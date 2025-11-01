@@ -3,7 +3,7 @@
   "content": "UTC",
   "content_en_sha1_hash": "bdfd4d8d6952777c39403b2d2e2f8a2a52bf255f",
   "created_at": "2025-05-19T21:30:49.484Z",
-  "updated_at": "2025-05-28T09:30:02.932Z",
+  "updated_at": "2025-10-13T20:34:50.733Z",
   "comment": {
     "text": "This translation key is used to display the label \"UTC\" in a dropdown menu for setting minutes in a cron job component. It appears as a suffix on a button and should be translated as a time unit or timezone abbreviation.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/cron/Cron.tsx",
-      "line_number": 213,
-      "context": "minutes={minutes}\n setMinutes={setMinutes}\n isDisabled={isDisabled}\n />\n ) : null}\n <span className={styles.suffix}>{t(\"Common:UTC\")}</span>\n </div>\n </div>\n );\n };",
+      "line_number": 220,
+      "context": "setMinutes={setMinutes}\n isDisabled={isDisabled}\n dataTestId={dataTestId ? `${dataTestId}_minutes` : undefined}\n />\n ) : null}\n <span className={styles.suffix}>{t(\"Common:UTC\")}</span>\n </div>\n </div>\n );\n };",
       "module": "/packages/shared"
     }
   ],
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Koordinoitu yleisaika' is a literal translation of 'Coordinated Universal Time' but might be overly formal or not the most common term in Finnish. While technically correct, 'UTC' is often used directly, or a simpler term like 'yleisaika' might be preferred depending on the context.",
-          "suggestion": "Consider using 'UTC' directly, or explore alternatives like 'yleisaika' or a more contextually appropriate term based on the target audience."
+          "description": "While 'Koordinoitu yleisaika' is a literal translation of 'Coordinated Universal Time', it's not the commonly used or understood term in Finnish. The standard term is 'UTC'.",
+          "suggestion": "UTC"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"ՀՀԺ\" is an abbreviation for \"Հայաստանի Համայնավարժության Ժամանակ\" (Armenian Time), which is not equivalent to \"UTC\". \"UTC\" refers to Coordinated Universal Time.",
-          "suggestion": "A more accurate translation would be something that represents \"UTC\" directly, or potentially a note indicating it refers to UTC."
+          "description": "The Armenian translation 'ՀՀԺ' is not a standard or recognizable abbreviation for UTC. It appears to be an abbreviation based on the Armenian words for hour, hour, and minute (ժամ, ժամ, րոպե). It does not accurately represent 'UTC'.",
+          "suggestion": "A more accurate Armenian translation for 'UTC' would be 'UTC' itself (transliterated into Armenian script), or 'Միջին Համաշխարհային Ժամանակ' (Mid-World Time) or a suitable shortened version like 'ՄՀԺ' (Mid-World Time Abbreviation)."
         }
       ],
       "approved_at": null
@@ -211,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

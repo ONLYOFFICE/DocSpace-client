@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomAccessRedirectNote",
+  "content": "You will be redirected to the {{sectionName}} automatically in 5 seconds.",
+  "content_en_sha1_hash": "d22cd1caa34e7ff53d69d23da49d87fd87b9f17f",
+  "created_at": "2025-06-02T10:19:23.266Z",
+  "updated_at": "2025-09-23T07:24:23.991Z",
+  "comment": {
+    "text": "This translation key is used to display a notification that the user will be redirected to another section automatically. It appears in an empty container when the user has no access to a specific room, and its purpose is to inform the user of this redirection process.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:21:44.435Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RoomNoAccessContainer.js",
+      "line_number": 46,
+      "context": "import { CategoryType } from \"@docspace/shared/constants\";\n \n const RoomNoAccessContainer = (props) => {\n const { t, setIsLoading, theme, isFrame, userId } = props;\n \n const descriptionRoomNoAccess = t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n });\n const titleRoomNoAccess = t(\"NoAccessRoomTitle\");\n \n const navigate = useNavigate();",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

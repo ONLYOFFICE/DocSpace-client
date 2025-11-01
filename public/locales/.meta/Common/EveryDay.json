@@ -3,7 +3,7 @@
   "content": "Every day",
   "content_en_sha1_hash": "3b2eb5131055ad07ac1d08de2f11f900286a51b5",
   "created_at": "2025-05-19T21:30:45.130Z",
-  "updated_at": "2025-05-28T09:30:02.529Z",
+  "updated_at": "2025-09-07T07:53:15.440Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Every day\" in various contexts within the application, likely as a frequency option for automated backup schedules. It appears on a category page where users can set up data management backups.",
     "is_auto": true,
@@ -11,16 +11,40 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/index.js",
-      "line_number": 90,
-      "context": "};\n \n this.periodsObject = [\n {\n key: 0,\n label: t(\"Common:EveryDay\"),\n },\n {\n key: 1,\n label: t(\"Common:EveryWeek\"),\n },",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/shared/components/cron/Cron.utils.ts",
-      "line_number": 537,
+      "line_number": 531,
       "context": "case \"Month\":\n return t(\"EveryMonth\");\n case \"Week\":\n return t(\"EveryWeek\");\n case \"Day\":\n return t(\"EveryDay\");\n case \"Hour\":\n return t(\"EveryHour\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/backup/auto-backup/hooks/index.ts",
+      "line_number": 46,
+      "context": "const periodsObject = useMemo(\n () => [\n {\n key: 0,\n label: t(\"Common:EveryDay\"),\n },\n {\n key: 1,\n label: t(\"Common:EveryWeek\"),\n },",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/management/src/hooks/useBackupSettings.ts",
+      "line_number": 70,
+      "context": "...(typeof action === \"function\" ? action(state) : action),\n }),\n {\n ...initBackupDefaultState,\n \n periodLabel: t(\"Common:EveryDay\"),\n },\n );\n \n const [selected, setSelected] = useReducer(\n (",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/hooks/useBackupSettings.ts",
+      "line_number": 70,
+      "context": "...(typeof action === \"function\" ? action(state) : action),\n }),\n {\n ...initBackupDefaultState,\n \n periodLabel: t(\"Common:EveryDay\"),\n },\n );\n \n const [selected, setSelected] = useReducer(\n (",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/hooks/useBackupSettings.ts",
+      "line_number": 70,
+      "context": "...(typeof action === \"function\" ? action(state) : action),\n }),\n {\n ...initBackupDefaultState,\n \n periodLabel: t(\"Common:EveryDay\"),\n },\n );\n \n const [selected, setSelected] = useReducer(\n (",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/hooks/useBackupSettings.ts",
+      "line_number": 70,
+      "context": "...(typeof action === \"function\" ? action(state) : action),\n }),\n {\n ...initBackupDefaultState,\n \n periodLabel: t(\"Common:EveryDay\"),\n },\n );\n \n const [selected, setSelected] = useReducer(\n (",
+      "module": "/packages/management"
     }
   ],
   "languages": {
@@ -150,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'În ficare zi' is not the most natural or accurate translation of 'Every day'. A more common and accurate translation would be 'În fiecare zi'.",
-          "suggestion": "În fiecare zi"
+          "description": "The Romanian translation \"În ficare zi\" is not the most natural or common translation of \"Every day.\" While technically correct, it sounds a bit formal and less idiomatic. A more common and natural translation would be \"Zilnic\".",
+          "suggestion": "Zilnic"
         }
       ],
       "approved_at": null

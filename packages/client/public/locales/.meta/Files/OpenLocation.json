@@ -3,7 +3,7 @@
   "content": "Open location",
   "content_en_sha1_hash": "dbcca6bc5e893598b3c23f1313c9f5d1b45c0114",
   "created_at": "2025-05-19T21:30:55.927Z",
-  "updated_at": "2025-06-03T20:59:42.012Z",
+  "updated_at": "2025-10-16T07:29:35.652Z",
   "comment": {
     "text": "This translation key is used for the text \"Open location\" in a button, which opens the selected location when clicked. It appears on the Home page's History block content and is associated with file management actions.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ItemList.tsx",
-      "line_number": 207,
-      "context": "className=\"location-btn\"\n iconName={FolderLocationReactSvgUrl}\n size={16}\n isFill\n onClick={() => checkAndOpenLocationAction!(item, actionType)}\n title={t(\"Files:OpenLocation\")}\n />\n ) : null}\n </StyledHistoryBlockFile>\n \n {actionType === \"rename\" && oldItem ? (",
+      "line_number": 225,
+      "context": "className=\"location-btn\"\n iconName={FolderLocationReactSvgUrl}\n size={16}\n isFill\n onClick={() => checkAndOpenLocationAction!(item)}\n title={t(\"Files:OpenLocation\")}\n dataTestId={`history_item_location_${index}`}\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 373,
-      "context": "this.dialogsStore.setFormItem(item);\n this.dialogsStore.setSubmitToGalleryDialogVisible(true);\n };\n \n onOpenLocation = (item) => {\n this.filesActionsStore.checkAndOpenLocationAction(item);\n };\n \n onMoveAction = (item) => {\n const { setIsMobileHidden } = this.infoPanelStore;",
+      "line_number": 403,
+      "context": "this.dialogsStore.setFormItem(item);\n this.dialogsStore.setSubmitToGalleryDialogVisible(true);\n };\n \n onOpenLocation = (item) => {\n this.filesActionsStore.checkAndOpenLocationAction(item);\n };\n \n onMoveAction = (item) => {\n const { id, isFolder } = this.selectedFolderStore;",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Qovluğu açmaq\" literally translates to \"To open a folder.\" \"Open location\" refers to opening a geographical location or point on a map, not necessarily a folder.",
-          "suggestion": "Consider a translation that better conveys the meaning of \"location,\" such as \"Yerini açmaq\" (to open the location), \"Mövqeyi açmaq\" (to open the position), or \"Yerini göstərmək\" (to show the location)."
+          "description": "The translation \"Qovluğu açmaq\" literally translates to \"To open a folder.\" While 'location' can sometimes refer to a folder, it's a more general term, often referring to a geographic location or a file path. A more accurate translation would be something like \"Yerləşdirmə\" or \"Mövqeyi açmaq\" depending on the context.",
+          "suggestion": "Consider \"Yerləşdirmə\" or \"Mövqeyi açmaq\" for a more accurate translation of 'location'."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Отвори локация' is technically understandable, it's not the most natural or idiomatic translation of 'Open location' in Bulgarian. It implies literally opening a location as if it were a file or folder. A more appropriate translation would depend on the context. For example, if it refers to opening a map location, 'Показване на локация' or 'Определяне на локация' might be better. If it refers to selecting a location, 'Избери локация' might be more suitable.",
-          "suggestion": "Consider context-specific alternatives such as 'Показване на локация', 'Определяне на локация', or 'Избери локация'."
+          "description": "While \"Отвори локация\" is understandable, it's a literal translation of 'Open location'. A more natural and idiomatic translation in Bulgarian would depend on the context. If referring to opening a map location, \"Покажи локация\" or \"Избери локация\" might be better. If it's referring to a file location, 'Отвори пътя' would be more accurate.",
+          "suggestion": "Consider 'Покажи локация', 'Избери локация' or 'Отвори пътя' depending on the specific context."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ordner öffnen' (Open folder) doesn't accurately reflect the English 'Open location'. 'Location' implies a geographical position or a specific place, while 'Ordner' means 'folder'.",
-          "suggestion": "A more accurate translation might be 'Standort öffnen' or 'Ort öffnen', depending on the specific context of 'location'."
+          "description": "'Open location' typically refers to opening a specific file or directory location. 'Ordner öffnen' translates to 'Open folder', which is a more specific interpretation. It might be accurate depending on the context, but 'Standort öffnen' might be a more direct translation for 'Open location'.",
+          "suggestion": "Consider 'Standort öffnen' or a more contextually appropriate translation."
         }
       ],
       "approved_at": null
@@ -81,13 +81,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ανοιχτή τοποθεσία\" is a literal translation of \"Open location,\" it might not be the most natural or idiomatic way to express this in Greek. \"Open location\" often implies a location that is accessible or available.  A better translation might depend on the specific context. Possible alternatives include \"Προσβάσιμη τοποθεσία\" (Accessible location), \"Διαθέσιμη τοποθεσία\" (Available location), or simply \"Τοποθεσία\" if the 'open' aspect is implied.",
-          "suggestion": "Consider alternatives like \"Προσβάσιμη τοποθεσία\", \"Διαθέσιμη τοποθεσία\", or \"Τοποθεσία\" depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ouvrir un emplacement\" literally translates to \"Open a location\". The English phrase \"Open location\" typically refers to opening a location file or a location within a software application. \"Ouvrir un emplacement\" might be interpreted as opening a physical location. A more accurate translation would depend on the context of the 'Files:OpenLocation' key.",
-          "suggestion": "Consider \"Emplacement à ouvrir\" or \"Localisation à ouvrir\" depending on the context. Without more context, \"Ouvrir un fichier de localisation\" is a safer bet."
+          "description": "The French translation \"Ouvrir un emplacement\" literally translates to \"Open a location\" which doesn't quite capture the intended meaning of 'Open location'. It sounds a bit awkward and might be misinterpreted. A more appropriate translation would depend on the specific context (e.g., 'Choisir un emplacement', 'Sélectionner un emplacement').",
+          "suggestion": "Consider 'Choisir un emplacement' or 'Sélectionner un emplacement' depending on the context."
         }
       ],
       "approved_at": null
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Բացել տեղադրությունը\" is a literal translation of 'Open location'. While understandable, a more natural and idiomatic translation for a UI element would be something like \"Ընտրել տեղը\" (Select location) or \"Բացել դիրքը\" (Open position/location). \"Տեղադրությունը\" sounds overly formal and technical in this context.",
-          "suggestion": "Consider \"Ընտրել տեղը\" or \"Բացել դիրքը\""
+          "description": "The translation 'Բացել տեղադրությունը' while literally meaning 'Open location' may not be the most natural or idiomatic translation for 'Open location' in the context of a software interface. It's a bit too literal. A more common translation might be something like 'Բացել վայրը' (Batsel vayry) which translates to 'Open place'.",
+          "suggestion": "Consider 'Բացել վայրը' (Batsel vayry) for a more natural and idiomatic translation. Alternatively, 'Տեղը բացել' (Tegը batsel) could be used."
         }
       ],
       "approved_at": null
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Apri posizione\" is a literal translation of \"Open location\" but doesn't convey the intended meaning in Italian. 'Open location' often implies revealing or displaying a location. \"Apri posizione\" sounds like an instruction to open a position or place something in a position. A more accurate translation would consider the context. Possible alternatives include \"Mostra posizione\" (Show location) or \"Visualizza posizione\" (Display location).",
-          "suggestion": "Consider \"Mostra posizione\" or \"Visualizza posizione\" depending on the exact meaning of 'Open location' in the application."
+          "description": "The translation 'Apri posizione' is a literal translation of 'Open location' but doesn't quite convey the intended meaning in Italian. 'Apri' means 'open,' but 'posizione' can refer to a geographical location or a position in a list/ranking. The intended meaning depends on the context of 'Open location.'",
+          "suggestion": "Possible alternatives depending on context: 'Seleziona posizione' (select location), 'Scegli posizione' (choose location), 'Posizione aperta' (open location - if referring to a status)."
         }
       ],
       "approved_at": null
@@ -141,7 +135,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'オープンロケーション' is a literal transliteration of 'Open location', it lacks nuance and doesn't convey the full meaning. 'ロケーション' emphasizes a physical place. A more natural translation would depend on the context. Possible alternatives include '場所' (basho - place), '場所を開く' (basho o hiraku - open a place), or '位置情報' (ichi position - location information).",
+          "suggestion": "Consider alternative translations like '場所' (basho), '場所を開く' (basho o hiraku), or '位置情報' (ichi position) depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Abrir a localização\" is not the most natural or idiomatic translation of \"Open location\" in Portuguese. It sounds a little literal.",
-          "suggestion": "Consider alternatives like \"Localizar\" (to locate) or a more context-specific translation depending on the functionality it refers to. For example, if opening a location on a map, \"Abrir no mapa\" might be better. Without more context, 'Acessar localização' is also a possibility."
+          "description": "While grammatically correct, \"Abrir a localização\" is a literal translation and might not be the most natural phrasing in Portuguese. \"Localizar\" or \"Abrir local\" could be more appropriate depending on the context of where this label is used.",
+          "suggestion": "Consider \"Localizar\" or \"Abrir local\" depending on the specific context."
         }
       ],
       "approved_at": null
@@ -195,7 +195,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Accesează locația\" is understandable, \"Deschide locația\" would be a more direct and natural translation of \"Open location\". \"Accesează\" implies accessing through a system or process, rather than simply opening a location.",
+          "suggestion": "Deschide locația"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Open location' generally refers to a specific geographical point or a directory path. 'Открыть папку' translates to 'Open folder', which is a specific type of location, not a general one. A more accurate translation would depend on the context of where this key is used.",
-          "suggestion": "Consider 'Открыть местоположение' or 'Открыть расположение' if referring to a general location. If it's strictly referring to a folder, 'Открыть папку' is acceptable but may be too specific."
+          "description": "The translation 'Открыть папку' (Open folder) doesn't fully capture the meaning of 'Open location'. 'Location' implies a place or geographical point, while 'папку' specifically means a folder. 'Открыть местоположение' would be a more accurate translation, though it's a bit more verbose.",
+          "suggestion": "Открыть местоположение"
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ස්ථානය අරින්න' (sthānaya arinna) while containing the word for 'location' (ස්ථානය), doesn't accurately convey the meaning of 'Open location' in the intended sense. 'අරින්න' (arinna) means 'to open' or 'to unravel', but it's not the most natural way to express 'open location' in Sinhala. A better translation would imply revealing or displaying a location.",
-          "suggestion": "Possible alternatives include: ස්ථානය දැක්ඛුව (sthānaya dekkuva - show location), ස්ථානය පෙන්වන්න (sthānaya penvanna - display location), or ස්ථානය ප්‍රදර්ශනය කරන්න (sthānaya pradarsanaya kanna - exhibit location), depending on the specific context."
+          "description": "The translation \"ස්ථානය අරින්න\" while literally translating to \"open place\", doesn't accurately convey the meaning of \"Open location\" in the context of a file path or program function. A more appropriate translation would capture the action of opening a location, such as 'විශේශ ස්ථානය විවෘත කරන්න' or 'ස්ථල විවෘත කරන්න'.",
+          "suggestion": "විශේෂ ස්ථානය විවෘත කරන්න"
         }
       ],
       "approved_at": null
@@ -231,37 +237,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Odpri lokacijo\" is literally \"Open location\", it might sound unnatural in Slovenian. A more idiomatic translation would depend on the context, but 'Odprite lokacijo' (formal plural) or 'Odpri datoteko' (Open file - if referring to a file) would be more accurate in many cases.",
-          "suggestion": "Consider 'Odprite lokacijo' or 'Odpri datoteko' depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Отвори локацију' is literally 'Open location', a more natural and idiomatic translation in Serbian would be something like 'Изабери локацију' (Select location) or 'Отвори место' (Open place). 'Отвори локацију' sounds slightly awkward.",
-          "suggestion": "Изабери локацију"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Open location' implies an action of opening a specific location, often in a software context. 'Otvori lokaciju' is a literal translation but might not convey the intended meaning. A better translation might be 'Otvor lokaciju' (imperative mood) or 'Odaberi lokaciju' (Select location), depending on the precise context.",
-          "suggestion": "Consider 'Otvor lokaciju' or 'Odaberi lokaciju' for a more accurate representation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -270,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Konumu aç' literally translates to 'Open the location'. While understandable, it's not the most natural or idiomatic way to express 'Open location' in Turkish. A more appropriate translation would depend on the context, but 'Konum Aç' or 'Konum' is often sufficient.",
-          "suggestion": "Consider 'Konum Aç' or simply 'Konum' depending on the specific context and intended meaning."
+          "description": "The translation \"Konumu aç\" literally translates to \"Open the location.\" While understandable, it's not the most natural or idiomatic way to express \"Open location\" in Turkish. A more natural translation would depend on the context, but options like \"Konum aç\" (location open) or \"Konumu göster\" (show location) might be better.",
+          "suggestion": "Consider \"Konum aç\" or \"Konumu göster\" depending on the specific function the English phrase represents."
         }
       ],
       "approved_at": null
@@ -288,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Vị trí mở\" is technically a literal translation of \"Open location\", it doesn't convey the intended meaning effectively. \"Open location\" in this context likely refers to the location where a file is opened or accessed. A more natural Vietnamese translation would be something that describes that specific meaning.",
-          "suggestion": "Mở vị trí"
+          "description": "While \"Vị trí mở\" is technically correct, it's not the most natural or idiomatic translation of \"Open location\" in Vietnamese. It sounds somewhat literal and less user-friendly. A better translation would convey the meaning of a location being accessible or visible.",
+          "suggestion": "Consider alternatives like \"Vị trí hiển thị\", \"Vị trí truy cập\", or \"Địa điểm mở\" depending on the specific context."
         }
       ],
       "approved_at": null

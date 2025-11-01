@@ -3,7 +3,7 @@
   "content": "Delete permanently",
   "content_en_sha1_hash": "e63b5153bde0d2b885dec00616d064be3e88c11b",
   "created_at": "2025-05-19T21:30:44.471Z",
-  "updated_at": "2025-05-28T09:30:02.230Z",
+  "updated_at": "2025-10-01T15:17:48.086Z",
   "comment": {
     "text": "\"This translation key is used to display a message that confirms permanent deletion. In the CreateEditRoomDialog component, this key is applied as the label of an action button, prompting users to permanently delete files.\"",
     "is_auto": true,
@@ -12,8 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FileLifetime.js",
-      "line_number": 84,
-      "context": "label: t(\"Common:MoveToTrash\"),\n value: false,\n },\n {\n key: 2,\n label: t(\"Common:DeletePermanently\"),\n value: true,\n },\n ];\n \n const selectedInputValue = `${lifetime.value}`;",
+      "line_number": 90,
+      "context": "value: false,\n dataTestId: \"virtual_data_room_file_lifetime_delete_move_to_trash\",\n },\n {\n key: 2,\n label: t(\"Common:DeletePermanently\"),\n value: true,\n dataTestId: \"virtual_data_room_file_lifetime_delete_permanently\",\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 191,
+      "context": "if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete) {\n return t(\"Common:DeletePermanently\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)",
       "module": "/packages/client"
     }
   ],
@@ -60,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Διαγραφή μόνιμα' is understandable, it's a literal translation and not the most natural way to express 'Delete permanently' in Greek. A more idiomatic translation would be something like 'Μόνιμη διαγραφή'.",
+          "description": "While \"Διαγραφή μόνιμα\" is understandable, a more natural and commonly used translation for \"Delete permanently\" would be \"Μόνιμη διαγραφή\". The current translation places the adverb 'μόνιμα' after the verb, which isn't typical Greek sentence structure.",
           "suggestion": "Μόνιμη διαγραφή"
         }
       ],
@@ -99,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"完全に削除する\" (kanzen ni sakujo suru) is a literal translation of \"Delete permanently,\" it sounds very formal and stiff in most contexts. A more natural and user-friendly translation might be preferable.",
-          "suggestion": "削除する (sakujo suru) or 完全に消去する (kanzen ni shokei suru)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ລົບລ້າງ' means 'delete' and 'ຖາວອນ' means 'permanent', the combination 'ລົບລ້າງຖາວອນ' feels somewhat unnatural in Lao. A more common and natural phrasing for 'Delete permanently' would be something like 'ລົບຖາວອນ' or 'ລົບລ້າງຢ່າງຖາວອນ'.",
-          "suggestion": "Consider 'ລົບຖາວອນ' or 'ລົບລ້າງຢ່າງຖາວອນ'."
+          "description": "While 'ລົບລ້າງຖາວອນ' is understandable, it's a rather literal and slightly awkward translation of 'Delete permanently'. A more natural and common phrasing would convey the meaning more effectively.",
+          "suggestion": "Consider 'ລົບຖິ້ມຢ່າງຖາວອນ' or 'ລົບຖິ້ມຖาวร' which are more commonly used and sound more natural in Lao."
         }
       ],
       "approved_at": null
@@ -171,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ස්ථිරවම මකන්න\" can be understood as \"Delete permanently\", a more natural and common phrasing in Sinhala would be \"අඛණ්ඩව මකන්න\" or \"සදාචාරව මකන්න\". \"ස්ථිරවම\" is generally used for stability or firmness, not for permanent deletion.",
-          "suggestion": "Consider using \"අඛණ්ඩව මකන්න\" or \"සදාචාරව මකන්න\" for a more natural translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Обриши трајно\" is understandable, a more natural and commonly used translation of \"Delete permanently\" in Serbian (Cyrillic) would be \"Избриши трајно\" or \"Користећи трајно бришење\". \"Обриши\" implies a wiping action which isn't quite the correct nuance for a delete function.",
-          "suggestion": "Избриши трајно"
+          "description": "While \"Обриши трајно\" is understandable, a more idiomatic and accurate translation of \"Delete permanently\" would be \"Делетно избриши\" or \"Трајно избриши\". \"Обриши\" implies a simple deletion, whereas \"Delete permanently\" implies a more irreversible action.",
+          "suggestion": "Делетно избриши"
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Obriši trajno' doesn't fully capture the meaning of 'Delete permanently'. While 'Obriši' means 'Delete', 'trajnu' is not the most natural way to convey 'permanently' in this context. It's grammatically correct, but sounds slightly awkward.",
-          "suggestion": "Consider using 'Obriši zauvek' or 'Trajno obriši' for a more natural and accurate translation. 'Obriši bez mogućnosti vraćanja' is a more descriptive but longer alternative."
+          "description": "The Serbian translation 'Obriši trajno' is a literal translation of 'Delete permanently' but isn't the most natural or idiomatic way to express this in Serbian. A more common and natural phrasing would be 'Kada obrišete...' or 'Trajno brisanje'.",
+          "suggestion": "Consider alternatives like 'Kada obrišete...' or 'Trajno brisanje'."
         }
       ],
       "approved_at": null

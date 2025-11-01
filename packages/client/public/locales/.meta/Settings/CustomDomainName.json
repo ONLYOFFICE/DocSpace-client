@@ -3,7 +3,7 @@
   "content": "Custom domain name",
   "content_en_sha1_hash": "206b756397ab3dc81264df6cc5ef34724be21bde",
   "created_at": "2025-05-19T21:30:50.988Z",
-  "updated_at": "2025-05-21T04:45:27.026Z",
+  "updated_at": "2025-10-03T13:19:30.533Z",
   "comment": {
     "text": "Custom domain name label for a toggle button in DNS settings.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 200,
-      "context": "<div className=\"settings-block\">\n {standalone ? (\n <>\n <ToggleButton\n className=\"settings-dns_toggle-button\"\n label={t(\"CustomDomainName\")}\n onChange={onClickToggle}\n isChecked={enable ?? false}\n style={toggleStyle}\n isDisabled={isLoading}\n />",
+      "line_number": 209,
+      "context": "{standalone ? (\n <>\n <ToggleButton\n className=\"settings-dns_toggle-button\"\n dataTestId=\"customization_dns_settings_toggle_button\"\n label={t(\"CustomDomainName\")}\n onChange={onClickToggle}\n isChecked={enable ?? false}\n style={toggleStyle}\n isDisabled={isLoading}\n />",
       "module": "/packages/client"
     }
   ],
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Muokattu verkkotunnuksen nimi' is too literal and doesn't accurately convey the meaning of 'Custom domain name'. 'Muokattu' means 'modified' which isn't the intended meaning. A more accurate translation would emphasize the 'custom' aspect.",
+          "description": "The Finnish translation 'Muokattu verkkotunnuksen nimi' is not the most natural or accurate translation of 'Custom domain name'. 'Muokattu' implies modified, which isn't the primary meaning of 'custom'.",
           "suggestion": "Oma verkkotunnus (Own domain name) or Asiakasverkkotunnus (Customer domain name)"
         }
       ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Պատվերով տիրույթի անուն' is a literal translation but doesn't quite capture the nuance of 'Custom domain name'. It translates to 'Ordered domain name' which isn't the intended meaning. 'Custom domain name' implies a domain name chosen and configured by the user.",
-          "suggestion": "A more accurate translation would be something like 'Օգտագործողի սեփական տիրույթի անուն' (User's own domain name) or 'Սեփական տիրույթի անուն' (Own domain name)."
+          "description": "The translation 'Պատվերով տիրույթի անուն' is a literal translation that doesn't quite capture the meaning of 'Custom domain name'. It translates to 'Ordered domain name,' which isn't the intended meaning. 'Custom domain name' refers to a domain name chosen and controlled by the user.",
+          "suggestion": "Մուտքագրված դոմեյնի անուն (Mut'iagrad domeni anun) or Ցանկացած դոմեյնի անուն (Ts'ank'ats domeni anun)"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අභිරුචි වසම් නාමය' doesn't accurately convey the meaning of 'Custom domain name'. 'අභිරුචි' means 'custom' or 'personalized', 'වසම්' is a word for 'residence', and 'නාමය' means 'name'. This translates to something like 'Custom residence name', which is not the intended meaning.",
-          "suggestion": "A more accurate translation would be something like 'පිටත පාලනය කළ හැකි නාමය' (Pittha paalayanay kala yathi namaya) which translates roughly to 'External controllable name' or 'External domain name', or 'අ sendiri පාලනය කළ හැකි ප්‍රදේශය' (A Kendriya paalayanay kala yathi pradeshyaya) which translates to 'Custom controllable area/domain'."
+          "description": "The translation 'අභිරුචි වසම් නාමය' is a literal translation of 'Custom domain name' and doesn't quite capture the intended meaning in a natural Sinhala way. 'අභිරුචි' (abiruchi) means 'custom' or 'taste,' but it's not commonly used in this context. 'වසම්' (vasam) is less common than more appropriate words for 'domain.'",
+          "suggestion": "Consider alternatives such as 'පිටු නාමය' (pitu naamaya - page name) or 'අ sendiri පාලනය කළ නාමය' (a sandaru pallaaniya kela naamaya - a self-managed name)."
         }
       ],
       "approved_at": null
@@ -189,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation uses 'Прилагођено' which is generally correct for 'Custom' but can also mean 'adjusted' or 'adapted'. While not strictly incorrect, 'Прилагођено име домена' might be perceived as slightly less natural than alternatives. A more common and direct translation for 'Custom' in this context might be 'Посебно'.",
-          "suggestion": "Consider using 'Посебно име домена' as a more direct translation of 'Custom domain name'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -216,13 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ім’я настроюваного домену' is a literal translation of 'Custom domain name' but doesn't quite capture the intended meaning in a natural Ukrainian way. It's overly formal and clunky.",
-          "suggestion": "Налаштування домену"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Ім’я настроюваного домену' lacks the typical succinctness expected in UI labels. The term 'настроюваного' is a bit verbose.",
-          "suggestion": "Власний домен"
+          "description": "The translation 'Ім’я настроюваного домену' is not the most natural or accurate translation of 'Custom domain name'. While technically correct, it sounds a bit formal and cumbersome. 'Настроюване доменне ім’я' or 'Власне доменне ім’я' would be more common and understandable.",
+          "suggestion": "Consider using 'Настроюване доменне ім’я' or 'Власне доменне ім’я'."
         }
       ],
       "approved_at": null

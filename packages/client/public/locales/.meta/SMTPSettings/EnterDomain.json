@@ -3,7 +3,7 @@
   "content": "Enter domain",
   "content_en_sha1_hash": "9eff7ed921a9f0545c57d5b06e9e53be925a95f4",
   "created_at": "2025-05-19T21:30:53.295Z",
-  "updated_at": "2025-05-21T01:36:07.896Z",
+  "updated_at": "2025-08-11T18:11:59.253Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text in a form field when entering a domain. It appears as a prompt within an input field, guiding users to enter their domain information.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 174,
-      "context": "</div>\n <TextInput\n isDisabled={isLoading}\n className=\"smtp-settings_input\"\n name={HOST}\n placeholder={t(\"EnterDomain\")}\n onChange={onChange}\n value={settings[HOST]}\n scale\n />",
+      "line_number": 178,
+      "context": "</div>\n <TextInput\n isDisabled={isLoading}\n className=\"smtp-settings_input\"\n name={HOST}\n placeholder={t(\"EnterDomain\")}\n onChange={onChange}\n value={settings[HOST]}\n scale\n testId=\"smtp_host_domain_input\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'වසම යොදන්න' (vasama yodanna) does not accurately convey the meaning of 'Enter domain'. 'වසම' (vasama) translates to 'grace' or 'blessing', which is unrelated to 'domain'. 'යොදන්න' (yodanna) means 'to add' or 'to apply'. The correct translation should be something along the lines of 'ප්‍රදේශය ඇතුළත් කරන්න' (pradeshiya athulatha karnataka) or 'අඩෝමෙන් ඇතුළත් කරන්න' (adomem athulatha karnataka).",
-          "suggestion": "ප්‍රදේශය ඇතුළත් කරන්න (pradeshiya athulatha karnataka) or අඩෝමෙන් ඇතුළත් කරන්න (adomem athulatha karnataka)"
+          "description": "The Sinhala translation \"වසම යොදන්න\" translates to something closer to \"Add Wasama\" or \"Enter Wasama.\" \"Wasama\" is not a standard term related to domains. The correct translation should convey 'domain' and not an unrelated term.",
+          "suggestion": "Enter the domain (උපසංදේශය ඇතුළත් කරන්න) or Domain ඇතුළත් කරන්න"
         }
       ],
       "approved_at": null
@@ -183,13 +183,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Unesi domen' implies 'Enter domain' as in, 'input domain'. A more natural translation for a label prompting the user to enter a domain would be 'Uneti domen'. The difference lies in the verb conjugation to agree with the implied subject.",
-          "suggestion": "Uneti domen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -213,7 +207,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"输入域\" (Shuru Yu) is technically correct, a more natural and user-friendly translation for \"Enter domain\" in a software context would be something like \"域名\" (Mingyu - Domain Name) or \"输入域名\" (Shuru Mingyu - Enter Domain Name). \"域\" (Yu) is a more general term for a domain and might not be immediately clear to all users.",
+          "suggestion": "输入域名"
+        }
+      ],
       "approved_at": null
     }
   }

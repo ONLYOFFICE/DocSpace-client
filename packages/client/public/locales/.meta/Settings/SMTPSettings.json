@@ -3,7 +3,7 @@
   "content": "SMTP Settings",
   "content_en_sha1_hash": "52ff101f3a7156bd8a868fbddda28dc2f4dfb972",
   "created_at": "2025-05-19T21:30:52.745Z",
-  "updated_at": "2025-07-02T07:49:19.842Z",
+  "updated_at": "2025-10-07T15:39:07.486Z",
   "comment": {
     "text": "SMTP Settings translation key is used to display the title of a page or section within the PortalSettings category, typically in a tab or header. It appears in the integration settings file and is related to sending emails via SMTP (Simple Mail Transfer Protocol).",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
-      "line_number": 77,
-      "context": "timerId = null;\n };\n }, []);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SMTPSettings\"));\n }, [ready]);\n \n const isLoadingContent = isLoading || !ready;\n \n if (!isLoading && !isInit) return null;",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
+      "line_number": 115,
+      "context": "await getThirdPartyData();\n },\n },\n {\n id: \"smtp-settings\",\n name: t(\"Settings:SMTPSettings\"),\n content: <SMTPSettings />,\n onClick: async () => {\n clearAbortControllerArr();\n await getSMTPSettingsData();\n },",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 41,
-      "context": "import SSO from \"./SingleSignOn\";\n import LDAP from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";\n import PluginPage from \"./Plugins\";\n \n const IntegrationWrapper = (props) => {\n const {",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
+      "line_number": 51,
+      "context": "\"Common\",\n \"UploadPanel\",\n ]);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SMTPSettings\"));\n }, [ready]);\n \n if (showPortalSettingsLoader || !ready) return <SettingsSMTPSkeleton />;\n \n return (",
       "module": "/packages/client"
     },
     {
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'إعدادات بروتوكول نقل البريد الالكتروني' is a very literal and technical translation of 'SMTP Settings'. While accurate, it's overly complex and not user-friendly for typical users. 'SMTP' itself is often understood by users familiar with email settings.",
-          "suggestion": "Consider a more concise and user-friendly translation, such as 'إعدادات SMTP' (SMTP Settings) or 'إعدادات خادم البريد' (Mail Server Settings)."
-        },
-        {
-          "type": "formatting",
-          "description": "The Arabic translation uses a full stop (period) at the end of the phrase. While grammatically correct, it's not always necessary or preferred in UI elements or labels. It depends on the overall design consistency.",
-          "suggestion": "Evaluate if a period is appropriate for the specific UI element where the translation is used. Consider removing it for a cleaner look if preferred."
+          "description": "The translation \"إعدادات بروتوكول نقل البريد الالكتروني\" is a literal translation of \"SMTP Settings\" and is overly verbose. While technically correct, it's not the most natural or concise way to express this in Arabic. A more common and understandable translation would be something like \"إعدادات SMTP\" or \"إعدادات خادم البريد\".",
+          "suggestion": "إعدادات SMTP or إعدادات خادم البريد"
         }
       ],
       "approved_at": null
@@ -104,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"SMTP կարգավորումներ\" is a literal translation, \"կարգավորումներ\" broadly means 'settings' or 'adjustments'. A more accurate and idiomatic translation for 'SMTP Settings' would consider the context. Options could include 'SMTP գործունեությունները' (SMTP operations) or 'SMTP-ի կարգավորումները' (SMTP settings).",
+          "suggestion": "Consider 'SMTP գործունեությունները' or 'SMTP-ի կարգավորումները' for a more contextually accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -179,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala translation 'SMTP සැකසුම්' appears to be a reasonable transliteration, but 'සැකසුම්' is slightly ambiguous. While it generally means 'settings' or 'configurations', it could be misinterpreted without context. A more precise translation might be preferable depending on the specific technical audience.",
-          "suggestion": "Consider 'SMTP සැකසුම්මා' or 'SMTP ආකෘති' for greater clarity, although 'SMTP සැකසුම්' is acceptable."
+          "description": "The Sinhala translation 'SMTP සැකසුම්' uses the word 'සැකසුම්' which is a general term for 'settings' or 'arrangements'. While understandable, a more precise translation for 'Settings' could be 'සමඳුරු' or 'අවස්ථාව'.",
+          "suggestion": "Consider 'SMTP සමඳුරු' or 'SMTP අවස්ථාව' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -191,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"SMTP Nastavenie\" is not the most accurate or natural Slovak translation of \"SMTP Settings\". \"Nastavenie\" translates to \"Setting\" but a more common and accurate term would be \"Konfigurácia\".",
-          "suggestion": "SMTP Konfigurácia"
+          "description": "While 'Nastavenie' can mean 'Setting', in the context of software configuration, 'Nastavenia' (plural) is more appropriate for 'Settings'. It implies a collection of settings.",
+          "suggestion": "SMTP Nastavenia"
         }
       ],
       "approved_at": null
@@ -209,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'SMTP подешавања' is a literal translation of 'Settings' rather than 'SMTP Settings'. While 'подешавања' correctly translates 'settings,' it doesn't convey the 'SMTP' part of the key. A more accurate translation would incorporate 'SMTP' in a way that is natural in Serbian.",
-          "suggestion": "SMTP поставке"
+          "description": "The Serbian (Cyrillic) translation \"SMTP подешавања\" while understandable, is not the most natural or accurate translation of \"SMTP Settings\". \"подешавања\" implies settings to be adjusted, rather than the settings themselves. A more accurate translation would be \"SMTP поставке\" or \"SMTP подешавања\" depending on the desired nuance.",
+          "suggestion": "Consider using \"SMTP поставке\" (SMTP postavkе) for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -221,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'podešavanja' is a valid Serbian word, a more common and natural translation of 'Settings' in this context would be 'postavke'. 'Podešavanja' is often used for adjustments or configurations, while 'postavke' is a more general term for settings.",
-          "suggestion": "postavke"
+          "description": "The translation 'SMTP podešavanja' isn't the most natural or accurate translation of 'SMTP Settings'. 'Podešavanja' translates to 'settings', but 'SMTP' is a technical term that should remain unchanged. A more appropriate translation would be 'SMTP podešavanja'.",
+          "suggestion": "SMTP podešavanja"
         }
       ],
       "approved_at": null

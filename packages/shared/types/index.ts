@@ -24,14 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RoomsType } from "../enums";
-import { TTheme, TColorScheme } from "../themes";
-import FirebaseHelper from "../utils/firebase";
+import type { TFile, TFileLink, TFolder } from "../api/files/types";
+import type { TBreadCrumb } from "../components/selector/Selector.types";
+import type { RoomsType, ShareAccessRights, ShareRights } from "../enums";
+import type { TTheme, TColorScheme } from "../themes";
+import type FirebaseHelper from "../utils/firebase";
+import type { TRoom } from "../api/rooms/types";
+
+export type Option = {
+  key: string;
+  value: string;
+  label: string;
+};
+
+export type TWeekdaysLabel = Pick<Option, "key" | "label">;
 
 export type TDirectionX = "left" | "right";
 export type TDirectionY = "bottom" | "top" | "both";
 
 export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
+
+export type ProviderType = {
+  provider_id: unknown;
+  customer_title: string;
+};
+
+export type ConnectedThirdPartyAccountType = {
+  id: string;
+  title: string;
+  providerId: string;
+  providerKey: string;
+};
+
+export type ThirdPartyAccountType = {
+  name: string;
+  key: string;
+  title: string;
+  label: string;
+  provider_key: string;
+  provider_link?: string;
+  storageIsConnected: boolean;
+  connected: boolean;
+  provider_id?: string;
+  id?: string;
+  disabled: boolean;
+  className?: string;
+};
+
+export type BackupToPublicRoomOptionType = {
+  breadCrumbs: TBreadCrumb[];
+  selectedItemId: number | string | undefined;
+  onClose: VoidFunction;
+  onSelectFolder: (
+    folderId: number | string | undefined,
+    breadCrumbs: TBreadCrumb[],
+  ) => void;
+};
 
 export type TSortOrder = "descending" | "ascending";
 export type TSortBy =
@@ -47,7 +95,7 @@ export type TSortBy =
 
 export type TTranslation = (
   key: string,
-  params?: { [key: string]: string | string[] },
+  params?: { [key: string]: string | string[] | number },
 ) => string;
 
 export type Nullable<T> = T | null;
@@ -93,12 +141,36 @@ export type TCreatedBy = {
   id: string;
   profileUrl: string;
   isAnonim?: boolean;
+  templateAccess?: ShareAccessRights;
 };
+export type ConnectingStoragesType = {
+  id: string;
+  className: string;
+  providerKey: string;
+  isConnected: boolean;
+  isOauth: boolean;
+  oauthHref: string;
+  category: string;
+  requiredConnectionUrl: boolean;
+  clientId?: string;
+};
+
+export type StorageRegionsType = { displayName: string; systemName: string };
+
+export type PropertiesType = { name: string; title: string; value: string };
 
 export type TI18n = {
   language: string;
   changeLanguage: (l: string) => string;
   t: (...key: string[]) => string;
+};
+
+export type SelectedStorageType = {
+  id: string;
+  isSet: boolean;
+  title: string;
+  properties: PropertiesType[];
+  current?: unknown;
 };
 
 declare module "styled-components" {
@@ -116,23 +188,63 @@ export interface StaticImageData {
   blurHeight?: number;
 }
 
+export interface LinkParamsType {
+  link: TFileLink;
+  item: TFile | TFolder | TRoom;
+
+  updateLink?: (newLink: TFileLink) => void;
+}
+
+export type TShareRightsType =
+  | "ExternalLink"
+  | "Group"
+  | "PrimaryExternalLink"
+  | "User";
+
+export type TAvailableShareRights = Partial<
+  Record<TShareRightsType, ShareRights[]>
+>;
+
+export type TShareLinkAccessRightOption = {
+  key: string;
+  icon: string;
+  label: string;
+  access: ShareAccessRights;
+  description?: string;
+  title?: string;
+};
+
+export type TShareToUserAccessRightOption = {
+  key: string;
+  label: string;
+  access: ShareAccessRights;
+  description?: string;
+  isSeparator?: boolean;
+};
+
+export type ValueOf<T> = T[keyof T];
+
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
     Asc: unknown;
     zESettings: unknown;
-    zE: unknown;
+    zE: {
+      apply: (...args: unknown[]) => void;
+    };
     i18n: {
       loaded: {
         [key: string]: { data: { [key: string]: string }; namespaces: string };
       };
     };
     timezone: string;
-    snackbar?: {};
+    snackbar?: object;
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
       location: Location & { state: unknown };
+      displayFileExtension?: boolean;
     };
+    loginCallback?: ((profile: unknown) => void) | null;
     logs: {
       socket: string[];
     };
@@ -191,7 +303,7 @@ declare global {
     cloudCryptoCommand: (
       type: string,
       params: { [key: string]: string | boolean },
-      callback: (obj?: {}) => void,
+      callback: (obj?: object) => void,
     ) => void;
     onSystemMessage: (e: {
       type: string;

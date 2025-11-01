@@ -24,21 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, type JSX } from "react";
 
 import { CSSTransition } from "react-transition-group";
 import { ReactSVG } from "react-svg";
-import { useTheme } from "styled-components";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
+import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
 import { classNames, ObjectUtils, DomHelpers, isMobile } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 
 import { ToggleButton } from "../../toggle-button";
 import { Scrollbar } from "../../scrollbar";
+import { IconButton } from "../../icon-button";
 
 import {
   ContextMenuModel,
@@ -47,12 +48,17 @@ import {
 } from "../ContextMenu.types";
 import { Badge } from "../../badge";
 import { globalColors } from "../../../themes";
+import { useTheme } from "../../../hooks/useTheme";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 import styles from "../ContextMenu.module.scss";
 
 const SUBMENU_LIST_MARGIN = 4; // Indentation of the second level menu from the first level
 const SECTION_PADDING = 16; // Screen margin
 const MIN_SUBMENU_WIDTH = 240; // Minimum width for submenu on mobile devices
+
+const OPEN_DELAY = 200;
+const HIDE_DELAY = 400;
 
 type SubMenuProps = {
   model: ContextMenuModel[];
@@ -71,6 +77,8 @@ type SubMenuProps = {
   onLoad?: () => Promise<ContextMenuModel[]>;
   changeView?: boolean;
   withHeader?: boolean;
+  onSubMenuMouseEnter?: () => void;
+  menuHovered?: boolean;
 };
 
 const SubMenu = (props: SubMenuProps) => {
@@ -84,6 +92,8 @@ const SubMenu = (props: SubMenuProps) => {
 
     changeView,
     withHeader,
+    onSubMenuMouseEnter,
+    menuHovered,
   } = props;
 
   const [model, setModel] = useState(props?.model);
@@ -93,7 +103,59 @@ const SubMenu = (props: SubMenuProps) => {
 
   const subMenuRef = useRef<HTMLUListElement>(null);
 
-  const theme = useTheme();
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const keepClosingRef = useRef<boolean>(false);
+  const openTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const subMenuHoveredRef = useRef<boolean>(false);
+
+  const clearOpen = () => {
+    if (openTimeoutRef.current) {
+      clearTimeout(openTimeoutRef.current);
+      openTimeoutRef.current = null;
+    }
+  };
+
+  const clearHide = () => {
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+  };
+
+  const cancelAll = () => {
+    clearOpen();
+    clearHide();
+    keepClosingRef.current = false;
+  };
+
+  const scheduleOpen = (itm: ContextMenuType, delay = OPEN_DELAY) => {
+    clearOpen();
+    clearHide();
+    keepClosingRef.current = false;
+    if (delay === 0) {
+      setActiveItem(itm);
+      return;
+    }
+    openTimeoutRef.current = setTimeout(() => {
+      if (keepClosingRef.current) return;
+      setActiveItem(itm);
+    }, delay);
+  };
+
+  const scheduleHide = (delay = HIDE_DELAY) => {
+    clearOpen();
+    keepClosingRef.current = true;
+    clearHide();
+    hideTimeoutRef.current = setTimeout(() => {
+      if (keepClosingRef.current) {
+        setActiveItem(null);
+        keepClosingRef.current = false;
+      }
+    }, delay);
+  };
+
+  const { isBase } = useTheme();
+  const { isRTL } = useInterfaceDirection();
 
   const onItemMouseEnter = (e: React.MouseEvent, item: ContextMenuType) => {
     if (isMobileDevice) {
@@ -101,8 +163,74 @@ const SubMenu = (props: SubMenuProps) => {
       return;
     }
 
-    setActiveItem(item);
+    const hasSubMenu = !!(item.items || item.onLoad);
+
+    if (keepClosingRef.current) {
+      if (hasSubMenu) {
+        keepClosingRef.current = false;
+        clearHide();
+      }
+    }
+
+    if (activeItem && !hasSubMenu) {
+      if (!hideTimeoutRef.current) scheduleHide(HIDE_DELAY);
+      return;
+    }
+
+    if (keepClosingRef.current) return;
+
+    if (hasSubMenu) {
+      if (root) {
+        cancelAll();
+        setActiveItem(item);
+        return;
+      }
+
+      scheduleOpen(item, OPEN_DELAY);
+      return;
+    }
+
+    if (!hideTimeoutRef.current) scheduleHide(HIDE_DELAY);
   };
+
+  const onItemMouseLeave = (item: ContextMenuType) => {
+    if (isMobileDevice) return;
+
+    if (item.items || item.onLoad) {
+      clearOpen();
+      scheduleHide(HIDE_DELAY);
+    }
+  };
+
+  const handleSubMenuMouseEnter = () => {
+    if (isMobileDevice) return;
+
+    clearHide();
+
+    keepClosingRef.current = false;
+    clearOpen();
+    subMenuHoveredRef.current = true;
+  };
+
+  const handleSubMenuMouseLeave = () => {
+    if (isMobileDevice) return;
+    subMenuHoveredRef.current = false;
+    scheduleHide(HIDE_DELAY);
+  };
+
+  useEffect(() => {
+    if (isMobileDevice) return;
+    if (menuHovered === undefined) return;
+
+    if (!menuHovered) {
+      // Don't schedule hide if the pointer is currently over the submenu
+      if (!subMenuHoveredRef.current) {
+        scheduleHide(HIDE_DELAY);
+      }
+    } else {
+      if (!keepClosingRef.current && hideTimeoutRef.current) clearHide();
+    }
+  }, [menuHovered]);
 
   const onItemClick = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -128,6 +256,8 @@ const SubMenu = (props: SubMenuProps) => {
     if (!url || (onClick && preventNewTab)) {
       e.preventDefault();
     }
+
+    if (items && !isMobileDevice) return;
 
     onClick?.({ originalEvent: e, action, item });
 
@@ -156,8 +286,6 @@ const SubMenu = (props: SubMenuProps) => {
     const itemOuterWidth = DomHelpers.getOuterWidth(
       parentItem?.children[0] as HTMLElement,
     );
-
-    const isRtl = theme.interfaceDirection === "rtl";
 
     if (!isMobile() && options) {
       const optionsWidth: number[] = [];
@@ -190,13 +318,15 @@ const SubMenu = (props: SubMenuProps) => {
           ".p-menuitem-active",
         ) as HTMLElement;
 
-        const top = menuItemActive.offsetTop;
-        const scroller = firstList.querySelector(".scroller") as HTMLElement;
-        const { scrollTop } = scroller;
-        const positionActiveItem = top - scrollTop;
+        if (menuItemActive) {
+          const top = menuItemActive.offsetTop;
+          const scroller = firstList.querySelector(".scroller") as HTMLElement;
+          const { scrollTop } = scroller;
+          const positionActiveItem = top - scrollTop;
 
-        subMenuRefTop = positionActiveItem - 2;
-        subMenuRef.current.style.top = `${subMenuRefTop}px`;
+          subMenuRefTop = positionActiveItem - 2;
+          subMenuRef.current.style.top = `${subMenuRefTop}px`;
+        }
       }
 
       const submenuRects = subMenuRef.current.getBoundingClientRect();
@@ -217,7 +347,7 @@ const SubMenu = (props: SubMenuProps) => {
         viewport.width - containerOffsetLeft - itemOuterWidth;
       const freeSpaceLeft = containerOffsetLeft;
 
-      if (isRtl) {
+      if (isRTL) {
         if (
           subListWidth < containerOffsetLeft ||
           (!root && freeSpaceLeft > freeSpaceRight)
@@ -251,7 +381,7 @@ const SubMenu = (props: SubMenuProps) => {
         containerOffsetLeft + itemOuterWidth + subListWidth >
         viewport.width - DomHelpers.calculateScrollbarWidth();
 
-      if (!isRtl) {
+      if (!isRTL) {
         if (notEnoughWidthRight && freeSpaceLeft > freeSpaceRight) {
           subMenuRef.current.style.left = `${-1 * subListWidth}px`;
 
@@ -311,6 +441,12 @@ const SubMenu = (props: SubMenuProps) => {
     }
   });
 
+  useEffect(() => {
+    return () => {
+      cancelAll();
+    };
+  }, []);
+
   const renderSeparator = (index: number, style: React.CSSProperties) => (
     <li
       key={`separator_${index}`}
@@ -360,7 +496,11 @@ const SubMenu = (props: SubMenuProps) => {
       ));
 
     const label = item.label && (
-      <span className="p-menuitem-text not-selectable" dir="auto">
+      <span
+        className="p-menuitem-text not-selectable"
+        dir="auto"
+        data-testid={item.id}
+      >
         {item.label}
       </span>
     );
@@ -384,6 +524,20 @@ const SubMenu = (props: SubMenuProps) => {
       onClick(e);
     };
 
+    const onDoubleClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    };
+
+    const checked =
+      item.checked && "isPortal" in item && item.isPortal ? (
+        <IconButton
+          className={classNames(iconClassName, "p-portal-icon")}
+          iconName={CheckIconURL}
+        />
+      ) : null;
+
     let content = (
       <a
         href={item.url || "#"}
@@ -394,6 +548,7 @@ const SubMenu = (props: SubMenuProps) => {
       >
         {icon}
         {label}
+        {checked}
         {subMenuIcon}
         {item.isOutsideLink ? (
           <OutsdideIcon className={subMenuIconClassName} />
@@ -404,7 +559,7 @@ const SubMenu = (props: SubMenuProps) => {
             className={`${subMenuIconClassName} p-submenu-badge`}
             backgroundColor={
               item.isPaidBadge
-                ? theme.isBase
+                ? isBase
                   ? globalColors.favoritesStatus
                   : globalColors.favoriteStatusDark
                 : globalColors.lightBlueMain
@@ -423,6 +578,7 @@ const SubMenu = (props: SubMenuProps) => {
     if (item.template) {
       const defaultContentOptions = {
         onClick,
+        onDoubleClick,
         className: linkClassName,
         labelClassName: "p-menuitem-text",
         iconClassName,
@@ -444,12 +600,15 @@ const SubMenu = (props: SubMenuProps) => {
         <li
           id={item.id}
           key={item.key}
+          data-testid={item.dataTestId ?? item.key}
           role="none"
           className={classNames(className, styles.subMenuItem)}
           style={{ ...item.style, ...style }}
           onClick={onClick}
+          onDoubleClick={onDoubleClick}
           onMouseDown={onMouseDown}
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
+          onMouseLeave={() => onItemMouseLeave(item)}
         >
           {content}
           <ToggleButton
@@ -465,12 +624,15 @@ const SubMenu = (props: SubMenuProps) => {
       <li
         id={item.id}
         key={item.key}
+        data-testid={item.dataTestId ?? item.key}
         role="none"
         className={className || ""}
         style={{ ...item.style, ...style }}
         onClick={onClick}
+        onDoubleClick={onDoubleClick}
         onMouseDown={onMouseDown}
         onMouseEnter={(e) => onItemMouseEnter(e, item)}
+        onMouseLeave={() => onItemMouseLeave(item)}
       >
         {content}
       </li>
@@ -545,6 +707,7 @@ const SubMenu = (props: SubMenuProps) => {
             resetMenu={item !== activeItem}
             onLeafClick={onLeafClick}
             onLoad={contextMenuTypeItem?.onLoad}
+            onSubMenuMouseEnter={handleSubMenuMouseEnter}
           />,
         );
       }
@@ -568,7 +731,7 @@ const SubMenu = (props: SubMenuProps) => {
       return 36;
     });
 
-    const height = rowHeights.reduce((a, b) => a + b);
+    const height = rowHeights.reduce((a, b) => a + b, 0);
     const viewport = DomHelpers.getViewport();
     const paddingList = 12;
     const marginsList = 32;
@@ -612,6 +775,8 @@ const SubMenu = (props: SubMenuProps) => {
                 }),
             } as React.CSSProperties
           }
+          onMouseEnter={onSubMenuMouseEnter || handleSubMenuMouseEnter}
+          onMouseLeave={handleSubMenuMouseLeave}
         >
           <Scrollbar style={{ height: listHeight }}>{submenu}</Scrollbar>
           {submenuLower}

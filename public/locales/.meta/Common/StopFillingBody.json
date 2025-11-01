@@ -3,7 +3,7 @@
   "content": "Are you sure you want to stop filling? It will be impossible to resume filling out this form after cancellation. Filling out the form will be stopped at the stage it is currently at. The file will be marked as \"Stopped\".",
   "content_en_sha1_hash": "2561d6901b3b3e363f37554ebafa3fb369555825",
   "created_at": "2025-05-19T21:30:49.064Z",
-  "updated_at": "2025-05-28T09:30:02.975Z",
+  "updated_at": "2025-10-14T04:06:01.228Z",
   "comment": {
     "text": "This translation key is used to display a warning message when a user attempts to stop filling out a form. The message informs the user that stopping filling will cancel any further progress and mark the file as \"Stopped\". It appears in a modal dialog.",
     "is_auto": true,
@@ -29,19 +29,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Stop Filling\" is translated as \"إيقاف التعبئة\". While technically correct, \"التعبئة\" can sound overly formal or technical in this context. A more natural phrasing might be \"ملء\" (mal') or “تعبئة النموذج” (ta'bi'at an-namoudhaj).",
-          "suggestion": "Consider translating \"Stop Filling\" as \"إيقاف الملء\" or \"إيقاف تعبئة النموذج\"."
+          "type": "formatting",
+          "description": "The Arabic translation uses full stops (.) which is not the standard way to end sentences in Arabic. It should use Arabic punctuation marks (e.g., ت).",
+          "suggestion": "Replace full stops (.) with appropriate Arabic punctuation marks (e.g., ت)."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"It will be impossible to resume filling out this form\" is translated as \"لن يكون بالإمكان استئناف تعبئة هذا النموذج بعد الإلغاء\". While accurate, a more colloquial and user-friendly alternative could be used. The sentence feels a bit stiff.",
-          "suggestion": "Consider rephrasing as something like: \"لن تستطيع استكمال هذا النموذج بعد الإلغاء\" (You will not be able to complete this form after cancellation)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"The file will be marked as 'Stopped'\" is translated as \"وسيُعلَّم الملف على أنه \"تم الإيقاف\" \".  While accurate, it can be slightly simplified for better readability.  Using direct quotes can be slightly awkward in Arabic.",
-          "suggestion": "Consider rephrasing as: \"وسيتم وضع علامة 'تم الإيقاف' على الملف\" (And the file will be marked with 'Stopped')."
+          "description": "The phrase \"لن يكون بالإمكان استئناف تعبئة هذا النموذج بعد الإلغاء\" is a bit wordy.  A more natural translation for 'It will be impossible to resume filling out this form after cancellation' could be 'لن تتمكن من استئناف تعبئة هذا النموذج بعد الإلغاء'.",
+          "suggestion": "Replace \"لن يكون بالإمكان استئناف تعبئة هذا النموذج بعد الإلغاء\" with \"لن تتمكن من استئناف تعبئة هذا النموذج بعد الإلغاء\""
         }
       ],
       "approved_at": null
@@ -49,7 +44,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"It will be impossible to resume filling out this form\" is not accurately translated. 'Resume filling' implies returning to a previous state. A more appropriate translation would focus on the inability to continue.",
+          "suggestion": "Doldurmağı dayandırdıqdan sonra bu formanı yenidən doldurmağınız mümkün olmayacaq."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"ləğv\" (cancellation) is a bit strong and might imply a complete deletion of the form process. 'Stop' might be more accurately conveyed by a term that indicates pausing or ending the current filling process.",
+          "suggestion": "Dayandırıldıqdan sonra bu formanı doldurmağa davam etmək mümkün olmayacaq."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -58,13 +64,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"It will be impossible to resume filling out this form after cancellation\" is not perfectly translated. \"анулиране\" (cancellation) implies a complete invalidation, whereas 'stop filling' is more of a pause. A better translation would convey the inability to *continue* filling.",
-          "suggestion": "Сигурни ли сте, че искате да спрете попълването? Ще бъде невъзможно да възобновите попълването на този формуляр след прекъсване."
+          "description": "The phrase \"resume filling\" is not accurately translated. \"Възобновите попълването\" while technically correct, sounds awkward in Bulgarian. A more natural phrasing would be \"да продължите попълването\".",
+          "suggestion": "Да продължите попълването"
         },
         {
           "type": "formatting",
-          "description": "The use of quotation marks around \"Спряно“ is inconsistent with English convention. While technically correct, it’s a little unusual for Bulgarian.",
-          "suggestion": "Сигурни ли сте, че искате да спрете попълването? Ще бъде невъзможно да възобновите попълването на този формуляр след прекъсване. Попълването на формуляра ще бъде спряно на етапа, на който е в момента. Файлът ще бъде маркиран като Спряно."
+          "description": "The use of quotation marks for \"Спряно\" is not consistent with standard Bulgarian practice when referring to a status label. It's better to avoid them.",
+          "suggestion": "Файлът ще бъде маркиран като Спряно."
         }
       ],
       "approved_at": null
@@ -72,7 +78,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation includes quotation marks around \"Zastaveno\" which matches the English use of quotation marks around \"Stopped\". This is consistent and acceptable.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -90,23 +102,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Stop Filling\" is translated as \"detener el rellenado.\" While technically correct, a more natural and user-friendly translation would be something like \"interrumpir el llenado\" or \"dejar de llenar\". \"Rellenar\" is more commonly used for crossword puzzles or forms with blank spaces to fill.",
-          "suggestion": "Consider using \"interrumpir el llenado\" or \"dejar de llenar\" instead of \"detener el rellenado\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"resume filling out\" is not directly captured. The Spanish translation implies stopping, but doesn't convey the ability to resume later.",
-          "suggestion": "Consider adding phrasing that conveys the inability to *continue* filling out the form after cancellation, e.g., “Será imposible *continuar* rellenando este formulario…”"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase \"Stopped\" is presented within quotation marks. While not technically incorrect, consistency with the English original should be considered. If the English is using quotation marks, it should be maintained; otherwise, it might be better without.",
-          "suggestion": "Evaluate the necessity of quotation marks around 'Detenido' and ensure consistency with the original English text."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -114,14 +110,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"It will be impossible to resume filling out this form after cancellation\" is translated as \"Tämän lomakkeen täyttämistä ei voi jatkaa peruutuksen jälkeen.\". While technically correct, it sounds somewhat awkward in Finnish. A more natural phrasing would be something like \"Tämän lomakkeen täyttöä ei voi jatkaa peruutuksen jälkeen.\" or \"Et voi jatkaa tämän lomakkeen täyttämistä peruutuksen jälkeen.\"",
-          "suggestion": "Et voi jatkaa tämän lomakkeen täyttämistä peruutuksen jälkeen."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a period (.) at the end of each sentence. While grammatically correct, it creates a stilted, overly formal tone. Removing some periods might improve readability.",
-          "suggestion": "Consider removing periods from some sentences to improve flow, e.g., 'Lomakkeen täyttäminen lopetetaan siinä vaiheessa, jossa se tällä hetkellä on Tiedosto merkitään pysäytetyksi.'"
+          "type": "grammar",
+          "description": "The phrase \"Tämän lomakkeen täyttämistä ei voi jatkaa peruutuksen jälkeen\" is slightly awkward. It translates literally to \"This form's filling cannot continue after cancellation.\" A more natural phrasing would be \"Tämän lomakkeen täyttämistä ei voi jatkaa peruutuksen jälkeen.\" or \"Lomakkeen täyttämistä ei voi jatkaa peruutuksen jälkeen.\"",
+          "suggestion": "Lomakkeen täyttämistä ei voi jatkaa peruutuksen jälkeen."
         }
       ],
       "approved_at": null
@@ -138,8 +129,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a question mark (՞) at the end of the first sentence, which is standard Armenian for questions, but it might not be necessary depending on the UI design. Consider whether the UI will handle the question mark appropriately.",
-          "suggestion": "Evaluate whether the question mark is needed based on the UI context. If the UI doesn't visually distinguish questions, remove it."
+          "description": "The Armenian translation uses a question mark at the beginning of the sentence. It should be a statement.",
+          "suggestion": "Վստահ եք, որ ցանկանում եք դադարեցնել լրացումը:"
         }
       ],
       "approved_at": null
@@ -168,8 +159,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation includes the English word \"Stopped\" in parentheses. While understandable, it's preferable to maintain consistency and use only Lao.",
-          "suggestion": "Replace \"ຢຸດ (Stopped)\" with just \"ຢຸດ\"."
+          "description": "The English content uses quotation marks around \"Stopped\". The Lao translation also uses quotation marks, which is appropriate but could be improved for consistency (e.g., using Lao quotation marks).",
+          "suggestion": "Consider using Lao quotation marks (“” and ‘’ ) for consistency:  ໄຟລ໌ຈະຖືກກຳນົດເປັນ “ຢຸດ”."
         }
       ],
       "approved_at": null
@@ -186,7 +177,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"in het fase waarin het zich op dat moment bevindt\" is grammatically awkward. A more natural phrasing would be \"in de fase waarin het zich bevindt\" or \"in de huidige fase\".",
+          "description": "The phrase \"in het fase waarin het zich op dat moment bevindt\" is grammatically awkward. A more natural phrasing would be 'in de fase waarin het zich bevindt' or 'in de huidige fase'.",
           "suggestion": "in de fase waarin het zich bevindt"
         }
       ],
@@ -203,9 +194,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ficheiro' is a less common and slightly archaic spelling. While technically correct, 'arquivo' is more frequently used and would improve readability for a broader audience.",
-          "suggestion": "arquivo"
+          "type": "formatting",
+          "description": "The word \"Parado\" is enclosed in double quotes, mirroring the English 'Stopped'. While not strictly incorrect, it's less natural in Portuguese and might be better without the quotes.",
+          "suggestion": "O ficheiro será marcado como Parado."
         }
       ],
       "approved_at": null
@@ -213,84 +204,43 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop (.) instead of a question mark (?) at the beginning of the first sentence. It should be a question mark as the English version uses 'Are you sure...?'",
+          "suggestion": "Change '.' to '?' at the beginning of the first sentence: 'Tem certeza de que deseja parar de preencher?'"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "“Stop filling” is not accurately translated. 'Încetare' implies a complete termination, but the English conveys a pause and the possibility of resuming.  'Completarea' is repeated unnecessarily.",
-          "suggestion": "Sigur doriți să întrerupeți completarea formularului? Va fi imposibil de reluat completarea acestui formular după anulare. Completarea formularului se va opri la stadiul în care se află. Fișierul va fi marcat cu \"Încetare\"."
-        },
-        {
-          "type": "grammatical",
-          "description": "The phrase \"la stadiul în care se află la moment\" is redundant. \"La moment\" is unnecessary.",
-          "suggestion": "la stadiul în care se află."
-        },
-        {
-          "type": "formatting",
-          "description": "The quote marks around \"Încetare\" could be stylistic, but it's worth checking if the English uses a different style (e.g., italics, or no quotes at all).",
-          "suggestion": "Maintain consistency with the English formatting of the status message."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of \"Остановлено\" within quotation marks feels slightly unnatural in this context. While technically correct, it might be better to integrate it more seamlessly.",
+          "suggestion": "Файл будет отмечен как \"остановлен\"."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ඔබ ඉන්ස්ටෝප් කිරීමෙන් ඉවත් වීමට සුරක්ෂිත බවට ඔබට විශ්වාසයක් තිබේද?\" is a literal and awkward translation of \"Are you sure you want to stop filling?\" A more natural translation would be something like \"ඔබ දැන් පෝරමය පිරවීමට නතර කිරීමට කැමතිද?\" or \"ඔබ දැන් පෝරමය පිරවීමට නතර කිරීමට අවශ්‍යද?\"",
-          "suggestion": "ඔබ දැන් පෝරමය පිරවීමට නතර කිරීමට කැමතිද?"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"අවලංගු කිරීමෙන් පසු\" (after cancellation) can be interpreted as complete form cancellation, which isn't accurate to the original intent. It's meant to refer to stopping the filling process, not canceling the entire form. It needs to be adjusted.",
-          "suggestion": "පිරවීම නතර කිරීමෙන් පසු"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"පෝරම පිරවීම දැනට පවතීන අවස්ථාවේදී නතර වනු ඇත\" is overly formal. A more conversational translation would be better.",
-          "suggestion": "පෝරම පිරවීම ඔබට අවසානයේදී තිබෙන ස්ථානයේදී නතර වනු ඇත."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"සලකුණු කරනු ඇත\" is grammatically correct, but feels a bit stiff.  A slightly softer phrasing might improve readability.",
-          "suggestion": "සංඥා කරනු ඇත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Stop Filling\" is translated as \"ukončiť vyplňovanie\". While understandable, a more natural translation might be something like \"prestať s vyplňovaním\" or \"zastaviť vyplňovanie\". \"Ukončiť vyplňovanie\" implies a more formal termination.",
-          "suggestion": "Consider translating \"Stop Filling\" as \"prestať s vyplňovaním\" or \"zastaviť vyplňovanie\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"resume filling out\" is translated as \"pokračovať vo vypĺňaní\". While accurate, the phrase \"obnoviť vyplňovanie\" might be a slightly better fit to emphasize the ability to restart the filling process.",
-          "suggestion": "Consider translating \"resume filling out\" as \"obnoviť vyplňovanie\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Stopped\" is translated as \"Ukončený\". While acceptable, \"Zastavený\" might be a more fitting term to directly correspond to the action of stopping.",
-          "suggestion": "Consider translating \"Stopped\" as \"Zastavený\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -310,9 +260,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a period after each sentence. While grammatically correct, in a UI context, a semicolon (;) might be more appropriate to maintain flow and readability, especially if this text is part of a longer explanation or message. This is a stylistic preference more than a grammatical error.",
-          "suggestion": "Consider using semicolons (;) instead of periods (.) to connect the sentences for a smoother reading experience in a UI."
+          "type": "spelling",
+          "description": "The word 'fajl' is a transliteration from English 'file' and should be 'datoteka' for better readability and cultural appropriateness in Serbian.",
+          "suggestion": "datoteka"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'otkazivanje' is a somewhat formal term for 'cancellation' in this context. A more natural and user-friendly alternative would be 'prekid'.",
+          "suggestion": "prekid"
         }
       ],
       "approved_at": null
@@ -323,13 +278,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'It will be impossible to resume filling out this form' is too literal and sounds unnatural in Turkish. A more natural phrasing would convey the impossibility of continuing.",
-          "suggestion": "Bu formu tekrar doldurmak mümkün olmayacaktır."
+          "description": "The phrase \"It will be impossible to resume filling out this form\" is too literal and awkward in Turkish. A more natural phrasing would be needed.",
+          "suggestion": "Doldurmayı tekrar başlatmak mümkün olmayacaktır."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Filling out the form will be stopped at the stage it is currently at' is wordy and can be simplified.",
-          "suggestion": "Doldurma işlemi mevcut aşamada kesilecektir."
+          "description": "The term 'Filling out the form' is repeated. It can be rephrased to avoid redundancy.",
+          "suggestion": "Formu doldurmaya devam etmek mümkün olmayacaktır."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Filling out the form will be stopped' is somewhat clunky in Turkish. A more concise alternative exists.",
+          "suggestion": "Doldurma işlemi durdurulacaktır."
         }
       ],
       "approved_at": null
@@ -347,6 +307,23 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"resume filling\" is not accurately reflected in the Chinese translation. \"恢复填写进度\" focuses on resuming the *progress* of filling, while the original emphasizes resuming the filling *process* itself. A more accurate translation for \"resume filling\" would be something along the lines of \"恢复填写\" or “继续填写”.",
+          "suggestion": "Replace “恢复填写进度” with “恢复填写” or “继续填写”."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of quotation marks around “已停止” might be stylistically unusual depending on the context of the application. It is best to ensure consistency with other similar messages.",
+          "suggestion": "Evaluate whether quotation marks around “已停止” are necessary based on the overall style of the application."
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

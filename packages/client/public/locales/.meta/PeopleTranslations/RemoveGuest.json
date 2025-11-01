@@ -3,7 +3,7 @@
   "content": "Remove guest",
   "content_en_sha1_hash": "f4c08fab02f6f28372817ad4c2797960ec7e89d6",
   "created_at": "2025-05-19T21:30:53.496Z",
-  "updated_at": "2025-05-21T05:58:38.325Z",
+  "updated_at": "2025-05-24T06:27:53.628Z",
   "comment": {
     "text": "The translation key \"RemoveGuest\" is used to display the text that will be shown when removing a selected guest from a contact. This text appears in a remove dialog and should convey the action being performed.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Αφαίρεση επισκέπτη' (Afairesi episkipti) implies a more forceful removal. A softer, more natural translation for 'Remove guest' in a user interface context would be 'Αφαίρεση καλεσμένου' (Afairesi kalesmenou) or 'Διαγραφή καλεσμένου' (Diagrafi kalesmenou).",
-          "suggestion": "Consider 'Αφαίρεση καλεσμένου' or 'Διαγραφή καλεσμένου'."
+          "description": "While \"Αφαίρεση επισκέπτη\" is grammatically correct, it's a rather formal and impersonal way to say \"Remove guest.\" A more natural and user-friendly translation would convey the action of removing someone from a guest list or similar context.",
+          "suggestion": "Consider \"Διαγραφή επισκέπτη\" or \"Αφαίρεση από τη λίστα επισκεπτών\" which are more commonly used and less formal."
         }
       ],
       "approved_at": null
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Հեռացնել հյուրին\" is technically correct, a more natural and commonly used translation for 'Remove guest' in this context (likely referring to removing a guest from a list or event) would be something like \"Հարկադրել հյուրին հեռանալ\" or \"Հանել հյուրին\" . \"Հեռացնել հյուրին\" has a stronger connotation of a forceful removal.",
-          "suggestion": "Consider alternatives such as \"Հարկադրել հյուրին հեռանալ\" or \"Հանել հյուրին\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -156,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ștergere invitat' is technically correct, it's a bit formal and less common for a user interface element. A more natural and user-friendly translation would be 'Elimină invitat' or 'Înlătură invitat'.",
+          "description": "While \"Ștergere invitat\" is understandable, a more natural and common Romanian translation for \"Remove guest\" would be \"Elimină invitat\" or \"Înlătură invitat\". \"Ștergere\" typically implies deleting data, not removing a person.",
           "suggestion": "Elimină invitat"
         }
       ],
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Уклони госта\" does not accurately convey the meaning of \"Remove guest.\" \"Уклони\" means \"remove\" or \"eliminate\" but in this context, a more appropriate translation would be \"Обавез госта\" or \"Удаљи госта\".",
-          "suggestion": "Обавез госта"
+          "description": "The Serbian translation 'Уклони госта' translates to 'Remove/Eliminate guest' which is not the most natural or accurate rendering of 'Remove guest'. A more appropriate translation would convey the action of removing a guest from a list or reservation.",
+          "suggestion": "Обави госта"
         }
       ],
       "approved_at": null
@@ -204,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Ukloni gosta\" translates to \"Remove guest\" literally, but \"Remove guest\" is more accurately rendered as \"Izbriši gosta\" or \"Uklanjanje gosta\" (for a more formal tone). \"Ukloni gosta\" sounds unnatural and isn't a common phrasing.",
+          "description": "The Serbian translation 'Ukloni gosta' translates to 'Remove a guest' or 'Remove guests' in a very formal and slightly awkward way. It's not the natural way to express 'Remove guest' in Serbian.",
           "suggestion": "Izbriši gosta"
         }
       ],
@@ -213,7 +207,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Konuğu kaldır\" is technically correct, a more natural and common translation for \"Remove guest\" in Turkish would be \"Misafiri sil\" or \"Misafir sil\". \"Kaldırmak\" often implies removing something that was lifted or placed somewhere, not necessarily a person.",
+          "suggestion": "Misafiri sil"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

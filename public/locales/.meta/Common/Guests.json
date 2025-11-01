@@ -3,7 +3,7 @@
   "content": "Guests",
   "content_en_sha1_hash": "3c23a67045a35d8dc1bd02b5088b1f1470636e89",
   "created_at": "2025-05-19T21:30:45.714Z",
-  "updated_at": "2025-06-18T17:09:45.685Z",
+  "updated_at": "2025-10-16T07:29:35.483Z",
   "comment": {
     "text": "This translation key is used to display a descriptive text that indicates guests when interacting with a group or list of users. It appears in various UI contexts, such as tabs and dialogs, where it helps users understand that they are viewing a collection of visitors or unassigned users.",
     "is_auto": true,
@@ -11,26 +11,44 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
+      "line_number": 89,
+      "context": "withAnimation\n />\n {hideGuests ? null : (\n <ArticleItem\n key=\"accounts-guests\"\n text={t(\"Common:Guests\")}\n linkData={getLinkData(\"guests\")}\n title={t(\"Common:Guests\")}\n icon={getCatalogIconUrlByType(PageType.guests)}\n showText={showText}\n onClick={onClickAction}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
+      "line_number": 89,
+      "context": "withAnimation\n />\n {hideGuests ? null : (\n <ArticleItem\n key=\"accounts-guests\"\n text={t(\"Common:Guests\")}\n linkData={getLinkData(\"guests\")}\n title={t(\"Common:Guests\")}\n icon={getCatalogIconUrlByType(PageType.guests)}\n showText={showText}\n onClick={onClickAction}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 68,
+      "line_number": 69,
       "context": "const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser\n ? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"\n ns=\"DeleteProfileEverDialog\"",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Tabs/ContactsTabs/index.tsx",
-      "line_number": 158,
-      "context": "];\n \n if (!isVisitor && !isCollaborator && showGuestsTab) {\n items.splice(2, 0, {\n id: \"guests\",\n name: t(\"Common:Guests\"),\n onClick: onGuests,\n content: null,\n badge: !guestsTabVisited ? (\n <Badge label={t(\"Common:New\")} noHover />\n ) : undefined,",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
+      "line_number": 114,
+      "context": "label: t(\"InfoPanel:Users\"),\n list: users,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"Common:Guests\"),\n list: guests,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"InfoPanel:ExpectUsers\"),",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/InfoPanelStore.js",
-      "line_number": 625,
-      "context": "const hasPrevGuestsTitle = this.getHasPrevTitle(users, \"guest\");\n \n if (guests?.length && !hasPrevGuestsTitle) {\n guests.unshift({\n id: \"guest\",\n displayName: t(\"Common:Guests\"),\n isTitle: true,\n });\n }\n \n const hasPrevExpectedTitle = this.getHasPrevTitle(",
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 548,
+      "context": "case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\":\n return getInsideGroupTitle();\n case \"guests\":\n return t(\"Common:Guests\");\n default:\n return t(\"Common:Members\");\n }\n };",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 556,
+      "context": "groups.push({ ...member, isGroup: true });\n } else if (\"isVisitor\" in member && member.isVisitor) {\n if (guests.length === 0) {\n guests.push({\n id: \"guests\",\n displayName: t(\"Common:Guests\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n guests.push(member);",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 593,
+      "line_number": 615,
       "context": "},\n ],\n ...[\n withGuests && {\n id: GUESTS_TAB_ID,\n name: t(\"Common:Guests\"),\n onClick: () => changeActiveTab(GUESTS_TAB_ID),\n content: null,\n },\n ],\n ].filter((i) => !!i),",
       "module": "/packages/shared"
     }

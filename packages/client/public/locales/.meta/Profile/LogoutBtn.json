@@ -3,7 +3,7 @@
   "content": "Log out",
   "content_en_sha1_hash": "6e78c91f5a05fc0d4f1a787d38e3d6fe2f856d46",
   "created_at": "2025-05-19T21:30:53.366Z",
-  "updated_at": "2025-05-28T09:30:02.282Z",
+  "updated_at": "2025-08-11T18:11:59.150Z",
   "comment": {
     "text": "This translation key is used for the text \"Log out\" on a logout button in a modal dialogue, typically used to exit the application or end a user's session. It appears as part of a footer section in a dialog box and is triggered when the user clicks the button.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LogoutAllSessionDialog/index.js",
-      "line_number": 83,
+      "line_number": 84,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"logout\"\n key=\"LogoutBtn\"\n label={t(\"Profile:LogoutBtn\")}\n size=\"normal\"\n scale\n primary\n onClick={onClickLogout}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Odhlášení\" is a valid Czech word, it's a noun meaning \"logging out.\" The English \"Log out\" is an imperative verb. A more appropriate translation would be a verb form.",
+          "suggestion": "Odhlásit se"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Դուրս գալ\" is a literal translation of \"to exit\" or \"to leave\", it doesn't accurately convey the meaning of \"Log out\" in a user interface context. \"Log out\" typically implies a secure sign-out from an account.",
-          "suggestion": "Consider using a more appropriate translation such as \"Ելք\" (Yelk) which directly translates to \"Exit\" or \"Ելքագրում\" (Yelqagrum) which means \"Signing out\"."
+          "description": "The translation 'Դուրս գալ' literally translates to 'exit' or 'get out', which isn't the best equivalent for 'Log out'. While understandable, it lacks the specific meaning of logging out of a system or application.",
+          "suggestion": "Consider using a more specific translation like 'Ավարտել գործունեությունը' (Avaretel gorut'evut'yun) which means 'End session' or 'Finish activity'.  Alternatively, 'Լոգ աութ' (Log out) could be used as a transliteration if the target audience is familiar with English terminology."
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"නික්මෙන්න\" (nikemanna) is a less formal way of saying 'Log out'. While understandable, a more formal and appropriate translation for a button label would be \"පිටතටsignOutකරන්න\" (pitath sign karanna).",
-          "suggestion": "පිටතටsignOutකරන්න (pitath sign karanna)"
+          "description": "The Sinhala translation 'නික්මෙන්න' (nikamennā) is a command form which translates to 'Go out!' or 'Leave!'.  The intended meaning of 'Log out' is to end a session, which is best conveyed with a more formal or specific term.  'නික්මෙන්න' implies physically leaving a place.",
+          "suggestion": "Consider 'පිටුබිඳින' (pithubidina) which means 'sign out', or 'නිෂ්ක්‍රමණය' (nishkramaya) meaning 'exit'."
         }
       ],
       "approved_at": null
@@ -201,13 +207,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Çıkış Yap\" is a valid translation for 'Log out', it's more literal. A more natural and commonly used translation would be \"Çıkış\" or \"Oturumu Kapat\".",
-          "suggestion": "Çıkış or Oturum Kapat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -228,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"注销\" is a possible translation for \"Log out\", it often implies cancellation or termination of something, not necessarily a logout action from a system or application. \"退出\" is a more standard and direct translation for 'Log out' in this context.",
+          "description": "While '注销' (zhùxiāo) can be used for 'log out,' it more accurately translates to 'cancel' or 'unregister.' '退出' (tuīchū) is a more common and direct translation for 'log out' in a user interface context.",
           "suggestion": "退出"
         }
       ],

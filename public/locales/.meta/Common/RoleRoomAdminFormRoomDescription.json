@@ -3,7 +3,7 @@
   "content": "Room admins can create and manage rooms, invite new users and assign roles of room admin or lower. Room admins can upload forms to the room and have full access to the Complete and In Process folders.",
   "content_en_sha1_hash": "7b59691d27e0f23bc84aede6a226741e9d6d6e79",
   "created_at": "2025-05-19T21:30:48.113Z",
-  "updated_at": "2025-05-28T09:30:03.001Z",
+  "updated_at": "2025-09-17T13:43:02.058Z",
   "comment": {
     "text": "Room admins can create and manage rooms, including uploading forms to the room and accessing certain folders. This description is used in the access options for a \"Form Room\" type of room, likely displayed in a UI element such as a button or dialog related to room management.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 53,
-      "context": "const None = -1 as RoomsType;\n \n const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n default:",
+      "line_number": 54,
+      "context": "const None = -1 as RoomsType;\n \n const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n default:",
       "module": "/packages/shared"
     }
   ],
@@ -30,13 +30,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'assign roles of room admin or lower' is not accurately translated. 'أدنى' (adnaa) generally means 'lower' in rank or quality, but in this context, it's better to convey 'roles lower than room admin'.",
-          "suggestion": "يمكن لمشرفي الغرف تعيين أدوار لمستخدمين أقل رتبة من مشرف الغرفة."
+          "description": "The phrase \"assign roles of room admin or lower\" is not accurately translated. The Arabic phrasing \"أدنى\" (adnaa) implies 'lower' in terms of rank or seniority, which might be misinterpreted. A more accurate translation would focus on the ability to assign roles *below* room admin.",
+          "suggestion": "يمكن لمشرفي الغرف تعيين أدوار أقل من مشرف الغرفة."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is slightly awkward. Splitting the sentence after 'أدنى' would improve readability.",
+          "suggestion": "يمكن لمشرفي الغرف تعيين أدوار مشرف الغرفة أو أدنى. يمكن لمشرفي الغرف تحميل النماذج إلى الغرفة وتقسيم الجملة إلى جملتين."
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Complete' as 'الاكتمال' (al-iktimaal) is technically correct but sounds a little formal and less natural. A more conversational translation might be preferable.",
-          "suggestion": "يمكن لمشرفي الغرف تحميل النماذج إلى الغرفة والحصول على وصول كامل إلى مجلدات 'مكتملة' أو 'قيد التنفيذ'."
+          "description": "The phrase \"Complete and In Process folders\" is translated as \"مجلدات الاكتمال والمراحل الجارية\" which is technically correct but can be simplified for better flow. The term 'In Process' might need clarification for a Saudi Arabian audience.",
+          "suggestion": "مجلدات الاكتمال والعمليات الجارية"
         }
       ],
       "approved_at": null
@@ -46,14 +51,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "grammar",
+          "description": "The phrase 'otaq administratoru və ya daha aşağı vəzifələr təyin edə bilər' is grammatically awkward. 'Vəzifələr' is plural, but the context implies assigning a single role.",
+          "suggestion": "Otaq administratoru və ya daha aşağı səviyyəli rolları təyin edə bilər."
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin or lower\" is not accurately translated.  'Daha aşağı vəzifələr' implies a ranking or hierarchy of positions, which isn't necessarily the intended meaning. It could be interpreted as suggesting a specific ranking system beyond just 'room admin or lower'.",
-          "suggestion": "Consider rephrasing to something like 'otaq administratorı və ya daha aşağı səlahiyyətlər' or 'otaq administratorı və ya daha aşağı statuslu istifadəçiləri təyin edə bilər' depending on the exact nuance intended."
+          "description": "The English phrase 'assign roles of room admin or lower' has been translated as 'təyin edə bilər' which could be interpreted as 'appoint'. A better translation would reflect the assignment of roles.",
+          "suggestion": "Otaq administratorları otaq içində aşağı səviyyəli rolları təyin edə bilər."
         },
         {
           "type": "formatting",
-          "description": "There's a slight awkwardness in the sentence structure. While grammatically correct, it could be improved for readability.",
-          "suggestion": "Consider splitting the first long sentence into two for better flow. For example: 'Otaq administratorları otaqlar yarada və idarə edə, yeni istifadəçiləri dəvət edə və otaq administratoru və ya daha aşağı səlahiyyətlər təyin edə bilər. Həmçinin, otaq administratorları formaları otağa yükləyə, Tamamlanmış və Prosesdə qovluqlarına tam giriş əldə edə bilər.'"
+          "description": "The English content uses a full stop (.) at the end of each sentence. The Azerbaijani translation does not consistently follow this.",
+          "suggestion": "Ensure consistent punctuation (full stops) at the end of each sentence."
         }
       ],
       "approved_at": null
@@ -64,13 +74,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin or lower\" is not accurately translated. The Bulgarian translation \"да назначават роли на администратор на стая или по-ниски\" implies assigning roles *to* room admins, rather than assigning roles *of* room admin.",
-          "suggestion": "да назначават потребители като администратори на стая или с по-ниски права"
+          "description": "The phrase \"assign roles of room admin or lower\" is not accurately translated. 'по-ниски' is too literal and doesn't convey the intended meaning of 'or lower' in the context of role hierarchy. It could be interpreted as 'lower' in some other sense.",
+          "suggestion": "Администраторите на стаята могат да канят нови потребители и да назначават роли на администратор на стая или по-ниски нива."
         },
         {
           "type": "formatting",
-          "description": "The repeated phrase \"Администраторите на стаята\" is a bit clunky. While accurate, it could be more elegantly phrased.",
-          "suggestion": "Ръководителите на стая могат..."
+          "description": "There is a lack of punctuation (period) at the end of the first sentence.",
+          "suggestion": "Администраторите на стаята могат да създават и управляват стаи, да канят нови потребители и да назначават роли на администратор на стая или по-ниски нива."
         }
       ],
       "approved_at": null
@@ -87,13 +97,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Im Nicht ausgefüllt' is not the correct translation of 'In Process'. It literally translates to 'In Not Filled'. The correct translation should be something like 'In Bearbeitung' or 'Offen'.",
-          "suggestion": "Change 'Im Nicht ausgefüllt' to 'In Bearbeitung' or 'Offen'."
+          "description": "The phrase \"Im Nicht ausgefüllt\" is not a correct translation of \"In Process\". It seems to be a literal and incorrect attempt. The correct translation should convey the meaning of 'in progress' or 'being filled out'.",
+          "suggestion": "Im Bearbeitung"
         },
         {
           "type": "formatting",
-          "description": "The German translation lacks proper capitalization for folder names. 'Ausgefüllt' and 'Im Nicht ausgefüllt' should be capitalized as 'Ausgefüllt' and 'In Bearbeitung' or 'Offen'.",
-          "suggestion": "Capitalize folder names: Change 'Ausgefüllt' to 'Ausgefüllt' and 'Im Nicht ausgefüllt' to 'In Bearbeitung' or 'Offen'."
+          "description": "The folder names \"Ausgefüllt\" and \"Im Bearbeitung\" are not consistently formatted. Consider whether to use quotation marks or italics for emphasis.",
+          "suggestion": "Consider consistent formatting for folder names, e.g., \"Ausgefüllt\" and \"Im Bearbeitung\" or *Ausgefüllt* and *Im Bearbeitung*"
         }
       ],
       "approved_at": null
@@ -115,14 +125,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The term 'RoleRoomAdmin' is not directly translated, potentially causing confusion. 'RoleRoomAdminFormRoomDescription' is overly verbose and not conveyed in Finnish.",
-          "suggestion": "Consider rewording the introductory phrase to clarify the role being described, e.g., 'Henkilöt, joilla on huoneen ylläpitäjän oikeudet...' (People with room administrator rights...)"
+          "type": "spelling",
+          "description": "The word 'järjestelmänvalvojat' (administrators) is repeated multiple times. While technically correct, it feels repetitive and could be improved for readability.",
+          "suggestion": "Consider using synonyms or rephrasing to avoid repetition. For example, 'Huoneen ylläpitäjät...' or 'Henkilöt, joilla on huoneen ylläpitäjän oikeudet...'"
         },
         {
-          "type": "spelling",
-          "description": "While technically not incorrect, 'Valmiit- ja Keskeneräiset-kansioihin' could be more elegantly phrased. The hyphenation while grammatically correct is a stylistic consideration.",
-          "suggestion": "Consider 'Valmiit ja Keskeneräiset kansioihin' - slightly more fluent."
+          "type": "formatting",
+          "description": "The repetition of 'Huoneen järjestelmänvalvojat' at the beginning of the second sentence feels slightly disjointed. A more flowing transition could enhance readability.",
+          "suggestion": "Reword the second sentence to avoid starting with the exact same phrase. For example: 'He voivat myös ladata lomakkeita huoneeseen...'"
         }
       ],
       "approved_at": null
@@ -139,13 +149,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'օգտատերերի' (users) is spelled correctly, but it might be beneficial to clarify it with a more specific term if the context requires it. It's technically correct but potentially vague.",
-          "suggestion": "Consider if a more precise term for 'users' is needed based on the context. For example, 'անդամներ' (members) might be more suitable."
+          "description": "The word 'օգտատերերի' (ogtatereri) is a slightly awkward phrasing. While technically correct, 'օգտատերներ' (ogtaterner) is more common and natural for 'users'.",
+          "suggestion": "Օգտատերներ"
         },
         {
           "type": "formatting",
-          "description": "Repetitive sentence structure. The phrase 'Սենյակի ադմինիստրատորները կարող են' is repeated. This makes the translation sound less fluid.",
-          "suggestion": "Rephrase the second sentence to avoid repetition. For example: 'Միևնույնպես, սենյակի ադմինիստրատորները կարող են ձևաթղթեր վերբեռնել սենյակ և ունենալ ամբողջական մուտք դեպի Ավարտված և Ընթացքի մեջ գտնվող թղթապանակները:'"
+          "description": "The sentence structure could be improved for better flow and readability. The repetition of 'Սենյակի ադմինիստրատորները կարող են...' makes the sentence feel clunky.",
+          "suggestion": "Սենյակի ադմինիստրատորները կարող են ստեղծել և կառավարել սենյակներ, հրավիրել նոր օգտատերներ և նրանց վստահել սենյակի ադմինիստրատորի կամ ավելի ցածր դերեր: Իրաւունք ունեն ձևաթղթեր վերբեռնել սենյակ և ամբողջական մուտք ունեն Ավարտված և Ընթացքի մեջ գտնվող թղթապանակներ:"
         }
       ],
       "approved_at": null
@@ -161,19 +171,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"assign roles of room admin or lower\" is not accurately translated. While \"ルーム管理者以下の役割を割り当てることができます\" is technically correct, it lacks the nuance of the English. It sounds slightly formal and doesn't convey the implied hierarchy clearly.",
+          "suggestion": "ルーム管理者は、ルーム管理者以下の役割や、より低い権限の役割を割り当てることができます。"
+        },
+        {
           "type": "formatting",
-          "description": "The translation uses a repetitive sentence structure. The phrase 'ルーム管理者は' (Room admins) is repeated multiple times. This can be improved for better readability.",
-          "suggestion": "ルーム管理者は、ルームを作成、管理し、新規ユーザーを招待し、ルーム管理者以下の役割を割り当てることができます。また、ルームにフォームをアップロードし、「完成」および「処理中」フォルダにフルアクセス権を持っています。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'assign roles of room admin or lower' is translated as 'ルーム管理者以下の役割を割り当てることができます'. While not incorrect, it's slightly awkward in Japanese. A more natural phrasing would convey the meaning of granting lower-level admin permissions.",
-          "suggestion": "ルーム管理者以下の権限を付与することができます。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'have full access' is translated as '完全にアクセスできます'. While technically correct, it is more natural to use a word indicating 'full access rights'.",
-          "suggestion": "フルアクセス権を持っています"
+          "description": "The sentence structure feels a little disjointed. Combining the two sentences about room admins into one would improve flow.",
+          "suggestion": "ルーム管理者は、ルームを作成、管理し、新規ユーザーを招待し、ルーム管理者以下の役割を割り当て、ルームにフォームをアップロードし、「完成」および「処理中」フォルダに完全にアクセスすることができます。"
         }
       ],
       "approved_at": null
@@ -183,9 +188,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of room admin or lower' is slightly awkward in Korean. While the literal translation is accurate, it could be improved for natural flow.",
+          "suggestion": "룸 관리자 또는 그 이하 권한을 부여할 수 있습니다."
+        },
+        {
           "type": "formatting",
-          "description": "The Korean translation uses a repetitive phrase '룸 관리자는...' which can be slightly improved for flow.  It's a bit clunky.",
-          "suggestion": "Consider rephrasing to avoid repeating '룸 관리자는' so frequently. For example, using pronouns or slightly restructuring sentences."
+          "description": "The sentence structure can be slightly improved for better readability. Connecting phrases with conjunctions would enhance the fluency.",
+          "suggestion": "룸 관리자는 룸을 생성 및 관리하고, 새 사용자를 초대하고, 룸 관리자 이하의 역할을 할당할 수 있으며, 양식을 룸에 업로드하고 완료 및 진행 중 폴더에 대한 전체 액세스 권한을 가질 수 있습니다."
         }
       ],
       "approved_at": null
@@ -196,13 +206,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ໂຟນເດີ' is a transliteration and might be confusing for some readers. A more common and understandable term for 'folder' in this context would be 'ໄຟລ໌' or 'ເອກະສານ'.",
-          "suggestion": "ໄຟລ໌"
+          "description": "The word 'ຕ່ຳ' is often written as 'ຕ່ຳກວ່າ'.",
+          "suggestion": "ຕ່ຳກວ່າ"
         },
         {
           "type": "formatting",
-          "description": "The repeated use of 'ຜູ້ປົກຄອງຫ້ອງ' is a little repetitive.  While not strictly incorrect, it could be made more fluent.",
-          "suggestion": "Consider rephrasing to use pronouns or shorter references after the initial mention. For example: 'ຜູ້ປົກຄອງຫ້ອງສາມາດສ້າງ ແລະ ຈັດການຫ້ອງ... ພວກເຂົາສາມາດອັບໂຫຼດແບບຟອມ...' "
+          "description": "There is an unnecessary space before 'ຕໍ່ກັບ' in the sentence.",
+          "suggestion": "ຕໍ່ກັບໂຟນເດີ"
         }
       ],
       "approved_at": null
@@ -213,13 +223,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin or lower\" is not accurately translated. The Latvian translation implies a hierarchy of roles, but the English emphasizes granting roles *of* room admin or a less privileged role. \"piešķirt telpas administratora vai zemāka līmeņa lomas\" could be interpreted as only allowing assigning a 'room admin' role or a lower one, while the English means any role up to that of room admin.",
-          "suggestion": "Consider rephrasing to better reflect the meaning of 'assign roles up to room admin' such as 'piešķirt lietotājiem telpas administratora vai zemākas pakāpes lomas.'"
+          "description": "The phrase 'assign roles of room admin or lower' is not accurately translated. 'Zemāka līmeņa lomas' is literal but doesn't fully capture the nuance of 'or lower' in this context. It could imply roles *below* admin, not simply other admin roles.",
+          "suggestion": "Telpu administratori var izveidot un pārvaldīt telpas, uzaicināt jaunus lietotājus un piešķirt telpas administratora lomas vai zemākas pakāpes lomas."
         },
         {
           "type": "formatting",
-          "description": "The capitalization of \"Pabeigts\" and \"Nepabeigts\" (Complete and In Process) seems inconsistent with Latvian convention for folder names which usually have lower case initial letters.",
-          "suggestion": "Change \"Pabeigts\" to \"pabeigts\" and \"Nepabeigts\" to \"nepabeigts\"."
+          "description": "The Latvian translation uses lowercase 'Pabeigts' and 'Nepabeigts' for folder names. While technically correct, it might be more consistent to capitalize them to match the English 'Complete and In Process'.",
+          "suggestion": "Telpu administratori var augšupielādēt veidlapas telpā, un viņiem ir pilnīga piekļuve mapēm Pabeigts un Nepabeigts."
         }
       ],
       "approved_at": null
@@ -230,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"or lower\" in the English content \"assign roles of room admin or lower\" is not accurately translated. \"onder hun niveau\" implies a level *below* the room admin, rather than 'or lower' which includes the room admin role itself. A more accurate translation would convey that the room admin can assign roles 'up to and including' room admin.",
-          "suggestion": "onder hun of gelijke niveau"
+          "description": "The phrase 'or lower' in the English content is translated as 'of onder hun niveau'. While technically correct, it's less natural in Dutch. A more idiomatic translation would be 'of lager niveau'.",
+          "suggestion": "of lager niveau"
         }
       ],
       "approved_at": null
@@ -239,18 +249,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'assign roles of room admin or lower' is translated as 'przypisywać im rolę administratora pokoju lub niższą'. While understandable, a more precise translation would be something like 'przypisywać im role administratora pokoju lub niższe role' to clarify that 'lower' refers to roles.",
-          "suggestion": "przypisywać im role administratora pokoju lub niższe role"
-        },
-        {
-          "type": "formatting",
-          "description": "The English uses 'Complete and In Process' as two separate folders. The Polish translation uses 'Gotowe oraz W toku'. While not incorrect, consistently using 'and' (as in 'Gotowe i W toku') would match the style of the English source more closely.",
-          "suggestion": "Gotowe i W toku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -268,13 +267,35 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"sunt oferite acces complet\" is awkward and doesn't accurately convey the English meaning of \"have full access.\" It literally translates to 'are offered complete access'.",
+          "suggestion": "Administratorii sălilor au acces complet"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation of 'Complete and In Process folders' is a bit clunky. While technically correct, it could be improved for better flow.",
+          "suggestion": "folderele Formulare completate și Formulare în lucru"
+        },
+        {
+          "type": "formatting",
+          "description": "Inconsistency in capitalization. 'Formulare' should be 'formulare' unless referring to a specific title.",
+          "suggestion": "formulare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of room admin or lower' is not perfectly translated. 'Роли уровнем ниже' is a bit awkward. A more natural phrasing would convey the meaning of roles subordinate to room admin.",
+          "suggestion": "Администраторы комнат могут назначать роли администраторов комнат или роли с более низким уровнем доступа."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -283,18 +304,23 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'කාමර' (room) is repeated excessively. While technically correct, it can be rephrased for better flow.",
-          "suggestion": "Consider alternatives to reduce repetition, such as using pronouns or synonyms where appropriate. For example, 'පරිපාලකයින් කාමර නිර්මාණය කර කළමනාකරණය කළ හැකි අතර, නව පරිශීලකයින් ආරාධනය කර...' "
+          "description": "The word 'කාමර' (room) is repeated excessively. While acceptable in Sinhala, it could be rephrased for better flow.",
+          "suggestion": "Consider rephrasing to avoid repetition. For example: 'පරිපාලකවරුන්ට කාමර නිර්මාණය කර කළමනාකරණය කළ හැකි අතර...'"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'පහත තත්වයේ භූමිකා' can be interpreted as 'role of lower condition' which is awkward. It should be clarified to indicate a lower-level role.",
-          "suggestion": "Replace 'පහත තත්වයේ භූමිකා' with 'හීනතම භූමිකාව' or 'ලිහිණි භූමිකාව'."
+          "description": "The phrase 'පහත තත්වයේ භූමිකා පැවරීමට හැකිය' could be more accurately expressed. The use of 'භාවය' (bhāvaya) isn't quite correct here.",
+          "suggestion": "Replace 'පහත තත්වයේ භූමිකා පැවරීමට හැකිය' with 'පහත පරිචය/ឋනාව/භූමිකාව පවරන්නට හැකියි' (depending on the intended nuance)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'assign roles of room admin or lower' isn't perfectly captured by 'කාමර පරිපාලක හෝ පහත තත්වයේ භූමිකා පැවරීමට හැකිය'.  The English implies a hierarchy. 'පහත තත්වයේ' (lower status) is a possible but not optimal translation of 'lower'.",
+          "suggestion": "Consider 'කාමර පරිපාලක හෝ අඩු ឋන්‍ය භූමිකාව පවරන්නට හැකියි' which more closely implies a hierarchical role assignment."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the sentence structure is a bit lengthy and could be broken down for improved readability in Sinhala.  Long sentences can be cumbersome.",
-          "suggestion": "Consider splitting the first sentence into two for better flow.  For example: 'කාමර පරිපාලකවරුන් කාමර නිර්මාණය කර කළමනාකරණය කළ හැකි අතර, නව පරිශීලකයින් ආරාධනය කළ හැකිය.' and 'ඔවුන් කාමර පරිපාලක හෝ පහත තත්වයේ භූමිකා පැවරීමට හැකිය.'"
+          "description": "While not a major issue, longer sentences can be broken down for better readability in Sinhala. The structure of the Sinhala sentences mirrors the English a little too closely, leading to slightly clunky phrasing.",
+          "suggestion": "Consider breaking down the long sentences into shorter, more digestible parts for a more natural flow."
         }
       ],
       "approved_at": null
@@ -305,13 +331,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The repetition of 'Administrátori miestností' feels slightly awkward. Consider rephrasing to avoid it.",
-          "suggestion": "Administrátori miestností môžu vytvárať a spravovať miestnosti, pozývať nových používateľov a prideľovať roly administrátora miestnosti alebo nižšie. Títo administrátori môžu do miestnosti nahrávať formuláre a majú úplný prístup k priečinkom Vyplnené a V procese."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Administrátori miestnosti' is a valid translation of 'Room admins', it sounds less natural than using a more descriptive phrase. 'Správcovia miestností' could be considered.",
-          "suggestion": "Consider using 'Správcovia miestností' instead of 'Administrátori miestnosti' for improved flow. The rest of the text would remain the same."
+          "description": "Inconsistent capitalization of 'Administrátori miestnosti' vs. 'Administrátori miestnosti' in the beginning of the sentences. It should be consistent.",
+          "suggestion": "Use consistent capitalization throughout the text, e.g., 'Administrátori miestnosti' or 'administrátori miestnosti'."
         }
       ],
       "approved_at": null
@@ -319,7 +340,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'V obdelavi' is slightly awkward. While technically correct, 'V procesu' would be a more common and natural phrasing in Slovenian.",
+          "suggestion": "Replace 'V obdelavi' with 'V procesu'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -328,13 +355,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"фолдерима\" (folderima) is grammatically correct but sounds a bit formal/stilted in this context. A more natural phrasing might be used.",
-          "suggestion": "фолдери or фасцикле"
+          "description": "The word 'фолдерима' (folders) is misspelled. It should be 'фолдерима'.",
+          "suggestion": "фолдерима"
         },
         {
           "type": "formatting",
-          "description": "The repetition of 'Администратори просторија' (Room admins) is a bit clunky. While technically correct, it could be improved for readability.",
-          "suggestion": "Могу креирати и управљати просторијама, позивати нове кориснике и додељивати улоге администатора просторије или ниже. Ови администратори могу отпремати формуларе у просторију..."
+          "description": "The repeated use of 'Администратори просторија' is slightly clunky. While grammatically correct, it could be rephrased for better flow.",
+          "suggestion": "Просторијама могу креирати и управљати просторијама, позивати нове кориснике и додељивати улоге администратора просторије или ниже. Ови администратори просторија могу..."
         }
       ],
       "approved_at": null
@@ -345,18 +372,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Room admins\" is consistently translated as \"Administratori prostorija.\" While technically correct, it's a bit clunky. A more natural phrasing would be \"Administratorsi sobi\" or \"Administratorsi prostorija.\" It's important to be consistent with the terminology throughout the translated document.",
-          "suggestion": "Consider using \"Administratorsi sobi\" or \"Administratorsi prostorija\" instead of \"Administratori prostorija\" to sound more natural."
+          "description": "The phrase 'Room admins' is consistently translated as 'Administratori prostorija'. While technically correct, a more natural Serbian phrasing would be 'Administratori sobi' or 'Administratori prostorija' depending on the context and desired formality. 'Prostorija' is generally used for a space, not necessarily a room with a specific function.",
+          "suggestion": "Consider 'Administratori sobi' or 'Administratori prostorija' for a more natural flow."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin or lower\" is translated as \"dodeljivati uloge administatora prostorije ili niže.\"  'Niže' implies a hierarchical position *below* room admin, but the English suggests roles that are at or below the level of room admin.  This nuance might be lost.",
-          "suggestion": "Consider a phrasing like \"dodeljivati uloge administratora sobe ili niže pozicije\" to better convey the meaning of roles at or below room admin."
+          "description": "The phrase 'assign roles of room admin or lower' is translated as 'dodeljivati uloge administatora prostorije ili niže'.  'Niže' (lower) is correct in meaning, but it is more natural to use 'nižeg ranga' or 'manjeg ranga' to indicate lower rank/authority.",
+          "suggestion": "Change 'ili niže' to 'ili manjeg ranga' or 'ili nižeg ranga'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"upload forms\" is translated as \"otpremati formulare.\" While 'otpremati' is a valid translation for 'upload', depending on the context, 'dizati' (as in, 'uploadovati') might be a more commonly used term in Serbian for uploading files online.",
-          "suggestion": "Consider using 'dizati formulare' as an alternative to 'otpremati formulare'."
+          "description": "The phrase 'upload forms' is translated as 'otpremati formulare'. 'Otpremati' suggests shipping or sending. While not entirely incorrect, 'ugraditi' or 'postavljati' might be more appropriate in this context, referring to uploading documents.",
+          "suggestion": "Consider 'ugraditi' or 'postavljati' instead of 'otpremati'."
+        },
+        {
+          "type": "formatting",
+          "description": "Folder names 'Complete and In Process' should be checked for consistency with other translated materials.  These are presented as 'Završeno i U Procesu'. It is essential that these names match existing conventions within the application.",
+          "suggestion": "Verify consistency of 'Završeno i U Procesu' with other translated elements."
         }
       ],
       "approved_at": null
@@ -373,8 +405,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"передавати форми до кімнати\" (transmit forms to the room) is awkward and doesn't accurately convey \"upload forms to the room.\" A more appropriate translation would be something like \"завантажувати форми до кімнати\" or \"додавати форми до кімнати\".",
+          "description": "The phrase \"передавати форми до кімнати\" is not the most accurate translation of \"upload forms to the room.\"  \"Передавати\" implies transferring, rather than uploading. A better translation would convey the uploading action.",
           "suggestion": "завантажувати форми до кімнати"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses lower case for \"Заповнені\" and \"В процесі\".  Consistent capitalization (or lack thereof) should be maintained across the translated text.",
+          "suggestion": "папок «Заповнені» та «В процесі» (or Папок «заповнені» та «в процесі» - depending on the intended style)"
         }
       ],
       "approved_at": null
@@ -385,13 +422,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'assign roles of room admin or lower' is a bit clunky in Vietnamese. While technically correct, it can be improved for natural flow.",
-          "suggestion": "chỉ định vai trò quản trị viên phòng hoặc các vai trò cấp dưới"
+          "description": "The phrase 'assign roles' is not perfectly captured by 'chỉ định vai trò'. A more accurate translation would emphasize granting or assigning roles.",
+          "suggestion": "Quản trị viên phòng có thể tạo và quản lý các phòng, mời người dùng mới và cấp quyền quản trị viên phòng hoặc thấp hơn."
         },
         {
           "type": "formatting",
-          "description": "The punctuation (periods) at the end of each sentence should be checked for consistency. It appears to be using periods, but a more formal document might benefit from a more unified approach.",
-          "suggestion": "Review the use of periods throughout the text to ensure consistency with the desired style."
+          "description": "The phrase 'Complete and In Process folders' should be checked for consistency in capitalization.",
+          "suggestion": "Các thư mục Hoàn thành và Đang xử lý"
         }
       ],
       "approved_at": null
@@ -402,13 +439,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin or lower\" is translated as \"为他人设置房间管理员或更低级别的权限\". While technically correct, it's a bit verbose and not as natural sounding in Chinese. A more concise and idiomatic translation would be \"授予房间管理员或更低权限\" or \"设置房间管理员或更低等级权限\".",
-          "suggestion": "授予房间管理员或更低权限"
+          "description": "The phrase \"assign roles of room admin or lower\" is translated as \"为他人设置房间管理员或更低级别的权限\". While technically correct, it's a bit clunky. A more natural phrasing would better reflect the original intent.",
+          "suggestion": "为他人设置房间管理员或更低权限 (Wei taren shezhi fangjian guanliyuan huo gengdi quanzhu)"
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is slightly awkward. Splitting it into two separate sentences would improve readability.",
-          "suggestion": "房间管理员可以创建和管理房间、邀请新用户并为他人设置房间管理员或更低权限。房间管理员可以将表单上传到房间，并拥有“完成”和“正在处理中”文件夹的完全访问权限。"
+          "description": "The phrase 'Complete and In Process folders' is presented in English within the Chinese sentence. While common, maintaining consistency by translating would be preferred. ",
+          "suggestion": "“完成”和“正在处理中”文件夹 (WanCheng he Zhengzai Chuli zhong folder)"
         }
       ],
       "approved_at": null

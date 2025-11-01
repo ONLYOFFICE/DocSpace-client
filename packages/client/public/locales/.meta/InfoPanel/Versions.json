@@ -3,7 +3,7 @@
   "content": "Versions",
   "content_en_sha1_hash": "a239107ef28f6efe13d8ea83e502da9aa8c43fbb",
   "created_at": "2025-05-19T21:30:54.979Z",
-  "updated_at": "2025-05-28T09:30:02.411Z",
+  "updated_at": "2025-08-12T19:46:26.017Z",
   "comment": {
     "text": "This translation key is used to display the label \"Versions\" in various contexts within the application. It is expected to appear on a UI component displaying version information, possibly in a file or package listing.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 196,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 223,
       "context": "case \"Index\":\n return this.t(\"Files:Index\");\n \n case \"Versions\":\n return this.t(\"InfoPanel:Versions\");\n case \"Comments\":\n return this.t(\"Common:Comments\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n case \"Storage\":",
       "module": "/packages/client"
     }
@@ -157,7 +157,7 @@
         {
           "type": "incorrect_translation",
           "description": "The Sinhala translation 'අනුවාද' translates to 'translation' or 'adaptation', not 'versions'. It doesn't accurately convey the meaning of 'Versions'.",
-          "suggestion": "Possible alternatives include:  'අවස්ථා' (awastha - versions/iterations), 'ලේඛණාංක' (lekhananka - version numbers), or 'ආකාරයන්' (akaramayan - forms/types)."
+          "suggestion": "The correct translation for 'Versions' would likely be 'අවස්ථා' (awastha) or 'පොත්කථා' (paththakatha) or ' අනුවාදය ' (anuvadaya) depending on the specific context. Consider context to determine the best fit."
         }
       ],
       "approved_at": null

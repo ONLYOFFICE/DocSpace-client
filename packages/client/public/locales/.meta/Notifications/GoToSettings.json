@@ -1,0 +1,28 @@
+{
+  "key_path": "GoToSettings",
+  "content": "Go to Settings",
+  "content_en_sha1_hash": "afc288b1ffb91b961cd8fa6fbe17bd6255268ca9",
+  "created_at": "2025-09-10T09:59:17.186Z",
+  "updated_at": "2025-09-12T14:18:49.517Z",
+  "comment": {
+    "text": "This text appears as a link, likely a button or call-to-action, that directs users to the settings page. It's used within a notification channel section of a user's profile, specifically when hovering over an element. Translators should ensure the translation accurately conveys the action of navigating to settings.",
+    "is_auto": true,
+    "updated_at": "2025-09-10T10:01:19.181Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
+      "line_number": 138,
+      "context": "isHovered\n type={LinkType.action}\n href={`${THIRD_PARTY_SERVICES_URL}${type}`}\n target={LinkTarget.blank}\n >\n {t(\"GoToSettings\")}\n </Link>\n );\n }\n \n return (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

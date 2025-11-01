@@ -3,7 +3,7 @@
   "content": "{{organizationName}} Form Gallery",
   "content_en_sha1_hash": "8ff9340314227b402803b08dcadbf18424b8d125",
   "created_at": "2025-05-19T21:30:49.175Z",
-  "updated_at": "2025-05-28T09:30:02.408Z",
+  "updated_at": "2025-10-14T02:55:04.586Z",
   "comment": {
     "text": "This translation key is used to display the header for a form gallery tile, which includes the organization's name. It appears in a submit button or action area on the FormGallery page, typically displayed when the user submits their data to the gallery.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'معرض نموذج {{organizationName}}' is a literal translation of '{{organizationName}} Form Gallery'. A more natural and idiomatic translation would be something like 'مجموعة نماذج {{organizationName}}' ({{organizationName}} Forms Collection) or 'نماذج {{organizationName}}' ({{organizationName}} Forms). The current translation doesn't quite convey the intended meaning of a curated gallery of forms.",
-          "suggestion": "مجموعة نماذج {{organizationName}}"
+          "description": "The translation \"معرض نموذج {{organizationName}}\" is a literal translation and doesn't quite convey the meaning of 'Form Gallery'. A better translation would consider the context of a gallery showcasing forms.",
+          "suggestion": "Consider a translation like \"مجموعة نماذج {{organizationName}}\" or \"نماذج {{organizationName}}\" to better reflect the meaning of a 'Form Gallery'."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation includes a space before the double curly braces `{{organizationName}}`. This should be removed for proper variable substitution.",
-          "suggestion": "Formulář{{organizationName}} Galerie"
+          "description": "The Czech translation includes a space before the variable {{organizationName}}. This might not be desired and should be checked for consistency with other similar variables.",
+          "suggestion": "Remove the space before {{organizationName}}: Formulář{{organizationName}} Galerie"
         }
       ],
       "approved_at": null
@@ -65,9 +65,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Formulargalerie von {{organizationName}}' is not the most natural or idiomatic way to express \"{{organizationName}} Form Gallery\" in German. While technically correct, it sounds slightly awkward. A better option would be something like '{{organizationName}}'s Form Gallery' or 'Formulargalerie {{organizationName}}'.",
-          "suggestion": "Formulargalerie {{organizationName}}"
+          "type": "formatting",
+          "description": "The German translation uses a lowercase 'f' in 'Formulargalerie'. It should be capitalized to match the English format.",
+          "suggestion": "Formulargalerie von {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -77,9 +77,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Συλλογή Φορμών {{organizationName}}' is literal and could be improved for naturalness in Greek. A more natural phrasing might be 'Γκαλερί Φορμών {{organizationName}}' or 'Φόρμες από την {{organizationName}}'.",
-          "suggestion": "Γκαλερί Φορμών {{organizationName}}"
+          "type": "formatting",
+          "description": "The Greek translation includes a space before the variable {{organizationName}}.  This likely isn't intended and should be removed for proper rendering.",
+          "suggestion": "Συλλογή Φορμών{{organizationName}}"
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is generally accurate, 'Form Gallery' could be more naturally translated as 'Galería de Formularios' instead of 'Galería de formularios'. The direct article 'de' is often required.",
+          "suggestion": "Galería de Formularios de {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The French translation uses a variable name within the translated text. While technically correct, it might be preferable to ensure the variable handling is consistent with the platform or application using the translation.  Consider whether the variable should be surrounded by HTML entities or handled differently.",
-          "suggestion": "Check the platform’s variable handling requirements. If necessary, enclose the variable name in HTML entities like `&{{organizationName}}` or adjust the placeholder to suit the specific system."
+          "description": "The French translation includes a space before the variable {{organizationName}}.",
+          "suggestion": "Galerie de formulaires{{organizationName}}"
         }
       ],
       "approved_at": null
@@ -120,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Galleria dei moduli di {{organizationName}}\" is a bit clunky. A more natural Italian phrasing would be \"Galleria moduli di {{organizationName}}\" or \"Galleria form di {{organizationName}}\".",
+          "description": "The translation 'Galleria dei moduli di {{organizationName}}' is technically correct but could be improved for fluency and naturalness in Italian. While 'dei moduli' is correct, a more common phrasing would be 'de {{organizationName}}' or 'di {{organizationName}}'.",
           "suggestion": "Galleria moduli di {{organizationName}}"
         }
       ],
@@ -143,9 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Lao translation includes the variable \"{{organizationName}}\" which should likely be replaced with the actual organization name when implementing the translation.",
-          "suggestion": "Ensure the variable \"{{organizationName}}\" is replaced with the actual organization name during implementation."
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຫ້ອງສະແດງແບບຟອມ {{organizationName}}\" literally translates to 'Form Gallery'. While understandable, a more natural and idiomatic translation might be \"ສາລະບານແບບຟອມຂອງ {{organizationName}}\" (Forms of {{organizationName}}) or \"ແບບຟອມຈາກ {{organizationName}}\" (Forms from {{organizationName}}). This depends on the specific nuance desired.",
+          "suggestion": "ສາລະບານແບບຟອມຂອງ {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -165,7 +171,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation includes a space before the variable {{organizationName}}, which may not be desirable. It should match the English format.",
+          "suggestion": "Galeria formularzy {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -183,19 +195,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes the variable {{organizationName}} which needs to be handled consistently with the English original. Ensure this variable is properly rendered in the user interface.",
+          "suggestion": "Verify that the variable {{organizationName}} is correctly integrated into the Romanian UI."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The variable {{organizationName}} is not enclosed in proper formatting to ensure it's rendered correctly within the gallery header. While the variable itself is present, its integration with the surrounding text might be problematic.",
-          "suggestion": "Consider adding appropriate HTML or templating markup around {{organizationName}} to ensure it's displayed as intended. For example, if it's a simple text replacement, ensure the surrounding text is properly formatted. If it's a link, ensure the variable is within an `<a>` tag."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -204,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආකෘති එකතුව' while technically meaning 'Forms Collection', doesn't quite capture the nuance of 'Gallery'.  A 'Gallery' implies a curated display of forms, often for inspiration or example. 'එකතුව' suggests a simple aggregation.",
-          "suggestion": "Consider a translation that better conveys the curated/displayed aspect of a gallery, such as 'ආකෘති ප්‍රදර්ශනය' (Akruthi Pradarsanaya - Forms Display) or 'ආකෘති සංග්‍රහය' (Akruthi Sangrahaya - Forms Compilation/Repository).  The best choice will depend on the specific context and brand voice."
+          "description": "The translation \"ආකෘති එකතුව\" while literally meaning 'forms collection', doesn't fully capture the meaning of \"Form Gallery\". A 'gallery' often implies a curated and searchable collection. A better translation would convey this curated aspect.",
+          "suggestion": "{{organizationName}} ආකෘති පින්තාරු එකතුව"
         }
       ],
       "approved_at": null
@@ -215,9 +227,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Galéria formulárov {{organizationName}}\" is technically correct but lacks the flow of the English phrase \"{{organizationName}} Form Gallery\". It sounds a bit abrupt in Slovak. A more natural phrasing would be \"Formuláre {{organizationName}} - Galéria\" or \"Galéria formulárov od {{organizationName}}\".",
-          "suggestion": "Consider \"Formuláre {{organizationName}} - Galéria\" or \"Galéria formulárov od {{organizationName}}\""
+          "type": "formatting",
+          "description": "The translation 'Galéria formulárov {{organizationName}}' lacks a space after the colon. It's better to have a space for readability.",
+          "suggestion": "Galéria formulárov {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -249,7 +261,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Галерея форм {{organizationName}}' is not the most natural or idiomatic translation of \"{{organizationName}} Form Gallery\".  A more natural translation might be 'Галерея форм від {{organizationName}}' or 'Галерея форм {{organizationName}}' depending on desired emphasis and style.",
+          "suggestion": "Галерея форм від {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -258,18 +276,19 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bộ Sưu tập Biểu mẫu {{organizationName}}\" is not the most natural or idiomatic way to express \"{{organizationName}} Form Gallery\" in Vietnamese. While technically correct, it sounds slightly awkward. A better translation would emphasize that it's a gallery *of* forms.",
-          "suggestion": "Thư viện Mẫu của {{organizationName}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The placement of '{{organizationName}}' might require consideration in the Vietnamese context. It depends on the overall layout and design of the user interface. It may need adjusted for better visual flow within the Vietnamese version.",
-          "suggestion": "Consider the surrounding text and UI design to determine the optimal placement of '{{organizationName}}'."
+          "description": "The translation \"Bộ Sưu tập Biểu mẫu {{organizationName}}\" is a literal translation and may not be the most natural or idiomatic way to express \"{{organizationName}} Form Gallery\" in Vietnamese. A more natural phrasing might be something like 'Thư viện Mẫu của {{organizationName}}' or 'Khu vực Mẫu {{organizationName}}'.",
+          "suggestion": "Consider using 'Thư viện Mẫu của {{organizationName}}' or 'Khu vực Mẫu {{organizationName}}' for a more natural flow."
         }
       ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

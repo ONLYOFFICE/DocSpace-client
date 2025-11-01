@@ -3,7 +3,7 @@
   "content": "Send an invitation to add new members to your {{productName}}",
   "content_en_sha1_hash": "abbd8fb2bdab0b643dd2213a6498d3863b588070",
   "created_at": "2025-05-19T21:30:56.520Z",
-  "updated_at": "2025-05-28T09:30:02.120Z",
+  "updated_at": "2025-10-13T13:22:35.626Z",
   "comment": {
     "text": "This translation key is used for a button that invites new members to join a room in the product, typically displayed on an \"Empty View\" container. The button sends an invitation notification containing the product name. It appears as a visible action element.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 290,
+      "line_number": 299,
       "context": "disabled: false,\n };\n \n const inviteRootRoom = {\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:InviteRootRoomDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: <InviteUserFormIcon />,\n key: \"invite-root-room\",\n onClick: () => actions.inviteRootUser(EmployeeType.User),",
       "module": "/packages/client"
     }
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lähetä kutsu lisätäksesi uusia jäseniä {{productName}}' is a literal translation and doesn't flow naturally in Finnish. A more natural phrasing would emphasize adding members *to* the product.",
+          "suggestion": "Lähetä kutsu lisätäksesi uusia jäseniä {{productName}}-palveluun"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ուղարկեք հրավեր՝ ձեր {{productName}}-ին նոր անդամներ ավելացնելու համար\" is a bit literal. A more natural Armenian phrasing would be something like \"Հրավերակում ձեր {{productName}}-ին՝ նոր անդամներ ավելացնելու համար\" or \"Ձևացրեք հրավեր՝ ձեր {{productName}}-ին նոր անդամներ ավելացնելու համար\" depending on the desired level of formality and nuance.",
+          "suggestion": "Հրավերակում ձեր {{productName}}-ին՝ նոր անդամներ ավելացնելու համար"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,7 +135,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Polish translation uses the plural form 'zaproszenia' (invitations) which might be slightly awkward. Using the singular 'zaproszenie' would be more natural in this context.",
+          "suggestion": "Wyślij zaproszenie, aby dodać nowych członków do {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -135,7 +153,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'sala' (room) doesn't quite convey the intended meaning of 'your [productName]'. While technically correct, it's a bit awkward and might confuse users. 'Produto' or a more generic term would be better.",
+          "suggestion": "Envie um convite para adicionar novos membros ao seu {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -153,13 +177,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබේ {{productName}} වෙත නව සාමාජිකයන් එක් කිරීමට ආරාධනාවක් යවන්න' is a literal translation but sounds slightly unnatural in Sinhala. A more natural phrasing would emphasize the action of inviting someone to join.",
+          "suggestion": "ඔබේ {{productName}} වෙත නව සාමාජිකයන් පිළිගැනීමට ආරාධනාවක් යවන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pošlite pozvánku a pridajte nových členov do vášho {{productName}}' is a bit awkward. A more natural Slovak phrasing would emphasize sending the invitation *to* a room.",
+          "suggestion": "Pošlite pozvánku na pridanie nových členov do vášho {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -183,7 +219,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}} ürününüze yeni üyeler eklemek için bir davetiye gönderin\" is a literal translation and sounds slightly awkward in Turkish. A more natural phrasing would be '{{productName}}'e yeni üyeler eklemek için bir davetiye gönderin.'",
+          "suggestion": "{{productName}}'e yeni üyeler eklemek için bir davetiye gönderin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +243,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '发送邀请以添加新成员到您的{{productName}}' is a literal translation and sounds awkward in Chinese. A more natural phrasing would be '向您的{{productName}}发送邀请，添加新成员'.",
+          "suggestion": "向您的{{productName}}发送邀请，添加新成员"
+        }
+      ],
       "approved_at": null
     }
   }

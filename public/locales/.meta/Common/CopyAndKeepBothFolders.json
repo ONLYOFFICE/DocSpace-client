@@ -3,7 +3,7 @@
   "content": "Copy and keep both folders",
   "content_en_sha1_hash": "176432b01539932c5ac6c8eb8c154f33251b3418",
   "created_at": "2025-05-19T21:30:43.753Z",
-  "updated_at": "2025-05-28T09:30:02.218Z",
+  "updated_at": "2025-05-26T07:57:32.244Z",
   "comment": {
     "text": "This translation key is used to display the text \"Copy and keep both folders\" in a file conflict resolution dialog. It is likely displayed as a button or option within the dialog, prompting users to choose whether to copy the contents of both source and destination folders.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Αντιγραφή και διατήρηση και των δύο φακέλων\" is technically correct but slightly verbose and awkward. While 'και των δύο' (and both) is present, it's a bit redundant with 'και' already indicating a plural. A more natural phrasing would be preferred.",
+          "suggestion": "Αντιγραφή και διατήρηση των δύο φακέλων"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation conveys the general meaning, 'Պատճենել և պահել երկու թղթապանակները' is a literal translation and might sound slightly awkward in Armenian. A more natural phrasing might be 'Պատճենել և պահել երկու ֆայլերը' (Copy and keep both files) or 'Պատճենել և պահել երկու պանակները' (Copy and keep both folders/directories), depending on the context.",
-          "suggestion": "Consider alternatives like 'Պատճենել և պահել երկու ֆայլերը' or 'Պատճենել և պահել երկու պանակները'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"保存する\" (save) implies a more permanent action than 'keep'. The English 'keep' suggests retaining the folders without necessarily archiving them.",
-          "suggestion": "両方のフォルダをコピーして保持する"
+          "description": "The English phrase \"Copy and keep both folders\" implies duplication and retention. The Japanese translation \"両方のフォルダをコピーして保存する\" translates to \"Copy both folders and save them.\" While similar, \"save\" has a slightly different connotation than \"keep.\" \"Keep\" often implies retaining them in their original state, whereas \"save\" might suggest some form of preservation or archiving.",
+          "suggestion": "Consider alternatives that more closely mirror the nuance of 'keep,' such as \"両方のフォルダをコピーして保持する\" (ryouhou no folderu o kopii shite hozon suru - Copy both folders and retain them) or \"両方のフォルダをコピーしてそのまま保管する\" (ryouhou no folderu o kopii shite sono mama hokan suru - Copy both folders and store them as is)."
         }
       ],
       "approved_at": null
@@ -111,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '두 폴더 모두 복사하여 보관' is understandable, it's a slightly formal and literal translation. A more natural and common way to express 'Copy and keep both folders' in Korean would be '두 폴더를 모두 복사해서 보관하세요' or '두 폴더를 모두 복사하고 보관하세요'. The addition of a particle '를' clarifies the object being copied and kept.",
+          "suggestion": "두 폴더를 모두 복사해서 보관하세요 or 두 폴더를 모두 복사하고 보관하세요"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -120,13 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ກ໊ອບ' (kop) is a transliteration of 'copy' and may not be the most natural Lao equivalent in this context. While understandable, 'ສໍາເນົາ' (sam nao) is a more common and accurate translation for 'copy'.",
-          "suggestion": "Replace 'ກ໊ອບ' with 'ສໍາເນົາ'."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ໄວ້' (vai) at the end sounds a bit stilted. While technically correct, a slightly more natural phrasing would be preferred.",
-          "suggestion": "Consider replacing 'ໄວ້' with a more natural phrasing like removing it entirely or using a different connective word depending on the desired nuance."
+          "description": "The word 'keep' is incorrectly translated. 'ຮັກສາ' (haksah) primarily means 'protect' or 'preserve', not 'keep' in the sense of retaining something.",
+          "suggestion": "Consider using 'ເກັບໄວ້' (kep wai) which more accurately translates to 'keep' in the context of retaining both folders."
         }
       ],
       "approved_at": null
@@ -179,8 +180,38 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ෆෝල්ඩර' is a valid transliteration of 'folder', but might benefit from a more standard Sinhala word for folder depending on the target audience. While acceptable, consider alternatives.",
-          "suggestion": "Consider if a more commonly used Sinhala word for 'folder' exists and is appropriate for the context. Options could include researching common terminology used in computing contexts."
+          "description": "The word 'ෆෝල්ඩර' (folder) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'දෙකම' (both) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'පිටපත්' (copy) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'කර' (do) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'තබා' (keep) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ගන්න' (get/take) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, a more natural translation might be 'ෆෝල්ඩර දෙකම බේකප් කර ගන්න' (folder dekama backup kara ganne). 'තබා ගන්න' (thaba ganne) implies holding onto something, while 'backup' is a more accurate representation of the action intended by 'copy'.",
+          "suggestion": "ෆෝල්ඩර දෙකම බේකප් කර ගන්න"
         }
       ],
       "approved_at": null
@@ -194,13 +225,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Kopiraj in shrani obe mapi' is understandable, a more natural and accurate translation of 'Copy and keep both folders' would be 'Kopiraj in ohrani obe mapi' or 'Kopiraj in zadrži obe mapi'. 'Shrani' implies saving a file, whereas 'keep' refers to retaining the folder itself.",
-          "suggestion": "Kopiraj in ohrani obe mapi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

@@ -3,7 +3,7 @@
   "content": "Data Management",
   "content_en_sha1_hash": "d5d83b763809dbf1782ea117dc9885e64311acdd",
   "created_at": "2025-05-19T21:30:51.903Z",
-  "updated_at": "2025-06-24T16:31:24.402Z",
+  "updated_at": "2025-06-30T12:20:31.387Z",
   "comment": {
     "text": "The \"ManagementCategoryDataManagement\" translation key is used to display the text \"Data Management\" in a UI context. It likely appears on a settings page or button related to data management features.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
       "line_number": 220,
-      "context": "return t(\"Migration\");\n case \"Backup\":\n return t(\"Backup\");\n case \"Common:PaymentsTitle\":\n return t(\"Common:PaymentsTitle\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");",
+      "context": "return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");\n case \"Common:PaymentsTitle\":\n return t(\"Common:PaymentsTitle\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");",
       "module": "/packages/client"
     }
   ],

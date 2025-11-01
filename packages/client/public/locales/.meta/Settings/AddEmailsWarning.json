@@ -3,7 +3,7 @@
   "content": "You don't have users with emails. Please proceed to the next step to add them.",
   "content_en_sha1_hash": "d0de0fa7652a248f3b7cd62973555fe24111973b",
   "created_at": "2025-05-19T21:30:50.343Z",
-  "updated_at": "2025-05-28T09:30:02.525Z",
+  "updated_at": "2025-08-11T09:02:43.949Z",
   "comment": {
     "text": "This translation key is used to display a warning message when adding users with emails in an email data import process. The text informs users that they don't have any existing users with emails and prompts them to proceed to add some. It appears as a prominent notification within the PortalSettings categories page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/index.tsx",
-      "line_number": 170,
+      "line_number": 174,
       "context": ") : null}\n </>\n ) : (\n <>\n <Text fontWeight={600} lineHeight=\"20px\" className=\"mb-17\">\n {t(\"Settings:AddEmailsWarning\")}\n </Text>\n {Buttons}\n </>\n )}",
       "module": "/packages/client"
     }
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ليس لديك مستخدمين لديهم بريد إلكتروني' is overly literal and sounds unnatural in Arabic. A more natural phrasing would be 'لا توجد لديك مستخدمون لديهم بريد إلكتروني' or 'لم يتم إضافة مستخدمين لديهم بريد إلكتروني بعد'.",
+          "suggestion": "لا توجد لديك مستخدمون لديهم بريد إلكتروني"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'يرجى المتابعة إلى الخطوة التالية لإضافتهم' is grammatically correct but could be slightly improved for flow. A more concise option would convey the same meaning better.",
+          "suggestion": "يرجى المتابعة إلى الخطوة التالية لإضافتهم أو يمكنك المتابعة إلى الخطوة التالية لإضافتهم."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -72,13 +83,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is a literal translation and sounds unnatural in Finnish. A more natural phrasing would be preferred.",
+          "description": "The translation is overly literal and sounds unnatural in Finnish. The phrase 'joilla on sähköpostit' (who have emails) is clunky.",
           "suggestion": "Sinulla ei ole käyttäjiä sähköpostiosoitteilla. Jatka seuraavaan vaiheeseen lisätäksesi heidät."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Ole hyvä' is overly formal and not commonly used in this context.",
-          "suggestion": "Remove 'Ole hyvä' for a more conversational tone."
+          "type": "grammar",
+          "description": "The sentence 'Ole hyvä ja jatka seuraavaan vaiheeseen lisätäksesi ne' is grammatically correct but the use of 'ne' referring to users feels awkward. Using 'heidät' would be more natural.",
+          "suggestion": "Ole hyvä ja jatka seuraavaan vaiheeseen lisätäksesi heidät."
         }
       ],
       "approved_at": null
@@ -89,8 +100,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'adresse e-mail' is technically correct but a more natural and common phrasing in French would be 'adresses e-mail'. The possessive 'les' is also needed to correctly refer to the users.",
-          "suggestion": "Il n'y a aucun utilisateur avec des adresses e-mail. Veuillez passer à l'étape suivante pour les ajouter."
+          "description": "The phrase \"adresse e-mail\" is overly formal. A more natural translation would be \"adresses e-mail\" or simply \"e-mails\".",
+          "suggestion": "Il n'y a aucun utilisateur avec des e-mails. Veuillez passer à l'étape suivante pour les ajouter."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Veuillez passer à l'étape suivante pour les ajouter' can be simplified and sound more natural.",
+          "suggestion": "Veuillez passer à l'étape suivante pour les ajouter."
         }
       ],
       "approved_at": null
@@ -101,13 +117,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Դուք էլ․փոստով օգտվողներ չունեք:' is slightly awkward. While technically correct, it's not the most natural phrasing in Armenian.  'էլ․փոստով' feels a bit forced.  It implies there are other types of users that are not email users, which isn't necessarily conveyed in the English.",
-          "suggestion": "Consider a more direct translation like 'Ձեր մոտ չկան էլ․փոստի հետ կապված օգտվողներ։'"
+          "description": "The translation 'Դուք էլ․փոստով օգտվողներ չունեք:' is a bit awkward. A more natural phrasing would be something like 'Ձեր մոտ չկան էլ․փոստով օգտվողներ:' or 'Դուք չունեք էլ․փոստով գրանցված օգտվողներ:'",
+          "suggestion": "Ձեր մոտ չկան էլ․փոստով օգտվողներ:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ավելացնելու համար' can be improved. A more direct translation of 'to add them' would enhance clarity.",
+          "suggestion": "ավելացնելու համար:"
         },
         {
           "type": "formatting",
-          "description": "The colon after the first sentence feels a bit abrupt.  It might be better to integrate the second part more smoothly.",
-          "suggestion": "Combine the two sentences into one: 'Ձեր մոտ չկան էլ․փոստի հետ կապված օգտվողներ։ Խնդրում ենք անցնել հաջորդ քայլին՝ դրանք ավելացնելու համար։'"
+          "description": "The use of the ellipsis (․) seems out of place and inconsistent with standard Armenian punctuation. Consider removing it or using a standard ellipsis (...).",
+          "suggestion": "Դուք չունեք էլ․փոստով գրանցված օգտվողներ: Խնդրում ենք անցնել հաջորդ քայլին՝ դրանք ավելացնելու համար:"
         }
       ],
       "approved_at": null
@@ -130,13 +151,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and sounds unnatural in Korean. The phrase '이메일이 있는 사용자가 없습니다' is repetitive.  A more natural phrasing would be something like '이메일 주소를 가진 사용자가 없습니다.'",
-          "suggestion": "이메일 주소를 가진 사용자가 없습니다."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The second part, '이메일이 있는 사용자를 추가하려면 다음 단계를 진행하세요,' also sounds awkward. A better wording would indicate adding email addresses to user accounts, not users with emails.",
-          "suggestion": "이메일 주소를 추가하려면 다음 단계를 진행하세요."
+          "description": "The Korean translation is overly verbose and literal. The phrase \"이메일이 있는 사용자가\" is repeated unnecessarily. A more natural and concise translation would avoid repetition.",
+          "suggestion": "이메일 사용자가 없습니다. 다음 단계로 진행하여 추가해주세요."
         }
       ],
       "approved_at": null
@@ -146,9 +162,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'ທ່ານບໍ່ມີຜູ້ໃຊ້ທີ່ມີອີເມວ. ກະລຸນາດໍາເນີນຂັ້ນຕອນຕໍ່ໄປເພື່ອເພີ່ມພວກມັນ.' is a literal translation but could be improved for naturalness in Lao. A more natural phrasing would convey the meaning more clearly.",
-          "suggestion": "ທ່ານບໍ່ມີຜູ້ໃຊ້ທີ່ມີອີເມວ. ກະລຸນາໄປສູ່ຂັ້ນຕອນຕໍ່ໄປເພື່ອເພີ່ມອີເມວຂອງຜູ້ໃຊ້."
+          "type": "spelling",
+          "description": "The word 'ພວກມັນ' (puak man) which translates to 'them' is potentially awkward in this context. While technically correct, it can sound less natural.  A more common phrasing might use a more specific descriptor of 'users' instead of simply 'them'.",
+          "suggestion": "ທ່ານບໍ່ມີຜູ້ໃຊ້ທີ່ມີອີເມວ. ກະລຸນາດໍາເນີນຂັ້ນຕອນຕໍ່ໄປເພື່ອກະລຸນາເພີ່ມພວກເຂົາ."
         }
       ],
       "approved_at": null
@@ -159,13 +175,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Jums nav lietotāju ar e-pasta ziņojumiem\" is a literal translation and doesn't convey the intended meaning naturally in Latvian. The phrase \"e-pasta ziņojumiem\" is awkward.",
-          "suggestion": "Jums nav lietotāju ar e-pastiem. Pārejiet pie nākamās darbības, lai tos pievienotu."
+          "description": "The translation 'Jums nav lietotāju ar e-pasta ziņojumiem' is not the most natural way to express 'You don't have users with emails.' A more accurate and natural translation would be something like 'Jums nav lietotāju ar e-pastiem.'",
+          "suggestion": "Jums nav lietotāju ar e-pastiem."
         },
         {
-          "type": "grammar",
-          "description": "The word order in the suggestion may be improved for better flow.",
-          "suggestion": "Jums nav lietotājiem ar e-pastiem. Pārejiet pie nākamās darbības, lai tos pievienotu."
+          "type": "incorrect_translation",
+          "description": "The phrase 'lai to pievienotu' is a bit awkward in this context. It is more natural to say 'lai pievienotu lietotājus'.",
+          "suggestion": "lai pievienotu lietotājus"
         }
       ],
       "approved_at": null
@@ -212,18 +228,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබට වි-තැපෑලක් සහිත පරිශ්‍රීලකයින් නැත' is not a natural or accurate rendering of 'You don't have users with emails.' A more accurate translation would focus on the lack of users with email addresses.",
-          "suggestion": "ඔබට වි-තැපෑල ලිපිනයක් සහිත පරිශ්‍රීලකයින් කිසිවෙකු නොමැත."
+          "description": "The translation of \"You don't have users with emails\" is not accurate.  'ඔබට වි-තැපෑලක් සහිත පරිශ්‍රීලකයින් නැත' literally translates to 'You don't have users with emails'. However, a more natural Sinhala phrasing would be 'ඔබට වි-තැපෑලක් ඇති පරිශ්‍රීලකයින් නොමැත' or 'ඔබට තැපැල් ලිපිනයක් නැති පරිශ්‍රීලකයින් සිටිති'.",
+          "suggestion": "ඔබට තැපැල් ලිපිනයක් නැති පරිශ්‍රීලකයින් සිටිති. or ඔබට වි-තැපෑලක් ඇති පරිශ්‍රීලකයින් නොමැත."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'එකතු කිරීමට' (to add) feels clunky in this context. It's a more formal way of saying 'to add'.",
-          "suggestion": "එකතු කිරීමට වෙනුවට 'ඇමුණු ගැනීමට' හෝ 'එකතු කිරීමට' වඩා සුදුසු වනු ඇත"
+          "type": "grammatical",
+          "description": "The phrase 'එකතු කිරීමට ඊළඟ පියවරට යන්න' is grammatically correct but can be improved for flow.  'එකතු කිරීමට' implies adding something.  Since users are needed, a better phrasing focuses on adding them directly.",
+          "suggestion": "ඊළඟ පියවරට ගොස් ඔවුන්ව එක් කරන්න."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrasing 'ඊළඟ පියවරට යන්න' is slightly formal. A more conversational phrasing could improve readability.",
-          "suggestion": "ඊළඟ පියවරට යන්න' වෙනුවට 'ඊළඟ පියවරට ගොස්' හෝ 'ඊළඟ පියවරේට යන්න' භාවිතා කළ හැකිය."
+          "type": "formatting",
+          "description": "While not a major issue, it would be more consistent to avoid unnecessary spaces in the sentence.",
+          "suggestion": "ඔබට තැපැල් ලිපිනයක් නැති පරිශ්‍රීලකයින් සිටිති. ඊළඟ පියවරයට ගොස් ඔවුන්ව එක් කරන්න."
         }
       ],
       "approved_at": null
@@ -234,7 +250,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Nemáte používateľov, ktorí majú uvedený e-mail' is a literal translation but doesn't convey the intended meaning as naturally as it could. 'Uvedený e-mail' (listed email) is less common in this context.",
+          "description": "The Slovak translation 'Nemáte používateľov, ktorí majú uvedený e-mail' is a literal translation but sounds unnatural. The phrase 'uvedený e-mail' (listed email) isn't the most appropriate way to phrase this in Slovak. It implies the emails are listed somewhere.",
           "suggestion": "Nemáte používateľov s e-mailovou adresou. Prejdite na ďalší krok a pridajte ich."
         }
       ],
@@ -252,13 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'email-ом' is not idiomatic Serbian. The possessive suffix is incorrect and unnecessary.",
-          "suggestion": "Немате кориснике са емаил адресама."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, 'емаил' is an Anglicism. Using the Serbian equivalent 'електронска пошта' would be more appropriate for a polished feel, though 'емаил адреса' is acceptable as a compromise.",
-          "suggestion": "Немате кориснике са електронском поштом. Молимо пређите на следећи корак да их додате."
+          "description": "The word 'емаил-ом' is a direct transliteration and isn't the standard way to refer to email addresses in Serbian. It's better to use a more natural Serbian term.",
+          "suggestion": "Немате кориснике са е-маил адресама."
         }
       ],
       "approved_at": null
@@ -269,18 +280,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nemate korisnike sa email-om' is overly literal. A more natural and idiomatic translation would be 'Nema korisnika sa e-mail adresom' or 'Nema korisnika sa e-mail adresama'.",
-          "suggestion": "Nema korisnika sa e-mail adresom"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'email-om' is a genitive case which isn't the most common or natural usage here. While grammatically correct, it feels stilted.",
-          "suggestion": "e-mail adresom"
+          "description": "The phrase \"Nemate korisnike sa email-om\" is technically correct, but a more natural and common phrasing would be \"Nemate korisnike sa e-mail adresama.\" 'Email' is commonly accepted, but 'e-mail adresa' sounds more idiomatic in this context.",
+          "suggestion": "Nemate korisnike sa e-mail adresama."
         },
         {
           "type": "formatting",
-          "description": "While not a hard error, using 'e-mail' (hyphenated) consistently would improve readability and match common Serbian usage for email addresses.",
-          "suggestion": "e-mail"
+          "description": "While not strictly incorrect, the use of a hyphen in 'email-om' is not standard Serbian. It should be 'e-mailom' or 'sa e-mailom'.",
+          "suggestion": "sa e-mailom"
         }
       ],
       "approved_at": null
@@ -288,13 +294,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'E-postası olan kullanıcılarınız yok.' is a bit awkward. A more natural Turkish phrasing would be 'E-postası bulunan kullanıcılarınız yok.'",
-          "suggestion": "E-postası bulunan kullanıcılarınız yok."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -315,13 +315,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"您没有拥有电子邮件的用户\" is a literal and slightly awkward translation of \"You don't have users with emails.\" A more natural phrasing would convey the meaning more effectively.",
-          "suggestion": "您还没有添加电子邮件用户。 (You haven't added email users yet.)"
+          "description": "The translation \"您没有拥有电子邮件的用户\" is a literal and somewhat awkward translation of \"You don't have users with emails.\" It sounds unnatural in Chinese. A more natural phrasing would be something like \"您还没有添加电子邮件用户\" or \"您目前没有添加电子邮件用户\".",
+          "suggestion": "您还没有添加电子邮件用户"
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure is a bit clunky. It could be smoother.",
-          "suggestion": "您还没有添加电子邮件用户，请继续执行下一步。 (You haven't added email users yet, please proceed to the next step.)"
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure in \"请继续执行下一步添加\" is slightly formal and less conversational. It could be improved.",
+          "suggestion": "请继续下一步添加"
         }
       ],
       "approved_at": null

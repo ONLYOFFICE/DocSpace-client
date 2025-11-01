@@ -2,17 +2,17 @@
   "key_path": "InviteToRoomManuallyInfoMembers",
   "content": "Add existing {{productName}} members to the room.",
   "content_en_sha1_hash": "816770fbd8f562c5be684447272d1393838bad6e",
-  "created_at": "2025-05-28T09:33:07.789Z",
-  "updated_at": "2025-05-28T09:34:06.897Z",
+  "created_at": "2025-05-26T07:15:53.261Z",
+  "updated_at": "2025-08-12T19:46:25.985Z",
   "comment": {
-    "text": "Add existing {{productName}} members to the room. This translation key is used to display a message prompting users to manually add existing members from the same product to a specific room in a UI element such as an invite panel or button.",
+    "text": "This translation key is used to display a message that prompts users to add existing members from {{productName}} to a room. It appears in an invite panel when manually inviting members and allows users to select multiple members at once.",
     "is_auto": true,
-    "updated_at": "2025-05-28T09:34:06.897Z"
+    "updated_at": "2025-05-26T08:09:29.804Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 597,
+      "line_number": 604,
       "context": "{roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InviteToRoomManuallyInfoGuest\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     }

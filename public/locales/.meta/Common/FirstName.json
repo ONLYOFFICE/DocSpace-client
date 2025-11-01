@@ -3,7 +3,7 @@
   "content": "First name",
   "content_en_sha1_hash": "7e568a90221d853052b3466e581eb5f7c030b901",
   "created_at": "2025-05-19T21:30:45.407Z",
-  "updated_at": "2025-07-10T11:11:06.792Z",
+  "updated_at": "2025-08-21T11:22:39.796Z",
   "comment": {
     "text": "This translation key is used to display the label \"First name\" in various UI elements, particularly in a change name dialog and an attribute mapping form. It appears as a required field label in these contexts, prompting users for their first name.",
     "is_auto": true,
@@ -24,26 +24,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 134,
-      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n >\n <LdapFieldComponent\n name={FIRST_NAME}\n hasError={errors.firstName}",
+      "line_number": 137,
+      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >\n <LdapFieldComponent\n name={FIRST_NAME}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 80,
-      "context": "}\n />\n </div>\n \n <SsoFormField\n labelText={t(\"Common:FirstName\")}\n name=\"firstName\"\n placeholder={SSO_GIVEN_NAME}\n tabIndex={16}\n value={firstName}\n hasError={firstNameHasError}",
+      "line_number": 81,
+      "context": "dataTestId=\"attribute_mapping_help_button\"\n />\n </div>\n \n <SsoFormField\n labelText={t(\"Common:FirstName\")}\n name=\"firstName\"\n placeholder={SSO_GIVEN_NAME}\n tabIndex={16}\n value={firstName}\n hasError={firstNameHasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
-      "line_number": 210,
-      "context": ">\n <TextInput\n id=\"name\"\n name=\"name\"\n value={name}\n placeholder={t(\"Common:FirstName\")}\n type={InputType.text}\n size={InputSize.large}\n scale={true}\n tabIndex={1}\n isAutoFocussed={true}",
+      "line_number": 211,
+      "context": ">\n <TextInput\n id=\"name\"\n name=\"name\"\n value={name}\n placeholder={t(\"Common:FirstName\")}\n type={InputType.text}\n size={InputSize.large}\n scale\n tabIndex={1}\n isAutoFocussed",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 188,
-      "context": "name=\"first-name\"\n type={InputType.text}\n size={InputSize.large}\n hasError={!fnameValid}\n value={fname}\n placeholder={t(\"Common:FirstName\")}\n scale={true}\n tabIndex={1}\n isDisabled={isLoading}\n onChange={onChangeFname}\n onKeyDown={onKeyPress}",
+      "line_number": 191,
+      "context": "name=\"first-name\"\n type={InputType.text}\n size={InputSize.large}\n hasError={!fnameValid}\n value={fname}\n placeholder={t(\"Common:FirstName\")}\n scale\n tabIndex={1}\n isDisabled={isLoading}\n onChange={onChangeFname}\n onKeyDown={onKeyPress}",
       "module": "/packages/login"
     }
   ],

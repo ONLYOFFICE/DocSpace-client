@@ -3,7 +3,7 @@
   "content": "Google directory",
   "content_en_sha1_hash": "59a0c0b37463b360cc851a7f2f339d4d973c22fc",
   "created_at": "2025-05-19T21:30:49.976Z",
-  "updated_at": "2025-06-03T20:59:41.988Z",
+  "updated_at": "2025-05-26T07:57:32.388Z",
   "comment": {
     "text": "This translation key is used to display the title of a Google directory in the UI. It will appear as the folder title when viewing a list of folders related to \"Google\" or \"GoogleDrive\". Translators should provide a localized version of the English content \"Google directory\" for this key.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Adresář\" is a valid Czech word for \"directory\", it's less common and might sound overly formal or technical for a folder title. \"Google složka\" or \"Google adresář\" (less preferred) would be more natural and understandable to a wider audience.",
+          "suggestion": "Consider \"Google složka\""
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Armenian translation 'Google գրացուցակ' contains a spelling error. The correct transliteration of 'directory' is 'ցուցակ'.",
-          "suggestion": "Google ցուցակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -96,7 +96,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Cartella di Google\" is understandable, a more natural and accurate translation of \"Google directory\" would be \"Directory di Google\". 'Directory' is the direct equivalent and commonly used in this context.",
+          "description": "While \"Cartella di Google\" is understandable, a more natural and accurate translation of \"Google directory\" would be \"Directory di Google\" or \"La directory di Google\". \"Cartella\" usually refers to a folder on a local computer, not a directory in a cloud service.",
           "suggestion": "Directory di Google"
         }
       ],
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ບັນຊີ Google\" translates to \"Google account\" rather than \"Google directory\". While \"account\" is related, it's not a direct equivalent.",
-          "suggestion": "Consider a more accurate translation for 'directory', such as \"ໂຟນທິບ Google\" or \"ສາ directorຍະ Google\" (though the best option would depend on the specific context of \"directory\" in the application)."
+          "description": "The Lao translation \"ບັນຊີ Google\" translates to \"Google account\" and not \"Google directory\". While an account could be considered a directory in some contexts, it's not the most accurate translation of \"directory\".",
+          "suggestion": "ບັນຊີໂຟນເດີຂອງ Google (Google folder)"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Director Google' is not a natural or accurate translation of 'Google directory'. It's a literal translation that doesn't convey the intended meaning. 'Director' implies a person, not a directory.",
-          "suggestion": "A more accurate translation would be 'Director Google' or 'Dosar Google' or 'Folder Google'."
+          "description": "The translation 'Director Google' is not the most natural or accurate translation of 'Google directory'. 'Director' implies a person, while 'directory' refers to a list or organized collection of resources.  A more accurate translation would be something like 'Director Google' or 'Directorul Google'.",
+          "suggestion": "Directorul Google"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Priečinok Google\" is a literal translation and doesn't fully capture the meaning of 'Google directory'. A more natural Slovak translation would be 'Google adresár' or 'Google zložka'. \"Priečinok\" is more commonly used for files and folders within a file system, whereas 'directory' in this context refers to a user's personal area within Google services.",
-          "suggestion": "Google adresár"
+          "description": "The translation 'Priečinok Google' is a literal translation but doesn't fully capture the meaning of 'Google directory' in a user interface context. A more natural Slovak translation would be 'Google Účet' or 'Moje Účet Google'.",
+          "suggestion": "Google Účet"
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Google директоријум\" while technically a valid word, doesn't accurately convey the meaning of \"Google directory.\" \"Директоријум\" implies a more formal, organized collection than a simple \"directory.\" A more appropriate translation would be \"Google директориј\" or \"Google фасцикла\".",
-          "suggestion": "Google директориј"
+          "description": "The translation 'Google директоријум' is a literal transliteration of 'directory' and doesn't convey the intended meaning of 'Google directory'. It sounds awkward and unnatural in Serbian.",
+          "suggestion": "Google-ова папка"
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'direktorijum' is a valid word for 'directory', a more natural and common translation in Serbian (Latin) would be 'Google folder'.",
-          "suggestion": "Google folder"
+          "description": "While 'direktorijum' is a valid Serbian word for 'directory', 'Google direktorijum' sounds slightly awkward. A more natural phrasing would be 'Google mapa' (Google Maps) or 'Google foldera' (Google folders). However, without more context, it's difficult to determine the best translation.",
+          "suggestion": "Consider 'Google mapa' or 'Google foldera' depending on the context."
         }
       ],
       "approved_at": null

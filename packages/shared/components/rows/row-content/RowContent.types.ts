@@ -26,7 +26,10 @@
 
 export type RowContentProps = {
   /** Components displayed inside RowContent */
-  children: React.ReactNode[];
+  children: React.ReactElement<{
+    containerWidth?: string;
+    children?: React.ReactElement;
+  }>[];
   /** Accepts class */
   className?: string;
   /** Disables SideElements */

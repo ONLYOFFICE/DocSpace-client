@@ -3,7 +3,7 @@
   "content": "Set storage quota to define the maximum disk space for this {{productName}}.",
   "content_en_sha1_hash": "499f7a97f93e9c092c5eca67c5fa8cfdfa381f2e",
   "created_at": "2025-05-19T21:30:48.569Z",
-  "updated_at": "2025-05-28T09:30:02.206Z",
+  "updated_at": "2025-08-12T19:46:26.364Z",
   "comment": {
     "text": "\"Defines the maximum disk space allowed for {{productName}}. This quota will be displayed as a storage limit option in the [Change Storage Quota Dialog] when setting or editing storage limits.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/ChangeStorageQuotaDialog/index.js",
-      "line_number": 127,
-      "context": "<Text noSelect>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!isDisableQuota ? (\n <QuotaForm",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
+      "line_number": 141,
+      "context": "<Text>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!isDisableQuota ? (\n <QuotaForm",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

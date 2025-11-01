@@ -3,7 +3,7 @@
   "content": "Finalize version",
   "content_en_sha1_hash": "eb5221894a10d4c42f4d9e62795544c5824ee81c",
   "created_at": "2025-05-19T21:30:55.690Z",
-  "updated_at": "2025-06-03T20:59:42.291Z",
+  "updated_at": "2025-10-16T07:29:35.966Z",
   "comment": {
     "text": "This translation key is used to display a label for a button or action that finalizes a version. The text should be translated to indicate when a version can be finalized. It appears in an editing dialog or context where options are being configured.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1578,
+      "line_number": 1669,
       "context": "icon: HistoryFinalizedReactSvgUrl,\n items: [\n {\n id: \"option_finalize-version\",\n key: \"finalize-version\",\n label: t(\"FinalizeVersion\"),\n icon: HistoryFinalizedReactSvgUrl,\n onClick: () =>\n isEditing\n ? this.onShowEditingToast(t)\n : this.finalizeVersion(item.id, item.security),",
       "module": "/packages/client"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Versiyanı formalaşdır\" doesn't quite capture the meaning of \"Finalize version\". While 'formalaşdır' implies shaping or forming, 'finalize' suggests bringing something to a complete and definitive state. A more accurate translation would convey this sense of completion.",
+          "suggestion": "Versiyanı tamamla"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Ավարտել տաբերակը' translates literally to 'Finalize version,' it's not the most natural or idiomatic way to express the concept of finalizing a version in Armenian. 'Finalize' can have different connotations, and a more accurate translation might depend on the specific context.",
+          "suggestion": "Consider alternatives like 'Արձակել տաբերակը' (Ardzakel taberakը - Release version) or 'Հաստատել տաբերակը' (Hastatel taberakը - Confirm version) depending on the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -147,7 +159,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Finalize version\" implies a process of bringing a version to a completed and ready state. \"Сформировать версию\" (Sformatirvat' versiyu) translates more literally to \"Create version\" or \"Form version\". It doesn't convey the sense of finalization or completion.",
+          "suggestion": "Consider translations like \"Завершить версию\" (Zavershit' versiyu) which means \"Complete version\", or \"Окончательная версия\" (Okonchatel'naya versiya) which means \"Final version\"."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -171,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Заврши верзију' while technically meaning 'Finish version,' doesn't fully capture the nuance of 'Finalize version.' 'Finalize' implies a completed and locked-in state, which 'Заврши' doesn't necessarily convey. A more accurate translation would emphasize completion and approval.",
+          "suggestion": "Consider alternatives like 'Затвори верзију' (Close version), 'Одреди верзију' (Define version), or 'Коначна верзија' (Final version) to better reflect the intent of 'Finalize'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +207,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Versiyonu sonlandır\" is understandable, it's not the most natural or accurate translation of \"Finalize version.\" \"Sonlandırmak\" implies ending or terminating something completely, which isn't necessarily the intent of finalizing a version. A better translation would convey the idea of completing and approving the version.",
+          "suggestion": "Versiyonu tamamla ve onayla"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

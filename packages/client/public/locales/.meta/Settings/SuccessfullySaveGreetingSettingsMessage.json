@@ -3,7 +3,7 @@
   "content": "Welcome Page settings have been successfully saved",
   "content_en_sha1_hash": "9423c52b478ba171e34c7255eaa0faeb80e5c709",
   "created_at": "2025-05-19T21:30:52.827Z",
-  "updated_at": "2025-05-21T02:55:35.503Z",
+  "updated_at": "2025-10-03T13:19:30.540Z",
   "comment": {
     "text": "The \"SuccessfullySaveGreetingSettingsMessage\" translation key is used to display a success message after saving welcome page settings. It appears when the user clicks a button or submits form data in the Portal Settings categories common/Customization/welcome-page-settings.js file. This message informs the user that their changes have been successfully saved.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 284,
+      "line_number": 311,
       "context": "const onSaveGreetingSettings = () => {\n const { greetingTitle } = state;\n setState((val) => ({ ...val, isLoadingGreetingSave: true }));\n setGreetingTitle(greetingTitle)\n .then(() => {\n toastr.success(t(\"SuccessfullySaveGreetingSettingsMessage\"));\n setState((val) => ({ ...val, greetingTitleDefault: greetingTitle }));\n })\n .catch((error) => toastr.error(error))\n .finally(() => {\n getGreetingSettingsIsDefault();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 284,
+      "line_number": 311,
       "context": "const onSaveGreetingSettings = () => {\n const { greetingTitle } = state;\n setState((val) => ({ ...val, isLoadingGreetingSave: true }));\n setGreetingTitle(greetingTitle)\n .then(() => {\n toastr.success(t(\"SuccessfullySaveGreetingSettingsMessage\"));\n setState((val) => ({ ...val, greetingTitleDefault: greetingTitle }));\n })\n .catch((error) => toastr.error(error))\n .finally(() => {\n getGreetingSettingsIsDefault();",
       "module": "/packages/client"
     }
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully saved' is better translated as 'mühafizə edilmişdir' or 'saxlanılmışdır' rather than 'yenilənmişdir' (updated). While 'yenilənmişdir' isn't entirely wrong, it implies a change rather than a saving of existing settings.",
+          "suggestion": "Salamlama Səhifəsi ayarları uğurla mühafizə edilmişdir"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -48,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Приветстващата' is misspelled. It should be 'Приветсвeщата'.",
-          "suggestion": "Приветсвeщата"
+          "description": "The word \"Приветстващата\" is misspelled. It should be \"Приветсвтащата\".",
+          "suggestion": "Приветсвтащата"
         }
       ],
       "approved_at": null
@@ -93,13 +99,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Բարի գալուստ էջի կարգավորումները հաջողությամբ պահպանվել են' is not a direct or natural translation of 'Welcome Page settings have been successfully saved'. A more accurate translation would emphasize that the settings were saved, not just that the welcome page was welcomed.",
-          "suggestion": "Consider 'Ընդունողական էջի կարգավորումները հաջողությամբ պահպանվել են' or 'Բարևույն էջի կարգավորումները հաջողությամբ պահպանվել են' or 'Ընդունողական էջի կարգավորումները հաջողությամբ գրանցվել են։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -137,9 +137,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation 'Welkomstpagina Instellingen zijn met succes opgeslagen' is a literal translation but sounds unnatural in Dutch. A more natural phrasing would emphasize 'saved' more directly.",
+          "suggestion": "Welkomstpagina-instellingen succesvol opgeslagen"
+        },
+        {
           "type": "formatting",
-          "description": "The translation uses a lowercase 'i' in 'Instellingen' which should be capitalized as it's part of a proper noun (settings).",
-          "suggestion": "Welkomstpagina Instellingen zijn met succes opgeslagen"
+          "description": "There's a potential issue with spacing around the hyphen in 'Welkomstpagina-instellingen'. While acceptable, a space on either side ('Welkomstpagina instellingen') could improve readability.",
+          "suggestion": "Welkomstpagina instellingen succesvol opgeslagen"
         }
       ],
       "approved_at": null
@@ -168,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Setările paginii principale au fost salvate cu succes' doesn't accurately convey 'Welcome Page settings have been successfully saved'. 'Welcome Page' is a specific type of page, and 'paginii principale' (main page) is too generic.",
-          "suggestion": "Setările paginii de bun venit au fost salvate cu succes"
+          "description": "The translation \"Setările paginii principale au fost salvate cu succes\" is not a direct or optimal translation of \"Welcome Page settings have been successfully saved.\"  'Welcome Page' is better conveyed as 'Pagina de bun venit'. 'Pagina principală' implies the main page of a website, which may not be the intended meaning.",
+          "suggestion": "Setările Paginii de bun venit au fost salvate cu succes"
         }
       ],
       "approved_at": null
@@ -186,18 +191,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පිළිගැනීමේ' (piliganaemine) is a bit awkward. While technically correct, 'ආaccueil පිටුවේ' (aaccueill pitiuvE) would be more natural for 'Welcome Page'.",
+          "description": "The word 'පිළිගැනීමේ' (piliganae) should be 'ආaccueil' (aakheel) to accurately translate 'Welcome'. While 'පිළිගැනීමේ' means 'receiving', 'ආaccueil' directly reflects the 'Welcome' context of the English.",
           "suggestion": "ආaccueil පිටුවේ"
         },
         {
-          "type": "grammar",
-          "description": "While not strictly incorrect, the phrase 'සාර්ථකව සුරැකිණි' (saarthakava suraekini) can be improved for clarity and natural flow. A more common phrasing would use a different verb structure.",
-          "suggestion": "සාර්ථකව සුරැකිනි"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While the translation is generally accurate, the overall phrasing isn't the most natural in Sinhala.  The English phrasing 'Welcome Page settings have been successfully saved' lends itself to a more active voice in Sinhala.",
-          "suggestion": "පිළිගැනීමේ පිටුවේ සැකසුම් සාර්ථකව සුරැකිනි"
+          "description": "While the overall meaning is conveyed, 'පිළිගැනීමේ පිටුවේ සැකසුම්' (piliganae pituwe sakesum) translates to 'settings of the receiving page' which isn't the ideal translation of 'Welcome Page settings'.",
+          "suggestion": "ආaccueil පිටුවේ සැකසුම්"
         }
       ],
       "approved_at": null
@@ -211,13 +211,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'dobrodošlice' is potentially misspelled or could be improved for clarity. It's the genitive case of 'dobrodošlica,' meaning 'welcome page.' Consider if 'začetne strani' (for the initial page) might be more natural.",
-          "suggestion": "Consider using 'Nastavitve začetne strani so bile uspešno shranjene' for improved clarity."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -226,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation uses the feminine singular form 'сачувана' which doesn't agree with 'Подешавања' which is plural. The subject is 'Settings' (plural) so the verb should also be in the plural.",
-          "suggestion": "Подешавања Добродошли странице су успешно сачувана **сачувани**"
+          "description": "The Serbian translation uses the feminine singular form 'сачувана' (saučuvana) which doesn't agree with 'Подешавања' (podešavanja), which is plural and grammatically masculine.  'Подешавања' refers to settings, which are masculine in Serbian grammar.",
+          "suggestion": "Подешавања Добродошли странице су успешно сачувана -> Подешавања Добродошли странице су успешно сачувани"
         }
       ],
       "approved_at": null
@@ -238,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation uses the feminine singular form 'sačuvana' when it should be neuter plural to agree with 'Podešavanja'.",
-          "suggestion": "Podešavanja Dobrodošli stranice su uspešno sačuvana → Podešavanja Dobrodošli stranice su uspešno sačuvana"
+          "description": "The Serbian translation uses the feminine singular agreement 'sačuvana' when it should be neuter plural to agree with 'Podešavanja' (settings).",
+          "suggestion": "Podešavanja Dobrodošli stranice su uspešno sačuvana -> Podešavanja Dobrodošli stranice su uspešno sačuvani"
         }
       ],
       "approved_at": null

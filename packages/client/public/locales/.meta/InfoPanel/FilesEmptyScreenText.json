@@ -3,7 +3,7 @@
   "content": "See file and folder details here",
   "content_en_sha1_hash": "957a447d0e759d8ee240c00e22da369edeea22c0",
   "created_at": "2025-05-19T21:30:54.825Z",
-  "updated_at": "2025-05-21T10:10:38.094Z",
+  "updated_at": "2025-08-04T07:30:01.204Z",
   "comment": {
     "text": "This translation key is used for a generic text that displays when no file or folder information is available in a UI component. The text is displayed below an image and provides a brief instruction to view file details. It appears in the \"NoItem\" component on the Home page of the client application.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/NoFileOrFolderItem.js",
-      "line_number": 48,
-      "context": "src={imgSrc}\n alt=\"No item\"\n />\n </div>\n \n <div className=\"no-item-text\">{t(\"FilesEmptyScreenText\")}</div>\n </StyledNoItemContainer>\n );\n };\n \n export default inject(({ settingsStore }) => {",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoFileOrFolderItem.tsx",
+      "line_number": 49,
+      "context": "<div className={styles.noItemContainer}>\n <div className=\"no-thumbnail-img-wrapper\">\n <img className=\"no-thumbnail-img\" src={imgSrc} alt=\"No item\" />\n </div>\n \n <div className=\"no-item-text\">{t(\"FilesEmptyScreenText\")}</div>\n </div>\n );\n };\n \n export default NoFileOrFolderItem;",
       "module": "/packages/client"
     }
   ],
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vizualizarea detaliilor despre fișiere și foldere' is a literal translation of 'See file and folder details here.' It is grammatically correct but sounds unnatural in Romanian. A more natural translation would convey the meaning of 'where you can see the details'.",
-          "suggestion": "Vezi detaliile fișierelor și folderele aici"
+          "description": "The translation 'Vizualizarea detaliilor despre fișiere și foldere' is a literal translation and doesn't quite capture the natural flow of the English phrase \"See file and folder details here.\" It sounds a bit formal and technical.",
+          "suggestion": "A more natural translation would be something like \"Vezi detaliile fișierelor și folderelor aici\" or \"Afișează detaliile fișierelor și folderelor\"."
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Здесь будут представлены свойства файлов и папок' is a literal translation that doesn't quite capture the intended meaning of 'See file and folder details here'. It's more formal and less inviting than the original.",
-          "suggestion": "Consider a more user-friendly translation like 'Здесь отображаются сведения о файлах и папках' or 'Здесь можно увидеть сведения о файлах и папках'."
+          "description": "The translation 'Здесь будут представлены свойства файлов и папок' is too literal and doesn't convey the same meaning as 'See file and folder details here'. It sounds formal and doesn't fit the user experience of a simple informational panel.",
+          "suggestion": "Consider a more natural translation like 'Здесь отображаются сведения о файлах и папках' or 'Здесь показаны файлы и папки'."
         }
       ],
       "approved_at": null
@@ -165,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ගොනු සහ බහාලුම්වල විස්තර මෙතැන බලන්න\" while understandable, isn't the most natural phrasing for the intended meaning of \"See file and folder details here\". A more accurate and natural translation would focus on encouraging the user to view the details.",
-          "suggestion": "පහත ගොනු හා ෆෝල්ඩර් විස්තර බලන්න (Pahatha gonu ha folder visarama balanna)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,25 +177,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'See file and folder details here' is more conversational than the Slovenian translation. 'Tukaj si oglejte podrobnosti o datotekah in mapah' is a literal translation, but lacks the inviting tone of the English. A better translation would convey a similar level of friendliness.",
-          "suggestion": "Consider 'Oglejte si podrobnosti o datotekah in mapah tukaj' or 'Poglejte si podrobnosti o datotekah in mapah.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Види детаље датотеке и фолдера овде' is a literal translation but doesn't flow naturally in Serbian. A more idiomatic translation would better convey the meaning of 'See file and folder details here'.",
-          "suggestion": "Погледајте детаље датотека и фолдера овде"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -210,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vidi detalje datoteke i foldera ovde' doesn't accurately convey the meaning of \"See file and folder details here.\" 'Vidi' is the imperfect tense of 'videti' (to see), implying a continuous action, while the English text is a directive or instruction. A more appropriate translation would use a more directive verb.",
-          "suggestion": "Pogledaj detalje datoteke i foldera ovde"
+          "description": "The translation 'Vidi detalje datoteke i foldera ovde' is a literal translation of 'See file and folder details here' but doesn't sound natural in Serbian. 'Vidi' is an imperative (command) form which isn't the best fit.  A more natural phrasing would be a statement about where to find the details.",
+          "suggestion": "Pogledajte detalje datoteka i foldera ovde"
         }
       ],
       "approved_at": null

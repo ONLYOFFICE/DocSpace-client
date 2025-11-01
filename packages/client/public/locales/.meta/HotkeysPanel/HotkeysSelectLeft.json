@@ -3,7 +3,7 @@
   "content": "Select next item to the left",
   "content_en_sha1_hash": "1df13864692a146290ae4d446d444f0c360d1164",
   "created_at": "2025-05-19T21:30:55.091Z",
-  "updated_at": "2025-05-21T10:23:22.928Z",
+  "updated_at": "2025-05-24T10:32:40.942Z",
   "comment": {
     "text": "This translation key is used for the \"Select next item to the left\" button label in the HotkeysPanel component. It appears as a hotkey button that allows users to navigate to the previous item in a list or selection.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Soldakı növbəti elementi seçin\" is a literal translation and doesn't perfectly convey the meaning of \"Select next item to the left\" in a user interface context. It's technically correct but can sound a bit formal and clunky.",
-          "suggestion": "Consider a more natural phrasing like \"Sol tərəfdəki növbəti seçim\" or \"Sol tərəfə keç\" (meaning 'go to the left'). The best option depends on the overall tone of the UI."
+          "description": "The translation 'Soldakı növbəti elementi seçin' while technically accurate, doesn't quite capture the nuance of 'Select next item to the left'. It's a bit literal. A more natural phrasing would improve user experience.",
+          "suggestion": "Növbəti elementi sola seç"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ընտրել հաջորդ միավորը ձախ կողմում\" is a literal translation that doesn't quite capture the meaning of 'Select next item to the left' in a user interface context. \"Միավորը\" (the unit) is a bit too formal and doesn't sound natural.  It lacks the directness expected in a hotkey description.",
-          "suggestion": "Ընտրել ձախ կողմի հաջորդ տարրը (Entrel dakh komi hachord tarre)"
+          "description": "The translation 'Ընտրել հաջորդ միավորը ձախ կողմում' doesn't perfectly convey the meaning of 'Select next item to the left'. ' միավորը' (miamvory) translates to 'item' but implies a unit or measure, rather than a selectable option. A more suitable term would better reflect the context of hotkeys.",
+          "suggestion": "Ընտրել հաջորդ տարրը ձախ կողմում"
         }
       ],
       "approved_at": null
@@ -107,9 +107,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation '次のアイテムを選択（左）' is not a direct or natural translation of 'Select next item to the left'. While '次のアイテムを選択' means 'Select next item', the addition of '(左)' feels tacked on and unnatural in Japanese. It doesn't convey the nuanced meaning of 'to the left' in the same fluid way.",
-          "suggestion": "複数の候補があります。例えば：\n* 「左にある項目を選択」 (Hidari ni aru koumoku o sentaku)\n* 「左の項目を選択」 (Hidari no koumoku o sentaku)\n* 「左の項目を次に選択」 (Hidari no koumoku o tsugi ni sentaku) - More literal, but potentially clunky."
+          "type": "formatting",
+          "description": "The translation includes \"(左)\" which may be unnecessary and disruptive to the flow in the UI. Consider integrating 'left' into the verb or using a more natural phrasing.",
+          "suggestion": "次のアイテムを左に選択"
         }
       ],
       "approved_at": null
@@ -117,13 +117,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '왼쪽으로 다음 항목 선택' while literally correct, doesn't quite capture the nuance of 'Select next item to the left'. It's a bit too direct. A more natural phrasing might better convey the intended action within a user interface.",
-          "suggestion": "Consider '왼쪽 항목으로 선택' or '왼쪽 항목 선택' which sound more idiomatic for this context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Выделить следующий объект слева' is a bit too literal and formal. 'Select' in this context refers to choosing an option, not necessarily highlighting it. The word 'выделить' (to highlight) doesn't quite capture the intended meaning.",
-          "suggestion": "Выберите следующий элемент слева"
+          "description": "The translation 'Выделить следующий объект слева' doesn't fully capture the nuance of 'Select next item to the left'. 'Выделить' means 'to highlight' or 'to select for highlighting', which is a specific type of selection. 'Select' is more general. A better translation would convey the general action of selecting.",
+          "suggestion": "Выбрать следующий элемент слева"
         }
       ],
       "approved_at": null
@@ -186,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වම් පස ඊළඟ අථකය තෝරන්න' is not the most natural or accurate translation of 'Select next item to the left'. 'අථකය' is used for object or property, not an item in this context. A more appropriate term would be 'අයිතමය'.",
-          "suggestion": "වම් පස ඊළඟ අයිතමය තෝරන්න"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'අථකය' isn't inherently incorrect, the common and preferred term for 'item' in this context is 'අයිතමය'.",
-          "suggestion": "අයිතමය"
+          "description": "The translation 'වම් පස ඊළඟ අථකය තෝරන්න' does not accurately convey the meaning of 'Select next item to the left'. 'අථකය' (athakaya) refers to 'object' or 'matter', which is not appropriate in this context. It seems to be a misunderstanding of the intended meaning.",
+          "suggestion": "වම් පැත්තේ nächste අයිතමය තෝරන්න (Vam paththe next item thora nna) - This translates to 'Select the next item to the left'."
         }
       ],
       "approved_at": null
@@ -209,8 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izberi naslednji predmet levo' is not the most natural or accurate translation of 'Select next item to the left.' While technically correct, it sounds a bit clunky. A more natural phrasing would convey the direction better.",
-          "suggestion": "Izberi naslednji element levo"
+          "description": "The translation 'Izberi naslednji predmet levo' is a literal translation that doesn't convey the intended meaning of 'Select next item to the left' in a user interface context.  'Predmet' is too general.  A better term would reflect a selectable option or control.",
+          "suggestion": "Izberi element levo"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrase 'Izberi element levo' flows better in Slovenian in a UI context. The direct translation feels a bit clunky.",
+          "suggestion": "Izberi naslednji element na levo"
         }
       ],
       "approved_at": null
@@ -221,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Одабери следећу ставку са леве стране' while understandable, is a bit literal and doesn't quite capture the nuance of 'Select next item to the left' in a UI context. A more natural translation would focus on 'next' or 'previous' in the sequence.",
-          "suggestion": "Одабери претходну ставку"
+          "description": "The translation 'Одабери следећу ставку са леве стране' is a literal translation, but 'item' (stavku) doesn't quite convey the meaning of 'next selection' in a hotkey context. It sounds awkward. A more natural phrasing would be closer to 'избери следећи елемент лево' or 'изабери следећи елемент лево'.",
+          "suggestion": "Избери следећи елемент лево"
         }
       ],
       "approved_at": null
@@ -233,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Odaberi sledeću stavku sa leve strane' is not the most natural or accurate translation of 'Select next item to the left'. 'Stavka' translates to 'item' or 'clause', which is not the best fit for the context of hotkeys. A better translation would focus on 'element' or 'option'.",
-          "suggestion": "Odaberi sledeću opciju levo"
+          "description": "The translation \"Odaberi sledeću stavku sa leve strane\" is not the most accurate or natural way to express 'Select next item to the left' in Serbian. 'Stavka' refers to an item in a list or menu, which might not be the intended meaning.  'Odaberi' is also a bit formal for a hotkey label.",
+          "suggestion": "Consider 'Izaberi sledeću opciju levo' or 'Izaberi sledeću tačku levo'. 'Izaberi' is a more common and appropriate verb for a hotkey context, and 'opcija' or 'tačka' are better choices for 'item'."
         }
       ],
       "approved_at": null
@@ -245,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sıradaki öğeyi sola doğru seç' is a literal translation that doesn't quite capture the nuance of \"Select next item to the left\" in the context of hotkeys. It sounds a bit clunky and unnatural.",
-          "suggestion": "Bir sonraki öğeyi sola seç"
+          "description": "The translation 'Sıradaki öğeyi sola doğru seç' is a bit literal and doesn't flow naturally in Turkish for this context. It emphasizes the 'to the left' part which isn't the primary focus. A more natural phrasing would be more concise and focused on the action of selecting the left item.",
+          "suggestion": "Sola olan öğeyi seç"
         }
       ],
       "approved_at": null
@@ -260,19 +254,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Chọn mục tiếp theo bên trái' is a literal translation but doesn't quite capture the nuance of 'Select next item to the left' in a user interface context. It might be perceived as slightly awkward.",
-          "suggestion": "Chọn mục sang trái"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '向左选择下一个项目' is a literal translation, but it doesn't fully capture the nuance of 'Select next item to the left' in a UI context. It sounds somewhat formal and not as natural as it could be.",
+          "suggestion": "考虑更自然的表达，例如'选择左侧项目' 或 '选择左边项目'。"
+        }
+      ],
       "approved_at": null
     }
   }

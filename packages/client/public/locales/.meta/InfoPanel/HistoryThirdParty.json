@@ -3,7 +3,7 @@
   "content": "History display is not available for public rooms with connected third-party storages",
   "content_en_sha1_hash": "15def1d16fa0234e0d0bd8f823a54c8ff6716f1e",
   "created_at": "2025-05-19T21:30:54.882Z",
-  "updated_at": "2025-05-21T10:00:09.246Z",
+  "updated_at": "2025-09-22T10:04:13.866Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that history display is not available for public rooms with connected third-party storages. The text appears on an \"InfoPanel\" within the application, providing context to users about limitations of viewing history in certain room types.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ThirdParty.tsx",
-      "line_number": 52,
+      "line_number": 51,
       "context": "return (\n <StyledEmptyScreenContainer\n imageSrc={theme.isBase ? EmptyCanceledLight : EmptyCanceledDark}\n headerText={t(\"NoRecordsFound\")}\n descriptionText={t(\"HistoryThirdParty\")}\n imageAlt={t(\"NoRecordsFound\")}\n />\n );\n };",
       "module": "/packages/client"
     }
@@ -29,14 +29,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"تابعة لجهات خارجية\" (belonging to third parties) is a bit clunky and less natural in this context. A more accurate and natural phrasing would better convey the intended meaning.",
-          "suggestion": "عرض السجل غير متاح للغرف العامة المتصلة بمخازن خارجية."
+          "type": "spelling",
+          "description": "The word 'بها' (biha) is grammatically correct, but sounds slightly less natural in this context. A more fluent option would be 'بها' (biha) or 'فيها' (fiha).",
+          "suggestion": "عرض السجل غير متاح للغرف العامة التي تحتوي على مخازن متصلة تابعة لجهات خارجية"
         },
         {
-          "type": "formatting",
-          "description": "While technically correct, the use of \"بها\" can be slightly improved for a smoother flow in the sentence.",
-          "suggestion": "عرض السجل غير متاح للغرف العامة التي تتصل بمخازن خارجية."
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, \"تابعة لجهات خارجية\" (tabi'a li-jihat kharijiyya) can be slightly improved for flow. It literally translates to 'belonging to external parties.' A more natural phrasing would indicate the storages are 'provided by' or 'from' third parties.",
+          "suggestion": "عرض السجل غير متاح للغرف العامة التي بها مخازن متصلة من جهات خارجية"
         }
       ],
       "approved_at": null
@@ -47,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tarixçə ekranı üçüncü tərəf saxlama vahidlərinin qoşulduğu ümumi otaqlarda əlçatan deyil\" is a literal translation that doesn't flow naturally in Azerbaijani. 'History display' is better conveyed as something like 'Tarix' or 'Keçmiş' followed by a phrase indicating its unavailability.",
-          "suggestion": "Consider a more natural phrasing such as: 'Üçüncü tərəf saxlama vahidləri qoşulmuş ümumi otaqlarda tarix görünümü mövcud deyil' or 'Keçmiş göstərişi üçüncü tərəf saxlama qoşulmuş ictimai otaqlarda əlçatan deyil.'"
+          "description": "The translation 'Tarixçə ekranı üçüncü tərəf saxlama vahidlərinin qoşulduğu ümumi otaqlarda əlçatan deyil' doesn't fully capture the meaning of 'History display is not available'. 'Tarixçə ekranı' (History screen) is a literal translation, but 'display' is better represented by a phrase like 'tarix göstəricisi' or 'tarix funksiyası'. The phrase 'qoşulduğu' (connected) is acceptable but could be more naturally phrased. 'Əlçatan deyil' (not accessible) is correct but a slightly more natural phrasing might improve readability.",
+          "suggestion": "Tarix funksiyası üçüncü tərəf saxlama ilə birləşmiş ictimai otaqlarda mövcud deyil."
         },
         {
-          "type": "grammar",
-          "description": "While technically correct, the phrasing \"qoşulduğu ümumi otaqlarda\" can be improved for flow. The possessive structure could be clearer.",
-          "suggestion": "Consider alternatives like \"qoşulmuş ümumi otaqlarda\" or restructuring the sentence to avoid direct possession."
+          "type": "formatting",
+          "description": "While not strictly an error, the punctuation and word order could be adjusted for better flow and readability in Azerbaijani. Consider rephrasing for a more natural feel.",
+          "suggestion": "Tarix funksiyası üçüncü tərəf saxlama ilə birləşmiş ictimai otaqlarda mövcud deyil."
         }
       ],
       "approved_at": null
@@ -79,13 +79,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'κατασκευαστών' (kataskevaston) is technically correct but could be improved for clarity and a more natural flow. It literally translates to 'manufacturers', which isn't the most appropriate term here. A more suitable term would convey the concept of 'third-party providers'.",
-          "suggestion": "Η εμφάνιση του ιστορικού δεν είναι διαθέσιμη για δημόσια δωμάτια με συνδεδεμένες υπηρεσίες τρίτων."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -100,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'kolmansien osapuolien muisteihin' translates more accurately as 'third-party storage services' or 'third-party storage solutions' rather than 'memories of third parties'. It implies a technical service, not physical memories.",
-          "suggestion": "Historian näyttö ei ole saatavilla julkisiin huoneisiin, jotka ovat yhteydessä kolmansien osapuolten tallennuspalveluihin."
+          "description": "The translation 'kolmansien osapuolien muisteihin' is a literal translation of 'third-party storages' and may sound awkward in Finnish. A more natural phrasing would be 'ulkopuolisten palveluntarjoajien tallennustilaan' or 'ulkopuolisten palveluiden tallennustilaan'.",
+          "suggestion": "Historian näyttö ei ole saatavilla julkisiin huoneisiin, jotka ovat yhteydessä ulkopuolisten palveluntarjoajien tallennustilaan."
         }
       ],
       "approved_at": null
@@ -118,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"երրորդ կողմի միացված պահեստարաններով\" (third party connected storages) is a bit awkward and doesn't perfectly capture the English meaning. It implies the storages are actively connected, whereas the English implies they simply *have* third-party storages.",
-          "suggestion": "Consider alternatives like \"երրորդ կողմի պահեստարաններով համակարգված հանրային սենյակների համար\" (for public rooms with systems utilizing third-party storages) or \"երրորդ կողմի պահեստարանի հետ կապված հանրային սենյակների համար\" (for public rooms connected with third-party storage)."
+          "description": "The translation 'Պատմության ցուցադրումը հասանելի չէ երրորդ կողմի միացված պահեստարաններով հանրային սենյակների համար' is a bit literal and could be improved for better flow and readability in Armenian. Specifically, 'երրորդ կողմի միացված պահեստարաններով' is clunky.",
+          "suggestion": "Պատմության ցուցադրումը հասանելի չէ հանրային սենյակների համար, որոնք միացված են երրորդ կողմի պահեստարանների հետ։"
         }
       ],
       "approved_at": null
@@ -139,13 +133,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '연결된 타사 스토리지가 포함된 공개 룸의 경우 기록 표시를 사용할 수 없습니다' is a bit literal and could be improved for naturalness. A more natural phrasing would emphasize that the history feature is unavailable *because* of the third-party storage.",
-          "suggestion": "타사 스토리지가 연결된 공개 룸에서는 기록 표시 기능을 사용할 수 없습니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,9 +141,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'ບ່ອນເກັບຂໍ້ມູນ' is used which refers to a general storage location. Considering the context of 'third-party storages', a more precise term might be appropriate.",
+          "suggestion": "Consider using a more specific term like 'ຖານຂໍ້ມູນຂອງພາກສ່ວນທີສາມ' (third-party database) or 'ການເກັບຂໍ້ມູນຂອງພາກສ່ວນທີສາມ' (third-party data storage) to be more accurate."
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The phrase 'third-party storages' is translated as 'ບ່ອນເກັບຂໍ້ມູນຂອງພາກສ່ວນທີສາມ'. While technically correct, a more natural and common phrasing in Lao for this context would be 'ເວັບໄຊ້ຂອງພາກສ່ວນທີສາມ' (websites of third parties) or 'ການເກັບຂໍ້ມູນຂອງພາກສ່ວນທີສາມ' (third-party data storage).",
-          "suggestion": "ບ່ອນເກັບຂໍ້ມູນຂອງພາກສ່ວນທີສາມ should be considered, but 'ເວັບໄຊ້ຂອງພາກສ່ວນທີສາມ' or 'ການເກັບຂໍ້ມູນຂອງພາກສ່ວນທີສາມ' may be more suitable depending on the specific context."
+          "description": "While the translation is understandable, the phrasing is somewhat formal and might not be the most natural way to express this in Lao. The English phrase emphasizes unavailability.",
+          "suggestion": "Consider a rephrased version that highlights unavailability more clearly. For example: 'ບໍ່ສາມາດສະແດງປະຫວັດການໃຊ້ງານສໍາລັບຫ້ອງສາທາລະນະທີ່ເຊື່ອມຕໍ່ກັບການເກັບຂໍ້ມູນຂອງພາກສ່ວນທີສາມໄດ້' (History display is unavailable for public rooms connected to third-party storage)."
         }
       ],
       "approved_at": null
@@ -172,13 +165,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"aangesloten opslagruimten\" is a bit clunky and literal. While technically correct, it's not the most natural phrasing in Dutch. \"Aangesloten\" implies a direct physical connection, which might not be the intended meaning. \"Opslagruimten van derden\" is also slightly formal and could be simplified.",
+          "description": "The term 'third-party storages' is translated as 'opslagruimten van derden'. While technically correct, it's overly literal and sounds unnatural in Dutch. A more natural phrasing would be 'externe opslag' or 'opslag van externe partijen'.",
           "suggestion": "Geschiedenisweergave is niet beschikbaar voor openbare kamers met externe opslag."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the sentence structure is a bit long and could be improved for readability in Dutch. Splitting it might enhance clarity.",
-          "suggestion": "Geschiedenisweergave is niet beschikbaar voor openbare kamers. Deze functie is niet beschikbaar als er externe opslag wordt gebruikt."
         }
       ],
       "approved_at": null
@@ -189,13 +177,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and sounds unnatural in Polish. \"Pamięciami podmiotów trzecich\" is not the standard way to refer to third-party storages in this context. It's overly formal and complex.",
-          "suggestion": "Wyświetlanie historii jest niedostępne dla publicznych pokoi z podłączonymi zewnętrznymi pamięciami."
+          "description": "The term \"pamięci podmiotów trzecich\" is a very literal and slightly awkward translation of \"third-party storages.\" A more natural Polish phrasing would improve readability.",
+          "suggestion": "Wyświetlanie historii jest niedostępne dla pokoi publicznych z podłączonymi zewnętrznymi pamięciami"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the Polish translation maintains a formality that doesn't align with the potentially more casual tone of the English original. This could be softened for better user experience.",
-          "suggestion": "Consider a more approachable phrasing depending on the overall tone of the UI."
+          "description": "While not strictly incorrect, the phrase \"pamięci podmiotów trzecich\" feels overly formal for this context. Consider a more accessible phrasing.",
+          "suggestion": "Wyświetlanie historii jest niedostępne dla pokoi publicznych z podłączonymi zewnętrznymi usługami przechowywania"
         }
       ],
       "approved_at": null
@@ -230,8 +218,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඉතිහාස ප්‍රදර්ශනය, සම්බන්ධිත තෙවන පාර්ශව ගබඩා සහිත පොදු කාමර සඳහා නොපවතී.' is a bit awkward and doesn't perfectly convey the meaning of 'History display is not available for public rooms with connected third-party storages'. A more natural phrasing would be needed.",
-          "suggestion": "Consider 'පොදු කාමරවලට, සම්බන්ධිත තෙවන පාර්ශව ගබඩා තිබේ නම්, ඉතිහාස ප්‍රදර්ශනය ලබාගත නොහැක.' or 'තෙවන පාර්ශව ගබඩා සමඟ සම්බන්ධ පොදු කාමර සඳහා ඉතිහාස ප්‍රදර්ශනය ලබා නොදිය හැක.'"
+          "description": "The translation 'ඉතිහාස ප්‍රදර්ශනය, සම්බන්ධිත තෙවන පාර්ශව ගබඩා සහිත පොදු කාමර සඳහා නොපවතී.' is a literal translation but doesn't flow naturally in Sinhala. It's a bit awkward to read.",
+          "suggestion": "A more natural translation might be: 'තෙවන පාර්ශව ගබඩා සම්බන්ධ කරගත් පොදු කාමර සඳහා ඉතිහාස ප්‍රදර්ශනය ලබාගත නොහැක.' or 'පොදු කාමර සඳහා, තෙවන පාර්ශව ගබඩා සම්බන්ධ කරගත් විට, ඉතිහාස ප්‍රදර්ශනය ලබා නොදී.' "
         }
       ],
       "approved_at": null
@@ -248,8 +236,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"shrambe tretjih oseb\" is a literal translation of \"third-party storages\" but sounds awkward and overly formal in Slovenian. A more natural phrasing would be \"zunanjimi shrambami\" or \"integriranimi storili tretjih ponudnikov\".",
-          "suggestion": "Prikaz zgodovine ni na voljo za javne sobe z zunanjimi shrambami."
+          "description": "The term 'shrambe tretjih oseb' is a literal translation of 'third-party storages' and while technically correct, it's not the most natural or common phrasing in Slovenian. A more fluent translation would use a term indicating external storage or integration with other services.",
+          "suggestion": "Prikaz zgodovine ni na voljo za javne sobe, ki so povezane z zunanjimi shrambami."
         }
       ],
       "approved_at": null
@@ -260,18 +248,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Приказ Историје није доступан за јавне просторије са повезаним складиштима треће стране' doesn't accurately convey the meaning of 'History display is not available for public rooms with connected third-party storages'. The phrasing is overly formal and complex.",
-          "suggestion": "Историја приказа није доступна за јавне собе које користе спољни складишни простори."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'треће стране' (third party) sounds unnatural in this context. It's too literal and doesn't flow well.",
-          "suggestion": "spoljni serveri"
+          "description": "The Serbian translation \"Приказ Историје није доступан за јавне просторије са повезаним складиштима треће стране\" is not an accurate translation of \"History display is not available for public rooms with connected third-party storages\".  'Priказ' (Priказ) translates to 'Display/Presentation' which is not precisely equivalent to 'History'.  'Складиштима треће стране' is a very literal and somewhat awkward translation of 'third-party storages'.",
+          "suggestion": "Возможне поправке: 'Приступ Историји није доступан за јавне просторије са повезаним сервисима треће стране' or 'Историјски записи нису доступни за јавне просторије са повезаним сервисима треће стране'."
         },
         {
           "type": "formatting",
-          "description": "The capitalization of 'Историје' is inconsistent.  It should likely be lower case: 'Историје'",
-          "suggestion": "Историје"
+          "description": "The word order in the translation is slightly unnatural in Serbian. While grammatically correct, it reads less fluently than a more natural phrasing would.",
+          "suggestion": "Реорганизација реченице за природнији протока."
         }
       ],
       "approved_at": null
@@ -282,8 +265,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'skladištima treće strane' is a literal translation of 'third-party storages' but sounds unnatural in Serbian. A more natural and idiomatic translation would be something like 'skladištima spoljnih provajdera' or 'skladištima drugih provajdera'.",
-          "suggestion": "Prikaz Istorije nije dostupan za javne prostorije sa povezanim skladištima spoljnih provajdera"
+          "description": "The term 'skladištima treće strane' is a literal translation of 'third-party storages' but sounds awkward and unnatural in Serbian. A more natural phrasing would be 'skladištima spoljnih servisa' or 'skladištima trećih provajdera'.",
+          "suggestion": "Prikaz Istorije nije dostupan za javne prostorije sa povezanim skladištima spoljnih servisa"
         }
       ],
       "approved_at": null
@@ -294,13 +277,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Geçmiş ekranı, bağlı üçüncü taraf depoları olan genel odalar için kullanılamaz' is a bit literal and doesn't flow naturally in Turkish. 'History display' is best conveyed with a more idiomatic expression. While 'Geçmiş ekranı' is technically correct, it's not the most common way to refer to the history display functionality.",
-          "suggestion": "History display can be translated as 'Geçmiş kaydı', 'Geçmiş görüntüsü' or 'Geçmiş verilere erişimi' depending on the specific context."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'depoları' (storages) could be ambiguous. 'Depo' usually refers to a storage facility, but in this context, it might be more accurate to imply a linked service or data store. It lacks nuance.",
-          "suggestion": "Consider using 'bağlantılı üçüncü taraf hizmetleri' or 'bağlantılı üçüncü taraf veri kaynakları' to be more precise."
+          "description": "The translation 'bağlı üçüncü taraf depoları olan genel odalar için kullanılamaz' doesn't fully convey the meaning of 'History display is not available for public rooms with connected third-party storages'.  A more accurate translation would emphasize the lack of availability because of the connected storage.",
+          "suggestion": "Geçmiş ekranı, üçüncü taraf depolama alanına bağlı genel odalarda görüntülenebilir değil."
         }
       ],
       "approved_at": null
@@ -314,13 +292,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Hiển thị lịch sử không khả dụng cho các phòng công cộng có kho lưu trữ của bên thứ ba được kết nối' is technically correct but sounds slightly unnatural in Vietnamese. A more natural phrasing would emphasize the restriction.",
-          "suggestion": "Hiển thị lịch sử không khả dụng đối với các phòng công cộng sử dụng dịch vụ lưu trữ của bên thứ ba."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

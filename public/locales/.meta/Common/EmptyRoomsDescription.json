@@ -3,7 +3,7 @@
   "content": "Please create the first room in My rooms.",
   "content_en_sha1_hash": "2e074fa0b8a6f1c2c553edbd7e313a8163aa58e1",
   "created_at": "2025-05-19T21:30:44.868Z",
-  "updated_at": "2025-05-28T09:30:02.984Z",
+  "updated_at": "2025-09-26T15:21:06.570Z",
   "comment": {
     "text": "This translation key is used for the description of an empty room screen, appearing on a button or similar interface element. It prompts users to create their first room in \"My rooms\". This message appears when the user has not set up any rooms.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 213,
+      "context": "const emptyScreenHeader = isEmptyFilesRootScreen\n ? t(\"Common:SelectorEmptyScreenHeader\")\n : t(\"Common:EmptyRoomsHeader\");\n const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : t(\"Common:EmptyRoomsDescription\");\n \n const SelectorBody = (\n <Selector\n {...headerSelectorProps}\n {...searchProps}",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/selectors/Room/index.tsx",
-      "line_number": 263,
-      "context": "onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={EmptyScreenCorporateSvgUrl}\n emptyScreenHeader={emptyScreenHeader ?? t(\"Common:EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ?? t(\"Common:EmptyRoomsDescription\")\n }\n searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:SearchEmptyRoomsDescription\")}\n totalItems={total}",
+      "line_number": 248,
+      "context": "emptyScreenImage={\n isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl\n }\n emptyScreenHeader={emptyScreenHeader ?? t(\"Common:EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ?? t(\"Common:EmptyRoomsDescription\")\n }\n searchEmptyScreenImage={\n isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}",
       "module": "/packages/shared"
     }
   ],
@@ -36,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Lütfən, Otaqlarımda ilk otağı yaradın.\" directly translates to \"Please, you created the first room in my rooms.\" which doesn't match the intended meaning of 'Please create the first room in My rooms.' It implies the user has already done something.",
-          "suggestion": "Lütfən, Otaqlarımda ilk otağı yarada bilərsiniz."
+          "description": "The translation \"Lütfən, Otaqlarımda ilk otağı yaradın.\" literally translates to \"Please, create the first room in My rooms.\" which doesn't convey the intended meaning. The English content is an instruction to *create* the first room, not that the user has already created it.",
+          "suggestion": "Lütfən, 'Otaqlarım'da ilk otağı yaradın."
         }
       ],
       "approved_at": null
@@ -54,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vytvořte první místnost v části Moje místnosti' is not a precise translation of 'Please create the first room in My rooms.' Specifically, 'části' (part) isn't directly implied in the original English.",
-          "suggestion": "Vytvořte první místnost v Moje místnosti."
+          "description": "The English phrase 'Please create the first room in My rooms' implies a user action to create a room within a defined section of a system or application. The Czech translation 'Vytvořte první místnost v části Moje místnosti' translates to 'Create the first room in the section My rooms,' which is accurate but could be more natural. 'Moje místnosti' could be shortened to 'Moje místnosti' or rephrased for better flow depending on the intended user experience.",
+          "suggestion": "Consider rephrasing to something like: 'Vytvořte si první místnost v Moje místnosti.' or 'Vytvořte první místnost do Moje místnosti.'"
         }
       ],
       "approved_at": null
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Please create the first room in My rooms\" implies creating a room *within* a list or section labeled 'My rooms'. The Spanish translation 'Por favor, cree la primera sala en Mis salas' literally translates to 'Please create the first room in My rooms' which lacks the nuance of creation *within* a section. A better translation would reflect the intent.",
-          "suggestion": "Por favor, cree la primera sala dentro de Mis salas."
+          "description": "The translation 'Por favor, cree la primera sala en Mis salas' is technically correct but sounds unnatural in Spanish.  'Mis salas' is less common and more literal translation of 'My rooms'.",
+          "suggestion": "Por favor, cree la primera habitación en Mis habitaciones. or Por favor, cree la primera sala en Mi sección de habitaciones."
         }
       ],
       "approved_at": null
@@ -90,8 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ole hyvä ja luo ensimmäinen huone Minun huoneet-osioon.\" is a somewhat literal and slightly awkward translation. 'Please create the first room in My rooms' could be rendered more naturally in Finnish.",
-          "suggestion": "Luo ensimmäinen huone 'Minun huoneet' -osioon."
+          "description": "The translation 'Ole hyvä ja luo ensimmäinen huone Minun huoneet-osioon' is not a natural or ideal translation of 'Please create the first room in My rooms.' The phrase 'Minun huoneet-osioon' is overly literal and sounds awkward in Finnish.  A better translation would convey the meaning of adding a room to a user's rooms.",
+          "suggestion": "Luo ensimmäinen huone omiin huoneisiisi."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a more formal tone ('Ole hyvä'). While acceptable, a slightly less formal tone might be more appropriate for a user interface element.",
+          "suggestion": "Luo ensimmäinen huone omiin huoneisiisi."
         }
       ],
       "approved_at": null
@@ -108,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Please create the first room in My rooms\" is not accurately reflected in the Armenian translation.  'My rooms' should be translated as 'My rooms' (as it's a proper noun/application name) rather than just 'սենյակներում' which implies a generic 'in rooms'. The word order feels slightly unnatural as well.  A more natural translation might convey the instruction more clearly.",
-          "suggestion": "Խնդրում եմ ստեղծեք առաջին սենյակը Իմ սենյակներում:"
+          "description": "The translation 'Խնդրում եմ ստեղծեք առաջին սենյակը Իմ սենյակներում:' literally translates to 'Please create the first room in My rooms:' which, while understandable, isn't the most natural phrasing in Armenian. A more natural translation would be something like 'Խնդրում եմ ստեղծեք առաջինը իմ սենյակներում' or 'Ստեղծեք առաջին սենյակը իմ սենյակներում'.",
+          "suggestion": "Խնդրում եմ ստեղծեք առաջինը իմ սենյակներում"
         }
       ],
       "approved_at": null
@@ -120,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ti preghiamo di creare la prima stanza in Le mie stanze' is not a direct or natural translation of 'Please create the first room in My rooms.' 'Le mie stanze' translates to 'The my rooms' which is grammatically incorrect. It should reflect the possessive 'My'.",
-          "suggestion": "Ti preghiamo di creare la prima stanza nelle mie stanze."
+          "description": "The translation 'Ti preghiamo di creare la prima stanza in Le mie stanze' is not a natural or accurate translation of 'Please create the first room in My rooms.'  'Le mie stanze' implies 'The rooms of mine,' which is overly formal and awkward. 'My rooms' should be translated as 'I miei stanze'.",
+          "suggestion": "Ti preghiamo di creare la prima stanza in I miei stanze."
         }
       ],
       "approved_at": null
@@ -132,18 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '私のルーム」に最初のルームを作成してください。' is a literal translation but sounds unnatural in Japanese. 'ルーム' is an Anglicism and isn't always the best choice. The phrase '私のルーム' sounds stilted. The quotation marks around '私のルーム' are also unnecessary and create a strange visual. The overall meaning is correct, but the phrasing needs improvement.",
-          "suggestion": "おすすめの修正： 「マイルーム」で最初の部屋を作成してください。 or 「マイルーム」に最初の部屋を追加してください。"
+          "description": "The translation is not entirely accurate. 'My rooms' is translated as '私のルーム (Watashi no ruumu)'. It should be '私の部屋 (Watashi no heya)' or 'マイルーム (Mai ruumu)' to more accurately reflect 'My rooms'. The former is more natural-sounding, the latter keeps the English term but properly rendered in Japanese.",
+          "suggestion": "私の部屋に最初のルームを作成してください。 (Watashi no heya ni saisho no ruumu o sakusei shite kudasai.) or マイルームに最初のルームを作成してください。 (Mai ruumu ni saisho no ruumu o sakusei shite kudasai.)"
         },
         {
           "type": "formatting",
-          "description": "The quotation marks around '私のルーム' are unnecessary and break the flow of the sentence.",
-          "suggestion": "Remove the quotation marks. '私のルーム' should be '私のルーム' "
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "Using 'ルーム' (room) directly transliterated is a bit unnatural. '部屋 (heya)' is a more common and natural way to say 'room' in this context.",
-          "suggestion": "Replace 'ルーム' with '部屋 (heya)'."
+          "description": "The punctuation and sentence structure could be improved for a more natural flow in Japanese. While technically correct, it feels slightly abrupt.",
+          "suggestion": "私のルームに最初のルームを作成してください。(Watashi no ruumu ni saisho no ruumu o sakusei shite kudasai.) - Adding a slight pause/filler word before 'sakusei shite kudasai' would improve flow, though it's a minor point."
         }
       ],
       "approved_at": null
@@ -157,13 +163,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ກະລຸນາສ້າງຫ້ອງທໍາອິດໃນຫ້ອງຂອງຂ້ອຍ' literally translates to 'Please create the first room in my rooms.' The English says 'My rooms', implying a list or collection. 'ຫ້ອງຂອງຂ້ອຍ' should more accurately reflect 'My rooms' in the context of a list or collection of rooms.",
-          "suggestion": "ກະລຸນາສ້າງຫ້ອງທໍາອິດໃນບັນຊີລາຍການຫ້ອງຂອງຂ້ອຍ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -172,8 +172,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Lūdzu, izveidojiet pirmo telpu Manās telpās.' doesn't fully capture the meaning of \"Please create the first room in My rooms.\" The phrase \"Manās telpās\" translates to \"in My rooms\" but it is a bit clunky and formal. A more natural translation would convey the instruction to create a room within the user's designated area.",
-          "suggestion": "Lūdzu, izveidojiet pirmo telpu savās telpās."
+          "description": "The translation 'Lūdzu, izveidojiet pirmo telpu Manās telpās.' is a literal translation and sounds unnatural in Latvian. A more natural translation would be something like 'Lūdzu, izveidojiet savu pirmo telpu.' or 'Lūdzu, izveidojiet pirmo telpu savā telpu sarakstā.'",
+          "suggestion": "Lūdzu, izveidojiet savu pirmo telpu."
         }
       ],
       "approved_at": null
@@ -190,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Utwórz pierwszy pokój w sekcji Moje pokoje' is a functional translation but lacks the nuance of 'Please'. While 'Utwórz' (Create) is accurate, the 'Please' is absent. A more polite equivalent could be incorporated.",
-          "suggestion": "Utwórz proszę pierwszy pokój w sekcji Moje pokoje."
+          "description": "The English phrase 'Please create the first room in My rooms' implies an action the user should perform. The Polish translation 'Utwórz pierwszy pokój w sekcji Moje pokoje' directly translates to 'Create the first room in the My rooms section.' While understandable, it's less natural and less user-friendly. A better translation would imply a prompt or instruction rather than a direct command.",
+          "suggestion": "Rozpocznij tworzenie pierwszego pokoju w sekcji Moje pokoje."
         }
       ],
       "approved_at": null
@@ -202,8 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Por favor, crie a primeira sala na opção As Minhas Salas' is not a direct and natural translation of 'Please create the first room in My rooms.'. The phrase 'na opção As Minhas Salas' (in the option My Rooms) is unnecessarily literal and doesn't flow well in Portuguese. A more natural translation would be 'Por favor, crie a primeira sala em Meus Quartos'.",
-          "suggestion": "Por favor, crie a primeira sala em Meus Quartos."
+          "description": "The translation 'Por favor, crie a primeira sala na opção As Minhas Salas' doesn't fully capture the meaning of 'Please create the first room in My rooms.'  While technically correct, it's a bit clunky. 'My rooms' refers to a section or a place, and the Portuguese phrasing makes it sound like a menu option. A more natural translation might emphasize the 'My rooms' section itself rather than just the action of creating a room 'in' it.",
+          "suggestion": "Por favor, crie a primeira sala em 'As Minhas Salas'."
         }
       ],
       "approved_at": null
@@ -211,7 +211,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Crie a primeira sala em Minhas salas' is not a direct or natural translation of 'Please create the first room in My rooms.' The word 'Please' is missing, and the phrasing 'em Minhas salas' sounds slightly awkward. A more natural translation would include a more polite phrasing and a more idiomatic 'in'.",
+          "suggestion": "Por favor, crie a primeira sala em Meus quartos."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -220,18 +226,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Creaţi prima sala în secţiunea Sălile mele' doesn't accurately convey the meaning of 'Please create the first room in My rooms'. 'Creaţi' is formal and sounds unnatural in this context.  'Secţiunea' is also unnecessary and adds complexity. The overall flow is awkward.",
-          "suggestion": "Vă rugăm să creați prima cameră în 'Sălile mele'."
-        },
-        {
-          "type": "grammar",
-          "description": "The use of 'Creaţi' is grammatically correct, but stylistically inappropriate for the implied user interface language. It's overly formal.",
-          "suggestion": "Use a more informal verb form, like 'Creează' or 'Creați o'."
+          "description": "The translation 'Creaţi prima sala în secţiunea Sălile mele' is not a perfect translation of 'Please create the first room in My rooms.'. 'Creaţi' is formal and might not be suitable for all contexts.  A more natural and less formal translation might be 'Creează prima cameră în Sălile mele.'",
+          "suggestion": "Creează prima cameră în Sălile mele."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the placement of 'în secţiunea' feels unnecessarily complex and adds extra words. It's more natural to just state the location directly.",
-          "suggestion": "Remove 'în secţiunea' and directly reference the location: 'în Sălile mele'."
+          "description": "The use of 'secţiunea' (section) feels a bit clunky. It's better to integrate the concept of 'My rooms' more seamlessly.",
+          "suggestion": "Creează prima cameră în Sălile mele."
         }
       ],
       "approved_at": null
@@ -248,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මාගේ කාමර තුළ පළමු කාමරය සාදන්න' literally translates to 'Create the first room inside my rooms'. The English says 'Please create the first room in My rooms.' The Sinhala should refer to a specific list or area named 'My rooms', not an internal space.",
-          "suggestion": "මාගේ කාමරවල පළමු කාමරයක් සාදා ගන්න."
+          "description": "The translation 'මාගේ කාමර තුළ පළමු කාමරය සාදන්න.' literally translates to 'Create the first room within my rooms.' The English content implies creating the *first* room in a list or section labeled 'My rooms.' The Sinhala translation suggests creating a room *inside* a collection of rooms already named 'My rooms'.",
+          "suggestion": "මාගේ කාමරයන්හි පළමු කාමරය සාදන්න."
         }
       ],
       "approved_at": null
@@ -269,7 +270,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Please create the first room in My rooms' implies a command or instruction. The Serbian translation 'Молим вас креирајте прву собу у Мојим собама' while grammatically correct, uses 'Молим вас' which translates to 'Please' as a polite request. A more direct and consistent translation for a UI instruction would be more appropriate.",
+          "suggestion": "Consider alternatives like 'Креирајте прву собу у Мојим собама.' or 'Изаберите прву собу у Мојим собама.' depending on the exact UI context (create vs select)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -289,9 +296,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation includes quotation marks around \"Мої кімнати\". It's unclear if these are necessary and aligns with the English instruction, which lacks them. Consider removing them for consistency.",
-          "suggestion": "Створіть першу кімнату в Мої кімнати."
+          "type": "incorrect_translation",
+          "description": "The translation 'Створіть першу кімнату в розділі «Мої кімнати»' is a functional equivalent but misses the nuance of 'Please'. It's more of a command than a polite request. A more accurate translation would include a form of 'Please'.",
+          "suggestion": "Будь ласка, створіть першу кімнату в розділі «Мої кімнати»."
         }
       ],
       "approved_at": null
@@ -305,13 +312,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The quotation marks around '我的房间' are not standard in this context. They imply it's a literal name, which might be unclear to the user.  Using parentheses or no quotation marks might be better.",
-          "suggestion": "请在（我的房间）中创建首个房间。 or 请在我的房间中创建首个房间。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

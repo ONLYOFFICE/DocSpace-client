@@ -3,7 +3,7 @@
   "content": "Incorrect email",
   "content_en_sha1_hash": "86ff68d5318bfa2b6198c429d79f7c00583764a9",
   "created_at": "2025-05-19T21:30:45.855Z",
-  "updated_at": "2025-06-18T07:34:14.836Z",
+  "updated_at": "2025-09-07T07:53:15.050Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user attempts to submit an email address that is empty or invalid. It appears as an error message in dialog boxes and forms where users enter their email addresses, such as in the \"Change Email\" dialog. The translator should provide a generic error message for incorrect or missing email input.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 220,
-      "context": "<FieldContainer\n className=\"smtp-settings_input\"\n isVertical\n place=\"top\"\n hasError={errors[SENDER_EMAIL_ADDRESS]}\n errorMessage={t(\"Common:IncorrectEmail\")}\n >\n <EmailInput\n name={SENDER_EMAIL_ADDRESS}\n isDisabled={isLoading}\n value={settings[SENDER_EMAIL_ADDRESS]}",
+      "line_number": 227,
+      "context": "<FieldContainer\n className=\"smtp-settings_input\"\n isVertical\n place=\"top\"\n hasError={errors[SENDER_EMAIL_ADDRESS]}\n errorMessage={t(\"Common:IncorrectEmail\")}\n dataTestId=\"smtp_sender_email_container\"\n >\n <EmailInput\n name={SENDER_EMAIL_ADDRESS}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 78,
+      "line_number": 79,
       "context": "case \"ErrorInvalidActivationLink\":\n return t(\"Errors:ErrorInvalidActivationLink\");\n case \"ErrorConfirmURLError\":\n return t(\"Errors:ErrorConfirmURLError\");\n case \"ErrorNotCorrectEmail\":\n return t(\"Common:IncorrectEmail\");\n case \"LoginWithBruteForce\":\n return t(\"Errors:LoginWithBruteForce\");\n case \"RecaptchaInvalid\":\n return t(\"Errors:RecaptchaInvalid\");\n case \"LoginWithAccountNotFound\":",
       "module": "/packages/login"
     }
@@ -60,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Etibarsız elektron poçt' is not the most natural or accurate translation of 'Incorrect email'. 'Etibarsız' implies untrustworthy rather than simply incorrect.",
+          "description": "The translation 'Etibarsız elektron poçt' doesn't accurately convey the meaning of 'Incorrect email'. 'Etibarsız' means 'unreliable' or 'untrustworthy', which isn't the intended meaning. 'Incorrect' implies an error in the email address itself.",
           "suggestion": "Yanlış elektron poçt"
         }
       ],
@@ -78,7 +78,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Nesprávná emailová adresa\" is understandable, a more accurate and natural Czech translation for \"Incorrect email\" would be \"Neplatná emailová adresa\" or simply \"Neplatná email\".  \"Nesprávná\" implies a mistake, whereas \"Neplatná\" directly means invalid.",
+          "description": "While technically correct, \"Nesprávná emailová adresa\" is a more verbose translation than the English \"Incorrect email\". A more concise and natural Czech translation would be \"Neplatná emailová adresa\" or simply \"Neplatná email\".",
           "suggestion": "Neplatná emailová adresa"
         }
       ],
@@ -90,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ungültige E-Mail-Adresse' is a technically correct translation, 'Incorrect email' often implies a typo or formatting error. 'Falsche E-Mail-Adresse' might be a more accurate and natural translation in many contexts.",
+          "description": "While \"Ungültige E-Mail-Adresse\" is technically correct, \"Incorrect email\" generally translates better to \"Falsche E-Mail-Adresse\". \"Ungültige\" implies the email address is not valid in some format, while \"falsche\" conveys the intended meaning of a user entering the wrong email.",
           "suggestion": "Falsche E-Mail-Adresse"
         }
       ],
@@ -99,13 +99,25 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Greek word 'Άκυρα' is technically correct but may be more appropriately translated to 'Λάθος' (Lathos) for a more natural feel in this context. 'Άκυρα' is often used for formally invalid or void documents.",
+          "suggestion": "Λάθος email"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Dirección de email incorrecta' is understandable, a more natural and common translation of 'Incorrect email' in Spanish would be 'Correo electrónico incorrecto'. 'Dirección de email' is technically correct but sounds slightly formal or technical in this context.",
+          "suggestion": "Correo electrónico incorrecto"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -126,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Սխալ էլ․ հասցե\" is a literal translation and sounds slightly unnatural in Armenian. A more natural phrasing would be \"Միջնորդական գծում սխալ էլ․ հասցե եղավ\" or simply \"Սխալ էլեկտրոնային փոստ\" (Incorrect email address).",
-          "suggestion": "Consider using \"Սխալ էլեկտրոնային փոստ\" or \"Միջնորդական գծում սխալ էլ․ հասցե եղավ\"."
+          "description": "The Armenian translation 'Սխալ էլ․ հասցե' is a literal translation but not the most natural phrasing. A more idiomatic translation for 'Incorrect email' would be something like 'Միջնորդում էլ․ փոստարկուղի' or 'Սխալ էլեկտրոնային փոստարկուղի'.",
+          "suggestion": "Consider 'Միջնորդում էլ․ փոստարկուղի' or 'Սխալ էլեկտրոնային փոստարկուղի'."
         }
       ],
       "approved_at": null
@@ -144,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'メールが正しくない' while technically correct, is a bit stiff and formal for a simple \"Incorrect email\" message. It translates more closely to 'The email is not correct'. A more natural and commonly used translation would be 'メールアドレスが違います' (meeru adoresu ga chigaimasu) or 'メールアドレスの間違いです' (meeru adoresu no machigai desu).",
-          "suggestion": "メールアドレスが違います (meeru adoresu ga chigaimasu) or メールアドレスの間違いです (meeru adoresu no machigai desu)"
+          "description": "The translation \"メールが正しくない\" (meeru ga seishiku nai) literally translates to \"The email is not correct.\" While understandable, a more natural and accurate translation for \"Incorrect email\" would be something like \"メールアドレスが間違っています\" (meeru adoresu ga machigatte imasu) - 'The email address is wrong' or \"メールアドレスの入力が間違っています\" (meeru adoresu no nyuuryoku ga machigatte imasu) - 'The email address input is wrong'.",
+          "suggestion": "メールアドレスが間違っています (meeru adoresu ga machigatte imasu)"
         }
       ],
       "approved_at": null
@@ -156,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"유효하지 않은 이메일입니다\" while technically correct, is a bit formal and verbose for a simple 'Incorrect email' label. It translates to 'It is an invalid email.' A more natural and concise translation would better suit the context.",
-          "suggestion": "Consider a more concise translation like \"잘못된 이메일입니다\" (Jalmae-doen imeil-imnida) which translates to 'Incorrect email' more directly."
+          "description": "The Korean translation '유효하지 않은 이메일입니다' is a literal translation of 'Invalid email' rather than 'Incorrect email'. While conveying a similar meaning, it lacks the direct correspondence with the original English phrase.",
+          "suggestion": "Consider alternative translations that more closely reflect 'Incorrect email', such as '잘못된 이메일입니다' (jalmotdoen imeilimnida) or '오류 있는 이메일입니다' (oreuyo inneun imeilimnida)."
         }
       ],
       "approved_at": null
@@ -174,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Nepareiza e-pasta adrese\" is understandable, a more precise translation of \"Incorrect email\" would be \"Nepareizs e-pasts\". \"Adrese\" refers to the address itself, while \"pasts\" refers to the email itself.",
+          "description": "While \"Nepareiza e-pasta adrese\" is technically correct, a more natural and common translation of \"Incorrect email\" in Latvian would be \"Nepareizs e-pasts\". \"E-pasta adrese\" is more specific (email address) than the original English, which is a more general 'incorrect email'.",
           "suggestion": "Nepareizs e-pasts"
         }
       ],
@@ -210,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Adresa de e-mail nu este valabilă' is a more verbose translation of 'Incorrect email'. While grammatically correct, it loses the brevity of the original. A more direct and commonly used translation would be 'Email incorect'.",
-          "suggestion": "Email incorect"
+          "description": "The translation 'Adresa de e-mail nu este valabilă' is a more verbose translation of 'Incorrect email'. While grammatically correct, it doesn't directly convey the brevity of the original English phrase. A more direct translation could be 'Email incorectă'.",
+          "suggestion": "Email incorectă"
         }
       ],
       "approved_at": null
@@ -228,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"වැරදි වි-තැපෑලකි\" (weradi vi-tapaekiki) is not the most natural or accurate translation of \"Incorrect email.\" While technically conveys the meaning, a more common and natural rendering would be \"මිසමතැපැල් ලිපිනය\" (misamatapeel lipinaya) or \"කිඩාවුන තැපැල් ලිපිනය\" (kidaawuna tapeel lipinaya). \"වි-තැපෑලකි\" sounds awkward.",
-          "suggestion": "මිසමතැපැල් ලිපිනය (misamatapeel lipinaya) or කිඩාවුන තැපැල් ලිපිනය (kidaawuna tapeel lipinaya)"
+          "description": "The translation 'වැරදි වි-තැපෑලකි' while understandable, isn't the most natural or common way to say 'Incorrect email' in Sinhala. A more accurate and common translation would be 'මි-සමාන වි-තැපෑලකි' (misaamana vithaepaaḷakiyi).",
+          "suggestion": "මි-සමාන වි-තැපෑලකි (misaamana vithaepaaḷakiyi)"
         }
       ],
       "approved_at": null
@@ -252,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Нетачан емаил\" is not the most natural-sounding translation of \"Incorrect email\" in Serbian. \"Неисправан емаил\" or \"Невалидан емаил\" would be more common and idiomatic.",
-          "suggestion": "Consider \"Неисправан емаил\" or \"Невалидан емаил\"."
+          "description": "The Serbian (Cyrillic) translation 'Нетачан емаил' is a literal transliteration of 'Incorrect email'. While understandable, it's not the most natural way to express this in Serbian. A more idiomatic translation would be 'Неисправан емаил' or 'Невалидан емаил'.",
+          "suggestion": "Неисправан емаил"
         }
       ],
       "approved_at": null

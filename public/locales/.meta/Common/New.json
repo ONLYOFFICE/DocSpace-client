@@ -3,7 +3,7 @@
   "content": "New",
   "content_en_sha1_hash": "6403f2b7eb2aaafe6de34cbf2a029b01afebc512",
   "created_at": "2025-05-19T21:30:46.723Z",
-  "updated_at": "2025-06-03T20:59:41.920Z",
+  "updated_at": "2025-10-13T14:41:03.180Z",
   "comment": {
     "text": "This translation key is used for the text \"New\" in various UI elements to indicate new or updated content. It appears on a badge within a contact tab, and a guest release tip dialog, providing users with context about what's new.",
     "is_auto": true,
@@ -11,33 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 118,
-      "context": "truncate\n className=\"accent-text\"\n >\n {t(\"Common:Guest\")}\n </Text>\n <Badge label={t(\"Common:New\")} noHover />\n </div>\n \n <IconButton\n iconName={CloseSvgUrl}\n size={16}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Tabs/ContactsTabs/index.tsx",
-      "line_number": 162,
-      "context": "id: \"guests\",\n name: t(\"Common:Guests\"),\n onClick: onGuests,\n content: null,\n badge: !guestsTabVisited ? (\n <Badge label={t(\"Common:New\")} noHover />\n ) : undefined,\n });\n }\n \n return (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1971,
-      "context": "id: \"option_save-as-template\",\n key: \"save-as-template\",\n label: t(\"SaveAsTemplate\"),\n icon: CreateTemplateSvgUrl,\n onClick: () => this.onSaveAsTemplate(item),\n badgeLabel: t(\"Common:New\"),\n disabled: !item.security?.Create || item.providerKey,\n },\n {\n id: \"option_owner-change\",\n key: \"owner-change\",",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 370,
+      "line_number": 429,
       "context": "{showNew ? (\n <BadgeWrapper onClick={onBadgeClick} isTile={isTile}>\n <Badge\n {...commonBadgeProps}\n className=\"badge-version badge-new-version tablet-badge icons-group\"\n label={t(\"Common:New\")}\n onClick={onBadgeClick}\n />\n </BadgeWrapper>\n ) : null}\n {/* {isForm  && (",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/components/room-type/index.tsx",
-      "line_number": 94,
-      "context": "<Text noSelect className=\"choose_room-title-text\">\n {t(room.title)}\n </Text>\n {isTemplate ? (\n <Badge\n label={t(\"Common:New\")}\n backgroundColor={globalColors.lightBlueMain}\n fontSize=\"9px\"\n fontWeight={700}\n borderRadius=\"50px\"\n noHover",
       "module": "/packages/shared"
     }
   ],
@@ -201,7 +177,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Latin) translation 'Novo' is a masculine form and doesn't always accurately reflect the meaning of 'New' which can be feminine or neuter depending on context. A more accurate and context-neutral translation would depend on what 'New' is referring to.",
+          "suggestion": "Consider 'Nova' (feminine) or 'Novo' (masculine) based on the gender of the noun being described as 'New'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -216,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Створити' (Sтворити) means 'Create', not 'New'. While 'create' can sometimes be a reasonable translation for 'new' depending on context, it is not a direct or generally appropriate translation.",
-          "suggestion": "Consider 'Новий' (Novyi) for a direct translation of 'New'. Alternatively, if the context implies creation, re-evaluate if 'Створити' is appropriate within that context, but acknowledge the potential for misunderstanding."
+          "description": "The Ukrainian translation \"Створити\" (Stvoryty) means \"Create\", not \"New\". This is a significant translation error.",
+          "suggestion": "The correct translation of \"New\" depends on the context. Possible alternatives include \"Новий\" (Novyi), \"Нова\" (Nova), or \"Нове\" (Nove), depending on the gender of the noun it modifies."
         }
       ],
       "approved_at": null
@@ -234,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"新建\" (xīn jiàn) generally means 'newly built' or 'create new'. While it can sometimes imply 'new', it doesn't accurately capture the simple meaning of 'New' in this context. It's overly specific.",
-          "suggestion": "新 (xīn)"
+          "description": "'新建' (xīn jiàn) generally means 'newly built' or 'create new,' not simply 'new.' While it can sometimes be used to mean 'new,' it's not the most natural or direct translation of 'New' in this context. Depending on the context, '新' (xīn) might be more appropriate.",
+          "suggestion": "Consider using '新' (xīn) for a more direct translation of 'New' if it fits the surrounding context."
         }
       ],
       "approved_at": null

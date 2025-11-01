@@ -3,7 +3,7 @@
   "content": "Impress your audience with stunning slides.",
   "content_en_sha1_hash": "4b55e3129fb359ae161ebc1598912e93350e7c1a",
   "created_at": "2025-05-19T21:30:56.459Z",
-  "updated_at": "2025-05-28T09:30:02.118Z",
+  "updated_at": "2025-10-13T13:22:35.623Z",
   "comment": {
     "text": "The \"CreatePresentationDescription\" translation key is used to describe a button that allows users to create a new presentation. The description will be displayed on a button or similar UI element, guiding users on what action it performs.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 263,
+      "line_number": 272,
       "context": "onClick: () => actions.onCreate(\"xlsx\"),\n disabled: !security?.Create,\n };\n const createPresentation = {\n title: t(\"EmptyView:CreatePresentation\"),\n description: t(\"EmptyView:CreatePresentationDescription\"),\n icon: <CreateNewPresentation />,\n key: \"create-presentation-option\",\n onClick: () => actions.onCreate(\"pptx\"),\n disabled: !security?.Create,\n };",
       "module": "/packages/client"
     }
@@ -99,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Impress your audience' is translated as '깊은 인상을 남기세요' (give a deep impression). While accurate, it lacks the immediacy and positive connotation of 'impress'. A more natural translation might convey excitement and impact.",
+          "suggestion": "청중을 사로잡는 멋진 슬라이드를 만들어보세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබේ ප්‍රේක්ෂකයන් විශ්මියජනක ස්ලයිඩුවලින් වශී කරන්න' while conveying a similar sentiment, doesn't directly translate to 'Impress your audience with stunning slides.' The word ' වශී කරන්න' (vaashiya karanna) means 'to enchant' or 'to mesmerize,' which is a stronger term than 'impress'. A more accurate translation might focus on capturing the sense of 'impressing' or 'wowing' the audience.",
+          "suggestion": "ඔබේ ප්‍රේක්ෂකයන් විශ්මිත ස්ලයිඩුවලින් වශී කරන්න (Obae prekshakayan vishmitha slaiduwalin vaashiya karanna) - This uses 'vishmitha' which conveys a sense of amazement/astonishment, closer to 'stunning'. A more literal and simpler alternative could be 'ඔබේ ප්‍රේක්ෂකයන් ආන්දෝलनීය ස්ලයිඩුවලින් ප්‍රමාණවත් කරන්න' (Obae prekshakayan aandaloniyo slaiduwalin pramaanavath karanna) - This uses 'aandaloniyo' meaning evocative/inspiring and 'pramaanavath karanna' meaning to satisfy/impress."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +207,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation focuses on *creating* an impression rather than simply *impressing* the audience. The English implies a presentation that already exists and will impress.  The Vietnamese suggests the user is building the presentation to impress.",
+          "suggestion": "Ấn tượng người xem bằng những slide tuyệt đẹp."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, '留下深刻印象' (liú xià shēn kè yìn xiàng) is a bit overly formal and strong for the simple 'Impress your audience'. A more natural and common phrasing would be more appropriate.",
+          "suggestion": "用精美的幻灯片吸引您的观众。"
+        }
+      ],
       "approved_at": null
     }
   }

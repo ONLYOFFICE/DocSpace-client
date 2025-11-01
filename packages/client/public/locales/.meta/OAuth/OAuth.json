@@ -3,7 +3,7 @@
   "content": "OAuth 2.0",
   "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
   "created_at": "2025-05-19T21:30:53.924Z",
-  "updated_at": "2025-07-02T07:49:19.824Z",
+  "updated_at": "2025-09-26T15:21:06.325Z",
   "comment": {
     "text": "OAuth 2.0 is a translation key used to display the English content \"OAuth 2.0\" in various UI contexts throughout the application, primarily for title settings and button labels, such as on create and edit pages of OAuth-related settings.",
     "is_auto": true,
@@ -31,19 +31,19 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
       "line_number": 93,
-      "context": "href={apiOAuthLink}\n tag=\"a\"\n themeId={ThemeId.Link}\n style={{ marginBottom: \"20px\" }}\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </ColorTheme>\n ) : null}\n </p>\n \n <RegisterNewButton />",
+      "context": "tag=\"a\"\n style={{ marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n </p>\n \n <RegisterNewButton />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
-      "line_number": 98,
-      "context": "href={apiOAuthLink}\n tag=\"a\"\n themeId={ThemeId.Link}\n style={{ marginBottom: \"20px\" }}\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </ColorTheme>\n ) : null}\n <RegisterNewButton currentDeviceType={currentDeviceType} />\n {isLoading ? (\n <OAuthLoader viewAs={viewAs} />",
+      "line_number": 101,
+      "context": "tag=\"a\"\n style={isError ? undefined : { marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n \n {isError ? (\n <EmptyServerErrorContainer />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/index.js",
-      "line_number": 82,
-      "context": ");\n \n const oauthData = identityServerEnabled\n ? {\n id: \"oauth\",\n name: t(\"OAuth:OAuth\"),\n content: <OAuth />,\n }\n : {};\n \n const data = [",
+      "line_number": 105,
+      "context": ");\n \n const oauthData = identityServerEnabled\n ? {\n id: \"oauth\",\n name: t(\"OAuth:OAuth\"),\n content: <OAuth error={errorOAuth} />,\n onClick: async () => {\n clearAbortControllerArr();\n await getOAuthData();\n },",
       "module": "/packages/client"
     },
     {

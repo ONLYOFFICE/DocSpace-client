@@ -3,7 +3,7 @@
   "content": "POST request body",
   "content_en_sha1_hash": "602f7a56b07bd8916fa8a44ba3deb7230ecfc19d",
   "created_at": "2025-05-19T21:30:49.796Z",
-  "updated_at": "2025-05-21T01:03:28.491Z",
+  "updated_at": "2025-05-24T02:17:25.336Z",
   "comment": {
     "text": "This translation key is used for the label \"RequestPostBody\" which appears as a heading in a UI component. It indicates that the content below it is related to the body of a POST request.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"نص طلب POST\" is a literal translation of \"POST request body\" but doesn't convey the meaning as naturally as it could in Arabic. While technically correct, it sounds somewhat awkward.",
-          "suggestion": "جسم نص طلب POST (Jis'm Nush' Talab POST) - This is a more natural translation conveying the meaning of 'request body'."
+          "description": "The translation 'نص طلب POST' while understandable, doesn't perfectly convey the meaning of 'POST request body'. A more accurate translation would emphasize that it's the *content* of the POST request.",
+          "suggestion": "جسم طلب POST"
         }
       ],
       "approved_at": null
@@ -39,19 +39,19 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"POST sorğu mətni\" is understandable, a more precise translation of \"POST request body\" would be \"POST istəyinin bədəni\" or \"POST istəyinin gövdəsi\". \"Sorğu\" generally translates to 'query' which isn't the exact meaning here.",
-          "suggestion": "POST istəyinin bədəni"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Текст на POST заявка' is understandable, a more accurate and common translation for 'POST request body' would be 'Съдържание на POST заявка'. 'Текст' (text) implies textual content, while 'Съдържание' (content) is a more encompassing term for the body of a request, which could include JSON or other data formats.",
+          "suggestion": "Съдържание на POST заявка"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Σώμα αίτησης POST\" is a very literal translation and sounds unnatural in Greek. A more natural and idiomatic translation would be something like \"Περιεχόμενο σώματος POST αίτησης\" or \"Δεδομένα σώματος POST αίτησης\".",
-          "suggestion": "Περιεχόμενο σώματος POST αίτησης"
+          "description": "While technically correct, \"Σώμα αίτησης POST\" is not the most natural-sounding translation. 'Σώμα' can feel a bit formal and literal here. A more common and understandable phrasing would be 'Δεδομένα POST αίτησης' or 'Περιεχόμενο POST αίτησης'.",
+          "suggestion": "Δεδομένα POST αίτησης"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"POST հարցման մարմին\" is a literal translation of 'POST request body'. While understandable, a more natural Armenian phrasing might be preferred. \"POST-ի թելադրանք\" or \"POST-ի տվյալներ\" would be more common in technical contexts.",
-          "suggestion": "Consider using \"POST-ի թելադրանք\" or \"POST-ի տվյալներ\" for a more natural and idiomatic translation."
+          "description": "The translation 'POST հարցման մարմին' is a literal translation but might not be the most natural or idiomatic way to express 'POST request body' in Armenian. A more common term might be used depending on the technical context.",
+          "suggestion": "Consider alternatives like 'POST թողոնի բովվածք' or 'POST հարցման բովվածք', which might be more familiar to Armenian speakers in a technical setting.  Further context would help determine the best option."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເນື້ອໃນການຮ້ອງຂໍ POST' is a literal translation of 'POST request body' but doesn't flow naturally in Lao. A more natural translation would convey the meaning of the data being sent in a POST request.",
-          "suggestion": "ເນື້ອໃນຂໍ້ຄວາມສົ່ງ POST"
+          "description": "The Lao translation 'ເນື້ອໃນການຮ້ອງຂໍ POST' is a literal translation and might not be the most natural or idiomatic way to express 'POST request body' in Lao. It's understandable but could be improved.",
+          "suggestion": "Consider alternatives like 'ເນື້ອໃນຕົວຢ່າງການສົ່ງຂໍ້ຄວາມ POST' or 'ເນື້ອໃນຂອງການສົ່ງຂໍ້ມູນ POST' depending on the specific context.  A more concise option could be 'ເນື້ອໃນ POST' if it's clear from context that it's a request body."
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"pieprasījuma pamatteksts\" is understandable, a more idiomatic translation for \"request body\" in a technical context would be \"pieprasījuma ķermenis\". \"Pamatteksts\" is more often used for email bodies or document content.",
-          "suggestion": "pieprasījuma ķermenis"
+          "description": "The translation 'POST pieprasījuma pamatteksts' is technically correct but could be more natural and concise in Latvian. 'Pamatteksts' (body) feels a bit formal and less common in this context.",
+          "suggestion": "POST pieprasījuma saturs"
         }
       ],
       "approved_at": null
@@ -156,13 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"POST-aanvraagtekst\" is understandable, it's not the most natural or idiomatic Dutch translation for \"POST request body.\"  'Tekst' is a bit clunky here.",
-          "suggestion": "POST-body"
-        },
-        {
-          "type": "formatting",
-          "description": "The hyphen in \"POST-aanvraagtekst\" is unnecessary and breaks the flow. While technically correct, it's not the standard way to express this in Dutch.",
-          "suggestion": "POST aanvraagtekst"
+          "description": "The translation \"POST-aanvraagtekst\" is not the most natural or idiomatic Dutch translation for \"POST request body\". While technically correct, it's a bit clunky. A more common and understandable translation would be \"Request body voor POST-verzoeken\" or \"POST verzoek body\".",
+          "suggestion": "Request body voor POST-verzoeken"
         }
       ],
       "approved_at": null
@@ -188,13 +183,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Corpul solicitării POST' is understandable, a more natural and commonly used translation for 'POST request body' in a technical context would be 'Corpul cererii POST'. 'Solicitare' can imply a request for information, while 'cerere' is more commonly used for HTTP requests.",
-          "suggestion": "Corpul cererii POST"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -209,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"POST ඉල්ලීමේ අන්තර්ගතය\" is not the most natural or accurate translation of \"POST request body.\" While technically correct, it sounds somewhat formal and literal. A more natural translation would be something like \"POST ඇණිල්ලේ ශරීරය\" or \"POST ඇණිල්ලේ පණිවිඩය\".",
-          "suggestion": "POST ඇණිල්ලේ ශරීරය"
+          "description": "The translation \"POST ඉල්ලීමේ අන්තර්ගතය\" is not the most natural or accurate translation of \"POST request body\". While technically correct, it sounds somewhat formal and less idiomatic. A more natural translation would incorporate the concept of 'request' more seamlessly.",
+          "suggestion": "POST ඉල්ලුමෙහි ඇති දත්ත"
         }
       ],
       "approved_at": null
@@ -224,7 +213,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'POST telo zahteve' is not the most natural or accurate translation of 'POST request body' in Slovenian. While technically correct, it sounds somewhat literal and clunky.",
+          "suggestion": "A more natural and idiomatic translation would be 'telo zahtevka' or 'telo POST zahteve'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -233,13 +228,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Тело POST захтева' is not the most natural or accurate translation of 'POST request body'.  'Захтева' is not the correct word. It should be 'захтева'. Also 'тело' is a bit clunky; 'садржина' would be more common in this context.",
-          "suggestion": "Садржина POST захтева"
+          "description": "The translation 'Тело POST захтева' is not the most accurate or natural-sounding Serbian (Cyrillic) translation of 'POST request body'. 'Захтева' is the genitive singular of 'захтев' (request), but the construction feels awkward.  A better translation would incorporate a more standard phrasing.",
+          "suggestion": "Тело POST захтева (или Тело захтева за POST)"
         },
         {
-          "type": "spelling",
-          "description": "The word 'захтева' is misspelled. It should be 'захтева'.",
-          "suggestion": "захтева"
+          "type": "incorrect_translation",
+          "description": "Using 'захтева' is grammatically sound, but stylistically it would be more fluent to use 'за POST захтева' or 'тело захтева за POST'.",
+          "suggestion": "Тело захтева за POST"
         }
       ],
       "approved_at": null
@@ -250,13 +245,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Telo POST zahteva' does not accurately convey the meaning of 'POST request body'. 'Telo' translates to 'body', which is redundant as 'zahteva' (request) already implies a body. The phrasing is also awkward.",
-          "suggestion": "POST zahtev telo"
+          "description": "The Serbian translation 'Telo POST zahteva' is not an accurate translation of 'POST request body'. 'Telo' means 'body' in a more general sense and doesn't specifically refer to the request body in a technical context. It also sounds unnatural.",
+          "suggestion": "Teksto POST zahteva"
         },
         {
           "type": "grammar",
-          "description": "While the translation isn't grammatically *incorrect* per se, the word order 'Telo POST zahteva' sounds unnatural in Serbian. Serbian generally prefers subject-verb-object order, and placing 'Telo' at the beginning is unusual.",
-          "suggestion": "POST zahtev telo"
+          "description": "While 'Teksto POST zahteva' is better, the case usage is incorrect. Serbian nouns have grammatical cases. In this context, the noun 'tekst' (text) should likely be in the genitive case.",
+          "suggestion": "Tekst POST zahteva"
         }
       ],
       "approved_at": null
@@ -273,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Тіло запиту POST' is a literal translation but not the most natural or idiomatic way to express \"POST request body\" in Ukrainian. While understandable, it's a bit clunky.",
-          "suggestion": "Розширене тіло запиту POST"
+          "description": "The translation 'Тіло запиту POST' is a literal translation and might not be the most natural or accurate way to convey 'POST request body' in Ukrainian. While technically correct, it sounds somewhat clunky.",
+          "suggestion": "Consider alternatives like 'Тіло POST-запиту' or 'POST-тіло запиту'. The best option would depend on the specific context and desired level of formality."
         }
       ],
       "approved_at": null

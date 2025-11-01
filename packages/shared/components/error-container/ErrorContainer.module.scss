@@ -1,5 +1,5 @@
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 .container {
   background: var(--error-container-background);

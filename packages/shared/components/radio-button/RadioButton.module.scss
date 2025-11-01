@@ -23,38 +23,37 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/common-icons-style.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 :global(.dark) {
   .label {
-    --radio-button-bg: #{$black};
-    --radio-button-disable-bg: #{$dark-gray-light};
-    --radio-button-text-color: #{$white};
-    --radio-button-text-disable-color: #{$gray-dark-text};
-    --radio-button-fill-color: #{$white};
-    --radio-button-border-color: #{$gray-dark-strong};
-    --radio-button-disable-fill-color: #{$gray-dark-strong};
+    --radio-button-bg: #{colors.$black};
+    --radio-button-disable-bg: #{colors.$dark-gray-light};
+    --radio-button-text-color: #{colors.$white};
+    --radio-button-text-disable-color: #{colors.$gray-dark-text};
+    --radio-button-fill-color: #{colors.$white};
+    --radio-button-border-color: #{colors.$gray-dark-strong};
+    --radio-button-disable-fill-color: #{colors.$gray-dark-strong};
     --radio-button-disable-border-color: none;
-    --radio-button-hover-border-color: #{$white};
+    --radio-button-hover-border-color: #{colors.$white};
   }
 }
 
 .radioButtonIcon {
-  @include common-icons-style;
+  @include mixins.common-icons-style;
 }
 
 .label {
-  --radio-button-bg: #{$white};
-  --radio-button-disable-bg: #{$gray-light};
-  --radio-button-text-color: #{$black};
-  --radio-button-text-disable-color: #{$gray};
-  --radio-button-fill-color: #{$black};
-  --radio-button-border-color: #{$gray-strong};
-  --radio-button-disable-fill-color: #{$gray-strong};
-  --radio-button-disable-border-color: #{$gray-light-mid};
-  --radio-button-hover-border-color: #{$gray};
+  --radio-button-bg: #{colors.$white};
+  --radio-button-disable-bg: #{colors.$gray-light};
+  --radio-button-text-color: #{colors.$black};
+  --radio-button-text-disable-color: #{colors.$gray};
+  --radio-button-fill-color: #{colors.$black};
+  --radio-button-border-color: #{colors.$gray-strong};
+  --radio-button-disable-fill-color: #{colors.$gray-strong};
+  --radio-button-disable-border-color: #{colors.$gray-light-mid};
+  --radio-button-hover-border-color: #{colors.$gray};
 
   --radio-button-spacing: unset;
 
@@ -63,7 +62,7 @@
   position: relative;
   margin: 0;
 
-  @include no-user-select;
+  @include mixins.no-user-select;
 
   cursor: pointer;
 

@@ -38,6 +38,7 @@ type AccessOptionType = {
 
   color?: string;
   quota?: string;
+  tooltip?: string;
 };
 
 type SeparatorOptionType = {
@@ -53,7 +54,7 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
       return t("Common:RoleRoomAdminFormRoomDescription");
     case None:
       return t("Common:RoleRoomAdminDescription", {
-        sectionName: t("Common:MyFilesSection"),
+        sectionName: t("Common:MyDocuments"),
       });
     default:
       return t("Common:RoleRoomManagerDescription");
@@ -96,7 +97,7 @@ export const getAccessOptions = (
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       description: t("Common:RolePortalAdminDescription", {
         productName: t("Common:ProductName"),
-        sectionName: t("Common:MyFilesSection"),
+        sectionName: t("Common:MyDocuments"),
       }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
@@ -120,6 +121,9 @@ export const getAccessOptions = (
       key: "roomManager",
       label: t("Common:RoomManager"),
       description: getRoomAdminDescription(roomType, t),
+      tooltip: t("UserMaxAvailableRoleWarning", {
+        productName: t("Common:ProductName"),
+      }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
       access:

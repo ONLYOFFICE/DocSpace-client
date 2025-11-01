@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> wants to share with you the contact of the guest.",
   "content_en_sha1_hash": "22e94db1f497e5a36b2d093d14a19ffc364fc51a",
   "created_at": "2025-05-19T21:30:45.696Z",
-  "updated_at": "2025-05-28T09:30:02.889Z",
+  "updated_at": "2025-06-30T12:20:31.673Z",
   "comment": {
     "text": "This translation key is used to display a personalized message when a user receives an invitation from a guest. It will show the name of the guest who shared the contact information. This appears in a greeting component on the login page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingGuestContainer.tsx",
-      "line_number": 68,
+      "line_number": 65,
       "context": "<img src={logoUrl} className=\"portal-logo guest\" alt=\"greeting-logo\" />\n <div className=\"tooltip guest\">\n <Text fontSize=\"16px\">\n <Trans\n t={t}\n i18nKey=\"GuestInvitation\"\n ns=\"Common\"\n defaults={DEFAULT_GUEST_TEXT}\n values={{\n displayName,\n }}",
       "module": "/packages/login"
     }
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"wants to share with you the contact of the guest\" is not perfectly conveyed in the Arabic translation. A more natural Arabic phrasing would emphasize the act of inviting or sharing an invitation rather than just 'sharing the contact'.",
+          "suggestion": "يرغب في دعوتك لمشاركة معلومات الضيف"
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags are inconsistent with typical XML or HTML. While not necessarily an error, consistency should be checked across all translations.",
+          "suggestion": "Review and standardize tag usage across all translations. Consider removing them if they aren't necessary."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -48,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation preserves the original English tags '<1>' and '{{{displayName}}}'. These tags are likely meant for processing and should be removed or adapted to the Czech localization system.",
-          "suggestion": "Remove the tags: \"<1>\" and \"{{{displayName}}}\". Replace with a localized equivalent if needed. Example: \"{{displayName}} chce s vámi sdílet kontakt na hosta.\""
+          "description": "The English content uses `<1>` and `</1>`, while the Czech translation uses `{{{displayName}}` and `</1>`. The opening tag appears inconsistent.",
+          "suggestion": "Ensure consistent tag formatting. It appears the English tag should be replicated in the Czech translation, so change `{{{displayName}}` to `<1>{{displayName}}</1>."
         }
       ],
       "approved_at": null
@@ -66,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Greek translation includes an article (Ο/Η) before the display name. While grammatically correct, it's unclear whether this was intentional based on the English source which does not include an article. It might be safer to omit it to match the English source more closely.",
-          "suggestion": "Consider removing the article 'Ο/Η' for closer alignment with the English source.  Alternatively, if the Greek version absolutely requires it, ensure it's consistently applied."
+          "description": "The Greek translation retains the HTML tags <1> and </1> which are unnecessary and should be removed. The original English content uses placeholders, implying these should be replaced, not preserved.",
+          "suggestion": "Remove the HTML tags <1> and </1>."
         }
       ],
       "approved_at": null
@@ -95,9 +106,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ձեզ հետ կիսվել\" (dzez het kiselvel) literally translates to \"share with you\". A more natural and idiomatic way to express 'share with you the contact of the guest' would be something like 'Ձեզ մատուցել հյուրի կոնտակտային տվյալները' (Dzez matuce h’yuri kontaktain tvyalner) which means 'provide you with the guest's contact information'.  Or, a simpler option: 'Ձեզ հանձնել հյուրի կոնտակտային տվյալները' (dzez handznel h’yuri kontaktain tvyalner) - 'give you the guest’s contact information'.",
-          "suggestion": "Ձեզ մատուցել հյուրի կոնտակտային տվյալները or Ձեզ հանձնել հյուրի կոնտակտային տվյալները"
+          "type": "formatting",
+          "description": "The Armenian translation includes a colon after 'տվյալներով' which is not present in the English template. The English template uses angle brackets, and the Armenian translation should follow this pattern.",
+          "suggestion": "<1>{{displayName}}</1>ն ուզում է ձեզ հետ կիսվել հյուրի կոնտակտային տվյալները:"
         }
       ],
       "approved_at": null
@@ -113,14 +124,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"さんがゲストの連絡先をあなたと共有したいと思っています\" is a bit too formal and verbose for a guest invitation notification. It sounds more like a formal announcement than a casual notification.",
-          "suggestion": "Consider a more natural and concise phrasing, such as \"{{displayName}}さんがゲストの連絡先を共有してほしいと言っています\" or \"{{displayName}}さんがゲストの連絡先をあなたとシェアしたいようです\"."
-        },
-        {
           "type": "formatting",
-          "description": "The formatting tags `<1>` and `</1>` are inconsistent with common practices. They appear to be wrapping the display name, but their purpose is unclear.",
-          "suggestion": "Confirm with the original content provider if these tags are intentional. If they are intended to format the name in a specific way, ensure the tags are consistently used and correct. Otherwise, remove them as they are redundant."
+          "description": "The tag <1> is inconsistent in both the English and Japanese versions. While the English uses `displayName`, the Japanese version simply repeats the tag with no content, which is unusual and could cause display problems.",
+          "suggestion": "Ensure consistent handling of the <1> tag. Consider if `displayName` should be translated or localized within the tag in the Japanese version, or if the tag needs adjustment to accommodate proper rendering."
         }
       ],
       "approved_at": null
@@ -131,13 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"wants to share with you\" is too literal. A more natural phrasing in Korean would be \"초대하고 싶어합니다\" (cho-dae-ha-go sipeo hamnida) or \"초대하고 싶어합니다\" (cho-dae-ha-go sipeo hamnida) rather than \"공유하길 원합니다\" (gong-yu-ha-gil wonhapnida), which is more formal and less common in this context.",
-          "suggestion": "<1>{{displayName}}</1>님이 고객님을 초대하고 싶어합니다."
-        },
-        {
-          "type": "formatting",
-          "description": "The spacing before and after the Korean translation text is inconsistent with the English original.",
-          "suggestion": "Ensure consistent spacing around the translated content to match the original English formatting."
+          "description": "The phrase 'share with you the contact of the guest' is translated as '게스트 연락처를 공유하길 원합니다'. While technically correct, a more natural and common phrasing in Korean would be '게스트 연락처를 공유하고 싶어합니다' or '게스트 연락처를 공유하려고 합니다'. The current phrasing sounds somewhat formal and less conversational.",
+          "suggestion": "게스트 연락처를 공유하고 싶어합니다."
         }
       ],
       "approved_at": null
@@ -145,7 +146,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຕ້ອງການ' (ta'ong gaan) is correct, but the Lao script needs a proper Lao font for accurate display.  Without it, it might appear as question marks or other incorrect characters depending on the rendering engine.",
+          "suggestion": "Ensure a Lao font is used for proper display."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -154,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ar jums ar viesa kontaktiem\" is awkward and less natural in Latvian. It literally translates to \"with you with the guest's contacts.\" A better phrasing would convey the intention of sharing the guest's contact information.",
-          "suggestion": "Consider rewording to something like \"vēlas dalīties ar jums viesa kontaktu\" (wants to share with you the guest's contact) or \"vēlas ar jums dalīties viesa kontaktiem\" (wants to share the guest's contacts with you)."
+          "description": "The phrase \"ar jums ar viesa kontaktiem\" is awkward and doesn't flow naturally in Latvian. A more natural translation would use 'ar viesi'.",
+          "suggestion": "The translation should be: \"<1>{{displayName}}</1> vēlas dalīties ar jums viesi.\" or \"<1>{{displayName}}</1> vēlas dalīties ar jums viesa kontaktu.\" "
         }
       ],
       "approved_at": null
@@ -169,7 +176,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Polish word 'gościa' is in the genitive case, which is correct in this context because it follows 'dane kontaktowe'. However, it might be slightly more natural to use the nominative case 'gość' for a more casual tone. This depends on the desired level of formality.",
+          "suggestion": "Consider 'gość' instead of 'gościa' for a less formal tone, but ensure it aligns with the overall style guide."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -190,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'contact' is translated as 'datele de contat'. 'Contact' should be translated as 'contactul'.",
+          "description": "The word 'contact' is translated as 'datele de contat'. The correct translation for 'contact' in this context should be 'contactul'.",
           "suggestion": "Replace 'datele de contat' with 'contactul'."
         }
       ],
@@ -208,8 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"wants to share with you the contact of the guest\" is not accurately translated.  'Share the contact' is too literal. A more natural Sinhala phrasing would express the intent of inviting the user to view or access the guest's contact information.",
-          "suggestion": "Possible suggestions:  'ඔබ සමඟ අමුත්තාගේ සම්බන්ධතා තොරතුරු බෙදා ගැනීමට කැමතියි' (Oba samaa amuththaage santhapaathathoru berbagiakathakiya kamitiya) - '{{displayName}} wants to share the guest's contact information with you.' or 'ඔබට අමුත්තාගේ සම්බන්ධතාවය දැකීමට {{displayName}} කැමතියි' (Obata amuththaage santhapaathaya dekima {{displayName}} kamitiya) - '{{displayName}} wants you to see the guest's contact.'"
+          "description": "The English phrase \"wants to share with you the contact of the guest\" is not accurately translated. The Sinhala translation \"හට අමුත්තාගේ සම්බන්ධතාවය ඔබ සමඟ බෙදා ගැනීමට අවශ්‍යයි\" literally translates to 'wants to share the guest's contact with you'. A more natural and accurate translation might use a phrasing that emphasizes inviting or offering the contact, rather than just 'wanting to share'.",
+          "suggestion": "Consider a translation that better reflects the nuance of invitation, such as: \"{{displayName}} ඔබට අමුත්තාගේ සම්බන්ධතාවය ලබා දීමට කැමතියි\" ({{displayName}} wants to offer you the guest's contact)."
+        },
+        {
+          "type": "formatting",
+          "description": "The XML tags `<1>` and `</1>` seem unnecessary and do not appear to serve a purpose in either the English or Sinhala content. They disrupt the readability.",
+          "suggestion": "Remove the unnecessary XML tags. The content should be rendered as plain text."
         }
       ],
       "approved_at": null
@@ -232,13 +250,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'жели да подели са вама контакт госта' is not a natural or accurate translation of 'wants to share with you the contact of the guest.'  'Жели' is archaic and doesn't convey 'wants' correctly.  'Са вама' is also not standard Serbian. The best equivalent of 'wants to share with you' would be 'жели да подели са вама'.",
-          "suggestion": "жели да подели са вама контакт госта."
+          "description": "The phrase 'wants to share with you' is not accurately translated. 'Жели да подели са вама' implies a desire, but 'share with you' implies offering. A more accurate translation would be 'позове вас да подели...' or 'позове вас да поделите...'",
+          "suggestion": "позове вас да подели са вама контакт госта."
         },
         {
-          "type": "grammatical",
-          "description": "The sentence structure and word order in the translation are slightly awkward and not idiomatic for standard Serbian. While understandable, it lacks the flow of natural Serbian.",
-          "suggestion": "жели да подели са вама контакт госта."
+          "type": "grammar",
+          "description": "The pronoun 'вама' is archaic and less common in modern Serbian.  'Теби' is generally preferred.",
+          "suggestion": "жели да подели са теби контакт госта."
         }
       ],
       "approved_at": null
@@ -252,13 +270,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'konuğun iletişim bilgilerini' is a bit awkward. 'Misafir' is a more common and natural word for 'guest' in this context.",
-          "suggestion": "Use 'Misafir' instead of 'Konuğun'. A better translation would be: '<1>{{displayName}}</1> sizinle misafirin iletişim bilgilerini paylaşmak istiyor.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -273,8 +285,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets <1> and </1> are present in the Vietnamese translation, mirroring the English. This might not be necessary or idiomatic in Vietnamese and could indicate a formatting issue related to how the translation was processed or intended to be displayed.",
-          "suggestion": "Remove the <1> and </1> tags from the Vietnamese translation. The content should be presented directly as \"{{displayName}} muốn chia sẻ với bạn thông tin liên hệ của khách.\""
+          "description": "The opening and closing tags '<1>' are not correctly rendered in the Vietnamese translation. They should either be removed or properly formatted according to the intended context.",
+          "suggestion": "Remove the tags '<1>' and '</1>' from the translation, or adjust them based on the platform's specific tag requirements."
         }
       ],
       "approved_at": null
@@ -282,13 +294,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The opening and closing tags <1> are present in both the English and Chinese versions, but they don't seem to serve a specific purpose and might be unnecessary.",
-          "suggestion": "Consider removing the <1> tags if they are just placeholders or have no functional meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

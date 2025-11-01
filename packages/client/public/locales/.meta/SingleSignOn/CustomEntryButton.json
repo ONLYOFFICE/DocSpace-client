@@ -3,7 +3,7 @@
   "content": "Custom login button caption",
   "content_en_sha1_hash": "f5f09f9a9e14e9be404be171d68c52364d62b9c9",
   "created_at": "2025-05-19T21:30:50.073Z",
-  "updated_at": "2025-05-21T02:15:45.852Z",
+  "updated_at": "2025-10-02T08:48:56.522Z",
   "comment": {
     "text": "This translation key is used for the caption of a custom login button, which allows users to customize the label displayed on the login form. It appears as part of an SSO settings page and can be translated to provide a localized label for this feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 92,
+      "line_number": 85,
       "context": "return (\n <StyledWrapper>\n <UploadXML />\n \n <SsoFormField\n labelText={t(\"CustomEntryButton\")}\n name=\"spLoginLabel\"\n placeholder={t(\"Settings:SingleSignOn\")}\n tabIndex={4}\n tooltipContent={<Text fontSize=\"12px\">{t(\"CustomEntryTooltip\")}</Text>}\n tooltipClass=\"custom-entry-tooltip icon-button\"",
       "module": "/packages/client"
     }
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'تخصيص تسمية زر تسجيل الدخول' is a literal translation of 'Custom login button caption'. A more natural and user-friendly translation would be something like 'عنوان زر تسجيل دخول مخصص' or 'وصف زر تسجيل الدخول المخصص'. The original English phrase implies a caption or label for a custom button, and the Arabic translation is more of a description of a customized login button itself.",
-          "suggestion": "عنوان زر تسجيل دخول مخصص"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fərdi giriş düyməsinin başlığı\" is a literal translation of 'Custom login button caption'. While understandable, it's a bit clunky. A more natural-sounding translation for a button caption would focus on the action the button performs. It lacks the 'Custom' flavor.",
-          "suggestion": "Xüsusi giriş"
+          "description": "The translation 'Fərdi giriş düyməsinin başlığı' is a literal translation of 'Custom login button caption' but isn't the most natural way to express it in Azerbaijani. 'Custom' implies a tailored or personalized button, and 'başlığı' (caption/title) is a bit too formal. A more appropriate translation would convey the idea of a personalized login button.",
+          "suggestion": "Xüsusi giriş düyməsi etiketi"
         }
       ],
       "approved_at": null
@@ -51,25 +45,31 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Персонализиран надпис на бутона за влизане' is a bit verbose and literal. While technically correct, it's not the most natural phrasing for a button caption. 'Персонализиран бутон за вход' or 'Собствен бутон за влизане' would be more concise and idiomatic.",
+          "suggestion": "Consider 'Персонализиран бутон за вход' or 'Собствен бутон за влизане'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vlastní titulek přihlašovacího tlačítka' is a very literal translation of 'Custom login button caption'. It's grammatically correct, but less natural sounding in Czech. A more idiomatic translation would be something like 'Vlastní popis tlačítka pro přihlášení' or 'Popis vlastního tlačítka pro přihlášení'.",
-          "suggestion": "Vlastní popis tlačítka pro přihlášení"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Benutzerdefinierte Beschriftung der Anmeldeschaltfläche' is overly literal and somewhat awkward. While technically correct, it doesn't flow naturally in German.",
+          "suggestion": "A more natural translation would be 'Benutzerdefinierte Anmeldeschaltflächentext' or 'Eigener Anmeldetext'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -90,13 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Mukautetun sisäänkirjautumispainikkeen teksti' is overly literal and verbose. While technically correct, it doesn't convey the brevity and clarity expected for a button caption. 'Custom login button caption' implies a simple label for the button itself.",
-          "suggestion": "Sisäänkirjautuspainike"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation is quite long and might be truncated on smaller screens or button sizes. A shorter caption is preferable.",
-          "suggestion": "Sisäänkirjautuspainike"
+          "description": "The translation \"Mukautetun sisäänkirjautumispainikkeen teksti\" is a bit too literal and verbose for a button caption. It translates to 'Text of a custom login button'. A shorter, more natural phrasing would be preferred for a button caption.",
+          "suggestion": "Kirjaudu sisään (Mukautettu)"
         }
       ],
       "approved_at": null
@@ -113,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Հատուկ մուտքի կոճակի վերնագիր' is too literal. 'Custom login button caption' implies a label or text for a custom login button. A more natural translation would emphasize that aspect. 'Տարածված մուտքի կոճակի լեյբլ' or 'Հատուկ մուտքի կոճակի լեյբլ' would be more appropriate.",
-          "suggestion": "Տարածված մուտքի կոճակի լեյբլ"
+          "description": "The translation 'Հատուկ մուտքի կոճակի վերնագիր' (Hatuk mut'ki kochak verhnagir) is a literal translation of 'Custom login button caption'. A more natural and idiomatic Armenian translation for 'Custom login button caption' might be something like 'Պատվերով մուտքի կոճակ' (Patverov mut'ki kochak) or 'Հատուկ մուտքի կոճակ' (Hatuk mut'ki kochak), depending on the desired nuance. The current translation is a bit clunky.",
+          "suggestion": "Պատվերով մուտքի կոճակ"
         }
       ],
       "approved_at": null
@@ -143,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ຄຳບັນຍາຍປຸ່ມເຂົ້າສູ່ລະບົບແບບກຳນົດເອງ\" is a literal translation and may be overly verbose for a button caption. It could be shortened for better usability. While technically correct, it's not ideal for a button label.",
-          "suggestion": "Consider a shorter, more user-friendly option like \"ປຸ່ມເຂົ້າສູ່ລະບົບກຳນົດເອງ\" or \"ປຸ່ມເຂົ້າສູ່ລະບົບແບບກຳມ້າງ\"."
+          "description": "The Lao translation 'ຄຳບັນຍາຍປຸ່ມເຂົ້າສູ່ລະບົບແບບກຳນົດເອງ' is a very literal translation of 'Custom login button caption.' It's a bit clunky and doesn't flow naturally in Lao. A more natural phrasing would be something like 'ປຸ່ມເຂົ້າສູ່ລະບົບຕາມຄວາມຕ້ອງການ' or 'ປຸ່ມເຂົ້າສູ່ລະບົບແບບພິເສດ'.",
+          "suggestion": "ປຸ່ມເຂົ້າສູ່ລະບົບຕາມຄວາມຕ້ອງການ"
         }
       ],
       "approved_at": null
@@ -155,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pielāgots pieteikšanās pogas paraksts' is a literal translation and doesn't quite capture the essence of 'Custom login button caption'. It's a bit clunky. A more natural-sounding translation might be better.",
-          "suggestion": "Ievadītais pieteikšanās pogas nosaukums"
+          "description": "The translation 'Pielāgots pieteikšanās pogas paraksts' is overly literal and doesn't capture the intended meaning of 'Custom login button caption.' A more natural translation would convey the idea of a button that's been personalized or customized.",
+          "suggestion": "Personalizētas pieteikšanās pogas nosaukums"
         }
       ],
       "approved_at": null
@@ -164,7 +159,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aangepaste aanmeldingsknop bijschrift' is too literal. 'Bijschrift' typically refers to a caption accompanying an image or figure, not a button's text.  A more natural translation for a custom login button caption would be something like 'Eigen aanmeldingsknop' or 'Aangepaste aanmeldknop'.",
+          "suggestion": "Eigen aanmeldingsknop"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -179,13 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Legenda dos botões personalizados para iniciar sessão' is too literal and verbose for a button caption. It doesn't convey the core meaning concisely. 'Legenda' isn't ideal for a button caption.",
-          "suggestion": "Consider a more concise and user-friendly option like 'Botão Personalizado' or 'Login Personalizado'."
+          "description": "The translation \"Legenda dos botões personalizados para iniciar sessão\" is overly verbose and doesn't directly convey the meaning of 'Custom login button caption'. A more concise and accurate translation would focus on the 'custom button' aspect.",
+          "suggestion": "Botão de login personalizado"
         },
         {
           "type": "formatting",
-          "description": "Button captions are usually short and impactful. The current translation is quite long and might be truncated or difficult to read on smaller screens.",
-          "suggestion": "Prioritize brevity. A shorter caption is preferable."
+          "description": "The translation includes \"para iniciar sessão\" which is redundant and can be removed for better clarity and conciseness in a caption. Captions are typically short.",
+          "suggestion": "Botão de login personalizado"
         }
       ],
       "approved_at": null
@@ -202,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Etichetă de buton de conectare particularizată' is a literal translation that might sound awkward in Romanian. While technically correct, it's not the most natural phrasing. 'Particularizată' implies customization, which might not always be the intended meaning. A more fluent translation might be needed depending on the context.",
-          "suggestion": "Consider alternatives like 'Text buton conectare personalizat' or 'Descriere buton conectare personalizat' depending on the exact UI element."
+          "description": "The translation 'Etichetă de buton de conectare particularizată' is a literal translation of 'Custom login button caption' but lacks the implied meaning of a label for a button. While technically correct, it's not the most natural phrasing in Romanian. It sounds slightly formal and clunky.",
+          "suggestion": "Consider 'Text pentru buton de autentificare personalizat' or 'Descriere buton autentificare personalizat' for a more natural and user-friendly translation."
         }
       ],
       "approved_at": null
@@ -214,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Пользовательская надпись для кнопки входа:' is overly literal and not idiomatic. It translates to 'Custom caption for the login button:' which sounds awkward in Russian. A more natural phrasing would be needed.",
-          "suggestion": "Вход (пользовательская кнопка)"
+          "description": "The translation 'Пользовательская надпись для кнопки входа:' is overly literal and not idiomatic. It translates to 'Custom caption for login button:'. A more natural phrasing would be something like 'Текст для кнопки входа' (Text for login button) or 'Надпись для кнопки входа' (Caption for login button).",
+          "suggestion": "Текст для кнопки входа"
         }
       ],
       "approved_at": null
@@ -226,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අභිරුචි පිවිසුම් බොත්තමේ ශ්‍රීර්ෂය\" (abiruchi pivisum bottame shreeshay) is a literal translation but doesn't convey the meaning of 'Custom login button caption' naturally in Sinhala. It reads as 'Custom entry button's header'.",
-          "suggestion": "Consider a more natural phrasing like \"අභිරුචි ලොග් බොත්තම් පදනය\" (abiruchi log bottam padanya) which translates to 'Custom login button text/caption' or \"අභිරුචි පිවිසුම් බොත්තම් ටීඨිල්ල\" (abiruchi pivisum bottam teetiyalla) - 'Custom login button title'."
+          "description": "The translation 'අභිරුචි පිවිසුම් බොත්තමේ ශ්‍රීර්ෂය' is a literal translation of 'Custom login button caption' and while technically correct, it's somewhat clunky in Sinhala. A more natural phrasing would be something like 'පිටුවූරූ ලඝන බොත්තම' (Pitawaru logana bottama) or 'අභිරුචි ලඝන බොත්තම' (Abhiruchi logana bottama).",
+          "suggestion": "Consider 'පිටුවූරූ ලඝන බොත්තම' or 'අභිරුචි ලඝන බොත්තම' for a more natural-sounding translation."
         }
       ],
       "approved_at": null
@@ -241,7 +242,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prilagojen naslov gumba za prijavo' is a bit literal and verbose. While technically correct, it doesn't capture the concise nature of the English 'Custom login button caption'. A more natural and concise translation might be better.",
+          "suggestion": "Potrditev gumba za prijavo"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -249,9 +256,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Прилагођена ознака дугмета за пријављивање' is quite literal and a bit clunky. While technically correct, it doesn't flow naturally in Serbian. A more natural phrasing might convey the meaning more effectively.",
-          "suggestion": "Consider a more concise and natural translation like 'Прилагођено дугме за пријаву' or 'Корисничко дугме за пријаву'."
+          "type": "spelling",
+          "description": "The word 'Прилагођена' (Prilagodjena) is correctly spelled, but could potentially be slightly more natural depending on the intended tone.",
+          "suggestion": "Consider 'Корисничка ознака дугмета за пријављивање' (Korisnička oznaka dugmeta za prijavljivanje) for a more commonly used phrasing, if appropriate for the context."
         }
       ],
       "approved_at": null
@@ -261,9 +268,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Prilagođena oznaka dugmeta za prijavljivanje\" is a bit literal and verbose. A more natural and concise translation would improve readability and user experience. \"Custom login button caption\" doesn't necessarily need to be translated as \"oznaka dugmeta\".",
-          "suggestion": "Prikupljena napomena o prijavljivanje"
+          "type": "spelling",
+          "description": "The word 'prijavljivanje' is often written as 'prijavu'.",
+          "suggestion": "Prilagođena oznaka dugmeta za prijavu"
         }
       ],
       "approved_at": null
@@ -274,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Özel oturum açma düğmesi başlığı' is too literal and doesn't flow naturally in Turkish. 'Başlığı' (caption) is redundant.",
-          "suggestion": "Özel giriş butonu"
+          "description": "The translation 'Özel oturum açma düğmesi başlığı' is overly literal and doesn't convey the intended meaning of 'Custom login button caption' naturally in Turkish.  'Başlığı' (caption) is redundant.  A more natural phrasing would be more concise.",
+          "suggestion": "Özel giriş butonu yazısı"
         }
       ],
       "approved_at": null
@@ -286,8 +293,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Налаштовуваний надпис на кнопці входу' is too literal and doesn't flow naturally in Ukrainian. 'Custom login button caption' implies a label for a custom button used for login, not the properties of the button itself.",
-          "suggestion": "Приклад: 'Текст на кнопці користувача' or 'Підпис на кнопці користувача'. A better translation would focus on the label/text displayed on the custom login button, not describe the button's customizability."
+          "description": "The translation 'Налаштовуваний надпис на кнопці входу' is overly literal and doesn't flow naturally in Ukrainian. While technically correct, it's cumbersome.",
+          "suggestion": "Розгляньте більш природний переклад, наприклад: 'Спеціальний текст кнопки' або 'Текст налаштування кнопки'."
         }
       ],
       "approved_at": null
@@ -298,8 +305,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Chú thích nút đăng nhập tùy chỉnh' is a literal translation but doesn't quite capture the meaning of 'caption'. 'Caption' refers to the text displayed *on* the button. A more natural translation would imply that, like 'Văn bản trên nút đăng nhập tùy chỉnh'.",
-          "suggestion": "Văn bản trên nút đăng nhập tùy chỉnh"
+          "description": "The translation \"Chú thích nút đăng nhập tùy chỉnh\" is a literal translation and doesn't fully convey the meaning of 'Custom login button caption'. It is a bit clunky. A more natural and concise translation would be better.",
+          "suggestion": "Nút đăng nhập tùy chỉnh"
         }
       ],
       "approved_at": null

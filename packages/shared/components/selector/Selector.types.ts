@@ -70,6 +70,7 @@ export type TInfoBar = {
 };
 
 export type InfoBarProps = {
+  ref?: React.RefObject<HTMLDivElement | null>;
   visible: boolean;
   className?: string;
 };
@@ -319,7 +320,7 @@ export type AccessSelectorProps = Omit<
   TWithAccessRightsProps,
   "withAccessRights"
 > & {
-  footerRef: React.RefObject<HTMLDivElement>;
+  footerRef: React.RefObject<HTMLDivElement | null>;
 };
 
 // footer input
@@ -410,6 +411,7 @@ export type SelectorProps = TSelectorHeader &
 
     isSSR?: boolean;
     selectedItem?: TSelectorItem | null; // no multiSelect only
+    dataTestId?: string;
   };
 
 export type BodyProps = TSelectorInfo &
@@ -492,6 +494,7 @@ type TSelectorItemEmpty = {
 
   isRoomsOnly?: undefined;
   createDefineRoomType?: undefined;
+  isSystem?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -504,6 +507,8 @@ export type TSelectorItemUser = MergeTypes<
     isCollaborator: boolean;
     isRoomAdmin: boolean;
     avatar: string;
+    avatarSmall?: string;
+    userName?: string;
     hasAvatar: boolean;
     role: AvatarRole;
     userType: EmployeeType;
@@ -554,6 +559,8 @@ export type TSelectorItemRoom = MergeTypes<
     color?: string;
     iconOriginal?: string;
     cover?: ICover;
+    tags?: string[];
+    title?: string;
   }
 >;
 
@@ -561,6 +568,7 @@ export type TSelectorItemGroup = MergeTypes<
   TSelectorItemEmpty,
   {
     isGroup: boolean;
+    isSystem?: boolean;
     name: string;
   }
 >;
@@ -616,6 +624,9 @@ export type TSelectorItem = TSelectorItemType & {
   lifetimeTooltip?: string | null;
   viewUrl?: string;
   isTemplate?: boolean;
+  templateAccess?: ShareAccessRights;
+  templateIsOwner?: boolean;
+  isSeparator?: boolean;
 };
 
 export type Data = {

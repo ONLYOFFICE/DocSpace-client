@@ -1,0 +1,272 @@
+{
+  "key_path": "WhiteLabel",
+  "content": "Logo settings",
+  "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
+  "created_at": "2025-05-26T07:15:49.607Z",
+  "updated_at": "2025-10-13T19:30:25.655Z",
+  "comment": {
+    "text": "The \"Logo settings\" translation key is used to display a description for a logo-related setting in the portal settings. It appears in the branding section of the portal and might be seen in a header or on a button related to logo customization. Translators should provide a clear and concise text that explains the purpose of logo settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-26T08:01:52.421Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 117,
+      "context": "{\n id: \"portal-settings_catalog-white-label\",\n key: \"0-1-1\",\n icon: \"\",\n link: \"white-label\",\n tKey: \"Common:WhiteLabel\",\n },\n {\n id: \"portal-settings_catalog-company-info-settings\",\n key: \"0-1-2\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 60,
+      "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}\n url={`${baseUrl}/branding/white-label`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
+      "line_number": 48,
+      "context": "} from \"../../../components/text-input\";\n import { Button, ButtonSize } from \"../../../components/button\";\n import { useTheme } from \"../../../hooks/useTheme\";\n \n import { NotAvailable } from \"./NotAvailable\";\n import { IHeaderProps } from \"./WhiteLabel.types\";\n import styles from \"./WhiteLabel.module.scss\";\n \n export const WhiteLabelHeader = ({\n showNotAvailable,\n isSettingPaid,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/management/src/lib/index.ts",
+      "line_number": 61,
+      "context": "case \"encrypt-data\":\n return { key: t(\"Common:Settings\"), isSubPage: false };\n case \"payments\":\n return { key: t(\"Common:PaymentsTitle\"), isSubPage: false };\n case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":",
+      "module": "/packages/management"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Logo Einstellungen' is too literal. A more natural German translation would be 'Logoeinstellungen' or 'Logo-Einstellungen'. The direct translation doesn't flow well in German.",
+          "suggestion": "Logoeinstellungen"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation \"Definições de login\" translates to \"Login settings\" which is not the same as \"Logo settings\". It implies login configurations instead of logo customization.",
+          "suggestion": "Configurações de logotipo"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ලාංඡනය' (Laanchchhana) is the correct spelling for 'Logo'.",
+          "suggestion": "No change needed. The spelling is correct."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ලාංඡනයේ සැකසුම්' (Laanchchhanae Saekasuum) is grammatically correct and means 'Logo Settings'. However, a more natural phrasing in Sinhala could potentially be 'ලාංඡන සැකසුම්' (Laanchchhana Saekasuum) - removing the locative case marker.",
+          "suggestion": "Consider 'ලාංඡන සැකසුම්' (Laanchchhana Saekasuum) for a slightly more natural phrasing."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Логотип подешавања\" doesn't accurately convey \"Logo settings\". \"Подешавања\" translates to \"settings\", but \"Логотип подешавања\" is a bit clunky. A better translation would be more direct.",
+          "suggestion": "Логотип подесиоца"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Логотип подешавања\" sounds unnatural in Serbian. A more natural phrasing would use a different grammatical structure.",
+          "suggestion": "Подешавања логотипа"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Cài đặt Logo\" is understandable, a more natural and common translation for 'Logo settings' would be 'Thiết lập logo'. 'Cài đặt' often implies installation, which isn't the intended meaning here.",
+          "suggestion": "Thiết lập logo"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

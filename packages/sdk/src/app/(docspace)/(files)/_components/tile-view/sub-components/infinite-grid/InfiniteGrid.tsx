@@ -32,10 +32,9 @@ import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { getCountTilesInRow } from "@docspace/shared/utils";
 import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
-import styles from "./InfiniteGrid.module.scss";
-
 import type { InfiniteGridProps } from "@/app/(docspace)/(files)/_components/tile-view/TileView.types";
 import classNames from "classnames";
+import styles from "./InfiniteGrid.module.scss";
 
 const HeaderItem = ({
   children,
@@ -63,8 +62,12 @@ const Card = ({ children }: { children: React.ReactNode }) => {
 
     if (!React.isValidElement(child)) return titleHeight;
 
-    const isFile = child?.props?.className?.includes("file");
-    const isFolder = child?.props?.className?.includes("folder");
+    const isFile = (child?.props as { className: string })?.className?.includes(
+      "file",
+    );
+    const isFolder = (
+      child?.props as { className: string }
+    )?.className?.includes("folder");
 
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;
@@ -104,8 +107,15 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
 
   const [countTilesInRow, setCountTilesInRow] = useState(0);
 
-  let cards: React.ReactElement[] = [];
-  const list: React.ReactElement[] = [];
+  let cards: React.ReactElement<{
+    children: React.ReactElement<{
+      className?: string;
+    }>;
+  }>[] = [];
+
+  const list: React.ReactElement<{
+    className?: string;
+  }>[] = [];
 
   const addItemToList = (key: string, cls: string, clear?: boolean) => {
     list.push(
@@ -121,8 +131,8 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
     const listItem = list[list.length - 1];
 
     const isFile = useTempList
-      ? card.props.children.props.className.includes("file")
-      : listItem.props.className.includes("isFile");
+      ? card?.props?.children?.props?.className?.includes("file")
+      : listItem?.props?.className?.includes("isFile");
 
     return isFile ? "isFile" : "isFolder";
   };
@@ -147,38 +157,45 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
   });
 
   if (children && React.isValidElement(children)) {
-    React.Children.map(children.props.children, (child) => {
-      if (child) {
-        if (child?.props["data-type"] === "header") {
-          // If cards is not empty then put the cards into the list
-          if (cards.length) {
-            const type = checkType();
+    React.Children.map(
+      (children.props as { children: React.ReactNode }).children,
+      (child) => {
+        if (child) {
+          const childElement = child as React.ReactElement<{
+            "data-type"?: string;
+            className?: string;
+          }>;
+          if (childElement.props["data-type"] === "header") {
+            // If cards is not empty then put the cards into the list
+            if (cards.length) {
+              const type = checkType();
 
-            addItemToList(`last-item-of_${type}`, type, true);
+              addItemToList(`last-item-of_${type}`, type, true);
+            }
+
+            list.push(
+              <HeaderItem
+                className={list.length ? "files_header" : "folder_header"}
+                key="header_item"
+              >
+                {childElement}
+              </HeaderItem>,
+            );
+          } else {
+            const isFile = childElement.props?.className?.includes("file");
+            const cls = isFile ? "isFile" : "isFolder";
+
+            if (cards.length && cards.length === countTilesInRow) {
+              const listKey = uniqueid("list-item_");
+              addItemToList(listKey, cls, true);
+            }
+
+            const cardKey = uniqueid("card-item_");
+            cards.push(<Card key={cardKey}>{childElement}</Card>);
           }
-
-          list.push(
-            <HeaderItem
-              className={list.length ? "files_header" : "folder_header"}
-              key="header_item"
-            >
-              {child}
-            </HeaderItem>,
-          );
-        } else {
-          const isFile = child?.props?.className?.includes("file");
-          const cls = isFile ? "isFile" : "isFolder";
-
-          if (cards.length && cards.length === countTilesInRow) {
-            const listKey = uniqueid("list-item_");
-            addItemToList(listKey, cls, true);
-          }
-
-          const cardKey = uniqueid("card-item_");
-          cards.push(<Card key={cardKey}>{child}</Card>);
         }
-      }
-    });
+      },
+    );
   }
 
   const type = checkType(!!cards.length);

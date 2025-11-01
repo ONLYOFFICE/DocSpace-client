@@ -3,7 +3,7 @@
   "content": "We found <1>{{users}} users</1> without emails. You can fill their emails or continue without this action.",
   "content_en_sha1_hash": "d718ba1093dbe90e13bd71f2648b6016e01d6581",
   "created_at": "2025-05-19T21:30:50.302Z",
-  "updated_at": "2025-05-21T05:28:09.280Z",
+  "updated_at": "2025-06-30T12:20:31.425Z",
   "comment": {
     "text": "This translation key is used to display a message about users without emails who have not had their email addresses filled in. It will be displayed as a notification or alert when data is being imported into a system that requires email addresses for all users.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/NoEmailUsersBlock.tsx",
-      "line_number": 33,
-      "context": "import { NoEmailUsersProps } from \"../types\";\n \n export const NoEmailUsersBlock = ({ t, users }: NoEmailUsersProps) => {\n return (\n <p className=\"users-without-email\">\n <Trans t={t} ns=\"Settings\" i18nKey=\"AccountsWithoutEmails\">\n We found <b>{{ users }} users</b> without emails. You can fill their\n emails or continue without this action.\n </Trans>\n </p>\n );",
+      "line_number": 36,
+      "context": "return (\n <p className=\"users-without-email\">\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"AccountsWithoutEmails\"\n values={{ users }}\n components={{ 1: <b /> }}\n />\n </p>\n );",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"الخاصة بهم\" (al-khaassa bihim) literally translates to \"their own\" and isn't the most natural way to express \"their\" in this context. A more appropriate phrasing would be something like \"لهم\" (lahum) which means 'for them'.",
-          "suggestion": "وجدنا <1>{{users}}مستخدمين</1> بدون بريد الكتروني. يمكنك إضافة البريد الإلكتروني لهم أو المتابعة دون هذا الإجراء."
+          "description": "The phrase 'You can fill their emails' is translated as 'يمكنك إضافة البريد الإلكتروني الخاصة بهم'. While technically correct, a more natural and idiomatic translation would be 'يمكنك إدخال بريدهم الإلكتروني' or 'يمكنك إدخال عنوان بريدهم الإلكتروني'. The current phrasing implies adding emails *to* them, rather than adding *their* emails.",
+          "suggestion": "يمكنك إدخال بريدهم الإلكتروني"
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic translation maintains the angle brackets `<1>{{users}}</1>` from the English, which isn't standard practice in Arabic UI text.  It's cleaner to remove these or adapt the formatting to be more suitable for Arabic text direction (right-to-left).",
+          "suggestion": "وجدنا {{users}} مستخدمين بدون بريد الكتروني. يمكنك إضافة البريد الإلكتروني الخاصة بهم أو المتابعة دون هذا الإجراء."
         }
       ],
       "approved_at": null
@@ -41,14 +46,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"E-poçt ünvanı olmayan\" is a literal translation of \"without emails.\" While understandable, it's less natural in Azerbaijani. A more natural phrasing would be something like \"E-poçtu olmayan\" or \"E-poçtü olmayan\" (although the latter is less common).",
-          "suggestion": "Consider using a more idiomatic phrase like \"E-poçtu olmayan\" or revising the English to better align with natural Azerbaijani phrasing."
+          "type": "formatting",
+          "description": "The opening tag `<1>` and closing tag `</1>` are inconsistent with English. In English, it's `<1>{{users}}</1>`. The Azerbaijani version has `<1>{{users}}</1>`. This could cause rendering issues.",
+          "suggestion": "Change the Azerbaijani tag to `<1>{{users}}</1>` to match the English structure."
         },
         {
-          "type": "formatting",
-          "description": "The `<1>{{users}}</1>` tag is consistent between English and Azerbaijani, which is good, but the placement and style of the tag need to be verified to ensure it matches the overall design and implementation of the application where this text will be displayed. This is beyond the scope of a simple translation verification, but should be confirmed.",
-          "suggestion": "Verify that the formatting and tag placement aligns with the application's design and implementation."
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'E-poçt ünvanı olmayan' is a bit wordy. A more natural phrasing for 'without emails' would be something like 'e-poçtü olmayan' or 'e-poçtü yox olan'.",
+          "suggestion": "Consider using 'e-poçtü olmayan' or 'e-poçtü yox olan' for a more natural flow."
         }
       ],
       "approved_at": null
@@ -71,13 +76,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle bracket tag <1> is present in both the English and German texts. It's unclear what its purpose is, but it should be consistent or removed.",
-          "suggestion": "Review and potentially remove the <1> tags if they are not functionally required. If they are, ensure they are handled correctly in the implementation."
+          "description": "The XML tags <1> and </1> are not consistently translated. The word 'Benutzer' is inside the opening tag but nothing else is.",
+          "suggestion": "Ensure consistent translation within the XML tags. Consider translating the tags themselves, or removing the tags altogether if they are purely structural."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'Benutzer' is a valid translation for 'users', in this context, 'Nutzer' might be a more common and natural-sounding translation, especially in user interface contexts.",
-          "suggestion": "Consider replacing 'Benutzer' with 'Nutzer'."
+          "description": "The English word 'emails' is translated as 'E-Mails'. While understandable, the more common and preferred translation would be 'E-Mail-Adressen'.",
+          "suggestion": "Change 'E-Mails' to 'E-Mail-Adressen'."
         }
       ],
       "approved_at": null
@@ -85,13 +90,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation maintains the HTML tags `<1>` and `</1>` which should be reviewed for consistency with other translations and overall design. It's unclear why these are present.",
-          "suggestion": "Determine if the HTML tags are intentional and necessary. If not, remove them."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -100,8 +99,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Puede completar sus correos electrónicos\" is not the most natural way to express \"You can fill their emails.\" A better translation would convey the action of adding/entering the email addresses.",
-          "suggestion": "Puede añadir sus correos electrónicos"
+          "description": "The phrase 'You can fill their emails' is an awkward translation. 'Fill their emails' doesn't directly translate to how a user would typically interact with this function. A more natural phrasing would be 'You can add their emails' or 'You can enter their emails'.",
+          "suggestion": "Puede completar sus correos electrónicos -> Puede añadir sus correos electrónicos / Puede ingresar sus correos electrónicos"
         }
       ],
       "approved_at": null
@@ -112,13 +111,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The closing tag </1> is misplaced and disrupts the flow of the sentence. It should be placed after the number of users.",
+          "description": "The trailing space after 'käyttäjää' is unnecessary and impacts readability.",
           "suggestion": "Löysimme <1>{{users}} käyttäjää</1> ilman sähköposteja. Voit lisätä heidän sähköpostinsa tai jatkaa lisäämättä."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'käyttäjää' (users) is grammatically correct in the accusative case, 'käyttäjiä' (users) might be more natural and flow better in this context. It emphasizes the collective group.",
-          "suggestion": "Löysimme <1>{{users}} käyttäjiä </1> ilman sähköposteja. Voit lisätä heidän sähköpostinsa tai jatkaa lisäämättä."
         }
       ],
       "approved_at": null
@@ -129,13 +123,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"sans avoir les ajouter\" is grammatically incorrect. It should express the action of adding the email addresses.",
+          "description": "The phrase 'sans avoir les ajouter' is grammatically incorrect. It should describe the action of adding the email addresses.",
           "suggestion": "sans les ajouter"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'You can fill their emails' in English translates better as 'You can add their email addresses', which is missing in the French translation. The current phrasing lacks clarity.",
-          "suggestion": "Vous pouvez ajouter leurs adresses e-mail."
+          "description": "The phrase 'ajouter leurs adresses e-mail' is not the best translation for 'fill their emails'. A more accurate translation would convey the action of completing/providing missing email addresses.",
+          "suggestion": "compléter leurs adresses e-mail"
         }
       ],
       "approved_at": null
@@ -146,18 +140,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"emails\" is not accurate. \"Էլփոստի\" translates to \"email's\" or \"of email\" rather than just \"emails\".",
+          "description": "The word 'users' is translated as 'օգտվողներ', which is correct. However, the phrase 'without emails' is translated as 'առանց էլփոստի'.  A more natural and accurate translation would be 'առանց էլեկտրոնային փոստի' or 'առանց էլ․ փոստի'.",
           "suggestion": "Մենք գտանք <1>{{users}} օգտվողներ</1> առանց էլեկտրոնային փոստի:"
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"fill their emails\" is not as natural. \"Լրացնել նրանց նամակները\" literally translates to 'fill their letters'.",
-          "suggestion": "Դուք կարող եք լրացնել նրանց էլեկտրոնային փոստերը կամ շարունակել առանց այս գործողության:"
-        },
-        {
-          "type": "formatting",
-          "description": "The original content uses <1> and </1> for dynamic content markers. These markers should be maintained in the translated version.",
-          "suggestion": "The provided translation already maintains the formatting correctly."
+          "description": "The phrase 'You can fill their emails' is translated as 'Դուք կարող եք լրացնել նրանց նամակները'. 'Նամակները' (letters) is not quite right. It should be 'էլ․ հասցեները' (email addresses) or 'էլ․ փոստերը'.",
+          "suggestion": "Մենք գտանք <1>{{users}} օգտվողներ</1> առանց էլեկտրոնային փոստի: Դուք կարող եք լրացնել նրանց էլ․ հասցեները կամ շարունակել առանց այս գործողության:"
         }
       ],
       "approved_at": null
@@ -168,8 +157,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'You can fill their emails' is translated as 'Puoi aggiungere le loro email'. While 'aggiungere' can mean 'to add', in this context 'fill' implies completion, and a more accurate translation would be 'Puoi completare le loro email' or 'Puoi inserire le loro email'.",
-          "suggestion": "Puoi completare le loro email"
+          "description": "The phrase \"aggiungere le loro email\" is not the best translation for \"fill their emails\". It literally translates to 'add their emails'. A more natural translation would be 'compilare le loro email' or 'inserire le loro email'.",
+          "suggestion": "Abbiamo trovato <1>{{users}} utenti</1> senza email. Puoi compilare le loro email o saltare questa azione."
         }
       ],
       "approved_at": null
@@ -179,14 +168,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The tag `<1>{{users}}</1>` is not closed correctly in the Japanese translation. It appears to be missing a closing tag.",
-          "suggestion": "メールアドレスのない<1>{{users}}</1>ユーザー"
+          "type": "incorrect_translation",
+          "description": "The phrase \"メールアドレスのない\" (meeru adoresu no nai) is a bit stiff and unnatural. A more natural way to say 'without emails' would be something like 'メールアドレスが設定されていない' (meeru adoresu ga settingu sarete inai) or 'メールアドレスがない' (meeru adoresu ga nai).",
+          "suggestion": "メールアドレスが設定されていない<1>{{users}}ユーザー</1>が見つかりました。メールアドレスを入力するか、このアクションを実行せずに続行することができます。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'continue without this action' might be better translated to convey a more natural and user-friendly tone. A literal translation isn't necessarily the best in this context.",
-          "suggestion": "メールアドレスを入力するか、この操作をスキップして続行することができます。"
+          "type": "formatting",
+          "description": "The tag `<1>` is not a standard tag and seems misplaced. It's assumed to be a placeholder. Standard placeholders for translations should be placed inside the `{{...}}` tags. ",
+          "suggestion": "メールアドレスが設定されていない{{users}}ユーザーが見つかりました。メールアドレスを入力するか、このアクションを実行せずに続行することができます。"
         }
       ],
       "approved_at": null
@@ -197,13 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"이해당 사용자의 메일을 입력하거나\" is awkward and doesn't accurately convey \"You can fill their emails\". A more natural translation would be \"이 사용자들의 이메일 주소를 입력하거나\"",
-          "suggestion": "이 사용자들의 이메일 주소를 입력하거나"
+          "description": "The phrase \"이해당 사용자의 메일을 입력하거나\" is awkward and doesn't accurately convey \"You can fill their emails\". A more natural Korean translation would be something like \"사용자의 이메일을 입력하거나\" or \"사용자에게 이메일을 입력하거나\".",
+          "suggestion": "사용자의 이메일을 입력하거나"
         },
         {
           "type": "formatting",
-          "description": "The placement of the number indicator '<1>' and '</1>' seems off and inconsistent with English. It should match the original placement.",
-          "suggestion": "이메일이 없는 <1>{{users}}명의 사용자</1>를 찾았습니다. 이 사용자들의 이메일 주소를 입력하거나 이 작업 없이 계속할 수 있습니다."
+          "description": "The angle bracket placement is inconsistent with the English source. The English source has <1> and </1>. The Korean translation has <1>{{users}}</1>. It should be <1>{{users}}</1> to match.",
+          "suggestion": "Change </1> to </1>"
         }
       ],
       "approved_at": null
@@ -214,13 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ທ່ານສາມາດຕື່ມຂໍ້ມູນໃສ່ອີເມວຂອງເຂົາເຈົ້າ\" is not the most natural way to say 'You can fill their emails'. A more direct and natural translation would be something like 'ທ່ານສາມາດໃສ່ອີເມວໃຫ້ເຂົາເຈົ້າໄດ້'.",
-          "suggestion": "ທ່ານສາມາດໃສ່ອີເມວໃຫ້ເຂົາເຈົ້າໄດ້"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ສືບຕໍ່ໂດຍບໍ່ມີການດໍາເນີນການນີ້\" is a bit clunky. It directly translates to 'continue without this action'. A more natural wording would be 'ສືບຕໍ່ໂດຍບໍ່ຕ້ອງເຮັດຢ່າງນັ້ນ' or 'ສືບຕໍ່ຕໍ່ໄປໄດ້'.",
-          "suggestion": "ສືບຕໍ່ຕໍ່ໄປໄດ້"
+          "description": "The phrase \"ສືບຕໍ່ໂດຍບໍ່ມີການດໍາເນີນການນີ້\" is awkward and doesn't directly translate to 'continue without this action'. It implies a more formal process than the English conveys. A more natural translation would be something like 'ສືບຕໍ່ໂດຍບໍ່ຕ້ອງເຮັດຫຍັງ'.",
+          "suggestion": "ພວກເຮົາພົບເຫັນ <1>{{users}} ຜູ້ໃຊ້</1> ໂດຍບໍ່ມີອີເມວ. ທ່ານສາມາດຕື່ມຂໍ້ມູນໃສ່ອີເມວຂອງເຂົາເຈົ້າຫຼືສືບຕໍ່ໂດຍບໍ່ຕ້ອງເຮັດຫຍັງ."
         }
       ],
       "approved_at": null
@@ -231,13 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"bez e-pasta ziņojumiem\" is a literal translation of \"without emails\" but sounds awkward in Latvian. A more natural phrasing would be \"bez e-pastiem\" or \"kuriem nav e-pasta adrešu\".",
-          "suggestion": "Mēs atradām <1>{{users}} lietotājus</1> bez e-pastiem. Varat aizpildīt e-pasta ziņojumus vai turpināt, neveicot šo darbību."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Varat aizpildīt e-pasta ziņojumus' is a bit verbose and stiff. A simpler phrasing might be more user-friendly.",
-          "suggestion": "Varat pievienot e-pastus vai turpināt, neveicot šo darbību."
+          "description": "The phrase \"bez e-pasta ziņojumiem\" (without email messages) is a literal translation that doesn't quite convey the intended meaning of 'without emails'. A more natural translation would be 'bez e-pastiem'.",
+          "suggestion": "Mēs atradām <1>{{users}} lietotājus</1> bez e-pastiem."
         }
       ],
       "approved_at": null
@@ -248,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'e-mails' should be translated to 'e-mailadressen'. While 'e-mails' is understandable, it's not the most accurate or natural Dutch translation for 'emails'.",
-          "suggestion": "We hebben <1>{{users}} gebruikers</1> zonder e-mailadressen gevonden. U kunt hun e-mailadressen invullen of doorgaan zonder deze actie."
+          "description": "The word 'fill' (invullen) doesn't quite capture the nuance of 'add' or 'provide'. It implies a process of filling in a blank, which isn't precisely what's happening with email addresses.",
+          "suggestion": "We hebben <1>{{users}} gebruikers</1> zonder e-mailadressen gevonden. U kunt hun e-mailadressen toevoegen of doorgaan zonder deze actie."
         }
       ],
       "approved_at": null
@@ -259,9 +238,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'adresów' should be 'adresów e-mail' for clarity and precision. While technically 'adresów' isn't *wrong*, it's less specific.",
-          "suggestion": "adresów e-mail"
+          "type": "formatting",
+          "description": "The Polish translation retains the HTML tags `<1>` and `</1>`, which should ideally be removed or handled appropriately within the application displaying the text.",
+          "suggestion": "Remove or sanitize the HTML tags `<1>` and `</1>` from the translated string."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, the phrase 'dodać ich adresy e-mail' is a bit clunky. A more natural Polish phrasing would be 'wypełnić ich adresy e-mail' or 'wprowadzić ich adresy e-mail'.",
+          "suggestion": "Change 'dodać ich adresy e-mail' to 'wypełnić ich adresy e-mail' or 'wprowadzić ich adresy e-mail'."
         }
       ],
       "approved_at": null
@@ -272,8 +256,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"sem e-mails\" is a literal translation of \"without emails\". A more natural and idiomatic Portuguese translation would be \"sem endereço de e-mail\" or simply \"sem e-mail\".",
+          "description": "The phrase \"sem e-mails\" is a literal translation of \"without emails\" and sounds slightly unnatural in Portuguese. A more natural phrasing would be \"sem endereço de e-mail\" or simply \"sem e-mail\".",
           "suggestion": "Encontramos <1>{{users}} usuários</1> sem endereço de e-mail. Você pode preencher seus e-mails ou continuar sem esta ação."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'seus' (their) referring to emails is slightly awkward. It's understood, but a more natural way to say it would be 'preencher os e-mails' (fill the emails).",
+          "suggestion": "Encontramos <1>{{users}} usuários</1> sem endereço de e-mail. Você pode preencher os e-mails ou continuar sem esta ação."
         }
       ],
       "approved_at": null
@@ -281,7 +270,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'You can fill their emails' is not a natural or idiomatic translation. A better phrasing would reflect 'You can add their email addresses'.",
+          "suggestion": "Você pode adicionar seus endereços de e-mail"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -290,18 +285,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Romanian translation includes a trailing space after 'utilizatori'.",
-          "suggestion": "Remove the trailing space after 'utilizatori'."
+          "description": "The closing tag '</1>' is misplaced and doesn't align with the opening tag '<1>{{users}}'.",
+          "suggestion": "Correct the closing tag to '</1>'. It should be consistently applied."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"fără adrese de e-mail\" is slightly awkward.  A more natural phrasing would be \"fără email\".",
-          "suggestion": "Change \"fără adrese de e-mail\" to \"fără email\"."
+          "type": "grammar",
+          "description": "The phrase 'fără adrese de e-mail' is slightly awkward. While grammatically correct, it could be improved for flow.",
+          "suggestion": "Consider rephrasing to 'fără e-mail' or 'fără adresă de e-mail'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The use of \"acestă\" instead of \"această\" is incorrect. The feminine definite article 'această' is needed.",
-          "suggestion": "Change \"acestă acțiune\" to \"această acțiune\"."
+          "type": "grammar",
+          "description": "The word 'acțiune' in 'fără acestă acțiune' might be better phrased. Using just 'fără aceasta' would be more concise and natural.",
+          "suggestion": "Change 'fără acestă acțiune' to 'fără aceasta'."
         }
       ],
       "approved_at": null
@@ -312,13 +307,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The XML tags <1> and </1> are inconsistent with the English version. The English version uses `{}` for variable substitution.",
-          "suggestion": "Change `<1>{{users}}</1>` to `{{users}}`"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'fill their emails' is translated as 'заполнить их электронные почты'. A more natural translation would be 'указать их электронные почты' or 'добавить их электронные почты'.",
-          "suggestion": "Change 'заполнить их электронные почты' to 'указать их электронные почты' or 'добавить их электронные почты'."
+          "description": "The HTML tags `<1>` and `</1>` are not properly closed in the Russian translation, mirroring the English but potentially causing rendering issues. They should be `<1>` and `</1>`.",
+          "suggestion": "Change `<1>` to `<1>` and `</1>` to `</1>`."
         }
       ],
       "approved_at": null
@@ -329,13 +319,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"පරිශ්‍රීලකයින්\" (parishreelakayin) isn't the most natural or common way to refer to 'users'. A more common and direct translation would be 'වියත්කරුවෝ' (vyathkaruvo) or 'භාවිතකරුවන්' (bhavitakaruvwen).",
-          "suggestion": "Replace 'පරිශ්‍රීලකයින්' with 'වියත්කරුවෝ' or 'භාවිතකරුවන්'."
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelayakayin) is a somewhat formal and less common way to say 'users'. A more natural and common translation would be 'වියත්කරුවන්' (viyathkaruwen) or simply 'භාවිතකරුවන්' (bhavitakaruwen).",
+          "suggestion": "Replace 'පරිශ්‍රීලකයින්' with 'වියත්කරුවන්' or 'භාවිතකරුවන්'."
         },
         {
-          "type": "formatting",
-          "description": "The Sinhala translation preserves the English tags `<1>` and `</1>`. These should be removed from the translated text.",
-          "suggestion": "Remove the English tags `<1>` and `</1>` from the Sinhala text."
+          "type": "incorrect_translation",
+          "description": "The phrase 'වි-තැපෑලක් රහිත' (vi-tapaelak rahita) is a somewhat literal translation of 'without emails'. While understandable, a more natural phrasing in Sinhala would be 'තැපැල් ලිපිනය රහිත' (tapael lipinaya rahita) or 'තැපැල් ලිපිනයක් නොමැති' (tapael lipinayak novamati).",
+          "suggestion": "Replace 'වි-තැපෑලක් රහිත' with 'තැපැල් ලිපිනය රහිත' or 'තැපැල් ලිපිනයක් නොමැති'."
         }
       ],
       "approved_at": null
@@ -346,13 +336,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"kde nie je uvedený e-mail\" (where the email is not listed) is a slightly awkward translation of \"without emails\". A more natural Slovak phrasing would be something like \"bez e-mailov\" or \"s neuvádzanou e-mailovou adresou\".",
-          "suggestion": "Našli sme <1>{{users}} používateľov </1> bez e-mailov. Môžete doplniť ich e-maily alebo pokračovať ďalej."
+          "description": "The phrase \"kde nie je uvedený e-mail\" is a literal translation that doesn't convey the meaning of 'without emails' as clearly as possible.  A more natural Slovak phrasing would be something like 'bez e-mailových adries' or 'ktorí nemajú e-mail'.",
+          "suggestion": "Našli sme <1>{{users}} používateľov </1>, ktorí nemajú e-mail."
         },
         {
           "type": "formatting",
-          "description": "The original English contains `<1>` and `</1>`. These tags are present in the Slovak translation as well. It's important to ensure these tags are handled correctly in the context where this translation is used and that the closing tag `</1>` is indeed needed.  If they represent similar formatting elements it would be helpful to confirm with the client. If not, the closing tag might be superfluous.",
-          "suggestion": "Verify the function of the <1> and </1> tags with the client and adjust the translation accordingly."
+          "description": "The closing bracket <1> isn't aligned with the opening bracket. It's placed directly after the number of users, which makes the sentence awkward to read.",
+          "suggestion": "Našli sme <1>{{users}} používateľov</1>, ktorí nemajú e-mail. Môžete doplniť ich e-maily alebo pokračovať ďalej."
         }
       ],
       "approved_at": null
@@ -363,8 +353,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"without emails\" is translated as \"brez e-maila\". While technically correct, a more natural and common Slovenian phrasing would be \"brez elektronske pošte\".",
-          "suggestion": "brez elektronske pošte"
+          "description": "The term 'e-mail' is often written as 'e-pošta' in Slovenian, which is more common and reflects standard terminology.",
+          "suggestion": "Našli smo <1>{{users}} uporabnikov</1> brez e-pošte."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'lahko izpolnite' is grammatically correct, 'lahko vnesete' might be a slightly more natural and fluent wording when referring to entering email addresses.",
+          "suggestion": "Našli smo <1>{{users}} uporabnikov</1> brez e-pošte. Lahko vnesete njihove e-poštne naslove ali nadaljujete brez tega dejanja."
         }
       ],
       "approved_at": null
@@ -375,13 +370,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"емаил-ова\" is an awkward and inaccurate translation of \"emails.\" The Serbian word for emails is \"email adrese\".",
-          "suggestion": "Пронашли смо <1>{{users}} корисника</1> без email адреса."
+          "description": "The term 'емаил-ова' is a direct transliteration of 'emails' and isn't the most natural or accurate translation in Serbian. A better option would be 'е-маил адреса' or simply 'е-маил'.",
+          "suggestion": "Пронашли смо <1>{{users}} корисника</1> без е-маил адреса."
         },
         {
           "type": "incorrect_translation",
-          "description": "The possessive pronoun \"њихове\" (their) is grammatically correct, but the overall wording feels a little unnatural. A more natural phrasing might use \"да попуните\" (to fill in).",
-          "suggestion": "Пронашли смо <1>{{users}} корисника</1> без email адреса. Можете да попуните њихове email адресе или наставити без ове радње."
+          "description": "The word 'попунити' is a bit formal for this context. A more conversational and natural word would be 'унети'.",
+          "suggestion": "Можете унети њихове е-маил адресе или наставити без ове радње."
         }
       ],
       "approved_at": null
@@ -391,14 +386,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'email-ova' is incorrect. It should be 'adresa elektronske pošte' or 'email adrese'.",
-          "suggestion": "Pronašli smo <1>{{users}} korisnika</1> bez adresa elektronske pošte."
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags are inconsistent with the English content. The English uses `<1>` and `</1>`, while the Serbian uses `<1>` and `</1>`.",
+          "suggestion": "Change `</1>` to `</1>`."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'without this action' is not a natural translation of the English. It feels clunky in Serbian.",
-          "suggestion": "Pronašli smo <1>{{users}} korisnika</1> bez email-ova. Možete popuniti njihove email-ove ili nastaviti."
+          "description": "The word 'radnje' (action) is a bit awkward in this context. It's a more formal term than necessary and doesn't flow naturally.",
+          "suggestion": "Consider using a more casual word like 'tako' (so) or rephrasing the sentence to something like 'Možete popuniti njihove email-ove ili nastaviti dalje.'"
         }
       ],
       "approved_at": null
@@ -409,13 +404,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"E-postaları olmayan\" is not the most natural way to say \"without emails.\" A more common and fluent translation would be \"E-posta adresi olmayan\".",
-          "suggestion": "E-posta adresi olmayan <1>{{users}} kullanıcılar</1> bulduk."
+          "description": "The translation \"E-postaları olmayan <1>{{users}} kullanıcılar</1> bulduk\" is not the most natural or accurate translation of \"We found <1>{{users}} users</1> without emails.\"  A better translation would convey that the users *lack* emails rather than that emails are 'missing' from the users.",
+          "suggestion": "Bulduğumuz <1>{{users}} kullanıcıların e-posta adresleri yok.</1> or <1>{{users}} kullanıcı, e-posta adresi olmayanlar</1> bulduk."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The sentence structure is a bit awkward. While technically correct, it's not as natural as it could be.",
-          "suggestion": " <1>{{users}}</1> e-posta adresi olmayan kullanıcı bulduk. E-postalarını doldurabilir veya bu işlemi yapmadan devam edebilirsiniz."
+          "type": "formatting",
+          "description": "The `<1>{{users}}</1>` tag formatting is inconsistent with the English tag `<1>{{users}}</1>`. While not a critical error, consistency is preferred.",
+          "suggestion": "Keep the formatting as `<1>{{users}}</1>` to match the English source."
         }
       ],
       "approved_at": null
@@ -425,9 +420,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'addresses of electronic mail' is overly formal and not the most natural way to express 'emails' in Ukrainian. A more common and natural wording would be 'електронні адреси'.",
-          "suggestion": "Ми знайшли <1>{{users}} користувачів</1> без електронних адрес. Ви можете ввести їхні електронні адреси або продовжити без цієї дії."
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Ukrainian versions. While technically not an error, consistency is important. The surrounding text should also be verified for proper HTML structure within the larger context of the application.",
+          "suggestion": "Review the application's HTML structure and ensure the <1> and </1> tags are used consistently and correctly. Consider whether these are placeholders or intended to be part of the visible text."
         }
       ],
       "approved_at": null
@@ -438,13 +433,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"You can fill their emails\" is not ideal. A more natural phrasing would be \"Bạn có thể nhập email cho họ\" or \"Bạn có thể thêm email cho họ\".",
-          "suggestion": "Bạn có thể nhập email cho họ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"tiếp tục mà không cần thao tác này\" is a bit clunky. A more fluent translation would be \"tiếp tục mà không cần thực hiện gì thêm\" or simply \"tiếp tục\".",
-          "suggestion": "tiếp tục"
+          "description": "The phrase \"không có email\" is a literal translation of \"without emails\". A more natural and idiomatic Vietnamese translation would be \"chưa có email\" (not yet have email) or \"thiếu email\" (lacking email).",
+          "suggestion": "Chúng tôi đã tìm thấy <1>{{users}} người dùng</1> chưa có email. or Chúng tôi đã tìm thấy <1>{{users}} người dùng</1> thiếu email."
         }
       ],
       "approved_at": null
@@ -455,13 +445,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"没有电子邮件\" (méiyǒu diànzǐ yóu jiàn) literally translates to \"without email\". A more natural and common phrasing in Chinese would be \"没有邮箱\" (méiyǒu yóuxiāng) or \"没有电子邮件地址\" (méiyǒu diànzǐ yóu jiàn dìzhǐ).",
-          "suggestion": "Change \"没有电子邮件\" to \"没有邮箱\" or \"没有电子邮件地址\"."
+          "description": "The phrase \"没有电子邮件\" (méiyǒu diànzǐ yóu jiàn) translates to \"without email\" or \"no email\". While technically correct, a more natural and common way to say this in Chinese would be \"没有邮箱\" (méiyǒu yóuxiāng) which means 'no email address'.",
+          "suggestion": "Change \"没有电子邮件\" to \"没有邮箱\"."
         },
         {
           "type": "formatting",
-          "description": "The original English uses a variable <1>{{users}}</1>. The Chinese translation also preserves this format. However, while technically correct, Chinese often doesn't require or benefit from such HTML-like tags. It's cleaner to remove them.",
-          "suggestion": "Remove the <1> and </1> tags around {{users}}."
+          "description": "The Chinese translation maintains the `<1>` and `</1>` tags which were present in the English content. These tags likely represent HTML or a similar templating structure. It's important to confirm whether these tags should be retained in the Chinese version and if so, if the placement is correct.",
+          "suggestion": "Verify that the `<1>` and `</1>` tags are necessary and correctly placed in the Chinese translation. If they are not needed, remove them."
         }
       ],
       "approved_at": null

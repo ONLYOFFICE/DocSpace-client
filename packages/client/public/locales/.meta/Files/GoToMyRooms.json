@@ -3,7 +3,7 @@
   "content": "Go to rooms",
   "content_en_sha1_hash": "74af5faf48c945eeed9e3c0e3dc2559009a9a4aa",
   "created_at": "2025-05-19T21:30:55.709Z",
-  "updated_at": "2025-05-28T09:30:02.091Z",
+  "updated_at": "2025-10-13T13:22:35.614Z",
   "comment": {
     "text": "This translation key is used to display the text \"Go to rooms\" in a button and dialog, typically found on a folder or archive access control panel. It guides users to navigate to a room by clicking or selecting an option.",
     "is_auto": true,
@@ -12,19 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RoomNoAccessContainer.js",
-      "line_number": 94,
+      "line_number": 96,
       "context": "{\n to: \"\",\n icon: <FolderIcon />,\n onClick: onGoToShared,\n key: \"empty-view-goto-rooms\",\n description: t(\"GoToMyRooms\"),\n },\n ],\n };\n \n return <EmptyView {...propsRoomNotFoundOrMoved} />;",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 266,
-      "context": "onClick={onGoToShared}\n iconName={RoomsReactSvgUrl}\n isFill\n />\n <Link onClick={onGoToShared} {...linkStyles}>\n {t(\"GoToMyRooms\")}\n </Link>\n </div>\n );\n \n const getEmptyFolderProps = () => {",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 408,
+      "line_number": 407,
       "context": "])\n .with([FolderType.Archive, ShareAccessRights.None, P._], () => [\n {\n ...actions.onGoToShared(),\n icon: <FolderIcon />,\n description: t(\"Files:GoToMyRooms\"),\n key: \"empty-view-goto-shared\",\n },\n ])\n .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [\n {",
       "module": "/packages/client"
     }
@@ -45,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Otaqlarım bölməsinə keçin' is overly literal and doesn't quite capture the natural flow of 'Go to rooms'. While 'Otaqlarım' means 'My rooms,' 'bölməsinə keçin' (to the section) is awkward.  A more natural phrasing is needed.",
+          "suggestion": "Consider 'Otaqlara keçin' or 'Otaqlar bölməsinə get' depending on the desired level of formality."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,19 +57,42 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Přejít do sekce místnosti\" is too literal and doesn't convey the same meaning as \"Go to rooms\". \"Sekce\" (section) is not necessary and makes it sound formal and unnatural. A more appropriate translation would depend on the context of where this button/link is located.",
+          "suggestion": "Consider alternatives like \"Jít do místností\", \"Místnosti\" or \"Přejít na místnosti\" depending on the specific application."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Zu Räume' is not the most natural or accurate translation of 'Go to rooms'. 'Zu' is a preposition that can mean 'to' but in this context, it doesn't flow well. A more natural translation would be 'Gehe zu den Räumen' or 'Gehe in die Räume'.",
+          "suggestion": "Gehe zu den Räumen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Μετάβαση στο «Τα δωμάτιά»\" is not a natural or accurate translation of \"Go to rooms\". \"Μετάβαση\" implies a transition or movement, but it's a bit formal. A more natural translation would be something like \"Πήγαινε στα δωμάτια\" or \"Επισκέψου τα δωμάτια\". The use of quotes around \"Τα δωμάτιά\" is also unusual and unnecessary without more context.",
+          "suggestion": "Consider \"Πήγαινε στα δωμάτια\" or \"Επισκέψου τα δωμάτια\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of quotes around \"Τα δωμάτιά\" suggests it's a specific name or brand.  Without context, this is potentially misleading or incorrect. If 'Go to MyRooms' is meant to be a link or button to a room, using quotes is an odd choice.",
+          "suggestion": "Remove the quotes unless 'Τα δωμάτιά' represents a branded name or has a specific purpose indicated in the UI."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -87,13 +110,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Aller dans les salles\" is grammatically correct, it doesn't quite capture the nuance of 'Go to rooms'. 'Go to' implies a destination. A more accurate translation might be \"Se rendre aux salles\" or \"Diriger vers les salles\".",
+          "suggestion": "Se rendre aux salles"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Գնալ Իմ սենյակները' literally translates to 'Go My rooms'. It does not convey the intended meaning of 'Go to rooms'.  It lacks the preposition 'to' which is crucial for correct meaning.",
+          "suggestion": "Գնալ դեպի իմ սենյակները (Gnal depi im senyaknere) - 'Go to my rooms' or Գնալ սենյակների (Gnal senyaknere) - 'Go to rooms' (more general)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +140,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"「ルーム」へ\" is a literal translation of \"Go to rooms\" but lacks nuance. While technically correct, it sounds awkward and unnatural in Japanese.  'へ' indicates direction, which is correct, but the phrasing is not idiomatic. It reads more like a dictionary definition than a natural command or instruction.",
+          "suggestion": "Consider alternatives like:  \"ルームへ移動」 (ruumu e idou - move to rooms) or \"ルームへ」 (ruumu e - to rooms) depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"내 방으로 이동\" (nae bang-eu-ro i-dong) is understandable, a more natural and direct translation of \"Go to rooms\" would be \"방으로 가세요\" (bang-eu-ro ga-se-yo) or \"방으로 이동하세요\" (bang-eu-ro i-dong-ha-se-yo). The current translation implies going to *my* rooms, whereas the original is more general.",
+          "suggestion": "방으로 가세요"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,19 +188,37 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ir para As Minhas Salas' is not the most natural or accurate translation of 'Go to rooms'. While technically correct, it's a bit literal. A better translation would convey the intended meaning more fluidly.",
+          "suggestion": "Ir para os meus quartos"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ir para minhas salas' while literally correct, doesn't convey the intended meaning of 'Go to rooms' in the context of a feature or action. It implies ownership ('my rooms'), which might not be accurate.",
+          "suggestion": "Consider 'Acessar salas' or 'Ir para as salas' for a more general and potentially accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Salt la Sălile' is not the most natural or accurate translation of 'Go to rooms'. While technically understandable, it sounds awkward. A more natural translation would be 'Mergi la camere' or 'Du-te la camere'.",
+          "suggestion": "Mergi la camere"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,37 +248,78 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Иди у собе\" is not a grammatically correct or natural way to say \"Go to rooms.\" The preposition 'у' should be replaced with 'у'. The word 'собе' is plural and doesn't quite fit the meaning of 'rooms' in this context. The best translation is likely 'Иди у собе'.",
+          "suggestion": "Иди у собе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Idi u sobe' is not the most natural or accurate translation of 'Go to rooms'. 'Idi' means 'go' in the imperative form, but it sounds somewhat abrupt. A more appropriate translation would convey a sense of direction or invitation.",
+          "suggestion": "A more natural translation could be 'Uđite u sobe' (Enter the rooms) or 'Kreni u sobe' (Head to the rooms)."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'sobe' (rooms) is grammatically correct, but depending on context it might be better to consider the number of rooms. If referring to specific rooms, the definite article should be used. If a general invitation, then the indefinite is correct.",
+          "suggestion": "Consider context. If referring to specific rooms use 'u sobe' (the rooms)."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Odalarıma git' translates more accurately to 'Go to my rooms' rather than just 'Go to rooms'. The possessive 'my' is lost in the translation. While grammatically correct, it doesn't fully capture the meaning of the English phrase, especially given the key name 'GoToMyRooms'.",
+          "suggestion": "Odalarıma git"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Перейти до розділу «Кімнати»' literally translates to 'Go to the section \"Rooms\"'. While understandable, a more natural and direct translation of 'Go to rooms' would be something closer to 'Перейти в кімнати' or 'Відкрити кімнати'. The current translation adds unnecessary words and creates a slightly formal tone.",
+          "suggestion": "Перейти в кімнати"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vào Phòng của tôi' directly translates to 'Enter my rooms'. While technically correct, 'Go to rooms' implies movement towards the rooms. A more natural and accurate translation would convey this intention.",
+          "suggestion": "Di đến phòng của tôi"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '转到房间' literally translates to 'Turn to rooms'. While understandable, a more natural translation for 'Go to rooms' would be '前往房间' or '去房间'. '转到' implies a turning or rotation, which doesn't align with the original meaning of 'Go to'.",
+          "suggestion": "前往房间 or 去房间"
+        }
+      ],
       "approved_at": null
     }
   }

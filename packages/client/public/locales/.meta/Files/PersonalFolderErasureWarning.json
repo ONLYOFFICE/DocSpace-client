@@ -3,7 +3,7 @@
   "content": "Your user type has been changed to Guest. Personal files will be deleted in 30 days.",
   "content_en_sha1_hash": "f6fa951b2bbdfb41512638cf7e8424c88af869a1",
   "created_at": "2025-05-19T21:30:55.955Z",
-  "updated_at": "2025-06-18T07:34:15.024Z",
+  "updated_at": "2025-10-16T07:29:35.705Z",
   "comment": {
     "text": "This translation key is used to display a warning message when a user's personal folder has been changed to Guest mode, informing them that their files will be deleted in 30 days. The text appears as a warning notification on the Home page of the application. It should be translated to indicate a clear and concise warning about the impending deletion of personal files.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 578,
-      "context": "stateShowTemplateBadge || showTemplateBadge ? t(\"Files:Template\") : \"\";\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashErasureWarning\")\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";\n \n const isContextButtonVisible = () => {\n if (isContactsPage && !isContactsInsideGroupPage) {\n return false;",
+      "line_number": 684,
+      "context": "const warningText = isRecycleBinFolder\n ? t(\"TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";\n \n const isContextButtonVisible = () => {\n if (isProfile) return true;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Warning/index.tsx",
-      "line_number": 52,
-      "context": "if (currentDeviceType === DeviceType.desktop) return null;\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashErasureWarning\")\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";\n \n if (!warningText) return null;\n \n return <WarningComponent title={warningText} />;",
+      "line_number": 54,
+      "context": "const warningText = isRecycleBinFolder\n ? t(\"TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";\n \n if (!warningText) return null;\n \n return <WarningComponent title={warningText} />;",
       "module": "/packages/client"
     }
   ],
@@ -89,9 +89,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ֆայլերը' (files) is sometimes spelled 'ֆայլ' (file) in Armenian. While both are understandable, 'ֆայլերը' is more grammatically correct when referring to multiple files.",
-          "suggestion": "ֆայլերը"
+          "type": "incorrect_translation",
+          "description": "The phrase 'Your user type has been changed to Guest' is not accurately conveyed. 'Ձեր օգտատիրոջ տեսակը փոխվել է հյուրի' literally translates to 'Your user type has changed to guest.' While understandable, it lacks the clarity and formality of the original.",
+          "suggestion": "Ձեր օգտատիրոջ տեսակը փոխվել է դեպի հյուրի (Dzer ogtatiroj tesaki poxvel e depi hyuri) - 'Your user type has changed to Guest' (more formal)"
         }
       ],
       "approved_at": null
@@ -168,13 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ආරාධිත' (aaradita) is a less common and potentially inaccurate translation for 'Guest' in this context. It generally means 'invited'. A more appropriate translation would be 'හමුදුව' (hamuduwa) which means 'temporary' or 'visitor' and aligns more closely with the intended meaning of 'Guest' in a system context.",
-          "suggestion": "Replace 'ආරාධිත' with 'හමුදුව'."
+          "description": "The word 'ආරාධිත' (aaraaditha) which translates to 'guest' can be ambiguous. It's more accurate to use a term directly meaning 'Guest' in this context to avoid potential misinterpretations.",
+          "suggestion": "Consider using 'මුළුතැන්පත්' (muluthenpoth) which directly translates to 'Guest' or a more specific term if applicable."
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the sentence structure 'ඔබේ පරිශීලක වර්ගය ආරාධිත ලෙස වෙනස් කර ඇත' could be more natural in Sinhala. A more fluent phrasing would be 'ඔබේ පරිශීලක වර්ගය හමුදුව ලෙස වෙනස් කර ඇත' or 'ඔබේ පරිශීලක වර්ගය තාවකාලික පරිශීලකයෙකු ලෙස වෙනස් කර ඇත'.",
-          "suggestion": "Rephrase the first part of the sentence to 'ඔබේ පරිශීලක වර්ගය හමුදුව ලෙස වෙනස් කර ඇත' or 'ඔබේ පරිශීලක වර්ගය තාවකාලික පරිශීලකයෙකු ලෙස වෙනස් කර ඇත'."
+          "description": "While grammatically correct, the sentence structure could be improved for better flow and naturalness in Sinhala. The current phrasing can feel a bit stiff.",
+          "suggestion": "Consider rephrasing to something like: 'ඔබේ පරිශීලක වර්ගය මුළුතැන්පත් ලෙස වෙනස් කර ඇත. ඔබේ පුද්ගලික ගොනු 30 දිනකින් මකා දැමීමට නියමිතයි.' (Your user type has been changed to Guest. Your personal files are scheduled to be deleted in 30 days.)"
         }
       ],
       "approved_at": null
@@ -191,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'spremenjena' (changed) does not agree in gender with 'tip uporabnika' (user type), which is masculine. It should be 'spremenjen'.",
-          "suggestion": "Vaš tip uporabnika je bil spremenjen v Gost. Osebne datoteke bodo izbrisane v 30 dneh."
+          "description": "The verb 'spremenjena' (changed) should agree with the subject 'tip uporabnika' (user type). It should be in the masculine singular form.",
+          "suggestion": "Vaš tip uporabnika je bil spremenjen v Gost."
         }
       ],
       "approved_at": null

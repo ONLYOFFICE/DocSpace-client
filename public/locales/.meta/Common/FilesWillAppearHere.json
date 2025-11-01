@@ -3,7 +3,7 @@
   "content": "Files and folders added to the room will appear here.",
   "content_en_sha1_hash": "52cd903bd75b3f0b726ed3310678ed5925968532",
   "created_at": "2025-05-19T21:30:45.315Z",
-  "updated_at": "2025-06-03T20:59:41.794Z",
+  "updated_at": "2025-09-23T07:24:24.011Z",
   "comment": {
     "text": "Files and folders added to a room will appear here. This translation key is used as a placeholder text in an empty folder container, displayed when there are no files or folders in the room. It appears below the message \"Room is empty at the moment\".",
     "is_auto": true,
@@ -11,14 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 110,
-      "context": "const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");\n \n const roomsDescription = isPublicRoom ? (\n <>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>\n </>\n ) : isVisitor || isCollaborator ? (\n t(\"RoomEmptyContainerDescriptionUser\")\n ) : (\n t(\"RoomEmptyContainerDescription\")",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 192,
+      "line_number": 198,
       "context": ")\n .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />\n <span>{t(\"Common:FilesWillAppearHere\")}</span>\n </>\n ))\n .with([FolderType.USER, P.when(() => security?.Create)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     }
@@ -33,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ستظهر هنا الملفات والمجلدات التي تمت إضافتها إلى الغرفة' is technically correct but sounds slightly formal and verbose for this context. A more natural phrasing would be more common.",
+          "suggestion": "ستظهر هنا الملفات والمجلدات المضافة إلى الغرفة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zde se zobrazí soubory a složky přidané do místnosti' is a literal translation and slightly awkward in Czech. A more natural phrasing would be 'Soubory a složky přidané do místnosti se zde zobrazí.' or 'Soubory a složky přidané do místnosti se objeví zde.'",
-          "suggestion": "Soubory a složky přidané do místnosti se zde zobrazí."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'folders' is transliterated as 'թղթապանակները'. While technically correct, it's quite literal and clunky. A more natural Armenian equivalent would convey the concept of 'directories' or 'folders' in a digital context.",
-          "suggestion": "Consider a more concise and natural Armenian word for 'folders' in a digital context, perhaps something like 'ցուցակներ' (lists) or a similar term depending on the specific usage."
+          "description": "The word 'folders' is not explicitly translated. While 'թղթապանակները' can imply folders, a direct translation would improve clarity.",
+          "suggestion": "Consider adding a more explicit translation of 'folders,' such as 'ֆայլերն ու պանակները' or 'ֆայլերն ու դոկումենտերը'."
         }
       ],
       "approved_at": null
@@ -126,48 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ໄຟລ໌' (file) is spelled correctly.",
-          "suggestion": null
+          "description": "The word 'ໄຟລ໌' (file) is spelled correctly, but 'ໂຟນເດີ' is an older term for folder. A more modern term would improve clarity.",
+          "suggestion": "Consider using a more contemporary Lao term for 'folder,' such as 'ໄຟລ໌ໂຟນເດີ' or a similar term understood by modern Lao speakers. The best term will depend on the specific context and target audience."
         },
         {
-          "type": "spelling",
-          "description": "The word 'ໂຟນເດີ' (folder) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ເພີ່ມ' (added) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ຫ້ອງ' (room) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ຈະ' (will) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ປາກົດ' (appear) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ຢູ່' (at/in) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ບ່ອນນີ້' (here/this place) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, the phrasing 'ໄຟລ໌ ແລະໂຟນເດີທີ່ເພີ່ມໃສ່ຫ້ອງຈະປາກົດ ຢູ່ບ່ອນນີ້' is slightly less natural than alternatives. It's more direct and literal, whereas Lao often prefers a more fluid sentence structure.",
-          "suggestion": "ໄຟລ໌ ແລະໂຟນເດີທີ່ເພີ່ມເຂົ້າໃນຫ້ອງຈະສະແດງຜົນຢູ່ບ່ອນນີ້"
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure 'ໄຟລ໌ ແລະໂຟນເດີທີ່ເພີ່ມໃສ່ຫ້ອງຈະປາກົດ ຢູ່ບ່ອນນີ້' could be improved for better flow in Lao.  The 'ຢູ່ບ່ອນນີ້' (at this place) feels slightly abrupt at the end.",
+          "suggestion": "Consider rephrasing the sentence to something like 'ໄຟລ໌ ແລະໂຟນເດີທີ່ເພີ່ມໃສ່ຫ້ອງຈະປາກົດຢູ່ທີ່ນີ້' (Files and folders added to the room will appear here - literally, 'will appear at this place').  Even better would be a more natural phrasing dependent on the intended tone - perhaps 'ໄຟລ໌ ແລະໂຟນເດີທີ່ເພີ່ມໃສ່ຫ້ອງຈະປະກົດຕໍ່ໄປອີ້ນີ້' (Files and folders added to the room will appear here - more conversational)."
         }
       ],
       "approved_at": null
@@ -175,7 +134,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Šeit tiks parādīti telpai pievienotie faili un mapes.\" is a bit literal and could be improved for natural flow in Latvian. 'Telpai pievienotie' (added to the room) is slightly awkward.",
+          "suggestion": "Šeit parādīsies pievienotie faili un mapes."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -184,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bestanden en mappen die aan de kamer zijn toegevoegd, verschijnen hier' is overly literal and sounds unnatural in Dutch. 'Aan de kamer zijn toegevoegd' implies adding files *to* the room as a physical location, which is likely not the intended meaning. It would be more appropriate to use phrasing that indicates the files are added to a specific folder or area within a digital space.",
-          "suggestion": "Bestanden en mappen die zijn toegevoegd, verschijnen hier."
+          "description": "The phrase \"aan de kamer zijn toegevoegd\" (added to the room) is awkward and doesn't quite capture the intended meaning of 'added to the room'. It implies the files are attached to the room itself, which isn't likely what's meant. A more natural phrasing would indicate addition to a designated area or space.",
+          "suggestion": "Bestanden en mappen die aan deze ruimte zijn toegevoegd, verschijnen hier."
         }
       ],
       "approved_at": null
@@ -193,13 +158,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tutaj pojawią się pliki i katalogi dodane do pokoju' is a bit literal and could be improved for natural Polish. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Tutaj pojawią się dodane do pokoju pliki i katalogi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -220,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'room' is translated as 'sală'. While 'sală' can mean room, in this context, it likely refers to a digital space or folder. A more accurate translation would be something like 'spațiu' or 'folder'.",
-          "suggestion": "Fișierele și folderele adăugate la acest spațiu vor fi afișate aici."
+          "description": "The Romanian translation \"Fișierele și folderele adăugate la această sală vor fi afișate aici\" is overly literal and doesn't flow naturally. 'Această sală' (this room) is not the best choice of wording. It implies a physical room.",
+          "suggestion": "Fișierele și folderele adăugate vor apărea aici."
         }
       ],
       "approved_at": null
@@ -238,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'bahaalum' (බහාලුම්) is a somewhat archaic or formal term for 'folders'. A more common and natural word would be ' සා Kegedera' (සැකෙදර).",
-          "suggestion": "Replace 'බහාලුම්' with 'සැකෙදර'"
+          "description": "The word 'bahaaluṁ' (බහාලුම්) likely refers to 'folders,' but the spelling could be slightly improved for better readability. While technically correct, it might be perceived as less natural.",
+          "suggestion": "Consider using 'පොට්‍රෝලි' (potroli) for 'folders' as it’s a more common and easily understood term in Sinhala."
         }
       ],
       "approved_at": null
@@ -256,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tukaj bodo prikazane datoteke in mape, dodane v sobi' is a bit literal and could be improved for naturalness. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Tukaj se bodo prikazale datoteke in mape, ki ste jih dodali v sobo."
+          "description": "The translation 'Tukaj bodo prikazane datoteke in mape, dodane v sobi' is a bit literal and slightly awkward. A more natural Slovenian phrasing would be 'Datoteke in mape, dodane v sobo, se bodo prikazale tukaj.'",
+          "suggestion": "Datoteke in mape, dodane v sobo, se bodo prikazale tukaj."
         }
       ],
       "approved_at": null
@@ -267,14 +226,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Датотеке и фолдери додати у собу ће се појавити овде' is a literal translation but not the most natural way to express the meaning in Serbian. It sounds slightly awkward.",
-          "suggestion": "Фaјлови и фолдери додани у просторију/собу/ћелију ће се појавити овде."
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'ће' should be separated with space.  'ће се' not 'ћесе'",
-          "suggestion": "Фaјлови и фолдери додани у просторију/собу/ћелију ће се појавити овде."
+          "type": "spelling",
+          "description": "The word 'folderi' is misspelled. It should be 'фолдери'.",
+          "suggestion": "фолдери"
         }
       ],
       "approved_at": null
@@ -306,18 +260,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"added to the room\" is not directly conveyed. While \"添加到房间的\" (added to the room) is present, it feels slightly awkward and could be improved for a more natural flow in Chinese.",
-          "suggestion": "添加到房间的文件和文件夹将显示在这里。"
-        },
-        {
-          "type": "formatting",
-          "description": "The placement of “会” (hui) feels slightly unnatural. Placing it before “显示” (display) creates a more common sentence structure.",
-          "suggestion": "添加到房间的文件和文件夹将显示在这里。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

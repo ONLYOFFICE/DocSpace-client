@@ -3,7 +3,7 @@
   "content": "Auth via NTLM",
   "content_en_sha1_hash": "207bb87de2e4b6d870453e16a0021127ffef3143",
   "created_at": "2025-05-19T21:30:53.288Z",
-  "updated_at": "2025-05-21T01:36:49.667Z",
+  "updated_at": "2025-08-11T18:11:59.252Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Auth via NTLM\" as a label for a checkbox in a settings UI. When checked, it likely enables authentication using NTLM protocol. It appears in the SMTP Settings page under Custom Settings.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 154,
-      "context": "/>\n \n <Checkbox\n className=\"smtp_settings_checkbox\"\n name={USE_NTLM}\n label={t(\"AuthViaNTLM\")}\n isChecked={settings[USE_NTLM]}\n onChange={onChangeCheckbox}\n isDisabled={isLoading || !settings[AUTHENTICATION]}\n />\n </div>",
+      "line_number": 157,
+      "context": "/>\n \n <Checkbox\n className=\"smtp_settings_checkbox\"\n name={USE_NTLM}\n label={t(\"AuthViaNTLM\")}\n isChecked={settings[USE_NTLM]}\n onChange={onChangeCheckbox}\n isDisabled={isLoading || !settings[AUTHENTICATION]}\n dataTestId=\"smtp_auth_ntlm_checkbox\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation is overly verbose and doesn't accurately reflect the meaning of \"Auth via NTLM\". It provides an explanation of NTLM rather than a simple translation.",
+          "description": "The Arabic translation is excessively verbose and doesn't accurately reflect the brevity of the English phrase 'Auth via NTLM'. It includes explanations of what NTLM *is*, which is unnecessary for a configuration setting. The translation should be more concise and directly represent the concept of authentication via NTLM.",
           "suggestion": "المصادقة عبر NTLM"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes Arabic script without proper transliteration or explanation of 'NTLM'.",
-          "suggestion": "It's best to keep 'NTLM' in English or provide a transliteration like 'إن تي إل إم' if necessary for understanding within the context."
         }
       ],
       "approved_at": null
@@ -47,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"NTLM vasitəsilə identifikasiya\" is understandable, it's a somewhat literal and less idiomatic translation of \"Auth via NTLM.\"  'Identifikasiya' directly translates to 'identification'. A more natural translation might consider phrasing it as 'NTLM ilə autentifikasiya' (NTLM with authentication) or 'NTLM üzrə tərif' (NTLM based verification/authentication).",
-          "suggestion": "Consider 'NTLM ilə autentifikasiya' or 'NTLM üzrə tərif'."
+          "description": "The translation 'NTLM vasitəsilə identifikasiya' while conveying the general idea, isn't the most natural or accurate translation of 'Auth via NTLM'. 'Identifikasiya' emphasizes identification, whereas 'Auth via NTLM' focuses on the authentication method itself. A more accurate translation would focus on authentication.",
+          "suggestion": "NTLM vasitəsilə təsdiqləmə"
         }
       ],
       "approved_at": null
@@ -89,7 +84,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Todennus NTLM:n kautta' is slightly awkward. A more natural Finnish phrasing would be 'NTLM-todennus'.",
+          "description": "While the translation 'Todennus NTLM:n kautta' is understandable, it's a bit wordy and not the most natural Finnish phrasing for 'Auth via NTLM'. A more concise and idiomatic translation would be 'NTLM-todennus'.",
+          "suggestion": "NTLM-todennus"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon and the word 'kautta' might be unnecessary and make the phrase sound formal. Removing them could improve readability.",
           "suggestion": "NTLM-todennus"
         }
       ],
@@ -107,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հաստատում NTLM-ի միջոցով\" translates to 'Authentication via NTLM'. While not entirely wrong, a more natural and direct translation of 'Auth via NTLM' would be something like 'NTLM ապրանիով հաստատում' or 'NTLM հաստատումով'. The current translation emphasizes 'authentication' which isn't explicitly stated in the English.",
-          "suggestion": "Consider 'NTLM ապրանիով հաստատում' or 'NTLM հաստատումով'."
+          "description": "The translation \"Հաստատում NTLM-ի միջոցով\" while understandable, doesn't perfectly capture the meaning of \"Auth via NTLM.\"  \"Հաստատում\" implies \"authentication\" but \"via\" isn't directly represented. A more literal translation encompassing the \"via\" aspect might be more precise.",
+          "suggestion": "Consider \"NTLM-ի միջոցով ճանապարհում\" (NTLM-i mijocov chanaparhum) which translates to \"Authentication through NTLM\" or \"Via NTLM Authentication\"."
         }
       ],
       "approved_at": null
@@ -137,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກວດສອບ ຜ່ານ NTLM\" translates to \"Check via NTLM\". The English \"Auth via NTLM\" implies authentication, not just checking. A more accurate translation would convey the authentication aspect.",
-          "suggestion": "ອະນຸສັນຍະຜ່ານ NTLM (Anusanyaphān NTLM) - meaning 'Authenticate via NTLM'"
+          "description": "The Lao translation \"ກວດສອບ ຜ່ານ NTLM\" translates to \"Verify through NTLM\". The English \"Auth via NTLM\" implies authentication, not verification. 'Auth' is a shortened form of 'Authentication'.",
+          "suggestion": "ອະນຸສັນຍະຜ່ານ NTLM (Anusanyaphān NTLM) - which translates to 'Authenticate via NTLM'"
         }
       ],
       "approved_at": null
@@ -149,7 +149,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Autentificēšana, izmantojot NTLM\" is a very literal translation and might sound awkward or overly formal in Latvian. A more natural phrasing would be preferable.",
+          "description": "The Latvian translation 'Autentificēšana, izmantojot NTLM' is a literal translation but might not be the most natural or common phrasing for this technical context. 'Autentifikācija' is correct, but 'izmantojot' might be overly verbose. A more concise and idiomatic translation might be preferable.",
           "suggestion": "Autentifikācija ar NTLM"
         }
       ],
@@ -173,13 +173,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses an abbreviation for 'Authentication' which might not be immediately clear to all users. While technically correct, it deviates from common usage and potentially reduces clarity.",
-          "suggestion": "Autenticação via NTLM"
+          "description": "The translation \"Auten. Via NTLM\" uses an abbreviation for \"Authentication\" which is not standard and may be confusing to users. Using the full word is generally preferred for clarity.",
+          "suggestion": "Autenticação Via NTLM"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'Auten.' is understandable as a shortened form of 'Authentication,' a more standard and complete translation would improve clarity and avoid potential ambiguity. The abbreviation might be perceived as unprofessional or confusing.",
-          "suggestion": "Autenticação via NTLM"
+          "description": "While \"Auten.\" is a shortening of \"Autenticação\", it lacks clarity. A more direct and understandable translation would be better. \"Auth\" is often used as a shortened form, but this isn't always appropriate.",
+          "suggestion": "Autenticação Via NTLM"
         }
       ],
       "approved_at": null
@@ -208,13 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'NTLM හරහා තහවුරුව' while literally meaning 'Authentication via NTLM', doesn't fully capture the English phrase 'Auth via NTLM'. A more accurate translation would convey the method of authentication.",
-          "suggestion": "NTLM භාවිතයෙන් ధృవీకరణ (NTLM vashtanava dhruvakarana)"
-        },
-        {
-          "type": "spelling",
-          "description": "There's a potential inconsistency in the Sinhala script. 'හරහා' might be better represented as 'හරණි' depending on the intended nuance.",
-          "suggestion": "NTLM හරණි තහවුරුව"
+          "description": "The translation 'NTLM හරහා තහවුරුව' directly translates to 'Authentication via NTLM'. While understandable, a more natural Sinhala phrasing might be preferred. 'NTLM භාවිතයෙන් ధృవీకరణ' (NTLM Vahisthenem Dhruvikaranam) or 'NTLM ඔස්සේ තහවුරුව' (NTLM Ossae Thaharuva) could be better options, preserving the meaning while sounding more fluent.",
+          "suggestion": "NTLM ඔස්සේ තහවුරුව"
         }
       ],
       "approved_at": null
@@ -236,9 +231,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a genitive case ending ('NTLM-а') which, while grammatically correct, might sound slightly awkward or overly formal in some contexts. A nominative case ('NTLM') could be considered for a more natural-sounding translation, especially in UI elements.",
-          "suggestion": "Аутентификација путем NTLM"
+          "type": "spelling",
+          "description": "The word 'путем' is stylistically awkward in this context. While grammatically correct, 'преко' or 'користи NTLM' would be more natural and clear.",
+          "suggestion": "Аутентификација преко NTLM-а"
+        },
+        {
+          "type": "spelling",
+          "description": "The final '-а' on 'NTLM-а' is a genitive case ending. While technically correct, it can be perceived as overly formal and potentially confusing for less technical users. Consider removing it for improved clarity.",
+          "suggestion": "Аутентификација преко NTLM"
         }
       ],
       "approved_at": null
@@ -249,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation 'Autentifikacija putem NTLM-a' includes an unnecessary possessive suffix '-a' on NTLM. While acceptable, it's more common and cleaner to simply use 'Autentifikacija putem NTLM'.",
-          "suggestion": "Autentifikacija putem NTLM"
+          "description": "The translation uses a hyphenated possessive ('NTLM-a'). While technically grammatical, it's more common and preferred in Serbian to use 'NTLM-ov'.",
+          "suggestion": "Autentifikacija putem NTLM-ov"
         }
       ],
       "approved_at": null
@@ -261,8 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"NTLM aracılığıyla kimlik doğrulama\" is a bit verbose and less natural for technical documentation in Turkish. A more concise and commonly used translation would be \"NTLM kimlik doğrulaması\".",
-          "suggestion": "NTLM kimlik doğrulaması"
+          "description": "The translation \"NTLM aracılığıyla kimlik doğrulama\" is accurate in conveying the meaning of 'Auth via NTLM', but slightly verbose for a configuration setting. A more concise translation might be better.",
+          "suggestion": "NTLM kimlik doğrulama"
         }
       ],
       "approved_at": null
@@ -282,13 +282,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"通过 NTLM 授权\" is understandable, a more precise and common translation of \"Auth via NTLM\" would be \"使用 NTLM 身份验证\" or \"NTLM 身份验证\". \"授权\" implies granting permissions, which is a different aspect than authentication.",
-          "suggestion": "使用 NTLM 身份验证"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

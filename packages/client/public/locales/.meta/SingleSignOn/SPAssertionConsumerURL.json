@@ -3,7 +3,7 @@
   "content": "SP Assertion Consumer URL (support POST and Redirect binding)",
   "content_en_sha1_hash": "2b8529e9db8bb8d718ee9270222543091dfae4c0",
   "created_at": "2025-05-19T21:30:50.149Z",
-  "updated_at": "2025-05-21T01:56:33.625Z",
+  "updated_at": "2025-09-26T15:21:06.402Z",
   "comment": {
     "text": "The SP Assertion Consumer URL is a required field for setting up Single Sign-On. It should be a URL that supports both POST and Redirect binding methods. This value appears in fields related to Single Sign-On settings, likely within portal configuration or provider metadata sections.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
-      "line_number": 89,
-      "context": "tooltipContent={<Text fontSize=\"12px\">{t(\"SPEntityIdTooltip\")}</Text>}\n tooltipClass=\"sp-entity-id-tooltip icon-button\"\n />\n \n <MetadataUrlField\n labelText={t(\"SPAssertionConsumerURL\")}\n name=\"spAssertionConsumerUrl\"\n placeholder={`${url}/sso/acs`}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SPAssertionConsumerURLTooltip\")}</Text>\n }",
+      "line_number": 92,
+      "context": "tooltipClass=\"sp-entity-id-tooltip icon-button\"\n dataTestId=\"sp_entity_id\"\n />\n \n <MetadataUrlField\n labelText={t(\"SPAssertionConsumerURL\")}\n name=\"spAssertionConsumerUrl\"\n placeholder={`${url}/sso/acs`}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SPAssertionConsumerURLTooltip\")}</Text>\n }",
       "module": "/packages/client"
     }
   ],
@@ -29,9 +29,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word \"آليتي\" (aliyyatay) should ideally be \"طرق\" (turuq) to better convey 'methods' in this context. While 'aliyyatay' can mean 'method', 'turuq' is more common and clearer for technical documentation.",
-          "suggestion": "عنوان رابط مُستهلك التأكيد لمزود الخدمة (SP) (يدعم طريقتي POST وRedirect للربط)."
+          "type": "incorrect_translation",
+          "description": "The term 'آليتي' is not the most natural way to express 'both methods' in this context. It sounds somewhat formal and awkward. A more fluent phrasing would be more appropriate.",
+          "suggestion": "عنوان رابط مُستهلك التأكيد لمزود الخدمة (SP) (يدعم طريقة POST وطريقة Redirect للربط)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a major issue, adding a space after the colon in 'عنوان رابط مُستهلك التأكيد لمزود الخدمة (SP)' would improve readability.",
+          "suggestion": "عنوان رابط مُستهلك التأكيد لمزود الخدمة (SP) : (يدعم طريقة POST وطريقة Redirect للربط)."
         }
       ],
       "approved_at": null
@@ -42,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"razılığı\" translates to \"consent\" or \"agreement\", but in this context, it's better to use a term closer to \"assertion\" or \"request\". \"Assertion\" is more technically accurate for SP Assertion Consumer URL.",
-          "suggestion": "SP İstehlakçı iddiaları URL (POST və Dolaylı bağlamasını dəstəkləyir)"
+          "description": "The term 'razılığı' doesn't accurately translate 'Assertion'. 'Assertion' in this context refers to a statement or declaration, not consent or agreement. A better translation would be something along the lines of 'Təkrarı' or 'Bəyannaməsi'.",
+          "suggestion": "SP İstehlakçı bəyannaməsi URL (POST və Dolaylı bağlamasını dəstəkləyir)"
         },
         {
-          "type": "spelling",
-          "description": "While \"İstehlakçı\" is correct for \"consumer\", it might be more readable to use a more familiar or commonly used term, depending on the target audience. Consider if a more accessible term exists.",
-          "suggestion": "SP İstifadəçi razılığı URL (POST və Dolaylı bağlamasını dəstəkləyir)"
+          "type": "formatting",
+          "description": "The word 'Dolaylı' might benefit from a more specific term like 'Yönləndirici'.",
+          "suggestion": "SP İstehlakçı bəyannaməsi URL (POST və Yönləndirici bağlamasını dəstəkləyir)"
         }
       ],
       "approved_at": null
@@ -58,14 +63,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'байдинг' is a transliteration and not a standard Bulgarian term. The correct term for 'binding' in this context would be 'свързване'.",
-          "suggestion": "свързване"
-        },
-        {
           "type": "formatting",
-          "description": "The phrase 'доставчика на услуги' could be slightly more concise.  'на доставчика на услуги' is a bit verbose.",
-          "suggestion": "на доставчика"
+          "description": "The translation includes the English word \"binding\" without adaptation to Bulgarian. It's better to use a Bulgarian equivalent or transliteration if a direct equivalent doesn't exist and maintain consistency with other similar terms.",
+          "suggestion": "Consider using a Bulgarian term for \"binding\" or transliterating it appropriately (e.g., \"байдинг\") if a direct equivalent is unavailable. Research the preferred terminology in the specific context of Single Sign-On in Bulgarian."
         }
       ],
       "approved_at": null
@@ -76,13 +76,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"tvrzení\" while technically meaning \"assertion\", might be overly formal or not the most natural way to express it in this context for a general user. \"Prohlášení\" might be a more accessible alternative.",
-          "suggestion": "Adresa URL spotřebitele prohlášení SP (podpora vazeb POST a přesměrování)"
+          "description": "The term 'Assertion Consumer' is best translated as 'URL pro zpracování tvrzení' or 'Adresa pro zpracování tvrzení'. 'Spotřebitele tvrzení' is an unusual and potentially confusing translation.",
+          "suggestion": "Adresa URL pro zpracování tvrzení SP (podpora vazeb POST a přesměrování)"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing 'vazeb POST a přesměrování' could be slightly more readable as 'vazby POST a přesměrování'. Adding the plural marker 'y' improves flow.",
-          "suggestion": "Adresa URL spotřebitele prohlášení SP (podpora vazby POST a přesměrování)"
+          "description": "While not incorrect, adding a colon after 'SP Assertion Consumer URL' would improve readability and consistency with English.",
+          "suggestion": "Adresa URL pro zpracování tvrzení SP: (podpora vazeb POST a přesměrování)"
         }
       ],
       "approved_at": null
@@ -98,14 +98,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'παρόχου' (provider) might be unnecessary and a bit formal in this context. While technically correct, it makes the sentence slightly clunky.",
-          "suggestion": "Διεύθυνση URL του καταναλωτή ισχυρισμού (υποστήριξη POST και δέσμευσης ανακατεύθυνσης)"
-        },
-        {
           "type": "formatting",
-          "description": "While technically correct, the use of parenthesis around 'υποστήριξη POST και δέσμευσης ανακατεύθυνσης' could be improved for better readability. It feels slightly disjointed from the main sentence flow.",
-          "suggestion": "Διεύθυνση URL του καταναλωτή ισχυρισμού: υποστήριξη POST και δέσμευσης ανακατεύθυνσης"
+          "description": "The Greek translation uses a colon after 'Διεύθυνση URL' which is unusual and may break readability. It should be removed.",
+          "suggestion": "Διεύθυνση URL του καταναλωτή ισχυρισμού του παρόχου υπηρεσιών (υποστήριξη POST και δέσμευσης ανακατεύθυνσης)"
         }
       ],
       "approved_at": null
@@ -122,7 +117,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'uudelleenohjausvelvoite' is an awkward and potentially incorrect translation of 'Redirect binding'.  'uudelleenohjaus' is correct for redirect, but 'velvoite' implies an obligation, which isn't the intended meaning. A more accurate translation would convey the function of the redirect.",
+          "description": "'uudelleenohjausvelvoite' is a less common and potentially inaccurate translation of 'Redirect binding'.  'uudelleenohjaus' is correct for 'redirect', but 'velvoite' implies an obligation, which isn't the intended meaning.  A more accurate term would convey the technical function of redirection.",
           "suggestion": "SP Assertion Consumer URL (POST-tuki ja uudelleenohjaus)"
         }
       ],
@@ -140,13 +135,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'աջակցում է POST-ին և Redirect պարտադիր է' is not an accurate representation of 'support POST and Redirect binding'. The word 'պարտադիր է' means 'mandatory' or 'required,' implying a restriction, whereas the English text indicates support, not obligation.",
-          "suggestion": "աջակցում է POST-ին և Redirect-ին (supports POST and Redirect)"
+          "description": "The term 'պարտադիր է' (mandatory) doesn't accurately convey the meaning of 'Redirect binding.' It implies a requirement rather than a method of transport. 'Redirect binding' refers to a specific way the data is sent.",
+          "suggestion": "SP Assertion Սպառողի URL (աջակցում է POST-ին և Redirect սպառումին)"
         },
         {
           "type": "formatting",
-          "description": "The hyphen in 'Redirect-ին' feels awkward. While technically valid, it would read more naturally without it.",
-          "suggestion": "աջակցում է POST-ին և Redirect-ը"
+          "description": "The use of 'և' might be improved for clarity. Consider using a hyphen or a more precise connector based on the intended nuance.",
+          "suggestion": "SP Assertion Սպառողի URL (աջակցում է POST-ին և Redirect սպառումին – կամ Redirect սպառումի միջոցով)"
         }
       ],
       "approved_at": null
@@ -157,18 +152,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL consumatore asserzione SP' is a literal translation but lacks clarity. 'Assertion Consumer URL' is a technical term best rendered as something more understandable to a broader audience. While technically correct, it may not convey the meaning effectively.",
-          "suggestion": "URL di ricezione asserzioni SP"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'collegamento POST e Reindirizzamento' is technically correct but 'binding' has a specific meaning in the context of Single Sign-On. A more appropriate translation would convey this technical nuance.",
-          "suggestion": "metodo POST e reindirizzamento"
+          "description": "The translation 'URL consumatore asserzione SP' is slightly awkward. 'SP Assertion Consumer URL' is a specific term and a more natural translation might be 'URL di consumazione asserzione SP' or 'URL di ricezione asserzione SP'.",
+          "suggestion": "URL di consumazione asserzione SP"
         },
         {
           "type": "formatting",
-          "description": "The entire translation feels a bit stiff and overly literal. Consider softening the tone to better align with typical Italian technical documentation.",
-          "suggestion": "URL per la ricezione delle asserzioni SP (supporta i metodi POST e di reindirizzamento)."
+          "description": "While not strictly incorrect, 'Reindirizzamento' could be 'Redirect' to maintain consistency and potentially better understandability for a technical audience familiar with English terms.  Using the Italianized version makes the document appear more technically verbose.",
+          "suggestion": "URL di consumazione asserzione SP (supporta il collegamento POST e Redirect)"
         }
       ],
       "approved_at": null
@@ -191,18 +181,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"SP Assertion Consumer URL\" is not accurately translated. \"ຢືນຢັນ\" (yeun yan) translates to \"verification\" or \"confirmation,\" which isn't the core function of a consumer URL. A better translation would focus on the role of receiving assertions.",
-          "suggestion": "SP ຮັບເອົາ URL ຂອງການຢັ້ງຢືນ (SP reab ao URL khong kan yang yan)"
+          "description": "The term 'Assertion Consumer URL' is not accurately translated. 'ຢືນຢັນ' (yeun yan) translates to 'verify' or 'confirmation', but in this context, 'consumer' needs a more accurate equivalent related to receiving or processing an assertion. A better translation would involve a term like 'ຮັບ' (rap - receive) or 'ປະມວນ' (promuan - process).",
+          "suggestion": "SP ຮັບຢັ້ງຢືນ URL ຜູ້ບໍລິໂພກ (ສະຫນັບສະຫນູນ POST ແລະປ່ຽນເສັ້ນທາງຜູກມັດ)"
         },
         {
           "type": "incorrect_translation",
-          "description": "While \"ປ່ຽນເສັ້ນທາງຜູກມັດ\" (pian sean tang phook mat) translates to \"redirect binding,\" the term \"binding\" in this context might be too technical for the target audience. It's better to explain the functionality more simply.",
-          "suggestion": "ສະຫນັບສະຫນູນການສົ່ງຂໍ້ມູນດ້ວຍ POST ແລະການປ່ຽນເສັ້ນທາງ (sanap sanun kan song khom mun duay POST lae kan pian sean tang)"
-        },
-        {
-          "type": "formatting",
-          "description": "The Lao translation includes Lao script characters, but no indication of punctuation or spacing conventions to match the English.  This may result in display issues depending on the rendering environment.",
-          "suggestion": "Ensure correct spacing and punctuation based on Lao conventions. Consider adding a space after each Lao word."
+          "description": "While 'ປ່ຽນເສັ້ນທາງຜູກມັດ' (pien sen tang phok mat) literally means 'redirect binding,' it's a less clear way to express 'redirect binding.' It can be simplified and made more understandable.",
+          "suggestion": "SP ຮັບຢັ້ງຢືນ URL ຜູ້ບໍລິໂພກ (ສະຫນັບສະຫນູນ POST ແລະປ່ຽນເສັ້ນທາງ)"
         }
       ],
       "approved_at": null
@@ -213,13 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"vietrādis\" while technically meaning 'location' or 'address', doesn't accurately convey the meaning of 'Assertion Consumer URL' in a technical context. It feels overly literal and may confuse users.",
-          "suggestion": "SP apgalvojuma patērētāja adrese URL (atbalsta POST un novirzīšanas saistīšanu)"
+          "description": "The term \"SP apgalvojuma patērētāja vietrādis URL\" is a very literal and somewhat awkward translation of \"SP Assertion Consumer URL.\" While technically correct, it's not idiomatic Latvian. \"SP apgalvojuma patērētāja URL\" would be more natural.",
+          "suggestion": "SP apgalvojuma patērētāja URL"
         },
         {
-          "type": "formatting",
-          "description": "While technically correct, using 'URL' after 'adrese' can sound repetitive. It might be more natural to just use 'adrese'.",
-          "suggestion": "SP apgalvojuma patērētāja adrese (atbalsta POST un novirzīšanas saistīšanu)"
+          "type": "incorrect_translation",
+          "description": "The phrase \"novirzīšanas saistīšanu\" is a bit too technical and verbose for a user-facing label. It's a direct translation of 'Redirect binding.'",
+          "suggestion": "novirzīšanu"
         }
       ],
       "approved_at": null
@@ -236,13 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'SP Assertion Consumer URL' is not accurately translated. 'Usługa konsumenta potwierdzenia' is a bit clunky and doesn't quite capture the meaning of 'Assertion Consumer URL'.  A more accurate translation might involve incorporating the abbreviation 'SP' or explaining its role.",
-          "suggestion": "Adres URL konsumenta potwierdzenia SP (obsługa powiązań POST i Redirect)"
+          "description": "The translation 'Adres URL usługi konsumenta potwierdzenia' is not the most natural or accurate translation of 'Assertion Consumer URL'. 'Assertion Consumer URL' generally refers to the endpoint that receives the assertion. A more natural translation would be something like 'Adres URL konsumenta asercji' or 'Adres URL odbiorcy asercji'.",
+          "suggestion": "Adres URL odbiorcy asercji"
         },
         {
           "type": "formatting",
-          "description": "The translation could benefit from a space after the colon.",
-          "suggestion": "Adres URL usługi konsumenta potwierdzenia : (obsługa powiązań POST i Redirect)"
+          "description": "While not strictly incorrect, the inclusion of 'usługi' feels a bit verbose and could be omitted for better readability. The term 'usługa' (service) is implied.",
+          "suggestion": "Adres URL konsumenta asercji (obsługa powiązań POST i Redirect)"
         }
       ],
       "approved_at": null
@@ -253,18 +238,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Asserção por parte do PS ao URL do Consumidor' is not a natural or accurate translation of 'SP Assertion Consumer URL'. 'PS' is likely an abbreviation that needs to be clarified or avoided. 'Assertion Consumer URL' should be translated more directly.",
-          "suggestion": "URL do Consumidor de Asserções (suporta POST e Redirecionamento)"
+          "description": "The translation \"Asserção por parte do PS ao URL do Consumidor\" is not a natural or accurate translation of \"SP Assertion Consumer URL\". 'SP Assertion Consumer URL' refers to the URL where the Service Provider (SP) receives the assertion. The current translation implies the assertion is *made* by the SP, which isn't correct.",
+          "suggestion": "URL do Consumidor de Asserção do PS (suporta POST e Redirecionamento)"
         },
         {
-          "type": "spelling",
-          "description": "The word 'enlace' (link) is not the best choice here. While technically correct, 'vinculação' or 'binding' would more closely align with the technical meaning in this context.",
-          "suggestion": "URL do Consumidor de Asserções (suporta POST e Redirecionamento)"
+          "type": "incorrect_translation",
+          "description": "The phrase \"do enlace\" is awkward and doesn't accurately convey the meaning of 'binding' in the context of Single Sign-On. It refers to the protocol used (POST or Redirect).",
+          "suggestion": "de ligação"
         },
         {
           "type": "formatting",
-          "description": "The translation includes a parenthetical phrase that doesn't quite match the format of the English. The English is more concise.",
-          "suggestion": "URL do Consumidor de Asserções (suporta POST e Redirecionamento)"
+          "description": "The spacing around the parentheses is inconsistent.  While not a major error, consistent formatting improves readability.",
+          "suggestion": "URL do Consumidor de Asserção do PS (suporta POST e Redirecionamento de ligação)"
         }
       ],
       "approved_at": null
@@ -274,9 +259,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'ligação de redirecionamento' is a bit clunky. 'Redirecionamento' alone would suffice as it's clear from the context.",
-          "suggestion": "URL do consumidor de asserção SP (suporte POST e redirecionamento)"
+          "type": "incorrect_translation",
+          "description": "The term 'ligação de redirecionamento' is a literal translation of 'Redirect binding'. A more natural and common phrasing in Brazilian Portuguese would be 'vinculação por redirecionamento' or simply 'redirecionamento'.",
+          "suggestion": "URL do consumidor de asserção SP (suporte POST e vinculação por redirecionamento)"
         }
       ],
       "approved_at": null
@@ -287,18 +272,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Adresa URL a serviciului consumator pentru aserțiune al furnizorului de servicii' is overly literal and not idiomatic Romanian. 'Furnizorului de servicii' is not the best phrasing. 'SP Assertion Consumer URL' is a specific technical term and needs to be translated in a way that conveys that meaning.  'Aserțiune' might also be too technical for the audience.",
-          "suggestion": "URL-ul de consum al aserțiunii SP (suportă legături POST și redirecționare)"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'aserțiune al furnizorului de servicii' has incorrect grammar.  'Al' should be 'a' because 'aserțiune' is feminine.",
-          "suggestion": "aserțiune a furnizorului de servicii"
+          "description": "The phrase \"serviciului consumator pentru aserţiune al furnizorului de servicii\" is overly literal and awkward. 'SP Assertion Consumer URL' implies a specific endpoint, and the Romanian translation doesn't convey that clearly. \"Furnizorului de servicii\" is also redundant; 'SP' already implies a service provider.",
+          "suggestion": "Adresa URL a serviciului de consum al aserțiunilor SP (acceptare POST și Redirecționare)"
         },
         {
           "type": "formatting",
-          "description": "The translation includes both 'POST' and 'Redirecționare'. It's beneficial to clarify their nature (binding types) for better understanding. Consider adding a short explanation or using a more descriptive term if appropriate.",
-          "suggestion": "URL-ul de consum al aserțiunii SP (suportă legături POST și redirecționare - tipuri de legătură)"
+          "description": "The translation uses an unnecessary long dash (–) instead of a hyphen (-). While not a critical error, it’s stylistically inconsistent and potentially jarring.",
+          "suggestion": "Replace “–” with “-” "
         }
       ],
       "approved_at": null
@@ -309,13 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon at the end of the phrase 'URL-адрес службы обработчика утверждений поставщика сервиса' is unnecessary and disrupts readability. It's more natural to omit it.",
+          "description": "The colon after \"POST\" should be removed to match the style of the English content.",
           "suggestion": "URL-адрес службы обработчика утверждений поставщика сервиса (поддерживаются привязки Redirect и POST)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'SP Assertion Consumer URL' is quite literal and could be improved for a more natural Russian phrasing. 'SP' isn't commonly understood or translated directly.",
-          "suggestion": "URL-адрес для обработки утверждений от поставщика услуг (поддерживаются привязки Redirect и POST)"
         }
       ],
       "approved_at": null
@@ -326,18 +301,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Assertion Consumer URL' is awkward. 'ප්‍රකාශන පරිභෝජක (AC) ඒ.ස.නි.' is a literal translation that doesn't flow naturally in Sinhala. 'Assertion Consumer URL' typically refers to a specific endpoint; a more natural phrasing would be needed.",
-          "suggestion": "Consider a phrase like 'SP ප්‍රකාශන ප්‍රතිකාරක URL' or 'SP ප්‍රකාශන ප්‍රතිකාරක ලිපිනය'."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of abbreviation 'AC' is confusing without explanation.  It's better to avoid abbreviations or briefly explain them.",
-          "suggestion": "Remove 'AC' or add a short explanation like 'ප්‍රකාශන පරිභෝජක (AC) - Assertion Consumer'."
+          "description": "The translation of \"Assertion Consumer URL\" as \"ප්‍රකාශන පරිභෝජක (AC)\" is not ideal. \"ප්‍රකාශන පරිභෝජක\" is technically correct but a more common and easily understood term would be beneficial. \"පරිභෝජක URL\" is clearer.",
+          "suggestion": "SP ප්රකාශන පරිභෝජක URL"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'යළි-හැරවීම් බැඳීමට සහාය දක්වයි' is a literal translation of 'support Redirect binding'.  It's not the most natural way to phrase this in Sinhala.  A more fluent option is needed.",
-          "suggestion": "Consider 'Redirect බැඳීම් සඳහා ධාරණය කරයි' or a similar rephrasing that avoids a direct translation."
+          "description": "While \"යළි-හැරවීම්\" translates to redirects, the entire phrase \"POST සහ යළි-හැරවීම් බැඳීමට සහාය දක්වයි\" is a bit clunky. A more natural phrasing for 'supports POST and Redirect binding' would improve readability.",
+          "suggestion": "POST හා යළි-හැරවීම් ක්‍රමයට අනුකූල වේ"
+        },
+        {
+          "type": "formatting",
+          "description": "The acronym \"AC\" is introduced without explanation. It's better to avoid abbreviations or explain them upon first use.",
+          "suggestion": "Remove 'AC' or include a brief explanation of what it stands for."
         }
       ],
       "approved_at": null
@@ -348,8 +323,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'spojenia' (connection) isn't the most accurate representation of 'binding' in this context. 'Binding' refers to the method of transport (POST or Redirect). A more accurate translation would be 'metódy prenosu'.",
-          "suggestion": "URL spotrebiteľa vyhlásenia SP (podpora metódy prenosu POST a presmerovania)"
+          "description": "The term 'spotrebiteľa' (consumer) might be too literal and less clear in this context. 'Príjemca' (receiver) or 'adresa' (address) might be more appropriate for 'Consumer URL'.",
+          "suggestion": "URL príjemcu vyhlásenia SP (podpora spojenia POST a presmerovania)"
+        },
+        {
+          "type": "formatting",
+          "description": "Consider adding parentheses around 'podpora spojenia POST a presmerovania' to match the English formatting. Although not strictly incorrect, it improves consistency.",
+          "suggestion": "URL príjemcu vyhlásenia SP (podpora (spojenia POST a presmerovania))"
         }
       ],
       "approved_at": null
@@ -360,13 +340,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"potrošnikov\" is not the most accurate translation for \"Consumer\" in this context. \"Potrošnik\" refers to a consumer in a purchasing sense. A more accurate translation would be something closer to 'prejemnik' (recipient) or 'obdelovalnik' (processor).",
+          "description": "The term \"potrošnikov\" is awkward. It literally translates to \"of consumers\". It's more appropriate to use a word that describes the function of the URL, such as \"prejemnika\" (receiver) or a more descriptive phrase.",
           "suggestion": "SP trditve prejemnikov URL (podporni POST in vezava preusmeritve)"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the Slovenian phrasing is a bit clunky. 'Vezava preusmeritve' is overly literal. It can be simplified.",
-          "suggestion": "SP trditve prejemnikov URL (podporni POST in preusmeritev)"
+          "description": "While not strictly incorrect, the parenthesis placement is slightly unusual. It might be more readable with a slight adjustment.",
+          "suggestion": "SP trditve prejemnikov URL (podpira POST in vezavo preusmeritve)"
         }
       ],
       "approved_at": null
@@ -377,13 +357,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'потрошача' (potrošača) doesn't perfectly convey the meaning of 'Consumer' in this context. It translates more directly to 'consumer' in a retail sense. A more accurate translation would be something along the lines of 'Примач' (Primać) or 'Пријемник' (Prijemnik) which refers to a receiver or acceptor, indicating where the assertion is received.",
-          "suggestion": "SP URL примача тврдње (потпора за POST и Redirect везивање)"
+          "description": "The term \"potrošača tvrdnji\" is not the most natural or accurate translation of \"Assertion Consumer\".  A more common and understandable translation would be \"URL za prijem tvrdnji\" or \"URL za potvrdu tvrdnji\".",
+          "suggestion": "URL za prijem tvrdnji"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, using the Cyrillic alphabet might be a barrier for some users. Consider adding a Latin transliteration in parentheses or as an alternative.",
-          "suggestion": "SP URL примача тврдње (потпора за POST и Redirect везивање) (SP URL primаča tvrđenje (potpora za POST i Redirect vezivanje))"
+          "description": "The parentheses around \"(потпора за POST и Redirect везивање)\" are unnecessary and break the flow of the sentence. It sounds like an afterthought rather than an integral part of the explanation.",
+          "suggestion": "URL za prijem tvrdnji (подршка за POST и Redirect везивање)"
         }
       ],
       "approved_at": null
@@ -394,13 +374,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'potpora' (support) doesn't accurately translate 'support' in this context. It implies assistance, not the binding method.",
+          "description": "The term 'potpora' is not the best fit for 'support' in this context. It translates more literally as 'support' or 'backing,' but in the context of technical documentation, 'podrška' would be more appropriate.",
           "suggestion": "SP URL potrošača tvrdnji (podrška za POST i Redirect vezivanje)"
         },
         {
           "type": "spelling",
-          "description": "While generally correct, 'vezivanje' might be slightly too formal for this technical context.  'način' could be considered a more accessible alternative.",
-          "suggestion": "SP URL potrošača tvrdnji (podrška za POST i Redirect način)"
+          "description": "The word 'vezivanje' might be slightly awkward. While technically correct, 'vezanost' or 'vezivanje' could be smoother depending on intended nuance.",
+          "suggestion": "SP URL potrošača tvrdnji (podrška za POST i Redirect vezanost)"
         }
       ],
       "approved_at": null
@@ -411,8 +391,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Assertion Consumer' is not accurately translated. 'Tüketici' (consumer) in this context isn't the best equivalent.  'Alıcı' or 'Kabul Eden' would be more appropriate in the context of Single Sign-On.",
-          "suggestion": "SP Bildirim Alıcı URL'si (POST ve Yönlendirme bağlamayı destekler)"
+          "description": "The translation of 'Assertion Consumer' is slightly awkward. 'Tüketici' directly translates to 'consumer,' which doesn't convey the technical meaning as well in this context. A more accurate term would be 'Onay URL'si or 'Doğrulama URL'si' to better represent 'Assertion Consumer'.",
+          "suggestion": "SP Onay URL'si (POST ve Yönlendirme bağlamayı destekler)"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using a hyphen to connect 'POST' and 'Yönlendirme' could improve readability. Turkish often prefers connecting phrases like this.",
+          "suggestion": "SP Onay URL'si (POST-Yönlendirme bağlamayı destekler)"
         }
       ],
       "approved_at": null
@@ -423,13 +408,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL-адреса служби обробника тверджень постачальника сервісу\" is overly verbose and technical. It's a very literal and complex translation of 'SP Assertion Consumer URL'. A more natural and understandable Ukrainian translation would be something like \"URL споживача тверджень постачальника\" or \"Адреса споживача тверджень постачальника\".",
-          "suggestion": "URL споживача тверджень постачальника"
+          "description": "The term \"служби обробника тверджень постачальника сервісу\" is overly verbose and doesn't accurately reflect the meaning of \"SP Assertion Consumer URL.\"  It's technically correct, but not ideal for clarity.",
+          "suggestion": "URL-адреса для обробки тверджень постачальника (підтримуються зв’язування POST та Redirect)"
         },
         {
           "type": "formatting",
-          "description": "The phrase \"зв’язування POST та Redirect\" should ideally be more consistently translated. 'Binding' in this context is often represented as 'метод прив'язки'.",
-          "suggestion": "метод прив’язки POST та Redirect"
+          "description": "The translation uses a hyphen (\"-\") instead of a more common en dash (–) between \"URL-адреса\" and \"служби\". While not a severe issue, en dashes are preferred for joining related terms.",
+          "suggestion": "URL–адреса служби обробника тверджень постачальника сервісу"
         }
       ],
       "approved_at": null
@@ -440,13 +425,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation 'ĐĂNG TẢI' translates to 'UPLOAD' which is not the correct meaning of POST in the context of SP Assertion Consumer URL. It should represent HTTP POST method.",
+          "description": "The Vietnamese translation 'ĐĂNG TẢI' directly translates to 'UPLOAD', which is not the intended meaning of 'POST' in the context of SP Assertion Consumer URL. It refers to the HTTP POST method.",
           "suggestion": "Assertion Consumer (hỗ trợ phương thức POST và chuyển hướng ràng buộc)"
         },
         {
           "type": "formatting",
-          "description": "The term 'ràng buộc' should be followed by a space.",
-          "suggestion": "Assertion Consumer (hỗ trợ phương thức POST và chuyển hướng ràng buộc)"
+          "description": "The word 'ràng buộc' (bound) isn't as commonly used in this context. While technically correct, it might sound overly technical for a wider audience.",
+          "suggestion": "Assertion Consumer (hỗ trợ phương thức POST và chuyển hướng)"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Create folder",
   "content_en_sha1_hash": "e59f63fa517890d45d5ab20a380fe68f2302ef67",
   "created_at": "2025-05-19T21:30:55.036Z",
-  "updated_at": "2025-05-21T10:35:02.167Z",
+  "updated_at": "2025-05-24T10:44:52.688Z",
   "comment": {
     "text": "This translation key describes the text displayed on a UI element that prompts users to create a folder, specifically in a Hotkeys panel. It is used for accessibility purposes to provide alternative text for keyboard navigation.",
     "is_auto": true,
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Qovluq yaradın' literally translates to 'You created a folder'. The original English is an instruction 'Create folder', which should be in the imperative mood.",
+          "description": "The translation \"Qovluq yaradın\" directly translates to \"You created a folder.\" The English phrase \"Create folder\" is an instruction, not a statement of fact. A more appropriate translation would be an imperative form.",
           "suggestion": "Yenı qovluq yarat"
         }
       ],
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Map maken\" is technically correct, \"Map\" can be ambiguous in this context. It's generally understood as \"folder\" in a directory structure. \"Map maken\" implies creating a geographic map.",
-          "suggestion": "Maak map"
+          "description": "While \"Map maken\" is understandable, a more accurate and natural translation for \"Create folder\" in a software context would be \"Map aanmaken\" or \"Folder aanmaken\". \"Maken\" is too general.",
+          "suggestion": "Map aanmaken"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Crează un director\" is understandable, \"Crează\" is a colloquial and potentially less formal way of saying 'create'.  A more standard and formal translation would be 'Creează un director'.  In UI contexts, formal language is generally preferred.",
-          "suggestion": "Creează un director"
+          "description": "While 'Crează un director' is understandable, 'Crează dosar' would be a more natural and common translation for 'Create folder' in a UI context in Romanian. 'Director' is often used for a more formal directory structure, while 'dosar' is more appropriate for a simple folder creation within a system.",
+          "suggestion": "Crează dosar"
         }
       ],
       "approved_at": null
@@ -171,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'බහාලුමක් සාදන්න' is understandable, a more natural and precise translation of 'Create folder' in Sinhala would be 'මතෘකා සාදා ගන්න' (mathruka sada gana). 'බහාලුමක්' literally means 'a basket' or 'a container', which doesn't accurately reflect the meaning of a 'folder' in a digital context.",
-          "suggestion": "මතෘකා සාදා ගන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'folder' is often transliterated to 'folder' in Serbian, as it's a borrowed English word. While 'фолдер' is understandable, 'фолдер' is more common and preferred in modern usage, especially in a technical context.",
+          "suggestion": "Креирај фолдер"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

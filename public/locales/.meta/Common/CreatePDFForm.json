@@ -3,7 +3,7 @@
   "content": "Create PDF Form",
   "content_en_sha1_hash": "63a20b374beb9b6d425be211a164c665bcb7ba88",
   "created_at": "2025-05-19T21:30:43.912Z",
-  "updated_at": "2025-05-28T09:30:02.078Z",
+  "updated_at": "2025-09-26T15:21:06.029Z",
   "comment": {
     "text": "Create a PDF form. This label is used in an article component's main button dropdown menu, prompting users to create a new PDF form.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 369,
+      "line_number": 374,
       "context": "// const templatePDFForm = {\n //   id: \"actions_template-PDF-form\",\n //   className: \"main-button_drop-down\",\n //   icon: FormReactSvgUrl,\n //   label: t(\"Common:CreatePDFForm\"),\n //   key: \"new-form\",\n //   items: [createTemplateBlankDocxf, showSelectorFormRoomDocx],\n // };\n \n const uploadFromDocSpace = {",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'PDF forması yaradın' directly translates to 'You created a PDF form'. The English phrase 'Create PDF Form' is more appropriately translated as 'PDF forması düzəldin' or 'PDF forması hazırlayın'.  'Yaradın' implies creation from scratch, which isn't the intended meaning.",
-          "suggestion": "PDF forması düzəldin"
+          "description": "The translation \"PDF forması yaradın\" translates literally to \"You created a PDF form.\" While understandable, it's more appropriate to use a more general phrase indicating the action of creating, rather than implying it was done by the user. A better translation would convey the concept of 'Creating a PDF Form'.",
+          "suggestion": "PDF forması yaratmaq"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ստեղծել PDF ձև' is a literal translation and might not be the most natural way to express 'Create PDF Form' in Armenian. A more idiomatic translation might be preferred.",
-          "suggestion": "Consider alternatives like 'Ստեղծեք PDF ձևաչափ' (Create PDF format) or 'Ձևաչափի PDF ստեղծում' (PDF form creation)."
+          "description": "The translation 'Ստեղծել PDF ձև' while generally understandable, doesn't perfectly capture the nuance of 'Create PDF Form'. A more accurate translation would include the concept of *designing* or *building* the form, not just creating an empty PDF.",
+          "suggestion": "Consider alternatives like 'Դիզայնել PDF ձև' (Design PDF Form) or 'Ստեղծել և դիզայնել PDF ձև' (Create and Design PDF Form)."
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Creare formular PDF' is slightly awkward. A more natural Romanian phrasing would be 'Creați formular PDF' (formal) or 'Creează formular PDF' (informal). The use of 'Creați' or 'Creează' conveys a more direct sense of creation.",
+          "description": "While \"Creare formular PDF\" is understandable, a more natural and accurate translation of \"Create PDF Form\" would be \"Creați formular PDF\" or \"Generați formular PDF\". \"Creare\" implies a more general creation process, while \"Creați\" (formal) or \"Generați\" is more aligned with creating a specific PDF form.",
           "suggestion": "Creați formular PDF"
         }
       ],
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Kreiraj' is correct for 'Create', 'Formular' is not the standard Serbian term for 'Form'. The more common and accurate term is 'Forma'.",
-          "suggestion": "Kreiraj PDF Forma"
+          "description": "While technically correct, 'Kreiraj PDF Formular' isn't the most natural phrasing in Serbian. 'Formular' is a direct import from German and while understood, 'obrazac' is the more common and preferred Serbian term for 'form'.",
+          "suggestion": "Kreiraj PDF Obrazac"
         }
       ],
       "approved_at": null

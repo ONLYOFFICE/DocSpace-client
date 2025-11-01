@@ -3,7 +3,7 @@
   "content": "Select the Google Workspace backup files to start the data import. Multiple files can be selected. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "content_en_sha1_hash": "f25f818a58e3d7ec05c1f90165f66a8facd46ed1",
   "created_at": "2025-05-19T21:30:52.519Z",
-  "updated_at": "2025-05-28T09:30:02.501Z",
+  "updated_at": "2025-06-30T12:20:31.402Z",
   "comment": {
     "text": "\"This translation key is used to describe the option to select Google Workspace backup files during data import. It appears in a step of a data import process and provides context for users. The purpose is to inform users about the expected behavior.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 50,
+      "line_number": 49,
       "context": "logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFiles\"),\n description: t(\"Settings:SelectFileDescriptionGoogle\"),\n component: (\n <SelectFileStep\n t={t}\n isMultipleUpload\n migratorName=\"GoogleWorkspace\"",
       "module": "/packages/client"
     },
@@ -36,18 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Select the Google Workspace backup files' is not accurately translated. 'Google Workspace' should be translated in a more familiar way for a Saudi Arabian audience. A more natural translation would include using a commonly understood equivalent.",
-          "suggestion": "اختر ملفات النسخ الاحتياطي لحسابات Google (أو: ملفات النسخ الاحتياطي لخدمات Google)"
+          "description": "The phrase 'Select the Google Workspace backup files' is not accurately translated. 'مساحة عمل Google' (Google Workspace) is correct, but 'الاحتفاظ بنسخة احتياطية' (for keeping a backup) is a bit verbose and could be simplified.",
+          "suggestion": "اختر ملفات النسخ الاحتياطية لمساحة عمل Google"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word ' الاحتفاظ بنسخة احتياطية ' is a bit formal. A more colloquial and easier to understand phrasing would improve readability.",
-          "suggestion": "اختر ملفات النسخ الاحتياطي"
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, the sentence structure could be slightly improved for better flow in Arabic. Splitting the sentence after 'ملفات متعددة' could enhance readability.",
-          "suggestion": "اختر ملفات النسخ الاحتياطي لحسابات Google لبدء استيراد البيانات. يمكن تحديد ملفات متعددة. بعد ذلك، بمجرد اكتمال تحميل البيانات وتحليلها، ستبدأ الخطوة التالية تلقائيا."
+          "description": "The phrase 'Once the data upload and analysis are complete' is a bit literal and could be more natural in Arabic. 'بمجرد اكتمال تحميل البيانات وتحليلها' translates to 'once the data upload and analysis are complete,' but a more fluent phrasing might improve readability.",
+          "suggestion": "عند الانتهاء من تحميل البيانات وتحليلها"
         }
       ],
       "approved_at": null
@@ -58,13 +53,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Select the Google Workspace backup files' is not accurately conveyed. 'Ehtiyat fayllarını seçin' literally translates to 'select the backup files', which is correct, but misses the 'Google Workspace' specification. It's important to clarify that these are Google Workspace backup files.",
-          "suggestion": "Məlumat idxalına başlamaq üçün Google Workspace *ehtiyat* fayllarını seçin."
+          "description": "The phrase \"Select the Google Workspace backup files\" is translated as \"Məlumat idxalına başlamaq üçün Google Workspace ehtiyat fayllarını seçin\". While technically correct, a more natural and direct translation would be \"Google Workspace ehtiyat fayllarını seçərək məlumat idxalına başlayın\" or \"Google Workspace ehtiyat fayllarını seçin ki, məlumat idxalına başlayaq\".",
+          "suggestion": "Google Workspace ehtiyat fayllarını seçərək məlumat idxalına başlayın"
         },
         {
           "type": "formatting",
-          "description": "The sentence structure feels slightly unnatural in Azerbaijani. While grammatically correct, it could be improved for better flow.",
-          "suggestion": "Google Workspace ehtiyat fayllarını seçərək məlumat idxalına başlayın. Birdən çox fayl seçilə bilər. Məlumatların yüklənməsi və təhlili tamamlandıqdan sonra növbəti addım avtomatik olaraq başlayacaq."
+          "description": "The sentence structure feels a bit long and could benefit from breaking it up for better readability in Azerbaijani. Although grammatically correct, it's not the most fluid.",
+          "suggestion": "Məlumat idxalına başlamaq üçün Google Workspace ehtiyat fayllarını seçin. Birdən çox fayl seçilə bilər. Məlumatların yüklənməsi və təhlili tamamlandıqdan sonra növbəti addım avtomatik başlayacaq."
         }
       ],
       "approved_at": null
@@ -75,13 +70,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'входирането' (vhodiraneeto) is not the most natural or accurate translation of 'import' in this context.  A more suitable translation would be 'качване' (kachvane) or 'внос' (vnos). While 'внос' is technically 'import', 'качване' (uploading) is more aligned with the user action of selecting files.",
-          "suggestion": "Изберете архивните файлове на Google Workspace, за да започнете качването на данни."
+          "description": "The English phrase 'data import' is translated as 'входирането на данни'. While technically correct, 'импортиране на данни' is a more common and natural-sounding translation for 'data import' in Bulgarian in this context.",
+          "suggestion": "импортиране на данни"
         },
         {
           "type": "formatting",
-          "description": "While grammatically correct, the sentence structure could be slightly improved for better flow. It sounds a bit literal from the English.",
-          "suggestion": "Изберете архивните файлове на Google Workspace, за да започнете качването на данни. Могат да бъдат избрани множество файлове. След приключване на качването и анализа на данните, следващата стъпка ще стартира автоматично."
+          "description": "The Bulgarian translation uses a comma (,) instead of a period (.) after 'файлове'.",
+          "suggestion": "архивните файлове на Google Workspace, за да започнете импортирането на данни."
         }
       ],
       "approved_at": null
@@ -92,18 +87,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Select the Google Workspace backup files\" is not accurately translated. \"Vyberte záložní soubory Google Workspace\" is closer but could be improved for clarity and natural flow.",
+          "description": "The phrase 'Select the Google Workspace backup files' is not accurately reflected. 'Vyberte záložní soubory Google Workspace' is too literal and could be improved for natural flow.",
           "suggestion": "Vyberte soubory zálohy Google Workspace"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'to start the data import' is not accurately translated. 'a spusťte import dat' can feel slightly abrupt.",
+          "description": "The phrase 'to start the data import' is not quite idiomatic in Czech. 'a spusťte import dat' feels a bit clunky.",
           "suggestion": "pro zahájení importu dat"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'Po dokončení nahrávání a analýzy dat se automaticky spustí další krok' is technically correct, it could be more naturally phrased in Czech.",
-          "suggestion": "Po dokončení nahrávání a analýzy dat automaticky přejdete k dalšímu kroku."
+          "type": "formatting",
+          "description": "The sentence structure 'Lze vybrat více souborů' is grammatically correct but reads somewhat awkwardly. It could be integrated more naturally into the preceding sentence.",
+          "suggestion": "Můžete vybrat více souborů."
         }
       ],
       "approved_at": null
@@ -119,9 +114,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'μεταφόρτωση' is a bit formal for this context. While not incorrect, a more conversational alternative might be better.",
+          "suggestion": "ανεβάσετε"
+        },
+        {
           "type": "formatting",
-          "description": "The Greek translation lacks a period at the end of the first sentence.",
-          "suggestion": "Επιλέξτε τα αρχεία αντιγράφων ασφαλείας του Google Workspace για να ξεκινήσετε την εισαγωγή δεδομένων."
+          "description": "The sentence structure could be slightly improved for better flow in Greek. The repetition of 'θα ξεκινήσει' feels a little awkward.",
+          "suggestion": "Μόλις ολοκληρωθεί η μεταφόρτωση και η ανάλυση των δεδομένων, θα προχωρήσει αυτόματα το επόμενο βήμα."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation contradicts the English content. The English states multiple files can be selected, while the Finnish says only one file can be selected. This is a significant error.",
-          "suggestion": "Valitse Google Workspace -varmuuskopiotiedostot aloittaaksesi tietojen siirto. Useita tiedostoja voidaan valita. Seuraava vaihe aloitetaan automaattisesti, kun tietojen lataus ja analysointi on tehty."
+          "description": "The Finnish translation contains a contradictory statement. The English states multiple files can be selected, but the Finnish says 'vain yksi tiedosto voidaan valita' (only one file can be selected).",
+          "suggestion": "Valitse Google Workspace-varmuuskopiotiedostoja aloittaaksesi tietojen siirto. Useita tiedostoja voidaan valita."
         }
       ],
       "approved_at": null
@@ -150,12 +150,12 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'fichier' is misspelled. It should be 'fichiers'.",
+          "description": "The word \"fichier\" is misspelled. It should be \"fichiers\".",
           "suggestion": "fichiers"
         },
         {
           "type": "grammar",
-          "description": "The verb 'est lancé' should be 'sera lancée' to agree with 'étape' (feminine).",
+          "description": "The verb \"est lancé\" should be \"sera lancée\".  It needs to agree in gender with 'étape'.",
           "suggestion": "sera lancée"
         }
       ],
@@ -191,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ອັດຕະໂນມັດ' (automatic) is spelled correctly, but the Lao spelling often prefers 'ອັດຕະກົນ'",
-          "suggestion": "ອັດຕະກົນ"
+          "description": "The word 'ອັດຕະໂນມັດ' (automatically) is spelled correctly, but its usage might be slightly formal for a user interface. Consider a more approachable alternative.",
+          "suggestion": "ອັດຕະໂນມັດ might be replaced with something like 'ອັດຕະໂນມັດ' or 'ໂດຍອັດຕະໂນມັດ' for a more user-friendly tone."
         }
       ],
       "approved_at": null
@@ -245,18 +245,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Select the Google Workspace backup files' is not accurately conveyed.  'Google Workspace' is well understood, but 'backup files' could be more clearly translated as 'ප්‍රතිස්ථ ගොනු' (prathistha gonu).",
-          "suggestion": "Replace 'ගූගල් වැඩබිමේ උපස්ථ ගොනු' with 'ගූගල් වැඩබිමේ ප්‍රතිස්ථ ගොනු'."
+          "description": "The phrase \"ආයාත කිරීම ඇරඹීමට\" is a bit awkward. A more natural phrasing for 'to start the data import' would be 'දත්ත ආයාත කිරීමට' or 'දත්ත ආයාතය ආරම්භ කිරීමට'.",
+          "suggestion": "Replace \"ආයාත කිරීම ඇරඹීමට\" with \"ආයාත කිරීමට\" or \"ආයාතය ආරම්භ කිරීමට\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Multiple files can be selected' is slightly awkward. While technically correct, it can be improved for natural flow.",
-          "suggestion": "Replace 'ගොනු කිහිපයක් තේරීමට හැකිය' with 'ගොනු කිහිපයක් තෝරා ගත හැකිය' or 'ඔබ ගොනු කිහිපයක් තෝරා ගත හැකියි'."
+          "description": "The phrase \"ගොනු කිහිපයක් තේරීමට හැකිය\" is grammatically correct but a more common and natural phrasing for 'multiple files can be selected' would be 'ගොනු කිහිපයක් තෝරා ගත හැකිය'.",
+          "suggestion": "Replace \"ගොනු කිහිපයක් තේරීමට හැකිය\" with \"ගොනු කිහිපයක් තෝරා ගත හැකිය\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Once the data upload and analysis are complete' is wordy. While accurate, can be simplified.",
-          "suggestion": "Replace 'දත්ත උඩුගත වී විශ්ලේෂණය අවසන් වූ පසු' with 'දත්ත උඩුගත වී විශ්ලේෂණය වූ පසු'."
+          "description": "The phrase \"උඩුගත වී විශ්ලේෂණය අවසන් වූ පසු\" could be slightly improved. While understandable, a more elegant phrasing for 'Once the data upload and analysis are complete' would be 'දත්ත උඩුගත වී විශ්ලේෂණය වීමෙන් පසු'.",
+          "suggestion": "Replace \"උඩුගත වී විශ්ලේෂණය අවසන් වූ පසු\" with \"දත්ත උඩුගත වී විශ්ලේෂණය වීමෙන් පසු\"."
         }
       ],
       "approved_at": null
@@ -267,8 +267,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'start the data import' is somewhat awkward. A more natural Slovak phrasing would be 'začať import údajov' or 'spustiť import údajov'. While 'spustite import údajov' is used in the translation, it sounds less natural than 'začať import údajov'.",
-          "suggestion": "Vyberte záložné súbory služby Google Workspace a *začať import údajov*."
+          "description": "The phrase 'start the data import' is translated as 'spustite import údajov'. While understandable, a more natural Slovak phrasing would be 'začnite import údajov' or 'spustite import dát'.",
+          "suggestion": "spustite import dát"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Multiple files can be selected' is translated as 'Je možné vybrať viacero súborov'. While technically correct, it sounds slightly formal. A more colloquial and user-friendly option would be 'Môžete vybrať viac súborov' or 'Je možné vybrať viaceré súbory'.",
+          "suggestion": "Môžete vybrať viac súborov"
         }
       ],
       "approved_at": null
@@ -285,13 +290,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Select the Google Workspace backup files' is not accurately translated. 'Изаберите Google Workspace датотеке за резервну копију' translates to 'Select Google Workspace files for backup,' implying all files are for backup, rather than selecting *the* backup files.",
-          "suggestion": "Изаберите Google Workspace датотеке за резервне копије"
+          "description": "The phrase \"Google Workspace датотеку за резервну копију\" is slightly awkward. A more natural Serbian translation for 'Google Workspace backup files' would be something like 'Google Workspace datoteke za sigurnosnu kopiju' or 'Google Workspace sigurnosne kopije'.",
+          "suggestion": "Google Workspace datoteke za sigurnosnu kopiju"
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a sentence structure that feels slightly awkward and less fluent in Serbian. It could be improved for better readability.",
-          "suggestion": "Изаберите датотеке за резервну копију Google Workspace да бисте започели увоз података. Можете изабрати више датотека. Након што се заврши отпремање и анализа података, следећи корак ће се аутоматски покренути."
+          "type": "incorrect_translation",
+          "description": "The word 'датотеку' is in the accusative case, but in this context, a more general nominative 'датотека' would be preferred for clarity. Although technically correct, it's not the most natural sounding.",
+          "suggestion": "Google Workspace datoteke za sigurnosnu kopiju"
         }
       ],
       "approved_at": null
@@ -302,13 +307,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Google Workspace datoteku za rezervnu kopiju\" is overly literal and doesn't flow naturally in Serbian. It translates to \"Google Workspace file for backup\".",
-          "suggestion": "Google Workspace datoteke za rezervnu kopiju"
+          "description": "The phrase \"datoteku za rezervnu kopiju\" is a literal translation of \"backup file\" and sounds unnatural in Serbian.  A more natural phrasing would be \"datoteke za Google Workspace\".",
+          "suggestion": "Izaberite datoteke za Google Workspace da biste započeli uvoz podataka."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"sledeći korak će se automatski pokrenuti\" is a bit stiff. While grammatically correct, it's not the most natural way to express the meaning.",
-          "suggestion": "automatski će se preći na sledeći korak"
+          "description": "The word 'sledeći' translates as 'next' but in this context, 'sledeći korak' can sound a little formal. A more conversational option would be better.",
+          "suggestion": "Nakon što se završe otpremanje i analiza podataka, automatski će se preći na sledeći korak."
         }
       ],
       "approved_at": null
@@ -325,8 +330,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'data import' is translated as 'імпорт даних'. While technically correct, 'завантаження даних' (data upload) might be more natural and align better with the preceding phrase about 'вивантаження даних' (data upload).",
-          "suggestion": "Виберіть файли резервної копії Google Workspace, щоб почати завантаження даних."
+          "description": "The phrase 'вивантаження даних' (vynhantuvannya danych) is a less common and slightly awkward translation of 'data upload'. A more natural and common translation would be 'завантаження даних' (zavantuvannya danych).",
+          "suggestion": "Завантаження даних"
         }
       ],
       "approved_at": null
@@ -343,13 +348,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Once the data upload and analysis are complete' is translated as '数据上传和分析完成后，系统会自动启动下一步'. While technically correct, it's overly literal and less natural in Chinese. The word '系统' (system) isn't necessary and adds unnecessary formality. A more natural phrasing would imply the process continues automatically.",
-          "suggestion": "数据上传和分析完成后，将自动进入下一步。"
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses a period after 'Multiple files can be selected.' The Chinese translation lacks a corresponding punctuation. It's a minor point but maintaining consistent punctuation improves readability.",
-          "suggestion": "您可以选择多个文件。"
+          "description": "The phrase 'Once the data upload and analysis are complete' is translated as '数据上传和分析完成后，系统会自动启动下一步'. While technically correct, it's more natural and aligns better with the English phrasing to say something like '数据上传和分析完成后，系统将自动进入下一步' or '数据上传和分析完成后，下一步将自动开始'. The current phrasing feels slightly awkward in Chinese.",
+          "suggestion": "数据上传和分析完成后，系统将自动进入下一步"
         }
       ],
       "approved_at": null

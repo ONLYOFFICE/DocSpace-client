@@ -3,7 +3,7 @@
   "content": "People",
   "content_en_sha1_hash": "b37554f695b15005fd23907b9488e0a8ad4bca5f",
   "created_at": "2025-05-19T21:30:47.324Z",
-  "updated_at": "2025-05-28T09:30:02.510Z",
+  "updated_at": "2025-08-11T09:02:43.943Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"People\" in various contexts throughout the application, such as step names and export details. It appears in a workspace settings component, indicating it likely refers to user or employee information.",
     "is_auto": true,

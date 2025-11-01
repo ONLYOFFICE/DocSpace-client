@@ -3,7 +3,7 @@
   "content": "Last activity",
   "content_en_sha1_hash": "1c73b806203dadd6ca31c5839a487aa2613433e6",
   "created_at": "2025-05-19T21:30:55.727Z",
-  "updated_at": "2025-05-28T09:30:02.457Z",
+  "updated_at": "2025-09-23T07:24:24.175Z",
   "comment": {
     "text": "This translation key is used for the text \"Last activity\" in various UI elements such as table headers and dropdowns. It appears on screens related to room management and file organization, providing context about the type of activity associated with a particular item.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 619,
+      "line_number": 721,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Activity\",\n title: t(\"LastActivity\"),\n enable: roomColumnActivityIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 619,
+      "line_number": 721,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Activity\",\n title: t(\"LastActivity\"),\n enable: roomColumnActivityIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 123,
-      "context": "{ value: \"custom\", label: t(\"SetItUp\") },\n ];\n \n const [columnsOptions, setColumnsOptions] = useState([\n { key: \"Owner\", label: t(\"Common:Owner\") },\n { key: \"Activity\", label: t(\"Files:LastActivity\") },\n ]);\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "line_number": 127,
+      "context": "{ value: \"custom\", label: t(\"SetItUp\"), dataTestId: \"custom_radio_button\" },\n ];\n \n const [columnsOptions, setColumnsOptions] = useState([\n { key: \"Owner\", label: t(\"Common:Owner\") },\n { key: \"Activity\", label: t(\"Files:LastActivity\") },\n ]);\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     }
   ],
@@ -81,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Viimeaikainen toiminta' translates to 'recent activity', which isn't as direct or accurate as 'Last activity'. While understandable, it lacks the specific temporal reference of 'last'.",
+          "suggestion": "Viimeisin toiminta"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -153,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Ultima activitate\" is grammatically correct but not the best translation for \"Last activity\" in the context of file system metadata. \"Ultima activitate\" translates to \"Last activity\" directly, which sounds slightly awkward. A more natural Romanian phrasing for this label would be \"Data ultimei activități\" (Date of last activity) or \"Ultima modificare\" (Last modification).",
+          "suggestion": "Consider \"Data ultimei activități\" or \"Ultima modificare\"."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -207,13 +219,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Hoạt động cuối\" doesn't fully capture the meaning of \"Last activity\". While it translates to \"last activity\", it sounds a bit abrupt and might imply the *final* activity ever, rather than the most recent one. A more natural translation might be \"Lần hoạt động cuối\" or \"Hoạt động gần nhất\".",
+          "suggestion": "Lần hoạt động cuối"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Last activity' implies the most recent activity. '近期活动' (Jìnqí huódòng) translates to 'recent activities' which is slightly broader. While not incorrect, it doesn't capture the nuance of 'last'.",
+          "suggestion": "考虑使用更准确的翻译，例如 '最后活动' (Zuìhòu huódòng) or '最近一次活动' (Zuìjìn yī cì huódòng) to more accurately convey 'last activity'."
+        }
+      ],
       "approved_at": null
     }
   }

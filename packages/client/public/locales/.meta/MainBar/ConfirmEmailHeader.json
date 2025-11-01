@@ -3,7 +3,7 @@
   "content": "Please activate your email ({{ email }}) to get access to the {{productName}} features.",
   "content_en_sha1_hash": "2460f1b5dab6b675bb302b34cc81639f46c34ae9",
   "created_at": "2025-05-19T21:30:54.106Z",
-  "updated_at": "2025-05-28T09:30:02.142Z",
+  "updated_at": "2025-09-26T15:21:06.057Z",
   "comment": {
     "text": "This translation key \"ConfirmEmailHeader\" is used to display a message prompting users to activate their email address in order to access features of the productName. It appears as a header in a dialog or notification. The translation should reflect a friendly and instructional tone to guide users through the activation process.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 104,
-      "context": "onClick={onDeactivateClick}\n isDisabled={notActivatedEmail}\n />\n {notActivatedEmail ? (\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"MainBar:ConfirmEmailHeader\", {\n email: owner.email,\n productName: t(\"Common:ProductName\"),\n })}\n <Link\n className=\"request-again-link\"",
+      "line_number": 99,
+      "context": "isDisabled={notActivatedEmail}\n testId=\"request_deactivate_portal_button\"\n />\n {notActivatedEmail && tReady ? (\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"MainBar:ConfirmEmailHeader\", {\n email: owner.email,\n productName: t(\"Common:ProductName\"),\n })}\n <Link\n className=\"request-again-link\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 112,
-      "context": "onClick={onDeleteClick}\n isDisabled={notActivatedEmail}\n />\n {notActivatedEmail ? (\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"MainBar:ConfirmEmailHeader\", {\n email: owner.email,\n productName: t(\"Common:ProductName\"),\n })}\n <Link\n className=\"request-again-link\"",
+      "line_number": 109,
+      "context": "isDisabled={notActivatedEmail}\n testId=\"delete_portal_button\"\n />\n {notActivatedEmail && tReady ? (\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"MainBar:ConfirmEmailHeader\", {\n email: owner.email,\n productName: t(\"Common:ProductName\"),\n })}\n <Link\n className=\"request-again-link\"",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'يرجى تنشيط' (yurja tansheet) translates to 'Please activate' but a more natural and common phrasing in Arabic would be 'من فضلك فعّل' (min fadlik fa'al) or 'رجاءً فعّل' (rajaan fa'al).",
-          "suggestion": "رجاءً فعّل (rajaan fa'al) or من فضلك فعّل (min fadlik fa'al)"
+          "description": "The word 'activate' is not accurately translated. 'تنشيط' (tanashit) implies a more complex activation process than simply verifying an email. A more appropriate translation would be 'تفعيل' (taf'eel) or 'التحقق من' (al-tahaqquq min).",
+          "suggestion": "يرجى تفعيل بريدك الإلكتروني ({{ email }}) للوصول إلى ميزات {{productName}}"
         }
       ],
       "approved_at": null
@@ -54,13 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'aktiv edin' for 'activate' is technically correct, but a more natural and commonly used phrasing would be 'təsdiqləyin'.",
-          "suggestion": "Lütfən, {{productName}} xüsusiyyətlərinə daxil olmaq üçün e-poçtunuzu ({{ email }}) təsdiqləyin."
+          "description": "The English phrase 'Please activate your email' is not accurately translated. 'Activate' implies an action on the email itself, which is not what's intended. It should imply activating the account linked to the email.",
+          "suggestion": "Lütfən, {{productName}} xüsusiyyətlərinə daxil olmaq üçün hesabınızı e-poçtunuzla ({{ email }}) təsdiqləyin."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the sentence structure could be slightly improved for better flow. The word order could be adjusted.",
-          "suggestion": "Lütfən, {{productName}} xüsusiyyətlərinə daxil olmaq üçün {{ email }} e-poçt ünvanınızı təsdiqləyin."
+          "description": "The word order in the Azerbaijani translation could be more natural. Placing 'e-poçtunuzu' closer to 'aktiv edin' would improve readability.",
+          "suggestion": "Lütfən, {{productName}} xüsusiyyətlərinə daxil olmaq üçün {{ email }} e-poçt ünvanınızı aktiv edin."
         }
       ],
       "approved_at": null
@@ -77,13 +77,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Pro získání přístupu\" is overly formal and wordy. A more natural and concise translation for \"to get access\" would be \"pro přístup\".",
-          "suggestion": "Pro přístup k funkcím {{productName}} aktivujte svůj e-mail ({{ email }})."
+          "description": "The translation 'Pro získání přístupu k funkcím {{productName}} aktivujte svůj e-mail ({{ email }})' is a bit literal and not the most natural way to phrase this in Czech. A more idiomatic translation would emphasize the 'activation' process more clearly.",
+          "suggestion": "Aktivujte svůj e-mail ({{ email }}) a získejte přístup k funkcím {{productName}}."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'aktivujte svůj e-mail' sounds slightly awkward. A more fluent translation for 'activate your email' would be 'ověřte svůj e-mail' or 'potvrďte svůj e-mail'.",
-          "suggestion": "Pro přístup k funkcím {{productName}} ověřte svůj e-mail ({{ email }})."
+          "type": "formatting",
+          "description": "The order of '{{ email }}' and the activation verb is less common in Czech. It reads a little awkwardly.",
+          "suggestion": "Aktivujte svůj e-mail ({{ email }}) a získejte přístup k funkcím {{productName}}."
         }
       ],
       "approved_at": null
@@ -99,9 +99,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"αποκτήσετε πρόσβαση\" (apoktisete prosvasi) which translates to 'to acquire access' is a bit awkward. A more natural phrasing would be 'να έχετε πρόσβαση' (na chete prosvasi) which means 'to have access'.",
-          "suggestion": "Ενεργοποιήστε το email ({{ email }}) σας για να έχετε πρόσβαση στις λειτουργίες του {{productName}}."
+          "type": "formatting",
+          "description": "The Greek translation lacks a space before the parenthesis after 'email'.",
+          "suggestion": "Ενεργοποιήστε το email ( {{ email }}) σας για να αποκτήσετε πρόσβαση στις λειτουργίες του {{productName}}."
         }
       ],
       "approved_at": null
@@ -109,7 +109,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"active su correo electrónico\" is not the most natural or idiomatic translation for \"activate your email.\" A more accurate translation would be \"verifique su correo electrónico\" or \"confirme su correo electrónico\".",
+          "suggestion": "Por favor, verifique su correo electrónico ({{ email }}) para obtener acceso a las características de {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -118,13 +124,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Ole hyvä ja' is a bit formal for this context. A more natural and conversational alternative would be more appropriate.",
-          "suggestion": "Please consider alternatives like 'Aktivoi sähköpostisi' or 'Varmista sähköpostisi'."
+          "description": "The phrasing 'Ole hyvä ja aktivoi sähköpostisi' is a bit formal and less natural. A more common and user-friendly way to say 'Please activate your email' would be 'Aktivoi sähköpostiosoitteesi'.",
+          "suggestion": "Aktivoi sähköpostiosoitteesi"
         },
         {
           "type": "incorrect_translation",
-          "description": "The possessive form ':n' is grammatically correct but a more natural phrasing would be using the genitive case directly or a different construction to avoid the formal possessive.",
-          "suggestion": "Consider 'saadaksesi {{productName}}:n ominaisuudet käyttöön' to 'saadaksesi {{productName}} ominaisuudet käyttöön' or 'voidaksesi käyttää {{productName}} ominaisuuksia'."
+          "description": "The possessive form '{{productName}}:n' is grammatically correct but can sound slightly clunky. A more natural phrasing would be '{{productName}} ominaisuudet'.",
+          "suggestion": "{{productName}} ominaisuudet"
         }
       ],
       "approved_at": null
@@ -141,13 +147,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'հասցեն՝' (literally 'address') is unnecessary and awkward in this context. It disrupts the flow of the sentence and isn't a natural way to express email activation.",
-          "suggestion": "Խնդրում ենք ակտիվացնել ձեր էլ ({{ email }})․ Ձեր էլ-ային հասցեն ակտիվացնելուց հետո դուք կկարողանաք օգտվել {{productName}}-ի գործառույթներից։ (Request activation of your email address to access {{productName}}'s features.) OR simpler: Խնդրում ենք ակտիվացնել ձեր էլ ({{ email }})․ Ձեր հասանելիությունը {{productName}}-ի գործառույթներին ապահովելու համար։ (Activate your email ({{ email }}). To ensure your access to the {{productName}} features.)"
+          "description": "The Armenian translation 'հասցեն՝' is awkward and doesn't quite convey the meaning of 'to get access to'. It implies the email *is* the access, rather than the activation of the email *provides* access.",
+          "suggestion": "Խնդրում ենք ակտիվացնել ձեր էլ ({{ email }})․ հասանելիություն ունենալու {{productName}}-ի գործառույթներին։"
         },
         {
           "type": "formatting",
-          "description": "The period after 'էլ' feels abrupt and the sentence could benefit from more natural punctuation.",
-          "suggestion": "Replace the period with a comma or consider restructuring the sentence for smoother reading."
+          "description": "The punctuation after 'էլ' is a period, while it should be a comma for smoother readability in Armenian.",
+          "suggestion": "Խնդրում ենք ակտիվացնել ձեր էլ ({{ email }})․"
         }
       ],
       "approved_at": null
@@ -158,8 +164,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Ti preghiamo di attivare la tua e-mail' is a bit formal and clunky. A more natural Italian phrasing would be 'Per favore, attiva la tua email' or 'Attiva la tua email'.",
-          "suggestion": "Attiva la tua email"
+          "description": "The Italian translation 'Ti preghiamo di attivare la tua e-mail' is slightly awkward. 'Attivare' isn't the most natural verb for email activation in Italian. A more natural phrasing would be 'confermare' or 'verificare'.",
+          "suggestion": "Ti preghiamo di confermare la tua e-mail ({{ email }}) per accedere alle funzionalità di {{productName}}."
         }
       ],
       "approved_at": null
@@ -170,8 +176,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"有効にしてください\" (yuusei ni shite kudasai) is a somewhat formal and direct way to say \"activate\". A more natural and user-friendly phrasing would be more appropriate for a user-facing message.  \"有効にしてください\" implies a technical activation process that might confuse some users.  A more conversational option would be something along the lines of '認証してください' (shinsei shite kudasai) or '確認してください' (kakunin shite kudasai).",
-          "suggestion": "{{productName}}の機能を利用するために、メール({{ email }})の認証をお願いします。"
+          "description": "The English phrase \"Please activate your email\" is not accurately translated. \"有効にしてください\" (yūsei ni shite kudasai) directly translates to 'make it valid' or 'activate it'. While understandable, a more natural phrasing in Japanese for email activation would be something like '認証してください' (shōnin shite kudasai) which means 'please verify'.",
+          "suggestion": "Please activate your email ({{ email }}) to get access to the {{productName}} features. -> {{productName}}の機能を利用するために、メール({{ email }})を認証してください。"
         }
       ],
       "approved_at": null
@@ -182,18 +188,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Please activate your email\" is not accurately reflected in the Korean translation. \"활성화하세요\" implies activation, but it's more natural to say something like \"이메일 인증을 완료하세요\" (complete email verification) or \"이메일 주소를 확인하세요\" (verify your email address).",
-          "suggestion": "이메일 주소를 확인하세요."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrasing 'to get access' is not directly translated. While '~하려면' (in order to) is used, a more natural and common way to express this would be a more direct phrasing, like '이용하려면' (to use) or '접속하려면' (to connect/access).",
-          "suggestion": "{{productName}} 기능 이용하려면 ({{ email }})이메일을 확인하세요."
+          "description": "The translation '액세스하려면 ({{ email }})이메일을 활성화하세요' is not the most natural or accurate translation of 'to get access to...activate your email'. A more natural phrasing would be '{{productName}} 기능 사용을 위해 ({{ email }}) 이메일 인증을 완료하세요' or '{{productName}} 기능 사용을 위해 ({{ email }}) 이메일을 활성화해주세요'.",
+          "suggestion": "{{productName}} 기능 사용을 위해 ({{ email }}) 이메일 인증을 완료하세요."
         },
         {
           "type": "formatting",
-          "description": "The translation uses parentheses around the email address. It would be more consistent with English if the parentheses also surrounded the `productName`.",
-          "suggestion": "({{productName}}) 기능에 액세스하려면 ({{ email }})이메일을 활성화하세요."
+          "description": "The Korean sentence is slightly awkward due to the placement of the email address.  It interrupts the flow.",
+          "suggestion": "{{productName}} 기능 사용을 위해 ({{ email }}) 이메일 인증을 완료하세요."
         }
       ],
       "approved_at": null
@@ -203,14 +204,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'get access to' is not accurately translated. 'ເຂົ້າເຖິງ' literally means 'to reach' or 'to access', but the nuance of 'getting access' is lost. A more natural translation would be something like 'ສາມາດໃຊ້ງານໄດ້' (can use) or 'ສາມາດເຂົ້າໃຊ້ໄດ້' (can access).",
-          "suggestion": "ກະລຸນາເປີດໃຊ້ອີເມວ ({{ email }}) ຂອງທ່ານ ເພື່ອສາມາດໃຊ້ງານໄດ້ ຄຸນສົມບັດ {{productName}}."
+          "type": "formatting",
+          "description": "The Lao translation lacks a proper conjunction or flow between the activation request and the explanation of access to features. It feels slightly abrupt.",
+          "suggestion": "ກະລຸນາເປີດໃຊ້ອີເມວ ({{ email }}) ຂອງທ່ານ ເພື່ອເຂົ້າເຖິງຄຸນສົມບັດຂອງ {{productName}}."
         },
         {
-          "type": "formatting",
-          "description": "While technically correct, the space before 'ເຖິງ' is a bit unusual. It's more standard to have no space before a preposition like 'ເຖິງ'.",
-          "suggestion": "ກະລຸນາເປີດໃຊ້ອີເມວ ({{ email }}) ຂອງທ່ານ ເພື່ອເຂົ້າເຖິງຄຸນສົມບັດ {{productName}}."
+          "type": "incorrect_translation",
+          "description": "While 'ເປີດໃຊ້' (pert sai) is understandable for 'activate', a more common and natural phrasing for activating an email might be 'ຢັ້ງຢືນອີເມວ' (yang yeun email).",
+          "suggestion": "ກະລຸນາຢັ້ງຢືນອີເມວ ({{ email }}) ຂອງທ່ານເພື່ອເຂົ້າເຖິງຄຸນສົມບັດຂອງ {{productName}}."
         }
       ],
       "approved_at": null
@@ -218,13 +219,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'to get access' is translated as 'lai piekļūtu'. While technically correct, a more natural and idiomatic Latvian phrasing for this context would be 'lai varētu piekļūt' or simply 'lai piekļautu'.",
-          "suggestion": "Lūdzu, aktivizējiet savu e-pastu ({{ email }}), lai varētu piekļūt {{productName}} funkcijām."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -238,9 +233,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'to get access' is a bit literal and can be improved for a more natural Polish phrasing. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Aby móc korzystać z funkcji..."
+          "type": "formatting",
+          "description": "The Polish translation lacks a comma after 'email'. The English version uses a comma.",
+          "suggestion": "Aktywuj swój adres e-mail ({{ email }}, aby uzyskać dostęp do funkcji {{productName}}."
         }
       ],
       "approved_at": null
@@ -257,7 +252,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Favor ativar seu e-mail' is a bit formal for this context. A more natural phrasing would be 'Por favor, ative seu e-mail' or 'Ative seu e-mail'. 'Favor' is less common in this type of communication.",
+          "description": "The phrase 'Favor ativar seu e-mail' is slightly formal for a user-facing email. A more natural phrasing would be 'Por favor, ative seu e-mail' or 'Ative seu e-mail'.",
           "suggestion": "Por favor, ative seu e-mail"
         }
       ],
@@ -269,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'pentru a avea acces la funcţiile' is a bit verbose. A more natural phrasing would be 'pentru acces la'.",
-          "suggestion": "Activați adresa de email ({{ email }}) pentru acces la funcţiile {{productName}}."
+          "description": "The phrase \"pentru a avea acces\" is a bit verbose and doesn't flow as naturally as alternatives. A more direct translation would be better.",
+          "suggestion": "Pentru a accesa"
         }
       ],
       "approved_at": null
@@ -281,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'to get access to all features' is a slightly unnatural translation. 'Чтобы получить доступ к функциям' is literal but could be improved.",
-          "suggestion": "Чтобы получить доступ к функциям {{productName}}."
+          "description": "The phrase \"Пожалуйста, активируйте свою электронную почту\" is technically correct, but sounds unnatural in Russian. A more natural phrasing would be 'Пожалуйста, подтвердите свою электронную почту'.  'Активируйте' implies activation of a system, while 'подтвердите' accurately conveys email verification.",
+          "suggestion": "Пожалуйста, подтвердите свою электронную почту"
         }
       ],
       "approved_at": null
@@ -292,14 +287,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'වි-තැපෑල' is a less common and slightly awkward way to say 'email' in Sinhala. It's a compound word that isn't typically used in this context.",
-          "suggestion": "Use 'විද්‍යුත් තැපෑල' (vidyut thapaela) which is the standard and more natural way to say 'email'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'ඔබගේ ({{ email }}) වි-තැපෑල සක්‍රිය කරගන්න' is a literal translation that doesn't flow naturally in Sinhala. A more natural phrasing would be something like 'ඔබගේ ({{ email }}) ලිපිනය සක්‍රිය කරන්න'.",
+          "suggestion": "ඔබගේ ({{ email }}) ලිපිනය සක්‍රිය කරන්න."
         },
         {
-          "type": "formatting",
-          "description": "The Sinhala translation uses a full stop at the end, which is grammatically correct but might be perceived as overly formal for this type of message.",
-          "suggestion": "Consider removing the full stop at the end for a slightly more conversational tone: \"{{productName}} විශේෂාංග වෙත ප්‍රවේශය ලැබීමට ඔබගේ ({{ email }}) වි-තැපෑල සක්‍රිය කරගන්න\" or \"{{productName}} විශේෂාංග වෙත ප්‍රවේශය ලැබීමට ඔබගේ ({{ email }}) විද්‍යුත් තැපෑල සක්‍රිය කරගන්න\""
+          "type": "incorrect_translation",
+          "description": "The word 'වි-තැපෑල' is an archaic and uncommon way to say 'email' in Sinhala. 'ලිපිනය' is the more common and preferred term.",
+          "suggestion": "Replace 'වි-තැපෑල' with 'ලිපිනය'."
         }
       ],
       "approved_at": null
@@ -310,13 +305,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ak chcete získať prístup k funkciám {{productName}}, aktivujte svoj e-mail ({{ email }})' is not a direct or natural equivalent to \"Please activate your email ({{ email }}) to get access to the {{productName}} features.\" It's a bit verbose and changes the sentence structure.  A more accurate translation would be something like 'Aktivujte svoj e-mail ({{ email }}) pre získanie prístupu k funkciám {{productName}}.'",
-          "suggestion": "Aktivujte svoj e-mail ({{ email }}) pre získanie prístupu k funkciám {{productName}}."
+          "description": "The Slovak translation 'Ak chcete získať prístup k funkciám {{productName}}, aktivujte svoj e-mail ({{ email }})' is a bit clunky and doesn't directly convey the urgency/necessity of activating the email like the English version. A more natural and accurate translation would emphasize that activation *is required* for access.",
+          "suggestion": "Prosím, aktivujte svoju e-mailovú adresu ({{ email }}) aby ste získali prístup k funkciám {{productName}}."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the Slovak translation rearranges the order of elements compared to the English.  The English starts with the imperative ('Please activate...') while the Slovak starts with a conditional clause ('If you want to...'). This changes the emphasis and flow.",
-          "suggestion": "Aktivujte svoj e-mail ({{ email }}) pre získanie prístupu k funkciám {{productName}}."
+          "description": "The Slovak translation places the parenthesis around \"svoj e-mail\" which makes the sentence structure a bit awkward compared to the English version. The English version places the parenthesis around the email address, which is the standard format.",
+          "suggestion": "Prosím, aktivujte svoju e-mailovú adresu ({{ email }}) aby ste získali prístup k funkciám {{productName}}."
         }
       ],
       "approved_at": null
@@ -327,13 +322,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"to get access\" is better translated as \"za pridobitev dostopa\" or \"za dostop\" in Slovenian. \"za dostop\" is more concise and natural in this context.",
-          "suggestion": "Aktiviraj svoj e-mail ({{ email }}) naslov za dostop do funkcij {{productName}}."
+          "description": "The English phrase \"Please activate your email\" is better translated as \"Potrdite svoj e-poštni naslov\" or \"Prosimo, potrdite svoj e-poštni naslov\" in Slovenian. \"Aktiviraj\" implies a more active action than is intended.",
+          "suggestion": "Potrdite svoj e-poštni naslov"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the translation lacks a more formal or professional tone. Consider adding 'Prosim' (Please) at the beginning for a more polite feel.",
-          "suggestion": "Prosim, aktiviraj svoj e-mail ({{ email }}) naslov za dostop do funkcij {{productName}}."
+          "description": "While technically correct, using parentheses around 'email' in the English isn't completely replicated in the Slovenian.  While Slovenian also uses parentheses, it reads slightly less natural.",
+          "suggestion": "Potrdite svoj e-poštni naslov ({{ email }})"
         }
       ],
       "approved_at": null
@@ -344,13 +339,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'email' is transliterated as 'емаил'. The correct Serbian word for email is 'e-mail'.",
-          "suggestion": "Активирајте своју e-mail ({{ email }}) да бисте добили приступ функцијама {{productName}}-а."
+          "description": "The word 'email' is transliterated directly from English ('емаил') instead of using the Serbian word for email, which is 'elektronska pošta' or simply 'pošta'. While 'емаил' is increasingly understood, it's not the preferred or most accurate translation in this context.",
+          "suggestion": "Активирајте своју електронску пошту ({{ email }}) да бисте добили приступ функцијама {{productName}}-а."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the use of the genitive suffix '-а' on {{productName}} might feel unnatural in this context. Consider using the nominative case for a more natural flow.",
-          "suggestion": "Активирајте своју e-mail ({{ email }}) да бисте добили приступ функцијама {{productName}}."
+          "description": "The possessive suffix '-а' is appended to '{{productName}}'. While grammatically correct in some cases, it can sound overly formal or awkward depending on the product name. It might be more natural to omit it or use a slightly different phrasing.  Consider whether the product name is masculine or feminine and adjust the suffix accordingly.",
+          "suggestion": "Активирајте своју електронску пошту ({{ email }}) да бисте добили приступ функцијама {{productName}}."
         }
       ],
       "approved_at": null
@@ -361,13 +356,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'email' is used in both English and Serbian. While understandable, it's more natural to use the Serbian equivalent 'elektronska pošta' or simply 'pošta'.",
-          "suggestion": "Aktivirajte svoju poštu ({{ email }}) da biste dobili pristup funkcijama {{productName}}-a."
+          "description": "The word 'aktivirajte' (activate) isn't the most natural translation for 'please activate' in this context. It sounds a bit formal and stiff. A more natural translation would be 'potvrdite' (confirm) or 'verifikujte' (verify).",
+          "suggestion": "Potvrdite svoju email ({{ email }}) da biste dobili pristup funkcijama {{productName}}-a."
         },
         {
           "type": "formatting",
-          "description": "The genitive case ending '-a' is used for productName.  While technically correct, it's more common and natural to omit it in this context or use a slightly different phrasing.",
-          "suggestion": "Aktivirajte svoju poštu ({{ email }}) da biste dobili pristup funkcijama {{productName}}."
+          "description": "The possessive suffix '-a' attached to 'funkcijama' is often unnecessary and makes the sentence sound slightly awkward. While grammatically correct, it's not the most idiomatic.",
+          "suggestion": "Potvrdite svoju email ({{ email }}) da biste dobili pristup funkcijama {{productName}}."
         }
       ],
       "approved_at": null
@@ -378,8 +373,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation '{{productName}} özelliklerine erişmek için lütfen e-postanızı ({{ email }}) etkinleştirin.' doesn't fully convey the meaning of 'Please activate your email...' The word 'aktif' (active) would be more appropriate than 'etkinleştirin' which means 'enable'. It sounds slightly unnatural.",
-          "suggestion": "{{productName}} özelliklerine erişmek için lütfen e-postanızı ({{ email }}) aktif hale getirin."
+          "description": "The English phrase 'Please activate your email' is better translated as 'Lütfen e-posta adresinizi doğrulayın' or 'Lütfen e-postanızı onaylayın' rather than 'Lütfen e-postanızı etkinleştirin'. 'Etkinleştirin' implies activation of a program, not email verification.",
+          "suggestion": "Lütfen e-posta adresinizi doğrulayın."
         }
       ],
       "approved_at": null
@@ -390,8 +385,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Ukrainian translation uses a comma (,) where a period (.) might be more appropriate for a formal instruction. While both are acceptable, a period aligns better with common Ukrainian writing style in formal contexts.",
-          "suggestion": "Активуйте свою адресу електронної пошти ({{ email }}), щоб отримати доступ до функцій {{productName}}."
+          "description": "The phrase \"Активуйте свою адресу електронної пошти\" could be more naturally phrased as \"Будь ласка, активуйте свою електронну адресу\" or \"Підтвердіть свою електронну адресу\".",
+          "suggestion": "Будь ласка, активуйте свою електронну адресу"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, \"щоб отримати доступ до функцій\" is a bit formal. A more conversational alternative would improve the tone.",
+          "suggestion": "щоб ви могли користуватися функціями"
         }
       ],
       "approved_at": null
@@ -402,13 +402,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'to get access to' can be translated more naturally in Vietnamese. 'Để có quyền truy cập vào' is a literal translation and sounds slightly formal and stiff.",
-          "suggestion": "Để sử dụng các tính năng {{productName}}."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the use of 'của bạn' after 'email' is somewhat redundant in Vietnamese and can be omitted for a more concise and natural flow.",
-          "suggestion": "Xin vui lòng kích hoạt email ({{ email }}) để có quyền truy cập vào các tính năng {{productName}}."
+          "description": "The phrase 'có quyền truy cập' is a bit formal for this context. A more natural phrasing would be 'để sử dụng' or 'để dùng'.",
+          "suggestion": "Xin vui lòng kích hoạt email ({{ email }}) của bạn để sử dụng các tính năng {{productName}}."
         }
       ],
       "approved_at": null

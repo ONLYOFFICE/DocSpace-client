@@ -52,9 +52,9 @@ export default async function Layout({
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
   const culture =
-    cookies().get("asc_language")?.value ?? objectSettings?.culture;
+    (await cookies()).get("asc_language")?.value ?? objectSettings?.culture;
 
-  const hdrs = headers();
+  const hdrs = await headers();
   const type = hdrs.get("x-confirm-type") ?? "";
 
   let isComboboxVisible = true;
@@ -70,8 +70,6 @@ export default async function Layout({
     cultures = await getPortalCultures();
   }
 
-  console.log("render second root layout");
-
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <SimpleNav
@@ -82,9 +80,9 @@ export default async function Layout({
       <ContentWrapper id="content-wrapper" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
-          {isComboboxVisible && (
+          {isComboboxVisible ? (
             <LanguageComboboxWrapper initialCultures={cultures} />
-          )}
+          ) : null}
 
           <StyledPage id="styled-page">{children}</StyledPage>
         </Scrollbar>

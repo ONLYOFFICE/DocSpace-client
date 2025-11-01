@@ -40,8 +40,8 @@ export const InterfaceDirectionProvider = ({
   children,
 }: InterfaceDirectionProviderProps) => {
   return (
-    <InterfaceDirectionContext.Provider value={interfaceDirection}>
+    <InterfaceDirectionContext value={interfaceDirection}>
       {children}
-    </InterfaceDirectionContext.Provider>
+    </InterfaceDirectionContext>
   );
 };

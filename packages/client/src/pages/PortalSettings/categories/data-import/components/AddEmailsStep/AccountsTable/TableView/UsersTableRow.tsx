@@ -41,7 +41,6 @@ import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { globalColors } from "@docspace/shared/themes";
 
-import { InputType } from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import {
   AddEmailTableRowProps,
@@ -51,6 +50,37 @@ import {
 const EmailInputWrapper = styled.div`
   display: flex;
   gap: 8px;
+`;
+
+const IconButtonWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+
+  border: var(--selector-item-input-button-border);
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  div {
+    height: 16px;
+  }
+
+  &:hover {
+    div {
+      cursor: pointer;
+    }
+    cursor: pointer;
+
+    border-color: var(--selector-item-input-button-border-hover);
+
+    svg path {
+      fill: var(--selector-item-input-button-border-hover);
+    }
+  }
 `;
 
 const StyledTableRow = styled(TableRow)`
@@ -128,14 +158,19 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
     }
   };
 
-  const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAccountToggle = (
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
+  ) => {
     e.preventDefault();
     e.stopPropagation();
 
     if (
       isPrevEmailValid &&
-      !(emailInputRef.current && emailInputRef.current.contains(e.target)) &&
-      !emailTextRef.current?.contains(e.target)
+      !(
+        emailInputRef.current &&
+        emailInputRef.current.contains(e.target as Node)
+      ) &&
+      !emailTextRef.current?.contains(e.target as Node)
     ) {
       toggleAccount();
     }
@@ -180,19 +215,15 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
   if (!ready) return;
 
   return (
-    <StyledTableRow
-      onClick={handleAccountToggle}
-      isDisabled={!isPrevEmailValid}
-    >
+    <StyledTableRow onClick={handleAccountToggle}>
       <TableCell className="checkboxWrapper">
         <Checkbox
           onChange={handleAccountToggle}
           isChecked={isChecked}
           isDisabled={!isPrevEmailValid}
+          truncate
+          label={displayName}
         />
-        <Text fontWeight={600} truncate>
-          {displayName}
-        </Text>
       </TableCell>
 
       <TableCell>
@@ -203,7 +234,6 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
               className="import-email-input"
               value={tempEmail}
               onChange={handleEmailChange}
-              type={InputType.email}
               onValidateInput={onValidateEmail}
               onKeyDown={handleKeyDown}
               hasError={hasError}
@@ -211,22 +241,23 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
               isAutoFocussed
             />
 
-            <IconButton
-              className="import-check-container-button"
-              size={32}
-              onClick={handleSaveClick}
-              iconName={CheckSvgUrl}
-              isFill
-              isClickable
-            />
-            <IconButton
-              className="import-clear-container-button"
-              size={32}
-              onClick={clearEmail}
-              iconName={CrossSvgUrl}
-              isFill
-              isClickable
-            />
+            <IconButtonWrapper onClick={handleSaveClick}>
+              <IconButton
+                className="import-check-container-button"
+                size={16}
+                iconName={CheckSvgUrl}
+                dataTestId="import_check_button"
+              />
+            </IconButtonWrapper>
+
+            <IconButtonWrapper onClick={clearEmail}>
+              <IconButton
+                className="import-clear-container-button"
+                size={16}
+                iconName={CrossSvgUrl}
+                dataTestId="import_clear_button"
+              />
+            </IconButtonWrapper>
           </EmailInputWrapper>
         ) : (
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>

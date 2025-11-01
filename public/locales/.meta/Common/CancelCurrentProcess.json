@@ -3,7 +3,7 @@
   "content": "Do you want to cancel the current process?",
   "content_en_sha1_hash": "c7c374f03228c44cfeaed59926e6745be6dc0052",
   "created_at": "2025-05-19T21:30:43.370Z",
-  "updated_at": "2025-05-28T09:30:02.184Z",
+  "updated_at": "2025-05-26T07:57:32.212Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when canceling the current process. It appears as a button in a modal dialog, prompting the user to confirm their action before proceeding.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Arabic translation uses the plural form \"تريدون\" (turīdūn), which translates to \"do you want (plural)\".  Since this is likely addressing a single user or a general audience, the singular form \"تريد\" (turīd) would be more appropriate.",
+          "suggestion": "هل تريد إلغاء العملية الحالية؟"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Искате ли да анулирате настоящия процес?' uses 'анулирате' (anulirate) which translates to 'cancel' or 'annul'. While technically correct, 'анулирате' carries a more formal and legalistic connotation. A more natural and user-friendly translation for a UI element would be something like 'Прекратяване на текущия процес?' (Prekratyane na tekuщия process?) meaning 'Stop/Terminate the current process?'",
+          "suggestion": "Прекратяване на текущия процес?"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Doriți să anulați procesul în desfășurare?' is a bit literal and could be improved for naturalness in Romanian. 'În desfășurare' (ongoing) is correct, but slightly formal. A more conversational and common phrasing would be preferred.",
+          "suggestion": "Doriți să anulați procesul curent?"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'අවලංගු කිරීමට' could be slightly improved for clarity and natural flow. While technically correct, it's a bit formal.",
+          "suggestion": "Consider using 'අවලංගු කරන්න' instead. It's more common and conversational."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -162,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Ste si istí, že chcete zrušiť prebiehajúci proces?\" translates to 'Are you sure you want to cancel the running process?' which is a more verbose and slightly different nuance than the English 'Do you want to cancel the current process?'. While understandable, it adds a layer of confirmation not present in the original.",
-          "suggestion": "Consider a more direct translation like \"Chcete zrušiť aktuálny proces?\" which translates to 'Do you want to cancel the current process?'"
+          "description": "The Slovak translation 'Ste si istí, že chcete zrušiť prebiehajúci proces?' translates more literally to 'Are you sure you want to cancel the running process?'. While understandable, it's a bit more formal and verbose than the original English 'Do you want to cancel the current process?'. A more direct and natural translation would be preferable.",
+          "suggestion": "Chcete zrušiť aktuálny proces?"
         }
       ],
       "approved_at": null
@@ -180,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Да ли желите да откажете тренутни процес?' isn't the most natural or accurate translation of 'Do you want to cancel the current process?'. While technically correct, it sounds somewhat formal and uses a less common verb for 'cancel' in this context. A more natural phrasing would use 'укинете' or 'прекинете'.",
-          "suggestion": "Да ли желите да укинете тренутни процес? or Да ли желите да прекинете тренутни процес?"
+          "description": "The Serbian translation 'Да ли желите да откажете тренутни процес?' is a literal translation but might not be the most natural way to phrase this in Serbian. 'Otkažete' implies a more formal cancellation. A more natural phrasing might focus on stopping or interrupting the process.",
+          "suggestion": "Да ли желите да прекинете тренутни процес?"
         }
       ],
       "approved_at": null

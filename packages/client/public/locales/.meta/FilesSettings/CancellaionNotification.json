@@ -3,7 +3,7 @@
   "content": "Don't display cancellation notification again",
   "content_en_sha1_hash": "537727f09456ab87cd615e057378ddfcf8cdf4b9",
   "created_at": "2025-05-19T21:30:55.169Z",
-  "updated_at": "2025-05-21T10:52:44.172Z",
+  "updated_at": "2025-08-11T18:11:59.297Z",
   "comment": {
     "text": "\"Don't display cancellation notification again\" is a message that allows users to toggle off the display of a confirmation notification when canceling an operation. This option appears as a button in a file management interface and helps avoid repetitive notifications.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
-      "line_number": 156,
-      "context": "<ToggleButton\n className=\"cancelletion-notification toggle-btn\"\n onChange={onChangeCancellationNotification}\n isChecked={hideConfirmCancelOperation}\n />\n <Text>{t(\"CancellaionNotification\")}</Text>\n </div>\n </div>\n </StyledWrapper>\n );\n };",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 179,
+      "context": ")}\n onChange={onChangeCancellationNotification}\n isChecked={hideConfirmCancelOperation}\n dataTestId=\"cancelletion_notification_toggle_button\"\n />\n <Text>{t(\"CancellaionNotification\")}</Text>\n </div>\n </div>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ləğvetmə bildirişini yenidən göstərməyin' is a literal translation but doesn't flow naturally in Azerbaijani. A more natural phrasing would be closer to 'Xəbərdar edən bildiriyi göstərməyin' or 'Ləğvetmə xəbərdar edənini göstərməyin' or even 'Bildiriş göstərməyin' (depending on the desired level of formality and context).",
-          "suggestion": "Xəbərdar edən bildiriyi göstərməyin"
+          "description": "The translation 'Ləğvetmə bildirişini yenidən göstərməyin' is a literal translation but doesn't sound natural in Azerbaijani. It's a bit clunky.",
+          "suggestion": "A more natural translation would be something like 'Ləğvetmə bildirişini daha sonra göstərməyin' or 'Ləğvetmə bildirişini təkrar göstərməyin'."
         }
       ],
       "approved_at": null
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Να μην εμφανιστεί ξανά η ειδοποίηση ακύρωσης' is a bit too literal. While grammatically correct, it sounds unnatural in Greek. A more natural phrasing would convey the intended meaning of 'Don't display cancellation notification again'.",
+          "description": "The translation 'Να μην εμφανιστεί ξανά η ειδοποίηση ακύρωσης' is a bit literal and sounds unnatural in Greek. A more natural phrasing would convey the meaning of 'Don't display again'.",
           "suggestion": "Μην εμφανίζεται ξανά η ειδοποίηση ακύρωσης"
         }
       ],
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Նորից չցուցադրել չեղարկման ծանուցումը' is a literal translation and sounds somewhat unnatural in Armenian. While technically correct, a more natural phrasing might be preferred.",
-          "suggestion": "Մեկընդմամբ չցուցադրել չեղարկման ծանուցումը"
+          "description": "The translation \"Նորից չցուցադրել չեղարկման ծանուցումը\" is a literal translation but may not be the most natural or user-friendly way to express \"Don't display cancellation notification again\" in Armenian. A more natural phrasing would improve user experience.",
+          "suggestion": "Consider alternatives such as \"Միգուշացրել չեղարկման հայտարարությունը\" (Migushacrel chelgarkman haytaranum) or \"Չի ցուցադրվի չեղարկման հայտարարությունը նորից\" (Chi cucadre chi legarkman haytaranum noric)."
         }
       ],
       "approved_at": null
@@ -111,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"キャンセル通知を再表示しない\" is technically correct but could be improved for naturalness and conciseness in Japanese UI contexts. A more common and user-friendly phrasing would be \"通知を再表示しない\" (Notification re-display off/Don't show notification again). The 'キャンセル' (cancellation) is redundant as it's implied by the context.",
+          "suggestion": "通知を再表示しない"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '취소 알림을 다시 표시하지 않음' is a literal translation and sounds unnatural in Korean. A more natural phrasing would be something like '다시 취소 알림 표시 안 함' or '취소 알림 다시 보지 않기'.",
-          "suggestion": "다시 취소 알림 표시 안 함"
+          "description": "The translation \"취소 알림을 다시 표시하지 않음\" is a literal translation but sounds unnatural in Korean. A more natural phrasing would emphasize preventing the notification.",
+          "suggestion": "취소 알림 표시 방지"
         }
       ],
       "approved_at": null
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Não volte a apresentar a notificação de cancelamento' is a literal translation and sounds unnatural in Portuguese. A more natural phrasing would be 'Não mostrar novamente a notificação de cancelamento' or 'Não exibir a notificação de cancelamento novamente'.",
-          "suggestion": "Não mostrar novamente a notificação de cancelamento"
+          "description": "The translation 'Não volte a apresentar a notificação de cancelamento' is technically correct but sounds slightly formal and verbose for a user interface setting. A more natural and concise translation would be preferable.",
+          "suggestion": "Não mostrar mais esta notificação de cancelamento"
         }
       ],
       "approved_at": null
@@ -186,13 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අහෝසි කිරීමේ දැනුම්දීම නැවත නොදක්වන්න' is a literal translation and sounds unnatural in Sinhala for a user interface element. A more natural phrasing would convey the meaning of 'Don't show this again'.",
-          "suggestion": "පසුබිඳුවා නොදක්වන්න (Pasu binduwa nokadawanna)"
-        },
-        {
-          "type": "formatting",
-          "description": "The suggested correction 'පසුබිඳුවා නොදක්වන්න' is more concise and user-friendly for a UI element.",
-          "suggestion": "පසුබිඳුවා නොදක්වන්න (Pasu binduwa nokadawanna)"
+          "description": "The translation 'අහෝසි කිරීමේ දැනුම්දීම නැවත නොදක්වන්න' is a literal translation and sounds somewhat awkward in Sinhala. A more natural phrasing would be preferable for user interface text.",
+          "suggestion": "මාෆ් කිරීම් දැනුම්දීම නැවත නොපෙන්වන්න"
         }
       ],
       "approved_at": null
@@ -215,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Не приказуј више обавештење о отказивању\" is not the most natural or accurate translation of \"Don't display cancellation notification again.\" It's quite literal and clunky.",
-          "suggestion": "A more natural translation would be \"Не приказуј више обавештења о откази\" or \"Немој више да приказујеш обавештење о откази\"."
+          "description": "The translation 'Не приказуј више обавештење о отказивању' is not the most natural or accurate translation of 'Don't display cancellation notification again'. It's overly literal and sounds clunky in Serbian.",
+          "suggestion": "More natural options include: 'Не приказуј поново обавештење о отказивању' or 'Искључи обавештење о отказивању' or 'Немој више да приказујеш обавештење о отказивању'."
         }
       ],
       "approved_at": null
@@ -227,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ne prikazuj više obaveštenje o otkazivanju' is a bit literal and could be improved for naturalness.  'Obaveštenje o otkazivanju' is a bit clunky. A more natural phrasing would be 'Ne prikazuj više upozorenja o otkazivanju' or 'Ne prikazuj više obaveštenja o poništavanju'.",
-          "suggestion": "Ne prikazuj više upozorenja o otkazivanju"
+          "description": "The translation 'Ne prikazuj više obaveštenje o otkazivanju' is a bit literal and not the most natural way to express this in Serbian. While technically correct, it could be improved for better flow.",
+          "suggestion": "Ne prikazuj ponovo obaveštenje o otkazivanju"
         }
       ],
       "approved_at": null
@@ -251,7 +252,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Không hiển thị lại thông báo hủy\" is a bit literal and doesn't flow naturally in Vietnamese. A more natural phrasing would convey the intent of 'Don't display cancellation notification again'.",
+          "description": "The translation 'Không hiển thị lại thông báo hủy' while conveying the general meaning, could be more accurately translated to reflect the original's nuance of 'Don't display cancellation notification again'. The current translation lacks the 'again' aspect.",
           "suggestion": "Không hiển thị thông báo hủy nữa"
         }
       ],

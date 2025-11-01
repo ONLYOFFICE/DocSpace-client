@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "පහතින් තෝරන්න",
-  "ConnectingAccount": "ගිණුම සම්බන්ධ වෙමින්",
-  "DeleteFromTrash": "තේරූ අංග කුණු කූඩයෙන් සාර්ථකව මකා ඇත",
   "FileLocked": "ගොනුවට අගුළු ලා ඇත",
   "FileProtected": "ගොනුව මුරපදයකින් ආරක්‍ෂිතයි",
   "FileUnlocked": "ගොනුව අගුළු හැරිණි",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "වන්ඩ්‍රයිව් නාමාවලිය",
   "FolderTitleWebDav": "WebDAV නාමාවලිය",
   "FolderTitleYandex": "යාන්ඩෙක්ස් නාමාවලිය",
-  "GuestReleaseTipDescripton": "සියලු පෙරදී එකතු කළ පරිශීලකයින් ආරාධිතයන් බවට පත්ව ඇති අතර දැන් {{productName}} පරිපාලකයින්ගේ සම්බන්ධතා ලැයිස්තුවෙහි පමණක් ලබා ගත හැකිය. ආරාධිතයන් කිසිදු සමූහයකට අයත් නොවේ. අවශ්‍ය නම්, ඔවුන්ගේ වර්ගය වෙනස් කර ඕනෑම සමූහයකට එකතු කළ හැකිය.",
-  "GuestReleaseTipLink": "පරිශීලක වර්ග ගැන වැඩිදුර තොරතුරු දැනගන්න.",
-  "LinkHasExpiredAndHasBeenDisabled": "සබැඳිය කල් ඉකුත් වී අබල කර ඇත",
   "LinkValidTime": "මෙම සබැඳිය දවස් {{days_count}}කට වලංගුය.",
   "NewForm": "ආකෘතිපත්‍ර අච්චුව",
   "OwnerChange": "හිමිකරු සංශෝධනය",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "තෙවන පාර්ශ්ව සේවා",
   "TitleShowActions": "ගොනුවේ ක්‍රියාමාර්ග පෙන්වන්න",
   "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න",
-  "TypeTitleBoxNet": "බොක්ස්",
-  "TypeTitleDocuSign": "ඩොකුසයින්",
-  "TypeTitleDropBox": "ඩ්‍රොප්බොක්ස්",
-  "TypeTitleGoogle": "ගූගල් ඩ්‍රයිව්",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "ෂෙයාර්පොයින්ට්",
-  "TypeTitleSkyDrive": "වන්ඩ්‍රයිව්",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "යාන්ඩෙක්ස්.ඩිස්ක්"
+  "TrashItemsDeleteSuccess": "තෝරාගත් අංග {{sectionName}} වෙතින් සාර්ථකව මකා දමන ලදී."
 }

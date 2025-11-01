@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/colors";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
 
 .styledDropDown {
   margin-bottom: 8px;
@@ -48,6 +48,131 @@
   }
   @media (hover: hover) {
     background-color: var(--progress-bar-background-dropdown-color);
+  }
+}
+
+.previewFloatingButtonContainer {
+  position: fixed;
+  bottom: 88px;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 310;
+  opacity: 1;
+
+  animation: none;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+
+  pointer-events: none;
+
+  @include mixins.mobile {
+    &.mainButtonVisible {
+      bottom: 80px;
+    }
+  }
+
+  @keyframes hideUnderProgressBar {
+    from {
+      bottom: 88px;
+      transform: translateX(50%);
+      opacity: 1;
+    }
+    to {
+      bottom: 24px;
+      right: 0;
+      inset-inline-end: 24px;
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes hideUnderProgressBarTablet {
+    from {
+      bottom: 88px;
+      transform: translateX(50%);
+      opacity: 1;
+    }
+    to {
+      bottom: 88px;
+      right: 0;
+      inset-inline-end: 24px;
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes hideUnderProgressBarMobile {
+    from {
+      bottom: 88px;
+      transform: translateX(50%);
+      opacity: 1;
+    }
+    to {
+      bottom: 80px;
+      right: 0;
+      inset-inline-end: 16px;
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
+
+  &.hidingUnder {
+    animation: hideUnderProgressBar 0.3s ease-out forwards;
+    @include mixins.tablet-and-below {
+      animation: hideUnderProgressBarTablet 0.3s ease-out forwards;
+    }
+    @include mixins.mobile {
+      animation: hideUnderProgressBarMobile 0.3s ease-out forwards;
+    }
+  }
+
+  .previewFloatingButton {
+    @keyframes raisePreviewButton {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes dropPreviewButton {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+    }
+
+    &.raising {
+      animation: raisePreviewButton 0.3s ease-out forwards;
+    }
+
+    &.dropping {
+      animation: dropPreviewButton 0.3s ease-in forwards;
+    }
+  }
+
+  .previewHelpButton {
+    animation: raisePreviewButton 0.3s ease-in-out forwards;
+  }
+
+  :global {
+    .layout-progress-bar_wrapper {
+      position: static;
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
   }
 }
 
@@ -77,7 +202,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     z-index: 200;
     bottom: 16px;
 
@@ -104,7 +229,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 16px;
     inset-inline-end: 16px;
 
@@ -248,7 +373,8 @@
   height: 12px;
   border: 2px solid transparent;
   border-radius: 50%;
-  background-image: linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
+  background-image:
+    linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
     conic-gradient(
       from 0.25turn at 50% 30%,
       rgb(85, 95, 101),

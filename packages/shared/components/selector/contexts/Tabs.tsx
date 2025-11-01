@@ -34,5 +34,5 @@ export const TabsProvider = ({
   children,
   ...rest
 }: TSelectorTabs & { children: ReactNode }) => {
-  return <TabsContext.Provider value={rest}>{children}</TabsContext.Provider>;
+  return <TabsContext value={rest}>{children}</TabsContext>;
 };

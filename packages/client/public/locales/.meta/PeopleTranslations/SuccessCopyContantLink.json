@@ -3,7 +3,7 @@
   "content": "Contact link copied successfully. The link is <strong>valid for 7 days.</strong>",
   "content_en_sha1_hash": "5619f1f14069c03b91d2f3f6bab2a6c1a01e91af",
   "created_at": "2025-05-19T21:30:53.522Z",
-  "updated_at": "2025-05-21T05:55:12.789Z",
+  "updated_at": "2025-05-24T06:24:37.641Z",
   "comment": {
     "text": "This translation key is used to display a success message when a contact link is successfully copied. It will appear in a notification area, likely after a button click or confirmation action. The message should indicate that the link is valid for 7 days, providing context for users who may need to share it again soon.",
     "is_auto": true,
@@ -27,19 +27,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is correctly used and mirrors the English content.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly applied, but inconsistent with the English version. While functionally correct, maintaining consistency with the English source would improve UX.",
-          "suggestion": "Consider using the same HTML tag (strong) or equivalent formatting style as the English version for consistency."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'valid for 7 days' is translated as 'валиден 7 дни'. A more natural and accurate translation would be 'валиден за 7 дни'.",
+          "description": "The English phrase 'valid for 7 days' is not accurately translated. 'Валиден 7 дни' literally means 'Valid 7 days' and sounds awkward in Bulgarian. A more natural translation would be something like 'валиден за 7 дни' (valid for 7 days).",
           "suggestion": "Линкът е <strong>валиден за 7 дни.</strong>"
         }
       ],
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is not closed correctly. The English uses </strong>, while the Finnish uses </strong.",
-          "suggestion": "Correct the closing strong tag to </strong>"
+          "description": "The strong tag in the Finnish translation has a space before the opening tag. Should be `<strong >7 päivää voimassa.</strong>`",
+          "suggestion": "<strong >7 päivää voimassa.</strong>"
         }
       ],
       "approved_at": null
@@ -101,9 +101,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'valid for 7 days' is not accurately translated. 'վավեր է 7 օր' translates more literally to 'valid for 7 days' but in this context, a better translation would convey the concept of 'active for 7 days' or 'usable for 7 days'.",
-          "suggestion": "Consider 'աշխատում է 7 օր' or 'գործող է 7 օր' to better convey the meaning of the English text."
+          "type": "formatting",
+          "description": "The strong tag is present in both the English and Armenian translations, which is appropriate. However, ensure consistency in usage across all translations of this message.",
+          "suggestion": "Verify consistent use of strong tags in all locales."
         }
       ],
       "approved_at": null
@@ -132,13 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຄະນະໂຄງການຕິດຕໍ່ຖືກສໍາເນົາຢ່າງສໍາເລັດຜົນ\" doesn't accurately translate \"Contact link copied successfully.\"  'ຄະນະໂຄງການຕິດຕໍ່' translates to 'Project contact' which is not the intended meaning.",
-          "suggestion": "Use a phrase that more directly conveys the action of copying a contact link, such as 'ລິ້ງຕິດຕໍ່ຖືກສໍາເນົາຢ່າງສໍາເລັດຜົນ' (Link contact copied successfully)."
+          "description": "The phrase \"Contact link copied successfully\" is mistranslated as \"ຄະນະໂຄງການຕິດຕໍ່ຖືກສໍາເນົາຢ່າງສໍາເລັດຜົນ​\" which translates to 'Project contact copied successfully'. It should more accurately reflect 'Contact link copied successfully'.",
+          "suggestion": "ຄະນະຕິດຕໍ່ຖືກສໍາເນົາຢ່າງສໍາເລັດຜົນ"
         },
         {
-          "type": "formatting",
-          "description": "The strong tag is correctly replicated in the Lao translation, however the English content uses `<strong/>` while the Lao uses `<strong/>`. While this is a minor issue it is important to maintain consistency.",
-          "suggestion": "Ensure consistency in tag formatting across all translations. Both versions should consistently use `<strong/>`."
+          "type": "incorrect_translation",
+          "description": "The phrase 'valid for 7 days' is translated as 'ໃຊ້ໄດ້ເປັນເວລາ 7 ມື້', which is a literal translation meaning 'usable for 7 days'. While understandable, a more natural translation would capture the concept of validity.",
+          "suggestion": "ຖືກຕ້ອງເປັນເວລາ 7 ມື້"
         }
       ],
       "approved_at": null
@@ -158,13 +158,30 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'valid for 7 days' is not perfectly translated. 'Ważny tylko przez 7 dni' emphasizes a limitation more strongly than the original English, which simply states validity. A more neutral translation would be 'ważny przez 7 dni'.",
+          "suggestion": "Link kontaktowy został skopiowany pomyślnie. Link jest <strong>ważny przez 7 dni.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Contact' is translated as 'contacto'. While acceptable, 'link de contato' would be more natural and precise in Portuguese.",
+          "suggestion": "O link de contato foi copiado com sucesso."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The possessive pronoun 'your' is translated as 'sua'. While technically correct, 'a ligação' is more idiomatic in this context, implying 'the link'.",
+          "suggestion": "A ligação é <strong>válida por 7 dias.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -179,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'valid for 7 days' is not perfectly translated. 'Valabil numai timp de 7 zile' is a bit more restrictive and suggests the link is *only* valid for 7 days, which might not be the intended nuance. A more accurate translation might be 'valabil pentru 7 zile'.",
-          "suggestion": "valabil pentru 7 zile"
+          "description": "The phrase 'valid for 7 days' is translated as 'valabil numai timp de 7 zile'. While technically correct, 'valabil pentru 7 zile' would be a more natural and idiomatic translation in Romanian. The addition of 'numai' emphasizes the limited validity excessively.",
+          "suggestion": "Link-ul de contact a fost copiat cu succes. Linkul este <strong>valabil pentru 7 zile.</strong>"
         }
       ],
       "approved_at": null
@@ -200,7 +217,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is correctly used in both English and Slovak, preserving the emphasis on the validity period.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -212,7 +235,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag formatting is preserved correctly in the Serbian translation.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -239,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"giá trị\" (value) doesn't accurately translate \"valid\" in this context. It implies a monetary or appraised value, not the timeframe of validity.",
-          "suggestion": "Liên kết này có hiệu lực trong 7 ngày."
+          "description": "The phrase \"giá trị trong 7 ngày\" doesn't accurately convey the meaning of \"valid for 7 days.\" It translates to 'validity for 7 days' or 'value for 7 days,' which isn't the intended meaning. It implies a monetary value rather than a period of usability.",
+          "suggestion": "Đã sao chép liên kết liên hệ thành công. Liên kết này có hiệu lực trong 7 ngày."
         }
       ],
       "approved_at": null

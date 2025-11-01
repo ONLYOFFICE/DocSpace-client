@@ -3,7 +3,7 @@
   "content": "Review",
   "content_en_sha1_hash": "e29a79fe0c349724caeaa1762fa917f5543248ca",
   "created_at": "2025-05-19T21:30:47.938Z",
-  "updated_at": "2025-07-01T15:57:36.064Z",
+  "updated_at": "2025-10-13T13:22:35.682Z",
   "comment": {
     "text": "This translation key is used to display the label \"Review\" in various UI elements, such as filters and sharing settings. It appears in sections like room filters and share settings, indicating a specific type of room that allows users to review content.",
     "is_auto": true,
@@ -18,20 +18,44 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 808,
+      "line_number": 905,
       "context": "case RoomsType.ReviewRoom:\n return {\n id: \"filter_type-review\",\n key: RoomsType.ReviewRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Review\"),\n };\n case RoomsType.ReadOnlyRoom:\n return {\n id: \"filter_type-view-only\",\n key: RoomsType.ReadOnlyRoom,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 108,
-      "context": "icon: CustomFilterReactSvgUrl,\n },\n available.Review && {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),\n icon: AccessReviewReactSvgUrl,\n },\n available.Comment && {\n access: ShareAccessRights.Comment,\n key: \"commenting\",",
+      "line_number": 124,
+      "context": "icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),\n icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 108,
-      "context": "icon: CustomFilterReactSvgUrl,\n },\n available.Review && {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),\n icon: AccessReviewReactSvgUrl,\n },\n available.Comment && {\n access: ShareAccessRights.Comment,\n key: \"commenting\",",
+      "line_number": 124,
+      "context": "icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),\n icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 124,
+      "context": "icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),\n icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 124,
+      "context": "icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),\n icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 124,
+      "context": "icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),\n icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 124,
+      "context": "icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),\n icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",",
       "module": "/packages/shared"
     }
   ],
@@ -51,13 +75,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Nəzərdən keçirin' can mean 'review', it primarily translates to 'consider' or 'look over'. 'Review' in the context of product or service feedback typically implies a more detailed and evaluative assessment. A more accurate translation for 'Review' in this context would be something like 'Rəy' or 'Qiymət'.",
-          "suggestion": "Consider using 'Rəy' or 'Qiymət' for a more accurate translation of 'Review' in the context of user feedback."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -72,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Prověřit\" while technically meaning 'to verify' or 'to check,' doesn't fully capture the nuance of 'Review' in this context. 'Review' often implies a more comprehensive assessment or evaluation, not just a check.",
-          "suggestion": "Consider alternatives like 'Recenze' (for a written review) or 'Zhodnocení' (for an evaluation). The best translation depends on the specific context where 'Review' is used."
+          "description": "The Czech translation \"Prověřit\" while technically meaning 'to verify' or 'to check', doesn't fully capture the nuance of 'Review' in the context of a feature or product. 'Review' often implies a more comprehensive and detailed assessment. \"Prověřit\" can sound more like a quick check.",
+          "suggestion": "Consider alternative translations like \"Recenze\" (more accurate for a formal review) or \"Zhodnocení\" (evaluation/assessment) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -114,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Նախադիտել\" can mean 'preview', it doesn't fully capture the meaning of 'Review' in this context (likely referring to a customer review or product review). It implies a preliminary view rather than a full assessment.",
-          "suggestion": "Consider alternatives like \"Արվեստություն\" (Arvestut'yun - Review), \"Բնութագրություն\" (Bnut'yagrut'yun - Characteristics/Description/Review), or \"Մեկնաբանություն\" (Mek'nabanut'yun - Comment/Review), depending on the specific context."
+          "description": "The Armenian translation \"Նախադիտել\" (Nahaditel) translates to \"Preview\" rather than \"Review\". While similar, they have distinct meanings. \"Review\" implies a critical assessment, whereas \"Preview\" means to view something before it's fully available.",
+          "suggestion": "Consider \"Արձագանք\" (Arzagank) or \"Մեկնաբանություն\" (Mekanabanut’yun) for a more accurate translation of 'Review'."
         }
       ],
       "approved_at": null
@@ -168,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Rever' doesn't accurately convey the meaning of 'Review'. 'Review' implies a critical assessment or evaluation, while 'Rever' primarily means 'to revere' or 'to look at'.",
-          "suggestion": "Consider 'Análise', 'Avaliação', 'Crítica', or 'Revisão' depending on the specific context. 'Revisão' is a reasonable default."
+          "description": "The Portuguese translation \"Rever\" is not the most accurate or natural translation of \"Review\". While \"Rever\" is a verb meaning 'to review' or 'to reconsider', \"Review\" as a noun typically translates to \"análise\", \"avaliação\", or \"opinião\".",
+          "suggestion": "Consider using \"análise\", \"avaliação\", or \"opinião\" as alternatives."
         }
       ],
       "approved_at": null
@@ -228,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Ön izleme\" translates to 'pre-review' or 'preview' which is not a direct or commonly used equivalent of \"Review\". A more accurate translation would be \"İnceleme\" or \"Değerlendirme\".",
-          "suggestion": "İnceleme or Değerlendirme"
+          "description": "'Ön izleme' translates to 'preview' or 'advance screening', not 'review'. While it's related to a review process, it's not a direct translation.",
+          "suggestion": "Consider 'İnceleme', 'Değerlendirme', or 'Gözden Geçirme' for a more accurate translation of 'Review'."
         }
       ],
       "approved_at": null
@@ -252,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"审阅\" (shēnyuè) can be understood to relate to reviewing, it's an archaic term and not a natural or common translation for \"Review\" in modern Chinese. It carries a more formal and official connotation, suggesting a detailed and scrutinizing review, more like a formal audit.  A more suitable translation would depend on the context of 'Review'.",
-          "suggestion": "Consider alternatives like: 评论 (pínglùn) - for general reviews, 审核 (shěnhé) - for approval reviews, or 评价 (píngjià) - for evaluations."
+          "description": "'审阅' is a formal and somewhat archaic term for 'review'. While not strictly incorrect, it may sound overly formal or stilted in modern contexts. '评论' or '评价' might be more natural and common translations for 'Review' depending on the intended nuance.",
+          "suggestion": "Consider '评论' or '评价' as alternatives, or clarify the intended meaning of 'Review' to determine the most appropriate translation."
         }
       ],
       "approved_at": null

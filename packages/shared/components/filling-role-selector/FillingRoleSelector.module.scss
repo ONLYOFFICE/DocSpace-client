@@ -23,16 +23,16 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/mixins.scss";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 :global(.dark) {
   :local {
     .plus {
-      --plus-color: #{$black};
+      --plus-color: #{colors.$black};
     }
     .remove {
-      --remove-color: #{$gray-dark};
+      --remove-color: #{colors.$gray-dark};
     }
   }
 }
@@ -40,10 +40,10 @@
 :global(.light) {
   :local {
     .plus {
-      --plus-color: #{$light-gray-dark};
+      --plus-color: #{colors.$light-gray-dark};
     }
     .remove {
-      --remove-color: #{$gray};
+      --remove-color: #{colors.$gray};
     }
   }
 }
@@ -66,7 +66,7 @@
 
   width: calc(100%);
 
-  @include no-user-select;
+  @include mixins.no-user-select;
 
   @media (hover: hover) {
     &:hover {
@@ -83,7 +83,7 @@
   letter-spacing: 0px;
   text-align: center;
 
-  color: $gray;
+  color: colors.$gray;
 }
 
 .button {
@@ -109,7 +109,7 @@
   text-align: start;
 
   color: var(--text-color);
-  @include truncate;
+  @include mixins.truncate;
 }
 
 .plus {
@@ -163,7 +163,7 @@
   }
 
   .me {
-    color: $light-gray-dark;
+    color: colors.$light-gray-dark;
 
     font-weight: 600;
     font-size: 14px;

@@ -39,8 +39,7 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
@@ -127,28 +126,32 @@ const RegistrationForm = ({
 
   const termsConditionsComponent = (
     <div className="terms-conditions">
-      <Text fontSize={"13px"} textAlign="center" lineHeight="20px">
+      <Text fontSize="13px" textAlign="center" lineHeight="20px">
         <Trans
           t={t}
           ns="Confirm"
           i18nKey="TermsAndConditions"
           components={{
             1: (
-              <ColorTheme
+              <Link
+                key="component_key"
                 tag="a"
-                themeId={ThemeId.Link}
                 href={licenseUrl}
                 target={LinkTarget.blank}
-                fontSize={"13px"}
+                fontSize="13px"
+                color="accent"
+                dataTestId="license_url"
               />
             ),
             2: (
-              <ColorTheme
+              <Link
+                key="second_component_key"
                 tag="a"
-                themeId={ThemeId.Link}
                 href={legalTerms}
                 target={LinkTarget.blank}
-                fontSize={"13px"}
+                fontSize="13px"
+                color="accent"
+                dataTestId="legal_terms_url"
               />
             ),
           }}
@@ -167,16 +170,16 @@ const RegistrationForm = ({
       />
       <FieldContainer
         className="form-field"
-        isVertical={true}
+        isVertical
         labelVisible={false}
         hasError={!fnameValid}
         errorMessage={
-          errorText
-            ? errorText
-            : fname.trim().length === 0
-              ? t("Common:RequiredField")
-              : t("Common:IncorrectFirstName")
+          errorText ||
+          (fname.trim().length === 0
+            ? t("Common:RequiredField")
+            : t("Common:IncorrectFirstName"))
         }
+        dataTestId="first_name_field_container"
       >
         <TextInput
           id="first-name"
@@ -186,26 +189,27 @@ const RegistrationForm = ({
           hasError={!fnameValid}
           value={fname}
           placeholder={t("Common:FirstName")}
-          scale={true}
+          scale
           tabIndex={1}
           isDisabled={isLoading}
           onChange={onChangeFname}
           onKeyDown={onKeyPress}
           isAutoFocussed
+          testId="first_name_input"
         />
       </FieldContainer>
       <FieldContainer
         className="form-field"
-        isVertical={true}
+        isVertical
         labelVisible={false}
         hasError={!snameValid}
         errorMessage={
-          errorText
-            ? errorText
-            : sname.trim().length === 0
-              ? t("Common:RequiredField")
-              : t("Common:IncorrectLastName")
+          errorText ||
+          (sname.trim().length === 0
+            ? t("Common:RequiredField")
+            : t("Common:IncorrectLastName"))
         }
+        dataTestId="last_name_field_container"
       >
         <TextInput
           id="last-name"
@@ -215,21 +219,23 @@ const RegistrationForm = ({
           hasError={!snameValid}
           value={sname}
           placeholder={t("Common:LastName")}
-          scale={true}
+          scale
           tabIndex={1}
           isDisabled={isLoading}
           onChange={onChangeSname}
           onKeyDown={onKeyPress}
+          testId="last_name_input"
         />
       </FieldContainer>
       <FieldContainer
         className="form-field password-field"
-        isVertical={true}
+        isVertical
         labelVisible={false}
-        hasError={isPasswordErrorShow && !passwordValid}
+        hasError={isPasswordErrorShow ? !passwordValid : undefined}
         errorMessage={
           password ? t("Common:IncorrectPassword") : t("Common:RequiredField")
         }
+        dataTestId="password_field_container"
       >
         <PasswordInput
           simpleView={false}
@@ -239,9 +245,9 @@ const RegistrationForm = ({
           placeholder={t("Common:Password")}
           inputType={InputType.password}
           size={InputSize.large}
-          hasError={isPasswordErrorShow && !passwordValid}
+          hasError={isPasswordErrorShow ? !passwordValid : undefined}
           inputValue={password}
-          scale={true}
+          scale
           tabIndex={1}
           isDisabled={isLoading}
           autoComplete="current-password"
@@ -261,7 +267,7 @@ const RegistrationForm = ({
         />
       </FieldContainer>
 
-      {!isStandalone && (
+      {!isStandalone ? (
         <div className="news-subscription">
           <Checkbox
             className="checkbox-news"
@@ -270,9 +276,10 @@ const RegistrationForm = ({
             isDisabled={isLoading}
             label={newsletter}
             truncate={false}
+            dataTestId="news_checkbox"
           />
         </div>
-      )}
+      ) : null}
 
       {termsConditionsComponent}
 
@@ -281,12 +288,13 @@ const RegistrationForm = ({
         className="login-button"
         primary
         size={ButtonSize.medium}
-        scale={true}
+        scale
         label={isLoading ? t("Common:LoadingProcessing") : t("SignUp")}
         tabIndex={1}
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}
+        testId="signup_button"
       />
     </div>
   );

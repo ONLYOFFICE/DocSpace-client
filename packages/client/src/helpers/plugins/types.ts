@@ -32,9 +32,9 @@ import { CheckboxProps } from "@docspace/shared/components/checkbox/Checkbox.typ
 import { ToggleButtonProps } from "@docspace/shared/components/toggle-button/ToggleButton.types";
 import { TextareaProps } from "@docspace/shared/components/textarea/Textarea.types";
 import {
-  ComboboxProps,
+  TComboboxProps,
   TOption,
-} from "@docspace/shared/components/combobox/Combobox.types";
+} from "@docspace/shared/components/combobox/ComboBox.types";
 import { ToastProps } from "@docspace/shared/components/toast/Toast.type";
 import { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
 import { TextProps } from "@docspace/shared/components/text/Text.types";
@@ -86,8 +86,11 @@ export interface ICreateDialog {
   ) => Promise<IMessage> | Promise<void> | IMessage | void;
   onCancel?: (e: unknown) => void;
   onClose?: (e: unknown) => void;
+  onChange?: (value: string) => void;
   isCreateDialog: boolean;
   extension?: string;
+  errorText?: string;
+  isAutoFocusOnError?: boolean;
 }
 
 export interface IImage {
@@ -108,7 +111,7 @@ export interface IMessage {
     | ToggleButtonProps
     | ButtonProps
     | TextareaProps
-    | ComboboxProps;
+    | TComboboxProps;
   toastProps?: ToastProps[];
   contextProps?: {
     name: string;
@@ -116,7 +119,7 @@ export interface IMessage {
       | BoxProps
       | ButtonProps
       | CheckboxProps
-      | ComboboxProps
+      | TComboboxProps
       | IFrame
       | IImage
       | TextInputProps
@@ -132,7 +135,7 @@ export interface IMessage {
   settings?: string;
 }
 
-type TButtonGroup = {
+export type TButtonGroup = {
   component: PluginComponents.button;
   props: ButtonProps;
   contextName?: string;
@@ -155,11 +158,12 @@ export interface IContextMenuItem {
   fileType?: PluginFileType[];
   usersTypes?: PluginUsersType[];
   devices?: PluginDevices[];
-  security?: (
-    | keyof TRoomSecurity
+  itemSecurity?: (
     | keyof TFileSecurity
+    | keyof TRoomSecurity
     | keyof TFolderSecurity
   )[];
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
   pluginName?: string;
 }
 
@@ -182,6 +186,8 @@ export interface IFileItem {
   fileTileIcon?: string;
   fileIcon?: string;
   fileIconTile?: string;
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
+  fileSecurity?: (keyof TFileSecurity)[];
   pluginName?: string;
 }
 
@@ -232,7 +238,9 @@ export interface IframeWindow extends Window {
 export type TPlugin = {
   name: string;
   version: string;
+  minDocSpaceVersion?: string;
   description: string;
+  compatible: boolean;
   license: string;
   author: string;
   homePage: string;

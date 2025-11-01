@@ -33,9 +33,11 @@ import {
   restoreAdditionalResources,
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import { AdditionalResources as AdditionalResourcesPage } from "@docspace/shared/pages/Branding/AdditionalResources";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
+import { brandingRedirectUrl } from "./constants";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 
 const AdditionalResourcesComponent = (props) => {
@@ -52,8 +54,16 @@ const AdditionalResourcesComponent = (props) => {
   } = props;
   const [isLoading, setIsLoading] = useState(false);
 
-  const { feedbackAndSupportEnabled, helpCenterEnabled } =
-    additionalResourcesData;
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "additional-resources",
+    deviceType,
+  });
+
+  const feedbackAndSupportEnabled = Boolean(
+    additionalResourcesData?.feedbackAndSupportEnabled,
+  );
+  const helpCenterEnabled = Boolean(additionalResourcesData?.helpCenterEnabled);
 
   useEffect(() => {
     if (!(additionalResourcesData && tReady)) return;
@@ -69,7 +79,7 @@ const AdditionalResourcesComponent = (props) => {
         settings.helpCenterEnabled = helpEnabled;
         await setAdditionalResources(settings);
         await getAdditionalResources();
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       } finally {
@@ -84,7 +94,7 @@ const AdditionalResourcesComponent = (props) => {
     try {
       await restoreAdditionalResources();
       await getAdditionalResources();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     } finally {
@@ -103,7 +113,6 @@ const AdditionalResourcesComponent = (props) => {
       onRestore={onRestore}
       isLoading={isLoading}
       additionalResourcesIsDefault={additionalResourcesIsDefault}
-      deviceType={deviceType}
     />
   );
 };

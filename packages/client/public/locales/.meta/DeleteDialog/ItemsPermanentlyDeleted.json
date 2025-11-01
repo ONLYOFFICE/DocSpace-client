@@ -1,31 +1,19 @@
 {
   "key_path": "ItemsPermanentlyDeleted",
-  "content": "Items will be permanently deleted in 30 days.",
-  "content_en_sha1_hash": "498e17195ea2014f36206b2ad558d1a38e7874bf",
-  "created_at": "2025-05-19T21:30:56.716Z",
-  "updated_at": "2025-06-18T07:34:14.879Z",
+  "content": "These items will be permanently removed from the {{trashSection}}.",
+  "content_en_sha1_hash": "210f25353b01ba80b5f4ad5b6e8835425939e450",
+  "created_at": "2025-10-01T15:20:12.341Z",
+  "updated_at": "2025-10-01T15:20:17.766Z",
   "comment": {
-    "text": "This translation key is used to display a message that informs users about the permanent deletion of items after 30 days. It appears in a delete confirmation dialog and prompts users to confirm their action. Translators should provide a clear and concise message that conveys this information in the target language.",
+    "text": "This text explains that selected items will be permanently removed from the trash section. It appears within a confirmation dialog used when permanently deleting files and folders. Translators should ensure the wording accurately conveys the irreversible nature of the action.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:20.617Z"
+    "updated_at": "2025-10-01T15:20:17.766Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 207,
-      "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 207,
-      "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 207,
-      "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 133,
+      "context": "<Trans t={t} i18nKey=\"DeleteFilesAndFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {t(\"ItemsPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );",
       "module": "/packages/client"
     }
   ],
@@ -175,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

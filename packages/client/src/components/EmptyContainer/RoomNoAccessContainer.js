@@ -38,12 +38,14 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 
 const RoomNoAccessContainer = (props) => {
   const { t, setIsLoading, theme, isFrame, userId } = props;
 
-  const descriptionRoomNoAccess = t("NoAccessRoomDescription");
+  const descriptionRoomNoAccess = t("RoomAccessRedirectNote", {
+    sectionName: t("Common:Rooms"),
+  });
   const titleRoomNoAccess = t("NoAccessRoomTitle");
 
   const navigate = useNavigate();

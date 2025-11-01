@@ -3,7 +3,7 @@
   "content": "For more security, you need to change your password.",
   "content_en_sha1_hash": "1afd18a143c4d1d4c7d0087433d19a43c3ac1ed0",
   "created_at": "2025-05-19T21:30:53.346Z",
-  "updated_at": "2025-05-28T09:30:02.282Z",
+  "updated_at": "2025-05-26T07:57:32.317Z",
   "comment": {
     "text": "\"This translation key is used to display a message explaining the importance of changing passwords for added security. It appears in a logout dialog and helps users understand why password changes are necessary.\"",
     "is_auto": true,
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Daha çox təhlükəsizlik üçün\" is not the most natural way to express \"For more security.\" A more appropriate translation would convey the intent of improving security.",
-          "suggestion": "Təhlükəsizliyi artırmaq üçün"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"şifrəni dəyişdirməlisiniz\" sounds a bit formal and abrupt. A softer phrasing would be more user-friendly.",
-          "suggestion": "şifrənizi dəyişdirməlisiniz"
+          "description": "The translation 'Daha çox təhlükəsizlik üçün şifrəni dəyişdirməlisiniz' literally translates to 'For more security you must change your password'. While understandable, it's a bit awkward. A more natural phrasing would emphasize the *reason* for the password change.",
+          "suggestion": "Təhlükəsizliyi artırmaq üçün şifrənizi dəyişdirməlisiniz."
         }
       ],
       "approved_at": null
@@ -83,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vaihda salasanasi lisätäksesi turvallisuutta' is a literal translation that doesn't convey the natural flow of the English sentence. A more natural Finnish phrasing would emphasize the action of changing the password to improve security.",
-          "suggestion": "Consider 'Vaihda salasana turvallisuuden parantamiseksi' or 'Parempi turvallisuus saavutetaan vaihtamalla salasana.'"
+          "description": "The translation 'Vaihda salasanasi lisätäksesi turvallisuutta' literally translates to 'Change your password to increase security'. While understandable, it's a less natural way to express this in Finnish. A more idiomatic translation would be something like 'Muuta salasanaasi lisätäksesi turvallisuutta' or 'Päivitä salasanaasi turvallisuuden parantamiseksi'.",
+          "suggestion": "Päivitä salasanaasi turvallisuuden parantamiseksi."
         }
       ],
       "approved_at": null
@@ -113,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'より安全性を高めるために、パスワードの変更をお勧めします' is a bit formal and indirect for the intended meaning. While technically correct, it's not the most natural way to express the idea of needing to change a password for security.",
-          "suggestion": "より安全のために、パスワードを変更してください。"
+          "description": "The translation \"より安全性を高めるために、パスワードの変更をお勧めします\" emphasizes a recommendation rather than a necessity. The English implies a requirement for increased security, while the Japanese phrasing softens it to a suggestion. A more accurate translation would convey the mandatory nature of the password change.",
+          "suggestion": "より安全性を確保するため、パスワードの変更が必要です。"
         }
       ],
       "approved_at": null
@@ -155,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Para que seja mais seguro, tem de mudar a sua palavra-chave\" is a literal translation and not the most natural way to convey the meaning of \"For more security, you need to change your password.\" It sounds slightly awkward in Portuguese.",
-          "suggestion": "A better translation would be something like \"Para aumentar a segurança, precisa alterar a sua palavra-chave.\" or \"Para maior segurança, altere a sua senha.\""
+          "description": "The translation 'Para que seja mais seguro, tem de mudar a sua palavra-chave' isn't a direct and natural translation of 'For more security, you need to change your password.' It's a bit formal and awkward. A more natural translation would emphasize the user's responsibility.",
+          "suggestion": "Para aumentar a segurança, você precisa alterar sua senha."
         }
       ],
       "approved_at": null
@@ -185,13 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වඩාත් හොඳ ආරක්‍ෂාකවකට' doesn't fully capture the meaning of 'For more security'. It literally translates to 'For a better protection,' which is not the intended meaning. It should convey the idea of 'increased security'.",
-          "suggestion": "වඩාත්ම ආරක්‍ෂාව සඳහා"
+          "description": "The translation 'වඩාත් හොඳ ආරක්‍ෂාකවකට' while literally meaning 'for better protection', doesn't quite convey the urgency and directness of 'For more security'. A more appropriate translation for the context of prompting a password change would be something like 'ආරක්‍ෂාව වැඩිදියුණු කිරීම සඳහා'.",
+          "suggestion": "ආරක්‍ෂාව වැඩිදියුණු කිරීම සඳහා"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'ඔබගේ මුරපදය වෙනස් කළ යුතුය' is grammatically correct, it's slightly formal. A more natural and common phrasing could be used.",
-          "suggestion": "ඔබ මුරපදය වෙනස් කළ යුතුයි"
+          "description": "The word 'ඔබගේ' (obage) is formal and correct, but in this context, a more conversational tone like 'ඔයාගේ' (oyage) could be preferable depending on the target audience.  However, the grammatical correctness is not impacted.",
+          "suggestion": "ඔයාගේ"
         }
       ],
       "approved_at": null
@@ -211,7 +206,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'За већу безбедност' (For greater security) sounds slightly formal and less natural in this context. A more common and conversational phrasing would be 'Да бисте били сигурнији...' or 'За вашу сигурност...'",
+          "suggestion": "Да бисте били сигурнији, морате променити вашу лозинку."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -244,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '如需进一步的安全性，您需要更改密码' is a literal translation and sounds slightly unnatural in Chinese. While not incorrect, it doesn't flow as smoothly as it could.",
-          "suggestion": "为了更高的安全性，请更改您的密码。"
+          "description": "The translation \"如需进一步的安全性，您需要更改密码\" is a literal translation but sounds somewhat unnatural in Chinese. While technically correct, it's not the most fluent way to express the sentiment.",
+          "suggestion": "Consider a more natural phrasing such as \"为了更高的安全性，请更改您的密码\" or \"请更改密码以提高安全性\"."
         }
       ],
       "approved_at": null

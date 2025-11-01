@@ -3,7 +3,7 @@
   "content": "Group Membership",
   "content_en_sha1_hash": "55e2f520df1da58560087151c9a25a57b1f4e8ff",
   "created_at": "2025-05-19T21:30:54.216Z",
-  "updated_at": "2025-05-21T08:19:30.041Z",
+  "updated_at": "2025-08-11T18:11:59.244Z",
   "comment": {
     "text": "Group Membership is a toggle button that enables or disables group membership for LDAP connections. When clicked, it controls visibility and interaction in the Portal Settings categories integration section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
       "line_number": 97,
-      "context": "<div className=\"group_membership-header\">\n <ToggleButton\n className=\"toggle\"\n isChecked={groupMembership}\n onChange={setIsGroupMembership}\n label={t(\"LdapGroupMembership\")}\n isDisabled={!isLdapEnabled || isUIDisabled}\n />\n <HelpButton\n tooltipContent={t(\"LdapGroupMembershipTooltip\", {\n productName: t(\"Common:ProductName\"),",
+      "context": "<div className=\"group_membership-header\">\n <ToggleButton\n className=\"toggle\"\n isChecked={groupMembership}\n onChange={setIsGroupMembership}\n label={t(\"LdapGroupMembership\")}\n isDisabled={!isLdapEnabled || isUIDisabled}\n dataTestId=\"group_membership_toggle_button\"\n />\n <HelpButton\n tooltipContent={t(\"LdapGroupMembershipTooltip\", {",
       "module": "/packages/client"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Qrup Üzvlüyü\" is a possible translation, it's a bit literal and can sound unnatural. A more natural and idiomatic translation would be \"Grup Üyvləri\" or \"Grup Aüzviyyəti\".",
+          "suggestion": "Consider using \"Grup Üyvləri\" or \"Grup Aüzviyyəti\" for a more natural feel."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -129,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Associação ao grupo\" is understandable, a more accurate and common translation of 'Group Membership' in a technical context like LDAP would be 'Filiação a grupo' or 'Membro do grupo'. \"Associação ao grupo\" implies a more voluntary or cooperative relationship rather than a technical membership.",
+          "suggestion": "Filiação a grupo"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -138,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Associação ao grupo' is understandable, it's a more literal and slightly less natural translation of 'Group Membership'. A more idiomatic translation would convey the concept of belonging or being part of a group.",
-          "suggestion": "Consider alternatives like 'Filiação ao grupo' or 'Membro do grupo'."
+          "description": "While 'Associação ao grupo' is understandable, a more accurate and commonly used translation for 'Group Membership' in a technical context would be 'Filiação ao grupo' or 'Membro do grupo'. 'Associação' implies a more formal or voluntary association.",
+          "suggestion": "Filiação ao grupo"
         }
       ],
       "approved_at": null
@@ -150,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Membrii grupului' is technically correct, it's a very literal translation. A more natural and idiomatic translation for 'Group Membership' in a technical context might be 'Afiilierea la grup' or 'Apartenența la grup'.",
-          "suggestion": "Consider 'Afiilierea la grup' or 'Apartenența la grup'."
+          "description": "While \"Membrii grupului\" is a literal translation of \"Group Members,\" it's not the most natural or idiomatic phrasing in Romanian for the context of LDAP group membership. A more common and contextually appropriate translation would be \"Aderarea la grup\" or \"Apartenența la grup\".",
+          "suggestion": "Consider using \"Aderarea la grup\" or \"Apartenența la grup\"."
         }
       ],
       "approved_at": null
@@ -186,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Чланство Групе' is not the most accurate or natural translation of 'Group Membership'. 'Групе' implies membership *in* a group, but 'Чланство' is a more formal term for membership. A more accurate and natural translation would be 'Припадност групи' or 'Чланство у групи'.",
+          "description": "The Serbian (Cyrillic) translation 'Чланство Групе' translates literally to 'Membership Group'.  A more natural and accurate translation of 'Group Membership' in Serbian would be 'Припадност групи' or 'Чланство у групи'. 'Чланство Групе' sounds awkward.",
           "suggestion": "Припадност групи"
         }
       ],
@@ -195,13 +207,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Članstvo Grupe' is understandable, a more accurate and idiomatic translation of 'Group Membership' would be 'Pripadnost Grupi'. 'Članstvo' often implies individual membership, whereas 'Pripadnost' better conveys the collective aspect of group membership.",
-          "suggestion": "Pripadnost Grupi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -213,13 +219,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Участь у групі\" is a possible translation, it's quite literal and doesn't convey the nuance of \"Group Membership\" in the context of LDAP. A more natural and commonly used translation for this context would be something like 'Членство в групі' or 'Приналежність до групи'.",
-          "suggestion": "Consider 'Членство в групі' or 'Приналежність до групи'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"组成员资格\" (zuò chéng yuán zì gé) while technically meaning 'membership', doesn't quite capture the nuance of 'Group Membership' which implies membership within a specific group context. It's a bit too literal.",
-          "suggestion": "Consider a more contextually appropriate translation like \"群组成员\" (qún zuò chéng yuán) which directly means 'group member' or \"组群成员\" (zǔ qún chéng yuán) for 'group membership'."
+          "description": "The translation '组成员资格' (Zu Cheng Yuan Zige) while technically meaning 'membership', doesn't quite capture the nuance of 'Group Membership'. It reads more like 'constituent membership' or 'membership of a component'. 'Group Membership' implies membership *in* a group.",
+          "suggestion": "Consider '群组会员资格' (Qun Zu Hui Yuan Zige) which more directly translates to 'Group Membership' or '团体会员资格' (Tuan Ti Hui Yuan Zige) meaning 'Team Membership'."
         }
       ],
       "approved_at": null

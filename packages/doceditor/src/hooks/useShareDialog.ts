@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 import type { IInitialConfig } from "@/types";
 import { FolderType } from "@docspace/shared/enums";

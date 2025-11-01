@@ -3,7 +3,7 @@
   "content": "Create file copy",
   "content_en_sha1_hash": "c53615e6b0064e7275aa77e2122140291698d2e9",
   "created_at": "2025-05-19T21:30:43.875Z",
-  "updated_at": "2025-05-28T09:30:02.217Z",
+  "updated_at": "2025-06-30T12:20:31.193Z",
   "comment": {
     "text": "The translation key \"CreateFileCopy\" is used to display the text for a file copy creation action in a UI component, typically found in a conflict resolution dialog or file management interface. It appears as a button label or title within the dialog, prompting users to create a duplicate of a file. This text should be clear and concise for the end-user to understand the action's purpose.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 63,
+      "line_number": 64,
       "context": "/>\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}\n />",
       "module": "/packages/doceditor"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'انشاء نسخة ملف' while understandable, doesn't perfectly capture the nuance of 'Create file copy.' A more accurate translation would emphasize the action of creation and copying.",
-          "suggestion": "عمل نسخة من ملف (ʿamal nuskhah min milaff) - meaning 'Make a copy of a file' or نسخ ملف (nuskha milaff) - meaning 'File copy'"
+          "description": "The translation \"انشاء نسخة ملف\" is a literal translation and while understandable, a more natural and commonly used phrase in Saudi Arabic would be \"عمل نسخة من ملف\" or \"نسخ ملف\".  \"انشاء\" implies creation from scratch, while \"عمل\" or \"نسخ\" better conveys the act of copying an existing file.",
+          "suggestion": "عمل نسخة من ملف"
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Faylın sürətini yaratmaq' literally translates to 'Create file speed'. It doesn't accurately convey the meaning of 'Create file copy'. The correct meaning should be something like 'Faylın surətini kecirmək' or 'Faylın nüsxəsini yaratmaq'.",
-          "suggestion": "Faylın nüsxəsini yaratmaq"
+          "description": "The translation \"Faylın sürətini yaratmaq\" does not accurately convey the meaning of \"Create file copy\".  \"Sürətini\" means \"its copy/duplicate\" but the entire phrase implies the action of creating a copy, not just referring to a copy's existence.",
+          "suggestion": "Consider \"Faylın eynisini yaratmaq\" or \"Faylın surətini çıxartmaq\" or \"Faylın köçürməsi\" depending on the desired nuance. \"Faylın nüsxəsini yaratmaq\" is another possible option."
         }
       ],
       "approved_at": null
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"als Kopie speichern\" (save as copy) doesn't fully capture the meaning of 'Create file copy'. It implies an action initiated by the user to save a copy, whereas 'Create file copy' is more about the system creating a copy.",
+          "description": "The German translation \"als Kopie speichern\" translates more accurately to \"save as copy\" or \"save as a copy.\" It doesn't directly translate \"create file copy.\" A more accurate translation might be \"Datei kopieren erstellen\" or \"Erstelle eine Dateikopie\".",
           "suggestion": "Datei kopieren erstellen"
         }
       ],
@@ -105,7 +105,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ֆայլի' (fayli) is a genitive case. While technically correct, it's more natural and readable in this context to use the nominative case 'ֆայլ' (fayl).",
+          "suggestion": "Ստեղծել ֆայլի պատճեն → Ստեղծել ֆայլ պատճեն"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '파일 본사본 생성' is not an accurate translation of 'Create file copy'. '본사본' implies a copy from the headquarters, which is not the intended meaning. It's likely a misunderstanding of the term 'copy'.",
-          "suggestion": "파일 복사 생성 (File boksa seonggong) or 파일 사본 만들기 (File sabon mandeugi)"
+          "description": "The translation \"파일 본사본 생성\" is not accurate. '본사본' implies a copy from the headquarters, which is not the intended meaning of 'Create file copy'.",
+          "suggestion": "파일 복사 생성"
         }
       ],
       "approved_at": null
@@ -171,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Crearea copiei fișierului' is a bit clunky and formal for a UI element. A more natural translation would be something like 'Copiere fișier' or 'Copiați fișier'.",
+          "suggestion": "Copiere fișier"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

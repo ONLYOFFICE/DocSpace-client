@@ -34,6 +34,7 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import { TFunction } from "i18next";
 
 type BodyComponentProps = {
   needReassignData: boolean;
@@ -57,7 +58,7 @@ const BodyComponent = ({
   onlyGuests,
 }: BodyComponentProps) => {
   const warningMessageMyDocuments = t("UserFilesRemovalScope", {
-    sectionNameFirst: t("Common:MyFilesSection"),
+    sectionNameFirst: t("Common:MyDocuments"),
     sectionNameSecond: t("Common:TrashSection"),
   });
 
@@ -71,14 +72,16 @@ const BodyComponent = ({
     <Trans
       i18nKey="DeleteReassignDescriptionUser"
       ns="DeleteProfileEverDialog"
-      t={t}
-    >
-      {{ warningMessageMyDocuments }}
-      <strong>
-        {{ userPerformedDeletion: userPerformedDeletion!.displayName }}
-        {{ userYou: t("Common:You") }}
-      </strong>
-    </Trans>
+      t={t as TFunction}
+      values={{
+        warningMessageMyDocuments,
+        userPerformedDeletion: userPerformedDeletion!.displayName,
+        userYou: t("Common:You"),
+      }}
+      components={{
+        1: <strong />,
+      }}
+    />
   );
 
   const warningMessage =
@@ -87,10 +90,18 @@ const BodyComponent = ({
       : warningMessageMyDocuments;
 
   const deleteMessage = (
-    <Trans i18nKey="DeleteUserMessage" ns="DeleteProfileEverDialog" t={t}>
-      {{ userCaption: onlyGuests ? t("Common:Guest") : t("Common:User") }}
-      <strong>{{ user: users[0].displayName }}</strong>
-    </Trans>
+    <Trans
+      i18nKey="DeleteUserMessage"
+      ns="DeleteProfileEverDialog"
+      t={t as TFunction}
+      values={{
+        userCaption: onlyGuests ? t("Common:Guest") : t("Common:User"),
+        user: users[0].displayName,
+      }}
+      components={{
+        1: <strong />,
+      }}
+    />
   );
 
   if (deleteWithoutReassign) {
@@ -109,7 +120,7 @@ const BodyComponent = ({
         <Text className="text-delete-description">
           {t("PersonalDataDeletionInfo", {
             productName: t("Common:ProductName"),
-            sectionNameFirst: t("Common:MyFilesSection"),
+            sectionNameFirst: t("Common:MyDocuments"),
             sectionNameSecond: t("Common:TrashSection"),
           })}
         </Text>
@@ -160,6 +171,7 @@ const BodyComponent = ({
           fontWeight={600}
           isHovered
           onClick={onClickReassignData}
+          dataTestId="dialog_reassign_data_link"
         >
           {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
         </Link>

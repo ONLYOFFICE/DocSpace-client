@@ -48,7 +48,7 @@ const StyledTableRow = styled(TableRow)`
     text-overflow: ellipsis;
   }
 
-  .username {
+  .checkbox-text {
     font-size: 13px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
@@ -130,12 +130,14 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
   };
 
   return (
-    <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
+    <StyledTableRow>
       <TableCell className="checkboxWrapper">
-        <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
-        <Text className="username" truncate>
-          {displayName}
-        </Text>
+        <Checkbox
+          isChecked={isChecked}
+          onChange={handleAccountToggle}
+          label={displayName}
+          truncate
+        />
       </TableCell>
 
       <TableCell>
@@ -150,6 +152,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
             displaySelectedOption
             modernView
             manualWidth="auto"
+            dataTestId="user_type_combobox"
           />
         </div>
       </TableCell>

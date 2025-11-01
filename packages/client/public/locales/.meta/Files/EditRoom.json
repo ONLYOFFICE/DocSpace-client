@@ -3,7 +3,7 @@
   "content": "Edit room",
   "content_en_sha1_hash": "5f5fa3dd732a628dd88ba173574e6ee90598df28",
   "created_at": "2025-05-19T21:30:55.513Z",
-  "updated_at": "2025-06-03T20:59:42.294Z",
+  "updated_at": "2025-10-16T07:29:35.969Z",
   "comment": {
     "text": "Edit room button label is used to confirm opening an edit room within the application. This key is likely applied to a button in the Context Options dialog (/packages/client/src/store/ContextOptionsStore.js).",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 903,
-      "context": "setIsVisible(true);\n view && setView(view);\n };\n \n onClickEditRoom = (item) => {\n const event = new Event(Events.ROOM_EDIT);\n event.item = item;\n window.dispatchEvent(event);\n };",
+      "line_number": 919,
+      "context": "if (item) {\n setView(view);\n }\n };\n \n onClickEditRoom = (item) => {\n const event = new Event(Events.ROOM_EDIT);\n event.item = item;\n window.dispatchEvent(event);\n };",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +33,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Otağı redaktə edin\" is a direct command and doesn't convey the meaning of 'Edit room' as a location or a place. A more accurate translation would reflect that it's a room *for* editing.",
+          "suggestion": "Redaktə otağı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Редактиране на стая\" literally translates to \"Editing of room.\" A more natural and idiomatic translation for \"Edit room\" would be something along the lines of \"Редакторска зала\" or \"Зала за редактиране\".",
+          "suggestion": "Редакторска зала"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -75,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Modifier la salle\" is understandable, a more accurate and common translation for \"Edit room\" would be \"Salle de montage\" or \"Salle de modification\". \"Modifier la salle\" implies changing the room itself, not the content within it.",
+          "suggestion": "Salle de montage"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -87,7 +105,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Modifica la stanza\" is not the most natural or accurate translation of \"Edit room\". \"Edit room\" refers to a room where editing takes place, not the act of modifying a room.",
+          "suggestion": "Sala montaggio"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,7 +123,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"방 편집\" is understandable, a more natural and accurate translation for \"Edit room\" in Korean would be \"편집실\" (byeonji-shil) or \"수정실\" (sujeong-shil). \"방 편집\" literally translates to 'room editing,' which is not how the term is typically used.",
+          "suggestion": "편집실 or 수정실"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,13 +147,25 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Bewerk kamer\" is a literal translation of \"Edit room\" and doesn't accurately convey the intended meaning. \"Edit room\" typically refers to a room used for editing videos or audio, not just a room that is being edited.",
+          "suggestion": "A more accurate translation might be something like \"Montagekamer\" (video editing room) or \"Bewerkingsruimte\" (editing space), depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Pokój do edytowania' is literally 'Room for editing', it's not the most natural or idiomatic translation for 'Edit room'. It sounds somewhat clunky in Polish.",
+          "suggestion": "Consider 'Sala montażowa' (editing suite/room) or 'Pokój montażu' (room for editing - slightly better than the current translation)"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +183,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Editare sală' is not the most natural Romanian translation of 'Edit room'. 'Editare' implies an action of editing, while 'sală' simply means 'room'. A more accurate and idiomatic translation would convey the purpose of the room.",
+          "suggestion": "Camera de editare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +201,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"කාමරය සංස්කරණය\" is a literal translation of 'room edit'. While understandable, it's not the most natural phrasing in Sinhala. A more idiomatic translation would be something like 'සංශකරණ කාමරය' (Sanksaran Kamaraya) or 'සංශකරණය කරන කාමරය' (Sanksaranaya karana kamaraya).",
+          "suggestion": "සංශකරණ කාමරය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Upraviť miestnosť\" is a literal translation of \"Edit room,\" it doesn't fully capture the nuance. 'Edit room' often refers to a space specifically designed for editing videos or audio, not just a general room to be modified. A better translation might consider 'Editačná miestnosť' or 'Miestnosť na úpravu'.",
+          "suggestion": "Consider 'Editačná miestnosť' or 'Miestnosť na úpravu' for a more accurate representation of an 'Edit room'."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,7 +231,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Edit room\" refers to a room dedicated to editing, such as video or audio editing. \"Уреди собу\" literally translates to \"Arrange room\" or \"Furnish room\", which doesn't convey the intended meaning of a room specifically for editing.",
+          "suggestion": "Редаторска соба"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +249,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Oda düzenle\" is understandable, a more natural and accurate translation of \"Edit room\" would be \"Düzenleme odası\" or \"Edit odası\". \"Oda düzenle\" implies 'organize the room,' rather than a room dedicated to editing.",
+          "suggestion": "Düzenleme odası"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,13 +267,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Chỉnh sửa\" is a valid translation for \"Edit\", \"phòng\" directly translates to \"room\".  \"Edit room\" often refers to a space used for editing (video, audio, documents, etc.). A more accurate translation would convey that meaning.",
+          "suggestion": "Phòng chỉnh sửa"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"编辑房间\" is too literal. \"Edit room\" typically refers to a room specifically designed for editing videos or other media, not just any room being edited.",
+          "suggestion": "Consider \"编辑室\" (biānjí shì) which directly translates to 'editing room' and is the standard term."
+        }
+      ],
       "approved_at": null
     }
   }

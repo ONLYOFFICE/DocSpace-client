@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import classNames from "classnames";
 
 import RadioButtonReactSvg from "PUBLIC_DIR/images/radiobutton.react.svg";
@@ -67,6 +67,7 @@ const RadioButton = ({
   fontWeight,
   label,
   autoFocus,
+  testId = "radio-button",
 }: RadioButtonProps) => {
   const [isCheckedState, setIsCheckedState] = React.useState(isChecked);
   const labelRef = React.useRef<HTMLLabelElement>(null);
@@ -80,14 +81,6 @@ const RadioButton = ({
     onClick?.(e);
   };
 
-  useLayoutEffect(() => {
-    if (!labelRef.current) return;
-
-    if (spacing) {
-      labelRef.current.style.setProperty("--radio-button-spacing", spacing);
-    }
-  }, [spacing]);
-
   return (
     <label
       id={id}
@@ -98,8 +91,12 @@ const RadioButton = ({
         [styles.orientationHorizontal]: orientation === "horizontal",
         [styles.spacing]: spacing,
       })}
-      style={style}
-      data-testid="radio-button"
+      data-spacing={spacing}
+      style={{
+        ...style,
+        ["--radio-button-spacing" as string]: spacing,
+      }}
+      data-testid={testId}
     >
       <input
         className={classNames(styles.input, classNameInput)}

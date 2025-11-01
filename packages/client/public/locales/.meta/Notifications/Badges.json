@@ -3,7 +3,7 @@
   "content": "Badges",
   "content_en_sha1_hash": "2c578dc888bc9805915a1839502adddce2592af7",
   "created_at": "2025-05-19T21:30:54.078Z",
-  "updated_at": "2025-05-21T07:36:20.098Z",
+  "updated_at": "2025-09-26T15:21:06.462Z",
   "comment": {
     "text": "The \"Badges\" translation key is used to display a label for user profile notifications related to achievements or rewards. This text appears on a notification component in the user's profile section.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/index.js",
-      "line_number": 44,
-      "context": "import RoomsActionsContainer from \"./sub-components/RoomsActionsContainer\";\n import DailyFeedContainer from \"./sub-components/DailyFeedContainer\";\n import RoomsActivityContainer from \"./sub-components/RoomsActivityContainer\";\n import { StyledSectionBodyContent, StyledTextContent } from \"./StyledComponent\";\n \n const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;\n \n const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {\n const { t, ready } = useTranslation(\"Notifications\");\n \n const [isLoading, setIsLoading] = useState(false);",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/index.tsx",
+      "line_number": 52,
+      "context": "const badgesContent = (\n <>\n <StyledTextContent>\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"Badges\")}\n </Text>\n </StyledTextContent>\n <div className=\"badges-container\">\n <RoomsActionsContainer\n t={t}",
       "module": "/packages/client"
     }
   ],
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Տեղեկաքարտ\" translates to 'information card' or 'information sheet', which is not an accurate translation of 'Badges'. 'Badges' typically refers to a visual indicator of achievement or status.",
-          "suggestion": "Possible alternatives include:  \"Շքանշաններ\" (Shkanshanner - Medals/Awards), \"Համաձայնագրեր\" (Hamadzayner - Seals/Emblems), or a more descriptive phrase depending on the specific context of the 'Badges' within the Notifications."
+          "description": "The Armenian translation \"Տեղեկաքարտ\" translates to 'Information card' or 'Information plaque,' which is not an accurate translation of \"Badges.\" 'Badges' refers to a visual indicator of achievement or status, often displayed as an icon or emblem.",
+          "suggestion": "Possible suggestions include: 'Մարքեր' (Markers), 'Շքանշաններ' (Medals/Awards), or a more contextual translation depending on the specific meaning of 'Badges' in the application."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The singular form \"Badge\" is used when the English is plural \"Badges\". This suggests an issue with number agreement.",
-          "suggestion": "Badge"
+          "description": "The singular form 'Badge' is used when the English key 'Badges' is plural. This implies multiple badges are being referred to.",
+          "suggestion": "Consider using the Italian plural form, 'Badge' (plural) or a more accurate translation depending on the context."
         }
       ],
       "approved_at": null
@@ -117,13 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ປ້າຍ\" (pai) can mean \"badge\" or \"label,\" it's a more generic term. A more accurate translation for \"Badges\" in the context of notifications would be something like \"ເຄື່ອງຊີ້ບອກຈຳນວນ\" (khouang chi bok chamnuan) or \"ຕົວເລກແຈ້ງເຕືອນ\" (tualek chaeng teuan), which specifically refers to a numerical indicator or alert count.",
-          "suggestion": "Consider \"ເຄື່ອງຊີ້ບອກຈຳນວນ\" or \"ຕົວເລກແຈ້ງເຕືອນ\" for a more accurate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Žetoni\" can sometimes translate to \"tokens,\" it's not the most accurate translation for \"Badges\" in the context of notifications. \"Badges\" typically refers to visual indicators of achievement or status.",
-          "suggestion": "Consider alternatives like \"Atzinības zīmes\" (Recognition Marks), \"Pagodinājumi\" (Honors), or \"zīmes\" (marks) depending on the specific nuance intended."
+          "description": "The Latvian translation \"Žetoni\" translates to 'tokens' or 'chips' and doesn't accurately convey the meaning of 'badges' in the context of notifications. 'Badges' refers to visual indicators of achievement or status.",
+          "suggestion": "Consider using \"Atzinības zīmes\" or \"Pagodinājumi\" which more accurately represent 'badges' in this context. Alternatively, a more literal but potentially less user-friendly translation could be 'Epruzetes'."
         }
       ],
       "approved_at": null
@@ -150,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Etykiety\" translates to \"Labels\" which is not the intended meaning of \"Badges\". \"Badges\" typically refer to icons or counters indicating the number of unread notifications.",
-          "suggestion": "Consider \"Odznaki\" or \"Powiadomienia\" as more accurate translations depending on the specific context within the application."
+          "description": "The Polish translation \"Etykiety\" translates to \"Labels\" which is not the same as \"Badges\". While \"etykiety\" can sometimes be used in a similar context, it doesn't convey the intended meaning of a visual indicator of achievement or a count of unread notifications.",
+          "suggestion": "Consider alternatives like \"Odznaki\", \"Licznik powiadomień\", or a more context-dependent translation."
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'චිහ්න' (chiha) is a general term for 'signs' or 'symbols' and doesn't specifically convey the meaning of 'badges' in the context of notifications (e.g., a counter on an app icon). A more appropriate translation would convey the sense of a badge as an award or indicator of progress.",
-          "suggestion": "Consider translations like 'බැජ්' (badge - transliteration), 'ත්‍යාගය' (thiyagaya - award), or 'නոտිෆිකේෂන් චිත්‍ර' (notification icons) depending on the desired nuance."
+          "description": "The translation 'චිහ්න' (chihna) translates to 'sign' or 'mark' rather than 'badges'. 'Badges' typically refer to emblems or indicators of achievement. A more accurate translation would depend on the specific context, but options could include 'ත්‍යාගම්' (thyagam - awards), 'බැජ්' (badge - transliteration), or a descriptive phrase.",
+          "suggestion": "Consider 'ත්‍යාගම්' (thyagam - awards), 'බැජ්' (badge - transliteration), or a descriptive phrase conveying the meaning of achievement indicators."
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Menovky\" can mean labels or tags, it doesn't accurately convey the meaning of \"Badges\" in the context of notifications. \"Badges\" typically refers to visual indicators of achievement or updates, not simply labels.",
-          "suggestion": "Consider using \"Odznaky\" which is a more accurate translation for \"Badges\" in this context. Alternatively, \"Výstražné symboly\" might also be suitable, depending on the specific visual representation."
+          "description": "The Slovak translation \"Menovky\" generally refers to \"name tags\" or \"labels\" rather than \"badges\" in the context of app notifications. A more accurate translation would convey the sense of a counter or indicator.",
+          "suggestion": "Zvonkohry (for bells or chimes), Počítadlá (counters), or possibly a more descriptive phrase depending on the precise visual representation of the badges."
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Значке' is a plural form. The English 'Badges' is singular in this context (representing the concept of badges in general). The correct singular form is 'Значка'.",
-          "suggestion": "Значка"
+          "description": "While \"Значке\" is a valid Serbian (Cyrillic) word, it's the genitive/dative plural form of 'значка' (badge). The correct nominative plural form, which is generally preferred for labels and UI elements, would be \"Значице\".",
+          "suggestion": "Значице"
         }
       ],
       "approved_at": null
@@ -252,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"弹窗\" (tan chuang) means \"pop-up window\" or \"modal window,\" which is not an accurate translation of \"Badges.\" \"Badges\" refers to visual indicators of achievements or notifications on a platform.",
-          "suggestion": "Consider alternatives such as \"徽章\" (hui zhang) which directly translates to \"badge,\" or a more contextual translation based on the platform's specific use of the term."
+          "description": "The translation \"弹窗\" (tan chuang) means \"pop-up window\" and doesn't accurately represent the meaning of \"Badges\" in the context of notifications. \"Badges\" typically refers to a visual indicator (like a number) on an icon representing the number of unread notifications.",
+          "suggestion": "Consider alternatives like \"徽章\" (hui zhang), which translates to \"badge,\" or a more descriptive phrase that conveys the concept of a notification indicator, like \"通知数\" (tongzhi shu, 'notification count')."
         }
       ],
       "approved_at": null

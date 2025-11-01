@@ -26,15 +26,17 @@
 
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import RestoreAuthReactSvgUrl from "PUBLIC_DIR/images/restore.auth.react.svg?url";
-import { useNavigate } from "react-router";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
-import { useState, useEffect } from "react";
+import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
+
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { withTranslation } from "react-i18next";
+
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
-import { withTranslation } from "react-i18next";
-import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import { getCorrectDate } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
@@ -48,7 +50,7 @@ import {
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StyledVersionRow } from "./StyledVersionHistory";
-import VersionBadge from "./VersionBadge";
+import VersionBadge from "./VersionBadge/VersionBadge";
 
 const VersionRow = (props) => {
   const {
@@ -81,6 +83,7 @@ const VersionRow = (props) => {
     canDeleteVersion,
     versionSelectedForDeletion,
     versionDeletionProcess,
+    dataTestId,
   } = props;
 
   const navigate = useNavigate();
@@ -258,6 +261,7 @@ const VersionRow = (props) => {
       isEditing={isEditing}
       contextTitle={t("Common:Actions")}
       versionDeleteProcess={versionDeletionProcess}
+      dataTestId={dataTestId}
       versionDeleteRow={
         versionDeletionProcess
           ? versionSelectedForDeletion === info.versionGroup
@@ -292,6 +296,7 @@ const VersionRow = (props) => {
               title={versionDate}
               isTextOverflow
               className="version-link-file"
+              dataTestId="version_link_file"
             >
               {versionDate}
             </Link>
@@ -312,6 +317,7 @@ const VersionRow = (props) => {
                 title={title}
                 isTextOverflow
                 className="version-link-file"
+                dataTestId="version_link_user"
               >
                 {title}
               </Link>
@@ -339,6 +345,7 @@ const VersionRow = (props) => {
               isDisabled={isSavingComment}
               autoFocus
               areaSelect
+              dataTestId="version_textarea"
             />
           ) : null}
 
@@ -361,6 +368,7 @@ const VersionRow = (props) => {
                 primary
                 onClick={onSaveClick}
                 label={t("Common:SaveButton")}
+                testId="version_save_button"
               />
             </div>
             <div className="version_edit-comment-button-second">
@@ -370,6 +378,7 @@ const VersionRow = (props) => {
                 scale
                 onClick={onCancelClick}
                 label={t("Common:CancelButton")}
+                testId="version_cancel_button"
               />
             </div>
           </div>

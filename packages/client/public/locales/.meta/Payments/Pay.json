@@ -3,7 +3,7 @@
   "content": "Pay",
   "content_en_sha1_hash": "80c37573afed72cb3ec54133cd32508d33bcb52d",
   "created_at": "2025-05-19T21:30:53.714Z",
-  "updated_at": "2025-07-01T15:57:36.286Z",
+  "updated_at": "2025-08-04T07:30:01.528Z",
   "comment": {
     "text": "The translation key \"Pay\" is used to display the label for a payment-related button, typically found on a portal settings page. Translators should provide a clear and concise word or phrase that represents making a payment, such as \"Make Payment\" or \"Pay Now\".",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word \"Pay\" refers to the action of making a payment. \"Плащане\" (Plashtane) is the noun representing 'payment'. While related, it's not a direct translation of the verb \"Pay\". A more accurate translation would be something like \"Плащай\" (Plashtai - imperative form of 'to pay').",
-          "suggestion": "Consider \"Плащай\" (Plashtai) or a similar verb form to align with the English word's function."
+          "description": "The translation 'Плащане' (Plashtane) generally translates to 'Payment' rather than 'Pay'. 'Pay' could also be translated as 'Плати' (Plati) which means 'to pay'.",
+          "suggestion": "Consider 'Плати' (Plati) if the intent is to represent the action of paying, or keep 'Плащане' (Plashtane) if referring to the act of payment itself."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"支払\" is incomplete. It represents the root form of the verb \"to pay\" but lacks the appropriate verb form for the context of 'Pay' which is likely an instruction or action.",
-          "suggestion": "Consider using a more complete verb form such as \"支払い\" (payment) or \"支払う\" (to pay) depending on the context. Without knowing the surrounding text it is difficult to give a precise suggestion."
+          "description": "The Japanese translation \"支払\" is incomplete. It means \"pay\" but is missing the verb ending. A more appropriate translation would include a verb ending like \"支払う\" (Shiharau).",
+          "suggestion": "支払う (Shiharau)"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'Plati' is the imperative form of 'platiti' (to pay). 'Pay' as a noun or label generally requires the noun form, which would be 'Platanje'.",
-          "suggestion": "Platanje"
+          "description": "The Serbian (Latin) translation \"Plati\" is the correct conjugation of the verb 'to pay' in the third person singular. However, given the key name 'Payments:Pay' likely refers to the action or concept of paying, a more appropriate translation might be 'Plaćanje' (Payment) or 'Uplata' (Deposit/Payment). 'Plati' implies a specific act of paying *by someone*.",
+          "suggestion": "Consider 'Plaćanje' or 'Uplata' for a more accurate representation of the intended meaning."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Buttons",
   "content_en_sha1_hash": "503d46db37b0db45db898aabed77244252918ca2",
   "created_at": "2025-05-19T21:30:50.842Z",
-  "updated_at": "2025-05-28T09:30:02.499Z",
+  "updated_at": "2025-08-04T07:30:01.304Z",
   "comment": {
     "text": "This translation key is used to display the label \"Buttons\" in a color scheme dialog. It appears as a button's color option and is intended for translators to provide alternative text for this specific UI component.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/sub-components/colorSchemeDialog.js",
-      "line_number": 167,
-      "context": "{!viewMobile ? nodeHexColorPickerAccent : null}\n </div>\n \n <div className=\"flex relative\">\n <div className=\"name-color\">{t(\"Settings:ButtonsColor\")}</div>\n <div\n id=\"buttons\"\n className=\"modal-add-theme buttons-box\"\n onClick={onClickColor}\n />",
+      "line_number": 168,
+      "context": "{!viewMobile ? nodeHexColorPickerAccent : null}\n </div>\n \n <div className=\"flex relative\">\n <div className=\"name-color\">{t(\"Settings:ButtonsColor\")}</div>\n <div\n id=\"buttons\"\n className=\"modal-add-theme buttons-box\"\n data-testid=\"color_scheme_dialog_buttons\"\n onClick={onClickColor}",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"مفاتيح\" (mifateeh) translates to \"keys\", not \"buttons\". This is an inaccurate translation of the English content \"Buttons\".",
-          "suggestion": "The correct translation for \"Buttons\" in Arabic (Saudi Arabia) should be something closer to \"أزرار\" (azraar) which means 'buttons'."
+          "description": "The Arabic translation \"مفاتيح\" (mifateeh) translates to \"keys\" and is not an accurate translation of \"Buttons\".",
+          "suggestion": "Consider \"أزرار\" (azraar) which directly translates to 'buttons'."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Дугмад' is a valid word for 'Buttons', but depending on the context (e.g., a specific UI element), it might not be the most natural or precise translation. While technically correct, it might sound a bit formal or less user-friendly.",
-          "suggestion": "Consider if a more colloquial or contextually appropriate term exists. Possibilities include 'Тампони' (if referring to UI buttons) or retaining 'Дугмад' if a formal tone is desired."
+          "description": "The Serbian (Cyrillic) translation \"Дугмад\" is a correct transliteration of 'Buttons', but it's a more general term for 'buttons' and might not be the most precise translation for a UI element named 'Buttons'. A more contextually appropriate translation might be needed depending on the specific usage within the settings. It is a generally accepted translation, but a more specific translation might improve the user experience.",
+          "suggestion": "Consider whether a more specific term for UI buttons, such as 'Дугме за подешавања' (Button for settings), would be more appropriate based on the context.  Alternatively, if 'Buttons' refers to a customizable element, 'Прилагодљива дугмада' might be considered."
         }
       ],
       "approved_at": null

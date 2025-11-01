@@ -3,7 +3,7 @@
   "content": "Remember me",
   "content_en_sha1_hash": "ced7b308a348567fbf21dd775ee496dd01207f24",
   "created_at": "2025-05-19T21:30:47.799Z",
-  "updated_at": "2025-05-28T09:30:02.893Z",
+  "updated_at": "2025-10-16T07:29:36.009Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Remember me\" as a label for a checkbox on a login form. It appears on a Forgot Container component, likely in a password recovery or authentication dialog. Translators should provide a brief, intuitive text that users can click on when selecting this option.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotContainer.tsx",
-      "line_number": 79,
+      "line_number": 84,
       "context": "id=\"login_remember\"\n className=\"login-checkbox\"\n tabIndex={3}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n label={t(\"Common:Remember\")}\n helpButton={\n <HelpButton\n id=\"login_remember-hint\"\n className=\"help-button\"\n offsetRight={0}",
       "module": "/packages/login"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"تذكرنى\" (tadhakrani) literally means \"remember me\" but is considered quite informal and might be awkward in some contexts. A more formal and widely accepted translation for a \"Remember me\" option (e.g., on a login form) would be \"تَذَكَّرْنِي\" (tadhakkarnee).",
-          "suggestion": "تَذَكَّرْنِي"
+          "description": "The translation \"تذكرنى\" is a literal translation of \"Remember me\" but it's not the most natural way to say it in Arabic (Saudi Arabia). It sounds somewhat direct and less polite for a login feature. A more common and natural phrasing would be something like \"احتفظ بي\" or \"تذكر معلوماتي\".",
+          "suggestion": "احتفظ بي"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Yadda saxla' is a literal translation of 'Remember,' it doesn't convey the intended meaning of 'Remember me' in the context of login or personalization. It sounds more like 'Save in memory.'",
-          "suggestion": "A more appropriate translation would be something like 'Mənı xatizlə' or 'Mənı unudma' depending on the specific nuance desired."
+          "description": "While \"Yadda saxla\" is a literal translation of \"Remember,\" it's not the idiomatic way to say \"Remember me\" in Azerbaijani. It sounds a bit awkward.",
+          "suggestion": "A more natural translation would be \"Mənı xatizlə\" or \"Mənı unutma\" depending on the intended nuance (remember vs. don't forget)."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Anmeldedaten speichern' translates to 'Save login details' which is not an exact equivalent of 'Remember me'. While functionally similar, the meaning is slightly different. 'Remember me' implies a passive remembering, while 'Anmeldedaten speichern' implies an action taken by the system to save the login details.",
-          "suggestion": "Consider alternatives like 'Merken' or 'Mich erinnern' for a more direct translation of 'Remember me'."
+          "description": "The German translation \"Anmeldedaten speichern\" translates to \"Save login details\" which is not the exact equivalent of \"Remember me\". While it conveys a similar function, it lacks the personal and familiar tone of the original.",
+          "suggestion": "Consider alternatives like \"Mich erinnern\" or \"Angemeldet bleiben\" which more closely align with the meaning of \"Remember me\"."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Απομνημόνευση των στοιχείων μου' (Apomnimonevsi ton stoicheion mou) is a very literal translation that means 'Memorization of my details'. It's not a natural way to express 'Remember me' in Greek.  It sounds overly formal and technical.",
-          "suggestion": "A more natural translation would be something like 'Να με θυμάσαι' (Na me thymasei) which means 'Remember me' or 'Keep me in mind'. Alternatively, 'Θυμήσου με' (Thimiso me) is a direct and common translation for 'Remember me'."
+          "description": "The translation \"Απομνημόνευση των στοιχείων μου\" is a literal translation of \"Remember my details.\" It's not the common or natural way to say \"Remember me\" in Greek. A more accurate and idiomatic translation would be something like \"Να με θυμάσαι\" or \"Να θυμάστε εμένα\".",
+          "suggestion": "Να με θυμάσαι"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"保存\" (Hozon) means \"save\" or \"storage\" and doesn't accurately convey the meaning of \"Remember me\".  It's not a direct or appropriate translation.",
-          "suggestion": "A more accurate translation would be something like \"ログイン状態を維持する\" (Login joutai o iji suru) or \"私を覚える\" (Watashi o oboeru).  Context might dictate the best option."
+          "description": "'保存' translates to 'save' or 'preserve', not 'Remember me'. It doesn't convey the meaning of remembering a user's login state.",
+          "suggestion": "適切な翻訳は「ログイン状態を記憶する」または「ログイン情報を保存する」などです。状況によって最も適切な表現を選ぶ必要があります。"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'저장하기' translates to 'Save' or 'Save settings', not 'Remember me'. It doesn't convey the meaning of remembering a user's login state.",
-          "suggestion": "A more appropriate translation would be '나를 기억하기' (na-reul gi-eok-ha-gi) or '로그인 기억' (lo-gi-in gi-eok)."
+          "description": "The Korean translation \"저장하기\" (jeojanghagi) translates to \"save\" or \"save it\" rather than \"Remember me\". While \"save\" can be related to remembering in some contexts (e.g., saving login information), it's not the direct translation of the English phrase.",
+          "suggestion": "A more accurate translation for \"Remember me\" would be something along the lines of \"나를 기억해주세요\" (nareul gieokhaejuseyo) or \"회원 정보 저장\" (hwoneun jeongbo jeojang), depending on the specific context (e.g., login form vs. general memory)."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The direct translation 'Pamiętaj mnie' is grammatically correct but sounds unnatural in Polish. The standard and more natural way to express 'Remember me' is 'Zapamiętaj mnie' or 'Pamiętaj o mnie'.",
-          "suggestion": "Zapamiętaj mnie"
+          "description": "The literal translation 'Pamiętaj mnie' is grammatically correct, but it's not the idiomatic way to say 'Remember me' in Polish. It sounds unnatural and slightly awkward.",
+          "suggestion": "A more natural and idiomatic translation would be 'Zapamiętaj mnie' or, more commonly, 'Zapal mnie' (if referring to saving login details)."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Lembrar a minha sessão' is a literal translation that doesn't quite convey the intended meaning of 'Remember me'. It translates to 'Remember my session,' which is more technical than the simple 'Remember me' used for user login.",
-          "suggestion": "A better translation would be 'Manter-me conectado' or 'Ficar conectado' depending on the context and desired level of formality. Alternatively, 'Lembrar minhas informações' (Remember my information) is also a reasonable option."
+          "description": "The translation \"Lembrar a minha sessão\" literally translates to \"Remember my session\". While understandable, it's not the most natural or common way to translate \"Remember me\" in a login/authentication context in Portuguese. A more natural translation would be something like \"Manter-me conectado\" or \"Ficar conectado\".",
+          "suggestion": "Consider \"Manter-me conectado\" or \"Ficar conectado\" instead."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Запомнить\" (Zapomnit') means \"to remember\" or \"to memorize\", but it doesn't convey the meaning of \"Remember me\", which is a request to be recognized and kept logged in. It's a prompt asking a system to retain user information.",
-          "suggestion": "A more accurate translation would be \"Помнить меня\" (Pomnit' menya) or \"Запомни меня\" (Zapomni menya)."
+          "description": "The Russian translation \"Запомнить\" (Zapomnit') translates to \"Remember\" or \"To remember,\" but it doesn't convey the nuance of \"Remember me,\" which is a request to be recognized or authenticated. It's a command, not a request for remembering.",
+          "suggestion": "A more appropriate translation would be something like \"Помни меня\" (Pomni menya) which directly translates to \"Remember me\" and conveys the intended meaning."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"මතක තබාගන්න\" (mathak thaba-ganna) is a valid phrase, it translates more literally to \"remember and keep\" or \"retain\".  The most natural and common translation of \"Remember me\" in Sinhala would be \"මා මතක් කරන්න\" (maa mathak karan-na).",
-          "suggestion": "මා මතක් කරන්න"
+          "description": "The translation \"මතක තබාගන්න\" (mathak thabāganna) is a literal translation of \"remember,\" but it doesn't quite capture the meaning of \"Remember me\" in the context of a login form or similar. It implies a general act of remembering, not a request to recall a specific user's information.",
+          "suggestion": "A more appropriate translation might be \"මා මතක් කර ගන්න\" (mā mathak kara gana) which translates to \"Remember me\" as in recall my information/state."
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Zapamätať si ma\" is grammatically correct but doesn't convey the intended meaning of \"Remember me\" in the context of a login or authentication feature. It translates more literally as 'to remember me' instead of a command or request to remember the user's credentials.",
-          "suggestion": "Použiť frázu 'Pamätaj ma' alebo 'Zapamätaj mi'."
+          "description": "The Slovak translation 'Zapamätať si ma' is not the idiomatic way to say 'Remember me'. It's literally 'to remember me', which sounds awkward. A more natural translation would be 'Pamätaj na mňa'.",
+          "suggestion": "Pamätaj na mňa"
         }
       ],
       "approved_at": null

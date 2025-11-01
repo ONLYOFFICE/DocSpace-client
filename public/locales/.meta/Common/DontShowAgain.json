@@ -3,7 +3,7 @@
   "content": "Don't show again",
   "content_en_sha1_hash": "d9afd5ec9a8d44ccb7cfd4b31bdf9df2fd16916d",
   "created_at": "2025-05-19T21:30:44.626Z",
-  "updated_at": "2025-05-28T09:30:02.248Z",
+  "updated_at": "2025-08-21T11:22:39.810Z",
   "comment": {
     "text": "This translation key is used to display the text \"Don't show again\" which is a label on a checkbox in a dialog box, indicating that the user has chosen not to be prompted about this option again. The text appears on a button and checkbox within a modal dialog component in a PDF form creation interface.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreatedPDFFormDialog/CreatedPDFFormDialog.tsx",
       "line_number": 95,
-      "context": "{theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}\n <span>{description}</span>\n <Checkbox\n className=\"created-pdf__checkbox\"\n onChange={handleChangeCheckbox}\n label={t(\"Common:DontShowAgain\")}\n />\n </Wrapper>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "context": "{theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}\n <span>{description}</span>\n <Checkbox\n className=\"created-pdf__checkbox\"\n onChange={handleChangeCheckbox}\n label={t(\"Common:DontShowAgain\")}\n dataTestId=\"created_pdf_form_dialog_dont_show_again\"\n />\n </Wrapper>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Bir daha göstərməyin\" is a rather formal and direct translation. A more natural and user-friendly translation would be something like \"Xilas et\" or \"Daha göstərmə\" which convey the intended meaning in a more conversational tone.",
-          "suggestion": "Consider alternatives like \"Xilas et\" or \"Daha göstərmə\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Να μην εμφανιστεί ξανά\" is understandable, it's a bit formal and literal. A more natural and common translation for 'Don't show again' would be something like 'Μην εμφανίζεται ξανά' or 'Μην το εμφανίσω ξανά'.",
+          "suggestion": "Μην εμφανίζεται ξανά"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"再表示しない\" (saishouhi shinai) is a valid Japanese phrase, it literally translates to \"do not show again\" or \"do not display again.\" It's not as natural a translation of \"Don't show again\" as other options. A more natural translation would be \"もう表示しない\" (mou saishou shinai) or \"非表示にする\" (hishou ni suru).",
-          "suggestion": "Consider using \"もう表示しない\" (mou saishou shinai) or \"非表示にする\" (hishou ni suru) for a more natural feel."
+          "description": "While \"再表示しない\" (saishōji shinai) is a literal translation, it's not the most natural or user-friendly way to express \"Don't show again\" in Japanese. It sounds quite formal and technical for a UI element.",
+          "suggestion": "Consider alternatives like \"表示しない\" (hyōji shinai - 'don't display') or \"もう表示しない\" (mō hyōji shinai - 'don't display again'). \"もう表示しない\" is probably the most common and natural choice for a UI element like this."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නැවත පෙන්වන්න එපා' while technically conveying 'Don't show again,' isn't the most natural or common phrasing in Sinhala for this context. A more idiomatic translation would be something like 'ඉවසන්න එපා' (iwāsanna epā) meaning 'Don't bother' or 'Leave it'. The current translation is quite literal.",
-          "suggestion": "Consider 'ඉවසන්න එපා' (iwāsanna epā) or a similar phrasing that feels more natural in Sinhala for this type of user interface text."
+          "description": "The translation 'නැවත පෙන්වන්න එපා' is a literal translation of 'Don't show again' and while understandable, it's not the most natural or preferred phrasing in Sinhala. A more common and natural way to express this would be something along the lines of 'ඉලඟ مرة ම තහනම් කරන්න' (ilag marama tha hamannak karanna) or 'වරදක්වා පෙන්වන්න එපා' (waradakva penvannepa).",
+          "suggestion": "Consider using 'වරදක්වා පෙන්වන්න එපා' (waradakva penvannepa) or 'ඉලඟ مرة ම තහනම් කරන්න' (ilag marama tha hamannak karanna) for a more natural-sounding translation."
         }
       ],
       "approved_at": null
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Nezobrazovať znova' is not the most natural Slovak translation for 'Don't show again.' A more common and idiomatic phrasing would be 'Neukazovať znova' or 'Zrušiť upozornenie'.",
+          "description": "While \"Nezobrazovať znova\" is understandable, a more natural and accurate Slovak translation of \"Don't show again\" would be \"Neukazovať znova\" or \"Nevypínať opäť\". \"Nezobrazovať\" is more formal and generally refers to displaying something visually.",
           "suggestion": "Neukazovať znova"
         }
       ],
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Не приказуј поново\" is a literal translation but doesn't convey the intended meaning of \"Don't show again\" in a natural way for user interface elements. It sounds somewhat formal and unusual in this context.",
-          "suggestion": "A more natural and common translation for a button or option that dismisses a notification or pop-up would be \"Не понови\" or \"Не приказуј више\"."
+          "description": "The translation \"Не приказуј поново\" while understandable, doesn't perfectly capture the nuance of \"Don't show again.\"  \"Не приказуј поново\" implies an active command or display. A more accurate and common translation for a UI element like this would be something like \"Не понови\" or \"Не приказуј више\".",
+          "suggestion": "Не понови"
         }
       ],
       "approved_at": null

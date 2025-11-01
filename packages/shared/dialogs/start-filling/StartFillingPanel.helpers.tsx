@@ -24,27 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo, forwardRef } from "react";
+import { memo } from "react";
 import type { HeaderProps } from "./StartFillingPanel.types";
 
 export const Header = memo(
-  forwardRef<HTMLDivElement, HeaderProps>(
-    ({ t, roleName, className, openInvitePanel, canEditRoom }, ref) => (
-      <div className={className} ref={ref}>
-        <h3
-          title={t("Common:RoleFields", {
-            roleName,
-          })}
-        >
-          {t("Common:RoleFields", {
-            roleName,
-          })}
-        </h3>
-        {canEditRoom ? (
-          <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
-        ) : null}
-      </div>
-    ),
+  ({
+    ref,
+    t,
+    roleName,
+    className,
+    openInvitePanel,
+    canEditRoom,
+  }: HeaderProps) => (
+    <div className={className} ref={ref}>
+      <h3
+        title={t("Common:RecipientFields", {
+          recipientName: roleName,
+        })}
+      >
+        {t("Common:RecipientFields", {
+          recipientName: roleName,
+        })}
+      </h3>
+      {canEditRoom ? (
+        <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
+      ) : null}
+    </div>
   ),
 );
 

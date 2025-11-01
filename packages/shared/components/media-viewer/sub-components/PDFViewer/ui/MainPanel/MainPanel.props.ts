@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 interface MainPanelProps {
+  ref?: React.RefObject<HTMLDivElement | null>;
   src: string;
   isLoading: boolean;
 

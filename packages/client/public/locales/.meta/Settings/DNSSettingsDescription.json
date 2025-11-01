@@ -3,7 +3,7 @@
   "content": "Set an alternative URL address for your space. Send your request to our support team to get help with the settings.",
   "content_en_sha1_hash": "07909a29d7f524535573d7fd44621cfb9130ebf3",
   "created_at": "2025-05-19T21:30:51.221Z",
-  "updated_at": "2025-05-21T04:29:43.322Z",
+  "updated_at": "2025-10-03T13:19:30.534Z",
   "comment": {
     "text": "This translation key is used for a button or link that allows users to set an alternative URL address for their space. It provides instructions on how to send a request to support for assistance with DNS settings. This text appears in a dialog box or settings page, likely within the PortalSettings category of customization options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 309,
+      "line_number": 318,
       "context": ") : null}\n </div>\n ) : null}\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"DNSSettingsDescription\")}\n </Text>\n {dnsSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
       "module": "/packages/client"
     }
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'alternative URL address' is not accurately conveyed. While 'عنوان URL بديل' is technically correct, a more natural and clear phrasing in Arabic would be something along the lines of 'عنوان موقع بديل'.",
-          "suggestion": "قم بتعيين عنوان موقع بديل للمساحة الخاصة بك."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Set an alternative URL address for your space' is not accurately translated. 'Domeniniz üçün alternativ URL ünvanı təyin edin' literally translates to 'Set an alternative URL address for your domain'. 'Space' implies a broader concept than just a domain, which might be a platform or a specific area within a larger application. The translation could be more general.",
-          "suggestion": "Davamlılığınız üçün alternativ URL ünvanı təyin edin. (Set an alternative URL address for your platform/application)"
+          "description": "The term 'Domeniniz' (Your Domain) is used. The English content refers to a 'space', not necessarily a domain. While it might be contextually acceptable, it's a potential mistranslation.",
+          "suggestion": "Consider a more general term for 'space' that translates to something like 'bəzəyin' (your area/space) or 'sahəniz' (your area/space), depending on the intended meaning."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'Parametrlərlə' in 'Parametrlərlə bağlı kömək üçün' is not the most natural way to say 'regarding settings'.",
-          "suggestion": "Parametrlərinizlə bağlı kömək üçün (Regarding your settings)"
+          "description": "While 'Parametrlərlə bağlı kömək' translates to 'help with parameters', 'settings' is a better equivalent given the English source.",
+          "suggestion": "Replace 'Parametrlərlə bağlı kömək' with 'Parametrlərə görə kömək' or 'Parametrlərə kömək'."
         }
       ],
       "approved_at": null
@@ -86,7 +80,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"asetusten kanssa\" is a bit awkward. It literally translates to \"with the settings\". A more natural Finnish phrasing would be \"asetusten kanssa apua\" (help with the settings) or simply \"asetuksissa\" (in the settings).",
+          "suggestion": "Aseta vaihtoehtoinen URL-osoite tilallesi. Lähetä pyyntö tukitiimillemme saadaksesi apua asetuksissa."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -95,13 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Send your request to our support team\" is not accurately reflected by \"Veuillez envoyer votre demande à notre équipe d'assistance technique\". While close, 'demande' is a bit formal here and 'assistance technique' is a more technical term than 'support team'. A more natural phrasing would be closer to 'Envoyez votre requête à notre service d'assistance'.",
-          "suggestion": "Envoyez votre requête à notre service d'assistance."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"to get help with the settings\" is not directly translated.  'Sur des réglages' is grammatically correct, but suggests help *about* settings rather than *with* the settings.  A more accurate translation would focus on assistance *with* configuring the settings.",
-          "suggestion": "pour vous aider à configurer ces réglages"
+          "description": "The phrase \"get help with the settings\" is not accurately translated. \"Obtenir de l'aide sur des réglages\" is too literal and sounds unnatural in French. A better phrasing would convey the meaning of getting assistance with configuring the settings.",
+          "suggestion": "Obtenir de l'aide pour la configuration des réglages."
         }
       ],
       "approved_at": null
@@ -112,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after 'տարածքի համար' is unnecessary and disrupts the flow. It's more natural to omit it.",
-          "suggestion": "Remove the colon after 'տարածքի համար'."
+          "description": "The colon after \"տարածքի համար\" is unnecessary and disrupts the flow. It should be removed.",
+          "suggestion": "Ուղարկեք ձեր հարցումը մեր աջակցման թիմին՝ կարգավորումների հետ կապված օգնություն ստանալու համար:"
         }
       ],
       "approved_at": null
@@ -130,13 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Send your request to our support team to get help with the settings\" is translated somewhat literally, which makes it sound slightly unnatural in Japanese. A more natural phrasing would be to offer direct assistance rather than requesting a request.",
-          "suggestion": "あなたのスペースの代替URLアドレスを設定してください。設定についてのお手伝いが必要な場合は、弊社のサポートチームまでお問い合わせください。"
+          "description": "The phrase \"Set an alternative URL address for your space\" is not accurately translated. \"設定してください\" implies a command, but a more polite phrasing would be better suited for a setting description. It should convey that the user *can* set an alternative URL, rather than being told to do so.",
+          "suggestion": "あなたのスペースの代替URLアドレスを設定可能です。 (Anata no space no dai-go URL adoresu o setto kanou desu.) - This translates to 'You can set an alternative URL address for your space.'"
         },
         {
-          "type": "formatting",
-          "description": "The use of \"弊社のサポートチーム\" (heisha no support team) is a bit formal. While appropriate, a slightly less formal \"当社のサポートチーム\" (tousha no support team) might be preferable depending on the target audience and the overall tone of the application.",
-          "suggestion": "あなたのスペースの代替URLアドレスを設定してください。設定についてのお手伝いが必要な場合は、当社のサポートチームまでお問い合わせください。"
+          "type": "incorrect_translation",
+          "description": "The phrase 'Send your request to our support team' is a bit stiff. 'リクエストを送信してください' is grammatically correct, but a more natural phrasing exists.",
+          "suggestion": "設定についてのお手伝いが必要な場合は、弊社のサポートチームにお問い合わせください。 (Settingo ni tsuite no otetsudai ga hitsuyou na baai wa, heisha no sapooto chiimu ni o-toiawase kudasai.) - This translates to 'If you need help with the settings, please contact our support team.'"
         }
       ],
       "approved_at": null
@@ -147,13 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Set an alternative URL address for your space\" is translated somewhat literally and could be more natural. \"공간에 대한 대체 URL 주소를 설정하세요\" is technically correct, but a more user-friendly phrasing might be preferable.",
-          "suggestion": "공간의 대체 URL 주소를 설정하세요 (Gonggan-ui daechae URL ju-so-reul seonjeonghaseyo)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Send your request to our support team to get help with the settings\" is also translated literally. While technically accurate, a more natural phrasing might be better.",
-          "suggestion": "설정 관련 도움이 필요하면 지원팀에 문의해주세요 (Seonjeong gwan-ryun doumi pillyomyeon jiwontimeun muleusayeyo)"
+          "description": "The phrase 'alternative URL address' is not accurately translated. '대체 URL 주소' is technically correct but could be more naturally expressed as '다른 URL 주소'.",
+          "suggestion": "다른 URL 주소를 설정하세요."
         }
       ],
       "approved_at": null
@@ -161,7 +151,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set an alternative URL address for your space\" is not perfectly captured. \"ກໍານົດທີ່ຢູ່ URL ທາງເລືອກສໍາລັບພື້ນທີ່ຂອງທ່ານ\" is a literal translation but might be more naturally expressed in Lao as something like \"ຕັ້ງທີ່ຢູ່ URL ທາງເລືອກສໍາລັບພື້ນທີ່ຂອງທ່ານ\" or \"ກໍານົດທີ່ຢູ່ URL ແບບອື່ນສໍາລັບພື້ນທີ່ຂອງທ່ານ\".",
+          "suggestion": "Consider revising to \"ຕັ້ງທີ່ຢູ່ URL ທາງເລືອກສໍາລັບພື້ນທີ່ຂອງທ່ານ\" or \"ກໍານົດທີ່ຢູ່ URL ແບບອື່ນສໍາລັບພື້ນທີ່ຂອງທ່ານ\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Send your request to our support team to get help with the settings\" is translated as \"ສົ່ງຄໍາຮ້ອງຂໍຂອງທ່ານໄປຫາທີມງານສະຫນັບສະຫນູນຂອງພວກເຮົາເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອໃນການຕັ້ງຄ່າ\". While technically correct, it might read more naturally as \"ຕິດຕໍ່ທີມງານສະຫນັບສະຫນູນຂອງພວກເຮົາເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອໃນການຕັ້ງຄ່າ\" or \"ຕິດຕໍ່ພວກເຮົາເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອໃນການຕັ້ງຄ່າ\".",
+          "suggestion": "Consider revising to \"ຕິດຕໍ່ທີມງານສະຫນັບສະຫນູນຂອງພວກເຮົາເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອໃນການຕັ້ງຄ່າ\" or \"ຕິດຕໍ່ພວກເຮົາເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອໃນການຕັ້ງຄ່າ\"."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -170,13 +171,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'vietrāža' is not the standard or most accurate translation of 'URL' in this context. 'URL' is often used directly, or a more descriptive term like 'adrese' or 'interneta adrese' might be more appropriate.",
-          "suggestion": "Iestatiet savai telpai alternatīvu URL adresi. Nosūtiet pieprasījumu mūsu atbalsta komandai, lai saņemtu palīdzību ar iestatījumiem."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'adresi' is a reasonable alternative to 'vietrāža', it is still slightly less precise. The English emphasizes a *URL* specifically, not just any address.  Consider more descriptive language if necessary for clarity.",
-          "suggestion": "Iestatiet savai telpai alternatīvu interneta adresi (URL). Nosūtiet pieprasījumu mūsu atbalsta komandai, lai saņemtu palīdzību ar iestatījumiem."
+          "description": "The term 'vietrāža' is not the most accurate translation of 'URL address' in this context. 'URL adrese' is more standard and widely understood.",
+          "suggestion": "Iestatiet savai telpai alternatīvu URL adresi."
         }
       ],
       "approved_at": null
@@ -193,8 +189,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'get help with the settings' is translated as 'aby uzyskać pomoc z konfiguracją'. While understandable, 'z konfiguracją' is slightly awkward. A more natural translation would be 'w konfiguracji' or a restructuring of the sentence.",
-          "suggestion": "Skonfiguruj alternatywny adres URL dla swojego obszaru. Wyślij prośbę do naszego działu wsparcia, aby uzyskać pomoc w konfiguracji."
+          "description": "The phrase \"pomoc z konfiguracją\" is a bit awkward and not the most natural way to express \"help with the settings.\" It's overly literal.",
+          "suggestion": "Wyślij prośbę do naszego działu wsparcia, aby uzyskać pomoc w ustawieniach."
         }
       ],
       "approved_at": null
@@ -217,8 +213,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ajutorul de setare\" is not the most natural translation of \"help with the settings.\" It's a bit literal and clunky. It implies help *for* the setting itself.",
-          "suggestion": "Trimiteţi solicitarea către echipa noastră de asistenţă, pentru a obține ajutor cu setările."
+          "description": "The phrase 'ajutorul de setare' is not the best translation for 'help with the settings'. It literally translates to 'the help of setting'. A better translation would be 'asistență pentru configurare'.",
+          "suggestion": "Trimiteţi solicitarea către echipa noastră de asistenţă, pentru a obține asistență pentru configurare."
         }
       ],
       "approved_at": null
@@ -235,13 +231,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"alternative URL address\" is somewhat literal and could be more natural. 'URL address' can be shortened to 'URL'.",
-          "suggestion": "ඔබගේ අවකාශය සඳහා විකල්ප URL සකසන්න."
+          "description": "The phrase 'alternative URL address' is not accurately translated. 'ඒ.ස.නි. ලිපිනයක්' (A.S.N. Lipinayak) literally translates to ASN address, which isn't a common term for a URL.  A more appropriate translation would convey the meaning of a 'different website address' or 'alternative web address'.",
+          "suggestion": "ඔබගේ අවකාශය සඳහා වෙනත් වෙබ් ලිපිනයක් සකසන්න."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'සැකසුම සඳහා උදවු ලබා ගැනීමට' is a bit clunky. A more natural phrasing would better convey the meaning of 'to get help with the settings'.",
-          "suggestion": "සැකසුම් පිළිබඳව උදවු ලබා ගැනීමට"
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow. The current translation sounds a bit abrupt.",
+          "suggestion": "ඔබගේ අවකාශය සඳහා වෙනත් වෙබ් ලිපිනයක් සකසන්න. මෙම සැකසුම් පිළිබඳව උදවු ලබා ගැනීමට, ඔබේ ඉල්ලුම අපගේ සහාය කණ්ඩායමට යවන්න."
         }
       ],
       "approved_at": null
@@ -264,8 +260,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Send your request to our support team' is too literal. A more natural Serbian translation would be 'Контактирајте нашу службу подршке' or 'Обавезно контактирајте службу подршке'. The current translation 'Пошаљите ваш захтев нашем тиму за подршку' sounds awkward.",
-          "suggestion": "Контактирајте нашу службу подршке"
+          "description": "The phrase \"Set an alternative URL address for your space\" is not perfectly translated. \"Поставите\" (Postavite) can imply a more technical setting or configuration that a casual user might not understand. A more user-friendly phrasing would be more appropriate.",
+          "suggestion": "Подесите алтернативну URL адресу за ваш простор."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the use of a period after \"подешавањима\" feels slightly abrupt in this context. A more natural flow might benefit from a different punctuation.",
+          "suggestion": "Подесите алтернативну URL адресу за ваш простор. Пошаљите ваш захтев нашем тиму за подршку како бисте добили помоћ са подешавањима."
         }
       ],
       "approved_at": null
@@ -276,13 +277,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Set an alternative URL address' is translated as 'Postavite alternativnu URL adresu'. While technically correct, a more natural translation might be 'Odredite alternativnu URL adresu' or 'Unesite alternativnu URL adresu'. 'Postavite' can imply configuration in a more general sense, not just assigning a URL.",
-          "suggestion": "Odredite alternativnu URL adresu za vaš prostor."
+          "description": "The phrase \"Postavite alternativnu URL adresu\" translates more literally to \"Set an alternative URL address\". While understandable, a more natural Serbian phrasing would be \"Odredite alternativnu URL adresu\" or \"Unesite alternativnu URL adresu\".",
+          "suggestion": "Odredite alternativnu URL adresu"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'to get help with the settings' is translated as 'da dobijete pomoć sa podešavanjima'. While understandable, a more accurate and natural translation would be 'za pomoć sa podešavanjima' or 'za pomoć u podešavanjima'. The use of 'sa' is not incorrect, but the phrasing is slightly awkward.",
-          "suggestion": "Pošaljite vaš zahtev našem timu za podršku za pomoć sa podešavanjima."
+          "description": "The phrase \"pomoć sa podešavanjima\" is grammatically correct, but \"pomoć u podešavanjima\" sounds more natural and idiomatic in Serbian.",
+          "suggestion": "pomoć u podešavanjima"
         }
       ],
       "approved_at": null
@@ -293,8 +294,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'alternative URL address' is not perfectly captured by 'alternatif bir URL adresi'. A more accurate translation would be 'alternatif bir web adresi' or 'başka bir web adresi'. 'URL adresi' is technically correct, but 'web adresi' flows better in Turkish in this context.",
-          "suggestion": "Alanınız için alternatif bir web adresi ayarlayın."
+          "description": "The English phrase 'alternative URL address' is not perfectly conveyed by 'alternatif bir URL adresi'. While understandable, a more precise translation would emphasize the use of a custom or non-standard URL.",
+          "suggestion": "Alanınız için özel veya farklı bir URL adresi ayarlayın."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'get help with the settings' is translated as 'Ayarlarla ilgili yardım almak için'. A more natural and user-friendly translation would be 'ayarlar konusunda yardım almak için'.",
+          "suggestion": "Ayarlar konusunda yardım almak için"
         }
       ],
       "approved_at": null
@@ -302,30 +308,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Ukrainian translation uses a period after 'простору' which is unusual in this context. A comma would be more appropriate to connect it to the following sentence.",
-          "suggestion": "Задайте альтернативну URL-адресу для свого простору, надішліть запит до нашої служби підтримки, щоб отримати допомогу з параметрами."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Send your request to our support team' is too literal. A more natural Vietnamese phrasing would be 'Liên hệ với bộ phận hỗ trợ của chúng tôi'.",
-          "suggestion": "Liên hệ với bộ phận hỗ trợ của chúng tôi để được trợ giúp về cài đặt."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“cài đặt” refers to settings in general. While technically correct, “thiết lập” is more specific and matches the original English ‘settings’.",
-          "suggestion": "Liên hệ với bộ phận hỗ trợ của chúng tôi để được trợ giúp về thiết lập."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -333,9 +322,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Send your request to our support team' is translated as '向我们的支持团队发送请求'. While technically correct, it sounds slightly formal and unnatural in modern Chinese for a user interface setting description. A more natural phrasing would emphasize getting help directly.",
+          "suggestion": "向我们的支持团队寻求帮助 (Xiàng wǒmen de zhīchí tuánduì xúnqiú bāngzhù) - 'Seek help from our support team'"
+        },
+        {
           "type": "formatting",
-          "description": "The phrase '关于设置方面的帮助' is slightly awkward. It can be simplified.",
-          "suggestion": "关于设置的帮助"
+          "description": "The phrase '关于设置方面的帮助' is a bit clunky. It's implying help *regarding* the settings. It's better to simplify it.",
+          "suggestion": "关于设置的帮助 (Guānyú shèzhì de bāngzhù) - 'Help with the settings'"
         }
       ],
       "approved_at": null

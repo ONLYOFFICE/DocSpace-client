@@ -3,7 +3,7 @@
   "content": "Add certificate",
   "content_en_sha1_hash": "631b330b27d1a4930628f96ea352593dfee627ba",
   "created_at": "2025-05-19T21:30:50.051Z",
-  "updated_at": "2025-05-21T02:18:32.440Z",
+  "updated_at": "2025-08-11T18:11:59.255Z",
   "comment": {
     "text": "This translation key is used to display the label for a button that adds a certificate, found on the Single Sign-On page in the Portal Settings. The button is disabled when SSO is not enabled or an XML file is being loaded.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 140,
-      "context": "{prefix === \"idp\" ? (\n <>\n <Button\n id=\"idp-add-certificate\"\n isDisabled={!enableSso || isLoadingXml}\n label={t(\"AddCertificate\")}\n onClick={openIdpModal}\n size=\"small\"\n tabIndex={9}\n />\n <AddIdpCertificateModal />",
+      "line_number": 145,
+      "context": "{prefix === \"idp\" ? (\n <>\n <Button\n id=\"idp-add-certificate\"\n isDisabled={!enableSso || isLoadingXml}\n label={t(\"AddCertificate\")}\n onClick={openIdpModal}\n size=\"small\"\n tabIndex={9}\n testId=\"idp_add_certificate_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 140,
-      "context": "{prefix === \"idp\" ? (\n <>\n <Button\n id=\"idp-add-certificate\"\n isDisabled={!enableSso || isLoadingXml}\n label={t(\"AddCertificate\")}\n onClick={openIdpModal}\n size=\"small\"\n tabIndex={9}\n />\n <AddIdpCertificateModal />",
+      "line_number": 145,
+      "context": "{prefix === \"idp\" ? (\n <>\n <Button\n id=\"idp-add-certificate\"\n isDisabled={!enableSso || isLoadingXml}\n label={t(\"AddCertificate\")}\n onClick={openIdpModal}\n size=\"small\"\n tabIndex={9}\n testId=\"idp_add_certificate_button\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -147,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Adăugare certificat\" is a bit literal. A more natural Romanian phrasing would be \"Adăugare certificat\" or \"Introduce certificat\".",
-          "suggestion": "Introduce certificat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

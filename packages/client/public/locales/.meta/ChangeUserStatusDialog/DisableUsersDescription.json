@@ -3,7 +3,7 @@
   "content": "If you Disable these users, they won’t be able to log in to {{productName}}, while their documents and data will remain intact.",
   "content_en_sha1_hash": "2f72747c134d6f27fe2f9ae5dc69eb20b8c55ee6",
   "created_at": "2025-05-19T21:30:56.961Z",
-  "updated_at": "2025-05-20T09:37:45.382Z",
+  "updated_at": "2025-08-04T07:30:01.063Z",
   "comment": {
     "text": "This translation key is used to display a message describing what happens when users are disabled. It appears in a change user status dialog and indicates that disabling users will prevent them from accessing the application while their data remains intact.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 181,
+      "line_number": 177,
       "context": ": t(\"DisableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"DisableGuestsDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"DisableUsersDescription\", {\n productName: t(\"Common:ProductName\"),\n });\n \n bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")",
       "module": "/packages/client"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will remain intact' is not accurately conveyed by 'سيتم المحافظة على بياناتهم ومستنداتهم'. A more accurate translation would reflect preservation or retention of data and documents.",
+          "suggestion": "سيظلّت بياناتهم ومستنداتهم محفوظة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'estos' should be 'estos'. 'estos' is incorrect Spanish.",
+          "suggestion": "Si desactiva a *estos* usuarios..."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -111,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation uses a comma (,) after 'pieteikties' instead of a semicolon (;) which is more appropriate in this context. It should follow the structure of the English phrase and the semicolon makes more sense with the following section.",
+          "suggestion": "Ja atspējosiet šos lietotājus, viņi nevarēs pieteikties; kamēr viņu dokumenti un dati paliks neskarti."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The pronoun 'acesta' (this) refers to a singular entity but 'utilizatori' (users) is plural. The translation should reflect the plural form.",
+          "suggestion": "Dacă dezactivați acești utilizatori, aceștia nu vor putea să se conecteze la spațiul {{productName}}, în timp ce documentele și datele asociate vor rămâne intacte."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +177,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ඔබ මෙම පරිශ්‍රීලකයින් අබල කළහොත්\" (If you Disable these users) is a bit awkward. A more natural phrasing would be something along the lines of \"ඔබ මෙම පරිශ්‍රීලකයින් අයින් කළහොත්\" or \"ඔබ මෙම පරිශ්‍රීලකයින් නිශ්චල කළහොත්\". While 'අබල' can mean 'disable', it's not the most common or easily understood term in this context.",
+          "suggestion": "ඔබ මෙම පරිශ්‍රීලකයින් අයින් කළහොත්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence structure is slightly unnatural. The phrase \"ඔවුන්ගේ ලේඛන සහ දත්ත යථාස්ථව පවතින නමුත්\" (while their documents and data will remain intact) can be improved. \"ඔවුන්ගේ ලේඛන සහ දත්ත නොවෙනස්ව පවතී\" is a more elegant alternative.",
+          "suggestion": "ඔවුන්ගේ ලේඛන සහ දත්ත නොවෙනස්ව පවතී"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

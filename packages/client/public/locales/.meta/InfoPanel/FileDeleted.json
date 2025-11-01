@@ -3,7 +3,7 @@
   "content": "Files removed.",
   "content_en_sha1_hash": "f2c2491c5788d8e6d37267425da3272d584c7b1c",
   "created_at": "2025-05-19T21:30:54.805Z",
-  "updated_at": "2025-05-28T09:30:02.427Z",
+  "updated_at": "2025-08-04T07:30:01.223Z",
   "comment": {
     "text": "This translation key displays a message when files are removed from the system, likely appearing on a user interface element such as a button or dialog. The exact wording may vary depending on the count of deleted files and other context.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 97,
+      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 85,
-      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case \"FileDeleted\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case \"FileLocked\":\n return `${t(\"Translations:FileLocked\")}.`;",
+      "line_number": 91,
+      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;",
       "module": "/packages/client"
     },
     {
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Files removed\" is plural, but the Italian translation \"File rimossi\" uses the singular form of 'File'. While 'File' can be used to represent multiple files, 'File' would technically mean 'File'. A more accurate translation would be \"Files rimossi\" or \"Documenti rimossi\" to match the plural nature of the English content.",
-          "suggestion": "Files rimossi"
+          "description": "The English phrase 'Files removed' translates more accurately to 'File cancellati' or 'File eliminati' in Italian, rather than 'File rimossi'. 'Rimossi' implies a temporary removal, while the original phrase suggests a permanent deletion.",
+          "suggestion": "File cancellati"
         }
       ],
       "approved_at": null
@@ -119,9 +125,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ຖືກ' (thuk) is used correctly here, but it can sometimes sound slightly formal depending on the context. While grammatically sound, a more colloquial alternative might be considered.",
-          "suggestion": "Consider using 'ຖືກຖິ້ມ' (thuk thim) for a slightly less formal tone, though 'ຖືກລົບ' is perfectly acceptable."
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເອກະສານຖືກລົບອອກແລ້ວ' is a literal translation and while understandable, it's not the most natural phrasing for a UI message.  A more common and concise way to express 'Files removed' would be 'ລົບເອກະສານແລ້ວ' or 'ລົບລ້າງເອກະສານແລ້ວ'.",
+          "suggestion": "Consider 'ລົບເອກະສານແລ້ວ' or 'ລົບລ້າງເອກະສານແລ້ວ'."
         }
       ],
       "approved_at": null
@@ -161,9 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Fişiere au fost eliminate' is a literal translation and sounds unnatural. A more idiomatic translation would be 'Fișiere șterse' or 'Fișierele au fost șterse'.",
-          "suggestion": "Fișiere șterse"
+          "type": "grammar",
+          "description": "The Romanian translation 'Fişiere au fost eliminate' is grammatically awkward. The correct grammatical form should be 'Fișiere au fost șterse' or 'Fișierele au fost eliminate'.",
+          "suggestion": "Fișiere au fost șterse"
         }
       ],
       "approved_at": null
@@ -183,7 +189,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Súbory odstránené' is technically correct, it's a bit literal and less natural. A more idiomatic translation would be 'Vymazané súbory' or 'Súbory vymazané'.",
+          "suggestion": "Vymazané súbory"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -198,13 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Датотеке су уклоњене.' is a literal translation that doesn't flow naturally in Serbian. It translates to 'Files are removed' which is grammatically correct, but sounds awkward.",
-          "suggestion": "Избрисане датотеке."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation should be concise and match the tone of 'Files removed.' The current translation is a bit verbose.",
-          "suggestion": "Избрисане датотеке."
+          "description": "The translation 'Датотеке су уклоњене.' is a literal translation and not the most natural way to express 'Files removed' in Serbian. It sounds somewhat formal and awkward.",
+          "suggestion": "A more natural translation would be 'Брисани фајлови.' or 'Уклоњени фајлови.'"
         }
       ],
       "approved_at": null
@@ -218,7 +225,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Dosyalar kaldırıldı\" is technically correct, a more natural and commonly used translation for \"Files removed\" in this context (likely a UI message) would be \"Dosyalar silindi.\" \"Kaldırıldı\" implies a temporary removal.",
+          "suggestion": "Dosyalar silindi."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -233,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Đã xóa các tập tin' while technically correct, is a bit literal. A more natural and idiomatic translation for 'Files removed' in this context (likely a system notification) would be 'Đã loại bỏ' or 'Đã gỡ bỏ'.",
-          "suggestion": "Đã loại bỏ"
+          "description": "While 'Đã xóa các tập tin' is technically correct, it's a bit formal and wordy for a simple notification like 'Files removed'. A more natural and concise translation would be preferred.",
+          "suggestion": "Các tập tin đã bị xóa."
         }
       ],
       "approved_at": null

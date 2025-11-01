@@ -1,0 +1,267 @@
+{
+  "key_path": "ShowHelpCenter",
+  "content": "Show link to Help Center",
+  "content_en_sha1_hash": "f1caebab0b9dd55772001bc3d83522b321581b0b",
+  "created_at": "2025-05-26T07:15:48.005Z",
+  "updated_at": "2025-10-14T06:50:36.543Z",
+  "comment": {
+    "text": "The translation key \"ShowHelpCenter\" is used to display a label for a checkbox that toggles visibility of the Help Center link in the UI. It appears as a button option and is intended to provide users with easy access to support resources when the \"help enabled\" setting is turned on.",
+    "is_auto": true,
+    "updated_at": "2025-05-26T08:03:37.336Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
+      "line_number": 117,
+      "context": "<Checkbox\n data-testid=\"show-help-center\"\n className={classNames(styles.checkbox)}\n isDisabled={!isSettingPaid}\n label={t(\"ShowHelpCenter\")}\n isChecked={helpEnabled}\n onChange={() => setHelpEnabled(!helpEnabled)}\n />\n </div>\n <SaveCancelButtons",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yardım Mərkəzinin keçidini göstərin' is a literal translation and sounds unnatural in Azerbaijani. A more natural phrasing would be closer to 'Yardım Mərkəzinə keçidini göstər' or 'Yardım Mərkəzinə linkini göstər'. The addition of the possessive suffix '-in' makes it sound overly formal and awkward.",
+          "suggestion": "Yardım Mərkəzinə keçidini göstər"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Показване на линк към Помощния център\" is too literal. A more natural translation would be \"Отвори линк към Помощния център\" or simply \"Помощен център\". \"Показване\" (Showing) isn't the most user-friendly wording in this context.",
+          "suggestion": "Отвори линк към Помощния център"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Link zum Hilfe-Center anzeigen\" is a literal translation and sounds awkward in German. A more natural phrasing would be something like \"Link zum Hilfebereich anzeigen\" or \"Zeige Link zum Hilfebereich\".",
+          "suggestion": "Link zum Hilfebereich anzeigen"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Näytä linkki Help Centeriin' is not ideal. While understandable, it's overly literal.  'Help Center' is a proper noun and should be handled more naturally in Finnish. The suffix '-iin' isn't always the best choice for proper nouns in this context.",
+          "suggestion": "Näytä linkki Ohjeisiin"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ցույց տալ հղումը դեպի Օգնության կենտրոն\" is a literal translation and sounds slightly unnatural in Armenian. A more idiomatic translation would be \"Ցուցադրել օգնության կենտրոնի հղումը\" or \"Ցույց տալ օգնության կենտրոնի շղթանցություն\" .",
+          "suggestion": "Ցուցադրել օգնության կենտրոնի հղումը"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Afişare linkul către Centru de ajutor' is not the most natural or idiomatic way to say 'Show link to Help Center'. 'Afişare' is a bit formal for a UI element label.",
+          "suggestion": "Arată linkul către Centrul de ajutor"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'උදව් මධ්‍යස්ථානයේ සබැඳිය පෙන්වන්න' is a bit too literal and sounds unnatural in Sinhala.  'Show link to Help Center' implies displaying the link, not necessarily showcasing it in a very active way. The verb 'පෙන්වන්න' (penvanna - to show) is strong and can be softened.",
+          "suggestion": "උදව් මධ්‍යස්ථානය වෙත සබැඳිය දැක්වන්න (Udaw Madhyasthanaya Vena Sabandiya Dekkavanna) - This translates to 'Display link to Help Center' and sounds more natural."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Прикажи линк до Центра за помоћ' while understandable, doesn't quite capture the precise meaning of 'Show link to Help Center'. 'Прикажи' is a direct translation of 'Show,' but a more natural phrasing in Serbian would be to use a verb implying 'Display' or 'Navigate to'.",
+          "suggestion": "Покажи линк до Центра за помоћ"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses Cyrillic script which is correct for Serbian, but it's important to maintain consistency with other translated content. While not an error, it's worth noting for review of overall language use.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

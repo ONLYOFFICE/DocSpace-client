@@ -39,15 +39,16 @@ import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { LoginContainer } from "@/components/LoginContainer";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
+async function Page(props: {
+  searchParams: Promise<{ [key: string]: string }>;
 }) {
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const clientId = searchParams.client_id;
 
   const [settings, thirdParty, capabilities, ssoSettings, oauthData] =
@@ -79,61 +80,61 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
-  return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <ColorTheme
-          themeId={ThemeId.LinkForgotPassword}
-          isRegisterContainerVisible={isRegisterContainerVisible}
-        >
-          <>
-            <GreetingLoginContainer
-              greetingSettings={settings.greetingSettings}
-              culture={culture}
+  if (ssoUrl && hideAuthPage && !searchParams?.skipssoredirect) {
+    redirect(ssoUrl);
+  }
+
+  return settings && typeof settings !== "string" ? (
+    <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
+      <>
+        <GreetingLoginContainer
+          greetingSettings={settings.greetingSettings}
+          culture={culture}
+        />
+
+        <FormWrapper id="login-form">
+          <Login>
+            <LoginForm
+              hashSettings={settings?.passwordHash}
+              cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+              clientId={clientId}
+              client={oauthData?.client}
+              reCaptchaPublicKey={settings?.recaptchaPublicKey}
+              reCaptchaType={settings?.recaptchaType}
+              ldapDomain={capabilities?.ldapDomain}
+              ldapEnabled={capabilities?.ldapEnabled || false}
+              baseDomain={settings?.baseDomain}
             />
-
-            <FormWrapper id="login-form">
-              <Login>
-                <LoginForm
-                  hashSettings={settings?.passwordHash}
-                  cookieSettingsEnabled={settings?.cookieSettingsEnabled}
-                  clientId={clientId}
-                  client={oauthData?.client}
-                  reCaptchaPublicKey={settings?.recaptchaPublicKey}
-                  reCaptchaType={settings?.recaptchaType}
-                  ldapDomain={capabilities?.ldapDomain}
-                  ldapEnabled={capabilities?.ldapEnabled || false}
-                  baseDomain={settings?.baseDomain}
-                />
-                {!clientId && (
-                  <ThirdParty
-                    thirdParty={thirdParty}
-                    capabilities={capabilities}
-                    ssoExists={ssoExists}
-                    ssoUrl={ssoUrl}
-                    hideAuthPage={hideAuthPage}
-                    oauthDataExists={oauthDataExists}
-                  />
-                )}
-                {settings.enableAdmMess && <RecoverAccess />}
-                {settings.enabledJoin && (
-                  <Register
-                    id="login_register"
-                    enabledJoin
-                    trustedDomains={settings.trustedDomains}
-                    trustedDomainsType={settings.trustedDomainsType}
-                    isAuthenticated={false}
-                  />
-                )}
-              </Login>
-            </FormWrapper>
-          </>
-        </ColorTheme>
-      )}
-    </>
-  );
+            {!clientId ? (
+              <ThirdParty
+                thirdParty={thirdParty}
+                capabilities={capabilities}
+                ssoExists={ssoExists}
+                oauthDataExists={oauthDataExists}
+              />
+            ) : null}
+            {settings.enableAdmMess ? (
+              <RecoverAccess
+                reCaptchaPublicKey={settings?.recaptchaPublicKey}
+                reCaptchaType={settings?.recaptchaType}
+              />
+            ) : null}
+            {settings.enabledJoin ? (
+              <Register
+                id="login_register"
+                enabledJoin
+                trustedDomains={settings.trustedDomains}
+                trustedDomainsType={settings.trustedDomainsType}
+                isAuthenticated={false}
+              />
+            ) : null}
+          </Login>
+        </FormWrapper>
+      </>
+    </LoginContainer>
+  ) : null;
 }
 
 export default Page;

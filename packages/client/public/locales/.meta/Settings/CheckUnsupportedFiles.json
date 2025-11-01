@@ -3,7 +3,7 @@
   "content": "Check unsupported files",
   "content_en_sha1_hash": "06b1841801242c62e0a1437b18e7a0bce4a0534a",
   "created_at": "2025-05-19T21:30:50.896Z",
-  "updated_at": "2025-05-28T09:30:02.523Z",
+  "updated_at": "2025-09-07T07:53:15.242Z",
   "comment": {
     "text": "The translation key \"CheckUnsupportedFiles\" is used to display a message indicating that a file type is not supported. It appears as a button label in a data import component.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 447,
-      "context": "type={LinkType.action}\n isHovered\n fontWeight={600}\n onClick={onDownloadArchives}\n >\n {t(\"Settings:CheckUnsupportedFiles\")}\n </Link>\n </div>\n ) : null}\n \n {isBackupEmpty ? (",
+      "line_number": 449,
+      "context": "isHovered\n fontWeight={600}\n onClick={onDownloadArchives}\n dataTestId=\"check_unsupported_files_link\"\n >\n {t(\"Settings:CheckUnsupportedFiles\")}\n </Link>\n </div>\n ) : null}\n \n {isBackupEmpty ? (",
       "module": "/packages/client"
     }
   ],
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nicht unterstützte Dateien markieren' implies 'mark unsupported files,' whereas the original 'Check unsupported files' suggests a scanning or verification process. The German translation has a more active connotation.",
-          "suggestion": "Überprüfe nicht unterstützte Dateien"
+          "description": "The translation 'Nicht unterstützte Dateien markieren' implies 'mark unsupported files' rather than 'check unsupported files'. While related, 'check' has a different nuance.",
+          "suggestion": "Consider 'Nicht unterstützte Dateien prüfen' or 'Überprüfung nicht unterstützter Dateien' to better reflect the original meaning."
         }
       ],
       "approved_at": null
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"ֆայլերը\" is spelled correctly, but it is in the nominative plural form. Given the English phrase \"Check unsupported files,\" the Armenian translation should use the accusative plural form \"Ստուգել չաջակցվող ֆայլեր\".",
-          "suggestion": "Ստուգել չաջակցվող ֆայլեր"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -156,13 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Verificarea fișierelor care nu sunt acceptate' is a literal translation and can be improved for natural Romanian. 'Acceptate' implies something was accepted and then rejected, which isn't the intended meaning. A more accurate translation would imply files the system *cannot* process or handle.",
+          "description": "The translation 'Verificarea fișierelor care nu sunt acceptate' is a literal translation and sounds somewhat awkward in Romanian. A more natural phrasing would be preferable.",
           "suggestion": "Verifică fișierele neacceptate"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Verifică fișierele neacceptate' is better, it can still sound slightly awkward.  A more natural phrasing would use a verb that better describes the purpose of the check.",
-          "suggestion": "Detectează fișierele neacceptate"
         }
       ],
       "approved_at": null
@@ -179,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සහාය නොදක්වන ගොනු බලන්න' is a literal translation and doesn't quite capture the intended meaning of 'Check unsupported files'. It translates to 'Check files that do not provide support,' which is not idiomatic.",
-          "suggestion": "Consider a more natural Sinhala phrasing like 'අනුග්‍රහණය නොමැති ගොනු පරීක්ෂා කරන්න' or 'නොතකාගත් ගොනු වලක්කා'."
+          "description": "The translation 'සහාය නොදක්වන ගොනු බලන්න' while understandable, is a bit literal and not the most natural way to express 'Check unsupported files' in Sinhala. A more idiomatic translation would be preferred.",
+          "suggestion": "තහනම් ගොනු පරීක්ෂించండి (Tahananum gonu parīkṣā karaṇa)"
         }
       ],
       "approved_at": null

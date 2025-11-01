@@ -3,7 +3,7 @@
   "content": "Zoom in",
   "content_en_sha1_hash": "4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78",
   "created_at": "2025-05-19T21:30:55.104Z",
-  "updated_at": "2025-05-21T10:20:04.087Z",
+  "updated_at": "2025-05-24T10:29:31.062Z",
   "comment": {
     "text": "The \"HotkeysZoomIn\" translation key is used to display the text \"Zoom in\" in a HotkeysPanel component. It is likely found on a UI element such as an action button or menu option, where users can zoom in on content with a specific hotkey combination.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Приближи\" is a literal translation of \"approach\" or \"draw near\" rather than \"zoom in.\" While it conveys a similar concept, it's not the precise meaning of \"zoom in.\" A more accurate translation would better reflect the functionality.",
-          "suggestion": "Увеличи"
+          "description": "The translation 'Приближи' (Priblizhi) while meaning 'approach' or 'draw near', doesn't accurately convey the meaning of 'Zoom in'. It lacks the specific connotation of magnifying an image or view.",
+          "suggestion": "Увеличаване (Uvelichavane) - which directly translates to 'Enlarge' or 'Magnify' would be a more accurate translation for 'Zoom in'."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Přiblížení\" is a valid Czech word, it translates more literally to \"approach\" or \"approximation.\" The more accurate and natural translation for \"Zoom in\" in the context of hotkeys is \"Zvětšit\".",
-          "suggestion": "Zvětšit"
+          "description": "While 'Přiblížení' is a valid Czech word, it translates more literally to 'Zoom' or 'Approximation' rather than the action 'Zoom in'. It's a noun instead of a verb phrase. A more natural translation of 'Zoom in' would be something like 'Přiblížit'.",
+          "suggestion": "Přiblížit"
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Μεγέθυνση' while technically meaning 'magnification' or 'enlargement', isn't the most natural or common way to say 'Zoom in' in Greek. It's a bit too formal and literal.",
-          "suggestion": "Κουζούμι"
+          "description": "While 'Μεγέθυνση' can mean 'magnification' or 'enlargement', it doesn't directly translate to 'Zoom in'. A more accurate translation that conveys the action of zooming would be 'Επέκταση' or 'Κάνε zoom'. Μεγέθυνση describes the *result* of zooming, not the action itself.",
+          "suggestion": "Επέκταση"
         }
       ],
       "approved_at": null
@@ -96,7 +96,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zoom avan' is not a standard or accurate French translation for 'Zoom in'. The correct translation would be 'Zoom avant'.",
+          "description": "The translation 'Zoom avan' is not the standard French translation for 'Zoom in'. The correct translation is 'Zoom avant'.",
           "suggestion": "Zoom avant"
         }
       ],
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '拡大' (kakudai) can mean 'zoom in', it's a more general term for 'expansion' or 'enlargement'. A more direct and user-friendly translation for 'Zoom in' in a hotkey context would be 'イン' (in) which is commonly used for zoom in functionality, or 'ズームイン' (zuumu in) which is a transliteration of 'zoom in'.",
-          "suggestion": "イン (in) or ズームイン (zuumu in)"
+          "description": "While \"拡大\" (kakudai) can mean \"zoom in\", it's a more general term for \"expansion\" or \"enlargement.\"  A more precise translation of \"Zoom in\" in a UI context might be something like \"イン (イン)\" (in) or \"ズームイン\" (zuu-mu-in), which is a direct transliteration and widely understood.",
+          "suggestion": "Consider \"イン\" (in) or \"ズームイン\" (zuu-mu-in)"
         }
       ],
       "approved_at": null
@@ -135,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ຂະ​ຫຍາຍ​ເຂົ້າ\" is a valid Lao phrase and can be understood as 'zoom in', it's a more literal translation of 'expand in'.  A more natural and commonly used translation for 'zoom in' in a user interface context might be something like 'ຊູມເຂົ້າ' (zoom into).",
+          "suggestion": "Consider using 'ຊູມເຂົ້າ' for a more idiomatic translation."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Mais Zoom\" is not the most natural or accurate translation of \"Zoom in.\" While technically understandable, it's not idiomatic Portuguese.  A better translation would convey the action of zooming in.",
-          "suggestion": "Aproximar"
+          "description": "The translation 'Mais Zoom' is not the most natural or accurate translation of 'Zoom in'. While 'Mais Zoom' literally means 'More Zoom', a more common and idiomatic translation would be 'Aumentar o zoom' or 'Zoom +'.",
+          "suggestion": "Aumentar o zoom"
         }
       ],
       "approved_at": null
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Mais Zoom\" is not the most natural or accurate translation of \"Zoom in\" in Portuguese (Brazil). While it's understandable, it's a literal translation and sounds somewhat awkward. A more idiomatic translation would be 'Aumentar Zoom' or 'Dar Zoom'.",
-          "suggestion": "Aumentar Zoom"
+          "description": "The translation \"Mais Zoom\" is not the most natural or accurate translation of \"Zoom in.\" While technically correct (More Zoom), it's not idiomatic in Brazilian Portuguese.  A better translation would convey the action of zooming in.",
+          "suggestion": "Aproximar"
         }
       ],
       "approved_at": null
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Mărire' is a valid Romanian word, it's more accurately translated as 'Enlarge' or 'Magnify'. 'Zoom in' has a specific meaning related to zooming functionality, and 'Mărire' is a more general term for increasing size.",
-          "suggestion": "Zoom In"
+          "description": "The Romanian translation \"Mărire\" is a noun meaning \"enlargement\" or \"magnification,\" not a verb meaning \"zoom in.\" It doesn't accurately convey the action described by the English content.",
+          "suggestion": "Creștere"
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'විශාලනය' (vishalanaya) translates to 'expansion' or 'enlargement', not 'zoom in'. It doesn't convey the specific action of zooming.",
-          "suggestion": "The correct translation should convey the action of zooming. Suggested options include: 'සzoom කිරීම' (zoom kirima - zooming), 'ප්‍රධාන කිරීම' (pradhana kirima - magnifying) or a more descriptive phrase depending on the context."
+          "description": "The translation 'විශාලනය' (vishalanaya) translates to 'expansion' or 'enlargement', not 'zoom in'. It doesn't accurately convey the intended meaning of zooming in on an image or view.",
+          "suggestion": "A more accurate translation for 'Zoom in' could be 'ලොගින් කිරීම' (login kirima - zoom in) or ' විශාල කිරීම' (vishala kirima - enlarge)."
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Зумирај унутра\" is not the best equivalent for \"Zoom in.\" While it literally translates to something like \"Zoom inside,\" it's not a natural or commonly used phrase in Serbian for the action of zooming in. It sounds awkward and unclear.",
-          "suggestion": "A more appropriate translation would be \"Приближи\" (Približi) or \"Увећај\" (Uvećaj)."
+          "description": "The Serbian (Cyrillic) translation \"Зумирај унутра\" doesn't accurately convey the meaning of \"Zoom in\". \"Унутра\" means \"inside\" and isn't part of the standard phrase for zooming in.",
+          "suggestion": "Повећај"
         }
       ],
       "approved_at": null
@@ -240,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zumiraj unutra' doesn't accurately convey the meaning of 'Zoom in'. 'Zumiraj' is a valid verb meaning 'zoom', but 'unutra' means 'inside' or 'inwards'. A more appropriate translation would convey the idea of increasing magnification.",
-          "suggestion": "Zumiraj povećaj"
+          "description": "The translation 'Zumiraj unutra' doesn't accurately convey the meaning of 'Zoom in'. 'Unutra' means 'inside' and isn't the correct terminology for zooming.",
+          "suggestion": "Pripremi"
         }
       ],
       "approved_at": null

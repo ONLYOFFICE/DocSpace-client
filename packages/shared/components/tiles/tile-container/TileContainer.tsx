@@ -41,6 +41,7 @@ export const TileContainer = ({
   headingFiles,
   isDesc,
   style,
+  noSelect,
 }: TileContainerProps) => {
   const Rooms: React.ReactElement[] = [];
   const Folders: React.ReactElement[] = [];
@@ -182,7 +183,9 @@ export const TileContainer = ({
 
   return (
     <div
-      className={classNames(className, styles.tileContainer)}
+      className={classNames(className, styles.tileContainer, {
+        [styles.noSelect]: noSelect,
+      })}
       id={id}
       style={style}
     >

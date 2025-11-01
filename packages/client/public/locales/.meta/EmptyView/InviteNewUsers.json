@@ -3,7 +3,7 @@
   "content": "Invite new users",
   "content_en_sha1_hash": "d996e6455c940edb191c294cd00ca3e24b39dd46",
   "created_at": "2025-05-19T21:30:56.518Z",
-  "updated_at": "2025-05-28T09:30:02.119Z",
+  "updated_at": "2025-10-13T13:22:35.626Z",
   "comment": {
     "text": "This translation key is used to display a label for inviting new users in the application. It appears on a button or similar UI element where users can create new rooms or invite others. The label invites users to send invitations to join the room.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 289,
+      "line_number": 298,
       "context": "onClick: actions.onCreateRoom,\n disabled: false,\n };\n \n const inviteRootRoom = {\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:InviteRootRoomDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: <InviteUserFormIcon />,\n key: \"invite-root-room\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 142,
-      "context": "if (isFiltered)\n return [\n {\n key: \"empty-view-invite-new-users\",\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:SendInvitationLetter\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,\n icon: <InviteUserIcon />,\n model: (getContactsModel(t, false) ?? []).filter(\n (m) => typeof m !== \"boolean\",",
+      "context": "if (isFiltered)\n return [\n {\n key: \"empty-view-invite-new-users\",\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:SendInvitationLetter\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,\n icon: <InviteUserIcon />,\n model: (getContactsModel?.(t, false) ?? []).filter(\n (m) => typeof m !== \"boolean\",",
       "module": "/packages/client"
     }
   ],
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'օգտատերերի' is missing a hyphen. It should be 'օգտատերևր'.",
+          "suggestion": "Հրավիրեք նոր օգտատերևր"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +105,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Japanese translation '新規ユーザーの招待する' is grammatically incorrect. It lacks a verb conjugation to properly express 'invite'. The phrase '招待する' implies the act of inviting, but needs to be combined with the subject in a grammatically correct sentence.",
+          "suggestion": "新規ユーザーを招待する (Shinki yūzā o shōtai suru)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation doesn't accurately convey the meaning of 'Invite new users'. The current phrasing is a fragment and needs to be a complete sentence or a correctly structured phrase.",
+          "suggestion": "新規ユーザーを招待する (Shinki yūzā o shōtai suru) - Invite new users"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,7 +170,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Russian translation 'Пригласить новых пользователь' is grammatically incorrect. It's missing the plural ending on 'пользователь'.",
+          "suggestion": "Пригласить новых пользователей"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -177,7 +200,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Позовите нове кориснике' is grammatically correct, but a more natural and common phrasing would be 'Позовите нове чланове'. 'Кориснике' translates to 'users' in a general sense, while 'чланове' (members) is more suitable in the context of inviting new people to a group or platform.",
+          "suggestion": "Позовите нове чланове"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

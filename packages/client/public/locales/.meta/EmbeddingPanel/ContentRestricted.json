@@ -3,7 +3,7 @@
   "content": "Content copying, file downloading and printing are restricted.",
   "content_en_sha1_hash": "d8e271a937efa90e3953ecc46a4796d2a538adac",
   "created_at": "2025-05-19T21:30:56.580Z",
-  "updated_at": "2025-05-28T09:30:02.352Z",
+  "updated_at": "2025-08-26T11:15:14.111Z",
   "comment": {
     "text": "Content restricted message is used to inform users that certain actions like downloading or printing are not allowed due to content restrictions. It appears on an Embedding Panel and is translated as per the \"ContentRestricted\" key.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 197,
+      "line_number": 196,
       "context": "const linkTitle = currentLink?.sharedTo?.title;\n const withPassword = currentLink?.sharedTo?.password;\n const denyDownload = currentLink?.sharedTo?.denyDownload;\n \n const contentRestrictedTitle = t(\"EmbeddingPanel:ContentRestricted\");\n const withPasswordTitle = t(\"EmbeddingPanel:LinkProtectedWithPassword\");\n \n let barSubTitle = \"\";\n \n if (withPassword) {",
       "module": "/packages/client"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'يتم تقييد نسخ المحتوى وتنزيل الملفات والطباعة.' while grammatically correct, isn't the most natural way to convey the meaning. A more user-friendly and common phrasing would be 'ممنوع نسخ المحتوى وتنزيل الملفات والطباعة.'",
+          "suggestion": "ممنوع نسخ المحتوى وتنزيل الملفات والطباعة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -105,7 +111,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Content copying' is not accurately reflected in the Lao translation. 'ການສໍາເນົາເນື້ອຫາ' is more accurately 'content replication' rather than 'content copying'. While close, 'ການສໍາເນົາເນື້ອຫາ' is a bit formal for this context.",
+          "suggestion": "Consider a phrasing like 'ການຖ່າຍອອກເນື້ອຫາ' which is closer to 'content extraction/copying'. Alternatively, 'ການສໍາເນົາເນື້ອຫາ' is acceptable but could be slightly adjusted to better fit the tone.  'ການກ່າຍເນື້ອຫາ' is also a possibility."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, the Laotian 'ເອກະສານ' (documents) in 'ການພິມເອກະສານ' is somewhat formal. It could be softened for a more user-friendly tone.",
+          "suggestion": "Consider using 'ເອກະສານ' instead of 'ເອກະສານ' for broader appeal"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +134,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Content' is not accurately translated. 'Materiaal' translates to 'material' which is a broader term than 'content'.",
+          "suggestion": "Het kopiëren van content, downloaden van bestanden en afdrukken is beperkt."
+        }
+      ],
       "approved_at": null
     },
     "pl": {

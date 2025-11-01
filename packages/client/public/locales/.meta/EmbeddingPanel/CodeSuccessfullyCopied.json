@@ -3,7 +3,7 @@
   "content": "Code to insert successfully copied to clipboard",
   "content_en_sha1_hash": "c574d56e885b5568a713afd840749a5369418b97",
   "created_at": "2025-05-19T21:30:56.574Z",
-  "updated_at": "2025-05-28T09:30:02.354Z",
+  "updated_at": "2025-08-26T11:15:14.112Z",
   "comment": {
     "text": "This translation key is used for a success message displayed when code is successfully copied to the clipboard. It is shown in a notification toast after the user clicks a button that triggers the copy action. Translators should provide a message indicating successful copying of code, suitable for various language and cultural contexts.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 249,
+      "line_number": 248,
       "context": "});\n };\n \n const onCopyLink = () => {\n copy(codeBlock);\n toastr.success(t(\"EmbeddingPanel:CodeSuccessfullyCopied\"));\n };\n \n const onHeaderChange = () => {\n setEmbeddingConfig((config) => {\n return { ...config, showTitle: !config.showTitle };",
       "module": "/packages/client"
     }
@@ -33,19 +33,47 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Əlavə ediləcək kod mübadilə buferinə uğurla kopyalandı' is not the most accurate representation of 'Code to insert successfully copied to clipboard'. 'Əlavə ediləcək' means 'to be added', which isn't quite right in this context. It should imply that the code is ready to be inserted.",
+          "suggestion": "Kod yerləşdirmək üçün uğurla mübadilə buferinə kopyalandı"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'mübadilə buferinə' is a less common and slightly awkward way to say 'clipboard'.",
+          "suggestion": "keçid yaddaşınğa"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Code to insert\" is awkward. \"Code to insert\" implies a specific purpose or context for the code that isn't clear from the English.  A more accurate translation would focus on the code itself, not how it's being used.",
+          "suggestion": "Кодът е успешно копиран в клипборда"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'за вкарване' (for inserting) is not the most natural way to describe the code's purpose in this context. It's more technical and less user-friendly.",
+          "suggestion": "Кодът е успешно копиран в клипборда"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kód pro vložení úspěšně zkopírovaný do schránky' is a bit literal and could be improved for naturalness in Czech. 'Pro vložení' (for inserting) is less common than simply stating the code has been copied.",
+          "suggestion": "Kód byl úspěšně zkopírován do schránky"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +85,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Κωδικός για εισαγωγή που αντιγράφηκε επιτυχώς στο πρόχειρο' is a bit literal and could be improved for naturalness in Greek. 'Κωδικός για εισαγωγή' translates to 'Code for insertion', which isn't the best phrasing. A more natural translation would convey that the code itself was copied.",
+          "suggestion": "Κώδικας για εισαγωγή αντιγράφηκε επιτυχώς στο πρόχειρο"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of lowercase 'κ' in 'κώδικας' might be stylistically inconsistent with other capitalized terms within the application. Consider capitalization consistency throughout the application.",
+          "suggestion": "Ensure capitalization consistency with other similar messages."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +108,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Syötettävä koodi kopioitu leikepöydälle' is a literal translation that doesn't quite capture the natural flow of the English phrase. 'Syötettävä' (to be inserted) is a bit awkward in this context. A more natural phrasing would be something indicating that the code has been copied *for insertion*.",
+          "suggestion": "Koodi, joka lisätään, kopioitu leikepöydälle"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'leikepöydälle' is correct for 'clipboard', it might be slightly formal. A more common and accessible term could improve user experience.",
+          "suggestion": "Koodi kopioitu pikkulehtiselle"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +137,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Codice da inserire copiato con successo negli appunti' is slightly awkward. A more natural Italian phrasing would be 'Codice da inserire copiato con successo negli appunti'. 'Negli appunti' is correct, but the sentence structure could be improved.",
+          "suggestion": "Codice da inserire copiato con successo negli appunti."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,7 +161,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ລະຫັດທີ່ຈະໃສ່ສໍາເລັດແລ້ວຖືກສໍາເນົາເຂົ້າຄລິບບອດ' is a literal translation and sounds unnatural in Lao.  'ທີ່ຈະໃສ່' could be improved.",
+          "suggestion": "ລະຫັດສໍາເນົາເຂົ້າຄລິບບອດສໍາເລັດແລ້ວ"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'ຖືກສໍາເນົາເຂົ້າຄລິບບອດ' is grammatically correct but a little verbose. A more concise phrasing would improve readability.",
+          "suggestion": "ຖືກຄັດລອກເຂົ້າຄລິບບອດ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,19 +196,47 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Código para inserir copiado com sucesso para a área de transferência\" is a bit literal and wordy. A more natural Portuguese translation would emphasize the action of copying rather than focusing on 'for inserting'.",
+          "suggestion": "Código copiado com sucesso para a área de transferência"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is a bit literal and not the most natural way to express this in Brazilian Portuguese. While technically correct, it lacks fluency.",
+          "suggestion": "Código para inserir copiado para a área de transferência."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrasing 'área de transferência' is a bit formal. More colloquial options exist.",
+          "suggestion": "Código para inserir copiado para a área de transferência, ou Código para inserir copiado para a sua área de transferência."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Code to insert' is not accurately reflected. 'Code to insert' implies the code is specifically intended for insertion somewhere, which isn't explicitly stated in the English. 'Codul de inserat' directly translates that, but it might be more natural to say something like 'Cod pentru inserare' or simply 'Codul copiat'.",
+          "suggestion": "Consider 'Cod pentru inserare a fost copiat cu succes în clipboard' or 'Codul copiat a fost adăugat cu succes în clipboard'."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, 'în clipboard' sounds slightly less natural than 'în agendă'. 'Clipboard' is a very technical term.",
+          "suggestion": "Consider 'în agendă' if the context is more informal. Otherwise, 'în clipboard' is acceptable if targeting a technical audience."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +248,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඇතුළු කිරීමට ඇති කේතය සාර්ථකව පසුරු පුවරුවට පිටපත් කරන ලදී' is overly literal and sounds unnatural in Sinhala. 'ඇතුළු කිරීමට' (for inclusion) is not the best choice here. 'Code to insert' can be better translated as something closer to 'copy to use'. 'පසුරු පුවරුවට' translates to 'to the back board' which is a less common way to refer to a clipboard.",
+          "suggestion": "කේතය සාර්ථකව ක්ලිප්බෝඩ්ට පිටපත් කරන ලදී."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a passive voice ('...was copied'). While grammatically correct, active voice often reads better in UI copy.  The suggested correction attempts to address this.",
+          "suggestion": "කේතය සාර්ථකව ක්ලිප්බෝඩ්ට පිටපත් කරන ලදී."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,37 +271,83 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Koda za vstavljanje je bila uspešno kopirana v odložišče' is a bit literal. A more natural translation would be 'Koda za vstavljanje je uspešno kopirana v spričevalnico.' The word 'odložišče' (storage) isn't the common term for clipboard in Slovenian.",
+          "suggestion": "Koda za vstavljanje je uspešno kopirana v spričevalnico"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Код за унос успешно копиран на привремено чување података.' is not an accurate reflection of the English meaning 'Code to insert successfully copied to clipboard'. The phrase 'на привремено чување података' (to temporary data storage) is not relevant to the original meaning. It implies the code was saved somewhere temporarily, which isn't what the English sentence conveys.",
+          "suggestion": "Код за убацивање успешно копиран у међускладно памћење (клипборд)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kod za unos uspešno kopiran na privremeno čuvanje podataka' is not a direct or accurate translation of 'Code to insert successfully copied to clipboard'. 'Za unos' (for insertion) is not the best fit and 'privremeno čuvanje podataka' is an overly literal translation of 'clipboard'.",
+          "suggestion": "Kod za ubacivanje uspešno kopiran u privremenu memoriju."
+        },
+        {
+          "type": "formatting",
+          "description": "The Serbian translation includes unnecessarily long phrases. 'privremeno čuvanje podataka' is a cumbersome way to describe 'clipboard'.",
+          "suggestion": "Consider simplifying 'privremeno čuvanje podataka' to 'smeše' or a more direct translation implying a temporary storage area."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop at the end of the sentence, which might not be necessary or preferred in all UI contexts. Consider removing it for consistency with other UI elements.",
+          "suggestion": "Eklenecek kod panoya başarıyla kopyalandı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Код для вставлення успішно скопійовано до буфера обміну' is overly literal and doesn't flow naturally in Ukrainian.  'До буфера обміну' is a bit clunky. A more idiomatic translation would be preferred.",
+          "suggestion": "Код для вставки успішно скопійовано в буфер обміну"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Mã để chèn được sao chép thành công vào bộ nhớ tạm' is not the most natural or idiomatic way to convey \"Code to insert successfully copied to clipboard\" in Vietnamese. 'Bộ nhớ tạm' refers to temporary memory which is the English 'clipboard'. While not technically wrong, it's slightly too literal and formal.",
+          "suggestion": "Mã để chèn đã được sao chép thành công vào clipboard (or Mã đã được sao chép thành công vào clipboard)."
+        },
+        {
+          "type": "formatting",
+          "description": "The inclusion of 'clipboard' in parentheses is a stylistic choice. It's understandable as it is the English term, but should be addressed consistently - either always include or never include. If using it, consider translating it to something like 'khay nhớ tạm' for more clarity.",
+          "suggestion": "If aiming for a more Vietnamese phrasing, avoid the English word 'clipboard'. Consider alternatives like 'khay nhớ' or 'vùng nhớ tạm'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

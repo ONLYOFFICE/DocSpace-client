@@ -1,5 +1,4 @@
-@import "../../styles/variables/devices.scss";
-@import "../../styles/mixins.scss";
+@use "../../styles/mixins";
 
 .autoBackup {
   width: 100%;
@@ -17,7 +16,7 @@
         max-width: 700px;
         width: 100%;
         height: 16px;
-        @include mobile {
+        @include mixins.mobile {
           height: 32px;
         }
       }
@@ -36,7 +35,7 @@
       .auto-backup-loader_option {
         height: 40px;
         max-width: 700px;
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           height: 54px;
         }
       }
@@ -76,7 +75,7 @@
         max-width: 700px;
         width: 100%;
         height: 16px;
-        @include mobile {
+        @include mixins.mobile {
           height: 32px;
         }
       }
@@ -98,13 +97,13 @@
       }
       .data-backup-loader_menu-higher {
         height: 72px;
-        @include mobile {
+        @include mixins.mobile {
           height: 120px;
         }
       }
       .data-backup-loader_menu-last {
         height: 56px;
-        @include mobile {
+        @include mixins.mobile {
           height: 88px;
         }
       }
@@ -113,7 +112,7 @@
         height: 32px;
         max-width: 285px;
         width: 100%;
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           height: 40px;
         }
       }
@@ -128,7 +127,7 @@
     .restore-backup-loader_title {
       max-width: 400px;
       height: 12px;
-      @include mobile {
+      @include mixins.mobile {
         height: 30px;
       }
     }
@@ -147,7 +146,7 @@
       .restore-backup_checkbox-second {
         max-width: 418px;
         height: 20px;
-        @include mobile {
+        @include mixins.mobile {
           height: 40px;
         }
       }
@@ -183,7 +182,7 @@
       display: block;
       height: 32px;
       max-width: 700px;
-      @include mobile {
+      @include mixins.mobile {
         height: 48px;
       }
     }
@@ -193,7 +192,7 @@
       display: block;
       height: 20px;
       max-width: 700px;
-      @include mobile {
+      @include mixins.mobile {
         height: 31px;
       }
     }
@@ -201,7 +200,7 @@
       display: block;
       max-width: 100px;
       height: 32px;
-      @include mobile {
+      @include mixins.mobile {
         height: 40px;
         max-width: 100%;
       }

@@ -3,7 +3,7 @@
   "content": "Search term",
   "content_en_sha1_hash": "972c8207d026dc3c256eba4e01b67d41c19be089",
   "created_at": "2025-05-19T21:30:54.661Z",
-  "updated_at": "2025-05-21T08:39:40.442Z",
+  "updated_at": "2025-05-24T08:52:40.636Z",
   "comment": {
     "text": "The \"Search term\" translation key is used to display a placeholder for users to input their search query. In the Portal Settings UI, it appears as part of a text input field where users can enter a search term. Translators should replace this placeholder with the actual search term in their respective language.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Termin axtarın' literally translates to 'Search Term' but doesn't convey the intended meaning of 'Search term' (the term being searched). It's more like 'Search for Term'.",
-          "suggestion": "A better translation would be 'Axtarış termini' or 'Axtarış sözü'."
+          "description": "The translation \"Termin axtarın\" literally translates to \"Search term\" but in the context of a software interface, a more natural and accurate translation would be something like \"Axtarış termini\" or \"Axtarış sözü\". \"Termin axtarın\" sounds like an instruction ('Search for term') rather than the term itself.",
+          "suggestion": "Axtarış termini"
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Όρος αναζήτησης' is understandable, it's a somewhat literal translation. A more natural and common Greek term for 'search term' would be 'Λέξη κλειδί' (Lexi Kleidi). 'Όρος' is more often used for 'term' in a technical or academic context, not a user-facing search field.",
-          "suggestion": "Λέξη κλειδί"
+          "description": "While \"Όρος αναζήτησης\" is technically a translation of 'Search term', it sounds somewhat unnatural and overly formal in Greek. A more common and natural phrasing would be something like \"Λέξη αναζήτησης\" or \"Όρος αναζήτησης\" (slightly better, but still potentially verbose).",
+          "suggestion": "Consider \"Λέξη αναζήτησης\" or a shorter, more conversational alternative depending on the context."
         }
       ],
       "approved_at": null
@@ -126,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Meklēšanas vienums\" translates more accurately to \"Search item\" or \"Search unit\" rather than \"Search term\".  \"Search term\" implies a word or phrase used in a search.",
+          "description": "The Latvian translation \"Meklēšanas vienums\" translates more accurately to \"Search item\" or \"Search unit\" rather than \"Search term\". \"Search term\" implies a specific word or phrase used in a search, while \"Meklēšanas vienums\" is more generic.",
           "suggestion": "Meklēšanas termins"
         }
       ],
@@ -144,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wyszukaj frazę' is a functional translation but doesn't accurately reflect the meaning of 'Search term'. 'Wyszukaj frazę' translates to 'Search phrase'. 'Search term' is more general and could refer to a single word or a short phrase. A more accurate translation would be 'Wyszukiwane słowo' or 'Wyszukiwany termin'.",
+          "description": "The translation 'Wyszukaj frazę' while technically meaning 'Search phrase', is not the most natural or accurate translation of 'Search term'. 'Wyszukiwane słowo' or 'Określenie do wyszukania' would be more aligned with the English meaning of 'Search term'.",
           "suggestion": "Wyszukiwane słowo"
         }
       ],
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Искать термин' literally translates to 'Search term'. However, the common and more natural translation for 'Search term' in a software context (like a search bar label) would be 'Поисковый запрос' or 'Термин для поиска'. 'Искать термин' implies searching *for* a term, which isn't the intended meaning.",
-          "suggestion": "Поисковый запрос"
+          "description": "The translation \"Искать термин\" literally means \"Search term\", but the correct translation would be more contextually appropriate. \"Search term\" can imply the term being searched *for*. A more natural translation would be something along the lines of \"Поисковый термин\" or \"Термин для поиска\".",
+          "suggestion": "Поисковый термин"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"සෙවුම් පද\" while understandable, isn't the most natural or precise translation of \"Search term\". \"පදය\" refers to a word, and \"සෙවුම්\" implies searching. A more accurate and natural translation might incorporate a combined word or phrase that more directly conveys the concept of a search term.",
-          "suggestion": "Consider alternatives like \"ගවේෂණ පදය\" (gaveshana padaya - inquiry word), \"ප්‍රවේණි පදය\" (prawaeni padaya - search word), or a phrase like \"පෙතීමේ පදය\" (pethimei padaya - word for searching)."
+          "description": "The translation 'සෙවුම් පද' while understandable, is not the most natural or precise translation of 'Search term'. 'පද' typically refers to words or verses, not a search query. A more accurate translation would convey the concept of a query or input for searching.",
+          "suggestion": "Possible alternatives include: 'ගවේෂණ පදය' (gaveshana padaya - inquiry word), 'සෙවුම් පදය' (sevum padaya - search word - though not ideal, this is close) or a more descriptive phrase."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Hľadať termín\" is not the most natural or accurate translation of \"Search term\". While literally \"search term\", it doesn't fully capture the intended meaning within a UI or software context. \"Vyhľadávacie slovo\" or \"Hľadané slovo\" would be more appropriate.",
-          "suggestion": "Hľadané slovo"
+          "description": "The Slovak translation 'Hľadať termín' literally translates to 'Search term'. While understandable, a more natural Slovak phrasing for a UI element referring to the search query would be 'Vyhľadávací výraz' or 'Hľadaný výraz'. 'Hľadať termín' sounds slightly awkward and might be misinterpreted.",
+          "suggestion": "Vyhľadávací výraz"
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Išči izraz\" is a literal translation, it doesn't quite capture the meaning of 'Search term' in a UI/technical context.  'Search term' refers to the text a user types into a search box.",
-          "suggestion": "Razlaga za iskanje"
+          "description": "While 'Išči izraz' is a possible translation, it's a bit literal and might not be the most natural phrasing for a search term label. 'Išči besedo' or 'Vnos iskanja' might be more appropriate depending on the context. 'Išči izraz' implies a specific phrase or term, not just any search input.",
+          "suggestion": "Consider 'Išči besedo' or 'Vnos iskanja' for better naturalness."
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Појмови претраге\" is a literal translation of 'Search terms' but isn't the most natural phrasing in Serbian. While not technically wrong, it sounds somewhat clunky.",
-          "suggestion": "Consider a more natural translation like \"Упит за претрагу\" or \"Тражена реч/фраза\" depending on the specific context of its usage."
+          "description": "While \"Појмови претраге\" is understandable, a more accurate and common translation of 'Search term' would be 'Упит за претрагу'. \"Појмови претраге\" translates more literally to 'search terms'.",
+          "suggestion": "Упит за претрагу"
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pojmovi pretrage' literally translates to 'Search terms' in the plural form, but the English key 'Search term' is singular. While not strictly wrong, it's less precise.",
-          "suggestion": "Pretraga po terminu"
+          "description": "While 'Pojmovi pretrage' is understandable, it's a more literal translation of 'search terms' rather than 'search term'. 'Term za pretragu' would be a more direct and natural translation for a single 'search term'.",
+          "suggestion": "Term za pretragu"
         }
       ],
       "approved_at": null

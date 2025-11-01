@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:53.465Z",
-  "updated_at": "2025-05-28T09:30:02.381Z",
+  "updated_at": "2025-08-04T07:30:01.185Z",
   "comment": {
     "text": "This translation key represents the text \"Disabled\" used to describe employee status, appearing in various contexts such as info panels and filter options, where it is displayed next to a user's status.",
     "is_auto": true,
@@ -13,12 +13,12 @@
     {
       "file_path": "/packages/client/src/helpers/contacts/utils.ts",
       "line_number": 204,
-      "context": "case \"active\":\n return t(\"Common:Active\");\n case \"pending\":\n return t(\"PeopleTranslations:PendingInviteTitle\");\n case \"disabled\":\n return t(\"PeopleTranslations:DisabledEmployeeStatus\");\n case \"all\":\n return t(\"All\");\n default:\n return \"\";\n }",
+      "context": "case \"active\":\n return t(\"Common:Active\");\n case \"pending\":\n return t(\"PeopleTranslations:PendingInviteTitle\");\n case \"disabled\":\n return t(\"PeopleTranslations:DisabledEmployeeStatus\");\n case \"all\":\n return t(\"Common:All\");\n default:\n return \"\";\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 116,
+      "line_number": 123,
       "context": "case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n \n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n \n case EmployeeStatus.Active:\n default:\n label = t(\"Common:Active\");",
       "module": "/packages/client"
     },
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Söndürülüb' can mean 'disabled' in some contexts, it more accurately translates to 'switched off' or 'extinguished'. For 'disabled' in the context of employee status, a more accurate translation would be 'İlə bağlı olmayan' or 'Əmək qabiliyyətindən məhrum edilmiş'.",
-          "suggestion": "İlə bağlı olmayan"
+          "description": "The translation 'Söndürülüb' while literally meaning 'switched off' or 'extinguished,' doesn't accurately convey the meaning of 'Disabled' in the context of employee status. 'Disabled' in this case likely refers to an employee being deactivated or inactive. A more appropriate translation would reflect that meaning.",
+          "suggestion": "İləsizləşdirilib, Fəaliyyəti dayandırılıb, or Əlaqəsizləşdirilib"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Deshabilitar' while technically meaning 'disable' in Spanish, is not the most appropriate translation for 'Disabled' in the context of an employee status. It suggests an action, not a state. A better translation would convey the state of being disabled.",
-          "suggestion": "Consider 'Inactivo', 'Desactivado', or 'Discapacitado' depending on the precise nuance intended. 'Inactivo' is often used for employee statuses, indicating the employee is not currently working."
+          "description": "While \"Deshabilitar\" is a possible translation of \"Disabled\", it's more accurately used as a verb (to disable). \"Disabled\" as an adjective describing a status is better translated as \"Invalidez\" or \"Discapacitado\" depending on the context. \"Deshabilitado\" also has a slightly different connotation.",
+          "suggestion": "Consider alternatives like \"Invalidez\" or \"Discapacitado\"."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Կասեցված\" (Kasetsvad) literally translates to \"suspended\" or \"paused\". While it can sometimes be used to convey \"disabled\", it's not the most accurate or natural translation for the English word \"Disabled\" in the context of an employee status. \"Անաշխատունակ\" (Anashxatunak) or \"Ոգնված\" (Ognvad) would be more suitable depending on the specific nuance needed.",
-          "suggestion": "Consider using \"Անաշխատունակ\" (Anashxatunak) or \"Ոգնված\" (Ognvad) for a more accurate translation of \"Disabled\" in an employee status context."
+          "description": "While \"Կասեցված\" (Kasetsvadz) can mean \"suspended\" or \"disabled\" in certain contexts, it doesn't fully capture the nuance of 'Disabled' in the context of employee status, which often implies a permanent or long-term inability to work. A more accurate translation would convey a sense of permanent or long-term ineligibility.",
+          "suggestion": "Consider alternatives like \"Անաշխատունակ\" (Anashkhadunak - unable to work), \"Հաշմանդամ\" (Hashmandam - handicapped), or \"Դադրված\" (Dadrvadz - terminated/ceased) depending on the specific meaning intended. Further context would be beneficial to choose the most appropriate term."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation '無効化' (mukyouka) translates to 'deactivation' or 'invalidated' rather than directly conveying 'disabled'. While it can sometimes be used in a similar context, it's not the most accurate or natural translation for 'Disabled' in a user interface or similar setting.",
-          "suggestion": "Consider alternative translations like: 無効 (mukyou - invalid), 不稼働 (fukadou - inoperative), or 停止 (teishi - stopped). The best option will depend on the specific context."
+          "description": "The Japanese translation \"無効化\" (muukyouka) literally means \"invalidate\" or \"disable (a function)\". While it conveys a similar concept to \"Disabled\" in some contexts, it might be too technical or formal for a general user interface element describing an employee status. A more natural and commonly used translation for 'Disabled' in this context, referring to an employee status, would be \"停止\" (teishi) meaning 'stopped' or 'suspended', or \"無効\" (mukyou) meaning 'invalid'.",
+          "suggestion": "Consider using \"停止\" (teishi) or \"無効\" (mukyou) for a more natural and understandable translation."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ປິດ' (pit) generally means 'closed' or 'shut', which while related to 'disabled' doesn't convey the precise meaning of being unable to work due to a disability. A more accurate translation would depend on the specific context of 'disabled employee status', but options like 'ຜູ້ທີ່ບໍ່ສາມາດເຮັດວຽກໄດ້' (phu thi bot samat het viak dai - person who cannot work) or 'ບໍອະນຸຍາດເຮັດວຽກ' (bo anuyat het viak - not permitted to work) might be more appropriate.",
-          "suggestion": "Consider 'ຜູ້ທີ່ບໍ່ສາມາດເຮັດວຽກໄດ້' or 'ບໍອະນຸຍາດເຮັດວຽກ' depending on the intended meaning."
+          "description": "'ປິດ' generally translates to 'closed' or 'shut' in Lao. While it can be used to describe a disabled state, it's not the most accurate or common translation for 'Disabled' in the context of employment status. A more appropriate translation might be something like 'ບໍອະນຸຍາດ' (bo anuyat - not permitted/allowed) or 'ຖືກປິດການນໍາໃຊ້' (thuk pid kan nam sai - deactivated/suspended).",
+          "suggestion": "Consider 'ບໍອະນຸຍາດ' (bo anuyat) or 'ຖືກປິດການນໍາໃຊ້' (thuk pid kan nam sai) for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Nieaktywny' can sometimes be used for 'Disabled', it doesn't fully capture the specific meaning in this context (referring to an employee status). 'Wyłączony' would be a more accurate translation as it directly signifies a deactivated or disabled state.",
-          "suggestion": "Wyłączony"
+          "description": "While \"Nieaktywny\" can be a valid translation for \"Disabled\" in some contexts, it doesn't perfectly convey the meaning of 'Disabled Employee Status' which implies a state of being inactive or removed from active employment due to disability. A more accurate translation might be 'Niepełnosprawny' or 'Wyłączony'.",
+          "suggestion": "Consider 'Niepełnosprawny' or 'Wyłączony' for a more precise translation of 'Disabled Employee Status'."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Заблокирован' is a valid translation, 'Отключен' would be a more accurate and natural translation of 'Disabled' in the context of an employee status. 'Заблокирован' implies a blockage or restriction, whereas 'Отключен' better conveys the state of an employee being deactivated or not currently active.",
-          "suggestion": "Отключен"
+          "description": "The translation 'Заблокирован' while technically meaning 'blocked,' isn't the most accurate or common translation for 'Disabled' in the context of an employee status. 'Отключен' or 'Неактивен' would be more suitable depending on the exact nuance required.",
+          "suggestion": "Consider using 'Отключен' or 'Неактивен' instead of 'Заблокирован'."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අබලයි\" is an informal and potentially inaccurate translation of \"Disabled\". While it can convey a sense of being out of order or not functioning, it doesn't directly represent the meaning of disability in the context of employment or legal status. A more accurate and respectful translation would be something like \"ආබාධිත\" (aabadhitha) or \"අසමත්\" (asamat) depending on the specific nuance intended.",
-          "suggestion": "Consider using \"ආබාධිත\" (aabadhitha) or \"අසමත්\" (asamat) for a more accurate translation."
+          "description": "The Sinhala translation \"අබලයි\" while containing elements of meaning related to 'disabled', is not the most accurate or commonly used translation for 'Disabled' in this context (referring to an employee status). It sounds more like an adjective describing something as broken or useless.",
+          "suggestion": "Consider using \"අසමත්\" (asmath) or \"නොහැකි\" (nohaki) which are more suitable translations for 'Disabled' in the context of an employee status. A more context-specific translation might be preferable if available."
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Онемогућено\" while technically meaning \"disabled\" or \"made impossible,\" isn't the most natural or common translation for the English word \"Disabled\" in the context of employee status. It sounds overly formal and technical. A more appropriate translation would depend on the specific nuance intended (e.g., 'онемогућен', 'неактиван', 'ограничен').",
-          "suggestion": "Consider alternatives like 'онемогућен' (more common for a person's ability), 'неактиван' (inactive), or 'ограничен' (limited), depending on the precise context."
+          "description": "While 'Онемогућено' is a valid Serbian word, it doesn't precisely convey the meaning of 'Disabled' in the context of employee status. It translates more to 'Rendered unable' or 'Impaired'.  'Онемогућено' is more appropriate for a technical setting or process being disabled, not a person's employment status.",
+          "suggestion": "Consider 'Они је престао да ради' (They are no longer working) or 'Неактиван' (Inactive) which might be more fitting depending on the exact context."
         }
       ],
       "approved_at": null
@@ -252,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'Onemogućeno' translates to 'Disabled' or 'Inactive' in a general sense, but in the context of employee status, a more accurate translation might be 'Nekompetentan' (incompetent/unable) or 'Prestao da radi' (ceased to work/retired). 'Onemogućeno' has a broader meaning and might imply something is technically blocked, not necessarily an employee's status.",
-          "suggestion": "Consider 'Nekompetentan' or 'Prestao da radi' for a more accurate reflection of 'Disabled' in the context of employee status."
+          "description": "The Serbian translation 'Onemogućeno' is a literal translation of 'disabled' meaning 'disabled' or 'deactivated' but doesn't fully capture the context. 'Disabled' in this key likely refers to a feature being turned off or unavailable. A more appropriate translation would depend on the specific context of the user interface where this key is used.",
+          "suggestion": "Consider alternatives like 'Isključeno' (switched off), 'Nepovoljno' (unavailable), or 'Omejeno' (limited), depending on the specific UI context. Without more context, it's difficult to give a perfect alternative."
         }
       ],
       "approved_at": null
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Devre dışı bırakıldı' while literally meaning 'deactivated/taken out of service', doesn't convey the meaning of 'Disabled' in the context of employee status. 'Disabled' in this context likely refers to an employee being marked as inactive or not currently working.",
-          "suggestion": "Engagede"
+          "description": "While 'Devre dışı bırakıldı' can be a literal translation of 'Disabled' in some contexts, it implies a deliberate action of being switched off or deactivated. 'Disabled' in the context of employee status typically refers to a state of being unable to work due to a disability. A more appropriate translation would be 'Engelli' or 'Görevden uzaklaştırıldı' depending on the specific nuance needed.",
+          "suggestion": "Consider 'Engelli' or 'Görevden uzaklaştırıldı' depending on the desired meaning."
         }
       ],
       "approved_at": null
@@ -282,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Đã vô hiệu hóa' is a possible translation of 'Disabled,' it leans towards 'deactivated' or 'made inactive.' 'Disabled' in this context likely refers to a person's physical or mental ability, which is better conveyed with a different term.",
-          "suggestion": "Consider 'Chỉ người khuyết tật' (for individuals with disabilities) or 'Không đủ năng lực' (incapable) depending on the specific context. More context is needed for the best translation."
+          "description": "While \"Đã vô hiệu hóa\" is a valid translation, it can be overly formal or technical for the context of 'Disabled' referring to an employee status. A more natural and easily understood translation might be preferred.",
+          "suggestion": "Vô hiệu"
         }
       ],
       "approved_at": null

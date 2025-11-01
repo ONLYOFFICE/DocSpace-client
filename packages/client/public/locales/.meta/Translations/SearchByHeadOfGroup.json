@@ -3,7 +3,7 @@
   "content": "Search by Head of group",
   "content_en_sha1_hash": "38790b414bc3ff27122ec8675023f26f062c1686",
   "created_at": "2025-05-19T21:30:50.003Z",
-  "updated_at": "2025-05-28T09:30:02.469Z",
+  "updated_at": "2025-05-26T07:57:32.463Z",
   "comment": {
     "text": "This translation key is used for a label that indicates \"Search by Head of group\" and appears as a filter option in a user interface, likely on a contact list or search results page. Translators should focus on conveying this meaning in their target language to ensure accurate user experience.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Qrup rəhbəri tərəfindən axtarış' is a literal translation and doesn't convey the intended meaning of 'Search by Head of group'. It translates to 'Search by the head of the group'. The correct phrasing would imply the user is performing the search.",
-          "suggestion": "A more accurate translation would be something like 'Qrup rəhbərinin axtarışı' or 'Qrup rəhbəri ilə axtarış'."
+          "description": "The translation 'Qrup rəhbəri tərəfindən axtarış' literally translates to 'Search by Head of group'. While understandable, it's not the most natural phrasing in Azerbaijani. A better phrasing would emphasize *searching for* someone related to the group head.",
+          "suggestion": "Axtarış qrup rəhbərinin üzvləri ilə bağlı"
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrase 'Qrup rəhbəri tərəfindən axtarış' sounds a bit awkward due to the word order. It implies a search *performed* by the group head, rather than searching *for* things associated with them.",
+          "suggestion": "Qrup rəhbərinin üzvləri ilə bağlı axtarış"
         }
       ],
       "approved_at": null
@@ -45,7 +50,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ръководител на група\" is a literal translation of \"Head of group\", it's somewhat formal and lengthy for a search label. A more natural and concise option might be preferred depending on the user interface context.",
+          "suggestion": "Consider \"Ръководител на екип\" or a shorter, more colloquial term if appropriate for the UI. More context is needed to determine the best alternative."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,7 +68,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Suchen nach' is correct for 'Search by', 'Gruppenleiter' is a more literal translation of 'Head of group' and might not be the most natural phrasing. It's not necessarily *wrong*, but could be improved for better flow and common usage.",
+          "suggestion": "Consider 'Suche nach Gruppenleitung' or 'Suche nach dem Gruppenleiter' for a more idiomatic translation, depending on the context. 'Gruppenleitung' implies the leadership role, while 'dem Gruppenleiter' refers specifically to the person."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -66,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Αναζήτηση ανά επικεφαλής ομάδας\" is a literal translation that doesn't quite capture the intended meaning of 'Search by Head of group'. It translates to 'Search by head of group'. A more natural and idiomatic translation might be 'Αναζήτηση με βάση τον επικεφαλής της ομάδας' or 'Αναζήτηση βάσει επικεφαλής ομάδας'.",
-          "suggestion": "Αναζήτηση με βάση τον επικεφαλής της ομάδας"
+          "description": "The translation \"Αναζήτηση ανά επικεφαλής ομάδας\" is a literal translation and might not be the most natural way to express 'Search by Head of group' in Greek. While technically correct, it sounds somewhat awkward. A more natural phrasing might be something like \"Αναζήτηση με βάση τον επικεφαλής της ομάδας\" or \"Αναζήτηση από τον επικεφαλής της ομάδας\".",
+          "suggestion": "Consider \"Αναζήτηση με βάση τον επικεφαλής της ομάδας\" or \"Αναζήτηση από τον επικεφαλής της ομάδας\"."
         }
       ],
       "approved_at": null
@@ -81,7 +98,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Hae ryhmän päällikön mukaan\" is understandable, a more natural and accurate translation of 'Search by Head of group' might be 'Etsi ryhmän päällikön mukaan' or 'Hae ryhmän johtajan mukaan'. \"Päällikön mukaan\" implies searching *according to* the head, rather than searching *for* the head.",
+          "suggestion": "Etsi ryhmän päällikön mukaan"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -108,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'グループ代表で検索' is a literal translation of 'head of group' as 'group representative'. While understandable, it might not be the most natural or precise way to convey the meaning of searching by the person in charge of a group. It doesn't necessarily imply a search *by* that person.",
-          "suggestion": "検討: リーダーで検索 (Rīdā de sāch)"
+          "description": "The translation 'グループ代表で検索' while technically understandable, isn't the most natural or accurate translation of 'Search by Head of group'. '代表' usually refers to a representative. The phrase implies searching *for* the head of group, rather than *by* them. A more appropriate translation would convey the action of searching based on the head of group's criteria or selection.",
+          "suggestion": "グループの責任者で検索"
         }
       ],
       "approved_at": null
@@ -120,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '그룹장으로 검색' while understandable, isn't the most natural or accurate translation of 'Search by Head of group'. It literally translates to 'Search by group leader'. A more natural phrasing might be '그룹장 기준 검색' or '그룹장 검색'.",
-          "suggestion": "그룹장 기준 검색"
+          "description": "The translation '그룹장으로 검색' is a literal translation but could be improved for naturalness. While technically correct, it might sound a bit awkward in Korean. A more natural phrasing would convey the action of searching *for* or *within* the head of group.",
+          "suggestion": "그룹장 검색"
         }
       ],
       "approved_at": null
@@ -144,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'Zoeken op Groepshoofd' is not the most natural or accurate translation of 'Search by Head of group'. 'Groepshoofd' literally translates to 'Group Head' and might not convey the intended meaning of searching based on the leader of a group. A better translation would convey the action of searching for a group's leader.",
-          "suggestion": "Zoeken naar de groepsleider"
+          "description": "The translation \"Zoeken op Groepshoofd\" is not the most natural or accurate translation of \"Search by Head of group\". \"Groepshoofd\" is a literal translation of 'Head of group' and doesn't convey the intended meaning of searching *by* the person leading a group.",
+          "suggestion": "Zoeken per groepsleider"
         }
       ],
       "approved_at": null
@@ -171,7 +194,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Șef de grupă' is a very literal translation. A more natural and commonly used term in Romanian would be 'Lider de grupă'. 'Șef' can sometimes imply a more authoritarian role.",
+          "suggestion": "Lider de grupă"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +212,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සමූහ ප්‍රධානීන් අනුව සොයන්න' while conveying a similar meaning, is a bit literal and not the most natural way to say 'Search by Head of group' in Sinhala. It translates to 'Search according to group leaders'. A more natural phrasing might be something like 'විධානනිර්වාහකයන්හී මුළුල්ලෙන් සොයන්න' (Vidhananirvahakayanhee mulullen soyanna) which translates closer to 'Search by group administrator/leader'.",
+          "suggestion": "විධානනිර්වාහකයන්හී මුළුල්ලෙන් සොයන්න (Vidhananirvahakayanhee mulullen soyanna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Vedúci skupiny\" translates to \"Head of group\", the phrasing sounds slightly unnatural in Slovak. A more common and natural phrasing would be \"Vyhľadávanie podľa riaditeľa skupiny\" or \"Vyhľadávanie podľa šéfa skupiny\".",
+          "suggestion": "Vyhľadávanie podľa riaditeľa skupiny"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -203,8 +244,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While 'Вођи' (Vodzi) is grammatically correct, 'Вођа' (Vođa) would be more natural and common usage for 'Head of group' in Serbian. 'Вођи' implies a dative case and makes the sentence slightly awkward.",
+          "type": "spelling",
+          "description": "The term 'Вођи' is a genitive case. It should be nominative 'Вођа' for accurate grammatical construction within the phrase 'Search by Head of group'.",
           "suggestion": "Претрага по Вођа групе"
         }
       ],
@@ -213,7 +254,18 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pretraga po Vođi grupe' is a literal translation that doesn't quite convey the intended meaning in a natural way. 'Head of group' often implies a leader or manager.",
+          "suggestion": "Pretraga po lideru grupe"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Vođa' technically means 'leader', it can sometimes have a more authoritarian connotation. 'Lider' is a more neutral and commonly used term in modern Serbian for 'leader'.",
+          "suggestion": "Consider using 'Lider' instead of 'Vođa' for a more modern and neutral tone."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -222,8 +274,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Grup Başkanına göre ara' is not the most natural or accurate translation of 'Search by Head of group'. It literally translates to 'Search according to the Head of group'. A more natural and accurate translation would convey the meaning of searching *for* or *within* a group led by a head.",
-          "suggestion": "Consider alternatives like 'Grup Başkanı'na göre arama yap' or 'Grup Başkanı'nın yönettiği grup içinde ara'."
+          "description": "The translation 'Grup Başkanına göre ara' literally translates to 'Search according to the Head of group'. While understandable, it's not the most natural or idiomatic way to express 'Search by Head of group' in Turkish. A more appropriate phrasing might emphasize the search *for* or *related to* the Head of Group.",
+          "suggestion": "Consider 'Grup Başkanı ile ara' (Search with the Head of Group) or 'Grup Başkanı ile ilgili ara' (Search related to the Head of Group)."
         }
       ],
       "approved_at": null
@@ -243,13 +295,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"按组长进行搜索\" literally translates to 'Search by group leader'. While close, 'Head of group' implies a more formal leadership role than 'group leader.' A more precise translation might consider the context of the application.",
-          "suggestion": "Consider alternatives like \"按小组负责人进行搜索\" (Search by group supervisor) or \"按团队负责人进行搜索\" (Search by team leader), depending on the precise meaning of 'Head of group'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

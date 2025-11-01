@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 
 import api from "@docspace/shared/api";
@@ -112,8 +112,6 @@ class PluginStore {
 
   deletePluginDialogProps: null | { pluginName: string } = null;
 
-  isLoading = true;
-
   isEmptyList = false;
 
   needPageReload = false;
@@ -132,10 +130,6 @@ class PluginStore {
 
   setNeedPageReload = (value: boolean) => {
     this.needPageReload = value;
-  };
-
-  setIsLoading = (value: boolean) => {
-    this.isLoading = value;
   };
 
   setIsEmptyList = (value: boolean) => {
@@ -169,7 +163,7 @@ class PluginStore {
   updatePluginStatus = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
-    const newStatus = plugin?.getStatus();
+    const newStatus = plugin?.getStatus?.();
 
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
@@ -245,29 +239,67 @@ class PluginStore {
 
     const { isAdmin, isOwner } = this.userStore.user;
 
-    this.setIsLoading(true);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
     try {
       this.plugins = [];
 
       const plugins = await api.plugins.getPlugins(
         !isAdmin && !isOwner ? true : null,
+        abortController.signal,
       );
 
       this.setIsEmptyList(plugins.length === 0);
-      plugins.forEach((plugin) => this.initPlugin(plugin, undefined, fromList));
-
-      setTimeout(() => {
-        this.setIsLoading(false);
-      }, 500);
+      await Promise.allSettled(
+        plugins.map((plugin) => this.initPlugin(plugin, undefined, fromList)),
+      );
     } catch (e) {
+      if (axios.isCancel(e)) {
+        return;
+      }
       console.log(e);
     }
   };
 
-  addPlugin = async (data: FormData) => {
+  checkPluginCompatibility = (minDocSpaceVersion?: string): boolean => {
+    if (!minDocSpaceVersion) return false;
+
+    const currentDocspaceVersion = this.settingsStore.buildVersionInfo.docspace;
+
+    const parts1 = minDocSpaceVersion.split(".").map(Number);
+    const parts2 = currentDocspaceVersion.split(".").map(Number);
+
+    const len = Math.max(parts1.length, parts2.length);
+
+    for (let i = 0; i < len; i++) {
+      const num1 = parts1[i] ?? 0;
+      const num2 = parts2[i] ?? 0;
+
+      if (num1 < num2) return true;
+      if (num1 > num2) return false;
+    }
+
+    return true;
+  };
+
+  addPlugin = async (data: FormData, t: TTranslation) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
+
+      const isPluginCompatible = this.checkPluginCompatibility(
+        plugin.minDocSpaceVersion,
+      );
+
+      if (!isPluginCompatible) {
+        toastr.error(
+          t("PluginIsNotCompatible", {
+            productName: t("Common:ProductName"),
+          }),
+        );
+      } else {
+        toastr.success(t("PluginLoadedSuccessfully"));
+      }
 
       this.setNeedPageReload(true);
 
@@ -305,48 +337,63 @@ class PluginStore {
     fromList?: boolean,
   ) => {
     if (!plugin.enabled && !fromList) return;
-    const onLoad = async () => {
-      const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
 
-      const newPlugin = cloneDeep({
-        ...plugin,
-        ...iWindow?.Plugins?.[plugin.pluginName],
-      });
+    return new Promise((resolve, reject) => {
+      const onLoad = async () => {
+        try {
+          const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
 
-      newPlugin.scopes =
-        typeof newPlugin.scopes === "string"
-          ? (newPlugin.scopes.split(",") as PluginScopes[])
-          : newPlugin.scopes;
+          const newPlugin = cloneDeep({
+            ...plugin,
+            ...iWindow?.Plugins?.[plugin.pluginName],
+          });
 
-      newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
+          newPlugin.scopes =
+            typeof newPlugin.scopes === "string"
+              ? (newPlugin.scopes.split(",") as PluginScopes[])
+              : newPlugin.scopes;
 
-      this.installPlugin(newPlugin);
+          newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
 
-      if (newPlugin.scopes.includes(PluginScopes.Settings)) {
-        newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+          const isPluginCompatible = this.checkPluginCompatibility(
+            plugin.minDocSpaceVersion,
+          );
+
+          newPlugin.compatible = isPluginCompatible;
+
+          this.installPlugin(newPlugin);
+
+          if (newPlugin.scopes.includes(PluginScopes.Settings)) {
+            newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+          }
+
+          callback?.(newPlugin);
+          resolve(newPlugin);
+        } catch (error) {
+          reject(error);
+        }
+      };
+
+      const onError = () => {};
+
+      const frameDoc = this.pluginFrame?.contentDocument;
+      const script = frameDoc?.createElement("script");
+
+      if (script) {
+        script.setAttribute("type", "text/javascript");
+        script.setAttribute("id", `${plugin.name}`);
+
+        script.onload = onLoad.bind(this);
+        script.onerror = onError.bind(this);
+
+        script.src = plugin.url;
+        script.async = true;
+
+        frameDoc?.body.appendChild(script);
+      } else {
+        reject(new Error("Failed to create script element"));
       }
-
-      callback?.(newPlugin);
-    };
-
-    const onError = () => {};
-
-    const frameDoc = this.pluginFrame?.contentDocument;
-
-    const script = frameDoc?.createElement("script");
-
-    if (script) {
-      script.setAttribute("type", "text/javascript");
-      script.setAttribute("id", `${plugin.name}`);
-
-      if (onLoad) script.onload = onLoad.bind(this);
-      if (onError) script.onerror = onError.bind(this);
-
-      script.src = plugin.url;
-      script.async = true;
-
-      frameDoc?.body.appendChild(script);
-    }
+    });
   };
 
   installPlugin = async (plugin: TPlugin, addToList = true) => {
@@ -409,7 +456,7 @@ class PluginStore {
     name: string,
     status: boolean,
     settings: string,
-    t: TTranslation,
+    t?: TTranslation,
   ) => {
     try {
       let currentSettings = settings;
@@ -433,10 +480,10 @@ class PluginStore {
       if (typeof status !== "boolean") return plugin;
 
       if (status) {
-        toastr.success(t("Common:PluginEnabled"));
+        if (t) toastr.success(t("Common:PluginEnabled"));
         this.activatePlugin(name);
       } else {
-        toastr.success(t("Common:PluginDisabled"));
+        if (t) toastr.success(t("Common:PluginDisabled"));
         this.deactivatePlugin(name);
       }
 
@@ -517,182 +564,132 @@ class PluginStore {
     return currentDeviceType as PluginDevices;
   };
 
+  validateContextMenuItem = (
+    item: IContextMenuItem,
+    ctx: {
+      type?: PluginFileType;
+      fileExst?: string;
+      userRole?: PluginUsersType;
+      device?: PluginDevices;
+      security?: TRoomSecurity | TFolderSecurity;
+      itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity;
+    },
+  ) => {
+    const { type, fileExst, userRole, device, security, itemSecurity } = ctx;
+
+    if (type && item.fileType && !item.fileType.includes(type)) return false;
+
+    if (fileExst && item.fileExt && !item.fileExt.includes(fileExst))
+      return false;
+
+    if (userRole && item.usersTypes && !item.usersTypes.includes(userRole))
+      return false;
+
+    if (device && item.devices && !item.devices.includes(device)) return false;
+
+    if (
+      security &&
+      item.security &&
+      !item.security.every((key) => security[key as keyof typeof security])
+    )
+      return false;
+
+    if (
+      itemSecurity &&
+      item.itemSecurity &&
+      !item.itemSecurity.every(
+        (key) => itemSecurity[key as keyof typeof itemSecurity],
+      )
+    )
+      return false;
+
+    return true;
+  };
+
   getContextMenuKeysByType = (
     type: PluginFileType,
     fileExst: string,
-    security: TRoomSecurity | TFileSecurity | TFolderSecurity,
+    security: TRoomSecurity | TFolderSecurity,
+    itemSecurity: TFileSecurity | TRoomSecurity | TFolderSecurity,
   ) => {
     if (!this.contextMenuItems) return;
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
-    const itemsMap = Array.from(this.contextMenuItems);
+    const items = Array.from(this.contextMenuItems.values());
     const keys: string[] = [];
 
     switch (type) {
       case PluginFileType.Files:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            fileExst,
+            userRole,
+            device,
+            security,
+            itemSecurity,
+          });
 
-          if (!item.fileType) return;
-
-          if (item.fileType.includes(PluginFileType.Files)) {
-            const correctFileExt = item.fileExt
-              ? item.fileExt.includes(fileExst)
-              : true;
-
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (
-              correctFileExt &&
-              correctUserType &&
-              correctDevice &&
-              correctSecurity
-            )
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
+
         break;
       case PluginFileType.Folders:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            userRole,
+            device,
+            security,
+            itemSecurity,
+          });
 
-          if (item.fileType?.includes(PluginFileType.Folders)) {
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (correctUserType && correctDevice && correctSecurity)
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
         break;
       case PluginFileType.Rooms:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            userRole,
+            device,
+            security,
+            itemSecurity,
+          });
 
-          if (item.fileType?.includes(PluginFileType.Rooms)) {
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (correctUserType && correctDevice && correctSecurity)
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
         break;
       case PluginFileType.Image:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            userRole,
+            device,
+            fileExst,
+            security,
+            itemSecurity,
+          });
 
-          if (item.fileType?.includes(PluginFileType.Image)) {
-            const correctFileExt = item.fileExt
-              ? item.fileExt.includes(fileExst)
-              : true;
-
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (
-              correctUserType &&
-              correctDevice &&
-              correctFileExt &&
-              correctSecurity
-            )
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
         break;
       case PluginFileType.Video:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            userRole,
+            device,
+            security,
+            itemSecurity,
+          });
 
-          if (item.fileType?.includes(PluginFileType.Video)) {
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (correctUserType && correctDevice && correctSecurity)
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
         break;
       default:
-        itemsMap.forEach((val) => {
-          const item = val[1];
-          if (item.fileType) return;
-
-          const correctUserType = item.usersTypes
-            ? item.usersTypes.includes(userRole)
-            : true;
-
-          const correctDevice = item.devices
-            ? item.devices.includes(device)
-            : true;
-
-          const correctSecurity = item.security
-            ? item.security.every(
-                (key: string) => security?.[key as keyof typeof security],
-              )
-            : true;
-
-          if (correctUserType && correctDevice && correctSecurity)
-            keys.push(item.key);
-        });
     }
 
     if (keys.length === 0) return null;
@@ -716,26 +713,25 @@ class PluginStore {
 
         const message = await value.onClick(fileId);
 
-        messageActions(
+        messageActions({
           message,
-          null,
-
-          plugin.name,
-
-          this.setSettingsPluginDialogVisible,
-          this.setCurrentSettingsDialogPlugin,
-          this.updatePluginStatus,
-          null,
-          this.setPluginDialogVisible,
-          this.setPluginDialogProps,
-
-          this.updateContextMenuItems,
-          this.updateInfoPanelItems,
-          this.updateMainButtonItems,
-          this.updateProfileMenuItems,
-          this.updateEventListenerItems,
-          this.updateFileItems,
-        );
+          setElementProps: null,
+          pluginName: plugin.name,
+          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
+          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
+          updatePluginStatus: this.updatePluginStatus,
+          updatePropsContext: null,
+          setPluginDialogVisible: this.setPluginDialogVisible,
+          setPluginDialogProps: this.setPluginDialogProps,
+          updateContextMenuItems: this.updateContextMenuItems,
+          updateInfoPanelItems: this.updateInfoPanelItems,
+          updateMainButtonItems: this.updateMainButtonItems,
+          updateProfileMenuItems: this.updateProfileMenuItems,
+          updateEventListenerItems: this.updateEventListenerItems,
+          updateFileItems: this.updateFileItems,
+          updateCreateDialogProps: null,
+          updatePlugin: null,
+        });
       };
 
       this.contextMenuItems.set(key, {
@@ -744,7 +740,7 @@ class PluginStore {
 
         pluginName: plugin.name,
 
-        icon: `${plugin.iconUrl}/assets/${value.icon}`,
+        icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       });
     });
   };
@@ -752,7 +748,8 @@ class PluginStore {
   deactivateContextMenuItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: IContextMenuItem[] = plugin.getContextMenuItems?.();
+    const items: Map<string, IContextMenuItem> | undefined =
+      plugin.getContextMenuItems?.();
 
     if (!items) return;
 
@@ -766,7 +763,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: Map<string, IInfoPanelItem> =
+    const items: Map<string, IInfoPanelItem> | undefined =
       plugin.getInfoPanelItems && plugin.getInfoPanelItems();
 
     if (!items) return;
@@ -791,26 +788,25 @@ class PluginStore {
         const onClick = async (id: number) => {
           const message = await value?.subMenu?.onClick?.(id);
 
-          messageActions(
+          messageActions({
             message,
-            null,
-
-            plugin.name,
-
-            this.setSettingsPluginDialogVisible,
-            this.setCurrentSettingsDialogPlugin,
-            this.updatePluginStatus,
-            null,
-            this.setPluginDialogVisible,
-            this.setPluginDialogProps,
-
-            this.updateContextMenuItems,
-            this.updateInfoPanelItems,
-            this.updateMainButtonItems,
-            this.updateProfileMenuItems,
-            this.updateEventListenerItems,
-            this.updateFileItems,
-          );
+            setElementProps: null,
+            pluginName: plugin.name,
+            setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
+            setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
+            updatePluginStatus: this.updatePluginStatus,
+            updatePropsContext: null,
+            setPluginDialogVisible: this.setPluginDialogVisible,
+            setPluginDialogProps: this.setPluginDialogProps,
+            updateContextMenuItems: this.updateContextMenuItems,
+            updateInfoPanelItems: this.updateInfoPanelItems,
+            updateMainButtonItems: this.updateMainButtonItems,
+            updateProfileMenuItems: this.updateProfileMenuItems,
+            updateEventListenerItems: this.updateEventListenerItems,
+            updateFileItems: this.updateFileItems,
+            updateCreateDialogProps: null,
+            updatePlugin: null,
+          });
         };
 
         submenu.onClick = onClick;
@@ -828,7 +824,7 @@ class PluginStore {
   deactivateInfoPanelItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: Map<string, IInfoPanelItem> =
+    const items: Map<string, IInfoPanelItem> | undefined =
       plugin.getInfoPanelItems && plugin.getInfoPanelItems();
 
     if (!items) return;
@@ -843,7 +839,8 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: IMainButtonItem[] = plugin.getMainButtonItems?.();
+    const items: Map<string, IMainButtonItem> | undefined =
+      plugin.getMainButtonItems?.();
 
     if (!items) return;
 
@@ -869,32 +866,33 @@ class PluginStore {
           const onClick = async () => {
             const message = await i?.onClick?.(storeId);
 
-            messageActions(
+            messageActions({
               message,
-              null,
-
-              plugin.name,
-
-              this.setSettingsPluginDialogVisible,
-              this.setCurrentSettingsDialogPlugin,
-              this.updatePluginStatus,
-              null,
-              this.setPluginDialogVisible,
-              this.setPluginDialogProps,
-
-              this.updateContextMenuItems,
-              this.updateInfoPanelItems,
-              this.updateMainButtonItems,
-              this.updateProfileMenuItems,
-              this.updateEventListenerItems,
-              this.updateFileItems,
-            );
+              setElementProps: null,
+              pluginName: plugin.name,
+              setSettingsPluginDialogVisible:
+                this.setSettingsPluginDialogVisible,
+              setCurrentSettingsDialogPlugin:
+                this.setCurrentSettingsDialogPlugin,
+              updatePluginStatus: this.updatePluginStatus,
+              updatePropsContext: null,
+              setPluginDialogVisible: this.setPluginDialogVisible,
+              setPluginDialogProps: this.setPluginDialogProps,
+              updateContextMenuItems: this.updateContextMenuItems,
+              updateInfoPanelItems: this.updateInfoPanelItems,
+              updateMainButtonItems: this.updateMainButtonItems,
+              updateProfileMenuItems: this.updateProfileMenuItems,
+              updateEventListenerItems: this.updateEventListenerItems,
+              updateFileItems: this.updateFileItems,
+              updateCreateDialogProps: null,
+              updatePlugin: null,
+            });
           };
 
           newItems.push({
             ...i,
             onClick,
-            icon: `${plugin.iconUrl}/assets/${i.icon}`,
+            icon: `${plugin.iconUrl}/assets/${i.icon}?hash=${plugin.version}`,
           });
         });
       }
@@ -906,26 +904,25 @@ class PluginStore {
 
         const message = await value.onClick(currStoreId);
 
-        messageActions(
+        messageActions({
           message,
-          null,
-
-          plugin.name,
-
-          this.setSettingsPluginDialogVisible,
-          this.setCurrentSettingsDialogPlugin,
-          this.updatePluginStatus,
-          null,
-          this.setPluginDialogVisible,
-          this.setPluginDialogProps,
-
-          this.updateContextMenuItems,
-          this.updateInfoPanelItems,
-          this.updateMainButtonItems,
-          this.updateProfileMenuItems,
-          this.updateEventListenerItems,
-          this.updateFileItems,
-        );
+          setElementProps: null,
+          pluginName: plugin.name,
+          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
+          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
+          updatePluginStatus: this.updatePluginStatus,
+          updatePropsContext: null,
+          setPluginDialogVisible: this.setPluginDialogVisible,
+          setPluginDialogProps: this.setPluginDialogProps,
+          updateContextMenuItems: this.updateContextMenuItems,
+          updateInfoPanelItems: this.updateInfoPanelItems,
+          updateMainButtonItems: this.updateMainButtonItems,
+          updateProfileMenuItems: this.updateProfileMenuItems,
+          updateEventListenerItems: this.updateEventListenerItems,
+          updateFileItems: this.updateFileItems,
+          updateCreateDialogProps: null,
+          updatePlugin: null,
+        });
       };
 
       this.mainButtonItems.set(key, {
@@ -934,7 +931,7 @@ class PluginStore {
 
         pluginName: plugin.name,
 
-        icon: `${plugin.iconUrl}/assets/${value.icon}`,
+        icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
         items: newItems.length > 0 ? newItems : null,
       });
     });
@@ -943,7 +940,7 @@ class PluginStore {
   deactivateMainButtonItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: IMainButtonItem[] =
+    const items: Map<string, IMainButtonItem> | undefined =
       plugin.getMainButtonItems && plugin.getMainButtonItems();
 
     if (!items) return;
@@ -958,7 +955,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: IProfileMenuItem[] =
+    const items: Map<string, IProfileMenuItem> | undefined =
       plugin.getProfileMenuItems && plugin.getProfileMenuItems();
 
     if (!items) return;
@@ -982,26 +979,25 @@ class PluginStore {
 
         const message = await value.onClick();
 
-        messageActions(
+        messageActions({
           message,
-          null,
-
-          plugin.name,
-
-          this.setSettingsPluginDialogVisible,
-          this.setCurrentSettingsDialogPlugin,
-          this.updatePluginStatus,
-          null,
-          this.setPluginDialogVisible,
-          this.setPluginDialogProps,
-
-          this.updateContextMenuItems,
-          this.updateInfoPanelItems,
-          this.updateMainButtonItems,
-          this.updateProfileMenuItems,
-          this.updateEventListenerItems,
-          this.updateFileItems,
-        );
+          setElementProps: null,
+          pluginName: plugin.name,
+          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
+          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
+          updatePluginStatus: this.updatePluginStatus,
+          updatePropsContext: null,
+          setPluginDialogVisible: this.setPluginDialogVisible,
+          setPluginDialogProps: this.setPluginDialogProps,
+          updateContextMenuItems: this.updateContextMenuItems,
+          updateInfoPanelItems: this.updateInfoPanelItems,
+          updateMainButtonItems: this.updateMainButtonItems,
+          updateProfileMenuItems: this.updateProfileMenuItems,
+          updateEventListenerItems: this.updateEventListenerItems,
+          updateFileItems: this.updateFileItems,
+          updateCreateDialogProps: null,
+          updatePlugin: null,
+        });
       };
 
       this.profileMenuItems.set(key, {
@@ -1010,7 +1006,7 @@ class PluginStore {
 
         pluginName: plugin.name,
 
-        icon: `${plugin.iconUrl}/assets/${value.icon}`,
+        icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       });
     });
   };
@@ -1018,7 +1014,7 @@ class PluginStore {
   deactivateProfileMenuItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: IProfileMenuItem[] =
+    const items: Map<string, IProfileMenuItem> | undefined =
       plugin.getProfileMenuItems && plugin.getProfileMenuItems();
 
     if (!items) return;
@@ -1033,7 +1029,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: IEventListenerItem[] =
+    const items: Map<string, IEventListenerItem> | undefined =
       plugin.getEventListenerItems && plugin.getEventListenerItems();
 
     if (!items) return;
@@ -1056,26 +1052,25 @@ class PluginStore {
 
         const message = await value.eventHandler();
 
-        messageActions(
+        messageActions({
           message,
-          null,
-
-          plugin.name,
-
-          this.setSettingsPluginDialogVisible,
-          this.setCurrentSettingsDialogPlugin,
-          this.updatePluginStatus,
-          null,
-          this.setPluginDialogVisible,
-          this.setPluginDialogProps,
-
-          this.updateContextMenuItems,
-          this.updateInfoPanelItems,
-          this.updateMainButtonItems,
-          this.updateProfileMenuItems,
-          this.updateEventListenerItems,
-          this.updateFileItems,
-        );
+          setElementProps: null,
+          pluginName: plugin.name,
+          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
+          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
+          updatePluginStatus: this.updatePluginStatus,
+          updatePropsContext: null,
+          setPluginDialogVisible: this.setPluginDialogVisible,
+          setPluginDialogProps: this.setPluginDialogProps,
+          updateContextMenuItems: this.updateContextMenuItems,
+          updateInfoPanelItems: this.updateInfoPanelItems,
+          updateMainButtonItems: this.updateMainButtonItems,
+          updateProfileMenuItems: this.updateProfileMenuItems,
+          updateEventListenerItems: this.updateEventListenerItems,
+          updateFileItems: this.updateFileItems,
+          updateCreateDialogProps: null,
+          updatePlugin: null,
+        });
       };
 
       this.eventListenerItems.set(key, {
@@ -1090,7 +1085,7 @@ class PluginStore {
   deactivateEventListenerItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: IEventListenerItem[] =
+    const items: Map<string, IEventListenerItem> | undefined =
       plugin.getEventListenerItems && plugin.getEventListenerItems();
 
     if (!items) return;
@@ -1105,7 +1100,8 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: IFileItem[] = plugin.getFileItems && plugin.getFileItems();
+    const items: Map<string, IFileItem> | undefined =
+      plugin.getFileItems && plugin.getFileItems();
 
     if (!items) return;
 
@@ -1118,38 +1114,58 @@ class PluginStore {
 
       if (!correctUserType) return;
 
-      const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}`;
-      const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}`;
+      const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}?hash=${plugin.version}`;
+      const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}?hash=${plugin.version}`;
 
       const onClick = async (item: TFile) => {
         const device = this.getCurrentDevice();
         const correctDevice = value.devices
           ? value.devices.includes(device)
           : true;
-        if (!value.onClick || !correctDevice) return;
+
+        const { security } = this.selectedFolderStore;
+
+        const correctSecurity = value.security
+          ? value.security.every(
+              (sKey) => security?.[sKey as keyof typeof security],
+            )
+          : true;
+
+        const correctFileSecurity = value.fileSecurity
+          ? value.fileSecurity.every(
+              (sKey) => item.security[sKey as keyof typeof item.security],
+            )
+          : true;
+
+        if (
+          !value.onClick ||
+          !correctDevice ||
+          !correctSecurity ||
+          !correctFileSecurity
+        )
+          return;
 
         const message = await value.onClick(item);
 
-        messageActions(
+        messageActions({
           message,
-          null,
-
-          plugin.name,
-
-          this.setSettingsPluginDialogVisible,
-          this.setCurrentSettingsDialogPlugin,
-          this.updatePluginStatus,
-          null,
-          this.setPluginDialogVisible,
-          this.setPluginDialogProps,
-
-          this.updateContextMenuItems,
-          this.updateInfoPanelItems,
-          this.updateMainButtonItems,
-          this.updateProfileMenuItems,
-          this.updateEventListenerItems,
-          this.updateFileItems,
-        );
+          setElementProps: null,
+          pluginName: plugin.name,
+          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
+          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
+          updatePluginStatus: this.updatePluginStatus,
+          updatePropsContext: null,
+          setPluginDialogVisible: this.setPluginDialogVisible,
+          setPluginDialogProps: this.setPluginDialogProps,
+          updateContextMenuItems: this.updateContextMenuItems,
+          updateInfoPanelItems: this.updateInfoPanelItems,
+          updateMainButtonItems: this.updateMainButtonItems,
+          updateProfileMenuItems: this.updateProfileMenuItems,
+          updateEventListenerItems: this.updateEventListenerItems,
+          updateFileItems: this.updateFileItems,
+          updateCreateDialogProps: null,
+          updatePlugin: null,
+        });
       };
 
       this.fileItems.set(key, {
@@ -1166,7 +1182,8 @@ class PluginStore {
   deactivateFileItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: IFileItem[] = plugin.getFileItems && plugin.getFileItems();
+    const items: Map<string, IFileItem> | undefined =
+      plugin.getFileItems && plugin.getFileItems();
 
     if (!items) return;
 

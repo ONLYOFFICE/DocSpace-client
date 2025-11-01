@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-import { classNames } from "@docspace/shared/utils";
+import { classNames } from "../../../utils";
 
 import { RoomsType } from "../../../enums";
 
@@ -51,7 +51,8 @@ import styles from "../Selector.module.scss";
 import { EmptyScreenProps } from "../Selector.types";
 
 const linkStyles = {
-  isHovered: true,
+  noHover: true,
+  isHovered: false,
   type: LinkType.action,
   fontWeight: "600",
   className: "empty-folder_link",
@@ -70,12 +71,12 @@ const EmptyScreen = ({
     searchEmptyScreenImage,
     searchEmptyScreenHeader,
     searchEmptyScreenDescription,
-  } = useContext(EmptyScreenContext);
+  } = use(EmptyScreenContext);
 
   const { t } = useTranslation(["Common"]);
 
-  const { onClearSearch } = useContext(SearchContext);
-  const setIsSearch = useContext(SearchDispatchContext);
+  const { onClearSearch } = use(SearchContext);
+  const setIsSearch = use(SearchDispatchContext);
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
     useCreateDropDown();
 
@@ -128,9 +129,7 @@ const EmptyScreen = ({
         {currentHeader}
       </Heading>
 
-      <Text className="empty-description" noSelect>
-        {currentDescription}
-      </Text>
+      <Text className="empty-description">{currentDescription}</Text>
       {createItem ? (
         <div className="buttons">
           <div

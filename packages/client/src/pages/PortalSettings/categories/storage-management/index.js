@@ -40,16 +40,16 @@ import RegionComponent from "./Region";
 import { StyledBody } from "./StyledComponent";
 import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
-const StorageManagement = ({
-  isInit,
-  language,
-  init,
-  clearIntervalCheckRecalculate,
-  standalone,
-}) => {
+const StorageManagementWrapper = (props) => {
+  const {
+    language,
+    clearIntervalCheckRecalculate,
+    standalone,
+    showPortalSettingsLoader,
+  } = props;
+
   useEffect(() => {
     moment.locale(language);
-    init();
 
     return () => {
       clearIntervalCheckRecalculate();
@@ -62,7 +62,7 @@ const StorageManagement = ({
     ready && setDocumentTitle(t("Settings:StorageManagement"));
   }, [ready]);
 
-  if (!ready || !isInit) return <SettingsStorageManagementSkeleton />;
+  if (showPortalSettingsLoader) return <SettingsStorageManagementSkeleton />;
 
   return (
     <StyledBody>
@@ -79,16 +79,17 @@ const StorageManagement = ({
 };
 
 export const Component = inject(
-  ({ authStore, storageManagement, settingsStore }) => {
+  ({ authStore, storageManagement, settingsStore, clientLoadingStore }) => {
     const { language } = authStore;
-    const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
+    const { clearIntervalCheckRecalculate } = storageManagement;
     const { standalone } = settingsStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
     return {
-      isInit,
       language,
-      init,
       clearIntervalCheckRecalculate,
       standalone,
+      showPortalSettingsLoader,
     };
   },
-)(observer(StorageManagement));
+)(observer(StorageManagementWrapper));

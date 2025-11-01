@@ -3,7 +3,7 @@
   "content": "Select a ready PDF form available in {{productName}} and upload it to the room.",
   "content_en_sha1_hash": "9d362f728a1ec68dd269f2a9f82fb1820a420640",
   "created_at": "2025-05-19T21:30:56.555Z",
-  "updated_at": "2025-05-28T09:30:02.112Z",
+  "updated_at": "2025-10-13T13:22:35.616Z",
   "comment": {
     "text": "This translation key is used to display a message when selecting a ready PDF form available in a product. It appears as part of a UI component that guides users to upload a selected PDF form to a room, likely within a document management or collaboration tool.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 196,
+      "line_number": 203,
       "context": "const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,\n );",
       "module": "/packages/client"
     }
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"جاهزًا\" (jaahizan) which translates to 'ready' is a correct translation but might sound slightly formal or stiff in this context. A more natural phrasing might be considered.",
+          "suggestion": "حدد نموذج PDF متاح في {{productName}} وقم بتحميله إلى الغرفة."
+        },
+        {
+          "type": "formatting",
+          "description": "There's a space missing before 'و' (wa) after 'متاحًا' (mutaahan).",
+          "suggestion": "حدد نموذج PDF جاهزًا متاحًا في {{productName}} و قم بتحميله إلى الغرفة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'upload it to the room' could be more accurately translated to reflect uploading to a specific area or space within the product. 'otağa yükləyin' literally means 'upload to the room,' which might not be the intended meaning. It's unclear what 'room' refers to in the context of the product.",
+          "suggestion": "Consider a more context-specific translation. For example, if it's uploading to a dashboard or a designated section, the translation should reflect that. Something like '...və onu sistemə yükləyin' (upload it to the system) or '...və onu bölməyə yükləyin' (upload it to the section) might be more accurate, depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +74,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'μεταφορτώστε' (metaphoroste) is a less common and slightly more formal way to say 'upload'. 'Ανεβάστε' (anavasti) would be more natural and commonly used in this context.",
+          "suggestion": "Επιλέξτε μια έτοιμη φόρμα PDF που είναι διαθέσιμη στο {{productName}} και ανεβάστε την στο δωμάτιο."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,19 +92,37 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"joka on {{productName}}:ssa\" translates to \"which is in {{productName}}\". This is not the intended meaning. It should convey that the PDF form is *available* within the product.",
+          "suggestion": "Valitse valmis PDF-lomake {{productName}}-palvelusta ja lataa se huoneeseen."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'ready PDF form' is best translated as 'formulaire PDF prêt à utiliser' rather than 'formulaire PDF prêt à l'emploi'. While 'prêt à l'emploi' isn't incorrect, 'prêt à utiliser' more closely conveys the meaning of 'ready to use'.",
+          "suggestion": "Sélectionnez un formulaire PDF prêt à utiliser disponible dans {{productName}} et téléchargez-le dans la salle."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"վերբեռնեք այն սենյակ\" is grammatically incorrect and doesn't clearly convey the intended meaning of 'upload it to the room'. It literally translates to 'upload it room'.",
+          "suggestion": "Ընտրել պատրաստ PDF ձևը, որը հասանելի է {{productName}}-ում և վերբեռնեք այն դեպի սենյակ: (or) Ընտրել պատրաստ PDF ձևը, որը հասանելի է {{productName}}-ում և վերբեռնեք այն սենյակի մեջ:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +134,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Select a ready PDF form' is translated as 'PDFフォームを選択し'. While technically correct, a more natural and common phrasing in Japanese would be '用意されたPDFフォームを選択する' (Yōi sareta PDF fōmu o sentaku suru). The current translation sounds slightly stiff.",
+          "suggestion": "用意されたPDFフォームを選択する"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +158,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'pieejama šeit:' (available here) is awkward and doesn't directly translate the English 'available in'. It creates unnecessary phrasing. The English implies availability *within* the product, not just generally 'here'.",
+          "suggestion": "Izvēlieties gatavu PDF veidlapu, kas pieejama {{productName}}, un augšupielādējiet to telpā."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +194,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'existent' (existent) doesn't quite capture the meaning of 'ready' or 'available' in this context. It implies the form already exists and is just waiting to be selected, not that it's prepared and usable.",
+          "suggestion": "Selectați un formular PDF pregătit/disponibil de pe {{productName}} și încărcați-l în sala."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +212,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Select' is not conveyed effectively. 'තෝරාගෙන' implies 'take' or 'grab,' rather than 'select' in the context of choosing something from a list.",
+          "suggestion": "Consider using a word like 'පilihනය කරන්න' (pilihna kārannā) which more accurately translates to 'select'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'upload' is accurate but might be too formal for the target audience.  'උඩුගත කරන්න' (udugata karaṇna) is a direct translation of 'upload.'",
+          "suggestion": "Consider a more user-friendly term if available and appropriate for the context. For instance, something like 'යටත් කරවා ගන්න' (yatath kara va gaṇna) could be explored, but requires careful consideration."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,31 +241,66 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'доступan' (dostupan) used in the Serbian translation doesn't perfectly capture the meaning of 'available'. A more accurate translation would be 'raspoloživ'.",
+          "suggestion": "Одаберите спреман PDF формулар *расположив* у {{productName}} и отпремите га у просторију."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically not incorrect, 'просторију' could be improved. While it means 'room', 'соби' is more commonly used in this context.",
+          "suggestion": "Одаберите спреман PDF формулар расположив у {{productName}} и отпремите га у *соби*."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'formular' should be 'obrazac'. 'Formular' is a loanword from German and not commonly used in Serbian.",
+          "suggestion": "Odaberite spreman PDF obrazac dostupan u {{productName}} i otpremite ga u prostoriju."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of \"{{productName}}\" is consistent with the English, which is good, but ensure this variable is properly handled and replaced with the correct value in the final output.",
+          "suggestion": "Verify the variable replacement mechanism for '{{productName}}' ensures proper rendering."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'передайте' (peredayte) implies 'transmit' or 'hand over', which doesn't quite capture the meaning of 'upload'. A more appropriate verb would convey the act of uploading a file.",
+          "suggestion": "Виберіть готову PDF-форму, доступну в {{productName}}, і завантажте її до кімнати."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'tải nó lên phòng' is not idiomatic. 'Phòng' (room) doesn't quite convey the intended meaning of uploading to a specific online space or workspace. It should be adjusted to reflect the context of uploading to a platform.",
+          "suggestion": "Chọn một biểu mẫu PDF sẵn có trong {{productName}} và tải nó lên hệ thống."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

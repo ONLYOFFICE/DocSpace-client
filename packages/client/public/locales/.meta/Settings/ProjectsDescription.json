@@ -3,7 +3,7 @@
   "content": "Each project is imported as a room, which will contain all the documents and users of this project. The project manager will become the owner of the room",
   "content_en_sha1_hash": "0629e4fc913621c403fea57e62a92efedb650e96",
   "created_at": "2025-05-19T21:30:52.323Z",
-  "updated_at": "2025-05-28T09:30:02.521Z",
+  "updated_at": "2025-08-21T11:22:39.867Z",
   "comment": {
     "text": "Each project is imported as a room, containing all project documents and users. The project manager becomes the room's owner. This text describes the data import process in the portal settings.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 216,
-      "context": "/>\n <ImportSection\n isChecked={importOptions.importProjectFiles}\n onChange={(e) => onChange(e, \"importProjectFiles\")}\n sectionName={t(\"Common:Projects\")}\n description={t(\"Settings:ProjectsDescription\")}\n exportSection={{\n sectionName: t(\"Common:Projects\"),\n workspace: serviceName,\n sectionIcon: ProjectsIcon,\n }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 216,
-      "context": "/>\n <ImportSection\n isChecked={importOptions.importProjectFiles}\n onChange={(e) => onChange(e, \"importProjectFiles\")}\n sectionName={t(\"Common:Projects\")}\n description={t(\"Settings:ProjectsDescription\")}\n exportSection={{\n sectionName: t(\"Common:Projects\"),\n workspace: serviceName,\n sectionIcon: ProjectsIcon,\n }}",
+      "line_number": 227,
+      "context": "{hasProjectFiles ? (\n <ImportSection\n isChecked={importOptions.importProjectFiles}\n onChange={(e) => onChange(e, \"importProjectFiles\")}\n sectionName={t(\"Common:Projects\")}\n description={t(\"Settings:ProjectsDescription\")}\n exportSection={{\n sectionName: t(\"Common:Projects\"),\n workspace: serviceName,\n sectionIcon: ProjectsIcon,\n }}",
       "module": "/packages/client"
     }
   ],
@@ -42,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Each project is imported as a room' is not accurately translated. The Azerbaijani translation 'Hər bir layihə həmin layihənin...' implies the project is imported *into* the project itself, rather than *as* a room.",
-          "suggestion": "Hər bir layihə bir otaq kimi idxal olunur, və bu otaq layihənin bütün sənədlərini və istifadəçilərini ehtiva edəcək."
+          "description": "The phrase \"Each project is imported as a room\" is not perfectly translated. 'Hər bir layihə' translates to 'Each project,' but the rest of the sentence doesn't fully capture the concept of importing as a 'room' in the system.  A more literal translation of 'room' might be needed, or an explanation of the system metaphor.",
+          "suggestion": "Hər bir layihə, layihənin bütün sənəd və istifadəçilərini ehtiva edən bir otaq kimi idxal olunur."
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure is slightly awkward. Combining the two sentences would improve readability.",
-          "suggestion": "Hər bir layihə bir otaq kimi idxal olunur, və bu otaq layihənin bütün sənəd və istifadəçilərini ehtiva edəcək. Layihə meneceri isə otağın sahibi olacaq."
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence \"Hər bir layihə həmin layihənin bütün sənəd və istifadəçilərini ehtiva edən otaq kimi idxal olunur.\" could be slightly improved for flow.  The repetition of 'layihə' (project) is a little clunky.",
+          "suggestion": "Hər bir layihə, layihənin daxilindəki bütün sənəd və istifadəçilərini ehtiva edən bir otaq kimi idxal olunur."
         }
       ],
       "approved_at": null
@@ -59,8 +53,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"imported\" is translated as \"входира\", which isn't the most natural or accurate translation in this context. A better translation would be \"вносен\" (vnosen) which means 'imported' or 'brought in'.",
-          "suggestion": "Replace \"входира\" with \"вносен\"."
+          "description": "The English word 'imported' is translated as 'входира' (vhodira) which isn't the most accurate translation. 'Внася' (vnesya) or 'зарежда' (zarezhda) would be more suitable for 'imported' in this context.",
+          "suggestion": "Replace 'входира' with 'внася' or 'зарежда'."
         }
       ],
       "approved_at": null
@@ -100,9 +94,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"en tant qu'une salle\" is slightly awkward. Using 'comme' is more natural in this context.",
-          "suggestion": "Chaque projet est importé comme une salle comportant tous les documents et les utilisateurs du projet."
+          "type": "incorrect_translation",
+          "description": "The phrase 'project manager' is translated as 'chef du projet'. While understandable, 'responsable de projet' or 'gestionnaire de projet' are more common and professional terms for 'project manager' in French.",
+          "suggestion": "Consider using 'responsable de projet' or 'gestionnaire de projet' instead of 'chef du projet'."
         }
       ],
       "approved_at": null
@@ -113,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'project manager' is translated as 'Ծրագրի ղեկավարը'. While technically correct, a more common and natural translation for 'project manager' in this context might be something like 'պրոյեկտային ղեկավարը' or 'դեպարտամենտի ղեկավարը' depending on the specific nuances intended. 'Ծրագրի ղեկավարը' sounds a bit stiff and formal.",
-          "suggestion": "Consider using 'պրոյեկտային ղեկավարը' or 'դեպարտամենտի ղեկավարը' for a more natural-sounding translation."
+          "description": "The phrase \"project manager\" is translated as \"Ծրագրի ղեկավարը\". While technically correct, a more natural translation in this context might be something like \"դեպարտամենտի ղեկավարը\" or \"ծրագրի պատասխանատուն\" to better convey the role within the application.",
+          "suggestion": "Consider alternatives like \"դեպարտամենտի ղեկավարը\" or \"ծրագրի պատասխանատուն\" for a more natural-sounding translation of 'project manager'."
         }
       ],
       "approved_at": null
@@ -137,18 +131,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Each project is imported as a room\" is awkwardly translated as \"각 프로젝트가 이 프로젝트의 모든 문서 및 사용자를 포함하는 방으로 가져오기되었습니다\". It implies the projects themselves were imported *to* a room, rather than being *represented as* rooms. A more natural translation would convey the idea that the project *is* a room.",
-          "suggestion": "각 프로젝트는 이 프로젝트의 모든 문서와 사용자를 포함하는 방으로 표현됩니다."
+          "description": "The phrase \"Each project is imported as a room\" is translated as \"각 프로젝트가 이 프로젝트의 모든 문서 및 사용자를 포함하는 방으로 가져오기되었습니다.\" This is overly literal and awkward. A more natural translation would convey the sense of import as a 'creation of a room' or 'establishment of a room'. The current translation also implies the projects were imported *in the past*. It should indicate the continuous state.",
+          "suggestion": "각 프로젝트는 이 프로젝트의 모든 문서 및 사용자를 포함하는 방으로 생성됩니다."
         },
         {
           "type": "grammar",
-          "description": "The ending of the sentence \"각 프로젝트가 이 프로젝트의 모든 문서 및 사용자를 포함하는 방으로 가져오기되었습니다\" is grammatically awkward.  The passive voice is too strong and indirect. \"가져오기되었습니다\" is not the most natural verb choice.",
-          "suggestion": "각 프로젝트는 이 프로젝트의 모든 문서와 사용자를 포함하는 방으로 표현됩니다."
+          "description": "The sentence \"각 프로젝트가 이 프로젝트의 모든 문서 및 사용자를 포함하는 방으로 가져오기되었습니다\" is grammatically a bit stiff. The passive voice (곰은소줄쇐줄소줄) makes it sound unnatural. The usage of \"방으로\" can be improved.",
+          "suggestion": "각 프로젝트는 이 프로젝트의 모든 문서와 사용자를 포함하는 방으로 만들어집니다."
         },
         {
           "type": "incorrect_translation",
-          "description": "While \"프로젝트 관리자가 방의 소유자가 됩니다\" is technically correct, it sounds a little formal. It's a direct translation of \"The project manager will become the owner of the room\".",
-          "suggestion": "프로젝트 관리자는 방의 관리자가 됩니다."
+          "description": "The term 'project manager' translates somewhat literally as '프로젝트 관리자'. While accurate, it could be slightly more contextually appropriate depending on the system. Consider whether a more concise term is better suited.",
+          "suggestion": "Consider retaining '프로젝트 담당자' if that term is commonly used in the target audience's context for 'project manager'."
         }
       ],
       "approved_at": null
@@ -156,58 +150,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ໂຄງການ' (project) appears multiple times and is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ຫ້ອງ' (room) appears multiple times and is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ເອກະສານ' (documents) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ຜູ້ໃຊ້' (users) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ຜູ້ຈັດການ' (project manager) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ເຈົ້າຂອງ' (owner) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is generally correct and follows Lao grammar rules.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'will become' can be slightly improved for a more natural Lao flow. A more idiomatic translation could be used, but the current translation is understandable.",
-          "suggestion": "ກາຍເປັນເຈົ້າຂອງຫ້ອງ"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of commas and conjunctions is appropriate and maintains readability.",
-          "suggestion": null
-        },
-        {
-          "type": "cultural",
-          "description": "The translation is culturally appropriate and conveys the original meaning without causing any offense.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -246,13 +189,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"project manager\" is translated as \"Manager de proiect\". While understandable, a more natural and common Romanian translation would be \"Administrator de proiect\" or simply \"Managerul proiectului\".",
-          "suggestion": "Administrator de proiect"
+          "description": "The phrase 'project manager' is translated literally as 'Manager de proiect'. While understandable, a more natural Romanian phrasing would be 'administrator de proiect' or 'șeful de proiect'.",
+          "suggestion": "administrator de proiect sau șeful de proiect"
         },
         {
-          "type": "formatting",
-          "description": "While not a major issue, the translation uses \"va deveni\" which is a future tense marker. A more straightforward and common phrasing would be using the present tense.",
-          "suggestion": "Managerul proiectului este proprietarul sălii."
+          "type": "incorrect_translation",
+          "description": "The translation of 'owner' as 'proprietarul' is technically correct but can sound a bit formal. Considering the context of a project management system, 'administratorul' might be a more fitting choice.",
+          "suggestion": "administratorul"
         }
       ],
       "approved_at": null
@@ -263,8 +206,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term \"room\" is translated as \"помещение\". While \"помещение\" can mean room, in this context \"комната\" is more appropriate. \"Комната\" implies a dedicated, project-specific space, while \"помещение\" is more generic and could refer to any enclosed area.",
-          "suggestion": "Каждый проект импортируется как комната, в которой будут храниться все документы и пользователи этого проекта. Менеджер проекта станет владельцем комнаты"
+          "description": "The word \"помещение\" (pomeshenie) for \"room\" is less common and has a more formal connotation than a more standard translation. While not technically incorrect, it feels slightly awkward in this context.",
+          "suggestion": "Consider using a more neutral term for 'room', such as 'пространство' (prostranstvo) or keeping 'комната' (komnata)."
         }
       ],
       "approved_at": null
@@ -275,13 +218,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'project manager' is translated as 'ව්‍යාපෘතියේ කළමනාකරු'. While technically correct, a more natural and commonly used translation would be 'ප්‍රජෙክት කළමණාකරු'.",
-          "suggestion": "ප්‍රජෙክት කළමණාකරු"
+          "description": "The phrase \"Each project is imported as a room\" is not accurately conveyed. 'ආයාත වන' implies importing, but the nuance of how a project becomes a 'room' is lost. A more accurate translation might focus on the creation or establishment of a room representing the project.",
+          "suggestion": "ප Setiap project is created as a room, which will contain all the documents and users of this project."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'will become the owner' is translated as 'හිමිකරු බවට පත්වනු ඇත'. A more natural phrasing could be 'හිමිකාරයා වනු ඇත'.",
-          "suggestion": "හිමිකාරයා වනු ඇත"
+          "description": "The phrase 'පරිශ්‍රීලකයින්' (parishreelayakayin) is not the standard translation for 'users'. A more common and natural term would be 'භාවිතකරුවන්' (bhavitakaruwan).",
+          "suggestion": "භාවිතකරුවන්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence structure 'ව්‍යාපෘතියේ කළමනාකරු කාමරයේ හිමිකරු බවට පත්වනු ඇත' is grammatically correct but slightly awkward and less direct. It can be improved for a smoother read.",
+          "suggestion": "ව්‍යාපෘතියේ කළමනාකරු කාමරයේ හිමිකරුවා වනු ඇත"
         }
       ],
       "approved_at": null
@@ -295,13 +243,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'uvožen' might be better as 'ustvarjen' or 'oblikovan' depending on the exact meaning intended. 'Uvožen' implies imported from somewhere else, which may not be the intention here.",
-          "suggestion": "Vsak projekt je ustvarjen/oblikovan kot soba..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -310,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"project manager\" is translated as \"Менаџер пројекта\". While understandable, a more natural translation would be \"начелник пројекта\" or \"руководилац пројекта\". \"Менаџер\" is a direct loanword and feels somewhat jarring.",
-          "suggestion": "начелник пројекта"
+          "description": "The English phrase 'project manager' is accurately translated as 'Менаџер пројекта'. However, a more natural and commonly used term in Serbian would be 'начелник пројекта' or 'руководилац пројекта'. 'Менаџер пројекта' is understandable but feels like a direct transliteration and less idiomatic.",
+          "suggestion": "начелник пројекта or руководилац пројекта"
         }
       ],
       "approved_at": null
@@ -322,7 +264,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'project manager' is translated as 'Menadžer projekta'. While technically correct, 'Projektni menadžer' is a more common and natural term in Serbian for a project manager.",
+          "description": "The English phrase 'project manager' is translated as 'Menadžer projekta'. While technically correct, 'Projektni menadžer' would be a more common and natural phrasing in Serbian for 'project manager'.",
           "suggestion": "Projektni menadžer"
         }
       ],
@@ -334,13 +276,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Each project is imported as a room\" is not fully captured in the Turkish translation. While \"Her proje, bu projenin tüm belgelerini ve kullanıcılarını içerecek bir oda olarak içe aktarılır\" conveys the idea of importing as a room, it's a bit verbose. A more direct translation of 'as a room' would be clearer.",
-          "suggestion": "Her proje, bir oda olarak içe aktarılır, bu oda bu projenin tüm belgelerini ve kullanıcılarını içerir."
+          "description": "The phrase \"Each project is imported as a room\" is not accurately translated. The Turkish translation, \"Her proje, bu projenin tüm belgelerini ve kullanıcılarını içerecek bir oda olarak içe aktarılır\", is overly literal and slightly awkward.  A more natural Turkish rendering would emphasize the project *being* a room.",
+          "suggestion": "Her proje bir oda olarak içe aktarılır ve bu odada projenin tüm belgeleri ve kullanıcıları bulunur."
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure is a bit awkward. It could be improved for readability.",
-          "suggestion": "Her proje, bir oda olarak içe aktarılır ve bu oda, bu projenin tüm belgelerini ve kullanıcılarını içerir. Proje yöneticisi odanın sahibi olur."
+          "type": "grammar",
+          "description": "The sentence \"Her proje, bu projenin tüm belgelerini ve kullanıcılarını içerecek bir oda olarak içe aktarılır\" uses the future tense unnecessarily. The phrase 'içerecek' (will contain) sounds formal and not as natural in this context.",
+          "suggestion": "Her proje bir oda olarak içe aktarılır ve bu odada projenin tüm belgeleri ve kullanıcıları bulunur."
         }
       ],
       "approved_at": null
@@ -348,7 +290,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"project manager\" is directly translated as \"менеджер проєкту\". While correct, a more natural Ukrainian phrasing would be \"керівник проєкту\".",
+          "suggestion": "керівник проєкту"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -357,8 +305,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"will become the owner\" is a bit awkward in Vietnamese. A more natural phrasing would be \"sẽ là người quản lý\" or \"sẽ là chủ phòng\".",
-          "suggestion": "Mỗi dự án được nhập dưới dạng một phòng, nó sẽ chứa tất cả các tài liệu và người dùng của dự án này. Người quản lý dự án sẽ là người quản lý của phòng."
+          "description": "The phrase 'The project manager will become the owner of the room' is slightly awkward in Vietnamese. A more natural phrasing would be 'Người quản lý dự án sẽ là chủ phòng'.",
+          "suggestion": "Người quản lý dự án sẽ là chủ phòng"
         }
       ],
       "approved_at": null

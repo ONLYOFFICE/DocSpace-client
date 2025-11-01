@@ -3,7 +3,7 @@
   "content": "SP Entity Id (link to metadata XML)",
   "content_en_sha1_hash": "4f511e076ad748fe91c1e8f019f742f025d91a46",
   "created_at": "2025-05-19T21:30:50.162Z",
-  "updated_at": "2025-05-21T01:50:36.215Z",
+  "updated_at": "2025-09-26T15:21:06.401Z",
   "comment": {
     "text": "This translation key is used for the label and tooltip of a field that displays a link to an entity's metadata XML in a Single Sign-On (SSO) provider settings page. The text appears as a button label in a PortalSettings categories integration setting.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
-      "line_number": 81,
-      "context": "}, []);\n \n return (\n <StyledWrapper>\n <MetadataUrlField\n labelText={t(\"SPEntityId\")}\n name=\"spEntityId\"\n placeholder={`${url}/sso/metadata`}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SPEntityIdTooltip\")}</Text>}\n tooltipClass=\"sp-entity-id-tooltip icon-button\"\n />",
+      "line_number": 83,
+      "context": "if (!ready) return null;\n \n return (\n <StyledWrapper>\n <MetadataUrlField\n labelText={t(\"SPEntityId\")}\n name=\"spEntityId\"\n placeholder={`${url}/sso/metadata`}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SPEntityIdTooltip\")}</Text>}\n tooltipClass=\"sp-entity-id-tooltip icon-button\"\n dataTestId=\"sp_entity_id\"",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"لغة التوصيف الموسعة\" (language description extended) is a very literal and overly technical translation of \"metadata\". It's not how this term is commonly understood in a Saudi Arabian context. It's too complex for the intended audience.",
-          "suggestion": "معرف كيان SP (رابط إلى ملف البيانات الوصفية)"
+          "description": "The translation 'معرف كيان SP (ارتباط إلى بيانات التعريف لغة التوصيف الموسعة)' is overly literal and complex. 'لغة التوصيف الموسعة' translates to 'Extensible Markup Language' which is not needed. The phrase is unnecessarily technical for the intended audience.",
+          "suggestion": "معرف كيان SP (رابط لملف التعريف)"
         },
         {
           "type": "formatting",
-          "description": "The use of parentheses and the term 'رابط' within them makes the phrase feel slightly awkward. Consider streamlining.",
-          "suggestion": "معرف كيان SP (رابط لملف البيانات الوصفية)"
+          "description": "The use of parentheses is slightly awkward. It might be clearer to use a colon or a more natural phrasing.",
+          "suggestion": "معرف كيان SP: رابط لملف التعريف"
         }
       ],
       "approved_at": null
@@ -47,13 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“Müəssisə” translates more accurately to 'Organization' or 'Institution' rather than 'Enterprise' in this context. 'Enterprise' implies a larger, more complex entity. 'Organization' or 'Institution' better represents 'SP' which often refers to a service provider.",
+          "description": "“Müəssisə” translates more accurately to 'Organization' rather than 'Institution' in this context. 'Institution' implies a more formal or educational setting.",
           "suggestion": "SP Təşkilat identifikatoru (metada XML üçün keçid)"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'keçid' is acceptable, but 'bağlantı' might be a more natural and common choice for 'link' in Azerbaijani in a technical context.",
-          "suggestion": "SP Təşkilat identifikatoru (metada XML üçün bağlantı)"
         }
       ],
       "approved_at": null
@@ -64,13 +59,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Идентификация на обекта на доставчика на услуги' is overly literal and doesn't fully convey the meaning of 'SP Entity Id'. 'SP Entity Id' refers to a specific identifier, not just the identification of an object.",
-          "suggestion": "Consider a more accurate translation like 'ИД на доставчика на услуги' or 'Идентификатор на доставчика на услуги'."
+          "description": "The translation 'Идентификация на обекта на доставчика на услуги (връзка към XML метаданни)' is a bit verbose and not a direct translation of 'SP Entity Id'.  'Идентификация на обекта на доставчика на услуги' is 'Service Provider Object Identification' which isn't the intended meaning. It's more accurately 'SP Entity ID' or 'Идентификатор на SP обекта'.",
+          "suggestion": "Идентификатор на SP обекта (връзка към XML метаданни)"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the phrase 'връзка към XML метаданни' could be more concisely stated.",
-          "suggestion": "Consider 'линк към XML метаданни' or 'препратка към XML метаданни'."
+          "description": "While the parentheses are correct, considering the brevity needed for a key name, it might be better to consider removing it.",
+          "suggestion": "Идентификатор на SP обекта, връзка към XML метаданни"
         }
       ],
       "approved_at": null
@@ -92,9 +87,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'μεταδεδομένων' is spelled incorrectly. It should be 'μεταδεδομένων'.",
-          "suggestion": "μεταδεδομένων"
+          "type": "incorrect_translation",
+          "description": "The translation 'Αναγνωριστικό οντότητας παρόχου υπηρεσιών' is a literal translation of 'SP Entity Id' and while technically correct, it's quite verbose and not how this term is typically used in Greek technical contexts. A more natural and concise translation would be 'SP Entity ID' or 'Αναγνωριστικό παρόχου (SP ID).",
+          "suggestion": "Consider 'SP Entity ID' or 'Αναγνωριστικό παρόχου (SP ID)'"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase '(σύνδεση με XML μεταδεδομένων)' is grammatically correct, but could be phrased more smoothly. The word 'σύνδεση' (connection) is not strictly necessary and can be implied.",
+          "suggestion": "Consider removing 'σύνδεση με' and simply stating '(XML μεταδεδομένων)'"
         }
       ],
       "approved_at": null
@@ -105,8 +105,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a period after 'Id' which isn't present in the English source. While not strictly incorrect, it deviates from the original format and could be inconsistent with other translations.",
-          "suggestion": "Remove the period after 'Id' to match the English source: 'Id de entidad SP (enlace al XML de metadatos)'"
+          "description": "The translation uses an abbreviation 'SP' without explanation. While likely understood by some, providing a short explanation would improve clarity for a broader audience.",
+          "suggestion": "Id. de entidad de Proveedor de Servicios (enlace al XML de metadatos)"
         }
       ],
       "approved_at": null
@@ -123,8 +123,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation lacks the parentheses after \"Id entité SP\". The original English contains '(link to metadata XML)' which indicates a specific format/content should be present.",
-          "suggestion": "Id entité SP (lien vers les métadonnées XML)"
+          "description": "The translation uses parentheses instead of brackets. The English uses brackets to denote a link, which is standard for technical documentation. While not incorrect, it deviates from the original format and should be consistent.",
+          "suggestion": "Id entité SP (lien vers les métadonnées XML) -> Id entité SP [lien vers les métadonnées XML]"
         }
       ],
       "approved_at": null
@@ -135,13 +135,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'անձի' (anzi) translates more accurately as 'entity's' or 'individual's' rather than just 'of'. It implies ownership or belonging. While understandable, it's slightly less precise.",
-          "suggestion": "SP entity (հղում դեպի մետատվյալներ XML)"
-        },
-        {
-          "type": "formatting",
-          "description": "While the parentheses are correct, consider whether they should be consistently used throughout the document if other similar terms also use parentheses.",
-          "suggestion": "SP entity ID (link to metadata XML) - Maintain consistent formatting."
+          "description": "The translation of \"SP Entity Id\" is technically correct, but could be more natural. \"անձի\" implies a person or individual. \"Entity\" in this context refers to a system or application.",
+          "suggestion": "SP համակարգի ID (հղում դեպի մետատվյալներ XML)"
         }
       ],
       "approved_at": null
@@ -149,30 +144,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'ID entità SP' could be improved to be more natural in Italian. 'ID fornitore di servizi' or 'Identificativo fornitore di servizi' would be more commonly used and understood in a technical context, especially regarding Single Sign-On.",
-          "suggestion": "ID fornitore di servizi (Identificativo fornitore di servizi)"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'link to metadata XML' is missing the translation for 'link'. It should be 'collegamento ai metadati XML'.",
-          "suggestion": "collegamento ai metadati XML"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"メタデータXMLへのリンク\" is a very literal translation. A more natural Japanese phrasing would be more appropriate in a UI context. The original English describes a link *to* metadata XML.",
-          "suggestion": "メタデータXMLへのリンク (リンク先: メタデータXML)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -187,8 +165,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation includes parentheses around the entire phrase, which might be visually awkward. It's unclear if this was intentional to match the English.",
-          "suggestion": "Consider removing the parentheses if they are not required for stylistic reasons.  Alternatively, ensure parentheses are consistently used in all related translations."
+          "description": "The Lao translation includes parentheses around the English phrase 'SP Entity Id'. This might not be standard practice in Lao and could be confusing. It's unclear if this was intentional.",
+          "suggestion": "Consider removing the parentheses: 'SP Entity Id (ລິ້ງຫາ metadata XML)' becomes 'SP Entity Id ລິ້ງຫາ metadata XML'"
         }
       ],
       "approved_at": null
@@ -199,13 +177,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SP entītijas ID' is a literal translation of 'SP Entity Id'. While understandable, 'SP entītātes ID' would be a more accurate and natural-sounding translation of 'Entity' in this context.",
-          "suggestion": "SP entītātes ID"
+          "description": "The translation 'SP entītijas ID' is a literal translation of 'SP Entity Id'. While understandable, it's not the most natural or idiomatic way to express it in Latvian. 'SP identitātes ID' would be a more appropriate translation.",
+          "suggestion": "SP identitātes ID"
         },
         {
           "type": "formatting",
-          "description": "The phrase '(saite uz metadatu XML)' is grammatically correct, but a colon or dash might improve readability and flow with the preceding 'ID' part.",
-          "suggestion": "SP entītātes ID: saite uz metadatu XML"
+          "description": "The translation of 'link to metadata XML' is missing entirely.",
+          "suggestion": "SP identitātes ID (saite uz metadatu XML)"
         }
       ],
       "approved_at": null
@@ -228,13 +206,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ID da Entidade PS (ligar ao XML com os metadados)' is not a natural or accurate translation of 'SP Entity Id (link to metadata XML)'. 'PS' is an abbreviation not commonly used in Portuguese. 'Ligar ao XML com os metadados' is overly literal and clunky.",
+          "description": "The translation 'ID da Entidade PS (ligar ao XML com os metadados)' is not a natural or accurate translation of 'SP Entity Id (link to metadata XML)'. 'PS' is an abbreviation that doesn't readily translate and can be confusing. 'Ligar ao XML com os metadados' is a literal translation of 'link to metadata XML' and is awkward.",
           "suggestion": "ID da Entidade SP (link para o XML de metadados)"
         },
         {
           "type": "formatting",
-          "description": "The parentheses usage is not optimal. It's better to use 'para' instead of 'de' to show the connection between 'ID' and the XML.",
-          "suggestion": "ID da Entidade SP (link para o XML de metadados)"
+          "description": "The parentheses around 'ligar ao XML com os metadados' are not ideal and break the flow of the sentence. ",
+          "suggestion": "Consider removing the parentheses and adjusting the sentence structure for better readability."
         }
       ],
       "approved_at": null
@@ -251,13 +229,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'SP Entity Id' is best translated as 'ID entitate furnizor de servicii' or 'Identificator entitate furnizor de servicii'. The current translation, while understandable, lacks the typical technical precision.",
-          "suggestion": "Consider using 'Identificator entitate furnizor de servicii' for a more precise translation."
+          "description": "The translation 'ID entitate furnizor de servicii' is a literal translation but might not be the most natural or common phrasing for 'SP Entity Id' in a technical context. 'Furnizor de servicii' is overly verbose.",
+          "suggestion": "ID entitate SP (link către fișierul XML de metadate)"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the inclusion of '(linkul spre fișerul de metadate XML)' is a bit clunky and might benefit from a more integrated phrasing. It feels like an afterthought.",
-          "suggestion": "Consider incorporating the link information more elegantly, such as 'ID entitate furnizor de servicii (link către fișierul XML cu metadate)' or 'ID entitate furnizor de servicii - link către fișierul XML cu metadate'."
+          "description": "The parenthetical phrase '(link către fișierul XML de metadate)' is separated by a space before the opening parenthesis.",
+          "suggestion": "'(link către fișierul XML de metadate)'"
         }
       ],
       "approved_at": null
@@ -268,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon at the end of the Russian translation creates a slightly awkward phrasing. It's technically correct, but less natural in this context.",
-          "suggestion": "Идентификатор сущности поставщика сервиса (ссылка на XML-файл метаданных)"
+          "description": "The colon at the end of the Russian translation feels a bit abrupt and might be better handled with a slightly different phrasing. While technically correct, it reads slightly less natural.",
+          "suggestion": "Идентификатор сущности поставщика сервиса (ссылка на XML-файл метаданных)."
         }
       ],
       "approved_at": null
@@ -280,13 +258,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SP හැඳු. (පාරදත්ත XML වෙත සබැඳියි)' while conveying a general meaning, isn't the most accurate translation of 'SP Entity Id (link to metadata XML)'. 'හැඳු' is a shortened form and 'සබැඳියි' is a literal translation of 'link' which is less natural. A more natural phrasing might include 'SP අනන්‍ය හැඳුම් අංකය (පාරදත්ත XML ගොනුවට සලකුණු කිරීම)'",
-          "suggestion": "SP අනන්‍ය හැඳුම් අංකය (පාරදත්ත XML ගොනුවට සලකුණු කිරීම)"
+          "description": "The translation 'SP හැඳු.' is a shortened form and might be confusing. 'SP හැඳුම' (SP Häduma) would be a more complete and clear translation of 'SP Entity Id'.",
+          "suggestion": "SP හැඳුම (පාරදත්ත XML වෙත සබැඳියි)"
         },
         {
-          "type": "formatting",
-          "description": "The parenthetical explanation '(පාරදත්ත XML වෙත සබැඳියි)' is technically correct, but it might benefit from a more standard format for Sinhala documentation. A full stop at the end of the primary translation would be common.",
-          "suggestion": "SP අනන්‍ය හැඳුම් අංකය (පාරදත්ත XML ගොනුවට සලකුණු කිරීම)."
+          "type": "incorrect_translation",
+          "description": "The phrase 'පාරදත්ත XML වෙත සබැඳියි' is a literal translation of 'link to metadata XML'.  A more natural phrasing in Sinhala might be 'පාරදත්ත XML ගොනුවට සබැඳියි' (paradattta XML gonuwa sabaḍiyī).",
+          "suggestion": "පාරදත්ත XML ගොනුවට සබැඳියි"
         }
       ],
       "approved_at": null
@@ -297,7 +275,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'SP entity ID' is more naturally rendered as 'Identifikátor SP entity' in Slovak. 'SP entity ID' feels like a transliteration rather than a proper translation.",
+          "description": "While 'SP entity ID' is understandable, a more precise translation for 'SP Entity Id' would be 'Identifikátor SP entity'. The current translation lacks the proper noun nuance.",
           "suggestion": "Identifikátor SP entity (odkaz na metadáta XML)"
         }
       ],
@@ -309,13 +287,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SP ID entitete' is not the most accurate translation of 'SP Entity Id'. 'Entitete' is the plural form of 'entiteta'. It should be 'entiteta'.",
-          "suggestion": "SP ID entiteta (povezava do meta podatkov XML)"
+          "description": "The translation 'SP ID entitete' doesn't accurately reflect 'SP Entity Id'. 'Entity' is a specific term that should be translated more precisely. 'ID' is acceptable but 'Entity' needs more attention.",
+          "suggestion": "SP ID entitete (povezava do meta podatkov XML) could be improved to 'SP identitete entitete (povezava do meta podatkov XML)' or 'SP entitete ID (povezava do meta podatkov XML)'."
         },
         {
           "type": "spelling",
-          "description": "The word 'ID' should be capitalized as 'Id'.",
-          "suggestion": "SP Id entiteta (povezava do meta podatkov XML)"
+          "description": "The word 'entitete' likely needs to be 'entitete'. It's a potential misspelling.",
+          "suggestion": "entitete"
         }
       ],
       "approved_at": null
@@ -326,13 +304,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"link\" as \"линк\" is a transliteration, not a true translation. A more appropriate Serbian (Cyrillic) word would be \"веза\" or \"путања\".",
-          "suggestion": "SP Entitet ID (веза ка метаподацима XML)"
+          "description": "The translation of \"link\" is not accurate. \"Link\" should be translated to something more natural in Serbian, such as \"veza\" or \"povezane metapodacima XML\" depending on the context. \"link\" is a direct transliteration and doesn't convey the intended meaning well.",
+          "suggestion": "SP Entitet ID (veza ka metapodacima XML)"
         },
         {
           "type": "formatting",
-          "description": "While not incorrect, using parentheses around \"веза\" would maintain the original formatting more closely. Alternatively, a dash or colon could be used depending on preference.",
-          "suggestion": "SP Entitet ID (веза до метаподацима XML)"
+          "description": "The use of Cyrillic for \"link\" might appear inconsistent and unprofessional. While Cyrillic is the standard, maintaining consistency with other technical terms might be beneficial. Consider using a transliteration if other similar terms use that approach.",
+          "suggestion": "SP Entitet ID (veza ka metapodacima XML)"
         }
       ],
       "approved_at": null
@@ -343,13 +321,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Entitet' is not the most natural translation of 'Entity' in this context. 'Entitet' is more formal and less commonly used in this technical setting. 'Identitet' would be a more appropriate translation.",
+          "description": "The translation 'Entitet' is technically correct, but 'Entitet' is less common and slightly more formal than 'Identitet' in this context. 'Identitet' would be a more natural and understandable choice for 'Entity' in a technical setting.",
           "suggestion": "SP Identitet ID (link ka metapodacima XML)"
         },
         {
           "type": "formatting",
-          "description": "The parentheses placement 'ka metapodacima' can be improved for better readability. It should be placed closer to the 'link' word.",
-          "suggestion": "SP Identitet ID (link do metapodacima XML)"
+          "description": "The parentheses are used correctly, but a space after the colon in 'ID:' would improve readability.",
+          "suggestion": "SP Identitet ID : (link ka metapodacima XML)"
         }
       ],
       "approved_at": null
@@ -360,13 +338,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Varlık Kimliği' while technically correct, could be improved for clarity and consistency with common terminology. 'Varlık ID' would be a more standard and easily understood term in Turkish IT contexts.",
-          "suggestion": "SP Varlık ID (meta veri XML bağlantısı)"
+          "description": "While 'Varlık Kimliği' is a reasonable translation for 'Entity Id', it might be perceived as slightly formal or technical for a general user. 'Kimlik' would be more commonly understood.",
+          "suggestion": "SP Kimliği (meta veri XML bağlantısı)"
         },
         {
           "type": "formatting",
-          "description": "The use of parentheses around 'meta veri XML bağlantısı' feels slightly awkward. A colon or hyphen might read more naturally.",
-          "suggestion": "SP Varlık ID: meta veri XML bağlantısı"
+          "description": "The use of parentheses around 'meta veri XML bağlantısı' isn't ideal. It might be better to integrate it more naturally into the sentence.",
+          "suggestion": "SP Kimliği (meta veri XML'e bağlantı)"
         }
       ],
       "approved_at": null
@@ -377,13 +355,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The term 'посилання' is generally correct but 'посилання на' is slightly more idiomatic for indicating a link or reference.",
+          "description": "The term 'посилання' can also be translated as 'посилання на'. While 'посилання' is acceptable, 'посилання на' might be more precise in this context to explicitly denote a link.",
           "suggestion": "посилання на XML-файл метаданих"
         },
         {
-          "type": "formatting",
-          "description": "While technically correct, consider adding a hyphen to 'XML-файл' for consistency with the English version.",
-          "suggestion": "XML-файл метаданих"
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'сутності постачальника сервісу' is a bit verbose. A more concise and natural translation for 'SP Entity' might be 'сервісу' or 'провайдера'.",
+          "suggestion": "Ідентифікатор сутності сервісу (посилання на XML-файл метаданих)"
         }
       ],
       "approved_at": null
@@ -391,13 +369,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"(liên kết đến siêu dữ liệu XML)\" is a literal translation of \"(link to metadata XML)\". While technically correct, it might be more natural to say something like \"(liên kết tới tệp XML siêu dữ liệu)\" or \"(đường dẫn đến tệp XML siêu dữ liệu)\" to convey the meaning more clearly in Vietnamese.",
-          "suggestion": "(liên kết tới tệp XML siêu dữ liệu)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

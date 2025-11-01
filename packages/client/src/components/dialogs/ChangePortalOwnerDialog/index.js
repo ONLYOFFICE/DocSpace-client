@@ -160,6 +160,7 @@ const ChangePortalOwnerDialog = ({
             currentUserId={id}
             disableDisabledUsers
             filter={filter}
+            dataTestId="change_portal_owner_people_selector"
           />
         </ModalDialog.Container>
       ) : null}
@@ -168,20 +169,20 @@ const ChangePortalOwnerDialog = ({
         <StyledOwnerInfo>
           <Avatar className="avatar" role="owner" source={avatar} size="big" />
           <div className="info">
-            <Text className="display-name" noSelect title={displayName}>
+            <Text className="display-name" title={displayName}>
               {displayName}
             </Text>
-            <Text className="status" noSelect title={t("Common:Owner")}>
+            <Text className="status" title={t("Common:Owner")}>
               {t("Common:Owner")}
             </Text>
           </div>
         </StyledOwnerInfo>
 
         <StyledPeopleSelectorInfo>
-          <Text className="new-owner" noSelect title={t("NewPortalOwner")}>
+          <Text className="new-owner" title={t("NewPortalOwner")}>
             {t("NewPortalOwner", { productName: t("Common:ProductName") })}
           </Text>
-          <Text className="description" noSelect title={t("ChangeInstruction")}>
+          <Text className="description" title={t("ChangeInstruction")}>
             {t("ChangeInstruction", { productName: t("Common:ProductName") })}
           </Text>
         </StyledPeopleSelectorInfo>
@@ -194,6 +195,7 @@ const ChangePortalOwnerDialog = ({
                 className="cross-icon"
                 onClick={onClearSelectedItem}
                 src={CrossReactSvgUrl}
+                data-testid="change_portal_owner_clear_selected_owner_button"
               />
             </StyledSelectedOwner>
 
@@ -202,6 +204,7 @@ const ChangePortalOwnerDialog = ({
               isHovered
               fontWeight={600}
               onClick={onTogglePeopleSelector}
+              dataTestId="change_portal_owner_change_user_link"
             >
               {t("ChangeUser")}
             </Link>
@@ -214,17 +217,18 @@ const ChangePortalOwnerDialog = ({
               label={t("Translations:ChooseFromList")}
               noSelect
               titleText={t("Translations:ChooseFromList")}
+              testId="change_portal_owner_choose_from_list_button"
             />
           </StyledPeopleSelector>
         )}
 
         <StyledAvailableList>
-          <Text className="list-header" noSelect title={t("PortalOwnerCan")}>
+          <Text className="list-header" title={t("PortalOwnerCan")}>
             {t("PortalOwnerCan", { productName: t("Common:ProductName") })}
           </Text>
 
           {ownerRights?.map((item) => (
-            <Text key={item} className="list-item" noSelect title={item}>
+            <Text key={item} className="list-item" title={item}>
               — {item};
             </Text>
           ))}
@@ -232,7 +236,7 @@ const ChangePortalOwnerDialog = ({
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <StyledFooterWrapper>
-          <Text className="info" noSelect>
+          <Text className="info">
             {t("Settings:AccessRightsChangeOwnerConfirmText")}
           </Text>
           <div className="button-wrapper">
@@ -245,6 +249,7 @@ const ChangePortalOwnerDialog = ({
               isDisabled={!selectedUser}
               onClick={onChangeAction}
               isLoading={isLoading}
+              testId="change_portal_owner_change_button"
             />
             <Button
               tabIndex={5}
@@ -253,6 +258,7 @@ const ChangePortalOwnerDialog = ({
               scale
               onClick={onCloseAction}
               isDisabled={isLoading}
+              testId="change_portal_owner_cancel_button"
             />
           </div>
         </StyledFooterWrapper>

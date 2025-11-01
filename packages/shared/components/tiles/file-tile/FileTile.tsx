@@ -27,23 +27,19 @@
 import React, { useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "../../checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-import classNames from "classnames";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { isMobile } from "@docspace/shared/utils";
+} from "../../context-menu-button";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import { HeaderType } from "../../context-menu/ContextMenu.types";
+import { Link, LinkType } from "../../link";
+import { Loader, LoaderTypes } from "../../loader";
+import { hasOwnProperty } from "../../../utils/object";
+import { isMobile, classNames, isTablet } from "../../../utils";
 
-import { FileTileProps } from "./FileTile.types";
+import { FileChildProps, FileTileProps } from "./FileTile.types";
 
 import styles from "./FileTile.module.scss";
 
@@ -52,7 +48,6 @@ const svgLoader = () => <div style={{ width: "96px" }} />;
 const FileTile = ({
   checked,
   children,
-  contextButtonSpacerWidth,
   contextOptions,
   contentElement,
   inProgress,
@@ -60,7 +55,6 @@ const FileTile = ({
   element,
   onSelect,
   setSelection,
-  sideColor,
   temporaryIcon,
   thumbnail,
   thumbSize,
@@ -78,6 +72,7 @@ const FileTile = ({
   badges,
   isEdit,
   forwardRef,
+  dataTestId,
   ...rest
 }: FileTileProps) => {
   const childrenArray = React.Children.toArray(children);
@@ -86,26 +81,42 @@ const FileTile = ({
   const { t } = useTranslation(["Translations"]);
 
   const [errorLoadSrc, setErrorLoadSrc] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const cm = useRef<ContextMenuRefType>(null);
+
+  const onHover = () => {
+    setIsHovered(true);
+  };
+
+  const onLeave = () => {
+    setIsHovered(false);
+  };
 
   const renderContext =
     hasOwnProperty(item, "contextOptions") &&
     contextOptions &&
     contextOptions.length > 0;
 
-  const firstChild = childrenArray[0];
+  const firstChild = childrenArray[0] as React.ReactElement<FileChildProps>;
   const contextMenuHeader: HeaderType | undefined =
     React.isValidElement(firstChild) && firstChild.props?.item
       ? {
-          title: firstChild.props.item.title,
+          title: firstChild.props.item.title || "",
           icon: firstChild.props.item.icon,
-          original: firstChild.props.item.logo?.original,
-          large: firstChild.props.item.logo?.large,
-          medium: firstChild.props.item.logo?.medium,
-          small: firstChild.props.item.logo?.small,
+          original: firstChild.props.item.logo?.original || "",
+          large: firstChild.props.item.logo?.large || "",
+          medium: firstChild.props.item.logo?.medium || "",
+          small: firstChild.props.item.logo?.small || "",
           color: firstChild.props.item.logo?.color,
-          cover: firstChild.props.item.logo?.cover,
+          cover: firstChild.props.item.logo?.cover
+            ? typeof firstChild.props.item.logo.cover === "string"
+              ? {
+                  data: firstChild.props.item.logo.cover,
+                  id: "",
+                }
+              : firstChild.props.item.logo.cover
+            : undefined,
         }
       : undefined;
 
@@ -198,7 +209,9 @@ const FileTile = ({
       !(e.target as HTMLElement).closest(".badges") &&
       !(e.target as HTMLElement).closest(".item-file-name") &&
       !(e.target as HTMLElement).closest(".tag") &&
-      !(e.target as HTMLElement).closest(`.${styles.checkbox}`)
+      !(e.target as HTMLElement).closest(`.${styles.checkbox}`) &&
+      !(e.target as HTMLElement).closest(".expandButton") &&
+      !(e.target as HTMLElement).closest(".p-contextmenu")
     ) {
       if (
         (e.target as HTMLElement).nodeName !== "IMG" &&
@@ -235,6 +248,9 @@ const FileTile = ({
   const isImageOrMedia =
     item?.viewAccessibility?.ImageView || item?.viewAccessibility?.MediaView;
 
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
   const fileTileClassNames = classNames(styles.fileTile, {
     [styles.isBlocked]: isBlockingOperation,
     [styles.showHotkeyBorder]: showHotkeyBorder,
@@ -242,6 +258,7 @@ const FileTile = ({
     [styles.isActive]: isActive,
     [styles.checked]: checked,
     [styles.isEdit]: isEdit,
+    [styles.isTouchDevice]: isTouchDevice || isMobile() || isTablet(),
   });
 
   const iconClassNames = classNames(styles.icon, {
@@ -251,6 +268,7 @@ const FileTile = ({
   const iconContainerClassNames = classNames(styles.iconContainer, {
     [styles.isDragging]: isDragging,
     [styles.inProgress]: inProgress,
+    [styles.checked]: checked,
   });
 
   const checkboxClassNames = classNames(styles.checkbox, {
@@ -265,6 +283,10 @@ const FileTile = ({
     [styles.isHighlight]: isHighlight,
   });
 
+  const contentClassNames = classNames(styles.content, "content", {
+    [styles.isHovered]: isHovered,
+  });
+
   return (
     <div
       {...rest}
@@ -272,22 +294,37 @@ const FileTile = ({
       className={fileTileClassNames}
       onContextMenu={onContextMenu}
       onClick={onFileClick}
+      data-testid={dataTestId ?? "tile"}
     >
       <div className={fileTileTopClassNames} onClick={thumbnailClick}>
         {icon}
       </div>
 
-      <div className={classNames(styles.icons, styles.isBadges)}>{badges}</div>
       {contentElement ? (
-        <div className={classNames(styles.icons, styles.isQuickButtons)}>
+        <div
+          className={classNames(styles.icons, styles.isQuickButtons)}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
           {contentElement}
         </div>
       ) : null}
+      <div
+        className={classNames(styles.icons, styles.isBadges)}
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
+      >
+        {badges}
+      </div>
 
       <div className={fileTileBottomClassNames}>
         {element && !isEdit ? (
           !inProgress ? (
-            <div className={iconContainerClassNames}>
+            <div
+              className={iconContainerClassNames}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
               <div className={iconClassNames} onClick={onFileIconClick}>
                 {element}
               </div>
@@ -308,9 +345,13 @@ const FileTile = ({
           )
         ) : null}
 
-        <div className={styles.content}>{FilesTileContent}</div>
+        <div className={contentClassNames}>{FilesTileContent}</div>
 
-        <div className={styles.optionButton}>
+        <div
+          className={styles.optionButton}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
           {renderContext ? (
             <ContextMenuButton
               isFill

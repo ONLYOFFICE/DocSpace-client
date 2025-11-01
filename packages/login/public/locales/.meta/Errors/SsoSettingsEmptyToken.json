@@ -3,7 +3,7 @@
   "content": "Authentication token could not be found",
   "content_en_sha1_hash": "eb23fffc3123c9e260912ae2c41dbb7d3930a14a",
   "created_at": "2025-05-19T21:30:57.310Z",
-  "updated_at": "2025-05-28T09:30:02.896Z",
+  "updated_at": "2025-09-07T07:53:15.427Z",
   "comment": {
     "text": "The translation key \"SsoSettingsEmptyToken\" is used to display an error message when an authentication token cannot be found. It appears in a UI element where user input or settings are validated, prompting the user to re-authenticate or correct their settings. This error typically occurs when the SSO settings are disabled or not properly configured.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 92,
+      "line_number": 93,
       "context": "case \"SsoSettingsDisabled\":\n return t(\"Errors:SsoSettingsDisabled\");\n case \"ErrorNotAllowedOption\":\n return t(\"Errors:ErrorNotAllowedOption\");\n case \"SsoSettingsEmptyToken\":\n return t(\"Errors:SsoSettingsEmptyToken\");\n case \"SsoSettingsNotValidToken\":\n return t(\"Errors:SsoSettingsNotValidToken\");\n case \"SsoSettingsCantCreateUser\":\n return t(\"Errors:SsoSettingsCantCreateUser\");\n case \"SsoSettingsUserTerminated\":",
       "module": "/packages/login"
     }
@@ -33,13 +33,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"İdentifikasiya nişanı tapılmadı\" is a literal translation of 'identification mark was not found' and doesn't fully convey the meaning of 'Authentication token could not be found'. It lacks the specific context of an authentication token.",
+          "suggestion": "Consider a more accurate translation like \"Zaviyyə müsahibəsi nişanı tapılmadı\" or \"Müvafiqiyyət nişanı tapılmadı\" (depending on the specific technical terminology used in Azerbaijani for authentication tokens). Alternatively, a more general translation like \"Təsdiq nişanı tapılmadı\" could also work, although it loses some of the original specificity."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Токът за удостоверяване не можа да бъде намерен\" is not the most natural or accurate translation of \"Authentication token could not be found\". \"Ток\" (tok) refers to current (electricity).  It's misleading to use it in this context.",
+          "suggestion": "Входният токен не може да бъде намерен"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The German translation \"Das Authentifizierungstoken kann nicht gefunden sein\" uses the incorrect tense. It should use the passive voice in present tense, or the passive voice in perfect tense.",
+          "suggestion": "Das Authentifizierungstoken kann nicht gefunden werden."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Նույնականացման նշանը չհաջողվեց գտնել\" is a literal translation that doesn't quite capture the intended meaning of 'Authentication token could not be found'. It translates to 'Identification sign could not be found'. A more accurate and natural translation would be something like \"Մեկտեղացման վավերացման թողնարկույթը չգտնվեց\" or \"Համակարգման թողնարկույթը չգտնվեց\".",
+          "suggestion": "Մեկտեղացման վավերացման թողնարկույթը չգտնվեց"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +129,30 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຢືນຢັນ' is technically correct but can be simplified for better readability in this context. It's a bit verbose for a technical error message.",
+          "suggestion": "ບໍ່ພົບໂທເຄັນການພິສູດຕົວຕົນ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the Lao translation is understandable, 'ການພິສູດຢືນຢັນຕົວຕົນ' is a very literal translation of 'Authentication.'  A more natural phrasing might improve clarity.",
+          "suggestion": "ບໍ່ພົບໂທເຄັນສຳລັບການເຂົ້າສູ່ລະບົບ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Neizdevās atrast autentifikācijas marķieri' is a literal translation of 'Authentication token could not be found'. While understandable, it's not the most natural phrasing in Latvian. 'Marķieris' (marker) can sound technical and less user-friendly in this context.",
+          "suggestion": "Consider a more natural phrasing like 'Neizdevās atrast autentifikācijas simbolu' or 'Autentifikācijas simbols nav atrasts'."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +194,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"බලයදීමේ නිමිත්ත හමු නොවිණි\" while conveying a similar meaning, isn't the most natural or accurate translation of \"Authentication token could not be found.\"  'බලයදීමේ' translates to 'of power/authority' which isn't the core concept of an authentication token.  It suggests a token related to power or authority, rather than a security token.",
+          "suggestion": "Consider a translation like \"අන්තර්ගත කිරීමේ ටෝකන් සොයා නොහැකි විය\" (Antharagata kirimē ṭōkan soyā nō haki viya) - 'Authentication token could not be found' or \"ප්‍රauthentication ටෝකන් හමු නොවීය\" (prōkthēntikēntōkan hamu novīya) - 'Authentication token was not found'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +230,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Şifre üretici bulunamadı\" translates to \"Password generator could not be found.\" This is not an accurate translation of \"Authentication token could not be found.\" The original phrase refers to a security token used for authentication, not a password generator.",
+          "suggestion": "Kimlik doğrulama belirteci bulunamadı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

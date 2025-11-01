@@ -3,7 +3,7 @@
   "content": "Restrict copy and download",
   "content_en_sha1_hash": "af30403c9d64f7941556ddaeb8fbb6e6cf56859e",
   "created_at": "2025-05-19T21:30:56.827Z",
-  "updated_at": "2025-05-20T09:38:04.795Z",
+  "updated_at": "2025-08-12T19:46:25.849Z",
   "comment": {
     "text": "Restrict copy and download is a setting that controls whether users can download files from a virtual data room. When enabled, users will be restricted from downloading files. This option appears as a toggle button in create/edit room dialogs.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 127,
+      "line_number": 128,
       "context": "} else {\n setFileLifetimeChecked(!fileLifetimeChecked);\n }\n };\n \n const onChangeRestrictCopyAndDownload = () => {\n setRoomParams({ ...roomParams, denyDownload: !roomParams.denyDownload });\n \n setCopyAndDownloadChecked(!copyAndDownloadChecked);\n };",
       "module": "/packages/client"
     }
@@ -87,19 +87,42 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Limitia la copia e il download' is not the most natural or accurate translation of 'Restrict copy and download'. 'Limitare' is a possible translation for 'restrict', but 'impedire' or 'proibire' would be more common and convey the meaning of restriction more accurately.",
+          "suggestion": "Impedisci la copia e il download"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'Limitia' is incorrect. It should be the conjugated form of 'limitare' to agree with the object.",
+          "suggestion": "Impedisci la copia e il download"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'コピーとダウンロードを制限する' (Kopii to daunroodo o seigen suru) while technically correct, is a bit formal for a UI label. A more natural and concise translation would be better.",
+          "suggestion": "コピー＆ダウンロード禁止"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '복사 및 다운로드 제한' (copy and download restriction) is accurate in conveying the meaning of 'Restrict copy and download'. However, a more natural phrasing in Korean might be '복사 및 다운로드 금지' (copy and download prohibition) or '복사 및 다운로드 불가' (copy and download unavailable). The current translation is not *wrong*, but it sounds slightly formal and less common.",
+          "suggestion": "Consider '복사 및 다운로드 금지' or '복사 및 다운로드 불가' for a more natural feel."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +164,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'încărcare' typically refers to uploading, not downloading. The English 'download' requires a more precise Romanian equivalent.",
+          "suggestion": "Restricție copiere și descărcare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,7 +212,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kopyalamayı ve indirmeyi kısıtlayın' is a command. The English 'Restrict copy and download' is more of a descriptive setting/label. A more suitable translation might be something like 'Kopyalamayı ve indirmeyi engelle' (Prevent copy and download) or 'Kopyalama ve indirme kısıtlaması' (Copy and download restriction).",
+          "suggestion": "Kopyalama ve indirme kısıtlaması"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

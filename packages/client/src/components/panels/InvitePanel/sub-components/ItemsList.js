@@ -37,13 +37,13 @@ import { ScrollList } from "../StyledInvitePanel";
 
 const USER_ITEM_HEIGHT = 48;
 
-const VirtualScroll = React.forwardRef((props, ref) => (
+const VirtualScroll = ({ ref, ...props }) => (
   <CustomScrollbarsVirtualList
     {...props}
     ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
   />
-));
+);
 
 VirtualScroll.displayName = "VirtualScroll";
 
@@ -74,6 +74,7 @@ const Row = memo(({ data, index, style }) => {
     <Item
       t={t}
       item={item}
+      index={index}
       key={item.id}
       style={style}
       theme={theme}
@@ -180,6 +181,7 @@ const ItemsList = ({
       ref={bodyRef}
       scrollAllPanelContent={scrollAllPanelContent}
       isTotalListHeight={isTotalListHeight}
+      dataTestId="invite_panel_items_scroll_list"
     >
       <List
         style={{ overflow: overflowStyle, willChange: willChangeStyle }}
@@ -204,6 +206,7 @@ const ItemsList = ({
           allowInvitingGuests,
         }}
         outerElementType={!scrollAllPanelContent ? VirtualScroll : null}
+        data-testid="invite_panel_items_list"
       >
         {Row}
       </List>

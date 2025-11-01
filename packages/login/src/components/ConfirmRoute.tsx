@@ -27,7 +27,7 @@
 "use client";
 
 import { notFound, useSearchParams } from "next/navigation";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getCookie } from "@docspace/shared/utils";
@@ -39,6 +39,7 @@ import { ConfirmRouteProps, TConfirmRouteContext } from "@/types";
 export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
   linkData: {},
   roomData: {},
+  confirmLinkResult: {},
 });
 
 function ConfirmRoute(props: ConfirmRouteProps) {
@@ -64,16 +65,17 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   }
 
   useEffect(() => {
-    if (location.search.includes("culture")) return;
+    if (window.location.search.includes("culture")) return;
     const lng = getCookie(LANGUAGE);
 
-    isAuthenticated && i18n.changeLanguage(lng);
+    if (isAuthenticated) i18n.changeLanguage(lng);
   }, [isAuthenticated, i18n]);
 
   if (!stateData) {
     switch (confirmLinkResult.result) {
-      case ValidationResult.Ok:
+      case ValidationResult.Ok: {
         const confirmHeader = searchParams?.toString();
+
         const linkData = {
           ...confirmLinkParams,
           confirmHeader,
@@ -83,8 +85,14 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           roomId: confirmLinkResult?.roomId,
           title: confirmLinkResult?.title,
         };
-        setStateData((val) => ({ ...val, linkData, roomData }));
+        setStateData((val) => ({
+          ...val,
+          linkData,
+          roomData,
+          confirmLinkResult,
+        }));
         break;
+      }
       case ValidationResult.Invalid:
         console.error("invalid link", {
           confirmLinkParams,
@@ -118,13 +126,17 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     }
   }
 
+  const value = useMemo(
+    () => ({
+      linkData: stateData?.linkData ?? {},
+      confirmLinkResult: stateData?.confirmLinkResult ?? {},
+      roomData: stateData?.roomData ?? {},
+    }),
+    [stateData?.linkData, stateData?.roomData, stateData?.confirmLinkResult],
+  );
+
   return (
-    <ConfirmRouteContext.Provider
-      value={{
-        linkData: stateData?.linkData ?? {},
-        roomData: stateData?.roomData ?? {},
-      }}
-    >
+    <ConfirmRouteContext.Provider value={value}>
       {children}
     </ConfirmRouteContext.Provider>
   );

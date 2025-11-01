@@ -3,7 +3,7 @@
   "content": "Room cannot be restored",
   "content_en_sha1_hash": "535cea729d9ce554fc381ca1a410cd6f99bcf7ca",
   "created_at": "2025-05-19T21:30:53.672Z",
-  "updated_at": "2025-05-21T06:42:38.972Z",
+  "updated_at": "2025-05-24T06:56:45.711Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a room cannot be restored, typically found on a button or dialog in a UI where users can select rooms to restore. The exact wording may vary based on whether the user has access to an archive folder root.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Imposibil de restaurat sala' is a very literal translation. A more natural Romanian phrasing would be 'Nu se poate restaura camera' or 'Restaurarea camerei nu este posibilă'. 'Sala' typically refers to a large room or hall, while 'camera' is a more general term for a room.  Given the context of 'Payments', 'camera' is likely the intended term.",
+          "suggestion": "Nu se poate restaura camera"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරය ප්‍රතිෂ්ඨාපනය කළ නොහැකි' while technically correct, is quite formal and might not be the most natural way to express 'Room cannot be restored' in Sinhala for a user interface. A more common and understandable phrasing would be preferable.",
-          "suggestion": "Consider alternatives like 'කාමරය නැවත ලබාගත නොහැක' or 'කාමරය යථා තත්වයට පත්කරන්න බැහැ'."
+          "description": "The translation 'කාමරය ප්‍රතිෂ්ඨාපනය කළ නොහැකි' while technically conveying 'cannot be restored', is a very formal and potentially unnatural phrasing in Sinhala for a user-facing message. A more natural and user-friendly translation would be preferable.",
+          "suggestion": "කාමරය යථා තත්ත්වයට පමුණුවා ගත නොහැකිය (Kamaraya yatha taththawathaya pamunuwa gata na hakiy)"
         }
       ],
       "approved_at": null
@@ -180,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'обновљена' (obnovljena) can mean restored, in the context of a 'room', 'враћена' (vraćena) is a more natural and accurate translation for 'restored'. 'Обновљена' implies a renovation or modernization, whereas 'враћена' implies returning the room to a previous state.",
+          "description": "The translation 'Просторија не може бити обновљена' while technically correct, doesn't convey the most natural meaning in this context. 'Restore' in the context of a 'room' often implies a return to a previous state, which is better conveyed by a term like 'враћена' (vraćena).",
           "suggestion": "Просторија не може бити враћена"
         }
       ],
@@ -204,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Неможливо відновити кімнати' literally translates to 'It is impossible to restore rooms'. The English phrase 'Room cannot be restored' implies a single room, whereas the Ukrainian suggests multiple rooms. A more accurate translation would consider the singular context.",
+          "description": "The translation 'Неможливо відновити кімнати' is too literal and doesn't convey the nuance of 'Room cannot be restored'. It implies restoring multiple rooms. A more accurate translation would focus on the room itself.",
           "suggestion": "Неможливо відновити кімнату"
         }
       ],

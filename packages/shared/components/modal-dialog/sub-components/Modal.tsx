@@ -51,6 +51,7 @@ const Modal = ({
   autoMaxHeight,
   autoMaxWidth,
   onClose,
+  onBackClick,
   isLoading,
   header,
   body,
@@ -62,30 +63,32 @@ const Modal = ({
   containerVisible,
   isDoubleFooterLine,
 
-  embedded,
   withForm,
   withoutPadding,
+  withoutHeaderMargin,
   hideContent,
 
   isInvitePanelLoader = false,
   onSubmit,
   withBodyScrollForcibly = false,
   withBorder = false,
+  dataTestId,
+  scrollbarCreateContext,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
 
   const headerComponent = React.isValidElement(header)
-    ? header.props.children
+    ? (header.props as { children: React.ReactNode }).children
     : null;
   const bodyComponent = React.isValidElement(body)
-    ? (body.props.children as React.ReactNode)
+    ? (body.props as { children: React.ReactNode }).children
     : null;
   const footerComponent = React.isValidElement(footer)
-    ? footer.props.children
+    ? (footer.props as { children: React.ReactNode }).children
     : null;
   const containerComponent = React.isValidElement(container)
-    ? container.props.children
+    ? (container.props as { children: React.ReactNode }).children
     : null;
 
   const validateOnMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -155,6 +158,7 @@ const Modal = ({
     headerProps.className,
     {
       [styles.displayTypeModal]: currentDisplayType === "modal",
+      [styles.withoutHeaderMargin]: withoutHeaderMargin,
     },
   );
 
@@ -188,7 +192,7 @@ const Modal = ({
       className={classNames(styles.modal, {
         [styles.modalActive]: visible,
       })}
-      data-testid="modal"
+      data-testid={dataTestId ?? "modal"}
     >
       <ModalBackdrop
         className={classNames({
@@ -238,6 +242,7 @@ const Modal = ({
                       className={headerClassName}
                       header={headerComponent}
                       onCloseClick={onClose}
+                      onBackClick={onBackClick}
                       {...rest}
                     />
                   ) : null}
@@ -255,6 +260,7 @@ const Modal = ({
                           className="modal-scroll"
                           noScrollY={isScrollLocked}
                           paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+                          createContext={scrollbarCreateContext}
                         >
                           {bodyComponent}
                         </Scrollbar>

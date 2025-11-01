@@ -3,7 +3,7 @@
   "content": "Marking is read",
   "content_en_sha1_hash": "a5692fb23182bbd0a5e2d94e7cd4e7637b871ce8",
   "created_at": "2025-05-19T21:30:55.823Z",
-  "updated_at": "2025-06-03T20:59:41.994Z",
+  "updated_at": "2025-05-26T07:57:32.395Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when a file is marked as read. It appears in a UI component related to file management or listing, and its purpose is to confirm that the action was successful, indicating the file has been marked for reading.",
     "is_auto": true,
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"جارٍ التعليم كمقروء\" does not accurately convey the meaning of \"Marking is read\". \"جارٍ التعليم\" (Jareen al-ta'leem) translates to \"Teaching is being done\" or \"Education is in progress\", which is irrelevant to the English phrase. \"كمقروء\" (ka maqroo') translates to \"as readable\" or \"as read\", but doesn't fit the context.",
-          "suggestion": "A more accurate translation would depend on the specific context. Possible suggestions include: \"تُقرأ العلامات\" (Tuqra' al-'alamaat) - \"The markings are read\", or \"علامات التقييم مقروءة\" ('Alamat al-taqyeem maqroo'ah) - \"The assessment markings are readable\"."
+          "description": "The Arabic translation \"جارٍ التعليم كمقروء\" does not accurately convey the meaning of \"Marking is read\". The phrase \"جارٍ التعليم\" (Jariyyu al-ta'lim) translates to 'Teaching is being done' or 'Teaching is in progress,' which is unrelated to the English meaning. \"كمقروء\" (kamarqū') translates to 'as read' or 'as readable,' further complicating the meaning.",
+          "suggestion": "A more accurate translation would be something like \"علامات القراءة\" ('Alamat al-qirā'ah) meaning 'Marking is read' or 'Reading marks' or simply \"علامات\" ('Alamat) which means 'Marks'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"جارٍ التعليم كمقروء\" is grammatically awkward in Arabic. The combination of phrases doesn't flow naturally.",
+          "suggestion": "Restructuring the phrase to improve grammatical flow is necessary when correcting the translation."
         }
       ],
       "approved_at": null
@@ -42,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'İşarələmə oxundu' doesn't accurately convey the meaning of 'Marking is read'. 'İşarələmə' refers to 'marking' as in notes or annotations, not the process of marking something as read.  A more appropriate translation would depend on the context of 'Marking'.",
-          "suggestion": "Possible alternatives depending on context: 'Qeyd oxundu' (Note was read), 'Öyrənilmə tamamlandı' (Review completed), or a more context-specific phrasing."
+          "description": "The Azerbaijani translation \"İşarələmə oxundu\" doesn't accurately convey the meaning of \"Marking is read\". \"İşarələmə\" translates to \"Marking\" or \"Signaling\" but \"oxundu\" means \"was read\", implying a passive action. The original phrase implies the marking itself is being read or viewed.",
+          "suggestion": "Consider alternatives like \"İşarələr baxıldı\" (The markings were viewed) or \"İşarələməyə baxıldı\" (The marking was reviewed) depending on the intended nuance."
         }
       ],
       "approved_at": null
@@ -54,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Marking is read\" implies that the marking process has been read, or the information related to the marking has been reviewed. The Bulgarian translation \"Маркировката е прочетена\" literally means \"The marking has been read,\" which doesn't quite capture the intended meaning. A more accurate translation might depend on the context, but a potential alternative is \"Маркировката е прегледана\" (The marking has been reviewed) or \"Информацията за маркировката е прочетена\" (The information about the marking has been read).",
-          "suggestion": "Consider alternatives like \"Маркировката е прегледана\" or \"Информацията за маркировката е прочетена\" depending on the specific context."
+          "description": "The translation \"Маркировката е прочетена\" literally translates to \"The marking is read\". While grammatically correct, it doesn't capture the nuance of the original English phrase \"Marking is read\", which implies that the marking itself has been reviewed or processed. A better translation might reflect that the marking has been processed or checked.",
+          "suggestion": "Маркировката е прегледана"
         }
       ],
       "approved_at": null
@@ -66,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Označení se čte\" is not the best equivalent of \"Marking is read\". While technically correct, \"Označení se čte\" implies a marking being read as in an annotation or identifier. 'Marking is read' is more general, and could refer to a marking process being reviewed. A better translation would depend on the specific context.",
-          "suggestion": "Consider alternatives like \"Značení je načteno\" or \"Práce s označením jsou k dispozici\" depending on the intended meaning."
+          "description": "The English phrase \"Marking is read\" is ambiguous. 'Marking' could refer to assessment marking, or simply a marking/highlighting action. 'Označení se čte' translates more literally to 'The marking is read', implying a marking itself is being read, which may not be the intended meaning. A more contextually accurate translation depending on the intended meaning might be 'Zaznamenání je přečteno' (for assessment marking) or 'Označení bylo přečteno' (for highlighting).",
+          "suggestion": "Consider alternative translations like 'Zaznamenání je přečteno' or 'Označení bylo přečteno' based on the context of 'Marking'."
         }
       ],
       "approved_at": null
@@ -78,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Als gelesen markieren\" doesn't accurately convey the meaning of \"Marking is read\". It translates to \"Mark as read\". The English phrase implies that the marking itself has been read, not that something is being marked as read.",
-          "suggestion": "Consider alternative translations such as \"Kennzeichnung ist gelesen\" or \"Markierung wurde gelesen\" which more closely reflect the original meaning."
+          "description": "The translation \"Als gelesen markieren\" doesn't accurately convey the meaning of \"Marking is read.\" It translates to \"Mark as read.\" The English phrase indicates that someone or something *is* reading the marking, not that something is being marked as read.",
+          "suggestion": "A more accurate translation might be something like \"Markierung wird gelesen\" (The marking is being read) or \"Die Markierung wird gelesen\" (The marking is being read)."
         }
       ],
       "approved_at": null
@@ -90,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Η σήμανση είναι αναγνωσμένη' while technically correct, doesn't fully capture the nuance of 'Marking is read'. 'Αναγνωσμένη' implies something *was* read. 'Marking is read' implies marking *is in the process of being* read, or is generally available to be read.",
-          "suggestion": "Consider 'Η σήμανση διαβάζεται' or 'Η σήμανση είναι διαθέσιμη για ανάγνωση' depending on the precise intended meaning."
+          "description": "The translation 'Η σήμανση είναι αναγνωσμένη' implies 'The marking is read' in the passive voice. A more direct and natural translation of 'Marking is read' would be 'Διαβάζεται η σήμανση' or 'Η σήμανση διαβάζεται'.",
+          "suggestion": "Διαβάζεται η σήμανση"
         }
       ],
       "approved_at": null
@@ -102,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Marking is read\" doesn't have a direct equivalent in Spanish that translates literally to \"Marking as read.\" It suggests an action being performed on something that is being read. A more accurate translation would convey that the file is being marked as read, not that the marking itself is being read.",
-          "suggestion": "A more accurate translation could be \"Marcar como leído\" or \"Se marca como leído\" depending on the desired tone and context."
+          "description": "The English phrase \"Marking is read\" doesn't translate directly to \"Marcando como leído.\" It implies something is being marked as read, rather than the marking itself being read. A more accurate translation would convey the action of marking something as read.",
+          "suggestion": "Consider translations like \"Marcar como leído\" or \"Se marca como leído\" to better reflect the original meaning."
         }
       ],
       "approved_at": null
@@ -120,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Marquage lu' doesn't fully capture the meaning of 'Marking is read'. 'Marquage' refers to the process of marking, not the marking itself being read. A more accurate translation might be 'Le marquage est lu' or 'Les annotations sont lues'.",
-          "suggestion": "Le marquage est lu"
+          "description": "While 'Marquage lu' is grammatically correct, it doesn't fully capture the nuance of \"Marking is read.\" \"Marking\" in this context likely refers to annotations or feedback, not simply the act of marking itself. A more accurate translation would consider the context. A potential alternative would incorporate the idea of 'reading the markings/annotations'.",
+          "suggestion": "Consider a translation like \"Les annotations sont lues\" (The annotations are read) or \"La notation est lue\" (The grading is read), depending on the precise meaning of 'Marking'."
         }
       ],
       "approved_at": null
@@ -132,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Նծումը կարդացվում է\" is a passive construction (\"is being read\") which doesn't quite capture the simplicity and directness of \"Marking is read.\" A more accurate translation would convey the idea of 'marking is read' in a more direct manner. While grammatically correct, it introduces a slightly different nuance.",
-          "suggestion": "Consider a more direct translation, such as \"Մարկինգը կարդացվեց\" (Marking was read), or potentially rephrasing the English to better suit Armenian structure if direct equivalence isn't possible."
+          "description": "The Armenian translation \"Նծումը կարդացվում է\" doesn't accurately convey the meaning of \"Marking is read\". \"Նծումը\" (Ntsumë) translates to something like 'dye' or 'stain', which is not the intended meaning.  The term 'marking' in this context likely refers to annotations or comments added to a document, and the phrase 'is read' implies someone is reviewing the marking.",
+          "suggestion": "A more accurate translation might be something like \"Մարկիզները կարդացվում են\" (Markiznerə kardatsvum e), where 'Markiznerə' approximates 'markings' as in annotations or comments."
         }
       ],
       "approved_at": null
@@ -144,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Segnato come letto' translates to 'Marked as read', which while conveying a similar concept, isn't a direct equivalent to 'Marking is read'. The original implies an ongoing action, whereas the translation describes a state.",
-          "suggestion": "Consider 'La marcatura è stata letta' or 'La lettura è stata segnalata' for a more accurate translation conveying the ongoing action of marking as read."
+          "description": "The translation 'Segnato come letto' doesn't accurately convey the meaning of 'Marking is read'. While it roughly translates to 'Marked as read,' the original implies that the marking itself was read or inspected. A more accurate translation would depend on the context of 'Marking'.",
+          "suggestion": "Possible alternatives: 'La segnalazione è stata letta' (The notification/flag was read), 'La marcatura è stata letta' (The marking was read)."
         }
       ],
       "approved_at": null
@@ -156,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"マークが読み取られました\" literally means \"The mark was read\" or \"The mark was scanned/detected\". While close, it doesn't directly convey the meaning of \"Marking is read\", which implies that the markings themselves are being read or examined. A more accurate translation would depend on the context of 'Marking'.",
-          "suggestion": "Consider alternatives such as: \"マーキングが確認されました\" (Marking was confirmed/verified) or \"マーキングの内容が読み取られました\" (The content of the markings was read), or \"マーキングを読みました\" (I read the markings) depending on the precise intended meaning."
+          "description": "The Japanese translation \"マークが読み取られました\" translates to \"Mark was read\" or \"The mark was read.\" It doesn't directly convey the meaning of \"Marking is read\", which implies an ongoing or continuous action of reading markings. A more accurate translation would convey the ongoing or habitual aspect of the reading.",
+          "suggestion": "検討: 「マーキングを読む」 or 「マーキングを読みます」. A more contextual translation might be required to capture the intended nuance.  For example, if it refers to a process, something like 「マーキングの読み取りが行われました」 (Marking reading was performed) could be considered."
         }
       ],
       "approved_at": null
@@ -168,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"읽음으로 표시\" doesn't accurately convey the meaning of \"Marking is read\". It literally translates to \"Marked as read\". The English phrase implies that the marking itself is being read or viewed.",
-          "suggestion": "Consider \"표시를 읽음\" (meaning \"Reading the marking\") or \"표시 확인됨\" (meaning \"Marking confirmed\") depending on the specific intended meaning."
+          "description": "The Korean translation \"읽음으로 표시\" literally translates to \"Marked as read\". While conveying a similar concept, it's not a direct and natural equivalent of \"Marking is read\". The English phrase implies an action happening, while the Korean translation describes a state.",
+          "suggestion": "Consider alternatives like \"읽음 처리됨\" (Marked for reading/processing) or \"읽음으로 됐음\" (It's marked as read) for a more accurate representation of the original meaning."
         }
       ],
       "approved_at": null
@@ -180,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ການກວດກາຖືກອ່ານ\" translates to \"The inspection is read,\" which doesn't accurately convey the meaning of \"Marking is read.\" \"Marking\" implies a process of marking or assessment, not simply an inspection.",
-          "suggestion": "Consider a translation that better reflects the meaning of 'marking,' such as \"ການກວດຄະແນນຖືກອ່ານ\" (The assessment is read) or \"ການແກ້ຄະແນນຖືກອ່ານ\" (The grading is read), depending on the precise nuance intended."
+          "description": "The Lao translation \"ການກວດກາຖືກອ່ານ\" literally translates to \"The inspection is read\". \"Marking\" has a more specific meaning in this context, likely referring to a process of marking or grading. A more accurate translation would depend on the intended nuance.",
+          "suggestion": "Consider alternatives like \"ການກວດຖືກກວດ\" (The marking is checked) or \"ການໃຫ້ຄະແນນຖືກອ່ານ\" (The grading is read) depending on the precise meaning of 'Marking'."
         }
       ],
       "approved_at": null
@@ -192,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Marking is read\" implies that the marking itself is being read, like a document or a file. The Latvian translation \"Marķējums ir nolasīts\" translates to \"The marking has been read,\" which is more passive and might not fully capture the intended meaning. A better translation would depend on the context. If referring to a process, 'Marking is being read' could be 'Marķējums tiek lasīts'.",
-          "suggestion": "Consider 'Marķējums tiek lasīts' or a more contextually accurate alternative."
+          "description": "The Latvian translation 'Marķējums ir nolasīts' translates more closely to 'The marking has been read'. While not entirely wrong, 'Marking is read' implies an ongoing action or a state of being currently readable, which is not perfectly captured by the passive perfect tense ('ir nolasīts'). A more accurate translation would convey a sense of current readability.",
+          "suggestion": "Consider 'Marķējums ir lasāms' (The marking is readable) or 'Marķējums ir atrodams' (The marking is available/findable)."
         }
       ],
       "approved_at": null
@@ -210,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation 'Oznaczanie jako przeczytane' doesn't directly translate to 'Marking is read'. While it conveys a similar meaning (marking something as read), it's more literal and less concise. A more accurate and natural translation would consider the context of what 'Marking' refers to and possibly use something like 'Oznaczono jako przeczytane' or 'Zaznaczono jako przeczytane'.",
-          "suggestion": "Consider alternatives like 'Oznaczono jako przeczytane' or 'Zaznaczono jako przeczytane', depending on the specific meaning of 'Marking'."
+          "description": "The translation \"Oznaczanie jako przeczytane\" doesn't directly convey the meaning of \"Marking is read.\" It translates to something like \"Marking as read.\" While close, it changes the phrasing.",
+          "suggestion": "Consider \"Oznaczone jako przeczytane\" or \"Zaznaczone jako przeczytane\" to more accurately reflect 'Marking is read'. Alternatively, a more literal, but potentially less natural, translation could be \"Oznaczenie zostało przeczytane\"."
         }
       ],
       "approved_at": null
@@ -234,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Marcajul a fost citit' implies that the marking *itself* was read, rather than the act of marking being read. The English 'Marking is read' suggests reading information *about* the marking process.",
-          "suggestion": "A more accurate translation could be 'Se citește despre marcare' or 'Informații despre marcare sunt citite'."
+          "description": "The translation 'Marcajul a fost citit' is a literal translation and doesn't fully capture the nuance of 'Marking is read'. It implies that the marking itself was read, rather than the actions taken for marking.",
+          "suggestion": "A more accurate translation might be 'Marcarea a fost examinată' (Marking was examined) or 'Se verifică marcarea' (The marking is being checked/verified), depending on the precise meaning intended in the original context."
         }
       ],
       "approved_at": null
@@ -246,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Отметить как прочитанное\" doesn't directly convey the meaning of \"Marking is read\". While it implies marking something as read, the English phrase suggests the *action* of reading something that has already been marked.",
-          "suggestion": "Consider alternatives like \"Прочитано и отмечено\" (Read and marked) or \"Обозначено как прочитанное\" (Marked as read - closer to the literal but less natural)."
+          "description": "The translation 'Отметить как прочитанное' is a more literal translation of 'Mark as read' rather than 'Marking is read'. While acceptable, it changes the grammatical structure. 'Marking is read' implies a passive voice, whereas the Russian translation is an active command/instruction.",
+          "suggestion": "Consider 'Отметка о прочтении' to better reflect the passive voice or 'Пометить как прочитанное' which is a more conversational and commonly used equivalent of 'Mark as read'."
         }
       ],
       "approved_at": null
@@ -258,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ලකුණු කිරීම කියවනු ලැබේ' while technically conveying the meaning of 'Marking is read', is a passive construction that may not be the most natural or idiomatic way to express the sentiment in Sinhala. A more direct translation might be preferred.",
-          "suggestion": "Consider alternatives like 'ලකුණු කිරීම් පිරිនិតා ගන්නා ලදී' (lakunu krim pavranit ganna ladei - Marking is reviewed) or 'ලකුණු කිරීම් කියවන ලදී' (lakunu krim kiyavana ladei - Marking is read) depending on the intended nuance.  A more active voice might be better, if possible given the context."
+          "description": "The translation 'ලකුණු කිරීම කියවනු ලැබේ' while conveying a similar idea, is a more formal and passive construction than the original 'Marking is read'.  A more direct translation might be 'ඇඳපු ලකුණු කියවනු ලැබේ' (Aedhapu lakunu kiyanu lebe - Drawn markings are read) or 'ලේඛනය කරන ලද ලකුණු කියවනු ලැබේ' (Lekananaya karanavad lakunu kiyanu lebe - Markings are written and read).  The original is simple and straightforward, the translation is more verbose and complex. It changes the tone.",
+          "suggestion": "Consider 'ඇඳපු ලකුණු කියවනු ලැබේ' or 'ලේඛනය කරන ලද ලකුණු කියවනු ලැබේ' for a closer translation."
         }
       ],
       "approved_at": null
@@ -270,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Označovať ako prečítané' is a literal translation that doesn't convey the intended meaning of 'Marking is read'. It translates to 'Mark as read', which implies an action performed *on* the marking, rather than stating that the marking itself has been read.",
-          "suggestion": "A more accurate translation would be 'Označenie je prečítané' which translates to 'The marking is read', or 'Čítanie označenia' which means 'Reading of the marking'."
+          "description": "The Slovak translation 'Označovať ako prečítané' is a literal translation that doesn't quite capture the nuance of 'Marking is read.' It implies an action of marking something as read, rather than simply stating that marking is being read or has been read. A more accurate translation would convey the state of marking being read.",
+          "suggestion": "Consider alternatives like 'Označenie je prečítané' (The marking is read) or 'Označenie bolo prečítané' (The marking has been read), depending on the intended tense and context."
         }
       ],
       "approved_at": null
@@ -282,8 +287,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Marking is read\" implies that the marking has been read. The Slovenian translation \"Označevanje je prebrano\" literally translates to \"Marking is read,\" which doesn't quite convey the intended meaning. A more accurate translation would depend on the context, but it likely requires a different verb form to indicate completion of reading or a passive voice construction.",
-          "suggestion": "Consider alternatives like \"Označevanje je bilo prečitano\" (Marking was read) or \"Prebrali so označevanje\" (They read the marking), depending on the desired nuance."
+          "description": "The translation 'Označevanje je prebrano' doesn't accurately convey the meaning of 'Marking is read.' 'Prebrano' means 'read' in the perfect passive participle, implying something *was* read. 'Marking is read' suggests marking is *currently* being read or is available to be read.",
+          "suggestion": "A more accurate translation would be 'Označevanje se bere' (Marking is being read) or 'Označevanje je za branje' (Marking is for reading)."
         }
       ],
       "approved_at": null
@@ -294,8 +299,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Означавање као прочитано' literally translates to 'Marking as read'. While understandable, it's not the most natural phrasing. A more accurate and idiomatic translation of 'Marking is read' would convey the meaning of something being marked as having been read, or the act of marking something as read.",
-          "suggestion": "Consider alternatives like 'Бележено као прочитано' (Marked as read), 'Обележено као прочитано' (Indicated as read), or 'Постављено као прочитано' (Set as read). The best option would depend on the specific context."
+          "description": "The Serbian translation \"Означавање као прочитано\" literally translates to \"Marking as read.\" While understandable, it's a somewhat awkward phrasing. A more natural translation for \"Marking is read\" would be closer to \"Označeno je kao pročitano\" or \"Označeno za čitanje\".",
+          "suggestion": "Označeno je kao pročitano"
         }
       ],
       "approved_at": null
@@ -306,8 +311,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Označavanje kao pročitano' doesn't accurately convey the meaning of 'Marking is read'. 'Označavanje' means 'marking' or 'labeling,' and 'kao pročitano' means 'as read'.  A more accurate translation would capture the action of reading the marking, or indicate that the marking has been reviewed.",
-          "suggestion": "Consider alternatives like 'Uređeno kao pročitano' (Marked as read), 'Pročitano' (Read), or 'Označeno kao pregledano' (Marked as reviewed)."
+          "description": "The translation 'Označavanje kao pročitano' is a literal translation that doesn't quite capture the meaning of 'Marking is read'. It implies 'Marking *as* read', suggesting the marking *became* read, rather than simply stating it was read. A more accurate translation would convey the marking itself was read.",
+          "suggestion": "Pročitana oznaka"
         }
       ],
       "approved_at": null
@@ -318,8 +323,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Okundu olarak işaretleniyor\" doesn't accurately convey the meaning of \"Marking is read.\" The original phrase implies a reading mark or notation is being read, while the translation implies something is being marked as read. A more accurate translation would reflect the act of reading a marking.",
-          "suggestion": "Okuma işareti okunuyor"
+          "description": "The Turkish translation \"Okundu olarak işaretleniyor\" doesn't accurately convey the meaning of \"Marking is read\". It translates to \"Being marked as read\".  It implies an action being performed *on* the marking, rather than the marking itself being read.",
+          "suggestion": "A more accurate translation could be \"İşaretleme okundu\" or \"İşaretleme yapıldı ve okundu\" (Marking was done and read)."
         }
       ],
       "approved_at": null
@@ -327,13 +332,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Позначка прочитана' while technically accurate, doesn't fully capture the nuance of 'Marking is read'. It implies the marking *itself* was read, rather than a document or file containing markings. A more accurate translation would depend on the specific context of what 'Marking' refers to.",
-          "suggestion": "Consider alternative translations like: 'Означено як прочитано' (Marked as read) or 'Відмічено як прочитано' (Marked as read) if it's referring to a document or task completion. If 'Marking' refers to a person doing the marking, the translation would be very different."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -342,8 +341,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Đánh dấu đã đọc\" while technically accurate, isn't the most natural or idiomatic way to convey 'Marking is read'. It implies 'Marked as read'. The original English suggests the marking itself was read, which is a passive action.",
-          "suggestion": "Consider a translation like \"Dấu hiệu đã được đọc\" or \"Thông báo đã được đọc\" depending on the specific context of 'Marking'."
+          "description": "The English phrase 'Marking is read' implies that the marking itself has been read or reviewed. 'Đánh dấu đã đọc' literally translates to 'Marked as read', which implies an action of marking something as read, rather than the marking being read.",
+          "suggestion": "Consider a translation that more accurately conveys the meaning of the original, such as 'Đánh giá đã được đọc' or 'Kết quả đánh giá đã được đọc' depending on the exact context. Alternatively, 'Xem xét đánh giá' could also work, if the intent is that the markings are being reviewed."
         }
       ],
       "approved_at": null
@@ -354,8 +353,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Marking is read\" is not directly equivalent to \"标记为已读\". While \"标记为已读\" translates to \"Mark as read\", the original phrasing implies that the marking itself was read. The translation changes the meaning of the original sentence.",
-          "suggestion": "Consider alternatives like \"标记已读\" or rephrase the English content to better suit the translation. If \"Mark as read\" is the desired meaning, the original English should reflect that."
+          "description": "The translation '标记为已读' literally translates to 'Marked as read'. While conveying a similar meaning to 'Marking is read,' it shifts the grammatical focus from the action of marking to the state of being marked. The original implies an ongoing process, while the translation implies a completed action.",
+          "suggestion": "Consider '标记已读' (Marked read) or '标记阅读状态' (Marking reading status) for a closer match, depending on the context. A more conversational translation might be '已标记为已读' (Already marked as read)."
         }
       ],
       "approved_at": null

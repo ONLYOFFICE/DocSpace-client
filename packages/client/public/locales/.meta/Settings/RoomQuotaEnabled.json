@@ -3,7 +3,7 @@
   "content": "Room quota has been successfully enabled.",
   "content_en_sha1_hash": "f8798ae2d7b3467cc9ad848be06b25332ae111b7",
   "created_at": "2025-05-19T21:30:52.450Z",
-  "updated_at": "2025-06-03T20:59:42.367Z",
+  "updated_at": "2025-09-17T13:43:02.047Z",
   "comment": {
     "text": "The RoomQuotaEnabled translation key is used to display a success message when room quota has been successfully enabled. This text appears in a toast notification after enabling room quota and is provided by the CurrentQuotaStore file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 469,
+      "line_number": 501,
       "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultRoomQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"RoomQuotaEnabled\")\n : t(\"RoomQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kvóty místností byly úspěšně povoleny' is a bit literal and could be improved for naturalness. 'Kvóty místností' translates to 'Room quotas' and while not wrong, it's slightly clunky. A more natural phrasing would imply that the *system* has enabled the quotas, not just the fact they were enabled.",
-          "suggestion": "Systém pro kvóty místností byl úspěšně povolen."
+          "description": "The translation \"Kvóty místností byly úspěšně povoleny\" is technically correct but could be improved for clarity and naturalness. \"Room quota\" is singular, and the Czech translation renders it as plural. A more natural translation would reflect the singular nature of the 'room quota'.",
+          "suggestion": "Kvóta místnosti byla úspěšně povolena."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ກວດກາຈຳນວນຫ້ອງໄດ້ຮັບການເປີດໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ' translates to 'Room count has been enabled correctly.' which is not the intended meaning of 'Room quota has been successfully enabled.'. It should convey the idea of a limit or allowance.",
-          "suggestion": "Consider a translation like 'ການກຳນົດຈຳນວນຫ້ອງຖືກເປີດໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ' (The room limit has been successfully enabled) or 'ໄດ້ກຳນົດຈຳນວນຫ້ອງຢ່າງຖືກຕ້ອງແລ້ວ' (The room quota has been correctly set)."
+          "description": "The Lao translation \"ກວດກາຈຳນວນຫ້ອງໄດ້ຮັບການເປີດໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ\" literally translates to 'Room number has been enabled correctly'. It implies the *room number* itself was enabled, not the *room quota* feature.  The Lao should accurately reflect 'room quota'.",
+          "suggestion": "ກວດກາຈຳນວນຫ້ອງໄດ້ຮັບການເປີດໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ  -> ກວດກາຈຳນວນຫ້ອງໄດ້ຮັບການເປີດໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ"
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limit pokoi został włączony' is a literal translation but doesn't fully capture the meaning of 'Room quota has been successfully enabled'. It focuses on the limit aspect, but not the enabling action. A more accurate translation would convey that the room quota feature is now active.",
-          "suggestion": "Funkcja limitu pokoi została włączona."
+          "description": "The translation \"Limit pokoi został włączony\" is not the best translation for \"Room quota has been successfully enabled.\" While \"limit pokoi\" is literally 'room limit', a more natural and accurate translation would convey the concept of a quota.",
+          "suggestion": "Ustawiono limit pokoi."
         }
       ],
       "approved_at": null
@@ -162,13 +162,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Cotă de stocare pentru sală a fost activată cu succes.\" is a bit literal and not the most natural-sounding Romanian. \"Sală\" implies a room in a building. The intent is likely about storage quota, not a room.",
-          "suggestion": "Cota de stocare a fost activată cu succes."
+          "description": "The translation 'Cotă de stocare pentru sală a fost activată cu succes' is overly literal and awkward in Romanian. 'Room quota' doesn't translate directly to 'Cotă de stocare pentru sală'.",
+          "suggestion": "Consider a more natural Romanian phrasing such as 'Limita de spațiu pentru sală a fost activată cu succes' or 'Cota de spațiu pentru sală este activată.'"
         },
         {
           "type": "formatting",
-          "description": "While grammatically correct, the translation is a bit long and clunky. Concise language is preferred for UI elements.",
-          "suggestion": "Cota de stocare este activată."
+          "description": "The phrase 'Cotă de stocare pentru sală' is a bit clunky. Combining 'cotă' and 'stocare' isn't the most common way to express 'room quota'.",
+          "suggestion": "Reconsider the phrasing to improve flow and readability."
         }
       ],
       "approved_at": null
@@ -179,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'enabled' is better translated as 'activated' or 'included' in this context rather than 'подключена' (connected). 'Подключена' implies a connection to something external, which isn't the intended meaning of enabling a room quota.",
-          "suggestion": "Квота комнаты успешно активирована."
+          "description": "The translation 'Квота комнаты успешно подключена.' implies 'connected' rather than 'enabled'. The English term 'enabled' suggests a state of being allowed or permitted, not necessarily connected.",
+          "suggestion": "Квота комнаты успешно включена."
         }
       ],
       "approved_at": null
@@ -188,7 +188,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'කාමර' (kamara) is acceptable but 'මාර්ගගත කාමර' (margagatayama kamara) or 'වर्चুয়াল කාමර' (varshial kamara) might be more precise depending on the context, as 'kamara' can also mean 'room' in a physical sense. This could cause confusion.",
+          "suggestion": "Consider using 'මාර්ගගත කාමර' or 'වर्चুয়াল කාමර' if the context is specifically about virtual rooms."
+        },
+        {
+          "type": "grammar",
+          "description": "While 'කාමර ප්‍රමාණය සාර්ථකව ක්‍රියාත්මක කර ඇත' is grammatically correct, it might sound slightly formal.  A more natural phrasing might be 'කාමර ප්‍රමාණය දැන් ක්‍රියාත්මකයි' which translates to 'Room quota is now active'.",
+          "suggestion": "කාමර ප්‍රමාණය දැන් ක්‍රියාත්මකයි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -209,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Квота просторије је успешно омогућена.' is a literal translation that doesn't flow naturally in Serbian. 'Просторије' (prostorije) refers to rooms as a space or area, not as the object being restricted by a quota. A more natural translation would imply the quota applies to 'spaces' or 'units', depending on the context.",
-          "suggestion": "Consider 'Омогућена је квота за просторе/јединице.' or 'Квота за просторе је успешно омогућена.'. The best option depends on the precise meaning of 'Room quota' in the original English."
+          "description": "The translation \"Квота просторије је успешно омогућена.\" is a literal translation and sounds unnatural in Serbian. While technically correct, a more natural phrasing would be preferred.",
+          "suggestion": "Consider a more natural phrasing like \"Омогућена је квота за просторије.\" or \"Квота за просторије је активирана.\" (Kvote za prostorije je aktivirana.)"
         }
       ],
       "approved_at": null
@@ -221,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kvota prostorije je uspešno omogućena.\" is a literal translation and doesn't quite capture the natural flow of the English phrase \"Room quota has been successfully enabled.\" A more natural Serbian phrasing would be more suitable.",
-          "suggestion": "Uključena je kvota za prostorije."
+          "description": "The translation \"Kvota prostorije je uspešno omogućena\" is not the most natural or precise translation of \"Room quota has been successfully enabled.\" While understandable, 'omogućena' implies enabling a feature, whereas 'aktivirana' (activated) might be more suitable for a quota.",
+          "suggestion": "Kvota prostorije je uspešno aktivirana."
         }
       ],
       "approved_at": null

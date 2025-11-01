@@ -3,7 +3,7 @@
   "content": "<2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "230031d75ca57d38f165f05a0fbf2c89bf74c2c6",
   "created_at": "2025-05-19T21:30:43.772Z",
-  "updated_at": "2025-05-28T09:30:02.859Z",
+  "updated_at": "2025-09-29T11:30:44.494Z",
   "comment": {
     "text": "This translation key is used to display a success message when an item (e.g. file or folder) is successfully copied in the UI. The message includes placeholders for the title and folder name of the copied item. It appears in success messages displayed via the toastr library, often as a toast notification.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useStartFillingSelectDialog.tsx",
-      "line_number": 209,
+      "line_number": 211,
       "context": "toastr.success(\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"CopyItem\"\n values={values}\n components={components}\n />,\n );",
       "module": "/packages/doceditor"
     }
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'uğurla' (successfully) feels slightly unnatural in this context. While technically correct, it doesn't flow as smoothly as a more colloquial expression.",
-          "suggestion": "Consider alternatives like 'növbəti' or 'müvəffəqiyyətlə' for a more natural flow. For example: \"<2>{{title}}</2> müvəffəqiyyətlə <1>{{folderName}}</1> qovluğuna kopyalandı\" or \"<2>{{title}}</2> növbəti <1>{{folderName}}</1> qovluğuna kopyalandı\""
+          "description": "The word 'uğurla' (successfully) is placed awkwardly within the sentence. A more natural phrasing would be 'uğurla köçürüldü' or 'müvəffəqiyyətlə köçürüldü'.",
+          "suggestion": "<2>{{title}}</2> müvəffəqiyyətlə <1>{{folderName}}</1> qovluğuna köçürüldü"
         },
         {
-          "type": "formatting",
-          "description": "The spacing around the `<1>` and `<2>` tags feels slightly off. It might be improved to match the English template more closely.",
-          "suggestion": "Ensure consistent spacing around the tags to match the English template."
+          "type": "incorrect_translation",
+          "description": "The word 'kopyalandı' is a direct transliteration of 'copied'. Using the verb 'köçürüldü' (transferred/moved) would be more natural in this context.",
+          "suggestion": "<2>{{title}}</2> müvəffəqiyyətlə <1>{{folderName}}</1> qovluğuna köçürüldü"
         }
       ],
       "approved_at": null
@@ -65,8 +65,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English uses \"copied to\" which implies an action performed *by* something. The Czech \"úspěšně zkopírováno do\" implies something was *successfully copied into* a destination. While not strictly incorrect, it changes the nuance slightly. A more accurate translation reflecting the original meaning of an action would be 'úspěšně zkopírováno *do* <1>{{folderName}}</1>.",
-          "suggestion": "Consider revising to 'úspěšně zkopírováno do <1>{{folderName}}</1>.'"
+          "description": "The word 'copied' is 'zkopírováno', which is a neuter past participle. It needs to agree with the item being copied (which is likely masculine or feminine in this context). Assuming the item is masculine, it should be 'zkopírováno'. Assuming it's feminine it should be 'zkopírována'. Without further context, it's difficult to determine the correct gender. It's generally better to use a gender-neutral phrasing to avoid ambiguity.",
+          "suggestion": "Consider rephrasing to avoid gender agreement or to specify the gender of the item being copied (e.g., 'úspěšně zkopírovaný soubor' for a masculine file, 'úspěšně zkopírovaná složka' for a feminine folder)."
         }
       ],
       "approved_at": null
@@ -83,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Greek translation retains the HTML-like tags <2> and <1> which should ideally be removed or adapted for a more natural Greek sentence structure, depending on the intended use case. While technically correct, it's not ideal for display.",
-          "suggestion": "Consider removing the tags or replacing them with a more appropriate Greek alternative for visual presentation, e.g., 'Το <2>{{title}}</2> αντιγράφηκε επιτυχώς στον φάκελο <1>{{folderName}}</1>' could be rephrased as 'Το <2>{{title}}</2> αντιγράφηκε επιτυχώς στον φάκελο <1>{{folderName}}</1>.'"
+          "description": "The angle brackets are not properly closed. While technically valid, it's best to ensure perfect alignment with the English format.",
+          "suggestion": "Ensure consistent use of angle brackets across both English and Greek. Verify closing tags match opening tags."
         }
       ],
       "approved_at": null
@@ -92,13 +92,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The sentence structure could be slightly improved for naturalness in Spanish. While grammatically correct, it feels a bit literal.",
-          "suggestion": "<2>{{title}}</2> se copió correctamente en <1>{{folderName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -107,7 +101,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The possessive suffix ':n' is incorrectly attached to 'folderName'. It should be attached to the noun it modifies. In this case, 'folderName' is already a noun and doesn't require a possessive suffix.",
+          "description": "The Finnish translation uses the genitive case ('n') after 'folderName'. It's not entirely incorrect, but depending on the context, a more natural phrasing might be preferable. The current construction implies possession (e.g., 'to folderName's'). A more general 'into' or 'to' might be better.",
           "suggestion": "<2>{{title}}</2> onnistuneesti kopioitu <1>{{folderName}}</1>"
         }
       ],
@@ -119,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'successfully copied' is better translated as 'transféré avec succès' in French to maintain the same level of formality and emphasis.",
-          "suggestion": "<2>{{title}}</2> transféré avec succès dans <1>{{folderName}}</1>"
+          "description": "The word 'successfully' is translated as 'avec succès'. While technically correct, in this context, a more natural translation would be 'réussi'. 'Avec succès' feels a bit formal for a simple copy notification.",
+          "suggestion": "<2>{{title}}</2> a été copié avec succès dans <1>{{folderName}}</1>"
         }
       ],
       "approved_at": null
@@ -128,7 +122,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'copied' is translated as 'պատճենվեց'. While technically correct, it sounds slightly unnatural in this context. A more natural phrasing might be 'տեղափոխվեց' (telep’ovets’) - meaning ‘moved’ or 'transferred'.",
+          "suggestion": "<2>{{title}}</2> հաջողությամբ տեղափոխվեց <1>{{folderName}}</1>ում"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -140,13 +140,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation maintains the HTML tags <2> and <1>, mirroring the English content. While technically correct in preserving the structure, it might be stylistically preferred to remove these tags or adjust their usage depending on the overall application context and rendering requirements.",
-          "suggestion": "Consider removing the HTML tags <2> and <1> or adapting their usage to fit the specific rendering environment. For example, if the tags control styling, ensure the styling is appropriately applied or adjusted for Japanese typography and layout."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -154,9 +148,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammatical",
-          "description": "The particle '이/가' is used incorrectly. It should be used based on whether 'title' is a noun ending in a consonant or vowel, respectively. Since it's a variable representing a title, its ending isn't known.  A more general and grammatically sound option is to simply omit the particle, or use a more contextualized particle if more information is available.",
-          "suggestion": "Consider removing the particle or changing to a more contextualized particle if the noun ending is known. For example: `<2>{{title}}</2> <1>{{folderName}}</1>에 복사되었습니다"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully copied to' is not accurately translated. '이/가 복사되었습니다' implies passive voice, but 'successfully' is missing and the implication of a completed action is weak. A better translation would include an explicit indicator of successful completion.",
+          "suggestion": "<2>{{title}}</2>이/가 <1>{{folderName}}</1>에 성공적으로 복사되었습니다"
+        },
+        {
+          "type": "formatting",
+          "description": "The verb '복사되었습니다' requires a subject marker. While '이/가' is present, the context requires more clarity. Combining the correction from the previous issue is recommended.",
+          "suggestion": "<2>{{title}}</2>이/가 <1>{{folderName}}</1>에 성공적으로 복사되었습니다"
         }
       ],
       "approved_at": null
@@ -164,7 +163,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"successfully copied\" is not perfectly captured by \"ຢ່າງສໍາເລັດແລ້ວ\". While it conveys completion, it lacks the direct sense of 'successful'. A more accurate translation might consider phrasing that emphasizes the action being successful.",
+          "suggestion": "Consider alternatives like \"ສໍາເລັດຜົນດີ\" or \"ເຮັດສໍາເລັດຢ່າງຖືກຕ້ອງ\" to more accurately convey 'successfully'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -194,13 +199,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'successfully copied' is translated as 'copiado com sucesso'. While technically correct, a more natural Portuguese phrasing would be 'copiado com êxito' or simply 'copiado'.",
-          "suggestion": "<2>{{title}}</2> copiado com êxito para <1>{{folderName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -215,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English text uses 'copied', implying a singular item. The Russian translation uses 'скопирована', which is feminine and implies the item being copied has a feminine gender.  This might not align with the intended meaning and could be inaccurate depending on the 'title' value.",
-          "suggestion": "Consider whether the gender of 'title' needs to be considered. If the item can be either masculine or feminine, use a gender-neutral form like 'скопировано' or rephrase the sentence to avoid gendered verbs."
+          "description": "The English sentence uses 'copied' which implies a singular item. The Russian translation uses 'скопирована', which is the feminine past participle of 'to copy' and implies the item being copied is feminine. This may be incorrect depending on the context of 'title'.",
+          "suggestion": "If 'title' refers to a masculine noun, the Russian translation should use 'скопирован'. If it refers to a neuter noun, 'скопировано' is correct. The most accurate translation depends on the gender of 'title'."
         }
       ],
       "approved_at": null
@@ -227,13 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වෙත' (wetha) implies 'to' or 'at' and doesn't accurately convey the 'copied to' aspect of the English sentence. It suggests the title was copied *to* the location, rather than *into* the folder.",
-          "suggestion": "<2>{{title}}</2> <1>{{folderName}}</1> හි සාර්ථකව පිටපත් කරන ලදී"
-        },
-        {
-          "type": "formatting",
-          "description": "The order of tags should match English content. In Sinhala, English style <1> and <2> need to be kept",
-          "suggestion": "<2>{{title}}</2> <1>{{folderName}}</1> වෙත සාර්ථකව පිටපත් කරන ලදී"
+          "description": "The Sinhala translation \"වෙත\" is not the most natural or accurate way to express \"to\" in this context. It implies movement towards a location rather than a destination of the copy.",
+          "suggestion": "Consider a more accurate translation like \"<2>{{title}}</2> <1>{{folderName}}</1> වෙතට සාර්ථකව පිටපත් කරන ලදී\" or \"<2>{{title}}</2> <1>{{folderName}}</1> තුළ සාර්ථකව පිටපත් කරන ලදී\" depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -256,8 +250,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'copied' (English: copied) is translated as 'kopiran' in Serbian, which is grammatically incorrect in this context. The correct form should be 'премештен' (premešten) or 'копиран' (kopiran) in the nominative case, depending on the desired nuance.",
-          "suggestion": "<2>{{title}}</2> успешно премештен у <1>{{folderName}}</1>"
+          "description": "The word 'copied' is translated as 'kopiran'. While technically correct, a more natural and common translation for 'copied' in this context would be 'премештен' (premešten) or 'копиран у' (kopiran u). The choice depends on the precise nuance desired, but 'kopiran' alone sounds a bit awkward.",
+          "suggestion": "Consider using 'премештен' or 'копиран у' instead of 'копиран'."
         }
       ],
       "approved_at": null
@@ -273,9 +267,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The word order in the Turkish translation is slightly awkward. While understandable, it's not the most natural way to express the sentence in Turkish. The English phrase 'copied to' is best translated as 'kopyalandı' at the end of the sentence.",
+          "suggestion": "<2>{{title}}</2> <1>{{folderName}}</1> konumuna başarıyla kopyalandı"
+        },
+        {
           "type": "formatting",
-          "description": "The placement of the numbering within the tags is inconsistent with the English version. The English version uses <2>{{title}}</2>, while the Turkish version follows the same order but lacks the closing tag placement.",
-          "suggestion": "<2>{{title}}</2>, <1>{{folderName}}</1> konumuna başarıyla kopyalandı"
+          "description": "The placement of the number tags (<1> and <2>) feels unnatural in Turkish. A more idiomatic construction might move the 1 and 2 tags. It's generally better to place them after the element they refer to if the word order is adjusted.",
+          "suggestion": "<2>{{title}}</2> konumuna <1>{{folderName}}</1> başarıyla kopyalandı"
         }
       ],
       "approved_at": null
@@ -289,13 +288,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets around the placeholders {{title}} and {{folderName}} are not consistently applied. The closing angle bracket is space separated from the content within the Vietnamese translation.",
-          "suggestion": "<2>{{title}}</2> được sao chép thành công vào <1>{{folderName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

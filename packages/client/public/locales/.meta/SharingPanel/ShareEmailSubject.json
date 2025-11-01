@@ -3,7 +3,7 @@
   "content": "You have been granted access to the {{itemName}} document",
   "content_en_sha1_hash": "63b9e4bbf777b1c142697c74e24fc94f9f01d505",
   "created_at": "2025-05-19T21:30:50.260Z",
-  "updated_at": "2025-05-28T09:30:02.373Z",
+  "updated_at": "2025-10-13T13:22:35.662Z",
   "comment": {
     "text": "This translation key is used for the subject line of an email invitation to share a document. It appears in a scenario where a user is granted access to a document and can be used as the subject of the email sent to them.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 191,
+      "line_number": 189,
       "context": "// };\n \n // const shareEmail = useCallback(\n //   (link) => {\n //     const { title, shareLink } = link;\n //     const subject = t(\"SharingPanel:ShareEmailSubject\", { title });\n //     const body = t(\"SharingPanel:ShareEmailBody\", { title, shareLink });\n \n //     const mailtoLink = `mailto:${objectToGetParams({\n //       subject,\n //       body,",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"لقد تم منحك حق الوصول إلى المستند {{itemName}}\" is a literal translation and sounds slightly unnatural in Arabic. A more natural phrasing would emphasize the granting of access.",
-          "suggestion": "لقد تم منحك صلاحية الوصول إلى المستند {{itemName}}"
+          "description": "The phrase 'You have been granted access' is not accurately conveyed by 'لقد تم منحك حق الوصول إلى'. A more natural and accurate translation would be something like 'تم منحك صلاحية الوصول إلى' or 'لقد أُعطيتك صلاحية الوصول إلى'.",
+          "suggestion": "تم منحك صلاحية الوصول إلى المستند {{itemName}}"
         }
       ],
       "approved_at": null
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Azerbaijani sentence could be improved for flow and clarity. While technically correct, it sounds a bit stiff. The use of 'giriş icazəsi verildi' is passive and less natural in this context.",
-          "suggestion": "Sizə {{itemName}} sənədinə daxil olmaq üçün icazə verildi"
+          "description": "The translation \"Sizə {{itemName}} sənədinə giriş icazəsi verildi \" could be improved for natural flow. The preposition 'nə' after 'sənədinin' feels slightly awkward. It would sound more natural to omit it or rephrase.",
+          "suggestion": "Sizə {{itemName}} sənədi ilə giriş icazəsi verildi"
         },
         {
-          "type": "formatting",
-          "description": "Consider capitalizing the first letter of the sentence for better readability.",
-          "suggestion": "Sizə {{itemName}} sənədinə daxil olmaq üçün icazə verildi."
+          "type": "grammar",
+          "description": "While not strictly incorrect, 'giriş icazəsi verildi' is a bit verbose. A more concise phrasing would enhance readability.",
+          "suggestion": "Sizə {{itemName}} sənədinə daxil olmaq icazəsi verildi"
         }
       ],
       "approved_at": null
@@ -59,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Даден Ви е достъп до документ {{itemName}}' is not the most natural or precise translation of 'You have been granted access to the {{itemName}} document'. A more suitable translation might be 'Имате достъп до документ {{itemName}}' or 'Предоставен Ви е достъп до документ {{itemName}}'. 'Даден Ви е' sounds a bit formal and less common in this context.",
-          "suggestion": "Имате достъп до документ {{itemName}}"
+          "description": "The translation 'Даден Ви е достъп до документ {{itemName}}' doesn't fully capture the original meaning of \"You have been granted access to the {{itemName}} document.\" A more accurate translation would convey the act of granting access, not just the existence of access.",
+          "suggestion": "Предоставен Ви е достъп до документ {{itemName}}"
         }
       ],
       "approved_at": null
@@ -68,13 +68,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Byl vám udělen přístup k dokumentu {{itemName}}' is a bit literal and could be more natural. A more common and idiomatic phrasing would be 'Máte přístup k dokumentu {{itemName}}' or 'Získali jste přístup k dokumentu {{itemName}}'.",
-          "suggestion": "Máte přístup k dokumentu {{itemName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -83,7 +77,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ihnen wurde Zugriff auf das Dokument {{itemName}} erteilt' is a bit formal for a share notification. A more conversational and user-friendly option would be preferable.",
+          "description": "The translation 'Ihnen wurde Zugriff auf das Dokument {{itemName}} erteilt' is a bit formal and could be improved for a more user-friendly tone. While grammatically correct, it doesn't convey the same friendly feel as the English original.",
           "suggestion": "Sie haben Zugriff auf das Dokument {{itemName}} erhalten."
         }
       ],
@@ -98,13 +92,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, \"Se le ha concedido acceso\" is a rather formal and less natural way to say \"You have been granted access\". A more conversational and common translation would be \"Tiene acceso a\".",
-          "suggestion": "Tiene acceso a"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -119,7 +107,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"autorisé\" is a valid translation for 'granted,' it implies permission was specifically given. 'granted access' often implies access was provided or enabled, not necessarily explicitly permitted. A more accurate translation reflecting that nuance might be 'Vous avez reçu l'accès au document {{itemName}}' or 'Vous avez été donné accès au document {{itemName}}'.",
+          "description": "The translation 'autorisé' implies permission granted by someone else. 'Granted access' implies access has been provided. A better translation would convey that the user now has access.",
           "suggestion": "Vous avez reçu l'accès au document {{itemName}}"
         }
       ],
@@ -131,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ձեզ տրվել է մատչում դեպի {{itemName}} փաստաթուղթ:\" doesn't accurately convey the meaning of \"You have been granted access to the {{itemName}} document.\" The phrase \"մատչում դեպի\" (matchum depi) is unusual and doesn't clearly indicate 'access'.",
-          "suggestion": "Ձեզ շնորհվել է մուտք դեպի {{itemName}} փաստաթուղթ: (Dez shnorhvel e mut'k depi {{itemName}} fasṭaṭuɣt): This translates to 'You have been given access to the {{itemName}} document'."
+          "description": "The translation 'Ձեզ տրվել է մատչում դեպի {{itemName}} փաստաթուղթ:' is not an accurate translation of 'You have been granted access to the {{itemName}} document'. 'Մատչում դեպի' doesn't convey 'access to'. A more accurate translation would be something along the lines of 'Ձեզ տրվել է հասանելիություն դեպի {{itemName}} փաստաթուղթ:' or 'Ձեզ շնորհվել է մուտք դեպի {{itemName}} փաստաթուղթ:'",
+          "suggestion": "Ձեզ տրվել է հասանելիություն դեպի {{itemName}} փաստաթուղթ:"
         }
       ],
       "approved_at": null
@@ -143,7 +131,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ti è stato concesso l'accesso al documento: {{itemName}}' is overly formal and not as natural as it could be. A more natural phrasing would be 'Hai accesso al documento: {{itemName}}' or 'Ti diamo accesso al documento: {{itemName}}'.",
+          "description": "The translation 'Ti è stato concesso l'accesso al documento: {{itemName}}' is a literal translation and sounds slightly unnatural in Italian. A more natural phrasing would be 'Hai accesso al documento: {{itemName}}' or 'Ti è stato dato accesso al documento: {{itemName}}'.",
           "suggestion": "Hai accesso al documento: {{itemName}}"
         }
       ],
@@ -155,13 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is technically correct but sounds unnatural in Japanese. A more natural phrasing would use a more active voice or a more concise wording.",
-          "suggestion": "あなたは{{itemName}}ドキュメントへのアクセス許可が与えられました。"
+          "description": "The translation 'あなたは{{itemName}}ドキュメントへのアクセスを許可されています。' is overly formal and passive. A more natural and direct translation would be better. '許可されています' implies an action taken *for* the recipient rather than a direct grant.",
+          "suggestion": "あなたは{{itemName}}ドキュメントにアクセスできるようになりました。"
         },
         {
-          "type": "formatting",
-          "description": "While the use of katakana for 'ドキュメント' is correct, it might be beneficial to consider whether it is truly necessary for the target audience. If the audience is less familiar with English loanwords, a more general term could improve readability.",
-          "suggestion": "あなたは{{itemName}}の資料へのアクセスを許可されています。"
+          "type": "incorrect_translation",
+          "description": "The English phrasing 'You have been granted access' is a bit indirect. The suggested correction aims for a more conversational and active tone.",
+          "suggestion": "あなたは{{itemName}}ドキュメントにアクセスできるようになりました。"
         }
       ],
       "approved_at": null
@@ -175,7 +163,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}' is a literal translation and could be improved for natural flow in Lao. A more natural phrasing might be 'ທ່ານໄດ້ຮັບການເຂົ້າເຖິງເອກະສານ {{itemName}}' or 'ທ່ານສາມາດເຂົ້າເຖິງເອກະສານ {{itemName}} ໄດ້'.",
+          "suggestion": "ທ່ານສາມາດເຂົ້າເຖິງເອກະສານ {{itemName}} ໄດ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -196,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Udzielono Ci dostępu do dokumentu {{itemName}}' is a bit formal and could be improved for a more user-friendly tone. A more natural phrasing would be closer to 'Masz dostęp do dokumentu {{itemName}}' or 'Otrzymałeś dostęp do dokumentu {{itemName}}'.",
-          "suggestion": "Otrzymałeś dostęp do dokumentu {{itemName}}"
+          "description": "The translation 'Udzielono Ci dostępu do dokumentu {{itemName}}' is a literal translation but sounds somewhat formal and impersonal. A more natural and user-friendly Polish phrasing would be 'Masz dostęp do dokumentu {{itemName}}' or 'Otrzymałeś dostęp do dokumentu {{itemName}}'.",
+          "suggestion": "Masz dostęp do dokumentu {{itemName}}"
         }
       ],
       "approved_at": null
@@ -205,19 +199,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Obteve acesso ao documento {{itemName}}.' is a literal translation and doesn't fully convey the intended meaning of 'You have been granted access'. A more natural translation would be something like 'Você recebeu acesso ao documento {{itemName}}.' or 'Você foi autorizado a acessar o documento {{itemName}}.'",
-          "suggestion": "Você recebeu acesso ao documento {{itemName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Você obteve acesso ao documento {{itemName}}.' is a literal translation that doesn't quite capture the nuance of 'You have been granted access'. A more natural phrasing would be something like 'Você foi autorizado a acessar o documento {{itemName}}.' or 'Você tem permissão para acessar o documento {{itemName}}.'",
+          "suggestion": "Você foi autorizado a acessar o documento {{itemName}}."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -226,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"V-a fost acordat accesul la document {{itemName}}\" is not the most natural or idiomatic way to express \"You have been granted access to the {{itemName}} document.\" A more natural translation would emphasize *who* granted the access.",
-          "suggestion": "S-a acordat acces la documentul {{itemName}}."
+          "description": "The translation \"V-a fost acordat accesul la document {{itemName}}\" is not the most natural or accurate translation of \"You have been granted access to the {{itemName}} document.\" A more natural phrasing would be something like \"Ați primit acces la documentul {{itemName}}\" or \"Aveți acces la documentul {{itemName}}\".",
+          "suggestion": "Ați primit acces la documentul {{itemName}}"
         }
       ],
       "approved_at": null
@@ -243,14 +237,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"ඔබට {{itemName}} ලේඛනයට ප්‍රවේශය ලබා දී ඇත\" could be improved for naturalness. A more natural phrasing would indicate that someone *shared* the document with the recipient.",
-          "suggestion": "ඔබට {{itemName}} ලේඛනය බෙදා දී ඇත"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ලබා දී ඇත' (laba dee ath) feels slightly clunky. While technically correct, it's not the most common or elegant way to express 'granted access'.",
-          "suggestion": "ඔබට {{itemName}} ලේඛනය වෙත ප්‍රවේශය ඇත"
+          "type": "spelling",
+          "description": "The word 'ඔබට' (obata) is grammatically correct but could be more natural as 'ඔබේ' (obae) in this context. It implies 'to you' versus 'your'.",
+          "suggestion": "ඔබේ {{itemName}} ලේඛනයට ප්‍රවේශය ලබා දී ඇත"
         }
       ],
       "approved_at": null
@@ -258,19 +247,19 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bol vám udelený prístup k dokumentu {{itemName}}.' is technically correct but a more natural Slovak phrasing would be 'Máte prístup k dokumentu {{itemName}}.' or 'Boli vám umožnený prístup k dokumentu {{itemName}}.'",
-          "suggestion": "Máte prístup k dokumentu {{itemName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'Omogočen vam je dostop do {{itemName}} dokumenta' is not the most natural or common way to express 'You have been granted access'. A more idiomatic translation would be 'Imate dostop do {{itemName}} dokumenta' or 'Dostop do {{itemName}} dokumenta je omogočen.'. The current translation implies that access *is* enabled, rather than you *having* access.",
+          "suggestion": "Imate dostop do {{itemName}} dokumenta"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -279,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'granted access' is not perfectly conveyed by 'добити приступ'. While 'приступ' means access, 'добити' implies obtaining or achieving something, which isn't the most accurate reflection of being given access. A more accurate translation would be 'имате приступ' or 'одобрен вам је приступ'.",
-          "suggestion": "Имате приступ {{itemName}} документу"
+          "description": "The translation 'Добили сте приступ {{itemName}} документу' is a literal translation and doesn't quite capture the natural flow of the English sentence. A more natural Serbian translation would use a different phrasing.",
+          "suggestion": "Добили сте дозволу за приступ {{itemName}} документу."
         }
       ],
       "approved_at": null
@@ -288,7 +277,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dobili ste pristup {{itemName}} dokumentu' is a reasonable translation, but could be more natural. A more idiomatic Serbian translation might be 'Imate pristup {{itemName}} dokumentu' or 'Omogućeno vam je da pristupite {{itemName}} dokumentu'.",
+          "suggestion": "Imate pristup {{itemName}} dokumentu"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -297,7 +292,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'doküman' is a less common and sometimes considered incorrect spelling. The correct spelling is 'dokümanı'.",
+          "description": "The word 'dokümanına' is a less common and slightly archaic spelling of 'dokümanı'. The more common and preferred spelling is 'dokümanı'.",
           "suggestion": "dokümanı"
         }
       ],
@@ -312,19 +307,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"granted access\" is not directly translated. While \"cấp quyền truy cập\" is generally understood, a more literal and potentially more natural translation could be considered depending on the tone desired.  'Bạn đã được cho phép truy cập...' is another possibility.",
-          "suggestion": "Consider alternatives like 'Bạn đã được cho phép truy cập...' or retaining 'Bạn đã được cấp quyền truy cập...' if it aligns with existing terminology."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"访问权限\" (access permission) sounds somewhat formal and less natural in this context. A more common and user-friendly phrasing would be \"查看权限\" (view permission) or simply \"访问\" (access).",
+          "suggestion": "您已获得{{itemName}}文档的查看权限"
+        }
+      ],
       "approved_at": null
     }
   }

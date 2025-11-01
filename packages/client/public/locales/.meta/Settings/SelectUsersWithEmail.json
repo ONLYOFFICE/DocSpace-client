@@ -3,7 +3,7 @@
   "content": "Select users with e-mail",
   "content_en_sha1_hash": "b44aac6c5a9314d6635f445965d4923714037e14",
   "created_at": "2025-05-19T21:30:52.583Z",
-  "updated_at": "2025-05-28T09:30:02.507Z",
+  "updated_at": "2025-06-30T12:20:31.408Z",
   "comment": {
     "text": "\"Select users who have an email address to import into Nextcloud.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 62,
+      "line_number": 61,
       "context": "acceptedExtensions={[\".zip\"]}\n />\n ),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (",
       "module": "/packages/client"
     }
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"تحديد المستخدمين باستخدام البريد الإلكتروني\" while generally accurate, is a bit literal. A more natural and idiomatic translation would be better suited for a user interface.",
-          "suggestion": "تحديد المستخدمين عبر البريد الإلكتروني"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Select users with e-mail' implies a selection process based on email addresses. The Azerbaijani translation 'E-poçtu olan istifadəçiləri seçin' literally translates to 'Select users who have e-mail.' While not entirely wrong, it doesn't perfectly convey the action of *selecting* based on email.",
-          "suggestion": "Consider a translation that emphasizes the selection action, such as 'E-poçt üzrə istifadəçiləri seçin' or 'E-poçt ilə istifadəçiləri seçin'."
+          "description": "The translation 'E-poçtu olan istifadəçiləri seçin' is a literal translation and can be improved for naturalness. While technically correct, it doesn't flow as well as other options.",
+          "suggestion": "İstifadəçiləri e-poçt ünvanına görə seçin"
         }
       ],
       "approved_at": null
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Valitse käyttäjät, joilla on sähköposti' is a literal translation that is grammatically correct but sounds slightly awkward in Finnish. A more natural phrasing would be 'Valitse käyttäjät sähköpostiosoitteella' or 'Valitse käyttäjät sähköpostitse'.",
-          "suggestion": "Valitse käyttäjät sähköpostiosoitteella"
+          "description": "The translation 'Valitse käyttäjät, joilla on sähköposti' is a literal translation. A more natural and idiomatic Finnish translation would be 'Valitse käyttäjät sähköpostiosoitteen perusteella' or 'Valitse sähköpostiosoitteen perusteella käyttäjät'. The original phrasing is technically correct, but doesn't flow well in Finnish.",
+          "suggestion": "Valitse käyttäjät sähköpostiosoitteen perusteella"
         }
       ],
       "approved_at": null
@@ -96,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sélectionnez les utilisateurs ayant l'adresse e-mail' is a bit verbose. A more concise and natural translation would be preferred.",
+          "description": "The translation 'Sélectionnez les utilisateurs ayant l'adresse e-mail' is too literal and verbose for a UI label. A more concise and natural translation would be better.",
           "suggestion": "Sélectionner les utilisateurs par e-mail"
         }
       ],
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ընտրել էլփոստով օգտվողներ' literally translates to 'Select users with email'. While understandable, a more natural and idiomatic Armenian phrasing would improve the user experience.  The phrase 'էլփոստով' implies 'with email' but might not be the most fluent way to express it in this context.",
-          "suggestion": "Consider 'Ընտրել օգտվողներ էլփոստի միջոցով' (Select users through email) or 'Ընտրել էլեկտրոնային փոստով օգտվողներ' (Select users with electronic mail) which are potentially more natural."
+          "description": "The translation \"Ընտրել էլփոստով օգտվողներ\" literally translates to 'Select users with email'. While understandable, a more natural Armenian phrasing might be preferable. A more idiomatic option would be something closer to 'Select users by email' or 'Find users by email'.",
+          "suggestion": "Consider 'Էլփոստով ընտրել օգտվողներ' or 'Ընտրել օգտվողներ էլփոստի միջոցով'."
         }
       ],
       "approved_at": null
@@ -126,8 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'メールアドレスがあるユーザーの選択' is a literal translation that sounds somewhat unnatural in Japanese. It directly translates to 'Selection of users who have email addresses.' A more natural phrasing would be something like 'メールアドレスを持つユーザーを選択' (Mēru adoresu o motsu yūzā o sentaku) or 'メールアドレスを持つユーザーを選択' (Mēru adoresu o motsu yūzā o sentaku).",
-          "suggestion": "メールアドレスを持つユーザーを選択"
+          "description": "The translation 'メールアドレスがあるユーザーの選択' is a literal translation but not the most natural or concise way to express 'Select users with e-mail' in Japanese within a UI context. It could be interpreted as 'The selection of users who have an email address'.",
+          "suggestion": "メールアドレスでユーザーを選択"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the phrase 'メールアドレスがあるユーザーの選択' is long and might not fit well in a UI element.  The suggested correction is more concise.",
+          "suggestion": "メールアドレスでユーザーを選択"
         }
       ],
       "approved_at": null
@@ -138,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"이메일이 있는 사용자 선택\" is a literal translation but could be improved for naturalness in Korean. While technically correct, it doesn't flow as elegantly as alternatives.",
-          "suggestion": "Consider alternatives like \"이메일 주소를 가진 사용자 선택\" or \"이메일 주소로 사용자 선택\" for better readability. A more conversational option could be \"이메일 사용자 선택\" depending on context."
+          "description": "The translation '이메일이 있는 사용자 선택' (Email-i inneun sayongja seontaek) is a literal translation that can sound a bit awkward in natural Korean. While technically correct, it's not the most fluent or idiomatic way to express 'Select users with e-mail'.",
+          "suggestion": "Consider a more natural phrasing like '이메일 주소를 가진 사용자 선택' (Imeil juoseul gajin sayongja seontaek) or '이메일 주소로 사용자 선택' (Imeil juoseoro sayongja seontaek)."
         }
       ],
       "approved_at": null
@@ -150,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ອີເມລ' (imeel) is a transliteration of 'email' and while understandable, a more natural Lao equivalent would be preferable.  'ອີເມລ໌' is also acceptable.",
-          "suggestion": "ອີເມລ໌"
+          "description": "The word 'ອີເມລ' (e-mail) is a direct transliteration and may not be the most natural or widely understood term in Lao. While understandable, it lacks a truly Lao equivalent.",
+          "suggestion": "Consider using a more localized term like 'ບູລິການອີເລັກໂຕຣນິກ' (buli kan ilek tronik) or 'ຊ່ອງທາງອີເລັກໂຕຣນິກ' (chong thang ilek tronik) if a truly localized alternative is desired. Otherwise, leaving it as 'ອີເມລ' is generally acceptable for clarity."
         }
       ],
       "approved_at": null
@@ -162,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Atlasīt lietotājus ar e-pastu' is understandable, a more natural and accurate translation of 'Select users with e-mail' would be 'Izvēlēties lietotājus ar e-pastu'. 'Atlasīt' implies a more careful or selective choosing, whereas 'izvēlēties' is a more direct equivalent of 'select'.",
-          "suggestion": "Izvēlēties lietotājus ar e-pastu"
+          "description": "The translation 'Atlasīt lietotājus ar e-pastu' is a literal translation but not the most natural phrasing in Latvian. 'E-pasts' is correct for email, but the phrase 'ar e-pastu' sounds somewhat awkward. A more natural way to express 'with e-mail' in this context would be 'ar e-pastā'.",
+          "suggestion": "Atlasīt lietotājus ar e-pastā"
         }
       ],
       "approved_at": null
@@ -198,13 +197,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"Secectați\" is a spelling error. It should be \"Selectați\".",
+          "description": "The word 'Secectați' is a misspelling. It should be 'Selectați'.",
           "suggestion": "Selectați"
         },
         {
           "type": "incorrect_translation",
-          "description": "While the meaning is generally understood, \"Selectați\" is a more direct and accurate translation of \"Select\" in this context.",
-          "suggestion": "Selectați utilizatorii cu adresa de e-mail."
+          "description": "The translation 'Secectați utilizatorii cu adresa de e-mail' isn't a natural Romanian phrasing. A more accurate and natural translation of 'Select users with e-mail' would be 'Selectați utilizatorii cu e-mail'.",
+          "suggestion": "Selectați utilizatorii cu e-mail"
         }
       ],
       "approved_at": null
@@ -221,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වි-තැපෑලක් සහිත පරිශ්‍රීලකයින් තෝරන්න' is a literal translation and doesn't convey the intended meaning clearly in Sinhala. 'වි-තැපෑලක් සහිත' literally means 'with an email,' which is awkward. A more natural phrasing would imply selecting users *by* email.",
-          "suggestion": "Consider 'වි-තැපෑලෙන් පරිශ්‍රීලකයින් තෝරන්න' (Select users by email) or 'වි-තැපෑල ලිපිනය සහිත පරිශ්‍රීලකයින් තෝරන්න' (Select users with an email address)."
+          "description": "The translation 'වි-තැපෑලක් සහිත පරිශ්‍රීලකයින් තෝරන්න' is not the most natural or accurate translation of 'Select users with e-mail'. 'වි-තැපෑලක් සහිත' literally translates to 'with an e-mail', which is a bit awkward. A more natural phrasing would convey the selection based on email address.",
+          "suggestion": "Consider a translation like 'වි-තැපෑලි ලිපිනය සහිත පරිශ්‍රීලකයින් තෝරන්න' (Select users with e-mail addresses) or 'ඊ-තැපෑලි ලිපිනය අනුව පරිශ්‍රීලකයින් තෝරන්න' (Select users by e-mail address)."
         }
       ],
       "approved_at": null
@@ -245,13 +244,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Изабери кориснике са емаил-ом' is not the most natural or accurate translation of 'Select users with e-mail'. While technically understandable, 'емаил-ом' is an awkward and somewhat forced incorporation of the English word. A more idiomatic translation would use a Serbian equivalent of 'email'.",
+          "description": "The translation 'Изабери кориснике са емаил-ом' is not the most natural or accurate translation of 'Select users with e-mail'. The term 'емаил-ом' is a direct transliteration and doesn't reflect standard Serbian usage.  A more idiomatic translation would use a Serbian equivalent for 'email'.",
           "suggestion": "Изабери кориснике са имејлом"
         },
         {
           "type": "formatting",
-          "description": "The use of the genitive case ending '-ом' with the borrowed word 'емаил' is not standard practice in Serbian.  While understood, it can appear awkward.",
-          "suggestion": "Use the nominative case ending with 'email' (Изабери кориснике са имејлом) or a Serbian equivalent (Изабери кориснике са електронском поштом)."
+          "description": "The use of the instrumental case ending '-ом' on 'емаил' is grammatically correct, but stylistically unusual in modern Serbian for technical terms. It sounds overly literal.",
+          "suggestion": "Remove the -ом suffix for a more modern feel, which is already addressed in the incorrect translation suggestion."
         }
       ],
       "approved_at": null
@@ -262,13 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izaberi korisnike sa email-om' is not the most natural or precise translation of 'Select users with e-mail'. While understandable, it's slightly awkward.",
-          "suggestion": "Odaberite korisnike sa e-mail adresom"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'email-om' is grammatically correct, but a more common and professional phrasing would use the full 'e-mail adresom'.",
-          "suggestion": "Use 'e-mail adresom' instead of 'email-om'."
+          "description": "The translation 'Izaberi korisnike sa email-om' is not the most natural or precise translation of 'Select users with e-mail'. 'Izaberi' is correct for 'Select', but 'sa email-om' is somewhat clunky. A more fluent option would be 'koji imaju email' or 's email adresom'.",
+          "suggestion": "Izaberi korisnike koji imaju email"
         }
       ],
       "approved_at": null
@@ -276,7 +270,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'E-posta ile kullanıcıları seçin' is a generally accurate translation of 'Select users with e-mail', but 'ile' implies 'with' in a specific way (using a tool/method). A more natural and common translation would be 'E-posta adresine göre kullanıcıları seçin' which means 'Select users by e-mail address'.",
+          "suggestion": "E-posta adresine göre kullanıcıları seçin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -285,7 +285,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Вибрати користувачів з адресою електронної пошти' is overly literal and slightly awkward. A more natural Ukrainian translation would be something like 'Вибрати користувачів за електронною поштою' or 'Обрати користувачів за електронною адресою'.",
+          "description": "The translation \"Вибрати користувачів з адресою електронної пошти\" is overly verbose and literal. A more natural and concise translation would be preferred.",
           "suggestion": "Вибрати користувачів за електронною поштою"
         }
       ],
@@ -303,7 +303,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"选择有电子邮件的用户\" is a bit literal and sounds unnatural in Chinese. A more natural phrasing would imply selecting users *by* email.",
+          "description": "While technically correct, \"选择有电子邮件的用户\" is a very literal translation. A more natural and idiomatic Chinese translation would be \"选择拥有电子邮件的用户\" or \"选择具有电子邮件的用户\". The use of '有' (yǒu) can sound slightly awkward in this context.",
           "suggestion": "选择拥有电子邮件的用户"
         }
       ],

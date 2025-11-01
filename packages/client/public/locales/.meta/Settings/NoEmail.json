@@ -3,7 +3,7 @@
   "content": "NO EMAIL",
   "content_en_sha1_hash": "0f557b7a5cc37e08743058f11c9f5c1af82a1a29",
   "created_at": "2025-05-19T21:30:52.016Z",
-  "updated_at": "2025-05-28T09:30:02.511Z",
+  "updated_at": "2025-09-29T11:28:56.116Z",
   "comment": {
     "text": "This translation key is used to display \"NO EMAIL\" in the UI. It appears in a specific table cell within a data import component and serves as a placeholder text when an email address is not set for a user.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/UsersRowContent.tsx",
-      "line_number": 186,
+      "line_number": 216,
       "context": "className=\"user-email\"\n fontWeight={600}\n fontSize=\"12px\"\n color={globalColors.gray}\n >\n {prevEmail === \"\" ? t(\"Settings:NoEmail\") : prevEmail}\n </Text>\n </div>\n {isEmailOpen ? (\n isMobile() ? (\n <EmailChangeDialog",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableRow.tsx",
-      "line_number": 235,
+      "line_number": 266,
       "context": "</EmailInputWrapper>\n ) : (\n <span onClick={openEmail} className=\"user-email\" ref={emailTextRef}>\n <EditSvg />\n <Text color={globalColors.gray} className=\"user-email\" truncate>\n {prevEmail !== \"\" ? prevEmail : t(\"Settings:NoEmail\")}\n </Text>\n </span>\n )}\n </TableCell>\n </StyledTableRow>",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'لا يوجد بريد الكتروني' is a literal translation and doesn't convey the same emphasis as 'NO EMAIL'. It translates to 'There is no email'. 'NO EMAIL' is used to highlight the absence of email, often in a setting where it's an option.",
-          "suggestion": "Consider a translation that conveys the emphasis, such as 'بدون بريد إلكتروني' (Without email) or 'لا يوجد خيار بريد إلكتروني' (No email option)."
+          "description": "The translation \"لا يوجد بريد الكتروني\" translates to 'No email address' which is a more verbose translation than the concise English 'NO EMAIL'. While technically correct, it doesn't maintain the same level of brevity.",
+          "suggestion": "لا بريد إلكتروني"
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"E-POÇT YOXDUR\" literally translates to 'NO EMAIL'. While understandable, it's not the most natural or idiomatic way to express 'NO EMAIL' in Azerbaijani. A more accurate and natural translation would be something like 'E-poçt yox'.",
-          "suggestion": "E-poçt yox"
+          "description": "The translation \"E-POÇT YOXDUR\" literally translates to \"EMAIL IS NOT\". While understandable, it's not the most natural or common way to express \"NO EMAIL\" in Azerbaijani. A more idiomatic translation might be something like \"E-poçt yox\" or \"E-poçt olmayıb\".",
+          "suggestion": "Consider alternatives like \"E-poçt yox\" or \"E-poçt olmayıb\"."
         }
       ],
       "approved_at": null
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"KEINE EMAIL\" is a literal translation of \"NO EMAIL\" but doesn't follow typical German phrasing. \"EMAIL\" should be translated as \"E-MAIL\" to be more aligned with common usage.",
+          "description": "The English phrase 'NO EMAIL' is often translated more naturally as 'E-MAIL' or 'EMAIL' in German, especially in user interface contexts. 'KEINE EMAIL' is literally 'NO EMAIL' but sounds less idiomatic and slightly awkward in this setting.",
           "suggestion": "KEINE E-MAIL"
         }
       ],
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ΧΩΡΙΣ EMAIL\" while understandable, isn't the most natural or preferred way to say \"NO EMAIL\" in Greek. A more common and accurate translation would be 'ΔΕΝ EMAIL' or 'ΧΩΡΙΣ EMAIL ΕΠΙΚΟΙΝΩΝΙΑΣ'.",
-          "suggestion": "Consider 'ΔΕΝ EMAIL' or 'ΧΩΡΙΣ EMAIL ΕΠΙΚΟΙΝΩΝΙΑΣ'."
+          "description": "The translation \"ΧΩΡΙΣ EMAIL\" while understandable, is not the most natural or common way to express \"NO EMAIL\" in Greek. A more accurate and idiomatic translation would be 'ΔΕΝ EMAIL' or 'ΧΩΡΙΣ EMAIL' (though the first is preferred).",
+          "suggestion": "ΔΕΝ EMAIL"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Էլ.հասցե չկա' (El.hasce chka) is a literal translation of 'No Email' which means 'No Email Address'. While understandable, a more natural and concise Armenian equivalent for a setting label might be preferable. 'Էլ. փոստ չկա' (El. post chka) would be closer to 'No Email'.",
-          "suggestion": "Էլ. փոստ չկա"
+          "description": "The Armenian translation 'Էլ.հասցե չկա' translates to 'No email address'. While conveying a similar concept, it's not a direct equivalent to 'NO EMAIL', which emphasizes the absence or prohibition of email. A more literal or emphatic translation would be better.",
+          "suggestion": "Consider 'Էլեկտրոնային փոստ չկա' (Elektronayin post ch ka) for a more direct equivalent, or 'Էլ. փոստ արգելված է' (El. post argelvad e) for 'Email prohibited'."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '이메일이 없습니다' (imail-i eopseumnida) translates to 'There is no email'. While technically correct, it lacks the emphasis and stylistic consistency of the English \"NO EMAIL\". A more suitable translation would capture the tone of emphasis.",
-          "suggestion": "이메일 없음 (imeil neom)"
+          "description": "The Korean translation \"이메일이 없습니다\" translates to \"There is no email\" which is a functional equivalent but doesn't directly reflect the English phrase \"NO EMAIL\". \"NO EMAIL\" is more of a label or heading indicating email is disabled or not available. A more appropriate translation that conveys the same meaning as a label might be something like \"이메일 없음\" or \"이메일 사용 불가\".",
+          "suggestion": "이메일 없음"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'NAV E-PASTA ADRESES' translates to 'NO EMAIL ADDRESS' which, while understandable, isn't the most natural or concise way to represent 'NO EMAIL' in Latvian. A more direct and common translation would be 'NAV E-PASTA' or 'NAV E-PASTS'.",
-          "suggestion": "NAV E-PASTA"
+          "description": "The translation 'NAV E-PASTA ADRESES' is too literal. While technically correct, it's not the most natural or user-friendly way to express 'NO EMAIL' in Latvian. It translates to 'NO EMAIL ADDRESS'.",
+          "suggestion": "Consider a more concise and idiomatic translation like 'NAV E-PASTA' (NO EMAIL) or 'NAV E-PASTS' (NO POSTAL EMAIL - a possible clarification depending on context)."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content \"NO EMAIL\" is translated as \"BRAK ADRESU E-MAIL\". While technically correct, \"BRAK E-MAILA\" would be a more natural and common translation for this type of setting label in Polish.",
-          "suggestion": "BRAK E-MAILA"
+          "description": "While 'BRAK ADRESU E-MAIL' is technically correct, it's a bit formal for a settings label. \"Brak E-mail\" or \"Brak adresu\" would be more natural and concise for UI text.",
+          "suggestion": "BRAK E-mail"
         }
       ],
       "approved_at": null
@@ -198,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'NICIUN E-EMAIL' is a literal translation and isn't the most natural Romanian phrasing for 'NO EMAIL'. It includes 'E-EMAIL' which is redundant.",
+          "description": "The translation \"NICIUN E-EMAIL\" is not the most natural or idiomatic Romanian for \"NO EMAIL\". While technically correct, it sounds slightly awkward. A better translation would emphasize the absence of an email address.",
           "suggestion": "FĂRĂ EMAIL"
         }
       ],
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'НЕТ ЭЛЕКТРОННОЙ ПОЧТЫ' is a literal translation of 'NO EMAIL'. While accurate, it's not as concise or common as alternatives.",
-          "suggestion": "Consider a more concise translation like 'Электронная почта отсутствует' or simply 'Нет почты'."
+          "description": "The translation \"НЕТ ЭЛЕКТРОННОЙ ПОЧТЫ\" is a literal translation of 'NO EMAIL' but is less concise and natural sounding than alternative options.",
+          "suggestion": "Consider alternatives like \"Без электронной почты\" or \"Не требуется email\" for a more idiomatic and shorter translation, depending on the context. A more direct translation might also be \"Электронная почта не требуется\"."
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'වි-තැපෑලක් නැත' while literally meaning 'no email', doesn't quite capture the same emphatic meaning as 'NO EMAIL' in English.  'NO EMAIL' often implies a strong refusal or a deliberate setting.",
-          "suggestion": "A more appropriate translation that conveys the same emphasis could be 'තැපෑලක් නැත' (tapaelak nathe) or 'තැපෑලක් ලබා නොගන්නමු' (tapaelak laba nogan'namu) - 'we don't take email'."
+          "description": "The Sinhala translation 'වි-තැපෑලක් නැත' is a literal translation and not the most natural way to express 'NO EMAIL' in Sinhala. It translates to 'without an email' which isn't quite the same meaning.",
+          "suggestion": "A more appropriate translation would be 'ඊමේල් නැත' (Email natha) or 'තැපැල් ලිපිනයක් නැත' (Tapael lipinayak natha) for 'No Email Address'."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'CHÝBA EMAIL' translates to 'EMAIL MISSING' which doesn't accurately reflect the English 'NO EMAIL'. 'NO EMAIL' indicates the absence of an email address, while 'CHÝBA EMAIL' implies it's missing.",
-          "suggestion": "Consider 'ŽIADNY EMAIL' or 'EMAIL NEBOL ZADANÝ' to better convey 'NO EMAIL'."
+          "description": "\"CHÝBA EMAIL\" translates to \"EMAIL MISSING\" which isn't a direct equivalent to \"NO EMAIL\". While it conveys a similar meaning, it's not the most accurate translation.",
+          "suggestion": "Consider \"ŽIADNY EMAIL\" or \"NIE JE EMAIL\" for a closer translation of 'NO EMAIL'."
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"NO EMAIL\" is a shortened, emphatic form, often used in user interfaces. A more accurate Slovenian translation would convey this emphasis. \"NI E-MAILA\" is literally \"There is no email\" which is grammatically correct but lacks the punch of the original. Consider \"BREZ E-POŠTE\" or \"NI E-POŠTE\" as alternatives that more closely match the tone of \"NO EMAIL\".",
-          "suggestion": "BREZ E-POŠTE"
+          "description": "The translation \"NI E-MAILA\" is a literal translation of \"NO EMAIL\" and doesn't convey the meaning of a setting or option. It's more like 'There is no email' rather than 'No email selected' or 'Disable email'.",
+          "suggestion": "Consider alternatives like \"BREZ E-POŠTE\", \"IZKLJUČI E-POŠTO\", or \"NE E-POŠTA\" depending on the specific context and intended user experience."
         }
       ],
       "approved_at": null
@@ -258,8 +258,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'БЕЗ ЕМАИЛ-А' is a direct transliteration and not a natural Serbian equivalent of \"NO EMAIL\". A more appropriate translation would be 'НЕМА ЕМАИЛ' or 'БЕЗ Е-МАИЛА'. The hyphen is unnecessary and makes the phrase sound awkward.",
-          "suggestion": "НЕМА ЕМАИЛ"
+          "description": "The Serbian translation \"БЕЗ ЕМАИЛ-А\" is a transliteration and not a true translation. A more accurate translation of \"NO EMAIL\" would be \"НЕ ПОШТА\" or \"БЕЗ Е-МАИЛА\".",
+          "suggestion": "НЕ ПОШТА"
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphenated form \"ЕМАИЛ-А\" is not standard Serbian writing. The word should be written as one word.",
+          "suggestion": "Е-МАИЛА"
         }
       ],
       "approved_at": null
@@ -270,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"NO EMAIL\" is best translated as \"NEMA EMAILA\" or \"EMAIL NIJE OBAVEZAN\" in Serbian (Latin) to accurately convey the meaning of 'no email' or 'email is not required' respectively. \"BEZ EMAIL-A\" is grammatically incorrect and doesn't convey the intended meaning.",
-          "suggestion": "NEMA EMAILA"
+          "description": "The translation \"BEZ EMAIL-A\" isn't the most natural or accurate translation of \"NO EMAIL\". \"NO EMAIL\" generally implies the absence of an email address or the user choosing not to provide one.",
+          "suggestion": "NE EMAIL or EMAIL-A NEMA"
         }
       ],
       "approved_at": null
@@ -282,8 +287,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"E-POSTA YOK\" is a literal translation of \"NO EMAIL\", it lacks the emphasis and directness conveyed by the original. \"NO EMAIL\" is often used as a stronger statement.",
-          "suggestion": "Consider using a more emphatic Turkish equivalent like \"E-POSTA YOKTUR\" or \"E-POSTA YOK!\" to better capture the original intent, depending on the context."
+          "description": "While \"E-POSTA YOK\" is literally \"NO EMAIL\", \"NO EMAIL\" often translates to a more emphatic or formal tone in Turkish. A more natural and commonly used translation would be \"E-posta yok\" (lowercase first letter).",
+          "suggestion": "E-posta yok"
         }
       ],
       "approved_at": null
@@ -294,8 +299,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"НЕМАЄ ЕЛЕКТРОННОЇ ПОШТИ\" is a literal translation of 'No Email' but might be too formal or lengthy for a settings option. A shorter, more natural-sounding alternative would be better.",
-          "suggestion": "Consider alternatives like \"Електронна пошта відсутня\" or \"Немає пошти\" depending on the desired tone and context within the settings."
+          "description": "The translation 'НЕМАЄ ЕЛЕКТРОННОЇ ПОШТИ' is a literal translation of 'NO EMAIL' but lacks the stylistic punch of a shortened, more user-friendly version often preferred in UI settings. 'NO EMAIL' is frequently used as a concise label.",
+          "suggestion": "Consider a more concise and idiomatic translation like 'НЕ ПОШТА' or 'БЕЗ ПОШТИ' for a more aligned user experience."
         }
       ],
       "approved_at": null
@@ -312,8 +317,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '无电子邮件' while literally meaning 'no email', doesn't convey the emphasis and tone of 'NO EMAIL' which is meant to be a strong declaration. It's too neutral.",
-          "suggestion": "Consider translations like '禁用电子邮件' (Disable Email) or '不允许电子邮件' (Not allowed Email) which more accurately reflect the strong negative tone of 'NO EMAIL'."
+          "description": "The translation \"无电子邮件\" (wú diànzǐ yóu jiàn) is a literal translation of \"no email\" and doesn't convey the emphatic nature of the English phrase \"NO EMAIL.\"  It lacks the capitalization and implied importance suggested by the original.",
+          "suggestion": "Consider a more emphatic translation like \"禁止电子邮件\" (jìnzhǐ diànzǐ yóu jiàn) - 'Prohibited Email' or \"不允许电子邮件\" (bù yǔnxǔ diànzǐ yóu jiàn) - 'Not Allowed Email' to better match the tone."
         }
       ],
       "approved_at": null

@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 
 import { DropDownItem } from ".";
@@ -20,7 +20,9 @@ export default {
   },
 } as Meta;
 
-const Template: Story<DropDownItemProps> = (args) => <DropDownItem {...args} />;
+const Template: StoryFn<DropDownItemProps> = (args) => (
+  <DropDownItem {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {
@@ -49,11 +51,14 @@ export const WithBadge = Template.bind({});
 WithBadge.args = {
   label: "Notifications",
   icon: SettingsReactSvgUrl,
+  isBeta: true,
 };
 
 export const WithToggle = Template.bind({});
 WithToggle.args = {
   label: "Toggle Feature",
+  withToggle: true,
+  checked: false,
 };
 
 export const Submenu = Template.bind({});
@@ -78,12 +83,6 @@ Modern.args = {
   label: "Modern Style",
   isModern: true,
   icon: SettingsReactSvgUrl,
-};
-
-export const WithMinWidth = Template.bind({});
-WithMinWidth.args = {
-  label: "Custom Width",
-  minWidth: "200px",
 };
 
 export const WithTextOverflow = Template.bind({});

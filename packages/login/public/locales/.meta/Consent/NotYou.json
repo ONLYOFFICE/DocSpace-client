@@ -3,7 +3,7 @@
   "content": "Not you?",
   "content_en_sha1_hash": "7d152bbf86921201b996816f81cc7e1d208a755b",
   "created_at": "2025-05-19T21:30:57.328Z",
-  "updated_at": "2025-05-28T09:30:02.885Z",
+  "updated_at": "2025-10-16T07:29:36.002Z",
   "comment": {
     "text": "This translation key is used for a warning message displayed on a login page when the user hovers over the \"Not You\" link. The message indicates that it's not intended for them and is used to provide clarity in the consent process.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
-      "line_number": 297,
-      "context": "isHovered={false}\n noHover\n lineHeight={\"20px\"}\n onClick={onChangeUserClick}\n >\n {t(\"NotYou\")}\n </Link>\n </div>\n </div>\n </StyledUserContainer>\n </FormWrapper>",
+      "line_number": 329,
+      "context": "noHover\n lineHeight=\"20px\"\n onClick={onChangeUserClick}\n dataTestId=\"not_you_link\"\n >\n {t(\"NotYou\")}\n </Link>\n </div>\n </div>\n </StyledUserContainer>\n </FormWrapper>",
       "module": "/packages/login"
     }
   ],
@@ -63,13 +63,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"¿No es usted?\" is grammatically correct but carries a formal tone that might not be appropriate for the casual English phrase \"Not you?\". A more informal translation would be better.",
+          "suggestion": "¿No eres tú?"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Eikö tämä ole tilisi?\" translates to \"Isn't this your account?\" which doesn't directly correspond to the English \"Not you?\". It implies ownership rather than a question of identity.",
+          "suggestion": "Consider \"Etkö ole sinä?\" or \"Oletko sinä?\" to better reflect the meaning of \"Not you?\" depending on the intended nuance (the latter being a more direct question)."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Դու՞ք չեք։\" literally translates to \"Are you not?\" or \"Isn't it you?\" while the English \"Not you?\" implies a question expressing surprise or disbelief. A more appropriate translation would convey that sentiment.",
+          "suggestion": "Consider \"Դու չե՞ք։\" which more closely matches the intent of expressing surprise or disbelief."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,13 +111,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"あなたではありませんか？\" (Anata dewa arimasen ka?) while technically grammatically correct, implies a questioning of identity or confirmation that someone is *not* a particular person. The English \"Not you?\" is more commonly used as a surprised or questioning response, indicating disbelief or confusion. A more natural translation would capture this surprise or questioning tone.",
+          "suggestion": "いくつかの提案：\n1. 「まさか？」（Masaka? - \"Really?\" or \"No way!\") - Captures surprise.\n2. 「本当に？」（Hontou ni? - \"Really?\" or \"Seriously?\") -  Also conveys surprise and disbelief.\n3. 「それ、あなた？」 (Sore, anata? - \"Is that you?\" - with a questioning tone)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"다른 사용자세요?\" translates to \"Are you a different user?\" which isn't a direct or natural equivalent of \"Not you?\". While it conveys a similar sentiment (expressing surprise or questioning), it's not the most accurate translation.",
+          "suggestion": "Consider alternatives like \"당신이 아니세요?\" (Dangsin-i aniseyo?) which more directly translates to \"Are you not you?\" or \"아닌가요?\" (Aninga-yo?) which conveys a similar sense of confusion/question."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,7 +141,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Vai tas neesat jūs?\" is a literal translation but might not be the most natural way to express \"Not you?\" in Latvian. It sounds slightly awkward.",
+          "suggestion": "Consider a more conversational translation like \"Tad nu neesmu es?\" or \"Tas neesmu es?\" depending on the intended nuance."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Este altcineva?\" doesn't directly translate \"Not you?\". It translates to \"Is someone else?\" or \"Is it someone else?\". While it conveys a similar sentiment, it's not a literal or equivalent translation.",
+          "suggestion": "A more accurate translation would be \"Nu ești tu?\" or \"Ești tu?\" depending on the intended nuance."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +207,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'To niste bili vi?' is a literal translation that doesn't quite capture the nuance of \"Not you?\". It implies a question about someone else's actions, whereas the English phrase is often used as a surprised or disbelieving response.",
+          "suggestion": "Consider alternatives like 'Res ti nisi?' (Really, it wasn't you?), 'Nič ti ni?' (Is nothing right?), or 'Res ne si ti?' (Really, it's not you?). The best option depends on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,7 +225,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Not you?\" implies a question of identity or confirmation. The Serbian translation \"Niste vi?\" is grammatically correct but doesn't fully capture the intended meaning of disbelief or questioning of identity. A more accurate translation would be \"To si ti?\" or \"Jesi ti?\"",
+          "suggestion": "To si ti?"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,7 +255,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"不是您本人？\" while grammatically correct, is overly formal for the simple question \"Not you?\". It implies a formal setting or situation.",
+          "suggestion": "您吗？"
+        }
+      ],
       "approved_at": null
     }
   }

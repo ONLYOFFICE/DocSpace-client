@@ -3,7 +3,7 @@
   "content": "Selected room templates have been deleted",
   "content_en_sha1_hash": "2e5750aba7320ae26e7a4bd63b132ccac69d6d51",
   "created_at": "2025-05-19T21:30:56.242Z",
-  "updated_at": "2025-06-18T07:34:14.876Z",
+  "updated_at": "2025-10-01T15:17:48.106Z",
   "comment": {
     "text": "The \"TemplateRemoved\" translation key is used to display a success message when a selected room template is deleted. This message is part of a delete dialog and is intended to inform users that their templates have been successfully removed from the system.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 123,
+      "line_number": 133,
       "context": "successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };\n \n if (isTemplate) {\n translations.successRemoveTemplate = t(\"Files:TemplateRemoved\");\n }\n \n setSelected(\"none\");\n onClose();",
       "module": "/packages/client"
     }
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තෝරාගත් කාමර සැකිලි මකා දමා ඇත' while technically correct, lacks nuance. A more natural sounding translation might emphasize that the templates *were* removed, rather than simply stating they 'were thrown away'.",
-          "suggestion": "තෝරාගත් කාමර සැකිලි ඉවත් කර ඇත (Tōrāgath kamar sakeeli ivala kara aetha) - Selected room templates have been removed."
+          "description": "The translation 'තෝරාගත් කාමර සැකිලි මකා දමා ඇත' is a literal translation and doesn't convey the natural flow of the English sentence. A more natural phrasing in Sinhala would be something like 'තෝරාගත් කාමර සැකිලි ඉවත් කර ඇත' or 'උපාංග කාමර සැකිලි වලිනුත් ඉවත් කර ඇත'.",
+          "suggestion": "තෝරාගත් කාමර සැකිලි ඉවත් කර ඇත"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Изабрани шаблони соба су обрисани' is a literal translation and may not convey the intended meaning clearly in Serbian. 'Соба' (soba) means 'room' but in this context, it can be awkward. A more natural phrasing would avoid it or use a more general term for 'room templates'.",
-          "suggestion": "Изабрани шаблони простора су обрисани"
+          "description": "The translation 'Изабрани шаблони соба су обрисани' while conveying the general meaning, could be improved for more natural Serbian. 'Соба' is technically correct but sounds slightly awkward in this context. 'Просторија' or 'Дневна соба' (if referring to a specific room type) would be more common.",
+          "suggestion": "Изабрани шаблони просторија су обрисани"
         }
       ],
       "approved_at": null
@@ -189,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Izabrani šabloni soba su obrisani' is a generally acceptable translation, but a more natural and slightly more precise translation would be 'Izbrisani su izabrani šabloni soba'.",
+          "suggestion": "Izbrisani su izabrani šabloni soba"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -204,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Вибрані шаблони кімнати видалено' is technically correct but sounds slightly unnatural. A more natural phrasing would emphasize the action of removing.",
+          "description": "The translation 'Вибрані шаблони кімнати видалено' is too literal and sounds awkward in Ukrainian. While technically correct, it's not the most natural phrasing.",
           "suggestion": "Видалено вибрані шаблони кімнати"
         }
       ],

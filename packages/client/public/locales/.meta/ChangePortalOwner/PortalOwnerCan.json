@@ -3,7 +3,7 @@
   "content": "{{productName}} owner can:",
   "content_en_sha1_hash": "97d7cb6f581a857cc0b100e3288462c1654fe519",
   "created_at": "2025-05-19T21:30:56.998Z",
-  "updated_at": "2025-05-20T09:37:39.584Z",
+  "updated_at": "2025-08-21T11:22:39.799Z",
   "comment": {
     "text": "This translation key is used to describe permissions related to portal ownership. It appears as a list header and item in a change portal owner dialog, indicating which actions an owner can perform on the portal.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 222,
-      "context": "/>\n </StyledPeopleSelector>\n )}\n \n <StyledAvailableList>\n <Text className=\"list-header\" noSelect title={t(\"PortalOwnerCan\")}>\n {t(\"PortalOwnerCan\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {ownerRights?.map((item) => (\n <Text key={item} className=\"list-item\" noSelect title={item}>",
+      "line_number": 226,
+      "context": "/>\n </StyledPeopleSelector>\n )}\n \n <StyledAvailableList>\n <Text className=\"list-header\" title={t(\"PortalOwnerCan\")}>\n {t(\"PortalOwnerCan\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {ownerRights?.map((item) => (\n <Text key={item} className=\"list-item\" title={item}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 222,
-      "context": "/>\n </StyledPeopleSelector>\n )}\n \n <StyledAvailableList>\n <Text className=\"list-header\" noSelect title={t(\"PortalOwnerCan\")}>\n {t(\"PortalOwnerCan\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {ownerRights?.map((item) => (\n <Text key={item} className=\"list-item\" noSelect title={item}>",
+      "line_number": 226,
+      "context": "/>\n </StyledPeopleSelector>\n )}\n \n <StyledAvailableList>\n <Text className=\"list-header\" title={t(\"PortalOwnerCan\")}>\n {t(\"PortalOwnerCan\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {ownerRights?.map((item) => (\n <Text key={item} className=\"list-item\" title={item}>",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +39,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'sahibi edə bilər:' is a literal translation and doesn't fully convey the nuance of 'can:' in this context. It suggests an ability, but 'can:' implies permission or capability within a system. A better translation would imply authorization or access.",
+          "suggestion": "Consider a translation like 'məxususiyyətli istifadəçi qədər:' (meaning 'as much as a privileged user') or 'məxususiyyətli istifadəçinin imkanı:' (meaning 'the capability of a privileged user'). The best choice depends on the specific functionality being described."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'собственикът може:' (the owner can) is grammatically correct but doesn't fully capture the intended meaning of 'owner can:' which implies a list or set of capabilities. A more accurate translation would emphasize ability or permission.",
+          "suggestion": "The translation could be improved to something like \"{{productName}} собственикът има право да:\" ({{productName}} owner has the right to:)"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,13 +69,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Besitzer können:' is grammatically correct, but might sound slightly unnatural in German. A more idiomatic phrasing would be 'kann/können'.",
+          "suggestion": "{{productName}}-Besitzer können:"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ο ιδιοκτήτης {{productName}} μπορεί:' is a literal translation and doesn't flow naturally in Greek. It lacks the natural phrasing expected in a Greek sentence.",
+          "suggestion": "Δυνατότητες για τον ιδιοκτήτη του {{productName}}:"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -87,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}}-ի տնօրինողը կարող է\" is a literal translation and doesn't convey the intended meaning of '{{productName}} owner can:'. A more natural Armenian phrasing would be something like '{{productName}}-ի սեփականատերը կարող է' or '{{productName}}-ի հետ գործողությունը կարող է'.",
+          "suggestion": "Consider '{{productName}}-ի սեփականատերը կարող է' or '{{productName}}-ի հետ գործողությունը կարող է'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +129,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}}の所有者のアクセス権:\" is not a direct or natural translation of \"{{productName}} owner can:\".  \"アクセス権\" specifically refers to access rights, while the English phrase is more general (abilities, privileges, etc.).",
+          "suggestion": "Consider a more general translation like \"{{productName}}のオーナーは：\" or \"{{productName}}のユーザーは：\" which more accurately reflects the English meaning."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -159,7 +195,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'හිමිකරුගේ වරප්‍රසාද:' doesn't fully convey the meaning of 'owner can:'. It translates to 'owner's privileges:' which implies a list of existing privileges rather than the ability to do something. A more accurate translation would convey 'owner can do:'.",
+          "suggestion": "හිමිකරුට හැකි: (himikaru ta ekasi:)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +219,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Власник {{productName}}-а може:\" is technically correct but slightly awkward. A more natural translation for 'owner can:' would be 'Власник {{productName}} може:'. The '-а' suffix is grammatically correct when referring to a masculine noun in the genitive case, but in this context, it sounds more like possession than capability.",
+          "suggestion": "Власник {{productName}} може:"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

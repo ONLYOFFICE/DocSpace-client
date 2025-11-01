@@ -39,7 +39,7 @@ import SearchIconReactSvg from "PUBLIC_DIR/images/search.react.svg";
 import { useDebounce } from "../../hooks/useDebounce";
 
 import { InputBlock } from "../input-block";
-import { InputSize, InputType } from "../text-input";
+import { InputType } from "../text-input";
 
 import styles from "./SearchInput.module.scss";
 import { SearchInputProps } from "./SearchInput.types";
@@ -62,8 +62,8 @@ const SearchInput = ({
   isDisabled = false,
   placeholder,
   onFocus,
-  resetOnBlur = false,
   children,
+  dataTestId,
 }: SearchInputProps) => {
   const [inputValue, setInputValue] = useState(value);
 
@@ -99,13 +99,14 @@ const SearchInput = ({
     onClearSearch?.();
   }, [onClearSearch]);
 
-  const handleBlur = useCallback(() => {
-    // Reset to the external value when focus is lost if they don't match
-    if (resetOnBlur && inputValue !== value) {
-      setInputValue(value);
-      prevValueRef.current = value;
-    }
-  }, [inputValue, value, resetOnBlur]);
+  // const handleBlur = useCallback(() => {
+  //   // Reset to the external value when focus is lost if they don't match
+  //   if (resetOnBlur && inputValue !== value) {
+  //     setInputValue(value);
+  //     console.log("handleBlur", value, inputValue);
+  //     prevValueRef.current = value;
+  //   }
+  // }, [inputValue, value, resetOnBlur]);
 
   useEffect(() => {
     if (prevValueRef.current !== value) {
@@ -113,30 +114,6 @@ const SearchInput = ({
       setInputValue(value);
     }
   }, [value]);
-
-  const clearButtonSize = React.useMemo(() => {
-    let buttonSize = 16;
-
-    switch (size) {
-      case InputSize.base:
-        buttonSize = !!inputValue || showClearButton ? 12 : 16;
-        break;
-      case InputSize.middle:
-        buttonSize = !!inputValue || showClearButton ? 16 : 18;
-        break;
-      case InputSize.big:
-        buttonSize = !!inputValue || showClearButton ? 18 : 22;
-        break;
-      case InputSize.huge:
-        buttonSize = !!inputValue || showClearButton ? 22 : 24;
-        break;
-
-      default:
-        break;
-    }
-
-    return buttonSize;
-  }, [size, inputValue, showClearButton]);
 
   const getIconNode = () => {
     const showCrossIcon = !!inputValue || showClearButton;
@@ -151,17 +128,18 @@ const SearchInput = ({
   };
 
   const iconNode = getIconNode();
+  const iconSizeValue = !!inputValue || showClearButton ? 12 : 14;
 
   return (
     <div
       className={classNames(
         styles.searchInputBlock,
-        { [styles.scale]: scale },
+        { [styles.scale]: scale, [styles.isFilled]: !!inputValue },
         className,
       )}
       id={id}
       style={style}
-      data-testid="search-input"
+      data-testid={dataTestId ?? "search-input"}
     >
       <InputBlock
         className="search-input-block"
@@ -175,14 +153,14 @@ const SearchInput = ({
         isDisabled={isDisabled}
         onChange={handleInputChange}
         onFocus={onFocus}
-        onBlur={handleBlur}
+        // onBlur={handleBlur}
         type={InputType.text}
         iconNode={iconNode}
         iconButtonClassName={
           !!inputValue || showClearButton ? "search-cross" : "search-loupe"
         }
         isIconFill
-        iconSize={clearButtonSize}
+        iconSize={iconSizeValue}
         onIconClick={
           !!inputValue || showClearButton ? handleClearSearch : undefined
         }

@@ -3,7 +3,7 @@
   "content": "Disabled contacts cannot be added to a room",
   "content_en_sha1_hash": "421ab52b4b6cf5dd5c636ef2db83a705517cdec2",
   "created_at": "2025-05-19T21:30:54.742Z",
-  "updated_at": "2025-05-28T09:30:02.374Z",
+  "updated_at": "2025-08-04T07:30:01.177Z",
   "comment": {
     "text": "\"This translation key is used to display an error message when a disabled contact attempts to be added to a room. It appears as a warning notification, typically displayed in a dialog or modal window.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 339,
-      "context": "item.access = selectedAccess;\n \n const addUser = () => {\n if (isDisabled) {\n toastr.warning(t(\"UsersCannotBeAdded\"));\n } else if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n if (isGroup && checkIfAccessPaid(item.access)) {\n item = fixAccess(item, t, roomType);",
+      "line_number": 346,
+      "context": "? EveryoneIconUrl\n : null;\n \n const addUser = () => {\n if (isDisabled) {\n toastr.warning(t(\"UsersCannotBeAdded\"));\n } else if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n if (isGroup && checkIfAccessPaid(item.access)) {\n item = fixAccess(item, t, roomType);",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Disabled contacts\" implies contacts that are intentionally blocked or inactive. The Azerbaijani translation uses \"İstifadəsiz kontaktlar\", which more closely translates to \"unused contacts.\" While not strictly incorrect, it doesn't capture the nuance of a disabled contact.",
-          "suggestion": "Consider a more precise translation that reflects the concept of contacts being blocked or inactive, such as \"Bloklanmış kontaktlar\" (Blocked contacts) or \"Fəaliyyətsiz kontaktlar\" (Inactive contacts)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -78,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Poistetut yhteystiedot ei voi lisätä huoneeseen' literally translates to 'Deleted contact information cannot be added to a room'.  'Disabled contacts' implies a state of being unable to contact, not necessarily being deleted. A more accurate translation would convey this inability to add due to being blocked or disabled.",
-          "suggestion": "Estetyt yhteystiedot ei voi lisätä huoneeseen"
+          "description": "The translation 'Poistetut yhteystiedot ei voi lisätä huoneeseen' translates to 'Deleted contacts cannot be added to a room'. The original English text refers to 'Disabled contacts', which implies contacts that are blocked or inactive, not necessarily deleted. 'Poistetut' specifically means 'deleted'.",
+          "suggestion": "Consider 'Estetyt yhteystiedot ei voi lisätä huoneeseen' (Blocked contacts cannot be added to a room) or 'Inaktiiviset yhteystiedot ei voi lisätä huoneeseen' (Inactive contacts cannot be added to a room)."
         }
       ],
       "approved_at": null
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Անջրկված կոնտակտները չեն կարող ավելացվել դրանցում։\" is a literal translation that sounds unnatural. 'դրանցում' (in them) is redundant and unnecessary.  A more natural Armenian phrasing would be needed to convey the meaning accurately.",
-          "suggestion": "Անջրկված կոնտակտները չեն կարողավելացվեն խորհրդարանի։"
+          "description": "The translation \"Անջրկված կոնտակտները չեն կարող ավելացվել դրանցում։\" is a literal translation and sounds awkward. 'դրանցում' refers to 'in them' which is vague and doesn't clearly refer to the room. A more natural phrasing would be more specific about what 'them' refers to.",
+          "suggestion": "Անջրկված կոնտակտները չեն կարող ավելացվել խորհրդակցության մեջ։ (Disabled contacts cannot be added to the chat/room)"
         }
       ],
       "approved_at": null
@@ -132,8 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Invalid kontaktpersonas\" is not the best equivalent of \"Disabled contacts\". \"Disabled\" in this context refers to contacts who have been blocked or restricted, not simply being invalid. A better translation would reflect this.",
-          "suggestion": "Bloķētas kontaktpersonas nevar pievienot telpai"
+          "description": "The translation 'Invalid kontaktpersonas' does not accurately convey the meaning of 'Disabled contacts'. 'Disabled' in this context means contacts that are blocked or otherwise unavailable, not simply 'invalid'.",
+          "suggestion": "Neaktivizētas kontaktpersonas nevar pievienot telpai"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'kontaktpersonas' is a valid Latvian word but is slightly less common. A more familiar and clear phrasing would benefit the user.",
+          "suggestion": "Kontakti nevar pievienot telpai"
         }
       ],
       "approved_at": null
@@ -180,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අවලංගු සම්බන්ධතා ක්‍රියාවලියට එක් කිරීමට නොහැකිය' is not the most natural or idiomatic way to express 'Disabled contacts cannot be added to a room' in Sinhala. While technically correct, it sounds a bit formal and clunky.",
-          "suggestion": "A more natural translation would be: 'ආවරණය කරන ලද සම්බන්ධතා గదుට చేర్చలేము' (Avaranaya karanada santhabataya gaduta cherilam). Alternatively, 'අවලංගු වූ පුද්ගලයින් ගෘහයට ඇතුළත් කිරීමට వీలుකాని' (Avalangu huva puugalayin gruhayata athulatha kirimata vilukaanai)"
+          "description": "The translation 'අවලංගු සම්බන්ධතා ක්‍රියාවලියට එක් කිරීමට නොහැකිය.' is a bit awkward. 'ක්‍රියාවලියට' (to the process) isn't the most natural phrasing here. A more natural translation would focus on the inability to add the contacts directly.",
+          "suggestion": "අවලංගු සම්බන්ධතා කාමරයට එක්කරන්න බැරි."
         }
       ],
       "approved_at": null
@@ -192,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Zakázaní kontakty je možné pridať do miestnosti' implies that disabled contacts *can* be added, which contradicts the English 'Disabled contacts cannot be added to a room'.",
-          "suggestion": "Zakázaní kontakty sa do miestnosti pridať nedajú."
+          "description": "The Slovak translation \"Zakázaní kontakty je možné pridať do miestnosti.\" incorrectly states that disabled contacts *can* be added to a room. The original English states they *cannot* be added.",
+          "suggestion": "Zakázaní kontakty sa nedajú pridať do miestnosti."
         }
       ],
       "approved_at": null
@@ -216,7 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The passive voice 'ne mogu biti dodati' is slightly awkward in Serbian. While grammatically correct, a more natural phrasing would be preferred.",
+          "description": "The passive voice 'ne mogu biti dodati' is a bit clunky in Serbian. A more natural phrasing would avoid it.",
           "suggestion": "Onemogućeni kontakti ne mogu da se dodaju u sobu."
         }
       ],
@@ -234,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Disabled contacts\" is better translated as \"контакти, яких заблоковано\", rather than directly translating it as \"заблокованих контактів\". While \"заблокованих контактів\" is technically correct, it's not the most natural phrasing in Ukrainian. \"контакти, яких заблоковано\" flows better.",
-          "suggestion": "контакти, яких заблоковано"
+          "description": "The English phrase \"Disabled contacts\" is best translated as \"заблоковані контакти\" or \"контакти, які заблоковані\", rather than just \"заблокованих контактів\". While \"заблокованих контактів\" is understandable, it's less natural and can imply a specific blocking action rather than the general state of being disabled.",
+          "suggestion": "Не вдасться додати заблоковані контакти до кімнати."
         }
       ],
       "approved_at": null

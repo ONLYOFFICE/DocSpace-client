@@ -3,7 +3,7 @@
   "content": "Details",
   "content_en_sha1_hash": "dc3decbb93847518f1a049dcf49d0d7c6560bcc6",
   "created_at": "2025-05-19T21:30:54.969Z",
-  "updated_at": "2025-05-28T09:30:02.454Z",
+  "updated_at": "2025-08-27T10:14:35.253Z",
   "comment": {
     "text": "This translation key is used for a tab label that displays the title \"Details\" on a settings panel or information header. It appears as a clickable button within an info panel and is part of a larger navigation system for accessing detailed views of various data members.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 124,
+      "line_number": 106,
       "context": "content: null,\n };\n \n const detailsTab = {\n id: \"info_details\",\n name: t(\"InfoPanel:SubmenuDetails\"),\n onClick: setDetails,\n content: null,\n };\n \n const templateSubmenu = [memberTab, detailsTab];",
       "module": "/packages/client"
     }
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"詳細情報\" while generally acceptable, is a bit verbose for a simple \"Details\" label. A more concise translation like \"詳細\" or \"詳細表示\" would be more suitable for a UI element like a submenu.",
-          "suggestion": "詳細 or 詳細表示"
+          "description": "While '詳細情報' is a technically correct translation for 'Details', it's a bit verbose and formal for a UI element like a submenu label. A more concise and natural translation would be '詳細' or '詳細表示'.",
+          "suggestion": "詳細"
         }
       ],
       "approved_at": null
@@ -120,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Detalizēta informācija' is a literal translation of 'Detailed Information,' 'Details' typically translates to a more concise term in Latvian, such as 'Detaļas'. 'Detalizēta informācija' is unnecessarily verbose for this context, which is likely a submenu label.",
+          "description": "While \"Detalizēta informācija\" is technically correct, it's a bit verbose for a simple \"Details\" label in a submenu. It translates to 'Detailed Information'. 'Detaļas' would be a more concise and standard translation for 'Details' in this context.",
           "suggestion": "Detaļas"
         }
       ],

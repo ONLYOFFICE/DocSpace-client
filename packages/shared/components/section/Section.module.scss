@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/colors";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
 
 .header {
   position: relative;
@@ -35,27 +35,7 @@
   height: var(--section-header-height);
   min-height: var(--section-header-height);
 
-  @include tablet-and-below {
-    height: var(--section-header-height-tablet);
-    min-height: var(--section-header-height-tablet);
-
-    :global {
-      .header-container {
-        margin-bottom: 1px;
-        -webkit-tap-highlight-color: #{$tap-highlight};
-      }
-    }
-  }
-
-  @include mobile {
-    height: var(--section-header-height-mobile);
-    min-height: var(--section-header-height-mobile);
-    margin-inline-end: 0;
-  }
-
   box-sizing: border-box;
-
-  @include no-user-select;
 
   display: grid;
   align-items: center;
@@ -63,16 +43,34 @@
   width: 100%;
   max-width: 100%;
 
-  :global {
-    .header-container {
-      display: flex;
+  &.form-gallery {
+    @include mixins.tablet-and-below {
+      height: var(--section-header-height);
+      min-height: var(--section-header-height);
     }
   }
 
-  &.form-gallery {
-    @include tablet-and-below {
-      height: var(--section-header-height);
-      min-height: var(--section-header-height);
+  @include mixins.tablet-and-below {
+    height: var(--section-header-height-tablet);
+    min-height: var(--section-header-height-tablet);
+
+    :global {
+      .header-container {
+        margin-bottom: 1px;
+        -webkit-tap-highlight-color: #{colors.$tap-highlight};
+      }
+    }
+  }
+
+  @include mixins.mobile {
+    height: var(--section-header-height-mobile);
+    min-height: var(--section-header-height-mobile);
+    margin-inline-end: 0;
+  }
+
+  :global {
+    .header-container {
+      display: flex;
     }
   }
 }
@@ -80,7 +78,7 @@
 .footer {
   margin-top: 40px;
 
-  @include mobile {
+  @include mixins.mobile {
     margin-top: 32px;
   }
 }
@@ -109,9 +107,7 @@
   background: var(--info-panel-blur-color);
   z-index: 300;
 
-  @include no-user-select;
-
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     z-index: 309;
     position: fixed;
     inset: 0;
@@ -132,7 +128,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     position: absolute;
     border: none;
     inset-inline-end: 0;
@@ -140,7 +136,7 @@
     max-width: calc(100vw - 69px);
   }
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 0;
     height: calc(100% - 64px);
     width: 100vw;
@@ -152,7 +148,7 @@
   display: none;
   min-height: 64px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     display: block;
   }
 }
@@ -162,7 +158,7 @@
   width: 100%;
   z-index: 1;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     width: calc(100% + 32px);
     position: sticky;
     top: var(--section-header-height-tablet);
@@ -172,7 +168,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     position: sticky;
     top: var(--section-header-height-mobile);
   }
@@ -189,12 +185,12 @@
 
   outline: none;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     padding-block: 0 16px;
     padding-inline: 24px 0;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     padding-inline: 24px 8px;
   }
 }
@@ -211,9 +207,9 @@
     }
 
     .section-wrapper-content {
-      @include paddingStyles;
       flex: 1 0 auto;
       outline: none;
+      @include paddingStyles;
 
       .section-wrapper {
         display: flex;
@@ -222,7 +218,7 @@
       }
 
       .files-tile-container {
-        @include desktop {
+        @include mixins.desktop {
           margin-top: 0px;
         }
       }
@@ -256,7 +252,7 @@
       .section-wrapper-content {
         padding-top: 0;
 
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           padding-top: 0;
         }
       }
@@ -265,14 +261,14 @@
 
   &.isFormGallery {
     :global {
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         .section-wrapper-content {
           padding-block: 0 20px !important;
           padding-inline: 16px 0 !important;
         }
       }
 
-      @include mobile {
+      @include mixins.mobile {
         .section-wrapper-content {
           padding: 0px 16px 16px !important;
         }
@@ -309,33 +305,32 @@
     .drag-and-drop {
       width: 100%;
 
-      @include no-user-select;
+      @include mixins.no-user-select;
     }
   }
 
   &.withScroll {
-    margin-inline-start: -20px;
+    margin-inline-start: var(--section-desktop-padding);
 
-    @include tablet-and-below {
-      margin-inline-start: -24px;
+    @include mixins.tablet-and-below {
+      margin-inline-start: var(--section-tablet-padding);
     }
   }
 }
 
 .sectionBody {
   max-width: 100vw !important;
-  user-select: none;
 
   &.withScroll {
-    margin-inline-start: -20px;
+    margin-inline-start: var(--section-desktop-padding);
 
-    @include tablet-and-below {
-      margin-inline-start: -24px;
+    @include mixins.tablet-and-below {
+      margin-inline-start: var(--section-tablet-padding);
     }
   }
 
   &.isFormGallery {
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       margin-block: 0;
       margin-inline: -16px 0;
       padding: 0;
@@ -357,7 +352,7 @@
       padding-inline-end: 0;
       z-index: 201;
 
-      @include mobile {
+      @include mixins.mobile {
         min-width: 100vw;
         margin-inline-start: -16px;
         padding-inline-end: 16px;
@@ -371,6 +366,10 @@
   }
 }
 
+.filter {
+  user-select: none;
+}
+
 .isFixed {
   position: sticky;
   top: 61px;
@@ -379,7 +378,7 @@
   padding: 0 16px;
   margin: 0 -16px !important;
 
-  @include mobile {
+  @include mixins.mobile {
     top: 53px;
   }
 }
@@ -387,7 +386,7 @@
 .withTabs {
   top: 114px;
 
-  @include mobile {
+  @include mixins.mobile {
     top: 106px;
   }
 }
@@ -398,14 +397,13 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  user-select: none;
 
   width: 100%;
   max-width: 100%;
 
   height: 100%;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     width: 100%;
     max-width: 100vw !important;
     @include tabletView;
@@ -414,12 +412,12 @@
   &:not(.withBodyScroll) {
     padding-inline-start: 20px;
 
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       padding-inline-start: 16px;
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100vw !important;
     max-width: 100vw !important;
     padding-inline-start: 16px;
@@ -432,7 +430,7 @@
         flex-direction: column;
         padding-inline-start: 20px !important;
 
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           padding-inline-start: 16px !important;
         }
       }
@@ -450,7 +448,7 @@
       padding-inline: 20px;
       margin-inline: -20px -17px;
 
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         padding-inline: 16px;
         margin-inline: -16px;
       }
@@ -486,7 +484,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     z-index: 200;
     bottom: 16px;
 
@@ -513,7 +511,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 16px;
     inset-inline-end: 16px;
 

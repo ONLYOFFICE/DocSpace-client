@@ -3,7 +3,7 @@
   "content": "File management",
   "content_en_sha1_hash": "5cdd155bb48d903d911fae98b21437d3fcd9e39d",
   "created_at": "2025-05-19T21:30:53.358Z",
-  "updated_at": "2025-05-21T05:43:14.120Z",
+  "updated_at": "2025-09-10T09:59:20.914Z",
   "comment": {
     "text": "This translation key is used to display \"File management\" as a label on a profile section, likely in a file upload or download process. It appears in the \"/packages/client/src/pages/Profile/Section/Body/index.js\" file at line 42.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/index.js",
-      "line_number": 42,
-      "context": "import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n import MainProfile from \"./sub-components/main-profile\";\n import LoginContent from \"./sub-components/LoginContent\";\n import Notifications from \"./sub-components/notifications\";\n import FileManagement from \"./sub-components/file-management\";\n import InterfaceTheme from \"./sub-components/interface-theme\";\n \n import AuthorizedApps from \"./sub-components/authorized-apps\";\n \n const Wrapper = styled.div`",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
+      "line_number": 55,
+      "context": "import TelegramStore from \"SRC_DIR/store/TelegramStore\";\n \n import MainProfile from \"./sub-components/main-profile\";\n import LoginContent from \"./sub-components/login\";\n import Notifications from \"./sub-components/notifications\";\n import FileManagement from \"./sub-components/file-management\";\n import InterfaceTheme from \"./sub-components/interface-theme\";\n import AuthorizedApps from \"./sub-components/authorized-apps\";\n import useProfileBody from \"./useProfileBody\";\n \n const Wrapper = styled.div`",
       "module": "/packages/client"
     }
   ],

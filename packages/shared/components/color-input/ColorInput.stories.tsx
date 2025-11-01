@@ -24,19 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
 import React from "react";
-import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { ColorInput } from "./ColorInput";
 import { ColorInputProps } from "./ColorInput.types";
 import { InputSize } from "../text-input/TextInput.enums";
 import { globalColors } from "../../themes";
-
-const ColorInputContainer = styled.div`
-  height: 300px;
-`;
 
 const meta = {
   title: "Components/ColorInput",
@@ -87,9 +81,9 @@ export default meta;
 
 const Template = ({ ...args }: ColorInputProps) => {
   return (
-    <ColorInputContainer>
+    <div style={{ height: "410px" }}>
       <ColorInput {...args} />
-    </ColorInputContainer>
+    </div>
   );
 };
 
@@ -111,6 +105,7 @@ export const WithScale: Story = {
     ...Default.args,
     scale: true,
   },
+  render: (args) => <Template {...args} />,
 };
 
 export const Disabled: Story = {
@@ -118,6 +113,7 @@ export const Disabled: Story = {
     ...Default.args,
     isDisabled: true,
   },
+  render: (args) => <Template {...args} />,
 };
 
 export const WithError: Story = {
@@ -125,6 +121,7 @@ export const WithError: Story = {
     ...Default.args,
     hasError: true,
   },
+  render: (args) => <Template {...args} />,
 };
 
 export const WithWarning: Story = {
@@ -132,11 +129,19 @@ export const WithWarning: Story = {
     ...Default.args,
     hasWarning: true,
   },
+  render: (args) => <Template {...args} />,
 };
 
 export const DifferentSizes: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        height: "600px",
+      }}
+    >
       {Object.values(InputSize).map((size) => (
         <ColorInput
           key={size}

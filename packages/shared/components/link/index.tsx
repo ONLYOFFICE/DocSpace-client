@@ -46,10 +46,11 @@ const Link: React.FC<LinkProps> = ({
   type = LinkType.page,
   isTextOverflow = false,
   noHover = false,
-  enableUserSelect = false,
+  enableUserSelect = true,
   textDecoration,
   ariaLabel,
   dataTestId,
+  style,
   ...rest
 }: LinkProps) => {
   const linkClasses = classNames(
@@ -65,6 +66,12 @@ const Link: React.FC<LinkProps> = ({
     className,
   );
 
+  const linkStyle = {
+    color: color === "accent" ? "var(--accent-main)" : color,
+    lineHeight,
+    textDecoration,
+  };
+
   return (
     <Text
       className={linkClasses}
@@ -74,13 +81,9 @@ const Link: React.FC<LinkProps> = ({
       rel={rel}
       tabIndex={tabIndex}
       isBold={isBold}
-      style={{
-        color,
-        lineHeight,
-        textDecoration,
-      }}
+      style={style ? { ...linkStyle, ...style } : linkStyle}
       aria-label={ariaLabel || children}
-      data-testid={dataTestId || "link"}
+      data-testid={dataTestId ?? "link"}
       {...rest}
     >
       {children}

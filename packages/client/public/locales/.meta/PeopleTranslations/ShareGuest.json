@@ -3,7 +3,7 @@
   "content": "Share guest",
   "content_en_sha1_hash": "3bc1f18e87e31dceec9010b37ce1ea9d3950e820",
   "created_at": "2025-05-19T21:30:53.513Z",
-  "updated_at": "2025-06-24T16:31:24.487Z",
+  "updated_at": "2025-10-13T13:22:35.926Z",
   "comment": {
     "text": "This translation key is used to display a button label that shares contact information with others, likely found on a contact details page or in a shared contacts list. The translated text appears when the \"Share Guest\" option is clicked. Translators should replace \"ShareGuest\" with the corresponding localized text for their language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 297,
+      "line_number": 295,
       "context": "case \"share-guest\":\n return {\n id: \"option_share-guest\",\n key: option,\n icon: PersonShareReactSvgUrl,\n label: t(\"PeopleTranslations:ShareGuest\"),\n onClick: () => shareGuest(item, t),\n };\n case \"change-type\":\n return {\n id: \"option_change-type\",",
       "module": "/packages/client"
     }

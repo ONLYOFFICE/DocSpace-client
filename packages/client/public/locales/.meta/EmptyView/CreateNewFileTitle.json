@@ -3,7 +3,7 @@
   "content": "Create a new file",
   "content_en_sha1_hash": "dd6b6ee5ecd9060521c42154ebe7467bb9158ddc",
   "created_at": "2025-05-19T21:30:56.455Z",
-  "updated_at": "2025-05-28T09:30:02.121Z",
+  "updated_at": "2025-10-13T13:22:35.629Z",
   "comment": {
     "text": "The \"CreateNewFileTitle\" translation key is used to display a label on a button or other interactive element in a UI, prompting users to create a new file. The content of this translation key (\"Create a new file\") will be displayed when the user clicks a specific action or navigates to a related section of the application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 340,
+      "line_number": 349,
       "context": "onClick: () => actions.navigate(\"/portal-settings/data-import\"),\n disabled: false,\n };\n \n const createFile: EmptyViewItemType = {\n title: t(\"EmptyView:CreateNewFileTitle\"),\n description: t(\"EmptyView:CreateNewFileDescription\"),\n icon: <CreateNewFormIcon />,\n key: \"create-form-form\",\n disabled: !security?.Create,\n model: [",
       "module": "/packages/client"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yeni fayl yaradın' translates to 'You created a new file'. The English 'Create a new file' implies a command or option title, not a statement about creation having already occurred. A more appropriate translation would be something like 'Yeni fayl düzəlt' or 'Yeni fayl aç'.",
+          "suggestion": "Yeni fayl düzəlt"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Ստեղծել նոր ֆայլ' is a literal translation of 'Create a new file' and might not be the most natural phrasing in Armenian. While understandable, it can sound slightly awkward.",
+          "suggestion": "Consider a more idiomatic Armenian translation such as 'Նոր ֆայլ ստեղծել' or 'Создаել նոր ֆայլ' (depending on the desired formality and audience)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +153,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Crearea' is a noun (the creation) instead of a verb (to create).",
+          "suggestion": "Creează un fișier nou"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Crearea unui fișier nou' is grammatically correct, it's a more literal translation and less natural-sounding for a button/title like 'Create a new file'. It focuses on the action of *creating* rather than the command to *create*. 'Creează un fișier nou' is more aligned with the English phrasing.",
+          "suggestion": "Creează un fișier nou"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

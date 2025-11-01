@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Επιλέξτε από τη λίστα",
-  "ConnectingAccount": "Σύνδεση λογαριασμού",
-  "DeleteFromTrash": "Τα επιλεγμένα στοιχεία διαγράφηκαν επιτυχώς από τον Κάδο απορριμμάτων",
   "FileLocked": "Το Αρχείο Κλειδώθηκε",
   "FileProtected": "Το αρχείο προστατεύεται με κωδικό πρόσβασης",
   "FileUnlocked": "Το Αρχείο Ξεκλειδώθηκε",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "Κατάλογος OneDrive",
   "FolderTitleWebDav": "Κατάλογος WebDAV",
   "FolderTitleYandex": "Κατάλογος Yandex",
-  "GuestReleaseTipDescripton": "Όλοι οι Χρήστες που είχαν προστεθεί προηγουμένως έγιναν Επισκέπτες και είναι πλέον διαθέσιμοι μόνο στη λίστα επαφών των διαχειριστών του {{productName}}. Οι Επισκέπτες δεν αποτελούν πλέον μέρος οποιασδήποτε ομάδας. Μπορείτε πάντα να αλλάξετε τον τύπο τους και να τους προσθέσετε σε μια ομάδα, αν χρειαστεί.",
-  "GuestReleaseTipLink": "Μάθετε περισσότερα σχετικά με τους τύπους χρηστών",
-  "LinkHasExpiredAndHasBeenDisabled": "Ο σύνδεσμος έχει λήξει και έχει απενεργοποιηθεί",
   "LinkValidTime": "Αυτός ο σύνδεσμος ισχύει μόνο για {{days_count}} ημέρες.",
   "NewForm": "Φόρμα PDF",
   "OwnerChange": "Αλλαγή κατόχου",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "Υπηρεσίες τρίτων",
   "TitleShowActions": "Εμφάνιση ενεργειών αρχείου",
   "TitleShowFolderActions": "Εμφάνιση Ενεργειών Φακέλου",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "Διαγράφηκαν με επιτυχία τα επιλεγμένα στοιχεία από το {{sectionName}}"
 }

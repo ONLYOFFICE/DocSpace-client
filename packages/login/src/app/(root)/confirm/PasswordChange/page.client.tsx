@@ -134,10 +134,11 @@ const PasswordChangeForm = ({
           {t("PassworResetTitle")}
         </Text>
         <FieldContainer
-          isVertical={true}
+          isVertical
           labelVisible={false}
-          hasError={isPasswordErrorShow && !passwordValid}
+          hasError={isPasswordErrorShow ? !passwordValid : undefined}
           errorMessage={t("Common:IncorrectPassword")}
+          dataTestId="password_field"
         >
           <PasswordInput
             simpleView={false}
@@ -146,7 +147,7 @@ const PasswordChangeForm = ({
             inputName="password"
             placeholder={t("Common:Password")}
             inputValue={password}
-            hasError={isPasswordErrorShow && !passwordValid}
+            hasError={isPasswordErrorShow ? !passwordValid : undefined}
             inputType={InputType.password}
             size={InputSize.large}
             scale
@@ -167,7 +168,7 @@ const PasswordChangeForm = ({
             )}`}
             generatePasswordTitle={t("Common:GeneratePassword")}
             tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
-            isAutoFocussed={true}
+            isAutoFocussed
           />
         </FieldContainer>
       </div>
@@ -180,6 +181,7 @@ const PasswordChangeForm = ({
         tabIndex={5}
         onClick={onSubmit}
         isDisabled={isLoading}
+        testId="create_password_button"
       />
     </>
   );

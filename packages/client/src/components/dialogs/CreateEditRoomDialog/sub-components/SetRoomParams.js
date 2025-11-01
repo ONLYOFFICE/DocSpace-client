@@ -265,7 +265,6 @@ const SetRoomParams = ({
 
     if (newValue.match(folderFormValidation)) {
       setIsWrongTitle(true);
-      // toastr.warning(t("Files:ContainsSpecCharacter"));
     } else {
       setIsWrongTitle(false);
     }
@@ -363,12 +362,15 @@ const SetRoomParams = ({
                 !selection?.logo?.large) ||
               cover?.color
         }
-        color={cover ? cover.color : selection?.logo?.color}
+        color={
+          cover ? cover.color : (selection?.logo?.color ?? selection?.color)
+        }
         size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
         radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
         withEditing
         model={isEditRoomModel}
         onChangeFile={onChangeFile}
+        dataTestId="create_edit_room_icon"
       />
     ) : (
       <RoomIcon
@@ -401,6 +403,7 @@ const SetRoomParams = ({
         }
         onChangeFile={onChangeFile}
         currentColorScheme={currentColorScheme}
+        dataTestId="create_edit_room_icon"
       />
     );
 
@@ -456,11 +459,12 @@ const SetRoomParams = ({
           onBlur={() => setForceHideRoomTypeDropdown(false)}
           errorMessage={
             isWrongTitle
-              ? t("Files:ContainsSpecCharacter")
+              ? t("Common:ContainsSpecCharacter")
               : t("Common:RequiredField")
           }
           onKeyUp={onKeyUp}
           isAutoFocussed
+          dataTestId="create_edit_room_input"
         />
       </div>
 
@@ -472,9 +476,11 @@ const SetRoomParams = ({
         isDisabled={isDisabled}
         onFocus={() => setForceHideRoomTypeDropdown(true)}
         onBlur={() => setForceHideRoomTypeDropdown(false)}
+        dataTestId="create_edit_room_tags_input"
         tooltipLabel={
           isTemplateSelected || isTemplate ? t("Files:RoomTagsTooltip") : ""
         }
+        isMobile={isMobile}
       />
 
       {/* //TODO: Uncomment when private rooms are done
@@ -553,6 +559,7 @@ const SetRoomParams = ({
             disableImageRescaling={disableImageRescaling}
             visible={roomParams.icon.uploadedFile}
             maxImageSize={maxImageUploadSize}
+            dataTestId="create_edit_room_avatar_editor"
           />
         ) : null}
       </div>

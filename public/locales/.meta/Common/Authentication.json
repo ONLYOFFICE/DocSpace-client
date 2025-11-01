@@ -3,7 +3,7 @@
   "content": "Authentication",
   "content_en_sha1_hash": "ee1acfa55eb1476c86c5c4a68f256a67b25289ab",
   "created_at": "2025-05-19T21:30:43.148Z",
-  "updated_at": "2025-05-28T09:30:02.635Z",
+  "updated_at": "2025-08-11T18:11:59.238Z",
   "comment": {
     "text": "This translation key is used for the label of a toggle button that enables or disables authentication settings, typically found in SMTP settings. The text appears as a button label and is labeled as \"Authentication\" to indicate its purpose. Translators should focus on providing a clear and concise description of this setting within the context of email account management.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
       "line_number": 115,
-      "context": "<div className=\"smtp-settings_auth\">\n <ToggleButton\n className=\"smtp-settings_toggle\"\n isChecked={settings[AUTHENTICATION]}\n onChange={onChangeToggle}\n label={t(\"Common:Authentication\")}\n isDisabled={isLoading}\n />\n \n <div className=\"smtp-settings_title smtp-settings_login\">\n <Text {...commonTextProps}>{t(\"HostLogin\")}</Text>",
+      "context": "<div className=\"smtp-settings_auth\">\n <ToggleButton\n className=\"smtp-settings_toggle\"\n isChecked={settings[AUTHENTICATION]}\n onChange={onChangeToggle}\n label={t(\"Common:Authentication\")}\n isDisabled={isLoading}\n dataTestId=\"smtp_auth_toggle_button\"\n />\n \n <div className=\"smtp-settings_title smtp-settings_login\">",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'İdentifikasiya' is a valid Azerbaijani word, it's not the most common or precise translation of 'Authentication' in this context. 'Təsdiqləmə' or 'Zəmanət' would be more appropriate and commonly understood for authentication processes.",
-          "suggestion": "Consider using 'Təsdiqləmə' or 'Zəmanət'."
+          "description": "The Azerbaijani translation 'İdentifikasiya' while technically meaning 'identification', doesn't fully convey the meaning of 'Authentication'. 'Authentication' implies verifying identity and granting access. 'İdentifikasiya' is a more general term.",
+          "suggestion": "Consider 'Təsdiqləmə' or 'Zəmanət' which better reflect the concept of authentication."
         }
       ],
       "approved_at": null
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Заверка\" while meaning 'verification' or 'checking' doesn't fully capture the nuanced meaning of \"Authentication\" which implies proving identity or confirming credentials.  \"Удостоверяване\" would be a more accurate translation.",
+          "description": "While 'Заверка' can sometimes be used to mean verification, it's not the most accurate translation of 'Authentication' in a technical or security context. 'Удостоверяване' or 'Проверка за автентичност' would be more appropriate.",
           "suggestion": "Удостоверяване"
         }
       ],
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"තහවුරුව\" (thahawuruvu) while related to the concept of authentication, doesn't precisely convey the meaning of \"Authentication\" in the technical context (verification of identity). It's closer to 'confirmation' or 'verification' in a broader sense. A more accurate translation would depend on the specific context where the term is used.",
-          "suggestion": "Consider alternatives like \"පහතිකෘතීම\" (pahathikruthim) or \"අauthentikatam\" (authentikatam) which are closer to the technical meaning of 'Authentication'."
+          "description": "The Sinhala translation 'තහවුරුව' while close in meaning, isn't the most common or direct translation of 'Authentication'. It implies 'confirmation' or 'verification' rather than the process of establishing identity.",
+          "suggestion": "Consider alternatives like 'අauthentification' (transliteration), 'අත්‍ථිකතැබීම' (aththikathabēma - validation), or 'ඔත්තිකය' (oththikaya - identification). The best choice depends on the specific context and desired level of formality."
         }
       ],
       "approved_at": null

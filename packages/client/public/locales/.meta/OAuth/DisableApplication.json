@@ -3,7 +3,7 @@
   "content": "Disable application",
   "content_en_sha1_hash": "7bd824177e5bbe18871af06fd6feb228e9f0c83b",
   "created_at": "2025-05-19T21:30:53.860Z",
-  "updated_at": "2025-05-21T07:18:55.054Z",
+  "updated_at": "2025-05-24T07:33:15.077Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disable application\" or \"Disable Applications\" depending on whether group-level disablement options are being displayed. It appears in a dialog box for portal settings and is likely used as a button label or header text.",
     "is_auto": true,
@@ -111,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Atspējot pieteikumu' is understandable, a more precise and natural translation of 'Disable application' in a technical context would be 'Aizliegt lietotni' or 'Izslēgt lietotni'. 'Atspējot' is often used for something that was previously enabled.",
-          "suggestion": "Aizliegt lietotni"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,7 +153,28 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'අයදුම්පත' (aydumpata) which means 'application' is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'අක්‍රිය' (akriya) which means 'disable/inactive' is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'කරන්න' (karanne) which means 'to do' or 'to make' is spelled correctly, but contextually could be replaced with a more specific verb for clarity and natural flow.",
+          "suggestion": "Consider replacing 'කරන්න' with a more direct verb like 'අයින් කරන්න' (ain kanna) - to remove, or 'අයින් කිරීම' (ain kirima) - removal, depending on the overall API design and usage of the term 'disable'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the literal translation is correct, 'Disable application' often implies a single action or a direct command.  'අයදුම්පත අක්‍රිය කරන්න' feels a bit verbose as a direct label or button text. A more succinct translation might be better.",
+          "suggestion": "Consider 'අයදුම්පත අක්‍රිය' (Aydumpata Akriya) - 'Application Inactive' or 'අයදුම්පත නිಷ್ක්‍රිය' (Aydumpata Nishkriya) - 'Application Inactive' for a shorter and more user-friendly option. However, this depends on the overall context and style guidelines."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -186,8 +201,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Onemogući aplikaciju\" is not the most natural or accurate translation of \"Disable application\" in Serbian (Latin). \"Onemogući\" implies making something unable, rather than directly disabling it. While understandable, it's not the preferred phrasing.",
-          "suggestion": "Isključite aplikaciju"
+          "description": "The translation \"Onemogući aplikaciju\" is not the most natural or accurate translation of \"Disable application\". While technically correct, it sounds somewhat awkward in Serbian. A more common and natural translation would be \"Isključi aplikaciju\" or \"Onemogući korišćenje aplikacije\".",
+          "suggestion": "Isključi aplikaciju"
         }
       ],
       "approved_at": null

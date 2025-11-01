@@ -60,7 +60,7 @@ export class FilesSelectionStore {
       return;
     }
 
-    this.selection = items ? items : [];
+    this.selection = items || [];
   };
 
   addSelection = (item: TFileItem | TFolderItem) => {
@@ -153,8 +153,9 @@ export const FilesSelectionStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const store = React.useMemo(() => new FilesSelectionStore(), []);
   return (
-    <FilesSelectionStoreContext.Provider value={new FilesSelectionStore()}>
+    <FilesSelectionStoreContext.Provider value={store}>
       {children}
     </FilesSelectionStoreContext.Provider>
   );

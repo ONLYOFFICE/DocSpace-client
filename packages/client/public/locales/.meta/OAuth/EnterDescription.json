@@ -3,7 +3,7 @@
   "content": "Enter description",
   "content_en_sha1_hash": "4841a72a99c70608a67394ab003dc3eadc91c8c4",
   "created_at": "2025-05-19T21:30:53.876Z",
-  "updated_at": "2025-05-21T07:15:47.811Z",
+  "updated_at": "2025-08-04T07:30:01.425Z",
   "comment": {
     "text": "The \"EnterDescription\" translation key is used to display a placeholder text in a text area group component. It appears as a label and serves as a hint for users to enter a description when filling out a form. Translators can use this key to provide a clear and concise message that helps users understand the purpose of the field.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 184,
-      "context": "</FieldContainer>\n \n <TextAreaGroup\n label={t(\"Common:Description\")}\n name=\"description\"\n placeholder={t(\"EnterDescription\")}\n value={descriptionValue}\n onChange={onChange}\n increaseHeight={isLogoRequiredError}\n />\n <InputGroup",
+      "line_number": 189,
+      "context": "</FieldContainer>\n \n <TextAreaGroup\n label={t(\"Common:Description\")}\n name=\"description\"\n placeholder={t(\"EnterDescription\")}\n value={descriptionValue}\n onChange={onChange}\n increaseHeight={isLogoRequiredError}\n dataTestId=\"description_textarea_group\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Modifica applicazione' (Modify Application) does not accurately reflect the English meaning of 'Enter description'. It suggests changing an application, not entering a description.",
-          "suggestion": "A more accurate translation would be something like 'Inserisci descrizione' or 'Aggiungi descrizione'."
+          "description": "The Italian translation \"Modifica applicazione\" translates to \"Modify application\" which doesn't accurately reflect the English phrase \"Enter description\".  The Italian translation should convey the action of entering a description, not modifying an application.",
+          "suggestion": "Inserisci descrizione"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '説明を追加する' literally means 'Add description'. The English phrase 'Enter description' implies providing a description, not adding one to something that already exists. A more accurate translation would capture the sense of inputting a description.",
-          "suggestion": "説明を入力する (説明を入力してください)"
+          "description": "The translation \"説明を追加する\" (Setsumei o tzuuke suru) literally translates to 'Add description'. The original English 'Enter description' implies entering an existing description, not adding a new one. A more appropriate translation would convey the act of inputting an already formulated description.",
+          "suggestion": "入力する説明 (Input suru Setsumei) or 説明を入力 (Setsumei o nyuuryoku suru)"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Unesite opis' doesn't accurately convey the meaning of 'Enter description'. 'Unesite' means 'enter' but 'opis' is 'description' in the genitive case. It should be in the accusative case to match the verb 'unesite'.",
-          "suggestion": "Unesite opis/Unesite opis"
+          "description": "The translation 'Unesite opis' is not the most natural or accurate translation of 'Enter description'. 'Opis' is a more formal term than is usually appropriate. A more natural translation would be 'Unesite opis/detalje' or 'Upišite opis'.",
+          "suggestion": "Unesite opis/detalje"
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Açıklama gir' is a literal translation that doesn't flow naturally in Turkish. It directly translates to 'Description enter'. A more natural phrasing would be 'Açıklama ekleyin' or 'Açıklama yazın'.",
-          "suggestion": "Açıklama ekleyin"
+          "description": "The Turkish translation 'Açıklama gir' is a literal translation but doesn't sound natural in Turkish. It translates to 'Enter description' but a more idiomatic phrasing would be preferred.",
+          "suggestion": "Tanım girin"
         }
       ],
       "approved_at": null

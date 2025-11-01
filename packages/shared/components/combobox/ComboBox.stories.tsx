@@ -26,6 +26,9 @@
 
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg";
 
 import { ComboBox } from "./ComboBox";
 import { TComboboxProps } from "./ComboBox.types";
@@ -94,11 +97,83 @@ The ComboBox component includes the following ARIA attributes:
       control: "boolean",
       description: "Enable search functionality",
     },
+    dropDownMaxHeight: {
+      control: { type: "number" },
+    },
+    directionY: {
+      control: { type: "select" },
+      options: ["top", "bottom", "both"],
+    },
+    directionX: {
+      control: { type: "select" },
+      options: ["left", "right"],
+    },
+    fixedDirection: { control: { type: "boolean" } },
+    isDefaultMode: { control: { type: "boolean" } },
+    disableIconClick: { control: { type: "boolean" } },
+    disableItemClick: { control: { type: "boolean" } },
+    disableItemClickFirstLevel: { control: { type: "boolean" } },
+    displaySelectedOption: { control: { type: "boolean" } },
+    displayArrow: { control: { type: "boolean" } },
+    showDisabledItems: { control: { type: "boolean" } },
+    fillIcon: { control: { type: "boolean" } },
+    plusBadgeValue: { control: { type: "number" } },
+    forceCloseClickOutside: { control: { type: "boolean" } },
+    hideMobileView: { control: { type: "boolean" } },
+    isAside: { control: { type: "boolean" } },
+    isLoading: { control: { type: "boolean" } },
+    isMobileView: { control: { type: "boolean" } },
+    isNoFixedHeightOptions: { control: { type: "boolean" } },
+    manualWidth: { control: { type: "text" } },
+    manualX: { control: { type: "text" } },
+    manualY: { control: { type: "text" } },
+    modernView: { control: { type: "boolean" } },
+    noBorder: { control: { type: "boolean" } },
+    offsetX: { control: { type: "number" } },
+    opened: { control: { type: "boolean" } },
+    searchPlaceholder: { control: { type: "text" } },
+    scaledOptions: { control: { type: "boolean" } },
+    textOverflow: { control: { type: "boolean" } },
+    title: { control: { type: "text" } },
+    topSpace: { control: { type: "number" } },
+    type: {
+      control: {
+        type: "select",
+        options: ["badge", "onlyIcon", "descriptive", null],
+      },
+    },
+    usePortalBackdrop: { control: { type: "boolean" } },
+    withBackdrop: { control: { type: "boolean" } },
+    withBackground: { control: { type: "boolean" } },
+    withBlur: { control: { type: "boolean" } },
+    withLabel: { control: { type: "boolean" } },
+    withoutBackground: { control: { type: "boolean" } },
+    withoutPadding: { control: { type: "boolean" } },
+    shouldShowBackdrop: { control: { type: "boolean" } },
+
+    options: { table: { disable: true } },
+    selectedOption: { table: { disable: true } },
+    advancedOptions: { table: { disable: true } },
+    advancedOptionsCount: { table: { disable: true } },
+    children: { table: { disable: true } },
+    className: { table: { disable: true } },
+    comboIcon: { table: { disable: true } },
+    id: { table: { disable: true } },
+    dropDownId: { table: { disable: true } },
+    optionStyle: { table: { disable: true } },
+    setIsOpenItemAccess: { table: { disable: true } },
+    role: { table: { disable: true } },
+    style: { table: { disable: true } },
+    tabIndex: { table: { disable: true } },
+    onBackdropClick: { table: { disable: true } },
+    onClickSelectedItem: { table: { disable: true } },
+    onSelect: { table: { disable: true } },
+    onToggle: { table: { disable: true } },
   },
 } satisfies Meta<typeof ComboBox>;
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
-  return <div style={{ height: "220px", padding: "20px" }}>{children}</div>;
+  return <div style={{ height: "240px", padding: "20px" }}>{children}</div>;
 };
 
 const defaultOptions = [
@@ -148,44 +223,14 @@ export const Default: StoryObj<typeof ComboBox> = {
     },
     dropDownMaxHeight: 200,
     scaled: false,
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
   },
   parameters: {
     docs: {
       description: {
         story: "Default ComboBox with basic configuration.",
-      },
-    },
-  },
-};
-
-export const WithSearch: StoryObj<typeof ComboBox> = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    withSearch: true,
-    searchPlaceholder: "Search status...",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "ComboBox with search functionality enabled. Users can filter options by typing.",
-      },
-    },
-  },
-};
-
-export const ToggleMode: StoryObj<typeof ComboBox> = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    displayType: ComboBoxDisplayType.toggle,
-    onToggle: () => console.log("Toggled"),
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "ComboBox in toggle mode, useful for simple on/off selections.",
       },
     },
   },
@@ -200,6 +245,10 @@ export const DifferentSizes: StoryObj<typeof ComboBox> = {
           options={defaultOptions}
           selectedOption={{ key: 0, label: `Size: ${size}` }}
           size={size}
+          directionY="bottom"
+          scaled={false}
+          fixedDirection
+          isDefaultMode={false}
         />
       ))}
     </div>
@@ -219,24 +268,27 @@ export const WithIcons: StoryObj<typeof ComboBox> = {
     options: [
       {
         key: 1,
-        label: "Document",
-        icon: "file",
+        label: "Move",
+        icon: MoveReactSvgUrl,
       },
       {
         key: 2,
-        label: "Image",
-        icon: "image",
+        label: "Copy",
+        icon: CopyReactSvgUrl,
       },
       {
         key: 3,
-        label: "Folder",
-        icon: "folder",
+        label: "Download",
+        icon: DownloadReactSvgUrl,
       },
     ],
     selectedOption: {
       key: 0,
       label: "Select Type",
     },
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
   },
   parameters: {
     docs: {
@@ -268,6 +320,9 @@ export const WithSelectedOption: StoryObj<typeof ComboBox> = {
   args: {
     ...Default.args,
     selectedOption: defaultOptions[0],
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
   },
   parameters: {
     docs: {
@@ -312,6 +367,10 @@ export const CustomStyling: StoryObj<typeof ComboBox> = {
       label: "Select Priority",
     },
     noBorder: true,
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
+    scaled: false,
   },
   parameters: {
     docs: {

@@ -3,7 +3,7 @@
   "content": "The limit for storage space and the number of rooms is about to be exceeded",
   "content_en_sha1_hash": "44751111553d2a9d8e1f31fcccffe6db2490587b",
   "created_at": "2025-05-19T21:30:54.131Z",
-  "updated_at": "2025-07-01T15:57:35.917Z",
+  "updated_at": "2025-10-01T08:28:21.902Z",
   "comment": {
     "text": "The translation key \"StorageAndRoomHeader\" is used to display a warning message when the storage space and room limits are about to be exceeded. This message appears in a quotas bar component, specifically at the header section, providing context for users of the \"QuotasBarTypes.RoomsAndStorageTariffLimit\" case.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 287,
+      "line_number": 288,
       "context": "header: t(\"StorageAndUserTariffLimitHeader\"),\n description: getUpgradeTariffDescription(),\n };\n case QuotaBarTypes.RoomsAndStorageTariff:\n return {\n header: t(\"StorageAndRoomHeader\"),\n description: getUpgradeTariffDescription(),\n };\n case QuotaBarTypes.RoomsAndStorageTariffLimit:\n return {\n header: t(\"StorageAndRoomLimitHeader\"),",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'about to be exceeded' implies an imminent exceeding of the limit, while the Arabic translation 'تم تجاوز' (tam tajawuz) directly states that the limit *has* been exceeded. This changes the urgency of the message.",
-          "suggestion": "Consider a translation that conveys the 'about to be exceeded' nuance. For example: 'سيتم تجاوز الحد الأقصى لمساحة التخزين وعدد الغرف' (sayatam tajawuz) - 'The limit for storage space and the number of rooms will be exceeded.'"
+          "description": "The English phrase 'about to be exceeded' implies an imminent threshold. The Arabic translation 'تم تجاوز' (tam tajawuz) means 'has been exceeded'. This doesn't convey the sense of imminence.",
+          "suggestion": "Consider a translation that reflects the 'about to be exceeded' nuance, such as 'سيتم تجاوز' (sayatam tajawuz) which means 'will be exceeded' or 'على وشك التجاوز' (ala washk at-tajawuz) which means 'on the verge of exceeding'."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"is about to be exceeded\" is not accurately reflected in the Korean translation. \"한도를 초과하려고 합니다\" implies an attempt to exceed the limit, rather than the imminent exceeding of the limit.",
-          "suggestion": "스토리지 공간 및 룸 수 한도에 임박했습니다 (Storage space and room count are close to the limit)."
+          "description": "The translation '스토리지 공간 및 룸 수가 한도를 초과하려고 합니다' is a literal translation and sounds unnatural in Korean. While technically correct, it lacks fluency. The phrasing 'about to be exceeded' is not naturally expressed this way.",
+          "suggestion": "스토리지 공간 및 룸 수 제한이 곧 초과됩니다"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຂີດຈຳກັດສຳລັບເນື້ອທີ່ເກັບຮັກສາ ແລະ ຈຳນວນຫ້ອງກຳລັງຈະເກີນຂີດຈຳກັດໄວ້ແລ້ວ\" is overly literal and sounds unnatural in Lao. The phrase \"ໄວ້ແລ້ວ\" (already) is unnecessary and adds to the awkwardness. A more natural phrasing is needed.",
-          "suggestion": "ຂີດຈຳກັດເນື້ອທີ່ເກັບຮັກສາ ແລະ ຈຳນວນຫ້ອງກຳລັງຈະເກີນໄວໆແລ້ວ"
+          "description": "The Lao translation 'ຂີດຈຳກັດສຳລັບເນື້ອທີ່ເກັບຮັກສາ ແລະ ຈຳນວນຫ້ອງກຳລັງຈະເກີນຂີດຈຳກັດໄວ້ແລ້ວ' is a bit literal and doesn't flow naturally in Lao. It translates to 'The limit for storage space and the number of rooms is about to exceed the limit already'. It's a bit verbose.",
+          "suggestion": "Consider a more concise and natural phrasing such as: 'ເນື້ອທີ່ເກັບຮັກສາ ແລະ ຈຳນວນຫ້ອງເກີນຂີດຈຳກັດໄວ້ແລ້ວ' (Storage space and number of rooms have already exceeded the limit) or 'ກຳລັງເກີນຂີດຈຳກັດໄວ້ແລ້ວ' (About to exceed the limit).  The best phrasing will depend on the exact context."
         }
       ],
       "approved_at": null
@@ -162,13 +162,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limita maximă permisă de stocare și de săli este pe punctul de a fi depăşit' is a bit literal and not the most natural way to express the English meaning. 'Sali' should be 'camere'. The phrase 'pe punctul de a fi depășit' is a bit clunky. A more natural phrasing would be closer to 'Se apropie de limita maximă de stocare și număr de camere'.",
-          "suggestion": "Se apropie de limita maximă de stocare și număr de camere."
+          "description": "The translation \"Limita maximă permisă de stocare și de săli este pe punctul de a fi depăşit\" is a bit literal and awkward. 'Sali' (rooms) is plural and doesn't quite fit the flow. It’s more natural to use a phrasing that reflects the general concept of exceeding a limit.",
+          "suggestion": "Limita de stocare și numărul de camere este pe punctul de a fi depășit."
         },
         {
           "type": "spelling",
-          "description": "The word 'sali' is incorrect. The correct word for 'rooms' in this context is 'camere'.",
-          "suggestion": "camere"
+          "description": "The word 'depășit' is spelled correctly, but it might be helpful to use a more accessible synonym to improve clarity for users.",
+          "suggestion": "Consider using 'atins' (reached) or 'depășită' (exceeded) depending on the context."
         }
       ],
       "approved_at": null
@@ -185,8 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ධාරිතාව සහ කාමර සංඛ්‍යාව ඉක්මවීමට නියමිතය.\" while conveying the general idea, doesn't precisely reflect the English sentence's emphasis on the *imminent* nature of the exceeding.  It's more like 'The capacity and number of rooms will exceed'. A better phrasing would more accurately convey 'is about to be exceeded'.",
-          "suggestion": "ධාරිතාව සහ කාමර සංඛ්‍යාව ඉක්ම යාමට කිට්ටුව ඇත."
+          "description": "The translation 'ධාරිතාව සහ කාමර සංඛ්‍යාව ඉක්මවීමට නියමිතය.' is a literal translation but doesn't fully capture the nuance of 'about to be exceeded'. It implies a certainty that might not be intended. A more natural phrasing would convey a warning.",
+          "suggestion": "ධාරිතාව සහ කාමර සංඛ්‍යාව ඉක්ම යාමට අවකාශයක් තිබේ."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'ධාරිතාව' might be perceived as slightly formal. A more common and accessible word might improve clarity.",
+          "suggestion": "කාමර සංඛ්‍යාව හා ගබඩා කරන ප්‍රමාණය ඉක්ම යාමට අවකාශයක් තිබේ."
         }
       ],
       "approved_at": null
@@ -208,9 +213,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'складишни' (skladishni) is a less common and slightly awkward way to say 'storage'. 'Складиште' (skladiste) or 'за складиште' (za skladiste) would be more natural.",
-          "suggestion": "Лимит за складиште простор и број просторија ће ускоро бити прекорачен"
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Лимит за складишни простор и број просторија ће ускоро бити прекорачен\" translates literally as 'The limit for storage space and number of rooms will soon be exceeded.' While understandable, a more natural and user-friendly phrasing would be 'Скоро ће бити прекоречен лимит за складишни простор и број просторија.' or 'Прекорачен је лимит за складишни простор и број просторија'.",
+          "suggestion": "Прекорачен је лимит за складишни простор и број просторија"
         }
       ],
       "approved_at": null
@@ -230,13 +235,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"storage space\" is translated as \"обсягу сховища\". While technically correct, \"об'єм сховища\" would be more natural and idiomatic in Ukrainian. \"Storage space\" often implies a limited capacity, and the translated phrasing doesn't quite convey that as effectively.",
-          "suggestion": "Скоро буде досягнуто обмеження об'єму сховища й кількості кімнат"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

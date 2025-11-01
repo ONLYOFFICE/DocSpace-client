@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../styles/variables/index.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/_mixins.scss";
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .flexBoxStyles {
   display: flex;
@@ -43,14 +43,31 @@
   box-sizing: border-box;
   position: relative;
 
-  height: 220px;
+  height: 222px;
 
   background: var(--tile-background-color);
   border: var(--tile-border);
   border-radius: var(--tile-border-radius);
 
-  @include mobile {
+  @include mixins.mobile {
     margin-inline-start: 2px;
+  }
+
+  &:hover:not(.isDragging),
+  &:hover:not(.isEdit),
+  &.isActive {
+    .content {
+      a {
+        text-decoration: var(--link-hover-page-text-decoration);
+      }
+    }
+  }
+
+  &.isTouchDevice {
+    :global(.badge) {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 
   &:hover:not(.isDragging),
@@ -59,7 +76,12 @@
   &.isActive {
     .fileTileBottom {
       background: var(--tile-checked-background);
-      border-top: var(--tile-border);
+    }
+  }
+
+  &.checked {
+    .fileTileTop {
+      background: var(--tile-checked-background);
     }
   }
 
@@ -94,47 +116,38 @@
         justify-content: center;
         padding: 8px;
         background: var(--tile-background-badge-color);
-        border-radius: 4px;
+        border-radius: 3px;
         box-shadow: var(--tile-badge-shadow);
       }
     }
   }
 
   .isQuickButtons {
-    inset-inline-end: 9px;
+    inset-inline-start: 8px;
 
     :global(.badges) {
-      display: grid;
-      grid-template-columns: 32px;
-      grid-template-rows: repeat(3, 32px);
-      grid-gap: 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      :global(.badge.file-locked),
+      :global(.badge.link-shared) {
+        opacity: 1;
+        pointer-events: auto;
+      }
     }
   }
 
   .isBadges {
-    inset-inline-start: 9px;
+    inset-inline-end: 8px;
 
     :global(.badges) {
-      display: grid;
-      grid-template-columns: repeat(3, fit-content(60px));
-      grid-template-rows: 32px;
-      grid-gap: 7px;
+      display: flex;
+      height: 32px;
+      gap: 4px;
 
-      .badge-new-version {
-        order: 1;
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-
-      .badge-version-current {
-        order: 2;
-      }
-
-      .is-editing,
-      .can-convert {
-        order: 3;
+      .badge {
+        height: 32px;
       }
     }
   }
@@ -149,9 +162,28 @@
       .icon {
         display: none;
       }
+
       .checkbox {
         opacity: 1;
         display: flex;
+      }
+    }
+
+    &:hover:not(.isDragging, .inProgress),
+    &.checked {
+      background: var(--tile-background-color);
+      border-radius: 6px;
+    }
+
+    .checkbox,
+    .checkbox:active {
+      padding-top: 8px;
+      padding-inline-start: 8px;
+
+      svg {
+        margin: -8px;
+        padding: 8px;
+        margin-inline-end: 4px;
       }
     }
   }
@@ -174,7 +206,7 @@
     padding-top: 8px;
     padding-inline-start: 7px;
 
-    @include tablet {
+    @include mixins.tablet {
       opacity: 1;
     }
 
@@ -195,13 +227,24 @@
       display: -webkit-box;
       max-width: 400px;
       height: auto;
-      line-height: 19px;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: normal;
       word-break: break-word;
+
+      font-size: var(--tile-font-size);
+      line-height: var(--tile-line-height);
+
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+    }
+
+    &.isHovered {
+      a {
+        text-decoration: none !important;
+      }
     }
 
     .badges {
@@ -231,7 +274,7 @@
       }
     }
 
-    @include tablet {
+    @include mixins.tablet {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -243,7 +286,7 @@
 
     .expandButton > div:first-child {
       padding-block: 8px;
-      padding-inline: 12px 21px;
+      padding-inline: 8px 16px;
     }
   }
 
@@ -255,7 +298,8 @@
     align-items: baseline;
     height: 156px;
     position: relative;
-    border-radius: 6px 6px 0 0;
+    border-radius: 12px 12px 0 0;
+    transition: background 0.2s;
 
     &:hover {
       cursor: pointer;
@@ -269,7 +313,7 @@
       object-fit: cover;
       object-position: top;
       z-index: 0;
-      border-radius: 6px 6px 0 0;
+      border-radius: 12px 12px 0 0;
 
       .isImageOrMedia {
         object-position: top;
@@ -286,13 +330,11 @@
   .fileTileBottom {
     @extend .flexBoxStyles;
 
-    border-top: 1px solid transparent;
-
     background: var(--tile-background-color);
-    border-radius: 0 0 6px 6px;
+    border-radius: 0 0 12px 12px;
 
-    padding: 9px 0;
-    height: 62px;
+    padding: 16px 0;
+    height: 64px;
     box-sizing: border-box;
 
     &.isHighlight {

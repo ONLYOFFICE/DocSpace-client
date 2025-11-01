@@ -3,7 +3,7 @@
   "content": "A new room will be created and all the contents of the selected folder will be copied there. Afterward, you can invite other users to collaborate on the files within a room.",
   "content_en_sha1_hash": "597bc2fc2cbb30eaee9a51897835cd16d0e53d5f",
   "created_at": "2025-05-19T21:30:56.185Z",
-  "updated_at": "2025-05-28T09:30:02.299Z",
+  "updated_at": "2025-08-12T19:46:25.944Z",
   "comment": {
     "text": "This translation key is used to display a description of the \"Share Folder\" action in a shared folder creation dialog. The text informs users about what happens when they share a folder and how it will be used by others collaborating on files within the room. It appears as a modal dialog body component.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ShareFolderDialog/index.js",
       "line_number": 59,
-      "context": "return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Files:ShareFolder\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400} noSelect>\n {t(\"Files:ShareFolderDescription\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"",
+      "context": "return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Files:ShareFolder\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Files:ShareFolderDescription\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"",
       "module": "/packages/client"
     }
   ],
@@ -33,18 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'content' is translated as 'məzmunu'. While 'məzmunu' can mean content, in this context, 'məzmunu' leans towards meaning content as in 'essence' or 'meaning'. A better translation for 'contents' referring to files and folders would be 'məzmunu' or 'içəriyi'.",
-          "suggestion": "Yeni otaq yaradılacaq və seçilmiş qovluğun bütün içəriyi oraya nüsxələnəcək."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The sentence 'Afterward, you can invite other users to collaborate on the files within a room' sounds slightly awkward in Azerbaijani.  The word order is not entirely natural.",
-          "suggestion": "Daha sonra otaqdakı fayllarla işləmək üçün digər istifadəçiləri dəvət edə bilərsiniz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -77,13 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"all the contents of the selected folder\" is slightly less natural in Spanish. While \"todo el contenido de la carpeta seleccionada\" is correct, it's a bit clunky.",
-          "suggestion": "Consider rephrasing to something like \"el contenido de la carpeta seleccionada\" or \"los archivos de la carpeta seleccionada\" to sound more idiomatic."
+          "description": "The phrase \"all the contents of the selected folder\" is translated as \"todo el contenido de la carpeta seleccionada.\" While technically correct, it's a bit clunky. A more natural and fluent translation would be something like \"todo el contenido de la carpeta elegida\" or \"todo lo que hay en la carpeta seleccionada\".",
+          "suggestion": "Consider 'todo el contenido de la carpeta elegida' or 'todo lo que hay en la carpeta seleccionada'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The use of \"Luego\" (then) is grammatically correct, but \"Después\" or \"Posteriormente\" might be more formal and consistent with the tone of a software description.",
-          "suggestion": "Replace 'Luego' with 'Después' or 'Posteriormente'."
+          "description": "The phrase 'Afterward, you can invite...' is translated as 'Luego, puede invitar...' While accurate, it sounds slightly formal. A more conversational tone could be achieved with a softer wording.",
+          "suggestion": "Consider 'Después, puedes invitar...' or 'Luego, podrás invitar...'"
         }
       ],
       "approved_at": null
@@ -94,13 +83,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"to this\" in \"koko valitun kansion sisältö kopioidaan tähän\" is ambiguous and doesn't accurately reflect the English \"there\". It implies the content is copied *to* a specific place already mentioned, which isn't the case.",
+          "description": "The phrase 'A new room will be created and all the contents of the selected folder will be copied there' is not perfectly conveyed by 'Uusi huone luodaan ja koko valitun kansion sisältö kopioidaan tähän.'. 'Tähän' (to this) implies copying to a specific, already existing location, while the English implies creating a new location.",
           "suggestion": "Uusi huone luodaan ja koko valitun kansion sisältö kopioidaan sinne."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"huoneeseen\" (into the room) in \"Sen jälkeen voit kutsua käyttäjiä huoneeseen tekemään yhteistyötä tiedostoilla\" is slightly awkward. While technically correct, it can be improved for natural flow.",
-          "suggestion": "Sen jälkeen voit kutsua käyttäjiä tekemään yhteistyötä tiedostoilla uudessa huoneessa."
+          "description": "The sentence 'Afterward, you can invite other users to collaborate on the files within a room' is not perfectly conveyed by 'Sen jälkeen voit kutsua käyttäjiä huoneeseen tekemään yhteistyötä tiedostoilla.'. While understandable, 'huoneeseen tekemään yhteistyötä tiedostoilla' is a little clunky. It directly translates 'to collaborate on files in a room', but in Finnish, a more natural phrasing would improve flow.",
+          "suggestion": "Sen jälkeen voit kutsua käyttäjiä huoneeseen ja tehdä yhteistyötä tiedostoissa."
         }
       ],
       "approved_at": null
@@ -116,14 +105,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"Կստեղծվի նոր սենյակ\" could be improved for flow. While grammatically correct, it sounds slightly awkward. A more natural phrasing might use a future tense verb that emphasizes the action being taken.",
-          "suggestion": "Կարվի նոր սենյակ ստեղծել"
+          "type": "spelling",
+          "description": "The word \"օգտատերերի\" (users) appears twice. While technically correct, it's slightly awkward. A more natural phrasing might be used.",
+          "suggestion": "օգտատերներ"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English word 'collaborate' is translated as 'համագործակցելու'. While accurate, it might be beneficial to consider a more colloquial term, especially depending on the target audience.  'Աշխատել' (to work) could be a more approachable alternative.",
-          "suggestion": "Կարող եք հրավիրել այլ օգտատերերի՝ աշխատելու սենյակում գտնվող ֆայլերի շուրջ:"
+          "type": "grammar",
+          "description": "The phrase \"սենյակում գտնվող ֆայլերի շուրջ\" (around the files in the room) could be more concisely phrased.",
+          "suggestion": "սենյակում գտնվող ֆայլերի հետ"
         }
       ],
       "approved_at": null
@@ -149,18 +138,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'A new room will be created' is somewhat literal. A more natural Lao phrasing might be 'ຫ້ອງໃໝ່ຈະຖືກສ້າງຕັ້ງຂຶ້ນ' (hong mai ja thuk sang tang khun).",
-          "suggestion": "ຫ້ອງໃໝ່ຈະຖືກສ້າງຕັ້ງຂຶ້ນ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ຄັດລອກ' (kat lok) while technically meaning 'copy', is a bit formal and might not be the most common phrasing. 'ຖ່າຍບົດ' (thai bot) is more often used for copying files.",
-          "suggestion": "ຖ່າຍບົດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -169,8 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'invite other users' is translated as 'uzaicināt citus lietotājus'. While technically correct, it's a bit formal for a user-facing interface. A more natural phrasing might be 'iedrošināt citus lietotājus' (to enable other users) or 'ļaut citiem lietotājiem' (allow other users).",
-          "suggestion": "iedrošināt citus lietotājus"
+          "description": "The English phrase \"collaborate on the files within a room\" is not perfectly captured by \"sadarboties ar telpas failiem\". A more accurate translation would convey the collaborative aspect more clearly, such as 'strādāt kopā pie telpas failiem' or 'kopīgi strādāt pie telpas failiem'.",
+          "suggestion": "kopīgi strādāt pie telpas failiem"
         }
       ],
       "approved_at": null
@@ -217,13 +195,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"වනතුර, වෙනත් පරිශ්‍රීලකයින් සමඟ කාමරයේ තිබෙන ගොනුවල සහයෝගයෙන් වැඩ කිරීමට ආරාධනා කිරීමට හැකිය\" is a somewhat literal and slightly awkward translation of 'Afterward, you can invite other users to collaborate on the files within a room.' A more natural Sinhala phrasing would convey the meaning more smoothly.",
-          "suggestion": "වනතුර, කාමරයට වෙනත් පරිශ්‍රීලකයින්ව සහයෝගයෙන් වැඩ කිරීමට ආරාධනා කළ හැකිය."
+          "description": "The phrase \"පරිශ්‍රීලකයින්\" (pariseelayakayin) is an uncommon and slightly awkward translation for \"users\". A more natural and common word would be \"පරිශ්‍රමණිකයින්\" (parishramanikayin) or simply \"භාවිතකරුවන්\" (bhavitakaruwan).",
+          "suggestion": "Replace \"පරිශ්‍රීලකයින්\" with \"පරිශ්‍රමණිකයින්\" or \"භාවිතකරුවන්\"."
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure feels a bit long and complex. It might be improved with a slight rephrasing for readability.",
-          "suggestion": "නව කාමරයක් සෑදී තේරූ බහාලුමේ සියලු අන්තර්ගතය එහි පිටපත් වනු ඇත. පසුව, කාමරයට වෙනත් පරිශ්‍රීලකයින්ව සහයෝගයෙන් වැඩ කිරීමට ආරාධනා කළ හැකිය."
+          "type": "incorrect_translation",
+          "description": "The phrase 'සහායෝගයෙන් වැඩ කිරීමට ආරාධනා කිරීමට හැකිය' is a bit wordy. A more concise and natural translation would be 'සහායෝගයෙන් වැඩ කිරීමට ආරාධනා කල හැකිය' or simply 'ආරාධනා කල හැකිය'.",
+          "suggestion": "Replace 'සහායෝගයෙන් වැඩ කිරීමට ආරාධනා කිරීමට හැකිය' with 'ආරාධනා කල හැකිය' or 'සහායෝගයෙන් වැඩ කිරීමට ආරාධනා කල හැකිය'."
         }
       ],
       "approved_at": null
@@ -231,13 +209,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'selected folder' is translated as 'vybraného priečinka'. While technically correct, a more natural and common Slovak term for 'folder' in this context would be 'zložka'.",
-          "suggestion": "Bude vytvorená nová miestnosť a skopíruje sa do nej celý obsah vybraného zložka."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -252,18 +224,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"соба\" (soba) is consistently used. While technically correct, \"просторија\" (prostorija) might be a more formal and contextually appropriate term for \"room\" in this professional setting.",
-          "suggestion": "Consider replacing \"соба\" with \"просторија\" for improved formality."
+          "description": "The word 'folder' is incorrectly transcribed as 'фолдер'. The correct spelling is 'фолдер'.",
+          "suggestion": "фолдер"
         },
         {
           "type": "grammar",
-          "description": "The phrase \"ц́е бити креирана\" (će biti kreirana) is grammatically correct, but a more concise phrasing could improve readability.  Passive voice can be avoided.",
-          "suggestion": "Consider replacing \"ц́е бити креирана\" with \"биће креирана\" (biće kreirana) or even a more active construction like \"биће отворена\" (biće otvorena) - 'will be opened' - depending on the exact intent."
+          "description": "The phrase 'Нова соба ц́е бити креирана' is grammatically correct, but a more natural-sounding alternative would be 'Нова соба ће бити креирана'.",
+          "suggestion": "Нова соба ће бити креирана"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"сарађују\" (saradjuju) is generally correct for 'collaborate,' but it could be more accurately translated to capture the nuance of working *together* on the files. The term \"заједничким радом\" (zajednickim radom) conveys this better.",
-          "suggestion": "Consider replacing \"сарађују на датотекама\" (saradjuju na datotekama) with \"раде заједнички на датотекама\" (rade zajednicki na datotekama) or similar phrasing."
+          "description": "The English phrase 'collaborate on the files' is translated as 'сарађују на датотекама'. While technically correct, a more precise and natural translation would be 'уређују датотеке' or 'сарађују на садржају'.",
+          "suggestion": "уређују датотеке"
         }
       ],
       "approved_at": null
@@ -274,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'foldera' is misspelled. It should be 'foldera'",
+          "description": "The word 'foldera' should be 'foldera'.",
           "suggestion": "foldera"
         }
       ],

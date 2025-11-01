@@ -25,10 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // Override default variables before the import
-$font-family-base: "Open Sans", sans-serif;
+$font-family-base:
+  "Open Sans",
+  -apple-system,
+  "Segoe UI",
+  sans-serif,
+  Arial;
 
-@import "../../../public/css/fonts.css";
-@import "./variables/_colors.scss";
+@use "./variables/colors";
+@use "../../../public/css/fonts.css";
+@use "./mixins";
 
 html,
 body {
@@ -45,6 +51,10 @@ body {
     inset-inline-start: calc(50% - 20px);
     top: 35%;
   }
+}
+
+img {
+  @include mixins.no-user-select;
 }
 
 .table-container_settings-checkbox {

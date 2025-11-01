@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2025-07-01T15:57:35.879Z",
+  "updated_at": "2025-10-14T04:30:51.499Z",
   "comment": {
     "text": "This translation key is used for the label \"Spreadsheet\" which appears on a button in the \"Actions\" dropdown menu, allowing users to create a new spreadsheet. It is also used as part of a dialog and links within the application, consistently displaying the term \"Spreadsheet\". The text should be translated to appear cohesively across these different contexts.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 534,
+      "line_number": 539,
       "context": "const createNewSpreadsheetXlsx = {\n id: \"actions_new-spreadsheet\",\n className: \"main-button_drop-down\",\n icon: SpreadsheetReactSvgUrl,\n label: t(\"Common:Spreadsheet\"),\n onClick: onCreate,\n action: \"xlsx\",\n key: \"xlsx\",\n };",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
+      "line_number": 87,
+      "context": "{\n label: t(\"Document\"),\n value: \".docx\",\n },\n {\n label: t(\"Spreadsheet\"),\n value: \".xlsx\",\n },\n ];\n \n const isXML = convertItem?.fileExst?.includes(\".xml\");",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js",
-      "line_number": 66,
+      "line_number": 67,
       "context": "<Link data-format=\"docx\" onClick={onCreate} {...linkStyles}>\n {t(\"Document\")},\n </Link>\n </div>\n <Link data-format=\"xlsx\" onClick={onCreate} {...linkStyles}>\n {t(\"Spreadsheet\")},\n </Link>\n <Link data-format=\"pptx\" onClick={onCreate} {...linkStyles}>\n {t(\"Presentation\")},\n </Link>\n <Link data-format=\"pdf\" onClick={onCreate} {...linkStyles}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 354,
+      "line_number": 363,
       "context": "icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",\n label: t(\"Common:Spreadsheet\"),\n icon: SpreadsheetReactSvgUrl,\n onClick: () => actions.onCreate(\"xlsx\"),\n },\n {\n key: \"create-presentation\",",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 88,
-      "context": "{\n label: t(\"Document\"),\n value: \".docx\",\n },\n {\n label: t(\"Spreadsheet\"),\n value: \".xlsx\",\n },\n ];\n \n const isXML = convertItem?.fileExst?.includes(\".xml\");",
       "module": "/packages/client"
     },
     {
@@ -41,8 +41,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 459,
+      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForEditors\", { editorName: t(\"Common:Spreadsheet\") })} (\n {logoUrls[8].size.width}x{logoUrls[8].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[8].name}",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 18,
+      "line_number": 21,
       "context": "case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.Document:",
       "module": "/packages/shared"
     }
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Աղյուսակաթերթ\" (Aghyusakatherth) is a possible translation for 'Spreadsheet', it is quite literal and less common. A more natural and widely understood translation would be \"Տախտակաթերթ\" (Takhdakaatherth) or simply \"Ցուցակ\" (Tsutsak).",
-          "suggestion": "Consider using \"Տախտակաթերթ\" (Takhdakaatherth) or \"Ցուցակ\" (Tsutsak)."
+          "description": "The translation \"Աղյուսակաթերթ\" while technically meaning something close to \"spreadsheet,\" isn't the standard or most natural-sounding term in Armenian. It sounds a bit constructed.",
+          "suggestion": "A more common and readily understood translation would be \"մարտավահաշիվ\" (martavahashiv) or \"հաշվապատճեն\" (hashvapatchyen)."
         }
       ],
       "approved_at": null
@@ -144,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄຳນວນ' (kham-nuan) means 'calculate' or 'compute,' not 'spreadsheet.' A more accurate translation would be something like 'ແຜ່ນກາານ' (phaen gaan) or 'ຕາຕະລາງ' (ta-talaang).",
-          "suggestion": "ແຜ່ນກາານ (phaen gaan) or ຕາຕະລາງ (ta-talaang)"
+          "description": "The Lao translation 'ຄຳນວນ' (kham-nuan) means 'calculate' or 'compute', which is not a direct translation of 'Spreadsheet'. A spreadsheet is a document or file used to organize data, not necessarily a calculation tool.",
+          "suggestion": "Possible alternatives include: ແຜ່ນແຜ່ນຂຶ້ນ (phaen phaen khuen) - sheet, or ເອກະສານແຜ່ນຕາຕະລາງ (ek-ga-san phaen ta-ta-ralang) - spreadsheet document."
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Прорачунска табела\" while technically meaning 'calculation table', is not the standard or most natural translation for 'Spreadsheet'. A more common and accurate translation would be 'Табела' or 'Рачунска табела'.",
-          "suggestion": "Табела"
+          "description": "While \"Прорачунска табела\" is a literal translation, it's not the standard or most natural way to refer to a spreadsheet in Serbian. It sounds overly formal and technical.  \"Рачунска табела\" is the more common and readily understood term.",
+          "suggestion": "Рачунска табела"
         }
       ],
       "approved_at": null
@@ -225,13 +231,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'računska' is missing an acute accent. It should be 'računska'.",
-          "suggestion": "ProračunSKA tabela"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Elektronik tablo' is a literal translation of 'spreadsheet' and while technically correct, it's not the most common or natural way a Turkish speaker would refer to a spreadsheet. A more idiomatic translation would be 'Excel tablosu' (referring to the Excel software) or simply 'tablo' depending on context.",
-          "suggestion": "Consider 'Excel tablosu' or 'tablo' as a more natural alternative depending on the context."
+          "description": "While 'Elektronik tablo' is a valid translation for spreadsheet, it is quite literal. A more common and natural translation would be 'Excel tablosu' (referencing the popular Excel software) or simply 'Tablo'. 'Elektronik tablo' emphasizes the electronic aspect which isn't always necessary or expected.",
+          "suggestion": "Consider 'Excel tablosu' or 'Tablo'."
         }
       ],
       "approved_at": null
@@ -259,6 +259,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

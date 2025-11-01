@@ -28,7 +28,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
 
 const StyledWrapper = styled.div`
   margin-top: 24px;
@@ -57,6 +57,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
+        dataTestId="sp_settings"
       />
       <MobileCategoryWrapper
         title={t("SpMetadata", {
@@ -70,6 +71,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
+        dataTestId="sp_metadata"
       />
     </StyledWrapper>
   );

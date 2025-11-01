@@ -76,43 +76,9 @@ const openDeepLink = (
 
     window.location.href = url;
   } catch (error) {
+    console.error(error);
     options?.onFail?.();
   }
-};
-
-export const getDeepLink = (
-  location: string,
-  email: string,
-  file?: TFile,
-  deepLinkConfig?: TDeepLinkConfig,
-  originalUrl?: string,
-  isOpenOnlyApp?: boolean,
-) => {
-  const jsonData = {
-    portal: location,
-    email: email,
-    file: {
-      id: file?.id,
-      title: file?.title,
-      extension: file?.fileExst,
-    },
-    folder: {
-      id: file?.folderId,
-      parentId: file?.rootFolderId,
-      rootFolderType: file?.rootFolderType,
-    },
-    originalUrl: originalUrl,
-  };
-  const stringifyData = JSON.stringify(jsonData);
-  const deepLinkData = bytesToBase64(
-    Array.from(new TextEncoder().encode(stringifyData)),
-  );
-
-  openDeepLink(`${deepLinkConfig?.url}?data=${deepLinkData}`, {
-    onOpen: () =>
-      (window.location.href = `${deepLinkConfig?.url}?data=${deepLinkData}`),
-    onFail: isOpenOnlyApp ? undefined : () => redirectToStore(deepLinkConfig),
-  });
 };
 
 export const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
@@ -124,4 +90,43 @@ export const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
     : `https://play.google.com/store/apps/details?id=${deepLinkConfig?.androidPackageName}`;
 
   window.location.replace(storeUrl);
+};
+
+export const getDeepLink = (
+  location: string,
+  email: string,
+  file?: TFile,
+  deepLinkConfig?: TDeepLinkConfig,
+  originalUrl?: string,
+  isOpenOnlyApp?: boolean,
+) => {
+  if (!deepLinkConfig) {
+    return (window.location.href = "/");
+  }
+
+  const jsonData = {
+    portal: location,
+    email,
+    file: {
+      id: file?.id,
+      title: file?.title,
+      extension: file?.fileExst,
+    },
+    folder: {
+      id: file?.folderId,
+      parentId: file?.rootFolderId,
+      rootFolderType: file?.rootFolderType,
+    },
+    originalUrl,
+  };
+  const stringifyData = JSON.stringify(jsonData);
+  const deepLinkData = bytesToBase64(
+    Array.from(new TextEncoder().encode(stringifyData)),
+  );
+
+  openDeepLink(`${deepLinkConfig?.url}?data=${deepLinkData}`, {
+    onOpen: () =>
+      (window.location.href = `${deepLinkConfig?.url}?data=${deepLinkData}`),
+    onFail: isOpenOnlyApp ? undefined : () => redirectToStore(deepLinkConfig),
+  });
 };

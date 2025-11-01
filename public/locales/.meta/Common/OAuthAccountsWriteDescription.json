@@ -3,7 +3,7 @@
   "content": "View and manage all contacts",
   "content_en_sha1_hash": "f7289c71c27551c49981978e5345662aa8dd1dbc",
   "created_at": "2025-05-19T21:30:46.982Z",
-  "updated_at": "2025-05-28T09:30:03.011Z",
+  "updated_at": "2025-09-07T07:53:15.529Z",
   "comment": {
     "text": "This translation key is used to display a label for managing all contacts. It is likely used in an OAuth authorization or settings interface, where users can view and manage their contact information.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/oauth/index.ts",
-      "line_number": 122,
+      "line_number": 121,
       "context": "return t(\"Common:OAuthFilesWriteDescription\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n if (type === ScopeType.read)\n return t(\"Common:OAuthAccountsReadDescription\");\n return t(\"Common:OAuthAccountsWriteDescription\");\n case ScopeGroup.profiles:\n if (type === ScopeType.read)\n return t(\"Common:OAuthProfilesReadDescription\");\n return t(\"Common:OAuthProfilesWriteDescription\");\n case ScopeGroup.rooms:",
       "module": "/packages/shared"
     }
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'View and manage all contacts' is not accurately translated to 'عرض وإدارة جميع الحسابات'. 'الحسابات' means 'accounts,' while the original refers to 'contacts'.",
+          "description": "The translation 'عرض وإدارة جميع الحسابات' translates to 'View and manage all accounts'. The original English content refers to 'contacts', while the Arabic translation refers to 'accounts'. This is a significant difference in meaning.",
           "suggestion": "عرض وإدارة جميع جهات الاتصال"
         }
       ],
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bütün hesablara baxın və idarə edin\" (View all accounts and manage them) doesn't precisely match the English content \"View and manage all contacts\". The English refers to 'contacts' while the Azerbaijani translation refers to 'accounts'.",
+          "description": "The translation \"Bütün hesablara baxın və idarə edin\" translates to \"View and manage all accounts,\" but the original English content says \"View and manage all contacts.\" The words 'accounts' and 'contacts' have different meanings.",
           "suggestion": "Bütün əlaqələrə baxın və idarə edin"
         }
       ],
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Прегледайте и управлявайте всички профили\" doesn't accurately reflect the meaning of \"View and manage all contacts.\" 'Contacts' are not 'profiles' in this context. 'Профили' suggests user profiles, which is different.",
+          "description": "The translation \"Прегледайте и управлявайте всички профили\" translates to \"View and manage all profiles\". The original English content is \"View and manage all contacts\". 'Contacts' and 'profiles' are different concepts. The translation doesn't accurately convey the meaning of 'contacts'.",
           "suggestion": "Прегледайте и управлявайте всички контакти"
         }
       ],
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zobrazení a správa všech účtů' translates to 'View and manage all accounts', which is not the intended meaning of 'View and manage all contacts'. The word 'accounts' (účtů) should be 'kontaktů' (contacts).",
+          "description": "The translation 'Zobrazení a správa všech účtů' translates to 'View and manage all accounts,' which is not the same as 'View and manage all contacts'. The original English refers to 'contacts', while the Czech translation refers to 'accounts'.",
           "suggestion": "Zobrazení a správa všech kontaktů"
         }
       ],
@@ -84,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Προβολή και διαχείριση όλων των λογαριασμών' translates to 'View and manage all accounts'. The English content refers to 'contacts', while the Greek translation refers to 'accounts'. This is a significant translation error.",
+          "description": "The translation \"Προβολή και διαχείριση όλων των λογαριασμών\" translates to 'View and manage all accounts,' which is not the intended meaning of 'View and manage all contacts'. 'Contacts' refers to people, while 'accounts' refers to system accounts.",
           "suggestion": "Προβολή και διαχείριση όλων των επαφών"
         }
       ],
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'contacts' has been translated as 'tilejä'. 'Contacts' refers to people, whereas 'tilejä' translates to 'accounts' or 'tiles'. This is a significant semantic error.",
-          "suggestion": "Näytä ja hallitse kaikkia yhteystietoja"
+          "description": "The English phrase 'contacts' has been translated as 'tilejä' (accounts). 'Contacts' refers to individual people, while 'tilejä' refers to accounts (like social media or email accounts). A more accurate translation would be something like 'yhteystietoja' (contact information) or 'henkilötietoja' (personal information).",
+          "suggestion": "yhteystietoja"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'すべての連絡先を見て管理する' is a literal translation that doesn't fully capture the meaning of 'View and manage all contacts'. It sounds a bit awkward in Japanese. A more natural phrasing would be closer to 'すべての連絡先を表示および管理する' or 'すべての連絡先を確認し管理する'.",
-          "suggestion": "すべての連絡先を表示および管理する"
+          "description": "The translation \"すべての連絡先を見て管理する\" is a literal translation and not the most natural or idiomatic way to express 'View and manage all contacts' in Japanese. It sounds a bit clunky.",
+          "suggestion": "Consider a more natural phrasing such as \"すべての連絡先を表示し、管理できます\" or \"すべての連絡先を閲覧および管理できます\"."
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '모든 계정 보기 및 관리' translates to 'View and manage all accounts,' which is not the same as the original English content 'View and manage all contacts'. The key name suggests 'OAuthAccounts', implying accounts, but the intended meaning is contacts.",
-          "suggestion": "모든 연락처 보기 및 관리"
+          "description": "The translation \"모든 계정 보기 및 관리\" (Modeun gyejeong bowi mit gwanli) translates to 'View and manage all accounts', which doesn't directly correspond to 'View and manage all contacts'. While 'accounts' and 'contacts' can sometimes be used interchangeably, in this context, 'contacts' is likely the more accurate term.",
+          "suggestion": "모든 연락처 보기 및 관리 (Modeun yeonrakcheo bowi mit gwanli)"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'View and manage all contacts' is not fully captured by the Lao translation. 'View and manage' could be more accurately translated to something like 'ເບິ່ງແລະຄຸ້ມຮັກສາ' (beng lae khum rak sa) to convey 'manage' more comprehensively.",
-          "suggestion": "ເບິ່ງແລະຄຸ້ມຮັກສາຕິດຕໍ່ທັງໝົດ"
+          "description": "The translation 'ເບິ່ງແລະຈັດການຕິດຕໍ່ທັງໝົດ' while literally meaning 'View and manage all contacts', doesn't fully capture the nuance of 'View and manage all contacts' in the context of OAuth accounts. It lacks the implication of *access* or *control* related to OAuth account permissions.",
+          "suggestion": "ເບິ່ງແລະຈັດການບັນຊີຕິດຕໍ່ທັງໝົດ (bew and jadarn banchee contact thangmot)"
         }
       ],
       "approved_at": null
@@ -168,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"View and manage all contacts\" has been translated as \"Skatīt un pārvaldīt visus kontus\". \"Contacts\" (kontakti) should be translated as \"kontaktus\", not \"kontus\". \"Kontus\" translates to \"accounts\".",
+          "description": "The English phrase \"contacts\" is translated as \"kontus\", which means \"accounts\".  'Kontakti' would be the more accurate translation for \"contacts\".",
           "suggestion": "Skatīt un pārvaldīt visus kontaktus"
         }
       ],
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wyświetl wszystkie kontakty i zarządzaj nimi' is a literal translation of 'View and manage all contacts'. While not incorrect, it's not the most natural phrasing in Polish. A better, more idiomatic translation would emphasize the ability to manage them.",
-          "suggestion": "Zarządzaj i przeglądaj wszystkie kontakty"
+          "description": "The English phrase 'View and manage all contacts' is translated as 'Wyświetl wszystkie kontakty i zarządzaj nimi'. While technically correct, 'manage' implies more than just 'zarządzaj', which leans towards 'control' or 'administration'. A more precise translation would emphasize the 'manage' aspect.",
+          "suggestion": "Wyświetl i zarządzaj wszystkimi kontaktami"
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Afișează și gestionează toate persoane de contact' is not the most natural Romanian translation for 'View and manage all contacts'. While technically correct, it sounds a bit literal.",
-          "suggestion": "Vizualizează și gestionează toate contactele"
+          "description": "The translation 'Afișează și gestionează toate persoane de contact' is not the most natural or accurate translation of 'View and manage all contacts.' While understandable, 'persoane de contact' is a bit formal and verbose. 'Contacte' is the more common and concise term.",
+          "suggestion": "Afișează și gestionează toate contactele"
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'View and manage all contacts' is not perfectly captured by 'Просмотреть все контакты и управлять ими'. 'View' implies a more passive action than 'Просмотреть'. 'Manage' is adequately translated as 'управлять'.",
-          "suggestion": "Просмотр и управление всеми контактами"
+          "description": "The English phrase 'View and manage all contacts' implies a more comprehensive action than simply 'View and manage'. The Russian translation is more literal and doesn't fully capture the intended scope.",
+          "suggestion": "Consider a translation like 'Просмотр и администрирование всех контактов' or 'Просмотр и редактирование всех контактов' to better reflect the management aspect. Alternatively, 'Просмотреть и управлять всеми контактами' is acceptable, although less impactful."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'View and manage all contacts' is not perfectly captured by the Sinhala translation 'සියලු සම්බන්ධතා බලන්න සහ කළමණාකරණය කරන්න'. While ' බලන්න' (balannaa - view) and ' කළමණාකරණය කරන්න' (kalamaanakaarayanay karannaa - manage) are correct, the overall flow and nuance is slightly off. A more natural translation would consider the sequential order and combined meaning.",
-          "suggestion": "A more accurate translation might be: 'සියලු සම්බන්ධතා දැකීමට හා පරිහරණය කිරීමට'."
+          "description": "The English phrase 'View and manage all contacts' is not perfectly conveyed by the Sinhala translation 'සියලු සම්බන්ධතා බලන්න සහ කළමණාකරණය කරන්න'. While ' බලන්න' (balanna - view) and ' කළමණාකරණය කරන්න' (kalamanakaraṇaya karanna - manage) are accurate, 'සියලු සම්බන්ධතා' (siyallu samprādhatā) translates literally to 'all contacts'. A more natural translation might emphasize the ability to see and control contacts.",
+          "suggestion": "Consider a translation that conveys 'see and control contacts' more naturally, perhaps 'සම්බන්ධතා දැකීමට සහ පාලනය කිරීමට' (samprādhatā dēkimito saha pālanaya kirimito)."
         }
       ],
       "approved_at": null
@@ -276,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Переглянути всі контакти та керувати ними' is too literal and not idiomatic. 'Manage' implies control and actions, while the original English phrase 'manage' here means overseeing and administering. A better translation would reflect this.",
-          "suggestion": "Переглянути та адмініструвати всі контакти"
+          "description": "The English phrase 'View and manage all contacts' is not perfectly conveyed by the Ukrainian translation 'Переглянути всі контакти та керувати ними'. 'Manage' implies a broader scope than simply 'manage'. A more accurate translation would consider terms like 'редагувати' (edit) or 'адмініструвати' (administer).",
+          "suggestion": "Переглянути та редагувати всі контакти"
         }
       ],
       "approved_at": null
@@ -288,7 +288,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'contacts' is best translated as 'liên hệ' in Vietnamese, not 'liên lạc'. 'Liên lạc' generally refers to communication.",
+          "description": "The translation 'Xem và quản lý tất cả liên lạc' is a literal translation of 'View and manage all contacts'. While technically correct, 'liên lạc' often refers to communication or contacts in a broader sense. A more natural and accurate translation for 'contacts' in this context (likely referring to contact records in a CRM or similar system) would be 'liên hệ'.",
           "suggestion": "Xem và quản lý tất cả liên hệ"
         }
       ],

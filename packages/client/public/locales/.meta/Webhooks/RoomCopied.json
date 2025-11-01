@@ -3,7 +3,7 @@
   "content": "Room copied",
   "content_en_sha1_hash": "84a37f78a1044b9e21ef84fec5b8c4ffddbd830b",
   "created_at": "2025-05-19T21:30:49.819Z",
-  "updated_at": "2025-05-21T00:59:46.563Z",
+  "updated_at": "2025-05-24T02:13:39.262Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when a room has been successfully copied. The text will appear in a UI context where rooms are being duplicated or transferred, providing feedback to users about the outcome of this action.",
     "is_auto": true,
@@ -144,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Grupul a fost copiat' translates to 'The group was copied'. While 'room' and 'group' can sometimes be interchangeable, 'room' in this context likely refers to a specific accommodation or space, not a general group. The Romanian translation doesn't accurately convey the intended meaning of 'Room copied'.",
+          "description": "The Romanian translation 'Grupul a fost copiat' translates to 'The group was copied'. This doesn't accurately reflect the English 'Room copied', which implies a room (e.g., a chat room) has been duplicated or replicated. 'Grupul' refers to a group, not a room.",
           "suggestion": "Camera a fost copiată"
         }
       ],
@@ -159,18 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'කාමරය පිටපත් කරන ලදී' is a literal translation of 'Room copied,' it sounds unnatural and overly formal in Sinhala. A more natural phrasing would convey the action of copying being completed.",
-          "suggestion": "කාමරය සාදා ගැනීම් අවසාන විය"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The use of 'පිටපත් කරන' (pitat karan) implies duplication rather than creation, which might not align with the intended meaning of the webhook.",
-          "suggestion": "කාමරය සාදා ගන්නා ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -191,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба копирана\" translates to \"Room copied\" literally, but 'soba' means 'room' in the general sense. The correct term for a 'room' in the context of a virtual room or workspace is likely 'просторија' or, more appropriately given the technical context, 'чаробна просторија' if it represents a virtual or magic room. Alternatively, 'соба' is acceptable but requires context to define its type.",
-          "suggestion": "Consider using 'Просторија копирана' or 'Чаробна просторија копирана' if the context specifies a virtual or designated workspace. Otherwise, 'Соба копирана' is understandable, but less precise."
+          "description": "The Serbian (Cyrillic) translation \"Соба копирана\" translates to \"Room copied\" literally, but it appears there's an error. 'Соба' (Soba) means 'room' but should be 'Ауторска соба' or a similar term indicating a copyright room/space.",
+          "suggestion": "Consider using 'Ауторска соба копирана' or a more contextually accurate translation for 'Room copied' related to copyright or a designated space. Without more context, it's difficult to offer a definitively correct suggestion."
         }
       ],
       "approved_at": null

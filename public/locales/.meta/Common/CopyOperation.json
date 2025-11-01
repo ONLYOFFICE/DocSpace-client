@@ -3,7 +3,7 @@
   "content": "Copying",
   "content_en_sha1_hash": "43b7de9894fd26b8d14ca6988e963239baff6ad4",
   "created_at": "2025-05-19T21:30:43.791Z",
-  "updated_at": "2025-06-03T20:59:41.993Z",
+  "updated_at": "2025-10-03T13:19:30.494Z",
   "comment": {
     "text": "This translation key \"CopyOperation\" is used to display a message that indicates an operation where content will be duplicated or mimicked. It is displayed as a label on a button in UI elements, typically allowing users to initiate a copy action, such as copying files or data.",
     "is_auto": true,
@@ -17,10 +17,10 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/index.js",
-      "line_number": 397,
-      "context": "style={{ marginInlineStart: \"8px\" }}\n />\n ) : null}\n {!isMaxProgress ? (\n <Button\n label={`${t(\"Common:CopyOperation\")}...`}\n isDisabled\n size={buttonSize}\n style={{ marginInlineStart: \"8px\" }}\n />\n ) : null}",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
+      "line_number": 476,
+      "context": "testId=\"download_temporary_copy_button\"\n />\n ) : null}\n {!isMaxProgress ? (\n <Button\n label={`${t(\"Common:CopyOperation\")} ...`}\n isDisabled\n size={buttonSize}\n style={{ marginInlineStart: \"8px\" }}\n testId=\"copy_temporary_operation_button\"\n />",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Köçürülür' implies a continuous or passive action ('is being copied'). The English word 'Copying' refers to the act of copying itself, not the process. A more accurate translation would convey the action of copying.",
-          "suggestion": "Nüsxə alınır"
+          "description": "The Azerbaijani translation \"Köçürülür\" translates to \"being copied\" or \"is copying\", which is a continuous tense. The English word \"Copying\" is a gerund or a noun/verb acting as a noun describing the action. A more accurate translation would be \"Köçürmə\" or \"Nüsxə\" to reflect the noun-like function of 'Copying'.",
+          "suggestion": "Köçürmə"
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Kopieren\" is a valid German word meaning \"copy\" or \"to copy,\" it doesn't directly translate the continuous action \"Copying.\" A more accurate translation that conveys the ongoing process would be \"das Kopieren\" or \"Kopieren in Echtzeit\" (copying in real-time), or even \"am Kopieren\" depending on the context.",
-          "suggestion": "Consider \"das Kopieren\" or \"am Kopieren\" for a more accurate translation of \"Copying\" to convey the ongoing action."
+          "description": "The English word \"Copying\" refers to the action of copying something. \"Kopieren\" is the noun 'copy' or 'to copy' but doesn't convey the action itself. A more accurate translation would be something like 'Das Kopieren' or 'Kopieren'.",
+          "suggestion": "Das Kopieren"
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Kopioidaan' is grammatically correct and means 'being copied' or 'copying (in progress)', it's a continuous tense. 'Copying' in English often refers to the action of copying in a more general sense, not necessarily an ongoing process. A more accurate translation might be 'kopiointi' (copying - noun) or 'kopioi' (copies - present tense, third person singular) depending on the context.",
+          "suggestion": "Consider 'kopiointi' or 'kopioi' for a more general translation of 'Copying'."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation \"copier\" is the infinitive form of the verb 'to copy'. While related, it doesn't directly translate 'Copying' which is a present participle representing an action in progress. A more appropriate translation would be \"en cours de copie\" or \"copie en cours\".",
-          "suggestion": "Consider \"en cours de copie\" or \"copie en cours\"."
+          "description": "The French translation \"copier\" is the infinitive form of the verb \"to copy.\" The correct translation of \"Copying\" (present participle) should be \"en cours de copie\" or \"copie en cours\". \"Copier\" doesn't accurately convey the ongoing action of copying.",
+          "suggestion": "Consider using \"en cours de copie\" or \"copie en cours\"."
         }
       ],
       "approved_at": null
@@ -114,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation \"Sta copiando\" translates to \"Is copying\" or \"He/She/It is copying.\" The English \"Copying\" is a gerund or a noun describing the action, not a continuous action. A more accurate translation would be \"Copia\" (Copy) or perhaps \"Copiatura\" (Copying - as a noun).",
+          "description": "The Italian translation \"Sta copiando\" translates to \"Is copying\" or \"He/She/It is copying\". While technically correct, it's more literal than the English \"Copying,\" which functions as a gerund or a label. A more fitting translation would be something like \"Copia\" or \"Copiatura\".",
           "suggestion": "Copia"
         }
       ],
@@ -129,13 +135,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"복사 중\" literally translates to \"copying\" or \"in the process of copying\". While technically correct, it lacks nuance. A more natural and contextually appropriate translation might depend on the user interface and intended meaning (e.g., 'Copying...', 'Performing copy...', 'Copy in progress').",
-          "suggestion": "Consider alternatives like '복사 중입니다' (Copying in progress) or '복사 진행 중' (Copy process in progress) depending on the UI context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Kopē\" is the infinitive form of the verb 'to copy'. The English word 'Copying' refers to the action of copying, which would require a present participle form.",
-          "suggestion": "Consider using a present participle form like \"Kopējot\" or a noun form like \"Kopēšana\", depending on the context."
+          "description": "The translation \"Kopē\" is the imperative form of 'copy' (copy!). It doesn't convey the ongoing action of \"Copying\". A more accurate translation would be something like \"Kopēšana\" (Copying - noun) or \"Kopšanas process\" (Copying process).",
+          "suggestion": "Kopēšana"
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'A copiar' is a possible translation for 'Copying', it's a continuous/ongoing action (like 'Copying now'). 'Copying' can also refer to the process of copying in general. A more appropriate translation might be 'Cópia' or 'Copiar' depending on the context.",
-          "suggestion": "Consider 'Cópia' or 'Copiar' for a more general translation of 'Copying'."
+          "description": "The translation \"A copiar\" while understandable, isn't the most natural or precise translation of \"Copying.\" It literally translates to \"Copying\" (as in, the act of copying is happening). A more appropriate translation would depend on the context. For example, if it's a button label, \"Copiar\" would be better. If it's describing the process, \"Está a copiar\" or \"Em cópia\" might be more suitable.",
+          "suggestion": "Consider 'Copiar' (for a button/action) or 'Está a copiar' / 'Em cópia' (for describing the process)."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Copiază' is the imperative form (you copy) instead of the gerund or present participle, 'Copying'.",
-          "suggestion": "Consider using a noun or participle form like 'copierea' (the copying) or 'în curs de copiere' (in the process of copying)."
+          "description": "The Romanian translation 'Copiază' is an imperative form (you copy). The English 'Copying' is a present participle, describing an ongoing action. A more accurate translation would be something like 'Copierea' (The Copying) or 'În copiere' (In copying).",
+          "suggestion": "Consider 'Copierea' or 'În copiere' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"පිටපත් වෙමින්\" while literally meaning \"copying\", doesn't quite capture the nuance of \"Copying\" as a title or label. It implies an ongoing process rather than a descriptive noun.",
-          "suggestion": "Consider \"පිටපත\" (pitapata) which means \"copy\" as a noun, or \"පිටපත කිරීම\" (pitapata kirima) which means \"copying\" as an action, depending on the context of where 'Copying' is used."
+          "description": "The Sinhala translation \"පිටපත් වෙමින්\" (pitapat vemin) while literally meaning \"copying\", doesn't quite capture the continuous/ongoing nature of \"Copying\" as a title or label. It implies an action in progress, which may not be the intended meaning in the context of a user interface or heading.",
+          "suggestion": "Consider \"පිටපතනය\" (pitapatanaya) which translates to 'copying' as a noun or \"පිටපත් කිරීම\" (pitapat kirima) which is a more formal and potentially more appropriate translation for a title or label."
         }
       ],
       "approved_at": null
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"复制中\" (zhuīfù zhōng) literally translates to \"Copying,\" it's a bit more formal and technical than the English word \"Copying.\" A more natural and user-friendly translation might be more context-dependent. For a simple status indicator, \"正在复制\" (zhèngzài zhuīfù) might be more appropriate.",
-          "suggestion": "Consider \"正在复制\" (zhèngzài zhuīfù) or a context-specific alternative."
+          "description": "While '复制中' (fùzhì zhōng) literally translates to 'Copying', it implies an ongoing process. 'Copying' in this context is likely referring to the act of copying, not the state of copying. A more accurate translation might be '复制' (fùzhì).",
+          "suggestion": "复制"
         }
       ],
       "approved_at": null

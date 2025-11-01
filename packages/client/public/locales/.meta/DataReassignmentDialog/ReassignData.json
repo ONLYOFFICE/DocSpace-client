@@ -3,7 +3,7 @@
   "content": "Reassign data",
   "content_en_sha1_hash": "22c68a0740223ff4ac25287bac3de5829dc35cf3",
   "created_at": "2025-05-19T21:30:56.751Z",
-  "updated_at": "2025-05-28T09:30:02.863Z",
+  "updated_at": "2025-10-13T13:22:35.924Z",
   "comment": {
     "text": "The translation key \"ReassignData\" is used to display a label for a data reassignment action in a UI dialog. It will appear as \"Reassign Data\" and is typically clicked to initiate the process of transferring or redistributing data. Translators should provide a clear and concise version of this phrase that accurately reflects its purpose and context in the user interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 242,
+      "line_number": 240,
       "context": "case \"reassign-data\":\n return {\n id: \"option_reassign-data\",\n key: option,\n icon: ReassignDataReactSvgUrl,\n label: t(\"DataReassignmentDialog:ReassignData\"),\n onClick: () => this.toggleDataReassignmentDialog(item),\n };\n case \"delete-personal-data\":\n return {\n id: \"option_delete-personal-data\",",
       "module": "/packages/client"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Məlumatı yenidən təyin edin\" is understandable, a more accurate and natural-sounding translation of \"Reassign data\" would be \"Veriləni dəyişdirin\" or \"Məlumatı başqa yerə köçürün\". \"Yenidən təyin edin\" implies a re-designation, which isn't necessarily what \"reassign data\" means.",
+          "suggestion": "Veriləni dəyişdirin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ມອບໝາຍຂໍ້ມູນຄືນໃໝ່\" while literally meaning \"reassign data again\" isn't the most natural or idiomatic way to express \"Reassign data\".  It implies a second reassignment.",
+          "suggestion": "Consider \"ປ່ຽນການມອບໝາຍຂໍ້ມູນ\" (Pian kan mop mai khomoon) which translates to 'Change data assignment' or \"ແກ້ໄຂການມອບໝາຍຂໍ້ມູນ\" (Gae khai kan mop mai khomoon) which translates to 'Correct data assignment'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +183,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Додели податке поново\" does not accurately convey the meaning of \"Reassign data.\" The word 'поново' seems incorrect and doesn't fit the context.",
+          "suggestion": "A more accurate translation would be something like \"Предодели податке\" or \"Поново додели податке,\" although the best option depends on the specific technical context."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'поново' appears to be a misspelling. It's unclear what the intended word is.",
+          "suggestion": "Requires further investigation to determine the intended word. Could be a typo or a misunderstanding of the original English term."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dodeli podatke ponovo' while understandable, doesn't perfectly capture the nuance of 'Reassign data'. It literally translates to 'Assign data again'. A more accurate translation would imply a change in assignment, not just a repeat.",
+          "suggestion": "Ponovno dodeli podatke"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +224,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Chuyển giao lại dữ liệu\" is understandable, it's a bit literal and not the most natural phrasing for 'Reassign data' in Vietnamese. 'Reassign' implies a process of moving something that was previously assigned. A more suitable translation would convey that sense of re-assignment.",
+          "suggestion": "Consider alternatives like 'Điều chỉnh lại dữ liệu' (Adjust data), 'Phân lại dữ liệu' (Redistribute data), or 'Gán lại dữ liệu' (Re-assign data). The best option depends on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

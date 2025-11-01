@@ -1,13 +1,20 @@
 {
-  "ActionsWithFilesDescription": "通知弹窗将为您提醒操作相关信息，例如：上传、创建和更改文件等。",
+  "ActionsWithFilesDescription": "标记将突出显示{{rooms}}、{{shared}}和{{documents}}板块中的文件活动（包括上传、编辑或共享）。",
+  "AdminSetupRequired": "需要管理员设置",
   "Badges": "弹窗",
   "DailyFeed": "{{productName}}每日动态",
   "DailyFeedDescription": "每日消息通知，了解{{productName}}内的所有动态。",
-  "ManageNotifications": "管理",
+  "FileActivityNotify": "文件活动通知",
+  "GoToSettings": "前往“设置”",
+  "IsNotValid": "是无效的",
+  "LdapEmailTooltip": "此用户帐户通过 LDAP 加载。用户的邮箱地址未指定，当前的为自动生成，无法用于发送通知。",
+  "NotConfigured": "未配置",
   "Notifications": "消息通知",
-  "RoomsActions": "房间文件操作",
-  "RoomsActivity": "房间动态",
-  "RoomsActivityDescription": "每小时消息通知，随时掌握房间内所有活动。",
-  "UsefulTips": "{{productName}}实用指南",
-  "UsefulTipsDescription": "获取关于{{productName}}的实用指南"
+  "RoomsActivityDescription": "接收{{sectionName}}内新共享文件/文件夹及相关活动的即时邮件通知。",
+  "RoomUpdateNotify": "共享内容与{{sectionName}}活动",
+  "SettingUpNotifications": "设置通知",
+  "SuccessConnected": "{{serviceName}} 已成功关联为通知渠道，您将通过该渠道接收更新。",
+  "SuccessDisconnected": "{{serviceName}} 已成功断开与通知渠道的关联，后续通知将不再发送至该渠道。",
+  "UsefulTips": "有用的{{productName}}提示",
+  "UsefulTipsDescription": "获取有关{{productName}}的有用指南"
 }

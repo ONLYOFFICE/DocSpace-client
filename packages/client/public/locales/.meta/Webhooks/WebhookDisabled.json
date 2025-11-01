@@ -3,7 +3,7 @@
   "content": "Webhook disabled",
   "content_en_sha1_hash": "a207e115d41b80aa7eba032b14687ed66099830b",
   "created_at": "2025-05-19T21:30:49.872Z",
-  "updated_at": "2025-06-18T07:34:15.295Z",
+  "updated_at": "2025-09-17T13:43:01.952Z",
   "comment": {
     "text": "The translation key \"WebhookDisabled\" is used to display a message indicating that a webhook is currently disabled. It appears in a success notification after enabling or disabling a webhook in the UI, providing feedback to the user about the current state of their webhook settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/WebhooksStore.js",
-      "line_number": 146,
+      "line_number": 157,
       "context": ");\n this.webhooks[index].enabled = !this.webhooks[index].enabled;\n toastr.success(\n this.webhooks[index].enabled\n ? t(\"WebhookEnabled\")\n : t(\"WebhookDisabled\"),\n );\n \n return res;\n } catch (error) {\n toastr.error(error);",
       "module": "/packages/client"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تم تعطيل الـWebhook\" is a literal translation, but a more natural phrasing in Arabic (Saudi Arabia) would be something like \"تم إيقاف تشغيل الـWebhook\" or \"الـWebhook معطل\".",
+          "suggestion": "الـWebhook معطل"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -99,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ウェブフック無効\" is understandable, a more natural and common translation of \"Webhook disabled\" would be \"ウェブフックが無効化されました\" or \"ウェブフックを無効にしました\". \"ウェブフック無効\" is grammatically correct but sounds abrupt and less user-friendly in this context.",
-          "suggestion": "ウェブフックが無効化されました"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tīmekļa aizķere ir atspējota\" is not an accurate translation of \"Webhook disabled.\" \"Aizķere\" translates to 'congestion' or 'blockage,' which is not the intended meaning. The word 'Webhook' should be translated or transliterated.",
-          "suggestion": "Consider translating 'Webhook' as 'Tīmekļa atbalsts' (Web Support) or transliterating it as 'Vebhuks'.  A more accurate translation would be something like \"Tīmekļa atbalsts ir atspējots\" or \"Vebhuks ir atspējots\"."
+          "description": "The Latvian translation \"Tīmekļa aizķere ir atspējota\" translates to \"Web jam is disabled.\" This is not an accurate translation of \"Webhook disabled.\" \"Webhook\" refers to a specific technical concept.",
+          "suggestion": "A more accurate translation would be something like \"Webhook ir atspējots\" or \"Webhook atspējots\"."
         }
       ],
       "approved_at": null
@@ -174,8 +174,33 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'අක්‍රිය' (akriya) is a valid term for 'disabled', but 'අක්‍රීයකරණය' (akriyakarana) would be a more accurate and natural translation of 'disabled' in this context, indicating the action of disabling.",
-          "suggestion": "වෙබ්හුක් අක්‍රීයකරණය කරන ලදි"
+          "description": "The word 'වෙබ්හුක්' (Webhooks) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'අක්‍රිය' (disabled/inactive) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'කරන' (done/made) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ලදි' (was/did) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'වෙබ්හුක් අක්‍රිය කරන ලදි' literally translates to 'Webhook was disabled'. While understandable, a more natural Sinhala phrasing for a UI label might be 'අක්‍රිය වෙබ්හුක්' (Inactive Webhook) or 'වෙබ්හුක් අක්‍රියයි' (Webhook is disabled).",
+          "suggestion": "Consider 'අක්‍රිය වෙබ්හුක්' or 'වෙබ්හුක් අක්‍රියයි' for a more natural phrasing."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is technically correct, it is a passive construction. A more active and concise form might be preferable in a UI label.",
+          "suggestion": "Consider 'වෙබ්හුක් අක්‍රියයි' (Webhook is disabled) for a more direct and common phrasing."
         }
       ],
       "approved_at": null
@@ -198,8 +223,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation uses 'онемогућен' which is the passive form of 'disable' but might not be the most natural wording in this context. While grammatically correct, 'isključeno' (turned off) or 'онемогућено' (disabled) could be more common and sound more natural.",
-          "suggestion": "Webhook искључено"
+          "description": "The Serbian translation uses the Cyrillic alphabet. While acceptable, it's crucial to confirm if the project requires Latin alphabet (Serbian-Latin) translation as well. This is a stylistic/preference issue, not a strict error.",
+          "suggestion": "Consider providing a Latin (Serbian-Latin) translation: 'Webhook onemogućen'"
         }
       ],
       "approved_at": null
@@ -210,7 +235,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"onemogućen\" is a valid Serbian word, a more natural and commonly used translation for \"disabled\" in the context of a webhook would be \"isključen\". \"Onemogućen\" implies a state of being rendered impossible, which is not the intended meaning here.",
+          "description": "While \"Webhook onemogućen\" is understandable, a more accurate and natural-sounding translation would be \"Isključen webhook\". \"Onemogućen\" implies a disabling due to a problem rather than a deliberate action.",
           "suggestion": "Webhook isključen"
         }
       ],

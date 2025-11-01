@@ -3,7 +3,7 @@
   "content": "Room managers can manage the assigned rooms, invite new users and assign roles below their level.",
   "content_en_sha1_hash": "28087aa15e7b634a0bac2753dc18b692629d85a8",
   "created_at": "2025-05-19T21:30:48.123Z",
-  "updated_at": "2025-05-28T09:30:03.002Z",
+  "updated_at": "2025-09-17T13:43:02.058Z",
   "comment": {
     "text": "Room managers can manage rooms, invite new users, and assign roles below their level. This message is used to describe the capabilities of a room manager in the UI, likely appearing on an access options page or similar setting.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 59,
-      "context": "case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };\n \n const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {",
+      "line_number": 60,
+      "context": "case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };\n \n const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {",
       "module": "/packages/shared"
     }
   ],
@@ -29,9 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'assign roles below their level' is not perfectly conveyed. While 'تعيين أدوار أدنى من مستواهم' is understandable, it could be more accurately translated to reflect the nuanced meaning of 'assigning roles to users with lower privileges'.",
-          "suggestion": "يمكن لمديري الغرف إدارة الغرف المعينة، ودعوة مستخدمين جدد وتعيين أدوار لمستخدمين أقل منهم مستوى."
+          "type": "spelling",
+          "description": "The word 'أدنى' (adnaa) can be interpreted as 'lower' or 'inferior'. In a professional context, it's better to use a more neutral term.",
+          "suggestion": "يمكن لمديري الغرف إدارة الغرف المعينة، ودعوة مستخدمين جدد وتعيين أدوار أقل منهم مستوى."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles below their level\" is not accurately translated. The Armenian translation uses \"հանձնարարել այլ անձանց ավելի ցածր դերեր\" which translates to 'assign roles to other people at a lower level'.  A more accurate translation would convey that they can assign roles *below* them, not to other people.",
-          "suggestion": "Consider revising to something like 'տրամադրել ավելի ցածր կարգի դերեր' (tramadrvel aveli tsodzr kargi derer) which means 'assign lower-level roles'."
+          "description": "The phrase 'assign roles below their level' is not perfectly conveyed. 'Հանձնարել այլ անձանց ավելի ցածր դերեր' translates more literally to 'assign roles to other people at a lower level.' A more accurate translation for 'assign roles below their level' would convey the implication of delegation or assignment to subordinates.",
+          "suggestion": "Consider rephrasing to something like 'Հանձնարել ավելի ցածր կարգի անձանց դերեր' or 'տրամադրել ավելի ցածր կարգի անձանց դերեր' to better convey the meaning of delegation."
         }
       ],
       "approved_at": null
@@ -105,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'assign roles below their level' is somewhat awkwardly translated. A more natural phrasing might be '自分より下の権限を持つロールを割り当てることができます' (jibun yori shita kengen o motsu rooru o wariate ru koto ga dekimasu).",
-          "suggestion": "自分より下の権限を持つロールを割り当てることができます"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles' is translated as 'ມອບບົດບາດ'. While technically correct, a more natural and nuanced translation in Lao might be 'ເພີ່ມບົດບາດ' (add roles) or 'ແຊ່ງຕັ້ງບົດບາດ' (assign roles), depending on the precise intended meaning.  'ມອບບົດບາດ' sounds more like delegating a task, not assigning a role.",
+          "suggestion": "Consider using 'ເພີ່ມບົດບາດ' or 'ແຊ່ງຕັ້ງບົດບາດ' for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -132,13 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Administratori' (Administrators) doesn't accurately reflect 'Room managers'. 'Room managers' implies a more specific, limited role.",
+          "description": "The word 'administratori' (administrators) is used instead of 'Room managers'. While administrators can often perform similar functions, the translation should accurately reflect the original term, which is specifically 'Room managers'.",
           "suggestion": "Telpu vadītāji"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'izveidot un pārvaldīt' (create and manage) is slightly awkward. It implies creation when 'manage' is sufficient.",
-          "suggestion": "pārvaldīt"
         }
       ],
       "approved_at": null
@@ -179,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'create' (crea) is not present in the original English content. The phrase 'manage the assigned rooms' implies management, but not creation.",
-          "suggestion": "Administratorii sălii pot gestiona sălile atribuite, invita noi utilizatori şi atribui roluri în funcţie de nivelul lor."
+          "description": "The English phrase 'Room managers' is translated as 'Administratorii sălii'. While 'administrator' is a possible translation, 'managerii de sală' would be more accurate and natural-sounding in Romanian. 'Administratorii' implies a higher level of access and responsibility than 'room managers' typically have.",
+          "suggestion": "managerii de sală"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'în funcție de nivelul lor' is grammatically correct, it's a bit literal and could be improved for flow. A more natural phrasing might be preferred.",
-          "suggestion": "Administratorii sălii pot gestiona sălile atribuite, invita noi utilizatori şi atribui roluri persoanelor de nivel inferior."
+          "description": "The English phrase 'assign roles below their level' is translated as 'atribui roluri în funcţie de nivelul lor'. This implies that roles can only be assigned based on the level of the recipient, which isn't explicitly stated in the English. A more accurate translation would be to convey that the room manager can assign roles to users with a lower level.",
+          "suggestion": "atribui roluri utilizatorilor cu un nivel inferior"
         }
       ],
       "approved_at": null
@@ -201,14 +196,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'කාමර' (kamara - room) is repeated unnecessarily. While technically correct, it's stylistically awkward in Sinhala.",
-          "suggestion": "කාමර කළමණාකරුවන් විසින් පැවරූ කාමර කළමනාකරණය කළ හැකි අතර,  can be shortened to 'කාමර කළමණාකරුවන් පැවරූ කාමර කළමනාකරණය කළ හැකි අතර' or even 'කාමර කළමණාකරුවන් කළමනාකරණය කළ හැකි අතර'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles below their level' is not accurately translated. 'ඔවුන්ගේ පහළ මට්ටමේ භූමිකා පැවරීමට හැකිය' is a bit literal and could be improved for clarity and natural flow in Sinhala.  It implies assigning roles *to* levels, rather than roles that exist *below* the manager's level.",
+          "suggestion": "කාමර කළමණාකරුවන් විසින්, ඔවුන්ට පහල සිටින පුද්ගලයින්ට භූමිකා පවරීමට හැකිය."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'පහළ මට්ටමේ භූමිකා පැවරීමට හැකිය' is slightly awkward. 'හැකිය' is a strong ability, perhaps too strong in this context. The meaning is slightly ambiguous, could mean both assign roles and have the ability to assign them.",
-          "suggestion": "පහළ මට්ටමේ භූමිකා පැවරීමට හැකි අතර (pahal mattaṁe bhūmikā pavērimē ākshi ekkadā) – ‘can assign roles below their level’ - a slightly gentler phrasing."
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better readability. While grammatically correct, it feels slightly disjointed.",
+          "suggestion": "කාමර කළමණාකරුවන් විසින් පැවරූ කාමර කළමනාකරණය කළ හැකි, නව පරිශීලකයින් ආරාධනය කර, ඔවුන්ට පහළ සිටින පුද්ගලයින්ට භූමිකා පවරීමට හැකිය."
         }
       ],
       "approved_at": null
@@ -219,8 +214,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"role, which are lower than theirs\" is not the most natural way to express \"roles below their level\". It's a literal translation that can be improved for clarity and fluency in Slovak.",
-          "suggestion": "Manažéri miestností môžu spravovať pridelené miestnosti, pozývať nových používateľov a prideľovať nižšie roly."
+          "description": "The phrase \"role, which are lower than theirs\" is a literal translation and sounds unnatural in Slovak. It's more idiomatic to say 'nižšieho stupňa' or 'nižšieho určenia'.",
+          "suggestion": "Manažéri miestností môžu spravovať pridelené miestnosti, pozývať nových používateľov a prideľovať roly nižšieho stupňa."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"prideľovať roly\" is technically correct, \"priraďovať roly\" might be a slightly more natural phrasing in this context, suggesting assignment of roles.",
+          "suggestion": "Manažéri miestností môžu spravovať pridelené miestnosti, pozývať nových používateľov a priraďovať roly nižšieho stupňa."
         }
       ],
       "approved_at": null
@@ -234,19 +234,24 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"Менаџери\" should ideally be \"Управници просторија\" for better clarity and consistency with common Serbian terminology.",
+          "suggestion": "Управници просторија"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"позивати\" is technically correct, \"додавати\" or \"изабрати\" might be more natural and common when referring to inviting users in a role-based system. 'Позивати' implies more of a general invitation.",
+          "suggestion": "додавати"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'prostorijama' could be more accurately rendered as 'sobe' (rooms) depending on the precise context. While 'prostorijama' can mean rooms, it leans towards 'spaces' or 'areas' rather than the rooms themselves.",
-          "suggestion": "Menadžeri soba mogu upravljati dodeljenim sobama, pozivati nove korisnike i dodeljivati uloge nižeg nivoa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -267,8 +272,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"dưới cấp của họ\" is a literal translation that doesn't convey the intended meaning of 'below their level'. It sounds awkward and unnatural in Vietnamese.",
-          "suggestion": "Consider alternatives like \"dưới quyền của họ\" or \"cấp dưới của họ\" to better convey the meaning of roles being assigned to those lower in the hierarchy."
+          "description": "The phrase \"dưới cấp của họ\" is not the most natural way to express \"below their level\" in Vietnamese in this context. It's a bit literal and sounds awkward. It implies a hierarchical level relationship which might not be intended.",
+          "suggestion": "Consider alternatives like \"dưới quyền của họ\" (reporting to them) or simply \"dưới cấp\" (lower level) depending on the intended meaning."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, a more natural flow might involve reordering the clauses. The Vietnamese translation feels a little clunky due to the sequence of actions.",
+          "suggestion": "Consider rephrasing to something like: \"Người quản lý phòng có thể mời người dùng mới, chỉ định vai trò dưới cấp, và quản lý các phòng được chỉ định.\" (Room managers can invite new users, assign roles below their level, and manage the assigned rooms.)"
         }
       ],
       "approved_at": null

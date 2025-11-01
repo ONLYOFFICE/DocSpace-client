@@ -3,7 +3,7 @@
   "content": "We recommend contacting the {{productName}} owner to choose a new Payer.",
   "content_en_sha1_hash": "b5344d317fd4c5a20440282f49db1b7581e966d7",
   "created_at": "2025-05-19T21:30:53.699Z",
-  "updated_at": "2025-07-01T15:57:36.282Z",
+  "updated_at": "2025-08-11T18:11:59.271Z",
   "comment": {
     "text": "This translation key is used to display a message when an admin attempts to pay using an email address without an active subscription. It recommends contacting the product owner to choose a new Payer. This message appears in the UI when an invalid payment method is detected.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
-      "line_number": 134,
+      "line_number": 135,
       "context": "if (isNotPaidPeriod) {\n invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InvalidEmailWithoutActiveSubscriptionByAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return userNotFound + invalidEmailDescription;\n }",
       "module": "/packages/client"
     }
@@ -33,13 +33,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yeni Ödəyici seçmək üçün {{productName}} sahibi ilə əlaqə saxlamağı tövsiyə edirik.\" is a bit literal and could be improved for naturalness in Azerbaijani. A more natural phrasing would emphasize the recommendation to contact the owner to *have* a new payer chosen, not just to choose one.",
+          "suggestion": "Yeni Ödəyici seçilməsi üçün {{productName}} sahibi ilə əlaqə saxlamağı tövsiyə edirik."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'за да изберете нов платец' is a literal translation of 'to choose a new payer'. A more natural and contextually appropriate translation for 'We recommend contacting the {{productName}} owner to choose a new Payer' would be something like 'Препоръчваме да се свържете със собственика на {{productName}}, за да изберат нов платец' or 'Препоръчваме да се свържете със собственика на {{productName}}, за да определите нов платец'.",
+          "suggestion": "Препоръчваме да се свържете със собственика на {{productName}}, за да изберат нов платец."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -48,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"vyvolat nového Plátce\" is awkward and doesn't quite convey the intended meaning of \"choose a new Payer.\"  \"Zvolit nového Plátce\" is better, but the phrasing could be improved for naturalness.",
-          "suggestion": "Doporučujeme kontaktovat vlastníka služby {{productName}} a vybrat nového Plátce."
+          "description": "The translation 'zvolit nového Plátce' is a literal translation of 'choose a new Payer'. While technically correct, it might sound unnatural in Czech. A more idiomatic phrasing would be 'vybrat nového platitele' or 'určit nového platitele'.",
+          "suggestion": "vybrat nového platitele"
         }
       ],
       "approved_at": null
@@ -69,13 +81,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Pagador' for 'Payer' is technically correct but sounds overly formal and less natural in Spanish. A more common and user-friendly translation would be 'titular de la cuenta' or 'suscripción'.",
-          "suggestion": "Recomendamos ponerse en contacto con el propietario de {{productName}} para elegir un nuevo titular de la cuenta."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Maksajan' is a literal translation of 'Payer' and might not be the most natural or clear way to express it in Finnish in this context. A more appropriate phrasing might be 'maksun suorittajan' or 'tilin haltijan' depending on the specific nuance desired.",
-          "suggestion": "Suosittelemme ottamaan yhteyttä {{productName}}-n omistajaan valitaksesi uuden maksun suorittajan."
+          "description": "The translation 'Maksajan' for 'Payer' is technically correct but sounds awkward in this context. A more natural and user-friendly translation would be 'maksajan' or 'maksusovellus'.",
+          "suggestion": "Suosittelemme ottamaan yhteyttä {{productName}}-n omistajaan valitaksesi uuden maksajan."
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"새로운 지불자를 선택할 것을 추천드립니다\" is overly formal and doesn't quite capture the friendly and advisory tone of \"We recommend...\". A more natural and less formal phrasing would be better.",
-          "suggestion": "새로운 결제 담당자를 선택하는 것을 권장합니다."
+          "description": "The phrase \"새로운 지불자를 선택할 것을 추천드립니다\" is a bit formal and indirect for a recommendation. It translates literally to \"we recommend that you choose a new payer\". A more natural and user-friendly phrasing would be preferred.",
+          "suggestion": "새로운 지불자를 선택하도록 {{productName}} 소유자에게 연락하는 것을 권장합니다."
         }
       ],
       "approved_at": null
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'A sua subscrição continua ativa...' (Your subscription remains active...) doesn't accurately reflect the English content which indicates a problem with the payer, not the subscription status. The English implies the payer is invalid and needs to be replaced, but the Portuguese translation states the subscription is active, which is a misrepresentation.",
-          "suggestion": "Recomendamos contactar o proprietário do {{productName}} para escolher um novo Pagador."
+          "description": "The translation \"A sua subscrição continua ativa...\" implies the subscription *is* active. The English sentence suggests it might not be, and recommends changing the payer due to an invalid email. The phrase 'We recommend contacting the {{productName}} owner to choose a new Payer' implies the current arrangement is problematic.",
+          "suggestion": "Recomendamos contactar o proprietário do {{productName}} para resolver problemas com o email e selecionar um novo Pagador."
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Pagador\" for \"Payer\" is technically correct, but can be overly formal or uncommon in everyday language. A more natural translation might be 'responsável pelo pagamento' or 'quem paga'.",
-          "suggestion": "Consider using 'responsável pelo pagamento' or 'quem paga' for a more natural and accessible translation."
+          "description": "The translation 'Pagador' for 'Payer' is technically correct but less common and potentially less clear in a customer-facing communication. 'Pagador' implies a payer in a broad sense, while in this context, it refers to a specific user acting as the payment account holder.",
+          "suggestion": "Consider using 'titular da conta' or 'responsável pelo pagamento' for a more precise and easily understood translation of 'Payer'."
         }
       ],
       "approved_at": null
@@ -177,7 +183,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Plătitor' should be 'Plătitor nou' to match the English 'new Payer'.",
+          "suggestion": "Vă recomandăm să contactați proprietarul {{productName}} pentru a alege un Plătitor nou."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -192,8 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නව ගෙවන්නෙකු තේරීම සඳහා {{productName}} හිමිකරු ඇමතීමට නිර්දේශ කෙරේ.' is a bit literal and can be improved for better flow and naturalness in Sinhala. While technically correct, it sounds slightly awkward.",
-          "suggestion": "නව ගෙවන්නෙකු තෝරා ගැනීමට {{productName}} හිමිකරුවාගෙන් අසා දැනගන්න."
+          "description": "The translation 'නව ගෙවන්නෙකු තේරීම සඳහා {{productName}} හිමිකරු ඇමතීමට නිර්දේශ කෙරේ.' is a bit literal and could be improved for natural flow in Sinhala. While technically correct, it sounds a bit formal and stiff.",
+          "suggestion": "නව ගෙවන්නෙකු තෝරා ගැනීමට {{productName}} හිමිකරුවාගෙන් අහන්නක."
+        },
+        {
+          "type": "formatting",
+          "description": "The variable {{productName}} is correctly included, but consider adding a space before and after for better readability in the Sinhala text.",
+          "suggestion": "නව ගෙවන්නෙකු තෝරා ගැනීමට {{productName}} හිමිකරුවාගෙන් අහන්නක."
         }
       ],
       "approved_at": null
@@ -204,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Odporúčame vám kontaktovať vlastníka {{productName}} pred výberom nového platiteľa\" is a bit awkward. While technically correct, it implies that contacting the owner *must* happen before selecting a new payer. The English suggests it's a recommendation, not a requirement.",
-          "suggestion": "Odporúčame kontaktovať vlastníka {{productName}} a zvoliť nového platiteľa."
+          "description": "The translation 'pred výberom nového platiteľa' (before selecting a new payer) implies an action the user needs to perform. The original English suggests a recommendation to the product owner. A more accurate translation would reflect this.",
+          "suggestion": "Odporúčame vám kontaktovať vlastníka {{productName}}, aby si vybral/a nového platiteľa."
         }
       ],
       "approved_at": null
@@ -221,9 +238,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation 'Препоручујемо да контактирате власника {{productName}}-а да бисте изабрали новог Платиоца.' is a literal translation but doesn't quite capture the nuance of the English. 'Payer' isn't a commonly used term in Serbian for this context. A more natural phrasing would be closer to 'Препоручујемо да контактирате власника {{productName}} како би изабрали новог партнера за плаћање' or 'Препоручујемо да контактирате власника {{productName}} да бисте нашли новог корисника за плаћање'.",
+          "suggestion": "Препоручујемо да контактирате власника {{productName}} како би изабрали новог партнера за плаћање."
+        },
+        {
           "type": "formatting",
-          "description": "The possessive suffix '-а' is attached to productName. It should be checked to ensure it aligns with the grammar rules for the specific productName. It could be incorrect depending on the product name's grammatical gender.",
-          "suggestion": "Verify if the possessive suffix '-а' is grammatically correct for the product name. Consider alternatives if needed."
+          "description": "The genitive ending '-а' on '{{productName}}-а' might sound unnatural depending on the product name. It's more standard to simply use the product name without alteration.",
+          "suggestion": "Препоручујемо да контактирате власника {{productName}} како би изабрали новог партнера за плаћање."
         }
       ],
       "approved_at": null
@@ -233,8 +255,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The possessive marker '-a' is unnecessarily attached to 'productName'. It should be 'productName' without the possessive suffix.",
+          "type": "grammar",
+          "description": "The preposition 'a' after 'productName' is unnecessary and grammatically incorrect in this context. Serbian generally doesn't require it when referring to a product name in this manner.",
           "suggestion": "Preporučujemo da kontaktirate vlasnika {{productName}} da biste izabrali novog Platioca."
         }
       ],
@@ -246,8 +268,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'We recommend contacting...' is slightly awkward. A more natural Turkish phrasing would be '{{productName}} sahibi ile iletişime geçerek...' instead of '{{productName}} sahibiyle iletişime geçmenizi öneririz.'. The latter is grammatically correct, but less conversational.",
-          "suggestion": "Yeni bir Ödeme Yapan seçmek için {{productName}} sahibi ile iletişime geçerek..."
+          "description": "The translation 'Yeni bir Ödeme Yapan seçmek için {{productName}} sahibiyle iletişime geçmenizi öneririz' is a bit awkward. 'Ödeme Yapan' literally translates to 'Payment Maker' which isn't the intended meaning. It should convey the idea of choosing a new 'Payer'.",
+          "suggestion": "Yeni bir Ödeme Yapan'ı seçmek için {{productName}} sahibiyle iletişime geçmenizi öneririz."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the suggested correction is better, a more natural and idiomatic Turkish translation is needed.  The phrasing 'Ödeme Yapan' even in the correction, isn't standard.",
+          "suggestion": "Yeni bir Ödeme Yapan atamak için {{productName}} sahibiyle iletişime geçmenizi öneririz."
         }
       ],
       "approved_at": null
@@ -270,8 +297,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"所有者\" (all owner) is overly formal and less natural in this context. A more appropriate term would be something like \"负责人\" (person in charge) or \"管理员\" (administrator). The overall tone is a little stiff.",
-          "suggestion": "我们建议您联系{{productName}}负责人以选择新的付款人。"
+          "description": "The translation of \"owner\" as \"所有者\" (suǒyǒu zhě) implies 'absolute owner' or 'holder of all rights'. While not incorrect, it's more formal and could be softened for better user experience. '负责人' (fùzé rén) - person in charge - or '管理者' (guǎnlǐ zhě) - manager - might be more appropriate depending on the specific context of 'owner' in this scenario.",
+          "suggestion": "Consider using '负责人' (fùzé rén) or '管理者' (guǎnlǐ zhě) instead of '所有者' (suǒyǒu zhě)."
         }
       ],
       "approved_at": null

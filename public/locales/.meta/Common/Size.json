@@ -3,7 +3,7 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2025-05-19T21:30:48.889Z",
-  "updated_at": "2025-07-01T15:57:36.081Z",
+  "updated_at": "2025-10-14T05:21:01.901Z",
   "comment": {
     "text": "This translation key is used to display the label \"Size\" in various UI elements, such as file extensions and table column headers, providing a clear and concise way to indicate size-related information.",
     "is_auto": true,
@@ -11,38 +11,50 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 181,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 208,
       "context": "return this.t(\"FileExtension\");\n \n case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n \n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 288,
+      "line_number": 290,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 288,
+      "line_number": 290,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 288,
+      "line_number": 290,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 288,
+      "line_number": 290,
+      "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 290,
+      "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 290,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1196,
+      "line_number": 1316,
       "context": "default: true,\n };\n const size = {\n id: \"sort-by_size\",\n key: SortByFieldName.Size,\n label: t(\"Common:Size\"),\n default: true,\n };\n \n const roomType = {\n id: \"sort-by_room-type\",",
       "module": "/packages/client"
     },
@@ -159,7 +171,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Formaat' is a valid translation for 'Size', it can have different connotations. 'Size' in the context of product specifications or dimensions might be better translated as 'Afmetingen' or 'Grootte'. 'Formaat' often refers to the format of a document or image.",
+          "suggestion": "Consider 'Afmetingen' or 'Grootte' depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -216,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Величина\" can translate to \"Size\" in some contexts, it's a more formal and nuanced term.  For a common property like size, a more direct translation like \"Величина\" is not the best fit.  \"Величина\" refers more to magnitude or extent.  A more appropriate translation might depend on the specific context where 'Size' is being used.  Without further context, it's difficult to provide a perfect alternative.",
-          "suggestion": "Consider alternatives like 'Димензије' (Dimensions), 'Вeљина' (Size - more direct, though less common), or 'Повељина' (Surface area) depending on the specific context."
+          "description": "While \"Величина\" is a valid Serbian (Cyrillic) word, it doesn't directly translate to \"Size\" in all contexts. \"Size\" can refer to dimensions, measurements, or quantity. \"Величина\" more often implies magnitude or extent. A more accurate translation might depend on the specific context.",
+          "suggestion": "Consider alternatives like 'Величина' (magnitude), 'Димензије' (dimensions), or 'Вeљина' (size - more literal)."
         }
       ],
       "approved_at": null
@@ -252,10 +270,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"大小\" (dàxiǎo) generally means \"size\" or \"big and small\". While it can convey the concept of size, it's a broader term and not the most precise translation for just \"Size\". It implies both large and small dimensions rather than simply the measurement of size.",
-          "suggestion": "Consider using a more precise translation like \"尺寸\" (chǐcùn) which specifically refers to dimensions or size, or \"大小\" (dàxiǎo) if the context explicitly requires indicating both large and small sizes."
+          "description": "The translation \"大小\" (dàxiǎo) means \"size\" or \"big and small\", but can be overly broad depending on the context. While it can be a valid translation for 'Size', it lacks the specificity and nuance of the English term. A more contextually appropriate translation might be required.",
+          "suggestion": "Consider translations like \"尺寸\" (chǐcun) which specifically refers to dimensions, or a more contextualized translation based on the surrounding text."
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

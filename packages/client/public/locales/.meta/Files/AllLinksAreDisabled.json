@@ -3,7 +3,7 @@
   "content": "All links are disabled",
   "content_en_sha1_hash": "4abc782c5ef61014c486667e9d377d626e19ba82",
   "created_at": "2025-05-19T21:30:55.258Z",
-  "updated_at": "2025-06-03T20:59:42.287Z",
+  "updated_at": "2025-10-16T07:29:35.962Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that all links are disabled. It appears as the label on an option in a UI component, providing context to users about their settings. Translators should replace the English content with a localized equivalent for the \"AllLinksAreDisabled\" setting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 961,
+      "line_number": 977,
       "context": "//           {\n //             id: \"no-external-links-option\",\n //             key: \"no-external-links\",\n //             label: !links.length\n //               ? t(\"Files:NoExternalLinks\")\n //               : t(\"Files:AllLinksAreDisabled\"),\n //             disableColor: true,\n //           },\n //           !isMobile && {\n //             key: \"separator0\",\n //             isSeparator: true,",
       "module": "/packages/client"
     }
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'zakázány' can mean 'disabled', in the context of links, 'vypnuté' or 'neaktivní' would be more accurate and natural.",
+          "suggestion": "Všechny odkazy jsou vypnuté"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Toate link-uri sunt dezactivate' is not the most natural or accurate translation of 'All links are disabled'. While technically correct, it sounds slightly awkward.",
+          "suggestion": "A more natural translation would be 'Toate legăturile sunt dezactivate' or 'Toate link-urile sunt inactive'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සියලුම' is spelled correctly, but might be more appropriately 'සියළු' depending on the desired level of formality. 'සියලුම' emphasizes 'all' more strongly.",
+          "suggestion": "Consider 'සියළු' for a more standard phrasing."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

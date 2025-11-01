@@ -3,7 +3,7 @@
   "content": "Last modified by",
   "content_en_sha1_hash": "0bd7b845232486d9f552a294c8d4177d957bf0c3",
   "created_at": "2025-05-19T21:30:54.889Z",
-  "updated_at": "2025-05-21T09:58:50.338Z",
+  "updated_at": "2025-08-12T19:46:26.016Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Last modified by\" in the user interface, typically appearing next to or below a file timestamp. It is likely used on a file info panel or similar UI element, where it provides context about who last edited the file. Translators should focus on localizing this text to provide clarity and consistency across different languages and regions.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 186,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 213,
       "context": "return this.t(\"Common:Size\");\n \n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"CreationDate\");\n case \"Lifetime ends\":\n return this.t(\"LifetimeEnds\");",
       "module": "/packages/client"
     }
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"تم التعديل الأخير من قبل\" is overly verbose and literal. A more natural and concise translation would be better. While technically correct, it doesn't read well in a UI context.",
-          "suggestion": "تم آخر تعديل بواسطة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"tərəfindən Son Dəyişiklik\" is not a natural or accurate translation of \"Last modified by\". \"tərəfindən\" means 'by' but the word order is awkward and \"Son Dəyişiklik\" is too literal for 'Last Modified'.",
-          "suggestion": "A more natural and accurate translation would be something like \"Son dəyişən\" or \"Son dəyisdirən\"."
+          "description": "The Azerbaijani translation \"tərəfindən Son Dəyişiklik\" is not a natural or accurate translation of \"Last modified by\". \"tərəfindən\" means \"by\", but \"Son Dəyişiklik\" is a literal translation of \"Last Modification\" and doesn't flow well. A more natural translation would be something along the lines of \"Son dəyişən\" or \"Son dəyirmişdir\".",
+          "suggestion": "Son dəyişən"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses two separate words rather than a single, more concise phrase. This impacts readability.",
+          "suggestion": "Consider restructuring the phrase to be more compact."
         }
       ],
       "approved_at": null
@@ -72,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Τελευταία Τροποποίηση Από' while technically correct, is a bit clunky and verbose for a UI label like 'Last modified by'. It literally translates to 'Last Modification From'.",
-          "suggestion": "Consider a more natural and concise translation like 'Τροποποιήθηκε από' (Modified by) or 'Τελευταία αλλαγή από' (Last change by)."
+          "description": "The translation \"Τελευταία Τροποποίηση Από\" is a literal translation of \"Last Modification By\". While understandable, it's not the most natural phrasing in Greek. A more common and natural way to express 'Last modified by' in Greek would be something like 'Τροποποιήθηκε από' (Troposipíthiike apó).",
+          "suggestion": "Τροποποιήθηκε από"
         }
       ],
       "approved_at": null
@@ -84,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ultima modificación por' is a literal translation and not the most natural way to express 'Last modified by' in Spanish. It's grammatically correct but sounds awkward.",
-          "suggestion": "Modificado por última vez"
+          "description": "The translation \"Ultima modificación por\" is not the most natural or accurate translation of \"Last modified by\". While technically correct, it sounds somewhat awkward in Spanish. A more common and fluent translation would be \"Modificado por\" or \"Última vez modificado por\".",
+          "suggestion": "Modificado por"
         }
       ],
       "approved_at": null
@@ -114,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ultima modifica di' is not the most natural or accurate translation of 'Last modified by'. It literally translates to 'Last modification of'. A more appropriate translation would convey the idea of who performed the last modification.",
-          "suggestion": "Modifica effettuata da"
+          "description": "The Italian translation 'Ultima modifica di' is not the most natural or accurate translation of 'Last modified by'. It translates literally as 'Last modification of,' which isn't idiomatic in Italian in this context. A more appropriate translation would reflect who made the last modification.",
+          "suggestion": "Ultima modifica effettuata da"
         }
       ],
       "approved_at": null
@@ -132,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"최종 편집자\" (choejong eonjja) translates to 'final editor'. While technically correct, 'Last modified by' typically implies the person who last made changes, not necessarily the final editor. A more accurate translation might be something like '수정자' (sujeongja) which means 'modifier' or 'editor who made changes'.",
-          "suggestion": "수정자"
+          "description": "The translation '최종 편집자' (choejong eomjja) literally translates to 'final editor'. While technically correct, 'Last modified by' typically implies the user who made the most recent change, not necessarily the final editor. A more accurate translation that reflects the context might be '수정한 사용자' (sujeong-han yongja) or '변경 내용 최신 사용자' (baekgyeong naeong choesin yongja).",
+          "suggestion": "수정한 사용자"
         }
       ],
       "approved_at": null
@@ -141,7 +140,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ດັດແກ້ຫຼ້າສຸດໂດຍ\" is a possible translation, it's quite literal and may sound awkward in Lao. A more natural phrasing would convey the meaning of 'last modified by' in a more idiomatic way.",
+          "suggestion": "Consider alternatives like \"ຄົນສຸດທະຍານດັດແກ້ໂດຍ\" or a similar phrasing that reflects natural Lao usage for this context. The ideal suggestion would depend on the overall style and tone of the InfoPanel."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -174,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Última Modificação Por\" is not the most natural or accurate translation of \"Last modified by\". It's too literal. A more idiomatic translation would be \"Última modificação feita por\" or simply \"Modificado por\".",
-          "suggestion": "Modificado por"
+          "description": "The translation 'Última Modificação Por' is not the most natural or accurate translation of 'Last modified by'. A more suitable translation would be 'Última modificação feita por' or 'Modificado por'. 'Modificação' is a noun, while 'modified' is a past participle.",
+          "suggestion": "Última modificação feita por"
         }
       ],
       "approved_at": null
@@ -186,13 +191,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Modificat ultima dată de către\" is overly literal and sounds unnatural. A more idiomatic translation would be preferred.",
-          "suggestion": "Ultima modificare de către"
+          "description": "The translation 'Modificat ultima dată de către' is overly verbose and not the most natural Romanian equivalent of 'Last modified by'. While technically correct, it's not idiomatic.",
+          "suggestion": "Modificat de"
         },
         {
           "type": "formatting",
-          "description": "The presence of 'de către' after 'de' can be slightly awkward in Romanian. While not strictly incorrect, it's often omitted in similar contexts to improve flow.",
-          "suggestion": "Ultima modificare de"
+          "description": "The inclusion of 'de către' is unnecessary and makes the sentence sound stiff.  The word 'de' already implies 'by'.",
+          "suggestion": "Remove 'de către'."
         }
       ],
       "approved_at": null
@@ -203,8 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Автор последнего корректива' while literally meaning 'Author of the last correction', doesn't convey the meaning of 'Last modified by' in a natural or common way in Russian. It's overly formal and doesn't reflect the user interface context.",
-          "suggestion": "Измененный пользователем: 'Izmenennyy pol'zovatel' ' or Последнее изменение: 'Poslednee izmenenie:'"
+          "description": "The translation \"Автор последнего корректива\" while technically conveying the idea of 'last modified by', is not the most natural or common way to express it in Russian. It sounds somewhat formal and less user-friendly.",
+          "suggestion": "A more natural and common translation would be something like \"Последние изменения внесены\" or \"Изменил последний\"."
         }
       ],
       "approved_at": null
@@ -215,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අවසාන සංශෝධනය\" (avasāna saṁśōdhanaya) translates to 'final revision' or 'final amendment', not 'Last modified by'. It misses the sense of 'by someone'.",
-          "suggestion": "Possible alternatives:  \"තන terakhir mengubah\" (Last one changed) or \"අවසන් කළේ\" (avasan kale) followed by a placeholder for the name of the user."
+          "description": "The translation \"අවසාන සංශෝධනය\" while technically meaning 'final modification', doesn't fully capture the nuance of \"Last modified by\". It omits the 'by' indicating the person or entity that made the modification.",
+          "suggestion": "අවසන් කළේ"
         }
       ],
       "approved_at": null
@@ -224,13 +229,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Naposledy upravené\" is understandable, it's not the most natural or idiomatic Slovak translation for \"Last modified by.\" It's a bit literal. A more common and fluent translation would be something like \"Zmenené používateľom\" or \"Posledná úprava používateľom\".",
-          "suggestion": "Zmenené používateľom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -239,8 +238,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nazadnje spremenjeno' while technically meaning 'Last changed', isn't the most natural or common translation for 'Last modified by' in this context (likely referring to a user or system). A more accurate translation might be 'Spremenjeno od' or 'Zadnja sprememba opravil'.",
-          "suggestion": "Spremenjeno od"
+          "description": "While 'Nazadnje spremenjeno' is a possible translation, it's quite literal. A more natural and common translation for 'Last modified by' in a UI context would be 'Spremenil' or 'Zadnji uporabnik spremembe'.",
+          "suggestion": "Spremenil"
         }
       ],
       "approved_at": null
@@ -251,8 +250,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Задње модификовано од стране' is overly formal and verbose for a simple 'Last modified by'. A more natural and concise translation would be better.",
-          "suggestion": "Последња измена од стране"
+          "description": "The translation 'Задње модификовано од стране' is overly formal and verbose for a UI label like 'Last modified by'. It translates literally to 'Last modified by (genitive case)'.",
+          "suggestion": "Послјedња измјена од стране (Posljednja izmjena od strane) or  Измјенио је (Izmijeno je) would be more natural and concise options, depending on the desired tone. A more direct translation, 'Задње измјењено' (Zadnje izmjenjeno) would also be acceptable."
         }
       ],
       "approved_at": null
@@ -263,8 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zadnje modifikovano od strane' is a literal translation and sounds unnatural in Serbian. A more natural phrasing would be 'Izmenjeno od' or 'Modifikovano od'.",
-          "suggestion": "Izmenjeno od"
+          "description": "The translation 'Zadnje modifikovano od strane' is a literal translation and sounds unnatural in Serbian. A more natural phrasing would be 'Izmenjeno od strane' or 'Modifikovano od strane'.",
+          "suggestion": "Izmenjeno od strane"
         }
       ],
       "approved_at": null
@@ -281,8 +280,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Автор останньої зміни\" doesn't perfectly convey the meaning of \"Last modified by\". While 'Автор' (Author) is technically correct, it implies authorship rather than modification. A more accurate translation would emphasize the action of modification.",
-          "suggestion": "Останній редактор"
+          "description": "The translation 'Автор останньої зміни' doesn't accurately convey the meaning of 'Last modified by'. While 'Автор' means 'author', the intended meaning is the person who made the last modification, not necessarily the author of the content.",
+          "suggestion": "Останнім редагував"
         }
       ],
       "approved_at": null
@@ -293,7 +292,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Sửa lần cuối bởi\" is understandable, it's not the most natural or idiomatic translation of \"Last modified by\". It literally translates to \"Edited last by\".  A more natural translation would be something like \"Người sửa lần cuối\" or \"Đã sửa bởi\".",
+          "description": "The translation 'Sửa lần cuối bởi' is a literal translation but sounds slightly unnatural in Vietnamese for a UI label like 'Last modified by'. A more natural phrasing would be 'Người sửa lần cuối' or 'Đã sửa lần cuối bởi'.",
           "suggestion": "Người sửa lần cuối"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Sync with Desktop Editor settings",
   "content_en_sha1_hash": "a8a7da11fabd075e939eef96ebf7c7edd247b5f8",
   "created_at": "2025-05-19T21:30:53.348Z",
-  "updated_at": "2025-05-21T05:45:55.100Z",
+  "updated_at": "2025-08-11T18:11:59.297Z",
   "comment": {
     "text": "This translation key is used to display a label that indicates whether the interface theme is set to \"Desktop Theme\" or \"System Theme\", depending on the application's desktop client setting. It appears in settings or configuration areas of the application, providing context for users managing their interface appearance.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
-      "line_number": 138,
-      "context": "const isSystemTheme = currentTheme === ThemeKeys.SystemStr;\n const systemThemeValue = getSystemTheme();\n \n const systemThemeLabel = isDesktopClient\n ? t(\"DesktopTheme\")\n : t(\"SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"DesktopThemeDescription\")\n : t(\"SystemThemeDescription\");",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 108,
+      "context": "const isSystemTheme = currentTheme === ThemeKeys.SystemStr;\n const systemThemeValue = getSystemTheme();\n \n const systemThemeLabel = isDesktopClient\n ? t(\"Profile:DesktopTheme\")\n : t(\"Profile:SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"Profile:DesktopThemeDescription\")\n : t(\"Profile:SystemThemeDescription\");",
       "module": "/packages/client"
     }
   ],
@@ -35,14 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Masaüstü Redaktor tənzimləmələri ilə sinxronizasiya edin' is a literal translation and sounds unnatural in Azerbaijani. A more natural phrasing would be something like 'Masaüstü redaktorun parametrləri ilə sinkronlaşdır' or 'Masaüstü redaktorun ayarları ilə sinkronlaşdır'.",
-          "suggestion": "Masaüstü redaktorun parametrləri ilə sinkronlaşdır"
-        },
-        {
           "type": "formatting",
-          "description": "The word 'sinkronizasiya' is less commonly used in Azerbaijani. 'Sinkronlaşdır' is preferred.",
-          "suggestion": "Sinkronlaşdır"
+          "description": "The translation uses a direct command (\"Sync with...\" translated as \"...edin\"). A more natural phrasing might be a descriptive statement. Consider rephrasing to avoid the imperative.",
+          "suggestion": "Masaüstü redaktor tənzimləmələri ilə sinxronlaşdırılır"
         }
       ],
       "approved_at": null
@@ -53,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Редакторските настройки на работния плот' is a bit long and could be more concise. While grammatically correct, it's not as fluid as it could be.",
-          "suggestion": "Синхронизирай с настройките на работния плот"
+          "description": "The Bulgarian translation uses a lowercase 'р' in 'Редакторските'. It should be capitalized as it's part of a proper noun (Editor).",
+          "suggestion": "Синхронизирай с Редакторските настройки на работния плот"
         }
       ],
       "approved_at": null
@@ -77,13 +72,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Συγχρονισμός με τις ρυθμίσεις του επεξεργαστή για σταθερούς υπολογιστές\" is too literal and not natural-sounding. \"Επεξεργαστής για σταθερούς υπολογιστές\" is clunky. A more natural translation of 'Desktop Editor' would be something along the lines of 'Εφαρμογή για επιτραπέζιους υπολογιστές' or 'Επεξεργασία σε σταθερούς υπολογιστές' depending on the specific context.",
-          "suggestion": "Συγχρονισμός με τις ρυθμίσεις της εφαρμογής για επιτραπέζιους υπολογιστές"
+          "description": "The translation \"Συγχρονισμός με τις ρυθμίσεις του επεξεργαστή για σταθερούς υπολογιστές\" is too literal and doesn't quite convey the intended meaning of 'Sync with Desktop Editor settings'. 'Desktop' is redundant as 'σταθερούς υπολογιστές' implies desktop.",
+          "suggestion": "Συγχρονισμός με τις ρυθμίσεις του Επεξεργαστή"
         },
         {
           "type": "formatting",
-          "description": "The word 'Συγχρονισμός' could benefit from being lowercase for consistency with common Greek UI practices.",
-          "suggestion": "συγχρονισμός με τις ρυθμίσεις της εφαρμογής για επιτραπέζιους υπολογιστές"
+          "description": "The word 'Επεξεργαστή' should likely be capitalized to match the implied proper name of the application or setting.",
+          "suggestion": "Συγχρονισμός με τις ρυθμίσεις του Επεξεργαστή"
         }
       ],
       "approved_at": null
@@ -93,9 +88,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The phrase 'Editor de escritorio' is missing an accent mark on the 'e'. It should be 'Editor de escritorio'.",
-          "suggestion": "Sincronizar con la configuración del Editor de escritorio"
+          "type": "incorrect_translation",
+          "description": "The translation 'Sincronizar con la configuración del Editor de escritorio' is a literal translation but could be improved for natural flow in Spanish. 'Editor de escritorio' is acceptable, but 'configuración' is less common in this context. A more natural phrasing would focus on synchronization with the desktop theme.",
+          "suggestion": "Sincronizar con la configuración del tema de escritorio"
         }
       ],
       "approved_at": null
@@ -112,7 +107,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Synchroniser avec les paramètres de Desktop Editors\" is too literal. 'Desktop Editor' should be translated to 'éditeur de bureau' or a more natural equivalent depending on the context. 'Desktop Editors' implies multiple editors, which might not be the intended meaning.",
+          "description": "The phrase 'Desktop Editor' should be translated to 'l'éditeur de bureau' or 'éditeur de bureau' for better accuracy and natural flow in French. 'Desktop Editors' implies a plural form which isn't explicitly present in the English.",
           "suggestion": "Synchroniser avec les paramètres de l'éditeur de bureau"
         }
       ],
@@ -124,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Համաժամեցրեք աշխատասեղանի խմբագրիչի կարգավորումների հետ\" is a literal translation of 'Sync with Desktop Editor settings'. A more natural Armenian translation would be something like 'Ձևակերպեք աշխատասեղանի խմբագրիչի հետ' or 'Մեկնարկեք աշխատասեղանի խմբագրիչի հետ.'",
-          "suggestion": "Ձևակերպեք աշխատասեղանի խմբագրիչի հետ"
+          "description": "The translation 'Համաժամեցրեք աշխատասեղանի խմբագրիչի կարգավորումների հետ' is a literal translation that sounds unnatural in Armenian. A more natural phrasing would be something like 'Նույնացրեք աշխատասեղանի խմբագրիչի կարգավորումների հետ' or 'Ձեռք բերեք աշխատասեղանի խմբագրիչի կարգավորումները'.",
+          "suggestion": "Նույնացրեք աշխատասեղանի խմբագրիչի կարգավորումների հետ"
         }
       ],
       "approved_at": null
@@ -136,7 +131,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sincronizza con le impostazioni dell'Editor Desktop' is technically correct but a bit clunky. A more natural Italian phrasing would use 'desktop' as an adjective.",
+          "description": "The translation 'Sincronizza con le impostazioni dell'Editor Desktop' is overly literal and doesn't flow naturally in Italian. 'Editor Desktop' is also less common than alternatives.",
+          "suggestion": "Sincronizza con le impostazioni dell'editor desktop"
+        },
+        {
+          "type": "formatting",
+          "description": "There is a capitalization issue. 'editor' should likely be lowercase.",
           "suggestion": "Sincronizza con le impostazioni dell'editor desktop"
         }
       ],
@@ -160,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຊິງຄ໌ກັບການຕັ້ງຄ່າ Desktop Editor' is a direct transliteration of \"Sync with Desktop Editor settings\". While understandable, it doesn't convey the meaning of 'sync' effectively in Lao. The word 'ຊິງຄ໌' is borrowed from English and may not be universally understood.",
-          "suggestion": "ສີ້ນສຸດການປ່ຽນແປງກັບການຕັ້ງຄ່າຂອງໂປແກຼມ Desktop Editor"
+          "description": "The Lao translation directly transliterates \"Sync\" as \"ຊິງຄ໌\" which isn't a natural or readily understood term in Lao. A more appropriate term conveying the meaning of synchronization would be needed.",
+          "suggestion": "ອັບເດດຕາມການຕັ້ງຄ່າຂອງ Desktop Editor"
         }
       ],
       "approved_at": null
@@ -169,19 +169,19 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"sinhronizēt\" is a valid Latvian word, but \"Synchronize\" is more commonly used and understood in the context of software. Although technically correct, it might feel slightly unnatural.",
-          "suggestion": "Sinhronizācija ar darbvirsmas redaktora iestatījumiem"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses lowercase 'instellingen' where proper capitalization might be more appropriate for a settings context, following Dutch capitalization rules.",
+          "suggestion": "Synchroniseren met desktop Editor Instellingen"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -190,8 +190,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zsynchronizuj z ustawieniami edytora dla komputerów stacjonarnych' is overly literal and slightly awkward. 'Dla komputerów stacjonarnych' specifically translates to 'for desktop computers' which is redundant since 'Desktop Editor' already implies this. A more natural translation would avoid this redundancy.",
-          "suggestion": "Zsynchronizuj z ustawieniami edytora"
+          "description": "The translation 'Zsynchronizuj z ustawieniami edytora dla komputerów stacjonarnych' is a bit literal and clunky. 'Dla komputerów stacjonarnych' isn't the most natural way to express 'Desktop' in this context.",
+          "suggestion": "Zsynchronizuj z ustawieniami edytora na komputer"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Zsynchronizuj z ustawieniami edytora na komputer' still might sound a little awkward.  Consider phrasing that emphasizes synchronization of the desktop theme.",
+          "suggestion": "Synchronizuj z ustawieniami motywu na komputerze"
         }
       ],
       "approved_at": null
@@ -201,9 +206,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Sincronizar com as configurações do editor de desktop' is technically correct but could be more natural and user-friendly. 'Desktop Editor' can be a bit clunky. A more common phrasing would be 'Sincronizar com as configurações do editor para desktop' or 'Sincronizar com as configurações do editor no desktop'.",
-          "suggestion": "Sincronizar com as configurações do editor para desktop"
+          "type": "spelling",
+          "description": "The word 'Sincronizar' is missing an accent mark. It should be 'Sincronize'.",
+          "suggestion": "Sincronize"
         }
       ],
       "approved_at": null
@@ -214,7 +219,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Sincronizar' should be 'Sincronizar'.",
+          "description": "The word 'Sincronizar' is misspelled. The correct spelling is 'Sincronizar'.",
           "suggestion": "Sincronizar"
         }
       ],
@@ -226,13 +231,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sincronizarea cu parametrii editorului pentru desktop' is overly literal and doesn't flow naturally in Romanian. 'Parametri' is a technical term that might not be understood by all users.",
-          "suggestion": "Sincronizare cu setările editorului pentru desktop"
+          "description": "The translation \"Sincronizarea cu parametrii editorului pentru desktop\" is a bit literal and not the most natural phrasing in Romanian. 'Parametri' is correct but 'pentru desktop' is less common than a more direct equivalent.",
+          "suggestion": "Sincronizare cu setările editorului de desktop"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the use of 'pentru desktop' at the end is slightly awkward. It is understood but sounds less natural.",
-          "suggestion": "Sincronizare cu setările editorului desktop"
+          "description": "While not strictly incorrect, using 'setările' (settings) instead of 'parametrii' flows better for a user-facing context. This is more common in UI translations.",
+          "suggestion": "N/A (Style preference)"
         }
       ],
       "approved_at": null
@@ -243,13 +248,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Синхронизация с параметрами десктопных редакторов\" is too literal and doesn't fully capture the meaning of 'Sync with Desktop Editor settings.' It sounds overly technical. A more natural translation would emphasize synchronization with the desktop application's settings, not necessarily just *desktop editors*.",
-          "suggestion": "Синхронизация с настройками настольного приложения"
+          "description": "The translation \"Синхронизация с параметрами десктопных редакторов\" is too literal and doesn't quite convey the intended meaning of syncing with settings from a desktop editor. 'Desktop' is used in a slightly different sense here.",
+          "suggestion": "Синхронизация с настройками редактора"
         },
         {
           "type": "formatting",
-          "description": "The use of 'десктопных' is unnecessary. 'Настольного' would be more appropriate for a general user interface context.",
-          "suggestion": "Replace 'десктопных' with 'настольного'."
+          "description": "The term 'десктопных редакторов' is slightly awkward. Using a simpler term would improve readability.",
+          "suggestion": "Using 'редактора' is more concise and natural in this context."
         }
       ],
       "approved_at": null
@@ -260,8 +265,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වැඩතල සංස්කරකයේ සැකසුම් සමමුහූර්ත කරන්න' is a literal translation and sounds unnatural in Sinhala. While technically correct, it doesn't convey the intended meaning of 'Sync with Desktop Editor settings' in a fluid and understandable way.",
-          "suggestion": "A more natural translation would be 'සමමුහුයම් කරන්න වැඩමුළු පරිශීලකයා සැකසුම්' or 'වැඩමුළු පරිශීලකයාගේ සැකසුම් සමමුහූර්ත කරන්න'."
+          "description": "The translation 'වැඩතල සංස්කරකයේ සැකසුම් සමමුහූර්ත කරන්න' while conveying a general idea of syncing, isn't the most natural or precise translation of 'Sync with Desktop Editor settings'. 'සමමුහූර්ත කරන්න' (samamuhu'rtha kanna) is a bit formal and less commonly used in this context. A more natural phrasing would emphasize 'synchronize' or 'update'.",
+          "suggestion": "Consider 'නම්‍යකරණ වැඩමුළු සැකසුම්වලින් පෙළඹුවා' (Namayakaran workmulu sekasumwala pelamuwa) or 'පාඩුතලය සංස්කරකයෙන් අනුරූපය කරන්න' (Padutalaya sanskarakayan Anurupaya kanna)"
+        },
+        {
+          "type": "formatting",
+          "description": "The word order and sentence structure could be improved for better flow and readability in Sinhala.  While technically correct, it sounds slightly awkward.",
+          "suggestion": "Reorder the sentence to prioritize the action and specify 'Desktop Editor settings' more clearly.  Refer to the suggestion above."
         }
       ],
       "approved_at": null
@@ -272,13 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Synchronizácia s nastaveniami Editora pre počítač' is somewhat literal and could be improved for better flow and naturalness in Slovak. While technically correct, it doesn't read as smoothly as it could.",
+          "description": "The translation \"Synchronizácia s nastaveniami Editora pre počítač\" is not the most natural or accurate translation of \"Sync with Desktop Editor settings\". While technically correct, it sounds somewhat clunky.",
           "suggestion": "Synchronizácia s nastaveniami stolného editora"
-        },
-        {
-          "type": "formatting",
-          "description": "The term 'počítač' (computer) feels redundant following 'Editora'. 'Stolný editor' (desktop editor) conveys the same meaning and is more concise.",
-          "suggestion": "No suggestion, as this is part of the broader translation improvement."
         }
       ],
       "approved_at": null
@@ -286,13 +291,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'namiznega' might be unnecessarily genitive. Consider if 'namizni' would suffice depending on the intended meaning.",
-          "suggestion": "Sinhronizacija z nastavitvami namiznega urejevalnika"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -300,9 +299,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses Cyrillic script, which is appropriate for Serbian. However, consistency with the original English phrasing 'Desktop Editor' is crucial. 'Десктоп Уређивача' is a literal translation. A more natural phrasing could improve readability.",
-          "suggestion": "Consider alternative phrasing such as 'Синхронизација са подешавањима уређивача за радну површину' or 'Синхронизација са подешавањима уређивача радне површине', although this depends on preferred terminology in the Serbian context."
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Десктоп Уређивача\" is a slightly awkward phrasing. It literally translates to \"Desktop Editor's\". A more natural and common phrasing would be \"подешавања за Десктоп Уређивач\" or \"подешавања Десктоп Уређивача\" (with a shorter article).",
+          "suggestion": "Синхронизација са подешавањима за Десктоп Уређивач"
         }
       ],
       "approved_at": null
@@ -313,13 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sinhronizacija sa podešavanjima Desktop Uređivača' is overly literal. 'Desktop Editor' is better translated as 'Desktop uređivač' or 'urednik radne površine' for a more natural flow in Serbian.",
-          "suggestion": "Sinhronizacija sa podešavanjima Desktop uređivača"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using a space before 'Desktop' is less common in Serbian when referring to software. It's more natural to integrate it into the word before.",
-          "suggestion": "Sinhronizacija sa podešavanjima desktop uređivača"
+          "description": "While technically correct, \"Desktop Uređivača\" is a bit clunky. A more natural translation for 'Desktop Editor' in this context would be 'Desktop Editora' or potentially 'Radne površine Editora'.",
+          "suggestion": "Sinhronizacija sa podešavanjima Desktop Editora"
         }
       ],
       "approved_at": null
@@ -342,8 +336,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Trình chỉnh sửa trên máy tính\" is a bit verbose and unnatural. A more common and fluent phrasing would be \"Trình chỉnh sửa\" or \"Phần mềm chỉnh sửa\" referring to the desktop editor.",
-          "suggestion": "Đồng bộ hóa với cài đặt Trình chỉnh sửa"
+          "description": "The translation 'Đồng bộ hóa với cài đặt Trình chỉnh sửa trên máy tính' is technically correct but a bit clunky and verbose. A more natural and concise translation would improve readability.",
+          "suggestion": "Đồng bộ với cài đặt trình chỉnh sửa"
         }
       ],
       "approved_at": null

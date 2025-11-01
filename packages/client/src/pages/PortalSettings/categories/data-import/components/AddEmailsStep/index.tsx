@@ -26,6 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
 import { SearchInput } from "@docspace/shared/components/search-input";
 
@@ -115,7 +116,10 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
       showReminder
       displaySettings
       saveButtonDisabled={
-        areCheckedUsersEmpty || (quota.max ? totalUsedUsers > quota.max : false)
+        areCheckedUsersEmpty ||
+        (quota.max && typeof quota.max === "number"
+          ? totalUsedUsers > quota.max
+          : false)
       }
       migrationCancelLabel={t("Settings:CancelImport")}
       onMigrationCancelClick={showCancelDialog}
@@ -125,7 +129,10 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
   return (
     <Wrapper>
       {users.withoutEmail.length > 0 ? (
-        <NoEmailUsersBlock t={t} users={users.withoutEmail.length} />
+        <NoEmailUsersBlock
+          t={t as TFunction}
+          users={users.withoutEmail.length}
+        />
       ) : null}
 
       {users.withoutEmail.length > 0 ? (
@@ -142,13 +149,14 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
             refreshTimeout={REFRESH_TIMEOUT}
             onClearSearch={onClearSearchInput}
             size={InputSize.base}
+            dataTestId="search_users_input"
           />
 
-          <AccountsTable t={t} accountsData={filteredAccounts} />
+          <AccountsTable t={t as TFunction} accountsData={filteredAccounts} />
 
           {users.withoutEmail.length > PAGE_SIZE ? (
             <AccountsPaging
-              t={t}
+              t={t as TFunction}
               numberOfItems={users.withoutEmail.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}

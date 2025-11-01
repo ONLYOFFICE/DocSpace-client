@@ -3,7 +3,7 @@
   "content": "Applications enabled successfully",
   "content_en_sha1_hash": "f63f04dc0b9858fce06d3d50f025938ad4a4b088",
   "created_at": "2025-05-19T21:30:53.809Z",
-  "updated_at": "2025-05-28T09:30:02.853Z",
+  "updated_at": "2025-09-17T13:43:01.938Z",
   "comment": {
     "text": "This translation key is used to display a success message when an application is enabled successfully in the OAuth store. It appears as a toast notification in the UI and indicates that the application has been enabled after clicking a button or similar action. The message is displayed if multiple applications are being enabled at once, otherwise, it displays a singular \"Application enabled successfully\" message.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 526,
+      "line_number": 559,
       "context": "await Promise.all(actions);\n \n this.setSelection(\"\");\n if (this.selectionToEnable.length > 1)\n toastr.success(t(\"OAuth:ApplicationsEnabledSuccessfully\"));\n else {\n toastr.success(t(\"OAuth:ApplicationEnabledSuccessfully\"));\n }\n } catch (e) {\n const err = e as TData;",
       "module": "/packages/client"
     }
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Հավելվածները հաջողությամբ միացված են' literally translates to 'The applications are successfully connected'.  'Enabled' implies a different action than 'connected'.  A more accurate translation might focus on activation or enabling, depending on the specific context of 'enabled'.",
+          "suggestion": "Consider alternatives like 'Հավելվածները հաջողությամբ ակտիվացվել են' (Applications successfully activated) or 'Հավելվածները հաջողությամբ սեղմվել են' (Applications successfully enabled - using a more nuanced Armenian equivalent for 'enabled'.)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -102,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"애플리케이션이 활성화되었습니다\" is a literal translation of 'Applications enabled successfully'. While technically correct, it sounds slightly formal and less natural in Korean. A more common and natural phrasing would be \"애플리케이션 활성화에 성공했습니다\" or \"애플리케이션 활성화 완료되었습니다\".",
+          "description": "The translation \"애플리케이션이 활성화되었습니다\" is a literal translation of \"Applications enabled successfully.\" While technically correct, it's not the most natural or idiomatic Korean. A more natural phrasing would be something like \"애플리케이션 활성화에 성공했습니다\" or \"애플리케이션 활성화가 완료되었습니다\".",
           "suggestion": "애플리케이션 활성화에 성공했습니다"
         }
       ],
@@ -147,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Romanian translation \"Aplicații au fost activate cu succes\" is grammatically correct, but slightly passive. A more natural phrasing would be 'Aplicațiile au fost activate cu succes' or 'Aplicațiile s-au activat cu succes'.",
-          "suggestion": "Aplicațiile au fost activate cu succes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'යෙදුම් සාර්ථකව ක්‍රියාත්මක කරන ලදී' while conveying a similar meaning, isn't the most natural or common phrasing for 'Applications enabled successfully' in Sinhala. A more accurate and idiomatic translation would emphasize the completion of the enabling process.",
-          "suggestion": "යෙදුම් සාර්ථකව සක්‍රීය කරන ලදී."
+          "description": "The translation 'යෙදුම් සාර්ථකව ක්‍රියාත්මක කරන ලදී' while conveying the general meaning, is a bit formal and less natural for this context. 'යෙදුම් සාර්ථකව ක්‍රියාත්මක' would be more common and concise.",
+          "suggestion": "යෙදුම් සාර්ථකව ක්‍රියාත්මක"
         }
       ],
       "approved_at": null
@@ -209,14 +209,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"Застосунки\" can mean 'applications,' it carries a more informal, almost playful tone. 'Програми' (programy) or 'Додатки' (dodatky) would be more appropriate for a formal context like OAuth settings.",
-          "suggestion": "Застосунки -> Програми or Додатки"
-        },
-        {
           "type": "spelling",
-          "description": "The word 'активовано' is spelled correctly but, depending on the desired level of formality, 'активовані' might be slightly better.",
-          "suggestion": "активовано -> активовані"
+          "description": "The word 'активовано' is grammatically correct but slightly awkward in this context. While technically meaning 'activated', 'увімкнено' might be a more natural and idiomatic translation for 'enabled' in the context of applications.",
+          "suggestion": "Застосунки успішно увімкнено"
         }
       ],
       "approved_at": null
@@ -233,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '多个应用已启用' (Duō gè yìngyòng yǐ qǐyòng) literally translates to 'Multiple applications have been enabled'. While technically correct, it's not as concise or natural as a direct equivalent of 'Applications enabled successfully'.  A more accurate translation might emphasize the successful completion of the action.",
-          "suggestion": "应用启用成功 (Yìngyòng qǐyòng chénggōng)"
+          "description": "The translation '多个应用已启用' (Duō gè yìngyòng yǐ qǐyòng) translates to 'Multiple applications have been enabled'. While not entirely wrong, it doesn't directly correspond to the English 'Applications enabled successfully'. The original implies a single action resulting in success.",
+          "suggestion": "应用已成功启用 (Yìngyòng yǐ chénggōng qǐyòng) - 'Applications have been successfully enabled' or just 应用已启用 (Yìngyòng yǐ qǐyòng) - 'Applications have been enabled' "
         }
       ],
       "approved_at": null

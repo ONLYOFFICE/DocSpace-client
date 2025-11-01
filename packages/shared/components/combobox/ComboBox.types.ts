@@ -34,7 +34,7 @@ export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
 export type TBaseOption = {
   key: string | number;
-  icon?: string | React.ReactElement | React.ElementType;
+  icon?: string | React.ElementType | React.ReactElement;
   label?: string;
   color?: string;
   backgroundColor?: string;
@@ -50,8 +50,12 @@ export type TBaseOption = {
   access?: ShareAccessRights;
   className?: string;
   title?: string;
+  dataTestId?: string;
   action?: unknown;
   onClick?: (opt: TContextMenuValueTypeOnClick) => void;
+  pageNumber?: number;
+  count?: number;
+  tooltip?: string;
 };
 
 export type TRegularOption = TBaseOption & {
@@ -67,7 +71,7 @@ export type TOption = TRegularOption | TSeparatorOption;
 
 export type TComboboxProps = {
   /** Displays advanced options */
-  advancedOptions?: React.ReactNode;
+  advancedOptions?: React.ReactElement<{ children?: React.ReactNode }>;
   /** Number of advanced options */
   advancedOptionsCount?: number;
   /** Children elements */
@@ -96,6 +100,8 @@ export type TComboboxProps = {
   displayArrow?: boolean;
   /** Height of Dropdown */
   dropDownMaxHeight?: number;
+  /** Test id for dropdown */
+  dropDownTestId?: string;
   /** Shows disabled items when displayType !== toggle */
   showDisabledItems?: boolean;
   /** Fill icon */
@@ -135,7 +141,7 @@ export type TComboboxProps = {
   /** No border */
   noBorder?: boolean;
   /** Offset left */
-  offsetLeft?: number;
+  offsetX?: number;
   /** Opened state */
   opened?: boolean;
   /** List of options */
@@ -195,6 +201,12 @@ export type TComboboxProps = {
 
   /** Indicates if the backdrop should be shown */
   shouldShowBackdrop?: boolean;
+  /** Data test id */
+  dataTestId?: string;
+  /** Disables text selection */
+  noSelect?: boolean;
+  /** Optional flag to use an image icon. */
+  useImageIcon?: boolean;
 };
 
 export type TComboButtonProps = {
@@ -238,6 +250,12 @@ export type TComboButtonProps = {
   plusBadgeValue?: number;
   /** Indicates if arrow should be displayed */
   displayArrow?: boolean;
+  /** Disables text selection */
+  noSelect?: boolean;
+  /** Icon image */
+  imageIcon?: string | React.ElementType | React.ReactElement;
+  /** Image alt */
+  imageAlt?: string;
 };
 
 export interface TComboButtonThemeProps {

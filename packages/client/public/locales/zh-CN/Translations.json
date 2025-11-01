@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "从列表中选择",
-  "ConnectingAccount": "连接账户",
-  "DeleteFromTrash": "选择的元素已成功从回收站中删除",
   "FileLocked": "文件已锁定",
   "FileProtected": "该文件受密码保护",
   "FileUnlocked": "文件已解锁",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive目录",
   "FolderTitleWebDav": "WebDAV目录",
   "FolderTitleYandex": "Yandex目录",
-  "GuestReleaseTipDescripton": "所有之前添加的用户都已成为访客，现在仅在 {{productName}} 管理员的联系人列表中。访客不再属于任何群组。如有必要，您可以随时更改其用户类型并添加至群组。",
-  "GuestReleaseTipLink": "详细了解用户类型",
-  "LinkHasExpiredAndHasBeenDisabled": "此链接过期，已被禁用",
   "LinkValidTime": "该链接仅在{{days_count}}天内有效。",
   "NewForm": "PDF 表单",
   "OwnerChange": "变更所有者",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "第三方服务",
   "TitleShowActions": "显示文件相关操作",
   "TitleShowFolderActions": "显示文件夹相关操作",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google 云端硬盘",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "已成功从{{sectionName}}中删除所选元素"
 }

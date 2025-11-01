@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import type { JSX } from "react";
 import type { TTranslation } from "../../types";
 import type { TFile, TFolder } from "../../api/files/types";
 import type { LinkWithDropDownProps } from "../../components/link-with-dropdown";
@@ -58,6 +59,7 @@ export type DownloadRowProps = {
   isOther: boolean;
   isChecked?: boolean;
   getItemIcon: (item: TDownloadedFile) => React.ReactNode;
+  dataTestId?: string;
 };
 
 export type DownloadContentProps = {
@@ -72,6 +74,7 @@ export type DownloadContentProps = {
   isChecked?: boolean;
   isIndeterminate: boolean;
   getItemIcon: (item: TDownloadedFile) => React.ReactNode;
+  dataTestId?: string;
 };
 
 export type PasswordRowProps = {

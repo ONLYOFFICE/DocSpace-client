@@ -3,7 +3,7 @@
   "content": "My profile",
   "content_en_sha1_hash": "2f3df0a939fdd38f0e2152b32e778eadb937d821",
   "created_at": "2025-05-19T21:30:53.371Z",
-  "updated_at": "2025-05-28T09:30:02.827Z",
+  "updated_at": "2025-10-16T07:29:35.703Z",
   "comment": {
     "text": "This translation key is used for the profile name \"My Profile\" on a user's profile page. It appears as a headline and is displayed when viewing your own profile information.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 555,
+      "context": "return t(\"Common:Members\");\n }\n };\n \n const currentTitle = isProfile\n ? t(\"Profile:MyProfile\")\n : isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? getAccountsTitle()\n : title;",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Profile/Section/Header/index.js",
-      "line_number": 182,
-      "context": "className=\"arrow-button\"\n />\n \n <div>\n <Heading className=\"header-headline\" type=\"content\">\n {t(\"Profile:MyProfile\")}\n </Heading>\n </div>\n <div className=\"action-button\">\n {(isAdmin && !profile?.isOwner) ||\n (isMe && !profile?.isLDAP && !profile?.isSSO) ? (",
+      "line_number": 97,
+      "context": "dataTestId=\"header_arrow_back_icon_button\"\n />\n \n <div>\n <Heading className=\"header-headline\" type=\"content\">\n {t(\"Profile:MyProfile\")}\n </Heading>\n </div>\n <div className=\"action-button\">\n {(isAdmin && !profile?.isOwner) ||\n (!profile?.isLDAP && !profile?.isSSO) ? (",
       "module": "/packages/client"
     }
   ],
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '我的档案' is a possible translation, it literally means 'My file/record'. 'My profile' usually implies a personal profile, which might be better conveyed with a more nuanced translation.",
-          "suggestion": "Consider '我的个人资料' (Wǒ de gèrén zīliào) for a more accurate translation of 'My profile', which means 'My personal information/profile'."
+          "description": "While '我的档案' (Wǒ de dāng'àn) is a possible translation, it's quite formal and leans towards 'personal records' or 'official file' rather than the simple 'My profile'. A more natural and common translation would be '我的资料' (Wǒ de zīliào) or '我的个人资料' (Wǒ de gèrén zīliào).",
+          "suggestion": "我的资料 (Wǒ de zīliào) or 我的个人资料 (Wǒ de gèrén zīliào)"
         }
       ],
       "approved_at": null

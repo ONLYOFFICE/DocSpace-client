@@ -3,7 +3,7 @@
   "content": "{{productName}} owner",
   "content_en_sha1_hash": "e8aa10492ad74ad965ab75de5d6375a78839f508",
   "created_at": "2025-05-19T21:30:47.420Z",
-  "updated_at": "2025-06-18T07:34:15.006Z",
+  "updated_at": "2025-09-23T07:24:24.402Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"{{productName}} owner\" in various UI contexts. It appears on user profiles and other views related to ownership, indicating whether a user has full access or not.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
-      "line_number": 356,
-      "context": "const uniqueTooltipId = `userTooltip_${Math.random()}`;\n \n const tooltipContent = `${\n user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n return user.isTitle ? (\n <StyledUserTypeHeader isExpect={isExpect}>",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/components/share/sub-components/User.tsx",
+      "line_number": 127,
+      "context": "const uniqueTooltipId = `userTooltip_${id}`;\n \n const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{productName}}-ի տնօրինող\" while conveying 'owner', might not be the most natural or idiomatic way to express it in Armenian. 'Տնօրինող' is more formal and typically refers to a manager or executive, not necessarily the simple 'owner'.",
-          "suggestion": "Consider alternatives like \"{{productName}}-ի սեփականատեր\" (sepackanater) which more directly translates to 'owner' or investigate more context-specific Armenian equivalents for 'owner' depending on the product and target audience. A more colloquial option might also be appropriate."
+          "description": "The translation \"տնօրինող\" while technically meaning 'owner' or 'manager', doesn't perfectly capture the nuance of 'owner' in the context of a portal. It can sound formal and potentially misleading. A more accurate and natural-sounding translation might depend on the specific nature of the 'portal' and the desired level of formality.",
+          "suggestion": "Consider alternatives like \"կազմող\" (creator), \"պատվաստող\" (responsible party), or \"դիրքորեն պատասխանատու\" (officially responsible), depending on the context. A less formal option could be just \"սեփականատեր\" (owner)."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Proprietário do {{productName}}' is a literal translation and might not be the most natural phrasing in Portuguese. '{{productName}} owner' implies possession or responsibility. A more natural translation would be 'Responsável pelo {{productName}}' or 'Gestor do {{productName}}'.",
-          "suggestion": "Responsável pelo {{productName}}"
+          "description": "The Portuguese translation 'Proprietário do {{productName}}' is a literal translation and might not be the most natural or accurate way to express \"{{productName}} owner\". It sounds slightly clunky.",
+          "suggestion": "Consider alternatives like 'Dono do {{productName}}' or 'Responsável pelo {{productName}}', depending on the intended nuance. 'Administrador do {{productName}}' could also be appropriate."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"{{productName}} власник\" uses the word 'власник' which translates to 'owner' but isn't the most natural phrasing in this context.  While technically correct, a more idiomatic translation might be needed depending on the overall tone and usage of 'PortalOwner'.  Consider options like '{{productName}} оператер' (operator) or '{{productName}} управител' (manager) depending on the nuance.",
-          "suggestion": "Consider alternative translations like '{{productName}} оператер' or '{{productName}} управител' for a more natural flow. The best option will depend on the specific product and desired meaning."
+          "description": "The Serbian (Cyrillic) translation 'власник' is a direct translation of 'owner' but might not be the most natural or idiomatic way to express this in a user interface context. Depending on the product and its usage, a more appropriate translation might be 'пользователь', 'корисник', or something more specific.",
+          "suggestion": "Consider alternatives like 'пользователь', 'корисник', or a product-specific term that better reflects the role of the 'owner'."
         }
       ],
       "approved_at": null
@@ -195,13 +195,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'vlasnik' directly translates to 'owner' but may sound less natural in this context.  A more appropriate translation might consider phrasing like 'odgovorni za' (responsible for) or 'zadužen za' (in charge of), depending on the intended nuance of 'owner' in the original English.",
-          "suggestion": "Consider alternatives like 'odgovorni za {{productName}}' or 'zadužen za {{productName}}' for a more natural-sounding Serbian translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

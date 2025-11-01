@@ -31,9 +31,9 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { toastr } from "@docspace/shared/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import { Link } from "@docspace/shared/components/link";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -112,6 +112,7 @@ const PayerInformation = ({
           </Text>
         </>
       }
+      dataTestId="payer_info_help_button"
     />
   );
 
@@ -143,57 +144,60 @@ const PayerInformation = ({
 
   const unknownPayerInformation = (
     <div>
-      <Text as="span" fontSize="13px" noSelect>
+      <Text as="span" fontSize="13px">
         {unknownPayerDescription()}
       </Text>
       <div>
         {isStripePortalAvailable ? (
-          <ColorTheme
+          <Link
             noSelect
             fontWeight={600}
             tag="a"
-            themeId={ThemeId.Link}
             target="_blank"
             className="payer-info_account-link"
+            color="accent"
             onClick={goToStripePortal}
+            dataTestId="stripe_customer_portal_link"
           >
             {t("ChooseNewPayer")}
-          </ColorTheme>
+          </Link>
         ) : null}
       </div>
     </div>
   );
 
   const payerInformation = isStripePortalAvailable ? (
-    <ColorTheme
+    <Link
       noSelect
       fontWeight={600}
       className="payer-info_account-link"
       tag="a"
-      themeId={ThemeId.Link}
       target="_blank"
+      color="accent"
       onClick={goToStripePortal}
+      dataTestId="stripe_customer_portal_link"
     >
       {t("StripeCustomerPortal")}
-    </ColorTheme>
+    </Link>
   ) : (
-    <ColorTheme
+    <Link
       fontWeight={600}
       href={`mailto:${email}`}
       tag="a"
-      themeId={ThemeId.Link}
+      color="accent"
+      dataTestId="payer_email_link"
     >
       {email}
-    </ColorTheme>
+    </Link>
   );
 
   const payerName = () => {
     let emailUnfoundedUser;
 
-    if (email) emailUnfoundedUser = `«${email}»`;
+    if (email) emailUnfoundedUser = `"${email}"`;
 
     return (
-      <Text as="span" fontWeight={600} noSelect fontSize="14px">
+      <Text as="span" fontWeight={600} fontSize="14px">
         {payerInfo ? (
           payerInfo.displayName
         ) : (

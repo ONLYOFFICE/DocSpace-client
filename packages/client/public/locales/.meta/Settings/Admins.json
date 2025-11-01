@@ -3,7 +3,7 @@
   "content": "Admins",
   "content_en_sha1_hash": "ed6b52430295a72fda6c352529f3aeb3023bfe0c",
   "created_at": "2025-05-19T21:30:50.380Z",
-  "updated_at": "2025-07-02T07:49:19.861Z",
+  "updated_at": "2025-08-04T07:30:01.571Z",
   "comment": {
     "text": "This translation key is used to display the text \"Admins\" in the Portal Settings page, likely in a dropdown list or filter option, allowing users to select administrators.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ադմինիստրատորներ\" is a literal translation of \"Administrators\" and is more formal than the English term \"Admins\". While technically correct, it lacks the brevity and informality implied by the original.",
-          "suggestion": "Consider a more concise and informal Armenian equivalent, such as \"Վարչատարեր\" (Varchater) or a similar term that reflects the intended meaning of 'admins' within the context of settings.  A more direct translation of 'admins' might be difficult, requiring analysis of how the term is used in the application."
+          "description": "While 'Ադմինիստրատորներ' is a direct translation of 'Administrators', 'Admins' implies a shorter, more informal term. A more appropriate Armenian equivalent for 'Admins' in this context might be something like 'Վարչատարեր' or 'Ադմիններ' to maintain the informal tone.",
+          "suggestion": "Consider using 'Վարչատարեր' or 'Ադմիններ' for a more contextually accurate and informal translation."
         }
       ],
       "approved_at": null
@@ -183,13 +183,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Administratori' is a valid Serbian (Latin) word for 'Administrators', it's a more formal and plural form. 'Admins' is often used as a shortened, more casual term. A more appropriate translation, depending on the context, might be 'Administratori' (plural, slightly less formal) or even a transliteration like 'Admini'.",
-          "suggestion": "Consider 'Administratori' or 'Admini' for a more contextually accurate translation. Evaluate if the formal tone of 'Administratori' is necessary."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

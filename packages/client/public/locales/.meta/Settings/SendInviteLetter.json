@@ -3,7 +3,7 @@
   "content": "Send invite letter",
   "content_en_sha1_hash": "72755e8fdfedd5113bd950ce2b3e632ee5bfce23",
   "created_at": "2025-05-19T21:30:52.606Z",
-  "updated_at": "2025-05-28T09:30:02.514Z",
+  "updated_at": "2025-08-11T09:02:43.945Z",
   "comment": {
     "text": "This translation key is used to display a button label that sends an invite letter. It appears on a checkbox within a UI component and is likely displayed in a portal settings page or similar context where user notifications are configured.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
       "line_number": 159,
-      "context": "<ErrorText>{t(\"Settings:ErrorOccuredDownloadLog\")}</ErrorText>\n ) : null}\n \n <Wrapper>\n <Checkbox\n label={t(\"Settings:SendInviteLetter\")}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n />\n <HelpButton\n place=\"right\"",
+      "context": "<ErrorText>{t(\"Settings:ErrorOccuredDownloadLog\")}</ErrorText>\n ) : null}\n \n <Wrapper>\n <Checkbox\n label={t(\"Settings:SendInviteLetter\")}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n dataTestId=\"send_invite_letter_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     }
   ],
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ආරාධනා පත්‍රය එවන්න\" is understandable, a more natural and accurate translation of \"Send invite letter\" would be \"නිundangන පත්‍රය යවන්න\" or \"නිundangන පත්‍රය යැවීමට\". \"එවන්න\" is generally used for sending something quickly or informally, while \"යවන්න\" or \"යැවීමට\" is more appropriate for formal correspondence like an invitation letter.",
+          "suggestion": "නිundangන පත්‍රය යවන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Пошаљи позивно писмо\" is a very literal translation and doesn't flow naturally in Serbian. A more idiomatic translation would better suit a settings label.",
-          "suggestion": "Послати писмо за позив"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Send invite letter' typically refers to a physical letter. The Chinese translation '发送邀请邮件' translates to 'Send invitation email'. These are different mediums and the translation doesn't reflect the original meaning.",
-          "suggestion": "Consider translating to '发送邀请函' which more accurately represents a physical invitation letter."
+          "description": "The English phrase \"Send invite letter\" is more accurately translated as \"发送邀请函\" rather than \"发送邀请邮件\". '邮件' refers to email, while '邀请函' refers to a physical invitation letter.",
+          "suggestion": "发送邀请函"
         }
       ],
       "approved_at": null

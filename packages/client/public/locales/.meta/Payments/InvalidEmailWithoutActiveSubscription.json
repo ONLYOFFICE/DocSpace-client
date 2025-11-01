@@ -3,7 +3,7 @@
   "content": "We recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "content_en_sha1_hash": "9892967bb06c7eefb95a79087af920be8fb6dea6",
   "created_at": "2025-05-19T21:30:53.697Z",
-  "updated_at": "2025-07-01T15:57:36.282Z",
+  "updated_at": "2025-08-11T18:11:59.271Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user attempts to save their payment information without an active subscription. The message recommends switching to a new Payer who can access subscription settings in {{productName}}. It appears as part of the payment form validation process in SaaS plans.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
-      "line_number": 131,
+      "line_number": 132,
       "context": "productName: t(\"Common:ProductName\"),\n });\n \n if (isNotPaidPeriod) {\n invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InvalidEmailWithoutActiveSubscriptionByAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'We recommend choosing a new Payer who gets access to subscription settings' is not perfectly captured. While 'نوصي باختيار دافع جديد' (we recommend choosing a new payer) is accurate, 'الذي يتمكن من الوصول إلى إعدادات الاشتراك' (who can access subscription settings) could be improved for clarity and natural flow. The sentence structure feels a bit clunky in Arabic.",
-          "suggestion": "نوصي باختيار دافع جديد لديه صلاحية الوصول إلى إعدادات الاشتراك في {{productName}}."
+          "description": "The translation of 'We recommend' is too formal. 'نوصي' (nawsi) implies a strong recommendation which doesn't quite match the tone of 'We recommend'. A more suitable phrasing would be more of a suggestion.",
+          "suggestion": "نقترح اختيار (naqtareh ikhtiyar) - 'We suggest choosing'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'دافع' (dafi’) translates to 'payer' in a generic sense. While technically correct, it might not convey the specific meaning of a 'Payer' as it relates to a payment platform. A more accurate translation might use a term indicating someone responsible for payments or a user.",
+          "suggestion": "قد يكون 'مستخدم' (mustakhdim - 'user') or 'مسؤول دفع' (mas’ool daf’ - 'payment responsible') more appropriate depending on the context of 'Payer'."
         }
       ],
       "approved_at": null
@@ -39,19 +44,19 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes a variable '{{productName}}' which should be consistent with the English version. Ensure it's correctly implemented in the final product.",
-          "suggestion": "Verify the '{{productName}}' variable is correctly handled in the final implementation to display the correct product name."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'payer' is translated as 'платец'. While technically correct, in this context, it might be more appropriate to use 'доставчик на плащания' or a similar term to convey a service provider for payments, depending on the exact meaning of 'payer' in the English text. 'Платец' can also refer to someone *making* a payment.",
+          "suggestion": "Consider 'доставчик на плащания' or a similar phrase that more accurately reflects the role of the 'payer' in the English text."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -66,13 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'We recommend' could be more natural in German. 'Wir empfehlen' is correct, but phrasing it as 'Wir schlagen vor' might sound better in this context.",
-          "suggestion": "Wir schlagen vor, einen neuen Payer zu wählen, der Zugriff auf die Abonnementeinstellungen in {{productName}} erhält."
+          "description": "The term \"Payer\" isn't commonly used in German in this context. It's an English loanword that may not be immediately understandable to German speakers. A more natural translation would be something like 'Zahlungsdienstleister' or 'Abrechnungsdienstleister'.",
+          "suggestion": "Consider translating 'Payer' to 'Zahlungsdienstleister' or 'Abrechnungsdienstleister' depending on the specific context."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'erhält' is grammatically correct, 'bekommt' might be a more common and accessible term for 'gets' in this scenario. It's slightly less formal and potentially clearer for a wider audience.",
-          "suggestion": "Wir schlagen vor, einen neuen Payer zu wählen, der Zugriff auf die Abonnementeinstellungen in {{productName}} bekommt."
+          "description": "While technically correct, 'erhält' (receives) sounds a bit formal for this context. A more conversational and user-friendly phrasing might be better.",
+          "suggestion": "Consider replacing 'erhält' with 'hat' (has) to make the sentence feel more natural.  For example: '...der Zugriff auf die Abonnementeinstellungen in {{productName}} hat.'"
         }
       ],
       "approved_at": null
@@ -89,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Payer' is translated as 'Pagador'. While 'Pagador' can mean payer, in this context, referring to a third-party payment processor or service, a more accurate translation might be 'Proveedor de pagos' or 'Procesador de pagos'. 'Pagador' primarily refers to the person making the payment.",
-          "suggestion": "Consider translating 'Payer' as 'Proveedor de pagos' or 'Procesador de pagos' to better reflect the intended meaning."
+          "description": "The translation of 'Payer' as 'Pagador' might not be the most accurate or natural in this context. 'Payer' in this scenario refers to a user or entity responsible for making payments, and 'Pagador' can have slightly different connotations (more like 'payment processor' or someone who 'pays'). A more suitable translation might be 'Usuario' or 'Cliente'.",
+          "suggestion": "Consider using 'Usuario' or 'Cliente' instead of 'Pagador'."
         }
       ],
       "approved_at": null
@@ -101,13 +106,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Payer' is not accurately translated. 'Payer' in this context refers to the entity responsible for making payments, and a more appropriate translation would be 'maksun maksaja' or something similar to convey that meaning.",
-          "suggestion": "Suosittelemme valitsemaan uuden maksun maksajan, joka saa pääsyn tilauksen asetuksiin {{productName}}-ssa."
+          "description": "The word 'Payer' is translated as 'Maksajan'. While technically correct, 'Payer' often refers to a third-party payment processor or platform. A more suitable translation, depending on the specific meaning in context, might be 'maksupalveluntarjoaja' or 'maksunvälittäjä'. Without more context, 'Maksajan' is somewhat ambiguous and could be misleading.",
+          "suggestion": "Consider translating 'Payer' as 'maksupalveluntarjoaja' or 'maksunvälittäjä' if it refers to a payment processor. Otherwise, retain 'Maksajan' with caution."
         },
         {
           "type": "formatting",
-          "description": "The addition of '-ssa' to {{productName}} is grammatically awkward and unnatural in Finnish. While indicating location, it isn't appropriate here.",
-          "suggestion": "Suosittelemme valitsemaan uuden maksun maksajan, joka saa pääsyn tilauksen asetuksiin {{productName}}."
+          "description": "The use of '-ssa' is awkward. While grammatically correct when attached to a place, it doesn't sound natural when referring to a product name. This might be an over-literal translation from the English template.",
+          "suggestion": "Remove the '-ssa' suffix or rephrase the sentence to avoid it. For example: '{{productName}}-palvelussa' or simply '{{productName}}-nimisessä palvelussa'."
         }
       ],
       "approved_at": null
@@ -115,7 +120,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'payeur' for 'Payer' isn't ideal in this context. 'Payer' refers to a payment processor or entity, while 'payeur' generally refers to the person making the payment. A better translation would be 'fournisseur de paiement' or a similar term that accurately represents the intended meaning.",
+          "suggestion": "Nous recommandons de choisir un nouveau fournisseur de paiement qui aura accès aux paramètres d’abonnement dans {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -124,13 +135,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"վճարող, ով հասանելի է դառնում\" is a bit awkward. A more natural translation for \"Payer who gets access\" would be something like \"վճարող, ով կարող է մուտք գործել\" or \"վճարող, ով ունի մուտք\".",
-          "suggestion": "Խորհուրդ ենք տալիս ընտրել նոր վճարող, ով կարող է մուտք գործել բաժանորդագրության կարգավորումներ {{productName}}-ում:"
+          "description": "The Armenian translation \"ով հասանելի է դառնում {{productName}}-ում բաժանորդագրության կարգավորումներին:\" literally translates to 'who becomes accessible to subscription settings in {{productName}}'. This isn't the intended meaning. The English 'gets access to subscription settings' implies more of a permission or right. A more accurate translation would convey that.",
+          "suggestion": "Խորհուրդ ենք տալիս ընտրել նոր վճարող, ով ունի մուտքի իրավունք բաժանորդագրության կարգավորումներին {{productName}}-ում:"
         },
         {
           "type": "formatting",
-          "description": "The placement of 'in {{productName}}' feels slightly detached. Consider integrating it more smoothly into the sentence.",
-          "suggestion": "Խորհուրդ ենք տալիս ընտրել նոր վճարող, ով կարող է մուտք գործել {{productName}}-ի բաժանորդագրության կարգավորումներ:"
+          "description": "The placement of the '{{productName}}' variable feels slightly awkward in the Armenian translation. It's at the end of the sentence.",
+          "suggestion": "Խորհուրդ ենք տալիս ընտրել նոր վճարող, ով ունի մուտքի իրավունք {{productName}}-ի բաժանորդագրության կարգավորումներին:"
         }
       ],
       "approved_at": null
@@ -141,13 +152,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Pagatore' doesn't perfectly capture the meaning of 'Payer' in this context. 'Payer' refers to a user or entity who makes payments for a subscription. A more accurate translation would be something like 'abbonato' (subscriber) or 'utente' (user), depending on the specific nuance needed. 'Pagatore' emphasizes the act of paying, which isn't the primary focus here.",
-          "suggestion": "Consider 'abbonato' or 'utente' instead of 'Pagatore'."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase \"che abbia accesso\" is grammatically correct but sounds slightly formal and could be improved for a more natural flow. While not strictly incorrect, it's less conversational than a simpler construction.",
-          "suggestion": "Consider 'che può accedere' or 'con accesso a'."
+          "description": "The term 'Pagatore' isn't the most natural or common translation for 'Payer' in the context of subscription management. 'Payer' typically refers to the person or entity making the payment, and a more accurate translation might be 'utente' (user), 'cliente' (customer), or even 'sottoscrittore' (subscriber). 'Pagatore' implies a person who pays, rather than the account or entity linked to the subscription.",
+          "suggestion": "Consider using 'utente', 'cliente', or 'sottoscrittore' instead of 'Pagatore'."
         }
       ],
       "approved_at": null
@@ -158,8 +164,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'payer' (支払人 - shiharinin) isn't the most natural or common term for someone who makes payments in the context of subscriptions. It sounds overly formal and technical. A more common and understandable term would be '支払いをする人' (shiharito suru hito) or a more concise option like '支払い方法' (shiharito houhou) - meaning payment method, if referring to selecting a new way to pay, or simply 'アカウント' (kaunatto) if referring to the user account managing the subscription.",
-          "suggestion": "Consider replacing '支払人' with '支払いをする人' or '支払い方法' or 'アカウント' depending on the precise meaning intended. For example: '{{productName}}の購読設定にアクセスできる新しい支払い方法を選択することをお勧めします。' or '{{productName}}の購読設定にアクセスできる新しいアカウントを選択することをお勧めします。'"
+          "description": "The term \"支払人 (shiharinin)\" translates to 'payer' or 'payor', but in this context, it feels unnatural. A more suitable term would depend on the specific role being referred to. It's likely intended to refer to a user or account managing the subscription.",
+          "suggestion": "Consider alternatives like \"利用者 (riyousha - user)\" or \"アカウント管理者 (akaunto kanrisha - account administrator)\" depending on the intended meaning. A more accurate translation would require further context on the role."
+        },
+        {
+          "type": "cultural",
+          "description": "The sentence structure, while grammatically correct, is a bit formal for a user-facing message. It might sound stiff.",
+          "suggestion": "Consider softening the tone.  For example, \"{{productName}}で購読設定が操作できるユーザーを選んでいただくことをお勧めします\" (We recommend selecting a user who can manage subscription settings in {{productName}}.)"
         }
       ],
       "approved_at": null
@@ -170,8 +181,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'We recommend choosing a new Payer' is not perfectly captured by '새로운 지불자를 선택할 것을 추천드립니다.' While technically correct, '지불자' (payer) can sound overly formal and potentially confusing in this context. A more natural phrasing might be '새로운 결제 방법을 선택하시는 것을 추천드립니다' (choosing a new payment method is recommended) or '구독 설정을 관리할 새로운 계정을 선택하시는 것을 추천드립니다' (we recommend choosing a new account to manage subscription settings).",
-          "suggestion": "새로운 결제 방법을 선택하시는 것을 추천드립니다"
+          "description": "The phrase \"지불자를 선택할 것을 추천드립니다\" (choose a payer, we recommend) sounds overly formal and stiff in Korean. A more natural and less formal phrasing would be better suited for a user-facing message.",
+          "suggestion": "새로운 지불자를 선택하여 구독 설정을 관리할 수 있도록 권장합니다."
+        },
+        {
+          "type": "formatting",
+          "description": "While the variable {{productName}} is correctly used, ensuring consistent formatting with other Korean translations is crucial. Confirm that the variable usage adheres to the project's established style guide.",
+          "suggestion": "No specific suggestion, check existing translations to confirm consistency."
         }
       ],
       "approved_at": null
@@ -188,8 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Mēs iesakām izvēlēties jaunu maksātāju, kurš saņem piekļuvi abonēšanas iestatījumiem {{productName}}.' doesn't fully capture the nuance of 'We recommend choosing a new Payer who gets access to subscription settings in {{productName}}'.  'Payer' implies a role or entity, which isn't directly conveyed. A better translation would highlight the 'payer' having access.",
-          "suggestion": "Mēs iesakām izvēlēties jaunu maksātāju, kam ir piekļuve abonēšanas iestatījumiem {{productName}}."
+          "description": "The translation of \"We recommend\" is somewhat literal. A more natural phrasing in Latvian would be \"Ieteicam\" or \"Mēs aicinām\". Using \"Mēs iesakām\" feels a bit formal and less conversational.",
+          "suggestion": "Mēs aicinām izvēlēties jaunu maksātāju, kurš saņem piekļuvi abonēšanas iestatījumiem {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"maksātāju\" (payer) is technically correct, depending on the context, \"kontu\" (account) might be more accurate or understandable to Latvian users. A 'payer' often manages an account or profile.",
+          "suggestion": "Mēs aicinām izvēlēties jaunu kontu, kurš saņem piekļuvi abonēšanas iestatījumiem {{productName}}."
         }
       ],
       "approved_at": null
@@ -203,7 +224,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"We recommend choosing a new Payer who gets access to subscription settings\" is a bit clunky in Polish. While technically correct, it could be more natural. 'Payer' is also translated as 'Płatnika', which is accurate but 'Użytkownika' (User) might be more understandable to a wider audience.",
+          "suggestion": "Zalecamy wybrać nowego Użytkownika, który będzie miał dostęp do ustawień subskrypcji w {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Płatnika' is correct for 'Payer', however, it might be slightly ambiguous. 'Płatnik' typically implies someone making a payment. 'Użytkownik' (User) more accurately represents someone with access to subscription settings.",
+          "suggestion": "Consider using 'Użytkownika' instead of 'Płatnika' for better clarity."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -212,13 +244,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Pagador' doesn't directly translate to 'Payer' in this context. While it means 'payer' in Portuguese, it's not the common or expected term in a technical context related to subscription management. A more appropriate term would be 'prestador de serviços' or a more direct translation that reflects the role (e.g., 'responsável de pagamentos').",
-          "suggestion": "Consider using 'responsável de pagamentos' or 'prestador de serviços' to better reflect the meaning of 'Payer'."
+          "description": "The term 'Pagador' (payer) while technically correct, isn't the most natural or common translation of 'Payer' in this context. It sounds slightly formal and clunky.",
+          "suggestion": "Consider using a more colloquial term like 'forma de pagamento' (payment method) or 'provedor de pagamento' (payment provider), depending on the exact nuance desired."
         },
         {
           "type": "incorrect_translation",
-          "description": "“relativas à subscrição” is a bit wordy. A more concise and natural translation for 'related to subscription' would be 'de subscrição' or 'da assinatura'.",
-          "suggestion": "Replace 'relativas à subscrição' with 'de subscrição' or 'da assinatura'."
+          "description": "The phrase 'relativas à subscrição' (related to subscription) is a bit verbose and less direct.  'de assinatura' or simply 'de subscrição' would be more concise and natural.",
+          "suggestion": "Replace 'relativas à subscrição' with 'de assinatura' or 'de subscrição'."
         }
       ],
       "approved_at": null
@@ -229,8 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Payer\" as \"Pagador\" is not ideal. \"Payer\" refers to the entity making the payment, which could be a company or individual. \"Pagador\" literally translates to 'payer' but can sound a bit formal or less appropriate in this context, depending on the tone of the product. A more natural translation might be something like 'quem realiza os pagamentos' or 'quem efetua os pagamentos,' or potentially 'Contador' if it refers to an account managing payments.",
-          "suggestion": "Consider 'quem realiza os pagamentos' or 'quem efetua os pagamentos' or 'Contador' depending on the precise meaning of 'Payer' in the context of {{productName}}."
+          "description": "The term 'Payer' doesn't have a direct equivalent in Portuguese that conveys the same meaning in this context. 'Payer' implies a third-party payment processor or similar, while 'Pagador' simply means 'payer'. It's not necessarily conveying the correct nuance.",
+          "suggestion": "Consider alternatives like 'provedor de pagamento', 'plataforma de pagamento' or rephrasing the sentence to clarify the intended meaning, like 'Recomendamos escolher uma nova forma de pagamento que ofereça acesso...' "
         }
       ],
       "approved_at": null
@@ -241,13 +273,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"care va avea acces\" is a bit clunky and literal. A more natural Romanian phrasing would be \"care are acces\" or \"care beneficiază de acces\".",
-          "suggestion": "Vă recomandăm să alegeți un Plătitor nou, care are acces la setările de abonament în spațiul {{productName}}."
+          "description": "The term 'Plătitor' isn't the most natural translation for 'Payer' in this context. 'Plătitor' is more generic for 'payer'. A more suitable term would be 'contribuitor' or 'utilizator' depending on the specific context of who is getting access to the subscription settings.",
+          "suggestion": "Vă recomandăm să alegeți un contribuitor nou, care va avea acces la setările de abonament în spațiul {{productName}}."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the Romanian translation uses a comma (,) instead of a semi-colon (;) to separate clauses. While a comma isn't *wrong*, a semi-colon would be more formal and align better with typical Romanian style for this type of notice.",
-          "suggestion": "Vă recomandăm să alegeți un Plătitor nou; care are acces la setările de abonament în spațiul {{productName}}."
+          "description": "The Romanian translation includes the word 'spațiul' which doesn't directly correspond to the English content's implication of the platform or product.  It feels a bit tacked on.",
+          "suggestion": "Vă recomandăm să alegeți un contribuitor nou, care va avea acces la setările de abonament în {{productName}}."
         }
       ],
       "approved_at": null
@@ -264,13 +296,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නව ගෙවන්නෙකු තේරීමට නිර්දේශ කෙරේ' (new payer to select) is a bit clunky. A more natural phrasing would be 'නව ගෙවන්නෙකු තෝරා ගන්න' or 'නව ගෙවන්නෙකු පත්කරන්න'.",
-          "suggestion": "නව ගෙවන්නෙකු තෝරා ගන්න"
+          "description": "The English phrase \"We recommend choosing\" is translated as \"නිර්දේශ කෙරේ\" which is a passive construction. While not strictly incorrect, it sounds less direct and slightly awkward in Sinhala. A more natural phrasing would be \"අපි නිර්දේශ කරමු\" (Ami nirdehash karamu - We recommend).",
+          "suggestion": "නිර්දේශ කෙරේ → නිර්දේශ කරමු"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term 'ප්‍රවේශය ලබන' (gets access) is a bit formal. While technically correct, it can be simplified.",
-          "suggestion": "ලැබෙන"
+          "type": "formatting",
+          "description": "The Sinhala translation contains a Sinhala word in the variable name, while the English version has 'productName'. It's assumed that this variable should match the English version in the Sinhala output as well.",
+          "suggestion": "Ensure the variable name in the Sinhala translation matches the English version (productName)"
         }
       ],
       "approved_at": null
@@ -293,13 +325,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The word 'productName' is not consistently formatted. It's followed by '-у' which isn't standard Serbian grammatical structure when referring to a product name. It's more natural to simply use 'productName'.",
+          "description": "The word 'productName' is followed by '-у'. While this can be a possessive ending in Serbian, it's likely incorrect in this context and makes the sentence awkward. The direct translation of 'in' is 'u'.",
           "suggestion": "Препоручујемо да изаберете новог Платиоца који добија приступ подешавањима претплате у {{productName}}."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Препоручујемо' (We recommend) is correct, a slightly more natural phrasing in this context would be 'Предлагамо' (We suggest).",
-          "suggestion": "Предлагамо да изаберете новог Платиоца који добија приступ подешавањима претплате у {{productName}}."
         }
       ],
       "approved_at": null
@@ -310,7 +337,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The hyphen in \"{{productName}}-u\" is unnecessary and grammatically incorrect in this context. Serbian doesn't require a hyphen in this construction.",
+          "description": "The translation includes an unnecessary hyphen after 'productName'. It should be removed.",
           "suggestion": "Preporučujemo da izaberete novog Platioca koji dobija pristup podešavanjima pretplate u {{productName}}."
         }
       ],
@@ -322,13 +349,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ödeme Yapan' for 'Payer' is not ideal. 'Payer' refers to the entity making the payment. A more accurate and natural translation would be 'ödeme yapan kişi' or simply 'ödeme sorumlusu'. Using 'Ödeme Yapan' sounds slightly awkward and less professional.",
-          "suggestion": "Consider translating 'Payer' as 'ödeme yapan kişi' or 'ödeme sorumlusu'."
+          "description": "The translation of 'Payer' is not ideal. 'Payer' refers to the entity making the payment. A better translation might be 'ödeme yapan kişi' (person making the payment) or a more contextually appropriate term depending on what 'Payer' specifically represents in {{productName}}.",
+          "suggestion": "Consider 'ödeme yapan kişi' or a more specific term relevant to the 'Payer' role in {{productName}}."
         },
         {
           "type": "formatting",
-          "description": "The use of double curly braces '{{productName}}' is correct for variable substitution, but it's important to confirm that the translation system correctly handles these double braces.",
-          "suggestion": "Verify that the translation system supports double curly braces and that the variable 'productName' is correctly substituted during rendering."
+          "description": "The use of '{{productName}}' is consistent with the English, but ensure that the substitution is handled correctly in the Turkish implementation.  The curly braces should not be displayed literally.",
+          "suggestion": "Verify that the variable substitution for '{{productName}}' is handled correctly within the Turkish implementation."
         }
       ],
       "approved_at": null
@@ -336,7 +363,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Рекомендуємо вибрати нового платника, який отримає доступ до параметрів підписки в {{productName}}.' doesn't fully capture the nuance of 'We recommend choosing a new Payer who gets access to subscription settings in {{productName}}'. The word 'payer' (платник) translates a general payer, while the English implies a payer with specific access rights. A better translation would emphasize this.",
+          "suggestion": "Рекомендуємо вибрати нового платника, який матиме доступ до налаштувань підписки в {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -348,13 +381,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"我们可以访问{{productName}}中订阅设置的新付款人\" implies the new payer *has* access. The original English states we *recommend* choosing one *who gets* access. The translation doesn't convey the recommendation aspect.",
-          "suggestion": "我们建议您选择一位能访问{{productName}}中订阅设置的新付款人。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

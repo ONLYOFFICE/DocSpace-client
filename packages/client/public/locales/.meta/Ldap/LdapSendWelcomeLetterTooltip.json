@@ -3,7 +3,7 @@
   "content": "If checked all new users will receive welcome letter. Available only when Mail Attribute is mapped to LDAP.",
   "content_en_sha1_hash": "9d5bbfe758465098b39bf00c96aa285961833c28",
   "created_at": "2025-05-19T21:30:54.265Z",
-  "updated_at": "2025-05-21T08:08:54.271Z",
+  "updated_at": "2025-05-24T08:22:32.426Z",
   "comment": {
     "text": "This translation key is used for the tooltip that explains when checking \"LdapSendWelcomeLetter\" enables sending welcome letters to new users, available only when a specific mail attribute is mapped to LDAP. It appears as a HelpButton in an Advanced Settings section of the PortalSettings page.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ميزة البريد\" (Mail Attribute) is not the most natural way to express 'Mail Attribute' in this context. A more accurate translation would convey that the mail functionality is linked or associated with LDAP.",
-          "suggestion": "إذا تم تحديده، فسيتلقى جميع المستخدمين الجدد خطاب ترحيب. يتوفر فقط عند ربط خاصية البريد بـ LDAP."
+          "description": "The phrase \"ميزة البريد\" (mail attribute) doesn't fully capture the intended meaning of \"Mail Attribute\". It's a bit too literal and might be confusing. A more accurate translation might consider how 'mail attribute' relates to the broader LDAP configuration.",
+          "suggestion": "Perhaps rephrase to something like: \"إذا تم تحديده، فسيتلقى جميع المستخدمين الجدد خطاب ترحيب. متوفر فقط عند ربط سمة البريد بـ LDAP.\" (If checked all new users will receive welcome letter. Available only when the mail attribute is linked to LDAP.)"
         },
         {
           "type": "formatting",
-          "description": "While not a major issue, using a colon (:) after 'LDAP' in both the English and Arabic versions would ensure consistency in formatting.",
-          "suggestion": "إذا تم تحديده، فسيتلقى جميع المستخدمين الجدد خطاب ترحيب. يتوفر فقط عند ربط خاصية البريد بـ LDAP:"
+          "description": "The Arabic text could benefit from improved readability by ensuring consistent spacing around punctuation and within complex phrases. While not a critical error, it enhances the user experience.",
+          "suggestion": "Review the overall formatting and spacing to ensure consistent and clear presentation."
         }
       ],
       "approved_at": null
@@ -46,14 +46,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"If checked\" is not accurately translated. \"İşarələndikdə\" is a literal translation of \"when checked\" but doesn't flow naturally. A better translation would reflect the 'checked' state enabling the feature.",
-          "suggestion": "Əgər seçilibsə"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Available' is not naturally translated to 'əlçatandır'. A more natural phrasing is required.",
-          "suggestion": "Təkcə Poçt Xüsusiyyəti LDAP-a uyğunlaşdırıldıqda aktivdir."
+          "type": "formatting",
+          "description": "The phrase \"Mail Xüsusiyyəti\" could be improved for clarity and consistency. \"Mail Xüsusiyyəti\" translates literally to \"Mail Attribute\" but may not be the most natural phrasing in Azerbaijani. Consider rephrasing for better flow.",
+          "suggestion": "Mail Xüsusiyyətinin LDAP-a uyğunlaşdırıldıqda əlçatandır."
         }
       ],
       "approved_at": null
@@ -64,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'приветстващо' (privetstvasho) should be 'поздравително' (pozdravitelno) which is the more common and accurate translation for 'welcome' in this context.",
-          "suggestion": "Ако е отметнато, всички нови потребители ще получат поздравително писмо."
+          "description": "The word 'приветстващо' is a less common and potentially less clear way to say 'welcome'.",
+          "suggestion": "Приветствено"
         }
       ],
       "approved_at": null
@@ -88,13 +83,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Χαρακτηριστικό Αλληλογραφίας\" is a literal translation of \"Mail Attribute\" and may be too technical or unclear for the target audience.  A more user-friendly translation might be preferable.",
-          "suggestion": "Αντιστοιχία Email (Email Mapping)"
+          "description": "The phrase \"Χαρακτηριστικό Αλληλογραφίας\" is a very literal and somewhat awkward translation of \"Mail Attribute\". A more natural phrasing might be \"Χαρακτηριστικό Email\" or \"Πεδίο Email\".",
+          "suggestion": "Εάν είναι επιλεγμένο, όλοι οι νέοι χρήστες θα λάβουν επιστολή καλωσορίσματος. Διαθέσιμο μόνο όταν το Πεδίο Email έχει αντιστοιχιστεί στο LDAP."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"επιστολή καλωσορίσματος\" (welcome letter) could be more naturally translated as something like \"email καλωσορίσματος\" or \"μήνυμα καλωσορίσματος\" to reflect modern communication.",
-          "suggestion": "email καλωσορίσματος"
+          "type": "formatting",
+          "description": "While not strictly incorrect, using a more active voice could improve readability. Consider revising the sentence structure.",
+          "suggestion": "Εάν είναι επιλεγμένο, όλοι οι νέοι χρήστες θα λάβουν επιστολή καλωσορίσματος.  Η λειτουργία είναι διαθέσιμη μόνο όταν το Πεδίο Email έχει αντιστοιχιστεί στο LDAP."
         }
       ],
       "approved_at": null
@@ -102,18 +97,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'If checked' is better translated as 'Si está marcada' rather than 'Si se marca'. 'Se marca' is passive voice and doesn't quite capture the active nature of checking a box.",
-          "suggestion": "Si está marcada"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Mail Attribute' is literally translated as 'atributo de correo'. While understandable, 'Atributo de Correo Electrónico' would be more precise and professional in this context.",
-          "suggestion": "Atributo de Correo Electrónico"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -133,14 +117,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term \"Փոստի հատկանիշը\" (Posti hatkanishi) is a literal translation of \"Mail Attribute\".  While understandable, it's not the most natural phrasing in Armenian. A more natural term for \"Mail Attribute\" in this context might be something like \"Էլեկտրոնային փոստի տվյալը\" (Elektronayin posti tvyaly) or simply \"ծածկագրային էլեկտրոնային փոստը\" (tsadkagravayin eleqtronayin posty).",
-          "suggestion": "Consider rephrasing \"Փոստի հատկանիշը\" to \"Էլեկտրոնային փոստի տվյալը\" or \"ծածկագրային էլեկտրոնային փոստը\" for better flow and naturalness."
-        },
-        {
           "type": "formatting",
-          "description": "The colon after \"LDAP-ին\" should ideally be a dash to match the English source. \"LDAP-ին:\" implies a direct translation of the English colon, which is not common in Armenian phrasing.",
-          "suggestion": "Change \"LDAP-ին:\" to \"LDAP-ին\""
+          "description": "The colon after \"Փոստի հատկանիշը\" is misplaced. It should be part of the sentence's structure, not just hanging after the word.",
+          "suggestion": "Եթե ​​նշված է, բոլոր նոր օգտվողները կստանան ողջույնի նամակ: Հասանելի է միայն այն դեպքում, երբ Փոստի հատկանիշը քարտեզագրված է LDAP-ին: should be changed to Եթե ​​նշված է, բոլոր նոր օգտվողները կստանան ողջույնի նամակ։ Հասանելի է միայն այն դեպքում, երբ Փոստի հատկանիշը քարտեզագրված է LDAP-ին։"
         }
       ],
       "approved_at": null
@@ -154,18 +133,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Available only when Mail Attribute is mapped to LDAP\" is not accurately conveyed. The Japanese translation focuses on validity rather than availability. A more literal and accurate translation would clarify the dependency.",
-          "suggestion": "メール属性がLDAPにマッピングされている場合にのみ利用可能です。(Mēru shison ga LDAP ni mapping sa rete iru baai nomi ni riyō kanō desu.)"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure could be slightly improved for better flow in Japanese. Separating the two conditions (checking the box and dependency on Mail Attribute mapping) would enhance readability.",
-          "suggestion": "チェックした場合、すべての新規ユーザにウェルカムレターが送信されます。ただし、メール属性がLDAPにマッピングされている場合にのみ有効です。(Chekku shita baai, subete no shinki yūza ni werukamu retā ga sōshin sa remasu. Tatoeba, mēru shison ga LDAP ni mapping sa rete iru baai ni nomi yūkō desu.)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -179,14 +147,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ຖ້າມາຢັ້ງຢືນ\" is not the most natural way to say \"If checked\". A more natural phrasing would be \"ຖ້າກວດກາ\" or \"ຖ້າເລືອກເອົາ\".",
-          "suggestion": "ຖ້າກວດກາ"
+          "type": "spelling",
+          "description": "The word 'ສະບັບນີ້' (sabap ni) in 'ສະບັບນີ້ໃຊ້ໄດ້ເມື່ອ...' is somewhat ambiguous and doesn't directly translate to 'this version' or 'this setting'. While understandable, it's not the most precise translation.",
+          "suggestion": "Consider replacing 'ສະບັບນີ້' with 'ການຕັ້ງຄ່າ' (kan tang kha) to more accurately convey 'this setting'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The wording \"ສະບັບນີ້ໃຊ້ໄດ້ເມື່ອຄຸນນະພາບອີເມລ໌ຖືກນໍາໃຊ້ກັບ LDAPເທົ່ານັ້ນ\" is a bit clunky. \"ຄຸນນະພາບອີເມລ໌\" isn't quite right. It’s referring to the mapping. It translates more literally to \"email quality\".",
-          "suggestion": "ມັນໃຊ້ໄດ້ເມື່ອຄຸນນະພາບອີເມລ໌ຖືກນໍາໃຊ້ກັບ LDAP ຢ່າງດຽວເທົ່ານັ້ນ"
+          "type": "grammar",
+          "description": "The phrase 'ຄຸນນະພາບອີເມລ໌ຖືກນໍາໃຊ້ກັບ LDAP' (kun na phap email thuk nam sai kap LDAP) is grammatically correct but sounds a little stiff.  A more natural phrasing would improve readability.",
+          "suggestion": "Consider replacing 'ຄຸນນະພາບອີເມລ໌ຖືກນໍາໃຊ້ກັບ LDAP' with 'ຖ້າຈຸດໝາຍອີເມລ໌ຖືກນໍາໃຊ້ກັບ LDAP' (tha jut mai email thuk nam sai kap LDAP) which translates to 'If email attribute is mapped to LDAP'."
         }
       ],
       "approved_at": null
@@ -209,13 +177,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Jeśli opcja jest zaznaczona' could be more concise and natural. While grammatically correct, it feels slightly verbose.",
-          "suggestion": "Jeśli zaznaczone,..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'If checked' is slightly more conversational than 'Jeśli opcja jest zaznaczona'. While not incorrect, it loses some nuance.",
-          "suggestion": "Jeśli zaznaczone..."
+          "description": "The translation uses a period (.) after \"Dostępna wyłącznie, jeśli Atrybut poczty jest mapowany do LDAP.\" which isn't consistent with the English tooltip which does not have a period at the end of the sentence. While not technically incorrect, it may affect visual consistency.",
+          "suggestion": "Remove the period at the end of the sentence: \"Dostępna wyłącznie, jeśli Atrybut poczty jest mapowany do LDAP\""
         }
       ],
       "approved_at": null
@@ -237,9 +200,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Romanian translation uses a colon after 'Dacă opțiunea este bifată' which is not present in the English version.  While not strictly incorrect, it alters the flow and is stylistically different.",
-          "suggestion": "Remove the colon after 'Dacă opțiunea este bifată'."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'If checked' is awkwardly translated as 'Dacă opțiunea este bifată'. It would be more natural to use 'Dacă este activată' or 'Dacă este selectată'.",
+          "suggestion": "Dacă este activată"
         }
       ],
       "approved_at": null
@@ -247,7 +210,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Атрибут почты\" is a literal translation of \"Mail Attribute\". A more natural and understandable translation in Russian would be something like \"Атрибут электронной почты\" or \"Почтовый атрибут\".",
+          "suggestion": "Атрибут электронной почты"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -256,23 +225,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'If checked' is awkwardly translated as 'යොමුවූවා නම්'. A more natural translation would be 'ප්‍රදේශිය තීරුණිසිට්ඨය ප überprüfen කර'.",
-          "suggestion": "ප්‍රදේශිය තීරුණිසිට්ඨය ප überprüfen කර"
+          "description": "The phrase \"යොමුවූවා නම්\" (yomuvoova naam) is not the most natural way to say \"If checked.\" A more accurate translation would be \"පහසු කළොත්\" (pahasu kalau) or \"මැක් කරන විට\" (maek karana vith).",
+          "suggestion": "පහසු කළොත් සියලු නව පරිශීලකයින් පිළිගැනීමේ ලිස්තුවක් ලැබෙනු ඇත. Available only when Mail Attribute is mapped to LDAP."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'new users' is translated as 'නව පරිශීලකයින්'. While technically correct, a more natural phrasing would be 'නව යුවෙක්කාරයන්'.",
-          "suggestion": "නව යුවෙක්කාරයන්"
+          "description": "The phrase \"මැක් කරන විට\" translates to 'when marking', which doesn't quite capture the meaning of checking a box. It needs to be a more neutral term for 'checked'.",
+          "suggestion": "පහසු කළොත් සියලු නව පරිශීලකයින් පිළිගැනීමේ ලිස්තුවක් ලැබෙනු ඇත. Available only when Mail Attribute is mapped to LDAP."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'welcome letter' is translated as 'පිළිගැනීමේ ලිස්තුවක්'.  A more accurate and commonly used term in this context would be 'එ පිළිගැනීම ලිපිය'.",
-          "suggestion": "එ පිළිගැනීම ලිපිය"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Available only when Mail Attribute is mapped to LDAP' is translated as 'මෙය, තැපැල් ගුණාංගය LDAP වෙත සකස් කර ඇති විට පමණක් ලබා ගත හැකිය.'. This translation is slightly verbose and could be simplified. A better option would be 'තැපැල් ගුණාංගය LDAP වෙත සම්බන්ධ කර ඇති විට පමණක් ලබා ගත හැකිය'.",
-          "suggestion": "තැපැල් ගුණාංගය LDAP වෙත සම්බන්ධ කර ඇති විට පමණක් ලබා ගත හැකිය"
+          "type": "spelling",
+          "description": "The term 'පරිශීලකයින්' is correct but can be more elegantly replaced with 'පරිශීලකයන්' for better readability. While both are acceptable, the latter is slightly preferred.",
+          "suggestion": "පහසු කළොත් සියලු නව පරිශීලකයන් පිළිගැනීමේ ලිස්තුවක් ලැබෙනු ඇත. Available only when Mail Attribute is mapped to LDAP."
         }
       ],
       "approved_at": null
@@ -282,9 +246,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Slovak translation uses 'Ak je táto možnosť zapnutá' which translates to 'If this option is enabled'. While not incorrect, it's slightly more formal than the English's 'If checked'. Consider a slightly less formal wording.",
-          "suggestion": "Ak je zaškrtnuté..."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Mail Attribute' is translated as 'Pošta'. While 'Pošta' is technically correct for 'Mail', in this context, it's more appropriate to use a term that refers to the 'Email Address' attribute within the LDAP configuration. 'Pošta' can also mean 'post office', which can be confusing.",
+          "suggestion": "Consider translating 'Mail Attribute' as 'Atribút e-mailu' or 'Adresa e-mailu' for clarity."
         }
       ],
       "approved_at": null
@@ -295,8 +259,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a period (.) after 'Na voljo samo,' which isn't consistent with the English phrasing. The English doesn't end the sentence there.",
-          "suggestion": "Na voljo le, če je poštni atribut preslikan v LDAP."
+          "description": "The Slovenian translation uses a comma (,) before 'Na voljo samo'. While grammatically acceptable, a period (.) would be more common and idiomatic in this context.",
+          "suggestion": "Če je označeno, bodo vsi novi uporabniki prejeli pozdravno pismo. Na voljo samo, če je poštni atribut preslikan v LDAP."
         }
       ],
       "approved_at": null
@@ -307,7 +271,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"ц́е\" is a ligature that can be confusing. It's better to use the standard \"ће\".",
+          "description": "The word 'ц́е' is an awkward abbreviation of 'ће'. It's better to use the full form for clarity and professionalism.",
           "suggestion": "ће"
         }
       ],
@@ -319,13 +283,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"Mejl\" is a transliteration and not a proper Serbian word. The correct word is \"Mejl\" or 'Email'.",
+          "description": "The word 'Mejl' is a transliteration and not a proper Serbian word. The correct Serbian word for 'Mail' is 'Email'.",
           "suggestion": "Email"
         },
         {
           "type": "grammar",
-          "description": "The phrase \"će dobiti\" could be more naturally rendered as \"primaće\".",
-          "suggestion": "primaće"
+          "description": "The phrase 'će dobiti pismo dobrodošlice' can be slightly improved for flow. A more natural phrasing would be 'primaće pismo dobrodošlice'.",
+          "suggestion": "primaće pismo dobrodošlice"
         }
       ],
       "approved_at": null
@@ -335,9 +299,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a period (.) after 'yazısı' which is not typical in Turkish for tooltips. It makes the sentence feel more formal than the English original.",
-          "suggestion": "Remove the period after 'yazısı'. The corrected sentence would be: 'İşaretlenirse tüm yeni kullanıcılar hoş geldiniz yazısı alır. Yalnızca Posta Özelliği LDAP ile eşleştirildiğinde kullanılabilir.'"
+          "type": "incorrect_translation",
+          "description": "The phrase 'welcome letter' is translated as 'hoş geldiniz yazısı'. While technically correct, a more natural and common translation for a system-generated welcome letter in Turkish would be 'hoş geldin mesajı' or 'kullanıcı hoş geldin mesajı'.",
+          "suggestion": "hoş geldin mesajı"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Available only when Mail Attribute is mapped to LDAP' is translated as 'Yalnızca Posta Özelliği LDAP ile eşleştirildiğinde kullanılabilir'. While understandable, a more natural phrasing would emphasize that the feature is enabled *because* the mail attribute is mapped.",
+          "suggestion": "Yalnızca Posta Özelliği LDAP ile eşleştiğinde kullanılabilir."
         }
       ],
       "approved_at": null
@@ -348,8 +317,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Available only when Mail Attribute is mapped to LDAP' is not entirely accurate. A more natural phrasing would capture the meaning of restriction.",
-          "suggestion": "Доступно лише за умови прив’язки атрибуту пошти до LDAP."
+          "description": "The phrase \"зіставляється з LDAP\" is a literal translation of \"mapped to LDAP\" and sounds unnatural in Ukrainian. A more natural phrasing would be \"пов'язаний з LDAP\" or \"налаштований для LDAP\".",
+          "suggestion": "Якщо позначено, усі нові користувачі отримають вітальний лист. Доступно, лише коли атрибут пошти пов'язаний з LDAP."
         }
       ],
       "approved_at": null
@@ -359,9 +328,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "formatting",
+          "description": "The phrase \"Nếu được chọn\" could be more naturally phrased. While technically correct, it feels slightly stiff in Vietnamese.",
+          "suggestion": "Nếu được kích hoạt"
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The phrase \"Mail Attribute\" is translated as \"Thuộc Tính Thư\". While technically correct, it's slightly awkward. A more natural translation for \"Mail Attribute\" in this context might be \"Thuộc Tính Bưu Điện\" or \"Thuộc Tính Email\".",
-          "suggestion": "Change \"Thuộc Tính Thư\" to \"Thuộc Tính Bưu Điện\" or \"Thuộc Tính Email\"."
+          "description": "“Mail Attribute” is translated as “Thuộc Tính Thư”. While “thư” can mean letter, in this context, it's referring to an email attribute. It's better to use a more technical term.",
+          "suggestion": "Nếu được kích hoạt, tất cả người dùng mới sẽ nhận được thư chào mừng. Chỉ khả dụng khi Thuộc Tính Email được ánh xạ tới LDAP."
         }
       ],
       "approved_at": null

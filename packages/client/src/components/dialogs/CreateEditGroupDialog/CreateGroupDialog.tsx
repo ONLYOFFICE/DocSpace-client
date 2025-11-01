@@ -35,6 +35,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
+import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";
@@ -179,6 +180,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
         <ModalDialog.Footer>
           <Button
             id="create-group-modal_submit"
+            testId="create_edit_group_create_button"
             tabIndex={5}
             label={t("Common:Create")}
             size={ButtonSize.normal}
@@ -193,6 +195,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
           />
           <Button
             id="create-group-modal_cancel"
+            testId="create_edit_group_cancel_button"
             tabIndex={5}
             label={t("Common:CancelButton")}
             size={ButtonSize.normal}
@@ -217,7 +220,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
           onParentPanelClose={onClose}
           groupManager={groupParams.groupManager}
           groupMembers={groupParams.groupMembers}
-          addMembers={addMembers}
+          addMembers={addMembers as unknown as TOnSubmit}
         />
       ) : null}
     </>

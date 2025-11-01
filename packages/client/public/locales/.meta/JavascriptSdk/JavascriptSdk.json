@@ -3,7 +3,7 @@
   "content": "Javascript SDK",
   "content_en_sha1_hash": "e6c94f16090ac34b87010e6e2af5e5e55d93af88",
   "created_at": "2025-05-19T21:30:54.548Z",
-  "updated_at": "2025-06-03T20:59:42.116Z",
+  "updated_at": "2025-09-26T15:21:06.305Z",
   "comment": {
     "text": "\"Javascript SDK\" is a label used to describe presets or settings related to the JavaScript SDK, likely found in developer tools or settings pages, guiding users through configuration options.",
     "is_auto": true,
@@ -19,19 +19,19 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
       "line_number": 62,
-      "context": "} from \"./StyledPresets\";\n \n const DocSpace = (props) => {\n const { t, theme, currentColorScheme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "context": "} from \"./StyledPresets\";\n \n const DocSpace = (props) => {\n const { t, theme, currentColorScheme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
       "line_number": 71,
-      "context": "} from \"./StyledPresets\";\n \n const Editor = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "context": "} from \"./StyledPresets\";\n \n const Editor = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
       "line_number": 85,
-      "context": "} from \"./StyledPresets\";\n \n const FileSelector = (props) => {\n const { t, fetchExternalLinks, theme, logoText } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const fileTypeDisplay = [\n { value: FilesSelectorFilterTypes.ALL, label: t(\"AllTypes\") },\n {\n value: \"EditorSupportedTypes\",",
+      "context": "} from \"./StyledPresets\";\n \n const FileSelector = (props) => {\n const { t, fetchExternalLinks, theme, logoText } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const fileTypeDisplay = [\n {\n value: FilesSelectorFilterTypes.ALL,\n label: t(\"AllTypes\"),",
       "module": "/packages/client"
     },
     {
@@ -49,19 +49,19 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
       "line_number": 87,
-      "context": "const SimpleRoom = (props) => {\n const { t, fetchExternalLinks, currentColorScheme, theme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "context": "const SimpleRoom = (props) => {\n const { t, fetchExternalLinks, currentColorScheme, theme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
       "line_number": 71,
-      "context": "} from \"./StyledPresets\";\n \n const Viewer = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "context": "} from \"./StyledPresets\";\n \n const Viewer = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/index.js",
-      "line_number": 58,
-      "context": "const [isLoading, setIsLoading] = useState(false);\n const [currentTabId, setCurrentTabId] = useState();\n \n const { t } = useTranslation([\n \"JavascriptSdk\",\n \"Webhooks\",\n \"Settings\",\n \"WebPlugins\",\n \"Common\",\n \"OAuth\",",
+      "line_number": 68,
+      "context": "const location = useLocation();\n \n const [currentTabId, setCurrentTabId] = useState();\n \n const { t, ready } = useTranslation([\n \"JavascriptSdk\",\n \"Webhooks\",\n \"Settings\",\n \"WebPlugins\",\n \"Common\",\n \"OAuth\",",
       "module": "/packages/client"
     }
   ],
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"مجموعة أدوات تطوير البرمجيات بلغة جافا سكربت\" is a very literal and verbose translation of \"Javascript SDK\". While technically correct, it's not the most natural or concise way to express it in Arabic. A more common and user-friendly translation would be something like \"حزمة تطوير جافاسكربت\" (Java Script Development Kit).",
-          "suggestion": "حزمة تطوير جافاسكربت"
+          "description": "The translation 'مجموعة أدوات تطوير البرمجيات بلغة جافا سكربت' is a very literal and verbose translation of 'Javascript SDK'. While technically correct, it's not idiomatic and doesn't capture the conciseness of the English term. A more natural translation might be something like 'حزمة تطوير جافا سكريبت' or 'Java Script SDK'.",
+          "suggestion": "Consider a more concise translation like 'حزمة تطوير جافا سكريبت' or 'Java Script SDK'."
         }
       ],
       "approved_at": null
@@ -117,13 +117,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"SDK de JavaScript\" is understandable, a more natural and common translation in Spanish would be \"Kit de desarrollo de JavaScript\".  \"SDK\" is often used directly in Spanish tech contexts, but 'Kit de desarrollo' is clearer for a broader audience.",
-          "suggestion": "Kit de desarrollo de JavaScript"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -138,13 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'SDK Javascript' reverses the order of the terms. The correct order should be 'Javascript SDK' or, more idiomatically, 'SDK Javascript' (although less common in French). However, the given translation is not the most natural phrasing.",
+          "description": "The French translation \"SDK Javascript\" reverses the order of the terms. The standard order is 'Javascript SDK'.",
           "suggestion": "Javascript SDK"
         },
         {
           "type": "formatting",
-          "description": "The French translation 'SDK Javascript' has a space between 'SDK' and 'Javascript', which is acceptable but less common than 'SDKJavascript'.",
-          "suggestion": "SDKJavascript"
+          "description": "The translation appears to lack a space between 'SDK' and 'Javascript'.",
+          "suggestion": " Javascript SDK"
         }
       ],
       "approved_at": null
@@ -161,12 +155,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation \"SDK Javascript\" reverses the order of the terms. The standard and expected order would be \"Javascript SDK\".",
+          "description": "The Italian translation \"SDK Javascript\" reverses the order of the terms. The standard and more natural order would be \"Javascript SDK\".",
           "suggestion": "Javascript SDK"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, 'Javascript SDK' would benefit from a space between 'Javascript' and 'SDK' for better readability in Italian.",
+          "description": "While not strictly incorrect, placing the acronym before the full term is less common and can appear unnatural in Italian. It's generally better to keep the full term first.",
           "suggestion": "Javascript SDK"
         }
       ],
@@ -208,8 +202,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"SDK Javascript\" reverses the order of the terms. The standard and expected order would be \"Javascript SDK\".",
-          "suggestion": "Javascript SDK"
+          "description": "The Polish translation 'SDK Javascript' reverses the order of the terms. 'Javascript SDK' should be translated as 'SDK JavaScript' to maintain the original meaning and order.",
+          "suggestion": "SDK JavaScript"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a strict error, the translation could benefit from capitalization consistency. It's conventional to capitalize 'JavaScript' in Polish as well.",
+          "suggestion": "SDK JavaScript"
         }
       ],
       "approved_at": null
@@ -232,7 +231,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'SDK Javascript' reverses the order of the terms. The conventional and more understandable order would be 'Javascript SDK'.",
+          "description": "The Romanian translation \"SDK Javascript\" reverses the order of the terms. It's more natural and common to place the specific term ('Javascript') before the abbreviation ('SDK').",
+          "suggestion": "Javascript SDK"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the reversed order creates a slightly awkward phrasing.",
           "suggestion": "Javascript SDK"
         }
       ],
@@ -244,8 +248,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Пакет SDK для Javascript\" is understandable, a more accurate and common translation would be \"JavaScript SDK\" or \"SDK для Javascript\".  The original phrase includes a brand name (Javascript), and translating it as 'Пакет SDK для Javascript' slightly alters the meaning and sounds less professional. It's better to preserve the English term where possible in a technical context.",
-          "suggestion": "SDK для Javascript"
+          "description": "While 'Пакет SDK для Javascript' is understandable, a more accurate and common translation for 'Javascript SDK' would be 'JavaScript SDK' or 'SDK для JavaScript'. Using 'Пакет' (Package) is not incorrect, but less precise in this context.",
+          "suggestion": "SDK для JavaScript"
+        },
+        {
+          "type": "formatting",
+          "description": "The Russian translation does not capitalize 'JavaScript'. It's best to follow the English capitalization convention when translating tech terms.",
+          "suggestion": "SDK для JavaScript"
         }
       ],
       "approved_at": null
@@ -283,13 +292,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation adds an unnecessary possessive suffix ('sı') to 'Javascript SDK'. While 'Javascript SDK'sı' is grammatically correct, it's not idiomatic in Turkish when referring to the SDK itself. Keeping it as 'Javascript SDK' is generally preferred, especially in technical contexts.",
-          "suggestion": "Javascript SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -298,13 +301,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SDK Javascript' reverses the order of the terms. It's more natural and conventional to place the main term ('SDK') first and the clarifying term ('Javascript') second.",
+          "description": "The translation 'SDK Javascript' reverses the order of the terms. In English, 'Javascript SDK' is the correct phrasing, and a direct translation should ideally maintain that order. While understandable, it is not the most natural or idiomatic Ukrainian translation.",
           "suggestion": "Javascript SDK"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the lack of a space between 'SDK' and 'Javascript' feels a bit awkward in Ukrainian. A space improves readability.",
-          "suggestion": "SDK Javascript"
+          "description": "The terms 'SDK' and 'Javascript' are separated by a space, which is acceptable, but a hyphen could improve readability and flow in Ukrainian. Consider if a hyphenated version is more common in Ukrainian technical contexts.",
+          "suggestion": "SDK JavaScript"
         }
       ],
       "approved_at": null

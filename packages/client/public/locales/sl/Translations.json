@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Izberi iz seznama",
-  "ConnectingAccount": "Povezovanje računa",
-  "DeleteFromTrash": "Izbrani elementi so bili uspešno izbrisani iz koša",
   "FileLocked": "Datoteka zaklenjena",
   "FileProtected": "Datoteka je zaščitena z geslom",
   "FileUnlocked": "Datoteka odklenjena",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive direktorij",
   "FolderTitleWebDav": "WebDAV direktorij",
   "FolderTitleYandex": "Yandex direktorij",
-  "GuestReleaseTipDescripton": "Vsi predhodno dodani uporabniki so postali gostje in so zdaj na voljo samo na seznamu stikov skrbnikov {{productName}}. Gostje niso več del nobene skupine. Vedno lahko spremenite njihov tip in jih po potrebi dodate v skupino.",
-  "GuestReleaseTipLink": "Izvedite več o vrstah uporabnikov",
-  "LinkHasExpiredAndHasBeenDisabled": "Povezava je potekla in je onemogočena",
   "LinkValidTime": "Ta povezava je veljavna le {{days_count}} dni.",
   "NewForm": "PDF obrazec",
   "OwnerChange": "Spremeni lastnika",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "Storitve tretjih oseb",
   "TitleShowActions": "Pokaži akcije datoteke",
   "TitleShowFolderActions": "Pokaži akcije mape",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "Izbrani elementi so bili uspešno izbrisani iz {{sectionName}}"
 }

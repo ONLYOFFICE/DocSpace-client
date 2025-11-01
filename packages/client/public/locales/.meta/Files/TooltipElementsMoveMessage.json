@@ -3,7 +3,7 @@
   "content": "Move {{element}} elements",
   "content_en_sha1_hash": "f9236f0310f2736deb1485bc3643886987b72e2a",
   "created_at": "2025-05-19T21:30:56.261Z",
-  "updated_at": "2025-05-21T11:07:54.636Z",
+  "updated_at": "2025-05-24T11:17:52.107Z",
   "comment": {
     "text": "The \"Move {{element}} elements\" translation key is used to display a tooltip message when moving files in the drag-and-drop interface. It appears on hover or focus of an element being moved and indicates the number of elements being relocated. Translators should provide a generic phrase that conveys the action of moving elements.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'انقل عناصر {{element}}' is a literal translation but might not be the most natural phrasing in Saudi Arabic. A more idiomatic translation might be 'نقل {{element}} من العناصر' or 'حرك {{element}} من العناصر'. While technically correct, it lacks nuance.",
+          "suggestion": "Consider 'نقل {{element}} من العناصر' or 'حرك {{element}} من العناصر' for a more natural flow."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{element}} elementinin yerdəyişməsi\" literally translates to \"{{element}} element's relocation\". While conveying the general idea, it's not as direct or natural as \"Move {{element}} elements\".  The original phrase is a command, and the translation is more descriptive.",
-          "suggestion": "{{element}} elementlərin hərəkəti"
+          "description": "The translation \"{{element}} elementinin yerdəyişməsi\" literally translates to \"the movement of {{element}} element\". It doesn't convey the action of moving elements. A better translation would describe the action, not the result.",
+          "suggestion": "Move {{element}} items"
         },
         {
-          "type": "formatting",
-          "description": "The Azerbaijani translation uses a possessive case ('-in').  Consistency with the English template (using curly braces for placeholders) might warrant a different approach, although grammatical correctness is prioritized.",
-          "suggestion": "Consider alternatives that maintain the placeholder structure, like \"{{element}} elementlərinin hərəkəti\" if the natural phrasing necessitates a possessive, or exploring different phrasing altogether."
+          "type": "incorrect_translation",
+          "description": "While 'element' is translated as 'elementinin', it would be more natural to use a different word to indicate the type of items being moved (e.g., 'obyektler' for objects or 'fayllar' for files if that's what 'element' refers to).",
+          "suggestion": "Consider specifying the type of element based on the context. For example: \"{{element}} faylının yerdəyişməsi\" (if 'element' refers to files)."
         }
       ],
       "approved_at": null
@@ -53,7 +59,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Bulgarian translation 'Премести {{element}} елемента' uses the singular form of 'елемента' (element). Since the English uses the plural 'elements', it should be the plural form 'елементи'.",
+          "description": "The Bulgarian translation uses the singular form 'елемента' when the English uses a plural form 'elements'. The correct form should be the plural.",
           "suggestion": "Премести {{element}} елементи"
         }
       ],
@@ -65,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Přesunout prvky {{element}}' is a literal translation but doesn't flow naturally in Czech. A more idiomatic translation would be 'Přenést prvky {{element}}' or 'Posunout prvky {{element}}'. 'Přesunout' can imply a more complex or significant movement than might be intended in a tooltip.",
-          "suggestion": "Přenést prvky {{element}}"
+          "description": "The translation 'Přesunout prvky {{element}}' is technically correct but could be more natural-sounding. 'Move' often implies a destination, which is missing here. A better translation might be 'Přemístit prvky {{element}}' which conveys 'to relocate' or 'to move to a new place'.",
+          "suggestion": "Přemístit prvky {{element}}"
         }
       ],
       "approved_at": null
@@ -77,12 +83,12 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The German translation uses parentheses to indicate pluralization. While acceptable, it might be more common to use the plural form directly, especially in a UI context. Consider the impact on the UI rendering.",
-          "suggestion": "{{element}} Elemente verschieben"
+          "description": "The German translation uses parentheses to indicate pluralization, which might look odd in a tooltip. Consider using a more natural phrasing for the plural.",
+          "suggestion": "{{element}} Elemente verschieben (Plural)"
         },
         {
-          "type": "grammar",
-          "description": "While 'Element(e)' is technically correct, using 'Elemente' directly is generally preferred for clarity and readability in German, particularly in UI elements. Using the parenthesized form can look awkward.",
+          "type": "incorrect_translation",
+          "description": "While 'Element(e)' is technically correct, it's not the most fluent way to express this in German. 'Element' in this context is often understood as 'elements' already.",
           "suggestion": "{{element}} Elemente verschieben"
         }
       ],
@@ -94,7 +100,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Μετακίνηση στοιχείων {{element}}\" is a literal translation and sounds unnatural in Greek. A more natural phrasing would be \"Μετακίνηση {{element}} στοιχείων\" or \"Μετακινήστε {{element}} στοιχεία\".",
+          "description": "The translation 'Μετακίνηση στοιχείων {{element}}' is a literal translation of 'Move elements {{element}}'. While understandable, a more natural Greek phrasing would be 'Μετακίνηση {{element}} στοιχείων' or 'Μετακίνηση {{element}}'.",
           "suggestion": "Μετακίνηση {{element}} στοιχείων"
         }
       ],
@@ -115,7 +121,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Déplacer les éléments {{element}}' is too literal. A more natural French phrasing for 'Move {{element}} elements' would be 'Déplacer {{element}} élément(s)'. The pluralization isn't handled correctly in the current translation. While 'éléments' is plural, it doesn't account for the singular case of {{element}}.",
+          "suggestion": "Déplacer {{element}} élément(s)"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -136,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Leading space before the Japanese text.",
-          "suggestion": "「{{element}} 要素を移動」"
+          "description": "The Japanese translation has a leading space.",
+          "suggestion": " {{element}} 要素を移動"
         }
       ],
       "approved_at": null
@@ -166,7 +178,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation \"Kopieer {{element}} elementen\" translates to \"Copy {{element}} elements\" instead of \"Move {{element}} elements\".  The original English content indicates a move action, while the Dutch translation implies copying.",
+          "description": "The Dutch translation 'Kopieer {{element}} elementen' translates to 'Copy {{element}} elements', which is different from the English 'Move {{element}} elements'. The translation doesn't accurately convey the original meaning.",
           "suggestion": "Verplaats {{element}} elementen"
         }
       ],
@@ -196,8 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Mutare elemente {{element}}' uses 'Mutare' which implies 'to move' or 'to change'. The correct translation for 'Move' in this context should be 'Mută'.",
-          "suggestion": "Mută elemente {{element}}"
+          "description": "The translation \"Mutare elemente {{element}}\" is a literal translation of \"Move elements {{element}}\" but doesn't quite convey the intended meaning in Romanian. \"Mutare\" is more like 'to move' (verb) rather than 'Move' (imperative).",
+          "suggestion": "Deplasare {{element}} elemente"
+        },
+        {
+          "type": "grammar",
+          "description": "The proposed suggestion 'Deplasare {{element}} elemente' contains a grammatical inconsistency. 'Deplasare' is singular while 'elemente' is plural.",
+          "suggestion": "Deplasare {{element}} element(e)"
         }
       ],
       "approved_at": null
@@ -208,8 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Russian translation 'Переместить {{element}} элемента(ов)' uses the genitive plural 'элемента(ов)' which isn't always the best fit for 'elements' in this context.  A more natural construction might use the nominative/accusative plural depending on the sentence structure.  While technically correct, it sounds slightly awkward.",
-          "suggestion": "Consider 'Переместить {{element}} элементов' (Переместить {{element}} elementov) which uses the nominative/accusative plural."
+          "description": "The Russian translation 'Переместить {{element}} элемента(ов)' is grammatically correct but could be improved for naturalness. The choice between 'элемента' and 'элементов' depends on the number of elements being moved. The current construction uses both, which is slightly awkward. It would be more natural to dynamically adjust the ending based on the value of '{{element}}'.",
+          "suggestion": "Ideally, the translation should dynamically adjust to 'Переместить {{element}} элемент' (if element is singular) or 'Переместить {{element}} элемента' (if element is plural).  Without a way to dynamically change the form, 'Переместить {{element}} элемента' is a safer choice, though not perfect."
         }
       ],
       "approved_at": null
@@ -220,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අංග {{element}} ගෙනයන්න\" is a literal translation and doesn't quite convey the meaning of 'Move elements' in a natural Sinhala way. 'ගෙනයන්න' implies carrying something, not moving it.",
-          "suggestion": "ප්‍රවාහ {{element}} අංග (Prawa {{element}} Anga) - This translates to 'Move {{element}} elements' in a more natural way. Alternatively, '{{element}} අංග පindahkan කරන්න' ({{element}} Anga Pinadhan Karnna) – This translates to 'Move {{element}} elements' and is more formal."
+          "description": "The translation \"අංග {{element}} ගෙනයන්න\" is a literal translation and doesn't convey the intended meaning of 'Move'. A more natural phrasing in Sinhala would be something like \"{{element}} අංග පතුරුවන්න\" or \"{{element}} අංගන් ගෙනයන්න\".",
+          "suggestion": "Consider \"{{element}} අංගන් ගෙනයන්න\" or \"{{element}} අංග පතුරුවන්න\"."
         }
       ],
       "approved_at": null
@@ -244,7 +261,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Помери {{element}} елементе' uses 'Помери' which translates to 'Move' but in this context, a more appropriate translation would be 'Премести' (Premesti) which also means 'Move' or 'Relocate'. 'Помери' implies a pushing or shoving motion, while 'Премести' is more aligned with moving elements in a user interface.",
+          "description": "The Serbian translation \"Помери {{element}} елементе\" uses the verb 'Помери' (Pomeri) which means 'Move' in the imperative form (you move). It's more accurate to use 'Премести' (Premesti) which also means 'move' or 'relocate' and is a more natural fit for this context (suggesting a user action). 'Помери' implies the system is moving the elements, which is not the intended meaning.",
           "suggestion": "Премести {{element}} елементе"
         }
       ],
@@ -255,14 +272,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Pomeri {{element}} elemente' is not grammatically correct or idiomatic for 'Move {{element}} elements'. 'Pomeri' is singular, but it should be plural to match 'elements'. The word order also sounds unnatural.",
-          "suggestion": "Premesti {{element}} elementa"
-        },
-        {
           "type": "grammar",
-          "description": "The translation uses the singular verb form 'Pomeri' while the English refers to plural 'elements'.",
-          "suggestion": "Premesti {{element}} elementa"
+          "description": "The Serbian translation 'Pomeri {{element}} elemente' uses the plural form 'elemente' which doesn't agree with the English 'Move {{element}} elements'. When 'element' refers to a variable number of elements, the verb should agree with the number implied by the variable.",
+          "suggestion": "Pomeri {{element}} elemenata"
         }
       ],
       "approved_at": null
@@ -270,19 +282,19 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Turkish word 'taşı' should be 'taşımak' to be grammatically correct in this context. 'taşımak' is the infinitive form of the verb 'to move'. 'taşı' is the imperative form of the verb 'to carry', which doesn't fit the meaning of 'move'.",
+          "suggestion": "{{element}} öğelerini taşımak"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Перемістити елементи {{element}}\" is too general. It doesn't accurately reflect the action of moving a *specific number* of elements. It should be \"Перемістити {{element}} елементів\" to match the English 'Move {{element}} elements'.",
-          "suggestion": "Перемістити {{element}} елементів"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -291,8 +303,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"thành phần\" (component) isn't the most natural translation for \"elements\" in this context (likely referring to file elements). \"Phần tử\" or \"đối tượng\" would be more appropriate.",
-          "suggestion": "Di chuyển {{element}} phần tử"
+          "description": "While technically correct, 'thành phần' is a more formal term for 'element' and might not be the most natural choice in a tooltip message. A more conversational and common word might be more appropriate.",
+          "suggestion": "Di chuyển {{element}} mục"
         }
       ],
       "approved_at": null

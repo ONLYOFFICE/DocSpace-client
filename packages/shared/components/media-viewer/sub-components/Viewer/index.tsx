@@ -77,7 +77,7 @@ export const Viewer = (props: ViewerProps) => {
     generateContextMenu,
   } = props;
 
-  const timerIDRef = useRef<NodeJS.Timeout>();
+  const timerIDRef = useRef<NodeJS.Timeout>(undefined);
 
   const [isPDFSidebarOpen, setIsPDFSidebarOpen] = useState<boolean>(false);
   const [panelVisible, setPanelVisible] = useState<boolean>(true);
@@ -197,7 +197,6 @@ export const Viewer = (props: ViewerProps) => {
 
   useEffect(() => {
     resetToolbarVisibleTimer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -37,8 +37,10 @@ import { TGroup } from "@docspace/shared/api/groups/types";
 import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
-} from "@docspace/shared/selectors/Files/FilesSelector.constants";
-import EditGroupStore from "SRC_DIR/store/EditGroupStore";
+} from "@docspace/shared/selectors/utils/constants";
+import { TUser } from "@docspace/shared/api/people/types";
+
+import EditGroupStore from "SRC_DIR/store/contacts/EditGroupStore";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import GroupNameParam from "./sub-components/GroupNameParam";
@@ -217,7 +219,9 @@ const EditGroupDialog = ({
                     withInfiniteLoader
                     total={currentTotal}
                     loadNextPage={loadMembers}
-                    hasNextPage={members ? members.length < currentTotal : null}
+                    hasNextPage={
+                      members ? members.length < currentTotal : false
+                    }
                   />
                 </>
               )
@@ -228,6 +232,7 @@ const EditGroupDialog = ({
         <ModalDialog.Footer>
           <Button
             id="edit-group-modal_submit"
+            testId="edit_group_save_button"
             tabIndex={5}
             label={t("Common:SaveButton")}
             size={ButtonSize.normal}
@@ -239,6 +244,7 @@ const EditGroupDialog = ({
           />
           <Button
             id="edit-group-modal_cancel"
+            testId="edit_group_cancel_button"
             tabIndex={5}
             label={t("Common:CancelButton")}
             size={ButtonSize.normal}
@@ -265,7 +271,7 @@ const EditGroupDialog = ({
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
           addMembers={(users) => {
-            addMembers(users);
+            addMembers(users as unknown as TUser[]);
             setSelectMembersPanelIsVisible(false);
           }}
         />

@@ -3,7 +3,7 @@
   "content": "Ready to fill out",
   "content_en_sha1_hash": "49288a5a196d7e8da840c21ce9572896f1dc613d",
   "created_at": "2025-05-19T21:30:47.733Z",
-  "updated_at": "2025-05-28T09:30:02.925Z",
+  "updated_at": "2025-10-13T14:41:03.179Z",
   "comment": {
     "text": "This translation key is used to display a label indicating readiness to interact with a form. It appears as a button in a file editing interface and serves as a placeholder for the actual file name or content when it's not yet filled out.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 273,
-      "context": "isEditing\n size={sizeBadge}\n iconName={iconForm}\n onClick={onFilesClick}\n themeId={ThemeId.IconButton}\n title={t(\"Common:ReadyToFillOut\")}\n hoverColor={theme.filesBadges.hoverIconColor}\n className=\"badge icons-group is-editing tablet-badge tablet-edit\"\n />\n )} */}",
+      "line_number": 304,
+      "context": "{/* {startFilling && (\n <IconButton\n size={sizeBadge}\n iconName={iconForm}\n onClick={onFilesClick}\n title={t(\"Common:ReadyToFillOut\")}\n hoverColor={accent}\n className=\"badge icons-group is-editing tablet-badge tablet-edit\"\n />\n )} */}",
       "module": "/packages/shared"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"جاهز للتعبئة\" (jahez lil ta'bi'ah) translates literally to 'ready for filling', it's not the most natural or common way to say \"Ready to fill out\" in Saudi Arabic. A more suitable translation would convey readiness for completion or completion of a form.",
-          "suggestion": "جاهز للتعمير (jahez lil ta'mir) - meaning 'ready for completion' or 'جاهز للإكمال (jahez lil ikmal) - meaning 'ready for completion'."
+          "description": "While 'جاهز للتعبئة' (jaahiz lil-ta'bi'ah) literally translates to 'ready for filling', it's not the most natural or idiomatic translation for 'Ready to fill out' in this context (presumably referring to a form or document). A more accurate and commonly used translation would be 'جاهز للتعبئة' (jaahiz lil-ta'bi'ah) or 'جاهز للإكمال' (jaahiz lil-ikmaal).",
+          "suggestion": "جاهز للتعبئة (jaahiz lil-ta'bi'ah) or جاهز للإكمال (jaahiz lil-ikmaal)"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Doldurmağa hazırdır\" is grammatically correct but doesn't perfectly capture the meaning of \"Ready to fill out.\" It translates more literally to \"Is ready to be filled.\"  A more natural and accurate translation would be closer to \"Doldurulmağa hazırdır\" or \"Boşalmağa hazırdır\".",
-          "suggestion": "Boşalmağa hazırdır"
+          "description": "The translation 'Doldurmağa hazırdır' is overly formal and doesn't quite capture the casual meaning of 'Ready to fill out'. It translates more closely to 'Is ready to be filled'.",
+          "suggestion": "Consider 'Doldurmağa hazırım' or 'Doldurmağa ehtiyat edirəm' for a more natural translation. A simpler 'Doldurmağa ehtiyat et' could also work depending on the context."
         }
       ],
       "approved_at": null
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Պատրաստ է լրացման' (Patrast e lracman) is a literal translation of 'Ready to fill out' but doesn't convey the intended meaning as naturally in Armenian. It sounds slightly awkward.",
+          "suggestion": "A more natural and idiomatic translation would be something like 'Լրացնելու համար պատրաստ' (Lracnelu hamar patrast) or 'Մատյան լցնելու համար պատրաստ' (Matyan lcnelu hamar patrast) depending on the context (e.g. for a form, 'Lracnelu hamar patrast' is better)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '今すぐ記入できる' (imasugu ki-nyuu dekiru) while generally meaning 'ready to fill out' or 'able to fill out now', is slightly more literal. A more natural and equivalent translation would be something like '記入可能です' (ki-nyuu kanou desu) or '記入できます' (ki-nyuu dekimasu). '今すぐ' (imasugu) - 'right now' adds a level of immediacy that might not be intended.",
-          "suggestion": "記入可能です (ki-nyuu kanou desu) or 記入できます (ki-nyuu dekimasu)"
+          "description": "The translation \"今すぐ記入できる\" (ima sugu ki jun dekiru) while technically meaning 'can be filled out now', doesn't quite capture the nuance of 'Ready to fill out'. It implies readiness *for* filling out, rather than the state of being ready.",
+          "suggestion": "Consider alternatives like \"記入可能\" (ki jun kanō - fillable/available for filling) or \"記入できます\" (ki jun dekimasu - can be filled out) for a more direct translation."
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"작성 준비 완료\" is understandable, it's a somewhat literal and formal translation. \"Ready to fill out\" implies a state of being prepared, which could be better conveyed with a more natural phrasing.",
-          "suggestion": "Consider alternatives like \"작성 가능\" (ready for writing) or \"작성할 준비 됐어요\" (I'm ready to fill it out). The best option depends on the context."
+          "description": "The translation \"작성 준비 완료\" (jaksyeong junbi wallyo) is a bit too literal and formal for 'Ready to fill out'. While technically correct, it doesn't convey the casual and action-oriented feel of the original.",
+          "suggestion": "Consider alternatives like \"작성 가능\" (jaksyeong ganeung - 'Ready for writing') or \"작성할 준비 됐어요\" (jaksyeonghal junbi dwaesseoyo - 'Ready to write').  The best option would depend on the specific context."
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ພ້ອມແລ້ວທີ່ຈະຕື່ມຂໍ້ມູນເຂົ້າໄປ\" is a literal translation and sounds overly formal and verbose for the simple English phrase \"Ready to fill out\". It's technically correct, but not natural.",
-          "suggestion": "Consider a more concise and natural translation like \"ກຽມຕື່ມຂໍ້ມູນ\" (Kieem toem khomun) or \"ສາມາດຕື່ມຂໍ້ມູນໄດ້\" (Samat toem khomun dai)."
+          "description": "The translation \"ພ້ອມແລ້ວທີ່ຈະຕື່ມຂໍ້ມູນເຂົ້າໄປ\" is a very literal translation of 'Ready to fill out'. While understandable, it's somewhat verbose and not the most natural way to express this in Lao. A more concise and natural translation would be better.",
+          "suggestion": "ພ້ອມຕື່ມຂໍ້ມູນ"
         }
       ],
       "approved_at": null
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කළු කිරීම සඳහා සුදානම්' literally translates to 'Ready for blackening/shading'. It doesn't accurately convey the meaning of 'Ready to fill out'. The intended meaning is likely 'Ready to be filled' or 'Fillable'.",
-          "suggestion": "සුදු කිරීම සඳහා සුදානම් (Ready to be filled)"
+          "description": "The Sinhala translation 'කළු කිරීම සඳහා සුදානම්' translates to 'Ready for marking/coloring'. It doesn't accurately convey the meaning of 'Ready to fill out' which implies readiness to complete a form or document with information.",
+          "suggestion": "A more accurate translation would be 'පුරවා ගැනීමේ හැකියාව' (purava genaemeya aviya) which means 'ready to be filled' or 'capable of being filled'."
         }
       ],
       "approved_at": null
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Спремни за попуњавање\" is understandable, a more natural and common translation of \"Ready to fill out\" in Serbian (Cyrillic) would be \"Готови за попуњавање\". \"Спремни\" implies readiness in a more general sense, while \"готови\" specifically implies completion or preparedness for a task.",
-          "suggestion": "Готови за попуњавање"
+          "description": "While \"Спремни за попуњавање\" is understandable, a more natural and idiomatic translation of \"Ready to fill out\" in Serbian (Cyrillic) would be \"Готово за попуњавање\" or \"Спољно за попуњавање\". \"Спремни\" implies readiness to do something, whereas \"готово\" or \"спољно\" better conveys the idea of being prepared or ready for someone else to fill it out.",
+          "suggestion": "Готово за попуњавање"
         }
       ],
       "approved_at": null

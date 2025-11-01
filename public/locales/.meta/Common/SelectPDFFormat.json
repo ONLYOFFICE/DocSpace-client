@@ -3,7 +3,7 @@
   "content": "Select .PDF file",
   "content_en_sha1_hash": "82630c35ad39df40c3e767ac55912619244898d8",
   "created_at": "2025-05-19T21:30:48.505Z",
-  "updated_at": "2025-05-28T09:30:02.127Z",
+  "updated_at": "2025-10-16T07:29:35.505Z",
   "comment": {
     "text": "This translation key is used to display the text \"Select .PDF file\" in a file selection dialog. It appears on a specific button when selecting a PDF file, and it's intended for users who need assistance understanding the purpose of the action.",
     "is_auto": true,
@@ -11,21 +11,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/FilesPanels/index.js",
-      "line_number": 203,
-      "context": "const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };\n \n return text[selectFileFormRoomFilterParam];\n }, [selectFileFormRoomFilterParam, t]);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/FilesPanels/index.js",
-      "line_number": 203,
-      "context": "const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };\n \n return text[selectFileFormRoomFilterParam];\n }, [selectFileFormRoomFilterParam, t]);",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 139,
-      "context": "if (isSelectingForm)\n return (\n <FilesSelector\n key=\"select-file-dialog\"\n filterParam={FilesSelectorFilterTypes.PDF}\n descriptionText={t(\"Common:SelectPDFFormat\")}\n isPanelVisible\n onSelectFile={onSelectForm}\n onClose={onCloseFormSelector}\n />\n );",
+      "line_number": 138,
+      "context": "if (isSelectingForm)\n return (\n <FilesSelector\n key=\"select-file-dialog\"\n filterParam=\"PDFTypes\"\n descriptionText={t(\"Common:SelectPDFFormat\")}\n isPanelVisible\n onSelectFile={onSelectForm}\n onClose={onCloseFormSelector}\n withRecentTreeFolder\n withFavoritesTreeFolder",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FilesPanels/index.js",
+      "line_number": 198,
+      "context": "const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };\n \n return text[selectFileFormRoomFilterParam];\n }, [selectFileFormRoomFilterParam, t]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FilesPanels/index.js",
+      "line_number": 198,
+      "context": "const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };\n \n return text[selectFileFormRoomFilterParam];\n }, [selectFileFormRoomFilterParam, t]);",
       "module": "/packages/client"
     }
   ],
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ընտրել .PDF ֆայլ' is a literal translation of 'Select .PDF file'. A more natural Armenian phrasing for user interface elements would be 'Choose .PDF file' or 'Select a .PDF file'.",
-          "suggestion": "Ընտրել .PDF ֆայլ (Choose .PDF file) or Արձակել .PDF ֆայլ (Select a .PDF file)"
+          "description": "The translation 'Ընտրել .PDF ֆայլ' is a literal translation of 'Select .PDF file'. A more natural and user-friendly translation would be something like 'Choose .PDF file' or 'Select a .PDF file'.",
+          "suggestion": "Ընտրել .PDF ֆայլ"
         }
       ],
       "approved_at": null
@@ -111,13 +111,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a polite request form (\"...てください\"). While not incorrect, it might be overly formal for a UI element like a file selection dialog. A more direct and concise phrasing could be preferable depending on the overall tone of the application.",
-          "suggestion": ".PDFファイルを選択"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເລືອກ​ເອກະສານ .PDF' translates to 'Select document .PDF'. While understandable, a more accurate translation for 'Select .PDF file' would be something like 'ເລືອກ​ເອກະສານ .PDF ທີ່ຕ້ອງການ' (Select desired .PDF document) or 'ເລືອກ​ໄຟລ໌ .PDF' (Select .PDF file).",
-          "suggestion": "ເລືອກ​ໄຟລ໌ .PDF"
+          "description": "The translation \"ເລືອກ​ເອກະສານ .PDF\" is a literal translation of 'Select .PDF file' and while understandable, it's not the most natural phrasing in Lao. A more idiomatic translation would be something like 'ເລືອກ​ເອກະສານ PDF' or 'ເລືອກ​ຟາຍ PDF'.",
+          "suggestion": "ເລືອກ​ຟາຍ PDF"
         }
       ],
       "approved_at": null
@@ -141,13 +135,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The period after 'Select' is missing in the Latvian translation.",
-          "suggestion": "Atlasīt .PDF fails"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +159,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a period (.) before 'PDF', which is acceptable but could be improved for consistency with the English version, which uses a space.",
-          "suggestion": "Selecione o arquivo .PDF -> Selecione o arquivo .PDF"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -186,8 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selectare fișier .PDF' is a literal translation but not the most natural way to say 'Select .PDF file' in Romanian. A more idiomatic translation would be something like 'Alegeți fișier .PDF' or 'Selectați fișier .PDF'.",
-          "suggestion": "Alegeți fișier .PDF"
+          "description": "The translation \"Selectare fișier .PDF\" is not the most natural or accurate translation of \"Select .PDF file\". \"Selectare\" implies a process or action of selecting, while \"Select\" is more direct and commonly used in UI contexts.",
+          "suggestion": "Selectați fișier .PDF"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, using a full stop after 'fișier' is unusual in Romanian UI text. It's more common to omit it.",
+          "suggestion": "Selectați fișier .PDF"
         }
       ],
       "approved_at": null
@@ -204,7 +191,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"PDF ගොනුව තෝදන්න\" is not the most natural or precise way to say \"Select .PDF file\" in Sinhala. While understandable, it is quite literal.",
+          "description": "The translation 'PDF ගොනුව තෝදන්න' while understandable, isn't the most natural or precise way to say 'Select .PDF file' in Sinhala. A more accurate and natural translation would be something like 'PDF ගොනුව තෝරා ගන්න'.",
           "suggestion": "PDF ගොනුව තෝරා ගන්න"
         }
       ],
@@ -216,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovak translation includes a space before the period in '.pdf'. It's more common to omit that space.",
+          "description": "The translation includes a space before the period in '.pdf'. It's more common and stylistically preferred to omit this space.",
           "suggestion": "Vyberte súbor vo formáte .pdf"
         }
       ],
@@ -234,7 +221,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes a space before the period in '.PDF'. It's more standard to have no space.",
+          "description": "The period after 'Select' is missing in the Serbian translation.",
           "suggestion": "Изаберите .PDF датотеку"
         }
       ],
@@ -246,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation includes a period (.) after the file extension, which isn't standard in this context. It should match the English format.",
-          "suggestion": "Izaberite PDF datoteku"
+          "description": "The Serbian translation uses 'datoteku' which is a feminine noun. It would be more natural to use the masculine form 'datoteke' to agree with the implied plural 'files'. While technically correct, it reads slightly less naturally.",
+          "suggestion": "Izaberite .PDF datoteke"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2025-07-10T11:11:06.841Z",
+  "updated_at": "2025-10-07T15:39:07.462Z",
   "comment": {
     "text": "The \"SelectDate\" translation key is used to display a label for date selection in various UI components, including a toggle block and a filter dialog. Its purpose is to provide users with clear instructions on how to select a date in these interfaces. It appears as part of the labels for date pickers and edit link panels.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/panels/EditLinkPanel/LimitTimeBlock.js",
-      "line_number": 82,
-      "context": "onChange={onChange}\n minDate={minDate}\n openDate={new Date()}\n hasError={isExpired}\n locale={language}\n selectDateText={t(\"Common:SelectDate\")}\n />\n </ToggleBlock>\n );\n };",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 260,
-      "context": ") : (\n <DatePicker\n outerDate={filters.deliveryDate}\n isMobile={isMobile()}\n onChange={onDateSet}\n selectDateText={t(\"Common:SelectDate\")}\n showCalendarIcon={false}\n locale={i18n.language}\n />\n )}\n {filters.deliveryDate !== null && isDefaultTime ? (",
+      "line_number": 261,
+      "context": ") : (\n <DatePicker\n outerDate={filters.deliveryDate}\n isMobile={isMobile()}\n onChange={onDateSet}\n selectDateText={t(\"Common:SelectDate\")}\n showCalendarIcon={false}\n locale={i18n.language}\n dataTestId=\"delivery_date_picker\"\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 264,
-      "context": "components={{\n 1: (\n <DatePicker\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
+      "line_number": 507,
+      "context": "key=\"start-date-picker\"\n initialDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n minDate={undefined}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 264,
-      "context": "components={{\n 1: (\n <DatePicker\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
+      "line_number": 507,
+      "context": "key=\"start-date-picker\"\n initialDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n minDate={undefined}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/LimitTimeBlock.tsx",
+      "line_number": 88,
+      "context": "hasError={isExpired}\n onChange={onChange}\n openDate={new Date()}\n initialDate={expirationDate}\n className=\"public-room_date-picker\"\n selectDateText={t(\"Common:SelectDate\")}\n dataTestId=\"edit_link_panel_date_time_picker\"\n />\n </ToggleBlock>\n );\n };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

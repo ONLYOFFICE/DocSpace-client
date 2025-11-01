@@ -3,7 +3,7 @@
   "content": "Creating new {{productName}}",
   "content_en_sha1_hash": "6800e874c8389a8afa1f9a17980218305df15b76",
   "created_at": "2025-05-19T21:30:57.420Z",
-  "updated_at": "2025-05-20T09:48:01.328Z",
+  "updated_at": "2025-08-12T19:46:26.415Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Creating new {{productName}}\" in a modal dialog, likely as part of a button or header, inviting users to create a new portal. The phrase includes placeholders for specific product names, which can be translated individually.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/CreatePortalDialog/index.tsx",
-      "line_number": 166,
-      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>\n {t(\"CreateSpaceDescription\", {",
+      "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
+      "line_number": 179,
+      "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"CreateSpaceDescription\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/management"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yeni {{productName}} yaradılır' (New {{productName}} is created) doesn't fully capture the meaning of \"Creating new {{productName}}\". It describes the result of creation, not the action of creating.",
+          "suggestion": "Consider '{{productName}} yeni yaradılır' or 'Yeni {{productName}} düzəldilir' (New {{productName}} is built/configured). Alternatively, '{{productName}} yaratma' would be more literal, but might sound unnatural depending on the overall context."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Vytvoření' is grammatically correct, 'prostor' (space) doesn't fully capture the meaning of 'Creating new {{productName}}'. It implies a physical space rather than a portal or platform.",
+          "suggestion": "Consider alternatives like 'Vytvoření nového portálu {{productName}}' (Creating new portal {{productName}}), 'Zřízení nového {{productName}}' (Establishing new {{productName}}), or 'Vznik nového {{productName}}' (Creation of new {{productName}}), depending on the specific context of 'portal'."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ստեղծվում է նոր {{productName}}\" translates to \"A new {{productName}} is being created\". It's a passive voice construction, whereas the English original implies an action being taken. A more direct and active translation would be better.",
+          "suggestion": "Նոր {{productName}} ստեղծվում է"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +117,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"새 {{productName}} 생성 중\" literally translates to 'Creating new {{productName}} in progress'. While understandable, a more natural and common phrasing would be \"새 {{productName}}을 생성합니다\" (creating a new {{productName}}) or \"새 {{productName}} 생성\" (new {{productName}} creation).  The '-중' suffix implies an ongoing process which might not be the intended meaning depending on the context.",
+          "suggestion": "새 {{productName}}을 생성합니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Jauna {{productName}} izveide\" is a literal translation and while understandable, a more natural phrasing in Latvian would be \"{{productName}} radīšana\" or \"{{productName}} veidošana\". 'Izveide' implies a process of creation that isn't necessarily the best fit.",
+          "suggestion": "{{productName}} radīšana"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,7 +153,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tworzenie nowego obszaru {{productName}}\" is not the most natural or accurate translation of \"Creating new {{productName}}\". 'Obszaru' implies an area or region, which might not be the intended meaning. 'Tworzenie nowego {{productName}}' is a more direct and understandable translation.",
+          "suggestion": "Tworzenie nowego {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Crearea spațiului nou {{productName}}' is not the most natural or accurate translation of 'Creating new {{productName}}'. 'Crearea' means 'creation' which is a bit literal. A more natural translation would be something along the lines of 'Crearea unui nou {{productName}}' or 'Crearea {{productName}} nou'.",
+          "suggestion": "Crearea unui nou {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +195,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'නව {{productName}} නිර්මාණය කිරීම' is understandable, a more natural and accurate translation would be '{{productName}} සාදා ගැනීම' or '{{productName}} පද්ධතියක් සාදා ගැනීම'. 'නිර්මාණය කිරීම' implies a more complex creation process than likely intended.",
+          "suggestion": "{{productName}} සාදා ගැනීම"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Vytvorenie nového priestoru {{productName}}\" translates to \"Creation of a new space {{productName}}\". While not entirely wrong, it doesn't capture the nuance of 'Creating new'. A more direct translation closer to the original meaning would be beneficial.",
+          "suggestion": "Vytváranie nového {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,13 +225,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation adds a genitive suffix '-а' to '{{productName}}'. This is grammatically correct only if 'productName' is a masculine noun. It needs to be verified if 'productName' is feminine or neuter, in which case the suffix would change.",
+          "suggestion": "Verify the gender of 'productName' and adjust the suffix accordingly (e.g., '-е' for feminine, '-о' for neuter)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation includes an unnecessary suffix '-a' at the end of 'productName'. While grammatically not incorrect, it's often omitted in modern Serbian, especially in UI contexts.",
+          "suggestion": "Kreiranje novog {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +255,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Creating new {{productName}}' implies an action of creation. 'Створення нового простору {{productName}}' literally translates to 'Creation of a new space {{productName}}'. While not entirely wrong, it's less active and less aligned with the original intention of the English phrase, which suggests the *process* of creating, not just the creation itself.  A more natural translation might emphasize the action of creating.",
+          "suggestion": "Розробка нового простору {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

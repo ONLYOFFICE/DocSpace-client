@@ -3,7 +3,7 @@
   "content": "Files copied to «{{folderTitle}}»",
   "content_en_sha1_hash": "efc9d1eb35c4eee0ddc64e6c32501869b672aac8",
   "created_at": "2025-05-19T21:30:54.796Z",
-  "updated_at": "2025-05-28T09:30:02.426Z",
+  "updated_at": "2025-08-04T07:30:01.222Z",
   "comment": {
     "text": "This translation key displays a message indicating that files have been successfully copied to a parent folder. It is used in a UI element, likely a notification or confirmation message, and appears when a user copies a file within a hierarchical structure, such as a directory or folder.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 86,
+      "context": "return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 74,
-      "context": "count,\n });\n return t(\"InfoPanel:FileMovedToTrash\");\n case \"FileCopied\":\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
+      "line_number": 80,
+      "context": "return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
       "module": "/packages/client"
     }
   ],
@@ -33,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The placement of the placeholder «{{folderTitle}}» appears correct, maintaining consistency with the English version.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -42,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Файлът е копиран в «{{folderTitle}}»' uses the singular form 'Файлът' (The file) instead of the plural form 'Файловете' (The files). The English text refers to multiple files.",
+          "description": "The translation \"Файлът е копиран в «{{folderTitle}}»\" literally translates to \"The file has been copied to...\" but the English says \"Files copied to...\" indicating multiple files. The Bulgarian translation should be in the plural form.",
           "suggestion": "Файловете са копирани в «{{folderTitle}}»"
         }
       ],
@@ -78,13 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Files copied to\" should be translated more accurately to reflect the action of moving files. \"Siirretty\" implies movement, which is more accurate in this context, but \"kopioitu\" would be closer to 'copied'.",
-          "suggestion": "Tiedostot siirretty/kopioitu «{{folderTitle}}»-kansioon"
+          "description": "The word 'siirretty' (moved) doesn't quite capture the meaning of 'copied'. 'Copied' implies a duplicate, whereas 'moved' suggests relocation. A better translation would emphasize the creation of a copy.",
+          "suggestion": "Tiedostot kopioitu «{{folderTitle}}»-kansioon"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the wording \"-kansioon\" is slightly clunky. A more natural Finnish phrasing might omit the hyphen.",
-          "suggestion": "Tiedostot siirretty/kopioitu «{{folderTitle}}» kansioon"
+          "description": "The placement of the hyphen in 'kansioon' is a matter of stylistic preference, but adding a hyphen can improve readability in some contexts.  Consistency with other localized content is key.",
+          "suggestion": "Tiedostot kopioitu «{{folderTitle}}»-kansioon"
         }
       ],
       "approved_at": null
@@ -107,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The translation uses the plural 'File' (Files) when the English uses the plural 'Files'.  It should reflect that the original is plural.",
-          "suggestion": "File copiati nella cartella «{{folderTitle}}» should be changed to 'Files copiati nella cartella «{{folderTitle}}»"
+          "description": "The translation uses the plural form 'File' (Files) when the English uses the plural 'Files'. It should match the English plural form.",
+          "suggestion": "Archivi copiati nella cartella «{{folderTitle}}»"
         }
       ],
       "approved_at": null
@@ -122,7 +134,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses '폴더로' which implies 'to folder'. It might be more natural to use '폴더에' which implies 'in folder' or '폴더로 이동되었습니다' (moved to folder).",
+          "suggestion": "파일이 «{{folderTitle}}»폴더에 복사되었습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -131,8 +149,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'copied' is better translated as 'ຍ້າຍ' (yai) rather than 'ສໍາເນົາ' (sam nao) in this context. 'ສໍາເນົາ' implies duplication, while 'ຍ້າຍ' implies moving.",
-          "suggestion": "ເອກະສານຖືກຍ້າຍສູ່ «{{folderTitle}}»"
+          "description": "The translation \"ເອກະສານຖືກສໍາເນົາສູ່ «{{folderTitle}}»\" is a literal translation of 'Files copied to'. While understandable, a more natural Lao phrasing might be preferable.  'ເອກະສານຖືກສໍາເນົາສູ່' translates to 'Documents were copied to'.  A better translation could emphasize the completion of the copy operation.",
+          "suggestion": "ເອກະສານຖືກສໍາເນົາສູ່ «{{folderTitle}}» ຢ່າງສໍາເລັດແລ້ວ"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ຢ່າງ' has a slight spelling variation depending on the dialect. While 'ຢ່າງ' is generally accepted, consider the intended audience.",
+          "suggestion": "No change needed if 'ຢ່າງ' is the preferred spelling for the target dialect."
         }
       ],
       "approved_at": null
@@ -152,13 +175,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Polish translation uses 'katalogu' which implies 'of the directory'.  The English uses a more general 'folder'.  While technically correct, 'katalogu' is slightly more formal/technical than the intended user experience. Consider a simpler term.",
-          "suggestion": "Pliki zostały skopiowane do «{{folderTitle}}»"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -191,7 +208,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොනු «{{folderTitle}}» වෙත පිටපත් කරන ලදී' is a literal translation and sounds unnatural in Sinhala. A more natural phrasing would be 'ගොනු «{{folderTitle}}» ෆෝල්ඩරයට පිටපත් කරන ලදී' or 'ගොනු «{{folderTitle}}» ෆෝල්ඩරයට යවා ඇත'.",
+          "description": "The translation \"ගොනු «{{folderTitle}}» වෙත පිටපත් කරන ලදී\" is a literal translation and doesn't quite convey the natural flow of the English phrase.  A more natural Sinhala phrasing would be preferable.",
           "suggestion": "ගොනු «{{folderTitle}}» ෆෝල්ඩරයට පිටපත් කරන ලදී"
         }
       ],
@@ -209,7 +226,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Datoteka kopirana v' is more accurately 'Datoteke kopirane v' to match the plural 'Files'.",
+          "description": "The translation 'Datoteka kopirana v' literally translates to 'File copied to'. While understandable, it would be more natural and grammatically correct to use the plural form 'Datoteke kopirane v' since 'Files' (plural) is the original English word. This creates a better flow in Slovenian.",
           "suggestion": "Datoteke kopirane v"
         }
       ],
@@ -221,13 +238,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Датотеке копиране у «{{folderTitle}}»' is not grammatically correct and doesn't accurately convey the meaning of 'Files copied to'. The verb 'copy' is in the present tense and sounds unnatural in this context.",
-          "suggestion": "Фaјлови копирани у «{{folderTitle}}»"
+          "description": "The Serbian translation \"Датотеке копиране у «{{folderTitle}}»\" is not grammatically correct and doesn't accurately convey the meaning of \"Files copied to\". The verb conjugation is incorrect, and the preposition 'у' isn't appropriate in this context. It implies 'into', rather than 'to'.",
+          "suggestion": "Датотеке су копиране у «{{folderTitle}}»"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure is awkward. 'Датотеке копиране' sounds like a noun phrase instead of an action.",
-          "suggestion": "Фaјлови копирани у «{{folderTitle}}»"
+          "description": "The use of 'су копиране' is awkward. A more natural way to express that files were copied is to use a past tense form.",
+          "suggestion": "Датотеке премештене у «{{folderTitle}}»"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the sentence can be interpreted, it is not a natural Serbian expression and doesn't capture the intended meaning of 'copied to'.",
+          "suggestion": "Датотеке премештене у «{{folderTitle}}»"
         }
       ],
       "approved_at": null

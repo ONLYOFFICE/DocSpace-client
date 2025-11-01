@@ -3,7 +3,7 @@
   "content": "The previous link will become unavailable. A new shared link will be created.",
   "content_en_sha1_hash": "126e609ac5db4aaad297d7da944fb8e0cc5a2767",
   "created_at": "2025-05-19T21:30:55.435Z",
-  "updated_at": "2025-07-10T11:11:06.820Z",
+  "updated_at": "2025-10-13T14:41:02.806Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that will be displayed to users when they delete a shared link. The message informs users that the previous link will become unavailable after deletion and a new one will be created. It appears in a dialog box context.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 146,
-      "context": "}\n \n if (isPublicRoomType || isCustomRoom)\n return t(\"Files:DeleteSharedCustomPublic\");\n \n return t(\"Files:DeleteSharedLink\");\n };\n \n console.debug({\n primary: link.sharedTo.primary,\n isPublicRoomType,",
+      "line_number": 111,
+      "context": "}\n \n if (isPublicRoomType || isCustomRoom)\n return t(\"Files:DeleteSharedCustomPublic\");\n \n return t(\"Files:DeleteSharedLink\");\n };\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>",
       "module": "/packages/client"
     }
   ],

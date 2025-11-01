@@ -3,7 +3,7 @@
   "content": "Upload a ready PDF form to the room from your device.",
   "content_en_sha1_hash": "922cf3023c5789a82845f3b3593e0386d2421b27",
   "created_at": "2025-05-19T21:30:56.548Z",
-  "updated_at": "2025-05-28T09:30:02.115Z",
+  "updated_at": "2025-10-13T13:22:35.618Z",
   "comment": {
     "text": "This translation key is used for the \"Upload a ready PDF form to the room from your device\" option in a files selector filter, likely appearing as a button or dialog title.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 216,
-      "context": "FilesSelectorFilterTypes.ALL,\n );\n \n const uploadFromDevicePDF = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDevicePDFFormOptionTitle\"),\n t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUser = createInviteOption(\n t(\"Common:InviteContacts\"),",
+      "line_number": 223,
+      "context": "FilesSelectorFilterTypes.ALL,\n );\n \n const uploadFromDevicePDF = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDevicePDFFormOptionTitle\"),\n t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(\n t(\"Common:InviteContacts\"),",
       "module": "/packages/client"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'otağa' (to the room) might be too literal. A more natural phrasing might be something like 'o İnformasiya sisteminə' (to the information system) or similar, depending on the specific context of where the PDF form is uploaded.",
+          "suggestion": "Consider revising 'otağa' to a more contextually appropriate term, such as 'İnformasiya sisteminə' or similar."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cargue un formulario PDF listo a la sala desde su dispositivo' is not the most natural or precise translation. 'A la sala' isn't the best way to indicate uploading *to* a room. A more accurate and natural phrasing would use a preposition that conveys the destination.",
+          "suggestion": "Cargue un formulario PDF listo en la sala desde su dispositivo."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,7 +93,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Վերբեռնեք պատրաստի PDF ձևը սենյակ ձեր սարքից:\" literally translates to 'Upload a ready PDF form to the room from your device:'. The word 'room' (սենյակ) is likely incorrect in this context. It should reflect the destination of the PDF upload within the application, not a physical room.",
+          "suggestion": "Consider a more contextually relevant word for 'room'. For example, if it's uploaded to a specific project or space, reflect that. A placeholder might be 'Վերբեռնեք պատրաստի PDF ձևը ձեր սարքից: (context)'"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically grammatically correct, the phrase 'սենյակ ձեր սարքից' sounds slightly awkward. The word order could be improved for better flow.",
+          "suggestion": "Consider rephrasing to 'ձեր սարքից սենյակ' or similar. A more natural phrasing would depend on the overall tone and style of the app."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +116,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"お使いのデバイスから\" (o-tsukai no debaisu kara) literally translates to \"from your device\". While understandable, it's slightly awkward. A more natural phrasing would be \"デバイスから\" (debaisu kara) or \"お客様のデバイスから\" (okyaku-sama no debaisu kara) for a more formal tone.",
+          "suggestion": "デバイスからルームにPDFフォームをアップロードする。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -135,13 +164,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Carregue um formulário PDF pronto para a sala a partir do seu dispositivo' is technically correct but lacks the nuance of the English 'Upload a ready PDF form *to* the room'. The preposition 'to' implies destination.",
+          "suggestion": "Carregue um formulário PDF pronto para a sala do seu dispositivo."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Încărcați un formular PDF pregătit în sala de pe dispozitivul dvs.' is a literal translation and sounds slightly awkward. A more natural phrasing would be something like 'Încărcați un formular PDF pregătit de pe dispozitivul dumneavoastră în cameră.' or 'Încărcați un formular PDF pregătit de pe dispozitiv în cameră.'",
+          "suggestion": "Încărcați un formular PDF pregătit de pe dispozitivul dumneavoastră în cameră."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +194,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබේ උපකරණයෙන් සූදානම් PDF ආකෘතියක් කාමරයට උඩුගත කරන්න' while understandable, is slightly awkward. 'සූදානම්' (sūdānama) means 'ready' but feels a bit too literal in this context. It would be more natural to convey the sense of a pre-filled or prepared PDF form.",
+          "suggestion": "ඔබේ උපකරණයෙන් පුරවාගත් PDF ආකෘතියක් කාමරයට උඩුගත කරන්න."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'කාමරයට' (kāmarayaṭa) translates to 'to the room'. While accurate, consider if 'dalam' (dalam) 'within' might be more appropriate depending on the application. It depends on the context. If it's uploading *into* a specific area or portal, 'dalam' might be better.",
+          "suggestion": "Consider if 'dalam' (dalam) would be more appropriate."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +223,23 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'спреман' (spreman) which translates to 'ready' in this context, might not be the most natural or clear way to convey the meaning of 'ready PDF form'. It implies the form is already prepared, but it might be better to convey the idea that the user can upload *any* PDF form.",
+          "suggestion": "Уколико је могуће, замените 'спреман' са 'одговарајући' или 'готови' (gotovi) - meaning 'suitable' or 'finished' respectively. Otherwise, 'PDF формулар' is acceptable."
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'Отпремите' (Otpemite) could be more naturally expressed as 'Уплоад-ујте' (Upload-ujte) or 'Пошаљите' (Posaljite). 'Отпремите' is less common in this context.",
+          "suggestion": "Замените 'Отпремите' са 'Уплоад-ујте' или 'Пошаљите'."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure is a bit stiff. Flow could be improved.",
+          "suggestion": "Разумије се да је то мањи проблем, али можда би се могло преформулисати у нешто попут: 'Пошаљите PDF формулар са свог уређаја у просторију'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,19 +257,37 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Передайте готову PDF-форму до кімнати зі свого пристрою' implies 'transmit' or 'send' instead of 'upload'. 'Upload' is the more accurate term in this context.",
+          "suggestion": "Завантажте готову PDF-форму до кімнати зі свого пристрою"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tải biểu mẫu PDF đã sẵn sàng lên phòng từ thiết bị của bạn' is not the most natural way to express the English meaning. 'Lên phòng' sounds awkward. A more idiomatic translation would use a word that implies uploading or adding to the room's resources.",
+          "suggestion": "Tải biểu mẫu PDF đã sẵn sàng lên phòng từ thiết bị của bạn -> Tải biểu mẫu PDF đã sẵn sàng vào phòng từ thiết bị của bạn."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '从您的设备将准备好的 PDF 表单上传到房间' is not the most natural or accurate rendering of 'Upload a ready PDF form to the room from your device'. The phrasing '将...上传到房间' is a bit clunky. A more fluent translation would place the action ('uploading') closer to the subject ('form').",
+          "suggestion": "从您的设备上传已准备好的 PDF 表单到房间。"
+        }
+      ],
       "approved_at": null
     }
   }

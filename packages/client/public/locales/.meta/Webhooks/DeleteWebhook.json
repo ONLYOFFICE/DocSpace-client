@@ -3,7 +3,7 @@
   "content": "Delete webhook",
   "content_en_sha1_hash": "1d387ca0c456960cba27386fd37fb23f3da6e285",
   "created_at": "2025-05-19T21:30:49.683Z",
-  "updated_at": "2025-06-18T07:34:15.128Z",
+  "updated_at": "2025-08-04T07:30:01.473Z",
   "comment": {
     "text": "The translation key \"DeleteWebhook\" is used to display the text \"Delete webhook\" in various UI elements, such as dropdown menus and buttons, where users can delete webhooks. This text is likely used in settings pages or configuration interfaces.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhooksTableRow.js",
-      "line_number": 149,
-      "context": "key: \"Separator dropdownItem\",\n isSeparator: true,\n },\n {\n key: \"Delete webhook dropdownItem\",\n label: t(\"DeleteWebhook\"),\n icon: DeleteIcon,\n onClick: onDeleteOpen,\n },\n ];",
+      "line_number": 151,
+      "context": "key: \"Separator dropdownItem\",\n isSeparator: true,\n },\n {\n key: \"Delete webhook dropdownItem\",\n label: t(\"DeleteWebhook\"),\n icon: DeleteIcon,\n onClick: onDeleteOpen,\n dataTestId: \"webhook_delete_item\",\n },\n ];",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Azerbaijani translation \"Webhooku silin\" uses the accusative case ('-ı') directly after 'Webhook'. While understandable, a more natural and grammatically precise phrasing would be to use the definite object marker and a more common verb form.",
-          "suggestion": "Webhook silinsin"
+          "description": "The Azerbaijani translation \"Webhooku silin\" lacks proper agreement. 'Webhook' is masculine, so the verb should reflect that.",
+          "suggestion": "Webhooku sil"
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Изтрий уеб кука' is a literal translation, it's not the most natural or accurate way to say 'Delete webhook' in Bulgarian. 'Уеб кука' is acceptable, but 'уебхук' (webhook) is the more common and preferred term.",
-          "suggestion": "Изтрий уебхук"
+          "description": "While \"Изтрий уеб кука\" is a literal translation of 'Delete webhook', the term 'уеб кука' is not standard Bulgarian terminology for 'webhook'. A more accurate and understandable translation would be 'Изтриване на уебхук' or 'Премахване на уебхук'.",
+          "suggestion": "Изтриване на уебхук"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Izdzēst tīmekļa aizķeri' is not an accurate translation of 'Delete webhook'. 'Tīmekļa aizķeri' translates to 'web blockage' or 'web jam', not 'webhook'.",
-          "suggestion": "Izdzēst tīmekļa atbalstu"
+          "description": "The translation 'Izdzēst tīmekļa aizķeri' is not an accurate translation of 'Delete webhook'. 'Tīmekļa aizķeri' translates to 'web snag' or 'web obstruction' rather than 'webhook'.",
+          "suggestion": "Izdzēst tīmekļa funkciju"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ștergere webhook' is a literal translation and might not be the most natural Romanian phrasing. 'Ștergere' is correct, but 'webhook' is often left as is or translated to a more descriptive term depending on context.",
-          "suggestion": "Consider 'Șterge webhook' or 'Eliminare webhook' for a more natural flow. The best option depends on the surrounding text and target audience."
+          "description": "While 'Ștergere webhook' is understandable, a more natural and accurate translation of 'Delete webhook' would be 'Șterge webhook'. The use of 'ștergere' implies an action of deleting, rather than the command to delete.",
+          "suggestion": "Șterge webhook"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"webhook මකන්න\" while understandable, is a more literal translation of 'delete' as 'erase' or 'remove'. A more natural translation of 'delete' in this context might be closer to 'ඉක්මිටාන්න' (ikmitaanna) or 'හරවා දාන්න' (harava daanna).",
-          "suggestion": "Consider 'ඉක්මිටාන්න' (ikmitaanna) or 'හරවා දාන්න' (harava daanna) for a more natural rendering of 'delete'."
+          "description": "The translation 'webhook මකන්න' while understandable, is a more literal translation of 'delete' as 'erase' or 'remove'. A more natural and common way to say 'delete' in Sinhala in this context would be 'හෝඳ මකන්න' or 'හෝඳ අයින් කරන්න'.",
+          "suggestion": "හෝඳ මකන්න"
         }
       ],
       "approved_at": null
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Обриши webhook' uses 'Обриши' which implies 'erase' or 'wipe', while 'Delete' is a more accurate and professional term for removing a webhook. 'Избриши' is a more appropriate verb to indicate deletion.",
+          "description": "The translation 'Обриши webhook' uses the verb 'Обриши' (obriši) which translates to 'delete' in an informal, almost aggressive way. A more appropriate and professional translation would use a verb that conveys the action of removal or deletion in a more neutral tone.",
           "suggestion": "Избриши webhook"
         }
       ],
@@ -219,7 +219,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Obriši' is missing an accent. The correct spelling is 'Obriši'.",
+          "suggestion": "Obriši"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

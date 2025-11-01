@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
-import ImageReactSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
+import ImageReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg?url";
 import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import { ReactSVG } from "react-svg";
 import { FileTile } from "../file-tile/FileTile";
@@ -87,7 +87,7 @@ const mockContextOptions = [
   { key: "delete", label: "Delete" },
 ];
 
-const Template: Story<TileContainerProps> = (args) => {
+const Template: StoryFn<TileContainerProps> = (args) => {
   return (
     <TileContainer {...args}>
       {mockFiles.map((file) => (

@@ -3,7 +3,7 @@
   "content": "Last modified date",
   "content_en_sha1_hash": "db142287f88a07da18a28455cfab95c90749ca33",
   "created_at": "2025-05-19T21:30:46.056Z",
-  "updated_at": "2025-07-01T15:57:36.078Z",
+  "updated_at": "2025-10-13T13:22:35.695Z",
   "comment": {
     "text": "The translation key \"LastModifiedDate\" refers to a date field that displays the last modified date of a file or item. It is used in sorting and filtering contexts to allow users to sort results by this field. This label appears in various UI elements such as filters, sorting menus, and data tables.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1159,
+      "line_number": 1285,
       "context": "default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastModifiedDate\"),\n default: true,\n };\n const activityDate = {\n id: \"sort-by_activity\",\n key: SortByFieldName.ModifiedDate,",
       "module": "/packages/client"
     },
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Modifikováno' is too literal and doesn't accurately convey the meaning of 'Last modified date'. It simply means 'Modified'. It lacks the context of a date.",
-          "suggestion": "Poslední změna data"
+          "description": "The Czech translation \"Modifikováno\" while technically meaning 'modified', doesn't accurately convey the full meaning of \"Last modified date\". It's missing the 'date' component. A more accurate translation would include the concept of 'date'.",
+          "suggestion": "Datum poslední modifikace"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation \"Modifié\" translates to \"Modified\" and doesn't convey the full meaning of \"Last modified date\". It's missing the \"date\" component.",
-          "suggestion": "A more accurate translation would be something like \"Date de dernière modification\" or \"Dernière date de modification\"."
+          "description": "The French translation \"Modifié\" is incomplete and doesn't accurately represent the English phrase \"Last modified date\". It only translates \"Modified\".",
+          "suggestion": "Date de dernière modification"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"変更日\" while generally understood as 'change date,' doesn't directly convey the meaning of 'last modified date.' A more accurate translation would emphasize the date of the most recent modification.",
-          "suggestion": "最終更新日 (Saishū kōshinbi) - This translates to 'last updated date' and is a more precise equivalent. Alternatively, 最終変更日 (Saishū henkōbi) could be used."
+          "description": "While '変更日' (henkoubi) is a reasonable translation for 'Last modified date', it lacks the specificity implied by the English. 'Last modified date' directly refers to the date of the last change, whereas '変更日' is a more general 'change date'.",
+          "suggestion": "Consider a more precise translation such as \"最終更新日\" (saishuu koushinbi) which directly translates to 'last updated date'."
         }
       ],
       "approved_at": null
@@ -192,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Modifikované' translates to 'Modified' and does not accurately convey the meaning of 'Last modified date'. It's missing the 'last' and 'date' components.",
+          "description": "The Slovak translation \"Modifikované\" is incomplete and doesn't accurately convey the meaning of \"Last modified date\". It only translates to \"Modified\".",
           "suggestion": "Dátum poslednej modifikácie"
         }
       ],
@@ -207,13 +207,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Датум последње измене\" is understandable, a more natural and accurate translation of \"Last modified date\" in Serbian (Cyrillic) would be \"Datum poslednje izmene\" or \"Datum poslednje modifikacije\". The current translation uses 'измене' which implies changes, while 'modifikacije' is closer to modification.",
-          "suggestion": "Datum poslednje izmene"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

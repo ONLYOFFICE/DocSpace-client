@@ -3,7 +3,7 @@
   "content": "Back to room",
   "content_en_sha1_hash": "05b5ad942bc5883b0e92e79a35cf1ad9a6740b9d",
   "created_at": "2025-05-19T21:30:57.150Z",
-  "updated_at": "2025-05-28T09:30:02.869Z",
+  "updated_at": "2025-08-12T19:46:26.307Z",
   "comment": {
     "text": "The translation key \"BackToRoom\" is used to display the phrase \"Back to room\" as a button label in the Completed Form component. It appears when the user wants to return to their room on a completed form.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 221,
-      "context": "/>\n {(!isShareFile || isRoomMember) && !isSDK && (\n <Button\n scale\n size={ButtonSize.medium}\n label={t(\"CompletedForm:BackToRoom\")}\n onClick={handleBackToRoom}\n />\n )}\n </ButtonWrapper>\n <Link",
+      "line_number": 233,
+      "context": "/>\n {(!isShareFile || isRoomMember) && !isSDK ? (\n <Button\n scale\n size={ButtonSize.medium}\n label={t(\"CompletedForm:BackToRoom\")}\n onClick={handleBackToRoom}\n testId=\"back_to_room_button\"\n />\n ) : null}\n </ButtonWrapper>",
       "module": "/packages/doceditor"
     }
   ],
@@ -81,13 +81,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Լրացնել կրկին' translates to 'Fill again'. This doesn't accurately convey the meaning of 'Back to room', which implies returning to a previously occupied room.",
+          "suggestion": "A more accurate translation would be something like 'Ջնջելու համար' (To erase/reset) or 'Վերադարձ դեպի սենյակ' (Return to room) depending on the desired nuance."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'Compilalo di nuovo' translates to 'Fill it out again' or 'Submit it again'. This doesn't accurately convey the meaning of 'Back to room'.",
+          "suggestion": "A more accurate translation would be 'Ritorna alla stanza' or 'Indietro alla stanza'."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Completaţi-l încă o dată' translates to 'Complete it once more'. This does not accurately reflect the English phrase 'Back to room', which implies returning to a room.",
+          "suggestion": "Întoarcere în cameră"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Назад у просторију' is a literal translation but doesn't fully convey the intended meaning of 'Back to room' in a user interface context. It sounds slightly awkward and formal.",
+          "suggestion": "Возврати у собу (Vratiti u sobu) - This is a more natural and common way to say 'Back to room' in a UI context."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +219,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Quay lại Phòng\" is a very literal translation and sounds somewhat unnatural in Vietnamese. A more natural phrasing would depend on the context (e.g., returning to a hotel room, returning to a specific room).",
+          "suggestion": "Consider alternatives like \"Trở lại phòng\" or \"Về phòng\" depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

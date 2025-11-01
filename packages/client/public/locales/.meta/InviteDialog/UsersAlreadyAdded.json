@@ -3,7 +3,7 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2025-06-18T07:34:14.859Z",
+  "updated_at": "2025-08-11T09:02:43.853Z",
   "comment": {
     "text": "\"This translation key is used to display a message when a user has already been added to a group or panel, indicating that they cannot be added again. It appears in warning notifications and dialog boxes, typically triggered by actions such as adding users to a group or editing invite panels.\"",
     "is_auto": true,
@@ -12,38 +12,38 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
-      "line_number": 115,
+      "line_number": 116,
       "context": "}\n resultGroupMembers.push(groupMember);\n });\n \n if (showErrorWasSelected) {\n toastr.warning(t(\"InviteDialog:UsersAlreadyAdded\"));\n }\n \n setGroupMembers(resultGroupMembers);\n onHideSelectMembersPanel();\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 402,
+      "line_number": 403,
       "context": "isUnique && unique.push(current);\n \n return unique;\n }, []);\n \n if (items.length > filtered.length) toastr.warning(t(\"UsersAlreadyAdded\"));\n \n return filtered;\n };\n \n const bodyInvitePanel = useMemo(() => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 341,
+      "line_number": 348,
       "context": "const addUser = () => {\n if (isDisabled) {\n toastr.warning(t(\"UsersCannotBeAdded\"));\n } else if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n if (isGroup && checkIfAccessPaid(item.access)) {\n item = fixAccess(item, t, roomType);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 341,
+      "line_number": 348,
       "context": "const addUser = () => {\n if (isDisabled) {\n toastr.warning(t(\"UsersCannotBeAdded\"));\n } else if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n if (isGroup && checkIfAccessPaid(item.access)) {\n item = fixAccess(item, t, roomType);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
-      "line_number": 261,
+      "line_number": 262,
       "context": "const saveEdit = async () => {\n if (searchRequestRunning) return;\n \n if (isSharedUser) {\n return toastr.warning(t(\"UsersAlreadyAdded\"));\n }\n \n const value = inputValue === \"\" ? name : inputValue;\n \n setEdit(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
-      "line_number": 185,
-      "context": "isGroup = false,\n } = item;\n \n const addUser = () => {\n if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n setInviteItems([item, ...inviteItems]);\n }\n \n setInputValue(\"\");",
+      "line_number": 177,
+      "context": "(item: TUser | TGroup) => {\n const { id, shared } = item;\n \n const addUser = () => {\n if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n setInviteItems([item, ...inviteItems] as TSelectorItem[]);\n }\n \n setInputValue(\"\");",
       "module": "/packages/client"
     }
   ],
@@ -135,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ບາງຄົນ' (bang khon) is generally acceptable, but in this context, 'ບາງທ່ານ' (bang tan) might be slightly more formal and appropriate for addressing users.",
+          "suggestion": "Consider replacing 'ບາງຄົນ' with 'ບາງທ່ານ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -174,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation uses the feminine plural 'adăugate' while 'utilizatori' is masculine plural.  It should agree in gender.",
+          "description": "The Romanian translation uses the feminine plural form 'adăugate' which doesn't agree with 'utilizatori' (users), which is masculine plural.  While grammatically possible, it's not the natural or preferred form.",
           "suggestion": "Anumite utilizatori sunt deja adăugați."
         }
       ],
@@ -189,13 +195,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ඇතැම් අය දැනටමත් එක් කර ඇත\" is not the most natural or idiomatic way to say \"Some users have already been added\" in Sinhala. While technically correct, it sounds a bit formal.",
-          "suggestion": "A more natural translation would be \"కొంతమంది యూజర్లు ఇప్పటికే చేర్చబడ్డారు\" (konthamanḍi yūjaru ikiḍalai cer̄cabaddārū) or \"కొంతమంది యూజర్లు ఇప్పటికే జోడించబడ్డారు\" (konthamanḍi yūjaru ikiḍalai jōḍiñcabaddārū)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,7 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Неки корисници су већ додати' while grammatically correct, doesn't quite capture the nuance of 'Some users have already been added.' A more natural-sounding translation might be 'Неки корисници су већ додати' or 'Већ су неки корисници додати'.",
+          "suggestion": "Већ су неки корисници додати"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

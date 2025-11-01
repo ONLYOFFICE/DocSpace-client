@@ -3,7 +3,7 @@
   "content": "File lifetime disabled in the room",
   "content_en_sha1_hash": "b862d629a1d859346f6c691889d607a78c28427a",
   "created_at": "2025-05-19T21:30:54.936Z",
-  "updated_at": "2025-05-28T09:30:02.438Z",
+  "updated_at": "2025-10-13T13:22:35.732Z",
   "comment": {
     "text": "This translation key is used for \"File lifetime disabled in the room\", a message that typically appears when a user tries to upload or download files from a room where file sharing has been disabled. It is likely displayed on a button or form control, indicating the reason for the action being restricted.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 339,
+      "context": "}}\n />\n );\n }\n case FeedActionKeys.RoomLifeTimeDisabled:\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case FeedActionKeys.RoomDenyDownloadEnabled:\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 279,
-      "context": "}}\n />\n );\n }\n case \"RoomLifeTimeDisabled\":\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case \"RoomDenyDownloadEnabled\":\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case \"RoomDenyDownloadDisabled\":\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case \"RoomArchived\":",
+      "line_number": 288,
+      "context": "}}\n />\n );\n }\n case FeedActionKeys.RoomLifeTimeDisabled:\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case FeedActionKeys.RoomDenyDownloadEnabled:\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تم تعطيل صلاحية الملف في الغرفة' is not the most natural or accurate rendering of 'File lifetime disabled in the room'. While it conveys the general meaning, it's a bit verbose and the phrasing 'صلاحية الملف' (the file's validity/permission) isn't the most appropriate. A more accurate and concise translation would focus on the 'lifetime' aspect.",
-          "suggestion": "مدة صلاحية الملف معطلة في الغرفة"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly an error, the Arabic translation uses a passive voice which may not be the preferred style. Consider active voice for better clarity and flow.",
-          "suggestion": "تعطيل مدة صلاحية الملف في الغرفة"
+          "description": "The translation \"تم تعطيل صلاحية الملف في الغرفة\" is not the most natural or accurate rendering of 'File lifetime disabled in the room.' While technically correct, it's a bit formal and wordy. A more natural translation would focus on the file being disabled, not the permission.",
+          "suggestion": "ملف الغرفة معطل (Milaf al-ghurfa mu'attal)"
         }
       ],
       "approved_at": null
@@ -47,8 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Faylın istifadə müddəti otaqda deaktiv edilib\" is too literal and doesn't flow naturally in Azerbaijani. 'File lifetime disabled' is better conveyed as something like 'Faylın ömrü otaqda söndürülüb' or 'Otaqda fayl ömrü söndürülüb'.",
-          "suggestion": "Otaqda fayl ömrü söndürülüb"
+          "description": "The translation 'Faylın istifadə müddəti otaqda deaktiv edilib' is not the most natural or accurate translation of 'File lifetime disabled in the room'. 'Lifetime' refers to the duration a file is accessible or stored. A more accurate translation would convey this meaning.",
+          "suggestion": "Faylın saxlanma müddəti otaqda ləğv edilib"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'ləğv edilib' (canceled/abolished) might be too strong. 'Deactivated' suggests a setting or functionality has been turned off, rather than a complete cancellation.",
+          "suggestion": "Faylın müddəti otaqda işləyə bilməz hala gətirilib"
         }
       ],
       "approved_at": null
@@ -59,13 +65,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and not idiomatic Bulgarian. 'Продължителността на живота на файла е деактивирана в стаята' sounds awkward. A more natural phrasing would convey the meaning of 'file lifetime disabled'.",
-          "suggestion": "Файловете не изтичат в стаята"
+          "description": "The translation is overly literal and doesn't flow naturally in Bulgarian. 'Продължителността на живота на файла' is a bit clunky. A more natural phrasing would be 'Ограничението за продължителност на файловете е деактивирано в стаята' or 'Файловете нямат ограничение за продължителност в стаята'.",
+          "suggestion": "Файловете нямат ограничение за продължителност в стаята"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'живота' (life) is not the best choice here. It refers to the period of existence, but 'изтичане' (expiration) is more appropriate for files.",
-          "suggestion": "Файловете не изтичат в стаята"
+          "description": "While 'деактивирана' is correct for 'disabled', it's more formal than often used in UI contexts. A slightly more approachable wording might be better depending on the overall tone of the application.",
+          "suggestion": "изключено"
         }
       ],
       "approved_at": null
@@ -76,8 +82,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Životnost souboru v místnosti zakázána' is a literal translation but sounds unnatural and overly formal in Czech. A more natural phrasing would imply disabling a feature rather than the file's lifespan.",
-          "suggestion": "Consider a phrasing like 'Omezení životnosti souborů v místnosti' or 'Životnost souborů v místnosti není povolena' depending on the precise meaning intended."
+          "description": "The translation 'Životnost souboru v místnosti zakázána' is a literal translation and doesn't quite capture the nuance of 'File lifetime disabled in the room'. It sounds overly formal and a bit awkward in Czech.",
+          "suggestion": "A more natural translation would be something like 'Omezení platnosti souborů v místnosti' or 'Zakázané platnost souborů v místnosti'."
         }
       ],
       "approved_at": null
@@ -88,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dateilebensdauer im Raum deaktiviert' is a literal translation and sounds unnatural in German. 'Dateilebensdauer' is not the most common or idiomatic way to refer to file lifetime. It's overly technical for a user interface.",
-          "suggestion": "Consider a more user-friendly phrasing such as 'Dateispeicherzeit im Raum deaktiviert' or 'Dateispeicher im Raum deaktiviert' or even 'Dateilagerung im Raum deaktiviert'."
+          "description": "While technically correct, 'Dateilebensdauer' is a somewhat uncommon and clunky way to phrase 'file lifetime'. A more natural phrasing would be 'Dateiablaufdauer' or 'Dateispeicherzeit'.",
+          "suggestion": "Dateiablaufdauer im Raum deaktiviert"
         }
       ],
       "approved_at": null
@@ -100,13 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Greek. \"Έγινε απενεργοποίηση διάρκειας ζωής αρχείων στο δωμάτιο\" sounds awkward. A more natural phrasing would convey the meaning of 'file lifetime disabled'.",
+          "description": "The translation \"Έγινε απενεργοποίηση διάρκειας ζωής αρχείων στο δωμάτιο\" is a bit wordy and passive. A more natural and concise translation would be preferred.",
           "suggestion": "Απενεργοποίηση διάρκειας ζωής αρχείων στο δωμάτιο"
-        },
-        {
-          "type": "formatting",
-          "description": "The passive voice ('Έγινε απενεργοποίηση...') while grammatically correct, can be less concise and clear in UI elements. A more active voice might be preferred.",
-          "suggestion": "Διακοπή διάρκειας ζωής αρχείων στο δωμάτιο"
         }
       ],
       "approved_at": null
@@ -117,13 +118,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vida útil de los archivos en la sala desactivada' is not the most natural or accurate translation of 'File lifetime disabled in the room'.  'Desactivada' implies the room itself is disabled, not the file lifetime feature.",
-          "suggestion": "Archivo: vida útil desactivada en la sala"
+          "description": "The translation \"Vida útil de los archivos en la sala desactivada\" is not the most natural or accurate translation of \"File lifetime disabled in the room.\" The phrase 'en la sala desactivada' is awkward. 'Disabled' refers to the feature, not the room itself.",
+          "suggestion": "Vida útil de los archivos desactivada en la sala"
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a colon which might not be necessary or desired. It's better to keep it concise.",
-          "suggestion": "Vida útil de archivos desactivada en la sala"
+          "type": "grammar",
+          "description": "While technically grammatically correct, the suggestion 'Vida útil de los archivos desactivada en la sala' sounds somewhat awkward in Spanish. A more natural phrasing would be better.",
+          "suggestion": "Se ha desactivado la vida útil de los archivos en la sala"
         }
       ],
       "approved_at": null
@@ -134,8 +135,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tiedoston ikä on poistettu käytöstä tässä huoneessa' is too literal and doesn't quite capture the meaning of 'File lifetime disabled'. A more natural Finnish phrasing would convey the intent more clearly.",
-          "suggestion": "A better translation would be something like 'Huoneessa tiedostojen elinikä on poistettu käytöstä' or 'Tiedostojen elinikä ei ole käytössä tässä huoneessa'."
+          "description": "The translation \"Tiedoston ikä on poistettu käytöstä tässä huoneessa\" is a literal translation that doesn't quite convey the meaning of 'File lifetime disabled'. It's overly verbose and doesn't sound natural in Finnish. A more natural phrasing would better reflect that the feature is disabled.",
+          "suggestion": "Huoneen tiedoston elinikä ei ole käytössä"
         }
       ],
       "approved_at": null
@@ -146,8 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Durée de vie du dossier désactivée dans la salle' is a literal translation that doesn't flow naturally in French. 'Dossier' refers to a folder, not a file. A more natural translation would use a term related to file storage or retention.",
-          "suggestion": "Durée de vie des fichiers désactivée dans la salle"
+          "description": "While the translation is understandable, \"Durée de vie du dossier\" is a bit literal and could be improved. 'Dossier' can sometimes refer to a folder, but 'vie' can be ambiguous here. A more natural translation would convey the idea of the file's duration being disabled.",
+          "suggestion": "Durée de validité des fichiers désactivée dans la salle"
         }
       ],
       "approved_at": null
@@ -158,8 +159,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ֆայլի ժամկետն անջատված է սենյակում\" is a literal translation and doesn't convey the intended meaning clearly. \" ժամկետն անջատված է\" can be interpreted as the 'deadline is disabled', instead of 'file lifetime is disabled'.",
-          "suggestion": "Consider \"Սենյակում ֆայլերի կյանսաժամկետը աշխատանքից դուրս է եղել\" or \"Սենյակում ֆայլերի ժամկետը չի գործում\"."
+          "description": "The translation 'Ֆայլի ժամկետն անջատված է սենյակում' is a literal translation and doesn't convey the intended meaning naturally in Armenian. It sounds awkward. A more natural phrasing would emphasize that file lifetime functionality is disabled within the room's context.",
+          "suggestion": "Consider 'Սենյակում ֆայլերի ժամկետի գործունեությունը աշխատանքից դուրս է եղել' or 'Ֆայլերի ժամկետի գործողությունը ազատված է սենյակում'"
         }
       ],
       "approved_at": null
@@ -167,7 +168,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Durata dei file disabilitata nella stanza' doesn't perfectly capture the meaning of 'File lifetime disabled in the room.' A more accurate translation would convey that the *feature* or *setting* related to file lifetime is disabled, rather than the lifetime itself. The current translation sounds like the files themselves have no lifetime.",
+          "suggestion": "Funzione durata file disabilitata nella stanza"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -176,8 +183,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ルームでファイルの有効期限は無効です' is too literal and sounds unnatural in Japanese. It directly translates 'File lifetime disabled in the room'. A more natural phrasing would convey the meaning of the file being permanently available or not expiring.",
-          "suggestion": "ルーム内のファイルは有効期限切れになりません"
+          "description": "The translation 'ルームでファイルの有効期限は無効です' is technically correct but a bit clunky and not the most natural way to say this in Japanese. It translates literally as 'In the room, the file's validity is disabled'.",
+          "suggestion": "ルームでファイルの有効期限が無効になっています (Rūmu de fairu no yūkigen ga muko ni natteimasu)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of '無効です' (muko desu) can sound a little formal or abrupt in this context. A softer phrasing might be more appropriate.",
+          "suggestion": "ルームでファイルの有効期限は設定されていません (Rūmu de fairu no yūkigen wa settei sareteimasen) - 'File lifetime is not set in the room'"
         }
       ],
       "approved_at": null
@@ -194,13 +206,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ຕະຫຼອດຊີວິດຂອງໄຟລ໌ທີ່ຖືກປິດໃຊ້ງານຢູ່ໃນຫ້ອງ' is overly literal and doesn't convey the meaning of 'File lifetime disabled'. A more natural and accurate translation would be something along the lines of 'ການປິດໃຊ້ງານໄລຍະເວລາຂອງໄຟລ໌ໃນຫ້ອງ'.",
-          "suggestion": "ການປິດໃຊ້ງານໄລຍະເວລາຂອງໄຟລ໌ໃນຫ້ອງ"
-        },
-        {
-          "type": "grammar",
-          "description": "The current phrasing 'ຕະຫຼອດຊີວິດຂອງໄຟລ໌ທີ່ຖືກປິດໃຊ້ງານ' is a bit clunky. While grammatically correct, it's not the most fluid way to express the concept.",
-          "suggestion": "ໄລຍະເວລາຂອງໄຟລ໌ຖືກປິດໃຊ້ງານ"
+          "description": "The Lao translation \"ຕະຫຼອດຊີວິດຂອງໄຟລ໌ທີ່ຖືກປິດໃຊ້ງານຢູ່ໃນຫ້ອງ\" is a very literal and somewhat awkward translation. \"ຕະຫຼອດຊີວິດ\" (talot chivhit) literally means 'throughout life' and isn't the best fit for 'lifetime' in this context.",
+          "suggestion": "Consider a more natural phrasing like \"ການປິດການນໍາໃຊ້ເວລາຂອງໄຟລ໌ໃນຫ້ອງ\" (gaan pit gaan nam sai wela khong file nai hong) or \"ໄລຍະເວລາຂອງໄຟລ໌ຖືກປິດໃຊ້ງານໃນຫ້ອງ\" (lai ya wela khong file thuk pit sai ngan nai hong)."
         }
       ],
       "approved_at": null
@@ -211,8 +218,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Faila darbmūžs telpā ir atspējots' is a literal translation but sounds awkward in Latvian. A more natural phrasing would be something like 'Faila glabāšanas laiks telpā ir atspējots' or 'Telpas failu glabāšanas laiks ir atspējots'.",
-          "suggestion": "Telpas failu glabāšanas laiks ir atspējots"
+          "description": "The translation 'Faila darbmūžs telpā ir atspējots' is a literal translation and sounds awkward in Latvian. A more natural phrasing would convey the meaning more effectively.",
+          "suggestion": "Faila glabāšanas laiks telpā ir atspējots"
         }
       ],
       "approved_at": null
@@ -220,13 +227,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bestand levensduur uitgeschakeld in de kamer' is technically correct but sounds awkward and less natural in Dutch. 'Bestand' (file) isn't the most common term in this context. A more natural phrasing would convey that the lifetime functionality itself is disabled.",
-          "suggestion": "Bestandslifetime uitgeschakeld in de kamer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -235,13 +236,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Okres ważności plików jest wyłączony w tym pokoju\" is a bit literal and doesn't flow naturally in Polish. While technically correct, it's not the most idiomatic way to express the meaning.",
+          "description": "The translation \"Okres ważności plików jest wyłączony w tym pokoju\" is a literal translation but not the most natural or concise way to express the meaning in Polish. It's a bit clunky.",
           "suggestion": "Wyłączono okres ważności plików w tym pokoju"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'okres ważności plików' can be simplified.  It's more natural to use a more concise wording.",
-          "suggestion": "Wyłączone są automatyczne usuwania plików w tym pokoju"
+          "type": "formatting",
+          "description": "While grammatically correct, the passive voice \"Wyłączono okres ważności plików...\" can sometimes sound less direct.  Consider active voice if appropriate for the UI style.",
+          "suggestion": "Nie włączono okresu ważności plików w tym pokoju"
         }
       ],
       "approved_at": null
@@ -252,8 +253,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tempo de vida do arquivo desativado na sala\" is not the most natural or accurate rendering of \"File lifetime disabled in the room\". While understandable, it's a bit literal. A more fluent translation might emphasize the disabling action.",
-          "suggestion": "Arquivo com tempo de vida desabilitado na sala"
+          "description": "The translation 'Tempo de vida do arquivo desativado na sala' is a literal translation that doesn't quite capture the intended meaning. 'Lifetime' in this context refers to the duration a file is stored, not the file's existence. A more natural and accurate translation would convey the meaning that the file deletion timer is disabled.",
+          "suggestion": "Vida útil do arquivo suspensa na sala"
         }
       ],
       "approved_at": null
@@ -264,8 +265,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tempo de vida do arquivo desativado na sala' is not the most natural or precise translation of 'File lifetime disabled in the room'. While understandable, it's a bit literal. A more natural phrasing would better convey the intended meaning.",
-          "suggestion": "Arquivo com tempo de vida desabilitado na sala"
+          "description": "The translation 'Tempo de vida do arquivo desativado na sala' is a literal translation and may not be the most natural way to express this in Portuguese. A more natural phrasing would be something like 'Desativação do tempo de vida do arquivo na sala' or 'Tempo de vida do arquivo está desativado na sala'.",
+          "suggestion": "Consider 'Desativação do tempo de vida do arquivo na sala' or 'Tempo de vida do arquivo está desativado na sala'."
         }
       ],
       "approved_at": null
@@ -276,8 +277,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Durata de viață a fișierelor este dezactivată pentru această sală\" is a bit literal and verbose. A more natural and concise translation would be preferable.",
-          "suggestion": "Fișierele nu au durată de viață în această sală."
+          "description": "The translation is overly literal and doesn't flow naturally in Romanian. 'Durata de viață a fișierelor' is correct, but the phrasing 'este dezactivată pentru această sală' is clunky.  A more natural phrasing would indicate the disabling is happening *within* the room.",
+          "suggestion": "Fișierele nu au durată de viață activată în această sală."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation is a complete sentence.  While grammatically correct, it's important to maintain consistency with other UI elements which might use shorter, more descriptive phrases.",
+          "suggestion": "Durată de viață fișiere dezactivată"
         }
       ],
       "approved_at": null
@@ -285,13 +291,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'В комнате отключен срок действия файла' is a literal translation, but it doesn't convey the intended meaning as naturally in Russian. 'Lifetime disabled' implies a setting or feature that's been turned off, not that the file itself has an expiration date that's been deactivated.",
-          "suggestion": "A more natural translation would be something like 'Отключена функция ограничения срока действия файлов в комнате' or 'Ограничение срока действия файлов в комнате отключено'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -300,8 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'රූම් තුළ ගොනු වල කාලය ක්‍රියාත්මක නැත.' while understandable, doesn't perfectly capture the meaning of 'File lifetime disabled in the room'.  It's a bit literal. A more natural phrasing would better convey that the file lifetime feature is turned off, rather than the time itself being absent.",
-          "suggestion": "Consider a translation like: 'රූම් තුළ ගොනු වල කාලසීමාව අක්‍රියයි.' or 'රූම් තුළ ගොනු වල කාලසීමා ක්‍රියාත්මකව නොමැත.'"
+          "description": "The translation 'රූම් තුළ ගොනු වල කාලය ක්‍රියාත්මක නැත.' is a literal translation that doesn't quite convey the intended meaning of 'File lifetime disabled in the room'. It sounds somewhat awkward in Sinhala. A more natural phrasing would be needed.",
+          "suggestion": "Consider 'රූම් තුළ ගොනු වල කාලසීමාව අයින් කර ඇත' or 'රූම් තුළ ගොනු වල කාලසීමාව ක්‍රියා විරහිතය' for a more natural and accurate translation.  'අයින් කර ඇත' implies removal, and 'ක්‍රියා විරහිතය' means 'disabled'. The best choice depends on the specific nuance desired."
         }
       ],
       "approved_at": null
@@ -312,13 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Doba používania súborov v miestnosti je vypnutá' is a literal translation that doesn't convey the intended meaning as clearly as it could. 'Lifetime disabled' implies a feature is turned off, not a duration being turned off.",
-          "suggestion": "Použitie životnosti súborov je vypnuté"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "A more natural and concise translation would be to convey the 'disabled' aspect more directly.  The current translation is somewhat verbose.",
-          "suggestion": "Vypnuté použitie životnosti súborov"
+          "description": "The Slovak translation 'Doba používania súborov v miestnosti je vypnutá' is a literal translation that doesn't convey the intended meaning of 'File lifetime disabled'. It sounds unnatural and technical. A more natural translation would be something like 'Neplatnosť životného cyklu súborov v miestnosti' or 'Vypnuté trvanie platnosti súborov v miestnosti'.",
+          "suggestion": "Consider 'Neplatnosť životného cyklu súborov v miestnosti' or 'Vypnuté trvanie platnosti súborov v miestnosti'."
         }
       ],
       "approved_at": null
@@ -326,13 +321,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Življenjska doba datoteke je v sobi onemogočena\" is overly literal and slightly awkward. A more natural Slovenian phrasing would be preferable.",
-          "suggestion": "Datoteke v sobi nimajo časovne omejitve"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -341,8 +330,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Време трајања фајлова у соби је онемогућено\" is a literal translation and slightly awkward. A more natural and concise phrasing would be better.",
-          "suggestion": "Филe трајања је онемогућено у соби"
+          "description": "The translation 'Време трајања фајлова у соби је онемогућено' is a bit literal and verbose. A more natural and concise translation would be preferred.",
+          "suggestion": "Онемогућено трајање фајлова у соби"
         }
       ],
       "approved_at": null
@@ -353,8 +342,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Serbian. \"Vreme trajanja fajlova u sobi je onemogućeno\" is correct grammatically but sounds awkward. A more natural phrasing would be \"Isključeno vreme trajanja fajlova u sobi\" or \"Fajlovi u sobi nemaju rok trajanja\".",
-          "suggestion": "Fajlovi u sobi nemaju rok trajanja"
+          "description": "The translation is too literal and doesn't flow naturally in Serbian. 'File lifetime' is awkward. A more natural phrasing would be 'trajanje fajlova' instead of 'vreme trajanja fajlova'.",
+          "suggestion": "Fajlovi u sobi imaju onemogućeno trajanje"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a passive voice that could be more direct. While grammatically correct, it reads less clearly.",
+          "suggestion": "Onemogućeno je trajanje fajlova u sobi."
         }
       ],
       "approved_at": null
@@ -365,7 +359,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Odada dosya yaşam süresi devre dışı bırakıldı' is too literal and sounds unnatural in Turkish. A more natural phrasing would be something like 'Odada dosya ömrü devre dışı bırakıldı' or 'Odada dosya ömrü kapandı'.",
+          "description": "The translation 'Odada dosya yaşam süresi devre dışı bırakıldı' is a literal translation but sounds unnatural in Turkish. A more natural phrasing would convey the meaning of disabling file lifetime within the room context.",
           "suggestion": "Odada dosya ömrü devre dışı bırakıldı"
         }
       ],
@@ -377,8 +371,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"У кімнаті вимкнено період існування файлів\" is a literal translation and doesn't convey the intended meaning as naturally as possible in Ukrainian. \"Period існування\" sounds quite formal and technical. A more natural phrasing would be preferred.",
+          "description": "The translation 'У кімнаті вимкнено період існування файлів' is too literal and doesn't convey the intended meaning as naturally as possible. 'Period of existence' is clunky.",
           "suggestion": "У кімнаті деактивовано обмеження терміну життя файлів"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'вимкнено період існування' is not the most natural way to express the disabling of a feature in Ukrainian. It sounds slightly robotic.",
+          "suggestion": "У кімнаті обмеження терміну життя файлів вимкнено"
         }
       ],
       "approved_at": null
@@ -389,13 +388,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Đã tắt thời gian tồn tại của tập tin trong phòng' is overly literal and doesn't flow naturally in Vietnamese. A more natural phrasing would convey the same meaning.",
-          "suggestion": "Tắt tính năng thời gian tồn tại tập tin trong phòng"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'thời gian tồn tại của tập tin' (lifetime of the file) is a bit clunky.  A simpler wording is preferred.",
-          "suggestion": "thời gian lưu trữ tập tin"
+          "description": "The translation 'Đã tắt thời gian tồn tại của tập tin trong phòng' is a bit literal and could be improved for naturalness. 'Lifetime' doesn't translate directly to 'thời gian tồn tại'.",
+          "suggestion": "Một cách dịch tự nhiên hơn có thể là: 'Vô hiệu hóa thời gian lưu trữ tệp trong phòng' or 'Tắt tính năng lưu trữ tệp trong phòng'."
         }
       ],
       "approved_at": null
@@ -406,8 +400,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"房间内文件有效期已禁用\" is a bit too formal and lengthy for the English \"File lifetime disabled in the room.\" A more natural and concise translation would improve the user experience.",
-          "suggestion": "房间文件有效期禁用"
+          "description": "The translation '房间内文件有效期已禁用' (Fángjiān nèi wénjiàn yǒuxiàoqí yǐ zībì) is a bit literal and could be improved for naturalness. While technically correct, it sounds somewhat formal and clunky in Chinese.",
+          "suggestion": "Consider a more natural translation like '房间文件无保存期限' (Fángjiān wénjiàn wú bǎocún qíxiàn) or '房间内文件不设有效期' (Fángjiān nèi wénjiàn bù shè yǒuxiàoqí)."
         }
       ],
       "approved_at": null

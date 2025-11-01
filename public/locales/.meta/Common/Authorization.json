@@ -3,7 +3,7 @@
   "content": "Authorization",
   "content_en_sha1_hash": "5e25ce007aa95ea2ea8b158aee9c630a32ea5616",
   "created_at": "2025-05-19T21:30:43.158Z",
-  "updated_at": "2025-06-03T20:59:41.882Z",
+  "updated_at": "2025-10-16T07:29:35.568Z",
   "comment": {
     "text": "This translation key is used as the title of an authorization dialog box that opens to prompt users to grant access or authenticate. It appears in various places, such as when reconnecting to a provider or connecting to a third-party storage, and its purpose is to inform the user about the authentication request.",
     "is_auto": true,
@@ -11,40 +11,52 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/ConnectDialog/index.js",
-      "line_number": 229,
-      "context": "]);\n \n const onReconnect = () => {\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n openConnectWindow(provider_key, authModal).then((modal) =>\n getOAuthToken(modal).then((accessToken) => {\n authModal.close();",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.js",
-      "line_number": 176,
+      "line_number": 179,
       "context": "if (storageLocation.provider.isOauth) {\n setIsOauthWindowOpen(true);\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n openConnectWindow(provider.providerKey, authModal).then((modal) =>\n getOAuthToken(modal)\n .then((token) =>",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/common-container/DirectThirdPartyConnection.js",
-      "line_number": 155,
-      "context": "const { key, provider_link: directConnection } = selectedThirdPartyAccount;\n \n if (directConnection) {\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n \n openConnectWindow(key, authModal)\n .then((modal) => getOAuthToken(modal))",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 301,
+      "line_number": 331,
       "context": "};\n \n if (provider.isOauth) {\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n await openConnectWindow(provider.providerName, authModal)\n .then(getOAuthToken)\n .then((token) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ThirdPartyStore.js",
-      "line_number": 148,
-      "context": "try {\n const params =\n \"height=600,width=1020,resizable=0,status=0,toolbar=0,menubar=0,location=1\";\n newWindow = modal\n ? newWindow\n : window.open(url, i18n.t(\"Common:Authorization\"), params);\n } catch (err) {\n newWindow = modal\n ? newWindow\n : window.open(url, i18n.t(\"Common:Authorization\"));\n }",
+      "line_number": 153,
+      "context": "try {\n const params =\n \"height=600,width=1020,resizable=0,status=0,toolbar=0,menubar=0,location=1\";\n newWindow = modal\n ? newWindow\n : window.open(url, i18n.t(\"Common:Authorization\"), params);\n } catch (err) {\n console.error(err);\n newWindow = modal\n ? newWindow\n : window.open(url, i18n.t(\"Common:Authorization\"));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ThirdPartyStore.js",
-      "line_number": 148,
-      "context": "try {\n const params =\n \"height=600,width=1020,resizable=0,status=0,toolbar=0,menubar=0,location=1\";\n newWindow = modal\n ? newWindow\n : window.open(url, i18n.t(\"Common:Authorization\"), params);\n } catch (err) {\n newWindow = modal\n ? newWindow\n : window.open(url, i18n.t(\"Common:Authorization\"));\n }",
+      "line_number": 153,
+      "context": "try {\n const params =\n \"height=600,width=1020,resizable=0,status=0,toolbar=0,menubar=0,location=1\";\n newWindow = modal\n ? newWindow\n : window.open(url, i18n.t(\"Common:Authorization\"), params);\n } catch (err) {\n console.error(err);\n newWindow = modal\n ? newWindow\n : window.open(url, i18n.t(\"Common:Authorization\"));",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/direct-third-party-connection/DirectThirdPartyConnection.tsx",
+      "line_number": 188,
+      "context": "const { key, provider_link: directConnection } = selectedThirdPartyAccount;\n \n if (directConnection) {\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n \n openConnectWindow(key, authModal)\n .then((modal) => getOAuthToken(modal))",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
+      "line_number": 242,
+      "context": "]);\n \n const onReconnect = () => {\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n openConnectWindow(provider_key, authModal).then((modal) =>\n getOAuthToken(modal).then((accessToken) => {\n authModal?.close();",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/openConnectWindow.ts",
+      "line_number": 58,
+      "context": "try {\n const params =\n \"height=600,width=1020,resizable=0,status=0,toolbar=0,menubar=0,location=1\";\n newWindow = modal\n ? newWindow\n : window.open(url, t(\"Common:Authorization\"), params);\n } catch (error) {\n newWindow = modal ? newWindow : window.open(url, t(\"Common:Authorization\"));\n console.error(error);\n }",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/openConnectWindow.ts",
+      "line_number": 58,
+      "context": "try {\n const params =\n \"height=600,width=1020,resizable=0,status=0,toolbar=0,menubar=0,location=1\";\n newWindow = modal\n ? newWindow\n : window.open(url, t(\"Common:Authorization\"), params);\n } catch (error) {\n newWindow = modal ? newWindow : window.open(url, t(\"Common:Authorization\"));\n console.error(error);\n }",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -123,13 +135,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"許可\" (kyoka) can translate to 'authorization,' it often carries the nuance of 'permission' or 'consent.' 'Authorization' in a technical or security context often implies a system-level approval, which \"許可\" doesn't fully capture.",
-          "suggestion": "Consider alternatives like \"認証\" (shōnin - authentication), \"認可\" (nin-ka - approval/licensing), or \"権限付与\" (kengen-fuyo - granting of authority) depending on the specific context of 'Authorization'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '승인' can mean 'authorization', it more commonly translates to 'approval' or 'acceptance'. 'Authorization' often implies granting permission or access, which is not directly conveyed by '승인'. A more accurate translation would depend on the specific context of 'Authorization'.",
-          "suggestion": "Consider alternatives like '인가' (ingo - authentication/authorization), '권한 부여' (gwonhan buyeo - permission granting), or '허가' (heoga - permit) depending on the nuance needed."
+          "description": "While '승인' can mean 'authorization' in some contexts, it often implies 'approval' or 'acceptance'.  'Authorization' implies granting permission or rights, which might be better conveyed by terms like '인가' (inga) or '권한 부여' (gwanhan bugeo).",
+          "suggestion": "Consider '인가' (inga) or '권한 부여' (gwanhan bugeo) for a more accurate translation of 'Authorization'."
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'බලය දීම' (balaya dima) literally translates to 'giving power' or 'granting power'. While it conveys a sense of authorization, it's not the most accurate or idiomatic translation of 'Authorization'. A more suitable translation would convey the meaning of permission or approval.",
-          "suggestion": "Consider alternatives like 'අවසරය' (awasarya - permission) or 'අනුමැතිය' (anumaathiya - approval)."
+          "description": "The translation 'බලය දීම' (balaya dima) literally translates to 'giving power' or 'granting authority'. While related to 'Authorization,' it's not the most accurate or commonly used translation. 'අවසරය' (awasariya) is a more direct and widely accepted translation of 'Authorization'.",
+          "suggestion": "Consider using 'අවසරය' (awasariya) as a more accurate translation."
         }
       ],
       "approved_at": null

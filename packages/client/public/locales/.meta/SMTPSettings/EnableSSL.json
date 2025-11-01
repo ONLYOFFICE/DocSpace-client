@@ -3,7 +3,7 @@
   "content": "Enable SSL",
   "content_en_sha1_hash": "25c1e8de1becab86d3eaeb5f929e874b731db4b3",
   "created_at": "2025-05-19T21:30:53.293Z",
-  "updated_at": "2025-05-21T01:36:21.143Z",
+  "updated_at": "2025-08-11T18:11:59.230Z",
   "comment": {
     "text": "This translation key is used to display the label for a checkbox that enables or disables SSL encryption. It appears in a UI component for settings related to SMTP configurations and is translated by the \"EnableSSL\" phrase.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/SSLVerification.js",
-      "line_number": 84,
-      "context": "name=\"ssl\"\n onClick={handleOnChange}\n options={[\n {\n id: \"enable-ssl\",\n label: t(\"EnableSSL\"),\n value: \"true\",\n },\n {\n id: \"disable-ssl\",\n label: t(\"DisableSSL\"),",
+      "line_number": 85,
+      "context": "name=\"ssl\"\n onClick={handleOnChange}\n options={[\n {\n id: \"enable-ssl\",\n label: t(\"EnableSSL\"),\n value: \"true\",\n dataTestId: \"enable_ssl_radio_button\",\n },\n {\n id: \"disable-ssl\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 238,
-      "context": "<Checkbox\n className=\"smtp_settings_checkbox\"\n isDisabled={isLoading}\n name={ENABLE_SSL}\n label={t(\"EnableSSL\")}\n isChecked={settings[ENABLE_SSL]}\n onChange={onChangeCheckbox}\n />\n <ButtonContainer\n t={t}",
+      "line_number": 247,
+      "context": "<Checkbox\n className=\"smtp_settings_checkbox\"\n isDisabled={isLoading}\n name={ENABLE_SSL}\n label={t(\"EnableSSL\")}\n isChecked={settings[ENABLE_SSL]}\n onChange={onChangeCheckbox}\n dataTestId=\"enable_ssl_checkbox\"\n />\n <ButtonContainer",
       "module": "/packages/client"
     }
   ],
@@ -36,12 +36,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation is overly verbose and doesn't accurately reflect the brevity of \"Enable SSL\". It describes the function of SSL instead of simply enabling it.",
-          "suggestion": "تمكين SSL"
+          "description": "The Arabic translation 'تمكين بروتكول تشفير اتصالات الانترنت بين العملاء والخوادم' is a very literal and overly verbose translation of 'Enable SSL'. It describes the *function* of SSL rather than simply enabling it.  A more direct and appropriate translation would be closer to 'تفعيل SSL' or 'تمكين SSL'.",
+          "suggestion": "تفعيل SSL"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The translation uses technical jargon that might not be understood by the target audience. \"بروتوكول تشفير اتصالات الانترنت بين العملاء والخوادم\" is complex.",
+          "type": "formatting",
+          "description": "The translation is a long sentence and potentially difficult to parse in a user interface or configuration setting.  Shorter is better for clarity and usability.",
           "suggestion": "تفعيل SSL"
         }
       ],
@@ -110,13 +110,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'SSLを有効に' is a very literal translation and might not be the most natural phrasing for a user interface setting. A more user-friendly and common translation would be 'SSLを許可する' or 'SSLを使用する'.",
-          "suggestion": "SSLを許可する"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -125,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SSL을 사용하도록 설정' is a bit verbose and could be more concise for a settings label. While technically correct, it's not the most natural phrasing.",
-          "suggestion": "SSL 활성화"
+          "description": "The translation 'SSL을 사용하도록 설정' while understandable, is not the most natural or concise way to express 'Enable SSL' in Korean. It's a bit verbose.",
+          "suggestion": "SSL 활성화 (SSL Hwalchonghwa) - This is a more common and succinct way to say 'Enable SSL' in Korean, utilizing standard terminology."
         }
       ],
       "approved_at": null
@@ -155,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Włącz protokół SSL\" is understandable, a more accurate and common translation of \"Enable SSL\" would be \"Włącz SSL\". The term 'protokół' (protocol) is redundant as 'SSL' implies a protocol.",
-          "suggestion": "Włącz SSL"
+          "description": "While 'Włącz protokół SSL' is understandable, a more accurate and natural translation of 'Enable SSL' would be 'Użyj SSL' or 'Włącz szyfrowanie SSL'. 'Protokół' is technically correct, but 'użyj' or a more direct phrasing feels more appropriate in a settings context.",
+          "suggestion": "Użyj SSL"
         }
       ],
       "approved_at": null
@@ -179,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Activare autentificare unică\" translates to \"Enable Single Sign-On\" which is not equivalent to \"Enable SSL\". The translation does not reflect the English meaning.",
-          "suggestion": "A more accurate translation for \"Enable SSL\" would be \"Activare SSL\" or \"Permite SSL\"."
+          "description": "The Romanian translation 'Activare autentificare unică' translates to 'Enable Single Sign-On' which is not equivalent to 'Enable SSL'. It does not accurately convey the meaning of the English content.",
+          "suggestion": "A more accurate translation would be 'Activare SSL' or 'Permite SSL'."
         }
       ],
       "approved_at": null

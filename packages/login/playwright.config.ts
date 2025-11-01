@@ -33,6 +33,12 @@ export default defineConfig({
         open: "never",
       },
     ],
+    [
+      "json",
+      {
+        outputFile: "../../playwright-report/login/test-results.json",
+      },
+    ],
   ],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -72,7 +78,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "yarn test:start",
+    command: "pnpm run test:start",
     port: PORT,
     timeout: 1000 * 60 * 5,
   },

@@ -3,7 +3,7 @@
   "content": "Edit index",
   "content_en_sha1_hash": "30be8c3352968fdc5ec16ed7922613790883e07d",
   "created_at": "2025-05-19T21:30:44.748Z",
-  "updated_at": "2025-06-03T20:59:42.293Z",
+  "updated_at": "2025-10-16T07:29:35.967Z",
   "comment": {
     "text": "This translation key is used for a button label that allows users to edit an index in the context of folder options. It typically appears as a button within a dialog or settings interface where user permissions and folder configurations are managed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1701,
+      "line_number": 1763,
       "context": "const { isIndexedFolder, security } = this.selectedFolderStore;\n \n const indexOptions = {\n id: \"option_edit-index\",\n key: \"edit-index\",\n label: t(\"Common:EditIndex\"),\n icon: EditIndexReactSvgUrl,\n onClick: () => this.onEditIndex(),\n disabled: !security?.EditRoom || !isIndexedFolder || isFiltered,\n };",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"İndeksi redaktə edin\" literally translates to \"Edit the index.\" It's a command and doesn't accurately reflect the English \"Edit index\" which is a label or a property name.",
-          "suggestion": "A more accurate translation would depend on the context. Possible suggestions include: \"Redaktə indeksi\" (Edit index - as a label), \"Redaktə indeksini\" (Edit the index - if referring to an action). Without more context, it is difficult to provide the optimal translation."
+          "description": "The translation \"İndeksi redaktə edin\" is a literal translation of 'Edit the index' rather than the intended meaning of 'Edit index'. It implies an action on the index, not a reference to it.",
+          "suggestion": "The most accurate translation would be \"Redaktə indeksindən\" (Edit index) or simply \"İndeks\" if it functions as a label."
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Редактирай индекс\" literally translates to \"Edit index\", but in context, it might imply an action to edit an index rather than just referring to the index itself. Depending on the specific use case, a more accurate translation might be \"Индекс\" (Index) or \"Индексиране\" (Indexing).",
-          "suggestion": "Consider \"Индекс\" or \"Индексиране\" depending on the intended meaning."
+          "description": "The translation \"Редактирай индекс\" implies 'Edit index' as in 'Edit the index', rather than simply 'Index'. A more accurate translation would depend on the context, but a simple 'Индекс' might be more appropriate.",
+          "suggestion": "Индекс"
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Upravit index' is a literal translation of 'Edit index' but doesn't quite capture the nuance. 'Edit index' often refers to the position of an item being edited, or a numerical identifier for editing. 'Upravit index' is more like 'Edit the index' - to modify it. A better translation might be 'Číslo úpravy' (Edit number) or 'Pozice pro úpravu' (Position for editing), depending on the context.",
-          "suggestion": "Consider 'Číslo úpravy' or 'Pozice pro úpravu' depending on context."
+          "description": "While 'Upravit index' is a literal translation, 'Edit index' often implies a numerical or positional index. 'Upravit index' can be interpreted as 'to edit an index' which is not the intended meaning. A more accurate translation might depend on the context but a possible alternative is 'Index pro úpravu' or 'Pozice pro úpravu'.",
+          "suggestion": "Consider 'Index pro úpravu' or 'Pozice pro úpravu' depending on the specific context."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Επεξεργασία ευρετηρίου\" doesn't accurately convey the meaning of \"Edit index.\" \"Επεξεργασία\" means \"processing\" or \"editing,\" but \"ευρετηρίου\" refers to an index or directory, not the act of editing one. \"Edit index\" typically refers to the position or identifier of an edit within a list or system.",
-          "suggestion": "Consider alternatives like \"Δείκτης επεξεργασίας\" (Deiktis epexergasias - Editing index/Indicator of editing) or \"Ευρετήριο επεξεργασίας\" (Evretirio epexergasias - Index of edits) depending on the specific context. A more accurate translation would need to reflect the function of the \"edit index.\""
+          "description": "The translation 'Επεξεργασία ευρετηρίου' translates to 'Index editing' or 'Processing of the index', which isn't a direct equivalent of 'Edit index'. 'Edit index' likely refers to the numerical position or identifier of an edit.",
+          "suggestion": "Επεξεργασία δεικτών"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Muokkaa hakemistoa\" translates to \"Edit directory\" rather than \"Edit index.\" While 'hakemisto' can mean both, 'index' usually refers to a list or register, not a directory.",
-          "suggestion": "Consider \"Muokkaa indeksiä\" to more accurately reflect 'Edit index'."
+          "description": "The translation 'Muokkaa hakemistoa' is a literal translation of 'Edit index' but doesn't accurately convey the intended meaning. 'Edit index' typically refers to the position where an edit is made within a data structure or list, not a directory to be edited.",
+          "suggestion": "Consider 'Muokkausindeksi' or 'Muokkauspiste' to better represent the concept of an 'edit index'."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Modifier l'index\" is understandable, a more accurate and idiomatic translation of 'Edit index' would be \"Index de modification\" or \"Index à modifier\". \"Modifier l'index\" implies changing the index itself, whereas 'Edit index' likely refers to an index that needs modification.",
-          "suggestion": "Index de modification"
+          "description": "The translation \"Modifier l'index\" is a literal translation and might not be the most natural or accurate rendering of \"Edit index\" in a software or user interface context. \"Edit index\" often refers to an index that can be edited or modified, and a more suitable translation might be something like 'Index de modification' or 'Index à modifier'.",
+          "suggestion": "Consider 'Index de modification' or 'Index à modifier' depending on the specific context."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Խմբագրել ինդեքսը' literally translates to 'Edit index'. While understandable, it's not the most natural or accurate phrasing for 'Edit index' in Armenian. A more natural phrasing might be 'Խմբագրման ցուցիչ' or 'Համախմբագրման ցուցիչ', depending on the specific context of 'Edit index'.",
-          "suggestion": "Consider 'Խմբագրման ցուցիչ' or 'Համախմբագրման ցուցիչ' for a more natural Armenian rendering."
+          "description": "The translation \"Խմբագրել ինդեքսը\" literally translates to \"Edit index\". While not entirely wrong, a more natural and accurate translation in Armenian would depend on the context. \"Edit index\" could refer to an index to be edited, or the index of an editing action. Without knowing the surrounding text, it's difficult to determine the best translation. It might be better phrased as something like 'Համամատչել ինդեքսը' (Match the index) or 'Խմբագրելու ցուցիչը' (Editing indicator) depending on context.",
+          "suggestion": "Consider re-evaluating the translation based on the surrounding context. Possible alternatives: 'Համամատչել ինդեքսը', 'Խմբագրելու ցուցիչը'."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Modifica indice\" is not the most accurate translation of \"Edit index\". While \"Modifica\" is correct for 'Edit', 'indice' is a literal translation of 'index' and might not convey the intended meaning depending on the context. A more appropriate translation would depend on what 'Edit index' refers to. It could mean 'Indice di modifica' or 'Numero di modifica' or something else entirely.",
-          "suggestion": "Consider 'Indice di modifica' or 'Numero di modifica' or a more context-specific alternative depending on the intended meaning of 'Edit index'."
+          "description": "While \"Modifica\" translates to \"Edit\" or \"Modification\", \"indice\" is generally translated as \"index\" rather than \"modification index.\"  A more accurate translation would reflect the English term's meaning of a numerical position or reference.",
+          "suggestion": "Indice di modifica"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"インデックスの編集\" is understandable, a more natural and common translation of \"Edit index\" would be \"編集インデックス\" or \"インデックス編集\". \"インデックスの編集\" implies editing *of* the index, rather than the index itself being the thing being edited.",
-          "suggestion": "編集インデックス or インデックス編集"
+          "description": "While technically correct, \"インデックスの編集\" is a very literal translation and might not be the most natural way to express \"Edit index\" in Japanese, depending on the context. It implies editing an index rather than referring to the index itself as an edit point. A more natural phrasing might be \"編集インデックス\" or depending on the context, simply \"インデックス\"",
+          "suggestion": "Consider \"編集インデックス\" or just \"インデックス\" depending on the intended meaning and context."
         }
       ],
       "approved_at": null
@@ -153,13 +153,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"인덱스 편집\" is a literal translation of \"Edit index\", it might be more natural to use a phrasing like \"편집 인덱스\" (Edit Index) or \"편집 지점\" (Edit Point) depending on the context. \"인덱스 편집\" implies editing an index itself, which may not be the intended meaning.",
-          "suggestion": "Consider \"편집 인덱스\" or \"편집 지점\" depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ດັດ​ແກ້​' correctly translates 'Edit', 'ດັດ​ຊະ​ນີ​' is a literal translation of 'index' and might not be the most natural or accurate rendering in Lao. A more idiomatic translation for 'Edit index' might consider the specific context in which it's used.",
-          "suggestion": "Consider 'ຕົວເລກດັດແກ້' or a phrase that better reflects the meaning of 'edit index' within its application, depending on the specific meaning."
+          "description": "While 'ດັດ​ແກ້​' (dat gae) correctly translates to 'edit', 'ດັດ​ຊະ​ນີ​' (dat sa nee) is a direct transliteration of 'index' and might not be the most natural or accurate translation in Lao depending on the context. A more appropriate translation might consider a term representing the concept of an 'index' rather than a direct transliteration.",
+          "suggestion": "Consider alternatives like 'ລຳດັບການແກ້ໄຂ' (lam dap gaan gae khai) which means 'order of editing' or a term more specific to the context of 'EditIndex'."
         }
       ],
       "approved_at": null
@@ -177,13 +171,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term \"Edit index\" refers to a numerical identifier representing the position of an edit or change within a sequence. \"Rediģēt rādītāju\" translates literally to \"Edit indicator,\" which doesn't convey the intended meaning of a numerical index. A more accurate translation would depend on the specific context, but potential options include \"Rediģēšanas indekss\" or \"Labošanas indekss\".",
-          "suggestion": "Consider \"Rediģēšanas indekss\" or \"Labošanas indekss\" depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -192,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bewerk index' is not the most accurate or natural Dutch translation for 'Edit index'. 'Bewerk' implies actively editing, which might not be the intended meaning. 'Index' is acceptable but often 'lijst' is used in conjunction with 'bewerken'.",
-          "suggestion": "Consider 'Bewerking index' or 'Index bewerken' depending on the context. Alternatively, if referring to an index list, 'Indexlijst bewerken'."
+          "description": "The translation 'Bewerk index' is not the most natural or accurate translation of 'Edit index' in Dutch. 'Bewerk' implies a more involved editing process. A more appropriate translation would be 'Bewerksindex' or 'Index bewerken'.",
+          "suggestion": "Bewerksindex"
         }
       ],
       "approved_at": null
@@ -204,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Edytuj indeks\" is not the most accurate representation of \"Edit index\". \"Edit index\" refers to the position or identifier of an edit. \"Edytuj indeks\" implies an action of editing an index itself. A better translation might be \"Indeks edycji\" or \"Pozycja edycji\" depending on context.",
-          "suggestion": "Indeks edycji"
+          "description": "The translation 'Edytuj indeks' is too literal and doesn't accurately convey the meaning of 'Edit index' in this context. 'Edit index' often refers to the position of an item to be edited, not the act of editing an index itself. A more appropriate translation would depend on the context, but options like 'Pozycja edycji' or 'Indeks do edycji' might be better.",
+          "suggestion": "Consider 'Pozycja edycji' or 'Indeks do edycji' depending on the context."
         }
       ],
       "approved_at": null
@@ -228,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Modificare index' is not the most natural or accurate translation of 'Edit index' in Romanian. 'Modificare' implies a change, while 'Edit' can also refer to the position or number of an item.",
-          "suggestion": "Indice de editare"
+          "description": "While 'Modificare' translates to 'Modify' or 'Edit', 'index' in this context refers to a numerical index or position. A more accurate translation would convey this meaning.",
+          "suggestion": "Poziția de editare"
         }
       ],
       "approved_at": null
@@ -240,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Редактировать индекс\" literally translates to \"Edit index\" but doesn't accurately convey the meaning of 'Edit index' as a numerical or positional indicator. A better translation would depend on the context, but a more accurate rendering might be something like \"Индекс редактирования\" or \"Порядковый номер редактирования\".",
-          "suggestion": "Consider alternatives like \"Индекс редактирования\" or \"Порядковый номер редактирования\" depending on the specific context."
+          "description": "The translation 'Редактировать индекс' literally translates to 'Edit index'. However, 'Edit Index' often refers to a numerical position or identifier within a data set or document, not the action of editing an index. A more accurate translation might convey this meaning, such as 'Индекс редактирования' or 'Индекс изменения'.",
+          "suggestion": "Consider 'Индекс редактирования' or 'Индекс изменения' for a more accurate translation depending on the context."
         }
       ],
       "approved_at": null
@@ -252,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'දර්ශකය සංස්කරණය කරන්න' translates to 'Edit index' literally, but it doesn't convey the intended meaning of 'Edit Index' as a numerical identifier or position within a list or document. It implies 'to edit the index'.",
-          "suggestion": "A more accurate translation would depend on the context. Potential suggestions include: 'සංස්කරණ අංකය' (San-skaraṇa aṅkaya - Edit number), 'අංකය සංස්කරණය කිරීම' (Aṅkaya saṁskaraṇa kirim - Editing the index/number), or simply 'අංකය' (Aṅkaya - Number/Index) if it's clear from context."
+          "description": "The translation \"දර්ශකය සංස්කරණය කරන්න\" literally translates to \"Edit index\". While not entirely wrong, it's not the most natural or idiomatic way to express \"Edit index\" in Sinhala. A more accurate translation might emphasize the concept of indexing or referring to a specific entry.",
+          "suggestion": "Consider alternative translations like \"සංස්කරණ අංකය\" (Sanskarana ankaya - Editing number) or \"සංස්කරණ ක්‍රමයක්\" (Sanskarana kramayek - Editing system/method) depending on the context."
         }
       ],
       "approved_at": null
@@ -264,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Upraviť index\" is a literal translation of \"Edit index,\" it's not the most natural or commonly used phrasing in Slovak. \"Edit index\" often refers to a position within a list or dataset. A more accurate translation might be 'Pozícia na editáciu' or 'Index na úpravu', depending on the specific context.",
-          "suggestion": "Consider 'Pozícia na editáciu' or 'Index na úpravu' for better accuracy and naturalness."
+          "description": "While \"Upraviť index\" is a literal translation, \"Edit index\" often refers to the position or location of an edit within a dataset or sequence. A more accurate translation, depending on context, might be \"Pozícia na úpravu\" or \"Index na úpravu\".",
+          "suggestion": "Consider \"Pozícia na úpravu\" or \"Index na úpravu\" depending on the context."
         }
       ],
       "approved_at": null
@@ -282,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Измени индекс\" literally translates to \"Change index.\" The English \"Edit index\" implies a more nuanced action – likely referring to modifying or updating an existing index. \"Измени индекс\" is too direct and doesn't capture the intended meaning.  A better translation might depend on the context, but a more appropriate option would imply modification rather than a complete change.",
-          "suggestion": "Consider a translation like \"Уреди индекс\" (Uredi indeks) which means 'Adjust index' or 'Modify index' or, depending on context, something more specific like 'Ажурирај индекс' (Ažuriraj indeks) which means 'Update index'."
+          "description": "The translation \"Измени индекс\" literally translates to \"Change index\". The English term \"Edit index\" implies a more precise adjustment or modification, not a complete change. \"Измени индекс\" is too broad.",
+          "suggestion": "Измените индекс (Izmenite indeks) - More formal and precise for 'Edit index'. Or, a more suitable translation might depend on the specific context. If it's about correcting an existing index, something like 'Исправи индекс' (Ispravi indeks) – 'Correct index' – might be better."
         }
       ],
       "approved_at": null
@@ -294,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Izmeni indeks\" doesn't perfectly capture the meaning of \"Edit index.\" \"Izmeni\" means \"to change\" or \"to edit,\" but \"index\" typically refers to a numerical or positional reference. A more accurate translation would depend on the context, but a better option might be 'Indeks za izmenu' (Index for editing) or similar.",
-          "suggestion": "Consider 'Indeks za izmenu' or a more contextually appropriate alternative."
+          "description": "The translation \"Izmeni indeks\" while technically correct, doesn't convey the full meaning of 'Edit index'. 'Edit' implies modification, while 'Izmeni' means 'change'. A more accurate translation would consider the context of what is being edited.",
+          "suggestion": "Consider alternatives like \"Indeks za izmenu\" or \"Uređivanje indeksa\" depending on the precise context."
         }
       ],
       "approved_at": null
@@ -306,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Dizini düzenle\" is technically \"Edit index\", it's not the most natural or accurate translation for 'Edit index' in a software context. 'Dizini düzenle' implies editing an index itself, whereas 'Edit index' usually refers to selecting or modifying an index within a list or table.",
-          "suggestion": "Daha uygun bir çeviri 'İndeksi düzenle' veya 'İndeks numarasını düzenle' olabilir. 'Edit index' in a user interface usually refers to selecting a specific index number."
+          "description": "The translation 'Dizini düzenle' while literally meaning 'Edit index', doesn't fully convey the intended meaning of 'Edit index' in the context of a user interface element or data structure. 'Dizini düzenle' sounds more like editing a directory or index file itself, rather than editing the index value or position.",
+          "suggestion": "Consider alternatives like 'İndeks düzenle' (Index edit), 'Düzenleme dizini' (Editing index), or a more context-specific term depending on where this 'Edit Index' is used."
         }
       ],
       "approved_at": null
@@ -318,8 +306,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Редагувати індекс\" literally translates to \"Edit index,\" which is technically correct but doesn't convey the intended meaning. 'Edit index' usually refers to an index that can be edited, modified, or adjusted. The Ukrainian translation simply implies an action of editing an index.",
-          "suggestion": "Потенційно краще: Змінний індекс (Variable Index) або Індекс для редагування (Index for Editing). The best option depends on the specific context."
+          "description": "The translation \"Редагувати індекс\" literally translates to \"Edit index\". While technically correct, it's not the most natural phrasing in Ukrainian. A more appropriate translation would depend on the context. If it refers to the position of an edit, something like \"Індекс редагування\" might be better. If it's referring to an index that can be edited, \"Редагований індекс\" or \"Змінний індекс\" could be considered.",
+          "suggestion": "Consider alternatives like \"Індекс редагування\", \"Редагований індекс\", or \"Змінний індекс\" depending on context."
         }
       ],
       "approved_at": null
@@ -330,8 +318,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Sửa\" means 'edit' or 'repair', 'chỉ mục' translates to 'index'. A more accurate translation would convey the concept of an edit index, which signifies the position or identifier of an edit. A better translation would be 'Chỉ số chỉnh sửa'.",
-          "suggestion": "Chỉ số chỉnh sửa"
+          "description": "While \"Sửa\" means 'edit' or 'repair', 'chỉ mục' translates to 'index'.  'Edit index' refers to a position or marker within an edited sequence, not the act of editing the index itself. A more accurate translation would convey the meaning of a positional marker.",
+          "suggestion": "Vị trí chỉnh sửa"
         }
       ],
       "approved_at": null

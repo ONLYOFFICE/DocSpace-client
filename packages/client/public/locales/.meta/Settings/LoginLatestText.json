@@ -3,7 +3,7 @@
   "content": "Only the latest activity is shown on this page. The data itself is stored during the period specified in the field below (max 180 days).",
   "content_en_sha1_hash": "22d2d2fe430d24da6673ccd96d307465d5dd1671",
   "created_at": "2025-05-19T21:30:51.835Z",
-  "updated_at": "2025-05-21T03:55:23.496Z",
+  "updated_at": "2025-09-17T13:43:01.896Z",
   "comment": {
     "text": "This translation key is used for a text that describes the functionality and limitations of an audit trail or login history feature in a portal settings page. It explains what data is displayed (latest activity) and how it is stored (for up to 180 days).",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 135,
+      "line_number": 107,
       "context": "<HistoryMainContent\n t={t}\n subHeader={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 89,
+      "line_number": 91,
       "context": "securityLifetime.loginHistoryLifeTime && (\n <HistoryMainContent\n t={t}\n loginHistory\n subHeader={t(\"LoginSubheaderTitle\")}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}",
       "module": "/packages/client"
     }
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The word 'maksimum' is in Latin script which might not be consistent with the rest of the Azerbaijani text.",
-          "suggestion": "Replace 'maksimum' with the Azerbaijani equivalent: 'maksimum'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -54,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"измерено в дни\" (measured in days) is redundant and doesn't accurately reflect the meaning of the English 'max 180 days'. The English doesn't explicitly state the units are days.",
-          "suggestion": "На тази страница се показва само последната дейност. Самите данни се съхраняват през периода, който може да се въведе в полето по-долу (максимум 180)."
+          "description": "The phrase \"измерено в дни\" (measured in days) is redundant and doesn't accurately reflect the meaning of the English phrase \"(max 180 days)\". It's implied that the 'period' is measured in days.",
+          "suggestion": "На тази страница се показва само последната дейност. Самите данни се съхраняват през периода, който може да се въведе в полето по-долу (максимум 180 дни)."
         }
       ],
       "approved_at": null
@@ -72,13 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"gemessen in Tagen\" (measured in days) is awkward and not the most natural way to convey the meaning. It's not completely wrong, but could be improved.",
-          "suggestion": "Consider using a more fluent phrasing such as \"(maximal 180 Tage)\" or \"(bis zu 180 Tage)\"."
+          "description": "The phrase \"gemessen in Tagen\" is not the most natural way to express \"(max 180 days)\" in German. It sounds slightly awkward and too literal. A more fluent translation would be more integrated into the sentence.",
+          "suggestion": "A better translation would be something like \"(maximal 180 Tage)\" or incorporate it more naturally into the sentence structure."
         },
         {
           "type": "formatting",
-          "description": "The colon at the end of the German sentence seems unnecessary and disrupts the flow. It's not standard practice in German for this type of explanatory phrase.",
-          "suggestion": "Remove the colon at the end of the sentence: \"(maximal 180 Tage)\""
+          "description": "The use of parentheses and colons in the German translation is slightly less common and less idiomatic than in the English.  The colon after \"(maximal 180 Tage)\" is particularly noticeable.",
+          "suggestion": "Consider removing the colon after 'maximal 180 Tage' or rethinking the structure to avoid it. For instance: '...gespeichert, für maximal 180 Tage.'"
         }
       ],
       "approved_at": null
@@ -95,12 +89,12 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'indicarado' is a misspelling of 'indicado'.",
+          "description": "The word 'indicado' is misspelled. It should be 'indicado'.",
           "suggestion": "indicado"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'En está página' should be 'En esta página'.  'Está' is the short form of 'está' and refers to a temporary state. 'Esta' is the demonstrative adjective agreeing with 'página'.",
+          "description": "The phrase 'En está página' is grammatically incorrect. 'Está' should be 'esta'.",
           "suggestion": "En esta página"
         }
       ],
@@ -112,8 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The abbreviation 'max.' should be followed by a period. While understandable, it's stylistically inconsistent with the rest of the sentence.",
-          "suggestion": "max. should be max."
+          "description": "The abbreviation \"max\" is followed by a period, while \"päivää\" is not. This creates an inconsistent formatting style.",
+          "suggestion": "Remove the period after 'päivää' to match the period after 'max'."
         }
       ],
       "approved_at": null
@@ -124,18 +118,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'Juste l'activité la plus récente est affichée' is grammatically awkward. 'Juste' doesn't flow well here.  A more natural phrasing would remove it or restructure the sentence.",
-          "suggestion": "L'activité la plus récente est affichée sur cette page."
+          "description": "The phrase 'Juste l'activité la plus récente est affichée' is grammatically awkward. It should be rephrased for better flow.",
+          "suggestion": "Seule l'activité la plus récente est affichée"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'period specified in the field below' is translated as 'période que vous devez saisir dans le champ ci-dessous'.  This translates to 'period you must enter in the field below'. It implies an action from the user, whereas the English implies it's a pre-existing setting.",
-          "suggestion": "période indiquée dans le champ ci-dessous"
+          "description": "The phrase 'que vous devez saisir' (that you must enter) is not the most natural translation of 'specified in the field below'. It implies an obligation.",
+          "suggestion": "indiquée dans le champ ci-dessous"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English 'measured in days' is translated as 'mesurée en jours'. While technically correct, it's less natural. It sounds more like a formal definition rather than a user-facing description.",
-          "suggestion": "en jours"
+          "type": "formatting",
+          "description": "The parenthetical clarification 'mesurée en jours' is redundant because the sentence already mentions 'jours'.",
+          "suggestion": "Remove 'mesurée en jours'."
         }
       ],
       "approved_at": null
@@ -152,13 +146,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"misurato in giorni\" is not the most natural or accurate translation of \"(max 180 days)\". It literally translates to \"measured in days\".",
-          "suggestion": "Consider a more fluent translation like \"(massimo 180 giorni)\" or \"(fino a un massimo di 180 giorni)\""
+          "description": "The phrase \"che può essere inserito nel campo sottostante\" is a somewhat literal and slightly awkward translation of \"specified in the field below.\" It could be improved to flow better in Italian.",
+          "suggestion": "Consider alternatives like \"specificato nel campo sottostante\" or \"indicato nel campo sottostante\"."
         },
         {
           "type": "formatting",
-          "description": "The colon at the end of the Italian sentence feels slightly abrupt. It could be improved for smoother readability.",
-          "suggestion": "Remove the colon or replace it with a period."
+          "description": "The colon after 'massimo 180' is misplaced and feels jarring. It should be integrated into the sentence more naturally.",
+          "suggestion": "Remove the colon and integrate the 'massimo 180' phrase into the preceding part of the sentence for a smoother flow. For example, '...sottostante, con un massimo di 180 giorni'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'misurato' seems slightly out of place and not completely necessary. The fact that it's measured in days should be implied.",
+          "suggestion": "Remove 'misurato'. The context already clarifies it's in days. If keeping it is crucial for some reason, ensure the flow is improved."
         }
       ],
       "approved_at": null
@@ -169,18 +168,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ポータルの活動' (portaru no katsudou) translates to 'portal activity', which isn't the same as 'activity' in the English context. The English refers to user actions/logins, not just portal-related actions.",
-          "suggestion": "このページでは最新のログイン履歴が表示されています。(Kono peeji dewa saishin no login rireki ga hyouji sareteimasu.) - 'This page shows the latest login history.'"
+          "description": "The phrase \"Only the latest activity is shown on this page\" is not accurately reflected. The Japanese translation mentions \"ポータルの活動\" (portal activity) which is too specific and might not be understood by all users. It's better to use a more general term for 'activity'.",
+          "suggestion": "このページでは、最新の活動が表示されています。(Kono peji de wa, saishin no katsudō ga hyōji sareteimasu.)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase '以下のフィールドに入力される期間中' is somewhat awkward. It literally translates to 'during the period entered in the following field'. This is not a clear or natural way to express the English meaning.",
-          "suggestion": "以下の期間中に保存されます。(Ika no kikan ni torihimesu.) - 'It is saved during the following period.'"
+          "description": "The phrase \"The data itself is stored during the period specified in the field below\" is not completely accurate. The use of 'フィールドに入力される期間中' (period entered in the field) is a bit clunky and implies the user enters the duration, which is likely incorrect.",
+          "suggestion": "データは、以下の設定期間中に保存されます。(Dēta wa, ika no settei kikan-chū ni hozon saremasu.)"
         },
         {
           "type": "formatting",
-          "description": "The parenthesis around '(日数、最大１８０日)' feel disjointed and don't perfectly match the flow of the English sentence.",
-          "suggestion": "最大１８０日まで保存されます。(Saidai 180 nichi made torihimesu.) - 'It is saved up to a maximum of 180 days.'"
+          "description": "The use of parentheses and the inclusion of '日数' (days) feels slightly unnatural in this context.  It disrupts the flow of the sentence.",
+          "suggestion": "データは以下の設定期間中に保存されます。（最大１８０日）"
         }
       ],
       "approved_at": null
@@ -196,14 +195,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"The data itself is stored\" is not accurately conveyed. \"ຂໍ້ມູນຕົວມັນເອງຖືກເກັບໄວ້\" literally translates to \"the data itself is kept\". A more natural translation would be something like \"ຂໍ້ມູນຖືກເກັບໄວ້\" or \"ຂໍ້ມູນນີ້ຖືກເກັບໄວ້\".",
-          "suggestion": "ຂໍ້ມູນຖືກເກັບໄວ້"
+          "type": "spelling",
+          "description": "The word 'ມື້' (days) is spelled correctly, but it's good to confirm its accurate usage in this context. It's generally accepted but a slight rephrasing might improve flow.",
+          "suggestion": "No specific suggestion for correction, but consider:  'ຂໍ້ມູນຕົວມັນເອງຖືກເກັບໄວ້ເປັນເວລາທີ່ລະບຸໄວ້ໃນພາກສະຫນາມຂ້າງລຸ່ມນີ້ (ສູງສຸດ 180 ມື້).'  (Replacing 'ໃນໄລຍະເວລາ' with 'ເປັນເວລາ')"
         },
         {
           "type": "formatting",
-          "description": "The parenthesis and wording around the timeframe clarification \"(max 180 days)\" could be improved for readability in Lao.  It feels slightly abrupt.",
-          "suggestion": "ເວລາເກັບໄວ້ບໍ່ເກີນ 180 ມື້"
+          "description": "The Lao translation maintains the parentheses correctly. No issues.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -250,7 +249,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'отображаюся' is incorrect. It should be 'отображаются' to agree with 'действия' (actions).",
+          "description": "The verb 'отображаюся' is incorrect. It should be 'отображаются'.",
           "suggestion": "На этой странице отображаются только последние действия."
         }
       ],
@@ -261,19 +260,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"මෙම පිටුවේ\" (in this page) is a bit literal and might not flow naturally. A more natural phrasing could be something like \"මෙම ඡේදයේ\" (in this section) or simply removing it.",
-          "suggestion": "Consider rephrasing to omit \"මෙම පිටුවේ\" or replacing it with \"මෙම ඡේදයේ\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrasing \"දහස තැනක\" in the Sinhala translation is not a direct or accurate translation of 'max'. It could be misconstrued.",
-          "suggestion": "Replace \"දහස තැනක\" with a more accurate translation of 'maximum', such as \"අதிகම\" or \"උපරිම\" which is already used later in the sentence. Since 'උපරිමය' is already used, consistently use 'උපරිම'."
-        },
-        {
           "type": "formatting",
-          "description": "While technically correct, using two different words ('උපරිමය' and 'අதிகම' ) to convey the same meaning is slightly jarring. While 'උපරිමය' is used later, maintaining consistency enhances readability.",
-          "suggestion": "Consistently use 'උපරිම' throughout the translation."
+          "description": "The phrase 'උපරිමය දවස් 180 කි' lacks a period at the end of the sentence.",
+          "suggestion": "උපරිමය දවස් 180 කි."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is generally accurate, the English 'activity' is a broader term.  'ක්‍රියාකාරකම්' leans more toward 'actions'. Consider whether 'සිද්ධීන්' or a more contextually appropriate word would be more accurate. This is subtle and depends on the specific user understanding.",
+          "suggestion": "මෙම පිටුවේ නවතම සිද්ධීන් පමණක් පෙන්වයි."
         }
       ],
       "approved_at": null
@@ -326,13 +320,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"可以输入下面的字段\" is awkward and doesn't accurately convey the meaning of 'the field below'. It suggests the user can *input* into the field, which isn't the intention. It should describe the field itself.",
-          "suggestion": "The phrase should be revised to better describe the field, such as \"数据存储时间可在此字段设置\" or \"数据存储时间在此设置\"."
+          "description": "The phrase \"可以输入下面的字段\" is not a direct translation of \"The data itself is stored during the period specified in the field below\". It implies the user *can* input the field, not that the field *specifies* the storage period.  It lacks the crucial connection of the field defining the duration.",
+          "suggestion": "数据本身在这段时间内存储，该时间由下面的字段（以天为单位，最多180天）指定。"
         },
         {
           "type": "formatting",
-          "description": "The phrase \"（以天为单位，最多180天）\" is awkwardly placed. It should be more integrated into the sentence for better flow.",
-          "suggestion": "Combine the phrase with the previous sentence for better readability. For example: \"此页仅显示最新活动，数据存储时间可在此字段设置（以天为单位，最多180天）\"."
+          "description": "The parenthesis around '（以天为单位，最多180天）' is slightly awkward. While not strictly incorrect, it breaks the flow a bit. The meaning is clear, but a different phrasing might read better.",
+          "suggestion": "数据本身在这段时间内存储，该时间由下面的字段指定（以天为单位，最多180天）。"
         }
       ],
       "approved_at": null

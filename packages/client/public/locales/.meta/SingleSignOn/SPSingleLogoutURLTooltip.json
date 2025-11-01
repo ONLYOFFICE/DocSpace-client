@@ -3,7 +3,7 @@
   "content": "The URL used for the single logout on the Identity provider side",
   "content_en_sha1_hash": "34319189f5b364b3990e748fe5bae631c61cf460",
   "created_at": "2025-05-19T21:30:50.182Z",
-  "updated_at": "2025-05-21T01:42:28.435Z",
+  "updated_at": "2025-09-26T15:21:06.403Z",
   "comment": {
     "text": "The \"SPSingleLogoutURLTooltip\" translation key provides a tooltip message explaining the purpose of the \"SPSingleLogoutURL\" field in the Portal Settings UI. It is used to inform users about the URL associated with single logout on the Identity provider side when setting up Single Sign-On (SSO) options, typically displayed in a button or dialog context.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
-      "line_number": 103,
-      "context": "<MetadataUrlField\n labelText={t(\"SPSingleLogoutURL\")}\n name=\"spSingleLogoutUrl\"\n placeholder={`${url}/sso/slo/callback`}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SPSingleLogoutURLTooltip\")}</Text>\n }\n tooltipClass=\"sp-single-logout-url-tooltip icon-button\"\n />\n \n <div className=\"button-wrapper\">",
+      "line_number": 107,
+      "context": "<MetadataUrlField\n labelText={t(\"SPSingleLogoutURL\")}\n name=\"spSingleLogoutUrl\"\n placeholder={`${url}/sso/slo/callback`}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SPSingleLogoutURLTooltip\")}</Text>\n }\n tooltipClass=\"sp-single-logout-url-tooltip icon-button\"\n dataTestId=\"sp_single_logout_url\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'عنوان رابط المستخدم لتسجيل الخروج الفردي من جانب مزود الهوية' is a literal translation and doesn't flow naturally in Arabic. It's overly verbose and technical for a tooltip.",
-          "suggestion": "تسجيل الخروج من الهوية"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'من جانب مزود الهوية' (from the side of the Identity Provider) is unnecessarily explicit. The meaning is implied.",
-          "suggestion": "تسجيل الخروج من الهوية"
+          "description": "The translation \"عنوان رابط المستخدم لتسجيل الخروج الفردي من جانب مزود الهوية\" is not the most natural or accurate translation of \"The URL used for the single logout on the Identity provider side.\" A more accurate translation would emphasize that it's *the URL that is used*. The current translation implies the URL is *using* the provider.",
+          "suggestion": "عنوان URL المستخدم لتسجيل الخروج الفردي من جانب مزود الهوية"
         }
       ],
       "approved_at": null
@@ -47,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL şəxsiyyət provayderi tərəfində tək çıxış üçün istifadə olunur' is a literal translation and could be improved for clarity and naturalness in Azerbaijani. It's a bit clunky.",
-          "suggestion": "URL şəxsiyyət təminatçısı tərəfindən tək avtorizasiyadan (single logout) çıxış üçün istifadə olunur."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the sentence structure could be more idiomatic. Azerbaijani often prefers a more active voice or rearranging the sentence to flow better.",
-          "suggestion": "Şəxsiyyət təminatçısı tərəfindən istifadə olunan tək çıxış URL."
+          "description": "The translation 'URL şəxsiyyət provayderi tərəfində tək çıxış üçün istifadə olunur' is a literal translation and doesn't flow naturally in Azerbaijani. It reads a bit awkward.",
+          "suggestion": "Consider a more natural phrasing like: 'Şəxsiyyət provayderində tək çıxış üçün istifadə edilən URL' or 'Tək çıxış prosesini şəxsiyyət provayderində həyata keçirmək üçün istifadə olunan URL.'"
         }
       ],
       "approved_at": null
@@ -64,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'отписване' is a valid translation of 'logout' in this context, but 'излизане' might be more common and natural-sounding.",
-          "suggestion": "URL адресът, използван за единично излизане от страна на доставчика на идентичност"
+          "description": "The word 'от' is commonly used as 'на' in this context.",
+          "suggestion": "URL адресът, използван за единично отписване на страната на доставчика на идентичност"
         }
       ],
       "approved_at": null
@@ -73,7 +63,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"jednorázové odhlášení\" can sound a bit awkward. A more natural phrasing for 'single logout' in this context would be 'společné odhlášení'.",
+          "suggestion": "Společná adresa URL pro odhlášení na straně poskytovatele identit"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -82,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The German word 'einmalige' is often used for 'single' in the context of logout. While technically correct, 'einzige' might be more natural and commonly used in this context, emphasizing uniqueness.",
-          "suggestion": "Die URL, die für die einzige Abmeldung auf der Seite des Identitätsanbieters verwendet wird."
+          "description": "The word 'einmalige' should be 'eindeutige'. While 'einmalige' translates to 'one-time', 'eindeutige' (unique) is a more accurate and common translation for single in this context.",
+          "suggestion": "Die URL, die für die eindeutige Abmeldung auf der Seite des Identitätsanbieters verwendet wird."
         }
       ],
       "approved_at": null
@@ -91,7 +87,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'εφάπαξ' (efápax) while technically correct for 'single', can sound a bit formal and potentially confusing for some users. A more common and easily understood alternative might improve clarity.",
+          "suggestion": "Η διεύθυνση URL που χρησιμοποιείται για την αποσύνδεση από την πλευρά του παρόχου ταυτότητας"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -106,13 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kertakirjautumisessa käytetty URL identiteetintarjoajan puolella' is technically correct but could be improved for clarity and naturalness. 'Identiteetintarjoajan puolella' is a bit clunky.",
-          "suggestion": "Kertakirjautumiseen käytetty URL identiteetintarjoajalla"
+          "description": "The translation \"Kertakirjautumisessa käytetty URL identiteetintarjoajan puolella\" is a bit clunky and doesn't flow naturally in Finnish. A more natural phrasing would be 'Yksittäisen uloskirjautumisen URL identiteetintarjoajan puolella'.",
+          "suggestion": "Yksittäisen uloskirjautumisen URL identiteetintarjoajan puolella"
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing could be more consistent with typical UI text. Separating the URL description and location could improve readability.",
-          "suggestion": "Kertakirjautumiseen käytetty URL. Identiteetintarjoajan osoite."
+          "type": "incorrect_translation",
+          "description": "The English term 'single logout' is better translated as 'yksittäinen uloskirjautuminen' rather than 'kertakirjautuminen' as 'kertakirjautuminen' refers to single sign-on.",
+          "suggestion": "yksittäinen uloskirjautuminen"
         }
       ],
       "approved_at": null
@@ -128,9 +130,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'դուրս գալու' can be more accurately translated as 'անջատվելու'. 'Դուրս գալու' implies a physical exit, while 'անջատվելու' is more appropriate for a logout action.",
-          "suggestion": "URL-ն, որն օգտագործվում է Identity մատակարարի կողմից անջատվելու համար"
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'URL-ն, որն օգտագործվում է Identity մատակարարի կողմից առանձին դուրս գալու համար' is a literal translation and sounds somewhat awkward. A more natural phrasing would be 'Identity մատակարարի կողմից դուրս գալու համար օգտագործվող URL-ը'.",
+          "suggestion": "Identity մատակարարի կողմից դուրս գալու համար օգտագործվող URL-ը"
         }
       ],
       "approved_at": null
@@ -159,8 +161,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation doesn't fully capture the meaning of \"Identity provider side.\" It literally translates to 'side of the Identity provider'. A more accurate translation would convey the meaning of 'Identity provider's side' or 'Identity provider'.",
-          "suggestion": "URL ທີ່ໃຊ້ສໍາລັບການອອກຈາກລະບົບດຽວຢູ່ຝ່າຍຜູ້ໃຫ້ບໍລິການ Identity"
+          "description": "The translation 'URL ທີ່ໃຊ້ສໍາລັບການອອກຈາກລະບົບດຽວຢູ່ຂ້າງຜູ້ໃຫ້ບໍລິການ Identity' is a literal translation and could be improved for naturalness in Lao. It's a bit clunky.",
+          "suggestion": "URL ທີ່ໃຊ້ສໍາລັບການອອກຈາກລະບົບແບບດຽວກັນຈາກຝ່າຍຜູ້ໃຫ້ບໍລິການยืนยันຕົວຕົນ"
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses 'ຝ່າຍ' instead of 'ຂ້າງ' for 'side'. While 'ຂ້າງ' isn't inherently wrong, 'ຝ່າຍ' is more commonly used in technical documentation in Lao for 'side' or 'department'.",
+          "suggestion": "Consider changing 'ຂ້າງ' to 'ຝ່າຍ'."
         }
       ],
       "approved_at": null
@@ -170,19 +177,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Vietrādis' seems to be a typo. It should likely be 'Vietnes'.",
-          "suggestion": "Vietnes"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'atteikšanai' is a bit formal for this context. A more natural and user-friendly phrasing might be preferred.",
-          "suggestion": "atlaišanai"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Identity provider' is translated as 'identitātes nodrošinātāja'. While accurate, the term 'identitātes pakalpojuma sniedzēja' might be more commonly understood.",
-          "suggestion": "identitātes pakalpojuma sniedzēja"
+          "description": "The translation \"Vietrādis URL\" is not accurate. 'Vietrādis' is a rare and archaic term. A more understandable term would be 'Identitātes pakalpojuma URL' or 'Identitātes sniedzēja URL'.",
+          "suggestion": "Identitātes pakalpojuma URL, kas tiek izmantots vienotajai atteikšanai identitātes nodrošinātāja pusē"
         }
       ],
       "approved_at": null
@@ -193,13 +190,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'De URL die wordt gebruikt voor het eenmalig uitloggen aan de kant van de Identity provider' is a bit literal and could be improved for naturalness. 'Eenmalig uitloggen' is correct but potentially clunky. A more fluent translation would convey the meaning better.",
-          "suggestion": "De URL voor single logout op de Identity provider."
+          "description": "The term 'eenmalig uitloggen' is a literal translation of 'single logout' and while understandable, it's not the most natural phrasing in Dutch. 'Single logout' is often used directly or rephrased for clarity.",
+          "suggestion": "Consider 'De URL voor uitloggen via de Identity provider' or 'De URL voor Single Logout via de Identity provider'."
         },
         {
           "type": "formatting",
-          "description": "While grammatically correct, the translation could benefit from closer alignment with the English phrasing in terms of simplicity. The original is a more complex sentence structure.",
-          "suggestion": "De URL voor het uitloggen via de Identity provider."
+          "description": "While grammatically correct, the phrasing 'aan de kant van' is slightly clunky. A more fluent option would improve readability.",
+          "suggestion": "Remove 'aan de kant van' and restructure the sentence."
         }
       ],
       "approved_at": null
@@ -216,8 +213,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"O URL utilizado para o término de sessão único no lado do Fornecedor da Identidade\" is a bit literal and could be improved for clarity and naturalness in Portuguese. 'Término de sessão' is a more technical term. A more common and understandable translation would be 'desligamento de sessão'. Also, 'Fornecedor da Identidade' can be simplified to 'provedor de identidade'.",
-          "suggestion": "O URL utilizado para o desligamento de sessão no provedor de identidade."
+          "description": "The translation 'O URL utilizado para o término de sessão único no lado do Fornecedor da Identidade' is a literal translation but not the most natural way to express this in Portuguese. 'Término de sessão único' is a bit formal. A more common phrasing would be 'desligamento único' or 'encerramento de sessão único'. 'Fornecedor da Identidade' is also a literal translation of 'Identity provider' and can be simplified to 'provedor de identidade'.",
+          "suggestion": "O URL utilizado para o desligamento único no provedor de identidade."
         }
       ],
       "approved_at": null
@@ -237,13 +234,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a hyphenated URL (URL-адрес). While not strictly incorrect, URLs are usually written as one word in modern usage.",
-          "suggestion": "URL-адрес -> URL-адрес"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -252,13 +243,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අනන්‍යතා ප්‍රතිපාදකයාගේ පස තනි නික්මීම සඳහා මෙම ඒ.ස.නි. භාවිතා කරයි' is not an accurate reflection of the English content 'The URL used for the single logout on the Identity provider side'. It literally translates to 'This URL is used by the Identity provider's side for single exit'. It doesn't convey the purpose of the URL (to be used *for* single logout).",
-          "suggestion": "A more accurate translation could be: 'අනන්‍යතා සපයින්නයාගේ ඒකතනි නික්මීම් සදහා භාවිතා වන URL මෙයයි' or 'මෙය අනන්‍යතා සපයින්නයා විසින් සිදුකරනු ලබන ඒකතනි නික්මීම් සදහා යෙදෙන URL'."
+          "description": "The translation 'අනන්‍යතා ප්‍රතිපාදකයාගේ පස තනි නික්මීම සඳහා මෙම ඒ.ස.නි. භාවිතා කරයි' doesn't accurately convey the meaning of 'The URL used for the single logout on the Identity provider side.' The term 'පස' (pasa) means 'side' or 'aspect', which isn't appropriate here. It creates a convoluted and inaccurate sentence. The English phrasing clearly refers to a URL.",
+          "suggestion": "A more accurate translation would focus on the URL itself. Consider something like 'අනන්‍යතා ප්‍රෝවයිඩර‍් අතින් සිංහල විවේකය සඳහා භාවිතා කරන URL මෙයයි' (This is the URL used for single logout from the Identity Provider)."
+        },
+        {
+          "type": "spelling",
+          "description": "The use of 'සිංහල' might be confusing as it literally means 'Sinhala'. It's likely meant to indicate the 'single logout' functionality. While technically correct, it's unnecessarily specific and potentially misleading.",
+          "suggestion": "Consider replacing 'සිංහල' with a more general term for 'single logout' if one exists in common Sinhala usage. Otherwise, a more descriptive phrase explaining what 'single logout' means might be necessary. Alternatively, consider using a transliteration if no good equivalent exists."
         },
         {
           "type": "formatting",
-          "description": "The Sinhala translation uses a mix of formal and informal language. Maintaining a consistent tone is preferable, especially for technical documentation.",
-          "suggestion": "Review and standardize the language to match the technical context. Consider replacing informal words with more formal equivalents if appropriate."
+          "description": "The translation feels slightly clunky and could benefit from a more natural flow in Sinhala. The sentence structure can be improved.",
+          "suggestion": "Re-evaluate the sentence structure for a more natural and readable flow in Sinhala. Consider breaking it down into two shorter sentences for clarity. For example: 'මෙම URL අනන්‍යතා ප්‍රතිපාදකයාගේ තනි නික්මීම් සඳහා භාවිතා වේ.' 'එය අනන්‍යතා ප්‍රෝවයිඩර් අතින් සිදුකරයි' (This URL is used for single logouts. It is performed by the Identity Provider)."
         }
       ],
       "approved_at": null
@@ -275,7 +271,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'identitete' should be 'identitete'.",
+          "description": "The word 'identitete' should be 'identitete'. While understandable, it's a slight misspelling.",
           "suggestion": "identitete"
         }
       ],
@@ -287,13 +283,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation is not entirely accurate. \"једнострано одјављивање\" literally translates to 'one-sided logout', which isn't the intended meaning. It should convey the idea of 'single logout'.",
-          "suggestion": "URL који се користи за једнократно одјављивање на страни Идентитетског пружаоца"
+          "description": "The translation 'URL који се користи за једнострано одјављивање на страни Идентитетског пружаоца' is overly literal and not idiomatic Serbian. 'Strani' means 'foreign' or 'side' in a geographical sense, and doesn't fit the context of an identity provider.",
+          "suggestion": "URL који се користи за једнострано одјављивање код провајдера идентитета"
         },
         {
-          "type": "spelling",
-          "description": "The word 'Идентитетског' is misspelled. The correct spelling is 'Идентитетског'",
-          "suggestion": "Идентитетског"
+          "type": "formatting",
+          "description": "The translation uses a relatively formal tone. While acceptable, consider a slightly more accessible phrasing depending on the target audience. 'Пружаоца' is slightly clunky and formal.",
+          "suggestion": "Consider using a more conversational phrasing like 'код провајдера' or 'на сајту провајдера' if a less formal tone is desired."
         }
       ],
       "approved_at": null
@@ -316,8 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The term 'постачальника' could be more accurately rendered as 'провайдера' for better technical consistency. While 'постачальника' is not incorrect, 'провайдера' is more common in IT contexts.",
-          "suggestion": "провайдера"
+          "description": "The term 'постачальника посвідчень' is a slightly awkward phrasing. While technically correct, it's a bit verbose and formal.",
+          "suggestion": "URL-адреса, яка використовується для єдиного виходу на стороні ідентифікатора"
         }
       ],
       "approved_at": null
@@ -331,13 +327,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '用于身份供应商端单点登出的 URL' while technically correct, is a bit literal and could be improved for naturalness. 'Identity provider side' is translated very directly. A more natural phrasing would focus on the *provider's* logout functionality.",
-          "suggestion": "身份提供商的单点登出 URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Your license file",
   "content_en_sha1_hash": "1c4c09b60f7f71efda625d4b3dc0e0eb4a70baa9",
   "created_at": "2025-05-19T21:30:57.221Z",
-  "updated_at": "2025-05-20T09:47:49.406Z",
+  "updated_at": "2025-08-21T11:22:39.938Z",
   "comment": {
     "text": "The translation key PlaceholderLicense is used as a placeholder text for a file input field, displaying \"Your license file\" in the login wizard. This text will be displayed when a user attempts to upload a license file and has not yet selected one. It appears on a file input component.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 437,
-      "context": ">\n <FileInput\n scale\n size={InputSize.large}\n accept={[\".lic\"]}\n placeholder={t(\"PlaceholderLicense\")}\n onInput={onLicenseFileHandler}\n hasError={hasErrorLicense}\n isDisabled={isCreated}\n />\n </FieldContainer>",
+      "line_number": 445,
+      "context": ">\n <FileInput\n scale\n size={InputSize.large}\n accept={[\".lic\"]}\n placeholder={t(\"PlaceholderLicense\")}\n onInput={onLicenseFileHandler}\n hasError={hasErrorLicense}\n isDisabled={isCreated}\n data-test-id=\"license_file_input\"\n />",
       "module": "/packages/login"
     }
   ],
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඔබගේ බලපත්‍රයේ ගොනුව\" (Obage balapaththarayee gonuw) translates more closely to 'Your license's file' rather than the intended 'Your license file'. While understandable, it's a slightly awkward phrasing in Sinhala.",
+          "suggestion": "ඔබේ බලපත්‍ර ගොනුව (Obae balapathra gonuw)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +177,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ваша датотека лиценце' is not an accurate translation of 'Your license file'. 'Датотека' means 'file' in general, not specifically a license file. The word 'лиценца' doesn't quite convey the meaning either, as it would typically be used as a noun rather than an adjective describing a file.",
+          "suggestion": "Ваша лиценца датотека"
+        },
+        {
+          "type": "formatting",
+          "description": "The word order is slightly awkward. While understandable, it's not the most natural way to express this in Serbian.",
+          "suggestion": "Ваша лиценца датотека"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

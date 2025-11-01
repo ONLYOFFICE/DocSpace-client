@@ -3,7 +3,7 @@
   "content": "If you have found a bug, please submit it via <1>forum</1> or contact us at <3>{{supportEmail}}</3>.",
   "content_en_sha1_hash": "8a2cd9231eb08c1160d462e751f9b72dd0d858cf",
   "created_at": "2025-05-19T21:30:43.272Z",
-  "updated_at": "2025-05-28T09:30:02.930Z",
+  "updated_at": "2025-08-21T11:22:39.950Z",
   "comment": {
     "text": "This translation key provides a message for displaying when a user finds a bug. It informs users to submit their findings via the forum or contact support at a specified email address. This text appears in the UI as part of the beta badge component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/beta-badge/index.tsx",
-      "line_number": 58,
+      "line_number": 60,
       "context": "})}\n {!withOutFeedbackLink ? (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"BetaBadgeFeedback\"\n values={{\n supportEmail: documentationEmail,\n }}\n components={{\n 1: (",
       "module": "/packages/shared"
     }
@@ -29,9 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'submit it via' is better translated as 'أرسل' (arsil) or 'قم بإرسال' (qum bi irsal) which means 'send it'. The word 'أرسله' (arsil-hu) is passive and less direct.",
-          "suggestion": "إذا عثرت على خطأ، فضلًا أرسلْهُ عبر <1>المنتدى</1> أو تواصل معنا عبر الإيميل <3>{{supportEmail}}</3>."
+          "type": "formatting",
+          "description": "The angle brackets <1> and <3> are preserved in the Arabic translation, mirroring the English content's formatting. This is technically correct, but might not be the standard Arabic formatting for hyperlinks or email addresses.",
+          "suggestion": "Consider replacing <1> with a more standard Arabic hyperlink formatting, if applicable. Similarly, assess if <3> is the preferred way to denote an email address in Arabic. For example, use 'عبر البريد الإلكتروني' (via email) instead of <3>."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The `<1>` and `<3>` tags are present in both the English and Azerbaijani text. It's unclear what these tags signify, but they should be consistently handled. It is important to confirm with the localization team what these tags represent and ensure they are processed correctly or removed if unnecessary.",
-          "suggestion": "Verify the purpose of `<1>` and `<3>` tags and ensure they are handled appropriately in the Azerbaijani version (e.g., replaced with equivalent tags, removed, or processed by a system)."
+          "description": "The `<1>` and `<3>` tags are not translated. They should ideally be handled consistently with the English version if they represent specific UI elements or formatting instructions. However, without knowing their intended purpose, I can only note this.",
+          "suggestion": "Determine the purpose of the `<1>` and `<3>` tags and apply the appropriate handling in the Azerbaijani translation. If they represent UI elements, ensure they are localized or rendered correctly."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'forum' has been transliterated as 'φόρουμ' instead of translated to the Greek word for forum, which is 'ψηφιακός χώρος' (psifiakós chóros) or a more colloquial term. While 'φόρουμ' is understandable, it's not the natural Greek translation.",
-          "suggestion": "Replace <1>φόρουμ</1> with <1>ψηφιακός χώρος</1> or a more appropriate colloquial term for 'forum' in Greek."
+          "description": "The word 'forum' has been directly translated to 'φόρουμ'. While understandable, a more natural Greek phrasing would be 'φόρουμ συζητήσεων' or simply 'φόρουμ'.",
+          "suggestion": "Εάν έχετε βρει κάποιο σφάλμα, υποβάλετέ το μέσω <1>φόρουμ συζητήσεων</1> ή επικοινωνήστε μαζί μας στο <3>{{supportEmail}}</3>."
         }
       ],
       "approved_at": null
@@ -87,13 +87,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'submit it via forum' translates more accurately to 'lähetä se foorumille' rather than 'lähetä se foorumin kautta'. The preposition 'via' is often best rendered as a direct object marker in Finnish in this context.",
-          "suggestion": "Jos olet löytänyt virheen, lähetä se foorumille tai ota meihin yhteyttä osoitteessa <3>{{supportEmail}}</3>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The `<1>forum</1>` tags are present in both the English and Armenian versions, but the Armenian version might benefit from rephrasing for smoother reading. While technically correct, the direct translation sounds a bit clunky.",
-          "suggestion": "Consider rephrasing the sentence to something like:  «Եթե սխալ եք գտել, խնդրում ենք տեղեկացրեք մեզ <1>forum-ի միջոցով</1> կամ կապվեք մեզ հետ <3>{{supportEmail}}</3>» (If you have found a bug, please inform us via <1>forum</1> or contact us at <3>{{supportEmail}}</3>.).  This avoids a literal translation of 'submit it' and sounds more natural."
+          "description": "The HTML tags <1> and </1> are present in both the English and Armenian versions. While not inherently incorrect, it's important to verify that these tags are intended and render correctly in the target platform. Consider removing them if they are not functional.",
+          "suggestion": "Review the intended functionality of the <1> and </1> tags. Remove them if they're not necessary."
         }
       ],
       "approved_at": null
@@ -126,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"If you have found a bug\" is translated as \"バグを発見された場合は\". While technically correct, a more natural and common phrasing in Japanese would be \"バグを見つけた場合は\" (Bagu o mitsuketa baai wa). The current translation uses a more formal/polite form that might sound slightly stiff.",
-          "suggestion": "バグを見つけた場合は"
+          "description": "The phrase \"If you have found a bug\" is translated as \"バグを発見された場合は\". While technically correct, a more natural and polite phrasing would be \"バグを見つけられた場合は\" or \"バグを発見した場合は\". The current translation sounds slightly stiff.",
+          "suggestion": "バグを見つけられた場合は"
         },
         {
-          "type": "formatting",
-          "description": "The HTML tags <1> and <3> are preserved in the translation, which is fine. However, consider if these tags are expected to be rendered differently in the target system and if adjustments are needed.",
-          "suggestion": "No change necessary, but verify tag rendering in the target system."
+          "type": "incorrect_translation",
+          "description": "The English phrase \"submit it via\" is translated to \"報告いただくか\". While understandable, it's a slightly verbose way to say it. A more direct translation would be \"報告してください\" or \"ご報告ください\".",
+          "suggestion": "ご報告ください"
         }
       ],
       "approved_at": null
@@ -197,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'forum' in English has been translated as 'සංසදය' which means 'parliament' or 'assembly'. It should be translated as something more appropriate for a user feedback forum, such as 'අදහස් බෙදාගන්නා ස්ථානය' or 'පfeedback forum'.",
-          "suggestion": "Replace 'සංසදය' with 'අදහස් බෙදාගන්නා ස්ථානය' or 'පfeedback forum'."
+          "description": "'forum' was translated as 'සංසදය'. 'සංසදය' means 'parliament' or 'debate', not a forum. A more appropriate translation would be something like 'මණިපදය' (manipadaya) or 'Discussion මණ්ඩලය'.",
+          "suggestion": "Replace 'සංසදය' with 'මණිපදය' or 'Discussion මණ්ඩලය'."
         }
       ],
       "approved_at": null
@@ -212,7 +206,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets (<1> and <3>) are preserved in the Slovenian translation, mirroring the English. While not technically incorrect, it's unusual for Slovenian text to use such formatting. It's recommended to remove them.",
+          "suggestion": "Remove the angle brackets around 'foruma' and '{{supportEmail}}'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -221,13 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"forum\" is transliterated directly from English. A more natural Serbian (Cyrillic) equivalent would be 'форум'. However, 'форум' isn't a direct translation as it indicates a specific platform. A more general and suitable term might be 'платформу' (platform) or 'средствима' (means) depending on the desired level of formality and specific context. Using 'форум' makes it sound like it specifically refers to a forum site.",
-          "suggestion": "Ако сте пронашли грешку, молимо вас да је пријавите путем <1>платформе</1> или нас контактирате на <3>{{supportEmail}}</3>."
-        },
-        {
-          "type": "formatting",
-          "description": "The tags <1> and <3> are maintained from the original English content. They should be translated into the Serbian equivalent if they represent specific formatting instructions.",
-          "suggestion": "If these tags represent specific formatting instructions, they should be adapted to the Serbian/Cyrillic context. Otherwise, their purpose should be re-evaluated and adjusted accordingly."
+          "description": "The word \"forum\" is transliterated but not translated. The correct translation of \"forum\" in this context would be \"форум\". While technically correct, it's preferable to use the more common Serbian word, 'diskusioni forum' or similar.",
+          "suggestion": "Consider using 'форум' or 'дискусион форум' for a more natural-sounding translation."
         }
       ],
       "approved_at": null
@@ -241,13 +236,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The XML tags <1> and <3> are preserved in the Turkish translation. They should be removed or adapted to the Turkish context.",
-          "suggestion": "Remove the XML tags. The content within should be integrated naturally into the Turkish sentence."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

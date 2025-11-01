@@ -99,9 +99,9 @@ export const ImageViewer = ({
 
   const lastTapTimeRef = useRef<number>(0);
   const isDoubleTapRef = useRef<boolean>(false);
-  const setTimeoutIDTapRef = useRef<NodeJS.Timeout>();
+  const setTimeoutIDTapRef = useRef<NodeJS.Timeout>(undefined);
   // const changeSourceTimeoutRef = useRef<NodeJS.Timeout>();
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>(undefined);
   const startAngleRef = useRef<number>(0);
   const toolbarRef = useRef<ImperativeHandle>(null);
 
@@ -955,7 +955,7 @@ export const ImageViewer = ({
     return () => {
       if (imgRef.current) {
         // abort img loading
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
         imgRef.current.src = "";
       }
     };
@@ -992,22 +992,23 @@ export const ImageViewer = ({
           data-testid="image-wrapper"
         >
           <animated.img
-            className={classNames(styles.image)}
-            draggable="false"
-            src={
-              window.ClientConfig?.imageThumbnails &&
-              thumbnailSrc &&
-              !showOriginSrc
-                ? `${thumbnailSrc}&size=3840x2160&view=true`
-                : src
-            }
-            ref={imgRef}
-            style={style}
-            onDoubleClick={handleDoubleTapOrClick}
-            onLoad={imageLoaded}
-            onError={onError}
-            onContextMenu={(event) => event.preventDefault()}
-            data-testid="image-content"
+            {...({
+              className: classNames(styles.image),
+              draggable: false,
+              src:
+                window.ClientConfig?.imageThumbnails &&
+                thumbnailSrc &&
+                !showOriginSrc
+                  ? `${thumbnailSrc}&size=3840x2160&view=true`
+                  : src,
+              ref: imgRef,
+              style,
+              onDoubleClick: handleDoubleTapOrClick,
+              onLoad: imageLoaded,
+              onError,
+              onContextMenu: (event: MouseEvent) => event.preventDefault(),
+              "data-testid": "image-content",
+            } as unknown as React.ImgHTMLAttributes<HTMLImageElement>)}
           />
         </div>
       </div>

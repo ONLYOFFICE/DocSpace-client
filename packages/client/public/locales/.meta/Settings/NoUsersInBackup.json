@@ -3,7 +3,7 @@
   "content": "No users found. Try again or upload other backup files.",
   "content_en_sha1_hash": "8260f4328d4c5850393c2d05baaf45d6f9ff5b07",
   "created_at": "2025-05-19T21:30:52.066Z",
-  "updated_at": "2025-05-28T09:30:02.523Z",
+  "updated_at": "2025-09-07T07:53:15.243Z",
   "comment": {
     "text": "This translation key is used to display an error message when no users are found during a data import process. It appears in a component where a file selection step is taking place, likely as part of a data import interface within a portal settings page. The message suggests trying again or uploading another backup file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 460,
+      "line_number": 462,
       "context": "percent={100}\n className=\"complete-progress-bar\"\n label={t(\"Common:LoadingIsComplete\")}\n />\n <Text className=\"error-text\">\n {t(\"Settings:NoUsersInBackup\")}\n </Text>\n </div>\n ) : null}\n \n {isNetworkError ? (",
       "module": "/packages/client"
     }
@@ -108,13 +108,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Lao translation contains an unusual and likely erroneous repetition of characters at the end: ຊື້ມັ່ງຄືນອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື",
-          "suggestion": "ຊື້ມັ່ງຄືນອີກ"
+          "description": "The Lao translation contains several spelling errors. The repeated 'ື' characters are incorrect and make the text unreadable. 'ຊື້ມັ່ງຄືນ' should be 'ສື້ມັ່ງຄືນ'.",
+          "suggestion": "ບໍ່ພົບຜູ້ໃຊ້ໃດໆ ສື້ມັ່ງຄືນອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is awkward and could be improved for better readability.",
+          "suggestion": "ບໍ່ພົບຜູ້ໃຊ້ໃດໆ ກະລຸນາລອງອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ຊື້ມັ່ງຄືນອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື' is not a natural or accurate translation of 'Try again'.  It seems to be a combination of words.  'ອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື' doesn't appear to be a valid term.",
-          "suggestion": "ລອງອີກຄັ້ງ"
+          "description": "The phrase 'Try again' is not accurately translated. 'ສື້ມັ່ງຄືນອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື' is not a standard or clear way to express this.",
+          "suggestion": "ກະລຸນາລອງອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື"
         }
       ],
       "approved_at": null
@@ -167,8 +172,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශීලකයින්' (parishilakayin) is not the most common or natural way to say 'users' in this context. It's more formal and can sound slightly awkward. A more common and appropriate word would be 'භාවිතකරුවෝ' (bhavitakaruvō).",
-          "suggestion": "Replace 'පරිශීලකයින්' with 'භාවිතකරුවෝ'."
+          "description": "The word 'පරිශීලකයින්' (parishilakayin) is a less common and slightly awkward way to say 'users'.  A more natural and widely understood term is 'පරිශීලකයන්' (parishilakayan).",
+          "suggestion": "පරිශීලකයින් → පරිශීලකයන්"
         }
       ],
       "approved_at": null

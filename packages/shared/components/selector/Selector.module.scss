@@ -23,8 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../../shared/styles/mixins.scss";
-@import "../../../shared/styles/variables/devices.scss";
+@use "../../../shared/styles/mixins";
 
 .selector {
   width: 100%;
@@ -94,7 +93,7 @@
   :global {
     .combo-button {
       min-height: 40px;
-      padding-inline-start: 16px;
+      padding-inline-start: 16px !important;
     }
 
     .combo-button-label,
@@ -206,27 +205,36 @@
         align-items: center;
         gap: 8px;
         cursor: pointer;
+        padding: 6px 10px;
+        border-radius: 6px;
+        background-color: var(--empty-view-link-bg-color);
 
         .empty-folder_link {
-          color: var(--selector-empty-screen-button-color);
+          color: var(--accent-main, --empty-view-link-color);
         }
 
-        &:hover {
-          .empty-folder_link {
-            color: var(--selector-empty-screen-hover-button-color);
-          }
+        svg path {
+          fill: var(--accent-main, --empty-view-link-color) !important;
+        }
 
-          svg path {
-            fill: var(--selector-empty-screen-hover-button-color);
+        &:hover:not(:active) {
+          background: var(--empty-view-link-bg-color-hover);
+          & > * {
+            opacity: 0.86;
+          }
+        }
+
+        &:active {
+          background: var(--empty-view-link-bg-color-press);
+          & > * {
+            filter: brightness(90%);
           }
         }
       }
     }
 
     .empty-image {
-      max-width: 72px;
-      max-height: 72px;
-
+      max-width: 150px;
       margin-bottom: 32px;
     }
 
@@ -494,6 +502,14 @@
     cursor: pointer;
   }
 
+  &.isSystem {
+    .userAvatar {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+  }
+
   &.disabled {
     .itemLogo,
     .userAvatar {
@@ -584,7 +600,7 @@
     inset-inline-start: -12px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100%;
     position: fixed;
     top: unset;
@@ -593,4 +609,12 @@
 
     border-radius: 6px 6px 0 0;
   }
+}
+
+.selectorSeparator {
+  cursor: default;
+  margin: 8px 16px 0px 16px;
+  line-height: 1px;
+  height: 1px;
+  width: calc(100% - 32px);
 }

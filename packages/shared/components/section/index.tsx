@@ -121,6 +121,12 @@ const Section = (props: SectionProps) => {
     primaryOperationsAlert,
     needErrorChecking,
     withTabs,
+    onDragOverEmpty,
+    onDragLeaveEmpty,
+    dragging,
+    clearDropPreviewLocation,
+    dropTargetPreview,
+    startDropPreview,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -204,7 +210,9 @@ const Section = (props: SectionProps) => {
   );
 
   const isShowOperationButton =
-    secondaryActiveOperations?.length || primaryOperationsArray?.length;
+    secondaryActiveOperations?.length ||
+    primaryOperationsArray?.length ||
+    startDropPreview;
 
   const isCompletedOperations = () => {
     if (
@@ -224,6 +232,8 @@ const Section = (props: SectionProps) => {
     primaryOperationsArray.length > 0 &&
     !primaryOperationsCompleted &&
     primaryOperationsArray.some((op) => op.operation === "upload");
+
+  const isInfoVisible = canDisplay && isInfoPanelVisible;
 
   return (
     isSectionAvailable && (
@@ -263,6 +273,8 @@ const Section = (props: SectionProps) => {
           {isSectionBodyAvailable ? (
             <SubSectionBody
               onDrop={onDrop}
+              onDragOverEmpty={onDragOverEmpty}
+              onDragLeaveEmpty={onDragLeaveEmpty}
               uploadFiles={uploadFiles}
               withScroll={withBodyScroll}
               autoFocus={currentDeviceType === DeviceType.desktop}
@@ -312,6 +324,7 @@ const Section = (props: SectionProps) => {
               operations={secondaryActiveOperations}
               operationsCompleted={isCompletedOperations()}
               clearPanelOperationsData={clearPrimaryProgressData}
+              clearDropPreviewLocation={clearDropPreviewLocation}
               operationsAlert={
                 primaryOperationsAlert || secondaryOperationsAlert
               }
@@ -321,7 +334,9 @@ const Section = (props: SectionProps) => {
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
-              isInfoPanelVisible={isInfoPanelVisible}
+              isInfoPanelVisible={isInfoVisible}
+              dropTargetFolderName={dropTargetPreview}
+              isDragging={dragging}
             />
           ) : null}
         </SectionContainer>

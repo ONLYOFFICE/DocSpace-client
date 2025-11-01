@@ -3,7 +3,7 @@
   "content": "Enable Custom filter",
   "content_en_sha1_hash": "347ea46e6b8619e12adca52dc59d4182968077ea",
   "created_at": "2025-05-19T21:30:55.402Z",
-  "updated_at": "2025-06-03T20:59:42.296Z",
+  "updated_at": "2025-10-16T07:29:35.972Z",
   "comment": {
     "text": "This translation key enables a custom filter option to be displayed as \"Enable Custom filter\". It is used in a UI component to toggle the state of this feature. In a dialog or button related to file options, it provides the label for an on/off switch controlling the custom filter's visibility.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2020,
-      "context": "{\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: item.customFilterEnabled\n ? t(\"Files:CustomFilterDisable\")\n : t(\"Files:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => this.onSetUpCustomFilter(item, t),\n disabled: false,\n },\n {",
+      "line_number": 2128,
+      "context": "{\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: item.customFilterEnabled\n ? t(\"Files:CustomFilterDisable\")\n : t(\"Files:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => this.onSetUpCustomFilter(item, t),\n disabled: Boolean(\n !isRoomAdmin &&\n item.customFilterEnabled &&",
       "module": "/packages/client"
     }
   ],
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'فِلتر' is a transliteration of 'filter' and while commonly used, 'مرشح' would be the more formally correct Arabic word for filter.",
+          "suggestion": "تمكين المرشح المخصص"
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic text includes a zero-width space character, which might cause rendering issues.",
+          "suggestion": "Remove the zero-width space."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -81,7 +92,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Միացնել Հատուկ ֆիլտրը\" is a literal translation of \"Enable Custom filter.\" While understandable, a more natural and idiomatic Armenian phrasing might improve clarity. \"Միացնել հատուկ ֆիլտրի գործարկումը\" or \"Ակտիվացնել հատուկ ֆիլտրը\" could be better alternatives.",
+          "suggestion": "Consider alternatives like \"Միացնել հատուկ ֆիլտրի գործարկումը\" or \"Ակտիվացնել հատուկ ֆիլտրը\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +116,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation contains a non-breaking space ( ) which may cause rendering issues depending on the context.",
+          "suggestion": "Remove the non-breaking space. Replace '필터 활성화' with '필터활성화'."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເປີດໃຊ້ຕົວປ່ຽນແກ້ແບບປົກກະຕິ\" literally translates to 'Enable custom filter/modifier (in a normal way)'. While not entirely incorrect, it's a bit verbose and doesn't quite capture the conciseness of 'Enable Custom filter'. A more natural translation would be something more aligned with 'ເປີດການໃຊ້ງານຕົວປ່ຽນແກ້ແບບປົກກະຕິ' or 'ເປີດຕົວປ່ຽນແກ້ແບບປົກກະຕິ' depending on the preferred level of formality.",
+          "suggestion": "ເປີດການໃຊ້ງານຕົວປ່ຽນແກ້ແບບປົກກະຕິ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +170,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Filtru particularizat\" is not the most natural Romanian phrasing for \"Custom filter\". A more idiomatic translation would be \"Filtru personalizat\".",
+          "suggestion": "Filtru personalizat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +188,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"Omogoči Prilagojen filter\" appears to be Slovenian, not Sinhala.  'Omogoči' means 'Enable' in Slovenian, but not in Sinhala.",
+          "suggestion": "The correct Sinhala translation should be something like \"හැසිරවුම් වடிகවනය පැණිවිසbringen\" (Hasiruvam vadikavana paenivisbringen) or similar, accurately conveying 'Enable Custom Filter'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +212,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'филтер' is a transliteration and not a native Serbian word. The correct Serbian word for 'filter' is 'филтар'.",
+          "suggestion": "Омогућите прилагођени филтар"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

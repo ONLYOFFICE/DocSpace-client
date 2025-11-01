@@ -24,14 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import Planet12ReactSvg from "PUBLIC_DIR/images/icons/12/planet.react.svg";
 import LifetimeRoomIcon from "PUBLIC_DIR/images/lifetime-room.react.svg";
+import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 
-import { SettingsContext } from "../../../selectors/Files/contexts/Settings";
+import { SettingsContext } from "../../../selectors/utils/contexts/Settings";
 import { getUserTypeTranslation } from "../../../utils/common";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
@@ -44,6 +45,8 @@ import { EmployeeType, RoomsType } from "../../../enums";
 import NewItem from "./NewItem";
 import InputItem from "./InputItem";
 import styles from "../Selector.module.scss";
+import { useTheme } from "../../../hooks/useTheme";
+import { globalColors } from "../../../themes";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -82,7 +85,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
-  const { displayFileExtension } = useContext(SettingsContext);
+  const { displayFileExtension } = use(SettingsContext);
+  const { isBase } = useTheme();
 
   const isLoaded = isItemLoaded(index);
 
@@ -124,7 +128,26 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       userType,
       fileExst: ext,
       isTemplate,
+      isSeparator,
+      isSystem,
     } = item;
+
+    if (isSeparator) {
+      return (
+        <div style={style}>
+          <div
+            style={{
+              backgroundColor: isBase
+                ? globalColors.grayLightMid
+                : globalColors.grayDarkStrong,
+            }}
+            className={styles.selectorSeparator}
+          >
+            {"\u00A0"}
+          </div>
+        </div>
+      );
+    }
 
     if (isInputItem) {
       return (
@@ -202,26 +225,25 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       </Text>
     );
 
+    const itemAvatar = avatar ?? (isGroup && isSystem ? EveryoneIconUrl : "");
+
     return (
       <div
         key={`${label}-${avatar}-${role}`}
         style={style}
         onClick={onClick}
-        className={classNames(
-          styles.selectorItem,
-          {
-            [styles.disabled]: isDisabled,
-            [styles.selectedSingle]: isSelected && !isMultiSelect,
-            [styles.hoverable]: !isDisabled,
-          },
-          "test-22",
-        )}
+        className={classNames(styles.selectorItem, {
+          [styles.disabled]: isDisabled,
+          [styles.selectedSingle]: isSelected && !isMultiSelect,
+          [styles.hoverable]: !isDisabled,
+          [styles.isSystem]: isSystem,
+        })}
         data-testid={`selector-item-${index}`}
       >
         {avatar || isGroup ? (
           <Avatar
             className={styles.userAvatar}
-            source={avatar ?? ""}
+            source={itemAvatar}
             role={currentRole}
             size={AvatarSize.min}
             isGroup={isGroup}

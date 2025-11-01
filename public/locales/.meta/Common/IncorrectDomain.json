@@ -3,7 +3,7 @@
   "content": "Incorrect domain",
   "content_en_sha1_hash": "d609421cd522ec58b1c74e81fb0b0128cbebce7d",
   "created_at": "2025-05-19T21:30:45.845Z",
-  "updated_at": "2025-06-18T07:34:14.837Z",
+  "updated_at": "2025-10-13T13:22:35.495Z",
   "comment": {
     "text": "This translation key is used to display an error message indicating that a domain entered is incorrect. It is commonly displayed in a dialog or notification when a user attempts to access a trusted mail account with an invalid domain. The translated version of this message should appear next to \"Incorrect domain\" on the screen.",
     "is_auto": true,
@@ -24,19 +24,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 185,
+      "line_number": 188,
       "context": "setIsSaving(true);\n const valid = domains.map((domain) => regexp.test(domain));\n console.log(\"valid\", valid);\n if (type === \"1\" && valid.includes(false)) {\n setIsSaving(false);\n toastr.error(t(\"Common:IncorrectDomain\"));\n return;\n }\n \n try {\n const data = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 163,
+      "line_number": 174,
       "context": "switch (error.errorKey) {\n case ErrorKeys.LocalDomain:\n return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 163,
+      "line_number": 174,
       "context": "switch (error.errorKey) {\n case ErrorKeys.LocalDomain:\n return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:",
       "module": "/packages/shared"
     }
@@ -102,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The French translation \"Domaine incorrecte\" is grammatically incorrect. \"Domaine\" is masculine, so the adjective \"incorrecte\" should be \"incorrect\".",
+          "description": "The French translation 'Domaine incorrecte' is grammatically incorrect. 'Domaine' is masculine, so the adjective 'incorrecte' should be 'incorrect'.",
           "suggestion": "Domaine incorrect"
         }
       ],
@@ -132,7 +132,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"유효하지 않은 도메인입니다\" (yu-hw-o-ha-ji a-neun do-mein-im-ni-da) translates to 'It is an invalid domain.' While technically correct, it lacks the brevity and directness of \"Incorrect domain.\" A more accurate and concise translation would be \"잘못된 도메인입니다\".",
+          "description": "The translation \"유효하지 않은 도메인입니다\" (yu-hyo-ha-ji a-neun do-mein-im-ni-da) literally translates to \"It is an invalid domain.\" While understandable, a more natural and nuanced translation of \"Incorrect domain\" might be \"잘못된 도메인입니다\" (jal-mot-deun do-mein-im-ni-da) which means \"It is a wrong/incorrect domain.\" ",
           "suggestion": "잘못된 도메인입니다"
         }
       ],
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'වැරදි වසමකි' while literally meaning 'incorrect scope/area' doesn't accurately convey the meaning of 'Incorrect domain'. 'Domain' in this context likely refers to a digital domain (website, etc.).",
-          "suggestion": "වැරදි අඩවිය (Waeradi Adhiya) - Incorrect website/site; or වැරදි පරිවරණය (Waeradi Pariwaranya) - Incorrect Domain (more technical)"
+          "description": "The Sinhala translation \"වැරදි වසමකි\" literally translates to \"incorrect circle\" or \"incorrect boundary\". While it conveys a sense of incorrectness, 'domain' has a more specific meaning (e.g., internet domain, area of expertise). A more accurate translation would consider the context of 'domain'.",
+          "suggestion": "Consider alternative translations like \"වැරදි ප්‍රදේශය\" (weradi pradesaya - incorrect area), \"වැරදි ක්ෂේත්‍රය\" (weradi kshethrnaya - incorrect field/area of expertise) or \"අවලංගු වසම\" (awalangu vasama - invalid domain) depending on the intended meaning of 'domain'."
         }
       ],
       "approved_at": null
@@ -246,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"域不正确\" is technically correct, a more natural and common translation of \"Incorrect domain\" in Chinese would be something like \"域名不正确\" (míng yíng bù zhèng què).  \"域\" (yù) refers to a broader area, whereas \"域名\" (míng yíng) specifically refers to a domain name.",
+          "description": "While \"域不正确\" is technically correct, it's a very literal and slightly awkward translation of \"Incorrect domain\". A more natural and idiomatic translation would be something like \"域名不正确\" (míngyíng bù zhèngquè) or \"域名错误\" (míngyíng cuòwù).",
           "suggestion": "域名不正确"
         }
       ],

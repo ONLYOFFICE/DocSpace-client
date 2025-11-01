@@ -37,6 +37,14 @@ const meta = {
     editAction: { action: "editAction" },
     onClick: { action: "onClick" },
     onChangeFile: { action: "onChangeFile" },
+    role: {
+      control: "select",
+      options: Object.values(AvatarRole),
+    },
+    size: {
+      control: "select",
+      options: Object.values(AvatarSize),
+    },
   },
   parameters: {
     docs: {

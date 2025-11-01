@@ -3,7 +3,7 @@
   "content": "Revoke",
   "content_en_sha1_hash": "0be720759ff04d13c5706881d5d227a2621f91a6",
   "created_at": "2025-05-19T21:30:54.004Z",
-  "updated_at": "2025-05-28T09:30:02.602Z",
+  "updated_at": "2025-09-17T13:43:01.801Z",
   "comment": {
     "text": "This translation key \"Revoke\" is used to describe the action of canceling or terminating an OAuth developer token. It appears in a modal dialog and a button, providing a clear and concise message to users in various UI contexts.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 100,
-      "context": "if (requestRunning) return;\n \n setGenerateDeveloperTokenDialogVisible?.(false);\n };\n \n const onRevoke = async () => {\n if (requestRunning || !token) return;\n \n setRequestRunning(true);\n \n await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);",
+      "line_number": 102,
+      "context": "if (requestRunning) return;\n \n setGenerateDeveloperTokenDialogVisible?.(false);\n };\n \n const onRevoke = async () => {\n if (requestRunning || !token) return;\n \n setRequestRunning(true);\n \n await setJwtToken?.();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/RevokeDeveloperTokenDialog.tsx",
       "line_number": 157,
-      "context": "visible\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"OAuth:RevokeDialogHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:RevokeDialogDescription\")}\n </Text>",
+      "context": "visible\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"OAuth:RevokeDialogHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:RevokeDialogDescription\")}\n </Text>",
       "module": "/packages/client"
     },
     {
@@ -30,14 +30,14 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 30,
+      "line_number": 32,
       "context": "import EnableReactSvgUrl from \"PUBLIC_DIR/images/enable.react.svg?url\";\n import RemoveReactSvgUrl from \"PUBLIC_DIR/images/remove.react.svg?url\";\n import PencilReactSvgUrl from \"PUBLIC_DIR/images/pencil.react.svg?url\";\n import CodeReactSvgUrl from \"PUBLIC_DIR/images/code.react.svg?url\";\n import ExternalLinkReactSvgUrl from \"PUBLIC_DIR/images/external.link.react.svg?url\";\n import OauthRevokeSvgUrl from \"PUBLIC_DIR/images/oauth.revoke.svg?url\";\n import GenerateIconUrl from \"PUBLIC_DIR/images/icons/16/refresh.react.svg?url\";\n import RevokeIconUrl from \"PUBLIC_DIR/images/revoke.react.svg?url\";\n import DeleteIconUrl from \"PUBLIC_DIR/images/delete.react.svg?url\";\n import SettingsIconUrl from \"PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url\";",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 768,
-      "context": "};\n \n const revokeDeveloperTokenOption = {\n key: \"revoke-token\",\n icon: RevokeIconUrl,\n label: t(\"OAuth:RevokeDialogHeader\"),\n onClick: onRevokeDeveloperToken,\n disabled: !item.enabled,\n };\n \n const contextOptions: ContextMenuModel[] = [",
+      "line_number": 808,
+      "context": "};\n \n const revokeDeveloperTokenOption = {\n key: \"revoke-token\",\n icon: RevokeIconUrl,\n label: t(\"OAuth:RevokeDialogHeader\"),\n onClick: onRevokeDeveloperToken,\n disabled: !item.enabled,\n dataTestId: \"oauth_revoke_token_option\",\n };",
       "module": "/packages/client"
     }
   ],
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ləğv edin\" is a valid Azerbaijani word, it translates more closely to \"abolish\" or \"cancel\" rather than \"revoke.\" 'Revoke' in the context of OAuth refers to invalidating a token, which often implies a more specific action.",
-          "suggestion": "Consider alternatives like \"etibarsızlaşdırın\" (invalidate) or \"pozulun\" (cancel/void), depending on the specific nuance intended."
+          "description": "While 'Ləğv edin' can mean 'revoke,' it has a broader meaning of 'cancel' or 'abolish.' 'Revoke' specifically implies taking back or withdrawing something previously granted, which isn't perfectly conveyed by 'Ləğv edin'. A more precise translation might be 'Saxlayın' or 'Etibardan kənarlaşdırın'.",
+          "suggestion": "Consider 'Saxlayın' or 'Etibardan kənarlaşdırın' for a more accurate translation of 'revoke'."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Չեղյալ համարել' is a valid Armenian phrase meaning 'invalidate' or 'cancel,' it doesn't perfectly capture the nuance of 'Revoke' in the context of OAuth. 'Revoke' specifically refers to withdrawing or canceling a previously granted right or permission. A more precise translation would convey that sense of withdrawal.",
-          "suggestion": "Consider alternatives like 'Ջնջել' (Jinjel - delete), 'Արձակել' (Arzakel - rescind), or 'Հրաժարվել' (Hrajarvel - relinquish), depending on the desired level of formality and specific application context."
+          "description": "While \"Չեղյալ համարել\" is a valid Armenian phrase and can mean \"to invalidate\" or \"to cancel,\" it's a somewhat formal and indirect translation of \"Revoke.\" \"Revoke\" implies a more direct and official removal of something (like access or authorization).",
+          "suggestion": "Consider alternatives like \"Չեղարկել\" (chelgarkel) which is more directly equivalent to 'revoke', or \"Ջնջել\" (jnjel) which can also convey cancellation, depending on the specific context."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"අවලංගු කරන්න\" can be a valid translation for 'revoke,' it carries a nuance of 'invalidate' or 'cancel' rather than the direct 'revoke' meaning, which implies withdrawing something previously granted. A more precise translation focusing on the removal of access would be preferable.",
-          "suggestion": "Consider alternatives like \"ඉවත් කරන්න\" (iwat kanna - remove) or \"අහෝසිකරන්න\" (ahosikarananna - abolish/rescind), depending on the specific context of the OAuth flow."
+          "description": "While 'අවලංගු කරන්න' is a possible translation, it leans towards 'invalidate' or 'nullify' rather than the direct meaning of 'revoke' in the context of OAuth. 'ඉවත් කරන්න' or 'හරවා හැරිය' would be more accurate.",
+          "suggestion": "ඉවත් කරන්න"
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Опозови' does not accurately convey the meaning of 'Revoke'. It translates to 'Disgrace' or 'Shame' instead of 'Revoke' (to cancel or withdraw).",
-          "suggestion": "The correct translation for 'Revoke' would be 'Укини' or 'Повуци'."
+          "description": "The Serbian (Cyrillic) translation \"Опозови\" translates to \"Disgrace\" or \"Shame\" and doesn't accurately represent the English word \"Revoke,\" which means to cancel or withdraw.",
+          "suggestion": "The correct translation for \"Revoke\" in Serbian (Cyrillic) would be \"Укини\" (Ukini) or \"Повуци\" (Povuci)."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'İptal' is a valid Turkish word, it doesn't fully capture the nuance of 'Revoke' in the context of OAuth. 'Revoke' implies a cancellation of access or permissions, and 'İptal' is a more general term for cancellation. More appropriate translations could include 'Geri Çekme' or 'İade'.",
-          "suggestion": "Consider 'Geri Çekme' or 'İade' for a more accurate translation of 'Revoke' in the OAuth context."
+          "description": "While 'İptal' can mean 'cancel' or 'revoke' in some contexts, 'Revoke' in the context of OAuth specifically refers to the act of withdrawing or invalidating an authorization. 'Geri Çekmek' would be a more accurate translation of 'Revoke' in this technical context.",
+          "suggestion": "Geri Çekmek"
         }
       ],
       "approved_at": null

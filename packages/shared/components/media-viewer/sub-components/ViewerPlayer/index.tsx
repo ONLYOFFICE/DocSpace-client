@@ -548,7 +548,6 @@ export const ViewerPlayer = ({
       setIsError(true);
       setIsLoading(false);
 
-      // eslint-disable-next-line no-console
       console.error("video error", error);
     },
     [setIsError],
@@ -596,7 +595,6 @@ export const ViewerPlayer = ({
   useLayoutEffect(() => {
     setIsLoading(true);
     resetState();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src]);
 
   useEffect(() => {
@@ -637,6 +635,7 @@ export const ViewerPlayer = ({
         })}
         ref={containerRef}
       >
+        {/* @ts-expect-error - React Spring types issue with React 19 */}
         <animated.div
           className={classNames(styles.videoWrapper, {
             [styles.visible]: !isLoading,
@@ -645,28 +644,31 @@ export const ViewerPlayer = ({
           ref={playerWrapperRef}
         >
           <animated.video
-            playsInline
-            ref={videoRef}
-            hidden={isAudio}
-            autoPlay={autoPlay}
-            preload="metadata"
-            style={omit(style, ["x", "y"])}
-            src={thumbnailSrc ? src : `${src}#t=0.001`}
-            poster={posterUrl}
-            onError={hadleError}
-            onClick={handleClickVideo}
-            onEnded={handleVideoEnded}
-            onProgress={handleProgress}
-            onTimeUpdate={handleTimeUpdate}
-            onWaiting={() => setIsWaiting(true)}
-            onPlaying={() => setIsWaiting(false)}
-            onDurationChange={handleDurationChange}
-            onLoadedMetadata={handleLoadedMetaDataVideo}
-            onPlay={() => setIsPlaying(true)}
-            onContextMenu={(event) => event.preventDefault()}
-            aria-label={isAudio ? "Audio player" : "Video player"}
-            data-testid="media-player"
+            {...({
+              playsInline: true,
+              ref: videoRef,
+              hidden: isAudio,
+              autoPlay,
+              preload: "metadata",
+              style: omit(style, ["x", "y"]),
+              src: thumbnailSrc ? src : `${src}#t=0.001`,
+              poster: posterUrl,
+              onError: hadleError,
+              onClick: handleClickVideo,
+              onEnded: handleVideoEnded,
+              onProgress: handleProgress,
+              onTimeUpdate: handleTimeUpdate,
+              onWaiting: () => setIsWaiting(true),
+              onPlaying: () => setIsWaiting(false),
+              onDurationChange: handleDurationChange,
+              onLoadedMetadata: handleLoadedMetaDataVideo,
+              onPlay: () => setIsPlaying(true),
+              onContextMenu: (event: MouseEvent) => event.preventDefault(),
+              "aria-label": isAudio ? "Audio player" : "Video player",
+              "data-testid": "media-player",
+            } as unknown as React.VideoHTMLAttributes<HTMLVideoElement>)}
           />
+
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}
             visible={!isPlaying && isVideo ? !isError : false}

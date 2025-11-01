@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { type JSX } from "react";
 import { NavigateFunction, Location } from "react-router";
 
 import { TFilterSortBy, TUser } from "@docspace/shared/api/people/types";
@@ -42,6 +42,7 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import TableStore from "SRC_DIR/store/TableStore";
 import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
+import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 
 export type TableViewStores = {
   peopleStore: PeopleStore;
@@ -128,6 +129,7 @@ export type TableViewProps = {
   storageInsideGroupColumnIsEnabled?: TableStore["storageInsideGroupColumnIsEnabled"];
   columnStorageName?: TableStore["columnStorageName"];
   columnInfoPanelStorageName?: TableStore["columnInfoPanelStorageName"];
+  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
 };
 
 export type TableHeaderState = {
@@ -143,9 +145,7 @@ export type TableHeaderProps = {
 
   sectionWidth: number;
 
-  containerRef: React.MutableRefObject<
-    Nullable<React.ForwardedRef<HTMLDivElement>>
-  >;
+  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
 
   navigate: NavigateFunction;
   location: Location;
@@ -174,14 +174,16 @@ export type TItem = ReturnType<UsersStore["getPeopleListItem"]>;
 
 export type TableRowProps = {
   item: TItem;
+  itemIndex?: number;
 
   isActive?: boolean;
+  inProgress?: boolean;
 
   getContextModel?: () => ContextMenuModel[];
 
   element: JSX.Element;
 
-  isGuests: boolean;
+  contactsTab: UsersStore["contactsTab"];
 
   checkedProps?: { checked: boolean };
   onContentRowSelect?: (checked: boolean, user: TItem) => void;
@@ -197,6 +199,7 @@ export type TableRowProps = {
   hideColumns: boolean;
 
   isRoomAdmin?: TUser["isRoomAdmin"];
+  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
 
   value?: string;
   standalone?: boolean;

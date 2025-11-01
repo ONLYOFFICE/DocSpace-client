@@ -38,6 +38,7 @@ import config from "PACKAGE_FILE";
 import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 import Dialog from "./sub-components/Dialog";
 
 const CreateEvent = ({
@@ -75,6 +76,9 @@ const CreateEvent = ({
   openOnNewPage,
   openEditor,
   createFile,
+
+  isFrame,
+  frameConfig,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -116,7 +120,7 @@ const CreateEvent = ({
       };
 
       if (!extension) {
-        api.files
+        await api.files
           .createFolder(parentId, newValue)
           .then((folder) => {
             item = folder;
@@ -141,7 +145,7 @@ const CreateEvent = ({
           });
       } else {
         try {
-          if (openEditor) {
+          if (openEditor && !(isFrame && frameConfig?.events?.onEditorOpen)) {
             const searchParams = new URLSearchParams();
 
             searchParams.append("parentId", parentId);
@@ -190,9 +194,18 @@ const CreateEvent = ({
             `${newValue}.${extension}`,
             templateId,
             gallerySelected?.id,
-          ).catch((error) => {
-            toastr.error(error);
-          });
+          )
+            .then((data) => {
+              if (isFrame && frameConfig?.events?.onEditorOpen) {
+                frameCallEvent({
+                  event: "onEditorOpen",
+                  data,
+                });
+              }
+            })
+            .catch((error) => {
+              toastr.error(error);
+            });
         } catch (error) {
           toastr.error(error);
         } finally {
@@ -296,7 +309,7 @@ export default inject(
 
     const { id: parentId, isIndexedFolder } = selectedFolderStore;
 
-    const { isDesktopClient } = settingsStore;
+    const { isDesktopClient, isFrame, frameConfig } = settingsStore;
 
     const { setPortalTariff } = currentTariffStatusStore;
 
@@ -340,6 +353,9 @@ export default inject(
       keepNewFileName,
       publicRoomKey,
       openOnNewPage,
+
+      isFrame,
+      frameConfig,
     };
   },
 )(observer(CreateEvent));

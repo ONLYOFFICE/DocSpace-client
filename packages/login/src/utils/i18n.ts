@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -40,13 +39,13 @@ export const getI18NInstance = (portalLng: string) => {
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
-      format: function (value, format) {
+      format(value, format) {
         if (format === "lowercase") return value.toLowerCase();
         return value;
       },
     },
 
-    ns: ["Login", "Common", "Error", "Wizard", "Confirm"],
+    ns: ["Login", "Common", "Errors", "Wizard", "Confirm"],
     defaultNS: "Login",
 
     react: {

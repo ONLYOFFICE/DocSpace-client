@@ -26,16 +26,26 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-$font-family-base: "Open Sans", sans-serif;
+$font-family-base:
+  "Open Sans",
+  -apple-system,
+  "Segoe UI",
+  sans-serif,
+  Arial;
 
-@import url(../../../../public/css/fonts.css);
+@use "../../../../public/css/fonts.css";
 
 html,
 body {
   height: 100%;
   width: 100%;
 
-  font-family: "Open Sans", sans-serif, Arial;
+  font-family:
+    "Open Sans",
+    -apple-system,
+    "Segoe UI",
+    sans-serif,
+    Arial;
   font-size: 13px;
   overscroll-behavior: none;
 

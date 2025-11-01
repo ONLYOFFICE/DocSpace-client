@@ -26,6 +26,9 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+"use client";
+
+import type { JSX } from "react";
 import dynamic from "next/dynamic";
 
 const ClientOnly = ({ children }: { children: JSX.Element }) => children;

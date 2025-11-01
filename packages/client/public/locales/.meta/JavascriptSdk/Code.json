@@ -3,7 +3,7 @@
   "content": "Code to insert",
   "content_en_sha1_hash": "73eb0e1ccc3a17f76090eb3ee695245eb8c9ba3b",
   "created_at": "2025-05-19T21:30:54.384Z",
-  "updated_at": "2025-05-28T09:30:02.361Z",
+  "updated_at": "2025-09-26T15:21:06.196Z",
   "comment": {
     "text": "\"Used as a header text in an EmbeddingPanel component, displaying 'Code' for a translation key that provides a placeholder for inserting code.\"",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 533,
+      "line_number": 549,
       "context": "<Text\n className=\"embedding-panel_header-text\"\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"JavascriptSdk:Code\")}\n </Text>\n <IconButton\n className=\"embedding-panel_copy-icon\"\n size={16}\n iconName={CopyReactSvgUrl}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/PreviewBlock.js",
-      "line_number": 31,
-      "context": "import { useState, useEffect } from \"react\";\n import { objectToGetParams } from \"@docspace/shared/utils/common\";\n import { Tabs, TabsTypes } from \"@docspace/shared/components/tabs\";\n \n import { CodeToInsert } from \"./CodeToInsert\";\n import { GetCodeBlock } from \"./GetCodeBlock\";\n \n import { Preview } from \"../presets/StyledPresets\";\n import { showPreviewThreshold } from \"../constants\";",
+      "line_number": 33,
+      "context": "import { useTranslation } from \"react-i18next\";\n import { objectToGetParams } from \"@docspace/shared/utils/common\";\n import { Tabs, TabsTypes } from \"@docspace/shared/components/tabs\";\n \n import EyeReactSvgUrl from \"PUBLIC_DIR/images/eye.react.svg?url\";\n import CodeReactSvgUrl from \"PUBLIC_DIR/images/code.react.svg?url\";\n \n import { CodeToInsert } from \"./CodeToInsert\";\n import { GetCodeBlock } from \"./GetCodeBlock\";\n \n import { Preview } from \"../presets/StyledPresets\";",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'رمز الإدخال' while understandable, doesn't perfectly capture the nuance of 'Code to insert'. It translates to 'Input Code'. A more accurate translation reflecting the instructional context could be 'كود الإدخال' or 'تعليمات البرمجة'.",
-          "suggestion": "كود الإدخال"
+          "description": "The translation 'رمز الإدخال' while understandable, is not the most natural or idiomatic translation of 'Code to insert'. 'رمز' primarily means 'code' or 'symbol,' but in this context, 'كود' (Kood - transliteration of 'code') or a more descriptive phrase like 'تعليمات برمجية' (programming instructions) might be more appropriate.",
+          "suggestion": "Consider 'كود للإدراج' or 'تعليمات برمجية للإدراج' or 'رمز للادخال' depending on the specific context and desired level of formality."
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Daxil etmək üçün kod' while technically understandable, isn't the most natural or accurate rendering of 'Code to insert'. 'Code to insert' implies the code is for the purpose of insertion.  A more accurate translation might focus on the code itself being the thing to insert.",
-          "suggestion": "Kodun daxil edilməsi"
+          "description": "The translation 'Daxil etmək üçün kod' while literal, isn't the most natural phrasing for 'Code to insert' in Azerbaijani. It implies 'code *for* inserting' rather than simply 'inserting code'.",
+          "suggestion": "A more natural translation would be something like 'Giriləcək kod' (Code to be entered) or 'Daxil etmək lazım olan kod' (Code that needs to be inserted)."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Կոդ՝ տեղադրելու համար\" literally translates to 'Code - for placing/inserting'. While understandable, it's not the most natural or idiomatic way to express 'Code to insert' in Armenian. A more fluent translation would be 'Տեղադրելու համար ավանդական ծածկագիր' or 'Ծածկագիր՝ տեղադրելու համար'.",
-          "suggestion": "Consider 'Ծածկագիր՝ տեղադրելու համար' or 'Տեղադրելու համար ավանդական ծածկագիր'."
+          "description": "The Armenian translation \"Կոդ՝ տեղադրելու համար\" literally translates to 'Code - for inserting'. While understandable, it's a bit clunky and doesn't capture the conciseness of 'Code to insert'. A more natural translation would be something like 'Տեղադրելու համար կոդ' or 'Կոդ տեղադրության համար'.",
+          "suggestion": "Կոդ տեղադրության համար"
         }
       ],
       "approved_at": null
@@ -123,7 +123,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '입력할 코드' literally translates to 'code to input'. While understandable, a more natural and accurate translation would convey the meaning of 'code to insert' more directly.",
+          "suggestion": "삽입할 코드"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -135,7 +141,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ievietojamais kods' while technically correct, is a bit literal. A more natural translation might be 'Kods ievietošanai'. 'Ievietojamais kods' implies the code is being inserted by someone/something, while 'Kods ievietošanai' simply means 'code for insertion'.",
+          "suggestion": "Kods ievietošanai"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -180,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඇතුළු කිරීමට කේතය' while literally meaning 'code to insert', doesn't quite capture the nuance of 'Code to insert'. It's a bit clunky. A more natural phrasing might be 'ඇතුළත් කල යුතු කේතය' or 'ඇතුළත් කරගත යුතු කේතය'.",
-          "suggestion": "ඇතුළත් කල යුතු කේතය"
+          "description": "The Sinhala translation 'ඇතුළු කිරීමට කේතය' (Athulukaraminaketha) literally translates to 'Code to include'. The English phrase 'Code to insert' implies a slightly different action - to embed or put the code within something. While 'include' isn't entirely wrong, 'ඇතුළු කිරීමට' (Athulukaraminak) can imply a more general inclusion, rather than a targeted insertion.",
+          "suggestion": "Consider 'ඇතුලත් කිරීමට කේතය' (Athulatha ketha) or 'ආමිණු කිරීමට කේතය' (Aaminu karamin ketha) to better reflect the meaning of 'insert'."
         }
       ],
       "approved_at": null
@@ -204,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Ћаскање' translates to 'chatting' or 'gossiping,' which is not an accurate translation of 'Code to insert'. It doesn't convey the technical meaning of code.",
-          "suggestion": "A more accurate translation would depend on the context, but possible options include: 'Код за убацивање', 'Убацивање кода', 'Код који се убацује'."
+          "description": "'Ћаскање' translates to 'chatting' or 'gossiping' in Serbian, which is not an accurate translation of 'Code to insert'. The translation doesn't convey the meaning of code that should be inserted.",
+          "suggestion": "Consider 'Убацити код' or 'Код за убацивање' which directly translates to 'Insert code' or 'Code to insert'."
         }
       ],
       "approved_at": null

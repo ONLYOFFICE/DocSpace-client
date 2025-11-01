@@ -3,7 +3,7 @@
   "content": "Your price",
   "content_en_sha1_hash": "16a067af179c1f81645e2954ee05c68337fd773c",
   "created_at": "2025-05-19T21:30:53.756Z",
-  "updated_at": "2025-05-28T09:30:02.672Z",
+  "updated_at": "2025-09-01T14:09:50.119Z",
   "comment": {
     "text": "This translation key is used to display \"Your price\" in a payment calculation context, typically on a settings page or pricing information section. It appears as a title and will be shown when certain conditions are met, indicating that the user's price should be displayed instead of another option.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PriceCalculation.js",
-      "line_number": 171,
-      "context": "fontWeight={600}\n noSelect\n className=\"payment_main-title\"\n >\n {isGracePeriod || isNotPaidPeriod\n ? t(\"YourPrice\")\n : t(\"PriceCalculation\")}\n </Text>\n {isGracePeriod || isNotPaidPeriod ? (\n <CurrentUsersCountContainer\n isNeedPlusSign={isNeedPlusSign}",
+      "line_number": 170,
+      "context": "return (\n <StyledBody className=\"price-calculation-container\" isDisabled={isDisabled}>\n <Text fontSize=\"16px\" fontWeight={600} className=\"payment_main-title\">\n {isGracePeriod || isNotPaidPeriod\n ? t(\"YourPrice\")\n : t(\"PriceCalculation\")}\n </Text>\n {isGracePeriod || isNotPaidPeriod ? (\n <CurrentUsersCountContainer\n isNeedPlusSign={isNeedPlusSign}",
       "module": "/packages/client"
     }
   ],
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Hintasi' is a possible translation, it's less common and potentially misleading. 'Hintasi' implies 'your suggestion' or 'your tip'. The accurate translation for 'Your price' in a payment context is typically 'Sinun hintasi' or 'Hintaasi'.",
-          "suggestion": "Sinun hintasi"
+          "description": "While 'Hintasi' can be translated as 'Your price', it's more accurately 'Your offer' or 'Your quote'. 'Hintasi' implies something offered or suggested, not necessarily a final price. 'Hintasi' also isn't commonly used for a price.",
+          "suggestion": "Consider 'Hinta' (Price), 'Sinun hintasi' (Your price), or 'Sinun tarjouksesi' (Your offer) depending on context."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"価格\" (Kakaku) translates to \"price\" or \"cost\" in general, but \"Your price\" implies a personalized or specific price for the user.  A more accurate translation would convey this possessive element.",
-          "suggestion": "検討価格 (Kentō Kakaku - Estimated Price) or あなたの価格 (Anata no Kakaku - Your Price)"
+          "description": "The translation \"価格\" (Kakaku) is a general term for 'price' and doesn't specifically convey \"Your price.\" It's too generic and doesn't capture the possessive aspect.",
+          "suggestion": "Consider \"お客様の価格\" (Okyakusama no Kakaku) which translates to 'Customer's price' or \"ご料金\" (Go Ryōkin) which translates to 'Your fare/charge.'"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"내 요금\" (nae yogeum) is a possible translation for \"Your price\", it can also mean \"My fee\" or \"My rate\". \"Your price\" implies ownership by the customer, and a more accurate translation would be something that directly conveys that ownership. ",
-          "suggestion": "고객 가격 (gogaek gagyeok) - Customer price, or 당신의 가격 (dangsinui gagyeok) - Your price"
+          "description": "'Your price' can have multiple appropriate Korean translations depending on context. '내 요금' (nae yogeum) is a possible translation, but might be more suitable for a pre-agreed price or a fixed fee.  A more general and potentially better translation, especially in a user-facing context, could be '가격' (gageok) or '금액' (geumak).",
+          "suggestion": "Consider '가격' (gageok) or '금액' (geumak) as alternatives, depending on the specific context."
         }
       ],
       "approved_at": null
@@ -165,13 +165,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Ваша стоимость' is technically correct, 'Ваша цена' would be a more natural and commonly used translation for 'Your price' in this context (referring to a price of a product or service). 'Стоимость' is more formal and often refers to the total cost or value of something, not just the price.",
+          "suggestion": "Ваша цена"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ඔබගේ මිල\" is a literal translation of \"Your price\", it's not the most natural or commonly used phrasing in Sinhala for this context. A more natural translation would be \"ඔබේ මිල\"",
+          "suggestion": "ඔබේ මිල"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -204,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Your price' implies a personalized or specific price. 'Ücret' simply means 'fee' or 'charge' and lacks the nuance of 'your price'.",
-          "suggestion": "Consider alternatives like 'Sizin Fiyatınız' (Your Price), 'Kişisel Fiyatınız' (Your Personalized Price), or 'Özel Fiyatınız' (Your Special Price), depending on the context."
+          "description": "While \"Ücret\" can mean 'price', it's a more formal term. 'Your price' implies a personalized or specific price. A more suitable translation would consider that nuance.",
+          "suggestion": "Fiyatınız"
         }
       ],
       "approved_at": null
@@ -222,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Phí thanh toán của bạn\" is understandable, it's not the most natural or concise translation of \"Your price.\" \"Phí của bạn\" or simply \"Giá của bạn\" would be more common and clearer in Vietnamese.",
+          "description": "The translation 'Phí thanh toán của bạn' translates to 'Your payment fee' which isn't a direct equivalent of 'Your price'. 'Your price' implies the total cost, whereas the translation emphasizes a fee specifically for payment. A more accurate translation might be 'Giá của bạn' or 'Tổng giá của bạn'.",
           "suggestion": "Giá của bạn"
         }
       ],

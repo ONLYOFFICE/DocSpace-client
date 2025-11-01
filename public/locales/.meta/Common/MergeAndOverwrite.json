@@ -3,7 +3,7 @@
   "content": "Merge and overwrite",
   "content_en_sha1_hash": "eb9c66da688e2f80d058216855946cdad7300b1b",
   "created_at": "2025-05-19T21:30:46.458Z",
-  "updated_at": "2025-05-28T09:30:02.216Z",
+  "updated_at": "2025-05-26T07:57:32.241Z",
   "comment": {
     "text": "The translation key \"MergeAndOverwrite\" is used to describe a merge and overwrite action in a conflict resolution dialog. This text appears as a title in a file-based merge dialog, instructing the user on what action they are about to take. It should be translated to convey a similar sense of merging content with an option to replace it.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Միավորել և վերագրանցել\" doesn't fully capture the meaning of 'Merge and overwrite'. \"Վերագրանցել\" implies re-registering, which is not the intended meaning of overwriting data. \"Վերագրանցել\" implies a new entry, not an update of an existing one.",
-          "suggestion": "Consider alternatives like \"Միավորել և գրել վրայով\" or \"Միավորել և թարմացնել\" which more accurately convey the concept of overwriting."
+          "description": "The Armenian translation \"Միավորել և վերագրանցել\" doesn't accurately convey the meaning of 'Merge and overwrite'. 'Վերագրանցել' (veragrantsel) implies re-registering or re-enrolling, which isn't the intended meaning of 'overwrite'. A better translation would focus on replacing existing data.",
+          "suggestion": "Consider alternatives like \"Միավորել և գրել վրայում\" (Miavorgel ev grel vrayum) which translates to 'Merge and write on top' or \"Միավորել և փոխարինել\" (Miavorgel ev poxarinel) which translates to 'Merge and replace'."
         }
       ],
       "approved_at": null
@@ -102,13 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"結合＆上書き\" is a literal rendering using katakana and doesn't fully convey the meaning of 'Merge and overwrite' in a natural Japanese way. \"結合\" (kyuusei) is a reasonable translation for 'merge,' but the '&' and \"上書き\" (uwagaki) which is a more technical term, feels clunky and lacks fluency.",
-          "suggestion": "Consider a more natural phrasing like \"マージ＆上書き\" (Maaji & Uwagaki), or a more descriptive translation like \"結合して上書きする\" (Kyuusei shite uwagaki suru), or even a simpler \"統合＆上書き\" (Togou & Uwagaki) depending on the context."
+          "description": "The translation \"結合＆上書き\" doesn't fully capture the meaning of 'Merge and overwrite'. '結合' (ketsugou) means 'combination' or 'union' which is close to 'merge', but '上書き' (uwagaki) is a more technical term for 'overwrite' and might not be understood by a general audience. A more natural translation would depend on the specific context.",
+          "suggestion": "Consider alternative translations like \"マージ＆上書き\" (Maaji & uwagaki - using the katakana for 'merge') or a more descriptive phrase like \"統合と上書き\" (tougou to uwagaki - integration and overwrite)."
         },
         {
           "type": "formatting",
-          "description": "Using a combination of Japanese and Katakana is unusual and visually jarring.  The ampersand (&) is not standard in Japanese text.",
-          "suggestion": "Replace the ampersand with a hyphen ( - ) or a full word like \"と\" (to) for 'and' if appropriate.  Evaluate whether all words need to be in katakana."
+          "description": "The use of '＆' (ampersand) in a Japanese translation can feel slightly unnatural. While understandable, it's more common to use 'と' (to) or a hyphen.",
+          "suggestion": "Replace '＆' with 'と' or a hyphen. For example: \"結合と上書き\" or \"結合-上書き\"."
         }
       ],
       "approved_at": null
@@ -173,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'එදාට ඒකාබද්ධ කර පෙර ලිවීම' doesn't accurately convey the meaning of 'Merge and overwrite'. 'එදාට' (edata) implies 'to that day' or 'then,' which isn't relevant. 'ඒකාබද්ධ කර' (ekābadha kara) means 'merge', which is correct, but 'පෙර ලිවීම' (pera liwīma) which translates to 'pre-writing' or 'writing before' does not accurately represent 'overwrite'. Overwrite implies replacing existing content, not writing before it.",
-          "suggestion": "A more accurate translation could be something like 'අඛණ්ඩව ලිවීම' (akhanaḍawa liwīma) - meaning 'continuous writing' or 'overwriting', or 'අවසන් කිරීම' (avasan kirima) - meaning 'to replace' or 'to supersede'."
+          "description": "The Sinhala translation \"එදාට ඒකාබද්ධ කර පෙර ලිවීම\" doesn't accurately convey the meaning of \"Merge and overwrite\". \"එදාට\" implies a past tense or specific date, which isn't part of the English phrase. \"පෙර ලිවීම\" (pera l'ivima) means 're-writing' or 'overwriting' but the 'merge' aspect is missing. A better translation would incorporate both merging and overwriting.",
+          "suggestion": "Consider \"එකතුකරමින් පෙර ලිවීම\" (ekathukaramin pera l'ivima) which implies merging and overwriting, or \"එකතුකරලා පෙර ලිවීම\" (ekathukarla pera l'ivima)."
         }
       ],
       "approved_at": null
@@ -197,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Споји и препиши\" while technically conveying the meaning of 'merge' and 'overwrite', doesn't fully capture the nuance. \"Препиши\" can imply a more direct copy and overwrite, rather than a merge where data is combined. A more accurate translation for 'merge' in this context might involve combining the information, rather than simply overwriting.",
-          "suggestion": "Споји и усаврши (Spaji i usavrši) - Merge and improve/refine, or Споји и обнови (Spaji i obnovi) - Merge and update."
+          "description": "While \"Споји и препиши\" is understandable, it doesn't perfectly capture the nuance of \"Merge and overwrite.\" \"Merge\" often implies combining data, while \"overwrite\" suggests replacing existing data. A more accurate translation would consider that context.",
+          "suggestion": "Consider alternatives like \"Упореди и замени\" (Compare and replace) or \"Споји и замени\" (Merge and replace), depending on the specific use case.  A more nuanced option could be \"Упореди и надпиши\" (Compare and write over)."
         }
       ],
       "approved_at": null
@@ -209,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Spoji i prepiši\" is understandable, it doesn't perfectly capture the nuance of \"Merge and overwrite.\" \"Spoji\" implies joining, while \"Merge\" is a more precise combination. \"Prepíši\" can mean rewrite or copy over, but \"Overwrite\" has a more specific meaning of replacing existing data.",
-          "suggestion": "Consider \"Ujedini i prepiši\" or \"Ujedini i zapiši preko\" for a more accurate translation. Alternatively, \"Sjedini i prepisi\" could be an acceptable compromise."
+          "description": "The Serbian translation \"Spoji i prepiši\" doesn't accurately convey the meaning of 'Merge and overwrite'. 'Spoji' means 'join' and 'prepiši' means 'copy'. While it's close, it lacks the 'overwrite' aspect which is crucial to the meaning.",
+          "suggestion": "A better translation might be \"Sjedini i prepisi\" or \"Sjedini i zapiši preko\" depending on the desired level of formality and accuracy. \"Sjedini\" captures the merging aspect more directly."
         }
       ],
       "approved_at": null
@@ -221,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Birleştir ve üzerine yaz\" is a literal translation of \"Merge and overwrite\", it might not be the most natural or idiomatic way to express this concept in Turkish, particularly in a technical context. \"Birleştir ve üzerine yaz\" sounds somewhat clunky and could be interpreted as simply combining and writing on top of something, not necessarily overwriting in the sense of replacing existing data.",
-          "suggestion": "Consider alternatives like \"Birleştir ve değiştir\" (Merge and replace) or \"Birleştir ve üzerine yazdır\" (Merge and write over), or a more context-specific wording depending on the application."
+          "description": "While \"Birleştir ve üzerine yaz\" is technically a translation of \"Merge and overwrite\", it's not the most natural or idiomatic way to express it in Turkish. It sounds somewhat literal.",
+          "suggestion": "Consider alternatives like \"Birleștirme ve üzerine yaz\" or \"Birleștirilip üzerine yaz.\" A more context-dependent and natural option might be needed depending on the specific use case. A specialist should review the best translation."
         }
       ],
       "approved_at": null

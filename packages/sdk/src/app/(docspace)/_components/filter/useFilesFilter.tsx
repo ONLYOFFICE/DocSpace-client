@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import {
   TItem,
@@ -13,7 +13,7 @@ import {
   FilterType,
   SortByFieldName,
 } from "@docspace/shared/enums";
-import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
+import { TSortBy, type TViewAs } from "@docspace/shared/types";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";
@@ -36,9 +36,10 @@ export default function useFilesFilter({
 }: useFilesFiltersProps) {
   const { t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const [filter, setFilter] = React.useState<FilesFilter>(
-    FilesFilter.getFilter({ search: `?${filesFilter}` } as Location)!,
+    FilesFilter.getFilter({ search: `?${filesFilter}`, pathname } as Location)!,
   );
 
   React.useEffect(() => {
@@ -276,7 +277,7 @@ export default function useFilesFilter({
 
       filterValues.push({
         key: `${filter.filterType}`,
-        label: label,
+        label,
         group: FilterGroups.filterType,
       });
     }
@@ -286,7 +287,6 @@ export default function useFilesFilter({
 
   const initSelectedFilterData = React.useMemo(
     () => getSelectedFilterData(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [], // should be calculated once
   );
 
@@ -295,13 +295,13 @@ export default function useFilesFilter({
       {
         id: "view-switch_rows",
         value: "row",
-        label: t("Common:ViewList"),
+        label: t("Files:ViewList"),
         icon: <ViewRowsReactSvg />,
       },
       {
         id: "view-switch_tiles",
         value: "tile",
-        label: t("Common:ViewTiles"),
+        label: t("Files:ViewTiles"),
         icon: <ViewTilesReactSvg />,
       },
     ];
@@ -316,7 +316,7 @@ export default function useFilesFilter({
   }, [setFilesViewAs, filesViewAs]);
 
   const removeSelectedItem = React.useCallback(
-    ({ key, group }: { key: string | number; group?: FilterGroups }) => {
+    ({ group }: { key: string | number; group?: FilterGroups }) => {
       const newFilter = filter.clone();
 
       if (group === FilterGroups.filterType) {

@@ -62,6 +62,7 @@ const ShareFormCard = ({
         label={buttonLabel}
         icon={<ArrowIcon />}
         size={ButtonSize.normal}
+        testId={`share_from_card_${id}`}
       />
     </div>
   );

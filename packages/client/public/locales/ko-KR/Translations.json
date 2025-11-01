@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "목록에서 선택",
-  "ConnectingAccount": "계정 연결 중",
-  "DeleteFromTrash": "선택 요소가 휴지통에서 성공적으로 삭제되었습니다",
   "FileLocked": "파일이 잠겼습니다",
   "FileProtected": "비밀번호로 보호된 파일입니다",
   "FileUnlocked": "파일이 잠금 해제되었습니다",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive 디렉토리",
   "FolderTitleWebDav": "WebDAV 디렉토리",
   "FolderTitleYandex": "Yandex 디렉토리",
-  "GuestReleaseTipDescripton": "이전에 추가한 모든 사용자는 게스트가 되었으며 이제 {{productName}} 관리자의 연락처 목록에서만 사용할 수 있습니다. 게스트는 더 이상 어떤 그룹에도 속하지 않습니다. 필요에 따라 언제든지 사용자 유형을 변경하고 그룹에 추가할 수 있습니다.",
-  "GuestReleaseTipLink": "사용자 유형에 대해 더 보기",
-  "LinkHasExpiredAndHasBeenDisabled": "링크가 만료되어 비활성화되었습니다",
   "LinkValidTime": "이 링크는 {{days_count}}일 동안만 유효합니다.",
   "NewForm": "PDF 양식",
   "OwnerChange": "소유자 변경",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "제3자 서비스",
   "TitleShowActions": "파일 동작 표시",
   "TitleShowFolderActions": "폴더 작업 표시",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "{{sectionName}}에서 선택한 항목이 성공적으로 삭제되었습니다."
 }

@@ -3,7 +3,7 @@
   "content": "Enter height",
   "content_en_sha1_hash": "584df7fd9c2be290b3a2f821fb9d0d47cf3681b4",
   "created_at": "2025-05-19T21:30:54.473Z",
-  "updated_at": "2025-05-21T09:11:27.376Z",
+  "updated_at": "2025-08-04T07:30:01.407Z",
   "comment": {
     "text": "This translation key is used for labeling a placeholder that asks users to input their height. It appears as a dialog prompt or a form field, and its purpose is to provide guidance to the user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/HeightSetter.js",
       "line_number": 70,
-      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"EmbeddingPanel:Height\")} />\n <RowContainer combo>\n <TextInput\n onChange={onChangeHeight}\n placeholder={t(\"EnterHeight\")}\n value={height}\n tabIndex={3}\n />\n <ComboBox\n size=\"content\"",
+      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"EmbeddingPanel:Height\")} />\n <RowContainer combo>\n <TextInput\n onChange={onChangeHeight}\n placeholder={t(\"EnterHeight\")}\n value={height}\n tabIndex={3}\n testId=\"height_dimension_input\"\n />\n <ComboBox",
       "module": "/packages/client"
     }
   ],
@@ -83,9 +83,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Armenian translation \"Մուտքագրել բարձրություն ը\" is grammatically incorrect. The trailing \"ը\" is unnecessary and creates an awkward phrasing. The verb \"Մուտքագրել\" (Enter) is used correctly, but the sentence structure needs improvement.",
-          "suggestion": "Մուտքագրեք բարձրությունը"
+          "type": "incorrect_translation",
+          "description": "The translation 'Մուտքագրել բարձրություն ը' is not a natural or accurate translation of 'Enter height'.  The trailing 'ը' makes the phrase awkward and grammatically incorrect.  It's likely a remnant of an earlier attempt or a misunderstanding of the original phrase.",
+          "suggestion": "Մուտքագրել բարձրություն (Mutqagrel bardzrutyun)"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, adding a space after 'Մուտքագրել' would improve readability. The current phrasing feels slightly compressed.",
+          "suggestion": "Մուտքագրել  բարձրություն"
         }
       ],
       "approved_at": null
@@ -108,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '높이 입력' is a literal translation of 'Enter height' but might not be the most natural or idiomatic phrasing for a user interface label. A more natural phrasing might be '키 입력' or '신장 입력'.",
-          "suggestion": "Consider '키 입력' or '신장 입력' for a more user-friendly label."
+          "description": "While \"높이 입력\" is understandable, a more natural and commonly used translation for \"Enter height\" in Korean would be \"키 입력\" or \"신장 입력\". \"높이\" refers to the height of an object, not a person's height.",
+          "suggestion": "키 입력"
         }
       ],
       "approved_at": null
@@ -168,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'උස යොදන්න' while generally understandable, is a more literal translation of 'Enter height'. A more natural and idiomatic Sinhala translation for a form field label would be something like 'උස සඳහන් කරන්න' or 'උස ඇතුළත් කරන්න'. 'යොදන්න' implies adding or joining, which isn't the primary action intended in this context.",
-          "suggestion": "උස සඳහන් කරන්න"
+          "description": "The translation 'උස යොදන්න' while literally meaning 'Enter height', sounds slightly unnatural in Sinhala for this context. A more natural phrasing would be 'වශයෙන් උස දාන්න' or 'උස ඇතුළත් කරන්න'.",
+          "suggestion": "වශයෙන් උස දාන්න"
         }
       ],
       "approved_at": null
@@ -198,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Unesi visinu' does not accurately convey the meaning of 'Enter height'. 'Unesi' means 'enter' but 'visinu' is not the correct term for 'height'.",
+          "description": "The Serbian translation 'Unesi visinu' is not the most natural or accurate translation of 'Enter height'. While 'unesi' means 'enter', 'visinu' refers to 'height' in the accusative case. The most common and accurate translation would be 'Unesite visinu'.",
           "suggestion": "Unesite visinu"
         }
       ],

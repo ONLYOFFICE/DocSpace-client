@@ -3,7 +3,7 @@
   "content": "Enter URL like this: https://example.com",
   "content_en_sha1_hash": "763567f27acb23f2192a45bc89a02abe46cb4f02",
   "created_at": "2025-05-19T21:30:54.427Z",
-  "updated_at": "2025-05-28T09:30:02.587Z",
+  "updated_at": "2025-09-17T13:43:01.796Z",
   "comment": {
     "text": "The \"CSPInputPlaceholder\" translation key is used to display a placeholder message that instructs users to enter a URL in a specific format. This placeholder appears as a text input field in the UI, likely in a dialog or settings page where users configure their Content Security Policy (CSP).",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 273,
-      "context": ") : null}\n <Container className=\"input-holder\">\n <TextInput\n onChange={onChangeDomain}\n value={domain}\n placeholder={t(\"CSPInputPlaceholder\")}\n tabIndex={1}\n hasError={error}\n isDisabled={disableCSP}\n />\n <SelectorAddButton isDisabled={!domain.trim()} onClick={addDomain} />",
+      "line_number": 269,
+      "context": ") : null}\n <Container className=\"input-holder\">\n <TextInput\n onChange={onChangeDomain}\n value={domain}\n placeholder={t(\"CSPInputPlaceholder\")}\n tabIndex={1}\n hasError={error}\n isDisabled={disableCSP}\n testId=\"allowed_domains_text_input\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'قم بإدخال' is a bit formal. A more natural phrasing would be 'أدخل' or 'ضع رابط'.",
-          "suggestion": "أدخل رابط مثل: https://example.com"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL'yi bu cür daxil edin: https://example.com' is not a natural or accurate translation of 'Enter URL like this: https://example.com'. It uses a slightly awkward phrasing in Azerbaijani. The term 'cür' is not commonly used in this context.",
-          "suggestion": "Consider a more natural phrasing such as 'URL-i belə daxil edin: https://example.com' or 'URL-ü aşağıdakı kimi daxil edin: https://example.com'."
+          "description": "The translation 'URL'yi bu cür daxil edin: https://example.com' is not a natural or accurate translation of 'Enter URL like this: https://example.com'. 'URL'yi' sounds somewhat forced and 'bu cür' is not the most common way to express 'like this'.",
+          "suggestion": "Consider a more natural translation such as 'URL-i belə daxil edin: https://example.com' or 'URL-i aşağıdakı kimi daxil edin: https://example.com'."
         },
         {
           "type": "spelling",
-          "description": "While 'URL-i' is technically correct, 'URL-ü' is generally preferred as the definite accusative suffix for URLs.",
-          "suggestion": "Change 'URL-i' to 'URL-ü'."
+          "description": "While not strictly incorrect, 'cür' might be better replaced with 'kimi' for a more standard phrasing.",
+          "suggestion": "Replace 'bu cür' with 'kimi'."
         }
       ],
       "approved_at": null
@@ -98,19 +92,24 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The backtick character (`) is misplaced and interrupts the sentence flow. It should be removed or repositioned.",
+          "suggestion": "Մուտքագրեք URL այսպես: https://example.com"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Մուտքագրեք' is correct, it might be slightly more natural to use a more informal word like 'Մուտք մի՛ր' depending on the context. However, 'Մուտքագրեք' is perfectly acceptable.",
+          "suggestion": "Մուտք մի՛ր URL այսպես: https://example.com"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Inserisci l'URL come: https://example.com' is literal and doesn't quite capture the natural flow of the English phrase. A more natural translation would be 'Inserisci un URL come questo: https://example.com' or 'Immetti un URL come questo: https://example.com'. 'Come questo' is more common than 'come'.",
-          "suggestion": "Inserisci un URL come questo: https://example.com"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -119,7 +118,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon and space after '次のように' could be improved for better readability. It feels a bit abrupt.",
+          "description": "The colon and space after 'URLを入力' could be improved for better readability. While technically correct, it's a bit stiff.",
           "suggestion": "URLを次のように入力してください： https://example.com"
         }
       ],
@@ -143,7 +142,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'vietrādi' is not the correct translation for 'like this' in this context. It implies a reciprocal or equivalent relationship, which isn't intended here. 'Kā šādi' or 'Šādi' would be more appropriate.",
+          "description": "The word 'vietrādi' is not the correct translation for 'like this' in this context. It means 'in place of' or 'instead of', which doesn't convey the intended meaning.",
           "suggestion": "Ievadiet URL šādi: https://example.com"
         }
       ],
@@ -179,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Romanian translation includes a space before the URL 'https://example.com'. While not strictly incorrect, it deviates from the English original's formatting.",
-          "suggestion": "Remove the space before the URL: Introduceți URL-ul în felul următor: https://example.com"
+          "description": "The Romanian translation includes an unnecessary space before 'https://example.com'.",
+          "suggestion": "Introduceți URL-ul în felul următor: https://example.com"
         }
       ],
       "approved_at": null
@@ -197,13 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙවැනි ඒ.ස.නි. යොදන්න: https://example.com' is not the most natural or accurate translation of 'Enter URL like this: https://example.com'. 'ඒ.ස.නි.' is an abbreviation for 'URL' and while understandable, it's less common and could be confusing.",
-          "suggestion": "දේශනයක් මෙවැනි ආකාරයට ඇතුළත් කරන්න: https://example.com"
-        },
-        {
-          "type": "formatting",
-          "description": "While not a major issue, adding a colon and space after 'ඇතුළත් කරන්න' would improve readability and better mirror the English phrasing.",
-          "suggestion": "දේශනයක් මෙවැනි ආකාරයට ඇතුළත් කරන්න: https://example.com"
+          "description": "The translation 'මෙවැනි ඒ.ස.නි. යොදන්න: https://example.com' is not a natural or accurate translation of 'Enter URL like this: https://example.com'. 'ඒ.ස.නි.' is an abbreviation for 'website' (website-la) and using it like this is awkward. A more natural translation would convey the idea of providing a URL.",
+          "suggestion": "Try something like: 'https://example.com' වැනි සබැඳිය ඇතුළත් කරන්න (https://example.com) or 'https://example.com' වැනි ලිපිනය ඇතුළත් කරන්න."
         }
       ],
       "approved_at": null
@@ -211,13 +205,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The colon after 'nasledovne' feels slightly awkward in this context. While grammatically correct, it breaks the flow a little. It's a more formal way of saying it than necessary.",
-          "suggestion": "URL zadávajte ako: https://example.com"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -226,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vnesite URL kot v primeru: https://example.com' is a literal translation but not the most natural way to express this in Slovenian. A more natural phrasing would be 'Vnesite URL v tem formatu: https://example.com' or 'Vnesite URL tako kot v primeru: https://example.com'. The phrase 'kot v primeru' can sound slightly awkward.",
-          "suggestion": "Vnesite URL v tem formatu: https://example.com"
+          "description": "The translation 'Vnesite URL kot v primeru: https://example.com' is not the most natural way to express the intended meaning. 'Kot v primeru' (like in the case of) sounds slightly awkward.",
+          "suggestion": "Vnesite URL na primer: https://example.com"
         }
       ],
       "approved_at": null
@@ -235,7 +223,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Унеси URL овако: https://example.com' is a literal translation and sounds unnatural in Serbian. A more natural phrasing would be 'Unesi URL kao što je: https://example.com' or 'Unesite URL u formatu: https://example.com'.",
+          "suggestion": "Unesi URL kao što je: https://example.com"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -268,13 +262,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"输入同类格式的链接 URL\" is not the most natural or accurate translation of \"Enter URL like this: https://example.com\". It's overly literal and slightly awkward.",
-          "suggestion": "输入网址，例如：https://example.com"
+          "description": "The phrase \"输入同类格式的链接 URL\" is not the most natural or accurate translation of \"Enter URL like this\". It's a bit verbose and awkward. A more direct and common translation would be better.",
+          "suggestion": "输入链接，例如： https://example.com"
         },
         {
           "type": "formatting",
-          "description": "The colon and space after “URL” in the Chinese translation is unnecessary and can be removed.",
-          "suggestion": "输入网址，例如：https://example.com"
+          "description": "The colon after \"链接 URL\" is unnecessary and disrupts the flow. It's more common to use a comma or just space.",
+          "suggestion": "Remove the colon after '链接'."
         }
       ],
       "approved_at": null

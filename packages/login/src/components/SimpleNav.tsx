@@ -37,8 +37,6 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import LanguageComboboxWrapper from "./LanguageCombobox";
 
-/* eslint-disable @next/next/no-img-element */
-
 const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
   display: none;
   height: 48px;
@@ -85,7 +83,7 @@ const SimpleNav = ({
 }: SimpleNavProps) => {
   const theme = useTheme();
 
-  const isDark = !theme.isBase;
+  const isDark = !theme?.isBase;
 
   const logoUrl = getLogoUrl(
     WhiteLabelLogoType.LightSmall,
@@ -97,12 +95,12 @@ const SimpleNav = ({
   return (
     <StyledSimpleNav id="login-header">
       <img className="logo" src={logoUrl} alt="logo-url" />
-      {isLanguageComboboxVisible && (
+      {isLanguageComboboxVisible ? (
         <LanguageComboboxWrapper
           className="modile-combobox"
           initialCultures={initialCultures}
         />
-      )}
+      ) : null}
     </StyledSimpleNav>
   );
 };

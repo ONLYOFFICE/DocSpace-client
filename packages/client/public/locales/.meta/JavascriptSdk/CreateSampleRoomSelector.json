@@ -3,7 +3,7 @@
   "content": "Create sample Room selector embed",
   "content_en_sha1_hash": "93d831166dcad24892ee84ef09c7ee51f7c5531b",
   "created_at": "2025-05-19T21:30:54.405Z",
-  "updated_at": "2025-06-03T20:59:42.127Z",
+  "updated_at": "2025-08-26T11:15:14.172Z",
   "comment": {
     "text": "This translation key is used for the header of a Room selector preset in a developer tool, displaying the phrase \"CreateSampleRoomSelector\" as its label. It appears in a dialog or settings section where users can customize their Room selectors.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 207,
-      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n t={t}\n loadCurrentFrame={initFrame}",
+      "line_number": 215,
+      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'قم بإنشاء نموذج لتضمين محدد الغرفة' is a literal translation but doesn't fully capture the meaning of 'Create sample Room selector embed'.  'Embed' implies integration or display, which isn't directly conveyed. A more natural translation would incorporate that concept.",
-          "suggestion": "قم بإنشاء نموذج لتضمين واجهة اختيار الغرفة (Create a sample interface for selecting a room)"
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, the translation sounds a bit formal. Consider adapting the tone to be more user-friendly.",
-          "suggestion": "قم بإنشاء نموذج لواجهة اختيار الغرفة (Create a sample room selection interface)"
+          "description": "The translation \"قم بإنشاء نموذج لتضمين محدد الغرفة\" while technically correct, doesn't fully capture the nuance of 'embed'. 'Embed' implies a component integrated into a larger platform or environment. A more accurate translation would convey that aspect.",
+          "suggestion": "قم بإنشاء نموذج لمُضمَّن محدد الغرفة"
         }
       ],
       "approved_at": null
@@ -47,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaq seçici yerləşdirmə nümunəsi yaradın\" is a literal translation and sounds awkward in Azerbaijani. A more natural phrasing would be something like \"Otaq seçici nümunəvi element yarat\". \"Yerləşdirmə\" refers to an installation/deployment, not a sample.",
-          "suggestion": "Otaq seçici nümunəvi element yarat"
+          "description": "The translation \"Otaq seçici yerləşdirmə nümunəsi yaradın\" while understandable, doesn't perfectly capture the meaning of 'Create sample Room selector embed'. A more accurate translation might emphasize the creation of a *functional* or *working* sample.",
+          "suggestion": "Otaq seçici nümunəvi yerləşdirmə yaradın (or) Otaq seçici nümunəvi funksional yerləşdirmə yaradın"
         }
       ],
       "approved_at": null
@@ -59,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"embed\" is not accurately translated. While \"вграждане\" is the direct translation, it might not be the most natural way to express the concept in this context. A more user-friendly translation might be something like 'добавяне' (adding) or 'вграден елемент' (embedded element).",
-          "suggestion": "Consider alternatives like: 'Добавете примерен селектор за стая' or 'Създайте примерен вграден селектор за стая'"
+          "description": "The translation 'Създайте примерно вграждане на Селектор за стая' while technically correct, doesn't fully capture the nuance of 'Create sample Room selector embed'. 'Embed' is not directly translated, which can lose meaning. A more accurate translation might include a term for 'embed' or rephrase to convey the meaning of an embedded component.",
+          "suggestion": "Consider alternatives like 'Създайте примерен Селектор за стая, вграден компонент' or 'Създайте примерен вграден Селектор за стая'"
         }
       ],
       "approved_at": null
@@ -71,8 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'embed' doesn't have a direct equivalent that perfectly captures its technical meaning in this context. 'Vložení' translates to 'insertion' which isn't quite the same as an embed code or widget. While not a complete error, it loses some nuance.",
-          "suggestion": "Consider 'vložení kódu pro výběr místnosti' (insertion of code for room selection) or 'vytvořit ukázkový selektor místnosti' (create a sample room selector) to better convey the meaning of an embed."
+          "description": "The translation 'Vytvořit vzorové vložení selektoru místnosti' is a bit literal and could be improved for naturalness. 'Embed' doesn't have a direct, commonly used equivalent in this context.",
+          "suggestion": "Vytvořit ukázkový výběr místností"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'vložení' can mean 'embedding', it's not the most common or idiomatic way to describe a UI element like a room selector in this context. 'Výběr místností' is generally more appropriate.",
+          "suggestion": "Use 'výběr místností' instead of 'vložení selektoru místností'."
         }
       ],
       "approved_at": null
@@ -89,13 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Δημιουργία δείγματος ενσωμάτωσης Επιλογέα δωματίου\" is a literal translation, but \"embed\" carries a specific meaning in this context (an embedded object/widget). A more natural translation would convey that meaning.  'Ενσωμάτωση' is correct for 'embed', but the overall phrasing could be improved.",
-          "suggestion": "Ενσωμάτωση επιλογέα δωματίου για δοκιμαστικούς σκοπούς"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase could benefit from slight rephrasing to improve flow and readability in Greek. While technically correct, it sounds somewhat clunky.",
-          "suggestion": "Ενσωμάτωση επιλογέα δωματίου για δοκιμαστικούς σκοπούς"
+          "description": "The translation 'Δημιουργία δείγματος ενσωμάτωσης Επιλογέα δωματίου' while technically correct, is a bit literal. 'Embed' doesn't translate directly and can be implied. A more natural phrasing might be better.",
+          "suggestion": "Δημιουργία Επιλογέα δωματίου (παράδειγμα)"
         }
       ],
       "approved_at": null
@@ -106,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"incrustación\" (embed) is a bit technical and might not be the most natural way to describe a Room selector. It's accurate, but potentially confusing for a wider audience.",
-          "suggestion": "Consider alternatives like 'selector de salas de ejemplo' or 'ejemplo de selector de salas' depending on the intended nuance."
+          "description": "The phrase 'embed' doesn't translate directly to 'incrustación.' While 'incrustación' can mean embed, in this context, a more accurate translation would be something along the lines of 'integración' or 'widget' to convey the idea of a room selector being added to a page.",
+          "suggestion": "Crear ejemplo del widget/integración del selector de salas"
         }
       ],
       "approved_at": null
@@ -118,8 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Luo esimerkki Huoneen valitsija-upotuksesta' is a bit literal and clunky. 'Huoneen valitsija-upotuksesta' is overly technical and not the most natural way to express 'Room selector embed'.",
-          "suggestion": "Luo esimerkkihuoneen valitsin (upotettuna)."
+          "description": "The term \"Room selector embed\" is translated as \"Huoneen valitsija-upotuksesta\". While technically correct, \"Huoneen valitsija\" is more common and natural in Finnish. \"-upotuksesta\" is a literal translation of \"embed\" which sounds awkward.",
+          "suggestion": "Luo esimerkki huoneen valitsimesta"
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphen in \"Huoneen valitsija-upotuksesta\" creates a slightly awkward phrasing. Removing it would improve readability.",
+          "suggestion": "Luo esimerkki huoneen valitsija upotuksesta"
         }
       ],
       "approved_at": null
@@ -136,8 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ստեղծեք սենյակի ընտրիչի ներկառուցման նմուշ' is a literal translation and doesn't fully capture the meaning of 'Create sample Room selector embed'. 'Embed' implies integration or insertion within a larger environment, which isn't explicitly conveyed.",
-          "suggestion": "Consider a translation that emphasizes the integration aspect, such as 'Ստեղծեք սենյակի ընտրիչի մուտքի նմուշ' (Create sample Room selector insertion) or 'Ստեղծեք սենյակի ընտրիչի ներդրման նմուշ' (Create sample Room selector integration)."
+          "description": "The translation \"Ստեղծեք սենյակի ընտրիչի ներկառուցման նմուշ\" is a literal translation and doesn't quite capture the nuance of \"Create sample Room selector embed.\"  'Embed' implies integrating something into a larger system. The Armenian translation focuses more on the 'sample' aspect of the selector. A more natural translation might focus on creation and embedding.",
+          "suggestion": "Consider a translation like: \"Ստեղծեք սենյակ ընտրիչի ներկառուցման օրինակ\" or \"Ստեղծեք սենյակի ընտրիչի միացման օրինակ\" (The latter emphasizing the integration aspect)"
         }
       ],
       "approved_at": null
@@ -148,13 +148,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Crea un campione di incorporamento del Selettore della stanza' is a literal translation that doesn't quite convey the intended meaning of 'Create sample Room selector embed'.  'Incorporamento' is overly formal and 'Selettore della stanza' is clunky.  A more natural translation would focus on the functionality.",
-          "suggestion": "Consider alternatives like 'Crea un esempio di selettore per la stanza' or 'Crea un componente di selezione stanza di esempio'."
+          "description": "The translation \"Crea un campione di incorporamento del Selettore della stanza\" is not a direct or natural translation of \"Create sample Room selector embed\".  'Incorporamento' is a very technical term and doesn't fully convey the meaning of 'embed' in this context. It suggests something literally embedded within something else, rather than the act of creating a selector.",
+          "suggestion": "Consider alternatives like: 'Crea un selettore di stanze di esempio' or 'Genera un selettore di stanze di esempio' or 'Crea un esempio di selettore di stanze'."
         },
         {
           "type": "formatting",
-          "description": "The Italian phrase includes a grammatical construction 'incorporamento del Selettore...' which, while technically correct, sounds awkward and potentially confusing to a native Italian speaker in this context.",
-          "suggestion": "Rephrase to avoid the long 'incorporamento del...' structure. Alternatives suggested above address this."
+          "description": "While not strictly incorrect, the use of 'Selettore della stanza' (with the definite article 'della') is slightly less common than 'Selettore di stanze' in this type of context.  Consistency with other translations is important.",
+          "suggestion": "Consider using 'Selettore di stanze' for greater consistency, depending on the overall project style."
         }
       ],
       "approved_at": null
@@ -165,8 +165,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Create sample Room selector embed\" implies creating a functional room selector that can be embedded. The Japanese translation \"埋め込みルームセレクタのサンプルを作成する\" literally translates to 'Create a sample of an embeddable room selector'. While not entirely wrong, it could be improved to better convey the action of *creating* the embeddable component itself, rather than just creating a sample *of* it. The nuance is slightly different.",
-          "suggestion": "埋め込みルームセレクタのサンプルを作成します (Umebomi ruum selekuta no sanpuru o sakusei shimasu)"
+          "description": "The translation \"埋め込みルームセレクタのサンプルを作成する\" (Ume-komi ruum selectora no sanpuru o sakusei suru) is a bit literal and doesn't flow naturally in Japanese. While technically correct, it could be improved.",
+          "suggestion": "Consider a more natural phrasing like \"ルームセレクタのサンプル埋め込みを作成する\" or \"ルームセレクタのサンプル埋め込みコードを作成する\" depending on the intended meaning. The best option would depend on the specific context."
         }
       ],
       "approved_at": null
@@ -189,8 +189,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Izveidot parauga telpas atlasītāja iegulšanu\" is a literal translation and doesn't quite capture the meaning of 'Create sample Room selector embed'. 'Embed' implies a component or piece of code being integrated. The Latvian phrasing sounds somewhat awkward and less natural in this context.",
-          "suggestion": "Consider a translation that better reflects the idea of integrating a room selector, such as \"Izveidot iekļaujamu parauga telpu atlasītāju\" or \"Radīt iekļaujamu parauga telpu izvēlēšanos.\""
+          "description": "The translation \"Izveidot parauga telpas atlasītāja iegulšanu\" is a literal translation and doesn't fully convey the meaning of \"Create sample Room selector embed\". It sounds clunky and overly formal in Latvian. The word 'iegulšanu' (embedding) is not always the best choice and can be avoided depending on context. A more natural phrasing would be needed.",
+          "suggestion": "Consider alternatives like \"Izveidot parauga telpu izvēlēšanās elementu\" or \"Izveidot parauga telpu izvēlēties palīdzību\" depending on the intended user experience. Another option could be \"Izveidot parauga telpu izvēlēties logu\" if a visual display element is meant."
         }
       ],
       "approved_at": null
@@ -201,13 +201,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Maak voorbeeld Kamer selectie insluiten' is not the best equivalent for 'Create sample Room selector embed'. 'Insluiten' implies embedding, but the original English is more about creating a selector. A better translation would emphasize creation.",
-          "suggestion": "Maak een voorbeeld Kamer selector"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'Kamer' is technically correct, in the context of a digital room selector, 'Ruimte' might be a more appropriate word.",
-          "suggestion": "Maak een voorbeeld Ruimte selector"
+          "description": "The word 'embed' is not accurately translated. 'Insluiten' can mean 'enclose', but in the context of a Room selector, a more accurate translation would be 'widget' or 'component'.",
+          "suggestion": "Maak voorbeeld Kamer selectie widget"
         }
       ],
       "approved_at": null
@@ -218,8 +213,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Room selector embed\" is not directly equivalent to \"Selektora pokojów\". \"Embed\" implies a visual element or integration, which isn't clearly conveyed by \"Selektora pokojów\". A more accurate translation might incorporate the idea of embedding or integration, perhaps something like \"Wbudowany selektor pokojów\" or \"Integracja selektora pokojów\".",
-          "suggestion": "Consider 'Wbudowany selektor pokojów' or 'Integracja selektora pokojów' for a more accurate representation of 'Room selector embed'."
+          "description": "The English phrase \"Room selector embed\" is best translated as 'wybór pokoi' or 'selektor pokojów', not just 'Selektora pokojów'. The possessive case 'Selektora' is incorrect in this context.",
+          "suggestion": "Utwórz próbne osadzenie wyboru pokoi"
         }
       ],
       "approved_at": null
@@ -230,12 +225,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Criar exemplo de incorporação do seletor de salas' is not the most natural or accurate rendering of 'Create sample Room selector embed'. 'Incorporação' (embedding) isn't the direct meaning of 'embed' in this context. The term 'embed' implies integration or display within a larger system.",
-          "suggestion": "Criar seletor de salas de exemplo"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'seletor de salas de exemplo' sounds a bit clunky. It might be improved for better flow.",
+          "description": "The translation 'Criar exemplo de incorporação do seletor de salas' is not a direct or ideal translation of 'Create sample Room selector embed'.  'Incorporação' (embedding) is accurate, but the phrasing is a bit clunky. A more natural translation might emphasize creating a sample selector.",
           "suggestion": "Criar um seletor de salas de exemplo"
         }
       ],
@@ -247,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Criar exemplo de incorporação do seletor de salas\" is a bit literal and could be improved to convey the meaning of 'create sample Room selector embed' more naturally. 'Incorporação' implies embedding, but the phrase as a whole is a bit clunky.",
-          "suggestion": "Criar um seletor de salas de exemplo (incorporado)"
+          "description": "The translation 'Criar exemplo de incorporação do seletor de salas' is not a direct or natural translation of 'Create sample Room selector embed'.  'Incorporação' implies embedding, but the original phrasing is simpler and more direct. A better translation would convey the creation of a sample room selector.",
+          "suggestion": "Criar um seletor de salas de exemplo"
         }
       ],
       "approved_at": null
@@ -259,13 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Creare exemplu Selector de sală pentru încorporare' is a literal translation but doesn't flow naturally in Romanian. 'Room selector embed' is a specific function, and the translation should convey that more accurately.",
-          "suggestion": "Creare selector de camere de exemplu pentru integrare"
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'încornporare' is a less common and slightly awkward construction in this context. 'Integrare' flows more naturally.",
-          "suggestion": "Use 'integrare' instead of 'încornporare'."
+          "description": "The English phrase 'Create sample Room selector embed' implies creating a selector specifically for embedding. The Romanian translation, 'Creare exemplu Selector de sală pentru încorporare,' is accurate in that it reflects the 'for embedding' part, but it might be more accurately translated as 'Creare selector de sală exemplu pentru încorporare' or 'Creare selector de sală demonstrativ pentru încorporare' to better convey the 'sample' meaning, depending on the exact desired nuance.",
+          "suggestion": "Creare selector de sală exemplu pentru încorporare"
         }
       ],
       "approved_at": null
@@ -276,8 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Создать образец встраивания Селектора комнат' is a bit literal and not the most natural way to express 'Create sample Room selector embed' in Russian. 'Встраивание' (embedding) feels slightly awkward here.",
-          "suggestion": "Consider alternatives like 'Создать демонстрационный Селектор комнат' (Create demonstrational Room selector) or 'Создать пример Селектора комнат' (Create example Room selector)."
+          "description": "The translation \"Создать образец встраивания Селектора комнат\" is not the most natural or accurate rendering of \"Create sample Room selector embed\". \"Встраивания\" (vstravivaniya) implies a complex embedding process which isn't necessarily implied in the original. A simpler, more direct translation is preferred.",
+          "suggestion": "Создать пример выбора комнаты"
         }
       ],
       "approved_at": null
@@ -288,8 +273,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාවද්දන ආදර්ශ කාමර තෝරනය සාදන්න' doesn't accurately convey the meaning of 'Create sample Room selector embed'. 'කාවද්දන' implies 'presenting' or 'introducing' rather than 'create'. 'embed' is also not captured.",
-          "suggestion": "Consider a translation like 'ආදර්ශ කාමර තෝරනය සාදා ගන්න' (aadapashya kaamara thoraanaya saadhaa gan'na) which means 'Create a sample room selector' or 'ආදර්ශ කාමර තෝරනය සාදා ඇමිණුම්' (aadapashya kaamara thoraanaya saadhaa amin'nu) which attempts to include the 'embed' concept, although the meaning might still require further refinement for naturalness."
+          "description": "The translation 'කාවද්දන ආදර්ශ කාමර තෝරනය සාදන්න' doesn't accurately convey the meaning of 'Create sample Room selector embed'. 'කාවද්දන' (kawaddana) implies 'presenting' or 'showing', while the English implies creation. 'ආදර්ශ' (aadarasha) is correct for 'sample'. 'කාමර' (kaamara) is correct for 'room'. 'තෝරනය' (thooranaya) is closer to selector. 'සාදන්න' (saadanna) means to create, which is accurate, but the overall flow is awkward.",
+          "suggestion": "Consider a more literal translation focusing on the creation aspect, for example, 'ආදර්ශ කාමර තෝරනය නිර්මාණය කරන්න' (aadarasha kaamara thooranaya nirmanayaa kanna) - 'Create sample Room selector'."
         }
       ],
       "approved_at": null
@@ -300,13 +285,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vytvoriť vzor vloženia pre Selektor miestnosti' is not an accurate translation of 'Create sample Room selector embed'. 'Embed' implies a code snippet or widget to be inserted. 'Vloženia' translates to 'insertion,' which isn't the same meaning. A more accurate translation would convey the idea of creating a sample room selector that can be integrated.",
-          "suggestion": "Vytvoriť ukážkový selektor miestnosti na vloženie"
+          "description": "The translation 'Vytvoriť vzor vloženia pre Selektor miestnosti' doesn't accurately convey the meaning of 'Create sample Room selector embed'. 'Vloženia' (embedding) is not the best fit for 'embed'. A more accurate translation would focus on creating a sample or example selector.",
+          "suggestion": "Vytvoriť ukážkový výber miestností"
         },
         {
           "type": "formatting",
-          "description": "The translation uses a capitalization style ('Selektor miestnosti') that might not be consistent with the Slovak language conventions for technical terms. It's worth checking if it should be 'selektor miestnosti' (lowercase).",
-          "suggestion": "Consider lowercasing 'selektor miestnosti' to 'selektor miestnosti' for consistency."
+          "description": "The phrase 'Selektor miestnosti' is a bit clunky. Consider a slightly more natural flow.",
+          "suggestion": "Výber miestností"
         }
       ],
       "approved_at": null
@@ -317,13 +302,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ustvari vzorec vdelave izbire sobe' is not the most natural or accurate translation of 'Create sample Room selector embed'. It's a literal translation that lacks flow.  'Embed' is a specific term and a more natural translation might incorporate that.",
-          "suggestion": "Ustvari vdelavo izbire vzorčne sobe"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'vzorčne' is needed to correctly translate 'sample' in this context. Using just 'vzorec' lacks precision.",
-          "suggestion": "Consider adding 'vzorce' before 'sobe' for clarity."
+          "description": "The translation 'Ustvari vzorec vdelave izbire sobe' is a literal translation but doesn't quite capture the meaning of 'Create sample Room selector embed'. 'Room selector embed' is a specific component. A more natural Slovenian phrasing would convey the purpose or functionality.",
+          "suggestion": "Consider a translation like 'Ustvari predogled izbirnika sob' or 'Ustvari primer izbirnika sob' which are more idiomatic and clearer about the purpose."
         }
       ],
       "approved_at": null
@@ -334,13 +314,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Направи пример уградње селектора Собе\" doesn't accurately convey the meaning of 'Create sample Room selector embed'. 'Уградње' implies installation or integration, whereas 'embed' refers to a more direct inclusion. A more accurate translation would involve conveying the concept of creating a sample or demonstration.",
-          "suggestion": "Направи пример селектора собе"
-        },
-        {
-          "type": "formatting",
-          "description": "The Serbian translation has a space before the Cyrillic character 'Собе'. This is unnecessary.",
-          "suggestion": "Направи пример селектора собе"
+          "description": "The translation \"Направи пример уградње селектора Собе\" doesn't accurately convey the meaning of 'Create sample Room selector embed'. 'Уградње' (installation) isn't the best fit for 'embed'. It implies a physical installation, not a digital embedding. 'Селектора Собе' sounds awkward. 'Room selector' should be translated in a more natural way.",
+          "suggestion": "Consider alternatives like 'Направи пример уређача просторија' or 'Направи пример уграђеног уређача просторија', where 'уређач' conveys a selector/widget."
         }
       ],
       "approved_at": null
@@ -351,13 +326,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Napravi primer ugradnje selektora Sobe' doesn't fully capture the meaning of 'Create sample Room selector embed'. 'Embed' is not represented. A more accurate translation would include a term indicating embedding or integration.",
-          "suggestion": "Napravi primer ugradnje selektora Sobe (ugradni kod)"
+          "description": "The translation 'Napravi primer ugradnje selektora Sobe' doesn't accurately convey the meaning of 'Create sample Room selector embed'. 'Ugradnje' implies installation, while 'embed' suggests integration within something. A better translation would focus on the concept of creation or a demonstration.",
+          "suggestion": "Napravi demo selektora Sobe"
         },
         {
           "type": "formatting",
-          "description": "The Serbian translation uses a lowercase 's' in 'sobe' (room). While grammatically correct, capitalizing 'Sobe' would enhance readability and consistency, particularly if referring to a specific component.",
-          "suggestion": "Napravi primer ugradnje selektora Sobe"
+          "description": "While not a major issue, 'Sobe' should likely be capitalized to align with proper noun usage.",
+          "suggestion": "Napravi demo selektora Sobe"
         }
       ],
       "approved_at": null
@@ -368,8 +343,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Örnek Oda seçici yerleştirmesi oluştur' while conveying a general meaning, doesn't perfectly capture the nuance of 'Create sample Room selector embed'. 'Yerleştirmesi oluştur' translates to 'create embed' but could be more naturally phrased for Turkish. The word 'embed' isn't directly translated.",
-          "suggestion": "Örnek oda seçici yerleştirmesini oluştur"
+          "description": "The translation 'Örnek Oda seçici yerleştirmesi oluştur' while generally conveying the meaning, could be improved for naturalness and clarity. 'Yerleştirmesi' is a bit clunky and might not be the most common way to describe an embed.",
+          "suggestion": "Örnek oda seçici gömülü öğe oluştur"
         }
       ],
       "approved_at": null
@@ -380,13 +355,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"embed\" is not accurately reflected in the translation. \"Вбудовування\" refers to the act of embedding, but the original refers to the selector itself. A better translation would capture the selector's function.",
-          "suggestion": "Створити зразок засобу вибору кімнати"
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, the translation could be more concise and natural in Ukrainian. The inclusion of 'Створити' (Create) at the beginning is standard, but the phrasing could be streamlined.",
-          "suggestion": "Зразок засобу вибору кімнати"
+          "description": "The English phrase \"Create sample Room selector embed\" implies creating a visual element or code snippet for selecting rooms. The Ukrainian translation \"Створити зразок вбудовування засобу вибору кімнати\" translates literally to 'Create a sample embedding of a room selection tool'. This is a bit awkward and doesn't convey the intended meaning as clearly. \"Embed\" is a technical term that requires more context.",
+          "suggestion": "Consider a more functional translation like \"Створити демонстраційний селектор кімнат\" (Create a demo room selector) or \"Створити приклад селектора кімнат\" (Create an example room selector)."
         }
       ],
       "approved_at": null
@@ -397,8 +367,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tạo mẫu nhúng bộ chọn Phòng\" doesn't fully capture the meaning of 'Create sample Room selector embed'. 'Embed' refers to the code snippet to be placed within another platform. A more accurate translation might convey this aspect.",
-          "suggestion": "Tạo bộ chọn phòng mẫu để nhúng (Create sample Room selector embed for embedding)"
+          "description": "The translation 'Tạo mẫu nhúng bộ chọn Phòng' is not the most natural or accurate translation of 'Create sample Room selector embed'. 'Bộ chọn Phòng' is technically correct, but 'trình chọn phòng' or 'phòng chọn' would be more common and understandable in Vietnamese in this context.",
+          "suggestion": "Tạo mẫu nhúng trình chọn phòng"
         }
       ],
       "approved_at": null

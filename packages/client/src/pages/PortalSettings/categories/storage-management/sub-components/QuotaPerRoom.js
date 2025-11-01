@@ -46,6 +46,7 @@ const QuotaPerRoomComponent = (props) => {
       {...initialSizeProp}
       isQuotaSet={isDefaultRoomsQuotaSet}
       tabIndex={1}
+      dataTestId="quota_room"
     />
   );
 };

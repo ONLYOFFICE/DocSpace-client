@@ -43,6 +43,7 @@ import { HTML_EXST, EBOOK_EXST } from "@docspace/shared/constants";
 import {
   getIconPathByFolderType,
   isPublicPreview,
+  insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -59,6 +60,9 @@ class FilesSettingsStore {
 
   settingsStore;
 
+  /**
+   *  @type {import("@docspace/shared/api/files/types").TFilesSettings=}
+   */
   filesSettings = null;
 
   isErrorSettings = null;
@@ -149,6 +153,8 @@ class FilesSettingsStore {
 
   hideConfirmCancelOperation = false;
 
+  documentServiceLocation = null;
+
   constructor(
     thirdPartyStore,
     treeFoldersStore,
@@ -227,8 +233,18 @@ class FilesSettingsStore {
             capabilities.forEach((item) => {
               item.splice(1, 1);
             });
+
             this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
             this.thirdPartyStore.setThirdPartyProviders(providers);
+          });
+      })
+      .then(() => {
+        api.files
+          .getDocumentServiceLocation()
+          .then(({ docServicePreloadUrl }) => {
+            if (docServicePreloadUrl) {
+              insertEditorPreloadFrame(docServicePreloadUrl);
+            }
           });
       })
       .catch(() => this.setIsErrorSettings(true));
@@ -262,8 +278,8 @@ class FilesSettingsStore {
       .catch((e) => toastr.error(e));
   };
 
-  setKeepNewFileName = (data) => {
-    api.files
+  setKeepNewFileName = async (data) => {
+    return api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res))
       .catch((e) => toastr.error(e));
@@ -307,7 +323,25 @@ class FilesSettingsStore {
   setForceSave = (data) =>
     api.files.forceSave(data).then((res) => this.setForcesave(res));
 
-  getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
+  getDocumentServiceLocation = async () => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      return await api.files.getDocumentServiceLocation(
+        null,
+        abortController.signal,
+      );
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+
+      throw error;
+    }
+  };
+
+  setDocumentServiceLocation = (data) => {
+    this.documentServiceLocation = data;
+  };
 
   changeDocumentServiceLocation = (
     docServiceUrl,
@@ -391,15 +425,14 @@ class FilesSettingsStore {
     presentInArray(this.extsSpreadsheet, extension);
 
   /**
-   *
-   * @param {number} [size = 24]
-   * @param {string } [fileExst = null]
-   * @param {string} [pproviderKey
+   * @param {number} size
+   * @param {string} fileExst
+   * @param {string} providerKey
    * @param {*} contentLength
-   * @param {RoomsType | null} roomType
-   * @param {boolean | null} isArchive
+   * @param {RoomsType} roomType
+   * @param {boolean } isArchive
    * @param {FolderType} folderType
-   * @returns {string | undefined}
+   * @returns {string}
    */
   getIcon = (
     size = 32,

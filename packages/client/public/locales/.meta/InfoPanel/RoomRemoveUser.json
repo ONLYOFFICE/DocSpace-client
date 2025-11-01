@@ -3,7 +3,7 @@
   "content": "User removed.",
   "content_en_sha1_hash": "f2fdb928851f1039e1245a21c6af39743a584c11",
   "created_at": "2025-05-19T21:30:54.943Z",
-  "updated_at": "2025-05-28T09:30:02.435Z",
+  "updated_at": "2025-10-13T13:22:35.727Z",
   "comment": {
     "text": "The \"RoomRemoveUser\" translation key is used to display a message indicating that a user has been removed from a room. This text appears in UI related to room management and access control, likely as part of an action confirmation or success message after a user removal event.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 285,
+      "context": "return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"InfoPanel:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 225,
-      "context": "if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case \"RoomUpdateAccessForUser\":\n return t(\"InfoPanel:RoomUpdateAccess\");\n case \"RoomRemoveUser\":\n return t(\"InfoPanel:RoomRemoveUser\");\n case \"RoomInviteResend\":\n return t(\"InfoPanel:RoomInviteResend\");\n case \"RoomGroupAdded\":\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {",
+      "line_number": 234,
+      "context": "if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"InfoPanel:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {",
       "module": "/packages/client"
     }
   ],
@@ -48,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Odstraněný uživatel' literally translates to 'Removed user'. While technically correct, it's not the most natural or user-friendly phrasing for a notification. A more common and natural Czech phrasing would be 'Uživatel odstraněn' or 'Uživatel smazán'.",
+          "description": "The translation \"Odstraněný uživatel\" is too literal and sounds awkward. A more natural translation for 'User removed' in this context would be something like 'Uživatel odstraněn' or 'Uživatel smazán'.",
           "suggestion": "Uživatel odstraněn"
         }
       ],
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Dutch translation uses 'verwijderd' which is the past participle and needs to be conjugated correctly for a complete sentence. It implies an action has been completed, but doesn't explicitly state who did the removing or when.",
-          "suggestion": "Gebruiker verwijderd."
+          "description": "The Dutch word 'verwijderd' is misspelled. The correct spelling is 'verwijderd'.",
+          "suggestion": "Gebruiker verwijderd"
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශීලකයා' (parashīlakayā) is a less common and somewhat formal way to say 'user'. While technically correct, 'පරිශෙත්کارයා' (parishēthkarayā) or simply 'භාවිතකරු' (bhavitakaru) is more common and natural in this context.",
-          "suggestion": "Consider using 'පරිශෙත්کارයා' (parishēthkarayā) or 'භාවිතකරු' (bhavitakaru) instead of 'පරිශීලකයා'."
+          "description": "The word 'පරිශීලකයා' (parashilakayaa) is generally used for 'artisan' or 'craftsman'.  'පරිශීලක' (parashilaka) or 'භාවිතාකරු' (bhavitakaru) would be more appropriate for 'user' in this context.",
+          "suggestion": "පරිශීලකයා වෙනුවට පරිශීලක or භාවිතාකරු භාවිතා කරන්න."
         }
       ],
       "approved_at": null
@@ -180,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Ikonka zmenená\" does not accurately convey the meaning of \"User removed.\" It translates to something like \"Icon changed.\" The correct translation should reflect that a user has been removed from a room.",
+          "description": "The Slovak translation \"Ikonka zmenená\" does not accurately convey the meaning of \"User removed.\" It translates to \"Icon changed.\" The correct translation should indicate user removal.",
           "suggestion": "Používateľ odstránený"
         }
       ],
@@ -192,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Ikona spremenjena' translates to 'Icon changed,' which does not accurately convey the meaning of 'User removed.' The translation should reflect the action performed on the user.",
+          "description": "The Slovenian translation 'Ikona spremenjena' translates to 'Icon changed' which does not accurately reflect the English content 'User removed'. The translation should convey the meaning of a user being removed from a room or group.",
           "suggestion": "Uporabnik odstranjen."
         }
       ],
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Simge değişti\" does not accurately convey the meaning of \"User removed.\" 'Simge değişti' translates to 'Icon changed'. It doesn't reflect the action of removing a user.",
-          "suggestion": "Kullanıcı kaldırıldı"
+          "description": "The translation 'Simge değişti' does not accurately convey the meaning of 'User removed.' 'Simge değişti' translates to 'Icon changed.' This suggests a misunderstanding of the original English phrase.",
+          "suggestion": "A more accurate translation would be something along the lines of 'Kullanıcı kaldırıldı' or 'Kullanıcı silindi,' which directly translate to 'User removed' or 'User deleted'."
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Піктограму змінено\" (Pictogram changed) does not accurately convey the meaning of \"User removed.\" It describes a change to an icon, not the removal of a user.",
-          "suggestion": "Користувача видалено"
+          "description": "The Ukrainian translation \"Піктограму змінено\" translates to \"The icon has been changed.\" which doesn't accurately reflect the English meaning \"User removed.\" It does not convey the action of removing a user.",
+          "suggestion": "Користувача видалено."
         }
       ],
       "approved_at": null
@@ -237,7 +243,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Đã xoá người dùng\" is understandable, \"removed\" often implies a less permanent action than \"xóa\" (delete). A more accurate translation might convey the temporary nature of removal, if that's the intent. \"Đã loại bỏ người dùng\" or \"Người dùng đã bị xóa\" could be alternatives.",
+          "suggestion": "Consider \"Đã loại bỏ người dùng\" or \"Người dùng đã bị xóa\" if a less permanent removal is intended."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

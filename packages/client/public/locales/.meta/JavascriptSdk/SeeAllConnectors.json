@@ -3,7 +3,7 @@
   "content": "See all connectors",
   "content_en_sha1_hash": "a539ba0228d0ead28c404acb9364e7d9b0f2a540",
   "created_at": "2025-05-19T21:30:54.665Z",
-  "updated_at": "2025-05-21T08:39:16.809Z",
+  "updated_at": "2025-08-04T07:30:01.407Z",
   "comment": {
     "text": "This translation key is used to display a button label that opens a URL in a new tab when clicked. It appears as a \"See all connectors\" link within a portal settings page, likely to provide users with access to additional connection options.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
-      "line_number": 110,
-      "context": "className=\"link\"\n noHover\n color={currentColorScheme.main?.accent}\n onClick={() => window.open(allConnectorsUrl, \"_blank\")}\n >\n {t(\"SeeAllConnectors\")}\n </Link>\n \n <div className=\"icon\">\n <ReactSVG\n className=\"icon-arrow\"",
+      "line_number": 123,
+      "context": "className=\"link\"\n noHover\n color={currentColorScheme.main?.accent}\n onClick={() => window.open(allConnectorsUrl, \"_blank\")}\n >\n {t(\"SeeAllConnectors\")}\n </Link>\n \n <div data-testid=\"all_connectors_icon\" className=\"icon\">\n <ReactSVG\n className=\"icon-arrow\"",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"عرض جميع الموصلات\" is a literal translation, it might not be the most natural or user-friendly phrasing in the context of a Javascript SDK. 'Connectors' can imply different things depending on the SDK's functionality. A more context-aware translation might be preferable.",
-          "suggestion": "Consider alternatives like \"كل الموصلات\" (Kull al-Muwassilat - All Connectors) or a phrase that better reflects the connectors' purpose within the SDK."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -60,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Alle Integrationen ansehen\" is understandable, it's not the most accurate translation of \"See all connectors.\" \"Connectors\" has a specific technical meaning in this context, which \"Integrationen\" doesn't fully convey. A more accurate translation would emphasize the connecting aspect.",
+          "description": "While \"Alle Integrationen ansehen\" is understandable, it's not the most direct or natural translation of \"See all connectors.\" \"Connectors\" in this context likely refers to specific technical connections, not generic integrations. A more accurate translation would consider that nuance.",
           "suggestion": "Alle Verbindungen anzeigen"
         }
       ],
@@ -69,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Δείτε όλους τους συνδετήρες' while literally correct, might not be the most natural or commonly used phrasing in Greek for 'See all connectors' in a technical context. 'Connectors' can also be translated as 'συνδέσεις' or 'προσαρμογείς', depending on the specific technical meaning.",
+          "suggestion": "Consider 'Δείτε όλες τις συνδέσεις' or 'Δείτε όλους τους προσαρμογείς' depending on the intended meaning of 'connectors'."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -138,7 +138,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'connectors' is better translated as 'połączenia' rather than 'wtyczki' in this context. 'Wtyczki' refers to plugins, while 'connectors' implies a connection or link, which is likely the intended meaning.",
+          "description": "While 'wtyczki' can mean connectors, in the context of Javascript SDKs, 'połączenia' would be a more accurate and common translation for 'connectors'. 'Wtyczki' often refers to plugins or extensions.",
           "suggestion": "Zobacz wszystkie połączenia"
         }
       ],
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සියලුම සම්බන්ධක බලන්න' is a literal translation and while understandable, it lacks natural flow in Sinhala. 'Connectors' implies a technical context. A more natural phrasing would use a verb more aligned with 'view' or 'list'.",
-          "suggestion": "Consider alternatives like 'සියලුම සම්බන්ධක පෙන්වාන්න' (See all connectors - emphasizes viewing) or 'සියලුම සම්බන්ධක ලැයිස්තුව බලන්න' (View the list of all connectors)."
+          "description": "The translation \"සියලුම සම්බන්ධක බලන්න\" while generally understandable, isn't the most natural way to say 'See all connectors' in Sinhala. 'Connectors' implies a technical context, and a more accurate and idiomatic translation might focus on viewing or listing them.",
+          "suggestion": "Consider \"සියළු සම්බන්ධකයන් බලන්න\" or \"සියළු සම්බන්ධකයන් දැකන්න\" for a more precise translation. 'දැකන්න' is often preferred for 'see' in this context."
         }
       ],
       "approved_at": null
@@ -183,13 +183,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Zobraziť všetky pripojenia\" is understandable, a more precise translation of \"See all connectors\" would be \"Zobraziť všetky konektory\". \"Pripojenia\" generally refers to connections, while \"konektory\" refers to connectors.",
-          "suggestion": "Zobraziť všetky konektory"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

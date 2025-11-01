@@ -3,7 +3,7 @@
   "content": "Third-party services",
   "content_en_sha1_hash": "871d2b6d2f4209a2045939948478b5ad9e16f6a2",
   "created_at": "2025-05-19T21:30:50.013Z",
-  "updated_at": "2025-05-28T09:30:02.241Z",
+  "updated_at": "2025-10-07T15:39:07.253Z",
   "comment": {
     "text": "This translation key is used to display \"Third-party services\" as a title in various UI components, such as a link and a category name, often found in settings or configuration pages. It appears on a page that lists integration options for third-party services.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 77,
-      "context": "name: t(\"SingleSignOn\"),\n content: <SSO />,\n },\n {\n id: \"third-party-services\",\n name: t(\"Translations:ThirdPartyTitle\"),\n content: <ThirdParty />,\n },\n {\n id: \"smtp-settings\",\n name: t(\"SMTPSettings\"),",
+      "line_number": 106,
+      "context": "await getSSOData();\n },\n },\n {\n id: \"third-party-services\",\n name: t(\"Translations:ThirdPartyTitle\"),\n content: <ThirdParty />,\n onClick: async () => {\n clearAbortControllerArr();\n await getThirdPartyData();\n },",
       "module": "/packages/client"
     }
   ],
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"الخدمات الجهة الخارجية\" is a literal translation and doesn't convey the natural meaning of \"Third-party services\" in a professional context. While technically correct, it's a bit clunky.",
+          "description": "While technically correct, \"الخدمات الجهة الخارجية\" is a very literal translation. A more natural and commonly used Arabic term for 'third-party services' would be \"خدمات من جهات خارجية\" or \"خدمات من جهات خارجية\". The current phrasing feels clunky and less idiomatic.",
           "suggestion": "خدمات من جهات خارجية"
         }
       ],
@@ -153,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Servicii terțe' while technically correct, doesn't fully convey the nuance of 'Third-party services'. It's a bit too literal. A more natural and commonly used translation would be 'Servicii externe' or 'Servicii de la terți'.",
-          "suggestion": "Consider 'Servicii externe' or 'Servicii de la terți'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"තෙවන පාර්ශ්ව සේවා\" is a literal transliteration and not a natural Sinhala equivalent of \"Third-party services\". It lacks fluency and context.",
-          "suggestion": "Consider a more natural phrasing like \"තෙවන සාමාජිකයාගේ සేవලාද pelayanan\" or \"තෙවන පක්ෂයේ සේවයන්\" depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -198,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Услуге трећих страна' is the more accurate and natural translation for 'Third-party services'. 'Услуге трећих страна' translates to 'Services of third parties', whereas the provided translation 'Услуге трећих страна' misses the plural form of the noun which is required to accurately convey the meaning of the English phrase.",
+          "description": "The Serbian translation 'Услуге трећих страна' is more accurate. 'Услуге' is the correct plural form of 'услуга' (service), and 'трећих страна' is the correct genitive plural form for 'third parties'. The current translation 'Услуге трећих страна' lacks proper grammatical agreement.",
           "suggestion": "Услуге трећих страна"
         }
       ],
@@ -228,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dịch vụ của bên thứ ba' is a literal translation, but not the most natural or common way to say 'Third-party services' in Vietnamese. It's grammatically correct, but sounds a bit formal and clunky.",
-          "suggestion": "Dịch vụ bên ngoài"
+          "description": "While technically correct, \"Dịch vụ của bên thứ ba\" is a very literal and somewhat clunky translation. A more natural and idiomatic translation would be something like \"Dịch vụ của bên ngoài\" or \"Dịch vụ từ bên thứ ba\".",
+          "suggestion": "Dịch vụ của bên ngoài"
         }
       ],
       "approved_at": null

@@ -23,9 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/variables/devices.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/mixins.scss";
+
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 :global(.rtl) {
   :local {
@@ -52,16 +52,19 @@
 
 .item {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(216px, 13.4vw, 360px), 1fr)
+  );
   gap: 14px 16px;
   width: 100%;
 
-  @include desktop {
+  @include mixins.desktop {
     margin-inline-start: 1px;
     padding-inline-end: 0;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-inline-start: -1px;
     gap: 14px;
   }
@@ -79,7 +82,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     width: calc(var(--infinite-loader-table-width) + 36px) !important;
 
     :global {
@@ -91,7 +94,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     margin-inline-start: -16px;
 
     width: calc(var(--infinite-loader-table-width) + 32px) !important;
@@ -111,12 +114,12 @@
       padding-inline-start: 20px;
       width: calc(100% - 40px) !important;
 
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         padding-inline-start: 20px;
         width: calc(100% - 36px) !important;
       }
 
-      @include mobile {
+      @include mixins.mobile {
         padding-inline-start: 16px;
         width: calc(100% - 32px) !important;
       }

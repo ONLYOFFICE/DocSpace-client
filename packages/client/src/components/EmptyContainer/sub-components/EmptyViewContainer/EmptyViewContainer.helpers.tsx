@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { type JSX } from "react";
 import { P, match } from "ts-pattern";
 import { isMobile } from "react-device-detect";
 
@@ -159,7 +159,7 @@ export const getIcon = (
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
-    : getRoomIcon(type, isBaseTheme, access);
+    : getRoomIcon(type, isBaseTheme, access)!;
 };
 
 export const getOptions = (
@@ -180,14 +180,21 @@ export const getOptions = (
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
+  const isTemplateFolder = rootFolderType === FolderType.RoomTemplates;
   const isNotAdmin = isUser(access);
 
   const {
     createInviteOption,
+    createTemplateAccessOption,
     // createCreateFileOption,
     createUploadFromDocSpace,
     createUploadFromDeviceOption,
   } = helperOptions(actions, security, isFrame);
+
+  const templateAccess = createTemplateAccessOption(
+    t("EmptyView:ManageAccess"),
+    t("EmptyView:TemplateAccessDescription"),
+  );
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
@@ -204,7 +211,7 @@ export const getOptions = (
       productName: t("Common:ProductName"),
     }),
     t("EmptyView:SectionsUploadDescription", {
-      sectionNameFirst: t("Common:MyFilesSection"),
+      sectionNameFirst: t("Common:MyDocuments"),
       sectionNameSecond: t("Common:Rooms"),
     }),
     // TODO: need fix selector
@@ -217,12 +224,14 @@ export const getOptions = (
     "pdf",
   );
 
-  const inviteUser = createInviteOption(
+  const inviteUserOption = createInviteOption(
     t("Common:InviteContacts"),
     t("EmptyView:InviteUsersOptionDescription", {
       productName: t("Common:ProductName"),
     }),
   );
+
+  const inviteUser = isTemplateFolder ? templateAccess : inviteUserOption;
 
   const shareFillingRoom = {
     title: t("EmptyView:ShareOptionTitle"),
@@ -391,16 +400,6 @@ export const getOptions = (
         createPresentation,
         createForm,
       ])
-      .with([FolderType.Recent, P._, P._], () => [
-        {
-          ...actions.onGoToPersonal(),
-          icon: <PersonIcon />,
-          description: t("Files:GoToSection", {
-            sectionName: t("Common:MyFilesSection"),
-          }),
-          key: "empty-view-goto-personal",
-        },
-      ])
       .with([FolderType.Archive, ShareAccessRights.None, P._], () => [
         {
           ...actions.onGoToShared(),
@@ -414,7 +413,7 @@ export const getOptions = (
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
           description: t("Files:GoToSection", {
-            sectionName: t("Common:MyFilesSection"),
+            sectionName: t("Common:MyDocuments"),
           }),
           key: "empty-view-trash-goto-personal",
         },
@@ -456,8 +455,8 @@ export const getOptions = (
     case RoomsType.FormRoom:
       if (isFormFiller) return [];
 
-      if (isCollaborator)
-        return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareFillingRoom];
+      if (isTemplateFolder)
+        return [templateAccess, uploadPDFFromDocSpace, uploadFromDevicePDF];
 
       return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareFillingRoom];
     case RoomsType.EditingRoom:
@@ -477,6 +476,14 @@ export const getOptions = (
 
       if (isCollaborator)
         return [createFile, uploadAllFromDocSpace, uploadFromDeviceAnyFile];
+
+      if (isTemplateFolder)
+        return [
+          createFile,
+          templateAccess,
+          uploadAllFromDocSpace,
+          uploadFromDeviceAnyFile,
+        ];
 
       return [
         createFile,

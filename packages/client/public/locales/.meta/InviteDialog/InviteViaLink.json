@@ -3,7 +3,7 @@
   "content": "Invite via link",
   "content_en_sha1_hash": "a8314a068e610756fa8088a3772ae621fcd59e37",
   "created_at": "2025-05-19T21:30:54.730Z",
-  "updated_at": "2025-05-28T09:30:02.373Z",
+  "updated_at": "2025-10-13T13:22:35.663Z",
   "comment": {
     "text": "This translation key is used to display the text \"Invite via link\" in a UI component, likely as a button label or header. It appears in an external links panel and is associated with invite actions when accessing paid role options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 240,
+      "line_number": 238,
       "context": "roomType === -1 ? accesses : filterPaidRoleOptions(accesses);\n \n return (\n <StyledExternalLink noPadding ref={inputsRef}>\n <StyledSubHeader $inline>\n {t(\"InviteViaLink\")}\n {/* {false ? (\n <div style={{ position: \"relative\" }}>\n <IconButton\n size={16}\n iconName={MediaDownloadReactSvgUrl}",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Keçidlə dəvət edin\" is a literal translation of 'Invite via link', it sounds slightly awkward and less natural in Azerbaijani. A more idiomatic translation would be something like 'Paylaşım bağlantısı ilə dəvət et' or 'Bağlantı vasitəsi ilə dəvət et'.",
-          "suggestion": "Paylaşım bağlantısı ilə dəvət et"
+          "description": "While technically correct, 'Keçidlə dəvət edin' is a somewhat literal and less natural translation of 'Invite via link'. A more idiomatic translation would be more appropriate.",
+          "suggestion": "Consider 'Link vasitəsilə dəvət edin' or 'Link ilə dəvət edin' for a more natural phrasing."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Inviter via le lien' is not idiomatic French. While technically understandable, a more natural phrasing would be 'Inviter par lien'. The use of 'via' is an Anglicism and should be avoided in this context.",
-          "suggestion": "Inviter par lien"
+          "description": "The translation 'Inviter via le lien' is not the most natural or idiomatic way to say 'Invite via link' in French. While grammatically correct, it sounds slightly awkward.",
+          "suggestion": "Utiliser une formulation plus naturelle comme 'Inviter par lien' ou 'Envoyer un lien d'invitation'."
         }
       ],
       "approved_at": null
@@ -165,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"සබැඳියකින් ආරාධනය\" is a literal translation of 'Invite via link', it might sound slightly unnatural in Sinhala. A more natural phrasing could convey the meaning better.",
-          "suggestion": "Consider alternatives like \"සබැඳිය හරහා ආරාධනය කරන්න\" or \"ආරාධනය කිරීමට සබැඳිය භාවිතා කරන්න\" for a more fluent and idiomatic translation. The best choice depends on the surrounding context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Позови путем линка' is a literal translation and doesn't flow naturally in Serbian. It sounds somewhat awkward.",
-          "suggestion": "Подели линком за позив"
+          "description": "While \"Позови путем линка\" is understandable, a more natural and precise translation of \"Invite via link\" in Serbian (Cyrillic) would be \"Позови преко везе\" or \"Позови путем везе\". \"Линка\" is a borrowed word and feels slightly awkward in this context.",
+          "suggestion": "Позови преко везе"
         }
       ],
       "approved_at": null
@@ -207,13 +201,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bağlantı yoluyla davet et' is technically correct, but it sounds a bit formal and verbose for a UI element like 'Invite via link'. A more natural and concise translation would be better.",
-          "suggestion": "Davet bağlantısı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

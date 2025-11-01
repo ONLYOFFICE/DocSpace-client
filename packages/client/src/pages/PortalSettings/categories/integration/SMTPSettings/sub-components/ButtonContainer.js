@@ -110,7 +110,7 @@ const ButtonContainer = (props) => {
 
     try {
       await updateSMTPSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e);
     }
@@ -196,7 +196,7 @@ const ButtonContainer = (props) => {
 
     try {
       await resetSMTPSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e);
     }
@@ -220,6 +220,7 @@ const ButtonContainer = (props) => {
         isDisabled={isLoading || !isValidForm() || isSMTPInitialSettings}
         isLoading={buttonOperation.save}
         scale={currentDeviceType === DeviceType.mobile}
+        testId="smtp_settings_save_button"
       />
       <Button
         label={t("Settings:DefaultSettings")}
@@ -228,6 +229,7 @@ const ButtonContainer = (props) => {
         isLoading={buttonOperation.reset}
         isDisabled={isLoading || isDefaultSettings}
         scale={currentDeviceType === DeviceType.mobile}
+        testId="smtp_default_settings_button"
       />
       <Button
         label={t("SendTestMail")}
@@ -236,6 +238,7 @@ const ButtonContainer = (props) => {
         isDisabled={isLoading || !isSMTPInitialSettings}
         isLoading={buttonOperation.send}
         scale={currentDeviceType === DeviceType.mobile}
+        testId="send_test_mail_button"
       />
     </ButtonStyledComponent>
   );

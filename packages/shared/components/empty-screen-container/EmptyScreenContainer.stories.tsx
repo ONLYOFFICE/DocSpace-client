@@ -25,19 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 import EmptyScreenFilterPng from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg?url";
 
-import { IconSizeType, commonIconsStyles } from "../../utils";
+import { IconSizeType } from "../../utils";
 import { Link, LinkType } from "../link";
 import { EmptyScreenContainer } from ".";
 
-const CrossReactSvgIcon = styled(CrossReactSvgUrl)`
-  ${commonIconsStyles}
-`;
+import styles from "./EmptyScreenContainer.stories.module.scss";
 
 const meta = {
   title: "Base UI Components/EmptyScreenContainer",
@@ -93,19 +90,19 @@ type Story = StoryObj<typeof meta>;
 export default meta;
 
 const ResetFilterButton = () => (
-  <>
-    <CrossReactSvgIcon
-      size={IconSizeType.small}
-      style={{ marginInlineEnd: "4px" }}
+  <div className={styles.resetFilterButton}>
+    <CrossReactSvgUrl
+      className={styles.crossIcon}
+      data-size={IconSizeType.small}
     />
     <Link type={LinkType.action} isHovered>
       Reset filter
     </Link>
-  </>
+  </div>
 );
 
 const HomeButton = () => (
-  <Link type={LinkType.action} isHovered href="/">
+  <Link type={LinkType.action} isHovered>
     Go to home
   </Link>
 );

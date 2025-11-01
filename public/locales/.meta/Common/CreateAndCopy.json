@@ -3,7 +3,7 @@
   "content": "Create and copy",
   "content_en_sha1_hash": "664c11524d7aaec28682c1ec39a8d3e5f847912d",
   "created_at": "2025-05-19T21:30:43.837Z",
-  "updated_at": "2025-07-02T07:49:19.895Z",
+  "updated_at": "2025-09-23T07:24:24.400Z",
   "comment": {
     "text": "This translation key is used to display the text \"Create and copy\" in a shared component, appearing as a link within a row of links that allows users to create a new instance or duplicate an existing one. The text is used to describe the action associated with the link.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
-      "line_number": 114,
-      "context": "<StyledLinkRow onClick={onAddClick}>\n <StyledSquare>\n <IconButton size={12} iconName={PlusIcon} isDisabled />\n </StyledSquare>\n <Link className=\"create-and-copy_link\" noHover fontWeight={600}>\n {t(\"Common:CreateAndCopy\")}\n </Link>\n </StyledLinkRow>\n ) : (\n links.map((link, index) => {\n if ((\"isLoaded\" in link && link.isLoaded) || \"isLoaded\" in link)",
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 457,
+      "context": "return [\n header,\n <CreateButton\n key=\"share-create-link\"\n onClick={addGeneralLink}\n title={t(\"Common:CreateAndCopy\")}\n />,\n ];\n \n return [\n header,",
       "module": "/packages/shared"
     }
   ],

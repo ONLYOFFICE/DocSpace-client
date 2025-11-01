@@ -1,0 +1,333 @@
+{
+  "key_path": "PortalRestoring",
+  "content": "{{productName}} restoring",
+  "content_en_sha1_hash": "1a4df26daa825b316038b98a7979d755b829dc9b",
+  "created_at": "2025-05-19T21:30:53.435Z",
+  "updated_at": "2025-05-24T06:22:54.611Z",
+  "comment": {
+    "text": "The translation key \"PortalRestoring\" is used to display a descriptive phrase when restoring or reopening a portal. It appears in a modal dialog as the header text, and its purpose is to inform the user that their portal is being restored.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:45.542Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/PreparationPortalDialog/index.js",
+      "line_number": 49,
+      "context": "displayType=\"modal\"\n isCloseable={false}\n isLarge\n >\n <ModalDialog.Header>\n {t(\"PortalRestoring\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledPreparationPortalDialog>\n <PreparationPortal withoutHeader isDialog style={{ padding: \"0\" }} />\n </StyledPreparationPortalDialog>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"{{productName}} restoring\" implies a process of bringing something back to a previous state. \"استعادة {{productName}}\" translates to \"restoring {{productName}}\" and, while not technically incorrect, may not fully capture the nuance of the English phrase.  A more accurate translation, depending on the specific context, might be something like \"إعادة {{productName}} إلى وضعه السابق\" (returning {{productName}} to its previous state) or \"تعافي {{productName}}\" (recovery of {{productName})",
+          "suggestion": "Consider alternatives like \"إعادة {{productName}} إلى وضعه السابق\" or \"تعافي {{productName}}\" based on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Възстановяване на {{productName}}\" literally translates to 'Restoration of {{productName}}'. While not incorrect, it doesn't directly convey the meaning of 'restoring' as an ongoing process. A more accurate translation might be '{{productName}} се възстановява' ({{productName}} is restoring).",
+          "suggestion": "{{productName}} се възстановява"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Obnovení\" translates to 'Restoring', it lacks the possessive feel of \"{{productName}} restoring\". A more accurate translation would incorporate the product name more naturally.",
+          "suggestion": "Obnova {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation \"Wiederherstellung von {{productName}}\" literally translates to 'Restoration of {{productName}}'. While understandable, a more natural and user-friendly translation for '{{productName}} restoring' would be something along the lines of '{{productName}} wird wiederhergestellt' ({{productName}} is being restored) or '{{productName}} ist in der Wiederherstellung' ({{productName}} is in the restoring process).",
+          "suggestion": "Consider '{{productName}} wird wiederhergestellt' or '{{productName}} ist in der Wiederherstellung'."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Επαναφορά {{productName}}' is a literal translation of 'restoring' as 'Επαναφορά', which is more accurately 'reset' or 'recovery'. 'Restoring' implies a process of returning something to a previous state, which is not fully conveyed by 'Επαναφορά'.",
+          "suggestion": "Consider a more nuanced translation like 'Αποκατάσταση {{productName}}' (meaning 'remediation' or 'restoration') or 'Επαναφορά στην προηγούμενη κατάσταση του {{productName}}' (meaning 'Restoring {{productName}} to the previous state'). The best choice depends on the precise meaning intended."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Restauración de {{productName}}\" while technically correct, doesn't fully convey the nuance of \"{{productName}} restoring\". A more natural translation would be something like \"{{productName}} está siendo restaurado\" or \"Restaurando {{productName}}\".",
+          "suggestion": "Restaurando {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}}-n palauttaminen\" is a literal translation of \"restoring\" that doesn't quite capture the meaning in this context. 'Restoring' in this context likely means 'being restored' or 'recovery'.",
+          "suggestion": "{{productName}}-palautus\" or \"{{productName}}-palautetaan\""
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Restauration de {{productName}}' is technically correct but sounds a bit stiff and not as natural as a more conversational alternative. '{{productName}} en cours de restauration' would be a better fit for a portal status message.",
+          "suggestion": "{{productName}} en cours de restauration"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ripristino {{productName}}' is too literal. A more natural Italian phrasing would be 'Restauro di {{productName}}' or '{{productName}} in fase di ripristino'. 'Ripristino' can be interpreted as 'reset' in some contexts, and 'restauro' better conveys the concept of restoring a product to a previous state.",
+          "suggestion": "Restauro di {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'restoring' implies a return to a previous state, often after a failure or problem. While 'ກູ້ຄືນ' (ku khun) means 'recover' or 'retrieve,' it might not fully capture the nuance of 'restoring' in this context, especially if the product is being rebuilt or refreshed rather than simply recovered.",
+          "suggestion": "Consider alternative Lao translations like 'ສ້າງຄືນ' (sang khun) which means 'rebuild' or 'create again,' depending on the exact meaning of 'restoring' in the product context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"atjaunošana\" technically translates to \"restoring\", it's a noun. The English phrase \"{{productName}} restoring\" is a verbal phrase (present participle). A more accurate translation would be something like '{{productName}} tiek atjaunots' ({{productName}} is being restored) or '{{productName}} atjaunojot' (restoring {{productName}}).",
+          "suggestion": "{{productName}} tiek atjaunots"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Odzyskiwanie {{productName}}\" while understandable, isn't the most natural or precise translation of \"{{productName}} restoring\". \"Odzyskiwanie\" implies recovery from a lost state, whereas \"restoring\" can also mean returning to a previous working condition. A better translation would reflect the nuance of the original.",
+          "suggestion": "Renewacja {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Restauração de {{productName}}' is not the most natural or idiomatic translation of '{{productName}} restoring'. While technically correct, it lacks fluency. A better translation might be '{{productName}} a ser restaurado' or 'Restaurando {{productName}}'.",
+          "suggestion": "Consider '{{productName}} a ser restaurado' or 'Restaurando {{productName}}'"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Restauração de {{productName}}\" is a literal translation of 'Restoration of {{productName}}'. A more natural and idiomatic translation for \"{{productName}} restoring\" would be something like \"{{productName}} está sendo restaurado\" or \"{{productName}} em restauração\".",
+          "suggestion": "{{productName}} está sendo restaurado"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Restaurarea spațiului {{productName}}\" is not a direct equivalent to \"{{productName}} restoring\". While \"Restaurarea\" means \"restoring\", \"spațiului\" implies a space or area, which isn't necessarily conveyed in the English original. A better translation might focus on the action of restoring the product itself.",
+          "suggestion": "Restaurarea {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation '{{productName}} ප්‍රත්‍යර්පණය' is a literal translation of 'restoring' as 'pratyarpanaya' which implies 'dedication' or 'offering'. It doesn't accurately convey the meaning of a product being restored to a previous state. A more accurate translation would convey 'recovering' or 're-establishing'.",
+          "suggestion": "{{productName}} නැවත ස්ථානගත කිරීම"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Obnovenie {{productName}}\" is too literal and doesn't flow naturally. \"Restoring\" implies an action happening *to* the product. A more accurate translation would convey this action.",
+          "suggestion": "Prípadne \"{{productName}} je obnovovaný\" or \"Obnova {{productName}}\""
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Obnavljanje' can mean restoring, it's more commonly associated with renewing or updating. A more accurate translation for 'restoring' in this context (likely referring to a system or product returning to a previous state) might be 'Ponovno vzpostavljanje'.",
+          "suggestion": "Ponovno vzpostavljanje {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Обнављање {{productName}}-а\" translates to \"Updating {{productName}}-a\" or \"Renewal of {{productName}}-a\" which doesn't fully convey the meaning of 'restoring'. 'Restoring' implies bringing something back to a previous state, not just updating or renewing. A better translation would be closer to 'Времање {{productName}}-а' or 'Повраћање {{productName}}-а'.",
+          "suggestion": "Времање {{productName}}-а"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'restoring' can have slightly different nuances depending on the context. While 'obnavljanje' is a valid translation for 'restoring,' it might imply a more complete restoration than the intended meaning. A more suitable translation might be 'vraćanje' or 'ponovno uspostavljanje' depending on the specific context.",
+          "suggestion": "Consider 'Vraćanje {{productName}}-a' or 'Ponavno uspostavljanje {{productName}}-a' as alternatives."
+        },
+        {
+          "type": "formatting",
+          "description": "The Serbian translation lacks a space before the product name variable, similar to the English original.",
+          "suggestion": "Change 'Obnavljanje {{productName}}-a' to 'Obnavljanje {{productName}} - a'"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

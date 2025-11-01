@@ -3,7 +3,7 @@
   "content": "Import data to your {{productName}} from {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
   "content_en_sha1_hash": "43136c0eceec75981e7d0da5bf5088cc77608a6e",
   "created_at": "2025-05-19T21:30:56.524Z",
-  "updated_at": "2025-05-28T09:30:02.121Z",
+  "updated_at": "2025-10-13T13:22:35.628Z",
   "comment": {
     "text": "This translation key is used to display a brief message explaining how to import data into {{productName}} from other services. It is likely used in a button or link that allows users to import their data. The key includes placeholders for productName and organizationName, which should be replaced with actual values during translation.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 329,
+      "line_number": 338,
       "context": "],\n };\n \n const migrationData = {\n title: t(\"EmptyView:MigrationDataTitle\"),\n description: t(\"EmptyView:MigrationDataDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n icon: <InviteUserFormIcon />,\n key: \"migration-data\",",
       "module": "/packages/client"
     }
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Workspace {{organizationName}}' is not a natural or clear way to refer to the organization's workspace in Arabic. It's better to use a more descriptive term or restructure the sentence.",
+          "suggestion": "استيراد البيانات إلى {{productName}} من مساحة عمل {{organizationName}} أو Google Workspace أو Nextcloud."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains the English phrasing using 'أو' (or) to connect the options. While grammatically correct, it might read more smoothly with a slightly different connector depending on context and desired flow.",
+          "suggestion": "استيراد البيانات إلى {{productName}} من مساحة عمل {{organizationName}}، Google Workspace، أو Nextcloud."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Import data to your {{productName}}' is better translated as 'Məlumatı {{productName}}-ə yükləyin' or 'Məlumatı {{productName}}-ə kopyalayın' rather than 'Məlumatı {{productName}}-ə idxal edin.' While 'idxal edin' is technically correct, 'yükləyin' or 'kopyalayın' are more common and natural-sounding for this type of action in Azerbaijani.",
+          "suggestion": "Məlumatı {{productName}}-ə yükləyin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,19 +62,37 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation literally translates 'Import data'. A more natural phrasing would be 'Naimportujte data' or 'Importujte data do'.",
+          "suggestion": "Naimportujte data do vašeho {{productName}} z {{organizationName}} Workspace, Google Workspace nebo Nextcloud."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Daten in Ihr {{productName}} aus dem {{organizationName}} Workspace, Google Workspace oder Nextcloud importieren' is grammatically correct, but the word order sounds slightly unnatural in German.  A more natural phrasing would be 'Importieren Sie Daten in Ihr {{productName}} aus dem {{organizationName}} Workspace, Google Workspace oder Nextcloud.'",
+          "suggestion": "Importieren Sie Daten in Ihr {{productName}} aus dem {{organizationName}} Workspace, Google Workspace oder Nextcloud."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation doesn't include the 'organizationName' variable properly. It's positioned after 'Workspace', which changes the meaning. The English implies data import *from* an organization's Workspace. The Greek implies data is imported *to* a workspace belonging to the organization.",
+          "suggestion": "Εισαγωγή δεδομένων στο {{productName}} σας από το Workspace της {{organizationName}}, το Google Workspace ή το Nextcloud."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +104,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Import data to your {{productName}}' is awkward. 'Tuo tiedot {{productName}}:een' literally translates to 'Bring data to {{productName}}:een'. A more natural phrasing would be 'Siirrä tiedot...'.",
+          "suggestion": "Siirrä tiedot {{productName}}:een {{organizationName}} työtilasta, Googlen työtilasta tai Nextcloudista."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +122,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation maintains the English structure of listing sources separated by commas, which can feel slightly unnatural in Armenian. A more fluid phrasing might be better.",
+          "suggestion": "Ներմուծեք տվյալները ձեր {{productName}} {{organizationName}} Workspace-ից, Google Workspace կամ Nextcloud-ից: "
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,19 +140,42 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"データをインポートできます\" (data import possible) doesn't perfectly align with the English \"Import data...\". A more direct translation would be something like \"データをインポートする (data import)\" or \"データをインポートしてください (please import data)\".",
+          "suggestion": "データをインポートしてください (Please import data)"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, using 'から' after each Workspace name might sound a little repetitive in Japanese. Consider a more concise phrasing.",
+          "suggestion": "{{organizationName}} Workspace、Google Workspace、または Nextcloud からデータを {{productName}} にインポートできます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation includes \"또는\" which is appropriate for connecting options, but a more natural flow might be achieved by using a more nuanced connector depending on the specific nuance intended.",
+          "suggestion": "Consider using a slightly different connector like \"및\" or rephrasing the sentence for better readability. For instance, \"{{organizationName}} Workspace, Google Workspace, 또는 Nextcloud에서 {{productName}}로 데이터를 가져올 수 있습니다.\" (This is a suggestion and the original is acceptable)."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation maintains the English formatting of using placeholders ({{productName}} and {{organizationName}}). This might be acceptable, but it's worth considering if a more natural Lao phrasing would be preferable without the placeholders, depending on the overall style guide.",
+          "suggestion": "Consider rephrasing to remove or integrate the placeholders for a more natural Lao flow if appropriate for your style guide. For example: \"ນໍາເຂົ້າຍ້ອນຂໍ້ມູນເຂົ້າສູ່ແອັບຯ {{productName}} ຂອງທ່ານຈາກເວທີເຮັດວຽກຂອງ {{organizationName}}, Google Workspace ຫຼື Nextcloud.\""
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +199,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Import data to your {{productName}}' could be more natural in Portuguese. 'Importe dados para o seu {{productName}}' would be more common and idiomatic.",
+          "suggestion": "Importe dados para o seu {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,13 +229,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation includes curly braces around the variables productName and organizationName, mirroring the English content. While technically correct, this is not standard practice in Sinhala and might look odd. It's recommended to remove them.",
+          "suggestion": "ඔබගේ {{productName}} වෙත {{organizationName}} Workspace, Google Workspace, හෝ Nextcloud වෙතින් දත්ත ආනයනය කරන්න. -->  ඔබගේ productName වෙත organizationName Workspace, Google Workspace, හෝ Nextcloud වෙතින් දත්ත ආනයනය කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation uses the phrase 'z {{organizationName}} Workspace' which literally translates to 'from {{organizationName}} Workspace'.  A more natural Slovak phrasing would be something like 'z prostredia {{organizationName}}' (from the {{organizationName}} environment).",
+          "suggestion": "Importovať údaje do {{productName}} z prostredia {{organizationName}} Workspace, Google Workspace alebo Nextcloud."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,37 +259,73 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Увезите' (Uvezite) translates to 'import' but sounds somewhat unnatural and formal in this context. A more natural and common word for 'import' in this context would be 'увезите' (uvezete) or 'увезите' (uvezite).",
+          "suggestion": "Увезите податке у ваш {{productName}} са {{organizationName}} Workspace, Google Workspace или Nextcloud."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation uses 'Uvezite' which implies 'import'. A more natural translation for 'Import' in this context might be 'Unesite' (enter/input) or 'Preuzmite' (download/get). 'Uvezite' is technically correct, but less common and slightly awkward in this scenario.",
+          "suggestion": "Unesite podatke u vaš {{productName}} sa {{organizationName}} Workspace, Google Workspace ili Nextcloud."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Verileri {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan {{productName}} üzerine aktarın.\" uses 'üzerine' which implies 'onto'. A more appropriate preposition to convey 'into' or 'to' would be 'içine' or 'a'.",
+          "suggestion": "Verileri {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan {{productName}} içine aktarın."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"{{organizationName}}\" is misplaced. It should be before \"Workspace\" in the Ukrainian translation to accurately reflect the original English meaning, which refers to importing data *from* a specific organization's Workspace.",
+          "suggestion": "Імпортуйте дані до {{productName}} з {{organizationName}} Workspace, Google Workspace або Nextcloud."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Import data to your {{productName}}' is not accurately translated. The Vietnamese translation 'Nhập dữ liệu {{productName}} của bạn' literally translates to 'Import data {{productName}} of you'. A more natural and accurate translation would be something like 'Nhập dữ liệu vào {{productName}}'.",
+          "suggestion": "Nhập dữ liệu vào {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '从{{organizationName}}工作区、Google 工作区或 Nextcloud 导入数据到您的{{productName}}' does not accurately convey the original meaning. The English sentence implies importing *to* the product. The Chinese translation reads as importing *from* those services *to* the product, which is correct, but the phrasing can be improved for fluency and clarity.",
+          "suggestion": "从{{organizationName}} 工作区、Google 工作区或 Nextcloud 将数据导入到您的{{productName}}。"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Enter domain name",
   "content_en_sha1_hash": "4aad4fadabc0049631d44b1adfbfcc29e2437e12",
   "created_at": "2025-05-19T21:30:57.452Z",
-  "updated_at": "2025-05-20T09:47:56.334Z",
+  "updated_at": "2025-08-12T19:46:26.411Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to enter a domain name. It appears as a placeholder text in UI components that accept domain names, such as input fields and dialog boxes.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
-      "line_number": 152,
-      "context": "type={InputType.text}\n size={InputSize.base}\n hasError={!!(domainNameError || checkDomainError)}\n onChange={onHandleDomain}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"spaces-input\"\n tabIndex={1}\n />\n <div style={{ marginTop: \"5px\" }}>\n {domainNameError",
+      "file_path": "/packages/management/src/app/spaces/configuration/body.tsx",
+      "line_number": 148,
+      "context": "errorMessage={domainErrorMessage}\n >\n <TextInput\n type={InputType.text}\n size={InputSize.base}\n placeholder={t(\"EnterDomain\")}\n value={domain}\n onChange={onChangeDomain}\n tabIndex={1}\n scale\n />",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/ChangeDomainDialog/index.tsx",
-      "line_number": 138,
-      "context": "size={InputSize.base}\n hasError={!!domainNameError}\n onChange={onHandleDomain}\n onKeyDown={onKeyDown}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"create-portal-input\"\n />\n <div>\n {domainNameError\n ? domainNameError.map((err) => (",
+      "file_path": "/packages/management/src/dialogs/change-domain/index.tsx",
+      "line_number": 129,
+      "context": "type={InputType.text}\n size={InputSize.base}\n hasError={!!domainNameError}\n onChange={onHandleDomain}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"create-portal-input\"\n />\n <div>\n {domainNameError\n ? domainNameError.map((err) => (",
       "module": "/packages/management"
     }
   ],
@@ -111,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ໃສ່' (sai) is generally correct for 'enter', but in this context, 'ລະบุ' (rabu) or 'ປ້ອນ' (pon) might be more appropriate for a formal application or user interface.",
+          "suggestion": "Consider 'ລະบุຊື່ໂດເມນ' or 'ປ້ອນຊື່ໂດເມນ'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"දුම් පත ඇතුළත් කරන්න\" literally translates to \"Enter smoke sheet/document.\" This is not an accurate translation of \"Enter domain name.\"",
+          "suggestion": "A more accurate translation would be something like \"డොමේన్ නම ඇතුළත් කරන්න\" (Domain name enter) or \"డొమైన్ పేరు నమోదు చేయండి\" (Register domain name)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +195,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Unesi ime domena' is understandable, a more natural and accurate translation of 'Enter domain name' would be 'Unesite domena' or 'Upisite domena'. 'Ime' (name) is not strictly necessary and makes the phrasing slightly awkward.",
+          "suggestion": "Unesite domena"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes both the English word 'Domain' and the Turkish word 'Alan'. While understandable, it's redundant. Ideally, just 'Alan adını girin' would be sufficient.",
+          "suggestion": "Alan adını girin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

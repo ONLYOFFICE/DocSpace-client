@@ -3,7 +3,7 @@
   "content": "Not need enter settings",
   "content_en_sha1_hash": "7f28597ca75d3662220ad43431be4c426a249474",
   "created_at": "2025-05-19T21:30:49.916Z",
-  "updated_at": "2025-05-21T00:43:03.149Z",
+  "updated_at": "2025-09-24T13:10:16.963Z",
   "comment": {
     "text": "This translation key is used to display the text \"Not need enter settings\" in a settings plugin dialog. It appears as part of a button or similar UI element that indicates whether entering settings is necessary or not. The text helps users understand their current status and navigate accordingly.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 80,
-      "context": "const locale = getCookie(LANGUAGE) || \"en\";\n const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n return (\n <StyledContainer withDelete={withDelete}>\n {withSeparator ? <StyledSeparator /> : null}",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
+      "line_number": 45,
+      "context": "const locale = getCookie(LANGUAGE) || \"en\";\n const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n return (\n <div\n className={classNames(styles.container, {",
       "module": "/packages/client"
     }
   ],
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'تحتاج إدخال الإعدادات' means 'Requires entering settings'. The English 'Not need enter settings' implies the opposite - that settings are *not* required. The translation should convey the meaning of 'does not require settings'.",
+          "description": "The Arabic translation 'تحتاج إدخال الإعدادات' translates to 'Needs to enter settings,' which is the opposite of the English 'Not need enter settings'. The intended meaning is that settings are not required.",
           "suggestion": "لا تحتاج إلى إدخال الإعدادات"
         }
       ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Parametrləri daxil etməlisiniz' means 'You must enter the parameters'. The English phrase 'Not need enter settings' implies that settings don't need to be entered. The correct translation should reflect this meaning.",
-          "suggestion": "Bir neçə ehtimal var: 'Parametrləri daxil etməyə ehtiyac yoxdur' (No need to enter parameters) or 'Parametrləri daxil etmək zəruridir deyil' (Entering parameters is not required)."
+          "description": "The Azerbaijani translation 'Parametrləri daxil etməlisiniz' means 'You must enter parameters'. The English 'Not need enter settings' suggests the opposite - that settings do not need to be entered. The translation should convey that entering settings is *not* required.",
+          "suggestion": "Tətricələr daxil etmək lazım deyil"
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Нужни са настройки за влизане\" (Needed are settings for entering) does not accurately reflect the English meaning \"Not need enter settings\". It implies that settings are required, while the original suggests they are not.",
-          "suggestion": "A more accurate translation could be something like \"Не са необходими настройки за влизане\" (Settings are not required for entering) or \"Не се изискват настройки за влизане\" (Settings are not required for entering)."
+          "description": "The Bulgarian translation \"Нужни са настройки за влизане\" (Needed are settings for entering) does not accurately reflect the meaning of \"Not need enter settings\". It implies that settings are required to enter, which is the opposite of the original meaning.",
+          "suggestion": "A more accurate translation would be something like \"Не са необходими настройки за влизане\" (Settings are not needed for entering) or \"Не изисква настройки за влизане\" (Doesn't require settings for entering)."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation 'Potřebujete zadat nastavení' translates to 'Do you need to enter settings?' which is the opposite of the English 'Not need enter settings'. The English phrase implies that settings do *not* need to be entered.",
-          "suggestion": "Zrušte zadávání nastavení"
+          "description": "The Czech translation \"Potřebujete zadat nastavení\" translates to \"You need to enter settings.\" This is the opposite of the English content \"Not need enter settings,\" which implies settings are not required.",
+          "suggestion": "A more accurate translation might be \"Není potřeba zadávat nastavení\" (It is not necessary to enter settings) or \"Není nutné zadávat nastavení\" (It is not necessary to enter settings)."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Keine Einstellungen erforderlich' is a bit formal and doesn't quite capture the nuance of 'Not need enter settings'. A more natural translation would convey the idea of not requiring any setup.",
-          "suggestion": "Nicht weiter konfigurieren benötigt"
+          "description": "The translation \"Keine Einstellungen erforderlich\" is a more formal and perhaps slightly less natural way to say \"Not need enter settings\". A more colloquial and direct translation might be better.",
+          "suggestion": "Benötigt keine Einstellungen"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Χρειάζεται εισαγωγή ρυθμίσεων\" translates to \"Requires entering settings\", which is the opposite of the English meaning \"Not need enter settings\". It implies that settings *are* needed, whereas the original states they are not.",
-          "suggestion": "Δεν απαιτείται εισαγωγή ρυθμίσεων"
+          "description": "The Greek translation \"Χρειάζεται εισαγωγή ρυθμίσεων\" translates to \"Requires entering settings,\" which is the opposite of the English \"Not need enter settings.\" The intended meaning is that settings are *not* required.",
+          "suggestion": "Δεν χρειάζεται εισαγωγή ρυθμίσεων"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'No es necesario introducir ajustes' is a valid translation but might be slightly more formal than the original 'Not need enter settings.' A more conversational and possibly more accurate translation could be 'No es necesario ingresar ajustes' or 'No es necesario configurar ajustes'.",
-          "suggestion": "No es necesario ingresar ajustes"
+          "description": "The translation 'No es necesario introducir ajustes' is technically correct but could be more natural. 'Introducir ajustes' sounds a bit formal for the original 'enter settings'.",
+          "suggestion": "No es necesario configurar"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tarvitsee sisäänpääsyasetukset' does not accurately reflect the meaning of 'Not need enter settings'. It implies a need for access settings, whereas the original suggests that settings are unnecessary.",
-          "suggestion": "A more accurate translation could be 'Ei tarvitse syöttää asetuksia' or 'Ei vaadi asetusten syöttämistä'."
+          "description": "The Finnish translation 'Tarvitsee sisäänpääsyasetukset' does not accurately reflect the meaning of 'Not need enter settings'. It translates to 'Needs access settings', which implies a requirement, whereas the English phrase suggests the opposite - that settings are not required.",
+          "suggestion": "A more accurate translation would be something like 'Ei tarvitse syöttää asetuksia' or 'Ei vaadi asetuksia'."
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Il n'est pas nécessaire de saisir les paramètres' is technically correct but sounds somewhat formal and less natural than other options. A more common and natural phrasing would be more appropriate.",
-          "suggestion": "Consider alternatives like 'Pas besoin de saisir les paramètres' or 'Les paramètres ne sont pas obligatoires'."
+          "description": "The translation \"Il n'est pas nécessaire de saisir les paramètres\" is a bit too formal for the original, which is a simple statement \"Not need enter settings\". A more natural and concise translation would be better.",
+          "suggestion": "Pas besoin de paramètres"
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Պետք է մուտքագրել կարգավորումները\" translates to \"It is necessary to enter the settings.\" which is the opposite of the English meaning \"Not need enter settings\". The English phrase implies that settings do *not* need to be entered.",
-          "suggestion": "A more accurate translation would be something like \"Do not need to enter settings\" which could be translated as \"Չպետք է մուտքագրել կարգավորումները\" (Chpetk e mut'yagrel kargavorumnerə)."
+          "description": "The Armenian translation 'Պետք է մուտքագրել կարգավորումները' translates to 'Need to enter settings'. The original English 'Not need enter settings' implies the opposite - that settings don't need to be entered. A more accurate translation would reflect that.",
+          "suggestion": "Մի պետք է մուտքագրել կարգավորումները (Mi petq e mut'yagrel kargavorumnerə) - 'Don't need to enter settings'"
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Non è necessario inserire le impostazioni\" is technically correct but lacks the brevity of the original \"Not need enter settings\". While grammatically sound, it's more verbose. A more accurate and concise translation reflecting the intended meaning (often used in UI contexts) would be closer to 'Non richiedere impostazioni'.",
-          "suggestion": "Non richiedere impostazioni"
+          "description": "The translation 'Non è necessario inserire le impostazioni' is a bit literal and not the most natural way to express 'Not need enter settings' in Italian. While grammatically correct, it's not idiomatic.",
+          "suggestion": "Consider 'Non serve inserire impostazioni' or 'Non è richiesta l'impostazione' for a more fluent translation.  'Non serve' is a common and concise way to convey 'not need'."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '設定入力が不要' while technically correct, is a bit formal for what 'Not need enter settings' likely implies. It lacks the brevity and casual tone of the original.",
-          "suggestion": "より自然な表現としては、'設定不要' や '設定不要です' が考えられます。 (More natural expressions would be 'settei fuyou' or 'settei fuyou desu.')"
+          "description": "The English phrase \"Not need enter settings\" is grammatically incorrect and implies a negative requirement. A more accurate English equivalent would be \"Settings are not required\" or \"No settings required\". The Japanese translation \"設定入力が不要\" (settei nyuuri ga fuyou) is a good translation of the intended meaning - 'entering settings is not required'. However, the mismatch between the poor English source and the accurate Japanese translation is noteworthy.",
+          "suggestion": "Consider revising the English source to 'Settings are not required' or 'No settings required' to align better with the Japanese translation."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"설정을 입력하지 않아도 됩니다\" (Seoljeong-eul inputhaji anadoeomyeon-eun-da) is a literal translation and doesn't quite convey the intended meaning of \"Not need enter settings\". It implies that entering settings is something that *can* be done, but is not required. A better translation would imply that settings are not needed at all.",
-          "suggestion": "A more accurate translation might be \"설정이 필요하지 않습니다\" (Seoljeong-i pillyohaji anseupnida) - 'Settings are not required' or \"설정 입력이 필요없습니다\" (Seoljeong input-i pillyeoepseumnida) - 'Entering settings is not necessary'."
+          "description": "The translation \"설정을 입력하지 않아도 됩니다\" is a literal translation but doesn't perfectly convey the nuance of \"Not need enter settings.\" A more natural and accurate translation would emphasize that settings are *not required*.",
+          "suggestion": "설정을 입력할 필요가 없습니다"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ບໍ່ຈຳເປັນຕ້ອງໃສ່ການຕັ້ງຄ່າ' while understandable, isn't the most natural or precise rendering of 'Not need enter settings'. It literally translates to 'Not necessary to put the settings'. A better translation would focus on the intention - 'No need to enter settings' or 'Settings are not required'.",
-          "suggestion": "Consider 'ບໍ່ຈຳເປັນຕ້ອງຕັ້ງຄ່າ' or 'ບໍ່ຕ້ອງການຕັ້ງຄ່າ'."
+          "description": "The translation 'ບໍ່ຈຳເປັນຕ້ອງໃສ່ການຕັ້ງຄ່າ' while understandable, isn't the most natural or precise translation of 'Not need enter settings'. A more accurate translation would emphasize the lack of necessity, rather than the act of entering.",
+          "suggestion": "ບໍ່ຈຳເປັນຕ້ອງຕັ້ງຄ່າ"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nav jāievada iestatījumus\" is a literal translation but doesn't quite capture the intended meaning of 'Not need enter settings'. It implies an obligation or requirement. A more accurate translation would convey that settings are unnecessary or not required.",
-          "suggestion": "Nav nepieciešami iestatījumi"
+          "description": "The translation 'Nav jāievada iestatījumus' is not the most natural or accurate rendering of 'Not need enter settings'. It's overly literal. A more idiomatic translation would better convey the intended meaning.",
+          "suggestion": "Nav nepieciešams ievadīt iestatījumus"
         }
       ],
       "approved_at": null
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Instellingen invoeren is niet nodig' is a bit formal and verbose for the simplicity of the original English phrase 'Not need enter settings'. A more natural translation might be 'Geen instellingen nodig' or 'Geen instellingen vereist'.",
+          "description": "The translation 'Instellingen invoeren is niet nodig' is a more formal and verbose translation of 'Not need enter settings'. A more direct and natural Dutch translation would be 'Geen instellingen nodig' or 'Instellingen zijn niet nodig'.",
           "suggestion": "Geen instellingen nodig"
         }
       ],
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nie trzeba wchodzić w ustawienia' is a functional translation, but not a direct and natural equivalent of 'Not need enter settings'.  'Not need' is grammatically incorrect in English. A more accurate translation conveying the meaning of bypassing settings would be 'No need to enter settings' or 'Settings are not required'.",
-          "suggestion": "No need to enter settings"
+          "description": "The translation 'Nie trzeba wchodzić w ustawienia' while understandable, isn't the most natural way to say 'Not need enter settings' in Polish. It implies 'entering' the settings, which might not be the intended meaning. A more accurate and natural translation would focus on the unnecessary action of adjusting settings.",
+          "suggestion": "Nie wymagane wprowadzanie ustawień"
         }
       ],
       "approved_at": null
@@ -231,13 +231,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Não é necessário inserir configurações\" is a literal translation but could be more naturally phrased. \"Not need enter settings\" implies a lack of requirement, which is conveyed, but could be improved for fluency.",
+          "suggestion": "Não é necessário configurar."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Não é necessário inserir configurações' while grammatically correct, doesn't perfectly capture the brevity of \"Not need enter settings\". A more direct and concise translation would be better.",
+          "suggestion": "Não precisa de configurações"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -246,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Nu trebuie să definiți setările\" is a more formal and literal translation of \"Not need enter settings.\" A more natural and accurate translation would convey the meaning of 'no need to configure' or 'no configuration required'.",
-          "suggestion": "Nu este nevoie de configurare."
+          "description": "The Romanian translation 'Nu trebuie să definiți setările' implies 'must not define settings,' which is a stronger statement than the English 'Not need enter settings.' The English phrase suggests the setting is optional or pre-configured.",
+          "suggestion": "Nu este necesar să introduceți setările"
         }
       ],
       "approved_at": null
@@ -264,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සැකසුම් අනවශ්‍යයි' while grammatically correct, doesn't perfectly capture the nuance of 'Not need enter settings'. A more precise translation would convey the idea that settings don't *require* entry.",
-          "suggestion": "Perhaps 'මාකෘතීන් ඇතුළත් කිරීම අවශ්‍ය නොවේ' (Maakrutheen etulath karima avashya navve) - 'Entering settings is not necessary' - is a better alternative, although lengthier."
+          "description": "The translation 'සැකසුම් අනවශ්‍යයි' while understandable, doesn't perfectly capture the nuance of 'Not need enter settings'. A more accurate translation would convey the idea that no settings need to be input or configured.",
+          "suggestion": "කට්ටලම් ඇතුළත් කිරීමට අවශ්‍ය නොවේ"
         }
       ],
       "approved_at": null
@@ -273,25 +285,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Nemusíte zadávať nastavenia' translates to 'You don't need to enter settings'. While not *wrong*, it's slightly more formal than the brevity of the English 'Not need enter settings'. A more accurate and natural-sounding translation might be 'Nie je potrebné nastavovať' or 'Nastavenie nie je potrebné'.",
-          "suggestion": "Nie je potrebné nastavovať"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ni treba vnesti nastavitev' while technically correct, doesn't quite capture the nuance of 'Not need enter settings'. A more natural and idiomatic Slovenian translation would better convey the intended meaning.",
-          "suggestion": "Ni potrebno vnašati nastavitev"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -300,8 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Није потребно ући у подешавања\" is not the most natural or accurate rendering of \"Not need enter settings.\" A more common and idiomatic translation would be something like \"Није потребно уношење подешавања\" or \"Нису потребни подешавања\". The current translation implies the user needs to *enter* settings, which isn't the intended meaning.",
-          "suggestion": "Нису потребни подешавања"
+          "description": "The translation \"Није потребно ући у подешавања\" is a literal translation and sounds awkward. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Није потребно уношење подешавања"
         }
       ],
       "approved_at": null
@@ -312,8 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nije potrebno ući u podešavanja\" is too literal and doesn't quite capture the meaning of \"Not need enter settings\". A more natural and accurate translation would be \"Nisu potrebna podešavanja\" or \"Nisu potrebni podesavanja\".",
-          "suggestion": "Nisu potrebna podešavanja"
+          "description": "The translation \"Nije potrebno ući u podešavanja\" is not the most natural or accurate rendering of \"Not need enter settings.\" A more idiomatic translation would convey the meaning of 'no need to enter settings'.",
+          "suggestion": "Nema potrebe za podešavanjima"
         }
       ],
       "approved_at": null
@@ -324,8 +324,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ayarlara girmenize gerek yok' while understandable, isn't the most natural or concise way to translate \"Not need enter settings.\" A more idiomatic translation would better reflect the original meaning.",
-          "suggestion": "Ayarlar gereklidir değil"
+          "description": "The translation 'Ayarlara girmenize gerek yok' while understandable, doesn't perfectly capture the nuance of 'Not need enter settings'. A more accurate and natural Turkish translation would be something like 'Ayarlar girmek gerekmiyor' or 'Ayarları girmek zorunda değilsiniz'. The current translation focuses on 'entering' rather than the general absence of need.",
+          "suggestion": "Ayarlar girmek gerekmiyor"
         }
       ],
       "approved_at": null
@@ -336,8 +336,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Не потрібно вводити параметри' while understandable, doesn't fully capture the simplicity and directness of 'Not need enter settings'. 'Not need' is awkward in English, but the Ukrainian translation implies a more complex situation.",
-          "suggestion": "Consider 'Не потрібно вказувати налаштування' or 'Не потребує налаштувань' for a closer match in meaning and tone."
+          "description": "The translation 'Не потрібно вводити параметри' is a functional translation, but it's not the most natural way to express 'Not need enter settings' in Ukrainian. While technically correct, it sounds a little stiff. A more natural phrasing would be 'Не потрібно вводити налаштування'.",
+          "suggestion": "Не потрібно вводити налаштування"
         }
       ],
       "approved_at": null
@@ -348,8 +348,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Not need enter settings\" is grammatically incorrect. A more accurate English phrasing would be \"No need to enter settings\" or \"No need for settings\". The Vietnamese translation \"Không cần vào cài đặt\" captures the general meaning but could be improved to be more aligned with a corrected English phrase.",
-          "suggestion": "Consider revising the English source to \"No need to enter settings\" or \"No need for settings\".  The Vietnamese translation \"Không cần nhập cài đặt\" might be more accurate depending on the intended meaning."
+          "description": "The translation \"Không cần vào cài đặt\" while understandable, doesn't perfectly capture the nuance of \"Not need enter settings\". A more accurate translation would be something along the lines of \"Không cần nhập cài đặt\" or \"Không cần thiết lập\". \"Vào\" implies entering a location, which isn't quite right in this context.",
+          "suggestion": "Không cần nhập cài đặt"
         }
       ],
       "approved_at": null
@@ -360,8 +360,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"无需输入设置\" while technically accurate, doesn't quite capture the nuance of 'Not need enter settings'. It implies a requirement to enter settings that isn't present. A better translation would convey the idea that settings are not required.",
-          "suggestion": "无需配置设置"
+          "description": "The translation '无需输入设置' while conveying a similar meaning, isn't the most natural or precise translation of 'Not need enter settings'. 'Not need' is an ungrammatical construction in English. A more accurate translation would capture the intended meaning of 'no need to enter settings'.",
+          "suggestion": "无需配置"
         }
       ],
       "approved_at": null

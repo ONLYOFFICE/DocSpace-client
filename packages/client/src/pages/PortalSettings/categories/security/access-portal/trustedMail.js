@@ -59,7 +59,7 @@ const MainContainer = styled.div`
 const TrustedMail = (props) => {
   const {
     t,
-
+    tReady,
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,
@@ -155,8 +155,11 @@ const TrustedMail = (props) => {
   }, [type, domains]);
 
   const onSelectDomainType = (e) => {
-    if (type !== e.target.value) {
-      setType(e.target.value);
+    if (type === e.target.value) return;
+    setType(e.target.value);
+    if (e.target.value === "1" && domains.length === 0) {
+      setDomains([...domains]);
+      setShowReminder(true);
     }
   };
 
@@ -202,7 +205,7 @@ const TrustedMail = (props) => {
         domains,
       });
       setShowReminder(false);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -218,7 +221,7 @@ const TrustedMail = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if ((currentDeviceType !== DeviceType.desktop && !isLoading) || !tReady) {
     return <TrustedMailLoader />;
   }
 
@@ -234,6 +237,7 @@ const TrustedMail = (props) => {
         {trustedMailDomainSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="trusted_mail_component_learn_more"
             color={currentColorScheme.main?.accent}
             target="_blank"
             isHovered
@@ -256,16 +260,19 @@ const TrustedMail = (props) => {
             id: "trusted-mail-disabled",
             label: t("Common:Disabled"),
             value: "0",
+            dataTestId: "trusted_mail_disabled",
           },
           {
             id: "any-domains",
             label: t("AllDomains"),
             value: "2",
+            dataTestId: "trusted_mail_any_domains",
           },
           {
             id: "custom-domains",
             label: t("CustomDomains"),
             value: "1",
+            dataTestId: "trusted_mail_custom_domains",
           },
         ]}
         selected={type}
@@ -281,6 +288,10 @@ const TrustedMail = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
+          inputDataTestId="trusted_mail_domain_input"
+          deleteIconDataTestId="trusted_mail_delete_domain_icon"
+          addButtonDataTestId="trusted_mail_add_domain_button"
+          hideDeleteIcon={domains.length === 1}
         />
       ) : null}
 
@@ -289,7 +300,7 @@ const TrustedMail = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
@@ -297,6 +308,8 @@ const TrustedMail = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="trusted-mail-save"
         additionalClassCancelButton="trusted-mail-cancel"
+        cancelButtonDataTestId="trusted_mail_cancel_button"
+        saveButtonDataTestId="trusted_mail_save_button"
       />
     </MainContainer>
   );

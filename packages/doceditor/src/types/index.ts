@@ -74,17 +74,19 @@ export type SdkSearchParams = {
 };
 
 export type RootPageProps = {
-  searchParams: Partial<{
-    fileId: string;
-    fileid: string;
-    version: string;
-    doc: string;
-    action: ActionType;
-    share: string;
-    editorType: string;
-    error?: string;
-  }> &
-    SdkSearchParams;
+  searchParams: Promise<
+    Partial<{
+      fileId: string;
+      fileid: string;
+      version: string;
+      doc: string;
+      action: ActionType;
+      share: string;
+      editorType: string;
+      error?: string;
+    }> &
+      SdkSearchParams
+  >;
 };
 export type TDocumentInfo = {
   favorite: boolean;
@@ -299,8 +301,6 @@ export type TEvent = {
   data: TEventData;
 };
 
-export interface UseSelectFolderDialogProps {}
-
 export interface UseSelectFileDialogProps {
   instanceId: string;
 }
@@ -335,7 +335,6 @@ export interface SelectFolderDialogProps {
   fileInfo: TFile;
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
-  organizationName: string;
   selectedFolderId?: string | number;
 }
 
@@ -433,7 +432,7 @@ export type TDocEditor = {
     history,
   }: {
     currentVersion?: number;
-    history?: {};
+    history?: object;
     error?: string;
   }) => void;
   setHistoryData?: (obj: THistoryData) => void;
@@ -441,6 +440,7 @@ export type TDocEditor = {
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
   startFilling?: VoidFunction;
   requestRoles?: VoidFunction;
+  setFavorite?: (favorite: boolean) => void;
 };
 
 export type TCatchError =
@@ -499,7 +499,7 @@ export type ConflictStateType = {
   resolve: (
     value: ConflictResolveType | PromiseLike<ConflictResolveType>,
   ) => void;
-  reject: (reason?: any) => void;
+  reject: (reason?: unknown) => void;
   fileName: string;
   folderName: string;
 };

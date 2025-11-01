@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import { Trans, useTranslation } from "react-i18next";
@@ -39,7 +37,6 @@ import { DEFAULT_GUEST_TEXT } from "@/utils/constants";
 import { GreetingContainer } from "./GreetingCreateUserContainer/GreetingCreateUserContainer.styled";
 
 type GreetingGuestContainerProps = {
-  firstName?: string;
   displayName?: string;
   culture?: string;
 };
@@ -72,7 +69,14 @@ export const GreetingGuestContainer = ({
               displayName,
             }}
             components={{
-              1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+              1: (
+                <Text
+                  key="component_key"
+                  fontWeight={600}
+                  as="strong"
+                  fontSize="16px"
+                />
+              ),
             }}
           />
         </Text>

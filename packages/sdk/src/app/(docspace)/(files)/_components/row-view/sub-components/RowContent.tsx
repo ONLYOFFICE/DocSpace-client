@@ -35,7 +35,7 @@ import { useTheme } from "styled-components";
 
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { SimpleFilesRowContent } from "@docspace/shared/styles/FilesRow.styled";
+import { FilesRowContent } from "@docspace/shared/components/files-row";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { SortByFieldName } from "@docspace/shared/enums";
@@ -102,7 +102,7 @@ const RowContent = observer(
     const mainInfo = getContentComponent();
 
     return (
-      <SimpleFilesRowContent sideColor={theme.filesSection.rowView.sideColor}>
+      <FilesRowContent sideColor={theme.filesSection.rowView.sideColor}>
         <Link
           className="row-content-link"
           type={LinkType.page}
@@ -132,8 +132,10 @@ const RowContent = observer(
           <Text fontSize="12px" fontWeight={400} className="row_update-text">
             {mainInfo}
           </Text>
-        ) : null}
-      </SimpleFilesRowContent>
+        ) : (
+          <div />
+        )}
+      </FilesRowContent>
     );
   },
 );

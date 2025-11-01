@@ -3,7 +3,7 @@
   "content": "Your additional storage subscription has been deactivated due to non-payment",
   "content_en_sha1_hash": "d95e5887fc80daff26ead869b2eb0182bf416e2c",
   "created_at": "2025-06-24T16:31:06.881Z",
-  "updated_at": "2025-07-01T15:57:36.032Z",
+  "updated_at": "2025-06-30T12:20:31.268Z",
   "comment": {
     "text": "This translation key is used for displaying a message indicating that an additional storage subscription has been deactivated due to non-payment. It appears in a modal dialog, informing users of the reason behind their subscription deactivation. The text \"Your additional storage subscription has been deactivated\" should match the provided English content and usage context.",
     "is_auto": true,

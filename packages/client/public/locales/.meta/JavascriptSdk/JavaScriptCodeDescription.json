@@ -3,7 +3,7 @@
   "content": "Embedding {{productName}} or its part using JavaScript. Copy the JavaScript code below.",
   "content_en_sha1_hash": "58a5dc751eef7422d7b3bd3ebf9706afd35bb2ee",
   "created_at": "2025-05-19T21:30:54.544Z",
-  "updated_at": "2025-05-28T09:30:02.574Z",
+  "updated_at": "2025-08-04T07:30:01.402Z",
   "comment": {
     "text": "This translation key is used for describing JavaScript code related to embedding a product using JavaScript. It appears on a page providing code to insert into the UI, and its purpose is to guide users on how to use it correctly.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 53,
+      "line_number": 60,
       "context": "<CodeWrapper height=\"fit-content\">\n <CategorySubHeader className=\"copy-window-code\">\n {`JavaScript ${t(\"CodeTitle\")}`}\n </CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"JavaScriptCodeDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <CodeBlock config={config} scriptUrl={scriptUrl} theme={theme} />\n </CodeWrapper>",
       "module": "/packages/client"
     }
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'yerləşdirilməsi' while technically correct, sounds slightly awkward and could be improved for naturalness in Azerbaijani. 'JavaScript istifadə edərək {{productName}}-in və ya onun bir hissəsini JavaScript vasitəsilə inteqrasiyası' would be a better flow.",
-          "suggestion": "JavaScript istifadə edərək {{productName}}-in və ya onun bir hissəsini JavaScript vasitəsilə inteqrasiyası."
+          "description": "The word 'yerləşdirilməsi' is a slightly awkward translation of 'embedding'. A more natural phrasing would be 'JavaScript vasitəsilə {{productName}}-i və ya onun bir hissəsini inteqrasiya etmək' or 'JavaScript vasitəsilə {{productName}}-i və ya onun bir hissəsini daxil etmək'.",
+          "suggestion": "JavaScript vasitəsilə {{productName}}-i və ya onun bir hissəsini inteqrasiya etmək."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure could be more fluid. While grammatically correct, it feels slightly stiff. Using 'JavaScript vasitəsilə' makes the sentence smoother.",
-          "suggestion": "JavaScript vasitəsilə {{productName}}-in və ya onun bir hissəsinin yerləşdirilməsi."
+          "type": "formatting",
+          "description": "The use of 'Aşağıdakı' is slightly formal. A more conversational tone might be preferable.",
+          "suggestion": "Qeyd etdiyimiz JavaScript kodunu kopyalayın."
         }
       ],
       "approved_at": null
@@ -56,13 +56,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Czech translation maintains the formatting of 'Copy the JavaScript code below.' which might be more natural as an imperative instruction. While not incorrect, it could be slightly improved.",
-          "suggestion": "Vložení {{productName}} nebo jeho části pomocí JavaScriptu. Níže uvedený kód JavaScriptu prosím zkopírujte."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -88,14 +82,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"upotus käyttäen JavaScriptiä\" could be more naturally translated as \"JavaScriptin avulla\" or \"JavaScriptin avulla sisällyttäminen.\" \"Upotus\" is technically correct but sounds slightly awkward in this context.",
-          "suggestion": "Sisällyttäminen JavaScriptin avulla"
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, the sentence could flow better by moving \"JavaScript-koodi\" to the end of the sentence.",
-          "suggestion": "{{productName}}-n tai sen osan upotus käyttäen JavaScriptiä. Alla oleva JavaScript-koodi on kopioitavissa."
+          "type": "spelling",
+          "description": "The word 'JavaScriptiä' is not the correct Finnish form. It should be 'JavaScriptia'.",
+          "suggestion": "JavaScriptia"
         }
       ],
       "approved_at": null
@@ -111,9 +100,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "grammar",
+          "description": "The phrase \"JavaScript-ի միջոցով\" is grammatically awkward. While technically correct, it's less natural in Armenian. A more fluent phrasing would be preferred.",
+          "suggestion": "JavaScript-ի օգտագործման միջոցով"
+        },
+        {
           "type": "formatting",
-          "description": "The colon after 'JavaScript-ի միջոցով' is not ideal. It's more common to use a period or no punctuation in this context.",
-          "suggestion": "JavaScript-ի միջոցով."
+          "description": "The colon after \"JavaScript-ի միջոցով\" feels slightly disjointed. It might be better to rephrase to avoid it.",
+          "suggestion": "JavaScript-ի օգտագործման միջոցով։ Պատճենեք JavaScript կոդը ստորև:"
         }
       ],
       "approved_at": null
@@ -121,13 +115,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Embedding' is better translated as 'Integrare' rather than 'Incorpora' in this context. 'Incorpora' suggests including something *within* something, while 'Integrare' conveys the sense of integrating or embedding a component into a larger system.",
-          "suggestion": "Integra {{productName}} o sue parti utilizzando JavaScript."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -148,8 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"ຖ່າຍບົດລະຫັດ JavaScript ດ້ານລຸ່ມນີ້\" is grammatically awkward. It implies copying the code, rather than using it. A more natural phrasing would suggest utilizing or implementing the code.",
-          "suggestion": "ໃຊ້ ຫຼື ປະຕິບັດຕາມບົດລະຫັດ JavaScript ດ້ານລຸ່ມນີ້."
+          "description": "The phrase \"ຖ່າຍບົດລະຫັດ JavaScript ດ້ານລຸ່ມນີ້\" sounds a bit awkward. 'ຖ່າຍ' implies copying like a photo. A better phrasing would suggest to 'copy' or 'use' the code.",
+          "suggestion": "ໃຊ້ບົດລະຫັດ JavaScript ດ້ານລຸ່ມນີ້"
         }
       ],
       "approved_at": null
@@ -190,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'spațiului' (space) doesn't accurately convey the meaning of 'Embedding'. A better translation would be 'integrării' (integration) or 'includerea' (inclusion).",
-          "suggestion": "Integrarea {{productName}} sau a unei părți a acestuia cu ajutorul JavaScript. Copiați codul JavaScript de mai jos."
+          "description": "The word \"spațiului\" (of the space) seems awkward and doesn't quite capture the meaning of \"Embedding.\" A more natural translation would focus on the action of embedding rather than the space itself.",
+          "suggestion": "Integrarea {{productName}} sau a unei părți din acesta cu ajutorul JavaScript."
         }
       ],
       "approved_at": null
@@ -208,8 +196,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'කෝඩ්ප්‍රමාණය' (kōḍapramāṇaya) is a bit clunky. While technically correct for 'code block/amount,' it's not the most natural phrasing in Sinhala.",
-          "suggestion": "Consider using 'කෝඩ්' (kōḍ) or 'ජාවාස්ක්‍රිප්ට් කේතය' (jāvas̄krip̄t kētaya) which translates to 'JavaScript code'. A more natural phrasing might be: 'පහත ජාවාස්ක්‍රිප්ට් කේතය පිටපත් කරන්න.'"
+          "description": "The word 'කොටසක්' (kotasak) is technically correct but sounds somewhat awkward in this context. A more natural phrasing might be 'කොටසැක' (kotasak) or 'අංගයක්' (angayak).",
+          "suggestion": "Consider using 'කොටසැක' or 'අංගයක්' instead of 'කොටසක්'."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the phrasing 'පහත ජාවාස්ක්‍රිප්ට් කෝඩ්ප්‍රමාණය පිටපත් කරන්න' is a bit long.  It could be more concise.",
+          "suggestion": "Consider rewording to 'පහත ජාවාස්ක්‍රිප්ට් කේත පිටපත් කරන්න.'"
         }
       ],
       "approved_at": null
@@ -217,13 +210,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovak translation uses a full stop after \"JavaScriptu\" which is unconventional in this context. It's better to omit it for consistency with typical coding documentation.",
-          "suggestion": "Vloženie {{productName}} alebo jeho časti pomocou JavaScriptu. Skopírujte nižšie uvedený kód JavaScript."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -238,8 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"помоц́у\" (pomoću) is a valid spelling, but depending on the specific context, \"уз помоћ\" (uz pomoć) might be more natural and common in Serbian. While not strictly incorrect, the latter enhances readability.",
-          "suggestion": "Уграђивање {{productName}}-а или његовог дела уз помоћ JavaScript. Копирајте JavaScript код испод."
+          "description": "The word 'помоц́у' is spelled incorrectly. It should be 'помоћу'.",
+          "suggestion": "помоћу"
         }
       ],
       "approved_at": null
@@ -250,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The use of genitive case 'JavaScript kod' is not ideal. It sounds slightly unnatural.  While grammatically correct, 'JavaScript kod' could be improved for flow.",
-          "suggestion": "JavaScript kod ili JavaScript skripta"
+          "description": "The use of \"pomoću\" is grammatically correct, but \"uz pomoć\" might be slightly more common and flow better in this context.",
+          "suggestion": "Ugrađivanje {{productName}}-a ili njegovog dela uz pomoć JavaScript. Kopirajte JavaScript kod ispod."
         }
       ],
       "approved_at": null
@@ -268,8 +255,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'представлений' (presented) is not the best translation for 'below' in this context. It sounds overly formal and doesn't accurately convey the meaning of simply referring to the code that follows.",
-          "suggestion": "Скопіюйте код JavaScript, наведений нижче."
+          "description": "The term 'представлений' (presented) doesn't quite convey the meaning of 'below' in this context. It sounds more formal than intended.",
+          "suggestion": "Вбудовування простору {{productName}} або його частини за допомогою JavaScript. Скопіюйте код JavaScript, наведений нижче."
         }
       ],
       "approved_at": null

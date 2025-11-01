@@ -30,8 +30,9 @@ import { BadgeProps } from "./Badge.types";
 import styles from "./Badge.module.scss";
 import { Text } from "../text";
 
-const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
+const Badge = (props: BadgeProps) => {
   const {
+    ref,
     onClick,
     fontSize = "11px",
     color,
@@ -42,7 +43,6 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     maxWidth = "50px",
     height,
     type,
-    compact,
     isHovered = false,
     border,
     label = 0,
@@ -53,6 +53,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     isVersionBadge,
     isPaidBadge,
     isMutedBadge,
+    dataTestId,
     ...rest
   } = props;
 
@@ -106,7 +107,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       aria-label={`${label} ${type || ""}`}
       aria-live="polite"
       aria-atomic="true"
-      data-testid="badge"
+      data-testid={dataTestId ?? "badge"}
       data-hidden={!shouldDisplay}
       data-no-hover={noHover}
       data-is-hovered={isHovered}
@@ -119,7 +120,6 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       <div
         className={styles.inner}
         style={innerStyle}
-        data-compact={compact}
         data-type={type}
         data-testid="badge-inner"
         aria-hidden="true"
@@ -136,7 +136,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       </div>
     </div>
   );
-});
+};
 
 Badge.displayName = "Badge";
 

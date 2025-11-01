@@ -28,13 +28,13 @@ import { IndexRange } from "react-virtualized";
 
 export type RowContainerProps = {
   /** Height of one Row element. Required for the proper functioning of the scroll */
-  itemHeight: number;
+  itemHeight?: number;
   /** Allows setting fixed block height for Row */
   manualHeight?: string;
   /** Child elements */
   children: React.ReactNode[];
   /** Enables react-window for efficient rendering of large lists */
-  useReactWindow: boolean;
+  useReactWindow?: boolean;
   /** Accepts class */
   className?: string;
   /** Accepts id */
@@ -44,11 +44,13 @@ export type RowContainerProps = {
   /** Sets a callback function that is called when the list scroll positions change */
   onScroll?: () => void;
   /** The property required for the infinite loader */
-  filesLength: number;
+  filesLength?: number;
   /** The property required for the infinite loader */
-  itemCount: number;
+  itemCount?: number;
   /** The property required for the infinite loader */
-  fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  fetchMoreFiles?: (params: IndexRange) => Promise<void>;
   /** The property required for the infinite loader */
-  hasMoreFiles: boolean;
+  hasMoreFiles?: boolean;
+  /** Disables text selection */
+  noSelect?: boolean;
 };

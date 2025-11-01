@@ -3,7 +3,7 @@
   "content": "Duplicate",
   "content_en_sha1_hash": "972d57379db3e5be76d4ead709fef1ad71ff03d6",
   "created_at": "2025-05-19T21:30:44.727Z",
-  "updated_at": "2025-06-03T20:59:42.292Z",
+  "updated_at": "2025-10-16T07:29:35.967Z",
   "comment": {
     "text": "This translation key is used to display the label \"Duplicate\" for a button or action that allows users to create a duplicate of an item. It appears in various UI contexts, such as option menus and dialogs, where it enables users to replicate existing content. The goal of this text is to provide clarity and consistency across different languages.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1632,
+      "line_number": 1722,
       "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1632,
+      "line_number": 1722,
       "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1632,
+      "line_number": 1722,
       "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Duplikovat\" (to duplicate) is a verb. The English word \"Duplicate\" functions as a noun. A more accurate noun translation would be \"duplikát\".",
-          "suggestion": "duplikát"
+          "description": "While \"Duplikovat\" can mean \"to duplicate,\" it's an action, not a noun. The English word \"Duplicate\" is a noun referring to a copy or a repeated instance. A more accurate translation would be \"Duplikát\".",
+          "suggestion": "Duplikát"
         }
       ],
       "approved_at": null
@@ -81,7 +81,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Duplizieren' is a valid German word, it primarily means 'to duplicate' or 'to copy'. 'Duplicate' in English often refers to the noun form – a copy or duplicate item. A more accurate translation, depending on the context, might be 'Doppelung' (noun) or 'Doppelung' (if emphasizing the act of creating duplicates).",
+          "suggestion": "Consider 'Doppelung' as a potential alternative, or provide more context to determine the most appropriate translation."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Spanish translation \"Duplicar\" means \"to duplicate\" or \"to copy\", not \"duplicate\" as a noun. The intended meaning is likely the noun form.",
-          "suggestion": "Consider \"Duplicado\" or \"Duplicada\" (depending on grammatical context) for a more accurate noun translation."
+          "description": "The translation \"Duplicar\" means \"to duplicate\" or \"to copy\". It's a verb. The English word \"Duplicate\" is a noun, meaning a copy or a thing that is duplicated. A more accurate translation would be \"Duplicado\" (masculine) or \"Duplicada\" (feminine), depending on the context, or simply \"Copia\".",
+          "suggestion": "Consider \"Duplicado\", \"Duplicada\", or \"Copia\"."
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Dupliquer\" is a valid French word, it translates more accurately to \"to duplicate\" or \"to copy.\" The English word \"Duplicate\" refers to a duplicate item itself, not the act of duplicating. A more accurate translation would be \"Doublon\".",
-          "suggestion": "Doublon"
+          "description": "The French translation \"Dupliquer\" translates to \"To duplicate\" or \"Duplicate\" as a verb. The English word \"Duplicate\" functions as a noun (a copy). A more accurate noun translation would be \"Duplicata\".",
+          "suggestion": "Duplicata"
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Կրկնօրինակել\" (Krknorinakel) means \"to duplicate\" or \"to copy\", but the English word \"Duplicate\" refers to something that is a duplicate of something else, not the action of duplicating. A more appropriate translation would be something like \"Կրկնություն\" (Krknut'yun) meaning 'repetition' or 'duplicate'.",
-          "suggestion": "Կրկնություն (Krknut'yun)"
+          "description": "The Armenian translation \"Կրկնօրինակել\" means \"to duplicate\" or \"to copy\". It doesn't directly translate to the English word \"Duplicate\" which refers to something being a copy or identical.",
+          "suggestion": "Consider using \"Կրկնություն\" (Krknotyoun) which means \"duplication\" or \"repetition\", or \"Երկվորյակ\" (Yerkvor'yak) which means “duplicate” in the sense of identical."
         }
       ],
       "approved_at": null
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Duplica' is a noun and doesn't accurately convey the meaning of the English word 'Duplicate', which is an adjective or verb.",
-          "suggestion": "Possible alternatives include: 'Duplicato' (past participle, can function as an adjective), 'Duplicare' (verb), or 'Doppio' (adjective meaning double/duplicate depending on context)."
+          "description": "The Italian translation \"Duplica\" is a verb form (infinitive). While related to \"duplicate,\" the English word \"Duplicate\" functions as a noun. A more accurate noun translation would be \"Duplicato\".",
+          "suggestion": "Duplicato"
         }
       ],
       "approved_at": null
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"複製する\" (fukuseki suru) translates to 'to reproduce' or 'to copy,' not directly 'duplicate.' While related, it doesn't convey the same meaning as 'duplicate' in the context of, for example, a duplicate entry or item. A more accurate translation would depend on the specific context, but something closer to '重複' (juuputsu) or '二重' (nijuu) might be more appropriate depending on what is being duplicated.",
-          "suggestion": "Consider alternatives like \"重複\" (juuputsu - duplication, overlap) or \"二重\" (nijuu - double, duplicate) depending on the specific context."
+          "description": "The translation \"複製する\" (fukuseki suru) translates to \"to duplicate\" or \"to reproduce\". While it can mean duplicate in some contexts, it's a more active process than the English word 'Duplicate' which is a state of being. A more suitable translation depending on the context would be 「重複」 (juuputsu) for a more direct equivalent of 'duplicate' referring to something being repeated.",
+          "suggestion": "Consider using 「重複」 (juuputsu) for a more accurate translation, especially if referring to a state of being duplicated."
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'ກ໋ອບປີ້' is a transliteration of 'copy' and doesn't directly translate 'duplicate'. While understood in Lao, it's not the most accurate or formal translation.",
-          "suggestion": "Consider 'ຊ້ອນຊ້ອນ' (son son) or 'ຄືນຄືນ' (khuen khuen) for a more accurate translation of 'duplicate'."
+          "description": "While 'ກ໋ອບປີ້' is a commonly used loanword in Lao, directly transliterating 'duplicate' doesn't always convey the intended meaning. 'Duplicate' can mean a copy, a repeated item, or redundancy. 'ກ໋ອບປີ້' primarily refers to a digital copy made through copying. Depending on context, a more accurate translation might be required.",
+          "suggestion": "Consider alternatives like 'ສຳເນົາ' (sam-nao) for a general copy, 'ຊ້ຳຊ້ອນ' (sam-son) for repeated or redundant, or 'ໂຕຄັດນອກ' (to kad nok) for a photocopy, depending on the context."
         }
       ],
       "approved_at": null
@@ -183,7 +189,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Dupliceren\" can mean \"to duplicate,\" in the context of a key named \"Common:Duplicate,\" the translation should be the noun \"Duplicate,\" which translates to \"Duplicaat\" in Dutch.",
+          "suggestion": "Duplicaat"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -192,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Duplikować' is a valid Polish word meaning 'to duplicate', it's a verb. The English 'Duplicate' is a noun. A more accurate noun translation would be 'Duplikat'.",
+          "description": "The Polish translation \"Duplikować\" is a verb (to duplicate) rather than a noun (Duplicate). The English word \"Duplicate\" functions as a noun in most contexts. A more appropriate translation would be \"Duplikat\".",
           "suggestion": "Duplikat"
         }
       ],
@@ -204,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Duplicar\" means \"to duplicate\" (verb). The English word \"Duplicate\" is a noun.",
-          "suggestion": "Consider using \"Duplicado\" (past participle, meaning 'duplicated') or \"Cópia\" (meaning 'copy') for a noun translation."
+          "description": "While \"Duplicar\" can mean \"to duplicate,\" it functions as a verb. \"Duplicate\" is a noun, referring to a copy or a duplicate item. A more accurate noun translation would be \"Duplicado\".",
+          "suggestion": "Duplicado"
         }
       ],
       "approved_at": null
@@ -222,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Dubluri\" is a plural form and doesn't accurately represent the singular English word \"Duplicate\". \"Dublă\" would be the singular feminine form, and \"Dublu\" would be the masculine singular form. The best singular translation depends on the context, but neither is inherently better than the other without more information.",
-          "suggestion": "Consider \"Dublă\" or \"Dublu\" depending on the grammatical gender required by the context."
+          "description": "The Romanian translation \"Dubluri\" is a plural form and doesn't directly translate \"Duplicate\" which is a singular noun. While 'dubluri' can mean 'duplicates' in a general sense, it is not the most accurate translation of the single word 'Duplicate'. A better translation would be 'Duplicat'.",
+          "suggestion": "Duplicat"
         }
       ],
       "approved_at": null
@@ -234,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Дублировать\" means \"to duplicate\" or \"to copy\". It's a verb. The English word \"Duplicate\" functions as a noun, meaning a copy or a duplicate item. A more accurate translation would be something like \"Дубликат\" (duplicate) or \"Двойник\" (double/copy).",
+          "description": "The Russian translation \"Дублировать\" (Dublirovat') means 'to duplicate' or 'to copy', which is a verb. The English word 'Duplicate' is a noun. A more accurate noun translation would be 'Дубликат'.",
           "suggestion": "Дубликат"
         }
       ],
@@ -246,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'අනුපිටපතක්' can mean 'duplicate', it often implies a copy or reproduction rather than the concept of 'duplicate' itself, which can refer to something being the same or repeated.",
-          "suggestion": "Consider 'ද්විතීය' (dwathiya) or 'සම' (sama) for a closer semantic match to 'duplicate'. The best choice would depend on the context."
+          "description": "While 'අනුපිටපතක්' (anupitapathak) can mean 'copy' or 'duplicate,' it's not the most common or natural translation for the English word 'Duplicate' in most contexts. A more accurate and commonly used translation would be 'පිටපත්' (pitapat) or 'සමරු' (samaru). 'අනුපිටපතක්' implies a more formal or legal copy.",
+          "suggestion": "Consider using 'පිටපත්' (pitapat) or 'සමරු' (samaru) instead of 'අනුපිටපතක්'."
         }
       ],
       "approved_at": null
@@ -270,7 +282,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Дуплицирај\" technically means \"duplicate\" or \"to duplicate\", it's a verb form (imperative mood). The key \"Common:Duplicate\" likely refers to the noun \"duplicate\". A more accurate translation would be \"Дупликат\".",
+          "description": "The Serbian (Cyrillic) translation \"Дуплицирај\" means \"duplicate\" as a verb (to duplicate). The English word 'Duplicate' functions as a noun. A more appropriate translation for a noun would be 'Дупликат'.",
           "suggestion": "Дупликат"
         }
       ],
@@ -282,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Dupliciraj\" is the verb form 'to duplicate'. The key 'Common:Duplicate' likely refers to the noun 'duplicate'.",
-          "suggestion": "Duplikat"
+          "description": "The Serbian translation \"Dupliciraj\" is the imperative form of the verb 'to duplicate'. The English word \"Duplicate\" functions as a noun, meaning 'a copy' or 'a duplicate'.  \"Dupliciraj\" doesn't convey this noun meaning.",
+          "suggestion": "Consider alternatives like \"Duplikat\" (duplicate - noun), \"Kopija\" (copy), or \"Ponovljeni primerak\" (repeated copy) depending on the context."
         }
       ],
       "approved_at": null
@@ -294,8 +306,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Çoğalt\" can mean 'duplicate', it's more accurately translated as 'reproduce' or 'copy'.  'Duplicate' implies an exact copy, which might be better conveyed by alternatives.",
-          "suggestion": "Consider alternatives like 'aynısı' (the same), 'eşleşmiş' (matched), or 'tekrarı' (repetition) depending on the specific context."
+          "description": "While 'Çoğalt' means 'duplicate' or 'reproduce,' it's not the most natural or common translation for the English word 'Duplicate' in this context (likely referring to a duplicate item or entry). A better translation might be 'Yineleme' or 'Tekrar.'",
+          "suggestion": "Consider using 'Yineleme' or 'Tekrar' for a more accurate and natural translation."
         }
       ],
       "approved_at": null
@@ -306,7 +318,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Дублювати\" (Dublyuvaty) means \"to duplicate\" or \"to copy\". While related to the concept of a duplicate, it's an action, not the noun \"duplicate\". A more accurate translation would be \"Дублікат\" (Dublikat), which means \"duplicate\".",
+          "description": "The Ukrainian translation \"Дублювати\" (Dublyuvaty) translates to \"to duplicate\" or \"to copy.\" While related to the English \"Duplicate,\" it's not a direct noun translation. A more accurate noun translation would be \"Дублікат\" (Dublykat).",
           "suggestion": "Дублікат"
         }
       ],
@@ -315,13 +327,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Nhân bản\" can mean 'duplicate', it's more commonly associated with replication or cloning. 'Duplicate' in a common context, like a redundant entry, might be better translated as 'trùng lặp' or 'bản sao'.",
-          "suggestion": "Consider 'trùng lặp' or 'bản sao' for a more accurate translation depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -330,8 +336,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'创建副本' (chuàngjiàn fùbǐ) literally translates to 'create a copy'. While conceptually related to 'duplicate', it's not the most direct or natural translation. 'Duplicate' often implies a precise and identical copy, which '创建副本' doesn't fully convey. A more appropriate translation might be '重复' (chóngfù) or '复制' (fùzhì).",
-          "suggestion": "Consider '重复' (chóngfù) or '复制' (fùzhì) for a more accurate translation."
+          "description": "'创建副本' (chuàngjiàn fùbǐ) translates to 'create a copy'. While related to 'duplicate', it doesn't directly convey the meaning of 'duplicate' which implies an exact repetition or redundancy. A more accurate translation could be '重复' (chóngfù) or '复制' (fùzhì).",
+          "suggestion": "'重复' (chóngfù) or '复制' (fùzhì)"
         }
       ],
       "approved_at": null

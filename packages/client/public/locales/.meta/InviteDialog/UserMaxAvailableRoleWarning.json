@@ -3,7 +3,7 @@
   "content": "Guests and Users cannot be assigned as Room managers. Only Room and {{productName}} admins are suitable for the specified role.",
   "content_en_sha1_hash": "c301475a90b7e7caea7bcb0e1ce1edfacec602b6",
   "created_at": "2025-05-19T21:30:54.739Z",
-  "updated_at": "2025-05-21T09:35:36.221Z",
+  "updated_at": "2025-09-17T13:43:01.663Z",
   "comment": {
     "text": "This translation key is used to display a warning message when users or guests are assigned as room managers. It informs the user that only certain admins (room and {{productName}}) are suitable for this role. This message appears in an invite panel and alerts users about accessibility restrictions.",
     "is_auto": true,
@@ -15,6 +15,18 @@
       "line_number": 71,
       "context": "item.access = freeRole.access;\n item.warning = item.isGroup\n ? t(\"GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n });\n return item;\n };",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 48,
+      "context": "type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"InviteDialog:UserMaxAvailableRoleWarning\", {\n productName: this.t(\"Common:ProductName\"),\n }),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 124,
+      "context": "},\n roomManager: {\n key: \"roomManager\",\n label: t(\"Common:RoomManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -30,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'لا يمكن تعيين الضيوف والمستخدمين كمديري غرف' is a literal translation but sounds unnatural in Arabic. A more natural phrasing would be 'لا يمكن تكليف الضيوف والمستخدمين بدور مديري غرف'.",
-          "suggestion": "لا يمكن تكليف الضيوف والمستخدمين بدور مديري غرف."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'الدور المحدد' (the specified role) is slightly awkward. A more common and natural phrasing would be 'هذا الدور'.",
-          "suggestion": "هذا الدور"
+          "description": "The phrase 'specified role' is not accurately conveyed. 'الدور المحدد' (al-door al-muhaddad) translates to 'the specified role' but a more natural phrasing in Arabic might be something like 'هذا الدور' (hatha al-door) meaning 'this role' or 'this position'.",
+          "suggestion": "لا يمكن تعيين الضيوف والمستخدمين كمديري غرف. فقط مسؤولو الغرف وإدارة {{productName}} مناسبون لهذا الدور."
         }
       ],
       "approved_at": null
@@ -47,13 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'administrator' (administratorları) is a direct transliteration and might not be the most natural or clear way to express 'manager' in Azerbaijani. A more contextually appropriate term could be used, potentially depending on the product's specific terminology.",
-          "suggestion": "Consider using a more natural Azerbaijani equivalent for 'manager', such as 'rüsvətçi' or a similar term that better reflects the role's responsibilities within the product's context."
+          "description": "The term \"Room managers\" is translated as \"Otaq administratoru\". While technically correct, \"Otaq inzibatçısı\" might be a more natural and common term for 'Room managers' in Azerbaijani.  'Administratoru' implies a passive state, while 'inzibatçısı' conveys more actively managing.",
+          "suggestion": "Qonaq və İstifadəçilər Otaq inzibatçısı kimi təyin edilə bilməz."
         },
         {
           "type": "formatting",
-          "description": "The variable `{{productName}}` is correctly placed, but the surrounding text should be carefully reviewed for proper punctuation and flow when the variable is replaced with the actual product name.",
-          "suggestion": "Double-check the spacing and punctuation around `{{productName}}` to ensure clarity and readability after substitution."
+          "description": "The translation includes 'göstərilən rol', which translates to 'the specified role'. It's slightly wordy. A more concise phrasing would improve readability.",
+          "suggestion": "Qonaq və İstifadəçilər Otaq inzibatçısı kimi təyin edilə bilməz. Yalnız Otaq və {{productName}} administratorları bu rol üçün uyğundur."
         }
       ],
       "approved_at": null
@@ -73,13 +80,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'suitable for the specified role' is a bit clunky in German. A more natural phrasing would be 'geeignet für diese Rolle'.",
-          "suggestion": "Gäste und Benutzer können nicht als Raum-Manager zugewiesen werden. Nur Raum- und {{productName}}-Administratoren sind für diese Rolle geeignet."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -88,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"suitable for the specified role\" is overly literal and doesn't flow naturally in Greek. A more natural phrasing would be 'επιλέξιμοι για αυτόν τον ρόλο'.",
-          "suggestion": "Οι Επισκέπτες και οι Χρήστες δεν μπορούν να οριστούν ως διαχειριστές Δωματίων. Μόνο οι διαχειριστές Δωματίων και {{productName}} είναι επιλέξιμοι για αυτόν τον ρόλο."
+          "description": "The phrase 'suitable for the specified role' could be improved to better convey the intended meaning in Greek. The current translation ('κατάλληλοι για τον καθορισμένο ρόλο') is literal but slightly awkward. A more natural phrasing might emphasize fitness or qualification.",
+          "suggestion": "Οι διαχειριστές Δωματίων και {{productName}} είναι οι μόνοι που μπορούν να αναλάβουν αυτόν τον ρόλο."
         }
       ],
       "approved_at": null
@@ -106,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Vieraita' is German for 'Guests'. The English term 'Guests' should be translated to a Finnish equivalent that means 'Guests'. A better translation would be 'Kävijöitä'.",
-          "suggestion": "Kävijöitä ja käyttäjiä ei voida asettaa huoneen johtajiksi."
+          "description": "The term 'Vieraita' (Guests) is German, not Finnish. The correct Finnish word for 'Guests' is 'Vieraita'. It should be 'Käyttäjiä'.",
+          "suggestion": "Käyttäjiä ja käyttäjiä ei voida asettaa huoneen johtajiksi."
         }
       ],
       "approved_at": null
@@ -118,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'jouer le rôle spécifié' is a slightly awkward translation of 'suitable for the specified role'. It implies 'playing' the role rather than 'being appropriate' for the role.",
-          "suggestion": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires de salle. Seuls les administrateurs de salle et de {{productName}} sont éligibles pour ce rôle."
+          "description": "The phrase \"jouer le rôle spécifié\" is an awkward translation of \"suitable for the specified role.\" It implies acting a role rather than being qualified for it.",
+          "suggestion": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires de salle. Seuls les administrateurs de salle et de {{productName}} sont aptes à ce rôle."
         }
       ],
       "approved_at": null
@@ -129,9 +130,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The term \"Սենյակի մենեջերներ\" is a literal translation of 'Room managers' but might sound unnatural in Armenian. A more idiomatic translation might be 'Ժամանակացույցի վարիչներ' if 'Room' refers to a scheduling room or 'Դահլիճի վարչակազմողներ' if it's a physical room.",
-          "suggestion": "Consider 'Ժամանակացույցի վարիչներ' or 'Դահլիճի վարչակազմողներ' depending on the context."
+          "type": "formatting",
+          "description": "The Armenian translation includes a colon after 'մենեջերներ', which doesn't match the English sentence structure.",
+          "suggestion": "Remove the colon after 'մենեջերներ': Հյուրերը և օգտատերերը չեն կարող նշանակվել որպես Սենյակի մենեջերներ Նշված դերի համար հարմար են միայն Սենյակի և {{productName}} ադմինիստրատորները:"
         }
       ],
       "approved_at": null
@@ -148,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'suitable for the specified role' is translated as 'その役割に適しています'. While not incorrect, it's a bit stiff and formal. A more natural and conversational translation might be better.  Consider something like 'その役割にふさわしい' (suitable for that role) or 'その役割を担える' (capable of fulfilling that role).",
-          "suggestion": "ゲストおよびユーザーはルーム管理者に指定できません。ルーム管理者および{{productName}}管理者だけが、その役割を担えます。"
+          "description": "The phrase \"その役割に適しています\" (sono yakuwari ni tekishite imasu) is a somewhat formal and indirect way of saying 'suitable'. A more natural and direct translation would be something like \"その役割にふさわしいです\" (sono yakuwari ni fusawashii desu) or simply \"その役割が適任です\" (sono yakuwari ga tekkin desu).",
+          "suggestion": "ゲストおよびユーザーはルーム管理者に指定できません。ルーム管理者および{{productName}}管理者だけが、その役割にふさわしいです。"
         }
       ],
       "approved_at": null
@@ -157,13 +158,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"지정된 역할에 적합합니다\" is a bit stiff and not the most natural way to express suitability. A more natural translation for 'suitable for the specified role' would be something along the lines of '해당 역할에 적합합니다' or '해당 역할에 적임입니다'.",
-          "suggestion": "게스트와 사용자를 룸 관리자로 할당할 수 없습니다. 룸 및 {{productName}} 관리자만 해당 역할에 적합합니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -172,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ເທົ່ານັ້ນ' (teo nan) is unnecessarily used. It's redundant and doesn't add meaning. While not technically incorrect, it makes the sentence sound awkward.",
-          "suggestion": "แขກ ແລະຜູ້ໃຊ້ບໍ່ສາມາດຖືກມອບຫມາຍເປັນຜູ້ຈັດການຫ້ອງໄດ້ ພຽງແຕ່ຜູ້ບໍລິຫານຫ້ອງ ແລະ {{productName}} ສາມາດຖືກຕ້ອງສໍາລັບບົດບາດທີ່ກໍາຫນົດໄວ້."
+          "description": "The word 'ຖືກຕ້ອງ' (tuk tong) in 'ພຽງແຕ່ຜູ້ບໍລິຫານຫ້ອງ ແລະ {{productName}} ເທົ່ານັ້ນທີ່ຈະຖືກຕ້ອງສໍາລັບບົດບາດທີ່ກໍາຫນົດໄວ້' is not the most natural or accurate translation for 'suitable'. It implies 'correct' or 'right' rather than 'appropriate' or 'fit'.",
+          "suggestion": "ພຽງແຕ່ຜູ້ບໍລິຫານຫ້ອງ ແລະ {{productName}} ເທົ່ານັ້ນທີ່ຈະເຫມາະສົມສໍາລັບບົດບາດທີ່ກໍາຫນົດໄວ້."
         }
       ],
       "approved_at": null
@@ -184,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Norādītajai lomai ir piemērota tikai...\" is a somewhat awkward and indirect translation of \"Only... are suitable for the specified role.\" A more natural Latvian phrasing would be more direct.",
-          "suggestion": "Lomai ir piemēroti tikai telpas un {{productName}} administratori."
+          "description": "The phrase \"Norādītajai lomai ir piemērota tikai...\" is a somewhat awkward phrasing. A more natural translation would be something like \"Šo lomu var ieņemt tikai...\" or \"Tikai telpa un... var ieņemt šo lomu\".",
+          "suggestion": "Tikai telpa un {{productName}} administratori var ieņemt šo lomu."
         }
       ],
       "approved_at": null
@@ -196,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"opgegeven rol vervullen\" is not the most natural or accurate translation of \"specified role\". A more idiomatic translation would be 'deze rol'.",
-          "suggestion": "Gasten en Gebruikers kunnen niet worden toegewezen als Kamerbeheerders. Alleen Kamer en {{productName}} beheerders kunnen deze rol vervullen."
+          "description": "The phrase \"opgegeven rol vervullen\" is not the most natural or accurate translation of \"specified role\". A more appropriate translation would emphasize suitability or appropriateness.",
+          "suggestion": "Gasten en Gebruikers kunnen niet worden toegewezen als Kamerbeheerders. Alleen Kamer en {{productName}} beheerders zijn geschikt voor de opgegeven rol."
         }
       ],
       "approved_at": null
@@ -205,13 +200,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Polish translation uses a semicolon (;) where a comma (,) might be more natural in this context. While technically correct, it sounds slightly formal.",
-          "suggestion": "Nie można przypisać roli menedżera pokoju gościom ani użytkownikom. Tylko administratorzy pokoi i {{productName}} mogą przyjąć daną rolę."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -220,13 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Utilizadors' is misspelled. It should be 'Utilizadores'.",
+          "description": "The word 'Utilizadors' is misspelled. The correct Portuguese word is 'Utilizadores'.",
           "suggestion": "Utilizadores"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow.  'Apenas os administradores Room e {{productName}} são adequados para a função especificada' is a bit clunky.",
-          "suggestion": "Apenas administradores Room e {{productName}} são adequados para essa função."
         }
       ],
       "approved_at": null
@@ -243,18 +227,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"assigned as\" is not accurate. \"Desemnate\" implies a designation rather than an assignment. \"Atribuiți\" would be a more accurate translation.",
-          "suggestion": "Invitați și Utilizatori nu pot fi atribuiți Administratori de sală."
+          "description": "The phrase \"desemnate Administratori de sală\" is awkward. 'Desemnat' implies a formal designation, which doesn't fit the context. A more natural translation for 'assigned' would be 'numiți'.",
+          "suggestion": "Invitați și Utilizatori nu pot fi numiți Administratori de sală."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"rolul menționat\" (the mentioned role) is a bit awkward. A more natural phrasing would be to just refer to the role directly or use \"acest rol\".",
-          "suggestion": "Invitați și Utilizatori nu pot fi atribuiți Administratori de sală. Numai administratori de sală și administratori {{productName}} pot atribui acest rol."
+          "description": "The phrase 'atribuite rolul menționat' is unnecessarily wordy and could be simplified. It translates literally to 'assigned the mentioned role'.",
+          "suggestion": "Numai administratori de sală și administratori {{productName}} pot deține rolul."
         },
         {
-          "type": "grammatical",
-          "description": "The sentence \"Numai administratori de sală și administratori {{productName}} pot fi atribuite rolul menționat.\" is grammatically incorrect. 'Atribuite' should match the plural subject.",
-          "suggestion": "Numai administratori de sală și administratori {{productName}} pot atribui acest rol."
+          "type": "formatting",
+          "description": "The sentence structure is a little clunky. Breaking it into two sentences would improve readability.",
+          "suggestion": "Invitați și Utilizatori nu pot fi numiți Administratori de sală. Numai administratori de sală și administratori {{productName}} pot deține rolul."
         }
       ],
       "approved_at": null
@@ -265,13 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Room managers' as 'Менеджерами комнат' is technically correct but slightly awkward. 'Менеджеры комнат' is a more natural and commonly used term.",
-          "suggestion": "Менеджеры помещений"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Указанную роль могут выполнять\" is grammatically correct, it's a bit formal and less conversational. A more natural phrasing would convey the same meaning.",
-          "suggestion": "Данная роль могут выполнять"
+          "description": "The English phrase \"Guests and Users cannot be assigned as Room managers\" is somewhat passive. The Russian translation \"Гости и Пользователи не могут быть назначены Менеджерами комнат\" is a direct translation, but sounds less natural. A more natural phrasing would be something like \"Гости и Пользователи не могут быть ответственными за управление комнатами\" or \"Гости и Пользователи не могут выполнять роль Менеджера комнаты\".",
+          "suggestion": "Гости и Пользователи не могут выполнять роль Менеджера комнаты."
         }
       ],
       "approved_at": null
@@ -281,14 +260,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"පරිශීලකයින්\" (parishilakayin) is not the most accurate translation of \"Users\" in this context. A more appropriate translation would be \"භාවිතකරුවන්\" (bhavitakaruwan) or simply \"භාවිතکنندگان\" (bhavitakarakaruwan).",
-          "suggestion": "Replace \"පරිශීලකයින්\" with \"භාවිතකරුවන්\" or \"භාවිතکنندگان\"."
+          "type": "spelling",
+          "description": "The word 'පරිශීලකයින්' (parishilakayin) which translates to 'users' is a slightly awkward and less common way to say it. A more natural translation might be 'භාවිතකරුවන්' (bhavitakaruwan).",
+          "suggestion": "Replace 'පරිශීලකයින්' with 'භාවිතකරුවන්'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word \"භූමිකාව\" (bhūmikāva) can be translated to 'role' in English, but here it might be more accurate to use 'ឋනාව' (thanāva) which refers specifically to a position or rank within a system, closer to 'designation'.",
-          "suggestion": "Consider replacing \"භූමිකාව\" with \"ឋනාව\"."
+          "type": "grammar",
+          "description": "The sentence structure 'ආගන්තුකයින් සහ පරිශීලකයින් කාමර කළමණාකරුවන් ලෙස පත් කළ නොහැකි' is a bit long and can be improved for readability. A more fluent structure might be 'ආගන්තුකයින් සහ පරිශීලකයින් කාමර කළමණාකරුවන් ලෙස පත් කිරීමට හැකියාවක් లేదు'.",
+          "suggestion": "Replace 'ආගන්තුකයින් සහ පරිශීලකයින් කාමර කළමණාකරුවන් ලෙස පත් කළ නොහැකි' with 'ආගන්තුකයින් සහ පරිශීලකයින් කාමර කළමණාකරුවන් ලෙස පත් කිරීමට හැකියාවක් లేదు'."
         }
       ],
       "approved_at": null
@@ -299,13 +278,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'assigned as' is not accurately translated. 'Označení' implies a marking or identification, not an assignment of a role.",
-          "suggestion": "Hostia a používatelia nemôžu byť menovaní za manažérov miestnosti."
+          "description": "The English phrase 'assigned as' is not accurately reflected in the Slovak translation. 'Označení' implies marking or labeling, not assigning a role. 'Pridelená' is closer to 'assigned' but still not quite right.",
+          "suggestion": "Hostia a používatelia nemôžu byť menovaní za manažérov miestnosti. Iba administrátorom miestnosti a administrátorom {{productName}} môže byť táto funkcia pridelená."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'pridelená' means assigned in a more general sense. The term lacks the precision of role assignment.",
-          "suggestion": "Iba administrátorom miestnosti a administrátorom {{productName}} môže byť táto funkcia pridelená."
+          "description": "The term 'role' is inadequately translated.  'Funkcia' is closer than 'rola' in this context, as 'rola' often refers to a more formal or predefined role.",
+          "suggestion": "Hostia a používatelia nemôžu byť menovaní za manažérov miestnosti. Iba administrátorom miestnosti a administrátorom {{productName}} môže byť táto funkcia pridelená."
         }
       ],
       "approved_at": null
@@ -316,13 +295,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ni mogoče določiti' is too formal and clunky for this context. A more natural phrasing would convey the same meaning with more user-friendly language.",
-          "suggestion": "Gostov in uporabnikov ne moremo dodeliti za upravitelje sob."
+          "description": "The translation of \"Guests and Users\" as \"Gostov in uporabnikov\" is grammatically awkward in Slovenian. It should be rephrased to sound more natural.",
+          "suggestion": "Gostov in uporabnikom ni mogoče dodeliti..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The wording 'primerni za to vlogo' is a bit awkward. It implies suitability rather than permission. 'lahko opravljajo to vlogo' would be better.",
-          "suggestion": "Samo skrbniki sobe in {{productName}} lahko opravljajo to vlogo."
+          "description": "The word 'določiti' (to assign/determine) isn't the most natural fit for 'assigned' in this context.  'Dodeliti' would be more appropriate.",
+          "suggestion": "Gostov in uporabnikom ni mogoče dodeliti za upravitelje sob."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'primerni za to vlogo' is a bit stiff. A more fluid phrasing would improve readability.",
+          "suggestion": "so upravičeni za to vlogo"
         }
       ],
       "approved_at": null
@@ -332,14 +316,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Корисници' is transliterated. While acceptable, 'Корисници' could be replaced with a more standard Serbian equivalent for 'Users' which might be 'Корисници' with a more consistent formatting.",
-          "suggestion": "Consider using a consistently formatted 'Корисници'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'погодни за одређену улогу' translates to 'suitable for a specific role' but isn't the most natural or clear way to convey the meaning in Serbian. A better phrasing would emphasize eligibility or appropriateness.",
+          "suggestion": "Само администратори собе и {{productName}} администратори су квалификовани за ту улогу."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'погодни за одређену улогу' is slightly awkward. A more natural phrasing could be used.",
-          "suggestion": "Consider rephrasing to 'адекватно за ту улогу' or 'могу имати ту улогу'."
+          "type": "formatting",
+          "description": "While the use of Cyrillic is correct, the consistent capitalization throughout the sentence may not be the preferred style. Serbian typically capitalizes only the first word of the sentence and proper nouns.",
+          "suggestion": "Гости и Корисници не могу бити постављени као менаџери собе. Само администратори собе и {{productName}} администратори су квалификовани за ту улогу."
         }
       ],
       "approved_at": null
@@ -350,8 +334,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"određena uloga\" (specified role) is a bit clunky. A more natural and common phrasing in Serbian would be 'za tu ulogu' or 'za tu poziciju'.",
-          "suggestion": "Gosti i Korisnici ne mogu biti postavljeni kao Menadžeri sobe. Samo administratori sobe i {{productName}} su pogodni za tu ulogu."
+          "description": "The Serbian translation 'pogodni za određenu ulogu' is a bit literal and doesn't flow naturally. A more idiomatic translation for 'suitable' in this context would be 'mogu obavljati tu ulogu' or 'adekvatni za tu ulogu'.",
+          "suggestion": "Gosti i Korisnici ne mogu biti postavljeni kao Menadžeri sobe. Samo administratori sobe i {{productName}} mogu obavljati tu ulogu."
         }
       ],
       "approved_at": null
@@ -374,13 +358,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is a bit too literal. \"được chỉ định\" is repetitive and sounds unnatural. A more natural phrasing would be more direct.",
-          "suggestion": "Khách và Người dùng không thể làm người quản lý Phòng. Chỉ quản trị viên Phòng và {{productName}} mới có thể đảm nhận vai trò này."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'Phòng' is correct for 'Room,' the use of 'quản trị viên Phòng' feels redundant. 'quản trị viên' is already understood to refer to a Room administrator in this context.",
-          "suggestion": "Khách và Người dùng không thể làm người quản lý Phòng. Chỉ quản trị viên {{productName}} mới có thể đảm nhận vai trò này."
+          "description": "The phrase 'specified role' is awkwardly translated. 'được chỉ định' (specified) is redundant, as 'vai trò' already implies a specific role.  It makes the sentence feel unnatural.",
+          "suggestion": "Khách và Người dùng không thể được chỉ định làm người quản lý Phòng. Chỉ Phòng và quản trị viên {{productName}} mới phù hợp với vai trò này."
         }
       ],
       "approved_at": null
@@ -391,13 +370,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Guests and Users\" is translated as \"访客和用户\". While accurate, it's slightly less natural in this context. A more appropriate translation might convey the intended meaning of users who lack administrative privileges.",
-          "suggestion": "无法指定非管理员用户为房间管理员。 (Wúfǎ zhǐdìng fēi guānzhōnghǎo yònghù wéi fángjiān guānlián. - Unable to specify non-administrator users as room managers.)"
+          "description": "The English phrase 'Guests and Users cannot be assigned as Room managers' is translated too literally. A more natural phrasing in Chinese would convey the restriction more clearly.",
+          "suggestion": "访客和用户不能被设置为房间管理员 (Fǎkè hé yònghù bùnéng bèi shèzhào wénjiān guànlǐ员)."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrasing \"可担任该角色\" is slightly formal and less conversational. It translates to 'can hold the role'. A more natural phrasing would be more common.",
-          "suggestion": "只有房间管理员和{{productName}}管理员适合担任此角色。(Zhǐ yǒu fángjiān guānlián hé {{productName}} guānlián shìhé dānréng cǐ juésè. - Only room administrators and {{productName}} administrators are suitable for this role.)"
+          "description": "The phrase 'Only Room and {{productName}} admins are suitable for the specified role' is slightly awkward in Chinese. While technically correct, it's not the most fluent way to express this.",
+          "suggestion": "只有房间管理员和{{productName}}管理员才能担任该角色 (Zhǐyǒu wénjiān guànlǐ员 hé {{productName}} guànlǐ员 cáinéng dānrèn gāi juésè)."
         }
       ],
       "approved_at": null

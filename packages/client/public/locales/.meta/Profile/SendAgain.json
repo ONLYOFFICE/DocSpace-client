@@ -3,7 +3,7 @@
   "content": "Send again",
   "content_en_sha1_hash": "9fafcfcc8089c0d4519f16a47cf411b0b51890a7",
   "created_at": "2025-05-19T21:30:53.377Z",
-  "updated_at": "2025-05-28T09:30:02.823Z",
+  "updated_at": "2025-09-17T13:43:01.920Z",
   "comment": {
     "text": "The \"SendAgain\" translation key is used to display the phrase \"Send again\" in a button or similar UI element. It appears as an action option on a profile page, likely within a file upload or message sending section. This text invites users to retry a previous action.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 412,
-      "context": "<ReactSVG\n className=\"send-again-icon\"\n src={SendClockReactSvgUrl}\n />\n <Text className=\"send-again-text\" fontWeight={600} noSelect>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 477,
+      "context": "<ReactSVG\n className=\"send-again-icon\"\n src={SendClockReactSvgUrl}\n />\n <Text className=\"send-again-text\" fontWeight={600}>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 412,
-      "context": "<ReactSVG\n className=\"send-again-icon\"\n src={SendClockReactSvgUrl}\n />\n <Text className=\"send-again-text\" fontWeight={600} noSelect>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 477,
+      "context": "<ReactSVG\n className=\"send-again-icon\"\n src={SendClockReactSvgUrl}\n />\n <Text className=\"send-again-text\" fontWeight={600}>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"أعد الإرسال مرة أخرى\" (A'id al-irsal marra ukhr) is a literal translation of \"Send again\" and while understandable, it's slightly clunky and not the most natural phrasing in Arabic. It emphasizes the repetition unnecessarily. A more natural and concise translation would be better.",
-          "suggestion": "إرسال مرة أخرى (Irsal marra ukhr) or أرسل مرة أخرى (Arsal marra ukhr)"
+          "description": "The translation \"أعد الإرسال مرة أخرى\" is overly verbose and not the most natural way to say \"Send again\" in Arabic (Saudi Arabia). While technically correct, it's redundant.",
+          "suggestion": "أعد الإرسال / أرسل مرة أخرى"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing \"أعد الإرسال مرة أخرى\" includes two 'again' concepts, potentially making it clunky. Consider a more concise alternative.",
+          "suggestion": "أعد الإرسال"
         }
       ],
       "approved_at": null
@@ -105,13 +110,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'もう一度送信する' is a literal translation of 'Send again', but it's not the most natural or concise phrasing in Japanese. A more common and idiomatic translation would be something like '再送信' (Sai-shōshin) or 'やり直し' (Yari-nori).",
-          "suggestion": "Consider using '再送信' (Sai-shōshin) or 'やり直し' (Yari-nori) for a more natural and concise translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -132,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Izveidot jaunu identitāti' (Create a new identity) does not accurately reflect the meaning of the English phrase 'Send again'. The English phrase refers to resending a message or action, while the Latvian translation implies creating a new persona.",
-          "suggestion": "A more accurate translation would be something like 'Nosūtīt vēlreiz' or 'Sūtīt atkārtoti'."
+          "description": "The Latvian translation \"Izveidot jaunu identitāti\" (Create a new identity) does not accurately convey the meaning of \"Send again\". It suggests a completely different action.",
+          "suggestion": "A more accurate translation for \"Send again\" would be something like \"Nosūtīt atkal\" or \"Sūtīt vēlreiz\"."
         }
       ],
       "approved_at": null
@@ -183,13 +182,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Poslať znova' is understandable, a more natural and accurate translation of 'Send again' in Slovak would be 'Odoslať znova' or 'Poslať ešte raz'. 'Znova' is colloquial and might not be suitable depending on the context and target audience.",
-          "suggestion": "Odoslať znova"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

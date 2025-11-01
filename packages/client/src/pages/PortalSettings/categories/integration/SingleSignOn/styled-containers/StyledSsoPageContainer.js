@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledSsoPage = styled.div`
   max-width: 100%;
@@ -35,8 +35,18 @@ const StyledSsoPage = styled.div`
     width: 100%;
     max-width: 700px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    margin-bottom: 20px;
     line-height: 20px;
+
+    ${(props) =>
+      props.withoutExternalLink &&
+      css`
+        margin-bottom: 20px;
+      `};
+  }
+
+  .link-learn-more {
+    display: block;
+    margin: 8px 0 20px 0;
   }
 
   .field-input {

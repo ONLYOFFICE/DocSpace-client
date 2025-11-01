@@ -3,7 +3,7 @@
   "content": "Delete guest",
   "content_en_sha1_hash": "74f9b74ae1d024f81e7e6e366926f86c3246c8f2",
   "created_at": "2025-05-19T21:30:56.657Z",
-  "updated_at": "2025-05-28T09:30:02.262Z",
+  "updated_at": "2025-10-13T13:22:35.575Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when deleting a guest. It is used within a delete profile ever dialog and is intended to be displayed after successful deletion of the guest's information.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 259,
+      "line_number": 257,
       "context": "return {\n id: \"option_delete-user\",\n key: option,\n icon: TrashReactSvgUrl,\n label: item.isVisitor\n ? t(\"DeleteProfileEverDialog:DeleteGuest\")\n : t(\"DeleteProfileEverDialog:DeleteUser\"),\n onClick: () => this.toggleDeleteProfileEverDialog([item]),\n };\n \n case \"details\":",
       "module": "/packages/client"
     }
@@ -111,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ລົບລ້າງບັນຊີແຂກ\" literally translates to 'cancel guest account'. While understandable, 'delete' implies a more permanent action. A more accurate translation would reflect that.",
+          "suggestion": "ລົບບັນຊີແຂກ (lop banchee khaek) - Delete guest account"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,7 +165,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ආගන්තුකයෙකු' (aaganthukayekun) is the correct form for 'a guest'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'මකන්න' (makanna) is the correct verb form for 'delete'.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'ආගන්තුකයෙකු මකන්න' (aaganthukayekun makanna) can sound overly formal for a simple action like deleting a guest profile. A more natural phrasing might be considered, but this is dependent on the context and tone of the application.",
+          "suggestion": "Consider a more casual phrasing if appropriate for the application's overall tone. Examples might include: 'මුදා හැරන්න' (muda haeranna - release/remove) or similar depending on the desired nuance."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +199,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Обриши госта\" is technically translatable to \"Delete guest,\" a more natural and idiomatic translation for 'Delete' in the context of profile deletion would be \"Избриши госта\" (Izbrishi gosta). \"Обриши\" typically means 'wipe' or 'erase' and doesn't convey the intended meaning as clearly.",
+          "suggestion": "Избриши госта"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +229,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Xóa khách\" is technically correct but lacks the nuance of the English phrase \"Delete guest\".  \"Xóa\" generally means to delete or remove, and \"khách\" means guest. However, it sounds very direct and abrupt. A more natural translation might be \"Xóa tài khoản khách\" or \"Xóa tài khoản của khách\".",
+          "suggestion": "Consider \"Xóa tài khoản khách\" or \"Xóa tài khoản của khách\" for a more natural and complete translation."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -34,7 +34,7 @@ import { Text } from "../text";
 import { Slider } from "../slider";
 import { TextInput } from "../text-input";
 import { InputType } from "../text-input/TextInput.enums";
-import { Tabs, TabsTypes } from "../tabs";
+import { TabItem } from "../tab-item";
 
 import styles from "./quantity-picker.module.scss";
 
@@ -210,22 +210,26 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
     });
   };
 
-  const onSelectTab = (data) => {
-    onChange(value + data.value);
+  const onSelectTab = (e: React.MouseEvent<HTMLDivElement>) => {
+    const itemValue = Number(e.currentTarget.dataset.value);
+    if (itemValue === undefined) return;
+
+    onChange(value + itemValue);
     setError(false);
   };
+
+  const tabItems = createTabItems();
 
   return (
     <div className={containerClass}>
       {title ? (
-        <Text noSelect fontWeight={600} fontSize="16px" className={titleClass}>
+        <Text fontWeight={600} fontSize="16px" className={titleClass}>
           {title}
         </Text>
       ) : null}
 
       {subtitle ? (
         <Text
-          noSelect
           fontWeight={600}
           fontSize="11px"
           className={classNames(styles.subTitle, {
@@ -242,6 +246,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             className={`${circleClass} ${styles.minusIcon}`}
             {...buttonProps}
             data-operation="minus"
+            data-testid="quantity_picker_minus_icon"
           >
             <MinusIcon className={controlButtonClass} />
           </div>
@@ -258,6 +263,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             value={displayValue}
             style={{ boxShadow: "none" }}
             {...inputProps}
+            testId="quantity_picker_input"
           />
         )}
 
@@ -266,6 +272,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             className={`${circleClass} ${styles.plusIcon}`}
             {...buttonProps}
             data-operation="plus"
+            data-testid="quantity_picker_plus_icon"
           >
             <PlusIcon className={controlButtonClass} />
           </div>
@@ -288,29 +295,29 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             value={value}
             {...sliderProps}
             className={styles.slider}
+            dataTestId="quantity_picker_slider"
           />
           <div className={styles.sliderTrack}>
-            <Text className={styles.sliderTrackValueMin} noSelect>
-              {minValue}
-            </Text>
-            <Text className={styles.sliderTrackValueMax} noSelect>
-              {`${maxValue}+`}
-            </Text>
+            <Text className={styles.sliderTrackValueMin}>{minValue}</Text>
+            <Text className={styles.sliderTrackValueMax}>{`${maxValue}+`}</Text>
           </div>
         </div>
       ) : null}
 
       {items && items.length > 0 ? (
         <div className={styles.tabsWrapper}>
-          <Tabs
-            items={createTabItems()}
-            selectedItemId=""
-            onSelect={onSelectTab}
-            type={TabsTypes.Secondary}
-            allowNoSelection
-            withoutStickyIntend
-            isCentered
-          />
+          {tabItems.map((item) => {
+            return (
+              <TabItem
+                data-value={item.value}
+                key={item.id}
+                label={item.name}
+                onSelect={onSelectTab}
+                allowNoSelection
+                dataTestId={`add_${item.id}_tab_item`}
+              />
+            );
+          })}
         </div>
       ) : null}
     </div>

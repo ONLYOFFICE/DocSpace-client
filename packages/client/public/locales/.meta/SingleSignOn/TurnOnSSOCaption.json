@@ -3,7 +3,7 @@
   "content": "Enable this option if you want to add users from SSO service to your space automatically.",
   "content_en_sha1_hash": "53b0b644d322e1cc595b46ed2bd913242f06931c",
   "created_at": "2025-05-19T21:30:50.193Z",
-  "updated_at": "2025-05-21T01:39:25.898Z",
+  "updated_at": "2025-08-12T19:46:26.213Z",
   "comment": {
     "text": "This translation key is used to display a caption that explains the purpose of enabling single sign-on (SSO) integration. It provides context for users deciding whether to enable automatic addition of SSO users to their space. The text appears as a tooltip or label in the UI, likely within a toggle switch component, such as the \"Turn On SSO\" button in Portal Settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/ToggleSSO.js",
       "line_number": 119,
-      "context": "fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n noSelect\n >\n {t(\"TurnOnSSOCaption\")}\n </Text>\n </div>\n </StyledWrapper>\n );\n };",
+      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"TurnOnSSOCaption\")}\n </Text>\n </div>\n </StyledWrapper>\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'domain' (domeninizə) is used instead of 'space' (your space). The English content refers to a 'space', not a 'domain'.",
-          "suggestion": "SSO xidmətindən avtomatik olaraq sahənizə istifadəçilər əlavə etmək istəyirsinizsə, bu seçimi aktiv edin."
+          "description": "The translation \"domeninizə\" (to your domain) doesn't quite align with 'your space' in the English context. 'Space' likely refers to a workspace or area within the application, not necessarily a domain.",
+          "suggestion": "SSO xidmətindən avtomatik olaraq iş sahənizə istifadəçilər əlavə etmək istəyirsinizsə, bu seçimi aktiv edin."
         }
       ],
       "approved_at": null
@@ -77,9 +77,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'palvelusta' is a bit clunky and could be improved for flow. While technically correct, it's not the most natural phrasing.",
-          "suggestion": "Salli tämä vaihtoehto jos haluat automaattisesti lisätä käyttäjiä SSO-palvelusta tilaasi."
+          "type": "incorrect_translation",
+          "description": "The translation 'Salli tämä vaihtoehto jos haluat automaattisesti lisätä käyttäjiä SSO palvelusta tilaasi' is a bit literal and could be improved for natural Finnish. 'Salli' (allow) is acceptable but 'Ota käyttöön' (enable) might be more common and idiomatic in this context.",
+          "suggestion": "Ota käyttöön tämä vaihtoehto, jos haluat lisätä käyttäjiä automaattisesti SSO-palvelusta tilaasi."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"space\" is slightly awkward. While \"տարածք\" (taradsyek) is correct for 'area' or 'space', it might be better to use a more specific term depending on the context of the application. 'Մարտավարություն' (martavareutyun) which means 'workspace' or 'environment' might be a more appropriate choice, or possibly 'հաշվարկային շրջանակ' (hashvarkayin shrjanak) which means 'account area', if applicable.",
-          "suggestion": "Consider replacing \"տարածք\" with a more contextually accurate term like 'մարտավարություն' or 'հաշվարկային շրջանակ'."
+          "description": "The translation 'Միացրեք այս տարբերակը, եթե ցանկանում եք SSO ծառայության օգտվողներին ավտոմատ կերպով ավելացնել ձեր տարածք:' is a bit literal and could be improved for better flow and naturalness in Armenian. The phrase 'ավելացնել ձեր տարածք' can be improved.",
+          "suggestion": "Միացրեք այս տարբերակը, եթե ցանկանում եք ավտոմատ կերպով ավելացնել SSO ծառայության օգտվողներին ձեր հաշվարկային գոտում: (or a similar phrasing meaning 'account area' or 'workspace')"
         }
       ],
       "approved_at": null
@@ -123,13 +123,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ບໍລິການ' (bori gan) is used for 'service' which is correct. However, it's a formal term. For a more conversational tone, 'ການຕັ້ງຄ່າ' (gaan dtang ka) could be considered.",
-          "suggestion": "ບໍລິການ -> ການຕັ້ງຄ່າ (optional, for a more conversational tone)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -155,9 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'utilizadores' should be 'utilizadores'. While a valid Portuguese word, it's a slightly less common and less formal way to say 'users'. Using 'usuários' would be more standard and preferred in this context.",
-          "suggestion": "Ative esta opção se quiser adicionar automaticamente usuários do serviço SSO ao seu espaço."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'add users' is better translated as 'adicionar utilizadores'. While 'acrescentar utilizadores' is acceptable, 'adicionar' is more common and natural in this context.",
+          "suggestion": "Ative esta opção se quiser adicionar automaticamente utilizadores do serviço SSO ao seu espaço."
         }
       ],
       "approved_at": null
@@ -174,13 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Activați această opţiune dacă doriţi să adăugaţi automat utilizatori în spaţiul prin serviciu SSO\" isn't the most natural or accurate rendering of \"Enable this option if you want to add users from SSO service to your space automatically.\" The phrasing 'în spaţiul prin serviciu SSO' is awkward.  It doesn't clearly convey 'to your space' or the direct connection to the SSO service.",
-          "suggestion": "Activați această opțiune dacă doriți să adăugați automat utilizatori din serviciul SSO în spațiul dvs."
+          "description": "The translation \"Activați această opţiune dacă doriţi să adăugaţi automat utilizatori în spaţiul prin serviciu SSO.\" is not the most natural or precise translation of \"Enable this option if you want to add users from SSO service to your space automatically.\" 'Spaţiul prin serviciu SSO' is awkward.  It implies space *through* the SSO service, rather than users being added *to* the space.",
+          "suggestion": "Activați această opțiune dacă doriți să adăugați automat utilizatori în spațiul dumneavoastră prin intermediul serviciului SSO."
         },
         {
           "type": "formatting",
-          "description": "The word 'spațiul' could benefit from a possessive 'dvs' for better clarity, implying 'your space'.",
-          "suggestion": "spațiul dvs."
+          "description": "While not strictly incorrect, the use of 'dumneavoastră' (your) sounds formal.  Depending on the tone desired for the UI, a less formal 'al tău' might be more appropriate.",
+          "suggestion": "Activați această opțiune dacă doriți să adăugați automat utilizatori în spațiul tău prin intermediul serviciului SSO."
         }
       ],
       "approved_at": null
@@ -191,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'space' is translated as 'portal'. While 'portal' isn't inherently wrong, 'space' in this context likely refers to a user's workspace or area within the application, which isn't precisely conveyed by 'portal'. A closer translation might be 'рабочее пространство' or 'пространство'.",
-          "suggestion": "Включите эту опцию, если вы хотите автоматически добавить на рабочее пространство пользователей из сервиса SSO."
+          "description": "The phrase \"add users from SSO service to your space automatically\" is not accurately reflected in the Russian translation. 'Portal' is added which changes the meaning. The original implies adding to a specific area/space within the application, not necessarily a portal.",
+          "suggestion": "Включите эту опцию, если вы хотите автоматически добавлять пользователей из сервиса SSO в ваше пространство."
         }
       ],
       "approved_at": null
@@ -203,18 +197,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The term 'පරිශ්‍රීලකයින්' is a less common and potentially incorrect spelling. The more standard term would be 'පරිශ්රමණිකයන්'.",
-          "suggestion": "Replace 'පරිශ්‍රීලකයින්' with 'පරිශ්රමණිකයන්'."
+          "description": "“පරිශ්‍රීලකයින්” is likely a typo. The correct word should be “පරිශ්රමකරුවන්” (users).",
+          "suggestion": "පරිශ්රමකරුවන්"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'ඔබට...නම් මෙම විකල්පය සබල කරන්න' could be improved for better flow and readability. A more natural phrasing would use a slightly different word order or connective.",
-          "suggestion": "Consider restructuring the latter part of the sentence to something like 'ඔබට අවශ්‍ය නම් මෙම විකල්පය සබල කරන්න'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'අවකාශයට' (awasayata) can sometimes be a bit ambiguous. Depending on the context, 'තැනි' (thani) or 'කාර්යාලයට' (kaaryaalayata) might be more precise for 'space'.",
-          "suggestion": "Evaluate whether 'තැනි' or 'කාර්යාලයට' would be a more accurate translation for 'space', considering the broader context."
+          "description": "The sentence structure could be improved for better flow. While technically correct, it's a bit clunky.",
+          "suggestion": "ඔබට තනි-පිවිසුම් (SSO) සේවාවෙන් පරිශ්රමකරුවන් ස්වයංක්‍රීයව ඔබේ අවකාශයට එක්කර ගැනීමට අවශ්‍ය නම්, මෙම විකල්පය සබල කරන්න."
         }
       ],
       "approved_at": null
@@ -267,8 +256,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '如果您想将 SSO 服务中的用户自动添加至空间中，请使用此选项' is a bit literal and could be improved for naturalness. The phrase '使用此选项' (use this option) sounds slightly awkward. A more natural phrasing would convey the intent of enabling the feature.",
-          "suggestion": "如果您想将 SSO 服务中的用户自动添加至空间中，请启用此功能。"
+          "description": "The translation '如果您想将 SSO 服务中的用户自动添加至空间中，请使用此选项' is overly formal and doesn't quite capture the natural flow of the English sentence. The term '至' is slightly awkward in this context.",
+          "suggestion": "如果您想自动将 SSO 服务中的用户添加到空间，请启用此选项。"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a passive voice that could be slightly more active for better readability.  While not strictly incorrect, a more direct phrasing is often preferred in user interfaces.",
+          "suggestion": "如果您想自动将 SSO 服务中的用户添加到空间，请启用此选项。"
         }
       ],
       "approved_at": null

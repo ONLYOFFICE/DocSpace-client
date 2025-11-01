@@ -1,5 +1,5 @@
-@import "../../styles/variables/index.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/mixins";
 
 .badge {
   display: flex;
@@ -15,7 +15,7 @@
     display: none;
   }
 
-  &:hover:not([data-no-hover="true"]) {
+  &:hover:not([data-no-hover="true"]):not(:global(.ai-agents)) {
     cursor: pointer;
     border-color: var(--badge-background-color);
   }
@@ -30,7 +30,7 @@
     border-radius: 6px;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     &[data-version-badge="true"] {
       width: auto;
     }
@@ -46,6 +46,7 @@
   justify-content: center;
   line-height: 1.5;
 
+
   &[data-compact="true"] {
     line-height: var(--badge-line-height);
   }
@@ -60,6 +61,10 @@
       font-weight: 400;
     }
   }
+}
+
+:global(.ai-agents) .inner {
+  background-color: var(--room-icon-button-color) !important;
 }
 
 .text {
@@ -82,12 +87,12 @@
     .inner {
       background-color: var(--badge-background-color);
 
-      &:hover:not([data-no-hover="true"]) {
+      &:hover:not([data-no-hover="true"]):not(:global(.ai-agents)) {
         background-color: var(--badge-background-color);
       }
     }
 
-    &:hover:not([data-no-hover="true"]) {
+    &:hover:not([data-no-hover="true"]):not(:global(.ai-agents)) {
       border-color: var(--badge-background-color);
     }
 

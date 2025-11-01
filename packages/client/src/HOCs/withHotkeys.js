@@ -31,6 +31,7 @@ import { useNavigate } from "react-router";
 import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { copySelectedText } from "@docspace/shared/utils/copy";
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
@@ -93,6 +94,7 @@ const withHotkeys = (Component) => {
       isFormRoom,
       isParentFolderFormRoom,
       isIndexEditingMode,
+      enableSelection,
     } = props;
 
     const navigate = useNavigate();
@@ -196,8 +198,16 @@ const withHotkeys = (Component) => {
       "*",
       (e) => {
         const someDialogIsOpen = checkDialogsOpen();
+        if (someDialogIsOpen) return;
 
-        if (e.shiftKey || e.ctrlKey || someDialogIsOpen || isIndexEditingMode)
+        if (
+          (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
+          ((e.key === "Meta" || e.key === "Control") && e.altKey)
+        ) {
+          return enableSelection(e);
+        }
+
+        if (e.shiftKey || e.ctrlKey || isIndexEditingMode || e.type === "keyup")
           return;
 
         switch (e.key) {
@@ -225,7 +235,7 @@ const withHotkeys = (Component) => {
             break;
         }
       },
-      hotkeysFilter,
+      { ...hotkeysFilter, keyup: true, keydown: true },
     );
 
     // //Select bottom element
@@ -253,7 +263,14 @@ const withHotkeys = (Component) => {
     useHotkeys("shift+LEFT", () => multiSelectLeft(), hotkeysFilter);
 
     // Select all files and folders
-    useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
+    useHotkeys(
+      "shift+a, ctrl+a, command+a",
+      (e) => {
+        e.preventDefault();
+        selectAll();
+      },
+      hotkeysFilter,
+    );
 
     // Deselect all files and folders
     useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
@@ -274,7 +291,14 @@ const withHotkeys = (Component) => {
     useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     // Back to parent folder
-    useHotkeys("Backspace", onClickBack, hotkeysFilter);
+    useHotkeys(
+      "Backspace",
+      () => {
+        const someDialogIsOpen = checkDialogsOpen();
+        if (!someDialogIsOpen) onClickBack();
+      },
+      hotkeysFilter,
+    );
 
     // Change viewAs
     useHotkeys(
@@ -348,9 +372,7 @@ const withHotkeys = (Component) => {
           if (isRecentFolder) return;
 
           if (isFavoritesFolder) {
-            const items = selection.map((item) => item.id);
-
-            setFavoriteAction("remove", items)
+            setFavoriteAction("remove", selection)
               .then(() => toastr.success(t("RemovedFromFavorites")))
               .catch((err) => toastr.error(err));
 
@@ -361,7 +383,9 @@ const withHotkeys = (Component) => {
             setDeleteDialogVisible(true);
           } else {
             const translations = {
-              deleteFromTrash: t("Translations:DeleteFromTrash"),
+              deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+                sectionName: t("Common:TrashSection"),
+              }),
             };
             deleteAction(translations).catch((err) => toastr.error(err));
           }
@@ -425,6 +449,19 @@ const withHotkeys = (Component) => {
       hotkeysFilter,
     );
 
+    // Copy selected items to clipboard
+    useHotkeys(
+      "Ctrl+Shift+c, command+Shift+c",
+      (e) => {
+        if (!selection.length) return e;
+        e.preventDefault();
+
+        copySelectedText(e, viewAs, selection);
+      },
+
+      hotkeysFilter,
+    );
+
     return <Component {...props} />;
   };
 
@@ -473,6 +510,7 @@ const withHotkeys = (Component) => {
         uploadFile,
         copyToClipboard,
         uploadClipboardFiles,
+        enableSelection,
       } = hotkeyStore;
 
       const {
@@ -571,6 +609,7 @@ const withHotkeys = (Component) => {
         isGroupMenuBlocked,
         isFormRoom,
         isParentFolderFormRoom,
+        enableSelection,
       };
     },
   )(observer(WithHotkeys));

@@ -3,7 +3,7 @@
   "content": "V.{{version}}",
   "content_en_sha1_hash": "47c10c364922c18836956f7551a177d3ca888116",
   "created_at": "2025-05-19T21:30:49.503Z",
-  "updated_at": "2025-05-28T09:30:02.928Z",
+  "updated_at": "2025-10-13T20:30:00.411Z",
   "comment": {
     "text": "This translation key is used to display a version number badge in a digital product. The badge displays the current version of a software or application, and it appears on a badge component, likely on a button or dialog. Translators should replace \"V.\" with an appropriate localization character and adjust the formatting as needed for their target language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 355,
+      "line_number": 413,
       "context": "className={classNames(\n styles.versionBadge,\n \"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={theme.filesBadges.badgeBackgroundColor}\n label={t(\"Common:VersionBadge\", {\n version: countVersions as string,\n })}\n {...onShowVersionHistoryProp}\n noHover\n isVersionBadge",
       "module": "/packages/shared"
     }
@@ -149,9 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'B.{{version}}' doesn't accurately reflect the meaning of 'V.{{version}}'. 'V' typically represents 'Version' and should be translated to a Russian equivalent, not simply replaced with 'B'.",
-          "suggestion": "Consider using 'Вер.{{version}}' (Ver.{{version}}) or 'В.{{version}}' (V.{{version}}), depending on desired level of formality and common usage."
+          "type": "formatting",
+          "description": "The translation maintains the same formatting template \"B.{{version}}\" as the English \"V.{{version}}\". While technically not incorrect, it's unusual to simply substitute 'V' with 'B' without considering the meaning. 'B' often stands for 'Build' in Russian software contexts, but 'V' (Version) is a generally acceptable abbreviation.",
+          "suggestion": "Consider whether 'Версия' (Versiya - Version) is a more appropriate translation instead of using the 'B' abbreviation. If the abbreviated form is essential to maintain consistency with the English, ensure the meaning remains clear in the context."
         }
       ],
       "approved_at": null
@@ -162,13 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අනු.{{version}}' doesn't accurately convey the meaning of 'V.{{version}}'. 'V.' typically represents 'Version'. 'අනු.' is closer to 'No.' or 'Item No.'.",
-          "suggestion": "අ.{{version}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The punctuation style might not align with common Sinhala usage. Consider whether a period is necessary after 'අ.'",
-          "suggestion": "අ{{version}}"
+          "description": "While \"අනු.\" can be a valid abbreviation, it doesn't directly translate \"Version\" in the same way as it's typically used in a version badge context.  A more accurate translation would convey the meaning of 'Version' within that context.",
+          "suggestion": "Consider alternatives like \"අවරුడు.{{version}}\" or \"වෙළුම.{{version}}\" which might better reflect the intended meaning in a version badge."
         }
       ],
       "approved_at": null
@@ -185,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'R.{{version}}' doesn't accurately convey the meaning of 'V.{{version}}'. 'V' typically represents 'Version' in English, and the Slovenian equivalent should be 'Različica'. 'R' is an abbreviation without clear meaning in this context.",
+          "description": "The translation 'R.{{version}}' doesn't accurately convey the meaning of 'V.{{version}}'. 'V' in English stands for 'Version', and 'R' doesn't have a direct equivalent in this context in Slovenian. A more appropriate translation would depend on the specific meaning intended, but 'Različica.{{version}}' or 'Verzija.{{version}}' would likely be better.",
           "suggestion": "Različica.{{version}}"
         }
       ],
@@ -222,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

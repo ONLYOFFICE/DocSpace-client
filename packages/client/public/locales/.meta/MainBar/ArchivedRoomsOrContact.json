@@ -3,7 +3,7 @@
   "content": "You can archive the unnecessary rooms or contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "00066215765488829b5743e4c8f0f9a42e6cabfc",
   "created_at": "2025-05-19T21:30:54.095Z",
-  "updated_at": "2025-05-21T07:55:24.378Z",
+  "updated_at": "2025-10-01T08:28:21.894Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that unnecessary rooms can be archived or that the administrator needs to contact them for tariff plan upgrades. It appears in the QuotasBar component and provides context for the user when they are not authorized administrators.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 208,
+      "line_number": 209,
       "context": ");\n };\n \n const getRoomsTariffDescription = () => {\n if (!isAdmin)\n return t(\"ArchivedRoomsOrContact\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'tariff plan' is translated as 'خطة التعريف' which literally translates to 'definition plan'. It's not the most accurate translation for 'tariff plan' in this context. A better translation would be something like 'باقة الخدمات' (service package) or 'خطة التسعير' (pricing plan).",
-          "suggestion": "Consider translating 'tariff plan' as 'باقة الخدمات' or 'خطة التسعير'."
+          "description": "The phrase 'tariff plan' is not accurately translated. 'خطة التعريف' (khitat al-ta'rif) translates to 'definition plan' or 'identification plan', which doesn't convey the meaning of a tariff plan.",
+          "suggestion": "Consider translating 'tariff plan' as 'خطة التسعير' (khitat al-tas'eer) which means 'pricing plan'."
         }
       ],
       "approved_at": null
@@ -42,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"upgrade the tariff plan\" is translated as \"Tarif planını təkmilləşdirmək\". While 'təkmilləşdirmək' can mean 'improve' or 'develop', in this context, 'upgrade' implies a transition to a higher tier or level. A more accurate translation might be something along the lines of 'tarif planını yüksəldə' (to elevate/raise the tariff plan).",
-          "suggestion": "Consider using 'tarif planını yüksəldə' for a more accurate translation of 'upgrade'."
+          "description": "The word 'archived' is translated as 'arxivləşdirə'. While technically correct, a more natural phrasing in Azerbaijani might be 'silə bilərsiniz' (you can delete) or 'arxaya göndərə bilərsiniz' (you can send to archive). The current translation is a bit literal.",
+          "suggestion": "Tarif planını təkmilləşdirmək üçün lazımsız otaqları silə və ya arxaya göndərə bilərsiniz."
+        },
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation maintains the '{{productName}}' placeholder, which is appropriate, but a more consistent capitalization style might be preferred if the English version also uses capitalization in the product name.",
+          "suggestion": "No change needed, but ensure consistency with English version's capitalization of '{{productName}}'."
         }
       ],
       "approved_at": null
@@ -60,8 +65,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"aby tarifní plán aktualizoval\" is an awkward and grammatically incorrect translation of \"to upgrade the tariff plan\". It implies the administrator is *updating* the plan rather than upgrading it.  The verb 'upgradovat' is missing.",
-          "suggestion": "Nepotřebné místnosti můžete archivovat nebo se obrátit na administrátora {{productName}}, aby tarifní plán upgradoval."
+          "description": "The verb 'aktualizoval' (updated) doesn't quite fit the context. Upgrading a tariff plan implies a change, not simply an update.  'Aktualizovat' is more for a software update.",
+          "suggestion": "Změnit tarifní plán (Change the tariff plan) or Obnovit tarifní plán (Renew/Refresh the tariff plan)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is slightly awkward.  It's a bit clunky to have 'aby tarifní plán aktualizoval' (so that the tariff plan updates).",
+          "suggestion": "…nebo se obraťte na administrátora {{productName}} ohledně změny tarifního plánu (…or contact the {{productName}} administrator regarding a change to the tariff plan)."
         }
       ],
       "approved_at": null
@@ -90,8 +100,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'tariff plan' is translated as 'tilauksen'. While 'tilauksen' can sometimes mean 'plan', in this context referring to an upgrade, a more accurate translation might be 'tilauspaketin' (subscription package) or 'palvelun'.",
-          "suggestion": "Consider translating 'tariff plan' as 'tilauspaketin' or 'palvelun'."
+          "description": "The English phrase \"tariff plan\" is translated as \"tilauksen\". While \"tilauksen\" can mean 'subscription' or 'order', it doesn't precisely convey the meaning of a 'tariff plan' which refers to a pricing structure or tier. A more accurate translation might be something like 'hintasuunnitelman' or 'hintasopimuksen'.",
+          "suggestion": "Consider translating 'tariff plan' as 'hintasuunnitelman' or 'hintasopimuksen'."
         }
       ],
       "approved_at": null
@@ -168,13 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"selecta un alt plan tarifar\" (select another tariff plan) doesn't accurately convey the meaning of 'upgrade the tariff plan'. The English implies an improvement or higher tier, whereas the Romanian suggests simply choosing a different plan, which may or may not be an upgrade.",
-          "suggestion": "Puteți arhiva sălile inutile sau contactați administratorul {{productName}} pentru a face o actualizare a planului tarifar."
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'sau' (or) should ideally be followed by a comma to improve readability in Romanian.",
-          "suggestion": "Puteți arhiva sălile inutile, sau contactați administratorul {{productName}} pentru a face o actualizare a planului tarifar."
+          "description": "The phrase \"selecta un alt plan tarifar\" doesn't accurately reflect the English phrase \"to upgrade the tariff plan.\" 'Selecta' implies choosing, while 'upgrade' implies increasing the level or scope. A more accurate translation would convey the upgrade aspect.",
+          "suggestion": "Puteți arhiva sălile inutile sau contactați administratorul {{productName}} pentru a actualiza planul tarifar."
         }
       ],
       "approved_at": null
@@ -191,12 +196,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ඔබට අනවශ්‍ය කාමර සංරක්ෂණය කළ හැකිය\" is a literal translation but sounds unnatural in Sinhala. A more natural phrasing would be something like \"ඔබට අවශ්‍ය නොවූ කාමරarchivක කළ හැකිය\" or \"ඔබට දැන් අවශ්‍ය නැති කාමරarchivක කළ හැකිය\".",
-          "suggestion": "ඔබට දැන් අවශ්‍ය නැති කාමරarchivක කළ හැකිය"
+          "description": "The phrase \"ඔබට අනවශ්‍ය කාමර සංරක්ෂණය කළ හැකිය\" is a literal translation of 'You can archive the unnecessary rooms'. While accurate, it could be more natural in Sinhala. A more natural phrasing might be 'ඔබට අවශ්‍ය නොවූ කාමරයන් archivé කල හැකිය' or 'අවශ්‍යතාවයක් නොමැති කාමරයන් archivé කල හැකිය'.",
+          "suggestion": "ඔබට අවශ්‍ය නොවූ කාමරයන් archivé කල හැකිය"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"උත්ශ්‍රේණි කිරීමට\" is a less common and slightly awkward way to say 'upgrade'. A more common and natural translation would be \"දියුණු කිරීමට\".",
+          "description": "The word 'උත්ශ්‍රේණි කිරීමට' (uthsreniyama kirimata) is a bit formal and doesn't flow naturally in this context. A simpler and more common word would be 'යහපත් කිරීමට' (yahapath kirimata) or 'දියුණු කිරීමට' (diyunu kirimata).",
           "suggestion": "දියුණු කිරීමට"
         }
       ],
@@ -208,8 +213,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"aby vám zvýšil tarifný plán\" is an awkward and inaccurate translation of \"to upgrade the tariff plan\".  It implies the administrator is increasing the plan *for* the user, rather than the administrator performing the upgrade action.",
-          "suggestion": "The translation should convey the action of the administrator upgrading the plan, not simply increasing it for the user.  A better translation might be something like \"...aby vám aktualizoval/zvýšil tarifný plán\" or \"...aby vám upravil tarifný plán.\""
+          "description": "The phrase \"aby vám zvýšil tarifný plán\" is an awkward and inaccurate translation of 'to upgrade the tariff plan'. The Slovak phrasing implies the administrator is *giving* the user a tariff plan, rather than facilitating an upgrade.",
+          "suggestion": "Consider alternatives like \"aby vám upravil tarifný plán\" (to adjust the tariff plan) or \"aby vám zlepšil tarifný plán\" (to improve the tariff plan). A more accurate, though potentially more formal, translation would be \"aby vám overil tarifný plán\" (to verify the tariff plan)."
         }
       ],
       "approved_at": null
@@ -220,8 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"contact the {{productName}} administrator\" is translated as \"obrnete na skrbnika {{productName}}\". While technically correct, \"obrnete na administratorja {{productName}}\" would be more natural and commonly used in Slovenian.  'Administrator' is often used directly.",
-          "suggestion": "obrnete na administratorja {{productName}}"
+          "description": "The phrase \"upgrade the tariff plan\" is translated as \"nadgradnjo tarifnega načrta\". While technically correct, a more natural phrasing in Slovenian might be \"za posodobitev tarifnega načrta\" (to update the tariff plan).",
+          "suggestion": "Za posodobitev tarifnega načrta"
         }
       ],
       "approved_at": null
@@ -232,7 +237,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'просторије' (prostoriije) is a somewhat formal and less common word for 'rooms'. A more natural and common word would be 'собе' (sobe).",
+          "description": "The word 'просторије' (prostoriye) is a somewhat archaic or formal term for 'rooms'. A more common and natural-sounding term would be 'собе' (sobe).",
           "suggestion": "Можете архивирати непотребне собе или контактирати {{productName}} администратора да бисте надоградили тарифни план."
         }
       ],
@@ -241,30 +246,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The sentence structure is slightly awkward.  Using 'ili kontaktirati' can be improved for a more natural flow in Serbian.",
-          "suggestion": "Možete arhivirati nepotrebne prostorije ili se obratiti {{productName}} administratoru da biste nadogradili tarifni plan."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'administratora' is grammatically correct, 'administratoru' would be more appropriate for the dative case indicating 'to the administrator'.",
-          "suggestion": "Možete arhivirati nepotrebne prostorije ili kontaktirati {{productName}} administratoru da biste nadogradili tarifni plan."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'contact the {{productName}} administrator' is not perfectly translated. 'İletişime geçebilirsiniz' (you can contact) is correct, but 'yöneticisiyle' (with the administrator) could be slightly improved for a more natural Turkish flow. A more fluent phrasing would suggest contacting the administrator directly.",
-          "suggestion": "Tarife planını yükseltmek için {{productName}} yöneticisinden destek alabilirsiniz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -273,8 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'upgrade the tariff plan' could be more accurately translated to reflect the nuance of modifying or adjusting the plan.  'Підвищити' (pidvyshchyty) implies an increase, which might not be the intended meaning. A better option might focus on modification or adjustment.",
-          "suggestion": "Ви можете архівувати непотрібні кімнати або звернутися до адміністратора {{productName}}, щоб змінити тарифний план."
+          "description": "The phrase \"to upgrade the tariff plan\" is not the most natural way to express this in Ukrainian. A more common and accurate phrasing would be 'щоб оновити тарифний план' or 'щоб змінити тарифний план'.",
+          "suggestion": "щоб оновити тарифний план"
         }
       ],
       "approved_at": null
@@ -285,13 +273,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“Sao lưu” (backup) is not the intended meaning of 'archive' in this context. 'Archive' implies storing something for later retrieval, not creating a copy.",
-          "suggestion": "Bạn có thể lưu trữ các phòng không cần thiết..."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of ellipses (...) feels slightly awkward in this context. It is not required and interrupts the flow of the sentence.",
-          "suggestion": "Bạn có thể lưu trữ các phòng không cần thiết hoặc liên hệ với quản trị viên {{productName}} để nâng cấp gói dịch vụ."
+          "description": "The word 'archive' (in the English content) is translated as 'sao lưu' (backup) in Vietnamese, which doesn't accurately convey the meaning of archiving (removing from view, but retaining data). A more appropriate translation for 'archive' in this context would be 'lưu trữ' or 'xóa khỏi danh sách'.",
+          "suggestion": "Bạn có thể lưu trữ các phòng không cần thiết hoặc xóa khỏi danh sách các phòng không cần thiết hoặc liên hệ với quản trị viên {{productName}} để nâng cấp gói dịch vụ."
         }
       ],
       "approved_at": null
@@ -302,13 +285,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“费用版本” is an awkward and inaccurate translation of \"tariff plan\". It doesn't convey the meaning of a tiered pricing structure.",
-          "suggestion": "您可以存档不需要的房间或联系{{productName}}管理员升级套餐。"
-        },
-        {
-          "type": "spelling",
-          "description": "While not strictly incorrect, “存档” is a more formal term and might be replaced with a more conversational alternative depending on the tone of the product.",
-          "suggestion": "您可以归档不需要的房间或联系{{productName}}管理员升级套餐。"
+          "description": "“费用版本” doesn't accurately translate “tariff plan”. A more accurate translation would be something like “套餐计划” or “计费方案”.",
+          "suggestion": "您可以存档不需要的房间或联系{{productName}}管理员升级套餐计划。"
         }
       ],
       "approved_at": null

@@ -70,9 +70,12 @@ export type SectionBodyProps = {
   getContextModel?: () => ContextMenuModel[];
   pathname?: string;
   isIndexEditingMode?: boolean;
+  onDragLeaveEmpty?: () => void;
+  onDragOverEmpty?: (isDragActive: boolean) => void;
 };
 
 export type SectionContainerProps = {
+  ref?: React.RefObject<HTMLDivElement | null>;
   isSectionHeaderAvailable: boolean;
   isInfoPanelVisible?: boolean;
   viewAs?: TViewAs;
@@ -84,7 +87,6 @@ export type SectionContainerProps = {
 export type SectionFilterProps = {
   children: React.ReactNode;
   className?: string;
-  viewAs?: TViewAs;
   withTabs?: boolean;
 };
 
@@ -146,9 +148,12 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     primaryOperationsAlert?: boolean;
     needErrorChecking?: boolean;
     onCancelOperation?: (callback: () => void) => void;
-
     mainBarVisible?: boolean;
     withTabs?: boolean;
+    dragging?: boolean;
+    dropTargetPreview?: string;
+    clearDropPreviewLocation?: () => void;
+    startDropPreview?: () => void;
   };
 
 export type SectionContextMenuProps = {

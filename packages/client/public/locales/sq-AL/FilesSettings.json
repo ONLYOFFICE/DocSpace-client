@@ -1,7 +1,7 @@
 {
   "CancellaionNotification": "Mos e shfaq më lajmërimin për anulim.",
   "DisplayFileExtension": "Shfaqni zgjerimin e skedarit pranë emrit të skedarit\"",
-  "DisplayNotification": "Shfaqni njoftimin kur i zhvendos artikujt në kosh",
   "OpenSameTab": "Hapni redaktorin e {{organizationName}} në të njëjtën skedë",
-  "OriginalCopy": "Ruani kopjen e skedarit gjithashtu në formatin origjinal"
+  "OriginalCopy": "Ruani kopjen e skedarit gjithashtu në formatin origjinal",
+  "TrashMoveConfirmation": "Shfaqni njoftimin kur artikujt zhvendosen te {{sectionName}}"
 }

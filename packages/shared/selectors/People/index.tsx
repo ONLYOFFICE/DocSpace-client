@@ -24,14 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg?url";
+import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg?url";
+
 import axios from "axios";
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 import { Selector, SelectorAccessRightsMode } from "../../components/selector";
 import {
@@ -57,9 +56,10 @@ import { Text } from "../../components/text";
 import { globalColors } from "../../themes";
 import { isNextImage } from "../../utils/typeGuards";
 import { toastr } from "../../components/toast";
+import { useTheme } from "../../hooks/useTheme";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
-import { StyledSendClockIcon } from "./PeopleSelector.styled";
+import StyledSendClockIcon from "./components/SendClockIcon";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
@@ -72,6 +72,7 @@ const toListItem = (
   disableInvitedUsers?: string[],
   isRoom?: boolean,
   checkIfUserInvited?: (user: TUser) => void,
+  disabledInvitedText?: string,
 ): TSelectorItem => {
   if ("displayName" in item) {
     const {
@@ -107,7 +108,7 @@ const toListItem = (
       disableDisabledUsers && status === EmployeeStatus.Disabled;
 
     const disabledText = isInvited
-      ? t("Common:Invited")
+      ? (disabledInvitedText ?? t("Common:Invited"))
       : isDisabled
         ? t("Common:Disabled")
         : "";
@@ -143,10 +144,13 @@ const toListItem = (
 
     name: groupName,
     shared,
+    isSystem,
   } = item;
 
   const isInvited = disableInvitedUsers?.includes(id) || (isRoom && shared);
-  const disabledText = isInvited ? t("Common:Invited") : "";
+  const disabledText = isInvited
+    ? (disabledInvitedText ?? t("Common:Invited"))
+    : "";
 
   return {
     id,
@@ -155,6 +159,7 @@ const toListItem = (
     label: groupName,
     disabledText,
     isDisabled: isInvited,
+    isSystem,
   };
 };
 
@@ -178,6 +183,11 @@ const PeopleSelector = ({
 
   filterUserId,
   currentUserId,
+
+  // Accessibility attributes
+  "aria-label": ariaLabel,
+  "data-selector-type": dataSelectorType,
+  "data-test-id": dataTestId,
   withOutCurrentAuthorizedUser,
 
   withFooterCheckbox,
@@ -221,10 +231,12 @@ const PeopleSelector = ({
   injectedElement,
   alwaysShowFooter = false,
   onlyRoomMembers,
+  targetEntityType = "room",
+  disabledInvitedText,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const [activeTabId, setActiveTabId] = useState<string>(
     isGuestsOnly ? GUESTS_TAB_ID : isGroupsOnly ? GROUP_TAB_ID : PEOPLE_TAB_ID,
@@ -342,6 +354,7 @@ const PeopleSelector = ({
               roomId,
               currentFilter,
               abortControllerRef.current?.signal,
+              targetEntityType,
             );
 
         let totalDifferent = startIndex ? response.total - totalRef.current : 0;
@@ -362,6 +375,7 @@ const PeopleSelector = ({
               disableInvitedUsers,
               !!roomId,
               checkIfUserInvited,
+              disabledInvitedText,
             ),
           );
 
@@ -423,6 +437,7 @@ const PeopleSelector = ({
       withGuests,
       withOutCurrentAuthorizedUser,
       onlyRoomMembers,
+      targetEntityType,
     ],
   );
 
@@ -455,12 +470,16 @@ const PeopleSelector = ({
       setSearchValue(() => {
         return "";
       });
+
+      // Trigger initial load after clearing search
+      loadNextPage(0);
+
       callback?.();
     },
-    [resetSelectorList],
+    [resetSelectorList, loadNextPage],
   );
 
-  const emptyScreenImage = theme.isBase
+  const emptyScreenImage = isBase
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
 
@@ -518,6 +537,7 @@ const PeopleSelector = ({
     return (
       <div
         style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
+        aria-label={`${isGroup ? "Group" : "User"}: ${label}${email ? `, ${email}` : ""}`}
       >
         <div
           style={{
@@ -533,6 +553,8 @@ const PeopleSelector = ({
             fontSize="14px"
             noSelect
             truncate
+            title={label}
+            aria-label={label}
             dir="auto"
           >
             {label}
@@ -634,6 +656,9 @@ const PeopleSelector = ({
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
+      aria-label={ariaLabel || "People Selector"}
+      data-selector-type={dataSelectorType || "people"}
+      dataTestId={dataTestId || "people-selector"}
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}

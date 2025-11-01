@@ -84,7 +84,7 @@ A dropdown component that appears as a link and expands to show a menu of option
         "Quick way to make text bold (equivalent to fontWeight: 'bold'). Takes precedence over fontWeight if both are specified",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     isTextOverflow: {
@@ -93,7 +93,7 @@ A dropdown component that appears as a link and expands to show a menu of option
         "When true, long text will be truncated with ellipsis (...). Useful for fixed-width containers",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     color: {
@@ -126,7 +126,7 @@ A dropdown component that appears as a link and expands to show a menu of option
       description: "Disables the dropdown functionality",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     withExpander: {
@@ -134,7 +134,7 @@ A dropdown component that appears as a link and expands to show a menu of option
       description: "Shows/hides the expander icon",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     isSemitransparent: {
@@ -142,7 +142,7 @@ A dropdown component that appears as a link and expands to show a menu of option
       description: "Makes the link semi-transparent",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     manualWidth: {
@@ -154,8 +154,32 @@ A dropdown component that appears as a link and expands to show a menu of option
         defaultValue: { summary: "undefined" },
       },
     },
+    fixedDirection: {
+      control: "boolean",
+      description: "Fixes the direction of the dropdown menu",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    directionY: {
+      control: "select",
+      options: ["top", "bottom"],
+      description: "Sets the direction of the dropdown menu",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "bottom" },
+      },
+    },
   },
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div style={{ padding: "20px", marginBottom: "200px" }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof LinkWithDropdown>;
 
 type Story = StoryObj<typeof meta>;
@@ -193,48 +217,81 @@ export const Default: Story = {
     isBold: false,
     isTextOverflow: false,
     isSemitransparent: false,
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
   },
 };
 
 export const WithExpander: Story = {
   args: {
-    ...Default.args,
     children: "Link with Expander",
+    data: dropdownItems,
+    fontSize: "13px",
+    fontWeight: 400,
+    isBold: false,
+    isTextOverflow: false,
+    isSemitransparent: false,
     withExpander: true,
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
   },
 };
 
 export const CustomStyling: Story = {
   args: {
-    ...Default.args,
     children: "Custom Styled Link",
+    data: dropdownItems,
     fontSize: "16px",
     fontWeight: 600,
     isBold: true,
     color: "#4781d1",
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    ...Default.args,
     children: "Disabled Link",
+    data: dropdownItems,
+    fontSize: "13px",
+    fontWeight: 400,
+    isBold: false,
+    isTextOverflow: false,
+    isSemitransparent: false,
     isDisabled: true,
   },
 };
 
 export const SemiTransparent: Story = {
   args: {
-    ...Default.args,
     children: "Semi-transparent Link",
+    data: dropdownItems,
+    fontSize: "13px",
+    fontWeight: 400,
+    isBold: false,
+    isTextOverflow: false,
     isSemitransparent: true,
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
   },
 };
 
 export const WithCustomWidth: Story = {
   args: {
-    ...Default.args,
     children: "Custom Width Link",
+    data: dropdownItems,
+    fontSize: "13px",
+    fontWeight: 400,
+    isBold: false,
+    isTextOverflow: false,
     manualWidth: "300px",
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
   },
 };

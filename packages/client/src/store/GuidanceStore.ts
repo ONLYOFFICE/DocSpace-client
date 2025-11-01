@@ -7,7 +7,7 @@ import { RefObject } from "react";
 
 type RefType = "direct" | "firstChildOffset";
 
-type ElementOrRef = HTMLElement | RefObject<HTMLElement>;
+type ElementOrRef = HTMLElement | RefObject<HTMLElement | null>;
 
 interface RefInfo {
   element: ElementOrRef;

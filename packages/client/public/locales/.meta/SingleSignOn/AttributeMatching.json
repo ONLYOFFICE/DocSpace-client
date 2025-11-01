@@ -3,7 +3,7 @@
   "content": "Attribute Mapping",
   "content_en_sha1_hash": "3c36e2ea92c694eb893c563ee8f8242b35bfedcc",
   "created_at": "2025-05-19T21:30:50.063Z",
-  "updated_at": "2025-05-21T02:17:41.124Z",
+  "updated_at": "2025-08-12T19:46:26.203Z",
   "comment": {
     "text": "Attribute Matching is used as a label to describe a field mapping feature that allows users to map attributes between different systems. It appears in a UI component where users can configure attribute mappings, providing context for users configuring this setting.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
       "line_number": 67,
-      "context": "return (\n <StyledWrapper>\n <div className=\"attribute-matching-box\">\n <Text as=\"h2\" fontSize=\"15px\" fontWeight={600} noSelect>\n {t(\"AttributeMatching\")}\n </Text>\n \n <HelpButton\n className=\"attribute-matching-tooltip icon-button\"\n offsetRight={0}",
+      "context": "return (\n <StyledWrapper>\n <div className=\"attribute-matching-box\">\n <Text as=\"h2\" fontSize=\"15px\" fontWeight={600}>\n {t(\"AttributeMatching\")}\n </Text>\n \n <HelpButton\n className=\"attribute-matching-tooltip icon-button\"\n offsetRight={0}",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"تعيين البيانات\" (ta'yeen al-bayyanat) is a literal translation, it doesn't fully capture the nuance of 'Attribute Mapping' in a technical context. 'Mapping' implies a defined relationship, which 'ta'yeen' doesn't inherently convey.",
-          "suggestion": "Consider \"ربط السمات\" (rabt al-samat) which more accurately conveys the concept of linking or associating attributes. Alternatively, \"تعريفات الربط\" (ta'reef al-rabt) could work, emphasizing the definitions of the mapping."
+          "description": "While \"تعيين البيانات\" (Ta'yeen al-Bayanaat) is a literal translation of 'Attribute Mapping,' it lacks the specificity of 'mapping' in the technical context of Single Sign-On. It simply means 'data assignment,' which might be misinterpreted.",
+          "suggestion": "Consider a more precise translation that incorporates the concept of 'mapping,' such as \"تطابق السمات\" (Tataabuq as-Samaat) or \"ربط السمات\" (Rabt as-Samaat)."
         }
       ],
       "approved_at": null
@@ -45,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Мапинг на атрибути' is understandable, 'Мапинг' is a direct transliteration of 'Mapping' and doesn't reflect the established Bulgarian terminology for attribute mapping in IT. A more accurate translation would use a more accepted Bulgarian term.",
+          "suggestion": "Определяне на атрибути"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ການສ້າງແຜນທີ່ຄຸນລັກສະນະ\" is a literal translation, it's a bit clunky and might not be the most natural phrasing for \"Attribute Mapping\" in Lao. It emphasizes the *creation* of the mapping, whereas 'Attribute Mapping' often refers to the mapping itself.",
-          "suggestion": "Consider alternatives like \"ການຕັ້ງຄ່າຄຸນລັກສະນະ\", \"ການຈຸດແຜນຄຸນລັກສະນະ\", or \"ການກຳນົດຄຸນລັກສະນະ\". The best choice would depend on the specific context and target audience.  'ການຕັ້ງຄ່າຄຸນລັກສະນະ' seems a good general option."
+          "description": "While \"ການສ້າງແຜນທີ່ຄຸນລັກສະນະ\" (kan saang phaan tii khun lak sa na) is a literal translation, it could be improved for better clarity and flow. \"ແຜນທີ່ຄຸນລັກສະນະ\" (phaan tii khun lak sa na) or \"ການຕັ້ງຄ່າການຈັບຄູ່ຄຸນລັກສະນະ\" (kan tang kha kan jap khu khun lak sa na) might be more natural and accurate depending on the specific context of 'Attribute Mapping'.",
+          "suggestion": "Consider \"ແຜນທີ່ຄຸນລັກສະນະ\" or \"ການຕັ້ງຄ່າການຈັບຄູ່ຄຸນລັກສະນະ\""
         }
       ],
       "approved_at": null
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Mapare atribute\" is understandable, it's a very literal and somewhat awkward translation of \"Attribute Mapping.\" A more natural Romanian translation would convey the meaning more accurately and be more commonly used in a technical context.",
-          "suggestion": "Consider alternatives like \"Corespondență de atribute\" or \"Asocieri de atribute.\" The best choice depends on the broader context of the documentation."
+          "description": "While \"Mapare atribute\" is understandable, a more accurate and idiomatic translation of \"Attribute Mapping\" would be \"Asocierea atributelor\". \"Mapare\" often implies a more technical mapping process, while \"Asociere\" is a broader term that captures the concept of linking attributes.",
+          "suggestion": "Asocierea atributelor"
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Russian translation uses 'аттрибутов:' which is a transliteration of 'attributes' and is not the standard Russian spelling. The correct spelling is 'атрибутов'.",
-          "suggestion": "атрибутов:"
+          "description": "The word 'аттрибутов' is a misspelling of 'атрибутов'.",
+          "suggestion": "атрибутов"
         }
       ],
       "approved_at": null
@@ -180,8 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The term 'අනුරූපණය' is generally correct for 'mapping' but in this context, a more precise term might be beneficial. 'අනුයුතිය' (anuyuthi) could also be considered depending on the specific nuance needed.",
-          "suggestion": "Consider 'අනුයුතිය' as an alternative to 'අනුරූපණය'."
+          "description": "The term 'උපලක්‍ෂණ' is a possible spelling error. It seems to be intended to represent 'attributes'.  A more common and potentially accurate spelling would be 'විශේෂතා' or 'ලක්ෂණ'.",
+          "suggestion": "විශේෂතා අනුරූපණය or ලක්ෂණ අනුරූපණය"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'අනුරූපණය' is a valid translation for 'mapping', in the context of 'Attribute Mapping' in Single Sign-On, a more accurate and natural-sounding translation might be 'සමාන කිරීම' or 'එකතු කිරීම'. 'අනුරූපණය' feels somewhat formal and detached.",
+          "suggestion": "විශේෂතා සමාන කිරීම or ලක්ෂණ සමාන කිරීම"
         }
       ],
       "approved_at": null
@@ -204,12 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Мапирање атрибута\" is understandable, it's a direct transliteration and not a natural-sounding Serbian translation. \"Attribute Mapping\" typically refers to the process of linking attributes, which is better conveyed with a more descriptive term.",
-          "suggestion": "Упоредба атрибута"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Мапирање\" (mapping) is often used in technical contexts, but \"Упоредба\" (comparison, matching) might be more readily understood by a broader audience, depending on the intended use case of 'SingleSignOn:AttributeMatching'.",
+          "description": "While \"Мапирање атрибута\" is understandable, a more accurate and common translation of 'Attribute Mapping' would be 'Упоредба атрибута' or 'Додељивање атрибута'. \"Мапирање\" directly translates to 'mapping' which isn't always the best fit in this context.",
           "suggestion": "Упоредба атрибута"
         }
       ],

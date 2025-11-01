@@ -3,7 +3,7 @@
   "content": "{{date}} will be deleted permanently",
   "content_en_sha1_hash": "162831ed34e414405757db44537e2e3c06d77646",
   "created_at": "2025-05-19T21:30:56.350Z",
-  "updated_at": "2025-05-28T09:30:02.413Z",
+  "updated_at": "2025-08-12T19:46:26.020Z",
   "comment": {
     "text": "This translation key displays a message indicating that a file will be deleted permanently. It is used in the application's UI to provide users with information about file deletion actions, and appears in the DetailsHelper component on certain files.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 326,
-      "context": "};\n \n getItemExpiredDate = () => {\n return this.roomLifetime?.deletePermanently\n ? text(\n this.t(\"Files:WillBeDeletedPermanently\", {\n date: parseAndFormatDate(this.item.expired, this.culture),\n }),\n )\n : text(\n this.t(\"Files:WillBeMovedToTrash\", {",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 365,
+      "context": "getItemExpiredDate = () => {\n if (!(\"expired\" in this.item)) return null;\n return this.roomLifetime?.deletePermanently\n ? text(\n this.t(\"Files:WillBeDeletedPermanently\", {\n date: getCorrectDate(this.culture, this.item.expired as string),\n }),\n )\n : text(\n this.t(\"Files:ScheduledTrashMove\", {",
       "module": "/packages/client"
     }
   ],
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'نهائيًا' (neha'ian) in this context can sound overly formal and slightly awkward. A more natural phrasing would convey the permanence more smoothly.",
+          "suggestion": "سيتم حذف {{date}} بشكل نهائي"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Το αρχείο {{date}} θα διαγραφεί μόνιμα' includes the word 'αρχείο' (file). The original English doesn't specify a file. It implies a collection of files or data.  A more accurate translation would omit 'αρχείο'.",
+          "suggestion": "Θα διαγραφούν μόνιμα στις {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,19 +93,19 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'will be deleted permanently' is not perfectly captured by 'կջնջվի'. A more accurate translation would convey a sense of irreversibility, like 'կջնջվի կայունօրինակով' (will be deleted irrevocably) or something similar depending on the desired nuance. 'կջնջվի' simply means 'will be deleted'.",
-          "suggestion": "Consider alternatives like 'կջնջվի կայունօրինակով' or a phrase that more strongly conveys permanent deletion. The best alternative depends on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'verrà eliminato definitivamente' uses the passive voice ('will be deleted') and masculine gender ('eliminato'). The English 'Files:WillBeDeletedPermanently' implies a list of files, which are generally considered plural in Italian. A more accurate and natural translation would account for this.",
+          "suggestion": "{{date}} verranno eliminati definitivamente"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -132,13 +144,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"{{date}} nastąpi trwałe usunięcie\" is not a natural or accurate translation of \"{{date}} will be deleted permanently\". The verb \"nastąpić\" (to occur, to happen) is awkward in this context.",
+          "description": "The Polish translation \"{{date}} nastąpi trwałe usunięcie\" is not the most natural or accurate translation of \"{{date}} will be deleted permanently\". 'Nastąpi' implies a future event happening, but the original focuses on the action of deletion.  A more accurate phrasing would reflect that.",
           "suggestion": "{{date}} zostanie trwale usunięte"
         },
         {
-          "type": "grammar",
-          "description": "The Polish translation \"{{date}} zostanie trwale usunięte\" should be grammatically adjusted based on the intended audience and the noun being deleted. If 'files' is the subject, the verb should agree.",
-          "suggestion": "{{date}} zostaną trwale usunięte"
+          "type": "formatting",
+          "description": "While technically correct, 'zostanie trwale usunięte' could be slightly improved for stylistic flow.  A space before 'trwale' may be preferable.",
+          "suggestion": "{{date}} zostanie trwale usunięte."
         }
       ],
       "approved_at": null
@@ -158,7 +170,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'şters' is not the best choice here. It's a reflexive verb, and the appropriate form for 'will be deleted' is 'va fi şters permanent'.",
+          "suggestion": "{{date}} va fi şters permanent"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -170,13 +188,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'permanently' is translated as 'ස්ථිරව මකා දැමෙනු ඇත.' While technically correct, 'ස්ථිරව' (sthiraava) can sometimes imply a more static permanence. Depending on the context, 'සදාචාරාත්මක' (sadaachaaraatmaaka) might be considered for a stronger sense of irreversible action.",
-          "suggestion": "Consider 'සදාචාරාත්මක' (sadaachaaraatmaaka) as a potential alternative for 'permanently' if stronger emphasis on irreversibility is needed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -185,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"bude natrvalo odstránený\" implies that the *content* of the file is being deleted, rather than the file itself.  A more accurate translation would specify that the file itself is being deleted.",
-          "suggestion": "{{date}} bude trvalo vymazaný (file)"
+          "description": "The translation 'bude natrvalo odstránený' is slightly awkward. While technically correct, a more natural Slovak phrasing would be 'bude trvalo vymazaný' or 'bude definitívne odstránený'.  'Natrvalo' is used, but it's less common in this context.",
+          "suggestion": "bude trvalo vymazaný"
         }
       ],
       "approved_at": null

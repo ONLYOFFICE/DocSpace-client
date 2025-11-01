@@ -3,7 +3,7 @@
   "content": "Uploaded elements: {{count}}",
   "content_en_sha1_hash": "3fbe647575ee9d3b5b58c83eb362282b29b9a3a2",
   "created_at": "2025-05-19T21:30:46.011Z",
-  "updated_at": "2025-06-18T07:34:15.293Z",
+  "updated_at": "2025-10-13T13:22:35.961Z",
   "comment": {
     "text": "This translation key is used to display a success message after uploading files successfully. It shows the number of uploaded elements and will be displayed in a toast notification, indicating the completion of an upload action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 1850,
-      "context": "});\n \n console.log(\"Errors: \", totalErrorsCount);\n } else {\n toastr.success(\n t(\"Common:ItemsSuccessfullyUploaded\", {\n count: filesWithoutErrors.length,\n }),\n );\n }",
+      "line_number": 1876,
+      "context": "filesWithErrors,\n filesWithAllErrors,\n ) => {\n if (totalErrorsCount === 0) {\n toastr.success(\n t(\"Common:ItemsSuccessfullyUploaded\", {\n count: filesWithoutErrors.length,\n }),\n );\n return;\n }",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Arabic translation uses a colon (:) which, while not inherently wrong, might benefit from a more idiomatic phrasing depending on the desired tone.  A more natural flow might use 'تم تحميل' instead of 'تم تحميلها'.",
-          "suggestion": "العناصر التي تم تحميلها: {{count}}  -> العناصر التي تم تحميل: {{count}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Missing pluralization. The English 'elements' is plural. The Italian translation 'Elementi' is singular. It needs to agree with the plural 'count'.",
-          "suggestion": " Elementi caricati: {{count}}"
+          "description": "Missing pluralization. The Italian translation should be \"Elementi caricati: {{count}}\" to match the English 'elements'. The singular 'Elemento caricato' would be incorrect.",
+          "suggestion": "Elementi caricati: {{count}}"
         }
       ],
       "approved_at": null
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"බාඩු කරුණු: {{count}}\" does not accurately convey the meaning of \"Uploaded elements: {{count}}\". 'බාඩු' (baadu) typically refers to damaged or flawed items, which is not the intended meaning of 'Uploaded'. A more appropriate translation for 'Uploaded' would be 'ගබඩා කරන ලද' (gabada karan lada) or 'තිබුණු' (thibunu).",
-          "suggestion": "Consider using a translation like 'ගබඩා කරන ලද කරුණු: {{count}}' or 'තිබුණු කරුණු: {{count}}'."
+          "description": "The translation 'බාඩු කරුණු: {{count}}' doesn't accurately convey the meaning of 'Uploaded elements: {{count}}'. 'බාඩු' generally means 'damaged' or 'spoiled' and is not suitable for 'uploaded'.  A more appropriate translation would use a term like 'ගොඩවුනු' (godawunu) meaning 'uploaded' or 'added'.",
+          "suggestion": "බාඩු කරුණු: {{count}} -> ගොඩවුනු කරුණු: {{count}}"
         }
       ],
       "approved_at": null
@@ -189,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Постављени елементи' doesn't directly translate to 'Uploaded elements'. 'Постављени' means 'placed' or 'set', which is a different action than 'uploaded'. A more accurate translation would be something like 'Унесени елементи' or 'Отпремљени елементи'.",
+          "suggestion": "Унесени елементи: {{count}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -198,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Postavljeni elementi' doesn't accurately convey the meaning of 'Uploaded elements'. 'Postavljeni' means 'set' or 'placed', which isn't synonymous with 'uploaded'. A more accurate translation would use a term related to uploading, such as 'Otpremljeni elementi' or 'Učitani elementi'.",
+          "description": "The word \"Postavljeni\" doesn't perfectly capture the meaning of \"Uploaded.\" While it implies setting or placing, \"Uploaded\" refers to the act of transferring files to a server or platform. A more accurate translation might be something like \"Otpremljeni elementi\".",
           "suggestion": "Otpremljeni elementi: {{count}}"
         }
       ],

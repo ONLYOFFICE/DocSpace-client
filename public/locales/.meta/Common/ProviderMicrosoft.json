@@ -3,7 +3,7 @@
   "content": "Microsoft",
   "content_en_sha1_hash": "11f3242118ff2add5d117cbf216f29ac578f6ba6",
   "created_at": "2025-05-19T21:30:47.586Z",
-  "updated_at": "2025-05-28T09:30:02.994Z",
+  "updated_at": "2025-10-13T13:22:36.060Z",
   "comment": {
     "text": "This translation key is used for displaying Microsoft as a provider option on a Twitter social media platform. It appears in a dropdown menu likely found within a settings or preferences section of the Twitter app or website. Translators should consider regional variations and cultural nuances when localizing this text to provide a consistent experience across languages and regions.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 424,
-      "context": "case \"twitter\":\n return t(\"Common:ProviderTwitter\");\n case \"linkedin\":\n return t(\"Common:ProviderLinkedIn\");\n case \"microsoft\":\n return t(\"Common:ProviderMicrosoft\");\n case \"sso\":\n return t(\"Common:SSO\");\n case \"zoom\":\n return t(\"Common:ProviderZoom\");\n case \"sso-full\":",
+      "line_number": 392,
+      "context": "case \"twitter\":\n return t(\"Common:ProviderTwitter\");\n case \"linkedin\":\n return t(\"Common:ProviderLinkedIn\");\n case \"microsoft\":\n return t(\"Common:ProviderMicrosoft\");\n case \"sso\":\n return t(\"Common:SSO\");\n case \"zoom\":\n return t(\"Common:ProviderZoom\");\n case \"weixin\":",
       "module": "/packages/shared"
     }
   ],
@@ -204,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation includes \"微软\" which is a redundant repetition of Microsoft. \"Microsoft\" itself is a recognized name and doesn't require translation.",
+          "description": "The translation \"Microsoft微软\" is redundant. The term \"微软\" is already a translation of \"Microsoft\". Repeating it is unnecessary and stylistically awkward.",
           "suggestion": "Microsoft"
         }
       ],

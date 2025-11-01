@@ -3,7 +3,7 @@
   "content": "Show backup codes",
   "content_en_sha1_hash": "ef39b662d908a8305219bddff4da149f743f9ad9",
   "created_at": "2025-05-19T21:30:53.382Z",
-  "updated_at": "2025-05-21T05:38:16.580Z",
+  "updated_at": "2025-08-11T18:11:59.300Z",
   "comment": {
     "text": "The translation key \"ShowBackupCodes\" represents a button label that displays instructions to show backup codes for two-factor authentication. It is used in a login settings page, where clicking this button will toggle a dialog open for managing backup codes. Translators should ensure the phrase provides clarity and accuracy in this context.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login-settings/index.js",
-      "line_number": 76,
-      "context": "<Text className=\"description\">{t(\"TwoFactorDescription\")}</Text>\n </div>\n <div className=\"actions\">\n <Button\n className=\"button\"\n label={t(\"ShowBackupCodes\")}\n onClick={() => setBackupCodesDialogVisible(true)}\n size=\"small\"\n />\n <Link\n fontWeight=\"600\"",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/login-settings/index.tsx",
+      "line_number": 84,
+      "context": "<Text className=\"description\">{t(\"TwoFactorDescription\")}</Text>\n </div>\n <div className=\"actions\">\n <Button\n className=\"button\"\n label={t(\"ShowBackupCodes\")}\n onClick={() => setBackupCodesDialogVisible(true)}\n size={ButtonSize.small}\n testId=\"show_backup_codes_button\"\n />\n <Link",
       "module": "/packages/client"
     }
   ],
@@ -156,13 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'උපස්ථ' (upasth) is a less common and potentially less clear way to say 'backup'.",
-          "suggestion": "Consider using 'ආපදි' (apadhi) or 'පටිබැකප්' (patibekap) which are more commonly understood for 'backup'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'උපස්ථ කේත පෙන්වන්න' is a somewhat literal and less natural-sounding translation of 'Show backup codes'.",
-          "suggestion": "A more natural translation might be 'ආපදි කේත පෙන්වන්න' or 'පටිබැකප් කේත පෙන්වන්න'."
+          "description": "The word 'උපස්ථ' (upasth) should be 'අවස්ථී' (awasthi) for a more accurate translation of 'backup'.",
+          "suggestion": "අවස්ථී කේත පෙන්වන්න"
         }
       ],
       "approved_at": null
@@ -185,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Прикажи резервне кодове' while understandable, isn't the most natural or common phrasing for 'Show backup codes' in Serbian (Cyrillic). A more accurate and idiomatic translation would be something along the lines of 'Покажи резервне кодове' or 'Прикажи резервне кодове'. The verb 'покажи' (pokazi) generally conveys 'show' more naturally in this context than 'прикажи' (prikazi).",
+          "description": "The translation \"Прикажи резервне кодове\" while understandable, isn't the most natural or precise rendering of 'Show backup codes' in Serbian. 'Покажи резервне кодове' (Pokazi rezervne kodove) would be more common and idiomatic.",
           "suggestion": "Покажи резервне кодове"
         }
       ],

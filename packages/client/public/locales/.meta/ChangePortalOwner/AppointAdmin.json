@@ -3,7 +3,7 @@
   "content": "Appoint administrators",
   "content_en_sha1_hash": "f027ebe781241c5adff25381c1382ded8b1277d1",
   "created_at": "2025-05-19T21:30:56.977Z",
-  "updated_at": "2025-05-20T09:37:42.723Z",
+  "updated_at": "2025-05-24T14:24:00.858Z",
   "comment": {
     "text": "This translation key is used for \"Appoint administrators\" and appears in a change portal owner dialog, indicating that the user can be appointed as an administrator.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"تعيين المسؤولين\" (Ta'yeen al-mas'oolin) literally translates to 'Appointing officials,' it's a more formal and general term than 'Appoint administrators.' A more suitable translation emphasizing the 'appointing' action and the role of 'administrators' would be more accurate.",
+          "suggestion": "تسمية مدراء (Tasmiyat mudaraa') - Meaning 'designating managers' or 'appointing administrators'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ορισμός διαχειριστών\" (Orimos diachemiston) is technically correct, it's more accurately translated as 'Definition of administrators' rather than 'Appoint administrators'. The original English implies an action, and a more suitable translation would convey that.",
+          "suggestion": "Διορισμός διαχειριστών (Diorismos diachemiston)"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nimeä ylläpitäjät' is understandable, a more accurate and natural translation for 'Appoint administrators' would be 'Valitse ylläpitäjät' or 'Anna ylläpitäjäoikeudet'. 'Nimeä' implies giving a name to something, not assigning administrative rights.",
+          "suggestion": "Valitse ylläpitäjät"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Նշանակեք ադմինիստրատորներ' (Nshanak'ek adminis'tratorner) is a literal translation of 'Appoint administrators'. While grammatically correct, a more natural and idiomatic translation might be preferred. Depending on the context, 'ձևացրեք ադմինիստրատորներ' (d'evac'rek adminis'tratorner - 'make administrators') or 'միացրեք ադմինիստրատորներ' (miac'rek adminis'tratorner - 'add administrators') could be better options.",
+          "suggestion": "Consider alternatives like 'ձևացրեք ադմինիստրատորներ' or 'միացրեք ադմինիստրատորներ' depending on the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"管理者の選任\" is technically correct, it carries a formal connotation (similar to 'appointment of administrators'). A more natural and common translation for a user interface element labeled 'Appoint administrators' would be something like \"管理者指定\" (kanrisha shitei) or \"管理者割り当て\" (kanrisha shiatesu). \"選任\" implies a more official or formal selection process.",
+          "suggestion": "管理者指定 (kanrisha shitei) or 管理者割り当て (kanrisha shiatesu)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ແຕ່ງຕັ້ງຜູ້ບໍລິຫານ\" is a literal translation of \"Appoint administrators,\" it might sound formal or bureaucratic in some contexts. A more natural phrasing might be considered depending on the overall tone of the ChangePortal.",
+          "suggestion": "Consider alternatives like \"ເພີ່ມຜູ້ບໍລິຫານ\" (add administrator) or \"ມອບຄວາມຮັບຜິດຊອບໃຫ້ຜູ້ບໍລິຫານ\" (assign responsibility to administrator) based on the desired nuance."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +165,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Definir administradores' doesn't fully convey the meaning of 'Appoint administrators'. 'Appoint' implies assigning a role or responsibility, while 'Definir' simply means 'to define'. A more accurate translation would convey the action of assigning administrative rights.",
+          "suggestion": "Consider 'Nomear administradores' or 'Designar administradores'. These options better capture the 'appoint' aspect."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +183,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Numire administratori' is a literal translation of 'Appoint administrators' but sounds unnatural in Romanian. A more idiomatic translation would be 'Numirea administratorilor' or 'Desemnarea administratorilor'.",
+          "suggestion": "Numirea administratorilor"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +201,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පරිපාලකයින් පත් කරන්න' is technically correct but could be improved for clarity and natural flow. A more common phrasing might emphasize 'as' administrators.",
+          "suggestion": "පරිපාලකයින් ලෙස පත් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +225,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Именовање администратора' is a valid Serbian (Cyrillic) phrase, it translates more literally to 'Naming administrators' rather than the intended 'Appoint administrators'. It lacks the nuance of appointment.",
+          "suggestion": "У именовање администратора"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Imenovanje administratora' is technically correct, it translates to 'Appointment of administrators'. 'Appoint administrators' implies a more active process. A more natural and accurate translation would convey that active role.",
+          "suggestion": "Dodela administratora"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -56,7 +56,7 @@ describe("Render room selector light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base`;
+    const pageRoute = `${path}?theme=Base&search=true`;
 
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
@@ -300,7 +300,7 @@ describe("Room selector light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base`;
+    const pageRoute = `${path}?theme=Base&search=true`;
 
     await page.goto(pageRoute);
 
@@ -1489,7 +1489,7 @@ describe("Room selector actions", () => {
       if (msg.text().includes("onSelectCallback")) logs.push(msg.text());
     });
 
-    const button = page.getByTestId("button");
+    const button = page.getByTestId("selector_submit_button");
 
     expect(button).toBeDisabled();
 

@@ -3,7 +3,7 @@
   "content": "Room cannot be created",
   "content_en_sha1_hash": "1b757c49f0d42f3c24e3e1addc3b7a264bd3589e",
   "created_at": "2025-05-19T21:30:53.667Z",
-  "updated_at": "2025-05-21T06:43:08.281Z",
+  "updated_at": "2025-05-24T06:57:18.523Z",
   "comment": {
     "text": "This translation key is used to display a message when attempting to create a new room, indicating that the action is not possible. It appears in the UI of an invitation quota warning dialog, specifically on a button or element prompting the user to refrain from creating a new room. Translators should provide a clear equivalent phrase to convey this message to users in different languages.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Otaq yaratmaq mümkün deyil' while understandable, is a bit literal and doesn't flow naturally in Azerbaijani. A more idiomatic translation would be more appropriate.",
-          "suggestion": "Consider: 'Yeni otaq yaratmaq olmaz' or 'Otaq yaratmaq qadağandır'."
+          "description": "The translation 'Otaq yaratmaq mümkün deyil' is a literal translation but doesn't fully capture the nuance of 'Room cannot be created.' It translates to 'Creating a room is not possible'. A more natural phrasing would be closer to 'Yeni otaq yaradıla bilməz' which means 'A new room cannot be created'.",
+          "suggestion": "Yeni otaq yaradıla bilməz"
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Imposibil de creat sala' is technically correct but sounds overly formal and literal. A more natural Romanian phrasing would be preferable.",
-          "suggestion": "Nu se poate crea sala"
+          "description": "The translation 'Imposibil de creat sala' is a literal translation and not the most natural way to express \"Room cannot be created\" in Romanian. It sounds somewhat awkward.",
+          "suggestion": "A more natural translation would be something like 'Nu se poate crea sala' or 'Crearea sălii este imposibilă'."
         }
       ],
       "approved_at": null
@@ -167,9 +167,44 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'කාමරය' (kamaray), meaning 'room', is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'නිර්මාණය' (niramaaya), meaning 'created', is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'කළ' (kala) meaning 'done' or 'made' is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'නොහැකි' (nohaki), meaning 'not possible', is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'විය' (viya), meaning 'was', is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is grammatically correct and conveys the meaning of 'Room cannot be created'.",
+          "suggestion": null
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරය නිර්මාණය කළ නොහැකි විය.' is a literal translation of 'Room cannot be created'. While technically correct, it sounds somewhat formal and clunky in Sinhala. A more natural phrasing would convey the same meaning more smoothly.",
-          "suggestion": "A more natural translation could be: 'කාමරය සාදාගත නොහැක.' (Kamara sadagathahaka) or 'කාමරයක් සාදාගත නොහැක.' (Kamarak sadagathahaka)"
+          "description": "While the translation is understandable, a more natural phrasing in Sinhala might be 'නව කාමරය නිර්මාණය කිරීමට නොහැකිය.' (Nava kamaraya niramaaya karmakuru nohakiy) - 'A new room cannot be created.' This emphasizes the lack of ability to create a *new* room, which aligns better with the English context.",
+          "suggestion": "නව කාමරය නිර්මාණය කිරීමට නොහැකිය."
+        },
+        {
+          "type": "cultural",
+          "description": "The formality of the translation is appropriate for a technical error message. No cultural adjustments are needed.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -189,13 +224,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Просторија не може бити креирана\" sounds overly formal and slightly awkward in Serbian. A more natural translation would be closer to \"Не може се креирати просторија\" or \"Просторију није могуће креирати\".",
-          "suggestion": "Не може се креирати просторија"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -204,13 +233,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Prostorija ne može biti kreirana' is overly formal and doesn't quite capture the natural tone of 'Room cannot be created'. 'Prostorija' is a very formal word for 'room'.",
+          "description": "The translation \"Prostorija ne može biti kreirana\" is overly formal and doesn't quite capture the natural flow of the English phrase \"Room cannot be created.\" \"Prostorija\" is a rather archaic term.",
           "suggestion": "Soba ne može biti kreirana"
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, the translation sounds unnatural. A more conversational and idiomatic translation would be more appropriate for a user-facing message.",
-          "suggestion": "Nije moguće kreirati sobu"
+          "description": "While grammatically correct, \"Prostorija ne može biti kreirana\" sounds stiff and unnatural in Serbian. A more natural phrasing would be preferred.",
+          "suggestion": "Nije moguće kreirati sobu."
         }
       ],
       "approved_at": null

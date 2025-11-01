@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Aus der Liste wählen",
-  "ConnectingAccount": "Konto wird verbunden",
-  "DeleteFromTrash": "Die ausgewählten Elemente wurden aus dem Papierkorb gelöscht",
   "FileLocked": "Datei gesperrt",
   "FileProtected": "Diese Datei ist kennwortgeschützt",
   "FileUnlocked": "Datei nicht gesperrt",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive-Verzeichnis",
   "FolderTitleWebDav": "WebDAV Verzeichnis",
   "FolderTitleYandex": "Yandex Verzeichnis",
-  "GuestReleaseTipDescripton": "Alle zuvor hinzugefügten Benutzer wurden zu Gästen und sind jetzt nur noch in der Kontaktliste der {{productName}}-Administratoren verfügbar. Gäste sind nicht länger Teil von Gruppen. Sie können ihren Typ jederzeit ändern und sie bei Bedarf einer Gruppe hinzufügen.",
-  "GuestReleaseTipLink": "Weitere Informationen zu Benutzertypen",
-  "LinkHasExpiredAndHasBeenDisabled": "Der Link ist abgelaufen und wurde deaktiviert.",
   "LinkValidTime": "Dieser Link ist nur für {{days_count}} Tage gültig.",
   "NewForm": "PDF-Formular",
   "OwnerChange": "Besitzer ändern",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "Dienste von Dritten",
   "TitleShowActions": "Dateiaktionen anzeigen",
   "TitleShowFolderActions": "Ordneraktionen anzeigen",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "Ausgewählte Elemente wurden erfolgreich aus {{sectionName}} gelöscht"
 }

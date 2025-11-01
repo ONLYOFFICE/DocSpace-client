@@ -3,7 +3,7 @@
   "content": "Data migration in progress. Please wait.",
   "content_en_sha1_hash": "8090fbbbee87e53181f66c7926521a0d0b525d93",
   "created_at": "2025-05-19T21:30:51.680Z",
-  "updated_at": "2025-05-28T09:30:02.506Z",
+  "updated_at": "2025-08-11T09:02:43.941Z",
   "comment": {
     "text": "\"This translation key is used to display a message indicating that data migration is in progress, prompting the user to wait. It appears in import processing steps within a data import process in the PortalSettings category.\"",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 149,
+      "line_number": 148,
       "context": "/>\n ),\n },\n {\n title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"GoogleWorkspace\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),\n description: t(\"Settings:ImportCompleteDescriptionGoogle\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 157,
+      "line_number": 156,
       "context": "/>\n ),\n },\n {\n title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"Nextcloud\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),\n description: t(\"Settings:ImportCompleteDescriptionNextcloud\", {",
       "module": "/packages/client"
     },
@@ -102,13 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The French translation uses the incorrect verb tense. 'est en cours d'exécution' is not the most natural way to express 'in progress'. It's overly literal and technically correct but stylistically awkward.",
+          "description": "The French translation 'Migration des données est en cours d'exécution' is grammatically awkward. 'est en cours d'exécution' is overly formal and less natural.",
           "suggestion": "Migration des données est en cours."
         },
         {
-          "type": "formatting",
-          "description": "The sentence is a bit long. Consider splitting it for better readability, especially in a UI element.",
-          "suggestion": "La migration des données est en cours. Veuillez patienter."
+          "type": "grammar",
+          "description": "While 'Veuillez patienter' is correct, it's quite formal. A more conversational and appropriate tone might be preferred.",
+          "suggestion": "Merci de patienter."
         }
       ],
       "approved_at": null
@@ -179,13 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Migrare de date în desfășurare\" is a literal translation of \"Data migration in progress\" and while understandable, it sounds slightly unnatural in Romanian. A more idiomatic phrasing would be more appropriate.",
-          "suggestion": "Migrarea datelor este în curs de desfășurare. Vă rugăm așteptați."
+          "description": "The translation 'Migrare de date în desfășurare Vă rugăm așteptați' is not the most natural or idiomatic Romanian. A more natural phrasing would use 'în curs de desfășurare' instead of 'în desfășurare'. Also, 'Vă rugăm așteptați' is a bit formal for a technical interface.",
+          "suggestion": "Migrare de date în curs de desfășurare. Vă rugăm să așteptați."
         },
         {
           "type": "formatting",
-          "description": "The sentence is split into two, creating a slightly awkward flow. Combining them is better for readability.",
-          "suggestion": "Migrarea datelor este în curs de desfășurare. Vă rugăm așteptați."
+          "description": "The two sentences are concatenated without punctuation. A period or other appropriate punctuation mark would improve readability.",
+          "suggestion": "Migrare de date în curs de desfășurare. Vă rugăm să așteptați."
         }
       ],
       "approved_at": null

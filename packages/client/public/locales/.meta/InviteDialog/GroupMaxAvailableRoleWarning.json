@@ -3,7 +3,7 @@
   "content": "Groups can be added to a room with the {{roleName}} role as maximum. However, you can change the role of individual users in the group after it has been successfully added.",
   "content_en_sha1_hash": "545f4276e8b6ebffc216035f1c8815efb100182f",
   "created_at": "2025-05-19T21:30:54.720Z",
-  "updated_at": "2025-05-21T09:40:55.603Z",
+  "updated_at": "2025-05-24T09:51:09.729Z",
   "comment": {
     "text": "This translation key is used to display a warning message when adding a group to a room, indicating that users can change individual roles in the group after it's been added successfully. The warning informs users about role changes allowed after initial group addition. It appears in the Invite Panel component.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"وظيفة {{roleName}} كحد أقصى\" (waẓīfat {{roleName}} ka ḥadd aqṣā) translates to 'function {{roleName}} as a maximum'. It would be more natural to say something like 'دور {{roleName}} كحد أقصى' (dawr {{roleName}} ka ḥadd aqṣā) which translates to 'role {{roleName}} as a maximum'.",
-          "suggestion": "يمكن إضافة المجموعات إلى غرفة مع دور {{roleName}} كحد أقصى."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"وظائف المستخدمين الفرديين\" (waẓā'if al-mustakhdimīn al-fardiyyīn) literally translates to 'functions of individual users'. It's more accurate and common to use 'أدوار المستخدمين الفرديين' (adwār al-mustakhdimīn al-fardiyyīn) which means 'roles of individual users'.",
-          "suggestion": "يمكنك تغيير أدوار المستخدمين الفرديين في المجموعة بعد إضافتها بنجاح."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -47,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'qrupdakı fərdi istifadəçilərin rolunu' is slightly awkward. While technically correct, it could be more naturally phrased.",
-          "suggestion": "qrup içindəki istifadəçilərin rolu"
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'otaga' (into the room) could benefit from a more natural flow. It seems slightly abrupt in the context.",
-          "suggestion": "otağa əlavə edilə bilər"
+          "description": "The sentence \"Bununla belə, qrup uğurla əlavə edildikdən sonra qrupdakı fərdi istifadəçilərin rolunu dəyişə bilərsiniz\" is slightly awkward. The verb 'dəyişə bilərsiniz' should agree with the subject. It should be 'dəyişə bilərsiniz'.",
+          "suggestion": "Bununla belə, qrup uğurla əlavə edildikdən sonra qrupdakı fərdi istifadəçilərin rolunu dəyişə bilər."
         }
       ],
       "approved_at": null
@@ -61,18 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"могат да се добавят към стая\" is slightly awkward. A more natural phrasing would be \"могат да бъдат добавени към стая\" or \"може да се добавят към стая\".",
-          "suggestion": "Групи могат да бъдат добавени към стая с роля {{roleName}} като максимум."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"успешно\" is placed awkwardly at the end of the sentence. It's grammatically correct, but the flow could be improved.",
-          "suggestion": "Въпреки това, можете да промените ролята на отделните потребители в групата, след като тя бъде добавена успешно."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Groups can be added to a room with the {{roleName}} role as maximum\" is not perfectly translated. The Czech translation \"Skupiny lze do místnosti přidat maximálně s rolí {{roleName}}\" implies that only groups with the given role can be added. A more accurate translation would convey the limit on the maximum role allowed.",
-          "suggestion": "Skupiny lze do místnosti přidat, maximální povolená role je {{roleName}}."
+          "description": "The English phrase 'Groups can be added to a room with the {{roleName}} role as maximum' is not perfectly reflected in the Czech translation.  The Czech phrasing 'Skupiny lze do místnosti přidat maximálně s rolí {{roleName}}' is a bit clunky and could be improved to flow better. A more natural Czech phrasing might be 'Do místnosti lze přidat skupiny s maximální rolí {{roleName}}'.",
+          "suggestion": "Do místnosti lze přidat skupiny s maximální rolí {{roleName}}."
         }
       ],
       "approved_at": null
@@ -93,8 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"zum Raum hinzugefügt werden\" is not the most natural way to express 'added to a room' in German. A more idiomatic phrasing would be 'in den Raum hinzugefügt werden'.",
-          "suggestion": "Gruppen können maximal mit der Rolle {{roleName}} in den Raum hinzugefügt werden."
+          "description": "The phrase \"Gruppen können maximal mit der Rolle {{roleName}} zum Raum hinzugefügt werden\" is awkward and doesn't flow naturally in German. A more natural phrasing would be \"Gruppen können bis zur Rolle {{roleName}} zu einem Raum hinzugefügt werden\" or \"Gruppen können mit der Rolle bis zu {{roleName}} zu einem Raum hinzugefügt werden\".",
+          "suggestion": "Gruppen können bis zur Rolle {{roleName}} zu einem Raum hinzugefügt werden."
+        },
+        {
+          "type": "formatting",
+          "description": "The preposition 'zu' needs a 'm' after it to indicate dative case. The use of 'zu einem Raum' is technically correct, but 'zu einem' makes the sentence more clunky than necessary. 'In einen Raum' could also be correct depending on context but likely isn't what's intended.",
+          "suggestion": "Gruppen können bis zur Rolle {{roleName}} in einen Raum hinzugefügt werden."
         }
       ],
       "approved_at": null
@@ -102,24 +80,19 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation lacks a space after the colon in 'Ωστόσο:'.",
-          "suggestion": "Ωστόσο : "
-        },
-        {
-          "type": "grammar",
-          "description": "The word 'της' after 'προσθήκη' is unnecessary and makes the sentence slightly awkward. It refers to the group, but it's implied.",
-          "suggestion": "Μπορούν να προστεθούν ομάδες σε ένα δωμάτιο με τον ρόλο {{roleName}} ως μέγιστο. Ωστόσο, μπορείτε να αλλάξετε τον ρόλο μεμονωμένων χρηστών στην ομάδα μετά την επιτυχή προσθήκη."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'can change' (puede cambiar) implies a general ability. The English emphasizes the *user's* ability to change the role, not just anyone.  It's missing the specificity of the user.",
+          "suggestion": "Puede modificar el rol de los usuarios individuales en el grupo una vez que se haya añadido correctamente."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -128,13 +101,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Maksimimäärän ryhmiä voi nyt lisätä huoneeseen {{roleName}}-roolissa\" doesn't accurately convey the meaning of \"Groups can be added to a room with the {{roleName}} role as maximum.\" It literally translates to \"A maximum number of groups can now be added to a room with the {{roleName}} role.\"  It implies a limit on the *number* of groups, not the role.",
-          "suggestion": "Ryhmiä voi lisätä huoneeseen {{roleName}}-roolilla. (Groups can be added to a room with the {{roleName}} role.)"
+          "description": "The phrase \"Maksimimäärän ryhmiä voi nyt lisätä huoneeseen\" is not the most natural or accurate translation of \"Groups can be added to a room\". A more natural phrasing would be something like \"Ryhmiä voi lisätä huoneeseen\".",
+          "suggestion": "Ryhmiä voi lisätä huoneeseen"
         },
         {
-          "type": "grammatical",
-          "description": "While not strictly incorrect, \"Voit kuitenkin muuttaa yksittäisten käyttäjien rooleja ryhmässä sen jälkeen, kun se on lisätty.\" is a bit clunky. The use of \"sen jälkeen, kun se on lisätty\" is a bit passive and could be improved.",
-          "suggestion": "Voit kuitenkin muuttaa yksittäisten käyttäjien rooleja ryhmässä lisäyksen jälkeen. (You can however change the roles of individual users in the group after adding.)"
+          "type": "incorrect_translation",
+          "description": "The use of \"nyt\" (now) in \"Maksimimäärän ryhmiä voi nyt lisätä huoneeseen\" is unnecessary and slightly awkward in this context. It doesn't add any meaning and makes the sentence less fluent.",
+          "suggestion": "Remove 'nyt'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation doesn't quite capture the nuance of 'as maximum'. While it technically works, it lacks the implied limitation that the role is the highest permitted.",
+          "suggestion": "Consider rephrasing to better convey the 'maximum' aspect, perhaps by adding context. Something like 'Ryhmiä voi lisätä huoneeseen vain {{roleName}}-roolilla' (Groups can be added to a room only with the {{roleName}} role)."
         }
       ],
       "approved_at": null
@@ -145,13 +123,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Les groupes peuvent être ajoutés à une salle avec le rôle {{roleName}} comme maximum\" is slightly awkward. A more natural phrasing would emphasize the maximum allowed role.",
-          "suggestion": "Les groupes peuvent être ajoutés à une salle avec le rôle {{roleName}} comme rôle maximum autorisé."
+          "description": "The phrase \"comme maximum\" is a bit awkward and not the most natural way to express \"as maximum\" in French. It's technically correct but sounds clunky.",
+          "suggestion": "Les groupes peuvent être ajoutés à une salle avec le rôle {{roleName}} maximum."
         },
         {
-          "type": "grammar",
-          "description": "The phrase \"une fois que celui-ci a été ajouté avec succès\" is a bit verbose.  'Celui-ci' refers to the group, but is slightly clunky.",
-          "suggestion": "une fois le groupe ajouté avec succès."
+          "type": "incorrect_translation",
+          "description": "The phrase \"une fois que celui-ci a été ajouté avec succès\" is slightly verbose and could be simplified. 'celui-ci' refers to the group, and while understandable, there's a more concise way to say it.",
+          "suggestion": "une fois que le groupe a été ajouté avec succès."
         }
       ],
       "approved_at": null
@@ -162,18 +140,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"դերն է\" is grammatically awkward. It translates to 'is the role' which isn't the most natural way to express the maximum allowed role.",
-          "suggestion": "դերն է թույլատրված"
+          "description": "The sentence structure in the Armenian translation is a bit awkward and could be improved for better flow. Specifically, the phrase \"դերն է\" sounds unnatural in this context.",
+          "suggestion": "Խմբերը կարող են ավելացվել սենյակում, որտեղ կարող են լինել {{roleName}} դեր ունեցողներ։"
         },
         {
-          "type": "grammar",
-          "description": "The phrasing \"առանձին օգտատերերի դերը խմբում\" is a bit convoluted. A more natural phrasing might be better.",
-          "suggestion": "խմբի անդամների դերը"
+          "type": "incorrect_translation",
+          "description": "The phrase 'դերն է' doesn't directly translate the meaning of 'maximum'.",
+          "suggestion": "The suggestion in the previous point addresses this, but to be more specific: consider using something like 'առավելագույնը {{roleName}} դեր ունեցողներ' or 'առավելագույնը {{roleName}} դերի մարդիկ'."
         },
         {
           "type": "formatting",
-          "description": "The use of \"այն ​​հաջողությամբ ավելացնելուց հետո:\" is a bit clunky due to the extra space in \"այն ​​\".",
-          "suggestion": "այն հաջողությամբ ավելացնելուց հետո:"
+          "description": "The double space after the colon in the second sentence is a formatting issue.",
+          "suggestion": "Remove the extra space after the colon."
         }
       ],
       "approved_at": null
@@ -181,13 +159,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Italian translation uses a period (.) after 'massimo' instead of a comma (,), which is standard in Italian for listing limitations. It disrupts the flow and sounds less natural.",
-          "suggestion": "I gruppi possono essere aggiunti a una stanza con al massimo, il ruolo {{roleName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -196,13 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"役割を最大として\" (as maximum role) is a bit unnatural in this context. A more natural phrasing would indicate a limit or restriction.",
-          "suggestion": "グループは{{roleName}}以下の役割を持つユーザーとしてルームに追加することができます。(Groups can be added to a room with users having {{roleName}} or lower roles.)"
+          "description": "The phrase \"役割を最大として\" (yakuwari o saidai to shite) is a slightly unnatural way to express \"as maximum\". A more natural phrasing would be something along the lines of \"最大で{{roleName}}の役割まで\" (saidai de {{roleName}} no yakuwari made).",
+          "suggestion": "グループは最大で{{roleName}}の役割まで、ルームに追加することができます。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The entire phrasing is a bit stiff and could be more conversational. The overall tone is too formal for an informational message in a user interface.",
-          "suggestion": "ルームには{{roleName}}のロールを持つユーザーまでグループを追加できます。グループ追加後、個々のユーザーのロールは変更可能です。"
+          "type": "formatting",
+          "description": "The punctuation mark after '役割' in \"役割を最大として\" could be improved. Using a period would make the sentence flow better, although the suggested correction above rephrases the sentence for a more natural flow.",
+          "suggestion": "グループは{{roleName}}役割を最大としてルームに追加することができます。"
         }
       ],
       "approved_at": null
@@ -213,13 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"최대 {{roleName}} 역할로 룸에 그룹을 추가할 수 있습니다\" could be misinterpreted. A more natural and clearer translation would emphasize the limit *per room*. It currently implies a limit on the role for groups generally.",
-          "suggestion": "최대 {{roleName}} 역할까지 룸에 그룹을 추가할 수 있습니다."
+          "description": "The phrase \"최대 {{roleName}} 역할로 룸에 그룹을 추가할 수 있습니다\" translates literally to 'You can add groups to a room with a maximum of {{roleName}} role.' This could be interpreted as the *room* having a limit based on the user's role, which is not the intended meaning. The intended meaning is the *group* can only be added to a room if its role is at or below {{roleName}}.",
+          "suggestion": "최대 {{roleName}} 역할 이하의 그룹만 룸에 추가할 수 있습니다."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word '포함된' in '그룹에 포함된 개별 사용자의 역할을' is slightly awkward. It literally translates to 'included'.  While not incorrect, a more fluent Korean phrasing would be better.",
-          "suggestion": "그룹에 포함된 사용자의 역할을"
+          "type": "formatting",
+          "description": "The sentence structure feels slightly awkward in Korean. While grammatically correct, it could be made more fluid.",
+          "suggestion": "룸에 그룹을 추가할 때, 최대 {{roleName}} 역할 이하의 그룹만 추가할 수 있습니다. 하지만 그룹을 추가한 후에는 개별 사용자의 역할을 변경할 수 있습니다."
         }
       ],
       "approved_at": null
@@ -229,14 +201,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"ຢ່າງໃດກໍຕາມ\" (Yang dai kor tam) is a bit clunky and doesn't flow naturally in this context. It translates to 'however' but a more natural phrasing would improve readability.",
-          "suggestion": "Consider replacing \"ຢ່າງໃດກໍຕາມ\" with a more concise connector like \"ແຕ່\" (tae) or omitting it entirely."
-        },
-        {
           "type": "formatting",
-          "description": "The variable `{{roleName}}` is correctly placed but its surrounding whitespace could be improved for consistent readability.",
-          "suggestion": "Ensure consistent spacing around the `{{roleName}}` variable. For example, add a space before and after: `ບົດບາດ {{roleName}} ທີ່ສູງສຸດເທົ່ານັ້ນ`."
+          "description": "The Lao translation uses a direct transliteration of 'roleName'. Consider localizing it with a more natural phrasing if possible. While technically correct, it might feel awkward for Lao speakers.",
+          "suggestion": "Consider rephrasing '{{roleName}}' to something like 'ຖານະຜູ້ໃຊ້' or a similar phrase that is commonly used in Lao for 'role' depending on the specific context."
         }
       ],
       "approved_at": null
@@ -246,14 +213,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'maximum' is translated as 'maksimālo'. While technically correct, it feels slightly awkward in this context. A more natural phrasing might emphasize the limit or restriction.",
-          "suggestion": "Grupas var pievienot telpai, pieļaujot maksimālo {{roleName}} lomu."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'you can change' is translated as 'jūs varat mainīt'. While correct, it might be more user-friendly to use a more passive phrasing.",
-          "suggestion": "varat mainīt atsevišķo lietotāju lomu"
+          "type": "spelling",
+          "description": "The word 'lietotāju' is misspelled. The correct spelling is 'lietotāji'.",
+          "suggestion": "lietotāji"
         }
       ],
       "approved_at": null
@@ -261,13 +223,30 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'Groepen kunnen aan een kamer worden toegevoegd met de {{roleName}} rol als maximum' is a bit clunky in Dutch. While technically correct, it doesn't flow naturally. A more natural phrasing would be 'Groepen kunnen aan een kamer worden toegevoegd, waarbij de {{roleName}} rol het maximum is.'",
+          "suggestion": "Groepen kunnen aan een kamer worden toegevoegd, waarbij de {{roleName}} rol het maximum is."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original sentence 'However, you can change the role of individual users in the group after it has been successfully added' translates to 'U kunt echter de rol van individuele gebruikers in de groep wijzigen nadat deze met succes is toegevoegd'. 'Deze' refers to 'groep' (group), but it is clearer to refer to the 'room' instead. This is because the previous sentence already established that we're talking about adding groups *to a room*.",
+          "suggestion": "U kunt echter de rol van individuele gebruikers in de groep wijzigen nadat de kamer succesvol is toegevoegd."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence \"Grupy mogą zostać dodane do pokoju z maksymalną rolą {{roleName}}.\" could be improved for flow. The passive voice \"mogą zostać dodane\" is grammatically correct but sounds less natural.",
+          "suggestion": "Grupy można dodać do pokoju z maksymalną rolą {{roleName}}."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -287,14 +266,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'un rol maxim' sounds slightly awkward. A more natural phrasing would be 'rolul maxim'.",
-          "suggestion": "Grupuri pot fi adăugate la o sală cu rolul maxim {{roleName}}."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Grupuri pot fi adăugate la o sală cu un rol maxim {{roleName}}\" is a bit awkward. A more natural translation would be something like \"Grupuri pot fi adăugate într-o sală cu rolul maxim {{roleName}}\" or \"În camera se pot adăuga grupuri cu rolul maxim {{roleName}}\"",
+          "suggestion": "Grupuri pot fi adăugate într-o sală cu rolul maxim {{roleName}}."
         },
         {
           "type": "grammar",
-          "description": "The sentence 'Cu toate acestea, puteți modifica rolul pentru utilizatori din grup în mod individual odată ce grupul a fost adăugat cu succes' is a bit long and could be simplified. The phrase 'în mod individual' is redundant as 'pentru utilizatori' already implies individual modification.",
-          "suggestion": "Cu toate acestea, puteți modifica rolul utilizatorilor din grup după ce grupul a fost adăugat cu succes."
+          "description": "While grammatically correct, the sentence \"Cu toate acestea, puteți modifica rolul pentru utilizatori din grup în mod individual odată ce grupul a fost adăugat cu succes.\" is a bit long and could be improved for readability. Using a simpler structure would enhance clarity.",
+          "suggestion": "Cu toate acestea, puteți modifica rolul utilizatorilor individual, după ce grupul a fost adăugat cu succes."
         }
       ],
       "approved_at": null
@@ -304,14 +283,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Groups can be added to a room with the {{roleName}} role as maximum' is not perfectly translated. The Russian translation 'Группы можно добавлять в комнату с максимальной ролью {{roleName}}' sounds a bit awkward. A more natural translation would incorporate the idea of a limit.",
-          "suggestion": "Группы можно добавлять в комнату с ролью {{roleName}} в качестве максимальной."
-        },
-        {
           "type": "formatting",
-          "description": "The spacing after the colon in the key name 'InviteDialog:GroupMaxAvailableRoleWarning' is unnecessary in Russian translations; this is a stylistic point.",
-          "suggestion": "No change needed in the translated text, but consider aligning key naming conventions."
+          "description": "The Russian translation uses a period after \"{{roleName}\" which is not present in the English content. This creates a slight difference in sentence structure and flow.",
+          "suggestion": "Remove the period after \"{{roleName}}\".  The phrase should read: \"Группы можно добавлять в комнату с максимальной ролью {{roleName}}.\""
         }
       ],
       "approved_at": null
@@ -321,14 +295,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'කාමරයකට' (kamaranakata) is a bit clunky. While technically correct, it could be improved for better flow.",
-          "suggestion": "කාමරයට (kamaraya)"
+          "type": "incorrect_translation",
+          "description": "The phrase \"භූමිකාව සහිතව උපරිම වශයෙන්\" is a bit awkward. A more natural translation of \"with the {{roleName}} role as maximum\" would be something like \"{{roleName}} භූමිකාව දක්වා උපරිම වශයෙන්\" or \"{{roleName}} භූමිකාවෙන් උපරිම වශයෙන්\".",
+          "suggestion": "පරිශීලක කණ්ඩායම් {{roleName}} භූමිකාවෙන් උපරිම වශයෙන් කාමරයකට එකතු කළ හැකිය."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure 'පරිශීලක කණ්ඩායම් {{roleName}} භූමිකාව සහිතව උපරිම වශයෙන් කාමරයකට එකතු කළ හැකිය' is a bit long and complex. It could be split or restructured for better readability.",
-          "suggestion": "පරිශීලක කණ්ඩායම් {{roleName}} භූමිකාව දක්වා කාමරයකට එකතු කළ හැකිය. (Parishilaka kandayama {{roleName}} bhoomikava dakka kamarayakata ekathu kala adiyak) - Groups can be added to a room up to the {{roleName}} role."
+          "type": "incorrect_translation",
+          "description": "The phrase \"කණ්ඩායම සාර්ථකව එකතු වූ පසු\" is a literal translation of 'after the group has been successfully added'. It sounds a little clunky in Sinhala. A more natural phrasing might be 'කණ්ඩායම එකතු කිරීම සාර්ථක වීමෙන් පසුව'.",
+          "suggestion": "පරිශීලක කණ්ඩායම් {{roleName}} භූමිකාවෙන් උපරිම වශයෙන් කාමරයකට එකතු කළ හැකිය. කෙසේ වෙතත්, කණ්ඩායම එකතු කිරීම සාර්ථක වීමෙන් පසුව තනි පරිශීලකයින්ගේ භූමිකාව වෙනස් කළ හැකිය."
         }
       ],
       "approved_at": null
@@ -339,13 +313,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"maximálnou rolou\" is awkward. A more natural Slovak phrasing would be \"rolou {{roleName}}\" or \"rolou s názvom {{roleName}}\".",
-          "suggestion": "Skupiny je možné pridať do miestnosti s rolou {{roleName}}. Alternatively: Skupiny je možné pridať do miestnosti s rolou s názvom {{roleName}}."
+          "description": "The Slovak translation \"maximálnou rolou\" is a literal translation of 'maximum role' but sounds awkward in Slovak. A more natural phrasing would be 'rolou {{roleName}} ako maximálnou'.",
+          "suggestion": "Skupiny je možné pridať do miestnosti s rolou {{roleName}} ako maximálnou."
         },
         {
-          "type": "formatting",
-          "description": "While technically correct, the sentence structure is a little clunky. Separating the two sentences improves readability.",
-          "suggestion": "Skupiny je možné pridať do miestnosti s rolou {{roleName}}. Po úspešnom pridaní skupiny môžete zmeniť rolu jednotlivých používateľov v skupine."
+          "type": "incorrect_translation",
+          "description": "The word 'v skupine' (in the group) is redundant. It's already clear that the user roles are being discussed within the context of the group.",
+          "suggestion": "Po úspešnom pridaní skupiny však môžete zmeniť rolu jednotlivých používateľov."
         }
       ],
       "approved_at": null
@@ -356,13 +330,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"Skupine se lahko dodaja\" is grammatically incorrect. It should be \"Skupine se lahko dodajajo\" to agree with the plural 'Groups'.",
-          "suggestion": "Skupine se lahko dodajajo"
+          "description": "The sentence \"Skupine se lahko dodaja v sobo z najvišjo vlogo {{roleName}}.\" is grammatically awkward. It implies that groups themselves are being added 'in' a room. A more natural phrasing would be \"Skupine se lahko dodajajo v sobo...\" or \"Mogoče je dodajanje skupin v sobo...\"",
+          "suggestion": "Skupine se lahko dodajajo v sobo z najvišjo vlogo {{roleName}}."
         },
         {
-          "type": "formatting",
-          "description": "The Slovenian translation maintains the `{{roleName}}` placeholder. It's important to ensure this placeholder is handled correctly in the target locale's implementation.",
-          "suggestion": "No direct correction, but ensure placeholder handling is consistent."
+          "type": "incorrect_translation",
+          "description": "The phrase 'najvišjo vlogo' (highest role) might be misinterpreted. It could be more accurate to express the limit of roles available, not necessarily the 'highest' one.",
+          "suggestion": "Skupine se lahko dodajajo v sobo z vlogo {{roleName}}."
         }
       ],
       "approved_at": null
@@ -373,8 +347,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The comma after 'Међутим' should be a period.",
-          "suggestion": "Међутим . could be changed to Међутим."
+          "description": "There's an unnecessary space before the comma after 'Међутим'.",
+          "suggestion": "Међутим, можете променити улогу појединачних корисника у групи након успешног додавања."
         }
       ],
       "approved_at": null
@@ -384,14 +358,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Grupe se mogu dodati u prostoriju sa {{roleName}} ulogom kao maksimum' is a bit clunky. 'Maksimum' is not the most natural way to express the limit in this context. It sounds more like a technical term being directly translated.",
-          "suggestion": "Grupe se mogu dodati u prostoriju sa {{roleName}} ulogom kao najvišom dozvođenom ili Grupe se mogu dodati u prostoriju uz {{roleName}} ulogu kao ograničenje."
+          "type": "grammar",
+          "description": "The Serbian translation uses passive voice ('Grupe se mogu dodati...') which can sound awkward in this context. A more active voice would be more natural.",
+          "suggestion": "Grupe mogu biti dodate u prostoriju sa {{roleName}} ulogom kao maksimum."
         },
         {
           "type": "grammar",
-          "description": "The sentence 'Međutim, možete promeniti ulogu pojedinačnih korisnika u grupi nakon uspešnog dodavanja.' is grammatically correct but could be slightly improved for flow. The word 'poredinačnih' is a bit awkward.",
-          "suggestion": "Međutim, možete promeniti ulogu korisnika u grupi nakon uspešnog dodavanja."
+          "description": "The phrase 'kao maksimum' is slightly clunky. A more natural phrasing would be to simply state the maximum role.",
+          "suggestion": "Grupe mogu biti dodate u prostoriju sa {{roleName}} ulogom. Međutim, možete promeniti ulogu pojedinačnih korisnika u grupi nakon uspešnog dodavanja."
         }
       ],
       "approved_at": null
@@ -408,13 +382,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"з максимальною роллю\" (with maximum role) is a slightly awkward translation. It's understandable but doesn't flow as naturally as it could.  A more natural phrasing would imply a limit, not a fixed assignment.",
-          "suggestion": "з максимально допустимою роллю"
+          "description": "The phrase \"з максимальною роллю\" (with maximum role) isn't the most natural way to express the intended meaning. It sounds slightly awkward in Ukrainian. A better phrasing would indicate the maximum allowable role when adding groups.",
+          "suggestion": "з максимально дозволеною роллю"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'після її успішного додавання' translates literally to 'after its successful adding.'  While grammatically correct, in Ukrainian, it is more natural to say 'після успішного додавання' (after successful addition).",
-          "suggestion": "після успішного додавання"
+          "description": "The word 'її' (its/her/their) refers to 'group'. While technically correct, it's slightly ambiguous. Rewording for more clarity is advisable.",
+          "suggestion": "після успішного додавання групи"
         }
       ],
       "approved_at": null
@@ -422,7 +396,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"với vai trò {{roleName}} là tối đa\" is a bit awkward. A more natural phrasing would be \"với vai trò tối đa là {{roleName}}\".",
+          "suggestion": "với vai trò tối đa là {{roleName}}"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -431,13 +411,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"可以将群组添加到房间，最大角色为{{roleName}}。但是，成功添加群组后，您可以更改群组中各个用户的角色。\" is a bit literal and could be more natural-sounding. Specifically, '可以将群组添加到房间' feels clunky.  A more natural phrasing would be something along the lines of '群组可以添加到房间'.",
-          "suggestion": "群组可以添加到房间，最大角色为{{roleName}}。但是，成功添加群组后，您可以更改群组中各个用户的角色。"
+          "description": "The phrase \"最大角色为{{roleName}}\" is a literal translation and sounds unnatural in Chinese. It would be more natural to say something like \"最高权限角色为{{roleName}}\" or \"允许的最大权限为{{roleName}} 的角色\".",
+          "suggestion": "可以将群组添加到房间，允许的最大权限为{{roleName}} 的角色。或者：可以将群组添加到房间，最高权限角色为{{roleName}}。"
         },
         {
           "type": "formatting",
-          "description": "The full stop (句号) follows '角色为{{roleName}}', which is a bit abrupt. It would flow better with a slightly longer pause indicated by an em dash or a comma, especially considering the subsequent explanation.",
-          "suggestion": "群组可以添加到房间，最大角色为{{roleName}}—但是，成功添加群组后，您可以更改群组中各个用户的角色。"
+          "description": "The placement of punctuation might improve readability. Adding a pause before and after the role name insertion is recommended.",
+          "suggestion": "可以将群组添加到房间，允许的最大权限为{{roleName}} 的角色。或者：可以将群组添加到房间，最高权限角色为{{roleName}}。"
         }
       ],
       "approved_at": null

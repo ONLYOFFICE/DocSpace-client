@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/devices.scss";
-@import "../../styles/_mixins.scss";
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
 .slider {
   width: 100%;
@@ -43,6 +42,11 @@
     background-image: var(--slider-background-image);
     background-size: var(--size-prop) 100%;
     background-repeat: no-repeat;
+    background-position: left center;
+
+    [dir="rtl"] & {
+      background-position: right center;
+    }
 
     &.disabled {
       opacity: 0.32;

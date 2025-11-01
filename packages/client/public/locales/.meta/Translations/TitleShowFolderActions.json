@@ -3,7 +3,7 @@
   "content": "Show Folder Actions",
   "content_en_sha1_hash": "bef5318e8ccef5256166f49092d119670d1acc28",
   "created_at": "2025-05-19T21:30:50.017Z",
-  "updated_at": "2025-06-18T07:34:14.987Z",
+  "updated_at": "2025-10-16T07:29:35.644Z",
   "comment": {
     "text": "This translation key is used to display a title for a button or menu that shows folder actions. It appears in various UI elements, such as buttons and row headers, indicating whether a selected item is a folder and prompting the user to view its actions.",
     "is_auto": true,
@@ -11,26 +11,26 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/Rooms/context-btn.js",
-      "line_number": 70,
-      "context": "<ContextMenuButton\n id=\"info-options\"\n className=\"expandButton\"\n title={\n selection.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n onClick={onContextMenu}\n getData={getData}\n directionX=\"right\"",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/ContextButton.tsx",
+      "line_number": 138,
+      "context": "<ContextMenuButton\n id=\"info-options\"\n className=\"expandButton\"\n title={\n \"isFolder\" in selection && selection.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n onClick={onContextMenu}\n getData={getData}\n directionX=\"right\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableRow.js",
-      "line_number": 239,
+      "line_number": 274,
       "context": "isIndexUpdated={isIndexUpdated}\n showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}\n displayFileExtension={displayFileExtension}\n title={\n item.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n isRoom={item.isRoom}\n isHighlight={isHighlight}\n hideColumns={hideColumns}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 659,
-      "context": "titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}\n onPlusClick={onCreateRoom}\n isEmptyPage={isEmptyPage}",
+      "line_number": 778,
+      "context": "titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}\n onPlusClick={onPlusClick}\n isEmptyPage={isEmptyPage}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/tiles/base-tile/BaseTile.tsx",
-      "line_number": 213,
+      "line_number": 225,
       "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"Translations:TitleShowFolderActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
       "module": "/packages/shared"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"عرض إجراءات المجلد\" is a literal translation but doesn't convey the intended meaning of 'Show Folder Actions' in a user interface context. A more natural and user-friendly translation would be something along the lines of 'إظهار إجراءات المجلد' or 'خيارات المجلد'. The current translation reads more like a technical description.",
-          "suggestion": "إظهار إجراءات المجلد"
+          "description": "The translation 'عرض إجراءات المجلد' is a literal translation but doesn't convey the intended meaning effectively. 'Show Folder Actions' implies displaying a list or set of actions related to a folder.  'عرض إجراءات المجلد' simply means 'Display Folder Actions,' which lacks the nuance of 'Show'.",
+          "suggestion": "إظهار إجراءات المجلد (Ithhar ‘Ijra’at al-Mujallad)"
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Qovluq əyləmlərini göstər' is a literal translation but doesn't quite capture the meaning of 'Show Folder Actions' in the context of a user interface.  It sounds a bit clunky.",
-          "suggestion": "Consider a more idiomatic translation like 'Qovluğu fəaliyyətlərini göstər' or 'Qovluq fəaliyyətlərini aç' or 'Qovluq Əməlləri' (depending on the UI style and context)."
+          "description": "The translation \"Qovluq əyləmlərini göstər\" is a literal translation but sounds unnatural in Azerbaijani. A more idiomatic translation would be 'Qovluğu əməllərini göstər' or 'Qovluq əməllərini aç'",
+          "suggestion": "Qovluğu əməllərini göstər"
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Покажи действията за папки' is a literal translation, but a more natural phrasing in Bulgarian would be 'Показване на действията за папки' or 'Действия за папки'. While technically correct, it sounds less fluent.",
-          "suggestion": "Показване на действията за папки"
+          "description": "The translation 'Покажи действията за папки' is a literal translation but lacks the nuance of \"Show Folder Actions\". A more natural phrasing would imply revealing or displaying actions *related* to folders.",
+          "suggestion": "Покажи действията на папката"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Mostrar las acciones con la carpeta' is a literal translation but doesn't quite convey the intended meaning of 'Show Folder Actions.' It implies showing actions *with* the folder, rather than actions *for* or *related to* the folder.",
-          "suggestion": "Mostrar las acciones de la carpeta"
+          "description": "The Spanish translation 'Mostrar las acciones con la carpeta' is a literal translation and doesn't convey the intended meaning as naturally as it could. It implies actions *with* a folder, rather than actions *on* or *for* a folder.",
+          "suggestion": "Mostrar acciones de la carpeta"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Actions sur le dossier' is a literal translation but doesn't quite capture the intended meaning of 'Show Folder Actions'. It implies actions *on* a folder, rather than *related to* or *for* a folder. A more natural translation might convey the functionality of displaying folder-specific actions.",
-          "suggestion": "Actions du dossier"
+          "description": "The translation 'Actions sur le dossier' is a literal translation but doesn't fully convey the meaning of 'Show Folder Actions'. A more natural and accurate translation would be something like 'Afficher les actions du dossier' or 'Actions du dossier'.",
+          "suggestion": "Afficher les actions du dossier"
         }
       ],
       "approved_at": null
@@ -129,7 +129,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ցույց տալ պանակի գործողությունները\" is a literal translation of \"Show Folder Actions\". While understandable, a more natural Armenian phrasing might be better. 'Ցույց տալ պանակի գործողությունները' directly translates to 'Show folder actions'. A better translation could be something that conveys the idea of displaying the actions available for a folder, more naturally.",
+          "suggestion": "Consider a more natural Armenian phrasing such as 'Ցուցադրել պանակի գործողություններ' or 'Պանակի գործողությունները ցույց տալ'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Mostra azioni con cartelle' is a literal translation but doesn't quite capture the meaning of 'Show Folder Actions'. It translates to 'Show actions with folders', which implies actions *within* folders, rather than the action of displaying folder actions.",
-          "suggestion": "Mostra Azioni Cartella"
+          "description": "The Italian translation 'Mostra azioni con cartelle' is a literal translation but doesn't quite capture the meaning of 'Show Folder Actions' in context. It implies 'Show actions *with* folders' rather than 'Show actions *for* folders'.",
+          "suggestion": "Consider 'Mostra azioni per cartelle' or 'Visualizza azioni per cartelle'."
         }
       ],
       "approved_at": null
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"폴더 작업 표시\" while technically correct, is a bit literal and could be improved for naturalness. \"폴더 작업 보기\" or \"폴더 액션 표시\" would be more common and idiomatic.",
-          "suggestion": "폴더 작업 보기"
+          "description": "The translation \"폴더 작업 표시\" while understandable, doesn't perfectly capture the meaning of \"Show Folder Actions.\" A more natural and accurate translation would emphasize the action of displaying or revealing the folder actions.",
+          "suggestion": "폴더 작업 표시하기"
         }
       ],
       "approved_at": null
@@ -168,8 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ\" is a literal translation but doesn't flow naturally in Lao. 'ການ​ປະ​ຕິ​ບັດ' implies 'actions' or 'operations', which might be too formal or technical for a simple 'Show Folder Actions'.",
-          "suggestion": "Consider a more natural phrasing like \"ເບິ່ງການກະກອນໂຟນເດີ\" or \"ສະແດງການກະກອນໂຟນເດີ\" depending on the specific nuance intended.  'ການກະກອນ' is a more general term for actions or functions in this context."
+          "description": "The Lao translation \"ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ\" is a literal translation and doesn't quite capture the natural phrasing in Lao. 'Folder Actions' refers to actions *on* a folder, not actions *of* a folder. A more idiomatic translation would convey this.",
+          "suggestion": "ສະແດງການກະກອນໃນໂຟນເດີ (Sadaeng kan kakon nai folder)"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'ປະຕິບັດ' is a more formal term and might not be the most appropriate word here.  A more common and less formal term could be used.",
+          "suggestion": "ສະແດງການກະກອນໃນໂຟນເດີ (Sadaeng kan kakon nai folder)"
         }
       ],
       "approved_at": null
@@ -186,7 +197,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Toon folder acties\" is a literal translation, but \"folder acties\" isn't the most natural Dutch phrasing. A more idiomatic translation would be something like \"Mapacties weergeven\" or \"Toon acties voor de map\".",
+          "description": "The translation 'Toon folder acties' is not the most natural Dutch phrasing. While understandable, it sounds slightly awkward. 'Toon mapacties' or 'Toon acties voor de map' would be more idiomatic.",
           "suggestion": "Toon mapacties"
         }
       ],
@@ -198,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Działania na folderach' while understandable, is a more literal translation of 'Folder Actions.' A more natural and user-friendly translation might be 'Pokaż działania folderu' or 'Akcje folderu'.",
-          "suggestion": "Pokaż działania folderu"
+          "description": "The translation 'Działania na folderach' is a literal translation of 'Show Folder Actions'. While understandable, it doesn't convey the 'Show' aspect of the English phrase, which implies displaying a list or set of actions. A more accurate translation would suggest a display action.",
+          "suggestion": "Pokaż działania na folderach"
         }
       ],
       "approved_at": null
@@ -222,13 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Afișare acțiuni asupra folderului' is a literal translation and sounds unnatural in Romanian. A more natural phrasing would focus on the action being performed on folders.",
-          "suggestion": "Acțiuni pentru foldere"
-        },
-        {
-          "type": "formatting",
-          "description": "The suggested translation 'Acțiuni pentru foldere' is concise, but might benefit from capitalization, depending on the UI context.  Consider 'Acțiuni pentru Foldere' if capitalization is used for menu items.",
-          "suggestion": "Consider 'Acțiuni pentru Foldere' depending on UI style"
+          "description": "The translation 'Afișare acțiuni asupra folderului' is a literal translation and not the most natural-sounding Romanian. A more idiomatic translation would be 'Vizualizare acțiuni pentru folder' or 'Afișează acțiuni pentru folder'.",
+          "suggestion": "Vizualizare acțiuni pentru folder"
         }
       ],
       "approved_at": null
@@ -245,13 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'බහාලුමේ' (bahalume) should be 'බාහිර' (bahira) which means 'external' or 'outside' in this context. 'බහාලුමේ' refers to a container or basket, which is not relevant to 'Folder Actions'.",
-          "suggestion": "බාහිර ක්‍රියාමාර්ග පෙන්වන්න"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The entire translation does not accurately convey the meaning of 'Show Folder Actions'. 'Folder Actions' refers to actions performed on folders, not actions to show folders.  The Sinhala translation implies showing a list of folders.",
-          "suggestion": "බාහිර ක්‍රියාවන් පෙන්වන්න"
+          "description": "The word 'බහාලුමේ' (bahalume) should be 'ගොඩබව' (godabawa) or 'මල්ලි' (malliya) to more accurately represent 'Folder'. 'බහාලුමේ' is more akin to a 'basket' or 'container'.",
+          "suggestion": "ගොඩබව පෙන්වන්න"
         }
       ],
       "approved_at": null
@@ -262,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zobraziť akcie pre priečinky' is a bit literal and doesn't quite capture the intended meaning of 'Show Folder Actions'. It translates to 'Show actions for folders', which is understandable but not as concise or natural as a more idiomatic Slovak equivalent.",
-          "suggestion": "Consider a more natural translation like 'Zobraziť ponuky pre priečinky' or 'Zobraziť akcie v priečinkoch'."
+          "description": "The translation 'Zobraziť akcie pre priečinky' is a literal translation but doesn't fully capture the meaning of 'Show Folder Actions'. It implies showing actions *for* folders, rather than the action of showing folder actions themselves. A more natural Slovak equivalent would emphasize the action of displaying the folder actions.",
+          "suggestion": "Zobrazenie akcie pre priečinky"
         }
       ],
       "approved_at": null
@@ -280,18 +281,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'акције' is likely a misspelling. It appears to be attempting to translate 'actions' but the spelling is incorrect.",
-          "suggestion": "Прикажи акције фолдера"
+          "description": "The word 'акције' is likely a typo and should be 'акције'",
+          "suggestion": "акције"
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure feels somewhat awkward in Serbian. While understandable, it might be improved for better flow.",
-          "suggestion": "Прикажи акције за фолдере"
+          "type": "spelling",
+          "description": "The phrase 'прикажи' is grammatically correct but sounds somewhat formal and can be replaced with a more natural alternative.",
+          "suggestion": "Покажи"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'акције' translates to 'actions', it might be more appropriate to use a term that specifically refers to folder actions or operations in this context.",
-          "suggestion": "Прикажи опције фолдера"
+          "description": "The English phrase 'Show Folder Actions' refers to displaying a list of actions that can be performed on a folder. The current translation 'Прикажи акцијеје фолдера' doesn't accurately convey this meaning and sounds awkward.  'Фолдера' also seems to be a grammatical error.",
+          "suggestion": "Покажи опције за фолдер"
         }
       ],
       "approved_at": null
@@ -302,13 +303,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Prikaži akciije foldera\" is not the most natural or accurate translation of \"Show Folder Actions.\" \"Akciije\" is a valid word, but \"akcije\" is generally used.  A better translation would convey the idea of 'actions *on* a folder'.",
-          "suggestion": "Prikaži akcije nad folderom"
+          "description": "The Serbian translation 'Prikaži akciije foldera' is a literal translation but doesn't quite capture the idiomatic meaning of 'Show Folder Actions'. A more natural and common phrasing would be 'Prikaži akcije u folderu'.",
+          "suggestion": "Prikaži akcije u folderu"
         },
         {
-          "type": "grammar",
-          "description": "While technically correct, the Serbian translation could benefit from using 'nad' instead of simply being placed next to 'folder'. It conveys the idea of actions *on* the folder.",
-          "suggestion": "Prikaži akcije nad folderom"
+          "type": "spelling",
+          "description": "While 'akciije' is technically a valid spelling (less common), 'akcije' is the more standard and preferred spelling of 'actions'.",
+          "suggestion": "akcije"
         }
       ],
       "approved_at": null
@@ -316,19 +317,24 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Klasör eylemlerini göster' sounds a bit formal and less natural in Turkish. A more common and user-friendly phrasing would be more appropriate for a UI element.",
+          "suggestion": "Klasör İletişimlerini Göster"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Klasör eylemlerini göster' is literally 'Show folder actions'. 'Eylemler' implies actions that are being performed on the folder, rather than an option to view a list of actions related to the folder. A clearer translation might imply 'Show Folder Options' or 'Show Folder Details'.",
+          "suggestion": "Klasör Seçeneklerini Göster"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Відобразити дії з папками' is a literal translation of 'Show Folder Actions' but lacks nuance. A more natural Ukrainian phrasing would emphasize 'Displaying' or 'Showing' folder actions.",
-          "suggestion": "Розпоказати дії з папками"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -337,8 +343,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Hiển thị Hoạt động Thư mục\" is a literal translation but doesn't quite convey the meaning of 'Show Folder Actions' in a natural way in Vietnamese. It sounds somewhat awkward.",
-          "suggestion": "Consider alternatives like \"Xem Hành động Thư mục\" or \"Hiển thị Các Hành động Thư mục\" for a more natural flow."
+          "description": "The translation 'Hiển thị Hoạt động Thư mục' is a literal translation that might not be the most natural or idiomatic way to express 'Show Folder Actions' in Vietnamese. 'Hoạt động' translates to 'Actions' which is accurate, but the overall phrasing might feel clunky.",
+          "suggestion": "Consider alternatives like 'Hiện các thao tác trên thư mục' or 'Hiển thị các hành động trên thư mục'. Both provide a more fluent expression, with 'thao tác' being closer to 'actions' than 'hoạt động' in this context, and 'hành động' being also possible."
         }
       ],
       "approved_at": null
@@ -349,8 +355,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"显示文件夹相关操作\" is too literal and doesn't quite capture the meaning of \"Show Folder Actions.\" It translates to \"Show Related Operations for Folder\", which is not as concise or user-friendly. A more natural translation would focus on the action of displaying the actions available on a folder.",
-          "suggestion": "显示文件夹操作"
+          "description": "The translation \"显示文件夹相关操作\" is a bit too literal and doesn't flow naturally in Chinese. It translates to \"Show Folder Related Operations,\" which is not as concise as it could be.",
+          "suggestion": "显示文件夹操作 (Xiǎnshì文件夹操作)"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Sorting Index",
   "content_en_sha1_hash": "fbd51b4c3b96b0eedc634a5831a2a1c4ec82f26e",
   "created_at": "2025-05-19T21:30:48.953Z",
-  "updated_at": "2025-06-18T07:34:15.024Z",
+  "updated_at": "2025-10-16T07:29:35.704Z",
   "comment": {
     "text": "The \"SortingIndex\" translation key is used to display the label for a sorting index feature in the application. It appears as part of header labels on the home page when in edit mode, and is intended to help users understand what this feature does. Translators should provide a clear and concise description that reflects this functionality.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 565,
+      "line_number": 670,
       "context": "const navigationButtonLabel = showNavigationButton\n ? t(\"Files:ShareRoom\")\n : null;\n \n const headerProps = isIndexEditingMode\n ? { headerLabel: t(\"Common:SortingIndex\") }\n : {};\n \n const closeProps = isIndexEditingMode\n ? { isCloseable: true, onCloseClick: onCloseIndexMenu }\n : {};",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Çeşidləmə indeksi' is understandable, it's not the most natural or accurate translation of 'Sorting Index'. 'Çeşidləmə' implies variation or type, rather than the order or ranking implied by 'Sorting'.",
-          "suggestion": "Consider alternatives like 'Sıralama indeksi' or 'Təsnif indeksi', depending on the specific context. 'Sıralama indeksi' is likely the closest and most commonly understood translation."
+          "description": "While \"Çeşidləmə indeksi\" is a literal translation, a more natural and commonly used term for 'Sorting Index' in Azerbaijani might be 'Sıralama indeksi'. \"Çeşidləmə\" generally implies 'variety' or 'assortment', not 'sorting'.",
+          "suggestion": "Sıralama indeksi"
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Index třídění' is understandable, a more natural and idiomatic Czech translation for 'Sorting Index' would be 'Řadící index' or 'Index řazení'. 'Index třídění' sounds slightly awkward.",
-          "suggestion": "Řadící index"
+          "description": "While \"Index třídění\" is technically correct, it's not the most natural or idiomatic translation of \"Sorting Index\" in Czech.  A more common and understandable translation would be \"Index řazení\".",
+          "suggestion": "Index řazení"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຈັດອັນດັບດອກສະນັ້ນ\" literally translates to \"arrange the flower\". While 'sorting' can involve arrangement, it doesn't directly convey the meaning of an index, which implies a numerical or positional ranking. The translation doesn't capture the intended meaning of 'Sorting Index'.",
-          "suggestion": "Consider a translation that better conveys the concept of an 'index,' perhaps involving terms like 'ດອກສະນັ້ນລຽງລຳດັບ' (flower sequence/ranking) or 'ຕົວເລກອັນດັບ' (ranking number). The best option would depend on the specific context."
+          "description": "The Lao translation \"ຈັດອັນດັບດອກສະນັ້ນ\" literally translates to \"arrange flowers\". \"Sorting Index\" implies a numerical or ranked order, which is not conveyed by \"arrange flowers\".",
+          "suggestion": "A more accurate translation would convey the concept of ranking or ordering. Consider phrases like \"ຕົວເລກຈັດອັນດັບ\" (number ranking) or \"ດອກສະນັ້ນຕາມລຳດັບ\" (flowers by order). The best option depends on the specific context."
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sortowanie indeksu' is a literal translation but doesn't convey the intended meaning of 'Sorting Index' in a natural Polish way. 'Sorting Index' typically refers to an index used for sorting, not a sorting *of* an index.",
-          "suggestion": "Indeks sortowania"
+          "description": "The translation \"Sortowanie indeksu\" is a literal translation of 'Sorting Index' but doesn't quite convey the intended meaning in a natural way in Polish. \"Sortowanie indeksu\" literally means 'Sorting of index'. A better translation would depend on the context. If it's referring to the index used for sorting, then 'Indeks sortowania' might be appropriate. If it refers to the order/position within an index, then a more descriptive phrase might be needed.",
+          "suggestion": "Consider 'Indeks sortowania' or a more context-specific translation like 'Kolejność indeksowania'."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Сортировать индекс' literally translates to 'Sort Index'. While understandable, a more natural and idiomatic Russian translation for 'Sorting Index' would be 'Индекс сортировки'.",
-          "suggestion": "Индекс сортировки"
+          "description": "The translation \"Сортировать индекс\" is a literal translation but doesn't convey the intended meaning of 'Sorting Index'. It implies sorting *an* index, rather than the property of being sortable or a sorting order.",
+          "suggestion": "Consider a more suitable translation like \"Индекс сортировки\" or \"Порядок сортировки\" depending on the context."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'වර්ගීකරණ දර්ශකය' is technically a valid translation, it's a bit overly formal and literal for 'Sorting Index.' A more natural and commonly used translation would be something like 'අවසរණය කිරීමේ දර්ශකය' (avasaranaya karimine dashakaya) or 'අවස්ථාවේ දර්ශකය' (avasthave dashakaya).  'වර්ගීකරණ' specifically means 'classification,' which doesn't perfectly align with 'sorting'.",
-          "suggestion": "Consider 'අවසរණය කිරීමේ දර්ශකය' (avasaranaya karimine dashakaya) or 'අවස්ථාවේ දර්ශකය' (avasthave dashakaya)"
+          "description": "While 'වර්ගීකරණ දර්ශකය' is a possible translation, it's quite literal and may not be the most natural or common way to express 'Sorting Index' in Sinhala. 'වර්ගීකරණය සඳහා වන ක්‍රමසන්නිවේදක' or 'අorderBy කිරීමේ ක්‍රමසන්නිවේදක' might be better alternatives depending on the context. 'වර්ගීකරණ දර්ශකය' translates more accurately to 'Classification Index'.",
+          "suggestion": "Consider 'වර්ගීකරණය සඳහා වන ක්‍රමසන්නිවේදක' or 'අorderBy කිරීමේ ක්‍රමසන්නිවේදක' or 'රຽງவரிசை දර්ශකය' depending on the context."
         }
       ],
       "approved_at": null
@@ -201,7 +201,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Sortiranje indeksa' is technically correct, it's a very literal translation. A more natural and idiomatic Slovenian translation for 'Sorting Index' would be 'Indeks za sortiranje' or 'Razvrščanje indeksa'. 'Indeks za sortiranje' emphasizes the index's purpose (for sorting), which is often what's intended.",
+          "suggestion": "Indeks za sortiranje"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Сортирај индекс' is a command ('Sort index') rather than a noun phrase ('Sorting Index'). It's an action rather than a description.",
-          "suggestion": "Индекс сортирања"
+          "description": "The Serbian translation 'Сортирај индекс' translates literally to 'Sort Index'. While understandable, 'Sorting Index' implies a value or field used for sorting, not the action of sorting. A more accurate translation would reflect this.",
+          "suggestion": "Индекс за сортирање"
         }
       ],
       "approved_at": null
@@ -222,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Sortiraj indeks\" is a command (\"Sort index\") rather than a noun phrase \"Sorting Index\". It needs to reflect the English meaning as a descriptor.",
+          "description": "The translation \"Sortiraj indeks\" is a command (\"Sort index\") rather than a noun phrase (\"Sorting Index\"). It doesn't accurately reflect the English term, which is a label or identifier.",
           "suggestion": "Indeks sortiranja"
         }
       ],
@@ -246,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Chỉ mục' is a valid translation for 'Index', 'phân loại' isn't the most natural or precise translation for 'Sorting'. 'Sorting' implies an order or arrangement, not necessarily classification.",
-          "suggestion": "Consider alternatives like 'Chỉ mục sắp xếp' or 'Chỉ mục thứ tự'."
+          "description": "While 'Chỉ mục phân loại' is technically correct, it sounds overly formal and less natural for a 'Sorting Index'. A more common and user-friendly translation would be 'Chỉ số sắp xếp'.",
+          "suggestion": "Chỉ số sắp xếp"
         }
       ],
       "approved_at": null
@@ -258,10 +264,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '分类索引' (fēn lèi suǒ yǐ) is understandable, it implies a category-based index rather than a simple sorting index. '排序索引' would be a more accurate translation of 'Sorting Index'.",
-          "suggestion": "排序索引"
+          "description": "While '分类索引' (fēn lèi suǒ yǐ) is a valid Chinese term, it translates more accurately to 'Category Index' rather than 'Sorting Index'. 'Sorting Index' implies an index used for ordering items, which isn't directly conveyed by '分类索引'.",
+          "suggestion": "Consider alternatives like '排序索引' (páixù suǒ yǐ) which directly translates to 'Sorting Index', or '排列索引' (páiliè suǒ yǐ) for a similar meaning. The best option depends on the specific context."
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

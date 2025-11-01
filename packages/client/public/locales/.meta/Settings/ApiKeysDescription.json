@@ -3,7 +3,7 @@
   "content": "As an owner/admin you can view and manage all API keys in this {{productName}}.",
   "content_en_sha1_hash": "5593ee7bc8d8372051b5728cbe1f5f45794ca38f",
   "created_at": "2025-05-19T21:30:50.545Z",
-  "updated_at": "2025-05-28T09:30:02.546Z",
+  "updated_at": "2025-09-17T13:43:01.770Z",
   "comment": {
     "text": "This translation key is used for describing API keys management features within a portal settings page. It will be displayed to owners/admins as a tooltip or description in the UI. The context suggests it appears on a page related to developer tools and settings.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 197,
-      "context": "return (\n <StyledApiKeys>\n <div className=\"api-keys_description\">\n <Text lineHeight=\"20px\" className=\"api-keys_text\">\n {t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"api-keys_text api-keys_description-text\">\n {t(\"Settings:ApiKeysShareDescription\")}",
+      "line_number": 156,
+      "context": "className={classNames(\"api-keys_description\", {\n withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className=\"api-keys_text\">\n {t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"api-keys_text api-keys_description-text\">\n {t(\"Settings:ApiKeysShareDescription\")}",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation includes the English abbreviation \"API\" within the Arabic text. This is unconventional and breaks the flow. It's preferable to translate 'API' or use a transliteration that is commonly understood.",
-          "suggestion": "Consider translating 'API' to its functional meaning, such as 'واجهات برمجة التطبيقات' (waajihaat barmajat al-tatbiqaat) or using a common transliteration like 'إيه بي آي' ('A.B.I.') within parentheses after 'مفاتيح' (mafaatih)."
+          "description": "The Arabic translation includes quotation marks around \"API\". While technically correct, it's stylistically better to avoid them in this context unless specifically required by a brand guideline.  It disrupts the flow of the sentence.",
+          "suggestion": "بصفتكم مالكًا أو مسؤولًا، يمكنكم عرض جميع مفاتيح API وإدارتها في {{productName}}."
         }
       ],
       "approved_at": null
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The curly braces `{{productName}}` are present in the Azerbaijani translation, mirroring the English. It's important to confirm whether this placeholder should remain as is or be replaced with the actual product name during implementation.",
+          "suggestion": "Confirm if `{{productName}}` should be replaced with the actual product name or if it should remain as a placeholder."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -78,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon and space after '{{productName}}' are unnecessary and disrupt the flow of the sentence.",
+          "description": "Unnecessary colon after 'ssa'. It breaks the sentence flow and is grammatically incorrect in Finnish.",
           "suggestion": "Omistajana/pääkäyttäjänä voit katsella ja hallita kaikkia API-avaimia tässä {{productName}}."
         }
       ],
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a hyphenated dash (-). It's generally preferred to use a non-breaking space ( ) or a regular space for better readability, especially when referencing a product name.",
-          "suggestion": "Որպես սեփականատեր/ադմին՝ կարող եք դիտել և կառավարել բոլոր API բանալիները այս {{productName}} ում:"
+          "description": "The Armenian translation uses a hyphen (-) instead of a more appropriate connector like 'և' (and) when joining 'դիտել' (view) and 'կառավարել' (manage).",
+          "suggestion": "Change 'դիտել և կառավարել' to 'դիտել կառավարել' or 'դիտել և կառավարել'"
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation uses 'あなた' (anata) which can sound overly direct and less professional, especially when addressing users in a platform setting. A more appropriate pronoun or omission is preferable.",
-          "suggestion": "Consider removing 'あなた' or replacing it with a more formal address like 'こちら' (kochira) or simply starting the sentence directly (e.g., 'この {{productName}} 内のすべての API キーを表示および管理できます。')"
+          "description": "The Japanese translation maintains the English \"{{productName}}\" placeholder, which is appropriate for consistency.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -126,13 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"owner/admin\" is not ideal. \"소유자/관리자\" directly translates to 'owner/manager,' which is functionally correct but sounds less natural in this context. It's more common to use terms implying administrative privilege.",
-          "suggestion": "API 키 관리자는 이 {{productName}}의 모든 API 키를 확인 및 관리할 수 있습니다."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, \"API 키 소유자/관리자\" is a bit clunky. Combining the role into a single noun phrase improves readability.",
-          "suggestion": "API 키 관리자는 이 {{productName}}의 모든 API 키를 확인 및 관리할 수 있습니다."
+          "description": "The term 'API 키 소유자/관리자' is a literal translation of 'owner/admin' and is not the most natural or idiomatic way to express this in Korean. It's overly verbose and slightly awkward.",
+          "suggestion": "API 키를 사용하는 관리자 (API key users/administrators) or API 키 관리를 담당하는 관리자 (administrators responsible for API key management)"
         }
       ],
       "approved_at": null
@@ -140,7 +141,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation retains the {{productName}} placeholder, which should ideally be replaced with the localized product name or removed if it's not needed in the Lao context.",
+          "suggestion": "Replace {{productName}} with the localized product name or remove if not applicable."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -164,7 +171,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation uses the formal 'pode' (you can) instead of the more common and generally preferred informal 'você pode' when addressing users. While 'pode' isn't technically incorrect, it creates a more distant and less approachable tone.",
+          "suggestion": "Como proprietário/administrador, você pode ver e gerir todas as chaves API neste {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -190,19 +203,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'API' is written as 'API යතුරු' which is technically correct, but a more common and accepted term would be 'API යතුරු'.",
-          "suggestion": "API යතුරු"
+          "type": "formatting",
+          "description": "The Sinhala translation uses 'ඔබ හිමිකරුවකු/පරිපාලකයකු ලෙස' which is a bit formal.  Consider a more conversational alternative for better user experience.",
+          "suggestion": "ඔබ හිමිකරු/පරිපාලකයෙකු ලෙස..."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'ඔබ හිමිකරුවකු/පරිපාලකයකු ලෙස' could be slightly more natural as 'ඔබ හිමිකරු/පරිපාලකයකු වශයෙන්'.",
-          "suggestion": "ඔබ හිමිකරු/පරිපාලකයකු වශයෙන්"
-        },
-        {
-          "type": "formatting",
-          "description": "The variable {{productName}} is correctly included, but consistency in its formatting (uppercase/lowercase, brackets) should be verified across all translations.",
-          "suggestion": "Ensure consistency with {{productName}} formatting across all translated strings."
+          "description": "The phrase 'මෙම {{productName}} හි සියලු API යතුරු' can be improved for better flow. While technically correct, it sounds slightly awkward.",
+          "suggestion": "මෙම {{productName}} සඳහා සියලු API යතුරු"
         }
       ],
       "approved_at": null
@@ -225,7 +233,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'у оквиру' sounds a little formal and could be simplified.  While grammatically correct, a more natural phrasing might improve readability.",
+          "description": "The Serbian translation includes the phrase 'у оквиру' which translates to 'within' or 'in the scope of'. While not incorrect, it adds unnecessary words and feels less natural than a simpler phrasing. It's often better to omit phrases like this for clarity and conciseness.",
           "suggestion": "Као власник/администратор можете прегледати и управљати свим API кључевима у {{productName}}."
         }
       ],
@@ -240,7 +248,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation retains the {{productName}} placeholder, which should be consistent with the English version. Ensure this placeholder is handled correctly during implementation.",
+          "suggestion": "Verify that {{productName}} is correctly replaced with the actual product name in the Turkish implementation."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -249,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'керувати ними' is slightly awkward. A more natural translation for 'manage' in this context would be 'адмініструвати'.",
-          "suggestion": "Як власник/адміністратор ви можете переглядати всі ключі API в цьому {{productName}} та адмініструвати їх."
+          "description": "The phrase 'та керувати ними' translates to 'and manage them' but a more natural Ukrainian phrasing would be something like 'та ними керувати' or simply 'та керувати'.  'Та керувати' is slightly more concise and reads more smoothly in Ukrainian.",
+          "suggestion": "Як власник/адміністратор ви можете переглядати всі ключі API в цьому {{productName}} та ними керувати."
         }
       ],
       "approved_at": null
@@ -267,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"view and manage\" is too literal. A more natural phrasing would be \"查看和管理\" instead of simply translating 'view' and 'manage' separately. The Chinese phrasing sounds slightly awkward.",
-          "suggestion": "作为所有者/管理员，您可以查看和管理此{{productName}}中的所有 API 密钥。"
+          "description": "The phrase 'API 密钥' is a direct transliteration of 'API keys'. A more natural Chinese translation might be 'API 接口密钥' or 'API 访问密钥', depending on the precise meaning intended. 'API 密钥' is understandable but less idiomatic.",
+          "suggestion": "API 接口密钥"
         }
       ],
       "approved_at": null

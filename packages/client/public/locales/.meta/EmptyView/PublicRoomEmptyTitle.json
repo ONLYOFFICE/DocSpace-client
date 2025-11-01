@@ -3,7 +3,7 @@
   "content": "Welcome to the Public room",
   "content_en_sha1_hash": "6489988fc5bed134cddf8d85fa49090d3f4e975e",
   "created_at": "2025-05-19T21:30:56.528Z",
-  "updated_at": "2025-06-03T20:59:41.805Z",
+  "updated_at": "2025-09-23T07:24:24.016Z",
   "comment": {
     "text": "This translation key is used for the title displayed in a public room, appearing as a welcome message when users enter the space. The text changes depending on the type of room. Translators should adapt this message to fit the tone and style of different languages while maintaining its welcoming nature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 269,
+      "line_number": 287,
       "context": "case RoomsType.FormRoom:\n return t(\"EmptyView:FormRoomEmptyTitle\");\n case RoomsType.EditingRoom:\n return t(\"EmptyView:CollaborationRoomEmptyTitle\");\n case RoomsType.PublicRoom:\n return t(\"EmptyView:PublicRoomEmptyTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"EmptyView:VirtualDataRoomEmptyTitle\");\n case RoomsType.CustomRoom:\n return t(\"EmptyView:CustomRoomEmptyTitle\");\n default:",
       "module": "/packages/client"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ümumi otağa xoş gəlmisiniz' literally translates to 'Welcome to the Public room'. While understandable, a more natural and common way to say 'Welcome to the Public room' in Azerbaijani might be 'Ümumi otağa salam!' or 'Xoş gəldiniz, Ümumi otağa!'",
+          "suggestion": "Xoş gəldiniz, Ümumi otağa!"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bienvenido/a a la Sala pública' is technically correct but slightly less natural than other options. While including both masculine and feminine forms is correct, it can be perceived as slightly clunky. A more common and natural phrasing might be 'Bienvenido a la Sala pública' (assuming a general audience) or rephrasing to avoid the gendered welcome.",
+          "suggestion": "Bienvenido a la Sala pública"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Բարի գալուստ Հանրային սենյակ\" is a very literal translation. A more natural Armenian phrasing would be something like \"Ուրախ ենք ողջունել Հանրային սենյակում\" or \"Добро пожаловать в общественный зал\". \"Բարի գալուստ\" is commonly used for welcoming someone to a place, but the Armenian phrasing could be more fluid and welcoming.",
+          "suggestion": "Ուրախ ենք ողջունել Հանրային սենյակում"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,7 +129,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Esiet sveicināti publiskajā telpā' is overly formal for a 'Welcome' message in a public room. A more natural and friendly translation would be preferred.",
+          "suggestion": "Laipni lūgti publiskajā telpā"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala translation contains a slight spelling error in 'පිළිගන්නවා'. The correct spelling should be 'පිළිගන්නම්'.",
+          "suggestion": "ජන කාමරයට සාදරයෙන් පිළිගන්නම්!"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +225,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Phòng Công Cộng' sounds slightly formal and less natural than alternatives for a welcoming message in a public room. 'Phòng chung' or 'Khu vực công cộng' might be more appropriate.",
+          "suggestion": "Chào mừng bạn đến với Phòng chung"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

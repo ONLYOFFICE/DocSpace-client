@@ -3,7 +3,7 @@
   "content": "Edit comment",
   "content_en_sha1_hash": "3b168257183896cf72ca48607075940bcabeb683",
   "created_at": "2025-05-19T21:30:49.937Z",
-  "updated_at": "2025-05-21T01:18:56.909Z",
+  "updated_at": "2025-08-21T11:22:39.917Z",
   "comment": {
     "text": "EditComment is used in a version history page to display the text \"Edit comment\" in a button or edit panel, prompting users to modify the comment associated with a specific version.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 107,
+      "line_number": 110,
       "context": ": `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;\n \n const onDownloadAction = () =>\n openUrl(`${info.viewUrl}&version=${info.version}`, UrlActionType.Download);\n \n const onEditComment = () => !isEditing && setShowEditPanel(!showEditPanel);\n \n const onChange = (e) => {\n const value = e.target.value;\n \n if (value.length > MAX_FILE_COMMENT_LENGTH) {",
       "module": "/packages/client"
     }
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අදහස සංස්කරණය' (adahas sanskaranya) literally translates to 'thought editing'. While it conveys the general idea of an edit, 'comment' is more accurately translated as 'අදහස කියවනය' (adahas kiyavanaya) or 'අදහස ප්‍රකාශය' (adahas prakashaya).  'සංස්කරණය' (sanskaranya) is more suited for a larger body of text.",
-          "suggestion": "Consider 'අදහස කියවනය' (adahas kiyavanaya) or 'අදහස ප්‍රකාශය' (adahas prakashaya)"
+          "description": "While \"අදහස සංස්කරණය\" (adahas sanskaranya) is understandable, it's a slightly literal translation. A more natural and commonly used translation for 'Edit comment' would be something like \"අදහස වෙනස් කිරීම\" (adahas venas kirima) or \"අදහස සංශෝධනය\" (adahas sanshodhana).",
+          "suggestion": "Consider \"අදහස වෙනස් කිරීම\" (adahas venas kirima) or \"අදහස සංශෝධනය\" (adahas sanshodhana)"
         }
       ],
       "approved_at": null

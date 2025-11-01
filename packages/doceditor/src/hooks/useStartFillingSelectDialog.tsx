@@ -23,14 +23,15 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
+
 import { useCallback, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { getFileInfo } from "@docspace/shared/api/files";
 
 import type {
@@ -46,14 +47,16 @@ import type { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import { saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
-import { LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
+
+type SuccessResponse = `${string}form:${string}`;
+type FailedResponseType = string;
+type ResponseType = SuccessResponse | FailedResponseType;
 
 type SuccessResponseType = {
   form: TFile;
   message: string;
 };
-type FailedResponseType = string;
-type ResponseType = SuccessResponseType | FailedResponseType;
 
 const DefaultConflictDataDialogState: ConflictStateType = {
   visible: false,
@@ -75,8 +78,8 @@ const hasFileUrl = (arg: object): arg is { data: { url: string } } => {
 
 const isSuccessResponse = (
   res: ResponseType | undefined,
-): res is SuccessResponseType => {
-  return Boolean(res) && typeof res === "object" && "form" in res;
+): res is SuccessResponse => {
+  return !!res && res.includes("form");
 };
 
 const useStartFillingSelectDialog = (
@@ -84,7 +87,8 @@ const useStartFillingSelectDialog = (
   openAssignRolesDialog: (form: TFile, roomName: string) => void,
 ) => {
   const { t } = useTranslation(["Common"]);
-  const resolveRef = useRef<(value: string | PromiseLike<string>) => void>();
+  const resolveRef =
+    useRef<(value: string | PromiseLike<string>) => void>(undefined);
 
   const [createDefineRoomType, setCreateDefineRoomType] = useState<RoomsType>(
     RoomsType.FormRoom,
@@ -93,9 +97,6 @@ const useStartFillingSelectDialog = (
   const [headerLabelSFSDialog, setHeaderLabelSFSDialog] = useState("");
 
   const [isVisible, setIsVisible] = useState(false);
-  const [conflictDataDialog, setConflictDataDialog] = useState(
-    DefaultConflictDataDialogState,
-  );
 
   const requestRunning = useRef(false);
 
@@ -142,7 +143,6 @@ const useStartFillingSelectDialog = (
       fileName: string,
       isChecked: boolean,
       selectedTreeNode: TFolder,
-      selectedFileInfo: TSelectedFileInfo,
     ) => {
       if (!fileInfo || !selectedItemId) return;
       requestRunning.current = true;
@@ -153,7 +153,7 @@ const useStartFillingSelectDialog = (
           getFileInfo(fileInfo.id),
         ]);
 
-        const response = await saveAs<ResponseType>(
+        const response = await saveAs(
           file.title,
           fileUrl,
           selectedItemId,
@@ -162,7 +162,9 @@ const useStartFillingSelectDialog = (
         );
 
         if (isSuccessResponse(response)) {
-          const { form } = response;
+          const res = JSON.parse(response) as SuccessResponseType;
+
+          const { form } = res;
 
           switch (createDefineRoomType) {
             case RoomsType.FormRoom:
@@ -186,12 +188,12 @@ const useStartFillingSelectDialog = (
 
                 const components = {
                   1: (
-                    <ColorTheme
+                    <Link
                       tag="a"
                       href={url.toString()}
-                      themeId={ThemeId.Link}
                       target={LinkTarget.blank}
-                      $isUnderline
+                      textDecoration="underline"
+                      color="accent"
                     />
                   ),
                   2: <strong />,
@@ -227,7 +229,6 @@ const useStartFillingSelectDialog = (
 
         if (key === "error") {
           toastr.error(value);
-          return;
         }
       } catch (e) {
         toastr.error(e as TData);
@@ -264,7 +265,7 @@ const useStartFillingSelectDialog = (
 
       if (isFirstLoad) return true;
       if (requestRunning.current) return true;
-      if (!!selectedFileInfo) return true;
+      if (selectedFileInfo) return true;
 
       if (!selectedItemSecurity) return false;
 
@@ -283,7 +284,7 @@ const useStartFillingSelectDialog = (
     getIsDisabledStartFillingSelectDialog: getIsDisabled,
     onDownloadAs,
     isVisibleStartFillingSelectDialog: isVisible,
-    conflictDataDialog,
+    conflictDataDialog: DefaultConflictDataDialogState,
     headerLabelSFSDialog,
   };
 };

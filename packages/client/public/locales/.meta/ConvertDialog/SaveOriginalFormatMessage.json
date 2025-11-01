@@ -3,7 +3,7 @@
   "content": "Save the file copy in the original format",
   "content_en_sha1_hash": "64de7dd97e573eef13f21dc0a7909949a67ea43a",
   "created_at": "2025-05-19T21:30:56.892Z",
-  "updated_at": "2025-05-20T09:37:55.450Z",
+  "updated_at": "2025-09-23T07:24:24.080Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to save a file copy in its original format when converting files. The text appears on a modal dialog footer.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Faylın nüsxəsini orijinal formatda yadda saxla' is a bit literal and could be improved for natural flow. 'Yadda saxla' (save) is acceptable, but the phrasing is slightly awkward.",
+          "suggestion": "Faylın orijinal formatda bir nüsxəsini saxla"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොනුවේ පිටපත මුල් ආකෘතියෙන් සුරකින්න' while understandable, is a bit literal and could be improved for naturalness in Sinhala. A more common phrasing for 'Save the file copy in the original format' might be 'මුල් ආකෘතියේ පිටපත සුරකින්න' or 'ගොනුවේ පිටපත මුල් ආකාරයෙන් සුරකින්න'.",
+          "suggestion": "මුල් ආකෘතියේ පිටපත සුරකින්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +195,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dosya kopyasını orijinal türünde kaydet' implies 'original type' instead of 'original format'. The English 'format' refers to the file format (e.g., .docx, .pdf). 'Tür' means 'type' in a broader sense.",
+          "suggestion": "Dosya kopyasını orijinal formatta kaydet"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

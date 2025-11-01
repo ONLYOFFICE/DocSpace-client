@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2025-06-26T19:00:18.292Z",
+  "updated_at": "2025-09-17T13:43:01.958Z",
   "comment": {
     "text": "This translation key is used to display an \"Error\" message in the app, indicating a specific type of error occurred. It appears as part of error messages in various UI elements, such as confirm routes and error containers, providing context for users when an unexpected issue arises.",
     "is_auto": true,
@@ -18,38 +18,44 @@
     },
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
-      "line_number": 111,
+      "line_number": 119,
       "context": "case ValidationResult.QuotaFailed:\n console.error(\"access below quota\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:Error\"));\n default:\n console.error(\"unknown link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 66,
+      "line_number": 67,
       "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 66,
+      "line_number": 67,
       "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 66,
+      "line_number": 67,
       "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
+      "line_number": 121,
+      "context": "maxLength: 40,\n });\n case \"SpecSymbols\":\n return t(\"Common:BrandNameForbidden\");\n default:\n return t(\"Common:Error\");\n }\n };\n \n return (\n <div className={styles.brandName}>",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/EncryptionPortal/index.tsx",
-      "line_number": 31,
-      "context": "import React, { useEffect, useState, useCallback } from \"react\";\n import { useTranslation } from \"react-i18next\";\n import { useTheme } from \"styled-components\";\n \n import ErrorContainer from \"../../components/error-container/ErrorContainer\";\n import { Text } from \"../../components/text\";\n import { ColorTheme, ThemeId } from \"../../components/color-theme\";\n import PreparationPortalLoader from \"../../skeletons/preparation-portal\";\n \n import SocketHelper, { SocketEvents } from \"../../utils/socket\";",
+      "line_number": 34,
+      "context": "import classNames from \"classnames\";\n \n import { Text } from \"../../components/text\";\n import { PreparationPortalProgress } from \"../../components/preparation-portal-progress\";\n import ErrorContainer from \"../../components/error-container/ErrorContainer\";\n import PreparationPortalLoader from \"../../skeletons/preparation-portal\";\n \n import { EncryptionStatus } from \"../../enums\";\n \n import {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 50,
-      "context": "const theme = useTheme();\n \n const { t, ready } = useTranslation([\"PreparationPortal\", \"Common\"]);\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getRecoveryProgress = useCallback(async () => {",
+      "line_number": 48,
+      "context": "export const PreparationPortal = (props: IPreparationPortal) => {\n const { withoutHeader, isDialog, style } = props;\n \n const { t, ready } = useTranslation([\"Common\"]);\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getRecoveryProgress = useCallback(async () => {",
       "module": "/packages/shared"
     }
   ],

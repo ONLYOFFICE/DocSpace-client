@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "Atribut imena skupine",
   "LdapGroupNameAttributeTooltip": "Določi atribut objekta, ki ustreza imenu skupine.",
   "LdapGroupUserAttributeTooltip": "Vnesi atribut uporabniškega objekta, ki se uporablja za določitev, če je ta uporabnik član skupin.",
-  "LdapIntro": "Uvozite uporabnike in skupine prek LDAP-ja in omogočite uporabniško avtentikacijo prek prijav/gesel, shranjenih na LDAP strežniku. Uporabniki bodo uvoženi takoj po shranjevanju nastavitev. Uporabniki, dodani kasneje, bodo uvoženi med njihovo prvo avtentikacijo. Če želite omogočiti dostop samo prek LDAP-ja, onemogočite možnost povabila novih {{productName}} članov prek Kontaktov: <1>{{link}}</1>",
+  "LdapIntegrationDescription": "Uvozite uporabnike in skupine prek LDAP-ja in omogočite uporabniško avtentikacijo prek prijav/gesel, shranjenih na LDAP strežniku. Uporabniki bodo uvoženi takoj po shranjevanju nastavitev. Uporabniki, dodani kasneje, bodo uvoženi med njihovo prvo avtentikacijo. Če želite omogočiti dostop samo prek LDAP-ja, onemogočite možnost povabila novih {{productName}} članov prek {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atribut prijave",
   "LdapLoginAttributeTooltip": "Vnesi atribut objekta, ki ustreza uporabniški prijavi.",
   "LdapLoginTooltip": "Določi uporabnika za prijavo, ki ima pravice za branje strežnika LDAP.",

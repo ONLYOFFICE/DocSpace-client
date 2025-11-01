@@ -3,7 +3,7 @@
   "content": "Files removed ({{count}}).",
   "content_en_sha1_hash": "042a8b55f4b0f4f8ec5ac79191e404ed05a3b7a0",
   "created_at": "2025-05-19T21:30:54.807Z",
-  "updated_at": "2025-05-28T09:30:02.427Z",
+  "updated_at": "2025-08-04T07:30:01.223Z",
   "comment": {
     "text": "This translation key displays a message indicating the number of files removed, typically appearing as a count after deleting multiple files. It is used to provide visual feedback and context in a UI component that handles file deletion or history views.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 97,
+      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 85,
-      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case \"FileDeleted\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case \"FileLocked\":\n return `${t(\"Translations:FileLocked\")}.`;",
+      "line_number": 91,
+      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Soubory odstraněny ({{count}}).' is a literal translation of 'Files removed'. A more natural Czech phrasing would be something like 'Odebrané soubory ({{count}}).' or 'Smazané soubory ({{count}}).'",
-          "suggestion": "Odebrané soubory ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -60,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Files removed' translates more accurately to 'Gelöschte Dateien' or 'Entfernte Dateien' in German, rather than just 'Dateien entfernt'. 'Dateien entfernt' is grammatically correct but lacks the nuance of files being actively removed.",
+          "description": "The translation 'Dateien entfernt' is a literal translation of 'Files removed' but doesn't convey the full meaning in a natural way in German. 'Entfernt' implies removal, but a more idiomatic expression would be something like 'Gelöschte Dateien' (Deleted files) or 'Entfernte Dateien' (Removed files, more formally).",
           "suggestion": "Gelöschte Dateien ({{count}})."
         }
       ],
@@ -95,9 +95,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The colon at the end of the Armenian translation is unusual for this type of UI text. It disrupts the flow and might be better removed.",
-          "suggestion": "Ֆայլերը հեռացվել են ({{count}})."
+          "type": "incorrect_translation",
+          "description": "The translation 'Ֆայլերը հեռացվել են ({{count}}):' is a literal translation of 'Files removed ({{count}}).'. A more natural Armenian phrasing would be 'Հեռացվել է ֆայլ {{count}} հատ:' or 'Հեռացվել է {{count}} ֆայլ:'",
+          "suggestion": "Հեռացվել է ֆայլ {{count}} հատ:"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Files removed' is plural but the Italian translation 'File rimossi' is singular. 'Files' is plural, so the Italian should also be plural.",
-          "suggestion": "File rimossi ({{count}})."
+          "description": "The English phrase 'Files removed' translates more accurately to 'Archivi rimossi' or 'File eliminati' in Italian, rather than 'File rimossi'. 'Rimossi' implies a removal, but 'eliminati' or 'archivi rimossi' are more common and accurate in this context.",
+          "suggestion": "Archivi rimossi ({{count}})."
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ファイルが削除されました ({{count}})。' is technically correct but sounds very formal and passive for a UI element like this. A more natural and conversational translation would be preferable.  '削除されたファイル ({{count}})' or 'ファイル: 削除しました ({{count}})' would be better.",
+          "suggestion": "ファイル: 削除しました ({{count}})"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '파일 제거됨 ({{count}}).' is technically correct but sounds somewhat robotic. A more natural Korean phrasing would be '제거된 파일 {{count}}개'.",
-          "suggestion": "제거된 파일 {{count}}개"
+          "description": "The translation '파일 제거됨 ({{count}}).' while technically correct, is a bit passive. A more natural and user-friendly phrasing would be '제거된 파일 ({{count}}).' or '삭제된 파일 ({{count}}).' depending on the desired tone. '제거됨' feels overly formal in this context.",
+          "suggestion": "제거된 파일 ({{count}})."
         }
       ],
       "approved_at": null
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເອກະສານຖືກລົບອອກແລ້ວ ({{count}}).\" is a literal translation and could be improved for naturalness.  'ຖືກລົບອອກແລ້ວ' is grammatically correct but sounds a bit formal and clunky in this context. A more natural phrasing would emphasize the action of removing files.",
-          "suggestion": "ເອກະສານລົບອອກແລ້ວ ({{count}})."
+          "description": "The translation 'ເອກະສານຖືກລົບອອກແລ້ວ ({{count}}).' while understandable, is not the most natural way to express 'Files removed'. A more idiomatic translation would be something like 'ລົບເອກະສານ ({{count}}).' or 'ເອກະສານລົບອອກແລ້ວ ({{count}}).' The current phrasing sounds a bit awkward.",
+          "suggestion": "Consider 'ລົບເອກະສານ ({{count}}).' or 'ເອກະສານລົບອອກແລ້ວ ({{count}}).' "
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation \"Fişiere au fost eliminate ({{count}}).\" is grammatically incorrect. The correct phrasing should use the plural agreement with 'Fișiere'. It needs the correct verb conjugation.",
-          "suggestion": "Fișierele au fost eliminate ({{count}})."
+          "description": "The Romanian translation 'Fişiere au fost eliminate ({{count}}).' is grammatically incorrect. 'Fişiere' is plural and requires a plural verb agreement.  'Fişierele au fost eliminate...' would be more accurate.",
+          "suggestion": "Fişierele au fost eliminate ({{count}})."
         }
       ],
       "approved_at": null
@@ -197,14 +203,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ඉවත්' is potentially ambiguous. While it generally means 'removed' or 'taken away', in this context, a more precise term might be preferable. 'හැලා බැහැර කීවා' (hela bahara kiwa) could be considered for a more direct translation of 'removed'.",
-          "suggestion": "Consider 'හැලා බැහැර කීවා ({{count}}).' for greater clarity. If 'ඉවත්' is preferred, ensure the audience understands the meaning."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for a more natural flow in Sinhala. 'ගොනු ඉවත් කරණ ලදි' (gonu ival karana ladi) feels slightly awkward. A more common phrasing might use a different verb conjugation.",
-          "suggestion": "Consider '{{count}} ගොනු ඉවත් කරන ලදි' ({{count}} gonu ival karana ladi)."
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොනු ඉවත් කරණ ලදි ({{count}}).' is a bit awkward. A more natural phrasing would be 'ඉවත් කරන ලද ගොනු ({{count}}).' or '{{count}} ගොනු ඉවත් කරන ලදි'. The current translation sounds like 'files were removed by someone'.",
+          "suggestion": "Consider 'ඉවත් කරන ලද ගොනු ({{count}}).' or '{{count}} ගොනු ඉවත් කරන ලදි'."
         }
       ],
       "approved_at": null
@@ -215,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Súbory odstránené ({{count}}).' is a literal translation of 'Files removed ({{count}}).' but 'removed' implies a deletion. A more accurate and natural Slovak translation would be 'Vymazané súbory ({{count}})' or 'Zmazané súbory ({{count}})', or 'Odstránené súbory ({{count}})' (although 'odstránené' is more formal).",
-          "suggestion": "Vymazané súbory ({{count}})"
+          "description": "The translation 'Súbory odstránené ({{count}}).' is not the most natural or accurate translation of 'Files removed ({{count}}).' A better translation would convey the action of removing files, not just stating they are removed.",
+          "suggestion": "Súbory vymazané ({{count}})."
         }
       ],
       "approved_at": null
@@ -233,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Датотеке су уклоњене ({{count}}).' is a literal translation and sounds unnatural in Serbian. A more natural phrasing would be 'Уклоњено је ({{count}}) датотека.' or 'Обрисано је ({{count}}) датотека.'",
-          "suggestion": "Уклоњено је ({{count}}) датотека."
+          "description": "The translation 'Датотеке су уклоњене ({{count}}).' is not the most natural or accurate translation of \"Files removed ({{count}})\". A more natural translation would be something like 'Уклоњено датотека ({{count}}).' or 'Оbrisano ({{count}}) datoteke.'",
+          "suggestion": "Уклоњено датотека ({{count}})."
         }
       ],
       "approved_at": null
@@ -245,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Datoteke su uklonjene ({{count}})\" is too literal and sounds unnatural. A more natural phrasing would be \"Obrađena količina fajlova: {{count}}\" or \"Izbrisano fajlova: {{count}}\".",
-          "suggestion": "Izbrisano fajlova: {{count}}"
+          "description": "The translation 'Datoteke su uklonjene ({{count}})' is not the most natural or idiomatic translation of 'Files removed ({{count}})' in Serbian (Latin). A more accurate and common translation would be 'Obrisane datoteke ({{count}})' or 'Izbrisane datoteke ({{count}})' which directly translates to 'Deleted files ({{count}})'.",
+          "suggestion": "Obrisane datoteke ({{count}})"
         }
       ],
       "approved_at": null
@@ -254,13 +255,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Files removed' is better translated as 'Silinen dosyalar' in Turkish, which more accurately conveys the action of removal and aligns with common terminology. 'Dosyalar kaldırıldı' literally translates to 'Files were lifted', which is not the intended meaning.",
-          "suggestion": "Silinen dosyalar ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -272,13 +267,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Đã xóa tệp ({{count}}).\" is a literal translation and doesn't flow naturally in Vietnamese. It's overly formal and a bit clunky.",
-          "suggestion": "Consider a more natural phrasing like \"Đã loại bỏ {count} tệp.\" or \"Xóa {count} tệp.\" or \"{count} tệp đã bị xóa.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

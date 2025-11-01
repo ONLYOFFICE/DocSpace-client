@@ -3,7 +3,7 @@
   "content": "Redirects URLs",
   "content_en_sha1_hash": "a8bd02c4b796e4cf78be011a8178f1851c9536db",
   "created_at": "2025-05-19T21:30:53.985Z",
-  "updated_at": "2025-05-21T07:04:34.946Z",
+  "updated_at": "2025-05-24T07:18:46.105Z",
   "comment": {
     "text": "Redirects URLs is a field that allows users to enter custom URL redirects. In the Client Form component, this key is used as the label for an input group where users can add and manage redirect URLs.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"روابط التحويل\" (Rawabit al-Tahweel) is a possible translation, it's quite literal and might not be the most natural or idiomatic way to express \"Redirect URLs\" in a technical context. A more accurate and common translation would be something like \"عناوين إعادة التوجيه\" (`'Anawin I'aadat al-Tawjeeh`).",
-          "suggestion": "عناوين إعادة التوجيه"
+          "description": "While \"روابط التحويل\" is a literal translation of \"Redirects URLs,\" it doesn't fully capture the nuance of a redirect URL in a technical context, particularly in the OAuth flow. It implies a general redirection, not a specific type of URL used for OAuth.",
+          "suggestion": "A more accurate translation might be \"عناوين إعادة التوجيه\" (ʿanāwīn ʾiʿādat at-tawjīh) or \"عناوين الإحالة\" (ʿanāwīn al-ʾiḥāla), which directly relate to redirect or referral URLs."
         }
       ],
       "approved_at": null
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'URL-ləri yönləndirir' is not an accurate translation of 'Redirect URLs'. It literally translates to 'Redirects URLs', which doesn't convey the meaning of URLs that are being redirected to. It's a verb-focused phrasing where the English is a noun phrase.",
-          "suggestion": "Yönləndirmə URL-ləri"
-        },
-        {
-          "type": "grammar",
-          "description": "Even with the suggested correction 'Yönləndirmə URL-ləri', it could be improved for flow. The phrase 'Yönləndirmə URL-ləri' feels a little clunky.",
-          "suggestion": "URL-lərin yönləndirilməsi"
+          "description": "The Azerbaijani translation 'URL-ləri yönləndirir' is not an accurate translation of 'Redirect URLs'. It literally translates to 'Redirects URLs'. The correct translation should convey the intended meaning of a URL that redirects.",
+          "suggestion": "Possible suggestions include: 'Yönləndirici URL-lər' or 'Yönləndirmə URL-ləri'."
         }
       ],
       "approved_at": null
@@ -77,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"URL ανακατεύθυνσης\" is understandable, a more accurate and idiomatic translation of 'Redirects URLs' would be 'Διευθύνσεις ανακατεύθυνσης' or 'URLs ανακατεύθυνσης'. The single URL implies a list or set of URLs.",
+          "description": "While 'URL ανακατεύθυνσης' is understandable, a more accurate and natural translation of 'Redirects URLs' would be 'Διευθύνσεις ανακατεύθυνσης' or 'URLs ανακατεύθυνσης'. 'URL ανακατεύθυνσης' translates to 'Redirecting URL' which isn't quite the same.",
           "suggestion": "Διευθύνσεις ανακατεύθυνσης"
         }
       ],
@@ -89,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Redirecciona URLs\" is not the most accurate translation of \"Redirect URLs.\" While \"redirecciona\" is the verb form for redirect, a more appropriate translation would use a noun phrase.",
+          "description": "The translation 'Redirecciona URLs' is not the most accurate or natural translation of 'Redirect URLs'. While 'Redirecciona' is a verb meaning 'redirects', it's not the typical way to express the concept of redirect URLs. A better translation would emphasize the URLs themselves.",
           "suggestion": "URLs de redirección"
         }
       ],
@@ -101,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Uudelleenohjaa URL:eja\" is a literal translation and not the most natural way to express \"Redirect URLs\" in Finnish. It emphasizes the action of redirecting rather than the URLs themselves.",
-          "suggestion": "A more natural translation would be something like \"Palautusosoitteet\" or \"Uudelleenohjausosoitteet\"."
+          "description": "The translation 'Uudelleenohjaa URL:eja' is a literal translation of 'Redirects URLs' and doesn't convey the intended meaning as naturally in Finnish. It's clunky and not idiomatic.",
+          "suggestion": "A more natural and accurate translation would be 'Palautusosoitteet' or 'Uudelleenohjausosoitteet'."
         }
       ],
       "approved_at": null
@@ -113,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Redirige les URLs' is a literal translation and not idiomatic French. It's more accurately 'URLs de redirection' or 'URLs de redirection vers'.",
+          "description": "The translation 'Redirige les URLs' is not the most natural or accurate translation of 'Redirect URLs'. While technically correct, it sounds awkward in French. A better translation would convey the intended meaning more clearly.",
           "suggestion": "URLs de redirection"
         }
       ],
@@ -125,13 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Վերահղումներ URLS\" is a literal translation of \"Redirects URLs.\" While understandable, a more natural and idiomatic Armenian translation would be better. \"Redirects\" implies a redirection process, which isn't fully conveyed.",
-          "suggestion": "Consider \"Վերահուշումների URL-ներ\" or \"Վերահուշումների հասցեներ\" (Redirect URLs/Addresses) for a more accurate and natural rendering."
-        },
-        {
-          "type": "formatting",
-          "description": "The inclusion of \"URLS\" in the Armenian translation mirrors the English. Maintaining this mirroring might be visually jarring and unnecessary. While technically correct, it's not idiomatic.",
-          "suggestion": "Remove \"URLS\" after \"Վերահղումներ\" if possible, and simply refer to the URLs as part of the context, or use \"URL-ներ\" which is more common in Armenian."
+          "description": "The Armenian translation \"Վերահղումներ URLS\" is a literal translation of \"Redirects URLs\". While understandable, a more natural and idiomatic translation would be preferable. \"Վերահղումների URL-ները\" would be a more accurate and common phrasing.",
+          "suggestion": "Վերահղումների URL-ները"
         }
       ],
       "approved_at": null
@@ -142,7 +132,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Reindirizza URL' is not the best translation for 'Redirects URLs'. While 'Reindirizza' is correct for 'Redirects', 'URL' should be pluralized to match the English. The more accurate translation would be 'URL di reindirizzamento' or 'URL di reindirizzamento'.",
+          "description": "The translation 'Reindirizza URL' is not the best rendering of \"Redirects URLs\". It's technically correct, but lacks the plural form implied in the English.  'Redirects URLs' refers to a list of URLs, not a single redirection.",
           "suggestion": "URL di reindirizzamento"
         }
       ],
@@ -154,8 +144,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URLのリダイレクト\" while literally correct, doesn't fully capture the nuance of \"Redirect URLs.\" It translates to \"URL redirects\" which implies the action, not the list of URLs to redirect to.  A more accurate translation would emphasize the list/set of URLs.",
-          "suggestion": "Consider alternatives like \"リダイレクト先URLリスト\" (List of redirect destination URLs), \"リダイレクトURL\" (Redirect URLs - more concise), or \"リダイレクト先URL\" (Redirect destination URLs)"
+          "description": "The translation 'URLのリダイレクト' while technically correct, doesn't fully capture the nuance of \"Redirects URLs.\" It focuses on the redirection action rather than the URLs themselves. A more accurate translation would emphasize the URLs being redirected.",
+          "suggestion": "URLの転送先"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The current translation lacks clarity regarding the subject of redirection. It's missing context. It doesn't explicitly state that these are URLs being redirected *to*.",
+          "suggestion": "OAuth認証時のリダイレクトURL"
         }
       ],
       "approved_at": null
@@ -166,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL 리디렉션' while technically correct, is a bit technical and less user-friendly. A more natural and common phrasing would be '리디렉션 URL' or '리디렉션 주소'.",
-          "suggestion": "리디렉션 URL"
+          "description": "While \"URL 리디렉션\" is understandable, it's a somewhat technical and less natural translation of \"Redirect URLs.\" A more common and user-friendly translation would be better.",
+          "suggestion": "URL 리디렉션 주소 (URL Redirect Addresses) or 리디렉션 URL (Redirect URL)"
         }
       ],
       "approved_at": null
@@ -178,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ການປ່ຽນເສັ້ນທາງ URL\" is a literal translation, a more natural and commonly used translation for 'Redirect URLs' in a technical context would be \"URL ທີ່ສົ່ງເສັ້ນທາງ\" or \"URL ສົ່ງເສັ້ນທາງ\".",
-          "suggestion": "URL ທີ່ສົ່ງເສັ້ນທາງ"
+          "description": "While \"ການປ່ຽນເສັ້ນທາງ URL\" is a literal translation, it's not the most natural or idiomatic way to express \"Redirect URLs\" in Lao. \"Redirects URLs\" implies a list of URLs being redirected to.",
+          "suggestion": "Consider \"URL ທີ່ປ່ຽນເສັ້ນທາງ\" or \"URL ປ່ຽນເສັ້ນທາງ\" for a more concise and accurate translation.  The best option would depend on the surrounding context."
         }
       ],
       "approved_at": null
@@ -190,8 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Novirza vietrāžus URL\" is not an accurate translation of \"Redirect URLs\". \"Novirza\" means 'redirects' (verb), and \"vietrāžus\" is incorrect and doesn't convey the meaning of URLs. It seems to be a combination of words and lacks the correct terminology for URLs in Latvian.",
-          "suggestion": "A more appropriate translation would be something like \"Pārvirzījuma URL\" or \"Pārvirzēšanas URL\" or \"Pārurzīšanas URL\", depending on the specific context and desired level of formality.  Ideally, research the standard term for 'Redirect URLs' in Latvian technical documentation."
+          "description": "The translation 'Novirza vietrāžus URL' is not the most natural or accurate translation of 'Redirect URLs'. 'Vietrāžus' is a rare word, and 'Novirza' can be improved.",
+          "suggestion": "A more suitable translation would be 'Pārvirzienējuma URL' or 'Pārvirzienējumu URL'."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of the plural form 'URL' might be grammatically incorrect in this context. The singular 'URL' could also be appropriate.",
+          "suggestion": "Consider using 'Pārvirzienējuma URL' if the singular form is preferred."
         }
       ],
       "approved_at": null
@@ -202,13 +202,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'URLS doorverwijzen' is not the most natural or accurate translation of 'Redirect URLs'. While 'doorverwijzen' correctly conveys 'redirect,' placing it directly after 'URLS' sounds awkward.",
-          "suggestion": "Consider 'Redirect URL's' (keeping the English 'Redirect' for clarity, as this is a technical term) or 'Doorverwijzing URL's' (which is more formal but accurate)."
+          "description": "The translation \"URLS doorverwijzen\" is not the most natural or accurate translation of \"Redirect URLs.\" \"Doorverwijzen\" implies a redirection action, but doesn't fully capture the concept of a list of redirect URLs.",
+          "suggestion": "A more accurate translation would be \"Doorverwijs-URL's\" or \"Redirect URL's\" (using the English term) or \"Verwijzings-URL's\"."
         },
         {
           "type": "formatting",
-          "description": "The capitalization of 'URLS' is inconsistent. The English source uses a pluralized term but the Dutch translation doesn't account for this. This creates a subtle jarring effect.",
-          "suggestion": "Consider 'doorverwijzingen URL's' or 'doorverwijzing URL's' to reflect the plural nature."
+          "description": "The translation uses a hyphenated form \"doorverwijs-URL's\" which may not be the most common or preferred style.  Consistency in capitalization (URL's vs. url's) should also be considered.",
+          "suggestion": "Consider using \"Verwijzings-URL's\" or “Redirect URL’s” as alternatives. If using the English term \"Redirect URL's\", ensure consistent capitalization."
         }
       ],
       "approved_at": null
@@ -219,8 +219,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Przekierowuje adresy URL' literally translates to 'Redirects URLs.' While technically correct, it's not the most natural phrasing in Polish for a configuration setting. It sounds passive and a little awkward. A better phrasing would indicate the URLs *to* which the application redirects.",
-          "suggestion": "Adresy URL przekierowania"
+          "description": "The translation 'Przekierowuje adresy URL' literally translates to 'Redirects URLs'. While technically correct, a more natural and idiomatic translation would be 'Adresy przekierowań' or 'URL-e przekierowań'.  'Przekierowuje' implies an action that this key isn't describing; it's the URLs themselves that are being redirected *to*.",
+          "suggestion": "Adresy przekierowań"
         }
       ],
       "approved_at": null
@@ -231,8 +231,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Redireciona URLs' is not the most natural or accurate translation of 'Redirect URLs'. While 'Redireciona' is related to 'redirects', it implies an action being performed. 'Redirect URLs' refers to a list of URLs that are used for redirection. A more appropriate translation would be 'URLs de Redirecionamento'.",
-          "suggestion": "URLs de Redirecionamento"
+          "description": "The translation \"Redireciona URLs\" doesn't quite capture the intended meaning of \"Redirect URLs.\" \"Redireciona\" implies an action being performed, whereas the English term describes a list of URLs.",
+          "suggestion": "URLs de redirecionamento"
         }
       ],
       "approved_at": null
@@ -243,13 +243,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Redirecionamentos de URLS' is not the most natural or accurate translation of 'Redirects URLs'. While technically correct, 'URLs' is an English loanword and doesn't flow as well in Brazilian Portuguese. A better translation would use a Portuguese equivalent for URLs.",
-          "suggestion": "Redirecionamentos de URLs (if the intention is to retain the English term) or Redirecionamentos de Endereços Web"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'URLs' in Portuguese can feel jarring. Consider using 'URLs' in parentheses after the Portuguese term to clarify the meaning for those unfamiliar with the English term.",
-          "suggestion": "Redirecionamentos de Endereços Web (URLs)"
+          "description": "While \"Redirecionamentos de URLS\" is understandable, a more accurate and natural translation of \"Redirects URLs\" would be \"URLs de redirecionamento\" or \"URLs de redirecionamento\". The current translation literally translates 'Redirects' as 'Redirecionamentos', which is grammatically correct but less idiomatic in this context.",
+          "suggestion": "URLs de redirecionamento"
         }
       ],
       "approved_at": null
@@ -266,8 +261,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Перенаправляет URL-адреса\" implies 'Redirects URLs' instead of 'Redirect URLs'. It should be a noun phrase, not a verb phrase.",
-          "suggestion": "URL-адреса перенаправления"
+          "description": "The translation 'Перенаправляет URL-адреса' literally translates to 'Redirects URL addresses'. While technically correct, it's not the most natural or idiomatic way to express 'Redirect URLs' in Russian. A better translation would focus on the destination URLs.",
+          "suggestion": "Исходящие URL-адреса"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a hyphenated word 'URL-адреса'. While acceptable, it might be more readable to use a more integrated form depending on the context.",
+          "suggestion": "URL-адреса can be considered correct but depending on the context, exploring options without the hyphen may improve readability."
         }
       ],
       "approved_at": null
@@ -278,8 +278,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'යූආර්එල් නැවත හරවන්න' literally translates to 'URLs redirect'. While understandable, it's not the most natural or accurate translation of 'Redirect URLs'. It lacks the nuance of implying a destination or a process.",
-          "suggestion": "A more accurate translation would be something like 'යredirect වන URLs' (redirect URLs) or ' නැවත යවන URLs' (URLs that redirect)."
+          "description": "The translation \"යූආර්එල් නැවත හරවන්න\" (Yūārella naewath haravanna) literally translates to \"URLs redirect.\" While understandable, it's not the most natural or precise translation of \"Redirect URLs.\" It doesn't convey the intent of URLs *being* redirected.",
+          "suggestion": "A more accurate translation would be something like \"නැවත යවන URLs\" (Naewath yavana URLs) or \"යredirect කරන්නාවූ URLs\" (Redirect karanavū URLs).  Ideally, the best approach would be to use a more idiomatic expression within Sinhala, but that requires deeper linguistic expertise."
         }
       ],
       "approved_at": null
@@ -301,9 +301,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word \"URL-ови\" is written with a hyphen. It should be without a hyphen.",
-          "suggestion": "URL-ови -> URL-ови"
+          "type": "formatting",
+          "description": "The Serbian translation uses a hyphen where a space might be more conventional. While not incorrect, 'URL-ови' can be perceived as less readable than 'URL-ови'.",
+          "suggestion": "URL-ови за преусмеравање"
         }
       ],
       "approved_at": null
@@ -314,8 +314,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'URL-ovi' should be 'URL-ovi za preusmeravanje' to match the English content. Currently, the translation just contains the plural of URL, but not the full meaning.",
-          "suggestion": "URL-ovi za preusmeravanje"
+          "description": "The term \"URL-ovi\" is technically correct, but in more common usage, \"URL adrese\" would be preferred.  \"URL-ovi\" feels slightly stilted.",
+          "suggestion": "URL adrese"
         }
       ],
       "approved_at": null
@@ -338,13 +338,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URLS chuyển hướng' is not the most natural or accurate translation of 'Redirect URLs'. While technically correct, it sounds awkward in Vietnamese.  'URL chuyển hướng' or 'Địa chỉ chuyển hướng' would be more common and fluent.",
-          "suggestion": "URL chuyển hướng or Địa chỉ chuyển hướng"
+          "description": "The translation 'URLS chuyển hướng' is not ideal. While technically correct, it's not the most natural or idiomatic Vietnamese. 'Chuyển hướng' directly translates to 'redirect,' but in this context, a more natural phrasing would use a term that implies a destination URL.",
+          "suggestion": "URLs chuyển hướng (URLs đích)"
         },
         {
           "type": "formatting",
-          "description": "The translation includes 'URLS' which is an English abbreviation. Maintaining the English abbreviation in a Vietnamese translation is inconsistent. Using 'URL' is more appropriate.",
-          "suggestion": "URL chuyển hướng or Địa chỉ chuyển hướng"
+          "description": "The translation retains the English abbreviation 'URLS'. While understood, it's more consistent with Vietnamese style to use the full term or a more common abbreviation.",
+          "suggestion": "Địa chỉ chuyển hướng"
         }
       ],
       "approved_at": null
@@ -355,8 +355,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '重定向 URL' is technically correct but lacks precision. 'Redirects URLs' implies a list or collection of redirect URLs. '重定向 URL' could be interpreted as a single redirect URL.",
-          "suggestion": "重定向 URL 列表 (Redirect URL List) or 重定向 URL 地址 (Redirect URL Addresses)"
+          "description": "While \"重定向 URL\" is understandable, it's a direct transliteration and doesn't fully capture the meaning of \"Redirects URLs.\" A more natural and accurate translation would emphasize the plural nature of the URLs.",
+          "suggestion": "重定向 URL 列表"
         }
       ],
       "approved_at": null

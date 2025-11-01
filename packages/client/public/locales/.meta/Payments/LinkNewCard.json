@@ -3,7 +3,7 @@
   "content": "To link a new card, please follow this link.",
   "content_en_sha1_hash": "6665a93b0b8f60a4f0e2901f2df3749bcba4d7a1",
   "created_at": "2025-06-24T16:31:06.750Z",
-  "updated_at": "2025-07-01T15:57:36.288Z",
+  "updated_at": "2025-09-02T07:59:28.607Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to link a new card. It appears as a warning message next to a \"Link New Card\" option on a wallet settings page, indicating that the card is not yet linked and suggesting action to take.",
     "is_auto": true,
@@ -13,12 +13,12 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
       "line_number": 163,
-      "context": "if (res === false) {\n const errorText =\n cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (\n <>\n {t(\"CardUnlinked\")} <br />\n {t(\"LinkNewCard\")} {\"  \"}\n <a\n onClick={goLinkCard}\n fontWeight={600}\n style={{ textDecoration: \"underline\" }}\n >",
+      "context": "if (res === false) {\n const errorText =\n cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (\n <>\n {t(\"CardUnlinked\")} <br />\n {t(\"LinkNewCard\")} {\"  \"}\n <a\n onClick={goLinkCard}\n fontWeight={600}\n style={{ textDecoration: \"underline\" }}\n data-testid=\"add_payment_method_link\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 254,
+      "line_number": 267,
       "context": "<Text fontWeight={600} className={styles.warningColor}>\n {t(\"CardUnlinked\")}\n </Text>\n <Text as=\"span\" className={styles.warningColor}>\n {isPayer ? (\n t(\"LinkNewCard\")\n ) : (\n <Trans\n t={t}\n i18nKey=\"LinkNewCardEmail\"\n values={{",
       "module": "/packages/client"
     }

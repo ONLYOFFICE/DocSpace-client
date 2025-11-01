@@ -26,8 +26,8 @@
 
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 const StyledContactContainer = styled.div`
   display: flex;
@@ -41,17 +41,18 @@ const ContactContainer = ({ t, salesEmail }) => {
   return (
     <StyledContactContainer>
       {salesEmail ? (
-        <Text as="span" noSelect fontWeight={600}>
-          {t("ContactUs")}
-          <ColorTheme
+        <Text as="span" fontWeight={600}>
+          {t("Common:ContactUs")}
+          <Link
             className="sales-email-link"
             tag="a"
-            themeId={ThemeId.Link}
             fontWeight="600"
             href={`mailto:${salesEmail}`}
+            color="accent"
+            dataTestId="sales_email_link"
           >
             {salesEmail}
-          </ColorTheme>
+          </Link>
         </Text>
       ) : null}
     </StyledContactContainer>

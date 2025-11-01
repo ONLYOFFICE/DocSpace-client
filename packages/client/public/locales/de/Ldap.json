@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "Gruppennamensattribut",
   "LdapGroupNameAttributeTooltip": "Bitte geben Sie das Objektattribut an, das dem Gruppennamen entspricht.",
   "LdapGroupUserAttributeTooltip": "Geben Sie das Attribut des Benutzerobjekts ein, mit dem bestimmt wird, ob dieser Benutzer Mitglied der Gruppen ist.",
-  "LdapIntro": "Importieren Sie Benutzer und Gruppen über LDAP und aktivieren Sie die Benutzerauthentifizierung über auf dem LDAP-Server gespeicherte Logins/Passwörter. Benutzer werden sofort nach dem Speichern der Einstellungen importiert. Später hinzugefügte Benutzer werden bei ihrer ersten Authentifizierung importiert. Wenn Sie den Zugriff ausschließlich über LDAP ermöglichen möchten, deaktivieren Sie die Option zum Einladen neuer {{productName}}-Mitglieder über Kontakte: <1>{{link}}</1>",
+  "LdapIntegrationDescription": "Importieren Sie Benutzer und Gruppen über LDAP und aktivieren Sie die Benutzerauthentifizierung über auf dem LDAP-Server gespeicherte Logins/Passwörter. Benutzer werden sofort nach dem Speichern der Einstellungen importiert. Später hinzugefügte Benutzer werden bei ihrer ersten Authentifizierung importiert. Wenn Sie den Zugriff nur über LDAP ermöglichen möchten, deaktivieren Sie die Option zum Einladen neuer {{productName}}-Mitglieder über {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Login-Attribut",
   "LdapLoginAttributeTooltip": "Geben Sie das Objektattribut ein, das der Benutzeranmeldung entspricht.",
   "LdapLoginTooltip": "Bitte geben Sie einen Login-Benutzer an, der Leserechte auf dem LDAP-Server hat.",

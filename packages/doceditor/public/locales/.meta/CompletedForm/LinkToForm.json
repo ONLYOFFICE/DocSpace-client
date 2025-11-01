@@ -3,7 +3,7 @@
   "content": "Link to form:",
   "content_en_sha1_hash": "50f3f84afe5ad2613a1c1fcafe7a2ba39b7e4ca0",
   "created_at": "2025-05-19T21:30:57.187Z",
-  "updated_at": "2025-05-28T09:30:02.870Z",
+  "updated_at": "2025-06-30T12:20:31.647Z",
   "comment": {
     "text": "This translation key is used to display a label that indicates the user can link to a form. It appears as a button or link in the completed form UI, and its purpose is to provide an option for users to navigate between the current form and another form.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 138,
+      "line_number": 139,
       "context": "const label = useMemo(() => {\n if (isStartFilling) return t(\"CompletedForm:LinkToFillOutForm\");\n \n if (completed) return t(\"CompletedForm:LinkToViewOnlyForm\");\n \n return t(\"CompletedForm:LinkToForm\");\n }, [t, isStartFilling, completed]);\n \n const header = useMemo(() => {\n if (isStartFilling) {\n return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");",
       "module": "/packages/doceditor"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Formaya keçid linki:' is not the most natural or idiomatic way to say \"Link to form:\" in Azerbaijani. While technically correct, it's a bit clunky. A better translation would be something like 'Formaya link:' or 'Formanın linki:'",
+          "suggestion": "Formaya link:"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ձևաթղթի հղում\" (Tsevathqthi hghum) literally translates to 'Form's reference' or 'Reference to form'. While understandable, it doesn't directly convey the meaning of 'Link to form:' which implies a clickable link or URL.",
+          "suggestion": "Consider a more direct translation emphasizing the 'link' aspect, such as \"Ձևի հղում\" (Devi hghum - Form Link) or \"Ձևին հղում\" (Devin hghum - Link to Form)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +111,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"양식 링크:\" is a literal translation of \"Link to form:\" and might sound awkward in Korean. A more natural phrasing would be something like \"폼 링크:\" or \"자세한 내용은 여기를 참조하세요:\" (For more details, please see here).",
+          "suggestion": "폼 링크:"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເອກະສານອ້າງອີງ:\" translates to \"Reference Document:\". While it conveys a similar concept, \"Link to form\" implies a direct connection or URL. A more accurate translation might be something like \"ເຊື່ອມຕໍ່ແບບຟອມ:\" (Cheum to form) which more closely aligns with the English meaning.",
+          "suggestion": "ເຊື່ອມຕໍ່ແບບຟອມ:"
+        }
+      ],
       "approved_at": null
     },
     "lv": {

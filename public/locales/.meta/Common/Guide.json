@@ -3,7 +3,7 @@
   "content": "Guide",
   "content_en_sha1_hash": "bf073fae640ded81eeb7a4cee70faff4a623c16c",
   "created_at": "2025-05-19T21:30:45.723Z",
-  "updated_at": "2025-05-28T09:30:02.599Z",
+  "updated_at": "2025-08-21T11:22:39.883Z",
   "comment": {
     "text": "This translation key is used to display a guide or introductory message related to OAuth authentication. It appears in two different UI elements, likely as part of a button or link, and provides context for users interacting with OAuth settings.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
       "line_number": 93,
-      "context": "href={apiOAuthLink}\n tag=\"a\"\n themeId={ThemeId.Link}\n style={{ marginBottom: \"20px\" }}\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </ColorTheme>\n ) : null}\n </p>\n \n <RegisterNewButton />",
+      "context": "tag=\"a\"\n style={{ marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n </p>\n \n <RegisterNewButton />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
-      "line_number": 98,
-      "context": "href={apiOAuthLink}\n tag=\"a\"\n themeId={ThemeId.Link}\n style={{ marginBottom: \"20px\" }}\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </ColorTheme>\n ) : null}\n <RegisterNewButton currentDeviceType={currentDeviceType} />\n {isLoading ? (\n <OAuthLoader viewAs={viewAs} />",
+      "line_number": 101,
+      "context": "tag=\"a\"\n style={isError ? undefined : { marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n \n {isError ? (\n <EmptyServerErrorContainer />",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Насочи\" can mean \"guide,\" it's more accurately translated as \"direct\" or \"point.\" \"Guide\" implies a more comprehensive explanation or assistance, whereas \"Насочи\" suggests a simple direction. Depending on the context, a better translation might be \"Ръководство\" or \"Пътнически указания\" to more closely convey the meaning of 'Guide'.",
-          "suggestion": "Consider \"Ръководство\" or \"Пътнически указания\" for a more accurate translation, or provide more context for a better fit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {

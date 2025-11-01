@@ -3,7 +3,7 @@
   "content": "Before",
   "content_en_sha1_hash": "74f39697ac328c6325ce068b6aaca626abc0bf63",
   "created_at": "2025-05-19T21:30:49.670Z",
-  "updated_at": "2025-05-21T01:18:35.527Z",
+  "updated_at": "2025-08-04T07:30:01.457Z",
   "comment": {
     "text": "This translation key is used to display the text \"Before\" in a filter dialog component. It likely appears on a date picker input field within the FilterDialog, allowing users to select a time frame that occurred before a specified delivery date.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 293,
+      "line_number": 296,
       "context": "isInline\n fontWeight={600}\n color={globalColors.gray}\n className=\"mr-8\"\n >\n {t(\"Before\")}\n </Text>\n <TimePicker\n classNameInput=\"before-time\"\n date={filters.deliveryTo}\n onChange={setDeliveryTo}",
       "module": "/packages/client"
     }
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Əvvəlki' translates to 'Previous' or 'Earlier', not 'Before'. While contextually it might work, it's not the most accurate translation.",
-          "suggestion": "Consider 'Əvvəl' or 'Öncə' for a more direct translation of 'Before'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'마감' typically translates to 'deadline' or 'closing date,' not 'before.' 'Before' indicates a point in time preceding an event, which is not the meaning conveyed by '마감'.",
-          "suggestion": "Consider '이전' (ieon) which means 'before' or 'prior to'. Alternatively, the context should be examined to find a more accurate translation depending on what 'Before' refers to."
+          "description": "'마감' translates to 'deadline' or 'closing date' in English, not 'before'. It doesn't accurately reflect the meaning of 'Before' in this context.",
+          "suggestion": "Consider alternatives such as '이전' (before, prior) or '사전' (pre-)."
         }
       ],
       "approved_at": null
@@ -183,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Пре\" is a valid word, but it doesn't accurately convey the meaning of 'Before' in this context. 'Before' as a prefix, denoting time or order, is better represented by 'Pre-' in Serbian. The standalone word 'Pre' has a different meaning.",
-          "suggestion": "Pre-"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

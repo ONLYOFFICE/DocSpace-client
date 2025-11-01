@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/mixins";
+@use "../../../../styles/mixins";
 
 .playerVolumeControlWrapper {
   display: flex;
@@ -68,7 +67,7 @@
       cursor: pointer;
     }
 
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       width: 63%;
     }
   }
@@ -130,7 +129,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     input[type="range"]::-webkit-slider-thumb {
       appearance: none;
       -moz-appearance: none;

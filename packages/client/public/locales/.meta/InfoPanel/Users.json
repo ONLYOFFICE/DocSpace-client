@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2025-05-19T21:30:54.976Z",
-  "updated_at": "2025-06-18T07:34:15.278Z",
+  "updated_at": "2025-10-13T13:22:35.709Z",
   "comment": {
     "text": "This translation key is used to display the label \"Users\" in the InfoPanelStore.js file. It appears as a title when users are displayed and needs to be translated into different languages, providing a user-friendly interface for various contexts.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/InfoPanelStore.js",
-      "line_number": 615,
-      "context": "const hasPrevUsersTitle = this.getHasPrevTitle(users, \"user\");\n \n if (users.length && !hasPrevUsersTitle) {\n users.unshift({\n id: \"user\",\n displayName: t(\"InfoPanel:Users\"),\n isTitle: true,\n });\n }\n \n const hasPrevGuestsTitle = this.getHasPrevTitle(users, \"guest\");",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
+      "line_number": 109,
+      "context": "label: t(\"Common:Groups\"),\n list: groups,\n },\n {\n key: TInfoPanelMemberType.users,\n label: t(\"InfoPanel:Users\"),\n list: users,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"Common:Guests\"),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 566,
+      "context": "guests.push(member);\n } else {\n if (users.length === 0) {\n users.push({\n id: \"users\",\n displayName: t(\"InfoPanel:Users\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n users.push(member);",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Armenian translation 'Օգտատերեր' appears to have a spelling error. The correct spelling for 'Users' in Armenian is 'Օգտատեր'. The ending 'երեր' is a double accusative and is not appropriate here.",
-          "suggestion": "Օգտատեր"
+          "description": "The Armenian translation 'Օգտատերեր' contains a spelling error. The correct plural form of 'Օգտատեր' is 'Օգտատերներ'.",
+          "suggestion": "Օգտատերներ"
         }
       ],
       "approved_at": null
@@ -161,9 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පරිශ්‍රීලකයින්\" is not the most accurate or common translation of \"Users\". While technically correct, it's rather formal and less frequently used. A more common and natural translation would be \"භාවිතරයන්\" (bhavitaraayan) or \"කරන්නන්\" (akarananan).",
-          "suggestion": "Consider using \"භාවිතරයන්\" (bhavitaraayan) or \"කරන්නන්\" (akarananan) instead of \"පරිශ්‍රීලකයින්\"."
+          "type": "spelling",
+          "description": "The Sinhala word 'පරිශ්‍රීලකයින්' is a valid word but might not be the most natural or commonly used translation for 'Users' in this context. It's a more formal or technical term.",
+          "suggestion": "Consider using 'භාවිතකරුවන්' (bhavitakaraaruwa) which is a more common and generally understood translation for 'Users' in a user interface context."
         }
       ],
       "approved_at": null

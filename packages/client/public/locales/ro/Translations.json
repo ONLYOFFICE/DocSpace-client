@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Alegeţi din lista",
-  "ConnectingAccount": "Conectare cont",
-  "DeleteFromTrash": "Elementele selectate au fost șterse cu succes din Coșul de gunoi",
   "FileLocked": "Fișier blocat",
   "FileProtected": "Fișierul este protejat prin parolă",
   "FileUnlocked": "Fișier deblocat",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "Director OneDrive",
   "FolderTitleWebDav": "Director WebDAV",
   "FolderTitleYandex": "Director Yandex",
-  "GuestReleaseTipDescripton": "Toți Utilizatorii pe care le-ați adăugat anterior au devenit Invitații și sunt disponibile acum în lista Persoane de contact numai a administratorilor{{productName}}. Invitații nu mai aparțin niciunui grup. Puteți schimba tipul și să le adăugați în orice grup oricând este necesar.",
-  "GuestReleaseTipLink": "Aflați mai multe despre tipuri de utilizatori",
-  "LinkHasExpiredAndHasBeenDisabled": "Link-ul a expirat și este dezactivat",
   "LinkValidTime": "Acest link este valabil doar timp de {{days_count}} zile.",
   "NewForm": "Formular PDF",
   "OwnerChange": "Schimbare proprietar",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "Servicii terțe",
   "TitleShowActions": "Afișare acțiuni asupra fișierului",
   "TitleShowFolderActions": "Afișare acțiuni asupra folderului",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "Elementele selectate au fost șterse cu succes din {{sectionName}}."
 }

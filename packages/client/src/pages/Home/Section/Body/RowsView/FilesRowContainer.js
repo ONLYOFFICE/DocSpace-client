@@ -24,15 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useMemo, useContext } from "react";
+import { useMemo, use } from "react";
 import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Context } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components/rows";
-
-import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
+import { FilesRowContainer as RowContainer } from "@docspace/shared/components/files-row";
 
 import withContainer from "../../../../../HOCs/withContainer";
 
@@ -54,8 +52,13 @@ const FilesRowContainer = ({
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
+  selectedFolderTitle,
+  setDropTargetPreview,
+  disableDrag,
+  canCreateSecurity,
+  withContentSelection,
 }) => {
-  const { sectionWidth } = useContext(Context);
+  const { sectionWidth } = use(Context);
 
   useViewEffect({
     view: viewAs,
@@ -85,6 +88,10 @@ const FilesRowContainer = ({
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
+        selectedFolderTitle={selectedFolderTitle}
+        setDropTargetPreview={setDropTargetPreview}
+        disableDrag={disableDrag}
+        canCreateSecurity={canCreateSecurity}
       />
     ));
   }, [
@@ -99,13 +106,14 @@ const FilesRowContainer = ({
 
   return (
     <RowContainer
-      className={`files-row-container ${styles.filesRowContainer}`}
+      className="files-row-container"
       filesLength={list.length}
       itemCount={filterTotal}
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreFiles}
       draggable
       useReactWindow
+      noSelect={!withContentSelection}
       itemHeight={58}
     >
       {filesListNode}
@@ -122,6 +130,9 @@ export default inject(
     indexingStore,
     filesActionsStore,
     guidanceStore,
+    selectedFolderStore,
+    uploadDataStore,
+    hotkeyStore,
   }) => {
     const {
       viewAs,
@@ -131,15 +142,22 @@ export default inject(
       hasMoreFiles,
       roomsFilter,
       highlightFile,
+      disableDrag,
     } = filesStore;
 
+    const { title: selectedFolderTitle, security } = selectedFolderStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
+    const { withContentSelection } = hotkeyStore;
+
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
+    const canCreateSecurity = security?.Create;
 
     return {
       viewAs,
@@ -156,6 +174,11 @@ export default inject(
       changeIndex: filesActionsStore.changeIndex,
       setRefMap,
       deleteRefMap,
+      selectedFolderTitle,
+      setDropTargetPreview,
+      disableDrag,
+      canCreateSecurity,
+      withContentSelection,
     };
   },
 )(withContainer(observer(FilesRowContainer)));

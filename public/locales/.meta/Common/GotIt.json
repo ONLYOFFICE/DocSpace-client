@@ -3,7 +3,7 @@
   "content": "Got it",
   "content_en_sha1_hash": "5b8027fa0e819719a62305a6b15f3f1c10769f7f",
   "created_at": "2025-05-19T21:30:45.641Z",
-  "updated_at": "2025-05-28T09:30:02.276Z",
+  "updated_at": "2025-08-11T18:11:59.365Z",
   "comment": {
     "text": "The \"GotIt\" translation key is used to display a confirmation button that indicates agreement or acceptance of information in UI elements such as buttons and dialogs. It is typically used in scenarios where the user needs to acknowledge understanding or accept terms, allowing them to proceed with the desired action. This text appears on primary buttons in dialog components and guidance sections.",
     "is_auto": true,
@@ -11,14 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 159,
-      "context": "<ReactSVG src={icon} alt=\"tip\" />\n \n <Button\n primary\n label={t(\"Common:GotIt\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n />\n </StyledContainer>",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",
-      "line_number": 395,
+      "line_number": 396,
       "context": ") : null}\n <Button\n id=\"form-filling_tips_next\"\n key=\"TipsNext\"\n primary\n label={isLastStep ? t(\"Common:GotIt\") : t(\"Common:Next\")}\n size={ButtonSize.extraSmall}\n onClick={isLastStep ? onClose : onNext}\n />\n </div>\n </div>",
       "module": "/packages/shared"
     }
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Snap ik' is a valid Dutch phrase, it doesn't directly translate to 'Got it' in the same conversational context. 'Got it' often implies understanding or acknowledgement. 'Snap ik' more closely means 'I understand' or 'I get it.' A more accurate, context-dependent translation might be 'Oké', 'Begrepen', or 'Goed'.",
-          "suggestion": "Consider 'Oké', 'Begrepen', or 'Goed' depending on the intended nuance."
+          "description": "'Snap ik' is a literal translation that doesn't convey the same meaning as 'Got it.' While it translates to 'I understand,' 'Got it' is often used as an acknowledgement or to signal understanding in a more conversational way. A more appropriate translation would depend on the context, but options like 'Oké,' 'Begrepen,' or 'Goed,' might be better.",
+          "suggestion": "Consider alternatives like 'Oké,' 'Begrepen,' or 'Goed,' depending on the intended nuance."
         }
       ],
       "approved_at": null
@@ -144,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Apanhei\" does not accurately convey the meaning of \"Got it\". \"Apanhei\" generally means \"I caught\" or \"I grabbed\". \"Got it\" implies understanding or acknowledgement.",
-          "suggestion": "Consider alternatives like \"Entendido\", \"Recebido\", or \"Ok\" depending on the specific context."
+          "description": "The Portuguese translation \"Apanhei\" doesn't accurately convey the meaning of \"Got it\". \"Apanhei\" primarily means \"I caught\" or \"I grabbed\". \"Got it\" in this context implies understanding or acknowledgement.",
+          "suggestion": "Consider alternatives like \"Entendi\", \"OK\", \"Combinado\", or \"Certo\", depending on the specific context."
         }
       ],
       "approved_at": null

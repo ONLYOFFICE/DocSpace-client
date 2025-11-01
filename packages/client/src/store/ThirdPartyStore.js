@@ -67,6 +67,11 @@ class ThirdPartyStore {
     this.capabilities = capabilities;
   };
 
+  /**
+   *
+   * @param {string} id
+   * @returns {Promise<void>}
+   */
   deleteThirdParty = (id) => api.files.deleteThirdParty(id);
 
   fetchThirdPartyProviders = async () => {
@@ -147,6 +152,7 @@ class ThirdPartyStore {
         ? newWindow
         : window.open(url, i18n.t("Common:Authorization"), params);
     } catch (err) {
+      console.error(err);
       newWindow = modal
         ? newWindow
         : window.open(url, i18n.t("Common:Authorization"));

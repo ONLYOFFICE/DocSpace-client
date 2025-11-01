@@ -3,7 +3,7 @@
   "content": "Change the third-party info",
   "content_en_sha1_hash": "9698ca4ad97dadedc70245cfc37a83f4aa325ad5",
   "created_at": "2025-05-19T21:30:50.012Z",
-  "updated_at": "2025-06-03T20:59:42.298Z",
+  "updated_at": "2025-10-16T07:29:35.974Z",
   "comment": {
     "text": "This translation key is used to display a button label that allows users to edit or update third-party information. The label \"Change the third-party info\" appears on a settings screen where users can modify their third-party provider details, and it triggers an action when clicked.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2153,
+      "line_number": 2233,
       "context": "disabled: false,\n },\n {\n id: \"option_change-thirdparty-info\",\n key: \"change-thirdparty-info\",\n label: t(\"Translations:ThirdPartyInfo\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => this.onChangeThirdPartyInfo(item.providerKey),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Смени информацията от трето лице\" is technically correct but sounds awkward and overly literal. A more natural phrasing would be more appropriate.",
+          "description": "The translation 'Смени информацията от трето лице' is a literal translation and sounds unnatural in Bulgarian. A more natural phrasing would convey the intent of 'change the third-party info'.",
           "suggestion": "Смени информацията за трети страни"
         }
       ],
@@ -123,13 +123,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"info van derden\" is a less natural phrasing in Dutch. A more common and clearer translation would be \"informatie van derden\".",
-          "suggestion": "Wijzig de informatie van derden"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -138,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zmień dane podmiotu trzeciego' is a literal translation but might sound overly formal or technical. A more natural and commonly used alternative would be 'Zmień informacje o podmiotach trzecich' or 'Zmień informacje o zewnętrznych podmiotach'.",
-          "suggestion": "Zmień informacje o podmiotach trzecich"
+          "description": "While \"Zmień dane podmiotu trzeciego\" is grammatically correct, it's a very literal and somewhat formal translation. A more natural and user-friendly translation would be preferable. 'Third-party info' often refers to information *about* a third party, not *of* a third party.",
+          "suggestion": "Zmiana informacji o podmiocie trzecim"
         }
       ],
       "approved_at": null
@@ -162,13 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Modificarea informațiilor despre servicii terțe\" is a bit too formal and literal. 'Third-party info' often refers to information *provided by* a third party, not information *about* third-party services. A more natural translation would capture that nuance.",
-          "suggestion": "Informații terțe"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'servicii terțe' is technically correct, it might be overly specific. Depending on the context, a more general term might be more appropriate.",
-          "suggestion": "Furnizori terți"
+          "description": "The translation 'Modificarea informațiilor despre servicii terțe' doesn't directly convey the meaning of 'Change the third-party info'. 'Modificarea' means 'Modification' and 'servicii terțe' translates to 'third-party services', which is more specific than the original phrase. It doesn't capture the general sense of updating or altering the information.",
+          "suggestion": "Schimbarea informațiilor despre terți"
         }
       ],
       "approved_at": null
@@ -179,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Изменить настройки подключения\" (Change connection settings) doesn't accurately reflect the original meaning \"Change the third-party info\". \"Third-party info\" implies information related to external services, not general connection settings.",
-          "suggestion": "Consider a translation closer to \"Изменить информацию о сторонних сервисах\" (Change third-party service information) or \"Изменить данные сторонних сервисов\" (Change third-party service data)."
+          "description": "The Russian translation \"Изменить настройки подключения\" (Change connection settings) doesn't accurately reflect the English phrase \"Change the third-party info\". It's too generic.",
+          "suggestion": "A more accurate translation would depend on the specific context of 'third-party info.' Potential suggestions include: \"Изменить информацию о третьих сторонах\" (Change information about third parties), or a more specific phrase depending on what the 'third-party info' refers to."
         }
       ],
       "approved_at": null
@@ -190,14 +179,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පාර්ශ්වයේ' (paars̄hwawē) is technically correct, but might sound slightly formal or technical for this context. Considering a simpler phrasing might improve readability.",
-          "suggestion": "පාර්ශ්වයේ තොරතුරු (paars̄hwawē thoruwathuru) - Third-party information"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'සංශෝධනය' (sanshodhanaya) generally means 'revise' or 'correct', 'පිටුවත් කිරීම' (pithuwat kiri) or 'වලදාගත් කිරීම' (waladāgath kiri) might be more naturally understood for 'change' in this context, depending on the desired nuance. 'සංශෝධනය' carries a stronger connotation of formal revision.",
-          "suggestion": "පිටුවත් කිරීම (pithuwat kiri) - Update, orවලදාගත් කිරීම (waladāgath kiri) - Adjust"
+          "description": "The translation \"තෙවන පාර්ශ්වයේ තොරතුරු සංශෝධනය\" while technically accurate, could be more naturally phrased. \"Change the third-party info\" often implies an update or modification, and the Sinhala translation leans towards a more formal 'amendment' or 'revision'.",
+          "suggestion": "තෙවන පාර්ශ්වයේ තොරතුරු යාවත්කාලීකරණය කරන්න (Tevaṁ pārs’wavayē thoraturu yāvatkālakaraṇā karanna)"
         }
       ],
       "approved_at": null
@@ -220,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Промени инфо треће стране' is not a natural or accurate rendering of 'Change the third-party info' in Serbian. 'Инфо' is a direct transliteration from English and sounds awkward. 'Треће стране' is also a bit literal and not the common way to refer to third parties.",
-          "suggestion": "A more natural translation would be something like 'Ажурирај информације о трећој страни' or 'Промени податке о трећој страни'.  'Ажурирај' (update) or 'Промени' (change) followed by 'податке' (data) or 'информације' about 'трећег лица' (third party) is preferred."
+          "description": "The Serbian translation \"Промени инфо треће стране\" is not an accurate translation of \"Change the third-party info.\" The term 'info' is a direct transliteration and doesn't flow naturally in Serbian. A more appropriate translation would use a Serbian equivalent for 'information'.",
+          "suggestion": "Измените информације треће стране"
         }
       ],
       "approved_at": null
@@ -232,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Promeni info treće strane' is not the most natural or accurate translation of 'Change the third-party info'. While understandable, it's a bit literal. A more common and idiomatic phrasing would be 'Izmeni informacije treće strane' or 'Ažuriraj informacije treće strane'.",
-          "suggestion": "Izmeni informacije treće strane"
+          "description": "The translation 'Promeni info treće strane' is not the most natural or accurate translation of 'Change the third-party info'. A more accurate and commonly used translation would be 'Izmenite informacije treće strane'. 'Promeni' implies a more abrupt or forceful change, while 'Izmenite' is a more standard way to convey 'Change'.",
+          "suggestion": "Izmenite informacije treće strane"
         }
       ],
       "approved_at": null

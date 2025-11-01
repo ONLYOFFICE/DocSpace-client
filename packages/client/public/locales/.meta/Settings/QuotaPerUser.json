@@ -3,7 +3,7 @@
   "content": "Quota per user",
   "content_en_sha1_hash": "34fbae11ee29d4cda07c3fec52be82daaf84c7c0",
   "created_at": "2025-05-19T21:30:52.346Z",
-  "updated_at": "2025-07-02T07:49:19.861Z",
+  "updated_at": "2025-09-02T07:59:28.631Z",
   "comment": {
     "text": "The QuotaPerUser translation key is used to display the label \"Quota per user\" in the PortalSettings category. It appears on a mobile component that manages storage quotas and allows users to set their individual quota limits.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 55,
-      "context": "productName: t(\"Common:ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),",
+      "line_number": 56,
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),",
       "module": "/packages/client"
     },
     {
@@ -66,8 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Quote pro Benutzer' is not the most accurate translation of 'Quota per user'. 'Quota' refers to a defined limit or allowance, and 'Quote' (in German 'Anführungszeichen') signifies a quotation. A more accurate translation would use a term related to 'Limit' or 'Kontingent'.",
+          "description": "The term \"Quota\" is better translated as \"Kontingent\" in this context, as \"Quote\" refers to a direct quotation.",
           "suggestion": "Kontingent pro Benutzer"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, \"Benutzer\" could be replaced with \"Nutzer\" which is more common and modern.",
+          "suggestion": "Kontingent pro Nutzer"
         }
       ],
       "approved_at": null
@@ -102,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Քվոտա մեկ օգտագործողի համար' literally translates to 'Quota for one user'. While understandable, it's less natural than a phrasing that implies 'per user'. A more accurate translation would reflect the English 'per user' construction.",
-          "suggestion": "Քվոտա յուրաքանչյեն օգտագործողի համար"
+          "description": "While technically correct, \"Քվոտա մեկ օգտագործողի համար\" is a very literal translation and sounds unnatural in Armenian. A more idiomatic translation would be something like \"Օգտագործողի համար տրվող քվոտա\" or \"Մեկ օգտագործողի համար քվոտա\" which convey the same meaning in a more natural way.",
+          "suggestion": "Օգտագործողի համար տրվող քվոտա or Մեկ օգտագործողի համար քվոտա"
         }
       ],
       "approved_at": null
@@ -120,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"ユーザーあたりの容量制限\" is a bit formal and lengthy for a setting label. A more natural and concise translation would better suit the context of user settings.",
-          "suggestion": "ユーザー制限 (Yūzā Sekigen) or ユーザー容量 (Yūzā Yōryō)"
+          "description": "While \"ユーザーあたりの容量制限\" is technically correct, it's a bit literal and verbose for a settings key. A more natural and concise translation would be preferable.",
+          "suggestion": "ユーザー制限 (Yūzā Sekigen)"
         }
       ],
       "approved_at": null
@@ -156,7 +161,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Limit na użytkownika\" is understandable, it's not the most natural or precise translation of \"Quota per user.\" \"Quota\" implies a defined amount or allowance, which \"Limit\" doesn't fully convey. A more accurate translation would highlight the allowance aspect.",
+          "description": "The translation \"Limit na użytkownika\" doesn't fully capture the meaning of \"Quota per user\". \"Quota\" implies a specific, allocated amount, which 'limit' doesn't entirely convey. A more accurate translation would consider options like \"Przydział na użytkownika\" or \"Limity dla użytkownika\".",
           "suggestion": "Przydział na użytkownika"
         }
       ],
@@ -192,13 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පරිශ්‍රීලකයෙක්ට සලාකය' is not an accurate translation of 'Quota per user'. 'සලාකය' means 'salary' or 'payment' and doesn't convey the meaning of quota.",
-          "suggestion": "A more accurate translation would be something like 'පරිශ්‍රමිකරුවාට හිමි කොට්ටා' (parishramikaruwata himi kotta) - meaning 'quota for a worker' or 'user quota'."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයෙක්ට' is not the most natural phrasing. While technically correct, a more common word choice might improve readability.",
-          "suggestion": "Consider using 'පරිශ්‍රමිකරුවාට' (parishramikaruwata) which is more commonly used to mean 'for a worker' or 'for a user'."
+          "description": "The Sinhala translation \"පරිශ්‍රීලකයෙක්ට සලාකය\" does not accurately convey the meaning of \"Quota per user.\"  \"සලාකය\" means 'salary' or 'wage,' which is unrelated to quota.",
+          "suggestion": "A more accurate translation would be something like \"පරිශ්‍රමිකරුවෙකුට හිමි කොත\" (Parishramikaruwakata himi kota) which translates to \"Quota allocated to a user\" or \"පරිශ්‍රමිකරුවෙකු සඳහා වූ කොත\" (Parishramikaruwa satha gawath kota) which translates to 'Quota for a user'."
         }
       ],
       "approved_at": null

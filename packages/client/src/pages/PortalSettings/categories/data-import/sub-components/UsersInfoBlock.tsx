@@ -39,12 +39,13 @@ const UsersInfo = ({
   const { t } = useTranslation(["Settings"]);
 
   return (
+    quota &&
     quota.max && (
       <StyledUsersInfoWrapper
-        selectedUsers={totalUsedUsers}
-        totalLicenceLimit={quota.max}
+        selectedUsers={totalUsedUsers!}
+        totalLicenceLimit={quota!.max}
       >
-        {totalUsedUsers > quota.max ? (
+        {totalUsedUsers! > quota!.max ? (
           <Text className="license-limit-warning">
             {t("Settings:UserLimitExceeded", {
               productName: t("Common:ProductName"),
@@ -66,6 +67,7 @@ const UsersInfo = ({
             </Text>
           </Text>
           <HelpButton
+            dataTestId="license_limit_help_button"
             place="right"
             offsetRight={0}
             tooltipContent={

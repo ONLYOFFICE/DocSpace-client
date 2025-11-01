@@ -3,7 +3,7 @@
   "content": "Room Tags",
   "content_en_sha1_hash": "072fd428f845879a0d812b1518a09807e3e3099f",
   "created_at": "2025-05-19T21:30:56.143Z",
-  "updated_at": "2025-05-28T09:30:02.235Z",
+  "updated_at": "2025-10-13T13:22:35.546Z",
   "comment": {
     "text": "The translation key \"RoomTags\" is used to display room tags label in a file management dialogue. It appears as part of the title and subtitle of a component displaying files related to rooms.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 407,
-      "context": "onChangeFile={onChangeFile}\n currentColorScheme={currentColorScheme}\n />\n );\n \n const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTags\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;",
+      "line_number": 410,
+      "context": "currentColorScheme={currentColorScheme}\n dataTestId=\"create_edit_room_icon\"\n />\n );\n \n const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTags\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;",
       "module": "/packages/client"
     }
   ],
@@ -54,13 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Raum-Tags' is understandable, it's a direct transliteration and not a fully natural German translation. A more accurate and idiomatic translation would be 'Raumbeschriftungen' or 'Raumkennzeichnungen'.",
-          "suggestion": "Raumbeschriftungen"
-        },
-        {
-          "type": "formatting",
-          "description": "The hyphen in 'Raum-Tags' is unconventional in German terminology. It's better to avoid it.",
-          "suggestion": "Raumbeschriftungen"
+          "description": "The translation 'Raum-Tags' is a direct transliteration and doesn't fully convey the meaning of 'Room Tags' in German. While understandable, it's not the most natural or idiomatic way to express this concept.",
+          "suggestion": "Consider alternatives like 'Raumbeschriftungen', 'Raumkennzeichnungen', or 'Raumetiketten' depending on the specific context of 'Room Tags'."
         }
       ],
       "approved_at": null
@@ -116,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ປ້າຍຫ້ອງ' is a literal translation of 'Room Tags', it doesn't fully convey the meaning in a technical context. 'Room Tags' often refers to labels or classifications applied to rooms within a system or application.  'ປ້າຍຫ້ອງ' is more like physical signs on doors.",
+          "suggestion": "Consider 'ທັດສະນາມຫ້ອງ' (Room Metadata) or 'ໝວດຫ້ອງ' (Room Categories) depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -167,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes the English term in parentheses after the Sinhala term. While transliteration is acceptable, it's best to evaluate if it's necessary for clarity and consistency. It might be redundant or confusing depending on the context.",
-          "suggestion": "Consider removing '(Room Tags)' if the term 'රූම් ටැග්' is sufficiently understood by the target audience. If clarity is required, a brief explanation in Sinhala might be a better alternative."
+          "description": "The translation includes the English term in parentheses after the Sinhala equivalent. This is unnecessary and disrupts the flow. While transliteration can be helpful, it's not always required and adds visual clutter.",
+          "suggestion": "Remove the English term in parentheses. Just use 'රූම් ටැග්'."
         }
       ],
       "approved_at": null
@@ -215,12 +216,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Thẻ tag (từ khóa) phòng\" is understandable, the phrase \"(từ khóa)\" is redundant. 'Tag' is already understood as a keyword in modern Vietnamese usage, especially in technical contexts. It adds unnecessary length and complexity.",
-          "suggestion": "Thẻ phòng"
+          "description": "The translation \"Thẻ tag (từ khóa) phòng\" is overly literal and a bit clunky. 'Tag' is already understood in Vietnamese, especially in a technical context.  Adding '(từ khóa)' is redundant and adds unnecessary length.",
+          "suggestion": "Phòng tags"
         },
         {
           "type": "formatting",
-          "description": "The use of parentheses around \"(từ khóa)\" is slightly awkward and deviates from typical Vietnamese phrasing.",
+          "description": "The use of parentheses around 'từ khóa' disrupts the flow and readability of the phrase.",
           "suggestion": "Remove the parentheses around 'từ khóa'."
         }
       ],

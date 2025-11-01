@@ -3,7 +3,7 @@
   "content": "Your turn",
   "content_en_sha1_hash": "8a4e60471b34b8af985c6dd2d93792af71788f57",
   "created_at": "2025-05-19T21:30:49.657Z",
-  "updated_at": "2025-07-10T11:11:07.164Z",
+  "updated_at": "2025-10-13T18:35:23.437Z",
   "comment": {
     "text": "\"This translation key displays the message 'Your turn' to indicate whose action is being requested or awaited. It is used in UI elements where a user's input or submission is required.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 270,
+      "line_number": 273,
       "context": ") => {\n switch (status) {\n case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:",
       "module": "/packages/shared"
     }
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '고객님의 차례입니다' translates to 'It's the customer's turn.' While technically correct, it's a more formal and verbose translation of 'Your turn'. A more natural and conversational translation would be better.",
-          "suggestion": "차례입니다"
+          "description": "The Korean translation '고객님의 차례입니다' literally translates to 'It is your customer's turn.' While understandable in some contexts, it's not the most natural or direct translation of 'Your turn.' It implies the turn belongs to the customer, which may be incorrect depending on the application.",
+          "suggestion": "Consider a more direct translation such as '당신의 차례입니다' (Dangsinui chareieumnida - Your turn) or '차례입니다' (Chareieumnida - It's your turn)."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເປັນຂອງເຈົ້າແລ້ວ\" (pen khong chao laeo) literally translates to 'it's yours now' or 'it belongs to you now'. While it *could* be used in some contexts to mean 'your turn', it's not the most accurate or common way to express 'Your turn'. A more direct and common translation would be something like 'ຖ້າຂອງເຈົ້າ' (tha khong chao).",
-          "suggestion": "Consider using 'ຖ້າຂອງເຈົ້າ' (tha khong chao) or a similar phrasing that directly conveys 'your turn'."
+          "description": "'ເປັນຂອງເຈົ້າແລ້ວ' translates more closely to 'It's your thing' or 'It's up to you' rather than 'Your turn.' It doesn't convey the meaning of taking a turn in a game or conversation.",
+          "suggestion": "A more accurate translation for 'Your turn' might be 'ຖ້າຂອງເຈົ້າ' (tha kong jao) or 'ຕາມຄືນຂອງເຈົ້າ' (tam khuen kong jao)."
         }
       ],
       "approved_at": null
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Phiên của bạn' doesn't accurately convey the meaning of 'Your turn'. 'Phiên' refers to a session or phase, not a turn in a game or conversation.",
+          "description": "The Vietnamese translation \"Phiên của bạn\" does not accurately convey the meaning of \"Your turn.\" \"Phiên của bạn\" translates to \"Your session\" or \"Your version.\" The correct translation for 'Your turn' should reflect a turn in a game or conversation.",
           "suggestion": "Lượt của bạn"
         }
       ],
@@ -220,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Radha jote' doesn't perfectly capture the nuance of 'Your turn'. While 'Radha' means 'turn', 'jote' means 'your'. A more accurate translation would depend on the specific context, but a possibility is 'Dheu yt' or a more conversational equivalent like 'Tani je ti'.",
+          "suggestion": "Consider 'Dheu yt' or a contextually appropriate alternative like 'Tani je ti'."
+        }
+      ],
       "approved_at": null
     }
   }

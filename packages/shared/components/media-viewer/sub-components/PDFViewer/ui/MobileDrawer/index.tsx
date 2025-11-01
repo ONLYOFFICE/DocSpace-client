@@ -181,6 +181,7 @@ export const MobileDrawer = ({
       aria-label="Mobile drawer"
       data-testid="mobile-drawer"
     >
+      {/* @ts-expect-error - React Spring types issue with React 19 */}
       <animated.div
         className={styles.wrapper}
         style={{

@@ -30,12 +30,11 @@ export enum InputType {
   email = "email",
   tel = "tel",
   search = "search",
+  number = "number",
 }
 
 export enum InputSize {
   base = "base",
   middle = "middle",
-  big = "big",
-  huge = "huge",
   large = "large",
 }

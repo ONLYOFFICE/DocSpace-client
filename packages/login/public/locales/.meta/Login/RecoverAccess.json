@@ -3,7 +3,7 @@
   "content": "Recover access",
   "content_en_sha1_hash": "3f0e9f892fde12d93db01b89396951762c8bb282",
   "created_at": "2025-05-19T21:30:57.252Z",
-  "updated_at": "2025-05-20T09:47:45.234Z",
+  "updated_at": "2025-10-16T07:29:36.011Z",
   "comment": {
     "text": "The translation key \"RecoverAccess\" is used to display a text message that allows users to recover access to their account. In this case, it appears as a button or link on a modal dialog in the login process, prompting users to regain access if they encounter issues.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/components/RecoverAccess.tsx",
       "line_number": 32,
-      "context": "\"use client\";\n \n import { useTranslation } from \"react-i18next\";\n \n import { Link, LinkType } from \"@docspace/shared/components/link\";\n import RecoverAccessModalDialog from \"@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog\";\n \n import useRecoverDialog from \"@/hooks/useRecoverDialog\";\n \n const RecoverAccess = () => {\n const { t } = useTranslation([\"Login\", \"Common\"]);",
+      "context": "\"use client\";\n \n import { useTranslation } from \"react-i18next\";\n \n import { Link, LinkType } from \"@docspace/shared/components/link\";\n import RecoverAccessModalDialog from \"@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog\";\n import { RecaptchaType } from \"@docspace/shared/enums\";\n \n import useRecoverDialog from \"@/hooks/useRecoverDialog\";\n \n type RecoverAccessProps = {",
       "module": "/packages/login"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Girişi bərpa edin' is a literal translation of 'Recover access' but doesn't flow naturally in Azerbaijani. A more idiomatic translation would be 'Parolu unutmusunuz?' or 'Hesabinizə daxil olun'.",
+          "suggestion": "Parolu unutmusunuz?"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,19 +87,37 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Վերականգնել մատչումը\" literally translates to \"Restore the match.\"  While \"recover\" can sometimes imply restoration, it doesn't accurately convey the intended meaning of regaining access to a login account. A more accurate translation would focus on regaining access.",
+          "suggestion": "Consider alternatives like \"Վերականգնել մուտքը\" (Recover entry/access) or \"Վերականգնել հասանելիությունը\" (Restore accessibility)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"Rimuovi accesso\" translates to \"Remove access\", which is not the intended meaning of \"Recover access\". It suggests a termination of access, not a restoration.",
+          "suggestion": "A more accurate translation for \"Recover access\" would be something like \"Ripristina accesso\" or \"Recupera accesso\"."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"アクセス回復\" (akusesu kaifuku) is understandable, it's not the most natural way to translate \"Recover access\" in a user interface context. It sounds a bit formal and technical.",
+          "suggestion": "Consider alternatives like \"アクセス復旧\" (akusesu fukushū) which is more commonly used for restoring access, or \"ログインを回復する\" (login o kaifuku suru) which is a more literal and user-friendly translation."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,13 +165,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Recuperarea accesului la cont\" is a more literal translation of \"Access Recovery\" rather than simply \"Recover access.\" While technically correct, it's more formal and lengthy than the English original, which is concise. A more natural Romanian translation for 'Recover access' would be 'Reacordare acces' or 'Restabilire acces'.",
+          "suggestion": "Consider using 'Reacordare acces' or 'Restabilire acces' for a more concise and natural translation."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Доступ к порталу\" translates to \"Access to the portal.\" While related to recovering access, it's not a direct translation of \"Recover access.\" It's more descriptive and implies regaining access *to a specific portal*. A more direct translation would be something like \"Восстановление доступа\" or \"Восстановить доступ\".",
+          "suggestion": "Consider \"Восстановление доступа\" or \"Восстановить доступ\" for a more direct translation."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -171,7 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Обнови приступ\" doesn't accurately convey the meaning of \"Recover access.\" \"Обнови\" means \"refresh\" or \"update,\" while \"recover\" implies regaining lost access. A more accurate translation would convey the sense of regaining lost access.",
+          "suggestion": "Vraćanje pristupa"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Domain name",
   "content_en_sha1_hash": "79f88a9bb9f4ec699c8ec64acf057a2ef9a2bf7c",
   "created_at": "2025-05-19T21:30:57.436Z",
-  "updated_at": "2025-05-20T09:47:58.863Z",
+  "updated_at": "2025-09-07T07:53:15.533Z",
   "comment": {
     "text": "The \"DomainName\" translation key is used to translate the text \"Domain name\" in a change domain dialog component. It appears as a label on a form or input field where users can edit their domain information.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/ChangeDomainDialog/index.tsx",
-      "line_number": 62,
-      "context": "`;\n \n const ChangeDomainDialogComponent = () => {\n const { t } = useTranslation([\"Management\", \"Common\"]);\n const { spacesStore, settingsStore } = useStore();\n const [domainNameError, setDomainNameError] =\n React.useState<null | Array<object>>(null);\n const [isLoading, setIsLoading] = React.useState<boolean>(false);\n const {\n setDomainName,\n getPortalDomain,",
+      "file_path": "/packages/management/src/dialogs/change-domain/index.tsx",
+      "line_number": 68,
+      "context": "export const ChangeDomainDialog = observer(() => {\n const { t } = useTranslation([\"Management\", \"Common\"]);\n const router = useRouter();\n const { spacesStore } = useStores();\n const [domainNameError, setDomainNameError] =\n React.useState<null | Array<string>>(null);\n const [isLoading, setIsLoading] = React.useState<boolean>(false);\n const {\n setDomainName,\n setChangeDomainDialogVisible,",
       "module": "/packages/management"
     }
   ],
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation 'Domain-Name' uses a hyphen where a space is more common and natural in German. While technically correct, it's not the preferred style.",
+          "suggestion": "Domain Name"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -183,7 +189,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Alan(Domain) adı' is overly literal and not the most natural way to express 'Domain name' in Turkish. The word 'Alan' already implies 'domain'.",
+          "suggestion": "Alan adı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

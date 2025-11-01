@@ -1,0 +1,28 @@
+{
+  "key_path": "TrashMoveConfirmation",
+  "content": "Display notification when moving items to {{sectionName}}",
+  "content_en_sha1_hash": "b42767b732c4005a1996d81998ef7f3c1c631f8c",
+  "created_at": "2025-06-02T10:19:22.427Z",
+  "updated_at": "2025-08-11T18:11:59.296Z",
+  "comment": {
+    "text": "Display a notification when moving items to a trash section. This translation is used to provide a user-friendly message in a file management UI, appearing as a toggle button on a profile page.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:21:51.496Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 140,
+      "context": "onChange={onChangeDeleteConfirm}\n isChecked={confirmDelete}\n dataTestId=\"display_notification_toggle_button\"\n />\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Form Gallery",
   "content_en_sha1_hash": "42e577c97dfa2f779f0d2e1a8a89acf48da1d243",
   "created_at": "2025-05-19T21:30:47.092Z",
-  "updated_at": "2025-06-03T20:59:41.782Z",
+  "updated_at": "2025-10-16T07:29:35.492Z",
   "comment": {
     "text": "The translation key \"OFORMsGallery\" refers to the label used in the form gallery header. It is displayed when an error occurs while loading data or when submitting a form. Translators should focus on rendering this string as a headline that indicates the status of the form gallery.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 514,
+      "line_number": 519,
       "context": "const formGallery = {\n id: \"actions_template_oforms-gallery\",\n className: \"main-button_drop-down_sub\",\n icon: FormGalleryReactSvgUrl,\n label: t(\"Common:OFORMsGallery\"),\n onClick: onShowGallery,\n disabled: isPrivacy,\n key: \"form-gallery\",\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/FormGallery/Header.js",
-      "line_number": 116,
+      "line_number": 117,
       "context": "className=\"oform-header\"\n isInfoPanelVisible={isInfoPanelVisible}\n >\n <StyledHeadline type=\"content\" truncate>\n {(!oformsLoadError && getCategoryTitle(currentCategory)) ||\n t(\"Common:OFORMsGallery\")}\n </StyledHeadline>\n </StyledHeading>\n \n {!oformsLoadError && canSubmitToFormGallery() ? (\n <StyledSubmitToGalleryButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2788,
+      "line_number": 3111,
       "context": "};\n \n const templateOformsGallery = {\n id: \"personal_template_oforms-gallery\",\n key: \"oforms-gallery\",\n label: t(\"Common:OFORMsGallery\"),\n icon: FormGalleryReactSvgUrl,\n onClick: () => this.onShowGallery(t),\n disabled: isPrivacyFolder,\n };",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"معرض اوفورم\" directly transliterates \"OFORMs\" which might not be understandable or meaningful to a Saudi Arabian user. A more descriptive translation would be preferable.",
-          "suggestion": "Consider a translation that describes the function of the gallery, such as \"معرض النماذج\" (Gallery of Forms) or \"مجموعة النماذج\" (Collection of Forms)."
+          "description": "The translation \"معرض اوفورم\" directly transliterates \"OFORMs\" which isn't ideal. It doesn't convey the meaning of 'Form Gallery' naturally in Arabic. A more accurate translation would describe what a form gallery is.",
+          "suggestion": "Consider translating as \"مجموعة النماذج\" (Majmu'at al-Namathij) which means 'Collection of Forms' or \"معرض النماذج\" (Ma'ridh al-Namathij) which means 'Forms Gallery'."
         }
       ],
       "approved_at": null
@@ -54,13 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'OFORM qalereyası' doesn't accurately convey 'Form Gallery'. 'OFORM' seems to be a misinterpretation or a transliteration error. 'Form' usually translates to 'şəkil' or 'forma' in Azerbaijani, depending on the context.",
-          "suggestion": "Consider using 'Şəkil qalereyası' or 'Forma qalereyası' depending on the intended meaning."
+          "description": "The translation 'OFORM qalereyası' is not the most natural or accurate rendering of 'Form Gallery' in Azerbaijani. 'OFORM' seems to be an attempt at transliteration or a misunderstanding of the word 'Form'. The correct translation would involve a more idiomatic approach to conveying the meaning.",
+          "suggestion": "Ərzaq Vəsiqələri Qalereyası"
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the transliteration to Azerbaijani could be improved for better readability and consistency with common naming conventions. The hyphenation and capitalization might be adjusted based on preferred style guides.",
-          "suggestion": "Consider 'Şəkil Qalereyası' or 'Forma Qalereyası' with proper capitalization."
+          "type": "spelling",
+          "description": "While 'qalereyası' is technically correct, it's a more formal or slightly less common form.  'Qalereyası' is more typical.",
+          "suggestion": "Qalereyası"
         }
       ],
       "approved_at": null
@@ -89,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Συλλογή OFORM\" seems to be a direct transliteration of 'Form Gallery' with \"OFORM\" added. It doesn't convey the meaning of 'Gallery' effectively in Greek. A better translation would capture the meaning of 'gallery' as a collection or display.",
-          "suggestion": "Consider translating it as something like \"Γκαλερί Φορμών\" (Galerí Formón - Gallery Forms) or \"Συλλογή Φορμών\" (Sylogí Formón - Collection of Forms) depending on the desired tone and context."
+          "description": "The Greek translation 'Συλλογή OFORM' appears to be a transliteration of 'Form Gallery' with the addition of 'OFORM'.  'Συλλογή Φορμών' would be a more accurate translation for 'Form Gallery', directly translating 'Forms'.",
+          "suggestion": "Συλλογή Φορμών"
         }
       ],
       "approved_at": null
@@ -116,13 +116,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ձևերի պատկերասրահ\" is a literal translation of \"Form Gallery\", it may sound slightly awkward in Armenian. A more natural phrasing might be preferred depending on the context.",
-          "suggestion": "Consider alternatives like \"Ֆորմերի պատկերասրահ\" (using the English loanword 'form') or a more descriptive phrase like \"Ձևերով լցված պատկերասրահ\" (Gallery filled with forms), if appropriate for the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -143,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'OFORMs 갤러리' includes 'OFORMs' which seems to be an appended brand name rather than a direct translation of 'Form Gallery'. 'Form Gallery' simply means '형식 갤러리' or '서식 갤러리'.",
-          "suggestion": "형식 갤러리 or 서식 갤러리"
+          "description": "The translation 'OFORMs 갤러리' includes 'OFORMs' which seems to be an abbreviation and not part of the original English phrase 'Form Gallery'. It's unclear what 'OFORMs' refers to and should be removed or replaced with the correct term if it's necessary for the context.",
+          "suggestion": "갤러리 (Gallery)"
         }
       ],
       "approved_at": null
@@ -155,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"OFORMs ຄັງ\" is not an accurate translation of \"Form Gallery\". \"ຄັງ\" typically means 'warehouse' or 'repository', which doesn't convey the meaning of a gallery showcasing forms. A more accurate translation would focus on the idea of a display or collection.",
-          "suggestion": "Consider alternatives like \"ສະແດງແບບຟອມ\" (sadaeng baep form - display forms) or \"ບົດຮຽນແບບຟອມ\" (botrian baep form - form lessons/examples) or \"ກາລີເຣີແບບຟອມ\" (galeri baep form - form gallery - transliteration)."
+          "description": "The Lao translation 'OFORMs ຄັງ' does not accurately convey the meaning of 'Form Gallery'. 'ຄັງ' generally means 'warehouse' or 'storehouse', which doesn't align with the concept of a gallery displaying forms.",
+          "suggestion": "A more accurate translation would be something like 'ສະແດງແບບຟອມ' (sa-daeng baep form) which means 'Form Display' or 'Form Showcase'."
         }
       ],
       "approved_at": null
@@ -167,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'OFORMs galerija' contains the word 'galerija' (gallery), 'OFORMs' is not a direct or accurate translation of 'Form' in this context. 'OFORMs' seems to be a transliteration or a potential acronym that might not be clear to Latvian speakers.  A more appropriate translation might be 'Formu galerija'.",
-          "suggestion": "Formu galerija"
+          "description": "The translation 'OFORMs galerija' while incorporating 'galerija' (gallery) correctly, the 'OFORMs' prefix seems unrelated to the original English term 'Form'. It's likely a transliteration or abbreviation that might not be universally understood in Latvian and could cause confusion. It doesn't convey the same meaning as 'Form'.",
+          "suggestion": "Consider a more direct translation that reflects 'Form', such as 'Veidņu galerija' (Templates gallery) or 'Formu galerija' (Forms gallery), depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -179,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"OFORMS galerij\" includes \"OFORMS\" which seems to be an abbreviation or specific branding. \"Form Gallery\" should ideally translate to a more generic term for 'Form Gallery' in Dutch. A more suitable translation might be something like \"Formulier Galerij\" or \"Vormen Galerij\".",
-          "suggestion": "Formulier Galerij"
+          "description": "The translation 'OFORMS galerij' includes the prefix 'OFORMS', which seems to be an unnecessary addition. It should ideally reflect the meaning of 'Form Gallery' without incorporating the specific brand or system name.",
+          "suggestion": "galerie"
         }
       ],
       "approved_at": null
@@ -191,8 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Galeria OFORM' does not accurately convey the meaning of 'Form Gallery'. 'OFORM' appears to be an abbreviation and doesn't directly translate 'Form'. A more accurate translation would consider the context and target audience. It's possible 'Form' refers to a specific type of form that should be reflected.",
-          "suggestion": "Consider a more descriptive translation like 'Galeria Formularzy' (Gallery of Forms) or research the specific meaning of 'Form' in this context to provide a more accurate translation."
+          "description": "The translation 'Galeria OFORM' doesn't accurately reflect 'Form Gallery'. 'OFORM' seems to be an abbreviation and might not be recognizable or understandable to Polish users. It's better to translate 'Form' more generically.",
+          "suggestion": "Galeria Formularzy"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Assuming 'OFORM' is meant to be a direct transliteration, it doesn't convey the meaning of 'Form' which usually refers to documents or templates.",
+          "suggestion": "Galeria Dokumentów"
         }
       ],
       "approved_at": null
@@ -215,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Din Galerie\" does not accurately convey the meaning of \"Form Gallery\". \"Din\" means \"from\" and doesn't represent a gallery showcasing forms. It's a literal translation of a word, not a semantic one.",
-          "suggestion": "A more accurate translation would be something like \"Galerie Formulare\" or \"Galerie de Formulare\".  \"Galerie de Formulare\" is probably the most natural and idiomatic."
+          "description": "The Romanian translation \"Din Galerie\" does not accurately translate \"Form Gallery\". \"Din\" means \"from\" or \"in\", but it doesn't convey the meaning of a gallery showcasing forms. It's a literal translation that misses the intended meaning.",
+          "suggestion": "A more accurate translation would be something like \"Galerie Formulare\" or \"Galerie de Formulare\"."
         }
       ],
       "approved_at": null
@@ -233,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"OFORM එකතුව\" literally translates to \"OFORM collection,\" it doesn't convey the meaning of \"Form Gallery\" effectively. 'Gallery' implies a display or curated selection, which is not captured by 'collection'.",
-          "suggestion": "Consider alternatives like \"ආකෘති පින්තූරගallery\" (Aakruthi Pinthura Gallery - Form Picture Gallery) or \"ආකෘති ප්‍රදර්ශනය\" (Aakruthi Pradarsanaya - Form Exhibition) which better represent a 'Form Gallery'."
+          "description": "The translation \"OFORM එකතුව\" is not the most natural or accurate translation of \"Form Gallery\". While 'එකතුව' conveys 'collection' or 'gathering', 'OFORM' seems to be a direct transliteration of 'Form', which might be confusing to Sinhala speakers. A more appropriate translation would convey the concept of a gallery containing forms.",
+          "suggestion": "Possible suggestions include: 'ආකෘති එකතුව' (Aakruthi Ekathuwa - Collection of Forms), 'ආකෘති පෙන්විසම' (Aakruthi Penvisama - Form Exhibition), or 'ආකෘති සංග්‍රහය' (Aakruthi Sangrahaya - Form Compilation)."
         }
       ],
       "approved_at": null
@@ -245,8 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Galéria OFORM' doesn't accurately reflect the meaning of 'Form Gallery'. 'OFORM' seems to be an abbreviation and doesn't convey the general concept of a gallery containing forms. It's likely a technical term that requires a more comprehensive translation or explanation.",
-          "suggestion": "Consider translating 'Form Gallery' as 'Galéria formulárov' or 'Zbernica formulárov', depending on the intended context and audience.  Alternatively, if 'OFORM' is a specific, known term in Slovak, it might be acceptable, but clarification is needed."
+          "description": "The translation 'Galéria OFORM' doesn't accurately reflect the English term 'Form Gallery'. 'OFORM' seems to be an abbreviation and doesn't convey the general concept of a gallery containing forms. A more accurate translation might be 'Formulárová galéria' or 'Galéria formulárov'.",
+          "suggestion": "Galéria formulárov"
         }
       ],
       "approved_at": null
@@ -257,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Galerija OFORM\" appears to be a direct transliteration rather than a true translation of \"Form Gallery\".  'Form' needs to be translated to something that implies a collection of documents or templates in Slovenian. \"OFORM\" could potentially be a valid term, but requires confirmation within the specific context to ensure it's the correct and understood term.",
-          "suggestion": "Consider translating 'Form' to a more appropriate Slovenian term like 'obrazec', 'dokument', or 'predloga', depending on the precise meaning of 'Form' in the original context.  For example, 'Galerija obrazcev' or 'Galerija dokumentov'."
+          "description": "The translation \"Galerija OFORM\" doesn't clearly convey the meaning of \"Form Gallery.\" 'OFORM' seems to be an abbreviation or acronym that might not be universally understood by Slovenian speakers. A more descriptive translation like \"Galerija obrazcev\" (Gallery of Forms) would be more understandable.",
+          "suggestion": "Galerija obrazcev"
         }
       ],
       "approved_at": null
@@ -269,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Форм Галерија' is a literal transliteration of 'Form Gallery' and doesn't reflect natural Serbian phrasing. While understandable, it's not idiomatic. A better translation would use a more common Serbian term for 'gallery' in this context.",
-          "suggestion": "Consider using 'Галерија образаца' or 'Примерни обрасци' depending on the precise meaning of 'Form Gallery' (e.g., a gallery *of* forms, or sample forms)."
+          "description": "While technically a direct transliteration, \"Форм Галерија\" doesn't quite convey the meaning of \"Form Gallery\" in a natural Serbian (Cyrillic) way. A more idiomatic translation might be \"Галерија образаца\".",
+          "suggestion": "Галерија образаца"
         }
       ],
       "approved_at": null
@@ -287,8 +286,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'OFORM galerisi' includes the 'galerisi' (gallery) part correctly, 'OFORM' is not a standard or readily understandable term in Turkish related to 'Form'. It's likely an abbreviation or a direct transliteration, which may confuse users. 'Form' typically translates to 'form' in Turkish, potentially 'başvuru formu' (application form) or simply 'form' (loanword).",
-          "suggestion": "Consider 'Form galerisi' or 'Başvuru formu galerisi' depending on the context of 'Form'."
+          "description": "The translation \"OFORM galerisi\" doesn't accurately convey the meaning of \"Form Gallery\". 'OFORM' seems to be an attempt to transliterate, but it's not a standard or recognizable term in Turkish. 'Form' is often translated as 'form' or 'biçim' in this context.",
+          "suggestion": "Biçim Galerisi"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'galerisi' is technically correct, it's more natural to simply use 'galeri' as it functions as a noun here. The suffix '-si' implies possession, which is not intended.",
+          "suggestion": "galeri"
         }
       ],
       "approved_at": null
@@ -305,8 +309,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Thư viện\" correctly translates to \"Gallery\" or \"Library\", the addition of \"OFORMs\" directly might not be the best translation. It's likely that \"OFORMs\" is a specific term or acronym. Without further context, a more general translation like \"Mẫu\" (Forms) or \"Tài liệu\" (Documents) might be more appropriate, or retaining \"OFORMs\" with an explanation would be better.",
-          "suggestion": "Consider translating as \"Thư viện Mẫu\" or \"Thư viện Tài liệu\" or clarifying \"Thư viện OFORMs (OFORMs Gallery)\""
+          "description": "The translation 'Thư viện OFORMs' includes 'OFORMs' which is an abbreviation and may not be understandable to Vietnamese speakers unfamiliar with the original English term. It's preferable to convey the meaning of 'Form Gallery' rather than directly translating 'OFORMs'.",
+          "suggestion": "Thư viện mẫu"
         }
       ],
       "approved_at": null

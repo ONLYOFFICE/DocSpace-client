@@ -3,7 +3,7 @@
   "content": "Common files",
   "content_en_sha1_hash": "60acd8499cffd4351b97c71f28d0dee8f9bae982",
   "created_at": "2025-05-19T21:30:43.597Z",
-  "updated_at": "2025-05-28T09:30:02.519Z",
+  "updated_at": "2025-08-21T11:22:39.866Z",
   "comment": {
     "text": "This translation key is used to display the label \"Common files\" in a data import section of a user interface. It appears as part of an import options dialog and provides context about what type of files are being imported.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 195,
-      "context": "isDisabled={false}\n />\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n productName: t(\"Common:ProductName\"),\n })}\n exportSection={{",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 195,
-      "context": "isDisabled={false}\n />\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n productName: t(\"Common:ProductName\"),\n })}\n exportSection={{",
+      "line_number": 203,
+      "context": "/>\n {hasCommonFiles ? (\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n })}\n exportSection={{\n sectionName: t(\"Common:Common\"),",
       "module": "/packages/client"
     }
   ],
@@ -66,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Κοινά αρχε\" is not an accurate translation of \"Common files\". \"Αρχε\" means 'origins' or 'beginnings', not 'files'.",
-          "suggestion": "A more accurate translation would be something like \"Κοινά αρχεία\" (Koiná archeía) which directly translates to 'Common files'."
+          "description": "The Greek translation \"Κοινά αρχε\" is not an accurate translation of \"Common files.\"  \"Αρχε\" (arche) translates to 'beginnings' or 'origins' and doesn't convey the meaning of 'files'.",
+          "suggestion": "A more accurate translation would be \"Κοινά αρχεία\" (Koiná archeía), where \"αρχεία\" (archeía) means 'files'."
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"公共文件\" (gōnggòng wénjiàn) is a literal translation of \"common files\", it may not be the most accurate or natural-sounding translation in this context.  'Common files' often refers to a directory or folder containing shared resources or utilities. A more accurate translation might be '通用文件' (tōngyòng wénjiàn) or '共享文件' (gòngxiǎng wénjiàn), depending on the specific intended meaning.",
-          "suggestion": "Consider '通用文件' (tōngyòng wénjiàn) or '共享文件' (gòngxiǎng wénjiàn)."
+          "description": "While \"公共文件\" (gōnggòng wénjiàn) is a literal translation of \"common files,\" it may not be the most accurate or natural-sounding translation in all contexts. 'Common' can also imply shared resources or standard files. Depending on the specific usage, a more appropriate translation might be '通用文件' (tōngyòng wénjiàn) which emphasizes the 'general' or 'universal' aspect, or '共享文件'(gòngxiǎng wénjiàn) if the emphasis is on shared accessibility.",
+          "suggestion": "Consider '通用文件' (tōngyòng wénjiàn) or '共享文件' (gòngxiǎng wénjiàn) depending on the intended meaning."
         }
       ],
       "approved_at": null

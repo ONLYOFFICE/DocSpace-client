@@ -37,13 +37,13 @@ export default function useContextMenuModel({
   const { downloadAction, downloadAsAction } = useDownloadActions();
 
   const getSelectItem = useCallback(
-    (item: TFileItem | TFolderItem) => {
+    (i: TFileItem | TFolderItem) => {
       return {
         id: "option_select",
         key: "select",
         label: t("Common:SelectAction"),
         icon: CheckBoxReactSvgUrl,
-        onClick: () => filesSelectionStore.addSelection(item),
+        onClick: () => filesSelectionStore.addSelection(i),
         disabled: false,
       };
     },
@@ -51,13 +51,13 @@ export default function useContextMenuModel({
   );
 
   const getOpenItem = useCallback(
-    (item: TFileItem | TFolderItem) => {
+    (i: TFileItem | TFolderItem) => {
       return {
         id: "option_open",
         key: "open",
-        label: t("Common:Open"),
+        label: t("Files:Open"),
         icon: FolderReactSvgUrl,
-        onClick: () => openFolder(item.id, item.title),
+        onClick: () => openFolder(i.id, i.title),
         disabled: false,
       };
     },
@@ -65,13 +65,13 @@ export default function useContextMenuModel({
   );
 
   const getPreviewItem = useCallback(
-    (item: TFileItem) => {
+    (i: TFileItem) => {
       return {
         id: "option_preview",
         key: "preview",
         label: t("Common:Preview"),
         icon: EyeReactSvgUrl,
-        onClick: () => openFile(item, true),
+        onClick: () => openFile(i, true),
         disabled: false,
       };
     },
@@ -79,15 +79,15 @@ export default function useContextMenuModel({
   );
 
   const getLinkForRoomMembersItem = useCallback(
-    (item: TFileItem | TFolderItem) => {
+    (i: TFileItem | TFolderItem) => {
       return {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
         label: t("Common:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
-        onClick: item.isFolder
-          ? () => copyFolderLink(item.id)
-          : () => copyFileLink(item.id),
+        onClick: i.isFolder
+          ? () => copyFolderLink(i.id)
+          : () => copyFileLink(i.id),
         disabled: false,
       };
     },
@@ -95,13 +95,13 @@ export default function useContextMenuModel({
   );
 
   const getOpenPDFItem = useCallback(
-    (item: TFileItem) => {
+    (i: TFileItem) => {
       return {
         id: "option_open-pdf",
         key: "open-pdf",
-        label: t("Common:Open"),
+        label: t("Files:Open"),
         icon: EyeReactSvgUrl,
-        onClick: () => openFile(item, false),
+        onClick: () => openFile(i, false),
         disabled: false,
       };
     },
@@ -109,9 +109,9 @@ export default function useContextMenuModel({
   );
 
   const getDownloadItem = useCallback(
-    (item?: TFileItem | TFolderItem) => {
-      const isDisabled = item
-        ? !item.security.Download
+    (i?: TFileItem | TFolderItem) => {
+      const isDisabled = i
+        ? !i.security.Download
         : filesSelectionStore.selection.some((k) => !k.security.Download);
 
       return {
@@ -119,7 +119,7 @@ export default function useContextMenuModel({
         key: "download",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
-        onClick: () => downloadAction(item),
+        onClick: () => downloadAction(i),
         disabled: isDisabled,
       };
     },
@@ -137,13 +137,13 @@ export default function useContextMenuModel({
   }, [downloadAsAction, t]);
 
   const getViewItem = useCallback(
-    (item: TFileItem) => {
+    (i: TFileItem) => {
       return {
         id: "option_view",
         key: "view",
         label: t("Common:View"),
         icon: EyeReactSvgUrl,
-        onClick: () => openFile(item),
+        onClick: () => openFile(i),
         disabled: false,
       };
     },
@@ -151,21 +151,21 @@ export default function useContextMenuModel({
   );
 
   const getEditItem = useCallback(
-    (item: TFileItem) => {
+    (i: TFileItem) => {
       return {
         id: "option_edit",
         key: "edit",
         label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
         onClick: () => {
-          const isPdf = item.fileExst === ".pdf";
+          const isPdf = i.fileExst === ".pdf";
           if (isPdf && isMobile) {
             toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
             return;
           }
 
           // TODO: check convert
-          openFile(item);
+          openFile(i);
         },
         disabled: false,
       };
@@ -174,13 +174,13 @@ export default function useContextMenuModel({
   );
 
   const getFillFormItem = useCallback(
-    (item: TFileItem) => {
+    (i: TFileItem) => {
       return {
         id: "option_fill-form",
         key: "fill-form",
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
-        onClick: () => openFile(item, false, false, false),
+        onClick: () => openFile(i, false, false, false),
         disabled: false,
       };
     },

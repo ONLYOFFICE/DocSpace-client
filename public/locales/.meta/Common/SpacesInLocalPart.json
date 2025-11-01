@@ -3,7 +3,7 @@
   "content": "Local part can't contain spaces",
   "content_en_sha1_hash": "1303a27e549235cda77cad1ed3ebba10af960eb5",
   "created_at": "2025-05-19T21:30:48.980Z",
-  "updated_at": "2025-06-18T07:34:14.838Z",
+  "updated_at": "2025-10-14T04:40:30.699Z",
   "comment": {
     "text": "The translation key \"SpacesInLocalPart\" is used to display an error message when a local part of a username or email address contains spaces. This error typically appears in dialogs or input fields where users can edit their account information. The goal is to prevent usernames from being set up incorrectly and to ensure consistency with standard naming conventions.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 173,
+      "line_number": 184,
       "context": "case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:\n return t(\"Common:IncorrectDomain\");\n }",
       "module": "/packages/shared"
     }
@@ -48,13 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Lokal yolda boşluqlar icazə verilmir' is a literal translation that doesn't convey the intended meaning as naturally as it could in Azerbaijani.  'Lokal yolda' is a bit clunky; it translates to 'in the local path'.",
-          "suggestion": "Consider a more natural phrasing like 'Lokal hissədə boşluqlar qadağandır' or 'Lokal hissə boşluqlar tuta bilməz'."
+          "description": "The translation \"Lokal yolda boşluqlar icazə verilmir\" while understandable, doesn't directly translate 'can't contain spaces'. A more accurate translation would convey a prohibition.",
+          "suggestion": "Lokal hissədə boşluqlar qadağandır"
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, 'icazə verilmir' is a more formal way of saying 'is not allowed'.",
-          "suggestion": "Consider using a less formal equivalent depending on the target audience. 'Qadağandir' is a better fit with 'Lokal hissədə'."
+          "type": "incorrect_translation",
+          "description": "The word 'yolda' (in/on the way) isn't appropriate in this context. 'Hissədə' (in the part) would be better.",
+          "suggestion": "Lokal hissədə boşluqlar icazə verilmir"
         }
       ],
       "approved_at": null
@@ -77,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Lokaler Teil beinhaltet Leerzeichen' is not the most accurate or natural rendering of 'Local part can't contain spaces'. While literally correct, it doesn't convey the restriction as clearly.",
-          "suggestion": "Lokaler Teil darf keine Leerzeichen enthalten."
+          "description": "The translation \"Lokaler Teil beinhaltet Leerzeichen\" doesn't accurately convey the meaning of \"Local part can't contain spaces.\" \"Beinhaltet\" implies 'contains', while the English implies a restriction.",
+          "suggestion": "Lokaler Teil darf keine Leerzeichen enthalten"
         }
       ],
       "approved_at": null
@@ -107,7 +107,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'ne peux pas' is incorrect. It should be 'ne peut pas' to agree with 'le local' (singular).",
+          "description": "The verb conjugation 'ne peux pas' is incorrect. It should be 'ne peut pas'.",
           "suggestion": "Le local ne peut pas contenir d'espace"
         }
       ],
@@ -118,9 +118,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'բացատներ' is likely a misspelling. It should be 'բաց ատանակներ' or a more accurate term for 'spaces'.",
-          "suggestion": "Տեղական մասը չի կարող բաց ատանակներ պարունակել"
+          "type": "incorrect_translation",
+          "description": "The translation 'Տեղական մասը չի կարող բացատներ պարունակել' while technically correct, doesn't flow naturally in Armenian. A more natural phrasing would convey the same meaning with better readability.",
+          "suggestion": "Տեղական մասում չի կարող լինել բացատներ"
         }
       ],
       "approved_at": null
@@ -134,13 +134,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ローカルパートはスペースを含むことができません\" is accurate in conveying the meaning, but a more natural and common phrasing would be 'ローカルパートにスペースは含まれません'.  The current phrasing (を含むことができません) sounds slightly formal and less conversational.",
-          "suggestion": "ローカルパートにスペースは含まれません"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -155,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ພື່ນທີ່ທ້ອງຖິ້ນບໍ່ພຽງພໍ' does not accurately convey the meaning of 'Local part can't contain spaces'. 'ພື່ນທີ່ທ້ອງຖິ້ນບໍ່ພຽງພໍ' translates to 'Local part is not enough' or 'The local part is insufficient,' which is a different meaning.",
-          "suggestion": "A more accurate translation might be 'ສ່ວນທ້ອງຖິ່ນບໍ່ສາມາດມີຊ່ອງຫວ່າງໄດ້' (Suan thong thin bor samart mee chong wang dai), which translates to 'The local part cannot contain spaces'."
+          "description": "The Lao translation \"ພື່ນທີ່ທ້ອງຖິ້ນບໍ່ພຽງພໍ\" does not accurately convey the meaning of \"Local part can't contain spaces\".  'ພື່ນທີ່ທ້ອງຖິ້ນ' translates roughly to 'local area' or 'local part', but 'ບໍ່ພຽງພໍ' means 'insufficient' or 'not enough'. The English sentence means that spaces are not allowed, not that the local part is insufficient.",
+          "suggestion": "A more accurate translation would be something like \"ສ່ວນພື້ນທີ່ທ້ອງຖິ່ນຫ້າມມີຊ່ອງຫວ່າງ\" (Suan phuen thi thong thin ham mi chong wang) - 'Local part is not allowed to have spaces'."
         }
       ],
       "approved_at": null
@@ -179,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Identyfikator użytkownika\" (user identifier) is a possible translation, \"Local part\" refers specifically to the part before the '@' in an email address or similar identifier. A more accurate translation would reflect this specificity.",
-          "suggestion": "Część lokalna nie może zawierać spacji"
+          "description": "While \"Identyfikator użytkownika\" is a valid translation for 'local part', it's not the most natural or easily understood phrasing for a general user in this context. 'Local part' refers to the username before the '@' in an email address or similar identifier. A more user-friendly translation would capture that meaning.",
+          "suggestion": "Nazwa użytkownika nie może zawierać spacji"
         }
       ],
       "approved_at": null
@@ -209,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Имя почтового ящика содержит пробелы' is a literal translation, but doesn't fully convey the meaning of \"Local part can't contain spaces.\" It translates to \"The email address name contains spaces,\" implying it *does* contain spaces, whereas the original means it *shouldn't*.",
-          "suggestion": "Локальная часть не может содержать пробелы"
+          "description": "The translation \"Имя почтового ящика содержит пробелы\" is too literal and doesn't accurately convey the meaning of \"Local part can't contain spaces.\" It implies that the local part *does* contain spaces, which is the problem being described.",
+          "suggestion": "A more accurate translation would be something like \"Локальная часть не может содержать пробелы\" or \"В локальной части не допускаются пробелы\"."
         }
       ],
       "approved_at": null
@@ -221,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ස්ථානීය කොටසේ හිස්තැන් අඩංගු නොවිය යුතුය' while understandable, is a bit formal and less natural for this type of error message. A more common and direct translation would be better.",
-          "suggestion": "A better translation might be 'දේශීය කොටසට අවකාශයන් තිබිය යුතු නැත' (deshiya kotasa avashayan thibiya netha) or 'දේශීය කොටස අවකාශයන් තබාගත නොහැකියි' (deshiya kotasa avashayan thabagat nokahidi)."
+          "description": "The translation 'ස්ථානීය කොටසේ හිස්තැන් අඩංගු නොවිය යුතුය' while technically conveying the meaning, is a rather formal and literal translation. A more natural and common way to express this in Sinhala would be something closer to 'දේශීය කොටසට හිස්තැන් තිබිය යුතු නැත' or 'දේශීය කොටසට ඉඩ තිබිය යුතු නැත'.",
+          "suggestion": "දේශීය කොටසට හිස්තැන් තිබිය යුතු නැත"
         }
       ],
       "approved_at": null
@@ -245,13 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Лоцал парт не сме садржати размаке\" is a direct transliteration of \"Local part can't contain spaces\" but doesn't reflect natural Serbian phrasing. While understandable, it sounds awkward.",
-          "suggestion": "Локални део не сме да садржи размаке"
-        },
-        {
-          "type": "spelling",
-          "description": "While not strictly incorrect, 'Лоцал' is a transliteration. The Serbian equivalent would be 'Локални'.",
-          "suggestion": "Локални"
+          "description": "The translation 'Лоцал парт не сме садржати размаке' is a literal transliteration of \"Local part can't contain spaces\" and doesn't accurately convey the meaning in natural Serbian. A more idiomatic translation would be something like 'Локални део не може да садржи размаке'. The word 'Лоцал' is not standard Serbian.  'Локални део' is preferred over a transliteration of 'local part'.",
+          "suggestion": "Локални део не може да садржи размаке"
         }
       ],
       "approved_at": null
@@ -281,6 +270,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

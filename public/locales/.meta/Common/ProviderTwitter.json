@@ -3,7 +3,7 @@
   "content": "Twitter",
   "content_en_sha1_hash": "5392c950bdde4be7e5f5b8fdc6a1ca5f21e905cf",
   "created_at": "2025-05-19T21:30:47.613Z",
-  "updated_at": "2025-05-28T09:30:02.993Z",
+  "updated_at": "2025-10-13T13:22:36.059Z",
   "comment": {
     "text": "This translation key is used for displaying social media providers on a platform, commonly found on authentication or sign-up buttons. It is likely used to display \"Twitter\" as one of the available provider options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 420,
+      "line_number": 388,
       "context": "case \"google\":\n return t(\"Common:ProviderGoogle\");\n case \"facebook\":\n return t(\"Common:ProviderFacebook\");\n case \"twitter\":\n return t(\"Common:ProviderTwitter\");\n case \"linkedin\":\n return t(\"Common:ProviderLinkedIn\");\n case \"microsoft\":\n return t(\"Common:ProviderMicrosoft\");\n case \"sso\":",
       "module": "/packages/shared"
     }
@@ -95,14 +95,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"X（旧Twitter）\" conveys the information that 'X' was formerly known as Twitter, it's a bit verbose for a key name. It's better to find a more concise and direct translation, especially for a technical context.",
-          "suggestion": "X"
+          "type": "formatting",
+          "description": "The translation includes a parenthetical explanation \"(旧Twitter)\" which may not be appropriate for all contexts. It's useful for clarity for some audiences but might be unnecessary or jarring in others.",
+          "suggestion": "Consider whether the parenthetical explanation is necessary. If not, simply use \"X\"."
         },
         {
-          "type": "formatting",
-          "description": "The use of parentheses and katakana feels overly explanatory for a key name.  A more streamlined and consistent approach is preferable.",
-          "suggestion": "X"
+          "type": "incorrect_translation",
+          "description": "While \"X（旧Twitter）\" is currently accurate given Twitter's rebranding, it's a dynamic translation. The \"旧Twitter\" portion will become obsolete.  A more robust translation would handle future branding changes.",
+          "suggestion": "Consider a translation approach that avoids directly incorporating the old name, or a system for automatically updating the translation when the brand changes."
         }
       ],
       "approved_at": null
@@ -131,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"X (Twitter)\" acknowledges the platform's rebranding, simply appending \"(Twitter)\" isn't the most natural or precise translation. It's better to prioritize \"X\" or a more localized equivalent if one exists.",
-          "suggestion": "Consider if a localized equivalent of \"Twitter\" exists in Dutch. Otherwise, \"X\" is preferable, or \"X (voorheen Twitter)\" for more clarity."
+          "description": "The translation 'X (Twitter)' doesn't accurately reflect the original English term. While 'X' is now used, retaining '(Twitter)' might be confusing or unnecessary for users who are still familiar with the original name.",
+          "suggestion": "Consider using just 'X' or 'X (voorheen Twitter)' to provide context."
         }
       ],
       "approved_at": null
@@ -173,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala translation \"ට්ටිටර්\" appears to be a phonetic transliteration of 'Twitter' rather than a proper Sinhala word. While understandable, it's not standard practice. There might be a more accepted transliteration or a creative adaptation suitable for branding.",
-          "suggestion": "Investigate more common or accepted transliterations of 'Twitter' into Sinhala. Consider consulting with Sinhala language experts for appropriate adaptation. Possible alternatives may exist depending on the target audience and context."
+          "description": "The Sinhala translation 'ට්ටිටර්' appears to be a transliteration of 'Twitter' and may not be the most accurate or readily understood representation in Sinhala. While it attempts to capture the sound, a more established or localized term might be preferable.",
+          "suggestion": "Consider researching and using a more established Sinhala term for 'Twitter' if one exists. Otherwise, ensure this transliteration is consistent across all materials."
         }
       ],
       "approved_at": null
@@ -227,7 +227,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation includes \"推特\" which is a transliteration of 'Twitter'. While commonly used, it's redundant since 'Twitter' is already understood in Chinese, especially in this context where it's likely a key name for a technical system. Using just 'Twitter' would be more concise and accurate.",
+          "description": "The translation \"Twitter推特\" includes both the English word \"Twitter\" and its Chinese transliteration \"推特\". This is redundant and unnecessary. While \"推特\" is a common transliteration, it's not needed when the English name is already present.",
           "suggestion": "Twitter"
         }
       ],

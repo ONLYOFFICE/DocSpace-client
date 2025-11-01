@@ -3,7 +3,7 @@
   "content": "With Authorization keys, you can connect third-party services to your space. Sign in easily with Facebook, Google, or LinkedIn. Add Dropbox, OneDrive, and other accounts to work with files stored there.",
   "content_en_sha1_hash": "dd9feaeb132234a03c190fb0d06cdfd14c0f9fb7",
   "created_at": "2025-05-19T21:30:50.608Z",
-  "updated_at": "2025-05-21T05:08:51.880Z",
+  "updated_at": "2025-09-26T15:21:06.408Z",
   "comment": {
     "text": "\"This translation key is used for a description explaining how authorization keys facilitate connections to third-party services. It aims to inform users about the benefits of using this feature in their portal settings. It appears as part of a UI element displaying information about available integrations.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 206,
-      "context": "return (\n <>\n <RootContainer className=\"RootContainer\">\n <Text className=\"third-party-description\">\n {t(\"AuthorizationKeysInfo\")}\n </Text>\n <div className=\"third-party-box\">\n {integrationSettingsUrl ? (\n <Link\n className=\"third-party-link\"",
+      "line_number": 205,
+      "context": "{!consumers.length || !tReady ? (\n <ThirdPartyLoader />\n ) : (\n <RootContainer className=\"RootContainer\">\n <Text className=\"third-party-description\">\n {t(\"AuthorizationKeysInfo\")}\n </Text>\n <div className=\"third-party-box\">\n {integrationSettingsUrl ? (\n <Link\n className=\"third-party-link\"",
       "module": "/packages/client"
     }
   ],
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'جوجل' is a transliteration of 'Google'. It is more appropriate to use the English name 'Google' for brand names.",
+          "suggestion": "Google"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of Arabic characters for brand names 'Facebook', 'Google', 'LinkedIn', 'Dropbox' and 'OneDrive' is inconsistent. While 'Facebook', 'LinkedIn', 'Dropbox' and 'OneDrive' are presented in their English form, 'Google' is transliterated. For consistency, maintain the English form for all brand names.",
+          "suggestion": "Facebook, Google, LinkedIn, Dropbox, OneDrive"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,18 +47,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Avtorizasiya' is a transliteration and not a standard Azerbaijani term. The correct term would be 'İcazə açarları'.",
+          "description": "The word \"Avtorizasiya\" should be \"İcazə açarları\" for better readability and accuracy in this context. \"Avtorizasiya\" is a more formal/technical term.",
           "suggestion": "İcazə açarları"
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'fəzaya qoşa bilərsiniz' is grammatically awkward. A more natural phrasing would be 'fəzənizlə qoşulun'.",
-          "suggestion": "fəzənizlə qoşulun"
+          "type": "incorrect_translation",
+          "description": "The phrase \"fəzaya qoşa bilərsiniz\" could be improved to accurately convey the meaning of connecting to a space. 'fəzaya qoşulmaq' or a rephrased sentence would be more accurate.",
+          "suggestion": "fəzənizlə əlaqə saxlaya bilərsiniz"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'orada saxlanılan fayllarla işləyin' is a bit literal. A more natural phrasing would be 'orada olan faylları işləyin' or 'orada olan faylları idarə edin'.",
-          "suggestion": "orada olan faylları işləyin"
+          "type": "formatting",
+          "description": "The use of a non-breaking space (&#8203;) is not standard in Azerbaijani and may cause display issues. Remove it.",
+          "suggestion": "Facebook, Google və ya LinkedIn ilə"
         }
       ],
       "approved_at": null
@@ -61,7 +72,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses non-breaking spaces (U+00A0) instead of regular spaces after punctuation. This can affect readability and visual appearance.",
+          "suggestion": "Replace the non-breaking spaces with regular spaces. For example, replace 'Facebooku ' with 'Facebooku '."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -76,13 +93,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistent capitalization of \"Facebook\", \"Google\", and \"LinkedIn\". They are capitalized in English, but lowercase in the Greek translation.",
-          "suggestion": "Capitalize \"Facebook\", \"Google\", and \"LinkedIn\" consistently: \"Facebook\", \"Google\", και \"LinkedIn\"."
+          "description": "The term \"Κλειδιά εξουσιοδότησης\" is inconsistent with the English \"Authorization keys\". It's a literal translation but might be better phrased for natural Greek flow. Consider a more descriptive term that conveys the purpose.",
+          "suggestion": "Consider rephrasing to something like \"Κλειδιά πρόσβασης\" or \"Κλειδιά σύνδεσης\" which more accurately describe the function of authorization keys."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'With Authorization keys' is translated as 'Με τα Κλειδιά εξουσιοδότησης'. While technically correct, it sounds slightly unnatural.  A more natural phrasing might be 'Χρησιμοποιώντας τα Κλειδιά εξουσιοδότησης' (Using Authorization keys).",
-          "suggestion": "Consider translating 'With Authorization keys' as 'Χρησιμοποιώντας τα Κλειδιά εξουσιοδότησης'."
+          "description": "The phrase \"για να εργαστείτε με αρχεία που είναι αποθηκευμένα εκεί\" is a bit clunky in Greek. 'Εκεί' refers to a vague 'there'.",
+          "suggestion": "Rephrase to 'για να εργαστείτε με αρχεία που βρίσκονται εκεί' or 'για να εργαστείτε με αρχεία που είναι αποθηκευμένα σε αυτά'."
         }
       ],
       "approved_at": null
@@ -93,7 +110,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'OneDriv' is misspelled. It should be 'OneDrive'.",
+          "description": "The Spanish translation misspells \"OneDrive\".",
           "suggestion": "OneDrive"
         }
       ],
@@ -106,12 +123,7 @@
         {
           "type": "formatting",
           "description": "Inconsistent use of hyphens in service names. 'Facebook-' should be 'Facebook'. 'Google-' should be 'Google'. 'LinkedIn-' should be 'LinkedIn'.",
-          "suggestion": "Correct the hyphens: Facebook, Google, LinkedIn"
-        },
-        {
-          "type": "formatting",
-          "description": "The repeated use of 'tilillä' (account) can be slightly awkward. While technically correct, it could be improved for flow.",
-          "suggestion": "Consider rewording to remove the repetition of 'tilillä'. For example: 'Kirjaudu helposti Facebookiin, Googleen tai LinkedIniin.' (Sign in easily to Facebook, Google, or LinkedIn.)"
+          "suggestion": "Remove the unnecessary hyphens: 'Facebook', 'Google', 'LinkedIn'."
         }
       ],
       "approved_at": null
@@ -128,13 +140,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"With Authorization keys\" is translated as \"Թույլտվության ստեղներով\". While technically correct, a more natural translation might be \"Authorization keys-ի միջոցով\" or something similar to emphasize the tool being used.",
-          "suggestion": "Authorization keys-ի միջոցով"
+          "description": "The phrase \"third-party services\" is translated as \"երրորդ կողմի ծառայությունները\" which is technically correct, but sounds a bit clunky in Armenian. A more natural phrasing might be \"գրանցված ծառայությունները\" or \"ծառայություններից\".",
+          "suggestion": "Consider translating \"third-party services\" as \"գրանցված ծառայությունները\" or \"ծառայություններից\" for better flow."
         },
         {
           "type": "formatting",
-          "description": "The names of services (Facebook, Google, LinkedIn, Dropbox, OneDrive) are not consistently formatted. They're all capitalized, which is appropriate for service names.",
-          "suggestion": "Maintain consistent capitalization for service names (Facebook, Google, LinkedIn, Dropbox, OneDrive)."
+          "description": "The use of colons after Facebook, Google, and LinkedIn feels slightly unnatural in Armenian. While grammatically acceptable, it’s more common to simply list them.",
+          "suggestion": "Remove the colons after Facebook, Google, and LinkedIn. Change \"Facebook-ի, Google-ի կամ LinkedIn-ի միջոցով:\" to \"Facebook, Google կամ LinkedIn միջոցով\"."
         }
       ],
       "approved_at": null
@@ -157,13 +169,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of full stops (periods) after each sentence is somewhat unnatural in Korean. A more natural flow would use slightly fewer.",
-          "suggestion": "Consider removing some full stops for a more natural Korean flow. For example, combining sentences with conjunctions."
+          "description": "Inconsistent spacing after punctuation marks. Korean often uses a space after a period, but the text has inconsistent spacing.",
+          "suggestion": "Ensure consistent spacing after punctuation marks according to Korean style guidelines. For example, after the period in '작업 공간에 연결할 수 있습니다.' should have a space."
         },
         {
           "type": "incorrect_translation",
-          "description": "“작업 공간에 연결할 수 있습니다” is a literal translation of 'connect to your space' and could be phrased more naturally. While technically correct, it’s not the most idiomatic expression.",
-          "suggestion": "Consider alternatives like “작업 영역에 연동할 수 있습니다” or “작업 영역에 연결하여 사용할 수 있습니다” which sound more natural depending on the intended nuance."
+          "description": "While technically correct, '해당 서비스에 저장된 파일로 작업하세요' could be more natural. '해당 서비스에 저장된 파일을 사용하여 작업하세요' is a more common phrasing.",
+          "suggestion": "해당 서비스에 저장된 파일을 사용하여 작업하세요"
         }
       ],
       "approved_at": null
@@ -174,28 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"With Authorization keys\" is translated as \"ດ້ວຍລະຫັດສາລະອານຸຍາດ\". While technically correct, it's quite literal and doesn't flow naturally in Lao. A more idiomatic translation would be something like \"ການໃຊ້ລະຫັດສາລະອານຸຍາດ\".",
-          "suggestion": "ການໃຊ້ລະຫັດສາລະອານຸຍາດ"
+          "description": "The phrase 'third-party services' is translated as 'ບໍລິການພາກທີສາມ'. While technically correct, a more natural and common translation for this context might be 'ບໍລິການຂອງບຸກຄົນທີສາມ' or 'ບໍລິການພາຍນອກ'.",
+          "suggestion": "ບໍລິການຂອງບຸກຄົນທີສາມ"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"third-party services\" is translated as \"ບໍລິການພາກທີສາມ\". While understandable, a more accurate and commonly used translation would be \"ບໍລິການພາຍນອກ\".",
-          "suggestion": "ບໍລິການພາຍນອກ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"space\" is translated as \"ເຂດພື້ນທີ່\". \"ເຂດພື້ນທີ່\" is a bit too formal. A simpler and more natural translation would be \"ສະຖານທີ່\" or \"ພື້ນທີ່\".",
-          "suggestion": "ພື້ນທີ່"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Sign in easily\" is translated as \"ລົງນາມເຂົ້າໃຊ້ງານໄດ້ງ່າຍ\". While acceptable, it could be smoother. A more natural phrasing might be \"ເຂົ້າສູ່ລະບົບໄດ້ງ່າຍ\".",
-          "suggestion": "ເຂົ້າສູ່ລະບົບໄດ້ງ່າຍ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"work with files stored there\" is translated as \"ເຮັດວຽກກັບເອກະສານທີ່ເກັບໄວ້ຢູ່ທີ່ນັ້ນ\". While accurate, it's a little wordy.  A more concise translation could be \"ເຮັດວຽກກັບເອກະສານເຫຼົ່ານັ້ນ\".",
-          "suggestion": "ເຮັດວຽກກັບເອກະສານເຫຼົ່ານັ້ນ"
+          "description": "The phrase 'space' is translated as 'ເຂດພື້ນທີ່ຂອງທ່ານ'. A more concise and understandable translation might be 'ສະຖານທີ່ຂອງທ່ານ' or simply 'ສະຖານທີ່'.",
+          "suggestion": "ສະຖານທີ່ຂອງທ່ານ"
         }
       ],
       "approved_at": null
@@ -203,7 +200,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space before 'Izmantojot' in the Latvian translation is unnecessary and may cause rendering issues. It should be a regular space.",
+          "suggestion": "Remove the non-breaking space: Izmantojot Autorizācijas atslēgas..."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -212,13 +215,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'third-party services' is translated as 'externe services'. While technically correct, a more natural translation in this context might be 'derde partijen diensten' or simply 'andere diensten'.",
-          "suggestion": "Consider 'derde partijen diensten' or 'andere diensten' for 'third-party services'."
+          "description": "The term 'Autorisatiesleutels' is a direct translation of 'Authorization keys' but sounds unnatural in Dutch. A more idiomatic translation would be 'Authorisatiesleutels' or 'Authenticatiesleutels'.",
+          "suggestion": "Consider using 'Authorisatiesleutels' or 'Authenticatiesleutels'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'work with files stored there' is translated as 'met daar opgeslagen bestanden te werken'. While understandable, a more fluent translation could be 'om met daaropgeslagen bestanden te werken' or 'om met bestanden daarop te werken'. The 'daar' needs to be elided.",
-          "suggestion": "Replace 'met daar opgeslagen bestanden te werken' with 'met daaropgeslagen bestanden te werken' or 'om met bestanden daarop te werken'."
+          "description": "The phrase 'met daar opgeslagen bestanden te werken' is grammatically correct but could be improved for clarity and naturalness. It literally translates to 'to work with files stored there'.",
+          "suggestion": "Consider rephrasing to 'om met daaropgeslagen bestanden te werken' or 'om bestanden daar te kunnen gebruiken'."
+        },
+        {
+          "type": "formatting",
+          "description": "There's an unnecessary non-breaking space before 'Autorisatiesleutels'.",
+          "suggestion": "Remove the space before 'Autorisatiesleutels'."
         }
       ],
       "approved_at": null
@@ -229,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of ellipses (three dots) in the Polish translation doesn't perfectly mirror the flow and implication of the English sentence structure. While technically correct, it can make the sentence feel slightly disjointed.",
-          "suggestion": "Consider rewording slightly to avoid ellipses if possible. For instance, 'Loguj się łatwo przez Facebook, Google lub LinkedIn - dodaj Dropbox, OneDrive i inne konta, aby pracować z przechowywanymi tam plikami.'"
+          "description": "The use of bolding for 'Kluczom autoryzacyjnym' is inconsistent with the English. It would be more consistent to bold 'Authorization keys' in the English source and then follow that style for the Polish translation.",
+          "suggestion": "Consider bolding 'Kluczom autoryzacyjnym' in the Polish translation to match the style of the English source."
         }
       ],
       "approved_at": null
@@ -253,18 +261,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“spațiu dvs la servicii terțe” is not a natural or accurate translation of “to your space to third-party services”. The Romanian phrase is awkward and doesn't convey the intended meaning.",
-          "suggestion": "la spațiul dvs. la servicii terțe"
+          "description": "“spațiu dvs la servici terțe” is not grammatically correct and doesn't accurately convey the meaning of \"connect your space to third-party services.\" The Romanian should reflect that the space *is* being connected *to* third-party services.",
+          "suggestion": "Cu cheile de acces, vă puteți conecta spațiul dvs. la servicii terțe."
         },
         {
           "type": "incorrect_translation",
-          "description": "“fișierele din spații de stocare” is a literal and somewhat clunky translation of “files stored there.” It lacks the fluidity of a native Romanian phrasing.",
-          "suggestion": "fișierele stocate acolo"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence “Cu cheile de acces, vă puteți conecta spațiu dvs la servicii terțe.” is grammatically awkward. While technically correct, it's not how a native speaker would phrase it.",
-          "suggestion": "Cu ajutorul cheilor de acces, vă puteți conecta la servicii terțe pentru spațiul dvs."
+          "description": "“din spații de stocare” is a bit awkward. It doesn't directly translate to the intended meaning and is a bit too literal.",
+          "suggestion": "pentru a lucra cu fișierele stocate acolo"
         }
       ],
       "approved_at": null
@@ -281,8 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation appears to be Russian, not Sinhala. The entire text is in Russian.",
-          "suggestion": "This needs to be translated into Sinhala (සිංහල). The English content describes authorization keys for connecting third-party services and signing in with Facebook, Google, or LinkedIn, and working with files in cloud storage."
+          "description": "The provided translation is in Slovenian, not Sinhala. 'Avtorizacijskimi ključi' and 'Enostavno se prijavite' are Slovenian phrases.",
+          "suggestion": "The translation needs to be provided in Sinhala.  For example: 'අවසරිතපත්ර බොරුන් සමඟ, ඔබට තෙවන පාර්ශව සేవలను ඔබේ ස්ථානයට සම්බන්ධ කළ හැකිය. ෆේස්බුක්, ගූगल හෝ ලින්ක්ඩින් සමඟ පහසුවෙන් تسجيل වන්න. ෆේස්‌බුක්, ත්තු ඔන්ඩ්‍රයිව්, සහ වෙනත් ගණக்குகලට වැඩ කිරීම සඳහා එහි ගබඩා කරන ලද ගොනු සමඟ'."
         }
       ],
       "approved_at": null
@@ -293,8 +296,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistent use of capitalization. 'Facebook', 'Google', and 'LinkedIn' are capitalized in the English version, but only the first word of each is capitalized in the Slovak translation.  The translation should also capitalize 'Dropbox' and 'OneDrive'.",
-          "suggestion": "Pridajte Facebook, Google, LinkedIn, Dropbox a OneDrive."
+          "description": "Inconsistent use of capitalization. \"Pomocou Autorizačných kľúčov\" should be \"Pomocou autorizačných kľúčov\" to match the overall tone and readability.",
+          "suggestion": "Pomocou autorizačných kľúčov"
+        },
+        {
+          "type": "formatting",
+          "description": "Inconsistent use of capitalization. \"Facebooku, Googleu alebo LinkedInu\" should be \"Facebooku, Google alebo LinkedInu\" to match the overall tone and readability.",
+          "suggestion": "Facebooku, Google alebo LinkedInu"
         }
       ],
       "approved_at": null
@@ -311,13 +319,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistency in handling of the app names (Facebook, Google, LinkedIn). They should be consistently using the genitive case.",
-          "suggestion": "Помоћу кључева за ауторизацију можете да повежете услуге трећих страна са својим простором. Пријавите се лако са Facebook-ом, Google-ом или LinkedIn-ом. Додајте Dropbox, OneDrive и друге налоге да бисте радили са датотекама које су тамо ускладиштене."
+          "description": "Inconsistent use of diacritics. While 'Google-ом' and 'Facebook-ом' have diacritics, 'LinkedIn-ом' does not. This should be corrected for consistency.",
+          "suggestion": "LinkedIn-ом"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'ускладиштене' (uskladishtenе) is a bit clunky and formal. While technically correct, a more natural phrasing might be preferred.",
-          "suggestion": "Помоћу кључева за ауторизацију можете да повежете услуге трећих страна са својим простором. Пријавите се лако са Facebook-ом, Google-ом или LinkedIn-ом. Додајте Dropbox, OneDrive и друге налоге да бисте радили са датотекама које тамо чувају."
+          "description": "The word 'ускладиштене' (uskradishtene) which translates to 'stored' or 'warehoused' is not the most natural translation for 'stored' in this context. It implies physical storage, not digital.",
+          "suggestion": "чуване' (čuVane) - meaning 'saved' or 'kept', or 'налазе се тамо' (nalaze se tamo) - meaning 'are located there'."
         }
       ],
       "approved_at": null
@@ -327,24 +335,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'With Authorization keys' is translated as 'Pomoću ključeva za autorizaciju'. While technically correct, a more natural and user-friendly translation would be something like 'Koristeći ključeve za autorizaciju' or 'Uz pomoć ključeva za autorizaciju'.",
-          "suggestion": "Koristeći ključeve za autorizaciju"
+          "type": "formatting",
+          "description": "Inconsistency in capitalization of service names. \"Facebook-om\", \"Google-om\", and \"LinkedIn-om\" should consistently use capitalization or avoid the genitive case.",
+          "suggestion": "Consider using \"Facebook\", \"Google\", and \"LinkedIn\" or consistently using the genitive case for all service names (e.g., \"Facebook-om\", \"Google-om\", \"LinkedIn-om\")."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'space' is translated as 'prostorom'. While not technically incorrect, 'prostor' can have a broader meaning. A more specific and potentially better fit, especially in this context, might be 'nalog' (account) or 'radni prostor' (workspace), depending on the platform’s terminology.",
-          "suggestion": "nalog"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'Facebook-om', 'Google-om', and 'LinkedIn-om' are using the instrumental case incorrectly. They should use the dative case 'Facebooku', 'Googleu', and 'Linkedinu'.",
-          "suggestion": "Facebooku, Googleu, Linkedinu"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'work with files stored there' is translated as 'da biste radili sa datotekama koje su tamo uskladištene'. While not wrong, it's a bit verbose. A more concise and natural translation would be 'da biste radili sa datotekama na njima'.",
-          "suggestion": "da biste radili sa datotekama na njima"
+          "description": "The phrase \"koje su tamo uskladištene\" is a bit clunky. A more natural translation for 'stored there' would be 'čuvane tamo' or simply 'tamo'.",
+          "suggestion": "Replace \"koje su tamo uskladištene\" with \"čuvane tamo\" or \"tamo\"."
         }
       ],
       "approved_at": null
@@ -361,13 +359,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of \"Ключів авторизації\" is a genitive plural, which is grammatically correct but reads awkwardly.  A nominative plural (\"Ключі авторизації\") or a singular form (\"Ключ авторизації\") would improve readability.",
-          "suggestion": "Ключі авторизації / Ключ авторизації"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“сторонні сервіси” could be more accurately translated as \"зовнішні сервіси\" or \"сторонні сервіси\" in this context. While 'сторонні' is acceptable, 'зовнішні' emphasizes the external/third-party nature.",
-          "suggestion": "зовнішні сервіси"
+          "description": "The use of the non-breaking space ( ) creates unnecessary spacing. It disrupts the natural flow of the text and might look awkward.",
+          "suggestion": "Replace all instances of the non-breaking space ( ) with regular spaces."
         }
       ],
       "approved_at": null
@@ -384,8 +377,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"处理存储的文件\" (chǔlǐ cúnchǔ de wénjiàn) literally translates to \"process stored files\" which isn't the most natural way to describe working with files.  It implies an active process rather than just access.",
-          "suggestion": "使用 Dropbox、OneDrive 或其他帐户访问存储的文件"
+          "description": "The phrase 'With Authorization keys' is awkwardly translated as '使用授权密钥'. While technically correct, it could be more naturally translated as '通过授权密钥'.",
+          "suggestion": "通过授权密钥"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'work with files stored there' is a little literal. A more natural translation would indicate functionality with the files.",
+          "suggestion": "管理其中存储的文件"
         }
       ],
       "approved_at": null

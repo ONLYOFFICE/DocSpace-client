@@ -1,0 +1,28 @@
+{
+  "key_path": "AdminSetupRequired",
+  "content": "Admin setup required",
+  "content_en_sha1_hash": "bf3f876c4210b1ea6155208eaa45003ce5ae5a1f",
+  "created_at": "2025-09-10T09:59:17.185Z",
+  "updated_at": "2025-09-12T14:18:49.517Z",
+  "comment": {
+    "text": "This text appears within a UI element (likely a disabled state) to inform the user that administrator setup is necessary. It's displayed when a user attempts to access a feature requiring admin privileges and lacks those permissions. Translators should ensure the meaning conveys the need for administrative intervention.",
+    "is_auto": true,
+    "updated_at": "2025-09-10T10:01:31.025Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
+      "line_number": 125,
+      "context": "if (isNeedConfig) {\n if (!isAdmin)\n return (\n <Text fontWeight={600} fontSize=\"12px\" className={styles.disabledText}>\n {t(\"AdminSetupRequired\")}\n </Text>\n );\n \n return (\n <Link",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Need enter settings",
   "content_en_sha1_hash": "7c8461e2e83ab971323d60705984dfd56a9fc031",
   "created_at": "2025-05-19T21:30:49.912Z",
-  "updated_at": "2025-05-21T00:44:15.612Z",
+  "updated_at": "2025-09-24T13:10:16.963Z",
   "comment": {
     "text": "This translation key is used for the label of a settings-related button or dialog. It displays the phrase \"Need enter settings\" to indicate that user settings need to be accessed or updated, typically in a plugin management interface.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 80,
-      "context": "const locale = getCookie(LANGUAGE) || \"en\";\n const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n return (\n <StyledContainer withDelete={withDelete}>\n {withSeparator ? <StyledSeparator /> : null}",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
+      "line_number": 45,
+      "context": "const locale = getCookie(LANGUAGE) || \"en\";\n const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n return (\n <div\n className={classNames(styles.container, {",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تحتاج إدخال الإعدادات' is a literal translation that isn't the most natural phrasing. A more natural phrasing would convey the need to provide or configure settings.",
-          "suggestion": "قد تحتاج لتوفير الإعدادات (Qad tahtaaj li tawfeer al-i'dadaat) - This translates to 'You may need to provide settings' or 'تَكُون الإعدادات مطلوبة (Takoon al-i'dadaat matlooba) - This translates to 'Settings are required'."
+          "description": "The translation \"تحتاج إدخال الإعدادات\" is a literal translation that doesn't quite capture the intended meaning of \"Need enter settings.\" A more natural and accurate translation would convey the requirement to input or configure settings.",
+          "suggestion": "يجب إدخال الإعدادات"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Parametrləri daxil etməlisiniz\" is a technically correct translation of 'Need enter settings' but is a bit formal and less natural. A more common and natural phrasing would be 'Parametrləri qeyd etməlisiniz' or 'Parametrləri tələb edirsiniz'.",
-          "suggestion": "Parametrləri qeyd etməlisiniz"
+          "description": "The English phrase 'Need enter settings' is grammatically incorrect and suggests a need to input settings. 'Need enter' is not standard English. A more accurate English translation would be 'Requires entering settings' or 'Needs settings input'. The Azerbaijani translation 'Parametrləri daxil etməlisiniz' translates to 'You must enter parameters,' which is a reasonable interpretation of the intended meaning, but the English source is flawed.",
+          "suggestion": "The English source should be corrected to 'Requires entering settings' or 'Needs settings input'."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Нужни са настройки за влизане' doesn't accurately convey the meaning of 'Need enter settings'. It translates to 'Settings are needed for entering,' which is more complex than the original. A more direct translation would better reflect the original meaning.",
-          "suggestion": "Нужни са настройки"
+          "description": "The translation \"Нужни са настройки за влизане\" (Needed are settings for entering) doesn't accurately reflect the English phrase \"Need enter settings\". The English phrase implies a need for settings to be entered, not just that settings are required.",
+          "suggestion": "По-подходящ превод би бил: \"Трябват настройки за въвеждане\" or \"Необходими са настройки за въвеждане\"."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Einstellungen müssen eingegeben werden\" is grammatically correct but doesn't perfectly capture the brevity and directness of \"Need enter settings\". A more natural and equivalent translation would be something along the lines of \"Einstellungen erforderlich\" or \"Einstellungen eingeben\".",
-          "suggestion": "Einstellungen erforderlich"
+          "description": "The translation \"Einstellungen müssen eingegeben werden\" is a literal translation but sounds somewhat unnatural in German. A more natural phrasing would be 'Einstellungen sind einzugeben' or 'Es müssen Einstellungen eingegeben werden'.",
+          "suggestion": "Einstellungen sind einzugeben"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Χρειάζεται να εισαγάγετε ρυθμίσεις\" is not the most natural way to express \"Need enter settings\" in Greek. A more appropriate translation would be something like \"Απαιτούνται ρυθμίσεις\" or \"Πρέπει να εισαγάγετε ρυθμίσεις\". The current translation literally translates 'need to enter settings' which isn't exactly what the English phrase implies.",
-          "suggestion": "Consider \"Απαιτούνται ρυθμίσεις\" or \"Πρέπει να εισαγάγετε ρυθμίσεις\"."
+          "description": "The English phrase \"Need enter settings\" is grammatically incorrect. A more accurate English equivalent would be \"Need to enter settings\" or \"Requires settings input.\" The Greek translation \"Χρειάζεται να εισαγάγετε ρυθμίσεις\" is a literal translation of the *incorrect* English phrase.  It means 'Needs to enter settings'.",
+          "suggestion": "Consider revising the English source to 'Need to enter settings' or 'Requires settings input'. If 'Need enter settings' must remain, the Greek translation should be revised to reflect the odd phrasing."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Es necesario introducir ajustes' is accurate but could be more natural. 'Introducir' implies a more formal or technical setting. A more common and natural phrasing would be 'Hay que introducir ajustes' or 'Se deben introducir ajustes'.",
-          "suggestion": "Hay que introducir ajustes"
+          "description": "The translation \"Es necesario introducir ajustes\" is technically correct but sounds somewhat formal and verbose for the simple English phrase \"Need enter settings.\" A more natural and concise translation would better reflect the original intent. \"Need enter settings\" implies a requirement or a prompt to input settings.",
+          "suggestion": "Consider \"Se deben ingresar ajustes\" or \"Hay que ingresar ajustes\" for a more natural and common phrasing."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Need enter settings\" is not a complete or natural sentence. A more accurate translation would depend on the intended meaning. \"Tarvitsee sisäänpääsyasetukset\" translates to \"Needs access settings,\" which doesn't fully capture the original meaning. The original English might mean 'Requires entering settings', 'Needs settings to be entered', or similar.",
-          "suggestion": "Consider re-evaluating the original English phrase for clarity and provide a more accurate translation based on the intended meaning. Possible suggestions include 'Vaatii asetusten syöttämisen' (Requires entering settings) or 'Tarvitsee asetustiedot' (Needs settings data)."
+          "description": "The Finnish translation \"Tarvitsee sisäänpääsyasetukset\" doesn't accurately convey the meaning of \"Need enter settings\". \"Sisäänpääsyasetukset\" translates to 'access settings', while the English implies a requirement to input settings. A better translation would focus on the need to input or provide settings.",
+          "suggestion": "Tarvitsee syöttää asetukset"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Il est nécessaire de saisir les paramètres' is accurate in conveying the meaning, but a more natural and concise phrasing would be preferred. 'Need enter settings' is quite direct, and while the translation is functionally correct, it's a bit formal for a UI message.",
-          "suggestion": "Consider 'Veuillez saisir les paramètres' or 'Entrez les paramètres'"
+          "description": "The translation \"Il est nécessaire de saisir les paramètres\" is overly formal for the original, simpler \"Need enter settings\". A more natural and equivalent translation would be something along the lines of \"Veuillez saisir les paramètres\" or \"Entrez les paramètres\".",
+          "suggestion": "Veuillez saisir les paramètres"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Need enter settings\" is grammatically incorrect. A more accurate English equivalent would be \"Need to enter settings\" or \"Requires settings entry.\" The Armenian translation, while understandable, doesn't perfectly capture the slightly awkward phrasing of the original English. It's a literal translation of the incorrect English.",
-          "suggestion": "Consider revising the English to 'Need to enter settings' or 'Requires settings entry'. A more fitting Armenian translation for 'Need to enter settings' could be 'Պետք է մուտքագրել կարգավորումները' (which is already provided), but ensure consistency if 'Requires settings entry' is used in the English source."
+          "description": "The English phrase \"Need enter settings\" is not grammatically correct. A more accurate translation would be something like \"Need to enter settings\". The Armenian translation, while understandable, doesn't fully capture the intended nuance of needing to perform an action.",
+          "suggestion": "Consider a more literal translation reflecting the need to *perform* the action.  Perhaps: \"Սպասվում է կարգավորումներ մուտքագրելու համար\" (Aspazvum e kargavorumner mutyagrelu hamar - 'Settings entry is required'). However, the best approach depends on the overall context of the application."
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'È necessario inserire le impostazioni' is a literal translation but doesn't fully convey the concise meaning of 'Need enter settings'. A more natural and accurate translation would be 'Devono essere inserite le impostazioni' or 'È richiesto l'inserimento delle impostazioni'.",
-          "suggestion": "Devono essere inserite le impostazioni"
+          "description": "The translation \"È necessario inserire le impostazioni\" is a valid sentence but doesn't perfectly capture the brevity and directness of \"Need enter settings\". A more accurate and concise translation would be something like \"Occorre inserire le impostazioni\" or \"Inserire le impostazioni\".",
+          "suggestion": "Occorre inserire le impostazioni"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"設定の入力\" while technically correct, is a bit stiff and doesn't quite capture the nuance of \"Need enter settings\". A more natural translation would imply a requirement or necessity.",
-          "suggestion": "設定が必要です (Settkei ga hitsuyou desu) - \"Settings are required\" or 設定の入力を求められます (Settkei no nyuutsū o motomeraremasu) - \"Settings input is requested\"."
+          "description": "The English phrase \"Need enter settings\" is grammatically incorrect and lacks clarity. A more accurate English phrase would be \"Need to enter settings\" or \"Requires settings input\". The Japanese translation \"設定の入力\" is a reasonable translation of \"settings input\", but doesn't fully capture the nuance of needing to perform an action.",
+          "suggestion": "Consider revising the English source to \"Requires settings input\" or \"Need to enter settings\". The Japanese translation \"設定の入力\" is acceptable given the revised English."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Need enter settings' is grammatically incorrect and should ideally be 'Need to enter settings' or 'Must enter settings'. The Korean translation '설정을 입력해야 합니다' accurately conveys the intended meaning of 'must/need to enter settings', but a more polished English source would improve the translation quality.",
-          "suggestion": "Consider revising the English source to 'Need to enter settings' or 'Must enter settings'."
+          "description": "The translation '설정을 입력해야 합니다' while grammatically correct, is not the most natural or accurate translation of 'Need enter settings'. 'Need enter settings' implies a requirement or necessity to input settings. A more accurate translation might be '설정을 입력해야 합니다' or '설정 입력이 필요합니다' (Setting input is required).",
+          "suggestion": "설정 입력이 필요합니다"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຕ້ອງການເຂົ້າການຕັ້ງຄ່າ\" translates to \"Need to enter settings\" but a more natural and accurate translation of \"Need enter settings\" would be \"ຕ້ອງໃສ່ການຕັ້ງຄ່າ\" or \"ຕ້ອງການຕັ້ງຄ່າ\" or something similar emphasizing the necessity to configure.",
-          "suggestion": "ຕ້ອງໃສ່ການຕັ້ງຄ່າ"
+          "description": "The Lao translation \"ຕ້ອງການເຂົ້າການຕັ້ງຄ່າ\" translates to \"Need to enter settings\" or \"Want to enter settings\". While not entirely wrong, it's less direct and doesn't perfectly convey the original meaning of \"Need enter settings\". A more accurate translation might better reflect the urgency or requirement implied by 'Need'.",
+          "suggestion": "ຕ້ອງຕັ້ງຄ່າ"
         }
       ],
       "approved_at": null
@@ -189,13 +189,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Need enter settings' is somewhat awkward. A more natural English equivalent would be 'Requires settings' or 'Needs settings'. The Latvian translation 'Nepieciešams ievadīt iestatījumus' translates to 'Requires entering settings', which is accurate but potentially verbose compared to the original.",
-          "suggestion": "Consider whether a more concise Latvian translation is possible while maintaining accuracy. Depending on the context, 'Nepieciešami iestatījumi' (Requires settings) might be a better fit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Instellingen invoeren\" is not the most natural or idiomatic way to express \"Need enter settings\". While technically correct, it sounds somewhat awkward. A more natural translation would be \"Vul de instellingen in\" or \"Geef de instellingen op\".",
-          "suggestion": "Vul de instellingen in"
+          "description": "The Dutch translation 'Instellingen invoeren' while understandable, is a bit formal and not the most natural way to say 'Need enter settings'. A more colloquial translation would be better.",
+          "suggestion": "Overweeg: 'Vul de instellingen in' or 'Voer instellingen in'"
         }
       ],
       "approved_at": null
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Precisa inserir configurações' while understandable, isn't the most natural or accurate rendering of 'Need enter settings'. A more accurate and idiomatic translation would be 'É necessário inserir configurações' or 'É preciso inserir configurações'.",
-          "suggestion": "É necessário inserir configurações"
+          "description": "The translation 'Precisa inserir configurações' is a literal translation but doesn't quite capture the intended meaning of 'Need enter settings'. A more natural translation would convey a sense of requirement or necessity.",
+          "suggestion": "Consider alternatives like 'É necessário inserir configurações' (It is necessary to enter settings) or 'Configurações precisam ser inseridas' (Settings need to be entered)."
         }
       ],
       "approved_at": null
@@ -234,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Precisa inserir configurações\" is technically correct but could be more natural. \"Need enter settings\" implies a requirement to input settings. A more idiomatic translation would convey the same meaning.",
-          "suggestion": "Recomenda-se inserir configurações"
+          "description": "The translation 'Precisa inserir configurações' isn't the most natural or idiomatic way to convey 'Need enter settings'. A more accurate and fluent translation would be 'É necessário inserir configurações' or 'Necessário inserir configurações'.",
+          "suggestion": "É necessário inserir configurações"
         }
       ],
       "approved_at": null
@@ -246,8 +240,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Trebuie să definiți setările\" implies 'you need to define settings', whereas the English 'Need enter settings' suggests a requirement to input settings. 'Trebuie să introduceți setările' or 'Este necesară introducerea setărilor' would be more accurate.",
-          "suggestion": "Trebuie să introduceți setările"
+          "description": "The Romanian translation \"Trebuie să definiți setările\" is a more formal and complex translation than the original English \"Need enter settings\". The English phrase is simple and direct, suggesting a requirement to input settings. \"Trebuie să definiți setările\" translates to \"You need to define the settings\" which implies a more involved process.",
+          "suggestion": "Consider a more direct translation like \"Introduceți setările\" (Enter the settings) or \"Este nevoie de setări\" (Settings are needed)."
+        },
+        {
+          "type": "grammar",
+          "description": "While \"Trebuie să definiți setările\" is grammatically correct, it sounds a bit stiff in this context. The use of the subjunctive mood (\"definiți\") is less common in user interface instructions.",
+          "suggestion": "Consider a more conversational phrasing, such as 'Introduceți setările' which uses the imperative mood."
         }
       ],
       "approved_at": null
@@ -255,7 +254,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Нужно ввести настройки' is accurate in conveying the meaning of 'Need enter settings', but a more natural and idiomatic Russian phrasing might be preferable. \"Need enter settings\" is slightly awkward English, so the translation, while correct, reflects that awkwardness. A better translation could be 'Требуются настройки' or 'Необходимо ввести настройки'.",
+          "suggestion": "Consider 'Требуются настройки' or 'Необходимо ввести настройки'."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -264,8 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සැකසුම් යෙදිය යුතුය\" translates to \"Settings must be applied.\" which doesn't accurately reflect the English \"Need enter settings\". The English phrase implies a requirement to input settings, not that they must be applied.",
-          "suggestion": "Consider a translation like \"සැකසුම් ඇතුළත් කළ යුතුයි\" (Settings need to be entered) or \"සැකසුම් ලබාදිය යුතුය\" (Settings need to be provided)."
+          "description": "The Sinhala translation 'සැකසුම් යෙදිය යුතුය' translates to 'settings should be applied' which doesn't accurately convey the meaning of 'Need enter settings'. It implies a requirement to apply settings, rather than the need to input them.",
+          "suggestion": "A more accurate translation might be 'සැකසුම් ඇතුළත් කළ යුතුය' (Sakasuṁ athulatha kalayēya) which means 'settings must be entered' or 'සැකසුම් ටිකක් ඇතුළත් කරන්න' (Sakasuṁ tikak athulatha kalā) which means 'Enter some settings'."
         }
       ],
       "approved_at": null
@@ -273,13 +278,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Potrebujete zadať nastavenia' is a literal translation and slightly awkward in Slovak. A more natural phrasing would be 'Musíte zadať nastavenia' or 'Zadajte nastavenia'.",
-          "suggestion": "Musíte zadať nastavenia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -288,8 +287,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Potreben je vnos nastavitev\" is not the most natural or accurate translation of \"Need enter settings\". It implies that entering settings is required, but not necessarily that the user *needs* to do so. A more appropriate translation would convey the urgency or necessity.",
-          "suggestion": "Potrebno je vnesti nastavitve"
+          "description": "The translation \"Potreben je vnos nastavitev\" is not the most natural or accurate translation of \"Need enter settings.\" A more accurate and natural translation would convey the need for settings to be entered.",
+          "suggestion": "Potrebno je vnesti nastavitve."
         }
       ],
       "approved_at": null
@@ -300,8 +299,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Потребно је ући у подешавања' while grammatically correct, is a more formal way of saying 'Need enter settings'. A more direct and natural translation would be closer to 'Потребно је унети подешавања' or 'Унети подешавања'.",
-          "suggestion": "Потребно је унети подешавања"
+          "description": "The English phrase \"Need enter settings\" is not grammatically correct. A more accurate English equivalent would be \"Need to enter settings\" or \"Requires settings entry\". The Serbian translation, \"Потребно је ући у подешавања\", translates to something like \"It is necessary to enter settings\" which is more aligned with the corrected English phrase. While the Serbian translation isn't *wrong*, it's a slightly more formal and indirect translation of the original, potentially awkward phrasing in English.",
+          "suggestion": "Consider revising the English source to \"Need to enter settings\" or \"Requires settings entry\" for a more accurate Serbian translation."
         }
       ],
       "approved_at": null
@@ -312,7 +311,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Need enter settings' is not idiomatic. A more accurate translation would reflect the intent of requiring the user to access and modify settings. 'Potrebno je ući u podešavanja' is a reasonable attempt, but could be refined.",
+          "description": "The translation 'Potrebno je ući u podešavanja' is overly literal and not the most natural way to express 'Need enter settings' in Serbian. A more natural phrasing would be 'Potrebno je uneti podešavanja' or 'Neophodno je uneti podešavanja'.",
           "suggestion": "Potrebno je uneti podešavanja"
         }
       ],
@@ -324,7 +323,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Ayarları girmeniz gerekiyor\" is a literal translation and doesn't quite capture the intent of \"Need enter settings\". It's grammatically correct, but sounds unnatural in Turkish. A more natural phrasing would be \"Ayarların girilmesi gerekiyor\" or \"Ayarların doldurulması gerekiyor\".",
+          "description": "The translation 'Ayarları girmeniz gerekiyor' is a functional equivalent, but not the most natural or concise way to express 'Need enter settings'. A more direct and common translation would be 'Ayarların girilmesi gerekiyor'.",
           "suggestion": "Ayarların girilmesi gerekiyor"
         }
       ],
@@ -336,8 +335,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Need enter settings' is a slightly awkward construction. A more natural English phrase would be 'Need to enter settings' or 'Must enter settings'. The Ukrainian translation 'Необхідно ввести параметри' accurately conveys the meaning of 'Must enter settings' or 'Need to enter settings', but the original English is a bit unnatural.",
-          "suggestion": "Consider revising the original English to 'Need to enter settings' or 'Must enter settings' for better clarity and flow."
+          "description": "The English phrase 'Need enter settings' is a somewhat awkward construction. A more natural English equivalent might be 'Need to enter settings' or 'Requires settings input'. The Ukrainian translation 'Необхідно ввести параметри' is a correct translation of the latter ('Requires settings input'), but doesn't perfectly match the original, slightly clumsy English. While technically correct, it could be improved to better reflect the original intent. A more literal translation for 'Need enter settings' might be 'Потрібно ввести налаштування', but this is less formal.",
+          "suggestion": "Consider 'Потрібно ввести налаштування' for a more literal translation, or evaluate if the original English can be rephrased for a more natural Ukrainian translation based on the overall context."
         }
       ],
       "approved_at": null
@@ -348,8 +347,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cần vào cài đặt' while understandable, isn't the most natural or accurate translation of 'Need enter settings'. 'Enter settings' implies needing to configure or adjust settings. 'Cần vào cài đặt' implies needing to access settings.",
-          "suggestion": "Cần thiết lập cài đặt"
+          "description": "The translation 'Cần vào cài đặt' is not the most natural or accurate rendering of 'Need enter settings'. While it conveys a similar meaning, 'Need enter settings' implies a requirement to input settings.",
+          "suggestion": "Cần nhập cài đặt"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'vào' (to enter) doesn't quite fit the context of needing to configure settings. 'Nhập' (to input) is a better option.",
+          "suggestion": "Cần nhập cài đặt"
         }
       ],
       "approved_at": null
@@ -360,8 +364,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Need enter settings' is not grammatically correct. A more natural phrasing would be 'Need to enter settings' or 'Requires entering settings'. The Chinese translation '需要输入设置' accurately reflects 'Need to enter settings'.",
-          "suggestion": "Consider revising the English source to 'Need to enter settings' or 'Requires entering settings' for greater clarity, although the Chinese translation is accurate for the original phrasing."
+          "description": "The English phrase 'Need enter settings' is grammatically incorrect. A more appropriate phrasing would be 'Need to enter settings' or 'Requires entering settings'. The Chinese translation '需要输入设置' accurately translates 'Need to enter settings'. However, given the original English is incorrect, it's best to revise the source.",
+          "suggestion": "Revise the English source to 'Need to enter settings' or 'Requires entering settings'."
         }
       ],
       "approved_at": null

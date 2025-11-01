@@ -3,7 +3,7 @@
   "content": "The SMTP settings are needed to set up an email account which will be used to send notifications from the portal using your own SMTP server instead of the one {{organizationName}} uses. Please fill in all the fields and click the 'Save' button. You can use the 'Send Test Mail' button to check if all the settings you entered are correct and work as supposed.",
   "content_en_sha1_hash": "4bf36a3101ed85c6f1e5966715d026a0cf242ce9",
   "created_at": "2025-05-19T21:30:52.753Z",
-  "updated_at": "2025-05-28T09:30:02.650Z",
+  "updated_at": "2025-09-29T11:28:56.225Z",
   "comment": {
     "text": "\"This translation key is used to describe the SMTP settings section, explaining its purpose and guiding users on how to set up their own email account for sending notifications. It appears in a UI component where users configure email settings.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
-      "line_number": 90,
-      "context": "return (\n <StyledComponent withoutExternalLink={!integrationSettingsUrl}>\n <div className=\"smtp-settings_main-title\">\n <Text className=\"smtp-settings_description\">\n {t(\"Settings:SMTPSettingsDescription\", {\n organizationName: logoText,\n })}\n </Text>\n {integrationSettingsUrl ? (\n <Link",
+      "line_number": 60,
+      "context": "return (\n <StyledComponent withoutExternalLink={!smtpUrl}>\n <div className=\"smtp-settings_main-title\">\n <Text className=\"smtp-settings_description\">\n {t(\"Settings:SMTPSettingsDescription\", {\n organizationName: logoText,\n })}\n </Text>\n {smtpUrl ? (\n <Link",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation includes 'زر' (button) before 'حفظ' (Save) which is slightly awkward. It would read more naturally without the redundant 'زر'.",
-          "suggestion": "حفظ"
+          "description": "The Arabic translation lacks consistent use of quotation marks around button names ('حفظ' and 'إرسال بريد اختبار').",
+          "suggestion": "Ensure consistent use of Arabic quotation marks (\"\") around button names, like this: \"حفظ\" and \"إرسال بريد اختبار\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'بروتوكول نقل البريد الالكتروني' is a literal translation of SMTP. While technically correct, it’s quite verbose. A more user-friendly translation would consider using a more common or simplified term for SMTP, or even leaving it as 'SMTP' in parentheses, to make it more accessible to a wider audience.",
-          "suggestion": "بروتوكول نقل البريد الإلكتروني (SMTP)"
+          "description": "The phrase \"بروتوكول نقل البريد الالكتروني\" is a literal translation of SMTP. While technically correct, it's quite verbose for a user interface. A more user-friendly translation might be preferred, something closer to \"إعدادات البريد الإلكتروني\" (Email Settings).",
+          "suggestion": "Consider translating 'SMTP settings' to a more user-friendly term like \"إعدادات البريد الإلكتروني\"."
         }
       ],
       "approved_at": null
@@ -47,18 +47,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'The SMTP settings are needed...' is translated as 'SMTP parametrləri...lazımdır'. A more natural translation would be 'SMTP parametrləri...tələb olunur' or 'SMTP parametrləri...görə'.",
-          "suggestion": "SMTP parametrləri...tələb olunur"
+          "description": "The phrase 'The SMTP settings are needed' is a bit literal. A more natural translation would be 'SMTP parametrləri tələb olunur...' or 'SMTP parametrləri gərəkdir...' ",
+          "suggestion": "SMTP parametrləri tələb olunur və ya SMTP parametrləri gərəkdir."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'click the 'Save' button' is translated as '“Yadda saxla” düyməsini basın'.  A more natural and accurate phrasing would be '“Saxla” düyməsini klikləyin' or '“Saxla” düyməsinə vurun'.",
-          "suggestion": "“Saxla” düyməsinə vurun"
+          "description": "The phrase 'to set up an email account which will be used' can be simplified. The current translation is a bit verbose.",
+          "suggestion": "e-poçt hesabı yaratmaq üçün lazımdır"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'check if all the settings you entered are correct and work as supposed' is translated too literally.  A more natural phrasing would convey the intention to test the settings.",
-          "suggestion": "Siz daxil etdiyiniz parametrlərin düzgün işlədiyini yoxlamaq üçün \"Sınaq məktubu göndər\" düyməsindən istifadə edə bilərsiniz."
+          "description": "The phrase 'work as supposed' is a literal translation of an idiom. A more natural translation would be 'normal işləyir' or 'dəqiq işləyir'",
+          "suggestion": "dəqiq işləyir"
         }
       ],
       "approved_at": null
@@ -72,13 +72,50 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'z portálů' sounds slightly unnatural. It implies notifications are being sent *from* multiple portals. It should be clarified.",
+          "suggestion": "z portálu"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'která jste zadali fungují správně' is grammatically correct but a bit clunky. A more natural phrasing is preferred.",
+          "suggestion": "které jste zadali, jsou správné"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses uppercase 'Uložit' and 'Odeslat Test Mail'. It's more common to use lowercase or sentence case in Czech user interfaces unless it's a specific design choice.",
+          "suggestion": "uložit"
+        },
+        {
+          "type": "formatting",
+          "description": "Similarly, 'Odeslat Test Mail' should be lowercase or sentence case: 'Odeslat testovací e-mail'.",
+          "suggestion": "Odeslat testovací e-mail"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence 'Die SMTP-Einstellungen müssen Ihr E-Mail-Konto einrichten, es wird gebraucht...' is grammatically awkward. The phrasing 'es wird gebraucht' is not idiomatic.",
+          "suggestion": "Die SMTP-Einstellungen sind erforderlich, um ein E-Mail-Konto einzurichten..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'mithilfe Ihres eigenen SMTP-Servers statt eines vom {{organizationName}}' is a literal translation and doesn't flow naturally in German. 'statt eines vom {{organizationName}}' is clunky.",
+          "suggestion": "mithilfe Ihres eigenen SMTP-Servers anstelle des von {{organizationName}} verwendeten Servers."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure in 'Sie können den Button 'Test-E-Mail senden' verwenden, um zu prüfen, ob alle eingegeben Einstellungen korrekt sind und wie vorgesehen funktionieren.' is awkward.  'eingaben Einstellungen' should be 'eingegebenen Einstellungen'.",
+          "suggestion": "Sie können den Button 'Test-E-Mail senden' verwenden, um zu prüfen, ob alle eingegebenen Einstellungen korrekt sind und wie vorgesehen funktionieren."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -86,14 +123,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase \"Αποθήκευση\" is not consistently formatted. It should be enclosed in quotation marks throughout.",
-          "suggestion": "Replace «Αποθήκευση» with \"Αποθήκευση\" consistently."
+          "type": "incorrect_translation",
+          "description": "The phrase \"πύλη\" (pyli) translates to \"gateway\" which isn't the best fit for 'portal'. 'Πλατφόρμα' (platforma) or 'ιστότοπος' (istotopos - website) might be more appropriate.",
+          "suggestion": "Consider replacing 'πύλη' with 'πλατφόρμα' or 'ιστότοπος'."
         },
         {
-          "type": "formatting",
-          "description": "The phrase \"Αποστολή δοκιματικού email\" is not consistently formatted. It should be enclosed in quotation marks throughout.",
-          "suggestion": "Replace «Αποστολή δοκιματικού email» with \"Αποστολή δοκιματικού email\" consistently."
+          "type": "incorrect_translation",
+          "description": "The phrase \"όπως θα έπρεπε\" (opos tha eprepe) translates literally to \"as should be,\" which sounds awkward in this context.  A more natural phrasing would imply the settings work as intended.",
+          "suggestion": "Replace \"όπως θα έπρεπε\" with something like \"όπως αναμένεται\" (opos anamenetai - as expected) or \"όπως θα έπρεπε να λειτουργούν\" (opos theprepe na λειτουργoun - as they should function)."
         }
       ],
       "approved_at": null
@@ -104,18 +141,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Por favor rellene todos los campos\" is a bit formal and less common in modern Spanish. A more natural phrasing would be \"Por favor complete todos los campos\" or \"Complete todos los campos\".",
-          "suggestion": "Por favor complete todos los campos"
+          "description": "The phrase \"rellene todos los campos\" is a bit formal and less common in modern Spanish. A more natural phrasing would be \"complete todos los campos\" or simply \"complete todos los campos\".",
+          "suggestion": "complete todos los campos"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"trabajan como debían\" is grammatically correct but sounds slightly awkward. A more natural phrasing would be \"funcionan correctamente\" or \"funcionan como deberían\".",
-          "suggestion": "funcionan correctamente"
-        },
-        {
-          "type": "formatting",
-          "description": "The term 'Enviar mensaje de prueba' should be enclosed in single quotes as it is a button label.",
-          "suggestion": "'Enviar mensaje de prueba'"
+          "description": "The phrase \"trabajan como debían\" is awkward.  It's better to express this as \"funcionan correctamente\" or \"funcionan como deberían\".",
+          "suggestion": "funcionan como deberían"
         }
       ],
       "approved_at": null
@@ -126,18 +158,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Finnish translation includes a comma after 'tarvitaan'. While not strictly incorrect, it disrupts the flow and is less common in this context. Removing it improves readability.",
-          "suggestion": "SMTP asetuksia tarvitaan jotta voit perustaa sähköpostin viestien lähettämiseen portaalista käyttämällä omaa SMTP palvelintasi, sen sijaan mitä {{organizationName}} käyttää."
+          "description": "The translation uses a slightly informal tone. While acceptable, consider a more formal tone aligning with a settings description.",
+          "suggestion": "SMTP asetuksia tarvitaan sähköpostiviestien lähettämiseen portaalista käyttämällä omaa SMTP-palvelinta {{organizationName}}:n sijaan.  Täytä kaikki kentät ja klikkaa 'Tallenna' painiketta.  'Lähetä testiviesti' painikkeella voit tarkistaa asetusten oikeellisuuden."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'perustaa sähköpostin viestien lähettämiseen' is a bit clunky. It literally translates to 'to establish an email of message sending'. A more natural Finnish phrasing would convey the meaning of configuring or setting up.",
-          "suggestion": "SMTP asetuksia tarvitaan, jotta voit määrittää sähköpostin viestien lähettämiseen portaalista käyttämällä omaa SMTP palvelintasi, sen sijaan mitä {{organizationName}} käyttää."
-        },
-        {
-          "type": "formatting",
-          "description": "The repetition of 'painiketta' (button) is a bit repetitive. It would be better to use a pronoun or rephrase.",
-          "suggestion": "SMTP asetuksia tarvitaan, jotta voit määrittää sähköpostin viestien lähettämiseen portaalista käyttämällä omaa SMTP palvelintasi, sen sijaan mitä {{organizationName}} käyttää. Ole hyvä ja täytä kaikki kentät ja klikkaa Tallenna. Voit käyttää Lähetä testiviesti -toiminnon avulla tarkistaaksesi, että kaikki syöttämäsi asetukset ovat oikein ja toimivat."
+          "description": "’Ole hyvä ja’ is a somewhat redundant phrase. It is polite, but can be omitted without losing meaning.",
+          "suggestion": "Remove ‘Ole hyvä ja’ and the sentence begins ‘Täytä kaikki kentät...’"
         }
       ],
       "approved_at": null
@@ -147,9 +174,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'insérés' (inserted) doesn't quite capture the intended meaning of 'fill in'. A more accurate translation would be something like 'saisis' (entered/typed) or 'remplis' (filled).",
-          "suggestion": "Remplissez tous les champs et cliquez sur le bouton 'Enregistrer'. Vous pouvez utiliser le bouton 'Envoyer le message de test' pour vérifier si tous les paramètres saisis sont bien corrects et fonctionnent comme prévu."
+          "type": "formatting",
+          "description": "The phrase 'insérés' is slightly awkward and could be improved for clarity. It translates literally as 'inserted' which isn't the most natural phrasing in this context.",
+          "suggestion": "Utilisez le bouton 'Envoyer le message de test' pour vérifier si tous les paramètres saisis sont bien corrects et fonctionnent comme prévu."
         }
       ],
       "approved_at": null
@@ -160,13 +187,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a mix of formal and informal language. The phrase 'Խնդրում ենք լրացնել' (Please fill in) feels slightly formal given the overall tone of the English content.",
-          "suggestion": "Consider a more conversational phrasing like 'Լրացրեք բոլոր դաշտերը' (Fill in all fields)."
+          "description": "The Armenian translation includes a lot of long sentences. Breaking them into shorter, more readable sentences would improve the user experience.",
+          "suggestion": "Consider breaking up long sentences for better readability. For example, the first sentence could be split into two."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'աշխատում են այնպես, ինչպես ենթադրվում էր' (work as supposed) is a somewhat awkward translation of 'work as supposed.'  It's not incorrect, but not ideal.",
-          "suggestion": "Consider a more direct and clearer phrasing like 'աշխատեն ըստ նախատեսվածի' (work according to the planned)."
+          "description": "“Այնպես, ինչպես ենթադրվում էր” (as supposed) is a bit awkward and formal. A simpler translation would be more natural.",
+          "suggestion": "Replace “այնպես, ինչպես ենթադրվում էր” with something like “այնպես, ինչպես սպասվում էր” (as expected) or simply “այնպես, ինչպես պետք էր” (as needed)."
         }
       ],
       "approved_at": null
@@ -177,18 +204,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'The SMTP settings are needed to set up an email account' is not accurately translated. 'Le impostazioni SMTP ti permettono di configurare un account di posta elettronica' implies the settings *allow* you to configure, rather than being *required*.  A more direct translation would be closer to 'Sono necessarie le impostazioni SMTP per configurare...' ",
-          "suggestion": "Sono necessarie le impostazioni SMTP per configurare un account di posta elettronica..."
+          "description": "The phrase \"Le impostazioni SMTP ti permettono di configurare un account di posta elettronica\" is a bit awkward. A more natural phrasing would be \"Le impostazioni SMTP sono necessarie per configurare un account di posta elettronica\".",
+          "suggestion": "Le impostazioni SMTP sono necessarie per configurare un account di posta elettronica"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'using your own SMTP server instead of the one {{organizationName}} uses' is a bit awkward. A more natural phrasing in Italian would improve readability.",
-          "suggestion": "utilizzando il tuo server SMTP invece di quello utilizzato da {{organizationName}}."
+          "description": "The word \"utilizzare\" can be replaced with a more concise and elegant word like \"usare\" or \"utilizzare\" in this context.",
+          "suggestion": "Puoi usare il pulsante 'Invia messaggio di prova' per controllare le impostazioni inserite."
         },
         {
           "type": "formatting",
-          "description": "The sentence 'Puoi utilizzare il pulsante 'Invia messaggio di prova' per controllare le impostazioni inserite.' should have a period at the end. Although implied in conversational Italian, for documentation, a full stop is preferred.",
-          "suggestion": "Puoi utilizzare il pulsante 'Invia messaggio di prova' per controllare le impostazioni inserite."
+          "description": "The English content uses the word 'instead' which is not present in the Italian translation. It's important to convey the same meaning.",
+          "suggestion": "Le impostazioni SMTP ti permettono di configurare un account di posta elettronica che sarà usato per inviare le notifiche dal portale, al posto di quello usato da {{organizationName}}."
         }
       ],
       "approved_at": null
@@ -199,18 +226,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"あなた自身のSMTPサーバーを使用してポータルから通知を送信するために使用するメールアカウントを設定するために必要です\" is overly verbose and doesn't accurately convey the simple meaning of the English \"The SMTP settings are needed to set up an email account which will be used to send notifications from the portal using your own SMTP server\". It’s difficult to understand.",
-          "suggestion": "SMTP設定は、{{organizationName}}が使用するSMTPサーバーの代わりに、お客様自身のSMTPサーバーを利用してポータルから通知を送信するためにメールアカウントを設定するために必要です。"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is a bit long and complex for natural Japanese flow. It can be broken down for better readability.",
-          "suggestion": "SMTP設定は、お客様自身のSMTPサーバーを使用してポータルから通知を送信するために必要なメールアカウントを設定する際に使用します。{{organizationName}}が使用するSMTPサーバーの代わりに、お客様のサーバーを利用できます。すべてのフィールドに入力し、'保存'ボタンをクリックしてください。テストメールを送信する'ボタンを使って、入力した設定が正しいか確認できます。"
+          "description": "The phrase 'あなた自身のSMTPサーバーを使用して' is a bit awkward and formal. It directly translates to 'using your own SMTP server' but sounds unnatural in Japanese.  A more natural phrasing would convey the same meaning.",
+          "suggestion": "SMTP設定は、{{organizationName}}が使用するSMTPサーバーの代わりに、独自SMTPサーバーを使用してポータルから通知を送信するためにメールアカウントを設定するために必要です。"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'テストメールを送信する' is a literal translation of 'Send Test Mail', it might sound slightly unnatural. A more common phrasing would be more concise.",
-          "suggestion": "テストメールを送信'ボタンを使って設定を確認できます。"
+          "description": "The phrase 'テストメールを送信する' is clunky.  A more natural expression would be 'テストメールの送信'.",
+          "suggestion": "テストメールの送信ボタンを使って、入力したすべての設定が正しく、想定通りに動作するかどうかを確認することができます。"
+        },
+        {
+          "type": "formatting",
+          "description": "The Japanese translation has a very long sentence. It's better to break it into smaller, more readable sentences. While technically correct, it's not user-friendly.",
+          "suggestion": "SMTP設定は、ポータルから通知を送信するためにメールアカウントを設定する際に必要です。{{organizationName}}が使用するSMTPサーバーの代わりに、あなた自身のSMTPサーバーを使用できます。すべてのフィールドに入力し、'保存'ボタンをクリックしてください。テストメールの送信ボタンを使って、入力したすべての設定が正しく、想定通りに動作するかどうかを確認することができます。"
         }
       ],
       "approved_at": null
@@ -221,13 +248,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"자체 SMTP 서버를 사용하여 포털에서 알림을 전송하는 데 사용할 이메일 계정을 설정하는 데 필요합니다\" is overly verbose and complex. A more natural translation would be something like \"자체 SMTP 서버를 사용하여 포털에서 알림을 보내기 위한 이메일 계정을 설정하는 데 필요합니다.\" ",
-          "suggestion": "SMTP 설정은 자체 SMTP 서버를 사용하여 포털에서 알림을 보내기 위한 이메일 계정을 설정하는 데 필요합니다."
+          "description": "The phrase \"자체 SMTP 서버를 사용하여 포털에서 알림을 전송하는 데 사용할 이메일 계정을 설정하는 데 필요합니다\" is a bit clunky. A more natural translation would emphasize that the settings are *for* configuring an email account for sending notifications.",
+          "suggestion": "SMTP 설정은 {{organizationName}}의 서버 대신 자체 SMTP 서버를 사용하여 포털에서 알림을 보내기 위한 이메일 계정을 설정하는 데 필요합니다."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase '작동하는지 확인할 수 있습니다' is slightly awkward.  A smoother phrasing would improve readability.",
-          "suggestion": "'테스트 메일 전송' 버튼을 통해 입력하신 모든 설정이 올바르게 작동하는지 확인할 수 있습니다."
+          "type": "formatting",
+          "description": "There's a slight imbalance in sentence length and flow. Combining the first and second sentence could improve readability.",
+          "suggestion": "SMTP 설정은 {{organizationName}}의 서버 대신 자체 SMTP 서버를 사용하여 포털에서 알림을 보내기 위한 이메일 계정을 설정하는 데 필요합니다. 모든 필드를 입력하고 '저장' 버튼을 클릭하세요."
         }
       ],
       "approved_at": null
@@ -237,14 +264,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Lao translation uses Lao script which is generally read from left to right. It's important to ensure the presentation aligns with Lao reading conventions.",
-          "suggestion": "Ensure the text is displayed and rendered correctly from left to right within the application."
+          "type": "spelling",
+          "description": "The word 'ປະຕູ' (door) is used instead of 'ເວັບໄຊ້' (website) or a more appropriate term for 'portal'.",
+          "suggestion": "ປ່ຽນ 'ປະຕູ' ໃຫ້ເປັນ 'ເວັບໄຊ້' ຫຼື ຄຳ ອື່ນທີ່ ເໝາະ ສົມ ກັບ 'portal'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ປະຕູ\" (door) in \"ຈາກປະຕູ\" is likely a mistranslation of 'portal'. It should reflect the meaning of 'portal' or 'platform'.",
-          "suggestion": "Replace \"ປະຕູ\" with a term that accurately describes 'portal' or 'platform', such as \"ເວັບໄຊ້\" (website) or a more specific Lao equivalent depending on the context."
+          "description": "The phrase 'ເຊີບເວີ SMTP ຂອງທ່ານເອງແທນທີ່ {{organizationName}}' could be more clearly translated. It's not immediately obvious that the user is replacing the organization's server with their own.",
+          "suggestion": "ປ່ຽນເປັນ 'ເຊີບເວີ SMTP ຂອງເຈົ້າ ທີ່ບໍ່ໃຊ້ເຊີບເວີຂອງ {{organizationName}}' ຫຼື ຄຳ ແນະ ນຳ ອື່ນໆ ທີ່ ຊັດເຈນ ກວ່າ"
+        },
+        {
+          "type": "formatting",
+          "description": "There's inconsistency in spacing around punctuation.",
+          "suggestion": "Review all punctuation marks to ensure consistent spacing throughout the entire text."
         }
       ],
       "approved_at": null
@@ -261,13 +293,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'aan te maken' implies 'to create' an email account, whereas the original English suggests 'to set up'. It's a subtle difference, but 'set up' conveys a more accurate meaning in this context.",
-          "suggestion": "De SMTP-instellingen zijn nodig om een e-mailaccount in te richten dat wordt gebruikt..."
+          "description": "The phrase 'aan te maken' (to create) in 'om een e-mailaccount aan te maken' is awkward. A more natural phrasing would be 'om een e-mailaccount in te stellen' (to configure an email account).",
+          "suggestion": "De SMTP-instellingen zijn nodig om een e-mailaccount in te stellen dat..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'verzend' should be 'sturen'.",
-          "suggestion": "U kunt de knop 'Verzenden Testmail' gebruiken om te controleren of alle instellingen die u hebt ingevoerd juist zijn en correct werken."
+          "description": "The use of 'U' (formal you) might feel too formal for a portal setting description. Considering a more informal 'Je' could improve user experience.",
+          "suggestion": "Je kunt de knop 'Verzenden Testmail' gebruiken om te controleren of alle instellingen die u hebt ingevoerd juist zijn en naar wens werken."
         }
       ],
       "approved_at": null
@@ -278,8 +310,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase \"Wyślij wiadomość testową\" should ideally have quotation marks consistently applied throughout the text. Currently, it has the opening quote but not the closing one.",
-          "suggestion": "Replace \"Wyślij wiadomość testową\" with \"Wyślij wiadomość testową\"."
+          "description": "The Polish translation uses quotation marks (“ ”) which are not the standard Polish quotation marks ( „ ”).",
+          "suggestion": "Replace “Zapisz” and “Wyślij wiadomość testową” with „Zapisz” and „Wyślij wiadomość testową” respectively."
         }
       ],
       "approved_at": null
@@ -290,13 +322,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'correio eletrónico' can be shortened to 'e-mail' for better readability and consistency with common usage in Portuguese, especially in technical contexts. While 'correio eletrónico' is technically correct, it feels a bit formal.",
-          "suggestion": "e-mail"
+          "description": "The translation uses 'Guardar' for 'Save' and 'Enviar email de teste' for 'Send Test Mail'. While understandable, consistent terminology is preferred. It might be better to use more common or standardized terms in this context.",
+          "suggestion": "Consider using more standardized terms like 'Salvar' for 'Save' and 'Enviar Email de Teste' or 'Teste de Email' for 'Send Test Mail'."
         },
         {
-          "type": "formatting",
-          "description": "Using 'introduzidas' instead of 'inseridas' or 'preenchidas' makes the sentence sound slightly awkward. 'Inseridas' or 'preenchidas' would be more natural.",
-          "suggestion": "preenchidas"
+          "type": "incorrect_translation",
+          "description": "The phrase 'correio eletrónico' is a somewhat formal way of saying 'email'. While not incorrect, it can be replaced with a more common term.",
+          "suggestion": "Replace 'correio eletrónico' with 'email' or 'endereço de email'."
         }
       ],
       "approved_at": null
@@ -313,8 +345,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Trimite un e-mail de testare' is a direct translation of 'Send Test Mail'. A more natural Romanian phrasing would be 'Trimite e-mail de test'.",
-          "suggestion": "Trimite e-mail de test"
+          "description": "The phrase 'Trimite un e-mail de testare' is a direct translation of 'Send Test Mail' and sounds slightly unnatural in Romanian. It would be more natural to use 'Trimite email de test'.",
+          "suggestion": "Trimite email de test"
         }
       ],
       "approved_at": null
@@ -325,13 +357,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Пожалуйста, заполните все поля и нажмите на кнопку 'Сохранить'' is slightly awkward. The repetition of 'на кнопку' is unnecessary and can be improved.",
-          "suggestion": "Пожалуйста, заполните все поля и нажмите кнопку 'Сохранить'."
+          "description": "The phrase 'Тестовое письмо' (Test letter) is less common than 'Отправить тестовое письмо' (Send test mail). While understandable, 'Отправить тестовое письмо' aligns more closely with the English 'Send Test Mail'.",
+          "suggestion": "Replace 'Тестовое письмо' with 'Отправить тестовое письмо'."
         },
         {
-          "type": "formatting",
-          "description": "The phrase 'всё ли работает как полагается' is a bit colloquial. A more formal alternative would enhance the professional tone of the documentation.",
-          "suggestion": "все ли параметры работают корректно"
+          "type": "incorrect_translation",
+          "description": "The phrase 'и всё ли работает как полагается' is a bit wordy and could be more concise. While technically correct, it loses some of the natural flow of the English phrasing.",
+          "suggestion": "Replace 'и всё ли работает как полагается' with 'и все работает правильно'."
         }
       ],
       "approved_at": null
@@ -342,23 +374,23 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The abbreviation 'ස.තැ.හු.ක.' appears multiple times and is likely an incorrect transliteration of SMTP. While Sinhala uses abbreviations, repeated use without clear definition or common understanding creates confusion.",
-          "suggestion": "Replace all instances of 'ස.තැ.හු.ක.' with 'SMTP' or a more common Sinhala equivalent if one exists. Consider adding a brief explanation of SMTP in parentheses the first time it's used (e.g., 'SMTP (Simple Mail Transfer Protocol)')."
+          "description": "The abbreviation 'ස.තැ.හු.ක.' is repeated and appears awkward. It represents SMTP.",
+          "suggestion": "Replace repeated 'ස.තැ.හු.ක.' instances with 'SMTP' or a more natural phrasing like 'ඊමේල්' (email)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'ඔබ ඇතුල් කළ සියළුම සැකසුම් නිවැරදි දැයි සහ සිතැඟි පරිදි ක්‍රියා කරයි දැයි පරීක්‍ෂා කිරීමට 'අත්හදා බැලීමේ තැපෑලක් යවන්න' බොත්තම භාවිතා කිරීමට හැකිය.' is a bit convoluted.  It could be phrased more directly.",
+          "suggestion": "Replace with: 'ඔබ ඇතුල් කළ සැකසුම් නිවැරදිව ක්‍රියාත්මක වේවි දැයි පරීක්‍ෂා කිරීමට 'අත්හදා බැලීමේ තැපෑලක් යවන්න' බොත්තම භාවිතා කරන්න.' (Use the 'Send Test Mail' button to check if the entered settings are correct and working)."
         },
         {
           "type": "formatting",
-          "description": "The repeated use of punctuation, specifically the periods within the abbreviation, is not standard Sinhala practice and can appear disjointed.",
-          "suggestion": "Remove unnecessary periods within abbreviations. For example, 'SMTP' should simply be 'SMTP' rather than 'ස.තැ.හු.ක'."
+          "description": "The translation contains a mix of abbreviations and full words which can make it difficult to read. Consistency is needed.",
+          "suggestion": "Ensure consistent use of either abbreviations or full words throughout the translation for better readability.  Consider explaining 'SMTP' on first usage."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'සියළුම ක්‍ෂේත්‍ර පුරවා' (siyāluma kṣētra pūrvā) is a rather literal translation of 'fill in all the fields.' While understandable, it sounds less natural in Sinhala. A more fluent phrasing would be something like 'සියළුම කොටස් පුරවා' or 'සියළුම තොරතුරු සපයන්න'.",
-          "suggestion": "Replace 'සියළුම ක්‍ෂේත්‍ර පුරවා' with 'සියළුම කොටස් පුරවා' or 'සියළුම තොරතුරු සපයන්න'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'සිතැඟි පරිදි ක්‍රියා කරයි' (sitheṅi paridī kriyā karayī) translates to 'works as supposed'. A more natural translation for 'work as supposed' in this context would be something like 'සිදු විය යුතු පරිදි ක්‍රියා කරයි' or 'ඔබට අවශ්‍ය පරිදි ක්‍රියා කරයි'.",
-          "suggestion": "Replace 'සිතැඟි පරිදි ක්‍රියා කරයි' with 'සිදු විය යුතු පරිදි ක්‍රියා කරයි' or 'ඔබට අවශ්‍ය පරිදි ක්‍රියා කරයි'."
+          "description": "The phrase 'සියළුම ක්‍ෂේත්‍ර පුරවා' (purava) could be improved to something more natural like 'සියළුම කොටස් පුරවා' (kotas purava) or simply 'සියළුම තොරතුරු පුරවා' (thorathuru purava) or 'සියළුම අඩංගු කර' (adangu karanu)",
+          "suggestion": "Replace 'සියළුම ක්‍ෂේත්‍ර පුරවා' with 'සියළුම කොටස් පුරවා' or 'සියළුම තොරතුරු පුරවා'."
         }
       ],
       "approved_at": null
@@ -375,18 +407,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ena {{organizationName}} uporabe\" is grammatically incorrect and doesn't clearly convey the intended meaning. It seems to be trying to say 'that {{organizationName}} uses'.",
-          "suggestion": "namesto tistega, ki ga {{organizationName}} uporablja"
+          "description": "The phrase \"namesto ene {{organizationName}} uporabe\" is grammatically incorrect and doesn't accurately convey the meaning of \"instead of the one {{organizationName}} uses\". It implies that the organization uses only one instance.",
+          "suggestion": "namesto tistega, ki ga uporablja {{organizationName}}"
         },
         {
           "type": "grammar",
-          "description": "The sentence \"Gumb 'Pošli testno sporočilo' lahko uporabite za preverjanje, če vse vnesene nastavitve delujejo pravilno.\" is a bit convoluted. A more natural phrasing would improve readability.",
-          "suggestion": "Z gumbom 'Pošlji testno sporočilo' lahko preverite, ali so vnesene nastavitve pravilne."
+          "description": "The sentence \"Prosim izpolnite vsa polja in pritisnite gumb 'Shrani'.\" could be improved for flow. The use of 'Prosim' feels slightly formal and can be improved for a better user experience.",
+          "suggestion": "Izpolnite vsa polja in pritisnite gumb 'Shrani'."
         },
         {
           "type": "formatting",
-          "description": "The quotation marks around 'Pošli testno sporočilo' should match the English quotation marks. It currently uses different quotation marks, making it inconsistent.",
-          "suggestion": "Gumb 'Pošlji testno sporočilo' lahko uporabite za preverjanje, če vse vnesene nastavitve delujejo pravilno."
+          "description": "The sentence \"Gumb 'Pošli testno sporočilo' lahko uporabite za preverjanje, če vse vnesene nastavitve delujejo pravilno.\" has an awkward flow. The use of 'lahko uporabite' is a little verbose.",
+          "suggestion": "Uporabite gumb 'Pošli testno sporočilo' za preverjanje, če vse vnesene nastavitve delujejo pravilno."
         }
       ],
       "approved_at": null
@@ -396,14 +428,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'Pošaljite probnu poštu' in the Serbian translation should be in the same formatting style as 'Сачувај'. While it's understandable, consistency suggests it should also be in Cyrillic. A more consistent formatting would be 'Проверите пробну пошту'.",
-          "suggestion": "Проверите пробну пошту"
+          "type": "spelling",
+          "description": "The word 'подешавања' (settings) is spelled correctly, but it's slightly informal for a settings description. A more formal term might be preferred.",
+          "suggestion": "Consider using 'поставке' (postavke) instead of 'подешавања' (podešavanja) for a more formal tone."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation of 'Send Test Mail' as 'Pošaljite probnu poštu' is grammatically correct but could be more naturally translated as 'Проверите пробну пошту' in this context.  'Pošaljite' implies sending; 'Proverite' implies checking/verifying which is closer to the original intent.",
-          "suggestion": "Проверите пробну пошту"
+          "type": "formatting",
+          "description": "The button label 'Pošaljite probnu poštu' (Send Test Mail) isn't consistently formatted with the rest of the text, which uses Cyrillic script. It mixes Cyrillic and Latin characters.",
+          "suggestion": "Translate 'Send Test Mail' entirely to Cyrillic: 'Шаљите пробну пошту'."
         }
       ],
       "approved_at": null
@@ -414,18 +446,23 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'podešavanja' is a direct transliteration of 'settings' and might be perceived as slightly unnatural in this context. While technically correct, 'postavke' might be more commonly used and flow better.",
-          "suggestion": "SMTP postavke su potrebna..."
+          "description": "The word 'podešavanja' is a Serbian word often used in informal contexts. While technically correct, 'postavke' would be more appropriate for a formal setting like configuration settings.",
+          "suggestion": "postavke"
         },
         {
           "type": "grammar",
-          "description": "The sentence 'SMTP postavke su potrebna...' uses the feminine plural form ('potrebna') which is grammatically incorrect. It should be masculine plural 'potrebni'.",
-          "suggestion": "SMTP postavke su potrebni..."
+          "description": "The phrase 'Molimo vas da popunite sva polja i kliknete na dugme ‘Sačuvaj’.' is slightly awkward. A more natural phrasing would be 'Molimo vas da popunite sva polja i kliknite na dugme ‘Sačuvaj’.'",
+          "suggestion": "Molimo vas da popunite sva polja i kliknite na dugme ‘Sačuvaj’."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Pošaljite probnu poštu’ is slightly colloquial. A more professional wording would be 'Pošaljite testnu poštu'.",
+          "suggestion": "Pošaljite testnu poštu"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Pošaljite probnu poštu' translates to 'Send test mail', but a more natural Serbian phrasing would be 'Pošaljite test e-poštu' or simply 'Pošaljite testnu poštu'.",
-          "suggestion": "Pošaljite testnu poštu"
+          "description": "While technically conveys the meaning, 'radite kako treba' is an awkward translation of 'work as supposed'. A better translation would convey the intended meaning of 'function correctly' or 'work properly'.",
+          "suggestion": "funkcionišu ispravno"
         }
       ],
       "approved_at": null
@@ -435,19 +472,24 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'başın' is a misspelling of 'basın'.",
-          "suggestion": "basın"
+          "type": "incorrect_translation",
+          "description": "The phrase \"kendi SMTP sunucunuzu kullanarak portalınızdan bildirim göndermek için eposta hesabınızı ayarlarken gerekli olacaktır\" is a somewhat convoluted translation of \"The SMTP settings are needed to set up an email account which will be used to send notifications from the portal using your own SMTP server\". It's not entirely inaccurate, but it lacks clarity and reads awkwardly. A more natural Turkish phrasing would improve readability.",
+          "suggestion": "Kendi SMTP sunucunuzu kullanarak portalınızdan bildirim göndermek için bir e-posta hesabı ayarlamanız gerekir. Bu ayarlar için gerekli bilgiler aşağıdadır."
         },
         {
-          "type": "grammar",
-          "description": "The sentence 'SMTP ayarları {{organizationName}}'in kullandığının yerine kendi SMTP sunucunuzu kullanarak portalınızdan bildirim göndermek için eposta hesabınızı ayarlarken gerekli olacaktır' is a bit convoluted and could be clearer. It’s passive and lengthy.",
-          "suggestion": "SMTP ayarları, portalınızdan kendi SMTP sunucunuzu kullanarak bildirim göndermek için e-posta hesabınızı ayarlarken gereklidir. {{organizationName}}'in kullandığı sunucu yerine kendi sunucunuzu kullanabilirsiniz."
+          "type": "incorrect_translation",
+          "description": "'Kaydet' tuşuna başın' is grammatically incorrect. The correct form is 'Kaydet' tuşuna tıklayın or 'Kaydet' tuşuna basın.",
+          "suggestion": "'Kaydet' tuşuna tıklayın."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'girdğiniz tüm ayarların doğru olduğunu ve çalıştığını deneyebilirsiniz' is a bit clunky. The verb 'deneyebilirsiniz' implies an experiment, which isn't the intended meaning. A more natural phrasing would be 'doğru olup olmadığını kontrol edebilirsiniz'.",
+          "suggestion": "'doğru olup olmadığını kontrol edebilirsiniz.'"
         },
         {
           "type": "formatting",
-          "description": "Inconsistent capitalization. 'Test Postası Gönder' should be 'Test Postası Gönder' (consistent capitalization)",
-          "suggestion": "Test Postası Gönder"
+          "description": "The repeated use of the word 'tuşunu' can be streamlined.  Consider using 'Kaydet' and 'Test Postası Gönder' directly when referring to the buttons.",
+          "suggestion": "Use 'Kaydet' and 'Test Postası Gönder' directly in the sentences instead of 'Kaydet tuşunu' and 'Test Postası Gönder tuşunu'."
         }
       ],
       "approved_at": null
@@ -455,7 +497,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation includes a lowercase 'ї' in 'використовується' which should be uppercase 'Використовується' to match the capitalization of 'Надіслати тестовий лист' and the overall tone.",
+          "suggestion": "Налаштування SMTP потрібні для налаштування облікового запису електронної пошти, що буде Використовуватися для надсилання сповіщень із порталу за допомогою вашого власного SMTP-сервера замість того, що використовує {{organizationName}}."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -463,14 +511,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase \"gửi thông báo từ cổng thông tin\" could be improved. It's a bit clunky.  It could be rephrased for better flow.",
-          "suggestion": "gửi thông báo từ hệ thống"
+          "type": "incorrect_translation",
+          "description": "The phrase \"Cài đặt SMTP là cần thiết\" translates literally to 'SMTP settings are necessary'. A more natural translation would be something like 'Cài đặt SMTP là bắt buộc' (SMTP settings are required) or 'Bạn cần thiết lập cài đặt SMTP'.",
+          "suggestion": "Bạn cần thiết lập cài đặt SMTP"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'hoạt động đúng như dự kiến' is a literal translation of 'work as supposed'. While understandable, it sounds slightly unnatural in Vietnamese. A more idiomatic expression is needed.",
-          "suggestion": "hoạt động bình thường"
+          "description": "The phrase \"Gửi Mail thử nghiệm\" is a literal translation of 'Send Test Mail'. A more idiomatic expression would be something like 'Gửi thư thử' or 'Thử gửi email'.",
+          "suggestion": "Thử gửi email"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'đúng như dự kiến ​​không' is grammatically a bit awkward. It implies a negative expectation.",
+          "suggestion": "đúng như mong đợi"
         }
       ],
       "approved_at": null
@@ -481,23 +534,23 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase '以设置一个电子邮件账户' is grammatically awkward. It would be better phrased to express the purpose more clearly.",
-          "suggestion": "使用SMTP设置以配置一个电子邮件账户"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The repetition of '以' is unnecessary and makes the sentence clunky. It suggests an attempt to directly translate English phrasing without considering natural Chinese flow. Also, '从从门户' is redundant.",
-          "suggestion": "使用SMTP设置，以配置一个电子邮件账户，用于使用您自己的SMTP服务器，而非{{organizationName}}使用的SMTP服务器，用于从门户发送通知。"
+          "description": "The phrase “以设置一个电子邮件账户，用于使用您自己的SMTP服务器” is awkward and grammatically incorrect. It implies setting up an email account *to use* your own SMTP server, which isn't the primary intent. The phrasing '为了设置一个邮件账户' would be more natural.",
+          "suggestion": "为了设置一个邮件账户，用于使用您自己的SMTP服务器"
         },
         {
           "type": "grammar",
-          "description": "The sentence '您可以使用“发送测试邮件”按钮，以检查您输入的所有设置是否正确，并照常工作' is wordy and awkward. '照常工作' isn't the most natural way to express 'work as supposed'.",
-          "suggestion": "您可以使用“发送测试邮件”按钮来验证您的所有设置是否正确。"
+          "description": "Repetition of “以” creates an unnatural reading flow. It's used excessively and can be reduced.",
+          "suggestion": "为了设置一个邮件账户，用于使用您自己的SMTP服务器，而不是{{organizationName}}使用的SMTP服务器。请填写所有字段，然后单击“保存”按钮。您可以使用“发送测试邮件”按钮检查您输入的所有设置是否正确。"
         },
         {
-          "type": "formatting",
-          "description": "The use of double characters ('从从') causes a formatting issue.",
-          "suggestion": "Remove the duplicate character."
+          "type": "spelling",
+          "description": "There's a duplicated character '从' in the sentence “以从从门户发送通知”.",
+          "suggestion": "以从门户发送通知"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence “您可以使用“发送测试邮件”按钮检查您输入的所有设置是否正确。” is somewhat stiff.  More natural phrasing would be used.",
+          "suggestion": "您可以使用“发送测试邮件”按钮来验证您输入的所有设置是否正确。"
         }
       ],
       "approved_at": null

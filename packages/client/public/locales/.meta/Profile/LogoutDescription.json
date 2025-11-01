@@ -3,7 +3,7 @@
   "content": "Note. All active connections except this connection will be logged out, as it is currently in use.",
   "content_en_sha1_hash": "20e853f73fa6e4fe2c68afd99e55c4ce5099c204",
   "created_at": "2025-05-19T21:30:53.368Z",
-  "updated_at": "2025-05-28T09:30:02.281Z",
+  "updated_at": "2025-05-26T07:57:32.317Z",
   "comment": {
     "text": "This translation key is used to display a notification when logging out all active connections. It will be shown in a modal dialog with a \"LogoutButton\" and serves as a security warning to users.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"as it is currently in use\" could be more naturally translated. A more idiomatic translation would convey the reason for the logout more clearly.",
-          "suggestion": "ملحوظة. سيتم تسجيل خروج جميع الاتصالات النشطة باستثناء هذا الاتصال، لأنه قيد الاستخدام حاليًا."
+          "description": "The phrase 'as it is currently in use' is a bit clunky and not the most natural way to express this in Arabic. While technically correct, it lacks fluency.",
+          "suggestion": "ملحوظة. سيتم تسجيل خروج جميع الاتصالات النشطة باستثناء هذا الاتصال، لأنه قيد الاستخدام."
         },
         {
           "type": "formatting",
-          "description": "While not incorrect, the punctuation could be slightly improved for better readability. Adding a space after the comma before 'حيث' would enhance clarity.",
-          "suggestion": "ملحوظة. سيتم تسجيل خروج جميع الاتصالات النشطة باستثناء هذا الاتصال ، حيث إنه قيد الاستخدام حاليًا."
+          "description": "The translation uses a comma (,) instead of a full stop (.) at the end of the first clause. Arabic typically uses a full stop.",
+          "suggestion": "ملحوظة. سيتم تسجيل خروج جميع الاتصالات النشطة باستثناء هذا الاتصال. لأنه قيد الاستخدام."
         }
       ],
       "approved_at": null
@@ -47,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'as it is currently in use' is not accurately reflected in the Azerbaijani translation. While 'hazırda istifadə edildiyi üçün' translates to 'because it is currently being used', it doesn't fully convey the nuance of a connection being actively used. A better phrasing might emphasize that the current session is actively ongoing.",
-          "suggestion": "Qeyd. Bundan başqa bütün aktiv bağlantılar hazırkı sessiyanın davam edəcəyi üçün sistemdən çıxacaq."
+          "description": "The translation 'sistemdən çıxacaq' literally translates to 'will be logged out of the system'. While conveying the general meaning, it's less natural than alternatives in Azerbaijani. A more fluent option would be something like 'bağlanacaq' (will be disconnected) or 'kəsiləcək' (will be terminated).",
+          "suggestion": "Consider using 'bağlanacaq' or 'kəsiləcək' instead of 'sistemdən çıxacaq'."
         },
         {
-          "type": "formatting",
-          "description": "The Azerbaijani translation does not follow the capitalization pattern of the English. 'Qeyd' should likely be capitalized as 'Qeyd:'.",
-          "suggestion": "Qeyd: Bundan başqa bütün aktiv bağlantılar hazırda istifadə edildiyi üçün sistemdən çıxacaq."
+          "type": "incorrect_translation",
+          "description": "The use of 'hazırda istifadə edildiyi üçün' is grammatically correct but a bit verbose for this context. A more concise phrasing would improve readability.",
+          "suggestion": "Consider replacing 'hazırda istifadə edildiyi üçün' with a shorter phrase like 'çünki istifadə olunur' or simply 'çünki istifadə edilir'."
         }
       ],
       "approved_at": null
@@ -64,13 +64,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'отписани' (otpisani) implies a dismissal or writing off, which isn't the intended meaning of 'logged out'. A more accurate translation would convey disconnection or termination of the sessions.",
-          "suggestion": "Всички активни връзки с изключение на тази ще бъдат прекъснати, тъй като тази връзка се използва в момента."
+          "description": "The word 'отписани' (otpisan) implies a more definitive disconnection or removal, whereas 'logged out' suggests a temporary state or session termination. A better translation for 'logged out' would convey a more temporary disconnection.",
+          "suggestion": "Всички активни връзки с изключение на тази ще бъдат прекратени, тъй като тази връзка се използва в момента."
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the repetition of 'тази връзка' is slightly awkward. It could be rephrased for better flow.",
-          "suggestion": "Всички активни връзки с изключение на текущата ще бъдат прекъснати, тъй като тя се използва в момента."
+          "type": "incorrect_translation",
+          "description": "The phrase 'тази връзка се използва в момента' (this connection is being used at the moment) is grammatically correct but can be more concise and natural-sounding.  It doesn't fully capture the nuance of 'currently in use'.",
+          "suggestion": "тъй като тази връзка е активна."
         }
       ],
       "approved_at": null
@@ -81,8 +81,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'as it is currently in use' is not accurately reflected in the Czech translation 'protože jsou právě používána'. The English implies the connection *being logged out* is in use, while the Czech implies *the connections* are being used. A more accurate translation would reflect the active connection being used.",
-          "suggestion": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože toto připojení je právě používáno."
+          "description": "The phrase 'are currently in use' is an awkward translation of 'as it is currently in use'. A more natural phrasing would be 'protože jsou právě aktivní' or 'protože je používáte'.",
+          "suggestion": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože je právě používáte."
         }
       ],
       "approved_at": null
@@ -99,7 +99,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'logged out' is better translated as 'αποσυνδεθούν' (aposindethoun) rather than 'τερματιστούν' (termatistoun). 'τερματιστούν' implies a more forceful termination.",
+          "description": "The phrase \"will be logged out\" is translated as \"θα τερματιστούν\" (tha termatistoún). While technically correct, a more natural and accurate translation of 'logged out' in this context would be 'αποσυνδεθούν' (aposindethoún) which means 'disconnected'.",
           "suggestion": "Σημείωση. Όλες οι ενεργές συνδέσεις θα αποσυνδεθούν, εκτός από αυτήν τη σύνδεση, καθώς χρησιμοποιείται αυτήν τη στιγμή."
         }
       ],
@@ -108,13 +108,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'logged out' is best translated as 'cerrarán sesión' rather than 'se desconectarán' to accurately convey the action of being signed out of a system. 'Desconectarán' is more suitable for disconnecting a device from a network.",
+          "suggestion": "Aviso. Todas las conexiones activas excepto esta conexión cerrarán sesión, ya que está actualmente en uso."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'kirjataan ulos' (logged out) is a passive voice construction that doesn't perfectly match the English's more direct phrasing. While not strictly wrong, it could be improved to be more natural.",
+          "suggestion": "Huom. Kaikki aktiiviset yhteydet paitsi tämä yhteys katkaistaan, koska se on tällä hetkellä käytössä."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -123,7 +135,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'logged out' is 'désactivées'. While 'désactivées' can mean deactivated, 'logged out' implies a more specific action related to user sessions. A more accurate translation would be something like 'déconnectées'.",
+          "description": "The word 'désactivées' (deactivated) doesn't quite convey the meaning of 'logged out' in this context. 'Log out' implies ending a session, and 'désactivées' sounds more like disabling a service.",
           "suggestion": "Remarque : toutes les connexions actives seront déconnectées, à l’exception de cette connexion, car elle est en cours d’utilisation."
         }
       ],
@@ -135,8 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"դուրս կգրվեն\" (durs kgrven) literally translates to 'will be written out' which is not the correct meaning of 'logged out'. A more accurate translation would convey the meaning of disconnection or termination of the session.",
-          "suggestion": "Consider using a phrase like \"կփակվեն\" (kphakven) which means 'will be closed/terminated' or \"կջնջվեն\" (kjndjven) which means 'will be deleted' depending on the intended technical meaning."
+          "description": "The phrase \"դուրս կգրվեն\" (durs kgrven) translates more literally to 'will be written out' or 'will be logged out'. While understandable, a more natural and accurate Armenian phrasing for 'logged out' would be something like \"վերջ կդառնան\" (verj kgardan) or \"չեղարկվեն\" (chelgarkven).",
+          "suggestion": "Consider using \"վերջ կդառնան\" (verj kgardan) or \"չեղարկվեն\" (chelgarkven) instead of \"դուրս կգրվեն\" (durs kgrven) to more accurately convey the meaning of 'logged out'."
         }
       ],
       "approved_at": null
@@ -146,9 +158,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a formal 'Ti preghiamo di notare' which is slightly more formal than the original 'Note'. While not incorrect, it introduces a tone difference.",
-          "suggestion": "Consider using a more informal opening such as 'Attenzione:' or simply 'Nota:' to better match the tone of the original."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'logged out' is translated as 'disconnesse'. While technically correct, 'chiuse' or 'terminate' might be more natural and less abrupt in Italian for the context of disconnecting connections.",
+          "suggestion": "Consider using 'chiuse' or 'terminate' instead of 'disconnesse' for a more natural feel."
         }
       ],
       "approved_at": null
@@ -159,13 +171,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'active connections' is not accurately conveyed by '接続' (connections). '継続中' (keizoku-chuu) or a similar term indicating ongoing/active state would be more precise.",
-          "suggestion": "ご注意：この接続以外の継続中の接続は、現在使用中のため、ログアウトされます。"
+          "description": "The phrase \"All active connections\" is not accurately conveyed. The translation focuses only on 'this connection' being active, implying the others are not necessarily active.",
+          "suggestion": "ご注意：現在アクティブな接続は、この接続以外すべてログアウトされます。"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, using a slightly less formal tone might be more appropriate for a user-facing message. The current phrasing feels a bit stiff.",
-          "suggestion": "ご注意：この接続以外の接続は、現在使用しているため、ログアウトされます。"
+          "description": "The colon after 'ご注意' is unusual in this context. While not strictly incorrect, it can feel abrupt.",
+          "suggestion": "ご注意：この接続以外の接続は、現在使用中のため、ログアウトされます。 (consider removing the colon or softening it with a phrase like 'なお、')"
         }
       ],
       "approved_at": null
@@ -176,8 +188,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'as it is currently in use' is not perfectly conveyed by '현재 사용 중이므로'. While understandable, a more direct and natural translation might be '현재 사용 중인 연결이기 때문에' (because it is a connection currently in use) or simply '현재 사용 중인 연결 때문에' (because of a connection currently in use).",
-          "suggestion": "참고. 현재 사용 중인 연결이기 때문에 이 연결을 제외한 모든 활성 연결이 로그아웃됩니다."
+          "description": "The translation '로그아웃됩니다' is a passive construction and doesn't fully convey the active nature of the English \"will be logged out.\"  A more natural Korean phrasing might emphasize who or what is causing the logout.",
+          "suggestion": "참고. 현재 사용 중이므로 이 연결을 제외한 모든 활성 연결은 시스템에 의해 로그아웃됩니다."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the punctuation in the Korean sentence is slightly less formal than typically found in a technical UI description. A period instead of a more conversational '습니다' ending would be appropriate.",
+          "suggestion": "참고. 현재 사용 중이므로 이 연결을 제외한 모든 활성 연결은 로그아웃됩니다."
         }
       ],
       "approved_at": null
@@ -188,13 +205,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຫມາຍ​ເຫດ​. ການ​ເຊື່ອມ​ຕໍ່​ທີ່​ໃຊ້​ງານ​ທັງ​ຫມົດ​ຍົກ​ເວັ້ນ​ການ​ເຊື່ອມ​ຕໍ່​ນີ້​ຈະ​ຖືກ​ອອກ​ຈາກ​ລະ​ບົບ​, ເນື່ອງ​ຈາກ​ວ່າ​ມັນ​ກໍາ​ລັງ​ໃຊ້​ໃນ​ປັດ​ຈຸ​ບັນ​.\" is a bit too literal and verbose for a user-facing message. It can be simplified while maintaining accuracy.",
-          "suggestion": "ຫມາຍ​ເຫດ​: ການ​ອອກ​ຈາກ​ລະ​ບົບ​ຈະ​ເຮັດ​ໃຫ້​ການ​ເຊື່ອມ​ຕໍ່​ອື່ນໆ​ທີ່​ກໍາ​ລັງ​ໃຊ້​ງານ​ຖືກ​ອອກ​ຈາກ​ລະ​ບົບ​ດ້ວຍ."
-        },
-        {
-          "type": "formatting",
-          "description": "The Lao translation includes a period after 'ຫມາຍ​ເຫດ', which might disrupt the flow of the sentence when displayed alongside other UI elements. It's recommended to ensure consistent punctuation within the application.",
-          "suggestion": "Consider removing the period after 'ຫມາຍ​ເຫດ' to maintain consistent formatting."
+          "description": "The phrase \"as it is currently in use\" isn't the most natural phrasing in Lao. It could be rephrased for better flow and clarity.",
+          "suggestion": "ຫມາຍ​ເຫດ​. ການ​ເຊື່ອມ​ຕໍ່​ທີ່​ໃຊ້​ງານ​ທັງ​ຫມົດ​ຍົກ​ເວັ້ນ​ການ​ເຊື່ອມ​ຕໍ່​ນີ້​ຈະ​ຖືກ​ອອກ​ຈາກ​ລະ​ບົບ​, ເນື່ອງ​ຈາກ​ມັນ​ກໍາ​ລັງ​ເຮັດ​ງານ​ຢູ່​."
         }
       ],
       "approved_at": null
@@ -205,8 +217,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"izrakstīti\" (logged out) while technically correct, isn't the most natural way to express the action of disconnecting connections in Latvian. A more idiomatic translation for 'logged out' in this context would be 'atslēgti' or 'noņemti'.",
-          "suggestion": "Piezīme. Visi aktīvie savienojumi, izņemot šo savienojumu, tiks atslēgti/noņemti, jo tas pašlaik tiek lietots."
+          "description": "The word 'izrakstīti' (logged out) in the Latvian translation could be misinterpreted as 'written out' rather than 'logged out' in the context of a connection. A more appropriate term for 'logged out' in this context would be 'atslēgti'.",
+          "suggestion": "Piezīme. Visi aktīvie savienojumi, izņemot šo savienojumu, tiks atslēgti, jo tas pašlaik tiek lietots."
         }
       ],
       "approved_at": null
@@ -223,13 +235,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"niniejszego\" is overly formal and doesn't quite capture the meaning of \"this connection\". It implies legal or official documentation.",
-          "suggestion": "Zostaną wylogowane, oprócz bieżącego połączenia."
+          "description": "The phrase \"niniejszego\" is overly formal and doesn't accurately convey the meaning of \"this connection.\" It can sound awkward in this context.",
+          "suggestion": "Wszystkie aktywne połączenia, oprócz tego połączenia, zostaną wylogowane, ponieważ jest ono obecnie w użyciu."
         },
         {
           "type": "incorrect_translation",
-          "description": "The pronoun 'ono' (it) refers back to 'niniejszego' which is awkward.  It's better to avoid the pronoun altogether in this context.",
-          "suggestion": "Zostaną wylogowane, ponieważ jest obecnie w użyciu."
+          "description": "While grammatically correct, 'ponieważ jest ono obecnie w użyciu' is slightly clunky. A more natural phrasing could improve readability.",
+          "suggestion": "ponieważ jest aktualnie używane."
         }
       ],
       "approved_at": null
@@ -240,18 +252,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'active connections' is translated as 'ligações'. While 'ligações' can mean connections, in this context, 'sessões' (sessions) would be a more accurate translation to reflect user sessions being logged out.",
-          "suggestion": "Todas as sessões ativas exceto esta sessão terão a sua sessão terminada, tal como está configurado atualmente."
+          "description": "The translation deviates from the original meaning. \"Connections\" is translated as \"ligações\", which while technically correct, implies physical connections. \"Connections\" in this context refers to user sessions or active logins.",
+          "suggestion": "Nota. Todas as sessões ativas, exceto esta sessão, serão terminadas, como configurado atualmente."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'logged out' is translated as 'terão a sua sessão terminada'. While technically correct, it's a bit verbose. A more natural and concise translation would be 'serão finalizadas' or 'serão encerradas'.",
-          "suggestion": "Todas as sessões ativas exceto esta sessão serão finalizadas, tal como está configurado atualmente."
+          "description": "The phrase \"terão a sua sessão terminada\" is awkward. It's a passive construction that isn't the most natural way to express this in Portuguese.  \"Como configurado atualmente\" is also a bit clunky.",
+          "suggestion": "Nota. Todas as sessões ativas, exceto esta sessão, serão terminadas, como está atualmente configurado."
         },
         {
           "type": "formatting",
-          "description": "The repetition of 'sessão' is a bit clunky. While accurate, it could be smoothed out.",
-          "suggestion": "Todas as sessões ativas exceto a sessão atual serão finalizadas, tal como está configurado atualmente."
+          "description": "The translation uses \"ligação\" and \"sessão\" interchangeably, which is confusing. Consistency is important.",
+          "suggestion": "Use either 'ligação' or 'sessão' consistently throughout the translation. The suggested correction uses 'sessão' for clarity."
         }
       ],
       "approved_at": null
@@ -262,8 +274,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"pois estão em uso no momento\" is a literal translation and sounds unnatural in Portuguese. A more natural phrasing would convey the same meaning.",
-          "suggestion": "pois ela está sendo utilizada no momento"
+          "description": "The English phrase 'will be logged out' is more accurately translated as 'serão finalizadas' or 'serão encerradas' in this context, rather than 'serão desconectadas'. 'Desconectadas' implies a disconnection from a network, while 'logged out' refers to a session termination.",
+          "suggestion": "Observação. Todas as conexões ativas, exceto esta conexão, serão finalizadas, pois estão em uso no momento."
         }
       ],
       "approved_at": null
@@ -273,14 +285,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'aceasta conexiune' sounds slightly awkward. It's grammatically correct but less natural than alternatives.",
-          "suggestion": "această conexiune poate fi înlocuită cu 'conexiunea curentă' or 'conexiunea actuală'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'as it is currently in use' is overly literal and doesn't flow naturally in Romanian. A more natural phrasing would be preferred.",
+          "suggestion": "Consider 'deoarece este utilizată în prezent' or 'deoarece este deja utilizată'."
         },
         {
           "type": "formatting",
-          "description": "The repetition of 'conexiune' can be slightly improved for readability.",
-          "suggestion": "Menţiune. Toate conexiunile active vor fi deconectate, cu excepţia conexiunii curente, deoarece aceasta este în curs de utilizare."
+          "description": "The use of 'ea' (she/it) to refer to the connection is slightly clunky. Using a more neutral pronoun would improve readability.",
+          "suggestion": "Replace 'ea' with a more neutral pronoun, potentially omitted or replaced with 'aceasta' depending on context."
         }
       ],
       "approved_at": null
@@ -291,13 +303,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'this connection' is ambiguous. 'Это' (eto) refers to a neuter gender object, but 'connection' is grammatically feminine in Russian. The translation lacks clarity and can be misinterpreted.",
-          "suggestion": "Внимание. Все активные подключения, кроме текущего, будут отключены, так как оно в данный момент используется."
+          "description": "The phrase \"кроме этого\" is not the most natural or precise way to say \"except this\" in the context of connections being logged out. It implies 'besides this one' rather than 'except for this one'.",
+          "suggestion": "кроме текущего"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The pronoun 'оно' (it) is ambiguous and doesn't clearly refer to a connection. It would be better to clarify what 'it' refers to.",
+          "suggestion": "кроме текущего подключения"
         },
         {
           "type": "formatting",
-          "description": "The punctuation and sentence structure could be improved for a more natural flow in Russian. While technically correct, it sounds somewhat stiff.",
-          "suggestion": "Внимание: все активные подключения, кроме текущего, будут отключены, поскольку оно сейчас используется."
+          "description": "The punctuation (comma before 'так как') might be improved for readability. A period or a more elegant phrasing might be preferable.",
+          "suggestion": "кроме текущего подключения. Так как оно используется в данный момент."
         }
       ],
       "approved_at": null
@@ -308,8 +325,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නික්මවනු ඇත' while technically meaning 'will be logged out', sounds unnatural in this context. A more natural phrasing would be something along the lines of 'ඉක්මාවනු ලැබේ' or 'ඉක්මාවනු වෙති'.",
-          "suggestion": "සටහන: මෙම සම්බන්ධතාවය හැර අනෙකුත් සියළුම සක්‍රිය සම්බන්ධතා ඉක්මාවනු ලැබේ."
+          "description": "The translation 'නික්මවනු ඇත' while technically meaning 'will be logged out', sounds unnatural in this context. A more natural phrasing would convey the action is being performed.",
+          "suggestion": "මෙම සම්බන්ධතාවය හැර අනෙකුත් සියළුම සක්‍රිය සම්බන්ධතා ස්වයංක්‍රියව බේරාගනු ලැබේ."
+        },
+        {
+          "type": "formatting",
+          "description": "The English content uses the word 'Note.' while the Sinhala translation doesn't explicitly have a corresponding introduction.  While not strictly incorrect, it slightly deviates from the original formatting.",
+          "suggestion": "සටහන: මෙම සම්බන්ධතාවය හැර අනෙකුත් සියළුම සක්‍රිය සම්බන්ධතා නික්මවනු ඇත."
         }
       ],
       "approved_at": null
@@ -326,8 +348,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'as it is currently in use' is not perfectly captured by 'ki je trenutno v uporabi'. A more natural and precise translation would be 'ki je že v uporabi' or 'ki jo trenutno uporabljate'. The original conveys a sense of ownership/active use by the user, which is lost.",
-          "suggestion": "ki je že v uporabi"
+          "description": "The phrase 'as it is currently in use' doesn't quite capture the nuance of the original English. A more accurate translation might convey the sense of being actively used to prevent logout.",
+          "suggestion": "Opomba. Vse aktivne povezave bodo odjavljene, razen tiste, ki je trenutno aktivna."
         }
       ],
       "approved_at": null
@@ -335,18 +357,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"пажњу\" is a bit formal and stiff in this context. While grammatically correct, a more natural phrasing would be preferable.",
-          "suggestion": "пажња"
-        },
-        {
-          "type": "formatting",
-          "description": "The repetition of \"конекције\" is slightly awkward. It can be streamlined for better readability.",
-          "suggestion": "Обратите пажњу. Све активне конекције осим ове ће бити одјављене, зато што је тренутно у употреби."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -355,8 +366,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"zato što je trenutno u upotrebi\" is a somewhat literal translation of \"as it is currently in use\" and isn't the most natural phrasing in Serbian. A more idiomatic translation would be \"jer se trenutno koristi\" or \"jer je trenutno aktivna\".",
-          "suggestion": "Jer se trenutno koristi."
+          "description": "The phrase 'zato što je trenutno u upotrebi' is a bit clunky and doesn't fully capture the nuance of 'as it is currently in use'. It's a literal translation but doesn't read naturally in Serbian.",
+          "suggestion": "A more natural phrasing would be something like 'jer se trenutno koristi' or 'jer je trenutno aktivna'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'će biti odjavljene' is grammatically correct but could be improved for flow. Using a more concise phrasing makes it sound less formal.",
+          "suggestion": "Consider 'odjavljuju se' instead of 'će biti odjavljene'."
         }
       ],
       "approved_at": null
@@ -367,13 +383,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Şu anda kullanımda olduğundan, bu bağlantı dışındaki tüm aktif bağlantıların oturumu kapatılacaktır.\" is a bit awkward. A more natural phrasing would be something like \"Bu bağlantı kullanımda olduğu için, diğer tüm aktif bağlantılar oturum kapatılacaktır.\" or \"Diğer tüm aktif bağlantılar, bu bağlantı kullanımda olduğu için oturum kapatılacaktır.\" The original phrasing is overly literal.",
-          "suggestion": "Diğer tüm aktif bağlantılar, bu bağlantı kullanımda olduğu için oturum kapatılacaktır."
+          "description": "The English phrase 'active connections' is translated as 'aktif bağlantıların'. While technically correct, a more natural and commonly used translation in Turkish for this context would be 'çalışan bağlantılar' or 'geçerli bağlantılar'. 'Aktif bağlantılar' sounds slightly less idiomatic.",
+          "suggestion": "Şu anda kullanımda olduğundan, bu bağlantı dışındaki tüm çalışan bağlantıların oturumu kapatılacaktır."
         },
         {
           "type": "formatting",
-          "description": "The Turkish translation does not start with 'Dikkat:' like the English 'Note.' This creates an inconsistency in the formatting.",
-          "suggestion": "Dikkat: Diğer tüm aktif bağlantılar, bu bağlantı kullanımda olduğu için oturum kapatılacaktır."
+          "description": "The Turkish translation starts with 'Not.' which is a direct translation of 'Note.'. While understandable, a more natural way to introduce this information in Turkish would be to omit it, or use a more conversational introductory phrase. The abruptness of 'Not.' might feel jarring.",
+          "suggestion": "Şu anda kullanımda olduğundan, bu bağlantı dışındaki tüm çalışan bağlantıların oturumu kapatılacaktır."
         }
       ],
       "approved_at": null
@@ -384,13 +400,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'яке зараз використовується' is overly literal and awkward. A more natural Ukrainian phrasing would be something like 'крім поточного'.",
-          "suggestion": "Примітка. Для всіх активних з’єднань, окрім поточного, буде здійснено вихід із системи."
+          "description": "The phrase \"яке зараз використовується\" is a literal translation that sounds unnatural in Ukrainian. A more natural phrasing would be 'яке використовується зараз' or 'яке зараз у користуванні'.",
+          "suggestion": "Для всіх активних з’єднань, окрім цього, яке використовується зараз, буде здійснено вихід із системи."
         },
         {
           "type": "formatting",
-          "description": "The comma after 'з’єднань' is unnecessary and disrupts the flow. While not strictly incorrect, it's not ideal.",
-          "suggestion": "Примітка. Для всіх активних з’єднань окрім поточного, буде здійснено вихід із системи."
+          "description": "The use of the em dash (–) in Ukrainian text is less common and can appear jarring. A standard comma or period would be more appropriate depending on the flow of the sentence.",
+          "suggestion": "Для всіх активних з’єднань, окрім цього, яке використовується зараз, буде здійснено вихід із системи."
         }
       ],
       "approved_at": null
@@ -398,18 +414,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'đăng xuất' for 'logged out' is technically correct but could be more natural. 'Xóa' or 'kết thúc' might be better depending on the specific system behavior.",
-          "suggestion": "Lưu ý. Tất cả các kết nối đang hoạt động ngoại trừ kết nối này sẽ bị kết thúc, vì nó hiện đang được sử dụng."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'bị' makes the sentence slightly awkward. It's a stylistic choice, but a simpler phrasing might be preferred.",
-          "suggestion": "Lưu ý. Tất cả các kết nối đang hoạt động ngoại trừ kết nối này sẽ được kết thúc, vì nó hiện đang được sử dụng."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -417,14 +422,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase '由于此连接当前正在使用' sounds slightly awkward. While technically correct, it's a bit verbose for a user-facing message.",
-          "suggestion": "由于当前连接正在使用"
+          "type": "incorrect_translation",
+          "description": "The phrase \"due to this connection currently being in use\" is a slightly unnatural translation. A more natural phrasing exists.",
+          "suggestion": "注意，因为此连接正在使用，所以除此之外的所有活动连接都将被注销。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word '故' (gù) feels overly formal and archaic in this context. It doesn't align with the friendly tone of the original English.",
-          "suggestion": "因此"
+          "type": "formatting",
+          "description": "The use of '故' (gu4) is slightly formal and could be replaced with a more common conjunction.",
+          "suggestion": "注意，因为此连接正在使用，所以除此之外的所有活动连接都将被注销。"
         }
       ],
       "approved_at": null

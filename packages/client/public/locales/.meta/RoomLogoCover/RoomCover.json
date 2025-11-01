@@ -3,7 +3,7 @@
   "content": "Room cover",
   "content_en_sha1_hash": "629fe77eb87170248f519263ffdf53af11eb35b4",
   "created_at": "2025-05-19T21:30:53.318Z",
-  "updated_at": "2025-05-28T09:30:02.181Z",
+  "updated_at": "2025-08-11T09:02:43.840Z",
   "comment": {
     "text": "The \"RoomCover\" translation key is used to display a localized string for a room cover image. It appears in a dialog box for editing room logos, where it serves as a title or placeholder text until an image is selected.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 134,
+      "line_number": 135,
       "context": "const editorBorderRadius = isProfileUpload ? 400 : 110;\n \n const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : t(\"RoomLogoCover:RoomCover\");\n \n const onResize = () => {\n const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;\n const screenHeight = document.documentElement.clientHeight;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 282,
-      "context": "withBodyScroll\n scrollBodyHeight={scrollBodyHeight}\n withBodyScrollForcibly={!!scrollBodyHeight}\n isScrollLocked={openColorPicker}\n >\n <ModalDialog.Header>{t(\"RoomLogoCover:RoomCover\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n forwardedRef={contentRef}\n scrollHeight={scrollH}\n covers={covers}",
+      "line_number": 287,
+      "context": "scrollBodyHeight={scrollBodyHeight}\n withBodyScrollForcibly={!!scrollBodyHeight}\n isScrollLocked={openColorPicker}\n dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>{t(\"RoomLogoCover:RoomCover\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n forwardedRef={contentRef}\n scrollHeight={scrollH}\n covers={covers}",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"غلاف الغرفة\" is a literal translation, it's not the most natural or commonly used phrase for 'room cover' in a Saudi Arabian context. It sounds somewhat formal and clunky.",
-          "suggestion": "Consider alternatives like \"تغليف الغرفة\" (Taghlif al-Ghurfa) which implies covering or wrapping, or a more descriptive phrase depending on the visual nature of the cover (e.g., \"صورة الغرفة\" - Surat al-Ghurfa - if it's an image)."
+          "description": "The translation \"غلاف الغرفة\" (ghilaf al-ghurfa) literally translates to \"cover of the room\". While understandable, \"Room cover\" often implies a decorative or protective cover for the room, not just the literal covering of the room itself. A more appropriate translation might emphasize this nuance.",
+          "suggestion": "Consider alternatives like \"تغطية الغرفة\" (taghtiyat al-ghurfa - room covering/decoration) or a more descriptive phrase depending on the intended use of 'Room cover'."
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaq örtüyü\" is not the most natural or accurate translation of \"Room cover.\" \"Örtüyü\" implies a covering, which isn't the primary meaning of a room cover image or design.",
-          "suggestion": "Consider \"Otaq üzü\" or \"Otaq qaplaması\" for a more appropriate translation, depending on the context. \"Otaq üzü\" is likely the best fit for a cover image."
+          "description": "The translation \"Otaq örtüyü\" doesn't accurately convey the meaning of \"Room cover.\" \"Örtüyü\" implies a covering or sheet, while \"Room cover\" refers to an image or graphic that covers a room's visual representation (e.g., in a booking website or app).",
+          "suggestion": "Consider alternatives like \"Otaqın üzü\" (Room's face/front), \"Otaqın təsviri\" (Room's image), or \"Otaqın qapağı\" (Room's cover - more literal but less common)."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Корица на стаята\" is a literal translation, it doesn't fully capture the meaning of 'Room cover' in this context. 'Room cover' often refers to an image or graphic that appears *over* or represents a room. 'Корица на стаята' literally means 'cover of the room,' which is a bit awkward.",
-          "suggestion": "Consider alternatives like \"Изображение на стая\" (image of the room), \"Обложка на стая\" (room cover - closer to the literal meaning but still potentially awkward), or a more context-dependent term depending on the specific meaning in the application."
+          "description": "While \"Корица на стаята\" is technically correct, it's not the most natural or idiomatic translation of \"Room cover\" in this context (likely referring to an image or graphic). A more fitting translation might be something like \"Изображение за стая\" or \"Покритие на стаята\".",
+          "suggestion": "Изображение за стая"
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation 'Zakrytí místnosti' translates to 'Room covering' or 'Room enclosure', not 'Room cover'. While not entirely wrong, it's not the most natural or accurate translation for the English term 'Room cover'.",
-          "suggestion": "Pokojová krycí obrazovka / Pokrytí pokoje (depending on context - screen cover or general covering)"
+          "description": "The Czech translation \"Zakrytí místnosti\" translates to 'Room covering' or 'Room closure' and doesn't accurately convey the meaning of 'Room cover' as a visual element or image.",
+          "suggestion": "Consider a translation like \"Pokryt místnosti\", \"Obrázek místnosti\", or \"Vizuální kryt místnosti\" depending on the intended meaning of 'Room cover'."
         }
       ],
       "approved_at": null
@@ -81,7 +81,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Raum-Cover' is understandable, a more natural and idiomatic translation of 'Room cover' in German would be 'Zimmerabdeckung' or 'Raumabdeckung'. 'Raum-Cover' sounds like a direct transliteration and might not be how a German speaker would typically describe it.",
+          "suggestion": "Zimmerabdeckung or Raumabdeckung"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Εξώφυλλο δωματίου' while technically correct, is quite literal and not the most natural way to say 'Room cover' in Greek. It translates to 'Room cover/exterior' and sounds somewhat formal or technical.",
-          "suggestion": "A more natural translation would be 'Κάλυμμα δωματίου' or 'Φωτογραφία δωματίου' depending on the context. 'Κάλυμμα' implies a covering, and 'Φωτογραφία' implies a photograph used as a cover."
+          "description": "While 'Εξώφυλλο δωματίου' is technically correct, it's a bit literal and not the most natural-sounding translation for 'Room cover' in this context. 'Room cover' often refers to a visual element or image representing the room, not just a cover in the general sense.",
+          "suggestion": "Διακοσμητικό δωματίου"
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Portada de la sala\" is technically correct, it's not the most natural or common way to say \"Room cover\" in Spanish. \"Fondo de pantalla de la habitación\" or \"Imagen de portada de la habitación\" would be more idiomatic.",
-          "suggestion": "Fondo de pantalla de la habitación"
+          "description": "While \"Portada de la sala\" is understandable, it's not the most natural or commonly used translation for 'Room cover'. 'Funda para la sala' or 'Cubierta de la sala' would be more idiomatic.",
+          "suggestion": "Funda para la sala"
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Huoneen etusivu' is not the most natural or accurate translation of 'Room cover'. While it literally translates to 'Room homepage', it doesn't convey the meaning of a cover image or design for a room.",
-          "suggestion": "Consider alternatives like 'Huoneen kansikuva' (Room cover image), 'Huoneen peitekuva' (Room cover picture), or 'Huoneen ulkoasu' (Room appearance/design)."
+          "description": "The translation \"Huoneen etusivu\" literally translates to \"Room's homepage\" which doesn't accurately convey the meaning of \"Room cover.\" A more appropriate translation would focus on the function of the cover.",
+          "suggestion": "Huonepeite"
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Սենյակի կազմ' while technically meaning 'room cover' or 'room design,' isn't the most natural or common way to refer to a 'room cover' image in a UI context. It sounds overly formal and design-focused. A more appropriate translation might focus on the visual aspect of covering the room, like a backdrop or image.",
-          "suggestion": "Consider alternatives like 'Սենյակի պատկեր' (Room image), 'Սենյակի ֆոնային պատկեր' (Room background image), or 'Սենյակի գեղմունակ պատկեր' (Room decorative image). The best option depends on the intended visual depiction."
+          "description": "While 'Սենյակի կազմ' is a literal translation of 'Room cover', it might not be the most natural or accurate translation in Armenian. 'Կազմ' often refers to the cover of a book or notebook. For a room cover, a more suitable translation might be 'Սենյակի պատվանդան' (Senyaki patvandzan) or 'Սենյակի ծածկույթ' (Senyaki tsadkuoyt).",
+          "suggestion": "Consider 'Սենյակի պատվանդան' (Senyaki patvandzan) or 'Սենյակի ծածկույթ' (Senyaki tsadkuoyt) as alternatives."
         }
       ],
       "approved_at": null
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຫຸ້ມຫ້ອງ' literally translates to 'room covering' or 'room wrap'. While not entirely wrong, 'Room cover' typically refers to a decorative or protective covering for a room, often a digital image or a physical sheet. A more accurate translation might convey this nuance.",
-          "suggestion": "Consider 'ຝາບັງຫ້ອງ' (fàa bang hông) which can mean 'room cover' or 'room covering' in the sense of decoration or protection. Alternatively, 'ພາບພື້ນຫ້ອງ' (phaap phuen hông) meaning 'room background' might be suitable depending on the context."
+          "description": "The Lao translation \"ຫຸ້ມຫ້ອງ\" literally translates to 'cover room'. While not entirely wrong, \"Room cover\" often refers to a decorative image or design element that covers a room (e.g., a wallpaper or header image). A more accurate translation might convey this sense of decoration or design.",
+          "suggestion": "Consider \"ພາບຫຸ້ມຫ້ອງ\" (image cover room) or \"ການອອກແບບຫ້ອງ\" (room design) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Telpas vāka foto\" literally translates to \"Room cover photo\". While understandable, it's not the most natural or concise way to say \"Room cover\" in Latvian. \"Telpas pārsegs\" or \"Telpas noformējums\" would be more accurate and idiomatic.",
-          "suggestion": "Telpas pārsegs"
+          "description": "The Latvian translation \"Telpas vāka foto\" literally translates to \"Room cover photo.\" While not entirely wrong, it's not the most natural or concise way to express \"Room cover.\" It adds \"foto\" (photo) which isn't necessary and changes the meaning slightly.",
+          "suggestion": "Telpas sega"
         }
       ],
       "approved_at": null
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Kamer omslag\" is a literal translation of \"Room cover\", it's not the most natural or common phrasing in Dutch. \"Kamerhoes\" or \"Ruimtehoes\" would be more typical for a cover used to protect or decorate a room.",
-          "suggestion": "Consider using \"Kamerhoes\" or \"Ruimtehoes\" for a more idiomatic translation."
+          "description": "While \"Kamer omslag\" is technically correct, it's not the most natural or idiomatic translation for \"Room cover.\" It sounds a bit literal and clunky.",
+          "suggestion": "Consider alternatives like \"Kamertent\" (room tent) or \"Ruimte omslag\" (space cover) depending on the intended meaning.  Further context would be needed to determine the best alternative."
         }
       ],
       "approved_at": null
@@ -207,13 +213,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Cobertura de sala\" is a literal translation of \"Room cover\", it's not the most natural or commonly used term in Portuguese (Brazil). \"Capa de sala\" would be a more idiomatic and frequently used translation.",
-          "suggestion": "Capa de sala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Copertă de sală\" literally translates to \"Gym cover\" and doesn't accurately represent the English term \"Room cover.\"  'Room cover' implies a covering for a room, not necessarily a gym. It could be a cover for furniture, a wall covering, etc.",
-          "suggestion": "Consider alternatives like \"Acoperire cameră\", \"Huză de cameră\", or \"Cameră acoperită\" depending on the specific context of what is being covered."
+          "description": "The translation 'Copertă de sală' is not the best equivalent for 'Room cover'. 'Copertă' generally refers to a cover for a book or object. 'Room cover' in this context likely refers to a decorative image or wallpaper covering a room or used in a room's design.",
+          "suggestion": "Consider alternatives like 'Imagine de fundal a camerei', 'Decor pentru cameră', or 'Acoperire decorativă a camerei' depending on the precise meaning."
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'කාමර ආවරණය' while technically translates to 'room covering', doesn't fully capture the nuance of 'room cover' which implies a decorative or featured image or element.  It's a more literal translation.",
-          "suggestion": "Consider 'කාමර ලාංඡනය' (kamara laanchhana) which translates to 'room logo' or 'room image', or 'කාමරය සැකසීම' (kamareya sakasima) which means 'room decoration'. The best option depends on the exact context of 'Room cover'."
+          "description": "The translation 'කාමර ආවරණය' while technically meaning 'room cover', sounds overly formal and not natural in common usage for a 'room cover' in this context (likely referring to a visual cover image).",
+          "suggestion": "කාමර වන්දක් (kamara wandak) - This translates to 'room image/picture' and is more commonly used for a cover image. Alternatively, 'කාමර හැඩය' (kamara hadaya) - 'room design/appearance' could be considered."
         }
       ],
       "approved_at": null
@@ -252,14 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kryt miestnosti' is a literal translation of 'cover' but doesn't accurately convey the intended meaning in this context. 'Room cover' typically refers to an image or design that covers a room's visual representation, not a physical covering of the room itself.",
-          "suggestion": "Pokrytie miestnosti",
-          "priority": "high"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Pokrytie miestnosti' is better, it can still feel awkward. A more natural translation might depend on the specific context of 'RoomLogoCover'.",
-          "suggestion": "Obrázok na kryt miestnosti"
+          "description": "The Slovak translation \"Kryt miestnosti\" translates more accurately to 'room cover' or 'covering of the room' rather than a general 'room cover'. While understandable, it's not the most natural or idiomatic translation for the intended meaning of a decorative or functional cover.",
+          "suggestion": "Consider alternatives like \"Obal miestnosti\", \"Prekrytie miestnosti\", or \"Dekoratívny kryt miestnosti\" depending on the specific context of the room cover."
         }
       ],
       "approved_at": null
@@ -270,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Naslovnica sobe\" is understandable, a more natural and accurate translation of \"Room cover\" would be \"pokrivalo sobe\" or \"prekritje sobe\". \"Naslovnica\" usually refers to a cover in the sense of a magazine or book.",
-          "suggestion": "pokrivalo sobe"
+          "description": "While 'Naslovnica sobe' is understandable, it's a somewhat literal and not the most natural translation of 'Room cover'. It sounds a bit clunky.",
+          "suggestion": "Consider alternatives like 'Pokrov sobe' or simply 'Zapestnica za sobo' (if referring to a decorative item) or 'Slika sobe' (if referring to a photo or image covering the room)."
         }
       ],
       "approved_at": null
@@ -282,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Насловница просторије\" is too literal and doesn't accurately convey the meaning of \"Room cover\" in this context. \"Насловница\" typically refers to the cover of a book or magazine. A more suitable translation would be something like \"Покривач собе\" or \"Слика просторије\" depending on the specific intended meaning.",
-          "suggestion": "Consider \"Покривач собе\" or \"Слика просторије\"."
+          "description": "The translation \"Насловница просторије\" is a literal translation of \"cover\" as \"cover page\" and \"room\" as \"room\". While understandable, it's not the most natural or idiomatic translation for 'Room cover' in this context. It suggests a cover *of* the room, rather than a design or image used *for* a room's presentation.",
+          "suggestion": "Consider alternatives like \"Покриће собе\", \"Сликовни материјал собе\", or \"Дизајн просторије\" depending on the specific context of the 'Room cover'."
         }
       ],
       "approved_at": null
@@ -294,8 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Naslovnica prostorije\" is understandable, it's not the most natural or idiomatic translation for 'Room cover'. 'Room cover' often refers to a decorative or protective cover for the room itself, or a cover image used to represent a room in a listing. 'Naslovnica prostorije' translates more literally as 'Room Cover Page' or 'Room Title Cover'.",
-          "suggestion": "Consider 'Pokrivač prostorije' or 'Slika prostorije' depending on the intended context. If it's a visual representation, 'Slika prostorije' might be more appropriate. If it's a physical cover, 'Pokrivač prostorije' is better."
+          "description": "While 'Naslovnica prostorije' is technically correct, it's a very literal and somewhat clunky translation of 'Room cover'. A more natural and common Serbian (Latin) translation would be 'Poklopac prostorije' or 'Prekrivač prostorije'.",
+          "suggestion": "Poklopac prostorije"
         }
       ],
       "approved_at": null
@@ -306,8 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Oda kapağı\" literally translates to \"Room lid\" or \"Room cover\" but it is not the most natural or commonly used term for a room cover in Turkish. A more appropriate translation would be 'Oda örtüsü' or 'Oda kılıfı'.",
-          "suggestion": "Oda örtüsü"
+          "description": "While \"Oda kapağı\" is a literal translation of \"Room cover\", it doesn't accurately convey the intended meaning in the context of a room logo cover. \"Kapağı\" implies a physical cover, which might not be accurate. A more suitable translation would describe the function or visual aspect of the cover.",
+          "suggestion": "Oda görseli kapağı"
         }
       ],
       "approved_at": null
@@ -324,8 +318,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Mặt ngoài của phòng\" (literally 'Outside face of the room') doesn't accurately convey the meaning of \"Room cover\". 'Room cover' refers to the image or graphic that overlays the room image or serves as a visual representation of the room.",
-          "suggestion": "Vỏ phòng (more closely represents a cover or shell), Hình ảnh trang trí phòng (decorative room image), or Ảnh bìa phòng (room cover image)."
+          "description": "The Vietnamese translation \"Mặt ngoài của phòng\" translates to \"Exterior of the room\" which is not the most natural or accurate translation of \"Room cover\". \"Room cover\" typically refers to an image or design covering the room's visual representation.",
+          "suggestion": "Phù hiệu phòng / Hình ảnh phòng / Hình nền phòng"
         }
       ],
       "approved_at": null
@@ -336,8 +330,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"房间封面\" (Fángjiān fēngmiàn) is a literal translation of \"room cover\", it might not be the most natural or commonly used term in Chinese. \"房间封面“ implies a cover *for* the room, which isn't the typical meaning of a 'room cover' in the context of, for example, a listing or website.",
-          "suggestion": "Consider alternatives like \"房源封面“ (Fángyuán fēngmiàn) for 'listing cover' or \"房间主图“ (Fángjiān zhǔtú) for 'room main image/cover', depending on the intended context."
+          "description": "The translation \"房间封面 \" while literally meaning \"room cover\" doesn't quite convey the intended meaning of 'Room cover' in the context of a logo or visual covering. It sounds too literal and might not be the best choice for marketing or UI.",
+          "suggestion": "Consider a more natural phrasing like \"房间封面图\" (room cover image), \"房间宣传图\" (room promotional image), or \"房间视觉封面\" (room visual cover), depending on the specific usage."
         }
       ],
       "approved_at": null

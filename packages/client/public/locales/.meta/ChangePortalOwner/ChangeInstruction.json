@@ -3,7 +3,7 @@
   "content": "To change the {{productName}} owner, please choose the name of the new owner below.",
   "content_en_sha1_hash": "bd9c11115488261945b3053d9085f2005e0ece2d",
   "created_at": "2025-05-19T21:30:56.984Z",
-  "updated_at": "2025-05-20T09:37:42.160Z",
+  "updated_at": "2025-08-21T11:22:39.798Z",
   "comment": {
     "text": "This translation key is used for a dialog instruction that guides users to select a new owner name when changing the ownership of a product named {{productName}}. It appears in a change portal owner dialog and provides a clear prompt to the user.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 184,
-      "context": "<StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" noSelect title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" noSelect title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </StyledPeopleSelectorInfo>\n \n {selectedUser ? (",
+      "line_number": 185,
+      "context": "<StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </StyledPeopleSelectorInfo>\n \n {selectedUser ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 184,
-      "context": "<StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" noSelect title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" noSelect title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </StyledPeopleSelectorInfo>\n \n {selectedUser ? (",
+      "line_number": 185,
+      "context": "<StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </StyledPeopleSelectorInfo>\n \n {selectedUser ? (",
       "module": "/packages/client"
     }
   ],
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"prostoru\" (space) is not the most accurate translation of \"owner\" in this context. While it's understandable, it's slightly off. 'Vlastníka' would be a more direct and accurate translation.",
+          "suggestion": "Chcete-li změnit vlastníka {{productName}}, vyberte níže jméno nového vlastníka."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -75,7 +81,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Ole hyvä ja valitse' is overly formal and sounds unnatural in this context. A more natural phrasing would be 'Valitse' or 'Valitse seuraavasta'.",
+          "suggestion": "Valitse"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The entire translation is slightly awkward. 'vaihtaaksesi {{productName}}-n omistajan' is complex and could be simplified. The sentence structure doesn't flow as naturally as it could.",
+          "suggestion": "Valitse seuraavasta nimen, jotta voit vaihtaa {{productName}}-n omistajan."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -111,7 +128,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses a space before the comma after 'ເຈົ້າຂອງ'. While not strictly incorrect, it's uncommon in Lao and can look slightly awkward. Consider removing the space.",
+          "suggestion": "ເພື່ອປ່ຽນເຈົ້າຂອງ {{productName}} , ກະລຸນາເລືອກຊື່ເຈົ້າຂອງໃໝ່ຂ້າງລຸ່ມນີ້."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,7 +182,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'හිමිකරු' (himikaru) is used twice, which is the correct translation for 'owner'.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing 'කරුණාකර පහතින් නව හිමිකරුගේ නම තෝරන්න' (karunaakar pahathin nava himikaruge nama thooranna) could be slightly improved for naturalness. A more colloquial phrasing might be preferable, although this isn't strictly incorrect.",
+          "suggestion": "කරුණාකර පහතින් නව හිමිකරු තෝරන්න."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation correctly preserves the use of {{productName}}.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +216,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Да бисте променили власника {{productName}}-а...' implies that the product itself is changing ownership, not the account or responsibility associated with the product. A more accurate translation would emphasize the change of responsibility or account ownership.",
+          "suggestion": "Да бисте пребацили одговорност за {{productName}}-у на новог власника, изаберите име испод."
+        },
+        {
+          "type": "formatting",
+          "description": "The possessive suffix '-а' on '{{productName}}-а' might be grammatically correct in some contexts, but it's a bit clunky and might not be necessary. It depends on the specific product name. It's advisable to check the product name and its declension rules to ensure correct usage or to avoid the suffix if possible.",
+          "suggestion": "Consider whether the suffix '-а' is truly necessary. If not, simply use '{{productName}}'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation includes an unnecessary hyphen after \"productName\".  It should be without the hyphen.",
+          "suggestion": "Da biste promenili vlasnika {{productName}} -a, izaberite ime novog vlasnika ispod."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -207,7 +263,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"owner\" as \"所有者\" (suǒyǒzhě) is technically correct but can sound overly formal or technical in this context. A more natural and user-friendly translation would be something like \"所有人\" (suǒyǒu rén) - meaning 'the person who owns it'.",
+          "suggestion": "要更改{{productName}}所有人，请在下面选择新所有者的姓名。"
+        }
+      ],
       "approved_at": null
     }
   }

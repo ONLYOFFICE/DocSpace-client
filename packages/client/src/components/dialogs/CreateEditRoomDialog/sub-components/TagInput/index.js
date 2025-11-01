@@ -63,6 +63,8 @@ const TagInput = ({
   tooltipLabel,
   onFocus,
   onBlur,
+  dataTestId,
+  isMobile,
 }) => {
   const inputRef = useRef();
   const [tagInput, setTagInput] = useState("");
@@ -70,7 +72,7 @@ const TagInput = ({
 
   const openDropdown = () => {
     if (isDisabled) return;
-    setIsScrollLocked(true);
+    // setIsScrollLocked(true);
     setIsDropdownOpen(true);
   };
 
@@ -100,7 +102,7 @@ const TagInput = ({
   };
 
   const handleBlur = () => {
-    closeDropdown();
+    !isMobile() && closeDropdown();
     onBlur && onBlur();
   };
 
@@ -133,6 +135,7 @@ const TagInput = ({
         onKeyDown={handleKeyDown}
         name="tagInput"
         tooltipLabel={tooltipLabel}
+        dataTestId={dataTestId}
       />
 
       <TagDropdown

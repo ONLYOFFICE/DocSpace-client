@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Siyahıdan seçin",
-  "ConnectingAccount": "Akkauntun qoşulması",
-  "DeleteFromTrash": "Seçilmiş elementlər zibil qutusundan silindi",
   "FileLocked": "Fayl Kilidləndi",
   "FileProtected": "Fayl parolla qorunur",
   "FileUnlocked": "Faylın Kilidi Açıldı",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive kataloqu",
   "FolderTitleWebDav": "WebDAV Kataloqu",
   "FolderTitleYandex": "Yandex Kataloqu",
-  "GuestReleaseTipDescripton": "Əvvəllər əlavə edilmiş bütün İstifadəçilər Qonaq oldular və indi yalnız {{productName}} administratorlarının Əlaqələr siyahısında mövcuddur. Qonaqlar artıq heç bir qrupun üzvü deyil. Siz həmişə onların növünü dəyişə və lazım gələrsə qrupa əlavə edə bilərsiniz.",
-  "GuestReleaseTipLink": "İstifadəçi növləri haqqında ətraflı məlumat əldə edin",
-  "LinkHasExpiredAndHasBeenDisabled": "Keçidin vaxtı bitib və deaktiv edilib",
   "LinkValidTime": "Bu link yalnız {{days_count}} gün ərzində etibarlıdır.",
   "NewForm": "PDF forma",
   "OwnerChange": "Sahibi dəyiş",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "Üçüncü tərəf xidmətləri",
   "TitleShowActions": "Fayl əyləmlərini göstər",
   "TitleShowFolderActions": "Qovluq əyləmlərini göstər",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "{{sectionName}} bölməsindən seçilmiş elementlər uğurla silindi."
 }

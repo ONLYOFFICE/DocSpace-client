@@ -3,7 +3,7 @@
   "content": "Select {{extension}} files",
   "content_en_sha1_hash": "ab8ac6b36fb55c14e37315654ed97c7fb6119fde",
   "created_at": "2025-05-19T21:30:48.401Z",
-  "updated_at": "2025-07-01T15:57:36.423Z",
+  "updated_at": "2025-08-04T07:30:01.765Z",
   "comment": {
     "text": "This translation key is used for the \"Select [extension] files\" text that appears when filtering by media type in a UI component. The text is intended to be displayed on a button or similar element that allows users to select multiple file extensions related to media. Translators should provide a phrase that accurately reflects this context, using the correct plural form for their language.",
     "is_auto": true,
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The German translation uses a hyphen where a space might be more natural. While technically correct, 'Dateien auswählen' often reads better with a space.",
-          "suggestion": "{{extension}} Dateien auswählen"
+          "description": "The German translation uses a hyphen '-' instead of a space before 'Dateien'. This is not typical in German and makes the phrase sound awkward. While technically understandable, it deviates from standard practice.",
+          "suggestion": "{{extension}}-Dateien auswählen -> {{extension}} Dateien auswählen"
         }
       ],
       "approved_at": null
@@ -113,9 +113,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ໄຟລ໌' (file) is repeated unnecessarily. While technically correct, it's stylistically awkward.",
-          "suggestion": "ເລືອກເອກະສານ {{extension}}"
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເລືອກເອກະສານໄຟລ໌ {{extension}}' is a literal translation that isn't the most natural way to express 'Select {{extension}} files' in Lao. 'ເອກະສານໄຟລ໌' (documents files) is redundant.",
+          "suggestion": "ເລືອກໄຟລ໌ {{extension}}"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Selectare fișiere {{extension}}' is a literal translation of 'Select {{extension}} files'. A more natural Romanian phrasing would be 'Alege fișiere {{extension}}' or 'Selectați fișiere {{extension}}'. 'Selectare' is a noun referring to the act of selecting, not the command to select.",
-          "suggestion": "Alege fișiere {{extension}}"
+          "description": "The translation 'Selectare fișiere {{extension}}' is a literal translation and doesn't sound natural in Romanian.  'Selectare' is a bit formal and less common than alternatives for 'Select'.",
+          "suggestion": "Selectează fișiere {{extension}}"
         }
       ],
       "approved_at": null
@@ -171,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation includes double curly braces '{{}}' which is likely not intended. It should be replaced with a single set of curly braces or removed if the intention is to display the variable directly.",
+          "suggestion": "{extension} ගොනු තෝරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -185,9 +191,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Select files' is best translated as 'Izberite datoteke', not 'Izberi datoteke'. 'Izberite' is the correct form to use with the plural 'datoteke'.",
-          "suggestion": "Izberite {{extension}} datoteke"
+          "type": "spelling",
+          "description": "The word 'datoteke' is correctly spelled, but might benefit from a more nuanced translation depending on the context of 'files'.  It is the general term for files.",
+          "suggestion": "Consider alternatives like 'naložene datoteke' (uploaded files) or a more context-specific term if applicable."
         }
       ],
       "approved_at": null
@@ -195,19 +201,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation does not include the proper spacing around the {{extension}} placeholder. It should be 'Изаберите {{extension}} датотеке'.",
+          "suggestion": "Изаберите {{extension}} датотеке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Izaberite datoteke {{extension}}' is a reasonable translation, but a more natural phrasing would be 'Odaberite datoteke {{extension}}'. 'Izaberite' is correct but less commonly used in this context.",
-          "suggestion": "Odaberite datoteke {{extension}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Vietnamese translation \"Chọn tập tin {{extension}} \" is missing a space after 'tập tin'.",
-          "suggestion": "Chọn tập tin {extension}"
+          "description": "Missing space after 'Chọn'",
+          "suggestion": "Chọn tập tin {{extension}} "
         }
       ],
       "approved_at": null

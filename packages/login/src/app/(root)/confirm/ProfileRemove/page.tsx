@@ -24,23 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getSettings } from "@/utils/actions";
+import { logger } from "logger.mjs";
+import { getSettings, getUserFromConfirm } from "@/utils/actions";
+
+import { TConfirmLinkParams } from "@/types";
+import { getStringFromSearchParams } from "@/utils";
 
 import ProfileRemoveForm from "./page.client";
 
-async function Page() {
-  const settings = await getSettings();
+type ProfileRemoveProps = {
+  searchParams: Promise<{ [key: string]: string }>;
+};
 
-  return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <ProfileRemoveForm
-          greetingSettings={settings.greetingSettings}
-          legalTerms={settings.externalResources.common?.entries.legalterms}
-        />
-      )}
-    </>
-  );
+async function Page(props: ProfileRemoveProps) {
+  logger.info("ProfileRemove page");
+
+  const { searchParams: sp } = props;
+  const searchParams = (await sp) as TConfirmLinkParams;
+  const uid = searchParams.uid;
+  const confirmKey = getStringFromSearchParams(searchParams);
+
+  const [settings, user] = await Promise.all([
+    getSettings(),
+    getUserFromConfirm(uid ?? "", confirmKey),
+  ]);
+
+  return settings && typeof settings !== "string" ? (
+    <ProfileRemoveForm
+      greetingSettings={settings.greetingSettings}
+      legalTerms={settings.externalResources?.common?.entries?.legalterms}
+      avatar={user?.avatarSmall}
+      displayName={user?.displayName}
+      email={user?.email}
+    />
+  ) : null;
 }
 
 export default Page;

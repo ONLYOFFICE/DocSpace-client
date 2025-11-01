@@ -3,7 +3,7 @@
   "content": "No records found",
   "content_en_sha1_hash": "96f4f9b2d6ff4a7e639152ace9aeefde1231d331",
   "created_at": "2025-05-19T21:30:54.896Z",
-  "updated_at": "2025-05-21T09:57:22.135Z",
+  "updated_at": "2025-09-22T10:04:13.866Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that no records were found, typically appearing on an \"Empty\" screen in a UI, such as a data visualization or search results section. It provides context to users when no relevant data is available.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ThirdParty.tsx",
-      "line_number": 51,
+      "line_number": 50,
       "context": "const theme = useTheme();\n \n return (\n <StyledEmptyScreenContainer\n imageSrc={theme.isBase ? EmptyCanceledLight : EmptyCanceledDark}\n headerText={t(\"NoRecordsFound\")}\n descriptionText={t(\"HistoryThirdParty\")}\n imageAlt={t(\"NoRecordsFound\")}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ThirdParty.tsx",
-      "line_number": 51,
+      "line_number": 50,
       "context": "const theme = useTheme();\n \n return (\n <StyledEmptyScreenContainer\n imageSrc={theme.isBase ? EmptyCanceledLight : EmptyCanceledDark}\n headerText={t(\"NoRecordsFound\")}\n descriptionText={t(\"HistoryThirdParty\")}\n imageAlt={t(\"NoRecordsFound\")}\n />\n );\n };",
       "module": "/packages/client"
     }
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Գրառումները չեն գտնվել\" is a literal translation of \"records not found\" but doesn't convey the natural phrasing for this context. A more natural translation would be \"չկան գրառումներ\" or \"ոչինչ չգտնվեց\" (nothing was found).",
-          "suggestion": "չկան գրառումներ"
+          "description": "The translation 'Գրառումները չեն գտնվել' while technically understandable, isn't the most natural or idiomatic way to say 'No records found' in Armenian. It translates literally as 'The records were not found'.",
+          "suggestion": "A more natural and idiomatic translation would be something like 'չկան գրանցումներ' (ch'kan granacumner) or 'ոչինչ չկայաց' (nochich ch'kayac)."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වාර්තා කිසිවක් හමු නොවීය.' while understandable, is a somewhat literal and less natural way to express \"No records found\" in Sinhala. A more idiomatic translation would be more appropriate.",
-          "suggestion": "නැතත Recordings / දත්ත කිසිවක් හමු නොවීය. (Nethata Recordings/data kisivak hamu noviya.)  Or, simpler: Recordings / දත්ත කීයක්වත් లేదు. (Recordings/Data kiayak-wath neda.)"
+          "description": "The translation 'වාර්තා කිසිවක් හමු නොවීය.' is a literal translation and doesn't flow naturally in Sinhala. A more common and natural phrasing would be something like 'දත්ත කිසිවක් හමු නොවීය' or 'නොරොක් දත්ත හමු නොවීය'.",
+          "suggestion": "Consider using 'දත්ත කිසිවක් හමු නොවීය' or 'නොරොක් දත්ත හමු නොවීය'."
         }
       ],
       "approved_at": null

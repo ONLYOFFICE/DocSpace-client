@@ -3,7 +3,7 @@
   "content": "Embedding will only work for the URLs specified by the {{productName}} admin in the JavaScript SDK settings.",
   "content_en_sha1_hash": "20daf7700e4107dbbb22b33a47d01501c6b64d05",
   "created_at": "2025-05-19T21:30:56.585Z",
-  "updated_at": "2025-05-28T09:30:02.356Z",
+  "updated_at": "2025-08-26T11:15:14.113Z",
   "comment": {
     "text": "This translation key is used for the description of a button that allows users to add their website URL to an \"allow list\" for embedding. It appears in a UI element where users can configure the allowed URLs for embedding. Translators should focus on creating a clear and concise message that will be displayed in this context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 423,
+      "line_number": 433,
       "context": "}}\n >\n {`\"Add the website URL for embedding to the <1>allow list</1>.\"`}\n </Trans>\n ) : (\n t(\"EmbeddingPanel:EmbeddingBarDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n )}\n </Text>\n <IconButton",
       "module": "/packages/client"
     }
@@ -27,13 +27,35 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Embedding will only work' is not fully captured by 'لن يعمل التضمين إلا'. A more accurate translation would convey 'التضمين سيعمل فقط' or 'التضمين يعمل فقط'.",
+          "suggestion": "التضمين سيعمل فقط"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'specified by the {{productName}} admin' could be improved for better flow. A more natural translation might use 'من قبل مسؤول {{productName}}'.",
+          "suggestion": "من قبل مسؤول {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'JavaScript' appears in both English and Azerbaijani content. It is generally recommended to keep technical terms consistent across languages.",
+          "suggestion": "Consider if a localized equivalent for 'JavaScript' exists, or if it is acceptable to keep the English term."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'tərəfindən müəyyən edilmiş' is grammatically correct but sounds slightly formal and could be more conversational.  Depending on the target audience, a simpler phrasing might be more appropriate.",
+          "suggestion": "Consider alternatives like 'tərəfindən göstərilən' or 'tərəfindən qeyd olunan'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +67,18 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Vkládání' (embedding) feels a bit awkward in this context. A more natural translation for 'Embedding' might be 'Funkce vkládání' or 'Vložení'.",
+          "suggestion": "Funkce vkládání bude fungovat pouze pro adresy URL zadané správcem {{productName}} v nastavení JavaScript SDK."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'adresy URL' might be more readable as 'URL adresy' (although this is a stylistic choice).",
+          "suggestion": "URL adresy zadané správcem {{productName}} v nastavení JavaScript SDK."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,19 +102,52 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Upottaminen onnistuu vain...\" is a somewhat literal translation of \"Embedding will only work...\" A more natural Finnish phrasing might be \"Sisällön upottaminen toimii vain...\" or \"Upotustoiminto on käytettävissä vain...\".",
+          "suggestion": "Sisällön upottaminen toimii vain..."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the use of a colon after '{{productName}}' isn't standard in Finnish sentence structure. It feels slightly awkward.",
+          "suggestion": "Remove the colon after '{{productName}}'"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Embedding' should be translated as 'L'intégration' consistently. Currently, the translation uses 'L'intégration' and then reverts to 'Embedding'.",
+          "suggestion": "L'intégration ne fonctionnera que pour les URL spécifiées par l'administrateur {{productName}} dans les paramètres du SDK JavaScript."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'URL' is commonly used, 'URLS' (plural) is more accurate as the context refers to multiple URLs.",
+          "suggestion": "L'intégration ne fonctionnera que pour les URLS spécifiées par l'administrateur {{productName}} dans les paramètres du SDK JavaScript."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Embedding' is translated as 'Ներկառուցումը' which might be too literal and not the most natural way to express it in Armenian. A more user-friendly translation might be 'Մուծվածքները' or a similar term.",
+          "suggestion": "Consider translating 'Embedding' as 'Մուծվածքները' or a more natural equivalent depending on the overall tone."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will only work' is translated as 'կաշխատի միայն'. While technically correct, it sounds slightly stiff. A more natural phrasing might be 'կգործի միայն' or similar.",
+          "suggestion": "Consider translating 'will only work' as 'կգործի միայն' or similar for a more natural flow."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +171,30 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will only work' is not accurately translated. 'ຈະສາມາດໃຊ້ໄດ້' implies possibility, not exclusivity. A more accurate translation would reflect that it's limited to specified URLs.",
+          "suggestion": "ການຝັງຈະໃຊ້ໄດ້ພຽງແຕ່ສໍາລັບ URL ທີ່ລະບຸ..."
+        },
+        {
+          "type": "formatting",
+          "description": "There's a potential readability issue with the sentence structure. While grammatically correct, it might be clearer to rephrase.",
+          "suggestion": "ການຝັງຈະໃຊ້ໄດ້ກັບ URL ທີ່ຜູ້ບໍລິຫານ {{productName}} ໄດ້ລະບຸໄວ້ໃນການຕັ້ງຄ່າ JavaScript SDK ເທົ່ານັ້ນ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'vietrāžiem' (URLs) is overly formal and potentially confusing in this context. A simpler and more natural translation would be 'adresēm' or 'saistēm'.",
+          "suggestion": "Iegulšana darbosies tikai tiem adresēm/saistēm, kurus {{productName}} administrators norādījis JavaScript SDK iestatījumos."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +224,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Embedding' is best translated as 'Integrare' or 'Implementare' in this context, not 'Incorporarea'. While 'Incorporarea' isn't *incorrect*, it's less natural and commonly used for technical implementation.",
+          "suggestion": "Integrarea este posibilă numai pentru adresele URL pe care administratorul {{productName}} le-a indicat în setările JavaScript SDK."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,31 +242,81 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'අන්තර්ගත කිරීම' is a bit formal and could be simplified for better readability. It translates to 'embedding' but a more natural phrasing might be preferred.",
+          "suggestion": "Insert کردن, පතුරුවීම, or a more context-appropriate term depending on the precise meaning intended."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be slightly improved for better flow. While grammatically correct, it feels a bit clunky.",
+          "suggestion": "Consider restructuring the sentence to prioritize the action first: '{{productName}} පරිපාලකයා JavaScript SDK සැකසුම්වල දක්වන ලද URL සඳහා පමණක්, පතුරුවීම ක්‍රියාත්මක වනු ඇත.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Embedding' is translated as 'Vkladanie'. While technically correct, 'Embedding' often refers to a specific function or feature. A more precise translation might be 'Vloženie' or 'Integrácia'.",
+          "suggestion": "Vloženie or Integrácia"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Embedding' should be translated to a Slovenian equivalent that conveys the meaning of 'embedding' in the context of data processing or integration. 'Vdelava' is a general term and might not accurately represent the intended meaning.",
+          "suggestion": "Consider alternatives like 'Vgrajevanje' or 'Integracija' depending on the precise nuance required. Consulting with a technical translator is recommended."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the Slovenian translation could be slightly improved for flow. A small adjustment might make it sound more natural.",
+          "suggestion": "Consider rephrasing to something like: 'Vgrajevanje/Integracija bo delovalo samo za URL-je, ki jih je skrbnik {{productName}} določil v nastavitvah JavaScript SDK.' (minor flow adjustment)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'JavaScript пакета за развој софтвера (SDK)' is a very literal and slightly awkward translation of 'JavaScript SDK'. A more natural Serbian (Cyrillic) phrasing would be 'JavaScript SDK-а'.",
+          "suggestion": "JavaScript SDK-а"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of hyphens and capitalization in 'JavaScript SDK-а' might benefit from review. Consistent usage across the application is important.",
+          "suggestion": "Consider reviewing overall capitalization/hyphenation of technology terms for consistency."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'JavaScript paketa za razvoj softvera' is a very literal and clunky translation of 'JavaScript SDK'. A more natural translation would be 'JavaScript SDK-a'.",
+          "suggestion": "Ugrađivanje će funkcionisati samo za URL adrese koje je odredio administrator {{productName}} u podešavanjima JavaScript SDK-a."
+        },
+        {
+          "type": "formatting",
+          "description": "The capitalization of 'JavaScript SDK-a' after the preposition 'u' should be lowercase. In Serbian, after prepositions, the noun should be in the prepositional case (instrumental) but in a lowercase form.",
+          "suggestion": "Ugrađivanje će funkcionisati samo za URL adrese koje je odredio administrator {{productName}} u podešavanjima javascript sdk-a."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +328,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation uses a period (.) after 'JavaScript' which might not be necessary. Consider removing it for a more natural flow.",
+          "suggestion": "Вбудовування буде працювати лише для URL-адрес, вказаних адміністратором {{productName}} в параметрах SDK JavaScript"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +346,18 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '嵌入仅适用于 JavaScript SDK 设置中{{productName}}管理员指定的 URL' is overly literal and slightly awkward in Chinese. A more natural phrasing would emphasize that the embedding functionality is restricted to URLs defined by the admin.",
+          "suggestion": "嵌入功能仅限于 JavaScript SDK 设置中{{productName}}管理员配置的 URL。"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'URL' is acceptable but could be replaced with a more common Chinese equivalent for URL, for better readability.",
+          "suggestion": "嵌入功能仅限于 JavaScript SDK 设置中{{productName}}管理员配置的网址。"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -1,0 +1,312 @@
+{
+  "key_path": "TemporaryStorageDescription",
+  "content": "Backup is stored in the 'Backup' section, you will be able to download it within 24 hours after creating.",
+  "content_en_sha1_hash": "88ae5786931a2fc09fc6599fe91ada967589e48d",
+  "created_at": "2025-05-26T07:15:48.759Z",
+  "updated_at": "2025-10-14T01:53:30.584Z",
+  "comment": {
+    "text": "This translation key is used for a description that explains how backup files are stored and accessible. It appears in a UI component related to manual backups, informing users when they can download their backup after creating it within 24 hours.",
+    "is_auto": true,
+    "updated_at": "2025-05-26T08:03:21.380Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
+      "line_number": 444,
+      "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:TemporaryStorageDescription\")}\n </Text>\n {isCheckedTemporaryStorage ? (\n <>\n <div\n className={classNames(",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation includes quotation marks around \"النسخ الاحتياطي\" which translates to 'Backup'. These should match the English content and be consistent. It's unclear whether these are necessary in the Arabic context or if single quotes would be more appropriate to match the English style.",
+          "suggestion": "Review the appropriateness of quotation marks. Consider using single quotes to match the English style, or confirm that double quotes are the preferred style in this context."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Backup' is translated as 'Архивиране'. While technically correct, 'Архивно копие' would be a more natural and commonly understood translation of 'Backup' in this context, aligning more closely with the English phrasing.",
+          "suggestion": "Архивно копие се съхранява в секцията 'Архивиране'."
+        },
+        {
+          "type": "formatting",
+          "description": "The English uses single quotes around 'Backup'. The Bulgarian translation uses double quotes. Consistency in quotation marks is important.",
+          "suggestion": "Архивното копие се съхранява в секцията 'Архивиране', ще можете да го изтеглите в рамките на 24 часа след създаването."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Պահուստ' appears multiple times and while it's the correct general term for 'backup', in this context a more specific term for 'temporary storage' might be preferable for clarity. Consider alternatives depending on the precise nuance needed.",
+          "suggestion": "Consider replacing some instances of 'Պահուստ' with a more descriptive term for 'temporary storage,' if applicable. This might involve consulting with a technical expert."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses katakana for \"Backup\" which isn't necessary and could be confusing.  The English uses single quotes, but Japanese uses double quotes in similar contexts.",
+          "suggestion": "バックアップは「バックアップ」セクションに保存されています。作成後24時間以内にダウンロードすることができます。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses the English word 'Backup' in Korean. While understandable, it's better to consistently use the Korean equivalent throughout.",
+          "suggestion": "Replace 'Backup' with '백업' throughout the translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation includes unnecessary punctuation (commas) after 'ການ​ສໍາ​ຮອງ​ຂໍ້​ມູນ​' and 'ພາກ​ສ່ວນ'.",
+          "suggestion": "Remove the commas after 'ການ​ສໍາ​ຮອງ​ຂໍ້​ມູນ​' and 'ພາກ​ສ່ວນ'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses lowercase 'back-up' while the English source uses 'Backup'. Maintaining consistency with the original capitalization would improve readability.",
+          "suggestion": "De back-up wordt opgeslagen in de rubriek 'Backup', u kunt hem binnen 24 uur na het maken downloaden"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'Kopia zapasowa' (Backup) for both the general concept and the section name. While technically correct, it can be slightly confusing for the user. A more natural phrasing might differentiate between the action (creating a backup) and the storage location.",
+          "suggestion": "Consider rephrasing to something like: 'Kopia zapasowa jest przechowywana w sekcji 'Archiwum kopii zapasowych' i będzie gotowa do pobrania w ciągu 24 godzin od jej utworzenia.' (Backup is stored in the 'Backup Archive' section...)"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Cópias de Segurança' is in uppercase. The original English uses single quotes for 'Backup'. Consistency in capitalization is preferred.",
+          "suggestion": "Consider using lowercase 'cópias de segurança' to match the original English's single quotes."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'poderá fazer o download' is grammatically correct, a more natural translation for 'you will be able to download' might be 'você poderá baixar'.",
+          "suggestion": "Replace 'poderá fazer o download' with 'poderá baixar'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'período de' is redundant. While not incorrect, it's less concise than simply saying 'em'.",
+          "suggestion": "O backup é armazenado na seção 'Backup'. Você poderá baixá-lo em 24 horas após criá-lo."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'pe care o puteți descărca' is slightly awkward. A more natural phrasing would be 'pe care o puteți descărca'.",
+          "suggestion": "Copia de rezervă este stocată în secția 'Copiere de rezervă' pe care o puteți descărca în termen de 24 ore de la creare."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'de la crearea' is unnecessarily verbose and could be simplified.",
+          "suggestion": "Copia de rezervă este stocată în secția 'Copiere de rezervă' pe care o puteți descărca în termen de 24 ore de la creare."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'within 24 hours after creating' is not perfectly conveyed by 'u roku od 24 sata nakon kreiranja'. A more natural phrasing might be 'u roku od 24 časa nakon što je kreirana'.",
+          "suggestion": "u roku od 24 časa nakon što je kreirana"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word 'Backup' is in English in the English source but in Albanian in the translation. It should consistently use the Albanian equivalent or maintain consistency.",
+          "suggestion": "Change 'Rezervë' back to 'Backup' or consistently use the Albanian translation throughout, depending on the desired style."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'you will be able to download it' can be improved for a more natural Albanian flow.",
+          "suggestion": "Consider rephrasing to 'mund ta shkarkoni' which is a more common and natural way to express ability to download in Albanian."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

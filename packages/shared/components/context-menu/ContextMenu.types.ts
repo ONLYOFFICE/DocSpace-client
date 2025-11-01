@@ -84,6 +84,7 @@ export type ContextMenuType = {
   badgeLabel?: string;
   isPaidBadge?: boolean;
   preventNewTab?: boolean;
+  dataTestId?: string;
 };
 
 export type SeparatorType = {
@@ -95,6 +96,7 @@ export type SeparatorType = {
   disableColor?: string;
   isLoader?: boolean;
   style?: React.CSSProperties;
+  dataTestId?: string;
 };
 
 export type HeaderType =
@@ -103,8 +105,9 @@ export type HeaderType =
       avatar?: string;
       logo?: string;
       icon?: string;
+      badgeUrl?: string;
     })
-  | { title: string; icon: string };
+  | { title: string; icon: string; badgeUrl?: string };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
 
@@ -150,7 +153,7 @@ export interface ContextMenuProps {
       | React.ChangeEvent<HTMLInputElement>,
   ) => void;
   /** Displays a reference to another component */
-  containerRef?: React.MutableRefObject<HTMLDivElement | null>;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
   /** Scales width by the container component */
   scaled?: boolean;
   /** Fills the icons with default colors */
@@ -162,12 +165,13 @@ export interface ContextMenuProps {
   rightOffset?: number;
   isRoom?: boolean;
   isArchive?: boolean;
-  ref?: React.RefObject<HTMLDivElement>;
+  ref?: React.RefObject<ContextMenuRefType | null>;
   badgeUrl?: string;
   headerOnlyMobile?: boolean;
+  dataTestId?: string;
 }
 
 export type TContextMenuRef = {
   show: (e: React.MouseEvent) => void;
-  hide: (e: React.MouseEvent) => {};
+  hide: (e: React.MouseEvent) => object | void;
 };

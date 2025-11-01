@@ -3,7 +3,7 @@
   "content": "Room preview",
   "content_en_sha1_hash": "e69a2be31a217a622021d1d51a30ac2ff1bd2bdc",
   "created_at": "2025-05-19T21:30:54.632Z",
-  "updated_at": "2025-05-21T08:46:54.686Z",
+  "updated_at": "2025-05-24T08:59:46.888Z",
   "comment": {
     "text": "Room preview is used as a placeholder text when a room frame is not defined. It appears as an empty iframe in the UI and is intended to display a room preview or a visual representation of the room, but since the actual content is missing, it displays a default message instead.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Otaq görüntüsü\" is understandable, it's not the most natural or accurate translation of \"Room preview.\" 'Otaq' translates to 'room' but 'görüntüsü' translates to 'appearance' or 'view'. A better translation would convey the sense of a glimpse or sample of the room.",
-          "suggestion": "Consider alternatives like \"Otaq önəskanı\" (Room preview/sample) or \"Otaqın qısa baxışı\" (Brief room overview)."
+          "description": "While \"Otaq görüntüsü\" is understandable, a more natural and accurate translation of \"Room preview\" in Azerbaijani would be \"Otaqın önəskicisi\" or \"Otaq önizləməsi\". \"Otaq görüntüsü\" literally translates to 'room image' which doesn't quite convey the intended meaning of a preview.",
+          "suggestion": "Otaqın önəskicisi"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ຕົວຢ່າງຫ້ອງ' is a literal translation of 'room preview', it doesn't convey the intended meaning of a preview – a glimpse or sample. A more accurate translation might emphasize that aspect.",
-          "suggestion": "Consider 'ລາຍງານຫ້ອງ' (lai ngap hong) which translates to 'room report' or 'room summary' or 'ຊົມຫ້ອງຕົວຢ່າງ' (chom hong tua yang) which means 'view room sample'."
+          "description": "While \"ຕົວຢ່າງຫ້ອງ\" is a literal translation of \"room preview\", it doesn't fully capture the meaning in the context of a software feature. \"ຕົວຢ່າງຫ້ອງ\" suggests a sample room, whereas \"Room preview\" implies a glimpse or a preliminary view of a room. A more accurate translation would convey the idea of a preview or a sneak peek.",
+          "suggestion": "Consider translations like \"ລາຍງານຕົວຢ່າງຫ້ອງ\" (room sample report), \"ເບິ່ງຕົວຢ່າງຫ້ອງ\" (view room example), or a more conceptual translation if possible within the software's context."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kamer preview\" is too literal and doesn't quite capture the nuance of \"Room preview\" in Dutch. It sounds awkward.",
-          "suggestion": "Consider \"Voorbeeld van de kamer\" or \"Kamervorschouw\"."
+          "description": "The translation \"Kamer preview\" is a direct transliteration and doesn't convey the meaning of 'Room preview' naturally in Dutch. 'Kamer' literally means 'room'. A more idiomatic translation would be something like 'Voorbeeld van een kamer' or 'Kameroverzicht'.",
+          "suggestion": "Voorbeeld van een kamer"
         }
       ],
       "approved_at": null
@@ -144,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podgląd pok' is incomplete and doesn't accurately convey the meaning of 'Room preview'. 'Pok' is an abbreviation and may not be understood. It seems to be missing the word 'pokoju', making it 'Podgląd pokoju'.",
+          "description": "The translation 'Podgląd pok' is incomplete and slightly awkward. It seems to be missing the word 'pokoju' (room). 'Podgląd' is correct for 'preview', but 'pok' is just 'room' without proper grammatical structure.",
           "suggestion": "Podgląd pokoju"
         }
       ],
@@ -195,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Преглед собе' contains a spelling error. The correct spelling should be 'Преглед просторије'.",
-          "suggestion": "Преглед просторије"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pregled sobe' is not the most accurate or natural translation of 'Room preview'. While 'Pregled' is correct for 'preview', 'sobe' is the genitive case of 'soba' (room). The more accurate and natural translation would be 'Pretvorba sobe' or 'Prikaz sobe'.",
-          "suggestion": "Prikaz sobe"
+          "description": "The translation \"Pregled sobe\" is not the most accurate or natural translation of \"Room preview\" in Serbian (Latin). \"Pregled sobe\" translates literally to \"Room View\" or \"Room Inspection\". A more appropriate translation would be something like \"Pretpremijera sobe\" or \"Vizualni pregled sobe\" to convey the meaning of a 'preview'.",
+          "suggestion": "Pretpremijera sobe"
         }
       ],
       "approved_at": null

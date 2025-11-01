@@ -121,14 +121,16 @@ export type TSettings = {
   wizardToken?: string;
   defaultPage?: string;
   tagManagerId?: string;
+  limitedAccessSpace: boolean;
   enabledJoin?: boolean;
   recaptchaPublicKey?: string;
   recaptchaType?: RecaptchaType;
   maxImageUploadSize: number;
   isAmi: boolean;
   logoText: string;
-  externalResources: TExternalResources;
   displayAbout: boolean;
+  externalResources: TExternalResources;
+  licenseAgreementsUrl?: string;
 };
 
 export type TCustomSchema = {
@@ -152,7 +154,6 @@ export type TGetColorTheme = {
 };
 
 export type TApiEntries = {
-  apikeys: string;
   docspace: string;
   "javascript-sdk": string;
   "plugins-sdk": string;
@@ -182,6 +183,7 @@ export type THelpCenterEntries = {
   becometranslator: string;
   connectamazon: string;
   connectapple: string;
+  connectweixin: string;
   connectbox: string;
   connectclickatell: string;
   connectdocusign: string;
@@ -225,6 +227,14 @@ export type THelpCenterEntries = {
   welcomepage: string;
   limiteddevtools: string;
   encryption: string;
+  docspacefaq: string;
+  configureDeepLink: string;
+  invitationSettings: string;
+  singleSignOn: string;
+  pluginsSdk: string;
+  smtp: string;
+  dataImport: string;
+  apikeys: string;
 };
 
 export type TIntegrationsEntries = {
@@ -347,6 +357,7 @@ export type TCompanyInfo = {
   email: string;
   address: string;
   phone: string;
+  hideAbout: boolean;
   isLicensor: boolean;
   isDefault: boolean;
 };
@@ -500,8 +511,28 @@ export type TSendWelcomeEmailData = { isSendWelcomeEmail: boolean };
 
 export type TPortalCultures = string[];
 
+export type PropertiesType = { name: string; value: string; title: string };
+
+export type TStorageBackup = {
+  id: string;
+  current: boolean;
+  isSet: boolean;
+  title: string;
+  properties: PropertiesType[];
+};
+
 export type TEncryptionSettings = {
   password: string;
   status: EncryptionStatus;
   notifyUsers: boolean;
+};
+
+export type TTelegramCheck = {
+  status: string;
+  username?: string;
+};
+
+export type TNotificationChannel = {
+  name: string;
+  isEnabled: boolean;
 };

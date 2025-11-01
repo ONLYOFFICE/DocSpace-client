@@ -220,7 +220,7 @@ const StartFillingPanel = ({
   const headerProps = useMemo(
     () =>
       ({
-        headerLabel: t("Common:AssignToRole"),
+        headerLabel: t("Common:AssignToRecipient"),
         withoutBackButton: false,
         withoutBorder: false,
         isCloseable: true,
@@ -275,7 +275,7 @@ const StartFillingPanel = ({
             onClose={closeUsersPanel}
             submitButtonLabel={t("Common:SelectAction")}
             cancelButtonLabel={t("Common:CancelButton")}
-            disableDisabledUsers={false}
+            disableDisabledUsers
             disableSubmitButton={false}
             checkIfUserInvited={checkIfUserInvited}
             injectedElement={
@@ -306,7 +306,7 @@ const StartFillingPanel = ({
             onSubmit={inviteUsers}
             onClose={closeInvitePanel}
             submitButtonLabel={t("Common:AddToRoom")}
-            disableDisabledUsers={false}
+            disableDisabledUsers
             disableSubmitButton={false}
             headerProps={invitePanelSelectorHeader}
           />
@@ -318,8 +318,8 @@ const StartFillingPanel = ({
           {infoBarVisible ? (
             <>
               <PublicRoomBar
-                headerText={t("Common:FillingStatusBarTitle")}
-                bodyText={t("Common:FillingStatusBarDescription")}
+                headerText={t("Common:StartFillingBarHeader")}
+                bodyText={t("Common:StartFillingBarDescription")}
                 iconName={InfoSvgUrl}
                 onClose={() => setInfoBarVisible(false)}
               />
@@ -331,7 +331,7 @@ const StartFillingPanel = ({
               [styles.titleMargin]: !infoBarVisible,
             })}
           >
-            {t("Common:RolesFromTheForm")}
+            {t("Common:RecipientsFromTheForm")}
           </p>
           <FillingRoleSelector
             roles={roles}

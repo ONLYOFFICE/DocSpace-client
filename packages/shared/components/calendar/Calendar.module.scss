@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/index.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 .container {
   box-sizing: border-box;
@@ -46,7 +46,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100%;
     height: 420px;
     padding: 16px;
@@ -77,7 +77,9 @@
   margin: 0;
   display: inline-block;
 
-  @include mobile {
+  @include mixins.no-user-select;
+
+  @include mixins.mobile {
     font-size: 21px;
     line-height: 28px;
   }
@@ -104,7 +106,7 @@
   column-gap: 14px;
   row-gap: 0;
 
-  @include mobile {
+  @include mixins.mobile {
     width: auto;
     column-gap: 2%;
     row-gap: 9px;
@@ -116,7 +118,7 @@
     column-gap: 31.33px;
     row-gap: 10px;
 
-    @include mobile {
+    @include mixins.mobile {
       column-gap: 8%;
       row-gap: 26.7px;
     }
@@ -164,7 +166,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 32px;
     height: 32px;
   }
@@ -182,7 +184,9 @@
   text-align: center;
   padding: 10.7px 0;
 
-  @include mobile {
+  @include mixins.no-user-select;
+
+  @include mixins.mobile {
     width: 40px;
     font-size: 16px;
   }
@@ -200,7 +204,7 @@
     top: 9px;
     left: 9.5px;
 
-    @include mobile {
+    @include mixins.mobile {
       transform: rotate(-45deg);
       top: 11.5px;
       left: 12.5px;
@@ -212,7 +216,7 @@
     top: 11px;
     left: 9.5px;
 
-    @include mobile {
+    @include mixins.mobile {
       transform: rotate(135deg);
       top: 14px;
       left: 12.5px;
@@ -231,7 +235,7 @@
   left: 104%;
   border-color: var(--color-scheme-main-accent);
 
-  @include mobile {
+  @include mixins.mobile {
     width: 5px;
     height: 5px;
     top: 11px;
@@ -252,6 +256,8 @@
   align-items: center;
   color: var(--text-color);
 
+  @include mixins.no-user-select;
+
   &.disabled {
     background: transparent;
     color: var(--calendar-disabled-color);
@@ -271,7 +277,7 @@
     width: 50px;
     height: 50px;
 
-    @include mobile {
+    @include mixins.mobile {
       width: 60px;
       height: 60px;
     }
@@ -279,7 +285,7 @@
 
   &.isCurrent {
     background: var(--color-scheme-main-accent);
-    color: #{$white} !important;
+    color: #{variables.$white} !important;
     &:hover {
       background-color: var(--color-scheme-main-accent);
     }
@@ -309,7 +315,7 @@
     border-color: var(--color-scheme-main-accent);
   }
 
-  @include mobile {
+  @include mixins.mobile {
     font-size: 16px;
     width: 40px;
     height: 40px;

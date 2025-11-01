@@ -3,7 +3,7 @@
   "content": "Enable guest",
   "content_en_sha1_hash": "f541937ff47f4169e43e5e8bb074927f6ee3bf2d",
   "created_at": "2025-05-19T21:30:56.963Z",
-  "updated_at": "2025-05-20T09:37:45.080Z",
+  "updated_at": "2025-08-04T07:30:01.065Z",
   "comment": {
     "text": "This translation key determines the label displayed on a button or link to enable guest access in a user management dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 195,
+      "line_number": 191,
       "context": "? t(\"Common:Disable\")\n : t(\"PeopleTranslations:DisableUserButton\");\n } else {\n header = onlyOneUser\n ? isGuests\n ? t(\"EnableGuest\")\n : t(\"EnableUser\")\n : isGuests\n ? t(\"EnableGuests\")\n : t(\"EnableUsers\");",
       "module": "/packages/client"
     }
@@ -75,7 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Activer l'invité\" is technically correct but doesn't fully capture the nuance of \"Enable guest\" in a user interface context. It implies activating a specific guest user, rather than enabling the *option* for guests.",
+          "suggestion": "Activer le mode invité"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Iespējot viesi' is a literal translation but doesn't quite convey the intended meaning in this context. 'Enable guest' typically refers to allowing a guest access or functionality, not simply 'enabling a guest' as a person.",
+          "suggestion": "Iespējot viesiniekam piekļuvi"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අමුත්තා සක්‍රීය කරන්න' while technically meaning 'enable guest', is not the most natural or commonly used phrasing in Sinhala. A more idiomatic translation would convey the meaning more clearly.",
+          "suggestion": "ක්ෂේත්‍රීය අමුත්තුවා සක්‍රීය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +213,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Kích hoạt' correctly means 'Enable', the translation 'Kích hoạt khách' is slightly awkward. A more natural phrasing might be 'Cho phép khách' or 'Bật chế độ khách'.",
+          "suggestion": "Cho phép khách"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "اختر من القائمة",
-  "ConnectingAccount": "ربط الحساب",
-  "DeleteFromTrash": "تم حذف العناصر المحددة من سلة المهملات بنجاح",
   "FileLocked": "الملف مؤمن",
   "FileProtected": "الملف محمي بكلمة مرور",
   "FileUnlocked": "ملف مفتوح",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "مجلد OneDrive",
   "FolderTitleWebDav": "مجلد WebDAV",
   "FolderTitleYandex": "مجلد Yandex",
-  "GuestReleaseTipDescripton": "أصبح جميع المستخدمين الذين تمت إضافتهم مسبقًا ضيوف ومتاحين الآن في قائمة جهات الاتصال الخاصة بـ {{productName}} المسؤولين فقط. لم يعد الضيوف جزءًا من أي مجموعات. يمكنك دائمًا تغيير نوعهم وإضافتهم إلى مجموعة ، إذا لزم الأمر.",
-  "GuestReleaseTipLink": "تعرف على المزيد حول أنواع المستخدمين",
-  "LinkHasExpiredAndHasBeenDisabled": "تم انتهاء صلاحية الرابط وتم تعطيله",
   "LinkValidTime": "هذا الرابط صالح لمدة {{days_count}} أيام فقط.",
   "NewForm": "نموذج PDF",
   "OwnerChange": "تغيير المالك",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "الخدمات الجهة الخارجية",
   "TitleShowActions": "عرض إجراءات الملف",
   "TitleShowFolderActions": "عرض إجراءات المجلد",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "تم حذف العناصر المحددة بنجاح من {{sectionName}}"
 }

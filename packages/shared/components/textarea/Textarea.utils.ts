@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import jsonBeautifier from "csvjson-json_beautifier";
+
 import { isJSON } from "../../utils/json";
 
 export function beautifyJSON(jsonString: string) {

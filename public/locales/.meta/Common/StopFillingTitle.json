@@ -3,7 +3,7 @@
   "content": "Stop filling?",
   "content_en_sha1_hash": "b3fff789a91323a06fd3adcd922650270391f583",
   "created_at": "2025-05-19T21:30:49.074Z",
-  "updated_at": "2025-05-28T09:30:02.974Z",
+  "updated_at": "2025-10-14T03:46:52.987Z",
   "comment": {
     "text": "This translation key is used for the title of a modal dialog that prompts the user to stop filling a form field. It appears on the header of the dialog and is displayed when the \"Stop Filling\" button is clicked or visible in certain contexts.",
     "is_auto": true,
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Doldurmaq dayandırılsın?' is a literal translation but doesn't quite capture the conversational tone of 'Stop filling?'. It sounds overly formal. A more natural translation would be something like 'Dayandırılsın?' or 'Saxlanılsın?' depending on context.",
+          "description": "The translation 'Doldurmaq dayandırılsın?' is a bit literal and doesn't sound natural in Azerbaijani. A more natural phrasing would be something like 'Dayandırılsın?' or 'Doldurma dayandırılsın?'",
           "suggestion": "Dayandırılsın?"
         }
       ],
@@ -57,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation \"Mit dem Ausfüllen stoppen?\" is technically correct but sounds unnatural. A more natural phrasing would be \"Ausfüllen beenden?\" or \"Beenden?\" (if the context allows it).",
+          "suggestion": "Ausfüllen beenden?"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Դադարե՞լ լրացնելը\" (Dadarel lracnely) is a literal translation but doesn't flow naturally in Armenian. It translates to something like 'To stop filling?' rather than the intended 'Stop filling?'.",
-          "suggestion": "A more natural translation would be something like \"Կանգնել լրացնելու՞\" (Kangnel lracnelu?) which translates to 'Stop filling?' or simply \"Դադարել լրացնելու՞\" (Dadarel lracnelu?), but this can also sound slightly unnatural depending on the context."
+          "description": "The translation \"Դադարե՞լ լրացնելը\" is a literal translation and doesn't flow naturally in Armenian. While grammatically correct, it sounds awkward.",
+          "suggestion": "A more natural translation would be something like \"Կդադարես լրացնելը?\" or simply \"Դադարեմ լրացնելը?\" or even a shorter \"Ավարտեմ?\" depending on the context."
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Interrompere la compilazione?\" while grammatically correct, is a bit formal for a simple 'Stop filling?' prompt. A more natural and conversational translation would be preferable.",
-          "suggestion": "Smettere di compilare?"
+          "description": "The translation 'Interrompere la compilazione?' while grammatically correct, is a bit formal for a simple question like 'Stop filling?'. A more natural translation would be closer to a direct equivalent or a slightly more conversational option.",
+          "suggestion": "Consider alternatives like 'Smettere di compilare?' or 'Fermare la compilazione?'"
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"작성을 중지하시겠습니까?\" is overly formal for a simple \"Stop filling?\" prompt. It translates to 'Would you like to stop writing?' or 'Would you like to cease writing?'.",
-          "suggestion": "Consider a more casual and direct translation like \"작성 중지?\" or \"중지하시겠어요?\""
+          "description": "The translation \"작성을 중지하시겠습니까?\" is a very formal way of asking \"Stop filling?\". It's closer to \"Would you like to stop writing?\" A more natural and conversational translation would be better.",
+          "suggestion": "Consider a more casual option like \"작성 멈출까요?\" or \"작성 중지할까요?\""
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຢຸດຕິມແລ້ວບໍ?\" translates more closely to \"Have you stopped filling?\" or \"Did you stop filling?\" rather than the English \"Stop filling?\".  The English phrase is more of a prompt or question seeking confirmation to cease an action.",
-          "suggestion": "ຢຸດຕິມບໍ? (Yut tim bor?)"
+          "description": "The Lao translation \"ຢຸດຕິມແລ້ວບໍ?\" while understandable, is a bit literal and less natural. A more common and idiomatic phrasing for 'Stop filling?' would be something like \"ຢຸດຕື່ມແລ້ວບໍ່?\" or \"ຢຸດຕື່ມແລບໍ່?\"",
+          "suggestion": "ຢຸດຕື່ມແລ້ວບໍ່?"
         }
       ],
       "approved_at": null
@@ -174,8 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Doriți să încetați completarea?' is a very formal and literal translation of 'Stop filling?'. It's unnecessarily verbose for a simple confirmation prompt. A more natural and user-friendly translation would be something like 'Oprești completarea?' or 'Întrerupi completarea?'",
-          "suggestion": "Oprești completarea?"
+          "description": "The Romanian translation \"Doriți să încetați completarea?\" is a very literal and formal translation of \"Stop filling?\". It implies a formal request for confirmation. A more natural and user-friendly translation would be more conversational.",
+          "suggestion": "Opresc completarea?"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of \"completarea\" is grammatically correct, but it sounds overly technical for a simple \"Stop filling?\" prompt. It's a more formal word than necessary.",
+          "suggestion": "Opresc?"
         }
       ],
       "approved_at": null
@@ -192,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නොපිරීම නවත්තන්නද?' is a literal translation of 'Stop filling?' but doesn't flow naturally in Sinhala. It can be interpreted as 'Should we stop the filling?' which is not the intended meaning of a simple 'Stop filling?' prompt.",
-          "suggestion": "A more natural translation would be 'وقف تعبئة؟' or 'وقف مملوء?' or 'නැවත පිරවීමටද නවත්වන්න?' depending on the precise context."
+          "description": "The translation \"නොපිරීම නවත්තන්නද?\" doesn't perfectly capture the nuance of \"Stop filling?\".  'නොපිරීම' refers to 'not filling' rather than the act of stopping filling. A more accurate translation would convey the meaning of halting the filling process.",
+          "suggestion": "Consider alternatives like \"ගෙවීම නවත්වන්නද?\" (payment stop?) or \"බුරුසු නවත්තන්නද?\" (stop the brush/filler?). The best alternative will depend on the exact context of the original English phrase."
         }
       ],
       "approved_at": null
@@ -207,7 +218,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ustavi izpolnjevanje?' is a literal translation and doesn't quite capture the natural phrasing of \"Stop filling?\" in Slovenian. It sounds a bit formal and awkward.",
+          "suggestion": "A more natural translation would be 'Prenehaj z izpolnjevanjem?' or 'Ne želiš več izpolnjevati?' or simply 'Ustavi?' depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -216,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Зауставите попуњавање?\" while grammatically correct, doesn't fully capture the nuance of \"Stop filling?\". It's more literal and sounds slightly awkward. A more natural phrasing in Serbian (Cyrillic) would convey the meaning of stopping a process of filling something out or entering data.",
-          "suggestion": "Прекините попуњавање?"
+          "description": "The translation 'Зауставите попуњавање?' while literally translating to 'Stop filling?', doesn't quite capture the conversational nuance of 'Stop filling?' in this context. It sounds overly formal and direct. A more natural and idiomatic translation would be better.",
+          "suggestion": "Престаните са попуњавањем?"
         }
       ],
       "approved_at": null
@@ -234,7 +251,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Doldurma durdurulsun mu?\" is a very literal and somewhat unnatural phrasing in Turkish. While technically correct, it doesn't sound conversational. A more natural translation for \"Stop filling?\" would be something like \"Doldurmayı bırak mı?\" or \"Doldurmayı kes mi?\"",
+          "description": "The translation 'Doldurma durdurulsun mu?' is overly formal and doesn't accurately convey the simple, questioning tone of 'Stop filling?'. It implies a more complex process or request.",
+          "suggestion": "Doldurmayı bırak mı?"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses passive voice ('doldurma durdurulsun'), which is less natural than active voice for a simple question.  The original English is direct.",
           "suggestion": "Doldurmayı bırak mı?"
         }
       ],
@@ -255,11 +277,17 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '是否停止填写？' is a literal and somewhat formal translation of \"Stop filling?\". While grammatically correct, it doesn't capture the casual tone of the English phrase. A more natural translation would better reflect the original's conversational style.",
-          "suggestion": "停止填写吗？"
+          "description": "The translation \"Të ndahet plotësimi?\" doesn't accurately convey the meaning of \"Stop filling?\". It translates more literally to 'To separate the filling?' which is not the intended meaning. The intended meaning is a question asking if someone wants to stop the filling process.",
+          "suggestion": "Mundësisht, 'Ndalo plotësimin?' or 'Të ndalohet plotësimi?' would be more accurate translations. A more conversational option could be 'Përplete plotësimin?'"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "In Google Play",
   "content_en_sha1_hash": "f8161e2969498169b03965ff3eb0f64d9b8a7d20",
   "created_at": "2025-05-19T21:30:50.049Z",
-  "updated_at": "2025-05-28T09:30:02.163Z",
+  "updated_at": "2025-10-01T15:17:48.186Z",
   "comment": {
     "text": "\"In Google Play\" is a text that appears on a button or similar element, indicating that users can download an app from the Google Play store. It is used in a Smart Banner component to provide alternative language options for users accessing the app through different platforms (iOS, Android).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
-      "line_number": 69,
+      "line_number": 72,
       "context": "checkBanner();\n }, [location]);\n \n const storeText = {\n ios: t(\"SmartBanner:AppStore\"),\n android: t(\"SmartBanner:GooglePlay\"),\n windows: \"\",\n kindle: \"\",\n };\n \n const priceText = {",
       "module": "/packages/client"
     }
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Google Playssa' while technically grammatically correct, is not the most natural or accurate translation of 'In Google Play'. A more idiomatic translation would be 'Google Play -kaupassa' or simply 'Google Play:ssä'.  'Playssa' implies Google Play is a game, which is incorrect.",
+          "suggestion": "Google Play -kaupassa"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Google Playから' is a literal translation and can sound awkward in Japanese. While technically correct, a more natural phrasing would be more appropriate for a button or banner label.",
-          "suggestion": "Consider using 'Google Playで' or 'Playストアから' depending on the intended nuance and surrounding context."
+          "description": "While technically correct, \"Google Playから\" is a very literal translation and might sound slightly unnatural in a UI context. A more natural phrasing would depend on the specific usage but could be something like \"Google Play経由で\" (Google Play via) or simply \"Google Play\" if it refers to being available on Google Play.",
+          "suggestion": "Consider \"Google Play\" or \"Google Play経由で\" depending on the context."
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Google Play' does not accurately translate the English content 'In Google Play'. It simply repeats the platform name, missing the preposition 'In'.",
-          "suggestion": "Google Play veikalā"
+          "description": "The translation \"Google Play\" does not accurately convey the meaning of \"In Google Play\". It simply repeats the name and doesn't indicate location or presence within the Google Play store.",
+          "suggestion": "A more accurate translation could be something like \"Google Play veikalā\" or \"Google Play lietotnē\" (In the Google Play store/app)."
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ගූගල් ප්ලේ\" is simply the transliteration of \"Google Play\" and does not convey the meaning \"In Google Play\". It's a proper noun, not a phrase.",
-          "suggestion": "A more appropriate translation would depend on the context, but a literal translation of \"In Google Play\" could be \"ගූගල් ප්ලේ තුළ\" (Google Play-la) or \"ගූගල් ප්ලේ හි\" (Google Play-ha)."
+          "description": "The translation 'ගූගල් ප්ලේ' is simply the transliteration of 'Google Play' into Sinhala script. It doesn't convey the meaning 'In Google Play'.",
+          "suggestion": "A more accurate translation would depend on the context. Some possibilities include: 'ගූගල් ප්ලේ තුළ' (Google Play within), 'ගූගල් ප්ලේ හි' (of Google Play), or a more contextual phrase."
         }
       ],
       "approved_at": null
@@ -192,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"У Google Play-у\" is grammatically incorrect and doesn't accurately convey the meaning of \"In Google Play.\"  The addition of the extra 'у' is unusual and not standard Serbian. It sounds awkward.",
+          "description": "The Serbian translation \"У Google Play-у\" is not the most natural or accurate translation of \"In Google Play\". The repetition of 'У' makes it sound awkward.",
           "suggestion": "У Google Play"
         }
       ],
@@ -204,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'U Google Play-u' is not the most natural or accurate translation of 'In Google Play'. While technically understandable, it's overly literal and contains unnecessary declension.",
+          "description": "The translation 'U Google Play-u' is not the most natural or accurate translation of \"In Google Play\". While understandable, it uses an unnecessary possessive ending. A more natural translation would be 'U Google Play' or 'Na Google Playu'.",
           "suggestion": "U Google Play"
         }
       ],
@@ -234,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'In Google Play' is translated as '在Google Play 商店'. While not entirely wrong, '商店' (shop) is redundant and unnecessary. 'In Google Play' implies the Google Play store.",
-          "suggestion": "在Google Play"
+          "description": "The translation \"在Google Play 商店\" literally translates to \"In Google Play Store\". While not entirely wrong, it's more natural and concise to simply use \"在 Google Play\" in this context, mirroring the original English.",
+          "suggestion": "在 Google Play"
         }
       ],
       "approved_at": null

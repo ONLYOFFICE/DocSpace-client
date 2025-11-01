@@ -3,7 +3,7 @@
   "content": "Advanced server settings",
   "content_en_sha1_hash": "5ebb3289911c026499372bca9d3ef3bdabd8785e",
   "created_at": "2025-05-19T21:30:51.337Z",
-  "updated_at": "2025-05-28T09:30:02.628Z",
+  "updated_at": "2025-09-17T13:43:01.828Z",
   "comment": {
     "text": "The \"Advanced server settings\" translation key is used to display a label for advanced server settings in the UI. It appears as part of a larger section in a portal settings page, possibly as a subheader or title, guiding users to access more detailed configuration options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 315,
+      "line_number": 317,
       "context": "</div>\n </div>\n \n <div className=\"form-inputs\">\n <Styled.LocationSubheader>\n {t(\"Settings:DocumentServiceAdvancedSettings\")}\n <Link\n className=\"advanced-link\"\n type=\"action\"\n isHovered\n onClick={onChangeIsShowAdvancedSettings}",
       "module": "/packages/client"
     }
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Qabaqcıl server parametrləri' is understandable, 'parametrleri' (parameters) is not the most natural translation for 'settings'. 'Parametr' implies technical configuration, whereas 'settings' is more general.",
+          "description": "While \"Qabaqcıl server parametrləri\" is understandable, \"parametrleri\" (parameters) doesn't fully capture the meaning of \"settings.\"  \"Parametr\" implies configurable values, while \"settings\" is broader.",
           "suggestion": "Qabaqcıl server ayarları"
         }
       ],
@@ -111,18 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ການຕັ້ງຄ່າເຄື່ອງແມ່ຂ່າຍແບບກ້ານAdvanced\" includes the English word \"Advanced\" which is redundant and unnecessary. It's better to translate the concept of 'advanced' more accurately within the Lao phrasing.",
-          "suggestion": "ການຕັ້ງຄ່າເຄື່ອງແມ່ຂ່າຍແບບກ້ານທີ່ໃຊ້ກົນໄກສູງ"
-        },
-        {
-          "type": "grammar",
-          "description": "The use of 'ແບບກ້ານ' (baep gan) is potentially ambiguous. It's not the clearest way to describe 'advanced' in this context. It could be interpreted in multiple ways.",
-          "suggestion": "Consider rephrasing 'ແບບກ້ານ' to a more specific term indicating advanced functionality or settings within a server context. For instance, using terms related to 'superior', 'expert', or 'complex' would be more suitable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -173,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ඉදිරිපත් සේවාදායක සැකසුම්\" doesn't accurately convey the meaning of \"Advanced server settings.\" \"ඉදිරිපත්\" (idiri path) means 'forward' or 'leading', which is not appropriate here. 'සේවාදායක' (sevaadaka) refers to a servant or server in the sense of a person serving. 'සැකසුම්' (sakasum) means settings.  A better translation would focus on 'අතරමැදි' (ataramadi) or 'උසස්' (usas) to convey 'advanced'.",
-          "suggestion": "උසස් සේවාදායක සැකසුම් (Usas sevadaayak sakasum) or අතරමැදි සේවාදායක සැකසුම් (Ataramadi sevadaayak sakasum)"
+          "description": "The translation \"ඉදිරිපත් සේවාදායක සැකසුම්\" while attempting to convey 'Advanced server settings', isn't the most natural or accurate way to express it in Sinhala. 'ඉදිරිපත්' (idirippat) means 'forward' or 'leading' which isn't quite aligned with 'advanced'. 'සේවාදායක' (sevadaayaka) is a more formal term for 'server'. 'සැකසුම්' (saekasum) correctly translates to 'settings'.",
+          "suggestion": "Consider \"උසස් සේවාදායක සැකසුම්\" (usas sevadaayaka saekasum) which translates to 'Advanced server settings' more accurately. 'උසස්' (usas) means 'advanced' or 'superior'."
         }
       ],
       "approved_at": null
@@ -197,13 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Напредна' is misspelled. It should be 'Напредни'.",
-          "suggestion": "Напредни"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Напредни' is a closer translation for 'Advanced', the overall phrase doesn't perfectly convey the meaning of 'Advanced server settings'. A more accurate translation would consider the context and perhaps use a phrase like 'Поставке сервера - напредни'.",
-          "suggestion": "Поставке сервера - напредни"
+          "description": "The Serbian (Cyrillic) translation contains a spelling error. 'Напредна' should be 'Напредне'.",
+          "suggestion": "Напредне"
         }
       ],
       "approved_at": null
@@ -214,12 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Napredna' is misspelled. It should be 'Napredna'.",
-          "suggestion": "Napredna"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'podešavanja' is misspelled. It should be 'podešavanja'.",
+          "description": "The word 'ppodešavanja' appears to be a typo and is not a standard Serbian word. It likely should be 'podešavanja'.",
           "suggestion": "podešavanja"
         }
       ],
@@ -240,7 +219,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Cài đặt máy chủ nâng cao\" is understandable, a more natural and idiomatic translation of 'Advanced server settings' would be \"Cấu hình máy chủ nâng cao\" or \"Thiết lập máy chủ nâng cao\". \"Cài đặt\" often implies installation, not configuration.",
+          "suggestion": "Cấu hình máy chủ nâng cao"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

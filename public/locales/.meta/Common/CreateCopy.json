@@ -3,7 +3,7 @@
   "content": "Create copy",
   "content_en_sha1_hash": "2a18291e8ec941661e232592c51e0660eb1c89ef",
   "created_at": "2025-05-19T21:30:43.847Z",
-  "updated_at": "2025-05-28T09:30:02.537Z",
+  "updated_at": "2025-10-03T13:19:30.812Z",
   "comment": {
     "text": "This translation key is used to display the text \"Create copy\" on a button that creates a duplicate or backup of a selected folder or file in various UI components. The text appears as the label on a primary button, typically found within buttons labeled \"Backup To Public Room\", \"Third Party Module\" or \"Manual Backup\".",
     "is_auto": true,
@@ -11,40 +11,40 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/sub-components/RoomsModule.js",
-      "line_number": 116,
-      "context": "<BackupToPublicRoom key=\"backup-to-public-room-panel\" />\n ) : null}\n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={this.onMakeCopy}\n primary\n isDisabled={isModuleDisabled || !selectedFolder}\n size={buttonSize}\n />",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/pages/backup/manual-backup/sub-components/RoomsModule/RoomsModule.tsx",
+      "line_number": 213,
+      "context": "<Button\n primary\n id=\"create-copy\"\n size={buttonSize}\n onClick={handleMakeCopy}\n label={t(\"Common:CreateCopy\")}\n isDisabled={isModuleDisabled || !selectedFolder}\n testId=\"create_backup_room_button\"\n />\n </div>\n <NoteComponent",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/sub-components/ThirdPartyModule.js",
-      "line_number": 136,
-      "context": "isSelectFolder\n />\n \n {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount ? (\n <Button\n label={t(\"Common:CreateCopy\")}\n onClick={this.onMakeCopy}\n primary\n isDisabled={isModuleDisabled || selectedFolder === \"\"}\n size={buttonSize}\n />",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/pages/backup/manual-backup/sub-components/storages/AmazonStorage/AmazonStorage.tsx",
+      "line_number": 143,
+      "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || isDisabled}\n size={buttonSize}\n testId=\"amazon_create_copy_button\"",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/sub-components/storages/AmazonStorage.js",
-      "line_number": 78,
-      "context": "/>\n \n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || this.isDisabled}\n size={buttonSize}\n />",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/pages/backup/manual-backup/sub-components/storages/GoogleCloudStorage/GoogleCloudStorage.tsx",
+      "line_number": 133,
+      "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || isDisabled}\n size={buttonSize}\n testId=\"google_cloud_create_copy_button\"",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/sub-components/storages/GoogleCloudStorage.js",
-      "line_number": 77,
-      "context": "/>\n \n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || this.isDisabled}\n size={buttonSize}\n />",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/pages/backup/manual-backup/sub-components/storages/RackspaceStorage/RackspaceStorage.tsx",
+      "line_number": 132,
+      "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || isDisabled}\n size={buttonSize}\n testId=\"racspace_create_copy_button\"",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/sub-components/storages/RackspaceStorage.js",
-      "line_number": 78,
-      "context": "/>\n \n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || this.isDisabled}\n size={buttonSize}\n />",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/pages/backup/manual-backup/sub-components/storages/SelectelStorage/SelectelStorage.tsx",
+      "line_number": 132,
+      "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || isDisabled}\n size={buttonSize}\n testId=\"selectel_create_copy_button\"",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/sub-components/storages/SelectelStorage.js",
-      "line_number": 77,
-      "context": "/>\n \n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || this.isDisabled}\n size={buttonSize}\n />",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/pages/backup/manual-backup/sub-components/ThirdPartyModule/ThirdPartyModule.tsx",
+      "line_number": 235,
+      "context": "{connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount ? (\n <Button\n primary\n size={buttonSize}\n onClick={handleMakeCopy}\n label={t(\"Common:CreateCopy\")}\n isDisabled={isModuleDisabled || selectedFolder === \"\"}\n testId=\"third_party_create_copy_button\"\n />\n ) : null}\n </div>",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

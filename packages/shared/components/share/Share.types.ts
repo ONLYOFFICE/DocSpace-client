@@ -26,20 +26,24 @@
 
 import React from "react";
 import moment from "moment";
-import {
-  TAvailableExternalRights,
-  TFile,
-  TFileLink,
-} from "../../api/files/types";
-import { ShareAccessRights } from "../../enums";
-import { TOption } from "../combobox";
+import type { TFunction } from "i18next";
+import type { IndexRange } from "react-virtualized";
+
+import type { TFile, TFileLink, TFolder } from "../../api/files/types";
+import type { LinkParamsType, TAvailableShareRights } from "../../types";
+import type { ShareAccessRights } from "../../enums";
+
+import type { TOption } from "../combobox";
+import type { TUser } from "../../api/people/types";
+import type { TGroup } from "../../api/groups/types";
+import type { RoomMember } from "../../api/rooms/types";
 
 export type ShareCalendarProps = {
   onDateSet: (formattedDate: moment.Moment) => void;
-  closeCalendar: (formattedDate: moment.Moment) => void;
-  calendarRef: React.RefObject<HTMLDivElement>;
+  closeCalendar: () => void;
+  calendarRef: React.RefObject<HTMLDivElement | null>;
   locale: string;
-  bodyRef?: React.MutableRefObject<HTMLDivElement | null>;
+  bodyRef?: React.RefObject<HTMLDivElement | null>;
   useDropDown?: boolean;
 };
 export type DefaultCreatePropsType = {
@@ -50,53 +54,46 @@ export type DefaultCreatePropsType = {
 
 export type AccessItem = { access?: ShareAccessRights };
 
-export type TLink = TFileLink | { isLoaded: boolean };
+export type TLink = TFileLink | { key: string; isLoaded: boolean };
 
-export type LinkRowProps =
+export type LinkRowProps = {
+  onAddClick?: () => Promise<void>;
+  links: TLink[] | null;
+
+  changeShareOption: (item: TOption, link: TFileLink) => void;
+  changeAccessOption?: (item: AccessItem, link: TFileLink) => Promise<void>;
+
+  changeExpirationOption: (
+    link: TFileLink,
+    expirationDate: moment.Moment | null,
+  ) => Promise<void>;
+
+  removedExpiredLink: (link: TFileLink) => void;
+
+  availableShareRights?: TAvailableShareRights;
+
+  loadingLinks: (string | number)[];
+
+  isFolder?: boolean;
+
+  onCopyLink: (link: TFileLink) => void;
+  getData: (link: TFileLink) => ContextMenuModel[];
+  onOpenContextMenu: (e: React.MouseEvent) => void;
+  onCloseContextMenu: () => void;
+
+  isShareLink?: boolean;
+} & (
   | {
-      onAddClick: () => Promise<void>;
-      links: TLink[] | null;
-      changeShareOption: (item: TOption, link: TFileLink) => Promise<void>;
-      changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
-      changeExpirationOption: (
-        link: TFileLink,
-        expirationDate: moment.Moment | null,
-      ) => Promise<void>;
-      availableExternalRights: TAvailableExternalRights;
-      loadingLinks: (string | number)[];
-      isRoomsLink?: undefined;
-      isPrimaryLink?: undefined;
+      isRoomsLink?: undefined | false;
       isArchiveFolder?: undefined;
-      getData?: () => undefined;
-      onOpenContextMenu?: undefined;
-      onCloseContextMenu?: undefined;
-      onAccessRightsSelect?: undefined;
-      isFormRoom?: boolean;
-      isCustomRoom?: boolean;
-      removedExpiredLink?: never;
+      onAccessRightsSelect?: never;
     }
   | {
-      onAddClick: () => Promise<void>;
-      links: TLink[] | null;
-      changeShareOption: (item: TOption, link: TFileLink) => Promise<void>;
-      changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
-      changeExpirationOption: (
-        link: TFileLink,
-        expirationDate: moment.Moment | null,
-      ) => Promise<void>;
-      availableExternalRights: TAvailableExternalRights;
-      loadingLinks: (string | number)[];
-      isRoomsLink?: boolean;
-      isPrimaryLink: boolean;
+      isRoomsLink: true;
       isArchiveFolder: boolean;
-      isFormRoom?: boolean;
-      isCustomRoom?: boolean;
-      getData: () => ContextMenuModel[];
-      onOpenContextMenu: (e: React.MouseEvent) => void;
-      onCloseContextMenu: () => void;
       onAccessRightsSelect: (option: TOption) => void;
-      removedExpiredLink: (link: TFileLink) => void;
-    };
+    }
+);
 
 export type ExpiredComboBoxProps = {
   link: TFileLink;
@@ -105,43 +102,152 @@ export type ExpiredComboBoxProps = {
     expirationDate: moment.Moment | null,
   ) => Promise<void>;
   isDisabled?: boolean;
-  isRoomsLink?: boolean;
-  changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
-  availableExternalRights: TAvailableExternalRights;
-  removedExpiredLink?: (link: TFileLink) => void;
+  removedExpiredLink: (link: TFileLink) => void;
 };
 
 export type ShareProps = {
-  infoPanelSelection: TFile;
+  infoPanelSelection: TFile | TFolder;
+  setEmbeddingPanelData?: (value: {
+    visible: boolean;
+    item?: TFile | TFolder;
+  }) => void;
 
-  isRooms?: boolean;
   setView?: (view: string) => void;
 
   shareChanged?: boolean;
   setShareChanged?: (value: boolean) => void;
 
-  getPrimaryFileLink?: (id: string | number) => Promise<TFileLink>;
-  editFileLink?: (
-    fileId: number | string,
-    linkId: number | string,
-    access: ShareAccessRights,
-    primary: boolean,
-    internal: boolean,
-    expirationDate: moment.Moment,
-  ) => Promise<TFileLink>;
-  addFileLink?: (
-    fileId: number | string,
-    access: ShareAccessRights,
-    primary: boolean,
-    internal: boolean,
-    expirationDate?: moment.Moment | null,
-  ) => Promise<TFileLink>;
-
-  selfId: string;
+  selfId?: string;
   onOpenPanel?: (options: {
     visible: boolean;
     updateAccessLink: () => Promise<void>;
     fileId: string | number;
   }) => void;
   onlyOneLink?: boolean;
+
+  setIsScrollLocked?: (isScrollLocked: boolean) => void;
+  setEditLinkPanelIsVisible: (value: boolean) => void;
+  setLinkParams: (linkParams: LinkParamsType) => void;
+  fileLinkProps?: TFileLink[];
+  members?: RoomMember[];
+  shareMembersTotal?: number;
+  isEditor?: boolean;
+  onAddUser?: (item: TFolder | TFile) => void;
+  disabledSharedUser?: boolean;
+  onClickGroup?: (group: TGroup) => void;
+};
+
+export interface LinkTitleProps {
+  t: TFunction;
+  linkTitle: string;
+  isExpiredLink: boolean;
+  onCopyLink: VoidFunction;
+  shareLink: string;
+
+  isLoaded?: boolean;
+  disabledCopy?: boolean;
+}
+
+export type TCopyShareLinkOptions = {
+  canShowLink: boolean;
+  onClickLink: VoidFunction;
+};
+
+export type TShareBarProps = {
+  t: TFunction;
+  isFolder?: boolean;
+  parentShared?: boolean;
+  selfId?: string;
+  isEditor?: boolean;
+};
+
+export interface UseMembersProps {
+  members: RoomMember[] | undefined;
+  selfId: string | undefined;
+  shareMembersTotal: number;
+  infoPanelSelection: TFile | TFolder;
+
+  linksCount: number;
+  onAddUser?: (item: TFolder | TFile) => void;
+  disabledSharedUser?: boolean;
+  onClickGroup?: (group: TGroup) => void;
+}
+
+export interface UseShareProps {
+  infoPanelSelection: TFile | TFolder;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditLinkPanelIsVisible: (value: boolean) => void;
+  setLinkParams: (linkParams: LinkParamsType) => void;
+
+  onlyOneLink?: boolean;
+  shareChanged?: boolean;
+  setShareChanged?: (value: boolean) => void;
+
+  fileLinkProps?: TLink[];
+  setView?: (view: string) => void;
+  setIsScrollLocked?: (isScrollLocked: boolean) => void;
+  onOpenPanel?: (options: {
+    visible: boolean;
+    updateAccessLink: () => Promise<void>;
+    fileId: string | number;
+  }) => void;
+  setEmbeddingPanelData?: (value: {
+    visible: boolean;
+    item?: TFile | TFolder;
+  }) => void;
+}
+
+export type TTitleID =
+  | "owner"
+  | "groups"
+  | "users"
+  | "guests"
+  | "expected"
+  | "administrators";
+
+export type TTitleShare = {
+  id: TTitleID;
+  displayName: string;
+  isTitle: true;
+  isExpect?: boolean;
+};
+
+export type TShareMember = {
+  access: number;
+  canEditAccess: boolean;
+  isExpect?: boolean;
+} & (TUser | TGroup);
+
+export type TShare = TTitleShare | TShareMember;
+export type TShareMembers = Record<TTitleID, TShare[]>;
+
+export interface UserProps {
+  user: TShare;
+  currentUser: TShareMember;
+
+  options?: TOption[];
+  hideCombobox?: boolean;
+  selectedOption?: TOption;
+  onSelectOption?: (option: TOption) => Promise<void>;
+
+  showInviteIcon?: boolean;
+  onRepeatInvitation?: () => Promise<void>;
+
+  onClickGroup?: (group: TGroup) => void;
+
+  index?: number;
+}
+
+export type ListProps = {
+  hasNextPage: boolean;
+  itemCount: number;
+  loadNextPage: (params: IndexRange) => Promise<void>;
+  linksBlockLength: number;
+  withoutTitlesAndLinks: boolean;
+  children: React.ReactNode;
+};
+
+export type Filter = {
+  startIndex: number;
+  count: number;
 };

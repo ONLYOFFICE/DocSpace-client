@@ -3,7 +3,7 @@
   "content": "Add admin by name or email",
   "content_en_sha1_hash": "c917300875036e8a075e1740087c98c90e3179cf",
   "created_at": "2025-05-19T21:30:55.202Z",
-  "updated_at": "2025-06-03T20:59:41.979Z",
+  "updated_at": "2025-08-11T09:02:43.900Z",
   "comment": {
     "text": "This translation key is used to display the text \"Add admin by name or email\" in a UI component, specifically as a placeholder in an invite input field. It appears on the screen when the user interacts with the input field and needs to add an administrator by either name or email address.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
-      "line_number": 281,
+      "line_number": 274,
       "context": "<StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>\n <TextInput\n className=\"invite-input\"\n scale\n onChange={onChange}\n placeholder={t(\"Files:AddAdminByNameOrEmail\")}\n value={inputValue}\n type={InputType.search}\n withBorder={false}\n isDisabled={isDisabled}\n onKeyDown={onKeyDown}",
       "module": "/packages/client"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ad və ya e-poçt ünvanı ilə administrator əlavə edin\" is a literal translation and sounds slightly awkward. A more natural phrasing would be 'Administratoru ad və ya e-poçt ünvanı ilə əlavə edin' or 'Ad və ya e-poçt ünvanı ilə yeni administrator əlavə edin'.",
+          "suggestion": "Administratoru ad və ya e-poçt ünvanı ilə əlavə edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Lisää pääkäyttäjän nimen tai sähköpostin perusteella\" is a bit too literal and verbose. A more natural phrasing would be something like \"Lisää pääkäyttäjä nimen tai sähköpostin perusteella\" or \"Lisää ylläpitäjä nimen tai sähköpostin perusteella\". While technically correct, it doesn't read as smooth in Finnish.",
+          "suggestion": "Lisää pääkäyttäjä nimen tai sähköpostin perusteella"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Using 'perusteella' feels slightly formal for a UI context. While not strictly wrong, it could be made more user-friendly.",
+          "suggestion": "Lisää pääkäyttäjä nimen tai sähköpostin mukaan"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +98,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ավելացնել ադմին անունով կամ էլ. հասցեով\" is somewhat literal and could be improved for natural flow. While technically correct, it reads a little awkwardly.",
+          "suggestion": "Ավելացնել ադմինը անունով կամ էլեկտրոնային հասցեով"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"էլ.\" is a shortened form and may be perceived as less formal depending on the target audience. Consider using the full word for better readability in a professional context.",
+          "suggestion": "Replace \"էլ.\" with \"կամ էլեկտրոնային\""
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,13 +151,30 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dodaj administratora wg nazwy użytkownika lub adresu e-mail\" is not the most natural or idiomatic way to express 'Add admin by name or email' in Polish. 'Wg' (według) is a bit formal and awkward in this context. A more natural phrasing would use something like 'po' or 'na podstawie'.",
+          "suggestion": "Dodaj administratora po nazwie użytkownika lub adresie e-mail"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'adresu e-mail' could be improved for readability.  While technically correct, it's slightly cumbersome.",
+          "suggestion": "Dodaj administratora po nazwie użytkownika lub adresie e-mail"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Adicione um administrador por nome ou endereço de correio eletrónico\" is a literal translation and sounds unnatural in Portuguese.  'Endereço de correio eletrónico' is overly formal. It should be 'endereço de email' or simply 'email'.",
+          "suggestion": "Adicione um administrador por nome ou email."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +198,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පරිපාලකයාවුන්ගේ නම හෝ විද්‍යුත් ලිපිනයෙන් එකතු කරන්න' is a literal translation that doesn't flow naturally in Sinhala.  'පරිපාලකයාවුන්ගේ' (Paripaalakayaavunge) is overly formal and possessive.  'එකතු කරන්න' (Ekathukaranna) sounds awkward in this context.",
+          "suggestion": "A more natural translation would be something like 'නම හෝ විද්‍යුත් ලිපිනයෙන් පරිපාලකයෙකු එක් කරන්න' (Nama hora vidyut lipinayan paripaalakayek ek karanna) or 'නම හෝ විද්‍යුත් ලිපිනයෙන් පරිපාලකයා එක් කරන්න' (Nama hora vidyut lipinayan paripaalakayaa ek karanna)."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the use of 'පරිපාලකයාවුන්ගේ' (Paripaalakayaavunge) makes the sentence sound overly formal and a bit stilted. The plural possessive is unusual for this action.",
+          "suggestion": "Use a simpler construct like 'පරිපාලකයෙකු' (Paripaalakayek) or 'පරිපාලකයා' (Paripaalakayaa)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +227,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'е-маилу' is written with a hyphen instead of a space.  It should be 'е маилу'.",
+          "suggestion": "Додајте администратора по имену или е маилу."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

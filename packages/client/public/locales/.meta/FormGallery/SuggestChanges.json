@@ -3,7 +3,7 @@
   "content": "Suggest changes",
   "content_en_sha1_hash": "9ffcb5afef6f8967083c097c71996bf3bcc700c1",
   "created_at": "2025-05-19T21:30:55.122Z",
-  "updated_at": "2025-06-03T20:59:42.011Z",
+  "updated_at": "2025-10-16T07:29:35.650Z",
   "comment": {
     "text": "This translation key is used for a button that suggests changes to a gallery. It appears as part of an info panel on the home page, allowing users to open a file in a new tab and suggest modifications to it.",
     "is_auto": true,
@@ -11,14 +11,14 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.js",
-      "line_number": 81,
-      "context": "target=\"_blank\"\n type=\"action\"\n isHovered\n color={currentColorScheme.main?.accent}\n >\n {t(\"FormGallery:SuggestChanges\")}\n </Link>\n </StyledLink>\n \n <StyledSubtitle>\n <Text fontWeight=\"600\" fontSize=\"14px\">",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
+      "line_number": 114,
+      "context": "type={LinkType.action}\n isHovered\n color=\"accent\"\n dataTestId=\"info_panel_gallery_suggest_changes_link\"\n >\n {t(\"FormGallery:SuggestChanges\")}\n </Link>\n </div>\n \n <div\n className={commonStyles.subtitle}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1240,
+      "line_number": 1248,
       "context": "key: \"separator\",\n isSeparator: true,\n },\n {\n key: \"suggest-changes\",\n label: t(\"FormGallery:SuggestChanges\"),\n onClick: () => this.onSuggestOformChanges(item),\n },\n ];\n };",
       "module": "/packages/client"
     }
@@ -99,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"変更点のご提案\" is understandable, it's a rather formal and verbose translation of \"Suggest changes.\" It might be too stiff for a UI element like a button or menu item. A more natural and concise translation would be better.",
-          "suggestion": "変更の提案 (Hen'kai no teian) or 提案 (Teian)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Предложи промене\" is not the most natural or idiomatic translation of \"Suggest changes.\" While technically correct, it sounds slightly formal and less conversational. A more natural translation would be \"Предложи измене\" or \"Предложити измену\".",
-          "suggestion": "Предложи измене"
+          "description": "The Serbian translation 'Предложи промене' is grammatically correct but doesn't quite capture the nuance of 'Suggest changes.' A more appropriate translation would emphasize a proposal or recommendation.",
+          "suggestion": "Предложите измене"
         }
       ],
       "approved_at": null
@@ -195,13 +189,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Predloži promene' is understandable, a more natural and idiomatic translation for 'Suggest changes' in Serbian (Latin) would be 'Predložite izmene' or 'Sugerišite promene'. 'Predloži promene' sounds slightly awkward.",
-          "suggestion": "Predložite izmene"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -210,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Değişiklik öner\" is a literal translation of 'Suggest changes' but doesn't quite capture the nuance. It translates more to 'Change suggestion' which isn't ideal. A more natural and accurate translation would convey the idea of proposing improvements or modifications.",
-          "suggestion": "Öneri yap"
+          "description": "While 'Değişiklik öner' is understandable, a more accurate and natural translation of 'Suggest changes' in Turkish would be 'Değişiklikler öner' or 'Değişiklik önerme'. 'Değişiklik öner' implies a single change being suggested, whereas 'Suggest changes' is plural.",
+          "suggestion": "Değişiklikler öner"
         }
       ],
       "approved_at": null

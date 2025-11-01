@@ -31,25 +31,33 @@ import { cookies } from "next/headers";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { selfHandler } from "@docspace/shared/__mocks__/e2e";
+import { logger } from "@/../logger.mjs";
 
 const IS_TEST = process.env.E2E_TEST;
 
 export async function getSelf(): Promise<TUser | undefined> {
-  const cookieStore = cookies();
-  const authToken = cookieStore.get("asc_auth_key");
+  logger.debug("Start GET /people/@self");
 
-  if (!authToken) return;
+  try {
+    const cookieStore = await cookies();
+    const authToken = cookieStore.get("asc_auth_key");
 
-  const [req] = createRequest([`/people/@self`], [["", ""]], "GET");
-  const res = IS_TEST
-    ? selfHandler()
-    : await fetch(req, { next: { revalidate: 300 } });
+    if (!authToken) return;
 
-  if (res.status === 401 || !res.ok) {
-    return;
+    const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
+    const res = IS_TEST
+      ? selfHandler()
+      : await fetch(req, { next: { revalidate: 300 } });
+
+    if (res.status === 401 || !res.ok) {
+      logger.error(`GET /people/@self failed: ${res.status}`);
+      return;
+    }
+
+    const self = await res.json();
+
+    return self.response;
+  } catch (error) {
+    logger.error(`Error in getSelf: ${error}`);
   }
-
-  const self = await res.json();
-
-  return self.response;
 }

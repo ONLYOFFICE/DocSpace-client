@@ -3,7 +3,7 @@
   "content": "Tags",
   "content_en_sha1_hash": "848eed0fbd5429f556b2982dec3ea87136e33e44",
   "created_at": "2025-05-19T21:30:49.252Z",
-  "updated_at": "2025-07-01T15:57:35.981Z",
+  "updated_at": "2025-10-14T02:01:08.998Z",
   "comment": {
     "text": "This translation key is used to display the label \"Tags\" in various UI elements throughout the application, such as input fields and column headers. It appears in contexts like dialog components, info panels, and table headers, helping users understand what field or section they are interacting with. Translators should provide a clear and concise version of this text that accurately conveys its intended purpose.",
     "is_auto": true,
@@ -12,43 +12,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TagInput/index.js",
-      "line_number": 126,
+      "line_number": 128,
       "context": "hasTags={!!tagHandler.tags.length}\n >\n <InputParam\n ref={inputRef}\n id=\"shared_tags-input\"\n title={title ? `${title}:` : `${t(\"Common:Tags\")}:`}\n placeholder={t(\"TagsPlaceholder\")}\n value={tagInput}\n onChange={onTagInputChange}\n onFocus={handleFocus}\n onBlur={handleBlur}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 200,
-      "context": "case \"Versions\":\n return this.t(\"InfoPanel:Versions\");\n case \"Comments\":\n return this.t(\"Common:Comments\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n case \"Storage\":\n if (this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 227,
+      "context": "case \"Versions\":\n return this.t(\"InfoPanel:Versions\");\n case \"Comments\":\n return this.t(\"Common:Comments\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 600,
+      "line_number": 702,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Tags\",\n title: t(\"Common:Tags\"),\n enable: roomColumnTagsIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Tags,\n withTagRef: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 600,
+      "line_number": 702,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Tags\",\n title: t(\"Common:Tags\"),\n enable: roomColumnTagsIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Tags,\n withTagRef: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1014,
+      "line_number": 1106,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1014,
+      "line_number": 1106,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 141,
+      "line_number": 145,
       "context": "const [selectedColumns, setSelectedColumns] = useState([\n { key: \"Index\", label: t(\"Files:Index\") },\n { key: \"Name\", label: t(\"Common:Label\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Tags\", label: t(\"Common:Tags\") },\n ]);\n \n const [selectedLink, setSelectedLink] = useState(null);\n \n const [config, setConfig] = useState({",
       "module": "/packages/client"
     }
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අනන්‍යන\" does not accurately convey the meaning of \"Tags\". \"අනන්‍යන\" translates to \"unique\" or \"distinctive\", which is not the intended meaning of \"Tags\" in this context (likely referring to keywords or labels).",
-          "suggestion": "Consider alternatives like \"ලේබල්\" (label), \"අනතුරු ඇමුණුම්\" (attachments), or \"විසඳුම්” (keywords). The best choice depends on the specific context."
+          "description": "The Sinhala translation \"අනන්‍යන\" does not accurately convey the meaning of \"Tags\". \"අනන්‍යන\" translates to 'unique' or 'peculiar', which is not the intended meaning of 'Tags' in this context.",
+          "suggestion": "A more appropriate translation for 'Tags' would be something like \"ලේබල්\" (label), \"මාර්ක්ස්\" (marks), or \"අනන්‍යවචන\" (ananyavachana - a more literal but less common translation). The best choice depends on the specific context."
         }
       ],
       "approved_at": null
@@ -240,13 +240,19 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Tag\" is a direct transliteration and doesn't fully capture the meaning of 'Tags' (plural). It should be a plural form or a more descriptive term depending on the context.",
-          "suggestion": "Consider alternatives like 'Thẻ' (if referring to labels) or a more descriptive phrase depending on how 'Tags' is used."
+          "description": "The translation 'Tag' is a direct transliteration and doesn't fully capture the intended meaning of 'Tags' in Vietnamese. 'Tags' implies a plural form or a collection of tags.",
+          "suggestion": "Consider using a plural form like 'Nhãn' or a more descriptive phrase like 'Các nhãn' depending on the context."
         }
       ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

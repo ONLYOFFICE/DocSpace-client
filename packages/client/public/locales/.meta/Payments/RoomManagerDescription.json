@@ -3,7 +3,7 @@
   "content": "Room administration and archiving, user invitation and management. Several admins can be assigned to the room.",
   "content_en_sha1_hash": "fcf79ad90b7d19194bb1754fbe16c0cc2c3a8dc2",
   "created_at": "2025-05-19T21:30:53.725Z",
-  "updated_at": "2025-05-21T06:29:52.169Z",
+  "updated_at": "2025-08-11T18:11:59.273Z",
   "comment": {
     "text": "This translation key is used to describe the role and responsibilities of a Room Manager, which includes administrative tasks and user management. It appears in the Portal Settings UI, likely on a category page or settings screen where admins can be assigned to rooms. Translators should focus on conveying the meaning of \"room administration\" and \"user management\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
       "line_number": 154,
-      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"Common:RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>\n }\n />\n );\n };",
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"Common:RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>\n }\n dataTestId=\"admin_accounts_help_button\"\n />\n );",
       "module": "/packages/client"
     }
   ],
@@ -29,19 +29,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'ودعوة المستخدم وإدارتها' is grammatically awkward. The second 'إدارتها' seems redundant and doesn't flow naturally.",
-          "suggestion": "ودعوة المستخدمين وإدارتهم"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The English phrase 'RoomManager' is not directly translated.  While 'مدراء' (managers) is implied, a more accurate translation might benefit from incorporating 'مدير الغرفة' at least once for clarity.",
-          "suggestion": "يمكن تعيين عدة مديري غرف للغرفة."
+          "description": "The phrase 'إدارتها' (idaritha) is redundant and grammatically incorrect. It repeats the action of management. It should refer specifically to 'user management'.",
+          "suggestion": "إدارة الغرف والأرشفة ودعوة المستخدم وإدارة المستخدمين. يمكن تعيين عدة مدراء للغرفة."
         },
         {
-          "type": "grammar",
-          "description": "The indefinite article is missing before 'إدارة الغرف'.",
-          "suggestion": "إدارة الغرف والأرشفة..."
+          "type": "formatting",
+          "description": "The translation lacks punctuation for clarity and flow.  A comma or other conjunction might improve readability.",
+          "suggestion": "إدارة الغرف والأرشفة، ودعوة المستخدم وإدارة المستخدمين. يمكن تعيين عدة مدراء للغرفة."
         }
       ],
       "approved_at": null
@@ -49,13 +44,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'arxivləşdirilməsi' could be improved. While technically correct, 'arxivlənməsi' is more commonly used and sounds more natural in this context.",
-          "suggestion": "Otağın arxivlənməsi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -64,13 +53,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'RoomManagerDescription' is not directly translated in the Bulgarian version. It simply translates the description itself. While not strictly incorrect, it's not ideal. A more literal translation of 'Room Manager Description' might be beneficial for context.",
-          "suggestion": "Consider adding a more literal translation of 'Room Manager Description' for added clarity. For example, 'Описание на администратора на стаите'."
-        },
-        {
-          "type": "formatting",
-          "description": "The English sentence 'Several admins can be assigned to the room' is translated as 'За стаята могат да бъдат назначени няколко администратора.' While correct, the Bulgarian sentence structure could be adjusted for improved flow and a more natural feel.",
-          "suggestion": "Consider rephrasing to something like: 'В стаята могат да бъдат назначени няколко администратори.' (Changing the word order slightly.)"
+          "description": "The phrase \"Several admins can be assigned to the room\" is translated as \"За стаята могат да бъдат назначени няколко администратора\". While technically correct, a more natural and idiomatic translation would be something like \"Могат да бъдат назначени няколко администратори за стаята\" or \"В стаята могат да бъдат назначени няколко администратора\". The current translation feels slightly awkward.",
+          "suggestion": "В стаята могат да бъдат назначени няколко администратора."
         }
       ],
       "approved_at": null
@@ -93,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Greek translation uses a period (.) after 'χρηστών'. While grammatically correct, a comma (,) might be more natural in this context, mirroring the structure of the English sentence.",
-          "suggestion": "Replace '.' with ',' after 'χρηστών'."
+          "description": "The Greek translation uses a period (.) at the end of each sentence, which is grammatically correct but might feel a bit abrupt in certain contexts. It's common to see longer sentences connected with commas or conjunctions in more conversational Greek.",
+          "suggestion": "Consider revising to flow better, perhaps combining the sentences with conjunctions like 'και' (and) or adjusting the sentence structure for a more fluid reading. For example: 'Διαχείριση και αρχειοθέτηση δωματίων, πρόσκληση και διαχείριση χρηστών, και μπορούν να οριστούν διάφοροι διαχειριστές στο δωμάτιο.'"
         }
       ],
       "approved_at": null
@@ -123,13 +107,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"user invitation\" is not accurately conveyed by \"օգտատերերի հրավեր\". A more accurate translation might be something like \"օգտատերերի հրավիրում և կառավարում\" to explicitly include the 'invitation' action.",
-          "suggestion": "Օգտատերերի հրավիրում և կառավարում"
+          "description": "The phrase \"user invitation\" is not accurately translated. \"Հրավեր\" (hravver) is more accurately 'invitation' or 'summons'.  It doesn't fully convey the concept of inviting users to a room.",
+          "suggestion": "Consider a more descriptive translation like \"օգտատերերի ընդգրկում\" (otatereri endgrkum) which means 'user inclusion' or 'user adding'."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, using a more consistent phrasing like “մի քանի վարչատարեր” instead of just “ադմիններ” might improve clarity and alignment with Armenian terminology. The term 'ադմիններ' is a direct transliteration and might be less familiar to some.",
-          "suggestion": "մի քանի վարչատարեր"
+          "description": "The Armenian translation uses a colon after 'առավարում' (aravrum) which is stylistically not as common as a period.",
+          "suggestion": "Replace the colon with a period: Սենյակի կառավարում և արխիվացում։ օգտատերերի հրավեր և կառավարում։"
         }
       ],
       "approved_at": null
@@ -137,13 +121,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'stanze' (rooms) could be improved for clarity. While technically correct, 'aree' (areas) or 'ambienti' (environments) might be more appropriate depending on the context of the 'room'.",
-          "suggestion": "Consider replacing 'stanze' with 'aree' or 'ambienti' if the 'room' refers to more than just a room."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -155,7 +133,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"archiving\" is translated as \"아카이브\" which, while understandable, is a direct transliteration and might not be the most natural or clear way to express archiving in this context. A more appropriate translation might be something like \"보관\" (storage) or \"파일 정리\" (file organization).",
+          "suggestion": "방 관리 및 보관, 사용자 초대 및 관리. 여러 관리자를 방에 할당할 수 있습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -164,8 +148,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Several admins can be assigned to the room\" is not accurately reflected in the Lao translation. \"ມອບຫມາຍໃຫ້ຫ້ອງ\" (moap mai hai hong) implies an assignment of responsibility, but doesn't convey the idea of multiple admins.",
-          "suggestion": "ການບໍລິຫານຫ້ອງແລະການເກັບຮັກສາ, ການເຊື້ອເຊີນຜູ້ໃຊ້ແລະການຄຸ້ມຄອງ. ສາມາດມອບຫມາຍຜູ້ເບິ່ງແຍງຫຼາຍຄົນໃຫ້ຫ້ອງໄດ້"
+          "description": "The phrase \"Room administration\" is too literal. A more natural Lao translation would be something along the lines of \"ການຈັດການຫ້ອງ\" (gan jat gaan hong).",
+          "suggestion": "ການຈັດການຫ້ອງ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“archiving” translated as “ການເກັບຮັກສາ” is accurate but could be more precise. Considering the context, a more suitable translation may be something indicating record keeping or data storage related to the room.",
+          "suggestion": "ການເກັບຂໍ້ມູນຂອງຫ້ອງ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“user invitation” translated as “ການເຊື້ອເຊີນຜູ້ໃຊ້” is technically correct but might sound overly formal. A slightly more natural phrasing could be used depending on the broader tone of the documentation.",
+          "suggestion": "ການເຊີນໃຊ້ອິນເຕີເນັດ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Several admins can be assigned” is overly literal. A more natural phrasing would be “ສາມາດເລືອກຜູ້ເບິ່ງແຍງໄດ້ຫຼາຍຄົນ”",
+          "suggestion": "ສາມາດເລືອກຜູ້ເບິ່ງແຍງໄດ້ຫຼາຍຄົນ"
         }
       ],
       "approved_at": null
@@ -179,19 +178,19 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Several admins can be assigned to the room' is translated as 'Er kunnen meerdere beheerders aan de kamer worden toegewezen'. While technically correct, it sounds slightly awkward in Dutch. A more natural phrasing would be 'Meerdere beheerders kunnen aan de ruimte worden toegewezen' or 'Aan de ruimte kunnen meerdere beheerders worden toegewezen'.",
+          "suggestion": "Meerdere beheerders kunnen aan de ruimte worden toegewezen."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Polish translation uses a comma (,) to separate the first two elements of the list, while the English uses a semicolon. This creates a slight inconsistency in formatting.",
-          "suggestion": "Consider using a semicolon (;) to match the English formatting: \"Administracja i archiwizowanie pokoi; zapraszanie i zarządzanie użytkownikami.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -200,8 +199,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'RoomManagerDescription' implies a description specifically about the role of a room manager. The Portuguese translation broadly refers to 'Administração e arquivação de salas, convite e gestão de utilizadores' which is more of a general description of room management functions, not necessarily the manager's role itself.",
-          "suggestion": "Consider rephrasing to better reflect the 'RoomManager' aspect. A possible suggestion is: 'Descrição do gestor de salas: administração e arquivação, convite e gestão de utilizadores. Vários administradores podem ser designados para a sala.'"
+          "description": "The English phrase 'RoomManagerDescription' is not directly conveyed in the translation. 'Administração e arquivação de salas' translates to 'Room administration and archiving,' which is accurate, but the 'Manager' aspect is lost. It's not a critical error, but it reduces clarity.",
+          "suggestion": "Consider 'Administração e arquivamento de salas, gestão de utilizadores e administração. Vários administradores podem ser designados para a sala.' or similar that implies the management aspect."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is slightly awkward. While grammatically correct, it lacks a natural flow in Portuguese.",
+          "suggestion": "Rephrase for better readability. For example: 'Administração e arquivamento de salas, convite e gestão de utilizadores. É possível designar vários administradores para cada sala.'"
         }
       ],
       "approved_at": null
@@ -212,12 +216,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"utilizadores\" is a Portuguese (Portugal) term for \"users\". The Brazilian Portuguese equivalent is \"usuários\".",
+          "description": "The word 'utilizadores' (users) is used instead of 'usuários'. 'Utilizadores' is more common in Portugal, while 'usuários' is standard in Brazil.",
           "suggestion": "Administração e arquivo de salas, convite e gestão de usuários."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'atribuídos' is grammatically correct but sounds slightly formal and less natural in this context. A more common and natural wording in Brazilian Portuguese would be 'podem ser administradores'.",
+          "description": "The phrase 'atribuídos à sala' is a bit formal and less natural in Brazilian Portuguese. A more common phrasing would be 'podem ser administradores da sala'.",
           "suggestion": "Vários administradores podem ser administradores da sala."
         }
       ],
@@ -226,13 +230,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'sală' is used repeatedly. While correct, it might sound repetitive. Consider using synonyms to improve readability.",
-          "suggestion": "Consider using synonyms for 'sală' such as 'spațiu', 'mediu', or rephrasing to avoid repetition."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -247,13 +245,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'කාමර' (kamara) is repeated unnecessarily. While grammatically correct, it's stylistically repetitive.",
-          "suggestion": "කාමර පරිපාලනය හා සංරක්‍ෂණය, පරිශ්‍රීලකයින්ට ආරාධනය හා කළමනාකරණය මෙන්ම පරිපාලකයින් කිහිප දෙනෙකු පත් කිරීමට හැකිය."
+          "description": "The word 'කාමර' (kamara) appears multiple times. While correct, consider using a more concise or varied phrasing for better readability. Depending on the context, 'මාර්ගගත කාමර' (margayanaatha kamara - online room) might be a better fit.",
+          "suggestion": "Consider alternatives like 'මාර්ගගත කාමර' or simply using 'කාමර' consistently and ensuring context makes it clear."
         },
         {
           "type": "grammar",
-          "description": "The phrasing 'කාමරයට පරිපාලකයින් කිහිප දෙනෙකු පත් කිරීමට හැකිය' could be slightly more concise.  While understandable, it's a bit verbose.",
-          "suggestion": "කාමරයට පරිපාලකයින් පත් කිරීමට හැකිය."
+          "description": "The phrase 'පරිශ්‍රීලකයින්ට ආරාධනය' (pariseelakayinnta aaradhwanaya) is grammatically correct, but could be slightly improved for flow. A more natural phrasing might be 'පරිශ්‍රීලකයින්ට ආරාධනය කිරීම' (pariseelakayinnta aaradhwanaya kirima - inviting users).",
+          "suggestion": "Replace 'ආරාධනය' with 'ආරාධනය කිරීම'."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure, while accurate, feels slightly long and can be broken down for improved readability in Sinhala. Long sentences are less common and less preferred in Sinhala.",
+          "suggestion": "Consider breaking the sentence into two shorter sentences, perhaps separating user invitation/management from admin assignment."
         }
       ],
       "approved_at": null
@@ -270,13 +273,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"RoomManagerDescription\" implies a description of a specific function or role. \"Administracija in arhiviranje sobe\" is a broader description of room management activities rather than the function itself. A more accurate translation would convey the role or function.",
-          "suggestion": "Administracija in upravljanje sob, vključno z arhiviranjem, povabilom in upravljanjem uporabnikov."
+          "description": "The phrase 'Room Manager' is not accurately translated. 'Room Manager' implies a role or application, while 'skrbnikov' translates to 'caretakers' or 'guardians'. A more appropriate translation would reflect the role of managing a room's settings and users.",
+          "suggestion": "Administracija in arhiviranje sobe, vabljenje in upravljanje uporabnikov. Sobi je mogoče dodeliti več upravljalcev."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While \"skrbnikov\" is technically correct, it can sound overly formal or clinical in this context. 'Administrators' would likely be more common and understandable.",
-          "suggestion": "Sobi je mogoče dodeliti več administratorjev."
+          "type": "formatting",
+          "description": "The Slovenian translation uses a comma (,) to separate phrases, which can make it read slightly awkwardly. Using a conjunction or restructuring the sentence would improve flow.",
+          "suggestion": "Administracija in arhiviranje sobe, ter vabljenje in vodenje uporabnikov. Sobi je mogoče dodeliti več skrbnikov."
         }
       ],
       "approved_at": null
@@ -286,19 +289,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'администрација' is generally acceptable, but 'управљање просторијама' would be more precise and natural in this context.",
-          "suggestion": "управљање просторијама"
+          "type": "incorrect_translation",
+          "description": "The phrase \"user invitation\" is translated as \"позивање корисника\". While technically correct, a more natural and common translation would be \"позивање и управљање корисницима\" or \"додавање и управљање корисницима\" depending on the intended nuance.",
+          "suggestion": "позивање и управљање корисницима"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'позивање корисника' is technically correct, 'додавање корисника' or 'и позивање корисника' might better convey the intended meaning of user invitation and management.",
-          "suggestion": "додавање корисника и управљање"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'соби' should be 'просторији' to agree with the gender of 'просторија'.",
-          "suggestion": "просторији"
+          "description": "The word 'room' is translated as 'соби'. While correct, a more formal/neutral translation, fitting for documentation, would be 'просторије'.",
+          "suggestion": "просторије"
         }
       ],
       "approved_at": null
@@ -309,13 +307,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'RoomManagerDescription' implies a description of the role or function, whereas the Serbian translation is a more literal description of actions. The translation doesn't convey the *description* aspect.",
-          "suggestion": "Administracija, arhiviranje prostorija, pozivanje i upravljanje korisnicima - opis uloge administratora prostorije."
+          "description": "The English phrase 'RoomManager' is not directly translated. While 'Administracija prostorija' conveys the management aspect, it misses the 'RoomManager' identifier. A more literal approach could be 'Upravljanje sobama' or 'Administracija soba (RoomManager)', although the latter is clunky.",
+          "suggestion": "Consider 'Administracija soba' or 'Upravljanje sobama' to better reflect the original meaning.  If preserving the term 'RoomManager' is important, a note could be added indicating it's a specific function or role."
         },
         {
           "type": "formatting",
-          "description": "The Serbian translation uses a dash '-' which can be more naturally rendered with an em dash '–' for better readability in this context.",
-          "suggestion": "Administracija i arhiviranje prostorija, pozivanje korisnika i upravljanje – nekoliko administratora može biti dodeljeno sobi."
+          "description": "The sentence structure could be slightly improved for better flow in Serbian. The list structure ('Administracija i arhiviranje prostorija, pozivanje korisnika i upravljanje') feels a little abrupt.",
+          "suggestion": "Rephrase to 'Administracija i arhiviranje prostorija, pozivanje i upravljanje korisnicima.'  or 'Administracija prostorija, pozivanje i upravljanje korisnicima.'"
         }
       ],
       "approved_at": null
@@ -332,8 +330,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"керування ними\" is awkward and doesn't directly translate to \"management of them\". A more natural translation would be \"керування користувачами\".",
+          "description": "The phrase 'kерування ними' is awkward and doesn't perfectly convey 'management of them'. It's overly literal.",
           "suggestion": "Адміністрування та архівування кімнати, запрошення користувачів та керування користувачами."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, a more natural phrasing might connect the last two clauses more smoothly.",
+          "suggestion": "Адміністрування та архівування кімнати, запрошення та керування користувачами. Для кімнати можна призначити кількох адміністраторів."
         }
       ],
       "approved_at": null
@@ -341,7 +344,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Several admins can be assigned to the room\" is not accurately reflected. A more natural translation would emphasize the ability to assign multiple administrators.",
+          "suggestion": "Một số quản trị viên có thể được thêm vào phòng."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -350,13 +359,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'user invitation and management' is too literal and could be improved for naturalness in Chinese. A more common phrasing would be '用户邀请及管理'.",
-          "suggestion": "用户邀请及管理"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word '存档' (archive) can be a little stiff for 'archiving' in this context. A more approachable term might be '归档' or '备份'.",
-          "suggestion": "房间管理和归档，用户邀请及管理可为房间指派多名管理员。"
+          "description": "The phrase \"Several admins can be assigned to the room\" is translated as \"可为房间指派多名管理员\". While technically correct, it's a bit stiff and less natural. A more natural phrasing would better convey the meaning.",
+          "suggestion": "可为房间分配多名管理员"
         }
       ],
       "approved_at": null

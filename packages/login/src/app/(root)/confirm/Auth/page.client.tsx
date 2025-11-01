@@ -27,13 +27,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -52,17 +46,14 @@ import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { getUser } from "@docspace/shared/api/people";
 
 const AuthHandler = () => {
-  let searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const { t } = useTranslation(["Common"]);
 
   const [authorized, setAuthorized] = useState(false);
 
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { email = "", key = "" } = linkData;
-
-  console.log("Rendered Auth page");
-  console.log(linkData);
-  console.log(email, key);
+  const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
+  const { key = "" } = linkData;
+  const { email = "" } = confirmLinkResult;
 
   const referenceUrl = searchParams?.get("referenceUrl");
   const isFileHandler =
@@ -70,12 +61,9 @@ const AuthHandler = () => {
   const isExternalDownloading =
     referenceUrl && referenceUrl.indexOf("action=download") !== -1;
 
-  console.log(isFileHandler, isExternalDownloading);
-
   const replaced = useRef(false);
 
   useLayoutEffect(() => {
-    console.log("call useLauoutEffect");
     if (!email || !key) return;
 
     async function loginWithKey() {
@@ -91,7 +79,6 @@ const AuthHandler = () => {
           },
         });
 
-        //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
         const wizard = searchParams?.get("wizard");
@@ -108,7 +95,7 @@ const AuthHandler = () => {
             return;
           }
 
-          const newUrl = location.search.split("referenceUrl=")[1];
+          const newUrl = window.location.search.split("referenceUrl=")[1];
 
           const token = getOAuthJWTSignature(user.id);
 
@@ -123,13 +110,12 @@ const AuthHandler = () => {
 
         if (referenceUrl) {
           try {
-            new URL(referenceUrl);
+            const url = new URL(referenceUrl);
             if (isFileHandler && isExternalDownloading) {
               setAuthorized(true);
               return;
-            } else {
-              return window.location.replace(referenceUrl);
             }
+            return window.location.replace(url.toString());
           } catch {
             return window.location.replace(
               combineUrl(window.location.origin, referenceUrl),
@@ -161,8 +147,6 @@ const AuthHandler = () => {
     }
 
     loginWithKey();
-
-    console.log("call useEffect");
   }, [
     email,
     key,
@@ -171,8 +155,6 @@ const AuthHandler = () => {
     isExternalDownloading,
     searchParams,
   ]);
-
-  console.log("render");
 
   return isFileHandler && isExternalDownloading ? (
     <OperationContainer

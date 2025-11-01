@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/variables/colors";
 
 .label {
   display: flex;
@@ -37,7 +37,7 @@
   -o-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-  -webkit-tap-highlight-color: $tap-highlight;
+  -webkit-tap-highlight-color: colors.$tap-highlight;
 
   .checkbox {
     margin-inline-end: 12px;

@@ -3,7 +3,7 @@
   "content": "go to the room",
   "content_en_sha1_hash": "e087b030e250e614a8cebdc0ce324509efe97e0d",
   "created_at": "2025-05-19T21:30:45.650Z",
-  "updated_at": "2025-05-28T09:30:02.584Z",
+  "updated_at": "2025-08-12T19:46:26.128Z",
   "comment": {
     "text": "This translation key is used to display a button label that instructs users to \"go to the room\" in a portal settings page and completed VDR form. It appears as a secondary button with different labels depending on the context, such as \"Copy Link\" or another variant of this phrase.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 268,
-      "context": "/>\n <Button\n className=\"secondary-button\"\n scale\n size={ButtonSize.medium}\n label={isTurnToFill ? t(\"Common:CopyLink\") : t(\"Common:GoToRoom\")}\n onClick={isTurnToFill ? copyLinkFile : handleBackToRoom}\n />\n {isTurnToFill ? (\n <Link\n href=\"\"",
+      "line_number": 275,
+      "context": "/>\n <Button\n className=\"secondary-button\"\n scale\n size={ButtonSize.medium}\n label={isTurnToFill ? t(\"Common:CopyLink\") : t(\"Common:GoToRoom\")}\n onClick={isTurnToFill ? copyLinkFile : handleBackToRoom}\n testId={isTurnToFill ? \"copy_link_button\" : \"go_to_room_button\"}\n />\n {isTurnToFill ? (\n <Link",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 268,
-      "context": "/>\n <Button\n className=\"secondary-button\"\n scale\n size={ButtonSize.medium}\n label={isTurnToFill ? t(\"Common:CopyLink\") : t(\"Common:GoToRoom\")}\n onClick={isTurnToFill ? copyLinkFile : handleBackToRoom}\n />\n {isTurnToFill ? (\n <Link\n href=\"\"",
+      "line_number": 275,
+      "context": "/>\n <Button\n className=\"secondary-button\"\n scale\n size={ButtonSize.medium}\n label={isTurnToFill ? t(\"Common:CopyLink\") : t(\"Common:GoToRoom\")}\n onClick={isTurnToFill ? copyLinkFile : handleBackToRoom}\n testId={isTurnToFill ? \"copy_link_button\" : \"go_to_room_button\"}\n />\n {isTurnToFill ? (\n <Link",
       "module": "/packages/doceditor"
     }
   ],

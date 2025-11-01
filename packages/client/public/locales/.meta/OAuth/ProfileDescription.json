@@ -3,7 +3,7 @@
   "content": "Here you can check the apps info to which you have granted the auth access, and revoke consent if needed.",
   "content_en_sha1_hash": "dcca0e452a98870510105db47286029b6900db85",
   "created_at": "2025-05-19T21:30:53.978Z",
-  "updated_at": "2025-05-21T07:05:51.050Z",
+  "updated_at": "2025-09-22T10:04:14.011Z",
   "comment": {
     "text": "This translation key is used to display a message explaining what authorized apps are and allowing users to revoke consent. It appears on an empty screen when there are no granted auth access apps.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/index.tsx",
-      "line_number": 58,
+      "line_number": 49,
       "context": "return (\n <StyledContainer>\n {consents && consents?.length > 0 ? (\n <>\n <Text fontSize=\"12px\" fontWeight=\"400\" lineHeight=\"16px\">\n {t(\"ProfileDescription\")}\n </Text>\n \n <Consumer>\n {(context) =>\n viewAs === \"table\" ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/EmptyScreen.tsx",
-      "line_number": 12,
-      "context": "return (\n <EmptyScreenContainer\n imageSrc={EmptyScreenPersonsSvgUrl}\n imageAlt=\"Empty apps list\"\n headerText={t(\"NoAuthorizedApps\")}\n descriptionText={t(\"ProfileDescription\")}\n />\n );\n };\n \n export default EmptyScreen;",
+      "line_number": 16,
+      "context": "return (\n <EmptyScreenContainer\n imageSrc={isBase ? EmptyScreenOauthSvgUrl : EmptyScreenOauthDarkSvgUrl}\n imageAlt=\"Empty apps list\"\n headerText={t(\"NoAuthorizedApps\")}\n descriptionText={t(\"ProfileDescription\")}\n />\n );\n };\n \n export default EmptyScreen;",
       "module": "/packages/client"
     }
   ],
@@ -33,18 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"granted the auth access\" is not accurately reflected in the Arabic translation. \"حق الوصول\" (right of access) is a literal translation but doesn't convey the nuance of 'auth access'.",
-          "suggestion": "هنا يمكنك التحقق من معلومات التطبيقات التي منحتها صلاحية الوصول (or) هنا يمكنك التحقق من معلومات التطبيقات التي منحتها إذن الوصول."
-        },
-        {
-          "type": "grammatical",
-          "description": "While grammatically correct, the sentence structure could be slightly more natural in Arabic. The word order could be adjusted for better flow.",
-          "suggestion": "يمكنك هنا التحقق من معلومات التطبيقات التي منحتها صلاحية الوصول وإلغاء الموافقة إذا لزم الأمر."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -53,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"granted the auth access\" is not accurate. \"autentifikasiya girişi verdiyiniz\" literally translates to 'authentication entry you gave'. A more accurate translation would convey the idea of 'authorized access' or 'given authorization'.",
-          "suggestion": "Burada siz təyin etdiyiniz tətbiqlərin məlumatlarını yoxlaya və lazım olduqda icazəni ləğv edə bilərsiniz."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrase 'lazım olduqda' (if needed) could be more elegantly phrased.",
-          "suggestion": "Burada siz autentifikasiya girişi verdiyiniz tətbiqlərin məlumatlarını yoxlaya və ehtiyacınız olarsa icazəni ləğv edə bilərsiniz."
+          "description": "The phrase \"auth access\" is translated as \"autentifikasiya girişi\". While understandable, a more precise translation would be \"izin\" or \"qeyd\" (record/entry) in this context, referring to the granted authorization.",
+          "suggestion": "Burada siz autentifikasiya *izinini* (or *qeydini*) verdiyiniz tətbiqlərin məlumatlarını yoxlaya və lazım olduqda icazəni ləğv edə bilərsiniz."
         }
       ],
       "approved_at": null
@@ -73,7 +57,18 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"granted the auth access\" is awkwardly translated. \"autorizaci\" doesn't perfectly capture the nuance of 'auth access'. A more natural phrasing would be preferable.",
+          "suggestion": "Zde můžete zkontrolovat informace o aplikacích, kterým jste udělili oprávnění."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing \"v případě potřeby souhlas odvolat\" is a bit clunky. It could be improved for flow.",
+          "suggestion": "Zde můžete zkontrolovat informace o aplikacích, kterým jste udělili oprávnění, a případně souhlas odvolat."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -82,13 +77,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"auth access\" is not naturally translated as \"Auth-Zugriff\". While technically correct, it's overly literal and doesn't flow well in German. It's better to use a more natural phrasing related to granting authorization.",
-          "suggestion": "Hier können Sie die Informationen der Apps überprüfen, denen Sie den Zugriff gewährt haben, und gegebenenfalls die Zustimmung widerrufen."
+          "description": "The phrase 'auth access' is translated literally as 'Auth-Zugriff'. While understandable, a more natural translation would be 'Autorisierungszugriff' or 'Zugriffsberechtigungen'.",
+          "suggestion": "Hier können Sie die Informationen der Apps überprüfen, denen Sie den Autorisierungszugriff gewährt haben, und gegebenenfalls die Zustimmung widerrufen."
         },
         {
           "type": "formatting",
-          "description": "Hyphenation of \"Auth-Zugriff\" is a bit unusual and makes the sentence feel less fluent.  Using a space is more common and stylistically preferable in this context.",
-          "suggestion": "Hier können Sie die Informationen der Apps überprüfen, denen Sie den Zugriff gewährt haben, und gegebenenfalls die Zustimmung widerrufen."
+          "description": "The word 'Auth' is capitalized in the English original, but it's not consistently applied in the German translation. Maintaining consistency would improve readability.",
+          "suggestion": "Hier können Sie die Informationen der Apps überprüfen, denen Sie den Auth-Zugriff gewährt haben, und gegebenenfalls die Zustimmung widerrufen."
         }
       ],
       "approved_at": null
@@ -123,8 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"apps info\" is translated as \"հավելվածների տեղեկությունները\". While technically correct, a more natural and user-friendly translation for \"apps info\" might be \"հավելվածների մասին տեղեկությունները\" or \"հավելվածների տեղեկացումները\". The current translation is a bit literal.",
-          "suggestion": "հավելվածների մասին տեղեկությունները"
+          "description": "The English phrase 'apps info' is translated as 'հավելվածների տեղեկությունները'. While technically correct, a more natural phrasing in Armenian would be 'ծրագրերի տեղեկությունները' or 'հավելվածների տեղեկություններ'. 'Ծրագրերի' or 'հավելվածների' sound more fluent in this context.",
+          "suggestion": "Ծրագրերի տեղեկությունները"
         }
       ],
       "approved_at": null
@@ -135,13 +130,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"auth access\" is not accurately translated. \"auth\" is an abbreviation and should be clarified or rephrased for Italian readers.",
-          "suggestion": "Consider replacing \"accesso auth\" with \"accesso tramite OAuth\" or \"accesso con OAuth\"."
+          "description": "The term 'auth' is not naturally translated. While understandable in context, it's better to avoid jargon.",
+          "suggestion": "Qui è possibile controllare le informazioni sulle app a cui hai concesso l'accesso e revocare il consenso, se necessario."
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure could be improved for better flow in Italian. While technically correct, it reads a little clunky.",
-          "suggestion": "Consider reordering the sentence to something like: 'Qui puoi controllare le informazioni sulle app a cui hai concesso l'accesso OAuth e, se necessario, revocare il consenso.'"
+          "type": "incorrect_translation",
+          "description": "Using 'hai' instead of 'è stato' creates a more direct and user-friendly tone. 'è stato' implies a passive action.",
+          "suggestion": "Qui è possibile controllare le informazioni sulle app a cui hai concesso l'accesso e revocare il consenso, se necessario."
         }
       ],
       "approved_at": null
@@ -161,13 +156,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'apps info' is translated as 'ຂໍ້ມູນແອບພິເຄຊັນ' which is technically correct but sounds slightly awkward in Lao. A more natural phrasing might be 'ຂໍ້ມູນຂອງແອບພິເຄຊັນ' or 'ລາຍລະອຽດຂອງແອບພິເຄຊັນ'.",
-          "suggestion": "ຂໍ້ມູນຂອງແອບພິເຄຊັນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -182,13 +171,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'auth access' is awkward in Dutch. It's better to use a more natural equivalent for 'authorization access'.",
-          "suggestion": "Hier kunt u de info van de apps controleren waaraan u autorisatie heeft verleend, en indien nodig de toestemming intrekken."
+          "description": "The phrase 'auth access' is not naturally translated. While technically correct, it's clunky. 'Auth' is also not commonly used in Dutch in this context.",
+          "suggestion": "Hier kunt u de informatie van de apps controleren waaraan u toegang heeft verleend, en indien nodig de toestemming intrekken."
         },
         {
-          "type": "spelling",
-          "description": "While not strictly incorrect, 'toestemming' is a bit formal. 'Goedkeuring' might be more approachable.",
-          "suggestion": "Hier kunt u de info van de apps controleren waaraan u autorisatie heeft verleend, en indien nodig de goedkeuring intrekken."
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of 'waaraan' is a bit formal for this context. A slightly more conversational alternative might improve readability.",
+          "suggestion": "Hier kunt u de info van de apps controleren waar u toegang toe heeft verleend, en indien nodig de toestemming intrekken."
         }
       ],
       "approved_at": null
@@ -196,42 +185,42 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"granted the auth access\" is not accurately translated. \"auth access\" is awkward and technically imprecise in Polish. A more natural and accurate translation would focus on the granting of authorization.",
-          "suggestion": "Tutaj można sprawdzić informacje o aplikacjach, którym przyznano uprawnienia do autoryzacji i w razie potrzeby wycofać zgodę."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'auth access' is not accurately translated. 'Auth access' likely refers to authentication access. A more accurate translation would be 'acesso de autenticação' or potentially 'acesso de autorização' depending on the precise intended meaning.",
+          "suggestion": "Consider 'acesso de autenticação' or 'acesso de autorização'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'auth access' is translated as 'acesso de autenticação'. While technically correct, it's a bit clunky. A more natural phrasing would be 'acesso via autenticação' or simply 'acesso de autenticação'.",
+          "suggestion": "Acesso via autenticação"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'se necessário' could be improved for flow. It sounds slightly abrupt.",
+          "suggestion": "caso seja necessário"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"auth access\" is awkwardly translated. A more natural Romanian phrasing would be \"accesul de autentificare\" or \"permisiunea de autentificare\".",
-          "suggestion": "Aici puteți verifica informații despre aplicațiile cărora le-ați acordat permisiunea de autentificare și puteți revoca consimțământul, dacă este cazul."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"dacă este cazul\" is a slightly formal and somewhat stilted phrasing. It can be improved for better flow.",
-          "suggestion": "Aici puteți verifica informații despre aplicațiile cărora le-ați acordat permisiunea de autentificare și puteți revoca consimțământul, dacă doriți."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -246,13 +235,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'revoke' is directly transliterated into Sinhala. It should be translated to a more natural equivalent.",
-          "suggestion": "ඔබ බලපත්‍ර ප්‍රවේශය හිමි කර ඇති යෙදුම් තොරතුරු මෙහි පරීක්ෂා කර අවශ්‍ය නම් කැමැත්ත ඉවත් කර හැක."
+          "description": "The term \"revoke\" is directly transliterated. A more natural Sinhala equivalent for \"revoke consent\" would be \"අවසර අවලංගු කිරීම\" (awasaya awalangu kirima).",
+          "suggestion": "ඔබ බලපත්‍ර ප්‍රවේශය හිමි කර ඇති යෙදුම් තොරතුරු මෙහි පරීක්ෂා කර අවශ්‍ය නම් අවසර අවලංගු කිරීම් කර හැක."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure could be improved for better flow in Sinhala. The current structure 'ඔබ බලපත්‍ර ප්‍රවේශය හිමි කර ඇති යෙදුම් තොරතුරු මෙහි පරීක්ෂා කර අවශ්‍ය නම් කැමැත්ත ඉ revoke කර හැක.' is a bit clunky.",
-          "suggestion": "මෙම ස්ථානයේදී ඔබට බලපත්‍ර ප්‍රවේශය හිමි කර ඇති යෙදුම් පිළිබඳ තොරතුරු පරීක්ෂා කර, අවශ්‍ය නම් කැමැත්ත ඉවත් කර හැක."
+          "description": "The phrase \"හිමි කර ඇති\" can be more naturally phrased as \"ලබා ඇති\" or \"ලබාගත්\".",
+          "suggestion": "ඔබ බලපත්‍ර ප්‍රවේශය ලබාගත් යෙදුම් තොරතුරු මෙහි පරීක්ෂා කර අවශ්‍ය නම් අවසර අවලංගු කිරීම් කර හැක."
         }
       ],
       "approved_at": null
@@ -275,8 +264,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'granted the auth access' is awkwardly translated. A more natural Serbian phrasing would be 'одалима сте дали дозволу' or 'одалима сте овластили'.",
-          "suggestion": "Овде можете проверити информације о апликацијама одалима сте дали дозволу/овластили и, ако је потребно, опозвати пристанак."
+          "description": "The phrase 'granted the auth access' is not accurately translated. 'Auth access' is too literal. A more natural phrasing in Serbian would be 'овластили' (ovlastili) or 'доделили дозволу' (dodelili dozvolu).",
+          "suggestion": "Овде можете проверити информације о апликацијама којима сте овластили приступ или доделили дозволу и, ако је потребно, опозвати пристанак."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the use of 'и, ако је потребно' can be slightly more fluent. Combining the sentences improves readability.",
+          "suggestion": "Овде можете проверити информације о апликацијама којима сте овластили приступ и опозвати пристанак ако је потребно."
         }
       ],
       "approved_at": null
@@ -287,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'odobril' should be 'odobrovali' to agree with the plural 'aplikacijama'.",
-          "suggestion": "Ovde možete proveriti informacije o aplikacijama kojima ste odobrovali pristup i, ako je potrebno, opozvati pristanak."
+          "description": "The word 'odobriti' should be 'odobriti'",
+          "suggestion": "odobriti"
         }
       ],
       "approved_at": null

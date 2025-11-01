@@ -3,7 +3,7 @@
   "content": "Share your form and collect responses via a Form filling room. Select an existing room or create a new one.",
   "content_en_sha1_hash": "0d0b4ad7012ef309d8c328d4b8c1b2c9e756aa25",
   "created_at": "2025-05-19T21:30:48.468Z",
-  "updated_at": "2025-05-28T09:30:02.161Z",
+  "updated_at": "2025-10-13T13:22:35.675Z",
   "comment": {
     "text": "This translation key is used to describe a room selection option in a form-filling interface. It appears in the UI as a tooltip or label on a button or dialog. The translation should clarify that users can select an existing room or create a new one for sharing and collecting responses.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
       "line_number": 255,
-      "context": "const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };",
+      "context": "const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarOfVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
       "line_number": 66,
-      "context": "};\n const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };",
+      "context": "};\n const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarOfVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };",
       "module": "/packages/doceditor"
     }
   ],
@@ -33,18 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Form filling room' is not a standard or easily understandable term in Arabic. A more natural translation would be 'غرفة ملء النماذج' or 'غرفة إدخال البيانات في النموذج', or a more descriptive phrase depending on the intended function.",
-          "suggestion": "Consider 'غرفة ملء النماذج' or 'غرفة إدخال البيانات في النموذج' or a phrase more closely tied to the actual functionality."
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, the sentence structure could be improved for better flow in Arabic.  A slight reordering could enhance readability.",
-          "suggestion": "Perhaps rephrase to: 'شارك نموذجك لجمع الردود عبر غرفة تعبئة النماذج. اختر غرفة موجودة أو أنشئ واحدة جديدة.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -71,13 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Share your form' is translated as 'Geben Sie Ihr Formular frei'. While technically correct, a more natural and user-friendly translation would be 'Teilen Sie Ihr Formular' or 'Machen Sie Ihr Formular verfügbar'. 'Freigeben' sounds a bit formal and less conversational.",
+          "description": "The phrase 'Share your form' is translated as 'Geben Sie Ihr Formular frei'. While technically correct, 'Teilen Sie Ihr Formular' would be a more natural and commonly used translation for 'share' in this context.",
           "suggestion": "Teilen Sie Ihr Formular"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Form filling room' is translated as 'Raum zum Formularausfüllen'. While understandable, a more idiomatic translation might be 'Formular-Ausfüllraum' or 'Antwortraum'. The current translation is a bit clunky.",
-          "suggestion": "Antwortraum"
         }
       ],
       "approved_at": null
@@ -94,13 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Form filling room' is not accurately translated. 'Sala de llenado de formularios' is a literal translation that doesn't convey the intended meaning of a dedicated space or room for form submission and response collection. It sounds awkward in Spanish.",
-          "suggestion": "Consider a more natural Spanish equivalent for 'Form filling room', such as 'Espacio para completar formularios', 'Habitación para respuestas', or 'Área de recolección de respuestas'."
-        },
-        {
-          "type": "formatting",
-          "description": "While not a major issue, consistency in capitalization might be beneficial. 'Habitación' should either be consistently capitalized or not.",
-          "suggestion": "Evaluate whether 'Habitación' should be capitalized throughout the text to match the capitalization of 'Comparta' and 'Seleccione'."
+          "description": "The English phrase \"Form filling room\" is best translated as \"Sala de completar formularios\" or \"Sala para completar formularios\" in Spanish, rather than just \"sala de llenado de formularios.\" \"Llenado\" implies filling something up, which isn't the most natural phrasing for a form-filling context.",
+          "suggestion": "Comparta su formulario y recopile respuestas a través de una sala para completar formularios. Seleccione una habitación existente o cree una nueva."
         }
       ],
       "approved_at": null
@@ -123,13 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Form filling room\" is translated as \"Ձևաթղթերի լրացման սենյակը\". While technically correct, it sounds overly literal and less natural in Armenian. A more suitable translation would convey the meaning of a designated space for form submission and response collection.",
-          "suggestion": "Consider alternatives like \"պարզեցված ձևերի հավաքման վայրը\" (a place for simplified form collection) or a more descriptive phrase that conveys the purpose of the room."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses capitalized \"Ձևաթղթերի\" and \"սենյակը\" which can be jarring. While capitalization isn't always incorrect, it’s important to review consistency and natural flow.",
-          "suggestion": "Review if the capitalization is appropriate for the context. Consider using lowercase 'ձևաթղթերի' and 'սենյակը' for a more natural tone."
+          "description": "The phrase \"Form filling room\" is not accurately translated. \"Ձևաթղթերի լրացման սենյակը\" literally translates to \"Form completion room\" which is close but not perfect. A more natural translation for 'Form filling room' might be something like \"Դիմումներ լրացնելու սենյակ\" or a more descriptive phrase that conveys the intended meaning of a dedicated space for form filling.",
+          "suggestion": "Consider a rephrasing of \"Ձևաթղթերի լրացման սենյակը\" to more accurately convey the concept of a 'Form filling room'.  Perhaps something like \"Դիմումներ լրացնելու տարածք\" or a more contextually appropriate term."
         }
       ],
       "approved_at": null
@@ -143,24 +117,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Share your form\" is translated as \"フォームを共有し\" (form o kyouyuu shi), which is technically correct but could be more natural-sounding in Japanese. A better translation would be something like \"フォームを配布し\" (form o bunpu shi) which conveys the meaning of sharing the form more clearly in this context.",
+          "suggestion": "フォームを配布し (form o bunpu shi)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Share your form\" is not directly equivalent to \"양식을 공유하고\" in this context. A more natural translation would be closer to \"양식을 공유하여\" or \"양식을 나눠서\".",
-          "suggestion": "양식을 나눠서"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Form filling room' is overly literal and doesn't flow naturally in Korean. While technically correct, it might be improved for clarity and naturalness. Consider a more descriptive term or a phrase that implies the functionality of the room.",
-          "suggestion": "응답 수집 룸"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -169,13 +138,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Share your form\" is translated as \"ແບ່ງປັນແບບຟອມຂອງທ່ານ\". While technically correct, a more natural and common phrasing in Lao would be something like \"ສົ່ງແບບຟອມຂອງທ່ານ\" (song baep form khong khun) or \"ປະກາດໃຊ້ແບບຟອມຂອງທ່ານ\" (pakat chai baep form khong khun).",
-          "suggestion": "ແບ່ງປັນ -> ສົ່ງ or ປະກາດໃຊ້"
+          "description": "The phrase \"Share your form\" is not accurately conveyed by \"ແບ່ງປັນແບບຟອມຂອງທ່ານ\". A more accurate translation would be something like \"ສົ່ງແບບຟອມຂອງທ່ານ\" or \"ໃຫ້ແບບຟອມຂອງທ່ານ\" which emphasizes the act of distributing or providing the form.",
+          "suggestion": "ສົ່ງແບບຟອມຂອງທ່ານ"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term \"Form filling room\" is translated as \"ຫ້ອງຕື່ມແບບຟອມ\". It's not incorrect but might sound a little awkward. A better term to convey the meaning would be 'ຫ້ອງຕື່ມຂໍ້ມູນແບບຟອມ' (hong tuem khomun baep form) which translates to 'form data filling room'.",
-          "suggestion": "ຫ້ອງຕື່ມແບບຟອມ -> ຫ້ອງຕື່ມຂໍ້ມູນແບບຟອມ"
+          "description": "“collect responses” is not accurately represented by “ສຸບເອກົດການຕອບສະໜອງ”.  A more appropriate translation would be something like “ຮັບການຕອບສະໜອງ” or “ເກັບກຳການຕອບສະໜອງ”.",
+          "suggestion": "ຮັບການຕອບສະໜອງ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Form filling room” is translated as “ຫ້ອງຕື່ມແບບຟອມ”. This is literally 'form filling room' and might not be the most natural phrasing in Lao. A more descriptive or clearer option might be better.",
+          "suggestion": "ຫ້ອງຮັບແບບຟອມ"
         }
       ],
       "approved_at": null
@@ -186,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Form filling room' is translated as 'veidlapu aizpildīšanas telpu'. While technically correct, it's a bit clunky in Latvian. A more natural translation might be 'veidlapu aizpildīšanas istaba' or 'veidlapu pildīšanas telpa'.",
-          "suggestion": "Consider 'veidlapu aizpildīšanas istaba' or 'veidlapu pildīšanas telpa' for a more natural flow."
+          "description": "The phrase 'Form filling room' is a bit clunky and doesn't perfectly capture the intended meaning. A more natural translation for this concept in Latvian would be something like 'Atsugu veidlapu istabu' or 'Veidlapu aizpildīšanas istabu', depending on the context and nuance desired. The current translation is understandable but lacks elegance.",
+          "suggestion": "Consider 'Atsugu veidlapu istabu' or 'Veidlapu aizpildīšanas istabu' for a more natural flow. The most appropriate translation depends on the broader product language."
         }
       ],
       "approved_at": null
@@ -198,13 +172,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Form filling room' is not accurately translated. 'Kamer voor het invullen van formulieren' is overly literal and clunky. A more natural Dutch translation would be 'Formulierkamer' or 'Vormulierkamer'.",
-          "suggestion": "Consider 'Formulierkamer' or 'Vormulierkamer' instead of 'Kamer voor het invullen van formulieren'."
+          "description": "The translation of 'Form filling room' is too literal and doesn't flow naturally in Dutch. 'Form filling room' is an English term and should be translated to a more appropriate Dutch equivalent. It should convey the concept of a dedicated space or system for collecting form responses.",
+          "suggestion": "Consider translating 'Form filling room' to something like 'Antwoordkamer' or 'Formulierinzamelruimte' or a more colloquial equivalent depending on the overall tone and context.  The best choice depends on what the 'room' actually *is*."
         },
         {
           "type": "formatting",
-          "description": "The translation lacks proper capitalization after the period.",
-          "suggestion": "Capitalize the first word after the period: 'Deel uw formulier en ontvang reacties via een Formulierkamer Selecteer een bestaande kamer of maak een nieuwe.'"
+          "description": "The sentence structure is a bit awkward in Dutch due to the direct translation. The flow is less smooth than a naturally written Dutch sentence.",
+          "suggestion": "Rephrase the sentence for better readability. For example: 'Deel uw formulier en verzamel reacties via een antwoordkamer. Selecteer een bestaande kamer of maak er een nieuwe aan.'"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'aan' is missing at the end of the last sentence.",
+          "suggestion": "Add 'aan' to the end of the sentence: 'Selecteer een bestaande kamer of maak een nieuwe *aan*.'"
         }
       ],
       "approved_at": null
@@ -221,13 +200,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Form filling room' is not accurately translated. 'Form filling' could be better conveyed as 'preenchimento de formulários' which is used, but 'room' could be more accurately translated as 'sala' to match the rest of the sentence. It seems 'Form filling room' is meant to convey a specific feature within the application.",
-          "suggestion": "Partilhe o seu formulário e recolha respostas através de uma sala de formulários. Selecione uma sala existente ou crie uma nova."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, using 'sala de formulários' in the suggested correction improves consistency and readability. Maintaining the structure and terminology throughout the sentence enhances the user experience.",
-          "suggestion": null
+          "description": "The English phrase 'Form filling room' doesn't directly translate to 'sala de preenchimento de formulários' in a natural way in Portuguese. A more appropriate translation would be 'sala de preenchimento de formulários' or, potentially, 'ambiente de preenchimento de formulários', depending on the context and desired nuance.",
+          "suggestion": "Consider 'sala de formulários' or 'ambiente de formulários' for a more natural flow."
         }
       ],
       "approved_at": null
@@ -241,13 +215,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Share' is translated as 'Partajați'. While technically correct, a more natural and common translation for 'Share' in this context would be 'Împărtășiți'. 'Partajați' has a connotation of dividing something, which isn't quite the intended meaning here.",
-          "suggestion": "Împărtășiți formularul și colectați răspunsuri printr-o cameră de completare a formularelor."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -262,13 +230,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Form filling room' is translated literally as 'ෆෝම් පුරවන ලද කාමරයක්'. A more natural translation would be something like 'ගොඩනගාගත් ෆෝම් කාමරයක්' or 'ෆෝම් සම්පූර්ණ කරන කාමරයක්' to convey the meaning of a dedicated space or room for filling out forms. The current translation sounds awkward.",
-          "suggestion": "ඔබේ ෆෝම් බෙදා ගන්න, සහ ෆෝම් සම්පූර්ණ කරන කාමරයක් හරහා ප්‍රතිචාර රැගෙන ගන්න. දැනටමත් පවතින කාමරයක් තෝරා ගන්න, නැතහොත් නව කාමරයක් සාදා ගන්න."
+          "description": "The phrase \"Form filling room\" is not accurately translated. \"ෆෝම් පුරවන ලද කාමරයක්\" literally translates to \"form-filled room\", which doesn't convey the intended meaning of a dedicated space for form submission and response collection. A better translation would capture the concept of a 'form submission room' or similar.",
+          "suggestion": "Consider alternatives like \"ෆෝම් සම්ප්‍රේෂණ කාමරයක්\" (form submission room) or \"ෆෝම් ප්‍රතිචාර ලබා ගැනීමේ ස්ථානය\" (place to collect form responses)."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'collect' is translated as 'රැගෙන ගන්න'. While technically correct, a more natural translation in this context could be 'ලබන්න' (labanna).",
-          "suggestion": "ඔබේ ෆෝම් බෙදා ගන්න, සහ ෆෝම් සම්පූර්ණ කරන කාමරයක් හරහා ප්‍රතිචාර ලබන්න. දැනටමත් පවතින කාමරයක් තෝරා ගන්න, නැතහොත් නව කාමරයක් සාදා ගන්න."
+          "type": "formatting",
+          "description": "The sentence structure feels somewhat disjointed. The two actions ('Share...','Collect...') feel separate. Consider restructuring for better flow.",
+          "suggestion": "Combine the actions into a single sentence: \"ඔබේ ෆෝම් බෙදා ගන්න, සහ ෆෝම් පුරවන ලද කාමරයක් හරහා ප්‍රතිචාර ලබා ගන්න.\" or \"ඔබේ ෆෝම් බෙදා ගන්න, ෆෝම් පුරවන ලද කාමරයක් හරහා ප්‍රතිචාර රැගෙන ගන්න.\"."
         }
       ],
       "approved_at": null
@@ -282,7 +250,18 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Form filling room' is translated as 'soba za izpolnjevanje obrazcev'. While technically correct, it sounds a bit awkward in Slovenian. A more natural phrasing might use a term that implies a dedicated space or environment.",
+          "suggestion": "Deli svoj obrazec in zbiraj odgovore preko namensko urejene sobe/prostorije. Izberi obstoječo sobo/prostorijo ali ustvari novo."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '/' between 'soba' and 'prostorijo' might be perceived as less fluid. Consider using 'ali' (or) to maintain clarity.",
+          "suggestion": "Deli svoj obrazec in zbiraj odgovore preko namensko urejene sobe ali prostorije. Izberi obstoječo sobo ali prostorijo ali ustvari novo."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -290,9 +269,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Form filling room' is awkwardly translated as 'Просторије за попуњавање формулара'. A more natural and concise translation would be 'Соба за попуњавање формулара' or 'Формуларска соба'.",
-          "suggestion": "Соба за попуњавање формулара"
+          "type": "formatting",
+          "description": "The phrase 'Form filling room' is clunky in Serbian. While technically correct, it could be improved for readability.",
+          "suggestion": "Просторија за попуњавање формулара could be rephrased to something more natural like 'Простор за попуњавање формулара' or 'Соба за попуњавање формулара'."
         }
       ],
       "approved_at": null
@@ -303,13 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Form filling room' is translated as 'Prostorija za popunjavanje formulara'. While technically correct, it sounds unnatural and clunky in Serbian. A more natural translation would be 'Sooba za popunjavanje formulara' or 'Prostor za popunjavanje formulara'.",
-          "suggestion": "Podelite svoj formular i prikupite odgovore preko Soobe za popunjavanje formulara. Odaberite postojeću sobu ili kreirajte novu."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, 'soba' (room) might be slightly more natural than 'prostorija' in this context. Consider consistency with other UI elements if 'soba' is preferred.",
-          "suggestion": "Consider using 'soba' consistently for 'room' if the overall UI uses 'soba'."
+          "description": "The English phrase 'Form filling room' is not perfectly translated. 'Prostorija za popunjavanje formulara' is technically correct, but sounds a bit clunky in Serbian. A more natural phrasing might be 'Prostor za popunjavanje formulara' or 'Soobor za popunjavanje formulara'.",
+          "suggestion": "Podelite svoj formular i prikupite odgovore preko Prostora za popunjavanje formulara. Odaberite postojeću prostoriju ili kreirajte novu."
         }
       ],
       "approved_at": null
@@ -320,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Form filling room\" is translated literally as \"Form doldurma odası.\" While understandable, a more natural Turkish phrasing would be something like \"Form yanıt toplama alanı\" or \"Form doldurma alanı.\" The original English uses the term 'room' to signify a dedicated space or feature, and this nuance isn't perfectly conveyed by the literal translation.",
-          "suggestion": "Form yanıt toplama alanı veya Form doldurma alanı"
+          "description": "The phrase \"Form filling room\" is quite literal and doesn't quite convey the intended meaning in Turkish.  'Form doldurma odası' sounds awkward.",
+          "suggestion": "Consider a more natural phrasing like 'Form yanıt toplama alanı' or 'Form doldurma alanı' depending on the overall user experience and the type of room being described. The best choice might require more context about the platform's design."
         }
       ],
       "approved_at": null
@@ -338,8 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Form filling room\" is translated literally as \"phòng Điền biểu mẫu.\" While understandable, it's not the most natural phrasing in Vietnamese. It sounds somewhat robotic and unnatural. A more idiomatic translation would be something like \"phòng điền thông tin\" or \"phòng thu thập thông tin\" depending on the desired nuance.",
-          "suggestion": "Consider translating \"Form filling room\" as \"phòng điền thông tin\" or \"phòng thu thập thông tin\" for better flow and naturalness."
+          "description": "The term 'Form filling room' is not idiomatic in Vietnamese. A more natural translation would be 'phòng điền mẫu' or 'phòng nhập liệu mẫu'. The current translation, while technically correct, sounds awkward.",
+          "suggestion": "Chia sẻ biểu mẫu của bạn và thu thập câu trả lời thông qua phòng điền mẫu. Chọn một phòng hiện có hoặc tạo một phòng mới."
         }
       ],
       "approved_at": null
@@ -350,13 +324,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Form filling room\" is translated literally as \"表单填写房间\". While understandable, it lacks the nuance and common usage of the English phrase. A more natural Chinese equivalent for \"Form filling room\" would be something like \"在线表单填写房间\" or \"表单收集房间\" which conveys the same meaning more elegantly.",
-          "suggestion": "分享您的表单并通过在线表单填写房间收集数据。选择现有的房间或创建新的房间。"
+          "description": "The phrase \"Form filling room\" is translated literally as \"表单填写房间\". While understandable, it lacks the nuance of the original English. A more natural translation might focus on the functionality of a 'room' in this context, such as a workspace or collection area.",
+          "suggestion": "分享您的表单并通过表单收集空间收集数据。选择现有的空间或创建新的空间。"
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a straightforward structure. Consider adding a pause or conjunction (e.g., 并且) to improve readability and flow.",
-          "suggestion": "分享您的表单，并且通过表单填写房间收集数据。选择现有的房间或创建新的房间。"
+          "type": "incorrect_translation",
+          "description": "The word 'collect' is translated as '收集'. While correct, '获取' or '接收' might be more appropriate to convey the sense of gathering responses.",
+          "suggestion": "分享您的表单并通过表单收集空间获取数据。选择现有的空间或创建新的空间。"
         }
       ],
       "approved_at": null

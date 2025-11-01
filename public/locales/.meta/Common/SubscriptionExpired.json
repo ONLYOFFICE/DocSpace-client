@@ -3,7 +3,7 @@
   "content": "Your subscription to support and updates has expired",
   "content_en_sha1_hash": "f5833d1780ea3b9e1d44aca439e0e66682bdf6a6",
   "created_at": "2025-05-19T21:30:49.184Z",
-  "updated_at": "2025-05-28T09:30:02.678Z",
+  "updated_at": "2025-10-14T02:50:30.515Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a subscription has expired. It appears as a title in a UI component displaying payment settings, prompting users to renew their subscriptions or update their licenses.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Standalone/sub-components/TariffTitleContainer.js",
-      "line_number": 69,
-      "context": "}\n \n return (\n isLicenseDateExpired && (\n <Text className=\"payments_subscription-expired\" isBold fontSize=\"14px\">\n {t(\"Common:SubscriptionExpired\")}\n </Text>\n )\n );\n };",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
+      "line_number": 65,
+      "context": "const alertComponent = () => {\n if (isTrial) {\n return isLicenseDateExpired ? (\n <Text\n className={styles.paymentsSubscriptionExpired}\n fontWeight={600}\n fontSize=\"14px\"\n >\n {t(\"TrialExpired\")}\n </Text>",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'předplatné podpory a aktualizací' sounds slightly awkward in Czech. A more natural phrasing would be 'předplatné podpory a aktualizací' or 'předplatné podpory a aktualizací'.",
+          "suggestion": "Vaše předplatné podpory a aktualizací skončilo."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -72,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tuen ja päivitysten tilauksesi on vanhentunut' is a bit literal and doesn't flow naturally in Finnish. A more natural phrasing would be closer to 'Your support and update subscription has expired' or 'Your subscription for support and updates has expired'. The use of 'on vanhentunut' (has expired) is correct but makes the sentence a bit stiff.",
-          "suggestion": "Your options are: 'Tukesi ja päivitysten tilaus on päättynyt' or 'Tilaus tukesi ja päivitysten osalta on päättynyt'."
+          "description": "The translation 'Tuen ja päivitysten tilauksesi on vanhentunut' is a literal translation, but 'Subscription' implies a recurring service. A more natural phrasing in Finnish would better convey the meaning of a subscription expiring.",
+          "suggestion": "Tukesi ja päivitykset ovat vanhentuneet"
         }
       ],
       "approved_at": null
@@ -102,13 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is too literal and sounds unnatural in Japanese. \"サブスクリプションの有効期限が切れています\" directly translates to \"the subscription's expiration date has passed,\" which is not the most natural way to convey that a subscription has expired in a user-facing context.",
-          "suggestion": "サポートとアップデートの契約期間が終了しました (Support and update contract period has ended)"
+          "description": "The translation is overly literal and somewhat unnatural in Japanese. While technically correct, it doesn't flow well. 'サブスクリプションの有効期限が切れています' is a bit verbose.",
+          "suggestion": "サポートとアップデートの契約が期限切れです"
         },
         {
-          "type": "incorrect_translation",
-          "description": "Using \"サブスクリプション\" (subscription) directly from English feels slightly awkward. While understandable, a more natural phrasing would be preferable.",
-          "suggestion": "契約 (keiyaku - contract) could be a better alternative to 'subscription' depending on the broader context."
+          "type": "formatting",
+          "description": "The use of 'サブスクリプション' is fine, but for a more natural tone, consider replacing it with a more common phrase, or removing it if the context makes it obvious.",
+          "suggestion": "サポートとアップデートの契約が切れました"
         }
       ],
       "approved_at": null
@@ -143,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'support and updates' is translated as 'wsparcie i aktualizacji'. While technically correct, it's a bit formal and could be improved to better convey the meaning in a more user-friendly way. A more natural phrasing might be 'wsparcie techniczne i aktualizacje'.",
-          "suggestion": "Consider translating 'support and updates' as 'wsparcie techniczne i aktualizacje'."
+          "description": "The translation 'Twoja subskrypcja umożliwiająca uzyskanie wsparcia i aktualizacji wygasła' is a bit wordy and formal. A more natural and concise translation would improve readability. The phrase 'umożliwiająca uzyskanie' (allowing to obtain) is unnecessary.",
+          "suggestion": "Twoja subskrypcja wsparcia i aktualizacji wygasła"
         }
       ],
       "approved_at": null
@@ -164,13 +170,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'abonamentul dvs' is a bit formal for a user-facing message. A more conversational and common phrasing would be better.",
-          "suggestion": "Abonamentul dumneavoastră pentru asistență și actualizări a expirat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -185,13 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and sounds unnatural in Sinhala. \"සහාය සහ යාවත්කාල සඳහා වන ඔබගේ දායකත්‍වය\" is a verbose way to express subscription to support and updates. It's better to convey the core meaning more concisely.",
+          "description": "The translation 'සහාය සහ යාවත්කාල සඳහා වන ඔබගේ දායකත්‍වය කල් ඉකුත් වී ඇත' is a literal translation but doesn't flow naturally in Sinhala. 'සහාය සහ යාවත්කාල' could be simplified.",
           "suggestion": "ඔබේ සහාය හා යාවත්කාලන දායකත්වය අවසන් වී ඇත"
         },
         {
-          "type": "spelling",
-          "description": "While not strictly incorrect, \"යාවත්කාල සඳහා\" could be more naturally rendered as \"යාවත්කාලන සඳහා\".",
-          "suggestion": "යාවත්කාලන සඳහා"
+          "type": "incorrect_translation",
+          "description": "The word 'යාවත්කාල' (yaavathkaala) is a bit formal and might not be the most common way to say 'updates'.",
+          "suggestion": "ඔබේ සහාය හා යාවත්කාලන දායකත්වය අවසන් වී ඇත"
         }
       ],
       "approved_at": null
@@ -238,18 +238,19 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Gói dịch vụ đăng ký để hỗ trợ và cập nhật của bạn đã hết hạn' is a bit literal and could be more naturally phrased. 'Gói dịch vụ' is correct for 'package', but 'đăng ký để hỗ trợ và cập nhật' is lengthy and not the most fluent way to say 'to support and updates'.",
-          "suggestion": "Gói hỗ trợ và cập nhật của bạn đã hết hạn"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the sentence structure could be slightly improved for better flow in Vietnamese. Starting with 'Gói...' feels a little abrupt.",
-          "suggestion": "Đăng ký hỗ trợ và cập nhật của bạn đã hết hạn"
+          "description": "The translation 'Gói dịch vụ đăng ký để hỗ trợ và cập nhật của bạn đã hết hạn' is a literal translation and sounds slightly unnatural in Vietnamese. A more natural phrasing would be something closer to 'Dịch vụ hỗ trợ và cập nhật của bạn đã hết hạn' or 'Gói hỗ trợ và cập nhật của bạn đã hết hạn'.",
+          "suggestion": "Dịch vụ hỗ trợ và cập nhật của bạn đã hết hạn"
         }
       ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

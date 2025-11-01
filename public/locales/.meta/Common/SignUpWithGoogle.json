@@ -3,7 +3,7 @@
   "content": "Sign up with Google",
   "content_en_sha1_hash": "338492d670292a6edd749c6b68952f5de10e1c01",
   "created_at": "2025-05-19T21:30:48.835Z",
-  "updated_at": "2025-05-28T09:30:02.987Z",
+  "updated_at": "2025-10-14T05:54:27.607Z",
   "comment": {
     "text": "Sign up with Google is a text used to describe the option to create an account using a Google account. It appears in a sign-up flow, providing clarity on how users can proceed with the registration process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 385,
+      "line_number": 423,
       "context": "switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");\n case \"google\":\n return signUp\n ? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":\n return signUp\n ? t(\"Common:SignUpWithFacebook\")\n : t(\"Common:SignInWithFacebook\");",
       "module": "/packages/shared"
     }
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Влезте чрез Google\" means \"Log in with Google\" instead of \"Sign up with Google.\" The Bulgarian phrase for \"Sign up\" would be \"Регистрирайте се\".",
+          "description": "The Bulgarian translation \"Влезте чрез Google\" translates to \"Log in with Google\". The English phrase \"Sign up with Google\" means to create a new account. \"Влезте\" implies logging in to an existing account.",
           "suggestion": "Регистрирайте се с Google"
         }
       ],
@@ -57,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Anmeldung bei Google' is technically correct, it's not the most natural or common way to say 'Sign up with Google' in German. It's a bit formal. A better translation would convey the action of creating an account, not just logging in.",
+          "suggestion": "Registriere dich mit Google"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -87,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Գրանցվեք Google-ով' is a literal translation and might not be the most natural way to say 'Sign up with Google' in Armenian. A more idiomatic translation might be preferable.",
-          "suggestion": "Consider a more natural phrasing like 'Մուտքագրվել Google-ի միջոցով' or 'Գրանցվել Google-ի հետ' depending on the desired nuance."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຂົ້າສູ່ລະບົບດ້ວຍ Google' literally translates to 'Log in with Google'. The English phrase 'Sign up with Google' implies account creation, not just logging in. While 'ເຂົ້າສູ່ລະບົບ' can be used in a broader sense, it doesn't accurately convey the specific meaning of signing up.",
-          "suggestion": "ອານຸສັນຍາດ້ວຍ Google"
+          "description": "The Lao translation \"ເຂົ້າສູ່ລະບົບດ້ວຍ Google\" literally translates to 'Log in with Google'.  The English phrase 'Sign up with Google' implies registration or creating a new account, not just logging in. This is a significant difference in meaning.",
+          "suggestion": "ປ່ຽນເປັນ \"ສ້າງບັນຊີດ້ວຍ Google\" (Sang ban chi duai Google) - This translates to 'Create an account with Google'."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Inscreva-se no Google' is a literal translation and doesn't convey the intended meaning as naturally as it could. A more idiomatic translation would be 'Continuar com o Google' or 'Entrar com o Google'. 'Inscreva-se' implies a more formal registration process.",
-          "suggestion": "Continuar com o Google"
+          "description": "While \"Inscreva-se no Google\" is technically correct, a more natural and common translation for \"Sign up with Google\" in Portuguese would be \"Cadastre-se com o Google\". \"Inscreva-se\" is more commonly used for events or classes.",
+          "suggestion": "Cadastre-se com o Google"
         }
       ],
       "approved_at": null
@@ -162,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Cadastre-se com Google\" is understandable, \"Sign up with Google\" is more commonly translated as \"Inscreva-se com Google\" or \"Crie uma conta com Google\". \"Cadastre-se\" implies a more complex registration process.",
+          "description": "While 'Cadastre-se com Google' is understandable, 'Sign up with Google' is more commonly and naturally translated as 'Inscreva-se com Google' or 'Crie sua conta com Google'. 'Cadastre-se' has a more formal connotation and isn't the typical phrasing for a sign-up flow.",
           "suggestion": "Inscreva-se com Google"
         }
       ],
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Conectare prin Google\" while understandable, doesn't perfectly capture the nuance of 'Sign up with Google'. 'Conectare' implies connecting to an existing account, whereas 'Sign up' suggests creating a new one. A more accurate translation would convey the action of creating a new account using Google.",
-          "suggestion": "Înscrieți-vă cu Google"
+          "description": "While \"Conectare prin Google\" is understandable, it's not the most natural or common translation for 'Sign up with Google'. 'Înregistrare cu Google' or 'Creare cont cu Google' would be more accurate and idiomatic.",
+          "suggestion": "Înregistrare cu Google"
         }
       ],
       "approved_at": null
@@ -189,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, a more natural and commonly used Sinhala equivalent for 'Sign up' would be 'ඇතුළත් වන්න' (Athula Wanne). 'ලියාපදිංචිය' is more formal and suggests registration, rather than the act of signing up.",
+          "suggestion": "ගූගල් සමඟ ඇතුළත් වන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -204,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vpiši se z Google' is not the most natural or accurate translation of 'Sign up with Google'. It literally translates to 'Enter yourself with Google', which is grammatically awkward and doesn't convey the intended meaning.",
+          "description": "The translation 'Vpiši se z Google' is not the most natural or accurate translation of 'Sign up with Google'. While technically correct, it sounds a bit clunky. A more idiomatic translation would be 'Prijava z Google' or 'Prijavi se z Google'.",
           "suggestion": "Prijava z Google"
         }
       ],
@@ -216,13 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Региструј се путем Google-а\" while understandable, is not the most natural or idiomatic way to say \"Sign up with Google\" in Serbian. 'Putem' implies 'through' or 'via', which isn't the best phrasing. A more common phrasing would use a preposition like 'са' (with) or simply omit a preposition.",
-          "suggestion": "Региструј се са Google-ом"
-        },
-        {
-          "type": "formatting",
-          "description": "The possessive case ending '-ом' on 'Google-ом' is grammatically correct but can feel slightly formal for user interface text. Depending on the target audience and overall tone, it might be acceptable to consider a less formal option.",
-          "suggestion": "Региструј се са Google"
+          "description": "The translation \"Региструј се путем Google-а\" is a literal translation but sounds slightly awkward in Serbian. A more natural phrasing would be \"Пријави се са Google-ом\" or \"Пријави се преко Google-а\".",
+          "suggestion": "Пријави се са Google-ом"
         }
       ],
       "approved_at": null
@@ -233,13 +234,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Registruj se putem Google-a' is not the most natural or preferred way to say 'Sign up with Google' in Serbian. While technically correct, it's a bit clunky.",
-          "suggestion": "Prijavi se preko Google-a"
+          "description": "The translation 'Registruj se putem Google-a' is technically correct but not the most natural or idiomatic way to express 'Sign up with Google' in Serbian. It's a bit literal.",
+          "suggestion": "Prijava sa Google-om"
         },
         {
           "type": "formatting",
-          "description": "The possessive form 'Google-a' uses a hyphen. While acceptable, the newer convention increasingly avoids this, favoring 'Google a' or 'Google-ovo' in some contexts.",
-          "suggestion": "Prijavi se preko Google a"
+          "description": "The addition of the genitive case suffix '-a' after 'Google' is grammatically correct but can appear a bit clunky in this context. It's more common to omit it in a user interface.",
+          "suggestion": "Registruj se sa Google-om"
         }
       ],
       "approved_at": null
@@ -268,10 +269,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"用 Google 帐号注册\" is understandable, a more natural and accurate translation of \"Sign up with Google\" would be something like \"使用 Google 注册\" or \"通过 Google 注册\". \"帐号\" (account) isn't strictly necessary and makes the phrasing slightly less fluent.",
+          "description": "While '用 Google 帐号注册' is understandable, a more accurate and natural translation of 'Sign up with Google' would be something along the lines of '使用 Google 注册' or '通过 Google 注册'. '用 Google 帐号注册' implies using a Google account specifically, while 'Sign up with Google' is more general.",
           "suggestion": "使用 Google 注册"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

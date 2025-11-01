@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
+import { QuotaForm } from "@docspace/shared/components/quota-form";
 
-import QuotaForm from "../../QuotaForm";
 import StyledBodyContent from "./StyledComponent";
 
 const ChangeQuotaDialog = (props) => {
@@ -51,7 +51,7 @@ const ChangeQuotaDialog = (props) => {
       <ModalDialog.Header>{t("Common:ChangeQuota")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBodyContent>
-          <Text noSelect>{t("Common:SetQuotaStorageLimit")}</Text>
+          <Text>{t("Common:SetQuotaStorageLimit")}</Text>
           <QuotaForm
             onSetQuotaBytesSize={onSetQuotaBytesSize}
             isLoading={isLoading}

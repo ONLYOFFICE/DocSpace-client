@@ -3,7 +3,7 @@
   "content": "Share the original form for filling out.",
   "content_en_sha1_hash": "d89e20141550449ea8d0537fbc588e697483a8fe",
   "created_at": "2025-05-19T21:30:48.698Z",
-  "updated_at": "2025-05-28T09:30:02.378Z",
+  "updated_at": "2025-10-14T07:34:35.092Z",
   "comment": {
     "text": "The translation key \"ShareTheOriginalFormForFillingOut\" is used to describe a feature that allows users to share their original form content. This message appears in UI elements such as buttons or dialog boxes, guiding users on how to share the unedited form data, typically for collaborative editing purposes.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 157,
+      "line_number": 171,
       "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },",
       "module": "/packages/doceditor"
     }
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"شاركوا النموذج الأصلي لأغراض التعبئة\" is not the most natural or accurate rendering of 'Share the original form for filling out.' While technically correct, it sounds slightly formal and less conversational. \"شاركوا النموذج الأصلي لملئه\" would be a more natural phrasing.",
+          "description": "The translation \"شاركوا النموذج الأصلي لأغراض التعبئة\" doesn't perfectly capture the nuance of 'for filling out'. While 'لأغراض التعبئة' (for filling purposes) is understandable, it's a bit formal. A more natural phrasing would emphasize the intended use.",
           "suggestion": "شاركوا النموذج الأصلي لملئه."
         }
       ],
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Կիսվել բնօրինակի ձևը\" doesn't perfectly convey the meaning of \"Share the original form for filling out.\" While \"Կիսվել\" (Kisvel) means 'share' and \"բնօրինակի ձևը\" (bnorinnaki evը) means 'the original form', the phrase lacks the context of 'for filling out'.",
-          "suggestion": "Կիսել բնօրինակը լրացնելու համար (Kisel bnorinnaki loragnelu hamar) - Share the original form for filling out."
+          "description": "The translation \"Կիսվել բնօրինակի ձևը\" literally translates to \"Share the original form.\" While understandable, it's slightly awkward and doesn't fully capture the nuance of 'for filling out'.  It lacks the explicit mention of the form's purpose.",
+          "suggestion": "Կիսվել բնօրինակի ձևը լրացնելու համար"
         }
       ],
       "approved_at": null
@@ -114,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '元のフォームを記入するために共有します。' is a literal translation and doesn't quite convey the natural English phrasing 'Share the original form for filling out.' It implies *sharing* the form *in order to* be filled out, which isn't the most fluent way to express the intent. A better translation would focus on the act of sharing to allow filling.",
-          "suggestion": "元のフォームを記入できるように共有します。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The use of '記入するために' is slightly awkward. While technically correct, it's not the most natural phrasing. A more idiomatic expression would be preferable.",
-          "suggestion": "元のフォームを記入用として共有します。"
+          "description": "The translation \"元のフォームを記入するために共有します\" while technically correct, is a bit stiff and formal. A more natural phrasing would better suit most contexts. It literally translates to \"Share the original form for filling out.\" It doesn't convey the nuance of 'sharing' for convenience or action.",
+          "suggestion": "元のフォームを記入用に共有します。"
         }
       ],
       "approved_at": null
@@ -131,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"작성을 위해 원본 양식을 공유하세요\" while understandable, doesn't perfectly capture the original's directness. 'Share the original form for filling out' implies a request or instruction to provide the original. The Korean translation leans more towards a general suggestion.",
-          "suggestion": "Consider alternatives like \"작성할 원본 양식을 제공해주세요\" (Please provide the original form for filling out) or \"작성을 위한 원본 양식을 공유해 주십시오.\" (Please share the original form for filling out - more formal)."
+          "description": "The translation \"작성을 위해 원본 양식을 공유하세요\" is a literal translation but could be improved for naturalness. '작성을 위해' (for writing) is slightly awkward. A more natural phrasing would convey the action of *completing* the form.",
+          "suggestion": "작성하실 원본 양식을 공유해 주세요."
         }
       ],
       "approved_at": null
@@ -179,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Partajare formular original pentru completare' doesn't quite capture the nuance of 'Share the original form for filling out.' 'Partajare' (sharing) implies a general action, while 'Share' in the original suggests providing it for the purpose of filling it out.  A better translation might emphasize providing it *to be* filled out.",
-          "suggestion": "Oferă formularul original pentru completare."
+          "description": "The translation 'Partajare formular original pentru completare' is not the most natural or accurate translation of 'Share the original form for filling out.' 'Partajare' is less common and sounds slightly awkward in this context. 'Formular' can be replaced with 'chestionar' which better conveys the meaning of form.",
+          "suggestion": "Distribuie formularul original pentru completare."
         },
         {
           "type": "grammar",
-          "description": "While understandable, 'Partajare formular original pentru completare' lacks a verb or a proper sentence structure. It reads more like a noun phrase than a complete sentence.",
-          "suggestion": "Oferă formularul original pentru completare."
+          "description": "While not strictly incorrect, the use of 'Partajare' (participle form) at the beginning of the sentence feels unnatural in Romanian. A verb is preferred.",
+          "suggestion": "Distribuie formularul original pentru completare."
         }
       ],
       "approved_at": null
@@ -202,13 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පූර්ණ පත්‍රය පුරවා ගැනීම සඳහා බෙදා ගන්න' while conveying a similar meaning, is not the most natural or common way to say 'Share the original form for filling out' in Sinhala. A more accurate and natural translation would emphasize providing the form rather than merely sharing it for filling.",
-          "suggestion": "A better translation could be 'පුරවා ගැනීම සඳහා මුල් පිටපත් පත්‍රය ලබා දෙන්න.' (Purava gatamu saha mata mul pitapata pathraya laba denna.)"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, the use of 'පත්‍රය' (pathraya - form) is a general term. Depending on the context, using a more specific term might be better.",
-          "suggestion": "Consider if a more specific term for 'form' is appropriate based on the context. For example, 'ආකෘතිය' (aakruththi - template/format) could be used."
+          "description": "The translation 'පූර්ණ පත්‍රය පුරවා ගැනීම සඳහා බෙදා ගන්න' while understandable, doesn't perfectly capture the nuance of 'Share the original form for filling out.' It's a bit verbose. A more direct translation might be preferable.",
+          "suggestion": "පත්‍රය පුරවා ගැනීම සඳහා බෙදා ගන්න"
         }
       ],
       "approved_at": null
@@ -231,13 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Поделите оригинални образац за попуњавање\" is not the most natural or accurate translation of \"Share the original form for filling out.\" While technically understandable, it lacks fluency.  \"Оригинални\" should be 'оригинал'. 'Образац' is a valid word, but may sound overly formal. A more natural wording would prioritize clarity and everyday language.",
-          "suggestion": "Поделите оригинални образац за попуњавање. (Could be improved to something like: Поделите оригинални формулар за попуњавање. or  Дајте оригинални образац за попуњавање.)"
+          "description": "The translation 'Поделите оригинални образац за попуњавање.' is not the most natural or accurate rendering of 'Share the original form for filling out.' While technically correct, it sounds somewhat formal and less idiomatic. A better translation would prioritize clarity and natural language flow.",
+          "suggestion": "Поделите оригинални формулар за попуњавање."
         },
         {
           "type": "spelling",
-          "description": "The word 'оригинални' should be 'оригинал'.",
-          "suggestion": "оригинал"
+          "description": "While 'образац' is a valid word, 'формулар' is more commonly used in modern Serbian to refer to a form.  Using 'образац' might sound slightly outdated in some contexts.",
+          "suggestion": "формулар"
         }
       ],
       "approved_at": null
@@ -254,13 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Formun orijinalini doldurulması için paylaşın' is not the most natural or accurate rendering of 'Share the original form for filling out.' The phrase 'doldurulması için' (for filling) is awkward. It implies a purpose rather than a direct action.",
-          "suggestion": "Formun orijinalini doldurmak üzere paylaşın."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word order sounds slightly unnatural. While understandable, it could be improved for a more fluent Turkish sentence.",
-          "suggestion": "Orijinal formu doldurmak için paylaşın."
+          "description": "The translation 'Formun orijinalini doldurulması için paylaşın' is not the most natural or accurate rendering of 'Share the original form for filling out.'  'Doldurulması için' is awkward. It literally translates to 'for being filled out'.",
+          "suggestion": "Birkaç seçeneğimiz var. 'Doldurulacak orijinal formu paylaşın' (Share the original form to be filled out) is a more accurate and natural phrasing. Another option would be 'Orijinal doldurulacak formu paylaşın' (Share the original form to fill in)."
         }
       ],
       "approved_at": null
@@ -281,6 +266,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ndani formularin origjinal për plotësim' isn't the most natural or common way to say 'Share the original form for filling out' in Albanian. 'Plotësim' refers to the act of filling, not the form itself. A more natural phrasing would emphasize sharing the form *to be* filled.",
+          "suggestion": "Ndani formularin origjinal për t'u plotësuar."
+        }
+      ],
       "approved_at": null
     }
   }

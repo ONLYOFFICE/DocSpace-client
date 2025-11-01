@@ -3,7 +3,7 @@
   "content": "You can select the section, room or folder you want to display",
   "content_en_sha1_hash": "35bc5102629f27da03df522abca9976c119d659a",
   "created_at": "2025-05-19T21:30:54.629Z",
-  "updated_at": "2025-07-01T15:57:36.196Z",
+  "updated_at": "2025-08-04T07:30:01.391Z",
   "comment": {
     "text": "This translation key is used for the description of a button or label that explains the purpose of selecting a room or folder in a file selection UI. It appears as a tooltip or tooltip content and provides contextual information to help users understand their options.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 417,
-      "context": "<Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput",
+      "line_number": 429,
+      "context": "<Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n dataTestId=\"room_or_folder_help_button\"\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 575,
-      "context": "<Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput",
+      "line_number": 590,
+      "context": "<Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n dataTestId=\"room_or_folder_help_button\"\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 303,
-      "context": "<Label className=\"label\" text={t(\"Common:Room\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <RoomsSelectorInput",
+      "line_number": 302,
+      "context": "<Label className=\"label\" text={t(\"Common:Room\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n dataTestId=\"room_selector_help_button\"\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>",
       "module": "/packages/client"
     }
   ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"You can select the section, room or folder you want to display\" is not perfectly captured by the Azerbaijani translation. While understandable, it's a bit literal. A more natural phrasing would emphasize the selection process.",
-          "suggestion": "Seçmək istədiyiniz bölmə, otaq və ya qovluğu göstərin"
+          "description": "The translation 'Baxmaq istədiyiniz bölmə, otaq və ya qovluğu seçə bilərsiniz' is a literal translation and doesn't flow naturally in Azerbaijani. A more natural phrasing would be 'Seçmək istədiyiniz bölmə, otaq və ya qovluğu seçə bilərsiniz' or 'Nə göstərmək istəyirsinizsə, bölmə, otaq və ya qovluğu seçə bilərsiniz'.",
+          "suggestion": "Seçmək istədiyiniz bölmə, otaq və ya qovluğu seçə bilərsiniz"
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'която искате да се показва' (which you want to be displayed) is a bit awkward and overly literal. A more natural phrasing would use a more active voice.",
-          "suggestion": "Можете да изберете секцията, стаята или папката, която да показвате"
+          "description": "The translation 'която искате да се показва' is a bit wordy and less natural. It translates literally to 'that you want to be displayed'. A more natural phrasing would be 'която да покажете'.",
+          "suggestion": "Можете да изберете секцията, стаята или папката, която да покажете"
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and slightly awkward. 'anzeigen möchten' (want to display) isn't the most natural phrasing.",
-          "suggestion": "Sie können den Bereich, den Raum oder den Ordner auswählen, den Sie sehen möchten."
+          "description": "The phrase 'anzeigen möchten' (want to display) is a bit awkward. It's more natural to use 'sehen möchten' (would like to see) or simply 'auswählen' (to select) if the context is just selecting something for display.",
+          "suggestion": "Sie können den Bereich, den Raum oder den Ordner auswählen, den Sie sehen möchten"
         }
       ],
       "approved_at": null
@@ -132,8 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'display' is translated as '디스플레이(display)'. While understandable, a more natural Korean translation for 'display' in this context would be '표시(pyojeo)'.",
-          "suggestion": "표시할 섹션, 방 또는 폴더를 선택할 수 있습니다"
+          "description": "The English phrase \"You can select the section, room or folder you want to display\" is more accurately conveyed as something like 'You can choose the section, room, or folder to display'. The current translation '디스플레이할 섹션, 방 또는 폴더를 선택할 수 있습니다' is technically correct but a bit stiff and formal. '선택할 수 있습니다' is overly formal for this context.",
+          "suggestion": "디스플레이할 섹션, 방, 또는 폴더를 선택하세요."
+        },
+        {
+          "type": "formatting",
+          "description": "The comma usage in the Korean translation could be improved for better readability. Adding a space after each comma would make it flow more naturally.",
+          "suggestion": "디스플레이할 섹션, 방, 또는 폴더를 선택할 수 있습니다."
         }
       ],
       "approved_at": null
@@ -141,13 +146,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ສະແດງ' might be more accurately translated as 'ເບິ່ງ' or 'ເປີດ' depending on the context. 'ສະແດງ' implies a performance or demonstration, whereas 'ເບິ່ງ' means 'to see' and 'ເປີດ' means 'to open'.",
-          "suggestion": "Consider using 'ເບິ່ງ' or 'ເປີດ' instead of 'ສະແດງ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -168,7 +167,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'który będzie się wyświetlać' is a bit awkward and overly literal. A more natural Polish phrasing would convey the meaning more clearly.",
+          "description": "The phrase \"który będzie się wyświetlać\" is a bit awkward in Polish. A more natural phrasing would convey the intent more clearly.",
           "suggestion": "Możesz wybrać sekcję, pokój lub katalog do wyświetlenia."
         }
       ],
@@ -180,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'que que pretende visualizar' is redundant and grammatically awkward. The repetition of 'que' is unnecessary and sounds unnatural in Portuguese.",
-          "suggestion": "Pode selecionar a secção, sala ou pasta que pretende visualizar."
+          "description": "The phrase \"que que pretende visualizar\" is redundant. \"que pretende visualizar\" is sufficient.",
+          "suggestion": "Pode selecionar a secção, sala, ou pasta que pretende visualizar."
         }
       ],
       "approved_at": null
@@ -210,13 +209,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ඔබට පෙන්වීමට වුවමනා කොටස, කාමරය හෝ බහාලුම තේරීමට හැකිය\" is not the most natural or accurate translation of 'You can select the section, room or folder you want to display'. A more accurate translation would focus on the *ability* to choose, rather than the action of *displaying*.",
-          "suggestion": "ඔබට අවශ්‍ය කොටස, කාමරය, හෝ ෆෝල්ඩර් තෝරා ගත හැකිය"
+          "description": "The translation 'ඔබට පෙන්වීමට වුවමනා කොටස, කාමරය හෝ බහාලුම තේරීමට හැකිය' is a bit literal and could be improved for naturalness. 'පෙන්වීමට' (to show) is unnecessary here. A better phrasing would focus on selecting.",
+          "suggestion": "ඔබට අවශ්‍ය කොටස, කාමරය හෝ බහාලුම තේරීමට හැකිය."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the punctuation and flow could be improved for better readability in Sinhala. Adding a comma after 'කොටස' would improve readability.",
-          "suggestion": "ඔබට අවශ්‍ය කොටස, කාමරය, හෝ ෆෝල්ඩර් තෝරා ගත හැකිය"
+          "description": "While not strictly incorrect, the comma usage might benefit from closer review in context. Consider if a different punctuation is preferable for flow.",
+          "suggestion": "Potentially review punctuation in context. May consider alternatives like a dash or no punctuation."
         }
       ],
       "approved_at": null
@@ -236,13 +235,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'fasciklu' is potentially incorrect. 'Fasikla' is the nominative case, but here we need the accusative case which would be 'fasiklu'.",
-          "suggestion": "fasiklu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -263,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'які треба показати' (which need to be shown) is slightly awkward and not the most natural way to express 'you want to display'. A more natural phrasing would emphasize the user's action.",
-          "suggestion": "Можна вибрати розділ, кімнату або папку, які ви хочете відобразити"
+          "description": "The phrase \"які треба показати\" is a bit clunky and could be improved for flow. A more natural phrasing would convey the same meaning more smoothly.",
+          "suggestion": "Можна вибрати розділ, кімнату або папку, які потрібно відобразити"
         }
       ],
       "approved_at": null
@@ -278,13 +271,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'section' is not accurately translated. While '板块' (bǎnkuài) can sometimes mean 'section', in the context of a room or folder hierarchy, it's not the most natural or common translation. It can be interpreted as a larger, distinct area or division, rather than a simple room or folder.",
-          "suggestion": "Consider using '类别' (lèibié) or '部分' (bùfen) instead of '板块' to better reflect the meaning of 'section' within the room/folder hierarchy. The most appropriate choice would depend on the specific nuance required."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Assign Owner",
   "content_en_sha1_hash": "65778d169276fd3b457d09651534e9f5172891db",
   "created_at": "2025-05-19T21:30:55.291Z",
-  "updated_at": "2025-05-28T09:30:02.280Z",
+  "updated_at": "2025-08-04T07:30:01.123Z",
   "comment": {
     "text": "The \"Assign Owner\" translation key is used to display a button label that assigns room ownership. It appears in a file management context, specifically on a footer button within a modal dialog, where users can select a new owner for a room file.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 91,
+      "line_number": 90,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={isRoomOwner ? t(\"Files:AssignOwner\") : t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onLeaveRoom}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 126,
+      "line_number": 124,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={showBackButton ? \"\" : t(\"Files:AssignOwner\")}\n onSubmit={onChangeRoomOwner}\n withHeader\n headerProps={{\n onCloseClick: handleClosePanel,\n onBackClick,",
       "module": "/packages/client"
     }
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Նշանակել սեփականատիրոջ\" while literally meaning \"Assign Owner\", might not be the most natural or idiomatic way to express this in Armenian. It can sound a bit formal or technical. A more natural phrasing might depend on the specific context.",
+          "suggestion": "Consider alternatives like \"ձեռք բերել սեփականատիրոջ\" (acquire owner) or a simpler phrasing based on the specific application context. It's best to consult with a native Armenian speaker familiar with the software/platform's terminology."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +105,30 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '所有者の割り当て' is a literal translation, it sounds somewhat formal and stiff for a UI element like 'Assign Owner'. A more natural and commonly used translation might be better.",
+          "suggestion": "所有者設定 (Shounsha settings)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '割り当て' (wariate) carries a nuance of allocation, which isn't always the intent of 'Assign Owner'.  '設定' (settei - setting) is often used for assigning or setting a value.",
+          "suggestion": "所有者設定 (Shounsha settings)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"소유자 할당\" is a literal translation of \"Assign Owner\", it can sound slightly awkward in Korean. A more natural phrasing would emphasize the action of assigning.",
+          "suggestion": "소유자 지정 (So-yu-ja Ji-jeong) - This translates to 'Designate Owner' or 'Set Owner' and flows more naturally."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +164,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Proprietário da sala' (Owner of the room) doesn't accurately reflect the English phrase 'Assign Owner'. It implies ownership of a room, while 'Assign Owner' suggests assigning a user as the owner of a file or resource.",
+          "suggestion": "Consider 'Atribuir Proprietário' or 'Definir Proprietário'.  A more context-aware translation would be ideal if 'Files' refers to a specific file management system."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -159,7 +188,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"හිමිකරුවෙක් පත් කරන්න\" (himikaruvakek path karanawa) literally translates to \"make someone an owner\". While conveying the general meaning of 'Assign Owner', it's a bit wordy and not the most natural way to express it in Sinhala for a UI element. A more direct and common translation would be 'හිමිකම් දීම' (himikam dima) - 'Grant Ownership'.",
+          "suggestion": "හිමිකම් දීම (himikam dima)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,19 +212,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Додели Власника' doesn't accurately convey the meaning of 'Assign Owner'. 'Додели' implies distributing or allocating, not specifically assigning ownership. A more accurate translation would focus on establishing ownership.",
+          "suggestion": "Доделити власника"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Dodeli Vlasnika' is a literal translation that doesn't fully capture the intended meaning of 'Assign Owner'. A more natural Serbian phrasing would be 'Podešavanje vlasnika' or 'Dodeljivanje vlasnika'. 'Dodeli' is grammatically correct but sounds a bit formal and less common in this context.",
+          "suggestion": "Podešavanje vlasnika"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Sahip Ata\" doesn't accurately convey the meaning of \"Assign Owner.\" \"Sahip\" means 'owner' but \"Ata\" implies 'to give' or 'to assign'. It's an incomplete translation.",
+          "suggestion": "A more accurate translation would be something like \"Sahiplendirmek\" or \"Sahibi Belirlemek\". \"Sahiplendirmek\" is closer to the action of assigning ownership. \"Sahibi Belirlemek\" means 'to determine the owner'."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

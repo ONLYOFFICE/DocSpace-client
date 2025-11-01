@@ -28,9 +28,8 @@ import React, { useCallback } from "react";
 import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
-import { type IConfig } from "@onlyoffice/document-editor-react";
-
 import {
+  addFileToRecentlyViewed,
   createFile,
   getEditDiff,
   getEditHistory,
@@ -40,7 +39,8 @@ import {
   openEdit,
   restoreDocumentsVersion,
   sendEditorNotify,
-  startFilling,
+  markAsFavorite,
+  removeFromFavorite,
 } from "@docspace/shared/api/files";
 import {
   TEditHistory,
@@ -54,7 +54,7 @@ import {
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { FolderType, StartFillingMode } from "@docspace/shared/enums";
+import { StartFillingMode } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { Nullable } from "@docspace/shared/types";
@@ -76,13 +76,11 @@ import {
   THistoryData,
   UseEventsProps,
 } from "@/types";
-
-type IConfigEvents = Pick<IConfig, "events">;
+import { onSDKInfo } from "@/utils/events";
 
 let docEditor: TDocEditor | null = null;
 
 const useEditorEvents = ({
-  user,
   successAuth,
   fileInfo,
   config,
@@ -153,10 +151,10 @@ const useEditorEvents = ({
 
         if (result.error) throw new Error(result.error);
 
-        var link = result.link;
+        const link = result.link;
         window.open(link, windowName);
       } catch (e) {
-        var winEditor = window.open("", windowName);
+        const winEditor = window.open("", windowName);
 
         winEditor?.close();
         docEditor?.showMessage?.(
@@ -175,9 +173,9 @@ const useEditorEvents = ({
       if (config?.type === "mobile") {
         const wrapEl = document.getElementsByTagName("iframe");
         if (wrapEl.length) {
-          wrapEl[0].style.height = screen.availHeight + "px";
+          wrapEl[0].style.height = `${window.screen.availHeight}px`;
           window.scrollTo(0, -1);
-          wrapEl[0].style.height = window.innerHeight + "px";
+          wrapEl[0].style.height = `${window.innerHeight}px`;
         }
       }
     } catch (e) {
@@ -214,10 +212,8 @@ const useEditorEvents = ({
         const message = decodeURIComponent(splitUrl[1]).replace(/\+/g, " ");
 
         docEditor?.showMessage?.(message);
-        history.pushState({}, "", url.substring(0, index));
-      } else {
-        if (config?.Error) docEditor?.showMessage?.(config.Error);
-      }
+        window.history.pushState({}, "", url.substring(0, index));
+      } else if (config?.Error) docEditor?.showMessage?.(config.Error);
     }
 
     const message = searchParams.get("message");
@@ -234,7 +230,7 @@ const useEditorEvents = ({
         }
       });
 
-      history.pushState({}, "", `/doceditor${search}`);
+      window.history.pushState({}, "", `/doceditor${search}`);
     }
   }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize]);
 
@@ -259,10 +255,10 @@ const useEditorEvents = ({
     if (docEditor) {
       // console.log("call assign for asc files editor doceditor");
       assign(
-        window as unknown as { [key: string]: {} },
+        window as unknown as { [key: string]: object },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
-      ); //Do not remove: it's for Back button on Mobile App
+      ); // Do not remove: it's for Back button on Mobile App
     }
   }, [config?.errorMessage, sdkConfig?.frameId, checkAndRequestRoles]);
 
@@ -351,7 +347,7 @@ const useEditorEvents = ({
 
   const getDocumentHistory = React.useCallback(
     (fileHistory: TEditHistory[], historyLength: number) => {
-      let result = [];
+      const result = [];
 
       for (let i = 0; i < historyLength; i++) {
         const changes = fileHistory[i].changes;
@@ -367,7 +363,7 @@ const useEditorEvents = ({
           )}`;
         });
 
-        let obj = {
+        const obj = {
           ...(changes.length !== 0 && { changes: changesModified }),
           created: `${new Date(fileHistory[i].created).toLocaleString(
             config?.editorConfig.lang,
@@ -409,22 +405,22 @@ const useEditorEvents = ({
           history: getDocumentHistory(updateVersions, historyLength),
         });
       } catch (error) {
-        let errorMessage = "";
+        let newErrorMessage = "";
 
         const typedError = error as TCatchError;
         if (typeof typedError === "object") {
-          errorMessage =
+          newErrorMessage =
             ("response" in typedError &&
               typedError?.response?.data?.error?.message) ||
             ("statusText" in typedError && typedError?.statusText) ||
             ("message" in typedError && typedError?.message) ||
             "";
         } else {
-          errorMessage = error as string;
+          newErrorMessage = error as string;
         }
 
         docEditor?.refreshHistory?.({
-          error: `${errorMessage}`, //TODO: maybe need to display something else.
+          error: `${newErrorMessage}`, // TODO: maybe need to display something else.
         });
       }
     },
@@ -449,20 +445,20 @@ const useEditorEvents = ({
         history: getDocumentHistory(fileHistory, historyLength),
       });
     } catch (error) {
-      let errorMessage = "";
+      let newErrorMessage = "";
       const typedError = error as TCatchError;
       if (typeof typedError === "object") {
-        errorMessage =
+        newErrorMessage =
           ("response" in typedError &&
             typedError?.response?.data?.error?.message) ||
           ("statusText" in typedError && typedError?.statusText) ||
           ("message" in typedError && typedError?.message) ||
           "";
       } else {
-        errorMessage = error as string;
+        newErrorMessage = error as string;
       }
       docEditor?.refreshHistory?.({
-        error: `${errorMessage}`, //TODO: maybe need to display something else.
+        error: `${newErrorMessage}`, // TODO: maybe need to display something else.
       });
     }
   }, [doc, fileInfo?.id, getDocumentHistory]);
@@ -492,8 +488,7 @@ const useEditorEvents = ({
           }),
         );
 
-        usersNotFound &&
-          usersNotFound.length > 0 &&
+        if (usersNotFound && usersNotFound.length > 0) {
           docEditor?.showMessage?.(
             t
               ? t("UsersWithoutAccess", {
@@ -501,6 +496,7 @@ const useEditorEvents = ({
                 })
               : "",
           );
+        }
       } catch (e) {
         toastr.error(e as TData);
       }
@@ -574,21 +570,21 @@ const useEditorEvents = ({
 
         docEditor?.setHistoryData?.(obj);
       } catch (error) {
-        let errorMessage = "";
+        let newErrorMessage = "";
         const typedError = error as TCatchError;
         if (typeof typedError === "object") {
-          errorMessage =
+          newErrorMessage =
             ("response" in typedError &&
               typedError?.response?.data?.error?.message) ||
             ("statusText" in typedError && typedError?.statusText) ||
             ("message" in typedError && typedError?.message) ||
             "";
         } else {
-          errorMessage = error as string;
+          newErrorMessage = error as string;
         }
 
         docEditor?.setHistoryData?.({
-          error: `${errorMessage}`, //TODO: maybe need to display something else.
+          error: `${newErrorMessage}`, // TODO: maybe need to display something else.
           version,
         });
       }
@@ -603,25 +599,27 @@ const useEditorEvents = ({
       setDocSaved(!(event as { data: boolean }).data);
 
       setTimeout(() => {
-        docSaved
-          ? setDocumentTitle(
-              t,
-              docTitle,
-              config?.document.fileType ?? "",
-              documentReady,
-              successAuth ?? false,
-              organizationName,
-              setDocTitle,
-            )
-          : setDocumentTitle(
-              t,
-              `*${docTitle}`,
-              config?.document.fileType ?? "",
-              documentReady,
-              successAuth ?? false,
-              organizationName,
-              setDocTitle,
-            );
+        if (docSaved) {
+          setDocumentTitle(
+            t,
+            docTitle,
+            config?.document.fileType ?? "",
+            documentReady,
+            successAuth ?? false,
+            organizationName,
+            setDocTitle,
+          );
+        } else {
+          setDocumentTitle(
+            t,
+            `*${docTitle}`,
+            config?.document.fileType ?? "",
+            documentReady,
+            successAuth ?? false,
+            organizationName,
+            setDocTitle,
+          );
+        }
       }, 500);
     },
     [
@@ -636,9 +634,23 @@ const useEditorEvents = ({
   );
 
   const onMetaChange = React.useCallback(
-    (event: object) => {
+    async (event: object) => {
       const newTitle = (event as { data: { title: string } }).data.title;
-      //const favorite = event.data.favorite;
+      const favorite = (event as { data: { favorite: boolean } }).data.favorite;
+
+      if (favorite !== fileInfo?.isFavorite && fileInfo?.id) {
+        try {
+          if (favorite) {
+            await markAsFavorite([fileInfo.id], []);
+          } else {
+            await removeFromFavorite([fileInfo.id], []);
+          }
+        } catch (error) {
+          console.error(error);
+        } finally {
+          docEditor?.setFavorite?.(favorite);
+        }
+      }
 
       if (newTitle && newTitle !== docTitle) {
         setDocumentTitle(
@@ -663,10 +675,14 @@ const useEditorEvents = ({
     ],
   );
 
+  const generateLink = (actionData: object) => {
+    return encodeURIComponent(JSON.stringify(actionData));
+  };
+
   const onMakeActionLink = React.useCallback((event: object) => {
     const url = window.location.href;
 
-    const actionData = (event as { data: {} }).data;
+    const actionData = (event as { data: object }).data;
 
     const link = generateLink(actionData);
 
@@ -689,16 +705,12 @@ const useEditorEvents = ({
   //   [fileInfo?.id],
   // );
 
-  const generateLink = (actionData: {}) => {
-    return encodeURIComponent(JSON.stringify(actionData));
-  };
-
   React.useEffect(() => {
     // console.log("render docspace config", { ...window.ClientConfig });
     if (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       return;
 
-    //FireFox security issue fix (onRequestCreateNew will be blocked)
+    // FireFox security issue fix (onRequestCreateNew will be blocked)
     const documentType = config?.documentType || "word";
     const defaultFileName = getDefaultFileName();
     const url = new URL(
@@ -786,7 +798,7 @@ const useEditorEvents = ({
   }, [setFillingStatusDialogVisible]);
 
   const onRequestStartFilling = useCallback(
-    (event: {}) => {
+    (event: object) => {
       switch (config?.startFillingMode) {
         case StartFillingMode.ShareToFillOut:
           openShareFormDialog?.();
@@ -832,6 +844,18 @@ const useEditorEvents = ({
     config?.editorConfig.mode,
   ]);
 
+  const onInfo = React.useCallback(
+    async (e: object) => {
+      onSDKInfo(e);
+
+      // Add to recently viewed files in any mode (read or edit)
+      if (successAuth && fileInfo?.id) {
+        addFileToRecentlyViewed(fileInfo.id);
+      }
+    },
+    [onSDKInfo, successAuth, fileInfo?.id],
+  );
+
   return {
     createUrl,
     documentReady,
@@ -858,6 +882,7 @@ const useEditorEvents = ({
     onRequestFillingStatus,
     onRequestStartFilling,
     onRequestRefreshFile,
+    onInfo,
   };
 };
 

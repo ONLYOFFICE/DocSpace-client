@@ -26,6 +26,7 @@
 
 import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 import { toastr } from "@docspace/shared/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -34,7 +35,7 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
-import { isManagement } from "@docspace/shared/utils/common";
+import { getErrorInfo, isManagement } from "@docspace/shared/utils/common";
 
 import {
   saveToLocalStorage,
@@ -52,9 +53,23 @@ async function* uploadBackupFile(requestsDataArray, url) {
   }
 }
 
+/**
+ * @typedef {import("@docspace/shared/types").ThirdPartyAccountType} ThirdPartyAccountType
+ * @typedef {import("@docspace/shared/api/files/types").TConnectingStorage} TConnectingStorage
+ */
+
 class BackupStore {
   authStore = null;
 
+  currentQuotaStore = null;
+
+  currentTariffStatusStore = null;
+
+  settingsStore = null;
+
+  paymentStore = null;
+
+  /** @type {import("./ThirdPartyStore").default} */
   thirdPartyStore = null;
 
   restoreResource = null;
@@ -123,12 +138,14 @@ class BackupStore {
 
   isThirdStorageChanged = false;
 
+  /** @type {Record<string, string>} */
   formSettings = {};
 
   requiredFormSettings = {};
 
   defaultFormSettings = {};
 
+  /** @type {Record<string, boolean>} */
   errorsFieldsBeforeSafe = {};
 
   selectedEnableSchedule = false;
@@ -137,23 +154,76 @@ class BackupStore {
 
   storageRegions = [];
 
+  /** @type {ThirdPartyAccountType | null} */
   selectedThirdPartyAccount = null;
 
   connectedThirdPartyAccount = null;
 
+  /** @type {ThirdPartyAccountType[]} */
   accounts = [];
 
   connectedAccount = [];
 
   isBackupProgressVisible = false;
 
-  backupPrgressError = "";
+  backupProgressError = "";
 
-  constructor(authStore, thirdPartyStore) {
+  backupsCount = null;
+
+  isInited = false;
+
+  isEmptyContentBeforeLoader = true;
+
+  isInitialError = false;
+
+  constructor(
+    authStore,
+    thirdPartyStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+    settingsStore,
+    paymentStore,
+  ) {
     makeAutoObservable(this);
 
     this.authStore = authStore;
     this.thirdPartyStore = thirdPartyStore;
+    this.currentQuotaStore = currentQuotaStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
+    this.settingsStore = settingsStore;
+    this.paymentStore = paymentStore;
+  }
+
+  setIsInitialError = (isInitialError) => {
+    this.isInitialError = isInitialError;
+  };
+
+  setIsEmptyContentBeforeLoader = (isEmptyContentBeforeLoader) => {
+    this.isEmptyContentBeforeLoader = isEmptyContentBeforeLoader;
+  };
+
+  setBackupsCount = (counts) => {
+    if (counts === undefined || counts === null) return;
+
+    this.backupsCount = counts;
+  };
+
+  setIsInited = (isInited) => {
+    this.isInited = isInited;
+  };
+
+  get backupPageEnable() {
+    const { maxFreeBackups, isBackupPaid } = this.currentQuotaStore;
+    const { isNotPaidPeriod } = this.currentTariffStatusStore;
+    const { isBackupServiceOn } = this.paymentStore;
+
+    if (!isBackupPaid || isNotPaidPeriod) return true;
+
+    if (maxFreeBackups === 0) return isBackupServiceOn;
+
+    if (this.backupsCount >= maxFreeBackups) return isBackupServiceOn;
+
+    return true;
   }
 
   setConnectedThirdPartyAccount = (account) => {
@@ -253,7 +323,9 @@ class BackupStore {
 
     this.setConnectedThirdPartyAccount(connectedAccount);
 
+    /** @type {ThirdPartyAccountType[]} */
     let accounts = [];
+    /** @type {ThirdPartyAccountType} */
     let selectedAccount = {};
 
     providers.forEach((item) => {
@@ -281,11 +353,20 @@ class BackupStore {
     );
   };
 
+  /**
+   * @typedef {Object} GetThirdPartyAccountReturnType
+   * @property {ThirdPartyAccountType} account
+   * @property {boolean} isConnected
+   *
+   * @param {TConnectingStorage} provider
+   * @param {import("@docspace/shared/types").TTranslation} t
+   * @returns {GetThirdPartyAccountReturnType}
+   */
   getThirdPartyAccount = (provider, t) => {
     const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);
     const serviceLabel = provider.connected
       ? serviceTitle
-      : `${serviceTitle} (${t("CreateEditRoomDialog:ActivationRequired")})`;
+      : `${serviceTitle} (${t("Common:ActivationRequired")})`;
 
     // const isConnected =
     //   this.connectedThirdPartyAccount?.providerKey === "WebDav"
@@ -322,20 +403,26 @@ class BackupStore {
     this.accounts = accounts;
   };
 
+  /**
+   * @param {Partial<ThirdPartyAccountType> | null} elem
+   */
   setSelectedThirdPartyAccount = (elem) => {
     this.selectedThirdPartyAccount = elem;
   };
 
   toDefault = () => {
-    this.selectedMonthlySchedule = this.defaultMonthlySchedule;
-    this.selectedWeeklySchedule = this.defaultWeeklySchedule;
-    this.selectedDailySchedule = this.defaultDailySchedule;
+    // this.selectedMonthlySchedule = this.defaultMonthlySchedule;
+    // this.selectedWeeklySchedule = this.defaultWeeklySchedule;
+    // this.selectedDailySchedule = this.defaultDailySchedule;
+
     this.selectedHour = this.defaultHour;
     this.selectedPeriodLabel = this.defaultPeriodLabel;
     this.selectedPeriodNumber = this.defaultPeriodNumber;
+
     this.selectedWeekdayLabel = this.defaultWeekdayLabel;
     this.selectedMaxCopiesNumber = this.defaultMaxCopiesNumber;
     this.selectedStorageType = this.defaultStorageType;
+
     this.selectedMonthDay = this.defaultMonthDay;
     this.selectedWeekday = this.defaultWeekday;
     this.selectedStorageId = this.defaultStorageId;
@@ -350,7 +437,7 @@ class BackupStore {
     this.setIsThirdStorageChanged(false);
   };
 
-  setDefaultOptions = (t, periodObj, weekdayArr) => {
+  setDefaultOptions = (periodObj, weekdayArr) => {
     if (this.backupSchedule) {
       const { storageType, cronParams, backupsStored, storageParams } =
         this.backupSchedule;
@@ -436,6 +523,10 @@ class BackupStore {
     }
 
     this.setIsThirdStorageChanged(false);
+  };
+
+  setDefaultFolderId = (id) => {
+    this.defaultFolderId = id;
   };
 
   setThirdPartyStorage = (list) => {
@@ -536,23 +627,19 @@ class BackupStore {
     }
   };
 
-  setErrorInformation = (err, t) => {
-    let message = "";
-    if (typeof err === "string") message = err;
-    else
-      message =
-        ("response" in err && err.response?.data?.error?.message) ||
-        ("message" in err && err.message) ||
-        "";
-
-    if (err?.response?.status === 502) message = t("Common:UnexpectedError");
-
-    this.errorInformation = message ?? t("Common:UnexpectedError");
+  setErrorInformation = (err, t, customText) => {
+    this.errorInformation = getErrorInfo(err, t, customText);
   };
 
   getProgress = async (t) => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
     try {
-      const response = await getBackupProgress(isManagement());
+      const response = await getBackupProgress(
+        isManagement(),
+        abortController.signal,
+      );
 
       if (response) {
         const { progress, link, error } = response;
@@ -572,7 +659,9 @@ class BackupStore {
         }
       }
     } catch (err) {
-      this.setErrorInformation(err, t);
+      if (axios.isCancel(err)) return;
+
+      if (err) this.setErrorInformation(err, t);
     }
   };
 
@@ -591,7 +680,7 @@ class BackupStore {
   };
 
   setBackupProgressError = (error) => {
-    this.backupPrgressError = error;
+    this.backupProgressError = error;
   };
 
   setDownloadingProgress = (progress) => {
@@ -615,6 +704,12 @@ class BackupStore {
     delete this.formSettings[key];
   };
 
+  /**
+   * @param { boolean } isCheckedThirdPartyStorage
+   * @param { null |string | number } selectedFolderId
+   * @param { string | null =} selectedStorageId
+   * @returns { import("@docspace/shared/types").Option[]}
+   */
   getStorageParams = (
     isCheckedThirdPartyStorage,
     selectedFolderId,
@@ -659,7 +754,7 @@ class BackupStore {
 
   get isValidForm() {
     const requiredKeys = Object.keys(this.requiredFormSettings);
-    if (!requiredKeys.length) return;
+    if (!requiredKeys.length) return true;
 
     return !this.requiredFormSettings.some((key) => {
       const value = this.formSettings[key];
@@ -716,6 +811,10 @@ class BackupStore {
     this.selectedEnableSchedule = !isEnable;
   };
 
+  setterSelectedEnableSchedule = (enable) => {
+    this.selectedEnableSchedule = enable;
+  };
+
   convertServiceName = (serviceName) => {
     // Docusign, OneDrive, Wordpress
     switch (serviceName) {
@@ -749,7 +848,6 @@ class BackupStore {
       url,
     );
 
-    // eslint-disable-next-line no-restricted-syntax
     for await (const value of uploadBackupFile(requestsDataArray, uploadUrl)) {
       if (!value) return false;
 

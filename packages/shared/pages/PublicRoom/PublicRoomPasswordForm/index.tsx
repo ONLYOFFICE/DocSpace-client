@@ -28,41 +28,45 @@
 
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-
-import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
+import { TFunction } from "i18next";
+import classNames from "classnames";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { Text } from "../../../components/text";
 import { PasswordInput } from "../../../components/password-input";
 import { Button, ButtonSize } from "../../../components/button";
 import { FieldContainer } from "../../../components/field-container";
-// import { createPasswordHash } from "@docspace/shared/utils/common";
 import { frameCallCommand } from "../../../utils/common";
 import { toastr } from "../../../components/toast";
 import { FormWrapper } from "../../../components/form-wrapper";
 import PortalLogo from "../../../components/portal-logo/PortalLogo";
 import { ValidationStatus } from "../../../enums";
 
-import type { TTranslation } from "../../../types";
 import { validatePublicRoomPassword } from "../../../api/rooms";
-import { InputSize } from "../../../components/text-input";
-import type { TPublicRoomPassword } from "../../../api/rooms/types";
-
 import {
-  StyledBody,
-  StyledContent,
-  StyledPage,
-} from "./PublicRoomPasswordForm.styled";
+  getLogo,
+  getPasswordDescription,
+} from "./PublicRoomPasswordForm.helper";
+import { InputSize } from "../../../components/text-input";
+import { RoomIcon } from "../../../components/room-icon";
+import type {
+  TPublicRoomPassword,
+  TValidateShareRoom,
+} from "../../../api/rooms/types";
 
-type PublicRoomPasswordProps = {
-  t: TTranslation;
+import styles from "./PublicRoomPasswordForm.module.scss";
+
+export type PublicRoomPasswordProps = {
+  t: TFunction;
   roomKey: string;
-  roomTitle: string;
+  validationData: TValidateShareRoom;
   onSuccessValidationCallback: (res: TPublicRoomPassword) => void;
+  getIcon?: (fileExst: string) => string;
 };
 
 const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
-  const { t, roomKey, roomTitle, onSuccessValidationCallback } = props;
+  const { t, roomKey, validationData, onSuccessValidationCallback, getIcon } =
+    props;
 
   const [password, setPassword] = useState("");
   const [passwordValid, setPasswordValid] = useState(true);
@@ -78,6 +82,16 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
       inputRef.current.focus();
     }
   });
+
+  const description = useMemo(
+    () => getPasswordDescription(t, validationData),
+    [t, validationData],
+  );
+
+  const logo = useMemo(
+    () => getLogo(validationData, getIcon),
+    [validationData, getIcon],
+  );
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -136,33 +150,57 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
   };
 
   return (
-    <StyledPage>
-      <div className="public-room-page">
-        <StyledContent className="public-room-content">
-          <StyledBody>
-            <PortalLogo className="portal-logo" />
+    <div className={styles.page} id="public-password-page">
+      <div className={styles.publicRoomPage}>
+        <div
+          className={classNames(
+            styles.content,
+            styles.publicRoomContent,
+            "public-room-content",
+          )}
+        >
+          <div className={styles.body}>
+            <PortalLogo
+              className={classNames(styles.portalLogo, "portal-logo")}
+            />
 
             <FormWrapper>
-              <div className="password-form">
+              <div className={classNames(styles.passwordForm, "password-form")}>
                 <Text fontSize="16px" fontWeight="600">
-                  {t("Common:EnterPassword")}
+                  {/* {t("Common:EnterPassword")} */}
+                  {t("Common:PasswordRequired")}
                 </Text>
 
                 <Text
                   fontSize="13px"
                   fontWeight="400"
-                  className="public-room-text"
+                  className={classNames(
+                    styles.publicRoomText,
+                    "public-room-text",
+                  )}
                 >
-                  {t("Common:NeedPassword")}:
+                  {description}:
                 </Text>
-                <div className="public-room-name">
-                  <PublicRoomIcon className="public-room-icon" />
+                <div
+                  className={classNames(
+                    styles.publicRoomName,
+                    "public-room-name",
+                  )}
+                >
+                  <RoomIcon
+                    logo={logo}
+                    showDefault={false}
+                    title={validationData.title}
+                  />
                   <Text
-                    className="public-room-text"
+                    className={classNames(
+                      styles.publicRoomText,
+                      "public-room-text",
+                    )}
                     fontSize="15px"
                     fontWeight="600"
                   >
-                    {roomTitle}
+                    {validationData.title}
                   </Text>
                 </div>
 
@@ -199,15 +237,15 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
                 scale
                 label={t("Common:ContinueButton")}
                 tabIndex={5}
-                onClick={onSubmitAction}
-                isDisabled={isLoading}
                 isLoading={isLoading}
+                isDisabled={isLoading}
+                onClick={onSubmitAction}
               />
             </FormWrapper>
-          </StyledBody>
-        </StyledContent>
+          </div>
+        </div>
       </div>
-    </StyledPage>
+    </div>
   );
 };
 

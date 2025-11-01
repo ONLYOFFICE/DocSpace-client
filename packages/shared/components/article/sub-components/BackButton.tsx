@@ -41,17 +41,23 @@ const BackButton = ({
   currentDeviceType,
   onLogoClickAction,
   isLoading,
+  toggleArticleOpen,
 }: {
   showText: boolean;
   currentDeviceType: DeviceType;
   onLogoClickAction?: () => void;
   isLoading?: boolean;
+  toggleArticleOpen?: () => void;
 }) => {
   const { t } = useTranslation("Common");
   const navigate = useNavigate();
 
   const onClickBack = () => {
     onLogoClickAction?.();
+
+    if (toggleArticleOpen && currentDeviceType === DeviceType.mobile)
+      toggleArticleOpen();
+
     navigate("/");
   };
 

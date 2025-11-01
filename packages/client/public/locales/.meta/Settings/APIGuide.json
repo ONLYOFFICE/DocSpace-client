@@ -3,7 +3,7 @@
   "content": "API Guide",
   "content_en_sha1_hash": "95bf0e870e2f1145571690754754b56cb523c59b",
   "created_at": "2025-05-19T21:30:50.490Z",
-  "updated_at": "2025-05-28T09:30:02.547Z",
+  "updated_at": "2025-09-29T11:28:56.134Z",
   "comment": {
     "text": "The \"APIGuide\" translation key is used to display the label for an API documentation button, which opens a new window to view API guide content when clicked. The label appears on a portal settings page, allowing users to access API documentation from within the application.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 215,
-      "context": "color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight={600}\n onClick={() => window.open(apiKeysLink, \"_blank\")}\n >\n {t(\"Settings:APIGuide\")}\n </Link>\n </div>\n <div>\n {isMobile() ? (\n <StyledMobileButton>",
+      "line_number": 176,
+      "context": "fontSize=\"13px\"\n fontWeight={600}\n onClick={() => window.open(apiKeysUrl, \"_blank\")}\n dataTestId=\"api_guide_link\"\n >\n {t(\"Settings:APIGuide\")}\n </Link>\n ) : null}\n </div>\n <div>\n {error ? (",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"دليل \"API\"\" is a literal translation, but could be improved for better readability and naturalness in Arabic. While technically correct, it's not the most common or elegant way to express \"API Guide.\"  The term \"API\" is often left as-is in Arabic technical contexts, but a more flowing translation might be preferable.",
-          "suggestion": "دليل واجهة برمجة التطبيقات (Daliil Waajihat Barmajate At-Tatbiqaat) or simply \"دليل واجهة برمجة\" (Daliil Waajihat Barmajate)"
+          "description": "The translation \"دليل \"API\"\" is a literal transliteration of \"API\" rather than a natural Arabic equivalent for \"Guide\". While understandable, it's not ideal. It would be better to translate \"Guide\" explicitly.",
+          "suggestion": "دليل واجهة برمجة التطبيقات (Dali Wajihat Barmajat al-Tatbiqat)"
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic text is directly adjacent to the English abbreviation \"API\" with no separation. This can appear visually jarring and less professional.",
+          "suggestion": "دليل واجهة برمجة التطبيقات (API)"
         }
       ],
       "approved_at": null
@@ -90,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"API Օգնություն\" uses \"Օգնություն\" (Ogntut'yun) which translates to 'Help' or 'Assistance', not 'Guide'.  'Guide' requires a different word.",
-          "suggestion": "Consider using a more accurate translation for 'Guide', such as \"API Ցուցումներ\" (API Ts'uk'umner - API Instructions/Directions) or \"API Ուղեցույց\" (API Ughutseu'ts' - API Guidebook)."
+          "description": "The Armenian translation 'API Օգնություն' uses 'Օգնություն' which translates to 'Help' rather than 'Guide'.  'Guide' implies a more comprehensive resource.",
+          "suggestion": "API Ցուցումներ (API Ts'umikner) - which means 'API Instructions' or API Ուղեցույց (API Ugeցuyց) - which means 'API Guide'."
         }
       ],
       "approved_at": null

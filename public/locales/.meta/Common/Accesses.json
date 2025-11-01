@@ -3,7 +3,7 @@
   "content": "Accesses",
   "content_en_sha1_hash": "3e2ca80db95767e37d4fe7d8f846aa94cb667515",
   "created_at": "2025-05-19T21:30:42.828Z",
-  "updated_at": "2025-05-28T09:30:02.453Z",
+  "updated_at": "2025-08-27T10:14:35.253Z",
   "comment": {
     "text": "This translation key is used for displaying the title of a tab on a page that lists access details. It appears as the name of a button or tab in an info panel header.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 117,
-      "context": "const setDetails = () => setView(\"info_details\");\n const setShare = () => setView(\"info_share\");\n \n const memberTab = {\n id: \"info_members\",\n name: isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n onClick: setMembers,\n content: null,\n };\n \n const detailsTab = {",
+      "line_number": 99,
+      "context": "const setDetails = () => setView(InfoPanelView.infoDetails);\n const setShare = () => setView(InfoPanelView.infoShare);\n \n const memberTab = {\n id: \"info_members\",\n name: isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n onClick: setMembers,\n content: null,\n };\n \n const detailsTab = {",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"الصلاحيات\" (Al-Sulahiyat) translates to 'authorizations' or 'permissions,' not 'accesses.' While related, it's not a direct equivalent of 'accesses.'",
-          "suggestion": "Consider \"وصول\" (Wusool) for a more accurate translation of 'accesses', or re-evaluate the intended meaning of 'Accesses' in context to find the closest Arabic equivalent."
+          "description": "The Arabic translation \"الصلاحيات\" (Al-Salahiyat) generally translates to \"permissions\" or \"authorizations,\" not \"accesses.\" While related, \"accesses\" implies the act of gaining access, while \"الصلاحيات\" focuses on the authority or right to access.",
+          "suggestion": "Consider a translation closer to \"وصول\" (Wusool) which means \"access\" or a phrasing that conveys the action of accessing, such as \"عمليات الوصول\" (Amaliyat Al-Wusool) - 'Access Operations'."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Přístupy\" while technically meaning 'accesses' or 'approaches', doesn't quite capture the direct meaning of the English 'Accesses' in this context. It's a slightly broader term and may not convey the precise meaning depending on the surrounding text.",
-          "suggestion": "Consider if \"Vstupy\" (Inputs) or a more context-specific term would be more accurate. If \"Accesses\" refers to the act of accessing something, a translation like \"přístupy\" could be suitable but requires careful consideration of the surrounding text."
+          "description": "The Czech translation \"Přístupy\" is a possible translation of \"Accesses\", but it lacks the specific nuance of the English word in this context. \"Přístupy\" generally means \"approaches\" or \"access points\". A more accurate translation, depending on the intended meaning, might be \"vstupy\" (entries), \"přístupy\" (accesses, but more like permissions), or a rephrasing of the sentence to better convey the meaning.",
+          "suggestion": "Consider alternatives like \"vstupy\" or \"přístupy\" and review context to ensure accuracy. A rephrased solution might be preferable."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Accesses' in this context likely refers to permissions or access rights, which 'Oikeudet' generally covers. However, 'Accesses' can also refer to instances of accessing something (like website accesses). While 'Oikeudet' isn't *wrong*, it's not the most precise translation. Depending on the context, 'Pääsyt' might be a closer translation if referring to instances of access.",
-          "suggestion": "Consider 'Pääsyt' if referring to instances of access. Otherwise, 'Oikeudet' is acceptable but less precise."
+          "description": "'Accesses' refers to permissions or rights of access. 'Oikeudet' is a good translation but may be too broad depending on the context. A more precise translation might be 'Pääsykerrat' (access instances) or 'Käyttöoikeudet' (usage rights) depending on what 'Accesses' refers to.",
+          "suggestion": "Consider 'Pääsykerrat' or 'Käyttöoikeudet' for greater specificity."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Մուտքի իրավունքներ\" (Mut'ki iravunqner) literally translates to \"Access rights.\" While conveying a similar concept, it’s a more formal and potentially broader interpretation than the English word \"Accesses.\" \"Accesses\" can refer to instances of accessing something, not just the right to access. A more accurate translation might consider the context and nuances.",
-          "suggestion": "Consider \"մուտքեր\" (mut'ker) for 'accesses' if referring to multiple instances or actions of accessing, or a more context-specific translation."
+          "description": "The Armenian translation \"Մուտքի իրավունքներ\" translates to \"Access Rights\" which is more specific than the English term \"Accesses\". While not entirely wrong, it loses the broader meaning of simply 'accesses' which could refer to instances or occurrences of access.",
+          "suggestion": "Consider a more literal translation like \"Մուտքեր\" (Mutker) which translates to 'accesses' as a plural noun, or \"մուտքային\" (mutqayin) which conveys access-related items, depending on the context."
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation \"Toegang tot\" translates to \"Access to\" rather than simply \"Accesses\".  'Accesses' implies multiple instances of access.",
-          "suggestion": "Consider \"Toegangen\" or a more descriptive phrase depending on the intended meaning in the original English content."
+          "description": "The Dutch translation \"Toegang tot\" is a literal translation of \"Accesses\" but doesn't capture the full meaning. \"Accesses\" in this context likely refers to a count or list of accesses, not simply 'access to'. A more accurate translation would depend on the specific context (e.g., 'Aantal toegangken', 'Toegangen', or a rephrased sentence).",
+          "suggestion": "Requires further context to provide an accurate translation. Possible alternatives: 'Aantal toegangken', 'Toegangen', or rephrase the sentence."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Приступи\" does not accurately translate \"Accesses.\" \"Приступи\" means \"Approaches\" or \"Go to\" and doesn't convey the meaning of access points or accesses (as in, instances of accessing).",
-          "suggestion": "A more appropriate translation would depend on the context of 'Accesses'. Possible alternatives include: 'Приступи', 'Приласци', 'Улази', 'Поступак приступања' or a more specific term depending on the software or system being described."
+          "description": "The Serbian (Cyrillic) translation \"Приступи\" does not accurately translate \"Accesses.\" \"Приступи\" means \"approach\" or \"proceed.\" A more accurate translation would depend on the context of \"Accesses\".",
+          "suggestion": "Requires context to determine the correct translation. Potential alternatives could include: \"Приступити\" (to access), \"Прилази\" (approaches), or a more specific term based on the intended meaning."
         }
       ],
       "approved_at": null
@@ -213,13 +213,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation \"Pristupi\" while potentially related to access, doesn't directly translate \"Accesses.\" It means 'Approaches' or 'Access Points'.  A more accurate translation would depend on the context of 'Accesses'.",
-          "suggestion": "Possible alternatives depending on context: 'Pristupi' (Approaches/Access Points), 'Ulazi' (Entrances), or a more descriptive phrase."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

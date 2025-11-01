@@ -3,7 +3,7 @@
   "content": "Please select a file type:",
   "content_en_sha1_hash": "2ba0a6e43a7c8a135541aaa8ae42b6bd94fc7b8f",
   "created_at": "2025-05-19T21:30:56.893Z",
-  "updated_at": "2025-05-20T09:37:55.215Z",
+  "updated_at": "2025-09-23T07:24:24.080Z",
   "comment": {
     "text": "This translation key is used for a label that prompts the user to select a file type. It appears in a conversion dialog and is displayed next to radio button options.",
     "is_auto": true,
@@ -171,7 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'одаберите' is a valid verb form, but a more common and natural choice would be 'изаберите'.",
+          "suggestion": "Молимо изаберите тип фајла:"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

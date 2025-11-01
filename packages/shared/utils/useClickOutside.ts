@@ -24,14 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable react-hooks/exhaustive-deps */
-
 "use client";
 
 import { DependencyList, RefObject, useEffect } from "react";
 
 export const useClickOutside = <T extends HTMLElement>(
-  ref: RefObject<T>,
+  ref: RefObject<T | null>,
   handler: VoidFunction,
   ...deps: DependencyList
 ) => {

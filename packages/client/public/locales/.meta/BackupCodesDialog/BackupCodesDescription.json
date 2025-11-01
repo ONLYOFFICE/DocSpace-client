@@ -3,7 +3,7 @@
   "content": "Use backup codes to sign in when you don't have access to your phone.",
   "content_en_sha1_hash": "1a983db387cd4c845ce7fe6768d78174b6e45c37",
   "created_at": "2025-05-19T21:30:57.028Z",
-  "updated_at": "2025-05-20T09:37:36.653Z",
+  "updated_at": "2025-05-24T14:29:49.874Z",
   "comment": {
     "text": "Use backup codes as an alternative signing-in method when phone access is unavailable. This message assists users in understanding their option to sign in securely using pre-generated backup codes. It appears in a ModalDialog component.",
     "is_auto": true,
@@ -51,7 +51,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Benutzen Sie Back-up-Codes, wenn Sie keinen Zugriff auf das Handy haben' is a literal translation but could be improved for naturalness in German. 'Handy' is colloquial and 'Zugriff' feels slightly formal in this context. A more natural phrasing would be something like 'Nutzen Sie Back-up-Codes, wenn Sie nicht auf Ihr Smartphone zugreifen können.'",
+          "suggestion": "Nutzen Sie Back-up-Codes, wenn Sie nicht auf Ihr Smartphone zugreifen können."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'Back-up-Codes' is a direct transliteration. While understandable, using the Germanized 'Sicherheits-Codes' or 'Notfall-Codes' might be more appropriate, although 'Back-up-Codes' is increasingly common.",
+          "suggestion": "Nutzen Sie Sicherheits-Codes, wenn Sie nicht auf Ihr Smartphone zugreifen können."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,7 +74,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Utilice códigos de copia de seguridad para iniciar sesión cuando usted no tiene acceso a su teléfono' is technically correct but sounds overly formal and slightly unnatural in Spanish. 'Utilice' is a formal 'you' (usted) and could be softened for a more user-friendly tone.",
+          "suggestion": "Use a more informal phrasing like 'Usa códigos de copia de seguridad para iniciar sesión cuando no tengas acceso a tu teléfono.' or 'Usa códigos de respaldo para iniciar sesión cuando no tengas acceso a tu teléfono.'"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,7 +98,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Օգտագործեք պահուստային կոդեր՝ մուտք գործելու համար, երբ մուտք չունեք ձեր հեռախոսը:' is not the most natural or accurate translation of 'Use backup codes to sign in when you don't have access to your phone.' A more natural phrasing would emphasize the purpose of the backup codes.",
+          "suggestion": "Օգտագործեք պահուստային կոդերը՝ մուտք գործելու համար, եթե ձեզ հասանելի չէ ձեր հեռախոսը:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,13 +146,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Loguj się za pomocą kodów zapasowych, gdy nie masz dostępu do swojego telefonu' is a literal translation, but it's slightly awkward in Polish. A more natural phrasing would emphasize the purpose of backup codes.",
+          "suggestion": "Użyj kodów zapasowych, aby zalogować się, gdy nie masz dostępu do telefonu."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'códigos de cópia de segurança' is a literal translation of 'backup codes' but isn't the most natural or commonly used phrasing in Portuguese. A more common and understandable translation would be 'códigos de segurança' or 'códigos de recuperação'.",
+          "suggestion": "Use códigos de segurança para iniciar sessão quando não tiver acesso ao seu telefone."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +176,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Utilizați coduri de rezervă când intrați în cont fără acces la telefonul dvs.' is not the most natural or idiomatic way to express the original meaning. \"Intrați în cont\" can be simplified.",
+          "suggestion": "Utilizați coduri de rezervă când nu aveți acces la telefon."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +194,30 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබගේ දුරකථනයට ප්‍රවේශය නැති විට පිවිසීමට උපස්ථ කේත භාවිතා කරන්න' is a literal translation but doesn't convey the natural flow of the English phrase 'Use backup codes to sign in when you don't have access to your phone.' A more natural translation would emphasize the purpose of backup codes as an alternative login method.",
+          "suggestion": "ඔබට ඔබේ දුරකථනයට ප්‍රවේශයක් නැති විට, උපස්ථ කේත භාවිතා කරමින් පිවිසිය හැකිය."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a critical error, the translation includes a period at the end. Maintaining consistency with other similar strings is important.",
+          "suggestion": "Remove the period at the end of the sentence if other similar strings do not include them."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ak nemáte prístup k telefónu, prihláste sa pomocou záložných kódov.' is a literal translation but doesn't quite capture the meaning of the English 'Use backup codes to sign in when you don't have access to your phone.' It sounds slightly unnatural in Slovak. The word 'prihláste sa' implies an action being taken *by* the user.",
+          "suggestion": "Použite záložné kódy na prihlásenie, ak nemáte prístup k telefónu."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -201,7 +259,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '当您无法使用手机时可通过备用代码进行登录' while generally accurate, could be more naturally phrased. '可通过备用代码进行登录' sounds a bit formal and less conversational. The English 'Use backup codes to sign in when you don't have access to your phone' is simpler and more direct.",
+          "suggestion": "当您无法使用手机时，可以使用备份代码登录。"
+        }
+      ],
       "approved_at": null
     }
   }

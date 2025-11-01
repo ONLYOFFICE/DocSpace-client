@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 
 import { setDefaultUserQuota, setDefaultRoomQuota } from "../api/settings";
 
@@ -49,15 +49,18 @@ import {
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
   YEAR_KEY,
+  FREE_BACKUP,
 } from "../constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
-
+import { SettingsStore } from "./SettingsStore";
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
 
   userStore: UserStore | null = null;
+
+  settingsStore: SettingsStore | null = null;
 
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
@@ -68,10 +71,12 @@ class CurrentQuotasStore {
   constructor(
     userStoreConst: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
+    settingsStore: SettingsStore,
   ) {
     makeAutoObservable(this);
     this.userStore = userStoreConst;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.settingsStore = settingsStore;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
@@ -212,6 +217,21 @@ class CurrentQuotasStore {
     return result?.value;
   }
 
+  get isBackupPaid() {
+    const result = this.currentPortalQuotaFeatures.get(
+      FREE_BACKUP,
+    ) as TNumericPaymentFeature;
+    return result?.value !== -1;
+  }
+
+  get maxFreeBackups(): number {
+    const result = this.currentPortalQuotaFeatures.get(
+      FREE_BACKUP,
+    ) as TNumericPaymentFeature;
+
+    return result?.value ?? 0;
+  }
+
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.get(
       "restore",
@@ -234,7 +254,7 @@ class CurrentQuotasStore {
   }
 
   get currentTariffPlanTitle() {
-    return this.currentPortalQuota?.title;
+    return this.currentPortalQuota?.title ?? "";
   }
 
   get quotaCharacteristics() {
@@ -253,9 +273,11 @@ class CurrentQuotasStore {
   get maxUsersCountInRoom() {
     const result = this.currentPortalQuotaFeatures.get(USERS_IN_ROOM);
 
-    if (!result || !result?.value) return PortalFeaturesLimitations.Limitless;
+    if (!result) return PortalFeaturesLimitations.Limitless;
 
-    return result?.value;
+    if ("value" in result && result?.value) return result.value;
+
+    return PortalFeaturesLimitations.Limitless;
   }
 
   get isRoomsTariffAlmostLimit() {
@@ -438,11 +460,21 @@ class CurrentQuotasStore {
   };
 
   fetchPortalQuota = async (refresh?: boolean) => {
-    return api.portal.getPortalQuota(refresh).then((res) => {
-      this.setPortalQuotaValue(res);
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
-      this.setIsLoaded(true);
-    });
+    return api.portal
+      .getPortalQuota(refresh, abortController.signal)
+      .then((res) => {
+        this.setPortalQuotaValue(res);
+
+        this.setIsLoaded(true);
+      })
+      .catch((e) => {
+        if (axios.isCancel(e)) return;
+
+        throw e;
+      });
   };
 
   setUserQuota = async (quota: string | number, t: (key: string) => string) => {

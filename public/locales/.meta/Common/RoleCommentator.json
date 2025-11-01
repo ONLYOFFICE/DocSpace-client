@@ -3,7 +3,7 @@
   "content": "Commenter",
   "content_en_sha1_hash": "bf4df9c00c605d80b4491471e60b45b6eaaca147",
   "created_at": "2025-05-19T21:30:47.984Z",
-  "updated_at": "2025-05-28T09:30:02.415Z",
+  "updated_at": "2025-09-17T13:43:01.694Z",
   "comment": {
     "text": "This translation key is used to display \"Commenter\" as a role label in the application's UI. It appears on various screens where user roles are displayed, such as information panels and room member settings, helping users understand their permissions and access levels.",
     "is_auto": true,
@@ -11,14 +11,14 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/MembersHelper.js",
-      "line_number": 80,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 86,
       "context": "access: ShareAccessRights.Review,\n type: \"user\",\n },\n commentator: {\n key: \"commentator\",\n label: this.t(\"Common:RoleCommentator\"),\n access: ShareAccessRights.Comment,\n type: \"user\",\n },\n };\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 170,
+      "line_number": 174,
       "context": "access: ShareAccessRights.Review,\n type: EmployeeType.User,\n },\n commentator: {\n key: \"commentator\",\n label: t(\"Common:RoleCommentator\"),\n description: t(\"Common:RoleCommentatorDescription\"),\n access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {",
       "module": "/packages/shared"
     },
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ນັກສະແດງຄວາມຄິດເຫັນ\" (nak sa daeng khwam khit hen) literally translates to 'person showing opinions', it's not the most natural or common way to say 'Commenter' in Lao. A more idiomatic translation would be something like 'ຜູ້ໃຫ້ຄວາມຄິດເຫັນ' (phu hai khwam khit hen) or simply 'ຄຳເຫັນ' (kham hen) depending on the context.",
-          "suggestion": "Consider using 'ຜູ້ໃຫ້ຄວາມຄິດເຫັນ' (phu hai khwam khit hen) or 'ຄຳເຫັນ' (kham hen) as a more natural translation."
+          "description": "The Lao translation 'ນັກສະແດງຄວາມຄິດເຫັນ' literally translates to 'person who expresses opinions/thoughts'. While not entirely wrong, it's a more verbose and formal translation of 'Commenter'. A more concise and commonly used translation would be better.",
+          "suggestion": "Consider 'ຄຳເຫັນ' or 'ຜູ້ໃຫ້ຄຳເຫັນ'."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Comentador\" is not the most natural or accurate translation of \"Commenter\" in Portuguese. While technically understandable, it's uncommon and sounds awkward.",
-          "suggestion": "Consider using \"Comentário\" (as a noun referring to the comments themselves) or \"Avaliador\" (evaluator/reviewer, if the context implies a reviewing role) or \"Participante\" (participant) depending on the specific nuance of \"Commenter\" needed."
+          "description": "The Portuguese translation \"Comentador\" is not the most natural or accurate translation of \"Commenter\". While it is technically a valid word, \"Comentador\" has connotations of someone who excessively comments or criticizes, which may not align with the intended meaning of 'Commenter'. A better translation would be 'Comentário' or 'Participante'.",
+          "suggestion": "Consider using 'Comentário' (Comment) or 'Participante' (Participant) instead of 'Comentador'."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"අදහස් දක්වන්නා\" (adahas dakvavannaa) is a valid Sinhala word meaning 'one who expresses opinions' or 'commenter,' it is a rather formal and lengthy translation of the English word 'Commenter.' A more natural and concise translation might be preferable, depending on the context.",
-          "suggestion": "Consider a shorter, more common translation like \"අදහස් කරන්නෙක්\" (adahas karannek) which is closer in formality and more readily understood in casual contexts."
+          "description": "While 'අදහස් දක්වන්නා' is a literal translation of 'Commenter,' it's quite formal and lengthy. A more natural and concise translation might be 'අදහස් කියන්නෙක්' or simply 'අදහස්කාරයා'.",
+          "suggestion": "Consider 'අදහස් කියන්නෙක්' or 'අදහස්කාරයා' for a more natural feel."
         }
       ],
       "approved_at": null
@@ -228,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Người nhận xét\" can mean 'reviewer', \"Commenter\" implies someone who leaves comments, not necessarily reviewing them. \"Người bình luận\" would be a more accurate translation.",
+          "description": "While \"Người nhận xét\" is a possible translation, \"Commenter\" generally refers to someone who leaves comments, not necessarily someone who reviews or critiques. \"Người bình luận\" would be a more accurate translation.",
           "suggestion": "Người bình luận"
         }
       ],
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'可评论' literally translates to 'can comment'. While related to 'Commenter', it doesn't accurately convey the role of someone who comments. It suggests ability rather than identity.",
-          "suggestion": "A more accurate translation would depend on the specific context, but options like '评论员' (Commentator), '评论者' (Commenter), or '评论人士' (Person who comments) might be better."
+          "description": "'可评论' translates to 'can comment' or 'able to comment', which doesn't accurately represent the meaning of 'Commenter'. A 'Commenter' is someone who comments.",
+          "suggestion": "评论者 (píng lùn zhě)"
         }
       ],
       "approved_at": null

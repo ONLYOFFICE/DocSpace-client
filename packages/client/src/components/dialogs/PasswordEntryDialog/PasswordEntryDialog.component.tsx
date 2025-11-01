@@ -56,7 +56,7 @@ const PasswordEntryDialog = ({
   onClickDownload,
 }: PasswordEntryDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const abortControllerRef = useRef<AbortController>();
+  const abortControllerRef = useRef<AbortController>(undefined);
 
   const { t } = useTranslation(["UploadPanel", "Common"]);
 
@@ -117,7 +117,6 @@ const PasswordEntryDialog = ({
       if (axios.isCancel(error)) return;
 
       toastr.error(error as Error);
-      // eslint-disable-next-line no-console
       console.error(error);
     } finally {
       setIsLoading(false);

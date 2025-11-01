@@ -3,7 +3,7 @@
   "content": "Single sign-on is disabled",
   "content_en_sha1_hash": "389c1b2a152f3b998ef97aafc11a5af93e69a5ad",
   "created_at": "2025-05-19T21:30:57.309Z",
-  "updated_at": "2025-05-28T09:30:02.896Z",
+  "updated_at": "2025-09-07T07:53:15.426Z",
   "comment": {
     "text": "This translation key is used to display an error message when single sign-on (SSO) is disabled in a login system. It appears as part of a larger error notification dialog or button prompt, indicating that SSO cannot be utilized due to configuration settings. Translators should ensure the text accurately conveys this disabling of SSO functionality.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 88,
+      "line_number": 89,
       "context": "case \"LoginWithAccountNotFound\":\n return t(\"Errors:LoginWithAccountNotFound\");\n case \"InvalidUsernameOrPassword\":\n return t(\"Errors:InvalidUsernameOrPassword\");\n case \"SsoSettingsDisabled\":\n return t(\"Errors:SsoSettingsDisabled\");\n case \"ErrorNotAllowedOption\":\n return t(\"Errors:ErrorNotAllowedOption\");\n case \"SsoSettingsEmptyToken\":\n return t(\"Errors:SsoSettingsEmptyToken\");\n case \"SsoSettingsNotValidToken\":",
       "module": "/packages/login"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تسجيل الدخول الأحادي غير مفعل\" while understandable, isn't the most natural or precise way to convey 'Single sign-on is disabled' in Arabic.  'غير مفعل' implies 'not activated' rather than 'disabled'.",
+          "suggestion": "تسجيل الدخول الموحد معطل"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Die Funktion Single Sign-on ist deaktiviert' is technically correct but could be improved for naturalness. While 'Funktion' is correct, it's somewhat formal. A more common phrasing for describing a feature being disabled would be more direct.",
+          "suggestion": "Single Sign-on ist deaktiviert"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -117,7 +129,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'geblokkeerd' can translate to 'disabled,' it more accurately means 'blocked'. 'Disabled' implies a feature is inactive but still available, whereas 'blocked' suggests it's prevented from being used. This difference in nuance can impact user understanding.",
+          "suggestion": "Single Sign-on is uitgeschakeld"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -135,7 +153,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Entrada única está desativada' is a literal translation of 'Single sign-on is disabled' and doesn't fully convey the intended meaning in Portuguese. 'Single sign-on' is commonly referred to as 'autenticação única' in Brazilian Portuguese.",
+          "suggestion": "Autenticação única está desativada"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"තනි පිවිසුම අබලයි\" while technically meaning 'single access is disabled' doesn't fully capture the nuance of 'Single sign-on'. 'Single sign-on' implies a specific authentication process. A more accurate translation would convey that meaning.",
+          "suggestion": "තනි ල໊ගින් ක්‍රියාවලිය අබලයි (Thani log in kriyawaliya abalayi) - which translates to 'Single login process is disabled'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +201,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation includes \"(Single sign-on)\" in parentheses. While providing the English term can be helpful, it's generally not necessary or natural in a Serbian translation unless specifically requested by the client. It breaks the flow and can feel awkward.",
+          "suggestion": "Јединствена пријава је онемогућена"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes the English term 'Single sign-on' in parentheses. While understandable, it's generally preferred to provide a fully localized term or ensure consistency if English terms are used.",
+          "suggestion": "Consider a fully localized term for 'Single sign-on', or remove the English term within parentheses if it's intended to be only supplementary."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +237,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Xác thực một lần tắt' is a literal translation of 'Single sign-on is disabled' but isn't the most natural phrasing in Vietnamese. A more idiomatic translation would better convey the meaning.",
+          "suggestion": "Đăng nhập một chạm đã bị tắt"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

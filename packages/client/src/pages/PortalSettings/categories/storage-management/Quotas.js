@@ -31,8 +31,8 @@ import { useTheme } from "styled-components";
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { globalColors } from "@docspace/shared/themes";
+import { Link } from "@docspace/shared/components/link";
 
 import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
@@ -79,15 +79,16 @@ const QuotasComponent = (props) => {
       <Text className="quotas_description">
         {t("Settings:QuotasDescription")}{" "}
         {storageManagementUrl ? (
-          <ColorTheme
-            themeId={ThemeId.Link}
+          <Link
             tag="a"
             isHovered={false}
             target="_blank"
             href={storageManagementUrl}
+            color="accent"
+            dataTestId="help_center_link"
           >
             {t("Common:HelpCenter")}
-          </ColorTheme>
+          </Link>
         ) : null}
       </Text>
 

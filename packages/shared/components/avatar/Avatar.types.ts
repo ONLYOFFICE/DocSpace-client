@@ -26,17 +26,18 @@
 
 import React from "react";
 import { Nullable } from "../../types";
+import { AVATAR_ACTION_KEYS } from "../../constants";
 
 import { AvatarRole, AvatarSize } from "./Avatar.enums";
 
-export type TAvarModel = { label: string; icon: string } & (
+export type TAvatarModel = { label: string; icon: string } & (
   | {
       key: string;
       onClick: () => void;
     }
   | {
-      key: "upload";
-      onClick: (ref?: React.MutableRefObject<Nullable<HTMLDivElement>>) => void;
+      key: typeof AVATAR_ACTION_KEYS.PROFILE_AVATAR_UPLOAD;
+      onClick: (ref?: React.RefObject<Nullable<HTMLDivElement>>) => void;
     }
 );
 
@@ -46,7 +47,7 @@ export type AvatarProps = {
   /** Adds a table of user roles */
   role: AvatarRole;
   /** Displays as `Picture` in case the url is specified and as `Icon` in case the path to the .svg file is specified */
-  source: string;
+  source?: string;
   /** Allows to display a user name as initials when `source` is set to blank */
   userName?: string;
   /** Enables avatar editing */
@@ -76,7 +77,8 @@ export type AvatarProps = {
   hasAvatar?: boolean;
   onChangeFile?: () => void;
 
-  model?: TAvarModel[];
+  model?: TAvatarModel[];
   isNotIcon?: boolean;
   imgClassName?: string;
+  dataTestId?: string;
 };

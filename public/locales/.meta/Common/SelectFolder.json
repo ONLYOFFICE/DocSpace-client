@@ -3,7 +3,7 @@
   "content": "Select folder",
   "content_en_sha1_hash": "20e97c9844509f09cc9df74473a387bfe234b56e",
   "created_at": "2025-05-19T21:30:48.430Z",
-  "updated_at": "2025-06-18T07:34:14.803Z",
+  "updated_at": "2025-06-18T17:11:42.305Z",
   "comment": {
     "text": "This translation key is used to display a button that allows users to select a folder, typically appearing as an icon in a dialog. The text \"Select folder\" provides a clear and concise message when the user clicks on the folder icon.",
     "is_auto": true,
@@ -21,6 +21,12 @@
       "line_number": 194,
       "context": "<span className=\"room_title\">\n {(path ? \"/\" : \"\") + (roomTitle || t(\"Common:NewRoom\"))}\n </span>\n ) : null}\n </div>\n <div title={t(\"Common:SelectFolder\")} className=\"icon-wrapper\">\n <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />\n </div>\n </StyledFolderInput>\n \n {isDialogOpen ? (",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
+      "line_number": 35,
+      "context": "t: TTranslation,\n isSelect?: boolean,\n filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ընտեք թղթապանակ' is a literal translation that doesn't convey the intended meaning of 'Select folder'. While 'Ընտեք' means 'Select' and 'թղթապանակ' means 'folder', the flow isn't natural in Armenian. A more idiomatic translation would be 'Ընտրել թղթապանակ' or 'Դասել թղթապանակ'.",
-          "suggestion": "Ընտրել թղթապանակ or Դասել թղթապանակ"
+          "description": "The translation 'Ընտեք թղթապանակ' while technically conveying 'select folder', doesn't use the standard Armenian verb for selection. The more appropriate verb would be 'ընտրել'.",
+          "suggestion": "Ընտրել թղթապանակ"
         }
       ],
       "approved_at": null
@@ -126,7 +132,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Izvēlēties direktoriju' is understandable, a more natural and commonly used translation for 'Select folder' would be 'Izvēlēties mapi'. 'Direktoriju' is more technical and less common in user interfaces.",
+          "description": "While \"Izvēlēties direktoriju\" is technically correct, \"Select folder\" often translates more naturally to \"Izvēlēties mapi\" or \"Atvērt mapi\" in Latvian, depending on the context. \"Direktoriju\" is more formal and less commonly used in this type of interface.",
           "suggestion": "Izvēlēties mapi"
         }
       ],
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Selectare folder\" is not the most natural or accurate translation of \"Select folder\". \"Selectare\" implies a process of selecting, while \"Select\" is more direct and common in UI contexts.",
-          "suggestion": "Select folder"
+          "description": "The translation 'Selectare folder' is not the most natural or accurate Romanian translation of 'Select folder'. The verb 'selectare' is not commonly used in this context.",
+          "suggestion": "Selectați folder"
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ෆෝල්ඩරය තෝදන්න\" is not the most natural or accurate translation of \"Select folder.\" While technically understandable, it sounds somewhat awkward. A more idiomatic translation would be \"ෆෝල්ඩරය પસંદ කරන්න\" (Folder pilsa karanna).",
-          "suggestion": "ෆෝල්ඩරය પસંદ කරන්න"
+          "description": "The translation 'ෆෝල්ඩරය තෝදන්න' is a literal translation but doesn't sound natural in Sinhala. A more natural phrasing would be 'ෆෝල්ඩර්‍ය තෝරන්න' or 'ෆෝල්ඩර්‍ය පිරිwählen කරන්න'.",
+          "suggestion": "ෆෝල්ඩර්‍ය තෝරන්න"
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Одаберите фолдер' isn't the most natural or accurate translation of 'Select folder'. While 'одаберите' is a valid verb meaning 'select', it's more formal. A more common and user-friendly translation would be 'Изаберите фасциклу' or 'Избери фасциклу'.",
-          "suggestion": "Изаберите фасциклу"
+          "description": "The Serbian translation \"Одаберите фолдер\" is a literal translation of 'Select folder' but isn't the most natural phrasing in Serbian. 'Select' is best translated as 'Izaberite'. 'Folder' is acceptable as 'folder' (loanword) or 'часовник' but 'фолдер' isn't standard.",
+          "suggestion": "Изберите фолдер"
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Odaberite' is grammatically correct, 'Izaberite' is a more common and natural translation of 'Select' in Serbian (Latin). 'Odaberite' implies a deliberate choice from a set of options, while 'Izaberite' is a more general 'choose'.",
-          "suggestion": "Izaberite folder"
+          "description": "While 'Odaberite' is a valid translation for 'Select,' 'folder' is an English loanword and often remains untranslated in Serbian. Using the Serbian equivalent 'mapa' would be more natural and accurate in many contexts.",
+          "suggestion": "Odaberite mapu"
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Klasör seç' is technically correct, but a more natural and complete Turkish translation would be 'Bir klasör seçin' or 'Klasör seçimi yap'. 'Klasör seç' sounds abrupt and less idiomatic in this context, especially when used as a label or button text.",
-          "suggestion": "Bir klasör seçin"
+          "description": "The translation 'Klasör seç' is a literal translation but sounds unnatural in Turkish. A more natural and idiomatic translation would be 'Klasörünü seç' or 'Bir klasör seç'.",
+          "suggestion": "Klasörünü seç"
         }
       ],
       "approved_at": null

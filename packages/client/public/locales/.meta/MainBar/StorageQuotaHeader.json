@@ -3,7 +3,7 @@
   "content": "Storage space amount is about to be exceeded: {{currentValue}} / {{maxValue}}",
   "content_en_sha1_hash": "c7505cb8d4b5ee00b1538b7c710c4fb40adfc6a9",
   "created_at": "2025-05-19T21:30:54.141Z",
-  "updated_at": "2025-07-01T15:57:35.916Z",
+  "updated_at": "2025-10-01T08:28:21.897Z",
   "comment": {
     "text": "This translation key is used to display a warning message when storage space is about to be exceeded. It shows the current and maximum storage values in a specific format. This message appears as a header in a UI component that displays quota information.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 247,
+      "line_number": 248,
       "context": "header: t(\"RoomQuotaHeaderLimit\", { currentValue, maxValue }),\n description: getRoomsTariffDescription(),\n };\n case QuotaBarTypes.StorageTariff:\n return {\n header: t(\"StorageQuotaHeader\", { currentValue, maxValue }),\n description: getStorageTariffDescription(),\n };\n case QuotaBarTypes.StorageTariffLimit:\n return {\n header: t(\"StorageLimitHeader\", { currentValue, maxValue }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 247,
+      "line_number": 248,
       "context": "header: t(\"RoomQuotaHeaderLimit\", { currentValue, maxValue }),\n description: getRoomsTariffDescription(),\n };\n case QuotaBarTypes.StorageTariff:\n return {\n header: t(\"StorageQuotaHeader\", { currentValue, maxValue }),\n description: getStorageTariffDescription(),\n };\n case QuotaBarTypes.StorageTariffLimit:\n return {\n header: t(\"StorageLimitHeader\", { currentValue, maxValue }),",
       "module": "/packages/client"
     }
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'حجم مساحة التخزين على وشك أن يتم تجاوزها' is a literal translation and a bit clunky. A more natural phrasing would be closer to 'مساحة التخزين على وشك التجاوز'.",
-          "suggestion": "مساحة التخزين على وشك التجاوز: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -48,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Yaddaş sahəsinin həcmi keçmək üzrədir' doesn't perfectly convey the meaning of 'Storage space amount is about to be exceeded'. A more accurate translation would emphasize the approaching limit, not just the action of exceeding it.",
-          "suggestion": "Yaddaş sahəsi limiti yaxınlaşır: {{currentValue}} / {{maxValue}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon after 'üzrədir' creates a slightly awkward phrasing. Removing it would improve flow.",
-          "suggestion": "Yaddaş sahəsinin həcmi keçməkdə : {{currentValue}} / {{maxValue}}"
+          "description": "The phrase \"Storage space amount\" is not accurately translated. \"Yaddaş sahəsinin həcmi\" is more accurately 'memory area volume' rather than 'storage space amount'.",
+          "suggestion": "Yaddaş həcmidir keçmək üzrədir : {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null
@@ -107,8 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Պահեստային տարածքի քանակը քիչ է մնում գերազանցվի\" is a literal translation of 'Storage space amount is about to be exceeded' but sounds awkward and unnatural in Armenian. A more natural phrasing would convey the impending exceedance more clearly.",
-          "suggestion": "Consider alternatives like \"Պահեստային տարածքը մոտենում է սահմանափակիչ գիծին՝ {{currentValue}} / {{maxValue}}\" (Storage space is approaching the limit: {{currentValue}} / {{maxValue}}) or \"Մնալ է տեղ մոտ՝ {{currentValue}} / {{maxValue}}\" (Remaining space: {{currentValue}} / {{maxValue}}). The best option depends on the overall tone of the UI."
+          "description": "The translation 'Պահեստային տարածքի քանակը քիչ է մնում գերազանցվի' is not a direct or natural translation of 'Storage space amount is about to be exceeded'. A more accurate translation would convey the sense of impending exceedance.",
+          "suggestion": "Պահեստային տարածքը այնպես է մոտենում գերազանցմանը, որ {{currentValue}} / {{maxValue}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'գերազանցվի' (will be exceeded) is grammatically correct, but 'գերազանցմանը' is more natural in this context.",
+          "suggestion": "No change needed for grammar itself, but see overall suggestion above"
         }
       ],
       "approved_at": null
@@ -149,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"staat op het punt overschreden te worden\" is grammatically awkward. A more natural phrasing would be \"overschreden te worden\" or \"wordt overschreden\".",
-          "suggestion": "De hoeveelheid opslagruimte staat er op het punt te worden overschreden: {{currentValue}} / {{maxValue}}"
+          "description": "The phrasing 'staat op het punt overschreden te worden' is grammatically awkward in Dutch. A more natural phrasing would be 'overschreden te worden' or 'wordt overschreden'.",
+          "suggestion": "De hoeveelheid opslagruimte staat er op het punt overschreden te worden: {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null
@@ -167,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"A capacidade de armazenamento do espaço está prestes a ser excedida\" is a bit literal and awkward. A more natural phrasing would be something like 'O espaço de armazenamento está prestes a ser excedido' or 'Sua capacidade de armazenamento está prestes a ser excedida'. The inclusion of 'do espaço' adds unnecessary words.",
-          "suggestion": "Sua capacidade de armazenamento está prestes a ser excedida: {{currentValue}} / {{maxValue}}"
+          "description": "The translation \"A capacidade de armazenamento do espaço está prestes a ser excedida\" is a bit awkward. \"A capacidade de armazenamento\" can be simplified. \"Espaço\" is redundant.",
+          "suggestion": "A capacidade de armazenamento está prestes a ser excedida: {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null
@@ -197,13 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ආචයනයේ ඉඩ ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}\" is not a natural or accurate translation of \"Storage space amount is about to be exceeded: {{currentValue}} / {{maxValue}}\". \"ආචයනයේ\" likely refers to 'organization' or 'institution' and doesn't fit the context of storage space. A more appropriate translation would focus on 'space' or 'capacity'.",
-          "suggestion": "හැලման ඉඩ ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}} or నిల్వ స్థలం ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically understandable, 'ආචයනයේ' is not a standard or readily understood word in this context. It appears to be a misinterpretation or incorrect transliteration.",
-          "suggestion": "Remove 'ආචයනයේ' and replace with a more appropriate term relating to storage or capacity."
+          "description": "The translation 'ආචයනයේ ඉඩ ඉක්මවීමට ආසන්නයි' is not a natural or accurate translation of 'Storage space amount is about to be exceeded'. 'ආචයනය' refers to a ritual or ceremony, which doesn't fit the context of storage space. A better translation would convey the concept of 'storage space' or 'available space'.",
+          "suggestion": "A more appropriate translation might be something like 'ගබඩාවේ ඉඩ ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}' (Gabadawae ida ikmavamituk aasannai: {{currentValue}} / {{maxValue}}), where 'ගබඩාවේ' (Gabadawae) means 'storage' or 'warehouse'."
         }
       ],
       "approved_at": null
@@ -226,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ц́е' is a non-standard contraction of 'ће'. The standard and preferred form is 'ће'.",
-          "suggestion": "Количина меморијског простора ће ускоро бити прекорачена: {{currentValue}} / {{maxValue}}"
+          "description": "The word 'ц́е' is not standard Serbian Cyrillic. The correct form should be 'ће'.",
+          "suggestion": "ће"
         }
       ],
       "approved_at": null
@@ -235,13 +224,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'memorijskog' is a slightly awkward construction. A more natural phrasing would improve readability.",
-          "suggestion": "Količina disk prostora će uskoro biti prekoračena: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

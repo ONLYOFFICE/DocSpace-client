@@ -3,7 +3,7 @@
   "content": "Data import from {{organizationName}} Workspace to {{organizationName}} {{productName}} is complete!",
   "content_en_sha1_hash": "ea8ba6a6ff5ddf5f347029bd6ff6ae943f26e62e",
   "created_at": "2025-05-19T21:30:51.634Z",
-  "updated_at": "2025-05-28T09:30:02.511Z",
+  "updated_at": "2025-08-11T09:02:43.943Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that data import from an organization's Workspace has been completed successfully. It appears in the UI as part of a data import process, specifically on a completion step or button, and includes placeholders for the product name and organization name.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation reverses the order of the product name and organization name in the phrase '{{productName}} {{organizationName}}'. The English version states '{{organizationName}} {{productName}}'.",
-          "suggestion": "اكتمل استيراد البيانات من مساحة عمل {{organizationName}} إلى {{organizationName}} {{productName}}!"
+          "description": "The Arabic translation reverses the order of 'organizationName' and 'productName'. The English says 'Data import from {{organizationName}} Workspace to {{productName}} {{organizationName}}'. The Arabic translation, as written, implies the product is within the workspace.",
+          "suggestion": "اكتمل استيراد البيانات من مساحة عمل {{organizationName}} إلى {{productName}} {{organizationName}}!"
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of 'organizationName' at the end of the Arabic sentence feels unnatural and disrupts the flow. While technically a direct translation, it's not stylistically ideal.",
+          "suggestion": "اكتمل استيراد البيانات من مساحة عمل {{organizationName}} إلى {{productName}} التابعة لـ {{organizationName}}!"
         }
       ],
       "approved_at": null
@@ -59,14 +64,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Data import' is better translated as 'Import dat' in Czech, rather than 'Import dat'. While 'Import dat' is understandable, it's less formal and consistent with similar Czech phrasing.",
-          "suggestion": "Import dat"
-        },
-        {
           "type": "formatting",
-          "description": "The Czech translation uses lowercase 'do' which is grammatically correct but might be visually inconsistent with other capitalized words in similar contexts. Consider capitalizing 'Do' for a more consistent, formal style.",
-          "suggestion": "Do"
+          "description": "The Czech translation uses 'do' instead of 'do' (into) which feels slightly less natural when referring to a process moving data into a system. While understandable, it can be improved.",
+          "suggestion": "Import dat z {{organizationName}} Workspace do {{organizationName}} {{productName}} je dokončen! -> Import dat z {{organizationName}} Workspace do {{organizationName}} {{productName}} je kompletní!"
         }
       ],
       "approved_at": null
@@ -83,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Greek translation maintains the use of placeholders {{organizationName}} and {{productName}}, which is consistent with the English source. However, ensure that these placeholders are correctly rendered and replaced with the appropriate values in the target environment.",
-          "suggestion": "Verify placeholder rendering in the target environment."
+          "description": "The Greek translation retains the double curly braces {{ }} which are meant for placeholders and should be removed.",
+          "suggestion": "Remove the double curly braces from the Greek translation."
         }
       ],
       "approved_at": null
@@ -100,14 +100,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'on suoritettu!' is a literal translation of 'is complete!'. A more natural and idiomatic Finnish phrasing would be something like 'on valmis!' or 'on päättynyt!'.",
-          "suggestion": "Tietojen tuonti {{organizationName}} Workspacesta {{organizationName}} {{productName}}:n on valmis!"
-        },
-        {
           "type": "formatting",
-          "description": "The colon after '{{organizationName}}' is grammatically unnecessary and disrupts the flow of the sentence.  Finnish sentence structure typically wouldn't include it here.",
-          "suggestion": "Tietojen tuonti {{organizationName}} Workspacesta {{organizationName}} {{productName}}:n on valmis!"
+          "description": "The colon after '{{organizationName}}' is unnecessary and disrupts the flow. It's better to omit it.",
+          "suggestion": "Tietojen tuonti {{organizationName}} Workspacesta {{organizationName}} {{productName}}:n on suoritettu!"
         }
       ],
       "approved_at": null
@@ -115,13 +110,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The French translation uses 'vers' which implies movement towards. While technically correct, 'dans' might be a slightly better fit to indicate being 'in' the destination.",
-          "suggestion": "Importation des données de {{organizationName}} Workspace dans {{organizationName}} {{productName}} est terminée !"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -130,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a hyphen (-) instead of a more appropriate Armenian connector or conjunction between 'Workspace' and 'ից'. While acceptable, a more natural flow might use a word like 'կողմից' or 'մասից'.",
-          "suggestion": "Տվյալների ներմուծումը {{organizationName}} Workspace-ից կամ {{organizationName}} Workspace-ի մասից..."
+          "description": "The Armenian translation uses a hyphen (-) instead of a space after 'Workspace'.",
+          "suggestion": "Տվյալների ներմուծումը {{organizationName}} Workspace ից {{organizationName}} {{productName}} ավարտված է:"
         }
       ],
       "approved_at": null
@@ -157,13 +146,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Lao translation uses a full stop at the end of the sentence, which is stylistically acceptable, but aligns better with English to omit. Consider removing the full stop for consistency, though this is a minor point.",
-          "suggestion": "ການນຳເຂົ້າຂໍ້ມູນຈາກ {{organizationName}} Workspace ໄປຫາ {{organizationName}} {{productName}} ແມ່ນສຳເລັດແລ້ວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -184,7 +167,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"Worskspace\" is misspelled. It should be \"Workspace\".",
+          "description": "The word 'Worskspace' is misspelled. It should be 'Workspace'.",
           "suggestion": "Workspace"
         }
       ],
@@ -196,7 +179,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Portuguese translation uses 'A importação' which is grammatically incorrect. It should be 'A importação de dados'.",
+          "description": "The Portuguese translation uses 'A importação' which is grammatically incorrect. It should be 'A importação de'.",
           "suggestion": "A importação de dados do {{organizationName}} Workspace para o {{organizationName}} {{productName}} foi concluída!"
         }
       ],
@@ -207,9 +190,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Portuguese translation starts with \"A\" instead of \"A importação\". It needs an article.",
-          "suggestion": "A importação de dados do {{organizationName}} Workspace para o {{organizationName}} {{productName}} foi concluída!"
+          "type": "grammar",
+          "description": "The phrase 'A importação de dados...' should be 'A importação dos dados...' The preposition 'de' implies 'of', while 'dos' correctly indicates 'of the' when referring to data (plural).",
+          "suggestion": "A importação dos dados do {{organizationName}} Workspace para o {{organizationName}} {{productName}} foi concluída!"
         }
       ],
       "approved_at": null
@@ -217,13 +200,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'date' in 'Import date din...' is incorrect. 'Date' means 'date' and should not be used here. The intended meaning is 'import'.",
-          "suggestion": "Importul de date din..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -237,24 +214,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Sinhala translation preserves the template variables {{organizationName}} and {{productName}} which is consistent with the English content. No changes needed here.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The Sinhala translation uses the word 'සිට' (sita) which implies 'from', and 'හේවා' (heva) which is like 'to'. This is grammatically correct and accurately conveys the direction of the import.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "All Sinhala words are spelled correctly based on common usage.",
-          "suggestion": null
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While technically a correct translation, 'ආනයනය' (aanaya) is a more formal word for 'import'. A more conversational and potentially easier to understand equivalent could be 'රැගෙනවිත්' (ragena wit).",
-          "suggestion": "{{organizationName}} Workspace සිට {{organizationName}} {{productName}} වෙත දත්ත රැගෙනවිත් සම්පූර්ණයි!"
+          "description": "The Sinhala translation 'ආනයනය සම්පූර්ණයි!' is a literal translation of 'import is complete'. A more natural and idiomatic phrasing would be 'මිපදවා ගැනීම් අවසන්' (mipadawa gatim avasan) or something similar that conveys the meaning of 'import completed'.",
+          "suggestion": "{{organizationName}} Workspace සිට {{organizationName}} {{productName}} වෙත දත්ත මිපදවා ගැනීම් අවසන්!"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of `{{organizationName}}` and `{{productName}}` is consistent with the English content, but ensure that these variables are properly handled during rendering in Sinhala environments.",
+          "suggestion": "Ensure proper variable substitution for `{{organizationName}}` and `{{productName}}` during rendering."
         }
       ],
       "approved_at": null
@@ -262,13 +229,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Import údajov z {{organizationName}} Workspace do {{organizationName}} {{productName}} je dokončený!' is a literal translation and could be improved for naturalness. A more natural phrasing would convey the same meaning.",
-          "suggestion": "Import údajov z pracovného priestoru {{organizationName}} do {{organizationName}} {{productName}} bol dokončený."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -283,8 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Увоз' is used which implies 'import' as a noun. While technically correct, 'Уношење' might be more suitable to better convey the action of importing data. It's a more common and natural term in this context.",
-          "suggestion": "Уношење података са {{organizationName}} Workspace на {{organizationName}} {{productName}} је завршен!"
+          "description": "The word 'Увоз' is potentially incorrect. 'Увоз' can mean 'import' but in this context 'Увожење' might be more suitable for a more formal tone, reflecting a completed process.",
+          "suggestion": "Увожење"
         }
       ],
       "approved_at": null

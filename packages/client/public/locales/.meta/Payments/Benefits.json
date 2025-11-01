@@ -3,7 +3,7 @@
   "content": "Benefits",
   "content_en_sha1_hash": "927f40673764a27aad14fdedb385b31e3b85f976",
   "created_at": "2025-05-19T21:30:53.650Z",
-  "updated_at": "2025-05-21T06:47:24.812Z",
+  "updated_at": "2025-08-21T14:45:44.104Z",
   "comment": {
     "text": "The \"Benefits\" translation key is used to translate a section of the PortalSettings page that displays information about payment benefits, likely in a grid or list format. It appears on mobile devices (max-width: 320px) and is styled within a container with specific background and padding settings. Translators should focus on providing concise descriptions for this text to ensure it accurately conveys the intended meaning.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/BenefitsContainer.js",
-      "line_number": 40,
+      "line_number": 48,
       "context": "max-width: 320px;\n \n padding: 24px;\n box-sizing: border-box;\n background: ${(props) =>\n props.theme.client.settings.payment.backgroundBenefitsColor};\n \n p {\n margin-bottom: 24px;\n }\n .payment-benefits_text {",
       "module": "/packages/client"
     }
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Предности\" (Prednosti) translates to 'Advantages' or 'Pros', not 'Benefits'. 'Benefits' would be more accurately translated as 'Naknade' or 'Погодбености' (Pogodbenosti).",
-          "suggestion": "Use 'Naknade' or 'Погодбености' (Pogodbenosti)"
+          "description": "The Serbian (Cyrillic) translation 'Предности' is a misspelling and doesn't accurately translate 'Benefits'. 'Предности' means 'Advantages'. The correct translation would be 'Погодбености' or 'Давачки'.",
+          "suggestion": "Погодбености"
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'优势' (Youyi) translates to 'advantages' or 'strengths' which isn't a direct or ideal translation for 'Benefits' in the context of payments. 'Benefits' often refers to entitlements or advantages received, typically financial. A more accurate translation would depend on the specific context of 'Benefits' within the payments system.",
-          "suggestion": "Consider alternatives like '福利' (fuli - welfare), '收益' (shouyi - gains/returns), or a more descriptive phrase depending on the specific type of benefit."
+          "description": "'优势' (youyi) primarily translates to 'advantages' or 'strengths', not 'benefits' in this context. 'Benefits' refers to something received as a return or advantage from something else. A more accurate translation would depend on the specific type of benefit being referred to.",
+          "suggestion": "Consider alternatives like '福利' (fuli) for welfare benefits, '收益' (shouyi) for returns or gains, or a more specific term depending on the intended meaning of 'Benefits'."
         }
       ],
       "approved_at": null

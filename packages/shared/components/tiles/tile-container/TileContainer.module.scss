@@ -24,16 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../styles/variables/index.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/_mixins.scss";
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .tileContainer {
   position: relative;
   height: 100%;
-  user-select: none;
 
-  @include tablet-and-below {
+  user-select: text;
+
+  & *:not(img) {
+    user-select: text;
+  }
+
+  &.noSelect {
+    user-select: none;
+
+    & *:not(img) {
+      user-select: none;
+    }
+  }
+
+  @include mixins.tablet-and-below {
     margin-top: 16px;
     margin-inline-end: -3px;
   }
@@ -53,7 +66,10 @@
 
 .gridWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(216px, 13.4vw, 360px), 1fr)
+  );
   grid-gap: 16px;
   width: 100%;
   box-sizing: border-box;
@@ -61,19 +77,22 @@
 
   &.rooms,
   &.templates {
-    grid-template-columns: repeat(auto-fill, minmax(274px, 1fr));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(clamp(275px, 13.4vw, 350px), 1fr)
+    );
   }
 
   &.files {
     margin-bottom: 0;
   }
 
-  @include desktop {
+  @include mixins.desktop {
     margin-inline-start: 1px;
     padding-inline-end: 0;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-inline-start: -1px;
   }
 }

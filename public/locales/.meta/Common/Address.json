@@ -3,7 +3,7 @@
   "content": "Address",
   "content_en_sha1_hash": "d70f93df5e8f9b55be44fbeee9d203972e3383d4",
   "created_at": "2025-05-19T21:30:42.924Z",
-  "updated_at": "2025-05-28T09:30:02.402Z",
+  "updated_at": "2025-08-04T07:30:01.664Z",
   "comment": {
     "text": "This translation key is used to display \"Address\" as a title and value in UI elements, typically representing a user's physical or mailing address. It appears in various places, such as on company pages and profile information sections, and can be translated by localizers to match different languages.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/About/AboutContent.js",
-      "line_number": 253,
-      "context": "© {companyName}\n </Text>\n \n <div className=\"row\">\n <Text className=\"address-title\" fontSize=\"13px\">\n {t(\"Common:Address\")}:{\" \"}\n </Text>\n <Text className=\"address-title select-el\" fontSize=\"13px\">\n {address}\n </Text>\n </div>",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
+      "line_number": 211,
+      "context": "<div className={classNames(styles.row, \"row\")}>\n <Text\n className={classNames(styles.addressTitle, \"address-title\")}\n fontSize=\"13px\"\n >\n {t(\"Common:Address\")}:{\" \"}\n </Text>\n <Text\n className={classNames(\n styles.addressTitle,\n styles.selectEl,",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 198,
-      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerAddress\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Address\")}\n isVertical\n >\n <TextInput\n testId=\"address-input\"\n id=\"textInputContainerAddress\"",
+      "line_number": 282,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerAddress\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Address\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerAddress\"\n testId=\"company_info_settings_address_input\"",
       "module": "/packages/shared"
     }
   ],
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation 'Alamat' is not the standard or accurate translation of 'Address'. It appears to be a loanword or a term from a different language. The correct Polish translation is 'Adres'.",
-          "suggestion": "Adres"
+          "description": "The Polish translation \"Alamat\" is not the standard or accurate translation of \"Address\". It appears to be a borrowing from another language (likely Indonesian/Malay).",
+          "suggestion": "The correct Polish translation for \"Address\" is \"Adres\"."
         }
       ],
       "approved_at": null
@@ -186,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The singular English word 'Address' has been translated to the plural Serbian word 'Адреса'. This implies multiple addresses, when the English term refers to a single address.",
+          "description": "The singular English word \"Address\" has been translated to the plural form \"Адреса\" in Serbian (Cyrillic). The appropriate translation should be the singular form.",
           "suggestion": "Адреса"
         }
       ],

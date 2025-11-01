@@ -3,19 +3,13 @@
   "content": "Action",
   "content_en_sha1_hash": "97c89a4d6630adeb18fa12ba9976a31413fe293e",
   "created_at": "2025-05-19T21:30:42.859Z",
-  "updated_at": "2025-05-28T09:30:02.680Z",
+  "updated_at": "2025-09-01T14:09:50.153Z",
   "comment": {
     "text": "The translation key \"Action\" is used to display the English content \"Action\", which likely serves as a title or header in a UI element, possibly in a table header or a settings page, guiding users to take a specific action.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:37:28.239Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableHeader.tsx",
-      "line_number": 56,
-      "context": "active: true,\n minWidth: 150,\n },\n {\n key: \"Action\",\n title: t(\"Common:Action\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },\n {",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableHeader.js",
       "line_number": 68,
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Tapahtuma' translates to 'Event' in English, not 'Action'. While related, it doesn't accurately convey the meaning of 'Action' in most contexts.",
-          "suggestion": "Consider alternatives like 'Toiminta', 'Tekeminen', or 'Toimi' depending on the specific context. 'Toiminta' is often the closest equivalent to 'Action' when referring to a task or activity."
+          "description": "While \"Tapahtuma\" can mean event, it doesn't accurately convey the meaning of 'Action' in this context. 'Action' often implies something being done or a move, whereas 'Tapahtuma' primarily describes an occurrence or happening.",
+          "suggestion": "Consider alternatives like \"Toiminta\" (activity, operation) or \"Tekeminen\" (doing) depending on the specific context."
         }
       ],
       "approved_at": null

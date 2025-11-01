@@ -33,6 +33,8 @@ export interface DragAndDropProps {
   isDropZone?: boolean;
   /** Shows that the item is being dragged now. */
   dragging?: boolean;
+  /** Indicates that dragging files to this element is not allowed */
+  isDragDisabled?: boolean;
   /** Occurs when the mouse button is pressed */
   onMouseDown?: () => void;
   /** Occurs when the dragged element is dropped on the drop target */
@@ -43,7 +45,7 @@ export interface DragAndDropProps {
   onDragLeave?: (e: React.DragEvent<HTMLElement>) => void;
   /** Needs for selection area and DND work */
   value?: string;
-  targetFile?: Function;
+  targetFile?: (file?: File | null) => void;
   style?: React.CSSProperties;
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
 }

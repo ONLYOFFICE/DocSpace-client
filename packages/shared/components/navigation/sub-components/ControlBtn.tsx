@@ -57,6 +57,7 @@ const ControlButtons = ({
   getContextOptionsFolder,
   isTrashFolder,
   isMobile,
+  isMobileOnly,
   onContextOptionsClick,
   isPublicRoom,
 
@@ -81,6 +82,7 @@ const ControlButtons = ({
   isContextButtonVisible,
 
   isPlusButtonVisible,
+  contextMenuHeader,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -107,9 +109,12 @@ const ControlButtons = ({
 
   const renderTariffBar = () => {
     if (!tariffBar || isFrame) return null;
+
+    const cloneProps = { title };
+
     return (
       <div className={styles.tariffWrapper}>
-        {React.cloneElement(tariffBar, { title })}
+        {React.cloneElement(tariffBar, cloneProps)}
       </div>
     );
   };
@@ -133,6 +138,8 @@ const ControlButtons = ({
   };
 
   const renderContextButton = (visible: boolean) => {
+    // console.log(visible);
+
     if (!visible || isFrame) return null;
 
     return (
@@ -141,14 +148,17 @@ const ControlButtons = ({
         className="option-button"
         getData={getContextOptionsFolder}
         withMenu={withMenu}
-        title={titles?.actions}
+        title={title}
         isTrashFolder={isTrashFolder}
         isMobile={isMobile || false}
+        isMobileOnly={isMobileOnly || false}
+        contextMenuHeader={contextMenuHeader}
         onCloseDropBox={onCloseDropBox}
         onContextOptionsClick={onContextOptionsClick}
         contextButtonAnimation={contextButtonAnimation}
         guidAnimationVisible={guidAnimationVisible}
         setGuidAnimationVisible={setGuidAnimationVisible}
+        ignoreChangeView={!!(isMobile && !!contextMenuHeader)}
       />
     );
   };

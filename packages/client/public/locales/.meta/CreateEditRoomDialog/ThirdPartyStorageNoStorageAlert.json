@@ -3,7 +3,7 @@
   "content": "Before, you need to connect the corresponding service in the “Integration” section. Otherwise, the connection will not be possible.",
   "content_en_sha1_hash": "2feb1762a1140fb97479d8150fe486ac65e755b3",
   "created_at": "2025-05-19T21:30:56.844Z",
-  "updated_at": "2025-05-20T09:38:02.009Z",
+  "updated_at": "2025-05-24T13:42:37.586Z",
   "comment": {
     "text": "This translation key is used to display an alert message indicating that a connection to third-party storage is required in order to proceed. It appears as a pop-up notification when attempting to create or edit a room without having connected the necessary service.",
     "is_auto": true,
@@ -57,19 +57,47 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"Before\" is not accurately translated. While \"Πριν\" (Prin) means 'before', it doesn't convey the intended meaning in this context. It feels abrupt and doesn't flow naturally within the sentence.",
+          "suggestion": "Consider rephrasing the initial part to something like \"Για να χρησιμοποιήσετε\" (Gia na xrisimopoiisete - 'In order to use') or \"Προτού\" (Proto - 'Before', but more formal and less abrupt)."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of quotation marks around “Ενσωμάτωση” (Integration) feels slightly awkward in Greek. While technically correct, it might be better to avoid them for a more natural feel.",
+          "suggestion": "Consider removing the quotation marks around \"Ενσωμάτωση\"."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Before, you need to...' doesn't translate directly to 'Sobre todo, debe...' which means 'Above all, you must...'.  The original conveys a prerequisite, while the Spanish translation implies importance. A more accurate translation would convey the necessity of the integration.",
+          "suggestion": "Antes, debe conectar el servicio correspondiente en la sección \"Integración\", de lo contrario, la conexión no será posible."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Before, you need to connect...\" is a bit awkward and doesn't quite capture the intended meaning.  \"Before\" is overly literal.  A more natural Finnish phrasing would better convey that a prerequisite action is needed.",
+          "suggestion": "Ennen kuin jatkat, sinun tulee yhdistää vastaavaan palveluun 'Liittäminen'-osiossa. Muuten yhteys ei onnistu."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"mahdollinen\" (possible) is correct but sounds formal. \"Onnistu\" (succeed) is more common and natural in this context.",
+          "suggestion": "Muuten yhteys ei onnistu."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +109,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Integration\" is translated as \"Ամբողջացում\", which is not the correct translation for 'Integration' in this context. 'Integration' refers to a section where services are connected and a more accurate translation would be something like 'Միացումներ' or 'Համակարգումներ'.",
+          "suggestion": "Consider translating 'Integration' as 'Միացումներ' or 'Համակարգումներ' to accurately reflect its meaning."
+        },
+        {
+          "type": "formatting",
+          "description": "The double quotes around \"Ամբողջացում\" are unnecessary and disrupt the flow of the sentence.",
+          "suggestion": "Remove the double quotes around \"Ամբողջացում\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +144,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເມື່ອກ່ອນ, ທ່ານຈໍາເປັນຕ້ອງເຊື່ອມຕໍ່ການບໍລິການທີ່ສອດຄ້ອງກັນໃນສ່ວນ \"ການເຊື່ອມໂຍງ\".\" doesn't fully capture the nuance of 'Otherwise, the connection will not be possible.' It focuses on the requirement to connect but omits the consequence of not doing so.",
+          "suggestion": "ເມື່ອກ່ອນ, ທ່ານຈໍາເປັນຕ້ອງເຊື່ອມຕໍ່ການບໍລິການທີ່ສອດຄ້ອງກັນໃນສ່ວນ \"ການເຊື່ອມໂຍງ\". ຖ້າບໍ່ດັ່ງນັ້ນ, ການເຊື່ອມຕໍ່ຈະບໍ່ສາມາດເຮັດໄດ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +186,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Mai întâi, trebuie să vă conectați cu acest cont de stocare în secţiunea Integrare' doesn't accurately convey the original English meaning. The English text indicates a need to connect to a service in the Integration section *before* a connection is possible. The Romanian implies connecting *to* a storage account.",
+          "suggestion": "Mai întâi, trebuie să vă conectați la serviciul corespunzător în secțiunea Integrare. Altfel, conexiunea nu va fi posibilă."
+        },
+        {
+          "type": "missing_content",
+          "description": "The original English includes the phrase 'Otherwise, the connection will not be possible.'. This phrase is only partially reflected in the Romanian translation.  The Romanian lacks a direct equivalent to 'Otherwise'.",
+          "suggestion": "Mai întâi, trebuie să vă conectați la serviciul corespunzător în secțiunea Integrare. Altfel, conexiunea nu va fi posibilă."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +209,30 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'නොඑසේ නම්, සම්බන්ධ වීමට නොහැකි වනු ඇත' is a bit literal and could be more natural in Sinhala. A more fluent translation would convey the meaning of 'otherwise' more smoothly.",
+          "suggestion": "Alternatively, 'නޫනොත්, සම්බන්ධ කිරීමට හැකියාවක් නොවනු ඇත' or 'එසේ නොවුවහ, සම්බන්ධ කිරීමට බැරි වනු ඇත'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Before, you need to connect\" is better conveyed as \"First, you must activate\" or \"Initially, you must activate\". The current translation uses \"Najprv musíte aktivovať\", which is closer to the suggested alternatives.",
+          "suggestion": "Najprv musíte aktivovať príslušnú službu..."
+        },
+        {
+          "type": "formatting",
+          "description": "The English uses quotation marks for “Integration”. While Slovak can also use double quotes, it's typical to use single quotes or angle brackets for UI elements. Consistency is important. If the application uses single quotes for similar terms, this translation should do the same.",
+          "suggestion": "Najprv musíte aktivovať príslušnú službu v časti „Integrácia“ should be reviewed for consistency with existing UI conventions regarding quote style."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,7 +244,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Пре' at the beginning of the sentence is not the most natural way to start a sentence in this context. While grammatically correct, it sounds slightly awkward. It translates to 'Before' but doesn't flow well.",
+          "suggestion": "Уместо тога, потребно је да повежете..."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'веза нец́е бити могуц́а' is grammatically correct, but a more natural phrasing would improve readability. The passive voice 'will not be possible' is not always the best choice.",
+          "suggestion": "У супротном, повезивање неће бити могуће."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +273,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Before, you need to connect...' implies a prerequisite action. The Ukrainian translation 'Перед цим необхідно ввімкнути...' translates to 'Before this, it is necessary to enable...'. While technically correct, it doesn't fully convey the sense of needing to *connect* a service, which implies more than just enabling it.  'Connect' usually means establishing a link or integration, which isn't fully captured.",
+          "suggestion": "Перед цим необхідно підключити відповідну службу в розділі «Інтеграція». В іншому випадку з’єднання буде неможливим."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +291,18 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Before, you need to connect...\" is awkwardly translated as \"您需要在此之前...\" which is not idiomatic Chinese. It sounds unnatural and doesn't convey the original meaning clearly. The original emphasizes doing something *before* a certain action.",
+          "suggestion": "您需要在“集成”部分先连接相应服务。"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly wrong, using “集成” instead of “集成部分” could improve readability and conciseness.",
+          "suggestion": "您需要在“集成”部分先连接相应服务。 或 您需要在“集成”先连接相应服务。"
+        }
+      ],
       "approved_at": null
     }
   }

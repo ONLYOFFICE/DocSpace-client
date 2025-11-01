@@ -3,7 +3,7 @@
   "content": "Files copied.",
   "content_en_sha1_hash": "9bab25397cd16a5f1461f06dc1004411ecc74e27",
   "created_at": "2025-05-19T21:30:54.792Z",
-  "updated_at": "2025-05-28T09:30:02.427Z",
+  "updated_at": "2025-08-04T07:30:01.222Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that files have been successfully copied. It appears when a file is moved from one location to another, providing feedback to the user about the outcome of the action. The exact wording may vary depending on whether the files were copied within a folder or not.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 86,
+      "context": "return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 74,
-      "context": "count,\n });\n return t(\"InfoPanel:FileMovedToTrash\");\n case \"FileCopied\":\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
+      "line_number": 80,
+      "context": "return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
       "module": "/packages/client"
     },
     {
@@ -42,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fayl kopyalandı.\" while technically correct, is in the singular form. The English 'Files copied' refers to multiple files, so the Azerbaijani should reflect that.",
+          "description": "The translation 'Fayl kopyalandı' is grammatically correct but doesn't fully convey the meaning of 'Files copied'. It translates to 'File copied'. It should be plural to match the English.",
           "suggestion": "Fayllar kopyalandı."
         }
       ],
@@ -54,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Копирани файлове' is a literal translation but doesn't convey the same meaning as 'Files copied.' It's more like 'Copied files' rather than 'Files copied'. The English implies the action of copying is complete.",
-          "suggestion": "Файлове копирани."
+          "description": "The translation 'Копирани файлове' while literally meaning 'Copied files', doesn't convey the same meaning as 'Files copied.' A more natural Bulgarian translation would be 'Копирани са файловете' or 'Файловете са копирани'.",
+          "suggestion": "Копирани са файловете"
         }
       ],
       "approved_at": null
@@ -69,7 +75,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Dateien kopiert\" is a literal translation of \"Files copied,\" it lacks the nuance of completion. A more natural and commonly used translation would reflect the action being finished.",
+          "suggestion": "Dateien erfolgreich kopiert."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -99,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Ֆայլերը պատճենված են:' while technically correct, can be improved for naturalness. A more common and idiomatic way to say 'Files copied' in Armenian would be 'Պատճենվել են ֆայլերը'.",
+          "suggestion": "Պատճենվել են ֆայլերը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -108,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'File copiati' is grammatically correct but doesn't fully convey the meaning of 'Files copied.' 'File copiati' translates to 'Files copied' in the singular sense. It should be plural to match the English.",
+          "description": "The translation 'File copiati' is grammatically correct but doesn't fully convey the meaning of 'Files copied.' It implies that only one file was copied. The plural 'Files' in English indicates multiple files.",
           "suggestion": "Archivi copiati."
         }
       ],
@@ -132,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເອກະສານຖືກສໍາເນົາແລ້ວ\" literally translates to \"Documents were copied.\" While close, it doesn't perfectly convey the simple \"Files copied.\" The word 'documents' (ເອກະສານ) is more formal than what is generally implied by 'files'.",
-          "suggestion": "ເອກະສານຖືກຄັດລອກແລ້ວ"
+          "description": "The Lao translation 'ເອກະສານຖືກສໍາເນົາແລ້ວ' literally translates to 'Documents have been copied'. While not entirely wrong, it's a more formal and passive construction than the English 'Files copied.'. A more direct and commonly used translation would be better.",
+          "suggestion": "ເອກະສານຄັດລອກແລ້ວ."
         }
       ],
       "approved_at": null
@@ -153,7 +171,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pliki zostały skopiowane.' is grammatically correct but can be more concise and natural. 'Skopiowane pliki' or 'Pliki skopiowano' would be more common and idiomatic.",
+          "suggestion": "Pliki skopiowano."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -173,9 +197,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Fișiere au fost copiate' is a literal translation and not the most natural way to express 'Files copied' in Romanian. A more idiomatic translation would be 'Fișierele copiate' or 'Fișierele s-au copiat'.",
-          "suggestion": "Fișierele copiate."
+          "type": "grammar",
+          "description": "The Romanian translation 'Fișiere au fost copiate' is grammatically incorrect. The correct form should use the plural agreement with 'fișiere'.",
+          "suggestion": "Fișierele au fost copiate."
         }
       ],
       "approved_at": null
@@ -192,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොනු පිටපත් කරන ලදී.' is a literal translation that sounds unnatural in Sinhala. A more natural phrasing would convey the same meaning.",
-          "suggestion": "ගොනු ඇණවුරුව පිටපත් කරන ලදී."
+          "description": "The translation 'ගොනු පිටපත් කරන ලදී.' is a literal translation of 'Files are copied.' while the English 'Files copied.' implies completion of the action. A more natural and accurate translation would emphasize completion.",
+          "suggestion": "ගොනු පිටපත් කළා."
         }
       ],
       "approved_at": null
@@ -216,13 +240,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation 'Датотеке су копиране' has a grammatical error. The verb 'су копиране' is not conjugated correctly. It should be in the past tense, agreeing with the plural noun 'Датотеке'.",
-          "suggestion": "Датотеке су копиране should be Датотеке су копиране."
+          "description": "The Serbian translation 'Датотеке су копиране' is grammatically incorrect. It appears to be missing a verb conjugation. The correct form should indicate a completed action.",
+          "suggestion": "Датотеке су копиране. --> Датотеке су копиране."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'Датотеке' correctly translates to 'Files,' the verb form 'копиране' is an infinitive and doesn't express the action of copying has already occurred.  It needs to be conjugated.",
-          "suggestion": "A more accurate translation would involve the past tense of the verb 'to copy'. Suggestions include 'Датотеке су копиране' (correct past tense form, suggested earlier) or 'Копиране су датотеке' (less common, but potentially valid)."
+          "description": "The Serbian translation 'Датотеке су копиране' does not accurately reflect the English meaning. 'Files copied' indicates a completed action. A better translation would require a perfect past participle.",
+          "suggestion": "Датотеке су копиране. --> Датотеке су копиране."
         }
       ],
       "approved_at": null
@@ -251,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Đã sao chép các tập tin.\" is a literal translation and a bit awkward. A more natural Vietnamese phrasing would be preferred.",
-          "suggestion": "Đã sao chép tệp tin."
+          "description": "The translation 'Đã sao chép các tập tin' is technically correct but sounds slightly formal and verbose for a simple confirmation message like 'Files copied.'. A more natural and concise translation would be preferable.",
+          "suggestion": "Đã copy."
         }
       ],
       "approved_at": null

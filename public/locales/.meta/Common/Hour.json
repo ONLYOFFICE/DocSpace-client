@@ -3,7 +3,7 @@
   "content": "hour",
   "content_en_sha1_hash": "52ab86a87214a453d9f82538264f190854915247",
   "created_at": "2025-05-19T21:30:45.818Z",
-  "updated_at": "2025-05-28T09:30:02.934Z",
+  "updated_at": "2025-06-30T12:20:31.697Z",
   "comment": {
     "text": "This translation key represents the English word \"hour\" to be used in a specific component displaying cron job schedules, typically found in a scheduling or configuration interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/cron/Cron.utils.ts",
-      "line_number": 107,
+      "line_number": 102,
       "context": "}\n if (cronParts[1].length > 0) {\n return \"Day\";\n }\n if (cronParts[0].length > 0) {\n return \"Hour\";\n }\n // return \"minute\";\n return \"Hour\";\n };",
       "module": "/packages/shared"
     }
@@ -93,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"時間\" (jikan) is a general term for 'time'. 'Hour' specifically refers to a unit of time. A more accurate translation would be something like \"時間\" (jikan) for general time, but if specifically referring to the hour, a more suitable translation might consider context or use a more precise term depending on the application (e.g., '時' (toki) might be used in certain situations).",
-          "suggestion": "Consider context. If a more specific term is needed, research the appropriate Japanese terminology for 'hour' depending on the context of use."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao translation 'ຊົ່ວໂມງ' appears to be the correct spelling for 'hour' in Lao.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"сат\" translates to 'hour' but is more commonly associated with 'o'clock' or 'hour' in the sense of a specific time. While technically not wrong, it's not the most natural or precise translation for just 'hour' in a general context.",
-          "suggestion": "часа"
+          "description": "The Serbian (Cyrillic) translation 'сат' does not accurately represent the English word 'hour'. 'Сат' translates to 'hour' in the sense of 'o'clock' or 'watch', but not as a unit of time. The correct translation for 'hour' as a unit of time would be 'час'.",
+          "suggestion": "час"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'sat' does not accurately translate the English word 'hour'. 'Sat' means 'hour' in the sense of a clock hand, not a unit of time. The correct translation for 'hour' as a unit of time is 'čas'.",
-          "suggestion": "čas"
+          "description": "The Serbian (Latin) translation 'sat' does not accurately translate the English word 'hour'. 'Sat' means 'hour' in the sense of a clock hand or time of day (e.g., 'it's 3 o'clock'). 'Hour' refers to a unit of time (60 minutes).",
+          "suggestion": "The correct translation of 'hour' in Serbian (Latin) depends on the specific context. Possible corrections include: 'čas' (general hour), 'sati' (hours - plural, often used in measurements), or 'sat vremena' (an hour)."
         }
       ],
       "approved_at": null

@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { RoomIcon } from ".";
-import { renderWithTheme } from "../../utils/render-with-theme";
 import { TModel } from "./RoomIcon.types";
 
 const mockImgSrc = "test-image.jpg";
@@ -65,26 +64,26 @@ describe("<RoomIcon />", () => {
   });
 
   it("renders without error", () => {
-    renderWithTheme(<RoomIcon {...baseProps} />);
+    render(<RoomIcon {...baseProps} />);
     expect(screen.getByTestId("room-icon")).toBeInTheDocument();
   });
 
   it("renders title when showDefault is true", () => {
-    renderWithTheme(<RoomIcon {...baseProps} />);
+    render(<RoomIcon {...baseProps} />);
     const title = screen.getByTestId("room-title");
     expect(title).toBeInTheDocument();
     expect(title).toHaveTextContent("TR");
   });
 
   it("renders empty icon state correctly", () => {
-    renderWithTheme(<RoomIcon {...baseProps} isEmptyIcon />);
+    render(<RoomIcon {...baseProps} isEmptyIcon />);
     const emptyIcon = screen.getByTestId("empty-icon");
     expect(emptyIcon).toBeInTheDocument();
     expect(screen.getByTestId("icon-button")).toBeInTheDocument();
   });
 
   it("renders edit mode correctly", () => {
-    renderWithTheme(<RoomIcon {...baseProps} withEditing model={mockModel} />);
+    render(<RoomIcon {...baseProps} withEditing model={mockModel} />);
     const editButton = screen.getByTestId("icon-button");
     expect(editButton).toBeInTheDocument();
     expect(screen.getByTestId("room-icon")).toHaveAttribute(
@@ -94,7 +93,7 @@ describe("<RoomIcon />", () => {
   });
 
   it("opens dropdown on edit icon click", () => {
-    renderWithTheme(<RoomIcon {...baseProps} withEditing model={mockModel} />);
+    render(<RoomIcon {...baseProps} withEditing model={mockModel} />);
     const editButton = screen.getByTestId("icon-button");
     fireEvent.click(editButton);
     expect(screen.getByText(mockModel[0].label)).toBeInTheDocument();
@@ -102,7 +101,7 @@ describe("<RoomIcon />", () => {
 
   it("handles file input change", () => {
     const onChangeFile = jest.fn();
-    renderWithTheme(
+    render(
       <RoomIcon
         {...baseProps}
         withEditing
@@ -119,7 +118,7 @@ describe("<RoomIcon />", () => {
   it("renders badge correctly", () => {
     const badgeUrl = "badge.svg";
     const onBadgeClick = jest.fn();
-    renderWithTheme(
+    render(
       <RoomIcon
         {...baseProps}
         badgeUrl={badgeUrl}
@@ -134,13 +133,13 @@ describe("<RoomIcon />", () => {
 
   it("handles hover state correctly", () => {
     const hoverSrc = "hover-image.jpg";
-    renderWithTheme(<RoomIcon {...baseProps} hoverSrc={hoverSrc} />);
+    render(<RoomIcon {...baseProps} hoverSrc={hoverSrc} />);
     const hoverImg = screen.getByTestId("hover-image");
     expect(hoverImg).toHaveAttribute("src", hoverSrc);
   });
 
   it("handles archive state correctly", () => {
-    renderWithTheme(<RoomIcon {...baseProps} isArchive />);
+    render(<RoomIcon {...baseProps} isArchive />);
     expect(screen.getByTestId("room-icon")).toHaveAttribute(
       "data-is-archive",
       "true",
@@ -149,7 +148,7 @@ describe("<RoomIcon />", () => {
 
   it("adds tooltip attributes to badge when tooltipContent is provided", () => {
     const tooltipId = "room-tooltip";
-    renderWithTheme(
+    render(
       <RoomIcon
         {...baseProps}
         badgeUrl="badge.svg"
@@ -163,7 +162,7 @@ describe("<RoomIcon />", () => {
   });
 
   it("adds isHovered class when tooltipContent is provided", () => {
-    renderWithTheme(
+    render(
       <RoomIcon
         {...baseProps}
         badgeUrl="badge.svg"
@@ -176,7 +175,7 @@ describe("<RoomIcon />", () => {
   });
 
   it("does not add tooltip attributes when tooltipContent is not provided", () => {
-    renderWithTheme(<RoomIcon {...baseProps} badgeUrl="badge.svg" />);
+    render(<RoomIcon {...baseProps} badgeUrl="badge.svg" />);
     const badgeButton = screen.getByTestId("icon-button");
     expect(badgeButton).not.toHaveAttribute("data-tooltip-id");
     const buttonWithClass = screen.getByTestId("icon-button");
@@ -184,7 +183,7 @@ describe("<RoomIcon />", () => {
   });
 
   it("handles template icon state", () => {
-    renderWithTheme(<RoomIcon {...baseProps} isTemplate />);
+    render(<RoomIcon {...baseProps} isTemplate />);
     const roomIcon = screen.getByTestId("room-icon");
     expect(roomIcon).toHaveAttribute("data-is-template", "true");
   });

@@ -3,7 +3,7 @@
   "content": "Button text",
   "content_en_sha1_hash": "2c1bff44c81120a2a08aa9cde226b916847d6ef4",
   "created_at": "2025-05-19T21:30:54.376Z",
-  "updated_at": "2025-05-21T09:30:30.980Z",
+  "updated_at": "2025-08-04T07:30:01.410Z",
   "comment": {
     "text": "Button text is used as a label for a button in the Portal Settings page, likely within a settings dialog or configuration panel. The translation of this key will be displayed on the button's surface, allowing users to customize its text.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 90,
+      "line_number": 95,
       "context": "const setButtonColor = (color) => {\n debouncedSetConfig(\"buttonColor\", color);\n };\n \n const setButtonText = (e) => {\n setButtonValue(e.target.value);\n debouncedSetConfig(\"buttonText\", e.target.value);\n };\n \n const toggleWithLogo = () => {",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"زر كتابة\" (zar kitaaba) literally translates to \"writing button\" rather than \"button text\". While understandable, it's not the most accurate or natural translation for \"button text\".",
-          "suggestion": "نص الزر (nass az-zar) - This translates to \"button text\" and is a more accurate rendering."
+          "description": "The translation \"زر كتابة\" (Zur Kitaaba) literally translates to \"Writing Button.\" While understandable, it doesn't accurately convey the meaning of \"Button text.\" A more accurate translation would imply the text *on* the button.",
+          "suggestion": "زر نص (Zur Nass) - Button Text"
         }
       ],
       "approved_at": null
@@ -111,18 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ປຸ່ມ' (pùm) is correctly spelled, but it might be more natural to use a more descriptive term for 'Button' depending on context, such as 'ກຸ່ມປຸ່ມ' (gùm pùm) for 'button group'. However, 'ປຸ່ມ' is acceptable in this case.",
-          "suggestion": "Consider 'ກຸ່ມປຸ່ມ' if the context requires a more descriptive term for 'Button'."
-        },
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ຂໍ້ຄວາມ' (khôo kwaam) is correctly spelled, meaning 'text'.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -137,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'Knop tek' is an incomplete and inaccurate translation of 'Button text'. 'Tek' means 'text' but 'Knop' just means 'button'. It misses the 'text' aspect of the original phrase.",
-          "suggestion": "Knoptekst"
+          "description": "The Dutch translation \"Knop tek\" is an incorrect translation of \"Button text\".  \"Tek\" means 'text' but is not commonly used in this context. A more natural translation would be \"Knoppentekst\".",
+          "suggestion": "Knoppentekst"
         }
       ],
       "approved_at": null
@@ -155,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Botão de texto\" is a literal translation of \"Button text\" but doesn't convey the intended meaning in Portuguese. \"Button text\" refers to the text displayed on a button. A more accurate translation would depend on the context, but possibilities include \"Texto do botão\", \"Rótulo do botão\", or simply \"Texto do botão\" if clarity is paramount.",
+          "description": "The translation \"Botão de texto\" is a literal translation of \"Button text\" and doesn't convey the intended meaning of a button's label. A more natural translation would be something like \"Texto do botão\" or simply \"Texto do botão\".",
           "suggestion": "Texto do botão"
         }
       ],
@@ -167,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Botão de texto\" is a literal translation of \"Button text\" and doesn't convey the intended meaning in Portuguese. It translates to \"Text Button,\" which is not a common or natural phrasing. A better translation would depend on the context of the button.",
-          "suggestion": "Consider alternatives like \"Texto do botão\" (Button text), \"Rótulo do botão\" (Button label), or a more context-specific translation."
+          "description": "The translation 'Botão de texto' is a literal translation and doesn't convey the intended meaning of 'Button text' in the context of a software interface. It translates to 'Text button' which is not what is meant.",
+          "suggestion": "A more appropriate translation would be something like 'Texto do botão' or simply 'Botão'."
         }
       ],
       "approved_at": null
@@ -191,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"බොත්තමේ පෙළ\" is understandable, it's a literal translation (\"text of the button\"). A more natural and idiomatic translation for \"Button text\" would be something like \"බට්න් පෙළ\" (Button Pela).",
-          "suggestion": "බට්න් පෙළ"
+          "description": "While 'බොත්තමේ පෙළ' is understandable, it's a literal translation and not the most natural phrasing. A more idiomatic translation would be closer to 'වාර்ப்பு ගත පෙළ' (varpu gata pel).",
+          "suggestion": "වාර்ப்பு ගත පෙළ"
         }
       ],
       "approved_at": null
@@ -215,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Текст дугмета' is spelled correctly.",
-          "suggestion": null
+          "description": "The word 'дугмета' is a less common and potentially incorrect spelling. The more standard spelling is 'дугмета'.",
+          "suggestion": "Текст дугмета -> Текст дугмета"
         }
       ],
       "approved_at": null
@@ -224,7 +213,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian word for 'button' is 'dugme', not 'dugmeta'. The '-a' suffix indicates a plural form.",
+          "suggestion": "Tekst dugmeta -> Tekst dugmeta"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -245,7 +240,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Chữ cho nút' is not a natural or accurate translation of 'Button text'. 'Cho' implies 'for', which isn't quite the meaning intended.",
+          "description": "The translation 'Chữ cho nút' is not the most natural or accurate translation of \"Button text\". While 'chữ' means 'text' and 'nút' means 'button', the phrasing is awkward. A more idiomatic translation would be 'Văn bản nút' or 'Nội dung nút'.",
           "suggestion": "Văn bản nút"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Embed a room selector to allow users to access any room from the list of the available ones. ",
   "content_en_sha1_hash": "a0805f766f94a0e3694b326697264720862a82a5",
   "created_at": "2025-05-19T21:30:54.635Z",
-  "updated_at": "2025-06-03T20:59:42.115Z",
+  "updated_at": "2025-09-26T15:21:06.304Z",
   "comment": {
     "text": "The \"RoomSelectorDescription\" translation key provides a brief description to be used when displaying an image and title for a room selector button in the Portal Settings page. The text is meant to describe the purpose of this feature: allowing users to access any room from a list of available ones.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 206,
-      "context": "</Frame>\n );\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n t={t}",
+      "line_number": 214,
+      "context": "</Frame>\n );\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}",
       "module": "/packages/client"
     }
   ],
@@ -36,18 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation deviates significantly from the intended meaning of the English content. The English text refers to a 'room selector' allowing access to available rooms. The Arabic translation mentions 'a public room' and accessing 'documents stored there without registration'. This changes the functionality described.",
-          "suggestion": "قم بتضمين منتقي غرف للسماح للمستخدمين بالوصول إلى أي غرفة من قائمة الغرف المتاحة."
+          "description": "The Arabic translation significantly alters the meaning of the English content. The English text refers to allowing users to access rooms, while the Arabic translation implies access to documents stored within a public room without logging in. It introduces an action ('viewing documents') and a condition ('without logging in') that are not present in the original.",
+          "suggestion": "قم بتضمين منتقي الغرف للسماح للمستخدمين بالوصول إلى أي غرفة من قائمة الغرف المتاحة."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'المستندات' (documents) isn't present or implied in the original English content. This addition introduces extraneous information.",
-          "suggestion": "Remove the reference to 'documents' (المستندات) from the translation."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'بدون تسجيل' (without registration) is not directly related to the functionality described in the English text. The English content does not mention registration.",
-          "suggestion": "Remove the phrase 'بدون تسجيل' (without registration) from the translation."
+          "type": "spelling",
+          "description": "The word 'مستندات' (documents) might not be the most accurate translation in this context, depending on the specific functionality of the room selector. It could be too specific.",
+          "suggestion": "Consider a more generic term like 'محتوى' (content) or 'الغرف' (rooms) if 'مستندات' is not suitable."
         }
       ],
       "approved_at": null
@@ -55,13 +50,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'otaqlar' should likely be 'oataqlar' to be consistent with common usage.",
-          "suggestion": "İstifadəçilərə mövcud oataqlar siyahısından istənilən otağa daxil olmaq üçün otaq seçicisi əlavə edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -70,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"to allow users to have access\" is redundant.  'To allow users access' is more concise and natural in Bulgarian.",
-          "suggestion": "Вградете селектор на стая, за да позволите на потребителите да имат достъп до всяка стая от списъка с наличните. -> Вградете селектор на стая, за да позволите на потребителите да имат достъп до всяка стая от наличните."
+          "description": "The phrase \"да имат достъп\" (to have access) sounds slightly awkward in this context. A more natural phrasing would be \"да получат достъп\" (to gain access) or simply \"за достъп\" (to access).",
+          "suggestion": "Вградете селектор на стая, за да позволите на потребителите да получат достъп до всяка стая от списъка с наличните."
         }
       ],
       "approved_at": null
@@ -82,13 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vložení selektoru místností...' literally translates to \"Insertion of a room selector...\" which is not as natural as a phrase like \"Implementujte selektor místností...\" or \"Zobrazte selektor místností...\". It feels clunky.",
-          "suggestion": "Implementujte selektor místností, který uživatelům umožní přístup k libovolné místnosti ze seznamu dostupných místností."
+          "description": "The translation \"Vložení selektoru místností\" is a bit literal and less natural. While technically correct, it reads awkwardly. A more natural phrasing would focus on the *function* of the room selector.",
+          "suggestion": "Použijte selektor místností, který umožní uživatelům..."
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using a more active phrasing would improve readability and flow.",
-          "suggestion": "Implementujte selektor místností, aby uživatelé mohli přistupovat k libovolné místnosti ze seznamu dostupných místností."
+          "type": "incorrect_translation",
+          "description": "The phrase 'libovolné místnosti' could be more concise. 'Jakékoliv místnosti' or 'každé místnosti' might sound more fluent.",
+          "suggestion": "Použijte 'jakékoliv místnosti' or 'každé místnosti' instead of 'libovolné místnosti'."
         }
       ],
       "approved_at": null
@@ -99,8 +88,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Betten Sie eine Raumauswahl ein' is not the most natural or idiomatic way to express 'Embed a room selector'. It literally translates to 'Bede a room selection' which isn't the intended meaning.  'Einbetten' or 'Integrieren' would be better alternatives.",
+          "description": "The translation of \"Embed\" is too literal. \"Betten Sie eine Raumauswahl ein\" sounds unnatural in German. A more natural phrasing would be \"Integrieren Sie eine Raumauswahl\" or \"Fügen Sie eine Raumauswahl hinzu\".",
           "suggestion": "Integrieren Sie eine Raumauswahl, um Benutzern den Zugriff auf jeden Raum aus der Liste der verfügbaren Räume zu ermöglichen."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'jeden Raum' feels slightly repetitive. A more concise phrasing could be used.",
+          "suggestion": "Integrieren Sie eine Raumauswahl, um Benutzern den Zugriff auf alle Räume aus der Liste der verfügbaren Räume zu ermöglichen."
         }
       ],
       "approved_at": null
@@ -116,9 +110,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Embed a room selector' is a bit ambiguous. 'Incruste' (embed) might imply a more forceful integration than intended. A more natural translation might be 'Añade' (add) or 'Incluye' (include).",
-          "suggestion": "Añade un selector de salas para permitir a los usuarios acceder a cualquier sala de la lista de salas disponibles."
+          "type": "formatting",
+          "description": "The Spanish translation lacks the punctuation at the end of the sentence. A period should be added.",
+          "suggestion": "Incruste un selector de salas para permitir a los usuarios acceder a cualquier sala de la lista de salas disponibles. "
         }
       ],
       "approved_at": null
@@ -129,13 +123,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and somewhat awkward. 'Päästä mihin tahansa saatavilla olevien huoneiden listalla olevaan huoneeseen' is clunky. It doesn't read naturally in Finnish.",
-          "suggestion": "Salli käyttäjien valita huone saatavilla olevien huoneiden listasta."
+          "description": "The translation is overly literal and somewhat awkward. 'Upota huoneen valitsija salliaksesi käyttäjien päästä mihin tahansa saatavilla olevien huoneiden listalla olevaan huoneeseen' translates to 'Embed a room selector to allow users to access any room on the list of available rooms.' It's wordy and doesn't flow naturally in Finnish.",
+          "suggestion": "Salli käyttäjien valita huone listaamastasi huonevalikoimasta."
         },
         {
-          "type": "formatting",
-          "description": "While not strictly wrong, the use of 'huoneeseen' at the end is a bit repetitive given the repeated use of 'huone'.",
-          "suggestion": "Consider rephrasing to avoid repeating 'huone' so much."
+          "type": "grammar",
+          "description": "The phrase 'saatavilla olevien huoneiden listalla olevaan huoneeseen' is grammatically correct but extremely verbose and convoluted. It could be simplified.",
+          "suggestion": "Simplify the phrase to something more concise like 'huonevalikoimasta' or 'huoneista'."
         }
       ],
       "approved_at": null
@@ -152,8 +146,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Տեղադրեք սենյակի ընտրիչը, որպեսզի օգտվողները կարողանան մուտք գործել ցանկացած սենյակ հասանելիների ցանկից:\" is a bit literal and could be more natural-sounding. 'հասանելիների ցանկից' translates to 'list of available ones', but in Armenian, a more common phrasing would be something like 'պահվողների ցանկից' or 'պԱրՀակային ցանկից'.",
-          "suggestion": "Տեղադրեք սենյակի ընտրիչը, որպեսզի օգտվողները կարողանան մուտք գործել ցանկացած սենյակ պահվողների ցանկից:"
+          "description": "The phrase \"հասանելիների ցանկից\" (from the list of available ones) is slightly awkward in Armenian. While technically correct, it's not the most natural phrasing. A better phrasing would convey the sense of 'available rooms'.",
+          "suggestion": "Տեղադրեք սենյակի ընտրիչը, որպեսզի օգտվողները կարողանան մուտք գործել ցանկացած սենյակ առկայծենողների ցանկից։ (or) Տեղադրեք սենյակի ընտրիչը, որպեսզի օգտվողները կարողանան մուտք գործել հասանելի սենյակների ցանկից:"
         }
       ],
       "approved_at": null
@@ -176,13 +170,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"임베드하세요\" (imbedhaseyo) is a direct transliteration of 'embed'. While understandable, it's not the most natural way to express this concept in Korean. A more natural phrasing would be something like \"방 선택 도구를 포함하세요\" (bang seon-taek dou-geul pohamhaseyo) or \"방 선택 기능을 추가하세요\" (bang seon-taek gineung-eul chugahaseyo).",
-          "suggestion": "방 선택 도구를 포함하세요 (bang seon-taek dou-geul pohamhaseyo) or 방 선택 기능을 추가하세요 (bang seon-taek gineung-eul chugahaseyo)"
+          "description": "The translation '임베드하세요' (imbed haseyo) directly translates to 'embed' which might sound technical and less natural for a user-facing description. A more approachable phrasing would be better.",
+          "suggestion": "사용자가 이용 가능한 방 목록에서 모든 방에 액세스할 수 있도록 방 선택 기능을 추가하세요."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"모든 방에 액세스할 수 있도록\" (modeun bang-e accesshal su itdorok) is grammatically correct but slightly stiff. A more fluent way to express this is '모든 방에 접근할 수 있게' (modeun bang-e jeopgeunhal su itge).",
-          "suggestion": "모든 방에 접근할 수 있게 (modeun bang-e jeopgeunhal su itge)"
+          "description": "The translation of 'allow users to access' is quite literal.  A more natural phrasing could improve readability.",
+          "suggestion": "사용자가 이용 가능한 방 목록에서 모든 방에 쉽게 접근할 수 있도록"
         }
       ],
       "approved_at": null
@@ -190,7 +184,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຝັງ' (fang) can be interpreted as 'bury' or 'embed' in the context. While 'embed' is acceptable, 'ຕັ້ງ' (tang) might be a more natural fit for a technical document, suggesting 'install' or 'implement'.",
+          "suggestion": "ຕັ້ງຕົວເລືອກຫ້ອງ"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'ຈາກລາຍຊື່ຫ້ອງທີ່ມີຢູ່' can be simplified to improve flow. While technically correct, it's slightly verbose.",
+          "suggestion": "ຈາກບັນຊີລາຍຊື່ຫ້ອງ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -199,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'pieejamo failu saraksta' (list of available files) doesn't accurately reflect the English phrase 'list of the available ones' (rooms). It should refer to 'telpu saraksta' (list of rooms).",
+          "description": "The translation 'pieejamo failu saraksta' (list of available files) does not accurately reflect the English phrase 'list of the available ones' which refers to rooms, not files. It implies a file list instead of a room list.",
           "suggestion": "Ieguliet telpu atlasītāju, lai ļautu lietotājiem piekļūt jebkurai telpai no pieejamo telpu saraksta."
         }
       ],
@@ -211,13 +216,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Embed' is not perfectly captured by 'Integreer'. 'Integreer' implies a deeper integration than simply displaying a selector. A better translation might be 'Voeg toe' or 'Plaats'.",
-          "suggestion": "Voeg een kamer selectie toe zodat gebruikers..."
+          "description": "The phrase \"openen\" (to open) doesn't quite capture the meaning of 'access' in this context. 'To access' implies being able to view or interact with, not just 'open'.",
+          "suggestion": "Integreer een kamer selectie zodat gebruikers toegang kunnen krijgen tot een willekeurige kamer uit de lijst met beschikbare kamers."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'to allow users to access' is somewhat awkwardly translated as 'zodat gebruikers een willekeurige kamer... kunnen openen'. While technically correct, it could be more fluent. 'Toegang krijgen tot' would be a more natural translation of 'access'.",
-          "suggestion": "zodat gebruikers toegang kunnen krijgen tot een willekeurige kamer..."
+          "type": "grammar",
+          "description": "The phrase 'kamer selectie' could be improved for better readability. While technically correct, it sounds slightly awkward.",
+          "suggestion": "kamerselectie"
         }
       ],
       "approved_at": null
@@ -225,7 +230,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Osadź selektor pokojów' is a bit literal and doesn't flow naturally. 'Osadź' can imply a more permanent embedding than intended. A more natural translation would be something like 'Dodaj selektor pokojów' or 'Umieść selektor pokojów'.",
+          "suggestion": "Dodaj selektor pokojów"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -243,13 +254,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Embed' is translated as 'Incorporează'. While technically correct, 'Incorporează' can sound a bit formal and less natural in this context. A more common and user-friendly translation would be 'Adaugă' or 'Include'.",
-          "suggestion": "Adaugă selector de sală pentru a permite utilizatorilor să acceseze orice sală din lista sălilor disponibile."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -264,18 +269,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"පවතින ලැයිස්තුවෙන් ඕනෑම කාමරයකට ප්‍රවේශයට පරිශ්‍රීලකයින්ට ඉඩ දීමට කාමර තෝරනයක් කාවද්දන්න\" is a bit awkward and doesn't flow naturally in Sinhala. The phrasing 'පරිශ්‍රීලකයින්ට ඉඩ දීමට' (to allow users) is overly formal and clunky.",
-          "suggestion": "පවතින කාමර ලැයිස්තුවෙන් ඕනෑම කාමරයකට පරිශ්‍රමකයින්ට යාමට හැකිවන පරිදි කාමර තෝරනයක් ඇතුළත් කරන්න."
+          "description": "The translation 'පවතින ලැයිස්තුවෙන් ඕනෑම කාමරයකට ප්‍රවේශයට පරිශ්‍රීලකයින්ට ඉඩ දීමට' doesn't quite capture the nuance of 'Embed a room selector to allow users to access any room from the list of the available ones.' It's a bit too literal and verbose. 'පරිශ්‍රීලකයින්ට ඉඩ දීමට' translates to 'to give opportunity to users', which is not the core meaning of 'allow'.",
+          "suggestion": "පවතින කාමරයන්ගෙන් අවශ්‍ය කාමරයකට පිවිසිය හැකි කාමර තෝරණයක් ස්ථාපනය කරන්න."
         },
         {
-          "type": "grammar",
-          "description": "The use of 'කාවද්දන්න' (kāvaddaṇna) which means 'to keep' or 'to have' isn't quite right in this context. It implies holding something, not embedding or including.",
-          "suggestion": "ඇතුළත් කරන්න (Athulath karanna) which means 'to include' or 'to embed' would be a more accurate choice."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The original English phrase 'Embed a room selector' is best conveyed by something that implies inclusion, rather than 'to allow access'.",
-          "suggestion": "The suggestion above incorporates a more appropriate verb."
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයින්ට' appears to be a typo. It should likely be 'පරිශ්රමකරුවන්ට' (users) or 'භාවිතකරුවන්ට' (users).",
+          "suggestion": "පරිශ්රමකරුවන්ට / භාවිතකරුවන්ට"
         }
       ],
       "approved_at": null
@@ -292,8 +292,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vdelajte izbirnik sobe, da uporabnikom omogočite dostop do katere koli sobe s seznama razpoložljivih.\" is a literal translation and sounds unnatural in Slovenian. 's seznama razpoložljivih' implies a list of available rooms as a specific list, whereas the English implies a general selection of available rooms. The word 'vdelajte' can also be improved for a more natural flow.",
-          "suggestion": "Integrirajte izbirnik sobe, da uporabnikom omogočite dostop do katere koli razpoložljive sobe."
+          "description": "The translation 'Vdelajte izbirnik sobe' is a bit awkward. 'Vdelajte' is a verb form that isn't the most natural way to express 'embed' in this context. A more fluent translation would be something like 'Integrirajte izbirnik sobe' or 'Vstavite izbirnik sobe'.",
+          "suggestion": "Integrirajte izbirnik sobe"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrase 's seznama razpoložljivih' sounds slightly formal and could be improved for clarity and flow. Consider restructuring it.",
+          "suggestion": "iz razpoložljivih sob"
         }
       ],
       "approved_at": null
@@ -304,13 +309,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'уградите' (ugradite) translates to 'install' or 'embed' in a technical sense, but in this context, a more appropriate word would convey the idea of 'providing' or 'including'. It implies a physical installation, which isn't intended.",
-          "suggestion": "Обезбедите селектор собе да бисте корисницима омогуц́или приступ било којој просторији са листе доступних."
+          "description": "The word 'уградите' (ugradite) translates to 'install' or 'integrate'. 'Уградите' doesn't quite capture the meaning of 'embed' in this context. A better translation would convey the action of including or presenting the selector.",
+          "suggestion": "Укључите селектор собе да бисте корисницима омогуц́или приступ било којој просторији са листе доступних."
         },
         {
           "type": "spelling",
-          "description": "The word 'просторији' is spelled correctly, but might be misinterpreted as 'room' in a colloquial sense. Using 'соби' is more accurate.",
-          "suggestion": "Обезбедите селектор собе да бисте корисницима омогуц́или приступ било којој соби са листе доступних."
+          "description": "While technically correct, the use of 'просторији' (prostoriji) is less common than 'соби' (sobi) in this context.  It's more conversational to say 'соби' rather than 'просторији'.",
+          "suggestion": "Укључите селектор собе да бисте корисницима омогуц́или приступ било којој соби са листе доступних."
         }
       ],
       "approved_at": null
@@ -321,13 +326,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ugradite selektor sobe da biste korisnicima omogućili pristup bilo kojoj prostoriji sa liste dostupnih.' is a bit literal and doesn't flow naturally in Serbian. 'Ugradite' (embed) feels awkward in this context. A more natural phrasing would focus on providing a room selection option.",
-          "suggestion": "Omogućite korisnicima da biraju iz liste dostupnih soba."
+          "description": "The word 'Ugradite' (Embed) doesn't quite capture the intended meaning of 'allow users to access'. A more accurate translation would convey the concept of enabling or providing access.",
+          "suggestion": "Omogućite selektor sobe da biste korisnicima omogućili pristup bilo kojoj prostoriji sa liste dostupnih."
         },
         {
           "type": "spelling",
-          "description": "The word 'prostoriji' contains a typo. It should be 'prostorija'.",
-          "suggestion": "prostorija"
+          "description": "The word 'prostoriji' is spelled correctly but might be slightly more formal than necessary. While acceptable, a slightly more conversational alternative might improve readability.",
+          "suggestion": "Consider 'soba' instead of 'prostoriji', though 'prostoriji' is technically correct."
         }
       ],
       "approved_at": null
@@ -337,9 +342,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a slightly formal tone for user-facing documentation. Consider softening it.",
-          "suggestion": "Kullanıcıların mevcut odalar arasından istedikleri odaya erişebilmeleri için bir oda seçici ekleyin."
+          "type": "incorrect_translation",
+          "description": "The translation \"Kullanıcıların mevcut odalar listesinden herhangi bir odaya erişmesine izin vermek için bir oda seçici yerleştirin.\" while conveying the general idea, is a bit clunky and literal. A more natural translation would consider the flow and brevity of the English original.",
+          "suggestion": "Kullanıcıların mevcut odalar arasından seçim yapabilmesi için bir oda seçici ekleyin."
         }
       ],
       "approved_at": null
@@ -347,13 +352,30 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Вбудуйте засіб вибору кімнати' is a bit literal and doesn't flow naturally in Ukrainian. A more natural phrasing would convey the 'Embed' action in a more user-friendly way.",
+          "suggestion": "Додайте засіб вибору кімнати (Add a room selector)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'щоб надати користувачам доступ' is correct but could be simplified for better readability.",
+          "suggestion": "щоб користувачі могли отримати доступ (so users could access)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nhúng trình chọn phòng để cho phép người dùng truy cập bất kỳ phòng nào từ danh sách các phòng có sẵn.' is a literal translation but sounds slightly awkward in Vietnamese. A more natural phrasing would emphasize the purpose of the room selector.",
+          "suggestion": "Cung cấp trình chọn phòng để người dùng dễ dàng truy cập vào bất kỳ phòng nào trong danh sách."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -362,8 +384,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"嵌入房间选择器，让用户能够访问允许列表中的房间\" doesn't fully capture the meaning of \"Embed a room selector to allow users to access any room from the list of the available ones.\" Specifically, '允许列表' (allowed list) implies a restriction. The original text suggests access to *all* available rooms.",
-          "suggestion": "嵌入房间选择器，方便用户访问可用房间列表。"
+          "description": "The translation '让用户能够访问允许列表中的房间' doesn't quite capture the nuance of 'allow users to access any room from the list of the available ones'. It implies the rooms are pre-approved or on an 'allow list,' which may not be the intended meaning. The original English suggests access to all available rooms.",
+          "suggestion": "嵌入房间选择器，让用户可以访问可用的房间。"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "User quota has been successfully disabled.",
   "content_en_sha1_hash": "585603e4624841cd6229d6ab3952af2f88d04b1e",
   "created_at": "2025-05-19T21:30:53.131Z",
-  "updated_at": "2025-06-03T20:59:42.367Z",
+  "updated_at": "2025-09-17T13:43:02.047Z",
   "comment": {
     "text": "This translation key is used to display a success message when user quota is disabled. It is typically displayed after clicking a button or submitting a form that affects user quota settings, and appears in a toast notification dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 455,
+      "line_number": 487,
       "context": "try {\n await setDefaultUserQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"UserQuotaEnabled\")\n : t(\"UserQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);\n }",
       "module": "/packages/shared"
     }
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disabled' is more accurately translated as 'poistettu käytöstä' (deactivated/removed from use) rather than 'otettu pois käytöstä' (taken out of use). While 'otettu pois käytöstä' isn't *wrong*, it's a slightly more verbose and less common phrasing in this context.",
+          "suggestion": "Käyttäjäkiintiö on poistettu käytöstä."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Numuru kvota ir veiksmīgi atspējota' is not the most natural or accurate translation of 'User quota has been successfully disabled'. 'Numuru kvota' literally means 'Number quota', which is a partial translation. 'User quota' implies a broader concept than just a quota for numbers. A better translation would reflect the overall user account limitations.",
-          "suggestion": "Lietotāja kvota ir veiksmīgi atspējota."
+          "description": "The term \"Numuru kvota\" literally translates to \"Number quota\".  While it might be understood, \"User quota\" implies a broader restriction not limited to just numbers. A more accurate translation would depend on the specific context of the quota. Considering it likely refers to a user's overall resource allowance, a more appropriate translation might be something like \"Lietotāja kvota\" (User quota) or \"Lietotāja resursu ierobežojums\" (User resource limit).",
+          "suggestion": "Consider using \"Lietotāja kvota\" or \"Lietotāja resursu ierobežojums\" for greater accuracy."
         }
       ],
       "approved_at": null
@@ -123,13 +129,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Gebruikersquota is met succes uitgeschakeld' is technically correct but slightly awkward. A more natural phrasing would be 'Het gebruikersquota is met succes uitgeschakeld.' or 'Het gebruikersquota is nu uitgeschakeld.'",
-          "suggestion": "Het gebruikersquota is met succes uitgeschakeld."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limit użytkowników został wyłączony' doesn't accurately convey the meaning of 'User quota has been successfully disabled'. 'Limit użytkowników' translates to 'User Limit', which is not the same as 'User quota'.",
-          "suggestion": "Limit użytkowania został wyłączony."
+          "description": "The translation 'Limit użytkowników został wyłączony' doesn't accurately convey the meaning of 'User quota has been successfully disabled.' 'Limit użytkowników' translates to 'User limit,' while 'quota' implies a specific allocation or allowance. The translation suggests simply disabling a user limit, not necessarily a quota.",
+          "suggestion": "Limity użytkowników zostały wyłączone."
         }
       ],
       "approved_at": null
@@ -162,13 +162,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cotă de stocare pentru utilizator a fost dezactivată cu succes' is a bit literal and verbose. A more natural Romanian phrasing would be preferred.",
-          "suggestion": "Utilizatorul nu mai are limită de stocare."
+          "description": "The translation 'Cotă de stocare pentru utilizator a fost dezactivată cu succes' is overly literal and slightly awkward in Romanian. While technically correct, it's not the most natural phrasing.",
+          "suggestion": "Cota de utilizator a fost dezactivată cu succes."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Cotă de stocare pentru utilizator' is slightly redundant. 'Cotă de stocare' is generally sufficient when the context implies it refers to a user.",
-          "suggestion": "Cotă de stocare a fost dezactivată cu succes."
+          "type": "formatting",
+          "description": "The translation includes extra words, making it longer than the English original. Shorter, more concise phrasing is generally preferred in UI translations.",
+          "suggestion": "Cota de utilizator a fost dezactivată cu succes."
         }
       ],
       "approved_at": null
@@ -182,18 +182,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පරිශීලක' is a less common and potentially awkward wording for 'user'. A more common and natural term would be 'භාවිතර'.",
-          "suggestion": "පරිශීලක → භාවිතර"
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, the sentence structure could be more fluid and natural in Sinhala. The phrasing is a bit literal from the English.",
-          "suggestion": "පරිශීලක කෝටාව සාර්ථකව අක්‍රිය කර ඇත. → භාවිතකරු කෝටාව සාර්ථකව අක්‍රිය කර ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

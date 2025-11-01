@@ -3,7 +3,7 @@
   "content": "If you disable this application, all active consents and authorization will be revoked. If necessary, you can enable the disabled application later.",
   "content_en_sha1_hash": "aa7576a64f9ab7a503bac25abeca6f558d18ae4f",
   "created_at": "2025-05-19T21:30:53.863Z",
-  "updated_at": "2025-05-21T07:18:45.815Z",
+  "updated_at": "2025-05-24T07:33:01.204Z",
   "comment": {
     "text": "This translation key is used to display a warning message when disabling an OAuth application. The message informs users that revoking active consents and authorization will occur if the application is disabled. It appears in a dialog modal.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"active consents\" is not accurately translated. \"Active consents\" implies user-granted permissions. While \"الأذونات النشطة\" (al-azhunaat an-nashita) is technically 'active permissions,' it doesn't fully capture the meaning of 'consents' in an OAuth context.",
-          "suggestion": "Consider a more precise translation that reflects the concept of user consent, such as: \"إذا قمت بتعطيل هذا التطبيق، فسيتم إلغاء جميع الموافقة والتصاريح النشطة.\" (Idha qumta bi ta'teel hatha al-tatbeeq, fasayyam ilga'u jami' al-muwafaqa wal-tasareeh an-nashita.) – This translates to 'If you disable this application, all active authorizations will be revoked.'"
+          "description": "The translation of 'consents' is missing. The English text specifically mentions 'consents' which is not reflected in the Arabic translation. The word 'consents' relates to user agreements and permissions.",
+          "suggestion": "إذا قمت بتعطيل هذا التطبيق، فسيتم إلغاء جميع الأذونات النشطة والمصادقة والموافقات. If necessary, you can enable the disabled application later."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"authorization\" is not accurately translated. المصادقة (al-musadaqa) primarily means 'authentication.' While related to authorization, it doesn't convey the full scope of 'authorization' in an OAuth context which involves permissions and access.",
-          "suggestion": "Replace \"المصادقة\" (al-musadaqa) with a more appropriate term like \"التصاريح\" (al-tasareeh) which means 'authorizations' or 'permissions', especially in the context of OAuth. Alternatively, use a combined term if clarity requires it (as suggested in the previous point)."
+          "description": "While 'مصادقة' (musadaqa) is a valid word for 'authentication', it might be more accurately translated in this context as 'تفويض' (tafweed) or 'ترخيص' (tarkeeb) to better convey 'authorization'. 'مصادقة' often implies verification of identity, whereas 'authorization' implies permission to access resources. The nuance of 'authorization' is lost.",
+          "suggestion": "إذا قمت بتعطيل هذا التطبيق، فسيتم إلغاء جميع الأذونات النشطة والتفويض. If necessary, you can enable the disabled application later."
         }
       ],
       "approved_at": null
@@ -116,23 +116,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"active consents\" is not accurately translated. \"ການຕົກລົງຮັບອະນຸຍາດທັງໝົດທີ່កំពុងເຮັດຢູ່\" literally translates to 'all consents that are being done', which is awkward. A more accurate translation would convey the sense of ongoing or current authorizations.",
-          "suggestion": "Consider using a phrase like \"ການອະນຸຍາດທີ່កំពុងໃຊ້ງານอยู่\" (ongoing authorizations) or \"ການຕົກລົງຮັບອະນຸຍາດທີ່ເປີດໃຊ້ງານຢູ່\" (active consents)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'revoked' is not directly translated. 'ຍົກເລີກ' means 'to cancel' or 'to revoke', but the nuance of 'revoked' as a legal or formal action might be missing.",
-          "suggestion": "While 'ຍົກເລີກ' is acceptable, consider exploring more specific terms if the context requires emphasizing the formal nature of the revocation. However, in many cases, 'ຍົກເລີກ' is sufficient."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"If necessary\" is translated as \"ຖ້າມີຄວາມຈໍາເປັນ\".  While grammatically correct, it's a bit wordy. A more concise option would improve the flow.",
-          "suggestion": "Consider using a simpler alternative like \"ຖ້າຕ້ອງການ\" (if needed) or just remove it, as the meaning is implied."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -141,13 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'authorization' is somewhat stiff and less common in Latvian in this context. A more natural translation would be 'apstiprinājumi' (approvals) or 'pieejas tiesības' (access rights).",
-          "suggestion": "Ja atspējosiet šo pieteikumu, visas aktīvās piekrišanas un apstiprinājumi/pieejas tiesības tiks atsauktas."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'lietojumprogrammu' is technically correct for 'application', 'ieteikums' or 'aplikācija' are often preferred in modern Latvian usage, particularly in technical contexts.",
-          "suggestion": "Ja atspējosiet šo pieteikumu, visas aktīvās piekrišanas un autorizācija tiks atsauktas. Ja nepieciešams, atspējoto ieteikumu/aplikāciju varat iespējot vēlāk."
+          "description": "The word 'lietošana' is used instead of 'lietojumprogramma' which is the accurate translation for 'application' in this context. 'Lietojumprogramma' specifically refers to an application.",
+          "suggestion": "Ja atspējosiet šo lietojumprogrammu, visas aktīvās piekrišanas un autorizācija tiks atsauktas. Ja nepieciešams, atspējoto lietojumprogrammu varat iespējot vēlāk."
         }
       ],
       "approved_at": null
@@ -194,13 +173,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'යෙදුම' (yeduma) appears multiple times. While technically correct, in this context, 'අප්ලිමාව' (application) might be more suitable for consistency and clarity, especially for a technical setting.",
-          "suggestion": "Consider replacing 'යෙදුම' with 'අප්ලිමාව' (application) for improved clarity."
+          "description": "The word 'යෙදුම' (yeduma) is used repeatedly. While technically correct, it's a bit formal. Consider using a more colloquial term for 'application' depending on the target audience.",
+          "suggestion": "Consider alternative terms like 'අප්ලිකේෂන්' (aplikeshin) or a similar, more common word for 'application'."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'ක්‍රියාත්මක සියලු කැමැත්තම් සහ අවසර අහෝසි වනු ඇත' is grammatically correct but could be slightly improved for flow. A more natural phrasing might use a passive construction.",
-          "suggestion": "Consider rephrasing to: 'සියලු ක්‍රියාත්මක කැමැත්තම් සහ අවසර අහෝසි කරනු ලැබේ' (All active consents and authorizations are revoked)."
+          "description": "The phrase 'ක්‍රියාත්මක සියලු කැමැත්තම්' (kriyathmak siyallu kamemiththam) is slightly awkward. It's grammatically correct but could be smoother.",
+          "suggestion": "Consider rephrasing to 'සියලු කැමැත්තම්' (siyallu kamemiththam) or 'මෙම සියලු කැමැත්තම්' (metha siyallu kamemiththam)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a major issue, breaking the long sentence into shorter ones could improve readability.",
+          "suggestion": "Consider splitting the sentence: 'මෙම යෙදුම අක්‍රිය කළොත්, ක්‍රියාත්මක සියලු කැමැත්තම් සහ අවසර අහෝසි වනු ඇත. අවශ්ය නම්, අක්‍රිය කරන ලද යෙදුම පසුකාලිනව නැවත ක්‍රියාත්මක කළ හැකිය.' into two shorter sentences."
         }
       ],
       "approved_at": null
@@ -228,9 +212,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'autorizacija' is a direct transliteration of 'authorization' and might sound unnatural in Serbian. While technically correct, 'odobrenje' is a more common and natural term for 'authorization' in this context.",
+          "type": "incorrect_translation",
+          "description": "The word 'autorizacija' is a direct translation of 'authorization' but doesn't flow naturally in Serbian. A more common and understandable term would be 'odobrenja'.",
           "suggestion": "Ako onemogućite ovu aplikaciju, svi aktivni pristanaci i odobrenja će biti opozvani."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'omogućiti onemogućenu aplikaciju' is a bit awkward. 'Omogućiti aplikaciju' is sufficient.",
+          "suggestion": "Po potrebi možete kasnije omogućiti aplikaciju."
         }
       ],
       "approved_at": null

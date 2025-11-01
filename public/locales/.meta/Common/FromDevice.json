@@ -3,7 +3,7 @@
   "content": "From device",
   "content_en_sha1_hash": "f831ef2d6cdd62d96cf8dc302c9a04f09962e594",
   "created_at": "2025-05-19T21:30:45.577Z",
-  "updated_at": "2025-06-03T20:59:41.780Z",
+  "updated_at": "2025-10-16T07:29:35.488Z",
   "comment": {
     "text": "This translation key is used to display the text \"From device\" in various places within the application's UI, typically in dropdown menus or buttons related to file uploads. The exact placement may vary depending on the specific use case, but it is commonly associated with user actions such as uploading files from a device.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 388,
+      "line_number": 393,
       "context": "const uploadFormDevice = {\n id: \"actions_upload-from-device\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromDevice\"),\n key: \"actions_upload-from-device\",\n onClick: onUploadPDFFilesClick,\n disabled: false,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2643,
+      "line_number": 2966,
       "context": "},\n {\n id: \"personal_upload-from-device\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromDevice\"),\n key: \"personal_upload-from-device\",\n onClick: () => this.onUploadAction(\"pdf\"),\n },\n ],\n };",
       "module": "/packages/client"
     }
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'De pe dispozitivul' is technically correct but a bit verbose and less natural than other options for 'From device'. A more concise and common translation would be 'De pe aparat' or 'De la dispozitiv'.",
-          "suggestion": "De pe aparat"
+          "description": "The Romanian translation \"De pe dispozitivul\" is a literal translation but doesn't quite capture the concise nature of \"From device.\" It's more verbose than necessary. A more natural and accurate translation would be something like \"De la dispozitiv\" or simply \"De dispozitiv\".",
+          "suggestion": "De la dispozitiv"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'උපාංගයෙන්' (Upānayen) can be a valid translation, it's quite formal and less common for a simple 'From device'. A more natural and common translation would be something like 'උදගමනයෙන්' (Udagamanayen) or 'සැපයුමෙන්' (Sapyumayen), depending on the specific context.",
-          "suggestion": "Consider 'උදගමනයෙන්' (Udagamanayen) or 'සැපයුමෙන්' (Sapyumayen) for a more natural translation."
+          "description": "The Sinhala translation \"උපාංගයෙන්\" (upāngayen) while technically meaning 'from device', doesn't convey the same natural flow as the English 'From device'. A more accurate and natural translation would be something like \"උපාංග සිට\" (upāngā sitā) or \"උපාංගයෙන් ලැබුණු\" (upāngayen lebaṇu).",
+          "suggestion": "උපාංග සිට (upāngā sitā) or උපාංගයෙන් ලැබුණු (upāngayen lebaṇu)"
         }
       ],
       "approved_at": null

@@ -34,7 +34,7 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import {
   // getKeyByLink,
@@ -67,6 +67,8 @@ const ArticleBodyContent = (props) => {
   const prevLocation = React.useRef(null);
 
   const location = useLocation();
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   // React.useEffect(() => {
   //   // prevLocation.current = location;
@@ -184,7 +186,7 @@ const ArticleBodyContent = (props) => {
   };
 
   const onSelect = () => {
-    if (currentDeviceType === DeviceType.mobile) {
+    if (isMobileView) {
       toggleArticleOpen();
     }
   };
@@ -214,7 +216,7 @@ const ArticleBodyContent = (props) => {
       case "Migration":
         return t("Migration");
       case "Backup":
-        return t("Backup");
+        return t("Common:Backup");
       case "Common:PaymentsTitle":
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
@@ -223,8 +225,8 @@ const ArticleBodyContent = (props) => {
         return t("Ldap:LdapSettings");
       case "LdapSyncTitle":
         return t("Ldap:LdapSyncTitle");
-      case "RestoreBackup":
-        return t("RestoreBackup");
+      case "Common:RestoreBackup":
+        return t("Common:RestoreBackup");
       case "PortalDeletion":
         return t("PortalDeletion", { productName: t("Common:ProductName") });
       case "Common:DeveloperTools":
@@ -300,9 +302,7 @@ const ArticleBodyContent = (props) => {
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
 
-      const style = isLastIndex
-        ? { margin: `${item.key.includes(9) ? "16px 0px" : "0"}` }
-        : { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
+      const style = { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
 
       items.push(
         <ArticleItem
@@ -319,6 +319,8 @@ const ArticleBodyContent = (props) => {
           folderId={item.id}
           style={style}
           $currentColorScheme={currentColorScheme}
+          withAnimation={!isMobileView}
+          isEndOfBlock={isLastIndex}
         />,
       );
     });
@@ -347,7 +349,7 @@ export default inject(
 
     const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
-    const { isOwner } = user;
+    const { isOwner } = user || {};
     const {
       standalone,
       showText,

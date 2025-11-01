@@ -3,7 +3,7 @@
   "content": "The limit for storage space and the number of admins is about to be exceeded",
   "content_en_sha1_hash": "d027c31d4402ca3dc95163baea8f21e13ce3f84b",
   "created_at": "2025-05-19T21:30:54.135Z",
-  "updated_at": "2025-07-01T15:57:35.917Z",
+  "updated_at": "2025-10-01T08:28:21.900Z",
   "comment": {
     "text": "The \"StorageAndUserHeader\" translation key is used to display a header message when the storage space limit and number of admins are about to be exceeded. This message is likely displayed in a quota bar component on the user interface, such as in the MainBar's QuotasBar.js file. It informs users that they are approaching a critical threshold and prompts them to upgrade their tariff plan or take action to avoid exceeding the limits.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 277,
+      "line_number": 278,
       "context": "header: t(\"UserTariffLimitHeader\", { currentValue, maxValue }),\n description: getUserTariffLimit(),\n };\n case QuotaBarTypes.UserAndStorageTariff:\n return {\n header: t(\"StorageAndUserHeader\"),\n description: getUpgradeTariffDescription(),\n };\n case QuotaBarTypes.UserAndStorageTariffLimit:\n return {\n header: t(\"StorageAndUserTariffLimitHeader\"),",
       "module": "/packages/client"
     }
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"about to be exceeded\" isn't perfectly captured by \"على وشك أن يتم تجاوزه\". A more natural and accurate translation would convey a sense of impending limit.",
+          "description": "The phrase \"على وشك أن يتم تجاوزه\" (on the verge of being exceeded) is a bit verbose and formal for a user-facing notification. A more natural and concise phrasing would improve readability.",
           "suggestion": "الحد الأقصى لمساحة التخزين وعدد المسؤولين على وشك الوصول إلى الحد الأقصى."
         }
       ],
@@ -42,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'about to be exceeded' is not accurately conveyed by 'aşmaq üzrədir'. A more appropriate translation would emphasize the impending limit, such as 'çatdırılacaq' or 'yetersizlik baş verəcək'. 'Aşmaq üzrədir' implies something is going over a boundary, which is not the intended meaning of exceeding a limit.",
-          "suggestion": "Yaddaş və administratorlar limiti çatdırılacaq."
+          "description": "The phrase 'about to be exceeded' is not accurately translated. 'Aşmaq üzrədir' implies a near-immediate exceeding, while the English suggests a warning of approaching a limit.",
+          "suggestion": "Yaddaş və administratorlar limitlərinə yaxınlaşır."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure, while understandable, could be slightly improved for a more natural flow in Azerbaijani. Placing 'yaddaş' (storage) before 'administratorlar' (admins) is more common.",
+          "suggestion": "Administratorlar və yaddaş limitlərinə yaxınlaşır."
         }
       ],
       "approved_at": null
@@ -66,8 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrasing \"the number of admins\" is awkwardly translated as \"Admins\" in German. A more natural phrasing would incorporate \"die Anzahl der\" or similar.",
-          "suggestion": "Limits für Speicherplatz und die Anzahl der Administratoren werden bald überschritten sein."
+          "description": "The translation 'Limits für Speicherplatz und Admins werden bald überschritten sein' is a literal translation and doesn't quite convey the urgency and warning tone of the English. A more natural German phrasing would be needed.",
+          "suggestion": "Mögliche Alternativen: 'Der Speicherplatz und die Anzahl der Administratoren erreichen bald das Limit.' or 'Der Speicherplatz und die Admins stehen kurz vor der Überschreitung des Limits.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'Admins' is Anglicism. German uses 'Administratoren' or 'Adminsitratoren'.",
+          "suggestion": "Replace 'Admins' with 'Administratoren' or 'Adminsitratoren'"
         }
       ],
       "approved_at": null
@@ -87,7 +97,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'the number of admins' is not perfectly captured by 'ylläpitäjien määrän'. While technically correct, a more natural Finnish phrasing might be 'ylläpitäjien lukumäärä' or simply 'ylläpitäjien'.",
+          "suggestion": "Muisti ja ylläpitäjien lukumäärän raja on ylittymässä."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -108,8 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb tense in the Italian translation is slightly awkward. 'Stanno per essere superati' (are about to be exceeded) implies a passive voice and feels less direct than a more active phrasing.",
-          "suggestion": "Consider rephrasing to something like 'Si sta per superare il limite di spazio di archiviazione e il numero di amministratori.' (The limit for storage space and the number of admins is about to be exceeded - a more direct translation) or 'Il limite di spazio di archiviazione e il numero di amministratori è in procinto di essere superati.' (The limit for storage space and the number of admins is about to be exceeded - more formal)"
+          "description": "The verb tense in the Italian translation is awkward. \"Stanno per essere superati\" implies a passive voice construction where the limits themselves are exceeding something. A more natural phrasing would indicate that the system is nearing the limit.",
+          "suggestion": "I limiti di spazio di archiviazione e il numero di amministratori stanno per raggiungere il limite."
         }
       ],
       "approved_at": null
@@ -132,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"about to be exceeded\" is not accurately reflected in the Lao translation.  \"ກຳລັງຈະເກີນໄວໆນີ້\" translates more closely to 'will exceed soon' rather than conveying the 'about to' immediacy.",
-          "suggestion": "Consider revising to something like: \"ຂີດຈຳກັດສຳລັບເນື້ອທີ່ເກັບຮັກສາ ແລະ ຈຳນວນຜູ້ບໍລິຫານຈະເກີນໃນໄວໆນີ້\" or \"ເນື້ອທີ່ເກັບຮັກສາ ແລະ ຈຳນວນຜູ້ບໍລິຫານເກືອບເຕັມແລ້ວ\"."
+          "description": "The phrase \"about to be exceeded\" is not accurately reflected.  \"ເກີນໄວໆນີ້\" (geen vai vai ni) translates to 'soon' or 'very soon,' which implies immediate excess, rather than a warning of an impending limit. A more accurate rendering would convey the sense of approaching a limit.",
+          "suggestion": "ຂີດຈຳກັດສຳລັບເນື້ອທີ່ເກັບຮັກສາ ແລະ ຈຳນວນຜູ້ບໍລິຫານກຳລັງຈະເກີນຂີດໄວໆນີ້ (khit jamkat samlap neuas thi keo haksa lae chamnuan phu borihan kamlang cha geen khit vai vai ni)."
         }
       ],
       "approved_at": null
@@ -141,7 +157,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'the number of admins' is not directly represented in the Latvian translation. 'Administratoru' implies 'of admins' but doesn't explicitly mention 'the number of'. While understandable, it could be more precise.",
+          "suggestion": "Tūlīt tiks pārsniegti krātuves vietas un administratoru skaita ierobežojumi."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -156,13 +178,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"StorageAndUserHeader\" implies a combined concept of storage space and user administration. The Polish translation separates them (\"pamięci/użytkowników\"), which may lose the intended meaning. 'pamięci' refers to memory, not storage space. A more accurate translation would combine the concepts or clarify the relationship.",
+          "description": "The translation 'Limity pamięci/użytkowników z większą liczbą uprawnień zostaną wkrótce przekroczone.' is not a direct or accurate translation of 'The limit for storage space and the number of admins is about to be exceeded'. The phrase 'z większą liczbą uprawnień' (with a higher number of permissions) doesn't accurately reflect the English 'number of admins'. It implies users with elevated privileges rather than simply the number of administrators.",
           "suggestion": "Limity przestrzeni dyskowej i liczby administratorów zostaną wkrótce przekroczone."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'użytkowników z większą liczbą uprawnień' is overly literal and not the best way to express 'admins'. It's clunky and doesn't convey the specific meaning of administrative users.",
-          "suggestion": "Limity przestrzeni dyskowej i liczby administratorów zostaną wkrótce przekroczone."
+          "type": "spelling",
+          "description": "While 'pamięci' is technically correct, in this context, 'przestrzeni dyskowej' (disk space) is more accurate and natural-sounding.",
+          "suggestion": "Przestrzeni dyskowej"
         }
       ],
       "approved_at": null
@@ -185,13 +207,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation doesn't accurately convey the meaning of the English sentence. 'Limite de stocare pentru administratori' implies the limit applies *only* to administrators' storage, whereas the English implies a shared storage limit.  It also lacks the crucial element of 'about to be exceeded'.",
+          "description": "The Romanian translation 'Limite de stocare pentru administratori sunt pe punctul de a fi depăşiti.' is not a perfect translation of 'The limit for storage space and the number of admins is about to be exceeded.' It specifically mentions 'administrators' which isn't explicitly stated in the English text. It should refer to the combined limit for storage space and admin count.",
           "suggestion": "Limite de spațiu de stocare și numărul de administratori sunt pe punctul de a depăși limita."
         },
         {
           "type": "grammar",
-          "description": "The original Romanian sentence uses 'sunt' which implies a plural subject, but 'limite' is feminine singular. This creates a grammatical inconsistency.",
-          "suggestion": "This issue is resolved with the suggested correction above, using 'este' which is the feminine singular form of 'to be'."
+          "description": "While grammatically correct, the phrase 'sunt pe punctul de a fi depăşiti' is a bit convoluted. A simpler phrasing would improve readability.",
+          "suggestion": "vor fi depășite"
         }
       ],
       "approved_at": null
@@ -208,13 +230,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ධාරිතාව සහ පරිපාලකයින් සංඛ්‍යාව ඉක්මවීමට නියමිතය.' translates to 'The capacity and number of administrators are about to be exceeded.' While not entirely wrong, it doesn't perfectly capture the nuance of 'the limit'. A more accurate translation would include the concept of a threshold or boundary being reached.",
-          "suggestion": "ධාරිතාව සහ පරිපාලකයින් සංඛ්‍යාවේ සීමාව ඉක්මවීමට නියමිතය."
-        },
-        {
-          "type": "spelling",
-          "description": "While generally correct, ensuring 'ධාරිතාව' is the most appropriate term for 'storage space' in this context is vital. Depending on the specific type of storage, a different word might be better.",
-          "suggestion": "Consider if 'ගබඩාවේ ඉඩ' (gabadeva ida) or similar terms are more accurate based on the precise meaning of 'storage space'."
+          "description": "The translation 'ධාරිතාව සහ පරිපාලකයින් සංඛ්‍යාව ඉක්මවීමට නියමිතය.' does not accurately convey the meaning of 'The limit for storage space and the number of admins is about to be exceeded.' It translates to 'Capacity and the number of administrators are about to exceed.' It misses the specific mention of 'storage space'.",
+          "suggestion": "ධාරිතාව සහ පරිපාලකයින් සංඛ්‍යාව ඉක්ම යාමට නියමිතය."
         }
       ],
       "approved_at": null
@@ -222,13 +239,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"The limit for storage space and the number of admins is about to be exceeded\" is not perfectly captured by the Slovak translation. \"Objem úložísk\" is accurate for 'storage space', but 'maximálny počet administrátorov' is more formal and less conversational than the original. A better translation would convey the imminent nature of the exceeding.",
-          "suggestion": "Čoskoro dosiahneme limit pre úložný priestor a maximálny počet administrátorov."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -237,8 +248,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'about to be exceeded' is better translated as 'se bo kmalu presegla' rather than 'bodo kmalu presežene'. The latter implies multiple things will be exceeded.",
-          "suggestion": "Omejitve prostora za shranjevanje in število skrbnikov se bo kmalu presegla."
+          "description": "The English phrase \"The limit for storage space and the number of admins is about to be exceeded\" is better translated as something implying a warning or approaching a limit. The current translation, \"Omejitve prostora za shranjevanje in število skrbnikov bodo kmalu presežene,\" translates literally to 'The limits of storage space and the number of admins will soon be exceeded.' which sounds more like a statement of fact than a warning.",
+          "suggestion": "Preseganje omejitev prostora za shranjevanje in števila skrbnikov se približuje."
         }
       ],
       "approved_at": null
@@ -249,8 +260,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'about to be exceeded' is not perfectly conveyed by 'ће ускоро бити прекорачена'. While not strictly incorrect, a more natural and precise translation would better reflect the urgency.",
-          "suggestion": "Consider 'скоро ће бити прекорачена' or 'близу је прекорачења'."
+          "description": "The English phrase 'about to be exceeded' doesn't translate directly to 'ће ускоро бити прекорачена' in a way that conveys the intended urgency. While technically correct, it sounds somewhat formal and less impactful. A more natural and urgent phrasing would better reflect the original meaning.",
+          "suggestion": "Consider alternatives like 'скоро ће бити прекорачена' or 'близу је прекорачења'."
         }
       ],
       "approved_at": null
@@ -261,8 +272,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'the limit for storage space and the number of admins is about to be exceeded' is not perfectly conveyed by the Serbian translation. 'Ograničenja skladišta i administratora će uskoro biti prekoračena' translates literally as 'The limits of storage and administrators will soon be exceeded.' While understandable, it's less natural. A more accurate phrasing would emphasize *reaching* the limit.",
-          "suggestion": "A better translation might be: 'Uskoro će se dostići limit skladišnog prostora i broja administratora.' (Soon the limit of storage space and number of administrators will be reached.) or 'Skladišni prostor i broj administratora uskoro će doseći granicu.' (Storage space and the number of administrators will soon reach the limit.)"
+          "description": "The English phrase 'about to be exceeded' is not perfectly captured by 'će uskoro biti prekoračena'. A more accurate translation would convey a sense of impending limit, like 'pripremaju se za prekoračenje' or 'blizu su prekoračenja'.",
+          "suggestion": "Pripremaju se za prekoračenje"
         }
       ],
       "approved_at": null
@@ -273,13 +284,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Depolama ve yöneticiler limitleri aşılmak üzere.\" is a passive construction that doesn't quite convey the original English's sense of impending action. It implies that the limits *will* be exceeded, rather than are *about to* be exceeded.  A more accurate translation would emphasize the immediacy.",
-          "suggestion": "Depolama alanı ve yönetici sayısı limitlerine yaklaşıyor."
+          "description": "The Turkish translation 'Depolama ve yöneticiler limitleri aşılmak üzere.' is a passive construction that doesn't quite convey the urgency of the English. It implies the limit *will* be exceeded, rather than 'is about to be'. A more accurate translation would emphasize the impending nature of the exceeding.",
+          "suggestion": "Depolama alanı ve yönetici sayısı sınırları yakında aşılacak."
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the translation lacks a more natural flow. Combining 'Depolama alanı' and 'yönetici sayısı' creates a slightly awkward phrasing.",
-          "suggestion": "Depolama alanı ve yönetici sayısı limitlerine yaklaşıyor."
+          "type": "grammar",
+          "description": "While not strictly incorrect, the phrasing 'aşılmak üzere' sounds slightly awkward and less natural in this context. The more common phrasing for 'about to be exceeded' would utilize a future tense.",
+          "suggestion": "Depolama alanı ve yönetici sayısı sınırları yakında aşılacak."
         }
       ],
       "approved_at": null
@@ -290,13 +301,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Обмеження сховища та обмеження для адміністраторів скоро буде перевищено' is not the most natural or accurate rendering of 'The limit for storage space and the number of admins is about to be exceeded'. Specifically, the repeated use of 'обмеження' (limit) is somewhat clunky. A more fluid translation would convey the same meaning.",
-          "suggestion": "Зона сховища та кількість адміністраторів скоро перевищить допустимі значення."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'скоро' (soon) might not be the best fit depending on the context. It might be better to convey the imminence of the exceeding.",
-          "suggestion": "Зона сховища та кількість адміністраторів незабаром перевищить допустимі значення."
+          "description": "The translation 'Обмеження сховища та обмеження для адміністраторів скоро буде перевищено' is a bit awkward. While technically correct, it repeats 'обмеження' (limitation/restriction). It reads less naturally in Ukrainian.",
+          "suggestion": "Зростає ризик перевищення ліміту сховища та кількості адміністраторів."
         }
       ],
       "approved_at": null
@@ -307,13 +313,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'the number of admins' is not accurately reflected in the Vietnamese translation. 'Quản trị viên' simply translates to 'administrator' and doesn't convey the concept of a *limit* or a *number* exceeding a threshold.",
-          "suggestion": "Sắp vượt quá giới hạn lưu trữ và số lượng quản trị viên."
+          "description": "The translation 'Sắp vượt quá giới hạn lưu trữ và quản trị viên.' doesn't fully capture the meaning of 'The limit for storage space and the number of admins is about to be exceeded.' The Vietnamese translation implies only the limits are being exceeded, but the English emphasizes that *they* (storage space and admin number) are approaching the limit.",
+          "suggestion": "Sắp đạt giới hạn lưu trữ và số lượng quản trị viên."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the sentence structure in Vietnamese could be improved for naturalness. Adding a conjunction like 'và' before 'quản trị viên' creates a smoother flow. Although present, it feels somewhat abrupt.",
-          "suggestion": "Sắp vượt quá giới hạn lưu trữ và số lượng quản trị viên."
+          "description": "While not a major issue, a more natural flow might benefit from a conjunction.",
+          "suggestion": "Sắp đạt giới hạn lưu trữ và số lượng quản trị viên."
         }
       ],
       "approved_at": null

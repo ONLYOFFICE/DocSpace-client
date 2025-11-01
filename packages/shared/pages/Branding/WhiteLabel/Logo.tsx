@@ -29,6 +29,7 @@ import { Link, LinkType } from "../../../components/link";
 import { getLogoFromPath, isMobile } from "../../../utils";
 
 import { ILogoProps } from "./WhiteLabel.types";
+import styles from "./WhiteLabel.module.scss";
 
 export const Logo = (props: ILogoProps) => {
   const {
@@ -41,9 +42,10 @@ export const Logo = (props: ILogoProps) => {
     linkId,
     imageClass,
     name,
+    dataTestId,
   } = props;
 
-  const currentLogo = getLogoFromPath(src);
+  const currentLogo = getLogoFromPath(src) as string;
 
   const onLogoClick = () => {
     if (!isMobile()) return;
@@ -52,7 +54,7 @@ export const Logo = (props: ILogoProps) => {
 
   return (
     <div>
-      <div className="logo-item">
+      <div className={styles.logoItem}>
         {title ? (
           <Text
             fontSize="13px"
@@ -75,7 +77,8 @@ export const Logo = (props: ILogoProps) => {
           data-testid={inputId}
           id={inputId}
           type="file"
-          className="hidden"
+          accept=".png, .jpg, .jpeg, .svg"
+          className={styles.hidden}
           onChange={onChange}
           disabled={!isSettingPaid}
         />
@@ -85,6 +88,7 @@ export const Logo = (props: ILogoProps) => {
           isHovered
           type={LinkType.action}
           className="settings_unavailable"
+          dataTestId={dataTestId}
         >
           {onChangeText}
         </Link>

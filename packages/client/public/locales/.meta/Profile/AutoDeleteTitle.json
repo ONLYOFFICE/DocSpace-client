@@ -3,7 +3,7 @@
   "content": "All the sessions older than 60 days will be automatically deleted.",
   "content_en_sha1_hash": "42cea0e4de85140efc8de6763eece38362e5d638",
   "created_at": "2025-05-19T21:30:53.337Z",
-  "updated_at": "2025-05-28T09:30:02.817Z",
+  "updated_at": "2025-08-11T18:11:59.299Z",
   "comment": {
     "text": "The translation key \"AutoDeleteTitle\" is used to display a message that explains the automatic deletion policy of inactive sessions. In this case, it would be used to show the reason behind deleting old sessions automatically. It appears in the UI as a placeholder text and needs to be replaced with a localized version after fixing the backend issue.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/active-session/index.js",
-      "line_number": 162,
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/active-session/index.js",
+      "line_number": 154,
       "context": "<Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Profile:ActiveSessions\")}\n </Text>\n \n {/* TODO: Uncomment after fix on backend */}\n {/* <Text className=\"auto-delete-title\">{t(\"Profile:AutoDeleteTitle\")}</Text> */}\n \n <div className=\"terminate-session-container\">\n <Link\n className=\"terminate-all-sessions\"\n type=\"action\"",
       "module": "/packages/client"
     }
@@ -35,9 +35,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'sessiyalar' is potentially misspelled. It should likely be 'seanslar' for a more natural and accurate translation of 'sessions'.",
+          "suggestion": "seanslar"
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The translation '60 gündən köhnə bütün sessiyalar avtomatik silinəcək' while understandable, isn't the most natural or idiomatic way to express the English sentence. A better phrasing would emphasize the automatic deletion applies to all sessions older than 60 days.",
-          "suggestion": "60 gündən artıq olan bütün sessiyalar avtomatik silinəcək."
+          "description": "While 'sessiyalar' is understandable, 'seanslar' is a more precise translation of 'sessions' in this context.",
+          "suggestion": "seanslar"
         }
       ],
       "approved_at": null
@@ -45,13 +50,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Bulgarian translation 'Всички по-стари от 60 дни сесии ще бъдат автоматично изтрити' is grammatically correct, but slightly awkward. A more natural phrasing would place 'автоматично' earlier.",
-          "suggestion": "Всички сесии, по-стари от 60 дни, ще бъдат автоматично изтрити."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -72,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"sessions\" is translated as \"περίοδοι λειτουργίας\" which is too literal and doesn't convey the intended meaning of user sessions in a software context. A better translation would be closer to \"λογαριασμοί\" or \"συνεδρίες\".",
-          "suggestion": "Consider using \"λογαριασμοί\" (accounts) or \"συνεδρίες\" (sessions) for a more accurate translation of 'sessions'."
+          "description": "The term 'sessions' is translated as 'περίοδοι λειτουργίας' which is a more literal translation of 'periods of operation'. While understandable, a more natural and accurate translation of 'sessions' in this context would be 'συνεδρίες' or 'ημερομηνίες σύνδεσης'.",
+          "suggestion": "Όλες οι συνεδρίες που είναι παλαιότερες από 60 ημέρες θα διαγραφούν αυτόματα."
         }
       ],
       "approved_at": null
@@ -101,9 +100,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"60 օրից բոլոր հին սեանսները ինքնաբերաբար կջնջվեն։\" is a literal translation but doesn't flow naturally in Armenian. The word order is a bit awkward. \"Հին\" (old) might not be the best descriptor here, as 'sessions' are just old, not necessarily 'old' in terms of age.",
-          "suggestion": "Consider rephrasing to something like: \"Բոլոր սեանսները, որոնք ավելի քան 60 օրվա են, ինքնաբերաբար ջնջվելու են։\" or \"60 օր ավելի քան հասակ առած բոլոր սեանսները ինքնաբերաբար ջնջվելու են։\""
+          "type": "spelling",
+          "description": "The word 'sessions' is transliterated as 'սեանսները'. While technically correct, 'ժամանցներ' or 'գրաբառներ' might be more natural depending on the context of 'sessions' here.",
+          "suggestion": "Consider using 'ժամանցներ' or 'գրաբառներ' if 'sessions' refers to user activities or data sessions respectively. Otherwise, 'սեանսները' is acceptable."
         }
       ],
       "approved_at": null
@@ -131,14 +130,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ການນັ່ງ' (kan nang) which translates to 'sitting' is used instead of 'data' or 'records'. This is an incorrect term in this context.",
-          "suggestion": "ການບັນທຶກຂໍ້ມູນ"
+          "type": "incorrect_translation",
+          "description": "The term \"ການນັ່ງຖະຫວ່າງ\" (kan nang tha wang) literally translates to \"sitting/seats\". It's not the correct term to describe 'sessions' in this context. It should refer to data sessions or activity logs.",
+          "suggestion": "Consider using a more appropriate Lao term for 'sessions' or 'data' depending on the intended meaning. Possible alternatives could involve terms related to 'ຂໍ້ມູນ' (khom moon - data) or 'ກິດຈະກຳ' (kit cha kam - activity)."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The overall meaning is slightly off. 'ການນັ່ງ' doesn't accurately convey the concept of 'sessions' in this context. It implies physical sitting.",
-          "suggestion": "ການເຮັດວຽກ"
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure could be more natural in Lao. The placement of 'ຈະຖືກລົບອອກ' might sound slightly awkward.",
+          "suggestion": "Consider restructuring the sentence to something like: 'ຂໍ້ມູນກິດຈະກຳທີ່ເກີນ 60 ມື້ ຈະຖືກລົບອອກໂດຍອັດຕະໂນມັດ' (Khom moon kit cha kam thi koen 60 mue cha thuk lob ok doi attathommat)."
         }
       ],
       "approved_at": null
@@ -179,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Toate sesiunile vor fi șterse automat în termen de 60 de zile' is a bit wordy and could be more concise. 'In termen de' translates to 'within' or 'in terms of', which isn't the most natural phrasing in this context. It implies a timeframe for the deletion, but the original implies the sessions are deleted *after* 60 days.",
-          "suggestion": "Toate sesiunile mai vechi de 60 de zile vor fi șterse automat."
+          "description": "The translation 'Toate sesiunile vor fi șterse automat în termen de 60 de zile' is not a direct or ideal translation of 'All the sessions older than 60 days will be automatically deleted.'. The phrase 'in termen de' (within) implies a timeframe, but the original English emphasizes the age of the sessions. A more accurate translation would reflect the age directly.",
+          "suggestion": "Toate sesiunile cu o vechime mai mare de 60 de zile vor fi șterse automat."
         }
       ],
       "approved_at": null
@@ -196,14 +195,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'sessions' (සැසි) is translated correctly, but the overall sentence structure feels slightly unnatural in Sinhala. A more fluent translation might be better.",
-          "suggestion": "සියලුම සැසි 60 දිනකට පෙර ඇති නම් ඒවා ස්වයංක්‍රීයව මකා දමනු ලැබේ."
+          "type": "spelling",
+          "description": "The word 'සියලුම' (siyallum) is spelled correctly, but a slightly more natural phrasing might be 'සියළු' (siyalu).",
+          "suggestion": "සියළු"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'නම්, ඒවා' (nam, elawa) is slightly awkward.  A more fluent phrasing would connect the sentences better.",
+          "suggestion": "නම්, ඒවා ස්වයංක්‍රීයව මකා දමනු ලැබේ."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the word 'නම්' following the date is a bit clunky. It feels like an unnecessary repetition of the concept of 'if'.",
-          "suggestion": "සියලුම සැසි 60 දිනකට පෙර ඇති විට ඒවා ස්වයංක්‍රීයව මකා දමනු ලැබේ."
+          "description": "While not strictly incorrect, using a period at the end of the Sinhala sentence would be more common in formal writing.",
+          "suggestion": "සියළුම සැසි 60 දිනට වඩා පැරණි නම්, ඒවා ස්වයංක්‍රීයව මකා දමනු ලැබේ."
         }
       ],
       "approved_at": null
@@ -223,7 +227,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Све сесије старије од 60 дана ће бити аутоматски избрисане.\" is a technically correct translation, but could be more natural and user-friendly. The word 'избрисане' (deleted) sounds a bit formal and abrupt in this context. A more colloquial and friendly phrasing would improve the user experience.",
+          "suggestion": "Све сесије старије од 60 дана биће аутоматски обрисане."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -250,13 +260,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tất cả các phiên giao dịch trên 60 ngày sẽ tự động bị xóa\" is a literal translation and might not be the most natural way to express the meaning in Vietnamese. 'Sessions' is not directly equivalent to 'phiên giao dịch' and can be more broadly interpreted.",
-          "suggestion": "Tất cả các phiên làm việc cũ hơn 60 ngày sẽ tự động bị xóa."
+          "description": "The translation 'Tất cả các phiên giao dịch trên 60 ngày sẽ tự động bị xóa.' doesn't fully capture the meaning of 'sessions'. 'Sessions' in this context likely refers to user sessions or login sessions, not financial transactions. 'Giao dịch' translates to 'transaction'.",
+          "suggestion": "Tất cả các phiên đăng nhập/phiên làm việc cũ hơn 60 ngày sẽ tự động bị xóa."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term 'phiên giao dịch' (transaction sessions) sounds too transactional.  'Sessions' in this context likely refers to user sessions or activity logs, not financial transactions.",
-          "suggestion": "Tất cả các phiên sử dụng/hoạt động cũ hơn 60 ngày sẽ tự động bị xóa."
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrase 'trên 60 ngày' could be improved for flow.  'Cũ hơn 60 ngày' is more common and natural.",
+          "suggestion": "Cũ hơn 60 ngày"
         }
       ],
       "approved_at": null

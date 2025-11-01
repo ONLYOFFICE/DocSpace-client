@@ -29,10 +29,10 @@ import { useDropzone } from "react-dropzone";
 import classNames from "classnames";
 
 import { Loader, LoaderTypes } from "../loader";
-import { ColorTheme, ThemeId } from "../color-theme";
 
 import { DropzoneProps } from "./Dropzone.types";
 import styles from "./Dropzone.module.scss";
+import { Link } from "../link";
 
 const Dropzone = ({
   isLoading,
@@ -43,6 +43,7 @@ const Dropzone = ({
   linkMainText,
   linkSecondaryText,
   exstsText,
+  dataTestId,
 }: DropzoneProps) => {
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles,
@@ -57,7 +58,7 @@ const Dropzone = ({
       className={classNames(styles.dropzoneWrapper, {
         [styles.isLoading]: isLoading,
       })}
-      data-testid="dropzone"
+      data-testid={dataTestId ?? "dropzone"}
       aria-busy={isLoading}
       aria-disabled={isDisabled}
     >
@@ -88,15 +89,15 @@ const Dropzone = ({
             aria-live="polite"
             aria-relevant="additions removals"
           >
-            <ColorTheme
+            <Link
               className={classNames(styles.dropzoneLink, {
                 [styles.main]: true,
               })}
-              themeId={ThemeId.Link}
               data-testid="dropzone-main-text"
+              color="accent"
             >
               {linkMainText}
-            </ColorTheme>
+            </Link>
             <span
               className={classNames(styles.dropzoneLink, {
                 [styles.secondary]: true,

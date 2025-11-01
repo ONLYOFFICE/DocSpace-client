@@ -44,6 +44,7 @@ export const EmailInput = ({
   handleAnimationStart,
   onChange,
   onBlur,
+  dataTestId,
   ...rest
 }: EmailInputProps) => {
   const [inputValue, setInputValue] = React.useState(value);
@@ -103,7 +104,7 @@ export const EmailInput = ({
       onChange={handleChange}
       onBlur={onBlur}
       onAnimationStart={handleAnimationStart}
-      testId="email-input"
+      testId={dataTestId ?? "email-input"}
     />
   );
 };

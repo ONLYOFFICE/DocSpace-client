@@ -89,7 +89,7 @@ const PluginSDK = ({
         <div className="plugin-list__item-info">
           <img
             className="plugin-logo"
-            src={`${p.iconUrl}/assets/${p.image}`}
+            src={`${p.iconUrl}/assets/${p.image}?hash=${p.version}`}
             alt="Plugin logo"
           />
           <div className="plugin-info-container">
@@ -108,6 +108,7 @@ const PluginSDK = ({
           scale
           label={t("GoToRepo")}
           size="small"
+          testId={`${p.name}_go_to_repo_button`}
         />
       </div>
     ));
@@ -145,6 +146,7 @@ const PluginSDK = ({
         scale={isMobile}
         size={isMobile ? "normal" : "small"}
         onClick={() => window.open(apiPluginSDKLink, "_blank")}
+        testId="read_instructions_button"
       />
       {!isEmptyList && list.length > 0 ? (
         <>

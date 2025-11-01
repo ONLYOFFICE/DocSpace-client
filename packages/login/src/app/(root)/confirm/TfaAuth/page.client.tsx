@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { ChangeEvent, useContext, useState } from "react";
 
 import { validateTfaCode } from "@docspace/shared/api/settings";
-import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
@@ -41,10 +41,6 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import {
-  TGetColorTheme,
-  TPasswordHash,
-} from "@docspace/shared/api/settings/types";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
@@ -53,17 +49,10 @@ import { useSearchParams } from "next/navigation";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 type TfaAuthFormProps = {
-  passwordHash: TPasswordHash;
-  userName?: string;
   defaultPage?: string;
-  colorTheme?: TGetColorTheme;
 };
 
-const TfaAuthForm = ({
-  passwordHash,
-  userName,
-  defaultPage = "/",
-}: TfaAuthFormProps) => {
+const TfaAuthForm = ({ defaultPage = "/" }: TfaAuthFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -82,11 +71,7 @@ const TfaAuthForm = ({
     try {
       setIsLoading(true);
 
-      // if (userName && passwordHash?.salt) {
-      // await loginWithTfaCode(userName, passwordHash.salt, code);
-      // } else {
       await validateTfaCode(code, confirmHeader);
-      // }
 
       let confirmData = "";
       try {
@@ -113,8 +98,8 @@ const TfaAuthForm = ({
       }
 
       window.location.replace(referenceUrl || defaultPage);
-    } catch (error) {
-      const knownError = error as TError;
+    } catch (e) {
+      const knownError = e as TError;
       let errorMessage: string;
 
       if (typeof knownError === "object") {
@@ -158,7 +143,7 @@ const TfaAuthForm = ({
         <div className="app-code-input">
           <FieldContainer
             labelVisible={false}
-            hasError={error ? true : false}
+            hasError={!!error}
             errorMessage={error}
           >
             <TextInput
@@ -174,8 +159,9 @@ const TfaAuthForm = ({
               maxLength={6}
               onChange={onChangeInput}
               value={code}
-              hasError={error ? true : false}
+              hasError={!!error}
               onKeyDown={onKeyPress}
+              testId="app_code_input"
             />
           </FieldContainer>
         </div>
@@ -193,6 +179,7 @@ const TfaAuthForm = ({
             isDisabled={!code.length || isLoading}
             isLoading={isLoading}
             onClick={onSubmit}
+            testId="app_code_continue_button"
           />
         </div>
       </div>

@@ -16,13 +16,12 @@ type ReducedRightsDialogProps = {
   visible: boolean;
   adminName: string;
   setReducedRightsData: (visible: boolean, admin?: string) => void;
-  personalUserFolderTitle?: string;
 };
 
 const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   visible,
   adminName,
-  personalUserFolderTitle,
+
   setReducedRightsData,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -59,7 +58,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
             t={t}
             ns="Files"
             i18nKey="PersonalContentRemovalNotice"
-            values={{ sectionName: personalUserFolderTitle }}
+            values={{ sectionName: t("Common:MyDocuments") }}
             components={{ 1: <span style={{ fontWeight: 600 }} /> }}
           />
         </StyledText>
@@ -81,7 +80,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
         <Button
           key="RedirectButton"
           label={t("Files:GoToSection", {
-            sectionName: t("Common:MyFilesSection"),
+            sectionName: t("Common:MyDocuments"),
           })}
           size={ButtonSize.normal}
           onClick={onRedirect}
@@ -92,15 +91,12 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   );
 };
 
-export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
+export default inject(({ dialogsStore }: TStore) => {
   const { reducedRightsData, setReducedRightsData } = dialogsStore;
-
-  const { personalUserFolderTitle } = treeFoldersStore;
 
   return {
     visible: reducedRightsData.visible,
     adminName: reducedRightsData.adminName,
     setReducedRightsData,
-    personalUserFolderTitle,
   };
 })(observer(ReducedRightsDialog));

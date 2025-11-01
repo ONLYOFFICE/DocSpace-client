@@ -3,7 +3,7 @@
   "content": "Backup file",
   "content_en_sha1_hash": "67b337d3326176a2feb444a78910349c3856d07a",
   "created_at": "2025-05-19T21:30:50.668Z",
-  "updated_at": "2025-05-28T09:30:02.522Z",
+  "updated_at": "2025-09-07T07:53:15.241Z",
   "comment": {
     "text": "Backup file label is displayed when selecting a backup file for data import, appearing on a file input field in data import components.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 401,
+      "line_number": 400,
       "context": "scale\n onInput={onSelectFile}\n className=\"upload-backup-input\"\n placeholder={\n (migratingWorkspace === migratorName && files && files.join(\",\")) ||\n t(\"Settings:BackupFile\")\n }\n isDisabled={\n fileLoadingStatus === \"upload\" || fileLoadingStatus === \"proceed\"\n }\n accept={acceptedExtensions}",
       "module": "/packages/client"
     }
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Zálohovať súbor\" literally translates to \"To backup file\". It doesn't directly mean \"Backup file\" as the English key does. A more accurate translation would be \"Záložný súbor\".",
-          "suggestion": "Záložný súbor"
+          "description": "The Slovak translation \"Zálohovať súbor\" literally translates to \"To backup file\". It's not the standard terminology for a backup file. A more accurate translation would convey the concept of a 'backup file' itself, not the action of backing it up.",
+          "suggestion": "Súbor zálohy"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Резервна датотека' has a spelling error. The 'на' should be 'на'.",
-          "suggestion": "Резервна датотека -> Резервна датотека"
+          "description": "The Serbian (Cyrillic) translation uses the word 'датотека' which is generally understood, but 'резервна копија' is the more common and preferred term for 'backup file'.",
+          "suggestion": "Резервна копија"
         }
       ],
       "approved_at": null

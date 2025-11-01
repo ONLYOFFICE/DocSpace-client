@@ -28,12 +28,10 @@ import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
-import ImageReactSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
+import ImageReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import { Link } from "../../link";
 import { Badge } from "../../badge";
-import { ColorTheme } from "../../color-theme/ColorTheme";
-import { ThemeId } from "../../color-theme/ColorTheme.enums";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 import { FileType } from "../../../enums";
@@ -41,6 +39,7 @@ import { FileType } from "../../../enums";
 import { FileTile } from "./FileTile";
 import { FileTileProps } from "./FileTile.types";
 import { TileContent } from "../tile-content/TileContent";
+import { IconButton } from "../../icon-button";
 
 const element = (
   <ReactSVG
@@ -86,17 +85,16 @@ const badges = (
 
 const contentElement = (
   <div className="badges">
-    <ColorTheme
-      themeId={ThemeId.IconButton}
+    <IconButton
       iconName={LockedReact12SvgUrl}
-      className="badge lock-file icons-group"
+      className="badge lock-file icons-group file-locked"
       size={IconSizeType.medium}
       data-id="file-lock"
       data-locked={false}
       onClick={() => {}}
       color="#A3A9AE"
       isDisabled={false}
-      hoverColor="#A3A9AE"
+      hoverColor="accent"
       title="Lock file"
     />
   </div>

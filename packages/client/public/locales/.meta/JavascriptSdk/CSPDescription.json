@@ -2,23 +2,95 @@
   "key_path": "CSPDescription",
   "content": "Enter the address of the service where you'd like to embed or connect your {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "a26d626ec3c5f0e569e9b657e92364de7923d62c",
-  "created_at": "2025-05-28T09:33:07.501Z",
-  "updated_at": "2025-05-28T09:34:21.016Z",
+  "created_at": "2025-06-08T12:02:20.095Z",
+  "updated_at": "2025-09-17T13:43:01.794Z",
   "comment": {
-    "text": "This translation key provides a text that will be displayed to users when they need to enter an address of a service to embed or connect their organization's product. The text explains the required action in simple terms. It appears on a page related to portal settings and is likely used as a help message or tooltip.",
+    "text": "Enter the address of the service where you'd like to embed or connect your organization's product. This field is used in a connection settings dialog for inputting a Content Security Policy (CSP) policy related to embedding or connecting an organization's {{productName}}.",
     "is_auto": true,
-    "updated_at": "2025-05-28T09:34:21.016Z"
+    "updated_at": "2025-06-08T12:02:59.258Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 225,
+      "line_number": 220,
       "context": "<>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n <HelpButton\n className=\"csp-helpbutton\"",
       "module": "/packages/client"
     }
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

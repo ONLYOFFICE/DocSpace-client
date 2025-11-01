@@ -3,7 +3,7 @@
   "content": "Submit your form to the public gallery to let others use it in their work. Once the form passes moderation, you will be notified and rewarded for your contribution.",
   "content_en_sha1_hash": "29f95dfb00ec59cea1ce9b04b7538cd849574569",
   "created_at": "2025-05-19T21:30:55.120Z",
-  "updated_at": "2025-05-28T09:30:02.303Z",
+  "updated_at": "2025-10-13T14:41:02.836Z",
   "comment": {
     "text": "\"This translation key is used to display instructions and guidelines on how to submit a form to the public gallery for use by others. It appears in a modal dialog when the user submits their form and is designed to inform them about the moderation process and potential rewards.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 152,
-      "context": "return (\n <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:SubmitToFormGallery\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>{t(\"FormGallery:SubmitToGalleryDialogMainInfo\")}</div>\n <div>\n <Trans\n t={t}\n i18nKey=\"SubmitToGalleryDialogGuideInfo\"\n ns=\"FormGallery\"",
+      "line_number": 160,
+      "context": "autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:SubmitToFormGallery\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"info\">\n {t(\"FormGallery:SubmitToGalleryDialogMainInfo\")}\n </div>\n <div className=\"info\">\n <Trans\n t={t}\n i18nKey=\"SubmitToGalleryDialogGuideInfo\"",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"السماح للمستخدمين استخدامه\" (allowing users to use it) is a bit awkward. A more natural phrasing would be \"ليتمكن الآخرون من استخدامه\" (so others can use it).",
-          "suggestion": "قم بتسليم النموذج الخاص بك إلى المعرض العام لكي يتمكن الآخرون من استخدامه في أعمالهم."
+          "description": "The phrase \"السماح للمستخدمين استخدامه\" is a bit awkward. A more natural phrasing would be \"ليتمكن المستخدمون من استخدامه\" or \"لاستخدامهم في أعمالهم\".",
+          "suggestion": "قم بتسليم النموذج الخاص بك إلى المعرض العام لتمكين المستخدمين من استخدامه في أعمالهم."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"بمجرد أن يتم قبول النموذج\" (once the form is accepted) can be improved. A more natural and concise phrasing would be \"عندما يتم اعتماد النموذج\" (when the form is approved/validated).",
-          "suggestion": "قم بتسليم النموذج الخاص بك إلى المعرض العام لكي يتمكن الآخرون من استخدامه في أعمالهم. عندما يتم اعتماد النموذج سيتم إعلامك وسيتم مكافئتك على مساهمتك."
+          "description": "The word 'moderation' is not explicitly translated.  A more accurate translation would convey the meaning of review process.",
+          "suggestion": "قم بتسليم النموذج الخاص بك إلى المعرض العام للسماح للمستخدمين استخدامه في أعمالهم. بمجرد أن يتم مراجعة النموذج والموافقة عليه سيتم إعلامك وسيتم مكافئتك على مساهمتك."
         }
       ],
       "approved_at": null
@@ -47,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Bu otağın sahibi sizsiniz. Otağı tərk etməzdən əvvəl sahib rolunu başqa istifadəçiyə ötürməlisiniz.' translates to 'You are the owner of this room. Before leaving the room, you must transfer the owner role to another user.' This does not accurately convey the original English meaning, which describes submitting a form to a public gallery.",
-          "suggestion": "A more accurate translation would be something like: 'Formunuzu ictimai qalereyaya göndərin ki başqaları işlərində istifadə eləsinlər. Formunuz moderasiyadan keçdikdən sonra bildiriləcəksiniz və töhfənizə görə mükafatlandırılacaqsınız.' (Submit your form to the public gallery so that others can use it in their work. You will be notified when your form passes moderation and rewarded for your contribution.)"
+          "description": "The Azerbaijani translation \"Bu otağın sahibi sizsiniz. Otağı tərk etməzdən əvvəl sahib rolunu başqa istifadəçiyə ötürməlisiniz.\" translates to \"You are the owner of this room. Before leaving the room, you must transfer the owner role to another user.\" This does not accurately reflect the English content about submitting a form to a public gallery and receiving rewards.",
+          "suggestion": "A more accurate translation would be something like: \"Formunuzu ictimai qalereyaya göndərin ki başqaları işləri üçün ondan istifadə edə bilsin. Form moderasyadan keçdikdən sonra sizə bildiriləcək və töhfənizə görə mükafatlandırılacaqsınız.\""
         }
       ],
       "approved_at": null
@@ -59,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation completely misses the meaning of the English content. It states 'You are the owner of this room. Before leaving the room, you must transfer the owner role to another user.' which is unrelated to submitting a form to a public gallery.",
-          "suggestion": "The translation needs to accurately convey the meaning of submitting a form to a public gallery and receiving a reward after moderation. A possible suggestion: 'Изпратете своя формуляр в публична галерия, за да могат други да го използват в работата си. След като формулярът премине модерация, ще бъдете уведомени и възнаградени за приноса си.'"
+          "description": "The Bulgarian translation completely misses the meaning of the English content. It translates to something about transferring ownership of a room before leaving, which is unrelated to submitting a form to a public gallery.",
+          "suggestion": "The translation needs to accurately convey the meaning of submitting a form to a public gallery, including aspects of moderation, notification, and reward. A possible suggestion would be: 'Изпратете формуляра си в публична галерия, за да могат други потребители да го използват в работата си. След одобрение от модераторите, ще бъдете уведомени и наградени за вашия принос.'"
         }
       ],
       "approved_at": null
@@ -71,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation does not accurately reflect the English content. It discusses transferring ownership of a room, whereas the English text is about submitting a form to a public gallery.",
-          "suggestion": "The translation needs to be completely rewritten to reflect the original meaning of submitting a form to a public gallery, including notification and rewards for contribution."
+          "description": "The Czech translation 'Majitelem této místnosti jste vy. Než místnost opustíte, musíte roli vlastníka převést na jiného uživatele.' does not accurately reflect the meaning of the English content. It translates to 'You are the owner of this room. Before you leave the room, you must transfer the owner role to another user.' This is unrelated to submitting a form to a public gallery.",
+          "suggestion": "A more accurate translation would convey the action of submitting a form to a public gallery and receiving notification and reward for contributing. For example: 'Odesláním formuláře do veřejné galerie umožníte ostatním jej využít. Po schválení administrátory budete odesláni upozornění a odměněni za váš příspěvek.' (Submitting the form to the public gallery allows others to use it. After administrator approval, you will receive a notification and be rewarded for your contribution.)"
         }
       ],
       "approved_at": null
@@ -89,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation is completely unrelated to the English content. It translates to \"You are the owner of this room. Before leaving the room, you must transfer the owner role to another user.\" This does not convey the meaning of submitting a form to a public gallery.",
-          "suggestion": "The translation needs to be rewritten to accurately reflect the English content. A possible suggestion would be: \"Υποβάλετε τη φόρμα σας στη δημόσια γκαλερί για να μπορούν άλλοι να τη χρησιμοποιήσουν στην εργασία τους. Αφού η φόρμα εγκριθεί από τους επιθεωρητές, θα ειδοποιηθείτε και θα λάβετε ανταμοιβή για τη συνεισφορά σας.\""
+          "description": "The Greek translation is completely unrelated to the English content. It discusses transferring ownership of a room, which has nothing to do with submitting a form to a gallery.",
+          "suggestion": "The translation should accurately reflect the English text: 'Υποβάλετε τη φόρμα σας στη δημόσια γκαλερί για να μπορούν άλλοι να τη χρησιμοποιήσουν στην εργασία τους. Μόλις η φόρμα περάσει από έλεγχο, θα ειδοποιηθείτε και θα αμειφθείτε για τη συνεισφορά σας.'"
         }
       ],
       "approved_at": null
@@ -107,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation completely fails to convey the meaning of the English content. It states 'You are the owner of this room. You must transfer the owner role to another user before leaving the room.' which is unrelated to submitting a form to a public gallery.",
-          "suggestion": "A correct translation would convey the meaning of submitting a form to a public gallery, receiving moderation approval, and potential rewards. For example: 'Lähetä lomake julkiseen galleriaan, jotta muut voivat käyttää sitä työssään. Kun lomake on läpäissyt tarkastuksen, saat ilmoituksen ja palkinnon panoksestasi.' (Submit your form to the public gallery so that others can use it in their work. When the form passes moderation, you will receive a notification and a reward for your contribution.)"
+          "description": "The Finnish translation completely misses the meaning of the English content. It talks about room ownership and transferring roles, which is irrelevant to submitting a form to a public gallery.",
+          "suggestion": "The translation should convey the idea of submitting a form to a public gallery, allowing others to use it and receiving a reward upon moderation. A possible suggestion: 'Lähetä lomake julkiseen galleriaan, jotta muut voivat käyttää sitä työssään. Kun lomake on läpäissyt tarkastuksen, saat ilmoituksen ja palkinnon panoksestasi.'"
         }
       ],
       "approved_at": null
@@ -125,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ուրիշներն' (urishnern) should be 'ուրիշները' (urishnere).",
-          "suggestion": "ուրիշները"
+          "description": "The word 'պարգևատրվեք' (parghevatrek) could be improved. While technically correct, 'կմրցանակվեք' (k'mrcanavkek) might be more natural and common in this context (rewarded).",
+          "suggestion": "կմրցանակվեք ձեր ներդրման համար"
         }
       ],
       "approved_at": null
@@ -143,13 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"他の人に使ってもらいましょう\" (o-ta ni tsukatte moraishō) implies a request or expectation that others *will* use the form, rather than an invitation. A more appropriate phrasing would convey a suggestion or possibility.",
-          "suggestion": "他の人があなたのフォームを利用できるようにしましょう (Hoka no hito ga anata no fōmu o riyō dekiru yō ni shimashō)"
+          "description": "The phrase \"let others use it in their work\" is a bit vague and doesn't fully capture the meaning of \"let others use it\". A more natural translation would be something along the lines of '他の人が活用できるようにしましょう' (allowing others to utilize it) or '他の人が利用できるようにしましょう' (allowing others to use it).",
+          "suggestion": "あなたのフォームを公開ギャラリーに投稿して、他の人が活用できるようにしましょう。"
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"rewarded for your contribution\" could be more precise. \"報酬が与えられます\" (hōshū ga ataeraremasu) is grammatically correct but can be improved.",
-          "suggestion": "あなたの貢献に報いる報酬が与えられます (Anata no kōken ni hōn'i suru hōshū ga ataeraremasu)"
+          "description": "The phrase \"your contribution\" is translated as \"あなたの貢献\". While correct, it might be more natural and impactful to use a term like \"ご提供いただいたフォーム\" (the form you provided) or \"ご協力いただいたフォーム\" (the form you collaborated on).",
+          "suggestion": "あなたのフォームを公開ギャラリーに投稿して、他の人が活用できるようにしましょう。フォームがモデレーションを通過すると、あなたに通知され、ご提供いただいたフォームに対して報酬が与えられます。"
         }
       ],
       "approved_at": null
@@ -160,18 +160,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Submit your form\" is overly literal and can be improved for natural flow in Korean. While technically correct, it doesn't sound idiomatic.",
-          "suggestion": "양식을 갤러리에 등록하세요 (Yangsig eul gaelleo-e deungmok haseyo)"
+          "description": "The phrase \"let others use it in their work\" is not perfectly captured. A more natural Korean phrasing would emphasize the benefit to the user. The current translation is literal but can feel awkward.",
+          "suggestion": "다른 사람들이 자신의 작업에 활용할 수 있도록 양식을 퍼블릭 갤러리에 제출하세요."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'let others use it in their work' is a bit clunky. A more natural translation might be '활용할 수 있도록 (hwalyonghal su itdorok).'",
-          "suggestion": "활용할 수 있도록 (hwalyonghal su itdorok)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrasing \"알림이 전송되며 기여에 대해 보상을 받게 됩니다\" is slightly awkward. A more concise and natural phrasing would be better.",
-          "suggestion": "검토를 통과하면 알림을 받으시고 기여에 대한 보상을 받으실 수 있습니다 (Geomtok eul tonggwa hamyeon alrim eun badeusigiyo giyeo-e daehan bosang eun badeusil su isseumnida)."
+          "description": "The phrase 'Once the form passes moderation, you will be notified' is a bit stiff in Korean. A more conversational and accurate rendering would be better.",
+          "suggestion": "양식이 검토를 통과하면 알림을 받으시고 기여에 대한 보상을 받으실 수 있습니다."
         }
       ],
       "approved_at": null
@@ -181,9 +176,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ປານກາງ\" (pan-gang) in the Lao translation doesn't accurately convey the meaning of \"moderation\" in this context. It literally translates to 'middle' or 'center'. A more appropriate translation would be something like \"ການກວດກາ\" (kan-guat-gaa) or \"ການຕີລາຄາ\" (kan-tee-la-kha).",
-          "suggestion": "Replace \"ປານກາງ\" with \"ການກວດກາ\" or \"ການຕີລາຄາ\"."
+          "type": "spelling",
+          "description": "The word 'ປານກາງ' is likely a typo and doesn't accurately convey the meaning of 'moderation'.",
+          "suggestion": "ປານກາງ should be changed to 'ການກວດກາ' or 'ການຄຸ້ມຄອງ'."
         }
       ],
       "approved_at": null
@@ -194,13 +189,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"lai ļautu citiem\" (to allow others) is slightly awkward and not the most natural way to express the intent. It implies giving permission rather than making available.",
-          "suggestion": "Iesniedziet savu veidlapu publiskajā galerijā, lai citi varētu to izmantot savā darbā."
+          "description": "The phrase \"lai ļautu citiem\" (to allow others) is slightly awkward. It's not the most natural way to express allowing others to use something.",
+          "suggestion": "Consider rephrasing to something like \"lai citiem būtu iespēja\" (so others have the opportunity) or \"lai citi varētu\" (so others can)."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"par jūsu ieguldījumu\" (for your contribution) is a bit formal and doesn't quite capture the rewarding aspect as well as a more direct translation would.",
-          "suggestion": "par jūsu ieguldījumu un saņemsiet balvu."
+          "description": "The word 'ieguldījumu' (investment) while technically correct, might not be the most suitable word here. 'Piedāvājums' (offer/contribution) may be more appropriate.",
+          "suggestion": "Replace 'ieguldījumu' with 'piedāvājumu'."
         }
       ],
       "approved_at": null
@@ -235,13 +230,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"în lucrul\" is not grammatically correct. It should be \"în munca lor\" or \"în proiectele lor\" to accurately convey 'in their work'.",
+          "description": "The phrase \"în lucrul\" is not the correct way to say \"in their work.\" It should be \"în munca lor\" or \"în activitatea lor\".",
           "suggestion": "Depuneți formularul dvs la galeria publică pentru a permite altora să-l folosească în munca lor."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'lucrul' (the work) is too vague. It doesn't specify the context in which the form would be used.",
-          "suggestion": "Depuneți formularul dvs la galeria publică pentru a permite altora să-l folosească în proiectele lor."
+          "description": "The term 'moderare' is correct, but depending on the target audience, a more common and easily understood word might be preferred.",
+          "suggestion": "Depuneți formularul dvs la galeria publică pentru a permite altora să-l folosească în munca lor. Odată ce formularul trece prin verificări, veți primi o notificare și o recompensă pentru contribuția dvs."
         }
       ],
       "approved_at": null
@@ -258,18 +253,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Submit your form\" is not accurately reflected. 'යොමු කරන්න' (yomu korenna) is more like 'refer' or 'direct' rather than 'submit'. A better translation for 'Submit' would convey the action of sending something for approval or publication.",
-          "suggestion": "ඔබේ ආකෘතිය ඉදිරිපත් කරන්න (Obae aakruthy idiripath karanne)"
+          "description": "The phrase \"Submit your form\" is translated as \"ඔබගේ ආකෘතිපත්‍රය යොමු කරන්න.\" While technically correct, a more natural phrasing in Sinhala might be \"ඔබේ ආකෘතිය ඉදිරිපත් කරන්න\" (oba arakturiyada pirisada karanne). \"යොමු කරන්න\" implies a more formal or specific direction.",
+          "suggestion": "ඔබේ ආකෘතිය ඉදිරිපත් කරන්න"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term \"moderation\" is translated as \"මැදිහත්කරණයෙන් සමත් වූ පසු\" (madihathkarayanen samath vu pasu), which is not a direct or clear translation. It suggests 'having become capable through moderation,' which is confusing. A simpler translation would be better.",
-          "suggestion": "සමාධීකරණයෙන් පසුව (samaadhikaraneyen pasu)"
+          "description": "The phrase \"pass moderation\" is translated as \"මැදිහත්කරණයෙන් සමත් වූ පසු\". While understandable, a more common and simpler translation would be \"සමාලෝචනයෙන් පසු\" (samalochanayan pahu) or \"පරික්ෂණයෙන් පසු\" (parikshanayan pahu).  \"මැදිහත්කරණයෙන් සමත් වූ\" is a bit verbose and less natural.",
+          "suggestion": "සමාලෝචනයෙන් පසු"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'reward' is not accurately translated. 'ත්‍යාගයක් පිරිනමනු ලැබේ' (thiyagayak pirinamunu geleb) translates to 'a gift will be given'. While related, 'reward' implies a more direct compensation for contribution. ",
-          "suggestion": "ඔබට ප්‍රතිපාදන ලැබේ (Obata pathipathana gele)"
+          "description": "The term \"rewarded for your contribution\" is translated as \"ඔබගේ දායකත්‍වයට ත්‍යාගයක් පිරිනමනු ලැබේ.\" While accurate, a more colloquial and accessible phrasing might be \"ඔබට පි Recognition ලැබෙනු ඇත\" (obata pirignanawa lebanu atha) or \"ඔබට ස්තුතිය පළවේ\" (obata stuthiya palav). The current translation uses more formal language that might not resonate with all users.",
+          "suggestion": "ඔබට පි Recognition ලැබෙනු ඇත"
         }
       ],
       "approved_at": null
@@ -280,13 +275,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"používať ho\" is a bit awkward and could be improved. A more natural Slovak translation for 'use it' would be 'využívať ho'.",
-          "suggestion": "Odošlite svoj formulár do verejnej galérie a umožnite ostatným, využívať ho v ich práci."
+          "description": "The phrase \"use it in their work\" is not accurately translated. \"používať ho v ich práci\" implies a broader application than simply allowing others to use the form. A more accurate translation would reflect the intention of letting others reuse the form's structure or content.",
+          "suggestion": "Odošlite svoj formulár do verejnej galérie a umožnite ostatným ho opätovne využívať alebo upravovať vo svojich projektoch."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence \"Po tom, ako formulár bude skalený moderátormi\" is grammatically awkward. The word 'skalený' doesn't quite fit the context; it means something like 'scaled' or 'peeled'. The intended meaning is 'reviewed' or 'moderated'.",
+          "suggestion": "Po overení formulára moderátormi"
         },
         {
           "type": "incorrect_translation",
-          "description": "“Skalený moderátormi” is not a standard term. It sounds like it’s trying to mean 'moderated'.",
-          "suggestion": "Odošlite svoj formulár do verejnej galérie a umožnite ostatným, využívať ho v ich práci. Po tom, ako formulár bude skontrolovaný moderátormi, budete informovaní a odmenení za svoj vklad."
+          "description": "The word \"vklad\" (contribution) doesn't fully capture the meaning of 'rewarded'. While it implies some form of acknowledgement, 'rewarded' suggests a tangible benefit.",
+          "suggestion": "Po overení formulára moderátormi budete informovaní a získate odmenu za vašu tvorbu."
         }
       ],
       "approved_at": null
@@ -303,13 +303,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"Поднесите\" (Podnesite) implies submitting a formal document or application. \"Submit\" in this context means to offer or present. A more accurate translation would be something along the lines of \"Објавите свој образац\" (Objavite svoj obrazac) or \"Пошаљите свој образац\" (Posaljite svoj obrazac).",
-          "suggestion": "Пошаљите свој образац у Јавну галерију да би други могли да га користе за свој посао."
+          "description": "The phrase \"Submit your form\" is translated as \"Поднесите свој образац\". While \"поднесите\" can mean submit, in this context, a more natural and common translation would be \"Пошаљите свој образац\" or \"Унесите свој образац\". \"Поднесите\" implies a more formal submission, like a legal document.",
+          "suggestion": "Пошаљите свој образац / Унесите свој образац"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'за свој посао' (za svoj posao) is quite literal and could be improved.  It doesn't quite capture the nuance of 'in their work' - it implies that the form is being used for some sort of specific work/job and not in a broader sense.",
-          "suggestion": "у њиховом раду"
+          "description": "The word \"posao\" translates to 'work' but in this context 'rad' would be more appropriate. \"Posao\" implies a job or profession, while \"rad\" refers to the task or project itself.",
+          "suggestion": "ради"
         }
       ],
       "approved_at": null
@@ -320,13 +320,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Submit your form' is better translated as 'Predajte svoj obrazac' rather than 'Podnesite svoj obrazac'. While 'podnesete' isn't incorrect, 'predajte' is more commonly used and conveys the meaning of submitting something for approval.",
+          "description": "The phrase 'Submit your form' is translated as 'Podnesite svoj obrazac'. While technically correct, 'Predajte svoj obrazac' would be a more natural and commonly used phrase in Serbian for submitting something.",
           "suggestion": "Predajte svoj obrazac u Javnu galeriju da bi drugi mogli da ga koriste za svoj posao."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'moderaciju' is technically correct, but 'prođe kroz moderaciju' or simply 'prođe proveru' flows more naturally in Serbian. 'Moderaciju' sounds overly literal.",
-          "suggestion": "Kada obrazac prođe proveru..."
+          "description": "The phrase 'let others use it in their work' is translated as 'da bi drugi mogli da ga koriste za svoj posao'. A more fluent translation would be 'da bi drugi mogli da ga koriste u svom radu'.",
+          "suggestion": "da bi drugi mogli da ga koriste u svom radu."
         }
       ],
       "approved_at": null
@@ -337,18 +337,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"başkasının çalışmalarında kullanmasına izin vermek\" (to allow others to use in their work) is a bit verbose and doesn't flow as naturally as a more concise phrasing. It's a literal translation of 'to let others use it in their work'.",
+          "description": "The phrase \"let others use it in their work\" is too literal. A more natural Turkish phrasing would convey the intent more effectively.",
           "suggestion": "Formunuzu başkalarının çalışmalarında kullanabilmesi için genel galeriye gönderin."
         },
         {
           "type": "incorrect_translation",
-          "description": "The original English uses 'rewarded for your contribution'.  'Ödüllendirileceksiniz' is a direct translation, but in Turkish, a slightly more active phrasing might be preferable to emphasize the benefit to the contributor.",
-          "suggestion": "Katkınızdan dolayı ödüllendirileceksiniz veya bir ödül alacaksınız."
+          "description": "The phrase \"Once the form passes moderation\" is a bit awkward. A better translation would emphasize the approval process.",
+          "suggestion": "Formunuz denetim sürecinden geçtikten sonra..."
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure is a little clunky. While grammatically correct, it could be made more fluent.",
-          "suggestion": "Formunuzu genel galeriye göndererek başkalarının çalışmalarında kullanmasını sağlayın. Form denetimden geçtikten sonra katkınız için bilgilendirilecek ve ödüllendirileceksiniz."
+          "type": "incorrect_translation",
+          "description": "The word 'katkınız' (your contribution) is grammatically correct but feels slightly formal in this context. A simpler term would improve readability.",
+          "suggestion": "Formunuz onaylandıktan sonra, katkınız için bilgilendirilecek ve ödüllendirileceksiniz."
         }
       ],
       "approved_at": null
@@ -365,13 +365,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"to let others use it in their work\" is a bit awkward in Vietnamese. It doesn't quite capture the nuance of letting others leverage the form for their projects or applications. A more natural phrasing would be preferred.",
-          "suggestion": "Gửi biểu mẫu của bạn đến bộ sưu tập công cộng để người khác có thể sử dụng biểu mẫu đó cho các dự án hoặc ứng dụng của họ."
+          "description": "The phrase \"to let others use it in their work\" is a bit literal and could be improved for naturalness in Vietnamese. A more common way to express this would be \"để người khác có thể sử dụng nó trong công việc của họ\" or something similar.",
+          "suggestion": "Gửi biểu mẫu của bạn đến bộ sưu tập công cộng để người khác có thể sử dụng nó trong công việc của họ."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"thưởng cho khoản đóng góp của mình\" sounds formal and stiff. A more approachable and common expression for \"rewarded for your contribution\" would be better.",
-          "suggestion": "Gửi biểu mẫu của bạn đến bộ sưu tập công cộng để người khác có thể sử dụng biểu mẫu đó cho các dự án hoặc ứng dụng của họ. Sau khi biểu mẫu được kiểm duyệt, bạn sẽ được thông báo và được đền bù cho sự đóng góp của mình."
+          "description": "The word 'khoản' (amount/sum) is slightly awkward in this context with 'đóng góp' (contribution). While not technically incorrect, it sounds less natural. It's better to simply say 'đóng góp'.",
+          "suggestion": "Gửi biểu mẫu của bạn đến bộ sưu tập công cộng để cho phép người khác sử dụng biểu mẫu đó trong công việc của họ. Sau khi biểu mẫu được kiểm duyệt, bạn sẽ được thông báo và thưởng cho đóng góp của mình."
         }
       ],
       "approved_at": null
@@ -382,15 +382,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"让他人在工作中使用\" is a bit awkward. It literally translates to 'let others use it in their work,' but in a more natural Chinese flow, it could be rephrased to emphasize usage.",
-          "suggestion": "将您的表单提交至公共表单库，方便他人将其应用于工作。",
-          "confidence": 0.8
+          "description": "The phrase \"让他人在工作中使用\" is a bit awkward and doesn't quite capture the nuance of \"let others use it in their work.\" It's too literal.",
+          "suggestion": "将您的表单提交至公共表单库，方便其他用户将其应用于工作。"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English 'rewarded for your contribution' is simplified in the Chinese translation.  It doesn't convey the nuance of the reward.",
-          "suggestion": "表单通过审核，您将收到通知并获得相应的奖励。",
-          "confidence": 0.7
+          "description": "The phrase \"获得奖励\" is too generic for 'rewarded'. It lacks specificity.",
+          "suggestion": "表单通过审核后，您将收到通知并获得相应的奖励。"
         }
       ],
       "approved_at": null

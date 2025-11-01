@@ -1,10 +1,9 @@
 import React from "react";
-import { screen, fireEvent, act } from "@testing-library/react";
+import { screen, fireEvent, act, render } from "@testing-library/react";
 
 import "@testing-library/jest-dom";
 
 import { DeviceType } from "../../enums";
-import { renderWithTheme } from "../../utils/render-with-theme";
 import Article from "./index";
 
 // Mock child components
@@ -79,10 +78,15 @@ const defaultProps = {
   showProgress: false,
   children: [],
   logoText: "",
+  showBackButton: false,
+  downloaddesktopUrl: "",
+  officeforandroidUrl: "",
+  officeforiosUrl: "",
+  limitedAccessDevToolsForUsers: false,
 };
 
 const renderComponent = (props = {}) => {
-  return renderWithTheme(<Article {...defaultProps} {...props} />);
+  return render(<Article {...defaultProps} {...props} />);
 };
 
 describe("Article", () => {
@@ -140,8 +144,16 @@ describe("Article", () => {
     expect(screen.getByTestId("article-dev-tools")).toBeInTheDocument();
   });
 
-  it("hides dev tools when user is not admin", () => {
-    renderComponent({ isAdmin: false });
+  it("hides dev tools when user is visitor", () => {
+    renderComponent({ user: { isVisitor: true } });
+    expect(screen.queryByTestId("article-dev-tools")).not.toBeInTheDocument();
+  });
+
+  it("hides dev tools when user is not admin and limitedAccessDevToolsForUsers is true", () => {
+    renderComponent({
+      user: { isAdmin: false },
+      limitedAccessDevToolsForUsers: true,
+    });
     expect(screen.queryByTestId("article-dev-tools")).not.toBeInTheDocument();
   });
 

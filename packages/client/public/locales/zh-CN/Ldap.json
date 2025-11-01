@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "组名属性",
   "LdapGroupNameAttributeTooltip": "请指定与组名对应的对象属性。",
   "LdapGroupUserAttributeTooltip": "输入用于确定此用户是否为组成员的用户对象属性。",
-  "LdapIntro": "通过LDAP导入用户和群组，并通过存储在LDAP服务器上的登录名/密码启用用户身份验证。保存设置后，用户将立即被导入。之后添加的用户将在首次身份验证时导入。如果您想仅通过LDAP提供访问权限，请禁用通过联系人邀请新{{productName}}成员的选项：<1>{{link}}</1>",
+  "LdapIntegrationDescription": "通过 LDAP 导入用户和群组，并通过存储在 LDAP 服务器上的登录名/密码启用用户身份验证。设置保存后，用户将立即被导入。后续新增用户将在首次身份验证时导入。如果您只想通过 LDAP 提供访问权限，请禁用通过{{sectionName}}邀请新{{productName}}成员的选项：<1>{{link}}</1>",
   "LdapLoginAttribute": "登录属性",
   "LdapLoginAttributeTooltip": "输入与用户登录相对应的对象属性。",
   "LdapLoginTooltip": "请指定具有 LDAP 服务器 读取访问权限的登录用户。",

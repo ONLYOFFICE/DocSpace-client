@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:47.065Z",
-  "updated_at": "2025-05-28T09:30:02.557Z",
+  "updated_at": "2025-09-07T07:53:15.257Z",
   "comment": {
     "text": "This translation key is used to display the word \"Rooms\" in various contexts, such as API key and OAuth scope descriptions. It is likely displayed in UI elements like dialog boxes or settings pages where users view their OAuth permissions.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/oauth/index.ts",
-      "line_number": 147,
+      "line_number": 146,
       "context": "case ScopeGroup.contacts:\n return t(\"Common:OAuthAccountsName\");\n case ScopeGroup.profiles:\n return t(\"Common:OAuthProfilesName\");\n case ScopeGroup.rooms:\n return t(\"Common:OAuthRoomsName\");\n case ScopeGroup.openid:\n return t(\"Common:OAuthOpenidName\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຫ້ອງໆ' (hong hong) translates to 'rooms' but includes reduplication, which is not standard or preferred in this context. It implies a collection of rooms, but 'Rooms' in English is a singular identifier.",
-          "suggestion": "ຫ້ອງ (hong)"
+          "description": "The Lao translation \"ຫ້ອງໆ\" (hong hong) is a reduplicated form of 'ຫ້ອງ' (hong) which means 'room'. While reduplication can sometimes convey plurality or intensity, in this context, simply using 'ຫ້ອງ' (hong) would be more accurate and natural for the English word 'Rooms'. The reduplication makes it sound repetitive and less formal.",
+          "suggestion": "ຫ້ອງ"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Săli' is grammatically correct but might not be the most accurate translation of 'Rooms' in this context. 'Săli' is a more general term for rooms and might not convey the specific meaning of 'Rooms' related to OAuth and potentially shared spaces or areas. A better translation might depend on the specific usage within the application.",
-          "suggestion": "Consider 'Secțiuni' or 'Spații' if the meaning is intended to be more specific to shared areas or sections."
+          "description": "While 'Săli' is a valid Romanian word, it doesn't accurately translate 'Rooms' in the context of OAuth rooms. 'Rooms' often refers to a specific space or area, which is best conveyed by a word like 'Camere' or 'Spații'. 'Săli' implies a hall or large room, which might not be the intended meaning.",
+          "suggestion": "Consider using 'Camere' or 'Spații' for a more accurate translation of 'Rooms'."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මාලා\" (Maalaa) typically translates to 'garland' or 'rosary', not 'rooms'. It doesn't accurately convey the meaning of 'Rooms' in the context of OAuth rooms.",
-          "suggestion": "Consider alternative translations like \"කාමරයන්\" (Kaamaran), \"ජනේඝට්ටాలు\" (Janaghatthava), or \"මکانಗಳು\" (Makaangala), which more accurately represent 'Rooms'."
+          "description": "The Sinhala translation \"මාලා\" (Maalaa) typically refers to a garland or a string of beads. While it could potentially be interpreted as \"Rooms\" in a very specific context, it's not a direct or common translation. A more accurate translation would be \"කාමර\" (Kaamara).",
+          "suggestion": "කාමර (Kaamara)"
         }
       ],
       "approved_at": null
@@ -198,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Собе\" is not the correct translation for \"Rooms\". The correct translation is \"Соби\".",
+          "description": "The Serbian (Cyrillic) translation 'Собе' does not accurately reflect the English word 'Rooms'. The correct translation would be 'Соби'. 'Собе' is grammatically incorrect and doesn't convey the intended meaning.",
           "suggestion": "Соби"
         }
       ],
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation \"Sobe\" translates to 'Rooms' in the sense of bedrooms or hotel rooms, not the context of 'Rooms' as in a forum or online space. A more appropriate translation would depend on the specific context but might be \"Prostorije\", \"Odseci\", or simply retaining 'Rooms' in English if it's a direct reference to an English term.",
-          "suggestion": "Consider 'Prostorije', 'Odseci', or retain 'Rooms' depending on context."
+          "description": "The Serbian (Latin) translation 'Sobe' translates to 'Rooms' in English, but it generally means 'bedrooms' or 'rooms' (in a house/building context). 'Rooms' in the context of OAuth may refer to dedicated spaces or groups. A more accurate translation might be 'Prostori' or 'Grupe', depending on the precise meaning of 'Rooms' in the English context.",
+          "suggestion": "Consider 'Prostori' or 'Grupe' for a more contextually accurate translation."
         }
       ],
       "approved_at": null

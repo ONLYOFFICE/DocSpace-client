@@ -3,7 +3,7 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:49.950Z",
-  "updated_at": "2025-05-21T01:20:14.803Z",
+  "updated_at": "2025-10-13T13:22:35.650Z",
   "comment": {
     "text": "This translation key is used as the label for a \"Done\" button, appearing on conversion and upload buttons in the UI, indicating completion or readiness. The translation key will be rendered when the value of \"Ready\" matches the content of this key, which should display as \"Done\".",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ConversionPanel/FileRow.js",
-      "line_number": 183,
+      "line_number": 191,
       "context": "<Button\n className=\"conversion-button\"\n size=\"small\"\n scale\n primary\n label={t(\"Ready\")}\n onClick={onButtonClick}\n isDisabled={!password}\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/UploadPanel/FileRow.js",
-      "line_number": 285,
+      "line_number": 293,
       "context": "<Button\n className=\"conversion-button\"\n size=\"small\"\n scale\n primary\n label={t(\"Ready\")}\n onClick={this.onButtonClick}\n isDisabled={!password}\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }
@@ -81,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Effectué' is a valid French word, it doesn't perfectly capture the nuance of 'Done' in this context. 'Done' in 'UploadPanel:Ready' likely signifies completion or readiness, and 'Effectué' implies something has been carried out or executed. A more appropriate translation might be 'Terminé' or 'Prêt'.",
+          "suggestion": "Terminé"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ແລ້ວໆ\" while meaning 'done' or 'finished' in some contexts, might not fully convey the intended meaning of 'Done' within the 'UploadPanel:Ready' context. It can sound informal or dismissive. A more suitable translation might depend on the specific nuance required within the panel.",
-          "suggestion": "Consider alternatives like \"ສຳເລັດແລ້ວ\" (sam-plet laeo) - 'completed' or \"ອໍ່າແລ້ວ\" (or a similar phrase signifying completion and readiness)"
+          "description": "The Lao translation \"ແລ້ວໆ\" (laeo laeo) while commonly used, doesn't directly convey the meaning of \"Done\" in the context of an \"UploadPanel:Ready\" state. It's more akin to \"Okay\" or \"Alright\" and implies completion but lacks the finality of \"Done\".",
+          "suggestion": "Consider a more precise translation like \"ສຳເລັດແລ້ວ\" (sam-plet laeo) which means 'completed' or 'finished'."
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අහවරයි\" does not accurately convey the meaning of \"Done\". It translates to something like \"Sky\" or \"Open Air\". It's a semantically incorrect translation for the context of a \"Done\" button or confirmation.",
-          "suggestion": "The correct translation for \"Done\" would depend on the specific context, but possible alternatives include: අවසානය (Awasaana - End/Finish), සකූඨිත (Sakuutita - Completed), හෝ සිදු (Sidu - Done/Achieved)."
+          "description": "'අහවරයි' does not accurately translate 'Done'. It generally means 'unlimited' or 'boundless'. A more appropriate translation for 'Done' would be something like 'పూర్తి' (puri) or 'සාර්ථක' (saarthaaka).",
+          "suggestion": "සාර්ථක"
         }
       ],
       "approved_at": null

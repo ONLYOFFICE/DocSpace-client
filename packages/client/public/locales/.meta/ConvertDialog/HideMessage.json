@@ -3,7 +3,7 @@
   "content": "Do not show this message again",
   "content_en_sha1_hash": "afe501e83003a3a7a215ca5582ac910c0271fb9b",
   "created_at": "2025-05-19T21:30:56.887Z",
-  "updated_at": "2025-05-28T09:30:02.224Z",
+  "updated_at": "2025-09-23T07:24:24.080Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to dismiss a warning message. It is used in a checkbox within a dialog footer in a file conversion dialog, allowing users to choose whether or not to see this message again.",
     "is_auto": true,
@@ -13,12 +13,12 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
       "line_number": 105,
-      "context": "rootFolderTitle = isShareFolder\n ? rootFoldersTitles[FolderType.USER]?.title\n : rootFoldersTitles[convertItem.rootFolderType]?.title;\n }\n \n const [hideMessage, setHideMessage] = useState(false);\n const [selectedOptionType, setSelectedOptionType] = useState(\n options[0].value,\n );\n \n const onChangeRadioButton = (e) => {",
+      "context": "rootFolderTitle = isSharedWithMeFolder\n ? t(\"Common:MyDocuments\")\n : rootFoldersTitles[convertItem.rootFolderType]?.title;\n }\n \n const [hideMessage, setHideMessage] = useState(false);\n const [selectedOptionType, setSelectedOptionType] = useState(\n options[0].value,\n );\n \n const onChangeRadioButton = (e) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LifetimeDialog/index.js",
-      "line_number": 73,
+      "line_number": 71,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <StyledFooterContent>\n <Checkbox\n className=\"modal-dialog_lifetime-checkbox\"\n label={t(\"ConvertDialog:HideMessage\")}\n isChecked={isChecked}\n onChange={onChange}\n />\n <div className=\"modal-dialog_lifetime-buttons\">\n <Button",
       "module": "/packages/client"
     }
@@ -33,13 +33,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'مرة' is spelled correctly, but 'آخرى' can be improved for clarity and common usage. While technically correct, it's less natural in modern Saudi Arabic.",
+          "suggestion": "لا تعرض هذه الرسالة مرة أخرى"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bu bildirişi bir daha göstərmə' is a literal translation but sounds unnatural in Azerbaijani. A more natural phrasing would convey the meaning of 'Do not show this message again'.",
+          "suggestion": "Bu bildirişi yenidən göstərməyin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -99,13 +111,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct but could be more natural-sounding for a user interface. A more common phrasing would be something along the lines of \"このメッセージは再表示しない\" or \"このメッセージを非表示にする\".",
+          "suggestion": "このメッセージは再表示しない"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '이 메시지 다시 표시 안함' is a literal translation that doesn't quite capture the natural flow of the English phrase 'Do not show this message again'. It translates to 'This message do not show again'.",
+          "suggestion": "Consider a more natural Korean phrasing like '이 메시지 다시 띄우지 않음' or '이 메시지 다시 보이지 않도록 함'."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -147,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Nu afișa acest mesaj din nou' is a bit literal and not the most natural Romanian phrasing. A more idiomatic translation would convey the intent of avoiding the message in the future.",
+          "suggestion": "Nu mai afișa acest mesaj"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +207,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Не приказуј ову поруку поново\" doesn't accurately convey the meaning of \"Do not show this message again\". It translates to something closer to \"Do not display this message again,\" which implies a command rather than a user preference to suppress a message.",
+          "suggestion": "Не приказуј ми ову поруку поново"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically grammatically correct, \"Не приказуј ову поруку поново\" sounds slightly unnatural in this context. Using the reflexive pronoun 'ми' (mi) makes it more natural and emphasizes the user's preference.",
+          "suggestion": "Не приказуј ми ову поруку поново"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +230,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bu mesajı tekrar gösterme' is a literal translation that sounds awkward in Turkish. A more natural and common phrasing would be 'Bu mesajı bir daha gösterme' or 'Bu mesajı tekrar göstermeyi kapat'.",
+          "suggestion": "Bu mesajı bir daha gösterme"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

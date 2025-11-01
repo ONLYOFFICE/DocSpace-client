@@ -3,7 +3,7 @@
   "content": "Minimal name length:",
   "content_en_sha1_hash": "b3c5f9c7877af590746a0e847e4a7a40da7f59ef",
   "created_at": "2025-05-19T21:30:53.884Z",
-  "updated_at": "2025-05-21T07:15:10.856Z",
+  "updated_at": "2025-08-04T07:30:01.423Z",
   "comment": {
     "text": "This translation key is used to display a minimal length requirement message for names. It should be translated as \"Minimal name length:\" and will appear in the UI when validating input within an input group component.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 143,
-      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />",
+      "line_number": 144,
+      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n dataTestId=\"app_name_input_group\"",
       "module": "/packages/client"
     }
   ],
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'الحد الأدنى لطول الاسم:' is a literal translation but might not be the most natural phrasing in Arabic. It translates to 'The minimum length of the name:' which, in the context of an OAuth error, could be better expressed as 'الحد الأدنى لطول الاسم المطلوب:' (The minimum required name length:).",
+          "suggestion": "الحد الأدنى لطول الاسم المطلوب:"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Minimum ad uzunluğu:' is a literal translation of 'Minimal name length:' which isn't the most natural phrasing in Azerbaijani. 'Ad' means 'name,' but in this context, 'uzunluğu' (length) refers to the minimum acceptable length of the name string, not the length of the word 'name' itself.",
-          "suggestion": "Minimum uzunluq:"
+          "description": "The translation 'Minimum ad uzunluğu:' is a literal translation of 'Minimal name length:' but 'ad' translates to 'advertisement' or 'name' in a different context. 'İsim uzunluğu' would be a more accurate translation for 'name length'.",
+          "suggestion": "Minimum isim uzunluğu:"
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"名前の最小文字数:\" is a literal translation of \"Minimal name length:\". While technically correct, it's not the most natural or idiomatic Japanese. A better translation would focus on conveying the meaning of the minimum length requirement for a name.",
-          "suggestion": "最小の文字数:"
+          "description": "The translation '名前の最小文字数:' is technically correct but could be improved for naturalness. While '文字数' (characters) is accurate, '長さ' (length) might be more idiomatic in this context. The English phrase implies a minimum length requirement.",
+          "suggestion": "名前の最小文字数: ではなく、名前の最小文字長:"
         }
       ],
       "approved_at": null
@@ -153,13 +159,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'numelui' should be 'numei'. 'Numelui' is the genitive singular of 'nume', but the correct genitive is 'numei'.",
-          "suggestion": "Lungimea minimă a **numei**:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අවමංගත නම දිග:' is not a precise translation of \"Minimal name length:\". 'අවමංගත' is closer to 'minimum requirement' or 'minimum obligatory', not just 'minimal'. 'නම' means 'name', and 'දිග' means 'length', so the core concepts are correct, but the overall phrasing is awkward and unnatural in Sinhala.",
-          "suggestion": "කිමිනම් නම දිග:"
+          "description": "The Sinhala translation 'අවමංගත නම දිග:' is not an accurate translation of 'Minimal name length:'. 'අවමංගත' implies something is avoided or shunned, which doesn't fit the context. A more accurate translation would focus on the minimum required length.",
+          "suggestion": "Possible suggestions include: 'අවම ලඝු නම දිග:' (minimum name length) or 'අ geringම නම දිග:' (smallest name length)"
         }
       ],
       "approved_at": null
@@ -195,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian translation contains a spelling error. 'називa' should be 'назива'.",
-          "suggestion": "Минимална дужина назива:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

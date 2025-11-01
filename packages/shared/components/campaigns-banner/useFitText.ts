@@ -30,8 +30,8 @@ const useFitText = (
   campaignBackground: string,
   currentFontSize: string = "13px",
 ) => {
-  const ref: React.RefObject<HTMLDivElement> = useRef(null);
-  const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
+  const ref: React.RefObject<HTMLDivElement | null> = useRef(null);
+  const wrapperRef: React.RefObject<HTMLDivElement | null> = useRef(null);
 
   const [fontSize, setFontSize] = useState(parseInt(currentFontSize, 10));
 

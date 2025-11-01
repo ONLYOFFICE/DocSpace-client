@@ -3,7 +3,7 @@
   "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
   "created_at": "2025-05-19T21:30:54.760Z",
-  "updated_at": "2025-06-18T07:34:15.278Z",
+  "updated_at": "2025-10-13T13:22:35.708Z",
   "comment": {
     "text": "This translation key is used to display the title \"Administration\" in a UI component, likely an InfoPanel, indicating access or management of administrative settings. It appears on a file at /packages/client/src/store/InfoPanelStore.js, suggesting it may be part of a larger admin interface.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/InfoPanelStore.js",
-      "line_number": 595,
-      "context": ");\n \n if (administrators.length && !hasPrevAdminsTitle) {\n administrators.unshift({\n id: \"administration\",\n displayName: t(\"InfoPanel:Administration\"),\n isTitle: true,\n });\n }\n \n const hasPrevGroupsTitle = this.getHasPrevTitle(groups, \"groups\");",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
+      "line_number": 99,
+      "context": "list: TMemberTuple;\n extra?: Partial<TTitleMember>;\n }[] = [\n {\n key: TInfoPanelMemberType.administrators,\n label: t(\"InfoPanel:Administration\"),\n list: administrators,\n },\n {\n key: TInfoPanelMemberType.groups,\n label: t(\"Common:Groups\"),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 533,
+      "context": "owner.push(member);\n } else if (access === ShareAccessRights.RoomManager || isOwner) {\n if (administrators.length === 0) {\n administrators.push({\n id: \"administrators\",\n displayName: t(\"InfoPanel:Administration\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n administrators.push(member);",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

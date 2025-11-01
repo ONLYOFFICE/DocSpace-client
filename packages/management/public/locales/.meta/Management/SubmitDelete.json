@@ -3,7 +3,7 @@
   "content": "Submit a deletion request",
   "content_en_sha1_hash": "ed0ccae882e2f245b96f3b0c590e35d64ba7c4c7",
   "created_at": "2025-05-19T21:30:57.481Z",
-  "updated_at": "2025-05-20T09:47:52.428Z",
+  "updated_at": "2025-06-30T12:20:31.763Z",
   "comment": {
     "text": "This translation key is used for the confirmation message when submitting a deletion request. It appears on a modal dialog in a UI component and informs users of the action being taken, providing clarity and transparency.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/DeletePortalDialog/index.tsx",
-      "line_number": 111,
+      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
+      "line_number": 107,
       "context": "displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {isWizardCompleted\n ? t(\"SubmitDelete\")\n : t(\"Settings:DeletePortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>",
       "module": "/packages/management"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"قدّموا طلب حذف\" is a literal translation of \"Submit a deletion request\" but sounds unnatural in Arabic. A more natural phrasing would be \"تقديم طلب حذف\" or \"اطلب حذف\".",
+          "suggestion": "تقديم طلب حذف"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -99,13 +105,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation \"삭제 요청 제출\" lacks a space after the hangul characters. It should be \"삭제 요청 제출 \"",
+          "suggestion": "삭제 요청 제출 "
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ສະບືນຄຳຮ້ອງຂໍລົບຂໍ້ມູນ' while understandable, isn't the most natural or precise translation of 'Submit a deletion request'. 'ສະບືນ' implies submitting *something*, but 'ຄຳຮ້ອງຂໍ' already implies that. A more natural phrasing might focus on the 'request' itself.",
+          "suggestion": "Consider 'ສົ່ງຄຳຮ້ອງຂໍລົບຂໍ້ມູນ' (song kham rong khop lob khomun) which translates more directly to 'send a deletion request'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dien een verzoek tot verwijdering in\" is not accurate. The word 'in' at the end doesn't make sense in this context. It implies something is being submitted *into* something, which isn't the intended meaning.",
+          "suggestion": "Dien een verwijderingsverzoek in"
+        }
+      ],
       "approved_at": null
     },
     "pl": {

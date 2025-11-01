@@ -34,7 +34,7 @@ const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 export const successLogin = {
   count: 1,
   response: {
-    token: "6jo5…zjm/tny6TtDUAvu3fuuNo3ZE/kxQQ==",
+    token: "6jo5...zjm/tny6TtDUAvu3fuuNo3ZE/kxQQ==",
     expires: "0001-01-01T00:00:00",
     sms: false,
     tfa: false,
@@ -49,6 +49,26 @@ export const successLogin = {
   statusCode: 200,
 };
 
-export const login = () => {
+export const errorLogin401 = {
+  count: 1,
+  error: {
+    message: "User authentication failed",
+    type: null,
+    stack: null,
+    hresult: 0,
+  },
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 1,
+  statusCode: 401,
+};
+
+export const login = (errorStatus: 401 | null = null) => {
+  if (errorStatus === 401) return new Response(JSON.stringify(errorLogin401));
+
   return new Response(JSON.stringify(successLogin));
 };

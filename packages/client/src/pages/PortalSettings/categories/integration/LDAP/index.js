@@ -51,10 +51,10 @@ const LDAP = ({
   load,
   isMobileView,
   isLdapEnabled,
-  isLoaded,
   setScrollToSettings,
+  showPortalSettingsLoader,
 }) => {
-  const { t } = useTranslation(["Ldap", "Settings", "Common"]);
+  const { t, ready } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
   const navigate = useNavigate();
 
@@ -72,15 +72,15 @@ const LDAP = ({
   };
 
   useEffect(() => {
-    isLdapAvailable && load(t);
     onCheckView();
-    setDocumentTitle(t("Ldap:LdapSettings"));
+    if (ready) setDocumentTitle(t("Ldap:LdapSettings"));
     window.addEventListener("resize", onCheckView);
 
     return () => window.removeEventListener("resize", onCheckView);
-  }, [isLdapAvailable, load, t]);
+  }, [isLdapAvailable, load, t, ready]);
 
-  if (!isLoaded && isLdapAvailable) return <LdapLoader />;
+  if ((showPortalSettingsLoader && isLdapAvailable) || !ready)
+    return <LdapLoader />;
 
   const link = `${`${t("Settings:ManagementCategorySecurity")} > ${t("Settings:InvitationSettings")}.`}`;
 
@@ -89,9 +89,13 @@ const LDAP = ({
       <Text className="intro-text settings_unavailable">
         <Trans
           t={t}
-          i18nKey="LdapIntro"
+          i18nKey="LdapIntegrationDescription"
           ns="Ldap"
-          values={{ productName: t("Common:ProductName"), link }}
+          values={{
+            productName: t("Common:ProductName"),
+            sectionName: t("Common:Contacts"),
+            link,
+          }}
           components={{
             1: (
               <Link
@@ -101,6 +105,7 @@ const LDAP = ({
                 color={currentColorScheme?.main?.accent}
                 isHovered
                 onClick={onGoToInvitationSettings}
+                dataTestId="invitation_settings_link"
               />
             ),
           }}
@@ -113,6 +118,8 @@ const LDAP = ({
             isHovered
             target="_blank"
             href={ldapSettingsUrl}
+            dataTestId="ldap_settings_link"
+            fontWeight={600}
           >
             {t("Common:LearnMore")}
           </Link>
@@ -139,26 +146,31 @@ const LDAP = ({
   );
 };
 
-export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
-  const { isLdapAvailable } = currentQuotaStore;
-  const {
-    ldapSettingsUrl,
-    currentColorScheme,
-    currentDeviceType,
-    setScrollToSettings,
-  } = settingsStore;
-  const { load, isLdapEnabled, isLoaded } = ldapStore;
+export default inject(
+  ({ ldapStore, settingsStore, currentQuotaStore, clientLoadingStore }) => {
+    const { isLdapAvailable } = currentQuotaStore;
+    const {
+      ldapSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
+      setScrollToSettings,
+    } = settingsStore;
+    const { load, isLdapEnabled, isLoaded } = ldapStore;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
-  return {
-    ldapSettingsUrl,
-    currentColorScheme,
-    isLdapAvailable,
-    load,
-    isMobileView,
-    isLdapEnabled,
-    isLoaded,
-    setScrollToSettings,
-  };
-})(observer(LDAP));
+    const isMobileView = currentDeviceType === DeviceType.mobile;
+
+    return {
+      ldapSettingsUrl,
+      currentColorScheme,
+      isLdapAvailable,
+      load,
+      isMobileView,
+      isLdapEnabled,
+      isLoaded,
+      setScrollToSettings,
+      showPortalSettingsLoader,
+    };
+  },
+)(observer(LDAP));

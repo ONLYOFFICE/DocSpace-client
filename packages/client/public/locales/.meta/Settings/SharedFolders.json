@@ -3,7 +3,7 @@
   "content": "Shared folders",
   "content_en_sha1_hash": "89815b84dde295d77a537a0bbb8ab594e7418560",
   "created_at": "2025-05-19T21:30:52.705Z",
-  "updated_at": "2025-05-28T09:30:02.505Z",
+  "updated_at": "2025-08-11T09:02:43.941Z",
   "comment": {
     "text": "This translation key is used to display the label \"Shared folders\" in various UI elements. It appears as a section name and description within import steps, allowing users to select shared folders for export.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 142,
+      "line_number": 141,
       "context": "}}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{\n name: t(\"Settings:SharedFolders\"),\n }}\n />\n ),\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 150,
+      "line_number": 149,
       "context": "}}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{\n name: t(\"Settings:SharedFolders\"),\n }}\n />\n ),\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 178,
-      "context": "isDisabled={false}\n />\n <ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:SharedFoldersDescription\")}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "line_number": 182,
+      "context": "dataTestId=\"import_shared_files_section\"\n />\n <ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,",
       "module": "/packages/client"
     }
   ],
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Համօգտագործվող թղթապանակներ' while technically correct, is a very literal and somewhat clunky translation of \"Shared folders.\" It doesn't flow naturally in Armenian. A more natural translation would be something like 'Մասնակցային թղթապանակներ' or 'Ընդհանուր թղթապանակներ'.",
-          "suggestion": "Consider 'Մասնակցային թղթապանակներ' or 'Ընդհանուր թղթապանակներ' for a more natural-sounding translation."
+          "description": "The translation \"Համօգտագործվող թղթապանակներ\" is a literal translation of 'shared folders' but it sounds unnatural and less common in Armenian. A more natural and commonly used translation would be something like 'Կիսվող թղթապանակներ' or 'Ընդհանուր թղթապանակներ'.",
+          "suggestion": "Կիսվող թղթապանակներ"
         }
       ],
       "approved_at": null
@@ -123,13 +123,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ທີ່' is unnecessarily present. It doesn't contribute to the meaning and makes the translation slightly awkward.",
-          "suggestion": "ໂຟນເດີແບ່ງປັນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -162,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Pastas partilhadas\" is understandable, the more common and accurate translation of \"Shared folders\" in Brazilian Portuguese is \"Pastas compartilhadas\". \"Partilhadas\" is more common in European Portuguese.",
+          "description": "While \"Pastas partilhadas\" is understandable, a more common and natural translation for \"Shared folders\" in Portuguese (Brazil) would be \"Pastas compartilhadas\". \"Partilhadas\" is more common in European Portuguese.",
           "suggestion": "Pastas compartilhadas"
         }
       ],
@@ -183,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"බෙදාගත් බහාලුම්\" (bedagatha bahaluum) is a literal translation of \"shared folders,\" it might sound a bit technical or awkward in natural Sinhala usage. A more common and natural phrasing would be \"ගොන berbagi ොන්\" (gonon berbagi on).",
+          "suggestion": "ගොන berbagi ොන්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

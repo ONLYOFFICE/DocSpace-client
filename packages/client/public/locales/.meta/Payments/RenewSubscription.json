@@ -3,7 +3,7 @@
   "content": "Renew subscription to {{planName}} plan",
   "content_en_sha1_hash": "ab8a1ed47bbc9bb05d92ff4ae2e9cf0620d14a23",
   "created_at": "2025-05-19T21:30:53.723Z",
-  "updated_at": "2025-05-21T06:30:20.802Z",
+  "updated_at": "2025-08-12T19:46:26.222Z",
   "comment": {
     "text": "The translation key \"RenewSubscription\" is used to display a message prompting the user to renew their subscription to a specific plan (\"{{planName}} plan\") in the PortalSettings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 237,
-      "context": "noSelect\n fontSize=\"16px\"\n isBold\n className=\"payment-info_suggestion\"\n >\n <Trans t={t} i18nKey=\"RenewSubscription\" ns=\"Payments\">\n {{ planName: tariffPlanTitle }}\n </Trans>\n </Text>\n );\n }",
+      "line_number": 223,
+      "context": "}\n \n if (isNotPaidPeriod) {\n return (\n <Text fontSize=\"16px\" isBold className=\"payment-info_suggestion\">\n <Trans t={t} i18nKey=\"RenewSubscription\" ns=\"Payments\">\n {{ planName: tariffPlanTitle }}\n </Trans>\n </Text>\n );\n }",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a lowercase 'p' in 'plan'. It should be capitalized to match the English 'Plan'.",
-          "suggestion": "{{planName}} Planın abunəliyini yeniləyin"
+          "description": "The translation uses lowercase 'plan' while the English uses title case 'Plan'.",
+          "suggestion": "{{planName}} planın yeniləyin"
         }
       ],
       "approved_at": null
@@ -60,12 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Abonnement des {{planName}}-Plans erneuern' is a bit literal and sounds unnatural in German. A more natural phrasing would emphasize the subscription being renewed *for* the plan.",
-          "suggestion": "Abonnement für den {{planName}}-Plan erneuern"
-        },
-        {
-          "type": "formatting",
-          "description": "While the template variable is correctly placed, the use of 'des' followed by a capitalized 'Plans' feels slightly awkward.  Using 'den' before the capitalized plan name is more common.",
+          "description": "The translation 'Abonnement des {{planName}}-Plans erneuern' is not the most natural or idiomatic way to say 'Renew subscription to {{planName}} plan' in German. 'Des' is grammatically correct, but sounds a little stiff. A more fluent translation would use a different preposition or phrasing.",
           "suggestion": "Abonnement für den {{planName}}-Plan erneuern"
         }
       ],
@@ -89,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Uusi tilaus {{planName}} ohjelmaan' doesn't fully convey the meaning of 'Renew subscription'. 'Uusi tilaus' means 'New Subscription', while 'Renew' implies extending an existing one.  'ohjelmaan' is generally used for programs/software, while 'plan' could refer to a service or product tier.",
-          "suggestion": "Consider 'Pidennä tilaus {{planName}} ohjelmaan' (Extend subscription to {{planName}} plan) or 'Aktivoi uudelleen {{planName}} tilaus' (Reactivate {{planName}} subscription)."
+          "description": "The translation 'Uusi tilaus {{planName}} ohjelmaan' is not the most natural or accurate translation of 'Renew subscription to {{planName}} plan'. 'Uusi tilaus' literally means 'new subscription' which isn't quite the meaning of 'renew'.",
+          "suggestion": "Uudista {{planName}} -tilauksen"
         }
       ],
       "approved_at": null
@@ -125,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"{{planName}} 요금제 구독 갱신\" is understandable, a more natural and common phrasing for 'Renew subscription' in Korean would be '{{planName}} 요금제 구독 자동 갱신' or '{{planName}} 요금제 구독 연장'.  '갱신' can sometimes imply a significant upgrade or change, which isn't necessarily what a subscription renewal is.",
-          "suggestion": "{{planName}} 요금제 구독 자동 갱신"
+          "description": "While \"{{planName}} 요금제 구독 갱신\" is understandable, a more natural and precise translation of \"Renew subscription to {{planName}} plan\" would be \"{{planName}} 플랜 구독 갱신\" or \"{{planName}} 요금제 구독 자동 갱신\". 요금제 and 구독 갱신 are a bit too literal and stiff.",
+          "suggestion": "{{planName}} 플랜 구독 갱신"
         }
       ],
       "approved_at": null
@@ -137,8 +132,43 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຕໍ່ອາຍຸ' (tor ayu) is a common and acceptable translation for 'renew', but in this context, 'ຕໍ່ການສະຫມັກໃຊ້' (tor gan samak sai) might be more precise and clearer for a subscription renewal.",
-          "suggestion": "Consider using 'ຕໍ່ການສະຫມັກໃຊ້' (tor gan samak sai) instead of 'ຕໍ່ອາຍຸ' (tor ayu) for improved clarity."
+          "description": "The word 'ຕໍ່ອາຍຸ' (tor ayu) is a correct term for 'renew' in this context. No spelling error found.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ການສະໝັກໃຊ້' (kan samak chai) is a correct term for 'subscription' in this context. No spelling error found.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ແຜນການ' (phaen kan) is a correct term for 'plan' in this context. No spelling error found.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is generally correct for Lao and accurately conveys the meaning of the English phrase.",
+          "suggestion": null
+        },
+        {
+          "type": "missing_content",
+          "description": "The template variable {{planName}} is correctly included in the Lao translation.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation is generally accurate and conveys the same meaning as the English original.",
+          "suggestion": null
+        },
+        {
+          "type": "formatting",
+          "description": "The translation appears to be formatted correctly for display within the application.",
+          "suggestion": null
+        },
+        {
+          "type": "cultural",
+          "description": "The translation is culturally appropriate for a Lao-speaking audience.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -167,7 +197,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'subscrição' is more commonly used in European Portuguese. In Brazilian Portuguese, 'assinatura' would be more appropriate for 'subscription'.",
+          "description": "The word \"subscrição\" is generally used in European Portuguese. Brazilian Portuguese would use \"assinatura\". While understandable, using 'assinatura' would be more aligned with a broader Portuguese-speaking audience.",
           "suggestion": "Renovar assinatura para o plano {{planName}}"
         }
       ],
@@ -191,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"тариф\" (tarif) translates to \"rate\" or \"rate plan\" and might not be the most accurate translation for \"plan\" in the context of a subscription.",
-          "suggestion": "Consider using a more precise term for \"plan\" such as \"подписку на план {{planName}}\" or \"продлить подписку на {{planName}}\" if \"plan\" refers to a service level or package."
+          "description": "The word 'тариф' (tarif) is a closer translation of 'plan' as in pricing tier or subscription level, rather than the broader 'plan' which could also refer to a broader plan or service. 'Продлить подписку на {{planName}}' is generally correct, but 'тариф' might be more precise depending on context.",
+          "suggestion": "Consider 'Продлить подписку на {{planName}} план' if 'plan' is meant to be a broader term, or keep 'тариф' for more specific subscription tier."
         }
       ],
       "approved_at": null
@@ -203,8 +233,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '{{planName}} සැලසුමට දායකත්‍වය අළුත් කරන්න' doesn't perfectly convey the meaning of 'Renew subscription to {{planName}} plan'.  'දායකත්‍වය' (daayakathvaya) translates to 'contribution' or 'subscription' but using it in this context feels a little formal and indirect. A more natural phrasing would be '{{planName}} සැලසුම නැවත අත්හදා ගන්න' or '{{planName}} සැලසුමට යාවත්කාලීන වන්න'.",
-          "suggestion": "{{planName}} සැලසුම නැවත අත්හදා ගන්න"
+          "description": "The translation \"{{planName}} සැලසුමට දායකත්‍වය අළුත් කරන්න\" is a literal translation of 'Renew subscription'.  A more natural and idiomatic way to express this in Sinhala would be to use a phrasing that indicates 'continue' or 'extend' the subscription. 'දාවත්වය යාවත්කරණය කරන්න' or 'ගිණුම දිගු කරන්න' would be better options.",
+          "suggestion": "{{planName}} ගිණුම දිගු කරන්න"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'අළුත්' can also mean 'new' in certain contexts. While not inherently wrong, in this context, 'දිගු' (long/extend) is a better fit for 'renew' and conveys the intended meaning of subscription continuation more accurately.",
+          "suggestion": "Replace 'අළුත්' with 'දිගු'"
         }
       ],
       "approved_at": null
@@ -227,13 +262,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Обновите' (Obnovite) is a formal imperative and might be too direct or stiff for a user-facing message. A more conversational option would be better.",
-          "suggestion": "Унапредите претплату на план {{planName}}"
+          "description": "The Serbian translation uses 'Обновите' which translates to 'Update' rather than 'Renew'. 'Renew' implies continuing an existing subscription.",
+          "suggestion": "Обновите претплату на план {{planName}}"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian word 'план' (plan) is used in the English text, but a more native-sounding alternative for 'plan' in this context might be considered.",
-          "suggestion": "Унапредите претплату на пакет {{planName}}"
+          "type": "spelling",
+          "description": "The word 'Обновите' is misspelled. It should be 'Наставите'.",
+          "suggestion": "Наставите претплату на план {{planName}}"
         }
       ],
       "approved_at": null
@@ -244,7 +279,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Obnovite pretplatu na plan {{planName}}\" is not the most natural or accurate translation of \"Renew subscription to {{planName}} plan\".  A more accurate translation would be something like \"Produžite pretplatu na plan {{planName}}\" or \"Aktivirajte obnovu pretplate za plan {{planName}}\". \"Obnovite\" implies restoring something, while 'renew' implies continuing a subscription.",
+          "description": "The translation 'Obnovite pretplatu na plan {{planName}}' isn't the most natural way to say 'Renew subscription to {{planName}} plan' in Serbian. A more idiomatic translation would be 'Produžite pretplatu na plan {{planName}}' or 'Aktivirajte obnovu pretplate za plan {{planName}}'.",
           "suggestion": "Produžite pretplatu na plan {{planName}}"
         }
       ],
@@ -265,7 +300,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Gia hạn\" generally translates to 'renew', in the context of subscriptions, \"Mở rộng\" or \"Kéo dài\" might be more natural and idiomatic.",
+          "suggestion": "Gia hạn or Mở rộng gói dịch vụ {{planName}}"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -274,8 +315,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"将订阅更新至{{planName}}版本\" doesn't accurately convey the meaning of \"Renew subscription to {{planName}} plan\".  '版本' (version) is not the correct term for a subscription plan. It implies a software version, not a tier of service.",
-          "suggestion": "将订阅更新至{{planName}}计划"
+          "description": "The translation '将订阅更新至{{planName}}版本' doesn't accurately convey the meaning of 'Renew subscription to {{planName}} plan'.  '更新' (update) implies a change to an existing subscription, while 'renew' suggests extending the subscription's validity.  '版本' (version) is also an odd choice for 'plan'.",
+          "suggestion": "将订阅续订至{{planName}}计划"
         }
       ],
       "approved_at": null

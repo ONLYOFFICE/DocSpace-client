@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:49.949Z",
-  "updated_at": "2025-05-21T01:20:26.985Z",
+  "updated_at": "2025-09-07T07:53:15.039Z",
   "comment": {
     "text": "This translation key is used to display \"Hide\" when a password input field needs to be toggled on or off. It appears as a button text in an error file component and is linked to the visibility of a password input field.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/PanelComponents/ErrorFile.js",
-      "line_number": 61,
-      "context": "maxWidth=\"320px\"\n color={theme.tooltip.backgroundColor}\n />\n {item.needPassword ? (\n <Text className=\"enter-password\" fontWeight=\"600\" onClick={onTextClick}>\n {showPasswordInput ? t(\"HideInput\") : t(\"Common:EnterPassword\")}\n </Text>\n ) : null}\n </div>\n );\n };",
+      "line_number": 77,
+      "context": "{t(\"Retry\")}\n </Text>\n ) : null}\n {item.needPassword ? (\n <Text className=\"enter-password\" fontWeight=\"600\" onClick={onTextClick}>\n {showPasswordInput ? t(\"HideInput\") : t(\"Common:EnterPassword\")}\n </Text>\n ) : null}\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Скрыть ввод\" is too literal and doesn't quite capture the meaning of 'Hide' in the context of an upload panel. It translates to 'Hide input,' which is specific and might not be the intended meaning.  A more appropriate translation might depend on what 'Hide' refers to (e.g., hiding a file selection field, hiding progress indicators).",
-          "suggestion": "Consider alternatives like \"Скрыть\" (Hide - generic), \"Закрыть\" (Close), or \"Убрать\" (Remove), depending on the exact functionality."
+          "description": "The translation \"Скрыть ввод\" is too literal and doesn't accurately reflect the meaning of \"Hide\" in this context (likely referring to hiding an input field). It translates to \"Hide input\", which is not a natural phrasing.",
+          "suggestion": "Consider a more natural phrasing like \"Скрыть\" (Hide) or \"Спрятать\" (Conceal) depending on the desired tone.  Alternatively, if the context is very specific to input fields, \"Скрыть поле\" (Hide field) might be better."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සඟවන්න' (sagawanna) while meaning 'to hide' or 'to conceal' doesn't perfectly convey the nuance of 'Hide' in the context of a UI element like an 'Upload Panel'. It implies a more secretive or deliberate act of hiding. A more suitable translation might convey the sense of simply making something disappear or retracting it.",
-          "suggestion": "භයාම් කරන්න (bhayaam karanna) - to disappear, or නැසීම (naesima) - to remove, or තැකීම (thaekima) - to retract."
+          "description": "'සඟවන්න' translates to 'conceal' or 'hide away,' but 'Hide' implies a simple disappearance or visibility toggle. While not entirely wrong, it's not the most accurate translation for the context of a UI element controlling visibility.",
+          "suggestion": "Consider using 'සිද්ධාංග' (siddaanga) which means 'hidden' or 'invisible' or 'ඉවත් කරන්න' (iwath kanna) which means 'remove', depending on the exact functionality."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Сакриј\" while technically meaning 'hide', doesn't perfectly align with the nuance of 'Hide' in the UI context, which often implies a more subtle or temporary concealment. 'Sakrij' can sound more forceful or permanent.",
-          "suggestion": "Consider 'Skrij' (Скриј) which is a more common and generally appropriate synonym for 'Hide' in a UI context."
+          "description": "The Serbian (Cyrillic) translation 'Сакриј' while technically meaning 'Hide', doesn't perfectly match the nuance of 'Hide' in the context of a UI element like an upload panel. It's a more general 'hide'. A better alternative might be 'Скрив' or 'Покриј'",
+          "suggestion": "Скрив"
         }
       ],
       "approved_at": null

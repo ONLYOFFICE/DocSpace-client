@@ -50,6 +50,7 @@ export interface IStartFillingPanelProps {
 }
 
 export interface HeaderProps {
+  ref?: React.RefObject<HTMLDivElement>;
   canEditRoom: boolean;
   roleName: string;
   t: TTranslation;

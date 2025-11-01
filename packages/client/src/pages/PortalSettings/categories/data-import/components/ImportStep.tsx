@@ -111,6 +111,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: AccountsIcon,
         }}
         isDisabled
+        dataTestId="import_users_section"
       />
 
       <ImportSection
@@ -131,6 +132,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: AccountsIcon,
         }}
         isDisabled={false}
+        dataTestId="import_groups_section"
       />
 
       <ImportSection
@@ -138,7 +140,7 @@ const ImportStep = (props: ImportStepProps) => {
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
         description={t("Settings:ImportFilesLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
         exportSection={{
           sectionName: personalExportDetails.name,
@@ -151,6 +153,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: DocumentsIcon,
         }}
         isDisabled={false}
+        dataTestId="import_personal_files_section"
       />
 
       <ImportSection
@@ -158,7 +161,7 @@ const ImportStep = (props: ImportStepProps) => {
         onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
         description={t("Settings:SharedFilesImportLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
         exportSection={{
           sectionName: sharedFilesExportDetails.name,
@@ -171,12 +174,15 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: DocumentsIcon,
         }}
         isDisabled={false}
+        dataTestId="import_shared_files_section"
       />
       <ImportSection
         isChecked={importOptions.importSharedFolders}
         onChange={(e) => onChange(e, "importSharedFolders")}
         sectionName={t("Settings:SharedFolders")}
-        description={t("Settings:SharedFoldersDescription")}
+        description={t("Settings:FolderToRoomImportNote", {
+          sectionName: t("Common:Rooms"),
+        })}
         exportSection={{
           sectionName: sharedFoldersExportDetails.name,
           workspace: serviceName,
@@ -188,43 +194,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: RoomsIcon,
         }}
         isDisabled={false}
-      />
-      <ImportSection
-        isChecked={importOptions.importCommonFiles}
-        onChange={(e) => onChange(e, "importCommonFiles")}
-        sectionName={t("Common:CommonFiles")}
-        description={t("Settings:CommonFilesDescription", {
-          user: user?.displayName,
-          productName: t("Common:ProductName"),
-        })}
-        exportSection={{
-          sectionName: t("Common:Common"),
-          workspace: serviceName,
-          sectionIcon: PortfolioIcon,
-        }}
-        importSection={{
-          sectionName: t("Common:Rooms"),
-          workspace: t("Common:ProductName"),
-          sectionIcon: RoomsIcon,
-        }}
-        isDisabled={false}
-      />
-      <ImportSection
-        isChecked={importOptions.importProjectFiles}
-        onChange={(e) => onChange(e, "importProjectFiles")}
-        sectionName={t("Common:Projects")}
-        description={t("Settings:ProjectsDescription")}
-        exportSection={{
-          sectionName: t("Common:Projects"),
-          workspace: serviceName,
-          sectionIcon: ProjectsIcon,
-        }}
-        importSection={{
-          sectionName: t("Common:Rooms"),
-          workspace: t("Common:ProductName"),
-          sectionIcon: RoomsIcon,
-        }}
-        isDisabled={false}
+        dataTestId="import_shared_folders_section"
       />
       {hasCommonFiles ? (
         <ImportSection
@@ -245,6 +215,7 @@ const ImportStep = (props: ImportStepProps) => {
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}
+          dataTestId="import_common_files_section"
         />
       ) : null}
 
@@ -265,6 +236,7 @@ const ImportStep = (props: ImportStepProps) => {
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}
+          dataTestId="import_project_files_section"
         />
       ) : null}
 

@@ -3,7 +3,7 @@
   "content": "Remember the choice when opening documents next time",
   "content_en_sha1_hash": "8a94a37909ee99414cba5dc3b7611377996e73b7",
   "created_at": "2025-05-19T21:30:57.146Z",
-  "updated_at": "2025-07-01T15:57:36.365Z",
+  "updated_at": "2025-06-30T12:20:31.651Z",
   "comment": {
     "text": "This translation key is used to display a reminder message when opening documents next time. It appears as a checkbox label in the \"Deep Link\" component and provides context for users who have chosen to remember their actions.",
     "is_auto": true,
@@ -45,19 +45,37 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Remember the choice' is too literal. A more natural Czech phrasing would emphasize remembering the *setting* or *preference* rather than the 'choice' itself. While not incorrect, it sounds slightly awkward.",
+          "suggestion": "Uložit nastavení pro příště při otevírání dokumentů"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Auswahl beim nächsten Öffnen von Dokumenten merken' is not a perfect match for the English content 'Remember the choice when opening documents next time'. While it conveys the general meaning, it could be improved to sound more natural in German. The phrasing 'merken' (to remember/notice) can feel slightly abrupt in this context.",
+          "suggestion": "Ein präziseres und natürlicheres Vorgehen wäre: 'Die Auswahl beim nächsten Mal beim Öffnen von Dokumenten speichern.'"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Να θυμάστε την επιλογή όταν ανοίξω έγγραφα την επόμενη φορά' is a literal translation and sounds somewhat awkward in Greek. While technically correct, it's not the most natural way to express the intent. It sounds passive and a bit formal.",
+          "suggestion": "Consider a more natural phrasing like 'Θυμήσου την επιλογή όταν ανοίξεις έγγραφα την επόμενη φορά' or 'Να θυμάσαι την επιλογή όταν ανοίγεις έγγραφα την επόμενη φορά'. The former is more informal (using 'εσύ'), and the latter is slightly more formal (using 'εσείς')."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,55 +93,109 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Garder ce choix pour la prochaine ouverture de documents' is a functional translation but could be more natural. 'Remember the choice' implies a setting or preference, which isn't fully conveyed. 'Garder' can be seen as 'keep' rather than 'remember'.",
+          "suggestion": "Conserver ce choix pour la prochaine ouverture des documents"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Հիշել այս ընտրությունը հաջորդ անգամ փաստաթղթերը բացելիս' literally translates to 'Remember this choice next time when opening documents.' It's a bit clunky and less natural in Armenian. A more natural phrasing would better convey the meaning of remembering the preference.",
+          "suggestion": "Հիշել ընտրությունը հաջորդ բացման ժամանակ (Remember the choice next time when opening) or Ընտրությունը պահպանվում է հաջորդ բացման ժամանակ (The choice is saved next time when opening)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ricorda la scelta alla prossima apertura dei documenti' is somewhat literal and could be improved for naturalness in Italian. It implies 'at' the next opening, which isn't the most idiomatic way to express the intention.",
+          "suggestion": "Ricorda la scelta per la prossima apertura dei documenti"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '次回、ドキュメントを開く際にこの選択を覚えておきます。' is a bit stiff and formal for a user-facing setting. It literally translates to 'We will remember this choice when opening documents next time.' A more natural phrasing would convey the meaning of remembering the user's preference.",
+          "suggestion": "次回ドキュメントを開く際に、選択を覚えておきます。(Jikai dokyumento o hiraku sai ni, sentaku o oboete okimasu.) - This is slightly less formal and more conversational."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '다음에 문서를 열 때 선택 사항을 기억하세요' is a literal translation but lacks nuance. \"Remember the choice\" implies remembering a specific choice made, whereas the Korean translation more generally means \"remember options\".",
+          "suggestion": "다음에 문서를 열 때, 이전에 선택한 내용을 기억하세요"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ຊື້ມຈໍາການເລືອກເວລາເປີດເອກະສານຄັ້ງຕໍ່ໄປ' is a literal translation and may not convey the intended meaning of 'Remember the choice when opening documents next time' naturally in Lao. It sounds somewhat clunky.  A more natural phrasing would emphasize the persistence of the choice.",
+          "suggestion": "Consider 'ຈື່ການເລືອກໃນຄັ້ງຕໍ່ໄປເມື່ອເປີດເອກະສານ' or 'ໃຫ້ຈຳການເລືອກໃນຄັ້ງຕໍ່ໄປເມື່ອເປີດເອກະສານ'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Atceries izvēli nākamreiz atverot dokumentus' is not the most natural or precise translation of 'Remember the choice when opening documents next time'. It is technically correct but sounds somewhat awkward in Latvian. A more natural phrasing would better convey the intended meaning.",
+          "suggestion": "Atcerieties izvēli nākamajā reizē, kad atvērsiet dokumentus"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence uses the formal 'u' instead of the more common and appropriate 'je' for this type of UI text. While not strictly incorrect, 'je' would be more natural in this context.",
+          "suggestion": "Onthoud de keuze wanneer je de volgende keer documenten opent"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"następnym razem\" (next time) is a bit awkward in this context. It implies a sequence of actions which isn't necessarily the case. A more natural phrasing would emphasize the persistence of the choice.",
+          "suggestion": "Zapamiętaj wybór przy otwieraniu dokumentów"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +213,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Salvează alegerea pentru deschiderea documentelor data viitoare' is not the most natural or accurate rendering of 'Remember the choice when opening documents next time'. 'Salvează' (save) implies a deliberate action, while 'remember' can be more automatic.  A more accurate translation would convey the sense of the system remembering a previous selection.",
+          "suggestion": "Păstrează alegerea pentru deschiderea documentelor data viitoare"
+        },
+        {
+          "type": "grammatical",
+          "description": "While grammatically correct, 'pentru deschiderea' can be slightly improved for flow.",
+          "suggestion": "pentru a deschide"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,31 +236,76 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඊළඟ වතාවේ ලේඛන විවෘත කිරීමේදී තේරීම මතක තබා ගන්න' is a literal translation but could be more natural.  While technically correct, it's a bit clunky in Sinhala. The phrasing 'when opening documents next time' is overly verbose.",
+          "suggestion": "Consider a more concise and natural phrasing like: 'ඊළඟ වතාවේ ලේඛන විවෘත කරන විට තේරීම මතක තබා ගන්න' or 'ඊළඟ වතාවේ ලේඛන විවෘත කරන විට තේරීම සුනමින් තබා ගන්න'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zapamätať voľbu pre otváranie dokumentov nabudúce' is a bit literal and awkward. A more natural Slovak phrasing would be better.",
+          "suggestion": "Pamätať si poslednú voľbu pri otváraní dokumentov."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zapomni si izbiro za naslednja odpiranja dokumentov' is somewhat awkward and doesn't flow naturally in Slovenian. While technically correct, it could be improved for better readability.",
+          "suggestion": "Zapomni si izbiro pri naslednjem odpiranju dokumenta"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'opening documents' implies a repeated action. The Slovenian translation doesn't fully capture that repeated aspect. Using the singular 'odpiranju' could be interpreted as a one-time action.",
+          "suggestion": "Zapomni si izbiro pri naslednjih odpiranjih dokumentov"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Запамти избор када отвараш документе следећи пут' is not the most natural or accurate translation of 'Remember the choice when opening documents next time'. While understandable, it's a bit clunky.",
+          "suggestion": "Запамти избор при отварању докумената следећи пут"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'следећи' could be more naturally expressed as 'наредни' in some contexts. It's a subtle stylistic preference.",
+          "suggestion": "Запамти избор при отварању докумената наредни пут"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb tense 'otvaraš' (you open) doesn't quite fit the context. 'Otvaraš' implies a continuous action. A better fit would be a form indicating future action or a general habit.",
+          "suggestion": "Zapamti izbor kada ćeš otvarati dokumente sledeći put"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Zapamti izbor' is a bit literal and less natural than alternatives. A more idiomatic translation would improve the overall feel.",
+          "suggestion": "Zapamti izbor sledeći put kada otvaraš dokumente"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +317,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Пам'ятати вибір під час відкриття документів наступного разу' is a literal translation but doesn't convey the intended meaning of 'Remember the choice...next time'. It sounds awkward in Ukrainian. The nuance of remembering a previous choice when opening documents is lost.",
+          "suggestion": "Consider a more natural translation such as: 'Запам'ятовувати вибір при наступному відкритті документів' or 'Зберігати вибір при наступному відкритті документів'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +335,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '下次打开文档时记住该选择' is a bit literal and not the most natural way to express the meaning in Chinese. It could be misinterpreted as only remembering the choice for *that specific* document opening.",
+          "suggestion": "下次打开文档时记住上次的选择 (Cǐ cì dǎkāi wéndàng shí jìzhù shàng cì de xuǎnzé)"
+        }
+      ],
       "approved_at": null
     }
   }

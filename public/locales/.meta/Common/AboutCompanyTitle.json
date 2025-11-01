@@ -3,7 +3,7 @@
   "content": "About this program",
   "content_en_sha1_hash": "56fb7336f231f3007d1a564b2c67ede83691a9e3",
   "created_at": "2025-05-19T21:30:42.806Z",
-  "updated_at": "2025-06-18T07:34:15.288Z",
+  "updated_at": "2025-10-03T13:19:30.725Z",
   "comment": {
     "text": "This translation key is used for a title that describes the purpose of a program or application. It appears as a label on an about page in the user interface, indicating the content to be displayed within it.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 389,
+      "line_number": 416,
       "context": "if (displayAbout) {\n about = {\n key: \"user-menu-about\",\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:AboutCompanyTitle\"),\n onClick: (e) => this.onAboutClick(e),\n url: `${window.location.pathname}?action=about`,\n };\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 107,
-      "context": "<Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"CompanyInfoSettingsDescription\"\n values={{\n link: t(\"Common:AboutCompanyTitle\"),\n }}\n components={{\n 1: isSettingPaid ? (\n <Link className=\"link\" onClick={onShowExample} noHover />\n ) : (",
+      "line_number": 111,
+      "context": "hasErrorCompanyName ||\n hasErrorEmail ||\n hasErrorPhone ||\n hasErrorSite;\n \n const link = t(\"Common:AboutCompanyTitle\");\n \n const showExample = () => {\n if (!isSettingPaid) return;\n setIsAboutDialogVisible(true);\n };",
       "module": "/packages/shared"
     }
   ],
@@ -33,25 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"نبذة تعريفية عن البرنامج\" is a bit too formal for \"About this program\". It translates to something like 'An introductory profile about the program'. A more direct and natural translation would be more appropriate.",
-          "suggestion": "اعلان عن البرنامج (E'lan 'an al-barnamaj) - 'Announcement about the program' or حول البرنامج (Hawl al-barnamaj) - 'About the program'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Proqram haqqında\" is a literal translation of \"About this program\", it might sound slightly less natural in Azerbaijani. A more idiomatic translation might be \"Bu proqram haqqında\" or \"Proqramın haqqında\".",
-          "suggestion": "Consider \"Bu proqram haqqında\" or \"Proqramın haqqında\" for a more natural phrasing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -72,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Über diese Software' doesn't accurately convey the meaning of 'About this program'. 'Software' implies a specific type of program, whereas the English phrase is more general.",
+          "description": "The translation 'Über diese Software' is not the most accurate translation of 'About this program'. 'Software' implies a specific type of program. 'About this program' is more general and could refer to any kind of program.",
           "suggestion": "Über dieses Programm"
         }
       ],
@@ -105,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ծրագրի մասին' is a literal translation of 'About this program' but lacks the nuance of 'About'. While technically correct, it sounds slightly less natural in Armenian. A more idiomatic translation might consider 'Մեր մասին ծրագրի շուրջ' or 'Ծրագրի դիտարկումներ'.",
-          "suggestion": "Consider 'Մեր մասին ծրագրի շուրջ' or 'Ծրագրի դիտարկումներ' for a more natural-sounding translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '프로그램 소개' is a reasonable translation, 'About this program' implies a description specifically *about* the program itself, its purpose, or its features. '프로그램 소개' is more generic, simply meaning 'program introduction'. It's not *incorrect* but lacks nuance.",
+          "suggestion": "Consider a more specific translation like '이 프로그램에 대한 소개' (Introduction to this program) or '프로그램에 대하여' (About the program) for greater accuracy, depending on context."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -174,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Despre aplicația\" is not the best equivalent for \"About this program\". While \"aplicația\" refers to an application, \"program\" can also mean a broader initiative or project. A more accurate translation would convey this broader meaning.",
+          "description": "The translation 'Despre aplicația' is not the most accurate or natural rendering of 'About this program.' 'Aplicația' refers to an application, but 'program' can have a broader meaning. A better translation would convey the meaning of the program's description or overview.",
           "suggestion": "Despre acest program"
         }
       ],
@@ -192,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මෙම මෘදුකාංගය ගැන\" translates to \"About this software\". The English content is \"About this program\", which refers to a program in a broader sense, not necessarily software. \"මෘදුකාංගය\" specifically means 'software'.",
+          "description": "The Sinhala translation \"මෙම මෘදුකාංගය ගැන\" translates to \"About this software\", not \"About this program\". The English content refers to a program, but the translation refers to software. While similar, they aren't identical.",
           "suggestion": "මෙම වැඩසටහන ගැන"
         }
       ],
@@ -216,8 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"У вези овог програма\" translates to \"Regarding this program\" or \"In connection with this program,\" which doesn't accurately convey the meaning of \"About this program.\" It's a functional equivalent, but not a direct translation.",
-          "suggestion": "О програму"
+          "description": "The Serbian translation \"У вези овог програма\" is a literal translation of \"in relation to this program\" and doesn't accurately convey the meaning of \"About this program.\" It's awkward and doesn't fit the context of a company description.",
+          "suggestion": "Овој програми"
+        },
+        {
+          "type": "spelling",
+          "description": "The Serbian translation has a potential spelling error. It's unclear whether 'програма' should be 'програму' or 'програма'. Without more context, I suggest the first option as more common.",
+          "suggestion": "У вези овог програму"
         }
       ],
       "approved_at": null
@@ -228,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"U vezi ovog programa\" does not accurately convey the meaning of \"About this program\". It literally translates to \"Regarding this program\" or \"In relation to this program\", which is not the intended meaning. \"About\" in this context refers to information or details *concerning* the program.",
-          "suggestion": "Consider using a more appropriate translation such as \"O ovom programu\" which directly translates to \"About this program\"."
+          "description": "The translation \"U vezi ovog programa\" is a literal translation of \"about\" but doesn't accurately convey the meaning of \"About this program\" in Serbian. It sounds awkward and doesn't read naturally. A more appropriate translation would focus on conveying the purpose of the section.",
+          "suggestion": "O ovom programu"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Check ready forms",
   "content_en_sha1_hash": "8a0b92bde27cfd467ecd8178e67fff5a5b357f4f",
   "created_at": "2025-05-19T21:30:57.155Z",
-  "updated_at": "2025-05-28T09:30:02.868Z",
+  "updated_at": "2025-08-12T19:46:26.307Z",
   "comment": {
     "text": "The translation key \"CheckReadyForms\" is used to display a label that confirms users are ready to submit completed forms. It appears as a button in a completed form component and changes depending on whether anonymous access is granted or not.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 213,
-      "context": "primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n />\n {(!isShareFile || isRoomMember) && !isSDK && (\n <Button",
+      "line_number": 220,
+      "context": "primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n testId={\n isAnonym\n ? \"download_form_button\"",
       "module": "/packages/doceditor"
     }
   ],
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Comprobar formularios listos' is a literal translation and doesn't flow naturally in Spanish. 'Listos' implies they are 'ready' in the sense of being prepared, but in this context, 'ready' likely means 'completed'.",
+          "suggestion": "Comprobar formularios completados"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"完成させたフォームを見る\" (Kanseisashita fōmu o miru) is a literal translation that doesn't quite capture the nuance of \"Check ready forms.\" It implies 'viewing completed forms'. A better translation would convey the meaning of verifying or reviewing forms that are prepared and ready for use.",
+          "suggestion": "Consider alternatives like: \"準備完了したフォームを確認する\" (Junbi kanryou shita fōmu o kakunin suru) - 'Check forms that are ready' or \"確認待ちのフォームを見る\" (Kakunin machi no fōmu o miru) - 'View forms awaiting confirmation'."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,7 +129,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Controleer bereide formulieren' isn't the most natural or accurate translation of 'Check ready forms'. 'Bereide formulieren' implies forms that have been *prepared*, rather than forms that are *ready* for use or review.",
+          "suggestion": "Controleer gereedstaande formulieren"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Verificați formulare completate' while conveying a similar meaning, isn't the most accurate translation of 'Check ready forms'. 'Check ready forms' implies checking if forms are prepared and available for use, not necessarily that they are already completed. A better translation would focus on the 'ready' aspect.",
+          "suggestion": "Verificați formularele pregătite"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"සූදානම් පෝරම පරීක්ෂා කරන්න\" while technically meaning 'check ready forms', is not the most natural or idiomatic way to express this in Sinhala. A more suitable translation would emphasize checking for completion or readiness rather than just 'ready'.",
+          "suggestion": "පෝරම පරීක්ෂා කරsehen (Porama periksha karasehen) - Check to see the forms"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +201,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Провери спремне формуларе' is not the most natural or accurate translation of 'Check ready forms'. While 'спремни' is related to 'ready', 'Провери спремне формуларе' sounds awkward. A better translation would be something like 'Проверите спремни обрасци' or 'Проверите готови обрасци'.",
+          "suggestion": "Проверите спремни обрасци"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'formularе' is misspelled. It should be 'formulare'.",
+          "suggestion": "Proveri spremne formulare"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,7 +243,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '检查已完成的表单' (Jiǎnchá yǐ wánchéng de biǎodān) doesn't fully capture the meaning of 'Check ready forms'.  'Ready forms' implies forms that are prepared or available for use, not necessarily *completed* forms.  The Chinese translation focuses on completion status rather than preparedness.",
+          "suggestion": "考虑使用 '检查准备好的表单' (Jiǎnchá zhǔnbèi hǎo de biǎodān) or '检查待使用的表单' (Jiǎnchá dài shǐyòng de biǎodān) to better reflect 'ready forms'."
+        }
+      ],
       "approved_at": null
     }
   }

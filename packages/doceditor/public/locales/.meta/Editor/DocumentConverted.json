@@ -3,7 +3,7 @@
   "content": "The document converted to {{title}} to allow its editing",
   "content_en_sha1_hash": "b25beb9e209d00d3f5cd7831679bf91da3ed2352",
   "created_at": "2025-05-19T21:30:57.081Z",
-  "updated_at": "2025-05-28T09:30:02.877Z",
+  "updated_at": "2025-06-30T12:20:31.654Z",
   "comment": {
     "text": "The translation key \"Editor:DocumentConverted\" is used to display a message indicating that a document has been converted to edit mode. This text appears in the UI after a document conversion process, typically displayed on-screen or in notifications.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/utils/events.ts",
-      "line_number": 113,
+      "line_number": 111,
       "context": "if (newURL.searchParams.has(\"action\")) newURL.searchParams.delete(\"action\");\n \n newURL.searchParams.append(\"action\", \"edit\");\n }\n \n const messageAfterConversion = t(\"Editor:DocumentConverted\", { title });\n const stringURL = newURL.toString();\n const concatURL = title\n ? stringURL.concat(`#message/${messageAfterConversion}`)\n : stringURL;",
       "module": "/packages/doceditor"
     }
@@ -33,19 +33,42 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Sənəd redaktə etmək üçün {{title}}-a çevrildi' is a literal translation that doesn't quite convey the intended meaning. It implies the document *became* something else to be editable, rather than being converted *to* a format to allow editing.",
+          "suggestion": "Sənəd redaktə imkanı yaratmaq üçün {{title}} formatına çevrildi"
+        },
+        {
+          "type": "grammatical",
+          "description": "While technically correct, the phrasing 'Sənəd redaktə etmək üçün...' is a bit clunky in Azerbaijani. A more natural construction is possible.",
+          "suggestion": "Sənədi redaktə etmək üçün..."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to allow its editing\" is a bit awkward. A more natural translation would be \"за да може да се редактира\" or \"за да се позволи редакторски достъп\".",
+          "suggestion": "Документът се преобразува в {{title}}, за да може да се редактира."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'to allow its editing' is not directly and naturally translated in the Czech version. 'Aby bylo možné jej upravovat' is grammatically correct but sounds somewhat formal. A more natural phrasing might be 'pro úpravu' or 'aby se dal upravovat'.",
+          "suggestion": "Dokument převeden na {{title}} pro úpravu"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,7 +92,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The document converted to {{title}}' is awkward and doesn't accurately convey the intended meaning. A more natural translation would be something like 'The document was converted to {{title}}'.",
+          "suggestion": "Asiakirja on muutettu {{title}} muotoon, jotta sitä voidaan muokata"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +110,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'to allow its editing' is not accurately reflected in the Armenian translation. While technically correct, it's a bit clunky. A more natural phrasing would improve readability.",
+          "suggestion": "Consider rephrasing 'խմբագրումը թույլ տալու համար' to something like 'խմբագրելու համար' (for editing) or 'խմբագրման համար' (for the purpose of editing)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +134,30 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to allow its editing\" is not accurately conveyed.  \"편집할 수 있도록\" means 'so that it can be edited', but the original English implies the document was *converted* to enable editing. A more accurate translation would emphasize the conversion's purpose.",
+          "suggestion": "문서를 편집 가능하도록 {{title}}로 변환했습니다"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, adding a slightly smoother transition between '{{title}}' and '로' would improve readability in Korean. The direct juxtaposition feels slightly abrupt.",
+          "suggestion": "문서를 {{title}}(으)로 변환하여 편집 가능하도록 했습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"The document converted to {{title}}\" is not accurately translated. It implies a transformation or conversion, but the Lao translation focuses on the document *being* changed. A more accurate translation might emphasize the conversion process.",
+          "suggestion": "ເອກະສານຖືກປ່ຽນແບງເປັນ {{title}} ເພື່ອໃຫ້ສາມາດດັດປ່ຽນໄດ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +181,18 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'O documento convertido em {{title}} para permitir que seja editado' isn't the most natural or accurate rendering of 'The document converted to {{title}} to allow its editing'.  'Em' can imply transformation or inclusion, whereas 'to' implies a destination or purpose.",
+          "suggestion": "O documento convertido para {{title}} para permitir sua edição."
+        },
+        {
+          "type": "grammar",
+          "description": "While 'para permitir que seja editado' is grammatically correct, 'para permitir sua edição' is more concise and common in Portuguese.",
+          "suggestion": "para permitir sua edição"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +216,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ලේඛනය එහි සංස්කරණයට ඉඩ දීම සඳහා {{title}} වෙත පරිවර්තනය කරන ලදී' doesn't quite capture the nuance of 'The document converted to {{title}} to allow its editing'.  The Sinhala implies the conversion *gave* permission for editing, rather than simply being the process that enabled it. A more accurate translation would emphasize the conversion *facilitated* editing.",
+          "suggestion": "ලේඛනය සංස්කරණය කිරීමේ හැකියාව ලබා දීමට {{title}} වෙත පරිවර්තනය කරන ලදී"
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of the placeholder '{{title}}' might not align with the English original's intended context. Double-check that it fits grammatically and logically within the Sinhala sentence.",
+          "suggestion": "Review the placement of '{{title}}' to ensure it flows naturally within the Sinhala sentence."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +245,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"to allow its editing\" is not perfectly captured by \"како би омогућио уређивање\". A more direct translation might be \"да би се могао уређивати\" or \"за уређивање\".  The current translation implies something enabling the editing, whereas the English implies allowance for it.",
+          "suggestion": "Документ је конвертован у {{title}} да би се могао уређивати"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +263,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'to allow its editing' is not accurately conveyed by 'düzenlenmesine izin vermek için'. A more natural Turkish translation would be 'düzenlenebilmesi için' or 'düzenlenmesi amacıyla'. The current translation implies the conversion *allowed* editing, rather than being *for the purpose of* enabling it.",
+          "suggestion": "Belge, düzenlenebilmesi için {{title}}'a dönüştürüldü"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +281,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to allow its editing\" is not perfectly conveyed. A more natural Vietnamese phrasing would be 'để có thể chỉnh sửa' or 'để chỉnh sửa được'.",
+          "suggestion": "Tài liệu được chuyển đổi sang {{title}} để có thể chỉnh sửa"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

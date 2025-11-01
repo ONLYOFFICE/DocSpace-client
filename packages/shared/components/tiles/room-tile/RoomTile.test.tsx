@@ -27,7 +27,7 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
 import { RoomTile } from "./RoomTile";
 import { RoomTileProps } from "./RoomTile.types";
 

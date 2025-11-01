@@ -3,7 +3,7 @@
   "content": "Sign up with SSO",
   "content_en_sha1_hash": "aa2bbf27ca1af663107f2a143436cf3c8c71d4e8",
   "created_at": "2025-05-19T21:30:48.862Z",
-  "updated_at": "2025-05-28T09:30:02.990Z",
+  "updated_at": "2025-10-14T05:41:48.650Z",
   "comment": {
     "text": "This translation key is used to display a sign-up option via Single Sign-On (SSO) method in the UI. It appears as a button or dialog prompt where users can choose to sign up using their SSO credentials. The purpose of this text is to inform users about an alternative way to create an account.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 404,
-      "context": "case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n default:\n return \"\";\n }",
+      "line_number": 442,
+      "context": "case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")",
       "module": "/packages/shared"
     }
   ],
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"التسجيل بواسطة SSO\" is a very literal translation. A more natural and user-friendly Arabic equivalent for 'Sign up with SSO' would be something like 'تسجيل الدخول عبر SSO' (Sign in via SSO) or 'استخدم SSO للتسجيل' (Use SSO to sign up). The current translation feels robotic.",
+          "suggestion": "تسجيل الدخول عبر SSO"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -42,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Влезте чрез SSO\" literally translates to \"Log in with SSO.\" The English phrase \"Sign up with SSO\" implies creating a new account, whereas \"Log in\" implies an existing account. While 'Sign up' and 'Log in' can be functionally similar, the nuance is lost.",
-          "suggestion": "Регистрирайте се чрез SSO"
+          "description": "The translation \"Влезте чрез SSO\" uses \"Влезте\" (Vlezte) which means 'Log in', not 'Sign up'. The original English 'Sign up with SSO' indicates registration, not just logging in.",
+          "suggestion": "Регистрирайте се с SSO"
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຂົ້າສູ່ລະບົບດ້ວຍ SSO' literally translates to 'Log in with SSO'. The English phrase 'Sign up with SSO' refers to creating a new account, not logging in. While SSO is a technical term and the Lao may understand it, the wording isn't the most accurate.",
-          "suggestion": "ສະໝັກຂຽນດ້ວຍ SSO"
+          "description": "While technically correct, \"ເຂົ້າສູ່ລະບົບດ້ວຍ SSO\" translates more literally to \"Log in with SSO\" rather than \"Sign up with SSO.\" The nuance of signing up is lost.",
+          "suggestion": "ເຂົ້າສູ່ການລົງທະບຽນດ້ວຍ SSO"
         }
       ],
       "approved_at": null
@@ -138,13 +144,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zarejestruj się przez usługę logowania jednokrotnego' is a very literal and somewhat verbose translation of 'Sign up with SSO'. While technically correct, it's not idiomatic Polish.  'SSO' is a known acronym in Polish, and a more natural translation would incorporate it.",
-          "suggestion": "Zarejestruj się przez SSO"
+          "description": "The translation is too literal and doesn't flow naturally in Polish. 'Sign up with SSO' is commonly translated to something more concise.",
+          "suggestion": "Zaloguj się przez SSO"
         },
         {
-          "type": "formatting",
-          "description": "The original phrase uses a short, succinct label. The translation is much longer and less suitable for button labels or similar UI elements.",
-          "suggestion": "Consider a shorter alternative like 'Logowanie przez SSO' or 'Zaloguj się przez SSO' depending on the desired action."
+          "type": "incorrect_translation",
+          "description": "The term 'usługę logowania jednokrotnego' (single sign-on service) is overly verbose for a button or link label. Users might not understand the technical jargon.",
+          "suggestion": "Zaloguj się przez SSO"
         }
       ],
       "approved_at": null
@@ -167,8 +173,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Conectare unică' is a literal translation of 'Single Sign-On', it might not be immediately understandable to all Romanian users. 'Autentificare cu SSO' or 'Înregistrare cu SSO' would be more commonly used and clearer alternatives for 'Sign up with SSO'.",
-          "suggestion": "Consider using 'Autentificare cu SSO' or 'Înregistrare cu SSO'."
+          "description": "While 'Conectare unică' translates to 'Single Connection' or 'Unique Connection', it doesn't directly convey 'Sign up with SSO'. 'Conectare' implies a connection is already established, not the action of signing up.",
+          "suggestion": "Înregistrare cu SSO"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes 'SSO' in parenthesis, which might not be consistent with the rest of the application's terminology.  Consider whether to always include the acronym or spell it out.",
+          "suggestion": "Consider either always including 'SSO' or removing it altogether, depending on the context and application style."
         }
       ],
       "approved_at": null
@@ -185,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SSO සමඟ ලියාපදිංචිය' is a literal translation and might not be the most natural or understandable way to convey 'Sign up with SSO' in Sinhala. While technically correct, it might be perceived as clunky.",
-          "suggestion": "Consider a more idiomatic translation like 'ඊමේල් හරහා ලියාපදිංචිය' (Eemail haratha liyapadinchiya - Sign up via email) or 'එකස්ත ක්‍රිඩාවාරයෙන් ලියාපදිංචිය' (Ekasta kridawarayan liyapadinchiya - Sign up with a unified login)."
+          "description": "While technically correct, \"SSO සමඟ ලියාපදිංචිය\" is a very literal translation. A more natural and user-friendly Sinhala phrase would convey the intent of 'Sign up with SSO' more effectively. Using just the acronym 'SSO' might not be readily understood by all users.",
+          "suggestion": "Consider something like \"එස්එස්ඕ භාවිතයෙන් ලියාපදිංචිය\" (Ess-Ess-Oh Upathaayama Liyapadinchiya) or a more descriptive phrase like \"ඔබගේ එස්එස්ඕ ගිණුමකින් ලියාපදිංචිය\" (Obage ess-ess-oh ginumakakin liyapadinchiya), which translates to 'Sign up with your SSO account'."
         }
       ],
       "approved_at": null
@@ -209,13 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Региструј се путем SSO-а' is a bit literal and could be improved for naturalness in Serbian. 'SSO' is often understood by a technical audience, but a more user-friendly option would be preferable.",
-          "suggestion": "Региструј се преко SSO"
-        },
-        {
-          "type": "formatting",
-          "description": "The possessive suffix '-а' on 'SSO-а' might sound a bit clunky. Removing it would improve flow.",
-          "suggestion": "Региструј се путем SSO"
+          "description": "While technically correct, \"Региструј се путем SSO-а\" sounds somewhat unnatural in Serbian. A more common and natural phrasing would be \"Пријави се путем SSO-а\" or \"Региструј се преко SSO-а\". \"Региструј се путем\" implies a more formal or technical process.",
+          "suggestion": "Пријави се путем SSO-а"
         }
       ],
       "approved_at": null
@@ -238,8 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Зареєструватися за допомогою єдиного входу\" is a rather formal and verbose translation of \"Sign up with SSO.\" A more natural and user-friendly translation would be preferred.",
-          "suggestion": "Consider alternatives like \"Увійти через SSO\" or \"Реєстрація через SSO\" for a more concise and user-friendly feel.  A more literal, but still acceptable alternative could be \"Створити обліковий запис через SSO\"."
+          "description": "While technically correct, 'Зареєструватися за допомогою єдиного входу' is a bit verbose and formal for a button label. A more natural and concise translation would be better suited for a user interface.",
+          "suggestion": "Реєстрація через SSO"
         }
       ],
       "approved_at": null
@@ -256,10 +262,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '用 SSO 注册' is understandable, a more natural and accurate translation of 'Sign up with SSO' would be '使用 SSO 注册' or '通过 SSO 注册'. '用' implies using SSO as a tool, while '使用' or '通过' better conveys the method of signing up.",
+          "description": "While \"用 SSO 注册\" is understandable, it's a somewhat literal translation. A more natural and common phrasing for 'Sign up with SSO' in Chinese would be something like \"使用 SSO 注册\" or \"通过 SSO 注册\".  '用' is often used for tools or instruments, and while technically correct, it's not the most elegant choice here.",
           "suggestion": "使用 SSO 注册"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

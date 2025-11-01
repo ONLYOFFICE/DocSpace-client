@@ -3,7 +3,7 @@
   "content": "Opening a document",
   "content_en_sha1_hash": "4a7eafc9df868a113f57ca2b0bb89644be660ffe",
   "created_at": "2025-05-19T21:30:57.145Z",
-  "updated_at": "2025-07-01T15:57:36.364Z",
+  "updated_at": "2025-06-30T12:20:31.650Z",
   "comment": {
     "text": "This translation key is used for a UI element that displays the text \"Opening a document\" as part of a deep link functionality. It appears on a file tile in a document editor interface and helps users understand the purpose of the deep link.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Sənədin açılması\" is a literal translation of \"Opening a document\", it sounds unnatural in Azerbaijani. A more natural phrasing would be \"Sənəd açılır\" or \"Sənədini açmaq\".",
+          "suggestion": "Sənəd açılır"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dokument wird geöffnet\" is a present tense, passive voice construction, literally meaning \"Document is being opened.\" A more natural and accurate translation of \"Opening a document\" (which implies the action of opening) would be something like \"Dokument öffnen\" or \"Ein Dokument öffnen\".",
+          "suggestion": "Dokument öffnen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -69,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Opening a document' is best translated as something more specific to the context of a deep link. 'Avataan asiakirjaa' is a literal translation implying an active process of opening. A more contextually accurate translation would depend on the intended action - e.g., 'Avaa asiakirja' (Open document) or 'Asiakirjan avaaminen' (Document opening).",
+          "suggestion": "Consider 'Avaa asiakirja' or 'Asiakirjan avaaminen' depending on the intended action."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,25 +111,49 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ドキュメントを開いています\" literally translates to \"Opening a document\" or \"Document is being opened.\" While technically correct, it's more passive than the English phrase \"Opening a document.\" A more natural and active phrasing would be better suited for a DeepLink key.",
+          "suggestion": "ドキュメントを開く"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '문서 여는 중' (munseo yeoneun jung) is a literal translation of 'Opening a document' but sounds awkward and unnatural in Korean. It implies the action is currently in progress. A more natural and accurate translation would be something like '문서 열기' (munseo yeolgi) - 'Document opening' or '문서 보기' (munseo bogi) - 'View document'.",
+          "suggestion": "문서 열기 (munseo yeolgi) or 문서 보기 (munseo bogi)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ກຳລັງເປີດເອກະສານ\" is a literal translation of \"Opening a document,\" it implies an action in progress. A more accurate and natural translation for a key name (which often represents a state) might be \"ເອກະສານເປີດ\" (Document Open) or \"ເອກະສານໄຂ\" (Document Opened).",
+          "suggestion": "ເອກະສານເປີດ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Notiek dokumenta atvēršana' translates literally to 'A document is being opened'. While not entirely incorrect, it's a more verbose and less natural way to express 'Opening a document'. A more direct and natural translation would be 'Dokumenta atvērums' or 'Atver dokumentu'.",
+          "suggestion": "Atver dokumentu"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,7 +171,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"A abrir um documento\" while literally meaning \"Opening a document,\" is not the idiomatic or standard way to express this in Portuguese. It sounds unfinished or like an action in progress, but not a completed or intended action.",
+          "suggestion": "Documento a ser aberto"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +201,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ලේඛනයක් විවෘත කිරීම\" is a literal translation of \"Opening a document\". While grammatically correct, a more natural and idiomatic Sinhala translation might be preferred depending on the context.  'විවෘත කිරීම' sounds somewhat formal. A more common phrasing might include 'තියවන්න' (thiyavanna - to open/view) or 'පෙන්වන්න' (penvanna - to show/display).",
+          "suggestion": "Consider alternatives like \"ලේඛනය ತೆරවන්න\" (lekkhayanā tharavannā) or \"ලේඛනය පෙන්වන්න\" (lekkhayanā penvanna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +237,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Belge açılıyor' translates more accurately to 'Document is opening' rather than 'Opening a document'. While not strictly wrong, it doesn't capture the passive voice of the original English phrase as well.",
+          "suggestion": "Belge açma"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

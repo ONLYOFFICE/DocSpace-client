@@ -3,7 +3,7 @@
   "content": "Local domains are not supported",
   "content_en_sha1_hash": "2f3c69b6241eaebb3afffd20ba46edbf9cf52247",
   "created_at": "2025-05-19T21:30:46.290Z",
-  "updated_at": "2025-06-18T07:34:14.836Z",
+  "updated_at": "2025-10-13T13:22:35.495Z",
   "comment": {
     "text": "This translation key is used to display an error message when a local domain is not supported, typically appearing in a change email dialog or similar interface. The purpose of this text is to inform users that their chosen domain is not compatible for use in this context. It appears on screen as part of the user experience, prompting the user to select a different domain if necessary.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 160,
+      "line_number": 171,
       "context": "if (parsedDomain?.parseErrors && parsedDomain?.parseErrors.length > 0) {\n const translatedErrors = parsedDomain.parseErrors.map((error) => {\n switch (error.errorKey) {\n case ErrorKeys.LocalDomain:\n return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");",
       "module": "/packages/shared"
     }
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The French translation uses the masculine plural 'domaines' instead of the more appropriate 'domain'. While technically correct, 'domain' is preferred in this context, mirroring the English.",
-          "suggestion": "Les domaines ne sont pas supportés"
+          "description": "The French translation contains a grammatical error. 'Les domaines local' should be 'Les domaines locaux'. The adjective 'local' needs to agree in gender and number with the noun it modifies ('domaines').",
+          "suggestion": "Les domaines locaux ne sont pas supportés"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Domeniile locale nu sunt acceptate' is not the most natural or accurate translation of 'Local domains are not supported'. 'Locale' should be 'locale'. While understandable, it's a slightly awkward phrasing.",
-          "suggestion": "Domeniile locale nu sunt suportate"
+          "description": "The translation 'Domeniile locale nu sunt acceptate' is not the most natural or accurate rendering of 'Local domains are not supported.' While technically correct, a more idiomatic translation would improve clarity. 'Locale' should likely be 'locale' in Romanian to maintain consistency with the English term, and the phrasing can be refined.",
+          "suggestion": "Domeniile locale nu sunt acceptate."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Псевдодомен верхнего уровня не поддерживается\" is not a direct or natural translation of \"Local domains are not supported.\" While \"псевдодомен\" (pseudodomain) attempts to capture the technical aspect, \"Local domains\" refers to domains configured locally, often within a development or testing environment. The Russian translation implies a specific type of domain (top-level pseudodomain) which may not be the intended meaning.",
-          "suggestion": "Consider a translation closer to \"Поддержка локальных доменов не предусмотрена\" or \"Локальные домены не поддерживаются\" to more accurately reflect the original meaning."
+          "description": "The translation \"Псевдодомен верхнего уровня не поддерживается\" doesn't precisely convey the meaning of \"Local domains are not supported.\" \"Псевдодомен верхнего уровня\" (pseudotop-level domain) is too specific and technical. A more accurate and understandable translation would be something like \"Локальные домены не поддерживаются\" or \"Поддержка локальных доменов отсутствует\".",
+          "suggestion": "Локальные домены не поддерживаются"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ස්ථානීය වසම් සඳහා සහාය නොදක්වයි' is a literal translation that doesn't quite capture the natural flow of the English sentence. It could be improved to sound more natural in Sinhala.",
-          "suggestion": "A more natural translation might be 'දේශීය පරිගණක නෙට්වொர்க்கුන් සහාය නොදක්වයි' (Dēśiya pariṭaṭa nēṭvōrku sahāyā nō dakkavai) which translates to 'Local computer networks are not supported'."
+          "description": "The translation 'ස්ථානීය වසම් සඳහා සහාය නොදක්වයි' while understandable, isn't the most natural or precise rendering of 'Local domains are not supported'. A more accurate translation would convey the idea of 'support' being absent.",
+          "suggestion": "ස්ථානීය වසම් සඳහා සහාය ලබා ගත නොහැක"
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '不支持本地域' while technically correct, is a somewhat literal and not the most natural way to express 'Local domains are not supported' in Chinese. It can sound a bit stiff. A more idiomatic translation might be '不支持本地域名' or '本地域名不受支持'.",
-          "suggestion": "Consider '不支持本地域名' or '本地域名不受支持'."
+          "description": "The translation '不支持本地域' while technically understandable, doesn't fully capture the nuance of 'Local domains are not supported'. '本地域' focuses on the 'local domain' as a place or area. The original English focuses on the *functionality* of local domains being unavailable.",
+          "suggestion": "不支持本地域名"
         }
       ],
       "approved_at": null

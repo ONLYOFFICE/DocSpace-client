@@ -3,7 +3,7 @@
   "content": "File deleted",
   "content_en_sha1_hash": "80bb638b8b9d2b50c437a89c6f74323269298583",
   "created_at": "2025-05-19T21:30:49.726Z",
-  "updated_at": "2025-05-21T01:12:23.842Z",
+  "updated_at": "2025-05-24T02:26:24.790Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -107,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fails dzēsts\" is grammatically correct but doesn't fully convey the meaning of \"File deleted\". A more accurate translation would be \"Fails izdzēsts\" or \"Dzēsts fails\". \"Dzēsts\" implies the act of deleting, but \"izdzēsts\" more specifically conveys the completed action of file deletion.",
-          "suggestion": "Fails izdzēsts"
+          "description": "The Latvian translation \"Fails dzēsts\" is a literal translation and doesn't quite convey the intended meaning in a natural way. While technically correct, it sounds awkward.",
+          "suggestion": "Consider a more idiomatic translation such as \"Dzēsts fails\" or \"Fails ir dzēsts\"."
         }
       ],
       "approved_at": null
@@ -155,7 +155,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ගොනුව මකන ලදි\" literally translates to 'File was deleted'. While understandable, a more natural and concise translation for \"File deleted\" would be more appropriate.",
+          "description": "The translation 'ගොනුව මකන ලදි' while literally translating to 'file deleted', may not be the most natural or idiomatic phrasing in Sinhala. A more common and accurate translation would be something like 'ගොනුව ඉවත් කරන ලදි' or 'ගොනුව නිදහසට යවන ලදි'. The original translation leans towards a more active verb form ('deleted') when a more passive or completed action is likely implied in the context of a webhook event.",
           "suggestion": "ගොනුව ඉවත් කරන ලදි"
         }
       ],
@@ -179,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"Фајл\" is a valid transliteration of 'File' but a more common and natural word in Serbian would be 'Datoteka'.",
-          "suggestion": "Datoteka obrisana"
+          "description": "The word 'Фајл' is spelled correctly. 'обрисан' is the correct Serbian (Cyrillic) word for 'deleted' in this context.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -191,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian translation 'Fajl obrisan' uses the English word 'Fajl' instead of the Serbian equivalent. While understandable, it's not the most accurate representation.",
-          "suggestion": "Datoteka obrisana"
+          "description": "The Serbian word 'Fajl' is a transliteration of the English 'File'. While understandable, the more accurate and natural Serbian word for 'File' is 'Datoteka'.",
+          "suggestion": "Datoteka obrisan"
         }
       ],
       "approved_at": null

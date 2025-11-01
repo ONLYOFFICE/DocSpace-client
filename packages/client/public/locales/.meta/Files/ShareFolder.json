@@ -3,7 +3,7 @@
   "content": "Share folder",
   "content_en_sha1_hash": "687c04c1582283164463bd86282100f45da05c54",
   "created_at": "2025-05-19T21:30:56.180Z",
-  "updated_at": "2025-05-28T09:30:02.298Z",
+  "updated_at": "2025-08-12T19:46:25.944Z",
   "comment": {
     "text": "This translation key is used to display a folder sharing label on a file-related modal dialog. The phrase \"Share folder\" will be shown when the user interacts with the dialog related to sharing files within the application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ShareFolderDialog/index.js",
       "line_number": 56,
-      "context": "onClose();\n };\n \n return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Files:ShareFolder\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400} noSelect>\n {t(\"Files:ShareFolderDescription\")}\n </Text>\n </ModalDialog.Body>",
+      "context": "onClose();\n };\n \n return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Files:ShareFolder\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Files:ShareFolderDescription\")}\n </Text>\n </ModalDialog.Body>",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Qovluğu paylaşın' literally translates to 'Share the folder'. While understandable, a more natural and accurate translation of 'Share folder' in this context would be something like 'Paylaşılabilən qovluq' (Shareable folder) or 'Paylaşım qovluğu' (Sharing folder). The current translation implies an action rather than describing the folder's function.",
-          "suggestion": "Paylaşılabilən qovluq or Paylaşım qovluğu"
+          "description": "The translation \"Qovluğu paylaşın\" is a command and doesn't accurately reflect the meaning of \"Share folder\" which is a label or a name of a feature. A more accurate translation would be something like \"Paylaşılabilən qovluq\" or \"Paylaşım qovluğu\".",
+          "suggestion": "Paylaşılabilən qovluq"
         }
       ],
       "approved_at": null
@@ -57,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ordner freigeben\" is understandable, a more accurate and natural translation of \"Share folder\" in German would be \"Gemeinsamer Ordner\" or \"Freigegebener Ordner\". \"Ordner freigeben\" translates to \"release folder\" and doesn't fully convey the meaning of sharing a folder.",
-          "suggestion": "Gemeinsamer Ordner"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,13 +81,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Partager le dossier' is understandable, a more idiomatic and precise translation of 'Share folder' in a technical context would be 'Dossier partagé' or 'Partage de dossier'. 'Partager le dossier' implies an action, while 'Share folder' typically refers to the folder itself being shared.",
-          "suggestion": "Dossier partagé"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -102,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Համօգտագործել թղթապանակը\" (Hamogtavorgel tghtpapanyakը) literally translates to 'Share folder' or 'Use the folder together', but it's a slightly awkward phrasing for a 'Share folder' context. It doesn't quite convey the meaning of sharing a folder for others to access.",
-          "suggestion": "Կիսել թղթապանակը (Kisel tghtpapanyakը) - This more directly translates to 'Share the folder' and is a more natural phrasing."
+          "description": "The Armenian translation 'Համօգտագործել թղթապանակը' translates to 'Share folder' but the wording is a bit awkward and not the most natural way to express 'Share folder' in Armenian. It implies 'to use a folder together'.",
+          "suggestion": "A more natural translation would be something like 'Կիսվել թղթապանակով' (Kisvel t’g’tapanakov) which translates to 'Share a folder' or 'Ընդհանուր թղթապանակ' (Endhanur t’g’tapanak) which translates to 'Shared folder'."
         }
       ],
       "approved_at": null
@@ -132,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ແບ່ງປັນໂຟນເດີ\" is a literal translation of 'share folder'. While technically correct, it might not be the most natural or idiomatic way to express 'share folder' in Lao. It is quite formal.",
-          "suggestion": "Consider alternatives like \"ໂຟນເດີຮ່ວມໃຊ້\" (folder for shared use) or \"ໂຟນເດີແບ່ງປັນ\" (shared folder), depending on the specific context and target audience. Further investigation of common usage is recommended."
+          "description": "The Lao translation \"ແບ່ງປັນໂຟນເດີ\" while conveying a similar meaning of sharing, doesn't directly translate to 'Share folder'. A more accurate translation would consider the context of a folder being shared, perhaps implying access or distribution. 'ແບ່ງປັນໂຟນເດີ' is more generic for 'share folder'.",
+          "suggestion": "Consider 'ໂຟນເດີຮ່ວມແບ່ງ' or 'ໂຟນເດີແບ່ງປັນ' for a more precise translation that reflects the meaning of 'Share folder' in a computer/file sharing context."
         }
       ],
       "approved_at": null
@@ -153,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Udostępnij katalog\" is understandable, a more natural and common Polish translation for \"Share folder\" would be \"Wspólny folder\" or \"Folder udostępniony\". \"Udostępnij katalog\" translates more literally as \"Share catalog\" and implies an action of sharing, rather than the folder itself being shared.",
+          "suggestion": "Wspólny folder"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Partajare folder\" is not the most natural Romanian phrasing for \"Share folder\". \"Partajare\" implies sharing something already owned. A more appropriate translation would be something like \"Folder partajat\" or \"Dosar partajat\".",
-          "suggestion": "Folder partajat"
+          "description": "The term \"Partajare\" is not the most natural or accurate translation of \"Share\". A more common and natural translation would be \"Împărtășire\" or \"Distribuire\". \"Partajare\" is more common in certain dialects and contexts, but less universally understood.",
+          "suggestion": "Împărtășire folder"
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Предоставить доступ к папке' (Provide access to folder) is too literal and doesn't convey the same meaning as 'Share folder'. 'Share folder' implies granting access, but a more accurate translation would depend on the context. For a simple 'share' functionality, a better option might be 'Общая папка' (Shared folder).",
-          "suggestion": "Общая папка"
+          "description": "The Russian translation \"Предоставить доступ к папке\" (Provide access to folder) is a functional equivalent, but not a direct translation of \"Share folder.\" \"Share folder\" implies a sharing of the folder, while the translation emphasizes granting access.  A closer translation might be \"Общая папка\" (Common folder) or \"Папка для совместного доступа\" (Folder for shared access).",
+          "suggestion": "Consider \"Общая папка\" or \"Папка для совместного доступа\" for a more direct translation."
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"කාමරය බෙදාගන්න\" literally translates to \"share room\". While it conveys a similar concept, \"Share folder\" generally refers to a shared network folder, not just a room. A more accurate translation would convey the idea of a shared folder or directory.",
-          "suggestion": "කාමර බෙදාගන්න, ෆෝල්ඩර්"
+          "description": "The Sinhala translation \"කාමරය බෙදාගන්න\" literally translates to \"share room\". \"Share folder\" implies a folder containing files, not a physical room. A more accurate translation would focus on the concept of sharing a folder or file repository.",
+          "suggestion": "බාගත හැකි ෆෝල්ඩර් (Bahathaa Key Foldaer) - This translates to \"Downloadable Folder\", which conveys a file-sharing context. Another option: බෙදාහැල හැකි ෆෝල්ඩර් (Bedahaela Key Foldaer) - This translates to \"Shareable Folder\"."
         }
       ],
       "approved_at": null
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Дели фолдер\" is a direct transliteration of \"Share folder\" and does not convey the meaning accurately in Serbian. The word 'дели' (deli) means 'share' or 'divide', but in this context, it should be something like 'Подеољенa папка' or 'Заједничка папка'.",
-          "suggestion": "Подеољенa папка"
+          "description": "The Serbian (Cyrillic) translation \"Дели фолдер\" is a transliteration of \"Share folder\" and not a proper translation.  \"Дели\" means 'share' but is used as a transliteration of the English word. A more appropriate translation would convey the concept of a shared folder.",
+          "suggestion": "Поделна папка"
         }
       ],
       "approved_at": null
@@ -234,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Deli folder\" is not an accurate translation of \"Share folder.\" The correct translation should be \"Delimi folder\" or \"Podeli folder\". \"Deli\" is a verb form, not a noun.",
-          "suggestion": "Delimi folder"
+          "description": "The Serbian (Latin) translation \"Deli folder\" is not an accurate translation of \"Share folder.\" \"Deli\" means \"divide\" or \"distribute,\" which doesn't convey the intended meaning of sharing a folder.",
+          "suggestion": "The correct translation should be \"Folder za deljenje\" or simply \"Deljena mapa\"."
         }
       ],
       "approved_at": null
@@ -246,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Klasörü paylaş\" literally translates to \"Share the folder.\" While understandable, it lacks the nuance of \"Share folder\" which describes a feature or setting.  A more accurate translation would convey the concept of a shareable folder itself.",
-          "suggestion": "Paylaşım klasörü"
+          "description": "The translation \"Klasörü paylaş\" literally translates to \"Share the folder\". While understandable, \"Share folder\" implies a feature or setting, not an action. A more accurate translation would reflect this.",
+          "suggestion": "Paylaşılan klasör"
         }
       ],
       "approved_at": null

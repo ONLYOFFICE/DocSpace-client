@@ -32,28 +32,25 @@ import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./enums";
 
-export const messageActions = (
+export const messageActions = ({
   message,
   setElementProps,
-
   pluginName,
-
   setSettingsPluginDialogVisible,
   setCurrentSettingsDialogPlugin,
   updatePluginStatus,
   updatePropsContext,
   setPluginDialogVisible,
   setPluginDialogProps,
-
   updateContextMenuItems,
   updateInfoPanelItems,
   updateMainButtonItems,
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
-
+  updateCreateDialogProps,
   updatePlugin,
-) => {
+}) => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
   message.actions.forEach((action) => {
@@ -131,11 +128,18 @@ export const messageActions = (
         }
         break;
 
+      case PluginActions.updateCreateDialogModal:
+        if (message.createDialogProps) {
+          updateCreateDialogProps &&
+            updateCreateDialogProps(message.createDialogProps);
+        }
+        break;
+
       case PluginActions.showModal:
         if (message.modalDialogProps) {
           setPluginDialogVisible && setPluginDialogVisible(true);
           setPluginDialogProps &&
-            setPluginDialogProps(message.modalDialogProps);
+            setPluginDialogProps({ ...message.modalDialogProps, pluginName });
         }
 
         break;

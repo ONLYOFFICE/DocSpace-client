@@ -3,7 +3,7 @@
   "content": "Disconnect",
   "content_en_sha1_hash": "ed28e0686e1251ba046f582a3e9ec02470a5e78d",
   "created_at": "2025-05-19T21:30:44.562Z",
-  "updated_at": "2025-06-03T20:59:42.097Z",
+  "updated_at": "2025-10-16T07:29:35.586Z",
   "comment": {
     "text": "This translation key is used to display the label \"Disconnect\" or variations of it, such as \"Sign Up With Apple\", in various UI elements like buttons and icons. It appears on a settings page and is related to data management, file backup, or deletion options. Translators should use this key for localized versions of these labels.",
     "is_auto": true,
@@ -11,21 +11,27 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/common-container/DirectThirdPartyConnection.js",
-      "line_number": 208,
-      "context": "disabled: false,\n icon: RefreshReactSvgUrl,\n },\n {\n key: \"Disconnect-settings\",\n label: t(\"Common:Disconnect\"),\n onClick: onDisconnect,\n disabled: false,\n icon: AccessNoneReactSvgUrl,\n },\n ];",
+      "file_path": "/packages/client/src/components/dialogs/DisconnectAccountDialog/index.tsx",
+      "line_number": 88,
+      "context": "})}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:Disconnect\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onClickDisconnect}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2211,
-      "context": "},\n {\n id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),",
+      "line_number": 2297,
+      "context": "},\n {\n id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/shared/components/direct-third-party-connection/DirectThirdPartyConnection.tsx",
+      "line_number": 239,
+      "context": "icon: RefreshReactSvgUrl,\n dataTestId: \"connection_settings_option\",\n },\n {\n key: \"Disconnect-settings\",\n label: t(\"Common:Disconnect\"),\n onClick: onDisconnect,\n disabled: false,\n icon: AccessNoneReactSvgUrl,\n dataTestId: \"disconnect_settings_option\",\n },",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 377,
-      "context": "signUp = false,\n ) {\n const capitalizeProvider =\n provider.charAt(0).toUpperCase() + provider.slice(1);\n if (linked) {\n return `${t(\"Common:Disconnect\")} ${capitalizeProvider}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");",
+      "line_number": 415,
+      "context": "signUp = false,\n ) {\n const providerLabel = getProviderLabel(provider, t);\n \n if (linked) {\n return `${t(\"Common:Disconnect\")} ${providerLabel}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");",
       "module": "/packages/shared"
     }
   ],
@@ -48,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Bağlantını kəs\" translates to 'Disconnect', it's a more forceful, abrupt disconnection. A more natural and nuanced translation for 'Disconnect' (in a general context) might be something like \"Ayrılmaq\" or \"Kəsişmək\". 'Bağlantını kəs' implies actively severing a connection.",
-          "suggestion": "Consider using \"Ayrılmaq\" or \"Kəsişmək\" for a more general 'Disconnect'."
+          "description": "While \"Bağlantını kəs\" is understandable, it's a somewhat literal translation of \"Disconnect.\" A more natural and idiomatic Azerbaijani translation might be \"Ayrılmaq\" or \"Kopma\". \"Bağlantını kəs\" implies actively cutting a connection, which may not always be the intended meaning of \"Disconnect\".",
+          "suggestion": "Consider using \"Ayrılmaq\" or \"Kopma\" for a more natural Azerbaijani translation."
         }
       ],
       "approved_at": null
@@ -60,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Прекъсни връзката' is a valid translation, it's more literal ('Break the connection') than the simple 'Disconnect'. A more accurate and concise translation might be 'Прекъсване' or 'Разкачи'.",
-          "suggestion": "Consider 'Прекъсване' or 'Разкачи' for a more accurate and concise translation."
+          "description": "While \"Прекъсни връзката\" is a possible translation, it's quite literal and less idiomatic for 'Disconnect' in many contexts (e.g., disconnecting from a network or service). A more appropriate and commonly used translation would depend on the context but might be \"Разкачи\", \"Изключи\", or simply \"Прекъсване\" depending on the surrounding text.",
+          "suggestion": "Consider 'Разкачи', 'Изключи', or 'Прекъсване' based on context."
         }
       ],
       "approved_at": null
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Trennen Sie die Verbindung\" is a literal translation that's not the most natural or concise way to say 'Disconnect' in German. While technically correct, it's formal and lengthy.",
-          "suggestion": "Consider a more concise and common translation like \"Verbinden Sie trennen\" or simply \"Trennen\" depending on the context. \"Abmelden\" might also be appropriate in some cases (e.g., disconnecting from a service)."
+          "description": "The German translation \"Trennen Sie die Verbindung\" is overly formal and literally translates to 'Disconnect the connection.' A more natural and concise translation for 'Disconnect' in many contexts would be 'Verbindungen trennen' or simply 'Trennen'.",
+          "suggestion": "Consider using 'Verbindungen trennen' or 'Trennen' for a more natural and appropriate translation."
         }
       ],
       "approved_at": null
@@ -99,13 +105,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Katkaise\" can mean \"disconnect\", it's more literally \"cut off\" or \"sever\". \"Disconnect\" implies a more voluntary or temporary separation, while \"Katkaise\" suggests a more abrupt or forceful disconnection. A more appropriate translation might be \"Irrota\" or \"Katkaise yhteys\".",
-          "suggestion": "Consider \"Irrota\" or \"Katkaise yhteys\" for a more accurate translation of \"Disconnect\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ապակապակցել\" (Apakapaktsel) translates to 'to connect' or 'to link', not 'disconnect'. This is the opposite of the intended meaning.",
-          "suggestion": "The correct Armenian translation for 'disconnect' would be something like \"անջատել\" (Anjatel) or \"ջնջել կապը\" (Jnjel kapi) depending on the specific context."
+          "description": "The Armenian translation \"Ապակապակցել\" (Apakapktsel) means 'to connect' or 'to join', which is the opposite of 'Disconnect'.",
+          "suggestion": "The correct translation for 'Disconnect' should be something like \"անջատել\" (anjatel) or \"դադարել\" (dadarel)."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"接続解除\" (setsuzoku kaikei) is a technically correct translation for 'disconnect', it's quite formal and not the most natural choice for a user interface element.  It implies a deliberate action of disconnection. A more common and user-friendly translation might be something like \"切断\" (settan) or \"切る\" (kiru) depending on the context.",
-          "suggestion": "Consider using \"切断\" (settan) or \"切る\" (kiru) for a more natural and user-friendly feel.  The best option depends on the surrounding UI and the intended nuance."
+          "description": "While \"接続解除\" (setsu-zukeru kaijo) is a technically correct translation, it's a bit formal and technical for a simple \"Disconnect\". A more common and natural translation for a user-facing disconnect button or message might be \"切断\" (setudan) or \"切 off\".",
+          "suggestion": "Consider using \"切断\" (setudan) or \"切 off\" for a more user-friendly translation."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '연결 해제' (yeon-gyeol hae-je) is a possible translation for 'Disconnect,' it's more literally 'connection release' or 'deactivate connection.'  A more direct and common translation for 'Disconnect' in the context of a network or device would be '분리' (bun-ri) or '끊기' (kkeun-gi).",
-          "suggestion": "Consider '분리' (bun-ri) or '끊기' (kkeun-gi) for a more accurate translation depending on the context."
+          "description": "'연결 해제' (yeon-gyeol hae-je) literally translates to 'connection release' or 'disconnecting'. While it conveys a similar meaning to 'Disconnect', it might be slightly less direct or natural in certain contexts depending on the specific application. A more direct translation might be '분리' (bun-ri) which means 'separation' or 'disconnection'.",
+          "suggestion": "Consider '분리' (bun-ri) or re-evaluate the context to determine the most appropriate translation for 'Disconnect'."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'විසන්ධි කරන්න' (visandhi kāranna) translates to 'disconnect' or 'terminate', but the most common and natural translation of 'disconnect' in this context (likely referring to disconnecting from a network or device) would be 'වසන්නා නැවතන්න' (vasannā naewattennā) or simply 'වසන්නා නැවතන්න' depending on formality. 'විසන්ධි කරන්න' is more suited for situations of separation or division, not disconnection.",
-          "suggestion": "වසන්නා නැවතන්න (vasannā naewattennā)"
+          "description": "The translation 'විසන්ධි කරන්න' (visandhi karanna) literally means 'to disconnect' or 'to separate'. While it conveys a similar meaning to 'Disconnect,' it's more of an action. 'Disconnect' can also be a state of being disconnected. A more accurate translation, depending on the context, might be 'දුරුවීම' (duruvim) which implies the state of being disconnected, or keeping 'විසන්ධි කරන්න' if the context clearly implies the act of disconnecting.",
+          "suggestion": "Consider 'දුරුවීම' (duruvim) for a more precise translation if 'Disconnect' refers to the state of being disconnected. If the context implies an action, 'විසන්ධි කරන්න' is acceptable."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Прекини везу\" is a possible translation for \"Disconnect\", it's quite literal and not the most natural way to express disconnection in many contexts. Depending on the system being described, a more suitable translation might be \"Распојили се\" (Raspajili se - disconnected) or \"Прекинуо се\" (Prekinuo se - broke/terminated). \"Прекини везу\" implies more of an active disconnection initiated by a user.",
-          "suggestion": "Consider \"Распојили се\" or \"Прекинуо се\" depending on the context.  Further context needed for best suggestion."
+          "description": "While \"Прекини везу\" is a possible translation for \"Disconnect\", it's quite literal and might not be the most natural or appropriate choice depending on the context. 'Disconnect' can have different meanings (e.g., disconnect from a network, disconnect emotionally). \"Прекини везу\" primarily means 'cut off the connection'.",
+          "suggestion": "Consider alternatives like \"Распојни\", \"Одјави се\", or a more context-specific term.  Without more context, it's difficult to recommend a single best alternative."
         }
       ],
       "approved_at": null
@@ -252,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bağlantıyı kes\" while literally meaning \"Cut the connection\", is not the most natural or accurate translation for \"Disconnect\" in most contexts. It's more of an action (actively cutting a connection). A more appropriate translation, depending on the context, would be something like \"Ayrılmak\" (to disconnect) or simply \"Ayrılma\" (disconnection).",
-          "suggestion": "Consider \"Ayrılmak\" or \"Ayrılma\", or a context-specific alternative for 'Disconnect'."
+          "description": "The Turkish translation \"Bağlantıyı kes\" literally translates to \"Cut the connection.\" While it conveys the general meaning of disconnect, it's a rather abrupt and technically oriented phrasing. A more natural and user-friendly translation for a general context might be \"Ayrıl\" or \"Kapat\".",
+          "suggestion": "Ayrıl"
         }
       ],
       "approved_at": null

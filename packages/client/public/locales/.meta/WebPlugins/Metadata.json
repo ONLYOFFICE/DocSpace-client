@@ -3,7 +3,7 @@
   "content": "Metadata",
   "content_en_sha1_hash": "251edc0eb5a820646bda4e103f0f007fd55321f3",
   "created_at": "2025-05-19T21:30:49.911Z",
-  "updated_at": "2025-05-21T00:44:24.054Z",
+  "updated_at": "2025-09-24T13:10:16.964Z",
   "comment": {
     "text": "This translation key is used to display the label \"Metadata\" in a settings plugin dialog. It appears as a heading and is likely associated with a button or section title, providing context for users viewing plugin information.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 87,
-      "context": "return (\n <StyledContainer withDelete={withDelete}>\n {withSeparator ? <StyledSeparator /> : null}\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\" noSelect>\n {t(\"Metadata\")}\n </Text>\n <StyledInfo>\n {plugin.author ? (\n <>\n <Text",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
+      "line_number": 56,
+      "context": "[styles.withDelete]: withDelete,\n })}\n >\n {withSeparator ? <div className={styles.separator} /> : null}\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {t(\"Metadata\")}\n </Text>\n <div className={styles.info}>\n {plugin.author ? (\n <>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>",
       "module": "/packages/client"
     }
   ],
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຂໍ້ມູນກ່ຽວກັບຂໍ້ມູນ\" (kh้อมูล gỉeow kh้อมูล) literally translates to 'information about information.' While it conveys a general idea, it's not a natural or precise translation of 'Metadata.' Metadata means data about data and should be expressed more directly.",
-          "suggestion": "Consider alternatives like \"ຂໍ້ມູນຫຼັກ\" (khỏ mun lạp) – meaning 'core data,' or \"ຂໍ້ມູນລໍາ້ຽວ\" (kh้อมูล lampiao) – meaning 'detailed data' or a more creative translation depending on the context."
+          "description": "The Lao translation \"ຂໍ້ມູນກ່ຽວກັບຂໍ້ມູນ\" (kh้อมูล gĭao kh้อมูล) literally translates to 'information about information'. While not entirely wrong, it's a somewhat awkward and overly literal rendering of 'Metadata'. A more natural and accurate translation would convey the meaning of descriptive data.",
+          "suggestion": "Consider alternatives like \"ຂໍ້ມູນລັກສະນະ\" (kh้อมูล lók-sà-nà) which means 'characteristics data' or \"ຂໍ້ມູນລາຍລະອຽດ\" (kh้อมูล lai-ró-ìat) meaning 'detailed information'."
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Metadati' is a direct transliteration of 'Metadata' and doesn't represent a natural or commonly used Latvian equivalent. While understandable, it lacks fluency.",
+          "suggestion": "Consider using 'Metadatu' or a more contextually appropriate Latvian term that conveys the meaning of metadata (e.g., 'dati par datiem', 'datiem par datumiem')."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -159,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala translation 'පාරදත්ත' may be a transliteration of 'metadata' and lacks the inherent nuance of the English term. While technically a possible rendering, it's not the most common or easily understood translation for 'metadata' in Sinhala.",
+          "suggestion": "Consider using a more widely accepted translation for 'metadata' in Sinhala. Potential alternatives include 'දත්ත විස්තර' (data description) or 'මාලාවක්'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -186,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Metapodaci' doesn't accurately convey the meaning of 'Metadata'. While it sounds like a potential derivative, it's not a standard or widely understood Serbian term for Metadata. A more appropriate translation would be 'Metadatak'.",
-          "suggestion": "Metadatak"
+          "description": "The translation 'Metapodaci' is not a standard or commonly accepted translation of 'Metadata' in Serbian (Latin). It appears to be a literal, but inaccurate, transliteration. A more accurate and widely understood translation would be 'Metadatak(ci)' or simply 'Metadata'.",
+          "suggestion": "Metadatak(ci) or Metadata"
         }
       ],
       "approved_at": null

@@ -53,6 +53,8 @@ const HelpButton = (props: HelpButtonProps) => {
     children,
     isOpen,
     noUserSelect,
+    dataTestId,
+    tooltipStyle,
   } = props;
 
   const currentId = id || uniqueId();
@@ -73,10 +75,11 @@ const HelpButton = (props: HelpButtonProps) => {
     anchorSelect,
     isOpen,
     noUserSelect,
+    tooltipStyle,
   };
 
   return (
-    <div ref={ref} style={style} data-testid="help-button">
+    <div ref={ref} style={style} data-testid={dataTestId ?? "help-button"}>
       {children ? (
         <div id={currentId} className={componentClass}>
           {children}

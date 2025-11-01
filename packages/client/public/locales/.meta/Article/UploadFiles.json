@@ -3,7 +3,7 @@
   "content": "Upload files",
   "content_en_sha1_hash": "41aca16f905ad31d0eec695b710915a4892e116f",
   "created_at": "2025-05-19T21:30:57.048Z",
-  "updated_at": "2025-06-03T20:59:41.783Z",
+  "updated_at": "2025-10-16T07:29:35.493Z",
   "comment": {
     "text": "The \"UploadFiles\" translation key is used to display the label for a button that allows users to upload files in an article component. It appears as part of a dropdown menu and provides a clear indication of its purpose, making it accessible for translators to ensure consistency across different languages.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 564,
+      "line_number": 569,
       "context": "const newUploadActions = [\n {\n id: \"actions_upload-files\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"UploadFiles\"),\n onClick: onUploadFileClick,\n key: \"upload-files\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2804,
+      "line_number": 3127,
       "context": "icon: CatalogFolderReactSvgUrl,\n };\n \n const uploadFiles = {\n key: \"upload-files\",\n label: t(\"Article:UploadFiles\"),\n onClick: () => this.onUploadAction(\"file\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {",
       "module": "/packages/client"
     }
@@ -63,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Μεταφόρτωση αρχεία\" is not the most natural or accurate translation of \"Upload files\". While technically correct, it sounds slightly awkward.",
+          "suggestion": "Ανεβάστε αρχεία"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -111,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao transliteration 'ອັບໂຫລດຟາຍ' is a direct transliteration of 'Upload files' and while understandable, it's not the most natural or accurate translation for a Lao speaker. It lacks Lao word choice for 'upload'.",
+          "suggestion": "Consider using a more idiomatic Lao translation like 'ໂຫລດໄຟລ໌' (lod file) or 'ອັບ​ໂຕ້​ດ​ໄຟລ໌' (upload file) depending on the desired level of formality."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"ගොනු දමන්න\" (gonu damanna) literally translates to 'put files'. While understandable, a more accurate and common translation for 'Upload files' would be something like \"ගොනු උඩුගත කරන්න\" (gonu udhugata karanna).",
+          "suggestion": "ගොනු උඩුගත කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Отпреми датотеке' is not an accurate translation of 'Upload files'. 'Отпреми' means 'send' or 'dispatch', not 'upload'.",
+          "suggestion": "Изузми датотеке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +219,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Передати файли' is technically correct, it implies 'to transfer' files rather than 'to upload'.  'Upload' typically implies sending files *to* a specific location, and 'передати' is more neutral.",
+          "suggestion": "Завантажити файли"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

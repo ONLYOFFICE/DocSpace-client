@@ -24,13 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { getCookie } from "@docspace/shared/utils/cookie";
 
 import ArrowRightSvrUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
@@ -48,7 +45,7 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
     : `${portal.portalName}.${baseDomain}`;
 
   const onClick = () => {
-    const redirectUrl = getRedirectURL()!.replace(window.location.origin, name);
+    const redirectUrl = getRedirectURL()?.replace(window.location.origin, name);
 
     sessionStorage.removeItem("tenant-list");
 
@@ -59,7 +56,13 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
     <div className="item" onClick={onClick} data-testid={portal}>
       <div className="info">
         <img className="favicon" alt="Portal favicon" src={DefaultLogoUrl} />
-        <Text fontWeight={600} fontSize="14px" lineHeight="16px" truncate>
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          lineHeight="16px"
+          truncate
+          dataTestId="portal_name_text"
+        >
           {name.replace("http://", "").replace("https://", "")}
         </Text>
       </div>
@@ -67,6 +70,7 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
         iconName={ArrowRightSvrUrl}
         size={16}
         className="icon-button"
+        dataTestId="open_portal_icon_button"
       />
     </div>
   );

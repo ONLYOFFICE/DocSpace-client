@@ -46,11 +46,9 @@ const SearchActionProvider = ({ children }: { children: ReactNode }) => {
   const [isSearch, setIsSearch] = useState(false);
 
   return (
-    <SearchDispatchContext.Provider value={setIsSearch}>
-      <SearchValueContext.Provider value={isSearch}>
-        {children}
-      </SearchValueContext.Provider>
-    </SearchDispatchContext.Provider>
+    <SearchDispatchContext value={setIsSearch}>
+      <SearchValueContext value={isSearch}>{children}</SearchValueContext>
+    </SearchDispatchContext>
   );
 };
 
@@ -59,8 +57,8 @@ export const SearchProvider = ({
   ...rest
 }: TSelectorSearch & { children: ReactNode }) => {
   return (
-    <SearchContext.Provider value={rest}>
+    <SearchContext value={rest}>
       <SearchActionProvider> {children}</SearchActionProvider>
-    </SearchContext.Provider>
+    </SearchContext>
   );
 };

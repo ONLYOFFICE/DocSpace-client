@@ -1,4 +1,14 @@
-FROM node:20-bookworm-slim
+FROM node:22-bookworm-slim
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+# Install required dependencies
+RUN apt-get -y update && \
+    apt-get install -yq
+    
+# Install PNPM
+RUN npm install -g pnpm@10.3.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-cjk \
@@ -16,28 +26,36 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-COPY  .yarn/plugins .yarn/plugins
-COPY  .yarn/releases .yarn/releases/
-COPY  .yarnrc.yml .
-COPY  yarn.lock .
+# Set PNPM store directory
+RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
-COPY  package.json  .
-COPY  packages/sdk/package.json packages/sdk/package.json
-COPY  packages/shared/package.json packages/shared/package.json
-# remove after clearing packages for shared
-COPY  packages/client/package.json packages/client/package.json
+# Copy package files first for better layer caching
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
-RUN yarn install --no-immutable 
-RUN npx playwright install chromium --with-deps
+# Copy the source code with correct directory structure
+COPY common/ ./common/
+COPY packages/sdk/ ./packages/sdk/
+COPY packages/shared/ ./packages/shared/
+COPY public/ ./public/
 
-COPY  packages/sdk packages/sdk
-COPY  packages/shared packages/shared
-COPY  public public
+# ENV NODE_OPTIONS="--max-old-space-size=8192"
 
-# remove after clearing packages for shared
-COPY  packages/client packages/client
+# Install dependencies with recursive installation
+RUN pnpm install --frozen-lockfile
+
+# Clear any existing global Playwright installations to avoid conflicts
+RUN npm uninstall -g playwright playwright-core @playwright/test
+
+# Install Playwright browsers directly from the project's dependency
+RUN cd /app/packages/sdk && pnpm exec playwright install chromium --with-deps
+
+# Run before-build script (packages/runtime.json)
+RUN pnpm run before-build
+
+# Run build:translations
+RUN pnpm --filter @docspace/sdk run build:translations
 
 WORKDIR /app/packages/sdk
 
-RUN yarn test:build
-
+# Run test:build
+RUN pnpm --filter @docspace/sdk run test:build

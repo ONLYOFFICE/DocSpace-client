@@ -8,6 +8,8 @@
   "NeedSettings": "需要输入设置",
   "NoPlugins": "未添加插件",
   "NotNeedSettings": "无需输入设置",
+  "PluginIsNotCompatible": "插件 SDK 版本与{{productName}}版本不兼容，请更新到兼容版本。",
+  "PluginLoadedSuccessfully": "插件加载成功",
   "PluginSamples": "插件示例",
   "PluginSDK": "插件SDK",
   "PluginSDKDescription": "使用插件 SDK，您可以扩展{{productName}}功能、连接第三方服务或增强现有用户体验。您可以在此处找到 GitHub 上提供的带有代码源的插件示例。",

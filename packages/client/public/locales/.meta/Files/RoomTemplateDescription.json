@@ -3,7 +3,7 @@
   "content": "Use this template to quickly create a new room.",
   "content_en_sha1_hash": "7164e5be24cd4f164abaf5db47bf85dd7a58fd3c",
   "created_at": "2025-05-19T21:30:56.157Z",
-  "updated_at": "2025-05-28T09:30:02.420Z",
+  "updated_at": "2025-08-04T07:30:01.212Z",
   "comment": {
     "text": "This translation key is used to provide a brief description that explains the purpose of a button labeled \"Create Room\". The text will appear on a button in an info panel, prompting users to quickly create a new room.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.js",
-      "line_number": 153,
-      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className=\"room-template_text\"\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n \n <Button\n label={t(\"Common:CreateRoom\")}\n className=\"room-template_button\"",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
+      "line_number": 206,
+      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.roomTemplateText}\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n <Button\n label={t(\"Common:CreateRoom\")}\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}",
       "module": "/packages/client"
     }
   ],
@@ -133,7 +133,7 @@
         {
           "type": "spelling",
           "description": "The word 'templates' is misspelled. It should be 'template'.",
-          "suggestion": "Utilize este template para criar rapidamente uma nova sala."
+          "suggestion": "template"
         }
       ],
       "approved_at": null
@@ -150,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'crearea rapidă a sălii noi' is slightly awkward. 'crearea' (the creation) is not the most natural phrasing. A more idiomatic translation would be something like 'pentru a crea rapid o sală nouă' or 'pentru a crea rapid o cameră nouă'.",
+          "description": "The Romanian translation 'crearea rapidă a sălii noi' is a bit awkward. A more natural phrasing would be 'pentru a crea rapid o sală nouă' or 'pentru a crea rapid o cameră nouă'. 'Sală' can imply a hall, while 'cameră' is a more general term for a room.",
           "suggestion": "Folosiți acest șablon pentru a crea rapid o sală nouă."
         }
       ],
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Uporabite to predlogo in hitro ustvarite novo sobo' is a bit literal and doesn't flow as naturally as it could. The 'in' (and) feels a little awkward.",
+          "description": "The translation 'Uporabite to predlogo in hitro ustvarite novo sobo' is a bit literal and could be improved for naturalness in Slovenian. The 'in' (and) feels slightly awkward.",
           "suggestion": "Uporabite to predlogo za hitro ustvarjanje nove sobe."
         }
       ],

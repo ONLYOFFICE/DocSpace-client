@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:50.084Z",
-  "updated_at": "2025-05-21T02:12:49.736Z",
+  "updated_at": "2025-08-11T18:11:59.247Z",
   "comment": {
     "text": "This translation key is used as a label for a button that allows users to hide or toggle off Single Sign-On functionality. In the UI, this \"Hide\" button appears in a portal settings page and is likely used by administrators to manage their organization's SSO configuration.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/HideButton.js",
       "line_number": 45,
-      "context": ".hide-button {\n margin-inline-start: 12px;\n }\n `;\n \n const HideButton = (props) => {\n const { t } = useTranslation(\"SingleSignOn\");\n const { text, label, isAdditionalParameters, value, setHideLabel, id } =\n props;\n \n const onClick = () => {",
+      "context": ".hide-button {\n margin-inline-start: 12px;\n }\n `;\n \n const HideButton = (props) => {\n const { t } = useTranslation(\"SingleSignOn\");\n const {\n text,\n label,\n isAdditionalParameters,",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Gizlədin\" is a conjugated verb form (first person singular, past tense) meaning 'I hid'. The correct translation for 'Hide' (as a noun or imperative) should be \"Gizlə\" (imperative) or \"Gizləmə\" (gerund/noun form).",
-          "suggestion": "Gizlə"
+          "description": "The Azerbaijani translation \"Gizlədin\" is not the correct translation for \"Hide\". \"Gizlədin\" is a verb form (I hid). The correct translation would be a noun, like \"Gizləmə\" (Hiding) or \"Qapalı\" (Hidden/Closed).",
+          "suggestion": "Consider \"Gizləmə\" or \"Qapalı\"."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Скриване' while technically meaning 'hiding' in a verb form, doesn't accurately represent the English word 'Hide' which functions as a noun in this context (e.g., a setting to 'Hide' something). A more appropriate translation would be 'Криене'.",
-          "suggestion": "Криене"
+          "description": "The Bulgarian translation \"Скриване\" (Skrivane) is a noun, meaning \"hiding\" or \"concealment.\" The English word \"Hide\" is a verb (to hide) or a noun (a place to hide). A more accurate translation, depending on the intended meaning, could be \"Скрий\" (Skrii) - imperative form, meaning \"Hide!\" or \"Крий\" (Krii) - infinitive form.",
+          "suggestion": "Consider \"Скрий\" or \"Крий\" depending on the context."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'සඟවන්න' (sagavanna) can mean 'hide,' it carries a connotation of concealing something deliberately or secretively. 'Hide' in the context of SingleSignOn likely refers to a UI element being visually hidden or collapsed, not actively concealed. A more appropriate translation might be 'ගැබවන්න' (gabavanna) which means 'to fold' or 'to collapse', or simply 'සිඟිමුට්ටිය' (sigimuttiya) which is the UI element that can be hidden.",
-          "suggestion": "Consider 'ගැබවන්න' (gabavanna) or 'සිඟිමුට්ටිය' (sigimuttiya) for a more accurate translation depending on the intended meaning."
+          "description": "The translation 'සඟවන්න' (sagavanna) implies 'to conceal' or 'to hide away,' which isn't a perfect synonym for 'Hide' in the context of a UI element (e.g., a button to hide something). A more appropriate translation might convey the action of making something invisible or not displayed.",
+          "suggestion": "Consider alternatives like 'වැවන්න' (vävenna - to cover/hide in a UI sense) or 'ඉවත් කරන්න' (iwath karanawa - to remove/take away)."
         }
       ],
       "approved_at": null
@@ -195,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Сакриј\" is a valid translation of \"Hide\", it might be too literal depending on the context of SingleSignOn. A more contextually appropriate translation could be considered.",
-          "suggestion": "Consider alternative translations like \"Прикриј\" or \"Сачувај\" depending on the desired nuance within the SingleSignOn feature."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

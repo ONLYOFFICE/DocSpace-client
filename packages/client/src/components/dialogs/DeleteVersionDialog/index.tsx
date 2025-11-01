@@ -87,7 +87,7 @@ const DeleteVersionDialogComponent: React.FC<DeleteVersionDialogProps> = (
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text lineHeight="20px" noSelect>
+          <Text lineHeight="20px">
             {t("VersionHistory:DeleteVersionDescription")}
           </Text>
         </div>

@@ -55,31 +55,31 @@ const getInitialState = (sortedFiles: TSortedFiles) => {
     documents: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.documents,
     },
     spreadsheets: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.spreadsheets,
     },
     presentations: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.presentations,
     },
     masterForms: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.masterForms,
     },
     pdfForms: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.pdfForms,
     },
     diagrams: {
@@ -91,7 +91,7 @@ const getInitialState = (sortedFiles: TSortedFiles) => {
     other: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.other,
     },
   };
@@ -442,9 +442,9 @@ const DownloadDialog = (props: DownloadDialogProps) => {
   const mainContent = (
     <>
       <div className={styles.downloadDialogBodyContent}>
-        <Text noSelect>{t("Common:ChooseFormatText")}.</Text>
+        <Text>{t("Common:ChooseFormatText")}.</Text>
         {!isSingleFile ? (
-          <Text noSelect>
+          <Text>
             <Trans t={t} ns="Common" i18nKey="ConvertToZip" />
           </Text>
         ) : null}
@@ -458,6 +458,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           titleFormat={state.documents.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.Documents}
           title={t("Common:Documents")}
+          dataTestId="download_dialog_documents"
         />
       ) : null}
       {state.spreadsheets.files.length > 0 ? (
@@ -469,6 +470,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           titleFormat={state.spreadsheets.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.Spreadsheets}
           title={t("Common:Spreadsheets")}
+          dataTestId="download_dialog_spreadsheets"
         />
       ) : null}
       {state.presentations.files.length > 0 ? (
@@ -480,6 +482,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           titleFormat={state.presentations.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.Presentations}
           title={t("Common:Presentations")}
+          dataTestId="download_dialog_presentations"
         />
       ) : null}
       {state.masterForms.files.length > 0 ? (
@@ -491,6 +494,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           titleFormat={state.masterForms.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.MasterForms}
           title={t("Common:FormTemplates")}
+          dataTestId="download_dialog_master-forms"
         />
       ) : null}
       {state.pdfForms.files.length > 0 ? (
@@ -502,6 +506,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           titleFormat={state.pdfForms.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.PdfForms}
           title={t("Common:Forms")}
+          dataTestId="download_dialog_pdf-forms"
         />
       ) : null}
       {state.diagrams.files.length > 0 ? (
@@ -513,6 +518,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           titleFormat={state.diagrams.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.Diagrams}
           title={t("Common:Diagrams")}
+          dataTestId="download_dialog_diagrams"
         />
       ) : null}
       {state.other.files.length > 0 ? (
@@ -523,10 +529,11 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           items={state.other.files}
           type={DownloadedDocumentType.Other}
           title={t("Common:Other")}
+          dataTestId="download_dialog_other"
         />
       ) : null}
       <div className={styles.downloadDialogConvertMessage}>
-        <Text noSelect>{t("Common:ConvertMessage")}</Text>
+        <Text>{t("Common:ConvertMessage")}</Text>
       </div>
     </>
   );
@@ -586,6 +593,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
             needPassword ? !isAllPasswordFilesSorted : checkedLength === 0
           }
           scale
+          testId="download_dialog_submit_button"
         />
         <Button
           key="CancelButton"
@@ -593,6 +601,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           size={ButtonSize.normal}
           onClick={onClose}
           scale
+          testId="download_dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

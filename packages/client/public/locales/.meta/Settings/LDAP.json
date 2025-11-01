@@ -3,7 +3,7 @@
   "content": "LDAP Settings",
   "content_en_sha1_hash": "fa317c0328f913259d21719d60750333e991d03c",
   "created_at": "2025-05-19T21:30:51.782Z",
-  "updated_at": "2025-05-28T09:30:02.645Z",
+  "updated_at": "2025-10-07T15:39:07.484Z",
   "comment": {
     "text": "This translation key \"LDAP Settings\" is used to label a settings container that contains configuration options for Lightweight Directory Access Protocol (LDAP). It appears as a button in certain mobile views and is likely displayed in a dialog or settings section.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer.js",
-      "line_number": 84,
-      "context": "}, []);\n \n const renderBody = () => (\n <>\n {!isMobileView ? (\n <HideButton text={t(\"Settings:LDAP\")} value={isSettingsShown} />\n ) : null}\n \n {isMobileView ? <ToggleLDAP /> : null}\n \n {isMobileView || isSettingsShown ? (",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
+      "line_number": 88,
+      "context": "} = useIntegration(defaultProps.integration);\n \n const data = [\n {\n id: \"ldap\",\n name: t(\"Settings:LDAP\"),\n content: <LdapSettings />,\n onClick: async () => {\n clearAbortControllerArr();\n await getLDAPData();\n },",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 38,
-      "context": "import config from \"PACKAGE_FILE\";\n \n import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n \n import SSO from \"./SingleSignOn\";\n import LDAP from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";\n import PluginPage from \"./Plugins\";",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer.js",
+      "line_number": 84,
+      "context": "}, []);\n \n const renderBody = () => (\n <>\n {!isMobileView ? (\n <HideButton text={t(\"Settings:LDAP\")} value={isSettingsShown} />\n ) : null}\n \n {isMobileView ? <ToggleLDAP /> : null}\n \n {isMobileView || isSettingsShown ? (",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Parametrləri\" technically means 'Parameters,' in the context of 'Settings,' a more natural and accurate translation would be 'Tənzimləmələri' or 'Ayarları'. 'Parametrləri' is more suitable for technical configurations, but 'Settings' often implies user-adjustable options.",
-          "suggestion": "Tənzimləmələri"
+          "description": "While \"Parametrləri\" (Parameters) is a reasonable translation, \"Parametrləri\" doesn't fully capture the meaning of 'Settings'. A more accurate translation would reflect the context of configurations.",
+          "suggestion": "Consider \"LDAP Tənzimləmələri\" (LDAP Adjustments/Configurations) or \"LDAP Ayarları\" (LDAP Settings - uses a more common term for settings in Turkish-influenced Azerbaijani)."
         }
       ],
       "approved_at": null
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Armenian word 'Կարգավորումներ' is generally correct for 'Settings,' but contextually, 'LDAP' is being used as a specific technical term. A more precise translation might be considered for technical accuracy.",
+          "suggestion": "Consider 'LDAP-ի կարգավորումներ' (LDAP-i kargavorumner) to emphasize that these are settings *for* LDAP."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -165,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala translation \"LDAP සැකසුම්\" uses the word \"සැකසුම්\" which is a general term for 'settings' or 'arrangements'. While not incorrect, it may not fully convey the specific meaning of 'LDAP Settings'.",
+          "suggestion": "Consider a more specific translation that captures the technical meaning of 'LDAP Settings', such as \"LDAP හරඹ සැකසුම්\" (LDAP haramba sakasuum - LDAP configuration) or \"LDAP පරිශීලක සැකසුම්\" (LDAP parishilaka sakasuum - LDAP user settings). However, this requires understanding the context of where these settings are used."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -185,9 +197,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'LDAP Подешавања' while generally understandable, isn't the most natural or precise translation of 'LDAP Settings'. 'Подешавања' translates to 'Settings' but directly translating 'LDAP' is often preferred for clarity in technical contexts.",
-          "suggestion": "LDAP Подешавање or LDAP Поставке"
+          "type": "spelling",
+          "description": "The word 'Подешавања' is generally correct but depending on the context (technical documentation), 'Поставке' might be a more common and preferred term for 'Settings'.",
+          "suggestion": "Consider using 'LDAP Поставке' for increased clarity and consistency with common technical terminology."
         }
       ],
       "approved_at": null
@@ -216,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Cài đặt\" translates to 'Settings' or 'Installation', 'LDAP Settings' specifically refers to the configuration of LDAP. 'Cài đặt LDAP' implies installing LDAP, not configuring it. A more accurate translation might focus on configuration.",
-          "suggestion": "Cấu hình LDAP"
+          "description": "While \"Cài đặt\" translates to \"Settings\" or \"Installation\", it doesn't fully convey the meaning of \"LDAP Settings\". It implies an installation process rather than configuration options.",
+          "suggestion": "Consider \"Thiết lập LDAP\" or \"Cấu hình LDAP\". \"Thiết lập\" is a more general term for settings, and \"Cấu hình\" specifically refers to configuration."
         }
       ],
       "approved_at": null

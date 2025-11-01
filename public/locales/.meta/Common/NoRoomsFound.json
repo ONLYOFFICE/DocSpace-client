@@ -3,7 +3,7 @@
   "content": "No rooms found",
   "content_en_sha1_hash": "ad2c3ebdb031938200e1b48e4c1f024860a8d3b2",
   "created_at": "2025-05-19T21:30:46.846Z",
-  "updated_at": "2025-05-28T09:30:02.949Z",
+  "updated_at": "2025-08-12T19:46:26.355Z",
   "comment": {
     "text": "The translation key \"NoRoomsFound\" is used to display a message indicating that no rooms are available for selection in an empty screen form. It appears as a heading on an empty room selection screen and provides context for users when no rooms can be found.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
       "line_number": 73,
-      "context": "className=\"empty-image\"\n src={formRoomEmptyScreenImage}\n alt=\"empty-screen\"\n />\n <Heading level={3} className=\"empty-header\">\n {t(\"Common:NoRoomsFound\")}\n </Heading>\n <Text className=\"empty-description\" noSelect>\n {description}\n </Text>\n <div className=\"empty_button-wrapper\" onClick={onCreateClickAction}>",
+      "context": "className=\"empty-image\"\n src={formRoomEmptyScreenImage}\n alt=\"empty-screen\"\n />\n <Heading level={3} className=\"empty-header\">\n {t(\"Common:NoRoomsFound\")}\n </Heading>\n <Text className=\"empty-description\">{description}</Text>\n <div className=\"empty_button-wrapper\" onClick={onCreateClickAction}>\n <SelectorAddButton\n isAction",
       "module": "/packages/shared"
     }
   ],
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Otaqlar tapılmadı' is a literal translation of 'No rooms found', a more natural and idiomatic Azerbaijani translation would be 'Xanafələr tapılmadı' or 'Heç bir otaq tapılmadı'.",
-          "suggestion": "Consider using 'Xanafələr tapılmadı' or 'Heç bir otaq tapılmadı' for a more natural-sounding translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -111,19 +105,19 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ບໍ່ພົບຫ້ອງໃດໆ\" is a literal translation of \"No rooms found\" and while understandable, it's not the most natural phrasing in Lao. A more idiomatic translation might be \"ບໍ່ເຫັນຫ້ອງໃດໆ\" or \"ບໍ່ມີຫ້ອງພົບ\".",
+          "suggestion": "Consider \"ບໍ່ເຫັນຫ້ອງໃດໆ\" or \"ບໍ່ມີຫ້ອງພົບ\" for a more natural Lao phrasing."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Nav atrasta neviena telpa' is understandable, a more natural and commonly used translation of 'No rooms found' would be 'Nav atrastas telpas'.  The plural form 'telpas' is more idiomatic in this context.",
-          "suggestion": "Nav atrastas telpas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මමගෙ කාමරයක් හමුවේ් නැත.' literally translates to 'I didn't find a room'. While understandable, a more natural and common translation for 'No rooms found' would be 'කාමරයක් නොවීය' or 'කාමර කිසිවක් නොවීය'. The possessive 'මමගෙ' (mine/my) is unnecessary and changes the meaning slightly.",
-          "suggestion": "කාමර කිසිවක් නොවීය"
+          "description": "The translation \"මමගෙ කාමරයක් හමුවේ් නැත.\" literally translates to \"My room was not found.\"  The intended meaning is a general statement that no rooms were found, not that the speaker's room wasn't found. This is an incorrect translation of the English phrase 'No rooms found'.",
+          "suggestion": "කිසිම කාමරයක් හමුවේ් නැත (Kisim kamarayak hamuvenatha) - Meaning 'No rooms were found'."
         }
       ],
       "approved_at": null
@@ -198,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nema pronađenih prostorija\" while grammatically correct, is a more formal and literal translation of \"No rooms found.\" A more natural and common Serbian (Latin) translation would be \"Nema dostupnih soba\" or \"Nema slobodnih soba\". \"Prostorija\" can refer to any room, while \"soba\" is generally understood as a room for living or working.",
+          "description": "The translation \"Nema pronađenih prostorija\" is technically correct but sounds overly formal and literal for a user-facing message. \"Nema dostupnih soba\" or \"Nema soba\" would be more natural and user-friendly.",
           "suggestion": "Nema dostupnih soba"
         }
       ],

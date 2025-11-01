@@ -3,7 +3,7 @@
   "content": "Clear all selections",
   "content_en_sha1_hash": "7d49842f4d504854e52ee0d1ad7b50eabc064b48",
   "created_at": "2025-05-19T21:30:55.028Z",
-  "updated_at": "2025-05-21T10:36:49.074Z",
+  "updated_at": "2025-08-12T19:46:25.977Z",
   "comment": {
     "text": "This translation key is used to display the label \"Clear all selections\" in a UI component that allows users to clear multiple selections. It appears as a button or similar action element.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 98,
-      "context": "</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysClearAll\")}</Text>\n <Text {...keyTextStyles}>Shift + n {t(\"Common:Or\")} Esc</Text>\n </>\n </Row>\n </>\n );",
+      "context": "</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysClearAll\")}</Text>\n <Text {...keyTextStyles}>Shift + n {t(\"Common:Or\")} Esc</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Изчистване на всички селекции\" is a literal translation of 'Clear all selections' but doesn't quite convey the meaning in a natural Bulgarian way. 'Clear all selections' in the context of hotkeys typically means to reset them to default. A more appropriate translation would reflect that.",
-          "suggestion": "Нулиране на всички клавишни комбинации"
+          "description": "The translation \"Изчистване на всички селекции\" is a literal translation of 'Clear all selections' but doesn't quite capture the meaning in a natural Bulgarian way for a UI element. \"Clear all selections\" implies removing all currently assigned hotkeys. A more idiomatic translation might be closer to 'Премахване на всички настройки' or 'Изчистване на всички присвоени клавиши'.",
+          "suggestion": "Премахване на всички настройки"
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Auswahl löschen\" is a literal translation of \"Clear all selections\". While technically correct, it lacks the nuance of 'all' and might be misleading. A more accurate translation that conveys the intent of clearing *all* selections would be better.",
-          "suggestion": "Alle Auswahlen löschen"
+          "description": "While \"Auswahl löschen\" is understandable, \"Clear all selections\" implies removing *all* selections. \"Auswahl löschen\" simply means 'delete selection'. It doesn't explicitly convey the 'all' aspect.",
+          "suggestion": "Auswahl komplett löschen"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Մաքրել բոլոր ընտրվածքները\" while literally meaning \"Clear all selections\" might not be the most natural or idiomatic phrasing for a 'Clear All' function in a hotkeys panel. It sounds a bit formal.",
-          "suggestion": "Consider alternatives like \"Մաքրել ամեն ինչ\" (Clear everything) or \"Ջնջել բոլորը\" (Delete all) which might be more commonly understood in this context. Alternatively, \"Մաքրել ընտրությունները\" (Clear selections) could be considered if 'all' is less important."
+          "description": "The translation 'Մաքրել բոլոր ընտրվածքները' while technically correct, might be overly literal and not the most natural phrasing for a hotkey label. 'Clear all selections' implies removing selections, but the Armenian translation focuses more on 'cleaning' them.  A more user-friendly translation might be needed depending on the context.",
+          "suggestion": "Consider alternatives like 'Ջնջել բոլոր ընտրվածքները' (Delete all selections) or 'Հեռացնել բոլոր ընտրվածքները' (Remove all selections), which might be clearer in a user interface context."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"全選択を解除\" (Zenselection wo kaijo) literally translates to \"Release all selections.\" While close in meaning to \"Clear all selections,\" '解除' (kaijo) implies a release or cancellation of something already selected, whereas 'clear' suggests removing the selections entirely. 'クリア' (kuria) or '消去' (shakujo) would be more accurate translations of 'clear' in this context.",
-          "suggestion": "全選択をクリア (Zenselection wo kuria) or 全選択を消去 (Zenselection wo shakujo)"
+          "description": "The translation '全選択を解除' literally translates to 'release all selections'. While it conveys a similar meaning to 'Clear all selections', it's not the most natural or common phrasing in Japanese for clearing selections in a user interface.  'クリア' (kuriya) is often used for 'clear' in a UI context.",
+          "suggestion": "全選択をクリア"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"모든 선택 삭제\" is technically correct but a more natural and user-friendly translation would be \"선택 초기화\" or \"선택 해제\". \"삭제\" implies deletion, which might be too strong a term for clearing selections in a hotkeys panel.",
-          "suggestion": "선택 초기화"
+          "description": "While \"모든 선택 삭제\" is technically correct, it lacks the nuance of 'Clear all selections.' '선택' emphasizes *chosen* selections. A more natural translation for a hotkey function would be something that implies a reset or removal of all settings.",
+          "suggestion": "모든 설정 초기화"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Notīrīt visas atlases\" is understandable, a more accurate and natural translation of \"Clear all selections\" would be \"Notīrīt visas izvēles\". 'Atlases' implies a more active or deliberate selection, whereas 'izvēles' is a more general term for selections or choices.",
-          "suggestion": "Notīrīt visas izvēles"
+          "description": "The translation 'Notīrīt visas atlases' while technically correct, doesn't fully capture the meaning of 'Clear all selections' in the context of hotkeys. 'Atlases' refers to selections made, but the English phrase implies a clearing action on the hotkey assignments themselves. A more natural translation might emphasize the clearing of the hotkey assignments.",
+          "suggestion": "Dzēst visas saīsmes"
         }
       ],
       "approved_at": null
@@ -162,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Wyczyść zaznaczenie\" translates to \"Clean selection\" which doesn't fully capture the meaning of \"Clear all selections\". It implies cleaning a single selection, not removing all of them.",
+          "description": "The translation \"Wyczyść zaznaczenie\" translates literally to 'Clear selection' instead of 'Clear all selections'. It misses the 'all'.",
           "suggestion": "Wyczyść wszystkie zaznaczenia"
         }
       ],
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Отменить все выделения\" is understandable, it's not the most natural or precise translation of 'Clear all selections'. 'Отменить' often implies undoing an action, whereas 'Clear' suggests removing selections entirely. A more accurate and natural-sounding translation would be closer to 'Сбросить все выделения'.",
-          "suggestion": "Сбросить все выделения"
+          "description": "The translation 'Отменить все выделения' while literally meaning 'Cancel all selections', doesn't quite capture the intent of 'Clear all selections' in the context of hotkeys.  'Clear' implies removing assignments, not just canceling a selection.",
+          "suggestion": "Очистить все назначения"
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"සියළුම තේරීම් ඉවතලන්න\" while understandable, isn't the most natural or idiomatic way to express \"Clear all selections\" in Sinhala. A more suitable translation would emphasize the 'clearing' action.",
-          "suggestion": "සියළුම තේරීම් නිෂ්ක්‍රිය කරන්න (Siyāluma thērim nishkr̥ya karmaṇa)"
+          "description": "The translation 'සියළුම තේරීම් ඉවතලන්න' is a literal translation of 'all selections remove'. A more natural and idiomatic Sinhala translation for 'Clear all selections' would be something along the lines of 'සියළුම නිවැරදි කිරීම් අහෝසි කරන්න' (Siya luma niwada kirim ahuosi krawnna) or 'සියළුම තේරීම් අවලංගු කරන්න' (Siya luma therim avalangu krawnna).",
+          "suggestion": "සියළුම නිවැරදි කිරීම් අහෝසි කරන්න"
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Clear all selections' implies removing all currently assigned hotkeys. The Slovak translation 'Zrušiť všetky výbery' literally means 'Cancel all selections,' which isn't a direct equivalent and may imply a different action. It suggests canceling an ongoing selection process rather than clearing existing assignments.",
-          "suggestion": "Consider a translation like 'Vymazať všetky nastavenia' (Clear all settings) or 'Obnoviť všetky nastavenia' (Reset all settings) to more accurately convey the intended meaning of clearing existing hotkey assignments."
+          "description": "The translation \"Zrušiť všetky výbery\" doesn't perfectly capture the meaning of \"Clear all selections\". While 'Zrušiť' (to cancel/revoke) is close, 'Clear' implies a reset or removal, which isn't fully conveyed. A more accurate translation might emphasize the removal aspect.",
+          "suggestion": "Vyčistiť všetky výbery"
         }
       ],
       "approved_at": null
@@ -228,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Premakni vse izbire' translates to 'Move all selections', which doesn't accurately convey the meaning of 'Clear all selections'. 'Clear' implies removing the selections, not moving them.",
+          "description": "The translation 'Premakni vse izbire' doesn't accurately convey the meaning of 'Clear all selections'. 'Premakni' means 'move', while 'clear' implies removing or resetting.",
           "suggestion": "Počisti vse izbire"
         }
       ],
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Обриши све селекције' is a literal translation of 'Clear all selections' but it doesn't quite capture the intended meaning in a UI context. 'Обриши' implies a forceful deletion, which might not be what's desired. A more suitable phrasing would convey 'resetting' or 'removing' the selections.",
-          "suggestion": "Избриши све селекције"
+          "description": "While \"Обриши све селекције\" is understandable, a more accurate and natural translation of \"Clear all selections\" would be \"Избриши све изборе\" or \"Очисти све изборе\". \"Селекције\" can feel slightly awkward in this context.",
+          "suggestion": "Избриши све изборе"
         }
       ],
       "approved_at": null
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Скасувати весь вибір\" while understandable, doesn't perfectly capture the nuance of 'Clear all selections'. 'Скасувати' implies undoing something, whereas 'Clear' is more about removing the selections.",
-          "suggestion": "Очистити всі виділення"
+          "description": "The translation 'Скасувати весь вибір' literally translates to 'Cancel all selection'. While functionally similar, 'Clear all selections' implies removing the selections rather than canceling them. A more accurate translation might be 'Очистити всі вибори' or 'Зняти всі вибори'.",
+          "suggestion": "Очистити всі вибори"
         }
       ],
       "approved_at": null

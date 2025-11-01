@@ -3,7 +3,7 @@
   "content": "This user account is loaded from LDAP. If you need to change the user name and email address, or disable a user, refer to the LDAP directory.",
   "content_en_sha1_hash": "c6c9f4030007d68e41bd8f5af7b73dfdf15d63b7",
   "created_at": "2025-05-19T21:30:53.478Z",
-  "updated_at": "2025-05-28T09:30:02.419Z",
+  "updated_at": "2025-09-19T15:39:23.111Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining that a user's account is loaded from LDAP, providing guidance on how to manage their account details. It appears in UI elements related to user accounts and profiles. Translators should provide an explanation of what it means for a user's account to be \"loaded from LDAP\".",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/UsersItemTitle.tsx",
-      "line_number": 185,
-      "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>\n {t(\"PeopleTranslations:LDAPAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n </div>\n <>",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
+      "line_number": 201,
+      "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>\n {t(\"PeopleTranslations:LDAPAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 357,
-      "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>\n {t(\"PeopleTranslations:LDAPAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n \n {!profile.isSSO && !profile.isLDAP ? (",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 419,
+      "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>\n {t(\"PeopleTranslations:LDAPAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n \n {!profile!.isSSO && !profile!.isLDAP ? (",
       "module": "/packages/client"
     }
   ],
@@ -33,25 +33,36 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"تعطيل حساب مستخدم\" is technically correct, but a more natural and common phrasing for disabling a user account in Arabic would be \"تعطيل مستخدم\".",
-          "suggestion": "يتم تحميل حساب المستخدم من LDAP. إذا كنت بحاجة إلى تغيير اسم المستخدم والبريد الالكتروني، أو تعطيل مستخدم، راجع دليل LDAP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"istifadəçini deaktiv etmək lazımdırsa\" is a bit awkward. A more natural phrasing would be \"istifadəçini söndürmək (or etraf etmək) lazımdırsa\".  'Deaktiv etmək' is technically correct but less common in this context.",
+          "suggestion": "Bu istifadəçi hesabı LDAP-dan yüklənib. İstifadəçi adı və e-poçt ünvanını dəyişmək və ya istifadəçini söndürmək (or etraf etmək) lazımdırsa, LDAP kataloqunu yoxlayın."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'user account' is translated as 'потребителски профил'. While technically correct, 'потребителски акаунт' would be a more common and readily understandable translation in a technical context, aligning closer to the English term 'user account'.",
+          "suggestion": "Consider using 'потребителски акаунт' instead of 'потребителски профил'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'или' (or) twice in the phrase 'промените потребителското име и имейл адреса или да деактивирате потребител' is stylistically less elegant. While grammatically correct, it could be improved for readability.",
+          "suggestion": "Consider restructuring the sentence to avoid the repetition of 'или'. For example: 'Ако трябва да промените потребителското име и имейл адреса или да деактивирате потребител, вижте LDAP директорията.'"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -84,13 +95,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence \"Jos haluat vaihtaa käyttäjänimeä tai sähköpostiosoitetta, tai poistaa käyttäjä käytöstä\" is grammatically awkward. The phrase 'käyttäjä käytöstä' should be 'käyttäjä pois käytöstä' or 'käyttäjä poistosta'.",
-          "suggestion": "Jos haluat vaihtaa käyttäjänimeä tai sähköpostiosoitetta, tai poistaa käyttäjä pois käytöstä."
+          "description": "The sentence \"Jos haluat vaihtaa käyttäjänimeä tai sähköpostiosoitetta, tai poistaa käyttäjä käytöstä\" is slightly awkward. The repetition of 'käyttäjä' is unnecessary.",
+          "suggestion": "Jos haluat vaihtaa käyttäjänimeä tai sähköpostiosoitetta, tai poistaa käyttäjän käytöstä..."
         },
         {
-          "type": "formatting",
-          "description": "The sentence is long and could be split for better readability. While not strictly incorrect, it's less fluent.",
-          "suggestion": "Tämä käyttäjätili on ladattu LDAP:lta. Jos haluat vaihtaa käyttäjänimeä tai sähköpostiosoitetta, tee se LDAP-hakemistossa. Jos haluat poistaa käyttäjän käytöstä, tee se myös LDAP-hakemistossa."
+          "type": "grammar",
+          "description": "The sentence \"...se tehdään LDAP-hakemistossa.\" is passive and can be improved. It lacks clarity about who or what is doing the change.",
+          "suggestion": "...toimenpiteet tulee tehdä LDAP-hakemistossa."
         }
       ],
       "approved_at": null
@@ -107,13 +118,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'էլ․փոստի' is an abbreviation and might be unclear to some users. While technically correct, a full spelling would be more accessible.",
-          "suggestion": "Replace 'էլ․փոստի' with 'էլեկտրոնային փոստի'"
+          "description": "The abbreviation 'էլ․փոստի' is not universally accepted. While understood, the full word 'էլեկտրոնային փոստի' is more common and formal.",
+          "suggestion": "էլեկտրոնային փոստի"
         },
         {
           "type": "formatting",
-          "description": "The use of a space before the colon after 'էլ․փոստի' (or suggested replacement) is inconsistent with standard Armenian punctuation. Consider removing the space.",
-          "suggestion": "Remove the space before the colon: 'էլ․փոստի:' or 'էլեկտրոնային փոստի:'"
+          "description": "While not strictly incorrect, the use of 'դիմեք LDAP գրացուցակին' could be more precisely worded for clarity. 'դիմեք LDAP դիրեկտորիային' (directory) might be more accurate in this context, depending on the desired level of formality.",
+          "suggestion": "դիմեք LDAP դիրեկտորիային"
         }
       ],
       "approved_at": null
@@ -124,7 +135,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'indirizzo' is missing an accent. It should be 'indirizzo'.",
+          "description": "The word 'indirizzo' is missing an accent mark. It should be 'indirizzo'.",
           "suggestion": "indirizzo"
         }
       ],
@@ -148,8 +159,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ກວດເບິ່ງບຸ໋ກ LDAP\" (check LDAP book) is an awkward and inaccurate translation of \"refer to the LDAP directory.\" \"ບຸ໋ກ\" means 'book'. It doesn't convey the meaning of a directory.",
-          "suggestion": "ປຶ້ມບັນຊີລາຍຊື່ຜູ້ໃຊ້ LDAP (pʉ̂ʉm banchii laai sʉ̃ʉ phʉ̃ʉ chai LDAP) - 'LDAP user list book' - is better, but still not ideal. A more accurate translation would be: ອ້າງອີງເຖິງບຸ໋ກບັນຊີລາຍຊື່ຜູ້ໃຊ້ LDAP (aang iing thʉ̌ng bʉ̂ʉm banchii laai sʉ̃ʉ phʉ̃ʉ chai LDAP) - 'Refer to the LDAP user list book' or just ປຶ້ມບັນຊີລາຍຊື່ຜູ້ໃຊ້ LDAP (pʉ̂ʉm banchii laai sʉ̃ʉ phʉ̃ʉ chai LDAP)."
+          "description": "The Lao translation of \"refer to the LDAP directory\" is \"ໃຫ້ກວດເບິ່ງບຸ໋ກ LDAP\".  'ບຸ໋ກ' translates to 'book' and is not the correct term for a directory. A more accurate translation would involve using a term for 'directory' or 'listing'.",
+          "suggestion": "Consider using a term like 'ລາຍການ LDAP' (LDAP listing) or 'ສາ directorie' (LDAP directory - though 'directory' would need to be adapted to Lao usage)."
         }
       ],
       "approved_at": null
@@ -172,12 +183,12 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'Dane konto użytkownika' is grammatically incorrect. 'Dane' (data) is unnecessary and awkward. It should be 'Konto użytkownika'.",
-          "suggestion": "Konto użytkownika"
+          "description": "The phrase 'Dane konto użytkownika' is grammatically incorrect. 'Dane' is in the nominative case but needs to agree with 'konto' (account) which is a neuter noun. The correct form is 'Dane konta użytkownika'.",
+          "suggestion": "Dane konta użytkownika"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'odwołać się do katalogu LDAP' is a bit formal and could be improved.  A more natural phrasing might be 'sprawdzić katalog LDAP' or 'zreferować do katalogu LDAP'.",
+          "description": "The verb 'odwołać się' (to refer) is a bit formal and doesn't flow naturally in this context. A more common and natural phrasing would be 'sprawdzić' (to check) or 'zaktualizować' (to update).",
           "suggestion": "sprawdzić katalog LDAP"
         }
       ],
@@ -198,13 +209,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Romanian translation uses a semicolon (;) after 'adresa de e-mail' instead of a comma (,) which is more common and grammatically correct in this context.",
-          "suggestion": "Contul acestui utilizator este încărcat din LDAP. Dacă doriți să schimbați nume de utilizator și adresa de e-mail, sau să dezactivați utilizatorul, accesați repertoarul LDAP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -219,18 +224,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශීලක' (parishiilaka) is used repeatedly and might be better represented as 'පරිශ්‍රමික' (parashramika) which directly translates to 'user' or 'worker' and is more commonly used in this context.",
-          "suggestion": "Replace all instances of 'පරිශීලක' with 'පරිශ්‍රමික'."
+          "description": "The word 'පරිශීලක' is used repeatedly and while technically correct, 'භාවිතාකරු' (bhavithakaaru) or 'පරිශීලකයා' (parishilakayaa) might be more common and understandable in this context, especially for a wider audience.",
+          "suggestion": "Consider replacing 'පරිශීලක' with 'භාවිතාකරු' or 'පරිශීලකයා' for better readability."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'LDAP වෙතින් පැටවිනි' (LDAP venin patawini) sounds slightly awkward. A more natural phrasing could be 'LDAP වෙතින් බද්ධ කර ඇත' (LDAP vatin badha kara ath).",
-          "suggestion": "Replace 'LDAP වෙතින් පැටවිනි' with 'LDAP වෙතින් බද්ධ කර ඇත'."
+          "description": "The phrase 'පරිශීලකයෙකු අක්‍රිය කිරීමට' could be slightly improved for smoother flow. 'පරිශීලකයෙකු නිಷ್ක්‍රිය කිරීමට' might sound more natural.",
+          "suggestion": "Replace 'අක්‍රිය කිරීමට' with 'නිಷ್ක්‍රිය කිරීමට'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'නාමාවලිය වෙත යොමු වන්න' (naamawaliye vetha yomu vanna) translates to 'refer to the directory', but it's a very formal way of saying it. A more user-friendly translation would be 'LDAP සේවාව බලන්න' (LDAP sevavaa balanna) or 'LDAP පරිශීලක ලේඛනය බලන්න' (LDAP parishiilaka lekhanaa balanna).",
-          "suggestion": "Replace 'නාමාවලිය වෙත යොමු වන්න' with 'LDAP සේවාව බලන්න' or 'LDAP පරිශීලක ලේඛනය බලන්න'."
+          "type": "formatting",
+          "description": "While not strictly an error, consider adding a more formal closing phrase like 'නමස්කාර' or 'සුභ පැතුම්' at the end if the tooltip is intended for a formal environment.",
+          "suggestion": "Add a polite closing phrase (e.g., 'නමස්කාර') at the end."
         }
       ],
       "approved_at": null
@@ -241,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'user account' is translated as 'používateľské konto'. While understandable, 'používateľský účet' would be a more common and natural translation in Slovak.",
-          "suggestion": "Toto používateľský účet je nahrané z LDAP."
+          "description": "The word 'priečinka' (folder) doesn't quite convey the meaning of 'directory' in this context. It suggests a physical folder, whereas 'LDAP directory' refers to the LDAP server or system.",
+          "suggestion": "Toto používateľské konto je načítané z LDAP. Ak potrebujete zmeniť meno používateľa a e-mailovú adresu alebo používateľa vypnúť, pozrite sa do LDAP adresára."
         }
       ],
       "approved_at": null
@@ -253,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"odpri imenik LDAP\" (open LDAP directory) implies an action of opening a directory as a document, rather than referring the user to manage the LDAP directory itself. A better translation would specify where the changes should be made.",
-          "suggestion": "Za spremembo uporabniškega imena in e-poštnega naslova ali onemogočitev uporabnika, upravljajte imenik LDAP."
+          "description": "The phrase 'refer to the LDAP directory' is translated as 'odpri imenik LDAP', which means 'open LDAP directory'. While understandable, 'refer to' implies consulting or checking, not literally opening a directory. A more accurate translation would be something like 'preverite LDAP imenik' (check the LDAP directory) or 'poglejte v LDAP imenik' (look in the LDAP directory).",
+          "suggestion": "poglejte v LDAP imenik"
         }
       ],
       "approved_at": null
@@ -262,7 +267,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"емаил\" is a misspelling of \"е-маил\".",
+          "suggestion": "е-маил"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

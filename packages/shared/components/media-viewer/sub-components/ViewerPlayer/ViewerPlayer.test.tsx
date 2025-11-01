@@ -40,24 +40,6 @@ jest.mock("react-i18next", () => ({
   }),
 }));
 
-// Mock SVG imports
-jest.mock("PUBLIC_DIR/images/media.viewer.play.react.svg", () => "play.svg");
-jest.mock("PUBLIC_DIR/images/media.viewer.pause.react.svg", () => "pause.svg");
-jest.mock(
-  "PUBLIC_DIR/images/media.viewer.volume.react.svg",
-  () => "volume.svg",
-);
-jest.mock("PUBLIC_DIR/images/media.viewer.mute.react.svg", () => "mute.svg");
-jest.mock(
-  "PUBLIC_DIR/images/media.viewer.fullscreen.react.svg",
-  () => "fullscreen.svg",
-);
-jest.mock(
-  "PUBLIC_DIR/images/media.viewer.fullscreen.exit.react.svg",
-  () => "fullscreen-exit.svg",
-);
-jest.mock("PUBLIC_DIR/images/media.viewer.audio.react.svg", () => "audio.svg");
-
 interface TextProps {
   children: React.ReactNode;
   [key: string]: React.HTMLAttributes<HTMLElement> | React.ReactNode;
@@ -124,15 +106,16 @@ jest.mock("../PlayerPlayButton", () => ({
 }));
 
 jest.mock("../PlayerTimeline", () => ({
-  PlayerTimeline: React.forwardRef(function PlayerTimelineMock(
-    { onChange }: { onChange: (value: number) => void },
-    ref: React.Ref<HTMLDivElement>,
-  ) {
+  PlayerTimeline: function PlayerTimelineMock({
+    ref,
+  }: {
+    ref: React.RefObject<HTMLDivElement>;
+  }) {
     React.useImperativeHandle(
       ref,
       () =>
         ({
-          setProgress: onChange,
+          setProgress: () => null,
         }) as unknown as HTMLDivElement,
     );
 
@@ -141,7 +124,7 @@ jest.mock("../PlayerTimeline", () => ({
         Timeline
       </div>
     );
-  }),
+  },
 }));
 
 jest.mock("../PlayerVolumeControl", () => ({

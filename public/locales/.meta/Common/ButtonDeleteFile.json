@@ -3,7 +3,7 @@
   "content": "Delete file",
   "content_en_sha1_hash": "b9ea4b3f01ac764edaec436479e4ef578ca45644",
   "created_at": "2025-05-19T21:30:43.338Z",
-  "updated_at": "2025-05-28T09:30:02.961Z",
+  "updated_at": "2025-05-26T07:57:32.933Z",
   "comment": {
     "text": "The translation key \"ButtonDeleteFile\" represents the text displayed on a delete button within a modal dialog. This button is used to confirm the deletion of a file when the user selects it for removal in a file management interface.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ລົບອອກຈາກໄຟລ໌\" literally translates to \"remove from file\". It doesn't accurately convey the meaning of 'Delete file'. The correct meaning implies permanently removing the file.",
-          "suggestion": "ລົບເອກະສານ"
+          "description": "The Lao translation \"ລົບອອກຈາກໄຟລ໌\" (lop ok jak file) literally translates to \"remove from file.\" While understandable, it's not the most natural way to say \"delete file\" in Lao. A more direct and accurate translation would be \"ລົບໄຟລ໌\" (lop file).",
+          "suggestion": "ລົບໄຟລ໌"
         }
       ],
       "approved_at": null
@@ -159,23 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ගොනුව' (gonuwa) is correctly spelled as 'file'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'මකන්න' (makanna) is correctly spelled as 'delete'.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ගොනුව මකන්න' is a literal translation, a more natural sounding translation might be 'ගොනුව ඉවත් කරන්න' (gonuwa ival kanna) meaning 'Remove file'.",
-          "suggestion": "ගොනුව ඉවත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -196,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Обришите фајл\" is a literal translation of \"Delete file\" and while understandable, it's not the most natural phrasing in Serbian. A more common and idiomatic way to say \"Delete file\" in Serbian (Cyrillic) would be \"Избришите фајл\".",
+          "description": "The translation 'Обришите фајл' is technically correct but sounds a bit abrupt and less natural in Serbian. A more common and polite phrasing would be 'Избришите фајл'.",
           "suggestion": "Избришите фајл"
         }
       ],
@@ -207,9 +191,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While 'Obrišite fajl' is understandable, a more accurate and natural translation of 'Delete file' would be 'Izbriši fajl'. 'Obriši' implies erasing or wiping clean, whereas 'Izbriši' specifically refers to deleting.",
-          "suggestion": "Izbriši fajl"
+          "type": "spelling",
+          "description": "The word 'fajl' is a transliteration from Russian and not the standard Serbian word for 'file'.",
+          "suggestion": "Datoteka"
         }
       ],
       "approved_at": null

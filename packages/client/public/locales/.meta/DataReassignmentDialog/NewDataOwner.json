@@ -3,7 +3,7 @@
   "content": "New data owner",
   "content_en_sha1_hash": "7ca3235c1bc6aeddbdad6d4a5e5512698930f922",
   "created_at": "2025-05-19T21:30:56.743Z",
-  "updated_at": "2025-05-28T09:30:02.249Z",
+  "updated_at": "2025-08-12T19:46:25.889Z",
   "comment": {
     "text": "The translation key \"NewDataOwner\" is used to display a user's name as the new data owner in a file reassignment dialogue. It appears on a screen where users select and transfer ownership of files, and its content should indicate that this person will be responsible for managing the transferred data. This text helps inform users about their role in the reassignment process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/NewOwner.js",
       "line_number": 86,
-      "context": "}) => {\n return (\n <>\n <StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" noSelect>\n {t(\"DataReassignmentDialog:NewDataOwner\")}\n </Text>\n <Text className=\"description\" noSelect>\n {t(\"DataReassignmentDialog:UserToWhomTheDataWillBeTransferred\")}\n </Text>\n </StyledPeopleSelectorInfo>",
+      "context": "}) => {\n return (\n <>\n <StyledPeopleSelectorInfo>\n <Text className=\"new-owner\">\n {t(\"DataReassignmentDialog:NewDataOwner\")}\n </Text>\n <Text className=\"description\">\n {t(\"DataReassignmentDialog:UserToWhomTheDataWillBeTransferred\")}\n </Text>\n </StyledPeopleSelectorInfo>",
       "module": "/packages/client"
     }
   ],
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Uusien tietojen omistaja' translates to 'New data owners' (plural), while the English 'New data owner' is singular. The translation should reflect the singular form.",
+          "suggestion": "Uuden tietojen omistaja"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Տվյալների նոր սեփականատեր' is a literal translation and while technically correct, it might sound slightly formal or clunky in Armenian. A more natural phrasing might be preferred depending on the context.",
+          "suggestion": "Consider alternatives like 'Նոր սեփականատեր տվյալների համար' or 'Տվյալների նոր իրավունքակիր' which might flow better in Armenian, particularly if the context implies a change in data ownership rather than simply introducing a new owner."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Нови власник података' is a literal translation, but 'New data owner' implies a more formal context. A more appropriate translation would be something like 'Нови власник података' (Novi vlasnik podataka) or 'Нови прималац података' (Novi primalac podataka) depending on the context. While technically correct, it might sound overly direct.",
+          "suggestion": "Consider 'Нови власник података' or 'Нови прималац података' depending on the intended formality."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

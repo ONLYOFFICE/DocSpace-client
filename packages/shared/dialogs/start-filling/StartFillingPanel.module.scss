@@ -23,20 +23,20 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/variables/_colors";
-@import "../../styles/mixins.scss";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 :global(.light) {
   :local {
     .divider {
-      --color-border: #{$gray-light-mid};
+      --color-border: #{colors.$gray-light-mid};
     }
   }
 }
 :global(.dark) {
   :local {
     .divider {
-      --color-border: #{$gray-dark-strong};
+      --color-border: #{colors.$gray-dark-strong};
     }
   }
 }
@@ -55,7 +55,7 @@
 
   color: var(--color-text);
 
-  @include no-user-select;
+  @include mixins.no-user-select;
 
   h3 {
     margin: 0;
@@ -64,7 +64,7 @@
     line-height: 22px;
     letter-spacing: 0px;
 
-    @include truncate;
+    @include mixins.truncate;
     min-width: 0;
   }
 

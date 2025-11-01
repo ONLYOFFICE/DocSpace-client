@@ -64,12 +64,14 @@ import {
 } from "./device";
 import { getCookie } from "./cookie";
 import { Context, Provider, Consumer } from "./context";
-import commonIconsStyles, { IconSizeType } from "./common-icons-style";
+import commonIconsStyles, {
+  IconSizeType,
+  isIconSizeType,
+} from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect, TextUserSelect } from "./commonStyles";
+import { NoUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
-import { commonTextStyles } from "./commonTextStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
@@ -109,9 +111,7 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
-  TextUserSelect,
   commonInputStyles,
-  commonTextStyles,
   INFO_PANEL_WIDTH,
   EmailSettings,
   parseAddress,
@@ -123,6 +123,7 @@ export {
   classNames,
   commonIconsStyles,
   IconSizeType,
+  isIconSizeType,
   Context,
   Provider,
   Consumer,
@@ -243,7 +244,9 @@ export const getLastColumn = (
 export const isLockedSharedRoom = (item?: TRoom) => {
   if (!item) return false;
 
-  return Boolean(item.external && item.passwordProtected && !item.expired);
+  return Boolean(
+    item.external && item.passwordProtected && !item.isLinkExpired,
+  );
 };
 
 export const addLog = (log: string, category: "socket") => {

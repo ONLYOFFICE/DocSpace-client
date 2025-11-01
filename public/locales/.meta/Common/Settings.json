@@ -3,7 +3,7 @@
   "content": "Settings",
   "content_en_sha1_hash": "c7f73bb54d928922c3838bb789ee9fb8a5b1eb37",
   "created_at": "2025-05-19T21:30:48.587Z",
-  "updated_at": "2025-06-18T07:34:14.911Z",
+  "updated_at": "2025-10-16T07:29:35.604Z",
   "comment": {
     "text": "This translation key is used as a title for the settings page. It appears on the header of a dialog when accessing settings in the application, and it will be displayed if the user navigates to the settings page. The exact text (\"Common:Settings\") will be translated by the translator based on the defined context.",
     "is_auto": true,
@@ -11,27 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Header.js",
-      "line_number": 43,
-      "context": "`;\n \n const Header = ({ t, name }) => {\n return (\n <StyledHeader>\n {t(\"Common:Settings\")}&nbsp;\n <div>({name})</div>\n </StyledHeader>\n );\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Hooks/useSettings.js",
-      "line_number": 40,
-      "context": "setIsLoading,\n }) => {\n React.useEffect(() => {\n if (!isSettingsPage) return;\n \n setDocumentTitle(t(\"Common:Settings\"));\n \n setIsLoading(false);\n }, [isSettingsPage]);\n };",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Header.tsx",
+      "line_number": 33,
+      "context": "import styles from \"../SettingsPluginDialog.module.scss\";\n \n const Header = ({ t, name }: HeaderProps) => {\n return (\n <div className={styles.header}>\n {t(\"Common:Settings\")}&nbsp;\n <div>({name})</div>\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 506,
-      "context": "tableGroupMenuProps.withoutInfoPanelToggler =\n isIndexEditingMode || isPublicRoom;\n }\n \n const currentTitle = isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : isLoading && stateTitle",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Header/index.js",
-      "line_number": 33,
-      "context": "import { useTranslation } from \"react-i18next\";\n \n const ArticleHeaderContent = () => {\n const { t } = useTranslation(\"Common\");\n \n return <>{t(\"Settings\")}</>;\n };\n \n export default React.memo(ArticleHeaderContent);",
+      "line_number": 557,
+      "context": "};\n \n const currentTitle = isProfile\n ? t(\"Profile:MyProfile\")\n : isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? getAccountsTitle()\n : title;\n \n const titleIcon = getTitleIcon();",
       "module": "/packages/client"
     },
     {
@@ -43,49 +31,37 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhooksTableRow.js",
       "line_number": 133,
-      "context": "};\n \n const contextOptions = [\n {\n key: \"Settings dropdownItem\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: onSettingsOpen,\n },\n {\n key: \"Webhook history dropdownItem\",",
+      "context": "};\n \n const contextOptions = [\n {\n key: \"Settings dropdownItem\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: onSettingsOpen,\n dataTestId: \"webhook_settings_item\",\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Header/index.js",
+      "line_number": 33,
+      "context": "import { useTranslation } from \"react-i18next\";\n \n const ArticleHeaderContent = () => {\n const { t } = useTranslation(\"Common\");\n \n return <>{t(\"Settings\")}</>;\n };\n \n export default React.memo(ArticleHeaderContent);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 287,
+      "line_number": 312,
       "context": "const settings = isAdmin\n ? {\n key: \"user-menu-settings\",\n icon: CatalogSettingsReactSvgUrl,\n label: t(\"Common:Settings\"),\n onClick: (obj) => this.onSettingsClick(\"/portal-settings\", obj),\n url: SETTINGS_URL,\n preventNewTab: true,\n }\n : null;",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/RowView/SpacesRoomRow.tsx",
+      "file_path": "/packages/management/src/app/spaces/multiple/spaces-row.tsx",
       "line_number": 120,
       "context": "if (item.wizardSettings.completed) {\n contextOptionsProps.splice(\n 1,\n 0,\n {\n label: t(\"Common:Settings\"),\n key: \"space_settings\",\n icon: CatalogSettingsReactSvgUrl,\n onClick: () =>\n window.open(`${protocol}//${item.domain}/portal-settings/`, \"_blank\"),\n },",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/utils/settingsTree.ts",
-      "line_number": 49,
-      "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
+      "file_path": "/packages/management/src/components/article/index.tsx",
+      "line_number": 102,
+      "context": "linkData={{ path: \"/spaces\", state: {} }}\n withAnimation\n />\n <ArticleItem\n key=\"settings\"\n text={t(\"Common:Settings\")}\n iconNode={<SettingsReactSvg />}\n showText={showText}\n onClick={() => onItemClick(\"settings/branding\")}\n isActive={activePath.includes(\"settings\")}\n folderId=\"management_catalog-settings\"",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/utils/settingsTree.ts",
-      "line_number": 49,
-      "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
-      "module": "/packages/management"
-    },
-    {
-      "file_path": "/packages/management/src/utils/settingsTree.ts",
-      "line_number": 49,
-      "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
-      "module": "/packages/management"
-    },
-    {
-      "file_path": "/packages/management/src/utils/settingsTree.ts",
-      "line_number": 49,
-      "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
-      "module": "/packages/management"
-    },
-    {
-      "file_path": "/packages/management/src/utils/settingsTree.ts",
-      "line_number": 49,
-      "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
+      "file_path": "/packages/management/src/lib/index.ts",
+      "line_number": 57,
+      "context": "case \"branding\":\n case \"data-backup\":\n case \"auto-backup\":\n case \"restore\":\n case \"encrypt-data\":\n return { key: t(\"Common:Settings\"), isSubPage: false };\n case \"payments\":\n return { key: t(\"Common:PaymentsTitle\"), isSubPage: false };\n case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":",
       "module": "/packages/management"
     }
   ],
@@ -261,7 +237,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Параметри\" can sometimes be used to translate \"Settings\", it often implies \"Parameters\" or \"Specifications\". \"Налаштування\" would be a more accurate and commonly used translation for \"Settings\".",
+          "suggestion": "Налаштування"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

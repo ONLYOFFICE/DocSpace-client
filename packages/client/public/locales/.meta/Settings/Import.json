@@ -3,7 +3,7 @@
   "content": "Import",
   "content_en_sha1_hash": "d6fbc9d2bdd580e18ed0bc5805dc26db323d6f5f",
   "created_at": "2025-05-19T21:30:51.611Z",
-  "updated_at": "2025-05-21T04:12:02.021Z",
+  "updated_at": "2025-09-29T11:28:56.123Z",
   "comment": {
     "text": "This translation key is used for the text \"Import\" displayed on a button or link that initiates data import functionality in a portal settings page. It is intended to be translated into various languages to support global accessibility.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/Providers.tsx",
       "line_number": 44,
-      "context": "import NextcloudWorkspaceDarkSvgUrl from \"PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url\";\n import WorkspaceDarkSvgUrl from \"PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url\";\n \n import { LinkType } from \"@docspace/shared/components/link/Link.enums\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import DataImportLoader from \"../sub-components/DataImportLoader\";\n import { WorkspacesContainer } from \"../StyledDataImport\";\n import { ProvidersProps, InjectedProvidersProps } from \"../types\";\n \n const Providers = (props: ProvidersProps) => {\n const {",
+      "context": "import WorkspaceDarkSvgUrl from \"PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url\";\n \n import { LinkType } from \"@docspace/shared/components/link/Link.enums\";\n import { Link, LinkTarget } from \"@docspace/shared/components/link\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { WorkspacesContainer } from \"../StyledDataImport\";\n import DataImportLoader from \"../sub-components/DataImportLoader\";\n import { ProvidersProps, InjectedProvidersProps } from \"../types\";\n \n const Providers = (props: ProvidersProps) => {\n const {",
       "module": "/packages/client"
     }
   ],
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İdxal edin' is a command (imperative) form of 'import'. The context 'Settings:Import' likely refers to a button or option, not a direct command to the user. A more appropriate translation would be a noun, such as 'İdxal' or 'Daxil etmə'.",
+          "description": "While 'İdxal edin' is a possible translation of 'Import,' it's a command form ('do import'). The context suggests a label or option, so a noun or a more neutral translation would be better.  'İdxal' (import - noun) would be a more appropriate choice.",
           "suggestion": "İdxal"
         }
       ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Входиране' is not the most natural or accurate translation of 'Import' in this context. While it technically means 'entering' or 'logging in,' it's not commonly used for importing data or files. It might confuse users.",
-          "suggestion": "A better translation would be 'Внасяне' or 'Импортиране'."
+          "description": "The translation \"Входиране\" while understandable, isn't the most common or natural translation of \"Import\" in Bulgarian. \"Внос\" is a more typical and widely accepted term.",
+          "suggestion": "Внос"
         }
       ],
       "approved_at": null
@@ -159,13 +159,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Импортировать' is the infinitive form of the verb 'to import'. The context 'Settings:Import' likely requires the noun form, which is 'Импорт'.",
-          "suggestion": "Импорт"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආයාත කරන්න' while understandable, is a command form ('to import'). 'Import' is a noun and a label, so a more appropriate translation would be a noun form.",
-          "suggestion": "ආයාතිය (Ayathiya)"
+          "description": "While 'ආයාත කරන්න' is a possible translation for 'Import', it's a verb form (imperative). 'Import' often functions as a noun in UI contexts (e.g., 'Import Settings'). A better translation would be a noun form, or a more general term that could work in both contexts.",
+          "suggestion": "Consider alternatives like 'ආනයනය' (aanayaya - import, noun), 'ගෙනාත්මක' (gena-thaam-thaka - import, often used in a more formal context) or a phrase like 'ආයාතනය කිරීම්' (aayathaanaakrama - import actions/settings)."
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Увези' translates to 'Carry' or 'Bring' in English, not 'Import'. It doesn't convey the intended meaning of importing data or settings.",
-          "suggestion": "The correct translation should be something like 'Увоз' (Uvoz), which directly means 'Import'."
+          "description": "The Serbian (Cyrillic) translation \"Увези\" (Uvezi) translates to \"bring\" or \"take\" in the context of importing data or settings. It doesn't accurately convey the meaning of 'Import'.",
+          "suggestion": "A more accurate translation would be \"Увоз\" (Uvoz)."
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Uvezi' is a valid Serbian word, it doesn't perfectly convey the meaning of 'Import' in the context of settings. It's more accurately translated as 'Introduce' or 'Bring in.'",
-          "suggestion": "Consider 'Uvezi' -> 'Unos' or 'Uvoz' for a more accurate representation of 'Import' in a settings context."
+          "description": "While 'Uvezi' is a valid Serbian word, it doesn't perfectly convey the meaning of 'Import' in this context (Settings). A more suitable translation might be 'Uvoz'.",
+          "suggestion": "Uvoz"
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Імпортувати' is a verb form (infinitive) which doesn't fit the context of a UI label representing a button or action. 'Import' in this context is a noun or action label, not an action to perform.",
-          "suggestion": "Consider using 'Імпорт' (noun form) or 'Ввійти' (Import, as an action)"
+          "description": "While 'Імпортувати' is a valid Ukrainian verb meaning 'to import', it's not the best translation for a UI element labeled 'Import'.  'Import' often functions as a noun in this context. A more appropriate translation would be 'Імпорт' (Import), which is a direct transliteration and functions as a noun.",
+          "suggestion": "Імпорт"
         }
       ],
       "approved_at": null

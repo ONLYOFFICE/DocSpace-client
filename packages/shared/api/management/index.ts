@@ -29,7 +29,7 @@
 
 import { AxiosRequestConfig } from "axios";
 import { request } from "../client";
-import { TGetAllPortals, TGetDomainName } from "./types";
+import { TGetAllPortals, TGetDomainName, TRemovedPortal } from "./types";
 
 const baseURL = "/apisystem";
 
@@ -43,7 +43,7 @@ export const deletePortal = async (data) => {
 
   const res = await request(options);
 
-  return res;
+  return res as TRemovedPortal;
 };
 
 export const getPortalName = async () => {
@@ -162,3 +162,16 @@ export const getAvailablePortals = async (data: {
 
   return res.tenants;
 };
+
+export async function createLicenseQuotaReport() {
+  const res = (await request({
+    baseURL,
+    method: "post",
+    url: "/portal/licensequota/report",
+    params: {
+      useCache: false,
+    },
+  })) as { result: string };
+
+  return res.result;
+}

@@ -3,7 +3,7 @@
   "content": "No files in this folder yet",
   "content_en_sha1_hash": "a2c2252ebfa998032b02ab97ce72316839804925",
   "created_at": "2025-05-19T21:30:55.575Z",
-  "updated_at": "2025-06-03T20:59:41.788Z",
+  "updated_at": "2025-09-23T07:24:24.014Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that there are no files in a subfolder. It appears in a UI component related to file management, and its purpose is to inform users about the contents of a specific folder. The exact location of this message is likely in an empty or placeholder state for a subfolder.",
     "is_auto": true,
@@ -11,20 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/EmptyContainer.helper.ts",
-      "line_number": 84,
-      "context": "const translateHeaderKey: Record<EmptyScreenTypeEnum, string> = {\n [EmptyScreenTypeEnum.Done]: t(\"EmptyFormFolderDoneHeaderText\"),\n [EmptyScreenTypeEnum.InProgress]: t(\"EmptyFormFolderProgressHeaderText\"),\n [EmptyScreenTypeEnum.Default]: t(\"Common:EmptyScreenFolder\"),\n [EmptyScreenTypeEnum.Corporate]: t(\"RoomCreated\"),\n [EmptyScreenTypeEnum.SubFolderDone]: t(\"EmptyFormSubFolderHeaderText\"),\n [EmptyScreenTypeEnum.SubFolderinProgress]: t(\n \"EmptyFormSubFolderHeaderText\",\n ),\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/EmptyContainer.helper.ts",
-      "line_number": 84,
-      "context": "const translateHeaderKey: Record<EmptyScreenTypeEnum, string> = {\n [EmptyScreenTypeEnum.Done]: t(\"EmptyFormFolderDoneHeaderText\"),\n [EmptyScreenTypeEnum.InProgress]: t(\"EmptyFormFolderProgressHeaderText\"),\n [EmptyScreenTypeEnum.Default]: t(\"Common:EmptyScreenFolder\"),\n [EmptyScreenTypeEnum.Corporate]: t(\"RoomCreated\"),\n [EmptyScreenTypeEnum.SubFolderDone]: t(\"EmptyFormSubFolderHeaderText\"),\n [EmptyScreenTypeEnum.SubFolderinProgress]: t(\n \"EmptyFormSubFolderHeaderText\",\n ),\n };",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 233,
+      "line_number": 251,
       "context": "[\n P._,\n P.union(FolderType.SubFolderDone, FolderType.SubFolderInProgress),\n P._,\n ],\n () => t(\"Files:EmptyFormSubFolderHeaderText\"),\n )\n .with(\n [\n FolderType.FormRoom,\n DefaultFolderType,",
       "module": "/packages/client"
     }
@@ -135,7 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Brak plików w tym katalogu\" is understandable, a more natural and common Polish phrasing would be \"Brak plików w tej katalogu\". 'tej' is the correct form of 'this' when referring to a feminine noun like 'katalogu'.",
+          "suggestion": "Brak plików w tej katalogu"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -165,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මෙම බහාලුමේ ගොනු නැත' is a literal translation and while understandable, it doesn't convey the exact meaning of 'No files in this folder yet' in a natural Sinhala way. The phrasing is slightly awkward.",
+          "suggestion": "Consider a more natural phrasing such as 'මෙම ෆෝල්ඩරයේ ගොනු නොමැත' or 'මෙම ෆෝල්ඩරයේ දැන් ගොනු කීයක්වත් නැත'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'folder' is transliterated as 'фолдеру' which is a less common and potentially confusing transliteration. A more standard transliteration would be 'фолдеру'.",
+          "suggestion": "фолдеру"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

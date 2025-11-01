@@ -3,7 +3,7 @@
   "content": "Collaborate on one or multiple documents with your team",
   "content_en_sha1_hash": "4f8794388fd638525016491260b66a81894a2574",
   "created_at": "2025-05-19T21:30:43.494Z",
-  "updated_at": "2025-06-03T20:59:42.344Z",
+  "updated_at": "2025-06-08T12:02:32.889Z",
   "comment": {
     "text": "This translation key is used to display a description for collaboration rooms in a shared component, typically appearing on a button or dialog related to team document collaboration. It guides users on how to collaborate on one or multiple documents with their team.",
     "is_auto": true,
@@ -72,13 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tee yhteistyötä yhden tai useiden dokumenttien luomisessa tiimisi kanssa' is a bit clunky and doesn't perfectly capture the simplicity of the English phrase. While technically correct, it is overly verbose.  'luomisessa' (in creation) is not the most natural phrasing.",
+          "description": "The translation \"Tee yhteistyötä yhden tai useiden dokumenttien luomisessa tiimisi kanssa\" is a bit literal and clunky. It translates to \"Collaborate on the creation of one or multiple documents with your team.\" A more natural Finnish phrasing would be more concise and flow better.",
           "suggestion": "Tee yhteistyötä tiimisi kanssa yhden tai useamman dokumentin parissa."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'yhden tai useiden dokumenttien' could be slightly improved for flow. Using 'yhden tai useamman dokumentin' is more concise.",
-          "suggestion": "yhden tai useamman dokumentin"
         }
       ],
       "approved_at": null
@@ -104,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"共同編集する\" (kyoudou henshuu suru) can sound a bit formal in this context. A more natural and user-friendly translation might emphasize collaboration rather than simply editing together.",
+          "suggestion": "チームでドキュメントを一緒に作業する。(Chiimu de dokyumento o issho ni sagyou suru - Collaborate on documents with your team)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -116,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ຮ່ວມມືໃນເອກະສານໜຶ່ງ ຫຼືຫຼາຍເອກະສານກັບທີມງານຂອງທ່ານ' is a literal translation, but could be more natural and fluent in Lao. 'Collaborate on one or multiple documents with your team' implies a broader sense of working together, not just directly manipulating documents.",
+          "suggestion": "Consider a more idiomatic translation like 'ເຮັດວຽກຮ່ວມກັນກັບທີມງານຂອງທ່ານໃນເອກະສານໜຶ່ງເອກະສານຫຼືຫຼາຍກວ່າ' (Work together with your team on one document or more) or 'ເຮັດວຽກຮ່ວມກັບທີມງານຂອງທ່ານໃນການເຮັດເອກະສານ' (Work together with your team on documents)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -155,8 +162,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation uses \"în documentul sau în mai multe documente\". A more natural phrasing would be \"în document sau în mai multe documente\". The repetition of 'în' is awkward.",
-          "suggestion": "Colaborați în document sau în mai multe documente cu echipa dvs"
+          "description": "The Romanian translation 'Colaborați în documentul sau în mai multe documente cu echipa dvs' could be improved for clarity and flow. While grammatically correct, it sounds a bit clunky.",
+          "suggestion": "Colaborați la un document sau mai multe documente cu echipa dumneavoastră."
+        },
+        {
+          "type": "formatting",
+          "description": "The possessive pronoun 'dvs' (your) could be replaced with the more formal 'dumneavoastră' for consistency with standard Romanian usage in professional contexts.",
+          "suggestion": "Replace 'dvs' with 'dumneavoastră'."
         }
       ],
       "approved_at": null
@@ -167,13 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Collaborate on' implies a more active participation than the Russian 'Совместная работа с'. 'Совместная работа с' is more passive, simply stating 'joint work with'.",
-          "suggestion": "Совместно работайте с командой над одним или несколькими документами"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'Совместная работа с командой над одним или несколькими документами' is a bit long and potentially clunky. Consider breaking it up for readability, although the impact is minor.",
-          "suggestion": "Работайте с командой над одним или несколькими документами для совместной работы."
+          "description": "The translation 'Совместная работа с командой над одним или несколькими документами ' is a literal translation and could be improved for natural flow in Russian. While technically correct, it sounds a bit clunky.",
+          "suggestion": "Совместная работа с командой над одним или несколькими документами"
         }
       ],
       "approved_at": null
@@ -184,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබගේ කණ්ඩායම සමඟ ලේඛනයක හෝ කිහිපයක සහයෝගයෙන් වැඩ කරන්න' is a literal translation but doesn't quite capture the natural flow of the English phrase 'Collaborate on one or multiple documents with your team.' It sounds a bit formal and clunky in Sinhala.",
-          "suggestion": "Consider a more natural phrasing such as 'ඔබේ කණ්ඩායමට සමඟ ලේඛනයක් හෝ වැඩිමහල් වැඩකට එක් වෙන්න' or 'ඔබේ කණ්ඩායම සමඟ එක්ව ලේඛන වැඩකට සහයෝගයෙන් වැඩ කරන්න.'"
+          "description": "The translation 'ඔබගේ කණ්ඩායම සමඟ ලේඛනයක හෝ කිහිපයක සහයෝගයෙන් වැඩ කරන්න' is a literal translation but doesn't flow naturally in Sinhala. A more idiomatic translation would be preferred.",
+          "suggestion": "ඔබේ කණ්ඩායම සමඟ වැඩපත්‍රයක් හෝ කිහිපයක් gemeinsam වැඩ කරන්න (or) ඔබේ කණ්ඩායම සමඟ වැඩපත්‍රයක් හෝ කිහිපයක් සාමූහිකව කරන්න."
         }
       ],
       "approved_at": null
@@ -208,13 +215,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Сарађуј на једном или више докумената са својим тимом' doesn't fully capture the meaning of 'Collaborate on one or multiple documents with your team.' The English implies a shared space or feature; the Serbian translation just means 'collaborate'.",
-          "suggestion": "Радите заједно на једном или више докумената са својим тимом"
+          "description": "The translation 'Сарађуј на једном или више докумената са својим тимом' while understandable, isn't the most natural or accurate translation of 'Collaborate on one or multiple documents with your team'. The verb 'Сарађуј' (Saradjuj - Collaborate) is in the imperative mood, which isn't always the best choice. A more natural phrasing would imply a suggestion rather than a direct command.",
+          "suggestion": "Радите на једном или више докумената са својим тимом"
         },
         {
-          "type": "formatting",
-          "description": "The verb 'Сарађуј' is in the imperative form, which may not be appropriate for all contexts (e.g., a help article).",
-          "suggestion": "Радите заједно на једном или више докумената са својим тимом (more suitable for instructional contexts)"
+          "type": "incorrect_translation",
+          "description": "The use of 'тимом' (timom) is slightly less common than 'екипом' (ekipom) for 'team'. While both are correct, 'екипом' sounds more natural in this context.",
+          "suggestion": "Радите на једном или више докумената са својом екипом"
         }
       ],
       "approved_at": null
@@ -225,13 +232,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sarađuj na jednom ili više dokumenata sa svojim timom\" is a literal translation but doesn't flow naturally in Serbian. A more natural phrasing would be 'Radite zajedno na jednom ili više dokumenata sa vašim timom' or 'Saradjujte na jednom ili više dokumenata sa svojim timom'.",
-          "suggestion": "Radite zajedno na jednom ili više dokumenata sa vašim timom"
+          "description": "The translation 'Sarađuj na jednom ili više dokumenata sa svojim timom' is a literal translation that doesn't quite capture the nuance of 'Collaborate'. 'Sarađuj' implies cooperation, but 'collaborate' often suggests a more integrated and active working relationship. A better translation would emphasize this collaborative effort.",
+          "suggestion": "Radite zajedno na jednom ili više dokumenata sa svojim timom"
         },
         {
-          "type": "grammatical",
-          "description": "While grammatically correct, using 'Sarađuj' (second person singular informal imperative) isn't appropriate for a general product description. It's better to use a more formal and inclusive form like 'Radite' (second person plural imperative) or 'Saradjujte' (formal imperative).",
-          "suggestion": "Saradjujte na jednom ili više dokumenata sa svojim timom"
+          "type": "spelling",
+          "description": "While technically correct, the Serbian word 'Sarađuj' is less commonly used than the more modern and widely understood 'Radite'. It sounds slightly archaic or formal in this context.",
+          "suggestion": "Radite"
         }
       ],
       "approved_at": null
@@ -245,13 +252,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Працюйте над одним або кількома документами разом зі своєю командою' while understandable, doesn't fully capture the nuance of 'Collaborate'. 'Працюйте над...разом зі своєю командою' translates more literally to 'Work on...together with your team'. 'Collaborate' implies a shared effort and can be better conveyed with a more dynamic verb.",
-          "suggestion": "Співпрацюйте над одним або кількома документами з вашою командою"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "Folder",
   "content_en_sha1_hash": "30baa24967e08965d1594408031f0324ae11ccac",
   "created_at": "2025-05-19T21:30:45.416Z",
-  "updated_at": "2025-07-01T15:57:35.880Z",
+  "updated_at": "2025-10-13T13:22:35.481Z",
   "comment": {
     "text": "This translation key is used to display the label \"Folder\" in various UI components, such as buttons and icons. It is part of a folder-related functionality used in the application, where it appears in dropdown menus and action buttons for creating and uploading folders.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 544,
+      "line_number": 549,
       "context": "const createNewFolder = {\n id: \"actions_new-folder\",\n className: \"main-button_drop-down\",\n icon: CatalogFolderReactSvgUrl,\n label: t(\"Common:Folder\"),\n onClick: onCreate,\n key: \"new-folder\",\n };\n \n const createNewPresentationPptx = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js",
       "line_number": 38,
-      "context": "import { IconButton } from \"@docspace/shared/components/icon-button\";\n import { Link } from \"@docspace/shared/components/link\";\n import { Text } from \"@docspace/shared/components/text\";\n \n import { FolderType, RoomSearchArea } from \"@docspace/shared/enums\";\n import RoomsFilter from \"@docspace/shared/api/rooms/filter\";\n import FilesFilter from \"@docspace/shared/api/files/filter\";\n \n import { getCategoryUrl, getCategoryType } from \"SRC_DIR/helpers/utils\";\n import { CategoryType } from \"SRC_DIR/helpers/constants\";",
+      "context": "import { IconButton } from \"@docspace/shared/components/icon-button\";\n import { Link } from \"@docspace/shared/components/link\";\n import { Text } from \"@docspace/shared/components/text\";\n \n import { FolderType, RoomSearchArea } from \"@docspace/shared/enums\";\n import RoomsFilter from \"@docspace/shared/api/rooms/filter\";\n import FilesFilter from \"@docspace/shared/api/files/filter\";\n import { CategoryType } from \"@docspace/shared/constants\";\n import { getCategoryType } from \"@docspace/shared/utils/common\";",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 320,
+      "line_number": 329,
       "context": "icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",\n label: t(\"Common:Folder\"),\n icon: FolderReactSvgUrl,\n onClick: () => actions.onUploadAction(\"folder\"),\n },\n ],\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 320,
+      "line_number": 329,
       "context": "icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",\n label: t(\"Common:Folder\"),\n icon: FolderReactSvgUrl,\n onClick: () => actions.onUploadAction(\"folder\"),\n },\n ],\n };",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 29,
+      "line_number": 32,
       "context": "case FileType.OFormTemplate:\n case FileType.OForm:\n case FileType.PDF:\n return t(\"Common:Document\");\n default:\n return t(\"Common:Folder\");\n }\n };",
       "module": "/packages/shared"
     }

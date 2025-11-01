@@ -31,65 +31,125 @@ import { useTranslation } from "react-i18next";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
-
-import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
-import LicenseContainer from "./LicenseContainer";
-import { StyledComponent } from "./StyledComponent";
-import EnterpriseContainer from "./EnterpriseContainer";
-import TrialContainer from "./TrialContainer";
+import { StandalonePage as StandalonePageComponent } from "@docspace/shared/pages/Payments/Standalone";
 
 const StandalonePage = (props) => {
   const {
-    standaloneInit,
     isInitPaymentPage,
     isLoadedTariffStatus,
     isLoadedCurrentQuota,
     isTrial,
     isUpdatingBasicSettings,
+    setPaymentsLicense,
+    acceptPaymentsLicense,
+    isLicenseCorrect,
+    trialDaysLeft,
+    paymentDate,
+    isLicenseDateExpired,
+    isDeveloper,
+    buyUrl,
+    salesEmail,
+    isEnterprise,
+    showPortalSettingsLoader,
+    docspaceFaqUrl,
+    licenseQuota,
+    openOnNewPage,
+    logoText,
   } = props;
 
-  const { t, ready } = useTranslation(["PaymentsEnterprise", "Common"]);
+  const { t, ready } = useTranslation("Common");
 
   useEffect(() => {
-    if (!isLoadedTariffStatus || !isLoadedCurrentQuota || !ready) return;
-
     setDocumentTitle(t("Common:PaymentsTitle"));
-
-    standaloneInit(t);
-  }, [isLoadedTariffStatus, isLoadedCurrentQuota, ready]);
+  }, [ready]);
 
   if (
-    !isInitPaymentPage ||
-    !isLoadedTariffStatus ||
-    !isLoadedCurrentQuota ||
-    !ready ||
-    isUpdatingBasicSettings
+    (!isInitPaymentPage ||
+      !isLoadedTariffStatus ||
+      !isLoadedCurrentQuota ||
+      !ready ||
+      isUpdatingBasicSettings) &&
+    showPortalSettingsLoader
   )
     return <PaymentsStandaloneLoader isEnterprise={!isTrial} />;
 
   return (
-    <StyledComponent>
-      {isTrial ? <TrialContainer t={t} /> : <EnterpriseContainer t={t} />}
-      <LicenseContainer t={t} />
-      <ContactContainer />
-    </StyledComponent>
+    <StandalonePageComponent
+      isTrial={isTrial}
+      setPaymentsLicense={setPaymentsLicense}
+      acceptPaymentsLicense={acceptPaymentsLicense}
+      isLicenseCorrect={isLicenseCorrect}
+      salesEmail={salesEmail}
+      isLicenseDateExpired={isLicenseDateExpired}
+      isDeveloper={isDeveloper}
+      buyUrl={buyUrl}
+      trialDaysLeft={trialDaysLeft}
+      paymentDate={paymentDate}
+      isEnterprise={isEnterprise}
+      docspaceFaqUrl={docspaceFaqUrl}
+      licenseQuota={licenseQuota}
+      openOnNewPage={openOnNewPage}
+      logoText={logoText}
+    />
   );
 };
 
 export default inject(
-  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
-    const { standaloneInit, isInitPaymentPage, isUpdatingBasicSettings } =
-      paymentStore;
+  ({
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+    clientLoadingStore,
+    settingsStore,
+    filesSettingsStore,
+  }) => {
+    const {
+      isInitPaymentPage,
+      isUpdatingBasicSettings,
+      setPaymentsLicense,
+      acceptPaymentsLicense,
+      isLicenseCorrect,
+      buyUrl,
+      salesEmail,
+      licenseQuota,
+    } = paymentStore;
     const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
-    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
+    const {
+      isLoaded: isLoadedTariffStatus,
+      trialDaysLeft,
+      paymentDate,
+      isLicenseDateExpired,
+      isDeveloper,
+      isEnterprise,
+    } = currentTariffStatusStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
+    const { docspaceFaqUrl, logoText } = settingsStore;
+
+    const { openOnNewPage } = filesSettingsStore;
 
     return {
       isTrial,
-      standaloneInit,
       isInitPaymentPage,
       isLoadedTariffStatus,
       isLoadedCurrentQuota,
       isUpdatingBasicSettings,
+      setPaymentsLicense,
+      acceptPaymentsLicense,
+      isLicenseCorrect,
+      trialDaysLeft,
+      paymentDate,
+      isLicenseDateExpired,
+      isDeveloper,
+      buyUrl,
+      salesEmail,
+      isEnterprise,
+      showPortalSettingsLoader,
+      docspaceFaqUrl,
+      licenseQuota,
+      openOnNewPage,
+      logoText,
     };
   },
 )(observer(StandalonePage));

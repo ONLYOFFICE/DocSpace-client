@@ -3,7 +3,7 @@
   "content": "If you disable this guest, they won’t be able to log in to {{productName}}.",
   "content_en_sha1_hash": "8658a912d92b434d61d4756c27d7262920b57444",
   "created_at": "2025-05-19T21:30:56.949Z",
-  "updated_at": "2025-05-20T09:37:47.364Z",
+  "updated_at": "2025-08-04T07:30:01.062Z",
   "comment": {
     "text": "This translation key is used to display a message when disabling guest access in {{productName}}. If this key is translated, it will appear as a prompt informing users about the consequences of disabling guest logins.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 175,
+      "line_number": 171,
       "context": "? t(\"DisableGuests\")\n : t(\"DisableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"DisableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"DisableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"DisableGuestsDescription\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     }
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The pronoun 'este' is repeated and sounds unnatural. It should be singular and refer to the guest.",
+          "suggestion": "Si desactiva a este invitado, no podrá iniciar sesión en {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -105,13 +111,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ປິດການໃຊ້ງານ\" (pit gaan chai ngan) is a literal translation of 'disable' and while understandable, a more natural phrasing might be 'ລົບການເຂົ້າສູ່ລະບົບ' (lop gaan khao suu lap bob) or 'ບໍ່ໃຫ້ເຂົ້າສູ່ລະບົບ' (bor hai khao suu lap bob).",
+          "suggestion": "ຖ້າເຈົ້າບໍ່ໃຫ້ເຂົ້າສູ່ລະບົບຜູ້ຮັບແຂກນີ້, ພວກເຂົາຈະບໍ່ສາມາດເຂົ້າສູ່ລະບົບເຂົ້າ {{productName}} ໄດ້."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The gendered pronoun 'viņš (-a)' is used. While technically correct, it's not ideal for a system message where the gender of the guest is unknown. Using a gender-neutral pronoun or rephrasing to avoid the pronoun would be better.",
+          "suggestion": "Consider using a gender-neutral option like 'viņi' or rephrasing the sentence to avoid the pronoun altogether, e.g., 'Ja atspējosiet šo viesi, pieteikšanās {{productName}} nevarēs notikt.'"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,7 +141,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'guest' is awkward. 'Gość' implies a more casual or unwanted visitor. A more accurate translation would convey the meaning of a user account.",
+          "suggestion": "Jeśli wyłączysz to konto gościa, nie będzie w stanie zalogować się na {{productName}}."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, 'nie będzie w stanie' is a bit clunky. A more natural phrasing would improve readability.",
+          "suggestion": "Jeśli wyłączysz tego gościa, nie będzie mógł/mogła zalogować się na {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +170,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'conecta' (connect) doesn't accurately convey the meaning of 'log in'. The correct Romanian term for 'log in' is 'autentifica' or 'se autentifica'.",
+          "suggestion": "Dacă dezactivați un invitat, acesta nu va putea să se autentifice la {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +188,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"disable\" as \"අක්‍රිය කළහොත්\" (akriya kalahoth) is technically correct, but a more natural and commonly used phrasing might be \"අයින් කළහොත්\" (ain kalahoth) or \"අයින් කිරීමෙන්\" (ain kirimen) when referring to removing a guest account. \"අක්‍රිය කළහොත්\" is more often used for deactivating features or systems, not user accounts.",
+          "suggestion": "ඔබ මෙම ආගන්තුකයා අයින් කළහොත් / ඔබට මෙම ආගන්තුකයා අයින් කිරීමෙන්..."
+        },
+        {
+          "type": "spelling",
+          "description": "While not technically incorrect, the word 'පුරනය' (puranaya) is archaic. A more contemporary term would be 'ඇතුළු වීමට' (athułu varmita).",
+          "suggestion": "ඔබ මෙම ආගන්තුකයා අයින් කළහොත්, ඔවුන්ට {{productName}} වෙත ඇතුළු වීමට නොහැකි වනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +229,18 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'oturum açamazlar' (cannot log in) is accurate but sounds somewhat formal and indirect. A more natural and user-friendly phrasing would be more appropriate.",
+          "suggestion": "Bu konuğu devre dışı bırakırsanız, {{productName}}’e giriş yapamazlar."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'e' was added in the suggestion, following Turkish grammar rules after the product name. This should be consistent with the English usage of 'to'.",
+          "suggestion": "This is a clarification of the suggested correction rather than a change."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

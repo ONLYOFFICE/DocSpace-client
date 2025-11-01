@@ -3,7 +3,7 @@
   "content": "The guest status was successfully changed",
   "content_en_sha1_hash": "40916ce817239977dd00d9f59371f44af34698d8",
   "created_at": "2025-05-19T21:30:53.519Z",
-  "updated_at": "2025-05-28T09:30:02.206Z",
+  "updated_at": "2025-08-04T07:30:01.061Z",
   "comment": {
     "text": "This translation key is used to display a success message when a guest's status is successfully changed. It will be shown in a toast notification when the user confirms the change in a dialog box.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 98,
+      "line_number": 95,
       "context": "setSelection([user]);\n }\n \n toastr.success(\n isGuests\n ? t(\"PeopleTranslations:SuccessChangeGuestStatus\")\n : t(\"PeopleTranslations:SuccessChangeUserStatus\"),\n );\n })\n .catch(() => {\n toastr.error(",
       "module": "/packages/client"
     }
@@ -161,9 +161,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'hosťa' is grammatically incorrect. It should be 'hosťa'",
-          "suggestion": "Status hosťa bol úspešne zmenený"
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Status hosťa bol úspešne zmenený' is a bit formal and awkward for a user-facing message. A more natural and user-friendly translation would be better.",
+          "suggestion": "The phrase 'Štátus hosťa bol zmenený' is simpler and more common, while still accurately conveying the meaning. Alternatively, 'Hosťovský štátus bol zmenený' could be used."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Status gosta je uspešno promenjen' doesn't perfectly convey the meaning of 'The guest status was successfully changed'. A more accurate translation would emphasize that the *status of the guest* was changed.",
-          "suggestion": "Status gosta uspešno izmenjen"
+          "description": "The Serbian translation 'Status gosta je uspešno promenjen' while understandable, is not the most natural way to express 'The guest status was successfully changed'. A more accurate and common phrasing would be 'Uspešno je promenjen status gosta'.",
+          "suggestion": "Uspešno je promenjen status gosta"
         }
       ],
       "approved_at": null

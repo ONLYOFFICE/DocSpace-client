@@ -142,7 +142,7 @@ class RoomsFilter {
       try {
         const filterStorageItem = getUserFilter(storageKey);
         Object.assign(defaultFilter, filterStorageItem);
-      } catch (e) {
+      } catch {
         // console.log(e);
       }
     }
@@ -404,7 +404,7 @@ class RoomsFilter {
       archivedStorageFilter = getUserFilter(archivedFilterKey);
       sharedStorageFilter = getUserFilter(sharedFilterKey);
       templatesStorageFilter = getUserFilter(templatesFilterKey);
-    } catch (e) {
+    } catch {
       // console.log(e);
     }
 
@@ -445,15 +445,15 @@ class RoomsFilter {
         ? currentStorageFilter
         : dtoFilter;
 
-    if (userId && !withLocalStorage) {
-      if (dtoFilter.searchArea === RoomSearchArea.Active) {
-        setUserFilter(sharedFilterKey, dtoFilter);
-      } else if (dtoFilter.searchArea === RoomSearchArea.Archive) {
-        setUserFilter(archivedFilterKey, dtoFilter);
-      } else if (dtoFilter.searchArea === RoomSearchArea.Templates) {
-        setUserFilter(templatesFilterKey, dtoFilter);
-      }
-    }
+    // if (userId && !withLocalStorage) {
+    //   if (dtoFilter.searchArea === RoomSearchArea.Active) {
+    //     setUserFilter(sharedFilterKey, dtoFilter);
+    //   } else if (dtoFilter.searchArea === RoomSearchArea.Archive) {
+    //     setUserFilter(archivedFilterKey, dtoFilter);
+    //   } else if (dtoFilter.searchArea === RoomSearchArea.Templates) {
+    //     setUserFilter(templatesFilterKey, dtoFilter);
+    //   }
+    // }
 
     return toUrlParams(urlParams, true);
   };

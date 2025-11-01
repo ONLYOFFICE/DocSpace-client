@@ -30,6 +30,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
+import { isIconSizeType } from "../../utils";
 import { isDesktop } from "../../utils/device";
 
 import { Tooltip } from "../tooltip";
@@ -37,7 +38,26 @@ import { Tooltip } from "../tooltip";
 import styles from "./IconButton.module.scss";
 import { IconButtonProps } from "./IconButton.types";
 
+const resolveSize = (size: IconButtonProps["size"]): string => {
+  if (typeof size === "number") return `${size}px`;
+  if (typeof size === "string") {
+    if (size === "base" || size === "middle" || size === "large") return "15px";
+    return size;
+  }
+  return "16px";
+};
+
 const isTouchDevice = () => "ontouchstart" in document.documentElement;
+
+const getColor = (color: IconButtonProps["color"]): string => {
+  if (!color) return "";
+
+  if (color.startsWith("--")) {
+    return `var(${color})`;
+  }
+
+  return color === "accent" ? "var(--accent-main)" : color;
+};
 
 const IconButton = ({
   // Icon props
@@ -74,6 +94,8 @@ const IconButton = ({
   onMouseUp,
   onClick,
 
+  // For test
+  dataTestId,
   tooltipContent,
   tooltipId,
 
@@ -93,20 +115,6 @@ const IconButton = ({
       color: color || "",
     });
   }, [iconName, color]);
-
-  // Update CSS variables when color or size changes
-  useEffect(() => {
-    if (!buttonRef.current) return;
-
-    buttonRef.current.style.setProperty(
-      "--icon-button-color",
-      currentIcon.color ?? "",
-    );
-    buttonRef.current.style.setProperty(
-      "--icon-button-hover-color",
-      currentIcon.color ?? "",
-    );
-  }, [currentIcon.color, size]);
 
   // Helper function to update icon state
   const updateIconState = useCallback(
@@ -217,13 +225,16 @@ const IconButton = ({
       [styles.notClickable]: !onClick && !isClickable,
       [styles.fill]: isFill && !isStroke,
       [styles.stroke]: isStroke,
+      [styles.commonIconsStyle]: isIconSizeType(size),
     },
     className,
     "icon-button_svg",
   );
 
   const buttonStyle = {
-    "--icon-button-size": typeof size === "number" ? `${size}px` : size,
+    "--icon-button-size": resolveSize(size),
+    "--icon-button-color": getColor(currentIcon.color),
+    "--icon-button-hover-color": getColor(currentIcon.color),
     ...style,
   } as React.CSSProperties;
 
@@ -242,8 +253,9 @@ const IconButton = ({
       data-for={id}
       id={id}
       style={buttonStyle}
-      data-testid="icon-button"
+      data-testid={dataTestId || "icon-button"}
       data-iconname={currentIcon.name}
+      data-size={resolveSize(size)}
       data-tooltip-id={tooltipId}
       data-tooltip-content={tooltipContent}
       {...rest}

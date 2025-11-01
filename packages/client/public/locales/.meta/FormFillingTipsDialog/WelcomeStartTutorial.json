@@ -3,7 +3,7 @@
   "content": "Take a short tour",
   "content_en_sha1_hash": "f769ba61daddc3b54db23529401893568c14a110",
   "created_at": "2025-05-19T21:30:55.154Z",
-  "updated_at": "2025-06-03T20:59:41.920Z",
+  "updated_at": "2025-10-16T07:29:35.588Z",
   "comment": {
     "text": "This translation key is used for a button label that invites users to take a short tour or introduction when they start using a form-filling tips dialog. It appears in the footer of a modal dialog component and serves as a prompt to engage new users. Translators should provide a welcoming phrase that conveys this intention.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2179,
-      "context": "action: \"archive\",\n },\n {\n id: \"option_short-tour\",\n key: \"short-tour\",\n label: t(\"FormFillingTipsDialog:WelcomeStartTutorial\"),\n icon: HelpCenterReactSvgUrl,\n onClick: () => this.onEnableFormFillingGuid(t, item.roomType),\n disabled:\n isArchive ||\n !isFormRoom ||",
+      "line_number": 2241,
+      "context": "disabled: false,\n },\n {\n id: \"option_short-tour\",\n key: \"short-tour\",\n label: t(\"FormFillingTipsDialog:WelcomeStartTutorial\"),\n icon: HelpCenterReactSvgUrl,\n onClick: () => this.onEnableFormFillingGuid(t, item.roomType),\n disabled:\n isArchive ||\n !isFormRoom ||",
       "module": "/packages/client"
     }
   ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ծանոթացեք համակարգին\" translates to \"Get acquainted with the system.\" While not entirely wrong, it's a more formal and less inviting phrasing than \"Take a short tour.\"  It doesn't convey the same sense of a quick, introductory experience.",
-          "suggestion": "Consider a more direct translation of \"tour\" or a more inviting phrase like \"Համակարգը ծանոթացրեք\" (Get to know the system) or something similar that captures the idea of a brief introduction."
+          "description": "The translation 'Ծանոթացեք համակարգին' while generally meaning 'Get acquainted with the system' or 'Familiarize yourself with the system', isn't a direct or natural equivalent of 'Take a short tour'.  'Take a short tour' implies a guided introduction, whereas the translation is more general.",
+          "suggestion": "Consider a more specific translation that conveys the idea of a guided tour, such as 'Դիտեք կարճ ծառայություն' (Dit'ek karq ts'arajut'yun) - 'Watch a short tutorial/demonstration' or 'Մեկնել մի կարճ ուղեցույց' (Meknel mi karq ugecy') - 'Start a short guide'."
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Īsa ievadapmācība' is a literal translation of 'short introductory tutorial,' but it doesn't convey the casual and inviting tone of 'Take a short tour.' A more natural and user-friendly translation would be something like 'Īss apmērs' or 'Īsa ekskursija'.",
-          "suggestion": "Īss apmērs"
+          "description": "While 'Īsa ievadapmācība' is understandable, a more natural and accurate translation of 'Take a short tour' would be 'Īss apmācību tūre' or 'Īsa demonstrācija'. 'Ievada' can imply a formal introduction, which doesn't quite capture the casual tone of 'Take a short tour'.",
+          "suggestion": "Īss apmācību tūre"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sprawdź nasz krótki przewodnik' is not the most natural or accurate translation of 'Take a short tour'. While 'sprawdź' means 'check', in this context, a more suitable verb would be 'zobacz' (to see) or 'przejrzyj' (to browse). 'Take a tour' implies experiencing or going through something, not just checking it.",
-          "suggestion": "Zobacz nasz krótki przewodnik"
+          "description": "The translation 'Sprawdź nasz krótki przewodnik' isn't a direct or natural equivalent of 'Take a short tour'. While 'Sprawdź' means 'check' or 'verify,' 'Take a short tour' implies guidance and experience, which isn't fully conveyed. A better translation would emphasize guidance or a walkthrough.",
+          "suggestion": "Rozpocznij szybkie wprowadzenie"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Faça uma breve visita guiada\" is understandable, it's a more literal and less natural translation of \"Take a short tour.\" The intended meaning is to guide the user through the form filling process, not necessarily a physical tour.",
-          "suggestion": "Faça um rápido tutorial"
+          "description": "While technically correct, \"Faça uma breve visita guiada\" is a very literal translation and sounds slightly unnatural in Portuguese. A more natural and concise translation would be \"Faça um rápido tour\" or \"Comece um tour rápido\". \"Visita guiada\" implies a more formal guided tour.",
+          "suggestion": "Faça um rápido tour"
         }
       ],
       "approved_at": null
@@ -177,7 +177,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Совершить экскурсию\" is a literal translation of \"Take a short tour\", it sounds somewhat formal and unusual in this context.  A more natural and user-friendly translation would be something like \"Пройти короткий тур\" or \"Посмотреть короткий тур\". \"Совершить экскурсию\" implies a guided tour, which isn't necessarily what the English phrase suggests.",
+          "suggestion": "Пройти короткий тур"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -204,13 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Крените у кратку туру' is not a natural or accurate rendering of 'Take a short tour'. 'Крените' (Krenite) is formal and doesn't quite fit the tone of an invitation to a tutorial. It also implies a more significant action than a simple tour.",
+          "description": "The Serbian translation 'Крените у кратку туру' doesn't accurately convey the meaning of 'Take a short tour.' The verb 'кренути' implies 'to set out' or 'to start', which isn't the best fit for inviting someone to take a tour. It's a bit clunky.",
           "suggestion": "Покрените кратку туру"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'Крените' is a word, in this context it's not the most appropriate.  'Покрените' would flow better and is more commonly used in similar contexts.",
-          "suggestion": null
         }
       ],
       "approved_at": null
@@ -227,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Kısa göz gezdirin\" is a literal translation of \"Take a short tour\" but sounds unnatural and awkward in Turkish. A more natural and idiomatic translation would be \"Kısa bir tur yapın\" or \"Hızlıca turu deneyimleyin\". \"Göz gezdirin\" typically means to glance or skim, not to take a tour.",
-          "suggestion": "Hızlıca turu deneyimleyin"
+          "description": "The translation \"Kısa göz gezdirin\" is a literal translation of \"Take a short tour\" but doesn't quite convey the intended meaning in Turkish. It sounds awkward and unnatural.  'Göz gezdirin' implies a casual look, not a tutorial tour.",
+          "suggestion": "Consider alternatives like \"Kısa bir tur yapalım\" (Let's take a short tour) or \"Kısa bir tanıtım yapalım\" (Let's do a short introduction) to better represent the intended purpose of a tutorial."
         }
       ],
       "approved_at": null
@@ -245,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cùng khám phá nhanh nhé' while understandable, doesn't perfectly capture the concise and inviting tone of 'Take a short tour'. It's a bit more verbose and less direct.",
-          "suggestion": "Một số gợi ý khác có thể là: 'Bắt đầu tour nhanh' hoặc 'Xem hướng dẫn nhanh'."
+          "description": "The translation 'Cùng khám phá nhanh nhé' doesn't perfectly capture the meaning of 'Take a short tour'. While 'khám phá' (explore) is relevant, 'cùng' (together) and 'nhé' (particle for suggestion/softening) add a nuance not present in the original English. It might sound overly conversational or informal.",
+          "suggestion": "Một số gợi ý thay thế bao gồm: 'Bắt đầu tour nhanh' hoặc 'Hướng dẫn nhanh' (Quick guide)."
         }
       ],
       "approved_at": null
@@ -257,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '进行简短浏览' while literally meaning 'conduct a short browsing', doesn't convey the intended meaning of 'Take a short tour'. It sounds more like a passive exploration rather than an interactive guided tour.",
-          "suggestion": "进行快速导览 (jìn xíng kuài sù dǎo lǎn) - This translates to 'take a quick tour' and is a more accurate representation of the English phrase."
+          "description": "The translation '进行简短浏览' (jìn xíng jiǎn duǎn liú lǎn) doesn't perfectly convey the meaning of 'Take a short tour.' While it's understandable, '浏览' (liú lǎn) implies browsing or skimming, not a guided tour. It lacks the sense of a tutorial.",
+          "suggestion": "A more accurate translation would be something like '开始快速导览' (kāi shǐ kuài sù dǎo lǎn) which means 'Start a quick guided tour' or '快速体验' (kuài sù tǐ yàn) which means 'Quick experience'."
         }
       ],
       "approved_at": null

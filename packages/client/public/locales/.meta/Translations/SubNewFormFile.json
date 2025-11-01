@@ -3,7 +3,7 @@
   "content": "From text file",
   "content_en_sha1_hash": "521c29206ecb79ca73e09f93fdfd9794e26a24c1",
   "created_at": "2025-05-19T21:30:50.009Z",
-  "updated_at": "2025-06-03T20:59:41.782Z",
+  "updated_at": "2025-10-16T07:29:35.490Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'From text file' in the UI, specifically on buttons or dropdowns related to uploading files.\"",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 504,
+      "line_number": 509,
       "context": "const showSelectorDocx = {\n id: \"actions_template_from-file\",\n className: \"main-button_drop-down_sub\",\n icon: FormFileReactSvgUrl,\n label: t(\"Translations:SubNewFormFile\"),\n onClick: onShowSelectFileDialog,\n disabled: isPrivacy,\n key: \"form-file\",\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2770,
+      "line_number": 3093,
       "context": "};\n \n const createTemplateNewFormFile = {\n id: \"personal_template_new-form-file\",\n key: \"new-form-file\",\n label: t(\"Translations:SubNewFormFile\"),\n icon: FormFileReactSvgUrl,\n onClick: () => this.onCreateFormFromFile(t),\n disabled: isPrivacyFolder,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2770,
+      "line_number": 3093,
       "context": "};\n \n const createTemplateNewFormFile = {\n id: \"personal_template_new-form-file\",\n key: \"new-form-file\",\n label: t(\"Translations:SubNewFormFile\"),\n icon: FormFileReactSvgUrl,\n onClick: () => this.onCreateFormFromFile(t),\n disabled: isPrivacyFolder,\n };",
       "module": "/packages/client"
     }
@@ -84,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Luo tekstitiedostosta\" translates to \"Create from text file\", which is a functional but not a direct equivalent of \"From text file\". It implies action rather than description. A more accurate translation would better reflect the original meaning of simply indicating the source.",
+          "description": "The Finnish translation \"Luo tekstitiedostosta\" translates to \"Create from text file\" rather than \"From text file\". It's an active construction where the English is more passive.",
           "suggestion": "Tekstitiedostosta"
         }
       ],
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"テキスト ファイルから作成\" (Tekisuto Faisu kara Sakusei) literally translates to 'Created from text file'. The English phrase 'From text file' implies the source or origin, not the creation process. A more accurate translation would capture the meaning of 'from' as in 'originating from'.",
-          "suggestion": "テキストファイルからの"
+          "description": "The translation 'テキスト ファイルから作成' (Tekisuto Faisu kara Sakusei) translates to 'Created from text file,' not 'From text file'. While conveying a similar meaning, it's not a direct or accurate translation of the original English phrase.",
+          "suggestion": "テキストファイルより"
         }
       ],
       "approved_at": null
@@ -126,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '기존 텍스트 파일에서' translates to 'From the existing text file'. While not entirely wrong, it adds the word 'existing' which wasn't present in the original English. This can change the meaning slightly.",
+          "description": "The translation \"기존 텍스트 파일에서\" (gijon tekseu peul-eseo) translates to \"From an existing text file\". The original English \"From text file\" implies a more general 'from a text file', not necessarily an existing one. \"기존\" (gijon) introduces the concept of 'existing'.",
           "suggestion": "텍스트 파일에서"
         }
       ],
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຟອມທີ່ມີຂໍ້ມູນ' (fom thi mi khomun) translates to 'form with data', which doesn't accurately convey the meaning of 'From text file'. It's missing the concept of 'from' and focuses on the file being a form.",
-          "suggestion": "A more accurate translation could be something like 'ຈາກເອກະສານໄຟລ໌' (jak เอกสาน файл) which means 'from file', or 'ຈາກໄຟລ໌ຂໍ້ຄວາມ' (jak файл kho tekwan) meaning 'from text file'."
+          "description": "The Lao translation 'ຟອມທີ່ມີຂໍ້ມູນ' (fom thi mi khomun) translates to 'form with data,' which doesn't accurately convey the meaning of 'From text file.' It implies a form *containing* data, not the *source* of the data.",
+          "suggestion": "A more accurate translation would be something like 'ຈາກເອກະສານໂຕ້ຫນ້າ' (jak ekasan to na) which means 'from text document', or 'ຈາກໄຟລ໌ເຕັສ໌' (jak file text) which uses transliteration."
         }
       ],
       "approved_at": null
@@ -189,13 +189,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පෙළ ගොනුවකින්' while technically meaning 'from a line file,' doesn't accurately convey the meaning of 'From text file.' A more accurate translation would emphasize the 'text' aspect.",
-          "suggestion": "පෙළ ගොනුවෙන් (pela gonuwen) - From a text file, or පෙළ ගොනින් (pela gonin) - From a text file."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Iz obstoječe tekstovne datoteke\" is overly literal and verbose for \"From text file.\" A more natural and concise translation would be better.",
-          "suggestion": "Iz besedilne datoteke"
+          "description": "The translation 'Iz obstoječe tekstovne datoteke' is a literal translation but doesn't fully convey the meaning of 'From text file' in the context of a form. It sounds a bit formal and verbose.",
+          "suggestion": "Potentially 'Iz datoteke' or 'Uvoz iz datoteke' would be more natural, depending on the specific action being described."
         }
       ],
       "approved_at": null
@@ -222,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Од текстуалне датотеке\" is not the most natural or idiomatic translation of \"From text file.\" While technically correct, it's a bit clunky. A better translation would convey the meaning more clearly and naturally.",
+          "description": "The Serbian (Cyrillic) translation 'Од текстуалне датотеке' is a literal translation, but doesn't quite convey the natural meaning of 'From text file' in a UI context. A more natural translation would be 'Из текстуалне датотеке'. 'Од' implies origin, while 'из' is more common for indicating the source of something.",
           "suggestion": "Из текстуалне датотеке"
         }
       ],
@@ -234,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Od tekstualne datoteke' is a literal translation but not the most natural phrasing. A more common and idiomatic translation would be 'Iz tekstualne datoteke'. 'Od' implies origin in some cases, whereas 'Iz' is more general for indicating the source.",
+          "description": "The Serbian translation 'Od tekstualne datoteke' is not the most natural or accurate translation of 'From text file'. While technically correct, it sounds somewhat stiff and formal. A more common and idiomatic translation would be 'Iz tekstualne datoteke'.",
           "suggestion": "Iz tekstualne datoteke"
         }
       ],

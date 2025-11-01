@@ -3,7 +3,7 @@
   "content": "Here you can set how often you want to auto sync LDAP users",
   "content_en_sha1_hash": "35acf0633b254a38e0963e2918875c55d920b708",
   "created_at": "2025-05-19T21:30:54.311Z",
-  "updated_at": "2025-05-21T08:02:20.169Z",
+  "updated_at": "2025-08-12T19:46:26.190Z",
   "comment": {
     "text": "This translation key defines the text that describes the setting for automatic LDAP user synchronization, appearing as a title in a UI component. It's used to provide contextual information about the sync functionality within a PortalSettings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
-      "line_number": 138,
-      "context": "fontWeight={400}\n lineHeight=\"20px\"\n className=\"ldap_cron-title\"\n noSelect\n >\n {t(\"LdapSyncCronTitle\")}\n </Text>\n <div className=\"ldap_cron-container\">\n <Cron\n value={cron}\n setValue={onChangeCron}",
+      "line_number": 136,
+      "context": "fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n className=\"ldap_cron-title\"\n >\n {t(\"LdapSyncCronTitle\")}\n </Text>\n <div className=\"ldap_cron-container\">\n <Cron\n value={cron}\n setValue={onChangeCron}",
       "module": "/packages/client"
     }
   ],
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'սինխրոնիզացնել' is a transliteration from 'synchronize' and while understandable, a more accurate Armenian word would be 'սինքրոնացնել'.",
-          "suggestion": "սինքրոնացնել"
+          "description": "The word 'սինխրոնիզացնել' (sinkhronizatsnel) is a transliteration of 'synchronize' and while understandable, the more common and preferred term is 'սինքրոնիզացնել' (sink'ronizatsnel).",
+          "suggestion": "Replace 'սինխրոնիզացնել' with 'սինքրոնիզացնել'."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ここでLDAPユーザを自動同期する頻度を設定できます' is technically correct but sounds slightly unnatural. A more natural phrasing might prioritize the 'auto sync' aspect.",
-          "suggestion": "LDAPユーザの自動同期間隔を設定できます (Ldap user auto sync interval setting)"
+          "description": "The translation 'ここでLDAPユーザを自動同期する頻度を設定できます' is technically correct but could be improved for naturalness and clarity. The phrasing '自動同期する頻度' (frequency of automatic synchronization) is a bit clunky.",
+          "suggestion": "ここでは、LDAPユーザの自動同期間隔を設定できます。"
         }
       ],
       "approved_at": null
@@ -120,8 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຊິງຂໍ້ມູນ' doesn't accurately convey the meaning of 'sync' in this context. 'ຊິງ' typically means 'to grab' or 'to take' and doesn't fit the concept of synchronization. A better translation would be something like 'ອັບເດດຂໍ້ມູນ' (update data) or 'ເຊື່ອມໂອ້ຂໍ້ມູນ' (merge data).",
-          "suggestion": "ນີ້ແມ່ນບ່ອນທີ່ທ່ານສາມາດຕັ້ງຄ່າຄວາມຖີ່ທີ່ທ່ານຕ້ອງການໃຫ້ອັບເດດຂໍ້ມູນຜູ້ໃຊ້ LDAP ໂດຍອັດຕະໂນມັດ"
+          "description": "The translation \"ນີ້ແມ່ນບ່ອນທີ່ທ່ານສາມາດຕັ້ງຄ່າຄວາມຖີ່ທີ່ທ່ານຕ້ອງການໃຫ້ຊິງຂໍ້ມູນຜູ້ໃຊ້ LDAP ໂດຍອັດຕະໂນມັດ\" is a bit literal and could be more natural. 'ຊິງຂໍ້ມູນ' (shing khomun) translates to 'take data' which isn't the most accurate way to describe syncing.",
+          "suggestion": "ນີ້ແມ່ນບ່ອນທີ່ທ່ານສາມາດຕັ້ງຄ່າໄລຍະເວລາໃນການເຊື່ອມໂອນຂໍ້ມູນຜູ້ໃຊ້ LDAP ໂດຍອັດຕະໂນມັດ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ເຊື່ອມໂອນ' (cheuam non) is suggested for 'sync' and may be a better fit for the context of data transfer than 'ຊິງຂໍ້ມູນ'.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -161,14 +166,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Aici puteți seta cât de des doriți să se realizeze automat sincronizarea utilizator LDAP' is a bit clunky. A more natural Romanian phrasing would be 'Aici puteți seta frecvența sincronizării automate a utilizatorilor LDAP'.",
-          "suggestion": "Aici puteți seta frecvența sincronizării automate a utilizatorilor LDAP"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'să se realizeze automat' can be simplified to 'automat'.",
-          "suggestion": "Aici puteți seta frecvența sincronizării automate a utilizatorilor LDAP"
+          "type": "spelling",
+          "description": "The word 'realizeze' (realize) is not the most natural fit in this context. While technically correct, 'face' or 'se efectueze' would flow better.",
+          "suggestion": "Aici puteți seta cât de des doriți să se efectueze automat sincronizarea utilizator LDAP"
         }
       ],
       "approved_at": null
@@ -184,9 +184,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පරිශීලකයින්' (parishilakayin) is technically correct, but 'පරිශ්රමණිකයන්' (parishramanikayan) might be a more common and natural choice when referring to LDAP users in a technical context. It's a nuance but improves clarity.",
-          "suggestion": "පරිශ්රමණිකයන්"
+          "type": "incorrect_translation",
+          "description": "The translation is overly formal and verbose for a UI element. 'ඔබට...සැකසිය හැකිය' (you can set) is less direct than a more common phrasing. The overall meaning is correct but the tone is off.",
+          "suggestion": "තවදුරටත් LDAP පරිශීලකයින් සුමුදාහරණය කිරීමේ ක්‍රම පත්‍රය මෙහිදී සැකසියන්න."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is long and could benefit from breaking into two shorter sentences for better readability in a UI.",
+          "suggestion": "මෙම ස්ථානයේ LDAP පරිශීලකයින් සුමුදාහරණය කිරීමේ ක්‍රම පත්‍රය සැකසිය හැකිය.  ඔබට අවශ්‍ය කාලගම මෙහිදී සකසන්න."
         }
       ],
       "approved_at": null
@@ -202,9 +207,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The verb form 'želiš' (you want) is less formal than what would typically be used in a settings panel. A more formal and impersonal construction would be more appropriate.",
-          "suggestion": "Tukaj se lahko nastavi, kako pogosto želite samodejno sinhronizirati uporabnike LDAP"
+          "type": "incorrect_translation",
+          "description": "The translation 'želiš' (you want) is less formal than the original 'want to'. A more appropriate and formal translation would improve the tone, aligning it with a technical setting. 'Lahko nastavite' (you can set) would be more suitable.",
+          "suggestion": "Tukaj se lahko nastavite, kako pogosto želite samodejno sinhronizirati uporabnike LDAP"
         }
       ],
       "approved_at": null
@@ -215,7 +220,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'аутоматски' is a valid word, but 'ауто-синхронизујете' (auto-synchronize) is more common and natural in this context. Using just 'синхронизујете' might be clearer.",
+          "description": "The word 'аутоматски' (automatically) is unnecessarily long and can be simplified.",
           "suggestion": "Овде можете да подесите колико често желите да синхронизујете LDAP кориснике"
         }
       ],
@@ -230,7 +235,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'senkronize' is misspelled. The correct spelling is 'senkronize etmek'.",
+          "suggestion": "Burada LDAP kullanıcılarını ne sıklıkla otomatik olarak senkronize etmek istediğinizi ayarlayabilirsiniz"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

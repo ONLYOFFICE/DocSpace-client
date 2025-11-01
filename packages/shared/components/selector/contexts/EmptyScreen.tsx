@@ -42,9 +42,5 @@ export const EmptyScreenProvider = ({
   children,
   ...rest
 }: TSelectorEmptyScreen & { children: ReactNode }) => {
-  return (
-    <EmptyScreenContext.Provider value={rest}>
-      {children}
-    </EmptyScreenContext.Provider>
-  );
+  return <EmptyScreenContext value={rest}>{children}</EmptyScreenContext>;
 };

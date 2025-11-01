@@ -3,7 +3,7 @@
   "content": "Your form completed and saved",
   "content_en_sha1_hash": "5bd6d599c7b5c53ab929687e0395e747e496d12c",
   "created_at": "2025-05-19T21:30:57.157Z",
-  "updated_at": "2025-05-28T09:30:02.867Z",
+  "updated_at": "2025-08-12T19:46:26.305Z",
   "comment": {
     "text": "This translation key is used for a completion message displayed on a form that has been successfully submitted. It appears on an empty form container when the form data cannot be saved, providing users with a reassuring notification.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.empty.tsx",
-      "line_number": 76,
-      "context": "width={416}\n height={200}\n />\n <TextWrapper className=\"completed-form__empty\">\n <Heading level={HeadingLevel.h1}>{t(\"CompletedForm:Title\")}</Heading>\n <Text noSelect>{t(\"CompletedForm:Description\")}</Text>\n </TextWrapper>\n </CompletedFormLayout>\n </ContainerCompletedForm>\n );\n };",
+      "line_number": 80,
+      "context": "width={416}\n height={200}\n />\n <TextWrapper className=\"completed-form__empty\">\n <Heading level={HeadingLevel.h1}>{t(\"CompletedForm:Title\")}</Heading>\n <Text>{t(\"CompletedForm:Description\")}</Text>\n </TextWrapper>\n </CompletedFormLayout>\n </ContainerCompletedForm>\n );\n };",
       "module": "/packages/doceditor"
     }
   ],
@@ -81,25 +81,59 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Լրացնել կրկին\" translates to \"Fill again\" which doesn't accurately convey the meaning of \"Your form completed and saved\". It suggests the form needs to be filled out again, rather than indicating successful completion.",
+          "suggestion": "A more accurate translation would be something like \"Ձեր դիմումը ավարտվել և պահպանվել է\" (Tzer dimumy avartvel ev pahpvanvel e) which translates to \"Your form is completed and saved\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'Compilalo di nuovo' translates to 'Fill it out again'. This does not accurately reflect the English content 'Your form completed and saved'. It implies the form needs to be re-submitted, not that it has been successfully completed.",
+          "suggestion": "A more accurate translation would be something like 'Il tuo modulo è stato compilato e salvato' (Your form has been completed and saved) or 'Modulo completato e salvato' (Form completed and saved)."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'フォームが完成させ、保存された' doesn't accurately convey the meaning of 'Your form completed and saved'. It translates to something like 'The form was completed and saved', which lacks the personal 'Your'.  It also uses the passive voice unnecessarily.",
+          "suggestion": "フォームが完了し、保存されました (Fōmu ga kanryō shi, hozon saremashita) - 'The form has been completed and saved' is more accurate.  Alternatively, フォームは完了し、保存されました (Fōmu wa kanryō shi, hozon saremashita) also works, but the nuance is slightly different. A more natural, slightly less formal option is フォームは完了して保存されました (Fōmu wa kanryō shite hozon saremashita)."
+        },
+        {
+          "type": "grammar",
+          "description": "The grammar 'フォームが完成させ、保存された' is awkward and unnatural in Japanese. The use of '完成させ' (kanjiritase) is not idiomatic in this context.",
+          "suggestion": "Replace '完成させ' with a more appropriate verb like '完了' (kanryō - completion) or '終了' (shūryō - termination)."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '양식 작성이 완료되어 저장되었습니다' while understandable, is a bit formal and clunky. A more natural and common phrasing would be better.",
+          "suggestion": "양식 작성이 완료되었습니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English implies completion and saving are intrinsically linked. The Korean translation explicitly states '저장되었습니다' (saved), which might not always be the case (e.g., saving as a draft). While technically correct, it might be misleading.",
+          "suggestion": "양식이 완료되었습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +175,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Completaţi-l încă o dată' translates to 'Complete it again'. This does not accurately reflect the English meaning 'Your form completed and saved'. It implies the form needs to be filled out again, which is not the intended message.",
+          "suggestion": "A more accurate translation would be something like 'Formularul a fost completat și salvat' (The form has been completed and saved) or 'Formularul dvs. a fost completat și salvat' (Your form has been completed and saved)."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +193,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබගේ පෝරමය සම්පුර්ණ කර සුරකින ලදී' is not the most natural or accurate translation of 'Your form completed and saved.' A more natural phrasing would be closer to 'ඔබගේ පෝරමය සම්පුර්ණ වී සුරකින ලදී' or 'ඔබගේ පෝරමය සම්පුර්ණ වී, සුරකින ලදී'. The use of 'කර' is awkward in this context.",
+          "suggestion": "ඔබගේ පෝරමය සම්පුර්ණ වී සුරකින ලදී"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically grammatically correct, the sentence structure is a bit stiff.  A more conversational flow would be preferred.",
+          "suggestion": "ඔබගේ පෝරමය සම්පුර්ණ වී, දැන් සුරකින ලදී"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +222,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'formular' is incorrect. It should be 'образац' (obrasac).",
+          "suggestion": "Ваш образац је завршен и сачуван"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -28,11 +28,16 @@ import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import { WhiteLabel as WhiteLabelPage } from "@docspace/shared/pages/Branding/WhiteLabel";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
+import { DeviceType } from "@docspace/shared/enums";
 
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
+import { brandingRedirectUrl } from "./constants";
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const WhiteLabelComponent = (props) => {
   const {
@@ -46,22 +51,37 @@ const WhiteLabelComponent = (props) => {
     logoUrls,
     isDefaultLogos,
     isWhiteLabelLoaded,
-    initWhiteLabel,
     setLogoUrls,
     saveWhiteLabelLogos,
     resetWhiteLabelLogos,
+    brandingStore,
   } = props;
+  const isMobileView = deviceType === DeviceType.mobile;
+
+  const defaultProps = createDefaultHookSettingsProps({
+    isMobileView,
+    brandingStore,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
+
   const [isSaving, setIsSaving] = useState(false);
   const showAbout = standalone && isManagement() && displayAbout;
 
   useEffect(() => {
-    initWhiteLabel();
+    if (isMobileView) getCommonInitialValue();
   }, []);
+
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "white-label",
+    deviceType,
+  });
 
   const onRestoreDefault = async () => {
     try {
       await resetWhiteLabelLogos();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -72,7 +92,7 @@ const WhiteLabelComponent = (props) => {
       setIsSaving(true);
       await saveWhiteLabelLogos(data);
 
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     } finally {
@@ -84,7 +104,6 @@ const WhiteLabelComponent = (props) => {
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelPage
-      t={t}
       logoUrls={logoUrls}
       isSettingPaid={isSettingPaid}
       showAbout={showAbout}
@@ -110,7 +129,6 @@ export const WhiteLabel = inject(
       defaultBrandName,
       isDefaultLogos,
       isWhiteLabelLoaded,
-      initWhiteLabel,
       setLogoUrls,
       setBrandName,
       saveWhiteLabelLogos,
@@ -145,12 +163,12 @@ export const WhiteLabel = inject(
       defaultBrandName,
       isDefaultLogos,
       isWhiteLabelLoaded,
-      initWhiteLabel,
       setLogoUrls,
       setBrandName,
       saveWhiteLabelLogos,
       saveBrandName,
       resetWhiteLabelLogos,
+      brandingStore,
     };
   },
 )(

@@ -3,7 +3,7 @@
   "content": "Token revoked successfully",
   "content_en_sha1_hash": "40f07694c195b055dc6382019e7a4f7ad297f06a",
   "created_at": "2025-05-19T21:30:54.064Z",
-  "updated_at": "2025-05-28T09:30:02.599Z",
+  "updated_at": "2025-08-04T07:30:01.439Z",
   "comment": {
     "text": "This translation key is used to display a success message when a developer token is revoked. It appears in a toast notification after clicking the \"Revoke Developer Token\" button or closing the revoke dialog. The message confirms that the token has been successfully revoked.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 109,
+      "line_number": 113,
       "context": "await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);\n \n setRequestRunning(false);\n \n toastr.success(t(\"TokenRevokedSuccessfully\"));\n \n setToken(\"\");\n \n onClose();\n };",
       "module": "/packages/client"
     },
@@ -78,7 +78,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tunnus on onnistuneesti peruutettu\" is understandable, a more natural and common Finnish translation of \"Token revoked successfully\" would be \"Token poistettu onnistuneesti\" or \"Poistettiin token onnistuneesti\". The current translation uses 'peruutettu' which implies cancellation or annulment rather than deletion/removal.",
+          "description": "While \"Tunnus on onnistuneesti peruutettu\" is understandable, a more natural and accurate translation of \"Token revoked successfully\" would be something along the lines of \"Token poistettu onnistuneesti\" or \"Token on mitätöity onnistuneesti\". \"Peruuttaminen\" implies a reversal of a transaction, which isn't the most accurate representation of token revocation.",
           "suggestion": "Token poistettu onnistuneesti"
         }
       ],
@@ -96,13 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Token-ը հաջողությամբ չեղարկվեց' while conveying the general meaning, could be improved for a more natural and idiomatic phrasing in Armenian. While 'չեղարկվեց' (chelgarkvec') means 'was cancelled', a more appropriate verb for revocation might be 'դադարեցվեց' (dadarecvets) or 'գործնականացվեց' (gorgnakaniacvec), depending on the specific context of token revocation.",
-          "suggestion": "Consider using 'Token-ը հաջողությամբ դադարեցվեց' or 'Token-ը հաջողությամբ գործնականացվեց' for a more natural and precise translation."
-        },
-        {
-          "type": "formatting",
-          "description": "The hyphen in 'Token-ը' is unnecessary. Armenian doesn't typically use hyphens in this construct.",
-          "suggestion": "Remove the hyphen. Use 'Tokenը' instead."
+          "description": "While technically correct, the translation 'Token-ը հաջողությամբ չեղարկվեց' is a bit literal and could be improved for naturalness. 'Token-ը' sounds a little clunky. A more idiomatic translation might consider using a verb implying cancellation or expiry, rather than just 'canceled'.",
+          "suggestion": "Consider alternatives like 'Token-ի գործողությունը դադարեցվեց' (Token's validity ceased) or 'Token-ը ուժը կորցրեց' (Token lost its validity)."
         }
       ],
       "approved_at": null
@@ -128,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ໂຕ໊ກເກນ' (token) is written with Lao characters, but it's a transliteration and might not be the most natural or easily understood representation for Lao speakers. While technically correct, it could be improved for clarity.",
+          "suggestion": "Consider using a more common or easily understood term if one exists in Lao, or keep it as is depending on the audience and context."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -167,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"Tocken\" is a misspelling of \"Token\".",
+          "description": "The word 'Token' is misspelled as 'Tocken'.",
           "suggestion": "Token"
         }
       ],
@@ -185,13 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සාක්ෂිපත්‍රය සාර්ථකව අහෝසි කරන ලදී.' while technically conveying the meaning, sounds overly formal and passive. A more natural and concise translation would be more suitable for a UI message.",
-          "suggestion": "සාක්ෂිපත්‍රය ඉවත් කරන ලදී."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is a bit long and could be simplified for better readability in a UI context.",
-          "suggestion": "සාක්ෂිපත්‍රය ඉවත් කරන ලදී."
+          "description": "The translation 'සාක්ෂිපත්‍රය සාර්ථකව අහෝසි කරන ලදී.' is a literal translation and sounds overly formal and unnatural in Sinhala. A more natural and common way to express 'Token revoked successfully' would be something like 'විශ්වාසපත්‍රය අවලංගු කරන ලදී.' or 'විශ්වාසපත්‍රය ඉවත් කරන ලදී.'",
+          "suggestion": "විශ්වාසපත්‍රය අවලංගු කරන ලදී."
         }
       ],
       "approved_at": null
@@ -214,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Токен успешно опозван\" incorrectly translates 'revoked'. The correct term for 'revoked' in this context should be 'укинут' or 'опозиван', not 'опозван'. 'Опозван' generally means 'challenged' or 'disputed'.",
+          "description": "The Serbian translation \"Токен успешно опозван\" uses the verb \"опозван\" which implies recognition or identification, not revocation. Revocation means to cancel or invalidate. A more appropriate verb would be \"укинут\" or \"опозиван\".",
           "suggestion": "Токен успешно укинут"
         }
       ],
@@ -238,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Маркер успішно відкликано\" is technically correct but sounds awkward in Ukrainian. A more natural phrasing would emphasize the action of revoking.",
+          "description": "While technically correct, \"Маркер успішно відкликано\" sounds a bit formal and unnatural in Ukrainian. A more natural and common phrasing for 'Token revoked successfully' would be something like 'Токен успішно скасовано' or 'Токен успішно анульовано'.",
           "suggestion": "Токен успішно скасовано"
         }
       ],
@@ -247,7 +243,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Đã thu hồi mã token thành công' is understandable, a more natural and accurate translation would be 'Đã hủy token thành công' or 'Token đã được hủy thành công'. 'Thu hồi' implies retrieval, not revocation.",
+          "suggestion": "Đã hủy token thành công"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

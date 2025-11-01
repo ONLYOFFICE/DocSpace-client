@@ -1,6 +1,4 @@
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/mixins";
 
 .body {
   margin: 0 auto;
@@ -34,10 +32,10 @@
   }
 
   .image {
-    height: 100px;
-    width: 100px;
+    height: 140px;
+    width: 200px;
     margin-bottom: 32px;
-    @include no-user-select;
+    @include mixins.no-user-select;
     background: no-repeat 0 0 transparent;
   }
 
@@ -78,12 +76,12 @@
     }
   }
 
-  @include transitional-screen-size {
+  @include mixins.transitional-screen-size {
     width: fit-content;
     max-width: 640px;
   }
 
-  @include tablet {
+  @include mixins.tablet {
     &.withoutFilter {
       padding-top: 109px;
     }
@@ -94,7 +92,7 @@
     max-width: 480px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     &.withoutFilter {
       padding-top: 69px;
     }
@@ -107,8 +105,8 @@
     width: fit-content;
 
     .image {
-      height: 75px;
-      width: 75px;
+      height: 105px;
+      width: 150px;
     }
 
     .buttons {

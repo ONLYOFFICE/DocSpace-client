@@ -25,11 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import { ModalDialog } from ".";
 import { ModalDialogType } from "./ModalDialog.enums";
 
@@ -51,7 +50,7 @@ describe("ModalDialog", () => {
   });
 
   it("renders modal dialog with header, body and footer", () => {
-    renderWithTheme(
+    render(
       <ModalDialog {...defaultProps}>
         <ModalDialog.Header>Modal Header</ModalDialog.Header>
         <ModalDialog.Body>Modal Body Content</ModalDialog.Body>
@@ -66,7 +65,7 @@ describe("ModalDialog", () => {
   });
 
   it("calls onClose when close button is clicked", async () => {
-    renderWithTheme(
+    render(
       <ModalDialog {...defaultProps}>
         <ModalDialog.Header>Modal Header</ModalDialog.Header>
         <ModalDialog.Body>Modal Body Content</ModalDialog.Body>
@@ -80,7 +79,7 @@ describe("ModalDialog", () => {
   });
 
   it("does not show close button when isCloseable is false", () => {
-    renderWithTheme(
+    render(
       <ModalDialog {...defaultProps} isCloseable={false}>
         <ModalDialog.Header>Modal Header</ModalDialog.Header>
         <ModalDialog.Body>Modal Body Content</ModalDialog.Body>
@@ -92,7 +91,7 @@ describe("ModalDialog", () => {
   });
 
   it("shows loading state when isLoading is true", () => {
-    renderWithTheme(
+    render(
       <ModalDialog {...defaultProps} isLoading>
         <ModalDialog.Body>Modal Body Content</ModalDialog.Body>
       </ModalDialog>,
@@ -105,7 +104,7 @@ describe("ModalDialog", () => {
   });
 
   it("renders container when containerVisible is true (aside only)", () => {
-    renderWithTheme(
+    render(
       <ModalDialog
         {...defaultProps}
         displayType={ModalDialogType.aside}

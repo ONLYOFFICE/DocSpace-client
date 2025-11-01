@@ -3,7 +3,7 @@
   "content": "Sign Auth Requests",
   "content_en_sha1_hash": "519ab04085d6e6c56d91eedea8dcd822ebb6d3cf",
   "created_at": "2025-05-19T21:30:50.153Z",
-  "updated_at": "2025-05-21T01:53:50.442Z",
+  "updated_at": "2025-08-11T18:11:59.265Z",
   "comment": {
     "text": "The \"spAuthRequest\" translation key is used to display the English content \"Sign Auth Requests\" in various UI elements, primarily found on checkboxes related to Single Sign-On (SSO) settings. This text likely appears as a label for checkbox components in a portal settings page or similar interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/CheckboxSet.js",
-      "line_number": 86,
+      "line_number": 104,
       "context": ": \"sp-sign-auth-requests\"\n }\n className=\"checkbox-input\"\n isDisabled={isDisabled}\n onChange={setCheckbox}\n label={prefix === \"idp\" ? t(\"idpAuthRequest\") : t(\"spAuthRequest\")}\n name={checkboxesNames[prefix][0]}\n tabIndex={10}\n isChecked={\n prefix === \"idp\" ? idpVerifyAuthResponsesSign : spSignAuthRequests\n }",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'توقيع طلبات المصادقة' while literally translating to 'Signing Authentication Requests', doesn't fully capture the nuance of 'Sign Auth Requests' which refers to generating or initiating authentication requests, not just signing them. It implies an action of signing which isn't the intended meaning in the context of Single Sign-On.",
-          "suggestion": "إنشاء طلبات مصادقة (Insha'a Talabat Musadaqa) - 'Creating Authentication Requests' or طلبات تسجيل الدخول الموحد (Talabat Tasjeel Al-Dukhool Al-Muwahhad) - 'Unified Login Requests'"
+          "description": "The translation \"توقيع طلبات المصادقة\" while literally meaning \"Signing Authentication Requests,\" doesn't fully capture the nuance of 'Sign Auth Requests' which implies generating or creating authentication requests, not just signing them.  It's a slightly awkward phrasing in Arabic for this context.",
+          "suggestion": "Consider alternatives like \"إنشاء طلبات المصادقة\" (Creating Authentication Requests) or \"توليد طلبات المصادقة\" (Generating Authentication Requests) which better reflect the intended meaning of initiating the authentication requests."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"İmza Doğrulama Sorğuları\" doesn't accurately reflect the English phrase \"Sign Auth Requests\". \"Sign Auth Requests\" refers to requests related to authentication via signing, not requests for signature verification. \"Doğrulama\" means verification, which is the opposite of what the English term implies.",
-          "suggestion": "A more accurate translation could be something like \"İmza Yetkilendirme İstekləri\" (Signature Authorization Requests) or \"Rəsmi İmzalaq İstəkləri\" (Official Signature Requests). The best option depends on the specific context of the key."
+          "description": "The translation \"İmza Doğrulama Sorğuları\" does not accurately convey the meaning of \"Sign Auth Requests\". \"Doğrulama\" implies verification, but the English refers to requests for signing. It's likely referring to authentication requests for signing, not verification of signatures.",
+          "suggestion": "Consider \"İmza İsteği Sorğuları\" or \"Rəsmi Sənəd Sorğuları\" (depending on the specific context of 'Sign Auth Requests'). A more precise translation would require understanding what type of requests are being referenced."
         }
       ],
       "approved_at": null
@@ -54,13 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Заявки за упълномощено вписване' while conveying a sense of requests, doesn't perfectly align with the English 'Sign Auth Requests'. 'Sign Auth Requests' refers to requests that trigger a signing process, implying a request for authorization. 'Упълномощено вписване' suggests a completed sign-in process. A better translation might focus on the 'request' aspect and authorization process.",
-          "suggestion": "Заявки за авторизация за вписване"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'упълномощено' is slightly awkward in this context. It implies a level of permission already granted, whereas 'Sign Auth Requests' refers to the initial request for that authorization.",
-          "suggestion": "Заявки за авторизация за влизане"
+          "description": "The translation \"Заявки за упълномощено вписване\" is a literal translation and not the most natural or idiomatic way to express \"Sign Auth Requests\" in Bulgarian. While technically correct, it sounds overly formal and complex. A more natural phrasing would convey the essence of authentication requests.",
+          "suggestion": "Consider a translation like \"Искания за удостоверяване\" or \"Заявки за автентикация\" which are more common and readily understood."
         }
       ],
       "approved_at": null
@@ -71,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Podepisování žádostí o ověření\" while technically correct, doesn't perfectly capture the nuance of 'Sign Auth Requests'. 'Sign' in this context refers to generating or initiating an authentication request, not necessarily signing it in a cryptographic sense. A more accurate translation would focus on the initiation of the request.",
-          "suggestion": "Generování žádostí o ověření"
+          "description": "The translation 'Podepisování žádostí o ověření' while technically correct, doesn't fully capture the meaning of 'Sign Auth Requests'. 'Sign' in this context implies a request being generated or triggered, not just 'signing' it in the literal sense. It sounds a little awkward.",
+          "suggestion": "Žádosti o ověření - generování/vytváření"
         }
       ],
       "approved_at": null
@@ -83,13 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Autorisierungsanfragen unterschreiben\" is not the most accurate or natural translation of \"Sign Auth Requests\". While technically correct, it's overly literal and doesn't fully capture the nuance. 'Sign' in this context usually implies authorization or approval, not literally signing something.",
-          "suggestion": "A better translation would be \"Autentifizierungsanfragen genehmigen\" or \"Autentifizierungsanfragen autorisieren\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses compound words, which is common in German, but might be difficult to parse for some users. Consider breaking it up if the user interface has space.",
-          "suggestion": "Consider using a more readable phrase such as \"Autorisierungsanfragen autorisieren\" if space allows. While not shorter, it may be more understandable."
+          "description": "The translation 'Autorisierungsanfragen unterschreiben' is not the most accurate or natural-sounding translation for 'Sign Auth Requests'. 'Sign' in this context implies generating or creating, not physically signing. 'Autorisierungsanfragen erstellen' or 'Signierte Autorisierungsanfragen' would be more accurate.",
+          "suggestion": "Autorisierungsanfragen erstellen"
         }
       ],
       "approved_at": null
@@ -100,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Υπογραφή αιτημάτων εξουσιοδότησης' translates literally to 'Signing Authorization Requests'. While not entirely wrong, it's a more formal and less direct translation than 'Sign Auth Requests'. 'Sign' implies the action of authorizing, which isn't fully conveyed by 'Υπογραφή'. A more natural translation might emphasize the act of generating or initiating the requests.",
-          "suggestion": "Consider 'Δημιουργία αιτημάτων εξουσιοδότησης' (Creation of Authorization Requests) or 'Έκδοση αιτημάτων εξουσιοδότησης' (Issuance of Authorization Requests)."
+          "description": "The translation \"Υπογραφή αιτημάτων εξουσιοδότησης\" is a literal translation of \"Sign Auth Requests\" which doesn't fully capture the intended meaning. 'Sign' in this context likely refers to authorization, not a physical signature. A more accurate translation would convey the sense of 'Authorization Requests' or 'Authentication Requests'.",
+          "suggestion": "Εξουσιοδοτήσεις αιτημάτων"
         }
       ],
       "approved_at": null
@@ -112,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Firmar' can mean 'sign', in the context of authentication requests, 'Autorizar' or 'Validar' would be more accurate translations of 'Sign' referring to a digital signature or authorization process.",
+          "description": "While \"Firmar\" can mean \"to sign,\" in the context of Single Sign-On authentication requests, \"Autorizar\" or \"Validar\" would be more accurate and commonly used to convey the meaning of authentication.",
           "suggestion": "Autorizar solicitudes de autenticación"
         }
       ],
@@ -124,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Allekirjoita todennuspyynnöt\" is technically correct, it's a very literal translation and doesn't convey the intended meaning of 'Sign Auth Requests' in a user-friendly way. The term 'Sign' in this context often refers to initiating or triggering authentication, not literally signing a document.",
-          "suggestion": "Consider alternatives like \"Käynnistä todennus\" (Initiate authentication) or \"Tarkista todennus\" (Verify authentication), depending on the precise functionality."
+          "description": "While 'Allekirjoita todennuspyynnöt' is technically correct, it's a very literal translation. A more natural and idiomatic Finnish translation for 'Sign Auth Requests' in a technical context (like Single Sign-On) would be something like 'Vahvista todennuspyynnöt' or 'Hyväksy todennuspyynnöt'. 'Allekirjoita' usually refers to physically signing a document, which isn't the intended meaning here.",
+          "suggestion": "Vahvista todennuspyynnöt"
         }
       ],
       "approved_at": null
@@ -133,7 +123,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Signer les demandes d’authentification' is technically correct, it's a bit formal and less natural for a user-facing label. A more common and user-friendly translation would be 'Approuver les demandes d'authentification' or 'Valider les demandes d’authentification'. 'Signer' implies a signature, which isn't the intended action.",
+          "suggestion": "Approuver les demandes d’authentification"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -142,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ստորագրեք վավերացման հարցումները' is a literal translation of 'Sign Auth Requests' but doesn't fully capture the intended meaning within a Single Sign-On context. 'Auth Requests' refers to authentication requests, not necessarily 'signing' them. A more accurate translation would convey the initiation or creation of authentication requests.",
-          "suggestion": "Consider alternatives like 'Ստանալ վավերացման հարցումներ' (Receive authentication requests) or 'Ստեղծել վավերացման հարցումներ' (Create authentication requests)."
+          "description": "The English phrase \"Sign Auth Requests\" is better translated as something conveying the action of generating or creating authentication requests, not simply 'signing' them. 'Sign' in this context likely refers to creating or initiating the request.",
+          "suggestion": "Մերժման հարցումներ ստեղծեք (Merzman harsumner stegcek)"
         }
       ],
       "approved_at": null
@@ -154,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Sign Auth Requests\" is more accurately translated as \"Richieste di autenticazione da firmare\" or \"Richieste di autenticazione per la firma\".  \"Firma le richieste di autenticazione\" sounds a bit awkward and implies the user is the one performing the signing action, not the system's action related to requests.",
-          "suggestion": "Richieste di autenticazione da firmare"
+          "description": "While technically correct, 'Firma le richieste di autenticazione' is a rather literal and stiff translation. A more natural and idiomatic translation would be 'Richieste di autenticazione firmate' or 'Autorizzazioni di accesso firmate'. The current translation sounds robotic and doesn't flow well in Italian.",
+          "suggestion": "Richieste di autenticazione firmate"
         }
       ],
       "approved_at": null
@@ -166,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '認証リクエストに署名する' (Shoukai rikusuto ni shomei suru) literally translates to 'Sign authentication requests'. While 'Sign' can sometimes imply authentication, 'Sign Auth Requests' is better translated as something more descriptive of the action being performed - like 'Generate Signed Auth Requests' or 'Create Signed Auth Requests'. The current translation implies that existing authentication requests are being signed, which may not be the intended meaning.",
-          "suggestion": "Consider '署名済みの認証リクエストを生成する' (Shomei-zumi no shoukai rikusuto o seisuru) or '認証リクエストに署名を付与する' (Shoukai rikusuto ni shomei o fuyuu) to better convey the action of generating or creating signed authentication requests."
+          "description": "The translation \"認証リクエストに署名する\" (Shoukai risukuesuto ni shomei suru) is too literal. It translates to 'Sign authentication requests'. The English 'Sign Auth Requests' likely refers to the action of generating or creating authentication requests, not literally signing them with a signature.",
+          "suggestion": "認証リクエストを生成する (Shoukai risukuesuto o seisei suru) - 'Generate authentication requests' or 認証リクエストを作成する (Shoukai risukuesuto o sakusei suru) - 'Create authentication requests'."
         }
       ],
       "approved_at": null
@@ -178,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '인증 요청 서명' (Incheung yocheong seomyung) translates more literally to 'Signature of Authentication Requests'. While related, it doesn't accurately convey the meaning of 'Sign Auth Requests', which implies the action of signing authentication requests, not the signature itself. It lacks the active verb of 'signing'.",
-          "suggestion": "Consider a translation like '인증 요청 서명하기' (Incheung yocheong seomyung-hagi) which translates to 'Signing Authentication Requests', or '인증 요청 생성 및 서명' (Incheung yocheong saengseong mit seomyung) meaning 'Authentication Request Generation and Signing'."
+          "description": "The Korean translation \"인증 요청 서명\" translates more literally to 'Signature of Authentication Requests' rather than 'Sign Auth Requests'. While not entirely wrong, it's not the most natural phrasing and could be misinterpreted.",
+          "suggestion": "Consider a more natural translation like \"인증 요청 처리\" (Process Authentication Requests) or \"인증 요청 생성\" (Generate Authentication Requests), depending on the intended meaning of 'Sign Auth Requests'."
         }
       ],
       "approved_at": null
@@ -190,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຊັນ ​ຄໍາ​ຮ້ອງ ​ສະ​ຫມັກ\" translates to 'Sign Application Requests', which is not a direct or accurate translation of 'Sign Auth Requests'. 'Auth' refers to authentication, which is a specific process.",
-          "suggestion": "Consider a translation that conveys the concept of authentication requests. For example, 'ຄໍາຮ້ອງຂໍການຢັ້ງຢືນຕົວຕົນ' (Kam Roung Kho Gan Yang Yen Thuan Ton) which translates to 'Authentication Request'."
+          "description": "The Lao translation \"ເຊັນ ​ຄໍາ​ຮ້ອງ ​ສະ​ຫມັກ\" translates to \"Sign Application Requests\".  While 'sign' might be related to authentication, \"ຄໍາ​ຮ້ອງ ​ສະ​ຫມັກ\" (application requests) isn't a direct equivalent of 'Auth Requests'. The intended meaning is likely more related to an authentication request or authorization request.",
+          "suggestion": "Consider a translation like \"ການ​ຢັ້ງຍືນຕົວຕົນ\" (identity verification) or \"ຄໍາ​ຮ້ອງຂໍການ​ເຂົ້າສູ່ລະບົບ\" (login request) to more accurately convey 'Auth Requests'."
         }
       ],
       "approved_at": null
@@ -202,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Parakstīt autentifikācijas pieprasījumus\" is a very literal translation and might sound overly formal or technical for a user interface. A more natural and user-friendly phrasing might be preferable.",
-          "suggestion": "Autentifikācijas pieprasījumu parakstīšana"
+          "description": "The translation \"Parakstīt autentifikācijas pieprasījumus\" is a literal translation of 'Sign Auth Requests' but might not be the most natural or user-friendly phrasing in Latvian.  'Sign' in this context refers to initiating or triggering a request, not necessarily adding a digital signature. A better translation might convey the action of initiating or generating the authentication request.",
+          "suggestion": "Autentifikācijas pieprasījuma izveidošana"
         }
       ],
       "approved_at": null
@@ -214,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Sign Auth Requests' implies a request *to sign* an authorization request. 'Sign Auth Verzoeken' literally translates to 'Sign Authorization Requests,' which is not precisely the intended meaning.  A better translation would convey the idea of authorization requests being signed or requiring signatures.",
-          "suggestion": "Consider 'Geautoriseerde Verzoeken' or 'Autorisatieverzoeken' depending on the desired nuance.  Alternatively, if the context requires emphasizing the action of signing, 'Verzoeken om Ondertekening' could be used, but this is less concise."
+          "description": "The English term \"Auth Requests\" implies a request for authentication. The Dutch translation \"Auth Verzoeken\" is technically correct, but \"Authenticatieverzoeken\" would be a more precise and natural rendering of 'Auth Requests' in this context, as 'verzoeken' can be a more general term.",
+          "suggestion": "Authenticatieverzoeken"
         }
       ],
       "approved_at": null
@@ -226,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Podpisz żądania autoryzacji\" is not the most natural or accurate translation of 'Sign Auth Requests'. \"Podpisz\" implies signing a document, whereas 'Sign' here refers to initiating or triggering an authentication request. A more accurate translation would focus on 'initiate' or 'generate'.",
-          "suggestion": "Rozpocznij żądania autoryzacji"
+          "description": "While grammatically correct, 'Podpisz żądania autoryzacji' can be interpreted as 'Sign Authorization Requests', which is not precisely the meaning of 'Sign Auth Requests'. The original English suggests an action being performed *on* auth requests, not simply signing them.",
+          "suggestion": "Rozważ użycie sformułowania bardziej oddającego sens oryginalnego tekstu, np. 'Wysyłaj żądania autoryzacji' (Send Authorization Requests) lub 'Generuj żądania autoryzacji' (Generate Authorization Requests), jeśli kontekst tego wymaga."
         }
       ],
       "approved_at": null
@@ -238,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pedidos de Autenticação' while technically correct, doesn't fully capture the nuance of 'Sign Auth Requests'. 'Sign' refers to the request being signed for security purposes.  A more accurate translation would consider this aspect.",
-          "suggestion": "Solicitações de Autenticação Assinadas"
+          "description": "The English phrase 'Sign Auth Requests' implies a request *for* signing authentication. 'Pedidos de Autenticação' translates to 'Authentication Requests' which is more general. It lacks the nuance of requesting a signing action.",
+          "suggestion": "Consider 'Solicitações de Autenticação por Assinatura' or 'Pedidos de Autenticação para Assinatura' for a more accurate translation reflecting the original meaning."
         }
       ],
       "approved_at": null
@@ -250,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Solicitações de autenticação de assinatura\" is not an accurate translation of \"Sign Auth Requests.\" \"Sign\" in this context likely refers to the signing process for authentication, not a physical signature. The translation implies a signature itself is being authenticated.",
-          "suggestion": "Solicitações de Autenticação (para Assinatura)"
+          "description": "The translation 'Solicitações de autenticação de assinatura' is too literal and doesn't accurately convey the meaning of 'Sign Auth Requests'. It sounds overly formal and technical. 'Sign Auth Requests' likely refers to requests to authenticate a signing process, not a request *for* a signature.",
+          "suggestion": "Consider alternatives like 'Solicitações de Autenticação para Assinatura' or 'Pedidos de Autenticação para Assinatura'. A more context-dependent suggestion might be 'Solicitações de Autenticação de Solicitação de Assinatura' if the English phrase specifically refers to requests *for* authentication requests."
         }
       ],
       "approved_at": null
@@ -262,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Semnează solicitarea de autentificare' directly translates to 'Signs the authentication request,' which doesn't fully capture the intended meaning of 'Sign Auth Requests.' It implies a physical signing action, while 'Sign Auth Requests' refers to the action of creating or generating authentication requests.",
-          "suggestion": "Solicitări de autentificare"
+          "description": "The translation \"Semnează solicitarea de autentificare\" is a literal translation of 'Sign Auth Requests' but doesn't accurately convey the intended meaning. 'Sign' in this context likely refers to initiating or generating an authentication request, not physically signing it.",
+          "suggestion": "Cerere de autentificare inițială"
         }
       ],
       "approved_at": null
@@ -274,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Подписывать запросы аутентификации\" while technically correct, doesn't fully capture the nuance of 'Sign Auth Requests'. 'Sign' in this context likely refers to initiating or generating, not literally signing.",
-          "suggestion": "Consider a more accurate translation like \"Генерировать запросы аутентификации\" or \"Создавать запросы аутентификации\" which better convey the function of initiating the requests."
+          "description": "The translation \"Подписывать запросы аутентификации\" while technically correct, doesn't fully capture the nuance of \"Sign Auth Requests.\" \"Sign\" in this context refers to initiating or generating a request, not necessarily signing it in the cryptographic sense. A more accurate translation might emphasize the initiation or generation aspect.",
+          "suggestion": "Рассылать запросы аутентификации"
         }
       ],
       "approved_at": null
@@ -286,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඉල්ලීම් අත්සන් තබන්න' literally translates to 'Sign Requests'. The English content is 'Sign Auth Requests', which implies signing authentication requests. The translation doesn't capture the 'authentication' aspect.",
-          "suggestion": "Consider a translation that incorporates the concept of 'authentication', such as 'අත්මැතිකරණ ඉල්ලීම්වලට අත්සන් තැබීම' (Athmathakaraṇaya illēmiwalata athsana tabēma) or a more concise 'අත්මැතිකරණ ඉල්ලීම් අත්සන් කිරීම' (Athmathakaraṇaya illēmiwalata athsana kirima)."
+          "description": "The translation \"ඉල්ලීම් අත්සන් තබන්න\" literally translates to 'Sign Requests'. The English term 'Sign Auth Requests' implies a request for authentication, which is not accurately conveyed.",
+          "suggestion": "A more accurate translation would convey the concept of 'authentication requests'. Consider something like \"ප්‍රමනීකරණ ඉල්ලුම්\" (Pramanēkarana Illum) which means 'Authentication Requests'."
         }
       ],
       "approved_at": null
@@ -298,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Žiadosti o autorizáciu podpisu' is a literal translation of 'Sign Auth Requests' but doesn't accurately convey the intended meaning. 'Sign Auth Requests' refers to authorization requests for signing, not requests *about* signatures themselves. It's likely related to OAuth or similar protocols.",
-          "suggestion": "Consider a more contextually appropriate translation, such as 'Požiadavky na autorizáciu prístupu' or 'Autorizačné požiadavky' (Authorization Requests)."
+          "description": "The Slovak translation 'Žiadosti o autorizáciu podpisu' is too literal and doesn't convey the intended meaning of 'Sign Auth Requests'. While technically correct, it's overly formal and cumbersome.",
+          "suggestion": "Consider a more natural and concise translation such as 'Požiadavky na podpisovanie' or 'Autorizačné požiadavky na podpis'."
         }
       ],
       "approved_at": null
@@ -310,8 +306,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podpis zahtev za avtorizacijo' is a literal translation of 'Sign Auth Requests' that doesn't quite convey the intended meaning in Slovenian. 'Sign' in this context refers to the process of generating or creating an authentication request, not actually signing it with a digital signature. A more accurate translation would capture the generation aspect.",
-          "suggestion": "Generated Authentication Requests"
+          "description": "The English phrase \"Sign Auth Requests\" doesn't directly translate to \"Podpis zahtev za avtorizacijo\". \"Sign\" in this context likely refers to generating or creating authentication requests, not literally signing them.",
+          "suggestion": "A more accurate translation might be \"Ustvarjanje zahtev za avtorizacijo\" (Creating Authorization Requests) or \"Zahteve za avtorizacijo\" (Authorization Requests) depending on the exact intended meaning."
         }
       ],
       "approved_at": null
@@ -322,8 +318,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Sign Auth Requests' implies a request to *initiate* authentication signing, not the action of *performing* a signature. The Serbian translation 'Потписивање захтева за аутентификацију' literally translates to 'Signing authentication requests,' which implies signing *existing* requests rather than initiating a signing process.",
-          "suggestion": "Consider 'Иницијација захтева за аутентификацију' (Initiating authentication requests) or 'Постављање захтева за аутентификацију' (Setting up authentication requests)."
+          "description": "The translation \"Потписивање захтева за аутентификацију\" is too literal and doesn't quite capture the meaning of \"Sign Auth Requests\" in the context of Single Sign-On. It implies a signing action on the requests themselves, rather than the action of creating or initiating them.",
+          "suggestion": "Consider a more functional translation like \"Иницијација захтева за аутентификацију\" or \"Креирање захтева за аутентификацију\".  Alternatively, a more concise option could be \"Захтеви за аутентификацију\" depending on the overall UI flow."
         }
       ],
       "approved_at": null
@@ -334,8 +330,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Potpisivanje zahteva za autentifikaciju' is a literal translation that doesn't quite capture the nuance of 'Sign Auth Requests'. 'Sign' in this context refers to initiating a Single Sign-On authentication request, not literally signing a document. A more accurate translation would convey the idea of initiating or triggering the authentication request.",
-          "suggestion": "Pokretanje zahteva za autentifikaciju"
+          "description": "The translation \"Potpisivanje zahteva za autentifikaciju\" is too literal and doesn't convey the intended meaning of 'Sign Auth Requests' in the context of Single Sign-On. 'Sign' in this context refers to generating or initiating an authentication request, not literally signing a document.",
+          "suggestion": "Autentifikacioni zahtevi"
         }
       ],
       "approved_at": null
@@ -346,8 +342,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Kimlik Doğrulama İsteklerini İmzala' literally translates to 'Sign Authentication Requests'. While technically not wrong, it's not the most natural or idiomatic translation for 'Sign Auth Requests' in a user interface context. 'Onaylı Kimlik Doğrulama İstekleri' or 'Kimlik Doğrulama İsteklerini Yetkilendir' would be more appropriate, depending on the intended functionality.",
-          "suggestion": "Consider 'Onaylı Kimlik Doğrulama İstekleri' or 'Kimlik Doğrulama İsteklerini Yetkilendir'."
+          "description": "The translation 'Kimlik Doğrulama İsteklerini İmzala' doesn't accurately reflect the meaning of 'Sign Auth Requests'. 'Sign' in this context likely refers to 'generate' or 'create' rather than 'imzala' (to sign).",
+          "suggestion": "Kimlik Doğrulama İsteklerini Oluştur"
         }
       ],
       "approved_at": null
@@ -358,8 +354,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Підписувати запити автентифікації' is overly literal and doesn't convey the meaning of 'Sign Auth Requests' naturally in Ukrainian. 'Sign' in this context likely refers to initiating or generating an authentication request, not literally signing it.",
-          "suggestion": "Consider alternatives like 'Генерувати запити автентифікації' (Generate authentication requests) or 'Ініціювати запити автентифікації' (Initiate authentication requests)."
+          "description": "The translation 'Підписувати запити автентифікації' while technically correct, is not the most natural or idiomatic way to translate 'Sign Auth Requests'.  'Sign' in this context likely refers to initiating or generating, rather than literally signing something.",
+          "suggestion": "Розпочинати запити автентифікації"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Підписувати' implies a more active signing process than intended. 'Sign Auth Requests' in this context usually means to create or initiate the authentication requests.",
+          "suggestion": "Генерувати запити автентифікації"
         }
       ],
       "approved_at": null
@@ -370,7 +371,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Yêu cầu xác thực ký tên\" doesn't accurately convey the meaning of \"Sign Auth Requests.\" \"Ký tên\" specifically means 'sign' (as in a signature), which is not the intended meaning here. 'Sign Auth Requests' refers to requests related to authentication.",
+          "description": "The translation \"Yêu cầu xác thực ký tên\" doesn't accurately convey the meaning of \"Sign Auth Requests\". \"Ký tên\" literally means 'sign name', which isn't the intended meaning of 'Sign Auth Requests' in this context.  It seems to be trying to convey authentication requests that are associated with signing or authorization.",
           "suggestion": "Yêu cầu xác thực đăng nhập"
         }
       ],
@@ -382,8 +383,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '签署认证请求' (qiān shǔ rèn zhèng qǐng rù) doesn't perfectly capture the meaning of 'Sign Auth Requests'. '签署' (qiān shǔ) typically implies signing a legal document. 'Sign' in this context likely refers to initiating or triggering an authentication request, not formally signing it.",
-          "suggestion": "认证请求发起"
+          "description": "While \"签署\" (qiān shǔ) can mean 'sign', in the context of authentication requests, a more accurate translation would convey the action of generating or creating the request. \"签署\" implies a signature, which isn't the primary meaning here.",
+          "suggestion": "认证请求 / 身份验证请求"
         }
       ],
       "approved_at": null

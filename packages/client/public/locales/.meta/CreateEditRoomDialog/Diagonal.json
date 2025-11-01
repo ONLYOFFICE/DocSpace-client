@@ -3,7 +3,7 @@
   "content": "Diagonal",
   "content_en_sha1_hash": "a5ecd286faa5677726aa083151af6be4709cf28e",
   "created_at": "2025-05-19T21:30:56.792Z",
-  "updated_at": "2025-05-20T09:38:09.984Z",
+  "updated_at": "2025-08-11T09:02:43.864Z",
   "comment": {
     "text": "This translation key is used for the label of a rotation option in an image viewer, typically appearing on a settings or options page. It displays as \"Diagonal\" and appears on a dropdown list or button related to image editing.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.js",
-      "line_number": 101,
-      "context": "return getTabsInfo(additions, t, dataTabs);\n };\n \n const rotateOptions = (t) => [\n { key: -45, label: t(\"Diagonal\") },\n { key: 0, label: t(\"Horizontal\") },\n ];\n \n const getInitialRotate = (rotate, isEdit, isImage, t) => {\n const dataRotate = rotateOptions(t);",
+      "line_number": 103,
+      "context": "};\n \n const rotateOptions = (t) => [\n {\n key: -45,\n label: t(\"Diagonal\"),\n dataTestId: \"virtual_data_room_watermark_position_diagonal\",\n },\n {\n key: 0,\n label: t(\"Horizontal\"),",
       "module": "/packages/client"
     }
   ],
@@ -69,19 +69,37 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Lävistäjä\" translates to 'piercer' or 'one who pierces,' not 'diagonal.' This is an incorrect translation of the English word 'Diagonal'.",
+          "suggestion": "A more appropriate translation for 'Diagonal' would be something like 'Vinonali' or 'Viisto'."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Diagonal' refers to a line or direction. 'En diagonale' translates to 'diagonally' or 'on the diagonal' which is a description of how something is done, not the term itself. While 'diagonale' exists as a noun, 'En diagonale' isn't the best equivalent. A more direct translation of 'Diagonal' might be 'diagonale'.",
+          "suggestion": "diagonale"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Շեղանկյուն\" (Sheganqyun) typically refers to a rhombus or parallelogram with equal sides, not generally used to mean 'diagonal'. While technically it *can* relate to a diagonal, it's not the most accurate or commonly understood translation in this context.",
+          "suggestion": "Consider alternatives like \"կիսանկյուն\" (kisankyun) which more accurately translates to 'diagonal' in a geometric context, or a more descriptive phrase depending on the intended meaning within the CreateEditRoomDialog."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເສັ້ນເຄິ່ງແບ່ງ\" (sen khong bang) translates to 'bisector' or 'line that divides into two equal parts,' which isn't a direct equivalent to 'Diagonal'. A diagonal is a line segment connecting two non-adjacent vertices of a polygon. A more accurate translation might be something like \"ເສັ້ນຂ້ວາງ\" (sen khwang).",
+          "suggestion": "ເສັ້ນຂ້ວາງ (sen khwang) - This means 'diagonal'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +147,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation 'Ukośnie' while literally meaning 'diagonally', doesn't fully capture the meaning of 'Diagonal' in the context of a room creation/editing dialog. 'Diagonal' likely refers to a diagonal line or setting, not just the act of being diagonal. A more accurate translation would depend on the specific context.",
+          "suggestion": "Consider 'Po przekątnej', 'Pod kątem', or 'Przekątna' depending on the specific use case within the dialog."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +177,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"По диагонали\" (Po diagonal'i) translates to 'along the diagonal' or 'diagonally'. While not strictly incorrect, it's more descriptive than the English \"Diagonal\", which is meant to be a label or title.  A more accurate translation would depend on the context, but a more direct translation like \"Диагональ\" (Diagonal') would be closer.",
+          "suggestion": "Диагональ"
+        }
+      ],
       "approved_at": null
     },
     "si": {

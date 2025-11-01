@@ -3,7 +3,7 @@
   "content": "To share your form and assign roles to the room participants for filling it out, please create a Virtual Data Room.",
   "content_en_sha1_hash": "7bfa16e48ac3fd715755d7c60f25d71d0451a9d6",
   "created_at": "2025-05-19T21:30:48.496Z",
-  "updated_at": "2025-05-28T09:30:02.949Z",
+  "updated_at": "2025-05-26T07:57:32.920Z",
   "comment": {
     "text": "\"To provide guidance on creating a Virtual Data Room for sharing forms and assigning roles to room participants.\" \n\n(This translation key is used in a button label or dialog related to form creation or assignment of roles.)",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English content emphasizes 'To share your form and assign roles'. The Arabic translation, while technically correct, lacks the nuance of 'sharing' and the proactive implication of assigning roles. It reads more like a general instruction rather than a clear action.",
-          "suggestion": "لمشاركة النموذج وتحديد صلاحيات للمشاركين عند تعبئته، يُرجى إنشاء غرفة بيانات افتراضية."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrase 'عند تعبئته' (when filling it out) feels a bit clunky. A more fluid phrasing would improve readability.",
-          "suggestion": "لمشاركة النموذج وتحديد صلاحيات للمشاركين لتعبئته، يُرجى إنشاء غرفة بيانات افتراضية."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -47,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'To share your form...' is not accurately reflected by 'Lütfən, formanızı paylaşmaq üçün...'. A more accurate translation would emphasize the purpose of creating the VDR – to facilitate sharing the form.",
-          "suggestion": "Formanızı paylaşmaq və formanı doldurmaq üçün virtual məlumat otağı yaradın."
+          "description": "The English phrase \"To share your form...\" isn't accurately reflected in the Azerbaijani translation. \"Lütfən, formanızı paylaşmaq üçün\" translates to 'Please, to share your form'. A more natural phrasing would be something like 'Formanızı paylaşmaq üçün...' or 'Formanızı paylaşmaq istəyirsinizsə...'",
+          "suggestion": "Formanızı paylaşmaq istəyirsinizsə və formanı doldurmaq üçün otaq iştirakçılarına rollar təyin etmək istəyirsinizsə, Virtual Məlumat Otağı yaradın."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure is a bit awkward. Combining the two actions (creating the VDR and assigning roles) into a single clause would improve flow.",
-          "suggestion": "Formanızı paylaşmaq və formanı doldurmaq üçün virtual məlumat otağı yaradın və otaq iştirakçılarına rollar təyin edin."
+          "type": "incorrect_translation",
+          "description": "The order of information is not ideal.  The original emphasizes *creating* the VDR first, as the primary action. The current translation sounds like a list of instructions without a clear starting point.",
+          "suggestion": "Virtual Məlumat Otağı yaradın, formanı paylaşın və formanı doldurmaq üçün otaq iştirakçılarına rollar təyin edin."
         }
       ],
       "approved_at": null
@@ -88,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Para compartir su formulario y asignar roles a los participantes de la sala para su rellenado, por favor cree una sala de datos virtuales' is slightly awkward. 'rellenado' is a bit formal and 'sala de datos virtuales' can be improved to 'habitación de datos virtual' or 'sala virtual de datos' for better flow.",
-          "suggestion": "Para compartir su formulario y asignar roles a los participantes de la sala para completarlo, por favor cree una habitación de datos virtual."
+          "description": "The phrase \"para su rellenado\" is a less common and slightly awkward way to say \"to fill it out.\" A more natural phrasing would be \"para completarlo\" or \"para rellenarla\".",
+          "suggestion": "Para compartir su formulario y asignar roles a los participantes de la sala para completarlo, por favor cree una sala de datos virtuales."
         }
       ],
       "approved_at": null
@@ -100,18 +89,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ole hyvä ja luo\" (please create) sounds overly formal and unnatural in this context. A more natural phrasing would be more direct.",
-          "suggestion": "Luo virtuaalinen tiedonhuone."
+          "description": "The phrase 'ole hyvä ja' (please) sounds overly formal and unnatural in this context. It's unnecessary and doesn't flow well.",
+          "suggestion": "Remove 'ole hyvä ja'. A more natural phrasing would be simply: 'Lomakkeen jakamiseen ja roolien määrittämiseen huoneen osallistujille lomakkeen täyttöä varten, luo virtuaalinen tiedon huone.'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'huoneen osallistujille' (for the room's participants) is grammatically correct but feels slightly awkward.  'Huoneen osallistujat' (room participants) is more common and reads better.",
-          "suggestion": "huoneen osallistujat"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"lomakkeen täyttöä varten\" (for filling out the form) is slightly redundant. It can be simplified.",
-          "suggestion": "lomakkeen täyttämiseen"
+          "description": "The word 'tiedon huone' is a literal translation of 'data room' but 'virtuaalinen huone' is more common and understandable in Finnish when referring to a Virtual Data Room.",
+          "suggestion": "Replace 'tiedon huone' with 'virtuaalinen huone'."
         }
       ],
       "approved_at": null
@@ -125,13 +109,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ձևը կիսվելու և մասնակիցներին դերեր նշանակելու համար խնդրում ենք ստեղծել Վիրտուալ Տվյալների Սենյակ։\" is a bit literal and sounds awkward in Armenian. A more natural phrasing would emphasize the purpose of creating the VDR.",
-          "suggestion": "Մասնակիցներին դերեր նշանակելու և ձևը կիսելու համար, խնդրում ենք ստեղծել Վիրտուալ Տվյալների Սենյակ։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -146,13 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'To share your form and assign roles to the room participants for filling it out' is not fully captured by 'フォームを共有し、参加者に役割を割り当てるには'. It implies a more active assignment of roles and sharing, rather than a simple instruction to do so.",
-          "suggestion": "フォームを共有し、記入者の役割を割り当てるには、バーチャルデータルームを作成してください。"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation lacks a polite or formal ending, which is often expected in Japanese instructions or informational text.  It reads somewhat abrupt.",
-          "suggestion": "フォームを共有し、記入者の役割を割り当てるには、バーチャルデータルームを作成してください。お願いいたします。"
+          "description": "The English phrase \"To share your form and assign roles to the room participants for filling it out\" is not fully captured in the Japanese translation. The phrase 'for filling it out' is missing, which implies a purpose for assigning roles.",
+          "suggestion": "フォームを共有し、参加者に役割を割り当ててフォームを埋めてもらうには、バーチャルデータルームを作成してください。"
         }
       ],
       "approved_at": null
@@ -163,13 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"양식을 공유하고 양식 작성을 위해 룸 참여자에게 역할을 할당하려면\" is a bit awkward and could be more naturally translated. \"양식 작성을 위해\" is redundant since sharing a form inherently implies it's for writing (filling out).",
-          "suggestion": "양식을 공유하고 룸 참여자에게 역할을 할당하려면 가상 데이터 룸을 생성하세요."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses a passive voice construction that isn't as direct as the English version. It's understandable but not the most natural Korean phrasing.",
-          "suggestion": "양식을 공유하고 룸 참여자에게 역할을 할당하려면 가상 데이터 룸을 만드세요."
+          "description": "The translation '양식을 공유하고 양식 작성을 위해 룸 참여자에게 역할을 할당하려면 가상 데이터 룸을 생성하세요.' is not a perfect translation of 'To share your form and assign roles to the room participants for filling it out, please create a Virtual Data Room.'. The phrase '양식 작성을 위해' (for form writing) is slightly awkward. A more natural phrasing would better convey the meaning of assigning roles *for filling out* the form.",
+          "suggestion": "양식을 공유하고 룸 참여자에게 역할을 할당하여 작성하도록 하려면 가상 데이터 룸을 생성하세요."
         }
       ],
       "approved_at": null
@@ -180,18 +148,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ເພື່ອກາບແບ່ງແບບຟອມ\" is not the most natural translation of \"To share your form\". \"ແບ່ງປັນແບບຟອມ\" would be more accurate.",
-          "suggestion": "ແບ່ງປັນແບບຟອມ"
+          "description": "The phrase \"ເພື່ອກາບແບ່ງແບບຟອມ\" (pheuak kapbaeng baepform) doesn't accurately translate \"To share your form.\" A better translation would be something along the lines of \"ຖ້າຫາກຕ້ອງການແບ່ງປັນແບບຟອມ\" (thahak tongkan baengpin baepform).",
+          "suggestion": "ຖ້າຫາກຕ້ອງການແບ່ງປັນແບບຟອມ (thahak tongkan baengpin baepform)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Virtual Data Room' as 'ຫ້ອງຖ້າຂໍ້ມູນດິຈິຕອນ' is literal and less common in Lao. A more commonly understood phrasing might be used.",
-          "suggestion": "ຫ້ອງຂໍ້ມູນອອນໄລ໌"
+          "description": "The phrase \"ມອບບົດບາດໃຫ້ຜູ້ເຂົ້າຮ່ວມຫ້ອງຖ້າຂໍ້ມູນ ເພື່ອຕື່ມຂໍ້ມູນ\" (mop botbad hai phu khao ruam hongtha khomun pheu toem khomun) is overly verbose and not a direct translation of \"and assign roles to the room participants for filling it out\".",
+          "suggestion": "ແລະມອບສິດໃຫ້ຜູ້ເຂົ້າຮ່ວມຫ້ອງຖ້າຂໍ້ມູນເພື່ອຕື່ມຂໍ້ມູນ (lae mop sit hai phu khao ruam hongtha khomun pheu toem khomun)"
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure is a bit long and can be improved for better readability. Breaking it into two sentences might be better.",
-          "suggestion": "ເພື່ອກາບແບ່ງແບບຟອມ ແລະມອບບົດບາດໃຫ້ຜູ້ເຂົ້າຮ່ວມຫ້ອງຖ້າຂໍ້ມູນເພື່ອຕື່ມຂໍ້ມູນ, ກະລຸນາສ້າງຫ້ອງຂໍ້ມູນອອນໄລ໌ (Virtual Data Room)."
+          "type": "incorrect_translation",
+          "description": "The use of \"ຫ້ອງຖ້າຂໍ້ມູນດິຈິຕອນ\" (hongtha khomun dijiton) for \"Virtual Data Room\" is technically correct but could be simplified. 'ຫ້ອງຂໍ້ມູນດິຈິຕອນ' or 'ຫ້ອງຂໍ້ມູນອອນໄລ໌' might be more common and understandable.",
+          "suggestion": "ຫ້ອງຂໍ້ມູນດິຈິຕອນ (hongkhomun dijiton)"
         }
       ],
       "approved_at": null
@@ -208,13 +176,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"for filling it out\" is slightly awkward. It can be improved to flow better in Dutch.",
-          "suggestion": "Maak een Virtuele Data Kamer om uw formulier te delen en rollen toe te wijzen aan de deelnemers in de kamer voor het invullen."
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, the sentence could be restructured for better flow and readability in Dutch. Adding a conjunction to link the two actions improves the cadence.",
-          "suggestion": "Maak een Virtuele Data Kamer om uw formulier te delen, en rollen toe te wijzen aan de deelnemers in de kamer voor het invullen ervan."
+          "description": "The translation of 'room participants' is too literal. A more natural Dutch phrasing would be 'deelnemers in de ruimte' or 'de aanwezigen'.",
+          "suggestion": "Maak een Virtuele Data Kamer om uw formulier te delen en rollen toe te wijzen aan de aanwezigen voor het invullen ervan."
         }
       ],
       "approved_at": null
@@ -225,8 +188,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'room participants' is translated as 'członkom pokoju'. While technically correct, it sounds awkward in Polish. A more natural phrasing would be 'osobom uczestniczącym w pokoju' or 'użytkownikom pokoju'.",
-          "suggestion": "Aby udostępnić swój formularz i przypisać role osobom uczestniczącym w pokoju w celu jego wypełnienia, utwórz wirtualny pokój danych."
+          "description": "The phrase \"w celu jego wypełnienia\" (in order to fill it out) is slightly awkward. It's more natural to simply say \"do wypełnienia\" (to be filled out).",
+          "suggestion": "Aby udostępnić swój formularz i przypisać role członkom pokoju do wypełnienia, utwórz wirtualny pokój danych."
         }
       ],
       "approved_at": null
@@ -237,8 +200,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"para o preencher\" (to fill it out) is slightly awkward in this context. It's technically correct but less natural than phrasing it as 'para preenchê-lo'.",
-          "suggestion": "Para partilhar o seu formulário e atribuir funções aos participantes da sala para preenchê-lo, crie uma sala de dados virtual."
+          "description": "The translation 'Para partilhar o seu formulário e atribuir funções aos participantes da sala para o preencher, crie uma sala de dados virtual.' is a literal translation that doesn't quite convey the natural flow of the English sentence. The phrase 'para o preencher' (to fill it out) is a bit redundant. A more natural translation would rephrase it.",
+          "suggestion": "Para partilhar o seu formulário e atribuir funções aos participantes da sala, crie uma sala de dados virtual."
         }
       ],
       "approved_at": null
@@ -255,7 +218,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Romanian translation uses a space before the word 'virtuală' (virtuala). It should be without the space.",
+          "description": "The Romanian translation uses a space before \"virtuală\" which is grammatically incorrect. It should be without a space.",
           "suggestion": "Pentru a partaja formularul și atribui roluri participanților pentru completarea formularului, creați Sala virtuală de date."
         }
       ],
@@ -267,13 +230,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles to the room participants\" is not perfectly translated. \"Назначить роли участникам комнаты\" can be interpreted as assigning roles to the room itself, rather than the participants.",
-          "suggestion": "Чтобы предоставить доступ к форме и назначить роли участникам для ее заполнения, создайте Виртуальную комнату данных."
+          "description": "The translation of \"Virtual Data Room\" as \"Виртуальную комнату данных\" is literal and not the standard terminology in Russian. A more natural translation would be \"Виртуальную базу данных\" or \"Виртуальную папку данных\" depending on the context.",
+          "suggestion": "Consider using \"Виртуальную базу данных\" or \"Виртуальную папку данных\" instead of \"Виртуальную комнату данных\"."
         },
         {
-          "type": "formatting",
-          "description": "The phrase \"для ее заполнения\" is a bit clunky. It could be more naturally integrated into the sentence.",
-          "suggestion": "Чтобы предоставить доступ к форме и назначить роли участникам для заполнения ее, создайте Виртуальную комнату данных."
+          "type": "incorrect_translation",
+          "description": "The phrase 'для ее заполнения' (for filling it out) is a bit clunky. A more concise and natural phrasing would improve readability.",
+          "suggestion": "Consider replacing 'для ее заполнения' with something like 'для заполнения'."
         }
       ],
       "approved_at": null
@@ -284,18 +247,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබේ ආකෘතිය බෙදා හැරීම සහ එය පුරවාපොිරීම සඳහා කාමරයේ සහභාගීකරුවන්ට භූමිකා පැවරීම සඳහා' is a bit verbose and could be simplified. It literally translates to 'To share your form and for filling it, assigning roles to the room participants for'. It doesn't flow naturally in Sinhala.",
-          "suggestion": "ඔබේ ආකෘතිය බෙදා හැරීම සහ කාමරයේ සහභාගි කරුවන්ට භූමිකා පවරන්න, ඒ සඳහා වර්චුවල් දත්ත කාමරයක් සාදා ගන්න."
+          "description": "The phrase \"භූමිකා පැවරීම\" (bhoomikaa pawaarim) translates to 'assigning roles' but in this context, a more natural phrasing would be 'හැටි පැවරුම් කිරීම' (hatti pavarum krim) or simply 'හැටි කිරීම' (hatti krim) to mean 'defining roles/instructions'. While technically correct, the current translation sounds slightly unnatural.",
+          "suggestion": "ඔබේ ආකෘතිය බෙදා හැරීම සහ එය පුරවාපොිරීම සඳහා කාමරයේ සහභාගීකරුවන්ට හැටි පැවරුම් කිරීම සඳහා, කරුණාකර වර්චුවල් දත්ත කාමරයක් සාදන්න."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'පැවරීම සඳහා' appears twice and is redundant. It directly translates to 'for assigning' each time.",
-          "suggestion": "Remove one instance of 'පැවරීම සඳහා' to improve flow."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure feels slightly awkward. The split between the explanation and the action ('සාදන්න') could be improved.",
-          "suggestion": "Consider rephrasing to combine the explanation and action more smoothly. e.g., 'ආකෘතිය බෙදා හැරීම සහ කාමරයේ සහභාගි කරුවන්ට භූමිකා පවරන්න, ඒ සඳහා වර්චුවල් දත්ත කාමරයක් සාදා ගන්න'."
+          "type": "spelling",
+          "description": "While technically not incorrect, 'වර්චුවල්' is an adaptation of the English word 'virtual'. Using a more Sinhala-fied term could improve readability, although this is a style preference.",
+          "suggestion": "ඔබේ ආකෘතිය බෙදා හැරීම සහ එය පුරවාපොිරීම සඳහා කාමරයේ සහභාගීකරුවන්ට භූමිකා පැවරීම සඳහා, කරුණාකර ඊඨාකෘතියක් සාදන්න."
         }
       ],
       "approved_at": null
@@ -317,14 +275,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Да бисте поделили свој образац и доделили улоге учесницима собе да га попуне, молимо креирајте Виртуелну Собу за податке.' is a bit clunky and overly formal. A more natural translation would convey the same meaning with smoother phrasing.",
-          "suggestion": "Да бисте поделили образац и доделили улоге учесницима, креирајте Виртуелну Собу за податке."
-        },
-        {
           "type": "formatting",
-          "description": "The term 'Виртуелну Собу за податке' can be improved. Using 'Виртуелну просторију за податке' would be more appropriate for 'Virtual Data Room'.",
-          "suggestion": "Да бисте поделили образац и доделили улоге учесницима, креирајте Виртуелну просторију за податке."
+          "description": "The translation uses a lowercase 'да' at the beginning of the sentence, which is grammatically correct but stylistically might be better as an uppercase 'Да' at the beginning of the sentence.",
+          "suggestion": "Да бисте поделили свој образац..."
         }
       ],
       "approved_at": null
@@ -335,13 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'room participants' is not accurately translated. 'Učesnicima sobe' is a literal translation but sounds awkward. A more natural translation would be 'poticinjima' or 'unosiocima'.",
-          "suggestion": "Da biste podelili svoj obrazac i dodelili uloge potinicijima/unosiocima da ga popune, molimo kreirajte Virtuelnu Sobu za podatke."
-        },
-        {
-          "type": "formatting",
-          "description": "The Serbian translation uses a comma after 'obrazac' which may not be standard for this kind of text. ",
-          "suggestion": "Da biste podelili svoj obrazac i dodelili uloge učesnicima sobe da ga popune, molimo kreirajte Virtuelnu Sobu za podatke."
+          "description": "The term 'sobe' (room) feels slightly awkward in this context. While technically correct, 'soba' often refers to a physical room. A more appropriate term for a virtual data room might be 'Virtuelnu Prostor za Podatke' or 'Virtuelni Data Room'.",
+          "suggestion": "Consider translating 'sobe' to 'Prostor za Podatke' or leaving it as 'Virtuelni Data Room' as a loanword."
         }
       ],
       "approved_at": null
@@ -364,13 +312,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"để điền vào\" (to fill in) is a bit awkward and doesn't flow naturally. It's literally 'to fill in'. A better phrasing would be more natural for Vietnamese.",
-          "suggestion": "Để chia sẻ biểu mẫu của bạn và chỉ định vai trò cho những người tham gia phòng, vui lòng tạo Phòng Dữ Liệu Ảo."
+          "description": "The phrase \"để điền vào\" (to fill in) is somewhat awkward in this context. It's more natural to say something like \"để họ điền vào\" (so they can fill in) or \"để mọi người điền vào\" (so everyone can fill in).",
+          "suggestion": "Để chia sẻ biểu mẫu của bạn và chỉ định vai trò cho những người tham gia phòng để họ điền vào, xin vui lòng tạo Phòng Dữ Liệu Ảo."
         },
         {
           "type": "formatting",
-          "description": "The use of \"xin vui lòng\" is a bit formal. While not incorrect, a slightly more conversational tone would be preferred in many contexts.",
-          "suggestion": "Để chia sẻ biểu mẫu của bạn và chỉ định vai trò cho những người tham gia phòng, hãy tạo Phòng Dữ Liệu Ảo."
+          "description": "The phrase \"xin vui lòng\" (please) can sometimes feel a bit formal in modern Vietnamese. Consider a more conversational alternative.",
+          "suggestion": "Để chia sẻ biểu mẫu của bạn và chỉ định vai trò cho những người tham gia phòng để họ điền vào, hãy tạo Phòng Dữ Liệu Ảo."
         }
       ],
       "approved_at": null
@@ -381,13 +329,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"要共享表单并为房间成员分配填写角色，请创建虚拟数据房间\" is a literal translation but doesn't quite convey the natural flow of the English sentence. '填写角色' (filling roles) is awkward. A more natural phrasing would be something like '为房间成员指定填写权限' (assign filling permissions to room members).",
-          "suggestion": "要共享表单并为房间成员指定填写权限，请创建虚拟数据房间。"
+          "description": "The phrase \"为房间成员分配填写角色\" is awkward and not a natural way to describe assigning roles in Chinese. It directly translates to \"assign filling roles to room members.\" A better phrasing would convey the meaning of assigning roles *for* filling out the form.",
+          "suggestion": "要共享表单并为房间成员分配填写权限，请创建虚拟数据房间。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term '虚拟数据房间' (virtual data room) is technically correct, but a more commonly understood and accepted term in Chinese for a VDR might be '虚拟资料库' or '电子数据间'. This depends on the target audience and their familiarity with the specific terminology. Using '虚拟数据房间' might require additional explanation.",
-          "suggestion": "要共享表单并为房间成员指定填写权限，请创建虚拟资料库。"
+          "type": "formatting",
+          "description": "The Chinese translation does not match the English sentence structure, which is relatively straightforward. It could be adjusted to mirror the English flow a bit more closely for better readability.",
+          "suggestion": "要共享表单，并为房间成员分配填写权限，请创建虚拟数据房间。"
         }
       ],
       "approved_at": null

@@ -56,13 +56,15 @@ export type SelectionAreaProps = {
   /** Flag indicating if this is for rooms */
   isRooms?: boolean;
   /** Height of folder header */
-  folderHeaderHeight: number;
+  folderHeaderHeight?: number;
   /** Array type configuration */
-  arrayTypes: TArrayTypes[];
+  arrayTypes?: TArrayTypes[];
   /** Class name for item elements */
   itemClass: string;
   /** Number of tiles in a row */
-  countTilesInRow: number;
+  countTilesInRow?: number;
   /** Default height of header */
-  defaultHeaderHeight: number;
+  defaultHeaderHeight?: number;
+  /** Callback function for mouse down event */
+  onMouseDown?: (event: MouseEvent) => void;
 };

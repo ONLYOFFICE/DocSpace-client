@@ -3,7 +3,7 @@
   "content": "and <1>{{count}} more</1>",
   "content_en_sha1_hash": "a3f1d7063a4cc3d879b42663726817ec56372d51",
   "created_at": "2025-05-19T21:30:54.762Z",
-  "updated_at": "2025-05-21T10:18:41.769Z",
+  "updated_at": "2025-09-07T07:53:15.184Z",
   "comment": {
     "text": "This translation key is used to display a count of items (\"and <count> more\") on expandable links in various UI components, such as group lists and item lists. The count is based on a threshold value, indicating the number of additional items beyond a certain point.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/GroupList.tsx",
-      "line_number": 137,
-      "context": "onClick={onExpand}\n >\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"AndMoreLabel\"\n values={{ count: groupsData.length - EXPANSION_THRESHOLD }}\n components={{ 1: <strong /> }}\n />\n </StyledHistoryBlockExpandLink>\n ) : null}",
+      "line_number": 155,
+      "context": "data-testid=\"history_groups_expand_more\"\n >\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"AndMoreLabel\"\n values={{ count: groupsData.length - EXPANSION_THRESHOLD }}\n components={{ 1: <strong /> }}\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ItemList.tsx",
-      "line_number": 249,
-      "context": "onClick={onExpand}\n >\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"AndMoreLabel\"\n values={{ count: items.length - EXPANSION_THRESHOLD }}\n components={{ 1: <strong /> }}\n />\n </StyledHistoryBlockExpandLink>\n ) : null}",
+      "line_number": 277,
+      "context": "data-testid=\"history_expand_more\"\n >\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"AndMoreLabel\"\n values={{ count: items.length - EXPANSION_THRESHOLD }}\n components={{ 1: <strong /> }}\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/UserList.tsx",
-      "line_number": 123,
-      "context": "onClick={onExpand}\n >\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"AndMoreLabel\"\n values={{ count: usersData.length - EXPANSION_THRESHOLD }}\n components={{ 1: <strong /> }}\n />\n </StyledHistoryBlockExpandLink>\n ) : null}",
+      "line_number": 129,
+      "context": "data-testid=\"history_users_expand_more\"\n >\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"AndMoreLabel\"\n values={{ count: usersData.length - EXPANSION_THRESHOLD }}\n components={{ 1: <strong /> }}\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }
   ],
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'و {{count}} المزيد </ 1>' is not the most natural or accurate translation of 'and {{count}} more'. While technically correct, a more idiomatic translation would be something like 'و <1>{{count}} المزيد</1>' or 'و <1>{{count}} إضافية</1>'. The current translation implies the word 'و' (and) is unnecessary or awkwardly placed.",
-          "suggestion": "و <1>{{count}} المزيد</1>"
+          "description": "The Arabic translation \"و <1> {{count}} المزيد </ 1>\" is a literal transliteration of the English. A more natural and idiomatic Arabic translation for \"and {{count}} more\" would be something like \"و <1> {{count}} إضافي </1>\" or \"و <1> {{count}} أخرى </1>\" depending on the context (singular/plural). \"المزيد\" (al-mazeed) means 'more' in a general sense, and while not *wrong*, it doesn't flow as well.",
+          "suggestion": "و <1> {{count}} إضافي </1>"
         },
         {
           "type": "formatting",
-          "description": "The closing tag '</ 1>' is incorrect. It should match the opening tag, which appears to be '<1>'.",
-          "suggestion": "</1>"
+          "description": "The angle brackets (<1> and </1>) are copied directly from the English. While functionally they preserve the formatting tags, they should be considered for localization-specific alternatives or removed if they are purely structural and don't represent visual elements.",
+          "suggestion": "Consider revising the formatting tags based on the UI design for Arabic (if any)."
         }
       ],
       "approved_at": null
@@ -65,8 +65,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation contains a space before 'още'. This breaks the natural flow and consistency with the English version.",
-          "suggestion": "и още {{count}}"
+          "description": "The angle bracket and tag '<1>' and '</1>' are identical in both English and Bulgarian translations. This suggests they might be placeholders for UI elements or styling and should be verified with the development team to ensure consistency.",
+          "suggestion": "Verify the intended functionality of the <1> and </1> tags with the development team and ensure consistent implementation in the Bulgarian localization."
         }
       ],
       "approved_at": null
@@ -74,13 +74,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'and X more' is not perfectly captured by 'a X další'. 'a' should be 'a' (not 'a'). Although understandable, 'další' is a more literal translation of 'more'. Consider using a more nuanced equivalent for a natural-sounding Czech sentence depending on the context.",
-          "suggestion": "a <1>{{count}} dalších</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -116,7 +110,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"and X more\" is a fairly informal construction. While \"և {{count}} ավելի\" is grammatically correct Armenian, it might sound slightly formal for this context. A more natural-sounding translation might consider phrasing such as \"և մոտավորապես {{count}} էլ\" (and approximately X more) or \"և {{count}} այնպես էլ\" (and also X more), depending on the specific nuance desired.",
+          "suggestion": "Consider alternatives like \"և մոտավորապես {{count}} էլ\" or \"և {{count}} այնպես էլ\" for a more natural feel."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -124,9 +124,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are replicated in both the English and Italian translations. This might be specific to the application using this string and should be confirmed with the developers. However, it is worth noting for consistency.",
-          "suggestion": "Confirm with developers if the tags are intentional and necessary. If not, remove them."
+          "type": "incorrect_translation",
+          "description": "While the translation is generally accurate, \"in più\" might sound slightly unnatural in this context. A more fluent option might consider a direct equivalent or a slightly rephrased sentence.",
+          "suggestion": "Consider alternatives like \"altri {{count}}\" or \"ulteriori {{count}}\""
         }
       ],
       "approved_at": null
@@ -137,8 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'and' is not accurately translated. 'and' in this context likely implies 'and further' or 'and additionally', which isn't captured by 'と'. 'もっと' does capture the 'more' aspect, but the conjunction is missing.",
-          "suggestion": "と、<1>{{count}}さらに</1>"
+          "description": "'and' is missing from the Japanese translation. The English 'and' serves to connect the 'and more' phrase.",
+          "suggestion": "と、<1>{{count}}もっと</1>を追加したい場合は、'および' (および) を使うことができます。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'もっと' (motto) means 'more', it doesn't directly translate 'more' in the intended context of 'and X more'. A more appropriate translation would consider the nuance of adding to a previous count.",
+          "suggestion": "Consider 'さらに' (sarani) or '追加で' (tsuika de) as alternatives to 'もっと' to better convey the meaning of 'and X more'."
         }
       ],
       "approved_at": null
@@ -149,8 +154,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'and' should be translated more accurately to convey the meaning of 'and more'. '및' implies a joining or connection, while '이상' indicates 'or more'. A better translation would incorporate a phrase suggesting an additional quantity.",
-          "suggestion": "및 <1>{{count}} 추가</1>"
+          "description": "'and' is translated as '및', which while grammatically correct, might not be the most natural or common way to express 'and' in this context (likely indicating additional information). A more suitable translation might be '그리고' or '더불어'. '이상' implies 'or more', which changes the meaning. It should convey 'more'.",
+          "suggestion": "그리고 <1>{{count}} 추가</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags '<1>' and '</1>' are replicated in both the English and Korean translations. This suggests they might be used for styling or referencing. Ensure that the styling/reference is also correctly handled in the Korean implementation.",
+          "suggestion": "Confirm the intended function of the tags and ensure correct handling in the Korean version. No direct translation change is suggested for this."
         }
       ],
       "approved_at": null
@@ -161,8 +171,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'and' is translated as 'ແລະ', which is correct. However, 'more' is translated as 'ເພີ່ມເຕີມ', which, while technically meaning 'added' or 'additional', isn't the most natural way to express 'more' in this context. A more idiomatic translation might be 'ອີກ' (ik).",
-          "suggestion": "ແລະ <1>{{count}} ອີກ <1>"
+          "description": "'and' should be translated to match the intended meaning. 'ແລະ' generally means 'and' but in this context, a more suitable translation might convey 'plus' or 'in addition to'.",
+          "suggestion": "Consider using a Lao phrase that better conveys 'in addition to' or 'plus' instead of just 'and'. This might require consulting a Lao language expert familiar with UI translation."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'ເພີ່ມເຕີມ' is a valid Lao word, its appropriateness in this UI context needs further consideration. It generally means 'additional' or 'extra'.",
+          "suggestion": "Verify with a native Lao speaker if 'ເພີ່ມເຕີມ' accurately conveys the intended meaning of 'more' in a UI element describing a list or similar situation.  A more concise or localized term might be preferable."
         }
       ],
       "approved_at": null
@@ -173,8 +188,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'un <1>{{count}} vēl</1>' doesn't fully convey the meaning of 'and <1>{{count}} more</1>'. While 'un' is 'and' and 'vēl' is 'more', the flow isn't as natural in Latvian. A more natural translation would be something like 'un <1>{{count}} papildus</1>' or 'un <1>{{count}} turklāt</1>'.",
-          "suggestion": "un <1>{{count}} papildus</1>"
+          "description": "The English phrase 'and X more' is not perfectly conveyed by 'un X vēl'. While 'vēl' means 'more' or 'still', 'un' (and) is less common to use before it in this context in Latvian. 'papildus' or simply 'vairāk' would be a more natural fit.",
+          "suggestion": "un <1>{{count}} vairāk</1>"
         }
       ],
       "approved_at": null
@@ -190,9 +205,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Polish translation retains the HTML-like tags '<1>' and '</1>'. This might not be the intended formatting and could cause issues depending on how the text is displayed.",
-          "suggestion": "Remove or adjust the tags '<1>' and '</1>' to match the expected formatting. If the tags are structural, ensure they are handled correctly in the application's rendering engine. If they are unnecessary, remove them entirely."
+          "type": "incorrect_translation",
+          "description": "The English phrase \"and\" is not accurately translated in the Polish version. \"Jeszcze\" implies \"still\" or \"yet\" and doesn't convey the conjunction \"and\".",
+          "suggestion": "The correct translation should include a conjunction equivalent to \"and\". A possible suggestion is: \"i jeszcze <1>{{count}}</1>\" or \"oraz <1>{{count}}</1>\"."
         }
       ],
       "approved_at": null
@@ -221,8 +236,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'and' is translated as 'и', which is correct. However, 'more' is translated as 'еще', which while meaning 'more', doesn't flow as naturally in this context. A better translation would consider the flow and brevity required for a label.",
-          "suggestion": "и <1>ещё {{count}}</1>"
+          "description": "The word \"еще\" (yeshche) is a more accurate translation of \"more\" in this context than the literal translation implied by just keeping \"and\". It would be better to rework the phrase slightly to incorporate it naturally.",
+          "suggestion": "и ещё {{count}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags appear to be incorrect or unnecessary. They don't seem to serve a functional purpose.  They might be placeholders that need adjustment, or they may be an artifact of the translation process.",
+          "suggestion": "Remove or correct the `<1>` and `</1>` tags based on the intended usage of the label.  Perhaps they need to be a different tag or be removed entirely."
         }
       ],
       "approved_at": null
@@ -232,9 +252,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Sinhala translation includes a space before the opening tag <1> which is not present in the English source. This can cause rendering issues.",
-          "suggestion": "Remove the space before <1>:  `සහ <1>තවත් {{count}}</1>` should be `සහ<1>තවත් {{count}}</1>`"
+          "type": "incorrect_translation",
+          "description": "The word 'and' is translated as 'සහ', which is generally correct. However, depending on the context, other translations like 'හා' might be more natural. 'සහ' can sometimes feel slightly formal.",
+          "suggestion": "Consider alternative translations of 'and' like 'හා' based on the surrounding text."
         }
       ],
       "approved_at": null
@@ -245,8 +265,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'and X more' should be translated more naturally in Slovak. 'a ďalšie' is technically correct but lacks fluidity.",
-          "suggestion": "Consider 'a ešte <1>{{count}}</1>' or 'ďalších <1>{{count}}</1>' for a more natural and idiomatic Slovak translation."
+          "description": "The English phrase 'and <1>{{count}} more</1>' implies an additional quantity beyond what's already shown. The Slovak translation 'a ďalšie <1>{{count}}</1>' literally translates to 'and further/additional'. While not strictly incorrect, it doesn't convey the same nuance of 'more' in this context. A better translation might be 'a ešte <1>{{count}}</1>' which is closer to 'and yet more'.",
+          "suggestion": "a ešte <1>{{count}}</1>"
         }
       ],
       "approved_at": null
@@ -257,8 +277,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'and' should be translated as 'in' in this context, but a more natural translation would be 'in dodaten'.",
-          "suggestion": "in dodaten"
+          "description": "'and' should be translated to 'in' in this context. However, a more natural Slovenian translation for 'and' in this scenario (indicating more items) might be 'in dodatnih'.",
+          "suggestion": "Consider 'in dodatnih {{count}} več' for a more natural flow, or maintain 'in {{count}} več' if strict adherence to the original wording is required."
         }
       ],
       "approved_at": null
@@ -269,13 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'и {{count}} више' doesn't fully capture the meaning of 'and {{count}} more'.  'Više' implies 'more of' something already present. A more accurate translation would convey the concept of adding to a total. Depending on the context, 'уз' or 'плус' might be more appropriate.",
-          "suggestion": "Consider 'и <1>{{count}} још</1>' or 'и <1>{{count}} плус</1>' or 'и <1>{{count}} уз</1>' depending on the specific context."
-        },
-        {
-          "type": "formatting",
-          "description": "The XML tags '<1>' and '</1>' are used in the English content, and must be maintained in the Serbian translation.",
-          "suggestion": "Ensure the Serbian translation also includes '<1>' and '</1>' tags."
+          "description": "The Serbian translation \"и <1>{{count}} више</1>\" doesn't perfectly capture the meaning of \"and <1>{{count}} more</1>\". While \"више\" means 'more', the word 'and' is missing. A more accurate translation would incorporate 'i' (and) at the beginning.",
+          "suggestion": "и <1>{{count}} још увек</1>"
         }
       ],
       "approved_at": null
@@ -304,13 +319,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'và {{count}} hơn thế nữa' is not the most natural or accurate translation of 'and {{count}} more'. 'hơn thế nữa' implies 'furthermore' or 'in addition,' which isn't quite the meaning of 'more'.",
-          "suggestion": "A more accurate translation would be 'và thêm {{count}} nữa' or 'còn thêm {{count}} nữa'."
+          "description": "The phrase \"hơn thế nữa\" is a bit verbose and doesn't perfectly capture the brevity of 'more' in the English context.  A more natural translation would be something like \"còn\" or \"thêm\".",
+          "suggestion": "và còn {{count}}"
         },
         {
           "type": "formatting",
-          "description": "The Vietnamese translation includes extra spaces before and after the 'và'. This can be avoided for a cleaner look.",
-          "suggestion": "Remove the extra spaces: 'và thêm {{count}} nữa' or 'còn thêm {{count}} nữa'"
+          "description": "The translation contains extra spaces before 'và'.",
+          "suggestion": "và {{count}} hơn thế nữa"
         }
       ],
       "approved_at": null
@@ -321,13 +336,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"以及<1>另外 {{count}} 个</1>\" doesn't quite capture the nuance of 'and <1>{{count}} more</1>'. '另外' (ling wai) implies 'in addition' or 'besides', which might be too strong. A more accurate translation would focus on 'more'.",
-          "suggestion": "以及还有 {{count}} 个"
+          "description": "The translation '另外 {{count}} 个' implies 'another' instead of 'more'.  'and more' suggests an addition to an existing amount, whereas 'another' introduces a separate quantity.",
+          "suggestion": "以及 还有 {{count}} 个"
         },
         {
           "type": "formatting",
-          "description": "The use of <1> and </1> is consistent with the English source but should be verified for correct usage within the target system. This is a potential integration issue, not strictly a translation error.",
-          "suggestion": "Verify that <1> and </1> are correctly implemented in the target platform to preserve the intended formatting."
+          "description": "The angle brackets <1> and </1> are retained in both the source and target strings. This formatting needs to be confirmed as necessary for the intended display and might need adjustment for Chinese rendering.",
+          "suggestion": "Confirm the necessity of angle brackets. Consider if they should be removed or adjusted for proper display in Chinese."
         }
       ],
       "approved_at": null

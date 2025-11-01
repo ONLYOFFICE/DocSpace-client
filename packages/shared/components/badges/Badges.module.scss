@@ -26,10 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "../../styles/common-icons-style.scss";
-@import "../../styles/variables/colors.scss";
-@import "../../styles/variables/devices";
-@import "../../styles/mixins";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 :global(.rtl) {
   .badgeWrapperNewBadge {
@@ -50,23 +48,23 @@
     }
 
     .iconBadge {
-      @include icon-size(small);
+      @include mixins.icon-size(small);
     }
   }
   &.rowView {
     .versionBadge > div {
       padding: 2px 5px !important;
 
-      @include mobile {
+      @include mixins.mobile {
         padding: 0 4px !important;
       }
     }
 
     .iconBadge {
-      @include icon-size(medium);
+      @include mixins.icon-size(medium);
 
-      @include mobile {
-        @include icon-size(small);
+      @include mixins.mobile {
+        @include mixins.icon-size(small);
       }
     }
   }
@@ -77,7 +75,7 @@
     }
 
     .iconBadge {
-      @include icon-size(medium);
+      @include mixins.icon-size(medium);
     }
   }
 }
@@ -96,7 +94,7 @@
   background: var(--files-badges-bg-color);
   padding: 6px;
   border-radius: 4px;
-  box-shadow: 0 2px 4px $badge-shadow;
+  box-shadow: 0 2px 4px colors.$badge-shadow;
 }
 
 .badgeWrapperNewBadge {
@@ -109,4 +107,41 @@
 
   border-radius: 11px;
   border: var(--files-badges-border);
+}
+
+.iconBadge {
+  &.muteBadge,
+  &.pinBadge {
+    margin-top: 2px;
+
+    svg {
+      path {
+        fill: var(--mute-badge-color);
+      }
+    }
+
+    :hover:not(:global(.disabled)) {
+      svg {
+        path {
+          fill: var(--mute-badge-color);
+        }
+      }
+    }
+  }
+
+  &.muteBadge {
+    svg {
+      path:first-child {
+        stroke: var(--mute-badge-color);
+      }
+
+      rect {
+        fill: var(--mute-badge-color);
+      }
+    }
+  }
+
+  &.pinBadge {
+    margin-top: 2px;
+  }
 }

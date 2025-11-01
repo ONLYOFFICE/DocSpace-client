@@ -3,7 +3,7 @@
   "content": "Once ready, you can find the files in your browser's download folder and close this tab.",
   "content_en_sha1_hash": "fb51684432ddc37df0f5a627e4af0bafc54fe1d4",
   "created_at": "2025-05-19T21:30:44.672Z",
-  "updated_at": "2025-05-28T09:30:02.878Z",
+  "updated_at": "2025-08-21T11:22:39.929Z",
   "comment": {
     "text": "This translation key is used to display a message informing users that files are ready to be downloaded and can be found in their browser's download folder. It appears on a UI element related to file downloads, likely as a confirmation or completion message. The translator should consider the tone of the English content, aiming for clarity and reassurance.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/Auth/page.client.tsx",
-      "line_number": 182,
+      "line_number": 164,
       "context": "return isFileHandler && isExternalDownloading ? (\n <OperationContainer\n url={referenceUrl}\n authorized={authorized}\n title={t(\"DownloadOperationTitle\")}\n description={t(\"DownloadOperationDescription\")}\n />\n ) : (\n <AppLoader />\n );\n };",
       "module": "/packages/login"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Once ready\" is translated as \"بمجرد أن تصبح جاهزًا\". While technically correct, it sounds slightly awkward in Arabic. A more natural translation would be \"عندما تكون جاهزًا\" or \"عندما يصبح جاهزًا\".",
+          "suggestion": "عندما تكون جاهزًا"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'close this tab' is not accurately conveyed by 'həmin nişanı bağlaya bilərsiniz'. 'Nişan' refers to a sign or mark, not a tab. A more accurate translation would reflect closing the browser tab.",
-          "suggestion": "Hazır olduqda, faylları brauzerinizin endirmə qovluğunda tapa və həmin səhifəni (və ya pəncərəni) bağlaya bilərsiniz."
-        },
-        {
-          "type": "formatting",
-          "description": "The translated sentence is slightly less fluid compared to the English. While grammatically correct, rephrasing could improve readability.",
-          "suggestion": "Hazır olduqda, faylları brauzerinizin endirmə qovluğunda tapa bilərsiniz və həmin pəncərəni bağlayın."
+          "description": "The word 'nişanı' (meaning 'sign' or 'mark') is not an accurate translation of 'tab' in this context. It implies a physical marker rather than a browser tab.",
+          "suggestion": "Hazır olduqda, faylları brauzerinizin endirmə qovluğunda tapa və həmin sekmeni bağlaya bilərsiniz."
         }
       ],
       "approved_at": null
@@ -59,13 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Once ready\" is not directly conveyed in the Czech translation. \"Po dokončení\" translates to 'After completion' which implies a more formal completion process than simply being ready.",
-          "suggestion": "Consider a more direct translation for \"Once ready\" such as \"Jakmile bude hotovo\" or \"Až bude hotovo\" to better align with the original meaning."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation lacks the conversational tone of the original. The English is slightly more informal.",
-          "suggestion": "While not an error, softening the Czech phrasing slightly (e.g., using a less formal word for 'close') could improve the user experience."
+          "description": "The phrase 'Once ready' is not accurately conveyed. 'Po dokončení' translates to 'After completion' which is close but slightly less natural in this context.",
+          "suggestion": "A more natural translation of 'Once ready' might be 'Jakmile bude hotovo' or 'Až bude hotovo'."
         }
       ],
       "approved_at": null
@@ -76,13 +72,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Once ready' is not accurately translated. 'Sobald fertig' literally translates to 'as soon as finished'. A more natural translation would be 'Wenn es fertig ist' or 'Wenn es bereit ist'.",
-          "suggestion": "Wenn es fertig ist, können Sie die Dateien im Download-Ordner Ihres Browsers finden und diese Registerkarte schließen."
+          "description": "The phrase \"Once ready\" is translated as \"Sobald fertig\". While understandable, a more natural and precise translation would be \"Wenn es fertig ist\" or \"Wenn der Download abgeschlossen ist\". \"Sobald fertig\" implies something starts immediately after being ready, which isn't the intended meaning.",
+          "suggestion": "Wenn es fertig ist"
         },
         {
           "type": "formatting",
-          "description": "The use of 'diese Registerkarte' is slightly awkward. It's more natural to simply say 'diese Tab' or rephrase the sentence.",
-          "suggestion": "Wenn es fertig ist, können Sie die Dateien im Download-Ordner Ihres Browsers finden und den Tab schließen."
+          "description": "The translation uses a comma to separate the first two clauses, which is grammatically correct but could be improved with a conjunction. Although not strictly wrong, it creates a slightly abrupt feel.",
+          "suggestion": "Sobald es fertig ist, können Sie die Dateien..."
         }
       ],
       "approved_at": null
@@ -90,18 +86,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Μόλις το κάνετε\" (Mólis to kánete) is an awkward and inaccurate translation of \"Once ready.\" A more natural translation would be something like \"Όταν είναι έτοιμο\" (Ótan íne étimo) or \"Μόλις ολοκληρωθεί\" (Mólis oloklitróthei).",
-          "suggestion": "Όταν είναι έτοιμο"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The use of 'φάκελο λήψης του προγράμματος περιήγησής σας' is technically correct but could be simplified for better readability.  It's a bit long and formal.",
-          "suggestion": "τον φάκελο λήψεων του προγράμματός σας"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -128,13 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"ներդիրը\" (nerdiru) which translates to 'insert' or 'tab' is not the correct term for 'tab' in this context. It implies a more literal insertion rather than the browser tab itself.",
-          "suggestion": "Replace \"ներդիրը\" with \"անվագիրը\" (anvagiru) which means 'tab' or 'page'."
+          "description": "The phrase \"close this tab\" is not accurately translated. \"Այս ներդիրը\" (This insert) doesn't convey the intended meaning of closing the tab.",
+          "suggestion": "Consider using something like \"փակել այս աշխատասեղանը\" (pakel ays ashtasեղանը - close this desktop/window) or \"փակել այս էջը\" (pakel ays ejը - close this page) depending on the precise context."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the sentence structure could be improved for better flow in Armenian. The order of actions could be slightly rearranged for improved readability.",
-          "suggestion": "Consider reordering to: \"Պատրաստ լինելուց հետո դուք կարող եք գտնել ֆայլերը ձեր բրաուզերի ներբեռնման թղթապանակում և այնուհետև փակել այս անվագիրը:\" (Patrast linelucts heto duk karg eq gtnel fayleru zer brauzeri nerbernmam thgtapanak'um ev anyuhet'ev pakel as anvagiru.) - 'After being ready, you can find the files in your browser's download folder and then close this tab.'"
+          "description": "The word order feels slightly unnatural in Armenian. While technically correct, it could be improved for better flow.",
+          "suggestion": "Reorder the sentence to something like: \"Պատրաստ լինելուց հետո դուք կարող եք գտնել ֆայլերը ձեր բրաուզերի ներբեռնման թղթապանակում, իսկ հետո փակել այս աշխատասեղանը.\" (Once ready, you can find the files in your browser's download folder, and then close this desktop.)"
         }
       ],
       "approved_at": null
@@ -148,13 +133,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'このタブを閉じます' (close this tab) is accurate but could be more natural. While technically correct, it sounds slightly abrupt in Japanese. A more natural phrasing would emphasize completion.",
-          "suggestion": "準備ができたら、ブラウザのダウンロードフォルダからファイルを見つけ、このタブを閉じてください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -166,7 +145,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເອກະສານ' (ekasan) translates to 'documents' and might be too formal.  'ເອກະສານ' is appropriate if the files are formal documents, but 'ໄຟລ໌' (fai) or 'ຂໍ້ມູນ' (khomun) might be more commonly used and natural in this context.",
+          "suggestion": "Consider using 'ໄຟລ໌' or 'ຂໍ້ມູນ' instead of 'ເອກະສານ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -175,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'esat gatavs (-a)' is grammatically correct, but potentially clunky. While technically including both masculine and feminine forms, it's more natural to use a gender-neutral alternative or specify gender based on context.",
-          "suggestion": "Consider using 'Kad būsiet gatavs' (when you are ready - more formal, gender-neutral) or 'Kad esi gatavs' (when you are ready - informal, masculine) if the user's gender is known."
+          "description": "The phrase 'Kad esat gatavs (-a)' can be slightly ambiguous. It's addressing both male and female users, which is good, but the phrasing is a bit clunky. A more natural phrasing could improve readability.",
+          "suggestion": "Kad esat gatavs, varat..."
         }
       ],
       "approved_at": null
@@ -193,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'będziesz w stanie' is overly literal and somewhat awkward in this context. A more natural Polish phrasing would be more direct.",
-          "suggestion": "Gdy pliki będą gotowe, znajdziesz je w katalogu Pobrane swojej przeglądarki i możesz zamknąć tę kartę."
+          "description": "The phrase 'close this tab' is translated as 'zamknąć tę kartę'. While technically correct, 'zamknąć zakładkę' is a more natural and common way to say 'close this tab' in Polish in this context.",
+          "suggestion": "Gdy pliki będą gotowe, znajdziesz je w katalogu Pobrane swojej przeglądarki i będziesz w stanie zamknąć tę zakładkę."
         }
       ],
       "approved_at": null
@@ -205,8 +190,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'close this tab' is translated as 'fechar este separador'. While 'separador' is acceptable, 'abrir' or 'fechar esta aba' would be more common and natural-sounding for 'tab' in a browser context in Portuguese.",
-          "suggestion": "fechar esta aba"
+          "description": "The English phrase 'Once ready' is a bit vague. A more accurate translation might convey when the download is complete, rather than just 'ready'.",
+          "suggestion": "Quando o download estiver concluído"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'separador' is technically correct for 'tab', in a user interface context, 'aba' is more commonly used and understood by Portuguese speakers.",
+          "suggestion": "Quando o download estiver concluído, pode encontrar os ficheiros na pasta de transferências do seu browser e fechar esta aba."
         }
       ],
       "approved_at": null
@@ -223,17 +213,17 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'fișeirele vor fi disponibile' is a bit too formal and indirect. A more natural translation for 'files' in this context would be something like 'fișierele'.",
-          "suggestion": "fișierele vor fi disponibile"
+          "description": "The phrase \"browser's download folder\" is not accurately translated. \"dosarul de descărcări din browser-ul\" is overly literal and sounds awkward. A more natural Romanian phrasing would be 'folderul de descărcări al browserului' or simply 'folderul de descărcări'.",
+          "suggestion": "folderul de descărcări al browserului"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a hyphen in \"browser-ul\" is unnecessary and grammatically incorrect. Romanian uses a connecting stroke (apostrophe) in this context.",
+          "suggestion": "browser-ul should be browserului"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'browser-ul' contains a hyphen which isn't standard Romanian. It should be written without the hyphen.",
-          "suggestion": "browserul"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'această filă' is correct, but 'această pagină' might be more common and understandable in all contexts.",
+          "description": "While the overall meaning is conveyed, 'această filă' is a somewhat formal way to say 'this tab.' A more common and natural phrasing would be 'această pagină'.",
           "suggestion": "această pagină"
         }
       ],
@@ -251,13 +241,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ෆෝල්ඩරයේ' (folder'ye) is written correctly, but 'වසා දමන්න' (wasa damanna) could be improved. While technically correct, it's a bit formal. A more natural phrasing would be 'වසන්න' (wasanna).",
-          "suggestion": "වසන්න"
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, the phrase 'මෙම ටැබය' (this tab) is a little literal. It might sound more natural to say something like 'මෙම ටැබ' (this tab - shortened form) or 'මෙම වින්ඩෝ' (this window).",
-          "suggestion": "මෙම ටැබ"
+          "description": "The word 'බාගැනීම්' (baganaeim) is used for 'downloads'. While technically correct, a more natural and common Sinhala term would be 'ගබඩා' (gabada).",
+          "suggestion": "සූදානම් වූ පසු, ඔබට ඔබේ බ්‍රවුසරයේ ගබඩා ෆෝල්ඩරයේ ඇති ගොනු සොයා ගත හැකි අතර මෙම ටැබය වසා දමන්න"
         }
       ],
       "approved_at": null
@@ -268,13 +253,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The original English sentence emphasizes that the user can find the files *after* the download is complete and can then close the tab. The Slovak translation places the instruction to close the tab first, which changes the flow and implies closing the tab before finding the files. 'Po dokončení zatvorte túto kartu' should ideally come after the instruction about finding the files.",
-          "suggestion": "Súbory nájdete v priečinku so stiahnutými súbormi vo vašom prehliadači, potom zatvorte túto kartu."
+          "description": "The English phrase 'Once ready' is not adequately translated. 'Po dokončení' translates to 'After completion', which is accurate but lacks the immediacy of 'Once ready'. It sounds slightly formal.",
+          "suggestion": "Ak je to pripravené, zatvorte túto kartu..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is a bit awkward. While grammatically correct, it's not the most natural way to say it in Slovak. The phrasing 'súbory nájdete v priečinku so stiahnutými súbormi vo vašom prehliadači' can be improved for better flow.",
+          "suggestion": "súbory nájdete v priečinku pre stiahnuté súbory vo vašom prehliadači."
         },
         {
           "type": "formatting",
-          "description": "While grammatically correct, the Slovak sentence could benefit from a slightly smoother flow. The structure is a bit abrupt.",
-          "suggestion": "Po dokončení stiahnutia nájdete súbory v priečinku so stiahnutými súbormi vo vašom prehliadači a potom zatvorte túto kartu."
+          "description": "The sentence is a bit long and could be split for improved readability.",
+          "suggestion": "Po dokončení zatvorte túto kartu. Súbory nájdete v priečinku pre stiahnuté súbory vo vašom prehliadači."
         }
       ],
       "approved_at": null
@@ -291,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Промените дозволе корисницима које сте позвали или <1> надоградите свој тарифни план </1>.\" does not accurately reflect the English content \"Once ready, you can find the files in your browser's download folder and close this tab.\"  It refers to user permissions and upgrading a tariff plan, which is unrelated to downloading files and closing a tab.",
-          "suggestion": "A more accurate translation would be something like: 'Када се заврши, можете пронаћи датотеке у фолдеру за преузимање у вашем прегледачу и затворити овај прозор/таб.'"
+          "description": "The Serbian translation 'Промените дозволе корисницима које сте позвали или <1> надоградите свој тарифни план </1>.' does not accurately reflect the meaning of the English content 'Once ready, you can find the files in your browser's download folder and close this tab.'. It mentions changing permissions for users or upgrading a tariff plan, which is unrelated to downloading files.",
+          "suggestion": "The translation should accurately describe the process of finding downloaded files in the browser's download folder and closing the tab. A possible suggestion is: 'Када се готови, можете пронаћи датотеке у фасцикли за преузимање у свом прегледачу и затворити овај прозор/утаб.'"
         }
       ],
       "approved_at": null
@@ -303,8 +293,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Promenite dozvole korisnicima koje ste pozvali ili <1>nadogradite svoj tarifni plan</1>' does not accurately reflect the English content 'Once ready, you can find the files in your browser's download folder and close this tab.'. The Serbian translation discusses user permissions and tariff plan upgrades, which are unrelated to downloading files.",
-          "suggestion": "The translation should accurately describe where the downloaded files are located (e.g., 'Kada budu spremni, datoteke možete pronaći u mapi za preuzimanje u pregledniku i zatvoriti ovu karticu.')"
+          "description": "The Serbian translation \"Promenite dozvole korisnicima koje ste pozvali ili <1>nadogradite svoj tarifni plan</1>\" does not accurately reflect the English content \"Once ready, you can find the files in your browser's download folder and close this tab.\" The Serbian translation seems to be about managing permissions or upgrading a plan, which is unrelated to downloading files.",
+          "suggestion": "A more accurate translation would be something like: \"Kada se završi, pronađite datoteke u mapi za preuzimanje u vašem pregledaču i zatvorite ovaj tab.\" or \"Kada bude spremno, datoteke možete pronaći u mapi za preuzimanje u vašem pregledniku i zatvorite ovaj tab.\""
+        },
+        {
+          "type": "formatting",
+          "description": "The translation contains HTML-like tags `<1>...</1>`. This is unexpected and should be removed.",
+          "suggestion": "Remove the tags `<1>...</1>` from the translation."
         }
       ],
       "approved_at": null

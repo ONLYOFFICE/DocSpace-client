@@ -3,7 +3,7 @@
   "content": "The maximum length of a user name or another local part is 64 characters.",
   "content_en_sha1_hash": "ba7b9b65a0fda5b91b2999cd6da74cf668a5cc1d",
   "created_at": "2025-05-19T21:30:46.386Z",
-  "updated_at": "2025-06-18T07:34:14.839Z",
+  "updated_at": "2025-10-13T13:22:35.500Z",
   "comment": {
     "text": "\"This translation key is used to display an error message when a user name exceeds the maximum allowed length of 64 characters. It appears in dialogs where users are prompted to update their email address or local part.\"",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 175,
+      "line_number": 186,
       "context": "case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:\n return t(\"Common:IncorrectDomain\");\n }\n });",
       "module": "/packages/shared"
     }
@@ -48,13 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses the term 'elektron poçtun' which translates to 'email'. The original English refers to usernames or any 'local part' of an address, not solely email. The term 'local part' is crucial to maintain the original meaning.",
-          "suggestion": "İstifadəçi adının və ya digər yerli hissənin maksimal uzunluğu 64 simvoldur."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'simvoldur' is a valid term, it's less common. A more prevalent alternative exists.",
-          "suggestion": "İstifadəçi adının və ya digər yerli hissənin maksimal uzunluğu 64 xarakterdir."
+          "description": "The translation 'Elektron poçtun maksimal uzunluğu 64 simvoldur' translates to 'The maximum length of an email is 64 characters.' The English content refers to usernames or another 'local part,' not specifically email.  This is a mistranslation of the scope.",
+          "suggestion": "Istifadəçi adı və ya yerli hissənin maksimal uzunluğu 64 simvoldur."
         }
       ],
       "approved_at": null
@@ -77,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'symbols' ('Symbole') isn't the best translation for 'characters' in this context. 'Zeichen' would be more accurate as it directly translates to characters.",
+          "description": "The word 'characters' (as in, letters and numbers) is translated as 'Symbole'. 'Symbole' translates to 'symbols' which is a more general term and doesn't specifically refer to characters in a username. This can lead to confusion.",
           "suggestion": "Die maximale Länge für den Benutzernamen oder anderen lokalen Teil beträgt 64 Zeichen."
         }
       ],
@@ -134,13 +129,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ໂຕອັກສອນ' (to akson) which translates to 'characters' is correct, but 'ພາກສ່ວນພື້ນຖານ' (pak suan phuen than) translates to 'local part' and could be more accurately translated to something like 'ສ່ວນອີ້ນອີ້ນ' (suan ien ien) which more closely conveys the meaning of 'local part' or 'prefix'.",
-          "suggestion": "ຄວາມຍາວສູງສຸດຂອງຊື່ຜູ້ໃຊ້ຫລືສ່ວນອີ້ນອີ້ນອື່ນໆແມ່ນ 64 ໂຕອັກສອນ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -161,8 +150,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Maksymalna długość identyfikatora użytkownika wynosi 64 znaki.' doesn't accurately reflect the English meaning. 'Identifier' is too specific. The English says 'user name or another local part'.",
-          "suggestion": "Maksymalna długość nazwy użytkownika lub innej części lokalnej wynosi 64 znaki."
+          "description": "The translation uses \"identyfikatora użytkownika\" which translates to \"user identifier\". The original sentence refers to a username or any 'local part'. 'Local part' is a more precise technical term here, which doesn't have a direct equivalent in Polish and requires more context. \"identyfikatora użytkownika\" is too specific.",
+          "suggestion": "Consider rephrasing to something like \"Maksymalna długość nazwy użytkownika lub innego fragmentu adresu wynosi 64 znaków.\" or \"Maksymalna długość segmentu identyfikującego użytkownika wynosi 64 znaki.\" depending on the intended audience."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the translation could benefit from punctuation consistency. Polish often uses a slightly different punctuation style.",
+          "suggestion": "Consider adding a comma after \"Maksymalna długość\" for better readability. E.g., \"Maksymalna długość, identyfikatora użytkownika...\""
         }
       ],
       "approved_at": null
@@ -191,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses \"имя почтового ящика\" (mailbox name) instead of \"имя пользователя\" (user name) which aligns better with the English content. The original English mentions \"user name or another local part,\" which is more general than just a mailbox name.",
-          "suggestion": "Максимальная длина имени пользователя или другой локальной части - 64 символа."
+          "description": "The translation uses \"имя почтового ящика\" (mailbox name) which is not equivalent to \"user name or another local part\". It's a more specific term.",
+          "suggestion": "Максимальная длина имени пользователя или другой локальной части - 64 символов."
         }
       ],
       "approved_at": null
@@ -203,13 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'local part' is not accurately translated. 'Local part' refers to the part of an email address before the @ symbol, or in this context, the user name. The translation implies a general 'location' or 'place' instead.",
-          "suggestion": "Consider translating 'local part' as 'විද්‍යුත් ලිපිනය කොටස' (widhyut lipinaya kotasa) which means 'email address part' or 'පරිශ්‍රීලක නාමයේ පළමු කොටස' (parishreelaka naamayey palamu kotasa) meaning 'the first part of the username'."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'අකුරු' (akuru) is slightly awkward in this context. While it literally means 'letters/characters', a more natural phrasing might exist.",
-          "suggestion": "Consider replacing 'අකුරු' with 'අක්ෂර' (akshara) which is a more formal and potentially more appropriate term for 'characters' in this technical context."
+          "description": "The word 'අකුරු' (akuru) means 'letters' and while technically correct, it's more natural to use a term implying characters or length. The original English emphasizes 'characters'.",
+          "suggestion": "පරිශ්‍රීලක නාමයක හෝ වෙනත් ස්ථානීය කොටසක උපරිම දිග 64 අක්ෂර කි."
         }
       ],
       "approved_at": null

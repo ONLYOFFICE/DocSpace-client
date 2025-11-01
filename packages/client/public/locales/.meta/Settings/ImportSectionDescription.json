@@ -3,7 +3,7 @@
   "content": "Select sections for import. They will appear in the corresponding sections of {{productName}}.",
   "content_en_sha1_hash": "fdb4147ce80c84acaac01c116f234f42d5e0b2a7",
   "created_at": "2025-05-19T21:30:51.687Z",
-  "updated_at": "2025-05-28T09:30:02.504Z",
+  "updated_at": "2025-08-11T09:02:43.941Z",
   "comment": {
     "text": "This translation key is used to describe the action of selecting sections for import in various data import steps. It explains that selected sections will appear in corresponding sections of {{productName}} and is typically displayed as part of a button label or dialog description.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 124,
+      "line_number": 123,
       "context": "),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n component: (\n <ImportStep\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 132,
+      "line_number": 131,
       "context": "),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n component: (\n <ImportStep\n t={t}",
       "module": "/packages/client"
     },
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'входиране' (vhodirane) is not the most natural or accurate translation of 'import' in this context. A better term would be 'вносване' (vnosvane) or 'внос' (vnos).",
-          "suggestion": "Изберете секции за вносване. Те ще се появят в съответните секции на {{productName}}."
+          "description": "The word \"входиране\" (vhodirane) is not the standard or most natural way to say \"import\" in Bulgarian. A more appropriate term would be \"внос\" (vnos).",
+          "suggestion": "Изберете секции за внос. Те ще се появят в съответните секции на {{productName}}."
         }
       ],
       "approved_at": null
@@ -102,13 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Ne ilmestyvät vastaaviin {{productName}}-n osioihin\" is awkward and not a natural Finnish construction. The '-n' suffix after {{productName}} is unnecessary and grammatically incorrect in this context.",
-          "suggestion": "Valitse tuotavat osiot. Ne ilmestyvät {{productName}}-osiossa."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The original English \"They will appear in the corresponding sections of {{productName}}\" implies a specific section within the application. The Finnish translation doesn't quite convey that clarity, translating more literally as 'corresponding sections'.",
-          "suggestion": "Valitse tuotavat osiot. Ne ilmestyvät {{productName}}-osiossa."
+          "description": "The phrase \"Ne ilmestyvät vastaaviin {{productName}}-n osioihin\" is not the most natural way to express \"They will appear in the corresponding sections of {{productName}}\". The '-n' suffix doesn't quite fit the intended meaning.",
+          "suggestion": "Valitse tuontikelpoiset osiot. Ne sijoittuvat vastaaviin {{productName}}-osiin."
         }
       ],
       "approved_at": null
@@ -119,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'appropriate sections' could be more accurately translated as 'sections concernées' or 'sections correspondantes' to better convey the intended meaning of 'corresponding sections'. 'Appropriées' can imply suitability rather than direct correspondence.",
-          "suggestion": "Sélectionnez les sections à importer. Ces sections apparaîtront dans les sections concernées/correspondantes de l'espace {{productName}}."
+          "description": "The phrase \"l'espace {{productName}}\" is a less natural way to say \"{{productName}}\". A more appropriate translation would be \"{{productName}}\" directly.",
+          "suggestion": "Sélectionnez les sections à importer. Ces sections apparaîtront dans les sections appropriées de {{productName}}."
         }
       ],
       "approved_at": null
@@ -142,9 +137,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Japanese translation includes a full stop (。) at the end of the first sentence. While grammatically correct, it might be more natural to omit it in this context, as it's followed by a second sentence.",
-          "suggestion": "インポートするセクションを選択してください。このセクションは、{{productName}}の対応するセクションに表示されます。"
+          "type": "incorrect_translation",
+          "description": "The phrase 'They will appear in the corresponding sections of {{productName}}' is translated as 'このセクションは、{{productName}}の対応するセクションに表示されます。'. While technically correct, it sounds slightly awkward in Japanese. A more natural phrasing would be something like '{{productName}}の対応するセクションに反映されます' or '{{productName}}の該当するセクションに適用されます'.",
+          "suggestion": "インポートしたセクションは、{{productName}}の対応するセクションに反映されます。"
         }
       ],
       "approved_at": null
@@ -155,8 +150,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"가져오기할 섹션을 선택하세요\" is a bit awkward. A more natural phrasing for \"Select sections for import\" would be \"가져올 섹션을 선택하세요\" or \"섹션을 가져올 부분을 선택하세요\".",
-          "suggestion": "섹션을 가져올 부분을 선택하세요"
+          "description": "The phrase \"가져오기할 섹션을 선택하세요\" could be improved. While technically correct, it's a bit stiff and less natural for a UI context. A more natural phrasing would be something like \"가져올 섹션을 선택하세요\" or \"섹션을 가져오기 위해 선택하세요\".",
+          "suggestion": "섹션을 가져오기 위해 선택하세요."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"{{productName}}의 해당 섹션에 표시됩니다\" is acceptable, but it could be more user-friendly.  A more natural phrasing would be '{{productName}}에 나타납니다.' or '{{productName}}에서 표시됩니다.'",
+          "suggestion": "{{productName}}에서 표시됩니다."
         }
       ],
       "approved_at": null
@@ -191,7 +191,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The pronoun 'Eles' (They) doesn't agree in gender with 'seções' (sections). 'Seções' is feminine plural, so the pronoun should be 'Elas'.",
+          "description": "The pronoun 'Eles' (They) is grammatically incorrect. The sections are not male, so the correct pronoun should be feminine ('Elas').",
           "suggestion": "Selecione seções para importação. Elas aparecerão nas seções correspondentes do {{productName}}."
         }
       ],
@@ -200,7 +200,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The pronoun 'Eles' (they) doesn't agree in gender with 'seções' (sections), which is feminine. It should be 'Elas'.",
+          "suggestion": "Selecione seções para importação. Elas aparecerão nas seções correspondentes do {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -214,8 +220,8 @@
         },
         {
           "type": "grammar",
-          "description": "The phrase 'spațiului {{productName}}' is grammatically awkward. It implies a 'space' of the product, which may not be the intended meaning. A more accurate translation would depend on the context of 'productName'.",
-          "suggestion": "produsului {{productName}}"
+          "description": "The phrase 'Aceste secţiuni vor apărea' could be improved for better flow. While technically correct, it sounds slightly awkward in Romanian.",
+          "suggestion": "Aceste secțiuni vor apărea"
         }
       ],
       "approved_at": null
@@ -232,8 +238,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'උචිත කොටස්වල' (uchita kotaswala) doesn't perfectly convey the meaning of 'corresponding sections'. A more accurate translation would emphasize that the sections will be imported *into* the existing sections of the product, not just be visible in them. 'පාර්ශ්වික කොටස්' (parshavika kotas) or 'සම්බන්ධිත කොටස්' (sambandhita kotas) might be more appropriate.",
-          "suggestion": "ආයාත කිරීමට කොටස් තෝරන්න. ඒවා {{productName}} හි පාර්ශ්වික කොටස්වලට යොදා දෙනු ඇත."
+          "description": "The translation 'ආයාත කිරීමට කොටස් තෝරන්න. ඒවා {{productName}} හි උචිත කොටස්වල දිස් වනු ඇත.' is not the most natural or accurate rendering of 'Select sections for import. They will appear in the corresponding sections of {{productName}}.' The word 'උචිත' (uchita) which means 'suitable' or 'appropriate' doesn't quite fit the context. It implies a suitability aspect that isn't present in the original English.",
+          "suggestion": "ආයාත කිරීමට කොටස් තෝරන්න. ඒවා {{productName}} හි පිළිවූ කොටස්වල දිස් වනු ඇත."
+        },
+        {
+          "type": "spelling",
+          "description": "While not strictly incorrect, 'ආයාත කිරීමට' (Ayathakarima) could be shortened to 'ආයාත' (Ayatha) for a more conversational tone in Sinhala. It's a stylistic preference, but generally makes the text flow better.",
+          "suggestion": "ආයාත කිරීමට කොටස් තෝරන්න. ඒවා {{productName}} හි උචිත කොටස්වල දිස් වනු ඇත."
         }
       ],
       "approved_at": null
@@ -241,25 +252,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovak translation retains the placeholder {{productName}}, which should be checked if it's appropriate for the Slovak context and whether the placeholder itself is correctly formatted.",
-          "suggestion": "Verify that the placeholder {{productName}} is correctly formatted and appropriate for the Slovak target audience. Consider if it needs localization."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'They will appear' is a bit clunky in Slovenian. A more natural phrasing would be 'They will be displayed' or 'They will show up'.",
-          "suggestion": "Izberite razdelke za uvoz. Prikazani bodo v ustreznih razdelkih {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -268,8 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The possessive suffix '-а' is attached to productName. While grammatically correct, it might be preferable to use a more neutral phrasing for a software interface. Depending on the product's brand voice, this might feel overly formal or awkward.",
-          "suggestion": "Изаберите секције за увоз. Оне ће се појавити у одговарајућим секцијама {{productName}}."
+          "description": "The Serbian translation includes a hyphenated possessive suffix '{{productName}}-а'. It's unclear if this is the correct grammatical form and whether the hyphenation is intentional and appropriate for the tone of the text. It would be best to confirm this with a native Serbian speaker familiar with the product's intended style.",
+          "suggestion": "Consider alternative possessive forms, e.g., '{{productName}}-е' or restructuring the sentence to avoid the possessive entirely, depending on the desired tone and grammatical precision. Consultation with a native speaker is recommended."
         }
       ],
       "approved_at": null
@@ -280,8 +279,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The possessive suffix '-a' is attached to '{{productName}}' which might look awkward and isn't strictly necessary. It is better to use a more general wording.",
-          "suggestion": "Izaberite sekcije za uvoz. One će se pojaviti u odgovarajućim sekcijama {{productName}}."
+          "description": "The possessive suffix '-a' is attached to '{{productName}}'. While grammatically correct, it might feel slightly unnatural or overly formal in this context. Consider whether it's necessary.",
+          "suggestion": "Consider removing the '-a' and simply use '{{productName}}' for a slightly more conversational tone.  Alternatively, investigate if there's a preferred Serbian style guide regarding possessives in UI text."
         }
       ],
       "approved_at": null
@@ -289,7 +288,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The placeholder {{productName}} is present in the English content and should be preserved in the Turkish translation.",
+          "suggestion": "Ensure the placeholder {{productName}} is correctly rendered in the translation."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -298,7 +303,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'простору' (prostoru) translates to 'space' and doesn't accurately convey the meaning of 'corresponding sections' in the context of a software product.  It implies a physical space rather than logical sections within the application.",
+          "description": "The word 'простору' (prostoru) translates to 'space' and doesn't accurately convey the meaning of 'corresponding sections' in the English context. It implies a separate space rather than within the {{productName}} application itself.",
           "suggestion": "Виберіть розділи для імпорту. Вони з’являться у відповідних секціях {{productName}}."
         }
       ],

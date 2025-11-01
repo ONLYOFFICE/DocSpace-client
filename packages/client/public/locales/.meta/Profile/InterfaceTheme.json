@@ -3,7 +3,7 @@
   "content": "Interface theme",
   "content_en_sha1_hash": "f47f8ed32464b7b3aa479c8638758420470a60e9",
   "created_at": "2025-05-19T21:30:53.359Z",
-  "updated_at": "2025-05-21T05:43:08.684Z",
+  "updated_at": "2025-09-10T09:59:20.914Z",
   "comment": {
     "text": "This translation key is used for the interface theme description displayed on the profile settings page. It explains the purpose of this setting and helps users understand its effect on the app's visual appearance.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/index.js",
-      "line_number": 43,
-      "context": "import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n import MainProfile from \"./sub-components/main-profile\";\n import LoginContent from \"./sub-components/LoginContent\";\n import Notifications from \"./sub-components/notifications\";\n import FileManagement from \"./sub-components/file-management\";\n import InterfaceTheme from \"./sub-components/interface-theme\";\n \n import AuthorizedApps from \"./sub-components/authorized-apps\";\n \n const Wrapper = styled.div`\n display: flex;",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
+      "line_number": 56,
+      "context": "import MainProfile from \"./sub-components/main-profile\";\n import LoginContent from \"./sub-components/login\";\n import Notifications from \"./sub-components/notifications\";\n import FileManagement from \"./sub-components/file-management\";\n import InterfaceTheme from \"./sub-components/interface-theme\";\n import AuthorizedApps from \"./sub-components/authorized-apps\";\n import useProfileBody from \"./useProfileBody\";\n \n const Wrapper = styled.div`\n display: flex;",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"واجهة المستخدم\" literally translates to \"user interface\". While it's a related concept, it doesn't directly translate \"interface theme\". \"Theme\" is missing.",
-          "suggestion": "Consider a translation that includes the concept of \"theme\", such as \"مظهر واجهة المستخدم\" (mazhar wajehat al-mustakhdim) which means \"user interface appearance\" or \"interface theme\"."
+          "description": "The Arabic translation \"واجهة المستخدم\" translates to \"User Interface\", not \"Interface theme\". While closely related, it's not a direct translation.",
+          "suggestion": "Consider \"مظهر الواجهة\" or \"سمة الواجهة\" for a more accurate translation of \"Interface theme\"."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Vzhled prostředí\" is a possible translation, \"Interface theme\" typically refers to a visual style or a set of design choices. \"Vzhled prostředí\" leans more towards the general appearance of the environment, which is broader than just the theme.",
-          "suggestion": "Consider \"Motiv uživatelského rozhraní\" or \"Téma uživatelského rozhraní\" for a more accurate translation that directly refers to an interface theme."
+          "description": "While 'Vzhled prostředí' is understandable, it's not the most natural or accurate translation of 'Interface theme'. 'Motiv uživatelského rozhraní' or 'Vzhled uživatelského rozhraní' would be more precise.",
+          "suggestion": "Motiv uživatelského rozhraní"
         }
       ],
       "approved_at": null
@@ -63,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Thema der Benutzeroberfläche\" is a very literal and somewhat clunky translation. A more natural and idiomatic German equivalent for 'Interface theme' would be 'Benutzerschnittstellenthema' or 'Design der Benutzeroberfläche'.",
+          "suggestion": "Consider 'Benutzerschnittstellenthema' or 'Design der Benutzeroberfläche'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ການໂຕ້ຕອບ ຫົວ​ຂໍ້' is a literal translation but doesn't quite capture the nuance of 'Interface theme'.  'ຫົວ​ຂໍ້' directly translates to 'topic' or 'subject' rather than 'theme'. A more accurate translation would convey the visual style or appearance of the interface.",
-          "suggestion": "Consider a translation like 'ຮູບແບບໂຕ້ຕອບ' (roop baep toetop - interface style/appearance) or 'ໂຕ້ຕອບ ສີ' (toetop see - interface color/theme)."
+          "description": "The Lao translation \"ການໂຕ້ຕອບ ຫົວ​ຂໍ້\" while understandable, isn't the most natural or precise translation of \"Interface theme.\" \"ການໂຕ້ຕອບ\" means \"interaction\" or \"interface,\" and \"ຫົວ​ຂໍ້\" means \"topic\" or \"heading.\" A more accurate and common translation would incorporate a term for 'theme'.",
+          "suggestion": "Consider \"ໂຕ້​ຖ້າ​ການໂຕ້​ຖ້າ\" or \"ຮູບແບບໂຕ້​ຖ້າ\" or \"ເນື້ອຫາໂຕ້​ຖ້າ\" (depending on the precise meaning intended).  A more natural phrasing might be  \"ໂຕ້​ຖ້າ​ແບບ\" if 'style' or 'look' is what is meant."
         }
       ],
       "approved_at": null
@@ -132,7 +138,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Interfeisa dizains\" is a possible translation, \"Interfeisa tēma\" would be a more direct and accurate translation of \"Interface theme\". \"Dizains\" translates to \"design\".",
+          "description": "While \"Interfeisa dizains\" is understandable, it translates to 'Interface design' rather than 'Interface theme'. 'Theme' implies a visual style or look and feel, while 'design' is more general.",
           "suggestion": "Interfeisa tēma"
         }
       ],
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අතුරු මුහුණතේ තේමාව\" is a literal translation of \"interface theme\" and while understandable, it might sound clunky or unnatural in Sinhala. A more natural phrasing might be considered.",
-          "suggestion": "අතුරු තේමාව (Atharu Themava)"
+          "description": "The translation 'අතුරු මුහුණතේ තේමාව' while technically understandable, isn't the most natural or accurate translation of 'Interface theme'. 'අතුරු මුහුණතේ' literally means 'on the interface' which isn't quite what 'Interface theme' implies. A more fitting translation would focus on the *theme of* the interface.",
+          "suggestion": "අතුරුමුහුණතේ ඡායාරූපය"
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Vzhľad prostredia' is understandable, it's a rather literal translation of 'Interface theme'. A more natural and commonly used translation in Slovak would be 'Téma rozhrania' or 'Motív rozhrania'. 'Vzhľad prostredia' emphasizes the appearance of the environment, whereas 'Interface theme' refers to the overall design and stylistic choices.",
-          "suggestion": "Téma rozhrania"
+          "description": "While \"Vzhľad prostredia\" is a possible translation, \"Interface theme\" more accurately refers to the visual style or color scheme. \"Vzhľad prostredia\" is more general and could mean the overall appearance of the environment, not just the user interface theme.",
+          "suggestion": "Consider \"Téma rozhrania\" or \"Motív rozhrania\" for a closer translation."
         }
       ],
       "approved_at": null
@@ -207,7 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian (Cyrillic) translation contains a spelling error. 'интерфејса' should be 'интерфејса'.",
+          "suggestion": "Тема интерфејса"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -216,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tema interfejsa\" is understandable, it's not the most natural or precise translation of \"Interface theme.\" \"Tema interfejsa\" literally translates to 'Theme of interface.' A more common and accurate translation would be \"Tema interfejsa\" or possibly \"Izgled interfejsa.\"  The direct literal translation is not preferred in this case.",
-          "suggestion": "Tema interfejsa"
+          "description": "The translation \"Tema interfejsa\" is not the most natural or accurate translation of \"Interface theme\" in Serbian (Latin). \"Tema interfejsa\" literally translates to \"Theme of interface,\" which is a bit awkward. A more natural translation would be \"Izgled interfejsa\" or \"Tema dizajna interfejsa\".",
+          "suggestion": "Izgled interfejsa"
         }
       ],
       "approved_at": null
@@ -237,13 +249,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Chủ đề giao diện\" is understandable, a more natural and accurate translation of \"Interface theme\" would be \"Giao diện chủ đề\" or \"Chủ đề giao diện người dùng\". \"Chủ đề giao diện\" sounds slightly awkward in Vietnamese.",
-          "suggestion": "Giao diện chủ đề"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

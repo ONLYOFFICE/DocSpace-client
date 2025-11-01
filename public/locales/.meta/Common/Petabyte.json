@@ -3,7 +3,7 @@
   "content": "PB",
   "content_en_sha1_hash": "a092b2d4c9d52807932bfedae96b01210db7e06b",
   "created_at": "2025-05-19T21:30:47.361Z",
-  "updated_at": "2025-05-28T09:30:02.994Z",
+  "updated_at": "2025-10-13T13:22:36.070Z",
   "comment": {
     "text": "This translation key is used to display \"Petabyte\" as a unit of measurement for file size. It appears in a list of byte units on a page where file sizes are being displayed, and is used when the selected value exceeds 1 petabyte.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 686,
+      "line_number": 704,
       "context": "t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];\n \n if (bytes <= 0) return `${`0 ${t(\"Common:Bytes\")}`}`;",
       "module": "/packages/shared"
     }
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation \"Po\" is incorrect. \"PB\" (Petabyte) should be translated to \"Pi\" in French.",
-          "suggestion": "Pi"
+          "description": "The French translation \"Po\" is incorrect for \"PB\" (Petabyte). The correct French abbreviation for Petabyte is \"Pi\".",
+          "suggestion": "Change \"Po\" to \"Pi\"."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'PO' is incorrect. The standard abbreviation for Petabyte in Romanian is 'PB', mirroring the English.",
-          "suggestion": "PB"
+          "description": "The standard abbreviation for Petabyte in Romanian is 'PB', not 'PO'. 'PO' is often used for 'point' or 'package'.",
+          "suggestion": "Change 'PO' to 'PB'."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Пб\" is an incorrect transliteration of \"PB\". The correct transliteration is \"ПБ\".",
-          "suggestion": "ПБ"
+          "description": "The standard abbreviation for Petabyte in Russian is 'ПБ', not 'Пб'. The lowercase 'б' is incorrect.",
+          "suggestion": "Replace 'Пб' with 'ПБ'."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The abbreviation 'PB' (Petabyte) is commonly understood in Sinhala as well, and translating it directly as 'පෙ.බ.' might cause confusion for some users. While technically correct, keeping the English abbreviation 'PB' might be more recognizable and maintain consistency with international standards.",
-          "suggestion": "Consider keeping the English abbreviation 'PB' instead of translating it to 'පෙ.බ.'"
+          "description": "The Sinhala translation 'පෙ.බ.' is an abbreviation, but it's not a standard or widely recognized abbreviation for Petabyte in Sinhala. A more understandable and correct translation would be something along the lines of 'පෙටාබයිට්' (Petabait).",
+          "suggestion": "පෙටාබයිට්"
         }
       ],
       "approved_at": null

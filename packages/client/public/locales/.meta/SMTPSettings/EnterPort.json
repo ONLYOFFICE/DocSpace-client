@@ -3,7 +3,7 @@
   "content": "Enter port",
   "content_en_sha1_hash": "2a63f0e8e10f2911346eb8d0e210209dec06d29b",
   "created_at": "2025-05-19T21:30:53.300Z",
-  "updated_at": "2025-05-21T01:34:56.093Z",
+  "updated_at": "2025-08-11T18:11:59.253Z",
   "comment": {
     "text": "\"Used as a placeholder text in a text input field within a custom settings component for an SMTP settings page.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 190,
-      "context": "</div>\n <TextInput\n isDisabled={isLoading}\n className=\"smtp-settings_input\"\n name={PORT}\n placeholder={t(\"EnterPort\")}\n onChange={onChange}\n value={settings[PORT].toString()}\n scale\n hasError={errors[PORT]}\n />",
+      "line_number": 195,
+      "context": "</div>\n <TextInput\n isDisabled={isLoading}\n className=\"smtp-settings_input\"\n name={PORT}\n placeholder={t(\"EnterPort\")}\n onChange={onChange}\n value={settings[PORT].toString()}\n scale\n hasError={errors[PORT]}\n testId=\"smtp_port_input\"",
       "module": "/packages/client"
     }
   ],
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຂົ້າຜອດ\" literally translates to 'enter hole' or 'enter orifice.' While it might be understood in some contexts, it's not the correct translation for 'Enter port' in the context of SMTP settings, which refers to a network port number. A more accurate translation would convey the action of inputting a number representing a port.",
-          "suggestion": "ປ້ອນຈຳນວນຜອດ (pɔn jamnuan phɔt) - 'Enter port number' or ໃສ່ຜອດ (sài phɔt) - 'Enter port'"
+          "description": "The Lao translation \"ເຂົ້າຜອດ\" literally translates to 'enter hole' or 'enter tunnel'. It doesn't accurately convey the meaning of 'Enter port' in the context of SMTP settings, which refers to a network port number. A more appropriate translation would focus on the concept of providing or inputting a port number.",
+          "suggestion": "ປ້ອນຈຸດຂ່າວ (pòn jut khāo) - meaning 'enter port number' or ສະຖາປົກອນຈຸດຂ່າວ (satapakon jut khāo) - meaning 'specify/set port number'."
         }
       ],
       "approved_at": null
@@ -138,7 +138,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Introduzir porta\" is not the most natural or accurate translation of \"Enter port\" in Portuguese. \"Introduzir\" implies inserting something.  A better translation would convey the meaning of specifying a port number.",
+          "description": "The translation \"Introduzir porta\" is a literal translation and not the typical phrasing for a field label requesting a port number. It sounds awkward in Portuguese.",
           "suggestion": "Digite a porta"
         }
       ],
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Introduceți numărul de port' is technically correct, 'Introduceți portul' would be more natural and concise in this context. 'Numărul de' is often redundant in UI labels.",
-          "suggestion": "Introduceți portul"
+          "description": "While technically correct, 'Introduceți numărul de port' is a bit formal for a user interface prompt. A more natural and user-friendly translation would be preferred.",
+          "suggestion": "Introduce portul"
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"තොට ඇතුල් කරන්න\" (thota athul karanna) literally translates to 'Enter soil/earth'. The correct meaning of 'Enter port' should convey the action of inputting a port number.",
-          "suggestion": "මානපෝර்ட் ඇතුල් කරන්න (maanaport athul karanna) - which means 'Enter port number'."
+          "description": "The translation 'තොට ඇතුල් කරන්න' is a literal translation of 'port' as 'gate' and 'enter'. The intended meaning of 'Enter port' refers to providing a numerical port number. A more accurate translation would reflect that.",
+          "suggestion": "ඇතුල් කරන්නාවූ ටෝකට්getNumber"
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Unesi port' is not the most natural or accurate translation of 'Enter port'. It's literally 'Enter port', but a better translation would convey the action of entering a port number.",
-          "suggestion": "Unesite broj porta"
+          "description": "The Serbian translation \"Unesi port\" is not the most natural or accurate translation of \"Enter port\". \"Unesi\" means \"enter\" in the sense of inputting, but in the context of a port number, a more natural phrasing would be 'Upiši port' or 'Odredi port'.",
+          "suggestion": "Upiši port"
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Bağlantı noktasını girin\" is understandable, a more natural and accurate translation of \"Enter port\" would be \"Port numarasını girin\" or simply \"Port girin\". \"Bağlantı noktası\" refers more to a connection point, not the port number itself.",
-          "suggestion": "Port numarasını girin"
+          "description": "While \"Bağlantı noktasını girin\" is understandable, a more natural and common translation of 'Enter port' in this context (SMTPSettings) would be 'Portu girin'. 'Bağlantı noktasını' implies a more general connection point, whereas 'Portu' directly refers to the port number.",
+          "suggestion": "Portu girin"
         }
       ],
       "approved_at": null

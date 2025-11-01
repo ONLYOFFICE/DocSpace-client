@@ -3,7 +3,7 @@
   "content": "Link for {{productName}} users",
   "content_en_sha1_hash": "81dfae215890ae1b202268510af7f7a2ac351480",
   "created_at": "2025-05-19T21:30:55.785Z",
-  "updated_at": "2025-06-03T20:59:42.295Z",
+  "updated_at": "2025-10-16T07:29:35.971Z",
   "comment": {
     "text": "This translation key is used to display a link for users accessing {productName}. It appears as part of an options setting in the UI. Translators should replace \"{productName}\" with the actual product name.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1985,
+      "line_number": 2099,
       "context": "disabled: false,\n },\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,",
       "module": "/packages/client"
     }
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \" {{productName}} istifadəçiləri üçün keçid\" is not a natural or accurate translation of \"Link for {{productName}} users\". The word 'keçid' usually translates to 'transition' or 'passage' and doesn't fit the context of a link.",
-          "suggestion": "Consider alternatives like \"{{productName}} istifadəçiləri üçün bağlantı\" (for {{productName}} users - link) or \"{{productName}} istifadəçiləri üçün əlaqə\" (for {{productName}} users - connection)."
+          "description": "The translation \" {{productName}} istifadəçiləri üçün keçid\" is not a natural or accurate translation of \"Link for {{productName}} users\".  'Keçid' simply means 'link' and lacks the implication of 'for'. It should be something along the lines of '{{productName}} istifadəçiləri üçün bağlantı' or '{{productName}} istifadəçilərinə olan keçid'.",
+          "suggestion": "{{productName}} istifadəçiləri üçün bağlantı"
+        },
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation includes a space before the opening curly brace. This should be removed to match the original format.",
+          "suggestion": "{{productName}} istifadəçiləri üçün bağlantı"
         }
       ],
       "approved_at": null
@@ -78,13 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Linkki {{productName}}:n käyttäjiin\" is not a natural or accurate translation of \"Link for {{productName}} users.\" It literally translates to \"Link to {{productName}}'s users.\" The intended meaning is a link *for* users, not a link *to* them.",
+          "description": "The translation 'Linkki {{productName}}:n käyttäjiin' is not the most natural or accurate translation of 'Link for {{productName}} users'. While technically correct, it's a bit awkward in Finnish. A better translation would convey the meaning more clearly and naturally.",
           "suggestion": "Linkki {{productName}}-käyttäjille"
-        },
-        {
-          "type": "formatting",
-          "description": "The possessive case usage ':n' is not the most natural way to represent the link relationship in Finnish in this context.  A more idiomatic approach would use a case that expresses 'for' or 'intended for'.",
-          "suggestion": "Consider a case that expresses 'for' or 'intended for', like genitive or partitive depending on the precise desired nuance."
         }
       ],
       "approved_at": null
@@ -101,8 +101,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Հղում {{productName}}-ի օգտագործողների համար' literally translates to 'Link for users of {{productName}}'. A more natural Armenian phrasing for 'Link for {{productName}} users' would be '{{productName}} օգտագործողների համար հղում' or '{{productName}} օգտագործողների համար ապահովված հղում'.",
-          "suggestion": "{{productName}} օգտագործողների համար հղում"
+          "description": "The phrase 'Link for {{productName}} users' is best translated as something more natural in Armenian. The current translation, while technically correct, is a bit literal and awkward.",
+          "suggestion": "Հղում {{productName}}-ի մասնակիցների համար"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'users' (օգտագործողների) might not be the most appropriate term. Depending on the context, 'participants' (մասնակիցների) or 'members' (անդամների) might be better.",
+          "suggestion": "Consider using 'մասնակիցների' or 'անդամների' instead of 'օգտագործողների' for a more natural and contextually appropriate translation."
         }
       ],
       "approved_at": null
@@ -137,7 +142,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Saite {{productName}} lietotājiem' is a literal translation and doesn't quite convey the intended meaning of 'Link for {{productName}} users'. A more natural and accurate translation would be '{{productName}} lietotāju saite' or 'Saite lietotājiem {{productName}}'.",
+          "description": "The translation 'Saite {{productName}} lietotājiem' is not the most natural or accurate translation of 'Link for {{productName}} users'.  A more suitable translation would be 'Saite lietotājiem {{productName}}' or '{{productName}} lietotāju saite'.",
           "suggestion": "{{productName}} lietotāju saite"
         }
       ],
@@ -184,9 +189,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}} පරිශ්‍රීලකයින් සඳහා සබැඳිය\" is not the most natural or idiomatic translation of \"Link for {{productName}} users.\" While technically correct, it's a bit literal. A more natural phrasing might be something like \"{{productName}} පරිශ්‍රීලකයන් සඳහා සබැඳිය\" or \"{{productName}} පරිශ්‍රීලකයන්ගේ සබැඳිය\".",
-          "suggestion": "{{productName}} පරිශ්‍රීලකයන් සඳහා සබැඳිය"
+          "type": "spelling",
+          "description": "The word 'සබැඳිය' is technically correct for 'link', but 'සබැඳුම' is more commonly used and might sound more natural in this context. It emphasizes a connection or relationship.",
+          "suggestion": "Replace 'සබැඳිය' with 'සබැඳුම'"
         }
       ],
       "approved_at": null
@@ -209,7 +214,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Линк за {{productName}} кориснике' is a literal translation and might not be the most natural way to phrase this in Serbian. A more natural phrasing would be 'Веза за {{productName}} кориснике'. 'Линк' is acceptable, but 'Веза' is more common in this context.",
+          "description": "The translation \"Линк за {{productName}} кориснике\" is a literal translation and may sound unnatural in Serbian. A more natural phrasing would be 'Веза за {{productName}} кориснике' or 'Линк до {{productName}} корисници'.",
           "suggestion": "Веза за {{productName}} кориснике"
         }
       ],

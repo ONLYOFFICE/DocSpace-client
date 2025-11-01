@@ -3,7 +3,7 @@
   "content": "Please select the action:",
   "content_en_sha1_hash": "690f45f13bb9e035ca831a55006b8db7f845025e",
   "created_at": "2025-05-19T21:30:43.643Z",
-  "updated_at": "2025-05-28T09:30:02.220Z",
+  "updated_at": "2025-06-30T12:20:31.195Z",
   "comment": {
     "text": "This translation key is used to display a message prompting the user to select an action when resolving conflicts in a file. It appears in buttons and dialogs related to conflict resolution, guiding users through the process of choosing an appropriate course of action.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 60,
-      "context": "i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}",
+      "line_number": 61,
+      "context": "i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong key=\"component_key\" className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}",
       "module": "/packages/doceditor"
     }
   ],
@@ -105,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"작업 선택:\" while technically correct, is a bit literal. A more natural phrasing might be \"어떤 작업을 선택하시겠습니까?\" or \"원하는 작업을 선택하세요.\" depending on the desired level of formality.",
-          "suggestion": "어떤 작업을 선택하시겠습니까?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -156,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selectați acțiune:' is a literal translation but sounds unnatural in Romanian. The proper phrasing would be 'Vă rugăm să selectați acțiunea:' or 'Alegeți acțiunea:'.",
+          "description": "The translation 'Selectați acțiune:' is a literal translation but sounds unnatural in Romanian. A more natural phrasing would be 'Vă rugăm să selectați acțiunea:' or 'Alegeți acțiunea:'.",
           "suggestion": "Vă rugăm să selectați acțiunea:"
         }
       ],
@@ -171,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ක්‍රියාමාර්ගය' (kriyā mārgaya) is a more formal term for 'action'. While not strictly incorrect, it might be overly formal for this context. Consider a simpler alternative.",
+          "suggestion": "ක්‍රියා තෝරන්න: (kriya thōranna: - Select action)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +195,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Molim vas odaberite akciju:\" is a bit formal and less natural for a user interface prompt. A more conversational and user-friendly option would be preferable.",
-          "suggestion": "Molim odaberite akciju:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

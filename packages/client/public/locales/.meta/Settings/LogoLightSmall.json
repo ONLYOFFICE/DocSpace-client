@@ -2,21 +2,14 @@
   "key_path": "LogoLightSmall",
   "content": "Logo for the portal",
   "content_en_sha1_hash": "68baaa7b0b5bd50156745cdc44b017fbb25007e5",
-  "created_at": "2025-05-19T21:30:51.888Z",
-  "updated_at": "2025-05-21T03:51:29.637Z",
+  "created_at": "2025-06-30T12:20:08.266Z",
+  "updated_at": "2025-06-30T12:20:08.266Z",
   "comment": {
-    "text": "The translation key \"LogoLightSmall\" contains a description used to display the portal logo's name and size in a settings page. It is typically displayed as part of a label or tooltip, providing context about the logo being referenced in the UI.",
-    "is_auto": true,
-    "updated_at": "2025-05-20T09:44:56.557Z"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 203,
-      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoLightSmall\")} ({logoUrls[0].size.width}x\n {logoUrls[0].size.height})\n </Text>\n <div className=\"logos-wrapper\">\n <Logo\n name={logoUrls[0].name}",
-      "module": "/packages/shared"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -27,371 +20,187 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"شعار ترويسة الاستضافة\" does not accurately convey the meaning of \"Logo for the portal\". \"ترويسة الاستضافة\" (header of the hosting) is too specific and doesn't reflect the general meaning of a portal logo.  It implies the logo is specifically for a hosting platform's header, whereas the English content is more general.",
-          "suggestion": "شعار الصفحة الرئيسية (Sha'ar al-Safha ar-Ra'eesiya) - Logo of the homepage / main page.  Or, شعار البوابة (Sha'ar al-bawwata) - Logo of the portal."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Sahə başlığı üçün loqo\" doesn't accurately convey the meaning of \"Logo for the portal\". \"Sahə başlığı\" translates to 'site header' which is not quite the same as 'portal logo'. A more accurate translation would focus on the portal itself.",
-          "suggestion": "Portal üçün loqo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Лого за заглавката на пространството\" doesn't accurately convey the meaning of \"Logo for the portal.\" \"Заглавката на пространството\" translates to 'header of the space' which is not synonymous with 'portal'.",
-          "suggestion": "Лого за портала"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Logo pro záhlaví prostoru' is not an accurate representation of 'Logo for the portal'. 'Záhlaví prostoru' translates to 'header area' which isn't necessarily the meaning of 'portal' in this context. 'Portal' often refers to a gateway or access point.",
-          "suggestion": "A more appropriate translation might be 'Logo pro portál' or 'Portálové logo'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Logo für Kopfzeile des Bereichs' doesn't accurately reflect the meaning of 'Logo for the portal'. 'Kopfzeile des Bereichs' translates to 'header of the area' which is too specific. A more accurate translation would focus on the purpose of the logo (portal identification).",
-          "suggestion": "Logo für das Portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Λογότυπο για την κεφαλίδα του χώρου' is a bit too literal. 'Portal' implies a web portal, and 'κεφαλίδα του χώρου' (header of the space) isn't the most natural way to describe that in Greek. It feels unnecessarily verbose.",
-          "suggestion": "Λογότυπο για την πύλη (or πλατφόρμα) "
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Logo para el encabezado del espacio\" is not an accurate representation of \"Logo for the portal\". While 'encabezado' (header) is close, 'portal' implies a broader concept than just the header. A more accurate translation would depend on the specific context of 'portal', but something like 'Logo para el portal' or 'Logo para la plataforma' would be better.",
-          "suggestion": "Logo para el portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation \"Tilan otsikon logo\" translates to \"Logo of the space title\". This is not an accurate representation of \"Logo for the portal\". It lacks the context of the portal itself.",
-          "suggestion": "Consider a more accurate translation like \"Portaalin logo\" (Portal logo) or \"Sisäänkäyntisivun logo\" (Logo for the entry page)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Logo pour l'en-tête de l’espace' is not an accurate representation of 'Logo for the portal'. 'En-tête' refers to the header, while 'portal' implies the entire platform or entry point. A more accurate translation might be 'Logo pour le portail' or 'Logo du portail'.",
-          "suggestion": "Logo pour le portail"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Լոգո կայքէջի էջագլխի համար\" is a literal translation and not the most natural way to express \"Logo for the portal.\" It implies a logo *for* the header of a webpage, rather than a logo representing the portal itself.",
-          "suggestion": "Consider alternatives like \"Պորտալի լոգո\" (Portal logo) or \"Պորտալի համար լոգո\" (Logo for the portal), depending on the desired level of formality and context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation \"Logo per l'intestazione dello spazio\" is not an accurate translation of \"Logo for the portal\". \"Intestazione dello spazio\" translates to 'header of the space,' which is more specific than 'portal'.",
-          "suggestion": "Logo per il portale"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"スペースのヘッダー用ロゴ\" (Supēsu no header yō logo) translates to \"Logo for the header of the space\". While not entirely wrong, it's more literal than the English \"Logo for the portal.\" A more natural and accurate translation, maintaining the simplicity of the English, would focus on conveying the purpose of the logo.",
-          "suggestion": "ポータル用ロゴ (Pōtaru yō logo) - Logo for the portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '스페이스 헤더 로고' (Space Header Logo) does not accurately reflect the English content 'Logo for the portal'. 'Portal' implies a gateway or online platform, not specifically a 'space header'.",
-          "suggestion": "Consider a translation like '포털 로고' (Portal Logo) or '웹사이트 로고' (Website Logo) to better convey the meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວຂອງ portal \" is too literal and doesn't accurately convey the meaning of 'Logo for the portal'.  'ແກ້ໄຂສ່ວນຫົວ' (editing the header) is unnecessary and adds complexity. It implies an action instead of simply describing the logo's purpose.",
-          "suggestion": "ໂລໂກ້ຂອງ portal"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using 'ຂອງ' (of) is more natural Lao phrasing for possessive connections in this context.",
-          "suggestion": "ໂລໂກ້ຂອງ portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Logotips portāla galvenei' is not an ideal translation of 'Logo for the portal'. While 'Logotips' means 'Logos', 'galvenei' is ambiguous and doesn't clearly convey the 'portal' context.  A more accurate translation would clarify the location or purpose of the logo within the portal.",
-          "suggestion": "Logotips portāla header'im"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation \"Logo voor de koptekst van de ruimte\" does not accurately convey the meaning of \"Logo for the portal\". \"Koptekst van de ruimte\" translates to \"header of the space\" which is not the intended meaning of \"portal\". A portal typically refers to a website or application interface.",
-          "suggestion": "Logo voor het portaal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Logo dla nagłówka portalu\" is too literal and not the most natural way to describe a portal logo in Polish. 'Nagłówek' (header) isn't necessarily the key element the English 'portal' intends to convey. A more suitable translation would focus on the purpose or visibility of the logo.",
-          "suggestion": "Logo portalu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Logo para o cabeçalho do espaço\" is not an accurate or natural translation of \"Logo for the portal.\" \"Cabeçalho do espaço\" translates to 'header of the space' which doesn't convey the meaning of a portal logo.  A more appropriate translation would be something like \"Logo para o portal\" or \"Logo do portal\".",
-          "suggestion": "Logo para o portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Logo para o cabeçalho do espaço' doesn't accurately convey the meaning of 'Logo for the portal'. 'Cabeçalho' means 'header' and 'espaço' means 'space'. The original refers to the portal logo in general, not just the header area.",
-          "suggestion": "Logo para o portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Logo-ul pentru antetul spațiului\" is not an accurate translation of \"Logo for the portal.\" \"Antetul spațiului\" translates to 'header of the space' which is too specific. A more accurate translation would be something like \"Logo pentru portal\" or \"Logo-ul portalului\".",
-          "suggestion": "Logo pentru portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Логотип для шапки портала\" is a bit literal and potentially clunky. 'Шапка' (cap) refers to the header of the portal and isn't always necessary to include. A more natural translation would depend on the context and intended nuance.",
-          "suggestion": "Логотип портала"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'අවකාශයේ ශ්‍රීර්ෂයට ලාංඡනය' (awasayē shrīrshayaṭa lāñchanaya) translates to 'Logo for the header of the space' which is not an accurate reflection of 'Logo for the portal'. The word 'portal' is missing.",
-          "suggestion": "අවකාශයේ පිවිසුමට ලාංඡනය (awasayē pivisumata lāñchanaya) - 'Logo for the portal access'"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'ශ්‍රීර්ෂයට' (shrīrshayaṭa) can be less commonly used in this context. A more common and clearer term might be preferable.",
-          "suggestion": "If possible, consider alternatives to 'ශ්‍රීර්ෂයට' that better convey 'portal' in Sinhala, such as 'පිවිසුමට' (pivisumata)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Logo pre hlavičku priestoru' doesn't accurately convey the meaning of 'Logo for the portal'. 'Hlavička priestoru' translates to 'header of the space' which is not the intended meaning of 'portal logo'. It's too specific and doesn't capture the general 'portal' reference.",
-          "suggestion": "Logo pre portál"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Logotip za glavo prostora\" is not the most natural or accurate translation of \"Logo for the portal.\" \"Glava prostora\" literally means \"head of space\" which isn't representative of a portal's logo. A better translation would focus on the 'portal' aspect.",
-          "suggestion": "Logotip za portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Логотип за просторно заглавље\" doesn't accurately convey the meaning of \"Logo for the portal.\" \"Просторно заглавље\" translates to 'spacious header' which isn't the intended meaning of a logo.",
-          "suggestion": "Лого за портал"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Logotip za prostorno zaglavlje' doesn't accurately convey the meaning of 'Logo for the portal.' 'Prostorno zaglavlje' translates to something like 'spatial header' which isn't the intended meaning. The translation should be more aligned with 'portal logo' or something similar.",
-          "suggestion": "Logotip za portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Alan başlığı için logo' translates to 'Logo for the heading' rather than 'Logo for the portal'. 'Portal' is a more accurate representation of the intended meaning.",
-          "suggestion": "Portal için logo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Логотип заголовка порталу\" is too literal and doesn't quite capture the simplicity of \"Logo for the portal.\" \"Заголовка\" (of the header) adds unnecessary detail. A more natural translation would be something like \"Логотип порталу\" or \"Логотип сайту\".",
-          "suggestion": "Логотип порталу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation 'Logo cho tiêu đề không gian' does not accurately convey the meaning of 'Logo for the portal'. 'Tiêu đề' refers to a header or title, and 'không gian' means space. It's not a suitable translation for a portal logo.",
-          "suggestion": "Logo cho cổng thông tin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"协作空间的标头 Logo\" (Collaboration Space Header Logo) doesn't accurately reflect the meaning of \"Logo for the portal.\" It’s too specific. \"Portal\" suggests a broader platform, not just a collaboration space.",
-          "suggestion": "Consider a more general translation like \"门户网站的 Logo\" (Portal Website Logo) or \"网站 Logo\" (Website Logo)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

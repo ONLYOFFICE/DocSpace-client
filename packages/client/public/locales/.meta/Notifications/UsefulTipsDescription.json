@@ -3,7 +3,7 @@
   "content": "Get useful guides about {{productName}}",
   "content_en_sha1_hash": "04ac5330b45383f4fd3a8bf806312a34a2d970b3",
   "created_at": "2025-05-19T21:30:54.093Z",
-  "updated_at": "2025-05-21T07:32:20.455Z",
+  "updated_at": "2025-08-11T18:11:59.304Z",
   "comment": {
     "text": "\"This translation key is used to describe a notification section on a profile page, providing useful guides related to a specific product. It appears in a sub-component within the 'Notifications' section of a 'Profile' page.\"",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.js",
-      "line_number": 63,
-      "context": "onChange={onChangeEmailSubscription}\n isChecked={usefulTipsSubscription}\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"UsefulTipsDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </div>\n );\n };",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.tsx",
+      "line_number": 77,
+      "context": "isChecked={usefulTipsSubscription}\n dataTestId=\"useful_tips_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"UsefulTipsDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The verb 'Поучавайте' (Pou4aete) translates more accurately as 'Receive' or 'Learn' rather than 'Get'. 'Get' is a very broad term and doesn't convey the nuance of guided instruction.",
-          "suggestion": "Вземайте/Научете полезни напътствия за {{productName}}"
+          "description": "The word 'Поучавайте' (Pou4ayavate) implies receiving something as a lesson or instruction, rather than simply 'get' or 'receive' useful tips. A more accurate translation would convey the idea of obtaining or accessing the tips.",
+          "suggestion": "Получавайте полезни напътствия за {{productName}}"
         }
       ],
       "approved_at": null
@@ -78,8 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"-sta\" at the end of {{productName}} is grammatically incorrect in this context. It indicates possession or origin, which isn't the intended meaning. The translation should reflect that the guides are *about* the product.",
-          "suggestion": "Saa hyödyllisiä oppaita {{productName}}:sta"
+          "description": "The translation 'Saa hyödyllisiä oppaita {{productName}}-sta' is not a natural or accurate translation of 'Get useful guides about {{productName}}'. The '-sta' suffix on {{productName}} doesn't fit the context. It implies origin or possession, which isn't intended.",
+          "suggestion": "Hanki hyödyllisiä oppaita {{productName}}-sta"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Hanki' is an improvement, a more natural translation would be 'Saat hyödyllisiä oppaita {{productName}}' or 'Löydä hyödyllisiä oppaita {{productName}}'.",
+          "suggestion": "Löydä hyödyllisiä oppaita {{productName}}"
         }
       ],
       "approved_at": null
@@ -93,13 +98,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"մասին\" (about) after the product name isn't ideal. It makes the sentence sound like the guides are *about* the product, rather than *for* the product or concerning the product. A more natural translation would imply the guides are specifically for or related to the product.",
-          "suggestion": "Consider alternatives like \"համար\" (for), or a phrasing that directly indicates the guides are *related to* the product. For example: \"Ստացեք օգտակար ուղեցույցներ {{productName}}-ի հետ կապված\" (Get useful guides related to {{productName}})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +116,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Korean translation uses '에 대한' which can sound slightly formal. A more conversational alternative could be used.",
-          "suggestion": "{{productName}}에 도움이 되는 가이드 얻기"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -162,7 +155,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation uses 'Obtenha', which implies obtaining something actively. A more natural and welcoming phrasing for 'Get' in this context would be 'Receba' (receive) or 'Tenha acesso a' (have access to).",
+          "description": "The Portuguese translation 'Obtenha' is a bit formal for this context. A more natural and user-friendly translation would be 'Receba' or 'Consiga'. 'Obtenha' implies a more official or earned acquisition.",
           "suggestion": "Receba guias úteis sobre o {{productName}}"
         }
       ],
@@ -174,13 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'instrucţiuni' (instructions) doesn't quite capture the meaning of 'guides'. 'Guides' suggests helpful tips and advice, not just step-by-step instructions. While not entirely wrong, it's not the best translation.",
-          "suggestion": "Obţineţi sfaturi utile despre {{productName}}"
-        },
-        {
-          "type": "grammar",
-          "description": "The verb form 'Obţineţi' (you obtain - formal plural) implies addressing a group, while the English implies a general offering. If the target audience is singular/informal, 'Obține' should be considered.",
-          "suggestion": "Obține sfaturi utile despre {{productName}}"
+          "description": "The translation 'Obţineţi instrucţiuni utile privind {{productName}}' is a bit too formal for a notification. 'Obține' is more common and conversational.",
+          "suggestion": "Obține instrucțiuni utile despre {{productName}}"
         }
       ],
       "approved_at": null
@@ -196,9 +184,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation '{{productName}} ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න' is a literal translation but might not be the most natural phrasing in Sinhala. A more natural phrasing would emphasize 'learn' or 'discover' rather than simply 'get'.",
+          "suggestion": "{{productName}} පිළිබඳව ප්‍රයෝජනවත් මාර්ගෝපදේශ දැනගන්න"
+        },
+        {
           "type": "formatting",
-          "description": "The Sinhala translation uses a space before the curly braces {{productName}}. While not strictly incorrect, this deviates from common formatting practices. It's generally best to omit the space.",
-          "suggestion": "{{productName}} ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න"
+          "description": "The use of double curly braces '{{productName}}' might be inconsistent with the rest of the application or style guide. Verify if single curly braces are preferred.",
+          "suggestion": "Check application style guide for preferred variable notation."
         }
       ],
       "approved_at": null
@@ -209,8 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Získajte užitočných sprievodcov o {{productName}}' literally translates to 'Get useful guides about {{productName}}'. While understandable, it's slightly awkward. 'Užitočných' is in the genitive case which isn't ideal here. A more natural phrasing would imply 'guides *for* {{productName}}'.",
-          "suggestion": "Získajte užitočné sprievodce {{productName}}"
+          "description": "The Slovak translation 'Získajte užitočných sprievodcov o {{productName}}' literally translates to 'Get useful guides about {{productName}}'. However, it's grammatically awkward. 'Užitočných' (useful - plural genitive) suggests multiple guides, which might not be the intended meaning. The wording doesn't flow naturally in Slovak.",
+          "suggestion": "Získajte užitočné rady o {{productName}}"
         }
       ],
       "approved_at": null
@@ -226,9 +219,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Serbian translation uses the preposition \"о\" (o) which, while grammatically correct, can sound slightly awkward in this context. Using \"за\" (za) would make it sound more natural and flow better.",
-          "suggestion": "Добиј корисне водиче за {{productName}}-у"
+          "type": "incorrect_translation",
+          "description": "The translation \"Добиј корисне водиче о {{productName}}-у\" is grammatically correct, but the phrasing isn't the most natural.  The 'o' construction implies a general topic, which may not be the intended meaning.  A more natural phrasing might convey 'about' or 'regarding' the product.  Consider whether 'regarding' would better suit the intent.",
+          "suggestion": "Добиј корисне водиче у вези са {{productName}}-ом"
         }
       ],
       "approved_at": null
@@ -239,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The preposition 'o' is grammatically correct, but a more natural phrasing in Serbian might use 'za'.",
-          "suggestion": "Dobij korisne vodiče za {{productName}}-u"
+          "description": "The preposition 'o' should be followed by the dative case. Since '{{productName}}' is in the nominative case, 'o' is incorrect.",
+          "suggestion": "Dobij korisne vodiče za {{productName}}."
         }
       ],
       "approved_at": null

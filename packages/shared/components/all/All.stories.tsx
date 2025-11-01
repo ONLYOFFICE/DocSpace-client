@@ -27,8 +27,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 // import { BooleanValue, StringValue } from "react-values";
 
@@ -56,7 +54,7 @@ import { FieldContainer } from "../field-container";
 import { Heading, HeadingSize } from "../heading";
 import { Link, LinkType } from "../link";
 import { Loader, LoaderTypes } from "../loader";
-import { Row } from "../rows";
+import { Row, RowProps } from "../rows";
 import { Scrollbar } from "../scrollbar";
 import { Tabs, TabsTypes } from "../tabs";
 import { Text } from "../text";
@@ -194,7 +192,7 @@ const rowContent = (
 );
 
 let rowCount = 5;
-const rowArray: React.ReactElement[] = [];
+const rowArray: React.ReactElement<RowProps>[] = [];
 while (rowCount !== 0) {
   rowArray.push(rowContent);
   rowCount -= 1;
@@ -451,7 +449,6 @@ const Template = () => (
       <div style={{ padding: "8px 0" }}>
         {/* {rowArray[0]} */}
         {rowArray.map((item, idx) => {
-          // eslint-disable-next-line react/no-array-index-key
           return <div key={`${idx}`}>{item}</div>;
         })}
       </div>

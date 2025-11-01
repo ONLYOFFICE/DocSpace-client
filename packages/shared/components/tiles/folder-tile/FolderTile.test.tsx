@@ -26,7 +26,7 @@
 
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { ContextMenuRefType } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { ContextMenuRefType } from "../../context-menu/ContextMenu.types";
 import { FolderTile } from "./FolderTile";
 import { FolderTileProps } from "./FolderTile.types";
 
@@ -76,29 +76,29 @@ jest.mock("@docspace/shared/components/context-menu-button", () => ({
 }));
 
 jest.mock("@docspace/shared/components/context-menu", () => {
-  const ContextMenuComponent = React.forwardRef(
-    (
-      {
-        model,
-      }: {
-        model?: Array<{ key: string; label: string }>;
-      },
-      ref: React.ForwardedRef<ContextMenuRefType>,
-    ) => {
-      React.useImperativeHandle(ref, () => ({
-        show: jest.fn(),
-        hide: jest.fn(),
-        toggle: jest.fn(),
-        menuRef: { current: null },
-      }));
+  const ContextMenuComponent = ({
+    ref,
+    model,
+  }: {
+    model?: Array<{ key: string; label: string }>;
+  } & {
+    ref: React.RefObject<ContextMenuRefType>;
+  }) => {
+    React.useImperativeHandle(ref, () => ({
+      show: jest.fn(),
+      hide: jest.fn(),
+      toggle: jest.fn(),
+      menuRef: { current: null },
+    }));
 
-      return (
-        <div data-testid="context-menu">
-          {model?.map((item) => <div key={item.key}>{item.label}</div>)}
-        </div>
-      );
-    },
-  );
+    return (
+      <div data-testid="context-menu">
+        {model?.map((item) => (
+          <div key={item.key}>{item.label}</div>
+        ))}
+      </div>
+    );
+  };
   ContextMenuComponent.displayName = "ContextMenu";
   return { ContextMenu: ContextMenuComponent };
 });

@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "Atributi i emrit të grupit",
   "LdapGroupNameAttributeTooltip": "Ju lutem specifikoni atributin e objektit që korrespondon me emrin e grupit.",
   "LdapGroupUserAttributeTooltip": "Futni atributin e objektit të përdoruesit që përdoret për të përcaktuar nëse ky përdorues është anëtar i grupeve.\"",
-  "LdapIntro": "Importoni përdorues dhe grupe nëpërmjet LDAP dhe aktivizoni vërtetimin e përdoruesit përmes hyrjeve/fjalëkalimeve të ruajtura në serverin LDAP. Përdoruesit do të importohen menjëherë pasi të ruhen cilësimet. Përdoruesit e shtuar më vonë do të importohen gjatë vërtetimit të tyre të parë. Nëse dëshironi të siguroni akses vetëm nëpërmjet LDAP, çaktivizoni opsionin për të ftuar anëtarë të rinj të {{productName}} nëpërmjet Kontakteve: <1>{{link}}</1>",
+  "LdapIntegrationDescription": "Importoni përdorues dhe grupe përmes LDAP dhe aktivizoni autentifikimin përmes kredencialeve të ruajtura në serverin LDAP. Përdoruesit do të importohen menjëherë pasi të ruhen cilësimet.\n Përdoruesit e shtuar më vonë do të importohen gjatë autentikimit të tyre të parë. Nëse dëshironi të ofroni akses vetëm përmes LDAP, çaktivizoni opsionin për të ftuar anëtarë të rinj të {{productName}} përmes {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atributi i hyrjes",
   "LdapLoginAttributeTooltip": "Futni atributin e objektit që korrespondon me hyrjen e përdoruesit.",
   "LdapLoginTooltip": "Ju lutemi specifikoni përdoruesin e hyrjes që ka të drejta aksesi për leximin e serverit LDAP.",

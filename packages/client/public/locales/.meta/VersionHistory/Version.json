@@ -3,7 +3,7 @@
   "content": "Ver.",
   "content_en_sha1_hash": "ad13edd94b15126ad9e0d50572bd122fefa36cb1",
   "created_at": "2025-05-19T21:30:49.939Z",
-  "updated_at": "2025-05-28T09:30:02.608Z",
+  "updated_at": "2025-05-26T07:57:32.668Z",
   "comment": {
     "text": "This translation key is used for the string \"Ver.\" which will be displayed as the value of a version number in a plugin info container on the PortalSettings page. It appears as part of a larger description of a plugin's version history.",
     "is_auto": true,
@@ -17,9 +17,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionBadge.js",
-      "line_number": 31,
-      "context": "import React from \"react\";\n import styled, { css } from \"styled-components\";\n import { Text } from \"@docspace/shared/components/text\";\n import { ColorTheme, ThemeId } from \"@docspace/shared/components/color-theme\";\n import VersionSvg from \"PUBLIC_DIR/images/versionrevision_active.react.svg\";\n import { useTranslation } from \"react-i18next\";\n \n const VersionMarkIcon = styled(VersionSvg)`\n path {\n fill: ${(props) =>",
+      "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionBadge/VersionBadge.js",
+      "line_number": 30,
+      "context": "// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import React from \"react\";\n import { Text } from \"@docspace/shared/components/text\";\n import classNames from \"classnames\";\n import VersionSvg from \"PUBLIC_DIR/images/versionrevision_active.react.svg\";\n import { useTranslation } from \"react-i18next\";\n import styles from \"./VersionBadge.module.scss\";\n \n const VersionBadge = ({\n className,",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"الإصدار\" (al-isdar) translates to 'edition' or 'release', which doesn't accurately convey the meaning of \"Ver.\" as an abbreviation for 'Version'.  It's a more formal term than what's likely intended.",
-          "suggestion": "Consider alternatives like \"نسخة\" (nuskha) which means 'version' or 'copy' or even a transliteration like \"فير.\" (feer) if a direct equivalent isn't suitable."
+          "description": "The Arabic translation \"الإصدار\" (al-isdaar) translates to 'edition' or 'release' rather than the abbreviation 'Ver.' which is typically used to denote 'Version'. While 'release' can sometimes be appropriate, it's a more verbose and less common translation for this specific key.",
+          "suggestion": "Consider a more concise translation like \"نسخة\" (nuskha) which means 'version' or 'copy', or potentially an abbreviation like \"إص\" (is) if space is limited and brevity is preferred, but this may require further context."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"に変更\" translates to \"to change\" or \"to modification\" which doesn't accurately reflect the meaning of \"Ver.\" which stands for \"Version\". It doesn't describe an action, but identifies a version number.",
-          "suggestion": "バージョン (ba-jon) - This is the Japanese word for 'version'."
+          "description": "The Japanese translation \"に変更\" doesn't accurately convey the meaning of \"Ver.\", which is short for \"Version\". \"に変更\" translates to \"to change to\" or \"to modify to,\" implying a change from a previous state, which isn't what 'Ver.' represents.",
+          "suggestion": "Consider alternatives like \"Ver.\", \"バージョン\", or \"版\" depending on the context and desired level of formality. \"バージョン\" is a direct transliteration and commonly used for version numbers."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '버전' (beojeon) translates to 'version' in English. While technically not incorrect, it's a full word where the English content is an abbreviation ('Ver.'). It doesn't convey the intended brevity and is likely too literal.",
-          "suggestion": "Consider a shorter, more idiomatic Korean abbreviation for 'Version', if one exists and is commonly used in the context of version history. If an abbreviation isn't appropriate, consider if '버전' is the most concise and suitable option given the overall style."
+          "description": "The English content \"Ver.\" is an abbreviation for \"Version\". The Korean translation \"버전\" is a correct translation of \"Version\", but it doesn't reflect the abbreviation nature of the original English content. While technically correct, it loses the brevity intended by \"Ver.\"",
+          "suggestion": "Consider alternatives like \"Ver.\" (keeping the abbreviation) or a more concise Korean equivalent of 'Version' depending on context."
         }
       ],
       "approved_at": null
@@ -150,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation 'Wer.' does not accurately reflect the meaning of the English 'Ver.'. 'Ver.' is an abbreviation for 'Version'. A more accurate Polish equivalent would be 'Wersja'.",
+          "description": "The Polish translation 'Wer.' is not an accurate translation of 'Ver.'. The correct Polish equivalent for 'Ver.' (as a shortened version of 'Version') would be 'Wersja'. 'Wer.' is a misspelling and doesn't convey the intended meaning.",
           "suggestion": "Wersja"
         }
       ],
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"版本\" (bǎn běn) translates to 'version' in Chinese, not a short form abbreviation like 'Ver.'. It's a complete word representing the entire concept, while 'Ver.' is a shortened version.",
-          "suggestion": "Consider a more appropriate abbreviation like “版” (bǎn) or a translation that accurately reflects the intent of 'Ver.' in context, such as '修订版本' (xiū dìng bǎn běn) for 'Revised Version'."
+          "description": "The translation \"版本\" (bǎnběn) means 'version' in general, but given the key name 'VersionHistory:Version' and the English 'Ver.', a more appropriate and concise translation would be '版'. '版本' is too verbose for what appears to be an abbreviation.",
+          "suggestion": "版"
         }
       ],
       "approved_at": null

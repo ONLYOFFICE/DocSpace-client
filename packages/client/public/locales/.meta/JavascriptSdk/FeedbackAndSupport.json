@@ -3,7 +3,7 @@
   "content": "Feedback&Support",
   "content_en_sha1_hash": "05454b4c029ec2178d01fa798a4b80592499c29e",
   "created_at": "2025-05-19T21:30:54.484Z",
-  "updated_at": "2025-05-21T09:10:01.165Z",
+  "updated_at": "2025-08-04T07:30:01.387Z",
   "comment": {
     "text": "This translation key is used to display a category label in a UI component, specifically in a row container within a settings page, allowing users to toggle the \"Feedback and Support\" feature on or off.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 258,
+      "line_number": 257,
       "context": "<RowContainer>\n <Checkbox label={t(\"Chat\")} onChange={() => {}} isChecked />\n <Text color=\"gray\">({t(\"InLeftPanel\")})</Text>\n </RowContainer>\n <RowContainer>\n <Checkbox label={t(\"FeedbackAndSupport\")} onChange={() => {}} isChecked />\n <Text color=\"gray\">({t(\"InLeftPanel\")})</Text>\n </RowContainer>\n </InterfaceElements>\n <CategorySubHeader>{t(\"AddWatermarks\")}</CategorySubHeader>\n <ControlsGroup>",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Əlaqə\" can translate to 'Contact', 'Feedback&Support' implies more than just contact. It suggests a system for providing feedback and receiving support. \"Dəstək\" translates to 'Support' which is accurate, but 'Əlaqə' doesn't fully capture 'Feedback'.",
-          "suggestion": "Consider a translation that incorporates both feedback and support, such as \"Rəy & Dəstək\" (Rəy means feedback) or \"Geri Bildirim & Dəstək\" (Geri Bildirim means feedback)"
+          "description": "While \"Əlaqə\" can mean \"Contact\", \"Support\" is better translated as \"Dəstək\". \"Əlaqə\" focuses on reaching out, while \"Dəstək\" implies assistance. The English \"Support\" implies assistance, not just contact.",
+          "suggestion": "Consider using \"Kömək & Dəstək\" or \"Yardım & Dəstək\" as alternatives to more accurately convey 'Support'."
         }
       ],
       "approved_at": null
@@ -111,18 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ຄໍາຕິຊົມແລະສະຫນັບສະຫນູນ\" is a literal translation, \"Feedback&Support\" often implies a combined function or area. A more accurate translation might consider a single term capturing both.",
-          "suggestion": "ຄໍາເຫັນແລະສະຫນັບສະຫນູນ (Kham hen lae sap sap nuan) - Opinion and Support"
-        },
-        {
-          "type": "formatting",
-          "description": "The Lao translation uses Lao script which is appropriate, but consistency with other translations (if any) should be verified.",
-          "suggestion": "N/A - Check for overall consistency in script usage."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -170,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ප්‍රතිපෝෂණ\" accurately translates to \"Feedback\", \"හා\" means \"and\" which is already represented in the English original with the '&'. It's more natural to use a different conjunction or restructure the sentence to avoid redundancy. A more natural translation might be 'ප්‍රතිපෝෂණය සහ සහාය'.",
-          "suggestion": "ප්‍රතිපෝෂණය සහ සහාය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -197,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Повратне информације' is a valid translation of 'Feedback', it's a bit formal and lengthy for a UI element like a button or link. A more common and concise option would be 'Обратна повратна информација' or simply 'Коментари'. 'Support' is translated correctly as 'Подршка'.",
-          "suggestion": "Consider using 'Обратна повратна информација' or 'Коментари' instead of 'Повратне информације'."
+          "description": "While \"Повратне информације\" is a valid translation of \"Feedback,\" it's a more formal and verbose option. A more common and concise translation would be \"Обратна повратна информација\" or simply \"Коментари.\" \"Подршка\" is a good translation for \"Support\".",
+          "suggestion": "Consider \"Обратна повратна информација и Подршка\" or \"Коментари и Подршка\"."
         }
       ],
       "approved_at": null
@@ -206,13 +189,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation uses spaces instead of '&' to represent 'and'. While understandable, '&' is often preferred for consistency, especially in technical contexts.",
-          "suggestion": "Consider replacing the space between 'Povratne' and 'Podrška' with '&' for better consistency with the English source."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

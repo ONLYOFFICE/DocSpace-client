@@ -3,7 +3,7 @@
   "content": "Link to fill out form:",
   "content_en_sha1_hash": "ff068cbba5aff27ffaa4fc308414233e7036451b",
   "created_at": "2025-05-19T21:30:57.185Z",
-  "updated_at": "2025-05-28T09:30:02.869Z",
+  "updated_at": "2025-09-07T07:53:15.409Z",
   "comment": {
     "text": "This translation key is used to display a link that prompts users to fill out a form. It appears as part of a completed form and is intended to guide users through the next steps after completing their work. The exact wording may vary depending on the context in which it is displayed, but its purpose remains consistent.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 134,
-      "context": "SocketHelper.off(SocketEvents.StopEditFile, stopEditFileHandler);\n };\n }, [socketUrl, formId]);\n \n const label = useMemo(() => {\n if (isStartFilling) return t(\"CompletedForm:LinkToFillOutForm\");\n \n if (completed) return t(\"CompletedForm:LinkToViewOnlyForm\");\n \n return t(\"CompletedForm:LinkToForm\");\n }, [t, isStartFilling, completed]);",
+      "line_number": 135,
+      "context": "SocketHelper?.off(SocketEvents.StopEditFile, stopEditFileHandler);\n };\n }, [socketUrl, formId]);\n \n const label = useMemo(() => {\n if (isStartFilling) return t(\"CompletedForm:LinkToFillOutForm\");\n \n if (completed) return t(\"CompletedForm:LinkToViewOnlyForm\");\n \n return t(\"CompletedForm:LinkToForm\");\n }, [t, isStartFilling, completed]);",
       "module": "/packages/doceditor"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Formanı doldurmaq üçün link:' is not the most natural or idiomatic way to say 'Link to fill out form:' in Azerbaijani. A more natural translation would be 'Formu doldurmaq üçün keçid:' or 'Formanı tamamlamak üçün link:'",
+          "suggestion": "Formu doldurmaq üçün keçid:"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ձևաթուղթը լրացնելու հղում\" literally translates to \"Link to complete the form.\" While understandable, it's more natural to say \"Հղում ձևաթուղթը լրացնելու համար\" (Link for filling out the form) or a more concise option like \"Ձև լրացնելու հղում\" (Form completion link).",
+          "suggestion": "Հղում ձևաթուղթը լրացնելու համար or Ձև լրացնելու հղում"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'フォームに記入するリンク:' is a bit stiff and unnatural in Japanese. A more natural phrasing would consider context and user experience. For example, using something like 'フォームへのリンク:' or 'フォームを記入するためのリンク:' would be more common and user-friendly.",
+          "suggestion": "フォームへのリンク:"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຄະນະໂອກາດເຕີມແບບຟອມ:\" does not accurately convey the meaning of \"Link to fill out form:\".  'ຄະນະ' generally refers to a committee or board, and 'ໂອກາດ' means opportunity. This combination doesn't translate to 'link'.",
+          "suggestion": "ອ້າຍານເຕີມແບບຟອມ:"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -183,7 +207,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Formu doldurma bağlantısı:' is not the most natural or accurate translation of 'Link to fill out form:'. A more idiomatic translation would be something like 'Formu doldurmak için bağlantı:' or 'Formu doldurabileceğiniz bağlantı:'. The current translation literally translates 'to fill out' which is not common in Turkish in this context.",
+          "suggestion": "Formu doldurmak için bağlantı:"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

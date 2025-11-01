@@ -25,31 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { SaveCancelButtons } from ".";
 import { SaveCancelButtonProps } from "./SaveCancelButton.types";
+import styles from "./SaveCancelButtons.stories.module.scss";
 
+/**
+ * Save and cancel buttons component with reminder text for unsaved changes.
+ *
+ * Features:
+ * - Customizable save and cancel button labels
+ * - Optional reminder text for unsaved changes
+ * - Loading state for save button
+ * - Keyboard navigation support (Enter to save, Escape to cancel)
+ * - Full accessibility support with ARIA attributes
+ * - Responsive design with mobile support
+ */
 const meta = {
   title: "Components/SaveCancelButtons",
   component: SaveCancelButtons,
   parameters: {
-    docs: {
-      description: {
-        component: `
-          Save and cancel buttons component with reminder text for unsaved changes.
-          
-          Features:
-          - Customizable save and cancel button labels
-          - Optional reminder text for unsaved changes
-          - Loading state for save button
-          - Keyboard navigation support (Enter to save, Escape to cancel)
-          - Full accessibility support with ARIA attributes
-          - Responsive design with mobile support
-        `,
-      },
-    },
     a11y: {
       config: {
         rules: [
@@ -115,20 +111,6 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const StyledWrapper = styled.div`
-  position: relative;
-  height: 300px;
-  padding: 20px;
-  background: var(--background-primary);
-
-  .positionAbsolute {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-`;
-
 const Template = ({
   onSaveClick,
   onCancelClick,
@@ -138,18 +120,18 @@ const Template = ({
     typeof window !== "undefined" && window?.location?.href.includes("docs");
 
   return (
-    <StyledWrapper>
+    <div className={styles.wrapper}>
       <SaveCancelButtons
         {...args}
         className={
           isAutoDocs && !args.displaySettings
-            ? `positionAbsolute ${args.className}`
+            ? `${styles.positionAbsolute} ${args.className || ""}`
             : args.className
         }
         onSaveClick={() => onSaveClick?.()}
         onCancelClick={() => onCancelClick?.()}
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@
   "content": "This section will display the forms in progress.",
   "content_en_sha1_hash": "9787e97adb0311eb2060676dcb01b86b91b4e08d",
   "created_at": "2025-05-19T21:30:55.561Z",
-  "updated_at": "2025-06-03T20:59:41.789Z",
+  "updated_at": "2025-09-23T07:24:24.004Z",
   "comment": {
     "text": "\"This section will display the forms in progress.\" \n\nThis text is used to describe the content of an empty folder, indicating that there are active or unfinished forms within. It appears on screens displaying a \"Done\" and \"In Progress\" status for folders, providing context for users navigating through the file system.",
     "is_auto": true,
@@ -11,14 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/EmptyContainer.helper.ts",
-      "line_number": 100,
-      "context": "type: EmptyScreenTypeEnum,\n ) => {\n const translateDescriptionKey: Record<EmptyScreenTypeEnum, string> = {\n [EmptyScreenTypeEnum.Done]: t(\"EmptyFormFolderDoneDescriptionText\"),\n [EmptyScreenTypeEnum.InProgress]: t(\n \"EmptyFormFolderProgressDescriptionText\",\n ),\n [EmptyScreenTypeEnum.Default]: t(\"EmptyFolderDescriptionUser\"),\n [EmptyScreenTypeEnum.Corporate]: t(\"EmptyFolderDecription\"),\n [EmptyScreenTypeEnum.SubFolderDone]: t(\n \"EmptyFormSubFolderDoneDescriptionText\",",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 130,
+      "line_number": 136,
       "context": "return match([parentRoomType, folderType, access])\n .with([P._, FolderType.Done, P._], () =>\n t(\"Files:EmptyFormFolderDoneDescriptionText\"),\n )\n .with([P._, FolderType.InProgress, P._], () =>\n t(\"Files:EmptyFormFolderProgressDescriptionText\"),\n )\n .with([P._, FolderType.SubFolderDone, P._], () =>\n t(\"Files:EmptyFormSubFolderDoneDescriptionText\"),\n )\n .with([P._, FolderType.SubFolderInProgress, P._], () =>",
       "module": "/packages/client"
     }
@@ -57,13 +51,30 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'In diesem Abschnitt werden die Formulare angezeigt, die gerade bearbeitet werden' is a bit literal and not the most natural way to express 'This section will display the forms in progress' in German.  'Forms in progress' implies a dynamic view of forms currently being worked on.  'Gerade bearbeitet werden' emphasizes the act of being edited, which might not be the core message.",
+          "suggestion": "In diesem Abschnitt werden die laufenden Formulare angezeigt."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While not a critical error, 'laufenden Formulare' is a better translation for 'forms in progress' in this context than the current translation. 'Laufend' implies ongoing or current status.",
+          "suggestion": "Use 'laufenden Formulare' for a more idiomatic translation."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Αυτή η ενότητα θα εμφανίσει τις φόρμες που βρίσκονται σε εξέλιξη\" could be improved. While technically correct, a more natural and common phrasing for \"forms in progress\" in a user interface context would be \"οι εκκρεμείς φόρμες\" or \"οι φόρμες υπό επεξεργασία\". \"Εκκρεμείς\" specifically conveys the meaning of pending or incomplete.",
+          "suggestion": "Αυτή η ενότητα θα εμφανίσει τις εκκρεμείς φόρμες."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,7 +92,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cette section affiche les formulaires en cours d'élaboration' doesn't quite capture the meaning of 'This section will display the forms in progress.' 'en cours d'élaboration' implies that the forms are *being created*, whereas the English implies they are in a state of *progress* or *being worked on*.",
+          "suggestion": "Cette section affiche les formulaires en cours de traitement."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,7 +146,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'W danej sekcji będą wyświetlane wszystkie formularze w trakcie wypełniania' is a bit too literal and verbose. 'W trakcie wypełniania' (while filling) is not the most natural way to describe forms in progress. It implies the user is actively filling them out. A more accurate translation would imply that the forms are 'in progress', not necessarily being actively filled.",
+          "suggestion": "W danej sekcji będą wyświetlane formularze w toku."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,19 +170,37 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Această secțiune conține formulare în curs de completare' doesn't quite capture the meaning of 'This section will display the forms in progress.' 'Conține' implies containment, while the English implies display. 'În curs de completare' is a reasonable translation of 'in progress,' but the overall sentence construction is awkward.",
+          "suggestion": "Această secțiune afișează formularele în curs de completare."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'in progress' is better translated as 'незавершенные' (uncompleted) rather than a literal translation of 'in progress'. While 'в процессе' would be technically correct, 'незавершенные' sounds more natural and professional in this context.",
+          "suggestion": "В этом разделе будут отображаться незавершенные формы."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"මෙම කොටසෙහි පුරවමින් පවතින ආකෘතිපත්‍ර පෙන්වනු ඇත.\" is a bit literal and could be improved for naturalness in Sinhala. A more natural phrasing would convey the same meaning more effectively.",
+          "suggestion": "මෙම කොටසේ ඉදිරියේදී සම්පූර්ණ කරන ආකෘතිපත්‍ර පෙන්වනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +218,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Овај одељак ће приказати обрасце у току\" is a very literal translation and sounds somewhat awkward in Serbian. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Овај одељак приказује обрасце у току."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,19 +242,42 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'У цьому розділі відображатимуться форми в процесі заповнення' is a bit literal and could be improved for naturalness. 'В процесі заповнення' (in the process of filling) is somewhat redundant given the context. A more natural translation would emphasize the forms *being worked on* or *currently being processed*.",
+          "suggestion": "У цьому розділі відображатимуться форми, що заповнюються."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Phần này sẽ hiển thị các biểu mẫu đang được tiến hành\" isn't the most natural way to express 'This section will display the forms in progress' in Vietnamese. 'Tiến hành' implies a process is actively being carried out, which isn't necessarily the meaning intended. It sounds a bit awkward.",
+          "suggestion": "Phần này sẽ hiển thị các biểu mẫu đang xử lý."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a major issue, using 'đang xử lý' is slightly more concise and modern compared to the original translation.",
+          "suggestion": "No change needed if prioritizing literal accuracy, but 'đang xử lý' is preferred for better flow."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '此板块会显示处理中的表单' while understandable, doesn't fully capture the meaning of 'in progress'. '处理中' implies processing, but 'in progress' can also mean forms that are being filled out or in a workflow.",
+          "suggestion": "此部分会显示正在进行的表单。"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "File created.",
   "content_en_sha1_hash": "1cbf9d9e44da87617f2a6b43738a8655e9a3d7fb",
   "created_at": "2025-05-19T21:30:54.798Z",
-  "updated_at": "2025-05-28T09:30:02.423Z",
+  "updated_at": "2025-08-04T07:30:01.218Z",
   "comment": {
     "text": "The \"FileCreated\" translation key is used to display a message indicating when a file has been created. It appears in various contexts throughout the application, such as on buttons and dialogues related to file management. Translators should focus on localizing this phrase to provide a clear and intuitive experience for users.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 51,
+      "context": "const count = feed.related.length + 1;\n \n const getFeedTranslation = (): React.ReactNode => {\n switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreated\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 42,
-      "context": ") => {\n const count = feed.related.length + 1;\n \n switch (feed.action.key) {\n case \"FileCreated\":\n return t(\"InfoPanel:FileCreated\");\n case \"FileUploaded\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });",
+      "line_number": 45,
+      "context": ") => {\n const count = feed.related.length + 1;\n \n switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreated\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });",
       "module": "/packages/client"
     },
     {
@@ -117,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fails ir izveidots.' is grammatically correct but lacks the nuance of the English 'File created.' A more natural and commonly used translation would be 'Fails izveidēts.'",
+          "suggestion": "Fails izveidēts."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -150,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Fişier a fost creat.' is not the most natural Romanian phrasing for 'File created.'. While technically correct, a more common and fluent translation would be 'Fișierul a fost creat.'",
+          "description": "The translation \"Fişier a fost creat.\" is a literal translation and doesn't sound natural in Romanian. The correct and more natural phrasing would be \"Fișierul a fost creat.\"",
           "suggestion": "Fișierul a fost creat."
         }
       ],
@@ -168,13 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොනුව සාදා ගන්නා ලදි' is overly verbose and doesn't directly translate 'File created.' It translates closer to 'File is being created.'",
-          "suggestion": "ගොනුව නිර්මාණය කරන ලදි (Gonu nirmanaya karana ladi) - File created/is being created.\nAlternatively, a more concise option would be: ගොනුව නිර්මාණයයි (Gonu nirmanayai) - File created."
+          "description": "The Sinhala translation 'ගොනුව සාදා ගන්නා ලදි' is too verbose and doesn't accurately reflect the simplicity of 'File created.'. It implies a continuous or ongoing creation process, which is not intended.",
+          "suggestion": "ගොනුව නිර්මාණය කරන ලදි."
         },
         {
-          "type": "grammatical",
-          "description": "The use of 'ගන්නා' (gannā) in 'ගොනුව සාදා ගන්නා ලදි' is not typically used in this context.  'සාදා' (sādā) is sufficient to indicate creation.",
-          "suggestion": "Remove 'ගන්නා' - Use 'ගොනුව සාදා ලදි' or 'ගොනුව සාදා ඇත'. However, both of these lack the continuous aspect present in the English."
+          "type": "incorrect_translation",
+          "description": "A more direct and concise translation would be preferred.",
+          "suggestion": "ගොනුව නිර්මිතයි."
         }
       ],
       "approved_at": null
@@ -185,7 +197,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Súbor vytvorený\" is a passive construction that doesn't flow naturally in this context. A more natural phrasing would be \"Vytvorený súbor.\" or \"Nový súbor vytvorený.\"",
+          "description": "The translation 'Súbor vytvorený' is a literal translation, but a more natural Slovak phrasing would be 'Vytvorený súbor.' or 'Nový súbor vytvorený.'  'Súbor vytvorený' sounds slightly awkward.",
           "suggestion": "Vytvorený súbor."
         }
       ],
@@ -203,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Датотека је креирана.' is a literal translation and sounds somewhat formal and clunky in Serbian. A more natural and common phrasing would be 'Фaјл је креиран.' or 'Направљенa дaтотекa.'",
-          "suggestion": "Фaјл је креиран."
+          "description": "The translation 'Датотека је креирана.' is a literal translation of 'File is created'. A more natural and idiomatic Serbian (Cyrillic) translation would be 'Направљена је датотека.' or 'Датотека је снимљена.'.",
+          "suggestion": "Направљена је датотека."
         }
       ],
       "approved_at": null
@@ -233,7 +245,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Đã tạo các tập tin' is too general. 'File created' refers to a single file, not multiple files. 'Các tập tin' implies multiple files.",
+          "description": "The translation 'Đã tạo các tập tin' (Created the files) is too general. The English 'File created' refers to a single file being created, not multiple.",
           "suggestion": "Đã tạo tập tin."
         }
       ],

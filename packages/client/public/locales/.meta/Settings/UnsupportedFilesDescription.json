@@ -3,7 +3,7 @@
   "content": "Some of the backup files are not supported. Click \"Check unsupported files\" to download the list of the unsupported items",
   "content_en_sha1_hash": "8920aec1acfe5e0af4ab26e2a95abe5be8859e34",
   "created_at": "2025-05-19T21:30:53.053Z",
-  "updated_at": "2025-05-28T09:30:02.523Z",
+  "updated_at": "2025-09-07T07:53:15.242Z",
   "comment": {
     "text": "The \"UnsupportedFilesDescription\" translation key is used to display a message when certain backup files are not supported, indicating that users can click on \"Check unsupported files\" to download a list of unsupported items. This message appears in a UI element and provides context for users to understand the issue with their files.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 439,
+      "line_number": 440,
       "context": "percent={100}\n className=\"complete-progress-bar\"\n label={t(\"Common:LoadingIsComplete\")}\n />\n <Text className=\"error-text\">\n {t(\"Settings:UnsupportedFilesDescription\")}\n </Text>\n <Link\n type={LinkType.action}\n isHovered\n fontWeight={600}",
       "module": "/packages/client"
     }
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a colon after 'dəstəklənmir', which is not common in this context. It's more natural to follow with a comma or no punctuation at all.",
-          "suggestion": "Bəzi ehtiyat faylları dəstəklənmir, Dəstəklənməyən elementlərin siyahısını endirmək üçün..."
+          "description": "The Azerbaijani translation uses \"Dəstəklənməyən faylları yoxlayın\" which translates literally to 'Unsupported files check'. It should more closely mirror the English 'Check unsupported files' for consistency and user experience. A more idiomatic translation of 'Check unsupported files' would be 'Dəstəklənməyən faylları yoxlayın'.",
+          "suggestion": "Dəstəklənməyən faylları yoxlayın"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"dəstəklənmir\" is correct for 'not supported', the phrasing \"dəstəklənməyən elementlərin siyahısını endirmək\" is a bit clunky. It translates literally to 'download the list of unsupported elements.' A smoother phrasing would emphasize that the user downloads the list of unsupported files.",
+          "suggestion": "Dəstəklənməyən faylların siyahısını endirmək üçün"
         }
       ],
       "approved_at": null
@@ -45,25 +50,31 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation includes quotes around \"Провери неподдържани файлове\". While technically correct, it's stylistically awkward in Bulgarian UI text. It's better to avoid quotes unless they are integral to the meaning.",
+          "suggestion": "Remove the quotes around 'Провери неподдържани файлове'.  Change from: „Провери неподдържани файлове“ to: Провери неподдържани файлове"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Czech translation uses quotation marks (``) for 'Check unsupported files'. The English uses double quotes (\"). It's important to maintain consistent formatting for UI elements. While not strictly incorrect, adhering to standard double quotes is preferred for consistency.",
-          "suggestion": "Replace `` with \" in the Czech translation: \"Některé záložní soubory nejsou podporovány. Kliknutím na \"Zkontrolovat nepodporované soubory\" stáhnete seznam nepodporovaných položek.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Click \"Check unsupported files\"\" is translated as \"Click \"Nicht unterstützte Dateien markieren\"\". While understandable, \"mark\" doesn't quite capture the intended action of viewing a list. A more accurate translation would be something like \"Klicken Sie auf 'Nicht unterstützte Dateien anzeigen'\" or 'Klicken Sie auf 'Liste der nicht unterstützten Dateien anzeigen'.",
+          "suggestion": "Klicken Sie auf 'Nicht unterstützte Dateien anzeigen' or 'Klicken Sie auf 'Liste der nicht unterstützten Dateien anzeigen'"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -78,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase \"Check unsupported files\" is translated as \"Verificar archivos no compatibles\". While technically correct, it might be more natural to use a phrase like \"Mostrar archivos no compatibles\" or \"Consultar archivos no compatibles\" to better align with common user interface language. \"Verificar\" implies a verification action, while the original English implies viewing a list.",
-          "suggestion": "Consider using \"Mostrar archivos no compatibles\" or \"Consultar archivos no compatibles\" instead of \"Verificar archivos no compatibles\""
+          "description": "The Spanish translation uses \"Verificar archivos no compatibles\" which directly translates to \"Check unsupported files\". While not incorrect, it is less natural than a more descriptive term. A better translation would convey the action of *viewing* the list.",
+          "suggestion": "Consider using a more descriptive phrase like \"Mostrar archivos no compatibles\" or \"Ver lista de archivos no compatibles\"."
         }
       ],
       "approved_at": null
@@ -96,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase \"Vérifiez les fichiers non pris en charge\" could be improved for clarity.  It's a bit clunky.  While technically correct, it reads less naturally.",
-          "suggestion": "Click on \"Afficher la liste des fichiers non pris en charge\" (Display the list of unsupported files)"
+          "description": "The phrase \"Vérifiez les fichiers non pris en charge\" in the French translation lacks a colon after 'Check' like in the English source ('Check unsupported files:').",
+          "suggestion": "Certains fichiers de sauvegarde ne sont pas pris en charge. Cliquez sur Vérifiez les fichiers non pris en charge : pour télécharger la liste des éléments non pris en charge."
         }
       ],
       "approved_at": null
@@ -108,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after \"չեն աջակցվում\" feels slightly abrupt. A more natural flow might involve a connecting word or phrase.",
-          "suggestion": "Consider adding a conjunction like 'և' (and) or a phrase like 'այնպես, որ' (so that) after 'չեն աջակցվում' to improve readability. For example: \"Պահուստային ֆայլերից մի քանիսը չեն աջակցվում, և Սեղմեք...\" or \"Պահուստային ֆայլերից մի քանիսը չեն աջակցվում, այնպես, որ Սեղմեք...\""
+          "description": "The colon after \"չեն աջակցվում\" creates a slightly awkward sentence structure. While grammatically correct, it might flow better without it.",
+          "suggestion": "Պահուստային ֆայլերից մի քանիսը չեն աջակցվում Սեղմեք «Ստուգել չաջակցվող ֆայլերը»՝ չաջակցվող տարրերի ցանկը ներբեռնելու համար"
         }
       ],
       "approved_at": null
@@ -120,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Check unsupported files\" is translated as \"Verifica file non supportati\". While technically correct, \"Verifica\" implies a verification action performed *by the system*. The intended meaning is to *view* the list. A more appropriate translation would be something like \"Visualizza file non supportati\" or \"Elenco file non supportati\".",
-          "suggestion": "Visualizza file non supportati"
+          "description": "The phrase \"Check unsupported files\" has been translated as \"Verifica file non supportati\". While technically correct, it doesn't quite convey the same meaning as the original. \"Check\" implies a process of examining, while \"Verifica\" leans more towards verifying or confirming. A more accurate translation would capture the action of reviewing the list.",
+          "suggestion": "Consider \"Visualizza file non supportati\" or \"Controlla file non supportati\" to better reflect the original intent. "
         }
       ],
       "approved_at": null
@@ -131,9 +142,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"一部のバックアップファイルはサポートされていません\" (Ichibu no bakkuappu fairu wa sapo-to sarete imasen) is a literal translation and sounds slightly unnatural in Japanese. A more natural phrasing would be something like \"一部のバックアップファイルは対応していません\" (Ichibu no bakkuappu fairu wa taiou shite imasen).",
+          "suggestion": "一部のバックアップファイルは対応していません"
+        },
+        {
           "type": "formatting",
-          "description": "The Japanese translation uses a polite request style (\"ください\") which might be overly formal for a user interface element. Consider a more direct imperative or a slightly softened request.",
-          "suggestion": "一部のバックアップファイルはサポートされていません。「サポートされていないファイルの確認」をクリックして、サポートされていない項目のリストをダウンロードできます。"
+          "description": "The phrase \"サポートされていないファイルの確認\" (Sapo-to sarete inai fairu no kakunin) is a bit clunky as a button label. While technically correct, it is long and not very user-friendly.",
+          "suggestion": "サポートされていないファイル"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"サポートされていない項目のリストをダウンロードしてください\" (Sapo-to sarete inai item no risuto o daunro-do shite kudasai) is slightly too polite for a button click action. The 'kudasai' makes it a request, which isn't the best approach for a UI button.",
+          "suggestion": "サポートされていないファイルリストをダウンロード"
         }
       ],
       "approved_at": null
@@ -153,25 +174,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a lowercase 'p' in 'Pārbaudīt', while button names are typically capitalized.",
-          "suggestion": "Pārbaudīt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Dutch translation preserves the button text \"Controleer niet-ondersteunde bestanden\" exactly as it appears in English. While technically correct, it might benefit from a more natural phrasing in Dutch, especially considering the previous sentence uses a slightly different wording. It could be more user-friendly.",
-          "suggestion": "Consider rephrasing the button text to something like \"Bekijk niet-ondersteunde bestanden\" or \"Toon niet-ondersteunde bestanden\" for better flow with the rest of the message."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -189,13 +198,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase \"Verificar arquivos não suportados\" (Check unsupported files) should match the original English phrase's capitalization. It should be \"Verificar arquivos não suportados\"",
-          "suggestion": "Verificar arquivos não suportados"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -203,14 +206,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Verificarea fișierelor care nu sunt acceptate\" is a literal translation of \"Check unsupported files\" and is not the most natural Romanian phrasing. It sounds clunky.",
-          "suggestion": "Consider a more idiomatic translation like \"Verificați fișierele neacceptate\" or \"Consultați lista fișierelor neacceptate\"."
+          "type": "formatting",
+          "description": "The button text \"Verificarea fișierelor care nu sunt acceptate\" is too literal and verbose. It doesn't flow naturally in Romanian.",
+          "suggestion": "Consider a shorter and more user-friendly alternative, such as \"Fișiere neacceptate\" or \"Vezi fișierele neacceptate\"."
         },
         {
-          "type": "formatting",
-          "description": "The translated text uses a capitalized \"Verificarea\" which doesn't align with the English source where the button label 'Check unsupported files' is title case.",
-          "suggestion": "Change \"Verificarea\" to \"Verificați\" to match the button label capitalization.  Alternatively, if the button text is to be changed to be title case, change the English text first."
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, the phrase \"pentru a încărca lista de elemente care nu sunt acceptate\" is a bit awkward. The meaning of 'download' isn't perfectly conveyed.",
+          "suggestion": "Consider using 'pentru a vizualiza lista de elemente neacceptate' or 'pentru a vedea lista de elemente neacceptate' which more closely implies viewing the list rather than downloading it."
         }
       ],
       "approved_at": null
@@ -221,8 +224,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The button text \"Проверьте неподдерживаемые файлы\" is not an exact match to the English \"Check unsupported files\". While the meaning is similar, maintaining consistency is important for UI clarity. A more literal translation would be \"Проверить неподдерживаемые файлы\".",
-          "suggestion": "Проверить неподдерживаемые файлы"
+          "description": "The button text \"Проверьте неподдерживаемые файлы\" should ideally match the English \"Check unsupported files\" more closely in terms of capitalization and phrasing. While understandable, it deviates slightly.",
+          "suggestion": "Consider \"Проверить неподдерживаемые файлы\" or \"Проверка неподдерживаемых файлов\" to better align with the English source."
         }
       ],
       "approved_at": null
@@ -245,8 +248,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase »Preveri nepodprte datoteke« is enclosed in right-pointing double quotes (»), which is not standard Slovenian formatting for button labels or links.  It should typically be in single quotes or no quotes at all.",
-          "suggestion": "Preveri nepodprte datoteke or 'Preveri nepodprte datoteke'"
+          "description": "The use of »Preveri nepodprte datoteke« is unconventional. Quotation marks or a different styling might be more appropriate for UI elements.",
+          "suggestion": "Consider using standard quotation marks or a UI-specific styling for the button label, e.g., \"Preveri nepodprte datoteke\" or using a button style with the text inside."
         }
       ],
       "approved_at": null
@@ -256,9 +259,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'датотека' (datoteka) is technically correct for 'file', but 'фајл' (fajl) is more commonly used and natural-sounding in modern Serbian (especially in a technical context).",
-          "suggestion": "Replace 'датотека' with 'фајл'."
+          "type": "formatting",
+          "description": "The translation uses a mix of sentence casing. It should be consistently lowercase or consistently capitalized.",
+          "suggestion": "Consider lowercasing the entire sentence for consistency: \"Неке од резервних датотека нису подржане. Кликните 'Провери неподржане фајлове' да бисте преузели листу неподржаних ставки.\""
         }
       ],
       "approved_at": null
@@ -266,7 +269,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses quotes (\"\") around the button label \"Proveri nepodržane fajlove\". It's preferable to use angle brackets, especially if the text is rendered in a UI element that requires it.",
+          "suggestion": "Use angle brackets: `<Proveri nepodržane fajlove>` or ensure consistent quote usage (either all double quotes or all angle brackets)."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -275,13 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a formal tone (\"Desteklenmeyen öğelerin listesini indirmek için\") which doesn't match the friendly tone of the English version (\"Click \"Check unsupported files\"\").",
-          "suggestion": "Consider a more conversational tone, such as \"Desteklenmeyen dosyaları kontrol et\" seçeneğine tıklayarak listeyi indirebilirsiniz."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "\"Unsupported files\" is translated as \"Desteklenmeyen dosyaları\", which is accurate but might benefit from clarification depending on the target audience. While accurate, using just \"desteklenmeyen dosyalar\" might not be immediately clear to all users.",
-          "suggestion": "Consider a slight rephrase, such as \"Desteklenmeyen yedekleme dosyalarını kontrol et\" or \"Uyumsuz yedekleme dosyalarını kontrol et\" for greater clarity."
+          "description": "The translation includes an English phrase within the Turkish text: \"Check unsupported files\". This breaks the expectation of a fully translated experience.",
+          "suggestion": "Translate \"Check unsupported files\" to \"Desteklenmeyen dosyaları kontrol et\" or a similar Turkish equivalent. For example: \"Desteklenmeyen öğeleri kontrol et\"."
         }
       ],
       "approved_at": null
@@ -289,13 +293,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Ukrainian translation uses angled brackets « » for the button label, which isn't standard Ukrainian or UI practice. Double quotes \"\" or regular parentheses () are more common.",
-          "suggestion": "Replace «Перевірити непідтримувані файли» with \"Перевірити непідтримувані файли\" or (Перевірити непідтримувані файли)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -307,18 +305,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"不支持的项目列表\" is a slightly unnatural way to say \"list of unsupported items.\" It literally translates to \"list of unsupported items,\" but doesn't flow as naturally in Chinese. A better phrasing would better reflect the original English meaning.",
-          "suggestion": "您可以点击“检查不支持的文件”，下载不支持的文件列表"
-        },
-        {
-          "type": "formatting",
-          "description": "The quotation marks around “检查不支持的文件” might not be the standard or preferred style for this context. Check for consistency with other UI elements.",
-          "suggestion": "Ensure quotation mark style aligns with existing UI conventions."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

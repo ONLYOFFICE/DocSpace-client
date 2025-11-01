@@ -3,7 +3,7 @@
   "content": "Profile",
   "content_en_sha1_hash": "ff4fc0276e960c348647b647235f68200887c9d2",
   "created_at": "2025-05-19T21:30:47.037Z",
-  "updated_at": "2025-05-28T09:30:02.556Z",
+  "updated_at": "2025-09-07T07:53:15.256Z",
   "comment": {
     "text": "This translation key is used for the label of a permission group that corresponds to the OAuth profile. It appears in a UI element related to portal settings and is intended to be displayed as \"Profile\" for users. Translators should provide a localized version of this phrase for their respective languages.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/oauth/index.ts",
-      "line_number": 145,
+      "line_number": 144,
       "context": "return t(\"Common:OAuthFilesName\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n return t(\"Common:OAuthAccountsName\");\n case ScopeGroup.profiles:\n return t(\"Common:OAuthProfilesName\");\n case ScopeGroup.rooms:\n return t(\"Common:OAuthRoomsName\");\n case ScopeGroup.openid:\n return t(\"Common:OAuthOpenidName\");\n default:",
       "module": "/packages/shared"
     }
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຂໍ້ມູນທັງໝົດຂອງເຈົ້າ\" (kh้อมูล thang mot khong jao) translates to 'all your information' or 'all of your data', which is not an accurate translation of 'Profile'. A profile is a summary or representation of a person or entity.",
-          "suggestion": "Consider alternatives like \"ໂປຟາຍ\" (phonetic transliteration - Profai) or a more descriptive phrase that conveys the meaning of a user profile, such as \"ຂໍ້ມູນສ່ວນຕົວ“ (kh้อมูล suan tua - personal information)."
+          "description": "The Lao translation \"ຂໍ້ມູນທັງໝົດຂອງເຈົ້າ\" translates to \"all your data\" or \"all of your information\", which is not an accurate translation of \"Profile\". A profile typically refers to a summary of a user's information, not the data itself.",
+          "suggestion": "A more accurate translation would depend on the specific context. Possible suggestions include: \"ຂໍ້ມູນສ່ວນຕົວ\", \"ຂໍ້ມູນສະມາຊິກ\", \"ລາຍການຂໍ້ມູນ\", or a more contextualized equivalent depending on the platform's terminology."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"个人资料\" (gèrén zīliào) is a common translation for \"Profile\" in many contexts, it might be too literal and a bit formal for OAuth profiles. A more succinct and generally accepted translation within the context of OAuth might be \"档案\" (dāng'àn) or \"用户资料\" (yònghù zīliào). \"档案\" is shorter and conveys the idea of a collection of information.",
-          "suggestion": "Consider using \"档案\" (dāng'àn) or \"用户资料\" (yònghù zīliào)"
+          "description": "'个人资料' is a general term for 'profile' and is often used. However, depending on the context, a more precise translation might be warranted. For example, if it's specifically referring to an OAuth profile, a term like 'OAuth 个人资料' or a more technical equivalent might be preferable for clarity.",
+          "suggestion": "Consider 'OAuth 个人资料' or a more contextually accurate term if the context is specifically OAuth profiles."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Copy window embed code",
   "content_en_sha1_hash": "1b104362c4ad084725d91f21f7a66daf38adfa3b",
   "created_at": "2025-05-19T21:30:54.392Z",
-  "updated_at": "2025-05-21T09:29:06.403Z",
+  "updated_at": "2025-05-24T09:41:16.189Z",
   "comment": {
     "text": "This translation key is used to display a success message when copying embed code in a modal dialog. The text will appear as the header of a modal window and is tied to the \"CopyWindowCode\" label on the UI element that triggers this action, such as a button or copy button.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'نسخ رمز متضمن في النافذة' is a literal translation but doesn't fully capture the nuance of 'Copy window embed code'. A more natural translation would convey the action of obtaining and using the code.",
-          "suggestion": "نسخ كود التضمين للنافذة"
+          "description": "The translation 'نسخ رمز متضمن في النافذة' while understandable, doesn't perfectly capture the nuance of 'Copy window embed code'.  'Embed' specifically refers to code embedded within a window or webpage.  A more precise translation would convey that.",
+          "suggestion": "نسخ كود تضمين النافذة"
         }
       ],
       "approved_at": null
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Pəncərənin kodunu kopyalayın\" is a literal translation of \"Copy window code\" but might not be the most natural or idiomatic way to express the concept in Azerbaijani. It could be improved to be more user-friendly. A more natural phrasing might be something like \"Xəbəri pencərəyə əlavə edin\" or \"Pencərəyə xəbər qoşun\".",
+          "suggestion": "Consider alternatives like \"Xəbəri pencərəyə əlavə edin\" or \"Pencərəyə xəbər qoşun\" to improve user experience."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -54,13 +60,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kopírování kódu pro vložení okna\" is not a precise equivalent of \"Copy window embed code.\" While understandable, \"vložení okna\" (inserting a window) isn't the most accurate representation of \"embed code.\"  \"Embed\" specifically implies the code is used to integrate content within another page or application.",
-          "suggestion": "Kopírování embed kódu okna"
+          "description": "The translation \"Kopírování kódu pro vložení okna\" is not the most natural or precise translation of \"Copy window embed code.\"  \"Vložení\" (insertion) isn't the best way to describe an embed code. The meaning of 'embed' is not well conveyed.",
+          "suggestion": "Kopírování vloženého kódu okna"
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, adding a hyphen could improve readability.",
-          "suggestion": "Kopírování embed-kódu okna"
+          "type": "incorrect_translation",
+          "description": "A more direct and perhaps more user-friendly translation would emphasize copying the code *to use* somewhere else.",
+          "suggestion": "Kopírování kódu pro vložení"
         }
       ],
       "approved_at": null
@@ -74,7 +80,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Αντιγραφή του κώδικα ενσωμάτωσης του παραθύρου' is a bit literal and could be improved for naturalness. 'Window' might be interpreted as the operating system window. While not strictly incorrect, it's not the ideal meaning in this context.",
+          "suggestion": "Αντιγραφή κώδικα ενσωμάτωσης"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -113,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation uses a full-width space after the opening quotation mark. While not strictly incorrect, it's stylistically preferable to use a half-width space for consistency with common practices.",
-          "suggestion": "ウィンドウ の埋め込みコードをコピーする"
+          "description": "The Japanese translation includes a space before the first katakana character 'ウ'.",
+          "suggestion": "ウィンドウの埋め込みコードをコピーする"
         }
       ],
       "approved_at": null
@@ -122,13 +134,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"윈도우 임베드 코드 복사\" can be improved for naturalness and common usage. '임베드' is a direct transliteration and not the most common way to refer to embed code in Korean. A more common and natural phrase would involve using '삽입' (sap-eup, meaning 'insertion' or 'embedding') or '포함' (po-ham, meaning 'inclusion').",
-          "suggestion": "윈도우 삽입 코드 복사"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -136,9 +142,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"ສຳເນົາ\" (sameo) means 'copy', it's not the most natural phrasing in Lao for a UI element like 'Copy'.  'ກ໊ອບ' (kop), borrowed from English, is a more common and immediately understood term in this context. 'ຝັງໜ້າຕ່າງ' (fang na tang) is correct for 'embed'.",
-          "suggestion": "ກ໊ອບລະຫັດຝັງໜ້າຕ່າງ"
+          "type": "spelling",
+          "description": "The word 'ຝັງ' (fang) might be better translated as 'ຝັງໄວ້' (fang vai) or 'ກຽມໄວ້' (kiam vai) to more accurately convey the meaning of 'embed' in this context. While 'ຝັງ' is technically correct, it might sound slightly unnatural.",
+          "suggestion": "ສຳເນົາລະຫັດກຽມໄວ້ໜ້າຕ່າງ"
         }
       ],
       "approved_at": null
@@ -155,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kopieer venster insluitcode\" is technically correct, but \"insluitcode\" is a less common and slightly awkward term in Dutch. A more natural and commonly used term would be \"inbedcode\".",
-          "suggestion": "Kopieer venster inbedcode"
+          "description": "The translation 'Kopieer venster insluitcode' is a literal translation but doesn't fully convey the meaning of 'Copy window embed code'. 'Insluitcode' is technically correct, but 'embed code' is often more readily understood as 'inbedcode' or 'ingebed code' in a Dutch context, especially regarding technical instructions. It feels slightly unnatural.",
+          "suggestion": "Kopieer inbedcode venster"
         }
       ],
       "approved_at": null
@@ -167,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"kod osadzania dla okna\" is a bit clunky and not the most natural Polish phrasing. \"kod wbudowania okna\" or \"kod osadzania okna\" are more common and flow better.",
-          "suggestion": "kod wbudowania okna"
+          "description": "While technically correct, 'osadzania' isn't the most natural word choice for 'embed' in this context. It sounds slightly formal and could be misinterpreted as relating to something being embedded *within* a window, rather than the code to embed a window.",
+          "suggestion": "Skopiuj kod do wstawienia okna"
         }
       ],
       "approved_at": null
@@ -188,13 +194,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Romanian word 'încorporare' is sometimes written as 'încadrare'. While both can be used, 'încorporare' is more common and appropriate in this context.",
-          "suggestion": "Copiere codul de încorporare al ferestrei"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -209,13 +209,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කවුළුවට කාවද්දන කේතයේ පිටපතක්' doesn't accurately convey the meaning of 'Copy window embed code'.  'කවුළුවට කාවද්දන' implies 'embedding to the window,' which isn't what 'copy window embed code' refers to. It suggests embedding code *into* a window, not copying the code itself.",
-          "suggestion": "A more accurate translation would focus on the 'copy' action related to the embed code.  Consider something like 'වින්ඩෝව්‍යේ කේතය පිටපත් කිරීම' (vindowyee ketaya pitapata kirima) - 'copying the window code'."
+          "description": "The translation 'කවුළුවට කාවද්දන කේතයේ පිටපතක්' doesn't accurately convey the meaning of 'Copy window embed code.' It literally translates to 'A copy of the code that embeds in the window,' which is a roundabout and not a direct translation. It lacks the action of 'copying.'",
+          "suggestion": "A more accurate translation would be something like 'වින්ඩෝව్‌ව යෙදවීමේ කේතය පිටපත් කරන්න' (Window embed code copy) or 'වින්ඩෝව్‌ව යෙදවීමේ කේතය ලබා ගන්න' (Get the window embed code)."
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, 'වින්ඩෝව්‍යේ' is a transliteration and might not be the most natural Sinhala phrasing. It depends on the target audience and level of formality.",
-          "suggestion": "Consider if a more established Sinhala term for 'window' exists and is appropriate for the context.  However, this is a stylistic preference and not strictly an error."
+          "type": "grammar",
+          "description": "While grammatically understandable, the word order in 'කවුළුවට කාවද්දන කේතයේ පිටපතක්' feels a little clunky. The verb ' පිටපතක්' (copy) should ideally be closer to the beginning of the sentence for better flow.",
+          "suggestion": "Consider reordering to place the verb closer to the beginning, as suggested in the 'incorrect_translation' suggestion."
         }
       ],
       "approved_at": null
@@ -226,7 +226,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kopírovať kód na vloženie okna' is too literal and doesn't convey the same meaning as 'Copy window embed code.' It sounds awkward in Slovak.  'Embed code' implies a more specific purpose than just 'kód na vloženie'.",
+          "description": "The Slovak translation 'Kopírovať kód na vloženie okna' is a literal translation and doesn't fully capture the nuance of 'Copy window embed code'. 'Embed' implies a more integrated, embedded element. A better translation would be more descriptive of the purpose.",
+          "suggestion": "Kopírovať kód na vloženie okna do stránky"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a strict error, 'Kopírovať kód na vloženie okna do stránky' would benefit from using sentence casing rather than title casing to match typical Slovak sentence structure. Although the phrase 'Kopírovať kód na vloženie okna' itself is acceptable.",
           "suggestion": "Kopírovať kód na vloženie okna do stránky"
         }
       ],
@@ -244,7 +249,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Копирај код за уградњу прозора' doesn't perfectly convey 'Copy window embed code'. 'Уградњу' implies installation/mounting, while 'embed code' refers to code that is integrated into a web page. A better translation would imply integration.",
+          "description": "The translation \"Копирај код за уградњу прозора\" is not the most natural or accurate translation of \"Copy window embed code.\" While technically correct, \"уградњу прозора\" (installation of windows) isn't the intended meaning. 'Embed' implies integrating code into a webpage or application, not installing windows.",
           "suggestion": "Копирај код за уграђивање прозора"
         }
       ],
@@ -256,12 +261,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kopiraj kod za ugradnju prozora\" is not the most accurate reflection of \"Copy window embed code.\" \"Ugradnja\" implies installation, whereas \"embed\" refers to inserting a code snippet for display within a webpage. A more accurate translation would focus on the embed aspect.",
-          "suggestion": "Kopiraj kod za prikaz prozora"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"prikaz\" is better than \"ugradnja,\" a more literal and potentially clearer translation emphasizing the code's purpose would be helpful.",
+          "description": "The translation \"Kopiraj kod za ugradnju prozora\" is not the most accurate or natural translation of \"Copy window embed code.\" \"Ugradnja\" refers to installation, while \"embed\" implies a more integrated, code-snippet-like inclusion. A more accurate translation would convey that.",
           "suggestion": "Kopiraj kod za ubacivanje prozora"
         }
       ],
@@ -270,13 +270,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Pencere gömülü kodunu kopyala' is understandable, a more natural and accurate translation of 'Copy window embed code' would be 'Pencere yerleştirmesi kodunu kopyala' or 'Pencere entegrasyonu kodunu kopyala'. 'Gömülü kodunu' is technically correct but sounds less fluent in this context.",
-          "suggestion": "Pencere yerleştirmesi kodunu kopyala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -291,8 +285,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sao chép mã nhúng cửa sổ\" while generally correct, could be improved for clarity and naturalness. 'Cửa sổ' literally translates to 'window', but in the context of embed code, 'cửa sổ' might be understood as a physical window, not a browser window or iframe. A more appropriate term would convey the sense of a browser window or embedded element.",
-          "suggestion": "Sao chép mã nhúng iframe"
+          "description": "While \"Sao chép mã nhúng cửa sổ\" is understandable, a more natural translation of 'Copy window embed code' would be \"Sao chép đoạn mã nhúng cửa sổ\" or \"Sao chép mã cửa sổ để nhúng\". The addition of 'đoạn' (section/snippet) or clarifying that it's for embedding improves the flow.",
+          "suggestion": "Sao chép đoạn mã nhúng cửa sổ"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Welcome to the Form filling room",
   "content_en_sha1_hash": "09261f81686cc959a160002cbda79de12cf2ddcf",
   "created_at": "2025-05-19T21:30:56.516Z",
-  "updated_at": "2025-06-03T20:59:41.805Z",
+  "updated_at": "2025-09-23T07:24:24.016Z",
   "comment": {
     "text": "This translation key is used for the title displayed on an empty form room screen. It appears as a heading in the UI and provides a welcoming message to the user when the room is not occupied or is an archive folder root.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 265,
+      "line_number": 283,
       "context": "if (isNotAdmin || isArchiveFolderRoot) return t(\"Common:EmptyScreenFolder\");\n \n switch (type) {\n case RoomsType.FormRoom:\n return t(\"EmptyView:FormRoomEmptyTitle\");\n case RoomsType.EditingRoom:\n return t(\"EmptyView:CollaborationRoomEmptyTitle\");\n case RoomsType.PublicRoom:\n return t(\"EmptyView:PublicRoomEmptyTitle\");\n case RoomsType.VirtualDataRoom:",
       "module": "/packages/client"
     }
@@ -57,13 +57,30 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'δωμάτιο' (domatio) is a feminine noun, while 'form filling room' implies a place. The more appropriate word would be 'χώρο' (choro), which means 'space' or 'area'.",
+          "suggestion": "Καλώς ήρθατε στον χώρο συμπλήρωσης φορμών"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using 'στον' instead of 'στην' (which would be required with 'δωμάτιο') would improve flow.",
+          "suggestion": "Καλώς ήρθατε στον χώρο συμπλήρωσης φορμών"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a forward slash (/) to indicate gender. While acceptable in some contexts, it's generally preferred to use separate translations for masculine and feminine forms, or a gender-neutral alternative if appropriate. This could cause rendering or display issues depending on the platform.",
+          "suggestion": "Consider separate translations: 'Bienvenido a la Sala para rellenar formularios' (masculine) and 'Bienvenida a la Sala para rellenar formularios' (feminine). Alternatively, explore gender-neutral phrasing if applicable."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,7 +98,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Բարի գալուստ Ձևաթղթերի լրացման սենյակ' is a literal translation of \"Welcome to the Form filling room\" but lacks the warmth and naturalness of a standard welcome phrase. It sounds overly formal.",
+          "suggestion": "Consider a more natural-sounding welcome phrase like 'Մաղթում ենք Ձեզ Ձևաթղթերի լրացման սենյակ' (Wishing you well in the Form filling room) or 'Добро пожаловать в комнату заполнения форм' (Welcome to the Form filling room - borrowing from Russian, which is often understood in Armenia)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -117,7 +140,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Welkom in de kamer voor het invullen van Formulieren\" is a literal translation that sounds unnatural in Dutch. A more natural phrasing would be \"Welkom in de formulier kamer\" or \"Welkom in de ruimte om formulieren in te vullen\".",
+          "suggestion": "Welkom in de formulier kamer"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,7 +182,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ආයුබෝවන්' is a common greeting but may not be the most appropriate tone for a form filling room. It's a very warm, formal greeting.",
+          "suggestion": "Consider a more neutral greeting like 'ඔන්න!' or 'ආ!' depending on the desired formality. Alternatively, 'සුභ දවස!' (Good day!) could be suitable."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ආකෘති පිරවුම් කාමරයට' translates literally to 'Form filling room', the phrasing might be a bit clunky in Sinhala. A more natural phrasing might be beneficial.",
+          "suggestion": "Consider 'ආකෘතිය පිරවෙන කාමරයට' (to the room where forms are filled) or simply 'ආකෘති කාමරයට' (to the forms room)."
+        },
+        {
+          "type": "formatting",
+          "description": "The punctuation is correct, but ensuring consistency in capitalization is important. While not a major issue, it's worth checking for overall consistency within the application.",
+          "suggestion": "Ensure capitalization follows application style guidelines. (e.g. all caps for titles or sentence case)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +216,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Добродошли у просторију за попуњавање формулара\" is a literal translation that sounds unnatural in Serbian. \"Prostorija\" is rarely used in this context.",
+          "suggestion": "Добродошли у простор за попуњавање формулара"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more natural and concise translation would be more appropriate. \"Prostorija\" carries a formal connotation that doesn't align with the welcoming tone of 'Welcome'.",
+          "suggestion": "Добродошли у простор за попуњавање образаца"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dobrodošli u prostoriju za Popunjavanje formulara' is a literal translation and sounds unnatural in Serbian. 'Popunjavanje formulara' is clunky. A more natural phrasing would be 'soba za popunjavanje obrazaca' or 'soba za unošenje podataka'.",
+          "suggestion": "Dobrodošli u sobu za popunjavanje obrazaca"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +257,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation includes a space before the double quotation mark at the end of the sentence. This is not standard Vietnamese punctuation and should be removed.",
+          "suggestion": "Chào mừng bạn đến với phòng Điền biểu mẫu"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

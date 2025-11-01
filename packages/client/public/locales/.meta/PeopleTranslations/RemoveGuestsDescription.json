@@ -3,7 +3,7 @@
   "content": "Selected guests will be removed from all rooms you have invited them to. This action cannot be undone.",
   "content_en_sha1_hash": "072226a1cb04c58c10506357b750c19bbcbbe35b",
   "created_at": "2025-05-19T21:30:53.506Z",
-  "updated_at": "2025-05-21T05:57:43.082Z",
+  "updated_at": "2025-05-24T06:27:02.919Z",
   "comment": {
     "text": "Selected guests will be removed from all rooms you have invited them to. This action cannot be undone. It is used as a descriptive text in a button within a modal dialog in the \"RemoveGuests\" feature.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'invited them to' is not accurately reflected. A more natural phrasing would be 'dəvət etdiyiniz otaqlarda'.",
-          "suggestion": "Seçilmiş qonaqlar onları dəvət etdiyiniz otaqlarda silinəcək."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -72,13 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"a las que los ha invitado\" is an awkward and overly formal translation of \"you have invited them to.\" A more natural phrasing would improve readability.",
-          "suggestion": "Los invitados seleccionados se eliminarán de todas las habitaciones a las que los hayas invitado."
-        },
-        {
-          "type": "grammar",
-          "description": "The use of 'los hayas invitado' is technically correct but can be slightly improved for fluency.",
-          "suggestion": "Los invitados seleccionados se eliminarán de todas las habitaciones a las que hayas invitado."
+          "description": "The phrasing 'a las que los ha invitado' is awkward and not the most natural way to say 'you have invited them to'. It's overly formal and passive.",
+          "suggestion": "Los invitados seleccionados se eliminarán de todas las salas a las que los has invitado, or Los invitados seleccionados se eliminarán de todas las salas donde los has invitado."
         }
       ],
       "approved_at": null
@@ -95,7 +84,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'dans lesquelles vous les avez invités' is overly literal and less natural in French. A more idiomatic translation would use a construction indicating invitation.",
+          "description": "The phrase \"dans lesquelles vous les avez invités\" is a bit clunky and not the most natural way to express \"invited them to.\" A more fluent translation would use a more direct phrasing.",
+          "suggestion": "Les invités sélectionnés seront retirés de toutes les salles où vous les avez invités."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrase 'où vous les avez invités' flows better than 'dans lesquelles vous les avez invités'.",
           "suggestion": "Les invités sélectionnés seront retirés de toutes les salles où vous les avez invités."
         }
       ],
@@ -119,13 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"招待したゲスト\" (shoutai shita gesuto) appears twice, which is slightly redundant. While not grammatically incorrect, it can be more concise. The English 'Selected guests' implies the action of inviting is already understood.",
-          "suggestion": "ゲストは、あなたが招待したすべてのルームから削除されます。この操作は元に戻すことはできません。"
+          "description": "The phrase \"あなたが招待したすべてのルームから\" (that you invited to all rooms) is slightly awkward and redundant. While technically correct, it's not the most natural way to express the idea in Japanese. It repeats the verb 'invited'.",
+          "suggestion": "招待したすべてのルームから (to all rooms you invited to)"
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using a more natural sentence structure could improve readability. The phrasing is a little formal for a potentially user-facing message.",
-          "suggestion": "招待したゲストを、招待しているすべてのルームから削除します。この操作は元に戻せません。"
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, the overall tone feels slightly formal and verbose for a user-facing message. It lacks the directness and clarity common in UI copy.",
+          "suggestion": "招待したゲストは、すべてのルームから削除されます。元に戻すことはできません。"
         }
       ],
       "approved_at": null
@@ -136,13 +130,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"초대한 모든 방에서\" (invited to all rooms) is slightly unnatural in this context. While technically correct, a more natural phrasing would be something like \"초대했던 모든 방에서\" (from all rooms you invited them to) or a more concise phrasing that emphasizes removal from the invitation.",
-          "suggestion": "선택된 게스트가 초대했던 모든 방에서 제거됩니다."
+          "description": "The translation \"선택된 게스트가 초대한 모든 방에서 제거됩니다\" is a literal translation that doesn't fully capture the intended meaning. '초대한' (invited) implies the user invited the guests, but the English implies the user *has* invited them. It's about rooms *the user* invited them to.",
+          "suggestion": "선택된 게스트가 사용자가 초대한 모든 방에서 제거됩니다. (Selected guests will be removed from all rooms *the user* invited them to.)"
         },
         {
           "type": "formatting",
-          "description": "While not a critical issue, consider adding a more natural pause or slight grammatical shift to improve readability.  The current phrasing feels a bit abrupt. ",
-          "suggestion": "선택된 게스트는 초대했던 모든 방에서 제거됩니다. 이 작업은 취소할 수 없습니다."
+          "description": "While not a critical error, a more natural Korean sentence structure might improve readability. Consider reordering elements for better flow.",
+          "suggestion": "사용자가 초대한 모든 방에서 선택된 게스트가 제거됩니다. (Selected guests will be removed from all rooms that the user has invited them to.)"
         }
       ],
       "approved_at": null
@@ -152,9 +146,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "Space missing after 'ກະ'",
-          "suggestion": "ບັນແຍກແຂກຄົນເດັ່ນອອກຈາກຫ້ອງທັງໝົດທີ່ທ່ານເຊີນພວກເຂົາເຂົ້າໄປ. ການກະ ທຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້."
+          "type": "spelling",
+          "description": "The Lao word 'ກະ' is incorrectly spelled. It should be 'ກໍ'.",
+          "suggestion": "ບັນແຍກແຂກຄົນເດັ່ນອອກຈາກຫ້ອງທັງໝົດທີ່ທ່ານເຊີນພວກເຂົາເຂົ້າໄປ. ການກະກໍ ທຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້."
         }
       ],
       "approved_at": null
@@ -192,13 +186,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"sălile\" (rooms) could be more accurately translated as \"camerelor\" to reflect the genitive case, indicating the rooms *to which* the guests were invited.",
-          "suggestion": "Invitații selectați vor fi eliminați din toate camerele la care au fost invitați."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -213,13 +201,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"තෝරාගත් ආරාධිතයින් ඔබ ආරාධිත කළ සියලු කාමරවලිනුත් ඉවත් කරනු ලැබේ\" is a bit wordy and less natural-sounding Sinhala. A more natural phrasing would be \"තෝරාගත් ආරාධිතයින් ඔබ ආරාධිත සියළුම කාමරවලින් ඉවත් කෙරේ\"",
-          "suggestion": "තෝරාගත් ආරාධිතයින් ඔබ ආරාධිත සියළුම කාමරවලින් ඉවත් කෙරේ"
+          "description": "The translation 'ඔබ ආරාධිත කළ සියලු කාමරවලිනුත්' is a bit awkward. While technically correct, it's not the most natural way to express 'all rooms you have invited them to'.",
+          "suggestion": "ඔබ ඇමතූ සියලුම කාමරවලිනුත්"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"මෙම ක්‍රියාව අහෝසි කළ නොහැකි වනු ඇත\" is grammatically correct but a bit formal and less common in contemporary Sinhala. A more conversational alternative would be \"මෙය අවලංගු කළ නොහැක\" or \"దీనిని අවලංගු చేయలేము\".",
-          "suggestion": "මෙය අවලංගු කළ නොහැක"
+          "description": "The word 'අහෝසි කළ නොහැකි' is a bit formal and verbose for the context. While understandable, a simpler equivalent would be preferred.",
+          "suggestion": " නැවත සිදු කළ නොහැකි"
         }
       ],
       "approved_at": null
@@ -248,13 +236,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izabrani gosti biće uklonjeni iz svih prostorija u koje ste ih pozvali' is a bit literal and sounds unnatural. 'Prostorija' implies a room with walls, not necessarily a 'room' in the context of an invitation (e.g., a meeting, a booking).",
-          "suggestion": "Izabrani gosti biće uklonjeni iz svih rezervacija/pozivnica u koje ste ih dodali. (or similar phrasing reflecting the context)"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure is a bit clunky. It could be improved for better flow.",
-          "suggestion": "Izabrani gosti biće uklonjeni iz svih rezervacija/pozivnica u koje ste ih dodali."
+          "description": "The term 'prostorija' (room) in the Serbian translation might be too formal or specific for the context of an invitation. It implies a physical room, whereas it could refer to a booking or event.",
+          "suggestion": "Consider using a more general term like 'rezervacija' (reservation) or 'dogadjaj' (event) if the context is digital or less formal. Alternatively, 'mesta' (places) could work well."
         }
       ],
       "approved_at": null
@@ -265,8 +248,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Selected guests' is not accurately translated. 'Seçilen konuklar' is literally 'Selected guests', but a more natural phrasing would be something like 'Seçtiğiniz konuklar'.",
-          "suggestion": "Seçtiğiniz konuklar davet ettiğiniz tüm odalardan kaldırılacak. Bu eylem geri alınamaz."
+          "description": "The English phrase 'Selected guests will be removed' is better translated as something more active and understandable in Turkish. 'Kaldırılacak' implies passive removal, which isn't the most natural way to convey the action. A more accurate translation would suggest that *you* are removing the guests.",
+          "suggestion": "Seçilen konuklar, davet ettiğiniz odalardan siz kaldıracaksınız."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Bu eylem geri alınamaz' is technically correct, it's overly formal and clunky for this context. A more conversational and user-friendly translation would be better.",
+          "suggestion": "Bu işlem geri alınamaz."
         }
       ],
       "approved_at": null

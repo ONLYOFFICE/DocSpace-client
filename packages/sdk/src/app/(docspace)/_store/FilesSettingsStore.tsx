@@ -52,8 +52,9 @@ export const FilesSettingsStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const store = React.useMemo(() => new FilesSettingsStore(), []);
   return (
-    <FilesSettingsStoreContext.Provider value={new FilesSettingsStore()}>
+    <FilesSettingsStoreContext.Provider value={store}>
       {children}
     </FilesSettingsStoreContext.Provider>
   );

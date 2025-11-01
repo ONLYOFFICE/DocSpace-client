@@ -25,8 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
+
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
+
+import { globalColors } from "../../../themes";
 
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -38,17 +42,13 @@ import {
   InputSize,
 } from "../../../components/text-input";
 import { Button, ButtonSize } from "../../../components/button";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { NotAvailable } from "./NotAvailable";
-import {
-  StyledHeader,
-  StyledWhiteLabelInput,
-  StyledCrossIcon,
-} from "./WhiteLabel.styled";
 import { IHeaderProps } from "./WhiteLabel.types";
+import styles from "./WhiteLabel.module.scss";
 
 export const WhiteLabelHeader = ({
-  t,
   showNotAvailable,
   isSettingPaid,
   standalone,
@@ -58,24 +58,25 @@ export const WhiteLabelHeader = ({
   onChange,
   onClear,
 }: IHeaderProps) => {
-  const theme = useTheme();
+  const { t } = useTranslation("Common");
+  const { isBase } = useTheme();
 
   return (
-    <StyledHeader>
-      {showNotAvailable ? <NotAvailable t={t} /> : null}
-      <div className="header-container">
+    <div className={styles.header}>
+      {showNotAvailable ? <NotAvailable /> : null}
+      <div className={classNames(styles.headerContainer, "header-container")}>
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
 
         {!isSettingPaid && !standalone ? (
           <Badge
-            className="paid-badge"
+            className={classNames(styles.paidBadge, "paid-badge")}
             fontWeight="700"
             label={t("Common:Paid")}
             isPaidBadge
             backgroundColor={
-              theme.isBase
+              isBase
                 ? globalColors.favoritesStatus
                 : globalColors.favoriteStatusDark
             }
@@ -83,19 +84,25 @@ export const WhiteLabelHeader = ({
         ) : null}
       </div>
 
-      <div className="wl-helper">
+      <div className={classNames(styles.wlHelper, "wl-helper")}>
         <Text
-          className="wl-subtitle wl-helper-label settings_unavailable"
+          as="div"
+          className={classNames(
+            styles.wlSubtitle,
+            styles.wlHelperLabel,
+            "wl-helper-label settings_unavailable",
+          )}
           fontSize="13px"
         >
           {t("WhiteLabelSubtitle")}
           <HelpButton
             tooltipContent={
-              <Text fontSize="12px">{t("WhiteLabelTooltip")}</Text>
+              <Text fontSize="12px">{t("Common:WhiteLabelTooltip")}</Text>
             }
             place="right"
             offsetRight={0}
             className="settings_unavailable"
+            dataTestId="white_label_helper_button"
           />
         </Text>
       </div>
@@ -108,10 +115,14 @@ export const WhiteLabelHeader = ({
           className="settings_unavailable field-container"
           labelVisible
         >
-          <StyledWhiteLabelInput isShowCross={!!logoTextWhiteLabel}>
+          <div
+            className={classNames(styles.whiteLabelInput, {
+              [styles.showCross]: !!logoTextWhiteLabel,
+            })}
+          >
             <TextInput
               testId="logo-text-input"
-              className="logo-text input"
+              className={classNames(styles.input, "input")}
               placeholder={t("YourLogo")}
               value={logoTextWhiteLabel}
               onChange={onChange}
@@ -124,14 +135,18 @@ export const WhiteLabelHeader = ({
               withBorder={false}
             />
 
-            <div className="append" onClick={onClear}>
-              <StyledCrossIcon />
+            <div
+              className={styles.append}
+              onClick={onClear}
+              data-testid="white_label_input_clear"
+            >
+              <CrossIcon />
             </div>
-          </StyledWhiteLabelInput>
+          </div>
           <Button
             testId="generate-logo-button"
             id="btnGenerateLogo"
-            className="generate-logo"
+            className={styles.generateLogo}
             size={ButtonSize.small}
             label={t("GenerateLogoButton")}
             onClick={onUseTextAsLogo}
@@ -139,6 +154,6 @@ export const WhiteLabelHeader = ({
           />
         </FieldContainer>
       </div>
-    </StyledHeader>
+    </div>
   );
 };

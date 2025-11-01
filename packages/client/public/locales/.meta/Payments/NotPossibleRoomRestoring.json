@@ -3,7 +3,7 @@
   "content": "Restoring this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "content_en_sha1_hash": "e5523aeaf0421937a5b76919eb1ee7bf877a3947",
   "created_at": "2025-05-19T21:30:53.708Z",
-  "updated_at": "2025-05-21T06:33:09.417Z",
+  "updated_at": "2025-05-24T06:47:38.780Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that restoring a room is not possible due to reaching the limit of rooms in the current plan. It appears in a dialog component, specifically on the RoomsContent sub-component, where it informs users about quota limitations for creating new rooms.",
     "is_auto": true,
@@ -129,18 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'uma vez que' while grammatically correct, can sound a bit formal or stiff in this context. A more natural phrasing would be more conversational.",
-          "suggestion": "Não é possível restaurar este quarto porque o limite do número de quartos incluídos no seu plano atual foi atingido."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is a bit long. Breaking it into two sentences might improve readability.",
-          "suggestion": "Não é possível restaurar este quarto. O limite do número de quartos incluídos no seu plano atual foi atingido."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -164,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'සීමාව' (seemawa) is spelled correctly, but its usage in this context could be slightly improved for better clarity. It directly translates to 'limit' but in conversational Sinhala, a slightly more natural wording might be preferred.",
-          "suggestion": "Consider rephrasing the phrase to something like 'ඔබගේ වත්මන් සැලැස්මට හැකිවන කාමර සංඛ්‍යාව සම්පූර්ණ වී ඇති බැවින්' (Obage vathman selansemtakiwath kamar sankhyawa sampurna ve athi bein) - 'The number of rooms possible under your current plan is complete.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -188,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'просторије' (prostoriye) is used instead of 'соби' (sobi). While 'просторије' can refer to rooms, 'соби' is more natural and specific in this context referring to a single room.",
-          "suggestion": "Обнављање ове собе није могуће јер је достигнут лимит за број соба укључених у ваш тренутни план."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -227,13 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Restoring this room' is not directly equivalent to '恢复此房间'. '恢复' implies a full restoration to a previous state. A better translation might convey 're-enabling' or 'making this room available again'.",
-          "suggestion": "由于当前费用版本的房间数量已达上限，因此无法使此房间重新可用。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While '费用版本' is understandable, it's not the most natural way to translate 'current plan'. A more common and clearer term would be '订阅套餐'.",
-          "suggestion": "由于当前订阅套餐的房间数量已达上限，因此无法使此房间重新可用。"
+          "description": "The phrase \"current plan\" is translated as \"当前费用版本\". While technically correct, it's a bit formal and might confuse users. A more user-friendly translation would be \"当前套餐\" or \"当前订阅\".",
+          "suggestion": "考虑使用“当前套餐”或“当前订阅”代替“当前费用版本”。"
         }
       ],
       "approved_at": null

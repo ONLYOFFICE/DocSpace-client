@@ -3,7 +3,7 @@
   "content": "Permissions",
   "content_en_sha1_hash": "d06d55570938d12f87db3bf2b48caa9de22d9c67",
   "created_at": "2025-05-19T21:30:47.333Z",
-  "updated_at": "2025-06-24T16:31:24.421Z",
+  "updated_at": "2025-09-29T11:30:44.311Z",
   "comment": {
     "text": "This translation key is used to display the label \"Permissions\" in a UI context, specifically in a Create API Key Dialog. It is part of a larger dialog that allows users to manage API keys, and this translation key enables the user to select specific permissions for their API key.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 432,
-      "context": "scale\n />\n </div>\n <div className=\"api-key_name\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:Permissions\")}\n </Text>\n <Tabs\n type={TabsTypes.Secondary}\n items={tabsItems}\n onSelect={onSelectPermission}",
+      "line_number": 393,
+      "context": "testId=\"secret_key_name_input\"\n />\n </div>\n <div className=\"api-key_name\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:Permissions\")}\n </Text>\n <Tabs\n hotkeysId=\"apiKeys\"\n type={TabsTypes.Secondary}\n items={tabsItems}",
       "module": "/packages/client"
     },
     {

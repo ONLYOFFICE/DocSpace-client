@@ -24,14 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { Tabs } from ".";
 import { TabsTypes } from "./Tabs.enums";
 import { TTabItem } from "./Tabs.types";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 // Mock IntersectionObserver
 const mockIntersectionObserver = jest.fn();
@@ -71,44 +69,54 @@ const arrayItems: TTabItem[] = [
 
 describe("Tabs", () => {
   it("renders without errors", () => {
-    const { container } = renderWithTheme(<Tabs items={arrayItems} />);
+    const { container } = render(
+      <Tabs items={arrayItems} selectedItemId="tab1" />,
+    );
     expect(container).toBeInTheDocument();
   });
 
   it("renders all tab items", () => {
-    renderWithTheme(<Tabs items={arrayItems} />);
+    render(<Tabs items={arrayItems} selectedItemId="tab1" />);
     expect(screen.getByText("Title1")).toBeInTheDocument();
     expect(screen.getByText("Title2")).toBeInTheDocument();
   });
 
   it("shows correct content for selected tab", () => {
-    renderWithTheme(<Tabs items={arrayItems} selectedItemId="tab1" />);
+    render(<Tabs items={arrayItems} selectedItemId="tab1" />);
     const labels = screen.getAllByText("LABEL");
     expect(labels).toHaveLength(3);
   });
 
   it("applies correct styles for primary tabs", () => {
-    const { container } = renderWithTheme(
-      <Tabs items={arrayItems} type={TabsTypes.Primary} />,
+    const { container } = render(
+      <Tabs
+        items={arrayItems}
+        type={TabsTypes.Primary}
+        selectedItemId="tab1"
+      />,
     );
     expect(container.querySelector(".primary")).toBeInTheDocument();
   });
 
   it("applies correct styles for secondary tabs", () => {
-    const { container } = renderWithTheme(
-      <Tabs items={arrayItems} type={TabsTypes.Secondary} />,
+    const { container } = render(
+      <Tabs
+        items={arrayItems}
+        type={TabsTypes.Secondary}
+        selectedItemId="tab1"
+      />,
     );
     expect(container.querySelector(".secondary")).toBeInTheDocument();
   });
   it("shows badge when provided", () => {
     const itemsWithBadge = [{ ...arrayItems[0], badge: "New" }, arrayItems[1]];
-    renderWithTheme(<Tabs items={itemsWithBadge} />);
+    render(<Tabs items={itemsWithBadge} selectedItemId="tab1" />);
     expect(screen.getByText("New")).toBeInTheDocument();
   });
 
   it("applies sticky styles when stickyTop is provided", () => {
-    const { container } = renderWithTheme(
-      <Tabs items={arrayItems} stickyTop="50px" />,
+    const { container } = render(
+      <Tabs items={arrayItems} stickyTop="50px" selectedItemId="tab1" />,
     );
     const stickyElement = container.querySelector(".sticky");
     expect(stickyElement).toHaveStyle({ top: "50px" });

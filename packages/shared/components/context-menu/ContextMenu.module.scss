@@ -1,9 +1,16 @@
-@import "../../styles/variables/colors";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/variables/colors";
 
-@import "../../styles/mixins";
+@use "../../styles/mixins";
 
 .contextMenu {
+  :global(.rtl) {
+    --context-menu-header-text-margin: 0 8px 0 0;
+    --context-menu-submenu-list-margin: -4px;
+
+    --context-menu-submenu-transoform: scaleX(-1);
+    --context-menu-submenu-transoform-box: content-box;
+  }
+
   :global {
     .p-contextmenu {
       position: absolute;
@@ -43,7 +50,7 @@
       background: none;
       outline: 0 !important;
 
-      -webkit-tap-highlight-color: #{$tap-highlight};
+      -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
       .icon-wrapper {
         display: flex;
@@ -75,7 +82,7 @@
         text-transform: none;
         text-decoration: none;
 
-        @include no-user-select;
+        @include mixins.no-user-select;
       }
     }
 
@@ -97,7 +104,7 @@
       -moz-box-shadow: var(--context-menu-box-shadow);
       -webkit-box-shadow: var(--context-menu-box-shadow);
 
-      @include truncate;
+      @include mixins.truncate;
 
       margin-top: -4px;
 
@@ -116,11 +123,11 @@
       padding: 0 16px;
       background: none;
 
-      @include no-user-select;
+      @include mixins.no-user-select;
 
       outline: 0 !important;
 
-      -webkit-tap-highlight-color: #{$tap-highlight};
+      -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
       font-size: 13px;
       font-weight: 600;
@@ -142,6 +149,10 @@
           background-color: var(--sub-menu-item-disabled-background-color);
         }
       }
+    }
+
+    .p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link {
+      background-color: var(--sub-menu-item-hover-background-color);
     }
 
     .p-contextmenu .p-menuitem-text {
@@ -170,13 +181,13 @@
       width: fit-content;
       min-width: inherit;
 
-      @include truncate;
+      @include mixins.truncate;
     }
 
     .p-contextmenu .scroll-body .p-menuitem {
       margin-inline-end: -17px !important;
 
-      @include mobile {
+      @include mixins.mobile {
         margin-inline-end: -8px !important;
       }
     }
@@ -201,6 +212,12 @@
         }
       }
       margin-inline-end: 8px;
+    }
+
+    .p-portal-icon {
+      cursor: pointer;
+      margin-inline-start: 12px;
+      margin-inline-end: 0px;
     }
 
     .p-contextmenu-enter {
@@ -229,13 +246,13 @@
     }
 
     .p-contextmenu {
-      @include not-mobile {
+      @include mixins.not-mobile {
         max-width: calc(100vw - 32px);
       }
     }
 
     .p-contextmenu ul {
-      @include not-mobile {
+      @include mixins.not-mobile {
         max-width: calc(100vw - 32px);
       }
     }
@@ -307,7 +324,7 @@
   &.changeView {
     :global {
       .p-contextmenu {
-        @include mobile {
+        @include mixins.mobile {
           position: fixed;
           width: 100vw;
           max-width: 100vw;
@@ -363,6 +380,11 @@
   }
 
   &:not(.noHover):hover {
+    background-color: var(--sub-menu-item-hover-background-color);
+  }
+
+  /* Keep root item highlighted while submenu is open */
+  &.p-menuitem-active:not(.noHover) {
     background-color: var(--sub-menu-item-hover-background-color);
   }
 

@@ -3,7 +3,7 @@
   "content": "Delayed payment of the {{planName}} plan dated {{date}}",
   "content_en_sha1_hash": "ced943efb69a32823d862e2dee47830da6f911b3",
   "created_at": "2025-05-19T21:30:53.681Z",
-  "updated_at": "2025-05-21T06:41:18.198Z",
+  "updated_at": "2025-08-12T19:46:26.223Z",
   "comment": {
     "text": "This translation key is used to display a warning message about delayed payments for a specific plan, including the plan name and date. It appears in the UI as part of payment information on a portal settings page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 253,
+      "line_number": 238,
       "context": "fontSize=\"16px\"\n isBold\n className=\"payment-info_grace-period\"\n color={theme.client.settings.payment.warningColor}\n >\n <Trans t={t} i18nKey=\"DelayedPayment\" ns=\"Payments\">\n {{ date: paymentDate }} {{ planName: currentTariffPlanTitle }}\n </Trans>\n </Text>\n );\n }",
       "module": "/packages/client"
     }
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"تأجيل دفع الخطة {{planName}} المؤرخة في {{date}}\" is not the most natural or accurate translation of 'Delayed payment of the {{planName}} plan dated {{date}}'. A more natural phrasing would be something like 'تأخر في دفع خطة {{planName}} بتاريخ {{date}}'.",
-          "suggestion": "تأخر في دفع خطة {{planName}} بتاريخ {{date}}."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, the use of \"المؤرخة في\" (al-mu'arrakha fi) feels slightly formal and less common in everyday language. Using \"بتاريخ\" (bi tarikh) is more natural for indicating a date.",
-          "suggestion": "Replace \"المؤرخة في\" with \"بتاريخ\"."
+          "description": "The phrase \"تأجيل دفع\" (ta'jeel daf') literally translates to 'delaying payment'. While understandable, a more natural and common phrasing for 'delayed payment' in Arabic (Saudi Arabia) would be something like \"دفع متأخر\" (dafa' muta'akhkhir) or \"تأخر في الدفع\" (ta'akhkhar fi al-daf'). \"تأجيل دفع\" implies an active decision to postpone payment.",
+          "suggestion": "Consider using \"دفع متأخر\" (dafa' muta'akhkhir) or \"تأخر في الدفع\" (ta'akhkhar fi al-daf')."
         }
       ],
       "approved_at": null
@@ -47,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Delayed payment\" is not accurately reflected in the Azerbaijani translation. \"Vaxtı keçmiş ödənişi\" literally translates to \"expired payment\" which doesn't convey the meaning of a delayed payment. It implies the payment period has ended, not just that it's late.",
-          "suggestion": "Consider using \"Gecikmiş ödəniş\" (Gecikmiş meaning delayed) or \"Təqviyə olunmuş ödəniş\" (Təqviyə olunmuş meaning postponed)."
+          "description": "The phrase \"vaxtı keçmiş ödənişi\" literally translates to \"expired payment\". While it conveys the idea of a delayed payment, a more accurate and common term in Azerbaijani for a delayed payment would be \"təqıycə ödənişi\" or \"keçikmiş ödənişi\".",
+          "suggestion": "Replace \"vaxtı keçmiş ödənişi\" with \"təqıycə ödənişi\" or \"keçikmiş ödənişi\"."
         }
       ],
       "approved_at": null
@@ -65,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'tarif' is a more technical term for a plan/subscription and may not be the most natural choice for a general user notification. 'Plán' might be a better alternative.",
-          "suggestion": "Opožděná platba plánu {{planName}} ze dne {{date}}"
+          "description": "The word 'tarif' might not be the most natural way to refer to a 'plan'. It's closer to a 'rate' or 'fee'.",
+          "suggestion": "Consider using a more general term like 'přihláška' (application) or 'smlouva' (contract) depending on the context. If 'plan' refers specifically to a subscription plan, something like 'předplatné' might be more appropriate."
         }
       ],
       "approved_at": null
@@ -77,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Aufgehaltene' (halted, stopped) doesn't accurately convey 'Delayed'. A more appropriate term would be 'Verzögerte'.",
+          "description": "The word 'Aufgehaltene' doesn't accurately convey 'Delayed'. 'Aufgehalten' means 'halted' or 'stopped'. A better translation for 'Delayed' would be 'Verzögerte'.",
           "suggestion": "Verzögerte Bezahlung des {{planName}}-Plans vom {{date}}"
         }
       ],
@@ -95,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Delayed payment of' is not accurately reflected in the Spanish translation 'Retraso en el pago para'. A more accurate translation would be 'Retraso del pago de' or 'Retraso en el pago de'.",
+          "description": "The English phrase \"Delayed payment of\" is better translated as something more concise in Spanish. \"Retraso en el pago para\" is somewhat clunky. A more natural phrasing would be \"Retraso del pago de\" or \"Incumplimiento del pago de\".",
           "suggestion": "Retraso del pago de"
         }
       ],
@@ -107,13 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"maksu myöhässä\" translates to \"payment is late\" or \"payment delayed,\" which isn't quite as natural as alternative phrasings in Finnish. A more natural phrasing would be something like \"maksun viivästys\" or \"maksun myöhästyminen\".",
-          "suggestion": "Consider using \"maksun viivästys {{planName}} ohjelman päiväys {{date}}\" or \"{{planName}} ohjelman maksun myöhästyminen päivämäärä {{date}}\""
+          "description": "The phrase 'Delayed payment' isn't accurately reflected. 'Myöhässä' implies 'late' but doesn't convey the meaning of a payment being delayed. A better translation would emphasize the 'delay' aspect.",
+          "suggestion": "Maksu on viivästynyt {{planName}} ohjelman päiväys {{date}}"
         },
         {
           "type": "formatting",
-          "description": "The translation includes a space before \"ohjelman\" which might not be stylistically preferred. Consistency is key.",
-          "suggestion": "Remove the space before \"ohjelman\": \"{{planName}} maksu myöhässä ohjelman päiväys {{date}}\""
+          "description": "The Finnish translation lacks the article 'the' which is often expected before 'date' (päiväys) in Finnish. While not strictly incorrect, it can sound slightly awkward.",
+          "suggestion": "{{planName}} maksu on myöhässä ohjelman *päivämäärä* {{date}}"
         }
       ],
       "approved_at": null
@@ -130,13 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"{{planName}} -ի հետաձգված վճարումը պլանը թվագրված է{{date}}\" is not an accurate translation of \"Delayed payment of the {{planName}} plan dated {{date}}\". The Armenian sentence structure is awkward and doesn't convey the meaning clearly. The literal translation of 'dated' doesn't fit the context.",
-          "suggestion": "{{planName}} պլանի հետաձգված վճարում, ամսը {{date}}"
+          "description": "The Armenian translation \"{{planName}} -ի հետաձգված վճարումը պլանը թվագրված է{{date}}\" doesn't accurately convey the meaning of 'Delayed payment of the {{planName}} plan dated {{date}}'. The structure is awkward and doesn't clearly state the delayed payment is *of* the plan. The 'պլանը թվագրված է' part (plan dated) is also unclear and doesn't fit the original meaning.",
+          "suggestion": "A better translation might be something like: \"{{planName}} պլանի հետաձգված վճարում, ամսաթվով {{date}}\" (Delayed payment for the {{planName}} plan, dated {{date}}). Alternatively: \"{{planName}} պլանի հետաձգված վճարում {{date}} ամսաթվով\" (Delayed payment for the {{planName}} plan with date {{date}})"
         },
         {
           "type": "formatting",
-          "description": "The formatting of the Armenian translation uses a hyphen incorrectly.  It interrupts the flow of the sentence.",
-          "suggestion": "Remove the hyphen after {{planName}}."
+          "description": "The Armenian translation uses a hyphen (-) where a space might be more appropriate depending on the desired flow and readability.",
+          "suggestion": "Replace the hyphen with a space:  \"{{planName}} պլանի հետաձգված վճարումը պլանը թվագրված է{{date}}\" -> \"{{planName}} պլանի հետաձգված վճարումը պլանը թվագրված է {{date}}\""
         }
       ],
       "approved_at": null
@@ -153,8 +148,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{planName}}プランの{{date}}までのお支払いを確認できませんでした\" literally translates to \"We could not confirm the payment until {{date}} for the {{planName}} plan.\"  A more accurate translation would convey the 'delayed' aspect more directly.  It doesn't accurately reflect the English content which specifies a 'delayed' payment.",
-          "suggestion": "Consider a translation closer to: \"{{planName}}プランのお支払いが遅延しました ({{date}}まで)\" or \"{{planName}}プランのお支払いが{{date}}まで遅れています\""
+          "description": "The translation \"{{planName}}プランの{{date}}までのお支払いを確認できませんでした\" literally translates to \"We could not confirm the payment until {{date}} for the {{planName}} plan.\" It doesn't accurately convey the meaning of 'Delayed payment'. A more accurate translation would emphasize the delay itself.",
+          "suggestion": "Consider a translation like \"{{planName}}プランの{{date}}のお支払いにお客様のご都合により遅延が発生しました\" (A delay occurred in the payment for the {{planName}} plan on {{date}} due to customer circumstances) or \"{{planName}}プランの{{date}}のお支払いにつきまして、遅延が発生しました\" (A delay has occurred regarding the payment for the {{planName}} plan on {{date}})."
+        },
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses 'プラン' which is acceptable, but depending on the target audience, '計画' (keikaku) may be a more formal or appropriate term for 'plan'.",
+          "suggestion": "Consider using '計画' instead of 'プラン' if a more formal tone is preferred."
         }
       ],
       "approved_at": null
@@ -165,8 +165,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"지불 지연\" (jibul jiyeon) is a literal translation of \"delayed payment\" but sounds awkward and unnatural in Korean. A more natural phrasing would be something like '결제 지연' (gyeolje jiyeon) or '납부 지연' (napbu jiyeon). '결제' specifically refers to payment, while '납부' is a more general term for submission/payment.",
-          "suggestion": "Replace \"지불 지연\" with \"결제 지연\" or \"납부 지연\"."
+          "description": "The phrase \"지불 지연\" (jibool jiyeon) translates to \"payment delay\" which is a bit literal and clunky. A more natural phrasing for 'Delayed payment' would be something like '결제 지연' (gyeolje jiyeon) or '납부 지연' (nappu jiyeon).",
+          "suggestion": "Consider using '결제 지연' or '납부 지연' instead of '지불 지연'."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the use of '날짜의' feels slightly formal and stiff in modern Korean. It's perfectly understandable, but a more conversational alternative could improve flow.",
+          "suggestion": "Consider replacing '날짜의' with '날짜' or '에'."
         }
       ],
       "approved_at": null
@@ -177,8 +182,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation uses 'ຂອງ' after 'ການຈ່າຍເງິນຊ້າ' which is grammatically correct but might sound slightly less natural. Consider rephrasing for smoother flow.",
-          "suggestion": "ການຈ່າຍເງິນຊ້າຂອງແຜນ {{planName}} ລົງວັນທີ {{date}}"
+          "description": "The Lao translation maintains the double curly braces {{ }} which are meant to be placeholders for variable data. These should be removed or replaced with appropriate Lao syntax for variable insertion if the translation platform supports it.",
+          "suggestion": "Remove the double curly braces or replace with the appropriate syntax for variable insertion in the Lao translation platform. For example, if the platform supports it, it could be something like `{{planName}}`."
         }
       ],
       "approved_at": null
@@ -189,8 +194,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Novēlots {{planName}} plāna maksājums datēts {{date}}' is not ideal. 'Novēlots' typically means 'desired' or 'wished for'. The intended meaning is 'delayed'. A more accurate translation would convey the meaning of 'delayed'.",
-          "suggestion": "Atpaliktus {{planName}} plāna maksājums datēts {{date}}"
+          "description": "The phrase 'dated' is not accurately translated. 'Datēts' implies something 'dated' as in old or obsolete, not 'dated' as in 'related to a specific date'.",
+          "suggestion": "Novēlots {{planName}} plāna maksājums {{date}}"
         }
       ],
       "approved_at": null
@@ -204,13 +209,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'for the plan' is a bit awkward in Polish. A more natural phrasing would be 'dotyczącego planu' or simply 'planu'.",
-          "suggestion": "Opóźniona płatność dotycząca planu {{planName}} z dnia {{date}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -219,13 +218,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"data do plano\" is not the correct way to refer to the date in Portuguese in this context. It literally translates to 'date of the plan'.",
-          "suggestion": "Pagamento em atraso no plano {{planName}} de {{date}}"
+          "description": "The phrase 'data do plano' is redundant and not the best way to express 'dated'. It translates more literally to 'plan data' rather than 'dated'.",
+          "suggestion": "Pagamento em atraso no plano {{planName}} datado de {{date}}"
         },
         {
           "type": "formatting",
-          "description": "The article 'de' is missing before '{{date}}'.",
-          "suggestion": "Pagamento em atraso no plano {{planName}} de {{date}}"
+          "description": "The Portuguese translation could benefit from adding a preposition to connect 'no plano' and 'datado de'.",
+          "suggestion": "Pagamento em atraso no plano {{planName}} datado de {{date}}"
         }
       ],
       "approved_at": null
@@ -236,7 +235,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'datado de' (dated of) is not the most natural way to express 'dated' in this context. A more common and fluid translation would be 'referente a' or 'do dia'.",
+          "description": "The phrase 'datado de' is an awkward and not idiomatic way to say 'dated' in this context. A more natural translation would use 'referente a' or simply omit the equivalent phrase.",
           "suggestion": "Pagamento atrasado do plano {{planName}} referente a {{date}}"
         }
       ],
@@ -248,13 +247,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Plata abonament {{planName}} cu întârziere din {{date}}\" doesn't fully convey the meaning of 'Delayed payment of the {{planName}} plan dated {{date}}'. 'Cu întârziere din' implies the delay started from the date, rather than the payment itself being delayed. A more accurate translation would clarify that the payment is delayed.",
-          "suggestion": "Plata întârziată a abonamentului {{planName}} din {{date}}"
+          "description": "The Romanian translation 'Plata abonament {{planName}} cu întârziere din {{date}}' doesn't accurately convey the meaning of 'Delayed payment of the {{planName}} plan dated {{date}}'.  'Cu întârziere din' implies a delay originating from a specific date, rather than a delayed payment for a plan with a particular date.",
+          "suggestion": "Plata întârziată a abonamentului {{planName}} din data {{date}}"
         },
         {
           "type": "formatting",
-          "description": "The Romanian translation uses a lowercase 'a' in 'abonamentului' when it might be more appropriate to capitalize it, as 'abonament' (subscription) is a noun.",
-          "suggestion": "Plata întârziată a Abonamentului {{planName}} din {{date}}"
+          "description": "The use of 'abonament' might be more formal than desired. Depending on the context, 'plan' might be more appropriate.",
+          "suggestion": "Plata întârziată a planului {{planName}} din data {{date}}"
         }
       ],
       "approved_at": null
@@ -265,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'plan' is repeated. A more natural translation would avoid repetition.",
-          "suggestion": "Просроченная оплата по плану {{planName}} от {{date}}"
+          "description": "The term 'Delayed payment' is better translated as 'Задолженность по оплате' (Debt on payment) or 'Несвоевременная оплата' (Untimely payment) instead of 'Просроченная оплата' which implies the payment was made, but late. 'Просроченная оплата' is more suitable for payments that should have already been made.",
+          "suggestion": "Задолженность по оплате {{planName}} плана от {{date}}"
         }
       ],
       "approved_at": null
@@ -277,8 +276,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Delayed payment of' is not perfectly captured by 'ගෙවීම ප්‍රමාදයි'. A more accurate translation would reflect the 'of' relationship, perhaps '{{planName}} සැලසුමට වන ගෙවීම ප්‍රමාදයි'.",
-          "suggestion": "{{planName}} සැලසුමට වන ගෙවීම ප්‍රමාදයි"
+          "description": "The phrase 'Delayed payment' is not accurately conveyed. 'ප්‍රමාදයි' (pramaadayi) translates to 'is delayed' rather than 'delayed payment'. A more accurate translation would incorporate the concept of a delayed payment directly.",
+          "suggestion": "Consider alternatives like \"{{planName}} සැලසුමට ගෙවීම ප්‍රමානය වී ඇත\" ({{planName}} planuma gevima pramanaya ve ath) - 'Payment for the {{planName}} plan has been delayed'"
+        },
+        {
+          "type": "formatting",
+          "description": "While the template variables {{date}} and {{planName}} are present, it’s important to ensure consistent formatting for these variables is maintained in the Sinhala context, ensuring they are properly rendered as intended.",
+          "suggestion": "Confirm consistent variable rendering in Sinhala display, ensuring correct character encoding if necessary."
         }
       ],
       "approved_at": null
@@ -286,13 +290,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Delayed payment of' is better translated as 'Meškaná platba za' or 'Zmeškaná platba za' in Slovak. 'Oneskorená platba' implies a late payment in general, not necessarily a missed or delayed one.",
-          "suggestion": "Oneskorená platba za -> Meškaná platba za or Zmeškaná platba za"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -301,13 +299,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Delayed payment' is better translated as 'Zakasanje plačila' or 'Nepravočasno plačilo' in Slovenian to accurately convey the meaning of a delayed payment.",
-          "suggestion": "Zakasanje plačila paketa {{planName}} z datumom {{date}}"
+          "description": "The term 'package' ('paket') might not be the most accurate translation for 'plan'. 'Plan' often refers to a subscription or service, not necessarily a physical package.",
+          "suggestion": "Consider using 'naročnina' (subscription) or 'načrt' (plan) instead of 'paket'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'paketa' is technically correct, it might be more natural to use a more general term like 'naročnine' (subscription) depending on the context of the plan.",
-          "suggestion": "Zakasanje plačila naročnine {{planName}} z datumom {{date}}"
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better flow in Slovenian.",
+          "suggestion": "Consider rephrasing as: 'Zamuda plačila naročnine/načrta {{planName}} z datumom {{date}}'."
         }
       ],
       "approved_at": null
@@ -318,8 +316,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'закаснело' (zakasnelo) translates to 'delayed' in a more general sense, implying a lateness in arrival or appearance. In the context of payments, a more accurate translation would be 'одношњено плаћање' (odnoseno plaćanje) or 'касно плаћање' (kasno plaćanje).",
-          "suggestion": "одношњено плаћање {{planName}} плана датираног {{date}}"
+          "description": "The word 'закаснело' (zakasnelo) translates to 'late' or 'delayed' but in the context of payments, it implies a general lateness rather than specifically a 'delayed' payment. A more accurate translation would use a word that specifically refers to delayed payment.",
+          "suggestion": "Одложено плаћање {{planName}} плана датираног {{date}}"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the use of 'плана датираног' might sound slightly awkward in Serbian. A more natural phrasing is preferred.",
+          "suggestion": "Одложено плаћање {{planName}} плана од {{date}}"
         }
       ],
       "approved_at": null
@@ -330,13 +333,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Zakasnelo' implies 'late' or 'delayed', but it's a less formal and potentially ambiguous way to express 'delayed payment'. A more precise translation would be 'Otkazno plaćanje' or 'Kašnjenje u plaćanju'.",
-          "suggestion": "Otkazno plaćanje {{planName}} plana datiranog {{date}}"
+          "description": "The term 'datiranog' (dated) is not the most natural or accurate translation of 'dated' in this context. It implies a specific date was attached to the plan, but 'dated' here refers more to the time period of the plan.",
+          "suggestion": "Consider using a more general term like 'za plan {{planName}} od {{date}}' or 'za plan {{planName}} važeći od {{date}}'"
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure feels slightly unnatural in Serbian. While grammatically correct, it could be improved for a more fluent reading.",
-          "suggestion": "Kašnjenje plaćanja {{planName}} plana datiranog {{date}}"
+          "type": "formatting",
+          "description": "While not strictly incorrect, the Serbian translation reads slightly less fluently than the English. The sentence structure is a little awkward.",
+          "suggestion": "Rephrase the sentence to improve flow, potentially by changing the order of elements. Example: 'Zakasnelo plaćanje za plan {{planName}} važeći od {{date}}.'"
         }
       ],
       "approved_at": null
@@ -344,13 +347,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Turkish translation uses \"gecikmiş ödemesi\" which implies a completed payment that was late. A more natural phrasing for a delayed payment would be \"ödenmemiş\" or \"ekonomik gecikmeli\".",
-          "suggestion": "Consider using \"{{date}} tarihli {{planName}} planının ödenmemiş ödemesi\" or \"{{date}} tarihli {{planName}} planının ekonomik gecikmeli ödemesi\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -365,13 +362,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Chậm thanh toán\" is a literal translation of 'Delayed payment' but sounds unnatural in Vietnamese. A more natural phrasing would be 'Thanh toán chậm trễ'.",
-          "suggestion": "Thanh toán chậm trễ gói kế hoạch {{planName}} {{date}} ngày"
+          "description": "The translation 'Chậm thanh toán gói kế hoạch {{planName}} {{date}} ngày' is not a natural or accurate translation of 'Delayed payment of the {{planName}} plan dated {{date}}'. The phrase 'ngày' (day) at the end is misplaced and changes the meaning.",
+          "suggestion": "Thanh toán chậm trễ của gói kế hoạch {{planName}} ngày {{date}}"
         },
         {
-          "type": "grammar",
-          "description": "The inclusion of \"ngày\" at the end of the sentence is grammatically awkward. The date is already implied.",
-          "suggestion": "Thanh toán chậm trễ gói kế hoạch {{planName}} {{date}}"
+          "type": "incorrect_translation",
+          "description": "While 'Thanh toán chậm trễ' is acceptable for 'Delayed payment', 'Chậm thanh toán' is also valid and possibly more common. Consider using 'Chậm thanh toán' for a more natural feel.",
+          "suggestion": "Thanh toán chậm của gói kế hoạch {{planName}} ngày {{date}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of 'ngày' (day) feels awkward. It should be integrated more smoothly with the date information.",
+          "suggestion": "Thanh toán chậm của gói kế hoạch {{planName}} vào ngày {{date}}"
         }
       ],
       "approved_at": null
@@ -382,13 +384,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{planName}}版本延迟付款日期{{date}}\" doesn't accurately convey the meaning of \"Delayed payment of the {{planName}} plan dated {{date}}\".  '版本' (version) isn't the correct term. It should imply the payment is delayed *for* the plan.",
-          "suggestion": "{{planName}}计划的付款延迟日期{{date}}"
+          "description": "The translation of 'Delayed payment of' is not accurate. '版本' (version) doesn't convey the meaning of 'delayed payment'. It implies a specific version of the plan.",
+          "suggestion": "Consider using a phrase like '{{planName}}计划的付款延迟' or '{{planName}}计划付款延迟' which directly translates to 'Delayed payment of the {{planName}} plan'."
         },
         {
           "type": "formatting",
-          "description": "The term '日期' (date) is appended instead of placed within the sentence to describe the delayed payment. It sounds unnatural in Chinese.",
-          "suggestion": "{{planName}}计划的付款延迟至{{date}}"
+          "description": "The Chinese translation doesn't clearly indicate that '{{date}}' refers to the date of the payment delay, it's ambiguous.",
+          "suggestion": "Clarify the context by adding a connector phrase, e.g., '{{planName}}版本延迟付款日期为{{date}}' or '{{planName}}计划付款延迟日期{{date}}'"
         }
       ],
       "approved_at": null

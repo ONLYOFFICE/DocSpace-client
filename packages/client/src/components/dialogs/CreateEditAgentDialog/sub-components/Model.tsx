@@ -49,7 +49,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   const [models, setModels] = React.useState<TModel[]>([]);
 
   const [selectedProvider, setSelectedProvider] = React.useState<TAiProvider>({
-    id: agentParams.providerId ?? -2,
+    id: agentParams.providerId || -2,
   } as TAiProvider);
   const [selectedModel, setSelectedModel] = React.useState<TModel | null>({
     modelId: agentParams.modelId ?? "",

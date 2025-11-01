@@ -86,7 +86,8 @@
         "useAsConstAssertion": "error",
         "useBlockStatements": "off",
         "noParameterAssign": "off",
-        "useConst": "error"
+        "useConst": "error",
+        "noRestrictedImports": "error"
       },
       "suspicious": {
         "noAssignInExpressions": "off",

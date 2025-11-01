@@ -2142,7 +2142,7 @@ class FilesStore {
     folderId,
     filter,
     clearFilter = true,
-    withSubfolders = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
+    withSubfolders = false,
     clearSelection = true,
   ) => {
     const { setSelectedNode } = this.treeFoldersStore;

@@ -317,25 +317,25 @@ const ToolsSettings = ({
         checked: webSearchEnabled && webSearchPortalEnabled,
         onClick: onWebSearchToggle,
         disabled: !webSearchPortalEnabled,
-        getTooltipContent: isAdmin
-          ? () => (
-              <>
-                <Text>
-                  {t("ConnectWebSearch", {
-                    productName: t("Common:ProductName"),
-                  })}
-                </Text>
-                <Link
-                  type={LinkType.action}
-                  isHovered
-                  fontWeight={600}
-                  onClick={onGoToWebSearchPage}
-                >
-                  {t("Common:GoToSettings")}
-                </Link>
-              </>
-            )
-          : undefined,
+        getTooltipContent: () => (
+          <>
+            <Text>
+              {t("ConnectWebSearch", {
+                productName: t("Common:ProductName"),
+              })}
+            </Text>
+            {isAdmin ? (
+              <Link
+                type={LinkType.action}
+                isHovered
+                fontWeight={600}
+                onClick={onGoToWebSearchPage}
+              >
+                {t("Common:GoToSettings")}
+              </Link>
+            ) : null}
+          </>
+        ),
       },
       ...(showManageConnectionItem || serverItems.length > 0
         ? [{ key: "separator-1", isSeparator: true }]

@@ -45,6 +45,17 @@
   .chatInputTextArea {
     min-height: 56px !important;
     max-height: 112px !important;
+
+    &.disabled {
+      textarea {
+        background-color: var(--chat-input-background-color) !important;
+      }
+
+      textarea::placeholder {
+        color: var(--chat-input-placeholder-disabled-color) !important;
+        -webkit-text-fill-color: var(--chat-input-placeholder-disabled-color) !important;
+      }
+    }
   }
 
   .chatInputTextAreaWrapper {
@@ -120,6 +131,8 @@
     }
 
     &.disabled {
+      cursor: not-allowed;
+
       svg {
         cursor: not-allowed;
 
@@ -130,6 +143,12 @@
     }
 
     &.chatInputToolsButton {
+      svg {
+        circle {
+          stroke: var(--chat-input-tools-button-color)
+        }
+      }
+
       &.disabled {
         cursor: not-allowed;
 

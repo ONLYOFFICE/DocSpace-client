@@ -390,3 +390,7 @@
     background-color: var(--sub-menu-item-background-color);
   }
 }
+
+.activeDescendant {
+  background-color: var(--drop-down-item-hover-color);
+}

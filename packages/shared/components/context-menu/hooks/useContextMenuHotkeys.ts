@@ -1,0 +1,203 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useEffect, useState } from "react";
+import { ContextMenuModel, ContextMenuType } from "../ContextMenu.types";
+
+const useContextMenuHotkeys = ({
+  model,
+  currentEvent,
+}: {
+  model: ContextMenuModel[];
+  currentEvent: React.RefObject<
+    | null
+    | React.MouseEvent
+    | MouseEvent
+    | React.ChangeEvent<HTMLInputElement>
+    | Event
+  >;
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeLevel, setActiveLevel] = useState(0);
+  const [activeModel, setActiveModel] = useState<ContextMenuModel[] | null>(
+    null,
+  );
+  const [activeItems, setActiveItems] = useState<ContextMenuType[] | null>(
+    null,
+  );
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    const menuModel = activeModel ?? model;
+    if (!currentEvent.current || !menuModel) return e;
+
+    const clearModel = [];
+    for (const index in menuModel) {
+      const item = menuModel[index];
+
+      if (!item.isSeparator) clearModel.push({ ...item, index: Number(index) });
+    }
+
+    if (!clearModel.length) return e;
+
+    const clearModelIndex = clearModel.findIndex(
+      (elem) => elem.id === menuModel[currentIndex].id,
+    );
+
+    switch (e.code) {
+      case "ArrowDown":
+        {
+          if (currentIndex + 1 >= menuModel.length) {
+            setCurrentIndex(clearModel[0].index);
+          } else {
+            const nextIndex = clearModel[clearModelIndex + 1].index;
+            setCurrentIndex(nextIndex);
+          }
+        }
+        break;
+      case "ArrowUp":
+        {
+          if (currentIndex - 1 < 0) {
+            setCurrentIndex(clearModel.at(-1)?.index ?? menuModel.length - 1);
+          } else {
+            const prevIndex = clearModel[clearModelIndex - 1].index;
+            setCurrentIndex(prevIndex);
+          }
+        }
+        break;
+      case "ArrowRight":
+        {
+          const currentItem = menuModel[currentIndex];
+          if (
+            !("items" in currentItem) ||
+            !currentItem.items ||
+            !currentItem.items.length
+          ) {
+            return;
+          }
+
+          setCurrentIndex(0);
+          setActiveLevel((prevLevel) => prevLevel + 1);
+          setActiveItems((items) =>
+            items && items.length ? [...items, currentItem] : [currentItem],
+          );
+          setActiveModel(currentItem.items);
+        }
+        break;
+      case "ArrowLeft":
+        {
+          if (!activeItems || !activeItems.length) return;
+
+          const prevItem = activeItems.at(-1);
+          const prevModel = activeItems.at(-2)?.items ?? model;
+          const prevModelIndex = prevModel?.findIndex(
+            (x) => x.id === prevItem?.id,
+          );
+
+          setCurrentIndex(prevModelIndex > -1 ? prevModelIndex : 0);
+          setActiveModel(prevModel);
+          setActiveLevel((prevLevel) => prevLevel - 1);
+          setActiveItems((prevActiveItems) =>
+            prevActiveItems ? prevActiveItems.slice(0, -1) : prevActiveItems,
+          );
+        }
+        break;
+      // case "Enter":
+      //   return (
+      //     children &&
+      //     Array.isArray(children) &&
+      //     children[index] &&
+      //     React.isValidElement(children?.[index]) &&
+      //     children?.[index]?.props?.onClick()
+      //   );
+      default:
+        return;
+    }
+
+    // e.preventDefault();
+    // e.stopPropagation();
+  };
+
+  const onMouseMove = (
+    index: number,
+    model: ContextMenuModel[],
+    level: number,
+  ) => {
+    setCurrentIndex(index);
+    setActiveLevel(level);
+    setActiveModel(model);
+  };
+
+  const setActiveHotkeysModel = (
+    item: ContextMenuType,
+    model: ContextMenuModel[],
+    level: number,
+  ) => {
+    if (!item) return;
+
+    const itemIndex = model.findIndex(({ id }) => id === item.id);
+
+    setCurrentIndex(itemIndex);
+    setActiveModel(model);
+    setActiveLevel(level);
+
+    if (level === 0) {
+      const modelItem = model[itemIndex];
+      if ("items" in modelItem && modelItem.items) {
+        setActiveItems([modelItem]);
+        return;
+      }
+
+      setActiveItems(null);
+    } else {
+      setActiveItems((prevItems) => {
+        if (!prevItems) return prevItems;
+
+        return item.items
+          ? [...prevItems.slice(0, level), item]
+          : prevItems.slice(0, level);
+      });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  });
+
+  return {
+    currentIndex,
+    activeLevel,
+    activeItems,
+    setActiveItems,
+    onMouseMove,
+    setActiveHotkeysModel,
+  };
+};
+
+export default useContextMenuHotkeys;

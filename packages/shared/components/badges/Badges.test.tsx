@@ -26,7 +26,7 @@
 
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 

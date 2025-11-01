@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { describe, expect, vi } from "vitest";
+import { describe, expect, it, afterEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 import { Aside } from ".";

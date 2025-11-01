@@ -26,7 +26,7 @@
 
 import React from "react";
 import moment from "moment";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { DatePicker } from "./DatePicker";

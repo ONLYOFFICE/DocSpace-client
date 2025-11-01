@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { expect } from "vitest";
+import { expect, describe, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 import Cron from "./Cron";

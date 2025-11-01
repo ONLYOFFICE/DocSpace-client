@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { inject, observer } from "mobx-react";
-
+import { saveThirdParty as saveThirdPartyApi } from "@docspace/shared/api/files";
 import { ConnectDialog } from "@docspace/shared/dialogs/connect";
 import type { Nullable, ThirdPartyAccountType } from "@docspace/shared/types";
 
@@ -94,7 +94,6 @@ export default inject<
   }) => {
     const {
       providers,
-      saveThirdParty,
       openConnectWindow,
       fetchThirdPartyProviders,
       connectingStorages,
@@ -129,7 +128,7 @@ export default inject<
       providers,
       visible,
       roomCreation,
-      saveThirdParty,
+      saveThirdParty: saveThirdPartyApi,
       openConnectWindow,
       connectingStorages,
       selectedFolderId: id,

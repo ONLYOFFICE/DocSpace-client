@@ -122,9 +122,9 @@ const SubMenu = (props: SubMenuProps) => {
 
   const [model, setModel] = useState(props?.model);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeItemKey, setActiveItemKey] = useState<string | number | null>(
-    null,
-  );
+  // const [activeItemKey, setActiveItemKey] = useState<string | number | null>(
+  //   null,
+  // );
   const [widthSubMenu, setWidthSubMenu] = useState<null | number>(null);
 
   const prevWidthSubMenu = useRef<number | null>(null);
@@ -173,7 +173,7 @@ const SubMenu = (props: SubMenuProps) => {
 
     if ((items || item.onLoad) && isMobileDevice) {
       setActiveItems([item]);
-      setActiveItemKey(item.key);
+      // setActiveItemKey(item.key);
 
       e.stopPropagation();
       return;

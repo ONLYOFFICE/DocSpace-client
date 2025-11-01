@@ -70,6 +70,11 @@ export default defineConfig({
     globals: true,
     clearMocks: true,
 
+    // TypeScript configuration
+    typecheck: {
+      tsconfig: "./tsconfig.vitest.json",
+    },
+
     // Coverage
     coverage: {
       enabled: false,
@@ -105,5 +110,9 @@ export default defineConfig({
       "hex-rgb": path.resolve(__dirname, "./__mocks__/hex-rgb.js"),
       "react-svg": path.resolve(__dirname, "./__mocks__/reactSvgMock.tsx"),
     },
+  },
+
+  esbuild: {
+    target: "esnext",
   },
 });

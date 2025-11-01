@@ -26,7 +26,14 @@
 
 import React from "react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { screen, fireEvent, waitFor, render } from "@testing-library/react";
+import {
+  screen,
+  fireEvent,
+  waitFor,
+  render,
+  act,
+} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import { WhiteLabel } from ".";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
@@ -87,11 +94,14 @@ describe("<WhiteLabel />", () => {
     expect(logoTextInput).toBeDisabled();
   });
 
-  it("updates logo text when input changes", () => {
+  it("updates logo text when input changes", async () => {
     render(<WhiteLabel {...defaultProps} />);
 
     const logoTextInput = screen.getByTestId("logo-text-input");
-    fireEvent.change(logoTextInput, { target: { value: "New Logo Text" } });
+
+    await act(async () => {
+      fireEvent.change(logoTextInput, { target: { value: "New Logo Text" } });
+    });
 
     expect(logoTextInput).toHaveValue("New Logo Text");
   });
@@ -141,7 +151,7 @@ describe("<WhiteLabel />", () => {
     expect(restoreButton).toBeDisabled();
   });
 
-  it("onUseTextAsLogo should update logos with text-based logos", () => {
+  it("onUseTextAsLogo should update logos with text-based logos", async () => {
     const mockSetLogoUrls = vi.fn();
     const props = {
       ...defaultProps,
@@ -153,8 +163,10 @@ describe("<WhiteLabel />", () => {
     const input = screen.getByTestId("logo-text-input");
     const button = screen.getByTestId("generate-logo-button");
 
-    fireEvent.change(input, { target: { value: "Test" } });
-    fireEvent.click(button);
+    await act(async () => {
+      fireEvent.change(input, { target: { value: "Test" } });
+      fireEvent.click(button);
+    });
 
     expect(mockSetLogoUrls).toHaveBeenCalled();
     const updatedLogos = mockSetLogoUrls.mock.calls[0][0];

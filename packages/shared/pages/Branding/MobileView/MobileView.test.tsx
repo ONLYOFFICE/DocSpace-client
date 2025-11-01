@@ -61,7 +61,7 @@ describe("MobileView", () => {
   });
 
   it("calls onClickLink when a category is clicked", () => {
-    const onClick = vi.fn();
+    const onClick = vi.fn((e) => e.preventDefault());
     render(<MobileView {...baseProps} onClickLink={onClick} />);
 
     const firstCategory = screen.getByText("BrandName");

@@ -5,6 +5,16 @@ import userEvent from "@testing-library/user-event";
 
 import { StandalonePage } from "./index";
 
+vi.mock("./sub-components/hooks/useUserStatisticsDialog", () => ({
+  useUserStatisticsDialog: vi.fn(() => ({
+    isUserStatisticsVisible: false,
+    openUserStatistics: vi.fn(),
+    closeUserStatistics: vi.fn(),
+    downloadAndOpenReport: vi.fn(),
+    usersStatistics: null,
+  })),
+}));
+
 describe("StandalonePage", () => {
   const defaultProps = {
     isTrial: false,

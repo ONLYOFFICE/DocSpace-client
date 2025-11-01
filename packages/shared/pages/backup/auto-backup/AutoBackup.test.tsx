@@ -10,13 +10,13 @@ import * as portalApi from "../../../api/portal";
 import AutomaticBackup from "./index";
 import { selectedStorages, mockThirdPartyAccounts } from "../mockData";
 
-vi.mock("@docspace/shared/api/portal", () => ({
+vi.mock("../../../api/portal", () => ({
   deleteBackupSchedule: vi.fn().mockResolvedValue(undefined),
   getBackupSchedule: vi.fn().mockResolvedValue(undefined),
   createBackupSchedule: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock("@docspace/shared/api/settings", () => ({
+vi.mock("../../../api/settings", () => ({
   getBackupStorage: vi.fn().mockResolvedValue(undefined),
 }));
 

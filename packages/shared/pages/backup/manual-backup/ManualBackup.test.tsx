@@ -11,7 +11,7 @@ import * as socketModule from "../../../utils/socket";
 import ManualBackup from "./index";
 import { selectedStorages, mockThirdPartyAccounts } from "../mockData";
 
-vi.mock("@docspace/shared/api/portal", () => ({
+vi.mock("../../../api/portal", () => ({
   startBackup: vi.fn().mockResolvedValue(undefined),
 }));
 

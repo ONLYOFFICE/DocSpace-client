@@ -540,12 +540,6 @@ const SubMenu = (props: SubMenuProps) => {
     const isActiveDescendant =
       currentIndex === index && activeLevel == menuLevel;
 
-    const newIsActiveDescendant = false;
-
-    if (isActiveDescendant !== newIsActiveDescendant) {
-      console.log("NONONO isActiveDescendant", isActiveDescendant);
-    }
-
     return (
       <li
         id={item.id}

@@ -24,60 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { LinkTarget } from "../components/link";
+import type { LinkProps } from "@docspace/shared/utils/plugin-file-utils";
 
-export interface FileItem {
-  isPlugin: boolean;
-  viewUrl: string;
-  title?: string;
-  [key: string]: unknown;
+export interface FileNameProps {
+  title: string;
+  color: string;
+  linkProps: LinkProps;
+  indexingClass: string;
+  titleWithoutExt: string;
+  displayFileExtension: boolean;
+  fileExst: string;
 }
-
-export interface LinkProps {
-  onClick?: (e: React.MouseEvent) => void;
-  onMouseDown?: (e: React.MouseEvent) => void;
-  onContextMenu?: (e: React.MouseEvent) => void;
-  target?: LinkTarget;
-  [key: string]: unknown;
-}
-
-/**
- * Creates handlers for plugin files to ensure proper behavior
- * when opening in a new tab through various methods
- *
- * @param item - File object
- * @param linkProps - Link properties
- * @returns Modified link properties
- */
-export const createPluginFileHandlers = (
-  item: FileItem,
-  linkProps: LinkProps = {},
-): LinkProps => {
-  if (!item || !item.isPlugin) return linkProps;
-
-  const newLinkProps: LinkProps = { ...linkProps };
-  const title = item.title || "";
-
-  const originalOnClick = newLinkProps.onClick;
-
-  newLinkProps.onClick = (e: React.MouseEvent) => {
-    if (e.ctrlKey || e.metaKey || e.button === 1) {
-      e.preventDefault();
-      window.open(item.viewUrl, "_self");
-      return;
-    }
-    if (originalOnClick) {
-      originalOnClick(e);
-    }
-  };
-
-  newLinkProps.onContextMenu = (e: React.MouseEvent) => {
-    e.currentTarget.setAttribute("href", item.viewUrl);
-    e.currentTarget.setAttribute("download", title);
-  };
-
-  newLinkProps.href = undefined;
-  newLinkProps.to = undefined;
-
-  return newLinkProps;
-};

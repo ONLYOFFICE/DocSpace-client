@@ -414,6 +414,14 @@ class InfoPanelStore {
       this.fileView === InfoPanelView.infoShare
     );
   }
+
+  inRoom = (): boolean => {
+    return (
+      this.infoPanelSelection !== null &&
+      "navigationPath" in this.infoPanelSelection &&
+      !!this.infoPanelSelection.navigationPath
+    );
+  };
 }
 
 export default InfoPanelStore;

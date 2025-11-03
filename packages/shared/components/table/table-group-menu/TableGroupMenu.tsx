@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo, useCallback } from "react";
+import { FC, memo, useCallback } from "react";
 import equal from "fast-deep-equal";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -42,9 +42,24 @@ import { IconButton } from "../../icon-button";
 import { Scrollbar } from "../../scrollbar";
 
 import { GroupMenuItem } from "../sub-components/group-menu-item";
+import type { TableGroupMenuProps, TGroupMenuProps } from "../Table.types";
 
-import { TableGroupMenuProps } from "../Table.types";
 import styles from "./TableGroupMenu.module.scss";
+
+const GroupMenu: FC<TGroupMenuProps> = memo(({ headerMenu, isBlocked }) => {
+  return (
+    <Scrollbar className={styles.scrollBar}>
+      {headerMenu.map((item) => (
+        <GroupMenuItem
+          key={item.id || item.label}
+          item={item}
+          isBlocked={isBlocked}
+          dataTestId={`table_group_menu_item_${item.id}`}
+        />
+      ))}
+    </Scrollbar>
+  );
+}, equal);
 
 const TableGroupMenu = memo((props: TableGroupMenuProps) => {
   const {
@@ -136,16 +151,7 @@ const TableGroupMenu = memo((props: TableGroupMenuProps) => {
           "table-container_group-menu-separator",
         )}
       />
-      <Scrollbar className={styles.scrollBar}>
-        {headerMenu.map((item) => (
-          <GroupMenuItem
-            key={item.id || item.label}
-            item={item}
-            isBlocked={isBlocked}
-            dataTestId={`table_group_menu_item_${item.id}`}
-          />
-        ))}
-      </Scrollbar>
+      <GroupMenu headerMenu={headerMenu} isBlocked={isBlocked} />
       {isCloseable ? (
         <div className={styles.tableHeaderIcon}>
           <IconButton

@@ -199,6 +199,8 @@ const SectionHeaderContent = (props) => {
     isArchive,
     isSharedWithMeFolderRoot,
     isAIAgentsFolder,
+    userSelection,
+    filesSelection,
   } = props;
 
   const location = useLocation();
@@ -575,39 +577,57 @@ const SectionHeaderContent = (props) => {
   const isSectionHeaderVisible =
     isUsersHeaderVisible || isGroupsHeaderVisible || isHeaderVisible;
 
-  const headerMenu = React.useMemo(() => {
-    if (!isSectionHeaderVisible) return EMPTY_ARRAY;
-
-    if (isIndexEditingMode)
-      return [
-        {
-          id: "reorder-index",
-          label: t("Files:Reorder"),
-          onClick: onIndexReorder,
-          iconUrl: RoundedArrowSvgUrl,
-        },
-        {
-          id: "save-index",
-          label: t("Common:ApplyButton"),
-          onClick: onIndexApply,
-          iconUrl: CheckIcon,
-        },
-      ];
-
-    if (isContactsPage) return getContactsHeaderMenu(t, isContactsGroupsPage);
+  const filesHeaderMenu = React.useMemo(() => {
+    if (!isSectionHeaderVisible || filesSelection.length === 0)
+      return EMPTY_ARRAY;
 
     return getHeaderMenu(t);
+  }, [getHeaderMenu, isSectionHeaderVisible, filesSelection, t]);
+
+  const contactsHeaderMenu = React.useMemo(() => {
+    if (!isSectionHeaderVisible || userSelection.length === 0)
+      return EMPTY_ARRAY;
+
+    return getContactsHeaderMenu(t, isContactsGroupsPage);
   }, [
+    getContactsHeaderMenu,
+    isContactsGroupsPage,
+    isSectionHeaderVisible,
+    userSelection,
     t,
+  ]);
+
+  const indexEditingMenu = React.useMemo(() => {
+    if (!isIndexEditingMode) return EMPTY_ARRAY;
+
+    return [
+      {
+        id: "reorder-index",
+        label: t("Files:Reorder"),
+        onClick: onIndexReorder,
+        iconUrl: RoundedArrowSvgUrl,
+      },
+      {
+        id: "save-index",
+        label: t("Common:ApplyButton"),
+        onClick: onIndexApply,
+        iconUrl: CheckIcon,
+      },
+    ];
+  }, [t, onIndexReorder, onIndexApply]);
+
+  const headerMenu = React.useMemo(() => {
+    if (isIndexEditingMode) return indexEditingMenu;
+
+    if (isContactsPage) return contactsHeaderMenu;
+
+    return filesHeaderMenu;
+  }, [
     isIndexEditingMode,
     isContactsPage,
-    getHeaderMenu,
-    isContactsGroupsPage,
-    getContactsHeaderMenu,
-    onIndexReorder,
-    onIndexApply,
-
-    isSectionHeaderVisible,
+    indexEditingMenu,
+    contactsHeaderMenu,
+    filesHeaderMenu,
   ]);
 
   const isContactSection =
@@ -1074,6 +1094,7 @@ export default inject(
 
     const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
+    const userSelection = peopleStore.usersStore.selection;
 
     const {
       setSelected,
@@ -1091,6 +1112,7 @@ export default inject(
 
       categoryType,
       setBufferSelection,
+      selection: filesSelection,
     } = filesStore;
 
     const { setRefMap, deleteRefMap } = guidanceStore;
@@ -1393,6 +1415,8 @@ export default inject(
       isArchive,
       isSharedWithMeFolderRoot,
       isAIAgentsFolder,
+      userSelection,
+      filesSelection,
     };
   },
 )(

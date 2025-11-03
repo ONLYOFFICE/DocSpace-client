@@ -2581,7 +2581,7 @@ class FilesStore {
   selectFile = (file) => {
     const { id, parentId } = file;
     const isFileSelected = this.isFileSelected(id, parentId);
-    if (!isFileSelected) this.selection.push(file);
+    if (!isFileSelected) this.selection = [...this.selection, file];
   };
 
   deselectFile = (file) => {

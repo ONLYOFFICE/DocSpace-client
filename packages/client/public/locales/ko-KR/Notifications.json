@@ -5,7 +5,6 @@
   "DailyFeed": "{{productName}} 일일 피드",
   "DailyFeedDescription": "일일 다이제스트에서 {{productName}}의 뉴스 및 이벤트 읽기.",
   "FileActivityNotify": "파일 활동 알림",
-  "GoToSettings": "설정으로 이동",
   "IsNotValid": "유효하지 않습니다",
   "LdapEmailTooltip": "이 사용자 계정은 LDAP에서 로드되었습니다. 사용자 이메일 주소가 지정되지 않았으며, 현재 주소는 자동으로 생성되었으므로 알림을 보내는 데 사용할 수 없습니다.",
   "NotConfigured": "설정되지 않음",

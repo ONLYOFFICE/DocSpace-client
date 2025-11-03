@@ -103,6 +103,8 @@ const CreateRoomEvent = ({
     };
   }, []);
 
+  if (!visible) return null;
+
   return (
     <CreateAgentDialog
       title={title}

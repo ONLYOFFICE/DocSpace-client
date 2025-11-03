@@ -3,7 +3,7 @@
   "content": "Disabling the Backup service will prevent {{productName}} administrators from creating backups. If Auto Backup is enabled, it will remain active within the free quota, but once the quota is fully utilized, it will be permanently deactivated. Are you sure you want to continue?",
   "content_en_sha1_hash": "a19b1a1308b0013c64babf5fade04f0a7951608a",
   "created_at": "2025-10-07T15:39:00.609Z",
-  "updated_at": "2025-10-27T16:14:33.622Z",
+  "updated_at": "2025-11-03T12:10:35.338Z",
   "comment": {
     "text": "This key provides a confirmation message displayed in a dialog when disabling the Backup service. It explains the consequences of disabling backups, including the impact on administrators and the status of Auto Backup, and asks the user to confirm their decision. The message includes a variable for the product name.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 118,
-      "context": "body: !isCurrentConfirmDialogVisible\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Services:DisableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n }),",
+      "line_number": 141,
+      "context": "body: !isCurrentConfirmState\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Services:DisableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n }),",
       "module": "/packages/client"
     }
   ],

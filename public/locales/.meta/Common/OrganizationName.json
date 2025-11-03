@@ -3,7 +3,7 @@
   "content": "ONLYOFFICE",
   "content_en_sha1_hash": "c1cd17a947d45060963b486bba7fd3346227bbee",
   "created_at": "2025-05-19T21:30:47.141Z",
-  "updated_at": "2025-10-27T16:14:33.050Z",
+  "updated_at": "2025-11-03T12:10:34.858Z",
   "comment": {
     "text": "This translation key is used to display the organization's name, such as \"ONLYOFFICE\", when a user needs help or wants to learn more about the product. It appears in various UI elements like dialog boxes and about pages, ensuring accessibility for users who need assistance with the application.",
     "is_auto": true,
@@ -23,8 +23,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
+      "line_number": 232,
+      "context": "return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"AISettings:MCPSettingDescription\", {\n organizationName: t(\"Common:OrganizationName\"),\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Link\n className={styles.learnMoreLink}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 112,
+      "line_number": 111,
       "context": "});\n \n const { t, ready } = useTranslation([\"Common\", \"SmartBanner\"]);\n \n useEffect(() => {\n if (!logoText) setLogoText(t(\"Common:OrganizationName\"));\n }, [logoText, setLogoText]);\n \n useEffect(() => {\n try {\n loadBaseInfo();",
       "module": "/packages/client"
     },

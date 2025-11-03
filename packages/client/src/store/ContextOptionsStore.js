@@ -1097,11 +1097,11 @@ class ContextOptionsStore {
     }
   };
 
-  onClickPin = (e, id, t) => {
+  onClickPin = (e, id, t, isAIAgent = false) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
 
-    this.filesActionsStore.setPinAction(action, id, t);
+    this.filesActionsStore.setPinAction(action, id, t, isAIAgent);
   };
 
   onClickArchive = (e) => {
@@ -1287,7 +1287,7 @@ class ContextOptionsStore {
         key: "pin-room",
         label: t("PinToTop"),
         icon: PinReactSvgUrl,
-        onClick: (e) => this.onClickPin(e, item.id, t),
+        onClick: (e) => this.onClickPin(e, item.id, t, item.isAIAgent),
         disabled:
           this.publicRoomStore.isPublicRoom ||
           Boolean(item.external && item.isLinkExpired),
@@ -1299,7 +1299,7 @@ class ContextOptionsStore {
         key: "unpin-room",
         label: t("Unpin"),
         icon: UnpinReactSvgUrl,
-        onClick: (e) => this.onClickPin(e, item.id, t),
+        onClick: (e) => this.onClickPin(e, item.id, t, item.isAIAgent),
         disabled:
           this.publicRoomStore.isPublicRoom ||
           Boolean(item.external && item.isLinkExpired),

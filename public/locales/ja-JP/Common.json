@@ -989,5 +989,6 @@
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
-  "YourTurn": "あなたの番です"
+  "YourTurn": "あなたの番です",
+  "GoToSettings": "設定に移動"
 }

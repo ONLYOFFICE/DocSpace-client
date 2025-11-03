@@ -150,6 +150,7 @@ const Badges = ({
     lockedBy,
     locked,
     isFavorite,
+    isAIAgent,
     // startFilling,
   } = item;
 
@@ -189,6 +190,7 @@ const Badges = ({
   const unpinIconProps = {
     "data-id": id,
     "data-action": "unpin",
+    "data-isaiagent": isAIAgent,
   };
 
   const commonBadgeProps = {

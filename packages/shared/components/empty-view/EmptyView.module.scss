@@ -110,6 +110,11 @@
   }
 }
 
+.button {
+  align-self: center;
+  max-width: fit-content;
+}
+
 .itemWrapper {
   display: flex;
   align-items: center;

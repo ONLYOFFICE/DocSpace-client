@@ -989,5 +989,6 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "GoToSettings": "Ayarlara Git"
 }

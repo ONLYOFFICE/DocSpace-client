@@ -989,5 +989,6 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "GoToSettings": "Mene Asetukset -kohtaan"
 }

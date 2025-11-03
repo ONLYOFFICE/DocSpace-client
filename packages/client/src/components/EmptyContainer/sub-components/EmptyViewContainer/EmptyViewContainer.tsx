@@ -79,10 +79,11 @@ const InjectedEmptyViewContainer = inject<
     peopleStore,
     settingsStore,
     aiRoomStore,
+    authStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame, logoText } = settingsStore;
+    const { isFrame, logoText, aiConfig, standalone } = settingsStore;
 
     const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
@@ -139,6 +140,9 @@ const InjectedEmptyViewContainer = inject<
       logoText,
       isKnowledgeTab: aiRoomStore.isKnowledgeTab,
       isResultsTab: aiRoomStore.isResultTab,
+      isDocSpaceAdmin: authStore.isAdmin,
+      aiReady: aiConfig?.aiReady,
+      standalone,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

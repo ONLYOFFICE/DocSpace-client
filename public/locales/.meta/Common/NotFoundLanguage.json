@@ -3,7 +3,7 @@
   "content": "Can't find your language? Contact us at <1>{{supportEmail}}</1> to take part in the translation program and get rewards.",
   "content_en_sha1_hash": "d9fc9ee07a76cc5a6bc5a5eeaad93f29138ddd5e",
   "created_at": "2025-05-19T21:30:46.900Z",
-  "updated_at": "2025-10-27T16:14:33.645Z",
+  "updated_at": "2025-11-03T12:10:35.363Z",
   "comment": {
     "text": "This translation key is used to display a message when the user cannot find their preferred language in the available options. It appears as a tooltip in the profile settings section, inviting users to contact support for further assistance. Translators should aim to preserve the friendly and encouraging tone of this text.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 258,
+      "line_number": 261,
       "context": "const tooltipLanguage = (\n <Text as=\"div\" fontSize=\"12px\">\n <Trans\n t={t}\n i18nKey=\"NotFoundLanguage\"\n ns=\"Common\"\n values={{ supportEmail: documentationEmail }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     }

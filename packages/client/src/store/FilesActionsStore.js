@@ -1308,7 +1308,7 @@ class FilesActionStore {
     }
   };
 
-  setPinAction = async (action, id, t) => {
+  setPinAction = async (action, id, t, isAIAgent = false) => {
     const items = Array.isArray(id) ? id : [id];
 
     const actions = [];
@@ -1320,10 +1320,20 @@ class FilesActionStore {
 
       const itemCount = { count: elems.length };
 
-      const translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
-      const translationForSeverals = isPin
-        ? t("RoomsPinned", { ...itemCount })
-        : t("RoomsUnpinned", { ...itemCount });
+      let translationForOneItem;
+      let translationForSeverals;
+
+      if (isAIAgent) {
+        translationForOneItem = isPin ? t("AIAgentPinned") : t("AIAgentUnpinned");
+        translationForSeverals = isPin
+          ? t("AIAgentsPinned", { ...itemCount })
+          : t("AIAgentsUnpinned", { ...itemCount });
+      } else {
+        translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
+        translationForSeverals = isPin
+          ? t("RoomsPinned", { ...itemCount })
+          : t("RoomsUnpinned", { ...itemCount });
+      }
 
       toastr.success(
         elems.length > 1 ? translationForSeverals : translationForOneItem,
@@ -1350,7 +1360,11 @@ class FilesActionStore {
 
       updatingFolderList(withFinishedOperation, isPin);
 
-      isError && toastr.error(t("RoomsPinLimitMessage"));
+      if(isError){
+        isAIAgent 
+          ? toastr.error(t("AIAgentPinLimitMessage")) 
+          : toastr.error(t("RoomsPinLimitMessage"));
+      }
 
       return;
     }
@@ -1371,7 +1385,7 @@ class FilesActionStore {
   };
 
   setMuteAction = (action, item, t) => {
-    const { id, new: newCount, rootFolderId } = item;
+    const { id, new: newCount, rootFolderId, isAIAgent } = item;
     const { treeFolders } = this.treeFoldersStore;
     const { folders, updateRoomMute } = this.filesStore;
 
@@ -1388,12 +1402,20 @@ class FilesActionStore {
       } else treeFolders[treeIndex].newItems = count + newCount;
     }
 
+    let notificationsDisabled = t("RoomNotificationsDisabled");
+    let notificationsEnabled = t("RoomNotificationsEnabled");
+
+    if(isAIAgent){
+      notificationsDisabled = t("AIAgentNotificationsDisabled");
+      notificationsEnabled = t("AIAgentNotificationsEnabled");
+    }
+
     muteRoomNotification(id, muteStatus)
       .then(() =>
         toastr.success(
           muteStatus
-            ? t("RoomNotificationsDisabled")
-            : t("RoomNotificationsEnabled"),
+            ? notificationsDisabled
+            : notificationsEnabled,
         ),
       )
       .catch((e) => toastr.error(e));
@@ -2022,11 +2044,13 @@ class FilesActionStore {
 
     const items = [];
 
+    const isAIAgent = selection.some((s) => s.isAIAgent);
+
     selection.forEach((item) => {
       if (!item.pinned) items.push(item.id);
     });
 
-    this.setPinAction("pin", items, t);
+    this.setPinAction("pin", items, t, isAIAgent);
   };
 
   unpinRooms = (t) => {
@@ -2034,11 +2058,13 @@ class FilesActionStore {
 
     const items = [];
 
+    const isAIAgent = selection.some((s) => s.isAIAgent);
+
     selection.forEach((item) => {
       if (item.pinned) items.push(item.id);
     });
 
-    this.setPinAction("unpin", items, t);
+    this.setPinAction("unpin", items, t, isAIAgent);
   };
 
   archiveRooms = (action) => {

@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, editing, form filling, reviewing, commenting.",
   "content_en_sha1_hash": "9f355c9883cbf811bb7d07dfef49aac22ce21e3e",
   "created_at": "2025-05-19T21:30:48.012Z",
-  "updated_at": "2025-09-29T18:22:19.731Z",
+  "updated_at": "2025-11-03T12:10:35.453Z",
   "comment": {
     "text": "This translation key is used to display a description for operations related to existing files, such as viewing, editing, and commenting. It appears in UI elements that allow file interaction, providing context for users and helping to guide their actions.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 154,
+      "line_number": 171,
       "context": "type: EmployeeType.User,\n },\n editor: {\n key: \"editor\",\n label: t(\"Common:Editor\"),\n description: t(\"Common:RoleEditorDescription\"),\n access: ShareAccessRights.Editing,\n type: EmployeeType.User,\n },\n formFiller: {\n key: \"formFiller\",",
       "module": "/packages/shared"
     }

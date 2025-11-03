@@ -3,7 +3,7 @@
   "content": "Upload files from your personal device",
   "content_en_sha1_hash": "f688820b7fa16a274eaa69b992f64925077509bb",
   "created_at": "2025-10-27T16:14:31.673Z",
-  "updated_at": "2025-10-27T16:58:01.275Z",
+  "updated_at": "2025-11-03T12:10:34.896Z",
   "comment": {
     "text": "This text appears as the title for a button or option that allows users to upload files from their personal device. It's used to initiate the file upload process from a user's computer or phone. Translators should ensure the wording accurately reflects this action.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 483,
+      "line_number": 523,
       "context": "true,\n );\n \n const uploadFilesFromDevice = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"AIRoom:UploadFilesDevice\"),\n \"file\",\n );\n \n return [uploadFilesFromDocSpace, uploadFilesFromDevice];\n }",
       "module": "/packages/client"
     }

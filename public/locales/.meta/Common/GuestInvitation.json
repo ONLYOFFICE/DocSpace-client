@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> wants to share with you the contact of the guest.",
   "content_en_sha1_hash": "22e94db1f497e5a36b2d093d14a19ffc364fc51a",
   "created_at": "2025-05-19T21:30:45.696Z",
-  "updated_at": "2025-06-30T12:20:31.673Z",
+  "updated_at": "2025-11-03T12:10:35.420Z",
   "comment": {
     "text": "This translation key is used to display a personalized message when a user receives an invitation from a guest. It will show the name of the guest who shared the contact information. This appears in a greeting component on the login page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingGuestContainer.tsx",
-      "line_number": 65,
-      "context": "<img src={logoUrl} className=\"portal-logo guest\" alt=\"greeting-logo\" />\n <div className=\"tooltip guest\">\n <Text fontSize=\"16px\">\n <Trans\n t={t}\n i18nKey=\"GuestInvitation\"\n ns=\"Common\"\n defaults={DEFAULT_GUEST_TEXT}\n values={{\n displayName,\n }}",
+      "line_number": 55,
+      "context": "<Logo culture={culture} className=\"guest\" />\n <div className=\"tooltip guest\">\n <Text fontSize=\"16px\">\n <Trans\n t={t}\n i18nKey=\"GuestInvitation\"\n ns=\"Common\"\n defaults={DEFAULT_GUEST_TEXT}\n values={{\n displayName,\n }}",
       "module": "/packages/login"
     }
   ],

@@ -1,0 +1,28 @@
+{
+  "key_path": "NoTags",
+  "content": "No tags",
+  "content_en_sha1_hash": "ea3d32deac740b8c0ec2a88044355a1ef5eaba37",
+  "created_at": "2025-11-03T12:10:21.069Z",
+  "updated_at": "2025-11-03T12:12:41.191Z",
+  "comment": {
+    "text": "This text is used as a label to indicate that a room has no tags assigned. It appears as a default tag on room tiles when no other tags are present. Translators should ensure the translation accurately conveys the absence of tags.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:12:41.191Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/tiles/room-tile/RoomTile.tsx",
+      "line_number": 108,
+      "context": "if (item.tags && item?.tags?.length > 0) {\n tags.push(...item.tags);\n } else if (item.isAIAgent) {\n tags.push({\n isDefault: true,\n label: t(\"Common:NoTags\"),\n });\n } else {\n tags.push({\n isDefault: true,\n label: getRoomTypeName(item.roomType, t),",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

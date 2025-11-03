@@ -3,7 +3,7 @@
   "content": "Template Name",
   "content_en_sha1_hash": "48c5544ff80abaeebe660549c0fe0b1a63ecedee",
   "created_at": "2025-05-19T21:30:56.233Z",
-  "updated_at": "2025-10-13T13:22:35.546Z",
+  "updated_at": "2025-11-03T12:10:34.982Z",
   "comment": {
     "text": "This translation key is used for the \"Template Name\" label that appears when selecting a template to edit or create a room. It is part of a set of parameters in a dialog component and displays in conjunction with the file name.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 414,
+      "line_number": 430,
       "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTags\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>\n {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (",
       "module": "/packages/client"
     }

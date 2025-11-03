@@ -3,7 +3,7 @@
   "content": "Room admins can create and manage rooms, invite new users and assign roles of room admin or lower. Room admins can upload forms to the room and have full access to the Complete and In Process folders.",
   "content_en_sha1_hash": "7b59691d27e0f23bc84aede6a226741e9d6d6e79",
   "created_at": "2025-05-19T21:30:48.113Z",
-  "updated_at": "2025-09-17T13:43:02.058Z",
+  "updated_at": "2025-11-03T12:10:35.527Z",
   "comment": {
     "text": "Room admins can create and manage rooms, including uploading forms to the room and accessing certain folders. This description is used in the access options for a \"Form Room\" type of room, likely displayed in a UI element such as a button or dialog related to room management.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
       "line_number": 54,
-      "context": "const None = -1 as RoomsType;\n \n const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n default:",
+      "context": "const None = -1 as RoomsType;\n \n const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAgentManagerDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),",
       "module": "/packages/shared"
     }
   ],

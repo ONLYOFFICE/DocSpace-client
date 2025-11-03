@@ -3,7 +3,7 @@
   "content": "Started to fill.",
   "content_en_sha1_hash": "bab99848f56bf61cd12c948d2c1dfd7cd478d768",
   "created_at": "2025-05-19T21:30:54.865Z",
-  "updated_at": "2025-10-13T13:22:35.736Z",
+  "updated_at": "2025-11-03T12:10:35.121Z",
   "comment": {
     "text": "This translation key is used to display a status message indicating when a form starts being filled, likely on a button or submit action in an info panel. It is part of a larger context related to file custom filters and form states in a user interface. Translators should aim to convey the idea that the form has begun being populated with data.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 366,
+      "line_number": 409,
       "context": "return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");\n \n case FeedActionKeys.FormPartiallyFilled:\n return t(\"InfoPanel:FormPartiallyFilled\");\n \n case FeedActionKeys.FormCompletelyFilled:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 315,
+      "line_number": 353,
       "context": "return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");\n \n case FeedActionKeys.FormPartiallyFilled:\n return t(\"InfoPanel:FormPartiallyFilled\");\n \n case FeedActionKeys.FormCompletelyFilled:",
       "module": "/packages/client"
     }

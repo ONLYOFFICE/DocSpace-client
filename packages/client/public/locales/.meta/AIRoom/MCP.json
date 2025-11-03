@@ -3,7 +3,7 @@
   "content": "MCP tools for this room",
   "content_en_sha1_hash": "b32783807f339a24dcf4fb105c7a70cdc92d3c70",
   "created_at": "2025-10-27T16:14:31.670Z",
-  "updated_at": "2025-10-27T17:01:03.045Z",
+  "updated_at": "2025-11-03T12:10:34.976Z",
   "comment": {
     "text": "Label for a button or section displaying MCP tools related to the current room or agent. This text appears within dialogs related to creating or editing rooms and agents, indicating access to MCP server configurations. Translators should ensure the description accurately reflects the functionality of the linked tools.",
     "is_auto": true,
@@ -14,12 +14,6 @@
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
       "line_number": 32,
       "context": "import React from \"react\";\n import { useTranslation } from \"react-i18next\";\n \n import { Text } from \"@docspace/shared/components/text\";\n import { SelectorAddButton } from \"@docspace/shared/components/selector-add-button\";\n import MCPServersSelector from \"@docspace/shared/selectors/MCPServers\";\n import { TSelectorItem } from \"@docspace/shared/components/selector\";\n import { IconButton } from \"@docspace/shared/components/icon-button\";\n import { TAgentParams } from \"@docspace/shared/utils/aiAgents\";\n import { getServersListForRoom } from \"@docspace/shared/api/ai\";\n import { getServerIcon } from \"@docspace/shared/utils\";",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/AiRoomSettings/MCP.tsx",
-      "line_number": 32,
-      "context": "import React from \"react\";\n import { useTranslation } from \"react-i18next\";\n \n import { Text } from \"@docspace/shared/components/text\";\n import { SelectorAddButton } from \"@docspace/shared/components/selector-add-button\";\n import MCPServersSelector from \"@docspace/shared/selectors/MCPServers\";\n import { TSelectorItem } from \"@docspace/shared/components/selector\";\n import { IconButton } from \"@docspace/shared/components/icon-button\";\n import { TRoomParams } from \"@docspace/shared/utils/rooms\";\n import { getServersListForRoom } from \"@docspace/shared/api/ai\";\n import { getServerIcon } from \"@docspace/shared/utils\";",
       "module": "/packages/client"
     }
   ],

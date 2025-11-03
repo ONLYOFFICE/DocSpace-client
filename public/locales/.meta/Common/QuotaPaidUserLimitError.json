@@ -3,7 +3,7 @@
   "content": "The paid user limit has been reached.",
   "content_en_sha1_hash": "e1d3147e981910f2b0f7ffe1cc79d9fbc9a364c2",
   "created_at": "2025-05-19T21:30:47.705Z",
-  "updated_at": "2025-09-07T07:53:15.037Z",
+  "updated_at": "2025-11-03T12:10:34.937Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user's paid quota has been reached. It appears in various UI components, such as error messages and payment-related interfaces, indicating that the user has exceeded their paid limit. The text translates to \"The paid user limit has been reached.\"",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
-      "line_number": 113,
+      "line_number": 139,
       "context": "case ValidationResult.TariffLimit:\n console.error(\"tariff limit\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:QuotaPaidUserLimitError\"));\n case ValidationResult.QuotaFailed:\n console.error(\"access below quota\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
       "module": "/packages/login"
     },

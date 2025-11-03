@@ -1,0 +1,28 @@
+{
+  "key_path": "AItoolsConfirm",
+  "content": "Enabling the AI tools service will grant all {{productName}} users access to AI-powered features, provided the wallet has sufficient funds. Are you sure you want to continue?",
+  "content_en_sha1_hash": "41f80688bdfeed997d4ff6f2119ac0d31489e252",
+  "created_at": "2025-11-03T12:10:29.414Z",
+  "updated_at": "2025-11-03T12:30:46.986Z",
+  "comment": {
+    "text": "This key displays a confirmation dialog asking users if they want to enable the AI tools service for all users of the {{productName}}, requiring sufficient wallet funds. It appears within the Portal Settings page, specifically in the Services section, and serves as a final confirmation step before activating the AI tools.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:30:46.986Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 150,
+      "context": "productName: t(\"Common:ProductName\"),\n }),\n },\n [AI_TOOLS]: {\n title: t(\"Common:Confirmation\"),\n body: t(\"Services:AItoolsConfirm\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n [WEB_SEARCH]: {\n title: t(\"Common:Confirmation\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

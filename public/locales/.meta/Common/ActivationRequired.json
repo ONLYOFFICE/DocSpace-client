@@ -3,7 +3,7 @@
   "content": "activation required",
   "content_en_sha1_hash": "76f386238b282abadda4b1e1fbd6696b1704ebc9",
   "created_at": "2025-05-26T07:15:40.182Z",
-  "updated_at": "2025-10-27T16:14:33.229Z",
+  "updated_at": "2025-11-03T12:10:34.984Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that activation is required. It appears as an overlay or tooltip when a third-party storage provider is not connected or requires activation. Translators should update this text to match the context of their language.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/BackupStore.js",
-      "line_number": 369,
+      "line_number": 371,
       "context": "*/\n getThirdPartyAccount = (provider, t) => {\n const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);\n const serviceLabel = provider.connected\n ? serviceTitle\n : `${serviceTitle} (${t(\"Common:ActivationRequired\")})`;\n \n // const isConnected =\n //   this.connectedThirdPartyAccount?.providerKey === \"WebDav\"\n //     ? serviceTitle === this.connectedThirdPartyAccount?.title\n //     : provider.name === this.connectedThirdPartyAccount?.title;",
       "module": "/packages/client"
     },

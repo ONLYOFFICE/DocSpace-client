@@ -3,7 +3,7 @@
   "content": "Example: “Chats in this room are used for discussing project files. Please stay on topic and avoid off-topic conversations or sharing unrelated documents.”",
   "content_en_sha1_hash": "ccbfe4536215767f3fe13c63bac52c7851835929",
   "created_at": "2025-10-27T16:14:31.668Z",
-  "updated_at": "2025-10-27T17:04:38.155Z",
+  "updated_at": "2025-11-03T12:10:34.975Z",
   "comment": {
     "text": "This key provides placeholder text for a textarea that displays instructions or guidelines within a dialog box. These instructions inform users about the intended purpose and acceptable behavior within a chat room or agent creation process. Translators should focus on maintaining a clear and concise explanation of the room's/agent's purpose and expected user conduct.",
     "is_auto": true,
@@ -14,12 +14,6 @@
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Instructions.tsx",
       "line_number": 82,
       "context": "</div>\n <Textarea\n value={value}\n onChange={handleChange}\n heightTextArea={144}\n placeholder={t(\"InstructionsPlaceholder\")}\n />\n </div>\n </StyledParam>\n );\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/AiRoomSettings/Instructions.tsx",
-      "line_number": 82,
-      "context": "</div>\n <Textarea\n value={value}\n onChange={handleChange}\n heightTextArea={72}\n placeholder={t(\"InstructionsPlaceholder\")}\n />\n </div>\n </StyledParam>\n );\n };",
       "module": "/packages/client"
     }
   ],

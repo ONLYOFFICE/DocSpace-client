@@ -68,13 +68,16 @@ const TableRow = React.memo((props: TableRowProps) => {
   const cm = useRef<ContextMenuRefType>(null);
   const row = useRef<HTMLDivElement | null>(null);
 
-  const onContextMenu = (e: React.MouseEvent) => {
-    fileContextClick?.(e.button === 2);
-    if (cm.current && !cm.current?.menuRef.current) {
-      row.current?.click();
-    }
-    if (cm.current) cm.current.show(e);
-  };
+  const onContextMenu = useCallback(
+    (e: React.MouseEvent) => {
+      fileContextClick?.(e.button === 2);
+      if (cm.current && !cm.current?.menuRef.current) {
+        row.current?.click();
+      }
+      if (cm.current) cm.current.show(e);
+    },
+    [cm, fileContextClick, row],
+  );
 
   const renderContext =
     hasOwnProperty(props, "contextOptions") &&

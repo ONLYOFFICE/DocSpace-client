@@ -133,7 +133,7 @@ const FilesTableRow = memo((props) => {
 
   const selectionProp = useMemo(() => {
     return {
-      className: `files-item ${className} ${value}`,
+      className: classNames("files-item", className, value),
       value,
       documentTitle,
     };

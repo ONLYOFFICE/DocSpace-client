@@ -27,8 +27,8 @@
 import type { LinkTarget } from "../components/link";
 
 export interface FileItem {
-  isPlugin: boolean;
-  viewUrl: string;
+  isPlugin?: boolean;
+  viewUrl?: string;
   title?: string;
   [key: string]: unknown;
 }
@@ -72,7 +72,9 @@ export const createPluginFileHandlers = (
   };
 
   newLinkProps.onContextMenu = (e: React.MouseEvent) => {
-    e.currentTarget.setAttribute("href", item.viewUrl);
+    if (item.viewUrl) {
+      e.currentTarget.setAttribute("href", item.viewUrl);
+    }
     e.currentTarget.setAttribute("download", title);
   };
 

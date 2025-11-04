@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo, useCallback, useMemo } from "react";
+import React, { ChangeEvent, memo, useCallback, useMemo } from "react";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { classNames } from "@docspace/shared/utils";
@@ -34,81 +34,87 @@ import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-uti
 
 import { FileName } from "./FileNameCell.helpers";
 import { tableCellStyle } from "./FileNameCell.constants";
+import type {
+  FileNameCellComponent,
+  FileNameCellItem,
+  FileNameCellProps,
+} from "./FileNameCell.types";
 
-const FileNameCell = memo(
-  ({
-    item,
-    titleWithoutExt,
-    linkStyles,
-    element,
-    onContentSelect,
-    checked,
-    theme,
-    t,
-    inProgress,
-    isIndexEditingMode,
-    displayFileExtension,
-  }) => {
-    const { title, fileExst } = item;
+const FileNameCell = <T extends FileNameCellItem = FileNameCellItem>({
+  item,
+  titleWithoutExt,
+  linkStyles,
+  element,
+  onContentSelect,
+  checked,
+  theme,
+  t,
+  inProgress,
+  isIndexEditingMode,
+  displayFileExtension,
+}: FileNameCellProps<T>) => {
+  const { title } = item;
 
-    const onChange = useCallback(
-      (e) => {
-        onContentSelect && onContentSelect(e.target.checked, item);
-      },
-      [onContentSelect, item],
-    );
+  const fileExst =
+    item !== null && "fileExst" in item && item.fileExst ? item.fileExst : "";
 
-    const indexingClass = isIndexEditingMode ? "item-file-name-index" : "";
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      onContentSelect && onContentSelect(e.target.checked, item);
+    },
+    [onContentSelect, item],
+  );
 
-    const linkProps = useMemo(() => {
-      const baseProps = isIndexEditingMode ? null : { ...linkStyles };
+  const indexingClass = isIndexEditingMode ? "item-file-name-index" : "";
 
-      return createPluginFileHandlers(item, baseProps);
-    }, [item, isIndexEditingMode]);
+  const linkProps = useMemo(() => {
+    const baseProps = isIndexEditingMode ? undefined : { ...linkStyles };
 
-    return (
-      <>
-        {inProgress ? (
-          <Loader
-            className="table-container_row-loader"
-            color=""
-            size="20px"
-            type={LoaderTypes.track}
-          />
-        ) : (
-          <TableCell
-            className={classNames("table-container_element-wrapper", {
-              "table-container-index": isIndexEditingMode,
-            })}
-            style={tableCellStyle}
-            hasAccess
-            checked={checked}
-          >
-            <div className="table-container_element-container">
-              <div className="table-container_element">{element}</div>
-              {!isIndexEditingMode ? (
-                <Checkbox
-                  className="table-container_row-checkbox"
-                  onChange={onChange}
-                  isChecked={checked}
-                  title={t("Common:TitleSelectFile")}
-                />
-              ) : null}
-            </div>
-          </TableCell>
-        )}
-        <FileName
-          title={title}
-          color={theme.filesSection.tableView.fileName.linkColor}
-          linkProps={linkProps}
-          indexingClass={indexingClass}
-          titleWithoutExt={titleWithoutExt}
-          displayFileExtension={displayFileExtension}
-          fileExst={fileExst}
+    return createPluginFileHandlers(item, baseProps);
+  }, [item, isIndexEditingMode, linkStyles]);
+
+  return (
+    <>
+      {inProgress ? (
+        <Loader
+          className="table-container_row-loader"
+          color=""
+          size="20px"
+          type={LoaderTypes.track}
         />
-      </>
-    );
-  },
-);
+      ) : (
+        <TableCell
+          className={classNames("table-container_element-wrapper", {
+            "table-container-index": isIndexEditingMode,
+          })}
+          style={tableCellStyle}
+          hasAccess
+          checked={checked}
+        >
+          <div className="table-container_element-container">
+            <div className="table-container_element">{element}</div>
+            {!isIndexEditingMode ? (
+              <Checkbox
+                className="table-container_row-checkbox"
+                onChange={onChange}
+                isChecked={checked}
+                title={t("Common:TitleSelectFile")}
+              />
+            ) : null}
+          </div>
+        </TableCell>
+      )}
+      <FileName
+        title={title}
+        color={theme.filesSection.tableView.fileName.linkColor}
+        linkProps={linkProps}
+        indexingClass={indexingClass}
+        titleWithoutExt={titleWithoutExt}
+        displayFileExtension={displayFileExtension}
+        fileExst={fileExst}
+      />
+    </>
+  );
+};
 
-export default FileNameCell;
+export default memo(FileNameCell) as FileNameCellComponent;

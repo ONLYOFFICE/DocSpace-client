@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TTheme } from "@docspace/shared/themes";
+import type { TTranslation } from "@docspace/shared/types";
 import type { LinkProps } from "@docspace/shared/utils/plugin-file-utils";
 
 export interface FileNameProps {
@@ -35,3 +37,30 @@ export interface FileNameProps {
   displayFileExtension: boolean;
   fileExst: string;
 }
+
+export type FileNameCellItem = {
+  title: string;
+  isPlugin?: boolean;
+  viewUrl?: string;
+  fileExst?: string;
+};
+
+export interface FileNameCellProps<T> {
+  item: T;
+  titleWithoutExt: string;
+  linkStyles: LinkProps;
+  onContentSelect?: (checked: boolean, item: T) => void;
+  element: React.ReactNode;
+  checked: boolean;
+  theme: TTheme;
+  t: TTranslation;
+  inProgress: boolean;
+  isIndexEditingMode: boolean;
+  displayFileExtension: boolean;
+}
+
+export type FileNameCellComponent = <
+  T extends FileNameCellItem = FileNameCellItem,
+>(
+  props: FileNameCellProps<T>,
+) => React.ReactElement;

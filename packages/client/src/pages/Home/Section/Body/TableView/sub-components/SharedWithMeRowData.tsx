@@ -78,7 +78,7 @@ interface SharedWithMeRowDataProps {
   fileOwner: string;
 
   create?: unknown;
-  checkedProps?: boolean;
+  checkedProps: boolean;
   showHotkeyBorder?: boolean;
   onContentFileSelect?: (checked: boolean, item: TFile | TFolder) => void;
 }
@@ -136,7 +136,7 @@ const SharedWithMeRowData: FC<
           "table-container_file-name-cell",
         )}
       >
-        <FileNameCell
+        <FileNameCell<TFile | TFolder>
           {...props}
           theme={theme}
           checked={checkedProps}

@@ -87,4 +87,4 @@ const TypeCell = ({ t, item, sideColor }) => {
     </StyledTypeCell>
   );
 };
-export default TypeCell;
+export default React.memo(TypeCell);

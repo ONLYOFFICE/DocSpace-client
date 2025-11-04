@@ -66,4 +66,4 @@ const AuthorCell = ({ fileOwner, sideColor, item }) => {
   );
 };
 
-export default AuthorCell;
+export default React.memo(AuthorCell);

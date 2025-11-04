@@ -104,7 +104,7 @@ const SharedWithMeRowData: FC<
     inProgress,
     checkedProps,
     selectionProp,
-    showHotkeyBorder,
+    // showHotkeyBorder,
     onContentFileSelect,
     badgesComponent,
     quickButtonsComponent,
@@ -125,6 +125,8 @@ const SharedWithMeRowData: FC<
     </StyledQuickButtonsContainer>
   );
 
+  const sideColor = theme.filesSection.tableView.row.sideColor;
+
   return (
     <>
       <TableCell
@@ -137,27 +139,26 @@ const SharedWithMeRowData: FC<
         )}
       >
         <FileNameCell<TFile | TFolder>
-          {...props}
           theme={theme}
           checked={checkedProps}
           element={element}
           inProgress={inProgress}
           onContentSelect={onContentFileSelect}
+          t={props.t}
+          item={props.item}
+          linkStyles={props.linkStyles}
+          titleWithoutExt={props.titleWithoutExt}
+          isIndexEditingMode={props.isIndexEditingMode}
+          displayFileExtension={props.displayFileExtension}
         />
-        <StyledBadgesContainer {...{ showHotkeyBorder }}>
-          {badgesComponent}
-        </StyledBadgesContainer>
+        <StyledBadgesContainer>{badgesComponent}</StyledBadgesContainer>
         {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
 
       {authorShareWithMeColumnIsEnabled ? (
         <TableCell
           dataTestId={`shared-with-me-cell-author-${index}`}
-          style={
-            !authorShareWithMeColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -165,8 +166,9 @@ const SharedWithMeRowData: FC<
           )}
         >
           <AuthorCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            sideColor={sideColor}
+            fileOwner={props.fileOwner}
+            item={props.item}
           />
           {lastColumn === "AuthorShareWithMe" ? lastColumnContent : null}
         </TableCell>
@@ -177,11 +179,7 @@ const SharedWithMeRowData: FC<
       {accessLevelShareWithMeColumnIsEnabled ? (
         <TableCell
           dataTestId={`shared-with-me-cell-access-level-${index}`}
-          style={
-            !accessLevelShareWithMeColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -189,8 +187,9 @@ const SharedWithMeRowData: FC<
           )}
         >
           <AccessLevelCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            sideColor={sideColor}
+            item={props.item}
+            t={props.t}
           />
           {lastColumn === "AccessLevelShareWithMe" ? lastColumnContent : null}
         </TableCell>
@@ -201,11 +200,7 @@ const SharedWithMeRowData: FC<
       {modifiedShareWithMeColumnIsEnabled ? (
         <TableCell
           dataTestId={`shared-with-me-cell-modified-${index}`}
-          style={
-            !modifiedShareWithMeColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -213,9 +208,12 @@ const SharedWithMeRowData: FC<
           )}
         >
           <DateCell
-            create={undefined}
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            sideColor={sideColor}
+            create={props.create}
+            updatedDate={props.updatedDate}
+            createdDate={props.createdDate}
+            lastOpenedDate={props.lastOpenedDate}
+            isRecentFolder={props.isRecentFolder}
           />
           {lastColumn === "ModifiedShareWithMe" ? lastColumnContent : null}
         </TableCell>
@@ -226,21 +224,14 @@ const SharedWithMeRowData: FC<
       {sizeShareWithMeColumnIsEnabled ? (
         <TableCell
           dataTestId={`shared-with-me-cell-size-${index}`}
-          style={
-            !sizeShareWithMeColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
             lastColumn === "SizeShareWithMe" ? "no-extra-space" : "",
           )}
         >
-          <SizeCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <SizeCell sideColor={sideColor} item={props.item} />
           {lastColumn === "SizeShareWithMe" ? lastColumnContent : null}
         </TableCell>
       ) : (
@@ -250,21 +241,14 @@ const SharedWithMeRowData: FC<
       {typeShareWithMeColumnIsEnabled ? (
         <TableCell
           dataTestId={`shared-with-me-cell-type-${index}`}
-          style={
-            !typeShareWithMeColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
             lastColumn === "TypeShareWithMe" ? "no-extra-space" : "",
           )}
         >
-          <TypeCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <TypeCell sideColor={sideColor} t={props.t} item={props.item} />
           {lastColumn === "TypeShareWithMe" ? lastColumnContent : null}
         </TableCell>
       ) : (

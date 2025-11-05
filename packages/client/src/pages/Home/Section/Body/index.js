@@ -467,7 +467,7 @@ const SectionBodyContent = (props) => {
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 
-  if (currentTab === "knowledge" && !aiConfig.vectorizationEnabled)
+  if (currentTab === "knowledge" && !aiConfig?.vectorizationEnabled)
     return <KnowledgeDisabledContainer />;
 
   if (

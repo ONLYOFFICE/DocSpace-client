@@ -1072,7 +1072,6 @@ class SettingsStore {
       await Promise.all([
         this.getPortalSettings(),
         this.getAppearanceTheme(),
-        this.getAIConfig(),
       ]);
 
       if (!this.isPortalDeactivate) {

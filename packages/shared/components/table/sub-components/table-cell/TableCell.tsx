@@ -26,11 +26,12 @@
 
 import React from "react";
 import classNames from "classnames";
+import equal from "fast-deep-equal/react";
 
 import { TableCellProps } from "../../Table.types";
 import styles from "./TableCell.module.scss";
 
-const TableCell = (props: TableCellProps) => {
+const TableCell = React.memo((props: TableCellProps) => {
   const {
     className,
     forwardedRef,
@@ -69,6 +70,6 @@ const TableCell = (props: TableCellProps) => {
       {children}
     </div>
   );
-};
+}, equal);
 
 export { TableCell };

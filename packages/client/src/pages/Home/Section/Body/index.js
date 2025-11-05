@@ -36,6 +36,7 @@ import {
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
+import { EMPTY_ARRAY } from "@docspace/shared/constants";
 import {
   DeviceType,
   VDRIndexingAction,
@@ -199,7 +200,7 @@ const SectionBodyContent = (props) => {
       e.target.closest("#filter_search-input") ||
       isHeaderOptionButton(e)
     ) {
-      setSelection([]);
+      setSelection(EMPTY_ARRAY);
       setBufferSelection(null);
       setHotkeyCaretStart(null);
       setHotkeyCaret(null);

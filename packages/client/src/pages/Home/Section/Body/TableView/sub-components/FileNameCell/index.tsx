@@ -24,14 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Link } from "@docspace/shared/components/link";
+import React, { ChangeEvent, memo, useCallback, useMemo } from "react";
+
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { classNames } from "@docspace/shared/utils";
 import { TableCell } from "@docspace/shared/components/table";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
-const FileNameCell = ({
+import { FileName } from "./FileNameCell.helpers";
+import { tableCellStyle } from "./FileNameCell.constants";
+import type {
+  FileNameCellComponent,
+  FileNameCellItem,
+  FileNameCellProps,
+} from "./FileNameCell.types";
+
+const FileNameCell = <T extends FileNameCellItem = FileNameCellItem>({
   item,
   titleWithoutExt,
   linkStyles,
@@ -43,16 +52,26 @@ const FileNameCell = ({
   inProgress,
   isIndexEditingMode,
   displayFileExtension,
-}) => {
-  const { title, fileExst } = item;
+}: FileNameCellProps<T>) => {
+  const { title } = item;
 
-  const onChange = (e) => {
-    onContentSelect && onContentSelect(e.target.checked, item);
-  };
+  const fileExst =
+    item !== null && "fileExst" in item && item.fileExst ? item.fileExst : "";
+
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      onContentSelect && onContentSelect(e.target.checked, item);
+    },
+    [onContentSelect, item],
+  );
 
   const indexingClass = isIndexEditingMode ? "item-file-name-index" : "";
-  const baseProps = isIndexEditingMode ? null : { ...linkStyles };
-  const linkProps = createPluginFileHandlers(item, baseProps);
+
+  const linkProps = useMemo(() => {
+    const baseProps = isIndexEditingMode ? undefined : { ...linkStyles };
+
+    return createPluginFileHandlers(item, baseProps);
+  }, [item, isIndexEditingMode, linkStyles]);
 
   return (
     <>
@@ -68,7 +87,7 @@ const FileNameCell = ({
           className={classNames("table-container_element-wrapper", {
             "table-container-index": isIndexEditingMode,
           })}
-          style={{ background: "none !important" }}
+          style={tableCellStyle}
           hasAccess
           checked={checked}
         >
@@ -85,25 +104,17 @@ const FileNameCell = ({
           </div>
         </TableCell>
       )}
-      <Link
-        type="page"
+      <FileName
         title={title}
-        fontWeight="600"
-        fontSize="13px"
         color={theme.filesSection.tableView.fileName.linkColor}
-        isTextOverflow
-        {...linkProps}
-        className={`item-file-name ${indexingClass}`}
-        dir="auto"
-        truncate
-      >
-        {titleWithoutExt}
-        {displayFileExtension ? (
-          <span className="item-file-exst">{fileExst}</span>
-        ) : null}
-      </Link>
+        linkProps={linkProps}
+        indexingClass={indexingClass}
+        titleWithoutExt={titleWithoutExt}
+        displayFileExtension={displayFileExtension}
+        fileExst={fileExst}
+      />
     </>
   );
 };
 
-export default FileNameCell;
+export default memo(FileNameCell) as FileNameCellComponent;

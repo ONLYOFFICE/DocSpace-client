@@ -35,10 +35,7 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
-import {
-  openShareTab,
-  forcedShowInfoPanelLoader,
-} from "SRC_DIR/helpers/info-panel";
+import { openShareTab } from "SRC_DIR/helpers/info-panel";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -153,14 +150,11 @@ export default function withQuickButtons(WrappedComponent) {
       const {
         item,
         setBufferSelection,
-        infoPanelSelection,
-        isShareTabActive,
         resetSelections,
+        showForcedInfoPanelLoader,
       } = this.props;
 
-      if (infoPanelSelection?.id === item.id && isShareTabActive) {
-        forcedShowInfoPanelLoader();
-      }
+      showForcedInfoPanelLoader(item.id);
 
       resetSelections();
       setBufferSelection(item);
@@ -266,8 +260,7 @@ export default function withQuickButtons(WrappedComponent) {
       const {
         setShareChanged,
         infoPanelRoomSelection,
-        infoPanelSelection,
-        isShareTabActive,
+        showForcedInfoPanelLoader,
       } = infoPanelStore;
 
       const { getManageLinkOptions } = contextOptionsStore;
@@ -295,8 +288,7 @@ export default function withQuickButtons(WrappedComponent) {
         isRecentFolder,
         retryVectorization,
         isTrashFolder,
-        isShareTabActive,
-        infoPanelSelection,
+        showForcedInfoPanelLoader,
       };
     },
   )(observer(WithQuickButtons));

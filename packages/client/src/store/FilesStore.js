@@ -1985,6 +1985,7 @@ class FilesStore {
         } else {
           this.aiRoomStore.setKnowledgeId(null);
           this.aiRoomStore.setResultId(null);
+          this.aiRoomStore.setCurrentTab(null);
         }
 
         runInAction(() => {
@@ -2211,6 +2212,7 @@ class FilesStore {
 
     this.aiRoomStore.setKnowledgeId(null);
     this.aiRoomStore.setResultId(null);
+    this.aiRoomStore.setCurrentTab(null);
 
     const request = () =>
       api.rooms
@@ -2379,6 +2381,8 @@ class FilesStore {
 
     this.aiRoomStore.setKnowledgeId(null);
     this.aiRoomStore.setResultId(null);
+
+    this.aiRoomStore.setCurrentTab(null);
 
     const request = () =>
       api.ai

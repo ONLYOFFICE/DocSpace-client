@@ -149,12 +149,12 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     (option: TOption) => {
       const provider = providers.find((p) => p.id === option.key);
 
-      if (!provider || provider.id === option.key) return;
+      if (!provider || provider.id === selectedProvider.id) return;
 
       setSelectedProvider(provider);
       setSelectedModel(null);
     },
-    [providers],
+    [providers, selectedProvider.id],
   );
 
   const modelOptions = React.useMemo(() => {
@@ -192,11 +192,11 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   React.useEffect(() => {
     if (!selectedModel) return;
 
-    if (
-      prevSelectedModel.current?.modelId === selectedModel?.modelId ||
-      typeof selectedModel.providerId !== "number"
-    )
-      return;
+    const hasChanges =
+      prevSelectedModel.current?.modelId !== selectedModel?.modelId ||
+      prevSelectedModel.current?.providerId !== selectedModel?.providerId;
+
+    if (!hasChanges || typeof selectedModel.providerId !== "number") return;
 
     setAgentParams({
       ...agentParams,
@@ -205,7 +205,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     });
 
     prevSelectedModel.current = selectedModel;
-  }, [selectedModel?.modelId, agentParams]);
+  }, [selectedModel?.modelId, selectedModel?.providerId, agentParams]);
 
   return (
     <StyledParam increaseGap>

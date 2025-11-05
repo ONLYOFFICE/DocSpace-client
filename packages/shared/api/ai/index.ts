@@ -29,7 +29,7 @@ import { getCookie } from "../../utils";
 
 import { request } from "../client";
 import { TFile } from "../files/types";
-import { ToolsPermission, WebSearchType } from "./enums";
+import { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
 import { checkFilterInstance } from "../../utils/common";
 
@@ -48,6 +48,7 @@ import {
   type TAddNewServer,
   type TUpdateServer,
   type WebSearchConfig,
+  type KnowledgeConfig,
   type TAIConfig,
   TAgent,
   TCreateAgentData,
@@ -526,6 +527,39 @@ export const updateWebSearchConfig = async (
       method: "put",
       url: `${baseUrl}/config/web-search`,
       data: { enabled, type, key },
+    });
+
+    return res;
+  } catch (e) {
+    console.log(e);
+    toastr.error(e as string);
+    throw e;
+  }
+};
+
+export const getKnowledgeConfig = async () => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/config/vectorization`,
+    });
+
+    return res as KnowledgeConfig;
+  } catch (e) {
+    console.log(e);
+    toastr.error(e as string);
+  }
+};
+
+export const updateKnowledgeConfig = async (
+  type: KnowledgeType,
+  key: string,
+) => {
+  try {
+    const res = await request({
+      method: "put",
+      url: `${baseUrl}/config/vectorization`,
+      data: { type, key },
     });
 
     return res;

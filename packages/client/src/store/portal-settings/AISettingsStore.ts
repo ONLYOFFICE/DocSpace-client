@@ -29,7 +29,8 @@
 import { makeAutoObservable } from "mobx";
 
 import {
-  WebSearchConfig,
+  type WebSearchConfig,
+  type KnowledgeConfig,
   type TAddNewServer,
   type TAiProvider,
   type TCreateAiProvider,
@@ -49,8 +50,14 @@ import {
   updateServerStatus,
   getWebSearchConfig,
   updateWebSearchConfig,
+  updateKnowledgeConfig,
+  getKnowledgeConfig,
 } from "@docspace/shared/api/ai";
-import { ServerType, WebSearchType } from "@docspace/shared/api/ai/enums";
+import {
+  ServerType,
+  WebSearchType,
+  KnowledgeType,
+} from "@docspace/shared/api/ai/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
 class AISettingsStore {
@@ -62,7 +69,11 @@ class AISettingsStore {
 
   webSearchConfig: WebSearchConfig | null = null;
 
+  knowledgeConfig: KnowledgeConfig | null = null;
+
   aiProvidersInitied = false;
+
+  knowledgeInitied = false;
 
   mcpServersInitied = false;
 
@@ -78,6 +89,10 @@ class AISettingsStore {
 
   setAiProvidersInitied = (value: boolean) => {
     this.aiProvidersInitied = value;
+  };
+
+  setKnowledgeInitied = (value: boolean) => {
+    this.knowledgeInitied = value;
   };
 
   setMCPServersInitied = (value: boolean) => {
@@ -98,6 +113,10 @@ class AISettingsStore {
 
   setWebSearchConfig = (config: WebSearchConfig | null) => {
     this.webSearchConfig = config;
+  };
+
+  setKnowledgeConfig = (config: KnowledgeConfig | null) => {
+    this.knowledgeConfig = config;
   };
 
   addAIProvider = async (provider: TCreateAiProvider) => {
@@ -178,6 +197,36 @@ class AISettingsStore {
     try {
       await updateWebSearchConfig(false, WebSearchType.None, "");
       this.setWebSearchConfig(null);
+    } catch {
+      //ignore
+    }
+  };
+
+  fetchKnowledge = async () => {
+    try {
+      const res = await getKnowledgeConfig();
+
+      this.setKnowledgeInitied(true);
+
+      if (res) this.setKnowledgeConfig(res);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  updateKnowledge = async (type: KnowledgeType, key: string) => {
+    try {
+      await updateKnowledgeConfig(type, key);
+      this.setKnowledgeConfig({ type, key });
+    } catch {
+      //ignore
+    }
+  };
+
+  restoreKnowledge = async () => {
+    try {
+      await updateKnowledgeConfig(KnowledgeType.None, "");
+      this.setKnowledgeConfig(null);
     } catch {
       //ignore
     }

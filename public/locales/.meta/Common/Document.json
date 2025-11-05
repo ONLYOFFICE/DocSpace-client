@@ -3,7 +3,7 @@
   "content": "Document",
   "content_en_sha1_hash": "e214b8a29923056887b7edf6635d90dcbb2abe88",
   "created_at": "2025-05-19T21:30:44.571Z",
-  "updated_at": "2025-10-27T16:14:33.103Z",
+  "updated_at": "2025-11-03T12:10:34.867Z",
   "comment": {
     "text": "This translation key is used for the label \"Document\" on buttons and links, appearing as part of a file path in `/packages/client/src/components/Article/MainButton/index.js` and a list of options in `/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js`. The text promotes creating a new document.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 395,
+      "line_number": 429,
       "context": "key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {\n key: \"create-Document\",\n label: t(\"Common:Document\"),\n icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",",
       "module": "/packages/client"
     },

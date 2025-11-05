@@ -3,7 +3,7 @@
   "content": "Select .DOCX file",
   "content_en_sha1_hash": "bff9ac62060c554eef777047f11e53f604167bf2",
   "created_at": "2025-05-19T21:30:48.392Z",
-  "updated_at": "2025-10-27T16:14:33.137Z",
+  "updated_at": "2025-11-03T12:10:34.920Z",
   "comment": {
     "text": "The translation key \"SelectDOCXFormat\" is used to translate the text that appears when selecting a .DOCX file in the UI, likely as a filter or option in a dialog box. It appears in the FilesSelector component and its corresponding modal.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 475,
+      "line_number": 483,
       "context": "!filterParam ||\n filterParam === \"ALL\" ||\n (filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||\n !descriptionText\n ? \"\"\n : (descriptionText ?? t(\"Common:SelectDOCXFormat\"))\n }\n submitButtonId={\n isMove || isCopy || isRestore ? \"select-file-modal-submit\" : \"\"\n }\n cancelButtonId={",
       "module": "/packages/client"
     }

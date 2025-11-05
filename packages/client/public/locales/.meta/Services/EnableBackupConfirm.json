@@ -3,7 +3,7 @@
   "content": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
   "content_en_sha1_hash": "30f47a8085a7a1bf1f7bbd806bf81f5a52c764c0",
   "created_at": "2025-08-21T14:45:38.902Z",
-  "updated_at": "2025-10-27T16:14:33.621Z",
+  "updated_at": "2025-11-03T12:10:35.337Z",
   "comment": {
     "text": "This key displays a confirmation dialog message when enabling the Backup service. It informs administrators that enabling backups allows them to create backups as long as the wallet balance is sufficient, and asks for confirmation. The message includes the product name for localization.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 114,
-      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmDialogVisible\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 137,
+      "context": "const confirmationDialogContent = {\n [BACKUP_SERVICE]: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     }
   ],

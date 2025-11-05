@@ -3,7 +3,7 @@
   "content": "Choose your portal",
   "content_en_sha1_hash": "baf622427618ef645a2014b502083b1cd768db08",
   "created_at": "2025-05-19T21:30:57.231Z",
-  "updated_at": "2025-08-21T11:22:39.940Z",
+  "updated_at": "2025-11-03T12:10:35.421Z",
   "comment": {
     "text": "The \"ChoosePortal\" translation key is used to display a title when choosing an authentication portal. It appears as a central heading in a login or greeting component, indicating that the user needs to select their preferred portal for authentication.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
-      "line_number": 127,
+      "line_number": 118,
       "context": "fontWeight={700}\n textAlign=\"center\"\n className=\"greeting-title\"\n >\n {pathname === \"/tenant-list\"\n ? t(\"TenantList:ChoosePortal\")\n : greetingSettings}\n </Text>\n );\n };",
       "module": "/packages/login"
     }

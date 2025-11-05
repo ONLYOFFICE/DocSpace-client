@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2025-10-27T16:14:33.304Z",
+  "updated_at": "2025-11-03T12:10:35.038Z",
   "comment": {
     "text": "This translation key displays the user's full name, typically their first and last names. It is used in a social authentication welcome dialog to provide user information. Translators should note that the name may be truncated or displayed as an alias if not available.",
     "is_auto": true,
@@ -78,13 +78,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 386,
+      "line_number": 389,
       "context": ") : null}\n </div>\n <div className={styles.infoWrapper}>\n <div className={styles.rowsContainer}>\n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Name\")}\n </Text>\n <div className={styles.profileBlockField}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 386,
+      "line_number": 389,
       "context": ") : null}\n </div>\n <div className={styles.infoWrapper}>\n <div className={styles.rowsContainer}>\n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Name\")}\n </Text>\n <div className={styles.profileBlockField}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>",
       "module": "/packages/client"
     }

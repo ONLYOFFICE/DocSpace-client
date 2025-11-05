@@ -3,7 +3,7 @@
   "content": "Content creator",
   "content_en_sha1_hash": "19984b0eed18a37a50dc1dace36b9a212c829a2e",
   "created_at": "2025-05-19T21:30:43.682Z",
-  "updated_at": "2025-09-17T13:43:01.692Z",
+  "updated_at": "2025-11-03T12:10:35.123Z",
   "comment": {
     "text": "This translation key is used to display the label \"Content Creator\" in various contexts throughout the application, such as access options and info panels. It is likely used consistently across different screens and interactions, including buttons or dialogs related to user roles or permissions, to provide a clear understanding of what this specific role entails.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 56,
+      "line_number": 65,
       "context": "access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n collaborator: {\n key: \"collaborator\",\n label: this.t(\"Common:ContentCreator\"),\n access: ShareAccessRights.Collaborator,\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 145,
+      "line_number": 162,
       "context": "roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },\n contentCreator: {\n key: \"contentCreator\",\n label: t(\"Common:ContentCreator\"),\n description: getUserDescription(roomType, t),\n access:\n roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },",
       "module": "/packages/shared"
     }

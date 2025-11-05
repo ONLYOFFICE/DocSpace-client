@@ -26,6 +26,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type {
+  EmptyViewButtonType,
   EmptyViewLinkType,
   EmptyViewOptionsType,
 } from "./EmptyView.types";
@@ -34,4 +35,12 @@ export const isEmptyLinkOptions = (
   options: EmptyViewOptionsType[number],
 ): options is EmptyViewLinkType => {
   return typeof options === "object" && "to" in options;
+};
+
+export const isEmptyButtonOption = (
+  option: EmptyViewOptionsType[number],
+): option is EmptyViewButtonType => {
+  return (
+    typeof option === "object" && "type" in option && option.type === "button"
+  );
 };

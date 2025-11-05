@@ -3,7 +3,7 @@
   "content": "Define the purpose and behavior of chats within this room. What should they do? How should they function? What should be avoided?",
   "content_en_sha1_hash": "43b39ac38c5d6f63a94347d4d3cb49144c587148",
   "created_at": "2025-10-27T16:14:31.668Z",
-  "updated_at": "2025-10-27T17:05:48.820Z",
+  "updated_at": "2025-11-03T12:10:34.975Z",
   "comment": {
     "text": "This text provides instructions for users to define the purpose and expected behavior of chat interactions within a room. It appears as a description within the Create/Edit Agent and Room dialogs, guiding users on what to specify for optimal chat functionality. Translators should focus on conveying guidance for setting room parameters.",
     "is_auto": true,
@@ -12,12 +12,6 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Instructions.tsx",
-      "line_number": 75,
-      "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"InstructionsDescription\")}\n </Text>\n </div>\n <Textarea\n value={value}\n onChange={handleChange}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/AiRoomSettings/Instructions.tsx",
       "line_number": 75,
       "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"InstructionsDescription\")}\n </Text>\n </div>\n <Textarea\n value={value}\n onChange={handleChange}",
       "module": "/packages/client"

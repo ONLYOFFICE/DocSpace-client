@@ -3,7 +3,7 @@
   "content": "Years",
   "content_en_sha1_hash": "96f997bcecb36502ed4b296a795f72aff9d6bfe7",
   "created_at": "2025-05-19T21:30:49.621Z",
-  "updated_at": "2025-10-27T16:14:33.224Z",
+  "updated_at": "2025-11-03T12:10:34.981Z",
   "comment": {
     "text": "This translation key is used for labeling options in a \"Years\" dropdown menu within the File Lifetime dialog. It will appear as the label on a button or select element in this specific component, and its purpose is to display the translated phrase \"Years\".",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 475,
+      "line_number": 488,
       "context": "case 0:\n return t(\"Common:Days\").toLowerCase();\n case 1:\n return t(\"Common:Months\").toLowerCase();\n case 2:\n return t(\"Common:Years\").toLowerCase();\n \n default:\n return t(\"Common:Days\").toLowerCase();\n }\n };",
       "module": "/packages/shared"
     }

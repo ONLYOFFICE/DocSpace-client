@@ -125,7 +125,7 @@ const ContextMenu = (props: ContextMenuProps) => {
     onMouseMove,
     setActiveHotkeysModel,
   } = useContextMenuHotkeys({
-    model: propsModel ?? model ?? getContextModel?.(),
+    model: model ?? getContextModel?.() ?? propsModel,
     currentEvent,
   });
 

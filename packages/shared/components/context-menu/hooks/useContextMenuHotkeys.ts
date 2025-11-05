@@ -63,7 +63,7 @@ const useContextMenuHotkeys = ({
     if (!clearModel.length) return e;
 
     const clearModelIndex = clearModel.findIndex(
-      (elem) => elem.id === menuModel[currentIndex].id,
+      (elem) => elem.key === menuModel[currentIndex].key,
     );
 
     switch (e.code) {
@@ -110,18 +110,31 @@ const useContextMenuHotkeys = ({
         {
           if (!activeItems || !activeItems.length) return;
 
-          const prevItem = activeItems.at(-1);
-          const prevModel = activeItems.at(-2)?.items ?? model;
+          const prevItem =
+            activeLevel !== activeItems?.length
+              ? activeItems.at(-2)
+              : activeItems.at(-1);
+
+          const prevActiveItems =
+            activeLevel !== activeItems?.length
+              ? activeItems.at(-3)
+              : activeItems.at(-2);
+
+          const prevModel = prevActiveItems?.items ?? model;
           const prevModelIndex = prevModel?.findIndex(
-            (x) => x.id === prevItem?.id,
+            (x) => x.key === prevItem?.key,
           );
 
           setCurrentIndex(prevModelIndex > -1 ? prevModelIndex : 0);
           setActiveModel(prevModel);
           setActiveLevel((prevLevel) => prevLevel - 1);
-          setActiveItems((prevActiveItems) =>
-            prevActiveItems ? prevActiveItems.slice(0, -1) : prevActiveItems,
-          );
+
+          setActiveItems((prevActiveItems) => {
+            if (!prevActiveItems) return prevActiveItems;
+            return activeLevel !== prevActiveItems?.length
+              ? prevActiveItems.slice(0, -2)
+              : prevActiveItems.slice(0, -1);
+          });
         }
         break;
       // case "Enter":
@@ -157,7 +170,7 @@ const useContextMenuHotkeys = ({
   ) => {
     if (!item) return;
 
-    const itemIndex = model.findIndex(({ id }) => id === item.id);
+    const itemIndex = model.findIndex(({ key }) => key === item.key);
 
     setCurrentIndex(itemIndex);
     setActiveModel(model);

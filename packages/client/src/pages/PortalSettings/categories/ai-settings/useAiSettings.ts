@@ -34,12 +34,14 @@ type UseAiSettingsProps = {
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
   fetchMCPServers?: AISettingsStore["fetchMCPServers"];
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
+  fetchKnowledge?: AISettingsStore["fetchKnowledge"];
 };
 
 const useAISettings = ({
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
+  fetchKnowledge,
   standalone,
 }: UseAiSettingsProps) => {
   const navigate = useNavigate();
@@ -56,10 +58,15 @@ const useAISettings = ({
     await Promise.all([fetchWebSearch?.(), fetchAIProviders?.()]);
   }, [fetchWebSearch, fetchAIProviders]);
 
+  const initKnowledge = React.useCallback(async () => {
+    await Promise.all([fetchKnowledge?.(), fetchAIProviders?.()]);
+  }, [fetchKnowledge, fetchAIProviders]);
+
   const getAiSettingsInitialValue = React.useCallback(async () => {
     const isProviders = window.location.pathname.includes("providers");
     const isServers = window.location.pathname.includes("servers");
     const isSearch = window.location.pathname.includes("search");
+    const isKnowledge = window.location.pathname.includes("knowledge");
 
     if (!standalone && !isServers) {
       navigate("/portal-settings/ai-settings/servers");
@@ -71,12 +78,14 @@ const useAISettings = ({
     if (isProviders) await initAIProviders();
     if (isServers) await initMCPServers();
     if (isSearch) await initWebSearch();
-  }, [initAIProviders, initMCPServers, initWebSearch, navigate]);
+    if (isKnowledge) await initKnowledge();
+  }, [initAIProviders, initMCPServers, initWebSearch, initKnowledge, navigate]);
 
   return {
     initAIProviders,
     initMCPServers,
     initWebSearch,
+    initKnowledge,
     getAiSettingsInitialValue,
   };
 };

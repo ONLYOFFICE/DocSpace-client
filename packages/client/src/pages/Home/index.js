@@ -160,6 +160,9 @@ const PureHome = (props) => {
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
+
+    aiConfig,
+    currentTab,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -375,6 +378,9 @@ const PureHome = (props) => {
     setShouldShowFilter(shouldRenderSectionFilter);
   }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
 
+  const isDisabledKnowledge =
+    !aiConfig.vectorizationEnabled && currentTab === "knowledge";
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage || isProfile ? (
@@ -407,7 +413,7 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {!isChat && shouldShowFilter && !isProfile ? (
+        {!isChat && !isDisabledKnowledge && shouldShowFilter && !isProfile ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />
@@ -453,6 +459,7 @@ export const Component = inject(
     indexingStore,
     dialogsStore,
     filesSettingsStore,
+    aiRoomStore,
   }) => {
     const {
       setSelectedFolder,
@@ -728,6 +735,9 @@ export const Component = inject(
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,
+
+      currentTab: aiRoomStore.currentTab,
+      aiConfig: settingsStore.aiConfig,
     };
   },
 )(observer(Home));

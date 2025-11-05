@@ -35,6 +35,7 @@ import {
 } from "../../../api/ai";
 import { TAIConfig, TMCPTool, TServer } from "../../../api/ai/types";
 import { Nullable } from "../../../types";
+import { RoomsType } from "../../../enums";
 
 type Props = {
   roomId: string | number;
@@ -96,9 +97,13 @@ const useToolsSettings = ({ roomId, aiConfig }: Props) => {
         data.type === "folder" &&
         data.id &&
         Number(data.id) === Number(roomId) &&
-        data.cmd !== "delete"
+        data.cmd !== "delete" && data.data
       ) {
-        fetchTools();
+        const parsedData = JSON.parse(data.data);
+        
+        if('roomType' in parsedData && parsedData.roomType === RoomsType.AIRoom){
+          fetchTools();
+        }
       }
     },
     [fetchTools, roomId],

@@ -96,8 +96,7 @@ const ExportSelector = ({
       withoutBackButton
       withCancelButton
       withCreate={false}
-      // TODO: restore when api will be ready
-      withFooterCheckbox={false}
+      withFooterCheckbox
       withFooterInput
       cancelButtonLabel={t("Common:CancelButton")}
       submitButtonLabel={t("Common:SaveButton")}

@@ -45,8 +45,6 @@ const Files = ({ files, getIcon }: MessageFilesProps) => {
       {files.map((file) => {
         if (file.type !== ContentType.Files) return;
 
-        console.log(file);
-
         const onClick = () => {
           const searchParams = new URLSearchParams();
 

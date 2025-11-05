@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { TableBody } from "./TableBody";
 import { TableCell } from "../sub-components/table-cell";
 
-jest.mock("../../infinite-loader", () => ({
+vi.mock("../../infinite-loader", () => ({
   InfiniteLoaderComponent: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="infinite-loader">{children}</div>
   ),
@@ -43,7 +43,7 @@ describe("<TableBody />", () => {
     columnInfoPanelStorageName: "test-info-panel-storage",
     filesLength: 10,
     itemCount: 20,
-    fetchMoreFiles: jest.fn(),
+    fetchMoreFiles: vi.fn(),
     hasMoreFiles: true,
     useReactWindow: true,
     itemHeight: 50,
@@ -51,7 +51,7 @@ describe("<TableBody />", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without errors", () => {

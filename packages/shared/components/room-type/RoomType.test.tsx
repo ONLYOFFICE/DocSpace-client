@@ -1,12 +1,13 @@
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { RoomsType } from "../../enums";
 import RoomType from "./index";
+import styles from "./RoomType.module.scss";
 
 // Mock translations
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     ready: true,
@@ -17,14 +18,14 @@ describe("RoomType", () => {
   const defaultProps = {
     type: "listItem" as const,
     roomType: RoomsType.EditingRoom,
-    onClick: jest.fn(),
+    onClick: vi.fn(),
 
     isOpen: false,
     selectedId: "",
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe("List Item Type", () => {
@@ -54,7 +55,7 @@ describe("RoomType", () => {
       render(<RoomType {...defaultProps} isOpen />);
 
       const listItem = screen.getByTestId("room-type-list-item");
-      expect(listItem).toHaveClass("isOpen");
+      expect(listItem).toHaveClass(styles.isOpen);
     });
   });
 
@@ -87,7 +88,7 @@ describe("RoomType", () => {
       render(<RoomType {...dropdownProps} isOpen />);
 
       const dropdownButton = screen.getByTestId("room-type-dropdown-button");
-      expect(dropdownButton).toHaveClass("isOpen");
+      expect(dropdownButton).toHaveClass(styles.isOpen);
     });
   });
 

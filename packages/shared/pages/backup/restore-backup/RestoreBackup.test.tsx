@@ -1,7 +1,7 @@
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { ButtonSize } from "../../../components/button";
 
@@ -14,24 +14,26 @@ import {
   mockConnectedAccount,
 } from "../mockData";
 
-jest.mock("@docspace/shared/utils/socket", () => ({
-  on: jest.fn(),
-  off: jest.fn(),
+vi.mock("@docspace/shared/utils/socket", () => ({
+  default: {
+    on: vi.fn(),
+    off: vi.fn(),
+  },
   SocketEvents: {
     BackupProgress: "BACKUP_PROGRESS",
   },
 }));
 
-jest.mock("@docspace/shared/components/toast", () => ({
+vi.mock("../../../components/toast", () => ({
   toastr: {
-    error: jest.fn(),
-    success: jest.fn(),
+    error: vi.fn(),
+    success: vi.fn(),
   },
 }));
 
-jest.mock("@docspace/shared/api/portal", () => ({
-  startRestore: jest.fn().mockResolvedValue({ data: { success: true } }),
-  getBackupHistory: jest.fn().mockResolvedValue({
+vi.mock("../../../api/portal", () => ({
+  startRestore: vi.fn().mockResolvedValue({ data: { success: true } }),
+  getBackupHistory: vi.fn().mockResolvedValue({
     data: {
       items: [
         {
@@ -46,23 +48,27 @@ jest.mock("@docspace/shared/api/portal", () => ({
       total: 1,
     },
   }),
-  deleteBackup: jest.fn().mockResolvedValue({ data: { success: true } }),
-  deleteBackupHistory: jest.fn().mockResolvedValue({ data: { success: true } }),
+  deleteBackup: vi.fn().mockResolvedValue({ data: { success: true } }),
+  deleteBackupHistory: vi.fn().mockResolvedValue({ data: { success: true } }),
 }));
 
-jest.mock("@docspace/shared/components/files-selector-input", () => ({
+vi.mock("../../../api/files", () => ({
+  getFiles: vi.fn().mockResolvedValue({ data: { success: true } }),
+}));
+
+vi.mock("../../../components/files-selector-input", () => ({
   FilesSelectorInput: () => (
     <div data-testid="files-selector-input">Files Selector</div>
   ),
 }));
 
-jest.mock("@docspace/shared/components/direct-third-party-connection", () => ({
+vi.mock("../../../components/direct-third-party-connection", () => ({
   DirectThirdPartyConnection: () => (
     <div data-testid="third-party-connection">Third Party Connection</div>
   ),
 }));
 
-jest.mock("@docspace/shared/skeletons/backup/RestoreBackup", () => ({
+vi.mock("../../../skeletons/backup/RestoreBackup", () => ({
   __esModule: true,
   default: () => <div data-testid="restore-backup-loader">Loading...</div>,
 }));
@@ -71,13 +77,13 @@ const defaultProps = {
   removeItem: mockThirdPartyAccounts[0],
   buttonSize: ButtonSize.medium,
   isEnableRestore: true,
-  navigate: jest.fn(),
+  navigate: vi.fn(),
   settingsFileSelector: {
-    getIcon: jest.fn(),
+    getIcon: vi.fn(),
   },
   isInitialLoading: false,
   standalone: false,
-  setTenantStatus: jest.fn(),
+  setTenantStatus: vi.fn(),
   errorInformation: "",
   isBackupProgressVisible: false,
   restoreResource: "backup.tar.gz",
@@ -91,39 +97,39 @@ const defaultProps = {
   isTheSameThirdPartyAccount: false,
   downloadingProgress: 0,
   connectedThirdPartyAccount: mockConnectedAccount,
-  setErrorInformation: jest.fn(),
-  setTemporaryLink: jest.fn(),
-  setDownloadingProgress: jest.fn(),
-  setConnectedThirdPartyAccount: jest.fn(),
-  setRestoreResource: jest.fn(),
-  clearLocalStorage: jest.fn(),
-  setSelectedThirdPartyAccount: jest.fn(),
-  setThirdPartyAccountsInfo: jest.fn().mockResolvedValue(undefined),
-  setCompletedFormFields: jest.fn(),
-  addValueInFormSettings: jest.fn(),
-  setRequiredFormSettings: jest.fn(),
-  deleteValueFormSetting: jest.fn(),
-  setIsThirdStorageChanged: jest.fn(),
-  isFormReady: jest.fn().mockReturnValue(true),
-  getStorageParams: jest.fn().mockReturnValue([]),
-  uploadLocalFile: jest.fn().mockResolvedValue(null),
+  setErrorInformation: vi.fn(),
+  setTemporaryLink: vi.fn(),
+  setDownloadingProgress: vi.fn(),
+  setConnectedThirdPartyAccount: vi.fn(),
+  setRestoreResource: vi.fn(),
+  clearLocalStorage: vi.fn(),
+  setSelectedThirdPartyAccount: vi.fn(),
+  setThirdPartyAccountsInfo: vi.fn().mockResolvedValue(undefined),
+  setCompletedFormFields: vi.fn(),
+  addValueInFormSettings: vi.fn(),
+  setRequiredFormSettings: vi.fn(),
+  deleteValueFormSetting: vi.fn(),
+  setIsThirdStorageChanged: vi.fn(),
+  isFormReady: vi.fn().mockReturnValue(true),
+  getStorageParams: vi.fn().mockReturnValue([]),
+  uploadLocalFile: vi.fn().mockResolvedValue(null),
   basePath: "/",
   newPath: "/",
   isErrorPath: false,
-  toDefault: jest.fn(),
-  setBasePath: jest.fn(),
-  setNewPath: jest.fn(),
+  toDefault: vi.fn(),
+  setBasePath: vi.fn(),
+  setNewPath: vi.fn(),
   providers: mockThirdPartyProviders,
-  deleteThirdParty: jest.fn().mockResolvedValue(undefined),
-  openConnectWindow: jest.fn().mockResolvedValue(null),
-  setThirdPartyProviders: jest.fn(),
+  deleteThirdParty: vi.fn().mockResolvedValue(undefined),
+  openConnectWindow: vi.fn().mockResolvedValue(null),
+  setThirdPartyProviders: vi.fn(),
   connectDialogVisible: false,
-  setConnectDialogVisible: jest.fn(),
+  setConnectDialogVisible: vi.fn(),
   deleteThirdPartyDialogVisible: false,
-  setDeleteThirdPartyDialogVisible: jest.fn(),
-  setIsBackupProgressVisible: jest.fn(),
+  setDeleteThirdPartyDialogVisible: vi.fn(),
+  setIsBackupProgressVisible: vi.fn(),
   backupProgressError: "",
-  setBackupProgressError: jest.fn(),
+  setBackupProgressError: vi.fn(),
 };
 
 describe("RestoreBackup", () => {

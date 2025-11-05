@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { Row } from ".";
+import styles from "./Row.module.scss";
 
 const baseProps = {
   checked: false,
@@ -61,7 +62,7 @@ describe("<Row />", () => {
   });
 
   it("handles checkbox state changes", () => {
-    const onSelect = jest.fn();
+    const onSelect = vi.fn();
     render(
       <Row
         {...baseProps}
@@ -103,7 +104,7 @@ describe("<Row />", () => {
     );
 
     const row = screen.getByTestId("row");
-    expect(row).toHaveClass("modern");
+    expect(row).toHaveClass(styles.modern);
   });
 
   it("handles indeterminate checkbox state", () => {
@@ -129,7 +130,7 @@ describe("<Row />", () => {
   });
 
   it("handles row click events", () => {
-    const onRowClick = jest.fn();
+    const onRowClick = vi.fn();
     render(
       <Row {...baseProps} isIndexEditingMode={false} onRowClick={onRowClick} />,
     );

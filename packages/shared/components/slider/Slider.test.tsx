@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, render, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Slider } from "./index";
 
@@ -34,7 +34,7 @@ const defaultProps = {
   min: 0,
   max: 100,
   value: 50,
-  onChange: jest.fn(),
+  onChange: vi.fn(),
 };
 
 describe("<Slider />", () => {

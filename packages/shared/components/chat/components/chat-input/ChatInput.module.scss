@@ -149,6 +149,14 @@
         }
       }
 
+      &.activeChatInputButton {
+        svg {
+          circle {
+            stroke: var(--chat-input-tools-button-active-color);
+          }
+        }
+      }
+
       &.disabled {
         cursor: not-allowed;
 

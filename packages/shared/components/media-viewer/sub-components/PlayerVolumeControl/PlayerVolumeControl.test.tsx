@@ -25,43 +25,36 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { PlayerVolumeControl } from "./index";
 
 // Mock SVG icons
-jest.mock("PUBLIC_DIR/images/media.volumemax.react.svg", () => {
+vi.mock("PUBLIC_DIR/images/media.volumemax.react.svg", () => {
   const VolumeMaxIcon = () => <div>VolumeMaxIcon</div>;
-  return VolumeMaxIcon;
+  return { default: VolumeMaxIcon };
 });
 
-jest.mock("PUBLIC_DIR/images/media.volumeoff.react.svg", () => {
+vi.mock("PUBLIC_DIR/images/media.volumeoff.react.svg", () => {
   const VolumeOffIcon = () => <div>VolumeOffIcon</div>;
-  return VolumeOffIcon;
+  return { default: VolumeOffIcon };
 });
 
-jest.mock("PUBLIC_DIR/images/media.volumemin.react.svg", () => {
+vi.mock("PUBLIC_DIR/images/media.volumemin.react.svg", () => {
   const VolumeMinIcon = () => <div>VolumeMinIcon</div>;
-  return VolumeMinIcon;
+  return { default: VolumeMinIcon };
 });
-
-// Mock styles
-jest.mock("./PlayerVolumeControl.module.scss", () => ({
-  playerVolumeControlWrapper: "playerVolumeControlWrapper",
-  iconWrapper: "iconWrapper",
-  volumeWrapper: "volumeWrapper",
-}));
 
 describe("PlayerVolumeControl", () => {
   const defaultProps = {
     volume: 50,
     isMuted: false,
-    toggleVolumeMute: jest.fn(),
-    onChange: jest.fn(),
+    toggleVolumeMute: vi.fn(),
+    onChange: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders with correct ARIA attributes", () => {

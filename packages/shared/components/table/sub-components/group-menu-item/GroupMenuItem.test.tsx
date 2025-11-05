@@ -25,16 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { GroupMenuItem } from "./GroupMenuItem";
 
 const mockItem = {
   label: "Menu Item",
   disabled: false,
-  onClick: jest.fn(),
+  onClick: vi.fn(),
   iconUrl: "",
   title: "Menu Item Title",
   id: "group-menu-item",
@@ -57,14 +57,14 @@ const mockItemWithDropDown = {
   ],
 };
 
-jest.mock("../../../drop-down", () => ({
+vi.mock("../../../drop-down", () => ({
   __esModule: true,
   DropDown: () => <div data-testid="dropdown" />,
 }));
 
 describe("<GroupMenuItem />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without errors", () => {

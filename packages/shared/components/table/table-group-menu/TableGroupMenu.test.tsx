@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 import { TableGroupMenu } from "./TableGroupMenu";
 
 const mockMenuItems = [
@@ -37,13 +37,13 @@ const mockMenuItems = [
     label: "Change type",
     title: "Change type",
     iconUrl: "",
-    onClick: jest.fn(),
+    onClick: vi.fn(),
     withDropDown: true,
     options: [
       {
         key: "option-1",
         label: "Option 1",
-        onClick: jest.fn(),
+        onClick: vi.fn(),
       },
     ],
   },
@@ -59,16 +59,16 @@ const defaultProps = {
       <div>2</div>
     </>
   ),
-  onClick: jest.fn(),
-  onChange: jest.fn(),
+  onClick: vi.fn(),
+  onChange: vi.fn(),
   withoutInfoPanelToggler: false,
   isInfoPanelVisible: false,
-  toggleInfoPanel: jest.fn(),
+  toggleInfoPanel: vi.fn(),
   isBlocked: false,
   withComboBox: true,
 };
 
-jest.mock("../../combobox", () => ({
+vi.mock("../../combobox", () => ({
   ComboBox: ({ title }: { title: string }) => (
     <div data-testid="combobox" title={title}>
       Mocked ComboBox
@@ -79,7 +79,7 @@ jest.mock("../../combobox", () => ({
 
 describe("<TableGroupMenu />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without errors", () => {
@@ -117,13 +117,13 @@ describe("<TableGroupMenu />", () => {
 
   it("renders close button if isCloseable is true", () => {
     render(
-      <TableGroupMenu {...defaultProps} isCloseable onCloseClick={jest.fn()} />,
+      <TableGroupMenu {...defaultProps} isCloseable onCloseClick={vi.fn()} />,
     );
     expect(screen.getByTestId("close-button")).toBeInTheDocument();
   });
 
   it("calls onCloseClick when close button is clicked", async () => {
-    const onCloseClick = jest.fn();
+    const onCloseClick = vi.fn();
     render(
       <TableGroupMenu
         {...defaultProps}

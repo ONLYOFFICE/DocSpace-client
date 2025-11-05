@@ -577,25 +577,15 @@ const SectionHeaderContent = (props) => {
   const isSectionHeaderVisible =
     isUsersHeaderVisible || isGroupsHeaderVisible || isHeaderVisible;
 
-  const filesHeaderMenu = React.useMemo(() => {
-    if (!isSectionHeaderVisible || filesSelection.length === 0)
-      return EMPTY_ARRAY;
+  const filesHeaderMenu =
+    !isSectionHeaderVisible || filesSelection.length === 0
+      ? EMPTY_ARRAY
+      : getHeaderMenu(t);
 
-    return getHeaderMenu(t);
-  }, [getHeaderMenu, isSectionHeaderVisible, filesSelection, t]);
-
-  const contactsHeaderMenu = React.useMemo(() => {
-    if (!isSectionHeaderVisible || userSelection.length === 0)
-      return EMPTY_ARRAY;
-
-    return getContactsHeaderMenu(t, isContactsGroupsPage);
-  }, [
-    getContactsHeaderMenu,
-    isContactsGroupsPage,
-    isSectionHeaderVisible,
-    userSelection,
-    t,
-  ]);
+  const contactsHeaderMenu =
+    !isSectionHeaderVisible || userSelection.length === 0
+      ? EMPTY_ARRAY
+      : getContactsHeaderMenu(t, isContactsGroupsPage);
 
   const indexEditingMenu = React.useMemo(() => {
     if (!isIndexEditingMode) return EMPTY_ARRAY;

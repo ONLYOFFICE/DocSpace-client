@@ -641,7 +641,9 @@ class FilesStore {
       const fileInfo = await this.getFileInfo(file.id, file.requestToken); // this.setFile(file);
       console.log("[WS] update file", file.id, file.title);
 
-      this.checkSelection(fileInfo);
+      const [newFile] = this.getFilesListItems([fileInfo]);
+
+      this.checkSelection(newFile);
     } else if (opt?.type === "folder" && opt?.data) {
       const folder = JSON.parse(opt?.data);
       if (!folder || !folder.id) return;
@@ -660,47 +662,47 @@ class FilesStore {
           ...response,
         };
 
-        console.log("[WS] update folder", folderInfo.id, folderInfo.title);
+        const [newFolder] = this.getFilesListItems([folderInfo]);
+
+        console.log("[WS] update folder", newFolder.id, newFolder.title);
 
         if (this.selection?.length) {
           const foundIndex = this.selection?.findIndex(
-            (x) => x.id === folderInfo.id,
+            (x) => x.id === newFolder.id,
           );
           if (foundIndex > -1) {
             runInAction(() => {
-              this.selection[foundIndex] = folderInfo;
+              this.selection[foundIndex] = newFolder;
             });
           }
         }
 
         if (this.bufferSelection) {
           if (
-            this.bufferSelection.id === folderInfo.id &&
+            this.bufferSelection.id === newFolder.id &&
             (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
           ) {
-            this.setBufferSelection(folderInfo);
+            this.setBufferSelection(newFolder);
           }
         }
 
         const navigationPath = [...this.selectedFolderStore.navigationPath];
         const pathParts = [...this.selectedFolderStore.pathParts];
 
-        const idx = navigationPath.findIndex((p) => p.id === folderInfo.id);
+        const idx = navigationPath.findIndex((p) => p.id === newFolder.id);
 
         if (idx !== -1) {
-          navigationPath[idx].title = folderInfo?.title;
+          navigationPath[idx].title = newFolder?.title;
         }
 
-        if (folderInfo.id === this.selectedFolderStore.id) {
+        if (newFolder.id === this.selectedFolderStore.id) {
           this.selectedFolderStore.setSelectedFolder({
-            ...folderInfo,
+            ...newFolder,
             navigationPath,
             pathParts,
           });
 
-          const item = this.getFilesListItems([folderInfo])[0];
-
-          setInfoPanelSelectedRoom(item, true);
+          setInfoPanelSelectedRoom(newFolder, true);
         }
 
         this.setFolder(folderInfo);

@@ -57,18 +57,6 @@ const Main = (props) => {
   const onResize = React.useCallback(() => {
     let correctHeight = window.innerHeight;
 
-    if (mainBarVisible && isMobileUtils()) {
-      const mainBar = document.getElementById("main-bar");
-
-      if (mainBar) {
-        const mainBarHeight = mainBar.offsetHeight || 0;
-        if (mainBarHeight === 0)
-          return (updateSizeRef.current = setTimeout(() => onResize(), 0));
-
-        correctHeight -= mainBarHeight;
-      }
-    }
-
     // 48 - its nav menu with burger, logo and user avatar
     if (isMobileUtils() && !isFrame) {
       correctHeight -= 48;

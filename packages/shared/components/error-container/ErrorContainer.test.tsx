@@ -25,24 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import ErrorContainer from "./ErrorContainer";
 
 describe("ErrorContainer", () => {
-  const mockOnClick = jest.fn();
+  const mockOnClick = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  test("renders without error", () => {
+  it("renders without error", () => {
     render(<ErrorContainer id="error-container" />);
     expect(screen.getByTestId("ErrorContainer")).toBeInTheDocument();
   });
 
-  test("renders with header and body text", () => {
+  it("renders with header and body text", () => {
     const headerText = "Some error has happened";
     const bodyText = "Try again later";
 
@@ -52,7 +52,7 @@ describe("ErrorContainer", () => {
     expect(screen.getByText(bodyText)).toBeInTheDocument();
   });
 
-  test("renders with customized body text", () => {
+  it("renders with customized body text", () => {
     const customText = "Custom error message";
 
     render(<ErrorContainer customizedBodyText={customText} />);
@@ -60,7 +60,7 @@ describe("ErrorContainer", () => {
     expect(screen.getByText(customText)).toBeInTheDocument();
   });
 
-  test("renders with button and handles click", () => {
+  it("renders with button and handles click", () => {
     const buttonText = "Retry";
 
     render(
@@ -74,7 +74,7 @@ describe("ErrorContainer", () => {
     expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 
-  test("renders with primary button style", () => {
+  it("renders with primary button style", () => {
     const buttonText = "Primary Button";
 
     render(
@@ -89,14 +89,14 @@ describe("ErrorContainer", () => {
     expect(button).toBeInTheDocument();
   });
 
-  test("renders in editor mode", () => {
+  it("renders in editor mode", () => {
     render(<ErrorContainer isEditor />);
 
     const container = screen.getByTestId("ErrorContainer");
     expect(container.className).toContain("isEditor");
   });
 
-  test("renders with additional className", () => {
+  it("renders with additional className", () => {
     const className = "custom-class";
 
     render(<ErrorContainer className={className} />);
@@ -105,7 +105,7 @@ describe("ErrorContainer", () => {
     expect(container.className).toContain(className);
   });
 
-  test("renders with children", () => {
+  it("renders with children", () => {
     const childText = "Child component";
 
     render(

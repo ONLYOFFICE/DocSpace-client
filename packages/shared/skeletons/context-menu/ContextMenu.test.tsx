@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { ContextMenuSkeleton } from ".";
 
-jest.mock("../../utils", () => ({
-  ...jest.requireActual("../../utils"),
-  isDesktop: jest.fn(),
+vi.mock("../../utils", () => ({
+  ...vi.importActual("../../utils"),
+  isDesktop: vi.fn(),
 }));
 
 describe("<ContextMenuSkeleton />", () => {

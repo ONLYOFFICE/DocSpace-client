@@ -25,14 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { NextButton } from "./NextButton";
 import { PrevButton } from "./PrevButton";
+import styles from "./Buttons.module.scss";
 
 describe("NextButton", () => {
-  const mockNextClick = jest.fn();
+  const mockNextClick = vi.fn();
 
   beforeEach(() => {
     mockNextClick.mockClear();
@@ -48,14 +49,14 @@ describe("NextButton", () => {
   it("applies correct classes for non-PDF files", () => {
     render(<NextButton nextClick={mockNextClick} isPDFFile={false} />);
     const button = screen.getByTestId("next-button");
-    expect(button).toHaveClass("right");
-    expect(button).not.toHaveClass("isPDFFile");
+    expect(button).toHaveClass(styles.right);
+    expect(button).not.toHaveClass(styles.isPDFFile);
   });
 
   it("applies correct classes for PDF files", () => {
     render(<NextButton nextClick={mockNextClick} isPDFFile />);
     const button = screen.getByTestId("next-button");
-    expect(button).toHaveClass("isPDFFile");
+    expect(button).toHaveClass(styles.isPDFFile);
   });
 
   it("calls nextClick when clicked", () => {
@@ -67,7 +68,7 @@ describe("NextButton", () => {
 });
 
 describe("PrevButton", () => {
-  const mockPrevClick = jest.fn();
+  const mockPrevClick = vi.fn();
 
   beforeEach(() => {
     mockPrevClick.mockClear();
@@ -83,7 +84,7 @@ describe("PrevButton", () => {
   it("applies correct classes", () => {
     render(<PrevButton prevClick={mockPrevClick} />);
     const button = screen.getByTestId("prev-button");
-    expect(button).toHaveClass("left");
+    expect(button).toHaveClass(styles.left);
   });
 
   it("calls prevClick when clicked", () => {

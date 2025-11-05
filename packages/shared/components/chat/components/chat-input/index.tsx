@@ -53,6 +53,9 @@ const ChatInput = ({
   attachmentFile,
   clearAttachmentFile,
   selectedModel,
+  toolsSettings,
+  isAdmin,
+  aiReady,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -97,7 +100,6 @@ const ChatInput = ({
       setValue("");
       setSelectedFiles([]);
     } catch (e) {
-      console.log("from here");
       console.log(e);
     }
   }, [currentChatId, startChat, sendMessage, value, selectedFiles]);
@@ -187,7 +189,9 @@ const ChatInput = ({
               onChange={handleChange}
               value={value}
               isFullHeight
-              className={styles.chatInputTextArea}
+              className={classNames(styles.chatInputTextArea, {
+                [styles.disabled]: !aiReady,
+              })}
               wrapperClassName={classNames({
                 [styles.chatInputTextAreaWrapper]: true,
                 [styles.chatInputTextAreaWrapperFiles]:
@@ -196,6 +200,7 @@ const ChatInput = ({
               placeholder={t("Common:AIChatInput")}
               isChatMode
               fontSize={15}
+              isDisabled={!aiReady}
             />
 
             <FilesList
@@ -211,6 +216,9 @@ const ChatInput = ({
               sendMessageAction={sendMessageAction}
               value={value}
               selectedModel={selectedModel}
+              toolsSettings={toolsSettings}
+              isAdmin={isAdmin}
+              aiReady={aiReady}
             />
           </>
         )}
@@ -223,14 +231,16 @@ const ChatInput = ({
         attachmentFile={attachmentFile}
         clearAttachmentFile={clearAttachmentFile}
       />
-      <Text
-        fontSize="10px"
-        fontWeight={400}
-        className={styles.chatInputText}
-        noSelect
-      >
-        {t("Common:CheckAIInfo")}
-      </Text>
+      {!isLoading ? (
+        <Text
+          fontSize="10px"
+          fontWeight={400}
+          className={styles.chatInputText}
+          noSelect
+        >
+          {t("Common:CheckAIInfo")}
+        </Text>
+      ) : null}
     </>
   );
 };

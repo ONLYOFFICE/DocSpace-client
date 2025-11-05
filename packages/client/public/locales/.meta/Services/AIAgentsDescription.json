@@ -1,0 +1,28 @@
+{
+  "key_path": "AIAgentsDescription",
+  "content": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an MCP server.",
+  "content_en_sha1_hash": "4cbacc9a0b10669919eda9a5e2edba3c9c2cf801",
+  "created_at": "2025-11-03T12:10:29.413Z",
+  "updated_at": "2025-11-03T12:41:38.081Z",
+  "comment": {
+    "text": "This text describes how to configure AI agents for a team. It explains the steps involved, such as adding a knowledge base and connecting a server. This description appears in a dialog for AI tools settings.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:41:38.081Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 116,
+      "context": "const serviceOptions: ServiceOption[] = [\n {\n id: \"ai-tools\",\n title: t(\"Common:AIAgents\"),\n description: t(\"AIAgentsDescription\"),\n icon: <ToolsIcon />,\n },\n {\n id: \"chatbot\",\n title: t(\"ChatBot\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1186,7 +1186,7 @@ class UploadDataStore {
         (x) => x.id === currentFile?.fileInfo?.id,
       );
 
-      let folderInfo = null;
+      const folderInfo = null;
       const index = path.findIndex((x) => x === this.selectedFolderStore.id);
       const folderId = index !== -1 ? path[index + 1] : null;
       // if (folderId && folderId !== this.aiRoomStore.knowledgeId)

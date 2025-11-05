@@ -51,6 +51,7 @@
   "GalleryEmptyScreenText": "See form template details here",
   "GroupsEmptyScreenText": "See groups details here",
   "GuestsEmptyScreenText": "See guests details here",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agent created",
   "HistoryEmptyScreenText": "Activity history will be shown here",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> room copied",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> room created",
@@ -62,6 +63,7 @@
   "MembersEmptyScreenText": "See members details here",
   "NoRecordsFound": "No records found",
   "Properties": "Properties",
+  "Resolution": "Resolution",
   "RoomCreateUserCount": "Users added ({{count}}).",
   "RoomDenyDownloadDisabled": "Downloading and copying unrestricted",
   "RoomDenyDownloadEnabled": "Downloading and copying restricted",
@@ -82,6 +84,7 @@
   "RoomLogoChanged": "Icon changed",
   "RoomRemoveUser": "User removed.",
   "RoomRenamed": "Room <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "See rooms details here",
   "RoomToArchiveMove": "Room moved to {{sectionName}}",
   "RoomUpdateAccess": "has been assigned role",
@@ -95,5 +98,6 @@
   "SubmenuHistory": "History",
   "UserFileUpdated": "File updated.",
   "Users": "Users",
-  "Versions": "Versions"
+  "Versions": "Versions",
+  "AIAgentsEmptyScreenTent": "See AI agents details here"
 }

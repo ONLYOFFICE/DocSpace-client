@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { InputSize } from "../text-input";
 import type { EmailInputProps } from "./EmailInput.types";
@@ -43,16 +43,16 @@ const defaultProps: EmailInputProps = {
   isReadOnly: false,
   maxLength: 255,
   placeholder: "Enter email",
-  onChange: jest.fn(),
-  onValidateInput: jest.fn(),
-  handleAnimationStart: jest.fn(),
-  onBlur: jest.fn(),
+  onChange: vi.fn(),
+  onValidateInput: vi.fn(),
+  handleAnimationStart: vi.fn(),
+  onBlur: vi.fn(),
   dataTestId: "email-input",
 };
 
 describe("<EmailInput />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("renders without error", () => {
@@ -69,8 +69,8 @@ describe("<EmailInput />", () => {
 
   it("handles input value changes", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
-    const onValidateInput = jest.fn();
+    const onChange = vi.fn();
+    const onValidateInput = vi.fn();
     render(
       <EmailInput
         {...defaultProps}
@@ -91,7 +91,7 @@ describe("<EmailInput />", () => {
 
   it("validates correct email formats", async () => {
     const user = userEvent.setup();
-    const onValidateInput = jest.fn();
+    const onValidateInput = vi.fn();
     render(<EmailInput {...defaultProps} onValidateInput={onValidateInput} />);
 
     const validEmails = [
@@ -117,7 +117,7 @@ describe("<EmailInput />", () => {
 
   it("validates incorrect email formats", async () => {
     const user = userEvent.setup();
-    const onValidateInput = jest.fn();
+    const onValidateInput = vi.fn();
     render(<EmailInput {...defaultProps} onValidateInput={onValidateInput} />);
 
     const invalidEmails = [
@@ -148,7 +148,7 @@ describe("<EmailInput />", () => {
       errors: [],
     });
 
-    const onValidateInput = jest.fn();
+    const onValidateInput = vi.fn();
     render(
       <EmailInput
         {...defaultProps}
@@ -187,8 +187,8 @@ describe("<EmailInput />", () => {
 
   it("handles blur events", async () => {
     const user = userEvent.setup();
-    const onBlur = jest.fn();
-    const onValidateInput = jest.fn();
+    const onBlur = vi.fn();
+    const onValidateInput = vi.fn();
     render(
       <EmailInput
         {...defaultProps}
@@ -213,7 +213,7 @@ describe("<EmailInput />", () => {
   });
 
   it("validates empty value", () => {
-    const onValidateInput = jest.fn();
+    const onValidateInput = vi.fn();
     render(
       <EmailInput
         {...defaultProps}
@@ -225,7 +225,7 @@ describe("<EmailInput />", () => {
   });
 
   it("validates initial value on mount", () => {
-    const onValidateInput = jest.fn();
+    const onValidateInput = vi.fn();
     const email = "test@example.com";
     render(
       <EmailInput
@@ -239,7 +239,7 @@ describe("<EmailInput />", () => {
 
   it("handles maxLength boundary", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const maxLength = 10;
     const testString = "a".repeat(maxLength + 5);
 

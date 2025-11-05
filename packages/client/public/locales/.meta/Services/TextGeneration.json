@@ -1,0 +1,28 @@
+{
+  "key_path": "TextGeneration",
+  "content": "Text generation",
+  "content_en_sha1_hash": "68c83d65666904cad4df00894e6dc246867bbb47",
+  "created_at": "2025-11-03T12:10:29.462Z",
+  "updated_at": "2025-11-03T12:25:51.239Z",
+  "comment": {
+    "text": "This translation key provides the label for a text generation tool option within the AI Service dialog. It appears as the title for this feature, likely on a list or selection menu of available AI services. Translators should consider phrasing that conveys the ability to create text content.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:25:51.239Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 145,
+      "context": "description: t(\"OCRDescription\"),\n icon: <OcrIcon />,\n },\n {\n id: \"text-generation\",\n title: t(\"TextGeneration\"),\n description: t(\"TextGenerationDescription\"),\n icon: <GenerationIcon />,\n },\n {\n id: \"image-generation\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

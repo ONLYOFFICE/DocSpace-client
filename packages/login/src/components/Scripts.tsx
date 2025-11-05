@@ -29,7 +29,6 @@ import Script from "next/script";
 let runtime = null;
 
 try {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   runtime = require("../../../runtime.json");
 } catch (e) {
   console.log(e);
@@ -78,6 +77,22 @@ const Scripts = () => {
             });
           `}
       </Script>
+      <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              try {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.body.classList.remove('light', 'dark');
+                document.body.classList.add(isDark ? 'dark' : 'light');
+              } catch (e) {
+                console.log(e);
+              }
+            })();
+          `,
+        }}
+      />
     </>
   );
 };

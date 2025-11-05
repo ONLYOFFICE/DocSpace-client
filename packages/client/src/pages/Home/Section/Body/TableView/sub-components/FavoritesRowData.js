@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import { TableCell } from "@docspace/shared/components/table";
@@ -64,7 +64,11 @@ const FavoritesRowDataComponent = (props) => {
     index,
   } = props;
 
-  const lastColumn = getLastColumn(tableStorageName);
+  const [lastColumn, setLastColumn] = useState(getLastColumn(tableStorageName));
+
+  useEffect(() => {
+    if (!lastColumn) setLastColumn(getLastColumn(tableStorageName));
+  }, [lastColumn, tableStorageName]);
 
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>

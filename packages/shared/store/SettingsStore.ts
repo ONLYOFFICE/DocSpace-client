@@ -68,6 +68,7 @@ import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketHelper from "../utils/socket";
+import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import {
@@ -84,6 +85,7 @@ import { TData } from "../components/toast/Toast.type";
 import { version } from "../package.json";
 import { Nullable } from "../types";
 import { TApiKey } from "../api/api-keys/types";
+import { TAIConfig } from "../api/ai/types";
 
 const themes = {
   Dark,
@@ -341,6 +343,8 @@ class SettingsStore {
   errorKeys: Error | null = null;
 
   abortControllerArr: Nullable<AbortController>[] = [];
+
+  aiConfig: Nullable<TAIConfig> = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -1063,19 +1067,26 @@ class SettingsStore {
 
   init = async () => {
     this.setIsLoading(true);
-    const requests = [];
 
-    requests.push(this.getPortalSettings(), this.getAppearanceTheme());
+    try {
+      await Promise.all([
+        this.getPortalSettings(),
+        this.getAppearanceTheme(),
+        this.getAIConfig(),
+      ]);
 
-    await Promise.all(requests);
+      if (!this.isPortalDeactivate) {
+        await this.getBuildVersionInfo();
+      }
+    } catch (error) {
+      if (isRequestAborted(error)) return;
 
-    if (!this.isPortalDeactivate) {
-      await this.getBuildVersionInfo();
+      console.error(error);
+    } finally {
+      this.setIsLoading(false);
+      this.setIsLoaded(true);
+      this.setIsFirstLoaded(true);
     }
-
-    this.setIsLoading(false);
-    this.setIsLoaded(true);
-    this.setIsFirstLoaded(true);
   };
 
   setRoomsMode = (mode: boolean) => {
@@ -1626,6 +1637,18 @@ class SettingsStore {
     this.setSelectThemeId(res.selected);
 
     if (currentColorScheme) this.setCurrentColorScheme(currentColorScheme);
+  };
+
+  getAIConfig = async () => {
+    const res = await api.ai.getAIConfig();
+
+    if (!res) return;
+
+    this.setAIConfig(res);
+  };
+
+  setAIConfig = (config: TAIConfig) => {
+    this.aiConfig = config;
   };
 
   setInterfaceDirection = (direction: string) => {

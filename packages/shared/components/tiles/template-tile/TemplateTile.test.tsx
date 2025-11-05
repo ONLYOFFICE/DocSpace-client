@@ -25,24 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { TemplateTile } from "./TemplateTile";
 import { TemplateTileProps, SpaceQuotaProps } from "./TemplateTile.types";
 
 // Mock translations
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
-// Mock styles
-jest.mock("./TemplateTile.module.scss", () => ({
-  wrapper: "wrapper",
-  field: "field",
-  text: "text",
+// Mock styles - return default export for CSS Modules
+vi.mock("./TemplateTile.module.scss", () => ({
+  default: {
+    wrapper: "wrapper",
+    field: "field",
+    text: "text",
+  },
 }));
 
 // Mock Link component
-jest.mock("@docspace/shared/components/link", () => ({
+vi.mock("@docspace/shared/components/link", () => ({
   Link: ({
     children,
     onClick,
@@ -57,7 +60,7 @@ jest.mock("@docspace/shared/components/link", () => ({
 }));
 
 // Mock Text component
-jest.mock("@docspace/shared/components/text", () => ({
+vi.mock("@docspace/shared/components/text", () => ({
   Text: ({
     children,
     className,
@@ -78,7 +81,7 @@ interface BaseTileProps {
 }
 
 // Mock BaseTile component
-jest.mock("../base-tile/BaseTile", () => ({
+vi.mock("../base-tile/BaseTile", () => ({
   BaseTile: ({ topContent, bottomContent, className }: BaseTileProps) => (
     <div data-testid="base-tile" className={className}>
       <div data-testid="top-content">{topContent}</div>
@@ -101,8 +104,8 @@ describe("TemplateTile", () => {
   };
 
   const mockContextOptions = [
-    { key: "edit", label: "Edit", onClick: jest.fn() },
-    { key: "delete", label: "Delete", onClick: jest.fn() },
+    { key: "edit", label: "Edit", onClick: vi.fn() },
+    { key: "delete", label: "Delete", onClick: vi.fn() },
   ];
 
   const MockSpaceQuota: React.FC<SpaceQuotaProps> = ({ item, type }) => (
@@ -121,9 +124,9 @@ describe("TemplateTile", () => {
       children: <TemplateContent />,
       columnCount: 3,
       showStorageInfo: false,
-      openUser: jest.fn(),
+      openUser: vi.fn(),
       contextOptions: mockContextOptions,
-      onSelect: jest.fn(),
+      onSelect: vi.fn(),
       checked: false,
       isActive: false,
       isBlockingOperation: false,
@@ -155,7 +158,7 @@ describe("TemplateTile", () => {
   });
 
   it("calls openUser when owner link is clicked", () => {
-    const openUser = jest.fn();
+    const openUser = vi.fn();
     renderTemplateTile({ openUser });
 
     const ownerLink = screen.getByTestId("link");

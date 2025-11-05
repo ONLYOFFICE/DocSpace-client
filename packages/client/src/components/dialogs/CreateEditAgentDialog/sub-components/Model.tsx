@@ -49,7 +49,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   const [models, setModels] = React.useState<TModel[]>([]);
 
   const [selectedProvider, setSelectedProvider] = React.useState<TAiProvider>({
-    id: agentParams.providerId ?? -1,
+    id: agentParams.providerId || -2,
   } as TAiProvider);
   const [selectedModel, setSelectedModel] = React.useState<TModel | null>({
     modelId: agentParams.modelId ?? "",
@@ -70,7 +70,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
 
         setIsProvidersFetched(true);
 
-        if (selectedProvider.id === -1) {
+        if (selectedProvider.id === -2) {
           setSelectedProvider(p[0]);
         } else {
           const provider = p.find((pr) => pr.id === selectedProvider.id);
@@ -116,7 +116,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       }
     };
 
-    if (typeof selectedProvider?.id !== "number" || selectedProvider.id === -1)
+    if (typeof selectedProvider?.id !== "number" || selectedProvider.id === -2)
       return;
 
     setSelectedModel(null);
@@ -149,12 +149,12 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     (option: TOption) => {
       const provider = providers.find((p) => p.id === option.key);
 
-      if (!provider) return;
+      if (!provider || provider.id === selectedProvider.id) return;
 
       setSelectedProvider(provider);
       setSelectedModel(null);
     },
-    [providers],
+    [providers, selectedProvider.id],
   );
 
   const modelOptions = React.useMemo(() => {
@@ -192,11 +192,11 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   React.useEffect(() => {
     if (!selectedModel) return;
 
-    if (
-      prevSelectedModel.current?.modelId === selectedModel?.modelId ||
-      typeof selectedModel.providerId !== "number"
-    )
-      return;
+    const hasChanges =
+      prevSelectedModel.current?.modelId !== selectedModel?.modelId ||
+      prevSelectedModel.current?.providerId !== selectedModel?.providerId;
+
+    if (!hasChanges || typeof selectedModel.providerId !== "number") return;
 
     setAgentParams({
       ...agentParams,
@@ -205,7 +205,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     });
 
     prevSelectedModel.current = selectedModel;
-  }, [selectedModel?.modelId, agentParams]);
+  }, [selectedModel?.modelId, selectedModel?.providerId, agentParams]);
 
   return (
     <StyledParam increaseGap>
@@ -251,6 +251,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             isDefaultMode
             className="ai-combobox"
             displaySelectedOption
+            dropDownClassName="not-selectable"
           />
         )}
       </div>

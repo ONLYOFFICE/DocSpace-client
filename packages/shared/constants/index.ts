@@ -58,6 +58,8 @@ export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
 export const YEAR_KEY = "year";
 export const BACKUP_SERVICE = "backup";
+export const AI_TOOLS = "aitools";
+export const WEB_SEARCH = "websearch";
 export const FREE_BACKUP = "free_backup";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
@@ -296,3 +298,7 @@ export const ROOM_ACTION_KEYS = {
 
 export const SHARED_MEMBERS_COUNT = 100;
 export const SHARED_WITH_ME_PATH = "shared-with-me";
+
+export const EMPTY_ARRAY = Object.freeze([]) as [];
+export const EMPTY_OBJECT = Object.freeze({});
+export const FUNCTION_EMPTY = (): void => {};

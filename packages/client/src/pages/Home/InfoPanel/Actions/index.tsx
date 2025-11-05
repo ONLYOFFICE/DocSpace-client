@@ -40,6 +40,7 @@ type TInfoPanelActionsProps = {
   setInfoPanelRoom?: InfoPanelStore["setInfoPanelRoom"];
   openMembersTab?: InfoPanelStore["openMembersTab"];
   openShareTab?: InfoPanelStore["openShareTab"];
+  refreshInfoPanel?: InfoPanelStore["refreshInfoPanel"];
 };
 
 const InfoPanelActions = ({
@@ -48,6 +49,7 @@ const InfoPanelActions = ({
   openMembersTab,
   openShareTab,
   setView,
+  refreshInfoPanel,
 }: TInfoPanelActionsProps) => {
   // Show info panel
   useEffect(() => {
@@ -185,6 +187,24 @@ const InfoPanelActions = ({
     };
   }, []);
 
+  // Refresh info panel
+  useEffect(() => {
+    const refreshInfoPanelHandler = () => {
+      refreshInfoPanel!();
+    };
+    window.addEventListener(
+      InfoPanelEvents.refreshInfoPanel,
+      refreshInfoPanelHandler as EventListener,
+    );
+
+    return () => {
+      window.removeEventListener(
+        InfoPanelEvents.refreshInfoPanel,
+        refreshInfoPanelHandler as EventListener,
+      );
+    };
+  }, []);
+
   return null;
 };
 
@@ -196,6 +216,7 @@ export default inject(
       openMembersTab,
       openShareTab,
       setView,
+      refreshInfoPanel,
     } = infoPanelStore;
     return {
       setIsVisible,
@@ -203,6 +224,7 @@ export default inject(
       openMembersTab,
       openShareTab,
       setView,
+      refreshInfoPanel,
     };
   },
 )(observer(InfoPanelActions));

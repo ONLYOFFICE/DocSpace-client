@@ -337,6 +337,10 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
+      path: "ai-settings/knowledge",
+      element: <ViewComponent />,
+    },
+    {
       path: "integration",
       element: <Navigate to="integration/third-party-services" replace />,
     },

@@ -52,7 +52,13 @@ export const PreparationPortal = (props: IPreparationPortal) => {
 
   const getRecoveryProgress = useCallback(async () => {
     const setMessage = (error?: unknown) => {
-      const errorText = (error as string) ?? errorInternalServer;
+      let errorText = errorInternalServer;
+
+      if (typeof error === "string") {
+        errorText = error;
+      } else if (error && typeof error === "object" && "message" in error) {
+        errorText = (error as { message?: string }).message ?? errorInternalServer;
+      }
 
       setErrorMessage(errorText);
     };

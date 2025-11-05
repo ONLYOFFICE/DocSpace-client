@@ -212,5 +212,12 @@
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "YouLeftTheAgent": "You have left the agent",
   "YouLeftTheRoom": "You have left the room",
-  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
+  "AIAgentPinned": "AI agent pinned",
+  "AIAgentUnpinned": "AI agent unpinned",
+  "AIAgentsPinned": "AI agents pinned",
+  "AIAgentsUnpinned": "AI agents unpinned",
+  "AIAgentPinLimitMessage": "You can't pin more than 10 AI agents to the top. Unpin some that are currently pinned.",
+  "AIAgentNotificationsDisabled": "AI agent notifications disabled",
+  "AIAgentNotificationsEnabled": "AI agent notifications enabled"
 }

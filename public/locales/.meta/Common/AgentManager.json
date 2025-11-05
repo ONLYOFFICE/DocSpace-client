@@ -1,0 +1,34 @@
+{
+  "key_path": "AgentManager",
+  "content": "Agent manager",
+  "content_en_sha1_hash": "9eb4782eb2942928e3b10def6aee29e8e6780164",
+  "created_at": "2025-11-03T12:10:13.383Z",
+  "updated_at": "2025-11-03T12:14:48.417Z",
+  "comment": {
+    "text": "This key refers to the text \"Agent manager,\" likely used as a label or title for a role or permission related to managing agents within a room or organization. It appears in UI elements like buttons or dialogs, granting access to agent management functions. Translators should ensure the description accurately reflects the agent management capabilities.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:14:48.417Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 56,
+      "context": "access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n agentAdmin: {\n key: \"agentAdmin\",\n label: this.t(\"Common:AgentManager\"),\n tooltip: this.t(\"InviteDialog:UserAgentMaxAvailableRoleWarning\", {\n productName: this.t(\"Common:ProductName\"),\n }),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 139,
+      "context": ": ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n agentManager: {\n key: \"agentManager\",\n label: t(\"Common:AgentManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserAgentMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

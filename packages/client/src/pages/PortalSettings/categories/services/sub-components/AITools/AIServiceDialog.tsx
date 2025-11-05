@@ -58,50 +58,113 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { BACKUP_SERVICE } from "@docspace/shared/constants";
+import { AI_TOOLS } from "@docspace/shared/constants";
 
 import ServiceToggleSection from "../ServiceToggleSection";
 import ServiceContent from "../ServiceContent";
-
+import MoreIcon from "PUBLIC_DIR/images/icons/32/more.svg";
+import ListIcon from "PUBLIC_DIR/images/icons/32/list.svg";
+import ImageGenerationIcon from "PUBLIC_DIR/images/icons/32/image.generation.svg";
+import GenerationIcon from "PUBLIC_DIR/images/icons/32/generation.svg";
+import OcrIcon from "PUBLIC_DIR/images/icons/32/ocr.svg";
+import TranslationIcon from "PUBLIC_DIR/images/icons/32/translation.svg";
+import SummarizationIcon from "PUBLIC_DIR/images/icons/32/summarization.svg";
+import ChatIcon from "PUBLIC_DIR/images/icons/32/chat.svg";
+import ToolsIcon from "PUBLIC_DIR/images/icons/32/tools.svg";
 import styles from "../../styles/BackupServiceDialog.module.scss";
 
-interface BackupServiceDialogProps {
+interface AIServiceDialogProps {
   visible: boolean;
   onClose: () => void;
   onToggle: (id: string, enabled: boolean) => void;
   isEnabled?: boolean;
-  description?: string;
-  // backupServicePrice?: number;
-  // formatWalletCurrency?: (
-  //   item: number | null,
-  //   fractionDigits: number,
-  // ) => string;
+  aiToolsPrice?: number;
+  formatWalletCurrency?: (
+    item: number | null,
+    fractionDigits: number,
+  ) => string;
+  logoText?: string;
 }
 
 interface ServiceOption {
   id: string;
   title: string;
-  description: string;
   icon: React.ReactNode;
+  description: string;
 }
 
-const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
+const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
   visible,
   onClose,
   onToggle,
   isEnabled = false,
-  description,
-  // backupServicePrice,
-  //formatWalletCurrency,
+  aiToolsPrice,
+  formatWalletCurrency,
+  logoText,
 }) => {
   const { t } = useTranslation(["Services", "Common", "Payments"]);
 
   const handleToggleChange = () => {
-    onToggle("ai", isEnabled);
+    onToggle(AI_TOOLS, isEnabled);
     onClose();
   };
 
-  const serviceOptions: ServiceOption[] = [];
+  const serviceOptions: ServiceOption[] = [
+    {
+      id: "ai-tools",
+      title: t("Common:AIAgents"),
+      description: t("AIAgentsDescription"),
+      icon: <ToolsIcon />,
+    },
+    {
+      id: "chatbot",
+      title: t("ChatBot"),
+      description: t("ChatBotDescription"),
+      icon: <ChatIcon />,
+    },
+    {
+      id: "summarization",
+      title: t("Summarization"),
+      description: t("SummarizationDescription"),
+      icon: <SummarizationIcon />,
+    },
+    {
+      id: "text-translation",
+      title: t("TextTranslation"),
+      description: t("TextTranslationDescription"),
+      icon: <TranslationIcon />,
+    },
+    {
+      id: "ocr",
+      title: t("OCR"),
+      description: t("OCRDescription"),
+      icon: <OcrIcon />,
+    },
+    {
+      id: "text-generation",
+      title: t("TextGeneration"),
+      description: t("TextGenerationDescription"),
+      icon: <GenerationIcon />,
+    },
+    {
+      id: "image-generation",
+      title: t("ImageGeneration"),
+      description: t("ImageGenerationDescription"),
+      icon: <ImageGenerationIcon />,
+    },
+    {
+      id: "error-checking",
+      title: t("ErrorChecking"),
+      description: t("ErrorCheckingDescription"),
+      icon: <ListIcon />,
+    },
+    {
+      id: "and-more",
+      title: t("AndMore"),
+      description: t("NewAIfeatures"),
+      icon: <MoreIcon />,
+    },
+  ];
 
   return (
     <ModalDialog
@@ -110,13 +173,18 @@ const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
       displayType={ModalDialogType.aside}
       withBodyScroll
     >
-      <ModalDialog.Header>{t("Common:Backup")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Services:AITools")}</ModalDialog.Header>
       <ModalDialog.Body>
         <ServiceToggleSection
           isEnabled={isEnabled}
           onToggle={handleToggleChange}
-          title={t("Common:Backup")}
-          description={description}
+          title={t("Services:EnableAItools", {
+            currency: formatWalletCurrency!(aiToolsPrice!, 4),
+          })}
+          description={t("Services:EnableAItoolsDescription", {
+            organizationName: logoText,
+            productName: t("Common:ProductName"),
+          })}
           testId="service-ai-toggle-button"
         />
         <div className={styles.servicesList}>
@@ -143,15 +211,15 @@ const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
   );
 };
 
-export default inject(({ paymentStore }: TStore) => {
-  const { servicesQuotasFeatures, backupServicePrice, formatWalletCurrency } =
+export default inject(({ paymentStore, settingsStore }: TStore) => {
+  const { servicesQuotasFeatures, aiToolsPrice, formatWalletCurrency } =
     paymentStore;
-
-  const feature = servicesQuotasFeatures.get(BACKUP_SERVICE);
+  const { logoText } = settingsStore;
+  const feature = servicesQuotasFeatures.get(AI_TOOLS);
   return {
     isEnabled: feature?.value,
-    description: feature?.priceTitle,
-    backupServicePrice,
+    aiToolsPrice,
     formatWalletCurrency,
+    logoText,
   };
 })(observer(AIServiceDialog));

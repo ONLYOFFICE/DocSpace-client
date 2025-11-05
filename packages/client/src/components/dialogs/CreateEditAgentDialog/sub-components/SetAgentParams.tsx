@@ -59,6 +59,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import RoomQuota from "SRC_DIR/components/RoomQuota";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import type { TRoom } from "@docspace/shared//api/rooms/types";
 
 const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
   display: flex;
@@ -157,6 +158,7 @@ type setAgentParamsProps = {
   covers?: Nullable<TServerCover[]>;
   setCover?: DialogsStore["setCover"];
   isDefaultAgentsQuotaSet?: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+  infoPanelSelection?: TRoom;
 };
 
 const setAgentParams = ({
@@ -187,6 +189,7 @@ const setAgentParams = ({
   setCover,
   onOwnerChange,
   isDefaultAgentsQuotaSet,
+  infoPanelSelection,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -198,8 +201,9 @@ const setAgentParams = ({
   const [previewIcon, setPreviewIcon] = useState(agentParams.previewIcon);
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
-
-  const [previewTitle, setPreviewTitle] = useState(selection?.title || "");
+  const [previewTitle, setPreviewTitle] = useState(
+    selection?.title || infoPanelSelection?.title || ""
+  );
   const [createAgentTitle, setCreateAgentTitle] = useState(agentParams.title);
 
   const checkWidth = () => {
@@ -232,7 +236,7 @@ const setAgentParams = ({
 
     if (cover && cover.cover) {
       const currentCoverData = covers?.filter(
-        (item) => item.id === cover.cover,
+        (item) => item.id === cover.cover
       )[0].data;
 
       return { ...cover, data: currentCoverData };
@@ -255,15 +259,21 @@ const setAgentParams = ({
       globalColors.logoColors[
         Math.floor(Math.random() * globalColors.logoColors.length)
       ].replace("#", ""),
-    [],
+    []
   );
 
   const currentIcon = selection
     ? selection?.logo?.large
       ? selection?.logo?.large
       : selection?.logo?.cover
-        ? selection?.logo
-        : getInfoPanelItemIcon?.(selection, 96)
+      ? selection?.logo
+      : getInfoPanelItemIcon?.(selection, 96)
+    : infoPanelSelection
+    ? infoPanelSelection?.logo?.large
+      ? infoPanelSelection?.logo?.large
+      : infoPanelSelection?.logo?.cover
+      ? infoPanelSelection?.logo
+      : getInfoPanelItemIcon?.(infoPanelSelection, 96)
     : undefined;
 
   const onChangeIcon = (icon: TAgentIconParams) => {
@@ -345,17 +355,17 @@ const setAgentParams = ({
   const isEditRoomModel = model?.map((item) =>
     item.key === "create_edit_room_delete"
       ? { ...item, onClick: onDeleteAvatar }
-      : item,
+      : item
   );
 
   const isEmptyIcon =
     createAgentTitle || cover?.color
       ? false
       : avatarEditorDialogVisible
-        ? true
-        : previewIcon
-          ? false
-          : !createAgentTitle;
+      ? true
+      : previewIcon
+      ? false
+      : !createAgentTitle;
 
   const roomIconLogo = currentCover
     ? { cover: currentCover }
@@ -364,8 +374,18 @@ const setAgentParams = ({
   const itemIconLogo = currentCover
     ? { cover: currentCover }
     : avatarEditorDialogVisible
-      ? currentIcon
-      : previewIcon || currentIcon;
+    ? currentIcon
+    : previewIcon || currentIcon;
+
+  const showDefault =
+    cover && cover.cover
+      ? false
+      : (!previewIcon &&
+          !selection?.logo?.cover &&
+          !selection?.logo?.large &&
+          !infoPanelSelection?.logo?.cover &&
+          !infoPanelSelection?.logo?.large) ||
+        !!cover?.color;
 
   const element = isEdit ? (
     <ItemIcon
@@ -373,15 +393,12 @@ const setAgentParams = ({
       title={previewTitle}
       className="room-params-icon"
       logo={itemIconLogo as unknown as TLogo}
-      showDefault={
-        cover && cover.cover
-          ? false
-          : (!previewIcon &&
-              !selection?.logo?.cover &&
-              !selection?.logo?.large) ||
-            !!cover?.color
+      showDefault={showDefault}
+      color={
+        cover
+          ? cover.color
+          : selection?.logo?.color || infoPanelSelection?.logo?.color
       }
-      color={cover ? cover.color : selection?.logo?.color}
       size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
       radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
       withEditing
@@ -479,6 +496,7 @@ const setAgentParams = ({
           roomParams={agentParams}
           isEdit={isEdit}
           isLoading={isDisabled}
+          isAgent
         />
       ) : null}
 
@@ -518,7 +536,7 @@ export default inject(
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     const { bufferSelection } = filesStore;
-    const { getInfoPanelItemIcon } = infoPanelStore;
+    const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
 
     const {
       uploadFile,
@@ -555,6 +573,7 @@ export default inject(
       covers,
       setCover,
       isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
+      infoPanelSelection,
     };
-  },
+  }
 )(observer(setAgentParams));

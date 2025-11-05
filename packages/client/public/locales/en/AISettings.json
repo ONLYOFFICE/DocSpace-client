@@ -22,7 +22,7 @@
   "IntegrationName": "Integration name",
   "IntegrationURL": "Integration URL",
   "MCPServer": "MCP Server",
-  "MCPSettingDescription": "This section lets you manage MCP servers for AI chats within rooms. You can enable system MCP servers or add custom ones to meet your company's needs. Once enabled, these servers will be accessible to other users for their tasks.",
+  "MCPSettingDescription": "The {{organizationName}} {{productName}} MCP Server streamlines AI-driven workflows, integrating LLMs with external systems for efficient and secure document management.",
   "MCPSettingTitle": "MCP servers",
   "Provider": "Provider",
   "ProviderAddedSuccess": "Provider added successfully",
@@ -42,5 +42,6 @@
   "ServiceIcon": "Service icon",
   "SystemMCPListTitle": "System",
   "ToUseAddProvider": "To use {{value}}, make sure to connect at least one provider first.",
-  "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes."
+  "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes.",
+  "KnowledgeDescription": "Enable knowledge base for AI agents. The system will use {{modelName}} model to create vector embeddings and perform semantic search through your documents."
 }

@@ -3,7 +3,7 @@
   "content": "Last modified by",
   "content_en_sha1_hash": "0bd7b845232486d9f552a294c8d4177d957bf0c3",
   "created_at": "2025-05-19T21:30:54.889Z",
-  "updated_at": "2025-08-12T19:46:26.016Z",
+  "updated_at": "2025-11-03T12:10:35.100Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Last modified by\" in the user interface, typically appearing next to or below a file timestamp. It is likely used on a file info panel or similar UI element, where it provides context about who last edited the file. Translators should focus on localizing this text to provide clarity and consistency across different languages and regions.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 213,
-      "context": "return this.t(\"Common:Size\");\n \n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"CreationDate\");\n case \"Lifetime ends\":\n return this.t(\"LifetimeEnds\");",
+      "line_number": 217,
+      "context": "case \"Resolution\":\n return this.t(\"InfoPanel:Resolution\");\n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"CreationDate\");\n case \"Lifetime ends\":\n return this.t(\"LifetimeEnds\");",
       "module": "/packages/client"
     }
   ],

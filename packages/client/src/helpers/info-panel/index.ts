@@ -59,6 +59,12 @@ export const openShareTab = () => {
   window.dispatchEvent(event);
 };
 
+export const refreshInfoPanel = () => {
+  const event = new CustomEvent(InfoPanelEvents.refreshInfoPanel);
+
+  window.dispatchEvent(event);
+};
+
 export const openMembersTab = () => {
   const event = new CustomEvent(InfoPanelEvents.openMembersTab);
 
@@ -104,7 +110,7 @@ export const getInfoPanelOpen = () => {
 };
 
 let loader = false;
-export const forcedShowInfoPanelLoader = () => {
+export const showForcedInfoPanelLoader = () => {
   if (loader) return;
 
   loader = true;

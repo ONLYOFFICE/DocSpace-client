@@ -49,6 +49,7 @@ import { SettingsContext } from "../contexts/Settings";
 
 const useSocketHelper = ({
   disabledItems,
+  disabledFolderType,
   filterParam,
   withCreate,
   setItems,
@@ -139,7 +140,12 @@ const useSocketHelper = ({
           item = convertRoomsToItems([room], t)[0];
         } else {
           const folder = await getFolderInfo(data.id);
-          item = convertFoldersToItems([folder], disabledItems, filterParam)[0];
+          item = convertFoldersToItems(
+            [folder],
+            disabledItems,
+            filterParam,
+            disabledFolderType,
+          )[0];
         }
       }
 
@@ -190,7 +196,16 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setItems, setTotal, t, withCreate],
+    [
+      disabledItems,
+      disabledFolderType,
+      filterParam,
+      getIcon,
+      setItems,
+      setTotal,
+      t,
+      withCreate,
+    ],
   );
 
   const updateItem = React.useCallback(
@@ -221,7 +236,12 @@ const useSocketHelper = ({
           item = convertRoomsToItems([room], t)[0];
         } else {
           const folder = await getFolderInfo(data.id);
-          item = convertFoldersToItems([folder], disabledItems, filterParam)[0];
+          item = convertFoldersToItems(
+            [folder],
+            disabledItems,
+            filterParam,
+            disabledFolderType,
+          )[0];
         }
       }
 
@@ -273,7 +293,15 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setBreadCrumbs, setItems, t],
+    [
+      disabledItems,
+      disabledFolderType,
+      filterParam,
+      getIcon,
+      setBreadCrumbs,
+      setItems,
+      t,
+    ],
   );
 
   const deleteItem = React.useCallback(

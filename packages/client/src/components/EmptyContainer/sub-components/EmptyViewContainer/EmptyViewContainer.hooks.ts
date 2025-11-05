@@ -75,13 +75,19 @@ export const useEmptyView = (
     selectedFolder,
     isKnowledgeTab,
     isResultsTab,
+    isDocSpaceAdmin,
+    aiReady,
+    standalone,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
 ) => {
   const theme = useTheme();
 
-  const isAIRoom = selectedFolder?.roomType === RoomsType.AIRoom;
+  const isAIRoom =
+    selectedFolder?.roomType === RoomsType.AIRoom ||
+    isKnowledgeTab ||
+    isResultsTab;
 
   const emptyViewOptions = useMemo(() => {
     const description = getDescription(
@@ -99,6 +105,9 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      aiReady,
+      standalone,
+      isDocSpaceAdmin,
     );
     const title = getTitle(
       type,
@@ -113,6 +122,9 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      aiReady,
+      standalone,
+      isDocSpaceAdmin,
     );
     const icon = getIcon(
       type,
@@ -180,12 +192,18 @@ export const useOptions = (
     logoText,
     isKnowledgeTab,
     isResultsTab,
+    aiReady,
+    standalone,
+    isDocSpaceAdmin,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
   const navigate = useNavigate();
 
-  const isAIRoom = selectedFolder?.roomType === RoomsType.AIRoom;
+  const isAIRoom =
+    selectedFolder?.roomType === RoomsType.AIRoom ||
+    isKnowledgeTab ||
+    isResultsTab;
 
   const onGoToShared = useCallback(() => {
     const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
@@ -207,6 +225,14 @@ export const useOptions = (
       state,
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
+
+  const onGoToServices = useCallback(() => {
+    return navigate("/portal-settings/services");
+  }, []);
+
+  const onGoToAIProviderSettings = useCallback(() => {
+    return navigate("/portal-settings/ai-settings/providers");
+  }, []);
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -344,6 +370,8 @@ export const useOptions = (
           onGoToShared,
           onOpenAccessSettings,
           onCreateAIAgent,
+          onGoToServices,
+          onGoToAIProviderSettings,
         },
         logoText,
         isVisitor,
@@ -351,6 +379,9 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
+        aiReady,
+        standalone,
+        isDocSpaceAdmin,
       ),
     [
       type,

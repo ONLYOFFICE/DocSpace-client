@@ -1236,7 +1236,6 @@ class PluginStore {
   }
 
   get contextMenuItemsList() {
-    console.log(this.contextMenuItems);
     const items: { key: string; value: IContextMenuItem }[] = Array.from(
       this.contextMenuItems,
       ([key, value]) => {

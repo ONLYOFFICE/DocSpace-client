@@ -44,6 +44,8 @@ import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
 
+import { showForcedInfoPanelLoader } from "SRC_DIR/helpers/info-panel";
+
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
 import FilesSettingsStore from "./FilesSettingsStore";
@@ -178,6 +180,29 @@ class InfoPanelStore {
     if (withCheck && infoPanelRoom?.id !== this.infoPanelRoom?.id) return;
 
     this.infoPanelRoom = infoPanelRoom;
+  };
+
+  refreshInfoPanel = () => {
+    const selection = this.infoPanelSelection;
+
+    if (!selection || Array.isArray(selection)) return;
+
+    const isRoomSelection = "isRoom" in selection && Boolean(selection.isRoom);
+
+    if (isRoomSelection) {
+      if (
+        this.roomsView === InfoPanelView.infoMembers &&
+        this.infoPanelRoomSelection?.id === selection.id
+      ) {
+        void this.updateInfoPanelMembers();
+      }
+
+      return;
+    }
+
+    if (this.isShareTabActive) {
+      this.setShareChanged(true);
+    }
   };
 
   openUser = async (user: TCreatedBy) => {
@@ -373,12 +398,30 @@ class InfoPanelStore {
     this.shareChanged = shareChanged;
   };
 
+  showForcedInfoPanelLoader = (id: string | number) => {
+    if (
+      this.isShareTabActive &&
+      !Array.isArray(this.infoPanelSelection) &&
+      this.infoPanelSelection?.id === id
+    ) {
+      showForcedInfoPanelLoader();
+    }
+  };
+
   get isShareTabActive(): boolean {
     return (
       this.roomsView === InfoPanelView.infoShare ||
       this.fileView === InfoPanelView.infoShare
     );
   }
+
+  inRoom = (): boolean => {
+    return (
+      this.infoPanelSelection !== null &&
+      "navigationPath" in this.infoPanelSelection &&
+      !!this.infoPanelSelection.navigationPath
+    );
+  };
 }
 
 export default InfoPanelStore;

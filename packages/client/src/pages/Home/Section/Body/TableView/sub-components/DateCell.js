@@ -55,4 +55,4 @@ const DateCell = ({
   );
 };
 
-export default DateCell;
+export default React.memo(DateCell);

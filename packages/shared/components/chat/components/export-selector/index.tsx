@@ -72,7 +72,8 @@ const ExportSelector = ({
         isRoot,
         selectedItemSecurity,
       ) => {
-        if (selectedItemType === "rooms") return true;
+        if (selectedItemType === "rooms" || selectedItemType === "agents")
+          return true;
 
         if (
           selectedItemSecurity &&
@@ -95,8 +96,7 @@ const ExportSelector = ({
       withoutBackButton
       withCancelButton
       withCreate={false}
-      // TODO: restore when api will be ready
-      withFooterCheckbox={false}
+      withFooterCheckbox
       withFooterInput
       cancelButtonLabel={t("Common:CancelButton")}
       submitButtonLabel={t("Common:SaveButton")}
@@ -110,6 +110,7 @@ const ExportSelector = ({
       currentFooterInputValue={getFileName()}
       descriptionText=""
       getFilesArchiveError={() => ""}
+      withAIAgentsTreeFolder
       currentDeviceType={
         isDesktop()
           ? DeviceType.desktop

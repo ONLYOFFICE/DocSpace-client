@@ -30,7 +30,6 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import socket, { SocketCommands, SocketEvents } from "../../../../utils/socket";
-import { isMobile } from "../../../../utils";
 
 import { Scrollbar } from "../../../scrollbar";
 import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
@@ -58,11 +57,9 @@ const ChatMessageBody = ({
     fetchNextMessages,
     addMessageId,
   } = useMessageStore();
-  const { currentChat, updateUrlChatId } = useChatStore();
+  const { currentChat } = useChatStore();
 
   const { t } = useTranslation(["Common"]);
-
-  const [height, setHeight] = React.useState(0);
 
   const scrollbarRef = useRef<CustomScrollbar>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
@@ -71,12 +68,6 @@ const ChatMessageBody = ({
   const disableAutoScrollRef = useRef(false);
 
   const isEmpty = messages.length === 0 || isLoading;
-
-  useEffect(() => {
-    return () => {
-      updateUrlChatId("");
-    };
-  }, []);
 
   useEffect(() => {
     if (!currentChat?.id) return;
@@ -113,59 +104,6 @@ const ChatMessageBody = ({
       }
     });
   });
-
-  const calculateHeight = React.useCallback(() => {
-    if (!isMobile()) return;
-
-    const sectionHeight =
-      document.getElementsByClassName("section-wrapper")[0]?.clientHeight || 0;
-    const sectionHeaderHeight =
-      document.getElementsByClassName("section-header")[0]?.clientHeight || 0;
-    const sectionTabsHeight =
-      document.getElementsByClassName("section-tabs")[0]?.clientHeight || 0;
-    const chatHeaderHeight =
-      document.getElementsByClassName("chat-header")[0]?.clientHeight || 0;
-    const chatInputHeight =
-      document.getElementsByClassName("chat-input")[0]?.clientHeight || 0;
-
-    // 30 - it is chat margin and description
-    // 24 - it is margin section
-    const newHeight =
-      sectionHeight -
-      sectionHeaderHeight -
-      sectionTabsHeight -
-      chatHeaderHeight -
-      chatInputHeight -
-      30 -
-      24;
-
-    setHeight(newHeight);
-  }, []);
-
-  useEffect(() => {
-    calculateHeight();
-  }, [calculateHeight]);
-
-  useEffect(() => {
-    const chatInputElement = document.getElementsByClassName("chat-input")[0];
-
-    if (!chatInputElement) return;
-
-    // Create ResizeObserver to watch for chat input height changes
-    const resizeObserver = new ResizeObserver(() => {
-      // Use requestAnimationFrame to ensure DOM has updated
-      requestAnimationFrame(() => {
-        calculateHeight();
-      });
-    });
-
-    // Start observing the chat input element
-    resizeObserver.observe(chatInputElement);
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [calculateHeight]);
 
   useEffect(() => {
     if (!chatBodyRef.current) return;
@@ -211,7 +149,6 @@ const ChatMessageBody = ({
       className={classNames(styles.chatMessageBody, {
         [styles.empty]: isEmpty,
       })}
-      style={isMobile() ? { height: `${height}px` } : undefined}
     >
       {isEmpty ? (
         <EmptyScreen isLoading={isLoading} />

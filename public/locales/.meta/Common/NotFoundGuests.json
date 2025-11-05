@@ -3,7 +3,7 @@
   "content": "No added guests yet",
   "content_en_sha1_hash": "e98856533c4e928082936c4943b3796791537ac1",
   "created_at": "2025-05-19T21:30:46.873Z",
-  "updated_at": "2025-10-01T15:17:48.228Z",
+  "updated_at": "2025-11-03T12:10:35.133Z",
   "comment": {
     "text": "This translation key is used to display the message \"No added guests yet\" when there are no guests added. It appears on an empty screen in a contacts section of the application and is displayed as a header or title. Translators should provide a corresponding phrase that conveys this same idea in the target language.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 672,
+      "line_number": 675,
       "context": "submitButtonId={submitButtonId}\n emptyScreenImage={emptyScreenImage}\n emptyScreenHeader={\n emptyScreenHeader ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuests\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyHeader\")\n : t(\"Common:NotFoundGroups\"))\n }\n emptyScreenDescription={",
       "module": "/packages/shared"
     }

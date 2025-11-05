@@ -53,6 +53,7 @@ const User = ({
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
   setRemoveUserConfirmation,
+  isAIAgentsFolder
 }: UserProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -86,10 +87,10 @@ const User = ({
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     room.roomType,
-    canChangeUserRole,
+    canChangeUserRole
   );
 
-  const userRole = membersHelper.getOptionByUserAccess(user.access);
+  const userRole = membersHelper.getOptionByUserAccess(user.access, isAIAgentsFolder);
 
   const userRoleOptions =
     ("isGroup" in user && user.isGroup) ||
@@ -101,7 +102,7 @@ const User = ({
     api.rooms
       .resendEmailInvitations(room.id, true)
       .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
       )
       .catch((err) => toastr.error(err));
   };
@@ -157,16 +158,19 @@ const User = ({
   );
 };
 
-export default inject(({ dialogsStore }: TStore) => {
+export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
   const {
     setEditMembersGroup,
     setEditGroupMembersDialogVisible,
     setRemoveUserConfirmation,
   } = dialogsStore;
 
+  const { isAIAgentsFolder } = treeFoldersStore;
+
   return {
     setEditMembersGroup,
     setEditGroupMembersDialogVisible,
     setRemoveUserConfirmation,
+    isAIAgentsFolder,
   };
 })(observer(User));

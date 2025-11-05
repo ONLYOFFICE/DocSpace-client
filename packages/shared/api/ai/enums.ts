@@ -69,3 +69,10 @@ export const enum WebSearchType {
   None,
   Exa,
 }
+
+export const enum KnowledgeType {
+  None,
+  OpenAi,
+  OpenRouter
+}
+  

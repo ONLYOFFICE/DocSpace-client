@@ -775,7 +775,8 @@ const ArticleMainButtonContent = (props) => {
 
     if (!isMobileArticle) visibilityValue = false;
 
-    if (isChatTab || isResultTab) visibilityValue = false;
+    if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
+
     return visibilityValue;
   };
 
@@ -786,6 +787,7 @@ const ArticleMainButtonContent = (props) => {
   }, [mainButtonVisible]);
 
   const onMainButtonClick = () => {
+    if (isAIAgentsFolder) return onCreateAgent();
     if (!isAccountsPage) return onCreateRoom();
     if (isContactsGroupsPage) return createGroup();
   };

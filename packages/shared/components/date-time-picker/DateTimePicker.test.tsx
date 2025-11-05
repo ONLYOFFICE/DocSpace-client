@@ -23,17 +23,18 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { screen, render, fireEvent } from "@testing-library/react";
 import moment from "moment";
 import { DateTimePicker } from "./DateTimePicker";
 import { DateTimePickerProps } from "./DateTimerPicker.types";
-import "@testing-library/jest-dom";
+import styles from "./DateTimePicker.module.scss";
 
 describe("DateTimePicker", () => {
   const defaultProps: DateTimePickerProps = {
     initialDate: moment("2025-01-27T10:00:00"),
     selectDateText: "Select Date",
-    onChange: jest.fn(),
+    onChange: vi.fn(),
     className: "test-date-picker",
     id: "test-date-picker",
     locale: "en",
@@ -42,7 +43,7 @@ describe("DateTimePicker", () => {
   };
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("should render with default props", () => {
@@ -50,7 +51,7 @@ describe("DateTimePicker", () => {
 
     const picker = screen.getByTestId("date-time-picker");
     expect(picker).toBeInTheDocument();
-    expect(picker).toHaveClass("test-date-picker");
+    expect(picker).toHaveClass(styles.selectors);
     expect(picker).toHaveAttribute("aria-label", "Select Date");
     expect(picker).toHaveAttribute("aria-invalid", "false");
   });
@@ -59,12 +60,12 @@ describe("DateTimePicker", () => {
     render(<DateTimePicker {...defaultProps} hasError />);
 
     const picker = screen.getByTestId("date-time-picker");
-    expect(picker).toHaveClass("hasError");
+    expect(picker).toHaveClass(styles.hasError);
     expect(picker).toHaveAttribute("aria-invalid", "true");
   });
 
   it("should handle date change", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<DateTimePicker {...defaultProps} onChange={onChange} />);
 
     const datePicker = screen.getByTestId("date-picker");

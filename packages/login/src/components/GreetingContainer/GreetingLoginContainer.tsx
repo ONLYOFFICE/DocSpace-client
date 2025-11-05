@@ -29,13 +29,11 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useTheme } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { getLogoUrl } from "@docspace/shared/utils/common";
 
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
+import { Logo } from "../Logo";
 
 export const GreetingLoginContainer = ({
   greetingSettings,
@@ -45,14 +43,7 @@ export const GreetingLoginContainer = ({
   culture?: string;
 }) => {
   const { t } = useTranslation(["Login", "Wizard", "TenantList"]);
-  const theme = useTheme();
 
-  const logoUrl = getLogoUrl(
-    WhiteLabelLogoType.LoginPage,
-    !theme?.isBase,
-    false,
-    culture,
-  );
   const searchParams = useSearchParams();
   const loginData = searchParams?.get("loginData") || null;
   const emailChange = searchParams?.get("emailChange") || null;
@@ -161,10 +152,10 @@ export const GreetingLoginContainer = ({
       </div>
     );
   };
-
   return (
     <>
-      <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
+      <Logo culture={culture} />
+
       {renderEmailChangeContent()}
       {renderGreetingTitle()}
       {renderInvitationContent()}

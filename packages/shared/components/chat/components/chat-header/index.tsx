@@ -34,11 +34,17 @@ import SelectChat from "./sub-components/SelectChat";
 import CreateChat from "./sub-components/CreateChat";
 import SelectModel from "./sub-components/SelectModel";
 
-const ChatHeader = ({ selectedModel, isLoading }: ChatHeaderProps) => {
+const ChatHeader = ({
+  selectedModel,
+  isLoading,
+  getIcon,
+  roomId,
+  aiReady,
+}: ChatHeaderProps) => {
   return (
     <div className={`${styles.chatHeader} chat-header`}>
-      <SelectChat isLoadingProp={isLoading} />
-      <CreateChat isLoadingProp={isLoading} />
+      <SelectChat isLoadingProp={isLoading} getIcon={getIcon} roomId={roomId} />
+      <CreateChat isLoadingProp={isLoading} isDisabled={!aiReady} />
       <SelectModel selectedModel={selectedModel} isLoading={isLoading} />
     </div>
   );

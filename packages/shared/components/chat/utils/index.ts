@@ -28,6 +28,7 @@ import { TTranslation } from "../../../types";
 import { LANGUAGE } from "../../../constants";
 import { getCookie } from "../../../utils";
 import getCorrectDate from "../../../utils/getCorrectDate";
+import { combineUrl } from "../../../utils/combineUrl";
 
 const fileRegex = /@\d+/g;
 
@@ -117,4 +118,17 @@ export const formatJsonWithMarkdown = (
 
   // Return the formatted JSON wrapped in markdown code block syntax
   return `\`\`\`json\n${formattedJson}\n\`\`\``;
+};
+
+export const openFile = (id: string) => {
+  const searchParams = new URLSearchParams();
+
+  searchParams.set("fileId", id);
+
+  const url = combineUrl(
+    window.location.origin,
+    `/doceditor?${searchParams.toString()}`,
+  );
+
+  window.open(url, "_blank");
 };

@@ -3,7 +3,7 @@
   "content": "{{currency}} per 1 backup",
   "content_en_sha1_hash": "d85e845aa0379da19ebcadd952f30a7ee8e2786f",
   "created_at": "2025-08-21T14:45:39.476Z",
-  "updated_at": "2025-08-21T14:47:27.335Z",
+  "updated_at": "2025-11-03T12:10:35.334Z",
   "comment": {
     "text": "This key displays the price per backup, formatted with the currency symbol. It's used to show the cost of a backup service, likely within a settings or pricing section of the user interface. Translators should ensure the currency symbol integrates correctly with the translated text.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/ServicesItems.tsx",
-      "line_number": 163,
-      "context": "return t(\"PerStorage\", {\n currency: formatWalletCurrency!(storagePriceIncrement!, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n });\n case BACKUP_SERVICE:\n return t(\"PerBackup\", {\n currency: formatWalletCurrency!(priceValue!, 2),\n });\n default:\n return \"\";\n }",
+      "line_number": 167,
+      "context": "return t(\"PerStorage\", {\n currency: formatWalletCurrency!(storagePriceIncrement!, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n });\n case BACKUP_SERVICE:\n return t(\"PerBackup\", {\n currency: formatWalletCurrency!(priceValue!, 2),\n });\n case AI_TOOLS:\n return t(\"PerAITools\", {\n currency: formatWalletCurrency!(priceValue!, 4),",
       "module": "/packages/client"
     }
   ],

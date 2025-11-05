@@ -37,14 +37,22 @@ import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 import { RectangleSkeleton } from "../../../../../skeletons";
 import { exportChat } from "../../../../../api/ai";
 
+import socket, {
+  SocketCommands,
+  SocketEvents,
+} from "../../../../../utils/socket";
+
 import { DropDown } from "../../../../drop-down";
+import { TBreadCrumb } from "../../../../selector/Selector.types";
 import { toastr } from "../../../../toast";
-import { Link, LinkType, LinkTarget } from "../../../../link";
+import { Link, LinkType } from "../../../../link";
 
 import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
-
+import { openFile } from "../../../utils";
 import { SelectChatProps } from "../../../Chat.types";
+
+import ExportSelector from "../../export-selector";
 
 import styles from "../ChatHeader.module.scss";
 
@@ -56,12 +64,13 @@ import {
 } from "../constants";
 import { ChatList } from "./ChatList";
 
-const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
+const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [hoveredItem, setHoveredItem] = React.useState("");
   const [isRenameOpen, setIsRenameOpen] = React.useState(false);
+  const [isExportOpen, setIsExportOpen] = React.useState(false);
 
   const parentRef = React.useRef<HTMLDivElement>(null);
 
@@ -77,6 +86,8 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     updateUrlChatId,
   } = useChatStore();
   const { fetchMessages, startNewChat, isRequestRunning } = useMessageStore();
+
+  const closeExportSelector = () => setIsExportOpen(false);
 
   const toggleOpen = () => {
     if (isRequestRunning) return;
@@ -117,30 +128,75 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
 
   const onSaveToFileAction = React.useCallback(async () => {
     if (isRequestRunning) return;
-    const res = await exportChat(hoveredItem);
-
-    const title = chats.find((chat) => chat.id === hoveredItem)?.title;
-    const toastMsg = (
-      <Trans
-        ns="Common"
-        i18nKey="ChatExported"
-        t={t}
-        values={{ fileName: res?.title, title }}
-        components={{
-          1: <b />,
-          2: (
-            <Link
-              type={LinkType.page}
-              target={LinkTarget.blank}
-              href={res?.webUrl}
-            />
-          ),
-        }}
-      />
-    );
-
-    toastr.success(toastMsg);
+    setIsExportOpen(true);
+    setIsOpen(false);
   }, [hoveredItem, chats, isRequestRunning, t]);
+
+  const getFileName = () => {
+    const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+
+    return title ?? "";
+  };
+
+  const onSubmit = React.useCallback(
+    async (
+      selectedItemId: string | number | undefined,
+      folderTitle: string,
+      isPublic: boolean,
+      breadCrumbs: TBreadCrumb[],
+      fileName: string,
+      isChecked: boolean,
+    ) => {
+      if (!selectedItemId) return;
+
+      const chatParts = ["CHAT-" + hoveredItem];
+
+      socket?.emit(SocketCommands.Subscribe, {
+        roomParts: ["CHAT-" + hoveredItem],
+        individual: true,
+      });
+
+      await exportChat(hoveredItem, selectedItemId, fileName);
+
+      socket?.on(SocketEvents.ExportChat, (data) => {
+        const { resultFile } = data;
+
+        const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+
+        if (isChecked) {
+          openFile(resultFile.id.toString());
+        }
+
+        const toastMsg = (
+          <Trans
+            ns="Common"
+            i18nKey="ChatExported"
+            t={t}
+            values={{ fileName, title }}
+            components={{
+              1: <b />,
+              2: (
+                <Link
+                  type={LinkType.action}
+                  onClick={() => openFile(resultFile.id.toString())}
+                />
+              ),
+            }}
+          />
+        );
+
+        toastr.success(toastMsg);
+
+        socket?.emit(SocketCommands.Unsubscribe, {
+          roomParts: chatParts,
+          individual: true,
+        });
+      });
+
+      setIsExportOpen(false);
+    },
+    [hoveredItem, chats, isRequestRunning, t],
+  );
 
   const contextModel = React.useMemo(() => {
     return [
@@ -231,6 +287,16 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
           chatId={hoveredItem}
           prevTitle={chats.find((chat) => chat.id === hoveredItem)?.title || ""}
           onRenameToggle={onRenameToggle}
+        />
+      ) : null}
+      {isExportOpen ? (
+        <ExportSelector
+          getIcon={getIcon}
+          showFolderSelector={isExportOpen}
+          onCloseFolderSelector={closeExportSelector}
+          roomId={roomId}
+          getFileName={getFileName}
+          onSubmit={onSubmit}
         />
       ) : null}
     </>

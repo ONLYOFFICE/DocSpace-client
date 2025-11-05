@@ -132,7 +132,7 @@ const SpaceQuota = (props) => {
 
     if (action === "no-quota") {
       try {
-        const items = await updateQuota([item.id], -1, inRoom);
+        const items = await updateQuota([item.id], -1, inRoom());
 
         options.forEach((o) => {
           if (o.key === "no-quota") o.label = t("Common:Unlimited");
@@ -149,7 +149,7 @@ const SpaceQuota = (props) => {
     }
 
     try {
-      const items = await resetQuota([item.id], inRoom);
+      const items = await resetQuota([item.id], inRoom());
 
       options.forEach((o) => {
         if (o.key === "default-quota") o.label = defaultQuotaSize;
@@ -250,8 +250,7 @@ export default inject(
       defaultRoomsQuota,
     } = currentQuotaStore;
 
-    const { infoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
-    const inRoom = !!infoPanelSelection?.navigationPath;
+    const { inRoom, isVisible: infoPanelVisible } = infoPanelStore;
 
     const changeQuota =
       type === "user"

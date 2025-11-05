@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { observer } from "mobx-react";
+
 import { MessageStoreContextProvider } from "./store/messageStore";
-import { ChatStoreContextProvider } from "./store/chatStore";
+import { ChatStoreContextProvider, useChatStore } from "./store/chatStore";
 
 import { ChatProps } from "./Chat.types";
 
@@ -34,51 +36,113 @@ import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
 import ChatInput from "./components/chat-input";
 import { ChatNoAccessScreen } from "./components/chat-no-access-screen";
+import { ChatInfoBlock } from "./components/chat-info-block";
 
 import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
 
 export { CHAT_SUPPORTED_FORMATS };
 
-const Chat = ({
-  roomId,
-  userAvatar,
-  selectedModel,
-  isLoading,
-  canUseChat,
+const Chat = observer(
+  ({
+    isLoadingChat,
+    selectedModel,
+    getIcon,
+    roomId,
+    userAvatar,
+    attachmentFile,
+    clearAttachmentFile,
+    toolsSettings,
+    isAdmin = false,
+    standalone = false,
+    canUseChat = false,
+    aiReady = false,
+  }: ChatProps & { isLoadingChat: boolean }) => {
+    const { currentChat } = useChatStore();
 
-  getIcon,
-  attachmentFile,
-  clearAttachmentFile,
-}: ChatProps) => {
-  if (!roomId) {
-    return null;
-  }
+    const showEmptyScreen = !isLoadingChat && !aiReady && !currentChat;
 
-  if (!canUseChat) {
-    return <ChatNoAccessScreen />;
+    return (
+      <>
+        <ChatHeader
+          selectedModel={selectedModel}
+          isLoading={isLoadingChat}
+          getIcon={getIcon}
+          roomId={roomId}
+          aiReady={aiReady}
+        />
+        {showEmptyScreen ? (
+          <ChatNoAccessScreen
+            canUseChat={canUseChat}
+            aiReady={aiReady}
+            standalone={standalone}
+            isDocSpaceAdmin={isAdmin}
+          />
+        ) : (
+          <>
+            <ChatMessageBody
+              userAvatar={userAvatar}
+              isLoading={isLoadingChat}
+              getIcon={getIcon}
+            />
+            {!isLoadingChat && !aiReady ? (
+              <ChatInfoBlock
+                standalone={standalone}
+                isDocSpaceAdmin={isAdmin}
+              />
+            ) : null}
+            <ChatInput
+              attachmentFile={attachmentFile}
+              clearAttachmentFile={clearAttachmentFile}
+              isLoading={isLoadingChat}
+              getIcon={getIcon}
+              selectedModel={selectedModel}
+              toolsSettings={toolsSettings}
+              isAdmin={isAdmin}
+              aiReady={aiReady}
+            />
+          </>
+        )}
+      </>
+    );
+  },
+);
+
+const ChatWrapper = (props: ChatProps) => {
+  const {
+    roomId,
+    isLoading,
+
+    initChats,
+
+    isAdmin = false,
+    standalone = false,
+    canUseChat = false,
+    aiReady = false,
+  } = props;
+
+  const isLoadingChat = isLoading || !roomId;
+  const hasChats = initChats?.chats?.length > 0;
+
+  if (!isLoadingChat && (!canUseChat || (!aiReady && !hasChats))) {
+    return (
+      <ChatNoAccessScreen
+        canUseChat={canUseChat}
+        aiReady={aiReady}
+        standalone={standalone}
+        isDocSpaceAdmin={isAdmin}
+      />
+    );
   }
 
   return (
-    <ChatStoreContextProvider roomId={roomId}>
+    <ChatStoreContextProvider roomId={roomId} {...initChats}>
       <MessageStoreContextProvider roomId={roomId}>
         <ChatContainer>
-          <ChatHeader selectedModel={selectedModel} isLoading={isLoading} />
-          <ChatMessageBody
-            userAvatar={userAvatar}
-            isLoading={isLoading}
-            getIcon={getIcon}
-          />
-          <ChatInput
-            attachmentFile={attachmentFile}
-            clearAttachmentFile={clearAttachmentFile}
-            isLoading={isLoading}
-            getIcon={getIcon}
-            selectedModel={selectedModel}
-          />
+          <Chat {...props} isLoadingChat={isLoadingChat} />
         </ChatContainer>
       </MessageStoreContextProvider>
     </ChatStoreContextProvider>
   );
 };
 
-export default Chat;
+export default ChatWrapper;

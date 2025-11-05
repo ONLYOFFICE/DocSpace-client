@@ -25,15 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { RowContainer } from ".";
 
 const baseProps = {
   manualHeight: "500px",
   useReactWindow: true,
-  onScroll: jest.fn(),
-  fetchMoreFiles: jest.fn().mockResolvedValue(undefined),
+  onScroll: vi.fn(),
+  fetchMoreFiles: vi.fn().mockResolvedValue(undefined),
   hasMoreFiles: true,
   itemCount: 2,
   filesLength: 2,

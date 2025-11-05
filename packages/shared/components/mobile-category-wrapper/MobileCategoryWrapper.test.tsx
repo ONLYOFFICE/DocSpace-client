@@ -16,7 +16,7 @@ const defaultProps = {
   title: "Test Title",
   url: "/test-url",
   subtitle: "Test Subtitle",
-  onClickLink: vi.fn(),
+  onClickLink: vi.fn((e) => e.preventDefault()),
   isDisabled: false,
   withPaidBadge: false,
   badgeLabel: "PRO",

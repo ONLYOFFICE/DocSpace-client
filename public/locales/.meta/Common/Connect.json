@@ -3,7 +3,7 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2025-10-27T16:14:33.199Z",
+  "updated_at": "2025-11-03T12:10:34.973Z",
   "comment": {
     "text": "This translation key is used for a \"Connect\" button that appears in various UI elements, such as buttons and dialog components. Its purpose is to provide a consistent label for this action across different applications and languages, allowing users to understand what happens when they click on the button.",
     "is_auto": true,
@@ -36,8 +36,8 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 34,
-      "context": "import { observer } from \"mobx-react\";\n import classNames from \"classnames\";\n \n import McpToolReactSvgUrl from \"PUBLIC_DIR/images/mcp.tool.svg?url\";\n import WebSearchIconUrl from \"PUBLIC_DIR/images/web.search.svg?url\";\n import ManageConnectionsReactSvgUrl from \"PUBLIC_DIR/images/manage.connection.react.svg?url\";\n \n import { openConnectWindow } from \"../../../../api/files\";\n import {\n changeMCPToolsForRoom,\n connectServer,",
+      "line_number": 35,
+      "context": "import classNames from \"classnames\";\n import { useNavigate } from \"react-router\";\n \n import McpToolReactSvgUrl from \"PUBLIC_DIR/images/mcp.tool.svg?url\";\n import WebSearchIconUrl from \"PUBLIC_DIR/images/web.search.svg?url\";\n import ManageConnectionsReactSvgUrl from \"PUBLIC_DIR/images/manage.connection.react.svg?url\";\n \n import { openConnectWindow } from \"../../../../api/files\";\n import {\n changeMCPToolsForRoom,\n connectServer,",
       "module": "/packages/shared"
     },
     {

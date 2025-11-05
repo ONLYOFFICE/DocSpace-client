@@ -1,0 +1,28 @@
+{
+  "key_path": "AIDisabledInfoBlockAdminStandaloneDescription",
+  "content": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. Connect your own AI service to unlock advanced features in {{productName}}.",
+  "content_en_sha1_hash": "4237f79a7117c22de53d1d53a9dbcf53a353051b",
+  "created_at": "2025-11-03T12:10:13.570Z",
+  "updated_at": "2025-11-03T12:16:01.879Z",
+  "comment": {
+    "text": "This text explains to users (particularly standalone admins) that AI features are disabled, preventing chat and task processing. It prompts them to connect their own AI service to enable advanced functionality within the product. It appears within a chat info block.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:16:01.879Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-info-block/index.tsx",
+      "line_number": 50,
+      "context": "const bodyText = !isDocSpaceAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:AIDisabledInfoBlockAdminSaasDescription\", {\n productName: t(\"Common:ProductName\"),\n });",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

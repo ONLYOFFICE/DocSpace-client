@@ -3,7 +3,7 @@
   "content": "Send the instructions for account disabling to the email address",
   "content_en_sha1_hash": "4774d3558c23bbee4e9e30a20c80b0bfe5b421fd",
   "created_at": "2025-05-19T21:30:56.636Z",
-  "updated_at": "2025-05-26T07:57:32.304Z",
+  "updated_at": "2025-11-03T12:10:35.003Z",
   "comment": {
     "text": "This translation key is used to display instructions for disabling an account, which are sent to the email address associated with the account. It appears in a modal dialog prompt. The text should be translated to encourage users to confirm their decision to disable their profile and prevent unauthorized access.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteSelfProfileDialog/index.js",
-      "line_number": 78,
+      "line_number": 79,
       "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteProfileInfo\")}{\" \"}\n <Link\n type=\"page\"\n href={`mailto:${email}`}\n noHover\n title={email}",
       "module": "/packages/client"
     }

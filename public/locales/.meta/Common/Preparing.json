@@ -3,7 +3,7 @@
   "content": "Preparing",
   "content_en_sha1_hash": "96a9b7cdbe400c8b44756e76d158b85eb3370995",
   "created_at": "2025-10-27T16:14:24.376Z",
-  "updated_at": "2025-10-27T16:29:56.822Z",
+  "updated_at": "2025-11-03T12:10:35.434Z",
   "comment": {
     "text": "This key displays a \"Preparing\" message, likely indicating a process is running or loading, specifically related to an AI tool. It appears within a tooltip that provides additional information to the user. Translators should ensure the translated text conveys a similar sense of temporary status and anticipation.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 282,
+      "line_number": 284,
       "context": "const getPreparingForAITooltipContent = () => {\n return (\n <div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAI\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAIInfo\")}\n </Text>\n </div>",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Rename",
   "content_en_sha1_hash": "d3f4cb898fbe0c7a7ac4f721438c4c26ad1a2513",
   "created_at": "2025-05-19T21:30:47.845Z",
-  "updated_at": "2025-10-27T16:14:33.149Z",
+  "updated_at": "2025-11-03T12:10:34.930Z",
   "comment": {
     "text": "The translation key \"Rename\" is used to display the label for renaming options on various UI elements, such as buttons and dialogs. It typically appears in contexts where user interaction with files or media items requires renaming, often alongside an icon representing a pencil or text editing action. This text helps to clearly communicate the purpose of the feature in different parts of the application.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/SelectChat.tsx",
-      "line_number": 149,
+      "line_number": 178,
       "context": "const contextModel = React.useMemo(() => {\n return [\n {\n key: \"rename\",\n label: t(\"Common:Rename\"),\n icon: RenameReactSvgUrl,\n onClick: onRenameToggle,\n },\n {\n key: \"save_to_file\",",
       "module": "/packages/shared"
     },

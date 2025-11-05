@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> invites you to join the room <1>{{roomName}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "a562c988747a5f073b4f2c0e05a5d2508c3d523a",
   "created_at": "2025-05-19T21:30:45.954Z",
-  "updated_at": "2025-08-21T11:22:39.940Z",
+  "updated_at": "2025-11-03T12:10:35.419Z",
   "comment": {
     "text": "This translation key is used for a notification message that invites a user to join a secure collaboration room. It appears in a greeting component when a new user joins or creates an account, and it includes placeholders for the user's display name and the room's title. The purpose of this text is to inform the user about the invitation to collaborate on documents securely.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
-      "line_number": 69,
+      "line_number": 60,
       "context": "<div className=\"tooltip\">\n <Text fontSize=\"16px\">\n {roomData.title ? (\n <Trans\n t={t}\n i18nKey=\"InvitationToRoom\"\n ns=\"Common\"\n defaults={DEFAULT_ROOM_TEXT}\n values={{\n displayName,\n ...(roomData.title",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
-      "line_number": 85,
+      "line_number": 76,
       "context": "}, [loginData]);\n \n const { type, roomName, displayName, spaceAddress } = invitationLinkData;\n \n const keyProp = roomName\n ? { tKey: \"InvitationToRoom\" }\n : { tKey: \"InvitationToPortal\" };\n \n const renderEmailChangeContent = () => {\n if (!(emailChange && type !== \"invitation\")) return null;",
       "module": "/packages/login"
     }

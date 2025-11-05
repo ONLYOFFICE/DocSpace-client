@@ -25,22 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { TabItem } from ".";
+import styles from "./TabItem.module.scss";
 
 const baseProps = {
   label: "Test Tab",
   isActive: false,
-  onSelect: jest.fn(),
+  onSelect: vi.fn(),
 };
 
 describe("<TabItem />", () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  test("renders tab item with default props", () => {
+  it("renders tab item with default props", () => {
     render(<TabItem {...baseProps} />);
 
     const tabItem = screen.getByTestId("tab-item");
@@ -48,22 +49,22 @@ describe("<TabItem />", () => {
 
     expect(tabItem).toBeInTheDocument();
     expect(tabText).toHaveTextContent("Test Tab");
-    expect(tabItem).toHaveClass("tabItem");
-    expect(tabItem).not.toHaveClass("active");
+    expect(tabItem).toHaveClass(styles.tabItem);
+    expect(tabItem).not.toHaveClass(styles.active);
     expect(tabItem).toHaveAttribute("aria-selected", "false");
   });
 
-  test("renders tab item with active state", () => {
+  it("renders tab item with active state", () => {
     render(<TabItem {...baseProps} isActive />);
 
     const tabItem = screen.getByTestId("tab-item");
 
     expect(tabItem).toBeInTheDocument();
-    expect(tabItem).toHaveClass("active");
+    expect(tabItem).toHaveClass(styles.active);
     expect(tabItem).toHaveAttribute("aria-selected", "true");
   });
 
-  test("calls onSelect when clicked", () => {
+  it("calls onSelect when clicked", () => {
     render(<TabItem {...baseProps} />);
 
     const tabItem = screen.getByTestId("tab-item");
@@ -72,29 +73,29 @@ describe("<TabItem />", () => {
     expect(baseProps.onSelect).toHaveBeenCalledTimes(1);
   });
 
-  test("toggles active state when clicked", () => {
+  it("toggles active state when clicked", () => {
     const { rerender } = render(<TabItem {...baseProps} />);
 
     const tabItem = screen.getByTestId("tab-item");
-    expect(tabItem).not.toHaveClass("active");
+    expect(tabItem).not.toHaveClass(styles.active);
     expect(tabItem).toHaveAttribute("aria-selected", "false");
 
     fireEvent.click(tabItem);
 
     // Re-render with updated isActive prop to simulate state change from parent
     rerender(<TabItem {...baseProps} isActive />);
-    expect(tabItem).toHaveClass("active");
+    expect(tabItem).toHaveClass(styles.active);
     expect(tabItem).toHaveAttribute("aria-selected", "true");
   });
 
-  test("renders with custom className", () => {
+  it("renders with custom className", () => {
     render(<TabItem {...baseProps} className="custom-class" />);
 
     const tabItem = screen.getByTestId("tab-item");
     expect(tabItem).toHaveClass("custom-class");
   });
 
-  test("renders with React node as label", () => {
+  it("renders with React node as label", () => {
     const customLabel = <span data-testid="custom-label">Custom Label</span>;
 
     render(<TabItem {...baseProps} label={customLabel} />);

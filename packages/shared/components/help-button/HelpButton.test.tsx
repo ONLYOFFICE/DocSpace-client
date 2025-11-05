@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { HelpButton } from ".";
+import iconButtonStyles from "../icon-button/IconButton.module.scss";
 
 describe("<HelpButton />", () => {
   const tooltipContent = "Your tooltip content";
@@ -73,7 +74,7 @@ describe("<HelpButton />", () => {
   it("renders as non-clickable when isClickable is false", () => {
     render(<HelpButton tooltipContent={tooltipContent} isClickable={false} />);
     const button = screen.getByTestId("icon-button");
-    expect(button).toHaveClass("notClickable");
+    expect(button).toHaveClass(iconButtonStyles.notClickable);
   });
 
   it("renders with getContent function", () => {
@@ -93,7 +94,7 @@ describe("<HelpButton />", () => {
   });
 
   it("renders with afterShow callback", () => {
-    const afterShow = jest.fn();
+    const afterShow = vi.fn();
     render(
       <HelpButton tooltipContent={tooltipContent} afterShow={afterShow} />,
     );
@@ -101,7 +102,7 @@ describe("<HelpButton />", () => {
   });
 
   it("renders with afterHide callback", () => {
-    const afterHide = jest.fn();
+    const afterHide = vi.fn();
     render(
       <HelpButton tooltipContent={tooltipContent} afterHide={afterHide} />,
     );

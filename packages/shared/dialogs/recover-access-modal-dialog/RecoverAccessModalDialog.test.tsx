@@ -24,36 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render, fireEvent, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
 import { sendRecoverRequest } from "../../api/settings";
 import { toastr } from "../../components/toast";
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     i18n: { language: "en" },
   }),
 }));
 
-jest.mock("../../api/settings", () => ({
-  sendRecoverRequest: jest.fn(),
+vi.mock("../../api/settings", () => ({
+  sendRecoverRequest: vi.fn(),
 }));
 
-jest.mock("../../components/toast", () => ({
+vi.mock("../../components/toast", () => ({
   toastr: {
-    success: jest.fn(),
-    error: jest.fn(),
+    success: vi.fn(),
+    error: vi.fn(),
   },
 }));
+
+const sendRecoverRequestMock = vi.mocked(sendRecoverRequest);
 
 describe("RecoverAccessModalDialog", () => {
   const defaultProps = {
     visible: true,
-    onClose: jest.fn(),
+    onClose: vi.fn(),
     textBody: "Test body text",
     emailPlaceholderText: "Enter email",
     id: "test-modal",
@@ -67,7 +69,7 @@ describe("RecoverAccessModalDialog", () => {
   const TEXT_BODY = "recover_access_modal_text";
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders correctly with default props", () => {
@@ -104,7 +106,7 @@ describe("RecoverAccessModalDialog", () => {
   });
 
   it("handles form submission successfully", async () => {
-    (sendRecoverRequest as jest.Mock).mockResolvedValueOnce("Success message");
+    sendRecoverRequestMock.mockResolvedValueOnce("Success message");
     render(<RecoverAccessModalDialog {...defaultProps} />);
 
     const emailInput = screen.getByTestId(EMAIL_INPUT);
@@ -116,8 +118,8 @@ describe("RecoverAccessModalDialog", () => {
     await userEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(sendRecoverRequest).toHaveBeenCalled();
-      const calls = (sendRecoverRequest as jest.Mock).mock.calls;
+      expect(sendRecoverRequestMock).toHaveBeenCalled();
+      const calls = sendRecoverRequestMock.mock.calls;
       expect(calls[0][0]).toBe("test@email.com");
       expect(calls[0][1]).toBe("Test description");
     });
@@ -127,7 +129,7 @@ describe("RecoverAccessModalDialog", () => {
 
   it("handles form submission error", async () => {
     const errorMessage = "Error message";
-    (sendRecoverRequest as jest.Mock).mockRejectedValueOnce(errorMessage);
+    sendRecoverRequestMock.mockRejectedValueOnce(errorMessage);
     render(<RecoverAccessModalDialog {...defaultProps} />);
 
     const emailInput = screen.getByTestId(EMAIL_INPUT);
@@ -139,8 +141,8 @@ describe("RecoverAccessModalDialog", () => {
     await userEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(sendRecoverRequest).toHaveBeenCalled();
-      const calls = (sendRecoverRequest as jest.Mock).mock.calls;
+      expect(sendRecoverRequestMock).toHaveBeenCalled();
+      const calls = sendRecoverRequestMock.mock.calls;
       expect(calls[0][0]).toBe("test@email.com");
       expect(calls[0][1]).toBe("Test description");
       expect(toastr.error).toHaveBeenCalledWith(errorMessage);
@@ -149,9 +151,7 @@ describe("RecoverAccessModalDialog", () => {
   });
 
   it("disables inputs while loading", async () => {
-    (sendRecoverRequest as jest.Mock).mockImplementationOnce(
-      () => new Promise(() => {}),
-    ); // Never resolves
+    sendRecoverRequestMock.mockImplementationOnce(() => new Promise(() => {})); // Never resolves
     render(<RecoverAccessModalDialog {...defaultProps} />);
 
     const emailInput = screen.getByTestId(EMAIL_INPUT);

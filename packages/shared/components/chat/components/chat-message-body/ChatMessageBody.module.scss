@@ -111,9 +111,22 @@
     flex-direction: column;
     align-items: flex-end;
 
-    .filesListWrapper {
-      width: fit-content;
+    .filesListWrapperContainer {
       display: flex;
+
+      height: 48px;
+      width: 100%;
+    }
+
+    .filesListWrapper {
+      width: 100%;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: end;
+
       gap: 6px;
 
       margin-bottom: 8px;
@@ -122,7 +135,8 @@
         width: fit-content;
         min-width: fit-content;
         height: 32px;
-
+        max-width: 300px;
+        
         padding-inline-end: 8px;
 
         display: flex;
@@ -131,6 +145,8 @@
         border: 1px solid var(--chat-message-file-border-color);
 
         border-radius: 6px;
+
+        cursor: pointer;
 
         .filesListItemIcon {
           width: 32px;
@@ -156,6 +172,8 @@
         max-width: 300px;
 
         .filesListItemInfoText {
+          max-width: 100%;
+
           display: flex;
           flex-direction: row;
 

@@ -41,6 +41,7 @@ import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import { AIProvider } from "./providers";
 import { MCPServers } from "./servers";
 import { Search } from "./search";
+import { Knowledge } from "./knowledge";
 
 import useAiSettings from "./useAiSettings";
 
@@ -55,6 +56,8 @@ const detectCurrentTabId = (standalone: boolean) => {
 
   if (path.includes("search")) return "search";
 
+  if (path.includes("knowledge")) return "knowledge";
+
   return "";
 };
 
@@ -62,6 +65,7 @@ type TAiSettingsProps = {
   currentDeviceType?: DeviceType;
   standalone?: boolean;
 
+  fetchKnowledge?: AISettingsStore["fetchKnowledge"];
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
   fetchMCPServers?: AISettingsStore["fetchMCPServers"];
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
@@ -71,18 +75,21 @@ type TAiSettingsProps = {
 const AiSettings = ({
   currentDeviceType,
   standalone = true,
+  fetchKnowledge,
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
 }: TAiSettingsProps) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common", "AISettings", "AIRoom"]);
 
-  const { initAIProviders, initMCPServers, initWebSearch } = useAiSettings({
-    fetchAIProviders,
-    fetchMCPServers,
-    fetchWebSearch,
-    standalone,
-  });
+  const { initAIProviders, initMCPServers, initWebSearch, initKnowledge } =
+    useAiSettings({
+      fetchAIProviders,
+      fetchMCPServers,
+      fetchWebSearch,
+      fetchKnowledge,
+      standalone,
+    });
 
   const navigate = useNavigate();
 
@@ -107,7 +114,9 @@ const AiSettings = ({
         ? "AISettings:AIProvider"
         : currentTabId === "search"
           ? "AISettings:Search"
-          : "AISettings:MCPSettingTitle";
+          : currentTabId === "knowledge"
+            ? "AIRoom:Knowledge"
+            : "AISettings:MCPSettingTitle";
     setDocumentTitle(t(titleKey));
   }, [t, currentTabId]);
 
@@ -135,6 +144,12 @@ const AiSettings = ({
           content: <Search />,
           onClick: initWebSearch,
         },
+        {
+          id: "knowledge",
+          name: t("AIRoom:Knowledge"),
+          content: <Knowledge />,
+          onClick: initKnowledge,
+        },
       ]
     : serversData;
 
@@ -153,14 +168,19 @@ export const Component = inject(
   ({ settingsStore, aiSettingsStore }: TStore) => {
     const { currentDeviceType } = settingsStore;
 
-    const { fetchAIProviders, fetchMCPServers, fetchWebSearch } =
-      aiSettingsStore;
+    const {
+      fetchAIProviders,
+      fetchMCPServers,
+      fetchWebSearch,
+      fetchKnowledge,
+    } = aiSettingsStore;
 
     return {
       currentDeviceType,
       fetchAIProviders,
       fetchMCPServers,
       fetchWebSearch,
+      fetchKnowledge,
     };
   },
 )(observer(AiSettings));

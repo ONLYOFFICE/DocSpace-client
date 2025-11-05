@@ -189,7 +189,7 @@ export const ChatStoreContextProvider = ({
   }, [store, roomId]);
 
   React.useEffect(() => {
-    store.addChats(chats);
+    store.setChats(chats);
   }, [store, chats]);
 
   React.useEffect(() => {

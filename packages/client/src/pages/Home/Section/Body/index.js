@@ -45,6 +45,7 @@ import {
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
+import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
@@ -101,6 +102,8 @@ const SectionBodyContent = (props) => {
     onEnableFormFillingGuid,
     isArchiveFolderRoot,
     setDropTargetPreview,
+    aiConfig,
+    currentTab,
   } = props;
 
   useEffect(() => {
@@ -464,6 +467,9 @@ const SectionBodyContent = (props) => {
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 
+  if (currentTab === "knowledge" && !aiConfig.vectorizationEnabled)
+    return <KnowledgeDisabledContainer />;
+
   if (
     isEmptyFilesList &&
     !welcomeFormFillingTipsVisible &&
@@ -488,6 +494,7 @@ export default inject(
     dialogsStore,
     userStore,
     contextOptionsStore,
+    aiRoomStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -544,6 +551,7 @@ export default inject(
       uploaded,
       onClickBack: filesActionsStore.onClickBack,
       currentDeviceType: settingsStore.currentDeviceType,
+      aiConfig: settingsStore.aiConfig,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
@@ -553,6 +561,7 @@ export default inject(
       userId: userStore?.user?.id,
       onEnableFormFillingGuid,
       setDropTargetPreview,
+      currentTab: aiRoomStore.currentTab,
     };
   },
 )(

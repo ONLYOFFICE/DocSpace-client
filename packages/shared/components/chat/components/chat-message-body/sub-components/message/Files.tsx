@@ -27,13 +27,13 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 
-import { combineUrl } from "../../../../../../utils/combineUrl";
-
 import { ContentType } from "../../../../../../api/ai/enums";
 
 import { Text } from "../../../../../text";
 
 import { MessageFilesProps } from "../../../../Chat.types";
+
+import { openFile } from "../../../../utils";
 
 import styles from "../../ChatMessageBody.module.scss";
 
@@ -45,21 +45,12 @@ const Files = ({ files, getIcon }: MessageFilesProps) => {
       {files.map((file) => {
         if (file.type !== ContentType.Files) return;
 
-        const onClick = () => {
-          const searchParams = new URLSearchParams();
-
-          searchParams.set("fileId", file.id.toString());
-
-          const url = combineUrl(
-            window.location.origin,
-            `/doceditor?${searchParams.toString()}`,
-          );
-
-          window.open(url, "_blank");
-        };
-
         return (
-          <div className={styles.filesListItem} key={file.id} onClick={onClick}>
+          <div
+            className={styles.filesListItem}
+            key={file.id}
+            onClick={() => openFile(file.id.toString())}
+          >
             <ReactSVG
               src={getIcon(24, file.extension!)}
               className={styles.filesListItemIcon}

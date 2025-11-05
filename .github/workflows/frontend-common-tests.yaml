@@ -34,6 +34,7 @@ jobs:
       colors: ${{ steps.changes.outputs.common }}
       ascii: ${{ steps.changes.outputs.common }}
       dependencies: ${{ steps.changes.outputs.packages }}
+      licenses: ${{ steps.changes.outputs.packages }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -140,6 +141,7 @@ jobs:
       ascii_result: ${{ steps.ascii.outputs.result }}
       locales_result: ${{ steps.locales.outputs.result }}
       dependencies_result: ${{ steps.dependencies.outputs.result }}
+      licenses_result: ${{ steps.licenses.outputs.result }}
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
@@ -299,6 +301,22 @@ jobs:
         env:
           CI: true
 
+      # Run licenses audit (if needed)
+      - name: Run licenses audit
+        id: licenses
+        if: needs.changes.outputs.licenses == 'true' || needs.changes.outputs.workflow == 'true'
+        run: |
+          echo "📜 Running licenses audit..."
+          if pnpm run licenses-audit; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "✅ Licenses audit passed"
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "❌ Licenses audit failed"
+            exit 1
+          fi
+        continue-on-error: true
+
       # Run unit tests (if needed)
       - name: Run unit tests
         id: unit-tests
@@ -329,7 +347,8 @@ jobs:
              [ "${{ steps.colors.outputs.result }}" = "failure" ] || \
              [ "${{ steps.ascii.outputs.result }}" = "failure" ] || \
              [ "${{ steps.locales.outputs.result }}" = "failure" ] || \
-             [ "${{ steps.dependencies.outputs.result }}" = "failure" ]; then
+             [ "${{ steps.dependencies.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.licenses.outputs.result }}" = "failure" ]; then
             echo "❌ One or more tests failed. Marking job as failed."
             exit 1
           else
@@ -452,6 +471,7 @@ jobs:
           echo "| **Static Analysis** | 🔤 Ascii | ${{ needs.static-analysis-and-tests.outputs.ascii_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.ascii_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **Static Analysis** | 🌐 Locales | ${{ needs.static-analysis-and-tests.outputs.locales_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.locales_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **Static Analysis** | 🔒 Dependencies | ${{ needs.static-analysis-and-tests.outputs.dependencies_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.dependencies_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 📜 Licenses | ${{ needs.static-analysis-and-tests.outputs.licenses_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.licenses_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **E2E Testing** | 🎭 Playwright Login | ${{ needs.playwright-login.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **E2E Testing** | 🎭 Playwright SDK | ${{ needs.playwright-sdk.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo '' >> "$REPORT_FILE"

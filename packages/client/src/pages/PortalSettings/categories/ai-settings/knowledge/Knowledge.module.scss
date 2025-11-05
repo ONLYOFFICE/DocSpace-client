@@ -24,9 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-module.exports = {
-  isValidLicense: (license) => {
-    const valid = new RegExp("\\b(mit|apache\\b.*2|bsd|isc|unlicense)\\b", "i");
-    return valid.test(license);
-  },
-};
+@use "@docspace/shared/styles/mixins";
+
+.knowledgeForm {
+  max-width: 340px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  margin-top: 12px;
+  margin-bottom: 16px;
+
+  .fieldContainer {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.passwordInput {
+  margin-bottom: 4px;
+}
+
+.hiddenKeyDescription {
+  font-size: 12px;
+  color: var(--web-search-hidden-key-description-color);
+}

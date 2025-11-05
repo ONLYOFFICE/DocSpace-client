@@ -86,7 +86,7 @@ export default defineConfig({
     // Reporters
     reporters: ["default", "html"],
     outputFile: {
-      html: "./vitest/reports/tests-results.html",
+      html: "./vitest/reports/index.html",
     },
 
     // Timeout

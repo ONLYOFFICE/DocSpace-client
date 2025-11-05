@@ -14,7 +14,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "test:open-report": "serve vitest/reports -p 8084 & sleep 2 & open http://localhost:8084/tests-results.html",
+    "test:open-report": "npx vite preview --outDir vitest/reports",
     "lint": "biome lint .",
     "lint:fix": "biome lint --write .",
     "format": "biome check .",
@@ -163,6 +163,7 @@
     "style-loader": "3.3.4",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
+    "vite": "7.1.12",
     "vitest": "4.0.5"
   },
   "peerDependencies": {

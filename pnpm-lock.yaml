@@ -1342,6 +1342,9 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
+      vite:
+        specifier: ^7.1.12
+        version: 7.1.12(@types/node@22.7.5)(sass@1.79.5)(terser@5.43.1)(yaml@2.8.1)
       vitest:
         specifier: 4.0.5
         version: 4.0.5(@types/debug@4.1.12)(@types/node@22.7.5)(@vitest/ui@4.0.5)(jsdom@20.0.3)(msw@2.11.1(@types/node@22.7.5)(typescript@5.9.3))(sass@1.79.5)(terser@5.43.1)(yaml@2.8.1)

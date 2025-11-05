@@ -314,6 +314,8 @@ jobs:
             exit 1
           fi
         continue-on-error: true
+        env:
+          CI: true
 
       # Check test results
       - name: Check test results

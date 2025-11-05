@@ -26,9 +26,9 @@
 
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { TViewAs } from "../../types";
 import {
@@ -38,9 +38,10 @@ import {
 } from "../../enums";
 import { Base } from "../../themes";
 import Badges from ".";
+import styles from "./Badges.module.scss";
 
 describe("<Badges />", () => {
-  const mockT = jest.fn((key) => key);
+  const mockT = vi.fn((key) => key);
   // Use the actual Base theme to avoid type errors
   const mockTheme = Base;
 
@@ -93,41 +94,41 @@ describe("<Badges />", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe("Rendering", () => {
-    test("renders Badges component", () => {
+    it("renders Badges component", () => {
       renderWithTheme(<Badges {...defaultProps} />);
       const badgesElement = screen.getByTestId("badges");
       expect(badgesElement).toBeInTheDocument();
     });
 
-    test("renders with correct class based on viewAs prop", () => {
+    it("renders with correct class based on viewAs prop", () => {
       // Test each viewAs prop in separate test renders
       const { unmount: unmountTable } = renderWithTheme(
         <Badges {...defaultProps} viewAs="table" />,
       );
       const tableBadgesElement = screen.getByTestId("badges");
-      expect(tableBadgesElement).toHaveClass("tableView");
+      expect(tableBadgesElement).toHaveClass(styles.tableView);
       unmountTable();
 
       const { unmount: unmountRow } = renderWithTheme(
         <Badges {...defaultProps} viewAs="row" />,
       );
       const rowBadgesElement = screen.getByTestId("badges");
-      expect(rowBadgesElement).toHaveClass("rowView");
+      expect(rowBadgesElement).toHaveClass(styles.rowView);
       unmountRow();
 
       const { unmount: unmountTile } = renderWithTheme(
         <Badges {...defaultProps} viewAs="tile" />,
       );
       const tileBadgesElement = screen.getByTestId("badges");
-      expect(tileBadgesElement).toHaveClass("tileView");
+      expect(tileBadgesElement).toHaveClass(styles.tileView);
       unmountTile();
     });
 
-    test("renders with custom className", () => {
+    it("renders with custom className", () => {
       renderWithTheme(<Badges {...defaultProps} className="custom-class" />);
       const badgesElement = screen.getByTestId("badges");
       expect(badgesElement).toHaveClass("custom-class");
@@ -135,7 +136,7 @@ describe("<Badges />", () => {
   });
 
   describe("Badge rendering based on item properties", () => {
-    test("renders version badge when version count is present", () => {
+    it("renders version badge when version count is present", () => {
       const item = { ...defaultItem, version: 1000 };
       renderWithTheme(<Badges {...defaultProps} item={item} />);
 
@@ -144,7 +145,7 @@ describe("<Badges />", () => {
       expect(badgesContainer).toBeInTheDocument();
     });
 
-    test("renders '999+' for large version numbers", () => {
+    it("renders '999+' for large version numbers", () => {
       const item = { ...defaultItem, version: 1000 };
       renderWithTheme(<Badges {...defaultProps} item={item} />);
 
@@ -153,7 +154,7 @@ describe("<Badges />", () => {
       expect(badgesContainer).toBeInTheDocument();
     });
 
-    test("renders form filling status badge when formFillingStatus is present", () => {
+    it("renders form filling status badge when formFillingStatus is present", () => {
       const item = {
         ...defaultItem,
         formFillingStatus: FileFillingFormStatus.Completed,
@@ -168,7 +169,7 @@ describe("<Badges />", () => {
       expect(statusBadge).toBeInTheDocument();
     });
 
-    test("renders draft badge when hasDraft is true", () => {
+    it("renders draft badge when hasDraft is true", () => {
       const item = { ...defaultItem, hasDraft: true };
       renderWithTheme(<Badges {...defaultProps} item={item} />);
 
@@ -177,7 +178,7 @@ describe("<Badges />", () => {
       expect(draftBadge).toBeInTheDocument();
     });
 
-    test("renders new badge when new count is present", () => {
+    it("renders new badge when new count is present", () => {
       const item = { ...defaultItem, new: 5 };
       renderWithTheme(<Badges {...defaultProps} item={item} />);
 
@@ -186,9 +187,9 @@ describe("<Badges />", () => {
       expect(newBadge).toBeInTheDocument();
     });
 
-    test("renders pin badge when pinned is true", () => {
+    it("renders pin badge when pinned is true", () => {
       const item = { ...defaultItem, pinned: true };
-      const onUnpinClick = jest.fn();
+      const onUnpinClick = vi.fn();
       renderWithTheme(
         <Badges {...defaultProps} item={item} onUnpinClick={onUnpinClick} />,
       );
@@ -198,9 +199,9 @@ describe("<Badges />", () => {
       expect(badgesContainer).toBeInTheDocument();
     });
 
-    test("renders mute badge when mute is true", () => {
+    it("renders mute badge when mute is true", () => {
       const item = { ...defaultItem, mute: true };
-      const onUnmuteClick = jest.fn();
+      const onUnmuteClick = vi.fn();
       renderWithTheme(
         <Badges {...defaultProps} item={item} onUnmuteClick={onUnmuteClick} />,
       );
@@ -210,7 +211,7 @@ describe("<Badges />", () => {
       expect(badgesContainer).toBeInTheDocument();
     });
 
-    test("renders custom filter badge when customFilterEnabled is true", () => {
+    it("renders custom filter badge when customFilterEnabled is true", () => {
       const item = { ...defaultItem, customFilterEnabled: true };
       renderWithTheme(
         <Badges {...defaultProps} item={item} isExtsCustomFilter />,
@@ -221,7 +222,7 @@ describe("<Badges />", () => {
       expect(badgesContainer).toBeInTheDocument();
     });
 
-    test("renders copy link badge for public rooms with appropriate access", () => {
+    it("renders copy link badge for public rooms with appropriate access", () => {
       const item = {
         ...defaultItem,
         isRoom: true,
@@ -229,7 +230,7 @@ describe("<Badges />", () => {
         access: ShareAccessRights.RoomManager,
         shared: true,
       };
-      const onCopyPrimaryLink = jest.fn();
+      const onCopyPrimaryLink = vi.fn();
       renderWithTheme(
         <Badges
           {...defaultProps}
@@ -245,7 +246,7 @@ describe("<Badges />", () => {
   });
 
   describe("Lock functionality", () => {
-    test("renders locked file icon when file is locked", () => {
+    it("renders locked file icon when file is locked", () => {
       const lockedItem = {
         ...defaultItem,
         locked: true,
@@ -261,8 +262,8 @@ describe("<Badges />", () => {
       expect(lockButton).toHaveAttribute("data-locked", "true");
     });
 
-    test("handles lock button click", async () => {
-      const onClickLock = jest.fn();
+    it("handles lock button click", async () => {
+      const onClickLock = vi.fn();
       const lockedItem = {
         ...defaultItem,
         locked: true,
@@ -284,8 +285,8 @@ describe("<Badges />", () => {
       expect(onClickLock).toHaveBeenCalledTimes(1);
     });
 
-    test("does not call onClickLock when canLock is false", async () => {
-      const onClickLock = jest.fn();
+    it("does not call onClickLock when canLock is false", async () => {
+      const onClickLock = vi.fn();
       const lockedItem = {
         ...defaultItem,
         locked: true,
@@ -311,7 +312,7 @@ describe("<Badges />", () => {
       expect(onClickLock).not.toHaveBeenCalled();
     });
 
-    test("does not render lock button in tile view", () => {
+    it("does not render lock button in tile view", () => {
       const lockedItem = {
         ...defaultItem,
         locked: true,
@@ -326,7 +327,7 @@ describe("<Badges />", () => {
       expect(lockButton).not.toBeInTheDocument();
     });
 
-    test("shows tooltip for locked file when user cannot unlock", () => {
+    it("shows tooltip for locked file when user cannot unlock", () => {
       const lockedItem = {
         ...defaultItem,
         locked: true,

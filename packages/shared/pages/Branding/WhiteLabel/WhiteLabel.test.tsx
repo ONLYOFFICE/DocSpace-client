@@ -25,27 +25,37 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent, waitFor, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import {
+  screen,
+  fireEvent,
+  waitFor,
+  render,
+  act,
+} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import { WhiteLabel } from ".";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { mockLogos } from "./mockData";
 
-jest.mock("../../../hooks/useResponsiveNavigation", () => ({
-  useResponsiveNavigation: jest.fn(),
+vi.mock("../../../hooks/useResponsiveNavigation", () => ({
+  useResponsiveNavigation: vi.fn(),
 }));
 
-jest.mock("./WhiteLabel.helper", () => ({
-  ...jest.requireActual("./WhiteLabel.helper"),
-  generateLogo: () => "data:image/png;base64,mockedBase64Data",
-  uploadLogo: jest.fn().mockResolvedValue({
-    data: {
-      Success: true,
-      Message: "https://example.com/uploaded-logo.png",
-    },
-  }),
-}));
+vi.mock("./WhiteLabel.helper", async () => {
+  const actualModule = await vi.importActual("./WhiteLabel.helper");
+  return {
+    ...actualModule,
+    generateLogo: () => "data:image/png;base64,mockedBase64Data",
+    uploadLogo: vi.fn().mockResolvedValue({
+      data: {
+        Success: true,
+        Message: "https://example.com/uploaded-logo.png",
+      },
+    }),
+  };
+});
 
 const defaultProps = {
   t: (key: string) => key,
@@ -54,12 +64,12 @@ const defaultProps = {
   showAbout: true,
   showNotAvailable: false,
   standalone: false,
-  onSave: jest.fn(),
-  onRestoreDefault: jest.fn(),
+  onSave: vi.fn(),
+  onRestoreDefault: vi.fn(),
   isSaving: false,
   enableRestoreButton: true,
   deviceType: DeviceType.desktop,
-  setLogoUrls: jest.fn(),
+  setLogoUrls: vi.fn(),
   isWhiteLabelLoaded: true,
   defaultLogoText: "Default Logo",
   defaultWhiteLabelLogoUrls: mockLogos,
@@ -68,7 +78,7 @@ const defaultProps = {
 
 describe("<WhiteLabel />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
@@ -84,17 +94,20 @@ describe("<WhiteLabel />", () => {
     expect(logoTextInput).toBeDisabled();
   });
 
-  it("updates logo text when input changes", () => {
+  it("updates logo text when input changes", async () => {
     render(<WhiteLabel {...defaultProps} />);
 
     const logoTextInput = screen.getByTestId("logo-text-input");
-    fireEvent.change(logoTextInput, { target: { value: "New Logo Text" } });
+
+    await act(async () => {
+      fireEvent.change(logoTextInput, { target: { value: "New Logo Text" } });
+    });
 
     expect(logoTextInput).toHaveValue("New Logo Text");
   });
 
   it("calls onSave when save button is clicked", () => {
-    const onSave = jest.fn();
+    const onSave = vi.fn();
 
     const newLogoUrls = mockLogos.map((logo, i) => {
       return i === 0
@@ -113,7 +126,7 @@ describe("<WhiteLabel />", () => {
   });
 
   it("calls onRestoreDefault when restore button is clicked", () => {
-    const onRestoreDefault = jest.fn();
+    const onRestoreDefault = vi.fn();
     render(
       <WhiteLabel {...defaultProps} onRestoreDefault={onRestoreDefault} />,
     );
@@ -138,8 +151,8 @@ describe("<WhiteLabel />", () => {
     expect(restoreButton).toBeDisabled();
   });
 
-  it("onUseTextAsLogo should update logos with text-based logos", () => {
-    const mockSetLogoUrls = jest.fn();
+  it("onUseTextAsLogo should update logos with text-based logos", async () => {
+    const mockSetLogoUrls = vi.fn();
     const props = {
       ...defaultProps,
       setLogoUrls: mockSetLogoUrls,
@@ -150,8 +163,10 @@ describe("<WhiteLabel />", () => {
     const input = screen.getByTestId("logo-text-input");
     const button = screen.getByTestId("generate-logo-button");
 
-    fireEvent.change(input, { target: { value: "Test" } });
-    fireEvent.click(button);
+    await act(async () => {
+      fireEvent.change(input, { target: { value: "Test" } });
+      fireEvent.click(button);
+    });
 
     expect(mockSetLogoUrls).toHaveBeenCalled();
     const updatedLogos = mockSetLogoUrls.mock.calls[0][0];
@@ -165,7 +180,7 @@ describe("<WhiteLabel />", () => {
   });
 
   it("onChangeLogo should update logo when file is uploaded", async () => {
-    const mockSetLogoUrls = jest.fn();
+    const mockSetLogoUrls = vi.fn();
     const props = {
       ...defaultProps,
       setLogoUrls: mockSetLogoUrls,

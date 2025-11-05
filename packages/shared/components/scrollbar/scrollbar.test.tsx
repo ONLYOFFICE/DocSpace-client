@@ -25,17 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Scrollbar } from "./Scrollbar";
 import styles from "./Scrollbar.module.scss";
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
 describe("<Scrollbar />", () => {
   afterEach(() => {
-    jest.clearAllTimers();
+    vi.clearAllTimers();
   });
 
   it("renders without error", () => {
@@ -49,7 +49,7 @@ describe("<Scrollbar />", () => {
   });
 
   it("handles scroll events", () => {
-    const onScroll = jest.fn();
+    const onScroll = vi.fn();
     render(
       <Scrollbar onScroll={onScroll}>
         <div style={{ height: "200px" }}>Scrollable content</div>
@@ -79,7 +79,7 @@ describe("<Scrollbar />", () => {
 
     // Fast forward timers to test auto-hide
     act(() => {
-      jest.advanceTimersByTime(3000);
+      vi.advanceTimersByTime(3000);
     });
     expect(scrollbar).not.toHaveClass(styles.scrollVisible);
   });
@@ -91,7 +91,7 @@ describe("<Scrollbar />", () => {
   });
 
   it("handles autoFocus prop", () => {
-    const focusSpy = jest.spyOn(HTMLElement.prototype, "focus");
+    const focusSpy = vi.spyOn(HTMLElement.prototype, "focus");
     render(<Scrollbar autoFocus>Content</Scrollbar>);
 
     expect(focusSpy).toHaveBeenCalled();

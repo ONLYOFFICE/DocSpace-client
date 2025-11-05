@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 
 import AmazonSettings from "./AmazonSettings";
 import {
@@ -47,10 +47,10 @@ import {
 } from "./AmazonSettings.constants";
 
 const mockT = (key: string) => key;
-const mockSetRequiredFormSettings = jest.fn();
-const mockSetIsThirdStorageChanged = jest.fn();
-const mockAddValueInFormSettings = jest.fn();
-const mockDeleteValueFormSetting = jest.fn();
+const mockSetRequiredFormSettings = vi.fn();
+const mockSetIsThirdStorageChanged = vi.fn();
+const mockAddValueInFormSettings = vi.fn();
+const mockDeleteValueFormSetting = vi.fn();
 
 const defaultProps = {
   selectedStorage: mockSelectedStorage,
@@ -70,7 +70,7 @@ const defaultProps = {
 
 describe("AmazonSettings", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders all UI elements correctly", () => {

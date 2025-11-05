@@ -23,34 +23,30 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import OperationContainer from "./index";
 import { OperationContainerProps } from "./OperationContainer.types";
 
-jest.mock("PUBLIC_DIR/images/downloading.react.svg", () => {
-  const MockSvgComponent = () => {
+vi.mock("PUBLIC_DIR/images/downloading.react.svg", () => ({
+  default: () => {
     return <div data-testid="operation-logo" />;
-  };
-  return MockSvgComponent;
-});
+  },
+}));
 
-jest.mock("PUBLIC_DIR/images/downloading.dark.react.svg", () => {
-  const MockSvgComponent = () => {
+vi.mock("PUBLIC_DIR/images/downloading.dark.react.svg", () => ({
+  default: () => {
     return <div data-testid="operation-logo" />;
-  };
-  return MockSvgComponent;
-});
+  },
+}));
 
 // Mock portal logo component
-jest.mock("../portal-logo/PortalLogo", () => {
-  const MockPortalLogo = () => {
+vi.mock("../portal-logo/PortalLogo", () => ({
+  default: () => {
     return <div data-testid="portal-logo" />;
-  };
-  MockPortalLogo.displayName = "MockPortalLogo";
-  return MockPortalLogo;
-});
+  },
+}));
 
 describe("OperationContainer", () => {
   const defaultProps: OperationContainerProps = {
@@ -82,7 +78,7 @@ describe("OperationContainer", () => {
 
   it("redirects when url is provided and user is authorized", () => {
     const originalLocation = window.location;
-    const mockReplace = jest.fn();
+    const mockReplace = vi.fn();
     // Mock window.location
     Object.defineProperty(window, "location", {
       configurable: true,
@@ -100,7 +96,7 @@ describe("OperationContainer", () => {
 
   it("does not redirect when unauthorized", () => {
     const originalLocation = window.location;
-    const mockReplace = jest.fn();
+    const mockReplace = vi.fn();
 
     // Mock window.location
     Object.defineProperty(window, "location", {

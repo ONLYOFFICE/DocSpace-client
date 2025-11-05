@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { fireEvent, render, screen, act } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import ReportDialog from ".";
 import {
   DeviceType,
@@ -39,7 +39,7 @@ import type { TFirebaseSettings } from "../../api/settings/types";
 import FirebaseHelper from "../../utils/firebase";
 
 // Mock translations
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     ready: true,
@@ -47,49 +47,50 @@ jest.mock("react-i18next", () => ({
 }));
 
 // Mock toast notifications
-jest.mock("../toast", () => ({
+vi.mock("../toast", () => ({
   toastr: {
-    success: jest.fn(),
-    error: jest.fn(),
+    success: vi.fn(),
+    error: vi.fn(),
   },
 }));
 
 // Mock SVG imports
-jest.mock("PUBLIC_DIR/images/icons/32/file.svg?url", () => "file-icon.svg");
-jest.mock(
-  "PUBLIC_DIR/images/icons/16/download.react.svg?url",
-  () => "download-icon.svg",
-);
-
-// Mock utility functions
-jest.mock("../../utils/crashReport", () => ({
-  getCrashReport: jest.fn(() => ({ error: "test error" })),
-  downloadJson: jest.fn(),
-  getCurrentDate: jest.fn(() => "2024-12-27"),
+vi.mock("PUBLIC_DIR/images/icons/32/file.svg?url", () => ({
+  default: "file-icon.svg",
+}));
+vi.mock("PUBLIC_DIR/images/icons/16/download.react.svg?url", () => ({
+  default: "download-icon.svg",
 }));
 
-const mockSendCrashReport = jest.fn(() => Promise.resolve(true));
+// Mock utility functions
+vi.mock("../../utils/crashReport", () => ({
+  getCrashReport: vi.fn(() => ({ error: "test error" })),
+  downloadJson: vi.fn(),
+  getCurrentDate: vi.fn(() => "2024-12-27"),
+}));
+
+const mockSendCrashReport = vi.fn(() => Promise.resolve(true));
 
 // Mock Firebase helper
-jest.mock("../../utils/firebase", () => {
-  return jest.fn().mockImplementation(() => ({
-    remoteConfig: null,
-    firebaseConfig: null,
-    firebaseStorage: null,
-    firebaseDB: null,
-    config: {},
-    isEnabled: true,
-    isEnabledDB: true,
-    checkMaintenance: jest.fn(),
-    checkBar: jest.fn(),
-    checkCampaigns: jest.fn(),
-    getCampaignsImages: jest.fn(),
-    getCampaignsTranslations: jest.fn(),
-    getCampaignConfig: jest.fn(),
-    sendCrashReport: mockSendCrashReport,
-    sendToastReport: jest.fn(),
-  }));
-});
+vi.mock("../../utils/firebase", () => ({
+  default: vi.fn().mockImplementation(function (this: Record<string, unknown>) {
+    this.remoteConfig = null;
+    this.firebaseConfig = null;
+    this.firebaseStorage = null;
+    this.firebaseDB = null;
+    this.config = {};
+    this.isEnabled = true;
+    this.isEnabledDB = true;
+    this.checkMaintenance = vi.fn();
+    this.checkBar = vi.fn();
+    this.checkCampaigns = vi.fn();
+    this.getCampaignsImages = vi.fn();
+    this.getCampaignsTranslations = vi.fn();
+    this.getCampaignConfig = vi.fn();
+    this.sendCrashReport = mockSendCrashReport;
+    this.sendToastReport = vi.fn();
+  }),
+}));
 
 const mockUser: TUser = {
   isAnonim: false,
@@ -143,7 +144,7 @@ const mockFirebaseHelper = new FirebaseHelper(mockFirebaseSettings);
 
 const defaultProps = {
   visible: true,
-  onClose: jest.fn(),
+  onClose: vi.fn(),
   error: mockError,
   user: mockUser,
   version: "1.0.0",
@@ -153,7 +154,7 @@ const defaultProps = {
 
 describe("ReportDialog", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const t = (key: string) => key;

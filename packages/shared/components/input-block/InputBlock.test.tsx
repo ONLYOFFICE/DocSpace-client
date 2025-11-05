@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 import { InputSize, InputType } from "../text-input";
@@ -36,21 +36,21 @@ describe("<InputBlock />", () => {
   const defaultProps = {
     value: "",
     iconName: SearchReactSvgUrl,
-    onIconClick: jest.fn(),
-    onChange: jest.fn(),
+    onIconClick: vi.fn(),
+    onChange: vi.fn(),
     size: InputSize.base,
     type: InputType.text,
   };
 
   afterEach(() => {
     cleanup();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("handles input interactions correctly", () => {
-    const onChange = jest.fn();
-    const onBlur = jest.fn();
-    const onFocus = jest.fn();
+    const onChange = vi.fn();
+    const onBlur = vi.fn();
+    const onFocus = vi.fn();
 
     const { container } = render(
       <InputBlock
@@ -78,7 +78,7 @@ describe("<InputBlock />", () => {
   });
 
   it("handles icon interactions correctly", () => {
-    const onIconClick = jest.fn();
+    const onIconClick = vi.fn();
 
     render(
       <InputBlock
@@ -152,7 +152,7 @@ describe("<InputBlock />", () => {
   });
 
   it("handles keyboard events correctly", () => {
-    const onKeyDown = jest.fn();
+    const onKeyDown = vi.fn();
     const { container } = render(
       <InputBlock {...defaultProps} onKeyDown={onKeyDown} />,
     );

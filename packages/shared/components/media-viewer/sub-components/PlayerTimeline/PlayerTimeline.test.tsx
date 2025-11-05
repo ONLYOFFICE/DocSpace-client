@@ -25,24 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { PlayerTimeline } from "./index";
 import { PlayerTimelineRef } from "./PlayerTimeline.props";
 
 // Mock react-device-detect
-jest.mock("react-device-detect", () => ({
-  get isMobile() {
-    return false;
-  },
-}));
-
-// Mock styles
-jest.mock("./PlayerTimeline.module.scss", () => ({
-  wrapper: "wrapper",
-  isMobile: "isMobile",
-  progress: "progress",
-  hoverProgress: "hoverProgress",
+vi.mock("react-device-detect", () => ({
+  isMobile: false,
+  isMobileOnly: false,
+  isIOS: false,
 }));
 
 describe("PlayerTimeline", () => {
@@ -50,17 +42,17 @@ describe("PlayerTimeline", () => {
   const defaultProps = {
     value: 50,
     duration: 300, // 5 minutes
-    onChange: jest.fn(),
-    onMouseEnter: jest.fn(),
-    onMouseLeave: jest.fn(),
+    onChange: vi.fn(),
+    onMouseEnter: vi.fn(),
+    onMouseLeave: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    jest.useFakeTimers();
+    vi.clearAllMocks();
+    vi.useFakeTimers();
 
     // Mock getBoundingClientRect
-    Element.prototype.getBoundingClientRect = jest.fn(() => ({
+    Element.prototype.getBoundingClientRect = vi.fn(() => ({
       width: mockClientWidth,
       height: 10,
       top: 0,
@@ -80,7 +72,7 @@ describe("PlayerTimeline", () => {
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("renders timeline with correct ARIA attributes", () => {
@@ -130,7 +122,7 @@ describe("PlayerTimeline", () => {
     ref.current?.setProgress(0.75);
 
     // Wait for style updates
-    jest.advanceTimersByTime(0);
+    vi.advanceTimersByTime(0);
     expect(progress.style.width).toBe("75%");
   });
 
@@ -145,6 +137,6 @@ describe("PlayerTimeline", () => {
     });
 
     // Wait for style updates
-    jest.advanceTimersByTime(0);
+    vi.advanceTimersByTime(0);
   });
 });

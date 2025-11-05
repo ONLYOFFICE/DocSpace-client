@@ -25,16 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import type { ContextMenuModel } from "../../../context-menu/ContextMenu.types";
 
 import { MessageError } from ".";
 
 describe("MessageError", () => {
-  const mockOnMaskClick = jest.fn();
-  const mockOnItemClick = jest.fn();
+  const mockOnMaskClick = vi.fn();
+  const mockOnItemClick = vi.fn();
 
   const defaultProps = {
     errorTitle: "Test Error Message",
@@ -59,7 +59,7 @@ describe("MessageError", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders error message correctly", () => {

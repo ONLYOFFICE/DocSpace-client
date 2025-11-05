@@ -26,9 +26,9 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { fireEvent, render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { ButtonSize } from "../button";
 
@@ -40,31 +40,31 @@ import {
   mockFilesSelectorSettings,
 } from "./mockData";
 
-jest.mock("../../api/files", () => ({
-  saveSettingsThirdParty: jest.fn().mockResolvedValue({}),
+vi.mock("../../api/files", () => ({
+  saveSettingsThirdParty: vi.fn().mockResolvedValue({}),
 }));
 
-jest.mock("../../utils/common", () => {
-  const originalModule = jest.requireActual("../../utils/common");
+vi.mock("../../utils/common", async () => {
+  const originalModule = await vi.importActual("../../utils/common");
 
   return {
     ...originalModule,
-    buildDataTestId: jest.fn(),
-    getOAuthToken: jest.fn().mockResolvedValue("mock-oauth-token"),
-    getIconPathByFolderType: jest.fn().mockReturnValue("folder-icon-path"),
+    buildDataTestId: vi.fn(),
+    getOAuthToken: vi.fn().mockResolvedValue("mock-oauth-token"),
+    getIconPathByFolderType: vi.fn().mockReturnValue("folder-icon-path"),
   };
 });
 
-jest.mock("../toast", () => ({
+vi.mock("../toast", () => ({
   toastr: {
-    error: jest.fn(),
-    success: jest.fn(),
-    info: jest.fn(),
-    warning: jest.fn(),
+    error: vi.fn(),
+    success: vi.fn(),
+    info: vi.fn(),
+    warning: vi.fn(),
   },
 }));
 
-jest.mock("../files-selector-input", () => ({
+vi.mock("../files-selector-input", () => ({
   __esModule: true,
   FilesSelectorInput: ({
     isDisabled,
@@ -83,7 +83,7 @@ jest.mock("../files-selector-input", () => ({
   ),
 }));
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => {
     return {
       t: (i18nKey: string) => i18nKey,
@@ -95,31 +95,31 @@ jest.mock("react-i18next", () => ({
 
 describe("DirectThirdPartyConnection", () => {
   const defaultProps = {
-    openConnectWindow: jest.fn().mockResolvedValue(window),
+    openConnectWindow: vi.fn().mockResolvedValue(window),
     connectDialogVisible: false,
     deleteThirdPartyDialogVisible: false,
-    setConnectDialogVisible: jest.fn(),
-    setDeleteThirdPartyDialogVisible: jest.fn(),
-    clearLocalStorage: jest.fn(),
-    setSelectedThirdPartyAccount: jest.fn(),
-    setThirdPartyAccountsInfo: jest.fn().mockResolvedValue(undefined),
-    deleteThirdParty: jest.fn().mockResolvedValue(undefined),
-    setConnectedThirdPartyAccount: jest.fn(),
-    setThirdPartyProviders: jest.fn(),
+    setConnectDialogVisible: vi.fn(),
+    setDeleteThirdPartyDialogVisible: vi.fn(),
+    clearLocalStorage: vi.fn(),
+    setSelectedThirdPartyAccount: vi.fn(),
+    setThirdPartyAccountsInfo: vi.fn().mockResolvedValue(undefined),
+    deleteThirdParty: vi.fn().mockResolvedValue(undefined),
+    setConnectedThirdPartyAccount: vi.fn(),
+    setThirdPartyProviders: vi.fn(),
     providers: mockProviders,
     removeItem: mockAccounts[1],
     newPath: "/",
     basePath: "/",
     isErrorPath: false,
     filesSelectorSettings: mockFilesSelectorSettings,
-    setBasePath: jest.fn(),
-    toDefault: jest.fn(),
-    setNewPath: jest.fn(),
-    setDefaultFolderId: jest.fn(),
+    setBasePath: vi.fn(),
+    toDefault: vi.fn(),
+    setNewPath: vi.fn(),
+    setDefaultFolderId: vi.fn(),
     accounts: mockAccounts,
     buttonSize: ButtonSize.normal,
-    onSelectFolder: jest.fn(),
-    onSelectFile: jest.fn(),
+    onSelectFolder: vi.fn(),
+    onSelectFile: vi.fn(),
     isTheSameThirdPartyAccount: false,
     selectedThirdPartyAccount: {
       ...mockAccounts[0],
@@ -129,7 +129,7 @@ describe("DirectThirdPartyConnection", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without errors", async () => {
@@ -157,10 +157,10 @@ describe("DirectThirdPartyConnection", () => {
 
   it("calls setSelectedThirdPartyAccount when selecting an account", async () => {
     const fakeWindow = {
-      postMessage: jest.fn(),
-      close: jest.fn(),
+      postMessage: vi.fn(),
+      close: vi.fn(),
     } as unknown as Window;
-    const mockOpen = jest.fn().mockReturnValue(fakeWindow);
+    const mockOpen = vi.fn().mockReturnValue(fakeWindow);
     const originalOpen = window.open;
     window.open = mockOpen;
 
@@ -198,10 +198,10 @@ describe("DirectThirdPartyConnection", () => {
 
   it("calls openConnectWindow when clicking connect button", async () => {
     const fakeWindow = {
-      postMessage: jest.fn(),
-      close: jest.fn(),
+      postMessage: vi.fn(),
+      close: vi.fn(),
     } as unknown as Window;
-    const mockOpen = jest.fn().mockReturnValue(fakeWindow);
+    const mockOpen = vi.fn().mockReturnValue(fakeWindow);
     const originalOpen = window.open;
     window.open = mockOpen;
 

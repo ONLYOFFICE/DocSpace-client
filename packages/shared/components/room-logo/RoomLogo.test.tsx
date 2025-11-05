@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { RoomsType } from "../../enums";
 import { RoomLogo } from "./RoomLogo";
 
 // Mock react-device-detect
-jest.mock("react-device-detect", () => ({
+vi.mock("react-device-detect", () => ({
   isMobile: false,
 }));
 
@@ -66,7 +66,7 @@ describe("<RoomLogo />", () => {
 
   describe("Checkbox functionality", () => {
     it("handles checkbox change", () => {
-      const onChangeMock = jest.fn();
+      const onChangeMock = vi.fn();
       render(
         <RoomLogo
           {...baseProps}
@@ -93,11 +93,11 @@ describe("<RoomLogo />", () => {
       });
     };
 
-    testRoomType(RoomsType.EditingRoom, "http://localhost/test-file-stub");
-    testRoomType(RoomsType.CustomRoom, "http://localhost/test-file-stub");
-    testRoomType(RoomsType.PublicRoom, "http://localhost/test-file-stub");
-    testRoomType(RoomsType.FormRoom, "http://localhost/test-file-stub");
-    testRoomType(RoomsType.VirtualDataRoom, "http://localhost/test-file-stub");
+    testRoomType(RoomsType.EditingRoom, "test-file-stub");
+    testRoomType(RoomsType.CustomRoom, "test-file-stub");
+    testRoomType(RoomsType.PublicRoom, "test-file-stub");
+    testRoomType(RoomsType.FormRoom, "test-file-stub");
+    testRoomType(RoomsType.VirtualDataRoom, "test-file-stub");
   });
 
   describe("Special States", () => {
@@ -105,7 +105,7 @@ describe("<RoomLogo />", () => {
       render(<RoomLogo {...baseProps} isArchive />);
 
       const icon = screen.getByAltText("room-logo") as HTMLImageElement;
-      expect(icon.src).toContain("http://localhost/test-file-stub");
+      expect(icon.src).toContain("test-file-stub");
     });
 
     it("prioritizes archive over room type icon", () => {
@@ -114,7 +114,7 @@ describe("<RoomLogo />", () => {
       );
 
       const icon = screen.getByAltText("room-logo") as HTMLImageElement;
-      expect(icon.src).toContain("http://localhost/test-file-stub");
+      expect(icon.src).toContain("test-file-stub");
     });
   });
 });

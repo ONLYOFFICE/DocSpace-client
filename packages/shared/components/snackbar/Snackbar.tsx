@@ -140,6 +140,8 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       backgroundColor = globalColors.lightToastAlert,
       opacity,
       backgroundImg,
+      onAction: _onAction, // Excluded from rest to prevent DOM warning
+      onLoad: _onLoad, // Excluded from rest to prevent DOM warning
       ...rest
     } = this.props;
 

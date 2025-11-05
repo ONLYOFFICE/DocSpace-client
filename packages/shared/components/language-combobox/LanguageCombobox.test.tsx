@@ -24,16 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { LanguageCombobox } from "./LanguageCombobox";
 
 // Mock react-i18next
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({ i18n: { language: "en" }, t: (key: string) => key }),
 }));
 
-const mockOnSelectLanguage = jest.fn();
+const mockOnSelectLanguage = vi.fn();
 
 const defaultProps = {
   selectedCulture: "en",
@@ -44,7 +44,7 @@ const defaultProps = {
 
 describe("LanguageCombobox", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without crashing", () => {

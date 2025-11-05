@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { TableRow } from "./TableRow";
 
@@ -44,23 +44,20 @@ const contextOptions = [
   },
 ];
 
-const mockFileContextClick = jest.fn();
+const mockFileContextClick = vi.fn();
 
-jest.mock("../../context-menu", () => ({
+vi.mock("../../context-menu", () => ({
   __esModule: true,
   ContextMenu: () => <div />,
 }));
 
-jest.mock(
-  "classnames",
-  () =>
-    (...args: string[]) =>
-      args.join(" "),
-);
+vi.mock("classnames", () => ({
+  default: (...args: string[]) => args.join(" "),
+}));
 
 describe("<TableRow />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without errors", () => {
@@ -114,7 +111,7 @@ describe("<TableRow />", () => {
   });
 
   it("calls onDoubleClick when double-click on table row", async () => {
-    const onDoubleClick = jest.fn();
+    const onDoubleClick = vi.fn();
 
     render(<TableRow onDoubleClick={onDoubleClick}>Table row</TableRow>);
 
@@ -126,7 +123,7 @@ describe("<TableRow />", () => {
   });
 
   it("calls onClick when click on table row", async () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
 
     render(<TableRow onClick={onClick}>Table row</TableRow>);
 

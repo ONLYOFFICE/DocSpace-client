@@ -8,6 +8,12 @@
     "lineEnding": "crlf",
     "lineWidth": 80
   },
+  "files": {
+    "includes": [
+      "!**/coverage",
+      "!**/vitest/reports"
+    ]
+  },
   "javascript": {
     "formatter": {
       "quoteStyle": "double",

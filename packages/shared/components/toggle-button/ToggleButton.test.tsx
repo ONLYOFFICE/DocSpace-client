@@ -25,48 +25,48 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { ToggleButton } from ".";
 
 describe("<ToggleButton />", () => {
   const defaultProps = {
     isChecked: false,
-    onChange: jest.fn(),
+    onChange: vi.fn(),
     label: "Toggle me",
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  test("renders without error", () => {
+  it("renders without error", () => {
     render(<ToggleButton {...defaultProps} />);
     expect(screen.getByTestId("toggle-button")).toBeInTheDocument();
   });
 
-  test("renders with label", () => {
+  it("renders with label", () => {
     render(<ToggleButton {...defaultProps} />);
     const label = screen.getByTestId("toggle-button-label");
     expect(label).toBeInTheDocument();
     expect(label).toHaveTextContent("Toggle me");
   });
 
-  test("renders without label when not provided", () => {
+  it("renders without label when not provided", () => {
     render(<ToggleButton {...defaultProps} label={undefined} />);
     expect(screen.queryByTestId("toggle-button-label")).not.toBeInTheDocument();
   });
 
-  test("handles checked state correctly", () => {
+  it("handles checked state correctly", () => {
     render(<ToggleButton {...defaultProps} isChecked />);
     const input = screen.getByTestId("toggle-button-input") as HTMLInputElement;
     expect(input.checked).toBe(true);
   });
 
-  test("calls onChange when clicked", async () => {
-    const onChange = jest.fn();
+  it("calls onChange when clicked", async () => {
+    const onChange = vi.fn();
     render(<ToggleButton {...defaultProps} onChange={onChange} />);
 
     const toggle = screen.getByTestId("toggle-button-input");
@@ -75,14 +75,14 @@ describe("<ToggleButton />", () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
-  test("respects disabled state", () => {
+  it("respects disabled state", () => {
     render(<ToggleButton {...defaultProps} isDisabled />);
     const input = screen.getByTestId("toggle-button-input");
     expect(input).toBeDisabled();
   });
 
-  test("prevents interaction when disabled", async () => {
-    const onChange = jest.fn();
+  it("prevents interaction when disabled", async () => {
+    const onChange = vi.fn();
     render(<ToggleButton {...defaultProps} onChange={onChange} isDisabled />);
 
     const toggle = screen.getByTestId("toggle-button-input");
@@ -91,26 +91,26 @@ describe("<ToggleButton />", () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  test("applies custom className", () => {
+  it("applies custom className", () => {
     render(<ToggleButton {...defaultProps} className="custom-class" />);
     const container = screen.getByTestId("toggle-button-container");
     expect(container).toHaveClass("custom-class");
   });
 
-  test("applies custom styles", () => {
+  it("applies custom styles", () => {
     const customStyle = { marginTop: "10px" };
     render(<ToggleButton {...defaultProps} style={customStyle} />);
     const container = screen.getByTestId("toggle-button-container");
     expect(container).toHaveStyle(customStyle);
   });
 
-  test("sets name attribute correctly", () => {
+  it("sets name attribute correctly", () => {
     render(<ToggleButton {...defaultProps} name="toggle-name" />);
     const input = screen.getByTestId("toggle-button-input");
     expect(input).toHaveAttribute("name", "toggle-name");
   });
 
-  test("applies font styling correctly", () => {
+  it("applies font styling correctly", () => {
     render(<ToggleButton {...defaultProps} fontWeight={600} fontSize="16px" />);
     const label = screen.getByTestId("toggle-button-label");
     expect(label).toHaveStyle({

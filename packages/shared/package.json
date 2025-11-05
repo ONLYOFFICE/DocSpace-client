@@ -11,10 +11,10 @@
     "storybook": "storybook dev -p 8082",
     "storybook-build": "storybook build",
     "storybook-serve": "serve storybook-static -p 8082",
-    "test": "vitest",
+    "test": "vitest --run",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "test:open-report": "npx vite preview --outDir vitest/reports",
+    "test:open-report": "pnpm dlx vite preview --outDir vitest/reports",
     "lint": "biome lint .",
     "lint:fix": "biome lint --write .",
     "format": "biome check .",
@@ -163,7 +163,6 @@
     "style-loader": "3.3.4",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
-    "vite": "7.1.12",
     "vitest": "4.0.5"
   },
   "peerDependencies": {

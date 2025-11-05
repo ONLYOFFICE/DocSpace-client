@@ -27,6 +27,7 @@
 import { TCreatedBy, type TPathParts } from "../../types";
 import {
   ContentType,
+  KnowledgeType,
   ProviderType,
   RoleType,
   ServerType,
@@ -185,7 +186,13 @@ export type WebSearchConfig = {
   key?: string;
 };
 
+export type KnowledgeConfig = {
+  type: KnowledgeType;
+  key?: string;
+}
+
 export type TAIConfig = {
+  vectorizationEnabled: boolean;
   webSearchEnabled: boolean;
   knowledgeSearchToolName: string;
   webSearchToolName: string;

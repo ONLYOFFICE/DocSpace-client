@@ -1023,7 +1023,7 @@ export function setDefaultAIAgentQuota(enableQuota, defaultQuota) {
   };
   const options = {
     method: "post",
-    url: "",
+    url: "/settings/aiagentquotasettings",
     data,
   };
 

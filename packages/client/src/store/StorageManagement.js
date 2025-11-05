@@ -61,6 +61,8 @@ class StorageManagement {
 
   accounts = [];
 
+  aIAgents = [];
+
   needRecalculating = false;
 
   isRecalculating = false;
@@ -226,7 +228,9 @@ class StorageManagement {
 
     type === "user"
       ? requests.push(getUserList(userFilterData))
-      : requests.push(getRooms(roomFilterData));
+      : type === "agent"
+        ? requests.push(getAIAgents(roomFilterData))
+        : requests.push(getRooms(roomFilterData));
 
     try {
       const [, items] = await Promise.all(requests);
@@ -235,6 +239,12 @@ class StorageManagement {
         this.accounts = items.items.map((user) => getPeopleListItem(user));
         return;
       }
+      if (type === "agent") {
+        console.log("agent", items.folders);
+        this.aIAgents = getFilesListItems(items.folders);
+        return;
+      }
+
       this.rooms = getFilesListItems(items.folders);
     } catch (e) {
       toastr.error(e);

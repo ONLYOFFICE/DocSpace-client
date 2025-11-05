@@ -411,8 +411,8 @@ class CurrentQuotasStore {
     return this.currentPortalQuota?.usersQuota?.enableQuota;
   }
 
-  get isDefaultAIAgentQuotaSet() {
-    return this.currentPortalQuota?.aiAgentQuota?.enableQuota;
+  get isDefaultAIAgentsQuotaSet() {
+    return this.currentPortalQuota?.aiAgentsQuota?.enableQuota;
   }
 
   get isTenantCustomQuotaSet() {
@@ -427,8 +427,8 @@ class CurrentQuotasStore {
     return this.currentPortalQuota?.usersQuota?.defaultQuota;
   }
 
-  get defaultAIAgentQuota() {
-    return this.currentPortalQuota?.aiAgentQuota?.defaultQuota;
+  get defaultAIAgentsQuota() {
+    return this.currentPortalQuota?.aiAgentsQuota?.defaultQuota;
   }
 
   get tenantCustomQuota() {

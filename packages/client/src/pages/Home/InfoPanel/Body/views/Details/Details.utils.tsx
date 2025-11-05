@@ -102,7 +102,7 @@ type DetailsHelperProps = {
   isCollaborator: boolean;
   selectTag: (tag: { label: string }) => void;
   isDefaultRoomsQuotaSet: boolean;
-  isDefaultAIAgentQuotaSet: boolean;
+  isDefaultAIAgentsQuotaSet: boolean;
   isAIAgentsFolder: boolean;
   roomLifetime: TRoomLifetime;
 };
@@ -124,7 +124,7 @@ class DetailsHelper {
 
   isDefaultRoomsQuotaSet: boolean;
 
-  isDefaultAIAgentQuotaSet: boolean;
+  isDefaultAIAgentsQuotaSet: boolean;
 
   isAIAgentsFolder: boolean;
 
@@ -139,7 +139,7 @@ class DetailsHelper {
     this.isCollaborator = props.isCollaborator;
     this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
-    this.isDefaultAIAgentQuotaSet = props.isDefaultAIAgentQuotaSet;
+    this.isDefaultAIAgentsQuotaSet = props.isDefaultAIAgentsQuotaSet;
     this.isAIAgentsFolder = props.isAIAgentsFolder;
     this.roomLifetime = props.roomLifetime;
   }
@@ -236,7 +236,7 @@ class DetailsHelper {
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
           const isDefaultQuotaSet = this.isAIAgentsFolder
-            ? this.isDefaultAIAgentQuotaSet
+            ? this.isDefaultAIAgentsQuotaSet
             : this.isDefaultRoomsQuotaSet;
 
           return isDefaultQuotaSet && this.item.quotaLimit !== undefined

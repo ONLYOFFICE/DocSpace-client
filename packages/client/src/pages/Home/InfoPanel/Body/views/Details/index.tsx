@@ -73,7 +73,7 @@ type DetailsProps = {
   onCreateRoomFromTemplate?: FilesActionStore["onCreateRoomFromTemplate"];
 
   isDefaultRoomsQuotaSet?: boolean;
-  isDefaultAIAgentQuotaSet?: boolean;
+  isDefaultAIAgentsQuotaSet?: boolean;
   isAIAgentsFolder?: boolean;
 
   getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
@@ -94,7 +94,7 @@ const Details = ({
   selectTag,
   isArchive,
   isDefaultRoomsQuotaSet,
-  isDefaultAIAgentQuotaSet,
+  isDefaultAIAgentsQuotaSet,
   isAIAgentsFolder,
 
   getLogoCoverModel,
@@ -125,7 +125,7 @@ const Details = ({
     culture: culture!,
     selectTag: selectTag!,
     isDefaultRoomsQuotaSet: isDefaultRoomsQuotaSet!,
-    isDefaultAIAgentQuotaSet: isDefaultAIAgentQuotaSet!,
+    isDefaultAIAgentsQuotaSet: isDefaultAIAgentsQuotaSet!,
     isAIAgentsFolder: isAIAgentsFolder!,
 
     roomLifetime: roomLifetime!,
@@ -332,7 +332,7 @@ export default inject(
     const isVisitor = user?.isVisitor;
     const isCollaborator = user?.isCollaborator;
 
-    const { isDefaultRoomsQuotaSet, isDefaultAIAgentQuotaSet } =
+    const { isDefaultRoomsQuotaSet, isDefaultAIAgentsQuotaSet } =
       currentQuotaStore;
 
     const { isAIAgentsFolder } = treeFoldersStore;
@@ -345,7 +345,7 @@ export default inject(
       isCollaborator,
       selectTag,
       isDefaultRoomsQuotaSet,
-      isDefaultAIAgentQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       isAIAgentsFolder,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
       onChangeFile: avatarEditorDialogStore.onChangeFile,

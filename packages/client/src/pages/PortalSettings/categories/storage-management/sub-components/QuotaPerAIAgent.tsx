@@ -31,17 +31,17 @@ import QuotaPerItemComponent from "./QuotaPerItem";
 
 type QuotaPerAIAgentComponentProps = {
   setAIAgentQuota: (size: number, t: (key: string) => string) => void;
-  defaultAIAgentQuota: number;
-  isDefaultAIAgentQuotaSet: boolean;
+  defaultAIAgentsQuota: number;
+  isDefaultAIAgentsQuotaSet: boolean;
 };
 
 const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
-  const { setAIAgentQuota, defaultAIAgentQuota, isDefaultAIAgentQuotaSet } =
+  const { setAIAgentQuota, defaultAIAgentsQuota, isDefaultAIAgentsQuotaSet } =
     props;
   const { t } = useTranslation("Settings");
 
-  const initialSizeProp = isDefaultAIAgentQuotaSet
-    ? { initialSize: defaultAIAgentQuota }
+  const initialSizeProp = isDefaultAIAgentsQuotaSet
+    ? { initialSize: defaultAIAgentsQuota }
     : {};
 
   const saveQuota = (size: number) => setAIAgentQuota(size, t);
@@ -49,12 +49,13 @@ const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
 
   return (
     <QuotaPerItemComponent
+      type="agent"
       formLabel={t("QuotaPerAIAgent")}
       toggleLabel={t("DefineQuotaPerAIAgent")}
       disableQuota={disableQuota}
       saveQuota={saveQuota}
       {...initialSizeProp}
-      isQuotaSet={isDefaultAIAgentQuotaSet}
+      isQuotaSet={isDefaultAIAgentsQuotaSet}
       tabIndex={1}
       dataTestId="quota_ai_agent"
       toggleDescription={t("SetDefaultAIAgentQuota", {
@@ -66,9 +67,9 @@ const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
 
 export const QuotaPerAIAgentComponentSection = inject(
   ({ currentQuotaStore }: TStore) => {
-    const { setAIAgentQuota, defaultAIAgentQuota, isDefaultAIAgentQuotaSet } =
+    const { setAIAgentQuota, defaultAIAgentsQuota, isDefaultAIAgentsQuotaSet } =
       currentQuotaStore;
 
-    return { setAIAgentQuota, defaultAIAgentQuota, isDefaultAIAgentQuotaSet };
+    return { setAIAgentQuota, defaultAIAgentsQuota, isDefaultAIAgentsQuotaSet };
   },
 )(observer(QuotaPerAIAgentComponent));

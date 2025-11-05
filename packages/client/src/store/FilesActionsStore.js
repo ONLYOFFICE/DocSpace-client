@@ -2169,7 +2169,7 @@ class FilesActionStore {
     window.dispatchEvent(event);
   };
 
-  changeAIAgentQuota = (items, successCallback, abortCallback) => {
+  changeAIAgentsQuota = (items, successCallback, abortCallback) => {
     const event = new Event(Events.CHANGE_QUOTA);
 
     const itemsIDs = items.map((item) => {
@@ -2372,7 +2372,7 @@ class FilesActionStore {
           key: "change-agent-quota",
           label: t("Common:ChangeQuota"),
           iconUrl: ChangQuotaReactSvgUrl,
-          onClick: () => this.changeAIAgentQuota(selection),
+          onClick: () => this.changeAIAgentsQuota(selection),
           disabled: !showStorageInfo,
         };
       case "default-quota":

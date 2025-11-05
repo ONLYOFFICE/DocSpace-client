@@ -196,7 +196,7 @@ const KnowledgeComponent = ({
         }
       >
         <Text className={generalStyles.description}>
-          {t("AISettings:KnowledgeDescription", {
+          {t("AIRoom:KnowledgeDescription", {
             modelName: "text-embedding-3-small",
           })}
         </Text>

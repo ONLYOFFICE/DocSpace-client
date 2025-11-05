@@ -146,7 +146,7 @@ const AiSettings = ({
         },
         {
           id: "knowledge",
-          name: t("AISettings:Knowledge"),
+          name: t("AIRoom:Knowledge"),
           content: <Knowledge />,
           onClick: initKnowledge,
         },

@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 8082",
     "storybook-build": "storybook build",
     "storybook-serve": "serve storybook-static -p 8082",
-    "test": "vitest --run",
+    "test": "vitest run",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "test:open-report": "pnpm dlx vite preview --outDir vitest/reports",

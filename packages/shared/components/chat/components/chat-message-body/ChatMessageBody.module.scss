@@ -458,6 +458,12 @@
       color: var(--chat-message-source-url-color);
     }
 
+    .sourceTitle,
+    .sourceContent {
+      text-align: var(--input-text-align);
+      unicode-bidi: plaintext;
+    }
+
     .sourceFallbackIcon {
       width: 16px;
       height: 16px;
@@ -471,6 +477,8 @@
   .externalLinkIcon {
     width: 16px;
     height: 16px;
+
+    @include mixins.flip-in-rtl;
 
     path {
       fill: var(--chat-message-external-link-icon-color);
@@ -714,6 +722,9 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   white-space: pre-line;
+
+  unicode-bidi: plaintext;
+  text-align: var(--input-text-align);
 }
 
 .heading,

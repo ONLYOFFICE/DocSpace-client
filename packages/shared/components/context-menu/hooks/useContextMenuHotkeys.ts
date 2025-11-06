@@ -57,7 +57,9 @@ const useContextMenuHotkeys = ({
     for (const index in menuModel) {
       const item = menuModel[index];
 
-      if (!item.isSeparator) clearModel.push({ ...item, index: Number(index) });
+      if (!item.isSeparator && !item.disabled) {
+        clearModel.push({ ...item, index: Number(index) });
+      }
     }
 
     if (!clearModel.length) return e;

@@ -55,6 +55,7 @@ import { type TData, toastr } from "@docspace/shared/components/toast";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { Text } from "@docspace/shared/components/text";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -239,6 +240,9 @@ const AddUpdateDialogComponent = ({
               placeholder={t("AISettings:EnterLabel")}
               isDisabled={isRequestRunning}
             />
+            <Text className={styles.fieldHint}>
+              {t("AISettings:ProviderNameInputHint")}
+            </Text>
           </FieldContainer>
 
           <FieldContainer
@@ -258,6 +262,9 @@ const AddUpdateDialogComponent = ({
               isDisabled={isRequestRunning}
               isReadOnly={selectedOption.key !== ProviderType.OpenAiCompatible}
             />
+            <Text className={styles.fieldHint}>
+              {t("AISettings:ProviderURLInputHint")}
+            </Text>
           </FieldContainer>
           <FieldContainer
             labelText={t("AISettings:ProviderKey")}
@@ -281,17 +288,22 @@ const AddUpdateDialogComponent = ({
                 </Link>
               </div>
             ) : (
-              <PasswordInput
-                size={InputSize.base}
-                inputValue={providerKey}
-                onChange={(_, value) => setProviderKey(value ?? "")}
-                isFullWidth
-                isDisableTooltip
-                placeholder={t("AISettings:EnterKey")}
-                isDisabled={isRequestRunning}
-                isSimulateType
-                autoComplete="off"
-              />
+              <>
+                <PasswordInput
+                  size={InputSize.base}
+                  inputValue={providerKey}
+                  onChange={(_, value) => setProviderKey(value ?? "")}
+                  isFullWidth
+                  isDisableTooltip
+                  placeholder={t("AISettings:EnterKey")}
+                  isDisabled={isRequestRunning}
+                  isSimulateType
+                  autoComplete="off"
+                />
+                <Text className={styles.fieldHint}>
+                  {t("AISettings:ProviderKeyInputHint")}
+                </Text>
+              </>
             )}
           </FieldContainer>
         </div>

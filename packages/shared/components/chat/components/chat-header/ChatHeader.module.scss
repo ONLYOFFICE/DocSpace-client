@@ -126,6 +126,11 @@
   justify-content: space-between;
   gap: 8px;
 
+  .chatListItemTitle {
+    text-align: var(--input-text-align);
+    unicode-bidi: plaintext;
+  }
+
   .iconButtonWrapper {
     width: 16px;
     height: 16px;

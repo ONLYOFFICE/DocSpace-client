@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -12,7 +12,13 @@
     "includes": [
       "**",
       "!**/coverage",
-      "!**/vitest/reports"
+      "!**/vitest/reports",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/storybook-static",
+      "!**/.git",
+      "!**/.nx",
+      "!**/.vscode"
     ]
   },
   "javascript": {
@@ -33,6 +39,7 @@
     }
   },
   "assist": {
+    "enabled": true,
     "actions": {
       "source": {
         "organizeImports": "off"

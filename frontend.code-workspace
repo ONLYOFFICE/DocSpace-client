@@ -367,8 +367,8 @@
       "editor.defaultFormatter": "biomejs.biome"
     },
     "editor.codeActionsOnSave": {
-      "source.organizeImports.biome": "explicit",
-      "source.fixAll.biome": "explicit",
+      "source.organizeImports.biome": "never",
+      "quickfix.biome": "explicit",
     },
     "[jsonc]": {
       "editor.defaultFormatter": "vscode.json-language-features"

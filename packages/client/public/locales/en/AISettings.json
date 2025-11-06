@@ -43,5 +43,5 @@
   "SystemMCPListTitle": "System",
   "ToUseAddProvider": "To use {{value}}, make sure to connect at least one provider first.",
   "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes.",
-  "KnowledgeDescription": "Enable knowledge base for AI agents. The system will use {{modelName}} model to create vector embeddings and perform semantic search through your documents."
+  "KnowledgeDescription": "Enable knowledge base for AI agents. The system will use the {{modelName}} model to create vector embeddings and perform semantic search through your documents."
 }

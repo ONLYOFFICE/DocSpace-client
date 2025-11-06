@@ -695,9 +695,9 @@ class FilesStore {
           navigationPath[idx].title = newFolder?.title;
         }
 
-        if (newFolder.id === this.selectedFolderStore.id) {
+        if (folderInfo.id === this.selectedFolderStore.id) {
           this.selectedFolderStore.setSelectedFolder({
-            ...newFolder,
+            ...folderInfo,
             navigationPath,
             pathParts,
           });

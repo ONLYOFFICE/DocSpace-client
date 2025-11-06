@@ -26,23 +26,20 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import { KnowledgeType } from "@docspace/shared/api/ai/enums";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { Text } from "@docspace/shared/components/text";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { inject, observer } from "mobx-react";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
-import { KnowledgeType, WebSearchType } from "@docspace/shared/api/ai/enums";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { PasswordInput } from "@docspace/shared/components/password-input";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-
-import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 import generalStyles from "../AISettings.module.scss";
 
@@ -55,6 +52,7 @@ type TKnowledgeProps = {
   updateKnowledge?: AISettingsStore["updateKnowledge"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
+  aiConfig?: SettingsStore["aiConfig"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -66,6 +64,7 @@ const KnowledgeComponent = ({
   updateKnowledge,
   hasAIProviders,
   getAIConfig,
+  aiConfig,
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
 
@@ -120,7 +119,7 @@ const KnowledgeComponent = ({
 
   const selectedItem = React.useMemo(() => {
     return items.find((item) => item.key === selectedOption);
-  }, [selectedOption]);
+  }, [items, selectedOption]);
 
   React.useEffect(() => {
     if (knowledgeConfig?.type) {
@@ -196,8 +195,8 @@ const KnowledgeComponent = ({
         }
       >
         <Text className={generalStyles.description}>
-          {t("AIRoom:KnowledgeDescription", {
-            modelName: "text-embedding-3-small",
+          {t("AISettings:KnowledgeDescription", {
+            modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
           })}
         </Text>
         <Link
@@ -296,6 +295,7 @@ export const Knowledge = inject(
       updateKnowledge: aiSettingsStore.updateKnowledge,
       hasAIProviders: aiSettingsStore.hasAIProviders,
       getAIConfig: settingsStore.getAIConfig,
+      aiConfig: settingsStore.aiConfig,
     };
   },
 )(observer(KnowledgeComponent));

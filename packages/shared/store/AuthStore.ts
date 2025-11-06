@@ -228,8 +228,10 @@ class AuthStore {
         }
 
         if (this.isAuthenticated && !skipRequest) {
-          if (!isPortalRestore && !isPortalDeactivated)
+          if (!isPortalRestore && !isPortalDeactivated) {
             requests.push(this.settingsStore?.getAdditionalResources());
+            requests.push(this.settingsStore?.getAIConfig())
+          }
 
           if (!this.settingsStore?.passwordSettings) {
             if (!isPortalRestore && !isPortalDeactivated) {

@@ -10,6 +10,7 @@
   },
   "files": {
     "includes": [
+      "**",
       "!**/coverage",
       "!**/vitest/reports"
     ]
@@ -40,9 +41,6 @@
   },
   "linter": {
     "enabled": true,
-    "domains": {
-      "test": "recommended"
-    },
     "rules": {
       "recommended": false,
       "complexity": {

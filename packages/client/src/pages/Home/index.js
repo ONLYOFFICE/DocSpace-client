@@ -380,7 +380,7 @@ const PureHome = (props) => {
   }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
 
   const isDisabledKnowledge =
-    !aiConfig.vectorizationEnabled && currentTab === "knowledge";
+    !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
 
   return (
     <>

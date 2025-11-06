@@ -86,3 +86,31 @@ export type TooltipProps = Pick<
   zIndex?: number;
   tooltipStyle?: React.CSSProperties;
 };
+
+export type MouseEventHandler = (e: React.MouseEvent) => void;
+
+export type TooltipHandlers = {
+  anchorId: string;
+  handleMouseEnter: MouseEventHandler;
+  handleMouseLeave: MouseEventHandler;
+  handleClick: MouseEventHandler;
+};
+
+export interface WithTooltipProps {
+  title?: string;
+  tooltipContent?: React.ReactNode;
+  tooltipPlace?: TTooltipPlace;
+  tooltipFitToContent?: boolean;
+}
+
+export type ComponentProps = React.HTMLAttributes<HTMLElement> & {
+  onClick?: MouseEventHandler;
+  onMouseEnter?: MouseEventHandler;
+  onMouseLeave?: MouseEventHandler;
+};
+
+declare global {
+  interface Window {
+    __systemTooltipRef?: React.RefObject<TooltipRefProps | null>;
+  }
+}

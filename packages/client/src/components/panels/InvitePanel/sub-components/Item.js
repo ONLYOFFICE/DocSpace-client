@@ -44,7 +44,6 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
-  RoomsType,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -135,20 +134,14 @@ const Item = ({
       return;
     }
 
-    const isPublicRoomType = roomType === RoomsType.PublicRoom;
-
     const filter = Filter.getDefault();
-
-    const searchArea = isPublicRoomType
-      ? AccountsSearchArea.People
-      : AccountsSearchArea.Any;
 
     filter.search = value;
 
     const users =
       roomId === -1
         ? await getUserList(filter)
-        : await getMembersList(searchArea, roomId, filter);
+        : await getMembersList(AccountsSearchArea.People, roomId, filter);
 
     setSearchRequestRunning(false);
 

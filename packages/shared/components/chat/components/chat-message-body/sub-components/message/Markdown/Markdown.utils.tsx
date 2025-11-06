@@ -176,7 +176,7 @@ export const createMarkdownComponents = ({
     if (typeof content === "string") {
       if (content.length) {
         if (content[0] === " ") {
-          return <span className="form-modal-markdown-span" />;
+          return <span className="form-modal-markdown-span">{content}</span>;
         }
 
         // Specifically handle <think> tags that were wrapped in backticks

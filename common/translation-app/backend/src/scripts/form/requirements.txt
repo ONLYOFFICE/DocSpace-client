@@ -1,0 +1,9 @@
+# Python dependencies for translation export and PDF form generation scripts
+
+# ONLYOFFICE Document Builder - required for PDF generation
+# Used by: build_oform.py, export_and_build_all.py
+document-builder>=1.0.0
+
+# Environment variable management - for loading .env files
+# Used by: build_oform.py
+python-dotenv>=0.19.0

@@ -26,6 +26,7 @@
 
 import React from "react";
 import classNames from "classnames";
+import equal from "fast-deep-equal";
 import { useDropzone } from "react-dropzone";
 
 import getFilesFromEvent from "../../utils/get-files-from-event";
@@ -85,4 +86,4 @@ const DragAndDrop = (props: DragAndDropProps) => {
   );
 };
 
-export default DragAndDrop;
+export default React.memo(DragAndDrop, equal);

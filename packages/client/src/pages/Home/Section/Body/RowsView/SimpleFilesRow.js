@@ -24,13 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
-import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
+import equal from "fast-deep-equal";
+import React, { useCallback, useMemo } from "react";
 import { isMobile } from "react-device-detect";
+import { withTranslation } from "react-i18next";
+
 import { FolderType } from "@docspace/shared/enums";
+import { EMPTY_OBJECT } from "@docspace/shared/constants";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import {
   FilesRow,
   FilesRowWrapper,
@@ -43,7 +47,7 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 
-const SimpleFilesRow = (props) => {
+const SimpleFilesRow = React.memo((props) => {
   const {
     t,
     item,
@@ -102,9 +106,12 @@ const SimpleFilesRow = (props) => {
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
 
-  const onChangeIndex = (action) => {
-    return changeIndex(action, item, t);
-  };
+  const onChangeIndex = useCallback(
+    (action) => {
+      return changeIndex(action, item, t);
+    },
+    [changeIndex, item, t],
+  );
 
   React.useEffect(() => {
     if (!rowRef?.current) return;
@@ -140,29 +147,31 @@ const SimpleFilesRow = (props) => {
     />
   );
 
-  const onDragOverEvent = (dragActive, e) => {
+  const onDragOverEvent = useEventCallback((dragActive, e) => {
     onDragOver && onDragOver(e);
 
     if (dragActive !== isDragActive) {
       setIsDragActive(dragActive);
     }
-  };
+  });
 
-  const onDragLeaveEvent = (e) => {
+  const onDragLeaveEvent = useEventCallback((e) => {
     onDragLeave && onDragLeave(e);
 
     setIsDragActive(false);
     setDropTargetPreview(null);
-  };
+  });
+
   const isDragDisabled = dragging && !isDragging;
 
-  const dragStyles =
-    (dragging && isDragging) || isDragDisabled
+  const dragStyles = useMemo(() => {
+    return (dragging && isDragging) || isDragDisabled
       ? {
           marginInline: "-16px",
           paddingInline: "16px",
         }
-      : {};
+      : EMPTY_OBJECT;
+  }, [dragging, isDragging, isDragDisabled]);
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
@@ -187,6 +196,24 @@ const SimpleFilesRow = (props) => {
     setDropTargetPreview,
   ]);
 
+  const onFilesClickEvent = useCallback(
+    (event) => {
+      if (isMobile) return;
+
+      onFilesClick(event);
+    },
+    [isMobile, onFilesClick],
+  );
+
+  const onRowClickEvent = useCallback(
+    (event) => {
+      if (isMobile) return;
+
+      onDoubleClick(event);
+    },
+    [isMobile, onDoubleClick],
+  );
+
   return (
     <FilesRowWrapper
       ref={rowRef}
@@ -208,7 +235,7 @@ const SimpleFilesRow = (props) => {
       isHighlight={isHighlight}
     >
       <DragAndDrop
-        data-title={item.title}
+        data-document-title={item.title}
         value={value}
         className={classNames("files-item", className, idWithFileExst)}
         onDrop={onDrop}
@@ -220,9 +247,7 @@ const SimpleFilesRow = (props) => {
         isDragDisabled={isDragDisabled}
       >
         <FilesRow
-          onRowClick={(e) => {
-            if (isMobile) onDoubleClick(e);
-          }}
+          onRowClick={onRowClickEvent}
           key={item.id}
           data={item}
           isEdit={isEdit}
@@ -272,11 +297,7 @@ const SimpleFilesRow = (props) => {
           <FilesRowContent
             item={item}
             sectionWidth={sectionWidth}
-            onFilesClick={(event) => {
-              if (isMobile) return;
-
-              onFilesClick(event);
-            }}
+            onFilesClick={onFilesClickEvent}
             quickButtons={
               isMobileDevice || isRooms || isAIAgentsFolder
                 ? quickButtonsComponent
@@ -292,7 +313,7 @@ const SimpleFilesRow = (props) => {
       </DragAndDrop>
     </FilesRowWrapper>
   );
-};
+}, equal);
 
 export default withTranslation([
   "Files",

@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { DropDown } from ".";
+import styles from "./DropDown.module.scss";
 
 const baseProps = {
   open: false,
@@ -61,10 +62,10 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("directionTop");
-    expect(dropdown).toHaveClass("directionRight");
-    expect(dropdown).not.toHaveClass("directionBottom");
-    expect(dropdown).not.toHaveClass("directionLeft");
+    expect(dropdown).toHaveClass(styles.directionTop);
+    expect(dropdown).toHaveClass(styles.directionRight);
+    expect(dropdown).not.toHaveClass(styles.directionBottom);
+    expect(dropdown).not.toHaveClass(styles.directionLeft);
   });
 
   it("applies mobile view class when isMobileView is true", () => {
@@ -75,7 +76,7 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("mobileView");
+    expect(dropdown).toHaveClass(styles.mobileView);
   });
 
   it("applies maxHeight class when maxHeight prop is provided", () => {
@@ -86,7 +87,7 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("maxHeight");
+    expect(dropdown).toHaveClass(styles.maxHeight);
   });
 
   it("applies withManualWidth class when manualWidth is provided", () => {
@@ -97,7 +98,7 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("withManualWidth");
+    expect(dropdown).toHaveClass(styles.withManualWidth);
   });
 
   it("applies notReady class before dropdown is ready", () => {
@@ -108,11 +109,11 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("notReady");
+    expect(dropdown).toHaveClass(styles.notReady);
   });
 
   it("doesn't handle click outside when enableOnClickOutside is false", () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     render(
       <div>
         <div data-testid="outside">Outside</div>
@@ -152,7 +153,7 @@ describe("<DropDown />", () => {
   });
 
   it("doesn't handle keyboard events when enableKeyboardEvents is false", () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     render(
       <DropDown
         {...baseProps}
@@ -188,7 +189,7 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("directionRight");
+    expect(dropdown).toHaveClass(styles.directionRight);
   });
 
   it("renders virtual list with correct props", () => {
@@ -219,8 +220,8 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass("directionBottom");
-    expect(dropdown).toHaveClass("directionLeft");
+    expect(dropdown).toHaveClass(styles.directionBottom);
+    expect(dropdown).toHaveClass(styles.directionLeft);
   });
 
   it("updates maxHeight based on calculatedHeight", () => {
@@ -243,7 +244,7 @@ describe("<DropDown />", () => {
         </DropDown>,
       );
 
-      expect(document.querySelector(".backdrop")).not.toBeInTheDocument();
+      expect(document.querySelector(styles.backdrop)).not.toBeInTheDocument();
     });
   });
 
@@ -274,9 +275,8 @@ describe("<DropDown />", () => {
     };
 
     beforeEach(() => {
-      jest
-        .spyOn(Element.prototype, "getBoundingClientRect")
-        .mockImplementation(function (this: Element) {
+      vi.spyOn(Element.prototype, "getBoundingClientRect").mockImplementation(
+        function (this: Element) {
           if (this.classList.contains("dropdown")) {
             return {
               width: 200,
@@ -300,11 +300,12 @@ describe("<DropDown />", () => {
             x: 40,
             y: 80,
           } as DOMRect;
-        });
+        },
+      );
     });
 
     afterEach(() => {
-      jest.restoreAllMocks();
+      vi.restoreAllMocks();
     });
 
     it("calculates correct position for bottom-left alignment", () => {
@@ -317,8 +318,8 @@ describe("<DropDown />", () => {
       );
 
       const dropdown = screen.getByTestId("dropdown");
-      expect(dropdown).toHaveClass("directionBottom");
-      expect(dropdown).toHaveClass("directionLeft");
+      expect(dropdown).toHaveClass(styles.directionBottom);
+      expect(dropdown).toHaveClass(styles.directionLeft);
 
       cleanup();
     });
@@ -339,8 +340,8 @@ describe("<DropDown />", () => {
       );
 
       const dropdown = screen.getByTestId("dropdown");
-      expect(dropdown).toHaveClass("directionBottom");
-      expect(dropdown).toHaveClass("directionLeft");
+      expect(dropdown).toHaveClass(styles.directionBottom);
+      expect(dropdown).toHaveClass(styles.directionLeft);
 
       cleanup();
     });

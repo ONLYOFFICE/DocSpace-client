@@ -3,7 +3,7 @@
   "content": "Welcome to the Collaboration room",
   "content_en_sha1_hash": "a559ce033e33b5b49d46dc8285acae2e30d705a4",
   "created_at": "2025-05-19T21:30:56.428Z",
-  "updated_at": "2025-10-27T16:14:33.134Z",
+  "updated_at": "2025-11-03T12:10:34.913Z",
   "comment": {
     "text": "The CollaborationRoomEmptyTitle translation key is used to display a welcoming message in an empty collaboration room. This text appears as the title of an empty collaboration room view and is intended to provide a clear indication that there are no existing collaborations to show. It is used to enhance user experience in the application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 291,
+      "line_number": 351,
       "context": "switch (type) {\n case RoomsType.FormRoom:\n return t(\"EmptyView:FormRoomEmptyTitle\");\n case RoomsType.EditingRoom:\n return t(\"EmptyView:CollaborationRoomEmptyTitle\");\n case RoomsType.PublicRoom:\n return t(\"EmptyView:PublicRoomEmptyTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"EmptyView:VirtualDataRoomEmptyTitle\");\n case RoomsType.CustomRoom:",
       "module": "/packages/client"
     }

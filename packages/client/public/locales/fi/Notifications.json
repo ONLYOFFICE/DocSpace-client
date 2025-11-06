@@ -5,7 +5,6 @@
   "DailyFeed": "Päivittäinen {{productName}}-syöte",
   "DailyFeedDescription": "Lue uutiset ja tapahtumat {{productName}}-si päivittäisistä uutisista.",
   "FileActivityNotify": "Tiedoston toimintailmoitukset",
-  "GoToSettings": "Mene Asetukset -kohtaan",
   "IsNotValid": "Ei ole kelvollinen",
   "LdapEmailTooltip": "Tämä käyttäjätili ladataan LDAP:sta. Käyttäjän sähköpostiosoitetta ei ole määritetty, ja nykyinen osoite on luotu automaattisesti eikä sitä voi käyttää ilmoitusten lähettämiseen.",
   "NotConfigured": "Ei määritetty",

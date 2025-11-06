@@ -27,7 +27,7 @@
 // import React from "react";
 // import moment from "moment";
 // import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it } from "vitest";
 
 // import { Weekdays, Days, Day } from "./sub-components/";
 // import { Calendar } from "./Calendar";

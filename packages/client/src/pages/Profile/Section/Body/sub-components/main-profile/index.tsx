@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { debounce } from "lodash";
 import { ReactSVG } from "react-svg";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -147,6 +148,8 @@ const MainProfile = (props: MainProfileProps) => {
 
   const styleContainerRef = useRef<HTMLDivElement>(null);
   const comboBoxRef = useRef<HTMLDivElement>(null);
+  const mobileComboBoxRef = useRef<HTMLDivElement>(null);
+  const profileContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!styleContainerRef.current) return;
@@ -178,26 +181,37 @@ const MainProfile = (props: MainProfileProps) => {
 
   const { isOwner, isAdmin, isRoomAdmin, isCollaborator } = profile!;
 
+  const isProfileMobile = isMobile(profileContainerRef.current?.offsetWidth); 
+
   const updateDropDownMaxHeight = () => {
-    if (comboBoxRef.current) {
-      const padding = 32;
-      const comboBoxRect = comboBoxRef.current.getBoundingClientRect();
-      const availableSpaceBottom =
-        window.innerHeight - comboBoxRect.bottom - padding;
+
+    const comboBox = comboBoxRef.current?.offsetParent !== null 
+    ? comboBoxRef.current 
+    : mobileComboBoxRef.current;
+
+    const padding = 32;
+    if (comboBox && !isProfileMobile) {
+      const comboBoxRect = comboBox.getBoundingClientRect();
+      const availableSpaceBottom = window.innerHeight - comboBoxRect.bottom - padding;
       const availableSpaceTop = comboBoxRect.top - padding;
-
       const max = Math.max(availableSpaceBottom, availableSpaceTop);
-
+      
       if (max === availableSpaceBottom) setDirectionY("bottom");
       else setDirectionY("top");
 
-      const newDropDownMaxHeight = Math.min(max, 352);
-
+      const newDropDownMaxHeight = Math.min(max, 352)
       setDropDownMaxHeight(newDropDownMaxHeight);
+    } else {
+      const max = window.innerHeight * 0.75;
+      setDropDownMaxHeight(Math.min(max, 352));
     }
   };
 
-  const checkScroll = () => {
+  const handleResize = () => {
+    updateDropDownMaxHeight();
+  };
+
+  const handleScroll = () => {
     updateDropDownMaxHeight();
   };
 
@@ -207,13 +221,17 @@ const MainProfile = (props: MainProfileProps) => {
 
   useEffect(() => {
     updateDropDownMaxHeight();
-    window.addEventListener("resize", updateDropDownMaxHeight);
-    window.addEventListener("scroll", checkScroll);
+
+    const scroll = !isMobile() ? document.querySelector("#sectionScroll .scroll-wrapper > .scroller") : null;
+
+    window.addEventListener("resize", handleResize);
+    scroll?.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener("resize", updateDropDownMaxHeight);
-      window.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", handleResize);
+      scroll?.removeEventListener("scroll", handleScroll);
     };
-  }, [cultureNames]);
+  }, [cultureNames, isMobile()]);
 
   useEffect(() => {
     if (!isMobileOnly) return;
@@ -330,7 +348,7 @@ const MainProfile = (props: MainProfileProps) => {
   const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
-    <div className={styles.profileContainer}>
+    <div className={styles.profileContainer} ref={profileContainerRef}>
       <div className={styles.profileWrapper} ref={styleContainerRef}>
         <div className={styles.avatarWrapper}>
           <Avatar
@@ -734,7 +752,7 @@ const MainProfile = (props: MainProfileProps) => {
                   />
                 ) : null}
               </Text>
-              <div className="mobile-language__wrapper-combo-box">
+              <div className="mobile-language__wrapper-combo-box" ref={mobileComboBoxRef}>
                 <ComboBox
                   className="language-combo-box"
                   directionY={isMobileHorizontalOrientation ? "bottom" : "both"}

@@ -3,7 +3,7 @@
   "content": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an MCP server. Invite your colleagues to collaborate and make the most of the agent’s chat capabilities.",
   "content_en_sha1_hash": "b2bcad55fdaeffee2e874fbd24d923780d12019f",
   "created_at": "2025-10-27T16:14:30.985Z",
-  "updated_at": "2025-10-27T17:57:42.880Z",
+  "updated_at": "2025-11-03T12:10:34.903Z",
   "comment": {
     "text": "This text describes how to set up and use AI agents for a team. It appears within the UI when a user views an empty AI Agents folder, explaining how to configure and collaborate using these agents. Translators should focus on conveying the process of creating and utilizing personalized AI assistants.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 189,
-      "context": "isPublicRoom: boolean,\n security: Nullable<TFolderSecurity>,\n ) => {\n return match([rootFolderType, access])\n .with([FolderType.AIAgents, P._], () =>\n t(\"EmptyView:EmptyAIAgentsDescription\"),\n )\n .with([FolderType.Rooms, ShareAccessRights.None], () =>\n t(\"Files:RoomEmptyContainerDescription\"),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>",
+      "line_number": 230,
+      "context": "t: TTranslation,\n access: AccessType,\n ) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsAIEnabledUserDescription\")\n : t(\"EmptyView:EmptyAIAgentsDescription\");\n };\n \n export const getRootDescription = (\n t: TTranslation,\n access: AccessType,",
       "module": "/packages/client"
     }
   ],

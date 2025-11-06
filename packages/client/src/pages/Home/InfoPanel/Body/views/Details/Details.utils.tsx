@@ -184,6 +184,9 @@ class DetailsHelper {
               "Type",
               "File extension",
               "Size",
+              "dimensions" in this.item &&
+                this.item?.dimensions &&
+                "Resolution",
               "Date modified",
               "Last modified by",
               "Creation date",
@@ -214,7 +217,8 @@ class DetailsHelper {
         return this.t("Common:Content");
       case "Size":
         return this.t("Common:Size");
-
+      case "Resolution":
+        return this.t("InfoPanel:Resolution");
       case "Date modified":
         return this.t("DateModified");
       case "Last modified by":
@@ -274,7 +278,8 @@ class DetailsHelper {
         return this.getItemContent();
       case "Size":
         return this.getItemSize();
-
+      case "Resolution":
+        return this.getItemDimensions();
       case "Date modified":
         return this.getItemDateModified();
       case "Last modified by":
@@ -354,6 +359,13 @@ class DetailsHelper {
     if (!("contentLength" in this.item)) return null;
 
     return text(this.item.contentLength);
+  };
+
+  getItemDimensions = () => {
+    if (!("dimensions" in this.item)) return null;
+    return text(
+      `${this.item?.dimensions?.width} x ${this.item?.dimensions?.height} px`,
+    );
   };
 
   getItemIndex = () => {

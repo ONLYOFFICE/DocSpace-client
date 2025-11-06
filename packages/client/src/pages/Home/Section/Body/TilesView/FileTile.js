@@ -24,11 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { use, useRef, useEffect, useState } from "react";
+import classNames from "classnames";
+import { use, useRef, useEffect, useState, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { FolderType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -39,6 +41,7 @@ import {
   RoomTile,
   TemplateTile,
 } from "@docspace/shared/components/tiles";
+
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
@@ -114,12 +117,14 @@ const FileTile = (props) => {
   const temporaryExtension =
     item.id === -1 ? `.${item.fileExst}` : item.fileExst;
 
-  const temporaryIcon = getIcon(
-    96,
-    temporaryExtension,
-    item.providerKey,
-    item.contentLength,
-  );
+  const temporaryIcon = useMemo(() => {
+    return getIcon(
+      96,
+      temporaryExtension,
+      item.providerKey,
+      item.contentLength,
+    );
+  }, [getIcon, temporaryExtension, item.providerKey, item.contentLength]);
 
   const { thumbnailUrl, providerItem } = item;
   const isDragDisabled = dragging && !isDragging;
@@ -178,23 +183,29 @@ const FileTile = (props) => {
 
   const activeClass = checkedProps || isActive ? "tile-selected" : "";
 
-  const onDragOverEvent = (dragActive, e) => {
-    onDragOver && onDragOver(e);
+  const onDragOverEvent = useCallback(
+    (dragActive, e) => {
+      onDragOver && onDragOver(e);
 
-    if (dragActive !== isDragActive) {
-      setIsDragActive(dragActive);
-    }
-  };
+      if (dragActive !== isDragActive) {
+        setIsDragActive(dragActive);
+      }
+    },
+    [onDragOver, isDragActive, setIsDragActive],
+  );
 
-  const onDragLeaveEvent = (e) => {
-    onDragLeave && onDragLeave(e);
-    setDropTargetPreview(null);
-    setIsDragActive(false);
-  };
+  const onDragLeaveEvent = useCallback(
+    (e) => {
+      onDragLeave && onDragLeave(e);
+      setDropTargetPreview(null);
+      setIsDragActive(false);
+    },
+    [onDragLeave, setDropTargetPreview, setIsDragActive],
+  );
 
-  const onOpenUser = () => {
+  const onOpenUser = useCallback(() => {
     openUser(item.createdBy, navigate);
-  };
+  }, [openUser, item.createdBy, navigate]);
 
   const tileContent = (
     <FilesTileContent t={t} item={item} onFilesClick={onFilesClick} />
@@ -275,12 +286,22 @@ const FileTile = (props) => {
 
   const droppableClassName = isDragging ? "droppable" : "";
 
+  const classNameMemo = useMemo(() => {
+    return classNames(
+      "files-item",
+      className,
+      activeClass,
+      `${item.id}_${item.fileExst}`,
+      droppableClassName,
+    );
+  }, [className, activeClass, item.id, item.fileExst, droppableClassName]);
+
   return (
     <div ref={selectableRef} id={id}>
       <StyledDragAndDrop
         data-title={item.title}
         value={value}
-        className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst} ${droppableClassName}`}
+        className={classNameMemo}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging ? isDragging : null}

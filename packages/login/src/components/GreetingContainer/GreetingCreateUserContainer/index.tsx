@@ -27,19 +27,16 @@
 "use client";
 
 import { useContext } from "react";
-import Image from "next/image";
 import { Trans, useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { getLogoUrl } from "@docspace/shared/utils";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { GreetingCreateUserContainerProps } from "@/types";
 
 import { GreetingContainer } from "./GreetingCreateUserContainer.styled";
+import { Logo } from "@/components/Logo";
 
 export const GreetingCreateUserContainer = ({
   type,
@@ -48,25 +45,12 @@ export const GreetingCreateUserContainer = ({
   hostName,
 }: GreetingCreateUserContainerProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
-  const theme = useTheme();
-  const { roomData } = useContext(ConfirmRouteContext);
 
-  const logoUrl = getLogoUrl(
-    WhiteLabelLogoType.LoginPage,
-    !theme.isBase,
-    false,
-    culture,
-  );
+  const { roomData } = useContext(ConfirmRouteContext);
 
   return (
     <GreetingContainer>
-      <Image
-        src={logoUrl}
-        className="portal-logo"
-        alt="greeting-logo"
-        width={386}
-        height={44}
-      />
+      <Logo culture={culture} />
       {type === "LinkInvite" ? (
         <div className="tooltip">
           <Text fontSize="16px">

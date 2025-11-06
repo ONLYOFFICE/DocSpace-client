@@ -39,7 +39,6 @@ const getRuntimeConfig = (): {
   const fallbackDate = new Date().getTime();
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
     runtime = require("../../../runtime.json");
   } catch (e) {
     console.warn("Failed to load runtime.json:", e);

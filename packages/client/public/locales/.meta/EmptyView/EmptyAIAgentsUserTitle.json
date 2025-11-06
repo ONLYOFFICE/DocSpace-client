@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyAIAgentsUserTitle",
+  "content": "No AI agents available yet",
+  "content_en_sha1_hash": "f17b97907f44cdd4598cd4333119a9c7a1e7292b",
+  "created_at": "2025-11-03T12:10:32.831Z",
+  "updated_at": "2025-11-03T12:18:30.237Z",
+  "comment": {
+    "text": "This text appears within an empty state container when no AI agents are available to the user. It's displayed to inform the user that no AI agents are currently accessible. This key differentiates the message shown to users versus other access types.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:18:30.237Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 182,
+      "context": "return t(\"EmptyView:EmptyDescription\");\n };\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\")\n : t(\"EmptyView:EmptyAIAgentsTitle\");\n };\n \n const getAIAgentsAIDisabledTitle = (\n t: TTranslation,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -73,7 +73,7 @@ import ChatIcon from "PUBLIC_DIR/images/icons/32/chat.svg";
 import ToolsIcon from "PUBLIC_DIR/images/icons/32/tools.svg";
 import styles from "../../styles/BackupServiceDialog.module.scss";
 
-interface BackupServiceDialogProps {
+interface AIServiceDialogProps {
   visible: boolean;
   onClose: () => void;
   onToggle: (id: string, enabled: boolean) => void;
@@ -93,7 +93,7 @@ interface ServiceOption {
   description: string;
 }
 
-const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
+const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
   visible,
   onClose,
   onToggle,
@@ -173,13 +173,13 @@ const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
       displayType={ModalDialogType.aside}
       withBodyScroll
     >
-      <ModalDialog.Header>{t("Common:Backup")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Services:AITools")}</ModalDialog.Header>
       <ModalDialog.Body>
         <ServiceToggleSection
           isEnabled={isEnabled}
           onToggle={handleToggleChange}
           title={t("Services:EnableAItools", {
-            currency: formatWalletCurrency!(aiToolsPrice!, 2),
+            currency: formatWalletCurrency!(aiToolsPrice!, 4),
           })}
           description={t("Services:EnableAItoolsDescription", {
             organizationName: logoText,

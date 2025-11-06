@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { RadioButton } from ".";
 
 const baseProps = {
@@ -54,7 +54,7 @@ describe("<RadioButton />", () => {
   });
 
   it("calls onClick handler when clicked and onChange is not provided", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     renderComponent({ onClick, isChecked: false });
 
     const radio = screen.getByRole("radio");
@@ -115,7 +115,7 @@ describe("<RadioButton />", () => {
   });
 
   it("calls onChange when provided", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderComponent({ onChange });
 
     const radio = screen.getByRole("radio");

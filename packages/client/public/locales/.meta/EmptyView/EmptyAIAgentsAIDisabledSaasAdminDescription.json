@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyAIAgentsAIDisabledSaasAdminDescription",
+  "content": "To create and use AI agents, connect your wallet and enable the AI features service in the {{productName}} settings. Once it’s done, you’ll be able to work with AI agents and collaborate with your team.",
+  "content_en_sha1_hash": "48978618332ec6820216792c933d9e3a42b59a52",
+  "created_at": "2025-11-03T12:10:32.823Z",
+  "updated_at": "2025-11-03T12:19:45.217Z",
+  "comment": {
+    "text": "This text explains how to enable AI agent features for SaaS administrators. It appears within an empty state view, guiding users to connect their wallet and configure settings in the product. Translators should ensure the terminology aligns with the overall product language around AI agents and settings.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:19:45.217Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 213,
+      "context": "t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([false, true], () =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .otherwise(() =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledDescription\", {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

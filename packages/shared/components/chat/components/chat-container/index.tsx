@@ -26,6 +26,8 @@
 
 import React from "react";
 
+import {isMobile} from "../../../../utils";
+
 import { ChatContainerProps } from "../../Chat.types";
 
 import styles from "./ChatContainer.module.scss";
@@ -34,6 +36,8 @@ const ChatContainer = ({ children }: ChatContainerProps) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
+    if (isMobile()) return;
+
     const sectionStickyContainer = document.getElementsByClassName(
       "section-sticky-container",
     );
@@ -48,6 +52,45 @@ const ChatContainer = ({ children }: ChatContainerProps) => {
 
     if (sectionStickyContainer[0])
       resizeObserver.observe(sectionStickyContainer[0] as HTMLElement);
+  }, []);
+
+  React.useEffect(() => {
+    if (!isMobile()) return;
+
+    const mainElement = document.getElementsByClassName("main")[0];
+    const mainBar = document.getElementById("main-bar");
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (!containerRef.current) return;
+
+      const mainElementHeight = mainElement?.clientHeight || 0;
+      const mainBarHeight = mainBar?.clientHeight || 0;
+      const sectionHeaderHeight = 53;
+      const sectionTabsHeight = 33;
+      const chatMargin = 16;
+      const sectionMargin = 16;
+
+      const newHeight =
+        mainElementHeight -
+        mainBarHeight -
+        sectionHeaderHeight -
+        sectionTabsHeight -
+        sectionMargin -
+        chatMargin;
+
+      containerRef.current.style.height = `${newHeight}px`;
+    });
+
+    if (mainBar)
+      resizeObserver.observe(mainBar as HTMLElement);
+
+    if (mainElement) {
+      resizeObserver.observe(mainElement)
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, []);
 
   return (

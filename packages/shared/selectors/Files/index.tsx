@@ -60,6 +60,7 @@ import { getDefaultBreadCrumb } from "../utils";
 const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
     disabledItems,
+    disabledFolderType,
     includedItems,
     filterParam,
 
@@ -177,6 +178,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
   const { subscribe, unsubscribe } = useSocketHelper({
     disabledItems,
+    disabledFolderType,
     filterParam,
     withCreate: withCreateState,
     setItems,
@@ -276,6 +278,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     selectedItemId,
     searchValue,
     disabledItems,
+    disabledFolderType,
     includedItems,
     isThirdParty,
     filterParam,

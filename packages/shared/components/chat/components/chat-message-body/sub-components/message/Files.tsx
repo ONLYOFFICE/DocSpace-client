@@ -33,6 +33,8 @@ import { Text } from "../../../../../text";
 
 import { MessageFilesProps } from "../../../../Chat.types";
 
+import { openFile } from "../../../../utils";
+
 import styles from "../../ChatMessageBody.module.scss";
 
 const Files = ({ files, getIcon }: MessageFilesProps) => {
@@ -47,7 +49,7 @@ const Files = ({ files, getIcon }: MessageFilesProps) => {
           <div
             className={styles.filesListItem}
             key={file.id}
-            style={{ maxWidth: "300px" }}
+            onClick={() => openFile(file.id.toString())}
           >
             <ReactSVG
               src={getIcon(24, file.extension!)}

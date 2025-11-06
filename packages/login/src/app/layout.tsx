@@ -174,7 +174,11 @@ export default async function RootLayout({
         />
         <meta name="google" content="notranslate" />
       </head>
-      <body style={styles} className={`${dirClass} ${themeClass}`}>
+      <body
+        style={styles}
+        className={`${dirClass} ${themeClass}`}
+        suppressHydrationWarning
+      >
         <StyledComponentsRegistry>
           <Providers
             value={{

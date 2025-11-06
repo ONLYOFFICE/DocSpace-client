@@ -51,7 +51,6 @@ const useInitChats = ({ roomId }: { roomId: string | number }) => {
       setTotalChats(total);
     } catch (error) {
       console.error(error);
-      toastr.error(error as string);
     } finally {
       setIsRequestRunning(false);
       setIsLoading(false);

@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import type { RadioButtonGroupProps } from "./RadioButtonGroup.types";
 import { RadioButtonGroup } from ".";
@@ -39,12 +39,12 @@ const baseProps = {
     { value: "banana", label: "Banana" },
     { value: "mandarin", label: "Mandarin" },
   ],
-  onClick: jest.fn(),
+  onClick: vi.fn(),
 };
 
 describe("<RadioButtonGroup />", () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {

@@ -3,7 +3,7 @@
   "content": "Agent name",
   "content_en_sha1_hash": "fc92420ca3d433f14f64480bd1e736eb2a2093aa",
   "created_at": "2025-10-27T16:14:10.199Z",
-  "updated_at": "2025-10-27T16:52:51.709Z",
+  "updated_at": "2025-11-03T12:10:34.976Z",
   "comment": {
     "text": "Label for an input field in the Create/Edit Agent dialog, prompting the user to enter the agent's name. This text is used to clearly indicate what information is being requested from the user. Translators should ensure the translation accurately conveys the need for a name.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 421,
+      "line_number": 438,
       "context": "/>\n );\n \n const tagsTitle = \"\";\n \n const inputTitle = `${t(\"Common:AgentName\")}:`;\n \n return (\n <StyledSetAgentParams disableImageRescaling={disableImageRescaling}>\n <div className=\"logo-name-container\">\n {element}",
       "module": "/packages/client"
     }

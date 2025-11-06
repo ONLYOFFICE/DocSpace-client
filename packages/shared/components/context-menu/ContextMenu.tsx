@@ -341,11 +341,21 @@ const ContextMenu = (props: ContextMenuProps) => {
   const isOutsideClicked = React.useCallback(
     (e: React.MouseEvent | MouseEvent) => {
       const target = e.target as HTMLElement;
+
+
+      const clickOnContainer = containerRef?.current && (
+        containerRef.current.isSameNode(target) || 
+        containerRef.current.contains(target)
+      );
+
+      const clickOnMenu = menuRef?.current && (
+        menuRef.current.isSameNode(target) || 
+        menuRef.current.contains(target)
+      );
+
       return (
-        menuRef.current &&
-        !(
-          menuRef.current.isSameNode(target) || menuRef.current.contains(target)
-        ) &&
+        !clickOnMenu &&
+        !clickOnContainer &&
         !target.closest(".context-menu-item-tooltip")
       );
     },

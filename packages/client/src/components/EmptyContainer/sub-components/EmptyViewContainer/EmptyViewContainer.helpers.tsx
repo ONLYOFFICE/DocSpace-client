@@ -103,6 +103,9 @@ export const getDescription = (
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
+  aiReady: boolean = false,
+  standalone: boolean = false,
+  isDocSpaceAdmin: boolean = false,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -119,6 +122,9 @@ export const getDescription = (
       rootFolderType,
       isPublicRoom,
       security,
+      standalone,
+      aiReady,
+      isDocSpaceAdmin,
     );
 
   if (isFolder)
@@ -147,6 +153,9 @@ export const getTitle = (
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
+  aiReady: boolean = false,
+  standalone: boolean = false,
+  isDocSpaceAdmin: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
@@ -156,7 +165,15 @@ export const getTitle = (
     if (isResultsTab) return t("AIRoom:EmptyResultsTitle");
   }
 
-  if (isRootEmptyPage) return getRootTitle(t, access, rootFolderType);
+  if (isRootEmptyPage)
+    return getRootTitle(
+      t,
+      access,
+      rootFolderType,
+      aiReady,
+      standalone,
+      isDocSpaceAdmin,
+    );
 
   if (isFolder)
     return getFolderTitle(
@@ -205,6 +222,9 @@ export const getOptions = (
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
+  aiReady: boolean = false,
+  standalone: boolean = false,
+  isDocSpaceAdmin: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -329,7 +349,7 @@ export const getOptions = (
     icon: <CreateAIAgentIcon />,
     key: "create-ai-agent",
     onClick: actions.onCreateAIAgent,
-    disabled: false,
+    disabled: !security?.Create,
   };
 
   const inviteRootRoom = {
@@ -342,6 +362,20 @@ export const getOptions = (
     onClick: () => actions.inviteRootUser(EmployeeType.User),
     disabled: false,
   };
+
+  // const goToServices = {
+  //   type: "button",
+  //   title: t("Common:GoToSettings"),
+  //   key: "go-to-services",
+  //   onClick: actions.onGoToServices,
+  // } as const;
+
+  const goToAIProviderSettings = {
+    type: "button",
+    title: t("Common:GoToSettings"),
+    key: "go-to-ai-provider-settings",
+    onClick: actions.onGoToAIProviderSettings,
+  } as const;
 
   const uploadFromDeviceAnyFile = isMobile
     ? createUploadFromDeviceOption(
@@ -427,9 +461,15 @@ export const getOptions = (
   if (isRootEmptyPage) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
-      .with([FolderType.AIAgents, ShareAccessRights.None, P._], () => [
-        createAIAgent,
-      ])
+      .with([FolderType.AIAgents, P._, P._], () =>
+        match([aiReady, standalone, isDocSpaceAdmin])
+          .with([true, P._, P.when(() => isAdmin(access))], () => [
+            createAIAgent,
+          ])
+          .with([false, P._, true], () => [goToAIProviderSettings]) // NOTE: AI SaaS same as AI Standalone in v.4.0
+          // .with([false, false, true], () => [goToServices])
+          .otherwise(() => []),
+      )
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,

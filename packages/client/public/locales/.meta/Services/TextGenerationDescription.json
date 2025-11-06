@@ -1,0 +1,28 @@
+{
+  "key_path": "TextGenerationDescription",
+  "content": "Create unique content like articles, letters, or marketing materials in minutes, right within the editor.",
+  "content_en_sha1_hash": "b05f18160edca387f58758b1b157c7b93e7bee9f",
+  "created_at": "2025-11-03T12:10:29.464Z",
+  "updated_at": "2025-11-03T12:25:34.005Z",
+  "comment": {
+    "text": "This translation key provides a short description of the text generation feature. It appears as a description for a tool within the AI Service Dialog, explaining that users can quickly create content like articles or marketing materials.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:25:34.005Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 146,
+      "context": "icon: <OcrIcon />,\n },\n {\n id: \"text-generation\",\n title: t(\"TextGeneration\"),\n description: t(\"TextGenerationDescription\"),\n icon: <GenerationIcon />,\n },\n {\n id: \"image-generation\",\n title: t(\"ImageGeneration\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

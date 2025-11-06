@@ -39,11 +39,12 @@ const ChatHeader = ({
   isLoading,
   getIcon,
   roomId,
+  aiReady,
 }: ChatHeaderProps) => {
   return (
     <div className={`${styles.chatHeader} chat-header`}>
       <SelectChat isLoadingProp={isLoading} getIcon={getIcon} roomId={roomId} />
-      <CreateChat isLoadingProp={isLoading} />
+      <CreateChat isLoadingProp={isLoading} isDisabled={!aiReady} />
       <SelectModel selectedModel={selectedModel} isLoading={isLoading} />
     </div>
   );

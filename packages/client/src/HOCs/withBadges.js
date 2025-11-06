@@ -89,11 +89,11 @@ export default function withBadges(WrappedComponent) {
 
       const { t, setPinAction } = this.props;
 
-      const { action, id } = e.target.closest(".is-pinned").dataset;
+      const { action, id, isaiagent = false } = e.target.closest(".is-pinned").dataset;
 
       if (!action && !id) return;
 
-      setPinAction(action, id, t).then(() => {
+      setPinAction(action, id, t, isaiagent).then(() => {
         this.setState({ disableUnpinClick: false });
       });
     };

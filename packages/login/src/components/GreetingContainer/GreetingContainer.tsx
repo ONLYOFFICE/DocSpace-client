@@ -27,12 +27,9 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { getLogoUrl } from "@docspace/shared/utils/common";
+import { Logo } from "../Logo";
 
 export const GreetingContainer = ({
   greetingText,
@@ -41,24 +38,9 @@ export const GreetingContainer = ({
   greetingText?: string | undefined;
   culture?: string;
 }) => {
-  const theme = useTheme();
-
-  const logoUrl = getLogoUrl(
-    WhiteLabelLogoType.LoginPage,
-    !theme.isBase,
-    false,
-    culture,
-  );
-
   return (
     <>
-      <Image
-        src={logoUrl}
-        className="logo-wrapper"
-        alt="greeting-logo"
-        width={386}
-        height={44}
-      />
+      <Logo culture={culture} />
       {greetingText ? (
         <Text
           fontSize="23px"

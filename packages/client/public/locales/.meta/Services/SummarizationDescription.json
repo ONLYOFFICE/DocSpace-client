@@ -1,0 +1,28 @@
+{
+  "key_path": "SummarizationDescription",
+  "content": "Quickly generate summaries of documents to save time and focus on key points.",
+  "content_en_sha1_hash": "12b226b4bb1c9cb46100abf0bf1251bd8eae3a51",
+  "created_at": "2025-11-03T12:10:29.459Z",
+  "updated_at": "2025-11-03T12:26:03.085Z",
+  "comment": {
+    "text": "This text describes the summarization feature, which allows users to quickly generate summaries of documents to save time and focus on key information. It appears within a list of AI tools in a dialog.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:26:03.085Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 128,
+      "context": "icon: <ChatIcon />,\n },\n {\n id: \"summarization\",\n title: t(\"Summarization\"),\n description: t(\"SummarizationDescription\"),\n icon: <SummarizationIcon />,\n },\n {\n id: \"text-translation\",\n title: t(\"TextTranslation\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

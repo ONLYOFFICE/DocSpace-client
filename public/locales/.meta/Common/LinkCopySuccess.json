@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2025-10-27T16:14:33.198Z",
+  "updated_at": "2025-11-03T12:10:34.972Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is successfully copied to the clipboard, typically in a button or link copy action. It appears as an alert or notification in UI components such as ExternalLinks and MetadataUrlField, and is used to provide a positive feedback to users after they have copied a link.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 87,
-      "context": "const inputsRef = useRef();\n \n const copyLink = (link) => {\n if (link) {\n toastr.success(\n `${t(\"Common:LinkCopySuccess\")}. ${t(\"Translations:LinkValidTime\", {\n days_count: 7,\n })}`,\n );\n \n copyShareLink(link);",
+      "line_number": 88,
+      "context": "const inputsRef = useRef();\n \n const copyLink = (link) => {\n if (link) {\n toastr.success(\n `${t(\"Common:LinkCopySuccess\")}. ${t(\"Translations:LinkValidTime\", {\n days_count: 7,\n })}`\n );\n \n copyShareLink(link);",
       "module": "/packages/client"
     },
     {

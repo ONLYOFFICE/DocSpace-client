@@ -24,49 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { PageCount } from "./PageCount";
 import { PageCountRef } from "./PageCount.props";
 
-jest.mock("react-device-detect", () => ({
+vi.mock("react-device-detect", () => ({
   isMobile: false,
 }));
 
 // Mock PanelReactSvg
-jest.mock("PUBLIC_DIR/images/panel.react.svg", () => {
-  return function DummyPanelSvg() {
-    return <div>Panel Icon</div>;
+vi.mock("PUBLIC_DIR/images/panel.react.svg", () => {
+  return {
+    default: function DummyPanelSvg() {
+      return <div>Panel Icon</div>;
+    },
   };
 });
 
 // Mock classnames
-jest.mock("classnames", () => {
-  return function dummyClassnames(...args: unknown[]) {
-    return args.join(" ");
+vi.mock("classnames", () => {
+  return {
+    default: function dummyClassnames(...args: unknown[]) {
+      return args.join(" ");
+    },
   };
 });
-
-// Mock styles
-jest.mock(
-  "./sub-components/PDFViewer/ui/PageCountPageCount.module.scss",
-  () => ({
-    pageCountWrapper: "pageCountWrapper",
-    isPanelOpen: "isPanelOpen",
-    isMobile: "isMobile",
-  }),
-);
 
 describe("PageCount", () => {
   const defaultProps = {
     visible: true,
     isPanelOpen: false,
-    setIsOpenMobileDrawer: jest.fn(),
+    setIsOpenMobileDrawer: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders correctly when visible", () => {

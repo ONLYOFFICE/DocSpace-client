@@ -24,1736 +24,1749 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
-
-import Filter from "../api/people/filter";
-import { TFrameConfig } from "../types/Frame";
+import { makeAutoObservable, runInAction } from "mobx";
 import api from "../api";
-import { TFolder } from "../api/files/types";
-import {
-  TAdditionalResources,
-  TCompanyInfo,
-  TCustomSchema,
-  TDomainValidator,
-  TFirebaseSettings,
-  TFormGallery,
-  TGetColorTheme,
-  TLoginSettings,
-  TMailDomainSettings,
-  TPasswordHash,
-  TPasswordSettings,
-  TSettings,
-  TTimeZone,
-  TVersionBuild,
-  TExternalResources,
+import type { TAIConfig } from "../api/ai/types";
+import type { TApiKey } from "../api/api-keys/types";
+import type { TFolder } from "../api/files/types";
+import type { TPortals } from "../api/management/types";
+import Filter from "../api/people/filter";
+import type { TUser } from "../api/people/types";
+import type {
+	TAdditionalResources,
+	TCompanyInfo,
+	TCustomSchema,
+	TDomainValidator,
+	TExternalResources,
+	TFirebaseSettings,
+	TFormGallery,
+	TGetColorTheme,
+	TLoginSettings,
+	TMailDomainSettings,
+	TPasswordHash,
+	TPasswordSettings,
+	TSettings,
+	TTimeZone,
+	TVersionBuild,
 } from "../api/settings/types";
-import { TUser } from "../api/people/types";
-import { TPortals } from "../api/management/types";
+import { toastr } from "../components/toast";
+import type { TData } from "../components/toast/Toast.type";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE, MEDIA_VIEW_URL } from "../constants";
 import {
-  size as deviceSize,
-  isTablet,
-  getSystemTheme,
-  getDeviceTypeByWidth,
+	DeepLinkType,
+	type RecaptchaType,
+	TenantStatus,
+	ThemeKeys,
+	type UrlActionType,
+} from "../enums";
+import { version } from "../package.json";
+import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
+import { Base, Dark, type TColorScheme } from "../themes";
+import type { Nullable } from "../types";
+import type { TFrameConfig } from "../types/Frame";
+import {
+	size as deviceSize,
+	getDeviceTypeByWidth,
+	getSystemTheme,
+	isTablet,
 } from "../utils";
-import {
-  frameCallEvent,
-  getShowText,
-  isPublicRoom,
-  insertTagManager,
-  isManagement,
-  openUrl,
-} from "../utils/common";
-import { setCookie, getCookie } from "../utils/cookie";
+import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { combineUrl } from "../utils/combineUrl";
+import {
+	frameCallEvent,
+	getShowText,
+	insertTagManager,
+	isManagement,
+	isPublicRoom,
+	openUrl,
+} from "../utils/common";
+import { getCookie, setCookie } from "../utils/cookie";
 import FirebaseHelper from "../utils/firebase";
 import SocketHelper from "../utils/socket";
-import { isRequestAborted } from "../utils/axios/isRequestAborted";
-import { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
-
-import {
-  ThemeKeys,
-  TenantStatus,
-  UrlActionType,
-  RecaptchaType,
-  DeepLinkType,
-} from "../enums";
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR, MEDIA_VIEW_URL } from "../constants";
-import { Dark, Base, TColorScheme } from "../themes";
-import { toastr } from "../components/toast";
-import { TData } from "../components/toast/Toast.type";
-import { version } from "../package.json";
-import { Nullable } from "../types";
-import { TApiKey } from "../api/api-keys/types";
 
 const themes = {
-  Dark,
-  Base,
+	Dark,
+	Base,
 };
 
 const isDesktopEditors = window.AscDesktopEditor !== undefined;
 const systemTheme = getSystemTheme();
 
 class SettingsStore {
-  isFirstLoaded = false;
+	isFirstLoaded = false;
 
-  isLoading = false;
+	isLoading = false;
 
-  interfaceDirection = "";
+	interfaceDirection = "";
 
-  isLoaded = false;
+	isLoaded = false;
 
-  isBurgerLoading = true;
+	isBurgerLoading = true;
 
-  checkedMaintenance = false;
+	checkedMaintenance = false;
 
-  maintenanceExist = false;
+	maintenanceExist = false;
 
-  snackbarExist = false;
+	snackbarExist = false;
 
-  currentProductId = "";
+	currentProductId = "";
 
-  culture = "en";
+	culture = "en";
 
-  cultures: string[] = [];
+	cultures: string[] = [];
 
-  theme = themes[systemTheme];
+	theme = themes[systemTheme];
 
-  trustedDomains: string[] = [];
+	trustedDomains: string[] = [];
 
-  trustedDomainsType = 0;
+	trustedDomainsType = 0;
 
-  ipRestrictionEnable = false;
+	ipRestrictionEnable = false;
 
-  ipRestrictions: string[] = [];
+	ipRestrictions: string[] = [];
 
-  sessionLifetime = 1440;
+	sessionLifetime = 1440;
 
-  enabledSessionLifetime = false;
+	enabledSessionLifetime = false;
 
-  timezone = "UTC";
+	timezone = "UTC";
 
-  timezones: TTimeZone[] = [];
+	timezones: TTimeZone[] = [];
 
-  tenantAlias = "";
+	tenantAlias = "";
 
-  utcOffset = "00:00:00";
+	utcOffset = "00:00:00";
 
-  utcHoursOffset = 0;
+	utcHoursOffset = 0;
 
-  defaultPage = "/";
+	defaultPage = "/";
 
-  homepage = "";
+	homepage = "";
 
-  datePattern = "M/d/yyyy";
+	datePattern = "M/d/yyyy";
 
-  datePatternJQ = "00/00/0000";
+	datePatternJQ = "00/00/0000";
 
-  dateTimePattern = "dddd, MMMM d, yyyy h:mm:ss tt";
+	dateTimePattern = "dddd, MMMM d, yyyy h:mm:ss tt";
 
-  datepicker = {
-    datePattern: "mm/dd/yy",
-    dateTimePattern: "DD, mm dd, yy h:mm:ss tt",
-    timePattern: "h:mm tt",
-  };
+	datepicker = {
+		datePattern: "mm/dd/yy",
+		dateTimePattern: "DD, mm dd, yy h:mm:ss tt",
+		timePattern: "h:mm tt",
+	};
 
-  greetingSettings = "Web Office Applications";
+	greetingSettings = "Web Office Applications";
 
-  enableAdmMess = false;
+	enableAdmMess = false;
 
-  enabledJoin = false;
+	enabledJoin = false;
 
-  formGallery: TFormGallery = {
-    url: "",
-    ext: ".oform",
-    uploadUrl: "",
-    uploadExt: ".docxf",
-    path: "",
-    domain: "",
-    uploadPath: "",
-    uploadDomain: "",
-    uploadDashboard: "",
-  };
+	formGallery: TFormGallery = {
+		url: "",
+		ext: ".oform",
+		uploadUrl: "",
+		uploadExt: ".docxf",
+		path: "",
+		domain: "",
+		uploadPath: "",
+		uploadDomain: "",
+		uploadDashboard: "",
+	};
 
-  logoUrl: Nullable<ILogo> = null;
+	logoUrl: Nullable<ILogo> = null;
 
-  isDesktopClient = isDesktopEditors;
+	isDesktopClient = isDesktopEditors;
 
-  isDesktopClientInit = false;
+	isDesktopClientInit = false;
 
-  // isDesktopEncryption: desktopEncryption;
-  isEncryptionSupport = false;
+	// isDesktopEncryption: desktopEncryption;
+	isEncryptionSupport = false;
 
-  encryptionKeys: { [key: string]: string | boolean } = {};
+	encryptionKeys: { [key: string]: string | boolean } = {};
 
-  roomsMode = false;
+	roomsMode = false;
 
-  isHeaderVisible = false;
+	isHeaderVisible = false;
 
-  isTabletView = false;
+	isTabletView = false;
 
-  showText = getShowText();
+	showText = getShowText();
 
-  articleOpen = false;
+	articleOpen = false;
 
-  isMobileArticle = false;
+	isMobileArticle = false;
 
-  folderPath: TFolder[] = [];
+	folderPath: TFolder[] = [];
 
-  hashSettings: Nullable<TPasswordHash> = null;
+	hashSettings: Nullable<TPasswordHash> = null;
 
-  title = "";
+	title = "";
 
-  ownerId = "";
+	ownerId = "";
 
-  nameSchemaId = null;
+	nameSchemaId = null;
 
-  owner: Nullable<TUser> = null;
+	owner: Nullable<TUser> = null;
 
-  wizardToken = null;
+	wizardToken = null;
 
-  limitedAccessSpace = null;
+	limitedAccessSpace = null;
 
-  passwordSettings: TPasswordSettings | null = null;
+	passwordSettings: TPasswordSettings | null = null;
 
-  hasShortenService = false;
+	hasShortenService = false;
 
-  customSchemaList: TCustomSchema[] = [];
+	customSchemaList: TCustomSchema[] = [];
 
-  firebase: TFirebaseSettings = {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
-    measurementId: "",
-    databaseURL: "",
-  };
+	firebase: TFirebaseSettings = {
+		apiKey: "",
+		authDomain: "",
+		projectId: "",
+		storageBucket: "",
+		messagingSenderId: "",
+		appId: "",
+		measurementId: "",
+		databaseURL: "",
+	};
 
-  version = "";
+	version = "";
 
-  buildVersionInfo = {
-    docspace: version,
-    documentServer: "6.4.1",
-    releaseDate: "",
-  };
+	buildVersionInfo = {
+		docspace: version,
+		documentServer: "6.4.1",
+		releaseDate: "",
+	};
 
-  debugInfo = false;
+	debugInfo = false;
 
-  debugInfoData = "";
+	debugInfoData = "";
 
-  socketUrl = "";
+	socketUrl = "";
 
-  folderFormValidation = new RegExp('[*+:"<>?|\\\\/]', "gim");
+	folderFormValidation = /[*+:"<>?|\\/]/gim;
 
-  tenantStatus: TenantStatus | null = null;
+	tenantStatus: TenantStatus | null = null;
 
-  externalResources: TExternalResources | null = null;
+	externalResources: TExternalResources | null = null;
 
-  hotkeyPanelVisible = false;
+	hotkeyPanelVisible = false;
 
-  frameConfig: Nullable<TFrameConfig> = null;
+	frameConfig: Nullable<TFrameConfig> = null;
 
-  appearanceTheme: TColorScheme[] = [];
+	appearanceTheme: TColorScheme[] = [];
 
-  selectedThemeId: number | null = null;
+	selectedThemeId: number | null = null;
 
-  currentColorScheme: Nullable<TColorScheme> = null;
+	currentColorScheme: Nullable<TColorScheme> = null;
 
-  enablePlugins = false;
+	enablePlugins = false;
 
-  pluginOptions = { upload: false, delete: false };
+	pluginOptions = { upload: false, delete: false };
 
-  domainValidator: TDomainValidator | null = null;
+	domainValidator: TDomainValidator | null = null;
 
-  additionalResourcesData: Nullable<TAdditionalResources> = null;
+	additionalResourcesData: Nullable<TAdditionalResources> = null;
 
-  additionalResourcesIsDefault = true;
+	additionalResourcesIsDefault = true;
 
-  companyInfoSettingsData: Nullable<TCompanyInfo> = null;
+	companyInfoSettingsData: Nullable<TCompanyInfo> = null;
 
-  companyInfoSettingsIsDefault = true;
+	companyInfoSettingsIsDefault = true;
 
-  whiteLabelLogoUrls: ILogo[] = [];
+	whiteLabelLogoUrls: ILogo[] = [];
 
-  standalone = false;
+	standalone = false;
 
-  mainBarVisible = false;
+	mainBarVisible = false;
 
-  zendeskKey = null;
+	zendeskKey = null;
 
-  legalTerms = null;
+	legalTerms = null;
 
-  baseDomain: string | null = null;
+	baseDomain: string | null = null;
 
-  portals: Nullable<TPortals[]> = null;
+	portals: Nullable<TPortals[]> = null;
 
-  domain = null;
+	domain = null;
 
-  cspDomains: string[] = [];
+	cspDomains: string[] = [];
 
-  publicRoomKey = "";
+	publicRoomKey = "";
 
-  numberAttempt: number | null = null;
+	numberAttempt: number | null = null;
 
-  blockingTime: number | null = null;
+	blockingTime: number | null = null;
 
-  checkPeriod: number | null = null;
+	checkPeriod: number | null = null;
 
-  userNameRegex = "";
+	userNameRegex = "";
 
-  maxImageUploadSize: number | null = null;
+	maxImageUploadSize: number | null = null;
 
-  windowWidth = window.innerWidth;
+	windowWidth = window.innerWidth;
 
-  windowAngle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
+	windowAngle = window.screen?.orientation?.angle ?? window.orientation ?? 0;
 
-  recaptchaPublicKey: string | null = null;
+	recaptchaPublicKey: string | null = null;
 
-  recaptchaType: RecaptchaType | null = null;
+	recaptchaType: RecaptchaType | null = null;
 
-  displayAbout: boolean = false;
+	displayAbout: boolean = false;
 
-  deepLinkType: DeepLinkType = DeepLinkType.Choice;
+	deepLinkType: DeepLinkType = DeepLinkType.Choice;
 
-  isDefaultPasswordProtection: boolean = false;
+	isDefaultPasswordProtection: boolean = false;
 
-  isBannerVisible = false;
+	isBannerVisible = false;
 
-  logoText = "";
+	logoText = "";
 
-  limitedAccessDevToolsForUsers = false;
+	limitedAccessDevToolsForUsers = false;
 
-  allowInvitingGuests: boolean | null = null;
+	allowInvitingGuests: boolean | null = null;
 
-  allowInvitingMembers: boolean | null = null;
+	allowInvitingMembers: boolean | null = null;
 
-  hasGuests: boolean | null = null;
+	hasGuests: boolean | null = null;
 
-  scrollToSettings: boolean = false;
+	scrollToSettings: boolean = false;
 
-  displayBanners: boolean = false;
+	displayBanners: boolean = false;
 
-  apiKeys: TApiKey[] = [];
+	apiKeys: TApiKey[] = [];
 
-  permissions: string[] = [];
+	permissions: string[] = [];
 
-  errorKeys: Error | null = null;
+	errorKeys: Error | null = null;
 
-  abortControllerArr: Nullable<AbortController>[] = [];
+	abortControllerArr: Nullable<AbortController>[] = [];
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+	aiConfig: Nullable<TAIConfig> = null;
 
-  clearAbortControllerArr = () => {
-    this.abortControllerArr.forEach((controller) => {
-      controller?.abort();
-    });
-    this.abortControllerArr = [];
-  };
+	constructor() {
+		makeAutoObservable(this);
+	}
 
-  addAbortControllers = (controllers: AbortController[] | AbortController) => {
-    if (Array.isArray(controllers)) {
-      this.abortControllerArr.push(...controllers);
-    } else {
-      this.abortControllerArr.push(controllers);
-    }
-  };
+	clearAbortControllerArr = () => {
+		this.abortControllerArr.forEach((controller) => {
+			controller?.abort();
+		});
+		this.abortControllerArr = [];
+	};
 
-  setLogoText = (logoText: string) => {
-    this.logoText = logoText;
-  };
+	addAbortControllers = (controllers: AbortController[] | AbortController) => {
+		if (Array.isArray(controllers)) {
+			this.abortControllerArr.push(...controllers);
+		} else {
+			this.abortControllerArr.push(controllers);
+		}
+	};
 
-  setTenantStatus = (tenantStatus: TenantStatus) => {
-    this.tenantStatus = tenantStatus;
-  };
+	setLogoText = (logoText: string) => {
+		this.logoText = logoText;
+	};
 
-  setApiKeys = (apiKeys: TApiKey[]) => {
-    this.apiKeys = apiKeys;
-  };
+	setTenantStatus = (tenantStatus: TenantStatus) => {
+		this.tenantStatus = tenantStatus;
+	};
 
-  setPermissions = (permissions: string[]) => {
-    this.permissions = permissions;
-  };
+	setApiKeys = (apiKeys: TApiKey[]) => {
+		this.apiKeys = apiKeys;
+	};
 
-  setErrorKeys = (error: Error | null) => {
-    this.errorKeys = error;
-  };
+	setPermissions = (permissions: string[]) => {
+		this.permissions = permissions;
+	};
 
-  get wizardCompleted() {
-    return this.isLoaded && !this.wizardToken;
-  }
+	setErrorKeys = (error: Error | null) => {
+		this.errorKeys = error;
+	};
 
-  get helpCenterDomain() {
-    return this.externalResources?.helpcenter?.domain;
-  }
+	get wizardCompleted() {
+		return this.isLoaded && !this.wizardToken;
+	}
 
-  get helpCenterEntries() {
-    return this.externalResources?.helpcenter?.entries;
-  }
+	get helpCenterDomain() {
+		return this.externalResources?.helpcenter?.domain;
+	}
 
-  get apiDomain() {
-    return this.externalResources?.api?.domain;
-  }
+	get helpCenterEntries() {
+		return this.externalResources?.helpcenter?.entries;
+	}
 
-  get apiEntries() {
-    return this.externalResources?.api?.entries;
-  }
+	get apiDomain() {
+		return this.externalResources?.api?.domain;
+	}
 
-  get siteDomain() {
-    return this.externalResources?.site?.domain;
-  }
+	get apiEntries() {
+		return this.externalResources?.api?.entries;
+	}
 
-  get siteEntries() {
-    return this.externalResources?.site?.entries;
-  }
+	get siteDomain() {
+		return this.externalResources?.site?.domain;
+	}
 
-  get feedbackAndSupportUrl() {
-    return this.externalResources?.support?.domain;
-  }
+	get siteEntries() {
+		return this.externalResources?.site?.entries;
+	}
 
-  get suggestFeatureUrl() {
-    return this.externalResources?.common?.entries?.feedback;
-  }
+	get feedbackAndSupportUrl() {
+		return this.externalResources?.support?.domain;
+	}
 
-  get licenseAgreementsUrl() {
-    return this.externalResources?.common?.entries.license;
-  }
+	get suggestFeatureUrl() {
+		return this.externalResources?.common?.entries?.feedback;
+	}
 
-  get ldapSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.ldap
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.ldap}`
-      : this.helpCenterDomain;
-  }
+	get licenseAgreementsUrl() {
+		return this.externalResources?.common?.entries.license;
+	}
 
-  get portalSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.settings
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.settings}`
-      : this.helpCenterDomain;
-  }
+	get ldapSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.ldap
+			? `${this.helpCenterDomain}${this.helpCenterEntries.ldap}`
+			: this.helpCenterDomain;
+	}
 
-  get integrationSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.integrationsettings
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.integrationsettings}`
-      : this.helpCenterDomain;
-  }
+	get portalSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.settings
+			? `${this.helpCenterDomain}${this.helpCenterEntries.settings}`
+			: this.helpCenterDomain;
+	}
 
-  get docuSignUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectdocusign
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectdocusign}`
-      : this.helpCenterDomain;
-  }
+	get integrationSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.integrationsettings
+			? `${this.helpCenterDomain}${this.helpCenterEntries.integrationsettings}`
+			: this.helpCenterDomain;
+	}
 
-  get dropboxUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectdropbox
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectdropbox}`
-      : this.helpCenterDomain;
-  }
+	get docuSignUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectdocusign
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectdocusign}`
+			: this.helpCenterDomain;
+	}
 
-  get boxUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectbox
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectbox}`
-      : this.helpCenterDomain;
-  }
+	get dropboxUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectdropbox
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectdropbox}`
+			: this.helpCenterDomain;
+	}
 
-  get mailRuUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectmailru
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectmailru}`
-      : this.helpCenterDomain;
-  }
+	get boxUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectbox
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectbox}`
+			: this.helpCenterDomain;
+	}
 
-  get oneDriveUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectonedrive
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectonedrive}`
-      : this.helpCenterDomain;
-  }
+	get mailRuUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectmailru
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectmailru}`
+			: this.helpCenterDomain;
+	}
 
-  get microsoftUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectmicrosoft
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectmicrosoft}`
-      : this.helpCenterDomain;
-  }
+	get oneDriveUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectonedrive
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectonedrive}`
+			: this.helpCenterDomain;
+	}
 
-  get googleUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectgoogle
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectgoogle}`
-      : this.helpCenterDomain;
-  }
+	get microsoftUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectmicrosoft
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectmicrosoft}`
+			: this.helpCenterDomain;
+	}
 
-  get facebookUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectfacebook
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectfacebook}`
-      : this.helpCenterDomain;
-  }
+	get googleUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectgoogle
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectgoogle}`
+			: this.helpCenterDomain;
+	}
 
-  get linkedinUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectlinkedin
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectlinkedin}`
-      : this.helpCenterDomain;
-  }
+	get facebookUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectfacebook
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectfacebook}`
+			: this.helpCenterDomain;
+	}
 
-  get clickatellUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectclickatell
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectclickatell}`
-      : this.helpCenterDomain;
-  }
+	get linkedinUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectlinkedin
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectlinkedin}`
+			: this.helpCenterDomain;
+	}
 
-  get smsclUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectsmsc
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectsmsc}`
-      : this.helpCenterDomain;
-  }
+	get clickatellUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectclickatell
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectclickatell}`
+			: this.helpCenterDomain;
+	}
 
-  get firebaseUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectfirebase
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectfirebase}`
-      : this.helpCenterDomain;
-  }
+	get smsclUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectsmsc
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectsmsc}`
+			: this.helpCenterDomain;
+	}
 
-  get appleIDUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectapple
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectapple}`
-      : this.helpCenterDomain;
-  }
+	get firebaseUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectfirebase
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectfirebase}`
+			: this.helpCenterDomain;
+	}
 
-  get weixinUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectweixin
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectweixin}`
-      : this.helpCenterDomain;
-  }
+	get appleIDUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectapple
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectapple}`
+			: this.helpCenterDomain;
+	}
 
-  get telegramUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connecttelegram
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connecttelegram}`
-      : this.helpCenterDomain;
-  }
+	get weixinUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectweixin
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectweixin}`
+			: this.helpCenterDomain;
+	}
 
-  get wordpressUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectwordpress
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectwordpress}`
-      : this.helpCenterDomain;
-  }
+	get telegramUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connecttelegram
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connecttelegram}`
+			: this.helpCenterDomain;
+	}
 
-  get awsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectamazon
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectamazon}`
-      : this.helpCenterDomain;
-  }
+	get wordpressUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectwordpress
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectwordpress}`
+			: this.helpCenterDomain;
+	}
 
-  get googleCloudUrl() {
-    return this.helpCenterDomain &&
-      this.helpCenterEntries?.connectgooglecloudstorage
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectgooglecloudstorage}`
-      : this.helpCenterDomain;
-  }
+	get awsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectamazon
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectamazon}`
+			: this.helpCenterDomain;
+	}
 
-  get rackspaceUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectrackspace
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectrackspace}`
-      : this.helpCenterDomain;
-  }
+	get googleCloudUrl() {
+		return this.helpCenterDomain &&
+			this.helpCenterEntries?.connectgooglecloudstorage
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectgooglecloudstorage}`
+			: this.helpCenterDomain;
+	}
 
-  get selectelUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectselectel
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectselectel}`
-      : this.helpCenterDomain;
-  }
+	get rackspaceUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectrackspace
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectrackspace}`
+			: this.helpCenterDomain;
+	}
 
-  get yandexUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectyandex
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectyandex}`
-      : this.helpCenterDomain;
-  }
+	get selectelUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectselectel
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectselectel}`
+			: this.helpCenterDomain;
+	}
 
-  get vkUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.connectvk
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectvk}`
-      : this.helpCenterDomain;
-  }
+	get yandexUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectyandex
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectyandex}`
+			: this.helpCenterDomain;
+	}
 
-  get languageAndTimeZoneSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.language
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.language}`
-      : this.helpCenterDomain;
-  }
+	get vkUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.connectvk
+			? `${this.helpCenterDomain}${this.helpCenterEntries.connectvk}`
+			: this.helpCenterDomain;
+	}
 
-  get welcomePageSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.welcomepage
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.welcomepage}`
-      : this.helpCenterDomain;
-  }
+	get languageAndTimeZoneSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.language
+			? `${this.helpCenterDomain}${this.helpCenterEntries.language}`
+			: this.helpCenterDomain;
+	}
 
-  get dnsSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.alternativeurl
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.alternativeurl}`
-      : this.helpCenterDomain;
-  }
+	get welcomePageSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.welcomepage
+			? `${this.helpCenterDomain}${this.helpCenterEntries.welcomepage}`
+			: this.helpCenterDomain;
+	}
 
-  get configureDeepLinkUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.configureDeepLink
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.configureDeepLink}`
-      : this.helpCenterDomain;
-  }
+	get dnsSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.alternativeurl
+			? `${this.helpCenterDomain}${this.helpCenterEntries.alternativeurl}`
+			: this.helpCenterDomain;
+	}
 
-  get invitationSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.invitationSettings
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.invitationSettings}`
-      : this.helpCenterDomain;
-  }
+	get configureDeepLinkUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.configureDeepLink
+			? `${this.helpCenterDomain}${this.helpCenterEntries.configureDeepLink}`
+			: this.helpCenterDomain;
+	}
 
-  get singleSignOnUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.singleSignOn
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.singleSignOn}`
-      : this.helpCenterDomain;
-  }
+	get invitationSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.invitationSettings
+			? `${this.helpCenterDomain}${this.helpCenterEntries.invitationSettings}`
+			: this.helpCenterDomain;
+	}
 
-  get pluginsSdkUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.pluginsSdk
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.pluginsSdk}`
-      : this.helpCenterDomain;
-  }
+	get singleSignOnUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.singleSignOn
+			? `${this.helpCenterDomain}${this.helpCenterEntries.singleSignOn}`
+			: this.helpCenterDomain;
+	}
 
-  get smtpUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.smtp
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.smtp}`
-      : this.helpCenterDomain;
-  }
+	get pluginsSdkUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.pluginsSdk
+			? `${this.helpCenterDomain}${this.helpCenterEntries.pluginsSdk}`
+			: this.helpCenterDomain;
+	}
 
-  get dataImportUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.dataImport
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.dataImport}`
-      : this.helpCenterDomain;
-  }
+	get smtpUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.smtp
+			? `${this.helpCenterDomain}${this.helpCenterEntries.smtp}`
+			: this.helpCenterDomain;
+	}
 
-  get apiKeysUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.apikeys
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.apikeys}`
-      : this.helpCenterDomain;
-  }
+	get dataImportUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.dataImport
+			? `${this.helpCenterDomain}${this.helpCenterEntries.dataImport}`
+			: this.helpCenterDomain;
+	}
 
-  get renamingSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.renaming
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.renaming}`
-      : this.helpCenterDomain;
-  }
+	get apiKeysUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.apikeys
+			? `${this.helpCenterDomain}${this.helpCenterEntries.apikeys}`
+			: this.helpCenterDomain;
+	}
 
-  get passwordStrengthSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.passwordstrength
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.passwordstrength}`
-      : this.helpCenterDomain;
-  }
+	get renamingSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.renaming
+			? `${this.helpCenterDomain}${this.helpCenterEntries.renaming}`
+			: this.helpCenterDomain;
+	}
 
-  get tfaSettingsUrl() {
-    return this.helpCenterDomain &&
-      this.helpCenterEntries?.twofactorauthentication
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.twofactorauthentication}`
-      : this.helpCenterDomain;
-  }
+	get passwordStrengthSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.passwordstrength
+			? `${this.helpCenterDomain}${this.helpCenterEntries.passwordstrength}`
+			: this.helpCenterDomain;
+	}
 
-  get trustedMailDomainSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.trusteddomain
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.trusteddomain}`
-      : this.helpCenterDomain;
-  }
+	get tfaSettingsUrl() {
+		return this.helpCenterDomain &&
+			this.helpCenterEntries?.twofactorauthentication
+			? `${this.helpCenterDomain}${this.helpCenterEntries.twofactorauthentication}`
+			: this.helpCenterDomain;
+	}
 
-  get ipSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.ipsecurity
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.ipsecurity}`
-      : this.helpCenterDomain;
-  }
+	get trustedMailDomainSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.trusteddomain
+			? `${this.helpCenterDomain}${this.helpCenterEntries.trusteddomain}`
+			: this.helpCenterDomain;
+	}
 
-  get bruteForceProtectionUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.login
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.login}`
-      : this.helpCenterDomain;
-  }
-
-  get administratorMessageSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.administratormessage
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.administratormessage}`
-      : this.helpCenterDomain;
-  }
-
-  get lifetimeSettingsUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.sessionlifetime
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.sessionlifetime}`
-      : this.helpCenterDomain;
-  }
-
-  get dataBackupUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.creatingbackup
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.creatingbackup}`
-      : this.helpCenterDomain;
-  }
-
-  get automaticBackupUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.autobackup
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.autobackup}`
-      : this.helpCenterDomain;
-  }
-
-  get walletHelpUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.configuringsettings
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.configuringsettings}`
-      : this.helpCenterDomain;
-  }
-
-  get webhooksGuideUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.administrationguides
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.administrationguides}`
-      : this.helpCenterDomain;
-  }
-
-  get dataReassignmentUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.managingusers
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.managingusers}`
-      : this.helpCenterDomain;
-  }
-
-  get installationGuidesUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.enterpriseinstall
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstall}`
-      : this.helpCenterDomain;
-  }
-
-  get apiOAuthLink() {
-    return this.helpCenterDomain && this.helpCenterEntries?.oauth
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.oauth}`
-      : this.helpCenterDomain;
-  }
-
-  get accessRightsLink() {
-    return this.helpCenterDomain && this.helpCenterEntries?.accessrights
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.accessrights}`
-      : this.helpCenterDomain;
-  }
-
-  get sdkLink() {
-    return this.apiDomain && this.apiEntries?.["javascript-sdk"]
-      ? `${this.apiDomain}${this.apiEntries["javascript-sdk"]}`
-      : this.apiDomain;
-  }
-
-  get apiBasicLink() {
-    return this.apiDomain && this.apiEntries?.docspace
-      ? `${this.apiDomain}${this.apiEntries.docspace}`
-      : this.apiDomain;
-  }
-
-  get apiPluginSDKLink() {
-    return this.apiDomain && this.apiEntries?.["plugins-sdk"]
-      ? `${this.apiDomain}${this.apiEntries["plugins-sdk"]}`
-      : this.apiDomain;
-  }
-
-  get forEnterprisesUrl() {
-    return this.siteDomain && this.siteEntries?.forenterprises
-      ? `${this.siteDomain}${this.siteEntries.forenterprises}`
-      : this.siteDomain;
-  }
-
-  get demoOrderUrl() {
-    return this.siteDomain && this.siteEntries?.demoorder
-      ? `${this.siteDomain}${this.siteEntries.demoorder}`
-      : this.siteDomain;
-  }
-
-  get desktopUrl() {
-    return this.siteDomain && this.siteEntries?.desktop
-      ? `${this.siteDomain}${this.siteEntries.desktop}`
-      : this.siteDomain;
-  }
-
-  get privateRoomsUrl() {
-    return this.siteDomain && this.siteEntries?.privaterooms
-      ? `${this.siteDomain}${this.siteEntries.privaterooms}`
-      : this.siteDomain;
-  }
-
-  get allConnectorsUrl() {
-    return this.siteDomain && this.siteEntries?.allconnectors
-      ? `${this.siteDomain}${this.siteEntries.allconnectors}`
-      : this.siteDomain;
-  }
-
-  get zoomUrl() {
-    return this.siteDomain && this.siteEntries?.officeforzoom
-      ? `${this.siteDomain}${this.siteEntries.officeforzoom}`
-      : this.siteDomain;
-  }
-
-  get wordPressUrl() {
-    return this.siteDomain && this.siteEntries?.officeforwordpress
-      ? `${this.siteDomain}${this.siteEntries.officeforwordpress}`
-      : this.siteDomain;
-  }
-
-  get drupalUrl() {
-    return this.siteDomain && this.siteEntries?.officefordrupal
-      ? `${this.siteDomain}${this.siteEntries.officefordrupal}`
-      : this.siteDomain;
-  }
-
-  get storageManagementUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.storagemanagement
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.storagemanagement}`
-      : this.helpCenterDomain;
-  }
-
-  get enterpriseInstallScriptUrl() {
-    return this.helpCenterDomain &&
-      this.helpCenterEntries?.enterpriseinstallscript
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstallscript}`
-      : this.helpCenterDomain;
-  }
-
-  get enterpriseInstallWindowsUrl() {
-    return this.helpCenterDomain &&
-      this.helpCenterEntries?.enterpriseinstallwindows
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstallwindows}`
-      : this.helpCenterDomain;
-  }
-
-  get downloaddesktopUrl() {
-    return this.siteDomain && this.siteEntries?.downloaddesktop
-      ? `${this.siteDomain}${this.siteEntries.downloaddesktop}`
-      : null;
-  }
-
-  get officeforandroidUrl() {
-    return this.siteDomain && this.siteEntries?.officeforandroid
-      ? `${this.siteDomain}${this.siteEntries.officeforandroid}`
-      : null;
-  }
-
-  get officeforiosUrl() {
-    return this.siteDomain && this.siteEntries?.officeforios
-      ? `${this.siteDomain}${this.siteEntries.officeforios}`
-      : null;
-  }
-
-  get forumLinkUrl() {
-    return this.externalResources?.forum?.domain;
-  }
-
-  get becometranslatorUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.becometranslator
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.becometranslator}`
-      : this.helpCenterDomain;
-  }
-
-  get requestEntriesUrl() {
-    return this.externalResources?.support?.entries?.request;
-  }
-
-  get requestSupportUrl() {
-    return this.feedbackAndSupportUrl && this.requestEntriesUrl
-      ? `${this.feedbackAndSupportUrl}${this.requestEntriesUrl}`
-      : this.feedbackAndSupportUrl;
-  }
-
-  get documentationEmail() {
-    return this.externalResources?.common?.entries?.documentationemail;
-  }
-
-  get bookTrainingEmail() {
-    return this.externalResources?.common?.entries?.booktrainingemail;
-  }
-
-  get appearanceBlockHelpUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.appearance
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.appearance}`
-      : this.helpCenterDomain;
-  }
-
-  get docspaceFaqUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.docspacefaq
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacefaq}`
-      : this.helpCenterDomain;
-  }
-
-  get limitedDevToolsBlockHelpUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.limiteddevtools
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.limiteddevtools}`
-      : this.helpCenterDomain;
-  }
-
-  get encryptionBlockHelpUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.encryption
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.encryption}`
-      : this.helpCenterDomain;
-  }
-
-  get docspaceManagingRoomsHelpUrl() {
-    return this.helpCenterDomain &&
-      this.helpCenterEntries?.docspacemanagingrooms
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacemanagingrooms}`
-      : this.helpCenterDomain;
-  }
-
-  setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
-    this.isDesktopClientInit = isDesktopClientInit;
-  };
-
-  setMainBarVisible = (visible: boolean) => {
-    this.mainBarVisible = visible;
-  };
-
-  setValue = <T>(key: keyof SettingsStore, value: T) => {
-    if (key in this)
-      // @ts-expect-error is always writable property
-      this[key] = value;
-  };
-
-  setCheckedMaintenance = (checkedMaintenance: boolean) => {
-    this.checkedMaintenance = checkedMaintenance;
-  };
-
-  setMaintenanceExist = (maintenanceExist: boolean) => {
-    this.maintenanceExist = maintenanceExist;
-  };
-
-  setSnackbarExist = (snackbar: boolean) => {
-    this.snackbarExist = snackbar;
-  };
-
-  setDefaultPage = (defaultPage: string) => {
-    this.defaultPage = defaultPage;
-  };
-
-  setPortalDomain = (domain: string) => {
-    this.baseDomain = domain;
-  };
-
-  setPortals = (portals: TPortals[]) => {
-    this.portals = portals;
-  };
-
-  setGreetingSettings = (greetingSettings: string) => {
-    this.greetingSettings = greetingSettings;
-  };
-
-  getSettings = async () => {
-    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
-
-    if (window.AscDesktopEditor !== undefined) {
-      const dp = combineUrl(window.ClientConfig?.proxy?.url, MEDIA_VIEW_URL);
-      this.setDefaultPage(dp);
-    }
-
-    if (!settings) return;
-
-    Object.keys(settings).forEach((forEachKey) => {
-      const key = forEachKey as keyof TSettings;
-
-      if (key in this && settings) {
-        if (key === "socketUrl") {
-          this.setSocketUrl(settings[key]);
-          return;
-        }
-
-        this.setValue(
-          key as keyof SettingsStore,
-          key === "defaultPage"
-            ? combineUrl(window.ClientConfig?.proxy?.url, settings[key])
-            : settings[key],
-        );
-
-        if (key === "culture") {
-          if (settings?.wizardToken) return;
-          const language = getCookie(LANGUAGE);
-          if (!language || language === "undefined") {
-            setCookie(LANGUAGE, settings[key], {
-              "max-age": COOKIE_EXPIRATION_YEAR,
-            });
-          }
-        }
-      } else if (key === "passwordHash" && settings) {
-        this.setValue("hashSettings", settings[key]);
-      }
-    });
-
-    this.setGreetingSettings(settings.greetingSettings);
-
-    return settings;
-  };
-
-  getFolderPath = async (id: number) => {
-    this.folderPath = await api.files.getFolderPath(id);
-  };
-
-  getCustomSchemaList = async () => {
-    this.customSchemaList = await api.settings.getCustomSchemaList();
-  };
-
-  getPortalSettings = async () => {
-    const origSettings = await this.getSettings().catch((err) => {
-      if (err?.response?.status === 404) {
-        // portal not found
-
-        const wrongportalname =
-          (typeof window !== "undefined" &&
-            window.ClientConfig?.wrongPortalNameUrl) ||
-          `https://www.onlyoffice.com/wrongportalname.aspx`;
-
-        const url = new URL(wrongportalname);
-        url.searchParams.append("url", window.location.hostname);
-        url.searchParams.append("ref", window.location.href);
-        return window.location.replace(url);
-      }
-
-      if (err?.response?.status === 403) {
-        // access to the portal is restricted
-        window.DocSpace.navigate("/access-restricted", {
-          state: { isRestrictionError: true },
-          replace: true,
-        });
-      }
-    });
-
-    if (origSettings?.plugins?.enabled) {
-      this.enablePlugins = origSettings.plugins.enabled;
-
-      this.pluginOptions = {
-        upload: origSettings.plugins.upload,
-        delete: origSettings.plugins.delete,
-      };
-    }
-
-    if (origSettings?.tenantAlias) {
-      this.setTenantAlias(origSettings.tenantAlias);
-    }
-
-    if (origSettings?.domainValidator) {
-      this.domainValidator = origSettings.domainValidator;
-    }
-
-    if (origSettings?.tagManagerId) {
-      insertTagManager(origSettings.tagManagerId);
-    }
-  };
-
-  getDebugInfo = async () => {
-    let response = this.debugInfoData;
-    try {
-      if (response) return response;
-
-      response = (await api.debuginfo.loadDebugInfo()) as string;
-      this.debugInfoData = response;
-    } catch (e) {
-      console.error("getDebugInfo failed", (e as Error).message);
-      response = `Debug info load failed (${(e as Error).message})`;
-    }
-
-    runInAction(() => {
-      this.debugInfoData = response;
-    });
-
-    return response;
-  };
-
-  get isPortalDeactivate() {
-    return this.tenantStatus === TenantStatus.PortalDeactivate;
-  }
-
-  get isPortalRestoring() {
-    return this.tenantStatus === TenantStatus.PortalRestore;
-  }
-
-  init = async () => {
-    this.setIsLoading(true);
-
-    try {
-      await Promise.all([this.getPortalSettings(), this.getAppearanceTheme()]);
-
-      if (!this.isPortalDeactivate) {
-        await this.getBuildVersionInfo();
-      }
-    } catch (error) {
-      if (isRequestAborted(error)) return;
-
-      console.error(error);
-    } finally {
-      this.setIsLoading(false);
-      this.setIsLoaded(true);
-      this.setIsFirstLoaded(true);
-    }
-  };
-
-  setRoomsMode = (mode: boolean) => {
-    this.roomsMode = mode;
-  };
-
-  setIsLoading = (isLoading: boolean) => {
-    this.isLoading = isLoading;
-  };
-
-  setIsLoaded = (isLoaded: boolean) => {
-    this.isLoaded = isLoaded;
-  };
-
-  setIsFirstLoaded = (isFirstLoaded: boolean) => {
-    this.isFirstLoaded = isFirstLoaded;
-  };
-
-  setCultures = (cultures: string[]) => {
-    this.cultures = cultures;
-  };
-
-  setAdditionalResourcesData = (data: TAdditionalResources) => {
-    this.additionalResourcesData = data;
-  };
-
-  setAdditionalResourcesIsDefault = (additionalResourcesIsDefault: boolean) => {
-    this.additionalResourcesIsDefault = additionalResourcesIsDefault;
-  };
-
-  getAdditionalResources = async () => {
-    const res = await api.settings.getAdditionalResources();
-
-    this.setAdditionalResourcesData(res);
-    this.setAdditionalResourcesIsDefault(res.isDefault);
-
-    if (!this.isFirstLoaded && !this.isLoading) {
-      this.getSettings();
-    }
-  };
-
-  getPortalCultures = async () => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const cultures = await api.settings.getPortalCultures(
-        abortController.signal,
-      );
-      this.setCultures(cultures);
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  setIsEncryptionSupport = (isEncryptionSupport: boolean) => {
-    this.isEncryptionSupport = isEncryptionSupport;
-  };
-
-  getIsEncryptionSupport = async () => {
-    const isEncryptionSupport = await api.files.getIsEncryptionSupport();
-    this.setIsEncryptionSupport(isEncryptionSupport);
-  };
-
-  updateEncryptionKeys = (encryptionKeys: {
-    [key: string]: string | boolean;
-  }) => {
-    this.encryptionKeys = encryptionKeys ?? {};
-  };
-
-  setEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
-    await api.files.setEncryptionKeys(keys);
-    this.updateEncryptionKeys(keys);
-  };
-
-  setCompanyInfoSettingsData = (data: TCompanyInfo) => {
-    this.companyInfoSettingsData = data;
-  };
-
-  setCompanyInfoSettingsIsDefault = (companyInfoSettingsIsDefault: boolean) => {
-    this.companyInfoSettingsIsDefault = companyInfoSettingsIsDefault;
-  };
-
-  setLogoUrl = (url: ILogo[]) => {
-    [this.logoUrl] = url;
-  };
-
-  setLogoUrls = (urls: ILogo[]) => {
-    this.whiteLabelLogoUrls = urls;
-  };
-
-  getCompanyInfoSettings = async () => {
-    const res = await api.settings.getCompanyInfoSettings();
-
-    this.setCompanyInfoSettingsData(res);
-    this.setCompanyInfoSettingsIsDefault(res.isDefault);
-    this.getSettings();
-  };
-
-  getWhiteLabelLogoUrls = async () => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const res = await api.settings.getLogoUrls(
-        null,
-        isManagement(),
-        abortController.signal,
-      );
-
-      this.setLogoUrls(Object.values(res));
-      this.setLogoUrl(Object.values(res));
-
-      return res;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-
-      throw e;
-    }
-  };
-
-  getDomainName = async () => {
-    const res = await api.management.getDomainName();
-    const { settings } = res;
-    this.setPortalDomain(settings);
-    return settings;
-  };
-
-  getAllPortals = async () => {
-    try {
-      const res = await api.management.getAllPortals();
-      this.setPortals(res.tenants);
-      return res;
-    } catch (e) {
-      toastr.error(e as string);
-    }
-  };
-
-  getPortals = async () => {
-    await this.getAllPortals();
-  };
-
-  getEncryptionKeys = async () => {
-    const encryptionKeys = await api.files.getEncryptionKeys();
-    this.updateEncryptionKeys(encryptionKeys);
-  };
-
-  setModuleInfo = (homepage: string, productId: string) => {
-    if (this.homepage === homepage || this.currentProductId === productId)
-      return;
-
-    // console.log(`setModuleInfo('${homepage}', '${productId}')`);
-
-    this.homepage = homepage;
-    this.setCurrentProductId(productId);
-
-    const baseElm = document.getElementsByTagName("base");
-    if (baseElm && baseElm.length === 1) {
-      const baseUrl = homepage
-        ? homepage[homepage.length - 1] === "/"
-          ? homepage
-          : `${homepage}/`
-        : "/";
-
-      baseElm[0].setAttribute("href", baseUrl);
-    }
-  };
-
-  setCurrentProductId = (currentProductId: string) => {
-    this.currentProductId = currentProductId;
-  };
-
-  setPortalOwner = (owner: TUser) => {
-    this.owner = owner;
-  };
-
-  getPortalOwner = async () => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const owner = await api.people.getUserById(
-        this.ownerId,
-        abortController.signal,
-      );
-
-      this.setPortalOwner(owner);
-      return owner;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  setWizardComplete = () => {
-    this.wizardToken = null;
-  };
-
-  setPasswordSettings = (passwordSettings: TPasswordSettings) => {
-    this.passwordSettings = passwordSettings;
-  };
-
-  getPortalPasswordSettings = async (confirmKey = null) => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const settings = await api.settings.getPortalPasswordSettings(
-        confirmKey,
-        abortController.signal,
-      );
-      this.setPasswordSettings(settings);
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  setPortalPasswordSettings = async (
-    minLength: number,
-    upperCase: boolean,
-    digits: boolean,
-    specSymbols: boolean,
-  ) => {
-    const settings = await api.settings.setPortalPasswordSettings(
-      minLength,
-      upperCase,
-      digits,
-      specSymbols,
-    );
-    this.setPasswordSettings(settings);
-  };
-
-  setTimezones = (timezones: TTimeZone[]) => {
-    this.timezones = timezones;
-  };
-
-  getPortalTimezones = async (token = undefined) => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const timezones = await api.settings.getPortalTimezones(
-        token,
-        abortController.signal,
-      );
-
-      this.setTimezones(timezones);
-      return timezones;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  setHeaderVisible = (isHeaderVisible: boolean) => {
-    this.isHeaderVisible = isHeaderVisible;
-  };
-
-  setIsTabletView = (isTabletView: boolean) => {
-    this.isTabletView = isTabletView;
-  };
-
-  setShowText = (showText: boolean) => {
-    this.showText = showText;
-  };
-
-  toggleShowText = () => {
-    const reverseValue = !this.showText;
-
-    localStorage.setItem("showArticle", `${reverseValue}`);
-
-    this.showText = reverseValue;
-  };
-
-  setArticleOpen = (articleOpen: boolean) => {
-    this.articleOpen = articleOpen;
-  };
-
-  toggleArticleOpen = () => {
-    this.articleOpen = !this.articleOpen;
-  };
-
-  setIsMobileArticle = (isMobileArticle: boolean) => {
-    this.isMobileArticle = isMobileArticle;
-  };
-
-  get firebaseHelper() {
-    window.firebaseHelper = new FirebaseHelper(this.firebase);
-    return window.firebaseHelper;
-  }
-
-  setSocketUrl = (url: string) => {
-    this.socketUrl = url;
-
-    const socketUrl =
-      isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
-
-    SocketHelper?.connect(socketUrl, this.publicRoomKey);
-  };
-
-  setPublicRoomKey = (key: string) => {
-    this.publicRoomKey = key;
-
-    const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
-
-    SocketHelper?.connect(socketUrl, key);
-  };
-
-  getBuildVersionInfo = async () => {
-    const versionInfo = await api.settings.getBuildVersion();
-    this.setBuildVersionInfo(versionInfo);
-  };
-
-  setBuildVersionInfo = (versionInfo: TVersionBuild) => {
-    // its release date 3.0.0 for SAAS version
-    const saasV3ReleaseDate = "2024-11-23";
-
-    let releaseDate = this.standalone
-      ? localStorage.getItem(`${versionInfo.docSpace}-release-date`)
-      : new Date(saasV3ReleaseDate).toString();
-
-    if (!releaseDate) {
-      releaseDate = new Date().toString();
-      localStorage.setItem(`${versionInfo.docSpace}-release-date`, releaseDate);
-    }
-
-    this.buildVersionInfo = {
-      ...this.buildVersionInfo,
-      docspace: version,
-      ...versionInfo,
-      releaseDate,
-    };
-
-    if (!this.buildVersionInfo.documentServer)
-      this.buildVersionInfo.documentServer = "6.4.1";
-  };
-
-  setTheme = (key: ThemeKeys) => {
-    let theme: null | ThemeKeys.BaseStr | ThemeKeys.DarkStr = null;
-    switch (key) {
-      case ThemeKeys.Base:
-      case ThemeKeys.BaseStr:
-        theme = ThemeKeys.BaseStr;
-        break;
-      case ThemeKeys.Dark:
-      case ThemeKeys.DarkStr:
-        theme = ThemeKeys.DarkStr;
-        break;
-      case ThemeKeys.System:
-      case ThemeKeys.SystemStr:
-      default:
-        theme =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? ThemeKeys.DarkStr
-            : ThemeKeys.BaseStr;
-        theme = getSystemTheme();
-    }
-
-    this.theme = themes[theme];
-  };
-
-  setMailDomainSettings = async (data: TMailDomainSettings) => {
-    const res = await api.settings.setMailDomainSettings(data);
-    this.trustedDomainsType = data.type;
-    this.trustedDomains = data.domains;
-    return res;
-  };
-
-  setTenantAlias = (tenantAlias: string) => {
-    this.tenantAlias = tenantAlias;
-  };
-
-  getIpRestrictions = async () => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const res = await api.settings.getIpRestrictions(abortController.signal);
-      this.ipRestrictions = res?.map((el) => el.ip);
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  setIpRestrictions = async (ips: string[], enable: boolean) => {
-    const data = {
-      IpRestrictions: ips,
-      enable,
-    };
-    const res = await api.settings.setIpRestrictions(data);
-
-    this.ipRestrictions = res?.ipRestrictions.map((el) => el.ip);
-    this.ipRestrictionEnable = res?.enable;
-  };
-
-  getIpRestrictionsEnable = async () => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const res = await api.settings.getIpRestrictionsEnable(
-        abortController.signal,
-      );
-      this.ipRestrictionEnable = res.enable;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  getInvitationSettings = async () => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const res = await api.settings.getInvitationSettings(
-        abortController.signal,
-      );
-      this.allowInvitingGuests = res.allowInvitingGuests;
-      this.allowInvitingMembers = res.allowInvitingMembers;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  setInvitationSettings = async (
-    allowInvitingGuests: boolean,
-    allowInvitingMembers: boolean,
-  ) => {
-    const data = {
-      allowInvitingGuests,
-      allowInvitingMembers,
-    };
-    const res = await api.settings.setInvitationSettings(data);
-
-    this.allowInvitingGuests = res.allowInvitingGuests;
-    this.allowInvitingMembers = res.allowInvitingMembers;
-  };
-
-  setMessageSettings = async (turnOn: boolean) => {
-    await api.settings.setMessageSettings(turnOn);
-    this.enableAdmMess = turnOn;
-  };
-
-  getSessionLifetime = async () => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const res = await api.settings.getCookieSettings(abortController.signal);
-      this.enabledSessionLifetime = res.enabled;
-      this.sessionLifetime = res.lifeTime;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  setSessionLifetimeSettings = async (lifeTime: number, enabled: boolean) => {
-    const res = await api.settings.setCookieSettings(lifeTime, enabled);
-
-    this.enabledSessionLifetime = enabled;
-    this.sessionLifetime = lifeTime;
-
-    return res;
-  };
-
-  setBruteForceProtectionSettings = (settings: TLoginSettings) => {
-    this.numberAttempt = settings.attemptCount;
-    this.blockingTime = settings.blockTime;
-    this.checkPeriod = settings.checkPeriod;
-    this.isDefaultPasswordProtection = settings.isDefault;
-  };
-
-  getBruteForceProtection = async () => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const res = await api.settings.getBruteForceProtection(
-        abortController.signal,
-      );
-      this.setBruteForceProtectionSettings(res);
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  setIsBurgerLoading = (isBurgerLoading: boolean) => {
-    this.isBurgerLoading = isBurgerLoading;
-  };
-
-  setHotkeyPanelVisible = (hotkeyPanelVisible: boolean) => {
-    this.hotkeyPanelVisible = hotkeyPanelVisible;
-  };
-
-  setFrameConfig = async (frameConfig: TFrameConfig) => {
-    runInAction(() => {
-      this.frameConfig = frameConfig;
-    });
-
-    if (frameConfig) {
-      frameCallEvent({
-        event: "onAppReady",
-        data: { frameId: frameConfig.frameId },
-      });
-    }
-    return frameConfig;
-  };
-
-  get isFrame() {
-    const isFrame = this.frameConfig
-      ? window.name.includes(this.frameConfig?.name as string)
-      : false;
-
-    if (window.ClientConfig) window.ClientConfig.isFrame = isFrame;
-
-    return isFrame;
-  }
-
-  setAppearanceTheme = (theme: TColorScheme[]) => {
-    this.appearanceTheme = theme;
-  };
-
-  setSelectThemeId = (selected: number) => {
-    this.selectedThemeId = selected;
-  };
-
-  setCurrentColorScheme = (currentColorScheme: TColorScheme) => {
-    this.currentColorScheme = currentColorScheme;
-  };
-
-  getAppearanceTheme = async () => {
-    const res: Nullable<TGetColorTheme> =
-      await api.settings.getAppearanceTheme();
-
-    const currentColorScheme = res.themes.find((theme) => {
-      return res && res.selected === theme.id;
-    });
-
-    this.setAppearanceTheme(res.themes);
-    this.setSelectThemeId(res.selected);
-
-    if (currentColorScheme) this.setCurrentColorScheme(currentColorScheme);
-  };
-
-  setInterfaceDirection = (direction: string) => {
-    this.interfaceDirection = direction;
-    localStorage.setItem("interfaceDirection", direction);
-  };
-
-  setCSPDomains = (domains: string[]) => {
-    this.cspDomains = domains;
-  };
-
-  getCSPSettings = async () => {
-    const abortController = new AbortController();
-    this.addAbortControllers(abortController);
-
-    try {
-      const { domains } = await api.settings.getCSPSettings(
-        abortController.signal,
-      );
-
-      this.setCSPDomains(domains || []);
-
-      return domains;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  setCSPSettings = async (data: string[]) => {
-    try {
-      const { domains } = await api.settings.setCSPSettings(data);
-
-      this.setCSPDomains(domains);
-
-      return domains;
-    } catch (e) {
-      toastr.error(e as TData);
-
-      throw e;
-    }
-  };
-
-  setWindowAngle = (angle: number) => {
-    this.windowAngle = angle;
-  };
-
-  setWindowWidth = (width: number) => {
-    if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile)
-      return;
-
-    if (isTablet(width) && isTablet(this.windowWidth)) return;
-
-    if (width > deviceSize.desktop && this.windowWidth > deviceSize.desktop)
-      return;
-
-    this.windowWidth = width;
-  };
-
-  get currentDeviceType() {
-    return getDeviceTypeByWidth(this.windowWidth);
-  }
-
-  get deviceType() {
-    const angleByRadians = (Math.PI / 180) * this.windowAngle;
-
-    const width = Math.abs(
-      Math.round(
-        Math.sin(angleByRadians) * window.innerHeight +
-          Math.cos(angleByRadians) * this.windowWidth,
-      ),
-    );
-
-    return getDeviceTypeByWidth(width);
-  }
-
-  get enablePortalRename() {
-    return (
-      !this.standalone || (this.standalone && this.baseDomain !== "localhost")
-    );
-  }
-
-  openUrl = (url: string, action: UrlActionType, replace: boolean = false) => {
-    openUrl({
-      url,
-      action,
-      replace,
-      isFrame: this.isFrame,
-      frameConfig: this.frameConfig,
-    });
-  };
-
-  checkEnablePortalSettings = (isPaid: boolean) => {
-    return isManagement() && this.portals?.length === 1 ? false : isPaid;
-  };
-
-  setIsBannerVisible = (visible: boolean) => {
-    this.isBannerVisible = visible;
-  };
-
-  setDevToolsAccessSettings = async (enable: string) => {
-    const boolEnable = enable === "true";
-    await api.settings.setLimitedAccessForUsers(boolEnable);
-    this.limitedAccessDevToolsForUsers = boolEnable;
-  };
-
-  get accessDevToolsForUsers() {
-    return this.limitedAccessDevToolsForUsers.toString();
-  }
-
-  checkGuests = async () => {
-    const filterDefault = Filter.getDefault();
-    filterDefault.area = "guests";
-    const res = await api.people.getUserList(filterDefault);
-    this.hasGuests = !!res.total;
-  };
-
-  setScrollToSettings = (scrollToSettings: boolean) => {
-    this.scrollToSettings = scrollToSettings;
-  };
-
-  setDisplayBanners = (displayBanners: boolean) => {
-    this.displayBanners = displayBanners;
-  };
+	get ipSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.ipsecurity
+			? `${this.helpCenterDomain}${this.helpCenterEntries.ipsecurity}`
+			: this.helpCenterDomain;
+	}
+
+	get bruteForceProtectionUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.login
+			? `${this.helpCenterDomain}${this.helpCenterEntries.login}`
+			: this.helpCenterDomain;
+	}
+
+	get administratorMessageSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.administratormessage
+			? `${this.helpCenterDomain}${this.helpCenterEntries.administratormessage}`
+			: this.helpCenterDomain;
+	}
+
+	get lifetimeSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.sessionlifetime
+			? `${this.helpCenterDomain}${this.helpCenterEntries.sessionlifetime}`
+			: this.helpCenterDomain;
+	}
+
+	get dataBackupUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.creatingbackup
+			? `${this.helpCenterDomain}${this.helpCenterEntries.creatingbackup}`
+			: this.helpCenterDomain;
+	}
+
+	get automaticBackupUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.autobackup
+			? `${this.helpCenterDomain}${this.helpCenterEntries.autobackup}`
+			: this.helpCenterDomain;
+	}
+
+	get walletHelpUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.configuringsettings
+			? `${this.helpCenterDomain}${this.helpCenterEntries.configuringsettings}`
+			: this.helpCenterDomain;
+	}
+
+	get webhooksGuideUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.administrationguides
+			? `${this.helpCenterDomain}${this.helpCenterEntries.administrationguides}`
+			: this.helpCenterDomain;
+	}
+
+	get dataReassignmentUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.managingusers
+			? `${this.helpCenterDomain}${this.helpCenterEntries.managingusers}`
+			: this.helpCenterDomain;
+	}
+
+	get installationGuidesUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.enterpriseinstall
+			? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstall}`
+			: this.helpCenterDomain;
+	}
+
+	get apiOAuthLink() {
+		return this.helpCenterDomain && this.helpCenterEntries?.oauth
+			? `${this.helpCenterDomain}${this.helpCenterEntries.oauth}`
+			: this.helpCenterDomain;
+	}
+
+	get accessRightsLink() {
+		return this.helpCenterDomain && this.helpCenterEntries?.accessrights
+			? `${this.helpCenterDomain}${this.helpCenterEntries.accessrights}`
+			: this.helpCenterDomain;
+	}
+
+	get sdkLink() {
+		return this.apiDomain && this.apiEntries?.["javascript-sdk"]
+			? `${this.apiDomain}${this.apiEntries["javascript-sdk"]}`
+			: this.apiDomain;
+	}
+
+	get apiBasicLink() {
+		return this.apiDomain && this.apiEntries?.docspace
+			? `${this.apiDomain}${this.apiEntries.docspace}`
+			: this.apiDomain;
+	}
+
+	get apiPluginSDKLink() {
+		return this.apiDomain && this.apiEntries?.["plugins-sdk"]
+			? `${this.apiDomain}${this.apiEntries["plugins-sdk"]}`
+			: this.apiDomain;
+	}
+
+	get forEnterprisesUrl() {
+		return this.siteDomain && this.siteEntries?.forenterprises
+			? `${this.siteDomain}${this.siteEntries.forenterprises}`
+			: this.siteDomain;
+	}
+
+	get demoOrderUrl() {
+		return this.siteDomain && this.siteEntries?.demoorder
+			? `${this.siteDomain}${this.siteEntries.demoorder}`
+			: this.siteDomain;
+	}
+
+	get desktopUrl() {
+		return this.siteDomain && this.siteEntries?.desktop
+			? `${this.siteDomain}${this.siteEntries.desktop}`
+			: this.siteDomain;
+	}
+
+	get privateRoomsUrl() {
+		return this.siteDomain && this.siteEntries?.privaterooms
+			? `${this.siteDomain}${this.siteEntries.privaterooms}`
+			: this.siteDomain;
+	}
+
+	get allConnectorsUrl() {
+		return this.siteDomain && this.siteEntries?.allconnectors
+			? `${this.siteDomain}${this.siteEntries.allconnectors}`
+			: this.siteDomain;
+	}
+
+	get zoomUrl() {
+		return this.siteDomain && this.siteEntries?.officeforzoom
+			? `${this.siteDomain}${this.siteEntries.officeforzoom}`
+			: this.siteDomain;
+	}
+
+	get wordPressUrl() {
+		return this.siteDomain && this.siteEntries?.officeforwordpress
+			? `${this.siteDomain}${this.siteEntries.officeforwordpress}`
+			: this.siteDomain;
+	}
+
+	get drupalUrl() {
+		return this.siteDomain && this.siteEntries?.officefordrupal
+			? `${this.siteDomain}${this.siteEntries.officefordrupal}`
+			: this.siteDomain;
+	}
+
+	get storageManagementUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.storagemanagement
+			? `${this.helpCenterDomain}${this.helpCenterEntries.storagemanagement}`
+			: this.helpCenterDomain;
+	}
+
+	get enterpriseInstallScriptUrl() {
+		return this.helpCenterDomain &&
+			this.helpCenterEntries?.enterpriseinstallscript
+			? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstallscript}`
+			: this.helpCenterDomain;
+	}
+
+	get enterpriseInstallWindowsUrl() {
+		return this.helpCenterDomain &&
+			this.helpCenterEntries?.enterpriseinstallwindows
+			? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstallwindows}`
+			: this.helpCenterDomain;
+	}
+
+	get downloaddesktopUrl() {
+		return this.siteDomain && this.siteEntries?.downloaddesktop
+			? `${this.siteDomain}${this.siteEntries.downloaddesktop}`
+			: null;
+	}
+
+	get officeforandroidUrl() {
+		return this.siteDomain && this.siteEntries?.officeforandroid
+			? `${this.siteDomain}${this.siteEntries.officeforandroid}`
+			: null;
+	}
+
+	get officeforiosUrl() {
+		return this.siteDomain && this.siteEntries?.officeforios
+			? `${this.siteDomain}${this.siteEntries.officeforios}`
+			: null;
+	}
+
+	get forumLinkUrl() {
+		return this.externalResources?.forum?.domain;
+	}
+
+	get becometranslatorUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.becometranslator
+			? `${this.helpCenterDomain}${this.helpCenterEntries.becometranslator}`
+			: this.helpCenterDomain;
+	}
+
+	get requestEntriesUrl() {
+		return this.externalResources?.support?.entries?.request;
+	}
+
+	get requestSupportUrl() {
+		return this.feedbackAndSupportUrl && this.requestEntriesUrl
+			? `${this.feedbackAndSupportUrl}${this.requestEntriesUrl}`
+			: this.feedbackAndSupportUrl;
+	}
+
+	get documentationEmail() {
+		return this.externalResources?.common?.entries?.documentationemail;
+	}
+
+	get bookTrainingEmail() {
+		return this.externalResources?.common?.entries?.booktrainingemail;
+	}
+
+	get appearanceBlockHelpUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.appearance
+			? `${this.helpCenterDomain}${this.helpCenterEntries.appearance}`
+			: this.helpCenterDomain;
+	}
+
+	get docspaceFaqUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.docspacefaq
+			? `${this.helpCenterDomain}${this.helpCenterEntries.docspacefaq}`
+			: this.helpCenterDomain;
+	}
+
+	get limitedDevToolsBlockHelpUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.limiteddevtools
+			? `${this.helpCenterDomain}${this.helpCenterEntries.limiteddevtools}`
+			: this.helpCenterDomain;
+	}
+
+	get encryptionBlockHelpUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.encryption
+			? `${this.helpCenterDomain}${this.helpCenterEntries.encryption}`
+			: this.helpCenterDomain;
+	}
+
+	get docspaceManagingRoomsHelpUrl() {
+		return this.helpCenterDomain &&
+			this.helpCenterEntries?.docspacemanagingrooms
+			? `${this.helpCenterDomain}${this.helpCenterEntries.docspacemanagingrooms}`
+			: this.helpCenterDomain;
+	}
+
+	setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
+		this.isDesktopClientInit = isDesktopClientInit;
+	};
+
+	setMainBarVisible = (visible: boolean) => {
+		this.mainBarVisible = visible;
+	};
+
+	setValue = <T>(key: keyof SettingsStore, value: T) => {
+		if (key in this)
+			// @ts-expect-error is always writable property
+			this[key] = value;
+	};
+
+	setCheckedMaintenance = (checkedMaintenance: boolean) => {
+		this.checkedMaintenance = checkedMaintenance;
+	};
+
+	setMaintenanceExist = (maintenanceExist: boolean) => {
+		this.maintenanceExist = maintenanceExist;
+	};
+
+	setSnackbarExist = (snackbar: boolean) => {
+		this.snackbarExist = snackbar;
+	};
+
+	setDefaultPage = (defaultPage: string) => {
+		this.defaultPage = defaultPage;
+	};
+
+	setPortalDomain = (domain: string) => {
+		this.baseDomain = domain;
+	};
+
+	setPortals = (portals: TPortals[]) => {
+		this.portals = portals;
+	};
+
+	setGreetingSettings = (greetingSettings: string) => {
+		this.greetingSettings = greetingSettings;
+	};
+
+	getSettings = async () => {
+		const settings: Nullable<TSettings> = await api.settings.getSettings(true);
+
+		if (window.AscDesktopEditor !== undefined) {
+			const dp = combineUrl(window.ClientConfig?.proxy?.url, MEDIA_VIEW_URL);
+			this.setDefaultPage(dp);
+		}
+
+		if (!settings) return;
+
+		Object.keys(settings).forEach((forEachKey) => {
+			const key = forEachKey as keyof TSettings;
+
+			if (key in this && settings) {
+				if (key === "socketUrl") {
+					this.setSocketUrl(settings[key]);
+					return;
+				}
+
+				this.setValue(
+					key as keyof SettingsStore,
+					key === "defaultPage"
+						? combineUrl(window.ClientConfig?.proxy?.url, settings[key])
+						: settings[key],
+				);
+
+				if (key === "culture") {
+					if (settings?.wizardToken) return;
+					const language = getCookie(LANGUAGE);
+					if (!language || language === "undefined") {
+						setCookie(LANGUAGE, settings[key], {
+							"max-age": COOKIE_EXPIRATION_YEAR,
+						});
+					}
+				}
+			} else if (key === "passwordHash" && settings) {
+				this.setValue("hashSettings", settings[key]);
+			}
+		});
+
+		this.setGreetingSettings(settings.greetingSettings);
+
+		return settings;
+	};
+
+	getFolderPath = async (id: number) => {
+		this.folderPath = await api.files.getFolderPath(id);
+	};
+
+	getCustomSchemaList = async () => {
+		this.customSchemaList = await api.settings.getCustomSchemaList();
+	};
+
+	getPortalSettings = async () => {
+		const origSettings = await this.getSettings().catch((err) => {
+			if (err?.response?.status === 404) {
+				// portal not found
+
+				const wrongportalname =
+					(typeof window !== "undefined" &&
+						window.ClientConfig?.wrongPortalNameUrl) ||
+					`https://www.onlyoffice.com/wrongportalname.aspx`;
+
+				const url = new URL(wrongportalname);
+				url.searchParams.append("url", window.location.hostname);
+				url.searchParams.append("ref", window.location.href);
+				return window.location.replace(url);
+			}
+
+			if (err?.response?.status === 403) {
+				// access to the portal is restricted
+				window.DocSpace.navigate("/access-restricted", {
+					state: { isRestrictionError: true },
+					replace: true,
+				});
+			}
+		});
+
+		if (origSettings?.plugins?.enabled) {
+			this.enablePlugins = origSettings.plugins.enabled;
+
+			this.pluginOptions = {
+				upload: origSettings.plugins.upload,
+				delete: origSettings.plugins.delete,
+			};
+		}
+
+		if (origSettings?.tenantAlias) {
+			this.setTenantAlias(origSettings.tenantAlias);
+		}
+
+		if (origSettings?.domainValidator) {
+			this.domainValidator = origSettings.domainValidator;
+		}
+
+		if (origSettings?.tagManagerId) {
+			insertTagManager(origSettings.tagManagerId);
+		}
+	};
+
+	getDebugInfo = async () => {
+		let response = this.debugInfoData;
+		try {
+			if (response) return response;
+
+			response = (await api.debuginfo.loadDebugInfo()) as string;
+			this.debugInfoData = response;
+		} catch (e) {
+			console.error("getDebugInfo failed", (e as Error).message);
+			response = `Debug info load failed (${(e as Error).message})`;
+		}
+
+		runInAction(() => {
+			this.debugInfoData = response;
+		});
+
+		return response;
+	};
+
+	get isPortalDeactivate() {
+		return this.tenantStatus === TenantStatus.PortalDeactivate;
+	}
+
+	get isPortalRestoring() {
+		return this.tenantStatus === TenantStatus.PortalRestore;
+	}
+
+	init = async () => {
+		this.setIsLoading(true);
+
+		try {
+			await Promise.all([this.getPortalSettings(), this.getAppearanceTheme()]);
+
+			if (!this.isPortalDeactivate) {
+				await this.getBuildVersionInfo();
+			}
+		} catch (error) {
+			if (isRequestAborted(error)) return;
+
+			console.error(error);
+		} finally {
+			this.setIsLoading(false);
+			this.setIsLoaded(true);
+			this.setIsFirstLoaded(true);
+		}
+	};
+
+	setRoomsMode = (mode: boolean) => {
+		this.roomsMode = mode;
+	};
+
+	setIsLoading = (isLoading: boolean) => {
+		this.isLoading = isLoading;
+	};
+
+	setIsLoaded = (isLoaded: boolean) => {
+		this.isLoaded = isLoaded;
+	};
+
+	setIsFirstLoaded = (isFirstLoaded: boolean) => {
+		this.isFirstLoaded = isFirstLoaded;
+	};
+
+	setCultures = (cultures: string[]) => {
+		this.cultures = cultures;
+	};
+
+	setAdditionalResourcesData = (data: TAdditionalResources) => {
+		this.additionalResourcesData = data;
+	};
+
+	setAdditionalResourcesIsDefault = (additionalResourcesIsDefault: boolean) => {
+		this.additionalResourcesIsDefault = additionalResourcesIsDefault;
+	};
+
+	getAdditionalResources = async () => {
+		const res = await api.settings.getAdditionalResources();
+
+		this.setAdditionalResourcesData(res);
+		this.setAdditionalResourcesIsDefault(res.isDefault);
+
+		if (!this.isFirstLoaded && !this.isLoading) {
+			this.getSettings();
+		}
+	};
+
+	getPortalCultures = async () => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const cultures = await api.settings.getPortalCultures(
+				abortController.signal,
+			);
+			this.setCultures(cultures);
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	setIsEncryptionSupport = (isEncryptionSupport: boolean) => {
+		this.isEncryptionSupport = isEncryptionSupport;
+	};
+
+	getIsEncryptionSupport = async () => {
+		const isEncryptionSupport = await api.files.getIsEncryptionSupport();
+		this.setIsEncryptionSupport(isEncryptionSupport);
+	};
+
+	updateEncryptionKeys = (encryptionKeys: {
+		[key: string]: string | boolean;
+	}) => {
+		this.encryptionKeys = encryptionKeys ?? {};
+	};
+
+	setEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
+		await api.files.setEncryptionKeys(keys);
+		this.updateEncryptionKeys(keys);
+	};
+
+	setCompanyInfoSettingsData = (data: TCompanyInfo) => {
+		this.companyInfoSettingsData = data;
+	};
+
+	setCompanyInfoSettingsIsDefault = (companyInfoSettingsIsDefault: boolean) => {
+		this.companyInfoSettingsIsDefault = companyInfoSettingsIsDefault;
+	};
+
+	setLogoUrl = (url: ILogo[]) => {
+		[this.logoUrl] = url;
+	};
+
+	setLogoUrls = (urls: ILogo[]) => {
+		this.whiteLabelLogoUrls = urls;
+	};
+
+	getCompanyInfoSettings = async () => {
+		const res = await api.settings.getCompanyInfoSettings();
+
+		this.setCompanyInfoSettingsData(res);
+		this.setCompanyInfoSettingsIsDefault(res.isDefault);
+		this.getSettings();
+	};
+
+	getWhiteLabelLogoUrls = async () => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const res = await api.settings.getLogoUrls(
+				null,
+				isManagement(),
+				abortController.signal,
+			);
+
+			this.setLogoUrls(Object.values(res));
+			this.setLogoUrl(Object.values(res));
+
+			return res;
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+
+			throw e;
+		}
+	};
+
+	getDomainName = async () => {
+		const res = await api.management.getDomainName();
+		const { settings } = res;
+		this.setPortalDomain(settings);
+		return settings;
+	};
+
+	getAllPortals = async () => {
+		try {
+			const res = await api.management.getAllPortals();
+			this.setPortals(res.tenants);
+			return res;
+		} catch (e) {
+			toastr.error(e as string);
+		}
+	};
+
+	getPortals = async () => {
+		await this.getAllPortals();
+	};
+
+	getEncryptionKeys = async () => {
+		const encryptionKeys = await api.files.getEncryptionKeys();
+		this.updateEncryptionKeys(encryptionKeys);
+	};
+
+	setModuleInfo = (homepage: string, productId: string) => {
+		if (this.homepage === homepage || this.currentProductId === productId)
+			return;
+
+		// console.log(`setModuleInfo('${homepage}', '${productId}')`);
+
+		this.homepage = homepage;
+		this.setCurrentProductId(productId);
+
+		const baseElm = document.getElementsByTagName("base");
+		if (baseElm && baseElm.length === 1) {
+			const baseUrl = homepage
+				? homepage[homepage.length - 1] === "/"
+					? homepage
+					: `${homepage}/`
+				: "/";
+
+			baseElm[0].setAttribute("href", baseUrl);
+		}
+	};
+
+	setCurrentProductId = (currentProductId: string) => {
+		this.currentProductId = currentProductId;
+	};
+
+	setPortalOwner = (owner: TUser) => {
+		this.owner = owner;
+	};
+
+	getPortalOwner = async () => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const owner = await api.people.getUserById(
+				this.ownerId,
+				abortController.signal,
+			);
+
+			this.setPortalOwner(owner);
+			return owner;
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	setWizardComplete = () => {
+		this.wizardToken = null;
+	};
+
+	setPasswordSettings = (passwordSettings: TPasswordSettings) => {
+		this.passwordSettings = passwordSettings;
+	};
+
+	getPortalPasswordSettings = async (confirmKey = null) => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const settings = await api.settings.getPortalPasswordSettings(
+				confirmKey,
+				abortController.signal,
+			);
+			this.setPasswordSettings(settings);
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	setPortalPasswordSettings = async (
+		minLength: number,
+		upperCase: boolean,
+		digits: boolean,
+		specSymbols: boolean,
+	) => {
+		const settings = await api.settings.setPortalPasswordSettings(
+			minLength,
+			upperCase,
+			digits,
+			specSymbols,
+		);
+		this.setPasswordSettings(settings);
+	};
+
+	setTimezones = (timezones: TTimeZone[]) => {
+		this.timezones = timezones;
+	};
+
+	getPortalTimezones = async (token = undefined) => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const timezones = await api.settings.getPortalTimezones(
+				token,
+				abortController.signal,
+			);
+
+			this.setTimezones(timezones);
+			return timezones;
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	setHeaderVisible = (isHeaderVisible: boolean) => {
+		this.isHeaderVisible = isHeaderVisible;
+	};
+
+	setIsTabletView = (isTabletView: boolean) => {
+		this.isTabletView = isTabletView;
+	};
+
+	setShowText = (showText: boolean) => {
+		this.showText = showText;
+	};
+
+	toggleShowText = () => {
+		const reverseValue = !this.showText;
+
+		localStorage.setItem("showArticle", `${reverseValue}`);
+
+		this.showText = reverseValue;
+	};
+
+	setArticleOpen = (articleOpen: boolean) => {
+		this.articleOpen = articleOpen;
+	};
+
+	toggleArticleOpen = () => {
+		this.articleOpen = !this.articleOpen;
+	};
+
+	setIsMobileArticle = (isMobileArticle: boolean) => {
+		this.isMobileArticle = isMobileArticle;
+	};
+
+	get firebaseHelper() {
+		window.firebaseHelper = new FirebaseHelper(this.firebase);
+		return window.firebaseHelper;
+	}
+
+	setSocketUrl = (url: string) => {
+		this.socketUrl = url;
+
+		const socketUrl =
+			isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
+
+		SocketHelper?.connect(socketUrl, this.publicRoomKey);
+	};
+
+	setPublicRoomKey = (key: string) => {
+		this.publicRoomKey = key;
+
+		const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
+
+		SocketHelper?.connect(socketUrl, key);
+	};
+
+	getBuildVersionInfo = async () => {
+		const versionInfo = await api.settings.getBuildVersion();
+		this.setBuildVersionInfo(versionInfo);
+	};
+
+	setBuildVersionInfo = (versionInfo: TVersionBuild) => {
+		// its release date 3.0.0 for SAAS version
+		const saasV3ReleaseDate = "2024-11-23";
+
+		let releaseDate = this.standalone
+			? localStorage.getItem(`${versionInfo.docSpace}-release-date`)
+			: new Date(saasV3ReleaseDate).toString();
+
+		if (!releaseDate) {
+			releaseDate = new Date().toString();
+			localStorage.setItem(`${versionInfo.docSpace}-release-date`, releaseDate);
+		}
+
+		this.buildVersionInfo = {
+			...this.buildVersionInfo,
+			docspace: version,
+			...versionInfo,
+			releaseDate,
+		};
+
+		if (!this.buildVersionInfo.documentServer)
+			this.buildVersionInfo.documentServer = "6.4.1";
+	};
+
+	setTheme = (key: ThemeKeys) => {
+		let theme: null | ThemeKeys.BaseStr | ThemeKeys.DarkStr = null;
+		switch (key) {
+			case ThemeKeys.Base:
+			case ThemeKeys.BaseStr:
+				theme = ThemeKeys.BaseStr;
+				break;
+			case ThemeKeys.Dark:
+			case ThemeKeys.DarkStr:
+				theme = ThemeKeys.DarkStr;
+				break;
+			case ThemeKeys.System:
+			case ThemeKeys.SystemStr:
+			default:
+				theme =
+					window.matchMedia &&
+					window.matchMedia("(prefers-color-scheme: dark)").matches
+						? ThemeKeys.DarkStr
+						: ThemeKeys.BaseStr;
+				theme = getSystemTheme();
+		}
+
+		this.theme = themes[theme];
+	};
+
+	setMailDomainSettings = async (data: TMailDomainSettings) => {
+		const res = await api.settings.setMailDomainSettings(data);
+		this.trustedDomainsType = data.type;
+		this.trustedDomains = data.domains;
+		return res;
+	};
+
+	setTenantAlias = (tenantAlias: string) => {
+		this.tenantAlias = tenantAlias;
+	};
+
+	getIpRestrictions = async () => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const res = await api.settings.getIpRestrictions(abortController.signal);
+			this.ipRestrictions = res?.map((el) => el.ip);
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	setIpRestrictions = async (ips: string[], enable: boolean) => {
+		const data = {
+			IpRestrictions: ips,
+			enable,
+		};
+		const res = await api.settings.setIpRestrictions(data);
+
+		this.ipRestrictions = res?.ipRestrictions.map((el) => el.ip);
+		this.ipRestrictionEnable = res?.enable;
+	};
+
+	getIpRestrictionsEnable = async () => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const res = await api.settings.getIpRestrictionsEnable(
+				abortController.signal,
+			);
+			this.ipRestrictionEnable = res.enable;
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	getInvitationSettings = async () => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const res = await api.settings.getInvitationSettings(
+				abortController.signal,
+			);
+			this.allowInvitingGuests = res.allowInvitingGuests;
+			this.allowInvitingMembers = res.allowInvitingMembers;
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	setInvitationSettings = async (
+		allowInvitingGuests: boolean,
+		allowInvitingMembers: boolean,
+	) => {
+		const data = {
+			allowInvitingGuests,
+			allowInvitingMembers,
+		};
+		const res = await api.settings.setInvitationSettings(data);
+
+		this.allowInvitingGuests = res.allowInvitingGuests;
+		this.allowInvitingMembers = res.allowInvitingMembers;
+	};
+
+	setMessageSettings = async (turnOn: boolean) => {
+		await api.settings.setMessageSettings(turnOn);
+		this.enableAdmMess = turnOn;
+	};
+
+	getSessionLifetime = async () => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const res = await api.settings.getCookieSettings(abortController.signal);
+			this.enabledSessionLifetime = res.enabled;
+			this.sessionLifetime = res.lifeTime;
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	setSessionLifetimeSettings = async (lifeTime: number, enabled: boolean) => {
+		const res = await api.settings.setCookieSettings(lifeTime, enabled);
+
+		this.enabledSessionLifetime = enabled;
+		this.sessionLifetime = lifeTime;
+
+		return res;
+	};
+
+	setBruteForceProtectionSettings = (settings: TLoginSettings) => {
+		this.numberAttempt = settings.attemptCount;
+		this.blockingTime = settings.blockTime;
+		this.checkPeriod = settings.checkPeriod;
+		this.isDefaultPasswordProtection = settings.isDefault;
+	};
+
+	getBruteForceProtection = async () => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const res = await api.settings.getBruteForceProtection(
+				abortController.signal,
+			);
+			this.setBruteForceProtectionSettings(res);
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	setIsBurgerLoading = (isBurgerLoading: boolean) => {
+		this.isBurgerLoading = isBurgerLoading;
+	};
+
+	setHotkeyPanelVisible = (hotkeyPanelVisible: boolean) => {
+		this.hotkeyPanelVisible = hotkeyPanelVisible;
+	};
+
+	setFrameConfig = async (frameConfig: TFrameConfig) => {
+		runInAction(() => {
+			this.frameConfig = frameConfig;
+		});
+
+		if (frameConfig) {
+			frameCallEvent({
+				event: "onAppReady",
+				data: { frameId: frameConfig.frameId },
+			});
+		}
+		return frameConfig;
+	};
+
+	get isFrame() {
+		const isFrame = this.frameConfig
+			? window.name.includes(this.frameConfig?.name as string)
+			: false;
+
+		if (window.ClientConfig) window.ClientConfig.isFrame = isFrame;
+
+		return isFrame;
+	}
+
+	setAppearanceTheme = (theme: TColorScheme[]) => {
+		this.appearanceTheme = theme;
+	};
+
+	setSelectThemeId = (selected: number) => {
+		this.selectedThemeId = selected;
+	};
+
+	setCurrentColorScheme = (currentColorScheme: TColorScheme) => {
+		this.currentColorScheme = currentColorScheme;
+	};
+
+	getAppearanceTheme = async () => {
+		const res: Nullable<TGetColorTheme> =
+			await api.settings.getAppearanceTheme();
+
+		const currentColorScheme = res.themes.find((theme) => {
+			return res && res.selected === theme.id;
+		});
+
+		this.setAppearanceTheme(res.themes);
+		this.setSelectThemeId(res.selected);
+
+		if (currentColorScheme) this.setCurrentColorScheme(currentColorScheme);
+	};
+
+	getAIConfig = async () => {
+		const res = await api.ai.getAIConfig();
+
+		if (!res) return;
+
+		this.setAIConfig(res);
+	};
+
+	setAIConfig = (config: TAIConfig) => {
+		this.aiConfig = config;
+	};
+
+	setInterfaceDirection = (direction: string) => {
+		this.interfaceDirection = direction;
+		localStorage.setItem("interfaceDirection", direction);
+	};
+
+	setCSPDomains = (domains: string[]) => {
+		this.cspDomains = domains;
+	};
+
+	getCSPSettings = async () => {
+		const abortController = new AbortController();
+		this.addAbortControllers(abortController);
+
+		try {
+			const { domains } = await api.settings.getCSPSettings(
+				abortController.signal,
+			);
+
+			this.setCSPDomains(domains || []);
+
+			return domains;
+		} catch (e) {
+			if (axios.isCancel(e)) return;
+			throw e;
+		}
+	};
+
+	setCSPSettings = async (data: string[]) => {
+		try {
+			const { domains } = await api.settings.setCSPSettings(data);
+
+			this.setCSPDomains(domains);
+
+			return domains;
+		} catch (e) {
+			toastr.error(e as TData);
+
+			throw e;
+		}
+	};
+
+	setWindowAngle = (angle: number) => {
+		this.windowAngle = angle;
+	};
+
+	setWindowWidth = (width: number) => {
+		if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile)
+			return;
+
+		if (isTablet(width) && isTablet(this.windowWidth)) return;
+
+		if (width > deviceSize.desktop && this.windowWidth > deviceSize.desktop)
+			return;
+
+		this.windowWidth = width;
+	};
+
+	get currentDeviceType() {
+		return getDeviceTypeByWidth(this.windowWidth);
+	}
+
+	get deviceType() {
+		const angleByRadians = (Math.PI / 180) * this.windowAngle;
+
+		const width = Math.abs(
+			Math.round(
+				Math.sin(angleByRadians) * window.innerHeight +
+					Math.cos(angleByRadians) * this.windowWidth,
+			),
+		);
+
+		return getDeviceTypeByWidth(width);
+	}
+
+	get enablePortalRename() {
+		return (
+			!this.standalone || (this.standalone && this.baseDomain !== "localhost")
+		);
+	}
+
+	openUrl = (url: string, action: UrlActionType, replace: boolean = false) => {
+		openUrl({
+			url,
+			action,
+			replace,
+			isFrame: this.isFrame,
+			frameConfig: this.frameConfig,
+		});
+	};
+
+	checkEnablePortalSettings = (isPaid: boolean) => {
+		return isManagement() && this.portals?.length === 1 ? false : isPaid;
+	};
+
+	setIsBannerVisible = (visible: boolean) => {
+		this.isBannerVisible = visible;
+	};
+
+	setDevToolsAccessSettings = async (enable: string) => {
+		const boolEnable = enable === "true";
+		await api.settings.setLimitedAccessForUsers(boolEnable);
+		this.limitedAccessDevToolsForUsers = boolEnable;
+	};
+
+	get accessDevToolsForUsers() {
+		return this.limitedAccessDevToolsForUsers.toString();
+	}
+
+	checkGuests = async () => {
+		const filterDefault = Filter.getDefault();
+		filterDefault.area = "guests";
+		const res = await api.people.getUserList(filterDefault);
+		this.hasGuests = !!res.total;
+	};
+
+	setScrollToSettings = (scrollToSettings: boolean) => {
+		this.scrollToSettings = scrollToSettings;
+	};
+
+	setDisplayBanners = (displayBanners: boolean) => {
+		this.displayBanners = displayBanners;
+	};
 }
 
 export { SettingsStore };

@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2025-10-27T16:14:33.461Z",
+  "updated_at": "2025-11-03T12:10:35.152Z",
   "comment": {
     "text": "The translation key \"LearnMore\" is used to display a link or button that encourages users to access more information about a particular topic, in this case, privacy limitations warnings, DNS settings, or language and time zone settings. This text appears as a clickable link or button, prompting users to learn additional details.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 242,
+      "line_number": 245,
       "context": "fontWeight={600}\n isHovered\n href=\"\"\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"AISettings:AddMCPServer\")}",
       "module": "/packages/client"
     },
@@ -246,25 +246,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 287,
+      "line_number": 290,
       "context": "fontSize=\"13px\"\n href={becometranslatorUrl}\n target={LinkTarget.blank}\n dataTestId=\"language_becometranslator_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Text>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 270,
+      "line_number": 272,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n href={customFilterExternalLink}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 426,
+      "line_number": 435,
       "context": "fontSize=\"13px\"\n color={currentColorScheme?.main?.accent}\n isHovered\n dataTestId=\"automatic_backup_learn_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 417,
+      "line_number": 433,
       "context": "fontSize=\"13px\"\n color={currentColorScheme?.main?.accent}\n isHovered\n dataTestId=\"creating_backup_learn_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div className={styles.modules}>",
       "module": "/packages/shared"
     }

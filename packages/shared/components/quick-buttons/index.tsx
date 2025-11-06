@@ -25,9 +25,11 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
+import { memo } from "react";
 import isNil from "lodash/isNil";
 import { Trans } from "react-i18next";
 import { isTablet as isTabletDevice } from "react-device-detect";
+import equal from "fast-deep-equal";
 
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
@@ -57,7 +59,7 @@ import { globalColors } from "../../themes/globalColors";
 import type { QuickButtonsProps } from "./QuickButtons.types";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
-export const QuickButtons = (props: QuickButtonsProps) => {
+export const QuickButtons = memo((props: QuickButtonsProps) => {
   const {
     t,
     item,
@@ -353,4 +355,4 @@ export const QuickButtons = (props: QuickButtonsProps) => {
       ) : null}
     </div>
   );
-};
+}, equal);

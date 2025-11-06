@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2025-10-27T16:14:33.173Z",
+  "updated_at": "2025-11-03T12:10:34.952Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": "};\n }, [onKeyUp]);\n \n const getAccessButtonLabel = () => {\n if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete) {\n return t(\"Common:DeletePermanently\");\n }",
+      "line_number": 194,
+      "context": "};\n }, [onKeyUp]);\n \n const getAccessButtonLabel = () => {\n if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete || isAIAgent) {\n return t(\"Common:DeletePermanently\");\n }",
       "module": "/packages/client"
     },
     {
@@ -186,19 +186,19 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2423,
+      "line_number": 2438,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: () => this.deleteRooms(t),\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2423,
+      "line_number": 2438,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: () => this.deleteRooms(t),\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2423,
+      "line_number": 2438,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: () => this.deleteRooms(t),\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete-agent\":",
       "module": "/packages/client"
     },
@@ -234,7 +234,7 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/SelectChat.tsx",
-      "line_number": 162,
+      "line_number": 191,
       "context": "onClick: onSaveToFileAction,\n },\n { key: \"separator\", isSeparator: true },\n {\n key: \"remove\",\n label: t(\"Common:Delete\"),\n icon: RemoveSvgUrl,\n onClick: onDeleteAction,\n },\n ];\n }, [t, onDeleteAction, onRenameToggle, onSaveToFileAction]);",
       "module": "/packages/shared"
     },

@@ -130,7 +130,6 @@ const InvitePanel = ({
   };
 
   const roomType = selectedRoom ? selectedRoom.roomType : -1;
-  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
@@ -545,8 +544,9 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups={!isPublicRoomType}
+            withGroups
             roomId={roomId}
+            isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}
             withHeader

@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import equal from "fast-deep-equal/react";
@@ -37,7 +37,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import {
   InputSize,
   InputType,
@@ -45,15 +45,16 @@ import {
 } from "@docspace/shared/components/text-input";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { getAiProviderLabel } from "@docspace/shared/utils";
-import {
-  type TAiProvider,
+import type {
+  TAiProvider,
   TCreateAiProvider,
-  type TProviderTypeWithUrl,
-  type TUpdateAiProvider,
+  TProviderTypeWithUrl,
+  TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
-import { TData, toastr } from "@docspace/shared/components/toast";
+import { type TData, toastr } from "@docspace/shared/components/toast";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -66,6 +67,7 @@ type AddEditDialogProps = {
   providerData?: TAiProvider;
   addAIProvider?: AISettingsStore["addAIProvider"];
   updateAIProvider?: AISettingsStore["updateAIProvider"];
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const providerTypes: TOption[] = [
@@ -105,6 +107,7 @@ const AddUpdateDialogComponent = ({
   addAIProvider,
   updateAIProvider,
   providerData,
+  getAIConfig,
 }: AddEditDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings", "OAuth", "Webhooks"]);
   const [selectedOption, setSelectedOption] = useState(
@@ -161,6 +164,7 @@ const AddUpdateDialogComponent = ({
         };
 
         await addAIProvider?.(data);
+        await getAIConfig?.();
         toastr.success(t("AISettings:ProviderAddedSuccess"));
       }
 
@@ -252,6 +256,7 @@ const AddUpdateDialogComponent = ({
               scale
               placeholder={t("OAuth:EnterURL")}
               isDisabled={isRequestRunning}
+              isReadOnly={selectedOption.key !== ProviderType.OpenAiCompatible}
             />
           </FieldContainer>
           <FieldContainer
@@ -279,7 +284,7 @@ const AddUpdateDialogComponent = ({
               <PasswordInput
                 size={InputSize.base}
                 inputValue={providerKey}
-                onChange={(_, value) => setProviderKey(value!)}
+                onChange={(_, value) => setProviderKey(value ?? "")}
                 isFullWidth
                 isDisableTooltip
                 placeholder={t("AISettings:EnterKey")}
@@ -314,8 +319,11 @@ const AddUpdateDialogComponent = ({
   );
 };
 
-export const AddUpdateProviderDialog = inject(({ aiSettingsStore }: TStore) => {
-  const { addAIProvider, updateAIProvider } = aiSettingsStore;
+export const AddUpdateProviderDialog = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    const { addAIProvider, updateAIProvider } = aiSettingsStore;
+    const { getAIConfig } = settingsStore;
 
-  return { addAIProvider, updateAIProvider };
-})(observer(AddUpdateDialogComponent));
+    return { addAIProvider, updateAIProvider, getAIConfig };
+  },
+)(observer(AddUpdateDialogComponent));

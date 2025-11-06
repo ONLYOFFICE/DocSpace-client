@@ -64,6 +64,7 @@ const CodeBlock = ({ language, content }: MessageCodeBlockProps) => {
       <Scrollbar
         className={styles.codeBlockScroll}
         translateContentSizeYToHolder
+        rtl={false}
       >
         <SyntaxHighlighter
           language={language}

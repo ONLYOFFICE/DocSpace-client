@@ -74,9 +74,6 @@ const AiRoomTabs = ({
 
   const { t } = useTranslation(["AIRoom", "Common"]);
 
-  if (showTabsLoader)
-    return <SectionSubmenuSkeleton style={{ marginBottom: 0 }} />;
-
   const onSelect = (tab: TTabItem) => {
     setCurrentTab(tab.id as "chat" | "knowledge" | "result");
 
@@ -130,6 +127,13 @@ const AiRoomTabs = ({
       content: null,
     });
   }
+
+  const isChat = currentClientView === "chat";
+
+  if (showTabsLoader)
+    return (
+      <SectionSubmenuSkeleton style={{ marginBottom: isChat ? 0 : "20px" }} />
+    );
 
   return (
     <Tabs

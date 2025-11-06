@@ -89,8 +89,8 @@ export default class FilesHeaderOptionStore {
   private changeRoomQuotaHandle = () =>
     this.filesActionsStore.changeRoomQuota(this.filesStore.selection, this.t);
 
-  private changeAIAgentQuotaHandle = () =>
-    this.filesActionsStore.changeAIAgentQuota(
+  private changeAIAgentsQuotaHandle = () =>
+    this.filesActionsStore.changeAIAgentsQuota(
       this.filesStore.selection,
       this.t,
     );
@@ -257,7 +257,7 @@ export default class FilesHeaderOptionStore {
           key: "change-agent-quota",
           label: t("Common:ChangeQuota"),
           iconUrl: ChangQuotaReactSvgUrl,
-          onClick: this.changeAIAgentQuotaHandle,
+          onClick: this.changeAIAgentsQuotaHandle,
           disabled: !showStorageInfo,
         };
       case "default-quota":

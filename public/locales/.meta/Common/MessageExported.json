@@ -3,7 +3,7 @@
   "content": "Message exported to file: <1>{{fileName}}</1>",
   "content_en_sha1_hash": "ab92a01d2527086a1e79c6bc2ac3c304fee54796",
   "created_at": "2025-10-27T16:14:24.189Z",
-  "updated_at": "2025-10-27T16:35:18.938Z",
+  "updated_at": "2025-11-06T18:29:16.034Z",
   "comment": {
     "text": "This key displays a success message confirming that a chat message has been exported to a file. It appears in a toast notification after a user successfully exports a message, informing them of the file name. Translators should ensure the message clearly indicates successful export and includes the filename placeholder.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/Buttons.tsx",
-      "line_number": 94,
-      "context": "window.open(exportResult?.webUrl, \"_blank\");\n } else {\n const toastMsg = (\n <Trans\n ns=\"Common\"\n i18nKey=\"MessageExported\"\n values={{ fileName }}\n t={t}\n components={{\n 1: (\n <Link",
+      "line_number": 110,
+      "context": "}\n \n const toastMsg = (\n <Trans\n ns=\"Common\"\n i18nKey=\"MessageExported\"\n values={{ fileName }}\n t={t}\n components={{\n 1: (\n <Link",
       "module": "/packages/shared"
     }
   ],

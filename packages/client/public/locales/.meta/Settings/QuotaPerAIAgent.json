@@ -1,0 +1,28 @@
+{
+  "key_path": "QuotaPerAIAgent",
+  "content": "Quota per AI agent",
+  "content_en_sha1_hash": "215b8bf5a578ced0bc211d0f9fbf5d4ea2b4f1f9",
+  "created_at": "2025-11-06T18:29:08.711Z",
+  "updated_at": "2025-11-06T18:39:25.025Z",
+  "comment": {
+    "text": "This key represents the quota allocated to each AI agent. It's used to display the amount of storage or resources assigned to individual AI agents, likely within a storage management section of the portal settings.",
+    "is_auto": true,
+    "updated_at": "2025-11-06T18:39:25.025Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
+      "line_number": 32,
+      "context": "import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";\n \n import QuotaPerItemComponent from \"./QuotaPerItem\";\n \n type QuotaPerAIAgentComponentProps = {\n setAIAgentQuota: (size: number, t: (key: string) => string) => void;\n defaultAIAgentsQuota: number;\n isDefaultAIAgentsQuotaSet: boolean;\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import equal from "fast-deep-equal/react";
@@ -37,7 +37,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import {
   InputSize,
   InputType,
@@ -45,16 +45,17 @@ import {
 } from "@docspace/shared/components/text-input";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { getAiProviderLabel } from "@docspace/shared/utils";
-import {
-  type TAiProvider,
+import type {
+  TAiProvider,
   TCreateAiProvider,
-  type TProviderTypeWithUrl,
-  type TUpdateAiProvider,
+  TProviderTypeWithUrl,
+  TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
-import { TData, toastr } from "@docspace/shared/components/toast";
+import { type TData, toastr } from "@docspace/shared/components/toast";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { Text } from "@docspace/shared/components/text";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -239,6 +240,9 @@ const AddUpdateDialogComponent = ({
               placeholder={t("AISettings:EnterLabel")}
               isDisabled={isRequestRunning}
             />
+            <Text className={styles.fieldHint}>
+              {t("AISettings:ProviderNameInputHint")}
+            </Text>
           </FieldContainer>
 
           <FieldContainer
@@ -256,7 +260,11 @@ const AddUpdateDialogComponent = ({
               scale
               placeholder={t("OAuth:EnterURL")}
               isDisabled={isRequestRunning}
+              isReadOnly={selectedOption.key !== ProviderType.OpenAiCompatible}
             />
+            <Text className={styles.fieldHint}>
+              {t("AISettings:ProviderURLInputHint")}
+            </Text>
           </FieldContainer>
           <FieldContainer
             labelText={t("AISettings:ProviderKey")}
@@ -280,17 +288,22 @@ const AddUpdateDialogComponent = ({
                 </Link>
               </div>
             ) : (
-              <PasswordInput
-                size={InputSize.base}
-                inputValue={providerKey}
-                onChange={(_, value) => setProviderKey(value!)}
-                isFullWidth
-                isDisableTooltip
-                placeholder={t("AISettings:EnterKey")}
-                isDisabled={isRequestRunning}
-                isSimulateType
-                autoComplete="off"
-              />
+              <>
+                <PasswordInput
+                  size={InputSize.base}
+                  inputValue={providerKey}
+                  onChange={(_, value) => setProviderKey(value ?? "")}
+                  isFullWidth
+                  isDisableTooltip
+                  placeholder={t("AISettings:EnterKey")}
+                  isDisabled={isRequestRunning}
+                  isSimulateType
+                  autoComplete="off"
+                />
+                <Text className={styles.fieldHint}>
+                  {t("AISettings:ProviderKeyInputHint")}
+                </Text>
+              </>
             )}
           </FieldContainer>
         </div>

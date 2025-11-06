@@ -906,7 +906,7 @@ const SectionHeaderContent = (props) => {
     if (!lengthList || lengthList === 0) return false;
 
     return true;
-  }, [getContextOptionsPlus, isContactsPage, isContactsGroupsPage]);
+  }, [getContextOptionsPlus, isContactsPage, isContactsGroupsPage, allowInvitingMembers]);
 
   const withMenu = !isRoomsFolder && !isContactsGroupsPage && !isAIAgentsFolder;
 

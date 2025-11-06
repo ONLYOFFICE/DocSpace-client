@@ -3,7 +3,7 @@
   "content": "Refresh message",
   "content_en_sha1_hash": "477004aadda455680bcab1d2ce9840ec07843b62",
   "created_at": "2025-10-27T16:14:24.162Z",
-  "updated_at": "2025-10-27T16:28:35.036Z",
+  "updated_at": "2025-11-06T18:29:16.034Z",
   "comment": {
     "text": "This text appears on a button that, when clicked, displays a \"Work in Progress\" notification. It's a tooltip explaining the button's functionality, indicating that a refresh action is being initiated. Translators should ensure the text accurately conveys the action of refreshing and the expectation of a temporary interruption.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/Buttons.tsx",
-      "line_number": 155,
+      "line_number": 175,
       "context": "</div>\n \n {/*{isLast ? (*/}\n {/*  <div*/}\n {/*    className={styles.buttonsBlockItem}*/}\n {/*    title={t(\"RefreshMessage\")}*/}\n {/*    onClick={() => {*/}\n {/*      toastr.info(t(\"Common:WorkInProgress\"));*/}\n {/*    }}*/}\n {/*  >*/}\n {/*    <ReactSVG src={RefreshIconUrl} />*/}",
       "module": "/packages/shared"
     }

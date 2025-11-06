@@ -3,7 +3,7 @@
   "content": "V.{{version}}",
   "content_en_sha1_hash": "47c10c364922c18836956f7551a177d3ca888116",
   "created_at": "2025-05-19T21:30:49.503Z",
-  "updated_at": "2025-11-03T12:10:35.433Z",
+  "updated_at": "2025-11-06T18:29:16.028Z",
   "comment": {
     "text": "This translation key is used to display a version number badge in a digital product. The badge displays the current version of a software or application, and it appears on a badge component, likely on a button or dialog. Translators should replace \"V.\" with an appropriate localization character and adjust the formatting as needed for their target language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 435,
+      "line_number": 436,
       "context": "className={classNames(\n styles.versionBadge,\n \"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={theme.filesBadges.badgeBackgroundColor}\n label={t(\"Common:VersionBadge\", {\n version: countVersions as string,\n })}\n {...onShowVersionHistoryProp}\n noHover\n isVersionBadge",
       "module": "/packages/shared"
     }

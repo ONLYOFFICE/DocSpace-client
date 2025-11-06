@@ -3,7 +3,7 @@
   "content": "AI agents pinned",
   "content_en_sha1_hash": "dc1b7cba66375983892e05b7198a4d976c86ab95",
   "created_at": "2025-11-03T12:10:32.747Z",
-  "updated_at": "2025-11-03T12:20:33.760Z",
+  "updated_at": "2025-11-06T18:29:15.991Z",
   "comment": {
     "text": "Indicates the status of AI agents being pinned. This key is used to display whether one or multiple AI agents are currently pinned, likely on a button or in a list displaying pinned items. Translators should ensure the wording accurately reflects the pinned/unpinned state.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1332,
-      "context": "let translationForSeverals;\n \n if (isAIAgent) {\n translationForOneItem = isPin ? t(\"AIAgentPinned\") : t(\"AIAgentUnpinned\");\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { ...itemCount })\n : t(\"AIAgentsUnpinned\", { ...itemCount });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { ...itemCount })",
+      "line_number": 1335,
+      "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\")\n : t(\"AIAgentUnpinned\");\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { ...itemCount })\n : t(\"AIAgentsUnpinned\", { ...itemCount });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { ...itemCount })",
       "module": "/packages/client"
     }
   ],

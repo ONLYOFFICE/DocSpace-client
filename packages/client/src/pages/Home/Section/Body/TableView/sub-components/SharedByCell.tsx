@@ -51,7 +51,7 @@ const SharedByCell: FC<SharedByCellProps> = ({
 }: SharedByCellProps) => {
   const { t } = useTranslation();
 
-  const { avatarSmall, hasAvatar, isAnonim } = item.createdBy;
+  const { avatarSmall, hasAvatar, isAnonim } = item.sharedBy ?? {};
 
   const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;
 

@@ -174,7 +174,7 @@ class DetailsHelper {
               "Creation date",
               this.item.order && "Index",
               this.item.createdBy && "Author",
-              this.item.createdBy && "Shared by",
+              this.item.sharedBy && "Shared by",
               this.item.access && "Access level",
             ]
           : [
@@ -193,7 +193,7 @@ class DetailsHelper {
               "Versions",
               "order" in this.item && this.item.order && "Index",
               this.item.createdBy && "Author",
-              this.item.createdBy && "Shared by",
+              "sharedBy" in this.item && this.item.sharedBy && "Shared by",
               this.item.access && "Access level",
               "Comments",
             ]
@@ -307,7 +307,7 @@ class DetailsHelper {
       case "Author":
         return this.getAuthorDecoration();
       case "Shared by":
-        return this.getAuthorDecoration("createdBy");
+        return this.getAuthorDecoration("sharedBy");
       case "Access level":
         return this.getItemAccessLevel();
       default:

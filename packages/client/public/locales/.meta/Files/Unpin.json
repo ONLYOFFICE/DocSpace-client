@@ -3,7 +3,7 @@
   "content": "Unpin",
   "content_en_sha1_hash": "2eba6a03b89a9ddb19e9cb15699a8737f8bab076",
   "created_at": "2025-05-19T21:30:56.284Z",
-  "updated_at": "2025-08-29T14:33:38.352Z",
+  "updated_at": "2025-11-06T18:29:15.978Z",
   "comment": {
     "text": "The translation key \"Unpin\" is used to display the action of removing a file or option from its pinned state in the UI. It appears on buttons and dialogues that allow users to manage their pinned options, files, or other context options.",
     "is_auto": true,
@@ -23,8 +23,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 34,
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 36,
       "context": "import CopyToReactSvgUrl from \"PUBLIC_DIR/images/copyTo.react.svg?url\";\n import DownloadReactSvgUrl from \"PUBLIC_DIR/images/icons/16/download.react.svg?url\";\n import DownloadAsReactSvgUrl from \"PUBLIC_DIR/images/downloadAs.react.svg?url\";\n import MoveReactSvgUrl from \"PUBLIC_DIR/images/icons/16/move.react.svg?url\";\n import PinReactSvgUrl from \"PUBLIC_DIR/images/pin.react.svg?url\";\n import UnpinReactSvgUrl from \"PUBLIC_DIR/images/unpin.react.svg?url\";\n import RoomArchiveSvgUrl from \"PUBLIC_DIR/images/room.archive.svg?url\";\n import DeleteReactSvgUrl from \"PUBLIC_DIR/images/delete.react.svg?url\";\n import CatalogRoomsReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url\";\n import ChangQuotaReactSvgUrl from \"PUBLIC_DIR/images/change.quota.react.svg?url\";\n import DisableQuotaReactSvgUrl from \"PUBLIC_DIR/images/disable.quota.react.svg?url\";",
       "module": "/packages/client"
     }

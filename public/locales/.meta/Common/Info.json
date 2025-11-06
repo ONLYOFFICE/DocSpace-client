@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2025-11-03T12:10:35.130Z",
+  "updated_at": "2025-11-06T18:29:15.747Z",
   "comment": {
     "text": "This translation key is used for the text \"Info\", which is displayed as a header or label in various UI components, including an info panel and an OAuth information dialog. The purpose of this text is to provide basic information or context, often accompanied by icons. It appears in places such as headers, dialogs, and context options.",
     "is_auto": true,
@@ -66,19 +66,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2147,
+      "line_number": 2151,
       "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2147,
+      "line_number": 2151,
       "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2284,
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 157,
       "context": "case \"show-info\":\n if (isDesktop()) return null;\n return {\n id: \"menu-show-info\",\n key: \"show-info\",\n label: t(\"Common:Info\"),\n iconUrl: InfoOutlineReactSvgUrl,\n onClick: showInfoPanel,\n };\n case \"copy\":\n if (!this.isAvailableOption(\"copy\")) return null;",
       "module": "/packages/client"
     },

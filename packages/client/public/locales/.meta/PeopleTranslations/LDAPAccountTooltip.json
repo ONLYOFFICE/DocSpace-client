@@ -3,7 +3,7 @@
   "content": "This user account is loaded from LDAP. If you need to change the user name and email address, or disable a user, refer to the LDAP directory.",
   "content_en_sha1_hash": "c6c9f4030007d68e41bd8f5af7b73dfdf15d63b7",
   "created_at": "2025-05-19T21:30:53.478Z",
-  "updated_at": "2025-11-03T12:10:35.128Z",
+  "updated_at": "2025-11-06T18:29:15.745Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining that a user's account is loaded from LDAP, providing guidance on how to manage their account details. It appears in UI elements related to user accounts and profiles. Translators should provide an explanation of what it means for a user's account to be \"loaded from LDAP\".",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 434,
+      "line_number": 449,
       "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>\n {t(\"PeopleTranslations:LDAPAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n \n {!profile!.isSSO && !profile!.isLDAP ? (",
       "module": "/packages/client"
     }

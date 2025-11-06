@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-11-03T12:10:34.861Z",
+  "updated_at": "2025-11-06T18:29:15.540Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -296,6 +296,18 @@
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
       "line_number": 70,
       "context": "}\n if (isTenantCustomQuotaSet) {\n quotaLimits.push(\n t(\"Settings:TenantQuotaLimit\", {\n tenantQuotaLimit: getConvertedSize(t, tenantCustomQuota),\n productName: t(\"Common:ProductName\"),\n }),\n );\n }\n \n if (quotaLimits.length === 0) {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 43,
+      "context": "const { t, theme, isFrame, isAdmin, setKnowledgeId, setCurrentTab } = props;\n \n const titleRoomNoAccess = t(\"AIRoom:KnowledgeUnavailable\");\n const descriptionRoomNoAccess = isAdmin\n ? t(\"AIRoom:KnowledgeUnavailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"AIRoom:KnowledgeUnavailableDescriptionUser\", {\n productName: t(\"Common:ProductName\"),\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 43,
+      "context": "const { t, theme, isFrame, isAdmin, setKnowledgeId, setCurrentTab } = props;\n \n const titleRoomNoAccess = t(\"AIRoom:KnowledgeUnavailable\");\n const descriptionRoomNoAccess = isAdmin\n ? t(\"AIRoom:KnowledgeUnavailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"AIRoom:KnowledgeUnavailableDescriptionUser\", {\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     },
     {
@@ -1296,7 +1308,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
-      "line_number": 108,
+      "line_number": 109,
       "context": "isPaidBadge\n />\n ) : null}\n </div>\n <Text className=\"statistics-description\">\n {t(\"StatisticDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {isStatisticsAvailable ? (\n <>\n <RoomsList\n buttonProps={buttonProps}",
       "module": "/packages/client"
     },
@@ -1313,15 +1325,21 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerItem.js",
-      "line_number": 112,
-      "context": "dataTestId={dataTestId ? `${dataTestId}_button` : undefined}\n />\n <Text className=\"toggle_label\" fontSize=\"12px\">\n {type === \"user\"\n ? t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n })\n : t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
+      "line_number": 62,
+      "context": "{...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={1}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerItem.js",
-      "line_number": 112,
-      "context": "dataTestId={dataTestId ? `${dataTestId}_button` : undefined}\n />\n <Text className=\"toggle_label\" fontSize=\"12px\">\n {type === \"user\"\n ? t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n })\n : t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js",
+      "line_number": 51,
+      "context": "{...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}\n tabIndex={1}\n dataTestId=\"quota_room\"\n toggleDescription={t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser.js",
+      "line_number": 53,
+      "context": "{...initialSizeProp}\n isQuotaSet={isDefaultUsersQuotaSet}\n tabIndex={2}\n dataTestId=\"quota_user\"\n toggleDescription={t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n })}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -1392,7 +1410,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 559,
+      "line_number": 569,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"8-1-6\",\n icon: \"\",\n link: \"docspace\",\n tKey: \"Common:ProductName\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-plugin-sdk\",",
       "module": "/packages/client"
     },
@@ -1488,19 +1506,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2164,
+      "line_number": 2168,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2164,
+      "line_number": 2168,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2164,
+      "line_number": 2168,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -1896,7 +1914,7 @@
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 147,
+      "line_number": 153,
       "context": "const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress\n text={t(\"Common:PreparationPortalDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n percent={percent}\n />\n );\n return (",
       "module": "/packages/shared"
     },

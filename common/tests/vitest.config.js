@@ -24,28 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-module.exports = {
-  rootDir: ".",
-  testEnvironment: "node",
-  setupFilesAfterEnv: ["jest-expect-message"],
-  verbose: true,
-  // Set a very long timeout for long-running tests like the Ollama LLM translation validation
-  testTimeout: 3600000, // 1 hour
-  reporters: [
-    "default",
-    [
-      "./node_modules/jest-html-reporter",
-      {
-        pageTitle: "DocSpace Frontend tests report",
-        outputPath: "<rootDir>/reports/tests-results.html",
-        includeFailureMsg: true,
-        includeConsoleLog: true,
-        includeStackTrace: false,
-        inlineSource: true,
-        useCssFile: false,
-        sort: "titleAsc",
-        append: false,
-      },
-    ],
-  ],
-};
+import { defineConfig } from "vitest/config";
+
+export default defineConfig({
+  test: {
+    environment: "node",
+    testTimeout: 3600000,
+    hookTimeout: 3600000,
+    globals: false,
+    include: ["test/**/*.test.js"],
+    reporters: ["verbose", "html"],
+    outputFile: {
+      html: "./reports/index.html",
+    },
+  },
+});

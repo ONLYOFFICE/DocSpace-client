@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "vitest run",
-    "test:lefthook": "cross-env SKIP_BASE_LANGUAGES_TEST=true jest",
+    "test:lefthook": "cross-env SKIP_BASE_LANGUAGES_TEST=true vitest",
     "test:only-base-languages": "vitest run locales.test.js --testNamePattern=\"NotTranslatedOnBaseLanguages\"",
     "test:skip-base-languages": "cross-env SKIP_BASE_LANGUAGES_TEST=true vitest run locales.test.js",
     "test:locales": "vitest run locales.test.js",

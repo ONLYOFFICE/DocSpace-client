@@ -36,6 +36,7 @@ const ICONS_REGEX = new RegExp(/\/(icons|thirdparties)\/(.)*/);
 
 let allImgs = [];
 let allFiles = [];
+let fileContentsCache = new Map();
 
 beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
@@ -76,10 +77,19 @@ beforeAll(() => {
 
   console.log(`Found files by filter = ${files.length}.`);
 
+  console.time('Reading files');
   files.forEach((filePath) => {
     const file = { path: filePath, fileName: path.basename(filePath) };
     allFiles.push(file);
+    
+    try {
+      const content = fs.readFileSync(filePath, "utf8");
+      fileContentsCache.set(filePath, content);
+    } catch (err) {
+      console.warn(`Failed to read file: ${filePath}`);
+    }
   });
+  console.timeEnd('Reading files');
 
   const imagesPattern = /\.(gif|jpe|jpeg|tiff?|png|webp|bmp|svg)$/i;
 
@@ -95,31 +105,33 @@ beforeAll(() => {
     );
   });
 
+  console.log(`Found images = ${images.length}.`);
+  console.time('Processing images');
+  
   images.forEach((filePath) => {
-    const data = fs.readFileSync(filePath, "utf8");
-
-    const buf = new Buffer.from(data);
-
-    const md5Hash = crypto.createHash("md5").update(buf).digest("hex");
-
-    const img = { path: filePath, fileName: path.basename(filePath), md5Hash };
-
-    allImgs.push(img);
+    try {
+      const data = fs.readFileSync(filePath);
+      const md5Hash = crypto.createHash("md5").update(data).digest("hex");
+      const img = { path: filePath, fileName: path.basename(filePath), md5Hash };
+      allImgs.push(img);
+    } catch (err) {
+      console.warn(`Failed to read image: ${filePath}`);
+    }
   });
+  
+  console.timeEnd('Processing images');
+  console.log(`Total files: ${allFiles.length}, Total images: ${allImgs.length}`);
 });
 
 describe("Image Tests", () => {
   it("UselessImagesTest: Verify that there are no unused image files in the codebase.", () => {
-    const usedImages = findImagesIntoFiles(allFiles, allImgs);
+    const usedImages = findImagesIntoFiles(allFiles, allImgs, fileContentsCache);
+    const usedImagesSet = new Set(usedImages);
 
     const uselessImages = allImgs.filter((img) => {
       if (img.fileName.includes("default_user_photo_size_48-48")) return false;
 
-      if (usedImages.indexOf(img.fileName) === -1) {
-        return true;
-      }
-
-      return false;
+      return !usedImagesSet.has(img.fileName);
     });
 
     let message = "Found unused images in the code.\r\n\r\n";
@@ -167,14 +179,6 @@ describe("Image Tests", () => {
           value[0].path.includes(convertPathToOS("/icons/"))
         ) {
           skip = true;
-          // value.forEach((v) => {
-          //   const isMain =
-          //     v.path.includes(convertPathToOS(`/logo/${key}`)) ||
-          //     v.path.includes(convertPathToOS(`/icons/${key}`));
-          //   const isSubPath =
-          //     LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path);
-          //   skip = (isSubPath || isMain) && skip;
-          // });
         }
         if (skip) return;
         message += `${++i}. ${key}:\r\n`;
@@ -293,7 +297,8 @@ describe("Image Tests", () => {
         return;
       }
 
-      const data = fs.readFileSync(file.path, "utf8");
+      const data = fileContentsCache.get(file.path);
+      if (!data) return;
 
       wrongImportImages.forEach((i) => {
         const idx = data.indexOf(i);

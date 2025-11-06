@@ -11,7 +11,7 @@ Generate translation review PDF forms. Each key is represented by 4 lines:
 Uses Python API directly for maximum performance and reliability.
 
 Usage:
-  pip install document-builder
+  pip install -r requirements.txt
   
   # Generate PDF form from translation JSON
   python build_oform.py --input Common-all-keys-from-en-to-ru.json
@@ -23,7 +23,67 @@ Usage:
 import argparse
 import json
 import sys
+import os
 from pathlib import Path
+
+try:
+    from dotenv import load_dotenv
+    DOTENV_AVAILABLE = True
+except ImportError:
+    DOTENV_AVAILABLE = False
+
+
+def load_env_file():
+    """
+    Load environment variables from .env file if it exists.
+    Uses python-dotenv library if available, otherwise skips.
+    Supports ONLYOFFICE_BUILDER_LICENSE variable.
+    """
+    if not DOTENV_AVAILABLE:
+        # Silently skip if python-dotenv is not installed
+        return
+    
+    script_dir = Path(__file__).parent
+    env_file = script_dir / ".env"
+    
+    if env_file.exists():
+        try:
+            load_dotenv(dotenv_path=env_file, override=False)
+        except Exception as e:
+            print(f"Warning: Failed to load .env file: {e}", file=sys.stderr)
+
+
+def set_docbuilder_license():
+    """
+    Validate ONLYOFFICE Document Builder license path from environment variable.
+    This prevents the "license is invalid" warning.
+    
+    ONLYOFFICE Document Builder reads license from two locations:
+    1. Environment variable ONLYOFFICE_BUILDER_LICENSE (path to license.lic)
+    2. Standard installation directory (if env variable is not set):
+       - Windows: C:\\Program Files\\ONLYOFFICE\\DocumentBuilder\\license.lic
+       - Linux: /opt/onlyoffice/documentbuilder/license.lic
+       - macOS: /Applications/ONLYOFFICE/DocumentBuilder.app/Contents/license.lic
+    
+    This function validates that the license file exists at the specified path.
+    """
+    license_path = os.environ.get('ONLYOFFICE_BUILDER_LICENSE')
+    
+    if not license_path:
+        return False
+    
+    # Expand user path (~) and resolve relative paths
+    license_path = Path(license_path).expanduser().resolve()
+    
+    if not license_path.exists():
+        print(f"Warning: License file not found: {license_path}", file=sys.stderr)
+        print(f"Hint: Make sure the license file exists and the path is correct.", file=sys.stderr)
+        return False
+    
+    # License file exists and ONLYOFFICE_BUILDER_LICENSE is set
+    # Document Builder will use this license automatically
+    print(f"✓ License file found: {license_path}")
+    return True
 
 
 def parse_translation_data(translation_data: dict) -> tuple:
@@ -182,6 +242,13 @@ def build_form(title: str, fields: list, pdf_path: str, base_language: str = "en
 
 
 def main():
+    # Load environment variables from .env file
+    load_env_file()
+    
+    # Validate ONLYOFFICE Builder license if specified
+    license_set = set_docbuilder_license()
+    # Note: License validation output is handled in set_docbuilder_license()
+    
     parser = argparse.ArgumentParser(
         description="Build ONLYOFFICE Form for translation review")
     parser.add_argument("--input", required=True,

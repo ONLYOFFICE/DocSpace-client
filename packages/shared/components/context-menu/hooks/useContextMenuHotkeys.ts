@@ -28,9 +28,13 @@ import { useEffect, useState } from "react";
 import { ContextMenuModel, ContextMenuType } from "../ContextMenu.types";
 
 const useContextMenuHotkeys = ({
+  visible,
+  withHotkeys,
   model,
   currentEvent,
 }: {
+  visible: boolean;
+  withHotkeys: boolean;
   model: ContextMenuModel[];
   currentEvent: React.RefObject<
     | null
@@ -51,7 +55,7 @@ const useContextMenuHotkeys = ({
 
   const onKeyDown = (e: KeyboardEvent) => {
     const menuModel = activeModel ?? model;
-    if (!currentEvent.current || !menuModel) return e;
+    if (!currentEvent.current || !menuModel || !withHotkeys) return e;
 
     const clearModel = [];
     for (const index in menuModel) {
@@ -204,6 +208,15 @@ const useContextMenuHotkeys = ({
       window.removeEventListener("keydown", onKeyDown);
     };
   });
+
+  useEffect(() => {
+    if (!visible) {
+      setCurrentIndex(0);
+      setActiveLevel(0);
+      setActiveItems(null);
+      setActiveModel(null);
+    }
+  }, [visible]);
 
   return {
     currentIndex,

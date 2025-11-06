@@ -115,6 +115,7 @@ const ContextMenu = (props: ContextMenuProps) => {
     dataTestId,
     maxHeightLowerSubmenu,
     showDisabledItems,
+    withHotkeys = true,
   } = props;
 
   const {
@@ -125,6 +126,8 @@ const ContextMenu = (props: ContextMenuProps) => {
     onMouseMove,
     setActiveHotkeysModel,
   } = useContextMenuHotkeys({
+    visible,
+    withHotkeys,
     model: model ?? getContextModel?.() ?? propsModel,
     currentEvent,
   });

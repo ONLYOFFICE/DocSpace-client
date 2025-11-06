@@ -357,6 +357,7 @@ class FilesActionStore {
     //  console.log("createFoldersTree", files, folderId);
     const { uploaded, percent } = this.uploadDataStore;
 
+    const { isAIAgentsFolderRoot } = this.treeFoldersStore;
     const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
 
@@ -395,11 +396,14 @@ class FilesActionStore {
 
         const size = getConvertedSize(t, roomFolder.quotaLimit);
 
-        throw new Error(
-          t("Common:RoomSpaceQuotaExceeded", {
-            size,
-          }),
-        );
+        const error = isAIAgentsFolderRoot
+          ? t("Common:AIAgentSpaceQuotaExceeded", {
+              size,
+            })
+          : t("Common:RoomSpaceQuotaExceeded", {
+              size,
+            });
+        throw new Error(error);
       }
     }
 

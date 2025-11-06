@@ -43,6 +43,7 @@
   "AdvancedFilter": "Search options",
   "AgentName": "Agent name",
   "AgentOwner": "Agent owner",
+  "AIAgentSpaceQuotaExceeded": "AI Agent space quota exceeded ({{size}}).",
   "AIAgents": "AI agents",
   "AIChatHelp": "How can i help?",
   "AIChatInput": "Chat with AI",

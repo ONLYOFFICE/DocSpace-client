@@ -16,7 +16,7 @@
     "test:colors": "vitest run colors.test.js",
     "test:ascii": "vitest run ascii.test.js",
     "test:dependencies": "vitest run dependencies.test.js",
-    "open-report": "npx vite preview --outDir reports"
+    "open-report": "npx vite preview --open --outDir reports"
   },
   "devDependencies": {
     "@vitest/ui": "4.0.7",

@@ -356,11 +356,9 @@ class PluginStore {
 
           newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
 
-          const isPluginCompatible = this.checkPluginCompatibility(
+          newPlugin.compatible = this.checkPluginCompatibility(
             plugin.minDocSpaceVersion,
           );
-
-          newPlugin.compatible = isPluginCompatible;
 
           this.installPlugin(newPlugin);
 
@@ -397,6 +395,35 @@ class PluginStore {
     });
   };
 
+  installPluginCss = async (plugin: TPlugin) => {
+    const cssUrl = getPluginUrl(plugin.url, `plugin.css?hash=${plugin.version}`);
+
+    const linkId = `plugin-styles-${plugin.pluginName}`;
+    const existingLink = document.getElementById(linkId) as HTMLLinkElement;
+
+    if (existingLink) {
+      // update existing link
+      existingLink.href = cssUrl;
+      return;
+    }
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = cssUrl;
+    link.id = linkId;
+    document.head.appendChild(link);
+  };
+
+  uninstallPluginCss = (plugin: TPlugin) => {
+    const linkId = `plugin-styles-${plugin.pluginName}`;
+    const link = document.getElementById(linkId) as HTMLLinkElement;
+
+    if (link) {
+      link.remove();
+    }
+  };
+
   installPlugin = async (plugin: TPlugin, addToList = true) => {
     if (addToList) {
       const idx = this.plugins.findIndex((p) => p.name === plugin.name);
@@ -427,6 +454,8 @@ class PluginStore {
     }
 
     if (plugin.status === PluginStatus.hide) return;
+
+    this.installPluginCss(plugin);
 
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
       this.updateContextMenuItems(name);
@@ -513,6 +542,8 @@ class PluginStore {
 
     plugin.enabled = false;
     plugin.settings = "";
+
+    this.uninstallPluginCss(plugin);
 
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
       this.deactivateContextMenuItems(plugin);

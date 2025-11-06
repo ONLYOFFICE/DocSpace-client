@@ -12,7 +12,13 @@
     "includes": [
       "**",
       "!**/coverage",
-      "!**/vitest/reports"
+      "!**/vitest/reports",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/storybook-static",
+      "!**/.git",
+      "!**/.nx",
+      "!**/.vscode"
     ]
   },
   "javascript": {

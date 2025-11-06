@@ -57,7 +57,7 @@ const getTags = (
     globalColors.secondGreen,
     globalColors.secondOrange,
     globalColors.mainYellow,
-    globalColors.mainRed,
+    globalColors.coralPink,
   ];
 
   let i = 0;

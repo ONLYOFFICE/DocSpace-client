@@ -359,7 +359,7 @@
     },
     "editor.codeActionsOnSave": {
       "source.organizeImports.biome": "never",
-      "quickfix.biome": "explicit",
+      "quickfix.biome": "never"
     },
     "[jsonc]": {
       "editor.defaultFormatter": "vscode.json-language-features"

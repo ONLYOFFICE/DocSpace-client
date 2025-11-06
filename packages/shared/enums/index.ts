@@ -41,7 +41,7 @@ export const enum ScopeGroup {
 
 export const enum AuthenticationMethod {
   none = "none",
-  "client_secret_post" = "client_secret_post",
+  client_secret_post = "client_secret_post",
 }
 
 /**
@@ -282,6 +282,7 @@ export const enum FolderType {
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
   RoomTemplates = 30,
+  AIAgent = 31,
   Knowledge = 32,
   ResultStorage = 33,
   AIAgents = 34,

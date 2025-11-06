@@ -1845,7 +1845,7 @@ class FilesStore {
 
         let currentFolder = data.current;
 
-        const navigationPath = await Promise.all(
+        let navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive, AIAgents } = FolderType;
 
@@ -1953,6 +1953,10 @@ class FilesStore {
             currentFolder.type === FolderType.Knowledge
               ? "knowledge"
               : "result",
+          );
+
+          navigationPath = navigationPath.filter(
+            (item) => item.folderType !== FolderType.AIAgent,
           );
 
           currentFolder = {

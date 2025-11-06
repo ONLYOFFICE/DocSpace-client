@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { FC } from "react";
 import { decode } from "he";
-import { useTranslation } from "react-i18next";
 
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
@@ -39,26 +38,19 @@ import { StyledText, StyledAuthorCell } from "./CellStyles";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 interface SharedByCellProps {
-  fileOwner: string;
   sideColor: string;
   item: TFolder | TFile;
 }
 
 const SharedByCell: FC<SharedByCellProps> = ({
-  fileOwner,
   sideColor,
   item,
 }: SharedByCellProps) => {
-  const { t } = useTranslation();
-
-  const { avatarSmall, hasAvatar, isAnonim } = item.sharedBy ?? {};
+  const { avatarSmall, hasAvatar, displayName } = item.sharedBy ?? {};
 
   const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;
 
-  const name = React.useMemo(
-    () => (isAnonim ? t("Common:Anonymous") : decode(fileOwner)),
-    [fileOwner, isAnonim],
-  );
+  const name = React.useMemo(() => decode(displayName ?? ""), [displayName]);
 
   return (
     <StyledAuthorCell className="author-cell">

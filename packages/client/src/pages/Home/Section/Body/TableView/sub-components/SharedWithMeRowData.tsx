@@ -161,21 +161,14 @@ const SharedWithMeRowData: FC<
       {sharedByShareWithMeColumnIsEnabled ? (
         <TableCell
           dataTestId={`shared-with-me-cell-shared-by-${index}`}
-          style={
-            !sharedByShareWithMeColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
             lastColumn === "SharedByShareWithMe" ? "no-extra-space" : "",
           )}
         >
-          <SharedByCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <SharedByCell sideColor={sideColor} item={props.item} />
           {lastColumn === "SharedByShareWithMe" ? lastColumnContent : null}
         </TableCell>
       ) : (

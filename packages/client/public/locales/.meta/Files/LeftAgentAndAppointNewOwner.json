@@ -3,7 +3,7 @@
   "content": "You have left the agent and appointed a new owner",
   "content_en_sha1_hash": "6a1b20156398d38d926af0af3b0c1e2d66f8c3c8",
   "created_at": "2025-10-27T16:14:30.390Z",
-  "updated_at": "2025-11-03T12:10:35.384Z",
+  "updated_at": "2025-11-06T18:29:15.994Z",
   "comment": {
     "text": "This text is displayed to the user when they leave a room and simultaneously appoint a new owner. It confirms this action, appearing as a success message within the file management interface. Translators should ensure the wording accurately conveys the dual action of leaving and transferring ownership.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3299,
+      "line_number": 3079,
       "context": "const roomSuccessText = isOwner\n ? t(\"Files:LeftAndAppointNewOwner\")\n : t(\"Files:YouLeftTheRoom\");\n const agentSuccessText = isOwner\n ? t(\"Files:LeftAgentAndAppointNewOwner\")\n : t(\"Files:YouLeftTheAgent\");\n const successText = isAIAgent ? agentSuccessText : roomSuccessText;\n \n return api.rooms\n .updateRoomMemberRole(roomId, {",
       "module": "/packages/client"
     }

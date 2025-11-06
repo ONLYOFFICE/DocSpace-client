@@ -2547,7 +2547,7 @@ class FilesStore {
     inAgent = false,
     filter = null,
   ) => {
-    const agents = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
+    const agents = await api.ai.setCustomAIAgentQuota(itemsIDs, +quotaSize);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -2573,7 +2573,7 @@ class FilesStore {
   };
 
   resetAIAgentQuota = async (itemsIDs, inAgent = false, filter = null) => {
-    const agents = await api.rooms.resetRoomQuota(itemsIDs);
+    const agents = await api.ai.resetAIAgentQuota(itemsIDs);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);

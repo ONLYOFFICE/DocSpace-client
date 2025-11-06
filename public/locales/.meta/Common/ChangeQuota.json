@@ -3,7 +3,7 @@
   "content": "Change quota",
   "content_en_sha1_hash": "02de777a63ceae10d68258c04b8924d83239debc",
   "created_at": "2025-05-19T21:30:43.407Z",
-  "updated_at": "2025-11-03T12:10:34.943Z",
+  "updated_at": "2025-11-06T18:29:15.620Z",
   "comment": {
     "text": "\"Change quota\" is used as a button label and header title in a modal dialog to prompt user action of changing storage limits. It appears in two contexts: a warning quota dialog and a space quota settings dialog. The translation key should be used for situations where users need to edit or adjust their storage quotas.",
     "is_auto": true,
@@ -41,15 +41,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2378,
-      "context": "case \"change-quota\":\n if (!this.isAvailableOption(\"change-quota\")) return null;\n return {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: () => this.changeRoomQuota(selection),\n disabled: !showStorageInfo,\n };\n case \"change-agent-quota\":",
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 248,
+      "context": "case \"change-quota\":\n if (!this.isAvailableOption(\"change-quota\")) return null;\n return {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: this.changeRoomQuotaHandle,\n disabled: !showStorageInfo,\n };\n case \"change-agent-quota\":",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2378,
-      "context": "case \"change-quota\":\n if (!this.isAvailableOption(\"change-quota\")) return null;\n return {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: () => this.changeRoomQuota(selection),\n disabled: !showStorageInfo,\n };\n case \"change-agent-quota\":",
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 248,
+      "context": "case \"change-quota\":\n if (!this.isAvailableOption(\"change-quota\")) return null;\n return {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: this.changeRoomQuotaHandle,\n disabled: !showStorageInfo,\n };\n case \"change-agent-quota\":",
       "module": "/packages/client"
     }
   ],

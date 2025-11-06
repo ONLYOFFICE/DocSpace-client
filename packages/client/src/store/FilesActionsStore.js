@@ -354,6 +354,7 @@ class FilesActionStore {
     //  console.log("createFoldersTree", files, folderId);
     const { uploaded, percent } = this.uploadDataStore;
 
+    const { isAIAgentsFolderRoot } = this.treeFoldersStore;
     const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
 
@@ -392,11 +393,14 @@ class FilesActionStore {
 
         const size = getConvertedSize(t, roomFolder.quotaLimit);
 
-        throw new Error(
-          t("Common:RoomSpaceQuotaExceeded", {
-            size,
-          }),
-        );
+        const error = isAIAgentsFolderRoot
+          ? t("Common:AIAgentSpaceQuotaExceeded", {
+              size,
+            })
+          : t("Common:RoomSpaceQuotaExceeded", {
+              size,
+            });
+        throw new Error(error);
       }
     }
 
@@ -1324,7 +1328,9 @@ class FilesActionStore {
       let translationForSeverals;
 
       if (isAIAgent) {
-        translationForOneItem = isPin ? t("AIAgentPinned") : t("AIAgentUnpinned");
+        translationForOneItem = isPin
+          ? t("AIAgentPinned")
+          : t("AIAgentUnpinned");
         translationForSeverals = isPin
           ? t("AIAgentsPinned", { ...itemCount })
           : t("AIAgentsUnpinned", { ...itemCount });
@@ -1360,9 +1366,9 @@ class FilesActionStore {
 
       updatingFolderList(withFinishedOperation, isPin);
 
-      if(isError){
-        isAIAgent 
-          ? toastr.error(t("AIAgentPinLimitMessage")) 
+      if (isError) {
+        isAIAgent
+          ? toastr.error(t("AIAgentPinLimitMessage"))
           : toastr.error(t("RoomsPinLimitMessage"));
       }
 
@@ -1405,7 +1411,7 @@ class FilesActionStore {
     let notificationsDisabled = t("RoomNotificationsDisabled");
     let notificationsEnabled = t("RoomNotificationsEnabled");
 
-    if(isAIAgent){
+    if (isAIAgent) {
       notificationsDisabled = t("AIAgentNotificationsDisabled");
       notificationsEnabled = t("AIAgentNotificationsEnabled");
     }
@@ -1413,9 +1419,7 @@ class FilesActionStore {
     muteRoomNotification(id, muteStatus)
       .then(() =>
         toastr.success(
-          muteStatus
-            ? notificationsDisabled
-            : notificationsEnabled,
+          muteStatus ? notificationsDisabled : notificationsEnabled,
         ),
       )
       .catch((e) => toastr.error(e));
@@ -2181,7 +2185,7 @@ class FilesActionStore {
     window.dispatchEvent(event);
   };
 
-  changeAIAgentQuota = (items, successCallback, abortCallback) => {
+  changeAIAgentsQuota = (items, successCallback, abortCallback) => {
     const event = new Event(Events.CHANGE_QUOTA);
 
     const itemsIDs = items.map((item) => {

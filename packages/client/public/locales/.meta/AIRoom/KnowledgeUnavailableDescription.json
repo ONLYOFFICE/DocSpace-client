@@ -1,0 +1,28 @@
+{
+  "key_path": "KnowledgeUnavailableDescription",
+  "content": "The Knowledge base is currently disabled. To activate semantic search and document processing for your AI agents, please configure the embeddings provider in the {{productName}} settings.",
+  "content_en_sha1_hash": "204cd9860bf19aadd961b25e184eab77ca784706",
+  "created_at": "2025-11-06T18:29:14.066Z",
+  "updated_at": "2025-11-06T18:33:54.625Z",
+  "comment": {
+    "text": "This text appears in a container displayed when the knowledge base is disabled. It informs the user that semantic search and document processing are unavailable for AI agents and instructs them to configure the embeddings provider in the product settings. This message explains why certain AI features are not working.",
+    "is_auto": true,
+    "updated_at": "2025-11-06T18:33:54.625Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 42,
+      "context": "const KnowledgeDisabledContainer = (props) => {\n const { t, theme, isFrame, isAdmin, setKnowledgeId, setCurrentTab } = props;\n \n const titleRoomNoAccess = t(\"AIRoom:KnowledgeUnavailable\");\n const descriptionRoomNoAccess = isAdmin\n ? t(\"AIRoom:KnowledgeUnavailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"AIRoom:KnowledgeUnavailableDescriptionUser\", {\n productName: t(\"Common:ProductName\"),\n });",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

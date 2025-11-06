@@ -47,6 +47,16 @@ const globalCloseEvents = {
   clickOutsideAnchor: true,
 };
 
+const openEvents = {
+  click: true,
+  mouseenter: false,
+};
+
+const closeEvents = {
+  click: true,
+  mouseleave: false,
+};
+
 const RootTooltip = () => {
   const systemTooltipRef = useRef<TooltipRefProps>(null);
   const infoTooltipRef = useRef<HTMLDivElement>(null);
@@ -62,6 +72,7 @@ const RootTooltip = () => {
       | React.RefObject<HTMLDivElement | null>,
     testId: string,
     imperativeMode: boolean,
+    openOnClick: boolean = false,
   ) => {
     return (
       <div
@@ -85,8 +96,10 @@ const RootTooltip = () => {
           noArrow
           className="__react_component_tooltip"
           globalCloseEvents={globalCloseEvents}
+          openEvents={openOnClick ? openEvents : undefined}
+          closeEvents={openOnClick ? closeEvents : undefined}
           delayShow={0}
-          clickable={false}
+          clickable={openOnClick}
           imperativeModeOnly={imperativeMode}
           middlewares={[
             offset(DEFAULT_OFFSET),
@@ -119,6 +132,7 @@ const RootTooltip = () => {
     systemTooltipRef,
     "system-tooltip-container",
     true,
+    false,
   );
 
   const infoTooltip = renderTooltip(
@@ -126,6 +140,7 @@ const RootTooltip = () => {
     infoTooltipRef,
     "info-tooltip-container",
     false,
+    true,
   );
 
   const rootElement = document?.getElementById("root");

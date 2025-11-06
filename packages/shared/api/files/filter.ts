@@ -374,6 +374,7 @@ class FilesFilter {
       extension,
       searchArea,
       location,
+      sharedBy,
     } = fixedValidObject;
 
     const isFilterSet =
@@ -406,6 +407,7 @@ class FilesFilter {
       extension,
       searchArea,
       location,
+      sharedBy,
     };
 
     const str = toUrlParams(dtoFilter, true);

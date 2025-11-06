@@ -121,15 +121,15 @@ const getAuthorType = (filterValues: TGroupItem[] | TItem[]) => {
   return authorType || null;
 };
 
-const getSharedByType = (filterValues: TGroupItem[] | TItem[]) => {
-  const sharedByType = result(
+const getSharedBy = (filterValues: TGroupItem[] | TItem[]) => {
+  const sharedBy = result(
     find(filterValues, (value) => {
       return value.group === FilterGroups.filterSharedBy;
     }),
     "key",
   );
 
-  return sharedByType || null;
+  return sharedBy || null;
 };
 
 const getRoomId = (filterValues: TGroupItem[] | TItem[]) => {
@@ -306,7 +306,7 @@ const replaceEqualFilterValuesWithPrev = (
 
 export {
   getFilterType,
-  getSharedByType,
+  getSharedBy,
   getFilterLocation,
   getSubjectFilter,
   getAuthorType,

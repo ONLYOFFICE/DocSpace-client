@@ -66,7 +66,7 @@ const DEFAULT_LOCATION: FilterLocation | null = null;
 
 const SEARCH_TYPE = "withSubfolders";
 const AUTHOR_TYPE = "authorType";
-const SHARED_BY_TYPE = "sharedByType";
+const SHARED_BY = "sharedBy";
 const FILTER_TYPE = "filterType";
 const ROOM_ID = "roomId";
 const SEARCH = "search";
@@ -98,7 +98,7 @@ const getOtherSearchParams = () => {
   const filterSearchParams = [
     SEARCH_TYPE,
     AUTHOR_TYPE,
-    SHARED_BY_TYPE,
+    SHARED_BY,
     FILTER_TYPE,
     ROOM_ID,
     SEARCH,
@@ -169,7 +169,7 @@ class FilesFilter {
 
   authorType: string | null;
 
-  sharedByType: string | null;
+  sharedBy: string | null;
 
   total: number;
 
@@ -242,8 +242,7 @@ class FilesFilter {
         urlFilter[AUTHOR_TYPE]) ||
       defaultFilter.authorType;
 
-    const sharedByType =
-      urlFilter[SHARED_BY_TYPE] || defaultFilter.sharedByType;
+    const sharedBy = urlFilter[SHARED_BY] || defaultFilter.sharedBy;
 
     const roomId = urlFilter[ROOM_ID] || defaultFilter.roomId;
     const withSubfolders =
@@ -293,7 +292,7 @@ class FilesFilter {
       searchArea,
       key,
       locationFilter,
-      sharedByType,
+      sharedBy,
     );
 
     return newFilter;
@@ -319,7 +318,7 @@ class FilesFilter {
     searchArea = DEFAULT_SEARCH_AREA,
     key = DEFAULT_KEY,
     location = DEFAULT_LOCATION,
-    sharedByType = DEFAULT_SHARED_BY_TYPE,
+    sharedBy = DEFAULT_SHARED_BY_TYPE,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -340,7 +339,7 @@ class FilesFilter {
     this.searchArea = searchArea;
     this.key = key;
     this.location = location;
-    this.sharedByType = sharedByType;
+    this.sharedBy = sharedBy;
   }
 
   getStartIndex = () => {
@@ -434,7 +433,7 @@ class FilesFilter {
       searchArea,
       key,
       location,
-      sharedByType,
+      sharedBy,
     } = fixedValidObject;
 
     const dtoFilter: { [key: string]: unknown } = {};
@@ -446,7 +445,7 @@ class FilesFilter {
     if (search) dtoFilter[SEARCH] = search.trim();
     if (roomId) dtoFilter[ROOM_ID] = roomId;
     if (authorType) dtoFilter[AUTHOR_TYPE] = authorType;
-    if (sharedByType) dtoFilter[SHARED_BY_TYPE] = sharedByType;
+    if (sharedBy) dtoFilter[SHARED_BY] = sharedBy;
     if (folder) dtoFilter[FOLDER] = folder;
     if (pageCount !== DEFAULT_PAGE_COUNT) dtoFilter[PAGE_COUNT] = pageCount;
     if (URLParams.preview) dtoFilter[PREVIEW] = URLParams.preview;
@@ -485,7 +484,7 @@ class FilesFilter {
         this.applyFilterOption ||
         this.extension ||
         this.location ||
-        this.sharedByType,
+        this.sharedBy,
     );
   }
 
@@ -510,7 +509,7 @@ class FilesFilter {
       this.searchArea,
       this.key,
       this.location,
-      this.sharedByType,
+      this.sharedBy,
     );
   }
 
@@ -533,7 +532,7 @@ class FilesFilter {
       this.extension === filter.extension &&
       this.searchArea === filter.searchArea &&
       this.location === filter.location &&
-      this.sharedByType === filter.sharedByType;
+      this.sharedBy === filter.sharedBy;
 
     return equals;
   }

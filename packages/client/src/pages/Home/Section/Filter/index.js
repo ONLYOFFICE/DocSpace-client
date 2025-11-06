@@ -51,7 +51,7 @@ import {
   getTags,
   getQuotaFilter,
   getFilterLocation,
-  getSharedByType,
+  getSharedBy,
 } from "@docspace/shared/components/filter/Filter.utils";
 
 import {
@@ -295,7 +295,7 @@ const SectionFilterContent = ({
         const filterType = getFilterType(data) || null;
 
         const authorType = getAuthorType(data);
-        const sharedByType = getSharedByType(data);
+        const sharedBy = getSharedBy(data);
 
         const withSubfolders = getSearchParams(data);
         const withContent = getFilterContent(data);
@@ -318,7 +318,7 @@ const SectionFilterContent = ({
           newFilter.excludeSubject = null;
         }
 
-        newFilter.sharedByType = sharedByType;
+        newFilter.sharedBy = sharedBy;
 
         newFilter.withSubfolders =
           withSubfolders === FilterKeys.excludeSubfolders ? null : "true";
@@ -779,12 +779,12 @@ const SectionFilterContent = ({
         });
       }
 
-      if (filter.sharedByType) {
-        const user = await getUser(filter.sharedByType);
+      if (filter.sharedBy) {
+        const user = await getUser(filter.sharedBy);
         const label = user.displayName;
 
         filterValues.push({
-          key: filter.sharedByType,
+          key: filter.sharedBy,
           group: FilterGroups.filterSharedBy,
           label,
         });
@@ -819,7 +819,7 @@ const SectionFilterContent = ({
     return filterValues;
   }, [
     filter.authorType,
-    filter.sharedByType,
+    filter.sharedBy,
     filter.roomId,
     filter.filterType,
     filter.excludeSubject,
@@ -1665,7 +1665,7 @@ const SectionFilterContent = ({
         }
 
         if (group === FilterGroups.filterSharedBy) {
-          newFilter.sharedByType = null;
+          newFilter.sharedBy = null;
         }
 
         if (group === FilterGroups.filterRoom) {

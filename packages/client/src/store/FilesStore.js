@@ -1845,7 +1845,7 @@ class FilesStore {
 
         let currentFolder = data.current;
 
-        const navigationPath = await Promise.all(
+        let navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive, AIAgents } = FolderType;
 
@@ -1955,10 +1955,20 @@ class FilesStore {
               : "result",
           );
 
+          navigationPath = navigationPath.filter(
+            (item) => item.folderType !== FolderType.AIAgent,
+          );
+
           currentFolder = {
             ...aiRoom,
             security: {
               ...currentFolder.security,
+              Download: aiRoom.security.Download,
+              ChangeOwner: aiRoom.security.ChangeOwner,
+              Delete: aiRoom.security.Delete,
+              EditRoom: aiRoom.security.EditRoom,
+              EditAccess: aiRoom.security.EditAccess,
+              Pin: aiRoom.security.Pin,
               UseChat: aiRoom.security.UseChat,
             },
             isRoom: true,
@@ -3139,9 +3149,9 @@ class FilesStore {
       if (!canPinAgent) {
         agentOptions = removeOptions(agentOptions, ["unpin-room", "pin-room"]);
       } else {
-        item.pinned
-          ? (agentOptions = removeOptions(agentOptions, ["pin-room"]))
-          : (agentOptions = removeOptions(agentOptions, ["unpin-room"]));
+        agentOptions = item.pinned
+          ? removeOptions(agentOptions, ["pin-room"])
+          : removeOptions(agentOptions, ["unpin-room"]);
       }
 
       if (!canMuteAgent) {
@@ -3150,9 +3160,9 @@ class FilesStore {
           "mute-room",
         ]);
       } else {
-        item.mute
-          ? (agentOptions = removeOptions(agentOptions, ["mute-room"]))
-          : (agentOptions = removeOptions(agentOptions, ["unmute-room"]));
+        agentOptions = item.mute
+          ? removeOptions(agentOptions, ["mute-room"])
+          : removeOptions(agentOptions, ["unmute-room"]);
       }
 
       if (!canViewAgentInfo) {

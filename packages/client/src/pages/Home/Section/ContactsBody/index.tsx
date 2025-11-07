@@ -63,7 +63,7 @@ type SectionBodyContentProps = {
   selectAll?: ContactsHotkeysStore["selectAll"];
   deselectAll?: ContactsHotkeysStore["deselectAll"];
   openItem?: ContactsHotkeysStore["openItem"];
-  openContextMenu?: ContactsHotkeysStore["openContextMenu"];
+  openContextMenu: ContactsHotkeysStore["openContextMenu"];
   onClickBack?: FilesActionStore["onClickBack"];
   getTfaType?: TfaStore["getTfaType"];
   enableSelection: ContactsHotkeysStore["enableSelection"];

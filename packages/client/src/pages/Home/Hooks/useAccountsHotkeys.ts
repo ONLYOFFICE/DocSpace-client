@@ -47,7 +47,7 @@ interface AccountsHotkeysProps {
   enableSelection: ContactsHotkeysStore["enableSelection"];
   viewAs: PeopleStore["viewAs"];
   selection: UsersStore["selection"] | GroupsStore["selection"];
-  openContextMenu: VoidFunction;
+  openContextMenu: ContactsHotkeysStore["openContextMenu"];
 }
 
 const useAccountsHotkeys = ({

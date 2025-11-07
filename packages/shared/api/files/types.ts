@@ -125,6 +125,7 @@ export type TFile = {
   updated: string;
   updatedBy: TCreatedBy;
   sharedBy?: TCreatedBy;
+  ownedBy?: TCreatedBy;
   version: number;
   versionGroup: number;
   viewAccessibility: TFileViewAccessibility;
@@ -234,6 +235,7 @@ export type TFolder = {
   updated: string;
   updatedBy: TCreatedBy;
   sharedBy?: TCreatedBy;
+  ownedBy?: TCreatedBy;
   rootFolderType: FolderType;
   isArchive?: boolean;
   roomType?: RoomsType;

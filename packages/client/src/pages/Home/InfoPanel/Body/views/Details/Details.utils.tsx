@@ -173,7 +173,7 @@ class DetailsHelper {
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
-              "Owner",
+              "ownedBy" in this.item && this.item.ownedBy ? "OwnedBy" : "Owner",
               // "Location",
               "Type",
               "Content",
@@ -181,12 +181,15 @@ class DetailsHelper {
               "Last modified by",
               "Creation date",
               this.item.order && "Index",
-              this.item.createdBy && "Author",
+              "ownedBy" in this.item &&
+                this.item.ownedBy &&
+                this.item.createdBy &&
+                "Author",
               this.item.sharedBy && "Shared by",
               this.item.access && "Access level",
             ]
           : [
-              "Owner",
+              "ownedBy" in this.item && this.item.ownedBy ? "OwnedBy" : "Owner",
               // "Location",
               "Type",
               "File extension",
@@ -200,7 +203,10 @@ class DetailsHelper {
               "expired" in this.item && this.item.expired && "Lifetime ends",
               "Versions",
               "order" in this.item && this.item.order && "Index",
-              this.item.createdBy && "Author",
+              "ownedBy" in this.item &&
+                this.item.ownedBy &&
+                this.item.createdBy &&
+                "Author",
               "sharedBy" in this.item && this.item.sharedBy && "Shared by",
               this.item.access && "Access level",
               "Comments",
@@ -211,6 +217,7 @@ class DetailsHelper {
   getPropertyTitle = (propertyId: string) => {
     switch (propertyId) {
       case "Owner":
+      case "OwnedBy":
         return this.t("Common:Owner");
       case "Location":
         return this.t("Common:Location");
@@ -276,6 +283,8 @@ class DetailsHelper {
     switch (propertyId) {
       case "Owner":
         return this.getAuthorDecoration("createdBy");
+      case "OwnedBy":
+        return this.getAuthorDecoration("ownedBy");
       case "Location":
         return text("...");
 

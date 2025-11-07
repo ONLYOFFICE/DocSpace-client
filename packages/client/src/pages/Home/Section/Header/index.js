@@ -199,7 +199,6 @@ const SectionHeaderContent = (props) => {
     isArchive,
     isSharedWithMeFolderRoot,
     isAIAgentsFolder,
-    userSelection,
     filesSelection,
   } = props;
 
@@ -582,10 +581,9 @@ const SectionHeaderContent = (props) => {
       ? EMPTY_ARRAY
       : getHeaderMenu(t);
 
-  const contactsHeaderMenu =
-    !isSectionHeaderVisible || userSelection.length === 0
-      ? EMPTY_ARRAY
-      : getContactsHeaderMenu(t, isContactsGroupsPage);
+  const contactsHeaderMenu = !isSectionHeaderVisible
+    ? EMPTY_ARRAY
+    : getContactsHeaderMenu(t, isContactsGroupsPage);
 
   const indexEditingMenu = React.useMemo(() => {
     if (!isIndexEditingMode) return EMPTY_ARRAY;
@@ -906,7 +904,12 @@ const SectionHeaderContent = (props) => {
     if (!lengthList || lengthList === 0) return false;
 
     return true;
-  }, [getContextOptionsPlus, isContactsPage, isContactsGroupsPage, allowInvitingMembers]);
+  }, [
+    getContextOptionsPlus,
+    isContactsPage,
+    isContactsGroupsPage,
+    allowInvitingMembers,
+  ]);
 
   const withMenu = !isRoomsFolder && !isContactsGroupsPage && !isAIAgentsFolder;
 
@@ -1084,7 +1087,6 @@ export default inject(
 
     const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
-    const userSelection = peopleStore.usersStore.selection;
 
     const {
       setSelected,
@@ -1405,7 +1407,6 @@ export default inject(
       isArchive,
       isSharedWithMeFolderRoot,
       isAIAgentsFolder,
-      userSelection,
       filesSelection,
     };
   },

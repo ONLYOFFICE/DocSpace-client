@@ -250,6 +250,7 @@ export const useMembers = (props: UseMembersProps) => {
         access: member.access,
         canEditAccess: member.canEditAccess,
         isGroup: member.subjectType === MembersSubjectType.Group,
+        isOwner: member.isOwner,
       };
     });
 
@@ -300,6 +301,7 @@ export const useMembers = (props: UseMembersProps) => {
             infoPanelSelection,
             true,
             isGroup,
+            member.isOwner,
           );
           const selectedOption = options.find(
             (option) => "access" in member && option.access === member.access,

@@ -3,7 +3,7 @@
   "content": "or continue with",
   "content_en_sha1_hash": "a1aa5858e0e7bb74686ebe81912f61fc201800cb",
   "created_at": "2025-05-19T21:30:47.130Z",
-  "updated_at": "2025-11-03T12:10:35.415Z",
+  "updated_at": "2025-11-07T13:41:06.619Z",
   "comment": {
     "text": "This translation key is used for the label \"or continue with\" that appears in a social login flow. It prompts the user to either use their email address or proceed with the current authentication method. The text is commonly found on buttons or labels within login confirmation dialogs.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/page.client.tsx",
-      "line_number": 608,
+      "line_number": 622,
       "context": "{!emailFromLink && (oauthDataExists() || ssoExists()) ? (\n <>\n <div className=\"line\">\n <Text color={globalColors.gray} className=\"or-label\">\n {t(\"Common:orContinueWith\")}\n </Text>\n </div>\n <SocialButtonsGroup\n providers={thirdPartyProviders}\n onClick={onSocialButtonClick}",
       "module": "/packages/login"
     },

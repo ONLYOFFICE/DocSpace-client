@@ -44,14 +44,16 @@ type AiProviderTileProps = {
   item: TAiProvider;
   onDeleteClick: (id: TAiProvider["id"]) => void;
   onSettingsClick: (provider: TAiProvider) => void;
+  isAvailable?: boolean;
 };
 
 export const AiProviderTile = ({
   item,
   onDeleteClick,
   onSettingsClick,
+  isAvailable = true,
 }: AiProviderTileProps) => {
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common", "AISettings"]);
 
   const icon = getAiProviderIcon(item.type) ?? "";
   const companyLabel = getAiProviderLabel(item.type);
@@ -73,9 +75,21 @@ export const AiProviderTile = ({
     ];
   };
 
+  const getErrorTooltipContent = () => {
+    return (
+      <Text fontSize="12px" lineHeight="16px">
+        {t("AISettings:ProviderUnavailableError")}
+      </Text>
+    );
+  };
+
   return (
     <AiTile icon={icon}>
-      <AiTile.Header title={item.title}>
+      <AiTile.Header
+        title={item.title}
+        hasError={!isAvailable}
+        getErrorTooltipContent={getErrorTooltipContent}
+      >
         <ContextMenuButton
           directionX="right"
           getData={getContextOptions}

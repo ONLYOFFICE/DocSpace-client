@@ -136,16 +136,19 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const expirationLinkDate =
     item && "expirationDate" in item ? item.expirationDate : "";
 
-  const getTooltipContent = () => (
-    <Text fontSize="12px" fontWeight={400} noSelect>
-      {roomLifetime?.deletePermanently
-        ? t("Common:FileWillBeDeletedPermanently", { date: expiredDate || "" })
-        : t("Common:SectionMoveNotification", {
-            sectionName: t("Common:TrashSection"),
-            date: expiredDate || "",
-          })}
-    </Text>
-  );
+  const getTooltipContent = () => {
+    const text = roomLifetime?.deletePermanently
+      ? t("Common:FileWillBeDeletedPermanently", { date: expiredDate || "" })
+      : t("Common:SectionMoveNotification", {
+          sectionName: t("Common:TrashSection"),
+          date: expiredDate || "",
+        });
+    return text;
+  };
+
+  const getLockTooltip = () => {
+    return t("Common:LockedBy", { userName: lockedBy || "" });
+  };
 
   const getExpirationLinkDateTooltipContent = () => {
     if (
@@ -176,11 +179,24 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     );
   };
 
-  const getLockTooltip = () => (
-    <Text fontSize="12px" fontWeight={400} noSelect>
-      {t("Common:LockedBy", { userName: lockedBy || "" })}
-    </Text>
-  );
+  const getExpirationLinkDateText = () => {
+    if (
+      item.external &&
+      (item.isLinkExpired ||
+        (expirationLinkDate && isExpired(expirationLinkDate)))
+    ) {
+      return t("Common:LinkExpired");
+    }
+
+    if (!expirationLinkDate) return null;
+
+    // For complex content with Trans, we'll use custom Tooltip
+    return null;
+  };
+
+  const expirationLinkDateText = getExpirationLinkDateText();
+  const hasComplexExpirationContent =
+    expirationLinkDate && !expirationLinkDateText;
 
   const onIconLockClick = () => {
     if (!canLock) {
@@ -198,23 +214,19 @@ export const QuickButtons = (props: QuickButtonsProps) => {
       {!isIndexEditingMode ? (
         <>
           {showLifetimeIcon ? (
-            <>
+            <div
+              data-tooltip-id="info-tooltip"
+              data-tooltip-content={getTooltipContent()}
+              data-tooltip-place="bottom"
+            >
               <IconButton
                 iconName={LifetimeReactSvgUrl}
                 className="badge file-lifetime icons-group"
                 size={sizeQuickButton}
                 isClickable
                 isDisabled={isDisabled}
-                data-tooltip-id="lifetimeTooltip"
               />
-
-              <Tooltip
-                id="lifetimeTooltip"
-                place="bottom"
-                getContent={getTooltipContent}
-                maxWidth="300px"
-              />
-            </>
+            </div>
           ) : null}
 
           {isAvailableDownloadFile ? (
@@ -280,7 +292,15 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             />
           ) : null}
           {locked && isTile ? (
-            <>
+            <div
+              data-tooltip-id={
+                lockedBy && !canLock ? "info-tooltip" : undefined
+              }
+              data-tooltip-content={
+                lockedBy && !canLock ? getLockTooltip() : undefined
+              }
+              data-tooltip-place="bottom"
+            >
               <IconButton
                 iconName={iconLock}
                 className={classNames("badge lock-file icons-group", {
@@ -292,38 +312,46 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 onClick={onIconLockClick}
                 color="accent"
                 title={t("Common:UnblockFile")}
-                data-tooltip-id={`lockTooltip${item.id}`}
               />
-              {lockedBy && !canLock ? (
-                <Tooltip
-                  id={`lockTooltip${item.id}`}
-                  place="bottom"
-                  getContent={getLockTooltip}
-                  maxWidth="300px"
-                  openOnClick
-                />
-              ) : null}
-            </>
+            </div>
           ) : null}
 
           {expirationLinkDate ? (
             <>
-              <IconButton
-                iconName={ExpirationLinkDateReactSvgUrl}
-                className="badge expiration-link-date icons-group"
-                isClickable
-                size={sizeQuickButton}
-                isDisabled={isDisabled}
-                data-tooltip-id={`expirationLinkDateTooltip${item.id}`}
-                color={globalColors.lightErrorStatus}
-              />
-              <Tooltip
-                id={`expirationLinkDateTooltip${item.id}`}
-                place="bottom"
-                getContent={getExpirationLinkDateTooltipContent}
-                maxWidth="300px"
-                openOnClick
-              />
+              <div
+                data-tooltip-id={
+                  hasComplexExpirationContent ? undefined : "info-tooltip"
+                }
+                data-tooltip-content={
+                  !hasComplexExpirationContent
+                    ? expirationLinkDateText
+                    : undefined
+                }
+                data-tooltip-place="bottom"
+              >
+                <IconButton
+                  iconName={ExpirationLinkDateReactSvgUrl}
+                  className="badge expiration-link-date icons-group"
+                  isClickable
+                  size={sizeQuickButton}
+                  isDisabled={isDisabled}
+                  data-tooltip-id={
+                    hasComplexExpirationContent
+                      ? `expirationLinkDateTooltip${item.id}`
+                      : undefined
+                  }
+                  color={globalColors.lightErrorStatus}
+                />
+              </div>
+              {hasComplexExpirationContent ? (
+                <Tooltip
+                  id={`expirationLinkDateTooltip${item.id}`}
+                  place="bottom"
+                  getContent={getExpirationLinkDateTooltipContent}
+                  maxWidth="300px"
+                  openOnClick
+                />
+              ) : null}
             </>
           ) : null}
 

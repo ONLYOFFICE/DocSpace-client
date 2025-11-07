@@ -103,11 +103,27 @@ export interface WithTooltipProps {
   tooltipFitToContent?: boolean;
 }
 
-export type ComponentProps = React.HTMLAttributes<HTMLElement> & {
-  onClick?: MouseEventHandler;
-  onMouseEnter?: MouseEventHandler;
-  onMouseLeave?: MouseEventHandler;
-};
+export type OmitTooltipProps<T> = Omit<
+  T,
+  "title" | "tooltipContent" | "tooltipPlace" | "tooltipFitToContent"
+>;
+
+export function omitTooltipProps<T extends Record<string, unknown>>(
+  props: T & Partial<WithTooltipProps>,
+): OmitTooltipProps<T> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { title, tooltipContent, tooltipPlace, tooltipFitToContent, ...rest } =
+    props;
+  return rest as OmitTooltipProps<T>;
+}
+
+export type ComponentProps = OmitTooltipProps<
+  React.HTMLAttributes<HTMLElement> & {
+    onClick?: MouseEventHandler;
+    onMouseEnter?: MouseEventHandler;
+    onMouseLeave?: MouseEventHandler;
+  }
+>;
 
 declare global {
   interface Window {

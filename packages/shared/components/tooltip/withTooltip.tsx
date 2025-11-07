@@ -31,12 +31,12 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import type {
+import {
   TTooltipPlace,
   MouseEventHandler,
   TooltipHandlers,
   WithTooltipProps,
-  ComponentProps,
+  omitTooltipProps,
 } from "./Tooltip.types";
 import { DEFAULT_DELAY_SHOW } from "./Tooltip.constants";
 
@@ -130,9 +130,9 @@ function useTooltipControl(
   };
 }
 
-function createTooltipWrapper<TProps extends ComponentProps>(
+function createTooltipWrapper<TProps extends Record<string, unknown>>(
   renderElement: (
-    props: TProps,
+    props: TProps & WithTooltipProps,
     ref: React.Ref<HTMLElement>,
     tooltipHandlers?: TooltipHandlers,
   ) => React.ReactElement,
@@ -141,19 +141,22 @@ function createTooltipWrapper<TProps extends ComponentProps>(
 
   return React.forwardRef<HTMLElement, Props>((props, ref) => {
     const {
-      title,
-      tooltipContent,
-      tooltipPlace = "bottom",
-      tooltipFitToContent,
-      ...restProps
+      title: _title,
+      tooltipContent: _tooltipContent,
+      tooltipPlace: _tooltipPlace,
+      tooltipFitToContent: _tooltipFitToContent,
     } = props;
 
-    const originalOnClick = restProps.onClick;
-    const originalOnMouseEnter = restProps.onMouseEnter;
-    const originalOnMouseLeave = restProps.onMouseLeave;
+    const originalOnClick = props.onClick as MouseEventHandler | undefined;
+    const originalOnMouseEnter = props.onMouseEnter as
+      | MouseEventHandler
+      | undefined;
+    const originalOnMouseLeave = props.onMouseLeave as
+      | MouseEventHandler
+      | undefined;
 
-    if (title || tooltipContent) {
-      const content = tooltipContent || title;
+    if (_title || _tooltipContent) {
+      const content = _tooltipContent || _title;
       const contentString = typeof content === "string" ? content : undefined;
 
       const tooltipHandlers = useTooltipControl(
@@ -161,10 +164,10 @@ function createTooltipWrapper<TProps extends ComponentProps>(
         originalOnMouseEnter,
         originalOnMouseLeave,
         contentString,
-        tooltipPlace,
+        _tooltipPlace as TTooltipPlace,
       );
 
-      if (tooltipFitToContent) {
+      if (_tooltipFitToContent) {
         return (
           <span
             data-tooltip-anchor={tooltipHandlers.anchorId}
@@ -174,30 +177,32 @@ function createTooltipWrapper<TProps extends ComponentProps>(
             onClick={tooltipHandlers.handleClick}
             onMouseDown={tooltipHandlers.handleClick}
           >
-            {renderElement(restProps as unknown as TProps, ref)}
+            {renderElement(props as TProps & WithTooltipProps, ref)}
           </span>
         );
       }
 
       return renderElement(
-        restProps as unknown as TProps,
+        props as TProps & WithTooltipProps,
         ref,
         tooltipHandlers,
       );
     }
 
-    return renderElement(restProps as unknown as TProps, ref);
+    return renderElement(props as TProps & WithTooltipProps, ref);
   });
 }
 
-export function withTooltip<T extends ComponentProps>(
+export function withTooltip<T extends Record<string, unknown>>(
   WrappedComponent: ComponentType<T>,
 ) {
   return createTooltipWrapper<T>((props, ref, tooltipHandlers) => {
+    const componentProps = omitTooltipProps(props);
+
     if (tooltipHandlers) {
       return (
         <WrappedComponent
-          {...props}
+          {...(componentProps as T)}
           ref={ref as React.Ref<never>}
           data-tooltip-anchor={tooltipHandlers.anchorId}
           onMouseEnter={tooltipHandlers.handleMouseEnter}
@@ -207,19 +212,27 @@ export function withTooltip<T extends ComponentProps>(
         />
       );
     }
-    return <WrappedComponent {...props} ref={ref as React.Ref<never>} />;
+    return (
+      <WrappedComponent
+        {...(componentProps as T)}
+        ref={ref as React.Ref<never>}
+      />
+    );
   });
 }
 
 export function withTooltipForElement<
   T extends keyof React.JSX.IntrinsicElements = "div",
 >(Element: T = "div" as T) {
-  type ElementProps = React.ComponentPropsWithoutRef<T> & ComponentProps;
+  type ElementProps = React.ComponentPropsWithoutRef<T> &
+    Record<string, unknown>;
 
   return createTooltipWrapper<ElementProps>((props, ref, tooltipHandlers) => {
+    const elementProps = omitTooltipProps(props);
+
     if (tooltipHandlers) {
       return React.createElement(Element, {
-        ...props,
+        ...elementProps,
         ref,
         "data-tooltip-anchor": tooltipHandlers.anchorId,
         onMouseEnter: tooltipHandlers.handleMouseEnter,
@@ -228,6 +241,6 @@ export function withTooltipForElement<
         onMouseDown: tooltipHandlers.handleClick,
       });
     }
-    return React.createElement(Element, { ...props, ref });
+    return React.createElement(Element, { ...elementProps, ref });
   });
 }

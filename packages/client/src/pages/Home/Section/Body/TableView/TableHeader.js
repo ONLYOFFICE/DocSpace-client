@@ -760,7 +760,7 @@ class FilesTableHeader extends React.Component {
   getAIAgentsColumns = () => {
     const {
       t,
-      isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       showStorageInfo,
       aiAgentColumnNameIsEnabled,
       aiAgentColumnTagsIsEnabled,
@@ -813,7 +813,7 @@ class FilesTableHeader extends React.Component {
     showStorageInfo &&
       columns.splice(columns.length, 0, {
         key: "StorageAIAgents",
-        title: isDefaultRoomsQuotaSet
+        title: isDefaultAIAgentsQuotaSet
           ? t("Common:StorageAndQuota")
           : t("Common:Storage"),
         enable: aiAgentColumnQuotaIsEnable,
@@ -1030,7 +1030,11 @@ export default inject(
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
+    const {
+      isDefaultRoomsQuotaSet,
+      showStorageInfo,
+      isDefaultAIAgentsQuotaSet,
+    } = currentQuotaStore;
 
     const { isIndexEditingMode } = indexingStore;
 
@@ -1226,6 +1230,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      isDefaultAIAgentsQuotaSet,
       isIndexEditingMode,
 
       indexColumnSize,

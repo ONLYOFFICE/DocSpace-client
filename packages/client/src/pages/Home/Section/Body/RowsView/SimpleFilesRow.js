@@ -207,9 +207,7 @@ const SimpleFilesRow = React.memo((props) => {
 
   const onRowClickEvent = useCallback(
     (event) => {
-      if (isMobile) return;
-
-      onDoubleClick(event);
+      if (isMobile) onDoubleClick(event);
     },
     [isMobile, onDoubleClick],
   );

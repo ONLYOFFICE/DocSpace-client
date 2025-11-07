@@ -89,7 +89,7 @@ export const ChatListItem = ({
         className={styles.dropdowItemWrapper}
         onMouseEnter={() => setHoveredChatId(chat.id)}
       >
-        <Text truncate title={chat.title}>
+        <Text className={styles.chatListItemTitle} truncate title={chat.title}>
           {chat.title}
         </Text>
         {hoveredChatId === chat.id || !desktop ? (

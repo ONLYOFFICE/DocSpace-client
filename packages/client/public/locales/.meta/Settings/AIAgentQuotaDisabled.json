@@ -1,0 +1,28 @@
+{
+  "key_path": "AIAgentQuotaDisabled",
+  "content": "AI agent quota has been successfully disabled.",
+  "content_en_sha1_hash": "93fd2063f14e1da29d4ed22d57d2a9b7d7eb9115",
+  "created_at": "2025-11-06T18:29:07.335Z",
+  "updated_at": "2025-11-06T18:41:34.880Z",
+  "comment": {
+    "text": "This key displays a success message in the UI confirming that the AI agent quota has been disabled. It appears as a toastr notification after a user attempts to disable the quota, indicating the action was completed successfully. Translators should ensure the message accurately conveys a successful deactivation.",
+    "is_auto": true,
+    "updated_at": "2025-11-06T18:41:34.880Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
+      "line_number": 532,
+      "context": "try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\")\n : t(\"AIAgentQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);\n }",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2025-11-03T12:10:34.871Z",
+  "updated_at": "2025-11-06T18:29:15.552Z",
   "comment": {
     "text": "This translation key is used for the label of a button that invites users to create a new room. The button appears in various UI elements, including main buttons and folder input dialogs. It displays the text \"New room\" to guide users through the process of creating a new room.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 810,
+      "line_number": 973,
       "context": "toggleInfoPanel={isProfile ? undefined : onToggleInfoPanel}\n isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}\n titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3311,
+      "line_number": 3316,
       "context": "? isFlowsFolder\n ? []\n : [\n {\n key: \"new-room\",\n label: t(\"Common:NewRoom\"),\n onClick: this.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n ]\n : [",
       "module": "/packages/client"
     },

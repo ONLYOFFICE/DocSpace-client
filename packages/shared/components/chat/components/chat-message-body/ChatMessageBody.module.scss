@@ -136,7 +136,7 @@
         min-width: fit-content;
         height: 32px;
         max-width: 300px;
-        
+
         padding-inline-end: 8px;
 
         display: flex;
@@ -361,6 +361,10 @@
 
     &.hide {
       border-bottom: none;
+
+      .arrowRightIcon svg {
+        @include mixins.flip-in-rtl;
+      }
     }
 
     &:not(.hide) {
@@ -454,6 +458,12 @@
       color: var(--chat-message-source-url-color);
     }
 
+    .sourceTitle,
+    .sourceContent {
+      text-align: var(--input-text-align);
+      unicode-bidi: plaintext;
+    }
+
     .sourceFallbackIcon {
       width: 16px;
       height: 16px;
@@ -467,6 +477,8 @@
   .externalLinkIcon {
     width: 16px;
     height: 16px;
+
+    @include mixins.flip-in-rtl;
 
     path {
       fill: var(--chat-message-external-link-icon-color);
@@ -561,7 +573,7 @@
 
   width: fit-content;
 
-  border-left: 3px solid var(--chat-message-blockquote-bg-color);
+  border-inline-start: 3px solid var(--chat-message-blockquote-bg-color);
   border-radius: 3px;
 
   color: var(--chat-message);
@@ -710,4 +722,18 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   white-space: pre-line;
+
+  unicode-bidi: plaintext;
+  text-align: var(--input-text-align);
+}
+
+.heading,
+.link,
+.blockquote,
+.paragraph,
+.ol,
+.ul,
+.listItem {
+  text-align: var(--input-text-align);
+  unicode-bidi: plaintext;
 }

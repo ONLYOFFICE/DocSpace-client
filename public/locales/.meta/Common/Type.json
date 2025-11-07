@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2025-11-03T12:10:35.096Z",
+  "updated_at": "2025-11-06T18:29:15.728Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 201,
+      "line_number": 209,
       "context": "return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");\n case \"Storage Type\":\n return this.t(\"InfoPanel:StorageType\");\n \n case \"File extension\":\n return this.t(\"FileExtension\");",
       "module": "/packages/client"
     },
@@ -150,13 +150,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 569,
+      "line_number": 584,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 569,
+      "line_number": 584,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     }

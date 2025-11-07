@@ -187,6 +187,7 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
 
         toastr.success(toastMsg);
 
+        socket?.off(SocketEvents.ExportChat);
         socket?.emit(SocketCommands.Unsubscribe, {
           roomParts: chatParts,
           individual: true,

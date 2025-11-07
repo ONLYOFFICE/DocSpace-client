@@ -109,6 +109,7 @@ export const MCPTile = ({
               directionX="right"
               getData={getContextOptions}
               isDisabled={disableActions}
+              dropDownClassName={styles.aiContextMenuDropDown}
             />
           ) : null}
         </div>

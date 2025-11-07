@@ -38,6 +38,8 @@ import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.re
 
 import { AiTile } from "../sub-components/ai-tile";
 
+import styles from "./../AISettings.module.scss";
+
 type AiProviderTileProps = {
   item: TAiProvider;
   onDeleteClick: (id: TAiProvider["id"]) => void;
@@ -74,7 +76,11 @@ export const AiProviderTile = ({
   return (
     <AiTile icon={icon}>
       <AiTile.Header title={item.title}>
-        <ContextMenuButton directionX="right" getData={getContextOptions} />
+        <ContextMenuButton
+          directionX="right"
+          getData={getContextOptions}
+          dropDownClassName={styles.aiContextMenuDropDown}
+        />
       </AiTile.Header>
 
       <AiTile.Body>

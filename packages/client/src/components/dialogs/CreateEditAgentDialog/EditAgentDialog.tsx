@@ -116,6 +116,10 @@ const EditAgentDialog = ({
     );
   };
 
+  const setAgentParamsAction = (newParams: TAgentParams) => {
+    setAgentParams((value) => ({ ...value, ...newParams }));
+  };
+
   const setAgentTags = (newTags: TAgentTagsParams[]) =>
     setAgentParams({ ...agentParams, tags: newTags });
 
@@ -191,7 +195,7 @@ const EditAgentDialog = ({
         <SetAgentParams
           tagHandler={tagHandler}
           agentParams={agentParams}
-          setAgentParams={setAgentParams}
+          setAgentParams={setAgentParamsAction}
           setIsScrollLocked={setIsScrollLocked}
           isEdit
           isDisabled={isLoading}

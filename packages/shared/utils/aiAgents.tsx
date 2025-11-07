@@ -61,6 +61,7 @@ export type TAgentParams = {
   mcpServers?: string[];
   mcpServersInitial?: string[];
   quota?: number;
+  attachDefaultTools?: boolean;
 };
 
 export const getStartAgentParams = (title: string): TAgentParams => {

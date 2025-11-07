@@ -399,6 +399,7 @@
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
+    min-width: 0;
   }
 
   :global(.name-wrapper),

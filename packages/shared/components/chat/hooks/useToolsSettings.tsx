@@ -31,24 +31,24 @@ import socket, { SocketEvents, TOptSocket } from "../../../utils/socket";
 import {
   getMCPToolsForRoom,
   getServersListForRoom,
-  getAIConfig,
   getWebSearchInRoom,
 } from "../../../api/ai";
-import { TMCPTool, TServer } from "../../../api/ai/types";
+import { TAIConfig, TMCPTool, TServer } from "../../../api/ai/types";
+import { Nullable } from "../../../types";
+import { RoomsType } from "../../../enums";
 
-const useToolsSettings = ({ roomId }: { roomId: string | number }) => {
+type Props = {
+  roomId: string | number;
+  aiConfig: Nullable<TAIConfig>;
+};
+
+const useToolsSettings = ({ roomId, aiConfig }: Props) => {
   const [servers, setServers] = React.useState<TServer[]>([]);
   const [MCPTools, setMCPTools] = React.useState<Map<string, TMCPTool[]>>(
     new Map(),
   );
-  const [webSearchPortalEnabled, setWebSearchPortalEnabled] =
-    React.useState(false);
   const [webSearchEnabled, setWebSearchEnabled] = React.useState(false);
   const [isFetched, setIsFetched] = React.useState(false);
-  const [knowledgeSearchToolName, setKnowledgeSearchToolName] =
-    React.useState("");
-  const [webSearchToolName, setWebSearchToolName] = React.useState("");
-  const [webCrawlingToolName, setWebCrawlingToolName] = React.useState("");
 
   const fetchServerTools = React.useCallback(
     async (res: TServer[], roomId: string | number) => {
@@ -82,17 +82,10 @@ const useToolsSettings = ({ roomId }: { roomId: string | number }) => {
   const initTools = React.useCallback(async () => {
     if (!roomId) return;
 
-    const [aiConfig, webSearchInRoom] = await Promise.all([
-      getAIConfig(),
+    const [webSearchInRoom] = await Promise.all([
       getWebSearchInRoom(Number(roomId)),
       fetchTools(),
     ]);
-    if (aiConfig) {
-      setKnowledgeSearchToolName(aiConfig.knowledgeSearchToolName);
-      setWebSearchToolName(aiConfig.webSearchToolName);
-      setWebCrawlingToolName(aiConfig.webCrawlingToolName);
-    }
-    setWebSearchPortalEnabled(aiConfig?.webSearchEnabled ?? false);
     setWebSearchEnabled(webSearchInRoom?.webSearchEnabled ?? false);
   }, [fetchTools, roomId]);
 
@@ -104,9 +97,13 @@ const useToolsSettings = ({ roomId }: { roomId: string | number }) => {
         data.type === "folder" &&
         data.id &&
         Number(data.id) === Number(roomId) &&
-        data.cmd !== "delete"
+        data.cmd !== "delete" && data.data
       ) {
-        fetchTools();
+        const parsedData = JSON.parse(data.data);
+        
+        if('roomType' in parsedData && parsedData.roomType === RoomsType.AIRoom){
+          fetchTools();
+        }
       }
     },
     [fetchTools, roomId],
@@ -123,15 +120,14 @@ const useToolsSettings = ({ roomId }: { roomId: string | number }) => {
   return {
     servers,
     MCPTools,
-    webSearchPortalEnabled,
+    webSearchPortalEnabled: aiConfig?.webSearchEnabled || false,
     webSearchEnabled,
     isFetched,
-    knowledgeSearchToolName,
-    webSearchToolName,
-    webCrawlingToolName,
+    knowledgeSearchToolName: aiConfig?.knowledgeSearchToolName || "",
+    webSearchToolName: aiConfig?.webSearchToolName || "",
+    webCrawlingToolName: aiConfig?.webCrawlingToolName || "",
     setServers,
     setMCPTools,
-    setWebSearchPortalEnabled,
     setWebSearchEnabled,
     setIsFetched,
     fetchTools,

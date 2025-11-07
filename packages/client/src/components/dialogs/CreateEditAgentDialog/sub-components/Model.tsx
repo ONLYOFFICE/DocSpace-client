@@ -28,18 +28,18 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
+import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { getModels, getProviders } from "@docspace/shared/api/ai";
 import { toastr } from "@docspace/shared/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { TAgentParams } from "@docspace/shared/utils/aiAgents";
+import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 type ModelSettingsProps = {
   agentParams: TAgentParams;
-  setAgentParams: (value: TAgentParams) => void;
+  setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
@@ -49,7 +49,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   const [models, setModels] = React.useState<TModel[]>([]);
 
   const [selectedProvider, setSelectedProvider] = React.useState<TAiProvider>({
-    id: agentParams.providerId ?? -2,
+    id: agentParams.providerId || -2,
   } as TAiProvider);
   const [selectedModel, setSelectedModel] = React.useState<TModel | null>({
     modelId: agentParams.modelId ?? "",
@@ -149,12 +149,12 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     (option: TOption) => {
       const provider = providers.find((p) => p.id === option.key);
 
-      if (!provider || provider.id === option.key) return;
+      if (!provider || provider.id === selectedProvider.id) return;
 
       setSelectedProvider(provider);
       setSelectedModel(null);
     },
-    [providers],
+    [providers, selectedProvider.id],
   );
 
   const modelOptions = React.useMemo(() => {
@@ -192,20 +192,19 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   React.useEffect(() => {
     if (!selectedModel) return;
 
-    if (
-      prevSelectedModel.current?.modelId === selectedModel?.modelId ||
-      typeof selectedModel.providerId !== "number"
-    )
-      return;
+    const hasChanges =
+      prevSelectedModel.current?.modelId !== selectedModel?.modelId ||
+      prevSelectedModel.current?.providerId !== selectedModel?.providerId;
+
+    if (!hasChanges || typeof selectedModel.providerId !== "number") return;
 
     setAgentParams({
-      ...agentParams,
       modelId: selectedModel?.modelId,
       providerId: selectedModel?.providerId,
     });
 
     prevSelectedModel.current = selectedModel;
-  }, [selectedModel?.modelId, agentParams]);
+  }, [selectedModel?.modelId, selectedModel?.providerId, setAgentParams]);
 
   return (
     <StyledParam increaseGap>

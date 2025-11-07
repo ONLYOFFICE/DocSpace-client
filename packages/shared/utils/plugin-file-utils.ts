@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { LinkTarget } from "../components/link";
+
 export interface FileItem {
-  isPlugin: boolean;
-  viewUrl: string;
+  isPlugin?: boolean;
+  viewUrl?: string;
   title?: string;
   [key: string]: unknown;
 }
@@ -35,7 +37,7 @@ export interface LinkProps {
   onClick?: (e: React.MouseEvent) => void;
   onMouseDown?: (e: React.MouseEvent) => void;
   onContextMenu?: (e: React.MouseEvent) => void;
-  target?: string;
+  target?: LinkTarget;
   [key: string]: unknown;
 }
 
@@ -70,7 +72,9 @@ export const createPluginFileHandlers = (
   };
 
   newLinkProps.onContextMenu = (e: React.MouseEvent) => {
-    e.currentTarget.setAttribute("href", item.viewUrl);
+    if (item.viewUrl) {
+      e.currentTarget.setAttribute("href", item.viewUrl);
+    }
     e.currentTarget.setAttribute("download", title);
   };
 

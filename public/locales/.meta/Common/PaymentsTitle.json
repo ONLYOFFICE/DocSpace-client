@@ -3,7 +3,7 @@
   "content": "Payments",
   "content_en_sha1_hash": "44357ae55a217646f4d1c3bb7cb7b437fa838999",
   "created_at": "2025-05-19T21:30:47.315Z",
-  "updated_at": "2025-10-27T16:14:33.158Z",
+  "updated_at": "2025-11-06T18:29:15.616Z",
   "comment": {
     "text": "This translation key is used as a title for payment-related sections and interfaces. It appears in various contexts, including error messages and settings pages, displaying the content \"Payments\" to users.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 626,
+      "line_number": 636,
       "context": "{\n id: \"portal-settings_catalog-payments\",\n key: \"10\",\n type: PageType.payments,\n link: \"payments\",\n tKey: \"Common:PaymentsTitle\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-portal-payments\",\n key: \"10-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 626,
+      "line_number": 636,
       "context": "{\n id: \"portal-settings_catalog-payments\",\n key: \"10\",\n type: PageType.payments,\n link: \"payments\",\n tKey: \"Common:PaymentsTitle\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-portal-payments\",\n key: \"10-0\",",
       "module": "/packages/client"
     },

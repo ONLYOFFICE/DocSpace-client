@@ -3,7 +3,7 @@
   "content": "Items in {{sectionName}} are automatically deleted after 30 days.",
   "content_en_sha1_hash": "72740d2f13fab9038a1cf3a73558f696ef70b1af",
   "created_at": "2025-06-02T10:19:23.448Z",
-  "updated_at": "2025-10-27T16:14:33.446Z",
+  "updated_at": "2025-11-06T18:29:15.756Z",
   "comment": {
     "text": "This translation key is used to display a warning message indicating that items in a specific section are automatically deleted after 30 days. It appears in the UI as part of a header on the Home page and in certain warnings, informing users about the auto-deletion policy for their files or personal folders.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 713,
-      "context": ": {};\n \n const badgeLabel = showTemplateBadge ? t(\"Files:Template\") : \"\";\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";",
+      "line_number": 858,
+      "context": ");\n \n const badgeLabel = showTemplateBadge ? t(\"Files:Template\") : \"\";\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";",
       "module": "/packages/client"
     },
     {

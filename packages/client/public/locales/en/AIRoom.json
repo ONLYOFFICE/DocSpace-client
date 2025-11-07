@@ -18,5 +18,8 @@
   "ModelDescription": "Select the AI provider and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
   "ResultStorage": "Result Storage",
   "UploadFilesDevice": "Upload files from your personal device",
-  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}"
+  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
+  "KnowledgeUnavailable": "Knowledge Base unavailable",
+  "KnowledgeUnavailableDescription": "The Knowledge base is currently disabled. To activate semantic search and document processing for your AI agents, please configure the embeddings provider in the {{productName}} settings.",
+  "KnowledgeUnavailableDescriptionUser": "The Knowledge base is currently disabled. To activate semantic search and document processing for AI agents, please contact your {{productName}} admin to configure the embeddings provider."
 }

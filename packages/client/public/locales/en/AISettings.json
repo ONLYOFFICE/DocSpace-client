@@ -26,8 +26,12 @@
   "MCPSettingTitle": "MCP servers",
   "Provider": "Provider",
   "ProviderAddedSuccess": "Provider added successfully",
+  "ProviderNameInputHint": "Use any name that is convenient for you to identify this connection",
+  "ProviderURLInputHint": "Enter the API endpoint URL provided by your AI service",
+  "ProviderKeyInputHint": "Enter the API key generated from your AI provider's dashboard",
   "ProviderKey": "Key",
   "ProviderRemovedSuccess": "Provider removed successfully",
+  "ProviderUnavailableError": "The AI provider is unavailable",
   "ProviderUpdatedSuccess": "Provider updated successfully",
   "ProviderURL": "URL",
   "ResetProviderKeyDescription": "The API key is displayed only once upon saving and is then hidden for security purposes. If it is reset, a new key must be provided; otherwise, AI features, including the chat, will be unavailable.",
@@ -42,5 +46,6 @@
   "ServiceIcon": "Service icon",
   "SystemMCPListTitle": "System",
   "ToUseAddProvider": "To use {{value}}, make sure to connect at least one provider first.",
-  "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes."
+  "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes.",
+  "KnowledgeSettingsDescription": "Enable a knowledge base for AI agents. The system will index your documents using the {{modelName}} model to support question-based search through your data. This feature focuses on finding relevant information but doesn't generate summaries or perform global analysis."
 }

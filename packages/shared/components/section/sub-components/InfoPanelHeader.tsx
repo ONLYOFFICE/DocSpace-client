@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { memo } from "react";
 import { SubInfoPanelHeaderProps } from "../Section.types";
 
-const SubInfoPanelHeader = ({ children }: SubInfoPanelHeaderProps) => {
+const SubInfoPanelHeader = memo(({ children }: SubInfoPanelHeaderProps) => {
   return children;
-};
+});
 
 SubInfoPanelHeader.displayName = "SubInfoPanelHeader";
 

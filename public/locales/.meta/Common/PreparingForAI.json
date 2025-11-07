@@ -3,7 +3,7 @@
   "content": "Preparing for AI",
   "content_en_sha1_hash": "455777c640a50d823923704cc725c569104b685e",
   "created_at": "2025-10-27T16:14:24.396Z",
-  "updated_at": "2025-10-27T16:29:29.236Z",
+  "updated_at": "2025-11-06T18:29:16.027Z",
   "comment": {
     "text": "This key displays the text \"Preparing for AI\" within a tooltip. It appears alongside explanatory text, likely to inform users about AI-related features or readiness. Translators should ensure the meaning is clear and concise for a general audience.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 282,
+      "line_number": 285,
       "context": "const getPreparingForAITooltipContent = () => {\n return (\n <div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAI\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAIInfo\")}\n </Text>\n </div>",
       "module": "/packages/shared"
     }

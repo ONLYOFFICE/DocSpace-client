@@ -1,0 +1,28 @@
+{
+  "key_path": "AIAgentNotificationsEnabled",
+  "content": "AI agent notifications enabled",
+  "content_en_sha1_hash": "7b64b614e7db12d11d087cce81225c8bf558b883",
+  "created_at": "2025-11-03T12:10:32.764Z",
+  "updated_at": "2025-11-06T18:29:15.993Z",
+  "comment": {
+    "text": "Indicates that notifications from the AI agent are turned on. This text is used to display the status of AI agent notifications, likely within a settings or notification preferences section. Translators should ensure the meaning accurately conveys the active state of AI agent notifications.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:21:48.628Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 1416,
+      "context": "let notificationsDisabled = t(\"RoomNotificationsDisabled\");\n let notificationsEnabled = t(\"RoomNotificationsEnabled\");\n \n if (isAIAgent) {\n notificationsDisabled = t(\"AIAgentNotificationsDisabled\");\n notificationsEnabled = t(\"AIAgentNotificationsEnabled\");\n }\n \n muteRoomNotification(id, muteStatus)\n .then(() =>\n toastr.success(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

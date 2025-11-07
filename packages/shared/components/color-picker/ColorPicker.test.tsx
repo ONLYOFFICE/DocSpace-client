@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render, fireEvent } from "@testing-library/react";
 import { ColorPicker } from "./ColorPicker";
-import "@testing-library/jest-dom";
 import { globalColors } from "../../themes";
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     i18n: {
@@ -44,12 +44,12 @@ describe("ColorPicker component", () => {
     appliedColor: globalColors.lightBlueMain,
   };
 
-  const mockHandleChange = jest.fn();
-  const mockOnApply = jest.fn();
-  const mockOnClose = jest.fn();
+  const mockHandleChange = vi.fn();
+  const mockOnApply = vi.fn();
+  const mockOnClose = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {

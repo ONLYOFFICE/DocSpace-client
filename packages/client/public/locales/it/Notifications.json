@@ -5,7 +5,6 @@
   "DailyFeed": "Feed giornaliero di {{productName}}",
   "DailyFeedDescription": "Leggi le notizie e gli eventi dal tuo {{productName}} in un riepilogo giornaliero.",
   "FileActivityNotify": "Notifiche attività file",
-  "GoToSettings": "Vai alle impostazioni",
   "IsNotValid": "Non è valido",
   "LdapEmailTooltip": "Questo account utente è stato caricato da LDAP. L’indirizzo email non è stato specificato, e quello attuale è stato generato automaticamente e non può essere usato per inviare notifiche.",
   "NotConfigured": "Non configurato",

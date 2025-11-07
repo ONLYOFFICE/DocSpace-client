@@ -298,3 +298,7 @@ export const ROOM_ACTION_KEYS = {
 
 export const SHARED_MEMBERS_COUNT = 100;
 export const SHARED_WITH_ME_PATH = "shared-with-me";
+
+export const EMPTY_ARRAY = Object.freeze([]) as [];
+export const EMPTY_OBJECT = Object.freeze({});
+export const FUNCTION_EMPTY = (): void => {};

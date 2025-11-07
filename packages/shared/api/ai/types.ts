@@ -24,16 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TCreatedBy, type TPathParts } from "../../types";
-import {
+import type { TCreatedBy, TPathParts } from "../../types";
+import type { TFile, TFolder } from "../files/types";
+import type { TRoom } from "../rooms/types";
+import type {
   ContentType,
+  KnowledgeType,
   ProviderType,
   RoleType,
   ServerType,
   WebSearchType,
 } from "./enums";
-import { TRoom } from "../rooms/types";
-import type { TFile, TFolder } from "../files/types";
 
 export type TCreateAiProvider = {
   type: ProviderType;
@@ -185,11 +186,20 @@ export type WebSearchConfig = {
   key?: string;
 };
 
+export type KnowledgeConfig = {
+  type: KnowledgeType;
+  key?: string;
+};
+
 export type TAIConfig = {
+  vectorizationEnabled: boolean;
   webSearchEnabled: boolean;
   knowledgeSearchToolName: string;
   webSearchToolName: string;
   webCrawlingToolName: string;
+  aiReady: boolean;
+  embeddingModel: string;
+  portalMcpServerId: string;
 };
 
 export type TAgent = TRoom;
@@ -216,6 +226,7 @@ export type TCreateAgentData = {
   logo?: TAgentLogo;
   chatSettings?: TChatSettings;
   quota?: number;
+  attachDefaultTools?: boolean;
 };
 
 export type TGetAgents = {

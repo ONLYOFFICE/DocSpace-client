@@ -72,11 +72,17 @@ type TUpdateDialogData =
 type AIProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
   aiProvidersInitied?: AISettingsStore["aiProvidersInitied"];
+  checkUnavailableProviders?: AISettingsStore["checkUnavailableProviders"];
+  isProviderAvailable?: AISettingsStore["isProviderAvailable"];
+  cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
 };
 
 const AIProviderComponent = ({
   aiProviders,
   aiProvidersInitied,
+  checkUnavailableProviders,
+  isProviderAvailable,
+  cancelAvailabilityCheck,
 }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
@@ -118,6 +124,18 @@ const AIProviderComponent = ({
 
     init();
   }, []);
+
+  useEffect(() => {
+    if (!aiProvidersInitied) return;
+
+    checkUnavailableProviders?.();
+  }, [aiProvidersInitied, checkUnavailableProviders]);
+
+  useEffect(() => {
+    return () => {
+      cancelAvailabilityCheck?.();
+    };
+  }, [cancelAvailabilityCheck]);
 
   if (!aiProvidersInitied)
     return (
@@ -174,6 +192,7 @@ const AIProviderComponent = ({
             item={provider}
             onDeleteClick={onDeleteAIProvider}
             onSettingsClick={onUpdateAIProvider}
+            isAvailable={isProviderAvailable?.(provider.id)}
           />
         ))}
       </div>
@@ -209,5 +228,8 @@ export const AIProvider = inject(({ aiSettingsStore }: TStore) => {
   return {
     aiProviders: aiSettingsStore.aiProviders,
     aiProvidersInitied: aiSettingsStore.aiProvidersInitied,
+    checkUnavailableProviders: aiSettingsStore.checkUnavailableProviders,
+    isProviderAvailable: aiSettingsStore.isProviderAvailable,
+    cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
   };
 })(observer(AIProviderComponent));

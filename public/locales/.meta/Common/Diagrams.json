@@ -3,7 +3,7 @@
   "content": "Diagrams",
   "content_en_sha1_hash": "ecf4d503679532de632c70286cab2a70bfaa2235",
   "created_at": "2025-07-01T15:57:10.991Z",
-  "updated_at": "2025-10-27T16:14:33.438Z",
+  "updated_at": "2025-11-03T12:10:35.137Z",
   "comment": {
     "text": "This translation key is used to display a label that refers to diagrams. It is used in the filter options section of a UI component, likely on a file selector or portal settings page. Translators should update this text to reflect different language versions of \"diagrams\".",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 520,
+      "line_number": 522,
       "context": "isChecked={state.diagrams.isChecked}\n isIndeterminate={state.diagrams.isIndeterminate}\n items={state.diagrams.files}\n titleFormat={state.diagrams.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.Diagrams}\n title={t(\"Common:Diagrams\")}\n dataTestId=\"download_dialog_diagrams\"\n />\n ) : null}\n {state.other.files.length > 0 ? (\n <DownloadContent",
       "module": "/packages/shared"
     },

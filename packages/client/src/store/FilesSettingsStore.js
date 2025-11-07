@@ -439,7 +439,7 @@ class FilesSettingsStore {
   getIcon = (
     size = 32,
     fileExst = null,
-    providerKey = null, // eslint-disable-line @typescript-eslint/no-unused-vars
+    providerKey = null,
     contentLength = null,
     roomType = null,
     isArchive = null,

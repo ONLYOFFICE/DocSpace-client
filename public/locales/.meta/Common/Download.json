@@ -3,7 +3,7 @@
   "content": "Download",
   "content_en_sha1_hash": "a479c9c34e878d07b4d67a73a48f432ad7dc53c8",
   "created_at": "2025-05-19T21:30:44.645Z",
-  "updated_at": "2025-10-27T16:14:33.651Z",
+  "updated_at": "2025-11-06T18:29:15.976Z",
   "comment": {
     "text": "This translation key is used for the label and icon of a \"Download\" button, typically found on a version history page or in a file listing. The label displays the content's download size when available, and the button triggers an action to download the file. It appears as a clickable element, allowing users to initiate the download process.",
     "is_auto": true,
@@ -35,9 +35,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2295,
-      "context": "case \"download\":\n if (!this.isAvailableOption(\"download\")) return null;\n return {\n id: \"menu-download\",\n label: t(\"Common:Download\"),\n onClick: () =>\n this.downloadAction(t(\"Common:ArchivingData\")).catch((err) =>\n toastr.error(err),\n ),\n iconUrl: DownloadReactSvgUrl,",
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 183,
+      "context": "case \"download\":\n if (!this.isAvailableOption(\"download\")) return null;\n return {\n id: \"menu-download\",\n label: t(\"Common:Download\"),\n onClick: this.downloadHandle,\n iconUrl: DownloadReactSvgUrl,\n };\n \n case \"downloadAs\":",
       "module": "/packages/client"
     },
     {
@@ -66,13 +66,13 @@
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 228,
+      "line_number": 230,
       "context": "className=\"badge download-file icons-group\"\n size={sizeQuickButton}\n onClick={onClickDownload}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:Download\")}\n />\n ) : null}\n {isTemplatesFolder ? (\n <IconButton\n iconName={CreateRoomReactSvgUrl}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 565,
+      "line_number": 567,
       "context": "autoMaxWidth\n isLarge\n withBodyScroll\n withoutPadding\n >\n <ModalDialog.Header>{t(\"Common:DownloadAs\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.modalBody}>\n {needPassword ? (\n <PasswordContent",
       "module": "/packages/shared"
     }

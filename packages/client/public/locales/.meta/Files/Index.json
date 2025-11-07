@@ -3,7 +3,7 @@
   "content": "Index",
   "content_en_sha1_hash": "c2df9b932637fe9d32a0f16da1c11873398f873d",
   "created_at": "2025-05-19T21:30:55.718Z",
-  "updated_at": "2025-10-27T16:14:33.374Z",
+  "updated_at": "2025-11-06T18:29:15.731Z",
   "comment": {
     "text": "This translation key is used to display \"Index\" as a file type label in various UI elements, such as file rows and file list headers. It appears in sections like Home/InfoPanel/Body/helpers/DetailsHelper.js and pages/Home/Section/Body/RowsView/FilesRowContent.js.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 220,
+      "line_number": 232,
       "context": "return this.t(\"CreationDate\");\n case \"Lifetime ends\":\n return this.t(\"LifetimeEnds\");\n \n case \"Index\":\n return this.t(\"Files:Index\");\n \n case \"Versions\":\n return this.t(\"InfoPanel:Versions\");\n case \"Comments\":\n return this.t(\"Common:Comments\");",
       "module": "/packages/client"
     },

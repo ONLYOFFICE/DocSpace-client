@@ -3,7 +3,7 @@
   "content": "Date modified",
   "content_en_sha1_hash": "dcef8297cd84445acb4ad6b84e674163d3d9765e",
   "created_at": "2025-05-19T21:30:54.770Z",
-  "updated_at": "2025-10-27T16:14:33.374Z",
+  "updated_at": "2025-11-06T18:29:15.730Z",
   "comment": {
     "text": "This translation key is used to display the label \"Date modified\" in a file's properties section. It appears on the /packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.js page and should be translated to provide consistency across different languages.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 211,
-      "context": "return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n \n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"CreationDate\");\n case \"Lifetime ends\":",
+      "line_number": 223,
+      "context": "case \"Size\":\n return this.t(\"Common:Size\");\n case \"Resolution\":\n return this.t(\"InfoPanel:Resolution\");\n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"CreationDate\");\n case \"Lifetime ends\":",
       "module": "/packages/client"
     },
     {

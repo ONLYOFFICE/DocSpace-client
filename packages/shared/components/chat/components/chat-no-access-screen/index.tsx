@@ -24,18 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
 import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
 import { EmptyView } from "../../../empty-view";
 import { useTheme } from "../../../../hooks/useTheme";
+import { match, P } from "ts-pattern";
 
-export const ChatNoAccessScreen = () => {
+type Props = {
+  aiReady: boolean;
+  canUseChat: boolean;
+  standalone: boolean;
+  isDocSpaceAdmin: boolean;
+};
+
+export const ChatNoAccessScreen = ({
+  aiReady,
+  canUseChat,
+  isDocSpaceAdmin,
+  standalone,
+}: Props) => {
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
+  const navigate = useNavigate();
 
   const icon = isBase ? (
     <ChatNoAccessRightsLightIcon />
@@ -43,12 +58,70 @@ export const ChatNoAccessScreen = () => {
     <ChatNoAccessRightsDarkIcon />
   );
 
+  const title = !canUseChat
+    ? t("Common:AIChatNoAccessTitle")
+    : isDocSpaceAdmin && standalone
+      ? t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle")
+      : t("Common:AIFeaturesAreCurrentlyDisabled");
+
+  const description = !canUseChat
+    ? t("Common:AIChatNoAccessDescription")
+    : match([standalone, isDocSpaceAdmin])
+        // standalone admin
+        .with([true, true], () =>
+          t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
+            productName: t("Common:ProductName"),
+          }),
+        )
+        // saas admin
+        .with([false, true], () =>
+          t("Common:EmptyChatAIDisabledSaasAdminDescription", {
+            productName: t("Common:ProductName"),
+          }),
+        )
+        // standalone/saas user
+        .with([P._, false], () =>
+          t("Common:EmptyChatAIDisabledUserDescription", {
+            productName: t("Common:ProductName"),
+          }),
+        )
+        .otherwise(() => "");
+
+  const onGoToServices = useCallback(() => {
+    return navigate("/portal-settings/services");
+  }, []);
+
+  const onGoToAIProviderSettings = useCallback(() => {
+    return navigate("/portal-settings/ai-settings/providers");
+  }, []);
+
+  const goToServices = {
+    type: "button",
+    title: t("Common:GoToSettings"),
+    key: "go-to-services",
+    onClick: onGoToServices,
+  } as const;
+
+  const goToAIProviderSettings = {
+    type: "button",
+    title: t("Common:GoToSettings"),
+    key: "go-to-ai-provider-settings",
+    onClick: onGoToAIProviderSettings,
+  } as const;
+
+  const options =
+    !isDocSpaceAdmin || !canUseChat
+      ? []
+      : standalone
+        ? [goToAIProviderSettings]
+        : [goToServices];
+
   return (
     <EmptyView
-      title={t("Common:AIChatNoAccessTitle")}
-      description={t("Common:AIChatNoAccessDescription")}
+      title={title}
+      description={description}
       icon={icon}
-      options={null}
+      options={options}
     />
   );
 };

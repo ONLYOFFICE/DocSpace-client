@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-10-27T16:14:33.152Z",
+  "updated_at": "2025-11-07T13:41:06.081Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -90,7 +90,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/CreateAgentDialog.tsx",
-      "line_number": 169,
+      "line_number": 171,
       "context": "testId=\"create_agent_dialog_save\"\n />\n <Button\n id=\"shared_create-agent-modal_cancel\"\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n scale\n isDisabled={isLoading}\n onClick={onCloseDialog}\n testId=\"create_agent_dialog_cancel\"\n />",
       "module": "/packages/client"
     },
@@ -144,7 +144,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 290,
+      "line_number": 293,
       "context": "testId=\"delete_dialog_modal_submit\"\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isLoading={isLoading}\n testId=\"delete_dialog_modal_cancel\"",
       "module": "/packages/client"
     },
@@ -157,7 +157,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
       "line_number": 147,
-      "context": "isDisabled={isLoading}\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
+      "context": "isLoading={isLoading}\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
       "module": "/packages/client"
     },
     {
@@ -186,7 +186,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteSelfProfileDialog/index.js",
-      "line_number": 105,
+      "line_number": 106,
       "context": "isLoading={isRequestRunning}\n testId=\"dialog_delete_self_button\"\n />\n <Button\n key=\"CloseBtn\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isDisabled={isRequestRunning}\n testId=\"dialog_delete_self_cancel_button\"",
       "module": "/packages/client"
     },
@@ -378,13 +378,13 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 403,
+      "line_number": 401,
       "context": "className=\"cancel-button\"\n scale\n size={ButtonSize.normal}\n isDisabled={isLoading}\n onClick={onCloseAccessSettings}\n label={t(\"Common:CancelButton\")}\n testId=\"template_access_settings_footer_cancel_button\"\n />\n </StyledTemplateAccessSettingsFooter>\n </StyledTemplateAccessSettingsContainer>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 403,
+      "line_number": 401,
       "context": "className=\"cancel-button\"\n scale\n size={ButtonSize.normal}\n isDisabled={isLoading}\n onClick={onCloseAccessSettings}\n label={t(\"Common:CancelButton\")}\n testId=\"template_access_settings_footer_cancel_button\"\n />\n </StyledTemplateAccessSettingsFooter>\n </StyledTemplateAccessSettingsContainer>\n );",
       "module": "/packages/client"
     },
@@ -414,19 +414,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 307,
+      "line_number": 339,
       "context": "isLoading={isRequestRunning}\n isDisabled={!canSubmit}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={isRequestRunning}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
-      "line_number": 90,
+      "line_number": 94,
       "context": "onClick={onSubmit}\n isLoading={loading}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/add/index.tsx",
-      "line_number": 142,
+      "line_number": 156,
       "context": "isLoading={loading}\n isDisabled={!hasChanges}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -444,7 +444,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/edit/index.tsx",
-      "line_number": 175,
+      "line_number": 189,
       "context": "isLoading={loading}\n isDisabled={!hasChanges}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -516,7 +516,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 524,
+      "line_number": 523,
       "context": "isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}\n testId=\"secret_key_generate_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"secret_key_cancel_button\"\n />",
       "module": "/packages/client"
     },
@@ -835,7 +835,7 @@
     {
       "file_path": "/packages/shared/components/chat/components/export-selector/index.tsx",
       "line_number": 101,
-      "context": "withCancelButton\n withCreate={false}\n // TODO: restore when api will be ready\n withFooterCheckbox={false}\n withFooterInput\n cancelButtonLabel={t(\"Common:CancelButton\")}\n submitButtonLabel={t(\"Common:SaveButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={roomId}",
+      "context": "withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterCheckbox\n withFooterInput\n cancelButtonLabel={t(\"Common:CancelButton\")}\n submitButtonLabel={t(\"Common:SaveButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={roomId}",
       "module": "/packages/shared"
     },
     {
@@ -870,7 +870,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 168,
+      "line_number": 169,
       "context": "isDisabled={!isDisableQuota ? size.trim() === \"\" : false}\n scale\n testId=\"storage_quota_save_button\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onCloseClick}\n isDisabled={isLoading}\n scale\n testId=\"storage_quota_cancel_button\"",
       "module": "/packages/shared"
     },
@@ -888,7 +888,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 600,
+      "line_number": 602,
       "context": "scale\n testId=\"download_dialog_submit_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"download_dialog_cancel_button\"\n />",
       "module": "/packages/shared"
     },
@@ -942,7 +942,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 659,
+      "line_number": 668,
       "context": ") : null}\n \n {isChanged || isThirdStorageChanged ? (\n <SaveCancelButtons\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveModuleSettings}\n onCancelClick={onCancelModuleSettings}\n saveButtonDisabled={isSaveCancelDisabled}\n disableRestoreToDefault={isSaveCancelDisabled}\n displaySettings",
       "module": "/packages/shared"
     },
@@ -954,7 +954,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 185,
+      "line_number": 198,
       "context": "},\n };\n \n const cancelButtonSelectorProps: TSelectorCancelButton = {\n withCancelButton: true,\n cancelButtonLabel: t(\"Common:CancelButton\"),\n onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,",
       "module": "/packages/shared"
     },
@@ -972,7 +972,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 499,
+      "line_number": 500,
       "context": ": ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"Common:CancelButton\"),\n onCancel,\n }\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {",
       "module": "/packages/shared"
     },

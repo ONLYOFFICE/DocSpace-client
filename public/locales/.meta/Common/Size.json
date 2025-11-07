@@ -3,7 +3,7 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2025-05-19T21:30:48.889Z",
-  "updated_at": "2025-10-27T16:14:33.374Z",
+  "updated_at": "2025-11-06T18:29:15.729Z",
   "comment": {
     "text": "This translation key is used to display the label \"Size\" in various UI elements, such as file extensions and table column headers, providing a clear and concise way to indicate size-related information.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 208,
-      "context": "return this.t(\"FileExtension\");\n \n case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n \n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");",
+      "line_number": 219,
+      "context": "return this.t(\"FileExtension\");\n \n case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n case \"Resolution\":\n return this.t(\"InfoPanel:Resolution\");\n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":",
       "module": "/packages/client"
     },
     {

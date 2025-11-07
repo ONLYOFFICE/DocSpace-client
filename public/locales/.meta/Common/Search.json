@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-10-27T16:14:33.365Z",
+  "updated_at": "2025-11-03T12:10:35.087Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 191,
+      "line_number": 204,
       "context": "onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
       "module": "/packages/shared"
     },
@@ -90,7 +90,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 506,
+      "line_number": 507,
       "context": "}\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch,\n onClearSearch,\n searchLoader: <SearchLoader />,\n isSearchLoading:",
       "module": "/packages/shared"
     },

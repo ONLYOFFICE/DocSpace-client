@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { ProgressBar } from ".";
+import styles from "./ProgressBar.module.scss";
 
 describe("<ProgressBar />", () => {
   const defaultProps = {
@@ -46,7 +46,7 @@ describe("<ProgressBar />", () => {
       const label = "Uploading files...";
       render(<ProgressBar {...defaultProps} label={label} />);
       expect(screen.getByText(label)).toBeInTheDocument();
-      expect(screen.getByText(label)).toHaveClass("fullText");
+      expect(screen.getByText(label)).toHaveClass(styles.fullText);
     });
 
     it("sets label as title attribute", () => {
@@ -79,7 +79,7 @@ describe("<ProgressBar />", () => {
       const status = "Processing...";
       render(<ProgressBar {...defaultProps} status={status} />);
       const statusElement = screen.getByText(status);
-      expect(statusElement).toHaveClass("statusText");
+      expect(statusElement.className).toContain("statusText");
       expect(statusElement).toHaveAttribute("title", status);
     });
 
@@ -87,7 +87,7 @@ describe("<ProgressBar />", () => {
       const error = "Upload failed";
       render(<ProgressBar {...defaultProps} error={error} />);
       const errorElement = screen.getByText(error);
-      expect(errorElement).toHaveClass("statusError");
+      expect(errorElement.className).toContain("statusError");
       expect(errorElement).toHaveAttribute("title", error);
     });
   });
@@ -95,6 +95,6 @@ describe("<ProgressBar />", () => {
   it("applies custom className when provided", () => {
     const customClass = "custom-progress";
     render(<ProgressBar {...defaultProps} className={customClass} />);
-    expect(screen.getByTestId("progress-bar")).toHaveClass(customClass);
+    expect(screen.getByTestId("progress-bar").className).toContain(customClass);
   });
 });

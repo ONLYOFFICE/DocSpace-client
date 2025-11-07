@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import equal from "fast-deep-equal";
 import React, { useMemo, useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
@@ -149,6 +150,7 @@ const Badges = ({
     lockedBy,
     locked,
     isFavorite,
+    isAIAgent,
     // startFilling,
   } = item;
 
@@ -188,6 +190,7 @@ const Badges = ({
   const unpinIconProps = {
     "data-id": id,
     "data-action": "unpin",
+    "data-isaiagent": isAIAgent,
   };
 
   const commonBadgeProps = {
@@ -620,4 +623,4 @@ const Badges = ({
   );
 };
 
-export default Badges;
+export default React.memo(Badges, equal);

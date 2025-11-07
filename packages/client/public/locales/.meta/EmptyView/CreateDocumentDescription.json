@@ -3,7 +3,7 @@
   "content": "Take advantage of vast word processing functionality.",
   "content_en_sha1_hash": "722e0e14c0c91f4013c10e4fad822951b0ab6b0d",
   "created_at": "2025-05-19T21:30:56.447Z",
-  "updated_at": "2025-10-27T16:14:33.120Z",
+  "updated_at": "2025-11-03T12:10:34.886Z",
   "comment": {
     "text": "This translation key is used to provide a descriptive text for a button or action that enables users to create new documents. The text appears on a button in an interface where users can create new content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 285,
+      "line_number": 305,
       "context": "disabled: isFrame,\n };\n \n const createDoc = {\n title: t(\"EmptyView:CreateDocument\"),\n description: t(\"EmptyView:CreateDocumentDescription\"),\n icon: <CreateNewFormIcon />,\n key: \"create-doc-option\",\n onClick: () => actions.onCreate(\"docx\"),\n disabled: !security?.Create,\n };",
       "module": "/packages/client"
     }

@@ -34,12 +34,20 @@ import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 
 import { exportChatMessage } from "../../../../../../api/ai";
 
+import socket, {
+  SocketCommands,
+  SocketEvents,
+} from "../../../../../../utils/socket";
+
 import { TBreadCrumb } from "../../../../../selector/Selector.types";
 
 import { toastr } from "../../../../../toast";
 import { Link, LinkTarget, LinkType } from "../../../../../link";
 
 import { useMessageStore } from "../../../../store/messageStore";
+import { useChatStore } from "../../../../store/chatStore";
+
+import { openFile } from "../../../../utils";
 
 import ExportSelector from "../../../../components/export-selector";
 
@@ -59,6 +67,7 @@ const Buttons = ({
 }: MessageButtonsProps) => {
   const { t } = useTranslation(["Common"]);
   const { roomId, findPreviousUserMessage } = useMessageStore();
+  const { currentChat } = useChatStore();
 
   const [showFolderSelector, setShowFolderSelector] = React.useState(false);
 
@@ -77,17 +86,26 @@ const Buttons = ({
     fileName: string,
     isChecked: boolean,
   ) => {
-    if (!messageId || !selectedItemId) return;
+    if (!messageId || !selectedItemId || !currentChat) return;
 
-    const exportResult = await exportChatMessage(
-      messageId,
-      selectedItemId,
-      fileName,
-    );
+    const chatParts = ["CHAT-" + currentChat.id];
 
-    if (isChecked) {
-      window.open(exportResult?.webUrl, "_blank");
-    } else {
+    socket?.emit(SocketCommands.Subscribe, {
+      roomParts: chatParts,
+      individual: true,
+    });
+
+    await exportChatMessage(messageId, selectedItemId, fileName);
+
+    console.log(socket?.socketSubscribers);
+
+    socket?.on(SocketEvents.ExportChat, (data) => {
+      const { resultFile } = data;
+
+      if (isChecked) {
+        openFile(resultFile.id.toString());
+      }
+
       const toastMsg = (
         <Trans
           ns="Common"
@@ -97,9 +115,8 @@ const Buttons = ({
           components={{
             1: (
               <Link
-                type={LinkType.page}
-                target={LinkTarget.blank}
-                href={exportResult?.webUrl}
+                type={LinkType.action}
+                onClick={() => openFile(resultFile.id.toString())}
               />
             ),
           }}
@@ -107,7 +124,13 @@ const Buttons = ({
       );
 
       toastr.success(toastMsg);
-    }
+
+      socket?.off(SocketEvents.ExportChat);
+      socket?.emit(SocketCommands.Unsubscribe, {
+        roomParts: chatParts,
+        individual: true,
+      });
+    });
 
     setShowFolderSelector(false);
   };

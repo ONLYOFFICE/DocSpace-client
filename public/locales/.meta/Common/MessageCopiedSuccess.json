@@ -3,7 +3,7 @@
   "content": "Message copied successfully",
   "content_en_sha1_hash": "f5ce8c195cfa0f6273cc3ba8c909a4a2467b43d6",
   "created_at": "2025-10-27T16:14:24.130Z",
-  "updated_at": "2025-10-27T16:35:45.988Z",
+  "updated_at": "2025-11-06T18:29:16.033Z",
   "comment": {
     "text": "This key displays a success message in a toast notification after a message has been successfully copied to the clipboard. It's used to confirm the copy action to the user within the chat interface. Translators should ensure the message accurately conveys a successful copy operation.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/Buttons.tsx",
-      "line_number": 69,
+      "line_number": 78,
       "context": "const onCloseFolderSelector = () => setShowFolderSelector(false);\n \n const onCopyAction = () => {\n copy(text);\n toastr.success(t(\"MessageCopiedSuccess\"));\n };\n \n const onExportMessage = async (\n selectedItemId: string | number | undefined,\n folderTitle: string,",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2025-10-16T07:29:35.713Z",
+  "updated_at": "2025-11-03T12:10:35.155Z",
   "comment": {
     "text": "The translation key \"SuccessfullySaveSettingsMessage\" is used to display a success message after saving portal settings. It appears in UI elements such as buttons or dialogs that trigger setting updates, providing feedback to the user that changes have been successfully applied.",
     "is_auto": true,
@@ -228,13 +228,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 269,
+      "line_number": 275,
       "context": "const handleDeleteSchedule = () => {\n setIsLoadingData(true, () => {\n deleteBackupSchedule(isManagement)\n ?.then(() => {\n deleteSchedule(weekdaysLabelArray);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n setErrorInformation(error, t);\n toastr.error(error);\n console.error(error);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 269,
+      "line_number": 275,
       "context": "const handleDeleteSchedule = () => {\n setIsLoadingData(true, () => {\n deleteBackupSchedule(isManagement)\n ?.then(() => {\n deleteSchedule(weekdaysLabelArray);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n setErrorInformation(error, t);\n toastr.error(error);\n console.error(error);",
       "module": "/packages/shared"
     }

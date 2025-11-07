@@ -24,47 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { PlayerSpeedControl } from "./index";
 
-// Mock react-device-detect
-jest.mock("react-device-detect", () => {
-  let isMobileValue = false;
-  return {
-    get isMobileOnly() {
-      return isMobileValue;
-    },
-    set __setMobileOnly(value: boolean) {
-      isMobileValue = value;
-    },
-  };
-});
-
-// Mock styles
-jest.mock("./PlayerSpeedControl.module.scss", () => ({
-  wrapper: "wrapper",
-  toast: "toast",
-  dropdown: "dropdown",
-  dropdownItem: "dropdownItem",
+vi.mock("react-device-detect", () => ({
+  isMobile: false,
+  isMobileOnly: false,
+  isIOS: false,
 }));
 
 describe("PlayerSpeedControl", () => {
   const defaultProps = {
-    handleSpeedChange: jest.fn(),
-    onMouseLeave: jest.fn(),
+    handleSpeedChange: vi.fn(),
+    onMouseLeave: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    jest.useFakeTimers();
-    const deviceDetect = jest.requireMock("react-device-detect");
-
-    deviceDetect.__setMobileOnly = false;
+    vi.clearAllMocks();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("renders speed control button with default speed", () => {

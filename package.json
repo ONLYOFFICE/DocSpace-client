@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "3.5.0",
+  "version": "4.0.0",
   "private": true,
   "engines": {
     "node": ">=22",
@@ -22,7 +22,8 @@
     "storybook-serve": "pnpm nx storybook-serve @docspace/shared",
     "test": "pnpm nx test @docspace/shared",
     "wipe": "pnpm nx reset && shx rm -rf node_modules pnpm-lock.yaml packages/**/node_modules",
-    "licenses-audit": "pnpm licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
+    "licenses-audit": "node scripts/check-licenses.js",
+    "licenses-aggregate": "node scripts/aggregate-licenses.js",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",

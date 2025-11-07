@@ -132,7 +132,7 @@ const SpaceQuota = (props) => {
 
     if (action === "no-quota") {
       try {
-        const items = await updateQuota([item.id], -1, inRoom);
+        const items = await updateQuota([item.id], -1, inRoom());
 
         options.forEach((o) => {
           if (o.key === "no-quota") o.label = t("Common:Unlimited");
@@ -149,7 +149,7 @@ const SpaceQuota = (props) => {
     }
 
     try {
-      const items = await resetQuota([item.id], inRoom);
+      const items = await resetQuota([item.id], inRoom());
 
       options.forEach((o) => {
         if (o.key === "default-quota") o.label = defaultQuotaSize;
@@ -233,7 +233,7 @@ export default inject(
     const { usersStore } = peopleStore;
     const { needResetUserSelection, setSelected: setUsersSelected } =
       usersStore;
-    const { changeRoomQuota, changeAIAgentQuota } = filesActionsStore;
+    const { changeRoomQuota, changeAIAgentsQuota } = filesActionsStore;
     const {
       setCustomRoomQuota,
       setCustomAIAgentQuota,
@@ -246,18 +246,19 @@ export default inject(
     const {
       isDefaultUsersQuotaSet,
       isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       defaultUsersQuota,
       defaultRoomsQuota,
+      defaultAIAgentsQuota,
     } = currentQuotaStore;
 
-    const { infoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
-    const inRoom = !!infoPanelSelection?.navigationPath;
+    const { inRoom, isVisible: infoPanelVisible } = infoPanelStore;
 
     const changeQuota =
       type === "user"
         ? changeUserQuota
         : type === "agent"
-          ? changeAIAgentQuota
+          ? changeAIAgentsQuota
           : changeRoomQuota;
 
     const updateQuota =
@@ -275,9 +276,18 @@ export default inject(
           : resetRoomQuota;
 
     const withoutLimitQuota =
-      type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;
+      type === "user"
+        ? !isDefaultUsersQuotaSet
+        : type === "agent"
+          ? !isDefaultAIAgentsQuotaSet
+          : !isDefaultRoomsQuotaSet;
 
-    const defaultSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+    const defaultSize =
+      type === "user"
+        ? defaultUsersQuota
+        : type === "agent"
+          ? defaultAIAgentsQuota
+          : defaultRoomsQuota;
 
     const needResetSelection =
       type === "user" ? needResetUserSelection : needResetFilesSelection;

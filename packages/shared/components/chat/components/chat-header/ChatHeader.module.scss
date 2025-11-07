@@ -58,7 +58,7 @@
 
   gap: 8px;
 
-  &:hover {
+  &:hover:not(.disabled) {
     background-color: var(--chat-header-button-hover-background);
   }
 
@@ -67,6 +67,20 @@
   svg {
     path {
       fill: var(--chat-header-button-svg-color);
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    p {
+      color: var(--chat-header-button-disabled-color);
+    }
+
+    svg {
+      path {
+        fill: var(--chat-header-button-disabled-color);
+      }
     }
   }
 }
@@ -111,6 +125,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+
+  .chatListItemTitle {
+    text-align: var(--input-text-align);
+    unicode-bidi: plaintext;
+  }
 
   .iconButtonWrapper {
     width: 16px;

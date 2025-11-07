@@ -25,20 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
+import { render, fireEvent, screen, within } from "@testing-library/react";
 import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
 import { RoomTile } from "./RoomTile";
 import { RoomTileProps } from "./RoomTile.types";
 
 // Mock translations
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
-// Mock styles
-jest.mock("./RoomTile.module.scss", () => ({
-  roomTile: "roomTile",
+// Mock styles - return default export for CSS Modules
+vi.mock("./RoomTile.module.scss", () => ({
+  default: {
+    roomTile: "roomTile",
+  },
 }));
 
 interface TagProps {
@@ -51,8 +53,8 @@ interface TagProps {
   providerType?: number | string;
 }
 
-// Mock Tags component
-jest.mock("@docspace/shared/components/tags", () => ({
+// Mock Tags component to mimic key behaviour
+vi.mock("../../tags", () => ({
   Tags: ({
     tags,
     onSelectTag,
@@ -62,23 +64,30 @@ jest.mock("@docspace/shared/components/tags", () => ({
   }) => (
     <div data-testid="tags" className="tags">
       {tags.map((tag) => {
-        const label = typeof tag === "string" ? tag : tag.label;
-        const onClick =
+        const normalized =
           typeof tag === "string"
-            ? undefined
-            : () => {
-                if (tag.onClick) tag.onClick();
-                if (onSelectTag) onSelectTag(tag);
-              };
+            ? ({ label: tag } as TagProps)
+            : (tag as TagProps);
+        const label = normalized.label;
+        const handleClick = () => {
+          normalized.onClick?.();
+          onSelectTag?.(normalized);
+        };
 
         return (
           <div
             key={label}
-            data-testid={`tag-${label}`}
-            onClick={onClick}
-            className="tags"
+            data-testid="tag_item"
+            data-tag={label}
+            aria-label={label}
+            className="tag"
+            onClick={handleClick}
           >
-            {label}
+            {normalized.isThirdParty ? (
+              <svg data-testid="mocked-react-svg" />
+            ) : (
+              <p data-testid="text">{label}</p>
+            )}
           </div>
         );
       })}
@@ -96,7 +105,7 @@ interface BaseTileProps {
 }
 
 // Mock BaseTile component
-jest.mock("../base-tile/BaseTile", () => ({
+vi.mock("../base-tile/BaseTile", () => ({
   BaseTile: ({
     onHover,
     onLeave,
@@ -133,8 +142,8 @@ describe("RoomTile", () => {
   };
 
   const mockContextOptions: ContextMenuModel[] = [
-    { key: "edit", label: "Edit", onClick: jest.fn() },
-    { key: "delete", label: "Delete", onClick: jest.fn() },
+    { key: "edit", label: "Edit", onClick: vi.fn() },
+    { key: "delete", label: "Delete", onClick: vi.fn() },
   ];
 
   const RoomContent = () => (
@@ -146,12 +155,12 @@ describe("RoomTile", () => {
       item: mockItem,
       children: <RoomContent />,
       columnCount: 3,
-      selectTag: jest.fn(),
-      selectOption: jest.fn(),
-      getRoomTypeName: jest.fn().mockReturnValue("Room Type Name"),
-      thumbnailClick: jest.fn(),
+      selectTag: vi.fn(),
+      selectOption: vi.fn(),
+      getRoomTypeName: vi.fn().mockReturnValue("Room Type Name"),
+      thumbnailClick: vi.fn(),
       contextOptions: mockContextOptions,
-      onSelect: jest.fn(),
+      onSelect: vi.fn(),
       checked: false,
       isActive: false,
       isBlockingOperation: false,
@@ -172,16 +181,16 @@ describe("RoomTile", () => {
 
   it("renders provider tag when providerType exists", () => {
     renderRoomTile();
-    const tag = screen.getByTestId("tag-provider-key");
+    const tag = screen.getByLabelText("provider-key");
     expect(tag).toBeTruthy();
-    expect(tag.textContent).toBe("provider-key");
+    expect(tag.getAttribute("data-tag")).toBe("provider-key");
   });
 
   it("renders custom tags when provided", () => {
     renderRoomTile();
-    const tag = screen.getByTestId("tag-Custom Tag");
+    const tag = screen.getByLabelText("Custom Tag");
     expect(tag).toBeTruthy();
-    expect(tag.textContent).toBe("Custom Tag");
+    expect(within(tag).getByText("Custom Tag")).toBeTruthy();
   });
 
   it("renders default room type tag when no custom tags", () => {
@@ -191,16 +200,16 @@ describe("RoomTile", () => {
       providerType: undefined,
       providerKey: undefined,
     };
-    const getRoomTypeName = jest.fn().mockReturnValue("Collaborative Room");
+    const getRoomTypeName = vi.fn().mockReturnValue("Collaborative Room");
 
     renderRoomTile({
       item: itemWithoutTags,
       getRoomTypeName,
     });
 
-    const tag = screen.getByTestId("tag-Collaborative Room");
+    const tag = screen.getByLabelText("Collaborative Room");
     expect(tag).toBeTruthy();
-    expect(tag.textContent).toBe("Collaborative Room");
+    expect(within(tag).getByText("Collaborative Room")).toBeTruthy();
     expect(getRoomTypeName).toHaveBeenCalledWith(
       mockRoomType,
       expect.any(Function),
@@ -208,7 +217,7 @@ describe("RoomTile", () => {
   });
 
   it("calls thumbnailClick when room is clicked", () => {
-    const thumbnailClick = jest.fn();
+    const thumbnailClick = vi.fn();
     renderRoomTile({ thumbnailClick });
 
     const baseTile = screen.getByTestId("base-tile");
@@ -218,10 +227,10 @@ describe("RoomTile", () => {
   });
 
   it("calls selectOption with provider type when provider tag is clicked", () => {
-    const selectOption = jest.fn();
+    const selectOption = vi.fn();
     renderRoomTile({ selectOption });
 
-    const providerTag = screen.getByTestId("tag-provider-key");
+    const providerTag = screen.getByLabelText("provider-key");
     fireEvent.click(providerTag);
 
     expect(selectOption).toHaveBeenCalledWith({
@@ -231,9 +240,14 @@ describe("RoomTile", () => {
   });
 
   it("calls selectOption with room type when default tag is clicked", () => {
-    const selectOption = jest.fn();
-    const getRoomTypeName = jest.fn().mockReturnValue("Collaborative Room");
-    const itemWithoutTags = { ...mockItem, tags: [] };
+    const selectOption = vi.fn();
+    const getRoomTypeName = vi.fn().mockReturnValue("Collaborative Room");
+    const itemWithoutTags = {
+      ...mockItem,
+      tags: [],
+      providerType: undefined,
+      providerKey: undefined,
+    };
 
     renderRoomTile({
       item: itemWithoutTags,
@@ -241,7 +255,7 @@ describe("RoomTile", () => {
       getRoomTypeName,
     });
 
-    const roomTypeTag = screen.getByTestId("tag-Collaborative Room");
+    const roomTypeTag = screen.getByLabelText("Collaborative Room");
     fireEvent.click(roomTypeTag);
 
     expect(selectOption).toHaveBeenCalledWith({

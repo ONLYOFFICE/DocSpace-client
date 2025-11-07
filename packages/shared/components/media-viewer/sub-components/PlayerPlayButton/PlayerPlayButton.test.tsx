@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { PlayerPlayButton } from "./index";
 
 // Mock SVG components
-jest.mock("PUBLIC_DIR/images/videoplayer.play.react.svg", () => {
+vi.mock("PUBLIC_DIR/images/videoplayer.play.react.svg", () => {
   const DummyPlayIcon = ({
     ref,
     ...props
@@ -38,10 +38,10 @@ jest.mock("PUBLIC_DIR/images/videoplayer.play.react.svg", () => {
     ref: React.RefObject<HTMLDivElement>;
   }) => <div {...props} ref={ref} />;
   DummyPlayIcon.displayName = "IconPlay";
-  return DummyPlayIcon;
+  return { default: DummyPlayIcon };
 });
 
-jest.mock("PUBLIC_DIR/images/videoplayer.stop.react.svg", () => {
+vi.mock("PUBLIC_DIR/images/videoplayer.stop.react.svg", () => {
   const DummyStopIcon = ({
     ref,
     ...props
@@ -49,22 +49,17 @@ jest.mock("PUBLIC_DIR/images/videoplayer.stop.react.svg", () => {
     ref: React.RefObject<HTMLDivElement>;
   }) => <div {...props} ref={ref} />;
   DummyStopIcon.displayName = "IconStop";
-  return DummyStopIcon;
+  return { default: DummyStopIcon };
 });
-
-// Mock styles
-jest.mock("./PlayerPlayButton.module.scss", () => ({
-  wrapper: "wrapper",
-}));
 
 describe("PlayerPlayButton", () => {
   const defaultProps = {
     isPlaying: false,
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders play button when not playing", () => {
@@ -94,7 +89,7 @@ describe("PlayerPlayButton", () => {
   });
 
   it("calls onClick when button is clicked", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<PlayerPlayButton {...defaultProps} onClick={onClick} />);
 
     const button = screen.getByTestId("player-play-button");
@@ -112,7 +107,7 @@ describe("PlayerPlayButton", () => {
       cancelable: true,
     });
     Object.defineProperty(touchStartEvent, "stopPropagation", {
-      value: jest.fn(),
+      value: vi.fn(),
     });
 
     button.dispatchEvent(touchStartEvent);

@@ -3,7 +3,7 @@
   "content": "File name",
   "content_en_sha1_hash": "09979a78c9954035af250cb7f4619ed9d606f0ef",
   "created_at": "2025-05-28T09:32:58.904Z",
-  "updated_at": "2025-10-27T16:14:33.683Z",
+  "updated_at": "2025-11-06T18:29:16.006Z",
   "comment": {
     "text": "File name is displayed as a header in a footer input field within a folder selector dialog, guiding users to enter a file name. It appears in select folders and chat message body components. The text \"File name\" assists translators in understanding its role as a placeholder or label for the input field.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
-      "line_number": 90,
-      "context": "withCancelButton\n disabledItems={[]}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:SaveHereButton\")}\n submitButtonId=\"select-file-modal-submit\"\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={titleSelectorFolder}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n isPanelVisible={isVisible}\n isRoomsOnly={false}\n isThirdParty={false}",
+      "line_number": 91,
+      "context": "disabledItems={[]}\n disabledFolderType={FolderType.ResultStorage}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:SaveHereButton\")}\n submitButtonId=\"select-file-modal-submit\"\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={titleSelectorFolder}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n isPanelVisible={isVisible}\n isRoomsOnly={false}\n isThirdParty={false}",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/shared/components/chat/components/export-selector/index.tsx",
       "line_number": 109,
-      "context": "isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={roomId}\n rootFolderType={FolderType.Rooms}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={getFileName()}\n descriptionText=\"\"\n getFilesArchiveError={() => \"\"}\n currentDeviceType={\n isDesktop()",
+      "context": "isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={roomId}\n rootFolderType={FolderType.Rooms}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={getFileName()}\n descriptionText=\"\"\n getFilesArchiveError={() => \"\"}\n withAIAgentsTreeFolder\n currentDeviceType={",
       "module": "/packages/shared"
     }
   ],

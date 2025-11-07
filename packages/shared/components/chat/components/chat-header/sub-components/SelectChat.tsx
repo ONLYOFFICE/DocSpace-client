@@ -37,14 +37,19 @@ import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 import { RectangleSkeleton } from "../../../../../skeletons";
 import { exportChat } from "../../../../../api/ai";
 
+import socket, {
+  SocketCommands,
+  SocketEvents,
+} from "../../../../../utils/socket";
+
 import { DropDown } from "../../../../drop-down";
 import { TBreadCrumb } from "../../../../selector/Selector.types";
 import { toastr } from "../../../../toast";
-import { Link, LinkType, LinkTarget } from "../../../../link";
+import { Link, LinkType } from "../../../../link";
 
 import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
-
+import { openFile } from "../../../utils";
 import { SelectChatProps } from "../../../Chat.types";
 
 import ExportSelector from "../../export-selector";
@@ -140,32 +145,55 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
       isPublic: boolean,
       breadCrumbs: TBreadCrumb[],
       fileName: string,
+      isChecked: boolean,
     ) => {
       if (!selectedItemId) return;
 
-      const res = await exportChat(hoveredItem, selectedItemId, fileName);
+      const chatParts = ["CHAT-" + hoveredItem];
 
-      const title = chats.find((chat) => chat.id === hoveredItem)?.title;
-      const toastMsg = (
-        <Trans
-          ns="Common"
-          i18nKey="ChatExported"
-          t={t}
-          values={{ fileName, title }}
-          components={{
-            1: <b />,
-            2: (
-              <Link
-                type={LinkType.page}
-                target={LinkTarget.blank}
-                href={res?.webUrl}
-              />
-            ),
-          }}
-        />
-      );
+      socket?.emit(SocketCommands.Subscribe, {
+        roomParts: ["CHAT-" + hoveredItem],
+        individual: true,
+      });
 
-      toastr.success(toastMsg);
+      await exportChat(hoveredItem, selectedItemId, fileName);
+
+      socket?.on(SocketEvents.ExportChat, (data) => {
+        const { resultFile } = data;
+
+        const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+
+        if (isChecked) {
+          openFile(resultFile.id.toString());
+        }
+
+        const toastMsg = (
+          <Trans
+            ns="Common"
+            i18nKey="ChatExported"
+            t={t}
+            values={{ fileName, title }}
+            components={{
+              1: <b />,
+              2: (
+                <Link
+                  type={LinkType.action}
+                  onClick={() => openFile(resultFile.id.toString())}
+                />
+              ),
+            }}
+          />
+        );
+
+        toastr.success(toastMsg);
+
+        socket?.off(SocketEvents.ExportChat);
+        socket?.emit(SocketCommands.Unsubscribe, {
+          roomParts: chatParts,
+          individual: true,
+        });
+      });
+
       setIsExportOpen(false);
     },
     [hoveredItem, chats, isRequestRunning, t],

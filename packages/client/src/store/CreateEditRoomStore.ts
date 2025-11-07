@@ -384,22 +384,6 @@ class CreateEditRoomStore {
         );
       }
 
-      const { mcpServers, mcpServersInitial } = newParams;
-
-      if (mcpServers && mcpServersInitial) {
-        const deletedServers = mcpServersInitial.filter(
-          (id) => !mcpServers.includes(id),
-        );
-        const addedServers = mcpServers.filter(
-          (id) => !mcpServersInitial.includes(id),
-        );
-
-        if (addedServers.length)
-          requests.push(addServersForRoom(roomId, addedServers));
-        if (deletedServers.length)
-          requests.push(deleteServersForRoom(roomId, deletedServers));
-      }
-
       if (room.isTemplate && isAvailable !== undefined) {
         requests.push(setTemplateAvailable(roomId, isAvailable));
       }

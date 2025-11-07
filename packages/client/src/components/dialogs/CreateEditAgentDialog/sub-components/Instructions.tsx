@@ -29,13 +29,13 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
-import { TAgentParams } from "@docspace/shared/utils/aiAgents";
+import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 type InstructionsSettingsProps = {
   agentParams: TAgentParams;
-  setAgentParams: (value: TAgentParams) => void;
+  setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const InstructionsSettings = ({
@@ -53,10 +53,9 @@ const InstructionsSettings = ({
     if (agentParams.prompt === value) return;
 
     setAgentParams({
-      ...agentParams,
       prompt: value,
     });
-  }, [value, agentParams]);
+  }, [value, agentParams.prompt, setAgentParams]);
 
   return (
     <StyledParam increaseGap>

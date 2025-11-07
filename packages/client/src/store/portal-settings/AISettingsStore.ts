@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import {
   type WebSearchConfig,
@@ -52,6 +52,7 @@ import {
   updateWebSearchConfig,
   updateKnowledgeConfig,
   getKnowledgeConfig,
+  getProviderAvailabilityStatus,
 } from "@docspace/shared/api/ai";
 import {
   ServerType,
@@ -78,6 +79,10 @@ class AISettingsStore {
   mcpServersInitied = false;
 
   webSearchInitied = false;
+
+  unavailableProvidersIdsSet: Set<number> = new Set<number>();
+
+  checkProvidersAbortController: AbortController | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -131,6 +136,14 @@ class AISettingsStore {
 
     if (index !== -1) {
       this.aiProviders[index] = newProvider;
+    }
+
+    if (this.unavailableProvidersIdsSet.has(id)) {
+      const res = await getProviderAvailabilityStatus(id);
+
+      if (res.available) {
+        this.unavailableProvidersIdsSet.delete(id);
+      }
     }
   };
 
@@ -276,6 +289,51 @@ class AISettingsStore {
     await Promise.all(actions);
 
     this.setIsInit(true);
+  };
+
+  checkUnavailableProviders = async () => {
+    if (this.aiProviders.length === 0) return;
+
+    this.cancelAvailabilityCheck();
+    const abortController = new AbortController();
+    this.checkProvidersAbortController = abortController;
+
+    const requests = this.aiProviders.map((provider) =>
+      getProviderAvailabilityStatus(provider.id, abortController),
+    );
+
+    const res = await Promise.allSettled(requests);
+
+    if (abortController.signal.aborted) {
+      this.checkProvidersAbortController = null;
+      return;
+    }
+
+    runInAction(() => {
+      this.unavailableProvidersIdsSet.clear();
+
+      res.forEach((p) => {
+        if (p.status === "fulfilled" && !p.value.available) {
+          this.unavailableProvidersIdsSet.add(p.value.id);
+        }
+
+        if (p.status === "rejected") {
+          console.error(p.reason);
+          return;
+        }
+      });
+    });
+
+    this.checkProvidersAbortController = null;
+  };
+
+  cancelAvailabilityCheck = () => {
+    this.checkProvidersAbortController?.abort();
+    this.checkProvidersAbortController = null;
+  };
+
+  isProviderAvailable = (id: number) => {
+    return !this.unavailableProvidersIdsSet.has(id);
   };
 
   get systemMCPServers() {

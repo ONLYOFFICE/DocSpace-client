@@ -109,7 +109,10 @@ export const getAvailableProviderUrls = async () => {
   return res;
 };
 
-export const getModels = async (providerId?: TAiProvider["id"]) => {
+export const getModels = async (
+  providerId?: TAiProvider["id"],
+  abortController?: AbortController | null,
+) => {
   const searchParams = new URLSearchParams();
   if (providerId) {
     searchParams.append("provider", providerId.toString());
@@ -120,9 +123,25 @@ export const getModels = async (providerId?: TAiProvider["id"]) => {
   const res = (await request({
     method: "get",
     url: `${baseUrl}/chats/models${strSearch}`,
+    signal: abortController?.signal,
   })) as TModelList;
 
   return res;
+};
+
+export const getProviderAvailabilityStatus = async (
+  id: number,
+  abortController?: AbortController | null,
+) => {
+  return getModels(id, abortController)
+    .then(() => ({
+      id: id,
+      available: true,
+    }))
+    .catch(() => ({
+      id: id,
+      available: false,
+    }));
 };
 
 export const startNewChat = async (

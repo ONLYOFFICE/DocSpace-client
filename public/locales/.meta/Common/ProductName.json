@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-11-06T18:29:15.540Z",
+  "updated_at": "2025-11-07T13:41:06.052Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -588,14 +588,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/add/index.tsx",
-      "line_number": 110,
-      "context": "<ModalDialog.Body>\n <div className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Link\n className={styles.learnMoreLink}\n target={LinkTarget.blank}",
+      "line_number": 118,
+      "context": "<ModalDialog.Body>\n <form onSubmit={onSubmitAction} className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Link\n className={styles.learnMoreLink}\n target={LinkTarget.blank}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/edit/index.tsx",
-      "line_number": 143,
-      "context": "<ModalDialog.Body>\n <div className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Link\n className={styles.learnMoreLink}\n target={LinkTarget.blank}",
+      "line_number": 151,
+      "context": "<ModalDialog.Body>\n <form onSubmit={onSubmitAction} className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Link\n className={styles.learnMoreLink}\n target={LinkTarget.blank}",
       "module": "/packages/client"
     },
     {

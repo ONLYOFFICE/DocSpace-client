@@ -3,7 +3,7 @@
   "content": "Provider added successfully",
   "content_en_sha1_hash": "e4bf5330298ec0d2321b6ee3e30c759ae0edd120",
   "created_at": "2025-10-27T16:14:31.654Z",
-  "updated_at": "2025-11-03T12:10:35.149Z",
+  "updated_at": "2025-11-07T13:41:06.282Z",
   "comment": {
     "text": "This key displays a success message in a toast notification, confirming that a new AI provider has been successfully added or updated within the Portal Settings. It appears after a user adds or modifies an AI provider in the providers dialog. Translators should ensure the tone aligns with a positive confirmation.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 168,
+      "line_number": 174,
       "context": "url: providerUrl,\n };\n \n await addAIProvider?.(data);\n await getAIConfig?.();\n toastr.success(t(\"AISettings:ProviderAddedSuccess\"));\n }\n \n if (variant === \"update\" && providerData?.id) {\n const data: TUpdateAiProvider = {};",
       "module": "/packages/client"
     }

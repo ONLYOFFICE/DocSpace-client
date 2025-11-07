@@ -97,6 +97,8 @@ const Buttons = ({
 
     await exportChatMessage(messageId, selectedItemId, fileName);
 
+    console.log(socket?.socketSubscribers);
+
     socket?.on(SocketEvents.ExportChat, (data) => {
       const { resultFile } = data;
 
@@ -123,6 +125,7 @@ const Buttons = ({
 
       toastr.success(toastMsg);
 
+      socket?.off(SocketEvents.ExportChat);
       socket?.emit(SocketCommands.Unsubscribe, {
         roomParts: chatParts,
         individual: true,

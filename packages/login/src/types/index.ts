@@ -27,209 +27,211 @@
 import { ReactNode } from "react";
 
 import {
-  TCapabilities,
-  TGetColorTheme,
-  TGetSsoSettings,
-  TPasswordHash,
-  TSettings,
-  TThirdPartyProvider,
+	TCapabilities,
+	TGetColorTheme,
+	TGetSsoSettings,
+	TPasswordHash,
+	TSettings,
+	TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import {
-  EmployeeActivationStatus,
-  RecaptchaType,
-  ThemeKeys,
+	EmployeeActivationStatus,
+	RecaptchaType,
+	ThemeKeys,
 } from "@docspace/shared/enums";
 
 import { ValidationResult } from "@/utils/enums";
 import { TUser } from "@docspace/shared/api/people/types";
 
 export type TError =
-  | {
-      response?: {
-        status?: number | string;
-        data?: {
-          error?: {
-            message: string;
-          };
-        };
-      };
-      statusText?: string;
-      message?: string;
-    }
-  | string;
+	| {
+			response?: {
+				status?: number | string;
+				data?: {
+					error?: {
+						message: string;
+					};
+				};
+			};
+			statusText?: string;
+			message?: string;
+	  }
+	| string;
 
 export type TTimeZoneOption = {
-  key: string | number;
-  label: string;
+	key: string | number;
+	label: string;
 };
 
 export type TPortal = { portalLink: string; portalName: string };
 
 export type TCulturesOption =
-  | {
-      isBeta?: boolean;
-      key: string | number;
-      label: string;
-      icon?: string | React.ElementType | React.ReactElement;
-    }
-  | {
-      isBeta?: boolean;
-      key: string | number;
-      icon?: string | React.ElementType | React.ReactElement;
-    };
+	| {
+			isBeta?: boolean;
+			key: string | number;
+			label: string;
+			icon?: string | React.ElementType | React.ReactElement;
+	  }
+	| {
+			isBeta?: boolean;
+			key: string | number;
+			icon?: string | React.ElementType | React.ReactElement;
+	  };
 
 export type TDataContext = {
-  settings?: TSettings;
-  colorTheme?: TGetColorTheme;
-  systemTheme?: ThemeKeys;
+	settings?: TSettings;
+	colorTheme?: TGetColorTheme;
+	systemTheme?: ThemeKeys;
 };
 
 export type TConfirmRouteContext = {
-  linkData: {
-    confirmHeader?: string;
-    key?: string;
-    emplType?: string;
-    encemail?: string;
-    uid?: string;
-    type?: string;
-    first?: string;
-    roomId?: string;
-    firstname?: string;
-    lastname?: string;
-    redirected?: string;
-  };
-  roomData: {
-    roomId?: string;
-    title?: string;
-  };
-  confirmLinkResult: {
-    result?: ValidationResult;
-    email?: string;
-  };
+	linkData: {
+		confirmHeader?: string;
+		key?: string;
+		emplType?: string;
+		encemail?: string;
+		uid?: string;
+		type?: string;
+		first?: string;
+		roomId?: string;
+		firstname?: string;
+		lastname?: string;
+		redirected?: string;
+	};
+	roomData: {
+		roomId?: string;
+		title?: string;
+		isAgent?: boolean;
+	};
+	confirmLinkResult: {
+		result?: ValidationResult;
+		email?: string;
+	};
 };
 
 export type TConfirmLinkParams = {
-  key: string;
-  emplType?: string;
-  encemail: string;
-  uid?: string;
-  type?: string;
-  first?: string;
-  roomId?: string;
-  linkData?: string;
-  culture?: string;
-  redirected?: string;
+	key: string;
+	emplType?: string;
+	encemail: string;
+	uid?: string;
+	type?: string;
+	first?: string;
+	roomId?: string;
+	linkData?: string;
+	culture?: string;
+	redirected?: string;
 };
 
 export type TConfirmLinkResult = {
-  result: ValidationResult;
-  roomId?: string;
-  title?: string;
-  email?: string;
+	result: ValidationResult;
+	roomId?: string;
+	title?: string;
+	isAgent?: boolean;
+	email?: string;
 };
 
 export type TCreateUserData = {
-  fromInviteLink: boolean;
-  userName: string;
-  passwordHash: string;
-  cultureName: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  key?: string;
-  type?: number;
-  spam: boolean;
+	fromInviteLink: boolean;
+	userName: string;
+	passwordHash: string;
+	cultureName: string;
+	email: string;
+	firstName: string;
+	lastName: string;
+	key?: string;
+	type?: number;
+	spam: boolean;
 };
 
 export type TActivateConfirmUser = {
-  personalData: {
-    firstname?: string;
-    lastname?: string;
-  };
-  loginData: {
-    userName: string;
-    passwordHash: string;
-  };
-  key: string;
-  userId: string;
-  activationStatus: EmployeeActivationStatus;
+	personalData: {
+		firstname?: string;
+		lastname?: string;
+	};
+	loginData: {
+		userName: string;
+		passwordHash: string;
+	};
+	key: string;
+	userId: string;
+	activationStatus: EmployeeActivationStatus;
 };
 
 export type TTfaSecretKeyAndQR = {
-  account: string;
-  manualEntryKey: string;
-  qrCodeSetupImageUrl: string;
+	account: string;
+	manualEntryKey: string;
+	qrCodeSetupImageUrl: string;
 };
 
 export interface ConfirmRouteProps {
-  socketUrl?: string;
-  children: ReactNode;
-  confirmLinkResult: TConfirmLinkResult;
-  confirmLinkParams: TConfirmLinkParams;
-  user?: TUser;
+	socketUrl?: string;
+	children: ReactNode;
+	confirmLinkResult: TConfirmLinkResult;
+	confirmLinkParams: TConfirmLinkParams;
+	user?: TUser;
 }
 
 export type GreetingCreateUserContainerProps = {
-  type: string;
-  displayName?: string;
-  culture?: string;
-  hostName?: string;
+	type: string;
+	displayName?: string;
+	culture?: string;
+	hostName?: string;
 };
 
 export type LoginProps = {
-  searchParams: { [key: string]: string };
-  isAuthenticated?: boolean;
-  settings?: TSettings;
-  capabilities?: TCapabilities;
-  thirdPartyProvider?: TThirdPartyProvider[];
-  ssoSettings?: TGetSsoSettings;
-  systemTheme?: ThemeKeys;
-  cultures: string[];
+	searchParams: { [key: string]: string };
+	isAuthenticated?: boolean;
+	settings?: TSettings;
+	capabilities?: TCapabilities;
+	thirdPartyProvider?: TThirdPartyProvider[];
+	ssoSettings?: TGetSsoSettings;
+	systemTheme?: ThemeKeys;
+	cultures: string[];
 };
 
 export type RegisterProps = {
-  isAuthenticated: boolean;
-  enabledJoin: boolean;
-  trustedDomainsType?: number;
-  trustedDomains?: string[];
-  id?: string;
+	isAuthenticated: boolean;
+	enabledJoin: boolean;
+	trustedDomainsType?: number;
+	trustedDomains?: string[];
+	id?: string;
 };
 
 export type RegisterModalDialogProps = {
-  visible: boolean;
-  loading: boolean;
-  email?: string;
-  emailErr: boolean;
-  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onValidateEmail: (res: TValidate) => undefined;
-  onBlurEmail: () => void;
-  onSendRegisterRequest: () => void;
-  onKeyDown: (e: KeyboardEvent) => void;
-  onRegisterModalClose: () => void;
-  trustedDomainsType?: number;
-  trustedDomains?: string[];
-  errorText?: string;
-  isShowError?: boolean;
+	visible: boolean;
+	loading: boolean;
+	email?: string;
+	emailErr: boolean;
+	onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onValidateEmail: (res: TValidate) => undefined;
+	onBlurEmail: () => void;
+	onSendRegisterRequest: () => void;
+	onKeyDown: (e: KeyboardEvent) => void;
+	onRegisterModalClose: () => void;
+	trustedDomainsType?: number;
+	trustedDomains?: string[];
+	errorText?: string;
+	isShowError?: boolean;
 };
 
 export type LoginFormProps = {
-  hashSettings?: TPasswordHash;
-  reCaptchaPublicKey?: string;
-  reCaptchaType?: RecaptchaType;
-  cookieSettingsEnabled: boolean;
-  clientId?: string;
-  client?: IClientProps;
-  ldapDomain?: string;
-  ldapEnabled?: boolean;
-  baseDomain?: string;
+	hashSettings?: TPasswordHash;
+	reCaptchaPublicKey?: string;
+	reCaptchaType?: RecaptchaType;
+	cookieSettingsEnabled: boolean;
+	clientId?: string;
+	client?: IClientProps;
+	ldapDomain?: string;
+	ldapEnabled?: boolean;
+	baseDomain?: string;
 };
 
 export type ForgotPasswordModalDialogProps = {
-  isVisible: boolean;
-  userEmail?: string;
-  onDialogClose: () => void;
-  reCaptchaPublicKey?: string;
-  reCaptchaType?: RecaptchaType;
+	isVisible: boolean;
+	userEmail?: string;
+	onDialogClose: () => void;
+	reCaptchaPublicKey?: string;
+	reCaptchaType?: RecaptchaType;
 };

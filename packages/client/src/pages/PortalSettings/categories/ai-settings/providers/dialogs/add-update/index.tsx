@@ -111,6 +111,8 @@ const AddUpdateDialogComponent = ({
   getAIConfig,
 }: AddEditDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings", "OAuth", "Webhooks"]);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
+
   const [selectedOption, setSelectedOption] = useState(
     getSelectedOptionByProviderType(providerData?.type),
   );
@@ -152,7 +154,10 @@ const AddUpdateDialogComponent = ({
     );
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!canSubmit) return;
+
     setIsRequestRunning(true);
 
     try {
@@ -196,6 +201,10 @@ const AddUpdateDialogComponent = ({
     }
   };
 
+  const handleSubmitClick = () => {
+    if (canSubmit) submitButtonRef.current?.click();
+  };
+
   const onResetKey = () => setIsKeyInputHidden(false);
 
   return (
@@ -208,7 +217,7 @@ const AddUpdateDialogComponent = ({
       <ModalDialog.Header>{t("AISettings:AIProvider")}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <div className={styles.modalBody}>
+        <form className={styles.modalBody} onSubmit={onSubmit}>
           <FieldContainer
             labelText={t("AISettings:Provider")}
             labelVisible
@@ -306,7 +315,13 @@ const AddUpdateDialogComponent = ({
               </>
             )}
           </FieldContainer>
-        </div>
+          <button
+            type="submit"
+            ref={submitButtonRef}
+            hidden
+            aria-label="submit"
+          />
+        </form>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -315,7 +330,7 @@ const AddUpdateDialogComponent = ({
           size={ButtonSize.normal}
           label={t("Common:SaveButton")}
           scale
-          onClick={onSubmit}
+          onClick={handleSubmitClick}
           isLoading={isRequestRunning}
           isDisabled={!canSubmit}
         />

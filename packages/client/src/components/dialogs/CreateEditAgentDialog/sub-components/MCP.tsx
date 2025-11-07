@@ -147,6 +147,10 @@ const MCPSettings = ({
     }
   }, [portalMcpServerId, isBase]);
 
+  const initSelectedServers = React.useMemo(() => {
+    return selectedServers.map((i) => i.id?.toString() || "");
+  }, [selectedServers]);
+
   return (
     <>
       <StyledParam increaseGap>
@@ -201,7 +205,11 @@ const MCPSettings = ({
       </StyledParam>
 
       {isSelectorVisible ? (
-        <MCPServersSelector onSubmit={onSubmit} onClose={onClose} />
+        <MCPServersSelector
+          onSubmit={onSubmit}
+          onClose={onClose}
+          initedSelectedServers={initSelectedServers}
+        />
       ) : null}
     </>
   );

@@ -27,9 +27,12 @@
  */
 
 import { useId } from "react";
+import classNames from "classnames";
 
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+
+import LoadErrorIcon from "PUBLIC_DIR/images/load.error.react.svg";
 
 import styles from "./AiTile.module.scss";
 
@@ -67,23 +70,51 @@ export const AiTile = ({ icon, children, tooltipText }: AiTileProps) => {
 type HeaderProps = {
   title: string;
   children: React.ReactNode;
+  className?: string;
+  hasError?: boolean;
+  getErrorTooltipContent?: () => React.ReactNode;
 };
 
-const Header = ({ title, children }: HeaderProps) => (
-  <div className={styles.header}>
-    <Heading
-      className={styles.heading}
-      level={HeadingLevel.h3}
-      fontSize="16px"
-      fontWeight={700}
-      lineHeight="22px"
-      truncate
-    >
-      {title}
-    </Heading>
-    {children}
-  </div>
-);
+const Header = ({
+  title,
+  children,
+  className,
+  hasError,
+  getErrorTooltipContent,
+}: HeaderProps) => {
+  const tooltipId = useId();
+
+  return (
+    <div className={classNames(styles.header, className)}>
+      <div className={styles.titleBlock}>
+        <Heading
+          className={styles.heading}
+          level={HeadingLevel.h3}
+          fontSize="16px"
+          fontWeight={700}
+          lineHeight="22px"
+          truncate
+        >
+          {title}
+        </Heading>
+
+        {hasError ? (
+          <>
+            <LoadErrorIcon data-tooltip-id={tooltipId} />
+            <Tooltip
+              id={tooltipId}
+              place="bottom"
+              offset={15}
+              getContent={getErrorTooltipContent}
+            />
+          </>
+        ) : null}
+      </div>
+
+      {children}
+    </div>
+  );
+};
 
 const Body = ({ children }: { children: React.ReactNode }) => (
   <div className={styles.body}>{children}</div>

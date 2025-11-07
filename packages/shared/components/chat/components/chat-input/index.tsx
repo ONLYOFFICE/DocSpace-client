@@ -173,7 +173,7 @@ const ChatInput = ({
   }, []);
 
   return (
-    <>
+    <div className={styles.chatFooter}>
       <div
         className={classNames(styles.chatInput, "chat-input")}
         ref={(ref) => {
@@ -241,7 +241,7 @@ const ChatInput = ({
           {t("Common:CheckAIInfo")}
         </Text>
       ) : null}
-    </>
+    </div>
   );
 };
 

@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices.scss";
 @import "../../../../styles/mixins";
 
 .chatHeader {
   width: 100%;
 
-  padding: 0 0 16px;
+  padding: 20px 0 16px;
 
   box-sizing: border-box;
 
@@ -40,6 +39,12 @@
   gap: 16px;
 
   min-height: 48px;
+  position: sticky;
+  top: var(--chat-header-top);
+
+  background: var(--background-color);
+
+  z-index: 1;
 }
 
 .createChat {

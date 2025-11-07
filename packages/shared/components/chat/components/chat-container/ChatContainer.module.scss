@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
-
 .chatContainer {
   width: 100%;
   height: 100%;
@@ -33,8 +31,4 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @include mixins.tablet-and-below {
-    margin-top: 16px;
-  }
 }

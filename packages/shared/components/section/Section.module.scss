@@ -211,6 +211,10 @@
       outline: none;
       @include paddingStyles;
 
+      &:has(.chat-container) {
+        padding-block: 0;
+      }
+
       .section-wrapper {
         display: flex;
         flex-direction: column;

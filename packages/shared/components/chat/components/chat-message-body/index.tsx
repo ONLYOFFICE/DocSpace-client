@@ -153,37 +153,37 @@ const ChatMessageBody = ({
       {isEmpty ? (
         <EmptyScreen isLoading={isLoading} />
       ) : (
-        <Scrollbar
-          ref={scrollbarRef}
-          className="chat-scroll-bar"
-          scrollBodyClassName={styles.chatScrollBody}
-          onScroll={onScroll}
-          fixedSize
+        // <Scrollbar
+        //   ref={scrollbarRef}
+        //   className="chat-scroll-bar"
+        //   scrollBodyClassName={styles.chatScrollBody}
+        //   onScroll={onScroll}
+        //   fixedSize
+        // >
+        <div
+          className={classNames(styles.chatMessageContainer)}
+          ref={chatBodyRef}
         >
-          <div
-            className={classNames(styles.chatMessageContainer)}
-            ref={chatBodyRef}
-          >
-            {!isStreamRunning && isRequestRunning ? (
-              <div className={styles.chatLoader}>
-                <Loader type={LoaderTypes.track} />
-                {t("Common:Analyzing")}
-              </div>
-            ) : null}
-            {messages.map((message, index) => {
-              return (
-                <Message
-                  key={`${currentChat?.id}-${message.createdOn}-${index * 2}`}
-                  message={message}
-                  idx={index}
-                  userAvatar={userAvatar}
-                  isLast={index === 0}
-                  getIcon={getIcon}
-                />
-              );
-            })}
-          </div>
-        </Scrollbar>
+          {!isStreamRunning && isRequestRunning ? (
+            <div className={styles.chatLoader}>
+              <Loader type={LoaderTypes.track} />
+              {t("Common:Analyzing")}
+            </div>
+          ) : null}
+          {messages.map((message, index) => {
+            return (
+              <Message
+                key={`${currentChat?.id}-${message.createdOn}-${index * 2}`}
+                message={message}
+                idx={index}
+                userAvatar={userAvatar}
+                isLast={index === 0}
+                getIcon={getIcon}
+              />
+            );
+          })}
+        </div>
+        // </Scrollbar>
       )}
     </div>
   );

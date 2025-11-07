@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { WithFlag } from "../../types";
-import { TRoom } from "../../api/rooms/types";
-import { TSelectorItem } from "../../components/selector/Selector.types";
+import type { TRoom } from "../../api/rooms/types";
+import type { TSelectorItem } from "../../components/selector/Selector.types";
+import type { WithFlag } from "../../types";
 
 export type TInitValue = WithFlag<
   "withInit",

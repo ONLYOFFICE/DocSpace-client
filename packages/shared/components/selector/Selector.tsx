@@ -40,7 +40,7 @@ import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
 import styles from "./Selector.module.scss";
 
-import {
+import type {
   TAccessRight,
   SelectorProps,
   TSelectorBreadCrumbs,

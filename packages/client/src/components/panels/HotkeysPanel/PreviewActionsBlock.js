@@ -33,6 +33,12 @@ const PreviewActionsBlock = ({ t, textStyles, keyTextStyles }) => {
     <>
       <Row className="hotkeys_row">
         <>
+          <Text {...textStyles}>{t("OpenContextMenu")}</Text>
+          <Text {...keyTextStyles}>Shift + c</Text>
+        </>
+      </Row>
+      <Row className="hotkeys_row">
+        <>
           <Text {...textStyles}>{t("HotkeysClose")}</Text>
           <Text {...keyTextStyles}>Esc</Text>
         </>

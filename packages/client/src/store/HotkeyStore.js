@@ -760,6 +760,60 @@ class HotkeyStore {
     e.preventDefault();
   };
 
+  getTileItems = (item, itemId) => {
+    const tileItems = item.querySelectorAll(".tile-item");
+    let id = null;
+
+    tileItems.forEach((tileItem) => {
+      if (tileItem.childNodes[0].id === itemId) {
+        id = tileItem.childNodes[0].id;
+      }
+    });
+
+    return id;
+  };
+
+  openContextMenu = () => {
+    const { selection, filesList, viewAs } = this.filesStore;
+
+    if (!selection.length) return;
+
+    const index = filesList.findIndex((i) => i.id === selection[0].id);
+    const firstSelectedItem = filesList[index];
+    const itemId = firstSelectedItem.isFolder
+      ? `folder_${firstSelectedItem.id}`
+      : `file_${firstSelectedItem.id}`;
+
+    const windowItems = document.querySelectorAll(".window-item");
+
+    windowItems.forEach((item) => {
+      let nodeId = item.childNodes[0].id;
+
+      if (viewAs === "tile") {
+        nodeId = this.getTileItems(item, itemId) ?? nodeId;
+      }
+
+      if (nodeId === itemId) {
+        const cmButton = item.querySelector(".context-menu-button");
+        if (!cmButton) return;
+
+        const rect = cmButton.getBoundingClientRect();
+
+        const event = new MouseEvent("contextmenu", {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          clientX: rect.left,
+          clientY: rect.top,
+          button: 2,
+        });
+
+        cmButton.dispatchEvent(event);
+        this.selectFile();
+      }
+    });
+  };
+
   get countTilesInRow() {
     return getCountTilesInRow(this.treeFoldersStore?.isRoomsFolder);
   }

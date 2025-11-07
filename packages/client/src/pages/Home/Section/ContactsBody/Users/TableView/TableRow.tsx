@@ -275,6 +275,7 @@ const PeopleTableRow = ({
 
   return (
     <StyledWrapper
+      id={item.id}
       className={`user-item ${
         isChecked || isActive ? "table-row-selected" : ""
       } ${item.id}`}

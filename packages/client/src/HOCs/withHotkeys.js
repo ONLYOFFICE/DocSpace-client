@@ -96,6 +96,7 @@ const withHotkeys = (Component) => {
       isParentFolderFormRoom,
       isIndexEditingMode,
       enableSelection,
+      openContextMenu,
     } = props;
 
     const navigate = useNavigate();
@@ -356,6 +357,11 @@ const withHotkeys = (Component) => {
       ...{ keyup: true },
     });
 
+    useHotkeys("Shift+c", openContextMenu, {
+      ...hotkeysFilter,
+      ...{ keyup: true },
+    });
+
     // Delete selection
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
@@ -516,6 +522,7 @@ const withHotkeys = (Component) => {
         uploadFile,
         copyToClipboard,
         uploadClipboardFiles,
+        openContextMenu,
         enableSelection,
       } = hotkeyStore;
 
@@ -585,6 +592,7 @@ const withHotkeys = (Component) => {
         deselectAll,
         activateHotkeys,
         onClickBack,
+        openContextMenu,
 
         uploadFile,
         enabledHotkeys,

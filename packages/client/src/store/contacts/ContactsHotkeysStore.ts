@@ -346,6 +346,44 @@ class ContactsHotkeysStore {
     }
     e.preventDefault();
   };
+
+  openContextMenu = () => {
+    if (!this.contactsSelection.length) return;
+
+    const index = this.contactsList.findIndex(
+      (i) => i.id === this.contactsSelection[0].id,
+    );
+    const firstSelectedItem = this.contactsList[index];
+    const windowItems = document.querySelectorAll(".window-item");
+
+    windowItems.forEach((item) => {
+      const nodeId = (item.childNodes[0] as HTMLElement).id;
+
+      if (nodeId === firstSelectedItem.id) {
+        const cmButton = item.querySelector(".context-menu-button");
+        if (!cmButton) return;
+
+        const rect = cmButton.getBoundingClientRect();
+
+        const event = new MouseEvent("contextmenu", {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          clientX: rect.left,
+          clientY: rect.top,
+          button: 2,
+        });
+
+        cmButton.dispatchEvent(event);
+
+        if (this.contactsSelection.length === 0) {
+          this.setSelectionWithCaret([firstSelectedItem] as
+            | UsersStore["selection"]
+            | GroupsStore["selection"]);
+        }
+      }
+    });
+  };
 }
 
 export default ContactsHotkeysStore;

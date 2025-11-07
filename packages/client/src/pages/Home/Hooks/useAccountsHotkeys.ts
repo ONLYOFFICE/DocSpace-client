@@ -47,6 +47,7 @@ interface AccountsHotkeysProps {
   enableSelection: ContactsHotkeysStore["enableSelection"];
   viewAs: PeopleStore["viewAs"];
   selection: UsersStore["selection"] | GroupsStore["selection"];
+  openContextMenu: VoidFunction;
 }
 
 const useAccountsHotkeys = ({
@@ -62,6 +63,7 @@ const useAccountsHotkeys = ({
   enableSelection,
   viewAs,
   selection,
+  openContextMenu,
 }: AccountsHotkeysProps) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -162,6 +164,12 @@ const useAccountsHotkeys = ({
 
   // Copy selected items to clipboard
   useHotkeys("Ctrl+Shift+c", copySelectedTextFn, hotkeysFilter);
+
+  // Open context menu
+  useHotkeys("Shift+c", openContextMenu, {
+    ...hotkeysFilter,
+    ...{ keyup: true },
+  });
 };
 
 export default useAccountsHotkeys;

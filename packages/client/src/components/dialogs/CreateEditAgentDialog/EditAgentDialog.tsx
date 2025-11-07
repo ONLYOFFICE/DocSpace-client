@@ -48,7 +48,7 @@ import SetAgentParams from "./sub-components/SetAgentParams";
 type EditAgentDialogProps = {
   visible: boolean;
   onClose: VoidFunction;
-  onSave: (params: Partial<TAgentParams>) => void;
+  onSave: (params: TAgentParams) => void;
   isLoading: boolean;
   isInitLoading: boolean;
   fetchedAgentParams: TAgentParams;
@@ -116,7 +116,7 @@ const EditAgentDialog = ({
     );
   };
 
-  const setAgentParamsAction = (newParams: TAgentParams) => {
+  const setAgentParamsAction = (newParams: Partial<TAgentParams>) => {
     setAgentParams((value) => ({ ...value, ...newParams }));
   };
 

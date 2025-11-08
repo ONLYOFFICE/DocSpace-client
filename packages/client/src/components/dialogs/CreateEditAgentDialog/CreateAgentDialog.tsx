@@ -37,8 +37,8 @@ import SetAgentParams from "./sub-components/SetAgentParams";
 import { useTranslation } from "react-i18next";
 import {
   getStartAgentParams,
-  TAgentParams,
-  TAgentTagsParams,
+  type TAgentParams,
+  type TAgentTagsParams,
 } from "@docspace/shared/utils/aiAgents";
 
 type CreateAgentDialogProps = {
@@ -48,6 +48,7 @@ type CreateAgentDialogProps = {
   onCreate: (params: TAgentParams) => void;
   fetchedTags: string[];
   isLoading: boolean;
+  portalMcpServerId: string;
 };
 
 const CreateAgentDialog = ({
@@ -58,6 +59,7 @@ const CreateAgentDialog = ({
 
   fetchedTags,
   isLoading,
+  portalMcpServerId,
 }: CreateAgentDialogProps) => {
   const { t } = useTranslation("Common");
 
@@ -77,6 +79,13 @@ const CreateAgentDialog = ({
     ...startAgentParams,
   });
   const [isValidTitle, setIsValidTitle] = useState(true);
+
+  const setAgentParamssAction = React.useCallback(
+    (newParams: Partial<TAgentParams>) => {
+      setAgentParams((value) => ({ ...value, ...newParams }));
+    },
+    [],
+  );
 
   const setAgentTags = (newTags: TAgentTagsParams[]) =>
     setAgentParams({ ...agentParams, tags: newTags });
@@ -141,7 +150,7 @@ const CreateAgentDialog = ({
         <SetAgentParams
           tagHandler={tagHandler}
           agentParams={agentParams}
-          setAgentParams={setAgentParams}
+          setAgentParams={setAgentParamssAction}
           setIsScrollLocked={setIsScrollLocked}
           isDisabled={isLoading}
           isValidTitle={isValidTitle}
@@ -149,6 +158,7 @@ const CreateAgentDialog = ({
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
+          portalMcpServerId={portalMcpServerId}
         />
       </ModalDialog.Body>
 

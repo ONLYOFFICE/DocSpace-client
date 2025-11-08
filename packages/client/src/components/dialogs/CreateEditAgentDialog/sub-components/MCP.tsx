@@ -30,10 +30,13 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+import type { TSelectorItem } from "@docspace/shared/components/selector";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { TAgentParams } from "@docspace/shared/utils/aiAgents";
-import { getServersListForRoom } from "@docspace/shared/api/ai";
+import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
+import {
+  getMCPServerById,
+  getServersListForRoom,
+} from "@docspace/shared/api/ai";
 import { getServerIcon } from "@docspace/shared/utils";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
@@ -43,10 +46,15 @@ import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 interface MCPSettingsProps {
   agentParams: TAgentParams;
-  setAgentParams: (value: TAgentParams) => void;
+  setAgentParams: (value: Partial<TAgentParams>) => void;
+  portalMcpServerId?: string;
 }
 
-const MCPSettings = ({ agentParams, setAgentParams }: MCPSettingsProps) => {
+const MCPSettings = ({
+  agentParams,
+  setAgentParams,
+  portalMcpServerId,
+}: MCPSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
 
   const { isBase } = useTheme();
@@ -93,18 +101,54 @@ const MCPSettings = ({ agentParams, setAgentParams }: MCPSettingsProps) => {
         }
       });
     }
-  }, [agentId]);
+  }, [agentId, isBase]);
 
   React.useEffect(() => {
     setAgentParams({
-      ...agentParams,
       mcpServers: selectedServers
         .map((server) => server.id?.toString() || "")
-        .filter((id) => id !== ""),
+        .filter((id) =>
+          portalMcpServerId ? id !== portalMcpServerId && id !== "" : id !== "",
+        ),
       mcpServersInitial: initialServers
         .map((server) => server.id?.toString() || "")
-        .filter((id) => id !== ""),
+        .filter((id) =>
+          portalMcpServerId ? id !== portalMcpServerId && id !== "" : id !== "",
+        ),
     });
+  }, [selectedServers, initialServers, portalMcpServerId, setAgentParams]);
+
+  React.useEffect(() => {
+    const initBaseMcpServers = async () => {
+      if (!portalMcpServerId) return;
+
+      const portalMcpServer = await getMCPServerById(portalMcpServerId);
+
+      setSelectedServers([
+        {
+          key: portalMcpServer.id,
+          id: portalMcpServer.id,
+          label: portalMcpServer.name,
+          icon:
+            (portalMcpServer.icon?.icon24 ||
+              getServerIcon(portalMcpServer.serverType, isBase)) ??
+            "",
+          isInputItem: false,
+          onAcceptInput: () => {},
+          onCancelInput: () => {},
+          defaultInputValue: "",
+          placeholder: "",
+        },
+      ]);
+    };
+
+    if (portalMcpServerId) {
+      initBaseMcpServers();
+    }
+  }, [portalMcpServerId, isBase]);
+
+  const initSelectedServers = React.useMemo(() => {
+    return selectedServers.map((i) => i.id?.toString() || "");
   }, [selectedServers]);
 
   return (
@@ -147,6 +191,11 @@ const MCPSettings = ({ agentParams, setAgentParams }: MCPSettingsProps) => {
                     setSelectedServers((prev) =>
                       prev.filter((item) => item.id !== server.id),
                     );
+                    if (portalMcpServerId && server.id === portalMcpServerId) {
+                      setAgentParams({
+                        attachDefaultTools: false,
+                      });
+                    }
                   }}
                 />
               </div>
@@ -156,7 +205,11 @@ const MCPSettings = ({ agentParams, setAgentParams }: MCPSettingsProps) => {
       </StyledParam>
 
       {isSelectorVisible ? (
-        <MCPServersSelector onSubmit={onSubmit} onClose={onClose} />
+        <MCPServersSelector
+          onSubmit={onSubmit}
+          onClose={onClose}
+          initedSelectedServers={initSelectedServers}
+        />
       ) : null}
     </>
   );

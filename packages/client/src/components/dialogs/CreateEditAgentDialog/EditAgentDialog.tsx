@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -32,13 +32,13 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import {
+import type {
   TAgentParams,
   TAgentTagsParams,
 } from "@docspace/shared/utils/aiAgents";
-import { TCreatedBy } from "@docspace/shared/types";
+import type { TCreatedBy } from "@docspace/shared/types";
 
-import { ICover } from "SRC_DIR/components/dialogs/RoomLogoCoverDialog/RoomLogoCoverDialog.types";
+import type { ICover } from "SRC_DIR/components/dialogs/RoomLogoCoverDialog/RoomLogoCoverDialog.types";
 
 import TagHandler from "../../../helpers/TagHandler";
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
@@ -116,6 +116,13 @@ const EditAgentDialog = ({
     );
   };
 
+  const setAgentParamsAction = React.useCallback(
+    (newParams: Partial<TAgentParams>) => {
+      setAgentParams((value) => ({ ...value, ...newParams }));
+    },
+    [],
+  );
+
   const setAgentTags = (newTags: TAgentTagsParams[]) =>
     setAgentParams({ ...agentParams, tags: newTags });
 
@@ -191,7 +198,7 @@ const EditAgentDialog = ({
         <SetAgentParams
           tagHandler={tagHandler}
           agentParams={agentParams}
-          setAgentParams={setAgentParams}
+          setAgentParams={setAgentParamsAction}
           setIsScrollLocked={setIsScrollLocked}
           isEdit
           isDisabled={isLoading}

@@ -130,7 +130,7 @@ type TClientCover = {
 
 type setAgentParamsProps = {
   agentParams: TAgentParams;
-  setAgentParams: (value: TAgentParams) => void;
+  setAgentParams: (value: Partial<TAgentParams>) => void;
   tagHandler: TagHandler;
   setIsScrollLocked: (value: boolean) => void;
   isEdit?: boolean;
@@ -141,6 +141,7 @@ type setAgentParamsProps = {
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: VoidFunction;
+  portalMcpServerId?: string;
 
   // Store props
   folderFormValidation?: SettingsStore["folderFormValidation"];
@@ -190,6 +191,7 @@ const setAgentParams = ({
   onOwnerChange,
   isDefaultAgentsQuotaSet,
   infoPanelSelection,
+  portalMcpServerId,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -202,7 +204,7 @@ const setAgentParams = ({
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
   const [previewTitle, setPreviewTitle] = useState(
-    selection?.title || infoPanelSelection?.title || ""
+    selection?.title || infoPanelSelection?.title || "",
   );
   const [createAgentTitle, setCreateAgentTitle] = useState(agentParams.title);
 
@@ -236,7 +238,7 @@ const setAgentParams = ({
 
     if (cover && cover.cover) {
       const currentCoverData = covers?.filter(
-        (item) => item.id === cover.cover
+        (item) => item.id === cover.cover,
       )[0].data;
 
       return { ...cover, data: currentCoverData };
@@ -259,22 +261,22 @@ const setAgentParams = ({
       globalColors.logoColors[
         Math.floor(Math.random() * globalColors.logoColors.length)
       ].replace("#", ""),
-    []
+    [],
   );
 
   const currentIcon = selection
     ? selection?.logo?.large
       ? selection?.logo?.large
       : selection?.logo?.cover
-      ? selection?.logo
-      : getInfoPanelItemIcon?.(selection, 96)
+        ? selection?.logo
+        : getInfoPanelItemIcon?.(selection, 96)
     : infoPanelSelection
-    ? infoPanelSelection?.logo?.large
       ? infoPanelSelection?.logo?.large
-      : infoPanelSelection?.logo?.cover
-      ? infoPanelSelection?.logo
-      : getInfoPanelItemIcon?.(infoPanelSelection, 96)
-    : undefined;
+        ? infoPanelSelection?.logo?.large
+        : infoPanelSelection?.logo?.cover
+          ? infoPanelSelection?.logo
+          : getInfoPanelItemIcon?.(infoPanelSelection, 96)
+      : undefined;
 
   const onChangeIcon = (icon: TAgentIconParams) => {
     if (!icon.uploadedFile !== disableImageRescaling)
@@ -355,17 +357,17 @@ const setAgentParams = ({
   const isEditRoomModel = model?.map((item) =>
     item.key === "create_edit_room_delete"
       ? { ...item, onClick: onDeleteAvatar }
-      : item
+      : item,
   );
 
   const isEmptyIcon =
     createAgentTitle || cover?.color
       ? false
       : avatarEditorDialogVisible
-      ? true
-      : previewIcon
-      ? false
-      : !createAgentTitle;
+        ? true
+        : previewIcon
+          ? false
+          : !createAgentTitle;
 
   const roomIconLogo = currentCover
     ? { cover: currentCover }
@@ -374,8 +376,8 @@ const setAgentParams = ({
   const itemIconLogo = currentCover
     ? { cover: currentCover }
     : avatarEditorDialogVisible
-    ? currentIcon
-    : previewIcon || currentIcon;
+      ? currentIcon
+      : previewIcon || currentIcon;
 
   const showDefault =
     cover && cover.cover
@@ -488,7 +490,11 @@ const setAgentParams = ({
         setAgentParams={setAgentParams}
       />
       {/* <KnowledgeSettings /> */}
-      <MCPSettings setAgentParams={setAgentParams} agentParams={agentParams} />
+      <MCPSettings
+        setAgentParams={setAgentParams}
+        agentParams={agentParams}
+        portalMcpServerId={portalMcpServerId}
+      />
 
       {isDefaultAgentsQuotaSet ? (
         <RoomQuota
@@ -575,5 +581,5 @@ export default inject(
       isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
       infoPanelSelection,
     };
-  }
+  },
 )(observer(setAgentParams));

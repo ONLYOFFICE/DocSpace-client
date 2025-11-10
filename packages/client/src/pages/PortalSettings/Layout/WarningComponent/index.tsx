@@ -44,6 +44,7 @@ type InjectedProps = {
   maxFreeBackups?: number;
   isInited?: boolean;
   isBackupServiceOn?: boolean;
+  isNotPaidPeriod?: boolean;
 };
 
 const Warning = ({
@@ -56,6 +57,7 @@ const Warning = ({
   maxFreeBackups = 0,
   isInited,
   isBackupServiceOn,
+  isNotPaidPeriod,
 }: InjectedProps) => {
   const { t, ready } = useTranslation(["Services", "Common"]);
   const { pathname } = useLocation();
@@ -71,7 +73,7 @@ const Warning = ({
     typeof pathname === "string" && pathname.includes("portal-settings/backup");
 
   React.useEffect(() => {
-    if (!isBackupPaid) return;
+    if (!isBackupPaid || isNotPaidPeriod) return;
     if (!isBackupRoute || !isInited) return;
     if (!ready) return;
 
@@ -169,6 +171,7 @@ const Warning = ({
     cardLinkedOnFreeTariff,
     isPayer,
     isBackupPaid,
+    isNotPaidPeriod,
   ]);
 
   React.useEffect(() => {
@@ -193,7 +196,7 @@ export default inject(
       cardLinkedOnFreeTariff,
       isBackupServiceOn,
     } = paymentStore;
-    const { walletCustomerEmail } = currentTariffStatusStore;
+    const { walletCustomerEmail, isNotPaidPeriod } = currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
 
@@ -207,6 +210,7 @@ export default inject(
       isInited,
       isBackupServiceOn,
       maxFreeBackups,
+      isNotPaidPeriod,
     };
   },
 )(observer(Warning));

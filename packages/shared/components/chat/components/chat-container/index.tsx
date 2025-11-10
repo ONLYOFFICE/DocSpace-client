@@ -27,74 +27,12 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Nullable } from "../../../../types";
-import { useIsMobile } from "../../../../hooks/useIsMobile";
-
 import { ChatContainerProps } from "../../Chat.types";
 import styles from "./ChatContainer.module.scss";
 
 const ChatContainer = ({ children }: ChatContainerProps) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const isMobile = useIsMobile();
-
-  React.useEffect(() => {
-    const scroll = isMobile
-      ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
-      : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
-
-    const mainBar = document.getElementById("main-bar");
-
-    const lastStickyElement = isMobile
-      ? document.querySelector(".section-sticky-container-mobile")
-          ?.lastElementChild
-      : document.querySelector(".section-sticky-container")?.lastElementChild;
-
-    if (!scroll) return;
-
-    let rafId: Nullable<number> = null;
-    let currentHeaderTop: Nullable<number> = null;
-
-    const calculateHeaderTop = () => {
-      rafId = null;
-
-      if (!containerRef.current) return;
-
-      const mainBarHeight = isMobile ? 0 : mainBar?.clientHeight || 0;
-      const newHeaderTop =
-        (lastStickyElement?.getBoundingClientRect().bottom || 0) -
-        mainBarHeight;
-
-      if (currentHeaderTop === newHeaderTop) return;
-      currentHeaderTop = newHeaderTop;
-
-      containerRef.current.style.setProperty(
-        "--chat-header-top",
-        `${newHeaderTop}px`,
-      );
-    };
-
-    const onScroll = () => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(calculateHeaderTop);
-    };
-
-    scroll.addEventListener("scroll", onScroll);
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      scroll.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, [isMobile]);
-
   return (
-    <div
-      ref={containerRef}
-      className={classNames(styles.chatContainer, "chat-container")}
-    >
+    <div className={classNames(styles.chatContainer, "chat-container")}>
       {children}
     </div>
   );

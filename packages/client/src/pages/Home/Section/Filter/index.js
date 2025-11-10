@@ -847,7 +847,7 @@ const SectionFilterContent = ({
   ]);
 
   const getSharedByFilter = React.useCallback(() => {
-    if (!isSharedWithMeFolder || isVisitor) return [];
+    if (!isSharedWithMeFolder || isVisitor || isCollaborator) return [];
 
     return [
       {
@@ -864,7 +864,7 @@ const SectionFilterContent = ({
         label: t("Translations:ChooseFromList"),
       },
     ];
-  }, [t, isSharedWithMeFolder, isVisitor]);
+  }, [t, isSharedWithMeFolder, isVisitor, isCollaborator]);
 
   const getAuthorFilter = React.useCallback(() => {
     const selectedFolder = getSelectedFolder();
@@ -877,7 +877,7 @@ const SectionFilterContent = ({
     if (isFolderSharedWithMe) return [];
 
     if (isSharedWithMeFolder) {
-      if (isVisitor) return [];
+      if (isVisitor || isCollaborator) return [];
 
       return [
         {

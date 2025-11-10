@@ -9,6 +9,7 @@ This directory contains Python scripts for exporting translations and generating
 | `export_all_languages.py` | Export translation keys to JSON | Python | Cross-platform |
 | `build_oform.py` | Generate PDF forms from JSON | Python | Cross-platform |
 | `export_and_build_all.py` | Automated export + build workflow | Python | Cross-platform |
+| `upload_to_docspace.py` | Upload PDF forms to DocSpace VDR | Python | Cross-platform |
 
 ## Scripts
 
@@ -149,6 +150,64 @@ python export_and_build_all.py --all-projects --base-language en --output-dir my
 - JSON files in `output/exports/`
 - PDF forms in `output/forms/{language}/` (organized by language)
 
+### 4. `upload_to_docspace.py`
+
+Upload generated PDF forms to ONLYOFFICE DocSpace VDR (Virtual Data Room) for review.
+
+**Features:**
+- Creates VDR room for translation review
+- Uploads PDF forms organized by language folders
+- Automatic folder structure creation
+- Progress tracking and error handling
+- Works with DocSpace API
+
+**Usage:**
+
+```bash
+# Upload all forms from default directory
+python upload_to_docspace.py
+
+# Upload from custom directory
+python upload_to_docspace.py --forms-dir my_forms
+
+# Specify custom room name
+python upload_to_docspace.py --room-name "Translation Review Q4 2024"
+
+# Override environment variables
+python upload_to_docspace.py --portal-url https://your-portal.onlyoffice.com --api-key YOUR_API_KEY
+```
+
+**Arguments:**
+- `--forms-dir`: Directory containing language folders with PDF forms (default: output/forms)
+- `--room-name`: Name for the VDR room (default: Translation Review)
+- `--portal-url`: DocSpace portal URL (overrides DOCSPACE_PORTAL_URL env variable)
+- `--api-key`: DocSpace API key (overrides DOCSPACE_API_KEY env variable)
+
+**Requirements:**
+```bash
+pip install -r requirements.txt
+```
+
+This will install the official ONLYOFFICE DocSpace SDK (`docspace-api-sdk`).
+
+**Configuration:**
+
+Set in `.env` file:
+```bash
+DOCSPACE_PORTAL_URL=https://your-portal.onlyoffice.com
+DOCSPACE_API_KEY=your-api-key-here
+```
+
+To generate an API key:
+1. Log in to your DocSpace portal
+2. Go to Settings → Integration → Developer Tools → API
+3. Create a new API key
+
+**Output:**
+- Creates VDR room in DocSpace
+- Uploads language folders with PDF forms
+- Prints room URL for sharing with reviewers
+
 ## Complete Workflow
 
 ### Quick Start (Automated)
@@ -173,6 +232,28 @@ This script will:
 1. Export all translation keys to JSON files
 2. Generate PDF forms for each language
 3. Save everything to the `output/` directory
+
+**Then upload to DocSpace:**
+```bash
+# Upload forms to DocSpace VDR room
+python upload_to_docspace.py
+
+# Or with custom room name
+python upload_to_docspace.py --room-name "Translation Review December 2024"
+```
+
+### Complete End-to-End Workflow
+
+```bash
+# 1. Export and build all forms
+python export_and_build_all.py --all-projects --languages ru de fr
+
+# 2. Upload to DocSpace for review
+python upload_to_docspace.py --room-name "Translation Review Q4 2024"
+
+# 3. Share the room URL with translators
+# (URL is printed by the upload script)
+```
 
 ### Manual Workflow
 

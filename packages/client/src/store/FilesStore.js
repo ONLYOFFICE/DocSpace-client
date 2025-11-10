@@ -1347,8 +1347,6 @@ class FilesStore {
   };
 
   updateRoomMute = (index, status) => {
-    if (index < 0) return;
-
     this.folders[index].mute = status;
   };
 

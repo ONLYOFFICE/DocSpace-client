@@ -18,5 +18,8 @@
   "SendInvitation": "发送邀请",
   "UserMaxAvailableRoleWarning": "无法指定访客和用户为房间管理员。只有房间管理员和{{productName}}管理员可担任该角色。",
   "UsersAlreadyAdded": "部分用户已添加过",
-  "UsersCannotBeAdded": "无法将禁用的联系人添加到房间。"
+  "UsersCannotBeAdded": "无法将禁用的联系人添加到房间。",
+  "InviteViaLinkDescriptionAgentGuest": "创建通用链接，供访客在智能体中自行授权。",
+  "InviteViaLinkDescriptionAgentMembers": "创建通用链接，供{{productName}}成员在智能体中自行授权。",
+  "UserAgentMaxAvailableRoleWarning": "访客和用户不能被指定为智能体管理员。只有房间和{{productName}}管理员适合担任指定角色。"
 }

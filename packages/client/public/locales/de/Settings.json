@@ -276,5 +276,15 @@
   "WantToCancelUpload": "Möchten Sie den Upload abbrechen?",
   "WantToContinue": "Möchten Sie fortfahren oder das Benutzer-Speicherlimit ändern?",
   "WhiteLabelSubtitle": "Geben Sie Ihren Firmennamen ein, laden Sie das Logo hoch, und passen Sie das Design an Ihr Branding an.",
-  "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort."
+  "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort.",
+  "AccountsUsersWithoutEmails": "Wir haben <1>{{users}} Benutzer</1> ohne E-Mail-Adresse gefunden. Sie können im nächsten Schritt die erforderlichen Daten zu deren Konten hinzufügen.",
+  "AccountsWithoutEmails": "Wir haben <1>{{users}} Benutzer</1> ohne E-Mail-Adresse gefunden. Sie können deren E-Mail-Adressen hinzufügen oder fortfahren.",
+  "AISettings": "KI-Einstellungen",
+  "DataImportAdminLimitExceeded": "Administratorlimit überschritten. Um fortzufahren, passen Sie bitte entweder die Anzahl der Administratoren an oder erhöhen Sie das Administratorlimit.",
+  "GroupsSectionDescription": "Die im vorherigen Schritt ausgewählten Benutzer werden in die in {{serviceName}} erstellten Gruppen importiert. Die Gruppen werden im Abschnitt <1>{{sectionName}}</1> angezeigt.",
+  "ImportFilesDescription": "Benutzerdateien und -dokumente werden in <1>{{sectionName}}</1> importiert.",
+  "ResetSettings": "Einstellungen zurücksetzen",
+  "SharedFilesAndFolders": "Freigegebene Dateien und Ordner",
+  "SharedFilesAndFoldersDescription": "Dateien und Ordner, die von anderen Benutzern freigegeben wurden, werden in <1>{{sectionName}}</1> importiert.<br><1>Bitte beachten Sie:</1> Beim Import können einige Zugriffsrechte verloren gehen.",
+  "SharedFilesAndFoldersDetails": "Freigegebene Dateien und Ordner"
 }

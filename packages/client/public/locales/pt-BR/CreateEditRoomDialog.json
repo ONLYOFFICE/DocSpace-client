@@ -37,5 +37,7 @@
   "UserName": "Nome do usuário",
   "ViewerInfo": "Informações do visualizador",
   "WatermarkPreview": "Visualização da marca d'água",
-  "WatermarkPreviewHelp": "Esta visualização da imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos."
+  "WatermarkPreviewHelp": "Esta visualização da imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos.",
+  "DisableRoomQuotaAgent": "Desativar cota para este agente",
+  "StorageDescriptionAgent": "Quota de armazenamento definida por agente. Você pode alterar esse valor ou desativar o limite de armazenamento."
 }

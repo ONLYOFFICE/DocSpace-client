@@ -4994,6 +4994,7 @@ class FilesStore {
       withSubfolders,
       filterType,
       searchInContent,
+      sharedBy,
     } = this.filter;
 
     const isFiltered =
@@ -5012,7 +5013,8 @@ class FilesStore {
           search ||
           withSubfolders ||
           filterType ||
-          searchInContent;
+          searchInContent ||
+          sharedBy;
 
     return isFiltered;
   }

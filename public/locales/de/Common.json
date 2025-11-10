@@ -1026,7 +1026,7 @@
   "EmptyChatAIDisabledUserDescription": "Die KI-Funktionen sind derzeit deaktiviert, daher kann dieser Agent weder Chats noch Aufgaben bearbeiten. Um wieder normal arbeiten zu können, bitten Sie Ihren {{productName}}-Administrator, die KI-Funktionen zu aktivieren.",
   "EmptyChatAIDisabledSaasAdminDescription": "Der KI-Dienst ist deaktiviert, wodurch dieser Agent keine Chats verarbeiten oder Aufgaben ausführen kann. Um die volle Funktionalität wiederherzustellen, aktivieren Sie die KI-Funktionen in den Einstellungen von {{productName}}.",
   "EmptyFilterAIAgentsDescription": "Für diesen Filter wurden keine Agenten gefunden. Versuchen Sie einen anderen Filter oder entfernen Sie den Filter, um alle Agenten anzuzeigen.",
-  "EmptyRoomsDescriptionText": "Bitte erstellen Sie den ersten Raum in {{section Name}}.",
+  "EmptyRoomsDescriptionText": "Bitte erstellen Sie den ersten Raum in {{sectionName}}.",
   "EmptyRoomsDescriptionTextAgent": "Bitte erstellen Sie den ersten Agenten in {{sectionName}}.",
   "EmptyRoomsHeaderAgent": "Noch keine Agenten hier",
   "KnowledgeSearch": "Wissensdatenbanksuche",

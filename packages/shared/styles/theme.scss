@@ -179,7 +179,6 @@
   --context-menu-button-hover-border: #{$gray};
 
   --drag-and-drop-height: 100%;
-  --drag-and-drop-border: 1px solid transparent;
   --drag-and-drop-accept-bg: #{$dnd-hover-color};
   --drag-and-drop-bg: #{$dnd-color};
 
@@ -305,7 +304,6 @@
 
   --context-menu-header-text-margin: 0 0 0 8px;
   --context-menu-submenu-list-margin: 4px;
-  --drag-and-drop-border: 1px solid transparent;
   --empty-view-link-color: #{$light-blue-main};
 
   --aside-custom-z-index: unset;

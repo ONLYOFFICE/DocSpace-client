@@ -25,123 +25,58 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
-import { isMobile } from "../../../../utils";
+import { Nullable } from "../../../../types";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
 
 import { ChatContainerProps } from "../../Chat.types";
-
 import styles from "./ChatContainer.module.scss";
-import classNames from "classnames";
 
 const ChatContainer = ({ children }: ChatContainerProps) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  // React.useEffect(() => {
-  //   if (isMobile()) return;
-  //
-  //   const sectionStickyContainer = document.getElementsByClassName(
-  //     "section-sticky-container",
-  //   );
-  //
-  //   const mainBar = document.getElementById("main-bar");
-  //
-  //   const resizeObserver = new ResizeObserver((el) => {
-  //     if (!containerRef.current || !el[0]) return;
-  //
-  //     containerRef.current.style.height = `${window.innerHeight - el[0].contentRect.height - (mainBar?.clientHeight || 0) - 40}px`;
-  //   });
-  //
-  //   if (sectionStickyContainer[0])
-  //     resizeObserver.observe(sectionStickyContainer[0] as HTMLElement);
-  // }, []);
-
-  // React.useEffect(() => {
-  //   if (!isMobile()) return;
-  //
-  //   const mainElement = document.getElementsByClassName("main")[0];
-  //   const mainBar = document.getElementById("main-bar");
-  //
-  //   const resizeObserver = new ResizeObserver(() => {
-  //     if (!containerRef.current) return;
-  //
-  //     const mainElementHeight = mainElement?.clientHeight || 0;
-  //     const mainBarHeight = mainBar?.clientHeight || 0;
-  //     const sectionHeaderHeight = 53;
-  //     const sectionTabsHeight = 33;
-  //     const chatMargin = 16;
-  //     const sectionMargin = 16;
-  //
-  //     const newHeight =
-  //       mainElementHeight -
-  //       mainBarHeight -
-  //       sectionHeaderHeight -
-  //       sectionTabsHeight -
-  //       sectionMargin -
-  //       chatMargin;
-  //
-  //     containerRef.current.style.height = `${newHeight}px`;
-  //   });
-  //
-  //   if (mainBar) resizeObserver.observe(mainBar as HTMLElement);
-  //
-  //   if (mainElement) {
-  //     resizeObserver.observe(mainElement);
-  //   }
-  //
-  //   return () => {
-  //     resizeObserver.disconnect();
-  //   };
-  // }, []);
-
-  // React.useEffect(() => {
-  //   if (!containerRef.current) return;
-  //
-  //   const sectionStickyContainer = document.getElementsByClassName(
-  //     "section-sticky-container",
-  //   );
-  //
-  //   const resizeObserver = new ResizeObserver((el) => {
-  //     if (!containerRef.current || !el[0]) return;
-  //
-  //     containerRef.current.style.setProperty(
-  //       "--chat-header-top",
-  //       sectionStickyContainer[0].getBoundingClientRect().bottom + "px",
-  //     );
-  //   });
-  //
-  //   if (sectionStickyContainer[0])
-  //     resizeObserver.observe(sectionStickyContainer[0] as HTMLElement);
-  //
-  //   return () => {
-  //     resizeObserver.disconnect();
-  //   };
-  // }, []);
+  const isMobile = useIsMobile();
 
   React.useEffect(() => {
-    const scroll = isMobile()
+    const scroll = isMobile
       ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
       : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
 
     const mainBar = document.getElementById("main-bar");
 
-    const lastStickyElement = isMobile()
+    const lastStickyElement = isMobile
       ? document.querySelector(".section-sticky-container-mobile")
           ?.lastElementChild
       : document.querySelector(".section-sticky-container")?.lastElementChild;
 
     if (!scroll) return;
 
-    const onScroll = () => {
+    let rafId: Nullable<number> = null;
+    let currentHeaderTop: Nullable<number> = null;
+
+    const calculateHeaderTop = () => {
+      rafId = null;
+
       if (!containerRef.current) return;
 
-      const mainBarHeight = isMobile() ? 0 : mainBar?.clientHeight || 0;
+      const mainBarHeight = isMobile ? 0 : mainBar?.clientHeight || 0;
+      const newHeaderTop =
+        (lastStickyElement?.getBoundingClientRect().bottom || 0) -
+        mainBarHeight;
+
+      if (currentHeaderTop === newHeaderTop) return;
+      currentHeaderTop = newHeaderTop;
 
       containerRef.current.style.setProperty(
         "--chat-header-top",
-        (lastStickyElement?.getBoundingClientRect().bottom || 0) -
-          mainBarHeight +
-          "px",
+        `${newHeaderTop}px`,
       );
+    };
+
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(calculateHeaderTop);
     };
 
     scroll.addEventListener("scroll", onScroll);
@@ -150,8 +85,10 @@ const ChatContainer = ({ children }: ChatContainerProps) => {
     return () => {
       scroll.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+
+      if (rafId) cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div

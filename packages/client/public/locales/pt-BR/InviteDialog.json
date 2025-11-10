@@ -18,5 +18,8 @@
   "SendInvitation": "Enviar convite",
   "UserMaxAvailableRoleWarning": "Convidados e usuários não podem ser designados como gerentes de sala. Somente administradores de salas e de {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados",
-  "UsersCannotBeAdded": "Contatos desativados não podem ser adicionados a uma sala."
+  "UsersCannotBeAdded": "Contatos desativados não podem ser adicionados a uma sala.",
+  "InviteViaLinkDescriptionAgentGuest": "Crie um link universal para autorização automática no agente como convidado.",
+  "InviteViaLinkDescriptionAgentMembers": "Crie um link universal para membros {{productName}} para autoautorização no agente.",
+  "UserAgentMaxAvailableRoleWarning": "Os hóspedes e usuários não podem ser designados como gerentes de agentes. Apenas os administradores do Room e do {{productName}} são adequados para a função especificada."
 }

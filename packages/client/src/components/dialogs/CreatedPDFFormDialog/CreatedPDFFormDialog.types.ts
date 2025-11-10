@@ -36,4 +36,6 @@ export interface CreatedPDFFormDialogProps {
 
 export interface InjectedCreatedPDFFormDialogProps {
   getItemUrl: TStore["filesStore"]["getItemUrl"];
+  getManageLinkOptions: TStore["contextOptionsStore"]["getManageLinkOptions"];
+  getFilesListItems: TStore["filesStore"]["getFilesListItems"];
 }

@@ -204,7 +204,7 @@ const setAgentParams = ({
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
   const [previewTitle, setPreviewTitle] = useState(
-    selection?.title || infoPanelSelection?.title || "",
+    selection?.title || infoPanelSelection?.title || ""
   );
   const [createAgentTitle, setCreateAgentTitle] = useState(agentParams.title);
 
@@ -238,7 +238,7 @@ const setAgentParams = ({
 
     if (cover && cover.cover) {
       const currentCoverData = covers?.filter(
-        (item) => item.id === cover.cover,
+        (item) => item.id === cover.cover
       )[0].data;
 
       return { ...cover, data: currentCoverData };
@@ -261,22 +261,22 @@ const setAgentParams = ({
       globalColors.logoColors[
         Math.floor(Math.random() * globalColors.logoColors.length)
       ].replace("#", ""),
-    [],
+    []
   );
 
   const currentIcon = selection
     ? selection?.logo?.large
       ? selection?.logo?.large
       : selection?.logo?.cover
-        ? selection?.logo
-        : getInfoPanelItemIcon?.(selection, 96)
+      ? selection?.logo
+      : getInfoPanelItemIcon?.(selection, 96)
     : infoPanelSelection
+    ? infoPanelSelection?.logo?.large
       ? infoPanelSelection?.logo?.large
-        ? infoPanelSelection?.logo?.large
-        : infoPanelSelection?.logo?.cover
-          ? infoPanelSelection?.logo
-          : getInfoPanelItemIcon?.(infoPanelSelection, 96)
-      : undefined;
+      : infoPanelSelection?.logo?.cover
+      ? infoPanelSelection?.logo
+      : getInfoPanelItemIcon?.(infoPanelSelection, 96)
+    : undefined;
 
   const onChangeIcon = (icon: TAgentIconParams) => {
     if (!icon.uploadedFile !== disableImageRescaling)
@@ -336,7 +336,9 @@ const setAgentParams = ({
   };
 
   const onDeleteAvatar = () => {
-    setCover?.(`#${randomColor}`, "");
+    if (previewIcon) setPreviewIcon(null);
+    else setCover?.(`#${randomColor}`, "");
+
     setAgentParams({
       ...agentParams,
       icon: {
@@ -346,28 +348,33 @@ const setAgentParams = ({
         y: 0.5,
         zoom: 1,
       },
+      iconWasUpdated: false,
     });
   };
 
   const hasImage = isEdit
-    ? agentParams.icon.uploadedFile && selection?.logo?.original
+    ? !!(
+        agentParams.iconWasUpdated ||
+        (agentParams.icon.uploadedFile &&
+          (selection?.logo?.original || infoPanelSelection?.logo?.original))
+      )
     : false;
   const model = getLogoCoverModel?.(t, hasImage);
 
   const isEditRoomModel = model?.map((item) =>
     item.key === "create_edit_room_delete"
       ? { ...item, onClick: onDeleteAvatar }
-      : item,
+      : item
   );
 
   const isEmptyIcon =
     createAgentTitle || cover?.color
       ? false
       : avatarEditorDialogVisible
-        ? true
-        : previewIcon
-          ? false
-          : !createAgentTitle;
+      ? true
+      : previewIcon
+      ? false
+      : !createAgentTitle;
 
   const roomIconLogo = currentCover
     ? { cover: currentCover }
@@ -376,8 +383,8 @@ const setAgentParams = ({
   const itemIconLogo = currentCover
     ? { cover: currentCover }
     : avatarEditorDialogVisible
-      ? currentIcon
-      : previewIcon || currentIcon;
+    ? currentIcon
+    : previewIcon || currentIcon;
 
   const showDefault =
     cover && cover.cover
@@ -581,5 +588,5 @@ export default inject(
       isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
       infoPanelSelection,
     };
-  },
+  }
 )(observer(setAgentParams));

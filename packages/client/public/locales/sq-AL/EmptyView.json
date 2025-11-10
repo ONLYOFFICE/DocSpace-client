@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Ngarkoni nga pajisja",
   "UploadFromPortalTitle": "Ngarkoni nga {{productName}}",
   "UploadPDFFormOptionDescription": "Selektoni një formular të gatshëm PDF të disponueshëm në {{productName}} dhe ngarkojeni në dhomë.",
-  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale"
+  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale",
+  "CreateAIAgent": "Krijo një agjent të ri",
+  "CreateAIAgentDescription": "Filloni të ndërtoni agjentin tuaj të parë të inteligjencës artificiale",
+  "EmptyAIAgentsDescription": "Konfiguroni një asistent të personalizuar për ekipin tuaj duke shtuar një bazë njohurish, duke zgjedhur modelin ideal dhe duke lidhur një server MCP. Ftoni kolegët tuaj të bashkëpunojnë dhe të shfrytëzojnë në maksimum aftësitë e bisedës së agjentit.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Për të krijuar dhe përdorur agjentë të IA-së, lidhni portofolin tuaj dhe aktivizoni shërbimin e veçorive të IA-së në cilësimet e {{productName}}. Pasi të keni mbaruar, do të jeni në gjendje të punoni me agjentë të IA-së dhe të bashkëpunoni me ekipin tuaj.",
+  "EmptyAIAgentsAIDisabledDescription": "Ky seksion u lejon përdoruesve të punojnë me agjentë të IA-së — asistentë inteligjentë për trajtimin e dokumenteve dhe detyrave të tjera.\n\nPër të filluar përdorimin e tyre, shërbimi i veçorive të IA-së duhet të aktivizohet nga administratori juaj i {{productName}}.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Pasi ekipi juaj t'ju ftojë të bashkëpunoni, agjentët e inteligjencës artificiale do të shfaqen këtu, të gatshëm për të ndihmuar me dokumentet, menaxhimin e njohurive dhe detyrat e përditshme.",
+  "EmptyAIAgentsTitle": "Krijo agjentin tënd të inteligjencës artificiale",
+  "EmptyAIAgentsUserTitle": "Nuk ka ende agjentë të inteligjencës artificiale në dispozicion",
+  "EmptyAIAgentsAIDisabledUserTitle": "Agjentët e inteligjencës artificiale nuk janë ende të disponueshëm",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Lidh portofolin tënd dhe aktivizo veçoritë e inteligjencës artificiale"
 }

@@ -29,5 +29,8 @@
   "ItemsDeletedAfter": "Aceste elemente vor fi şterse definitiv după 30 de zile.",
   "ItemsPermanentlyDeleted": "Aceste elemente vor fi şterse definitiv din {{trashSection}} de gunoi.",
   "removeFromListDescription": "Sunteți pe cale să eliminați <1>{{title}}</1> din listă. Sunteți sigur că doriți să continuați?",
-  "removeFromListDescriptionPlural": "Sunteți pe cale să eliminați <1>elemente ({{count}})</1> din listă. Sunteți sigur că doriți să continuați?"
+  "removeFromListDescriptionPlural": "Sunteți pe cale să eliminați <1>elemente ({{count}})</1> din listă. Sunteți sigur că doriți să continuați?",
+  "DeleteAIAgentDescription": "Agentul <strong>\"{{agentName}}\"</strong> va fi șters definitiv. Toate datele și conectările utilizatorilor se vor pierde.",
+  "DeleteAIAgentTitle": "Doriți să ștergeți acest agent?",
+  "DeleteAIAgentWarning": "Confirm că înțeleg efectele și doresc să șterg acest agent"
 }

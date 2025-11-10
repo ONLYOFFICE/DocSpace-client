@@ -108,6 +108,10 @@ class SelectedFolderStore {
 
   updatedBy: TCreatedBy | null = null;
 
+  ownedBy: TCreatedBy | null = null;
+
+  sharedBy: TCreatedBy | null = null;
+
   rootFolderType: FolderType | null = null;
 
   pathParts: TPathParts[] = [];
@@ -254,6 +258,8 @@ class SelectedFolderStore {
       shareSettings: this.shareSettings,
       availableShareRights: this.availableShareRights,
       parentShared: this.parentShared,
+      ownedBy: this.ownedBy,
+      sharedBy: this.sharedBy,
     };
   };
 
@@ -313,6 +319,8 @@ class SelectedFolderStore {
     this.shareSettings = null;
     this.availableShareRights = null;
     this.parentShared = false;
+    this.ownedBy = null;
+    this.sharedBy = null;
   };
 
   setFilesCount = (filesCount: number) => {

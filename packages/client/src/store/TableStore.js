@@ -135,6 +135,8 @@ class TableStore {
 
   authorShareWithMeColumnIsEnabled = true;
 
+  sharedByShareWithMeColumnIsEnabled = true;
+
   accessLevelShareWithMeColumnIsEnabled = true;
 
   modifiedShareWithMeColumnIsEnabled = true;
@@ -385,6 +387,10 @@ class TableStore {
     this.accessLevelShareWithMeColumnIsEnabled = enable;
   };
 
+  setSharedByShareWithMeColumn = (enable) => {
+    this.sharedByShareWithMeColumnIsEnabled = enable;
+  };
+
   setModifiedShareWithMeColumn = (enable) =>
     (this.modifiedShareWithMeColumnIsEnabled = enable);
 
@@ -486,6 +492,9 @@ class TableStore {
       }
 
       if (isSharedWithMeFolderRoot) {
+        this.setSharedByShareWithMeColumn(
+          splitColumns.includes("SharedByShareWithMe"),
+        );
         this.setAuthorShareWithMeColumn(
           splitColumns.includes("AuthorShareWithMe"),
         );
@@ -760,6 +769,12 @@ class TableStore {
       case "AccessLevelShareWithMe":
         this.setAccessLevelShareWithMeColumn(
           !this.accessLevelShareWithMeColumnIsEnabled,
+        );
+        return;
+
+      case "SharedByShareWithMe":
+        this.setSharedByShareWithMeColumn(
+          !this.sharedByShareWithMeColumnIsEnabled,
         );
         return;
 

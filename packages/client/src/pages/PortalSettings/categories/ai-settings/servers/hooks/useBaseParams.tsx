@@ -103,6 +103,8 @@ export const useBaseParams = (initialValues?: {
 
   const hasChanges = !equal(initBaseParams.current, { name, url, description });
 
+  const baseParamsEmpty = !name || !url || !description;
+
   const baseParamsComponent = (
     <>
       <FieldContainer
@@ -122,6 +124,7 @@ export const useBaseParams = (initialValues?: {
           placeholder={t("Common:EnterName")}
           scale
           hasError={!!nameError}
+          maxLength={128}
         />
       </FieldContainer>
       <FieldContainer
@@ -157,6 +160,7 @@ export const useBaseParams = (initialValues?: {
           value={description}
           onChange={(e) => onChangeDescription(e.target.value)}
           placeholder={t("OAuth:EnterDescription")}
+          maxLength={256}
         />
       </FieldContainer>
     </>
@@ -166,5 +170,6 @@ export const useBaseParams = (initialValues?: {
     getBaseParams,
     baseParamsComponent,
     baseParamsChanged: hasChanges,
+    baseParamsEmpty,
   };
 };

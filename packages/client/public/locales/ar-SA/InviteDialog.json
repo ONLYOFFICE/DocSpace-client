@@ -18,5 +18,8 @@
   "SendInvitation": "إرسال دعوة",
   "UserMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديري غرف. فقط مسؤولو الغرف وإدارة {{productName}} مناسبون لهذا الدور المحدد.",
   "UsersAlreadyAdded": "تمت إضافة بعض المستخدمين بالفعل",
-  "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة"
+  "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة",
+  "InviteViaLinkDescriptionAgentGuest": "إنشاء رابط عالمي للمصادقة الذاتية في الوكيل كضيف.",
+  "InviteViaLinkDescriptionAgentMembers": "إنشاء رابط عالمي لأعضاء {{productName}} للمصادقة الذاتية في الوكيل.",
+  "UserAgentMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديرين للوكيل. مسؤولو الغرفة ومسؤولو {{productName}} فقط هم المناسبون للدور المحدد."
 }

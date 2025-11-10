@@ -9,7 +9,7 @@
   "CustomMCPListTitle": "Custom",
   "DeleteImage": "Delete image",
   "DeleteProvider": "Delete provider",
-  "DeleteProviderDescription": "Deleting this provider will revoke access for all users, and its settings will be permanently erased. To use the provider again, you will need to set it up from scratch.",
+  "DeleteProviderDescription": "Deleting this provider will revoke access for all users, and its settings will be permanently erased.\n To use the provider again, you will need to set it up from scratch.",
   "DeleteServer": "Delete server",
   "DeleteServerDescription": "Deleting this server will revoke access for all users, and its settings will be permanently erased.\n To use the server again, you will need to set it up from scratch.",
   "DisableMCPServer": "Disable server",

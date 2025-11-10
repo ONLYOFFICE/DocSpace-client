@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "从设备上传",
   "UploadFromPortalTitle": "从{{productName}}上传",
   "UploadPDFFormOptionDescription": "选择{{productName}}中可用的现成 PDF 表单并将其上传到房间。",
-  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"
+  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间",
+  "CreateAIAgent": "创建新智能体",
+  "CreateAIAgentDescription": "开始构建您的第一个 AI 智能体",
+  "EmptyAIAgentsDescription": "通过添加知识库、选择理想模型并连接 MCP 服务器，为您的团队设置个性化助手。邀请同事协作，充分利用智能体的对话功能。",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "要创建和使用 AI 智能体，请连接您的钱包并在{{productName}}设置中启用 AI 功能服务。完成后，您将能够使用 AI 智能体并与团队协作。",
+  "EmptyAIAgentsAIDisabledDescription": "本部分允许用户使用 AI 智能体——处理文档和其他任务的智能助手。\n要开始使用，必须由您的{{productName}}管理员启用 AI 功能服务。",
+  "EmptyAIAgentsAIEnabledUserDescription": "一旦您的团队邀请您协作，AI 智能体将出现在此处，随时协助处理文档、知识管理和日常任务。",
+  "EmptyAIAgentsTitle": "创建您的 AI 智能体",
+  "EmptyAIAgentsUserTitle": "尚无可用的 AI 智能体",
+  "EmptyAIAgentsAIDisabledUserTitle": "AI 智能体尚不可用",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "连接钱包并启用 AI 功能"
 }

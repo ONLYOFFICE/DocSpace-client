@@ -50,12 +50,14 @@ type EditDialogProps = {
   onClose: VoidFunction;
 
   updateMCP?: AISettingsStore["updateMCP"];
+  aiSettingsUrl?: string;
 };
 
 const EditMCPDialogComponent = ({
   server,
   onClose,
   updateMCP,
+  aiSettingsUrl,
 }: EditDialogProps) => {
   const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
@@ -151,17 +153,19 @@ const EditMCPDialogComponent = ({
                 productName: t("Common:ProductName"),
               })}
             </Text>
-            <Link
-              className={styles.learnMoreLink}
-              target={LinkTarget.blank}
-              type={LinkType.page}
-              fontWeight={600}
-              isHovered
-              href=""
-              color="accent"
-            >
-              {t("Common:LearnMore")}
-            </Link>
+            {aiSettingsUrl ? (
+              <Link
+                className={styles.learnMoreLink}
+                target={LinkTarget.blank}
+                type={LinkType.page}
+                fontWeight={600}
+                isHovered
+                href={aiSettingsUrl}
+                color="accent"
+              >
+                {t("Common:LearnMore")}
+              </Link>
+            ) : null}
           </div>
           {iconComponent}
           {baseParamsComponent}
@@ -196,8 +200,11 @@ const EditMCPDialogComponent = ({
   );
 };
 
-export const EditMCPDialog = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    updateMCP: aiSettingsStore.updateMCP,
-  };
-})(observer(EditMCPDialogComponent));
+export const EditMCPDialog = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    return {
+      updateMCP: aiSettingsStore.updateMCP,
+      aiSettingsUrl: settingsStore.aiSettingsUrl,
+    };
+  },
+)(observer(EditMCPDialogComponent));

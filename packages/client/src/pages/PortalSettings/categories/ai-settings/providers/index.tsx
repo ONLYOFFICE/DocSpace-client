@@ -75,6 +75,7 @@ type AIProviderProps = {
   checkUnavailableProviders?: AISettingsStore["checkUnavailableProviders"];
   isProviderAvailable?: AISettingsStore["isProviderAvailable"];
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
+  aiSettingsUrl?: string;
 };
 
 const AIProviderComponent = ({
@@ -83,6 +84,7 @@ const AIProviderComponent = ({
   checkUnavailableProviders,
   isProviderAvailable,
   cancelAvailabilityCheck,
+  aiSettingsUrl,
 }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
@@ -165,17 +167,19 @@ const AIProviderComponent = ({
           productName: t("Common:ProductName"),
         })}
       </Text>
-      <Link
-        className={styles.learnMoreLink}
-        target={LinkTarget.blank}
-        type={LinkType.page}
-        fontWeight={600}
-        isHovered
-        href=""
-        color="accent"
-      >
-        {t("Common:LearnMore")}
-      </Link>
+      {aiSettingsUrl ? (
+        <Link
+          className={styles.learnMoreLink}
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          fontWeight={600}
+          isHovered
+          href={aiSettingsUrl}
+          color="accent"
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
       <Button
         primary
         size={ButtonSize.small}
@@ -224,12 +228,15 @@ const AIProviderComponent = ({
   );
 };
 
-export const AIProvider = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    aiProviders: aiSettingsStore.aiProviders,
-    aiProvidersInitied: aiSettingsStore.aiProvidersInitied,
-    checkUnavailableProviders: aiSettingsStore.checkUnavailableProviders,
-    isProviderAvailable: aiSettingsStore.isProviderAvailable,
-    cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
-  };
-})(observer(AIProviderComponent));
+export const AIProvider = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    return {
+      aiProviders: aiSettingsStore.aiProviders,
+      aiProvidersInitied: aiSettingsStore.aiProvidersInitied,
+      checkUnavailableProviders: aiSettingsStore.checkUnavailableProviders,
+      isProviderAvailable: aiSettingsStore.isProviderAvailable,
+      cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
+      aiSettingsUrl: settingsStore.aiSettingsUrl,
+    };
+  },
+)(observer(AIProviderComponent));

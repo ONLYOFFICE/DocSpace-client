@@ -285,6 +285,6 @@
   "ImportFilesDescription": "Fișierele și documentele utilizatorului vor fi importate în secțiunea <1>{{sectionName}}</1>.",
   "ResetSettings": "Resetare",
   "SharedFilesAndFolders": "Fișiere și foldere partajate",
-  "SharedFilesAndFoldersDescription": "Fișierele și folderele partajate de alți utilizatori vor fi importate în secțiunea <1>{{sectionName}}</1>.\r\n<1>Rețineți:</1> este posibil ca unele drepturi de acces să se piardă în timpul importului.",
+  "SharedFilesAndFoldersDescription": "Fișierele și folderele partajate de alți utilizatori vor fi importate în secțiunea <1>{{sectionName}}</1>.<br><1>Rețineți:</1> este posibil ca unele drepturi de acces să se piardă în timpul importului.",
   "SharedFilesAndFoldersDetails": "Fișiere și foldere partajate"
 }

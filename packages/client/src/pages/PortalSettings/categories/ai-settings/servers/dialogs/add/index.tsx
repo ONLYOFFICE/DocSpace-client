@@ -61,8 +61,12 @@ const AddMCPDialogComponent = ({
 
   const [loading, setLoading] = React.useState(false);
 
-  const { getBaseParams, baseParamsComponent, baseParamsChanged } =
-    useBaseParams();
+  const {
+    getBaseParams,
+    baseParamsComponent,
+    baseParamsChanged,
+    baseParamsEmpty,
+  } = useBaseParams();
   const { headersComponent, getAPIHeaders, advancedSettingsChanged } =
     useAdvancedSettings();
   const { iconComponent, getIcon, iconChanged } = useIcon();
@@ -156,7 +160,7 @@ const AddMCPDialogComponent = ({
           scale
           onClick={handleSubmitClick}
           isLoading={loading}
-          isDisabled={!hasChanges}
+          isDisabled={baseParamsEmpty ? true : !hasChanges}
         />
         <Button
           size={ButtonSize.normal}

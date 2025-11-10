@@ -42,8 +42,9 @@ import styles from "../styles/AddEditDialog.module.scss";
 
 export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
   const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);
-  const [showAdvancedSettings, setShowAdvancedSettings] =
-    useState(!!initialValues);
+  const [showAdvancedSettings, setShowAdvancedSettings] = useState(
+    !!initialValues,
+  );
 
   const [headerCounts, setHeaderCounts] = React.useState(
     initialValues ? Object.keys(initialValues).length : 1,
@@ -108,6 +109,7 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
         <Link
           onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
           type={LinkType.action}
+          isHovered
         >
           {t(showAdvancedSettings ? "Common:Hide" : "SingleSignOn:Show")}
         </Link>

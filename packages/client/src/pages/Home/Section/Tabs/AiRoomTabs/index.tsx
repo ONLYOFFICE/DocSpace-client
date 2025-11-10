@@ -138,9 +138,7 @@ const AiRoomTabs = ({
   return (
     <Tabs
       className="ai-room-tabs"
-      selectedItemId={
-        currentClientView === "chat" ? "chat" : (currentTab ?? "chat")
-      }
+      selectedItemId={currentTab ?? "chat"}
       items={items}
       onSelect={onSelect}
       withoutStickyIntend={currentClientView === "chat"}

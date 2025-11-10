@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
 import type { TSelectorItem } from "@docspace/shared/components/selector";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
@@ -47,18 +48,18 @@ interface MCPSettingsProps {
   agentParams: TAgentParams;
   setAgentParams: (value: Partial<TAgentParams>) => void;
   portalMcpServerId?: string;
-  onOpenMCPSelector?: VoidFunction;
 }
 
 const MCPSettings = ({
   agentParams,
   setAgentParams,
   portalMcpServerId,
-  onOpenMCPSelector,
 }: MCPSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
 
   const { isBase } = useTheme();
+
+  const [isSelectorVisible, setIsSelectorVisible] = React.useState(false);
 
   const [selectedServers, setSelectedServers] = React.useState<TSelectorItem[]>(
     [],
@@ -67,10 +68,12 @@ const MCPSettings = ({
     [],
   );
 
-  const onClickAction = () => {
-    if (onOpenMCPSelector) {
-      onOpenMCPSelector();
-    }
+  const onClickAction = () => setIsSelectorVisible(true);
+
+  const onClose = () => setIsSelectorVisible(false);
+
+  const onSubmit = (servers: TSelectorItem[]) => {
+    setSelectedServers(servers);
   };
 
   const agentId = agentParams.agentId;
@@ -144,6 +147,10 @@ const MCPSettings = ({
     }
   }, [portalMcpServerId, isBase]);
 
+  const initSelectedServers = React.useMemo(() => {
+    return selectedServers.map((i) => i.id?.toString() || "");
+  }, [selectedServers]);
+
   return (
     <>
       <StyledParam increaseGap>
@@ -184,18 +191,11 @@ const MCPSettings = ({
                     setSelectedServers((prev) =>
                       prev.filter((item) => item.id !== server.id),
                     );
-
-                    const updatedServerIds = selectedServers
-                      .filter((item) => item.id !== server.id)
-                      .map((item) => item.id?.toString() || "")
-                      .filter((id) => id !== "");
-
-                    setAgentParams({
-                      mcpServers: updatedServerIds,
-                      ...(portalMcpServerId && server.id === portalMcpServerId
-                        ? { attachDefaultTools: false }
-                        : {}),
-                    });
+                    if (portalMcpServerId && server.id === portalMcpServerId) {
+                      setAgentParams({
+                        attachDefaultTools: false,
+                      });
+                    }
                   }}
                 />
               </div>
@@ -203,6 +203,14 @@ const MCPSettings = ({
           </div>
         </div>
       </StyledParam>
+
+      {isSelectorVisible ? (
+        <MCPServersSelector
+          onSubmit={onSubmit}
+          onClose={onClose}
+          initedSelectedServers={initSelectedServers}
+        />
+      ) : null}
     </>
   );
 };

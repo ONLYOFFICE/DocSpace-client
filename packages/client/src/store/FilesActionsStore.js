@@ -1398,7 +1398,7 @@ class FilesActionStore {
     const muteStatus = action === "mute";
 
     const folderIndex = id && folders.findIndex((x) => x.id == id);
-    if (folderIndex) updateRoomMute(folderIndex, muteStatus);
+    if (folderIndex > -1) updateRoomMute(folderIndex, muteStatus);
 
     const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
     const count = treeFolders[treeIndex].newItems;

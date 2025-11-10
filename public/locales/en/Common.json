@@ -1063,5 +1063,7 @@
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
-  "GoToSettings": "Go to Settings"
+  "GoToSettings": "Go to Settings",
+  "SelectorFilesLimit": "Maximum {{count}} files allowed",
+  "SelectorFilesLimitDescription": "When uploading a large amount of data, the context may be partially truncated, which can reduce the accuracy of responses. It’s recommended to limit the number of files and their total size."
 }

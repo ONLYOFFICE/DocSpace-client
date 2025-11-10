@@ -39,9 +39,11 @@ import type {
 import type { TCreatedBy } from "@docspace/shared/types";
 
 import type { ICover } from "SRC_DIR/components/dialogs/RoomLogoCoverDialog/RoomLogoCoverDialog.types";
+import type { TSelectorItem } from "@docspace/shared/components/selector";
 
 import TagHandler from "../../../helpers/TagHandler";
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
+import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
 
 import SetAgentParams from "./sub-components/SetAgentParams";
 
@@ -73,6 +75,7 @@ const EditAgentDialog = ({
   const [isWrongTitle, setIsWrongTitle] = useState(false);
   const [changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible] =
     useState(false);
+  const [isMCPSelectorVisible, setIsMCPSelectorVisible] = useState(false);
   const [agentParams, setAgentParams] = useState({
     ...fetchedAgentParams,
   });
@@ -154,6 +157,7 @@ const EditAgentDialog = ({
 
   const onBackClick = () => {
     if (changeRoomOwnerIsVisible) setChangeRoomOwnerIsVisible(false);
+    if (isMCPSelectorVisible) setIsMCPSelectorVisible(false);
   };
 
   const onOwnerChange = () => {
@@ -169,6 +173,27 @@ const EditAgentDialog = ({
     setChangeRoomOwnerIsVisible(false);
   };
 
+  const onOpenMCPSelector = () => {
+    setIsMCPSelectorVisible(true);
+  };
+
+  const onCloseMCPSelector = () => {
+    setIsMCPSelectorVisible(false);
+  };
+
+  const onSubmitMCPSelector = (servers: TSelectorItem[]) => {
+    const serverIds = servers
+      .map((server) => server.id?.toString() || "")
+      .filter((id) => id !== "");
+
+    setAgentParams((prev) => ({
+      ...prev,
+      mcpServers: serverIds,
+    }));
+
+    setIsMCPSelectorVisible(false);
+  };
+
   return (
     <ModalDialog
       displayType={ModalDialogType.aside}
@@ -178,7 +203,7 @@ const EditAgentDialog = ({
       onBackClick={onBackClick}
       isScrollLocked={isScrollLocked}
       isLoading={isInitLoading}
-      containerVisible={changeRoomOwnerIsVisible}
+      containerVisible={changeRoomOwnerIsVisible || isMCPSelectorVisible}
     >
       {changeRoomOwnerIsVisible ? (
         <ModalDialog.Container>
@@ -188,6 +213,16 @@ const EditAgentDialog = ({
             onOwnerChange={onSetNewOwner}
             showBackButton
             onClose={onCloseRoomOwnerPanel}
+          />
+        </ModalDialog.Container>
+      ) : null}
+
+      {isMCPSelectorVisible ? (
+        <ModalDialog.Container>
+          <MCPServersSelector
+            onSubmit={onSubmitMCPSelector}
+            onClose={onCloseMCPSelector}
+            initedSelectedServers={agentParams.mcpServers}
           />
         </ModalDialog.Container>
       ) : null}
@@ -208,6 +243,7 @@ const EditAgentDialog = ({
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
           onOwnerChange={onOwnerChange}
+          onOpenMCPSelector={onOpenMCPSelector}
         />
       </ModalDialog.Body>
 

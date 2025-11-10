@@ -25,3 +25,5 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const CHAT_SUPPORTED_FORMATS = "doc,docx,txt,pdf,xls,xlsx";
+
+export const CHAT_MAX_FILE_COUNT = 5;

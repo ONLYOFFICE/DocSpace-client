@@ -48,9 +48,14 @@ import { useIcon } from "../../hooks/useIcon";
 type AddMCPDialogProps = {
   onClose: VoidFunction;
   addNewMCP?: AISettingsStore["addNewMCP"];
+  aiSettingsUrl?: string;
 };
 
-const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
+const AddMCPDialogComponent = ({
+  onClose,
+  addNewMCP,
+  aiSettingsUrl,
+}: AddMCPDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -118,17 +123,19 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
                 productName: t("Common:ProductName"),
               })}
             </Text>
-            <Link
-              className={styles.learnMoreLink}
-              target={LinkTarget.blank}
-              type={LinkType.page}
-              fontWeight={600}
-              isHovered
-              href=""
-              color="accent"
-            >
-              {t("Common:LearnMore")}
-            </Link>
+            {aiSettingsUrl ? (
+              <Link
+                className={styles.learnMoreLink}
+                target={LinkTarget.blank}
+                type={LinkType.page}
+                fontWeight={600}
+                isHovered
+                href={aiSettingsUrl}
+                color="accent"
+              >
+                {t("Common:LearnMore")}
+              </Link>
+            ) : null}
           </div>
           {iconComponent}
           {baseParamsComponent}
@@ -163,8 +170,11 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
   );
 };
 
-export const AddMCPDialog = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    addNewMCP: aiSettingsStore.addNewMCP,
-  };
-})(observer(AddMCPDialogComponent));
+export const AddMCPDialog = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    return {
+      addNewMCP: aiSettingsStore.addNewMCP,
+      aiSettingsUrl: settingsStore.aiSettingsUrl,
+    };
+  },
+)(observer(AddMCPDialogComponent));

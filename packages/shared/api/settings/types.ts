@@ -235,6 +235,7 @@ export type THelpCenterEntries = {
   smtp: string;
   dataImport: string;
   apikeys: string;
+  aisettings: string;
 };
 
 export type TIntegrationsEntries = {

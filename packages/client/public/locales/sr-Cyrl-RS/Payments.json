@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "Нисте додали ниједан начин плаћања",
   "YourCurrentPayment": "Ваш тренутни начин плаћања",
   "YourCurrentPlan": "<1>Ваш тренутни план:</1> {{amount}} <2>({{price}}/месечно)</2>",
-  "YourPrice": "Ваша цена"
+  "YourPrice": "Ваша цена",
+  "PerAITools": "{{currency}} по токену"
 }

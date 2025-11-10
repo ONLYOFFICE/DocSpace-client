@@ -95,5 +95,9 @@
   "SubmenuHistory": "Историја",
   "UserFileUpdated": "Датотека ажурирана.",
   "Users": "Корисници",
-  "Versions": "Верзије"
+  "Versions": "Верзије",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> агент креиран",
+  "Resolution": "Одлука",
+  "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> преименован у <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Погледајте детаље о ВИ агентима овде"
 }

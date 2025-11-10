@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Отпреми са уређаја",
   "UploadFromPortalTitle": "Отпреми из {{productName}}",
   "UploadPDFFormOptionDescription": "Одаберите спреман PDF формулар доступан у {{productName}} и отпремите га у просторију.",
-  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке"
+  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке",
+  "CreateAIAgent": "Креирајте новог агента",
+  "CreateAIAgentDescription": "Почните да правите свог првог ВИ агента",
+  "EmptyAIAgentsDescription": "Подесите персонализованог асистента за свој тим додавањем базе знања, одабиром идеалног модела и повезивањем MCP сервера. Позовите своје колеге да сарађују и максимално искористе могућности ћаскања агента.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Да бисте креирали и користили ВИ агенте, повежите новчаник и омогућите услугу ВИ функција у подешавањима {{productName}}. Када се то заврши, моћи ћете да радите са ВИ агентима и сарађујете са својим тимом.",
+  "EmptyAIAgentsAIDisabledDescription": "Овај одељак омогућава корисницима да раде са ВИ агентима — паметним помоћницима за руковање документима и другим задацима. \nДа бисте почели да их користите, ваш {{productName}} администратор мора да омогући услугу ВИ функција.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Када вас ваш тим позове на сарадњу, овде ће се појавити ВИ агенти, спремни да помогну око докумената, управљања знањем и свакодневних задатака.",
+  "EmptyAIAgentsTitle": "Креирајте вашег ВИ агента",
+  "EmptyAIAgentsUserTitle": "Још нема доступних ВИ агената",
+  "EmptyAIAgentsAIDisabledUserTitle": "Још нема доступних ВИ агената",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Повежите свој новчаник и омогућите ВИ функције"
 }

@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "Nu a fost adăugată nicio metodă de plată",
   "YourCurrentPayment": "Metoda dvs de plată actuală",
   "YourCurrentPlan": "<1>Planul actual:</1> {{amount}} <2>({{price}}/lună)</2>",
-  "YourPrice": "Preţul dvs."
+  "YourPrice": "Preţul dvs.",
+  "PerAITools": "{{currency}} pentru un token"
 }

@@ -103,6 +103,8 @@ export const useBaseParams = (initialValues?: {
 
   const hasChanges = !equal(initBaseParams.current, { name, url, description });
 
+  const baseParamsEmpty = !name || !url || !description;
+
   const baseParamsComponent = (
     <>
       <FieldContainer
@@ -166,5 +168,6 @@ export const useBaseParams = (initialValues?: {
     getBaseParams,
     baseParamsComponent,
     baseParamsChanged: hasChanges,
+    baseParamsEmpty,
   };
 };

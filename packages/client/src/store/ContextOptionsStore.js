@@ -2322,10 +2322,7 @@ class ContextOptionsStore {
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled:
-          isArchive ||
-          (!item.inRoom && !isAIAgent) ||
-          isPublicRoom ||
-          Boolean(item.external),
+          isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
         id: "option_archive-room",

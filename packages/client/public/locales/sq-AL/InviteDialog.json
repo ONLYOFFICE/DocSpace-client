@@ -18,5 +18,8 @@
   "SendInvitation": "Dërgoni ftesë",
   "UserMaxAvailableRoleWarning": "Vizitorët dhe përdoruesit nuk mund të caktohen si menaxherë të dhomës. Vetëm administratorët e dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar.",
   "UsersAlreadyAdded": "Disa përdorues janë shtuar tashmë",
-  "UsersCannotBeAdded": "Kontaktet e çaktivizuara nuk mund të shtohen në një dhomë"
+  "UsersCannotBeAdded": "Kontaktet e çaktivizuara nuk mund të shtohen në një dhomë",
+  "InviteViaLinkDescriptionAgentGuest": "Krijo një lidhje universale për vetë-autorizim në agjent si mysafir.",
+  "InviteViaLinkDescriptionAgentMembers": "Krijo një lidhje universale për anëtarët e {{productName}} për vetë-autorizim në agjent.",
+  "UserAgentMaxAvailableRoleWarning": "Vizitorët dhe Përdoruesit nuk mund të caktohen si menaxherë të Agjentëve. Vetëm administratorët e Dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar."
 }

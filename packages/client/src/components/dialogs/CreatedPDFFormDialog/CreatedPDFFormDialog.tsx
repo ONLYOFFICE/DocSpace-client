@@ -38,9 +38,11 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { getFileLink } from "@docspace/shared/api/files";
-import { copyShareLink } from "@docspace/shared/utils/copy";
+import { copyShareLink as clipboardCopy } from "@docspace/shared/utils/copy";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { toastr } from "@docspace/shared/components/toast";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { getFileInfo } from "@docspace/shared/api/files";
 
 import { Wrapper } from "./CreatedPDFFormDialog.styled";
 import type {
@@ -54,23 +56,30 @@ const CreatedPDFFormDialogComponent = ({
   onClose,
   visible,
   getItemUrl,
+  getManageLinkOptions,
+  getFilesListItems,
 }: CreatedPDFFormDialogProps & InjectedCreatedPDFFormDialogProps) => {
   const { t } = useTranslation(["PDFFormDialog", "Common"]);
   const theme = useTheme();
 
   const onSubmit = async () => {
     try {
-      const itemLink = await getFileLink(file.id);
-      copyShareLink(itemLink.sharedTo.shareLink);
+      const currentFile = await getFileInfo(file.id);
+
+      const [fileItem] = getFilesListItems([currentFile]);
+
+      const primaryLink = await ShareLinkService.getFilePrimaryLink(fileItem);
+
+      copyShareLink(fileItem, primaryLink, t, getManageLinkOptions(fileItem));
     } catch (error) {
       const url = getItemUrl(file.id, false, false, false);
       if (url) {
-        copyShareLink(url);
+        clipboardCopy(url);
+        toastr.success(t("Common:LinkCopySuccess"));
       }
 
       console.error(error);
     } finally {
-      toastr.success(t("Common:LinkCopySuccess"));
       onClose();
     }
   };
@@ -124,6 +133,12 @@ const CreatedPDFFormDialogComponent = ({
   );
 };
 
-export const CreatedPDFFormDialog = inject((store: TStore) => ({
+export const CreatedPDFFormDialog = inject<
+  TStore,
+  CreatedPDFFormDialogProps,
+  InjectedCreatedPDFFormDialogProps
+>((store) => ({
   getItemUrl: store.filesStore.getItemUrl,
+  getManageLinkOptions: store.contextOptionsStore.getManageLinkOptions,
+  getFilesListItems: store.filesStore.getFilesListItems,
 }))(observer(CreatedPDFFormDialogComponent as FC<CreatedPDFFormDialogProps>));

@@ -276,5 +276,15 @@
   "WantToCancelUpload": "Dëshironi ta anuloni ngarkimin?",
   "WantToContinue": "Dëshironi të vazhdoni apo të ndryshoni kuotën e ruajtjes së përdoruesit?",
   "WhiteLabelSubtitle": "Ngarkoni logove me sfond transparent (PNG, SVG, JPG) për tema të lehta dhe të errëta, ose gjeneroni një menjëherë duke futur logon tuaj më poshtë.",
-  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër."
+  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër.",
+  "AccountsUsersWithoutEmails": "Ne gjetëm <1>{{users}} përdorues</1> pa email-e. Mund të shtoni të dhënat e nevojshme në llogaritë e tyre në hapin tjetër.",
+  "AccountsWithoutEmails": "Ne gjetëm <1>{{users}} përdorues</1> pa email-e. Mund t'i plotësoni email-et e tyre ose të vazhdoni pa këtë veprim.",
+  "AISettings": "Cilësimet e inteligjencës artificiale",
+  "DataImportAdminLimitExceeded": "Limiti i administratorëve është tejkaluar. Për të vazhduar, ju lutemi ose rregulloni numrin e administratorëve ose rrisni limitin e administratorëve.",
+  "GroupsSectionDescription": "Përdoruesit që keni zgjedhur në hapin e mëparshëm do të importohen në grupet e krijuara në {{serviceName}}. Grupet do të shfaqen në seksionin <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Skedarët dhe dokumentet e përdoruesit do të importohen në <1>{{sectionName}}</1>.",
+  "ResetSettings": "Rivendos cilësimet",
+  "SharedFilesAndFolders": "Skedarët dhe dosjet e përbashkëta",
+  "SharedFilesAndFoldersDescription": "Skedarët dhe dosjet e ndara nga përdorues të tjerë do të importohen në <1>{{sectionName}}</1>.<br><1>Ju lutemi vini re:</1> disa të drejta aksesi mund të humbasin gjatë importimit.",
+  "SharedFilesAndFoldersDetails": "Skedarët dhe dosjet e përbashkëta"
 }

@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "您尚未添加任何支付方式",
   "YourCurrentPayment": "您当前的支付方式",
   "YourCurrentPlan": "<1>您当前的套餐：</1>{{amount}} <2>({{price}}/月)</2>",
-  "YourPrice": "您的价格"
+  "YourPrice": "您的价格",
+  "PerAITools": "每token {{currency}}"
 }

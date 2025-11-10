@@ -276,5 +276,15 @@
   "WantToCancelUpload": "Da li želite da otkažete otpremanje?",
   "WantToContinue": "Da li želite da nastavite ili da promenite korisničku kvotu za skladište?",
   "WhiteLabelSubtitle": "Unesite naziv svoje kompanije, otpremite logotip i prilagodite stil da odgovara vašem brendu.",
-  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak."
+  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak.",
+  "AccountsUsersWithoutEmails": "Pronašli smo <1>{{users}} korisnika</1> bez imejlova. U sledećem koraku možete dodati potrebne podatke na njihove naloge.",
+  "AccountsWithoutEmails": "Pronašli smo <1>{{users}} korisnika</1> bez imejlova. Možete popuniti njihove imejlove ili nastaviti bez ove radnje.",
+  "AISettings": "AI podešavanja",
+  "DataImportAdminLimitExceeded": "Administratorsko ograničenje je premašeno. Da biste nastavili, prilagodite broj administratora ili povećajte ograničenje administratora.",
+  "GroupsSectionDescription": "Korisnici koje ste izabrali u prethodnom koraku biće uvezeni u grupe napravljene u {{serviceName}}. Grupe će se pojaviti u odeljku <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Korisničke datoteke i dokumenti će biti uvezeni u <1>{{sectionName}}</1>.",
+  "ResetSettings": "Resetujte podešavanja",
+  "SharedFilesAndFolders": "Deljene datoteke i fascikle",
+  "SharedFilesAndFoldersDescription": "Datoteke i direktorijumi koje dele drugi korisnici biće uvezeni u <1>{{sectionName}}</1>.<br><1>Imajte na umu:</1> neka prava pristupa mogu da se izgube tokom uvoza.",
+  "SharedFilesAndFoldersDetails": "Deljeni fajlovi i folderi"
 }

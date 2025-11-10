@@ -37,5 +37,7 @@
   "UserName": "Benutzername",
   "ViewerInfo": "Betrachter-Info",
   "WatermarkPreview": "Wasserzeichen-Vorschau",
-  "WatermarkPreviewHelp": "Diese Bildvorschau zeigt ungefähr, wie das Wasserzeichen in Ihren Dateien angezeigt wird."
+  "WatermarkPreviewHelp": "Diese Bildvorschau zeigt ungefähr, wie das Wasserzeichen in Ihren Dateien angezeigt wird.",
+  "DisableRoomQuotaAgent": "Speicherkontingent für diesen Agenten deaktivieren",
+  "StorageDescriptionAgent": "Speicherkontingent pro Agent festgelegt. Sie können diesen Wert ändern oder das Speicherlimit deaktivieren."
 }

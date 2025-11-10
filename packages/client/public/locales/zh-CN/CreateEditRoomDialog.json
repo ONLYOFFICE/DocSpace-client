@@ -37,5 +37,7 @@
   "UserName": "用户名称",
   "ViewerInfo": "查看者信息",
   "WatermarkPreview": "水印预览",
-  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果"
+  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果",
+  "DisableRoomQuotaAgent": "禁用此智能体的配额",
+  "StorageDescriptionAgent": "为每个智能体设置存储配额。您可以更改此值或关闭存储限制。"
 }

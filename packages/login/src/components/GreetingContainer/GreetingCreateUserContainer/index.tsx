@@ -32,7 +32,11 @@ import { Trans, useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
+import {
+  DEFAULT_PORTAL_TEXT,
+  DEFAULT_ROOM_TEXT,
+  DEFAULT_AGENT_TEXT,
+} from "@/utils/constants";
 import { GreetingCreateUserContainerProps } from "@/types";
 
 import { GreetingContainer } from "./GreetingCreateUserContainer.styled";
@@ -48,61 +52,74 @@ export const GreetingCreateUserContainer = ({
 
   const { roomData } = useContext(ConfirmRouteContext);
 
+  const getInviteText = () => {
+    const commonProps = {
+      t,
+      ns: "Common",
+      components: {
+        1: (
+          <Text
+            key="component_key"
+            fontWeight={600}
+            as="strong"
+            fontSize="16px"
+          />
+        ),
+      },
+    };
+
+    if (roomData?.isAgent) {
+      return (
+        <Trans
+          {...commonProps}
+          i18nKey="InvitationToAgent"
+          defaults={DEFAULT_AGENT_TEXT}
+          values={{
+            displayName,
+            agentName: roomData.title,
+          }}
+        />
+      );
+    }
+
+    if (roomData?.title) {
+      return (
+        <Trans
+          {...commonProps}
+          i18nKey="InvitationToRoom"
+          defaults={DEFAULT_ROOM_TEXT}
+          values={{
+            displayName,
+            ...(roomData.title
+              ? { roomName: roomData.title }
+              : { spaceAddress: hostName }),
+          }}
+        />
+      );
+    }
+
+    return (
+      <Trans
+        {...commonProps}
+        i18nKey="InvitationToPortal"
+        defaults={DEFAULT_PORTAL_TEXT}
+        values={{
+          displayName,
+          productName: t("Common:ProductName"),
+          ...(roomData.title
+            ? { roomName: roomData.title }
+            : { spaceAddress: hostName }),
+        }}
+      />
+    );
+  };
+
   return (
     <GreetingContainer>
       <Logo culture={culture} />
       {type === "LinkInvite" ? (
         <div className="tooltip">
-          <Text fontSize="16px">
-            {roomData.title ? (
-              <Trans
-                t={t}
-                i18nKey="InvitationToRoom"
-                ns="Common"
-                defaults={DEFAULT_ROOM_TEXT}
-                values={{
-                  displayName,
-                  ...(roomData.title
-                    ? { roomName: roomData.title }
-                    : { spaceAddress: hostName }),
-                }}
-                components={{
-                  1: (
-                    <Text
-                      key="component_key"
-                      fontWeight={600}
-                      as="strong"
-                      fontSize="16px"
-                    />
-                  ),
-                }}
-              />
-            ) : (
-              <Trans
-                t={t}
-                i18nKey="InvitationToPortal"
-                ns="Common"
-                defaults={DEFAULT_PORTAL_TEXT}
-                values={{
-                  displayName,
-                  productName: t("Common:ProductName"),
-                  ...(roomData.title
-                    ? { roomName: roomData.title }
-                    : { spaceAddress: hostName }),
-                }}
-                components={{
-                  1: (
-                    <Text
-                      key="component_key"
-                      fontWeight={600}
-                      as="strong"
-                      fontSize="16px"
-                    />
-                  ),
-                }}
-              />
-            )}
-          </Text>
+          <Text fontSize="16px">{getInviteText()}</Text>
         </div>
       ) : null}
     </GreetingContainer>

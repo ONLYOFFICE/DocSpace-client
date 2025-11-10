@@ -276,5 +276,15 @@
   "WantToCancelUpload": "Deseja cancelar o upload?",
   "WantToContinue": "Você quer continuar ou alterar a cota de armazenamento do usuário?",
   "WhiteLabelSubtitle": "Insira o nome da sua empresa, carregue o logotipo e personalize o estilo para combinar com a sua marca.",
-  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
+  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
+  "AccountsUsersWithoutEmails": "Descobrimos <1>{{users}} users</1> sem e-mails. Você pode adicionar os dados necessários às contas deles na próxima etapa.",
+  "AccountsWithoutEmails": "Descobrimos <1>{{users}} users</1> sem e-mails. Você pode preencher os e-mails deles ou continuar sem essa ação.",
+  "AISettings": "Configurações de IA",
+  "DataImportAdminLimitExceeded": "Limite de administradores excedido. Para continuar, ajuste o número de administradores ou aumente o limite de administradores.",
+  "GroupsSectionDescription": "Os usuários selecionados na etapa anterior serão importados para grupos criados em {{serviceName}}. Os grupos aparecerão na <1>{{sectionName}}</1> seção",
+  "ImportFilesDescription": "Os arquivos e documentos do usuário serão importados para a <1>{{sectionName}}</1>.",
+  "ResetSettings": "Redefinir configurações",
+  "SharedFilesAndFolders": "Arquivos e pastas compartilhados",
+  "SharedFilesAndFoldersDescription": "Os arquivos e pastas compartilhados por outros usuários serão importados para a <1>{{sectionName}}</1>.<br><1>Por favor, observe:</1> alguns direitos de acesso podem ser perdidos durante a importação",
+  "SharedFilesAndFoldersDetails": "Arquivos e pastas compartilhados"
 }

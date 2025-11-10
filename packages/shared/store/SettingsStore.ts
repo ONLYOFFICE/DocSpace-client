@@ -592,6 +592,12 @@ class SettingsStore {
 			: this.helpCenterDomain;
 	}
 
+	get aiSettingsUrl() {
+		return this.helpCenterDomain && this.helpCenterEntries?.aisettings
+			? `${this.helpCenterDomain}${this.helpCenterEntries.aisettings}`
+			: null;
+	}
+
 	get configureDeepLinkUrl() {
 		return this.helpCenterDomain && this.helpCenterEntries?.configureDeepLink
 			? `${this.helpCenterDomain}${this.helpCenterEntries.configureDeepLink}`

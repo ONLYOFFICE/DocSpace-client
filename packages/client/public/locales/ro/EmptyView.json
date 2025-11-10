@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
-  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
+  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date",
+  "CreateAIAgent": "Creare un agent nou",
+  "CreateAIAgentDescription": "Începeți procesul de creare al primului agent de IA.",
+  "EmptyAIAgentsDescription": "Configurați un asistent particularizat pentru echipa dvs: adăugați o bază de cunoștințe, alegeți modelul potrivit și conectați un server MCP. Invitați colegii să colaboreze și profitați la maxim de capabilitățile chat-ului ale agentului.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Pentru a crea și a utiliza agenți IA, conectați-vă portofelul și activați funcțiile de IA în setările {{productName}}. Odată ce acest lucru este finalizat, veți putea lucra cu agenți IA și să colaborați cu echipa dvs.",
+  "EmptyAIAgentsAIDisabledDescription": "Această secțiune le permite utilizatorilor să lucreze cu agenți IA — asistenți inteligenți pentru gestionarea documentelor și altor sarcini. \nPentru a începe să îi utilizezi, administratorul al {{productName}} trebuie să activeze serviciul de funcții AI.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Odată ce echipa dvs. vă invită să colaborați, agenții AI vor apărea aici, gata să vă ajute cu documente, gestionarea cunoștințelor și sarcinilor zilnice.",
+  "EmptyAIAgentsTitle": "Creare agent IA",
+  "EmptyAIAgentsUserTitle": "Niciun agent IA nu este deocamdată disponibil",
+  "EmptyAIAgentsAIDisabledUserTitle": "Agenții IA nu sunt deocamdată disponibile",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Conectați portofelul dvs și activați caracteristicile de IA"
 }

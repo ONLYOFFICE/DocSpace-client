@@ -59,7 +59,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import RoomQuota from "SRC_DIR/components/RoomQuota";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-import type { TRoom } from "@docspace/shared//api/rooms/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
   display: flex;
@@ -141,6 +141,7 @@ type setAgentParamsProps = {
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: VoidFunction;
+  onOpenMCPSelector?: VoidFunction;
   portalMcpServerId?: string;
 
   // Store props
@@ -189,6 +190,7 @@ const setAgentParams = ({
   covers,
   setCover,
   onOwnerChange,
+  onOpenMCPSelector,
   isDefaultAgentsQuotaSet,
   infoPanelSelection,
   portalMcpServerId,
@@ -336,7 +338,9 @@ const setAgentParams = ({
   };
 
   const onDeleteAvatar = () => {
-    setCover?.(`#${randomColor}`, "");
+    if (previewIcon) setPreviewIcon(null);
+    else setCover?.(`#${randomColor}`, "");
+
     setAgentParams({
       ...agentParams,
       icon: {
@@ -346,11 +350,16 @@ const setAgentParams = ({
         y: 0.5,
         zoom: 1,
       },
+      iconWasUpdated: false,
     });
   };
 
   const hasImage = isEdit
-    ? agentParams.icon.uploadedFile && selection?.logo?.original
+    ? !!(
+        agentParams.iconWasUpdated ||
+        (agentParams.icon.uploadedFile &&
+          (selection?.logo?.original || infoPanelSelection?.logo?.original))
+      )
     : false;
   const model = getLogoCoverModel?.(t, hasImage);
 
@@ -494,6 +503,7 @@ const setAgentParams = ({
         setAgentParams={setAgentParams}
         agentParams={agentParams}
         portalMcpServerId={portalMcpServerId}
+        onOpenMCPSelector={onOpenMCPSelector}
       />
 
       {isDefaultAgentsQuotaSet ? (

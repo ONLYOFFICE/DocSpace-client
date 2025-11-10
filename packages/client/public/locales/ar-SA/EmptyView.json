@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
   "UploadFromPortalTitle": "تحميل من {{productName}}",
   "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
-  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
+  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية",
+  "CreateAIAgent": "إنشاء وكيل جديد",
+  "CreateAIAgentDescription": "ابدأوا ببناء أول وكيل ذكاء اصطناعي خاص بكم",
+  "EmptyAIAgentsDescription": "قوموا بإعداد مساعد مخصص لفريقكم عن طريق إضافة قاعدة معرفية، واختيار النموذج المثالي، وتوصيل خادم MCP. ادعوا زملائكم للتعاون والاستفادة القصوى من إمكانيات الدردشة الخاصة بالوكيل.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "لإنشاء واستخدام وكلاء الذكاء الاصطناعي، قوموا بتوصيل محفظتكم وتمكين خدمة ميزات الذكاء الاصطناعي في إعدادات {{productName}}. بمجرد الانتهاء من ذلك، ستتمكنون من العمل مع وكلاء الذكاء الاصطناعي والتعاون مع فريقكم.",
+  "EmptyAIAgentsAIDisabledDescription": "يسمح هذا القسم للمستخدمين بالعمل مع وكلاء الذكاء الاصطناعي - المساعدين الأذكياء للتعامل مع المستندات والمهام الأخرى. \nلبدء استخدامهم، يجب تمكين خدمة ميزات الذكاء الاصطناعي من قبل مسؤول {{productName}} الخاص بكم.",
+  "EmptyAIAgentsAIEnabledUserDescription": "بمجرد أن يدعوكم فريقكم للتعاون، سيظهر وكلاء الذكاء الاصطناعي هنا، جاهزين للمساعدة في المستندات، وإدارة المعرفة، والمهام اليومية.",
+  "EmptyAIAgentsTitle": "أنشئوا وكيل الذكاء الاصطناعي الخاص بكم",
+  "EmptyAIAgentsUserTitle": "لا يوجد وكلاء ذكاء اصطناعي متاحون بعد",
+  "EmptyAIAgentsAIDisabledUserTitle": "وكلاء الذكاء الاصطناعي غير متاحين بعد",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "قوموا بتوصيل محفظتكم وتمكين ميزات الذكاء الاصطناعي"
 }

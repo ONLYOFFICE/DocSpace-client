@@ -276,5 +276,15 @@
   "WantToCancelUpload": "Doriți să anulați încărcarea?",
   "WantToContinue": "Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?",
   "WhiteLabelSubtitle": "Introduceţi numele companiei dvs, încărcați sigla şi particularizați stilul pentru a se potrivi cu brandingul dvs.",
-  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare."
+  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
+  "AccountsUsersWithoutEmails": "Au fost găsite <1>{{users}} de utilizatori </1> fără adrese de e-mail. Puteți adăuga datele necesare la etapa următoare.",
+  "AccountsWithoutEmails": "Au fost găsite <1>{{users}} de utilizatori </1> fără adrese de e-mail. Puteți adăuga adrese de e-mail sau continuați fără acestă acțiune.",
+  "AISettings": "Setări IA",
+  "DataImportAdminLimitExceeded": "Limita de administratori a fost depășită. To continue, please either adjust the number of admins or increase the admin limit.",
+  "GroupsSectionDescription": "Utilizatorii pe care i-ați selectat  în etapa anterioară vor fi importați în grupurile create în {{serviceName}}. Grupurile vor fi afișate în secțiunea <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Fișierele și documentele utilizatorului vor fi importate în secțiunea <1>{{sectionName}}</1>.",
+  "ResetSettings": "Resetare",
+  "SharedFilesAndFolders": "Fișiere și foldere partajate",
+  "SharedFilesAndFoldersDescription": "Fișierele și folderele partajate de alți utilizatori vor fi importate în secțiunea <1>{{sectionName}}</1>.<br><1>Rețineți:</1> este posibil ca unele drepturi de acces să se piardă în timpul importului.",
+  "SharedFilesAndFoldersDetails": "Fișiere și foldere partajate"
 }

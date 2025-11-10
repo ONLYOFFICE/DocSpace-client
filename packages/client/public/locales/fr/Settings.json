@@ -276,5 +276,15 @@
   "WantToCancelUpload": "Voulez-vous annuler le téléchargement?",
   "WantToContinue": "Voulez-vous continuer ou modifier le quota de stockage de l'utilisateur ?",
   "WhiteLabelSubtitle": "Saisissez le nom de votre entreprise, téléchargez le logo et personnalisez le style pour qu’il corresponde à votre image de marque.",
-  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante."
+  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
+  "AccountsUsersWithoutEmails": "Nous avons trouvé <1>{{users}} utilisateurs</1> sans adresse e-mail. Vous pouvez ajouter les données nécessaires à leurs comptes à l'étape suivante.",
+  "AccountsWithoutEmails": "Nous avons trouvé <1>{{users}} utilisateurs</1> sans adresse e-mail. Vous pouvez remplir leurs adresses e-mail ou continuer sans cette action.",
+  "AISettings": "Paramètres IA",
+  "DataImportAdminLimitExceeded": "Limite d'administrateurs dépassée. Pour continuer, veuillez ajuster le nombre d'administrateurs ou augmenter la limite d'administrateurs.",
+  "GroupsSectionDescription": "Les utilisateurs que vous avez sélectionnés à l'étape précédente seront importés dans les groupes créés dans {{serviceName}}. Les groupes apparaîtront dans la section <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Les fichiers et documents de l'utilisateur seront importés dans <1>{{sectionName}}</1>.",
+  "ResetSettings": "Réinitialiser les paramètres",
+  "SharedFilesAndFolders": "Fichiers et dossiers partagés",
+  "SharedFilesAndFoldersDescription": "Les fichiers et dossiers partagés par d'autres utilisateurs seront importés dans <1>{{sectionName}}</1>.<br><1>Remarque :</1> certains droits d'accès peuvent être perdus lors de l'importation.",
+  "SharedFilesAndFoldersDetails": "Fichiers et dossiers partagés"
 }

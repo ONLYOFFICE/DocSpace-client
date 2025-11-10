@@ -77,7 +77,9 @@ const ChangeRoomOwner = ({
             size={AvatarSize.base}
             role={AvatarRole.none}
             isDefaultSource={roomOwner.hasAvatar}
-            source={roomOwner.avatarSmall ?? roomOwner.avatar}
+            source={
+              roomOwner.hasAvatar ? roomOwner.avatar : roomOwner.avatarSmall
+            }
             userName={userName}
           />
           <div className="change-owner-display-name">

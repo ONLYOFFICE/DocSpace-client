@@ -114,6 +114,7 @@ type MCPServersProps = {
   updateMCPStatus?: AISettingsStore["updateMCPStatus"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   mcpServersInitied?: AISettingsStore["mcpServersInitied"];
+  aiSettingsUrl?: string;
 };
 
 const MCPServersComponent = ({
@@ -123,6 +124,7 @@ const MCPServersComponent = ({
   updateMCPStatus,
   hasAIProviders,
   mcpServersInitied,
+  aiSettingsUrl,
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
@@ -233,17 +235,19 @@ const MCPServersComponent = ({
           productName: t("Common:ProductName"),
         })}
       </Text>
-      <Link
-        className={styles.learnMoreLink}
-        target={LinkTarget.blank}
-        type={LinkType.page}
-        fontWeight={600}
-        isHovered
-        href=""
-        color="accent"
-      >
-        {t("Common:LearnMore")}
-      </Link>
+      {aiSettingsUrl ? (
+        <Link
+          className={styles.learnMoreLink}
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          fontWeight={600}
+          isHovered
+          href={aiSettingsUrl}
+          color="accent"
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
       <Button
         primary
         size={ButtonSize.small}
@@ -307,20 +311,23 @@ const MCPServersComponent = ({
   );
 };
 
-export const MCPServers = inject(({ aiSettingsStore }: TStore) => {
-  const {
-    customMCPServers,
-    systemMCPServers,
-    updateMCPStatus,
-    hasAIProviders,
-    mcpServersInitied,
-  } = aiSettingsStore;
+export const MCPServers = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    const {
+      customMCPServers,
+      systemMCPServers,
+      updateMCPStatus,
+      hasAIProviders,
+      mcpServersInitied,
+    } = aiSettingsStore;
 
-  return {
-    customMCPServers,
-    systemMCPServers,
-    updateMCPStatus,
-    hasAIProviders,
-    mcpServersInitied,
-  };
-})(observer(MCPServersComponent));
+    return {
+      customMCPServers,
+      systemMCPServers,
+      updateMCPStatus,
+      hasAIProviders,
+      mcpServersInitied,
+      aiSettingsUrl: settingsStore.aiSettingsUrl,
+    };
+  },
+)(observer(MCPServersComponent));

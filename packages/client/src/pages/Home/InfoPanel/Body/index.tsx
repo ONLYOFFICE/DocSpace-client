@@ -65,6 +65,7 @@ type BodyProps = {
   maxImageUploadSize: SettingsStore["maxImageUploadSize"];
 
   editRoomDialogProps: DialogsStore["editRoomDialogProps"];
+  editAgentDialogProps: DialogsStore["editAgentDialogProps"];
   createRoomDialogProps: DialogsStore["createRoomDialogProps"];
   templateEventVisible: DialogsStore["templateEventVisible"];
 
@@ -105,6 +106,7 @@ const InfoPanelBodyContent = ({
   onChangeFile,
   setImage,
   checkIsExpiredLinkAsync,
+  editAgentDialogProps,
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
@@ -160,7 +162,7 @@ const InfoPanelBodyContent = ({
   }, [fileView, selection, isTemplatesRoom]);
 
   const isExpiredLink = useEventCallback(() =>
-    checkIsExpiredLinkAsync(selection),
+    checkIsExpiredLinkAsync(selection)
   );
 
   React.useEffect(() => {
@@ -203,8 +205,8 @@ const InfoPanelBodyContent = ({
               currentView === InfoPanelView.infoMembers
                 ? "members"
                 : currentView === InfoPanelView.infoHistory
-                  ? "history"
-                  : "details"
+                ? "history"
+                : "details"
             }
           />
         }
@@ -217,6 +219,8 @@ const InfoPanelBodyContent = ({
       </React.Suspense>
     );
   };
+
+
 
   return (
     <div className={commonStyles.infoPanelBody}>
@@ -234,6 +238,7 @@ const InfoPanelBodyContent = ({
 
       {avatarEditorDialogVisible &&
       !editRoomDialogProps.visible &&
+      !editAgentDialogProps.visible &&
       !createRoomDialogProps.visible &&
       !Array.isArray(selection) ? (
         <AvatarEditorDialog
@@ -276,8 +281,12 @@ export default inject(
     } = infoPanelStore;
 
     const { isExpiredLinkAsync } = filesActionsStore;
-    const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
-      dialogsStore;
+    const {
+      editRoomDialogProps,
+      editAgentDialogProps,
+      createRoomDialogProps,
+      templateEventVisible,
+    } = dialogsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -305,6 +314,7 @@ export default inject(
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 
       editRoomDialogProps,
+      editAgentDialogProps,
       createRoomDialogProps,
       templateEventVisible,
 
@@ -317,5 +327,5 @@ export default inject(
       setImage,
       checkIsExpiredLinkAsync: isExpiredLinkAsync,
     };
-  },
+  }
 )(observer(InfoPanelBodyContent));

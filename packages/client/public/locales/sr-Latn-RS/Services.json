@@ -19,7 +19,7 @@
   "WebSearchEnabled": "Usluga AI veb pretrage je uspešno omogućena.",
   "ChatBot": "ChatBot",
   "ChatBotDescription": "Interagujte sa pomoćnikom veštačke inteligencije direktno u svojim urednicima — postavljajte pitanja, dobijajte predloge ili ubrzajte tok posla.",
-  "EnableAItools": "Omogući AI alatke ({{currenci}} po tokenu)",
+  "EnableAItools": "Omogući AI alatke ({{currency}} po tokenu)",
   "EnableAItoolsDescription": "Koristite funkcije zasnovane na veštačkoj inteligenciji dok radite u {{organizationName}} {{productName}} dodavanjem sredstava u novčanik",
   "ErrorChecking": "Provera grešaka",
   "ErrorCheckingDescription": "Ispravite greške u kucanju i gramatičke greške da biste poboljšali kvalitet teksta.",

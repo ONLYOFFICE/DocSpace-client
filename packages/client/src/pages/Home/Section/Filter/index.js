@@ -847,7 +847,7 @@ const SectionFilterContent = ({
   ]);
 
   const getSharedByFilter = React.useCallback(() => {
-    if (!isSharedWithMeFolder) return [];
+    if (!isSharedWithMeFolder || isVisitor) return [];
 
     return [
       {
@@ -864,7 +864,7 @@ const SectionFilterContent = ({
         label: t("Translations:ChooseFromList"),
       },
     ];
-  }, [isSharedWithMeFolder]);
+  }, [t, isSharedWithMeFolder, isVisitor]);
 
   const getAuthorFilter = React.useCallback(() => {
     const selectedFolder = getSelectedFolder();
@@ -876,7 +876,9 @@ const SectionFilterContent = ({
 
     if (isFolderSharedWithMe) return [];
 
-    if (isSharedWithMeFolder)
+    if (isSharedWithMeFolder) {
+      if (isVisitor) return [];
+
       return [
         {
           key: FilterGroups.filterAuthor,
@@ -892,6 +894,7 @@ const SectionFilterContent = ({
           label: t("Translations:ChooseFromList"),
         },
       ];
+    }
 
     return [
       {
@@ -923,7 +926,7 @@ const SectionFilterContent = ({
             },
           ]),
     ];
-  }, [getSelectedFolder, isSharedWithMeFolder, isCollaborator, isVisitor]);
+  }, [t, getSelectedFolder, isSharedWithMeFolder, isCollaborator, isVisitor]);
 
   const getFilterData = React.useCallback(async () => {
     const quotaFilter = [

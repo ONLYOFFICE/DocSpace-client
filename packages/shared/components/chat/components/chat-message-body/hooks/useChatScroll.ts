@@ -61,19 +61,23 @@ export const useChatScroll = ({
     const scrollEl = e.currentTarget as HTMLDivElement;
     if (!scrollEl) return;
 
-    const currentHeight = scrollEl.scrollTop + scrollEl.clientHeight;
-
     const chatBodyOffsetHeight = chatBodyRef.current?.offsetHeight || 0;
 
-    if (prevScrollTopRef.current > scrollEl.scrollTop) {
+    const currentHeight =
+      scrollEl.scrollTop +
+      scrollEl.clientHeight -
+      (scrollEl.scrollHeight - chatBodyOffsetHeight);
+
+    const isScrollToTop = prevScrollTopRef.current > scrollEl.scrollTop;
+    const scrollThreshold = isScrollToTop ? 5 : 50;
+
+    if (isScrollToTop) {
       disableAutoScrollRef.current = true;
     }
 
-    console.log({ chatBodyOffsetHeight, currentHeight });
-
     if (
       currentHeight === chatBodyOffsetHeight ||
-      Math.abs(currentHeight - chatBodyOffsetHeight) < 5 ||
+      Math.abs(currentHeight - chatBodyOffsetHeight) < scrollThreshold ||
       chatBodyOffsetHeight < currentHeight
     ) {
       disableAutoScrollRef.current = false;

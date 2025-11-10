@@ -280,6 +280,18 @@
     }
   }
 
+  &.fullHeightBody {
+    display: flex;
+    flex-direction: column;
+
+    :global(.section-wrapper),
+    :global(.section-wrapper-content) {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+  }
+
   &:not(.withScroll) {
     :global {
       .section-wrapper {

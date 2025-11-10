@@ -296,6 +296,7 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+      sectionProps.fullHeightBody = isChat;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }

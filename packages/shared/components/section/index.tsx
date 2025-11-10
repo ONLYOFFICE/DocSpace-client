@@ -130,6 +130,7 @@ const Section = (props: SectionProps) => {
     clearDropPreviewLocation,
     dropTargetPreview,
     startDropPreview,
+    fullHeightBody,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -297,6 +298,7 @@ const Section = (props: SectionProps) => {
             isIndexEditingMode={isIndexEditingMode}
             pathname={pathname}
             withoutFooter={withoutFooter}
+            fullHeightBody={fullHeightBody}
           >
             <div
               className="section-sticky-container-mobile"

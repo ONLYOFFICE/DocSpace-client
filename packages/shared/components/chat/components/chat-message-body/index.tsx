@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useEffectEvent, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import socket, { SocketCommands, SocketEvents } from "../../../../utils/socket";
-import { useIsMobile } from "../../../../hooks/useIsMobile";
 
 import { Loader, LoaderTypes } from "../../../loader";
 

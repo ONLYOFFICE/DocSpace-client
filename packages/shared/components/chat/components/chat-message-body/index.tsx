@@ -42,6 +42,7 @@ import { MessageBodyProps } from "../../Chat.types";
 import EmptyScreen from "./sub-components/EmptyScreen";
 import Message from "./sub-components/message";
 
+import { useChatScroll } from "./hooks/useChatScroll";
 import styles from "./ChatMessageBody.module.scss";
 
 const ChatMessageBody = ({
@@ -60,13 +61,7 @@ const ChatMessageBody = ({
 
   const { t } = useTranslation(["Common"]);
 
-  const scrollbarRef = useRef<HTMLDivElement>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
-  const prevBodyHeight = useRef(0);
-  const prevScrollTopRef = useRef(0);
-  const disableAutoScrollRef = useRef(false);
-
-  const isMobile = useIsMobile();
 
   const isEmpty = messages.length === 0 || isLoading;
 
@@ -90,78 +85,13 @@ const ChatMessageBody = ({
     });
   }, [addMessageId]);
 
-  useEffect(() => {
-    disableAutoScrollRef.current = false;
-  }, [currentChat]);
-
-  const onScroll = useEffectEvent((e: Event) => {
-    const scrollEl = e.currentTarget as HTMLDivElement;
-    if (!scrollEl) return;
-
-    const currentHeight = scrollEl.scrollTop + scrollEl.clientHeight;
-
-    const chatBodyOffsetHeight = chatBodyRef.current?.offsetHeight || 0;
-
-    if (prevScrollTopRef.current > scrollEl.scrollTop) {
-      disableAutoScrollRef.current = true;
-    }
-
-    if (
-      currentHeight === chatBodyOffsetHeight ||
-      Math.abs(currentHeight - chatBodyOffsetHeight) < 5 ||
-      chatBodyOffsetHeight < currentHeight
-    ) {
-      disableAutoScrollRef.current = false;
-    }
-
-    if (scrollEl.scrollTop < 500 + scrollEl.clientHeight) {
-      fetchNextMessages();
-    }
-
-    prevScrollTopRef.current = scrollEl.scrollTop;
+  useChatScroll({
+    chatBodyRef,
+    isEmpty,
+    fetchNextMessages,
+    currentChat,
+    messages,
   });
-
-  useEffect(() => {
-    const scroll = isMobile
-      ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
-      : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
-
-    if (!scroll) return;
-
-    scrollbarRef.current = scroll as HTMLDivElement;
-
-    scroll.addEventListener("scroll", onScroll);
-
-    return () => {
-      scroll.removeEventListener("scroll", onScroll);
-    };
-  }, [isMobile]);
-
-  useEffect(() => {
-    if (isEmpty || disableAutoScrollRef.current) return;
-
-    const scrollEl = scrollbarRef.current;
-
-    requestAnimationFrame(() => {
-      if (scrollEl) {
-        scrollEl.scrollTo(0, scrollEl.scrollHeight);
-      }
-    });
-  });
-
-  useEffect(() => {
-    if (!chatBodyRef.current) return;
-
-    const bodyHeight = chatBodyRef.current?.clientHeight;
-    const diff = bodyHeight - prevBodyHeight.current;
-    if (diff !== 0) {
-      prevBodyHeight.current = bodyHeight;
-    }
-
-    if (prevScrollTopRef.current === 0 && diff > 0) {
-      scrollbarRef.current?.scrollTo(0, diff);
-    }
-  }, [messages.length]);
 
   return (
     <div

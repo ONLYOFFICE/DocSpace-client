@@ -54,7 +54,7 @@ const ChatInput = ({
   clearAttachmentFile,
   selectedModel,
   toolsSettings,
-  isAdmin,
+  isDocSpaceAdmin,
   aiReady,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
@@ -173,7 +173,7 @@ const ChatInput = ({
   }, []);
 
   return (
-    <div className={styles.chatFooter}>
+    <>
       <div
         className={classNames(styles.chatInput, "chat-input")}
         ref={(ref) => {
@@ -217,7 +217,7 @@ const ChatInput = ({
               value={value}
               selectedModel={selectedModel}
               toolsSettings={toolsSettings}
-              isAdmin={isAdmin}
+              isAdmin={isDocSpaceAdmin}
               aiReady={aiReady}
             />
           </>
@@ -241,7 +241,7 @@ const ChatInput = ({
           {t("Common:CheckAIInfo")}
         </Text>
       ) : null}
-    </div>
+    </>
   );
 };
 

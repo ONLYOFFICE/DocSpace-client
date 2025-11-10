@@ -34,9 +34,8 @@ import { ChatProps } from "./Chat.types";
 import ChatContainer from "./components/chat-container";
 import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
 import { ChatNoAccessScreen } from "./components/chat-no-access-screen";
-import { ChatInfoBlock } from "./components/chat-info-block";
+import ChatFooter from "./components/chat-footer";
 
 import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
 
@@ -84,21 +83,16 @@ const Chat = observer(
               isLoading={isLoadingChat}
               getIcon={getIcon}
             />
-            {!isLoadingChat && !aiReady ? (
-              <ChatInfoBlock
-                standalone={standalone}
-                isDocSpaceAdmin={isAdmin}
-              />
-            ) : null}
-            <ChatInput
+            <ChatFooter
               attachmentFile={attachmentFile}
               clearAttachmentFile={clearAttachmentFile}
               isLoading={isLoadingChat}
               getIcon={getIcon}
               selectedModel={selectedModel}
               toolsSettings={toolsSettings}
-              isAdmin={isAdmin}
+              isDocSpaceAdmin={isAdmin}
               aiReady={aiReady}
+              standalone={standalone}
             />
           </>
         )}

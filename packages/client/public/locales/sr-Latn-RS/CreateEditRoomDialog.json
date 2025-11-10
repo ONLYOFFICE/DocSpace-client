@@ -37,5 +37,7 @@
   "UserName": "Korisničko ime",
   "ViewerInfo": "Informacije o pregledatelju",
   "WatermarkPreview": "Pregled vodenog žiga",
-  "WatermarkPreviewHelp": "Ova slika prikazuje kako će vodeni žig izgledati u vašim fajlovima."
+  "WatermarkPreviewHelp": "Ova slika prikazuje kako će vodeni žig izgledati u vašim fajlovima.",
+  "DisableRoomQuotaAgent": "Onemogućite kvotu za ovog agenta",
+  "StorageDescriptionAgent": "Podešena kvota za skladištenje po agentu. Možete promeniti ovu vrednost ili isključiti ograničenje skladištenja."
 }

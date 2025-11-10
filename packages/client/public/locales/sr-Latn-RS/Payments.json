@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "Niste dodali nijedan način plaćanja",
   "YourCurrentPayment": "Vaš trenutni način plaćanja",
   "YourCurrentPlan": "<1>Vaš trenutni plan:</1> {{amount}} <2>({{price}}/mesečno)</2>",
-  "YourPrice": "Vaša cena"
+  "YourPrice": "Vaša cena",
+  "PerAITools": "{{currency}} po tokenu"
 }

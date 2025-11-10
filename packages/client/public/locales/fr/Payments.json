@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "Vous n'avez ajouté aucun paiement",
   "YourCurrentPayment": "Votre paiement actuel",
   "YourCurrentPlan": "<1>Votre plan actuel :</1> {{amount}} <2>({{price}}/mois)</2>",
-  "YourPrice": "Votre prix"
+  "YourPrice": "Votre prix",
+  "PerAITools": "{{currency}} par jeton"
 }

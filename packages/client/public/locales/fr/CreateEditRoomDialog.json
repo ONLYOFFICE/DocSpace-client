@@ -37,5 +37,7 @@
   "UserName": "Nom de l'utilisateur",
   "ViewerInfo": "Informations sur le lecteur",
   "WatermarkPreview": "Aperçu du filigrane",
-  "WatermarkPreviewHelp": "Cet image avec l'aperçu montre approximativement comment le filigrane s'affichera dans vos fichiers."
+  "WatermarkPreviewHelp": "Cet image avec l'aperçu montre approximativement comment le filigrane s'affichera dans vos fichiers.",
+  "DisableRoomQuotaAgent": "Désactiver le quota pour cet agent",
+  "StorageDescriptionAgent": "Quota de stockage défini par agent. Vous pouvez modifier cette valeur ou désactiver la limite de stockage."
 }

@@ -18,5 +18,8 @@
   "SendInvitation": "Einladung versenden",
   "UserMaxAvailableRoleWarning": "Gäste und Benutzer können nicht als Raum-Manager zugewiesen werden. Nur Raum- und {{productName}}-Administratoren sind für die angegebene Rolle geeignet.",
   "UsersAlreadyAdded": "Einige Benutzer wurden bereits hinzugefügt",
-  "UsersCannotBeAdded": "Deaktivierte Kontakte können nicht zu einem Raum hinzugefügt werden."
+  "UsersCannotBeAdded": "Deaktivierte Kontakte können nicht zu einem Raum hinzugefügt werden.",
+  "InviteViaLinkDescriptionAgentGuest": "Erstellen Sie einen universellen Link zur Selbstautorisierung im Agenten als Gast.",
+  "InviteViaLinkDescriptionAgentMembers": "Erstellen Sie einen universellen Link für {{productName}}-Mitglieder zur Selbstautorisierung im Agenten.",
+  "UserAgentMaxAvailableRoleWarning": "Gäste und Benutzer können nicht als Agentenmanager eingesetzt werden. Nur Raum- und {{productName}}-Administratoren eignen sich für diese Rolle."
 }

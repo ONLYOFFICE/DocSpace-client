@@ -192,7 +192,7 @@ const PayerInformation = ({
   );
 
   const payerName = () => {
-    let emailUnfoundedUser;
+    let emailUnfoundedUser = "";
 
     if (email) emailUnfoundedUser = `"${email}"`;
 

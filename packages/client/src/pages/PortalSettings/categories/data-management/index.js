@@ -243,6 +243,7 @@ export const Component = inject(
 
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
+    const { isNotPaidPeriod } = currentTariffStatusStore;
     return {
       dataBackupUrl,
       automaticBackupUrl,
@@ -258,7 +259,7 @@ export const Component = inject(
       currentTariffStatusStore,
       settingsStore,
       clearAbortControllerArr,
-      isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
+      isNotPaidPeriod,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

@@ -29,5 +29,8 @@
   "ItemsDeletedAfter": "سيتم حذف هذه العناصر نهائيًا في غضون 30 يومًا. ",
   "ItemsPermanentlyDeleted": "سيتم حذف هذه العناصر نهائيًا من {{trashSection}}.",
   "removeFromListDescription": "أنتم على وشك إزالة <1>{{title}}</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟",
-  "removeFromListDescriptionPlural": "أنتم على وشك إزالة <1>عناصر ({{count}})</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟"
+  "removeFromListDescriptionPlural": "أنتم على وشك إزالة <1>عناصر ({{count}})</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟",
+  "DeleteAIAgentDescription": "سيتم حذف الوكيل <strong>\"{{agentName}}\"</strong> نهائيًا. سيتم فقدان جميع البيانات ووصول المستخدمين.",
+  "DeleteAIAgentTitle": "هل تريدون حذف هذا الوكيل؟",
+  "DeleteAIAgentWarning": "أنا أفهم العواقب وأريد حذف الوكيل"
 }

@@ -276,5 +276,15 @@
   "WantToCancelUpload": "您是否要取消上传？",
   "WantToContinue": "您希望继续还是更改用户存储配额？",
   "WhiteLabelSubtitle": "输入公司名称、上传徽标并自定义其风格以匹配您的品牌风格。",
-  "WithoutEmailHint": "的用户全部拥有电子邮件。请继续执行下一步。"
+  "WithoutEmailHint": "的用户全部拥有电子邮件。请继续执行下一步。",
+  "AccountsUsersWithoutEmails": "我们发现<1>{{users}}个用户</1>没有电子邮件。您可以在下一步中向其帐户添加必要数据。",
+  "AccountsWithoutEmails": "我们发现<1>{{users}}个用户</1>没有电子邮件。您可以填写他们的电子邮件或继续而不执行此操作。",
+  "AISettings": "AI 设置",
+  "DataImportAdminLimitExceeded": "管理员数量超限。要继续，请调整管理员数量或提高管理员上限。",
+  "GroupsSectionDescription": "您在上一步选择的用户将被导入到{{serviceName}}中创建的群组中。群组将出现在<1>{{sectionName}}</1>板块。",
+  "ImportFilesDescription": "用户文件和文档将被导入到<1>{{sectionName}}</1>。",
+  "ResetSettings": "重置设置",
+  "SharedFilesAndFolders": "共享文件和文件夹",
+  "SharedFilesAndFoldersDescription": "其他用户共享的文件和文件夹将被导入到<1>{{sectionName}}</1>。<br><1>请注意：</1>部分访问权限可能在导入过程中丢失。",
+  "SharedFilesAndFoldersDetails": "共享文件和文件夹"
 }

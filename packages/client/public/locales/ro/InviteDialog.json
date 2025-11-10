@@ -18,5 +18,8 @@
   "SendInvitation": "Trimitere invitaţie",
   "UserMaxAvailableRoleWarning": "Invitați și Utilizatori nu pot fi desemnate Administratori de sală. Numai administratori de sală și administratori {{productName}} pot fi atribuite rolul menționat.",
   "UsersAlreadyAdded": "Anumite utilizatori sunt deja adăugate.",
-  "UsersCannotBeAdded": "Contactele dezactivate nu pot fi adăugate la o sală."
+  "UsersCannotBeAdded": "Contactele dezactivate nu pot fi adăugate la o sală.",
+  "InviteViaLinkDescriptionAgentGuest": "Creați un link universal pentru autentificare în agentul în calitate de invitat.",
+  "InviteViaLinkDescriptionAgentMembers": "Creați un link universal pentru membrii ai {{productName}} pentru autentificare în agentul.",
+  "UserAgentMaxAvailableRoleWarning": "Invitații și Utilizatorii nu pot fi desemnați în calitate de administratori de agenți. Numai administratori de sală și administratori de {{productName}} pot fi atribuite rolul menționat."
 }

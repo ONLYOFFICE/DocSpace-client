@@ -95,5 +95,9 @@
   "SubmenuHistory": "Geschichte",
   "UserFileUpdated": "Datei aktualisiert.",
   "Users": "Benutzer",
-  "Versions": "Versionen"
+  "Versions": "Versionen",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> Agent erstellt",
+  "Resolution": "Auflösung",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> umbenannt in <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Hier finden Sie Details zu den KI-Agenten"
 }

@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Otpremi sa uređaja",
   "UploadFromPortalTitle": "Otpremi iz {{productName}}",
   "UploadPDFFormOptionDescription": "Odaberite spreman PDF formular dostupan u {{productName}} i otpremite ga u prostoriju.",
-  "VirtualDataRoomEmptyTitle": "Dobrodošli u Virtuelnu sobu za podatke"
+  "VirtualDataRoomEmptyTitle": "Dobrodošli u Virtuelnu sobu za podatke",
+  "CreateAIAgent": "Kreirajte novog agenta",
+  "CreateAIAgentDescription": "Počnite da pravite svog prvog AI agenta",
+  "EmptyAIAgentsDescription": "Podesite personalizovanog asistenta za svoj tim dodavanjem baze znanja, odabirom idealnog modela i povezivanjem MCP servera. Pozovite svoje kolege da sarađuju i maksimalno iskoriste mogućnosti ćaskanja agenta.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Da biste kreirali i koristili AI agente, povežite novčanik i omogućite uslugu AI funkcija u podešavanjima {{productName}}. Kada se to završi, moći ćete da radite sa AI agentima i sarađujete sa svojim timom.",
+  "EmptyAIAgentsAIDisabledDescription": "Ovaj odeljak omogućava korisnicima da rade sa AI agentima — pametnim pomoćnicima za rukovanje dokumentima i drugim zadacima. \nDa biste počeli da ih koristite, vaš {{productName}} administrator mora da omogući uslugu AI funkcija.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Kada vas vaš tim pozove na saradnju, ovde će se pojaviti AI agenti, spremni da pomognu oko dokumenata, upravljanja znanjem i svakodnevnih zadataka.",
+  "EmptyAIAgentsTitle": "Kreirajte vašeg AI agenta",
+  "EmptyAIAgentsUserTitle": "Još nema dostupnih AI agenata",
+  "EmptyAIAgentsAIDisabledUserTitle": "Još nema dostupnih AI agenata",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Povežite svoj novčanik i omogućite AI funkcije"
 }

@@ -95,5 +95,9 @@
   "SubmenuHistory": "التاريخ",
   "UserFileUpdated": "تم تحديث الملف.",
   "Users": "المستخدمين",
-  "Versions": "إصدارات"
+  "Versions": "إصدارات",
+  "HistoryAgentCreated": "تم إنشاء الوكيل <1>«{{roomTitle}}»</1>",
+  "Resolution": "الدقة",
+  "AgentRenamed": "تمت إعادة تسمية الوكيل <1>«{{oldRoomTitle}}»</1> إلى <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "اطلعوا على تفاصيل وكلاء الذكاء الاصطناعي هنا"
 }

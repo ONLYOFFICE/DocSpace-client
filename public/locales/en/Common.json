@@ -332,7 +332,7 @@
   "EditUserStatistics": "User statistics",
   "Email": "Email",
   "Embed": "Embed",
-  "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "AI provider are not available yet",
+  "EmptyAIAgentsAIDisabledStandaloneAdminTitle": "AI provider is not available yet",
   "EmptyAIAgentsAIDisabledStandaloneAdminDescription": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in AI chats.",
   "EmptyChatAIDisabledUserDescription": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. To get back on track, ask your {{productName}} admin to enable AI features.",
   "EmptyChatAIDisabledSaasAdminDescription": "The AI service is turned off, preventing this agent from processing chats or performing tasks. To restore full functionality, enable AI features in the {{productName}} settings.",

@@ -37,5 +37,7 @@
   "UserName": "Emri i Përdoruesit",
   "ViewerInfo": "Informacione për shikuesin",
   "WatermarkPreview": "Parapri Shumëzimë",
-  "WatermarkPreviewHelp": "Kjo paraqitje e imazhit tregon përafërsisht se si do të shfaqet marka ujësimi në fajljet tuaja."
+  "WatermarkPreviewHelp": "Kjo paraqitje e imazhit tregon përafërsisht se si do të shfaqet marka ujësimi në fajljet tuaja.",
+  "DisableRoomQuotaAgent": "Çaktivizo kuotën për këtë agjent",
+  "StorageDescriptionAgent": "Kuota e ruajtjes është caktuar për çdo agjent. Mund ta ndryshoni këtë vlerë ose ta çaktivizoni limitin e ruajtjes."
 }

@@ -53,6 +53,7 @@ type TKnowledgeProps = {
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
+  aiSettingsUrl?: string;
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -65,6 +66,7 @@ const KnowledgeComponent = ({
   hasAIProviders,
   getAIConfig,
   aiConfig,
+  aiSettingsUrl,
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
 
@@ -199,17 +201,19 @@ const KnowledgeComponent = ({
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
           })}
         </Text>
-        <Link
-          className={generalStyles.learnMoreLink}
-          target={LinkTarget.blank}
-          type={LinkType.page}
-          fontWeight={600}
-          isHovered
-          href=""
-          color="accent"
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {aiSettingsUrl ? (
+          <Link
+            className={generalStyles.learnMoreLink}
+            target={LinkTarget.blank}
+            type={LinkType.page}
+            fontWeight={600}
+            isHovered
+            href={aiSettingsUrl}
+            color="accent"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
         <div className={styles.knowledgeForm}>
           <FieldContainer
             labelVisible
@@ -296,6 +300,7 @@ export const Knowledge = inject(
       hasAIProviders: aiSettingsStore.hasAIProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,
+      aiSettingsUrl: settingsStore.aiSettingsUrl,
     };
   },
 )(observer(KnowledgeComponent));

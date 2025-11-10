@@ -52,6 +52,7 @@ type TSearchProps = {
   restoreWebSearch?: AISettingsStore["restoreWebSearch"];
   updateWebSearch?: AISettingsStore["updateWebSearch"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
+  aiSettingsUrl?: string;
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -62,6 +63,7 @@ const SearchComponent = ({
   restoreWebSearch,
   updateWebSearch,
   hasAIProviders,
+  aiSettingsUrl,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
 
@@ -187,17 +189,19 @@ const SearchComponent = ({
             productName: t("Common:ProductName"),
           })}
         </Text>
-        <Link
-          className={generalStyles.learnMoreLink}
-          target={LinkTarget.blank}
-          type={LinkType.page}
-          fontWeight={600}
-          isHovered
-          href=""
-          color="accent"
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {aiSettingsUrl ? (
+          <Link
+            className={generalStyles.learnMoreLink}
+            target={LinkTarget.blank}
+            type={LinkType.page}
+            fontWeight={600}
+            isHovered
+            href={aiSettingsUrl}
+            color="accent"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
         <div className={styles.searchForm}>
           <FieldContainer
             labelVisible
@@ -274,12 +278,13 @@ const SearchComponent = ({
   );
 };
 
-export const Search = inject(({ aiSettingsStore }: TStore) => {
+export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
   return {
     webSearchInitied: aiSettingsStore.webSearchInitied,
     webSearchConfig: aiSettingsStore.webSearchConfig,
     restoreWebSearch: aiSettingsStore.restoreWebSearch,
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
+    aiSettingsUrl: settingsStore.aiSettingsUrl,
   };
 })(observer(SearchComponent));

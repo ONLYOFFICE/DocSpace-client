@@ -124,6 +124,7 @@ export const useBaseParams = (initialValues?: {
           placeholder={t("Common:EnterName")}
           scale
           hasError={!!nameError}
+          maxLength={128}
         />
       </FieldContainer>
       <FieldContainer
@@ -159,6 +160,7 @@ export const useBaseParams = (initialValues?: {
           value={description}
           onChange={(e) => onChangeDescription(e.target.value)}
           placeholder={t("OAuth:EnterDescription")}
+          maxLength={256}
         />
       </FieldContainer>
     </>

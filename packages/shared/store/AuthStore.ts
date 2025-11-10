@@ -207,13 +207,25 @@ class AuthStore {
       !isPublicPreview()
     ) {
       requests.push(
-        this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
-          if (!isPortalRestore) {
-            this.getPaymentInfo();
-          } else {
-            this.isPortalInfoLoaded = true;
-          }
-        }),
+        this.userStore
+          ?.init(i18n, this.settingsStore.culture)
+          .then(async () => {
+            if (!isPortalRestore) {
+              await this.getPaymentInfo();
+
+              if (
+                !this.currentTariffStatusStore?.isNotPaidPeriod &&
+                !isPortalDeactivated &&
+                this.isAuthenticated &&
+                !skipRequest
+              ) {
+                this.settingsStore?.getAIConfig();
+                this.settingsStore?.getAdditionalResources();
+              }
+            } else {
+              this.isPortalInfoLoaded = true;
+            }
+          }),
       );
     } else {
       this.userStore?.setIsLoaded(true);
@@ -228,11 +240,6 @@ class AuthStore {
         }
 
         if (this.isAuthenticated && !skipRequest) {
-          if (!isPortalRestore && !isPortalDeactivated) {
-            requests.push(this.settingsStore?.getAdditionalResources());
-            requests.push(this.settingsStore?.getAIConfig())
-          }
-
           if (!this.settingsStore?.passwordSettings) {
             if (!isPortalRestore && !isPortalDeactivated) {
               requests.push(this.settingsStore?.getCompanyInfoSettings());

@@ -294,11 +294,9 @@ const Badges = ({
     [styles.tileView]: viewAs === "tile",
   });
 
-  const getLockTooltip = () => (
-    <Text fontSize="12px" fontWeight={400} noSelect>
-      {t("Common:LockedBy", { userName: lockedByUser })}
-    </Text>
-  );
+  const getLockTooltip = () => {
+    return t("Common:LockedBy", { userName: lockedByUser });
+  };
 
   const onIconLockClick = () => {
     if (!canLock) {
@@ -378,7 +376,15 @@ const Badges = ({
       ) : null}
 
       {locked && !isTile ? (
-        <>
+        <div
+          data-tooltip-id={
+            lockedByUser && !canLock ? "info-tooltip" : undefined
+          }
+          data-tooltip-content={
+            lockedByUser && !canLock ? getLockTooltip() : undefined
+          }
+          data-tooltip-place="bottom"
+        >
           <IconButton
             iconName={iconLock}
             className={classNames(
@@ -391,18 +397,8 @@ const Badges = ({
             color={theme.filesQuickButtons.sharedColor}
             hoverColor="accent"
             title={t("Common:UnblockFile")}
-            data-tooltip-id={`lockTooltip${item.id}`}
           />
-          {lockedByUser && !canLock ? (
-            <Tooltip
-              id={`lockTooltip${item.id}`}
-              place="bottom"
-              getContent={getLockTooltip}
-              maxWidth="300px"
-              openOnClick
-            />
-          ) : null}
-        </>
+        </div>
       ) : null}
 
       {item.viewAccessibility?.MustConvert &&

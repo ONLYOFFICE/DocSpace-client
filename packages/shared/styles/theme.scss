@@ -1036,6 +1036,8 @@
   --section-header-height-mobile: 53px;
   --section-desktop-padding: -20px;
   --section-tablet-padding: -24px;
+
+  --section-submenu-height: 33px;
 }
 
 .light {
@@ -1082,6 +1084,8 @@
   --section-header-height-mobile: 53px;
   --section-desktop-padding: -20px;
   --section-tablet-padding: -24px;
+
+  --section-submenu-height: 33px;
 
   --section-header-bg: #{$white};
   --info-panel-blur-color: #{$blur-light};

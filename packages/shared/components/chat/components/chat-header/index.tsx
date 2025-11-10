@@ -34,7 +34,6 @@ import styles from "./ChatHeader.module.scss";
 import SelectChat from "./sub-components/SelectChat";
 import CreateChat from "./sub-components/CreateChat";
 import SelectModel from "./sub-components/SelectModel";
-import { useStickyHeaderPosition } from "./hooks/useStickyHeaderPosition";
 
 const ChatHeader = ({
   selectedModel,
@@ -44,8 +43,6 @@ const ChatHeader = ({
   aiReady,
 }: ChatHeaderProps) => {
   const headerRef = useRef<HTMLDivElement>(null);
-
-  useStickyHeaderPosition({ headerRef });
 
   return (
     <div ref={headerRef} className={`${styles.chatHeader} chat-header`}>

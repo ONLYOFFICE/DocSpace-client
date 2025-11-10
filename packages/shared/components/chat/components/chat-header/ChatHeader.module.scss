@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/mixins";
+@use "../../../../styles/mixins";
 
 .chatHeader {
   width: 100%;
@@ -41,11 +41,19 @@
 
   min-height: 48px;
   position: sticky;
-  top: var(--chat-header-top);
+  top: calc(var(--section-header-height) + var(--section-submenu-height));
 
   background: var(--background-color);
 
   z-index: 1;
+
+  @include mixins.tablet-and-below {
+    top: calc(var(--section-header-height-tablet) + var(--section-submenu-height));
+  }
+
+  @include mixins.mobile {
+    top: calc(var(--section-header-height-mobile) + var(--section-submenu-height));
+  }
 }
 
 .createChat {

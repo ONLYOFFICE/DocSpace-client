@@ -300,37 +300,32 @@ const Section = (props: SectionProps) => {
             withoutFooter={withoutFooter}
             fullHeightBody={fullHeightBody}
           >
-            <div
-              className="section-sticky-container-mobile"
-              style={{ display: "contents" }}
-            >
-              {isSectionHeaderAvailable &&
-              currentDeviceType === DeviceType.mobile ? (
-                <SubSectionHeader
-                  className="section-body_header"
-                  isFormGallery={isFormGallery}
-                >
-                  {sectionHeaderContent}
-                </SubSectionHeader>
-              ) : null}
-              {currentDeviceType !== DeviceType.desktop ? (
-                <SubSectionWarning>{sectionWarningContent}</SubSectionWarning>
-              ) : null}
-              {isSectionSubmenuAvailable &&
-              currentDeviceType === DeviceType.mobile ? (
-                <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
-              ) : null}
-              {isSectionFilterAvailable &&
-              !hideFilter &&
-              currentDeviceType !== DeviceType.desktop ? (
-                <SubSectionFilter
-                  withTabs={withTabs}
-                  className="section-body_filter"
-                >
-                  {sectionFilterContent}
-                </SubSectionFilter>
-              ) : null}
-            </div>
+            {isSectionHeaderAvailable &&
+            currentDeviceType === DeviceType.mobile ? (
+              <SubSectionHeader
+                className="section-body_header"
+                isFormGallery={isFormGallery}
+              >
+                {sectionHeaderContent}
+              </SubSectionHeader>
+            ) : null}
+            {currentDeviceType !== DeviceType.desktop ? (
+              <SubSectionWarning>{sectionWarningContent}</SubSectionWarning>
+            ) : null}
+            {isSectionSubmenuAvailable &&
+            currentDeviceType === DeviceType.mobile ? (
+              <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
+            ) : null}
+            {isSectionFilterAvailable &&
+            !hideFilter &&
+            currentDeviceType !== DeviceType.desktop ? (
+              <SubSectionFilter
+                withTabs={withTabs}
+                className="section-body_filter"
+              >
+                {sectionFilterContent}
+              </SubSectionFilter>
+            ) : null}
             <SubSectionBodyContent>{sectionBodyContent}</SubSectionBodyContent>
             {withoutFooter ? null : (
               <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>

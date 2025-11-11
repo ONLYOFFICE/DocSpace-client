@@ -37,11 +37,11 @@ import styles from "./ChatInfoBlock.module.scss";
 
 export const ChatInfoBlock = ({
   standalone,
-  isDocSpaceAdmin,
+  isPortalAdmin,
 }: ChatInfoBlockProps) => {
   const { t } = useTranslation("Common");
 
-  const bodyText = !isDocSpaceAdmin
+  const bodyText = !isPortalAdmin
     ? t("Common:AIDisabledInfoBlockUserDescription", {
         productName: t("Common:ProductName"),
       })

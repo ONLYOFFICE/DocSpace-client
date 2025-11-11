@@ -34,7 +34,7 @@ import styles from "./ChatFooter.module.scss";
 const ChatFooter = ({
   isLoading,
   aiReady,
-  isDocSpaceAdmin,
+  isPortalAdmin,
   standalone,
   attachmentFile,
   clearAttachmentFile,
@@ -45,10 +45,7 @@ const ChatFooter = ({
   return (
     <div className={styles.chatFooter}>
       {!isLoading && !aiReady ? (
-        <ChatInfoBlock
-          standalone={standalone}
-          isDocSpaceAdmin={isDocSpaceAdmin}
-        />
+        <ChatInfoBlock standalone={standalone} isPortalAdmin={isPortalAdmin} />
       ) : null}
       <ChatInput
         attachmentFile={attachmentFile}
@@ -57,7 +54,7 @@ const ChatFooter = ({
         getIcon={getIcon}
         selectedModel={selectedModel}
         toolsSettings={toolsSettings}
-        isDocSpaceAdmin={isDocSpaceAdmin}
+        isPortalAdmin={isPortalAdmin}
         aiReady={aiReady}
       />
     </div>

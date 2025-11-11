@@ -74,7 +74,7 @@ const Chat = observer(
             canUseChat={canUseChat}
             aiReady={aiReady}
             standalone={standalone}
-            isDocSpaceAdmin={isAdmin}
+            isPortalAdmin={isAdmin}
           />
         ) : (
           <>
@@ -90,7 +90,7 @@ const Chat = observer(
               getIcon={getIcon}
               selectedModel={selectedModel}
               toolsSettings={toolsSettings}
-              isDocSpaceAdmin={isAdmin}
+              isPortalAdmin={isAdmin}
               aiReady={aiReady}
               standalone={standalone}
             />
@@ -123,7 +123,7 @@ const ChatWrapper = (props: ChatProps) => {
         canUseChat={canUseChat}
         aiReady={aiReady}
         standalone={standalone}
-        isDocSpaceAdmin={isAdmin}
+        isPortalAdmin={isAdmin}
       />
     );
   }

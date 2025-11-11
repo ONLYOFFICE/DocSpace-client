@@ -156,13 +156,13 @@ export type ChatInputProps = {
   selectedModel: string;
 
   toolsSettings: ReturnType<typeof useToolsSettings>;
-  isDocSpaceAdmin: boolean;
+  isPortalAdmin: boolean;
   aiReady: boolean;
 };
 
 export type ChatInfoBlockProps = {
   standalone: boolean;
-  isDocSpaceAdmin: boolean;
+  isPortalAdmin: boolean;
 };
 
 export type ChatFooterProps = ChatInputProps & ChatInfoBlockProps;

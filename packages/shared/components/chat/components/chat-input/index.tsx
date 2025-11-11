@@ -54,7 +54,7 @@ const ChatInput = ({
   clearAttachmentFile,
   selectedModel,
   toolsSettings,
-  isDocSpaceAdmin,
+  isPortalAdmin,
   aiReady,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
@@ -217,7 +217,7 @@ const ChatInput = ({
               value={value}
               selectedModel={selectedModel}
               toolsSettings={toolsSettings}
-              isAdmin={isDocSpaceAdmin}
+              isAdmin={isPortalAdmin}
               aiReady={aiReady}
             />
           </>

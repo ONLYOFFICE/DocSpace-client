@@ -96,8 +96,8 @@
   "UserFileUpdated": "Файл обновлен.",
   "Users": "Пользователи",
   "Versions": "Версии",
-  "HistoryAgentCreated": "Создан агент <1>«{{roomTitle}}»</1>",
+  "HistoryAgentCreated": "Агент <1>«{{roomTitle}}»</1> создан",
   "Resolution": "Разрешение",
   "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> переименован в <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Подробности об ИИ-агентах смотрите здесь"
+  "AIAgentsEmptyScreenTent": "Подробнее об ИИ-агентах здесь"
 }

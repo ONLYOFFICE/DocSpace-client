@@ -46,6 +46,7 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import FileNameCell from "./FileNameCell";
 import AccessLevelCell from "./AccessLevelCell";
+import SharedByCell from "./SharedByCell";
 
 interface SharedWithMeRowDataProps {
   t: TFunction;
@@ -86,6 +87,7 @@ interface SharedWithMeRowDataProps {
 interface InjectedSharedWithMeRowDataProps {
   authorShareWithMeColumnIsEnabled: boolean;
   accessLevelShareWithMeColumnIsEnabled: boolean;
+  sharedByShareWithMeColumnIsEnabled: boolean;
   modifiedShareWithMeColumnIsEnabled: boolean;
   sizeShareWithMeColumnIsEnabled: boolean;
   typeShareWithMeColumnIsEnabled: boolean;
@@ -111,6 +113,7 @@ const SharedWithMeRowData: FC<
 
     authorShareWithMeColumnIsEnabled,
     accessLevelShareWithMeColumnIsEnabled,
+    sharedByShareWithMeColumnIsEnabled,
     modifiedShareWithMeColumnIsEnabled,
     sizeShareWithMeColumnIsEnabled,
     typeShareWithMeColumnIsEnabled,
@@ -154,6 +157,23 @@ const SharedWithMeRowData: FC<
         <StyledBadgesContainer>{badgesComponent}</StyledBadgesContainer>
         {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
+
+      {sharedByShareWithMeColumnIsEnabled ? (
+        <TableCell
+          dataTestId={`shared-with-me-cell-shared-by-${index}`}
+          style={dragStyles.style}
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "SharedByShareWithMe" ? "no-extra-space" : "",
+          )}
+        >
+          <SharedByCell sideColor={sideColor} item={props.item} />
+          {lastColumn === "SharedByShareWithMe" ? lastColumnContent : null}
+        </TableCell>
+      ) : (
+        <div />
+      )}
 
       {authorShareWithMeColumnIsEnabled ? (
         <TableCell
@@ -266,6 +286,7 @@ export default inject<
   const {
     authorShareWithMeColumnIsEnabled,
     accessLevelShareWithMeColumnIsEnabled,
+    sharedByShareWithMeColumnIsEnabled,
     modifiedShareWithMeColumnIsEnabled,
     sizeShareWithMeColumnIsEnabled,
     typeShareWithMeColumnIsEnabled,
@@ -275,6 +296,7 @@ export default inject<
   return {
     authorShareWithMeColumnIsEnabled,
     accessLevelShareWithMeColumnIsEnabled,
+    sharedByShareWithMeColumnIsEnabled,
     modifiedShareWithMeColumnIsEnabled,
     sizeShareWithMeColumnIsEnabled,
     typeShareWithMeColumnIsEnabled,

@@ -100,7 +100,7 @@ export type TSortBy =
 
 export type TTranslation = (
   key: string,
-  params?: { [key: string]: string | string[] | number },
+  params?: Record<string, unknown>,
 ) => string;
 
 export type Nullable<T> = T | null;

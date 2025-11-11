@@ -23,63 +23,54 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React, { FC } from "react";
+import { decode } from "he";
 
-import React, { FC, useMemo } from "react";
-import { useTranslation } from "react-i18next";
+import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
-import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 
-import { Text } from "@docspace/shared/components/text";
-import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { useItemIcon } from "@docspace/shared/hooks/useItemIcon";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { StyledText, StyledAuthorCell } from "./CellStyles";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import styles from "./ShareDialog.module.scss";
-import type { ShareDialogHeaderProps } from "./ShareDialog.types";
+interface SharedByCellProps {
+  sideColor: string;
+  item: TFolder | TFile;
+}
 
-const ShareDialogHeader: FC<ShareDialogHeaderProps> = ({
-  file,
-  disabledIcon = true,
-  filesSettings,
-  onClickAddUser,
-}) => {
-  const { t } = useTranslation(["Common"]);
+const SharedByCell: FC<SharedByCellProps> = ({
+  sideColor,
+  item,
+}: SharedByCellProps) => {
+  const { avatarSmall, hasAvatar, displayName } = item.sharedBy ?? {};
 
-  const { getIcon } = useItemIcon({ filesSettings });
+  const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;
 
-  const icon = useMemo(() => getIcon(file.fileExst, 32), [file.fileExst]);
-
-  const title = useMemo(
-    () => file.title.replace(/\.[^/.]+$/, ""),
-    [file.title],
-  );
+  const name = React.useMemo(() => decode(displayName ?? ""), [displayName]);
 
   return (
-    <div className={styles.header}>
-      <RoomIcon logo={icon} title={title} showDefault={false} />
-      <Text
+    <StyledAuthorCell className="author-cell">
+      <Avatar
+        source={avatarSource}
+        className="author-avatar-cell"
+        role={AvatarRole.user}
+        size={AvatarSize.small}
+      />
+      <StyledText
+        color={sideColor}
+        fontSize="12px"
+        fontWeight={600}
+        title={name}
         truncate
-        dir="auto"
-        fontSize="16px"
-        fontWeight={700}
-        title={title}
-        className={styles.title}
       >
-        {title}
-      </Text>
-      {disabledIcon ? null : (
-        <IconButton
-          size={16}
-          isFill
-          id="share-panel_add-user"
-          className={styles.icon}
-          title={t("Common:AddUsers")}
-          iconName={PersonPlusReactSvgUrl}
-          onClick={onClickAddUser}
-        />
-      )}
-    </div>
+        {name}
+      </StyledText>
+    </StyledAuthorCell>
   );
 };
 
-export default ShareDialogHeader;
+export default SharedByCell;

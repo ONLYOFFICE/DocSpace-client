@@ -107,7 +107,9 @@ const useAccountsHotkeys = ({
     "*",
     (e) => {
       const someDialogIsOpen = checkDialogsOpen();
-      if (someDialogIsOpen) return;
+      const contextMenuIsOpen =
+        document.getElementsByClassName("p-contextmenu").length;
+      if (someDialogIsOpen || contextMenuIsOpen) return;
 
       if (
         (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||

@@ -80,7 +80,7 @@ const useContextMenuHotkeys = ({
     setActiveModel(currentItem.items);
   };
 
-  const onKeyDown = (e: KeyboardEvent) => {
+  const onKeyUp = (e: KeyboardEvent) => {
     if (!currentEvent.current || !menuModel || !withHotkeys) return e;
 
     const clearModel = [];
@@ -218,10 +218,10 @@ const useContextMenuHotkeys = ({
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
 
     return () => {
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keyup", onKeyUp);
     };
   });
 

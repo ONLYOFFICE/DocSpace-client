@@ -85,6 +85,7 @@ export type ContextMenuType = {
   isPaidBadge?: boolean;
   preventNewTab?: boolean;
   dataTestId?: string;
+  tooltipTarget?: "item" | "toggle";
   getTooltipContent?: () => React.ReactNode;
   withMCPIcon?: boolean;
 };

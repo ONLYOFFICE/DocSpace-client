@@ -34,9 +34,8 @@ import { ChatProps } from "./Chat.types";
 import ChatContainer from "./components/chat-container";
 import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
 import { ChatNoAccessScreen } from "./components/chat-no-access-screen";
-import { ChatInfoBlock } from "./components/chat-info-block";
+import ChatFooter from "./components/chat-footer";
 
 import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
 
@@ -75,7 +74,7 @@ const Chat = observer(
             canUseChat={canUseChat}
             aiReady={aiReady}
             standalone={standalone}
-            isDocSpaceAdmin={isAdmin}
+            isPortalAdmin={isAdmin}
           />
         ) : (
           <>
@@ -84,21 +83,16 @@ const Chat = observer(
               isLoading={isLoadingChat}
               getIcon={getIcon}
             />
-            {!isLoadingChat && !aiReady ? (
-              <ChatInfoBlock
-                standalone={standalone}
-                isDocSpaceAdmin={isAdmin}
-              />
-            ) : null}
-            <ChatInput
+            <ChatFooter
               attachmentFile={attachmentFile}
               clearAttachmentFile={clearAttachmentFile}
               isLoading={isLoadingChat}
               getIcon={getIcon}
               selectedModel={selectedModel}
               toolsSettings={toolsSettings}
-              isAdmin={isAdmin}
+              isPortalAdmin={isAdmin}
               aiReady={aiReady}
+              standalone={standalone}
             />
           </>
         )}
@@ -129,7 +123,7 @@ const ChatWrapper = (props: ChatProps) => {
         canUseChat={canUseChat}
         aiReady={aiReady}
         standalone={standalone}
-        isDocSpaceAdmin={isAdmin}
+        isPortalAdmin={isAdmin}
       />
     );
   }

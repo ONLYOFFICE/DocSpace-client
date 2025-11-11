@@ -37,5 +37,7 @@
   "UserName": "Nume de utilizator",
   "ViewerInfo": "Detalii Vizualizator",
   "WatermarkPreview": "Previzualizare incripționare",
-  "WatermarkPreviewHelp": "Previzualizarea imaginii arată cum aproximativ  va fi afișată incripționarea în fișierele dvs."
+  "WatermarkPreviewHelp": "Previzualizarea imaginii arată cum aproximativ  va fi afișată incripționarea în fișierele dvs.",
+  "DisableRoomQuotaAgent": "Dezactivare cotă de stocare pentru acest agent",
+  "StorageDescriptionAgent": "Cota de stocare este stabilită pentru fiecare agent. Puteți modifica limita stabilită sau puteți dezactiva limita de stocare."
 }

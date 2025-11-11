@@ -1347,8 +1347,6 @@ class FilesStore {
   };
 
   updateRoomMute = (index, status) => {
-    if (index < 0) return;
-
     this.folders[index].mute = status;
   };
 
@@ -4994,6 +4992,7 @@ class FilesStore {
       withSubfolders,
       filterType,
       searchInContent,
+      sharedBy,
     } = this.filter;
 
     const isFiltered =
@@ -5012,7 +5011,8 @@ class FilesStore {
           search ||
           withSubfolders ||
           filterType ||
-          searchInContent;
+          searchInContent ||
+          sharedBy;
 
     return isFiltered;
   }

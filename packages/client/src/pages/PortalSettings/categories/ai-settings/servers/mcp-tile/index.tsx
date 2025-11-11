@@ -83,6 +83,19 @@ export const MCPTile = ({
     ];
   };
 
+  const name =
+    item.serverType === ServerType.Portal
+      ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+      : item.name;
+
+  const description =
+    item.serverType === ServerType.Portal
+      ? t("AISettings:MCPProductDescription", {
+          organizationName: t("Common:OrganizationName"),
+          productName: t("Common:ProductName"),
+        })
+      : item.description;
+
   return (
     <AiTile
       icon={
@@ -96,7 +109,7 @@ export const MCPTile = ({
           : undefined
       }
     >
-      <AiTile.Header title={item.name}>
+      <AiTile.Header title={name}>
         <div className={styles.buttonsContainer}>
           <ToggleButton
             className={styles.toggleButton}
@@ -116,7 +129,9 @@ export const MCPTile = ({
       </AiTile.Header>
 
       <AiTile.Body>
-        <Text className={styles.description}>{item.description}</Text>
+        <Text className={styles.description} title={description}>
+          {description}
+        </Text>
       </AiTile.Body>
     </AiTile>
   );

@@ -158,7 +158,7 @@ type setAgentParamsProps = {
   cover?: Nullable<TClientCover>;
   covers?: Nullable<TServerCover[]>;
   setCover?: DialogsStore["setCover"];
-  isDefaultAgentsQuotaSet?: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+  isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
 };
 
@@ -189,7 +189,7 @@ const setAgentParams = ({
   covers,
   setCover,
   onOwnerChange,
-  isDefaultAgentsQuotaSet,
+  isDefaultAIAgentsQuotaSet,
   infoPanelSelection,
   portalMcpServerId,
 }: setAgentParamsProps) => {
@@ -336,7 +336,9 @@ const setAgentParams = ({
   };
 
   const onDeleteAvatar = () => {
-    setCover?.(`#${randomColor}`, "");
+    if (previewIcon) setPreviewIcon(null);
+    else setCover?.(`#${randomColor}`, "");
+
     setAgentParams({
       ...agentParams,
       icon: {
@@ -346,11 +348,16 @@ const setAgentParams = ({
         y: 0.5,
         zoom: 1,
       },
+      iconWasUpdated: false,
     });
   };
 
   const hasImage = isEdit
-    ? agentParams.icon.uploadedFile && selection?.logo?.original
+    ? !!(
+        agentParams.iconWasUpdated ||
+        (agentParams.icon.uploadedFile &&
+          (selection?.logo?.original || infoPanelSelection?.logo?.original))
+      )
     : false;
   const model = getLogoCoverModel?.(t, hasImage);
 
@@ -496,7 +503,7 @@ const setAgentParams = ({
         portalMcpServerId={portalMcpServerId}
       />
 
-      {isDefaultAgentsQuotaSet ? (
+      {isDefaultAIAgentsQuotaSet ? (
         <RoomQuota
           setRoomParams={setAgentParams}
           roomParams={agentParams}
@@ -538,7 +545,7 @@ export default inject(
     avatarEditorDialogStore,
     currentQuotaStore,
   }: TStore) => {
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     const { bufferSelection } = filesStore;
@@ -578,7 +585,7 @@ export default inject(
       cover,
       covers,
       setCover,
-      isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       infoPanelSelection,
     };
   },

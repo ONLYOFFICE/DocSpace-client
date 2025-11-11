@@ -95,5 +95,9 @@
   "SubmenuHistory": "Istoric",
   "UserFileUpdated": "Fişier actualizat.",
   "Users": "Utilizatori",
-  "Versions": "Versiuni"
+  "Versions": "Versiuni",
+  "HistoryAgentCreated": "Agentul a fost creat pentru <1>«{{roomTitle}}»</1>",
+  "Resolution": "Rezoluție",
+  "AgentRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a agentului a fost redenumită <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Detaliile agenților de IA aici"
 }

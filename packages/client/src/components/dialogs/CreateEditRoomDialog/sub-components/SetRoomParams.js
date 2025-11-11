@@ -306,7 +306,9 @@ const SetRoomParams = ({
   };
 
   const onDeleteAvatar = () => {
-    setCover(`#${randomColor}`, "");
+    if (previewIcon) setPreviewIcon(null);
+    else setCover(`#${randomColor}`, "");
+
     setRoomParams({
       ...roomParams,
       icon: {
@@ -316,6 +318,7 @@ const SetRoomParams = ({
         y: 0.5,
         zoom: 1,
       },
+      iconWasUpdated: false,
     });
   };
 
@@ -332,12 +335,19 @@ const SetRoomParams = ({
 
   const hasImage =
     isEdit || isTemplate || fromTemplate
-      ? roomParams.icon.uploadedFile && selection?.logo?.original
+      ? !!(
+          roomParams.iconWasUpdated ||
+          (roomParams.icon.uploadedFile &&
+            (selection?.logo?.original || infoPanelSelection?.logo?.original))
+        )
       : false;
+
   const model = getLogoCoverModel(t, hasImage);
 
   const isEditRoomModel = model.map((item) =>
-    item.key === "delete" ? { ...item, onClick: onDeleteAvatar } : item
+    item.key === "create_edit_room_delete"
+      ? { ...item, onClick: onDeleteAvatar }
+      : item
   );
 
   const isEmptyIcon =

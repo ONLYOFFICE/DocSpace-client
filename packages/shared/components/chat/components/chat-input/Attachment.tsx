@@ -27,6 +27,8 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
+import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
+
 import { DeviceType, FolderType } from "../../../../enums";
 import { isDesktop, isTablet } from "../../../../utils";
 
@@ -37,7 +39,10 @@ import FilesSelector from "../../../../selectors/Files";
 import { TSelectorItem } from "../../../selector";
 
 import { AttachmentProps } from "../../Chat.types";
-import { CHAT_SUPPORTED_FORMATS } from "../../Chat.constants";
+import {
+  CHAT_SUPPORTED_FORMATS,
+  CHAT_MAX_FILE_COUNT,
+} from "../../Chat.constants";
 
 const Attachment = ({
   isVisible,
@@ -53,6 +58,8 @@ const Attachment = ({
     Partial<TFile>[]
   >([]);
 
+  const [withInfo, setWithInfo] = React.useState(true);
+
   const onSelectItem = (item: TSelectorItem) => {
     if (!item.id || !item.fileExst) return;
 
@@ -63,10 +70,16 @@ const Attachment = ({
       return;
     }
 
-    setTempSelectedFiles((prev) => [
-      ...prev,
-      { id: Number(item.id), title: item.label, fileExst: item.fileExst },
-    ]);
+    setTempSelectedFiles((prev) => {
+      if (prev.length >= CHAT_MAX_FILE_COUNT) {
+        return prev;
+      }
+
+      return [
+        ...prev,
+        { id: Number(item.id), title: item.label, fileExst: item.fileExst },
+      ];
+    });
   };
 
   useEffect(() => {
@@ -148,6 +161,14 @@ const Attachment = ({
             ? DeviceType.tablet
             : DeviceType.mobile
       }
+      withInfoBar={withInfo}
+      maxSelectedItems={CHAT_MAX_FILE_COUNT}
+      infoBarData={{
+        title: t("Common:SelectorFilesLimit", { count: CHAT_MAX_FILE_COUNT }),
+        icon: AttachmentReactSvgUrl,
+        onClose: () => setWithInfo(!withInfo),
+        description: t("Common:SelectorFilesLimitDescription"),
+      }}
     />
   );
 };

@@ -58,7 +58,7 @@ import { Portal } from "../../../portal";
 import { useChatStore } from "../../store/chatStore";
 import { useMessageStore } from "../../store/messageStore";
 
-import useToolsSettings from "../../hooks/useToolsSettings";
+import type useToolsSettings from "../../hooks/useToolsSettings";
 
 import styles from "./ChatInput.module.scss";
 import { Link, LinkType } from "../../../link";
@@ -151,7 +151,7 @@ const ToolsSettings = ({
         }
       }
     },
-    [MCPTools, roomId],
+    [MCPTools, roomId, setMCPTools],
   );
 
   const onGoToWebSearchPage = () => {
@@ -240,19 +240,19 @@ const ToolsSettings = ({
 
     updateWebSearchInRoom(Number(roomId), !webSearchEnabled);
     setWebSearchEnabled(!webSearchEnabled);
-  }, [roomId, webSearchEnabled, webSearchPortalEnabled]);
+  }, [roomId, webSearchEnabled, webSearchPortalEnabled, setWebSearchEnabled]);
 
   React.useEffect(() => {
     setKnowledgeSearchToolName(knowledgeSearchToolName);
-  }, [knowledgeSearchToolName]);
+  }, [knowledgeSearchToolName, setKnowledgeSearchToolName]);
 
   React.useEffect(() => {
     setWebSearchToolName(webSearchToolName);
-  }, [webSearchToolName]);
+  }, [webSearchToolName, setWebSearchToolName]);
 
   React.useEffect(() => {
     setWebCrawlingToolName(webCrawlingToolName);
-  }, [webCrawlingToolName]);
+  }, [webCrawlingToolName, setWebCrawlingToolName]);
 
   const model = React.useMemo(() => {
     const serverItems = Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
@@ -291,9 +291,14 @@ const ToolsSettings = ({
           .filter(Boolean),
       ];
 
+      const name =
+        server.serverType === ServerType.Portal
+          ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+          : server.name;
+
       return {
         key: mcpId,
-        label: server.name,
+        label: name,
         icon:
           (server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
           "",
@@ -317,6 +322,7 @@ const ToolsSettings = ({
         checked: webSearchEnabled && webSearchPortalEnabled,
         onClick: onWebSearchToggle,
         disabled: !webSearchPortalEnabled,
+        tooltipTarget: "toggle",
         getTooltipContent: () => (
           <>
             <Text>
@@ -358,7 +364,7 @@ const ToolsSettings = ({
             },
           ]
         : []),
-    ];
+    ] as ContextMenuModel[];
   }, [
     MCPTools,
     isBase,
@@ -394,6 +400,9 @@ const ToolsSettings = ({
           onHide={hideMcpTools}
           maxHeightLowerSubmenu={360}
           showDisabledItems
+          // ignoreChangeView
+          headerOnlyMobile
+          withoutBackHeaderButton
         />
       </div>
       {showManageConnections ? (

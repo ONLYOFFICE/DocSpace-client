@@ -102,15 +102,16 @@ const RenameChat = ({ chatId, prevTitle, onRenameToggle }: RenameChatProps) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          size={ButtonSize.small}
+          size={ButtonSize.normal}
           label={t("Common:SaveButton")}
           onClick={onRenameAction}
           scale
           primary
           isLoading={isLoading}
+          isDisabled={!newName || prevTitle === newName}
         />
         <Button
-          size={ButtonSize.small}
+          size={ButtonSize.normal}
           label={t("Common:CancelButton")}
           onClick={onRenameToggle}
           scale

@@ -95,5 +95,9 @@
   "SubmenuHistory": "历史记录",
   "UserFileUpdated": "文件已更新。",
   "Users": "用户",
-  "Versions": "版本"
+  "Versions": "版本",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> 智能体已创建",
+  "Resolution": "分辨率",
+  "AgentRenamed": "智能体<1>«{{oldRoomTitle}}»</1>已重命名为<2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "在此处查看 AI 智能体详情"
 }

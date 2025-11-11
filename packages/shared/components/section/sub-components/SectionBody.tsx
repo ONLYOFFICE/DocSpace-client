@@ -51,6 +51,7 @@ const SectionBody = React.memo(
     withoutFooter,
     onDragLeaveEmpty,
     onDragOverEmpty,
+    fullHeightBody,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -107,6 +108,7 @@ const SectionBody = React.memo(
             [styles.isProfileView]: viewAs === "profile",
             [styles.isFormGallery]: isFormGallery,
             [styles.isStudio]: settingsStudio,
+            [styles.fullHeightBody]: fullHeightBody,
             [styles.common]: true,
           },
           "section-body",

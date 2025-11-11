@@ -291,9 +291,14 @@ const ToolsSettings = ({
           .filter(Boolean),
       ];
 
+      const name =
+        server.serverType === ServerType.Portal
+          ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+          : server.name;
+
       return {
         key: mcpId,
-        label: server.name,
+        label: name,
         icon:
           (server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
           "",

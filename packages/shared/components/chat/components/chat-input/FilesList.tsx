@@ -34,7 +34,7 @@ import { Text } from "../../../text";
 import { IconButton } from "../../../icon-button";
 import { Scrollbar } from "../../../scrollbar";
 
-import { FilesListProps } from "../../Chat.types";
+import type { FilesListProps } from "../../Chat.types";
 
 import styles from "./ChatInput.module.scss";
 

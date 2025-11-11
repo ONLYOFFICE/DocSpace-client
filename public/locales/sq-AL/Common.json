@@ -1012,7 +1012,6 @@
   "AskAI": "Pyete IA-në",
   "CannotGuaranteeSecurity": "Ne nuk mund të garantojmë praktikat e sigurisë ose të privatësisë së integrimeve të palëve të treta.",
   "ChatExported": "Biseda <1>{{title}}</1> u eksportua në skedarin: <2>{{fileName}}</2>",
-  "CheckAIInfo": "Biseda me inteligjencën artificiale mund të bëjë gabime. Kontrolloni informacionin e rëndësishëm.",
   "ChooseAIAgent": "Zgjidhni një agjent të inteligjencës artificiale",
   "ChooseAIAgentDescription": "Zgjidhni agjentin ku dëshironi të bisedoni me IA-në rreth skedarit të zgjedhur. Mund të zgjidhni një agjent ekzistues ose të krijoni një të ri.",
   "ConnectMCPServers": "Për të përdorur menaxhimin e lidhjes, duhet të lidhni serverat MCP brenda cilësimeve të dhomës.",

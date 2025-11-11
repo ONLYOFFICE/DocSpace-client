@@ -74,17 +74,23 @@ const VirtualList = ({
 
       let index = currentIndexRef.current;
 
+      if (!children || !Array.isArray(children)) {
+        return;
+      }
+
       switch (event.code) {
-        case "ArrowDown":
-          index += 1;
+        case "ArrowDown": {
+          if (children?.[index + 1]) index += 1;
+          else index = 0;
           break;
+        }
+
         case "ArrowUp":
-          index -= 1;
+          if (children?.[index - 1]) index -= 1;
+          else index = children.length - 1;
           break;
         case "Enter":
           return (
-            children &&
-            Array.isArray(children) &&
             children[index] &&
             React.isValidElement(children?.[index]) &&
             children?.[index]?.props?.onClick()

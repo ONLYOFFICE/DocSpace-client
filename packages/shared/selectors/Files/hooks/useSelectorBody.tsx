@@ -125,6 +125,7 @@ const useSelectorBody = ({
   withInit,
 
   isMultiSelect,
+  maxSelectedItems,
 
   selectedItemType,
 }: Omit<FilesSelectorProps, "withSearch" | "onSubmit"> &
@@ -209,17 +210,17 @@ const useSelectorBody = ({
   const emptyScreenHeader = isEmptyFilesRootScreen
     ? t("Common:SelectorEmptyScreenHeader")
     : isEmptyAgentsRootScreen
-    ? t("Common:EmptyRoomsHeaderAgent")
-    : t("Common:EmptyRoomsHeader");
+      ? t("Common:EmptyRoomsHeaderAgent")
+      : t("Common:EmptyRoomsHeader");
   const emptyScreenDescription = isEmptyFilesRootScreen
     ? ""
     : isEmptyAgentsRootScreen
-    ? t("Common:EmptyRoomsDescriptionTextAgent", {
-        sectionName: t("Common:AIAgents"),
-      })
-    : t("Common:EmptyRoomsDescriptionText", {
-        sectionName: t("Common:Rooms"),
-      });
+      ? t("Common:EmptyRoomsDescriptionTextAgent", {
+          sectionName: t("Common:AIAgents"),
+        })
+      : t("Common:EmptyRoomsDescriptionText", {
+          sectionName: t("Common:Rooms"),
+        });
 
   const SelectorBody = (
     <Selector
@@ -231,6 +232,7 @@ const useSelectorBody = ({
       {...footerCheckboxProps}
       {...breadCrumbsProps}
       isMultiSelect={isMultiSelect ?? false}
+      maxSelectedItems={maxSelectedItems}
       items={items}
       onSelect={onSelect}
       emptyScreenImage={

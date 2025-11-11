@@ -120,6 +120,7 @@ const Selector = ({
   renderCustomItem,
   isMultiSelect,
   selectedItems,
+  maxSelectedItems,
 
   onSelect,
 
@@ -186,6 +187,14 @@ const Selector = ({
 
   const [requestRunning, setRequestRunning] = React.useState(false);
 
+  const maxSelectableCount =
+    typeof maxSelectedItems === "number" && maxSelectedItems > 0
+      ? maxSelectedItems
+      : null;
+
+  const isLimitReached = (count: number) =>
+    maxSelectableCount !== null && count >= maxSelectableCount;
+
   const onSubmitAction = React.useCallback(
     async (item?: TSelectorItem | React.MouseEvent, fromCallback?: boolean) => {
       setRequestRunning(true);
@@ -209,83 +218,104 @@ const Selector = ({
   );
 
   const onSelectAction = (item: TSelectorItem, isDoubleClick: boolean) => {
-    onSelect?.(
-      {
-        ...item,
-      },
-      isDoubleClick,
-      () => onSubmitAction(item, true),
-    );
+    const emitSelection = (nextSelected?: boolean) => {
+      if (!onSelect) return;
+
+      const payload =
+        typeof nextSelected === "boolean"
+          ? { ...item, isSelected: nextSelected }
+          : { ...item };
+
+      onSelect(payload, isDoubleClick, () => onSubmitAction(item, true));
+    };
 
     if (isMultiSelect) {
-      if (item.disableMultiSelect) return;
+      let selectionPrevented = false;
+      let itemWillBeSelected = Boolean(item.isSelected);
 
-      if (item.isSelected) {
-        setNewSelectedItems((value) => {
-          const newValue = value.filter((x) => x.id !== item.id);
+      setNewSelectedItems((value) => {
+        const alreadySelected = value.some((x) => x.id === item.id);
+
+        if (alreadySelected) {
+          itemWillBeSelected = false;
+          return value.filter((x) => x.id !== item.id);
+        }
+
+        if (item.disableMultiSelect) {
+          selectionPrevented = true;
+          itemWillBeSelected = Boolean(item.isSelected);
+          return value;
+        }
+
+        if (isLimitReached(value.length)) {
+          selectionPrevented = true;
+          itemWillBeSelected = Boolean(item.isSelected);
+          return value;
+        }
+
+        itemWillBeSelected = true;
+        return [...value, { ...item }];
+      });
+
+      if (selectionPrevented) {
+        emitSelection(itemWillBeSelected);
+        return;
+      }
+
+      if (activeTabId) {
+        setSelectedTabItems((value) => {
+          const newValue = { ...value };
+          const tabItems = newValue[activeTabId] ?? [];
+
+          if (itemWillBeSelected) {
+            if (!tabItems.some((x) => x.id === item.id)) {
+              newValue[activeTabId] = [...tabItems, item];
+            }
+          } else {
+            newValue[activeTabId] = tabItems.filter((x) => x.id !== item.id);
+          }
 
           return newValue;
         });
-        if (activeTabId) {
-          setSelectedTabItems((value) => {
-            const newValue = { ...value };
-            newValue[activeTabId] = newValue[activeTabId].filter(
-              (x) => x.id !== item.id,
-            );
-
-            return newValue;
-          });
-        }
-      } else {
-        setNewSelectedItems((value) => {
-          value.push({
-            ...item,
-          });
-
-          return [...value];
-        });
-        if (activeTabId) {
-          setSelectedTabItems((value) => {
-            const newValue = { ...value };
-
-            if (newValue[activeTabId]) newValue[activeTabId].push(item);
-            else newValue[activeTabId] = [{ ...item }];
-
-            return newValue;
-          });
-        }
       }
+
       setRenderedItems((valueProp) => {
         const value = [...valueProp];
         const idx = value.findIndex((x) => item.id === x.id);
 
         if (idx === -1) return value;
 
-        value[idx] = { ...value[idx], isSelected: !value[idx].isSelected };
+        value[idx] = { ...value[idx], isSelected: itemWillBeSelected };
 
         return value;
       });
+
+      emitSelection(itemWillBeSelected);
+
+      return;
+    }
+
+    emitSelection(!item.isSelected);
+
+    setRenderedItems((value) => {
+      const idx = value.findIndex((x) => item.id === x.id);
+
+      const newValue = value.map((i: TSelectorItem) => ({
+        ...i,
+        isSelected: false,
+      }));
+
+      if (idx === -1) return newValue;
+
+      newValue[idx].isSelected = !item.isSelected;
+
+      return [...newValue];
+    });
+
+    if (item.isSelected && !isDoubleClick) {
+      setNewSelectedItems([]);
     } else {
-      setRenderedItems((value) => {
-        const idx = value.findIndex((x) => item.id === x.id);
-
-        const newValue = value.map((i: TSelectorItem) => ({
-          ...i,
-          isSelected: false,
-        }));
-
-        if (idx === -1) return newValue;
-
-        newValue[idx].isSelected = !item.isSelected;
-
-        return [...newValue];
-      });
-
-      if (item.isSelected && !isDoubleClick) {
-        setNewSelectedItems([]);
-      } else {
-        setNewSelectedItems([item]);
-      }
+      setNewSelectedItems([item]);
     }
   };
 
@@ -294,68 +324,119 @@ const Selector = ({
 
     if (!items) return;
 
+    const selectableItems = items
+      .map((x) => ({ ...x }))
+      .filter((x) => !x.isDisabled && !x.disableMultiSelect);
+
     const query =
       activeTabId && selectedTabItems[activeTabId]
         ? selectedTabItems[activeTabId].length === 0 ||
-          selectedTabItems[activeTabId].length !==
-            items.filter((i) => !i.isDisabled).length
+          selectedTabItems[activeTabId].length !== selectableItems.length
         : newSelectedItems.length === 0 ||
-          newSelectedItems.length !== items.filter((i) => !i.isDisabled).length;
+          newSelectedItems.length !== selectableItems.length;
 
     if (query) {
-      const cloneItems = items
-        .map((x) => ({ ...x }))
-        .filter((x) => !x.isDisabled);
+      let nextSelectedItemsSnapshot: TSelectorItem[] = [];
 
-      setRenderedItems((i) => {
-        const cloneRenderedItems = i.map((x) => ({
-          ...x,
-          isSelected: !x.isDisabled,
-        }));
+      setNewSelectedItems((value) => {
+        const outsideCurrent = activeTabId
+          ? value.filter(
+              (selected) =>
+                items.findIndex((item) => item.id === selected.id) === -1,
+            )
+          : [];
+        const selectedWithinCurrent = activeTabId
+          ? value.filter(
+              (selected) =>
+                items.findIndex((item) => item.id === selected.id) !== -1,
+            )
+          : [];
 
-        return cloneRenderedItems;
+        const next = [...outsideCurrent];
+        const selectedIds = new Set(
+          next
+            .map((selected) => selected.id)
+            .filter(
+              (id): id is string | number => id !== undefined && id !== null,
+            ),
+        );
+
+        const addItemToSelection = (candidate: TSelectorItem) => {
+          const candidateId = candidate.id;
+          if (candidateId === undefined || candidateId === null) return;
+          if (selectedIds.has(candidateId)) return;
+          if (isLimitReached(next.length)) {
+            return;
+          }
+
+          next.push({ ...candidate });
+          selectedIds.add(candidateId);
+        };
+
+        selectedWithinCurrent.forEach(addItemToSelection);
+        selectableItems.forEach(addItemToSelection);
+
+        nextSelectedItemsSnapshot = next;
+
+        return next;
       });
+
+      const selectedIds = new Set(
+        nextSelectedItemsSnapshot
+          .map((selected) => selected.id)
+          .filter(
+            (id): id is string | number => id !== undefined && id !== null,
+          ),
+      );
+
+      setRenderedItems((rendered) =>
+        rendered.map((x) => {
+          const itemId = x.id;
+          const isSelected =
+            !x.isDisabled &&
+            itemId !== undefined &&
+            itemId !== null &&
+            selectedIds.has(itemId);
+
+          return { ...x, isSelected };
+        }),
+      );
+
       if (activeTabId) {
         setSelectedTabItems((value) => {
           const newValue = { ...value };
-
-          newValue[activeTabId] = [...cloneItems];
-
+          newValue[activeTabId] = selectableItems.filter(({ id }) => {
+            if (id === undefined || id === null) return false;
+            return selectedIds.has(id);
+          });
           return newValue;
         });
-        setNewSelectedItems((value) => [...value, ...cloneItems]);
-      } else {
-        setNewSelectedItems(cloneItems);
       }
+
+      return;
+    }
+
+    setRenderedItems((rendered) =>
+      rendered.map((x) => ({
+        ...x,
+        isSelected: false,
+      })),
+    );
+
+    if (activeTabId) {
+      setSelectedTabItems((value) => {
+        const newValue = { ...value };
+
+        newValue[activeTabId] = [];
+
+        return newValue;
+      });
+
+      setNewSelectedItems((value) =>
+        value.filter((v) => items.findIndex((i) => i.id === v.id) === -1),
+      );
     } else {
-      setRenderedItems((i) => {
-        const cloneRenderedItems = i.map((x) => ({
-          ...x,
-          isSelected: false,
-        }));
-
-        return cloneRenderedItems;
-      });
-
-      if (activeTabId) {
-        setSelectedTabItems((value) => {
-          const newValue = { ...value };
-
-          newValue[activeTabId] = [];
-
-          return newValue;
-        });
-
-        setNewSelectedItems((value) => {
-          const newValue = value.filter(
-            (v) => items.findIndex((i) => i.id === v.id) === -1,
-          );
-
-          return newValue;
-        });
-      } else {
-        setNewSelectedItems([]);
-      }
+      setNewSelectedItems([]);
     }
   }, [
     activeTabId,
@@ -363,6 +444,7 @@ const Selector = ({
     newSelectedItems.length,
     onSelectAll,
     selectedTabItems,
+    maxSelectableCount,
   ]);
 
   const onChangeAccessRightsAction = React.useCallback(
@@ -474,22 +556,37 @@ const Selector = ({
         return setRenderedItems(cloneItems);
       }
 
+      const limitedSelectedItems =
+        maxSelectableCount !== null && selectedItems.length > maxSelectableCount
+          ? selectedItems.slice(0, maxSelectableCount)
+          : selectedItems;
+
+      const selectedItemIds = new Set(
+        limitedSelectedItems.map((selectedItem) => selectedItem.id),
+      );
+
       const newItems = items.map((item) => {
         const { id: itemId } = item;
 
-        const isSelected = selectedItems.some(
-          (selectedItem) => selectedItem.id === itemId,
-        );
+        const isSelected = selectedItemIds.has(itemId);
 
         return { ...item, isSelected };
       });
 
-      const cloneSelectedItems = selectedItems.map((item) => ({ ...item }));
+      const cloneSelectedItems = limitedSelectedItems.map((item) => ({
+        ...item,
+      }));
 
       setRenderedItems(newItems);
       setNewSelectedItems(cloneSelectedItems);
     }
-  }, [items, selectedItems, isMultiSelect, selectedItemProp]);
+  }, [
+    items,
+    selectedItems,
+    isMultiSelect,
+    selectedItemProp,
+    maxSelectableCount,
+  ]);
 
   const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbs
     ? {

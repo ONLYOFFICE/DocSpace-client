@@ -322,6 +322,7 @@ const ToolsSettings = ({
         checked: webSearchEnabled && webSearchPortalEnabled,
         onClick: onWebSearchToggle,
         disabled: !webSearchPortalEnabled,
+        tooltipTarget: "toggle",
         getTooltipContent: () => (
           <>
             <Text>
@@ -363,7 +364,7 @@ const ToolsSettings = ({
             },
           ]
         : []),
-    ];
+    ] as ContextMenuModel[];
   }, [
     MCPTools,
     isBase,

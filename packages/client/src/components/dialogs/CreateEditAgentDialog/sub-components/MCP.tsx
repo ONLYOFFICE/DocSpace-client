@@ -32,6 +32,8 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { MCPIcon, MCPIconSize } from "@docspace/shared/components/mcp-icon";
+
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 import type { TSelectorItem } from "@docspace/shared/components/selector";
 
@@ -78,7 +80,11 @@ const MCPSettings = ({
 
           {selectedServers?.map((server) => (
             <div className="ai-mcp-item" key={server.id}>
-              <img src={server.icon} alt="DocSpace" />
+              <MCPIcon
+                title={server.label}
+                imgSrc={server.icon}
+                size={MCPIconSize.Small}
+              />
               <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
                 {server.label}
               </Text>

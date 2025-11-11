@@ -22,7 +22,7 @@
   "IntegrationName": "Nom de l'intégration",
   "IntegrationURL": "URL d'intégration",
   "MCPServer": "Serveur MCP",
-  "MCPSettingDescription": "Le serveur MCP {{organizationName}} {{productName}} rationalise les flux de travail pilotés par l'IA, en intégrant les LLM avec des systèmes externes pour une gestion de documents efficace et sécurisée.",
+  "MCPProductDescription": "Le serveur MCP {{organizationName}} {{productName}} rationalise les flux de travail pilotés par l'IA, en intégrant les LLM avec des systèmes externes pour une gestion de documents efficace et sécurisée.",
   "MCPSettingTitle": "Serveurs MCP",
   "Provider": "Fournisseur",
   "ProviderAddedSuccess": "Fournisseur ajouté avec succès",

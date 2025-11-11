@@ -241,10 +241,7 @@ const MCPServersComponent = ({
   return (
     <div className={styles.mcpServers}>
       <Text className={styles.description}>
-        {t("AISettings:MCPSettingDescription", {
-          organizationName: t("Common:OrganizationName"),
-          productName: t("Common:ProductName"),
-        })}
+        {t("AISettings:MCPSettingsDescription")}
       </Text>
       {aiSettingsUrl ? (
         <Link

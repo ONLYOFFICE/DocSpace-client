@@ -238,7 +238,7 @@ const ChatInput = ({
           className={styles.chatInputText}
           noSelect
         >
-          {t("Common:CheckAIInfo")}
+          {t("Common:AICanMakeMistakes")}
         </Text>
       ) : null}
     </>

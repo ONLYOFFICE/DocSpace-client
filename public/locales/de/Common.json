@@ -1012,7 +1012,6 @@
   "AskAI": "KI fragen",
   "CannotGuaranteeSecurity": "Wir können die Sicherheit und die Datenschutzpraktiken von Drittanbieterintegrationen nicht garantieren.",
   "ChatExported": "Chat <1>{{title}}</1> exportiert in Datei: <2>{{fileName}}</2>",
-  "CheckAIInfo": "KI-Chat kann Fehler machen. Überprüfen Sie wichtige Informationen.",
   "ChooseAIAgent": "Einen KI-Agenten wählen",
   "ChooseAIAgentDescription": "Wählen Sie den Agenten aus, mit dem Sie über die ausgewählte Datei mithilfe der KI chatten möchten. Sie können einen vorhandenen Agenten auswählen oder einen neuen erstellen.",
   "ConnectMCPServers": "Um die Verbindungsverwaltung zu nutzen, müssen Sie die MCP-Server in den Raumeinstellungen verbinden.",

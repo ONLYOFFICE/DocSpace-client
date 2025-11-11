@@ -1012,7 +1012,6 @@
   "AskAI": "询问 AI",
   "CannotGuaranteeSecurity": "我们无法保证第三方集成的安全性或隐私措施。",
   "ChatExported": "对话<1>{{title}}</1>已导出到文件：<2>{{fileName}}</2>",
-  "CheckAIInfo": "AI 对话可能出错。请检查重要信息。",
   "ChooseAIAgent": "选择 AI 智能体",
   "ChooseAIAgentDescription": "选择您想要就所选文件与 AI 对话的智能体。您可以选择现有智能体或创建新智能体。",
   "ConnectMCPServers": "要使用管理连接，您需要在房间设置中连接 MCP 服务器",

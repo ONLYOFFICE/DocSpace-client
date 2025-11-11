@@ -218,12 +218,6 @@ export const ChatStoreContextProvider = ({
     };
   }, [store]);
 
-  React.useEffect(() => {
-    return () => {
-      store.updateUrlChatId("");
-    };
-  }, [store]);
-
   return (
     <ChatStoreContext.Provider value={store}>
       {children}

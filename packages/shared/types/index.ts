@@ -319,7 +319,9 @@ declare global {
     RendererProcessVariable: {
       theme?: { id: string; system: string; type: string; addlocal: string };
     };
-    Tiff: new (arg: object) => {
+    Tiff: new (
+      arg: object,
+    ) => {
       toDataURL: () => string;
     };
     dataLayer?: Record<string, unknown>[];

@@ -211,6 +211,10 @@
       outline: none;
       @include paddingStyles;
 
+      &:has(.chat-container) {
+        padding-block: 0;
+      }
+
       .section-wrapper {
         display: flex;
         flex-direction: column;
@@ -273,6 +277,18 @@
           padding: 0px 16px 16px !important;
         }
       }
+    }
+  }
+
+  &.fullHeightBody {
+    display: flex;
+    flex-direction: column;
+
+    :global(.section-wrapper),
+    :global(.section-wrapper-content) {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
   }
 

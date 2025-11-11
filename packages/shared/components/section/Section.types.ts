@@ -75,6 +75,7 @@ export type SectionBodyProps = {
   withoutFooter?: boolean;
   onDragLeaveEmpty?: () => void;
   onDragOverEmpty?: (isDragActive: boolean) => void;
+  fullHeightBody?: boolean;
 };
 
 export type SectionContainerProps = {

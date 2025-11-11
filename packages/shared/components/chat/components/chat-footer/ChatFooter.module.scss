@@ -1,4 +1,4 @@
-/*
+/*!
  * (c) Copyright Ascensio System SIA 2009-2025
  *
  * This program is a free software product.
@@ -26,39 +26,20 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useTranslation } from "react-i18next";
+.chatFooter {
+  position: sticky;
+  bottom: 0;
 
-import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-import PublicRoomBar from "../../../public-room-bar";
+  width: 100%;
+  max-width: 700px;
 
-import { ChatInfoBlockProps } from "../../Chat.types";
-import styles from "./ChatInfoBlock.module.scss";
+  padding-bottom: 20px;
 
-export const ChatInfoBlock = ({
-  standalone,
-  isPortalAdmin,
-}: ChatInfoBlockProps) => {
-  const { t } = useTranslation("Common");
+  background: var(--background-color);
 
-  const bodyText = !isPortalAdmin
-    ? t("Common:AIDisabledInfoBlockUserDescription", {
-        productName: t("Common:ProductName"),
-      })
-    : standalone
-      ? t("Common:AIDisabledInfoBlockAdminStandaloneDescription", {
-          productName: t("Common:ProductName"),
-        })
-      : t("Common:AIDisabledInfoBlockAdminSaasDescription", {
-          productName: t("Common:ProductName"),
-        });
-
-  return (
-    <PublicRoomBar
-      className={styles.chatInfoBlock}
-      headerText={t("Common:AIFeaturesAreCurrentlyDisabled")}
-      bodyText={bodyText}
-      iconName={InfoIcon}
-    />
-  );
-};
+  z-index: 1;
+}

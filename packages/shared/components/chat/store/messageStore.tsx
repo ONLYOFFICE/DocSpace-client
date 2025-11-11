@@ -130,8 +130,9 @@ export default class MessageStore {
 
     try {
       const { items, total } = await getChatMessages(chatId, 0);
+      const reversedItems = items.reverse();
 
-      this.setMessages(items);
+      this.setMessages(reversedItems);
       this.setStartIndex(total > 100 ? 100 : total);
       this.setTotalMessages(total);
       this.setCurrentChatId(chatId);
@@ -157,8 +158,9 @@ export default class MessageStore {
         this.currentChatId,
         this.startIndex,
       );
+      const reversedItems = items.reverse();
 
-      this.setMessages([...this.messages, ...items]);
+      this.setMessages([...reversedItems, ...this.messages]);
       this.setStartIndex(this.startIndex + 100);
       this.setTotalMessages(total);
     } catch (error) {
@@ -170,7 +172,12 @@ export default class MessageStore {
   };
 
   addMessageId = (id: number) => {
-    this.messages[0] = { ...this.messages[0], id };
+    const lastIndex = this.messages.length - 1;
+
+    this.messages[lastIndex] = {
+      ...this.messages[lastIndex],
+      id,
+    };
   };
 
   addUserMessage = (message: string, files: Partial<TFile>[]) => {
@@ -189,10 +196,12 @@ export default class MessageStore {
       contents: [{ type: ContentType.Text, text: message }, ...filesContent],
     };
 
-    if (this.messages[0]?.role === RoleType.Error) {
-      this.messages[0] = newMsg;
+    const lastIndex = this.messages.length - 1;
+
+    if (this.messages[lastIndex]?.role === RoleType.Error) {
+      this.messages[lastIndex] = newMsg;
     } else {
-      this.setMessages([newMsg, ...this.messages]);
+      this.setMessages([...this.messages, newMsg]);
     }
 
     this.setTotalMessages(this.totalMessages + 1);
@@ -200,16 +209,18 @@ export default class MessageStore {
   };
 
   addNewAIMessage = (message: string) => {
-    if (this.messages[0].role === RoleType.AssistantMessage) {
+    const lastIndex = this.messages.length - 1;
+
+    if (this.messages[lastIndex].role === RoleType.AssistantMessage) {
       const newMsg: TMessage = {
-        ...this.messages[0],
+        ...this.messages[lastIndex],
         contents: [
-          ...this.messages[0].contents,
+          ...this.messages[lastIndex].contents,
           { type: ContentType.Text, text: message },
         ],
       };
 
-      this.setMessages([newMsg, ...this.messages.slice(1)]);
+      this.setMessages([...this.messages.slice(0, lastIndex), newMsg]);
       return;
     } else {
       const newMsg: TMessage = {
@@ -218,7 +229,7 @@ export default class MessageStore {
         contents: [{ type: ContentType.Text, text: message }],
       };
 
-      this.setMessages([newMsg, ...this.messages]);
+      this.setMessages([...this.messages, newMsg]);
 
       this.setTotalMessages(this.totalMessages + 1);
       this.setStartIndex(this.startIndex + 1);
@@ -226,10 +237,12 @@ export default class MessageStore {
   };
 
   continueAIMessage = (message: string) => {
+    const lastIndex = this.messages.length - 1;
+
     const msg: TMessage = {
-      ...this.messages[0],
+      ...this.messages[lastIndex],
       contents: [
-        ...this.messages[0].contents.slice(0, -1),
+        ...this.messages[lastIndex].contents.slice(0, -1),
         {
           type: ContentType.Text,
           text: message,
@@ -237,7 +250,7 @@ export default class MessageStore {
       ],
     };
 
-    this.setMessages([msg, ...this.messages.slice(1)]);
+    this.setMessages([...this.messages.slice(0, lastIndex), msg]);
   };
 
   handleMetadata = (jsonData: string) => {
@@ -250,9 +263,10 @@ export default class MessageStore {
 
   handleToolCall = (jsonData: string) => {
     const { name, arguments: args, callId, ...rest } = JSON.parse(jsonData);
+    const lastIndex = this.messages.length - 1;
 
     const shouldCreateNewMessage =
-      this.messages[0].role !== RoleType.AssistantMessage;
+      this.messages[lastIndex].role !== RoleType.AssistantMessage;
 
     const content = {
       type: ContentType.Tool,
@@ -269,23 +283,24 @@ export default class MessageStore {
         contents: [content],
       };
 
-      this.setMessages([newMsg, ...this.messages]);
+      this.setMessages([...this.messages, newMsg]);
       this.setTotalMessages(this.totalMessages + 1);
       this.setStartIndex(this.startIndex + 1);
     } else {
       const newMsg: TMessage = {
-        ...this.messages[0],
-        contents: [...this.messages[0].contents, content],
+        ...this.messages[lastIndex],
+        contents: [...this.messages[lastIndex].contents, content],
       };
 
-      this.setMessages([newMsg, ...this.messages.slice(1)]);
+      this.setMessages([...this.messages.slice(0, lastIndex), newMsg]);
     }
   };
 
   handleToolResult = (jsonData: string) => {
     const { result, callId } = JSON.parse(jsonData);
+    const lastIndex = this.messages.length - 1;
 
-    const lstMsgContents = this.messages[0].contents;
+    const lstMsgContents = this.messages[lastIndex].contents;
 
     const idx = lstMsgContents.findIndex(
       (c) => (c as TToolCallContent).callId === callId,
@@ -298,7 +313,7 @@ export default class MessageStore {
     } as TToolCallContent;
 
     const newMsg: TMessage = {
-      ...this.messages[0],
+      ...this.messages[lastIndex],
 
       contents: [
         ...lstMsgContents.slice(0, idx),
@@ -307,7 +322,7 @@ export default class MessageStore {
       ],
     };
 
-    this.setMessages([newMsg, ...this.messages.slice(1)]);
+    this.setMessages([...this.messages.slice(0, lastIndex), newMsg]);
   };
 
   handleStreamError = (jsonData: string) => {
@@ -325,7 +340,7 @@ export default class MessageStore {
       contents: [{ type: ContentType.Text, text: message }],
     };
 
-    this.setMessages([newMsg, ...this.messages]);
+    this.setMessages([...this.messages, newMsg]);
   };
 
   startStream = async (stream?: ReadableStream<Uint8Array> | null) => {
@@ -537,7 +552,7 @@ export default class MessageStore {
   };
 
   findPreviousUserMessage = (fromIndex: number) => {
-    for (let i = fromIndex + 1; i <= this.messages.length; i++) {
+    for (let i = fromIndex - 1; i >= 0; i--) {
       if (this.messages[i].role === RoleType.UserMessage)
         return this.messages[i];
     }

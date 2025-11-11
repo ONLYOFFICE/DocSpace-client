@@ -1012,7 +1012,6 @@
   "AskAI": "Pitajte AI",
   "CannotGuaranteeSecurity": "Ne možemo garantovati bezbednost ili praksu privatnosti integracija trećih strana.",
   "ChatExported": "Razgovor <1>{{title}}</1> eksportovan u fajl: <2>{{fileName}}</2>",
-  "CheckAIInfo": "AI razgovor može napraviti greške. Proverite važne informacije.",
   "ChooseAIAgent": "Izaberite AI agenta",
   "ChooseAIAgentDescription": "Izaberite agenta sa kojim želite da razgovarate sa AI o izabranoj datoteci. Možete odabrati postojećeg agenta ili kreirati novog.",
   "ConnectMCPServers": "Da biste koristili upravljanje vezom, potrebno je da povežete MCP servere unutar podešavanja sobe",

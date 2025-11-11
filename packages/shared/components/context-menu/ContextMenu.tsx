@@ -118,20 +118,6 @@ const ContextMenu = (props: ContextMenuProps) => {
     withHotkeys = true,
   } = props;
 
-  const {
-    currentIndex,
-    activeLevel,
-    activeItems,
-    setActiveItems,
-    onMouseMove,
-    setActiveHotkeysModel,
-  } = useContextMenuHotkeys({
-    visible,
-    withHotkeys,
-    model: model ?? getContextModel?.() ?? propsModel,
-    currentEvent,
-  });
-
   const onMenuClick = () => {
     setResetMenu(false);
   };
@@ -551,6 +537,21 @@ const ContextMenu = (props: ContextMenuProps) => {
   React.useImperativeHandle(ref, () => {
     return { show, hide, toggle, menuRef };
   }, [hide, show, toggle]);
+
+  const {
+    currentIndex,
+    activeLevel,
+    activeItems,
+    setActiveItems,
+    onMouseMove,
+    setActiveHotkeysModel,
+  } = useContextMenuHotkeys({
+    visible,
+    withHotkeys,
+    model: model ?? getContextModel?.() ?? propsModel,
+    currentEvent,
+    hide,
+  });
 
   const renderContextMenu = () => {
     const currentClassName = className

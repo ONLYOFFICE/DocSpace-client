@@ -25,13 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { ContextMenuModel, ContextMenuType } from "../ContextMenu.types";
+import {
+  ContextMenuModel,
+  ContextMenuRefType,
+  ContextMenuType,
+  TContextMenuValueTypeOnClick,
+} from "../ContextMenu.types";
 
 const useContextMenuHotkeys = ({
   visible,
   withHotkeys,
   model,
   currentEvent,
+  hide,
 }: {
   visible: boolean;
   withHotkeys: boolean;
@@ -43,6 +49,7 @@ const useContextMenuHotkeys = ({
     | React.ChangeEvent<HTMLInputElement>
     | Event
   >;
+  hide: ContextMenuRefType["hide"];
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeLevel, setActiveLevel] = useState(0);
@@ -53,8 +60,27 @@ const useContextMenuHotkeys = ({
     null,
   );
 
+  const menuModel = activeModel ?? model;
+
+  const onOpenSubMenu = () => {
+    const currentItem = menuModel[currentIndex];
+    if (
+      !("items" in currentItem) ||
+      !currentItem.items ||
+      !currentItem.items.length
+    ) {
+      return;
+    }
+
+    setCurrentIndex(0);
+    setActiveLevel((prevLevel) => prevLevel + 1);
+    setActiveItems((items) =>
+      items && items.length ? [...items, currentItem] : [currentItem],
+    );
+    setActiveModel(currentItem.items);
+  };
+
   const onKeyDown = (e: KeyboardEvent) => {
-    const menuModel = activeModel ?? model;
     if (!currentEvent.current || !menuModel || !withHotkeys) return e;
 
     const clearModel = [];
@@ -94,23 +120,7 @@ const useContextMenuHotkeys = ({
         }
         break;
       case "ArrowRight":
-        {
-          const currentItem = menuModel[currentIndex];
-          if (
-            !("items" in currentItem) ||
-            !currentItem.items ||
-            !currentItem.items.length
-          ) {
-            return;
-          }
-
-          setCurrentIndex(0);
-          setActiveLevel((prevLevel) => prevLevel + 1);
-          setActiveItems((items) =>
-            items && items.length ? [...items, currentItem] : [currentItem],
-          );
-          setActiveModel(currentItem.items);
-        }
+        onOpenSubMenu();
         break;
       case "ArrowLeft":
         {
@@ -143,14 +153,20 @@ const useContextMenuHotkeys = ({
           });
         }
         break;
-      // case "Enter":
-      //   return (
-      //     children &&
-      //     Array.isArray(children) &&
-      //     children[index] &&
-      //     React.isValidElement(children?.[index]) &&
-      //     children?.[index]?.props?.onClick()
-      //   );
+      case "Enter": {
+        const currentItem = clearModel[clearModelIndex];
+        if ("items" in currentItem && currentItem.items) {
+          onOpenSubMenu();
+        } else if ("onClick" in currentItem && currentItem.onClick) {
+          currentItem.onClick(e as unknown as TContextMenuValueTypeOnClick);
+          hide(e);
+        }
+        break;
+      }
+      case "Escape": {
+        hide(e);
+        break;
+      }
       default:
         return;
     }

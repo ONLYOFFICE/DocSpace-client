@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const fs = require("fs");
 const path = require("path");
+const {
+  cleanFailedTests,
+} = require("../../../common/scripts/clean-failed-tests");
 
 const REPORT_PATH = path.resolve(
   __dirname,
@@ -33,111 +35,4 @@ const REPORT_PATH = path.resolve(
 );
 const PACKAGES_DIR = path.resolve(__dirname, "../..");
 
-const extractRelativePath = (attachmentPath) => {
-  const sdkIndex = attachmentPath.lastIndexOf("/login");
-  return sdkIndex !== -1
-    ? attachmentPath.substring(sdkIndex + 1)
-    : attachmentPath;
-};
-
-const getImageAttachments = (attachments = []) => {
-  return attachments.filter(
-    (attachment) =>
-      attachment.contentType?.startsWith("image/") && attachment.path,
-  );
-};
-
-const extractFailedTests = (reportData) => {
-  const failedTests = [];
-
-  for (const suite of reportData.suites || []) {
-    for (const spec of suite.specs || []) {
-      if (spec.ok !== false) continue;
-
-      for (const test of spec.tests || []) {
-        for (const result of test.results || []) {
-          if (result.status !== "failed") continue;
-
-          const imageAttachments = getImageAttachments(result.attachments);
-
-          if (imageAttachments.length > 0) {
-            const name = spec.title || test.title || "Unknown test";
-            const imagePath = extractRelativePath(imageAttachments[0].path);
-
-            failedTests.push({ name, imagePath });
-          }
-        }
-      }
-    }
-  }
-
-  return failedTests;
-};
-
-const deleteFailedTestImages = (failedTests) => {
-  let deleted = 0;
-  let errors = 0;
-
-  for (const { imagePath } of failedTests) {
-    try {
-      const fullImagePath = path.join(PACKAGES_DIR, imagePath);
-
-      if (fs.existsSync(fullImagePath)) {
-        fs.unlinkSync(fullImagePath);
-        deleted++;
-      }
-    } catch (error) {
-      errors++;
-      console.error(
-        `Failed to delete ${path.basename(imagePath)}: ${error.message}`,
-      );
-    }
-  }
-
-  return { deleted, errors };
-};
-
-const cleanFailedTests = async () => {
-  try {
-    if (!fs.existsSync(REPORT_PATH)) {
-      console.error(`Test report not found: ${REPORT_PATH}`);
-      return false;
-    }
-
-    let reportData;
-
-    try {
-      const reportContent = fs.readFileSync(REPORT_PATH, "utf8");
-      reportData = JSON.parse(reportContent);
-    } catch (parseError) {
-      console.error(`Failed to parse JSON report: ${parseError.message}`);
-      return false;
-    }
-
-    const failedTests = extractFailedTests(reportData);
-
-    if (failedTests.length === 0) {
-      return true;
-    }
-
-    console.log(`\nFound ${failedTests.length} failed tests`);
-
-    const { deleted, errors } = deleteFailedTestImages(failedTests);
-
-    console.log(`\nSummary:`);
-    console.log(`   • Images deleted: ${deleted}`);
-    console.log(`   • Errors: ${errors}`);
-    return true;
-  } catch (error) {
-    console.error(`Unexpected error: ${error.message}`);
-    console.error(error.stack);
-    return false;
-  }
-};
-
-cleanFailedTests()
-  .then((success) => process.exit(success ? 0 : 1))
-  .catch((err) => {
-    console.error("Error:", err);
-    process.exit(1);
-  });
+process.exit(cleanFailedTests(REPORT_PATH, PACKAGES_DIR, "login") ? 0 : 1);

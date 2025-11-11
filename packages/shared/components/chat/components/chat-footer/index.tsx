@@ -26,39 +26,39 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useTranslation } from "react-i18next";
+import { ChatFooterProps } from "../../Chat.types";
+import { ChatInfoBlock } from "../chat-info-block";
+import ChatInput from "../chat-input";
+import styles from "./ChatFooter.module.scss";
 
-import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
-
-import PublicRoomBar from "../../../public-room-bar";
-
-import { ChatInfoBlockProps } from "../../Chat.types";
-import styles from "./ChatInfoBlock.module.scss";
-
-export const ChatInfoBlock = ({
-  standalone,
+const ChatFooter = ({
+  isLoading,
+  aiReady,
   isPortalAdmin,
-}: ChatInfoBlockProps) => {
-  const { t } = useTranslation("Common");
-
-  const bodyText = !isPortalAdmin
-    ? t("Common:AIDisabledInfoBlockUserDescription", {
-        productName: t("Common:ProductName"),
-      })
-    : standalone
-      ? t("Common:AIDisabledInfoBlockAdminStandaloneDescription", {
-          productName: t("Common:ProductName"),
-        })
-      : t("Common:AIDisabledInfoBlockAdminSaasDescription", {
-          productName: t("Common:ProductName"),
-        });
-
+  standalone,
+  attachmentFile,
+  clearAttachmentFile,
+  getIcon,
+  selectedModel,
+  toolsSettings,
+}: ChatFooterProps) => {
   return (
-    <PublicRoomBar
-      className={styles.chatInfoBlock}
-      headerText={t("Common:AIFeaturesAreCurrentlyDisabled")}
-      bodyText={bodyText}
-      iconName={InfoIcon}
-    />
+    <div className={styles.chatFooter}>
+      {!isLoading && !aiReady ? (
+        <ChatInfoBlock standalone={standalone} isPortalAdmin={isPortalAdmin} />
+      ) : null}
+      <ChatInput
+        attachmentFile={attachmentFile}
+        clearAttachmentFile={clearAttachmentFile}
+        isLoading={isLoading}
+        getIcon={getIcon}
+        selectedModel={selectedModel}
+        toolsSettings={toolsSettings}
+        isPortalAdmin={isPortalAdmin}
+        aiReady={aiReady}
+      />
+    </div>
   );
 };
+
+export default ChatFooter;

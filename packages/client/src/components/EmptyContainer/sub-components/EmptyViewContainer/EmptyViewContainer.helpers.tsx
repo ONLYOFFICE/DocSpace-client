@@ -105,7 +105,7 @@ export const getDescription = (
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
-  isDocSpaceAdmin: boolean = false,
+  isPortalAdmin: boolean = false,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -124,7 +124,7 @@ export const getDescription = (
       security,
       standalone,
       aiReady,
-      isDocSpaceAdmin,
+      isPortalAdmin,
     );
 
   if (isFolder)
@@ -155,7 +155,7 @@ export const getTitle = (
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
-  isDocSpaceAdmin: boolean = false,
+  isPortalAdmin: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
@@ -172,7 +172,7 @@ export const getTitle = (
       rootFolderType,
       aiReady,
       standalone,
-      isDocSpaceAdmin,
+      isPortalAdmin,
     );
 
   if (isFolder)
@@ -224,7 +224,7 @@ export const getOptions = (
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
-  isDocSpaceAdmin: boolean = false,
+  isPortalAdmin: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -462,7 +462,7 @@ export const getOptions = (
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
       .with([FolderType.AIAgents, P._, P._], () =>
-        match([aiReady, standalone, isDocSpaceAdmin])
+        match([aiReady, standalone, isPortalAdmin])
           .with([true, P._, P.when(() => isAdmin(access))], () => [
             createAIAgent,
           ])

@@ -156,9 +156,16 @@ export type ChatInputProps = {
   selectedModel: string;
 
   toolsSettings: ReturnType<typeof useToolsSettings>;
-  isAdmin?: boolean;
+  isPortalAdmin: boolean;
   aiReady: boolean;
 };
+
+export type ChatInfoBlockProps = {
+  standalone: boolean;
+  isPortalAdmin: boolean;
+};
+
+export type ChatFooterProps = ChatInputProps & ChatInfoBlockProps;
 
 export type ChatContainerProps = {
   children: React.ReactNode;

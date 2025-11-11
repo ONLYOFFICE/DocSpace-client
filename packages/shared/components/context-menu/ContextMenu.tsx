@@ -495,6 +495,8 @@ const ContextMenu = (props: ContextMenuProps) => {
     if (items && items.length > 0) {
       items.forEach((item) => {
         if (
+          item &&
+          typeof item === "object" &&
           !("isSeparator" in item && item.isSeparator) &&
           "label" in item &&
           item.label
@@ -519,7 +521,11 @@ const ContextMenu = (props: ContextMenuProps) => {
 
     if (currentItem) {
       const item = propsModel.find(
-        (item) => "label" in item && item.label === currentItem.header,
+        (item) =>
+          item &&
+          typeof item === "object" &&
+          "label" in item &&
+          item.label === currentItem.header,
       );
       if (item && "items" in item && item.items?.length) {
         setMobileSubMenuItems(item?.items);

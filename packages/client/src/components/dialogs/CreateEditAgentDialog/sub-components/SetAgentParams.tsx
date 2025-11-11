@@ -49,6 +49,7 @@ import {
   TAgentIconParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
+import type { TSelectorItem } from "@docspace/shared/components/selector";
 import { Nullable } from "@docspace/shared/types";
 import { TAgent } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
@@ -142,6 +143,9 @@ type setAgentParamsProps = {
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: VoidFunction;
   portalMcpServerId?: string;
+  onClickAction?: () => void;
+  selectedServers?: TSelectorItem[];
+  setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 
   // Store props
   folderFormValidation?: SettingsStore["folderFormValidation"];
@@ -192,6 +196,9 @@ const setAgentParams = ({
   isDefaultAIAgentsQuotaSet,
   infoPanelSelection,
   portalMcpServerId,
+  onClickAction,
+  selectedServers,
+  setSelectedServers,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -501,6 +508,9 @@ const setAgentParams = ({
         setAgentParams={setAgentParams}
         agentParams={agentParams}
         portalMcpServerId={portalMcpServerId}
+        onClickAction={onClickAction}
+        selectedServers={selectedServers}
+        setSelectedServers={setSelectedServers}
       />
 
       {isDefaultAIAgentsQuotaSet ? (

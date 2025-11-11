@@ -50,7 +50,7 @@ const ChatMessageBody = ({
   isLoading,
 }: MessageBodyProps) => {
   const {
-    reversedMessagesList,
+    messages,
     isStreamRunning,
     isRequestRunning,
     fetchNextMessages,
@@ -62,7 +62,7 @@ const ChatMessageBody = ({
 
   const chatBodyRef = useRef<HTMLDivElement>(null);
 
-  const isEmpty = reversedMessagesList.length === 0 || isLoading;
+  const isEmpty = messages.length === 0 || isLoading;
 
   useEffect(() => {
     if (!currentChat?.id) return;
@@ -89,7 +89,7 @@ const ChatMessageBody = ({
     isEmpty,
     fetchNextMessages,
     currentChat,
-    messages: reversedMessagesList,
+    messages,
   });
 
   return (
@@ -105,7 +105,13 @@ const ChatMessageBody = ({
           className={classNames(styles.chatMessageContainer)}
           ref={chatBodyRef}
         >
-          {reversedMessagesList.map((message, index) => {
+          {!isStreamRunning && isRequestRunning ? (
+            <div className={styles.chatLoader}>
+              <Loader type={LoaderTypes.track} />
+              {t("Common:Analyzing")}
+            </div>
+          ) : null}
+          {messages.map((message, index) => {
             return (
               <Message
                 key={`${currentChat?.id}-${message.createdOn}-${index * 2}`}
@@ -117,12 +123,6 @@ const ChatMessageBody = ({
               />
             );
           })}
-          {!isStreamRunning && isRequestRunning ? (
-            <div className={styles.chatLoader}>
-              <Loader type={LoaderTypes.track} />
-              {t("Common:Analyzing")}
-            </div>
-          ) : null}
         </div>
       )}
     </div>

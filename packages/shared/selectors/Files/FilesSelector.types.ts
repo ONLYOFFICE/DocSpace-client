@@ -287,4 +287,5 @@ export type FilesSelectorProps = TInfoBar &
     isMultiSelect?: boolean;
     onSelectItem?: (item: TSelectorItem) => void;
     maxSelectedItems?: number;
+    renderInPortal?: boolean;
   };

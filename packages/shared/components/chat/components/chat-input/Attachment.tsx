@@ -169,6 +169,7 @@ const Attachment = ({
         onClose: () => setWithInfo(!withInfo),
         description: t("Common:SelectorFilesLimitDescription"),
       }}
+      renderInPortal
     />
   );
 };

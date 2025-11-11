@@ -140,7 +140,7 @@ const InjectedEmptyViewContainer = inject<
       logoText,
       isKnowledgeTab: aiRoomStore.isKnowledgeTab,
       isResultsTab: aiRoomStore.isResultTab,
-      isDocSpaceAdmin: authStore.isAdmin,
+      isPortalAdmin: authStore.isAdmin,
       aiReady: aiConfig?.aiReady,
       standalone,
     };

@@ -185,6 +185,7 @@ export interface ContextMenuProps {
   dataTestId?: string;
   maxHeightLowerSubmenu?: number;
   showDisabledItems?: boolean;
+  withoutBackHeaderButton?: boolean;
 }
 
 export type TContextMenuRef = {

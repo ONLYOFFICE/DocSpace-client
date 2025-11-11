@@ -211,7 +211,8 @@ const EditAgentDialog = ({
         <ModalDialog.Container>
           <MCPServersSelector
             onSubmit={onSubmit}
-            onClose={() => setIsMCPSelectorVisible(false)}
+            onClose={onCloseAction}
+            onBackClick={() => setIsMCPSelectorVisible(false)}
             initedSelectedServers={initSelectedServers}
           />
         </ModalDialog.Container>

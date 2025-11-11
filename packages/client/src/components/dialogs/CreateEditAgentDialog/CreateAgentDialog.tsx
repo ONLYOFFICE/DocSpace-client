@@ -165,7 +165,8 @@ const CreateAgentDialog = ({
         <ModalDialog.Container>
           <MCPServersSelector
             onSubmit={onSubmit}
-            onClose={() => setIsMCPSelectorVisible(false)}
+            onClose={onCloseDialog}
+            onBackClick={() => setIsMCPSelectorVisible(false)}
             initedSelectedServers={initSelectedServers}
           />
         </ModalDialog.Container>

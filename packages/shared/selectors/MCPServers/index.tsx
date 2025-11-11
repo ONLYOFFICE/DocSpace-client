@@ -40,6 +40,7 @@ import { useTheme } from "../../hooks/useTheme";
 type MCPServersSelectorProps = {
   onSubmit: (servers: TSelectorItem[]) => void;
   onClose: VoidFunction;
+  onBackClick: VoidFunction;
 
   initedSelectedServers?: string[];
 };
@@ -48,6 +49,7 @@ const MCPServersSelector = ({
   initedSelectedServers,
   onSubmit,
   onClose,
+  onBackClick,
 }: MCPServersSelectorProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -183,13 +185,13 @@ const MCPServersSelector = ({
       headerProps={{
         headerLabel: t("Common:ListMCPServers"),
         withoutBackButton: false,
-        onBackClick: onClose,
+        onBackClick: onBackClick,
         onCloseClick: onClose,
         withoutBorder: false,
       }}
       withCancelButton
       cancelButtonLabel={t("Common:CancelButton")}
-      onCancel={onClose}
+      onCancel={onBackClick}
       selectedItems={initedSelectedServersItems}
     />
   );

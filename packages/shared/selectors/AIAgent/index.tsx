@@ -112,6 +112,8 @@ const AIAgentSelectorComponent = ({
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
+    if (item && "security" in item && !item.security?.UseChat) return;
+
     setSelectedItem((el) => {
       if (el?.id === item.id) return null;
 

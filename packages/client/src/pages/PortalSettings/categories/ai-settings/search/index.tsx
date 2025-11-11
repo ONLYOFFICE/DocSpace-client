@@ -48,248 +48,248 @@ import generalStyles from "../AISettings.module.scss";
 import styles from "./Search.module.scss";
 
 type TSearchProps = {
-	webSearchInitied?: AISettingsStore["webSearchInitied"];
-	webSearchConfig?: AISettingsStore["webSearchConfig"];
-	restoreWebSearch?: AISettingsStore["restoreWebSearch"];
-	updateWebSearch?: AISettingsStore["updateWebSearch"];
-	hasAIProviders?: AISettingsStore["hasAIProviders"];
-	aiSettingsUrl?: string;
-	getAIConfig?: SettingsStore["getAIConfig"];
+  webSearchInitied?: AISettingsStore["webSearchInitied"];
+  webSearchConfig?: AISettingsStore["webSearchConfig"];
+  restoreWebSearch?: AISettingsStore["restoreWebSearch"];
+  updateWebSearch?: AISettingsStore["updateWebSearch"];
+  hasAIProviders?: AISettingsStore["hasAIProviders"];
+  aiSettingsUrl?: string;
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
 
 const SearchComponent = ({
-	webSearchInitied,
-	webSearchConfig,
-	restoreWebSearch,
-	updateWebSearch,
-	hasAIProviders,
-	aiSettingsUrl,
-	getAIConfig,
+  webSearchInitied,
+  webSearchConfig,
+  restoreWebSearch,
+  updateWebSearch,
+  hasAIProviders,
+  aiSettingsUrl,
+  getAIConfig,
 }: TSearchProps) => {
-	const { t } = useTranslation(["Common", "AISettings", "Settings"]);
+  const { t } = useTranslation(["Common", "AISettings", "Settings"]);
 
-	const [isKeyHidden, setIsKeyHidden] = React.useState(
-		webSearchConfig?.enabled,
-	);
-	const [value, setValue] = React.useState(
-		webSearchConfig?.enabled ? FAKE_KEY_VALUE : "",
-	);
-	const [selectedOption, setSelectedOption] = React.useState<WebSearchType>(
-		() => {
-			if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
+  const [isKeyHidden, setIsKeyHidden] = React.useState(
+    webSearchConfig?.enabled,
+  );
+  const [value, setValue] = React.useState(
+    webSearchConfig?.enabled ? FAKE_KEY_VALUE : "",
+  );
+  const [selectedOption, setSelectedOption] = React.useState<WebSearchType>(
+    () => {
+      if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
 
-			return WebSearchType.None;
-		},
-	);
-	const [saveRequestRunning, setSaveRequestRunning] = React.useState(false);
+      return WebSearchType.None;
+    },
+  );
+  const [saveRequestRunning, setSaveRequestRunning] = React.useState(false);
 
-	const onChange = (_: React.ChangeEvent<HTMLInputElement>, value?: string) => {
-		setValue(value || "");
-	};
+  const onChange = (_: React.ChangeEvent<HTMLInputElement>, value?: string) => {
+    setValue(value || "");
+  };
 
-	const onRestoreToDefault = async () => {
-		setValue("");
-		setSelectedOption(WebSearchType.None);
-		setIsKeyHidden(false);
+  const onRestoreToDefault = async () => {
+    setValue("");
+    setSelectedOption(WebSearchType.None);
+    setIsKeyHidden(false);
 
-		restoreWebSearch?.();
-	};
+    restoreWebSearch?.();
+  };
 
-	const onSave = async () => {
-		if (isKeyHidden) return;
+  const onSave = async () => {
+    if (isKeyHidden) return;
 
-		setSaveRequestRunning(true);
-		await updateWebSearch?.(true, selectedOption, value);
-		setSaveRequestRunning(false);
-		getAIConfig?.();
-	};
+    setSaveRequestRunning(true);
+    await updateWebSearch?.(true, selectedOption, value);
+    setSaveRequestRunning(false);
+    getAIConfig?.();
+  };
 
-	const items = React.useMemo(() => {
-		return [
-			{
-				key: WebSearchType.Exa,
-				label: "Exa",
-			},
-		];
-	}, []);
+  const items = React.useMemo(() => {
+    return [
+      {
+        key: WebSearchType.Exa,
+        label: "Exa",
+      },
+    ];
+  }, []);
 
-	const selectedItem = React.useMemo(() => {
-		return items.find((item) => item.key === selectedOption);
-	}, [selectedOption, items]);
+  const selectedItem = React.useMemo(() => {
+    return items.find((item) => item.key === selectedOption);
+  }, [selectedOption, items]);
 
-	React.useEffect(() => {
-		if (webSearchConfig?.enabled) {
-			setIsKeyHidden(true);
-			setValue(FAKE_KEY_VALUE);
-		}
+  React.useEffect(() => {
+    if (webSearchConfig?.enabled) {
+      setIsKeyHidden(true);
+      setValue(FAKE_KEY_VALUE);
+    }
 
-		setSelectedOption(() => {
-			if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
+    setSelectedOption(() => {
+      if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
 
-			return WebSearchType.None;
-		});
-	}, [webSearchConfig]);
+      return WebSearchType.None;
+    });
+  }, [webSearchConfig]);
 
-	if (!webSearchInitied)
-		return (
-			<div className={generalStyles.search}>
-				<RectangleSkeleton
-					className={generalStyles.description}
-					width="700px"
-					height="36px"
-				/>
-				<RectangleSkeleton
-					className={generalStyles.learnMoreLink}
-					width="100px"
-					height="19px"
-				/>
-				<div className={styles.searchForm}>
-					<div className={generalStyles.fieldContainer}>
-						<RectangleSkeleton width="119px" height="20px" />
-						<RectangleSkeleton width="340px" height="32px" />
-					</div>
-					<div className={generalStyles.fieldContainer}>
-						<RectangleSkeleton width="48px" height="32px" />
-						<RectangleSkeleton width="340px" height="32px" />
-					</div>
-				</div>
-				<div className={styles.buttonContainer}>
-					<RectangleSkeleton
-						className={styles.addProviderButton}
-						width="128px"
-						height="32px"
-					/>
-					<RectangleSkeleton
-						className={styles.learnMoreLink}
-						width="322px"
-						height="32px"
-					/>
-				</div>
-			</div>
-		);
+  if (!webSearchInitied)
+    return (
+      <div className={generalStyles.search}>
+        <RectangleSkeleton
+          className={generalStyles.description}
+          width="700px"
+          height="36px"
+        />
+        <RectangleSkeleton
+          className={generalStyles.learnMoreLink}
+          width="100px"
+          height="19px"
+        />
+        <div className={styles.searchForm}>
+          <div className={generalStyles.fieldContainer}>
+            <RectangleSkeleton width="119px" height="20px" />
+            <RectangleSkeleton width="340px" height="32px" />
+          </div>
+          <div className={generalStyles.fieldContainer}>
+            <RectangleSkeleton width="48px" height="32px" />
+            <RectangleSkeleton width="340px" height="32px" />
+          </div>
+        </div>
+        <div className={styles.buttonContainer}>
+          <RectangleSkeleton
+            className={styles.addProviderButton}
+            width="128px"
+            height="32px"
+          />
+          <RectangleSkeleton
+            className={styles.learnMoreLink}
+            width="322px"
+            height="32px"
+          />
+        </div>
+      </div>
+    );
 
-	const isSaveDisabled =
-		!value || selectedOption === WebSearchType.None || isKeyHidden;
+  const isSaveDisabled =
+    !value || selectedOption === WebSearchType.None || isKeyHidden;
 
-	const tooltipId = "tooltip-web-search";
+  const tooltipId = "tooltip-web-search";
 
-	return (
-		<>
-			<div
-				className={generalStyles.search}
-				data-tooltip-id={tooltipId}
-				data-tooltip-content={
-					!hasAIProviders
-						? t("AISettings:ToUseAddProvider", {
-								value: t("AISettings:Search"),
-							})
-						: undefined
-				}
-			>
-				<Text className={generalStyles.description}>
-					{t("AISettings:SearchDescription", {
-						productName: t("Common:ProductName"),
-					})}
-				</Text>
-				{aiSettingsUrl ? (
-					<Link
-						className={generalStyles.learnMoreLink}
-						target={LinkTarget.blank}
-						type={LinkType.page}
-						fontWeight={600}
-						isHovered
-						href={aiSettingsUrl}
-						color="accent"
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-				<div className={styles.searchForm}>
-					<FieldContainer
-						labelVisible
-						isVertical
-						labelText={t("AISettings:SearchEngine")}
-						removeMargin
-					>
-						<ComboBox
-							options={items}
-							selectedOption={
-								selectedItem ?? ({ label: t("Common:SelectAction") } as TOption)
-							}
-							scaled
-							displayArrow
-							onSelect={(option) =>
-								setSelectedOption(option.key as WebSearchType)
-							}
-							displaySelectedOption
-							isDisabled={!hasAIProviders}
-						/>
-					</FieldContainer>
-					<FieldContainer
-						labelVisible
-						isVertical
-						labelText={t("AISettings:APIKey")}
-						removeMargin
-					>
-						<PasswordInput
-							className={styles.passwordInput}
-							placeholder={t("AISettings:EnterKey")}
-							inputValue={value}
-							onChange={onChange}
-							scale
-							isSimulateType
-							isFullWidth
-							isDisableTooltip
-							isDisabled={isKeyHidden || selectedOption === WebSearchType.None}
-							autoComplete="off"
-						/>
-						{isKeyHidden ? (
-							<Text className={styles.hiddenKeyDescription}>
-								{t("AISettings:WebSearchKeyHiddenDescription")}
-							</Text>
-						) : null}
-					</FieldContainer>
-				</div>
-				<div className={styles.buttonContainer}>
-					<Button
-						primary
-						size={ButtonSize.small}
-						label={t("SaveButton")}
-						scale={false}
-						onClick={onSave}
-						isLoading={saveRequestRunning}
-						isDisabled={isSaveDisabled}
-					/>
-					<Button
-						size={ButtonSize.small}
-						label={t("Settings:ResetSettings")}
-						scale={false}
-						onClick={onRestoreToDefault}
-						isDisabled={
-							!webSearchConfig ||
-							webSearchConfig?.type === WebSearchType.None ||
-							saveRequestRunning
-						}
-					/>
-				</div>
-			</div>
-			{!hasAIProviders ? (
-				<Tooltip id={tooltipId} place="bottom" offset={10} float />
-			) : null}
-		</>
-	);
+  return (
+    <>
+      <div
+        className={generalStyles.search}
+        data-tooltip-id={tooltipId}
+        data-tooltip-content={
+          !hasAIProviders
+            ? t("AISettings:ToUseAddProvider", {
+                value: t("AISettings:Search"),
+              })
+            : undefined
+        }
+      >
+        <Text className={generalStyles.description}>
+          {t("AISettings:SearchDescription", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
+        {aiSettingsUrl ? (
+          <Link
+            className={generalStyles.learnMoreLink}
+            target={LinkTarget.blank}
+            type={LinkType.page}
+            fontWeight={600}
+            isHovered
+            href={aiSettingsUrl}
+            color="accent"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+        <div className={styles.searchForm}>
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("AISettings:SearchEngine")}
+            removeMargin
+          >
+            <ComboBox
+              options={items}
+              selectedOption={
+                selectedItem ?? ({ label: t("Common:SelectAction") } as TOption)
+              }
+              scaled
+              displayArrow
+              onSelect={(option) =>
+                setSelectedOption(option.key as WebSearchType)
+              }
+              displaySelectedOption
+              isDisabled={!hasAIProviders || isKeyHidden}
+            />
+          </FieldContainer>
+          <FieldContainer
+            labelVisible
+            isVertical
+            labelText={t("AISettings:APIKey")}
+            removeMargin
+          >
+            <PasswordInput
+              className={styles.passwordInput}
+              placeholder={t("AISettings:EnterKey")}
+              inputValue={value}
+              onChange={onChange}
+              scale
+              isSimulateType
+              isFullWidth
+              isDisableTooltip
+              isDisabled={isKeyHidden || selectedOption === WebSearchType.None}
+              autoComplete="off"
+            />
+            {isKeyHidden ? (
+              <Text className={styles.hiddenKeyDescription}>
+                {t("AISettings:WebSearchKeyHiddenDescription")}
+              </Text>
+            ) : null}
+          </FieldContainer>
+        </div>
+        <div className={styles.buttonContainer}>
+          <Button
+            primary
+            size={ButtonSize.small}
+            label={t("SaveButton")}
+            scale={false}
+            onClick={onSave}
+            isLoading={saveRequestRunning}
+            isDisabled={isSaveDisabled}
+          />
+          <Button
+            size={ButtonSize.small}
+            label={t("Settings:ResetSettings")}
+            scale={false}
+            onClick={onRestoreToDefault}
+            isDisabled={
+              !webSearchConfig ||
+              webSearchConfig?.type === WebSearchType.None ||
+              saveRequestRunning
+            }
+          />
+        </div>
+      </div>
+      {!hasAIProviders ? (
+        <Tooltip id={tooltipId} place="bottom" offset={10} float />
+      ) : null}
+    </>
+  );
 };
 
 export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
-	return {
-		webSearchInitied: aiSettingsStore.webSearchInitied,
-		webSearchConfig: aiSettingsStore.webSearchConfig,
-		restoreWebSearch: aiSettingsStore.restoreWebSearch,
-		updateWebSearch: aiSettingsStore.updateWebSearch,
-		hasAIProviders: aiSettingsStore.hasAIProviders,
-		aiSettingsUrl: settingsStore.aiSettingsUrl,
-		getAIConfig: settingsStore.getAIConfig,
-	};
+  return {
+    webSearchInitied: aiSettingsStore.webSearchInitied,
+    webSearchConfig: aiSettingsStore.webSearchConfig,
+    restoreWebSearch: aiSettingsStore.restoreWebSearch,
+    updateWebSearch: aiSettingsStore.updateWebSearch,
+    hasAIProviders: aiSettingsStore.hasAIProviders,
+    aiSettingsUrl: settingsStore.aiSettingsUrl,
+    getAIConfig: settingsStore.getAIConfig,
+  };
 })(observer(SearchComponent));

@@ -158,7 +158,7 @@ type setAgentParamsProps = {
   cover?: Nullable<TClientCover>;
   covers?: Nullable<TServerCover[]>;
   setCover?: DialogsStore["setCover"];
-  isDefaultAgentsQuotaSet?: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+  isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
 };
 
@@ -189,7 +189,7 @@ const setAgentParams = ({
   covers,
   setCover,
   onOwnerChange,
-  isDefaultAgentsQuotaSet,
+  isDefaultAIAgentsQuotaSet,
   infoPanelSelection,
   portalMcpServerId,
 }: setAgentParamsProps) => {
@@ -204,7 +204,7 @@ const setAgentParams = ({
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
   const [previewTitle, setPreviewTitle] = useState(
-    selection?.title || infoPanelSelection?.title || ""
+    selection?.title || infoPanelSelection?.title || "",
   );
   const [createAgentTitle, setCreateAgentTitle] = useState(agentParams.title);
 
@@ -238,7 +238,7 @@ const setAgentParams = ({
 
     if (cover && cover.cover) {
       const currentCoverData = covers?.filter(
-        (item) => item.id === cover.cover
+        (item) => item.id === cover.cover,
       )[0].data;
 
       return { ...cover, data: currentCoverData };
@@ -261,22 +261,22 @@ const setAgentParams = ({
       globalColors.logoColors[
         Math.floor(Math.random() * globalColors.logoColors.length)
       ].replace("#", ""),
-    []
+    [],
   );
 
   const currentIcon = selection
     ? selection?.logo?.large
       ? selection?.logo?.large
       : selection?.logo?.cover
-      ? selection?.logo
-      : getInfoPanelItemIcon?.(selection, 96)
+        ? selection?.logo
+        : getInfoPanelItemIcon?.(selection, 96)
     : infoPanelSelection
-    ? infoPanelSelection?.logo?.large
       ? infoPanelSelection?.logo?.large
-      : infoPanelSelection?.logo?.cover
-      ? infoPanelSelection?.logo
-      : getInfoPanelItemIcon?.(infoPanelSelection, 96)
-    : undefined;
+        ? infoPanelSelection?.logo?.large
+        : infoPanelSelection?.logo?.cover
+          ? infoPanelSelection?.logo
+          : getInfoPanelItemIcon?.(infoPanelSelection, 96)
+      : undefined;
 
   const onChangeIcon = (icon: TAgentIconParams) => {
     if (!icon.uploadedFile !== disableImageRescaling)
@@ -364,17 +364,17 @@ const setAgentParams = ({
   const isEditRoomModel = model?.map((item) =>
     item.key === "create_edit_room_delete"
       ? { ...item, onClick: onDeleteAvatar }
-      : item
+      : item,
   );
 
   const isEmptyIcon =
     createAgentTitle || cover?.color
       ? false
       : avatarEditorDialogVisible
-      ? true
-      : previewIcon
-      ? false
-      : !createAgentTitle;
+        ? true
+        : previewIcon
+          ? false
+          : !createAgentTitle;
 
   const roomIconLogo = currentCover
     ? { cover: currentCover }
@@ -383,8 +383,8 @@ const setAgentParams = ({
   const itemIconLogo = currentCover
     ? { cover: currentCover }
     : avatarEditorDialogVisible
-    ? currentIcon
-    : previewIcon || currentIcon;
+      ? currentIcon
+      : previewIcon || currentIcon;
 
   const showDefault =
     cover && cover.cover
@@ -503,7 +503,7 @@ const setAgentParams = ({
         portalMcpServerId={portalMcpServerId}
       />
 
-      {isDefaultAgentsQuotaSet ? (
+      {isDefaultAIAgentsQuotaSet ? (
         <RoomQuota
           setRoomParams={setAgentParams}
           roomParams={agentParams}
@@ -545,7 +545,7 @@ export default inject(
     avatarEditorDialogStore,
     currentQuotaStore,
   }: TStore) => {
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     const { bufferSelection } = filesStore;
@@ -585,8 +585,8 @@ export default inject(
       cover,
       covers,
       setCover,
-      isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       infoPanelSelection,
     };
-  }
+  },
 )(observer(setAgentParams));

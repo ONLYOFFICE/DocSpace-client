@@ -47,7 +47,7 @@ type EditAgentEventProps = {
   fetchTags: TagsStore["fetchTags"];
   cover: ICover;
   onSaveEditAgent: CreateEditAgentStore["onSaveEditAgent"];
-  isDefaultAgentsQuotaSet: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+  isDefaultAIAgentsQuotaSet: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
 };
 
 const EditAgentEvent = ({
@@ -57,7 +57,7 @@ const EditAgentEvent = ({
   fetchTags,
   cover,
   onSaveEditAgent,
-  isDefaultAgentsQuotaSet,
+  isDefaultAIAgentsQuotaSet,
 }: EditAgentEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -67,7 +67,7 @@ const EditAgentEvent = ({
 
   const fetchedAgentParams = getFetchedAgentParams(
     item,
-    isDefaultAgentsQuotaSet,
+    isDefaultAIAgentsQuotaSet,
   );
 
   const onSave = async (agentParams: TAgentParams) => {
@@ -116,7 +116,7 @@ export default inject(
     createEditAgentStore,
     currentQuotaStore,
   }: TStore) => {
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
 
     const { fetchTags } = tagsStore;
 
@@ -125,7 +125,7 @@ export default inject(
     const { onSaveEditAgent } = createEditAgentStore;
 
     return {
-      isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
 
       fetchTags,
 

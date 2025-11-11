@@ -115,6 +115,7 @@ const ContextMenu = (props: ContextMenuProps) => {
     dataTestId,
     maxHeightLowerSubmenu,
     showDisabledItems,
+    withoutBackHeaderButton,
   } = props;
 
   const onMenuClick = () => {
@@ -215,7 +216,10 @@ const ContextMenu = (props: ContextMenuProps) => {
     }
   }, [visible, reshow, show]);
 
-  const position = (event: React.MouseEvent | MouseEvent) => {
+  const position = (
+    event: React.MouseEvent | MouseEvent,
+    isMobileSubMenu?: boolean,
+  ) => {
     if (event) {
       const rects = containerRef?.current?.getBoundingClientRect();
 
@@ -242,7 +246,9 @@ const ContextMenu = (props: ContextMenuProps) => {
             .borderWidth.replace("px", "")
         : 0;
 
-      const mobileView = isMobileUtils() && (height > 210 || ignoreChangeView);
+      const mobileView =
+        isMobileUtils() &&
+        (height > 210 || ignoreChangeView || isMobileSubMenu);
 
       if (!mobileView) {
         const options = menuRef?.current?.getElementsByClassName("p-menuitem");
@@ -266,7 +272,16 @@ const ContextMenu = (props: ContextMenuProps) => {
       if (mobileView) {
         setChangeView(true);
 
+        if (isMobileSubMenu) {
+          menuRef.current?.style.removeProperty("width");
+          menuRef.current?.style.removeProperty("left");
+          menuRef.current?.style.removeProperty("top");
+          menuRef.current?.style.removeProperty("height");
+        }
+
         return;
+      } else {
+        setChangeView(false);
       }
 
       // flip
@@ -342,16 +357,15 @@ const ContextMenu = (props: ContextMenuProps) => {
     (e: React.MouseEvent | MouseEvent) => {
       const target = e.target as HTMLElement;
 
+      const clickOnContainer =
+        containerRef?.current &&
+        (containerRef.current.isSameNode(target) ||
+          containerRef.current.contains(target));
 
-      const clickOnContainer = containerRef?.current && (
-        containerRef.current.isSameNode(target) || 
-        containerRef.current.contains(target)
-      );
-
-      const clickOnMenu = menuRef?.current && (
-        menuRef.current.isSameNode(target) || 
-        menuRef.current.contains(target)
-      );
+      const clickOnMenu =
+        menuRef?.current &&
+        (menuRef.current.isSameNode(target) ||
+          menuRef.current.contains(target));
 
       return (
         !clickOnMenu &&
@@ -498,6 +512,21 @@ const ContextMenu = (props: ContextMenuProps) => {
     );
   };
 
+  React.useEffect(() => {
+    if (!propsModel) return;
+
+    const currentItem = mobileMenuStack[mobileMenuStack.length - 1];
+
+    if (currentItem) {
+      const item = propsModel.find(
+        (item) => "label" in item && item.label === currentItem.header,
+      );
+      if (item && "items" in item && item.items?.length) {
+        setMobileSubMenuItems(item?.items);
+      }
+    }
+  }, [propsModel, mobileMenuStack]);
+
   const onMobileItemClick = async (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
     label: string,
@@ -522,9 +551,15 @@ const ContextMenu = (props: ContextMenuProps) => {
           ? menuRef.current.offsetHeight
           : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
 
-      const mobileView = isMobileUtils() && (height > 210 || ignoreChangeView);
+      const mobileView =
+        isMobileUtils() &&
+        (height > 210 || ignoreChangeView || res?.length > 7);
 
       const syntheticEvent = createSyntheticMouseEvent(e);
+
+      if (res.length > 7 && mobileView) {
+        position(syntheticEvent, true);
+      }
 
       if (!mobileView) {
         const estimatedWidth = calculateSubMenuWidth(res);
@@ -573,7 +608,8 @@ const ContextMenu = (props: ContextMenuProps) => {
         className={classNames(styles.contextMenu, {
           [styles.isRoom]: isRoom,
           [styles.coverExist]: isCoverExist,
-          [styles.isIconExist]: isIconExist || showMobileMenu,
+          [styles.isIconExist]:
+            (isIconExist || showMobileMenu) && !withoutBackHeaderButton,
           [styles.fillIcon]: fillIcon,
           [styles.changeView]: changeView,
         })}
@@ -601,7 +637,7 @@ const ContextMenu = (props: ContextMenuProps) => {
             {changeView && (withHeader || isHeaderMobileSubMenu) ? (
               <div className="contextmenu-header">
                 {isIconExist || isHeaderMobileSubMenu ? (
-                  showMobileMenu ? (
+                  withoutBackHeaderButton ? null : showMobileMenu ? (
                     <IconButton
                       className="edit_icon"
                       iconName={ArrowLeftReactUrl}

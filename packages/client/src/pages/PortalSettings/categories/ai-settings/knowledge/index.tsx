@@ -232,7 +232,7 @@ const KnowledgeComponent = ({
                 setSelectedOption(option.key as KnowledgeType)
               }
               displaySelectedOption
-              isDisabled={!hasAIProviders}
+              isDisabled={!hasAIProviders || isKeyHidden}
             />
           </FieldContainer>
           <FieldContainer

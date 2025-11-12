@@ -32,6 +32,8 @@ import EmptyScreenRoomDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.room.se
 
 import { getAvailableServersList } from "../../api/ai";
 import type { TServer } from "../../api/ai/types";
+import { ServerType } from "../../api/ai/enums";
+
 import { Selector, type TSelectorItem } from "../../components/selector";
 import { getServerIcon } from "../../utils";
 import { RowLoader } from "../../skeletons/selector";
@@ -70,10 +72,15 @@ const MCPServersSelector = ({
 
   const convertServerToOption = React.useCallback(
     (server: TServer): TSelectorItem => {
+      const name =
+        server.serverType === ServerType.Portal
+          ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+          : server.name;
+
       return {
         key: server.id,
         id: server.id,
-        label: server.name,
+        label: name,
         icon:
           (server.icon?.icon32 || getServerIcon(server.serverType, isBase)) ??
           "",
@@ -81,7 +88,7 @@ const MCPServersSelector = ({
         isSelected: initedSelectedServers?.includes(server.id),
       };
     },
-    [isBase, initedSelectedServers],
+    [isBase, initedSelectedServers, t],
   );
 
   const fetchServers = React.useCallback(async () => {

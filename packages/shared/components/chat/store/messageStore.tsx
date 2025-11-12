@@ -68,9 +68,21 @@ export default class MessageStore {
 
   webCrawlingToolName: string = "";
 
+  toolsConfirmQueue: string[] = [];
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  addToToolsConfirmQueue = (id: string) => {
+    this.toolsConfirmQueue.push(id);
+  };
+
+  removeFromToolsConfirmQueue = (id: string) => {
+    this.toolsConfirmQueue = this.toolsConfirmQueue.filter(
+      (item) => item !== id,
+    );
+  };
 
   addMessage = (message: TMessage) => {
     this.messages.push(message);

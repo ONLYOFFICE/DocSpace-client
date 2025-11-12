@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "Bạn chưa thêm bất kỳ phương thức thanh toán nào.",
   "YourCurrentPayment": "Thanh toán hiện tại của bạn",
   "YourCurrentPlan": "<1>Gói cước hiện tại của bạn:</1> {{amount}} <2>({{price}}/tháng)</2>",
-  "YourPrice": "Phí thanh toán của bạn"
+  "YourPrice": "Phí thanh toán của bạn",
+  "PerAITools": "{{currency}} mỗi token"
 }

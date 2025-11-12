@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "Imate ne shranjene spremembe. Če zdaj odidete, bodo vaše posodobitve izgubljene. Ste prepričani, da želite oditi?",
   "WebCrawling": "Raziskovanje spleta",
   "WebSearch": "Spletna iskalna",
-  "WorkInProgress": "Delo v teku"
+  "WorkInProgress": "Delo v teku",
+  "NoMCPServersDescription": "Prosimo, povežite MCP strežnike v nastavitvah {{productName}}, da jih lahko uporabite v umetni inteligenci (AI) agentu."
 }

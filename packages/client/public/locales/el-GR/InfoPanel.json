@@ -95,5 +95,9 @@
   "SubmenuHistory": "Ιστορικό",
   "UserFileUpdated": "Το αρχείο ενημερώθηκε.",
   "Users": "Χρήστες",
-  "Versions": "Εκδόσεις"
+  "Versions": "Εκδόσεις",
+  "HistoryAgentCreated": "«{{roomTitle}}» πράκτορας δημιουργήθηκε",
+  "Resolution": "Ανάλυση",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> μετονομάστηκε σε <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Δείτε λεπτομέρειες για τους πράκτορες τεχνητής νοημοσύνης εδώ"
 }

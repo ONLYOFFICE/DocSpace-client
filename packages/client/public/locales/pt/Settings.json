@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Deseja cancelar o upload?",
   "WantToContinue": "Deseja continuar ou alterar a cota de armazenamento do utilizador?",
   "WhiteLabelSubtitle": "Introduza o nome da sua empresa, carregue o logótipo, e personalize o estilo para combinar com a sua imagem de marca.",
-  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
+  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
+  "AccountsUsersWithoutEmails": "Encontramos <1>{{users}} usuários</1> sem emails. Você pode adicionar os dados necessários para suas contas na próxima etapa.",
+  "AccountsWithoutEmails": "Encontramos <1>{{users}} usuários</1> sem emails. Você pode preencher seus emails ou continuar sem esta ação.",
+  "AIAgentQuotaDisabled": "A cota do agente de IA foi desativada com sucesso.",
+  "AIAgentQuotaEnabled": "A cota de agentes de IA foi habilitada com sucesso.",
+  "AISettings": "Configurações de IA",
+  "DataImportAdminLimitExceeded": "Limite de administradores excedido. Para continuar, ajuste o número de administradores ou aumente o limite de administradores.",
+  "DefineQuotaPerAIAgent": "Definir cota por agente de IA",
+  "GroupsSectionDescription": "Os usuários que você selecionou na etapa anterior serão importados para grupos criados em {{serviceName}}. Os grupos aparecerão na seção <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Os arquivos e documentos do usuário serão importados para <1>{{sectionName}}</1>.",
+  "QuotaPerAIAgent": "Cota por agente de IA",
+  "ResetSettings": "Redefinir configurações",
+  "SetDefaultAIAgentQuota": "Defina a cota de armazenamento padrão para agentes de IA neste {{productName}}. Ela pode ser ajustada posteriormente nas configurações ou personalizada individualmente ao criar cada agente de IA.",
+  "SharedFilesAndFolders": "Arquivos e pastas compartilhados",
+  "SharedFilesAndFoldersDescription": "Arquivos e pastas compartilhados por outros usuários serão importados para <1>{{sectionName}}</1>.<br><1>Por favor, note:</1> alguns direitos de acesso podem ser perdidos durante a importação.",
+  "SharedFilesAndFoldersDetails": "Arquivos e pastas compartilhados",
+  "Top5AIAgents": "Top 5 agentes de IA por uso de armazenamento:"
 }

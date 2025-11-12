@@ -95,5 +95,9 @@
   "SubmenuHistory": "Lịch sử",
   "UserFileUpdated": "Tập tin đã được cập nhật. vai trò",
   "Users": "Người dùng",
-  "Versions": "Phiên Bản"
+  "Versions": "Phiên Bản",
+  "HistoryAgentCreated": "«{{roomTitle}}» đại lý đã tạo",
+  "Resolution": "Nghị quyết",
+  "AgentRenamed": "Tác nhân <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Xem chi tiết về các tác nhân AI tại đây"
 }

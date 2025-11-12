@@ -95,5 +95,9 @@
   "SubmenuHistory": "기록",
   "UserFileUpdated": "파일이 업데이트되었습니다. 역할",
   "Users": "사용자",
-  "Versions": "버전"
+  "Versions": "버전",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> 에이전트 생성됨",
+  "Resolution": "결의",
+  "AgentRenamed": "에이전트 <1>«{{oldRoomTitle}}»</1>을(를) <2>«{{roomTitle}}»</2>로 이름이 변경되었습니다.",
+  "AIAgentsEmptyScreenTent": "여기 AI 에이전트 세부 정보 보기"
 }

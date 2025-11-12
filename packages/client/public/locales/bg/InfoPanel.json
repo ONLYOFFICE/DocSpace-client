@@ -95,5 +95,9 @@
   "SubmenuHistory": "История",
   "UserFileUpdated": "Актуализиран файл.",
   "Users": "Потребители",
-  "Versions": "Версии"
+  "Versions": "Версии",
+  "HistoryAgentCreated": "«{{roomTitle}}» агент създаден",
+  "Resolution": "Резолюция",
+  "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> преименуван на <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Вижте подробности за AI агентите тук"
 }

@@ -95,5 +95,9 @@
   "SubmenuHistory": "Vēsture",
   "UserFileUpdated": "Fails ir atjaunināts.",
   "Users": "Lietotāji",
-  "Versions": "Versijas"
+  "Versions": "Versijas",
+  "HistoryAgentCreated": "«{{roomTitle}}» aģents izveidots",
+  "Resolution": "Rezolūcija",
+  "AgentRenamed": "Aģents <1>«{{oldRoomTitle}}»</1> pārdēvēts par <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Skatīt AI aģentu detalizējums šeit"
 }

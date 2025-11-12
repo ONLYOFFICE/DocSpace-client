@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "Ödəniş əlavə etməmisiniz.",
   "YourCurrentPayment": "Hazırda olan ödənişiniz",
   "YourCurrentPlan": "<1>Hazırda olan planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Qiymətiniz"
+  "YourPrice": "Qiymətiniz",
+  "PerAITools": "tokenə görə {{currency}}"
 }

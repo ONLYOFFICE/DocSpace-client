@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükləyin",
   "UploadFromPortalTitle": "{{productName}} dan yükləyin",
   "UploadPDFFormOptionDescription": "{{productName}}-də mövcud olan hazır PDF formasını seçin və onu otağa yükləyin.",
-  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz"
+  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz",
+  "CreateAIAgent": "Yeni agent yarat",
+  "CreateAIAgentDescription": "İlk süni intellekt agentinizi inşa etməyə başlayın",
+  "EmptyAIAgentsDescription": "Komandanız üçün mühasibi özləştirin, bilik bazası əlavə edin, ən yaxşı modeli seçin və MCP serverini qoşun. İş yoldaşlarınızı əməkdaşlığa dəvət edin və agentin söhbət imkanlarından maksimum yararlanın.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Süni intellekt agentləri yaratmaq və istifadə etmək üçün cüzdanınızı qoşun və {{productName}} parametrlərində süni intellekt xüsusiyyətləri xidmətini aktivləşdirin. Bu iş bitdikdən sonra süni intellekt agentləri ilə işləyə və komandanızla əməkdaşlıq edə biləcəksiniz.",
+  "EmptyAIAgentsAIDisabledDescription": "Bu bölmə istifadəçilərə sənədləri və digər tapşırıqları idarə etmək üçün ağıllı köməkçilər olan süni intellekt agentləri ilə işləməyə imkan verir. Onlardan istifadə etməyə başlamaq üçün süni intellekt xüsusiyyətləri xidməti {{productName}} admininiz tərəfindən aktivləşdirilməlidir.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Komandanız sizi əməkdaşlığa dəvət etdikdən sonra, süni intellekt agentləri burada görünəcək, sənədlər, biliklərin idarəolunması və gündəlik vəzifələrlə kömək etmək üçün hazır olacaqlar.",
+  "EmptyAIAgentsTitle": "Süni intellekt agentinizi yaradın",
+  "EmptyAIAgentsUserTitle": "Hələlik süni intellekt agentləri mövcud deyil",
+  "EmptyAIAgentsAIDisabledUserTitle": "Süni intellekt agentləri hələ mövcud deyil.",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Cüzdanınızı qoşun və süni intellekt xüsusiyyətlərini aktivləşdirin"
 }

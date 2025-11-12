@@ -37,5 +37,7 @@
   "UserName": "Uživatelské jméno",
   "ViewerInfo": "Informace o prohlížeči",
   "WatermarkPreview": "Náhled vodoznaku",
-  "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech."
+  "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech.",
+  "DisableRoomQuotaAgent": "Vypnout kvótu pro tohoto agenta",
+  "StorageDescriptionAgent": "Limit úložného prostoru nastaven pro každého agenta. Můžete změnit tuto hodnotu nebo vypnout limit úložného prostoru."
 }

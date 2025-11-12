@@ -37,5 +37,7 @@
   "UserName": "Uporabniško ime",
   "ViewerInfo": "Informacije o ogledovalcu",
   "WatermarkPreview": "Predogled vodnega žiga",
-  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah."
+  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah.",
+  "DisableRoomQuotaAgent": "Onemogoči kvoto za tega agenta",
+  "StorageDescriptionAgent": "Določen je limit prostora za vsakega agenta. Lahko spremenite to vrednost ali onemogočite omejitev prostora."
 }

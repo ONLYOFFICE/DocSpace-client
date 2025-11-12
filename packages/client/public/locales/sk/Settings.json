@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Chcete zrušiť nahrávanie?",
   "WantToContinue": "Chcete pokračovať alebo zmeniť kvótu úložiska používateľa?",
   "WhiteLabelSubtitle": "Zadajte názov svojej spoločnosti, nahrajte logo a prispôsobte štýl tak, aby zodpovedal vašej značke.",
-  "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok."
+  "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok.",
+  "AccountsUsersWithoutEmails": "Našli sme <1>{{users}} používateľov</1> bez e-mailov. Na ďalšom kroku môžete pridať potrebné údaje do ich účtov.",
+  "AccountsWithoutEmails": "Našli sme <1>{{users}} používateľov</1> bez e-mailov. Môžete vyplniť ich e-maily alebo pokračovať bez tejto akcie.",
+  "AIAgentQuotaDisabled": "Kvote pre AI agenta boli úspešne vypnuté.",
+  "AIAgentQuotaEnabled": "Kvote pre AI agenta boli úspešne povolené.",
+  "AISettings": "Nastavenia AI",
+  "DataImportAdminLimitExceeded": "Prekročené obmedzenie administrátorov. Aby ste mohli pokračovať, upravte počet administrátorov alebo zvyšte obmedzenie administrátorov.",
+  "DefineQuotaPerAIAgent": "Definujte kvótu pre AI agenta",
+  "GroupsSectionDescription": "Používatelia, ktorých ste vybrali v predchádzajúcom kroku, budú importovaní do skupín vytvorených v {{serviceName}}. Skupiny sa zobrazia v sekcii <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Používateľské súbory a dokumenty budú importované do <1>{{sectionName}}</1>.",
+  "QuotaPerAIAgent": "Kvóta na AI agenta",
+  "ResetSettings": "Obnoviť nastavenia",
+  "SetDefaultAIAgentQuota": "Nastavte predvolenú kvótu úložiska pre AI agentov v tomto {{productName}}. Je možné ju neskôr upraviť v nastaveniach alebo prispôsobiť individuálne pri vytváraní každého AI agenta.",
+  "SharedFilesAndFolders": "Zdieľané súbory a priečinky",
+  "SharedFilesAndFoldersDescription": "Súbory a priečinky zdieľané inými používateľmi budú importované do <1>{{sectionName}}</1>.<br><1>Upozorňujeme:</1> pri importe sa môžu stratiť niektoré prístupové práva.",
+  "SharedFilesAndFoldersDetails": "Zdieľané súbory a priečinky",
+  "Top5AIAgents": "Top 5 AI agentov podľa využitia miesta:"
 }

@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Yüklemeyi iptal etmek istiyor musunuz?",
   "WantToContinue": "Devam etmek mi yoksa kullanıcı kotasını değiştirmek mi istiyorsunuz?",
   "WhiteLabelSubtitle": "Şirketinizin adını girin, logoyu yükleyin ve stili markanıza uyacak şekilde özelleştirin.",
-  "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin."
+  "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin.",
+  "AccountsUsersWithoutEmails": "E-posta adresi olmayan <1>{{users}} kullanıcı</1> bulduk. Bir sonraki adımda hesaplarına gerekli verileri ekleyebilirsiniz.",
+  "AccountsWithoutEmails": "E-posta adresi olmayan <1>{{users}} kullanıcı</1> bulduk. E-posta adreslerini doldurabilir veya bu işlemi yapmadan devam edebilirsiniz.",
+  "AIAgentQuotaDisabled": "AI aracı kotaı başarıyla devre dışı bırakıldı.",
+  "AIAgentQuotaEnabled": "AI aracı kota limiti başarıyla etkinleştirildi.",
+  "AISettings": "Yapay zeka ayarları",
+  "DataImportAdminLimitExceeded": "Yönetici limiti aşıldı. Devam etmek için lütfen yönetici sayısını ayarlayın veya yönetici limitini artırın.",
+  "DefineQuotaPerAIAgent": "AI aracısı başına kota tanımlayın",
+  "GroupsSectionDescription": "Önceki adımda seçtiğiniz kullanıcılar, {{serviceName}} içinde oluşturulan gruplara aktarılacaktır. Gruplar, <1>{{sectionName}}</1> bölümünde görünecektir.",
+  "ImportFilesDescription": "Kullanıcı dosyaları ve belgeler <1>{{sectionName}}</1>’e aktarılacaktır.",
+  "QuotaPerAIAgent": "Yapay zeka ajanı başına kota",
+  "ResetSettings": "Ayarları sıfırla",
+  "SetDefaultAIAgentQuota": "Bu {{productName}}'deki yapay zeka ajanları için varsayılan depolama kotasını ayarlayın. Bu, daha sonra ayarlar bölümünde ayarlanabilir veya her yapay zeka ajanı oluşturulurken ayrı ayrı özelleştirilebilir.",
+  "SharedFilesAndFolders": "Paylaşılan dosyalar ve klasörler",
+  "SharedFilesAndFoldersDescription": "Diğer kullanıcılar tarafından paylaşılan dosyalar ve klasörler, <1>{{sectionName}}</1> bölümüne aktarılacaktır.<br><1>Lütfen unutmayın:</1> bazı erişim hakları aktarım sırasında kaybolabilir.",
+  "SharedFilesAndFoldersDetails": "Paylaşılan dosyalar ve klasörler",
+  "Top5AIAgents": "Depolama kullanımıyla en iyi 5 yapay zeka ajanı:"
 }

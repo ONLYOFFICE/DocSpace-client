@@ -18,5 +18,8 @@
   "SendInvitation": "Odeslat pozvánku",
   "UserMaxAvailableRoleWarning": "Hosty a uživatele nelze přiřadit jako správce místnosti. Pro zadanou roli jsou vhodní pouze správci místností a {{productName}}.",
   "UsersAlreadyAdded": "Někteří uživatelé již byli přidáni",
-  "UsersCannotBeAdded": "Vypnuté kontakty nelze přidat do místnosti."
+  "UsersCannotBeAdded": "Vypnuté kontakty nelze přidat do místnosti.",
+  "InviteViaLinkDescriptionAgentGuest": "Vytvořte univerzní odkaz pro samoautorizaci v agentovi jako host.",
+  "InviteViaLinkDescriptionAgentMembers": "Vytvořte univerzní odkaz pro členy {{productName}} pro vlastní autorizaci v agentovi.",
+  "UserAgentMaxAvailableRoleWarning": "Hosté a uživatelé nemohou být přidáni jako manažeři agentů. Pro danou roli jsou vhodní pouze administrátoři pokojů a {{productName}}."
 }

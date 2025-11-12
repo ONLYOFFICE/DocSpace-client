@@ -37,5 +37,7 @@
   "UserName": "Nazwa użytkownika",
   "ViewerInfo": "Dane osoby przeglądającej",
   "WatermarkPreview": "Podgląd znaku wodnego",
-  "WatermarkPreviewHelp": "Niniejszy podgląd obrazu pokazuje mniej więcej, jak znak wodny będzie wyświetlany w Twoich plikach."
+  "WatermarkPreviewHelp": "Niniejszy podgląd obrazu pokazuje mniej więcej, jak znak wodny będzie wyświetlany w Twoich plikach.",
+  "DisableRoomQuotaAgent": "Wyłącz limit dla tego agenta",
+  "StorageDescriptionAgent": "Przydział limitu przestrzeni dyskowej ustalany dla każdego agenta. Możesz zmienić tę wartość lub wyłączyć limit przestrzeni dyskowej."
 }

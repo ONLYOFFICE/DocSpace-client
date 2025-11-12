@@ -95,5 +95,9 @@
   "SubmenuHistory": "Historie",
   "UserFileUpdated": "Soubor aktualizován.",
   "Users": "Uživatelé",
-  "Versions": "Verze"
+  "Versions": "Verze",
+  "HistoryAgentCreated": "«{{roomTitle}}» agent vytvořen",
+  "Resolution": "Rozlišení",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> přejmenován na <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Podívejte se na detaily AI agentů zde."
 }

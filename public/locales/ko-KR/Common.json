@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "변경 사항이 저장되지 않았습니다. 지금 나가시면 업데이트 내용이 손실됩니다. 정말 나가시겠습니까?",
   "WebCrawling": "웹 크롤링",
   "WebSearch": "웹 검색",
-  "WorkInProgress": "진행 중"
+  "WorkInProgress": "진행 중",
+  "NoMCPServersDescription": "AI 에이전트에서 사용하려면 {{productName}} 설정에서 MCP 서버를 연결하십시오."
 }

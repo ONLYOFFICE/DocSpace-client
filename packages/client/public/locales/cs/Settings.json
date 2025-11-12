@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Chcete zrušit nahrávání?",
   "WantToContinue": "Chcete pokračovat nebo změnit kvótu uživatelského úložiště?",
   "WhiteLabelSubtitle": "Zadejte název společnosti, nahrajte logo a přizpůsobte styl tak, aby odpovídal vaší značce.",
-  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku."
+  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku.",
+  "AccountsUsersWithoutEmails": "Našli jsme <1>{{users}} uživatelů</1> bez e-mailů. V dalším kroku můžete přidat potřebná data do jejich účtů.",
+  "AccountsWithoutEmails": "Našli jsme <1>{{users}} uživatelů</1> bez e-mailů. Můžete vyplnit jejich e-maily nebo pokračovat bez této akce.",
+  "AIAgentQuotaDisabled": "Konta AI agenta byla úspěšně deaktivována.",
+  "AIAgentQuotaEnabled": "Kvote agenta AI byla úspěšně povolena.",
+  "AISettings": "Nastavení AI",
+  "DataImportAdminLimitExceeded": "Administrátorský limit byl překročen. Pro pokračování upravte počet administrátorů nebo zvyšte limit administrátorů.",
+  "DefineQuotaPerAIAgent": "Definujte kvótu pro každého AI agenta",
+  "GroupsSectionDescription": "Uživatelé, které jste vybrali v předchozím kroku, budou importováni do skupin vytvořených v {{serviceName}}. Skupiny se zobrazí v sekci <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Uživatelské soubory a dokumenty budou importovány do <1>{{sectionName}}</1>.",
+  "QuotaPerAIAgent": "Kvóta na AI agenta",
+  "ResetSettings": "Obnovit nastavení",
+  "SetDefaultAIAgentQuota": "Nastavte výchozí limit úložiště pro AI agenty v tomto {{productName}}. Lze jej později upravit v nastavení nebo jej upravit individuálně při vytváření každého AI agenta.",
+  "SharedFilesAndFolders": "Sdílené soubory a složky",
+  "SharedFilesAndFoldersDescription": "Soubory a složky sdílené ostatními uživateli budou importovány do <1>{{sectionName}}</1>.<br><1>Upozorňujeme:</1> při importu mohou být některé přístupová práva ztraceny.",
+  "SharedFilesAndFoldersDetails": "Sdílené soubory a složky",
+  "Top5AIAgents": "Top 5 AI agentů podle využití úložiště:"
 }

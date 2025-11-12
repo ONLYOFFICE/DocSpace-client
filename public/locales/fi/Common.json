@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "Sinulla on tallentamattomia muutoksia. Jos poistut nyt, päivitykset menetetään. Oletko varma, että haluat poistua?",
   "WebCrawling": "Verkkosivujen indeksointi",
   "WebSearch": "Verkkohaku",
-  "WorkInProgress": "Työn alla"
+  "WorkInProgress": "Työn alla",
+  "NoMCPServersDescription": "Ole hyvä ja yhdistä MCP-palvelimet {{productName}}-asetuksissa, jotta voit käyttää niitä tekoälyagentissa."
 }

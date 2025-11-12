@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Vai vēlaties atcelt augšupielādi?",
   "WantToContinue": "Vai vēlaties turpināt vai mainīt lietotāja krātuves kvotu?",
   "WhiteLabelSubtitle": "Ievadiet sava uzņēmuma nosaukumu, augšupielādējiet logotipu un pielāgojiet stilu atbilstoši savam zīmolam.",
-  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību."
+  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību.",
+  "AccountsUsersWithoutEmails": "Mēs atradām <1>{{users}} lietotājiem</1>, kuriem nav e-pasta adrešu. Jūs varat pievienot nepieciešamos datus viņu kontos nākamajā posmā.",
+  "AccountsWithoutEmails": "Mēs atradām <1>{{users}} lietotājus</1>, kuriem nav e-pasta adrešu. Jūs varat aizpildīt viņu e-pasta adreses vai turpināt bez šīs darbības.",
+  "AIAgentQuotaDisabled": "AI aģenta kvota ir veiksmīgi atspējota.",
+  "AIAgentQuotaEnabled": "AI aģenta kvota ir veiksmīgi aktivizēta.",
+  "AISettings": "AI iestatījumi",
+  "DataImportAdminLimitExceeded": "Pārvaldnieku limits pārsniegts. Lai turpinātu, lūdzu, vai nu pielāgo administrēšanas skaitu, vai palieliniet administrēšanas limitu.",
+  "DefineQuotaPerAIAgent": "Definēt kvotu katram AI aģentam",
+  "GroupsSectionDescription": "Lietotāji, kurus jūs izvēlējāties iepriekšējā solī, tiks importēti grupās, kas izveidotas {{serviceName}}. Grupas parādīsies <1>{{sectionName}}</1> sadaļā.",
+  "ImportFilesDescription": "Lietotāja faili un dokumenti tiks importēti uz <1>{{sectionName}}</1>.",
+  "QuotaPerAIAgent": "Kvotei par AI aģentu",
+  "ResetSettings": "Atiestatnēt iestatījumus",
+  "SetDefaultAIAgentQuota": "Iestatiet noklusējuma uzglabāšanas kvotu AI aģentiem šajā {{productName}}. To var pielāgot vēlāk iestatējumos vai individualizēt, izveidojot katru AI aģentu.",
+  "SharedFilesAndFolders": "Kopīgas mapes un faili",
+  "SharedFilesAndFoldersDescription": "Faili un mapes, kuras kopīgā lietošanā ir pie citiem lietotājiem, tiks importēti uz <1>{{sectionName}}</1>.<br><1>Lūdzu, ņemiet vērā:</1> importa procesā daži piekļuves tiesību līmeņi var tikt zaudēti.",
+  "SharedFilesAndFoldersDetails": "Kopīgas mapes un faili",
+  "Top5AIAgents": "Top 5 AI aģenti pēc uzglabāšanas patēriņa:"
 }

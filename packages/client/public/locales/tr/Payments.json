@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "Ödeme eklemeyi unuttunuz",
   "YourCurrentPayment": "Mevcut ödemeniz",
   "YourCurrentPlan": "<1>Mevcut planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Ücret"
+  "YourPrice": "Ücret",
+  "PerAITools": "{{currency}} bir token başına"
 }

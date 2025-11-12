@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Czy chcesz anulować przesyłanie?",
   "WantToContinue": "Chcesz kontynuować czy zmienić limit pamięci użytkownika?",
   "WhiteLabelSubtitle": "Wpisz nazwę swojej firmy, wgraj logo i dostosuj stylizację, aby lepiej pasowała do Twojego brandingu.",
-  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku."
+  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku.",
+  "AccountsUsersWithoutEmails": "Znaleźliśmy <1>{{users}} użytkowników</1> bez adresów e-mail. Możesz dodać niezbędne dane do ich kont na następnym etapie.",
+  "AccountsWithoutEmails": "Znaleziono <1>{{users}} użytkowników</1> bez adresów e-mail. Możesz uzupełnić ich adresy e-mail lub kontynuować bez podejmowania tej akcji.",
+  "AIAgentQuotaDisabled": "Limit użycia agenta AI został pomyślnie wyłączony.",
+  "AIAgentQuotaEnabled": "Udzielono limitu agentów AI.",
+  "AISettings": "Ustawienia AI",
+  "DataImportAdminLimitExceeded": "Osiągnięto limit administratorów. Aby kontynuować, zmień liczbę administratorów lub zwiększ limit administratorów.",
+  "DefineQuotaPerAIAgent": "Zdefiniuj limit dla każdego agenta AI.",
+  "GroupsSectionDescription": "Użytkownicy, których wybrano w poprzednim kroku, zostaną zaimportowani do grup utworzonych w {{serviceName}}. Grupy pojawią się w sekcji <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Pliki użytkownika i dokumenty zostaną zaimportowane do <1>{{sectionName}}</1>.",
+  "QuotaPerAIAgent": "Przydział na agenta AI",
+  "ResetSettings": "Zresetuj ustawienia",
+  "SetDefaultAIAgentQuota": "Ustaw domyślny limit przestrzeni dyskowej dla agentów AI w tym {{productName}}. Można go później dostosować w ustawieniach lub skonfigurować indywidualnie podczas tworzenia każdego agenta AI.",
+  "SharedFilesAndFolders": "Współdzielone pliki i foldery",
+  "SharedFilesAndFoldersDescription": "Pliki i foldery udostępnione przez innych użytkowników zostaną zaimportowane do <1>{{sectionName}}</1>.<br><1>Uwaga:</1> podczas importu niektóre uprawnienia dostępu mogą zostać utracone.",
+  "SharedFilesAndFoldersDetails": "Współdzielone pliki i foldery",
+  "Top5AIAgents": "Top 5 agentów AI pod względem zużycia pamięci:"
 }

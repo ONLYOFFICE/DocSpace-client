@@ -95,5 +95,9 @@
   "SubmenuHistory": "Tarixçə",
   "UserFileUpdated": "Fayl yeniləndi.",
   "Users": "İstifadəçilər",
-  "Versions": "Versiyalar"
+  "Versions": "Versiyalar",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agenti yaradıldı",
+  "Resolution": "Qərar",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> adınadək dəyişdi",
+  "AIAgentsEmptyScreenTent": "Süni intellekt agentlərinin təfərrüatlarına burada baxın"
 }

@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
   "UploadFromPortalTitle": "Naloži iz {{productName}}",
   "UploadPDFFormOptionDescription": "Izberi pripravljen PDF obrazec, ki je na voljo v {{productName}} in ga naloži v sobo.",
-  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi"
+  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi",
+  "CreateAIAgent": "Ustvarite novega agenta",
+  "CreateAIAgentDescription": "Začnite ustvarjati svoj prvi AI agent",
+  "EmptyAIAgentsDescription": "Nastavite osebnega asistenta za vašo ekipo z dodajanjem baze znanja, izbiro idealnega modela in povezavo MCP strežnika. Povabite sodelavce, da sodelujejo in izkoristite zmogljivosti klepeta agenta.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Za ustvarjanje in uporabo AI agentov povežite svojo denarnico in omogočite storitev AI funkcij v nastavitvah {{productName}}. Ko boste to naredili, boste lahko delali z AI agenti in sodelovali z vašo ekipo.",
+  "EmptyAIAgentsAIDisabledDescription": "Ta razdelek uporabnikom omogoča delo z umetno inteligenčnimi agenti – pametnimi pomočniki za obdelavo dokumentov in drugih nalog.\nZa začetek uporabe jih mora omogočiti skrbnik {{productName}} storitve umetne inteligence.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Ko vas vaša ekipa povabi k sodelovanju, se bodo umetni agenti pojavili tukaj, pripravljeni pomagati pri dokumentih, upravljanju znanja in vsakdanjih opravilih.",
+  "EmptyAIAgentsTitle": "Ustvarite svojega AI agenta",
+  "EmptyAIAgentsUserTitle": "Še ni na voljo nobenih AI agentov.",
+  "EmptyAIAgentsAIDisabledUserTitle": "AI agenti še niso na voljo.",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Povežite svojo denarnico in omogočite funkcije umetne inteligence."
 }

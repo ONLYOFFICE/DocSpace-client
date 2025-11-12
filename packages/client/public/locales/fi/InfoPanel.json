@@ -95,5 +95,9 @@
   "SubmenuHistory": "Historia",
   "UserFileUpdated": "Tiedosto päivitetty.",
   "Users": "Käyttäjät",
-  "Versions": "Versiot"
+  "Versions": "Versiot",
+  "HistoryAgentCreated": "«{{roomTitle}}» agentti luotu",
+  "Resolution": "Päätös",
+  "AgentRenamed": "Agentti <1>«{{oldRoomTitle}}»</1> nimennettiin uudelleen <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Katso tekoälyagenttien tiedot tässä"
 }

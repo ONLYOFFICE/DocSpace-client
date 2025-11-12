@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Качете от устройство",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
+  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни",
+  "CreateAIAgent": "Създайте нов агент",
+  "CreateAIAgentDescription": "Започнете да създавате първия си AI агент",
+  "EmptyAIAgentsDescription": "Създайте персонализиран асистент за вашия екип, като добавите база знания, изберете идеалния модел и свържете MCP сървър. Поканете колегите си да си сътрудничат и да се възползват максимално от възможностите за чат на агента.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "За да създадете и използвате AI агенти, свържете портфейла си и активирайте услугата за AI функции в настройките на {{productName}}. След като това приключи, ще можете да работите с AI агенти и да си сътрудничите с вашия екип.",
+  "EmptyAIAgentsAIDisabledDescription": "Тази секция позволява на потребителите да работят с AI агенти — интелигентни асистенти за обработка на документи и други задачи.\nЗа да започнете да ги използвате, услугата за AI функции трябва да бъде активирана от администратор на {{productName}}.",
+  "EmptyAIAgentsAIEnabledUserDescription": "След като вашият екип ви покани да си сътрудничите, тук ще се появят AI агенти, готови да помогнат с документи, управление на знания и ежедневни задачи.",
+  "EmptyAIAgentsTitle": "Създайте своя AI агент",
+  "EmptyAIAgentsUserTitle": "Още няма налични AI агенти.",
+  "EmptyAIAgentsAIDisabledUserTitle": "AI агентите все още не са достъпни.",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Свържете портфейла си и активирайте AI функциите"
 }

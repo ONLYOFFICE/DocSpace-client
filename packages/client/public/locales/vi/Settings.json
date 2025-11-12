@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Bạn có muốn hủy tải lên không?",
   "WantToContinue": "Bạn có muốn tiếp tục hoặc thay đổi hạn mức lưu trữ người dùng không?",
   "WhiteLabelSubtitle": "Nhập tên công ty của bạn, tải logo lên và tùy chỉnh phong cách để phù hợp với thương hiệu của bạn.",
-  "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo."
+  "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo.",
+  "AccountsUsersWithoutEmails": "Chúng tôi đã tìm thấy <1>{{users}} người dùng</1> không có email. Bạn có thể thêm dữ liệu cần thiết vào tài khoản của họ ở bước tiếp theo.",
+  "AccountsWithoutEmails": "Chúng tôi tìm thấy <1>{{users}} người dùng</1> không có email. Bạn có thể điền email của họ hoặc tiếp tục mà không cần thực hiện hành động này.",
+  "AIAgentQuotaDisabled": "Đã vô hiệu hóa thành công hạn ngạch tác nhân AI.",
+  "AIAgentQuotaEnabled": "Đã kích hoạt thành công hạn ngạch cho AI agent.",
+  "AISettings": "Cài đặt AI",
+  "DataImportAdminLimitExceeded": "Đã vượt quá giới hạn quản trị viên. Để tiếp tục, vui lòng điều chỉnh số lượng quản trị viên hoặc tăng giới hạn quản trị viên.",
+  "DefineQuotaPerAIAgent": "Xác định hạn ngạch cho mỗi tác nhân AI",
+  "GroupsSectionDescription": "Người dùng mà bạn đã chọn ở bước trước sẽ được nhập vào các nhóm được tạo trong {{serviceName}}. Các nhóm sẽ xuất hiện trong phần <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Các tệp và tài liệu của người dùng sẽ được nhập vào <1>{{sectionName}}</1>.",
+  "QuotaPerAIAgent": "Giới hạn cho mỗi tác nhân AI",
+  "ResetSettings": "Thiết lập lại cài đặt",
+  "SetDefaultAIAgentQuota": "Thiết lập hạn ngạch lưu trữ mặc định cho các tác nhân AI trong {{productName}} này. Có thể điều chỉnh sau trong cài đặt hoặc tùy chỉnh riêng khi tạo từng tác nhân AI.",
+  "SharedFilesAndFolders": "Tệp và thư mục được chia sẻ",
+  "SharedFilesAndFoldersDescription": "Các tệp và thư mục được chia sẻ bởi người dùng khác sẽ được nhập vào <1>{{sectionName}}</1>.<br><1>Xin lưu ý:</1> một số quyền truy cập có thể bị mất trong quá trình nhập.",
+  "SharedFilesAndFoldersDetails": "Tệp và thư mục được chia sẻ",
+  "Top5AIAgents": "Top 5 AI agents theo dung lượng lưu trữ:"
 }

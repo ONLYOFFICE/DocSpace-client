@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
-  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
+  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz",
+  "CreateAIAgent": "Yeni bir ajan oluştur",
+  "CreateAIAgentDescription": "İlk yapay zeka aracınızı oluşturmaya başlayın",
+  "EmptyAIAgentsDescription": "Ekibiniz için kişiselleştirilmiş bir asistan ayarlamak için bir bilgi tabanı ekleyin, ideal modeli seçin ve bir MCP sunucusuna bağlayın. İş arkadaşlarınızı işbirliği yapmak için davet edin ve aracının sohbet özelliklerinden en iyi şekilde yararlanın.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "AI ajanları oluşturmak ve kullanmak için, {{productName}} ayarlarında cüzdanınızı bağlayın ve AI özellikler hizmetini etkinleştirin. Bu işlem tamamlandıktan sonra, AI ajanlarıyla çalışabilir ve ekibinizle işbirliği yapabilirsiniz.",
+  "EmptyAIAgentsAIDisabledDescription": "Bu bölüm, kullanıcıların AI ajanlarıyla (belgeleri ve diğer görevleri yönetmek için akıllı asistanlar) çalışmasını sağlar.\nOnları kullanmaya başlamak için, AI özellikleri hizmeti {{productName}} yöneticiniz tarafından etkinleştirilmelidir.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Ekibiniz sizi işbirliği yapmaya davet ettikten sonra, AI ajanları burada belgelere, bilgi yönetimine ve günlük görevlere yardımcı olmaya hazır olarak görünecektir.",
+  "EmptyAIAgentsTitle": "AI ajanınızı oluşturun",
+  "EmptyAIAgentsUserTitle": "Henüz kullanılabilir yapay zeka aracılar bulunmamaktadır.",
+  "EmptyAIAgentsAIDisabledUserTitle": "AI ajanları henüz mevcut değil",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Cüzdanınızı bağlayın ve yapay zeka özelliklerini etkinleştirin"
 }

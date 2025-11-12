@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "Нямате добавени плащания.",
   "YourCurrentPayment": "Вашият настоящ платеж",
   "YourCurrentPlan": "<1>Вашият текущ план:</1> {{amount}} <2>({{price}}/месец)</2>",
-  "YourPrice": "Вашата цена"
+  "YourPrice": "Вашата цена",
+  "PerAITools": "{{currency}} на токен"
 }

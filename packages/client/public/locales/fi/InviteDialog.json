@@ -18,5 +18,8 @@
   "SendInvitation": "Lähetä kutsu",
   "UserMaxAvailableRoleWarning": "Vieraita ja käyttäjiä ei voida asettaa huoneen johtajiksi. Vain huoneen ja {{productName}} pääkäyttäjät ovat sopivia tähän rooliin.",
   "UsersAlreadyAdded": "Jotkut käyttäjät on jo lisätty.",
-  "UsersCannotBeAdded": "Poistetut yhteystiedot ei voi lisätä huoneeseen"
+  "UsersCannotBeAdded": "Poistetut yhteystiedot ei voi lisätä huoneeseen",
+  "InviteViaLinkDescriptionAgentGuest": "Luo universaali linkki itsevaltuutukselle agentissa vieraana.",
+  "InviteViaLinkDescriptionAgentMembers": "Luo universaali linkki {{productName}}-jäsenille itsevahvistusta varten agentissa.",
+  "UserAgentMaxAvailableRoleWarning": "Vieraat ja käyttäjät eivät voi olla agenttien päälliköitä. Vain huone- ja {{productName}}-ylläpitäjät soveltuvat määritettyyn rooliin."
 }

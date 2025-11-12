@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
   "UploadFromPortalTitle": "Prześlij z {{productName}}",
   "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
-  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
+  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych",
+  "CreateAIAgent": "Utwórz nowego agenta",
+  "CreateAIAgentDescription": "Zacznij budować swojego pierwszego agenta AI",
+  "EmptyAIAgentsDescription": "Skonfiguruj spersonalizowanego asystenta dla swojego zespołu, dodając bazę wiedzy, wybierając idealny model i podłączając serwer MCP. Zaproś współpracowników do współpracy i w pełni wykorzystaj możliwości czatu agenta.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Aby tworzyć i używać agentów AI, połącz swój portfel i włącz usługę funkcji AI w ustawieniach {{productName}}. Po wykonaniu tego będziesz mógł pracować z agentami AI i współpracować ze swoim zespołem.",
+  "EmptyAIAgentsAIDisabledDescription": "Ta sekcja umożliwia użytkownikom pracę z agentami AI — inteligentnymi asystentami do obsługi dokumentów i innych zadań.\nAby zacząć z nich korzystać, usługa funkcji AI musi zostać włączona przez administratora {{productName}}.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Gdy Twój zespół zaprosi Cię do współpracy, agenci AI pojawią się tutaj, gotowi do pomocy w dokumentach, zarządzaniu wiedzą i codziennych zadaniach.",
+  "EmptyAIAgentsTitle": "Stwórz swojego agenta AI",
+  "EmptyAIAgentsUserTitle": "Brak dostępnych agentów AI.",
+  "EmptyAIAgentsAIDisabledUserTitle": "Agenci AI nie są jeszcze dostępni.",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Połącz swój portfel i włącz funkcje AI"
 }

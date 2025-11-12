@@ -95,5 +95,9 @@
   "SubmenuHistory": "Zgodovina",
   "UserFileUpdated": "Datoteka posodobljena.",
   "Users": "Uporabniki",
-  "Versions": "Verzije"
+  "Versions": "Verzije",
+  "HistoryAgentCreated": "«{{roomTitle}}» agent je ustvarjen",
+  "Resolution": "Resolucija",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> je preimenovan v <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Poglejte podrobnosti o AI agentih tukaj."
 }

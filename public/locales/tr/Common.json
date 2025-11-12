@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "Değişiklikleriniz kaydedilmedi. Şimdi ayrılırsanız, güncellemeleriniz kaybolacaktır. Gerçekten ayrılmak istiyor musunuz?",
   "WebCrawling": "Web tarama",
   "WebSearch": "Web araması",
-  "WorkInProgress": "Yapım aşamasında"
+  "WorkInProgress": "Yapım aşamasında",
+  "NoMCPServersDescription": "Lütfen AI aracında kullanmak için {{productName}} ayarlarında MCP sunucularını bağlayın."
 }

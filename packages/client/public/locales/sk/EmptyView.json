@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Nahrať zo zariadenia",
   "UploadFromPortalTitle": "Nahrať z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte pripravený PDF formulár dostupný v {{productName}} a nahrajte ho do miestnosti.",
-  "VirtualDataRoomEmptyTitle": "Vitajte vo Virtuálnej dátovej miestnosti"
+  "VirtualDataRoomEmptyTitle": "Vitajte vo Virtuálnej dátovej miestnosti",
+  "CreateAIAgent": "Vytvoriť nového agenta",
+  "CreateAIAgentDescription": "Začnite vytvárať svojho prvého AI agenta",
+  "EmptyAIAgentsDescription": "Nastavte si personalizovaného asistenta pre váš tím pridaním databázy znalostí, výberom ideálneho modelu a pripojením MCP servera. Pozývajte svojich kolegov na spoluprácu a využite naplno chatovacie schopnosti agenta.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Na vytvorenie a používanie AI agentov pripojte svoju peňaženku a povoľte službu AI funkcií v nastaveniach {{productName}}. Po dokončení budete môcť pracovať s AI agentmi a spolupracovať so svojím tímom.",
+  "EmptyAIAgentsAIDisabledDescription": "Táto sekcia umožňuje používateľom pracovať s AI agentmi – inteligentnými asistentmi na spracovanie dokumentov a iných úloh.\nNa začatie používania je potrebné, aby služba AI funkcií aktivovala administrátor {{productName}}.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Keď váš tím pozve na spoluprácu, AI agenti sa tu zobrazia, pripravení pomôcť s dokumentmi, riadením znalostí a každodennými úlohami.",
+  "EmptyAIAgentsTitle": "Vytvorte svojho AI agenta",
+  "EmptyAIAgentsUserTitle": "Zatiaľ nie sú k dispozícii žiadni AI agenti.",
+  "EmptyAIAgentsAIDisabledUserTitle": "AI agenti ešte nie sú k dispozícii.",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Pripojte peňaženku a povoľte funkcie AI"
 }

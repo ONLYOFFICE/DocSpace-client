@@ -37,5 +37,7 @@
   "UserName": "Käyttäjänimi",
   "ViewerInfo": "Katsojan tiedot",
   "WatermarkPreview": "Vesileiman esikatselu",
-  "WatermarkPreviewHelp": "Tämä esikatselu näyttää karkeasti kuinka vesileima näytetään tiedostoissasi."
+  "WatermarkPreviewHelp": "Tämä esikatselu näyttää karkeasti kuinka vesileima näytetään tiedostoissasi.",
+  "DisableRoomQuotaAgent": "Poista kiintiö tälle agentille",
+  "StorageDescriptionAgent": "Varastokvota asetettu agenttikohtaisesti. Voit muuttaa tätä arvoa tai poistaa tallennusrajan käytöstä."
 }

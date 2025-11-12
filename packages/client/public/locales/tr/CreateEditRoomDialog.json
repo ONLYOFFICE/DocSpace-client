@@ -37,5 +37,7 @@
   "UserName": "Kullanıcı Adı",
   "ViewerInfo": "Görüntüleyici bilgisi",
   "WatermarkPreview": "Filigran Ön izlemesi",
-  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir."
+  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir.",
+  "DisableRoomQuotaAgent": "Bu ajan için kota devre dışı bırak",
+  "StorageDescriptionAgent": "Her ajan için depolama kotası belirlenmiştir. Bu değeri değiştirebilir veya depolama limitini kapatabilirsiniz."
 }

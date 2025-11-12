@@ -29,5 +29,8 @@
   "ItemsDeletedAfter": "Những mục này sẽ bị xóa vĩnh viễn trong 30 ngày.",
   "ItemsPermanentlyDeleted": "Những mục này sẽ bị xóa vĩnh viễn khỏi {{trashSection}}.",
   "removeFromListDescription": "Bạn sắp xóa <1>{{title}}</1> khỏi danh sách. Bạn có chắc chắn muốn tiếp tục không?",
-  "removeFromListDescriptionPlural": "Bạn sắp xóa <1>items ({{count}})</1> khỏi danh sách. Bạn có chắc chắn muốn tiếp tục không?"
+  "removeFromListDescriptionPlural": "Bạn sắp xóa <1>items ({{count}})</1> khỏi danh sách. Bạn có chắc chắn muốn tiếp tục không?",
+  "DeleteAIAgentDescription": "Tài khoản <strong>\"{{agentName}}\"</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
+  "DeleteAIAgentTitle": "Xóa bỏ người đại diện này?",
+  "DeleteAIAgentWarning": "Tôi hiểu những hậu quả và muốn xóa bỏ người đại diện."
 }

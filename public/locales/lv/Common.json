@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "Jūsu izmaiņas vēl nav saglabātas. Ja tagad aiziesiet, jūsu jauninājumi tiks zaudēti. Vai esat pārliecināts, ka vēlaties aiziet?",
   "WebCrawling": "Tīmekļa rāpošana",
   "WebSearch": "Tīmekļa meklēšana",
-  "WorkInProgress": "Darbs vēl jāpabeidz"
+  "WorkInProgress": "Darbs vēl jāpabeidz",
+  "NoMCPServersDescription": "Lūdzu, savienojiet MCP serverus {{productName}} iestatējumos, lai izmantotu tos AI aģentā."
 }

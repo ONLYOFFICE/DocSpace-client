@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Yükləməni ləğv etmək istəyirsiniz?",
   "WantToContinue": "İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?",
   "WhiteLabelSubtitle": "Şirkətinizin adını daxil edin, loqonu yükləyin və stili brendinizə uyğunlaşdırın.",
-  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin."
+  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
+  "AccountsUsersWithoutEmails": "Biz <1>{{users}}</1> e-poçtu olmayan istifadəçi tapdıq. Siz növbəti addımda onların hesablarına zəruri məlumatları əlavə edə bilərsiniz.",
+  "AccountsWithoutEmails": "E-poçtları olmayan <1>{{users}} istifadəçi</1> tapdılar. Siz onların e-poçtlarını doldura bilərsiniz və ya bu hərəkət olmadan davam edə bilərsiniz.",
+  "AIAgentQuotaDisabled": "Süni intellekt agent kvotası uğurla deaktiv edildi.",
+  "AIAgentQuotaEnabled": "Süni intellekt agent kvotası uğurla aktivləşdirilib.",
+  "AISettings": "Süni İntellekt parametrləri",
+  "DataImportAdminLimitExceeded": "İdarəçilərin sayı limiti keçildi. Davam etmək üçün, ya idarəçilərin sayını azaldaq, ya da idarəçi limiti artırılmalıdır.",
+  "DefineQuotaPerAIAgent": "Hər süni intellekt agenti üçün kvotanı müəyyənləşdirin",
+  "GroupsSectionDescription": "Əvvəlki addımda seçdiyiniz istifadəçilər {{serviceName}} xidmətində yaradılmış qruplara idxal ediləcək. Qruplar <1>{{sectionName}}</1> bölməsində görünəcək.",
+  "ImportFilesDescription": "İstifadəçinin faylları və sənədləri <1>{{sectionName}}</1> bölməsinə idxal ediləcək.",
+  "QuotaPerAIAgent": "Süni intellekt agenti üçün kvota",
+  "ResetSettings": "Tənzimləmələri sıfırla",
+  "SetDefaultAIAgentQuota": "Bu {{productName}} bölməsində süni intellekt agentləri üçün standart yaddaş kvotasını təyin edin. Bu, daha sonra parametrlərdə tənzimlənə və ya hər bir süni intellekt agenti yaradılarkən fərdi olaraq tənzimlənə bilər.",
+  "SharedFilesAndFolders": "Paylaşılmış fayllar və qovluclar",
+  "SharedFilesAndFoldersDescription": "Digər istifadəçilər tərəfindən paylaşılmış fayllar və qovluqlar <1>{{sectionName}}</1> bölməsinə idxal ediləcək.<br><1>Zəhmət çəkin:</1> idxal zamanı bəzi giriş hüquqları itirilə bilər.",
+  "SharedFilesAndFoldersDetails": "Paylaşılmış fayllar və qovluclar",
+  "Top5AIAgents": "Yaddaş istifadəsinə görə ən yaxşı 5 süni intellekt agenti:"
 }

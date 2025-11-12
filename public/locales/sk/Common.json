@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "Máte nenakopírované zmeny. Ak teraz odídete, vaše aktualizácie budú stratené. Ste si istí, že chcete odísť?",
   "WebCrawling": "Prehľadávanie webu",
   "WebSearch": "Webové vyhľadávanie",
-  "WorkInProgress": "Práca v pokroku"
+  "WorkInProgress": "Práca v pokroku",
+  "NoMCPServersDescription": "Prosím, pripojte servery MCP v nastaveniach {{productName}}, aby ste ich mohli používať v AI agentovi."
 }

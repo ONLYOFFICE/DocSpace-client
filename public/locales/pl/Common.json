@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "Masz niezapisane zmiany. Jeśli teraz opuścisz stronę, Twoje aktualizacje zostaną utracone. Czy na pewno chcesz opuścić stronę?",
   "WebCrawling": "Zarabianie w sieci",
   "WebSearch": "Wyszukiwarka internetowa",
-  "WorkInProgress": "Praca w toku"
+  "WorkInProgress": "Praca w toku",
+  "NoMCPServersDescription": "Proszę połącz serwery MCP w ustawieniach {{productName}}, aby móc z nich korzystać w agencie AI."
 }

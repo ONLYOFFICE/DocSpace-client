@@ -18,5 +18,8 @@
   "SendInvitation": "초대장 전송",
   "UserMaxAvailableRoleWarning": "게스트와 사용자를 룸 관리자로 할당할 수 없습니다. 룸 및 {{productName}} 관리자만 지정된 역할에 적합합니다.",
   "UsersAlreadyAdded": "일부 사용자가 이미 추가되었습니다",
-  "UsersCannotBeAdded": "비활성화된 연락처는 방에 추가할 수 없습니다."
+  "UsersCannotBeAdded": "비활성화된 연락처는 방에 추가할 수 없습니다.",
+  "InviteViaLinkDescriptionAgentGuest": "에이전트에서 게스트 자격으로 자체 인증을 위한 범용 링크를 생성합니다.",
+  "InviteViaLinkDescriptionAgentMembers": "에이전트 내에서 {{productName}} 멤버들을 위한 자체 인증을 위한 범용 링크를 생성하세요.",
+  "UserAgentMaxAvailableRoleWarning": "손님과 사용자는 에이전트 관리자로 지정할 수 없습니다. 지정된 역할에 적합한 사람은 객실 및 {{productName}} 관리자뿐입니다."
 }

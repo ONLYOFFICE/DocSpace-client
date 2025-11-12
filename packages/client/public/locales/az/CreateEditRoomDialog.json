@@ -37,5 +37,7 @@
   "UserName": "İstifadəçi Adı",
   "ViewerInfo": "İzləyici məlumatı",
   "WatermarkPreview": "Su nişanı önizləməsi",
-  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir."
+  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir.",
+  "DisableRoomQuotaAgent": "Bu agent üçün kvota söndür.",
+  "StorageDescriptionAgent": "Agentlərinə görə saxlama kvotası müəyyən edilib. Bu dəyəri dəyişdirmək və ya saxlama limitini söndürmək olar."
 }

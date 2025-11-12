@@ -95,5 +95,9 @@
   "SubmenuHistory": "Geçmiş",
   "UserFileUpdated": "Dosya güncellendi.",
   "Users": "Kullanıcılar",
-  "Versions": "Sürümler"
+  "Versions": "Sürümler",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> ajanı oluşturuldu",
+  "Resolution": "Çözünürlük",
+  "AgentRenamed": "Temsilci <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> olarak değiştirdi",
+  "AIAgentsEmptyScreenTent": "İşte yapay zeka ajanlarının detayları burada"
 }

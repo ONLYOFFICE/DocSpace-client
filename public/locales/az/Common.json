@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "Köhnələşdirilməmiş dəyişikliklər var. İndi getməlisinizsə, yeniləmələr silinəcək. Əminsiz ki getmək istəyirsiniz?",
   "WebCrawling": "Veb sürüşü",
   "WebSearch": "Veb axtarışı",
-  "WorkInProgress": "İş aparılır"
+  "WorkInProgress": "İş aparılır",
+  "NoMCPServersDescription": "Süni intellekt agentində istifadə etmək üçün MCP serverlərini {{productName}} parametrlərində qoşun."
 }

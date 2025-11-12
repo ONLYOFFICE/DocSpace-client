@@ -37,5 +37,7 @@
   "UserName": "Gebruikersnaam",
   "ViewerInfo": "Kijker info",
   "WatermarkPreview": "Voorbeeld Watermerk",
-  "WatermarkPreviewHelp": "Dit voorbeeld van de afbeelding laat ongeveer zien hoe het watermerk in uw bestanden zal worden weergegeven."
+  "WatermarkPreviewHelp": "Dit voorbeeld van de afbeelding laat ongeveer zien hoe het watermerk in uw bestanden zal worden weergegeven.",
+  "DisableRoomQuotaAgent": "Schakel de quota uit voor deze agent",
+  "StorageDescriptionAgent": "Opslagquota ingesteld per agent. U kunt deze waarde wijzigen of de opslaglimiet uitschakelen."
 }

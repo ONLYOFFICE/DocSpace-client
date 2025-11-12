@@ -37,5 +37,7 @@
   "UserName": "Tên người dùng",
   "ViewerInfo": "Thông tin người xem",
   "WatermarkPreview": "Xem trước watermark",
-  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn."
+  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn.",
+  "DisableRoomQuotaAgent": "Vô hiệu hóa hạn ngạch cho agent này",
+  "StorageDescriptionAgent": "Ngân sách lưu trữ được thiết lập cho mỗi nhân viên. Bạn có thể thay đổi giá trị này hoặc tắt giới hạn lưu trữ."
 }

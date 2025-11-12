@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Wilt u het uploaden annuleren?",
   "WantToContinue": "Wilt u doorgaan of de opslagquota voor gebruikers wijzigen?",
   "WhiteLabelSubtitle": "Voer uw bedrijfsnaam in, upload het logo en pas de styling aan aan uw huisstijl.",
-  "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap."
+  "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap.",
+  "AccountsUsersWithoutEmails": "We hebben <1>{{users}} gebruikers</1> zonder e-mailadressen gevonden. U kunt de benodigde gegevens aan hun accounts toevoegen in de volgende stap.",
+  "AccountsWithoutEmails": "We hebben <1>{{users}} gebruikers</1> zonder e-mailadressen gevonden. U kunt hun e-mailadressen invullen of verdergaan zonder deze actie.",
+  "AIAgentQuotaDisabled": "De AI agent quota is succesvol uitgeschakeld.",
+  "AIAgentQuotaEnabled": "De AI agent quota is succesvol ingeschakeld.",
+  "AISettings": "AI-instellingen",
+  "DataImportAdminLimitExceeded": "Admin limiet overschreden. Om verder te gaan, pas dan het aantal beheerders aan of verhoog de beheerderslimiet.",
+  "DefineQuotaPerAIAgent": "Definieer quota per AI-agent",
+  "GroupsSectionDescription": "Gebruikers die u in de vorige stap hebt geselecteerd, worden geïmporteerd in groepen die zijn gemaakt in {{serviceName}}. Groepen verschijnen in de <1>{{sectionName}}</1> sectie.",
+  "ImportFilesDescription": "Gebruikersbestanden en documenten worden geïmporteerd in <1>{{sectionName}}</1>.",
+  "QuotaPerAIAgent": "Quota per AI-agent",
+  "ResetSettings": "Instellingen resetten",
+  "SetDefaultAIAgentQuota": "Stel het standaard opslagquotum in voor AI-agenten in {{productName}}. Dit kan later worden aangepast in de instellingen of individueel worden aangepast bij het aanmaken van elke AI-agent.",
+  "SharedFilesAndFolders": "Gedeelde bestanden en mappen",
+  "SharedFilesAndFoldersDescription": "Bestanden en mappen die door andere gebruikers zijn gedeeld, worden geïmporteerd in <1>{{sectionName}}</1>.<br><1>Let op:</1> sommige toegangsrechten kunnen tijdens de import verloren gaan.",
+  "SharedFilesAndFoldersDetails": "Gedeelde bestanden en mappen",
+  "Top5AIAgents": "Top 5 AI agents qua opslaggebruik:"
 }

@@ -37,5 +37,7 @@
   "UserName": "Meno používateľa",
   "ViewerInfo": "Informácie o prehliadači",
   "WatermarkPreview": "Náhľad vodoznaku",
-  "WatermarkPreviewHelp": "Tento náhľad obrázku približne zobrazuje, ako sa vodoznak zobrazí vo vašich súboroch."
+  "WatermarkPreviewHelp": "Tento náhľad obrázku približne zobrazuje, ako sa vodoznak zobrazí vo vašich súboroch.",
+  "DisableRoomQuotaAgent": "Vypnúť kvótu pre tohto agenta",
+  "StorageDescriptionAgent": "Prístrojové kvóty úložiska sú nastavené na agenta. Môžete zmeniť túto hodnotu alebo vypnúť limit úložiska."
 }

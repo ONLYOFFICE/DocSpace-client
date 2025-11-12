@@ -18,5 +18,8 @@
   "SendInvitation": "Poslať pozvánku",
   "UserMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť označení ako manažéri miestnosti. Iba administrátorom miestnosti a administrátorom {{productName}} môže byť pridelená táto rola.",
   "UsersAlreadyAdded": "Niektorí používatelia už boli pridaní",
-  "UsersCannotBeAdded": "Zakázaní kontakty je možné pridať do miestnosti."
+  "UsersCannotBeAdded": "Zakázaní kontakty je možné pridať do miestnosti.",
+  "InviteViaLinkDescriptionAgentGuest": "Vytvorte univerzívny odkaz na samoautorizáciu v agentovi ako hosť.",
+  "InviteViaLinkDescriptionAgentMembers": "Vytvorte univerzity link pre členov {{productName}} na vlastnú autorizáciu v agente.",
+  "UserAgentMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť priradení ako manažéri agentov. Na danú úlohu sú vhodní len administrátori izieb a {{productName}}."
 }

@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "Bạn có những thay đổi chưa được lưu. Nếu bạn rời khỏi trang này, các bản cập nhật của bạn sẽ bị mất. Bạn có chắc chắn muốn rời khỏi trang này không?",
   "WebCrawling": "Thu thập dữ liệu web",
   "WebSearch": "Tìm kiếm trên web",
-  "WorkInProgress": "Đang thực hiện"
+  "WorkInProgress": "Đang thực hiện",
+  "NoMCPServersDescription": "Vui lòng kết nối máy chủ MCP trong cài đặt {{productName}} để sử dụng chúng trong tác nhân AI."
 }

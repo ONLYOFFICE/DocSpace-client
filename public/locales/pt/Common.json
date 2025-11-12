@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "Você tem alterações não salvas. Se você sair agora, suas atualizações serão perdidas. Tem certeza de que deseja sair?",
   "WebCrawling": "Crawling na web",
   "WebSearch": "Pesquisa na web",
-  "WorkInProgress": "Trabalho em andamento"
+  "WorkInProgress": "Trabalho em andamento",
+  "NoMCPServersDescription": "Por favor, conecte os servidores MCP nas configurações do {{productName}} para usá-los no agente de IA."
 }

@@ -29,5 +29,8 @@
   "ItemsDeletedAfter": "Bu əşyalar 30 gün ərzində mərhum ediləcəkdir.",
   "ItemsPermanentlyDeleted": "Bu əşyalar {{trashSection}} bölməsindən daimi şəkildə silinəcəkdir.",
   "removeFromListDescription": "Siz siyahidan <1>{{title}}</1> silməyə hazırıqsınız. Davam etmək istəyirsinizmi?",
-  "removeFromListDescriptionPlural": "Siz siyahidan <1>1</1> ədəd ({{count}}) silməyə hazırıqsınız. Davam etmək istəyirsinizmi?"
+  "removeFromListDescriptionPlural": "Siz siyahidan <1>1</1> ədəd ({{count}}) silməyə hazırıqsınız. Davam etmək istəyirsinizmi?",
+  "DeleteAIAgentDescription": "Agent <strong>\"{{agentName}}\"</strong> daimi şəkildə silinəcək. Bütün məlumatlar və istifadəçi girişləri itiriləcək.",
+  "DeleteAIAgentTitle": "Bu agenti silməli?",
+  "DeleteAIAgentWarning": "Mövcud nəticələri başa düşürəm və agenti silmək istəyirəm."
 }

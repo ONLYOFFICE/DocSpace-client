@@ -1062,5 +1062,6 @@
   "UnsavedChangesDescription": "U heeft wijzigingen die nog niet opgeslagen zijn. Als u nu vertrekt, gaan uw updates verloren. Bent u zeker dat u wilt vertrekken?",
   "WebCrawling": "Webcrawlen",
   "WebSearch": "Web zoeken",
-  "WorkInProgress": "Werk in uitvoering"
+  "WorkInProgress": "Werk in uitvoering",
+  "NoMCPServersDescription": "Verbind alstublieft MCP servers in de {{productName}} instellingen om ze in de AI agent te gebruiken."
 }

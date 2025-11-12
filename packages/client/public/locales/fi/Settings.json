@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Haluatko peruuttaa latauksen?",
   "WantToContinue": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
   "WhiteLabelSubtitle": "Syötä yrityksesi nimi, lataa logo ja muokkaa tyyli brändäykseesi sopivaksi. ",
-  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen."
+  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
+  "AccountsUsersWithoutEmails": "Löysimme <1>{{users}} käyttäjää</1> ilman sähköpostiosoitteita. Voit lisätä tarvittavat tiedot heidän tileilleen seuraavassa vaiheessa.",
+  "AccountsWithoutEmails": "Löysimme <1>{{users}} käyttäjää</1> ilman sähköpostiosoitteita. Voit täyttää heidän sähköpostiosoitteensa tai jatkaa ilman tätä toimenpidettä.",
+  "AIAgentQuotaDisabled": "AI-agentin kiintiö on poistettu onnistuneesti.",
+  "AIAgentQuotaEnabled": "AI-agentin kiintiö on otettu käyttöön onnistuneesti.",
+  "AISettings": "AI-asetukset",
+  "DataImportAdminLimitExceeded": "Ylläpitäjien määrä ylittynyt. Jatkaaksesi, säädä joko ylläpitäjien lukumäärää tai kasvata ylläpitäjien aikarajaa.",
+  "DefineQuotaPerAIAgent": "Määritä kiintiö per AI-agentti",
+  "GroupsSectionDescription": "Käyttäjät, jotka valitsit edellisessä vaiheessa, tuodaan {{serviceName}}-palvelussa luotuihin ryhmiin. Ryhmät näkyvät <1>{{sectionName}}</1>-osiossa.",
+  "ImportFilesDescription": "Käyttäjän tiedostot ja dokumentit tuodaan <1>{{sectionName}}</1>:een.",
+  "QuotaPerAIAgent": "AI-agentin kiintiö",
+  "ResetSettings": "Nollaa asetukset",
+  "SetDefaultAIAgentQuota": "Aseta oletuslevytilan raja AI-agentteille tässä {{productName}}. Sitä voidaan säätää myöhemmin asetuksissa tai mukauttaa yksilöllisesti luotaessa jokaista AI-agenttia.",
+  "SharedFilesAndFolders": "Jaetut tiedostot ja kansiot",
+  "SharedFilesAndFoldersDescription": "Muiden käyttäjien kanssa jaetut tiedostot ja kansiot tuodaan <1>{{sectionName}}</1>.<br><1>Huomioithan:</1> osa käyttöoikeuksista voi kadota tuonnin yhteydessä.",
+  "SharedFilesAndFoldersDetails": "Jaetut tiedostot ja kansiot",
+  "Top5AIAgents": "Top 5 AI-agentit tallennustilan käytön mukaan:"
 }

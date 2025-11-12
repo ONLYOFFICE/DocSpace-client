@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "결제 정보를 추가하지 않으셨습니다.",
   "YourCurrentPayment": "현재 결제",
   "YourCurrentPlan": "<1>현재 요금제:</1> {{amount}} <2>({{price}}/월)</2>",
-  "YourPrice": "내 요금"
+  "YourPrice": "내 요금",
+  "PerAITools": "토큰당 {{currency}}"
 }

@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "Jūs neesat pievienojis(-usi) nevienu maksājumu",
   "YourCurrentPayment": "Jūsu pašreizējais maksājums",
   "YourCurrentPlan": "<1>Jūsu pašreizējais plāns:</1> {{amount}} <2>({{price}}/mēnesī)</2>",
-  "YourPrice": "Jūsu cena"
+  "YourPrice": "Jūsu cena",
+  "PerAITools": "{{currency}} par žetonu"
 }

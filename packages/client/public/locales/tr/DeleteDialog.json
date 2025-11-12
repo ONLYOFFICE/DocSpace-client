@@ -29,5 +29,8 @@
   "ItemsDeletedAfter": "Bu öğeler 30 gün sonra kalıcı olarak silinecektir.",
   "ItemsPermanentlyDeleted": "Bu öğeler {{trashSection}}'dan kalıcı olarak kaldırılacaktır.",
   "removeFromListDescription": "Silmek üzere olduğunuz öğe <1>{{title}}</1>. Devam etmek istediğinizden emin misiniz?",
-  "removeFromListDescriptionPlural": "listeden <1> öğe({{count}})</1> silmek üzeresiniz. Devam etmek istediğinizden emin misiniz?"
+  "removeFromListDescriptionPlural": "listeden <1> öğe({{count}})</1> silmek üzeresiniz. Devam etmek istediğinizden emin misiniz?",
+  "DeleteAIAgentDescription": "Ajan <strong\">{{agentName}}\"</strong> kalıcı olarak silinecektir. Tüm veriler ve kullanıcı erişimleri kaybolacaktır.",
+  "DeleteAIAgentTitle": "Bu ajanı sil?",
+  "DeleteAIAgentWarning": "Sonuçların farkındayım ve ajanı silmek istiyorum"
 }

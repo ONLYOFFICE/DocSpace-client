@@ -276,5 +276,21 @@
   "WantToCancelUpload": "Ali želite preklicati nalaganje?",
   "WantToContinue": "Ali želite nadaljevati ali spremeniti uporabniško kvoto prostora za shranjevanje?",
   "WhiteLabelSubtitle": "Vnesite ime svojega podjetja, naložite logotip in prilagodite slog, da bo ustrezal vaši blagovni znamki.",
-  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom."
+  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
+  "AccountsUsersWithoutEmails": "Odkrili smo <1>{{users}} uporabnikov</1> brez e-pošte. Na naslednjem koraku lahko dodate potrebne podatke v njihove račune.",
+  "AccountsWithoutEmails": "Našli smo <1>{{users}} uporabnikov</1> brez e-pošte. Lahko izpolnite njihove e-poštne naslove ali nadaljujete brez tega dejanja.",
+  "AIAgentQuotaDisabled": "Kvote za AI agenta ste uspešno onemogočili.",
+  "AIAgentQuotaEnabled": "Kvote za AI agenta je bila uspešno omogočena.",
+  "AISettings": "AI nastavitve",
+  "DataImportAdminLimitExceeded": "Presegajoča se meja za skrbnike. Za nadaljevanje, prosim prilagodite število skrbnikov ali povečajte mejo za skrbnike.",
+  "DefineQuotaPerAIAgent": "Določite kvoto na umetno inteligenco.",
+  "GroupsSectionDescription": "Uporabniki, ki ste jih izbrali v prejšnjem koraku, bodo uvoženi v skupine, ki so ustvarjene v {{serviceName}}. Skupine se bodo pojavile v razdelku <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "Uporabniške datoteke in dokumenti bodo uvoženi v <1>{{sectionName}}</1>.",
+  "QuotaPerAIAgent": "Kvota za AI agenta",
+  "ResetSettings": "Ponastavi nastavitve",
+  "SetDefaultAIAgentQuota": "Nastavite privzeto mero shranjevanja za umetne inteligence v tem {{productName}}. Jo je mogoče kasneje prilagoditi v nastavitvah ali pa jo individualno prilagoditi ob ustvarjanju vsake umetne inteligence.",
+  "SharedFilesAndFolders": "Skupne datoteke in mape",
+  "SharedFilesAndFoldersDescription": "Datoteke in mape, ki jih delijo drugi uporabniki, bodo uvožene v <1>{{sectionName}}</1>.<br><1>Prosimo, upoštevajte:</1> med uvoženjem je morda izgubljenih nekaj pravic dostopa.",
+  "SharedFilesAndFoldersDetails": "Skupne datoteke in mape",
+  "Top5AIAgents": "Najboljši 5 AI agentov po uporabi prostora za shranjevanje:"
 }

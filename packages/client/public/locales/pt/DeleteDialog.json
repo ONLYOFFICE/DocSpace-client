@@ -29,5 +29,8 @@
   "ItemsDeletedAfter": "Estes itens serão permanentemente eliminados em 30 dias.",
   "ItemsPermanentlyDeleted": "Estes itens serão removidos permanentemente da {{trashSection}}.",
   "removeFromListDescription": "Você está prestes a remover <1>{{title}}</1> da lista. Tem certeza de que deseja continuar?",
-  "removeFromListDescriptionPlural": "Você está prestes a remover <1>items ({{count}})</1> da lista. Tem certeza de que deseja continuar?"
+  "removeFromListDescriptionPlural": "Você está prestes a remover <1>items ({{count}})</1> da lista. Tem certeza de que deseja continuar?",
+  "DeleteAIAgentDescription": "O agente <strong>\"{{agentName}}\"</strong> será excluído permanentemente. Todos os dados e acessos de usuário serão perdidos.",
+  "DeleteAIAgentTitle": "Excluir este agente?",
+  "DeleteAIAgentWarning": "Eu compreendo as consequências e quero excluir o agente."
 }

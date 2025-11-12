@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "장치에서 업로드",
   "UploadFromPortalTitle": "{{productName}}에서 업로드",
   "UploadPDFFormOptionDescription": "{{productName}}에서 이용 가능한 PDF 양식을 선택하여 룸에 업로드하세요. ",
-  "VirtualDataRoomEmptyTitle": "가상 데이터 룸에 오신 것을 환영합니다"
+  "VirtualDataRoomEmptyTitle": "가상 데이터 룸에 오신 것을 환영합니다",
+  "CreateAIAgent": "새 에이전트 생성하기",
+  "CreateAIAgentDescription": "첫 번째 AI 에이전트 구축 시작하기",
+  "EmptyAIAgentsDescription": "팀을 위한 개인화된 어시스턴트를 설정하려면 지식 기반을 추가하고, 최적의 모델을 선택하고, MCP 서버를 연결하세요. 동료들을 초대하여 협업하고 에이전트의 채팅 기능을 최대한 활용하세요.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "AI 에이전트 생성 및 사용을 위해서는 {{productName}} 설정에서 지갑을 연결하고 AI 기능 서비스 활성화를 해주세요. 완료되면 AI 에이전트와 함께 작업하고 팀과 협업할 수 있습니다.",
+  "EmptyAIAgentsAIDisabledDescription": "이 섹션에서는 사용자가 AI 에이전트와 함께 작업할 수 있습니다 — 문서 및 기타 작업을 처리하는 스마트 어시스턴트입니다.\nAI 기능 서비스를 사용하려면 {{productName}} 관리자가 활성화해야 합니다.",
+  "EmptyAIAgentsAIEnabledUserDescription": "팀원이 협업을 위해 вас 초대하면, AI 에이전트가 여기에 나타나 문서, 지식 관리 및 일상적인 업무를 지원할 준비가 됩니다.",
+  "EmptyAIAgentsTitle": "AI 에이전트 생성하기",
+  "EmptyAIAgentsUserTitle": "아직 AI 에이전트가 없습니다.",
+  "EmptyAIAgentsAIDisabledUserTitle": "AI 에이전트는 아직 사용 가능하지 않습니다.",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "지갑을 연결하고 AI 기능을 활성화하세요."
 }

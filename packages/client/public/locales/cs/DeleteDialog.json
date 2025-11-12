@@ -29,5 +29,8 @@
   "ItemsDeletedAfter": "Tyto položky budou trvale smazány za 30 dní.",
   "ItemsPermanentlyDeleted": "Tyto položky budou trvale odstraněny z {{trashSection}}.",
   "removeFromListDescription": "Odstraníte <1>{{title}}</1> ze seznamu. Jste si jistí, že chcete pokračovat?",
-  "removeFromListDescriptionPlural": "Odstraníte <1>položek ({{count}})</1>. Jste si jistí, že chcete pokračovat?"
+  "removeFromListDescriptionPlural": "Odstraníte <1>položek ({{count}})</1>. Jste si jistí, že chcete pokračovat?",
+  "DeleteAIAgentDescription": "Agent <strong>\"{{agentName}}\"</strong> bude trvale smazán. Všechna data a přístupy uživatelů budou ztraceny.",
+  "DeleteAIAgentTitle": "Smazat tohoto agenta?",
+  "DeleteAIAgentWarning": "Rozumím následkům a chci smazat agenta."
 }

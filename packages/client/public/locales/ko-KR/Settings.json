@@ -276,5 +276,21 @@
   "WantToCancelUpload": "업로드를 취소하시겠습니까?",
   "WantToContinue": "사용자 스토리지 할당량을 계속 유지하거나 변경하시겠습니까?",
   "WhiteLabelSubtitle": "회사 이름을 입력하고 로고를 업로드하고 브랜딩에 맞게 스타일을 사용자 정의하세요.",
-  "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요."
+  "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요.",
+  "AccountsUsersWithoutEmails": "이메일이 없는 <1>{{users}} 명의 사용자</1>를 찾았습니다. 다음 단계에서 해당 계정에 필요한 데이터를 추가할 수 있습니다.",
+  "AccountsWithoutEmails": "이메일이 없는 <1>{{users}} 명</1>의 사용자를 찾았습니다. 이들의 이메일을 채워 넣거나, 이 작업을 진행하지 않고 계속할 수 있습니다.",
+  "AIAgentQuotaDisabled": "AI 에이전트 할당량 비활성화가 성공적으로 완료되었습니다.",
+  "AIAgentQuotaEnabled": "AI 에이전트 할당량이 성공적으로 활성화되었습니다.",
+  "AISettings": "AI 설정",
+  "DataImportAdminLimitExceeded": "관리자 제한을 초과했습니다. 계속하려면 관리자 수를 조정하거나 관리자 제한을 늘려주세요.",
+  "DefineQuotaPerAIAgent": "AI 에이전트별 할당량 정의",
+  "GroupsSectionDescription": "이전 단계에서 선택한 사용자는 {{serviceName}}에서 생성된 그룹으로 가져오게 됩니다. 그룹은 <1>{{sectionName}}</1> 섹션에 나타납니다.",
+  "ImportFilesDescription": "사용자 파일 및 문서는 <1>{{sectionName}}</1>으로 가져오기 됩니다.",
+  "QuotaPerAIAgent": "AI 에이전트당 할당량",
+  "ResetSettings": "설정 초기화",
+  "SetDefaultAIAgentQuota": "이 {{productName}}에서 AI 에이전트의 기본 저장 용량을 설정합니다. 설정에서 나중에 조정하거나 각 AI 에이전트를 생성할 때 개별적으로 사용자 정의할 수 있습니다.",
+  "SharedFilesAndFolders": "공유 파일 및 폴더",
+  "SharedFilesAndFoldersDescription": "다른 사용자와 공유된 파일 및 폴더는 <1>{{sectionName}}</1>으로 가져오기 됩니다.<br><1>참고:</1> 가져오는 동안 일부 접근 권한이 손실될 수 있습니다.",
+  "SharedFilesAndFoldersDetails": "공유 파일 및 폴더",
+  "Top5AIAgents": "저장 용량 사용량 기준 상위 5 AI 에이전트:"
 }

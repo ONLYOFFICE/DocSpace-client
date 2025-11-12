@@ -95,5 +95,9 @@
   "SubmenuHistory": "Geschiedenis",
   "UserFileUpdated": "Bestand bijgewerkt.",
   "Users": "Gebruikers",
-  "Versions": "Versies"
+  "Versions": "Versies",
+  "HistoryAgentCreated": "«{{roomTitle}}» agent aangemaakt",
+  "Resolution": "Resolutie",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> heeft de naam veranderd naar <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Bekijk de details van AI-agenten hier"
 }

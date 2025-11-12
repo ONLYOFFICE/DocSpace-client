@@ -95,5 +95,9 @@
   "SubmenuHistory": "Історія",
   "UserFileUpdated": "Файл оновлено.",
   "Users": "Користувачі",
-  "Versions": "Версії"
+  "Versions": "Версії",
+  "HistoryAgentCreated": "«{{roomTitle}}» агента створено",
+  "Resolution": "Роздільна здатність",
+  "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> перейменовано на <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Дивіться детальну інформацію про агентів ШІ тут"
 }

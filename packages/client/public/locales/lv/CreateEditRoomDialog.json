@@ -37,5 +37,7 @@
   "UserName": "Lietotājvārds",
   "ViewerInfo": "Informācija par skatītāju",
   "WatermarkPreview": "Ūdenszīmes priekšskatījums",
-  "WatermarkPreviewHelp": "Šis attēla priekšskatījums aptuveni parāda, kā ūdenszīme tiks parādīta jūsu failos."
+  "WatermarkPreviewHelp": "Šis attēla priekšskatījums aptuveni parāda, kā ūdenszīme tiks parādīta jūsu failos.",
+  "DisableRoomQuotaAgent": "Atspējot kvotu šim aģentam",
+  "StorageDescriptionAgent": "Pārvaldniekam iestatīts uzglabāšanas kvotas limits. Jūs varat mainīt šo vērtību vai izslēgt uzglabāšanas limitu."
 }

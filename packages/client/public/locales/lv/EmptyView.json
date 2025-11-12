@@ -54,5 +54,15 @@
   "UploadDevicePDFFormOptionTitle": "Augšupielādēt no ierīces",
   "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
   "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
-  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā"
+  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā",
+  "CreateAIAgent": "Izveidot jaunu aģentu",
+  "CreateAIAgentDescription": "Sāciet veidot savu pirmo AI aģentu",
+  "EmptyAIAgentsDescription": "Iestatiet personalizētu palīdzību savai komandai, pievienojot zināšanu bāzi, atlasot ideālo modeli un pievienojot MCP serveri. Aicināt savus kolēģus sadarboties un izmantot aģenta tērzēšanas iespējas.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Lai izveidotu un izmantotu AI aģentus, pievienojiet savu maku un iespējojiet AI funkciju pakalpojumu {{productName}} iestatējumos. Kad tas būs izdarīts, jūs varēsit strādāt ar AI aģentiem un sadarboties ar savu komandu.",
+  "EmptyAIAgentsAIDisabledDescription": "Šis attāls nodrošina lietotājiem iespēju strādāt ar AI aģentiem — viediem palīgiem dokumentu un citu uzdevumu veikšanai.\nLai sāktu tos lietot, AI funkciju pakalpojums jāaktivizē jūsu {{productName}} administrators.",
+  "EmptyAIAgentsAIEnabledUserDescription": "Kad jūsu komanda jūs aicina sadarboties, šeit parādīsies AI aģenti, gatavi palīdzēt ar dokumentiem, zināšanu vadību un ikdienas uzdevumiem.",
+  "EmptyAIAgentsTitle": "Izveidojiet savu AI aģentu",
+  "EmptyAIAgentsUserTitle": "Vēl nav pieejami AI aģenti",
+  "EmptyAIAgentsAIDisabledUserTitle": "AI aģenti vēl nav pieejami",
+  "EmptyAIAgentsAIDisabledSaasAdminTitle": "Pievienojiet savu maku un iespējojiet AI funkcijas"
 }

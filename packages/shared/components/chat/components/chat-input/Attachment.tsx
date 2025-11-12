@@ -70,10 +70,16 @@ const Attachment = ({
       return;
     }
 
-    setTempSelectedFiles((prev) => [
-      ...prev,
-      { id: Number(item.id), title: item.label, fileExst: item.fileExst },
-    ]);
+    setTempSelectedFiles((prev) => {
+      if (prev.length >= CHAT_MAX_FILE_COUNT) {
+        return prev;
+      }
+
+      return [
+        ...prev,
+        { id: Number(item.id), title: item.label, fileExst: item.fileExst },
+      ];
+    });
   };
 
   useEffect(() => {
@@ -156,12 +162,14 @@ const Attachment = ({
             : DeviceType.mobile
       }
       withInfoBar={withInfo}
+      maxSelectedItems={CHAT_MAX_FILE_COUNT}
       infoBarData={{
         title: t("Common:SelectorFilesLimit", { count: CHAT_MAX_FILE_COUNT }),
         icon: AttachmentReactSvgUrl,
         onClose: () => setWithInfo(!withInfo),
         description: t("Common:SelectorFilesLimitDescription"),
       }}
+      renderInPortal
     />
   );
 };

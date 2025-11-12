@@ -1,0 +1,8 @@
+@use "@docspace/shared/styles/variables";
+
+.fieldHint {
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 4px;
+  color: variables.$gray;
+}

@@ -57,11 +57,8 @@ import ExportSelector from "../../export-selector";
 import styles from "../ChatHeader.module.scss";
 
 import RenameChat from "./RenameChat";
-import {
-  CHAT_LIST_MAX_HEIGHT,
-  CHAT_LIST_ROW_HEIGHT,
-  CHAT_LIST_WIDTH,
-} from "../constants";
+import { CHAT_LIST_MAX_HEIGHT, CHAT_LIST_WIDTH } from "../constants";
+import { getSelectChatRowHeight } from "../utils";
 import { ChatList } from "./ChatList";
 
 const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
@@ -223,16 +220,30 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
     ];
   }, [t, onDeleteAction, onRenameToggle, onSaveToFileAction]);
 
+  const rowHeight = getSelectChatRowHeight();
+
   const maxHeight =
-    chats.length > 7
-      ? CHAT_LIST_MAX_HEIGHT
-      : CHAT_LIST_ROW_HEIGHT * chats.length;
+    chats.length > 7 ? CHAT_LIST_MAX_HEIGHT : rowHeight * chats.length;
 
   React.useEffect(() => {
     if (isRequestRunning) {
       setIsOpen(false);
     }
   }, [isRequestRunning]);
+
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const onResize = () => {
+      setIsOpen(false);
+    };
+
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [isOpen]);
 
   if (isLoadingProp) {
     return (

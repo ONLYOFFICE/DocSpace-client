@@ -34,13 +34,14 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 import generalStyles from "../AISettings.module.scss";
 
@@ -53,6 +54,7 @@ type TSearchProps = {
   updateWebSearch?: AISettingsStore["updateWebSearch"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   aiSettingsUrl?: string;
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -64,6 +66,7 @@ const SearchComponent = ({
   updateWebSearch,
   hasAIProviders,
   aiSettingsUrl,
+  getAIConfig,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
 
@@ -100,6 +103,7 @@ const SearchComponent = ({
     setSaveRequestRunning(true);
     await updateWebSearch?.(true, selectedOption, value);
     setSaveRequestRunning(false);
+    getAIConfig?.();
   };
 
   const items = React.useMemo(() => {
@@ -113,7 +117,7 @@ const SearchComponent = ({
 
   const selectedItem = React.useMemo(() => {
     return items.find((item) => item.key === selectedOption);
-  }, [selectedOption]);
+  }, [selectedOption, items]);
 
   React.useEffect(() => {
     if (webSearchConfig?.enabled) {
@@ -220,7 +224,7 @@ const SearchComponent = ({
                 setSelectedOption(option.key as WebSearchType)
               }
               displaySelectedOption
-              isDisabled={!hasAIProviders}
+              isDisabled={!hasAIProviders || isKeyHidden}
             />
           </FieldContainer>
           <FieldContainer
@@ -286,5 +290,6 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
     aiSettingsUrl: settingsStore.aiSettingsUrl,
+    getAIConfig: settingsStore.getAIConfig,
   };
 })(observer(SearchComponent));

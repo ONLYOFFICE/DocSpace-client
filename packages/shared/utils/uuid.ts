@@ -24,15 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const path = require("path");
-const {
-  cleanFailedTests,
-} = require("../../../common/scripts/clean-failed-tests");
+/**
+ * @description Return unique UUID v4
+ */
+export const uuid = () => {
+  let uuid = "";
 
-const REPORT_PATH = path.resolve(
-  __dirname,
-  "../../../playwright-report/sdk/test-results.json",
-);
-const PACKAGES_DIR = path.resolve(__dirname, "../..");
+  for (let i = 0; i < 32; i++) {
+    switch (i) {
+      case 8:
+      case 20: {
+        uuid += `-${Math.trunc(Math.random() * 16).toString(16)}`;
 
-process.exit(cleanFailedTests(REPORT_PATH, PACKAGES_DIR, "sdk") ? 0 : 1);
+        break;
+      }
+      case 12: {
+        uuid += "-4";
+
+        break;
+      }
+      case 16: {
+        uuid += `-${((Math.random() * 16) | (0 & 3) | 8).toString(16)}`;
+
+        break;
+      }
+      default: {
+        uuid += Math.trunc(Math.random() * 16).toString(16);
+      }
+    }
+  }
+
+  return uuid;
+};

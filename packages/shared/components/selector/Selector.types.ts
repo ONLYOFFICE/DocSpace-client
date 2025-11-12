@@ -401,6 +401,7 @@ export type SelectorProps = TSelectorHeader &
 
     isMultiSelect: boolean;
     selectedItems?: TSelectorItem[];
+    maxSelectedItems?: number;
 
     disableFirstFetch?: boolean;
     loadNextPage: (startIndex: number) => Promise<void>;

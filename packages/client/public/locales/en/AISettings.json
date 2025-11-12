@@ -25,6 +25,8 @@
   "MCPSettingsDescription": "This section lets you manage MCP servers for AI chats within rooms. You can enable system MCP servers or add custom ones to meet your company's needs. Once enabled, these servers will be accessible to other users for their tasks.",
   "MCPProductDescription": "The {{organizationName}} {{productName}} MCP Server streamlines AI-driven workflows, integrating LLMs with external systems for efficient and secure document management.",
   "MCPSettingTitle": "MCP servers",
+  "MCPServerDescriptionHint": "Write a brief explanation of the integration's purpose",
+  "MCPServerIntegrationURLHint": "Enter the MCP server address provided by your service",
   "Provider": "Provider",
   "ProviderAddedSuccess": "Provider added successfully",
   "ProviderNameInputHint": "Use any name that is convenient for you to identify this connection",

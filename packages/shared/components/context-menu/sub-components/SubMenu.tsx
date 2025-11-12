@@ -366,17 +366,6 @@ const SubMenu = (props: SubMenuProps) => {
     }
   }, [props.model]);
 
-  // TODO:
-  // useEffect(() => {
-  //   if (!activeItemKey) return;
-
-  //   const item = model.find(
-  //     (item) => item.key === activeItemKey,
-  //   ) as ContextMenuType;
-
-  //   setActiveItem(item || null);
-  // }, [model, activeItemKey]);
-
   const renderSeparator = (index: number, style: React.CSSProperties) => (
     <li
       key={`separator_${index}`}
@@ -564,7 +553,7 @@ const SubMenu = (props: SubMenuProps) => {
         onDoubleClick={onDoubleClick}
         onMouseDown={onMouseDown}
         onMouseEnter={(e) => onItemMouseEnter(e, item)}
-        onMouseMove={() => mouseMoveHandler?.(index, model, menuLevel)} // TODO: sub
+        onMouseMove={() => mouseMoveHandler?.(index, model, menuLevel)}
       >
         {content}
         {item.withToggle ? (

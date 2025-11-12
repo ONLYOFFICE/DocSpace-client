@@ -249,7 +249,11 @@ const SearchComponent = ({
               <Text className={styles.hiddenKeyDescription}>
                 {t("AISettings:WebSearchKeyHiddenDescription")}
               </Text>
-            ) : null}
+            ) : (
+              <Text className={styles.hiddenKeyDescription}>
+                {t("AISettings:WebSearchKeyDescription")}
+              </Text>
+            )}
           </FieldContainer>
         </div>
         <div className={styles.buttonContainer}>

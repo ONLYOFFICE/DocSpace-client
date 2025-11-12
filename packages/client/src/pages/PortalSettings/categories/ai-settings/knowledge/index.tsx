@@ -257,7 +257,11 @@ const KnowledgeComponent = ({
               <Text className={styles.hiddenKeyDescription}>
                 {t("AISettings:WebSearchKeyHiddenDescription")}
               </Text>
-            ) : null}
+            ) : (
+              <Text className={styles.hiddenKeyDescription}>
+                {t("AISettings:KnowledgeKeyDescription")}
+              </Text>
+            )}
           </FieldContainer>
         </div>
         <div className={styles.buttonContainer}>

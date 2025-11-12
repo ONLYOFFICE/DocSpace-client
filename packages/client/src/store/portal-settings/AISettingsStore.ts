@@ -225,12 +225,8 @@ class AISettingsStore {
   };
 
   restoreKnowledge = async () => {
-    try {
-      await updateKnowledgeConfig(KnowledgeType.None, "");
-      this.setKnowledgeConfig(null);
-    } catch {
-      //ignore
-    }
+    await updateKnowledgeConfig(KnowledgeType.None, "");
+    this.setKnowledgeConfig(null);
   };
 
   addNewMCP = async (data: TAddNewServer) => {

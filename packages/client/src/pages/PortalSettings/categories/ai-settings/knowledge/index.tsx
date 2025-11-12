@@ -94,7 +94,12 @@ const KnowledgeComponent = ({
     setSelectedOption(KnowledgeType.None);
     setIsKeyHidden(false);
 
-    restoreKnowledge?.();
+    try {
+      await restoreKnowledge?.();
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as string);
+    }
     getAIConfig?.();
   };
 

@@ -62,6 +62,7 @@ import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import { CategoryType } from "@docspace/shared/constants";
+import { Text } from "@docspace/shared/components/text";
 
 import type {
   EmptyViewItemType,
@@ -110,7 +111,15 @@ export const getDescription = (
   const isNotAdmin = isUser(access);
 
   if (isAIRoom) {
-    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeDescription");
+    if (isKnowledgeTab)
+      return (
+        <>
+          {t("AIRoom:EmptyKnowledgeDescription")}
+          <Text fontSize="12px" style={{ marginTop: "8px" }}>
+            {t("AIRoom:EmptyKnowledgeDescriptionActions")}
+          </Text>
+        </>
+      );
 
     if (isResultsTab) return t("AIRoom:EmptyResultsDescription");
   }

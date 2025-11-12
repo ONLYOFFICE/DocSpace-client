@@ -46,6 +46,7 @@ import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
 
 import SetAgentParams from "./sub-components/SetAgentParams";
 import { useMCP } from "./hooks/useMCP";
+import { modelCache } from "./sub-components/modelCache";
 
 type EditAgentDialogProps = {
   visible: boolean;
@@ -164,6 +165,7 @@ const EditAgentDialog = ({
   const onCloseAction = () => {
     if (isLoading) return;
 
+    modelCache.clear();
     onClose && onClose();
   };
 
@@ -259,7 +261,7 @@ const EditAgentDialog = ({
           tabIndex={5}
           label={t("Common:CancelButton")}
           scale
-          onClick={onClose}
+          onClick={onCloseAction}
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>

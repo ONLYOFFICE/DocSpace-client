@@ -42,6 +42,7 @@ import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
 import TagHandler from "../../../helpers/TagHandler";
 import SetAgentParams from "./sub-components/SetAgentParams";
 import { useMCP } from "./hooks/useMCP";
+import { modelCache } from "./sub-components/modelCache";
 
 type CreateAgentDialogProps = {
   visible: boolean;
@@ -147,6 +148,7 @@ const CreateAgentDialog = ({
   const onCloseDialog = async () => {
     if (isLoading) return;
 
+    modelCache.clear();
     onClose();
   };
 

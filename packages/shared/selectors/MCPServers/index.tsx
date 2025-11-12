@@ -32,6 +32,8 @@ import EmptyScreenRoomDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.room.se
 
 import { getAvailableServersList } from "../../api/ai";
 import type { TServer } from "../../api/ai/types";
+import { ServerType } from "../../api/ai/enums";
+
 import { Selector, type TSelectorItem } from "../../components/selector";
 import { getServerIcon } from "../../utils";
 import { RowLoader } from "../../skeletons/selector";
@@ -40,6 +42,7 @@ import { useTheme } from "../../hooks/useTheme";
 type MCPServersSelectorProps = {
   onSubmit: (servers: TSelectorItem[]) => void;
   onClose: VoidFunction;
+  onBackClick: VoidFunction;
 
   initedSelectedServers?: string[];
 };
@@ -48,6 +51,7 @@ const MCPServersSelector = ({
   initedSelectedServers,
   onSubmit,
   onClose,
+  onBackClick,
 }: MCPServersSelectorProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -68,10 +72,15 @@ const MCPServersSelector = ({
 
   const convertServerToOption = React.useCallback(
     (server: TServer): TSelectorItem => {
+      const name =
+        server.serverType === ServerType.Portal
+          ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+          : server.name;
+
       return {
         key: server.id,
         id: server.id,
-        label: server.name,
+        label: name,
         icon:
           (server.icon?.icon32 || getServerIcon(server.serverType, isBase)) ??
           "",
@@ -79,7 +88,7 @@ const MCPServersSelector = ({
         isSelected: initedSelectedServers?.includes(server.id),
       };
     },
-    [isBase, initedSelectedServers],
+    [isBase, initedSelectedServers, t],
   );
 
   const fetchServers = React.useCallback(async () => {
@@ -144,7 +153,7 @@ const MCPServersSelector = ({
 
   const onSubmitAction = () => {
     onSubmit(selectedServers);
-    onClose();
+    onBackClick();
   };
 
   React.useEffect(() => {
@@ -176,20 +185,20 @@ const MCPServersSelector = ({
       loadNextPage={fetchMoreServer}
       isLoading={isLoading}
       isMultiSelect
-      useAside
+      useAside={false}
       onClose={onClose}
       onSelect={onSelect}
       withHeader
       headerProps={{
         headerLabel: t("Common:ListMCPServers"),
         withoutBackButton: false,
-        onBackClick: onClose,
+        onBackClick: onBackClick,
         onCloseClick: onClose,
         withoutBorder: false,
       }}
       withCancelButton
       cancelButtonLabel={t("Common:CancelButton")}
-      onCancel={onClose}
+      onCancel={onBackClick}
       selectedItems={initedSelectedServersItems}
     />
   );

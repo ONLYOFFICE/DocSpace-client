@@ -39,6 +39,7 @@ import { WebSearchType } from "@docspace/shared/api/ai/enums";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { toastr } from "@docspace/shared/components/toast";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
@@ -94,14 +95,26 @@ const SearchComponent = ({
     setSelectedOption(WebSearchType.None);
     setIsKeyHidden(false);
 
-    restoreWebSearch?.();
+    try {
+      await restoreWebSearch?.();
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as string);
+    }
   };
 
   const onSave = async () => {
     if (isKeyHidden) return;
 
     setSaveRequestRunning(true);
-    await updateWebSearch?.(true, selectedOption, value);
+    try {
+      await updateWebSearch?.(true, selectedOption, value);
+
+      toastr.success(t("AISettings:WebSearchEnabledSuccess"));
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as string);
+    }
     setSaveRequestRunning(false);
     getAIConfig?.();
   };
@@ -249,7 +262,11 @@ const SearchComponent = ({
               <Text className={styles.hiddenKeyDescription}>
                 {t("AISettings:WebSearchKeyHiddenDescription")}
               </Text>
-            ) : null}
+            ) : (
+              <Text className={styles.hiddenKeyDescription}>
+                {t("AISettings:WebSearchKeyDescription")}
+              </Text>
+            )}
           </FieldContainer>
         </div>
         <div className={styles.buttonContainer}>

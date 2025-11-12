@@ -32,6 +32,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { ImportItemProps, ImportSectionProps } from "../types";
 import { tablet } from "@docspace/shared/utils";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 const SectionWrapper = styled.div<{ isChecked: boolean }>`
   max-width: 700px;
@@ -42,6 +43,7 @@ const SectionWrapper = styled.div<{ isChecked: boolean }>`
 
   box-sizing: border-box;
   display: flex;
+  align-items: start;
   gap: 4px;
 
   .toggleButton {
@@ -195,7 +197,9 @@ const ImportSection = ({
   exportSection,
   importSection,
   dataTestId,
+  getTooltipContent,
 }: ImportSectionProps) => {
+  const toggleButtonTooltipId = `toggle-button-tooltip-${sectionName}`;
   return (
     <SectionWrapper data-testid={dataTestId} isChecked={isChecked}>
       <ToggleButton
@@ -204,7 +208,18 @@ const ImportSection = ({
         className="toggleButton"
         isDisabled={isDisabled}
         dataTestId="enable_import_section_button"
+        dataTooltipId={
+          isDisabled && getTooltipContent ? toggleButtonTooltipId : undefined
+        }
       />
+      {isDisabled && getTooltipContent ? (
+        <Tooltip
+          id={toggleButtonTooltipId}
+          place="bottom-end"
+          getContent={getTooltipContent}
+          maxWidth="220px"
+        />
+      ) : null}
       <div className="section-content">
         <Text lineHeight="20px" fontWeight={600} className="section-title">
           {sectionName}

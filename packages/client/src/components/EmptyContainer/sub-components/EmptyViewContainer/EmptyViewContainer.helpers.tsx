@@ -536,7 +536,7 @@ export const getOptions = (
           onClick: () => {
             const filesFilter = FilesFilter.getFilter(window.location);
 
-            filesFilter.searchArea = SearchArea.ResultStorage;
+            filesFilter.searchArea = SearchArea.Any;
 
             const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
 

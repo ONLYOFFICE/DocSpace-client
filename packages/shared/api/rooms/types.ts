@@ -389,6 +389,7 @@ export enum FeedActionKeys {
 export type CapitalizedFeedAction = Capitalize<FeedAction>;
 
 export type TFeedAction<T = TFeedData> = {
+  id: number;
   action: {
     id: number;
     key: FeedActionKeys;

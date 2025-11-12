@@ -64,7 +64,7 @@
   "Allow": "Allow",
   "AllowedCharacters": "Allowed characters",
   "AllTypesAvailableForEditing": "all file types available for editing in {{organizationName}}",
-  "AlwaysAllowToolCall": "Always allow this tool to perform this action without asking againw",
+  "AlwaysAllowToolCall": "Always allow this tool to perform this action without asking again",
   "AmazonBucketTip": "Enter the unique name of the Amazon S3 bucket where you want to store your backups.",
   "AmazonCSE": "Client-Side Encryption",
   "AmazonForcePathStyleTip": "When true, requests will always use path style addressing.",

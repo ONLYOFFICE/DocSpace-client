@@ -112,4 +112,5 @@ export type UseSocketHelperProps = {
   disabledFolderType?: FolderType;
   filterParam?: string | number;
   withCreate?: boolean;
+  disableBySecurity?: string;
 };

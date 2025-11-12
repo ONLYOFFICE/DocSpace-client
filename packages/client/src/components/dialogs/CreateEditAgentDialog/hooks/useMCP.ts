@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
@@ -35,6 +36,7 @@ import {
 import { getServerIcon } from "@docspace/shared/utils";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 import type { TSelectorItem } from "@docspace/shared/components/selector";
+import { ServerType } from "@docspace/shared/api/ai/enums";
 
 export const useMCP = ({
   agentParams,
@@ -46,6 +48,7 @@ export const useMCP = ({
   portalMcpServerId?: string;
 }) => {
   const { isBase } = useTheme();
+  const { t } = useTranslation();
 
   const [isMCPSelectorVisible, setIsMCPSelectorVisible] = React.useState(false);
 
@@ -72,26 +75,33 @@ export const useMCP = ({
     if (agentId) {
       getServersListForRoom(agentId).then((res) => {
         if (res) {
-          const items = res.map((item) => ({
-            key: item.id,
-            id: item.id,
-            label: item.name,
-            icon:
-              (item.icon?.icon24 || getServerIcon(item.serverType, isBase)) ??
-              "",
-            isInputItem: false,
-            onAcceptInput: () => {},
-            onCancelInput: () => {},
-            defaultInputValue: "",
-            placeholder: "",
-          }));
+          const items = res.map((item) => {
+            const name =
+              item.serverType === ServerType.Portal
+                ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+                : item.name;
+
+            return {
+              key: item.id,
+              id: item.id,
+              label: name,
+              icon:
+                (item.icon?.icon24 || getServerIcon(item.serverType, isBase)) ??
+                "",
+              isInputItem: false,
+              onAcceptInput: () => {},
+              onCancelInput: () => {},
+              defaultInputValue: "",
+              placeholder: "",
+            };
+          });
 
           setSelectedServers(items);
           setInitialServers(items);
         }
       });
     }
-  }, [agentId, isBase]);
+  }, [agentId, isBase, t]);
 
   React.useEffect(() => {
     setAgentParams({

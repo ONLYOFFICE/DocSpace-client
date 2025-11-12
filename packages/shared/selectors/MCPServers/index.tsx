@@ -146,7 +146,7 @@ const MCPServersSelector = ({
 
   const onSubmitAction = () => {
     onSubmit(selectedServers);
-    onClose();
+    onBackClick();
   };
 
   React.useEffect(() => {

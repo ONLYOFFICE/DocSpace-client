@@ -83,6 +83,7 @@ export const ToolCallConfirmDialog = ({
       onClose={onCloseAction}
       isLarge
       autoMaxHeight
+      closeOnBackdropClick={false}
     >
       <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
 

@@ -21,5 +21,6 @@
   "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
   "KnowledgeUnavailable": "Knowledge Base unavailable",
   "KnowledgeUnavailableDescription": "The Knowledge base is currently disabled. To activate semantic search and document processing for your AI agents, please configure the embeddings provider in the {{productName}} settings.",
-  "KnowledgeUnavailableDescriptionUser": "The Knowledge base is currently disabled. To activate semantic search and document processing for AI agents, please contact your {{productName}} admin to configure the embeddings provider."
+  "KnowledgeUnavailableDescriptionUser": "The Knowledge base is currently disabled. To activate semantic search and document processing for AI agents, please contact your {{productName}} admin to configure the embeddings provider.",
+  "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results."
 }

@@ -35,6 +35,7 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { toastr } from "@docspace/shared/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { inject, observer } from "mobx-react";
@@ -44,6 +45,7 @@ import { useTranslation } from "react-i18next";
 import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Knowledge.module.scss";
+import { ResetKnowledgeDialog } from "./dialogs/reset";
 
 type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
@@ -70,6 +72,9 @@ const KnowledgeComponent = ({
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
 
+  const [resetDialogVisible, setResetDialogVisible] =
+    React.useState<boolean>(false);
+
   const [isKeyHidden, setIsKeyHidden] = React.useState(!!knowledgeConfig?.key);
   const [value, setValue] = React.useState(
     knowledgeConfig?.key ? FAKE_KEY_VALUE : "",
@@ -89,11 +94,14 @@ const KnowledgeComponent = ({
   };
 
   const onRestoreToDefault = async () => {
+    setResetDialogVisible(true);
+  };
+
+  const refreshData = () => {
     setValue("");
     setSelectedOption(KnowledgeType.None);
     setIsKeyHidden(false);
 
-    restoreKnowledge?.();
     getAIConfig?.();
   };
 
@@ -104,6 +112,7 @@ const KnowledgeComponent = ({
     await updateKnowledge?.(selectedOption, value);
     getAIConfig?.();
     setSaveRequestRunning(false);
+    toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
   };
 
   const items = React.useMemo(() => {
@@ -285,6 +294,12 @@ const KnowledgeComponent = ({
       </div>
       {!hasAIProviders ? (
         <Tooltip id={tooltipId} place="bottom" offset={10} float />
+      ) : null}
+      {resetDialogVisible ? (
+        <ResetKnowledgeDialog
+          onSuccess={() => refreshData()}
+          onClose={() => setResetDialogVisible(false)}
+        />
       ) : null}
     </>
   );

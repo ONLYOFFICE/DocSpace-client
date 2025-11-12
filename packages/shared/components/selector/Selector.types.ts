@@ -305,15 +305,14 @@ type TWithAccessRightsProps = {
   accessRightsMode?: SelectorAccessRightsMode;
 };
 
-export type TSelectorWithAside = WithFlag<
-  "useAside",
-  {
-    useAside: boolean;
-    onClose: VoidFunction;
-    withoutBackground?: boolean;
-    withBlur?: boolean;
-  }
->;
+type TAsideCommonProps = {
+  withoutBackground?: boolean;
+  withBlur?: boolean;
+};
+
+export type TSelectorWithAside =
+  | ({ useAside: true; onClose: VoidFunction } & TAsideCommonProps)
+  | ({ useAside?: false; onClose?: VoidFunction } & TAsideCommonProps);
 
 export type TSelectorAccessRights = WithFlag<
   "withAccessRights",

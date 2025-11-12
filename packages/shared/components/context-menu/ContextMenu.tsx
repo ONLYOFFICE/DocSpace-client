@@ -519,7 +519,7 @@ const ContextMenu = (props: ContextMenuProps) => {
 
     if (currentItem) {
       const item = propsModel.find(
-        (item) => "label" in item && item.label === currentItem.header,
+        (item) => item && "label" in item && item.label === currentItem.header,
       );
       if (item && "items" in item && item.items?.length) {
         setMobileSubMenuItems(item?.items);

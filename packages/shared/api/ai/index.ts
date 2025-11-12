@@ -541,19 +541,13 @@ export const updateWebSearchConfig = async (
   type: WebSearchType,
   key: string,
 ) => {
-  try {
-    const res = await request({
-      method: "put",
-      url: `${baseUrl}/config/web-search`,
-      data: { enabled, type, key },
-    });
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/config/web-search`,
+    data: { enabled, type, key },
+  });
 
-    return res;
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-    throw e;
-  }
+  return res as WebSearchConfig;
 };
 
 export const getKnowledgeConfig = async () => {

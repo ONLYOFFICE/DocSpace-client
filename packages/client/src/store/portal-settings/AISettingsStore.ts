@@ -198,21 +198,13 @@ class AISettingsStore {
     type: WebSearchType,
     key: string,
   ) => {
-    try {
-      await updateWebSearchConfig(enabled, type, key);
-      this.setWebSearchConfig({ enabled, type, key });
-    } catch {
-      //ignore
-    }
+    await updateWebSearchConfig(enabled, type, key);
+    this.setWebSearchConfig({ enabled, type, key });
   };
 
   restoreWebSearch = async () => {
-    try {
-      await updateWebSearchConfig(false, WebSearchType.None, "");
-      this.setWebSearchConfig(null);
-    } catch {
-      //ignore
-    }
+    await updateWebSearchConfig(false, WebSearchType.None, "");
+    this.setWebSearchConfig(null);
   };
 
   fetchKnowledge = async () => {

@@ -36,6 +36,7 @@ import type {
   TAgentParams,
   TAgentTagsParams,
 } from "@docspace/shared/utils/aiAgents";
+import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
 import type { TCreatedBy } from "@docspace/shared/types";
 
 import type { ICover } from "SRC_DIR/components/dialogs/RoomLogoCoverDialog/RoomLogoCoverDialog.types";
@@ -44,6 +45,8 @@ import TagHandler from "../../../helpers/TagHandler";
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
 
 import SetAgentParams from "./sub-components/SetAgentParams";
+import { useMCP } from "./hooks/useMCP";
+import { modelCache } from "./sub-components/modelCache";
 
 type EditAgentDialogProps = {
   visible: boolean;
@@ -123,6 +126,19 @@ const EditAgentDialog = ({
     [],
   );
 
+  const {
+    isMCPSelectorVisible,
+    setIsMCPSelectorVisible,
+    onSubmit,
+    initSelectedServers,
+    onClickAction,
+    selectedServers,
+    setSelectedServers,
+  } = useMCP({
+    agentParams,
+    setAgentParams: setAgentParamsAction,
+  });
+
   const setAgentTags = (newTags: TAgentTagsParams[]) =>
     setAgentParams({ ...agentParams, tags: newTags });
 
@@ -149,6 +165,7 @@ const EditAgentDialog = ({
   const onCloseAction = () => {
     if (isLoading) return;
 
+    modelCache.clear();
     onClose && onClose();
   };
 
@@ -178,7 +195,7 @@ const EditAgentDialog = ({
       onBackClick={onBackClick}
       isScrollLocked={isScrollLocked}
       isLoading={isInitLoading}
-      containerVisible={changeRoomOwnerIsVisible}
+      containerVisible={changeRoomOwnerIsVisible || isMCPSelectorVisible}
     >
       {changeRoomOwnerIsVisible ? (
         <ModalDialog.Container>
@@ -188,6 +205,17 @@ const EditAgentDialog = ({
             onOwnerChange={onSetNewOwner}
             showBackButton
             onClose={onCloseRoomOwnerPanel}
+          />
+        </ModalDialog.Container>
+      ) : null}
+
+      {isMCPSelectorVisible ? (
+        <ModalDialog.Container>
+          <MCPServersSelector
+            onSubmit={onSubmit}
+            onClose={onCloseAction}
+            onBackClick={() => setIsMCPSelectorVisible(false)}
+            initedSelectedServers={initSelectedServers}
           />
         </ModalDialog.Container>
       ) : null}
@@ -208,6 +236,9 @@ const EditAgentDialog = ({
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
           onOwnerChange={onOwnerChange}
+          onClickAction={onClickAction}
+          selectedServers={selectedServers}
+          setSelectedServers={setSelectedServers}
         />
       </ModalDialog.Body>
 
@@ -230,7 +261,7 @@ const EditAgentDialog = ({
           tabIndex={5}
           label={t("Common:CancelButton")}
           scale
-          onClick={onClose}
+          onClick={onCloseAction}
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>

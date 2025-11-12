@@ -308,7 +308,7 @@ type TWithAccessRightsProps = {
 export type TSelectorWithAside = WithFlag<
   "useAside",
   {
-    useAside: true;
+    useAside: boolean;
     onClose: VoidFunction;
     withoutBackground?: boolean;
     withBlur?: boolean;

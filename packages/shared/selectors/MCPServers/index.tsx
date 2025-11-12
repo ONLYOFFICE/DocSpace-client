@@ -178,7 +178,7 @@ const MCPServersSelector = ({
       loadNextPage={fetchMoreServer}
       isLoading={isLoading}
       isMultiSelect
-      useAside
+      useAside={false}
       onClose={onClose}
       onSelect={onSelect}
       withHeader

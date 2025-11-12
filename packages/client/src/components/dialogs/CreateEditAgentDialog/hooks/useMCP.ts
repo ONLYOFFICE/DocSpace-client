@@ -57,7 +57,6 @@ export const useMCP = ({
   );
 
   const onClickAction = () => {
-    console.log("onClickAction");
     setIsMCPSelectorVisible(true);
   };
 

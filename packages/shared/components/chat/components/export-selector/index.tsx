@@ -118,6 +118,7 @@ const ExportSelector = ({
             ? DeviceType.tablet
             : DeviceType.mobile
       }
+      renderInPortal
     />
   );
 };

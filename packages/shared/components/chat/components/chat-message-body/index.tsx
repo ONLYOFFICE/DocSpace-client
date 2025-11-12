@@ -105,12 +105,6 @@ const ChatMessageBody = ({
           className={classNames(styles.chatMessageContainer)}
           ref={chatBodyRef}
         >
-          {!isStreamRunning && isRequestRunning ? (
-            <div className={styles.chatLoader}>
-              <Loader type={LoaderTypes.track} />
-              {t("Common:Analyzing")}
-            </div>
-          ) : null}
           {messages.map((message, index) => {
             return (
               <Message
@@ -123,6 +117,12 @@ const ChatMessageBody = ({
               />
             );
           })}
+          {!isStreamRunning && isRequestRunning ? (
+            <div className={styles.chatLoader}>
+              <Loader type={LoaderTypes.track} />
+              {t("Common:Analyzing")}
+            </div>
+          ) : null}
         </div>
       )}
     </div>

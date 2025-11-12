@@ -25,21 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-
-import TagHandler from "../../../helpers/TagHandler";
-import SetAgentParams from "./sub-components/SetAgentParams";
-import { useTranslation } from "react-i18next";
 import {
   getStartAgentParams,
   type TAgentParams,
   type TAgentTagsParams,
 } from "@docspace/shared/utils/aiAgents";
+import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
+
+import TagHandler from "../../../helpers/TagHandler";
+import SetAgentParams from "./sub-components/SetAgentParams";
+import { useMCP } from "./hooks/useMCP";
+import { modelCache } from "./sub-components/modelCache";
 
 type CreateAgentDialogProps = {
   visible: boolean;
@@ -87,6 +90,20 @@ const CreateAgentDialog = ({
     [],
   );
 
+  const {
+    isMCPSelectorVisible,
+    setIsMCPSelectorVisible,
+    onSubmit,
+    initSelectedServers,
+    onClickAction,
+    selectedServers,
+    setSelectedServers,
+  } = useMCP({
+    agentParams,
+    setAgentParams: setAgentParamssAction,
+    portalMcpServerId,
+  });
+
   const setAgentTags = (newTags: TAgentTagsParams[]) =>
     setAgentParams({ ...agentParams, tags: newTags });
 
@@ -131,6 +148,7 @@ const CreateAgentDialog = ({
   const onCloseDialog = async () => {
     if (isLoading) return;
 
+    modelCache.clear();
     onClose();
   };
 
@@ -142,8 +160,20 @@ const CreateAgentDialog = ({
       onClose={onCloseDialog}
       isScrollLocked={isScrollLocked}
       onSubmit={handleSubmit}
+      containerVisible={isMCPSelectorVisible}
       withForm
     >
+      {isMCPSelectorVisible ? (
+        <ModalDialog.Container>
+          <MCPServersSelector
+            onSubmit={onSubmit}
+            onClose={onCloseDialog}
+            onBackClick={() => setIsMCPSelectorVisible(false)}
+            initedSelectedServers={initSelectedServers}
+          />
+        </ModalDialog.Container>
+      ) : null}
+
       <ModalDialog.Header>{t("Common:CreateAgent")}</ModalDialog.Header>
 
       <ModalDialog.Body>
@@ -159,6 +189,9 @@ const CreateAgentDialog = ({
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
           portalMcpServerId={portalMcpServerId}
+          onClickAction={onClickAction}
+          selectedServers={selectedServers}
+          setSelectedServers={setSelectedServers}
         />
       </ModalDialog.Body>
 

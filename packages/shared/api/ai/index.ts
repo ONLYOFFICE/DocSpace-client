@@ -574,19 +574,13 @@ export const updateKnowledgeConfig = async (
   type: KnowledgeType,
   key: string,
 ) => {
-  try {
-    const res = await request({
-      method: "put",
-      url: `${baseUrl}/config/vectorization`,
-      data: { type, key },
-    });
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/config/vectorization`,
+    data: { type, key },
+  });
 
-    return res;
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-    throw e;
-  }
+  return res as KnowledgeConfig;
 };
 
 export const createAIAgent = async (data: TCreateAgentData) => {

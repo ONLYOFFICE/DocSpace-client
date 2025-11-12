@@ -36,6 +36,7 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { toastr } from "@docspace/shared/components/toast";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { inject, observer } from "mobx-react";
 import React from "react";
@@ -101,7 +102,15 @@ const KnowledgeComponent = ({
     if (isKeyHidden) return;
 
     setSaveRequestRunning(true);
-    await updateKnowledge?.(selectedOption, value);
+    try {
+      await updateKnowledge?.(selectedOption, value);
+
+      toastr.success(t("AISettings:KnowledgeEnabledSuccess"));
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as string);
+    }
+
     getAIConfig?.();
     setSaveRequestRunning(false);
   };

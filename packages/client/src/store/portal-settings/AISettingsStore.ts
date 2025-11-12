@@ -228,12 +228,8 @@ class AISettingsStore {
   };
 
   updateKnowledge = async (type: KnowledgeType, key: string) => {
-    try {
-      await updateKnowledgeConfig(type, key);
-      this.setKnowledgeConfig({ type, key });
-    } catch {
-      //ignore
-    }
+    await updateKnowledgeConfig(type, key);
+    this.setKnowledgeConfig({ type, key });
   };
 
   restoreKnowledge = async () => {

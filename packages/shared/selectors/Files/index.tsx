@@ -33,12 +33,12 @@ import { createFile, deleteFile } from "../../api/files";
 
 import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
 
-import { TSelectorItem } from "../../components/selector";
+import type { TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
 import { Portal } from "../../components/portal";
 import { toastr } from "../../components/toast";
-import { TBreadCrumb } from "../../components/selector/Selector.types";
+import type { TBreadCrumb } from "../../components/selector/Selector.types";
 
 import useRoomsHelper from "../utils/hooks/useRoomsHelper";
 import useSocketHelper from "../utils/hooks/useSocketHelper";
@@ -49,7 +49,7 @@ import useRootHelper from "./hooks/useRootHelper";
 import useSelectorBody from "./hooks/useSelectorBody";
 import useSelectorState from "./hooks/useSelectorState";
 
-import { FilesSelectorProps } from "./FilesSelector.types";
+import type { FilesSelectorProps } from "./FilesSelector.types";
 import { SettingsContextProvider } from "../utils/contexts/Settings";
 import {
   LoadersContext,
@@ -114,6 +114,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     onSelectItem,
 
     renderInPortal,
+
+    disableBySecurity,
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } = use(LoadersContext);
@@ -175,6 +177,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     disabledItems,
     filterParam,
     withCreate,
+    disableBySecurity,
     ...withInitProps,
   });
 
@@ -183,6 +186,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     disabledFolderType,
     filterParam,
     withCreate: withCreateState,
+    disableBySecurity,
     setItems,
     setBreadCrumbs,
     setTotal,
@@ -294,6 +298,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     withInit,
     applyFilterOption,
+    disableBySecurity,
   });
 
   const onClickBreadCrumb = React.useCallback(

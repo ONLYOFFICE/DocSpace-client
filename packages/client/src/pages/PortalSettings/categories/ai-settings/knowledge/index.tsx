@@ -50,7 +50,6 @@ import { ResetKnowledgeDialog } from "./dialogs/reset";
 type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
   knowledgeConfig?: AISettingsStore["knowledgeConfig"];
-  restoreKnowledge?: AISettingsStore["restoreKnowledge"];
   updateKnowledge?: AISettingsStore["updateKnowledge"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
@@ -63,7 +62,6 @@ const FAKE_KEY_VALUE = "0000000000000000";
 const KnowledgeComponent = ({
   knowledgeInitied,
   knowledgeConfig,
-  restoreKnowledge,
   updateKnowledge,
   hasAIProviders,
   getAIConfig,
@@ -103,6 +101,10 @@ const KnowledgeComponent = ({
     setIsKeyHidden(false);
 
     getAIConfig?.();
+  };
+
+  const closeDialog = () => {
+    setResetDialogVisible(false);
   };
 
   const onSave = async () => {
@@ -308,10 +310,7 @@ const KnowledgeComponent = ({
         <Tooltip id={tooltipId} place="bottom" offset={10} float />
       ) : null}
       {resetDialogVisible ? (
-        <ResetKnowledgeDialog
-          onSuccess={() => refreshData()}
-          onClose={() => setResetDialogVisible(false)}
-        />
+        <ResetKnowledgeDialog onSuccess={refreshData} onClose={closeDialog} />
       ) : null}
     </>
   );
@@ -322,7 +321,6 @@ export const Knowledge = inject(
     return {
       knowledgeInitied: aiSettingsStore.knowledgeInitied,
       knowledgeConfig: aiSettingsStore.knowledgeConfig,
-      restoreKnowledge: aiSettingsStore.restoreKnowledge,
       updateKnowledge: aiSettingsStore.updateKnowledge,
       hasAIProviders: aiSettingsStore.hasAIProviders,
       getAIConfig: settingsStore.getAIConfig,

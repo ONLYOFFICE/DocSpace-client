@@ -47,6 +47,7 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Search.module.scss";
+import { ResetWebSearchDialog } from "./dialogs/reset";
 
 type TSearchProps = {
   webSearchInitied?: AISettingsStore["webSearchInitied"];
@@ -63,13 +64,15 @@ const FAKE_KEY_VALUE = "0000000000000000";
 const SearchComponent = ({
   webSearchInitied,
   webSearchConfig,
-  restoreWebSearch,
   updateWebSearch,
   hasAIProviders,
   aiSettingsUrl,
   getAIConfig,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
+
+  const [resetDialogVisible, setResetDialogVisible] =
+    React.useState<boolean>(false);
 
   const [isKeyHidden, setIsKeyHidden] = React.useState(
     webSearchConfig?.enabled,
@@ -90,17 +93,18 @@ const SearchComponent = ({
     setValue(value || "");
   };
 
-  const onRestoreToDefault = async () => {
+  const refreshData = () => {
     setValue("");
     setSelectedOption(WebSearchType.None);
     setIsKeyHidden(false);
+  };
 
-    try {
-      await restoreWebSearch?.();
-    } catch (e) {
-      console.error(e);
-      toastr.error(e as string);
-    }
+  const closeDialog = () => {
+    setResetDialogVisible(false);
+  };
+
+  const onRestoreToDefault = async () => {
+    setResetDialogVisible(true);
   };
 
   const onSave = async () => {
@@ -295,6 +299,9 @@ const SearchComponent = ({
       {!hasAIProviders ? (
         <Tooltip id={tooltipId} place="bottom" offset={10} float />
       ) : null}
+      {resetDialogVisible ? (
+        <ResetWebSearchDialog onSuccess={refreshData} onClose={closeDialog} />
+      ) : null}
     </>
   );
 };
@@ -303,7 +310,6 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
   return {
     webSearchInitied: aiSettingsStore.webSearchInitied,
     webSearchConfig: aiSettingsStore.webSearchConfig,
-    restoreWebSearch: aiSettingsStore.restoreWebSearch,
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
     aiSettingsUrl: settingsStore.aiSettingsUrl,

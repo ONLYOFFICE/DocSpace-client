@@ -27,6 +27,7 @@
   "MCPSettingTitle": "MCP servers",
   "MCPServerDescriptionHint": "Write a brief explanation of the integration's purpose",
   "MCPServerIntegrationURLHint": "Enter the MCP server address provided by your service",
+  "MCPServerAdvancedSettingsHint": "Use this section to pass additional HTTP headers, like authorization tokens.",
   "Provider": "Provider",
   "ProviderAddedSuccess": "Provider added successfully",
   "ProviderNameInputHint": "Use any name that is convenient for you to identify this connection",

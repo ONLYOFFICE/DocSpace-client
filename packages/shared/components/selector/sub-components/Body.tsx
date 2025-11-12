@@ -217,8 +217,11 @@ const Body = ({
       if (infoEl) {
         const { height } = infoEl.getBoundingClientRect();
         setInfoBarHeight(height + CONTAINER_PADDING);
+        return;
       }
     }
+
+    setInfoBarHeight(0);
   }, [withInfoBar, itemsCount, visibleInfoBar]);
   useLayoutEffect(() => {
     if (injectedElement) {

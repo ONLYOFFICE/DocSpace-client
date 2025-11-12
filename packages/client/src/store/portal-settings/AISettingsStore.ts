@@ -198,21 +198,13 @@ class AISettingsStore {
     type: WebSearchType,
     key: string,
   ) => {
-    try {
-      await updateWebSearchConfig(enabled, type, key);
-      this.setWebSearchConfig({ enabled, type, key });
-    } catch {
-      //ignore
-    }
+    await updateWebSearchConfig(enabled, type, key);
+    this.setWebSearchConfig({ enabled, type, key });
   };
 
   restoreWebSearch = async () => {
-    try {
-      await updateWebSearchConfig(false, WebSearchType.None, "");
-      this.setWebSearchConfig(null);
-    } catch {
-      //ignore
-    }
+    await updateWebSearchConfig(false, WebSearchType.None, "");
+    this.setWebSearchConfig(null);
   };
 
   fetchKnowledge = async () => {
@@ -228,21 +220,13 @@ class AISettingsStore {
   };
 
   updateKnowledge = async (type: KnowledgeType, key: string) => {
-    try {
-      await updateKnowledgeConfig(type, key);
-      this.setKnowledgeConfig({ type, key });
-    } catch {
-      //ignore
-    }
+    await updateKnowledgeConfig(type, key);
+    this.setKnowledgeConfig({ type, key });
   };
 
   restoreKnowledge = async () => {
-    try {
-      await updateKnowledgeConfig(KnowledgeType.None, "");
-      this.setKnowledgeConfig(null);
-    } catch {
-      //ignore
-    }
+    await updateKnowledgeConfig(KnowledgeType.None, "");
+    this.setKnowledgeConfig(null);
   };
 
   addNewMCP = async (data: TAddNewServer) => {

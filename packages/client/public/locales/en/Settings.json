@@ -123,6 +123,7 @@
   "GroupsSectionDescription": "Users which you selected in the previous step will be imported into groups created in {{serviceName}}. Groups will appear in the <1>{{sectionName}}</1> section.",
   "HexCode": "Hex code",
   "Import": "Import",
+  "ImportSectionDisabled": "To import {{importSectionName}}, enable the \"<1>{{sectionName}}</1>\" option first.",
   "ImportCompleteDescriptionGoogle": "Data import from Google Workspace to {{organizationName}} {{productName}} is complete!",
   "ImportCompleteDescriptionNextcloud": "Data import from Nextcloud to {{organizationName}} {{productName}} is complete!",
   "ImportCompleteDescriptionWorkspace": "Data import from {{organizationName}} Workspace to {{organizationName}} {{productName}} is complete!",

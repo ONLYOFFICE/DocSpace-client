@@ -1,0 +1,28 @@
+{
+  "key_path": "WebSearchEnabledSuccess",
+  "content": "Web search successfully enabled",
+  "content_en_sha1_hash": "03fbd882eead437b19e5b4a22299863b51d74220",
+  "created_at": "2025-11-13T07:58:04.702Z",
+  "updated_at": "2025-11-13T08:06:18.259Z",
+  "comment": {
+    "text": "This key displays a success message in the user interface, confirming that web search has been successfully enabled. It appears as a toastr notification after a successful web search configuration update, typically within the AI Settings section of the portal. Translators should ensure the message conveys a positive confirmation to the user.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:06:18.259Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 117,
+      "context": "setSaveRequestRunning(true);\n try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(t(\"AISettings:WebSearchEnabledSuccess\"));\n } catch (e) {\n console.error(e);\n toastr.error(e as string);\n }\n setSaveRequestRunning(false);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

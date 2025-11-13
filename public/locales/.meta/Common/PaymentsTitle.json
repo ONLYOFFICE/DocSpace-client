@@ -3,7 +3,7 @@
   "content": "Payments",
   "content_en_sha1_hash": "44357ae55a217646f4d1c3bb7cb7b437fa838999",
   "created_at": "2025-05-19T21:30:47.315Z",
-  "updated_at": "2025-11-06T18:29:15.616Z",
+  "updated_at": "2025-11-13T07:58:07.737Z",
   "comment": {
     "text": "This translation key is used as a title for payment-related sections and interfaces. It appears in various contexts, including error messages and settings pages, displaying the content \"Payments\" to users.",
     "is_auto": true,
@@ -48,8 +48,8 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 460,
-      "context": "management,\n isAdmin &&\n !isCommunity && {\n key: \"user-menu-payments\",\n icon: PaymentsReactSvgUrl,\n label: t(\"Common:PaymentsTitle\"),\n onClick: (obj) => this.onPaymentsClick(obj),\n additionalElement: <TariffBar />,\n url: PAYMENTS_URL,\n preventNewTab: true,\n },",
+      "line_number": 462,
+      "context": "!isNotPaidPeriod &&\n isAdmin &&\n !isCommunity && {\n key: \"user-menu-payments\",\n icon: PaymentsReactSvgUrl,\n label: t(\"Common:PaymentsTitle\"),\n onClick: (obj) => this.onPaymentsClick(obj),\n additionalElement: <TariffBar />,\n url: PAYMENTS_URL,\n preventNewTab: true,\n },",
       "module": "/packages/client"
     },
     {

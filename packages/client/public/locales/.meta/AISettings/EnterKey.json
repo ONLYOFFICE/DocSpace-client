@@ -3,7 +3,7 @@
   "content": "Enter key",
   "content_en_sha1_hash": "a41b85834a1e94ca65de2f1d2f5722a1060ad0ad",
   "created_at": "2025-10-27T16:14:31.647Z",
-  "updated_at": "2025-11-07T13:41:06.281Z",
+  "updated_at": "2025-11-13T07:58:08.088Z",
   "comment": {
     "text": "Placeholder text for an input field, prompting the user to enter a key (likely an API or access key). It appears in both the AI settings provider dialog and the AI settings search page. Translators should ensure the term \"key\" is accurately conveyed in the target language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 242,
+      "line_number": 265,
       "context": "labelText={t(\"AISettings:APIKey\")}\n removeMargin\n >\n <PasswordInput\n className={styles.passwordInput}\n placeholder={t(\"AISettings:EnterKey\")}\n inputValue={value}\n onChange={onChange}\n scale\n isSimulateType\n isFullWidth",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 230,
+      "line_number": 255,
       "context": "labelText={t(\"AISettings:APIKey\")}\n removeMargin\n >\n <PasswordInput\n className={styles.passwordInput}\n placeholder={t(\"AISettings:EnterKey\")}\n inputValue={value}\n onChange={onChange}\n scale\n isSimulateType\n isFullWidth",
       "module": "/packages/client"
     }

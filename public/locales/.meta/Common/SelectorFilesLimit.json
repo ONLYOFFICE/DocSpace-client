@@ -1,0 +1,28 @@
+{
+  "key_path": "SelectorFilesLimit",
+  "content": "Maximum {{count}} files allowed",
+  "content_en_sha1_hash": "4886f6d97491793d45f7b46f21d0ad5ac83aa7c5",
+  "created_at": "2025-11-13T07:57:55.552Z",
+  "updated_at": "2025-11-13T08:04:15.993Z",
+  "comment": {
+    "text": "This key displays a limit on the number of files that can be selected, informing the user how many files are allowed. It appears in a file selection interface, likely within a chat attachment component on mobile devices, to show the maximum file upload count. The `count` variable will be replaced with the actual file limit value.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:04:15.993Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/Attachment.tsx",
+      "line_number": 168,
+      "context": ": DeviceType.mobile\n }\n withInfoBar={withInfo}\n maxSelectedItems={CHAT_MAX_FILE_COUNT}\n infoBarData={{\n title: t(\"Common:SelectorFilesLimit\", { count: CHAT_MAX_FILE_COUNT }),\n icon: AttachmentReactSvgUrl,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"Common:SelectorFilesLimitDescription\"),\n }}\n renderInPortal",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

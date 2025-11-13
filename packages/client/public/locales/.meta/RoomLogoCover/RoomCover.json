@@ -3,7 +3,7 @@
   "content": "Room cover",
   "content_en_sha1_hash": "629fe77eb87170248f519263ffdf53af11eb35b4",
   "created_at": "2025-05-19T21:30:53.318Z",
-  "updated_at": "2025-10-27T16:14:33.174Z",
+  "updated_at": "2025-11-13T07:58:07.756Z",
   "comment": {
     "text": "The \"RoomCover\" translation key is used to display a localized string for a room cover image. It appears in a dialog box for editing room logos, where it serves as a title or placeholder text until an image is selected.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 288,
+      "line_number": 291,
       "context": "scrollBodyHeight={scrollBodyHeight}\n withBodyScrollForcibly={!!scrollBodyHeight}\n isScrollLocked={openColorPicker}\n dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>{t(\"RoomLogoCover:RoomCover\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n forwardedRef={contentRef}\n scrollHeight={scrollH}\n covers={covers}",
       "module": "/packages/client"
     }

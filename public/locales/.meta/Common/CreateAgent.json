@@ -3,7 +3,7 @@
   "content": "Create Agent",
   "content_en_sha1_hash": "a23848cb58c448a3d7658e361ad1820c5a8c3a85",
   "created_at": "2025-10-27T16:14:12.329Z",
-  "updated_at": "2025-11-03T12:10:34.975Z",
+  "updated_at": "2025-11-13T07:58:07.794Z",
   "comment": {
     "text": "This key displays the text \"Create Agent\" as the header of a dialog used to create a new agent. The dialog allows users to input and submit agent parameters. Translators should ensure the translation accurately conveys the action of creating a new agent.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/CreateAgentDialog.tsx",
-      "line_number": 138,
-      "context": "onClose={onCloseDialog}\n isScrollLocked={isScrollLocked}\n onSubmit={handleSubmit}\n withForm\n >\n <ModalDialog.Header>{t(\"Common:CreateAgent\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetAgentParams\n tagHandler={tagHandler}\n agentParams={agentParams}",
+      "line_number": 177,
+      "context": "initedSelectedServers={initSelectedServers}\n />\n </ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>{t(\"Common:CreateAgent\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetAgentParams\n tagHandler={tagHandler}\n agentParams={agentParams}",
       "module": "/packages/client"
     }
   ],

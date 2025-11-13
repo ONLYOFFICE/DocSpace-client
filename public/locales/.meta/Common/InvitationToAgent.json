@@ -1,0 +1,28 @@
+{
+  "key_path": "InvitationToAgent",
+  "content": "<1>{{displayName}}</1> invites you to join the AI agent <1>{{agentName}}</1>.",
+  "content_en_sha1_hash": "219914f391293ff45a679d1db1a94472c58701ce",
+  "created_at": "2025-11-13T07:57:47.813Z",
+  "updated_at": "2025-11-13T08:04:25.956Z",
+  "comment": {
+    "text": "This key displays an invitation to a user, informing them that `<displayName>` is inviting them to join the AI agent `<agentName>`. It appears within the user creation flow, likely as part of a prompt or message presented to the invited user. Translators should ensure the invitation is clear and welcoming.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:04:25.956Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
+      "line_number": 75,
+      "context": "if (roomData?.isAgent) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n }}",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

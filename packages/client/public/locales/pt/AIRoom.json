@@ -1,1 +1,25 @@
-{}
+{
+  "AIChat": "IA-Chat",
+  "CreateChat": "Criar chat",
+  "CreateChatDescription": "Vá para a aba IA-Chat para começar.",
+  "EmptyKnowledgeDescription": "Arquivos carregados aqui serão indexados e usados como contexto na aba AI-Chat. Adicione arquivos para perguntar ao AI sobre eles, gerar conteúdo ou analisar informações juntos.",
+  "EmptyKnowledgeTitle": "Ainda não foram enviados arquivos.",
+  "EmptyResultsDescription": "Arquivos gerados no AI-Chat aparecerão aqui automaticamente. Sempre que você gerar conteúdo, iniciar um chat ou enviar uma mensagem com saída, o resultado será salvo nesta seção.",
+  "EmptyResultsTitle": "Ainda não há resultados.",
+  "Instructions": "Instruções",
+  "InstructionsDescription": "Defina o propósito e o comportamento dos chats dentro deste espaço. O que eles devem fazer? Como devem funcionar? O que deve ser evitado?",
+  "InstructionsPlaceholder": "Exemplo: “Chats neste espaço são utilizados para discutir arquivos do projeto. Por favor, mantenha-se no tópico e evite conversas fora do tema ou compartilhamento de documentos não relacionados.”",
+  "Knowledge": "Conhecimento",
+  "KnowledgeDescription": "Carregue arquivos do seu computador ou {{productName}} para fornecer mais contexto para o chat. Observe: parte ou todo o conteúdo carregado poderá ser exposto durante a conversa.",
+  "KnowledgeSelectIn": "Selecione em {{productName}}",
+  "MCP": "Ferramentas MCP para este quarto",
+  "MCPDescription": "Utilize as ferramentas MCP conectadas pelo administrador para aprimorar a experiência de chat com IA. Essas ferramentas podem auxiliar com extração de dados, resumos, sugestões inteligentes, etc.",
+  "Model": "Fornecedor e modelo",
+  "ModelDescription": "Selecione o provedor e o modelo de IA a serem usados nos chats desta sala. Esta configuração é obrigatória e se aplica a todos os participantes.",
+  "ResultStorage": "Armazenamento de resultados",
+  "UploadFilesDevice": "Carregar arquivos do seu dispositivo pessoal",
+  "UploadFilesPortal": "Carregue arquivos de {{sectionNameFirst}} ou {{sectionNameSecond}}",
+  "KnowledgeUnavailable": "Base de conhecimento indisponível",
+  "KnowledgeUnavailableDescription": "A base de conhecimento está atualmente desativada. Para ativar a pesquisa semântica e o processamento de documentos para seus agentes de IA, configure o provedor de embeddings nas configurações do {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "A base de conhecimento está atualmente desativada. Para ativar a pesquisa semântica e o processamento de documentos para agentes de IA, entre em contato com o administrador do seu {{productName}} para configurar o provedor de embeddings."
+}

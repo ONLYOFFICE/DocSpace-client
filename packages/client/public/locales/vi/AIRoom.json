@@ -1,1 +1,25 @@
-{}
+{
+  "AIChat": "Trò chuyện AI",
+  "CreateChat": "Tạo cuộc trò chuyện",
+  "CreateChatDescription": "Đến tab AI-Chat để bắt đầu.",
+  "EmptyKnowledgeDescription": "Các tệp được tải lên ở đây sẽ được lập chỉ mục và sử dụng làm ngữ cảnh trong tab AI-Chat. Thêm các tệp để hỏi AI về chúng, tạo nội dung hoặc phân tích thông tin cùng nhau.",
+  "EmptyKnowledgeTitle": "Chưa có tệp nào được tải lên.",
+  "EmptyResultsDescription": "Các tệp được tạo trong AI-Chat sẽ tự động xuất hiện ở đây. Bất cứ khi nào bạn tạo nội dung, bắt đầu một cuộc trò chuyện hoặc gửi một tin nhắn có đầu ra, kết quả sẽ được lưu trong phần này.",
+  "EmptyResultsTitle": "Chưa có kết quả nào.",
+  "Instructions": "Hướng dẫn",
+  "InstructionsDescription": "Xác định mục đích và hành vi của các cuộc trò chuyện trong phòng này. Chúng nên làm gì? Chúng nên hoạt động như thế nào? Điều gì nên tránh?",
+  "InstructionsPlaceholder": "Ví dụ: “Các cuộc trò chuyện trong phòng này được sử dụng để thảo luận về các tệp dự án. Vui lòng giữ chủ đề và tránh các cuộc trò chuyện lạc đề hoặc chia sẻ các tài liệu không liên quan.”",
+  "Knowledge": "Kiến thức",
+  "KnowledgeDescription": "Tải lên các tệp từ máy tính của bạn hoặc {{productName}} để cung cấp ngữ cảnh tốt hơn cho cuộc trò chuyện. Lưu ý: một phần hoặc toàn bộ nội dung đã tải lên có thể bị lộ trong quá trình trò chuyện.",
+  "KnowledgeSelectIn": "Chọn trong {{productName}}",
+  "MCP": "Công cụ MCP cho phòng này",
+  "MCPDescription": "Sử dụng các công cụ MCP được kết nối bởi quản trị viên để nâng cao trải nghiệm trò chuyện với AI. Các công cụ này có thể hỗ trợ trích xuất dữ liệu, tóm tắt, gợi ý thông minh, v.v.",
+  "Model": "Nhà cung cấp và kiểu máy",
+  "ModelDescription": "Chọn nhà cung cấp AI và mô hình sẽ được sử dụng trong các cuộc trò chuyện của phòng này. Cài đặt này là bắt buộc và áp dụng cho tất cả người tham gia.",
+  "ResultStorage": "Lưu trữ kết quả",
+  "UploadFilesDevice": "Tải lên tệp từ thiết bị cá nhân của bạn.",
+  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
+  "KnowledgeUnavailable": "Cơ sở kiến thức không khả dụng",
+  "KnowledgeUnavailableDescription": "Cơ sở kiến ​​thức hiện đang bị vô hiệu hóa. Để kích hoạt tìm kiếm ngữ nghĩa và xử lý tài liệu cho các tác nhân AI của bạn, vui lòng cấu hình nhà cung cấp nhúng trong cài đặt {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Cơ sở kiến ​​thức hiện đang bị vô hiệu hóa. Để kích hoạt tìm kiếm ngữ nghĩa và xử lý tài liệu cho các tác nhân AI, vui lòng liên hệ với quản trị viên {{productName}} của bạn để cấu hình nhà cung cấp nhúng."
+}

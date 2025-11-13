@@ -1,1 +1,25 @@
-{}
+{
+  "AIChat": "AI-Čats",
+  "CreateChat": "Izveidot tērzēšanu",
+  "CreateChatDescription": "Dodieties uz AI-Čata cilni, lai sāktu.",
+  "EmptyKnowledgeDescription": "Faili, kas tiek augšupielādēti šeit, tiks indeksēti un izmantoti kā konteksts AI-Čat cilnē. Pievienojiet failus, lai jautātu AI par tiem, ģenerētu saturu vai analizētu informāciju kopā.",
+  "EmptyKnowledgeTitle": "Vēl nav pievienoti faili",
+  "EmptyResultsDescription": "Faili, kas ģenerēti AI-Chat, automātiski parādīsies šeit. Katreiz, kad ģenerējat saturu, sākat tērzēšanu vai nosūtāt ziņojumu ar izvadi, rezultāts tiks saglabāts šajā sadaļā.",
+  "EmptyResultsTitle": "Vēl nav rezultātu",
+  "Instructions": "Instrukcijas",
+  "InstructionsDescription": "Definējiet šīs telpas tērzēšanu – tās mērķi un uzvedību. Ko tās vajadzētu darīt? Kā tām vajadzētu funkcionēt? Ko vajadzētu izvairīties darīt?",
+  "InstructionsPlaceholder": "Piemērs: \"Čati šajā telpā tiek izmantoti, lai diskutētu par projekta failiem. Lūdzu, turiet tēmu un izvairieties no beztematiskiem jautājumiem vai nepiemērotu dokumentu kopīgošanu.\"",
+  "Knowledge": "Zināšanas",
+  "KnowledgeDescription": "Augšupielādējiet failus no sava datora vai {{productName}}, lai nodrošinātu labāku kontekstu sarunai. Piezīme: sarunas laikā var tikt atklāti daži vai visi augšupielādētie faili.",
+  "KnowledgeSelectIn": "Izvēlēties {{productName}}",
+  "MCP": "MCP rīki šai telpai",
+  "MCPDescription": "Izmantojiet MCP rīkus, kas pievienoti administratora rīcībā, lai uzlabotu tērzēšanas pieredzi ar AI. Šie rīki var palīdzēt ar datu izvilkšanu, kopsavilkumiem, viediem ieteikumiem u.c.",
+  "Model": "Pakalpojuma sniedzējs un modelis",
+  "ModelDescription": "Izvēlieties AI pakalpojumu sniedzēju un modeli, kas tiks izmantots šīs telpas sarunās. Šis iestatījums ir obligāts un attiecas uz visiem dalībniekiem.",
+  "ResultStorage": "Rezultātu glabāšana",
+  "UploadFilesDevice": "Augšupielādējiet failus no sava personīgā ierīces",
+  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}.",
+  "KnowledgeUnavailable": "Zinu bāze nav pieejama",
+  "KnowledgeUnavailableDescription": "Zināšanu bāze šobrīd ir deaktivizēta. Lai aktivizētu semantisko meklēšanu un dokumentu apstrādi jūsu AI aģentiem, lūdzu, konfigurējiet vektortrāķa nodrošinātāju {{productName}} iestatējumos.",
+  "KnowledgeUnavailableDescriptionUser": "Zināšanu bāze šobrīd ir deaktivizēta. Lai aktivizētu semantisko meklēšanu un dokumentu apstrādi AI aģentiem, lūdzu, sazinieties ar savu {{productName}} administratoru, lai konfigurētu vektortrāķa nodrošinātāju."
+}

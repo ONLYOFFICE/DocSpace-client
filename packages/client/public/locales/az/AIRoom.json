@@ -1,1 +1,25 @@
-{}
+{
+  "AIChat": "Süni İntellekt-Çat",
+  "CreateChat": "Söhbət yarat",
+  "CreateChatDescription": "Əməgiyyətə başlamak üçün AI-Chat bölməsinə keçin.",
+  "EmptyKnowledgeDescription": "Buraya yüklənən fayllar indeksləşdirilib və AI-Chat sektsiyasında kontekst kimi istifadə olunacaq. AI-dən söhbət etmək, məzmun yaratmaq və ya məlumatları birgə analiz etmək üçün fayllar əlavə edin.",
+  "EmptyKnowledgeTitle": "Hələlik fayl yüklənməyib",
+  "EmptyResultsDescription": "AI-Chat tərəfindən yaradılmış fayllar avtomatik olaraq burada görünəcəkdir. Hər dəfə məzmun yaradır, söhbətə başlayır və ya nəticəsi olan bir mesaj göndərsəniz, nəticə bu bölmədə saxlanılacaqdır.",
+  "EmptyResultsTitle": "Hələlik nəticə yoxdur",
+  "Instructions": "Təlimatlar",
+  "InstructionsDescription": "Bu otaqda söhbətlərin məqsədini və davranışını müəyyən edin. Onlar nə etməli? Necə işləməlidir? Nədən çəkinməlidir?",
+  "InstructionsPlaceholder": "Misal: \"Bu otaqda söhbətlər layihə fayllarını müzakirə etmək üçün istifadə olunur. Xahiş edirəm mövzudan yayınmayın və əlaqəsiz söhbətlərə və ya sənədlərə yol verməyin.\"",
+  "Knowledge": "Bilik",
+  "KnowledgeDescription": "Komputerinizdən və ya {{productName}} proqramından faylları yükləyin ki, söhbət üçün daha yaxşı kontekst yarana bilsin. Qeyd: söhbət zamanı yüklənən məzmunun bir hissəsi və ya hamısı göstərilə bilər.",
+  "KnowledgeSelectIn": "{{productName}} seçim edin",
+  "MCP": "Bu otaq üçün MCP alətləri",
+  "MCPDescription": "Administrator tərəfindən qoşulmuş MCP alətlərindən istifadə edin ki, İM ilə təcrübənizi AI ilə daha yaxşı edin. Bu alətlər məlumatların çıxarılması, xülasələr, ağıllı təkliflər və s. ilə kömək edə bilər.",
+  "Model": "Təminatçı və model",
+  "ModelDescription": "Bu otaqda istifadə ediləcək AI təminatçısı və modeli seçin. Bu ayarı məcburi hesab edilir və bütün iştirakçılar üçün tətbiq olunur.",
+  "ResultStorage": "Nəticə saxlanması",
+  "UploadFilesDevice": "Şəxsi cihazınızdan faylları yükləyin",
+  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin",
+  "KnowledgeUnavailable": "Bilgi Bazası mövcud deyil",
+  "KnowledgeUnavailableDescription": "Bilik bazası hazırda deaktivdir. Süni intellekt agentləriniz üçün semantik axtarışı və sənəd emalını aktivləşdirmək üçün {{productName}} parametrlərində yerləşdirmə provayderini konfiqurasiya edin.",
+  "KnowledgeUnavailableDescriptionUser": "Bilik bazası hazırda deaktivdir. Süni intellekt agentləri üçün semantik axtarışı və sənəd emalını aktivləşdirmək üçün, yerləşdirmə provayderini konfiqurasiya etmək üçün {{productName}} admininiz ilə əlaqə saxlayın."
+}

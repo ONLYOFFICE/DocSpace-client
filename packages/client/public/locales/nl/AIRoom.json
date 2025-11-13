@@ -1,1 +1,25 @@
-{}
+{
+  "AIChat": "AI-Chat",
+  "CreateChat": "Maak chat",
+  "CreateChatDescription": "Ga naar het tabblad AI-Chat om te beginnen.",
+  "EmptyKnowledgeDescription": "Bestanden die hier worden geüpload, worden geïndexeerd en gebruikt als context in het AI-Chat tabblad. Voeg bestanden toe om AI er vragen over te stellen, content te genereren of informatie samen te analyseren.",
+  "EmptyKnowledgeTitle": "Nog geen bestanden geüpload.",
+  "EmptyResultsDescription": "Bestanden die in AI-Chat worden gegenereerd, verschijnen hier automatisch. Telkens wanneer u inhoud genereert, een chat start of een bericht met output verzendt, wordt het resultaat in dit gedeelte opgeslagen.",
+  "EmptyResultsTitle": "Nog geen resultaten.",
+  "Instructions": "Instructies",
+  "InstructionsDescription": "Definieer het doel en het gedrag van chats binnen deze ruimte. Wat zouden ze moeten doen? Hoe zouden ze moeten functioneren? Wat moet vermeden worden?",
+  "InstructionsPlaceholder": "Voorbeeld: “Chats in deze ruimte worden gebruikt om projectbestanden te bespreken. Blijf alsjeblieft bij het onderwerp en vermijd off-topic gesprekken of het delen van niet-gerelateerde documenten.”",
+  "Knowledge": "Kennis",
+  "KnowledgeDescription": "Upload bestanden van uw computer of {{productName}} om de chat meer context te geven. Let op: een deel of alle geüploade inhoud kan tijdens het gesprek worden getoond.",
+  "KnowledgeSelectIn": "Selecteer in {{productName}}",
+  "MCP": "MCP tools voor deze kamer",
+  "MCPDescription": "Gebruik MCP-tools verbonden door de beheerder om de chatervaring met AI te verbeteren. Deze tools kunnen helpen met data-extractie, samenvattingen, slimme suggesties, enz.",
+  "Model": "Provider en model",
+  "ModelDescription": "Selecteer de AI-provider en het model dat in de chats van deze ruimte gebruikt moet worden. Deze instelling is verplicht en is van toepassing op alle deelnemers.",
+  "ResultStorage": "Resultaatopslag",
+  "UploadFilesDevice": "Upload bestanden vanaf uw persoonlijke apparaat",
+  "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}",
+  "KnowledgeUnavailable": "Kennisbank niet beschikbaar",
+  "KnowledgeUnavailableDescription": "De kennisbank is momenteel uitgeschakeld. Om semantisch zoeken en documentverwerking voor uw AI-agenten te activeren, configureert u de embeddings provider in de {{productName}} instellingen.",
+  "KnowledgeUnavailableDescriptionUser": "De kennisbank is momenteel uitgeschakeld. Om semantisch zoeken en documentverwerking voor AI-agenten te activeren, neem dan contact op met uw {{productName}} beheerder om de embeddings provider te configureren."
+}

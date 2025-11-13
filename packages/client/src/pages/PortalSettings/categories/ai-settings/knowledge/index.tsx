@@ -241,23 +241,28 @@ const KnowledgeComponent = ({
             labelText={t("AISettings:APIKey")}
             removeMargin
           >
-            <PasswordInput
-              className={styles.passwordInput}
-              placeholder={t("AISettings:EnterKey")}
-              inputValue={value}
-              onChange={onChange}
-              scale
-              isSimulateType
-              isFullWidth
-              isDisableTooltip
-              isDisabled={isKeyHidden || selectedOption === KnowledgeType.None}
-              autoComplete="off"
-            />
             {isKeyHidden ? (
-              <Text className={styles.hiddenKeyDescription}>
-                {t("AISettings:WebSearchKeyHiddenDescription")}
-              </Text>
-            ) : null}
+              <div className={styles.aiBanner}>
+                <Text fontSize="12px" fontWeight={400} lineHeight="16px">
+                  {t("AISettings:WebSearchKeyHiddenDescription")}
+                </Text>
+              </div>
+            ) : (
+              <PasswordInput
+                className={styles.passwordInput}
+                placeholder={t("AISettings:EnterKey")}
+                inputValue={value}
+                onChange={onChange}
+                scale
+                isSimulateType
+                isFullWidth
+                isDisableTooltip
+                isDisabled={
+                  isKeyHidden || selectedOption === KnowledgeType.None
+                }
+                autoComplete="off"
+              />
+            )}
           </FieldContainer>
         </div>
         <div className={styles.buttonContainer}>

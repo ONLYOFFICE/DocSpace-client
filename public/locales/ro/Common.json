@@ -45,7 +45,6 @@
   "AgentName": "Nume de agent",
   "AgentOwner": "Proprietar agent",
   "AIAgents": "Agenți de inteligență artificială",
-  "AIChatHelp": "Cu ce vă pot ajuta?",
   "AIChatInput": "Chat cu IA",
   "AIChatNoAccessDescription": "Puteți afișa acest agent și rezultatele salvate, dar inițierea conversațiilor noi cu IA nu este permisă pentru rolul dvs. actual. Aveți nevoie de acces? Contactați administratorul dvs. sau proprietarul agentului pentru a solicita permisiunea de acces.",
   "AIChatNoAccessTitle": "Accesul la chat-ul cu IA limitat",

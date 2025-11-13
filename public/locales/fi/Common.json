@@ -46,7 +46,6 @@
   "AgentOwner": "Agentin omistaja",
   "AIAgents": "AI-agentit",
   "AIAgentSpaceQuotaExceeded": "AI Agentin tilavuusraja ylitetty ({{size}}).",
-  "AIChatHelp": "Miten voin auttaa?",
   "AIChatInput": "Keskustele tekoälyn kanssa",
   "AIChatNoAccessDescription": "Voit tarkastella tätä agenttia ja sen tallennettuja tuloksia, mutta uusien tekoälykeskustelujen aloittaminen ei ole sallittua nykyisessä roolissasi. Tarvitsetko pääsyn? Ota yhteyttä ylläpitäjällesi tai agentin omistajalle saadaksesi käyttöoikeutta.",
   "AIChatNoAccessTitle": "AI-chatin käyttöä rajoitettu",

@@ -45,7 +45,6 @@
   "AgentName": "Emri i agjentit",
   "AgentOwner": "Pronari i agjentit",
   "AIAgents": "Agjentë AI",
-  "AIChatHelp": "Si mund të ndihmoj?",
   "AIChatInput": "Bisedo me IA-në",
   "AIChatNoAccessDescription": "Mund ta shikosh këtë agjent dhe rezultatet e ruajtura të tij, por fillimi i bisedave të reja me inteligjencë artificiale nuk lejohet për rolin tënd aktual. Keni nevojë për qasje? Kontaktoni administratorin tënd ose pronarin e agjentit për të kërkuar leje.",
   "AIChatNoAccessTitle": "Qasja në bisedën me inteligjencën artificiale është e kufizuar",

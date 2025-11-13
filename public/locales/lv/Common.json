@@ -46,7 +46,6 @@
   "AgentOwner": "Aģenta īpašnieks",
   "AIAgents": "AI aģenti",
   "AIAgentSpaceQuotaExceeded": "AI aģenta vietas kvota pārsniegta ({{size}}).",
-  "AIChatHelp": "Kā es varu palīdzēt?",
   "AIChatInput": "Tērzējiet ar mākslīgo intelektu",
   "AIChatNoAccessDescription": "Jūs varat apskatīt šo aģentu un tā saglabātos rezultātus, taču jaunu AI sarunu sākšana nav atļauta jūsu pašreizējā lomā. Neizdodas piekļūt? Sazinieties ar savu administratoru vai aģenta īpašnieku, lai pieprasītu atļauju.",
   "AIChatNoAccessTitle": "Pieejas uz AI tērzēšanu ierobežota",

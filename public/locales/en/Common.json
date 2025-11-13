@@ -47,7 +47,7 @@
   "AIAgents": "AI agents",
   "AIAgentSpaceQuotaExceeded": "AI Agent space quota exceeded ({{size}}).",
   "AICanMakeMistakes": "AI can make mistakes. Please double-check responses.",
-  "AIChatHelp": "How can i help?",
+  "AIChatOfferHelp": "How can I help?",
   "AIChatInput": "Chat with AI",
   "AIChatNoAccessDescription": "You can view this agent and its stored results, but starting new AI chats isn’t permitted for your current role. Need access? Reach out to your administrator or the agent owner to request permission.",
   "AIChatNoAccessTitle": "Access to AI chat restricted",

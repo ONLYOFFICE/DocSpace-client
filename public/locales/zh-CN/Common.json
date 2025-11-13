@@ -45,7 +45,6 @@
   "AgentName": "智能体名称",
   "AgentOwner": "智能体所有者",
   "AIAgents": "AI 智能体",
-  "AIChatHelp": "我能帮上什么忙？",
   "AIChatInput": "与 AI 对话",
   "AIChatNoAccessDescription": "您可以查看此智能体及其存储的结果，但您当前角色不允许启动新的 AI 对话。需要访问权限？请联系您的管理员或智能体所有者请求权限。",
   "AIChatNoAccessTitle": "AI 对话访问受限",

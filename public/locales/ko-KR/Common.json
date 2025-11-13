@@ -46,7 +46,6 @@
   "AgentOwner": "에이전트 소유자",
   "AIAgents": "AI 에이전트",
   "AIAgentSpaceQuotaExceeded": "AI 에이전트 할당량 초과 ({{size}}).",
-  "AIChatHelp": "도와드릴 수 있는 일이 있을까요?",
   "AIChatInput": "AI와 대화하기",
   "AIChatNoAccessDescription": "이 에이전트와 저장된 결과는 확인할 수 있지만, 현재 역할로는 새로운 AI 채팅을 시작할 수 없습니다. 접근 권한이 필요하신가요? 관리자 또는 에이전트 소유자에게 문의하여 권한을 요청하세요.",
   "AIChatNoAccessTitle": "AI 챗봇 사용 제한",

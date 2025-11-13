@@ -45,7 +45,6 @@
   "AgentName": "Nom de l'agent",
   "AgentOwner": "Propriétaire de l'agent",
   "AIAgents": "Agents IA",
-  "AIChatHelp": "Comment puis-je vous aider ?",
   "AIChatInput": "Discutez avec l'IA",
   "AIChatNoAccessDescription": "Vous pouvez consulter cet agent et ses résultats enregistrés, mais votre rôle actuel ne vous autorise pas à démarrer de nouvelles conversations IA. Vous avez besoin d'un accès ? Contactez votre administrateur ou le propriétaire de l'agent pour demander l'autorisation.",
   "AIChatNoAccessTitle": "Accès restreint au chat IA",

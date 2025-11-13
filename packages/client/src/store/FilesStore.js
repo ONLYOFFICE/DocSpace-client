@@ -1348,6 +1348,7 @@ class FilesStore {
 
   updateRoomMute = (index, status) => {
     this.folders[index].mute = status;
+    this.updateSelection(this.folders[index].id);
   };
 
   setFile = (file) => {
@@ -4460,6 +4461,20 @@ class FilesStore {
     return rooms.length > 0;
   }
 
+  get hasAIAgentsToResetQuota() {
+    const canResetCustomQuota = (item) => {
+      const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
+
+      if (!isDefaultAIAgentsQuotaSet) return false;
+
+      return item.security?.EditRoom && item.isCustomQuota;
+    };
+
+    const aiAgents = this.selection.filter((x) => canResetCustomQuota(x));
+
+    return aiAgents.length > 0;
+  }
+
   get hasRoomsToDisableQuota() {
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
@@ -4476,6 +4491,20 @@ class FilesStore {
     return rooms.length > 0;
   }
 
+  get hasAIAgentsToDisableQuota() {
+    const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canDisableQuota = (item) => {
+      if (!isDefaultAIAgentsQuotaSet) return false;
+
+      return item.security?.EditRoom;
+    };
+
+    const aiAgents = this.selection.filter((x) => canDisableQuota(x));
+
+    return aiAgents.length > 0;
+  }
+
   get hasRoomsToChangeQuota() {
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
@@ -4490,6 +4519,20 @@ class FilesStore {
     const rooms = this.selection.filter((x) => canChangeQuota(x));
 
     return rooms.length > 0;
+  }
+
+  get hasAIAgentsToChangeQuota() {
+    const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canChangeQuota = (item) => {
+      if (!isDefaultAIAgentsQuotaSet) return false;
+
+      return item.security?.EditRoom;
+    };
+
+    const aiAgents = this.selection.filter((x) => canChangeQuota(x));
+
+    return aiAgents.length > 0;
   }
 
   get hasOneSelection() {

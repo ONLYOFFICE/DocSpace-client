@@ -675,6 +675,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       isInsideResultStorage,
     ),
 
+    selectedTreeNode,
+
     breadCrumbs,
     onSelectBreadCrumb: onClickBreadCrumb,
 

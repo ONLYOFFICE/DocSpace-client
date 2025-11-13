@@ -130,6 +130,7 @@ const RoomLogoCoverDialog = ({
   editAgentDialogVisible,
   uploadedFile,
   setUploadedFile,
+  isAIAgentsFolderRoot,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover"]);
   const theme = useTheme();
@@ -140,7 +141,7 @@ const RoomLogoCoverDialog = ({
   const [view, setView] = React.useState(isDesktop() ? "desktop" : "tablet");
   const [openColorPicker, setOpenColorPicker] = React.useState<boolean>(false);
   const [scrollBodyHeight, setScrollBodyHeight] = React.useState<null | number>(
-    null
+    null,
   );
 
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -288,7 +289,11 @@ const RoomLogoCoverDialog = ({
       isScrollLocked={openColorPicker}
       dataTestId="room_logo_cover_dialog"
     >
-      <ModalDialog.Header>{t("RoomLogoCover:RoomCover")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isAIAgentsFolderRoot
+          ? t("RoomLogoCover:AgentCover")
+          : t("RoomLogoCover:RoomCover")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <RoomLogoCover
           forwardedRef={contentRef}
@@ -330,7 +335,7 @@ const RoomLogoCoverDialog = ({
 };
 
 export default inject<TStore>(
-  ({ dialogsStore, filesStore, avatarEditorDialogStore }) => {
+  ({ dialogsStore, filesStore, avatarEditorDialogStore, treeFoldersStore }) => {
     const {
       setCover,
       getCovers,
@@ -354,6 +359,7 @@ export default inject<TStore>(
       setUploadedFile,
     } = avatarEditorDialogStore;
 
+    const { isAIAgentsFolderRoot } = treeFoldersStore;
     return {
       setRoomLogoCoverDialogVisible,
       roomLogoCoverDialogVisible,
@@ -372,6 +378,7 @@ export default inject<TStore>(
       uploadedFile,
 
       setUploadedFile,
+      isAIAgentsFolderRoot,
     };
-  }
+  },
 )(observer(RoomLogoCoverDialog));

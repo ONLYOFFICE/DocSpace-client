@@ -3,7 +3,7 @@
   "content": "Chat <1>{{title}}</1> exported to file: <2>{{fileName}}</2>",
   "content_en_sha1_hash": "ffe8e0bb5328b1c868484d72118ab9536c8dcc7e",
   "created_at": "2025-10-27T16:14:24.214Z",
-  "updated_at": "2025-11-06T18:29:16.030Z",
+  "updated_at": "2025-11-13T07:58:08.561Z",
   "comment": {
     "text": "This key displays a notification message confirming that a chat has been exported to a file. It appears as a toast message within the chat interface, likely triggered after a user initiates an export action. The message includes the chat title and the name of the exported file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/SelectChat.tsx",
-      "line_number": 173,
+      "line_number": 170,
       "context": "}\n \n const toastMsg = (\n <Trans\n ns=\"Common\"\n i18nKey=\"ChatExported\"\n t={t}\n values={{ fileName, title }}\n components={{\n 1: <b />,\n 2: (",
       "module": "/packages/shared"
     }

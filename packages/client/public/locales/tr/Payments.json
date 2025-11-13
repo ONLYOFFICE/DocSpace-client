@@ -88,6 +88,7 @@
   "Payer": "Ödeyen",
   "PayerDescription": "Bu kullanıcının ödeme detaylarına erişimi vardır ve kotayı ayarlayıp ödeme yapabilen tek kullanıcıdır. {{productName}} sahibi ve ödeme yöneticisinin kendisi, Stripe müşteri portalını kullanarak ödeme yöneticisi rolünü yeniden atayabilir.",
   "PaymentMethod": "Ödeme yöntemi",
+  "PerAITools": "{{currency}} bir token başına",
   "PerBackup": "{{currency}} başına 1 yedekleme",
   "PerBackupWithBracket": "({{currency}} başına 1 yedekleme)",
   "PerStorage": "{{currency}} başına {{amount}}/ay",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "Ödeme eklemeyi unuttunuz",
   "YourCurrentPayment": "Mevcut ödemeniz",
   "YourCurrentPlan": "<1>Mevcut planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Ücret",
-  "PerAITools": "{{currency}} bir token başına"
+  "YourPrice": "Ücret"
 }

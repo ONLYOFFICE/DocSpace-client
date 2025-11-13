@@ -357,7 +357,6 @@ const FilesView = ({
   };
 
   const isRoomMembersPanel = value === InfoPanelView.infoMembers;
-  const isShareTab = value === InfoPanelView.infoShare;
 
   const roomMembersProps = isRoomMembersPanel
     ? {
@@ -380,7 +379,6 @@ const FilesView = ({
             : selection
         }
         {...roomMembersProps}
-        isShareTab={isShareTab}
       />
       <LoaderWrapper
         isLoading={isLoadingSuspense}

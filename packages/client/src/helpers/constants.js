@@ -72,7 +72,7 @@ export const TableVersions = Object.freeze({
   Recent: "2",
   Favorites: "1",
   Guests: "1",
-  SharedWithMe: "1",
+  SharedWithMe: "2",
   AIAgents: "1",
 });
 

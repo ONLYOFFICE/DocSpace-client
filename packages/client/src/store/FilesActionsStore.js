@@ -1398,7 +1398,7 @@ class FilesActionStore {
     const muteStatus = action === "mute";
 
     const folderIndex = id && folders.findIndex((x) => x.id == id);
-    if (folderIndex) updateRoomMute(folderIndex, muteStatus);
+    if (folderIndex > -1) updateRoomMute(folderIndex, muteStatus);
 
     const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
     const count = treeFolders[treeIndex].newItems;
@@ -1598,6 +1598,8 @@ class FilesActionStore {
 
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
 
+    const categoryType = getCategoryType(window.DocSpace.location);
+
     const setIsLoading = (param) => {
       setIsSectionBodyLoading(param);
     };
@@ -1632,9 +1634,19 @@ class FilesActionStore {
     } else {
       newFilter.withoutTags = true;
     }
+
+    let pathName = window.DocSpace.location.pathname;
+
+    if (
+      categoryType === CategoryType.Chat ||
+      categoryType === CategoryType.AIAgent
+    ) {
+      pathName = getCategoryUrl(CategoryType.AIAgents);
+    }
+
     setIsLoading(true);
     window.DocSpace.navigate(
-      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,
+      `${pathName}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,
     );
   };
 

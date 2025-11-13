@@ -88,6 +88,7 @@
   "Payer": "Platiteľ",
   "PayerDescription": "Tento používateľ má prístup k detailom platby a je jediným používateľom, ktorý môže nastaviť kvótu a vykonávať platby. Vlastník {{productName}}, ako aj samotný správca platieb, môže rolu správcu platieb zmeniť pomocou zákazníckeho portálu Stripe.",
   "PaymentMethod": "Platobná metóda",
+  "PerAITools": "{{currency}} za token",
   "PerBackup": "{{currency}} za 1 zálohu",
   "PerBackupWithBracket": "({{currency}} za 1 zálohu)",
   "PerStorage": "{{currency}} za {{amount}}/mesiac",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "Neboli pridané žiadne platby.",
   "YourCurrentPayment": "Vaša aktuálna platba",
   "YourCurrentPlan": "<1>Váš aktuálny plán:</1> {{amount}} <2>({{price}}/mesiac)</2>",
-  "YourPrice": "Vaša cena",
-  "PerAITools": "{{currency}} za token"
+  "YourPrice": "Vaša cena"
 }

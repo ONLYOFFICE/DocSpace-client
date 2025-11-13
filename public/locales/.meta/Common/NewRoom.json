@@ -3,7 +3,7 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2025-11-13T07:42:11.032Z",
+  "updated_at": "2025-11-13T10:21:17.703Z",
   "comment": {
     "text": "This translation key is used for the label of a button that invites users to create a new room. The button appears in various UI elements, including main buttons and folder input dialogs. It displays the text \"New room\" to guide users through the process of creating a new room.",
     "is_auto": true,
@@ -66,7 +66,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorState.ts",
-      "line_number": 87,
+      "line_number": 94,
       "context": "return [\n ...((withCreate && [\n {\n isCreateNewItem: true,\n label: initSelectedItemType === \"files\" ? t(\"NewFolder\") : t(\"NewRoom\"),\n id: \"create-folder-item\",\n key: \"create-folder-item\",\n hotkey: \"f\",\n onBackClick: () => {},\n },",
       "module": "/packages/shared"
     },

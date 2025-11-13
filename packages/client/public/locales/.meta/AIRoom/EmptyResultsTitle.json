@@ -3,7 +3,7 @@
   "content": "No results yet",
   "content_en_sha1_hash": "e2dc86caab47bb92a20bcd8804679262d607a38b",
   "created_at": "2025-10-27T16:14:31.665Z",
-  "updated_at": "2025-11-03T12:10:34.878Z",
+  "updated_at": "2025-11-13T07:58:07.673Z",
   "comment": {
     "text": "This key displays a message when no results are found within an AI Room's results tab. It's used to inform the user that there is no data to display in that specific view. Translators should ensure the message conveys the absence of results clearly and naturally.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 165,
+      "line_number": 174,
       "context": "const isNotAdmin = isUser(access);\n \n if (isAIRoom) {\n if (isKnowledgeTab) return t(\"AIRoom:EmptyKnowledgeTitle\");\n \n if (isResultsTab) return t(\"AIRoom:EmptyResultsTitle\");\n }\n \n if (isRootEmptyPage)\n return getRootTitle(\n t,",
       "module": "/packages/client"
     }

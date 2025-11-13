@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-11-13T07:42:11.013Z",
+  "updated_at": "2025-11-13T10:21:17.697Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -128,6 +128,18 @@
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
       "line_number": 112,
       "context": "const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyDocuments\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(\n toType,\n isSingleUser,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/hooks/useMCP.ts",
+      "line_number": 85,
+      "context": "getServersListForRoom(agentId).then((res) => {\n if (res) {\n const items = res.map((item) => {\n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n return {\n key: item.id,\n id: item.id,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/hooks/useMCP.ts",
+      "line_number": 85,
+      "context": "getServersListForRoom(agentId).then((res) => {\n if (res) {\n const items = res.map((item) => {\n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n return {\n key: item.id,\n id: item.id,",
       "module": "/packages/client"
     },
     {
@@ -312,43 +324,43 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 250,
+      "line_number": 259,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 250,
+      "line_number": 259,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 250,
+      "line_number": 259,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 250,
+      "line_number": 259,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 250,
+      "line_number": 259,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 250,
+      "line_number": 259,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 250,
+      "line_number": 259,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
@@ -582,7 +594,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 189,
+      "line_number": 210,
       "context": ": undefined\n }\n >\n <Text className={generalStyles.description}>\n {t(\"AISettings:SearchDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {aiSettingsUrl ? (\n <Link\n className={generalStyles.learnMoreLink}",
       "module": "/packages/client"
     },
@@ -599,9 +611,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 235,
-      "context": "return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"AISettings:MCPSettingDescription\", {\n organizationName: t(\"Common:OrganizationName\"),\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {aiSettingsUrl ? (\n <Link\n className={styles.learnMoreLink}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
+      "line_number": 88,
+      "context": "];\n };\n \n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n const description =\n item.serverType === ServerType.Portal\n ? t(\"AISettings:MCPProductDescription\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
+      "line_number": 88,
+      "context": "];\n };\n \n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n const description =\n item.serverType === ServerType.Portal\n ? t(\"AISettings:MCPProductDescription\", {",
       "module": "/packages/client"
     },
     {
@@ -636,43 +654,43 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
+      "line_number": 135,
       "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
+      "line_number": 135,
       "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
+      "line_number": 135,
       "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
+      "line_number": 135,
       "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
+      "line_number": 135,
       "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
+      "line_number": 135,
       "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
+      "line_number": 135,
       "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
@@ -1722,44 +1740,50 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-info-block/index.tsx",
-      "line_number": 47,
-      "context": "export const ChatInfoBlock = ({ standalone, isDocSpaceAdmin }: Props) => {\n const { t } = useTranslation(\"Common\");\n \n const bodyText = !isDocSpaceAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),\n })",
+      "line_number": 46,
+      "context": "}: ChatInfoBlockProps) => {\n const { t } = useTranslation(\"Common\");\n \n const bodyText = !isPortalAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-info-block/index.tsx",
-      "line_number": 47,
-      "context": "export const ChatInfoBlock = ({ standalone, isDocSpaceAdmin }: Props) => {\n const { t } = useTranslation(\"Common\");\n \n const bodyText = !isDocSpaceAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),\n })",
+      "line_number": 46,
+      "context": "}: ChatInfoBlockProps) => {\n const { t } = useTranslation(\"Common\");\n \n const bodyText = !isPortalAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-info-block/index.tsx",
-      "line_number": 47,
-      "context": "export const ChatInfoBlock = ({ standalone, isDocSpaceAdmin }: Props) => {\n const { t } = useTranslation(\"Common\");\n \n const bodyText = !isDocSpaceAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),\n })",
+      "line_number": 46,
+      "context": "}: ChatInfoBlockProps) => {\n const { t } = useTranslation(\"Common\");\n \n const bodyText = !isPortalAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 324,
-      "context": "disabled: !webSearchPortalEnabled,\n getTooltipContent: () => (\n <>\n <Text>\n {t(\"ConnectWebSearch\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {isAdmin ? (\n <Link\n type={LinkType.action}",
+      "line_number": 296,
+      "context": ".filter(Boolean),\n ];\n \n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: mcpId,\n label: name,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
+      "line_number": 296,
+      "context": ".filter(Boolean),\n ];\n \n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: mcpId,\n label: name,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
       "line_number": 73,
-      "context": "? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isDocSpaceAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
+      "context": "? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
       "line_number": 73,
-      "context": "? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isDocSpaceAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
+      "context": "? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
       "line_number": 73,
-      "context": "? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isDocSpaceAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
+      "context": "? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
       "module": "/packages/shared"
     },
     {
@@ -1920,8 +1944,14 @@
     },
     {
       "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
-      "line_number": 162,
-      "context": "emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\")}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n searchEmptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}",
+      "line_number": 77,
+      "context": "const convertServerToOption = React.useCallback(\n (server: TServer): TSelectorItem => {\n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: server.id,\n id: server.id,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
+      "line_number": 77,
+      "context": "const convertServerToOption = React.useCallback(\n (server: TServer): TSelectorItem => {\n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: server.id,\n id: server.id,",
       "module": "/packages/shared"
     },
     {
@@ -1932,7 +1962,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/utils/index.ts",
-      "line_number": 202,
+      "line_number": 208,
       "context": "return items;\n };\n \n export const getDefaultBreadCrumb = (t: TTranslation) => {\n return {\n label: t(\"Common:ProductName\"),\n id: 0,\n isRoom: false,\n };\n };",
       "module": "/packages/shared"
     },

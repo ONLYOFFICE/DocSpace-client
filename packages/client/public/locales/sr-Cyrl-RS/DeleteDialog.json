@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Агент <strong>\"{{agentName}}\"</strong> ће бити трајно избрисан. Сви подаци и приступи корисника ће бити изгубљени.",
+  "DeleteAIAgentTitle": "Обришите овог агента",
+  "DeleteAIAgentWarning": "Разумем последице и желим да избришем агента",
   "DeleteAllGroupDescription": "Одабране групе ће бити обрисане. Корисници у групама неће бити уклоњени са {{productName}}-а. Да ли сте сигурни да желите да наставите?",
   "DeleteAllGroupsTitle": "Обриши групе",
   "DeleteFiles": "Управо ћеш преместити <strong>фајлове ({{filesCount}})</strong> у {{trashSection}}.",
@@ -29,8 +32,5 @@
   "ItemsDeletedAfter": "Ове ставке ће бити трајно обрисане за 30 дана.",
   "ItemsPermanentlyDeleted": "Фолдери ће бити трајно уклоњени из {{trashSection}}.",
   "removeFromListDescription": "Спремате се да уклоните <1>{{title}}</1> са листе. Да ли сте сигурни да желите да наставите?",
-  "removeFromListDescriptionPlural": "Спремате се да уклоните <1>ставке ({{count}})</1> са листе. Да ли сте сигурни да желите да наставите?",
-  "DeleteAIAgentDescription": "Агент <strong>\"{{agentName}}\"</strong> ће бити трајно избрисан. Сви подаци и приступи корисника ће бити изгубљени.",
-  "DeleteAIAgentTitle": "Обришите овог агента",
-  "DeleteAIAgentWarning": "Разумем последице и желим да избришем агента"
+  "removeFromListDescriptionPlural": "Спремате се да уклоните <1>ставке ({{count}})</1> са листе. Да ли сте сигурни да желите да наставите?"
 }

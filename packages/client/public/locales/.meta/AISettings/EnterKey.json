@@ -3,7 +3,7 @@
   "content": "Enter key",
   "content_en_sha1_hash": "a41b85834a1e94ca65de2f1d2f5722a1060ad0ad",
   "created_at": "2025-10-27T16:14:31.647Z",
-  "updated_at": "2025-11-13T07:42:11.515Z",
+  "updated_at": "2025-11-13T10:21:17.838Z",
   "comment": {
     "text": "Placeholder text for an input field, prompting the user to enter a key (likely an API or access key). It appears in both the AI settings provider dialog and the AI settings search page. Translators should ensure the term \"key\" is accurately conveyed in the target language.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 246,
-      "context": "labelText={t(\"AISettings:APIKey\")}\n removeMargin\n >\n <PasswordInput\n className={styles.passwordInput}\n placeholder={t(\"AISettings:EnterKey\")}\n inputValue={value}\n onChange={onChange}\n scale\n isSimulateType\n isFullWidth",
+      "line_number": 272,
+      "context": "</div>\n ) : (\n <>\n <PasswordInput\n className={styles.passwordInput}\n placeholder={t(\"AISettings:EnterKey\")}\n inputValue={value}\n onChange={onChange}\n scale\n isSimulateType\n isFullWidth",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 307,
+      "line_number": 309,
       "context": "size={InputSize.base}\n inputValue={providerKey}\n onChange={(_, value) => setProviderKey(value ?? \"\")}\n isFullWidth\n isDisableTooltip\n placeholder={t(\"AISettings:EnterKey\")}\n isDisabled={isRequestRunning}\n isSimulateType\n autoComplete=\"off\"\n />\n <Text className={styles.fieldHint}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 234,
-      "context": "labelText={t(\"AISettings:APIKey\")}\n removeMargin\n >\n <PasswordInput\n className={styles.passwordInput}\n placeholder={t(\"AISettings:EnterKey\")}\n inputValue={value}\n onChange={onChange}\n scale\n isSimulateType\n isFullWidth",
+      "line_number": 263,
+      "context": "</div>\n ) : (\n <>\n <PasswordInput\n className={styles.passwordInput}\n placeholder={t(\"AISettings:EnterKey\")}\n inputValue={value}\n onChange={onChange}\n scale\n isSimulateType\n isFullWidth",
       "module": "/packages/client"
     }
   ],

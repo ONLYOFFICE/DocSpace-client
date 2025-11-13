@@ -3,7 +3,7 @@
   "content": "The title can't contain any of the following characters: *+:\"<>?|/",
   "content_en_sha1_hash": "2988d94a573dbf375e5668150d952ca1022bdb80",
   "created_at": "2025-05-26T07:15:41.554Z",
-  "updated_at": "2025-11-13T07:42:11.125Z",
+  "updated_at": "2025-11-13T10:21:17.720Z",
   "comment": {
     "text": "The translation key \"ContainsSpecCharacter\" is used to display an error message when a file title contains specific characters. It appears in a dialog box that allows users to input a file name and is linked to validation rules for folder names. Translators should replace this text with a corresponding message in their language, ensuring it conveys the same meaning as the original English content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 466,
+      "line_number": 471,
       "context": "isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"",
       "module": "/packages/client"
     },

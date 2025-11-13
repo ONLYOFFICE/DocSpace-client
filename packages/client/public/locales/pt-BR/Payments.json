@@ -88,6 +88,7 @@
   "Payer": "Pagador",
   "PayerDescription": "Este usuário tem acesso aos detalhes de pagamento e é o único usuário que pode ajustar a cota e efetuar pagamentos. O proprietário do {{productName}}, bem como o próprio gerente pagador, pode reatribuir a função de gerente pagador usando o portal do cliente Stripe.",
   "PaymentMethod": "Método de pagamento",
+  "PerAITools": "{{currency}} por token",
   "PerBackup": "{{currency}} por 1 backup",
   "PerBackupWithBracket": "({{currency}} por 1 backup)",
   "PerStorage": "{{currency}} por {{amount}}/mês",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "Você não adicionou nenhum pagamento",
   "YourCurrentPayment": "Seu pagamento atual",
   "YourCurrentPlan": "<1>Seu plano atual:</1> {{amount}} <2>({{price}}/mês)</2>",
-  "YourPrice": "Seu preço",
-  "PerAITools": "{{currency}} por token"
+  "YourPrice": "Seu preço"
 }

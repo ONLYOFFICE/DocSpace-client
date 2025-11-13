@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
@@ -36,6 +36,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
+import { modelCache } from "./modelCache";
 
 type ModelSettingsProps = {
   agentParams: TAgentParams;
@@ -61,12 +62,32 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   const prevSelectedModel = React.useRef<TModel | null>(null);
 
   React.useEffect(() => {
+    const cachedProviders = modelCache.getProviders();
+    if (cachedProviders) {
+      setProviders(cachedProviders);
+      setIsProvidersFetched(true);
+
+      if (selectedProvider.id === -2) {
+        setSelectedProvider(cachedProviders[0]);
+      } else {
+        const provider = cachedProviders.find(
+          (pr) => pr.id === selectedProvider.id,
+        );
+        if (provider) {
+          setSelectedProvider(provider);
+        }
+      }
+    }
+  }, []);
+
+  React.useEffect(() => {
     const fetchProviders = async () => {
       try {
         setIsProvidersLoading(true);
 
         const p = await getProviders();
         setProviders(p);
+        modelCache.setProviders(p);
 
         setIsProvidersFetched(true);
 
@@ -86,6 +107,8 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       }
     };
 
+    if (modelCache.getProviders()) return;
+
     if (providers.length || isProvidersLoading || isProvidersFetched) return;
 
     fetchProviders();
@@ -101,6 +124,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       try {
         const m = await getModels(selectedProvider?.id);
         setModels(m);
+        modelCache.setModels(selectedProvider.id, m);
 
         if (selectedModel?.modelId) {
           const model = m.find((mo) => mo.modelId === selectedModel.modelId);
@@ -119,8 +143,26 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     if (typeof selectedProvider?.id !== "number" || selectedProvider.id === -2)
       return;
 
-    setSelectedModel(null);
+    const cachedModels = modelCache.getModels(selectedProvider.id);
+    if (cachedModels) {
+      setModels(cachedModels);
 
+      if (selectedModel?.modelId) {
+        const model = cachedModels.find(
+          (mo) => mo.modelId === selectedModel.modelId,
+        );
+        if (model) {
+          setSelectedModel(model);
+        } else {
+          setSelectedModel(cachedModels[0]);
+        }
+      } else {
+        setSelectedModel(cachedModels[0]);
+      }
+      return;
+    }
+
+    setSelectedModel(null);
     fetchModels();
   }, [selectedProvider?.id]);
 
@@ -221,6 +263,22 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             noSelect
           >
             {t("ModelDescription")}
+          </Text>
+          <Text
+            fontSize="12px"
+            lineHeight="16px"
+            fontWeight={400}
+            className="set_room_params-info-description"
+            noSelect
+          >
+            <Trans
+              t={t}
+              i18nKey="ResponseQualityNode"
+              ns="AIRoom"
+              components={{
+                1: <span style={{ fontWeight: 600 }} />,
+              }}
+            />
           </Text>
         </div>
         {isProvidersLoading ? (

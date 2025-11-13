@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -73,6 +74,24 @@ const AiRoomTabs = ({
   const navigate = useNavigate();
 
   const { t } = useTranslation(["AIRoom", "Common"]);
+
+  useEffect(() => {
+    return () => {
+      const currentSearch = new URLSearchParams(window.location.search);
+
+      const chatId = currentSearch.get("chat");
+
+      if (chatId) {
+        currentSearch.delete("chat");
+      }
+
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}?${currentSearch.toString()}`,
+      );
+    };
+  }, []);
 
   const onSelect = (tab: TTabItem) => {
     setCurrentTab(tab.id as "chat" | "knowledge" | "result");

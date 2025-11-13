@@ -26,15 +26,19 @@
 
 import React from "react";
 import { decode } from "he";
+import type { TFunction } from "i18next";
 
 import { getCorrectDate } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Tag } from "@docspace/shared/components/tag";
+import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
-import { TCreatedBy, TTranslation } from "@docspace/shared/types";
-import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
+
+import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
+import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
@@ -169,7 +173,7 @@ class DetailsHelper {
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
-              "Owner",
+              "ownedBy" in this.item && this.item.ownedBy ? "OwnedBy" : "Owner",
               // "Location",
               "Type",
               "Content",
@@ -177,9 +181,15 @@ class DetailsHelper {
               "Last modified by",
               "Creation date",
               this.item.order && "Index",
+              "ownedBy" in this.item &&
+                this.item.ownedBy &&
+                this.item.createdBy &&
+                "Author",
+              this.item.sharedBy && "Shared by",
+              this.item.access && "Access level",
             ]
           : [
-              "Owner",
+              "ownedBy" in this.item && this.item.ownedBy ? "OwnedBy" : "Owner",
               // "Location",
               "Type",
               "File extension",
@@ -193,6 +203,12 @@ class DetailsHelper {
               "expired" in this.item && this.item.expired && "Lifetime ends",
               "Versions",
               "order" in this.item && this.item.order && "Index",
+              "ownedBy" in this.item &&
+                this.item.ownedBy &&
+                this.item.createdBy &&
+                "Author",
+              "sharedBy" in this.item && this.item.sharedBy && "Shared by",
+              this.item.access && "Access level",
               "Comments",
             ]
     ).filter((nP) => nP) as string[];
@@ -201,6 +217,7 @@ class DetailsHelper {
   getPropertyTitle = (propertyId: string) => {
     switch (propertyId) {
       case "Owner":
+      case "OwnedBy":
         return this.t("Common:Owner");
       case "Location":
         return this.t("Common:Location");
@@ -237,6 +254,14 @@ class DetailsHelper {
         return this.t("Common:Comments");
       case "Tags":
         return this.t("Common:Tags");
+
+      case "Author":
+        return this.t("Files:ByAuthor");
+      case "Shared by":
+        return this.t("Files:SharedBy");
+      case "Access level":
+        return this.t("Files:AccessLevel");
+
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
           const isDefaultQuotaSet = this.isAIAgentsFolder
@@ -258,6 +283,8 @@ class DetailsHelper {
     switch (propertyId) {
       case "Owner":
         return this.getAuthorDecoration("createdBy");
+      case "OwnedBy":
+        return this.getAuthorDecoration("ownedBy");
       case "Location":
         return text("...");
 
@@ -297,9 +324,20 @@ class DetailsHelper {
         return this.getItemTags();
       case "Storage":
         return this.getQuotaItem();
+      case "Author":
+        return this.getAuthorDecoration();
+      case "Shared by":
+        return this.getAuthorDecoration("sharedBy");
+      case "Access level":
+        return this.getItemAccessLevel();
       default:
         break;
     }
+  };
+
+  getItemAccessLevel = () => {
+    if (!("access" in this.item) || isRoom(this.item)) return null;
+    return text(getAccessLabel(this.t as TFunction, this.item));
   };
 
   getAuthorDecoration = (byField = "createdBy") => {

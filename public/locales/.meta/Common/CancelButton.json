@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-11-13T07:42:11.041Z",
+  "updated_at": "2025-11-13T10:21:17.721Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -90,14 +90,14 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/CreateAgentDialog.tsx",
-      "line_number": 221,
+      "line_number": 214,
       "context": "testId=\"create_agent_dialog_save\"\n />\n <Button\n id=\"shared_create-agent-modal_cancel\"\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n scale\n isDisabled={isLoading}\n onClick={onCloseDialog}\n testId=\"create_agent_dialog_cancel\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/EditAgentDialog.tsx",
-      "line_number": 267,
-      "context": "}\n isLoading={isLoading}\n />\n <Button\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />\n </ModalDialog.Footer>",
+      "line_number": 262,
+      "context": "}\n isLoading={isLoading}\n />\n <Button\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onCloseAction}\n isDisabled={isLoading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
@@ -413,8 +413,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/dialogs/reset/index.tsx",
+      "line_number": 89,
+      "context": "onClick={onSubmitAction}\n isLoading={loading}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 339,
+      "line_number": 341,
       "context": "isLoading={isRequestRunning}\n isDisabled={!canSubmit}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={isRequestRunning}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -422,6 +428,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
       "line_number": 94,
       "context": "onClick={onSubmit}\n isLoading={loading}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
+      "line_number": 89,
+      "context": "onClick={onSubmitAction}\n isLoading={loading}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
@@ -822,13 +834,13 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/RenameChat.tsx",
-      "line_number": 114,
-      "context": "primary\n isLoading={isLoading}\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:CancelButton\")}\n onClick={onRenameToggle}\n scale\n isDisabled={isLoading}\n />\n </ModalDialog.Footer>",
+      "line_number": 115,
+      "context": "isLoading={isLoading}\n isDisabled={!newName || prevTitle === newName}\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onRenameToggle}\n scale\n isDisabled={isLoading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/Attachment.tsx",
-      "line_number": 127,
+      "line_number": 140,
       "context": "withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterCheckbox={false}\n withFooterInput={false}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n submitButtonLabel={t(\"Common:AddButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId=\"\"",
       "module": "/packages/shared"
     },
@@ -954,20 +966,20 @@
     },
     {
       "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 196,
+      "line_number": 214,
       "context": "},\n };\n \n const cancelButtonSelectorProps: TSelectorCancelButton = {\n withCancelButton: true,\n cancelButtonLabel: t(\"Common:CancelButton\"),\n onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 174,
+      "line_number": 175,
       "context": "};\n \n const cancelButtonProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"Common:CancelButton\"),\n cancelButtonId,\n onCancel,\n }\n : {};",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
-      "line_number": 191,
-      "context": "onBackClick: onClose,\n onCloseClick: onClose,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={onClose}\n selectedItems={initedSelectedServersItems}\n />\n );\n };",
+      "line_number": 200,
+      "context": "onBackClick: onBackClick,\n onCloseClick: onClose,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={onBackClick}\n selectedItems={initedSelectedServersItems}\n />\n );\n };",
       "module": "/packages/shared"
     },
     {

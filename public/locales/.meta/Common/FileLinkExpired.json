@@ -3,7 +3,7 @@
   "content": "The file link you are trying to open does not exist or has expired.",
   "content_en_sha1_hash": "b0f0a1aa31b6a32a7ed73f77c620726a30be717a",
   "created_at": "2025-10-13T13:22:03.326Z",
-  "updated_at": "2025-11-06T18:29:15.726Z",
+  "updated_at": "2025-11-13T07:58:07.971Z",
   "comment": {
     "text": "This key displays a message indicating that a file link is no longer valid and cannot be opened. It's used within the UI to inform users when a file link has expired or is unavailable, often appearing in a dialog or informational panel related to files and folders. Translators should ensure the message conveys a clear understanding of why the file cannot be accessed.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2591,
+      "line_number": 2603,
       "context": ") {\n const isFile = isFileCheck(item);\n const isFolder = isFolderCheck(item);\n \n const description = isFile\n ? t(\"Common:FileLinkExpired\")\n : isFolder\n ? t(\"Common:FolderLinkExpired\")\n : t(\"Common:RoomLinkExpired\");\n \n const title = isFile",
       "module": "/packages/client"
     }

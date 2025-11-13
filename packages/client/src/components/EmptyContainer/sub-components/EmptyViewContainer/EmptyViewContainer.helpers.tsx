@@ -62,6 +62,7 @@ import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import { CategoryType } from "@docspace/shared/constants";
+import { Text } from "@docspace/shared/components/text";
 
 import type {
   EmptyViewItemType,
@@ -105,12 +106,20 @@ export const getDescription = (
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
-  isDocSpaceAdmin: boolean = false,
+  isPortalAdmin: boolean = false,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
   if (isAIRoom) {
-    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeDescription");
+    if (isKnowledgeTab)
+      return (
+        <>
+          {t("AIRoom:EmptyKnowledgeDescription")}
+          <Text fontSize="12px" style={{ marginTop: "8px" }}>
+            {t("AIRoom:EmptyKnowledgeDescriptionActions")}
+          </Text>
+        </>
+      );
 
     if (isResultsTab) return t("AIRoom:EmptyResultsDescription");
   }
@@ -124,7 +133,7 @@ export const getDescription = (
       security,
       standalone,
       aiReady,
-      isDocSpaceAdmin,
+      isPortalAdmin,
     );
 
   if (isFolder)
@@ -155,7 +164,7 @@ export const getTitle = (
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
-  isDocSpaceAdmin: boolean = false,
+  isPortalAdmin: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
@@ -172,7 +181,7 @@ export const getTitle = (
       rootFolderType,
       aiReady,
       standalone,
-      isDocSpaceAdmin,
+      isPortalAdmin,
     );
 
   if (isFolder)
@@ -224,7 +233,7 @@ export const getOptions = (
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
-  isDocSpaceAdmin: boolean = false,
+  isPortalAdmin: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -462,7 +471,7 @@ export const getOptions = (
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
       .with([FolderType.AIAgents, P._, P._], () =>
-        match([aiReady, standalone, isDocSpaceAdmin])
+        match([aiReady, standalone, isPortalAdmin])
           .with([true, P._, P.when(() => isAdmin(access))], () => [
             createAIAgent,
           ])
@@ -536,7 +545,7 @@ export const getOptions = (
           onClick: () => {
             const filesFilter = FilesFilter.getFilter(window.location);
 
-            filesFilter.searchArea = SearchArea.ResultStorage;
+            filesFilter.searchArea = SearchArea.Any;
 
             const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
 

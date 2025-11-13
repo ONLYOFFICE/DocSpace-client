@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Oznake dodane.",
   "Administration": "Administracija",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> je preimenovan v <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Poglejte podrobnosti o AI agentih tukaj.",
   "AndMoreLabel": "in <1>{{count}} več</1>",
   "CreationDate": "Datum nastanka",
   "Data": "Podatki",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Oglejte si podrobnosti predloge obrazca tukaj",
   "GroupsEmptyScreenText": "Oglejte si podrobnosti skupin tukaj",
   "GuestsEmptyScreenText": "Oglejte si podrobnosti o gostih tukaj",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agent je ustvarjen",
   "HistoryEmptyScreenText": "Tukaj bo prikazana zgodovina aktivnosti",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> soba kopirana",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> soba ustvarjena",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Oglejte si podrobnosti članov tukaj",
   "NoRecordsFound": "Ni najdenih zapisov",
   "Properties": "Lastnosti",
+  "Resolution": "Resolucija",
   "RoomCreateUserCount": "Uporabniki dodani ({{count}})",
   "RoomDenyDownloadDisabled": "Prenos in kopiranje neomejeno",
   "RoomDenyDownloadEnabled": "Prenos in kopiranje omejeno",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Zgodovina",
   "UserFileUpdated": "Datoteka posodobljena.",
   "Users": "Uporabniki",
-  "Versions": "Verzije",
-  "HistoryAgentCreated": "«{{roomTitle}}» agent je ustvarjen",
-  "Resolution": "Resolucija",
-  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> je preimenovan v <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Poglejte podrobnosti o AI agentih tukaj."
+  "Versions": "Verzije"
 }

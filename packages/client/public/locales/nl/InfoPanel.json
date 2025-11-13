@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Tags toegevoegd.",
   "Administration": "Beheer",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> heeft de naam veranderd naar <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Bekijk de details van AI-agenten hier",
   "AndMoreLabel": "en <1>{{count}} meer</1>",
   "CreationDate": "Aanmaakdatum",
   "Data": "Data",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Bekijk hier de details van het formulier sjabloon",
   "GroupsEmptyScreenText": "Bekijk groepsdetails hier",
   "GuestsEmptyScreenText": "Bekijk hier de details van de gasten",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agent aangemaakt",
   "HistoryEmptyScreenText": "De activiteitsgeschiedenis wordt hier getoond",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> kamer gekopieerd",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> kamer aangemaakt",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Bekijk hier de details van de leden",
   "NoRecordsFound": "Geen records gevonden",
   "Properties": "Eigenschappen",
+  "Resolution": "Resolutie",
   "RoomCreateUserCount": "Gebruikers toegevoegd ({{count}}).",
   "RoomDenyDownloadDisabled": "Downloaden en kopiëren zonder beperkingen",
   "RoomDenyDownloadEnabled": "Downloaden en kopiëren beperkt",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Geschiedenis",
   "UserFileUpdated": "Bestand bijgewerkt.",
   "Users": "Gebruikers",
-  "Versions": "Versies",
-  "HistoryAgentCreated": "«{{roomTitle}}» agent aangemaakt",
-  "Resolution": "Resolutie",
-  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> heeft de naam veranderd naar <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Bekijk de details van AI-agenten hier"
+  "Versions": "Versies"
 }

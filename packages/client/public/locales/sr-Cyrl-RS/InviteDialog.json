@@ -12,14 +12,14 @@
   "InviteToRoomSearchPlaceholder": "Претражи и позови по имену или емаил",
   "InviteViaLink": "Позови путем линка",
   "InviteViaLinkDescriptionAccounts": "Створите универзални линк за самопризнање у {{productName}}-у.",
+  "InviteViaLinkDescriptionAgentGuest": "Направите универзалну везу за самоауторизацију у агенту као гост.",
+  "InviteViaLinkDescriptionAgentMembers": "Направите универзалну везу за чланове {{productName}} за самоовлашћење у агенту.",
   "InviteViaLinkDescriptionRoomGuest": "Креирајте универзални линк за самосталну ауторизацију у соби као гост.",
   "InviteViaLinkDescriptionRoomMembers": "Креирајте универзални линк за чланове {{productName}} за самосталну ауторизацију у соби.",
   "LinkCopySuccess": "Линк је копиран",
   "SendInvitation": "Пошаљи позивницу",
+  "UserAgentMaxAvailableRoleWarning": "Гости и корисници не могу бити додељени као менаџери агената. Само администратори собе и {{productName}} су погодни за наведну улогу.",
   "UserMaxAvailableRoleWarning": "Гости и Корисници не могу бити постављени као Менаџери собе. Само администратори собе и {{productName}} су погодни за одређену улогу.",
   "UsersAlreadyAdded": "Неки корисници су већ додати",
-  "UsersCannotBeAdded": "Онемогућени контакти не могу бити додати у собу.",
-  "InviteViaLinkDescriptionAgentGuest": "Направите универзалну везу за самоауторизацију у агенту као гост.",
-  "InviteViaLinkDescriptionAgentMembers": "Направите универзалну везу за чланове {{productName}} за самоовлашћење у агенту.",
-  "UserAgentMaxAvailableRoleWarning": "Гости и корисници не могу бити додељени као менаџери агената. Само администратори собе и {{productName}} су погодни за наведну улогу."
+  "UsersCannotBeAdded": "Онемогућени контакти не могу бити додати у собу."
 }

@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Đã thêm thẻ.",
   "Administration": "Quản lý ",
+  "AgentRenamed": "Tác nhân <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Xem chi tiết về các tác nhân AI tại đây",
   "AndMoreLabel": "và  <1>{{count}} hơn thế nữa</1>",
   "CreationDate": "Ngày tạo",
   "Data": "Dữ liệu",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Xem chi tiết biểu mẫu tại đây",
   "GroupsEmptyScreenText": "Xem chi tiết nhóm tại đây",
   "GuestsEmptyScreenText": "Xem thông tin khách tại đây",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> đại lý đã tạo",
   "HistoryEmptyScreenText": "Lịch sử hoạt động sẽ được hiển thị ở đây",
   "HistoryRoomCopied": "Đã sao chép phòng <1>«{{roomTitle}}»</1> ",
   "HistoryRoomCreated": "Đã tạo phòng <1>«{{roomTitle}}»</1> ",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Xem chi tiết thành viên tại đây",
   "NoRecordsFound": "Không tìm thấy bản ghi nào",
   "Properties": "Thuộc tính",
+  "Resolution": "Nghị quyết",
   "RoomCreateUserCount": "Đã thêm người dùng ({{count}}).",
   "RoomDenyDownloadDisabled": "Không hạn chế tải xuống và sao chép",
   "RoomDenyDownloadEnabled": "Hạn chế tải xuống và sao chép",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Lịch sử",
   "UserFileUpdated": "Tập tin đã được cập nhật. vai trò",
   "Users": "Người dùng",
-  "Versions": "Phiên Bản",
-  "HistoryAgentCreated": "«{{roomTitle}}» đại lý đã tạo",
-  "Resolution": "Nghị quyết",
-  "AgentRenamed": "Tác nhân <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Xem chi tiết về các tác nhân AI tại đây"
+  "Versions": "Phiên Bản"
 }

@@ -34,16 +34,16 @@ import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import { FolderType, RoomsType } from "../../../enums";
 import { toastr } from "../../../components/toast";
-import { TSelectorItem } from "../../../components/selector";
-import { TData } from "../../../components/toast/Toast.type";
-import { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type { TSelectorItem } from "../../../components/selector";
+import type { TData } from "../../../components/toast/Toast.type";
+import type { TBreadCrumb } from "../../../components/selector/Selector.types";
 
 import useInputItemHelper from "../../utils/hooks/useInputItemHelper";
 import { SettingsContext } from "../../utils/contexts/Settings";
 import { LoadersContext } from "../../utils/contexts/Loaders";
 
 import { PAGE_COUNT } from "../../utils/constants";
-import { UseFilesHelpersProps } from "../FilesSelector.types";
+import type { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
   convertFilesToItems,
   convertFoldersToItems,
@@ -90,6 +90,8 @@ const useFilesHelper = ({
 
   setIsInsideKnowledge,
   setIsInsideResultStorage,
+
+  disableBySecurity,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -218,6 +220,7 @@ const useFilesHelper = ({
           getIcon,
           filterParam,
           includedItems,
+          disableBySecurity,
         );
 
         const itemList = [...foldersList, ...filesList];
@@ -308,7 +311,7 @@ const useFilesHelper = ({
               hotkey: "f",
               onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
               onBackClick: () => {
-                let isRooms;
+                let isRooms = false;
                 setBreadCrumbs((val) => {
                   const newVal = [...val];
 
@@ -413,6 +416,7 @@ const useFilesHelper = ({
       applyFilterOption,
       includedItems,
       disabledFolderType,
+      disableBySecurity,
     ],
   );
 

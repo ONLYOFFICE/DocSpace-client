@@ -12,14 +12,14 @@
   "InviteToRoomSearchPlaceholder": "Pesquisar e convidar por nome ou e-mail",
   "InviteViaLink": "Convidar através de uma hiperligação",
   "InviteViaLinkDescriptionAccounts": "Crie uma hiperligação universal para permitir a auto autorização no {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Crie um link universal para autoautorização no agente como convidado.",
+  "InviteViaLinkDescriptionAgentMembers": "Crie um link universal para membros de {{productName}} para autoautorização no agente.",
   "InviteViaLinkDescriptionRoomGuest": "Crie um link universal para autoautorização na sala como convidado.",
   "InviteViaLinkDescriptionRoomMembers": "Crie um link universal para membros de {{productName}} para autoautorização na sala.",
   "LinkCopySuccess": "A ligação foi copiada",
   "SendInvitation": "Enviar convite",
+  "UserAgentMaxAvailableRoleWarning": "Convidados e Usuários não podem ser designados como gerentes de Agentes. Apenas administradores de Quartos e {{productName}} são adequados para a função especificada.",
   "UserMaxAvailableRoleWarning": "Hóspedes e Utilizadors não podem ser atribuídos como gerentes de quarto. Apenas os administradores Room e {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados",
-  "UsersCannotBeAdded": "Os contactos desativados não podem ser adicionados a uma sala",
-  "InviteViaLinkDescriptionAgentGuest": "Crie um link universal para autoautorização no agente como convidado.",
-  "InviteViaLinkDescriptionAgentMembers": "Crie um link universal para membros de {{productName}} para autoautorização no agente.",
-  "UserAgentMaxAvailableRoleWarning": "Convidados e Usuários não podem ser designados como gerentes de Agentes. Apenas administradores de Quartos e {{productName}} são adequados para a função especificada."
+  "UsersCannotBeAdded": "Os contactos desativados não podem ser adicionados a uma sala"
 }

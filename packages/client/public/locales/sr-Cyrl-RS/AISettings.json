@@ -22,7 +22,6 @@
   "IntegrationName": "Име интеграције",
   "IntegrationURL": "URL integracije",
   "MCPServer": "MCP интеграције",
-  "MCPSettingDescription": "{{organizationName}} {{productName}} MCP сервер поједностављује токове рада вођене ВИ, интегришући LLM са спољним системима за ефикасно и безбедно управљање документима.",
   "MCPSettingTitle": "MCP сервери",
   "Provider": "Провајдер",
   "ProviderAddedSuccess": "Провајдер успешно додат",

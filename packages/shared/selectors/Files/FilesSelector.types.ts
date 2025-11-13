@@ -82,6 +82,7 @@ export type UseSocketHelperProps = {
   disabledFolderType?: FolderType;
   filterParam?: string;
   withCreate?: boolean;
+  disableBySecurity?: string;
 };
 
 export type UseRoomsHelperProps = TUseInputItemHelper & {
@@ -160,6 +161,8 @@ export type UseFilesHelpersProps = {
   setIsInsideResultStorage: (value: boolean) => void;
 
   applyFilterOption?: ApplyFilterOption;
+
+  disableBySecurity?: string;
 };
 
 export type TUseInputItemHelper = {
@@ -286,4 +289,7 @@ export type FilesSelectorProps = TInfoBar &
 
     isMultiSelect?: boolean;
     onSelectItem?: (item: TSelectorItem) => void;
+    maxSelectedItems?: number;
+    renderInPortal?: boolean;
+    disableBySecurity?: string;
   };

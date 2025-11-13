@@ -3,7 +3,7 @@
   "content": "No rooms match this filter. Try a different one or clear filter to view all rooms.",
   "content_en_sha1_hash": "f23a94b4f404fdc1101c69caa60118df9f3d9514",
   "created_at": "2025-05-19T21:30:48.337Z",
-  "updated_at": "2025-11-13T07:42:12.161Z",
+  "updated_at": "2025-11-13T10:21:18.103Z",
   "comment": {
     "text": "\"No rooms match this filter. This message is displayed when a user searches for rooms that don't meet their criteria and is typically shown on an empty screen after clearing filters or changing search parameters.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
-      "line_number": 168,
+      "line_number": 177,
       "context": "})}\n searchEmptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:SearchEmptyRoomsDescription\")}\n submitButtonLabel={t(\"Common:AddButton\")}\n disableSubmitButton={false}\n onSubmit={onSubmitAction}\n rowLoader={<RowLoader />}\n hasNextPage={servers.length < totalServers}",
       "module": "/packages/shared"
     },

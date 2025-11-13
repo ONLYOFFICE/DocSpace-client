@@ -3,13 +3,19 @@
   "content": "Who has access",
   "content_en_sha1_hash": "b82540c6a77efe28089091e2a93027edf47bac9e",
   "created_at": "2025-08-26T11:15:03.431Z",
-  "updated_at": "2025-10-13T19:08:04.952Z",
+  "updated_at": "2025-11-13T07:58:08.610Z",
   "comment": {
     "text": "This key displays the text \"Who has access\" as a label within an access selector block, likely in a dialog or panel where users manage link permissions. It's used to clearly indicate what the following options pertain to – the individuals or groups who currently have access.",
     "is_auto": true,
     "updated_at": "2025-08-26T11:15:45.438Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/shared/components/share/hooks/useMembers.tsx",
+      "line_number": 287,
+      "context": ");\n \n const header = (\n <ShareHeader\n key=\"share-header-users\"\n title={t(\"Common:WhoHasAccess\")}\n options={options}\n isShareTitle\n />\n );",
+      "module": "/packages/shared"
+    },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/AccessSelectorBlock/AccessSelectorBlock.tsx",
       "line_number": 47,

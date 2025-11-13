@@ -3,7 +3,7 @@
   "content": "Enter description",
   "content_en_sha1_hash": "4841a72a99c70608a67394ab003dc3eadc91c8c4",
   "created_at": "2025-05-19T21:30:53.876Z",
-  "updated_at": "2025-10-27T16:14:33.466Z",
+  "updated_at": "2025-11-13T10:21:17.842Z",
   "comment": {
     "text": "The \"EnterDescription\" translation key is used to display a placeholder text in a text area group component. It appears as a label and serves as a hint for users to enter a description when filling out a form. Translators can use this key to provide a clear and concise message that helps users understand the purpose of the field.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 159,
-      "context": ">\n <Textarea\n heightTextArea={64}\n value={description}\n onChange={(e) => onChangeDescription(e.target.value)}\n placeholder={t(\"OAuth:EnterDescription\")}\n />\n </FieldContainer>\n </>\n );",
+      "line_number": 171,
+      "context": ">\n <Textarea\n heightTextArea={64}\n value={description}\n onChange={(e) => onChangeDescription(e.target.value)}\n placeholder={t(\"OAuth:EnterDescription\")}\n maxLength={256}\n />\n <Text className={styles.fieldHint}>\n {t(\"AISettings:MCPServerDescriptionHint\")}\n </Text>",
       "module": "/packages/client"
     },
     {

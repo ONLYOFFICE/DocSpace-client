@@ -11,6 +11,7 @@
   "CreateTagOption": "Creare etichetă",
   "Diagonal": "În diagonală",
   "DisableRoomQuota": "Dezactivare cotă de stocare pentru această sală",
+  "DisableRoomQuotaAgent": "Dezactivare cotă de stocare pentru acest agent",
   "FileLifetime": "Durata de viață a fișierului",
   "FileLifetimeDescription": "Stabiliți durata de viață a fișierului pentru a șterge automat fișierele din sala după o anumită perioadă. Durata de viață începe la data încărcării/creării fișierului.",
   "FilesOlderThan": "Fișierele mai vechi decât:",
@@ -27,6 +28,7 @@
   "RoomEditing": "Modificare sală",
   "RootFolderLabel": "Folder rădăcină",
   "StorageDescription": "Cota de stocare este stabilită pentru fiecare sală. Puteți modifica limita stabilită sau puteți dezactiva limita de stocare.",
+  "StorageDescriptionAgent": "Cota de stocare este stabilită pentru fiecare agent. Puteți modifica limita stabilită sau puteți dezactiva limita de stocare.",
   "TagsPlaceholder": "Adăugare etichetă",
   "ThirdPartyStorageComboBoxPlaceholder": "Selectaţi stocarea",
   "ThirdPartyStorageNoStorageAlert": "Mai întâi, trebuie să vă conectați cu acest cont de stocare în secţiunea Integrare. Altfel, nu se va stabili o conexiune.",
@@ -37,7 +39,5 @@
   "UserName": "Nume de utilizator",
   "ViewerInfo": "Detalii Vizualizator",
   "WatermarkPreview": "Previzualizare incripționare",
-  "WatermarkPreviewHelp": "Previzualizarea imaginii arată cum aproximativ  va fi afișată incripționarea în fișierele dvs.",
-  "DisableRoomQuotaAgent": "Dezactivare cotă de stocare pentru acest agent",
-  "StorageDescriptionAgent": "Cota de stocare este stabilită pentru fiecare agent. Puteți modifica limita stabilită sau puteți dezactiva limita de stocare."
+  "WatermarkPreviewHelp": "Previzualizarea imaginii arată cum aproximativ  va fi afișată incripționarea în fișierele dvs."
 }

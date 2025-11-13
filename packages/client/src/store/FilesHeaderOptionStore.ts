@@ -87,13 +87,10 @@ export default class FilesHeaderOptionStore {
     this.filesActionsStore.archiveRooms("unarchive");
 
   private changeRoomQuotaHandle = () =>
-    this.filesActionsStore.changeRoomQuota(this.filesStore.selection, this.t);
+    this.filesActionsStore.changeRoomQuota(this.filesStore.selection);
 
   private changeAIAgentsQuotaHandle = () =>
-    this.filesActionsStore.changeAIAgentsQuota(
-      this.filesStore.selection,
-      this.t,
-    );
+    this.filesActionsStore.changeAIAgentsQuota(this.filesStore.selection);
 
   private resetRoomQuotaHandle = () =>
     this.filesActionsStore.resetRoomQuota(this.filesStore.selection, this.t);

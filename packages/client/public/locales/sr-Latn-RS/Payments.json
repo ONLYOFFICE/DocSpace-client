@@ -88,6 +88,7 @@
   "Payer": "Platilac",
   "PayerDescription": "Ovaj korisnik ima pristup detaljima plaćanja i jedini je korisnik koji može da prilagodi kvotu i izvrši plaćanja. Vlasnik {{productName}}-a, kao i sam menadžer plaćanja, mogu da ponovo dodele ulogu menadžera plaćanja koristeći portal za korisnike Stripe.",
   "PaymentMethod": "Način plaćanja",
+  "PerAITools": "{{currency}} po tokenu",
   "PerBackup": "{{currency}} po 1 bekapu",
   "PerBackupWithBracket": "({{currency}} po 1 bekapu)",
   "PerStorage": "{{currency}} po {{amount}}/mesečno",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "Niste dodali nijedan način plaćanja",
   "YourCurrentPayment": "Vaš trenutni način plaćanja",
   "YourCurrentPlan": "<1>Vaš trenutni plan:</1> {{amount}} <2>({{price}}/mesečno)</2>",
-  "YourPrice": "Vaša cena",
-  "PerAITools": "{{currency}} po tokenu"
+  "YourPrice": "Vaša cena"
 }

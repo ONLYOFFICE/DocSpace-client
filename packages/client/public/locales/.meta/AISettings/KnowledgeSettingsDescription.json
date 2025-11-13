@@ -3,7 +3,7 @@
   "content": "Enable a knowledge base for AI agents. The system will index your documents using the {{modelName}} model to support question-based search through your data. This feature focuses on finding relevant information but doesn't generate summaries or perform global analysis.",
   "content_en_sha1_hash": "051497791b5c25829911619c1bdca5f620bcec85",
   "created_at": "2025-11-07T13:41:03.830Z",
-  "updated_at": "2025-11-07T13:48:08.421Z",
+  "updated_at": "2025-11-13T10:21:17.837Z",
   "comment": {
     "text": "This text describes the Knowledge Base feature for AI agents. It explains that enabling this feature allows the system to index documents for question-based search using a specified AI model and clarifies that it focuses on information retrieval, not summarization or global analysis. It appears as a description within the AI settings section of the Portal Settings.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 198,
-      "context": "})\n : undefined\n }\n >\n <Text className={generalStyles.description}>\n {t(\"AISettings:KnowledgeSettingsDescription\", {\n modelName: aiConfig?.embeddingModel || \"text-embedding-3-small\",\n })}\n </Text>\n <Link\n className={generalStyles.learnMoreLink}",
+      "line_number": 218,
+      "context": "})\n : undefined\n }\n >\n <Text className={generalStyles.description}>\n {t(\"AISettings:KnowledgeSettingsDescription\", {\n modelName: aiConfig?.embeddingModel || \"text-embedding-3-small\",\n })}\n </Text>\n {aiSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     }
   ],

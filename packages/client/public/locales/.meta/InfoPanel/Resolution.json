@@ -3,7 +3,7 @@
   "content": "Resolution",
   "content_en_sha1_hash": "516aae52959dcf5398a9985414a78b8c24a4f0e5",
   "created_at": "2025-11-03T12:10:31.525Z",
-  "updated_at": "2025-11-06T18:29:15.730Z",
+  "updated_at": "2025-11-13T07:58:07.981Z",
   "comment": {
     "text": "This key represents the resolution of a file or media displayed in the InfoPanel. It's used to show the resolution details to the user within the application's interface. Translators should ensure the translation accurately conveys the file's resolution.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 221,
+      "line_number": 238,
       "context": "case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n case \"Resolution\":\n return this.t(\"InfoPanel:Resolution\");\n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");\n case \"Creation date\":",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Shared files and folders",
   "content_en_sha1_hash": "8cb552a10fc5a2919fbca9ebc6f9dfb0566bbf62",
   "created_at": "2025-10-03T10:07:00.002Z",
-  "updated_at": "2025-10-17T14:44:45.285Z",
+  "updated_at": "2025-11-13T07:58:08.217Z",
   "comment": {
     "text": "This text labels a checkbox within the \"Settings\" section of the Portal data import process. It indicates whether to import shared files and folders during the import. Translators should ensure the translation accurately reflects the action of importing shared resources.",
     "is_auto": true,
@@ -12,7 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 182,
+      "line_number": 208,
+      "context": "/>\n \n <ImportSection\n isChecked={importOptions.importSharedFilesAndFolders}\n onChange={(e) => onChange(e, \"importSharedFilesAndFolders\")}\n sectionName={t(\"Settings:SharedFilesAndFolders\")}\n description={\n <Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 208,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importSharedFilesAndFolders}\n onChange={(e) => onChange(e, \"importSharedFilesAndFolders\")}\n sectionName={t(\"Settings:SharedFilesAndFolders\")}\n description={\n <Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     }

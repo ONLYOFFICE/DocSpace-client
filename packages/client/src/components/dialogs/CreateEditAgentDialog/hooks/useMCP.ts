@@ -48,7 +48,7 @@ export const useMCP = ({
   portalMcpServerId?: string;
 }) => {
   const { isBase } = useTheme();
-  const { t } = useTranslation();
+  const { t } = useTranslation(["Common"]);
 
   const [isMCPSelectorVisible, setIsMCPSelectorVisible] = React.useState(false);
 
@@ -66,6 +66,10 @@ export const useMCP = ({
   const onClose = () => setIsMCPSelectorVisible(false);
 
   const onSubmit = (servers: TSelectorItem[]) => {
+    if (servers.find((s) => s.id === portalMcpServerId)) {
+      setAgentParams({ attachDefaultTools: true });
+    }
+
     setSelectedServers(servers);
   };
 
@@ -124,11 +128,18 @@ export const useMCP = ({
 
       const portalMcpServer = await getMCPServerById(portalMcpServerId);
 
+      if (!portalMcpServer.enabled) return;
+
+      const name =
+        portalMcpServer.serverType === ServerType.Portal
+          ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+          : portalMcpServer.name;
+
       setSelectedServers([
         {
           key: portalMcpServer.id,
           id: portalMcpServer.id,
-          label: portalMcpServer.name,
+          label: name,
           icon:
             (portalMcpServer.icon?.icon24 ||
               getServerIcon(portalMcpServer.serverType, isBase)) ??
@@ -145,7 +156,7 @@ export const useMCP = ({
     if (portalMcpServerId) {
       initBaseMcpServers();
     }
-  }, [portalMcpServerId, isBase]);
+  }, [portalMcpServerId, isBase, t]);
 
   const initSelectedServers = React.useMemo(() => {
     return selectedServers.map((i) => i.id?.toString() || "");

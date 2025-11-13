@@ -1,0 +1,28 @@
+{
+  "key_path": "AICanMakeMistakes",
+  "content": "AI can make mistakes. Please double-check responses.",
+  "content_en_sha1_hash": "b55d36ccb29f649d216d835fd6fa2dbdad309c53",
+  "created_at": "2025-11-13T07:57:41.751Z",
+  "updated_at": "2025-11-13T08:04:57.026Z",
+  "comment": {
+    "text": "This key displays a disclaimer reminding users that the AI may produce errors and requires verification of its responses. It appears as small text near the chat input field, likely providing a subtle cautionary message. Translators should maintain the disclaimer's tone and ensure it accurately conveys the AI's limitations.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:04:57.026Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/index.tsx",
+      "line_number": 241,
+      "context": "fontSize=\"10px\"\n fontWeight={400}\n className={styles.chatInputText}\n noSelect\n >\n {t(\"Common:AICanMakeMistakes\")}\n </Text>\n ) : null}\n </>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

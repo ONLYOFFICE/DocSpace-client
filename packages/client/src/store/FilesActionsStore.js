@@ -1977,6 +1977,9 @@ class FilesActionStore {
       hasRoomsToResetQuota,
       hasRoomsToDisableQuota,
       hasRoomsToChangeQuota,
+      hasAIAgentsToChangeQuota,
+      hasAIAgentsToDisableQuota,
+      hasAIAgentsToResetQuota,
     } = this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
@@ -2030,14 +2033,17 @@ class FilesActionStore {
         return canCreateRoom;
       }
       case "change-quota":
-      case "change-agent-quota":
         return hasRoomsToChangeQuota;
+      case "change-agent-quota":
+        return hasAIAgentsToChangeQuota;
       case "disable-quota":
-      case "disable-agent-quota":
         return hasRoomsToDisableQuota;
+      case "disable-agent-quota":
+        return hasAIAgentsToDisableQuota;
       case "default-quota":
-      case "default-agent-quota":
         return hasRoomsToResetQuota;
+      case "default-agent-quota":
+        return hasAIAgentsToResetQuota;
       case "vectorization":
         return selection.some((s) => s.security?.Vectorization);
       default:

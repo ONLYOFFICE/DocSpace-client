@@ -3,7 +3,7 @@
   "content": "Upload any type files from your personal device",
   "content_en_sha1_hash": "668f73764cc99938a3a442a47ee4a5d6a62e4d50",
   "created_at": "2025-05-19T21:30:56.543Z",
-  "updated_at": "2025-11-03T12:10:34.889Z",
+  "updated_at": "2025-11-13T07:58:07.685Z",
   "comment": {
     "text": "Upload any type of file from your personal device. This translation key is used to provide a descriptive text for a UI element that allows users to upload files from their device, appearing in an empty view container on mobile devices or as part of a dialog on desktop devices.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 383,
+      "line_number": 392,
       "context": "} as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),\n description: t(\"EmptyView:UploadDeviceOptionDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 383,
+      "line_number": 392,
       "context": "} as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),\n description: t(\"EmptyView:UploadDeviceOptionDescription\"),",
       "module": "/packages/client"
     }

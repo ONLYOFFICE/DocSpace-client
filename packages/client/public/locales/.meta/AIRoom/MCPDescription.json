@@ -3,7 +3,7 @@
   "content": "Use MCP tools connected by the administrator to enhance chat experience with AI. These tools can assist with data extraction, summaries, smart suggestions, etc.",
   "content_en_sha1_hash": "cb5b3ae0230b6e3d58621b8ba7e3dc57b3b75c3d",
   "created_at": "2025-10-27T16:14:31.670Z",
-  "updated_at": "2025-11-03T12:10:34.976Z",
+  "updated_at": "2025-11-13T10:21:17.754Z",
   "comment": {
     "text": "This text explains the functionality of MCP tools, which enhance chat experience with AI features like data extraction and smart suggestions. It appears as a descriptive tooltip within dialogs used to create or edit agents and AI rooms, helping users understand the purpose of the MCP options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
-      "line_number": 125,
+      "line_number": 75,
       "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"MCPDescription\")}\n </Text>\n </div>\n <div className=\"ai-mcp-group\">\n <SelectorAddButton onClick={onClickAction} />",
       "module": "/packages/client"
     }

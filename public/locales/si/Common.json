@@ -417,6 +417,7 @@
   "GoBack": "ආපසු යන්න",
   "GotIt": "තේරුනා",
   "GoToRoom": "කාමරයට යන්න",
+  "GoToSettings": "සැකසීම් වෙත යන්න",
   "Group": "සමූහය",
   "Groups": "සමූහ",
   "GroupsNotFoundDescription": "ඔබගේ සෙවුමට ගැළපෙන සමූහ නැත. සෙවුම් පද වෙනස් කරන්න හෝ සමූහ සියල්ල දැකීමට ක්ෂේත්‍රය හිස් කරන්න.",
@@ -989,6 +990,5 @@
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
   "YourLogo": "ඔබේ ලාංචනය",
-  "YourTurn": "ඔබේ වාරය.",
-  "GoToSettings": "සැකසීම් වෙත යන්න"
+  "YourTurn": "ඔබේ වාරය."
 }

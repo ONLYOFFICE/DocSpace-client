@@ -3,7 +3,7 @@
   "content": "Owner",
   "content_en_sha1_hash": "89ff31225c5f042fff61e92ec8cf80e417a7140c",
   "created_at": "2025-05-19T21:30:47.205Z",
-  "updated_at": "2025-11-06T18:29:15.638Z",
+  "updated_at": "2025-11-13T07:58:07.772Z",
   "comment": {
     "text": "The translation key \"Owner\" represents the label used to display an owner's name or avatar in a user interface, typically appearing in dialog boxes and info panels. It is translated from \"Common:Owner\", suggesting that it relates to general information about a user's role. This text appears as part of a styled component, likely within a UI element intended to provide context or identify the user.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 204,
-      "context": "};\n \n getPropertyTitle = (propertyId: string) => {\n switch (propertyId) {\n case \"Owner\":\n return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");",
+      "line_number": 221,
+      "context": "getPropertyTitle = (propertyId: string) => {\n switch (propertyId) {\n case \"Owner\":\n case \"OwnedBy\":\n return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");",
       "module": "/packages/client"
     },
     {
@@ -36,37 +36,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 725,
+      "line_number": 733,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Owner\",\n title: t(\"Common:Owner\"),\n enable: roomColumnOwnerIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 725,
+      "line_number": 733,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Owner\",\n title: t(\"Common:Owner\"),\n enable: roomColumnOwnerIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 725,
+      "line_number": 733,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Owner\",\n title: t(\"Common:Owner\"),\n enable: roomColumnOwnerIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 608,
+      "line_number": 613,
       "context": "label,\n };\n \n if (roomsFilter.subjectFilter?.toString()) {\n if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {\n subject.selectedLabel = `${t(\"Common:Owner\")}: ${label}`;\n }\n \n filterValues.push(subject);\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 608,
+      "line_number": 613,
       "context": "label,\n };\n \n if (roomsFilter.subjectFilter?.toString()) {\n if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {\n subject.selectedLabel = `${t(\"Common:Owner\")}: ${label}`;\n }\n \n filterValues.push(subject);\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 608,
+      "line_number": 613,
       "context": "label,\n };\n \n if (roomsFilter.subjectFilter?.toString()) {\n if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {\n subject.selectedLabel = `${t(\"Common:Owner\")}: ${label}`;\n }\n \n filterValues.push(subject);\n \n filterValues.push({",
       "module": "/packages/client"
     },
@@ -75,6 +75,12 @@
       "line_number": 126,
       "context": "},\n { value: \"custom\", label: t(\"SetItUp\"), dataTestId: \"custom_radio_button\" },\n ];\n \n const [columnsOptions, setColumnsOptions] = useState([\n { key: \"Owner\", label: t(\"Common:Owner\") },\n { key: \"Activity\", label: t(\"Files:LastActivity\") },\n ]);\n \n const [version, onSetVersion] = useState(sdkVersion[210]);",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 523,
+      "context": "expected.push(member);\n } else if (isOwner && location.pathname.includes(\"rooms/personal\")) {\n if (owner.length === 0) {\n owner.push({\n id: \"owner\",\n displayName: t(\"Common:Owner\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n owner.push(member);",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",

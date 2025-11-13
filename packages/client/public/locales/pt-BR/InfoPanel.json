@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Etiquetas adicionadas.",
   "Administration": "Administração",
+  "AgentRenamed": "Agente <1>«{{oldRoomTitle}}»</1> renomeado para <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Veja os detalhes dos agentes de IA aqui",
   "AndMoreLabel": "e <1>{{count}} mais</1>",
   "CreationDate": "Data de criação",
   "Data": "Dados",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Veja detalhes do modelo de formulário aqui",
   "GroupsEmptyScreenText": "Veja os detalhes dos grupos aqui",
   "GuestsEmptyScreenText": "Veja os detalhes dos convidados aqui",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agente criado",
   "HistoryEmptyScreenText": "O histórico de atividades será mostrado aqui",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> sala copiada",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> sala criada",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Veja os detalhes dos membros aqui",
   "NoRecordsFound": "Nenhum registro foi encontrado",
   "Properties": "Propriedades",
+  "Resolution": "Resolução",
   "RoomCreateUserCount": "Usuários adicionados ({{count}}).",
   "RoomDenyDownloadDisabled": "Download e cópia sem restrições",
   "RoomDenyDownloadEnabled": "Download e cópia restritos",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Histórico",
   "UserFileUpdated": "Arquivo atualizado.",
   "Users": "Usuários",
-  "Versions": "Versões",
-  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agente criado",
-  "Resolution": "Resolução",
-  "AgentRenamed": "Agente <1>«{{oldRoomTitle}}»</1> renomeado para <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Veja os detalhes dos agentes de IA aqui"
+  "Versions": "Versões"
 }

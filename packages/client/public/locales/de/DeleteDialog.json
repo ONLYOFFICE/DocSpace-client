@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Der Agent <strong>\"{{agentName}}\"</strong> wird endgültig gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
+  "DeleteAIAgentTitle": "Diesen Agenten löschen?",
+  "DeleteAIAgentWarning": "Ich verstehe die Konsequenzen und möchte den Agenten löschen.",
   "DeleteAllGroupDescription": "Die ausgewählten Gruppen werden gelöscht. Benutzer in den Gruppen werden nicht aus {{productName}} entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteAllGroupsTitle": "Gruppen löschen",
   "DeleteFiles": "Sie sind dabei, <strong>Dateien ({{filesCount}})</strong> in den {{trashSection}} zu verschieben.",
@@ -29,8 +32,5 @@
   "ItemsDeletedAfter": "Diese Elemente werden innerhalb von 30 Tagen dauerhaft gelöscht.",
   "ItemsPermanentlyDeleted": "Diese Elemente werden dauerhaft aus dem {{trashSection}} entfernt.",
   "removeFromListDescription": "Sie werden <1>{{title}}</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?",
-  "removeFromListDescriptionPlural": "Sie werden <1>({{count}}) Elemente</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?",
-  "DeleteAIAgentDescription": "Der Agent <strong>\"{{agentName}}\"</strong> wird endgültig gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
-  "DeleteAIAgentTitle": "Diesen Agenten löschen?",
-  "DeleteAIAgentWarning": "Ich verstehe die Konsequenzen und möchte den Agenten löschen."
+  "removeFromListDescriptionPlural": "Sie werden <1>({{count}}) Elemente</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?"
 }

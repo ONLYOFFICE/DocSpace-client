@@ -88,6 +88,7 @@
   "Payer": "지불자",
   "PayerDescription": "이 사용자는 결제 세부 정보에 액세스할 수 있으며 할당량을 조정하고 결제할 수 있는 유일한 사용자입니다. {{productName}} 소유자와 결제 관리자는 Stripe 고객 포털을 사용하여 결제 관리자 역할을 재할당할 수 있습니다.",
   "PaymentMethod": "결제 방법",
+  "PerAITools": "토큰당 {{currency}}",
   "PerBackup": "{{currency}} 1개당",
   "PerBackupWithBracket": "({{currency}} per 1 백업)",
   "PerStorage": "{{currency}}당 {{amount}}/월",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "결제 정보를 추가하지 않으셨습니다.",
   "YourCurrentPayment": "현재 결제",
   "YourCurrentPlan": "<1>현재 요금제:</1> {{amount}} <2>({{price}}/월)</2>",
-  "YourPrice": "내 요금",
-  "PerAITools": "토큰당 {{currency}}"
+  "YourPrice": "내 요금"
 }

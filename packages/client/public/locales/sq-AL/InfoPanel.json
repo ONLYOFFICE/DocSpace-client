@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Etiketat e shtuara.",
   "Administration": "Administrata",
+  "AgentRenamed": "Agjenti <1>«{{oldRoomTitle}}»</1> u riemërua në <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Shihni detajet e agjentëve të IA këtu",
   "AndMoreLabel": "dhe <1>{{count}} më shumë</1>",
   "CreationDate": "Data e krijimit",
   "Data": "Data",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Shikoni detajet e modelit të formularit këtu",
   "GroupsEmptyScreenText": "Shikoni detajet e grupeve këtu",
   "GuestsEmptyScreenText": "Shikoni detajet e të ftuarve këtu",
+  "HistoryAgentCreated": "Agjenti <1>«{{roomTitle}}»</1> u krijua",
   "HistoryEmptyScreenText": "Historiku i aktivitetit do të shfaqet këtu",
   "HistoryRoomCopied": "Dhoma <1>«{{roomTitle}}»</1> u kopjua",
   "HistoryRoomCreated": "Dhoma <1>«{{roomTitle}}»</1> u krijua",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Shikoni detajet e anëtarëve këtu",
   "NoRecordsFound": "Nuk u gjend asnjë regjistrim",
   "Properties": "Vetitë",
+  "Resolution": "Rezolucioni",
   "RoomCreateUserCount": "Përdoruesit e shtuar ({{count}}).",
   "RoomDenyDownloadDisabled": "Shkarkimi dhe kopjimi i pakufizuar",
   "RoomDenyDownloadEnabled": "Shkarkimi dhe kopjimi i kufizuar",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Histori",
   "UserFileUpdated": "Skedari u përditësua.",
   "Users": "Përdoruesit",
-  "Versions": "Versionet",
-  "HistoryAgentCreated": "Agjenti <1>«{{roomTitle}}»</1> u krijua",
-  "Resolution": "Rezolucioni",
-  "AgentRenamed": "Agjenti <1>«{{oldRoomTitle}}»</1> u riemërua në <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Shihni detajet e agjentëve të IA këtu"
+  "Versions": "Versionet"
 }

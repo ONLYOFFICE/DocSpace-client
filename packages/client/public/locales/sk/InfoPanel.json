@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Tagy pridané.",
   "Administration": "Administrácia",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> premenovaný na <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Pozrite si detaily AI agentov tu.",
   "AndMoreLabel": "a ďalšie <1>{{count}}</1>",
   "CreationDate": "Dátum vytvorenia",
   "Data": "Dáta",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Podrobnosti o šablóne formulára nájdete tu",
   "GroupsEmptyScreenText": "Pozrite si detaily skupín tu.",
   "GuestsEmptyScreenText": "Podrobnosti o hosťoch nájdete tu",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agent vytvorený",
   "HistoryEmptyScreenText": "Tu sa zobrazí história aktivít",
   "HistoryRoomCopied": "Miestnosť <1>«{{roomTitle}}»</1> skopírovaná",
   "HistoryRoomCreated": "Miestnosť <1>«{{roomTitle}}»</1> vytvorená",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Tu nájdete podrobnosti o členoch",
   "NoRecordsFound": "Nenašli sa žiadne záznamy",
   "Properties": "Vlastnosti",
+  "Resolution": "Rozlíšenie",
   "RoomCreateUserCount": "Používatelia pridaní ({{count}}).",
   "RoomDenyDownloadDisabled": "Sťahovanie a kopírovanie nie je obmedzené",
   "RoomDenyDownloadEnabled": "Sťahovanie a kopírovanie je obmedzené",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "História",
   "UserFileUpdated": "Súbor aktualizovaný.",
   "Users": "Používatelia",
-  "Versions": "Verzie",
-  "HistoryAgentCreated": "«{{roomTitle}}» agent vytvorený",
-  "Resolution": "Rozlíšenie",
-  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> premenovaný na <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Pozrite si detaily AI agentov tu."
+  "Versions": "Verzie"
 }

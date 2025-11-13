@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Teqlər əlavə edildi.",
   "Administration": "İdarəetmə",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> adınadək dəyişdi",
+  "AIAgentsEmptyScreenTent": "Süni intellekt agentlərinin təfərrüatlarına burada baxın",
   "AndMoreLabel": "və <1>{{count}} daha çox</1>",
   "CreationDate": "Yaradılma tarixi",
   "Data": "Məlumat",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Forma şablonunun təfərrüatlarına burada baxın",
   "GroupsEmptyScreenText": "Burada qrupların təfərrüatlarını görün",
   "GuestsEmptyScreenText": "Qonaq detallarına burada baxın",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agenti yaradıldı",
   "HistoryEmptyScreenText": "Hərəkət tarixçəsi burada göstəriləcək",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> otaq kopyalandı",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> otaq yaradıldı",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Üzvlərin məlumatlarına burada baxın",
   "NoRecordsFound": "Qeydlər tapılmadı",
   "Properties": "Xüsusiyyətlər",
+  "Resolution": "Qərar",
   "RoomCreateUserCount": "İstifadəçilər əlavə edildi ({{count}}).",
   "RoomDenyDownloadDisabled": "Yükləmə və nüsxələnmə limitsizdir",
   "RoomDenyDownloadEnabled": "Yükləmə və nüsxələnmə məhdudlaşdırılıb",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Tarixçə",
   "UserFileUpdated": "Fayl yeniləndi.",
   "Users": "İstifadəçilər",
-  "Versions": "Versiyalar",
-  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agenti yaradıldı",
-  "Resolution": "Qərar",
-  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> adınadək dəyişdi",
-  "AIAgentsEmptyScreenTent": "Süni intellekt agentlərinin təfərrüatlarına burada baxın"
+  "Versions": "Versiyalar"
 }

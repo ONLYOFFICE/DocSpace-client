@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Agent <strong>\"{{agentName}}\"</strong> bude trvale odstránený. Všetky dáta a prístupy používateľov budú stratené.",
+  "DeleteAIAgentTitle": "Zmazať tohto agenta?",
+  "DeleteAIAgentWarning": "Rozumiem dôsledky a chcem zmazať agenta.",
   "DeleteAllGroupDescription": "Vybrané skupiny budú vymazané. Používatelia v skupinách nebudú z priestoru {{productName}} odstránení. Ste si istí, že chcete pokračovať?",
   "DeleteAllGroupsTitle": "Vymazať skupiny",
   "DeleteFiles": "Čoskoro presuniete <strong>súbory ({{filesCount}})</strong> do {{trashSection}}.",
@@ -29,8 +32,5 @@
   "ItemsDeletedAfter": "Tieto položky budú trvale vymazané o 30 dní.",
   "ItemsPermanentlyDeleted": "Tieto položky budú trvale odstránené z {{trashSection}}.",
   "removeFromListDescription": "Odstránite <1>{{title}}</1> zo zoznamu. Ste si istý/á, že chcete pokračovať?",
-  "removeFromListDescriptionPlural": "Odstránite <1>{{count}} položiek</1>. Ste si istí, že chcete pokračovať?",
-  "DeleteAIAgentDescription": "Agent <strong>\"{{agentName}}\"</strong> bude trvale odstránený. Všetky dáta a prístupy používateľov budú stratené.",
-  "DeleteAIAgentTitle": "Zmazať tohto agenta?",
-  "DeleteAIAgentWarning": "Rozumiem dôsledky a chcem zmazať agenta."
+  "removeFromListDescriptionPlural": "Odstránite <1>{{count}} položiek</1>. Ste si istí, že chcete pokračovať?"
 }

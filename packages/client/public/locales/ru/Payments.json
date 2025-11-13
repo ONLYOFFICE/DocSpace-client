@@ -88,6 +88,7 @@
   "Payer": "Плательщик",
   "PayerDescription": "Данный пользователь осуществляет оплату за тарифный план. Никто, кроме него, не может настраивать и оплачивать квоту. Сменить плательщика может владелец {{productName}}, а также сам плательщик через клиентский портал Stripe.",
   "PaymentMethod": "Способ оплаты",
+  "PerAITools": "{{currency}} за токен",
   "PerBackup": "{{currency}} за 1 резервную копию",
   "PerBackupWithBracket": "({{currency}} за 1 резервную копию)",
   "PerStorage": "{{currency}} за {{amount}}/месяц",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "Вы не добавили ни одного платежа",
   "YourCurrentPayment": "Ваш текущий платеж",
   "YourCurrentPlan": "<1>Ваш текущий тарифный план:</1> {{amount}} <2>({{price}}/месяц)</2>",
-  "YourPrice": "Ваша стоимость",
-  "PerAITools": "{{currency}} за токен"
+  "YourPrice": "Ваша стоимость"
 }

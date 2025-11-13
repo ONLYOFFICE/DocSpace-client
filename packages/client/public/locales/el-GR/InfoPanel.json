@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Οι ετικέτες προστέθηκαν.",
   "Administration": "Διαχείριση",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> μετονομάστηκε σε <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Δείτε λεπτομέρειες για τους πράκτορες τεχνητής νοημοσύνης εδώ",
   "AndMoreLabel": "και <1>{{count}} περισσότερα</1>",
   "CreationDate": "Ημερομηνία δημιουργίας",
   "Data": "Δεδομένα",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Δείτε τις λεπτομέρειες του προτύπου φόρμας εδώ",
   "GroupsEmptyScreenText": "Δείτε λεπτομέρειες ομάδων εδώ",
   "GuestsEmptyScreenText": "Δείτε τις λεπτομέρειες για τους επισκέπτες εδώ",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> πράκτορας δημιουργήθηκε",
   "HistoryEmptyScreenText": "Το ιστορικό δραστηριοτήτων θα εμφανίζεται εδώ",
   "HistoryRoomCopied": "<1>Το δωμάτιο «{{roomTitle}}»</1> αντιγράφηκε",
   "HistoryRoomCreated": "Το δωμάτιο <1>«{{roomTitle}}»</1> δημιουργήθηκε",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Δείτε λεπτομέρειες για τα μέλη εδώ",
   "NoRecordsFound": "Δεν βρέθηκαν εγγραφές",
   "Properties": "Ιδιότητες",
+  "Resolution": "Ανάλυση",
   "RoomCreateUserCount": "Προσθήκη χρηστών ({{count}}).",
   "RoomDenyDownloadDisabled": "Λήψη και αντιγραφή χωρίς περιορισμούς",
   "RoomDenyDownloadEnabled": "Λήψη και αντιγραφή περιορισμένη",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Ιστορικό",
   "UserFileUpdated": "Το αρχείο ενημερώθηκε.",
   "Users": "Χρήστες",
-  "Versions": "Εκδόσεις",
-  "HistoryAgentCreated": "«{{roomTitle}}» πράκτορας δημιουργήθηκε",
-  "Resolution": "Ανάλυση",
-  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> μετονομάστηκε σε <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Δείτε λεπτομέρειες για τους πράκτορες τεχνητής νοημοσύνης εδώ"
+  "Versions": "Εκδόσεις"
 }

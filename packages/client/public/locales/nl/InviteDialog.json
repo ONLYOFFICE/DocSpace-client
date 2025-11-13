@@ -12,14 +12,14 @@
   "InviteToRoomSearchPlaceholder": "Zoeken en uitnodigen op naam of e-mail",
   "InviteViaLink": "Uitnodigen via link",
   "InviteViaLinkDescriptionAccounts": "Maak een universele link voor zelfautorisatie in {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Maak een universele link voor zelfautorisatie in de agent als gast.",
+  "InviteViaLinkDescriptionAgentMembers": "Maak een universele link voor {{productName}}-leden voor zelfautorisatie in de agent.",
   "InviteViaLinkDescriptionRoomGuest": "Maak een universele link voor zelfautorisatie in de ruimte als gast.",
   "InviteViaLinkDescriptionRoomMembers": "Maak een universele link voor {{productName}}-leden voor zelfautorisatie in de ruimte.",
   "LinkCopySuccess": "Link is gekopieerd",
   "SendInvitation": "Stuur uitnodiging",
+  "UserAgentMaxAvailableRoleWarning": "Gasten en gebruikers kunnen niet worden toegewezen als agentmanagers. Alleen kamer- en {{productName}}-beheerders komen in aanmerking voor de opgegeven rol.",
   "UserMaxAvailableRoleWarning": "Gasten en Gebruikers kunnen niet worden toegewezen als Kamerbeheerders. Alleen Kamer en {{productName}} beheerders kunnen de opgegeven rol vervullen.",
   "UsersAlreadyAdded": "Sommige gebruikers zijn al toegevoegd",
-  "UsersCannotBeAdded": "Uitgeschakelde contacten kunnen niet aan een kamer worden toegevoegd.",
-  "InviteViaLinkDescriptionAgentGuest": "Maak een universele link voor zelfautorisatie in de agent als gast.",
-  "InviteViaLinkDescriptionAgentMembers": "Maak een universele link voor {{productName}}-leden voor zelfautorisatie in de agent.",
-  "UserAgentMaxAvailableRoleWarning": "Gasten en gebruikers kunnen niet worden toegewezen als agentmanagers. Alleen kamer- en {{productName}}-beheerders komen in aanmerking voor de opgegeven rol."
+  "UsersCannotBeAdded": "Uitgeschakelde contacten kunnen niet aan een kamer worden toegevoegd."
 }

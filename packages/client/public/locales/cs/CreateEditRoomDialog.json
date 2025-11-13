@@ -11,6 +11,7 @@
   "CreateTagOption": "Vytvořit značku",
   "Diagonal": "Diagonální",
   "DisableRoomQuota": "Zakázat kvóty pro tuto místnost",
+  "DisableRoomQuotaAgent": "Vypnout kvótu pro tohoto agenta",
   "FileLifetime": "Životnost souboru",
   "FileLifetimeDescription": "Nastavte životnost souborů tak, aby se soubory v této místnosti po uplynutí definované doby automaticky odstranily. Životnost začíná datem nahrání/vytvoření souboru.",
   "FilesOlderThan": "Soubory starší než:",
@@ -27,6 +28,7 @@
   "RoomEditing": "Úprava místnosti",
   "RootFolderLabel": "Kořenová složka",
   "StorageDescription": "Nastavení kvóty úložného prostoru na místnost. Tuto hodnotu můžete změnit nebo limit úložiště vypnout.",
+  "StorageDescriptionAgent": "Limit úložného prostoru nastaven pro každého agenta. Můžete změnit tuto hodnotu nebo vypnout limit úložného prostoru.",
   "TagsPlaceholder": "Přidat značku",
   "ThirdPartyStorageComboBoxPlaceholder": "Vyberte úložiště",
   "ThirdPartyStorageNoStorageAlert": "Předtím je třeba připojit příslušnou službu v části „Integrace“. V opačném případě nebude připojení možné.",
@@ -37,7 +39,5 @@
   "UserName": "Uživatelské jméno",
   "ViewerInfo": "Informace o prohlížeči",
   "WatermarkPreview": "Náhled vodoznaku",
-  "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech.",
-  "DisableRoomQuotaAgent": "Vypnout kvótu pro tohoto agenta",
-  "StorageDescriptionAgent": "Limit úložného prostoru nastaven pro každého agenta. Můžete změnit tuto hodnotu nebo vypnout limit úložného prostoru."
+  "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech."
 }

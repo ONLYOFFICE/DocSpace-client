@@ -12,14 +12,14 @@
   "InviteToRoomSearchPlaceholder": "ابحثوا ودعوا حسب الاسم أو البريد الإلكتروني",
   "InviteViaLink": "دعوة عبر الرابط",
   "InviteViaLinkDescriptionAccounts": "قم بإنشاء ارتباط عالمي للمصادقة الذاتية في {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "إنشاء رابط عالمي للمصادقة الذاتية في الوكيل كضيف.",
+  "InviteViaLinkDescriptionAgentMembers": "إنشاء رابط عالمي لأعضاء {{productName}} للمصادقة الذاتية في الوكيل.",
   "InviteViaLinkDescriptionRoomGuest": "قم بإنشاء رابط عالمي للتفويض الذاتي في الغرفة كضيف.",
   "InviteViaLinkDescriptionRoomMembers": "أنشئ رابطًا عالميًا لأعضاء {{productName}} لتمكينهم من التفويض الذاتي في الغرفة.",
   "LinkCopySuccess": "تم نسخ الرابط",
   "SendInvitation": "إرسال دعوة",
+  "UserAgentMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديرين للوكيل. مسؤولو الغرفة ومسؤولو {{productName}} فقط هم المناسبون للدور المحدد.",
   "UserMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديري غرف. فقط مسؤولو الغرف وإدارة {{productName}} مناسبون لهذا الدور المحدد.",
   "UsersAlreadyAdded": "تمت إضافة بعض المستخدمين بالفعل",
-  "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة",
-  "InviteViaLinkDescriptionAgentGuest": "إنشاء رابط عالمي للمصادقة الذاتية في الوكيل كضيف.",
-  "InviteViaLinkDescriptionAgentMembers": "إنشاء رابط عالمي لأعضاء {{productName}} للمصادقة الذاتية في الوكيل.",
-  "UserAgentMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديرين للوكيل. مسؤولو الغرفة ومسؤولو {{productName}} فقط هم المناسبون للدور المحدد."
+  "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة"
 }

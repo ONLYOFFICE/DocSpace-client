@@ -1,13 +1,12 @@
 {
-  "AITools": "AI tools",
   "AIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an MCP server.",
+  "AITools": "AI tools",
   "AItoolsConfirm": "Enabling the AI tools service will grant all {{productName}} users access to AI-powered features, provided the wallet has sufficient funds. Are you sure you want to continue?",
+  "AIToolsEnabled": "AI tools service successfully enabled.",
   "AndMore": "And more!",
   "AutomaticBackupDescription": "Set up scheduled backups for continuous data protection without manual actions.",
   "BackupRoomDescription": "Save a backup to a selected room or the {{sectionName}} section. Use existing rooms or create a new one.",
   "BackupServiceEnabled": "Backup service successfully enabled.",
-  "AIToolsEnabled": "AI tools service successfully enabled.",
-  "WebSearchEnabled": "AI Web search service successfully enabled.",
   "ChatBot": "ChatBot",
   "ChatBotDescription": "Interact with an AI assistant directly in your editors — ask questions, get suggestions, or speed up your workflow.",
   "ConnectService": "Connect the service <1>here</1> to enable backup features",
@@ -33,5 +32,6 @@
   "TextTranslation": "Text translation",
   "TextTranslationDescription": "Translate text into your desired language instantly, while maintaining meaning and context.",
   "ThirdPartyResourceDescription": "Connect and save backups to cloud accounts like Dropbox, Box, OneDrive, or Google Drive.",
-  "ThirdPartyStorageDescription": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms."
+  "ThirdPartyStorageDescription": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms.",
+  "WebSearchEnabled": "AI Web search service successfully enabled."
 }

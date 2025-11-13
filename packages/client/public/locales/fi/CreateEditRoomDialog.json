@@ -11,6 +11,7 @@
   "CreateTagOption": "Luo merkki",
   "Diagonal": "Lävistäjä ",
   "DisableRoomQuota": "Ota tämän huoneen kiintiö pois käytöstä",
+  "DisableRoomQuotaAgent": "Poista kiintiö tälle agentille",
   "FileLifetime": "Tiedoston käyttöikä",
   "FileLifetimeDescription": "Aseta tiedoston käyttöikä poistaaksesi automaattisesti tämän huoneen tiedostot määrätyn ajanjakson jälkeen. Käyttöikä alkaa tiedoston lataamis-/luomispäivämäärästä.",
   "FilesOlderThan": "Tiedostot, jotka ovat vanhempia kuin:",
@@ -27,6 +28,7 @@
   "RoomEditing": "Huoneen muokkaus",
   "RootFolderLabel": "Juurikansio",
   "StorageDescription": "Muistin kiintiö asetettu per huone. Voit muuttaa tätä arvoa tai poistaa muistin rajan pois käytöstä.",
+  "StorageDescriptionAgent": "Varastokvota asetettu agenttikohtaisesti. Voit muuttaa tätä arvoa tai poistaa tallennusrajan käytöstä.",
   "TagsPlaceholder": "Lisää tunniste",
   "ThirdPartyStorageComboBoxPlaceholder": "Valitse muisti",
   "ThirdPartyStorageNoStorageAlert": "Sitä ennen, sinun tulee yhdistää vastaavaan palveluun \"Liittäminen\"-osiossa. Muuten, yhteys ei ole mahdollinen.",
@@ -37,7 +39,5 @@
   "UserName": "Käyttäjänimi",
   "ViewerInfo": "Katsojan tiedot",
   "WatermarkPreview": "Vesileiman esikatselu",
-  "WatermarkPreviewHelp": "Tämä esikatselu näyttää karkeasti kuinka vesileima näytetään tiedostoissasi.",
-  "DisableRoomQuotaAgent": "Poista kiintiö tälle agentille",
-  "StorageDescriptionAgent": "Varastokvota asetettu agenttikohtaisesti. Voit muuttaa tätä arvoa tai poistaa tallennusrajan käytöstä."
+  "WatermarkPreviewHelp": "Tämä esikatselu näyttää karkeasti kuinka vesileima näytetään tiedostoissasi."
 }

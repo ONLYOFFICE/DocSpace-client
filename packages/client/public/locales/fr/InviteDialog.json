@@ -12,14 +12,14 @@
   "InviteToRoomSearchPlaceholder": "Rechercher et inviter par nom ou par e-mail",
   "InviteViaLink": "Inviter via le lien",
   "InviteViaLinkDescriptionAccounts": "Créez un lien universel pour l’auto-autorisation dans {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Créer un lien universel pour l'auto-autorisation dans l'agent en tant qu'invité.",
+  "InviteViaLinkDescriptionAgentMembers": "Créer un lien universel pour les membres {{productName}} afin qu'ils puissent s'autoriser eux-mêmes dans l'agent.",
   "InviteViaLinkDescriptionRoomGuest": "Créer un lien universel pour l'auto-autorisation dans la salle en tant qu'invité.",
   "InviteViaLinkDescriptionRoomMembers": "Créer un lien universel pour les membres de {{productName}} pour l'auto-autorisation dans la salle.",
   "LinkCopySuccess": "Le lien a été copié",
   "SendInvitation": "Envoyer une invitation",
+  "UserAgentMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires d'agents. Seuls les administrateurs de salle et de {{productName}} peuvent occuper ce rôle.",
   "UserMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires de salle. Seuls les administrateurs de salle et de {{productName}} peuvent jouer le rôle spécifié.",
   "UsersAlreadyAdded": "Certains utilisateurs ont déjà été ajoutés",
-  "UsersCannotBeAdded": "Les contacts désactivés ne peuvent pas être ajoutés à une salle.",
-  "InviteViaLinkDescriptionAgentGuest": "Créer un lien universel pour l'auto-autorisation dans l'agent en tant qu'invité.",
-  "InviteViaLinkDescriptionAgentMembers": "Créer un lien universel pour les membres {{productName}} afin qu'ils puissent s'autoriser eux-mêmes dans l'agent.",
-  "UserAgentMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires d'agents. Seuls les administrateurs de salle et de {{productName}} peuvent occuper ce rôle."
+  "UsersCannotBeAdded": "Les contacts désactivés ne peuvent pas être ajoutés à une salle."
 }

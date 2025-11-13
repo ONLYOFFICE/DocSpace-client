@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Agentti <strong>\"{{agentName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
+  "DeleteAIAgentTitle": "Poista tämä agentti?",
+  "DeleteAIAgentWarning": "Ymmärrän seuraukset ja haluan poistaa agentin.",
   "DeleteAllGroupDescription": "Valitut ryhmät poistetaan. Ryhmien käyttäjiä ei poisteta {{productName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteAllGroupsTitle": "Poista ryhmiä",
   "DeleteFiles": "Olet siirtämässä <strong>tiedostoja ({{filesCount}})</strong> {{trashSection}}-kohtaan.",
@@ -29,8 +32,5 @@
   "ItemsDeletedAfter": "Nämä kohteet poistetaan pysyvästi 30 päivän kuluttua.",
   "ItemsPermanentlyDeleted": "Nämä kohteet poistetaan pysyvästi {{trashSection}}-osiosta.",
   "removeFromListDescription": "Olet aikeissa poistaa <1>{{title}}</1> luettelosta. Oletko varma, että haluat jatkaa?",
-  "removeFromListDescriptionPlural": "Olet poistamassa <1>kohteita ({{count}})</1> luettelosta. Oletko varma, että haluat jatkaa?",
-  "DeleteAIAgentDescription": "Agentti <strong>\"{{agentName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
-  "DeleteAIAgentTitle": "Poista tämä agentti?",
-  "DeleteAIAgentWarning": "Ymmärrän seuraukset ja haluan poistaa agentin."
+  "removeFromListDescriptionPlural": "Olet poistamassa <1>kohteita ({{count}})</1> luettelosta. Oletko varma, että haluat jatkaa?"
 }

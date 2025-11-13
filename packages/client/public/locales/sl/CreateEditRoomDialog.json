@@ -11,6 +11,7 @@
   "CreateTagOption": "Ustvari oznako",
   "Diagonal": "Diagonalno",
   "DisableRoomQuota": "Onemogoči kvoto za to sobo",
+  "DisableRoomQuotaAgent": "Onemogoči kvoto za tega agenta",
   "FileLifetime": "Življenjska doba datoteke",
   "FileLifetimeDescription": "Nastavite življenjsko dobo datoteke za samodejno brisanje datotek v tej sobi po določenem obdobju. Življenjska doba se začne z datumom nalaganja/ustvarjanja datoteke.",
   "FilesOlderThan": "Datoteke starejše od:",
@@ -27,6 +28,7 @@
   "RoomEditing": "Urejanje sobe",
   "RootFolderLabel": "Korenska mapa",
   "StorageDescription": "Kvota prostora za shranjevanje je nastavljena na sobo. To vrednost lahko spremenite ali izklopite omejitev prostora za shranjevanje.",
+  "StorageDescriptionAgent": "Določen je limit prostora za vsakega agenta. Lahko spremenite to vrednost ali onemogočite omejitev prostora.",
   "TagsPlaceholder": "Dodaj oznak",
   "ThirdPartyStorageComboBoxPlaceholder": "Izberi shrambo",
   "ThirdPartyStorageNoStorageAlert": "Predhodno morate povezati ustrezno storitev v razdelku “Integracija”. V nasprotnem primeru povezava ne bo mogoča.",
@@ -37,7 +39,5 @@
   "UserName": "Uporabniško ime",
   "ViewerInfo": "Informacije o ogledovalcu",
   "WatermarkPreview": "Predogled vodnega žiga",
-  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah.",
-  "DisableRoomQuotaAgent": "Onemogoči kvoto za tega agenta",
-  "StorageDescriptionAgent": "Določen je limit prostora za vsakega agenta. Lahko spremenite to vrednost ali onemogočite omejitev prostora."
+  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah."
 }

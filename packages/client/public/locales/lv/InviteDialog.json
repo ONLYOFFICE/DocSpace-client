@@ -12,14 +12,14 @@
   "InviteToRoomSearchPlaceholder": "Meklējiet un uzaiciniet pēc vārda vai e-pasta adreses",
   "InviteViaLink": "Uzaicināt, izmantojot saiti",
   "InviteViaLinkDescriptionAccounts": "Izveidot universālu saiti pašautorizācijai {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Izveidot universālu saiti pašapstiprināšanai aģentā kā viesis.",
+  "InviteViaLinkDescriptionAgentMembers": "Izveidojiet universālu saiti {{productName}} biedriem, lai paši varētu autorizēties aģentā.",
   "InviteViaLinkDescriptionRoomGuest": "Izveidot universālu saiti pašapstiprināšanai telpā kā viesim.",
   "InviteViaLinkDescriptionRoomMembers": "Izveido universālu saiti {{productName}} biedriem pašapstiprināšanai telpā.",
   "LinkCopySuccess": "Saite ir nokopēta",
   "SendInvitation": "Sūtīt ielūgumu",
+  "UserAgentMaxAvailableRoleWarning": "Viesi un lietotāji nevar tikt iecelti par aģentu vadītājiem. Šī amata funkcijai ir piemēroti tikai Istabu un {{productName}} administratori.",
   "UserMaxAvailableRoleWarning": "Viesi un lietotāji nevar būt telpu pārvaldnieki. Norādītajai lomai ir piemērota tikai telpa un {{productName}} administratori.",
   "UsersAlreadyAdded": "Daži lietotāji jau ir pievienoti",
-  "UsersCannotBeAdded": "Invalid kontaktpersonas nevar pievienot telpai",
-  "InviteViaLinkDescriptionAgentGuest": "Izveidot universālu saiti pašapstiprināšanai aģentā kā viesis.",
-  "InviteViaLinkDescriptionAgentMembers": "Izveidojiet universālu saiti {{productName}} biedriem, lai paši varētu autorizēties aģentā.",
-  "UserAgentMaxAvailableRoleWarning": "Viesi un lietotāji nevar tikt iecelti par aģentu vadītājiem. Šī amata funkcijai ir piemēroti tikai Istabu un {{productName}} administratori."
+  "UsersCannotBeAdded": "Invalid kontaktpersonas nevar pievienot telpai"
 }

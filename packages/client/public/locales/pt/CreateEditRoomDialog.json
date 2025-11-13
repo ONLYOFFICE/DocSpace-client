@@ -11,6 +11,7 @@
   "CreateTagOption": "Criar tag",
   "Diagonal": "Diagonal",
   "DisableRoomQuota": "Desativar cota para esta sala",
+  "DisableRoomQuotaAgent": "Desativar cota para este agente",
   "FileLifetime": "Tempo de vida do arquivo",
   "FileLifetimeDescription": "Defina o tempo de vida do arquivo para excluir automaticamente os arquivos nesta sala após um período definido. O tempo de vida começa na data de upload/criação do arquivo.",
   "FilesOlderThan": "Ficheiros mais antigos que:",
@@ -27,6 +28,7 @@
   "RoomEditing": "Edição de Salas",
   "RootFolderLabel": "Pasta raiz",
   "StorageDescription": "Cota de armazenamento definida por sala. Você pode alterar esse valor ou desativar o limite de armazenamento.",
+  "StorageDescriptionAgent": "Cota de armazenamento definida por agente. Você pode alterar este valor ou desativar o limite de armazenamento.",
   "TagsPlaceholder": "Adicionar uma tag",
   "ThirdPartyStorageComboBoxPlaceholder": "Selecionar armazenamento",
   "ThirdPartyStorageNoStorageAlert": "Antes de proceder, é necessário ligar o serviço correspondente na secção \"Integração\". Caso contrário, a ligação não será possível.",
@@ -37,7 +39,5 @@
   "UserName": "Nome de Utilizador",
   "ViewerInfo": "Informações do visualizador",
   "WatermarkPreview": "Pré-visualização da marca d'água",
-  "WatermarkPreviewHelp": "Esta visualização de imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos.",
-  "DisableRoomQuotaAgent": "Desativar cota para este agente",
-  "StorageDescriptionAgent": "Cota de armazenamento definida por agente. Você pode alterar este valor ou desativar o limite de armazenamento."
+  "WatermarkPreviewHelp": "Esta visualização de imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos."
 }

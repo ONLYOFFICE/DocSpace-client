@@ -88,6 +88,7 @@
   "Payer": "Платник",
   "PayerDescription": "Цей користувач має доступ до платіжних даних і є єдиним користувачем, який може регулювати квоту та здійснювати платежі. Власник {{productName}}, а також сам менеджер з оплати можуть змінити менеджера з оплати за допомогою порталу клієнтів Stripe.",
   "PaymentMethod": "Спосіб оплати",
+  "PerAITools": "{{currency}} за токен",
   "PerBackup": "{{currency}} за 1 резервну копію",
   "PerBackupWithBracket": "({{currency}} за 1 резервну копію)",
   "PerStorage": "{{currency}} за {{amount}}/місяць",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "Ви не додали жодного платежу",
   "YourCurrentPayment": "Ваш поточний платіж",
   "YourCurrentPlan": "<1>Ваш поточний план:</1> {{amount}} <2>({{price}}/місяць)</2>",
-  "YourPrice": "Ваша ціна",
-  "PerAITools": "{{currency}} за токен"
+  "YourPrice": "Ваша ціна"
 }

@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Ο πράκτορας <strong>\"{{agentName}}\"</strong> θα διαγραφεί οριστικά. Όλα τα δεδομένα και οι πρόσβαση χρήστη θα χαθούν.",
+  "DeleteAIAgentTitle": "Διαγραφή αυτού του πράκτορα;",
+  "DeleteAIAgentWarning": "Κατανοώ τις συνέπειες και θέλω να διαγράψω τον πράκτορα.",
   "DeleteAllGroupDescription": "Οι επιλεγμένες ομάδες θα διαγραφούν. Οι χρήστες των ομάδων δεν θα διαγραφούν από το {{productName}}. Θέλετε σίγουρα να συνεχίσετε;",
   "DeleteAllGroupsTitle": "Διαγραφή ομάδων",
   "DeleteFiles": "Ετοιμάζεστε να μετακινήσετε <strong>αρχεία ({{filesCount}})</strong> στο {{trashSection}}.",
@@ -29,8 +32,5 @@
   "ItemsDeletedAfter": "Αυτά τα αντικείμενα θα διαγραφούν οριστικά σε 30 ημέρες.",
   "ItemsPermanentlyDeleted": "Αυτά τα αντικείμενα θα αφαιρεθούν οριστικά από το {{trashSection}}.",
   "removeFromListDescription": "Ετοιμάζεστε να αφαιρέσετε <1>{{title}}</1> από τη λίστα. Είστε σίγουροι ότι θέλετε να συνεχίσετε;",
-  "removeFromListDescriptionPlural": "Ετοιμαστείτε να αφαιρέσετε <1>αντικείμενα ({{count}})</1> από τη λίστα. Είστε σίγουροι ότι θέλετε να συνεχίσετε;",
-  "DeleteAIAgentDescription": "Ο πράκτορας <strong>\"{{agentName}}\"</strong> θα διαγραφεί οριστικά. Όλα τα δεδομένα και οι πρόσβαση χρήστη θα χαθούν.",
-  "DeleteAIAgentTitle": "Διαγραφή αυτού του πράκτορα;",
-  "DeleteAIAgentWarning": "Κατανοώ τις συνέπειες και θέλω να διαγράψω τον πράκτορα."
+  "removeFromListDescriptionPlural": "Ετοιμαστείτε να αφαιρέσετε <1>αντικείμενα ({{count}})</1> από τη λίστα. Είστε σίγουροι ότι θέλετε να συνεχίσετε;"
 }

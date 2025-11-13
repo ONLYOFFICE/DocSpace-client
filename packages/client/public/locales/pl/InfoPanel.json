@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Tagi zostały dodane.",
   "Administration": "Administracja",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> zmienił nazwę na <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Zobacz szczegóły agentów AI tutaj",
   "AndMoreLabel": "jeszcze <1>{{count}}</1>",
   "CreationDate": "Data utworzenia",
   "Data": "Dane",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Zobacz szczegóły szablonu formularza tutaj",
   "GroupsEmptyScreenText": "Zobacz szczegóły grup tutaj",
   "GuestsEmptyScreenText": "Zobacz dane gości tutaj",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agent utworzony",
   "HistoryEmptyScreenText": "Historia aktywności będzie widoczna tutaj",
   "HistoryRoomCopied": "Pokój <1>«{{roomTitle}}»</1> został skopiowany",
   "HistoryRoomCreated": "Pokój <1>«{{roomTitle}}»</1> został utworzony",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Zobacz dane członków tutaj",
   "NoRecordsFound": "Nie znaleziono rekordów",
   "Properties": "Właściwości",
+  "Resolution": "Rozdzielczość",
   "RoomCreateUserCount": "Użytkownicy dodani ({{count}}).",
   "RoomDenyDownloadDisabled": "Pobieranie i kopiowanie nie są ograniczone",
   "RoomDenyDownloadEnabled": "Pobieranie i kopiowanie są ograniczone",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Historia",
   "UserFileUpdated": "Plik został zaktualizowany.",
   "Users": "Użytkownicy",
-  "Versions": "Wersje",
-  "HistoryAgentCreated": "«{{roomTitle}}» agent utworzony",
-  "Resolution": "Rozdzielczość",
-  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> zmienił nazwę na <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Zobacz szczegóły agentów AI tutaj"
+  "Versions": "Wersje"
 }

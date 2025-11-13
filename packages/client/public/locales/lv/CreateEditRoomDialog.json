@@ -11,6 +11,7 @@
   "CreateTagOption": "Izveidot birku",
   "Diagonal": "Diagonāli",
   "DisableRoomQuota": "Atspējot kvotu šai telpai",
+  "DisableRoomQuotaAgent": "Atspējot kvotu šim aģentam",
   "FileLifetime": "Faila kalpošanas laiks",
   "FileLifetimeDescription": "Iestatiet faila kalpošanas laiku, lai automātiski izdzēstu failus šajā telpā pēc noteikta perioda. Kalpošanas laiks sākas faila augšupielādes/izveides dienā.",
   "FilesOlderThan": "Faili, kas vecāki par:",
@@ -27,6 +28,7 @@
   "RoomEditing": "Telpas rediģēšana",
   "RootFolderLabel": "Root Folder",
   "StorageDescription": "Katrai telpai ir noteikta uzglabāšanas kvota. Varat mainīt šo vērtību vai izslēgt krātuves ierobežojumu.",
+  "StorageDescriptionAgent": "Pārvaldniekam iestatīts uzglabāšanas kvotas limits. Jūs varat mainīt šo vērtību vai izslēgt uzglabāšanas limitu.",
   "TagsPlaceholder": "Pievienot atzīmi",
   "ThirdPartyStorageComboBoxPlaceholder": "Izvēlieties krātuvi",
   "ThirdPartyStorageNoStorageAlert": "Vispirms attiecīgais pakalpojums ir jāpievieno sadaļā Integrācija (Integration). Pretējā gadījumā savienojums nebūs iespējams.",
@@ -37,7 +39,5 @@
   "UserName": "Lietotājvārds",
   "ViewerInfo": "Informācija par skatītāju",
   "WatermarkPreview": "Ūdenszīmes priekšskatījums",
-  "WatermarkPreviewHelp": "Šis attēla priekšskatījums aptuveni parāda, kā ūdenszīme tiks parādīta jūsu failos.",
-  "DisableRoomQuotaAgent": "Atspējot kvotu šim aģentam",
-  "StorageDescriptionAgent": "Pārvaldniekam iestatīts uzglabāšanas kvotas limits. Jūs varat mainīt šo vērtību vai izslēgt uzglabāšanas limitu."
+  "WatermarkPreviewHelp": "Šis attēla priekšskatījums aptuveni parāda, kā ūdenszīme tiks parādīta jūsu failos."
 }

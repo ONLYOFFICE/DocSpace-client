@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Etiketler eklendi.",
   "Administration": "Yönetim",
+  "AgentRenamed": "Temsilci <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> olarak değiştirdi",
+  "AIAgentsEmptyScreenTent": "İşte yapay zeka ajanlarının detayları burada",
   "AndMoreLabel": "ve <1>{{count}} daha</1>",
   "CreationDate": "Oluşturulma tarihi",
   "Data": "Veri",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Form şablonu ayrıntılarına buradan bakın",
   "GroupsEmptyScreenText": "Grupların detaylarını burada görün",
   "GuestsEmptyScreenText": "Konukların ayrıntılarını burada görün",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> ajanı oluşturuldu",
   "HistoryEmptyScreenText": "Etkinlik geçmişi burada gösterilecek",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> oda kopyalandı",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> odası oluşturuldu",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Üye ayrıntılarını burada görüntüleyin",
   "NoRecordsFound": "Kayıt bulunamadı",
   "Properties": "Özellikler",
+  "Resolution": "Çözünürlük",
   "RoomCreateUserCount": "Kullanıcılar eklendi ({{count}}).",
   "RoomDenyDownloadDisabled": "İndirme ve kopyalama sınırlandırılmıştır",
   "RoomDenyDownloadEnabled": "İndirme ve kopyalama sınırlandırılmamıştır",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Geçmiş",
   "UserFileUpdated": "Dosya güncellendi.",
   "Users": "Kullanıcılar",
-  "Versions": "Sürümler",
-  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> ajanı oluşturuldu",
-  "Resolution": "Çözünürlük",
-  "AgentRenamed": "Temsilci <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> olarak değiştirdi",
-  "AIAgentsEmptyScreenTent": "İşte yapay zeka ajanlarının detayları burada"
+  "Versions": "Sürümler"
 }

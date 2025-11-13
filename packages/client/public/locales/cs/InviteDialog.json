@@ -12,14 +12,14 @@
   "InviteToRoomSearchPlaceholder": "Vyhledávání a pozvání podle jména nebo e-mailu",
   "InviteViaLink": "Pozvání prostřednictvím odkazu",
   "InviteViaLinkDescriptionAccounts": "Vytvoření univerzálního odkazu pro samoautorizaci v {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Vytvořte univerzní odkaz pro samoautorizaci v agentovi jako host.",
+  "InviteViaLinkDescriptionAgentMembers": "Vytvořte univerzní odkaz pro členy {{productName}} pro vlastní autorizaci v agentovi.",
   "InviteViaLinkDescriptionRoomGuest": "Vytvořte univerzní odkaz pro vlastní autorizaci v místnosti jako host.",
   "InviteViaLinkDescriptionRoomMembers": "Vytvořte univerzní odkaz pro členy {{productName}} pro vlastní autorizaci v místnosti.",
   "LinkCopySuccess": "Odkaz byl zkopírován",
   "SendInvitation": "Odeslat pozvánku",
+  "UserAgentMaxAvailableRoleWarning": "Hosté a uživatelé nemohou být přidáni jako manažeři agentů. Pro danou roli jsou vhodní pouze administrátoři pokojů a {{productName}}.",
   "UserMaxAvailableRoleWarning": "Hosty a uživatele nelze přiřadit jako správce místnosti. Pro zadanou roli jsou vhodní pouze správci místností a {{productName}}.",
   "UsersAlreadyAdded": "Někteří uživatelé již byli přidáni",
-  "UsersCannotBeAdded": "Vypnuté kontakty nelze přidat do místnosti.",
-  "InviteViaLinkDescriptionAgentGuest": "Vytvořte univerzní odkaz pro samoautorizaci v agentovi jako host.",
-  "InviteViaLinkDescriptionAgentMembers": "Vytvořte univerzní odkaz pro členy {{productName}} pro vlastní autorizaci v agentovi.",
-  "UserAgentMaxAvailableRoleWarning": "Hosté a uživatelé nemohou být přidáni jako manažeři agentů. Pro danou roli jsou vhodní pouze administrátoři pokojů a {{productName}}."
+  "UsersCannotBeAdded": "Vypnuté kontakty nelze přidat do místnosti."
 }

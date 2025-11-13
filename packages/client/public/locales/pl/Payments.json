@@ -88,6 +88,7 @@
   "Payer": "Płatnik",
   "PayerDescription": "Dany użytkownik ma dostęp do szczegółów płatności i jest jedynym użytkownikiem, który może dostosować limit oraz dokonać płatności. Właściciel {{productName}} i sam płacący menedżer mogą przypisać lub przekazać rolę płacącego menedżera za pomocą portalu klienta Stripe.",
   "PaymentMethod": "Metoda płatności",
+  "PerAITools": "{{currency}} za token",
   "PerBackup": "{{currency}} za 1 kopię zapasową",
   "PerBackupWithBracket": "({{currency}} za 1 kopię zapasową))",
   "PerStorage": "{{currency}} za {{amount}}/miesiąc",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "Nie dodano jeszcze żadnej płatności.",
   "YourCurrentPayment": "Twoje aktualne płatności",
   "YourCurrentPlan": "<1>Twój aktualny plan:</1> {{amount}} <2>({{price}}/miesiąc)</2>",
-  "YourPrice": "Twoja cena",
-  "PerAITools": "{{currency}} za token"
+  "YourPrice": "Twoja cena"
 }

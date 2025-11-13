@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "De agent <strong>\"{{agentName}}\"</strong> wordt permanent verwijderd. Alle data en gebruikersrechten gaan verloren.",
+  "DeleteAIAgentTitle": "Deze agent verwijderen?",
+  "DeleteAIAgentWarning": "Ik begrijp de gevolgen en wil de agent verwijderen.",
   "DeleteAllGroupDescription": "De geselecteerde groepen worden verwijderd. Gebruikers in de groepen worden niet verwijderd uit {{productName}}. Weet u zeker dat u door wilt gaan?",
   "DeleteAllGroupsTitle": "Groepen verwijderen",
   "DeleteFiles": "U gaat nu <strong>bestanden ({{filesCount}})</strong> naar {{trashSection}} verplaatsen.",
@@ -29,8 +32,5 @@
   "ItemsDeletedAfter": "Deze items worden over 30 dagen permanent verwijderd.",
   "ItemsPermanentlyDeleted": "Deze items worden permanent verwijderd uit {{trashSection}}.",
   "removeFromListDescription": "U bent op het punt om <1>{{title}}</1> uit de lijst te verwijderen. Bent u zeker dat u verder wilt gaan?",
-  "removeFromListDescriptionPlural": "U gaat <1>items ({{count}})</1> uit de lijst verwijderen. Bent u zeker dat u verder wilt gaan?",
-  "DeleteAIAgentDescription": "De agent <strong>\"{{agentName}}\"</strong> wordt permanent verwijderd. Alle data en gebruikersrechten gaan verloren.",
-  "DeleteAIAgentTitle": "Deze agent verwijderen?",
-  "DeleteAIAgentWarning": "Ik begrijp de gevolgen en wil de agent verwijderen."
+  "removeFromListDescriptionPlural": "U gaat <1>items ({{count}})</1> uit de lijst verwijderen. Bent u zeker dat u verder wilt gaan?"
 }

@@ -3,7 +3,7 @@
   "content": "Spaces",
   "content_en_sha1_hash": "9b584b52b28402594628cea231d8d1cd0eb03d50",
   "created_at": "2025-05-19T21:30:48.971Z",
-  "updated_at": "2025-11-13T07:58:08.512Z",
+  "updated_at": "2025-11-13T07:42:11.939Z",
   "comment": {
     "text": "This translation key is used for the label of a settings section titled \"Spaces\", which appears on a management settings page. It displays the text when the user navigates to this section, serving as a header or title. The translation should accurately convey the concept of spaces in the context of management settings.",
     "is_auto": true,

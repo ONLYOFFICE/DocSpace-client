@@ -3,7 +3,7 @@
   "content": "Move to archive",
   "content_en_sha1_hash": "bc085e822ae67c9e26aba6df62730c436e6c09b2",
   "created_at": "2025-05-19T21:30:55.866Z",
-  "updated_at": "2025-11-13T07:58:08.494Z",
+  "updated_at": "2025-11-13T07:42:11.919Z",
   "comment": {
     "text": "This translation key is used to display the text \"Move to archive\" in the application's UI. It appears as a label on an action button or menu option, likely within a file management interface, and is intended to be displayed when the user has selected the \"archive\" action.",
     "is_auto": true,

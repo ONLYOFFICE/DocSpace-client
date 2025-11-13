@@ -88,6 +88,7 @@
   "Payer": "Betaler",
   "PayerDescription": "Deze gebruiker heeft toegang tot de betalingsgegevens en is de enige gebruiker die de quota kan aanpassen en betalingen kan verrichten. De {{productName}}-eigenaar, evenals de betalende beheerder zelf, kan de rol van betalende beheerder opnieuw toewijzen via het Stripe klantenportaal.",
   "PaymentMethod": "Betaalmethode",
+  "PerAITools": "{{currency}} per token",
   "PerBackup": "{{currency}} per 1 back-up",
   "PerBackupWithBracket": "({{currency}} per 1 back-up))",
   "PerStorage": "{{currency}} per {{amount}}/maand",

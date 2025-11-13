@@ -3,7 +3,7 @@
   "content": "PDF form",
   "content_en_sha1_hash": "3ca9af6a134077a287add11f88e394868153a2c0",
   "created_at": "2025-05-19T21:30:53.760Z",
-  "updated_at": "2025-11-13T07:58:07.825Z",
+  "updated_at": "2025-11-13T07:42:11.107Z",
   "comment": {
     "text": "The translation key \"PDFform\" is used to display the label for a PDF form element in a modal dialog. It appears on a dialog's header and is typically translated to \"PDF form\".",
     "is_auto": true,

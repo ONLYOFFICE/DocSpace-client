@@ -3,7 +3,7 @@
   "content": "Header name",
   "content_en_sha1_hash": "b46f85a9b7d61d832e708d435d51c596f9144100",
   "created_at": "2025-10-27T16:14:31.645Z",
-  "updated_at": "2025-11-13T07:58:08.095Z",
+  "updated_at": "2025-11-13T10:21:17.842Z",
   "comment": {
     "text": "This key displays the label for a field that specifies the name of a header setting within the AI Settings section of the Portal Settings. It appears as a label on a text input field, likely allowing users to customize header names. Translators should ensure this name accurately reflects the setting it describes.",
     "is_auto": true,

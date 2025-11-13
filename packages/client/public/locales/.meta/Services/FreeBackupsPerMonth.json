@@ -3,7 +3,7 @@
   "content": "Free backups: {{value}}/{{maxValue}} per current month.",
   "content_en_sha1_hash": "8cf13b9966c2fbcaa58aab806bc96734da72d035",
   "created_at": "2025-08-21T14:45:38.903Z",
-  "updated_at": "2025-11-13T07:58:08.083Z",
+  "updated_at": "2025-11-13T07:42:11.868Z",
   "comment": {
     "text": "This translation key displays the number of free backups remaining for the current month. It's used to inform the user about their backup usage within the Portal Settings page, specifically within a warning component. The key includes variables for the current backup count (`value`) and the maximum allowed (`maxValue`).",
     "is_auto": true,

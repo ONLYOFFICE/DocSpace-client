@@ -3,7 +3,7 @@
   "content": "Web Search Engine",
   "content_en_sha1_hash": "fd0bb421e0702774cc60741a1f08a5801ba2beb9",
   "created_at": "2025-10-27T16:14:31.660Z",
-  "updated_at": "2025-11-13T07:58:08.093Z",
+  "updated_at": "2025-11-13T10:21:17.840Z",
   "comment": {
     "text": "This translation key provides the label for a \"Web Search Engine\" option, likely within a settings panel or configuration area. It's used as the label for a dropdown or selection field where users can choose a search engine. The text appears in the Portal Settings, specifically within the AI Settings section.",
     "is_auto": true,

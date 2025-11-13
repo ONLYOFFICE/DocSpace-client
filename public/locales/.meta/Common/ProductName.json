@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-11-13T07:58:07.646Z",
+  "updated_at": "2025-11-13T10:21:17.697Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -132,7 +132,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/hooks/useMCP.ts",
-      "line_number": 81,
+      "line_number": 85,
+      "context": "getServersListForRoom(agentId).then((res) => {\n if (res) {\n const items = res.map((item) => {\n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n return {\n key: item.id,\n id: item.id,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/hooks/useMCP.ts",
+      "line_number": 85,
       "context": "getServersListForRoom(agentId).then((res) => {\n if (res) {\n const items = res.map((item) => {\n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n return {\n key: item.id,\n id: item.id,",
       "module": "/packages/client"
     },

@@ -416,8 +416,29 @@ export const getFolderIcon = (
   isBaseTheme: boolean,
   access: AccessType,
   folderType: Nullable<FolderType>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ) => {
   return match([roomType, folderType, access])
+    .with(
+      [
+        P._,
+        P.when(
+          () =>
+            security &&
+            "UseChat" in security &&
+            !security?.UseChat &&
+            isResultsTab,
+        ),
+        P._,
+      ],
+      () =>
+        isBaseTheme ? (
+          <ChatNoAccessRightsLightIcon />
+        ) : (
+          <ChatNoAccessRightsDarkIcon />
+        ),
+    )
     .with([FolderType.FormRoom, P._, P._], () =>
       isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
     )

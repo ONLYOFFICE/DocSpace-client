@@ -59,6 +59,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
+import AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
@@ -100,6 +101,7 @@ type ViewProps = UseContactsProps &
     isAdmin: AuthStore["isAdmin"];
     aiConfig: SettingsStore["aiConfig"];
     standalone: SettingsStore["standalone"];
+    isResultTab: AiRoomStore["isResultTab"];
   };
 
 const View = ({
@@ -174,9 +176,10 @@ const View = ({
   isAdmin,
   aiConfig,
   standalone,
+  isResultTab,
 }: ViewProps) => {
   const location = useLocation();
-  const { t } = useTranslation(["Files", "Common"]);
+  const { t } = useTranslation(["Files", "Common", "AIRoom"]);
 
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
@@ -499,6 +502,21 @@ const View = ({
     getView();
   }, [location, isContactsPage, isProfilePage, isChatPage, showToastAccess]);
 
+  React.useEffect(() => {
+    if (isResultTab && !canUseChat && !showBodyLoader) {
+      toastr.info(
+        <Trans
+          t={t}
+          ns="AIRoom"
+          i18nKey="AgentInViewModeWarning"
+          components={{
+            strong: <strong />,
+          }}
+        />,
+      );
+    }
+  }, [isResultTab, canUseChat, showBodyLoader, t]);
+
   const attachmentFile = React.useMemo(
     () => aiAgentSelectorDialogProps?.file,
     [aiAgentSelectorDialogProps?.file],
@@ -584,7 +602,9 @@ export const ViewComponent = inject(
     dialogsStore,
     accessRightsStore,
     settingsStore,
+    aiRoomStore,
   }: TStore) => {
+    const { isResultTab } = aiRoomStore;
     const { aiConfig, standalone } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
@@ -726,6 +746,7 @@ export const ViewComponent = inject(
       isAdmin,
       aiConfig,
       standalone,
+      isResultTab,
     };
   },
 )(observer(View));

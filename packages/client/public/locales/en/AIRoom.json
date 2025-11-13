@@ -24,5 +24,6 @@
   "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results.",
   "ResultStorage": "Result Storage",
   "UploadFilesDevice": "Upload files from your personal device",
-  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}"
+  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "You’re in <strong>view-only</strong> mode for this AI agent. You can see the results of AI chat activity from other users."
 }

@@ -119,6 +119,7 @@ export const useEmptyView = (
       isArchiveFolderRoot,
       isRootEmptyPage,
       rootFolderType,
+      security,
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
@@ -135,6 +136,8 @@ export const useEmptyView = (
       parentRoomType,
       isRootEmptyPage,
       rootFolderType,
+      security,
+      isResultsTab,
     );
 
     return { description, title, icon };

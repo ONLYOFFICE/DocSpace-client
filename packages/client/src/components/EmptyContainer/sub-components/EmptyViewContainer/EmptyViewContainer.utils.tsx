@@ -432,6 +432,8 @@ export const getRoomIcon = (
   type: RoomsType,
   isBaseTheme: boolean,
   access: AccessType,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ) => {
   return match([type, access])
     .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
@@ -557,6 +559,20 @@ export const getRoomIcon = (
       ) : (
         <EmptyCustomRoomCollaboratorDarkIcon />
       ),
+    )
+    .with(
+      [
+        RoomsType.AIRoom,
+        P.when(
+          () =>
+            security &&
+            "UseChat" in security &&
+            !security?.UseChat &&
+            isResultsTab,
+        ), // viewer
+      ],
+      () =>
+        isBaseTheme ? <EmptyAIAgentsLightIcon /> : <EmptyAIAgentsDarkIcon />,
     )
     .with(
       [

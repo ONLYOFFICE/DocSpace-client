@@ -6,6 +6,7 @@
   "EmptyKnowledgeDescriptionActions": "Try these actions to get started:",
   "EmptyKnowledgeTitle": "No files uploaded yet",
   "EmptyResultsDescription": "Files generated in AI-Chat will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.",
+  "EmptyResultsViewerDescription": "You’ll see the results of AI chat activity from other users here once they become available.",
   "EmptyResultsTitle": "No results yet",
   "Instructions": "Instructions",
   "InstructionsDescription": "Define the purpose and behavior of chats within this room. What should they do? How should they function? What should be avoided?",

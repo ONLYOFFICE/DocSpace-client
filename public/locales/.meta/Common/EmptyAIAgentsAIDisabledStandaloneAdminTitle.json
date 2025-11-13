@@ -1,30 +1,78 @@
 {
   "key_path": "EmptyAIAgentsAIDisabledStandaloneAdminTitle",
-  "content": "AI provider are not available yet",
-  "content_en_sha1_hash": "038a227fa26bc660b4095aece1e11ecb5242f0fa",
-  "created_at": "2025-11-03T12:10:17.249Z",
-  "updated_at": "2025-11-03T12:13:39.535Z",
+  "content": "AI provider is not available yet",
+  "content_en_sha1_hash": "ac68bde04216f5db7b195fdf7e31f837ebbcf37c",
+  "created_at": "2025-11-13T07:57:45.555Z",
+  "updated_at": "2025-11-13T08:04:35.649Z",
   "comment": {
-    "text": "This key displays a message informing users that AI provider functionality is currently unavailable. It appears when a user is in a standalone mode and is an administrator. This message explains why AI agents are not accessible within the system.",
+    "text": "This text appears as a title indicating that AI functionality is currently unavailable for standalone administrators. It informs users that the AI provider is not yet accessible in their environment. This message helps explain why AI features are not working.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:13:39.535Z"
+    "updated_at": "2025-11-13T08:04:35.649Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 193,
-      "context": "standalone: boolean,\n isDocSpaceAdmin: boolean,\n ) => {\n return match([standalone, isDocSpaceAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\"),\n )\n .with([false, true], () =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle\"),\n )\n .otherwise(() => t(\"EmptyView:EmptyAIAgentsAIDisabledUserTitle\"));",
+      "context": "standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n return match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\"),\n )\n .with([false, true], () =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle\"),\n )\n .otherwise(() => t(\"EmptyView:EmptyAIAgentsAIDisabledUserTitle\"));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
       "line_number": 64,
-      "context": ");\n \n const title = !canUseChat\n ? t(\"Common:AIChatNoAccessTitle\")\n : isDocSpaceAdmin && standalone\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\")\n : t(\"Common:AIFeaturesAreCurrentlyDisabled\");\n \n const description = !canUseChat\n ? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isDocSpaceAdmin])",
+      "context": ");\n \n const title = !canUseChat\n ? t(\"Common:AIChatNoAccessTitle\")\n : isPortalAdmin && standalone\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\")\n : t(\"Common:AIFeaturesAreCurrentlyDisabled\");\n \n const description = !canUseChat\n ? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isPortalAdmin])",
       "module": "/packages/shared"
     }
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

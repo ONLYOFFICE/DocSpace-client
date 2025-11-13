@@ -3,7 +3,7 @@
   "content": "Files and folders shared by other users will be imported into <1>{{sectionName}}</1>.<br><1>Please note:</1> some access rights may get lost during import.",
   "content_en_sha1_hash": "e22c23d457bed53fabab5837d1f1d5d30dd96fc4",
   "created_at": "2025-10-03T10:07:00.021Z",
-  "updated_at": "2025-10-17T14:44:37.836Z",
+  "updated_at": "2025-11-13T07:58:08.217Z",
   "comment": {
     "text": "This text explains that files and folders shared by other users will be imported into a specific settings section. It also warns that some access rights might be lost during the import process. It appears as a description related to importing shared files and folders within the Portal Settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 186,
+      "line_number": 212,
       "context": "onChange={(e) => onChange(e, \"importSharedFilesAndFolders\")}\n sectionName={t(\"Settings:SharedFilesAndFolders\")}\n description={\n <Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"\n values={{\n sectionName: t(\"Common:SharedWithMe\"),\n }}\n components={{",
       "module": "/packages/client"
     }

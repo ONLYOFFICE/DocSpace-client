@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import equal from "fast-deep-equal/react";
@@ -207,6 +207,12 @@ const AddUpdateDialogComponent = ({
 
   const onResetKey = () => setIsKeyInputHidden(false);
 
+  const filteredProviderTypes = useMemo(() => {
+    return providerTypes.filter((item) =>
+      aiProviderTypesWithUrls.find((p) => p.type === item.key),
+    );
+  }, [aiProviderTypesWithUrls]);
+
   return (
     <ModalDialog
       visible
@@ -225,7 +231,7 @@ const AddUpdateDialogComponent = ({
             removeMargin
           >
             <ComboBox
-              options={providerTypes}
+              options={filteredProviderTypes}
               selectedOption={selectedOption}
               onSelect={onSelectProvider}
               scaled
@@ -268,8 +274,10 @@ const AddUpdateDialogComponent = ({
               onChange={(e) => setProviderUrl(e.target.value)}
               scale
               placeholder={t("OAuth:EnterURL")}
-              isDisabled={isRequestRunning}
-              isReadOnly={selectedOption.key !== ProviderType.OpenAiCompatible}
+              isDisabled={
+                isRequestRunning ||
+                selectedOption.key !== ProviderType.OpenAiCompatible
+              }
             />
             <Text className={styles.fieldHint}>
               {t("AISettings:ProviderURLInputHint")}

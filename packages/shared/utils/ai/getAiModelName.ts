@@ -26,7 +26,21 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-export { getAiProviderIcon } from "./getAiProviderIcon";
-export { getServerIcon } from "./getServerIcon";
-export { getAiProviderLabel } from "./getAiProviderLabel";
-export { getAiModelName } from "./getAiModelName";
+export const getAiModelName = (id: string) => {
+  switch (id) {
+    case "gpt-5":
+      return "gpt-5";
+    case "gpt-4.1":
+      return "gpt-4.1";
+    case "deepseek-ai/DeepSeek-V3.1":
+      return "DeepSeek-V3.1";
+    case "Qwen/Qwen3-235B-A22B-fp8-tput":
+      return "Qwen3";
+    default:
+      if (id.includes("claude-haiku-4-5")) return "Claude Haiku 4.5";
+      if (id.includes("claude-sonnet-4-5")) return "Claude Sonnet 4.5";
+      if (id.includes("claude-opus-4-1")) return "Claude Opus 4.1";
+
+      return id;
+  }
+};

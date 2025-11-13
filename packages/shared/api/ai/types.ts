@@ -66,6 +66,7 @@ export type TModel = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
   modelId: string;
+  name?: string;
 };
 
 export type TModelList = TModel[];

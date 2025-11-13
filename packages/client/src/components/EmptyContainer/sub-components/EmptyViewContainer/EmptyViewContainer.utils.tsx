@@ -90,6 +90,8 @@ import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.fo
 
 import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
+import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
 import {
   FilesSelectorFilterTypes,
@@ -572,7 +574,11 @@ export const getRoomIcon = (
         ), // viewer
       ],
       () =>
-        isBaseTheme ? <EmptyAIAgentsLightIcon /> : <EmptyAIAgentsDarkIcon />,
+        isBaseTheme ? (
+          <ChatNoAccessRightsLightIcon />
+        ) : (
+          <ChatNoAccessRightsDarkIcon />
+        ),
     )
     .with(
       [

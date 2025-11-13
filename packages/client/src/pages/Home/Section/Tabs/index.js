@@ -35,6 +35,7 @@ const SectionSubmenuContent = ({
   allowInvitingGuests,
   checkGuests,
   currentClientView,
+  canUseChat,
 }) => {
   const isContacts =
     currentClientView === "users" || currentClientView === "groups";
@@ -44,7 +45,7 @@ const SectionSubmenuContent = ({
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
-  if (isAIRoom) return <AiRoomTabs />;
+  if (isAIRoom && canUseChat) return <AiRoomTabs />;
 
   if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
     return <RoomTemplatesTabs />;
@@ -57,7 +58,10 @@ export default inject(
     settingsStore,
     clientLoadingStore,
     selectedFolderStore,
+    accessRightsStore,
   }) => {
+    const { canUseChat } = accessRightsStore;
+
     const { isRoomsFolderRoot, isTemplatesFolder } = treeFoldersStore;
 
     const { allowInvitingGuests, checkGuests } = settingsStore;
@@ -71,6 +75,7 @@ export default inject(
       allowInvitingGuests,
       checkGuests,
       currentClientView,
+      canUseChat,
     };
   },
 )(observer(SectionSubmenuContent));

@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
-import { useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router";
 
 import Chat from "@docspace/shared/components/chat";
 import useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
@@ -50,6 +50,8 @@ import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers"
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { SearchArea } from "@docspace/shared/enums";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -57,6 +59,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -506,6 +509,25 @@ const View = ({
   }, [setAiAgentSelectorDialogProps]);
   // console.log("currentView", currentView);
 
+  const shouldRedirectToResultStorage =
+    currentView === "chat" && !showBodyLoader && !canUseChat;
+
+  if (shouldRedirectToResultStorage) {
+    const agentId =
+      selectedFolderStore.rootRoomId?.toString() ||
+      selectedFolderStore.id?.toString() ||
+      roomId?.toString() ||
+      "";
+
+    const filesFilter = FilesFilter.getDefault();
+    filesFilter.folder = agentId;
+    filesFilter.searchArea = SearchArea.ResultStorage;
+
+    const path = getCategoryUrl(CategoryType.AIAgent, agentId);
+
+    return <Navigate to={`${path}?${filesFilter.toUrlParams()}`} />;
+  }
+
   return (
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
       <Consumer>
@@ -525,7 +547,6 @@ const View = ({
               isLoading={showBodyLoader}
               attachmentFile={attachmentFile}
               clearAttachmentFile={onClearAttachmentFile}
-              canUseChat={canUseChat}
               toolsSettings={toolsSettings}
               initChats={initChats}
               isAdmin={isAdmin}

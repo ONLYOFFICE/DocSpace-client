@@ -53,7 +53,6 @@ const Chat = observer(
     toolsSettings,
     isAdmin = false,
     standalone = false,
-    canUseChat = false,
     aiReady = false,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
@@ -71,7 +70,6 @@ const Chat = observer(
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen
-            canUseChat={canUseChat}
             aiReady={aiReady}
             standalone={standalone}
             isPortalAdmin={isAdmin}
@@ -110,17 +108,15 @@ const ChatWrapper = (props: ChatProps) => {
 
     isAdmin = false,
     standalone = false,
-    canUseChat = false,
     aiReady = false,
   } = props;
 
   const isLoadingChat = isLoading || !roomId;
   const hasChats = initChats?.chats?.length > 0;
 
-  if (!isLoadingChat && (!canUseChat || (!aiReady && !hasChats))) {
+  if (!isLoadingChat && !aiReady && !hasChats) {
     return (
       <ChatNoAccessScreen
-        canUseChat={canUseChat}
         aiReady={aiReady}
         standalone={standalone}
         isPortalAdmin={isAdmin}

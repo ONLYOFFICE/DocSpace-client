@@ -3,7 +3,7 @@
   "content": "Sorting Index",
   "content_en_sha1_hash": "fbd51b4c3b96b0eedc634a5831a2a1c4ec82f26e",
   "created_at": "2025-05-19T21:30:48.953Z",
-  "updated_at": "2025-11-13T07:58:08.067Z",
+  "updated_at": "2025-11-13T07:42:11.502Z",
   "comment": {
     "text": "The \"SortingIndex\" translation key is used to display the label for a sorting index feature in the application. It appears as part of header labels on the home page when in edit mode, and is intended to help users understand what this feature does. Translators should provide a clear and concise description that reflects this functionality.",
     "is_auto": true,

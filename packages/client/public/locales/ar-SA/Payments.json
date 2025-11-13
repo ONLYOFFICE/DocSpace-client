@@ -88,6 +88,7 @@
   "Payer": "طريقة الدفع",
   "PayerDescription": "هذا المستخدم لديه حق الوصول إلى تفاصيل الدفع وهو المستخدم الوحيد الذي يمكنه تعديل الحصة وإجراء المدفوعات. يمكن لمالك {{productName}} ، بالإضافة إلى مدير الدفع نفسه ، إعادة تعيين دور مدير الدفع باستخدام بوابة عملاء سترب.",
   "PaymentMethod": "طريقة الدفع",
+  "PerAITools": "{{currency}} لكل توكن",
   "PerBackup": "{{currency}} لكل نسخة احتياطية واحدة",
   "PerBackupWithBracket": "({{currency}} لكل نسخة احتياطية واحدة)",
   "PerStorage": "{{currency}} لكل {{amount}}/شهر",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "لم تقم بإضافة أي دفعة",
   "YourCurrentPayment": "دفعتك الحالية",
   "YourCurrentPlan": "<1>خطة الاشتراك الحالية:</1> {{amount}} <2>({{price}}/الشهر)</2>",
-  "YourPrice": "سعرك",
-  "PerAITools": "{{currency}} لكل توكن"
+  "YourPrice": "سعرك"
 }

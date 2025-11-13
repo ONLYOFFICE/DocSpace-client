@@ -417,6 +417,7 @@
   "GoBack": "戻る",
   "GotIt": "了解",
   "GoToRoom": "ルームへ移動する",
+  "GoToSettings": "設定に移動",
   "Group": "グループ",
   "Groups": "グループ",
   "GroupsNotFoundDescription": "検索条件に一致するグループがありません。検索パラメータを調整するか、検索フィールドをクリアしてグループの全リストを表示してください。",
@@ -989,6 +990,5 @@
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
-  "YourTurn": "あなたの番です",
-  "GoToSettings": "設定に移動"
+  "YourTurn": "あなたの番です"
 }

@@ -3,7 +3,7 @@
   "content": "Me and members ({{ membersCount }})",
   "content_en_sha1_hash": "a3d819681518616be864b842599d088e7cd38fae",
   "created_at": "2025-05-19T21:30:55.837Z",
-  "updated_at": "2025-11-13T07:58:07.813Z",
+  "updated_at": "2025-11-13T07:42:11.142Z",
   "comment": {
     "text": "This translation key is used to display a label indicating whether you are able to view or edit files based on your membership status among users and groups. It appears in the Create Edit Room Dialog component, specifically at line 99 of TemplateAccess.tsx, and depends on the number of members in the users list.",
     "is_auto": true,

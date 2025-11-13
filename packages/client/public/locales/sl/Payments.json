@@ -88,6 +88,7 @@
   "Payer": "Plačnik",
   "PayerDescription": "Ta uporabnik ima dostop do podrobnosti plačila in je edini uporabnik, ki lahko prilagaja račun in izvaja plačila. Lastnik {{productName}} in sam upravitelj plačevanja lahko prerazporedita vlogo upravitelja plačevanja prek portala za stranke Stripe.",
   "PaymentMethod": "Način plačila",
+  "PerAITools": "{{currency}} na žeton",
   "PerBackup": "{{currency}} na 1 varnostno kopijo",
   "PerBackupWithBracket": "({{currency}} na 1 varnostno kopijo))",
   "PerStorage": "{{currency}} na {{amount}}/mesec",

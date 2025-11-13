@@ -3,7 +3,7 @@
   "content": "Upload files",
   "content_en_sha1_hash": "41aca16f905ad31d0eec695b710915a4892e116f",
   "created_at": "2025-05-19T21:30:57.048Z",
-  "updated_at": "2025-11-13T07:58:07.656Z",
+  "updated_at": "2025-11-13T07:42:11.018Z",
   "comment": {
     "text": "The \"UploadFiles\" translation key is used to display the label for a button that allows users to upload files in an article component. It appears as part of a dropdown menu and provides a clear indication of its purpose, making it accessible for translators to ensure consistency across different languages.",
     "is_auto": true,

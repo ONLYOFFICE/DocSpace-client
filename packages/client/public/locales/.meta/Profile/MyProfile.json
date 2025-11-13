@@ -3,7 +3,7 @@
   "content": "My profile",
   "content_en_sha1_hash": "2f3df0a939fdd38f0e2152b32e778eadb937d821",
   "created_at": "2025-05-19T21:30:53.371Z",
-  "updated_at": "2025-11-13T07:58:08.066Z",
+  "updated_at": "2025-11-13T07:42:11.500Z",
   "comment": {
     "text": "This translation key is used for the profile name \"My Profile\" on a user's profile page. It appears as a headline and is displayed when viewing your own profile information.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Items in {{sectionName}} are automatically deleted after 30 days.",
   "content_en_sha1_hash": "72740d2f13fab9038a1cf3a73558f696ef70b1af",
   "created_at": "2025-06-02T10:19:23.448Z",
-  "updated_at": "2025-11-13T07:58:08.068Z",
+  "updated_at": "2025-11-13T07:42:11.504Z",
   "comment": {
     "text": "This translation key is used to display a warning message indicating that items in a specific section are automatically deleted after 30 days. It appears in the UI as part of a header on the Home page and in certain warnings, informing users about the auto-deletion policy for their files or personal folders.",
     "is_auto": true,

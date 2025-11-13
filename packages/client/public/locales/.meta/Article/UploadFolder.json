@@ -3,7 +3,7 @@
   "content": "Upload folder",
   "content_en_sha1_hash": "e77a1496f8e8093547d02f31abdfb67b6e95e806",
   "created_at": "2025-05-19T21:30:57.049Z",
-  "updated_at": "2025-11-13T07:58:07.661Z",
+  "updated_at": "2025-11-13T07:42:11.027Z",
   "comment": {
     "text": "The translation key \"UploadFolder\" is used to display the text for an upload folder button. It appears in a button component, where it allows users to select a folder for uploading files, and its purpose is to provide a clear label for this action.",
     "is_auto": true,

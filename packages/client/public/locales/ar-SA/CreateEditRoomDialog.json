@@ -11,6 +11,7 @@
   "CreateTagOption": "إنشاء إشارة",
   "Diagonal": "قطري",
   "DisableRoomQuota": "تعطيل الحصة لهذه الغرفة",
+  "DisableRoomQuotaAgent": "تعطيل الحصة النسبية لهذا الوكيل",
   "FileLifetime": "عمر الملف",
   "FileLifetimeDescription": "تعيين عمر الملف لحذف الملفات تلقائيًا في هذه الغرفة بعد فترة محددة. يبدأ العمر من تاريخ تحميل أو إنشاء الملف.",
   "FilesOlderThan": "الملفات الأقدم من:",
@@ -27,6 +28,7 @@
   "RoomEditing": "تعديل الغرفة",
   "RootFolderLabel": "المجلد الرئيسي",
   "StorageDescription": "تم تحديد حصص التخزين لكل غرفة. يمكنك تغيير هذه القيمة أو إيقاف تشغيل حد التخزين.",
+  "StorageDescriptionAgent": "تم تعيين حصة التخزين لكل وكيل. يمكنكم تغيير هذه القيمة أو إيقاف تشغيل حد التخزين.",
   "TagsPlaceholder": "أضف وسم",
   "ThirdPartyStorageComboBoxPlaceholder": "حدد المساحة التخزينية",
   "ThirdPartyStorageNoStorageAlert": "قبل ذلك ، تحتاج إلى توصيل الخدمة المقابلة في قسم \"التكامل\". خلاف ذلك ، لن يكون الاتصال ممكنًا.",
@@ -37,7 +39,5 @@
   "UserName": "اسم المستخدم",
   "ViewerInfo": "معلومات العارض",
   "WatermarkPreview": "معاينة العلامة المائية",
-  "WatermarkPreviewHelp": "تظهر هذه المعاينة تقريبًا كيف ستبدو العلامة المائية في ملفاتك.",
-  "DisableRoomQuotaAgent": "تعطيل الحصة النسبية لهذا الوكيل",
-  "StorageDescriptionAgent": "تم تعيين حصة التخزين لكل وكيل. يمكنكم تغيير هذه القيمة أو إيقاف تشغيل حد التخزين."
+  "WatermarkPreviewHelp": "تظهر هذه المعاينة تقريبًا كيف ستبدو العلامة المائية في ملفاتك."
 }

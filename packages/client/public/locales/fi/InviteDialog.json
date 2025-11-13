@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Etsi ja kutsu nimellä tai sähköpostilla",
   "InviteViaLink": "Kutsu linkin kautta",
   "InviteViaLinkDescriptionAccounts": "Luo universaali linkki itsevaltuutukselle {{productName}}:lla.",
+  "InviteViaLinkDescriptionAgentGuest": "Luo universaali linkki itsevaltuutukselle agentissa vieraana.",
+  "InviteViaLinkDescriptionAgentMembers": "Luo universaali linkki {{productName}}-jäsenille itsevahvistusta varten agentissa.",
   "InviteViaLinkDescriptionRoomGuest": "Luo universaali linkki itsevahvistukseen huoneessa vieraana.",
   "InviteViaLinkDescriptionRoomMembers": "Luo universaali linkki {{productName}}-jäsenille itsevahvistusta varten huoneessa.",
   "LinkCopySuccess": "Linkki on kopioitu",
   "SendInvitation": "Lähetä kutsu",
+  "UserAgentMaxAvailableRoleWarning": "Vieraat ja käyttäjät eivät voi olla agenttien päälliköitä. Vain huone- ja {{productName}}-ylläpitäjät soveltuvat määritettyyn rooliin.",
   "UserMaxAvailableRoleWarning": "Vieraita ja käyttäjiä ei voida asettaa huoneen johtajiksi. Vain huoneen ja {{productName}} pääkäyttäjät ovat sopivia tähän rooliin.",
   "UsersAlreadyAdded": "Jotkut käyttäjät on jo lisätty.",
   "UsersCannotBeAdded": "Poistetut yhteystiedot ei voi lisätä huoneeseen"

@@ -3,7 +3,7 @@
   "content": "Choose from Templates",
   "content_en_sha1_hash": "8e45ce4bac54530298690bc33665f4627cd46fb2",
   "created_at": "2025-05-19T21:30:43.457Z",
-  "updated_at": "2025-11-13T07:58:07.651Z",
+  "updated_at": "2025-11-13T07:42:11.008Z",
   "comment": {
     "text": "The translation key \"ChooseFromTemplates\" is used to display a label for a button that allows users to select from pre-defined templates. This key appears in the UI as part of a dropdown menu on a main button, providing an alternative way for users to configure their document.",
     "is_auto": true,

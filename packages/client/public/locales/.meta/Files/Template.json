@@ -3,7 +3,7 @@
   "content": "Template",
   "content_en_sha1_hash": "3ec1ae061c27325c7ecb543adf91235e22cbc9ed",
   "created_at": "2025-05-19T21:30:56.219Z",
-  "updated_at": "2025-11-13T07:58:08.067Z",
+  "updated_at": "2025-11-13T07:42:11.503Z",
   "comment": {
     "text": "This translation key is used to display a label that indicates whether a template feature is available. In the provided context, it appears on a button or similar UI element in the \"/packages/client/src/pages/Home/Section/Header/index.js\" file.",
     "is_auto": true,

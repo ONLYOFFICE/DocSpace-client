@@ -3,7 +3,7 @@
   "content": "Share room",
   "content_en_sha1_hash": "6b4b82e0d7f345d4b85db2c03f44214a284a7ba3",
   "created_at": "2025-05-19T21:30:56.199Z",
-  "updated_at": "2025-11-13T07:58:08.067Z",
+  "updated_at": "2025-11-13T07:42:11.501Z",
   "comment": {
     "text": "The \"ShareRoom\" translation key is used to display a tooltip label in a navigation button on a file management interface. It corresponds to the phrase \"Share room\". This translation appears when users have access to share room functionality and view the option to share files or folders.",
     "is_auto": true,

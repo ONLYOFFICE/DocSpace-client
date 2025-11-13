@@ -3,7 +3,7 @@
   "content": "Space Management",
   "content_en_sha1_hash": "24d0ef152cae43af192222fa4e73c1a54ebe6318",
   "created_at": "2025-05-19T21:30:48.962Z",
-  "updated_at": "2025-11-13T07:58:08.513Z",
+  "updated_at": "2025-11-13T07:42:11.940Z",
   "comment": {
     "text": "This translation key is used for \"Space Management\" content displayed on a settings page header, which toggles visibility of the title. It appears in the management layout and is translated using the \"Common:SpaceManagement\" key.",
     "is_auto": true,

@@ -417,6 +417,7 @@
   "GoBack": " Torna indietro",
   "GotIt": "Capito",
   "GoToRoom": "vai nella stanza",
+  "GoToSettings": "Vai alle impostazioni",
   "Group": "Gruppo",
   "Groups": "Gruppi",
   "GroupsNotFoundDescription": "Nessun gruppo corrisponde alla tua ricerca. Modifica i parametri di ricerca o cancella la ricerca per visualizzare l'elenco completo dei gruppi.",
@@ -989,6 +990,5 @@
   "YouHaveUnsavedChanges": "Hai delle modifiche non salvate",
   "YourCurrentDomain": "Il tuo dominio attuale",
   "YourLogo": "Il tuo logo",
-  "YourTurn": "Il tuo turno",
-  "GoToSettings": "Vai alle impostazioni"
+  "YourTurn": "Il tuo turno"
 }

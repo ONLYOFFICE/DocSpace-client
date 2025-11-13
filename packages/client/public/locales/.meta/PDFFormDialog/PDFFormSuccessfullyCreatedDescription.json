@@ -3,7 +3,7 @@
   "content": "Your PDF form is ready to be filled out. Copy public link to start the form filling process or Invite other users to this room.",
   "content_en_sha1_hash": "e0b80d168f5e86028d159e7def09f956b8f49d39",
   "created_at": "2025-05-19T21:30:53.769Z",
-  "updated_at": "2025-11-13T07:58:07.823Z",
+  "updated_at": "2025-11-13T07:42:11.104Z",
   "comment": {
     "text": "This translation key contains a message used when a user creates and successfully downloads a PDF form. It appears as a description in a modal dialog after creating or downloading a form, informing users about the next steps.",
     "is_auto": true,

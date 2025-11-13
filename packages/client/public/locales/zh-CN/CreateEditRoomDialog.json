@@ -11,6 +11,7 @@
   "CreateTagOption": "创建标签",
   "Diagonal": "对角线",
   "DisableRoomQuota": "停用该房间的配额",
+  "DisableRoomQuotaAgent": "禁用此智能体的配额",
   "FileLifetime": "文件有效期",
   "FileLifetimeDescription": "设置文件有效期，此房间中的文件会在定义的时间段后自动删除。有效期从文件上传/创建之日起开始计算。",
   "FilesOlderThan": "超过以下时间的文件：",
@@ -27,6 +28,7 @@
   "RoomEditing": "房间编辑",
   "RootFolderLabel": "根文件夹",
   "StorageDescription": "您可以为每个房间设置存储空间配额，可以更改配额值，或关闭存储空间限制。",
+  "StorageDescriptionAgent": "为每个智能体设置存储配额。您可以更改此值或关闭存储限制。",
   "TagsPlaceholder": "添加标签",
   "ThirdPartyStorageComboBoxPlaceholder": "选择存储空间",
   "ThirdPartyStorageNoStorageAlert": "您需要在此之前于“集成”部分中连接相应服务。否则将无法建立连接。",
@@ -37,7 +39,5 @@
   "UserName": "用户名称",
   "ViewerInfo": "查看者信息",
   "WatermarkPreview": "水印预览",
-  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果",
-  "DisableRoomQuotaAgent": "禁用此智能体的配额",
-  "StorageDescriptionAgent": "为每个智能体设置存储配额。您可以更改此值或关闭存储限制。"
+  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果"
 }

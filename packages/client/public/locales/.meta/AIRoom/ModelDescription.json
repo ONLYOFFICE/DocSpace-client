@@ -3,7 +3,7 @@
   "content": "Select the AI provider and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
   "content_en_sha1_hash": "9c83f4e388800821fb37bb548ebf8d40e545620b",
   "created_at": "2025-10-27T16:14:31.671Z",
-  "updated_at": "2025-11-13T07:58:07.798Z",
+  "updated_at": "2025-11-13T10:21:17.754Z",
   "comment": {
     "text": "This text explains that users must select an AI provider and model for the chat room, and this selection applies to everyone participating. It appears within the AI room settings dialog, providing context for the model selection process.",
     "is_auto": true,

@@ -47,8 +47,6 @@
   "AIAgents": "Yapay zeka ajanları",
   "AIAgentSpaceQuotaExceeded": "AI Aracısı depolama kotası aşıldı ({{size}}).",
   "AIChatInput": "AI ile sohbet edin",
-  "AIChatNoAccessDescription": "Bu ajanı ve saklanan sonuçlarını görüntüleyebilirsiniz, ancak mevcut rolünüz için yeni yapay zeka sohbetleri başlatmak izin verilmiyor. İzin mi gerekiyor? İzin istemek için yöneticinize veya ajanın sahibine başvurun.",
-  "AIChatNoAccessTitle": "Yapay zeka sohbetine erişim kısıtlandı",
   "AIDisabledInfoBlockAdminSaasDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Tam işlevselliği geri yüklemek için {{productName}} ayarlarında AI özelliklerini etkinleştirin.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Gelişmiş özellikleri açmak için kendi AI hizmetinizi {{productName}} ile bağlayın.",
   "AIDisabledInfoBlockUserDescription": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Tekrar yola getirmek için, {{productName}} yöneticinizden AI özelliklerini etkinleştirmesini isteyin.",

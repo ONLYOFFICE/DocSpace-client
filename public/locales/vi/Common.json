@@ -47,8 +47,6 @@
   "AIAgents": "Các tác nhân AI",
   "AIAgentSpaceQuotaExceeded": "Đã vượt quá hạn mức không gian của tác nhân AI ({{size}}).",
   "AIChatInput": "Trò chuyện với AI",
-  "AIChatNoAccessDescription": "Bạn có thể xem lại tác nhân này và các kết quả đã lưu trữ của nó, nhưng việc bắt đầu các cuộc trò chuyện AI mới không được phép cho vai trò hiện tại của bạn. Cần quyền truy cập? Hãy liên hệ với quản trị viên của bạn hoặc chủ tác nhân để yêu cầu quyền.",
-  "AIChatNoAccessTitle": "Truy cập vào trò chuyện AI bị hạn chế",
   "AIDisabledInfoBlockAdminSaasDescription": "Các khả năng AI hiện đang bị tắt, điều này có nghĩa là agent này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Để khôi phục đầy đủ chức năng, hãy bật các tính năng AI trong cài đặt {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Các khả năng AI hiện đang bị tắt, điều này có nghĩa là agent này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Kết nối dịch vụ AI của riêng bạn để mở khóa các tính năng nâng cao trong {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "Các khả năng AI hiện đang bị tắt, điều này có nghĩa là agent này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Để quay trở lại hoạt động, hãy yêu cầu quản trị viên {{productName}} của bạn bật lại các tính năng AI.",

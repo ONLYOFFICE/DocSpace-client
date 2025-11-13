@@ -122,7 +122,6 @@ const KnowledgeComponent = ({
 
     getAIConfig?.();
     setSaveRequestRunning(false);
-    toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
   };
 
   const items = React.useMemo(() => {

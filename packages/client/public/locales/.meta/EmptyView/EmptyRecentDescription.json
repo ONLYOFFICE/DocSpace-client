@@ -3,7 +3,7 @@
   "content": "All recent files opened in the portal end up in this section. Files are stored for 90 days",
   "content_en_sha1_hash": "4e5c1bc7601edc7ebec83bfbfa5fdd57e2d6fef0",
   "created_at": "2025-08-27T10:14:24.681Z",
-  "updated_at": "2025-09-23T07:24:24.012Z",
+  "updated_at": "2025-11-03T12:10:34.907Z",
   "comment": {
     "text": "This text appears in the UI to describe the \"Recent\" folder section. It explains that recently opened files are stored here for 90 days. This description helps users understand the purpose of this section.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 209,
+      "line_number": 275,
       "context": ".with([FolderType.SHARE, P._], () =>\n t(\"EmptyView:EmptyShareDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([FolderType.Recent, P._], () => t(\"EmptyView:EmptyRecentDescription\"))\n .with([FolderType.Favorites, P._], () =>\n t(\"EmptyView:EmptyFavoritesDescription\"),\n )\n .with([FolderType.Archive, ShareAccessRights.None], () =>\n t(\"Files:ArchiveEmptyScreen\", {",
       "module": "/packages/client"
     }

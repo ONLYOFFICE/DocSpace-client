@@ -133,6 +133,7 @@ const BenefitsContainer = ({ t, features }) => {
         return (
           <div className="payment-benefits" key={item.title || item.image}>
             <div
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
               dangerouslySetInnerHTML={{ __html: item.image }}
               className="icons-container"
             />

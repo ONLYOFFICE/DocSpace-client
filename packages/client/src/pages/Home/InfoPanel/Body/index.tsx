@@ -59,11 +59,13 @@ type BodyProps = {
   fileView: InfoPanelStore["fileView"];
   getIsFiles: InfoPanelStore["getIsFiles"];
   getIsRooms: InfoPanelStore["getIsRooms"];
+  getIsAIAgent: InfoPanelStore["getIsAIAgent"];
   setView: InfoPanelStore["setView"];
 
   maxImageUploadSize: SettingsStore["maxImageUploadSize"];
 
   editRoomDialogProps: DialogsStore["editRoomDialogProps"];
+  editAgentDialogProps: DialogsStore["editAgentDialogProps"];
   createRoomDialogProps: DialogsStore["createRoomDialogProps"];
   templateEventVisible: DialogsStore["templateEventVisible"];
 
@@ -87,6 +89,7 @@ const InfoPanelBodyContent = ({
   fileView,
   getIsFiles,
   getIsRooms,
+  getIsAIAgent,
   setView,
 
   maxImageUploadSize,
@@ -103,9 +106,11 @@ const InfoPanelBodyContent = ({
   onChangeFile,
   setImage,
   checkIsExpiredLinkAsync,
+  editAgentDialogProps,
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
+  const isAgents = getIsAIAgent();
   const isGallery = window.location.pathname.includes("form-gallery");
   const isGroups = contactsTab === "groups";
   const isGuests = contactsTab === "guests";
@@ -115,6 +120,12 @@ const InfoPanelBodyContent = ({
     selection?.rootFolderType === FolderType.RoomTemplates;
 
   const isRoom = isRoomUtil(selection);
+  const isAgent =
+    selection &&
+    "rootFolderType" in selection &&
+    "roomType" in selection &&
+    selection.roomType &&
+    selection.rootFolderType === FolderType.AIAgents;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
@@ -132,8 +143,8 @@ const InfoPanelBodyContent = ({
     (isRoot && !isGallery);
 
   const currentView = useMemo(() => {
-    return isRoom || isTemplatesRoom ? roomsView : fileView;
-  }, [isRoom, roomsView, fileView, isTemplatesRoom]);
+    return isRoom || isTemplatesRoom || isAgent ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView, isTemplatesRoom, isAgent]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
@@ -143,14 +154,15 @@ const InfoPanelBodyContent = ({
       selection &&
       isFolderUtil(selection) &&
       !selection?.canShare &&
-      !isTemplatesRoom
+      !isTemplatesRoom &&
+      !isAgent
     ) {
       setView(InfoPanelView.infoDetails);
     }
   }, [fileView, selection, isTemplatesRoom]);
 
   const isExpiredLink = useEventCallback(() =>
-    checkIsExpiredLinkAsync(selection),
+    checkIsExpiredLinkAsync(selection)
   );
 
   React.useEffect(() => {
@@ -178,6 +190,7 @@ const InfoPanelBodyContent = ({
           isRooms={isRooms}
           isFiles={isFiles}
           isTemplatesRoom={isTemplatesRoom}
+          isAgents={isAgents}
           infoPanelSelection={selection}
           {...lockedSharedRoomProps}
         />
@@ -192,8 +205,8 @@ const InfoPanelBodyContent = ({
               currentView === InfoPanelView.infoMembers
                 ? "members"
                 : currentView === InfoPanelView.infoHistory
-                  ? "history"
-                  : "details"
+                ? "history"
+                : "details"
             }
           />
         }
@@ -206,6 +219,8 @@ const InfoPanelBodyContent = ({
       </React.Suspense>
     );
   };
+
+
 
   return (
     <div className={commonStyles.infoPanelBody}>
@@ -223,6 +238,7 @@ const InfoPanelBodyContent = ({
 
       {avatarEditorDialogVisible &&
       !editRoomDialogProps.visible &&
+      !editAgentDialogProps.visible &&
       !createRoomDialogProps.visible &&
       !Array.isArray(selection) ? (
         <AvatarEditorDialog
@@ -260,12 +276,17 @@ export default inject(
 
       getIsFiles,
       getIsRooms,
+      getIsAIAgent,
       setView,
     } = infoPanelStore;
 
     const { isExpiredLinkAsync } = filesActionsStore;
-    const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
-      dialogsStore;
+    const {
+      editRoomDialogProps,
+      editAgentDialogProps,
+      createRoomDialogProps,
+      templateEventVisible,
+    } = dialogsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -287,11 +308,13 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
+      getIsAIAgent,
       setView,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 
       editRoomDialogProps,
+      editAgentDialogProps,
       createRoomDialogProps,
       templateEventVisible,
 
@@ -304,5 +327,5 @@ export default inject(
       setImage,
       checkIsExpiredLinkAsync: isExpiredLinkAsync,
     };
-  },
+  }
 )(observer(InfoPanelBodyContent));

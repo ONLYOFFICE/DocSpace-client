@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { SaveCancelButtons } from ".";
 
@@ -36,12 +36,12 @@ describe("<SaveCancelButtons />", () => {
     reminderText: "You have unsaved changes",
     saveButtonLabel: "Save",
     cancelButtonLabel: "Cancel",
-    onSaveClick: jest.fn(),
-    onCancelClick: jest.fn(),
+    onSaveClick: vi.fn(),
+    onCancelClick: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error and has correct ARIA attributes", () => {

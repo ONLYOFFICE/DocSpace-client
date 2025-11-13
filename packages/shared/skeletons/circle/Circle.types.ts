@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+
 export type CircleSkeletonProps = {
   title?: string;
   x?: string;
@@ -38,4 +40,5 @@ export type CircleSkeletonProps = {
   speed?: number;
   animate?: boolean;
   className?: string;
+  style?: React.CSSProperties;
 };

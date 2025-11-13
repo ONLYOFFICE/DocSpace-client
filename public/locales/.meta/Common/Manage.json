@@ -3,7 +3,7 @@
   "content": "Manage",
   "content_en_sha1_hash": "bf58d17e561b1b858e35f9202f811297dac2e9db",
   "created_at": "2025-09-01T11:05:11.038Z",
-  "updated_at": "2025-10-16T07:29:35.976Z",
+  "updated_at": "2025-10-27T16:14:33.664Z",
   "comment": {
     "text": "This key is used to display the label for a button or link that allows users to manage notifications. It appears within a list of options, likely in a settings or configuration panel. Translators should consider a phrase that conveys the action of controlling or organizing notifications.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 988,
+      "line_number": 999,
       "context": "//           },\n //           {\n //             icon: SettingsReactSvgUrl,\n //             id: \"manage-option\",\n //             key: \"manage-links\",\n //             label: t(\"Common:ManageNotifications\"),\n //             onClick: () => this.onShowInfoPanel(item, \"info_members\"),\n //           },\n //         ];\n //       }",
       "module": "/packages/client"
     }

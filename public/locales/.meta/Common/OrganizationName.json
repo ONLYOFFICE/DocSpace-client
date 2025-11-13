@@ -3,7 +3,7 @@
   "content": "ONLYOFFICE",
   "content_en_sha1_hash": "c1cd17a947d45060963b486bba7fd3346227bbee",
   "created_at": "2025-05-19T21:30:47.141Z",
-  "updated_at": "2025-10-17T14:43:53.302Z",
+  "updated_at": "2025-11-13T10:21:17.694Z",
   "comment": {
     "text": "This translation key is used to display the organization's name, such as \"ONLYOFFICE\", when a user needs help or wants to learn more about the product. It appears in various UI elements like dialog boxes and about pages, ensuring accessibility for users who need assistance with the application.",
     "is_auto": true,
@@ -11,8 +11,20 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/hooks/useMCP.ts",
+      "line_number": 85,
+      "context": "getServersListForRoom(agentId).then((res) => {\n if (res) {\n const items = res.map((item) => {\n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n return {\n key: item.id,\n id: item.id,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/hooks/useMCP.ts",
+      "line_number": 85,
+      "context": "getServersListForRoom(agentId).then((res) => {\n if (res) {\n const items = res.map((item) => {\n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n return {\n key: item.id,\n id: item.id,",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 213,
+      "line_number": 230,
       "context": "const several = selection.length > 1;\n \n // for backup\n if (!selection.length) return t(\"Common:BackupNotAllowedInFormRoom\");\n \n const option = { organizationName: t(\"Common:OrganizationName\") };\n \n if (isCopy)\n return several\n ? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);",
       "module": "/packages/client"
     },
@@ -23,8 +35,20 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
+      "line_number": 88,
+      "context": "];\n };\n \n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n const description =\n item.serverType === ServerType.Portal\n ? t(\"AISettings:MCPProductDescription\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
+      "line_number": 88,
+      "context": "];\n };\n \n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n const description =\n item.serverType === ServerType.Portal\n ? t(\"AISettings:MCPProductDescription\", {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 112,
+      "line_number": 111,
       "context": "});\n \n const { t, ready } = useTranslation([\"Common\", \"SmartBanner\"]);\n \n useEffect(() => {\n if (!logoText) setLogoText(t(\"Common:OrganizationName\"));\n }, [logoText, setLogoText]);\n \n useEffect(() => {\n try {\n loadBaseInfo();",
       "module": "/packages/client"
     },
@@ -53,9 +77,21 @@
       "module": "/packages/management"
     },
     {
+      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
+      "line_number": 296,
+      "context": ".filter(Boolean),\n ];\n \n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: mcpId,\n label: name,",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/hooks/useDocumentTitle.ts",
       "line_number": 39,
       "context": "export const useDocumentTitle = (titleI18nKey: string) => {\n const { t } = useTranslation();\n \n const setDocumentTitle = (t: TTranslation, titleI18nKey: string) => {\n let title;\n const organizationName = t(\"Common:OrganizationName\");\n \n if (titleI18nKey) {\n title = `${t(titleI18nKey)} - ${organizationName}`;\n } else {\n title = organizationName;",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
+      "line_number": 77,
+      "context": "const convertServerToOption = React.useCallback(\n (server: TServer): TSelectorItem => {\n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: server.id,\n id: server.id,",
       "module": "/packages/shared"
     }
   ],

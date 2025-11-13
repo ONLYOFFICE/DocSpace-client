@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteAIAgentDescription",
+  "content": "The agent <strong>\"{{agentName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
+  "content_en_sha1_hash": "acaf104049bd1afdc3810fc8a41112e22892b022",
+  "created_at": "2025-10-27T16:14:31.201Z",
+  "updated_at": "2025-11-03T12:10:34.992Z",
+  "comment": {
+    "text": "This key provides the description text for a confirmation dialog when deleting an AI agent. It informs the user that the agent, identified by its name (inserted as `agentName`), will be permanently deleted, resulting in data loss. The text appears within a Delete Dialog.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:57:23.455Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 83,
+      "context": "if (isAIAgent) {\n return (\n <>\n <Trans\n t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"DeleteDialog\"\n values={{ agentName: selection[0]?.title }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

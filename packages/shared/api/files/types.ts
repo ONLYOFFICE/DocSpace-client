@@ -39,6 +39,7 @@ import type {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  VectorizationStatus,
 } from "../../enums";
 import type { TUser } from "../people/types";
 import type { TRoom } from "../rooms/types";
@@ -81,11 +82,18 @@ export type TFileSecurity = {
   CreateRoomFrom: boolean;
   CopyLink: boolean;
   Embed: boolean;
+  Vectorization: boolean;
+  AskAi?: boolean;
 };
 
 export type TShareSettings = {
   ExternalLink?: number;
   PrimaryExternalLink?: number;
+};
+
+type TDimensions = {
+  width: number;
+  height: number;
 };
 
 export type TFile = {
@@ -116,6 +124,8 @@ export type TFile = {
   title: string;
   updated: string;
   updatedBy: TCreatedBy;
+  sharedBy?: TCreatedBy;
+  ownedBy?: TCreatedBy;
   version: number;
   versionGroup: number;
   viewAccessibility: TFileViewAccessibility;
@@ -142,10 +152,12 @@ export type TFile = {
   originTitle?: string;
   requestToken?: string;
   isFavorite?: boolean;
+  vectorizationStatus?: VectorizationStatus;
   expirationDate?: string;
   sharedForUser?: boolean;
   external?: boolean;
   isLinkExpired?: boolean;
+  dimensions?: TDimensions;
 };
 
 export type TOpenEditRequest = {
@@ -222,6 +234,8 @@ export type TFolder = {
   createdBy: TCreatedBy;
   updated: string;
   updatedBy: TCreatedBy;
+  sharedBy?: TCreatedBy;
+  ownedBy?: TCreatedBy;
   rootFolderType: FolderType;
   isArchive?: boolean;
   roomType?: RoomsType;
@@ -235,6 +249,7 @@ export type TFolder = {
   parentRoomType?: FolderType;
   order?: string;
   isRoom?: false;
+  rootRoomType?: RoomsType;
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
   isFavorite?: boolean;
@@ -509,6 +524,12 @@ export type TConnectingStorage = {
   redirectUrl: string;
   clientId?: string;
   requiredConnectionUrl: boolean;
+  providerKey?: string;
+  isConnected?: boolean;
+  id?: string;
+  title?: string;
+  oauthHref?: string;
+  isOauth?: boolean;
 };
 
 export type TIndexItems = {

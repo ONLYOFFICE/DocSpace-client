@@ -27,6 +27,7 @@
 import type { TTranslation } from "@docspace/shared/types";
 import { TColorScheme } from "@docspace/shared/themes";
 import FilesStore from "SRC_DIR/store/FilesStore";
+import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
 export interface ICover {
   data: string;
@@ -77,9 +78,13 @@ export type CoverDialogProps = RoomLogoCoverProps & {
   setRoomLogoCoverDialogVisible: (value: boolean) => void;
   createRoomDialogVisible: boolean;
   editRoomDialogPropsVisible: boolean;
+  createAgentDialogVisible: boolean;
+  editAgentDialogVisible: boolean;
   roomLogoCoverDialogVisible: boolean;
   templateEventVisible: boolean;
   setEnabledHotkeys?: FilesStore["setEnabledHotkeys"];
+  uploadedFile: AvatarEditorDialogStore["uploadedFile"];
+  setUploadedFile: AvatarEditorDialogStore["setUploadedFile"];
 };
 
 export interface CustomLogoProps {

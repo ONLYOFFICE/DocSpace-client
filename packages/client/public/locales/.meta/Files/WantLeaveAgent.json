@@ -1,0 +1,28 @@
+{
+  "key_path": "WantLeaveAgent",
+  "content": "Do you really want to leave this agent? You will be able to join it again via new invitation by an agent admin.",
+  "content_en_sha1_hash": "dfab32a686321c982763bf68219653566661129b",
+  "created_at": "2025-10-27T16:14:30.876Z",
+  "updated_at": "2025-10-27T17:58:17.405Z",
+  "comment": {
+    "text": "This text appears in a dialog, confirming a user's intent to leave an agent. It explains that leaving is possible and the user can rejoin with a new invitation from an agent admin. This message helps users understand the consequences of leaving.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:58:17.405Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 86,
+      "context": "? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");\n \n const descriptionText = isAIAgent ? agentDescription : roomDescription;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

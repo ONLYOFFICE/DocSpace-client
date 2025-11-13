@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyAIAgentsTitle",
+  "content": "Create your AI agent",
+  "content_en_sha1_hash": "ac4a2210b44fea676b4bb03d7b89d8b8faef2aaf",
+  "created_at": "2025-10-27T16:14:30.982Z",
+  "updated_at": "2025-11-03T12:10:34.898Z",
+  "comment": {
+    "text": "This key provides the title for a view, likely a button or section title, that prompts the user to create a new AI agent. It appears within the EmptyViewContainer component, specifically when the user has access to AI Agents. Translators should ensure the text clearly conveys the action of creating an AI agent.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:57:33.158Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 183,
+      "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\")\n : t(\"EmptyView:EmptyAIAgentsTitle\");\n };\n \n const getAIAgentsAIDisabledTitle = (\n t: TTranslation,\n standalone: boolean,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

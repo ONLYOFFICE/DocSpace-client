@@ -3,7 +3,7 @@
   "content": "Add a tag",
   "content_en_sha1_hash": "a8212f9bf639eb29d1e9572a9b9325ec8febbb76",
   "created_at": "2025-05-19T21:30:56.838Z",
-  "updated_at": "2025-10-13T14:41:02.780Z",
+  "updated_at": "2025-11-07T13:41:06.096Z",
   "comment": {
     "text": "This translation key is used for a placeholder text to display when adding a tag in a room editing dialog. It's intended to appear as a hint or label for users to enter a new tag value. The key appears on a UI input field in the `/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TagInput` component.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TagInput/index.js",
-      "line_number": 129,
+      "file_path": "/packages/client/src/components/TagInput/index.tsx",
+      "line_number": 154,
       "context": ">\n <InputParam\n ref={inputRef}\n id=\"shared_tags-input\"\n title={title ? `${title}:` : `${t(\"Common:Tags\")}:`}\n placeholder={t(\"TagsPlaceholder\")}\n value={tagInput}\n onChange={onTagInputChange}\n onFocus={handleFocus}\n onBlur={handleBlur}\n isDisabled={isDisabled}",
       "module": "/packages/client"
     }

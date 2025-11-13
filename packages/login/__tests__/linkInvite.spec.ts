@@ -83,7 +83,7 @@ test("link invite login render", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.getUserByEmail]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
   await page.waitForURL("/login?loginData**", { waitUntil: "load" });
@@ -104,7 +104,7 @@ test("link invite registration render standalone", async ({
   ]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
   await page
@@ -130,7 +130,7 @@ test("link invite registration render no standalone", async ({
 
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
   await page
@@ -152,7 +152,7 @@ test("link invite email error", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.getUserByEmail]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail.com");
+  await page.getByTestId("email-input-invite").fill("mail.com");
   await page.getByTestId("email_continue_button").click();
 
   await expect(page).toHaveScreenshot([
@@ -174,7 +174,7 @@ test("link invite login success", async ({ page, mockRequest }) => {
 
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
   await page.waitForURL("/login?loginData**", { waitUntil: "load" });
@@ -206,7 +206,7 @@ test("link invite login error", async ({ page, mockRequest }) => {
 
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
   await page.waitForURL("/login?loginData**", { waitUntil: "load" });
@@ -232,7 +232,7 @@ test("link invite registration success standalone", async ({
   await mockRequest.router([endpoints.createUser, endpoints.login]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
   await page.fill("[name='first-name']", "firstName");
@@ -268,7 +268,7 @@ test("link invite registration success no standalone", async ({
   await mockRequest.router([endpoints.createUser, endpoints.login]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
   await page.fill("[name='first-name']", "firstName");
@@ -304,7 +304,7 @@ test("link invite registration error standalone", async ({
   ]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
   await page.fill("[name='password']", "123");
 
@@ -329,7 +329,7 @@ test("link invite registration error no standalone", async ({
 
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
   await page.getByTestId("email_continue_button").click();
 
   await page.fill("[name='password']", "123");

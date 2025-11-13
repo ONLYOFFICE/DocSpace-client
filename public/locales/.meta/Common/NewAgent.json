@@ -1,0 +1,52 @@
+{
+  "key_path": "NewAgent",
+  "content": "New agent",
+  "content_en_sha1_hash": "d200d92a331aabd52dfb0d7911c95be2fdd35eab",
+  "created_at": "2025-10-27T16:14:17.785Z",
+  "updated_at": "2025-11-13T07:42:11.033Z",
+  "comment": {
+    "text": "This key is used for the label of a button that creates a new agent. It appears on a button, likely within an agent creation interface or folder view, and translators should understand it refers to the action of creating a new agent.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:34:50.763Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 854,
+      "context": "/>\n ) : isAIAgentsFolder ? (\n <StyledButton\n className=\"create-agent-button\"\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onCreateAgent}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 854,
+      "context": "/>\n ) : isAIAgentsFolder ? (\n <StyledButton\n className=\"create-agent-button\"\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onCreateAgent}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 3302,
+      "context": "const options = isAIAgentsFolder\n ? [\n {\n key: \"new-agent\",\n label: t(\"Common:NewAgent\"),\n onClick: this.onCreateAgent,\n icon: CatalogAIAgentsReactSvgUrl,\n },\n ]\n : isRoomsFolder",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/CreateEditAgentStore.ts",
+      "line_number": 324,
+      "context": "color: (logo as { color: string }).color,\n }\n : null;\n \n const createAgentData = {\n title: title || t(\"Common:NewAgent\"),\n \n ...(quotaLimit && {\n quota: +quotaLimit,\n }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/selectors/utils/hooks/useAgentsHelper.tsx",
+      "line_number": 154,
+      "context": "// if (withCreate && security.Create) {\n //   setTotal(total + 1);\n //   const createItem: TSelectorItem = {\n //     isCreateNewItem: true,\n //     label: createDefineLabel ?? t(\"NewAgent\"),\n //     id: \"create-room-item\",\n //     key: \"create-room-item\",\n //     hotkey: \"r\",\n //     // isRoomsOnly,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

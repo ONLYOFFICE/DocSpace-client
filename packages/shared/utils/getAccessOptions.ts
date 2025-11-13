@@ -27,7 +27,7 @@
 import { globalColors } from "../themes";
 import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
-import { RoomsType, EmployeeType, ShareAccessRights } from "../enums";
+import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";
 
 export type AccessOptionType = {
   key: string | EmployeeType;
@@ -52,6 +52,8 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Common:RoleRoomAdminFormRoomDescription");
+    case RoomsType.AIRoom:
+      return t("Common:RoleAgentManagerDescription");
     case None:
       return t("Common:RoleRoomAdminDescription", {
         sectionName: t("Common:MyDocuments"),
@@ -88,7 +90,7 @@ export const getAccessOptions = (
   withSeparator = false,
   isOwner = false,
   isAdmin = false,
-  standalone = false,
+  standalone = false
 ) => {
   let options: Array<AccessOptionType | SeparatorOptionType> = [];
   const accesses = {
@@ -122,6 +124,21 @@ export const getAccessOptions = (
       label: t("Common:RoomManager"),
       description: getRoomAdminDescription(roomType, t),
       tooltip: t("UserMaxAvailableRoleWarning", {
+        productName: t("Common:ProductName"),
+      }),
+      ...(!standalone && { quota: t("Common:Paid") }),
+      color: globalColors.favoritesStatus,
+      access:
+        roomType === None
+          ? EmployeeType.RoomAdmin
+          : ShareAccessRights.RoomManager,
+      type: EmployeeType.RoomAdmin,
+    },
+    agentManager: {
+      key: "agentManager",
+      label: t("Common:AgentManager"),   
+      description: getRoomAdminDescription(roomType, t),
+      tooltip: t("UserAgentMaxAvailableRoleWarning", {
         productName: t("Common:ProductName"),
       }),
       ...(!standalone && { quota: t("Common:Paid") }),
@@ -257,6 +274,15 @@ export const getAccessOptions = (
       ];
       break;
 
+    case RoomsType.AIRoom:
+      options = [
+        accesses.agentManager,
+        accesses.contentCreator,
+        { key: "s1", isSeparator: withSeparator },
+        accesses.viewer,
+      ];
+      break;
+
     case None:
       if (isOwner) options.push(accesses.portalAdmin);
 
@@ -268,7 +294,7 @@ export const getAccessOptions = (
               key: "s1",
               isSeparator: withSeparator,
             },
-          ],
+          ]
         );
       }
 

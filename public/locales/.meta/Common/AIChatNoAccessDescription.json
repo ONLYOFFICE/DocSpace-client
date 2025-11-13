@@ -1,0 +1,28 @@
+{
+  "key_path": "AIChatNoAccessDescription",
+  "content": "You can view this agent and its stored results, but starting new AI chats isn’t permitted for your current role. Need access? Reach out to your administrator or the agent owner to request permission.",
+  "content_en_sha1_hash": "8892081addc69341c896d2c244f9fe29c9893465",
+  "created_at": "2025-11-03T12:10:13.463Z",
+  "updated_at": "2025-11-13T07:58:08.577Z",
+  "comment": {
+    "text": "This text explains to users why they cannot start a new AI chat. It appears on a screen indicating a lack of access and instructs them to contact an administrator or agent owner to request permission. Translators should ensure the message remains polite and clearly communicates the restriction.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:17:05.934Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 68,
+      "context": ": isPortalAdmin && standalone\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\")\n : t(\"Common:AIFeaturesAreCurrentlyDisabled\");\n \n const description = !canUseChat\n ? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

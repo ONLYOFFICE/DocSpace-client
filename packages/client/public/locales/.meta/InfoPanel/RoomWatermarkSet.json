@@ -3,7 +3,7 @@
   "content": "Watermark for files in the room enabled",
   "content_en_sha1_hash": "9506b337eecb9b7c7c5901282ebc888da3503049",
   "created_at": "2025-05-19T21:30:54.957Z",
-  "updated_at": "2025-10-13T13:22:35.729Z",
+  "updated_at": "2025-11-03T12:10:35.117Z",
   "comment": {
     "text": "This translation key is used to display the text \"Watermark for files in the room enabled\" when a room's watermark setting has been activated. It appears on the InfoPanel and is likely displayed as a notification or confirmation message indicating the status of the watermark feature.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 299,
+      "line_number": 342,
       "context": "case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"InfoPanel:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 248,
+      "line_number": 286,
       "context": "case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"InfoPanel:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:",
       "module": "/packages/client"
     }

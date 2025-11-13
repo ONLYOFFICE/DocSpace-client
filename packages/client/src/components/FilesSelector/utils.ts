@@ -109,7 +109,22 @@ export const getIsDisabled = (
   includeFolder?: boolean,
   isRestore?: boolean,
   isDisabledFolder?: boolean,
+  isInsideKnowledge?: boolean,
+  isInsideResultStorage?: boolean,
+  isAgents?: boolean,
 ) => {
+  console.log(
+    isFirstLoad,
+    isRequestRunning,
+    isDisabledFolder,
+    filterParam,
+    sameId,
+    isCopy,
+    isRooms,
+    isRoot,
+    isSelectedParentFolder,
+    security,
+  );
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;
   if (isDisabledFolder) return true;
@@ -119,14 +134,20 @@ export const getIsDisabled = (
   if (isRooms) return true;
   if (isRoot) return true;
   if (isSelectedParentFolder) return true;
-  if (isCopy)
+  if (isCopy) {
+    if (isInsideResultStorage || isAgents) return true;
+
     return security && "CopyTo" in security
       ? !security?.CopyTo || !security?.Create
       : !security?.Copy;
-  if (isMove || isRestoreAll || isRestore)
+  }
+  if (isMove || isRestoreAll || isRestore) {
+    if (isInsideResultStorage || isAgents) return true;
+
     return security && "MoveTo" in security
       ? !security?.MoveTo || !security?.Create
       : !security?.Move;
+  }
 
   return false;
 };

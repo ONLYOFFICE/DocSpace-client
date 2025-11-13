@@ -67,6 +67,9 @@ const RowDataComponent = (props) => {
     erasureColumnIsEnabled,
     index,
     isPersonalReadOnly,
+    t,
+    item,
+    linkStyles,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
@@ -95,6 +98,8 @@ const RowDataComponent = (props) => {
     ? indexComponentNode
     : quickButtonsComponentNode;
 
+  const sideColor = theme.filesSection.tableView.row.sideColor;
+
   return (
     <>
       <TableCell
@@ -113,12 +118,17 @@ const RowDataComponent = (props) => {
         documentTitle={documentTitle}
       >
         <FileNameCell
+          t={t}
+          item={item}
           theme={theme}
-          onContentSelect={onContentFileSelect}
-          checked={checkedProps}
           element={element}
+          checked={checkedProps}
           inProgress={inProgress}
-          {...props}
+          linkStyles={linkStyles}
+          titleWithoutExt={props.titleWithoutExt}
+          onContentSelect={onContentFileSelect}
+          isIndexEditingMode={isIndexEditingMode}
+          displayFileExtension={props.displayFileExtension}
         />
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
@@ -129,11 +139,7 @@ const RowDataComponent = (props) => {
       {authorColumnIsEnabled ? (
         <TableCell
           dataTestId={`files-cell-author-${index}`}
-          style={
-            !authorColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -144,8 +150,9 @@ const RowDataComponent = (props) => {
           )}
         >
           <AuthorCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            item={item}
+            sideColor={sideColor}
+            fileOwner={props.fileOwner}
           />
           {lastColumn === "Author" ? lastColumnContent : null}
         </TableCell>
@@ -156,11 +163,7 @@ const RowDataComponent = (props) => {
       {createdColumnIsEnabled ? (
         <TableCell
           dataTestId={`files-cell-created-${index}`}
-          style={
-            !createdColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -172,8 +175,11 @@ const RowDataComponent = (props) => {
         >
           <DateCell
             create
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            sideColor={sideColor}
+            updatedDate={props.updatedDate}
+            createdDate={props.createdDate}
+            lastOpenedDate={props.lastOpenedDate}
+            isRecentFolder={props.isRecentFolder}
           />
           {lastColumn === "Created" ? lastColumnContent : null}
         </TableCell>
@@ -184,9 +190,7 @@ const RowDataComponent = (props) => {
       {modifiedColumnIsEnabled ? (
         <TableCell
           dataTestId={`files-cell-modified-${index}`}
-          style={
-            !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -197,8 +201,11 @@ const RowDataComponent = (props) => {
           )}
         >
           <DateCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
+            sideColor={sideColor}
+            updatedDate={props.updatedDate}
+            createdDate={props.createdDate}
+            lastOpenedDate={props.lastOpenedDate}
+            isRecentFolder={props.isRecentFolder}
           />
           {lastColumn === "Modified" ? lastColumnContent : null}
         </TableCell>
@@ -209,19 +216,14 @@ const RowDataComponent = (props) => {
       {isPersonalReadOnly && erasureColumnIsEnabled ? (
         <TableCell
           dataTestId={`files-cell-erasure-${index}`}
-          style={
-            !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
             lastColumn === "Erasure" ? "no-extra-space" : "",
           )}
         >
-          <ErasureCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <ErasureCell sideColor={sideColor} item={item} t={t} />
         </TableCell>
       ) : (
         <div />
@@ -230,9 +232,7 @@ const RowDataComponent = (props) => {
       {sizeColumnIsEnabled ? (
         <TableCell
           dataTestId={`files-cell-size-${index}`}
-          style={
-            !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -240,10 +240,7 @@ const RowDataComponent = (props) => {
             lastColumn === "Size" && isIndexEditingMode ? "index-buttons" : "",
           )}
         >
-          <SizeCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <SizeCell sideColor={sideColor} item={item} />
           {lastColumn === "Size" ? lastColumnContent : null}
         </TableCell>
       ) : (
@@ -253,11 +250,7 @@ const RowDataComponent = (props) => {
       {typeColumnIsEnabled ? (
         <TableCell
           dataTestId={`files-cell-type-${index}`}
-          style={
-            !typeColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -265,10 +258,7 @@ const RowDataComponent = (props) => {
             lastColumn === "Type" && isIndexEditingMode ? "index-buttons" : "",
           )}
         >
-          <TypeCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <TypeCell sideColor={sideColor} item={item} t={t} />
           {lastColumn === "Type" ? lastColumnContent : null}
         </TableCell>
       ) : (

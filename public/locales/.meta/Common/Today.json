@@ -3,7 +3,7 @@
   "content": "Today",
   "content_en_sha1_hash": "24345a14377fd821d3932f4e82f6431640955b0b",
   "created_at": "2025-05-19T21:30:49.316Z",
-  "updated_at": "2025-10-14T00:24:53.272Z",
+  "updated_at": "2025-11-06T18:29:15.615Z",
   "comment": {
     "text": "The translation key \"Today\" represents a generic term used to indicate the current day, often displayed on a date or in a calendar UI component. It is typically used when the exact date is unknown or not relevant, providing a concise and neutral label for the user interface.",
     "is_auto": true,
@@ -21,6 +21,12 @@
       "line_number": 59,
       "context": "const now = moment();\n const weekAgo = moment().subtract(1, \"week\");\n const halfYearAgo = moment().subtract(6, \"month\");\n \n if (given.isAfter(weekAgo)) {\n if (now.weekday() === given.weekday()) return t(\"Common:Today\");\n if (now.weekday() - 1 === given.weekday()) return t(\"Common:Yesterday\");\n \n const weekday = moment.weekdays(given.weekday());\n return weekday.charAt(0).toUpperCase() + weekday.slice(1);\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/chat/utils/index.ts",
+      "line_number": 102,
+      "context": "return `folder-${folderId}-${userId}-${new Date().getTime()}`;\n };\n \n export const getChateTranslationDate = (t: TTranslation, value: string) => {\n return value === \"today\"\n ? t(\"Common:Today\")\n : value === \"yesterday\"\n ? t(\"Common:Yesterday\")\n : \"\";\n };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

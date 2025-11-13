@@ -36,6 +36,7 @@ import NoFileOrFolderItem from "./NoFileOrFolderItem";
 import NoContactsItem from "./NoContactsItem";
 import ExpiredItem from "./ExpiredItem";
 import LockedItem from "./LockedItem";
+import NoAgentItem from "./NoAgentItem";
 
 type SharedRoom = WithFlag<
   "isLockedSharedRoom",
@@ -50,6 +51,7 @@ type NoItemsProps = {
   isGuests?: boolean;
   isGallery?: boolean;
   isRooms?: boolean;
+  isAgents?: boolean;
   isFiles?: boolean;
   isTemplatesRoom?: boolean;
   infoPanelSelection?: TRoom | TFile | TFolder | null;
@@ -63,6 +65,7 @@ const NoItem = ({
   isRooms,
   isFiles,
   isTemplatesRoom,
+  isAgents,
   isLockedSharedRoom,
   infoPanelSelection,
 }: NoItemsProps) => {
@@ -74,6 +77,7 @@ const NoItem = ({
     isRooms,
     isFiles,
     isTemplatesRoom,
+    isAgents,
     isLockedSharedRoom,
   });
 
@@ -85,6 +89,7 @@ const NoItem = ({
     isRooms ||
     isFiles ||
     isTemplatesRoom ||
+    isAgents ||
     isLockedSharedRoom
   ) {
     prevNoItemsRef.current = {
@@ -95,6 +100,7 @@ const NoItem = ({
       isRooms,
       isFiles,
       isTemplatesRoom,
+      isAgents,
       isLockedSharedRoom,
     };
   }
@@ -116,6 +122,7 @@ const NoItem = ({
   if (prevNoItemsRef.current.isFiles) return <NoFileOrFolderItem />;
   if (prevNoItemsRef.current.isTemplatesRoom) return <NoGalleryItem />;
   if (prevNoItemsRef.current.isRooms) return <NoRoomItem />;
+  if (prevNoItemsRef.current.isAgents) return <NoAgentItem />;
 
   return null;
 };

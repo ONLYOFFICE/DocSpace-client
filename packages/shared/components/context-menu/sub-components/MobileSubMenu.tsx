@@ -7,13 +7,15 @@ import { DomHelpers, classNames } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 import { Scrollbar } from "../../scrollbar";
 import { Badge } from "../../badge";
-import {
+import type {
   ContextMenuModel,
   ContextMenuType,
   TOnMobileItemClick,
 } from "../ContextMenu.types";
 import { globalColors } from "../../../themes";
 import { useTheme } from "../../../hooks/useTheme";
+import { ToggleButton } from "../../toggle-button";
+import styles from "../ContextMenu.module.scss";
 
 interface MobileSubMenuProps {
   onLeafClick: (e: React.MouseEvent) => void;
@@ -41,11 +43,13 @@ const MenuItem = ({
   const className = classNames(
     "p-menuitem",
     { "p-menuitem-active": false },
+    { "p-menuitem-with-toggle": item.withToggle },
     item?.className || "",
   );
 
   const linkClassName = classNames("p-menuitem-link", "not-selectable", {
     "p-disabled": item.disabled || item.disableColor,
+    [styles.menuItemWithToggle]: item.withToggle,
   });
 
   const iconClassName = classNames("p-menuitem-icon", {
@@ -54,6 +58,7 @@ const MenuItem = ({
 
   const renderIcon = () => {
     if (!item.icon) return null;
+
     return !item.icon.includes("images/") ? (
       <img src={item.icon} alt="plugin img" className={iconClassName} />
     ) : (
@@ -64,6 +69,40 @@ const MenuItem = ({
   const dataKeys = Object.fromEntries(
     Object.entries(item).filter((el) => el[0].indexOf("data-") === 0),
   );
+
+  if (item.withToggle) {
+    return (
+      <li
+        id={item.id}
+        key={item.key}
+        data-testid={item.dataTestId ?? item.key}
+        role="none"
+        className={className}
+        style={{ ...item.style, ...style }}
+      >
+        <a
+          href={item.url || "#"}
+          className={linkClassName}
+          target={item.target}
+          {...dataKeys}
+          onClick={onClick}
+          role="menuitem"
+        >
+          {renderIcon()}
+          {item.label ? (
+            <span className="p-menuitem-text not-selectable">{item.label}</span>
+          ) : null}
+          <ToggleButton
+            isChecked={item.checked || false}
+            onChange={() => onClick}
+            noAnimation
+            isDisabled={item?.disabled ?? false}
+            style={{ width: "28px", height: "16px" }}
+          />
+        </a>
+      </li>
+    );
+  }
 
   return (
     <li
@@ -189,6 +228,8 @@ export const MobileSubMenu = ({
       }
 
       item.onClick?.({ originalEvent: e, action: item.action, item });
+
+      if (item.withToggle) return;
 
       if (item.items || item.onLoad) {
         onMobileItemClick?.(e, item.label as string, item.items, item.onLoad);

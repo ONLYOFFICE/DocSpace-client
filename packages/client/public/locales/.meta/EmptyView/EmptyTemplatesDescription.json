@@ -3,7 +3,7 @@
   "content": "You can create a template from a room in the Room section",
   "content_en_sha1_hash": "3ae0630d6f2123e351bffec005e5b0541a21b4dd",
   "created_at": "2025-05-19T21:30:56.500Z",
-  "updated_at": "2025-09-23T07:24:24.010Z",
+  "updated_at": "2025-11-03T12:10:34.903Z",
   "comment": {
     "text": "This translation key describes the text that will be displayed when creating a template from an empty room in the Room section. It explains how to proceed with the process and provides context for users navigating the Room templates page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 192,
+      "line_number": 258,
       "context": ")\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesDescription\"),\n )\n .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />",
       "module": "/packages/client"
     }

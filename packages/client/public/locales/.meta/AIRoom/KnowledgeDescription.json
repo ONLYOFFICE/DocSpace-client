@@ -1,0 +1,28 @@
+{
+  "key_path": "KnowledgeDescription",
+  "content": "Upload files from your computer or {{productName}} to provide better context for the chat. Note: some or all of the uploaded content may be exposed during the conversation.",
+  "content_en_sha1_hash": "3403740b6bcdafb36ed3f87a54c60a89a85bb039",
+  "created_at": "2025-10-27T16:14:31.669Z",
+  "updated_at": "2025-11-03T12:10:34.976Z",
+  "comment": {
+    "text": "This text explains to the user that they can upload files to provide context for the chat, but warns that the content may be visible during the conversation. It appears as a descriptive message within the file upload section of both the Create/Edit Agent and Create/Edit Room dialogs.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:02:34.751Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
+      "line_number": 59,
+      "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"KnowledgeDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n <div className=\"ai-button-group\">",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

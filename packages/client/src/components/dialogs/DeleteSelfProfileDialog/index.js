@@ -52,6 +52,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
         .then((res) => {
           toastr.success(
             <div
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
               dangerouslySetInnerHTML={{
                 __html: res,
               }}

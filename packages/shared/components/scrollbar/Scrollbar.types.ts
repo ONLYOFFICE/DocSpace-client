@@ -31,7 +31,16 @@ import {
 
 type PickedScrollbarLibraryProps = Pick<
   ScrollbarLibraryProps,
-  "id" | "className" | "style" | "noScrollY" | "noScrollX" | "createContext"
+  | "id"
+  | "className"
+  | "style"
+  | "noScrollY"
+  | "noScrollX"
+  | "createContext"
+  | "translateContentSizeYToHolder"
+  | "translateContentSizeXToHolder"
+  | "translateContentSizesToHolder"
+  | "rtl"
 >;
 
 export type ScrollbarProps = PickedScrollbarLibraryProps & {

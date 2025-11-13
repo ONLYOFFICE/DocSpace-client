@@ -1,0 +1,28 @@
+{
+  "key_path": "CreateChatDescription",
+  "content": "Go to the AI-Chat tab to get started.",
+  "content_en_sha1_hash": "f507beeeeadd638b1a476d2815c31e12f49a8fba",
+  "created_at": "2025-10-27T16:14:31.664Z",
+  "updated_at": "2025-11-13T07:58:07.691Z",
+  "comment": {
+    "text": "This text appears on a button or link, prompting users to navigate to the AI-Chat tab to begin using the chat feature. It guides users towards initiating a conversation with the AI. Translators should ensure the wording encourages action and clearly indicates a starting point.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:10:42.041Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 554,
+      "context": "const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);\n \n window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);\n },\n description: t(\"AIRoom:CreateChatDescription\"),\n disabled: !canUseChat,\n },\n ];\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

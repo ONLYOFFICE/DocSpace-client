@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Kërkoni dhe ftoni me emër ose email",
   "InviteViaLink": "Ftoni përmes lidhjes",
   "InviteViaLinkDescriptionAccounts": "Krijo një lidhje universale për vetëautorizim në {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Krijo një lidhje universale për vetë-autorizim në agjent si mysafir.",
+  "InviteViaLinkDescriptionAgentMembers": "Krijo një lidhje universale për anëtarët e {{productName}} për vetë-autorizim në agjent.",
   "InviteViaLinkDescriptionRoomGuest": "Krijoni një lidhje universale për vetë-autorizimin në dhomë si mysafir.",
   "InviteViaLinkDescriptionRoomMembers": "Krijoni një lidhje universale për anëtarët e {{productName}} për vetëautorizim në dhomë.",
   "LinkCopySuccess": "Lidhja është kopjuar",
   "SendInvitation": "Dërgoni ftesë",
+  "UserAgentMaxAvailableRoleWarning": "Vizitorët dhe Përdoruesit nuk mund të caktohen si menaxherë të Agjentëve. Vetëm administratorët e Dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar.",
   "UserMaxAvailableRoleWarning": "Vizitorët dhe përdoruesit nuk mund të caktohen si menaxherë të dhomës. Vetëm administratorët e dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar.",
   "UsersAlreadyAdded": "Disa përdorues janë shtuar tashmë",
   "UsersCannotBeAdded": "Kontaktet e çaktivizuara nuk mund të shtohen në një dhomë"

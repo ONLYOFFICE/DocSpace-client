@@ -3,7 +3,7 @@
   "content": "Members",
   "content_en_sha1_hash": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
   "created_at": "2025-05-19T21:30:46.449Z",
-  "updated_at": "2025-10-17T14:43:53.306Z",
+  "updated_at": "2025-11-13T10:21:17.698Z",
   "comment": {
     "text": "This translation key is used to display the label \"Members\" in various UI contexts, such as headers and buttons, within dialogs and other interactive components. It appears on screens related to user management, group creation, and contact filtering, providing context for users navigating these sections.",
     "is_auto": true,
@@ -36,31 +36,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 820,
+      "line_number": 830,
       "context": "};\n \n const people = {\n id: \"sort-by_people\",\n key: \"membersCount\",\n label: t(\"Common:Members\"),\n default: true,\n };\n \n const manager = {\n id: \"sort-by_manager\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 542,
-      "context": "}\n \n const getAccountsTitle = () => {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\":\n return getInsideGroupTitle();\n case \"guests\":",
+      "line_number": 706,
+      "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 542,
-      "context": "}\n \n const getAccountsTitle = () => {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\":\n return getInsideGroupTitle();\n case \"guests\":",
+      "line_number": 706,
+      "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 108,
+      "line_number": 134,
       "context": "sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 600,
+      "line_number": 603,
       "context": "? {\n withTabs: true,\n tabsData: [\n {\n id: PEOPLE_TAB_ID,\n name: t(\"Common:Members\"),\n onClick: () => changeActiveTab(PEOPLE_TAB_ID),\n content: null,\n },\n ...[\n withGroups && {",
       "module": "/packages/shared"
     }

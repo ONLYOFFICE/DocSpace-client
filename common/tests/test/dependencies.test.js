@@ -265,17 +265,21 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
     let missing = wsDepsItem.deps.filter((dep) => {
       let success =
         currentWorkspaceCodeImports.uniqueImports.has(dep.name) ||
-        Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some((s) => {
-          return s.startsWith(`${dep.name}/`);
-        });
+        Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
+          (s) => {
+            return s.startsWith(`${dep.name}/`);
+          }
+        );
 
       if (!success && dep.name.startsWith("@types/")) {
         const name = dep.name.substring("@types/".length);
         success =
           currentWorkspaceCodeImports.uniqueImports.has(name) ||
-          Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some((s) => {
-            return s.startsWith(`${name}/`);
-          });
+          Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
+            (s) => {
+              return s.startsWith(`${name}/`);
+            }
+          );
       }
 
       if (success) {
@@ -285,7 +289,9 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       return !success;
     });
 
-    if (currentWorkspaceCodeImports.workspace !== path.join("packages", "shared")) {
+    if (
+      currentWorkspaceCodeImports.workspace !== path.join("packages", "shared")
+    ) {
       missing = missing.filter((m) => {
         const success = sharedDeps.deps.find((d) => d.name === m.name);
 
@@ -321,11 +327,9 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@storybook/addon-webpack5-compiler-babel",
       "@storybook/components",
       "@storybook/react-webpack5",
-      "babel-eslint",
       "babel-jest",
       "babel-plugin-styled-components",
       "@babel/core",
-      "@babel/eslint-parser",
       "@babel/runtime",
       "@babel/preset-env",
       "@babel/preset-react",
@@ -336,33 +340,23 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@babel/plugin-transform-class-properties",
       "@babel/plugin-proposal-export-default-from",
       "webpack-dev-server",
-      "eslint-config-airbnb",
-      "eslint-config-airbnb-typescript",
-      "eslint-config-prettier",
-      "eslint-plugin-import",
-      "eslint-plugin-jsx-a11y",
-      "eslint-plugin-prettier",
-      "eslint-plugin-react-hooks",
-      "eslint-plugin-react",
-      "eslint-plugin-storybook",
-      "eslint-config-next",
-      "eslint-import-resolver-webpack",
-      "prettier",
       "resolve-url-loader",
       "typescript",
       "local-web-server",
       "identity-obj-proxy",
       "@types/identity-obj-proxy",
       "@types/element-resize-detector",
-      "@types/eslint",
       "@types/node",
-      "@typescript-eslint/eslint-plugin",
-      "@typescript-eslint/parser",
       "jest-environment-jsdom",
       "jest-styled-components",
       "ts-jest",
       "ts-node",
       "jest-html-reporter",
+      "linkifyjs",
+      "@biomejs/biome",
+      "@vitest/ui",
+      "@vitest/coverage-v8",
+      "open-cli"
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
@@ -388,7 +382,9 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       });
     }
 
-    const foundInOtherWorkspace = missing.filter((dep) => usedSomeWhere.has(dep.name));
+    const foundInOtherWorkspace = missing.filter((dep) =>
+      usedSomeWhere.has(dep.name)
+    );
 
     if (foundInOtherWorkspace.length > 0) {
       message += `\n  Found in other workspace:\n`;
@@ -435,7 +431,9 @@ test("DifferentDependencyVersionsTest: Verify that all workspaces use same depen
         .map(([ws, ver]) => `  - ${ws}: ${ver}`)
         .join("\n");
 
-      mismatchedDeps.push(`❌ ${depName} has different versions:\n${versionList}`);
+      mismatchedDeps.push(
+        `❌ ${depName} has different versions:\n${versionList}`
+      );
     }
   }
 

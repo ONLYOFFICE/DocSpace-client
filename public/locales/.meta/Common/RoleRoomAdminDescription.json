@@ -3,7 +3,7 @@
   "content": "Room admins can create and manage the assigned rooms, invite new users, and assign roles of room admin and lower. All admins have access to the {{sectionName}} section.",
   "content_en_sha1_hash": "9a3722d73aa3935ca6a26779438b5b1f420f67b4",
   "created_at": "2025-05-19T21:30:48.104Z",
-  "updated_at": "2025-10-17T14:43:53.741Z",
+  "updated_at": "2025-11-03T12:10:35.524Z",
   "comment": {
     "text": "This translation key is used to describe the role and responsibilities of a Room Admin in the product. It appears as part of an access options menu in the UI, informing users about their permissions and roles within the system.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1299,
+      "line_number": 1331,
       "context": "productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n \n if (isCollaborator) return t(\"Common:RoleNewUserDescription\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 56,
-      "context": "const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }",
+      "line_number": 58,
+      "context": "case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAgentManagerDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }",
       "module": "/packages/shared"
     }
   ],

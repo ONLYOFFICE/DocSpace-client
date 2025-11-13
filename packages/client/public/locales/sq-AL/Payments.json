@@ -88,6 +88,7 @@
   "Payer": "Paguesi",
   "PayerDescription": "Ky përdorues ka qasje në detajet e pagesës dhe është i vetmi përdorues që mund të rregullojë kuotën dhe të bëjë pagesa. Zotëruesi i {{productName}}, si dhe vetë menaxheri i pagesës, mund të ricaktojë rolin e menaxherit të pagesës duke përdorur portalin e klientëve Stripe.",
   "PaymentMethod": "Mënyra e pagesës",
+  "PerAITools": "{{currency}} për tokenin",
   "PerBackup": "{{currency}} për 1 backup",
   "PerBackupWithBracket": "({{currency}} për 1 backup)",
   "PerStorage": "{{currency}} për {{amount}}/muaj",

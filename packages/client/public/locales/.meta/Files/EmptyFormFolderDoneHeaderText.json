@@ -3,7 +3,7 @@
   "content": "No finished forms yet",
   "content_en_sha1_hash": "43fb198123ae11d4e4ffaad9fdb88dfdf93a092e",
   "created_at": "2025-05-19T21:30:55.556Z",
-  "updated_at": "2025-09-23T07:24:24.014Z",
+  "updated_at": "2025-11-03T12:10:34.909Z",
   "comment": {
     "text": "The translation key \"EmptyFormFolderDoneHeaderText\" is used to display a message when there are no finished forms in an empty folder. It appears on an empty form folder container and indicates that no files have been completed yet. Translators should provide a clear and concise message that suggests action or alternative behavior, such as suggesting a way to create a new file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 239,
+      "line_number": 305,
       "context": "folderType: Nullable<FolderType>,\n parentRoomType: Nullable<FolderType>,\n ) => {\n return match([parentRoomType, folderType, access])\n .with([P._, FolderType.Done, P._], () =>\n t(\"Files:EmptyFormFolderDoneHeaderText\"),\n )\n \n .with([P._, FolderType.InProgress, P._], () =>\n t(\"Files:EmptyFormFolderProgressHeaderText\"),\n )",
       "module": "/packages/client"
     }

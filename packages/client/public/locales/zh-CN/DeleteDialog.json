@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "智能体<strong>\"{{agentName}}\"</strong>将被永久删除。所有数据和用户访问权限都将丢失。",
+  "DeleteAIAgentTitle": "删除此智能体？",
+  "DeleteAIAgentWarning": "我了解后果并希望删除此智能体",
   "DeleteAllGroupDescription": "所选组将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteAllGroupsTitle": "删除群组",
   "DeleteFiles": "您将要把<strong>{{filesCount}}个文件</strong>移至{{trashSection}}。",

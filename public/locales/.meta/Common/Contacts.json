@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2025-10-17T14:43:53.347Z",
+  "updated_at": "2025-11-13T10:21:17.733Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
@@ -30,19 +30,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 99,
+      "line_number": 102,
       "context": "const setDetails = () => setView(InfoPanelView.infoDetails);\n const setShare = () => setView(InfoPanelView.infoShare);\n \n const memberTab = {\n id: \"info_members\",\n name: isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n onClick: setMembers,\n content: null,\n };\n \n const detailsTab = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 626,
-      "context": "navigationPath[navigationPath.length - 2].title;\n \n const accountsNavigationPath = isContactsInsideGroupPage && [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];",
+      "line_number": 799,
+      "context": "const accountsNavigationPath = React.useMemo(() => {\n if (isContactsInsideGroupPage) {\n return [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 127,
+      "line_number": 153,
       "context": "t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"\n values={{\n serviceName,\n sectionName: t(\"Common:Contacts\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
       "module": "/packages/client"
     },
@@ -72,13 +72,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 428,
-      "context": "const accounts =\n !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
+      "line_number": 429,
+      "context": "const accounts =\n !isNotPaidPeriod && !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/GuestShareLink/page.client.tsx",
-      "line_number": 141,
+      "line_number": 100,
       "context": "onClick={onDenyInvite}\n testId=\"deny_button\"\n />\n </ButtonsWrapper>\n <Text fontSize=\"12px\" fontWeight=\"400\" className=\"guest-info\">\n {t(\"Common:GuestApprovalNote\", { sectionName: t(\"Common:Contacts\") })}\n </Text>\n </FormWrapper>\n );\n };",
       "module": "/packages/login"
     },
@@ -90,7 +90,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 491,
+      "line_number": 492,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps.headerLabel || t(\"Common:Contacts\"),\n },\n }\n : ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/packages/shared"
     }

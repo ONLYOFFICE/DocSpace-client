@@ -321,6 +321,26 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "ai-settings",
+      element: <Navigate to="ai-settings/providers" replace />,
+    },
+    {
+      path: "ai-settings/providers",
+      element: <ViewComponent />,
+    },
+    {
+      path: "ai-settings/servers",
+      element: <ViewComponent />,
+    },
+    {
+      path: "ai-settings/search",
+      element: <ViewComponent />,
+    },
+    {
+      path: "ai-settings/knowledge",
+      element: <ViewComponent />,
+    },
+    {
       path: "integration",
       element: <Navigate to="integration/third-party-services" replace />,
     },

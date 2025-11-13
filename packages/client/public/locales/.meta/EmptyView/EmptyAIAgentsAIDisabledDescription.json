@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyAIAgentsAIDisabledDescription",
+  "content": "This section allows users to work with AI agents — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by your {{productName}} admin.",
+  "content_en_sha1_hash": "81bbd385cc11e06429ef08aaad4a49c31666567b",
+  "created_at": "2025-11-03T12:10:32.825Z",
+  "updated_at": "2025-11-03T12:19:59.848Z",
+  "comment": {
+    "text": "This text explains that the AI agent features are currently unavailable. It informs users that an administrator must enable the AI features service within the {{productName}} platform to begin using the AI assistants for document handling and other tasks. This message appears within an empty state view.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:19:59.848Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 218,
+      "context": "t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .otherwise(() =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

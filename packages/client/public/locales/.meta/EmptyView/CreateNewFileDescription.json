@@ -3,7 +3,7 @@
   "content": "Start working in the room by creating files or folders",
   "content_en_sha1_hash": "b56bfa9dcd9738c6041f0bf7c598799e68e184c6",
   "created_at": "2025-05-19T21:30:56.453Z",
-  "updated_at": "2025-10-13T13:22:35.629Z",
+  "updated_at": "2025-11-13T07:58:07.689Z",
   "comment": {
     "text": "This translation key is used to display a message that prompts users to create new files or folders in a room. It appears on an empty view component where users can start working, likely on a file creation or management interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 350,
+      "line_number": 431,
       "context": "disabled: false,\n };\n \n const createFile: EmptyViewItemType = {\n title: t(\"EmptyView:CreateNewFileTitle\"),\n description: t(\"EmptyView:CreateNewFileDescription\"),\n icon: <CreateNewFormIcon />,\n key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {",
       "module": "/packages/client"
     }

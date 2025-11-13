@@ -3,7 +3,7 @@
   "content": "The folder will be permanently removed from the {{trashSection}}.",
   "content_en_sha1_hash": "f9a5e2503aa7e4653b89b651be7d2cffa1282180",
   "created_at": "2025-10-01T15:20:12.310Z",
-  "updated_at": "2025-10-17T14:43:53.392Z",
+  "updated_at": "2025-11-03T12:10:34.993Z",
   "comment": {
     "text": "This key displays a message within a delete confirmation dialog, informing the user that a folder will be permanently removed from the trash section. It's used when deleting a folder, and the `trashSection` value should be translated separately.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 112,
+      "line_number": 128,
       "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })",
       "module": "/packages/client"
     }

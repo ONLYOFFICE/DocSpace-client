@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.262Z",
-  "updated_at": "2025-09-29T18:22:19.545Z",
+  "updated_at": "2025-11-06T18:29:15.780Z",
   "comment": {
     "text": "This translation key is used for \"Custom\" labels and descriptions in the Portal Settings page, particularly in the categories and developer tools sections. It appears as a title or heading, indicating custom themes or settings. Translators should provide an equivalent label that accurately reflects the UI context.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 488,
-      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_custom\",\n key: \"7-1-1\",\n icon: \"\",\n link: \"custom\",\n tKey: \"Common:Custom\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_room-selector\",\n key: \"7-1-2\",\n icon: \"\",",
+      "line_number": 534,
+      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_custom\",\n key: \"8-1-1\",\n icon: \"\",\n link: \"custom\",\n tKey: \"Common:Custom\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_room-selector\",\n key: \"8-1-2\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {

@@ -32,6 +32,7 @@ import classNames from "classnames";
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
+import { Encoder } from "@docspace/shared/utils/encoder";
 
 import { getCorrectDate } from "@docspace/shared/utils";
 import styles from "../../styles/TransactionHistory.module.scss";
@@ -79,7 +80,9 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {transaction.participantDisplayName || "—"}
+          {transaction.participantDisplayName
+            ? Encoder.htmlDecode(transaction.participantDisplayName)
+            : "—"}
         </Text>
       </TableCell>
       <TableCell>

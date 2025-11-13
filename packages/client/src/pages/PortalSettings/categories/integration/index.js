@@ -37,7 +37,6 @@ import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Secti
 import SsoSettings from "./SingleSignOn";
 import LdapSettings from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
-
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
@@ -80,7 +79,9 @@ const IntegrationWrapper = (props) => {
     getThirdPartyData,
     getSMTPSettingsData,
     getDocumentServiceData,
-  } = useIntegration(defaultProps.integration);
+  } = useIntegration({
+    ...defaultProps.integration,
+  });
 
   const data = [
     {

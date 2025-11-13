@@ -3,7 +3,7 @@
   "content": "Two-factor authentication enabled for secure access",
   "content_en_sha1_hash": "7b532590bb7deb0a53a33a476ff22eada36474da",
   "created_at": "2025-08-12T19:46:18.440Z",
-  "updated_at": "2025-08-12T19:51:56.228Z",
+  "updated_at": "2025-11-03T12:10:35.410Z",
   "comment": {
     "text": "This key displays a title indicating that two-factor authentication has been successfully enabled. It appears as the main title within the Two-Factor Authentication Activation page, confirming secure access. Translators should ensure the tone conveys a sense of security and confirmation.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 149,
+      "line_number": 150,
       "context": "return (\n <>\n <div className=\"set-app-description\">\n <Text isBold fontSize=\"18px\" className=\"set-app-title\">\n {t(\"TfaTitle\")}\n </Text>\n <Text className=\"set-app-subtitle\">\n {t(\"TfaSubTitle\", { productName: t(\"Common:ProductName\") })}\n </Text>",
       "module": "/packages/login"
     }

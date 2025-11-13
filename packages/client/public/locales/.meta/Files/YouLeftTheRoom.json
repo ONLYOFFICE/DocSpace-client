@@ -3,7 +3,7 @@
   "content": "You have left the room",
   "content_en_sha1_hash": "46542dad576cfe3647d36a31566045dcad57950c",
   "created_at": "2025-05-19T21:30:56.359Z",
-  "updated_at": "2025-10-13T14:41:03.137Z",
+  "updated_at": "2025-11-13T07:58:08.506Z",
   "comment": {
     "text": "\"When you exit a room, displays a confirmation message to inform users that they have left the current room.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3101,
-      "context": "this.filesStore.setInRoomFolder(roomId, false);\n }\n \n isOwner\n ? toastr.success(t(\"Files:LeftAndAppointNewOwner\"))\n : toastr.success(t(\"Files:YouLeftTheRoom\"));\n });\n };\n \n changeRoomOwner = (t, userId, isLeaveChecked = false) => {\n const { setFolder, setSelected, selection, bufferSelection } =",
+      "line_number": 3089,
+      "context": "const isAdmin = user.isOwner || user.isAdmin;\n const isRoot = this.selectedFolderStore.isRootFolder;\n \n const roomSuccessText = isOwner\n ? t(\"Files:LeftAndAppointNewOwner\")\n : t(\"Files:YouLeftTheRoom\");\n const agentSuccessText = isOwner\n ? t(\"Files:LeftAgentAndAppointNewOwner\")\n : t(\"Files:YouLeftTheAgent\");\n const successText = isAIAgent ? agentSuccessText : roomSuccessText;",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Details",
   "content_en_sha1_hash": "dc3decbb93847518f1a049dcf49d0d7c6560bcc6",
   "created_at": "2025-05-19T21:30:54.969Z",
-  "updated_at": "2025-08-27T10:14:35.253Z",
+  "updated_at": "2025-10-27T16:14:33.420Z",
   "comment": {
     "text": "This translation key is used for a tab label that displays the title \"Details\" on a settings panel or information header. It appears as a clickable button within an info panel and is part of a larger navigation system for accessing detailed views of various data members.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 106,
+      "line_number": 109,
       "context": "content: null,\n };\n \n const detailsTab = {\n id: \"info_details\",\n name: t(\"InfoPanel:SubmenuDetails\"),\n onClick: setDetails,\n content: null,\n };\n \n const templateSubmenu = [memberTab, detailsTab];",
       "module": "/packages/client"
     }

@@ -1,0 +1,28 @@
+{
+  "key_path": "AIAgentsEmptyScreenTent",
+  "content": "See AI agents details here",
+  "content_en_sha1_hash": "01eb5a8dd58f70c44074a6b035be2e39b68b6f8a",
+  "created_at": "2025-11-03T12:10:31.620Z",
+  "updated_at": "2025-11-03T12:23:26.432Z",
+  "comment": {
+    "text": "This text appears on a screen displaying no AI agents. It serves as placeholder text indicating where AI agent details would normally be shown. Translators should maintain a similar tone to suggest the absence of content.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:23:26.432Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
+      "line_number": 57,
+      "context": ">\n <div className=\"no-thumbnail-img-wrapper\">\n <img src={imageSrc} alt=\"No AI agent\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"AIAgentsEmptyScreenTent\")}\n </Text>\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

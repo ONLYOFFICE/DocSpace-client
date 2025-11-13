@@ -1,0 +1,34 @@
+{
+  "key_path": "EnterLabel",
+  "content": "Enter name",
+  "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
+  "created_at": "2025-10-27T16:14:31.647Z",
+  "updated_at": "2025-11-13T10:21:17.838Z",
+  "comment": {
+    "text": "This key provides the placeholder text for an input field prompting the user to enter a name. It appears in dialogs related to AI settings, specifically for adding or updating AI providers and managing server headers. Translators should ensure the wording is clear and concise for entering a user-defined title or name.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:30:49.103Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 249,
+      "context": "size={InputSize.base}\n type={InputType.text}\n value={providerTitle}\n onChange={(e) => setProviderTitle(e.target.value)}\n scale\n placeholder={t(\"AISettings:EnterLabel\")}\n isDisabled={isRequestRunning}\n />\n <Text className={styles.fieldHint}>\n {t(\"AISettings:ProviderNameInputHint\")}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useAdvancedSettings.tsx",
+      "line_number": 141,
+      "context": "<TextInput\n type={InputType.text}\n size={InputSize.base}\n value={headerNames[index]}\n onChange={(e) => onChangeHeaderName(index, e.target.value)}\n placeholder={t(\"AISettings:EnterLabel\")}\n scale\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"AISettings:HeaderValue\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

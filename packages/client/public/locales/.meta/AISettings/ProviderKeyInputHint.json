@@ -1,0 +1,28 @@
+{
+  "key_path": "ProviderKeyInputHint",
+  "content": "Enter the API key generated from your AI provider's dashboard",
+  "content_en_sha1_hash": "05bc4c582666abe84c54fed8350b4cc8d7ea9a83",
+  "created_at": "2025-11-07T13:41:03.795Z",
+  "updated_at": "2025-11-13T10:21:17.840Z",
+  "comment": {
+    "text": "This text provides a helpful hint to the user within a dialog for adding or updating AI provider settings. It instructs them to enter an API key obtained from their AI provider's dashboard. Translators should ensure the phrasing clearly conveys the need for a valid API key.",
+    "is_auto": true,
+    "updated_at": "2025-11-07T13:45:29.462Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 315,
+      "context": "isDisabled={isRequestRunning}\n isSimulateType\n autoComplete=\"off\"\n />\n <Text className={styles.fieldHint}>\n {t(\"AISettings:ProviderKeyInputHint\")}\n </Text>\n </>\n )}\n </FieldContainer>\n <button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

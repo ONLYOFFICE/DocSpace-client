@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Agent <strong>\"{{agentName}}\"</strong> daimi şəkildə silinəcək. Bütün məlumatlar və istifadəçi girişləri itiriləcək.",
+  "DeleteAIAgentTitle": "Bu agenti silməli?",
+  "DeleteAIAgentWarning": "Mövcud nəticələri başa düşürəm və agenti silmək istəyirəm.",
   "DeleteAllGroupDescription": "Seçilmiş qruplar silinəcək. Qruplardakı istifadəçilər {{productName}}-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
   "DeleteAllGroupsTitle": "Qrupları silin",
   "DeleteFiles": "Siz <strong>faylları ({{filesCount}})</strong> {{trashSection}}-ə köçürmək üzrəsiniz.",

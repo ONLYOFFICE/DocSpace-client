@@ -28,6 +28,8 @@ export const DEFAULT_EMAIL_TEXT =
   "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email.";
 export const DEFAULT_ROOM_TEXT =
   "<strong>{{displayName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+export const DEFAULT_AGENT_TEXT =
+  "<strong>{{displayName}}</strong> invites you to join the AI agent <strong>{{agentName}}</strong>.";
 export const DEFAULT_PORTAL_TEXT =
   "<strong>{{displayName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
 export const DEFAULT_GUEST_TEXT =

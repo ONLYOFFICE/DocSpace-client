@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyRoomsDescriptionTextAgent",
+  "content": "Please create the first agent in {{sectionName}}.",
+  "content_en_sha1_hash": "c2b0bca3f0a3e91aa78ae12c2249093cbb2d0c81",
+  "created_at": "2025-11-03T12:10:17.456Z",
+  "updated_at": "2025-11-13T07:58:08.672Z",
+  "comment": {
+    "text": "This text provides a description for the first agent when the agent section is empty. It's used to guide the user and appears as a message in the UI within the agent section. The `sectionName` variable will be replaced with \"AIAgents\" for context.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:13:10.305Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 218,
+      "context": "? t(\"Common:EmptyRoomsHeaderAgent\")\n : t(\"Common:EmptyRoomsHeader\");\n const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : isEmptyAgentsRootScreen\n ? t(\"Common:EmptyRoomsDescriptionTextAgent\", {\n sectionName: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

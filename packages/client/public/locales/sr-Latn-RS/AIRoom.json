@@ -1,0 +1,22 @@
+{
+  "AIChat": "AI razgovor",
+  "CreateChat": "Kreirajte ćaskanje",
+  "CreateChatDescription": "Idite na karticu AI razgovor da biste započeli.",
+  "EmptyKnowledgeDescription": "Datoteke otpremljene ovde biće indeksirane i korišćene kao kontekst u AI razgovoru. Dodajte datoteke da biste postavljali pitanja AI o njima, generisali sadržaj ili zajedno analizirali informacije.",
+  "EmptyKnowledgeTitle": "Još uvek nema otpremljenih datoteka",
+  "EmptyResultsDescription": "Datoteke generisane u AI razgovoru pojaviće se ovde automatski. Kad god generišete sadržaj, započnete razgovor ili pošaljete poruku sa izlaznim rezultatom, on će biti sačuvan u ovom odeljku.",
+  "EmptyResultsTitle": "Još nema rezultata",
+  "Instructions": "Instrukcije",
+  "InstructionsDescription": "Definišite svrhu i ponašanje ćaskanja u ovoj prostoriji. Šta treba da rade? Kako treba da funkcionišu? Šta treba izbegavati?",
+  "InstructionsPlaceholder": "Primer: „Ćaskanja u ovoj prostoriji se koriste za diskusiju o projektnim fajlovima. Ostanite na temi i izbegavajte razgovore van teme ili deljenje nepovezanih dokumenata.“",
+  "Knowledge": "Znanje",
+  "KnowledgeDescription": "Otpremite datoteke sa svog računara ili sa {{productName}} da biste obezbedili bolji kontekst za ćaskanje. Napomena: deo ili ceo otpremljeni sadržaj može biti otkriven tokom razgovora.",
+  "KnowledgeSelectIn": "Izaberite u {{productName}}",
+  "MCP": "MCP alati za ovu sobu",
+  "MCPDescription": "Koristite MCP alate koje je povezao administrator kako biste poboljšali iskustvo razgovora sa veštačkom inteligencijom. Ovi alati mogu pomoći pri izdvajanju podataka, sažecima, pametnim predlozima i slično.",
+  "Model": "Provajder i model",
+  "ModelDescription": "Izaberite AI provajdera i model koji će se koristiti u razgovorima u ovoj sobi. Ovo podešavanje je obavezno i odnosi se na sve učesnike.",
+  "ResultStorage": "Skladištenje rezultata",
+  "UploadFilesDevice": "Otpremite datoteke sa svog ličnog uređaja",
+  "UploadFilesPortal": "Otpremite datoteke sa {{sectionNameFirst}} ili {{sectionNameSecond}}"
+}

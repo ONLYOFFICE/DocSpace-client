@@ -88,6 +88,7 @@
   "Payer": "Zahler",
   "PayerDescription": "Dieser Benutzer hat Zugriff auf die Zahlungsdetails und ist der einzige Benutzer, der die Quote anpassen und Zahlungen vornehmen kann. Der {{productName}}-Besitzer sowie der zahlende Manager selbst können die Rolle des zahlenden Managers über das Stripe-Kundenportal neu zuweisen.",
   "PaymentMethod": "Zahlungsmethode",
+  "PerAITools": "{{currency}} pro Token",
   "PerBackup": "{{currency}} pro 1 Backup",
   "PerBackupWithBracket": "({{currency}} pro 1 Backup)",
   "PerStorage": "{{currency}} pro {{amount}}/Monat",

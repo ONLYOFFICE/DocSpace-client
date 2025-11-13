@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 import { Tags } from ".";
@@ -58,7 +58,7 @@ describe("<Tags />", () => {
   });
 
   it("calls onSelectTag when a tag is clicked", () => {
-    const onSelectTagMock = jest.fn();
+    const onSelectTagMock = vi.fn();
     render(
       <Tags {...baseProps} tags={["tag1"]} onSelectTag={onSelectTagMock} />,
     );

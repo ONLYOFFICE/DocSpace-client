@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useLocation, Outlet } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
@@ -64,6 +64,7 @@ import {
 import MediaViewer from "./MediaViewer";
 
 import { useSDK, useOperations } from "./Hooks";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 const PureHome = (props) => {
   const {
@@ -149,6 +150,7 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    chatFiles,
 
     allowInvitingGuests,
     checkGuests,
@@ -159,6 +161,9 @@ const PureHome = (props) => {
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
+
+    aiConfig,
+    currentTab,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -179,8 +184,9 @@ const PureHome = (props) => {
   const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
+  const isChat = currentClientView === "chat";
 
-  const onDrop = (f, uploadToFolder) => {
+  const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
 
     if (
@@ -202,7 +208,7 @@ const PureHome = (props) => {
       .catch((err) => {
         toastr.error(err, null, 0, true);
       });
-  };
+  });
 
   useOperations({
     clearUploadData,
@@ -237,21 +243,21 @@ const PureHome = (props) => {
     isLoading,
   });
 
-  const getContextModel = () => {
+  const getContextModel = useCallback(() => {
     if (isFrame || isProfile) return null;
 
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
-  };
+  }, [isFrame, isProfile, isContactsPage, getContactsModel, getFolderModel]);
 
-  const onCancelUpload = () => {
+  const onCancelUpload = useCallback(() => {
     if (hideConfirmCancelOperation) {
       cancelUpload(t);
       return;
     }
 
     setOperationCancelVisible(true);
-  };
+  }, [hideConfirmCancelOperation, cancelUpload, setOperationCancelVisible]);
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
@@ -275,11 +281,12 @@ const PureHome = (props) => {
       isLoaded: !firstLoad,
       viewAs: contactsViewAs,
       isAccounts: isContactsPage,
+      chatFiles,
     };
 
     if (!isContactsPage) {
       sectionProps.dragging = dragging;
-      sectionProps.uploadFiles = true;
+      sectionProps.uploadFiles = !isChat;
       sectionProps.onDrop =
         isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
 
@@ -289,6 +296,7 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+      sectionProps.fullHeightBody = isChat;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
@@ -332,7 +340,7 @@ const PureHome = (props) => {
 
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 
-  sectionProps.getContextModel = getContextModel;
+  sectionProps.getContextModel = isChat ? null : getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
@@ -372,6 +380,9 @@ const PureHome = (props) => {
     setShouldShowFilter(shouldRenderSectionFilter);
   }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
 
+  const isDisabledKnowledge =
+    !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage || isProfile ? (
@@ -386,7 +397,7 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <SectionWrapper {...sectionProps}>
+      <SectionWrapper {...sectionProps} withoutFooter={isChat}>
         {!isErrorRoomNotAvailable ||
         isContactsPage ||
         isProfile ||
@@ -404,13 +415,13 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {shouldShowFilter && !isProfile ? (
+        {!isChat &&
+        !isDisabledKnowledge &&
+        shouldShowFilter &&
+        !isProfile &&
+        (!isFrame || showFilter) ? (
           <Section.SectionFilter>
-            {isFrame ? (
-              showFilter && <SectionFilterContent />
-            ) : (
-              <SectionFilterContent />
-            )}
+            <SectionFilterContent />
           </Section.SectionFilter>
         ) : null}
 
@@ -450,6 +461,7 @@ export const Component = inject(
     indexingStore,
     dialogsStore,
     filesSettingsStore,
+    aiRoomStore,
   }) => {
     const {
       setSelectedFolder,
@@ -513,6 +525,8 @@ export const Component = inject(
       scrollToTop,
       wsCreatedPDFForm,
       mainButtonVisible,
+
+      removeActiveItem,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -712,6 +726,7 @@ export const Component = inject(
       setOperationCancelVisible,
       hideConfirmCancelOperation,
 
+      removeActiveItem,
       allowInvitingGuests,
       checkGuests,
       hasGuests,
@@ -722,6 +737,9 @@ export const Component = inject(
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,
+
+      currentTab: aiRoomStore.currentTab,
+      aiConfig: settingsStore.aiConfig,
     };
   },
 )(observer(Home));

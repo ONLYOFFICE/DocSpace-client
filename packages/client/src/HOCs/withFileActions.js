@@ -249,6 +249,7 @@ export default function withFileActions(WrappedFileItem) {
         // !!e.target.closest(".additional-badges") ||
         e.target.closest(".tag") ||
         e.target.closest(".mainIcons") ||
+        e.target.closest(".react-tooltip") ||
         isNewBadgePanelVisible ||
         isTrashFolder
       )
@@ -431,6 +432,7 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder,
         isTemplatesFolder,
         isRecentFolder,
+        isAIAgentsFolder,
       } = treeFoldersStore;
       const {
         dragging,
@@ -515,8 +517,9 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder ||
         isTemplatesFolder ||
         isRecentFolder ||
-        settingsStore.currentDeviceType !== DeviceType.desktop ||
-        inProgress;
+        inProgress ||
+        isAIAgentsFolder ||
+        isMobile;
 
       let isActive = false;
 

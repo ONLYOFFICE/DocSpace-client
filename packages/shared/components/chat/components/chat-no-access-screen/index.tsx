@@ -39,13 +39,13 @@ type Props = {
   aiReady: boolean;
   canUseChat: boolean;
   standalone: boolean;
-  isDocSpaceAdmin: boolean;
+  isPortalAdmin: boolean;
 };
 
 export const ChatNoAccessScreen = ({
   aiReady,
   canUseChat,
-  isDocSpaceAdmin,
+  isPortalAdmin,
   standalone,
 }: Props) => {
   const { t } = useTranslation("Common");
@@ -60,13 +60,13 @@ export const ChatNoAccessScreen = ({
 
   const title = !canUseChat
     ? t("Common:AIChatNoAccessTitle")
-    : isDocSpaceAdmin && standalone
+    : isPortalAdmin && standalone
       ? t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle")
       : t("Common:AIFeaturesAreCurrentlyDisabled");
 
   const description = !canUseChat
     ? t("Common:AIChatNoAccessDescription")
-    : match([standalone, isDocSpaceAdmin])
+    : match([standalone, isPortalAdmin])
         // standalone admin
         .with([true, true], () =>
           t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
@@ -110,7 +110,7 @@ export const ChatNoAccessScreen = ({
   } as const;
 
   const options =
-    !isDocSpaceAdmin || !canUseChat
+    !isPortalAdmin || !canUseChat
       ? []
       : standalone
         ? [goToAIProviderSettings]

@@ -44,6 +44,7 @@ import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
 import { getTextColor } from "./getTextColor";
 import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
+import { uuid } from "./uuid";
 
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
@@ -167,6 +168,7 @@ export {
   getAiProviderIcon,
   getServerIcon,
   getAiProviderLabel,
+  uuid,
 };
 
 export const getModalType = () => {

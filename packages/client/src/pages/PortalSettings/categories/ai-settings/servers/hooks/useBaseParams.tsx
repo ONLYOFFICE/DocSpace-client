@@ -35,6 +35,9 @@ import {
   InputSize,
 } from "@docspace/shared/components/text-input";
 import { Textarea } from "@docspace/shared/components/textarea";
+import { Text } from "@docspace/shared/components/text";
+
+import styles from "./useBaseParams.module.scss";
 
 export const useBaseParams = (initialValues?: {
   name?: string;
@@ -124,7 +127,11 @@ export const useBaseParams = (initialValues?: {
           placeholder={t("Common:EnterName")}
           scale
           hasError={!!nameError}
+          maxLength={128}
         />
+        <Text className={styles.fieldHint}>
+          {t("AISettings:ProviderNameInputHint")}
+        </Text>
       </FieldContainer>
       <FieldContainer
         labelText={t("AISettings:IntegrationURL")}
@@ -144,6 +151,9 @@ export const useBaseParams = (initialValues?: {
           scale
           hasError={!!urlError}
         />
+        <Text className={styles.fieldHint}>
+          {t("AISettings:MCPServerIntegrationURLHint")}
+        </Text>
       </FieldContainer>
       <FieldContainer
         labelText={t("Common:Description")}
@@ -159,7 +169,11 @@ export const useBaseParams = (initialValues?: {
           value={description}
           onChange={(e) => onChangeDescription(e.target.value)}
           placeholder={t("OAuth:EnterDescription")}
+          maxLength={256}
         />
+        <Text className={styles.fieldHint}>
+          {t("AISettings:MCPServerDescriptionHint")}
+        </Text>
       </FieldContainer>
     </>
   );

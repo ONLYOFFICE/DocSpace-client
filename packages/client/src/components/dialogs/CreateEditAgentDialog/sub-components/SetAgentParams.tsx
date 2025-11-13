@@ -49,6 +49,7 @@ import {
   TAgentIconParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
+import type { TSelectorItem } from "@docspace/shared/components/selector";
 import { Nullable } from "@docspace/shared/types";
 import { TAgent } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
@@ -59,7 +60,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import RoomQuota from "SRC_DIR/components/RoomQuota";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TRoom } from "@docspace/shared//api/rooms/types";
 
 const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
   display: flex;
@@ -141,8 +142,10 @@ type setAgentParamsProps = {
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: VoidFunction;
-  onOpenMCPSelector?: VoidFunction;
   portalMcpServerId?: string;
+  onClickAction?: () => void;
+  selectedServers?: TSelectorItem[];
+  setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 
   // Store props
   folderFormValidation?: SettingsStore["folderFormValidation"];
@@ -159,7 +162,7 @@ type setAgentParamsProps = {
   cover?: Nullable<TClientCover>;
   covers?: Nullable<TServerCover[]>;
   setCover?: DialogsStore["setCover"];
-  isDefaultAgentsQuotaSet?: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+  isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
 };
 
@@ -190,10 +193,12 @@ const setAgentParams = ({
   covers,
   setCover,
   onOwnerChange,
-  onOpenMCPSelector,
-  isDefaultAgentsQuotaSet,
+  isDefaultAIAgentsQuotaSet,
   infoPanelSelection,
   portalMcpServerId,
+  onClickAction,
+  selectedServers,
+  setSelectedServers,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -503,10 +508,12 @@ const setAgentParams = ({
         setAgentParams={setAgentParams}
         agentParams={agentParams}
         portalMcpServerId={portalMcpServerId}
-        onOpenMCPSelector={onOpenMCPSelector}
+        onClickAction={onClickAction}
+        selectedServers={selectedServers}
+        setSelectedServers={setSelectedServers}
       />
 
-      {isDefaultAgentsQuotaSet ? (
+      {isDefaultAIAgentsQuotaSet ? (
         <RoomQuota
           setRoomParams={setAgentParams}
           roomParams={agentParams}
@@ -548,7 +555,7 @@ export default inject(
     avatarEditorDialogStore,
     currentQuotaStore,
   }: TStore) => {
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     const { bufferSelection } = filesStore;
@@ -588,7 +595,7 @@ export default inject(
       cover,
       covers,
       setCover,
-      isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       infoPanelSelection,
     };
   },

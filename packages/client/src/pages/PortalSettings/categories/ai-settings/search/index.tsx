@@ -34,17 +34,20 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { toastr } from "@docspace/shared/components/toast";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Search.module.scss";
+import { ResetWebSearchDialog } from "./dialogs/reset";
 
 type TSearchProps = {
   webSearchInitied?: AISettingsStore["webSearchInitied"];
@@ -53,6 +56,7 @@ type TSearchProps = {
   updateWebSearch?: AISettingsStore["updateWebSearch"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   aiSettingsUrl?: string;
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -60,12 +64,15 @@ const FAKE_KEY_VALUE = "0000000000000000";
 const SearchComponent = ({
   webSearchInitied,
   webSearchConfig,
-  restoreWebSearch,
   updateWebSearch,
   hasAIProviders,
   aiSettingsUrl,
+  getAIConfig,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
+
+  const [resetDialogVisible, setResetDialogVisible] =
+    React.useState<boolean>(false);
 
   const [isKeyHidden, setIsKeyHidden] = React.useState(
     webSearchConfig?.enabled,
@@ -86,20 +93,34 @@ const SearchComponent = ({
     setValue(value || "");
   };
 
-  const onRestoreToDefault = async () => {
+  const refreshData = () => {
     setValue("");
     setSelectedOption(WebSearchType.None);
     setIsKeyHidden(false);
+  };
 
-    restoreWebSearch?.();
+  const closeDialog = () => {
+    setResetDialogVisible(false);
+  };
+
+  const onRestoreToDefault = async () => {
+    setResetDialogVisible(true);
   };
 
   const onSave = async () => {
     if (isKeyHidden) return;
 
     setSaveRequestRunning(true);
-    await updateWebSearch?.(true, selectedOption, value);
+    try {
+      await updateWebSearch?.(true, selectedOption, value);
+
+      toastr.success(t("AISettings:WebSearchEnabledSuccess"));
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as string);
+    }
     setSaveRequestRunning(false);
+    getAIConfig?.();
   };
 
   const items = React.useMemo(() => {
@@ -113,7 +134,7 @@ const SearchComponent = ({
 
   const selectedItem = React.useMemo(() => {
     return items.find((item) => item.key === selectedOption);
-  }, [selectedOption]);
+  }, [selectedOption, items]);
 
   React.useEffect(() => {
     if (webSearchConfig?.enabled) {
@@ -220,7 +241,7 @@ const SearchComponent = ({
                 setSelectedOption(option.key as WebSearchType)
               }
               displaySelectedOption
-              isDisabled={!hasAIProviders}
+              isDisabled={!hasAIProviders || isKeyHidden}
             />
           </FieldContainer>
           <FieldContainer
@@ -229,23 +250,33 @@ const SearchComponent = ({
             labelText={t("AISettings:APIKey")}
             removeMargin
           >
-            <PasswordInput
-              className={styles.passwordInput}
-              placeholder={t("AISettings:EnterKey")}
-              inputValue={value}
-              onChange={onChange}
-              scale
-              isSimulateType
-              isFullWidth
-              isDisableTooltip
-              isDisabled={isKeyHidden || selectedOption === WebSearchType.None}
-              autoComplete="off"
-            />
             {isKeyHidden ? (
-              <Text className={styles.hiddenKeyDescription}>
-                {t("AISettings:WebSearchKeyHiddenDescription")}
-              </Text>
-            ) : null}
+              <div className={styles.aiBanner}>
+                <Text fontSize="12px" fontWeight={400} lineHeight="16px">
+                  {t("AISettings:WebSearchKeyHiddenDescription")}
+                </Text>
+              </div>
+            ) : (
+              <>
+                <PasswordInput
+                  className={styles.passwordInput}
+                  placeholder={t("AISettings:EnterKey")}
+                  inputValue={value}
+                  onChange={onChange}
+                  scale
+                  isSimulateType
+                  isFullWidth
+                  isDisableTooltip
+                  isDisabled={
+                    isKeyHidden || selectedOption === WebSearchType.None
+                  }
+                  autoComplete="off"
+                />
+                <Text className={styles.hiddenKeyDescription}>
+                  {t("AISettings:WebSearchKeyDescription")}
+                </Text>
+              </>
+            )}
           </FieldContainer>
         </div>
         <div className={styles.buttonContainer}>
@@ -274,6 +305,9 @@ const SearchComponent = ({
       {!hasAIProviders ? (
         <Tooltip id={tooltipId} place="bottom" offset={10} float />
       ) : null}
+      {resetDialogVisible ? (
+        <ResetWebSearchDialog onSuccess={refreshData} onClose={closeDialog} />
+      ) : null}
     </>
   );
 };
@@ -282,9 +316,9 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
   return {
     webSearchInitied: aiSettingsStore.webSearchInitied,
     webSearchConfig: aiSettingsStore.webSearchConfig,
-    restoreWebSearch: aiSettingsStore.restoreWebSearch,
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
     aiSettingsUrl: settingsStore.aiSettingsUrl,
+    getAIConfig: settingsStore.getAIConfig,
   };
 })(observer(SearchComponent));

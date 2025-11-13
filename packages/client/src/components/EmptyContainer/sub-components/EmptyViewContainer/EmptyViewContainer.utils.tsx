@@ -186,9 +186,9 @@ const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
 const getAIAgentsAIDisabledTitle = (
   t: TTranslation,
   standalone: boolean,
-  isDocSpaceAdmin: boolean,
+  isPortalAdmin: boolean,
 ) => {
-  return match([standalone, isDocSpaceAdmin])
+  return match([standalone, isPortalAdmin])
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle"),
     )
@@ -201,9 +201,9 @@ const getAIAgentsAIDisabledTitle = (
 const getAIAgentsAIDisabledDescription = (
   t: TTranslation,
   standalone: boolean,
-  isDocSpaceAdmin: boolean,
+  isPortalAdmin: boolean,
 ) => {
-  return match([standalone, isDocSpaceAdmin])
+  return match([standalone, isPortalAdmin])
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
         productName: t("Common:ProductName"),
@@ -238,7 +238,7 @@ export const getRootDescription = (
   security: Nullable<TFolderSecurity>,
   standalone: boolean,
   aiReady: boolean,
-  isDocSpaceAdmin: boolean,
+  isPortalAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
     .with(
@@ -246,7 +246,7 @@ export const getRootDescription = (
       () =>
         aiReady
           ? getAIAgentsAIEnabledDescription(t, access)
-          : getAIAgentsAIDisabledDescription(t, true, isDocSpaceAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+          : getAIAgentsAIDisabledDescription(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
@@ -366,7 +366,7 @@ export const getRootTitle = (
   rootFolderType: Nullable<FolderType>,
   aiReady: boolean,
   standalone: boolean,
-  isDocSpaceAdmin: boolean,
+  isPortalAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
     .with(
@@ -374,7 +374,7 @@ export const getRootTitle = (
       () =>
         aiReady
           ? getAIAgentsAIEnabledTitle(t, access)
-          : getAIAgentsAIDisabledTitle(t, true, isDocSpaceAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+          : getAIAgentsAIDisabledTitle(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
     )
     .with(
       [

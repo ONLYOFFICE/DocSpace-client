@@ -209,7 +209,7 @@ export const User = ({
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           ) : null}
         </div>
-        {!("isGroup" in user) ? (
+        {!("isGroup" in user && user.isGroup) ? (
           <div className="role-email" style={{ display: "flex" }}>
             <Text
               className="label"

@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2025-11-06T18:29:15.558Z",
+  "updated_at": "2025-11-13T07:58:07.686Z",
   "comment": {
     "text": "This translation key \"Files\" is used to display the English text for a file-related feature or action in the UI, such as an upload button. It appears on screens like the Home page and File management pages, indicating the number of files or folders available.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 395,
+      "line_number": 404,
       "context": "key: \"uploads\",\n disabled: !security?.Create,\n model: [\n {\n key: \"upload-files\",\n label: t(\"Common:Files\"),\n icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 353,
+      "line_number": 391,
       "context": "getItemContent = () => {\n if (!(\"foldersCount\" in this.item) || !(\"filesCount\" in this.item))\n return null;\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };\n \n getItemSize = () => {",
       "module": "/packages/client"
     },
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 730,
+      "line_number": 735,
       "context": "break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():\n label = getManyPDFTitle(t, true);\n break;\n case FilterType.Pdf.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 730,
+      "line_number": 735,
       "context": "break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():\n label = getManyPDFTitle(t, true);\n break;\n case FilterType.Pdf.toString():",
       "module": "/packages/client"
     },
@@ -54,7 +54,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 369,
+      "line_number": 371,
       "context": "case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");",
       "module": "/packages/shared"
     }

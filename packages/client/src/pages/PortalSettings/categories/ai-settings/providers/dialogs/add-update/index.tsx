@@ -268,8 +268,10 @@ const AddUpdateDialogComponent = ({
               onChange={(e) => setProviderUrl(e.target.value)}
               scale
               placeholder={t("OAuth:EnterURL")}
-              isDisabled={isRequestRunning}
-              isReadOnly={selectedOption.key !== ProviderType.OpenAiCompatible}
+              isDisabled={
+                isRequestRunning ||
+                selectedOption.key !== ProviderType.OpenAiCompatible
+              }
             />
             <Text className={styles.fieldHint}>
               {t("AISettings:ProviderURLInputHint")}

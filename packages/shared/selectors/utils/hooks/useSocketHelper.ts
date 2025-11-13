@@ -55,6 +55,7 @@ const useSocketHelper = ({
   setItems,
   setBreadCrumbs,
   setTotal,
+  disableBySecurity,
 }: UseSocketHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const { getIcon } = React.use(SettingsContext);
@@ -133,7 +134,13 @@ const useSocketHelper = ({
 
       if (opt?.type === "file" && "folderId" in data) {
         const file = await getFileInfo(data.id);
-        [item] = convertFilesToItems([file], getIcon, filterParam);
+        [item] = convertFilesToItems(
+          [file],
+          getIcon,
+          filterParam,
+          undefined,
+          disableBySecurity,
+        );
       } else if (opt?.type === "folder" && !("folderId" in data)) {
         if ("roomType" in data) {
           const room = await getRoomInfo(data.id);
@@ -205,6 +212,7 @@ const useSocketHelper = ({
       setTotal,
       t,
       withCreate,
+      disableBySecurity,
     ],
   );
 
@@ -229,7 +237,13 @@ const useSocketHelper = ({
 
       if (opt?.type === "file" && "folderId" in data) {
         const file = await getFileInfo(data.id);
-        [item] = convertFilesToItems([file], getIcon, filterParam);
+        [item] = convertFilesToItems(
+          [file],
+          getIcon,
+          filterParam,
+          undefined,
+          disableBySecurity,
+        );
       } else if (opt?.type === "folder") {
         if ("roomType" in data) {
           const room = await getRoomInfo(data.id);
@@ -301,6 +315,7 @@ const useSocketHelper = ({
       setBreadCrumbs,
       setItems,
       t,
+      disableBySecurity,
     ],
   );
 

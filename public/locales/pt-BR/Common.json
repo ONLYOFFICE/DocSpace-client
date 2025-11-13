@@ -1012,7 +1012,6 @@
   "AskAI": "Pergunte à IA",
   "CannotGuaranteeSecurity": "Não podemos garantir as práticas de segurança ou privacidade de integrações de terceiros.",
   "ChatExported": "Chat <1>{{title}}</1> exportado para o arquivo: <2>{{fileName}}</2>",
-  "CheckAIInfo": "O chat de IA pode cometer erros. Verifique as informações importantes.",
   "ChooseAIAgent": "Escolha um agente de IA",
   "ChooseAIAgentDescription": "Selecione o agente com o qual deseja conversar com a IA sobre o arquivo selecionado. Você pode escolher um agente existente ou criar um novo.",
   "ConnectMCPServers": "Para usar o gerenciamento de conexão, você precisa conectar os servidores MCP nas configurações da sala.",

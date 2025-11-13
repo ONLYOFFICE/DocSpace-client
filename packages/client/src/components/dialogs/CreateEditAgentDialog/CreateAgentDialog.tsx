@@ -25,23 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-
-import TagHandler from "../../../helpers/TagHandler";
-import SetAgentParams from "./sub-components/SetAgentParams";
-import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
-import type { TSelectorItem } from "@docspace/shared/components/selector";
-import { useTranslation } from "react-i18next";
 import {
   getStartAgentParams,
   type TAgentParams,
   type TAgentTagsParams,
 } from "@docspace/shared/utils/aiAgents";
+import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
+
+import TagHandler from "../../../helpers/TagHandler";
+import SetAgentParams from "./sub-components/SetAgentParams";
+import { useMCP } from "./hooks/useMCP";
+import { modelCache } from "./sub-components/modelCache";
 
 type CreateAgentDialogProps = {
   visible: boolean;
@@ -67,7 +68,6 @@ const CreateAgentDialog = ({
 
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
-  const [isMCPSelectorVisible, setIsMCPSelectorVisible] = useState(false);
   const isMountRef = React.useRef(true);
 
   React.useEffect(() => {
@@ -89,6 +89,20 @@ const CreateAgentDialog = ({
     },
     [],
   );
+
+  const {
+    isMCPSelectorVisible,
+    setIsMCPSelectorVisible,
+    onSubmit,
+    initSelectedServers,
+    onClickAction,
+    selectedServers,
+    setSelectedServers,
+  } = useMCP({
+    agentParams,
+    setAgentParams: setAgentParamssAction,
+    portalMcpServerId,
+  });
 
   const setAgentTags = (newTags: TAgentTagsParams[]) =>
     setAgentParams({ ...agentParams, tags: newTags });
@@ -134,32 +148,8 @@ const CreateAgentDialog = ({
   const onCloseDialog = async () => {
     if (isLoading) return;
 
+    modelCache.clear();
     onClose();
-  };
-
-  const onOpenMCPSelector = () => {
-    setIsMCPSelectorVisible(true);
-  };
-
-  const onCloseMCPSelector = () => {
-    setIsMCPSelectorVisible(false);
-  };
-
-  const onSubmitMCPSelector = (servers: TSelectorItem[]) => {
-    const serverIds = servers
-      .map((server) => server.id?.toString() || "")
-      .filter((id) => id !== "");
-
-    setAgentParams((prev) => ({
-      ...prev,
-      mcpServers: serverIds,
-    }));
-
-    setIsMCPSelectorVisible(false);
-  };
-
-  const onBackClick = () => {
-    if (isMCPSelectorVisible) setIsMCPSelectorVisible(false);
   };
 
   return (
@@ -168,21 +158,22 @@ const CreateAgentDialog = ({
       withBodyScroll
       visible={visible}
       onClose={onCloseDialog}
-      onBackClick={onBackClick}
       isScrollLocked={isScrollLocked}
       onSubmit={handleSubmit}
-      withForm
       containerVisible={isMCPSelectorVisible}
+      withForm
     >
       {isMCPSelectorVisible ? (
         <ModalDialog.Container>
           <MCPServersSelector
-            onSubmit={onSubmitMCPSelector}
-            onClose={onCloseMCPSelector}
-            initedSelectedServers={agentParams.mcpServers}
+            onSubmit={onSubmit}
+            onClose={onCloseDialog}
+            onBackClick={() => setIsMCPSelectorVisible(false)}
+            initedSelectedServers={initSelectedServers}
           />
         </ModalDialog.Container>
       ) : null}
+
       <ModalDialog.Header>{t("Common:CreateAgent")}</ModalDialog.Header>
 
       <ModalDialog.Body>
@@ -198,7 +189,9 @@ const CreateAgentDialog = ({
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
           portalMcpServerId={portalMcpServerId}
-          onOpenMCPSelector={onOpenMCPSelector}
+          onClickAction={onClickAction}
+          selectedServers={selectedServers}
+          setSelectedServers={setSelectedServers}
         />
       </ModalDialog.Body>
 

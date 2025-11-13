@@ -35,8 +35,8 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { toastr } from "@docspace/shared/components/toast";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { inject, observer } from "mobx-react";
 import React from "react";
@@ -45,11 +45,11 @@ import { useTranslation } from "react-i18next";
 import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Knowledge.module.scss";
+import { ResetKnowledgeDialog } from "./dialogs/reset";
 
 type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
   knowledgeConfig?: AISettingsStore["knowledgeConfig"];
-  restoreKnowledge?: AISettingsStore["restoreKnowledge"];
   updateKnowledge?: AISettingsStore["updateKnowledge"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
@@ -62,7 +62,6 @@ const FAKE_KEY_VALUE = "0000000000000000";
 const KnowledgeComponent = ({
   knowledgeInitied,
   knowledgeConfig,
-  restoreKnowledge,
   updateKnowledge,
   hasAIProviders,
   getAIConfig,
@@ -70,6 +69,9 @@ const KnowledgeComponent = ({
   aiSettingsUrl,
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
+
+  const [resetDialogVisible, setResetDialogVisible] =
+    React.useState<boolean>(false);
 
   const [isKeyHidden, setIsKeyHidden] = React.useState(!!knowledgeConfig?.key);
   const [value, setValue] = React.useState(
@@ -90,17 +92,19 @@ const KnowledgeComponent = ({
   };
 
   const onRestoreToDefault = async () => {
+    setResetDialogVisible(true);
+  };
+
+  const refreshData = () => {
     setValue("");
     setSelectedOption(KnowledgeType.None);
     setIsKeyHidden(false);
 
-    try {
-      await restoreKnowledge?.();
-    } catch (e) {
-      console.error(e);
-      toastr.error(e as string);
-    }
     getAIConfig?.();
+  };
+
+  const closeDialog = () => {
+    setResetDialogVisible(false);
   };
 
   const onSave = async () => {
@@ -118,6 +122,7 @@ const KnowledgeComponent = ({
 
     getAIConfig?.();
     setSaveRequestRunning(false);
+    toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
   };
 
   const items = React.useMemo(() => {
@@ -304,6 +309,9 @@ const KnowledgeComponent = ({
       {!hasAIProviders ? (
         <Tooltip id={tooltipId} place="bottom" offset={10} float />
       ) : null}
+      {resetDialogVisible ? (
+        <ResetKnowledgeDialog onSuccess={refreshData} onClose={closeDialog} />
+      ) : null}
     </>
   );
 };
@@ -313,7 +321,6 @@ export const Knowledge = inject(
     return {
       knowledgeInitied: aiSettingsStore.knowledgeInitied,
       knowledgeConfig: aiSettingsStore.knowledgeConfig,
-      restoreKnowledge: aiSettingsStore.restoreKnowledge,
       updateKnowledge: aiSettingsStore.updateKnowledge,
       hasAIProviders: aiSettingsStore.hasAIProviders,
       getAIConfig: settingsStore.getAIConfig,

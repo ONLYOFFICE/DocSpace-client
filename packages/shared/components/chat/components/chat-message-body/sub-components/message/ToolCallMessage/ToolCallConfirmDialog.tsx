@@ -28,6 +28,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
 
 import { ToolsPermission } from "../../../../../../../api/ai/enums";
 import type { TToolCallContent } from "../../../../../../../api/ai/types";
@@ -42,91 +43,103 @@ import { ToolCall } from "./ToolCall";
 import { ModalDialog, ModalDialogType } from "../../../../../../modal-dialog";
 import { isMobile } from "../../../../../../../utils";
 import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
+import { useMessageStore } from "../../../../../store/messageStore";
 
 type ToolCallConfirmDialogProps = {
   content: TToolCallContent;
   onClose: () => void;
 };
 
-export const ToolCallConfirmDialog = ({
-  content,
-  onClose,
-}: ToolCallConfirmDialogProps) => {
-  const [alwaysAllow, setAlwaysAllow] = React.useState(false);
-  const { t } = useTranslation(["Common"]);
+export const ToolCallConfirmDialog = observer(
+  ({ content, onClose }: ToolCallConfirmDialogProps) => {
+    const [alwaysAllow, setAlwaysAllow] = React.useState(false);
+    const { t } = useTranslation(["Common"]);
+    const {
+      toolsConfirmQueue,
+      addToToolsConfirmQueue,
+      removeFromToolsConfirmQueue,
+    } = useMessageStore();
 
-  const onClickAction = (decision: ToolsPermission) => {
-    if (content.callId) {
-      updateToolsPermission(
-        content.callId,
-        alwaysAllow && decision === ToolsPermission.Allow
-          ? ToolsPermission.AlwaysAllow
-          : decision,
-      );
-    }
+    const onClickAction = (decision: ToolsPermission) => {
+      if (content.callId) {
+        updateToolsPermission(
+          content.callId,
+          alwaysAllow && decision === ToolsPermission.Allow
+            ? ToolsPermission.AlwaysAllow
+            : decision,
+        );
+      }
 
-    onClose();
-  };
+      onClose();
+    };
 
-  const onCloseAction = () => {
-    if (content.callId) {
-      updateToolsPermission(content.callId, ToolsPermission.Deny);
-    }
+    const onCloseAction = () => {
+      if (content.callId) {
+        updateToolsPermission(content.callId, ToolsPermission.Deny);
+      }
 
-    onClose();
-  };
+      onClose();
+    };
 
-  return (
-    <ModalDialog
-      visible
-      displayType={ModalDialogType.modal}
-      onClose={onCloseAction}
-      isLarge
-      autoMaxHeight
-      closeOnBackdropClick={false}
-    >
-      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
+    React.useEffect(() => {
+      addToToolsConfirmQueue(content.callId!);
+      return () => {
+        removeFromToolsConfirmQueue(content.callId!);
+      };
+    }, [content.callId]);
 
-      <ModalDialog.Body>
-        <div className={styles.toolCallManage}>
-          <Text>{t("Common:AIWouldLikeToUseThisTool")}</Text>
-          <ToolCall
-            content={content}
-            status={ToolCallStatus.Confirmation}
-            placement={ToolCallPlacement.ConfirmDialog}
-          />
-          <div>
-            <Text>{t("Common:ReviewAction")}</Text>
-            <Text>{t("Common:CannotGuaranteeSecurity")}</Text>
-          </div>
-        </div>
-      </ModalDialog.Body>
+    return (
+      <ModalDialog
+        visible={toolsConfirmQueue[0] === content.callId}
+        displayType={ModalDialogType.modal}
+        onClose={onCloseAction}
+        isLarge
+        autoMaxHeight
+        closeOnBackdropClick={false}
+      >
+        <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
 
-      <ModalDialog.Footer>
-        <div className={styles.toolCallFooter}>
-          <Checkbox
-            isChecked={alwaysAllow}
-            onChange={(e) => setAlwaysAllow(e.target.checked)}
-            label={t("Common:AlwaysAllowToolCall")}
-          />
-          <div className={styles.buttonsBlockContainer}>
-            <Button
-              primary
-              label={t("Common:Allow")}
-              onClick={() => onClickAction(ToolsPermission.Allow)}
-              scale={isMobile()}
-              size={ButtonSize.normal}
+        <ModalDialog.Body>
+          <div className={styles.toolCallManage}>
+            <Text>{t("Common:AIWouldLikeToUseThisTool")}</Text>
+            <ToolCall
+              content={content}
+              status={ToolCallStatus.Confirmation}
+              placement={ToolCallPlacement.ConfirmDialog}
             />
-            <Button
-              className={styles.denyButton}
-              label={t("Common:Deny")}
-              onClick={() => onClickAction(ToolsPermission.Deny)}
-              size={ButtonSize.normal}
-              scale={isMobile()}
-            />
+            <div>
+              <Text>{t("Common:ReviewAction")}</Text>
+              <Text>{t("Common:CannotGuaranteeSecurity")}</Text>
+            </div>
           </div>
-        </div>
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
-};
+        </ModalDialog.Body>
+
+        <ModalDialog.Footer>
+          <div className={styles.toolCallFooter}>
+            <Checkbox
+              isChecked={alwaysAllow}
+              onChange={(e) => setAlwaysAllow(e.target.checked)}
+              label={t("Common:AlwaysAllowToolCall")}
+            />
+            <div className={styles.buttonsBlockContainer}>
+              <Button
+                primary
+                label={t("Common:Allow")}
+                onClick={() => onClickAction(ToolsPermission.Allow)}
+                scale={isMobile()}
+                size={ButtonSize.normal}
+              />
+              <Button
+                className={styles.denyButton}
+                label={t("Common:Deny")}
+                onClick={() => onClickAction(ToolsPermission.Deny)}
+                size={ButtonSize.normal}
+                scale={isMobile()}
+              />
+            </div>
+          </div>
+        </ModalDialog.Footer>
+      </ModalDialog>
+    );
+  },
+);

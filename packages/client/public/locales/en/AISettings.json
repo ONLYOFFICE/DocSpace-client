@@ -39,6 +39,8 @@
   "ProviderUpdatedSuccess": "Provider updated successfully",
   "ProviderURL": "URL",
   "ResetProviderKeyDescription": "The API key is displayed only once upon saving and is then hidden for security purposes. If it is reset, a new key must be provided; otherwise, AI features, including the chat, will be unavailable.",
+  "ResetKnowledgeDescription": "This action will remove the configured API key and disable document indexing for the knowledge base. Adding new documents to the knowledge base and working with them will be unavailable until a new key is provided.",
+  "ResetWebSearchDescription": "This action will remove the configured API key and disconnect the web search integration. AI chats will no longer be able to access real-time information from the internet until a new key is added.",
   "Search": "Web Search",
   "SearchDescription": "Connect a web search engine to enhance AI chats with real-time information from the internet. Once configured, it will be available to all users in {{productName}}.",
   "SearchEngine": "Web Search Engine",
@@ -53,7 +55,9 @@
   "WebSearchKeyDescription": "Enter the API key obtained from your web search provider",
   "KnowledgeKeyDescription": "Enter the API key obtained from your knowledge base provider",
   "WebSearchKeyHiddenDescription": "The API key is displayed only once upon saving and is then hidden for security purposes.",
-  "WebSearchEnabledSuccess": "Web search successfully enabled",
   "KnowledgeSettingsDescription": "Enable a knowledge base for AI agents. The system will index your documents using the {{modelName}} model to support question-based search through your data. This feature focuses on finding relevant information but doesn't generate summaries or perform global analysis.",
-  "KnowledgeEnabledSuccess": "Knowledge base successfully enabled"
+  "KnowledgeDisabledSuccess": "Knowledge base successfully disabled",
+  "KnowledgeEnabledSuccess": "Knowledge base successfully enabled",
+  "WebSearchDisabledSuccess": "Web search successfully disabled",
+  "WebSearchEnabledSuccess": "Web search successfully enabled"
 }

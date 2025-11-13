@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
@@ -263,6 +263,22 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             noSelect
           >
             {t("ModelDescription")}
+          </Text>
+          <Text
+            fontSize="12px"
+            lineHeight="16px"
+            fontWeight={400}
+            className="set_room_params-info-description"
+            noSelect
+          >
+            <Trans
+              t={t}
+              i18nKey="ResponseQualityNode"
+              ns="AIRoom"
+              components={{
+                1: <span style={{ fontWeight: 600 }} />,
+              }}
+            />
           </Text>
         </div>
         {isProvidersLoading ? (

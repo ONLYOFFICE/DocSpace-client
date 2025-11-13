@@ -3,7 +3,7 @@
   "content": "Provider and model",
   "content_en_sha1_hash": "cf097ad17bf098af341f4a5eda84e5b2fce65fff",
   "created_at": "2025-10-27T16:14:31.671Z",
-  "updated_at": "2025-11-03T12:10:34.976Z",
+  "updated_at": "2025-11-13T07:42:11.120Z",
   "comment": {
     "text": "This text refers to the AI provider and model selection in a dialog, likely within agent or room creation/editing workflows. It appears as a label or description within a dropdown or combobox where users choose the specific AI model to use. Translators should ensure this phrase accurately reflects the choice between different AI services and models.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Model.tsx",
       "line_number": 31,
-      "context": "import React from \"react\";\n import { useTranslation } from \"react-i18next\";\n \n import { Text } from \"@docspace/shared/components/text\";\n import { TAiProvider, TModel } from \"@docspace/shared/api/ai/types\";\n import { ComboBox, TOption } from \"@docspace/shared/components/combobox\";\n import { getModels, getProviders } from \"@docspace/shared/api/ai\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { RectangleSkeleton } from \"@docspace/shared/skeletons\";\n import { TAgentParams } from \"@docspace/shared/utils/aiAgents\";",
+      "context": "import React from \"react\";\n import { useTranslation } from \"react-i18next\";\n \n import { Text } from \"@docspace/shared/components/text\";\n import type { TAiProvider, TModel } from \"@docspace/shared/api/ai/types\";\n import { ComboBox, type TOption } from \"@docspace/shared/components/combobox\";\n import { getModels, getProviders } from \"@docspace/shared/api/ai\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { RectangleSkeleton } from \"@docspace/shared/skeletons\";\n import type { TAgentParams } from \"@docspace/shared/utils/aiAgents\";",
       "module": "/packages/client"
     }
   ],

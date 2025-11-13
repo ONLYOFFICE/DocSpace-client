@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2025-11-03T12:10:34.929Z",
+  "updated_at": "2025-11-13T07:42:11.111Z",
   "comment": {
     "text": "This translation key is used to display the label \"Create\" in a button within a modal dialog. It appears as the primary action button when creating a new group and is also shown in other contexts where creation is applicable.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/CreateAgentDialog.tsx",
-      "line_number": 138,
-      "context": "onClose={onCloseDialog}\n isScrollLocked={isScrollLocked}\n onSubmit={handleSubmit}\n withForm\n >\n <ModalDialog.Header>{t(\"Common:CreateAgent\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetAgentParams\n tagHandler={tagHandler}\n agentParams={agentParams}",
+      "line_number": 186,
+      "context": "onClose={onCloseMCPSelector}\n initedSelectedServers={agentParams.mcpServers}\n />\n </ModalDialog.Container>\n ) : null}\n <ModalDialog.Header>{t(\"Common:CreateAgent\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetAgentParams\n tagHandler={tagHandler}\n agentParams={agentParams}",
       "module": "/packages/client"
     },
     {

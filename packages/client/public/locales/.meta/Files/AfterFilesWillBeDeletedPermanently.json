@@ -3,7 +3,7 @@
   "content": "After files will be deleted permanently.",
   "content_en_sha1_hash": "1cf2afa9fc3fdf5d47ce9ac332b34c895d762e1b",
   "created_at": "2025-05-19T21:30:55.248Z",
-  "updated_at": "2025-11-06T18:29:15.755Z",
+  "updated_at": "2025-11-13T07:42:11.498Z",
   "comment": {
     "text": "This translation key is used to display a message that explains what will happen to files after they are permanently deleted. It appears in a UI element that provides users with information about file deletion options, likely on a settings page or configuration dialog. The goal of this message is to inform users about the permanent nature of the action.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 563,
+      "line_number": 562,
       "context": "return `${t(\"Files:RoomFilesLifetime\", {\n days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;",
       "module": "/packages/client"
     }

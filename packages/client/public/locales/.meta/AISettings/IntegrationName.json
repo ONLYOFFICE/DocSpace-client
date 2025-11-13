@@ -3,7 +3,7 @@
   "content": "Integration name",
   "content_en_sha1_hash": "f28419904f21e4ead21f3c80d3ff939d87dfb4c7",
   "created_at": "2025-10-27T16:14:31.644Z",
-  "updated_at": "2025-10-27T17:27:51.671Z",
+  "updated_at": "2025-11-13T07:42:11.541Z",
   "comment": {
     "text": "This text appears as the label for a form field, specifically within the AI Settings section of Portal Settings. It represents the name of an integration being configured, and translators should ensure accuracy and clarity for users setting up integrations.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 109,
-      "context": "const hasChanges = !equal(initBaseParams.current, { name, url, description });\n \n const baseParamsComponent = (\n <>\n <FieldContainer\n labelText={t(\"AISettings:IntegrationName\")}\n isRequired\n isVertical\n removeMargin\n labelVisible\n errorMessage={nameError}",
+      "line_number": 111,
+      "context": "const baseParamsEmpty = !name || !url || !description;\n \n const baseParamsComponent = (\n <>\n <FieldContainer\n labelText={t(\"AISettings:IntegrationName\")}\n isRequired\n isVertical\n removeMargin\n labelVisible\n errorMessage={nameError}",
       "module": "/packages/client"
     }
   ],

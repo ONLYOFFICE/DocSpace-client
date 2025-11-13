@@ -1,44 +1,20 @@
 {
-  "key_path": "More",
-  "content": "More",
-  "content_en_sha1_hash": "4bab2d8fe13fa6ab57f80098b414f0f734c5dd25",
-  "created_at": "2025-05-19T21:30:46.613Z",
-  "updated_at": "2025-11-13T07:42:11.017Z",
+  "key_path": "InvitationToAgent",
+  "content": "<1>{{displayName}}</1> invites you to join the AI agent <1>{{agentName}}</1>.",
+  "content_en_sha1_hash": "219914f391293ff45a679d1db1a94472c58701ce",
+  "created_at": "2025-11-13T07:41:30.489Z",
+  "updated_at": "2025-11-13T07:42:11.998Z",
   "comment": {
-    "text": "This translation key is used for the label of a button that displays the word \"More\". It appears in a dropdown menu next to a main action button on an article page, allowing users to access additional options.",
-    "is_auto": true,
-    "updated_at": "2025-05-20T09:35:27.879Z"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 443,
-      "context": "// const moreActions = {\n //   id: \"actions_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 443,
-      "context": "// const moreActions = {\n //   id: \"actions_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 443,
-      "context": "// const moreActions = {\n //   id: \"actions_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3094,
-      "context": "// const moreActions = {\n //   id: \"personal_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3094,
-      "context": "// const moreActions = {\n //   id: \"personal_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
-      "module": "/packages/client"
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
+      "line_number": 75,
+      "context": "if (roomData?.isAgent) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n }}",
+      "module": "/packages/login"
     }
   ],
   "languages": {
@@ -69,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation \"Více na\" doesn't accurately convey the meaning of \"More.\" \"Více na\" translates to \"More at\" and implies a link or further information located elsewhere, which is not the intended meaning of a simple \"More\".",
-          "suggestion": "A more accurate translation might be \"Více\" or \"Další\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -99,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Finnish translation 'Enemmmän' contains a spelling error. It appears to be an attempt at 'Enemmän'.",
-          "suggestion": "Enemmän"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -204,6 +168,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
@@ -231,13 +201,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Khác' is a valid translation of 'More' in certain contexts, but it's a general term for 'different' or 'other'. Depending on the specific context of 'More' (e.g., 'More information', 'More options'), a more accurate translation might be 'Thêm' (for additional) or something more specific. Without the context, 'Khác' could be misleading.",
-          "suggestion": "Consider the context and explore alternatives like 'Thêm' or a more specific term if 'Khác' isn't the best fit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

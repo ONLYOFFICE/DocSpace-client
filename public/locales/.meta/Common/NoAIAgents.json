@@ -3,7 +3,7 @@
   "content": "No AI agents available",
   "content_en_sha1_hash": "9ab4cab366ceae875ded0c4b0f59e11958942401",
   "created_at": "2025-10-27T16:14:24.530Z",
-  "updated_at": "2025-11-03T12:10:35.507Z",
+  "updated_at": "2025-11-13T07:42:12.152Z",
   "comment": {
     "text": "This text displays a message when no AI agents are available. It appears as the header within an empty screen, likely on a page or section where AI agents are expected but not found. Translators should ensure the description accurately conveys the lack of available AI agents.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 231,
+      "line_number": 229,
       "context": "emptyScreenImage={\n isBase\n ? EmptyScreenAIAgentsSelectorSvgUrl\n : EmptyScreenAIAgentsSelectorSvgUrlDark\n }\n emptyScreenHeader={t(\"Common:NoAIAgents\")}\n emptyScreenDescription={t(\"Common:NoAIAgentsDescription\")}\n searchEmptyScreenImage={\n isBase\n ? EmptyScreenAIAgentsSelectorSvgUrl\n : EmptyScreenAIAgentsSelectorSvgUrlDark",
       "module": "/packages/shared"
     }

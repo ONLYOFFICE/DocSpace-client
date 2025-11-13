@@ -3,7 +3,7 @@
   "content": "Knowledge",
   "content_en_sha1_hash": "dec1fccaba73443d77f5cfc48dacf9d496399f53",
   "created_at": "2025-10-27T16:14:31.668Z",
-  "updated_at": "2025-11-06T18:29:15.652Z",
+  "updated_at": "2025-11-13T07:42:11.117Z",
   "comment": {
     "text": "This key refers to the label \"Knowledge,\" likely representing a setting or section related to knowledge management or AI room settings within dialogs and tabs. It appears in UI components like dialogs and tabs, probably used to identify a relevant configuration area. Consider it a general term for knowledge-related functionality.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 192,
+      "line_number": 194,
       "context": "className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AIRoom:Knowledge\"),\n })\n : undefined\n }\n >\n <Text className={generalStyles.description}>",
       "module": "/packages/client"
     },

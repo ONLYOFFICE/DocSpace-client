@@ -7,8 +7,6 @@
   "EmptyResultsDescription": "Fișierele generate de IA în chatul vor apărea automat aici. De fiecare dată când generali conţinutul, începeţi o conversaţie în chat sau trimiteţi un mesaj cu conţinut generat, rezultatul va fi salvat în această secţiune.",
   "EmptyResultsTitle": "Deocamdată niciun rezultat",
   "Instructions": "Instrucțiuni",
-  "InstructionsDescription": "Determinați scopul și comportamentul chat-urilor în această sală. Ce trebuie să facă? Cum trebuie să funcţioneze? Ce trebuie evitat?",
-  "InstructionsPlaceholder": "Exemplu: “Chat-urile din această sală sunt folosite pentru a discuta fişierele proiectului. Vă rugăm să rămâineți la subiect și să evitați conversațiile care nu sunt legate de subiectul și să nu partajați documentele nerelevante.”",
   "Knowledge": "Cunoștințe",
   "KnowledgeDescription": "Încărcați fișierele de pe calculatorul sau {{productName}} pentru a oferi contextul suplimentar chat-ului. Mențiune: o parte sau întregul conținut încărcat poate fi partajat în timpul conversației.",
   "KnowledgeSelectIn": "Selectare din {{productName}}",

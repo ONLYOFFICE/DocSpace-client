@@ -7,8 +7,6 @@
   "EmptyResultsDescription": "Datoteke generisane u AI razgovoru pojaviće se ovde automatski. Kad god generišete sadržaj, započnete razgovor ili pošaljete poruku sa izlaznim rezultatom, on će biti sačuvan u ovom odeljku.",
   "EmptyResultsTitle": "Još nema rezultata",
   "Instructions": "Instrukcije",
-  "InstructionsDescription": "Definišite svrhu i ponašanje ćaskanja u ovoj prostoriji. Šta treba da rade? Kako treba da funkcionišu? Šta treba izbegavati?",
-  "InstructionsPlaceholder": "Primer: „Ćaskanja u ovoj prostoriji se koriste za diskusiju o projektnim fajlovima. Ostanite na temi i izbegavajte razgovore van teme ili deljenje nepovezanih dokumenata.“",
   "Knowledge": "Znanje",
   "KnowledgeDescription": "Otpremite datoteke sa svog računara ili sa {{productName}} da biste obezbedili bolji kontekst za ćaskanje. Napomena: deo ili ceo otpremljeni sadržaj može biti otkriven tokom razgovora.",
   "KnowledgeSelectIn": "Izaberite u {{productName}}",

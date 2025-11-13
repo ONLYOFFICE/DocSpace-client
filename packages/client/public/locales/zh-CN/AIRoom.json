@@ -7,8 +7,6 @@
   "EmptyResultsDescription": "AI 对话中生成的文件将自动显示在此处。每当您生成内容、开启对话或发送带有输出的消息时，结果都会保存在此。",
   "EmptyResultsTitle": "暂无结果",
   "Instructions": "操作指引",
-  "InstructionsDescription": "定义此房间内对话的用途和行为。它们应该做什么？应该如何运作？应该避免什么？",
-  "InstructionsPlaceholder": "例如：“此房间中的对话用于讨论项目文件。请围绕主题展开讨论，避免离题对话或分享无关文档。”",
   "Knowledge": "知识库",
   "KnowledgeDescription": "从您的计算机或{{productName}}上传文件，为对话提供上下文。注意：部分或全部上传内容可能会在对话期间显示。",
   "KnowledgeSelectIn": "在{{productName}}中选择",

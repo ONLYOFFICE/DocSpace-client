@@ -71,14 +71,14 @@ const InstructionsSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("InstructionsDescription")}
+            {t("InstructionsDescriptionAgent")}
           </Text>
         </div>
         <Textarea
           value={value}
           onChange={handleChange}
           heightTextArea={144}
-          placeholder={t("InstructionsPlaceholder")}
+          placeholder={t("InstructionsDescriptionAgentExample")}
         />
       </div>
     </StyledParam>

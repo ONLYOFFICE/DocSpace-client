@@ -1,0 +1,28 @@
+{
+  "key_path": "InstructionsDescriptionAgentExample",
+  "content": "Example: “You are an AI PR assistant that helps write and edit press releases. Maintain a professional, confident, and media-friendly tone. Highlight key messages clearly, avoid jargon, and keep the text concise and engaging.”",
+  "content_en_sha1_hash": "61cc7c5dec4338ac127087c95422c8df8a730b55",
+  "created_at": "2025-11-13T14:53:09.553Z",
+  "updated_at": "2025-11-13T14:55:14.637Z",
+  "comment": {
+    "text": "This text provides an example of the desired tone and style for agent instructions. It's displayed as a placeholder in a text area within the Create/Edit Agent dialog, guiding users on how to write effective instructions for their AI agents. Translators should maintain a similar level of detail and clarity in the localized version.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T14:55:14.637Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Instructions.tsx",
+      "line_number": 81,
+      "context": "</div>\n <Textarea\n value={value}\n onChange={handleChange}\n heightTextArea={144}\n placeholder={t(\"InstructionsDescriptionAgentExample\")}\n />\n </div>\n </StyledParam>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

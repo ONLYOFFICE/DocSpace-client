@@ -46,7 +46,6 @@
   "AgentOwner": "Majitel agenta",
   "AIAgents": "AI agenti",
   "AIAgentSpaceQuotaExceeded": "Překročena míra úložiště AI agenta ({{size}}).",
-  "AIChatHelp": "Jak ti mohu pomoci?",
   "AIChatInput": "Chat s AI",
   "AIChatNoAccessDescription": "Můžete si prohlédnout tohoto agenta a jeho uložené výsledky, ale zahájení nových AI chatů není pro vaši aktuální roli povolené. Potřebujete přístup? Obraťte se na svého administrátora nebo vlastníka agenta a požádejte o povolení.",
   "AIChatNoAccessTitle": "Přístup k AI chatu omezen",

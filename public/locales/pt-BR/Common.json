@@ -45,7 +45,6 @@
   "AgentName": "Nome do agente",
   "AgentOwner": "Proprietário do agente",
   "AIAgents": "Agentes de IA",
-  "AIChatHelp": "Como posso ajudar?",
   "AIChatInput": "Converse com a IA",
   "AIChatNoAccessDescription": "Você pode visualizar esse agente e seus resultados armazenados, mas não é permitido iniciar novos chats de IA com sua função atual. Precisa de acesso? Entre em contato com seu administrador ou com o proprietário do agente para solicitar permissão.",
   "AIChatNoAccessTitle": "Acesso ao chat de IA restrito",

@@ -46,7 +46,6 @@
   "AgentOwner": "Acente sahibi",
   "AIAgents": "Yapay zeka ajanları",
   "AIAgentSpaceQuotaExceeded": "AI Aracısı depolama kotası aşıldı ({{size}}).",
-  "AIChatHelp": "Size nasıl yardımcı olabilirim?",
   "AIChatInput": "AI ile sohbet edin",
   "AIChatNoAccessDescription": "Bu ajanı ve saklanan sonuçlarını görüntüleyebilirsiniz, ancak mevcut rolünüz için yeni yapay zeka sohbetleri başlatmak izin verilmiyor. İzin mi gerekiyor? İzin istemek için yöneticinize veya ajanın sahibine başvurun.",
   "AIChatNoAccessTitle": "Yapay zeka sohbetine erişim kısıtlandı",

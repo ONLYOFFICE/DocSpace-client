@@ -45,7 +45,6 @@
   "AgentName": "Name des Agenten",
   "AgentOwner": "Besitzer des Agenten",
   "AIAgents": "KI-Agenten",
-  "AIChatHelp": "Wie kann ich helfen?",
   "AIChatInput": "Mit KI chatten",
   "AIChatNoAccessDescription": "Sie können diesen Agenten und seine gespeicherten Ergebnisse einsehen, aber das Starten neuer KI-Chats ist für Ihre aktuelle Rolle nicht zulässig. Benötigen Sie Zugriff? Wenden Sie sich an Ihren Administrator oder den Agentenbesitzer, um die entsprechende Berechtigung anzufordern.",
   "AIChatNoAccessTitle": "Zugriff auf KI-Chat beschränkt",

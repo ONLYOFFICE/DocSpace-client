@@ -45,7 +45,6 @@
   "AgentName": "Ime agenata",
   "AgentOwner": "Vlasink agenata",
   "AIAgents": "AI agenti",
-  "AIChatHelp": "Kako Vam mogu pomoći",
   "AIChatInput": "Razgovatajte sa AI",
   "AIChatNoAccessDescription": "Možete pregledati ovog agenta i njegove sačuvane rezultate, ali pokretanje novih AI razgovora nije dozvoljeno za vašu trenutnu ulogu. Trebate pristup? Obratite se administratoru ili vlasniku agenta da zatražite dozvolu.",
   "AIChatNoAccessTitle": "Pristup AI razgovoru je ograničen",

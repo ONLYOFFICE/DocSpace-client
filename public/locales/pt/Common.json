@@ -46,7 +46,6 @@
   "AgentOwner": "Agente proprietário",
   "AIAgents": "Agentes de IA",
   "AIAgentSpaceQuotaExceeded": "Limite de espaço do Agente de IA excedido ({{size}}).",
-  "AIChatHelp": "Como posso ajudar?",
   "AIChatInput": "Converse com IA",
   "AIChatNoAccessDescription": "Você pode visualizar este agente e seus resultados armazenados, mas iniciar novos chats de IA não é permitido para sua função atual. Precisa de acesso? Entre em contato com seu administrador ou o proprietário do agente para solicitar permissão.",
   "AIChatNoAccessTitle": "Acesso ao chat de IA restrito",

@@ -46,7 +46,6 @@
   "AgentOwner": "Agent eigenaar",
   "AIAgents": "AI-agenten",
   "AIAgentSpaceQuotaExceeded": "AI Agent ruimtequota overschreden ({{size}}).",
-  "AIChatHelp": "Hoe kan ik helpen?",
   "AIChatInput": "Chat met AI",
   "AIChatNoAccessDescription": "U kunt deze agent en de opgeslagen resultaten bekijken, maar het starten van nieuwe AI-chats is niet toegestaan voor uw huidige rol. Ben je toegang nodig? Neem contact op met uw beheerder of de eigenaar van de agent om toestemming aan te vragen.",
   "AIChatNoAccessTitle": "Toegang tot AI-chat beperkt",

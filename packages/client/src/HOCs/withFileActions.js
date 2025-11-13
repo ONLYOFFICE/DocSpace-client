@@ -249,6 +249,7 @@ export default function withFileActions(WrappedFileItem) {
         // !!e.target.closest(".additional-badges") ||
         e.target.closest(".tag") ||
         e.target.closest(".mainIcons") ||
+        e.target.closest(".react-tooltip") ||
         isNewBadgePanelVisible ||
         isTrashFolder
       )

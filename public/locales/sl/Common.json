@@ -46,7 +46,6 @@
   "AgentOwner": "Agent lastnik",
   "AIAgents": "AI agenti",
   "AIAgentSpaceQuotaExceeded": "Presežena je kvota prostora za agente umetne inteligence ({{size}}).",
-  "AIChatHelp": "Kako vam lahko pomagam?",
   "AIChatInput": "Pogovor z umetno inteligenco",
   "AIChatNoAccessDescription": "Lahko si ogledate tega agenta in njegovih shranjenih rezultatov, vendar začetek novih pogovorov z umetno inteligenco ni dovoljen za vašo trenutno vlogo. Potrebujete dostop? Obrnite se na administratorja ali lastnika agenta, da zahtevate dovoljenje.",
   "AIChatNoAccessTitle": "Omejen dostop do klepetalnega AI.",

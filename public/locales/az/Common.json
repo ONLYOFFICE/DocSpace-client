@@ -46,7 +46,6 @@
   "AgentOwner": "Agent sahibi",
   "AIAgents": "Süni intellekt agentləri",
   "AIAgentSpaceQuotaExceeded": "AI Agentinə ayrılmış yer limiti keçildi ({{size}}).",
-  "AIChatHelp": "Səni nə bacarıram?",
   "AIChatInput": "Süni intellektlə söhbət",
   "AIChatNoAccessDescription": "Bu agentə və onun saxlanılmış nəticələrinə baxmaq olar, lakin cari rolunuz üçün yeni AI söhbətləri başlatmağa icazə verilmir. İcazəyə ehtiyacınız var? İcazə üçün administratora və ya agent sahibi ilə əlaqə saxlayın.",
   "AIChatNoAccessTitle": "Süni intellekt söhbətindən istifadəyə məhdudiyyət qoyulub.",

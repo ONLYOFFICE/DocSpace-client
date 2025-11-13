@@ -39,6 +39,7 @@ import { WebSearchType } from "@docspace/shared/api/ai/enums";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { toastr } from "@docspace/shared/components/toast";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
@@ -46,6 +47,7 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Search.module.scss";
+import { ResetWebSearchDialog } from "./dialogs/reset";
 
 type TSearchProps = {
   webSearchInitied?: AISettingsStore["webSearchInitied"];
@@ -62,13 +64,15 @@ const FAKE_KEY_VALUE = "0000000000000000";
 const SearchComponent = ({
   webSearchInitied,
   webSearchConfig,
-  restoreWebSearch,
   updateWebSearch,
   hasAIProviders,
   aiSettingsUrl,
   getAIConfig,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
+
+  const [resetDialogVisible, setResetDialogVisible] =
+    React.useState<boolean>(false);
 
   const [isKeyHidden, setIsKeyHidden] = React.useState(
     webSearchConfig?.enabled,
@@ -89,19 +93,32 @@ const SearchComponent = ({
     setValue(value || "");
   };
 
-  const onRestoreToDefault = async () => {
+  const refreshData = () => {
     setValue("");
     setSelectedOption(WebSearchType.None);
     setIsKeyHidden(false);
+  };
 
-    restoreWebSearch?.();
+  const closeDialog = () => {
+    setResetDialogVisible(false);
+  };
+
+  const onRestoreToDefault = async () => {
+    setResetDialogVisible(true);
   };
 
   const onSave = async () => {
     if (isKeyHidden) return;
 
     setSaveRequestRunning(true);
-    await updateWebSearch?.(true, selectedOption, value);
+    try {
+      await updateWebSearch?.(true, selectedOption, value);
+
+      toastr.success(t("AISettings:WebSearchEnabledSuccess"));
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as string);
+    }
     setSaveRequestRunning(false);
     getAIConfig?.();
   };
@@ -240,20 +257,25 @@ const SearchComponent = ({
                 </Text>
               </div>
             ) : (
-              <PasswordInput
-                className={styles.passwordInput}
-                placeholder={t("AISettings:EnterKey")}
-                inputValue={value}
-                onChange={onChange}
-                scale
-                isSimulateType
-                isFullWidth
-                isDisableTooltip
-                isDisabled={
-                  isKeyHidden || selectedOption === WebSearchType.None
-                }
-                autoComplete="off"
-              />
+              <>
+                <PasswordInput
+                  className={styles.passwordInput}
+                  placeholder={t("AISettings:EnterKey")}
+                  inputValue={value}
+                  onChange={onChange}
+                  scale
+                  isSimulateType
+                  isFullWidth
+                  isDisableTooltip
+                  isDisabled={
+                    isKeyHidden || selectedOption === WebSearchType.None
+                  }
+                  autoComplete="off"
+                />
+                <Text className={styles.hiddenKeyDescription}>
+                  {t("AISettings:WebSearchKeyDescription")}
+                </Text>
+              </>
             )}
           </FieldContainer>
         </div>
@@ -283,6 +305,9 @@ const SearchComponent = ({
       {!hasAIProviders ? (
         <Tooltip id={tooltipId} place="bottom" offset={10} float />
       ) : null}
+      {resetDialogVisible ? (
+        <ResetWebSearchDialog onSuccess={refreshData} onClose={closeDialog} />
+      ) : null}
     </>
   );
 };
@@ -291,7 +316,6 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
   return {
     webSearchInitied: aiSettingsStore.webSearchInitied,
     webSearchConfig: aiSettingsStore.webSearchConfig,
-    restoreWebSearch: aiSettingsStore.restoreWebSearch,
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
     aiSettingsUrl: settingsStore.aiSettingsUrl,

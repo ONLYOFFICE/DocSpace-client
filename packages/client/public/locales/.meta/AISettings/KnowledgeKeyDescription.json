@@ -1,0 +1,28 @@
+{
+  "key_path": "KnowledgeKeyDescription",
+  "content": "Enter the API key obtained from your knowledge base provider",
+  "content_en_sha1_hash": "b99b4aff406e752f40ee98ab7d3c9ef517e1fe72",
+  "created_at": "2025-11-13T07:58:04.683Z",
+  "updated_at": "2025-11-13T08:11:22.692Z",
+  "comment": {
+    "text": "This text provides a brief explanation for users, instructing them to input their API key from their knowledge base provider. It appears as a hidden description field within the AI Settings section of the Portal. Translators should ensure the wording accurately conveys the need for an API key.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:11:22.692Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
+      "line_number": 281,
+      "context": "<Text className={styles.hiddenKeyDescription}>\n {t(\"AISettings:WebSearchKeyHiddenDescription\")}\n </Text>\n ) : (\n <Text className={styles.hiddenKeyDescription}>\n {t(\"AISettings:KnowledgeKeyDescription\")}\n </Text>\n )}\n </FieldContainer>\n </div>\n <div className={styles.buttonContainer}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

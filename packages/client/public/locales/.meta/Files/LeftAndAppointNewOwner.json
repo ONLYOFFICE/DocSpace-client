@@ -3,7 +3,7 @@
   "content": "You have left the room and appointed a new owner",
   "content_en_sha1_hash": "70c6513ecf2f1d31d81657e1a47a62c5179cea80",
   "created_at": "2025-05-19T21:30:55.742Z",
-  "updated_at": "2025-11-06T18:29:15.994Z",
+  "updated_at": "2025-11-13T07:58:08.505Z",
   "comment": {
     "text": "This translation key is used for a confirmation message when a user leaves a room and appoints a new owner. It appears as a success notification after the action is completed in the application's files management system.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3076,
+      "line_number": 3088,
       "context": "const isAdmin = user.isOwner || user.isAdmin;\n const isRoot = this.selectedFolderStore.isRootFolder;\n \n const roomSuccessText = isOwner\n ? t(\"Files:LeftAndAppointNewOwner\")\n : t(\"Files:YouLeftTheRoom\");\n const agentSuccessText = isOwner\n ? t(\"Files:LeftAgentAndAppointNewOwner\")\n : t(\"Files:YouLeftTheAgent\");\n const successText = isAIAgent ? agentSuccessText : roomSuccessText;",
       "module": "/packages/client"
     }

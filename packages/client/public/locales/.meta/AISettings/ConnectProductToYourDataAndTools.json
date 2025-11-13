@@ -3,7 +3,7 @@
   "content": "Connect {{productName}} to your data and tools.",
   "content_en_sha1_hash": "4cc178cdd202c14a52f15345c6ab0084f8394f42",
   "created_at": "2025-10-27T16:14:31.657Z",
-  "updated_at": "2025-11-07T13:41:06.286Z",
+  "updated_at": "2025-11-13T07:58:08.093Z",
   "comment": {
     "text": "This text appears in a dialog header and description prompting users to connect a product (identified by the `productName` variable) to their data and tools. It guides users through the process of integrating the product with their existing systems. Translators should ensure that the phrasing encourages user action and aligns with the overall onboarding flow.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/add/index.tsx",
-      "line_number": 117,
-      "context": "<ModalDialog.Header>{t(\"AISettings:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <form onSubmit={onSubmitAction} className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Link\n className={styles.learnMoreLink}",
+      "line_number": 126,
+      "context": "<ModalDialog.Header>{t(\"AISettings:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <form onSubmit={onSubmitAction} className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {aiSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/edit/index.tsx",
-      "line_number": 150,
-      "context": "<ModalDialog.Header>{t(\"AISettings:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <form onSubmit={onSubmitAction} className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Link\n className={styles.learnMoreLink}",
+      "line_number": 152,
+      "context": "<ModalDialog.Header>{t(\"AISettings:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <form onSubmit={onSubmitAction} className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {aiSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     }
   ],

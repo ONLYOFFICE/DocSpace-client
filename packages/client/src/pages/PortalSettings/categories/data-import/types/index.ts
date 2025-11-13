@@ -451,6 +451,7 @@ export interface ImportSectionProps {
   description: React.ReactNode;
   exportSection: Omit<ImportItemProps, "isChecked">;
   importSection: Omit<ImportItemProps, "isChecked">;
+  getTooltipContent?: () => React.ReactNode;
   dataTestId?: string;
 }
 

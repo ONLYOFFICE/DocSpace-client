@@ -81,6 +81,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   isDoubleFooterLine?: boolean;
   /** Sets the displayed dialog to be closed or open */
   isCloseable?: boolean;
+  /**  Disables closing the modal when the backdrop is clicked */
+  closeOnBackdropClick?: boolean;
   /** Enables embedded mode */
   embedded?: boolean;
   /** Wraps content in form element */

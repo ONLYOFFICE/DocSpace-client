@@ -3,7 +3,7 @@
   "content": "Description",
   "content_en_sha1_hash": "55f8ebc805e65b5b71ddafdae390e3be2bcd69af",
   "created_at": "2025-05-19T21:30:44.499Z",
-  "updated_at": "2025-10-27T16:14:33.302Z",
+  "updated_at": "2025-11-13T07:58:07.890Z",
   "comment": {
     "text": "This translation key is used for describing plugins or other entities on a settings page, typically displayed as truncated text to limit length. It appears in various UI elements such as dialog boxes and forms, providing essential information about what users can expect from these entities.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 147,
-      "context": "scale\n hasError={!!urlError}\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Description\")}\n isRequired\n isVertical\n removeMargin\n labelVisible\n errorMessage={descriptionError}",
+      "line_number": 159,
+      "context": "<Text className={styles.fieldHint}>\n {t(\"AISettings:MCPServerIntegrationURLHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Description\")}\n isRequired\n isVertical\n removeMargin\n labelVisible\n errorMessage={descriptionError}",
       "module": "/packages/client"
     },
     {

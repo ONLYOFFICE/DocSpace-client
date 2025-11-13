@@ -3,7 +3,7 @@
   "content": "The title can't contain any of the following characters: *+:\"<>?|/",
   "content_en_sha1_hash": "2988d94a573dbf375e5668150d952ca1022bdb80",
   "created_at": "2025-05-26T07:15:41.554Z",
-  "updated_at": "2025-11-03T12:10:34.931Z",
+  "updated_at": "2025-11-13T07:58:07.720Z",
   "comment": {
     "text": "The translation key \"ContainsSpecCharacter\" is used to display an error message when a file title contains specific characters. It appears in a dialog box that allows users to input a file name and is linked to validation rules for folder names. Translators should replace this text with a corresponding message in their language, ensuring it conveys the same meaning as the original English content.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 455,
+      "line_number": 471,
       "context": "isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 478,
+      "line_number": 488,
       "context": "isWrongTitle={isWrongTitle}\n onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"",
       "module": "/packages/client"
     },

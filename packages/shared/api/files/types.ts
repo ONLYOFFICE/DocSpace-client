@@ -83,7 +83,7 @@ export type TFileSecurity = {
   CopyLink: boolean;
   Embed: boolean;
   Vectorization: boolean;
-  AscAi?: boolean;
+  AskAi?: boolean;
 };
 
 export type TShareSettings = {

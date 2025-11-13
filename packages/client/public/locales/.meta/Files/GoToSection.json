@@ -3,7 +3,7 @@
   "content": "Go to {{sectionName}}",
   "content_en_sha1_hash": "c1337f981bf1d4a2b8b5f06ade64c7b13617b7ef",
   "created_at": "2025-05-19T21:30:55.713Z",
-  "updated_at": "2025-11-03T12:10:34.895Z",
+  "updated_at": "2025-11-13T07:58:07.689Z",
   "comment": {
     "text": "The \"Go to {{sectionName}}\" translation key is used in a button's tooltip, prompting users to navigate to their personal files section. It appears on the \"Files\" page and is linked to a file management action that directs users to their personalized folder. The section name placeholder allows for dynamic text replacement based on the specific file system section being referenced.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 496,
+      "line_number": 505,
       "context": "])\n .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [\n {\n ...actions.onGoToPersonal(),\n icon: <PersonIcon />,\n description: t(\"Files:GoToSection\", {\n sectionName: t(\"Common:MyDocuments\"),\n }),\n key: \"empty-view-trash-goto-personal\",\n },\n ])",
       "module": "/packages/client"
     }

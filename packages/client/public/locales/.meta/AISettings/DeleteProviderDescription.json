@@ -1,13 +1,13 @@
 {
   "key_path": "DeleteProviderDescription",
-  "content": "Deleting this provider will revoke access for all users, and its settings will be permanently erased. To use the provider again, you will need to set it up from scratch.",
-  "content_en_sha1_hash": "11099d1f9a0a9d3c41cdeab509f84bd9505feb27",
-  "created_at": "2025-10-27T16:14:31.657Z",
-  "updated_at": "2025-11-03T12:10:35.151Z",
+  "content": "Deleting this provider will revoke access for all users, and its settings will be permanently erased.\n To use the provider again, you will need to set it up from scratch.",
+  "content_en_sha1_hash": "684c9cdd8886ac52a88b39cbe244b733bf8bd7e2",
+  "created_at": "2025-11-13T07:58:04.424Z",
+  "updated_at": "2025-11-13T08:12:51.728Z",
   "comment": {
-    "text": "This text explains the consequences of deleting an AI provider, including access revocation and permanent data loss. It appears as a descriptive message within a confirmation dialog prompting the user to delete an AI provider. Translators should convey the finality of the action.",
+    "text": "This text provides a warning message within a confirmation dialog. It explains the consequences of deleting an AI provider, including loss of access and settings, and the need to reconfigure it. This description helps users understand the impact before confirming the deletion.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:34:55.384Z"
+    "updated_at": "2025-11-13T08:12:51.728Z"
   },
   "usage": [
     {
@@ -19,6 +19,54 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

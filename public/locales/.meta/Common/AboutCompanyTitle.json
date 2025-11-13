@@ -3,7 +3,7 @@
   "content": "About this program",
   "content_en_sha1_hash": "56fb7336f231f3007d1a564b2c67ede83691a9e3",
   "created_at": "2025-05-19T21:30:42.806Z",
-  "updated_at": "2025-10-17T14:43:53.642Z",
+  "updated_at": "2025-11-13T07:58:08.514Z",
   "comment": {
     "text": "This translation key is used for a title that describes the purpose of a program or application. It appears as a label on an about page in the user interface, indicating the content to be displayed within it.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 417,
+      "line_number": 418,
       "context": "if (displayAbout) {\n about = {\n key: \"user-menu-about\",\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:AboutCompanyTitle\"),\n onClick: (e) => this.onAboutClick(e),\n url: `${window.location.pathname}?action=about`,\n };\n }",
       "module": "/packages/client"
     },

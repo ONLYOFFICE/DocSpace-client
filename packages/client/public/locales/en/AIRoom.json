@@ -2,7 +2,8 @@
   "AIChat": "AI-Chat",
   "CreateChat": "Create chat",
   "CreateChatDescription": "Go to the AI-Chat tab to get started.",
-  "EmptyKnowledgeDescription": "Files uploaded here will be indexed and used as context in the AI-Chat tab. Add files to ask AI about them, generate content, or analyze information together.",
+  "EmptyKnowledgeDescription": "Files uploaded here will be indexed and used as context in the AI-Chat tab. Add files to ask AI questions, generate content, or collaborate on information.",
+  "EmptyKnowledgeDescriptionActions": "Try these actions to get started:",
   "EmptyKnowledgeTitle": "No files uploaded yet",
   "EmptyResultsDescription": "Files generated in AI-Chat will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.",
   "EmptyResultsTitle": "No results yet",
@@ -21,5 +22,6 @@
   "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
   "KnowledgeUnavailable": "Knowledge Base unavailable",
   "KnowledgeUnavailableDescription": "The Knowledge base is currently disabled. To activate semantic search and document processing for your AI agents, please configure the embeddings provider in the {{productName}} settings.",
-  "KnowledgeUnavailableDescriptionUser": "The Knowledge base is currently disabled. To activate semantic search and document processing for AI agents, please contact your {{productName}} admin to configure the embeddings provider."
+  "KnowledgeUnavailableDescriptionUser": "The Knowledge base is currently disabled. To activate semantic search and document processing for AI agents, please contact your {{productName}} admin to configure the embeddings provider.",
+  "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results."
 }

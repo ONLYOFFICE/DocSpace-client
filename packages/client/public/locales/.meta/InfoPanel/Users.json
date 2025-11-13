@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2025-05-19T21:30:54.976Z",
-  "updated_at": "2025-10-17T14:43:53.450Z",
+  "updated_at": "2025-11-13T07:58:08.008Z",
   "comment": {
     "text": "This translation key is used to display the label \"Users\" in the InfoPanelStore.js file. It appears as a title when users are displayed and needs to be translated into different languages, providing a user-friendly interface for various contexts.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 100,
+      "line_number": 126,
       "context": "return (\n <Wrapper>\n <ImportSection\n isChecked\n sectionName={t(\"InfoPanel:Users\")}\n description={t(\"Settings:UsersSectionDescription\")}\n exportSection={{\n sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,",
       "module": "/packages/client"
     },

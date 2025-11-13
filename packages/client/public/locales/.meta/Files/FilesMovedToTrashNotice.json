@@ -3,7 +3,7 @@
   "content": "After files will be moved to {{sectionName}}.",
   "content_en_sha1_hash": "772c05fb87bfce6033351176146d02a6a2363a1e",
   "created_at": "2025-06-02T10:19:22.898Z",
-  "updated_at": "2025-11-06T18:29:15.755Z",
+  "updated_at": "2025-11-13T07:58:08.065Z",
   "comment": {
     "text": "This translation key is used to display a notice informing users that files will be moved to the trash after a certain period. It appears in a UI element related to file management, likely a button or dialog related to deleting or archiving files. The exact section name and phrase are placeholders for localization purposes.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 564,
+      "line_number": 563,
       "context": "days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;",
       "module": "/packages/client"
     }

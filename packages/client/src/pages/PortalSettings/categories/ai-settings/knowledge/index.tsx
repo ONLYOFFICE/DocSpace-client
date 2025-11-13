@@ -122,7 +122,6 @@ const KnowledgeComponent = ({
 
     getAIConfig?.();
     setSaveRequestRunning(false);
-    toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
   };
 
   const items = React.useMemo(() => {
@@ -260,26 +259,32 @@ const KnowledgeComponent = ({
             labelText={t("AISettings:APIKey")}
             removeMargin
           >
-            <PasswordInput
-              className={styles.passwordInput}
-              placeholder={t("AISettings:EnterKey")}
-              inputValue={value}
-              onChange={onChange}
-              scale
-              isSimulateType
-              isFullWidth
-              isDisableTooltip
-              isDisabled={isKeyHidden || selectedOption === KnowledgeType.None}
-              autoComplete="off"
-            />
             {isKeyHidden ? (
-              <Text className={styles.hiddenKeyDescription}>
-                {t("AISettings:WebSearchKeyHiddenDescription")}
-              </Text>
+              <div className={styles.aiBanner}>
+                <Text fontSize="12px" fontWeight={400} lineHeight="16px">
+                  {t("AISettings:WebSearchKeyHiddenDescription")}
+                </Text>
+              </div>
             ) : (
-              <Text className={styles.hiddenKeyDescription}>
-                {t("AISettings:KnowledgeKeyDescription")}
-              </Text>
+              <>
+                <PasswordInput
+                  className={styles.passwordInput}
+                  placeholder={t("AISettings:EnterKey")}
+                  inputValue={value}
+                  onChange={onChange}
+                  scale
+                  isSimulateType
+                  isFullWidth
+                  isDisableTooltip
+                  isDisabled={
+                    isKeyHidden || selectedOption === KnowledgeType.None
+                  }
+                  autoComplete="off"
+                />
+                <Text className={styles.hiddenKeyDescription}>
+                  {t("AISettings:KnowledgeKeyDescription")}
+                </Text>
+              </>
             )}
           </FieldContainer>
         </div>

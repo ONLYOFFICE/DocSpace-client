@@ -1348,6 +1348,7 @@ class FilesStore {
 
   updateRoomMute = (index, status) => {
     this.folders[index].mute = status;
+    this.updateSelection(this.folders[index].id);
   };
 
   setFile = (file) => {

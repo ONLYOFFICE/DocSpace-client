@@ -66,6 +66,10 @@ export const useMCP = ({
   const onClose = () => setIsMCPSelectorVisible(false);
 
   const onSubmit = (servers: TSelectorItem[]) => {
+    if (servers.find((s) => s.id === portalMcpServerId)) {
+      setAgentParams({ attachDefaultTools: true });
+    }
+
     setSelectedServers(servers);
   };
 
@@ -123,6 +127,8 @@ export const useMCP = ({
       if (!portalMcpServerId) return;
 
       const portalMcpServer = await getMCPServerById(portalMcpServerId);
+
+      if (!portalMcpServer.enabled) return;
 
       setSelectedServers([
         {

@@ -154,7 +154,7 @@ const Attachment = ({
       withRecentTreeFolder
       withFavoritesTreeFolder
       withAIAgentsTreeFolder
-      disableBySecurity="AscAi"
+      disableBySecurity="AskAi"
       currentDeviceType={
         isDesktop()
           ? DeviceType.desktop

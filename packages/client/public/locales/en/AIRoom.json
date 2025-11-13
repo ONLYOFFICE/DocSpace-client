@@ -17,7 +17,7 @@
   "KnowledgeUnavailableDescription": "The Knowledge base is currently disabled. To activate semantic search and document processing for your AI agents, please configure the embeddings provider in the {{productName}} settings.",
   "KnowledgeUnavailableDescriptionUser": "The Knowledge base is currently disabled. To activate semantic search and document processing for AI agents, please contact your {{productName}} admin to configure the embeddings provider.",
   "MCP": "MCP tools for this room",
-  "MCPDescription": "Use MCP tools connected by the administrator to enhance chat experience with AI. These tools can assist with data extraction, summaries, smart suggestions, etc.",
+  "MCPDescriptionServers": "Use MCP servers connected by the administrator to enhance chat experience with AI. MCP servers can assist with data extraction, summaries, smart suggestions, etc.",
   "Model": "Provider and model",
   "ModelDescription": "Select the AI provider and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
   "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results.",

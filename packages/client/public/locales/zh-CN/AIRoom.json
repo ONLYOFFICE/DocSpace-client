@@ -10,7 +10,6 @@
   "KnowledgeDescription": "从您的计算机或{{productName}}上传文件，为对话提供上下文。注意：部分或全部上传内容可能会在对话期间显示。",
   "KnowledgeSelectIn": "在{{productName}}中选择",
   "MCP": "此房间的 MCP 工具",
-  "MCPDescription": "使用管理员连接的 MCP 工具增强 AI 对话体验。这些工具可协助进行数据提取、内容摘要、智能建议等操作。",
   "Model": "提供商和模型",
   "ModelDescription": "选择本房间对话使用的 AI 提供商与模型。此为必填设置，对所有参与者生效。",
   "ResultStorage": "结果存储",

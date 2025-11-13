@@ -10,7 +10,6 @@
   "KnowledgeDescription": "Ngarko skedarë nga kompjuteri yt ose {{productName}} për të ofruar kontekst më të mirë për bisedën. Shënim: një pjesë ose e gjithë përmbajtja e ngarkuar mund të ekspozohet gjatë bisedës.",
   "KnowledgeSelectIn": "Zgjidh në {{productName}}",
   "MCP": "Mjetet MCP për këtë dhomë",
-  "MCPDescription": "Përdorni mjetet MCP të lidhura nga administratori për të përmirësuar përvojën e bisedës me IA-në. Këto mjete mund të ndihmojnë me nxjerrjen e të dhënave, përmbledhjet, sugjerimet inteligjente etj.",
   "Model": "Ofruesi dhe modeli",
   "ModelDescription": "Zgjidh ofruesin dhe modelin e inteligjencës artificiale që do të përdoret në bisedat e kësaj dhome. Ky cilësim është i detyrueshëm dhe zbatohet për të gjithë pjesëmarrësit.",
   "ResultStorage": "Ruajtja e rezultateve",

@@ -10,7 +10,6 @@
   "KnowledgeDescription": "Laden Sie Dateien von Ihrem Computer oder {{productName}} hoch, um den Chat mit mehr Kontext zu versehen. Hinweis: Einige oder alle hochgeladenen Inhalte können während des Gesprächs sichtbar sein.",
   "KnowledgeSelectIn": "In {{productName}} wählen",
   "MCP": "MCP-Tools für diesen Raum",
-  "MCPDescription": "Nutzen Sie die vom Administrator verbundenen MCP-Tools, um das Chat-Erlebnis mithilfe von KI zu verbessern. Diese Tools unterstützen Sie bei der Datenextraktion, der Erstellung von Zusammenfassungen, intelligenten Vorschlägen usw.",
   "Model": "Anbieter und Modell",
   "ModelDescription": "Wählen Sie den KI-Anbieter und das KI-Modell aus, die in den Chats dieses Raums verwendet werden sollen. Diese Einstellung ist obligatorisch und gilt für alle Teilnehmer.",
   "ResultStorage": "Ergebnisspeicherung",

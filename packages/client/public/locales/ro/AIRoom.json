@@ -10,7 +10,6 @@
   "KnowledgeDescription": "Încărcați fișierele de pe calculatorul sau {{productName}} pentru a oferi contextul suplimentar chat-ului. Mențiune: o parte sau întregul conținut încărcat poate fi partajat în timpul conversației.",
   "KnowledgeSelectIn": "Selectare din {{productName}}",
   "MCP": "Instrumente MCP în această sală",
-  "MCPDescription": "Folosiți instrumentele MCP conectate de administrator pentru a îmbunătăţi experiența de conversație cu IA. Aceste instrumente vă pot ajuta cu extragerea de date, rezumate, sugestii inteligente, etc.",
   "Model": "Furnizor și model",
   "ModelDescription": "Selectați furnizorul și modelul de IA de utilizat în conversaţiile din această sală. Această opțiune setează în mod obligatoriu și se aplică tuturor participanţilor.",
   "ResultStorage": "Stocare rezultate",

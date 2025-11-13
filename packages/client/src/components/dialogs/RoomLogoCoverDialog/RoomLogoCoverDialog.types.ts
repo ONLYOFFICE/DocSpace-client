@@ -85,6 +85,7 @@ export type CoverDialogProps = RoomLogoCoverProps & {
   setEnabledHotkeys?: FilesStore["setEnabledHotkeys"];
   uploadedFile: AvatarEditorDialogStore["uploadedFile"];
   setUploadedFile: AvatarEditorDialogStore["setUploadedFile"];
+  isAIAgentsFolderRoot: boolean;
 };
 
 export interface CustomLogoProps {

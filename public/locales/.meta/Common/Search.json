@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-11-13T10:21:17.806Z",
+  "updated_at": "2025-11-13T14:53:11.219Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -78,7 +78,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 157,
+      "line_number": 165,
       "context": "const searchProps: TSelectorSearch = withSearch\n ? {\n withSearch,\n searchLoader: <SearchLoader />,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n isSearchLoading: showBreadCrumbsLoader,\n onSearch: onSearch!,\n onClearSearch: onClearSearch!,\n }",
       "module": "/packages/shared"
     },

@@ -1,1 +1,21 @@
-{}
+{
+  "AIChat": "AI-Chat",
+  "CreateChat": "Luo chat",
+  "CreateChatDescription": "Siirry AI-Chat-välilehteen aloittaaksesi.",
+  "EmptyKnowledgeDescription": "Tähän ladatut tiedostot indeksoidaan ja niitä käytetään AI-Chat -välilehden kontekstina. Lisää tiedostoja, jotta voit kysyä AI:lta niistä, luoda sisältöä tai analysoida tietoja yhdessä.",
+  "EmptyKnowledgeTitle": "Ei tiedostoja vielä ladattu",
+  "EmptyResultsDescription": "Tekoälykeskusteluissa luoduista tiedostoista ilmestyy tiedot tähän automaattisesti. Aina kun luot sisältöä, aloitat keskustelun tai lähetät viestin, jossa on tuloste, tulos tallennetaan tähän osioon.",
+  "EmptyResultsTitle": "Ei tuloksia vielä",
+  "Knowledge": "Tieto",
+  "KnowledgeDescription": "Lataa tiedostoja tietokoneeltasi tai {{productName}}-palvelusta, jotta chatissa on parempi konteksti. Huomio: osa tai kaikki ladatut tiedot voivat näkyä keskustelun aikana.",
+  "KnowledgeSelectIn": "Valitse {{productName}}",
+  "KnowledgeUnavailable": "Tietokanta ei ole käytettävissä",
+  "KnowledgeUnavailableDescription": "Tietokanta on tällä hetkellä poissa käytöstä. Jotta voit ottaa semanttisen haun ja dokumenttien käsittelyn käyttöön AI-agenttiesi osalta, määritä upotusten tarjoaja {{productName}} -asetuksissa.",
+  "KnowledgeUnavailableDescriptionUser": "Tietokanta on tällä hetkellä poissa käytöstä. Jotta voit ottaa semanttisen haun ja dokumenttien käsittelyn käyttöön AI-agentteja varten, ota yhteyttä {{productName}}-järjestelmän ylläpitäjään upotusten tarjoajan määrittämiseksi.",
+  "MCP": "MCP työkalut tähän huoneeseen",
+  "Model": "Palveluntarjoaja ja malli",
+  "ModelDescription": "Valitse tässä huoneessa käytettävä tekoälyn tarjoaja ja malli. Tämä asetus on pakollinen ja koskee kaikkia osallistujia.",
+  "ResultStorage": "Tulosten tallennus",
+  "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",
+  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}"
+}

@@ -1,1 +1,21 @@
-{}
+{
+  "AIChat": "AI-Chat",
+  "CreateChat": "Utwórz czat",
+  "CreateChatDescription": "Przejdź do zakładki AI-Chat, aby rozpocząć.",
+  "EmptyKnowledgeDescription": "Pliki przesłane tutaj zostaną zindeksowane i wykorzystane jako kontekst w zakładce AI-Chat. Dodawaj pliki, aby pytać AI o nie, generować treści lub wspólnie analizować informacje.",
+  "EmptyKnowledgeTitle": "Jeszcze nie przesłano żadnych plików.",
+  "EmptyResultsDescription": "Pliki generowane w AI-Chat pojawią się tutaj automatycznie. Za każdym razem, gdy wygenerujesz treść, rozpoczniesz czat lub wyślesz wiadomość z wynikiem, rezultat zostanie zapisany w tej sekcji.",
+  "EmptyResultsTitle": "Brak wyników na razie",
+  "Knowledge": "Wiedza",
+  "KnowledgeDescription": "Prześlij pliki z komputera lub {{productName}}, aby zapewnić lepszy kontekst dla rozmowy. Zwróć uwagę: część lub całość przesłanych treści może zostać ujawniona podczas rozmowy.",
+  "KnowledgeSelectIn": "Wybierz w {{productName}}",
+  "KnowledgeUnavailable": "Baza wiedzy niedostępna",
+  "KnowledgeUnavailableDescription": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla Twoich agentów AI, skonfiguruj dostawcę osadzeń w ustawieniach {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla agentów AI, skontaktuj się z administratorem {{productName}}, aby skonfigurować dostawcę osadzeń.",
+  "MCP": "Narzędzia MCP do tego pomieszczenia",
+  "Model": "Dostawca i model",
+  "ModelDescription": "Wybierz dostawcę i model AI, które będą używane w rozmowach w tym pokoju. To ustawienie jest obowiązkowe i dotyczy wszystkich uczestników.",
+  "ResultStorage": "Przechowywanie wyników",
+  "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
+  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}"
+}

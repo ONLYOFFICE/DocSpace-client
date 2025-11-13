@@ -3,7 +3,7 @@
   "content": "Download as",
   "content_en_sha1_hash": "e10ee8f09efe43f28dc9a950ae25d485fde3ca5e",
   "created_at": "2025-05-19T21:30:44.663Z",
-  "updated_at": "2025-11-06T18:29:15.986Z",
+  "updated_at": "2025-11-13T14:53:11.453Z",
   "comment": {
     "text": "The translation key \"DownloadAs\" is used to display the text \"Download as\", which appears on a download button in the UI. This text allows users to select a file format or destination when downloading a file from an application. It may appear in dialog boxes or buttons related to file management and downloads.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 192,
+      "line_number": 189,
       "context": "case \"downloadAs\":\n if (!this.isAvailableOption(\"downloadAs\")) return null;\n return {\n id: \"menu-download-as\",\n label: t(\"Common:DownloadAs\"),\n onClick: this.downloadAsHandle,\n iconUrl: DownloadAsReactSvgUrl,\n };\n \n case \"moveTo\":",
       "module": "/packages/client"
     },

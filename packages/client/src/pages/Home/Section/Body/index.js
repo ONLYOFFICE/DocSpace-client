@@ -104,6 +104,7 @@ const SectionBodyContent = (props) => {
     setDropTargetPreview,
     aiConfig,
     currentTab,
+    isAIRoom,
   } = props;
 
   useEffect(() => {
@@ -131,7 +132,7 @@ const SectionBodyContent = (props) => {
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
-      "#customScrollBar > .scroll-wrapper > .scroller",
+      "#customScrollBar > .scroll-wrapper > .scroller"
     );
 
     if (isTablet() || isMobile() || currentDeviceType !== DeviceType.desktop) {
@@ -153,7 +154,7 @@ const SectionBodyContent = (props) => {
         const bodyScroll =
           isMobile() || currentDeviceType === DeviceType.mobile
             ? document.querySelector(
-                "#customScrollBar > .scroll-wrapper > .scroller",
+                "#customScrollBar > .scroll-wrapper > .scroller"
               )
             : document.querySelector(".section-scroll");
 
@@ -162,8 +163,8 @@ const SectionBodyContent = (props) => {
           (isMobile() || currentDeviceType === DeviceType.mobile
             ? 57
             : viewAs === "table"
-              ? 40
-              : 48);
+            ? 40
+            : 48);
 
         bodyScroll.scrollTo(0, count);
       }
@@ -237,7 +238,7 @@ const SectionBodyContent = (props) => {
     indexSeparatorNode.classList.add("indexing-separator");
 
     const parent = document.querySelector(
-      ".ReactVirtualized__Grid__innerScrollContainer",
+      ".ReactVirtualized__Grid__innerScrollContainer"
     );
 
     if (styles) {
@@ -250,7 +251,7 @@ const SectionBodyContent = (props) => {
           const value = currentDroppable.getAttribute("value");
 
           const documentTitle = currentDroppable.getAttribute(
-            "data-document-title",
+            "data-document-title"
           );
           setDropTargetPreview(documentTitle);
 
@@ -268,7 +269,7 @@ const SectionBodyContent = (props) => {
           }
         } else {
           const documentTitle = currentDroppable.getAttribute(
-            "data-document-title",
+            "data-document-title"
           );
           setDropTargetPreview(documentTitle);
 
@@ -282,7 +283,7 @@ const SectionBodyContent = (props) => {
           const value = currentDroppable.getAttribute("value");
 
           const documentTitle = currentDroppable.getAttribute(
-            "data-document-title",
+            "data-document-title"
           );
           setDropTargetPreview(documentTitle);
 
@@ -304,7 +305,7 @@ const SectionBodyContent = (props) => {
           droppableSeparator = indexSeparatorNode;
 
           const documentTitle = currentDroppable.getAttribute(
-            "data-document-title",
+            "data-document-title"
           );
           setDropTargetPreview(documentTitle);
         }
@@ -320,7 +321,7 @@ const SectionBodyContent = (props) => {
       if (wrappedClass === sectionClass) {
         indexSeparatorNode.setAttribute(
           "style",
-          `${separatorStyles}bottom: 0px;`,
+          `${separatorStyles}bottom: 0px;`
         );
         return parent.append(indexSeparatorNode);
       }
@@ -370,7 +371,7 @@ const SectionBodyContent = (props) => {
 
     const selectedFolder = getSelectedFolder();
     const destFolderInfo = selectedFolder.folders.find(
-      (folder) => folder.id == selectedFolderId,
+      (folder) => folder.id == selectedFolderId
     );
 
     if (!isIndexEditingMode && selectedFolderId) {
@@ -392,7 +393,7 @@ const SectionBodyContent = (props) => {
       const replaceableItemIndex = filesList.findIndex((i) =>
         replaceableItemType === "file"
           ? i.id === replaceableItemId && !i.isFolder
-          : i.id === replaceableItemId && i.isFolder,
+          : i.id === replaceableItemId && i.isFolder
       );
 
       if (replaceableItemIndex > -1) {
@@ -479,6 +480,8 @@ const SectionBodyContent = (props) => {
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
+  if (isAIRoom) return null;
+
   return <FileViewComponent />;
 };
 
@@ -562,10 +565,11 @@ export default inject(
       onEnableFormFillingGuid,
       setDropTargetPreview,
       currentTab: aiRoomStore.currentTab,
+      isAIRoom: selectedFolderStore.isAIRoom,
     };
-  },
+  }
 )(
   withTranslation(["Files", "Common", "Translations", "FormFillingTipsDialog"])(
-    withHotkeys(withLoader(observer(SectionBodyContent))()),
-  ),
+    withHotkeys(withLoader(observer(SectionBodyContent))())
+  )
 );

@@ -1,5 +1,6 @@
 {
   "AIChat": "AI-Chat",
+  "AIInstructions": "AI Instructions",
   "CreateChat": "Create chat",
   "CreateChatDescription": "Go to the AI-Chat tab to get started.",
   "EmptyKnowledgeDescription": "Files uploaded here will be indexed and used as context in the AI-Chat tab. Add files to ask AI questions, generate content, or collaborate on information.",
@@ -7,7 +8,6 @@
   "EmptyKnowledgeTitle": "No files uploaded yet",
   "EmptyResultsDescription": "Files generated in AI-Chat will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.",
   "EmptyResultsTitle": "No results yet",
-  "Instructions": "Instructions",
   "InstructionsDescriptionAgent": "Describe how the AI agent should behave and respond. Define its role, tone, and main tasks.",
   "InstructionsDescriptionAgentExample": "Example: “You are an AI PR assistant that helps write and edit press releases. Maintain a professional, confident, and media-friendly tone. Highlight key messages clearly, avoid jargon, and keep the text concise and engaging.”",
   "Knowledge": "Knowledge",

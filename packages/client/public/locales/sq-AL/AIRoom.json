@@ -6,7 +6,6 @@
   "EmptyKnowledgeTitle": "Nuk ka ende skedarë të ngarkuar",
   "EmptyResultsDescription": "Skedarët e gjeneruar në Bisedë - IA do të shfaqen këtu automatikisht. Sa herë që gjeneroni përmbajtje, filloni një bisedë ose dërgoni një mesazh me rezultat, rezultati do të ruhet në këtë seksion.",
   "EmptyResultsTitle": "Nuk ka ende rezultate",
-  "Instructions": "Udhëzime",
   "Knowledge": "Njohuri",
   "KnowledgeDescription": "Ngarko skedarë nga kompjuteri yt ose {{productName}} për të ofruar kontekst më të mirë për bisedën. Shënim: një pjesë ose e gjithë përmbajtja e ngarkuar mund të ekspozohet gjatë bisedës.",
   "KnowledgeSelectIn": "Zgjidh në {{productName}}",

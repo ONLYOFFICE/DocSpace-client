@@ -6,7 +6,6 @@
   "EmptyKnowledgeTitle": "Aucun fichier téléchargé pour le moment",
   "EmptyResultsDescription": "Les fichiers générés dans Chat IA apparaîtront ici automatiquement. Chaque fois que vous générez du contenu, démarrez une discussion ou envoyez un message avec un résultat, celui-ci sera enregistré dans cette section.",
   "EmptyResultsTitle": "Aucun résultat pour le moment",
-  "Instructions": "Instructions",
   "Knowledge": "Connaissances",
   "KnowledgeDescription": "Téléchargez des fichiers depuis votre ordinateur ou {{productName}} pour fournir un meilleur contexte à la discussion. Remarque : une partie ou la totalité du contenu téléchargé peut être exposée pendant la conversation.",
   "KnowledgeSelectIn": "Sélectionner dans {{productName}}",

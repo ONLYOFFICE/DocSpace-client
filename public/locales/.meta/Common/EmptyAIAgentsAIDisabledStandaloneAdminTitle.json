@@ -3,23 +3,23 @@
   "content": "AI provider is not available yet",
   "content_en_sha1_hash": "ac68bde04216f5db7b195fdf7e31f837ebbcf37c",
   "created_at": "2025-11-13T07:41:25.968Z",
-  "updated_at": "2025-11-13T07:42:11.283Z",
+  "updated_at": "2025-11-13T10:21:50.394Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text is a title displayed when AI features are disabled for standalone administrators. It appears in empty container views and chat access screens, informing users that the AI provider is not yet available. Translators should ensure the message clearly conveys the unavailability of AI functionality.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T10:21:50.394Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 193,
-      "context": "standalone: boolean,\n isDocSpaceAdmin: boolean,\n ) => {\n return match([standalone, isDocSpaceAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\"),\n )\n .with([false, true], () =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle\"),\n )\n .otherwise(() => t(\"EmptyView:EmptyAIAgentsAIDisabledUserTitle\"));",
+      "context": "standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n return match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\"),\n )\n .with([false, true], () =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle\"),\n )\n .otherwise(() => t(\"EmptyView:EmptyAIAgentsAIDisabledUserTitle\"));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
       "line_number": 64,
-      "context": ");\n \n const title = !canUseChat\n ? t(\"Common:AIChatNoAccessTitle\")\n : isDocSpaceAdmin && standalone\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\")\n : t(\"Common:AIFeaturesAreCurrentlyDisabled\");\n \n const description = !canUseChat\n ? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isDocSpaceAdmin])",
+      "context": ");\n \n const title = !canUseChat\n ? t(\"Common:AIChatNoAccessTitle\")\n : isPortalAdmin && standalone\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\")\n : t(\"Common:AIFeaturesAreCurrentlyDisabled\");\n \n const description = !canUseChat\n ? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isPortalAdmin])",
       "module": "/packages/shared"
     }
   ],

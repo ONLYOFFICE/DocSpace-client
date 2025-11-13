@@ -3,7 +3,7 @@
   "content": "Header value",
   "content_en_sha1_hash": "418adf04f2dc1501aee19de7cd0076792c4e38a3",
   "created_at": "2025-10-27T16:14:31.645Z",
-  "updated_at": "2025-11-13T07:42:11.537Z",
+  "updated_at": "2025-11-13T10:21:17.842Z",
   "comment": {
     "text": "This translation key provides the label \"Header value\" for a text input field within the AI Settings section of the Portal Settings. It's used as a label to instruct the user what information should be entered into the field.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useAdvancedSettings.tsx",
-      "line_number": 138,
+      "line_number": 146,
       "context": "placeholder={t(\"AISettings:EnterLabel\")}\n scale\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"AISettings:HeaderValue\")}\n isVertical\n removeMargin\n labelVisible\n >\n <TextInput",
       "module": "/packages/client"
     }

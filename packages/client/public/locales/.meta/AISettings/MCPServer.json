@@ -3,7 +3,7 @@
   "content": "MCP Server",
   "content_en_sha1_hash": "231652eb3665c808c6c3afc9440be17d0a741a12",
   "created_at": "2025-10-27T16:14:31.643Z",
-  "updated_at": "2025-11-13T07:42:11.531Z",
+  "updated_at": "2025-11-13T10:21:17.841Z",
   "comment": {
     "text": "This key displays \"MCP Server\" as the title of a dialog used for configuring or adding an MCP server connection within the AI settings. It appears in the header of the dialog and as a value in a tooltip on a button. Translators should ensure the meaning is clear to users managing AI server connections.",
     "is_auto": true,
@@ -24,14 +24,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
-      "line_number": 262,
+      "line_number": 270,
       "context": "onClick={showAddDialog}\n isDisabled={isMCPActionsDisabled}\n tooltipText={\n isMCPActionsDisabled\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AISettings:MCPServer\"),\n })\n : undefined\n }\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
-      "line_number": 94,
-      "context": "<MCPIcon title={item.name} imgSrc={icon} size={MCPIconSize.Large} />\n }\n tooltipText={\n disableActions\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AISettings:MCPServer\"),\n })\n : undefined\n }\n >\n <AiTile.Header title={item.name}>",
+      "line_number": 107,
+      "context": "<MCPIcon title={item.name} imgSrc={icon} size={MCPIconSize.Large} />\n }\n tooltipText={\n disableActions\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AISettings:MCPServer\"),\n })\n : undefined\n }\n >\n <AiTile.Header title={name}>",
       "module": "/packages/client"
     }
   ],

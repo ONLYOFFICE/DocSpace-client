@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-11-13T07:42:11.413Z",
+  "updated_at": "2025-11-13T10:21:17.806Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
-      "line_number": 289,
+      "line_number": 259,
       "context": "<div className=\"info_title-icons\">\n {isRoomMembersPanel ? (\n <IconButton\n id=\"info_search\"\n className=\"icon\"\n title={t(\"Common:Search\")}\n iconName={SearchIconReactSvgUrl}\n onClick={onSearchClick}\n size={16}\n />\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1712,
+      "line_number": 1762,
       "context": "getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}",
       "module": "/packages/client"
     },
@@ -72,13 +72,13 @@
     },
     {
       "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 202,
+      "line_number": 220,
       "context": "onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 156,
+      "line_number": 157,
       "context": "const searchProps: TSelectorSearch = withSearch\n ? {\n withSearch,\n searchLoader: <SearchLoader />,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n isSearchLoading: showBreadCrumbsLoader,\n onSearch: onSearch!,\n onClearSearch: onClearSearch!,\n }",
       "module": "/packages/shared"
     },

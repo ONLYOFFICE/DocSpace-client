@@ -3,7 +3,7 @@
   "content": "Enter name",
   "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
   "created_at": "2025-05-19T21:30:44.990Z",
-  "updated_at": "2025-11-13T07:42:11.124Z",
+  "updated_at": "2025-11-13T10:21:17.755Z",
   "comment": {
     "text": "\"Enter name\" is used as a placeholder text in various input fields within the application, prompting users to provide a name. It appears in dialogue boxes, room setting pages, and other forms where user-inputted names are required.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 458,
+      "line_number": 463,
       "context": "<div className=\"logo-name-container\">\n {element}\n <InputParam\n id=\"shared_agent-name\"\n title={inputTitle}\n placeholder={t(\"Common:EnterName\")}\n value={agentParams.title}\n onChange={onChangeName}\n isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}",
       "module": "/packages/client"
     },
@@ -30,8 +30,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 124,
-      "context": "<TextInput\n type={InputType.text}\n size={InputSize.base}\n value={name}\n onChange={(e) => onChangeName(e.target.value)}\n placeholder={t(\"Common:EnterName\")}\n scale\n hasError={!!nameError}\n />\n </FieldContainer>\n <FieldContainer",
+      "line_number": 127,
+      "context": "<TextInput\n type={InputType.text}\n size={InputSize.base}\n value={name}\n onChange={(e) => onChangeName(e.target.value)}\n placeholder={t(\"Common:EnterName\")}\n scale\n hasError={!!nameError}\n maxLength={128}\n />\n <Text className={styles.fieldHint}>",
       "module": "/packages/client"
     },
     {

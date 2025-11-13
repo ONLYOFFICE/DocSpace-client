@@ -3,11 +3,11 @@
   "content": "<1>{{displayName}}</1> invites you to join the AI agent <1>{{agentName}}</1>.",
   "content_en_sha1_hash": "219914f391293ff45a679d1db1a94472c58701ce",
   "created_at": "2025-11-13T07:41:30.489Z",
-  "updated_at": "2025-11-13T07:42:11.998Z",
+  "updated_at": "2025-11-13T10:21:39.820Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays an invitation for a user to join an AI agent. It appears within the UI, specifically when a room is designated as an agent, and informs the user who is inviting them and the name of the agent. Translators should ensure the wording accurately conveys an invitation to join a specific AI agent.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T10:21:39.820Z"
   },
   "usage": [
     {

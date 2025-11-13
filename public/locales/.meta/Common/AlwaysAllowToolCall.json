@@ -3,16 +3,16 @@
   "content": "Always allow this tool to perform this action without asking again",
   "content_en_sha1_hash": "41118a7f36f45b703d13f6961e969fa01188f0a7",
   "created_at": "2025-11-13T07:41:22.086Z",
-  "updated_at": "2025-11-13T07:42:12.038Z",
+  "updated_at": "2025-11-13T10:21:58.911Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears as the label for a checkbox in a dialog. It allows users to permanently allow a specific tool to perform an action without needing to confirm it again in the future. Translators should convey the meaning of permanently granting tool access.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T10:21:58.911Z"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallConfirmDialog.tsx",
-      "line_number": 109,
+      "line_number": 122,
       "context": "<ModalDialog.Footer>\n <div className={styles.toolCallFooter}>\n <Checkbox\n isChecked={alwaysAllow}\n onChange={(e) => setAlwaysAllow(e.target.checked)}\n label={t(\"Common:AlwaysAllowToolCall\")}\n />\n <div className={styles.buttonsBlockContainer}>\n <Button\n primary\n label={t(\"Common:Allow\")}",
       "module": "/packages/shared"
     }

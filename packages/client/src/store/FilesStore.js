@@ -2758,7 +2758,7 @@ class FilesStore {
         "stop-filling",
       ];
 
-      if (!item?.security?.AscAi) {
+      if (!item?.security?.AskAi) {
         fileOptions = removeOptions(fileOptions, ["ask-ai", "separator6"]);
       }
 

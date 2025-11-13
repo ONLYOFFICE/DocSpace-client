@@ -32,6 +32,7 @@ import type { TFile } from "../files/types";
 import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
 import { checkFilterInstance } from "../../utils/common";
+import { getAiModelName } from "../../utils/ai";
 
 import type {
   TCreateAiProvider,
@@ -126,7 +127,10 @@ export const getModels = async (
     signal: abortController?.signal,
   })) as TModelList;
 
-  return res;
+  return res.map((m) => ({
+    ...m,
+    name: getAiModelName(m.modelId),
+  })) as TModelList;
 };
 
 export const getProviderAvailabilityStatus = async (

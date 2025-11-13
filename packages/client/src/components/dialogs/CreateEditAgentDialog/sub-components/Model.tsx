@@ -96,7 +96,10 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         } else {
           const provider = p.find((pr) => pr.id === selectedProvider.id);
 
-          if (!provider) return;
+          if (!provider) {
+            setSelectedProvider(p[0]);
+            return;
+          }
 
           setSelectedProvider(provider);
         }
@@ -129,7 +132,11 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         if (selectedModel?.modelId) {
           const model = m.find((mo) => mo.modelId === selectedModel.modelId);
 
-          if (!model) return;
+          if (!model) {
+            setSelectedModel(m[0]);
+
+            return;
+          }
 
           setSelectedModel(model);
         } else {
@@ -203,7 +210,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     return models.map((model) => ({
       key: model.modelId,
       value: model.modelId,
-      label: model.modelId,
+      label: model.name ?? model.modelId,
     }));
   }, [models]);
 
@@ -212,7 +219,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       ? {
           key: selectedModel.modelId,
           value: selectedModel.modelId,
-          label: selectedModel.modelId,
+          label: selectedModel.name ?? selectedModel.modelId,
         }
       : {
           key: "empty-selected-option",

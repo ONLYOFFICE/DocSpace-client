@@ -1,0 +1,28 @@
+{
+  "key_path": "AvailableMCPServers",
+  "content": "Available MCP servers",
+  "content_en_sha1_hash": "bd5269aeaf3760d34dfa6e8ecfad325320682267",
+  "created_at": "2025-11-13T14:52:47.947Z",
+  "updated_at": "2025-11-13T14:54:44.910Z",
+  "comment": {
+    "text": "This key displays the label \"Available MCP servers\" as the header for a selection dialog or similar UI component. It indicates the list of MCP servers that are currently accessible. Translators should ensure the translation accurately conveys the meaning of accessible servers.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T14:54:44.910Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
+      "line_number": 193,
+      "context": "useAside={false}\n onClose={onClose}\n onSelect={onSelect}\n withHeader\n headerProps={{\n headerLabel: t(\"Common:AvailableMCPServers\"),\n withoutBackButton: false,\n onBackClick: onBackClick,\n onCloseClick: onClose,\n withoutBorder: false,\n }}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

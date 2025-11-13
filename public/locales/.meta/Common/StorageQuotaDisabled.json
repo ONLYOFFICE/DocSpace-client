@@ -3,7 +3,7 @@
   "content": "Storage quota disabled.",
   "content_en_sha1_hash": "b6d30ca17df8d425a828140d44b2241bd12d1c5e",
   "created_at": "2025-05-19T21:30:49.119Z",
-  "updated_at": "2025-11-13T07:58:07.745Z",
+  "updated_at": "2025-11-13T14:53:11.118Z",
   "comment": {
     "text": "This translation key is used for a message displayed when storage quota is disabled. It informs users that their storage limit has been removed. This message appears in a success notification dialog and toast notification after certain actions are performed, such as enabling unlimited space or setting custom room quotas.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2229,
+      "line_number": 2235,
       "context": "return item?.id ? item.id : item;\n });\n \n try {\n await setCustomRoomQuota(userIDs, -1);\n toastr.success(t(\"Common:StorageQuotaDisabled\"));\n } catch (e) {\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2229,
+      "line_number": 2235,
       "context": "return item?.id ? item.id : item;\n });\n \n try {\n await setCustomRoomQuota(userIDs, -1);\n toastr.success(t(\"Common:StorageQuotaDisabled\"));\n } catch (e) {\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     }

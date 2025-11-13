@@ -2790,7 +2790,12 @@ class FilesActionStore {
       CategoryType.Trash !== categoryType && urlFilter?.folder
     );
 
-    if (roomType === RoomsType.AIRoom) {
+    if (
+      roomType === RoomsType.AIRoom ||
+      categoryType === CategoryType.Chat ||
+      categoryType === CategoryType.AIAgent ||
+      categoryType === CategoryType.AIAgents
+    ) {
       return this.moveToAIAgentsPage();
     }
 

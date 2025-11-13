@@ -1,1 +1,21 @@
-{}
+{
+  "AIChat": "AI-Klep",
+  "CreateChat": "Ustvari klepetal",
+  "CreateChatDescription": "Pojdite na zavihek AI-Chat, da začnete.",
+  "EmptyKnowledgeDescription": "Datoteke, ki so naložene tukaj, bodo indeksirane in uporabljene kot kontekst v zavihku AI-Chat. Dodajte datoteke, da vprašate AI o njih, ustvarite vsebino ali analizirajte informacije skupaj.",
+  "EmptyKnowledgeTitle": "Še nobena datoteka ni bila naložena.",
+  "EmptyResultsDescription": "Datoteke, ustvarjene v AI-klepantu, se bodo samodejno pojavile tukaj. Kadar koli ustvarite vsebino, začnete klepet ali pošljete sporočilo z izhodom, bo rezultat shranjen v tem razdelku.",
+  "EmptyResultsTitle": "Še ni rezultatov.",
+  "Knowledge": "Znanje",
+  "KnowledgeDescription": "Naložite datoteke z računalnika ali {{productName}}, da zagotovite boljši kontekst za klepet. Opomba: med pogovorom je morda vidna vsa ali del vsebine, ki ste jo naložili.",
+  "KnowledgeSelectIn": "Izberi v {{productName}}",
+  "KnowledgeUnavailable": "Baza znanja ni na voljo",
+  "KnowledgeUnavailableDescription": "Baza znanja je trenutno onemogočena. Za omogočitev semantičnega iskanja in obdelave dokumentov za vaše AI agente, prosim konfigurirajte ponudnika vgrajenih podatkov v nastavitvah {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Baza znanja je trenutno onemogočena. Za omogočitev semantičnega iskanja in obdelave dokumentov za AI agente, se obrnite na administratorja {{productName}}, da konfigurira ponudnika vgrajenih podatkov.",
+  "MCP": "MCP orodja za to sobo",
+  "Model": "Ponudnik in model",
+  "ModelDescription": "Izberite ponudnika umetne inteligence in modela, ki se bo uporabljal v klepetalnici. Ta nastavitev je obvezna in velja za vse udeležence.",
+  "ResultStorage": "Shranjevanje rezultatov",
+  "UploadFilesDevice": "Naložite datoteke iz vaše osebne naprave.",
+  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}"
+}

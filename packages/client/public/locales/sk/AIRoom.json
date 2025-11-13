@@ -1,1 +1,21 @@
-{}
+{
+  "AIChat": "AI-Chat",
+  "CreateChat": "Vytvoriť chat",
+  "CreateChatDescription": "Pre začatie kliknite na záložku AI-Chat.",
+  "EmptyKnowledgeDescription": "Súbory nahrané sem budú indexované a použité ako kontext v záložke AI-Chat. Pridajte súbory, aby ste sa ich opýtali AI, generovali obsah alebo analyzovali informácie spoločne.",
+  "EmptyKnowledgeTitle": "Zatiaľ neboli nahraté žiadne súbory.",
+  "EmptyResultsDescription": "Súbory generované v AI-Chat sa tu zobrazia automaticky. Kedykoľvek vygenerujete obsah, spustíte chat alebo pošlete správu s výstupom, výsledok sa uloží v tejto sekcii.",
+  "EmptyResultsTitle": "Zatiaľ žiadne výsledky.",
+  "Knowledge": "Vedomosti",
+  "KnowledgeDescription": "Nahrajte súbory z vášho počítača alebo z {{productName}}, aby ste poskytli kontext pre chat. Upozornenie: počas konverzácie môžu byť niektoré alebo všetky nahraté údaje zverejnené.",
+  "KnowledgeSelectIn": "Vyberte v {{productName}}",
+  "KnowledgeUnavailable": "Základňa vedomostí nedostupná",
+  "KnowledgeUnavailableDescription": "Znalostná báza je momentálne vypnutá. Aby ste aktivovali sémantické vyhľadávanie a spracovanie dokumentov pre vašich AI agentov, nakonfigurujte poskytovateľa vložieb v nastaveniach {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Znalostná báza je momentálne vypnutá. Aby ste aktivovali sémantické vyhľadávanie a spracovanie dokumentov pre AI agentov, kontaktujte prosím administrátora {{productName}} a nakonfigurujte poskytovateľa vložieb.",
+  "MCP": "MCP nástroje pre túto miestnosť",
+  "Model": "Poskytovateľ a model",
+  "ModelDescription": "Vyberte poskytovateľa AI a model, ktorý sa bude používať v chatovaní v tejto miestnosti. Toto nastavenie je povinné a vzťahuje sa na všetkých účastníkov.",
+  "ResultStorage": "Ukladanie výsledkov",
+  "UploadFilesDevice": "Nahrajte súbory z vášho osobného zariadenia.",
+  "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}"
+}

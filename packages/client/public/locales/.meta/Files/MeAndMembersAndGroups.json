@@ -3,7 +3,7 @@
   "content": "Me, members ({{ membersCount }}) and groups ({{ groupsCount }})",
   "content_en_sha1_hash": "64caf3f805190928e6451798cb92bf8e11d877ce",
   "created_at": "2025-05-19T21:30:55.842Z",
-  "updated_at": "2025-11-13T07:58:07.812Z",
+  "updated_at": "2025-11-13T07:42:11.141Z",
   "comment": {
     "text": "This translation key is used to display a label that describes access to files based on user membership and group membership. It appears in a dialog component where users can edit or create room settings, specifically on the \"Template Access\" section. Translators should focus on the word \"members\" and \"groups\", as it's about describing user groups rather than individual members.",
     "is_auto": true,

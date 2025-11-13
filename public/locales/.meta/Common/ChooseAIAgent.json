@@ -3,7 +3,7 @@
   "content": "Choose an AI agent",
   "content_en_sha1_hash": "010e2be5b630361c373b91b30e873bd492c762f3",
   "created_at": "2025-10-27T16:14:24.488Z",
-  "updated_at": "2025-11-13T07:58:08.669Z",
+  "updated_at": "2025-11-13T10:21:18.101Z",
   "comment": {
     "text": "This text appears as the title within a dialog or panel where the user selects an AI agent. It indicates the purpose of the selection interface – to choose an AI agent. The key is used for localization and should be translated with that purpose in mind.",
     "is_auto": true,

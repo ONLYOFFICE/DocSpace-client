@@ -3,7 +3,7 @@
   "content": "Feedback & Support",
   "content_en_sha1_hash": "7714e1a8a44cee405d24cfadd08ff22d9fc4f6b9",
   "created_at": "2025-05-19T21:30:45.233Z",
-  "updated_at": "2025-11-13T07:58:08.514Z",
+  "updated_at": "2025-11-13T07:42:11.944Z",
   "comment": {
     "text": "This translation key is used to display a label on a user menu item for accessing support and feedback features. It appears in the user menu, allowing users to access common feedback and support options. The exact UI component this label is part of can be found at /packages/client/src/store/ProfileActionsStore.js line 439.",
     "is_auto": true,

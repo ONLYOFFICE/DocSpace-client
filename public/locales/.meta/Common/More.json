@@ -3,7 +3,7 @@
   "content": "More",
   "content_en_sha1_hash": "4bab2d8fe13fa6ab57f80098b414f0f734c5dd25",
   "created_at": "2025-05-19T21:30:46.613Z",
-  "updated_at": "2025-11-13T07:58:07.656Z",
+  "updated_at": "2025-11-13T07:42:11.017Z",
   "comment": {
     "text": "This translation key is used for the label of a button that displays the word \"More\". It appears in a dropdown menu next to a main action button on an article page, allowing users to access additional options.",
     "is_auto": true,

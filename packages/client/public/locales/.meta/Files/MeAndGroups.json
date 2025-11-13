@@ -3,7 +3,7 @@
   "content": "Me and groups ({{ groupsCount }})",
   "content_en_sha1_hash": "056c8e719cd461f48ae982914d1324e06bffa247",
   "created_at": "2025-05-19T21:30:55.833Z",
-  "updated_at": "2025-11-13T07:58:07.814Z",
+  "updated_at": "2025-11-13T07:42:11.143Z",
   "comment": {
     "text": "This translation key is used to display a phrase indicating whether the user has a Me and Groups section. If groups are available, it shows the number of groups; otherwise, it displays an empty string. It appears in a dialog component at line 107, likely as part of a button or label.",
     "is_auto": true,

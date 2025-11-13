@@ -3,7 +3,7 @@
   "content": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in AI chats.",
   "content_en_sha1_hash": "f65c00479e173279940cf144a990184968ac2c4c",
   "created_at": "2025-10-27T16:14:31.639Z",
-  "updated_at": "2025-11-13T07:58:08.092Z",
+  "updated_at": "2025-11-13T07:42:11.525Z",
   "comment": {
     "text": "This text explains how to connect a custom AI service within the application, unlocking advanced features for all users in AI chats. It appears as a description within the AI Settings section of the Portal Settings page. Translators should maintain the clarity of how connecting an AI provider extends functionality.",
     "is_auto": true,

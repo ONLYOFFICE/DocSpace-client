@@ -3,7 +3,7 @@
   "content": "Create Agent",
   "content_en_sha1_hash": "a23848cb58c448a3d7658e361ad1820c5a8c3a85",
   "created_at": "2025-10-27T16:14:12.329Z",
-  "updated_at": "2025-11-13T07:58:07.794Z",
+  "updated_at": "2025-11-13T10:21:17.753Z",
   "comment": {
     "text": "This key displays the text \"Create Agent\" as the header of a dialog used to create a new agent. The dialog allows users to input and submit agent parameters. Translators should ensure the translation accurately conveys the action of creating a new agent.",
     "is_auto": true,

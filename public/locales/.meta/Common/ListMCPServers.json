@@ -3,7 +3,7 @@
   "content": "List MCP",
   "content_en_sha1_hash": "e6b8229c05937fab1d5c3109b8d84ac668712dce",
   "created_at": "2025-10-27T16:14:24.246Z",
-  "updated_at": "2025-11-13T07:58:08.674Z",
+  "updated_at": "2025-11-13T10:21:18.104Z",
   "comment": {
     "text": "This key displays the title \"List MCP\" for a UI component, likely a dialog or aside panel, that presents a list of Minecraft server options. Translators should ensure the translation accurately reflects the meaning of \"List MCP\" within the Minecraft context.",
     "is_auto": true,

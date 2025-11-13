@@ -88,6 +88,7 @@
   "Payer": "Người thanh toán",
   "PayerDescription": "Người dùng này có quyền truy cập vào thông tin thanh toán và là người dùng duy nhất có thể điều chỉnh định mức và thực hiện thanh toán. Chủ sở hữu {{productName}}, cũng như chính người quản lý thanh toán, có thể chỉ định lại vai trò người quản lý thanh toán bằng cổng thông tin khách hàng Stripe.",
   "PaymentMethod": "Phương thức thanh toán",
+  "PerAITools": "{{currency}} mỗi token",
   "PerBackup": "{{currency}} mỗi 1 bản sao lưu",
   "PerBackupWithBracket": "({{currency}} mỗi 1 bản sao lưu)",
   "PerStorage": "{{currency}} mỗi {{amount}}/tháng",

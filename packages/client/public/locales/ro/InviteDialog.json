@@ -12,14 +12,14 @@
   "InviteToRoomSearchPlaceholder": "Căutare și invitare după nume sau adresa de e-mail",
   "InviteViaLink": "Invitaţi prin link",
   "InviteViaLinkDescriptionAccounts": "Creaţi un link universal de auto-autentificare în {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Creați un link universal pentru autentificare în agentul în calitate de invitat.",
+  "InviteViaLinkDescriptionAgentMembers": "Creați un link universal pentru membrii ai {{productName}} pentru autentificare în agentul.",
   "InviteViaLinkDescriptionRoomGuest": "Creaţi un link universal de auto-autentificare în sala în calitate de invitat.",
   "InviteViaLinkDescriptionRoomMembers": "Creaţi un link universal de auto-autentificare în sala pentu membrii ai {{productName}}.",
   "LinkCopySuccess": "Link-ul a fost copiat",
   "SendInvitation": "Trimitere invitaţie",
+  "UserAgentMaxAvailableRoleWarning": "Invitații și Utilizatorii nu pot fi desemnați în calitate de administratori de agenți. Numai administratori de sală și administratori de {{productName}} pot fi atribuite rolul menționat.",
   "UserMaxAvailableRoleWarning": "Invitați și Utilizatori nu pot fi desemnate Administratori de sală. Numai administratori de sală și administratori {{productName}} pot fi atribuite rolul menționat.",
   "UsersAlreadyAdded": "Anumite utilizatori sunt deja adăugate.",
-  "UsersCannotBeAdded": "Contactele dezactivate nu pot fi adăugate la o sală.",
-  "InviteViaLinkDescriptionAgentGuest": "Creați un link universal pentru autentificare în agentul în calitate de invitat.",
-  "InviteViaLinkDescriptionAgentMembers": "Creați un link universal pentru membrii ai {{productName}} pentru autentificare în agentul.",
-  "UserAgentMaxAvailableRoleWarning": "Invitații și Utilizatorii nu pot fi desemnați în calitate de administratori de agenți. Numai administratori de sală și administratori de {{productName}} pot fi atribuite rolul menționat."
+  "UsersCannotBeAdded": "Contactele dezactivate nu pot fi adăugate la o sală."
 }

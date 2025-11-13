@@ -3,7 +3,7 @@
   "content": "Blank",
   "content_en_sha1_hash": "276c9361fff15e60f48af4d733ec83315d2bb251",
   "created_at": "2025-05-19T21:30:50.007Z",
-  "updated_at": "2025-11-13T07:58:07.658Z",
+  "updated_at": "2025-11-13T07:42:11.022Z",
   "comment": {
     "text": "The translation key \"SubNewForm\" is used to display the content \"Blank\" as a label for a new form action in various UI components. This label appears in the context of creating or editing forms, providing a placeholder or default value for the form fields.",
     "is_auto": true,

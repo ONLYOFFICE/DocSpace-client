@@ -3,7 +3,7 @@
   "content": "Connect {{productName}} to your data and tools.",
   "content_en_sha1_hash": "4cc178cdd202c14a52f15345c6ab0084f8394f42",
   "created_at": "2025-10-27T16:14:31.657Z",
-  "updated_at": "2025-11-13T07:58:08.093Z",
+  "updated_at": "2025-11-13T07:42:11.532Z",
   "comment": {
     "text": "This text appears in a dialog header and description prompting users to connect a product (identified by the `productName` variable) to their data and tools. It guides users through the process of integrating the product with their existing systems. Translators should ensure that the phrasing encourages user action and aligns with the overall onboarding flow.",
     "is_auto": true,

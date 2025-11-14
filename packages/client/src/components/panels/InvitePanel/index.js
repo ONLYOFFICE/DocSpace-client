@@ -51,7 +51,7 @@ import { Link } from "@docspace/shared/components/link";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";

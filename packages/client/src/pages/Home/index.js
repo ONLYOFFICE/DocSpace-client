@@ -170,7 +170,9 @@ const PureHome = (props) => {
 
   const location = useLocation();
 
-  // console.log(t("Common:ComingSoon"))
+  const isChatPage =
+    location.pathname.includes("chat") &&
+    location.pathname.includes("ai-agents");
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
@@ -416,6 +418,7 @@ const PureHome = (props) => {
         </Section.SectionWarning>
 
         {!isChat &&
+        !isChatPage &&
         !isDisabledKnowledge &&
         shouldShowFilter &&
         !isProfile &&

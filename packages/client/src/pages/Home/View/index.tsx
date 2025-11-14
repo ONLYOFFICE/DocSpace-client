@@ -103,6 +103,7 @@ type ViewProps = UseContactsProps &
     standalone: SettingsStore["standalone"];
     isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
+    isAIRoom: SelectedFolderStore["isAIRoom"];
   };
 
 const View = ({
@@ -179,6 +180,7 @@ const View = ({
   standalone,
   isResultTab,
   resultId,
+  isAIRoom,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common", "AIRoom"]);
@@ -584,7 +586,7 @@ const View = ({
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
-          ) : (
+          ) : isAIRoom && isChatPage && currentView !== "chat" ? null : (
             <SectionBodyContent sectionWidth={context.sectionWidth} />
           ))
         }
@@ -759,6 +761,7 @@ export const ViewComponent = inject(
       standalone,
       isResultTab,
       resultId,
+      isAIRoom: selectedFolderStore.isAIRoom,
     };
   },
 )(observer(View));

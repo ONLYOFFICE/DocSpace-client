@@ -104,7 +104,6 @@ const SectionBodyContent = (props) => {
     setDropTargetPreview,
     aiConfig,
     currentTab,
-    isAIRoom,
   } = props;
 
   useEffect(() => {
@@ -480,8 +479,6 @@ const SectionBodyContent = (props) => {
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
-  if (isAIRoom) return null;
-
   return <FileViewComponent />;
 };
 
@@ -565,7 +562,6 @@ export default inject(
       onEnableFormFillingGuid,
       setDropTargetPreview,
       currentTab: aiRoomStore.currentTab,
-      isAIRoom: selectedFolderStore.isAIRoom,
     };
   }
 )(

@@ -48,6 +48,7 @@ const ChatMessageBody = ({
   userAvatar,
   getIcon,
   isLoading,
+  getResultStorageId,
 }: MessageBodyProps) => {
   const {
     messages,
@@ -114,6 +115,7 @@ const ChatMessageBody = ({
                 userAvatar={userAvatar}
                 isLast={index === 0}
                 getIcon={getIcon}
+                getResultStorageId={getResultStorageId}
               />
             );
           })}

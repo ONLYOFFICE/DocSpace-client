@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "AICanMakeMistakes": "Yapay zeka hatalar yapabilir. Lütfen yanıtları iki kez kontrol edin.",
+  "AIChatOfferHelp": "Size nasıl yardımcı olabilirim?",
+  "AvailableMCPServers": "Mevcut MCP sunucuları",
+  "SelectorEmptyScreenHeaderKnowledge": "Burada henüz dosya yok",
+  "SelectorFilesLimit": "Maksimum {{count}} dosya izin verilir",
+  "SelectorFilesLimitDescription": "Büyük miktarda veri yüklerken, bağlam kısmen kesilebilir ve bu da yanıtların doğruluğunu azaltabilir. Dosya sayısını ve toplam boyutlarını sınırlamanız önerilir."
 }

@@ -46,5 +46,18 @@
   "ServiceIcon": "Palveluikoni",
   "SystemMCPListTitle": "Järjestelmä",
   "ToUseAddProvider": "Käyttääksesi {{value}}, varmista, että olet ensin yhdistänyt vähintään yhden palveluntarjoajan.",
-  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä."
+  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä.",
+  "KnowledgeDisabledSuccess": "Tietokanta poistettu käytöstä onnistuneesti",
+  "KnowledgeEnabledSuccess": "Tietokanta otettu käyttöön onnistuneesti",
+  "KnowledgeKeyDescription": "Syötä API-avain, jonka olet saanut tietopohjapalveluntarjoajaltasi.",
+  "MCPServerAdvancedSettingsHint": "Käytä tätä osiota lisä-HTTP-otsakkeiden, kuten tunnistetietojen, välittämiseen.",
+  "MCPServerDescriptionHint": "Kirjoita lyhyt selitys integraation tarkoituksesta.",
+  "MCPServerIntegrationURLHint": "Syötä palvelusi antama MCP-palvelimen osoite",
+  "WebSearchDisabledSuccess": "Web-haun poistaminen käytöstä onnistui",
+  "WebSearchEnabledSuccess": "Verkkohaku käytössä onnistuneesti",
+  "WebSearchKeyDescription": "Syötä web-hakupalveluntarjoajaltasi hankittu API-avain.",
+  "MCPProductDescription": "{{organizationName}} {{productName}} MCP Server virtaviivaistaa tekoälypohjaisia työnkulkuja, yhdistäen LLM:t ulkoisiin järjestelmiin tehokkaan ja turvallisen dokumenttienhallinnan mahdollistamiseksi.",
+  "MCPSettingsDescription": "Tämä osio mahdollistaa MCP-palvelimien hallinnan AI-keskusteluille huoneissa. Voit ottaa käyttöön järjestelmän MCP-palvelimia tai lisätä mukautettuja palvelimia yrityksesi tarpeisiin. Kun ne on otettu käyttöön, nämä palvelimet ovat muiden käyttäjien käytettävissä heidän tehtäviään varten.",
+  "ResetKnowledgeDescription": "Tämä toiminto poistaa määritetyn API-avaimen ja poistaa käytöstä dokumenttien indeksoinnin tietopohjassa. Uusien dokumenttien lisääminen tietopohjaan ja niiden kanssa työskentely ei ole mahdollista ennen kuin uusi avain on annettu.",
+  "ResetWebSearchDescription": "Tämä toiminto poistaa määritetyn API-avaimen ja katkaisee verkkohakuintegraation. AI-keskustelut eivät enää pääse käsiksi reaaliaikaiseen tietoon internetistä ennen kuin uusi avain on lisätty."
 }

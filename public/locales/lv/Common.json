@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "AICanMakeMistakes": "AI var pieļaut kļūdas. Lūdzu, dubultpārbaudiet atbildes.",
+  "AIChatOfferHelp": "Kā es varu palīdzēt?",
+  "AvailableMCPServers": "Pieejami MCP serveri",
+  "SelectorEmptyScreenHeaderKnowledge": "Vēl nav failu šeit",
+  "SelectorFilesLimit": "Maksimāli {{count}} faili pieļaujami",
+  "SelectorFilesLimitDescription": "Augsneldējot lielu datu apjomu, konteksts var tikt daļēji saīsināts, kas var samazināt atbilžu precizitāti. Ieteicams ierobežot failu skaitu un to kopējo apjomu."
 }

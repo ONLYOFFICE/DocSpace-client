@@ -17,5 +17,11 @@
   "ModelDescription": "Selecione o provedor e o modelo de IA a serem usados nos chats desta sala. Esta configuração é obrigatória e se aplica a todos os participantes.",
   "ResultStorage": "Armazenamento de resultados",
   "UploadFilesDevice": "Carregar arquivos do seu dispositivo pessoal",
-  "UploadFilesPortal": "Carregue arquivos de {{sectionNameFirst}} ou {{sectionNameSecond}}"
+  "UploadFilesPortal": "Carregue arquivos de {{sectionNameFirst}} ou {{sectionNameSecond}}",
+  "AIInstructions": "Instruções de IA",
+  "EmptyKnowledgeDescriptionActions": "Experimente estas ações para começar:",
+  "InstructionsDescriptionAgent": "Descreva como o agente de IA deve se comportar e responder. Defina seu papel, tom e tarefas principais.",
+  "ResponseQualityNode": "<1>Nota:</1> A qualidade da resposta pode variar de acordo com o modelo; recomenda-se utilizar modelos mais recentes para obter os melhores resultados.",
+  "InstructionsDescriptionAgentExample": "Exemplo: “Você é um assistente de RP de IA que ajuda a escrever e editar comunicados de imprensa. Mantenha um tom profissional, confiante e amigável à mídia. Destaque as mensagens-chave de forma clara, evite jargões e mantenha o texto conciso e envolvente.”",
+  "MCPDescriptionServers": "Use servidores MCP conectados pelo administrador para aprimorar a experiência de chat com IA. Servidores MCP podem auxiliar com extração de dados, resumos, sugestões inteligentes, etc."
 }

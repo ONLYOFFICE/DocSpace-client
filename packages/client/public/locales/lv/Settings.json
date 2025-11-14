@@ -292,5 +292,6 @@
   "WantToCancelUpload": "Vai vēlaties atcelt augšupielādi?",
   "WantToContinue": "Vai vēlaties turpināt vai mainīt lietotāja krātuves kvotu?",
   "WhiteLabelSubtitle": "Ievadiet sava uzņēmuma nosaukumu, augšupielādējiet logotipu un pielāgojiet stilu atbilstoši savam zīmolam.",
-  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību."
+  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību.",
+  "ImportSectionDisabled": "Lai importētu {{importSectionName}}, vispirms aktivizējiet \"<1>{{sectionName}}</1>\" opciju."
 }

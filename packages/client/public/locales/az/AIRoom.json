@@ -17,5 +17,11 @@
   "ModelDescription": "Bu otaqda istifadə ediləcək AI təminatçısı və modeli seçin. Bu ayarı məcburi hesab edilir və bütün iştirakçılar üçün tətbiq olunur.",
   "ResultStorage": "Nəticə saxlanması",
   "UploadFilesDevice": "Şəxsi cihazınızdan faylları yükləyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin"
+  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin",
+  "AIInstructions": "Süni İntellekt Təlimatları",
+  "EmptyKnowledgeDescriptionActions": "Bu işə başlamak üçün aşağıdakı hərəkətləri sınayın:",
+  "InstructionsDescriptionAgent": "Süni intellekt agentinin necə davranması və reaksiya verməsi haqqında məlumat verin. Onun rolu, tonu və əsas vəzifələrini müəyyən edin.",
+  "ResponseQualityNode": "<1>Qeyd:</1> Müxbirə görə cavabın keyfiyyəti dəyişə bilər; daha yaxşı nəticələr üçün daha yeni modellər tövsiyə edilir.",
+  "InstructionsDescriptionAgentExample": "Misal: “Siz mətbuat açıqlamalarının yazılmasına və redaktə edilməsinə kömək edən süni intellektlə PR köməkçisisiniz. Peşəkar, özünəinamlı və mediaya uyğun bir tonda qalın. Əsas mesajları aydın şəkildə vurğulayın, terminlərdən çəkinin və mətnin qısa və cəlbedici olmasını təmin edin.”",
+  "MCPDescriptionServers": "Süni intellekt ilə söhbət təcrübəsini artırmaq üçün administrator tərəfindən qoşulmuş MCP serverlərindən istifadə edin. MCP serverləri məlumatların çıxarılması, xülasələr, ağıllı təkliflər və s. ilə kömək edə bilər."
 }

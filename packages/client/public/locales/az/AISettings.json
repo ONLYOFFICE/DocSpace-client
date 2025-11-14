@@ -46,5 +46,18 @@
   "ServiceIcon": "Xidmət ikonu",
   "SystemMCPListTitle": "Sistem",
   "ToUseAddProvider": "{{value}} istifadə etmək üçün, əvvəlcə ən az bir provayderi qoşduğunuzdan əmin olun.",
-  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir."
+  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir.",
+  "KnowledgeDisabledSuccess": "Bilgi bazası uğurla deaktivləşdirilib.",
+  "KnowledgeEnabledSuccess": "Bilgi bazası uğurla aktivləşdirilib",
+  "KnowledgeKeyDescription": "Bilgi bazası sağlayıcınızdan aldığınız API açısını daxil edin.",
+  "MCPServerAdvancedSettingsHint": "Bu hissəni əlavə HTTP başliqlarını, məsələn, səlahiyyət lövhələrini ötürmək üçün istifadə edin.",
+  "MCPServerDescriptionHint": "İnteqrasiyanın məqsədini qısaca izah edin.",
+  "MCPServerIntegrationURLHint": "Xidmətiniz tərəfindən verilən MCP server ünvanını daxil edin.",
+  "WebSearchDisabledSuccess": "Veb axtarışı uğurla dayandırıldı",
+  "WebSearchEnabledSuccess": "Veb axtarışı uğurla aktivləşdirilib",
+  "WebSearchKeyDescription": "Veb axtarış xidmətinizdən əldə etdiyiniz API açarını daxil edin.",
+  "MCPProductDescription": "{{organizationName}} {{productName}} MCP Server, süni intellektlə idarə olunan iş axınlarını optimallaşdırır, LLM-ləri xarici sistemlərlə inteqrasiya edərək səmərəli və təhlükəsiz sənəd idarəetməni təmin edir.",
+  "MCPSettingsDescription": "Bu bölmə otaqlar daxilində süni intellekt söhbətləri üçün MCP serverlərini idarə etməyə imkan verir. Siz sistem MCP serverlərini aktiv edə bilərsiniz və ya şirkətinizin ehtiyaclarını ödəmək üçün xüsusi olanları əlavə edə bilərsiniz. Aktiv edildikdən sonra, bu serverlər digər istifadəçilər üçün onların tapşırıqları üçün əlçatmaz olacaq.",
+  "ResetKnowledgeDescription": "Bu hərəkət konfiqurasiya edilmiş API açarını siləcək və məlumat bazası üçün sənəd indeksləşdirməsini deaktiv edəcəkdir. Məlumat bazasına yeni sənədlər əlavə etmək və onlarla işləmək yeni açar təmin edilənədək mümkün olmayacaq.",
+  "ResetWebSearchDescription": "Bu hərəkət konfiqurasiya edilmiş API açarını siləcək və web axtarış inteqrasiyasını kəsəcəkdir. Süni intellekt söhbətləri yeni bir açar əlavə edilənədək internetdən real vaxt informasiyasına çıха bilməyəcəkdir."
 }

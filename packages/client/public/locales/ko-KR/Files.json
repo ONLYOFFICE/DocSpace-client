@@ -218,5 +218,6 @@
   "WillBeDeletedPermanently": "{{date}}이 영구적으로 삭제됩니다",
   "YouLeftTheAgent": "에이전트를 떠나셨습니다.",
   "YouLeftTheRoom": "방을 나왔습니다",
-  "YourUserTypeHasChanged": "사용자 유형이 {{productName}} 관리자 <1>{{adminName}}</1>님에 의해 <1>“{{userType}}”</1>(으)로 변경되었습니다."
+  "YourUserTypeHasChanged": "사용자 유형이 {{productName}} 관리자 <1>{{adminName}}</1>님에 의해 <1>“{{userType}}”</1>(으)로 변경되었습니다.",
+  "SharedBy": "공유됨"
 }

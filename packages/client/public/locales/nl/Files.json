@@ -218,5 +218,6 @@
   "WillBeDeletedPermanently": "{{date}} wordt definitief verwijderd",
   "YouLeftTheAgent": "U heeft de agent verlaten",
   "YouLeftTheRoom": "U heeft de kamer verlaten",
-  "YourUserTypeHasChanged": "Uw gebruikerstype is gewijzigd in <1>“{{userType}}”</1> door de {{productName}} beheerder <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Uw gebruikerstype is gewijzigd in <1>“{{userType}}”</1> door de {{productName}} beheerder <1>{{adminName}}</1>.",
+  "SharedBy": "Gedeeld door"
 }

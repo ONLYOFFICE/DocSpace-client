@@ -95,5 +95,9 @@
   "SubmenuHistory": "Պատմություն",
   "UserFileUpdated": "Ֆայլը թարմացվել է:",
   "Users": "Օգտատերեր",
-  "Versions": "Տարբերակներ"
+  "Versions": "Տարբերակներ",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> գործակալը ստեղծվել է",
+  "Resolution": "Թույլատրելիություն",
+  "AgentRenamed": "Գործակալ <1>«{{oldRoomTitle}}»-ը</1> վերանվանվել է <2>«{{roomTitle}}»-ի</2>",
+  "AIAgentsEmptyScreenTent": "ԱԲ գործակալների մանրամասները տե՛ս այստեղ"
 }

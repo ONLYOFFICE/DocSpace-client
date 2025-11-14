@@ -17,5 +17,11 @@
   "ModelDescription": "Valitse tässä huoneessa käytettävä tekoälyn tarjoaja ja malli. Tämä asetus on pakollinen ja koskee kaikkia osallistujia.",
   "ResultStorage": "Tulosten tallennus",
   "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",
-  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}"
+  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}",
+  "AIInstructions": "AI Ohjeet",
+  "EmptyKnowledgeDescriptionActions": "Kokeile näitä toimintoja päästäksesi alkuun:",
+  "InstructionsDescriptionAgent": "Kuvaile, miten tekoälyagentin tulisi käyttäytyä ja reagoida. Määrittele sen rooli, sävy ja päätehtävät.",
+  "ResponseQualityNode": "<1>Huomautus:</1> Vastausten laatu voi vaihdella mallista riippuen; parempien tulosten saavuttamiseksi suositellaan uusia malleja.",
+  "InstructionsDescriptionAgentExample": "Esimerkki: \"Olet tekoälyviestintäavustaja, joka auttaa kirjoittamaan ja muokkaamaan lehdistötiedotteita. Säilytä ammattimainen, itsevarma ja mediaystävällinen sävy. Korosta keskeisiä viestejä selkeästi, vältä ammattikieltä ja pidä teksti ytimekkäänä ja kiinnostavana.\"",
+  "MCPDescriptionServers": "Käytä ylläpitäjän yhdistämiä MCP-palvelimia parantaaksesi chat-kokemusta tekoälyn avulla. MCP-palvelimet voivat auttaa datan poiminnassa, tiivistelmissä, älykkäissä ehdotuksissa jne."
 }

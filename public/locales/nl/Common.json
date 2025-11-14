@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "AICanMakeMistakes": "AI kan fouten maken. Controleer antwoorden alsjeblieft nogmaals.",
+  "AIChatOfferHelp": "Hoe kan ik helpen?",
+  "AvailableMCPServers": "Beschikbare MCP servers",
+  "SelectorEmptyScreenHeaderKnowledge": "Nog geen bestanden hier.",
+  "SelectorFilesLimit": "Maximaal {{count}} bestanden toegestaan",
+  "SelectorFilesLimitDescription": "Bij het uploaden van een grote hoeveelheid data kan de context deels worden afgekapt, wat de nauwkeurigheid van de antwoorden kan verminderen. Het wordt aanbevolen om het aantal bestanden en hun totale grootte te beperken."
 }

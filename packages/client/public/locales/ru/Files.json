@@ -218,5 +218,6 @@
   "WillBeDeletedPermanently": "{{date}} будет удален навсегда",
   "YouLeftTheAgent": "Вы покинули агента",
   "YouLeftTheRoom": "Вы покинули комнату",
-  "YourUserTypeHasChanged": "Ваш тип пользователя был изменен на <1>«{{userType}}»</1> администратором {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Ваш тип пользователя был изменен на <1>«{{userType}}»</1> администратором {{productName}} <1>{{adminName}}</1>.",
+  "SharedBy": "Предоставил доступ:"
 }

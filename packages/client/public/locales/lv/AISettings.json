@@ -46,5 +46,18 @@
   "ServiceIcon": "Pakalpojuma ikona",
   "SystemMCPListTitle": "Sistēma",
   "ToUseAddProvider": "Lai izmantotu {{value}}, vispirms pārliecinieties, ka savienojat vismaz vienu pakalpojumu sniedzēju.",
-  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos."
+  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos.",
+  "KnowledgeDisabledSuccess": "Pamatņu bāze veiksmīgi atspējota",
+  "KnowledgeEnabledSuccess": "Zināšanu bāze veiksmīgi aktivizēta",
+  "KnowledgeKeyDescription": "Ievadiet API atslēgu, kas iegūta no jūsu zināšanu bāzes pakalpojuma sniedzēja.",
+  "MCPServerAdvancedSettingsHint": "Izmantojiet šo sadaļu, lai nodotu papildu HTTP galvenes, piemēram, autorizācijas žetonus.",
+  "MCPServerDescriptionHint": "Rakstiet īsu skaidrojumu par integrācijas mērķi.",
+  "MCPServerIntegrationURLHint": "Ievadiet MCP server adresi, ko sniedz jūsu pakalpojums.",
+  "WebSearchDisabledSuccess": "Web meklēšana veiksmīgi atslēgta",
+  "WebSearchEnabledSuccess": "Web meklēšana veiksmīgi ieslēgta",
+  "WebSearchKeyDescription": "Ievadiet API atslēgu, kas iegūta no jūsu tiešsaistes meklēšanas pakalpojuma.",
+  "MCPProductDescription": "{{organizationName}} {{productName}} MCP serveris vienkāršo mākslīgā intelekta vadītas darbplūsmas, integrējot tiesību zinātņu vadītājus (LLM) ar ārējām sistēmām efektīvai un drošai dokumentu pārvaldībai.",
+  "MCPSettingsDescription": "Šis nosaukums ļauj jums pārvaldīt MCP serverus AI tērzēšanai telpās. Jūs varat iespējot sistēmas MCP serverus vai pievienot pielāgotus serverus, lai apmierinātu uzņēmuma vajadzības. Kad tie ir iespējoti, šie serveri būs pieejami citiem lietotājiem viņu uzdevumiem.",
+  "ResetKnowledgeDescription": "Šis rīcības veids izdzēsīs konfigurēto API atslēgu un atslēgs dokumentu indeksēšanu zināšanu bāzei. Pievienojot jaunus dokumentus zināšanu bāzei un strādājot ar tiem, nebūs iespējams, līdz netiks sniegta jauna atslēga.",
+  "ResetWebSearchDescription": "Šis rīcības veids noņemēs konfigurēto API atslēgu un atvienosies no tīmekļa meklēšanas integrāciju. AI čati vairs nevarēs piekļūt reāllaika informācijai no interneta, līdz pievieno jaunu atslēgu."
 }

@@ -46,5 +46,18 @@
   "ServiceIcon": "Biểu tượng dịch vụ",
   "SystemMCPListTitle": "Hệ thống",
   "ToUseAddProvider": "Để sử dụng {{value}}, hãy chắc chắn kết nối ít nhất một nhà cung cấp trước.",
-  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn."
+  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn.",
+  "KnowledgeDisabledSuccess": "Cơ sở kiến thức đã tắt thành công",
+  "KnowledgeEnabledSuccess": "Cơ sở kiến thức đã được kích hoạt thành công",
+  "KnowledgeKeyDescription": "Nhập khóa API đã lấy được từ nhà cung cấp cơ sở kiến thức của bạn.",
+  "MCPServerAdvancedSettingsHint": "Sử dụng phần này để truyền các tiêu đề HTTP bổ sung, như các mã thông báo xác thực.",
+  "MCPServerDescriptionHint": "Viết một giải thích ngắn gọn về mục đích của tích hợp này.",
+  "MCPServerIntegrationURLHint": "Nhập địa chỉ máy chủ MCP được cung cấp bởi dịch vụ của bạn.",
+  "WebSearchDisabledSuccess": "Tìm kiếm trên web đã bị tắt thành công",
+  "WebSearchEnabledSuccess": "Đã bật tìm kiếm trên web thành công",
+  "WebSearchKeyDescription": "Nhập khóa API đã lấy được từ nhà cung cấp tìm kiếm trên web của bạn.",
+  "MCPProductDescription": "Máy chủ {{organizationName}} {{productName}} MCP hợp lý hóa các quy trình làm việc được hỗ trợ bởi AI, tích hợp LLM với các hệ thống bên ngoài để quản lý tài liệu hiệu quả và an toàn.",
+  "MCPSettingsDescription": "Phần này cho phép bạn quản lý các máy chủ MCP cho các cuộc trò chuyện AI trong phòng. Bạn có thể bật các máy chủ MCP hệ thống hoặc thêm các máy chủ tùy chỉnh để đáp ứng nhu cầu của công ty bạn. Sau khi được bật, các máy chủ này sẽ có thể truy cập được cho những người dùng khác để thực hiện các tác vụ của họ.",
+  "ResetKnowledgeDescription": "Hành động này sẽ xóa khóa API đã cấu hình và tắt lập chỉ mục tài liệu cho cơ sở kiến thức. Việc thêm tài liệu mới vào cơ sở kiến thức và làm việc với chúng sẽ không khả dụng cho đến khi có khóa mới được cung cấp.",
+  "ResetWebSearchDescription": "Hành động này sẽ xóa khóa API đã cấu hình và ngắt kết nối tích hợp tìm kiếm web. Các cuộc trò chuyện AI sẽ không thể truy cập thông tin thời gian thực từ internet cho đến khi có một khóa mới được thêm vào."
 }

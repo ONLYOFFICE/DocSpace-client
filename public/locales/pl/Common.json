@@ -134,7 +134,7 @@
   "CancelDownload": "Anuluj pobieranie",
   "CancelUpload": "Przesyłanie zostało przerwane. Nie udało się wgrać wszystkich plików.",
   "CancelUploadingProcess": "Czy chcesz anulować wysyłanie?",
-  "CannotGuaranteeSecurity": "Nie możemy zagwarantować bezpieczeństwa ani praktyk dotyczących prywatności integracji osób trzecich.",
+  "CannotGuaranteeSecurity": "Nie gwarantujemy bezpieczeństwa ani prywatności w integracjach z podmiotami trzecimi.",
   "ChangeButton": "Zmień",
   "ChangeLogoButton": "Zmień logo",
   "ChangeQuota": "Zmień limit",
@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "AICanMakeMistakes": "AI może popełniać błędy. Proszę, zweryfikuj odpowiedzi.",
+  "AIChatOfferHelp": "Jak mogę pomóc?",
+  "AvailableMCPServers": "Dostępne serwery MCP",
+  "SelectorEmptyScreenHeaderKnowledge": "Brak plików tutaj jeszcze",
+  "SelectorFilesLimit": "Maksymalnie {{count}} plików dozwolonych.",
+  "SelectorFilesLimitDescription": "Podczas przesyłania dużej ilości danych, kontekst może być częściowo obcinany, co może obniżyć dokładność odpowiedzi. Zaleca się ograniczenie liczby plików i ich całkowitego rozmiaru."
 }

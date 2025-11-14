@@ -17,5 +17,11 @@
   "ModelDescription": "Selecteer de AI-provider en het model dat in de chats van deze ruimte gebruikt moet worden. Deze instelling is verplicht en is van toepassing op alle deelnemers.",
   "ResultStorage": "Resultaatopslag",
   "UploadFilesDevice": "Upload bestanden vanaf uw persoonlijke apparaat",
-  "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}"
+  "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}",
+  "AIInstructions": "AI Instructies",
+  "EmptyKnowledgeDescriptionActions": "Probeer deze acties om aan de slag te gaan:",
+  "InstructionsDescriptionAgent": "Beschrijf hoe de AI-agent zich moet gedragen en reageren. Definieer zijn rol, toon en belangrijkste taken.",
+  "ResponseQualityNode": "<1>Let op:</1> De kwaliteit van de antwoorden kan variëren per model; nieuwere modellen worden aanbevolen voor de beste resultaten.",
+  "InstructionsDescriptionAgentExample": "Voorbeeld: \"Je bent een AI-PR-assistent die helpt bij het schrijven en bewerken van persberichten. Handhaaf een professionele, zelfverzekerde en mediavriendelijke toon. Benadruk belangrijke boodschappen duidelijk, vermijd jargon en houd de tekst beknopt en boeiend.\"",
+  "MCPDescriptionServers": "Gebruik MCP servers verbonden door de beheerder om de chatervaring te verbeteren met AI. MCP servers kunnen helpen met data-extractie, samenvattingen, slimme suggesties, etc."
 }

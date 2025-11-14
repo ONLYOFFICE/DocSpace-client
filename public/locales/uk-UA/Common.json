@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга"
+  "YourTurn": "Ваша черга",
+  "AICanMakeMistakes": "Штучний інтелект може помилятися. Будь ласка, перевірте відповіді двічі.",
+  "AIChatOfferHelp": "Як я можу допомогти?",
+  "AvailableMCPServers": "Доступні сервери MCP",
+  "SelectorEmptyScreenHeaderKnowledge": "Тут ще немає файлів.",
+  "SelectorFilesLimit": "Максимально дозволено {{count}} файлів.",
+  "SelectorFilesLimitDescription": "При завантаженні великої кількості даних контекст може бути частково обрізаний, що може знизити точність відповідей. Рекомендується обмежити кількість файлів та їхній загальний розмір."
 }

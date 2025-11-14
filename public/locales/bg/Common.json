@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Имате незапазени промени",
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "AICanMakeMistakes": "AI може да прави грешки. Моля, проверете отговорите отново.",
+  "AIChatOfferHelp": "Как мога да помогна?",
+  "AvailableMCPServers": "Налични MCP сървъри",
+  "SelectorEmptyScreenHeaderKnowledge": "Още няма файлове тук",
+  "SelectorFilesLimit": "Максимум {{count}} файла са разрешени.",
+  "SelectorFilesLimitDescription": "При качване на голям обем данни, контекстът може частично да бъде съкратен, което може да намали точността на отговорите. Препоръчително е да ограничите броя на файловете и общия им размер."
 }

@@ -46,5 +46,18 @@
   "ServiceIcon": "Service-icoon",
   "SystemMCPListTitle": "Systeem",
   "ToUseAddProvider": "Om {{value}} te gebruiken, zorg ervoor dat u eerst minstens één provider verbindt.",
-  "WebSearchKeyHiddenDescription": "De API-sleutel wordt slechts één keer weergegeven bij het opslaan en daarna verborgen om veiligheidsredenen."
+  "WebSearchKeyHiddenDescription": "De API-sleutel wordt slechts één keer weergegeven bij het opslaan en daarna verborgen om veiligheidsredenen.",
+  "KnowledgeDisabledSuccess": "Kennisbank succesvol uitgeschakeld",
+  "KnowledgeEnabledSuccess": "Kennisbank succesvol ingeschakeld",
+  "KnowledgeKeyDescription": "Voer de API-sleutel in die u van uw kennisbankprovider heeft verkregen",
+  "MCPServerAdvancedSettingsHint": "Gebruik dit gedeelte om aanvullende HTTP-headers door te geven, zoals autorisatietokens.",
+  "MCPServerDescriptionHint": "Schrijf een korte uitleg over het doel van de integratie",
+  "MCPServerIntegrationURLHint": "Voer het MCP serveradres in dat door uw service is verstrekt",
+  "WebSearchDisabledSuccess": "Webzoekfunctie succesvol uitgeschakeld",
+  "WebSearchEnabledSuccess": "Web zoeken succesvol ingeschakeld",
+  "WebSearchKeyDescription": "Voer de API-sleutel in die u van uw webzoekmachineprovider heeft verkregen",
+  "MCPProductDescription": "De {{organizationName}} {{productName}} MCP Server stroomlijnt AI-gestuurde workflows, door LLM's te integreren met externe systemen voor efficiënt en veilig documentbeheer.",
+  "MCPSettingsDescription": "Deze sectie stelt u in staat om MCP-servers te beheren voor AI-chats binnen ruimtes. U kunt systeem-MCP-servers inschakelen of aangepaste servers toevoegen om te voldoen aan de behoeften van uw bedrijf. Zodra deze ingeschakeld zijn, zijn deze servers toegankelijk voor andere gebruikers voor hun taken.",
+  "ResetKnowledgeDescription": "Deze actie verwijdert de geconfigureerde API-sleutel en schakelt documentindexering voor de kennisbank uit. Het toevoegen van nieuwe documenten aan de kennisbank en het werken met deze documenten is niet beschikbaar totdat een nieuwe sleutel wordt verstrekt.",
+  "ResetWebSearchDescription": "Deze actie verwijdert de geconfigureerde API-sleutel en verbreekt de integratie met de web zoekfunctie. AI-chats zullen geen toegang meer hebben tot real-time informatie van internet totdat een nieuwe sleutel is toegevoegd."
 }

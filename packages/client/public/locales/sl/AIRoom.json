@@ -17,5 +17,11 @@
   "ModelDescription": "Izberite ponudnika umetne inteligence in modela, ki se bo uporabljal v klepetalnici. Ta nastavitev je obvezna in velja za vse udeležence.",
   "ResultStorage": "Shranjevanje rezultatov",
   "UploadFilesDevice": "Naložite datoteke iz vaše osebne naprave.",
-  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}"
+  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}",
+  "AIInstructions": "Navodila za umetno inteligenco",
+  "EmptyKnowledgeDescriptionActions": "Poskusite naslednje ukaze za začetek:",
+  "InstructionsDescriptionAgent": "Opisujte, kako naj se obnaša in odgovarja AI agent. Definirajte njegovo vlogo, ton in glavne naloge.",
+  "ResponseQualityNode": "<1>Opomba:</1> Kakovost odgovorov se lahko razlikuje glede na model; za najboljše rezultate priporočamo novejše modele.",
+  "InstructionsDescriptionAgentExample": "Primer: \"Vi ste AI PR pomočnik, ki pomaga pri pisanju in urejanju obvestil za javnost. Ohranite profesionalen, samozloben in medijsko prijazen ton. Izpostavite ključne poudarke jasno, izogibajte se žargonu in ohranite besedilo jedrnato in privlačno.\"",
+  "MCPDescriptionServers": "Uporabite MCP strežnike, povezane z administratorjem, za izboljšanje izkušnje s klepanjem z umetno inteligenco. MCP strežniki lahko pomagajo pri izvlečenju podatkov, povzetkih, pametnih predlogih itd."
 }

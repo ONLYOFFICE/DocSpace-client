@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "AICanMakeMistakes": "AI có thể mắc lỗi. Vui lòng kiểm tra lại các phản hồi.",
+  "AIChatOfferHelp": "Tôi có thể giúp gì cho bạn?",
+  "AvailableMCPServers": "Các máy chủ MCP khả dụng",
+  "SelectorEmptyScreenHeaderKnowledge": "Chưa có tệp nào ở đây.",
+  "SelectorFilesLimit": "Tối đa {{count}} tập tin được phép.",
+  "SelectorFilesLimitDescription": "Khi tải lên một lượng dữ liệu lớn, ngữ cảnh có thể bị cắt xén một phần, điều này có thể làm giảm độ chính xác của các phản hồi. Nên hạn chế số lượng tệp và tổng kích thước của chúng."
 }

@@ -153,5 +153,6 @@
   "YouHaveNotAddedAnyPayment": "No ha añadido ningún pago",
   "YourCurrentPayment": "Su pago actual",
   "YourCurrentPlan": "<1>Su plan actual:</1> {{amount}} <2>({{price}}/mes)</2>",
-  "YourPrice": "Su precio"
+  "YourPrice": "Su precio",
+  "PerAITools": "{{currency}} por token"
 }

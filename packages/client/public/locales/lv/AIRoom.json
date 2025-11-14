@@ -17,5 +17,11 @@
   "ModelDescription": "Izvēlieties AI pakalpojumu sniedzēju un modeli, kas tiks izmantots šīs telpas sarunās. Šis iestatījums ir obligāts un attiecas uz visiem dalībniekiem.",
   "ResultStorage": "Rezultātu glabāšana",
   "UploadFilesDevice": "Augšupielādējiet failus no sava personīgā ierīces",
-  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}."
+  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}.",
+  "AIInstructions": "AI instrukcijas",
+  "EmptyKnowledgeDescriptionActions": "Izmēģiniet šos soļus, lai sāktu:",
+  "InstructionsDescriptionAgent": "Aprakstiet, kā mākslīgā intelekta aģents vajadzētu uzvesties un reaģēt. Definējiet tā lomu, toni un galvenos uzdevumus.",
+  "ResponseQualityNode": "<1>Piezīme:</1> Atbildes kvalitāte var atšķirties atkarībā no modeļa; labākiem rezultātiem ieteicami jaunāki modeļi.",
+  "InstructionsDescriptionAgentExample": "Piemērs: \"Jūs esat AI PR asistents, kas palīdz rakstīt un rediģēt preses paziņojumus. Saglabājiet profesionālu, pārliecinātu un plašsaziņas līdzekļiem draudzīgu toni. Skaidri izcelt galvenos ziņojumus, izvairieties no žargona un saglabājiet tekstu saīsinātu un saistošu.\"",
+  "MCPDescriptionServers": "Izmantojiet MCP serverus, kas savienoti ar administratoru, lai uzlabotu tērzēšanas pieredzi ar AI. MCP serveri var palīdzēt ar datu izguvi, kopsavilkumiem, viediem ieteikumiem u.c."
 }

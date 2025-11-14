@@ -17,5 +17,11 @@
   "ModelDescription": "Bu oda sohbetlerinde kullanılacak yapay zeka sağlayıcısı ve modeli seçin. Bu ayar zorunludur ve tüm katılımcılar için geçerlidir.",
   "ResultStorage": "Sonuç depolama",
   "UploadFilesDevice": "Kişisel cihazınızdan dosyalar yükleyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin"
+  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin",
+  "AIInstructions": "AI Talimatları",
+  "EmptyKnowledgeDescriptionActions": "Başlamak için aşağıdaki eylemleri deneyin:",
+  "InstructionsDescriptionAgent": "Yapay zeka aracısının nasıl davranması ve yanıt vermesi gerektiğini açıklayın. Rolünü, tonunu ve ana görevlerini tanımlayın.",
+  "ResponseQualityNode": "<1>Not:</1> Yanıt kalitesi modele göre değişiklik gösterebilir; en iyi sonuçlar için daha yeni modeller önerilir.",
+  "InstructionsDescriptionAgentExample": "Örnek: \"Basın bültenleri yazıp düzenlemeye yardımcı olan bir yapay zeka PR asistanısınız. Profesyonel, kendinden emin ve medyaya uygun bir ton koruyun. Ana mesajları açıkça vurgulayın, jargon kullanmaktan kaçının ve metni öz ve ilgi çekici tutun.\"",
+  "MCPDescriptionServers": "Yönetici tarafından bağlanan MCP sunucularını, yapay zeka ile sohbet deneyimini geliştirmek için kullanın. MCP sunucuları, veri çıkarma, özetler, akıllı öneriler vb. konularında yardımcı olabilir."
 }

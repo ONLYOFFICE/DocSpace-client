@@ -17,5 +17,11 @@
   "ModelDescription": "Vyberte poskytovateľa AI a model, ktorý sa bude používať v chatovaní v tejto miestnosti. Toto nastavenie je povinné a vzťahuje sa na všetkých účastníkov.",
   "ResultStorage": "Ukladanie výsledkov",
   "UploadFilesDevice": "Nahrajte súbory z vášho osobného zariadenia.",
-  "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}"
+  "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}",
+  "AIInstructions": "AI pokyny",
+  "EmptyKnowledgeDescriptionActions": "Skúste tieto kroky, aby ste začali:",
+  "InstructionsDescriptionAgent": "Popíšte, ako by mal AI agent fungovať a reagovať. Definujte jeho úlohu, tón a hlavné úlohy.",
+  "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovede sa môže líšiť v závislosti od modelu; na dosiahnutie najlepších výsledkov sa odporúčajú novšie modely.",
+  "InstructionsDescriptionAgentExample": "Príklad: „Ste AI PR asistent, ktorý pomáha písať a upravovať tlačové správy. Udržiavajte profesionálny, sebavedomý a pre médiá priateľský tón. Jasne zvýrazňujte kľúčové posolstvá, vyhýbajte sa žargónu a udržujte text stručný a zaujímavý.“",
+  "MCPDescriptionServers": "Využívajte MCP servery prepojené administrátorom na zlepšenie chatovacej skúsenosti s AI. MCP servery môžu pomôcť s extrakciou dát, súhrnmi, inteligentnými návrhmi a pod."
 }

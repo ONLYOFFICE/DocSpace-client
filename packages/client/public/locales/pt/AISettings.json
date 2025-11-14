@@ -46,5 +46,18 @@
   "ServiceIcon": "Ícone de serviço",
   "SystemMCPListTitle": "Sistema",
   "ToUseAddProvider": "Para usar {{value}}, certifique-se de conectar pelo menos um provedor primeiro.",
-  "WebSearchKeyHiddenDescription": "A chave da API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança."
+  "WebSearchKeyHiddenDescription": "A chave da API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança.",
+  "KnowledgeDisabledSuccess": "Base de conhecimento desativada com sucesso",
+  "KnowledgeEnabledSuccess": "Base de conhecimento habilitada com sucesso",
+  "KnowledgeKeyDescription": "Insira a chave da API obtida do seu provedor de base de conhecimento",
+  "MCPServerAdvancedSettingsHint": "Use este seção para passar cabeçalhos HTTP adicionais, como tokens de autorização.",
+  "MCPServerDescriptionHint": "Escreva uma breve explicação do propósito da integração.",
+  "MCPServerIntegrationURLHint": "Insira o endereço do servidor MCP fornecido pelo seu serviço",
+  "WebSearchDisabledSuccess": "Pesquisa na web desativada com sucesso",
+  "WebSearchEnabledSuccess": "Pesquisa na web habilitada com sucesso",
+  "WebSearchKeyDescription": "Insira a chave da API obtida do seu provedor de pesquisa na web.",
+  "MCPProductDescription": "O {{organizationName}} {{productName}} MCP Server otimiza fluxos de trabalho impulsionados por IA, integrando LLMs com sistemas externos para gerenciamento de documentos eficiente e seguro.",
+  "MCPSettingsDescription": "Esta seção permite que você gerencie servidores MCP para chats de IA dentro de salas. Você pode habilitar servidores MCP do sistema ou adicionar servidores personalizados para atender às necessidades da sua empresa. Uma vez habilitados, esses servidores estarão acessíveis a outros usuários para suas tarefas.",
+  "ResetKnowledgeDescription": "Esta ação removerá a chave de API configurada e desativará a indexação de documentos para a base de conhecimento. Adicionar novos documentos à base de conhecimento e trabalhar com eles ficará indisponível até que uma nova chave seja fornecida.",
+  "ResetWebSearchDescription": "Esta ação removerá a chave de API configurada e desconectará a integração de pesquisa na web. Os chats de IA não conseguirão mais acessar informações em tempo real da internet até que uma nova chave seja adicionada."
 }

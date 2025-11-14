@@ -18,5 +18,8 @@
   "SendInvitation": "Enviar invitación",
   "UserMaxAvailableRoleWarning": "Los invitados y los usuarios no pueden ser asignados como gestores de sala. Solo los administradores de sala y administradores de {{productName}} son adecuados para el rol especificado.",
   "UsersAlreadyAdded": "Algunos usuarios ya se han añadido",
-  "UsersCannotBeAdded": "Los contactos deshabilitados no se pueden agregar a una sala."
+  "UsersCannotBeAdded": "Los contactos deshabilitados no se pueden agregar a una sala.",
+  "InviteViaLinkDescriptionAgentGuest": "Crear un enlace universal para la autoautorización en el agente como invitado.",
+  "InviteViaLinkDescriptionAgentMembers": "Crear un enlace universal para los miembros de {{productName}} para la autoautorización en el agente.",
+  "UserAgentMaxAvailableRoleWarning": "Los Invitados y Usuarios no pueden ser asignados como Administradores de agentes. Solo los Administradores de sala y de {{productName}} son aptos para el rol especificado."
 }

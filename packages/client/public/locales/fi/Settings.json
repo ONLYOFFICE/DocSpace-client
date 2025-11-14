@@ -292,5 +292,6 @@
   "WantToCancelUpload": "Haluatko peruuttaa latauksen?",
   "WantToContinue": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
   "WhiteLabelSubtitle": "Syötä yrityksesi nimi, lataa logo ja muokkaa tyyli brändäykseesi sopivaksi. ",
-  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen."
+  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
+  "ImportSectionDisabled": "Ladataaksesi {{importSectionName}}, ota ensin käyttöön \"<1>{{sectionName}}</1>\"-vaihtoehto."
 }

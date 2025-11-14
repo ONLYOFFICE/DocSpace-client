@@ -218,5 +218,6 @@
   "WillBeDeletedPermanently": "Το αρχείο {{date}} θα διαγραφεί μόνιμα",
   "YouLeftTheAgent": "Έχετε αποχωρήσει από τον πράκτορα",
   "YouLeftTheRoom": "Έχετε φύγει από το δωμάτιο",
-  "YourUserTypeHasChanged": "Ο τύπος χρήστη σας έχει αλλάξει σε <1>”{{userType}}”</1> από τον διαχειριστή {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Ο τύπος χρήστη σας έχει αλλάξει σε <1>”{{userType}}”</1> από τον διαχειριστή {{productName}} <1>{{adminName}}</1>.",
+  "SharedBy": "Μοιράστηκε από"
 }

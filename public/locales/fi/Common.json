@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "AICanMakeMistakes": "AI voi tehdä virheitä. Tarkista vastaukset vielä kerran.",
+  "AIChatOfferHelp": "Miten voin auttaa?",
+  "AvailableMCPServers": "Käytettävissä olevat MCP-palvelimet",
+  "SelectorEmptyScreenHeaderKnowledge": "Ei tiedostoja vielä",
+  "SelectorFilesLimit": "Suurin sallittu {{count}} tiedoston määrä",
+  "SelectorFilesLimitDescription": "Kun lataat suuren määrän dataa, konteksti voi osittain katkea, mikä voi heikentää vastausten tarkkuutta. On suositeltavaa rajoittaa tiedostojen määrää ja niiden kokonaiskokoa."
 }

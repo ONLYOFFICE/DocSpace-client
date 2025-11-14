@@ -46,5 +46,18 @@
   "ServiceIcon": "Ikona storitve",
   "SystemMCPListTitle": "Sistem",
   "ToUseAddProvider": "Za uporabo {{value}} se prepričajte, da najprej povežete vsaj en ponudnik.",
-  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov."
+  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov.",
+  "KnowledgeDisabledSuccess": "Znanje je bilo uspešno onemogočeno.",
+  "KnowledgeEnabledSuccess": "Znanje je bilo uspešno omogočeno",
+  "KnowledgeKeyDescription": "Vnesite ključ API, pridobljen od ponudnika vaše baze znanja.",
+  "MCPServerAdvancedSettingsHint": "Uporabite ta razdelek za pošiljanje dodatnih HTTP glavic, kot so avtorizacijski žetoni.",
+  "MCPServerDescriptionHint": "Napišite kratek opis namena integracije.",
+  "MCPServerIntegrationURLHint": "Vnesite naslov MCP strežnika, ki ga je zagotovila vaša storitev.",
+  "WebSearchDisabledSuccess": "Spletno iskanje je bilo uspešno onemogočeno.",
+  "WebSearchEnabledSuccess": "Omogočeno uspešno iskanje po spletu",
+  "WebSearchKeyDescription": "Vnesite ključ API, pridobljen od ponudnika iskanja na spletu.",
+  "MCPProductDescription": "Strežnik {{organizationName}} {{productName}} MCP poenostavlja delovne tokove, ki jih poganja umetna inteligenca, in integrira LLM z zunanjimi sistemi za učinkovito in varno upravljanje dokumentov.",
+  "MCPSettingsDescription": "Ta razdelek vam omogoča upravljanje MCP strežnikov za pogovore z umetno inteligenco v sobah. Lahko omogočite sistemske MCP strežnike ali dodate po meri, da ustrezate potrebam vašega podjetja. Ko so ti strežniki omogočeni, bodo na voljo drugim uporabnikom za njihove naloge.",
+  "ResetKnowledgeDescription": "To delovanje bo odstranilo konfiguriran ključ API-ja in onemogočilo indeksiranje dokumentov za bazo znanja. Dodajanje novih dokumentov v bazo znanja in delo z njimi ne bo na voljo, dokler ne bo zagotovljen nov ključ.",
+  "ResetWebSearchDescription": "To delovanje bo odstranilo nastavljeni ključ API-ja in odklopilo integracijo iskanja po spletu. Pogovori z umetno inteligenco ne bodo več mogli dostopati do informacij v realnem času iz interneta, dokler ne bo dodan nov ključ."
 }

@@ -95,5 +95,9 @@
   "SubmenuHistory": "Historial",
   "UserFileUpdated": "Archivo actualizado.",
   "Users": "Usuarios",
-  "Versions": "Versiones"
+  "Versions": "Versiones",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> agente creado",
+  "Resolution": "Resolución",
+  "AgentRenamed": "Agente <1>«{{oldRoomTitle}}»</1> renombrado a <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Vea aquí los detalles de los agentes de IA"
 }

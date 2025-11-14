@@ -17,5 +17,11 @@
   "ModelDescription": "이 방 채팅에 사용할 AI 제공업체 및 모델을 선택하세요. 이 설정은 필수이며 모든 참가자에게 적용됩니다.",
   "ResultStorage": "결과 저장",
   "UploadFilesDevice": "개인 기기에서 파일 업로드",
-  "UploadFilesPortal": "{{sectionNameFirst}} 또는 {{sectionNameSecond}}에서 파일을 업로드하세요."
+  "UploadFilesPortal": "{{sectionNameFirst}} 또는 {{sectionNameSecond}}에서 파일을 업로드하세요.",
+  "AIInstructions": "AI 지침",
+  "EmptyKnowledgeDescriptionActions": "시작하려면 다음 작업을 해보세요:",
+  "InstructionsDescriptionAgent": "AI 에이전트가 어떻게 행동하고 응답해야 하는지 설명하십시오. 그 역할, 어조, 주요 업무를 정의하십시오.",
+  "ResponseQualityNode": "<1>참고:</1> 응답 품질은 모델에 따라 다를 수 있습니다. 최상의 결과를 얻으려면 최신 모델을 사용하는 것이 좋습니다.",
+  "InstructionsDescriptionAgentExample": "예: “당신은 보도 자료 작성 및 편집을 돕는 AI PR 어시스턴트입니다. 전문적이고, 자신감 있으며, 언론 친화적인 어조를 유지하십시오. 핵심 메시지를 명확하게 강조하고, 전문 용어를 피하며, 텍스트를 간결하고 흥미롭게 유지하십시오.”",
+  "MCPDescriptionServers": "관리자가 연결한 MCP 서버를 사용하여 AI와의 채팅 경험을 향상시키세요. MCP 서버는 데이터 추출, 요약, 스마트 제안 등을 지원할 수 있습니다."
 }

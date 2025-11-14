@@ -17,5 +17,11 @@
   "ModelDescription": "Chọn nhà cung cấp AI và mô hình sẽ được sử dụng trong các cuộc trò chuyện của phòng này. Cài đặt này là bắt buộc và áp dụng cho tất cả người tham gia.",
   "ResultStorage": "Lưu trữ kết quả",
   "UploadFilesDevice": "Tải lên tệp từ thiết bị cá nhân của bạn.",
-  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}"
+  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
+  "AIInstructions": "Hướng dẫn AI",
+  "EmptyKnowledgeDescriptionActions": "Thử các hành động sau để bắt đầu:",
+  "InstructionsDescriptionAgent": "Mô tả cách thức hành vi và phản hồi của tác nhân AI. Xác định vai trò, giọng điệu và các nhiệm vụ chính của nó.",
+  "ResponseQualityNode": "<1>Lưu ý:</1> Chất lượng phản hồi có thể khác nhau tùy theo mô hình; nên sử dụng các mô hình mới hơn để có kết quả tốt nhất.",
+  "InstructionsDescriptionAgentExample": "Ví dụ: “Bạn là một trợ lý PR AI giúp viết và chỉnh sửa các thông cáo báo chí. Hãy duy trì giọng văn chuyên nghiệp, tự tin và thân thiện với giới truyền thông. Làm nổi bật các thông điệp chính một cách rõ ràng, tránh biệt ngữ, và giữ cho văn bản ngắn gọn và hấp dẫn.”",
+  "MCPDescriptionServers": "Sử dụng các máy chủ MCP được kết nối bởi quản trị viên để nâng cao trải nghiệm trò chuyện với AI. Các máy chủ MCP có thể hỗ trợ trích xuất dữ liệu, tóm tắt, gợi ý thông minh, v.v."
 }

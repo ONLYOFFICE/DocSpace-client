@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
-  "YourTurn": "A sua vez"
+  "YourTurn": "A sua vez",
+  "AICanMakeMistakes": "A IA pode cometer erros. Por favor, verifique as respostas.",
+  "AIChatOfferHelp": "Como posso ajudar?",
+  "AvailableMCPServers": "Servidores MCP disponíveis",
+  "SelectorEmptyScreenHeaderKnowledge": "Ainda não há arquivos aqui",
+  "SelectorFilesLimit": "Máximo {{count}} arquivos permitidos.",
+  "SelectorFilesLimitDescription": "Ao carregar uma grande quantidade de dados, o contexto pode ser parcialmente truncado, o que pode reduzir a precisão das respostas. Recomenda-se limitar o número de arquivos e o tamanho total deles."
 }

@@ -218,5 +218,6 @@
   "WillBeDeletedPermanently": "{{date}} bude natrvalo odstránený",
   "YouLeftTheAgent": "Opustili ste agenta.",
   "YouLeftTheRoom": "Opustili ste miestnosť",
-  "YourUserTypeHasChanged": "Váš typ používateľa bol zmenený na <1>“{{userType}}“</1> administrátorom {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Váš typ používateľa bol zmenený na <1>“{{userType}}“</1> administrátorom {{productName}} <1>{{adminName}}</1>.",
+  "SharedBy": "Zdieľané od"
 }

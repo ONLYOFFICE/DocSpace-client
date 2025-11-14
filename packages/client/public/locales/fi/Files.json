@@ -218,5 +218,6 @@
   "WillBeDeletedPermanently": "{{date}} poistetaan lopullisesti",
   "YouLeftTheAgent": "Olet jättänyt agentin.",
   "YouLeftTheRoom": "Olet poistunut huoneesta",
-  "YourUserTypeHasChanged": "{{productName}} :n pääkäyttäjä <1>{{adminName}}</1> on vaihtanut käyttäjätyypiksesi <1>“{{userType}}”</1>."
+  "YourUserTypeHasChanged": "{{productName}} :n pääkäyttäjä <1>{{adminName}}</1> on vaihtanut käyttäjätyypiksesi <1>“{{userType}}”</1>.",
+  "SharedBy": "Jakanut"
 }

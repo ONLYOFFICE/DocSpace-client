@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "AICanMakeMistakes": "Umetna inteligenca lahko dela napake. Prosimo, dvakrat preverite odgovore.",
+  "AIChatOfferHelp": "Kako vam lahko pomagam?",
+  "AvailableMCPServers": "Razpoložljivi MCP strežniki",
+  "SelectorEmptyScreenHeaderKnowledge": "Še nobena datoteka tukaj.",
+  "SelectorFilesLimit": "Največ {{count}} datotek dovoljenih.",
+  "SelectorFilesLimitDescription": "Pri nalaganju velike količine podatkov se lahko kontekst delno skrajša, kar lahko zmanjša natančnost odgovorov. Priporočljivo je, da omejite število datotek in njihovo skupno velikost."
 }

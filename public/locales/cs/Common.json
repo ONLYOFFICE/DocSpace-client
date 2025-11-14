@@ -134,7 +134,7 @@
   "CancelDownload": "Zrušit stahování",
   "CancelUpload": "Nahrávání bylo přerušeno. Některé soubory nebyly nahrány.",
   "CancelUploadingProcess": "Chcete zrušit nahrávání?",
-  "CannotGuaranteeSecurity": "Nemůžeme zaručit bezpečnost ani zásady ochrany osobních údajů u integrací třetích stran.",
+  "CannotGuaranteeSecurity": "Nemůžeme zaručit bezpečnost ani ochranu soukromí u integrací třetích stran.",
   "ChangeButton": "Změnit",
   "ChangeLogoButton": "Změnit Logo",
   "ChangeQuota": "Změna kvóty",
@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "AICanMakeMistakes": "AI může dělat chyby. Prosím, zkontrolujte odpovědi.",
+  "AIChatOfferHelp": "Jak vám mohu pomoci?",
+  "AvailableMCPServers": "Dostupné servery MCP",
+  "SelectorEmptyScreenHeaderKnowledge": "Zatím zde nejsou žádné soubory.",
+  "SelectorFilesLimit": "Maximálně {{count}} souborů povoleno.",
+  "SelectorFilesLimitDescription": "Při nahrávání velkého množství dat může být kontext částečně zkrácen, což může snížit přesnost odpovědí. Doporučuje se omezit počet souborů a jejich celkovou velikost."
 }

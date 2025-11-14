@@ -17,5 +17,11 @@
   "ModelDescription": "Wybierz dostawcę i model AI, które będą używane w rozmowach w tym pokoju. To ustawienie jest obowiązkowe i dotyczy wszystkich uczestników.",
   "ResultStorage": "Przechowywanie wyników",
   "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
-  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}"
+  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}",
+  "AIInstructions": "Instrukcje AI",
+  "EmptyKnowledgeDescriptionActions": "Spróbuj wykonać te czynności, aby zacząć:",
+  "InstructionsDescriptionAgent": "Opisz, jak agent AI powinien się zachowywać i odpowiadać. Zdefiniuj jego rolę, ton i główne zadania.",
+  "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
+  "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga w pisaniu i redagowaniu komunikatów prasowych. Zachowuj profesjonalny, pewny siebie i przyjazny mediom ton. Wyraźnie podkreślaj kluczowe przesłania, unikaj żargonu i utrzymuj tekst zwięzły i angażujący.”",
+  "MCPDescriptionServers": "Wykorzystaj serwery MCP połączone przez administratora, aby ulepszyć doświadczenie czatu z wykorzystaniem AI. Serwery MCP mogą pomagać w ekstrakcji danych, podsumowaniach, inteligentnych sugestiach, itp."
 }

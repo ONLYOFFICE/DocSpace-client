@@ -46,5 +46,18 @@
   "ServiceIcon": "Hizmet simgesi",
   "SystemMCPListTitle": "Sistem",
   "ToUseAddProvider": "{{value}}’yi kullanmak için öncelikle en az bir sağlayıcı bağladığınızdan emin olun.",
-  "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir."
+  "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir.",
+  "KnowledgeDisabledSuccess": "Bilgi tabanı başarıyla devre dışı bırakıldı",
+  "KnowledgeEnabledSuccess": "Bilgi tabanı başarıyla etkinleştirildi",
+  "KnowledgeKeyDescription": "Bilgi tabanı sağlayıcınızdan aldığınız API anahtarını girin.",
+  "MCPServerAdvancedSettingsHint": "Bu bölümü, yetkilendirme belirteçleri gibi ek HTTP başlıkları iletmek için kullanın.",
+  "MCPServerDescriptionHint": "Entegrasyonun amacını kısaca açıklayın",
+  "MCPServerIntegrationURLHint": "Hizmetiniz tarafından sağlanan MCP sunucu adresini girin",
+  "WebSearchDisabledSuccess": "Web araması başarıyla devre dışı bırakıldı",
+  "WebSearchEnabledSuccess": "Web araması başarıyla etkinleştirildi",
+  "WebSearchKeyDescription": "Web arama sağlayıcınızdan aldığınız API anahtarını girin.",
+  "MCPProductDescription": "{{organizationName}} {{productName}} MCP Sunucusu, yapay zeka destekli iş akışlarını kolaylaştırarak, verimli ve güvenli belge yönetimi için LLM'leri harici sistemlerle entegre eder.",
+  "MCPSettingsDescription": "Bu bölüm, odvlarda yapay zeka sohbetleri için MCP sunucularını yönetmenize olanak tanır. Sistem MCP sunucularını etkinleştirebilir veya şirketinizin ihtiyaçlarını karşılamak için özel sunucular ekleyebilirsiniz. Bir kez etkinleştirildikten sonra, bu sunucular diğer kullanıcıların görevleri için erişilebilir olacaktır.",
+  "ResetKnowledgeDescription": "Bu işlem, yapılandırılmış API anahtarını kaldıracak ve bilgi tabanı için belge dizinlemesini devre dışı bırakacaktır. Yeni belgelerin bilgi tabanına eklenmesi ve bunlarla çalışılması, yeni bir anahtar sağlanana kadar kullanılamaz hale gelecektir.",
+  "ResetWebSearchDescription": "Bu işlem, yapılandırılmış API anahtarını kaldıracak ve web arama entegrasyonunu kesintiye uğratacaktır. Yapay zeka sohbetleri, yeni bir anahtar eklenene kadar internetten gerçek zamanlı bilgilere erişemeyecektir."
 }

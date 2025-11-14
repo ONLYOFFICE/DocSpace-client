@@ -1060,5 +1060,11 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "AICanMakeMistakes": "Süni intellekt səhvlər edə bilər. Cavabları iki dəfə yoxlayın.",
+  "AIChatOfferHelp": "Səni nə bacarıram?",
+  "AvailableMCPServers": "Mövcud MCP serverləri",
+  "SelectorEmptyScreenHeaderKnowledge": "Hələlik burada fayl yoxdur",
+  "SelectorFilesLimit": "Maksimum {{count}} fayl icazə verilir",
+  "SelectorFilesLimitDescription": "Böyük həcmində məlumat yükləyərkən, kontekst qısaldıla bilər, bu da cavabların dəqiqliyini azaltmağa səbəb ola bilər. Fayl sayını və onların ümumi həcmini məhdud etmək tövsiyə olunur."
 }

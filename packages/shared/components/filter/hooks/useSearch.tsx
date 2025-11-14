@@ -73,8 +73,12 @@ const useSearch = ({
 
   React.useEffect(() => {
     const value = getSelectedInputValue?.();
-
-    if (value) searchRef.current?.focus();
+    if (value && searchRef.current) {
+      searchRef.current.focus();
+      searchRef.current.setSelectionRange(value.length, value.length);
+    } else {
+      searchRef.current?.setSelectionRange(0, 0);
+    }
 
     setInputValue(value);
   }, [getSelectedInputValue]);

@@ -528,17 +528,13 @@ const View = ({
   // console.log("currentView", currentView);
 
   const shouldRedirectToResultStorage =
-    currentView === "chat" && !showBodyLoader && !canUseChat;
+    currentView === "chat" && !!selectedFolderStore.id && !canUseChat;
 
   if (shouldRedirectToResultStorage) {
-    const agentId =
-      selectedFolderStore.rootRoomId?.toString() ||
-      selectedFolderStore.id?.toString() ||
-      roomId?.toString() ||
-      "";
+    const agentId = selectedFolderStore.id || "";
 
     const filesFilter = FilesFilter.getDefault();
-    filesFilter.folder = agentId;
+    filesFilter.folder = agentId.toString();
     filesFilter.searchArea = SearchArea.ResultStorage;
 
     const path = getCategoryUrl(CategoryType.AIAgent, agentId);

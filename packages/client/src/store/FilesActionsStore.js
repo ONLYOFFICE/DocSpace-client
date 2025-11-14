@@ -2709,7 +2709,7 @@ class FilesActionStore {
       }
 
       if ((fileStatus & FileStatus.IsNew) === FileStatus.IsNew)
-        this.onMarkAsRead(item);
+        await this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
         let shareKey = item.requestToken;

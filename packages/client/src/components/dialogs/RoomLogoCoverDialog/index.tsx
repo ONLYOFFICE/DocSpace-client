@@ -226,6 +226,8 @@ const RoomLogoCoverDialog = ({
       withSelection,
     });
     setRoomLogoCoverDialogVisible(false);
+
+    if (uploadedFile) setUploadedFile(null);
   };
 
   const handleSubmit = () => {

@@ -61,7 +61,12 @@ import { CHAT_LIST_MAX_HEIGHT, CHAT_LIST_WIDTH } from "../constants";
 import { getSelectChatRowHeight } from "../utils";
 import { ChatList } from "./ChatList";
 
-const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
+const SelectChat = ({
+  isLoadingProp,
+  roomId,
+  getIcon,
+  getResultStorageId,
+}: SelectChatProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -261,6 +266,7 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
   return (
     <>
       <div
+        title={t("Common:ChatHistory")}
         className={classNames(styles.selectChat, { [styles.open]: isOpen })}
         onClick={toggleOpen}
         ref={parentRef}
@@ -306,7 +312,7 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
           getIcon={getIcon}
           showFolderSelector={isExportOpen}
           onCloseFolderSelector={closeExportSelector}
-          roomId={roomId}
+          currentFolderId={getResultStorageId() || roomId}
           getFileName={getFileName}
           onSubmit={onSubmit}
         />

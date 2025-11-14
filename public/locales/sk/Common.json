@@ -47,8 +47,6 @@
   "AIAgents": "AI agenti",
   "AIAgentSpaceQuotaExceeded": "Kvóta priestoru pre agentov AI bola prekročená ({{size}}).",
   "AIChatInput": "Chat s umelou inteligenciou",
-  "AIChatNoAccessDescription": "Môžete si prezerať tohto agenta a jeho uložené výsledky, ale začatie nových AI chatov nie je povolené pre vašu aktuálnu rolu. Potrebujete prístup? Kontaktujte svojho administrátora alebo vlastníka agenta a požiadajte o povolenie.",
-  "AIChatNoAccessTitle": "Obmedzený prístup do AI chatu",
   "AIDisabledInfoBlockAdminSaasDescription": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Aby ste obnovili plnú funkčnosť, povoľte AI funkcie v nastaveniach {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Pripojte si vlastnú AI službu a odomknite pokročilé funkcie v {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Aby ste sa vrátili do koľají, požiadajte administrátora {{productName}} aby zapol AI funkcie.",

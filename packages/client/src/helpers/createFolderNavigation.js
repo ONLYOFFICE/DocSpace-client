@@ -1,6 +1,6 @@
 import FilesFilter from "@docspace/shared/api/files/filter";
 
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, SearchArea } from "@docspace/shared/enums";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_ARCHIVE_DOCUMENTS,
@@ -35,13 +35,19 @@ export const createFolderNavigation = async (
 
   const isAiRoom = itemRoomType === RoomsType.AIRoom;
 
+  const aiAgentStartCategory = security.UseChat
+    ? CategoryType.Chat
+    : CategoryType.AIAgent;
+
   const path = isAiRoom
-    ? getCategoryUrl(CategoryType.Chat, id)
+    ? getCategoryUrl(aiAgentStartCategory, id)
     : getCategoryUrl(getCategoryTypeByFolderType(rootFolderType, id), id);
   const filter = FilesFilter.getDefault();
   const filterObj = FilesFilter.getFilter(window.location);
 
-  if (isRoom && !isAiRoom) {
+  if (isAiRoom) {
+    if (!security.UseChat) filter.searchArea = SearchArea.ResultStorage;
+  } else if (isRoom) {
     if (userId) {
       const key =
         categoryType === CategoryType.Archive
@@ -53,7 +59,7 @@ export const createFolderNavigation = async (
       if (filterObject?.sortBy) filter.sortBy = filterObject.sortBy;
       if (filterObject?.sortOrder) filter.sortOrder = filterObject.sortOrder;
     }
-  } else if (filterObj && !isAiRoom) {
+  } else if (filterObj) {
     // For the document section at all levels there is one sorting
     filter.sortBy = filterObj.sortBy;
     filter.sortOrder = filterObj.sortOrder;

@@ -133,6 +133,7 @@
   "ImportFromPortal": "Importeren vanuit {{organizationName}} Workspace",
   "ImportProcessingDescription": "Gegevensmigratie in uitvoering. Een moment geduld.",
   "ImportSectionDescription": "Selecteer secties om te importeren. Ze verschijnen in de overeenkomstige secties van {{productName}}.",
+  "ImportSectionDisabled": "Om {{importSectionName}} te importeren, schakel eerst de \"<1>{{sectionName}}</1>\" optie in.",
   "IncludedInBusiness": "Inbegrepen in Business plan",
   "IntegrationRequest": "Mist u een handige integratie of component in {{organizationName}} {{productName}}? Laat een verzoek achter bij ons team en wij zullen ernaar kijken.",
   "InvitationSettings": "Uitnodigingsinstellingen",
@@ -292,6 +293,5 @@
   "WantToCancelUpload": "Wilt u het uploaden annuleren?",
   "WantToContinue": "Wilt u doorgaan of de opslagquota voor gebruikers wijzigen?",
   "WhiteLabelSubtitle": "Voer uw bedrijfsnaam in, upload het logo en pas de styling aan aan uw huisstijl.",
-  "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap.",
-  "ImportSectionDisabled": "Om {{importSectionName}} te importeren, schakel eerst de \"<1>{{sectionName}}</1>\" optie in."
+  "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap."
 }

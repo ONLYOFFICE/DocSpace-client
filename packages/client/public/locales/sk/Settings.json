@@ -133,6 +133,7 @@
   "ImportFromPortal": "Importovať z {{organizationName}} Workspace",
   "ImportProcessingDescription": "Prebieha migrácia údajov. Počkajte, prosím.",
   "ImportSectionDescription": "Vyberte sekcie na import. Zobrazia sa v príslušných sekciách {{productName}}.",
+  "ImportSectionDisabled": "Na import {{importSectionName}} najprv povoľte možnosť \"<1>{{sectionName}}</1>\".",
   "IncludedInBusiness": "Zahrnuté v Obchodnom pláne",
   "IntegrationRequest": "Chýba vám v {{organizationName}} {{productName}} užitočná integrácia alebo komponent? Napíšte nášmu tímu svoju požiadavku a my sa na ňu pozrieme.",
   "InvitationSettings": "Nastavenia pozvánok",
@@ -292,6 +293,5 @@
   "WantToCancelUpload": "Chcete zrušiť nahrávanie?",
   "WantToContinue": "Chcete pokračovať alebo zmeniť kvótu úložiska používateľa?",
   "WhiteLabelSubtitle": "Zadajte názov svojej spoločnosti, nahrajte logo a prispôsobte štýl tak, aby zodpovedal vašej značke.",
-  "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok.",
-  "ImportSectionDisabled": "Na import {{importSectionName}} najprv povoľte možnosť \"<1>{{sectionName}}</1>\"."
+  "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok."
 }

@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "タグが追加されました。",
   "Administration": "管理",
+  "AgentRenamed": "<1>«{{oldRoomTitle}}»</1>エージェントが<2>«{{roomTitle}}»</2>に名前変更されました",
+  "AIAgentsEmptyScreenTent": "AIエージェントの詳細はこちらをご覧ください",
   "AndMoreLabel": "と、<1>{{count}}もっと</1>",
   "CreationDate": "作成日",
   "Data": "データ",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "フォームテンプレートの詳細はこちら",
   "GroupsEmptyScreenText": "グループの詳細はこちらで確認できます",
   "GuestsEmptyScreenText": "ゲストの詳細はこちらでご確認いただけます",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1>用エージェントが作成されました",
   "HistoryEmptyScreenText": "アクティビティ履歴はこちらに表示されます",
   "HistoryRoomCopied": "<1>「{{roomTitle}}」</1>ルームがコピーされました ",
   "HistoryRoomCreated": "<1>「{{roomTitle}}」</1>ルームが作成されました。",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "メンバーの詳細はここをクリックしてご覧ください",
   "NoRecordsFound": "レコードが見つかりません",
   "Properties": "プロパティ",
+  "Resolution": "解像度",
   "RoomCreateUserCount": "ユーザーが追加されました ({{count}})。",
   "RoomDenyDownloadDisabled": "無制限のダウンロードとコピー",
   "RoomDenyDownloadEnabled": "制限付きのダウンロードとコピー",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "履歴",
   "UserFileUpdated": "ファイルが更新されました。",
   "Users": "ユーザー",
-  "Versions": "バージョン",
-  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1>用エージェントが作成されました",
-  "Resolution": "解像度",
-  "AgentRenamed": "<1>«{{oldRoomTitle}}»</1>エージェントが<2>«{{roomTitle}}»</2>に名前変更されました",
-  "AIAgentsEmptyScreenTent": "AIエージェントの詳細はこちらをご覧ください"
+  "Versions": "バージョン"
 }

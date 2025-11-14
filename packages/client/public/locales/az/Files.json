@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Otaq şablonu <1>«{{title}}»</1> yadda saxlanıldı",
   "ScheduledTrashMove": "{{date}} {{sectionName}} bölməsinə köçürüləcəkdir.",
   "SendByEmail": "Elektron poçt vasitəsi ilə göndər",
+  "SharedBy": "Paylaşılmışdır",
   "ShareFolder": "Qovluğu paylaşın",
   "ShareFolderDescription": "Yeni otaq yaradılacaq və seçilmiş qovluğun bütün məzmunu oraya nüsxələnəcək. Daha sonra digər istifadəçiləri otaqdakı fayllar üzərində əməkdaşlığa dəvət edə bilərsiniz.",
   "SharePDFFormModalDescription": "Yeni otaq yaradılacaq və PDF forması oraya köçürüləcək. Daha sonra digər istifadəçiləri otaqdakı formanı doldurmağa dəvət edə bilərsiniz.",
@@ -218,6 +219,5 @@
   "WillBeDeletedPermanently": "{{date}} həmişəlik silinəcək",
   "YouLeftTheAgent": "Siz agentdən ayrılıbsınız.",
   "YouLeftTheRoom": "Otağı tərk etdiniz",
-  "YourUserTypeHasChanged": "İstifadəçi tipiniz {{productName}} administratoru <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirilib.",
-  "SharedBy": "Paylaşılmışdır"
+  "YourUserTypeHasChanged": "İstifadəçi tipiniz {{productName}} administratoru <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirilib."
 }

@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Huonemalli <1>«{{title}}»</1> tallennettu",
   "ScheduledTrashMove": "{{date}} siirretään {{sectionName}}-kohtaan",
   "SendByEmail": "Lähetä sähköpostitse",
+  "SharedBy": "Jakanut",
   "ShareFolder": "Jaa kansio",
   "ShareFolderDescription": "Uusi huone luodaan ja koko valitun kansion sisältö kopioidaan tähän. Sen jälkeen voit kutsua käyttäjiä huoneeseen tekemään yhteistyötä tiedostoilla.",
   "SharePDFFormModalDescription": "Uusi huone luodaan ja PDF-lomake kopioidaan sinne. Sen jälkeen voit kutsua huoneeseen muita käyttäjiä täyttämään lomakkeen.",
@@ -218,6 +219,5 @@
   "WillBeDeletedPermanently": "{{date}} poistetaan lopullisesti",
   "YouLeftTheAgent": "Olet jättänyt agentin.",
   "YouLeftTheRoom": "Olet poistunut huoneesta",
-  "YourUserTypeHasChanged": "{{productName}} :n pääkäyttäjä <1>{{adminName}}</1> on vaihtanut käyttäjätyypiksesi <1>“{{userType}}”</1>.",
-  "SharedBy": "Jakanut"
+  "YourUserTypeHasChanged": "{{productName}} :n pääkäyttäjä <1>{{adminName}}</1> on vaihtanut käyttäjätyypiksesi <1>“{{userType}}”</1>."
 }

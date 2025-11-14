@@ -133,6 +133,7 @@
   "ImportFromPortal": "Importar do espaço de trabalho {{organizationName}}",
   "ImportProcessingDescription": "Migração de dados em andamento. Por favor, aguarde.",
   "ImportSectionDescription": "Selecione seções para importação. Eles aparecerão nas seções correspondentes do {{productName}}.",
+  "ImportSectionDisabled": "Para importar {{importSectionName}}, ative primeiro a opção \"<1>{{sectionName}}</1>\".",
   "IncludedInBusiness": "Incluído no plano de negócios",
   "IntegrationRequest": "Está a faltar uma integração ou componente útil no {{organizationName}} {{productName}}? Deixe um pedido à nossa equipa e analisaremos o assunto.",
   "InvitationSettings": "Configurações do Convite",
@@ -292,6 +293,5 @@
   "WantToCancelUpload": "Deseja cancelar o upload?",
   "WantToContinue": "Deseja continuar ou alterar a cota de armazenamento do utilizador?",
   "WhiteLabelSubtitle": "Introduza o nome da sua empresa, carregue o logótipo, e personalize o estilo para combinar com a sua imagem de marca.",
-  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
-  "ImportSectionDisabled": "Para importar {{importSectionName}}, ative primeiro a opção \"<1>{{sectionName}}</1>\"."
+  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
 }

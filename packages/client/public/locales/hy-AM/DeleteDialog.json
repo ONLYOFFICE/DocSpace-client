@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Գործակալ <strong>\"{{agentName}}\"</strong>-ը ընդմիշտ կջնջվի։ Բոլոր տվյալները և օգտատիրոջ մուտքի իրավունքները կկորչեն։",
+  "DeleteAIAgentTitle": "Ջնջե՞լ այս գործակալին։",
+  "DeleteAIAgentWarning": "Ես հասկանում եմ հետևանքները և ցանկանում եմ հեռացնել գործակալին",
   "DeleteAllGroupDescription": "Ընտրված խմբերը կջնջվեն: Խմբերի օգտատերերը չեն հեռացվի {{productName}}-ից: Վստա՞հ եք, որ ցանկանում եք շարունակել:",
   "DeleteAllGroupsTitle": "Ջնջել խմբերը",
   "DeleteFiles": "Դուք պատրաստվում եք տեղափոխել <strong>ֆայլեր ({{filesCount}})</strong> {{trashSection}}։",
@@ -29,8 +32,5 @@
   "ItemsDeletedAfter": "Այս տարրերը վերջնականապես կհեռացվեն 30 օրից։",
   "ItemsPermanentlyDeleted": "Այս տարրերը վերջնականապես կհեռացվեն {{trashSection}}։",
   "removeFromListDescription": "Դուք պատրաստվում եք հեռացնել <1>{{title}}</1>-ը ցանկից։ Վստա՞հ եք, որ ցանկանում եք շարունակել։",
-  "removeFromListDescriptionPlural": "Դուք պատրաստվում եք հեռացնել <1>տարրերը ({{count}})</1> ցանկից։ Վստա՞հ եք, որ ցանկանում եք շարունակել։",
-  "DeleteAIAgentDescription": "Գործակալ <strong>\"{{agentName}}\"</strong>-ը ընդմիշտ կջնջվի։ Բոլոր տվյալները և օգտատիրոջ մուտքի իրավունքները կկորչեն։",
-  "DeleteAIAgentTitle": "Ջնջե՞լ այս գործակալին։",
-  "DeleteAIAgentWarning": "Ես հասկանում եմ հետևանքները և ցանկանում եմ հեռացնել գործակալին"
+  "removeFromListDescriptionPlural": "Դուք պատրաստվում եք հեռացնել <1>տարրերը ({{count}})</1> ցանկից։ Վստա՞հ եք, որ ցանկանում եք շարունակել։"
 }

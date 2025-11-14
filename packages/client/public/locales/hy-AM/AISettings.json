@@ -22,7 +22,6 @@
   "IntegrationName": "Ինտեգրացիայի անունը",
   "IntegrationURL": "Ինտեգրացիայի URL",
   "MCPServer": "MCP Սրեվեր",
-  "MCPSettingDescription": "{{organizationName}} {{productName}} MCP սերվերը հարթեցնում է ԱԲ-հովանավորված աշխատանքային հոսքերը՝ ինտեգրելով LLM-ներն արտաքին համակարգերի հետ՝ ապահով և արդյունավետ փաստաթղթերի կառավարման համար։",
   "MCPSettingTitle": "MCP սերվերներ",
   "Provider": "Պրովայդեր",
   "ProviderAddedSuccess": "Պրովայդերը հաջողությամբ ավելացվեց",

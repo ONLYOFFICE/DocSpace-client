@@ -22,7 +22,6 @@
   "IntegrationName": "Nombre de la integración",
   "IntegrationURL": "URL de la integración",
   "MCPServer": "Servidor MCP",
-  "MCPSettingDescription": "El Servidor MCP de {{organizationName}} {{productName}} agiliza los flujos de trabajo basados en IA, integrando los LLM con sistemas externos para una gestión eficiente y segura de los documentos.",
   "MCPSettingTitle": "Servidores MCP",
   "Provider": "Proveedor",
   "ProviderAddedSuccess": "Proveedor añadido correctamente",

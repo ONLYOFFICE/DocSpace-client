@@ -133,6 +133,7 @@
   "ImportFromPortal": "Εισαγωγή από το {{organizationName}} Workspace",
   "ImportProcessingDescription": "Η μεταφορά δεδομένων βρίσκεται σε εξέλιξη. Περιμένετε.",
   "ImportSectionDescription": "Επιλέξτε τμήματα για εισαγωγή. Θα εμφανιστούν στα αντίστοιχα τμήματα του {{productName}}.",
+  "ImportSectionDisabled": "Για να εισαγάγετε το {{importSectionName}}, ενεργοποιήστε πρώτα την επιλογή \"<1>{{sectionName}}</1>\".",
   "IncludedInBusiness": "Περιλαμβάνεται στο επιχειρηματικό σχέδιο",
   "IntegrationRequest": "Σας λείπει μια χρήσιμη ενσωμάτωση ή ένα στοιχείο στο {{productName}} του {{organizationName}}; Αφήστε ένα αίτημα στην ομάδα μας και θα το εξετάσουμε.",
   "InvitationSettings": "Ρυθμίσεις Προσκλήσεων",
@@ -292,6 +293,5 @@
   "WantToCancelUpload": "Θέλετε να ακυρώσετε τη μεταφόρτωση;",
   "WantToContinue": "Θέλετε να συνεχίσετε ή να αλλάξετε την ποσόστωση αποθήκευσης των χρηστών;",
   "WhiteLabelSubtitle": "Εισάγετε το όνομα της εταιρείας σας, ανεβάστε το λογότυπο και προσαρμόστε το στυλ ώστε να ταιριάζει με την επωνυμία σας.",
-  "WithoutEmailHint": "Δεν έχετε χρήστες χωρίς email. Προχωρήστε στο επόμενο βήμα.",
-  "ImportSectionDisabled": "Για να εισαγάγετε το {{importSectionName}}, ενεργοποιήστε πρώτα την επιλογή \"<1>{{sectionName}}</1>\"."
+  "WithoutEmailHint": "Δεν έχετε χρήστες χωρίς email. Προχωρήστε στο επόμενο βήμα."
 }

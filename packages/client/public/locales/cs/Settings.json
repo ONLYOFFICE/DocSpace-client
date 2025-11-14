@@ -133,6 +133,7 @@
   "ImportFromPortal": "Import z pracovního prostoru {{organizationName}}",
   "ImportProcessingDescription": "Probíhá migrace dat. Vyčkejte prosím.",
   "ImportSectionDescription": "Vyberte oddíly pro import. Objeví se v odpovídajících sekcích {{productName}}.",
+  "ImportSectionDisabled": "Pro import {{importSectionName}} nejprve povolte možnost \"<1>{{sectionName}}</1>\".",
   "IncludedInBusiness": "Zahrnuto v obchodním plánu",
   "IntegrationRequest": "Chybí vám v {{organizationName}} {{productName}} užitečná integrace nebo komponenta? Zanechte požadavek našemu týmu a my se na něj podíváme.",
   "InvitationSettings": "Nastavení pozvánek",
@@ -292,6 +293,5 @@
   "WantToCancelUpload": "Chcete zrušit nahrávání?",
   "WantToContinue": "Chcete pokračovat nebo změnit kvótu uživatelského úložiště?",
   "WhiteLabelSubtitle": "Zadejte název společnosti, nahrajte logo a přizpůsobte styl tak, aby odpovídal vaší značce.",
-  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku.",
-  "ImportSectionDisabled": "Pro import {{importSectionName}} nejprve povolte možnost \"<1>{{sectionName}}</1>\"."
+  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku."
 }

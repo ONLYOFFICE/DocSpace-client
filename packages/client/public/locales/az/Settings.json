@@ -133,6 +133,7 @@
   "ImportFromPortal": "{{organizationName}} Workspace-dən idxal edin",
   "ImportProcessingDescription": "Məlumat köçürülməsi davam edir. Zəhmət olmasa, gözləyin.",
   "ImportSectionDescription": "İdxal etmək üçün bölmələri seçin. Onlar {{productName}}-in müvafiq bölmələrində görünəcək.",
+  "ImportSectionDisabled": "{{importSectionName}} sekciyasını idxal etmək üçün, əvvəlcə \"<1>{{sectionName}}</1>\" seçiminə aktiv etməlisiniz.",
   "IncludedInBusiness": "Biznes plana daxildir",
   "IntegrationRequest": "{{organizationName}} {{productName}}-də faydalı inteqrasiya və ya komponent yoxdur? Komandamıza bir sorğu buraxın və biz buna baxacağıq.",
   "InvitationSettings": "Sərfətlər",
@@ -292,6 +293,5 @@
   "WantToCancelUpload": "Yükləməni ləğv etmək istəyirsiniz?",
   "WantToContinue": "İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?",
   "WhiteLabelSubtitle": "Şirkətinizin adını daxil edin, loqonu yükləyin və stili brendinizə uyğunlaşdırın.",
-  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
-  "ImportSectionDisabled": "{{importSectionName}} sekciyasını idxal etmək üçün, əvvəlcə \"<1>{{sectionName}}</1>\" seçiminə aktiv etməlisiniz."
+  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin."
 }

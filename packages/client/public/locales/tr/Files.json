@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Oda şablonu <1>«{{title}}»</1> kaydedildi",
   "ScheduledTrashMove": "{{date}} {{sectionName}}’a taşınacaktır.",
   "SendByEmail": "E-posta ile gönder",
+  "SharedBy": "Paylaşıldı",
   "ShareFolder": "Klasörü paylaş",
   "ShareFolderDescription": "Yeni bir oda oluşturulacak ve seçilen klasörün tüm içeriği buraya kopyalanacaktır. Daha sonra, diğer kullanıcıları bir oda içindeki dosyalar üzerinde iş birliği yapmaya davet edebilirsiniz.",
   "SharePDFFormModalDescription": "Yeni bir oda oluşturulacak ve PDF formu oraya kopyalanacaktır. Daha sonra diğer kullanıcıları odadaki formu doldurmaya davet edebilirsiniz.",
@@ -218,6 +219,5 @@
   "WillBeDeletedPermanently": "{{date}} kalıcı olarak silinecek",
   "YouLeftTheAgent": "Ajanı terk ettiniz.",
   "YouLeftTheRoom": "Odadan ayrıldınız",
-  "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi.",
-  "SharedBy": "Paylaşıldı"
+  "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi."
 }

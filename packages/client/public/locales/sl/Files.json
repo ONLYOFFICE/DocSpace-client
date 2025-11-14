@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Predloga sobe <1>«{{title}}»</1> shranjena",
   "ScheduledTrashMove": "{{date}} bo prestavljeno v {{sectionName}}",
   "SendByEmail": "Pošlji po email",
+  "SharedBy": "Javno deljeno s",
   "ShareFolder": "Deljena mapa",
   "ShareFolderDescription": "Ustvarila se bo nova soba in vanjo bo kopirana vsa vsebina izbrane mape. Nato lahko druge uporabnike povabite k sodelovanju pri datotekah v sobi.",
   "SharePDFFormModalDescription": "Ustvarila se bo nova soba in vanjo bo kopiran obrazec PDF. Nato lahko povabiš druge uporabnike, da izpolnijo obrazec v sobi.",
@@ -218,6 +219,5 @@
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",
   "YouLeftTheAgent": "Zapustili ste agenta.",
   "YouLeftTheRoom": "Zapustili ste sobo",
-  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>“{{userType}}”</1> skrbnik za {{productName}} <1>{{adminName}}</1>.",
-  "SharedBy": "Javno deljeno s"
+  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>“{{userType}}”</1> skrbnik za {{productName}} <1>{{adminName}}</1>."
 }

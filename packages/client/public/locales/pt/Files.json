@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Templates de sala <1>«{{title}}»</1> guardados",
   "ScheduledTrashMove": "{{date}} será movida para {{sectionName}}",
   "SendByEmail": "Enviar por e-mail",
+  "SharedBy": "Compartilhado por",
   "ShareFolder": "Compartilhar pasta",
   "ShareFolderDescription": "Uma nova sala será criada e todo o conteúdo da pasta selecionada será copiado para lá. Depois, você pode convidar outros usuários para colaborar nos arquivos de uma sala.",
   "SharePDFFormModalDescription": "Uma nova sala será criada e o formulário PDF será copiado para lá. Você pode então convidar outros usuários para preencher o formulário na sala.",
@@ -218,6 +219,5 @@
   "WillBeDeletedPermanently": "{{date}} será eliminado permanentemente",
   "YouLeftTheAgent": "Você saiu do agente",
   "YouLeftTheRoom": "Você saiu da sala",
-  "YourUserTypeHasChanged": "O seu tipo de utilizador foi alterado para <1>“{{userType}}”</1> pelo administrador {{productName}} <1>{{adminName}}</1>.",
-  "SharedBy": "Compartilhado por"
+  "YourUserTypeHasChanged": "O seu tipo de utilizador foi alterado para <1>“{{userType}}”</1> pelo administrador {{productName}} <1>{{adminName}}</1>."
 }

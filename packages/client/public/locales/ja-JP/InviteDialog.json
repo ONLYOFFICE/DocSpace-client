@@ -12,14 +12,14 @@
   "InviteToRoomSearchPlaceholder": "名前またはメールアドレスで検索して招待する",
   "InviteViaLink": "リンクで招待する",
   "InviteViaLinkDescriptionAccounts": "{{productName}}で自己認証のためのユニバーサルリンクを作成する",
+  "InviteViaLinkDescriptionAgentGuest": "エージェント内でゲストとして自己認証するためのユニバーサルリンクを作成する。",
+  "InviteViaLinkDescriptionAgentMembers": "{{productName}}メンバー向けに、エージェント内での自己認証用ユニバーサルリンクを作成する。",
   "InviteViaLinkDescriptionRoomGuest": "ゲストとしてルームで自己認証を行うためのユニバーサルリンクを作成する",
   "InviteViaLinkDescriptionRoomMembers": "{{productName}} メンバー用のユニバーサルリンクを作成し、ルームで自己認証を行えるようにする",
   "LinkCopySuccess": "リンクがコピーされました",
   "SendInvitation": "招待を送信する",
+  "UserAgentMaxAvailableRoleWarning": "ゲストおよびユーザーはエージェント管理者として割り当てられません。指定された役割には、ルーム管理者および{{productName}}管理者のみが適任です。",
   "UserMaxAvailableRoleWarning": "ゲストおよびユーザーはルーム管理者に指定できません。ルーム管理者および{{productName}}管理者だけが、その役割に適しています。",
   "UsersAlreadyAdded": "一部のユーザーはすでに追加されています",
-  "UsersCannotBeAdded": "無効な連絡先はルームに追加できません。",
-  "InviteViaLinkDescriptionAgentGuest": "エージェント内でゲストとして自己認証するためのユニバーサルリンクを作成する。",
-  "InviteViaLinkDescriptionAgentMembers": "{{productName}}メンバー向けに、エージェント内での自己認証用ユニバーサルリンクを作成する。",
-  "UserAgentMaxAvailableRoleWarning": "ゲストおよびユーザーはエージェント管理者として割り当てられません。指定された役割には、ルーム管理者および{{productName}}管理者のみが適任です。"
+  "UsersCannotBeAdded": "無効な連絡先はルームに追加できません。"
 }

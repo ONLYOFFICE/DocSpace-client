@@ -88,6 +88,7 @@
   "Payer": "Pagador",
   "PayerDescription": "Este usuario tiene acceso a los detalles de pago y es el único que puede ajustar la cuota y realizar pagos. El propietario de {{productName}}, así como el propio gestor de pagos, pueden reasignar el rol de gestor de pagos mediante el portal de cliente de Stripe.",
   "PaymentMethod": "Método de pago",
+  "PerAITools": "{{currency}} por token",
   "PerBackup": "{{currency}} por 1 copia de seguridad",
   "PerBackupWithBracket": "({{currency}} por 1 copia de seguridad)",
   "PerStorage": "{{currency}} por {{amount}}/mes",
@@ -153,6 +154,5 @@
   "YouHaveNotAddedAnyPayment": "No ha añadido ningún pago",
   "YourCurrentPayment": "Su pago actual",
   "YourCurrentPlan": "<1>Su plan actual:</1> {{amount}} <2>({{price}}/mes)</2>",
-  "YourPrice": "Su precio",
-  "PerAITools": "{{currency}} por token"
+  "YourPrice": "Su precio"
 }

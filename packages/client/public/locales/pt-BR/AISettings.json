@@ -19,6 +19,7 @@
   "EnterValue": "Insira o valor",
   "HeaderName": "Nome do cabeçalho",
   "HeaderValue": "Valor do cabeçalho",
+  "IntegrationName": "Nome da integração",
   "IntegrationURL": "URL de integração",
   "MCPProductDescription": "O {{organizationName}} {{productName}} MCP Server otimiza fluxos de trabalho orientados por IA, integrando LLMs com sistemas externos para um gerenciamento de documentos eficiente e seguro.",
   "MCPServer": "Servidor MCP",
@@ -41,6 +42,5 @@
   "ServiceIcon": "Ícone de serviço",
   "SystemMCPListTitle": "Sistema",
   "ToUseAddProvider": "Para usar {{value}}, certifique-se de conectar pelo menos um provedor primeiro.",
-  "WebSearchKeyHiddenDescription": "A chave API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança.",
-  "IntegrationName": "Nome da integração"
+  "WebSearchKeyHiddenDescription": "A chave API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança."
 }

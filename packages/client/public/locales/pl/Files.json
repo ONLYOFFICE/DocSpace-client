@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Szablon pokoju <1>«{{title}}»</1> został zapisany",
   "ScheduledTrashMove": "{{date}} zostanie przeniesione do {{sectionName}}",
   "SendByEmail": "Wyślij e-mailem",
+  "SharedBy": "Udostępnił",
   "ShareFolder": "Udostępnij katalog",
   "ShareFolderDescription": "Zostanie utworzony nowy pokój, a cała zawartość wybranego katalogu zostanie do niego skopiowana. Następnie możesz zaprosić innych użytkowników do współpracy nad plikami w pokoju.",
   "SharePDFFormModalDescription": "Zostanie utworzony nowy pokój i formularz PDF zostanie do niego skopiowany. Następnie możesz zaprosić innych użytkowników do wypełnienia formularza w pokoju.",
@@ -218,6 +219,5 @@
   "WillBeDeletedPermanently": "{{date}} nastąpi trwałe usunięcie",
   "YouLeftTheAgent": "Zostawiłeś agenta.",
   "YouLeftTheRoom": "Opuszczono pokój",
-  "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>.",
-  "SharedBy": "Udostępnił"
+  "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>."
 }

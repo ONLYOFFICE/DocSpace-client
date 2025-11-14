@@ -133,6 +133,7 @@
   "ImportFromPortal": "Входирай от {{organizationName}} Workspace",
   "ImportProcessingDescription": "Извършва се миграция на данни. Моля, изчакайте.",
   "ImportSectionDescription": "Изберете секции за входиране. Те ще се появят в съответните секции на {{productName}}.",
+  "ImportSectionDisabled": "За да импортирате {{importSectionName}}, първо разрешете опцията \"<1>{{sectionName}}</1>\".",
   "IncludedInBusiness": "Включен в Бизнес план",
   "IntegrationRequest": "Липсва Ви полезна интеграция или компонент в {{organizationName}} {{productName}}? Направете заявка към нашия екип и ние ще я разгледаме.",
   "InvitationSettings": "Настройки на покани",
@@ -292,6 +293,5 @@
   "WantToCancelUpload": "Искате ли да отмените качването?",
   "WantToContinue": "Искате ли да продължите или да промените потребителската квота за съхранение?",
   "WhiteLabelSubtitle": "Въведете името на фирмата си, качете логото и персонализирайте стила, за да съответства на вашата марка.",
-  "WithoutEmailHint": "Нямате потребители без имейли. Моля, преминете към следващата стъпка.",
-  "ImportSectionDisabled": "За да импортирате {{importSectionName}}, първо разрешете опцията \"<1>{{sectionName}}</1>\"."
+  "WithoutEmailHint": "Нямате потребители без имейли. Моля, преминете към следващата стъпка."
 }

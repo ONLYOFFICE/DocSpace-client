@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Պիտակները ավելացվել են։",
   "Administration": "Ադմինիստրացիա",
+  "AgentRenamed": "Գործակալ <1>«{{oldRoomTitle}}»-ը</1> վերանվանվել է <2>«{{roomTitle}}»-ի</2>",
+  "AIAgentsEmptyScreenTent": "ԱԲ գործակալների մանրամասները տե՛ս այստեղ",
   "AndMoreLabel": "և <1>{{count}} ավելի</1>",
   "CreationDate": "Ստեղծման ամսաթիվ",
   "Data": "Տվյալներ",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Տեսեք ձևանմուշի մանրամասները այստեղ",
   "GroupsEmptyScreenText": "Տեսեք խմբերի մանրամասները այստեղ",
   "GuestsEmptyScreenText": "Հյուրերի մասին մանրամասները կարող եք տեսնել այստեղ",
+  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> գործակալը ստեղծվել է",
   "HistoryEmptyScreenText": "Գործողությունների պատմությունը կցուցադրվի այստեղ",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> սենյակը պատճենված է",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> ստեղծված սենյակ",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Անդամների մանրամասները կարող եք տեսնել այստեղ",
   "NoRecordsFound": "Գրառումները չեն գտնվել",
   "Properties": "Հատկություններ",
+  "Resolution": "Թույլատրելիություն",
   "RoomCreateUserCount": "Օգտատերերն ավելացվել են ({{count}})։",
   "RoomDenyDownloadDisabled": "Ներբեռնումը և պատճենումը անսահմանափակ են",
   "RoomDenyDownloadEnabled": "Ներբեռնումը և պատճենումը սահմանափակված են",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Պատմություն",
   "UserFileUpdated": "Ֆայլը թարմացվել է:",
   "Users": "Օգտատերեր",
-  "Versions": "Տարբերակներ",
-  "HistoryAgentCreated": "<1>«{{roomTitle}}»</1> գործակալը ստեղծվել է",
-  "Resolution": "Թույլատրելիություն",
-  "AgentRenamed": "Գործակալ <1>«{{oldRoomTitle}}»-ը</1> վերանվանվել է <2>«{{roomTitle}}»-ի</2>",
-  "AIAgentsEmptyScreenTent": "ԱԲ գործակալների մանրամասները տե՛ս այստեղ"
+  "Versions": "Տարբերակներ"
 }

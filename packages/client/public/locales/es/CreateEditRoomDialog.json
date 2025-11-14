@@ -11,6 +11,7 @@
   "CreateTagOption": "Crear etiqueta",
   "Diagonal": "Diagonal",
   "DisableRoomQuota": "Desactivar cuota para esta sala",
+  "DisableRoomQuotaAgent": "Deshabilitar cuota para este agente",
   "FileLifetime": "Vida útil de archivo",
   "FileLifetimeDescription": "Establezca la vida útil de los archivos para eliminar automáticamente los archivos de esta sala tras un periodo definido. La vida útil comienza en la fecha de carga/creación del archivo.",
   "FilesOlderThan": "Archivos más antiguos que:",
@@ -27,6 +28,7 @@
   "RoomEditing": "Edición de las salas",
   "RootFolderLabel": "Carpeta raíz",
   "StorageDescription": "Cuota de almacenamiento establecida por sala. Puede cambiar este valor o desactivar el límite de almacenamiento.",
+  "StorageDescriptionAgent": "Cuota de almacenamiento establecida por agente. Puede cambiar este valor o desactivar el límite de almacenamiento.",
   "TagsPlaceholder": "Añada etiqueta",
   "ThirdPartyStorageComboBoxPlaceholder": "Seleccionar almacenamiento",
   "ThirdPartyStorageNoStorageAlert": "Sobre todo, debe conectar el servicio correspondiente en la sección \"Integración\". En caso contrario, la conexión no será posible.",
@@ -37,7 +39,5 @@
   "UserName": "Nombre del usuario",
   "ViewerInfo": "Información del visor",
   "WatermarkPreview": "Vista previa de la marca de agua",
-  "WatermarkPreviewHelp": "Esta vista previa de la imagen muestra aproximadamente cómo se mostrará la marca de agua en sus archivos.",
-  "DisableRoomQuotaAgent": "Deshabilitar cuota para este agente",
-  "StorageDescriptionAgent": "Cuota de almacenamiento establecida por agente. Puede cambiar este valor o desactivar el límite de almacenamiento."
+  "WatermarkPreviewHelp": "Esta vista previa de la imagen muestra aproximadamente cómo se mostrará la marca de agua en sus archivos."
 }

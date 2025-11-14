@@ -29,5 +29,8 @@
   "ItemsDeletedAfter": "これらのアイテムは30日後に永久に削除されます。",
   "ItemsPermanentlyDeleted": "これらのアイテムは{{trashSection}}から永久に削除されます。",
   "removeFromListDescription": "<1>{{title}}</1> をリストから削除しようとしています。続行しますか？",
-  "removeFromListDescriptionPlural": "<1>{{count}}個のアイテム</1>をリストから削除しようとしています。続行しますか？"
+  "removeFromListDescriptionPlural": "<1>{{count}}個のアイテム</1>をリストから削除しようとしています。続行しますか？",
+  "DeleteAIAgentDescription": "エージェント<strong>「{{agentName}}」</strong>は完全に削除されます。すべてのデータとユーザーアクセス権限が失われます。",
+  "DeleteAIAgentTitle": "このエージェントを削除",
+  "DeleteAIAgentWarning": "結果を理解した上で、エージェントを削除したい"
 }

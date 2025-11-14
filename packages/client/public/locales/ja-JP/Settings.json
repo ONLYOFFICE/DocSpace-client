@@ -276,5 +276,15 @@
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
   "WantToContinue": "ユーザーストレージ容量制限を継続または変更しますか？",
   "WhiteLabelSubtitle": "会社名を入力し、ロゴをアップロードし、ブランディングに合わせたスタイリングにカスタマイズをしましょう。",
-  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。"
+  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
+  "AccountsUsersWithoutEmails": "メールアドレスがないユーザーを<1>{{users}}人</1>見つかりました。次のステップで、それらのアカウントに必要なデータを追加できます。",
+  "AccountsWithoutEmails": "メールアドレスがないユーザーを<1>{{users}}人</1>見つかりました。メールアドレスを入力するか、この操作をスキップして続行できます。",
+  "AISettings": "AI設定",
+  "DataImportAdminLimitExceeded": "管理者数の上限を超えました。続行するには、管理者数を調整するか、管理者数の上限を引き上げてください。",
+  "GroupsSectionDescription": "前のステップで選択したユーザーは、{{serviceName}}に作成されたグループにインポートされます。グループは<1>{{sectionName}}</1>セクションに表示されます。",
+  "ImportFilesDescription": "ユーザーファイルとドキュメントは<1>{{sectionName}}</1>にインポートされます。",
+  "ResetSettings": "設定をリセット",
+  "SharedFilesAndFolders": "共有ファイルとフォルダ",
+  "SharedFilesAndFoldersDescription": "他のユーザーが共有しているファイルとフォルダーは、<1>{{sectionName}}</1> にインポートされます。<br><1>ご注意：</1>インポート中に一部のアクセス権が失われる可能性があります。",
+  "SharedFilesAndFoldersDetails": "共有ファイルとフォルダ"
 }

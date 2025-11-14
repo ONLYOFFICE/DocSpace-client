@@ -37,5 +37,7 @@
   "UserName": "ユーザー名",
   "ViewerInfo": "閲覧者情報",
   "WatermarkPreview": "透かしのプレビュー",
-  "WatermarkPreviewHelp": "この画像プレビューは、ファイルに透かしがどのように表示されるかを大まかに示しています。"
+  "WatermarkPreviewHelp": "この画像プレビューは、ファイルに透かしがどのように表示されるかを大まかに示しています。",
+  "DisableRoomQuotaAgent": "このエージェントのクォータを無効にする",
+  "StorageDescriptionAgent": "エージェントごとに設定されたストレージクォータです。この値を変更するか、ストレージ制限を無効にすることができます。"
 }

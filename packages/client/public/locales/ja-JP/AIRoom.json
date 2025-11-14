@@ -1,1 +1,22 @@
-{}
+{
+  "AIChat": "AIチャット",
+  "CreateChat": "チャットを作成",
+  "CreateChatDescription": "始めるにはAIチャットタブに移動してください。",
+  "EmptyKnowledgeDescription": "ここにアップロードされたファイルはインデックス化され、AIチャットタブのコンテキストとして使用されます。ファイルを追加してAIに質問したり、コンテンツを生成したり、情報を共同で分析したりできます。",
+  "EmptyKnowledgeTitle": "ファイルはまだアップロードされていません",
+  "EmptyResultsDescription": "AIチャットで生成されたファイルはここに自動的に表示されます。コンテンツを生成したり、チャットを開始したり、出力結果を含むメッセージを送信したりするたびに、結果はこのセクションに保存されます。",
+  "EmptyResultsTitle": "結果はまだありません",
+  "Instructions": "説明",
+  "InstructionsDescription": "このルーム内でのチャットの目的と行動を定義してください。チャットは何をすべきか？どのように機能すべきか？何を避けるべきか？などを詳しく記入してください。",
+  "InstructionsPlaceholder": "例：「このルームでのチャットはプロジェクトファイルの議論に使用されます。話題から外れないよう、また関係のない会話や無関係な文書の共有は避けてください。」",
+  "Knowledge": "知識",
+  "KnowledgeDescription": "お使いのコンピューターまたは{{productName}}からファイルをアップロードすると、チャットの文脈がより明確になります。ご注意：アップロードされたコンテンツの一部または全部が会話中に出てくる可能性があります。",
+  "KnowledgeSelectIn": "{{productName}}で選択",
+  "MCP": "このルーム用のMCPツール",
+  "MCPDescription": "管理者が接続したMCPツールを活用し、AIによるチャット体験を向上させます。これらのツールはデータ抽出、要約、スマート提案などを支援します。",
+  "Model": "プロバイダーとモデル",
+  "ModelDescription": "このルームのチャットで使用するAIプロバイダーとモデルを選択してください。この設定は必須であり、すべての参加者に適用されます。",
+  "ResultStorage": "結果ストレージ",
+  "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",
+  "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする"
+}

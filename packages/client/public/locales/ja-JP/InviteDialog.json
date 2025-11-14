@@ -18,5 +18,8 @@
   "SendInvitation": "招待を送信する",
   "UserMaxAvailableRoleWarning": "ゲストおよびユーザーはルーム管理者に指定できません。ルーム管理者および{{productName}}管理者だけが、その役割に適しています。",
   "UsersAlreadyAdded": "一部のユーザーはすでに追加されています",
-  "UsersCannotBeAdded": "無効な連絡先はルームに追加できません。"
+  "UsersCannotBeAdded": "無効な連絡先はルームに追加できません。",
+  "InviteViaLinkDescriptionAgentGuest": "エージェント内でゲストとして自己認証するためのユニバーサルリンクを作成する。",
+  "InviteViaLinkDescriptionAgentMembers": "{{productName}}メンバー向けに、エージェント内での自己認証用ユニバーサルリンクを作成する。",
+  "UserAgentMaxAvailableRoleWarning": "ゲストおよびユーザーはエージェント管理者として割り当てられません。指定された役割には、ルーム管理者および{{productName}}管理者のみが適任です。"
 }

@@ -71,6 +71,7 @@ const useToolsSettings = ({ roomId, aiConfig }: Props) => {
   );
 
   const fetchTools = React.useCallback(async () => {
+    setIsFetched(false);
     const res = await getServersListForRoom(Number(roomId));
 
     if (!res) return;
@@ -97,11 +98,15 @@ const useToolsSettings = ({ roomId, aiConfig }: Props) => {
         data.type === "folder" &&
         data.id &&
         Number(data.id) === Number(roomId) &&
-        data.cmd !== "delete" && data.data
+        data.cmd !== "delete" &&
+        data.data
       ) {
         const parsedData = JSON.parse(data.data);
-        
-        if('roomType' in parsedData && parsedData.roomType === RoomsType.AIRoom){
+
+        if (
+          "roomType" in parsedData &&
+          parsedData.roomType === RoomsType.AIRoom
+        ) {
           fetchTools();
         }
       }

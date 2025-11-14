@@ -77,7 +77,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isRecentFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isFavoritesFolder,
       isArchiveFolder,
       isIndexEditingMode,
@@ -107,7 +107,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
       isRecentFolder !== prevProps.isRecentFolder ||
-      isSharedWithMeFolderRoot !== prevProps.isSharedWithMeFolderRoot ||
+      isSharedWithMeFolder !== prevProps.isSharedWithMeFolder ||
       isFavoritesFolder !== prevProps.isFavoritesFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
@@ -214,11 +214,11 @@ class FilesTableHeader extends React.Component {
       isFavoritesFolder,
       isTemplatesFolder,
       isIndexing,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = this.props;
 
-    if (isSharedWithMeFolderRoot) return this.getSharedWithMeFolderColumns();
+    if (isSharedWithMeFolder) return this.getSharedWithMeFolderColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isAIAgentsFolder) return this.getAIAgentsColumns();
@@ -1065,7 +1065,7 @@ export default inject(
       isPersonalReadOnly,
       isRecentFolder,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = treeFoldersStore;
     const withContent = canShare;
@@ -1234,7 +1234,7 @@ export default inject(
       isFrame,
       isAIAgentsFolder,
       isRecentFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isFavoritesFolder,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,

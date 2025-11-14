@@ -74,7 +74,7 @@ type DetailsProps = {
 
   isDefaultRoomsQuotaSet?: boolean;
   isDefaultAIAgentsQuotaSet?: boolean;
-  isAIAgentsFolder?: boolean;
+  isAIAgentsFolderRoot?: boolean;
 
   getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
 
@@ -95,7 +95,7 @@ const Details = ({
   isArchive,
   isDefaultRoomsQuotaSet,
   isDefaultAIAgentsQuotaSet,
-  isAIAgentsFolder,
+  isAIAgentsFolderRoot,
 
   getLogoCoverModel,
   onChangeFile,
@@ -126,8 +126,7 @@ const Details = ({
     selectTag: selectTag!,
     isDefaultRoomsQuotaSet: isDefaultRoomsQuotaSet!,
     isDefaultAIAgentsQuotaSet: isDefaultAIAgentsQuotaSet!,
-    isAIAgentsFolder: isAIAgentsFolder!,
-
+    isAIAgentsFolder: isAIAgentsFolderRoot!,
     roomLifetime: roomLifetime!,
   });
 
@@ -335,7 +334,7 @@ export default inject(
     const { isDefaultRoomsQuotaSet, isDefaultAIAgentsQuotaSet } =
       currentQuotaStore;
 
-    const { isAIAgentsFolder } = treeFoldersStore;
+    const { isAIAgentsFolderRoot } = treeFoldersStore;
     return {
       culture,
       createThumbnail,
@@ -346,7 +345,7 @@ export default inject(
       selectTag,
       isDefaultRoomsQuotaSet,
       isDefaultAIAgentsQuotaSet,
-      isAIAgentsFolder,
+      isAIAgentsFolderRoot,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
       onChangeFile: avatarEditorDialogStore.onChangeFile,
       roomLifetime:

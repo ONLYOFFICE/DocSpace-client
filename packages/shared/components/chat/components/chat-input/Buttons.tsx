@@ -27,6 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
@@ -52,6 +53,8 @@ const Buttons = ({
   aiReady,
 }: ButtonsProps) => {
   const { isRequestRunning, stopMessage } = useMessageStore();
+
+  const { t } = useTranslation(["Common"]);
 
   const isSendButtonDisabled = !isRequestRunning
     ? !value || !selectedModel
@@ -80,7 +83,7 @@ const Buttons = ({
       className={styles.chatInputButtons}
       style={{ width: `${inputWidth}px` }}
     >
-      <div className={styles.chatInputButtonsTools}>
+      <div className={styles.chatInputButtonsTools} title={t("AddFiles")}>
         <div
           className={classNames(styles.chatInputButton, {
             [styles.activeChatInputButton]: isFilesSelectorVisible,

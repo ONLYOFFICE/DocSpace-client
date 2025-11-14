@@ -261,6 +261,7 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
   return (
     <>
       <div
+        title={t("Common:ChatHistory")}
         className={classNames(styles.selectChat, { [styles.open]: isOpen })}
         onClick={toggleOpen}
         ref={parentRef}

@@ -51,7 +51,7 @@ import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { SearchArea } from "@docspace/shared/enums";
+import { FolderType, SearchArea } from "@docspace/shared/enums";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -102,6 +102,7 @@ type ViewProps = UseContactsProps &
     aiConfig: SettingsStore["aiConfig"];
     standalone: SettingsStore["standalone"];
     isResultTab: AiRoomStore["isResultTab"];
+    resultId: AiRoomStore["resultId"];
   };
 
 const View = ({
@@ -177,6 +178,7 @@ const View = ({
   aiConfig,
   standalone,
   isResultTab,
+  resultId,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common", "AIRoom"]);
@@ -527,6 +529,18 @@ const View = ({
   }, [setAiAgentSelectorDialogProps]);
   // console.log("currentView", currentView);
 
+  const getResultStorageId = () => {
+    if (!selectedFolderStore.isAIRoom) return null;
+
+    if (resultId) return resultId;
+
+    return (
+      selectedFolderStore.folders?.find(
+        (folder) => folder.type === FolderType.ResultStorage,
+      )?.id || null
+    );
+  };
+
   const shouldRedirectToResultStorage =
     currentView === "chat" && !!selectedFolderStore.id && !canUseChat;
 
@@ -566,6 +580,7 @@ const View = ({
               isAdmin={isAdmin}
               aiReady={aiConfig?.aiReady || false}
               standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
+              getResultStorageId={getResultStorageId}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -600,7 +615,7 @@ export const ViewComponent = inject(
     settingsStore,
     aiRoomStore,
   }: TStore) => {
-    const { isResultTab } = aiRoomStore;
+    const { isResultTab, resultId } = aiRoomStore;
     const { aiConfig, standalone } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
@@ -743,6 +758,7 @@ export const ViewComponent = inject(
       aiConfig,
       standalone,
       isResultTab,
+      resultId,
     };
   },
 )(observer(View));

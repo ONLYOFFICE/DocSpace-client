@@ -64,6 +64,7 @@ const Buttons = ({
   // isLast,
   getIcon,
   messageIndex,
+  getResultStorageId,
 }: MessageButtonsProps) => {
   const { t } = useTranslation(["Common"]);
   const { roomId, findPreviousUserMessage } = useMessageStore();
@@ -196,7 +197,7 @@ const Buttons = ({
         <ExportSelector
           onCloseFolderSelector={onCloseFolderSelector}
           onSubmit={onExportMessage}
-          roomId={roomId}
+          currentFolderId={getResultStorageId() || roomId}
           getFileName={getExportedFileName}
           getIcon={getIcon}
           showFolderSelector={showFolderSelector}

@@ -54,6 +54,7 @@ const Chat = observer(
     isAdmin = false,
     standalone = false,
     aiReady = false,
+    getResultStorageId,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
@@ -65,6 +66,7 @@ const Chat = observer(
           selectedModel={selectedModel}
           isLoading={isLoadingChat}
           getIcon={getIcon}
+          getResultStorageId={getResultStorageId}
           roomId={roomId}
           aiReady={aiReady}
         />
@@ -80,6 +82,7 @@ const Chat = observer(
               userAvatar={userAvatar}
               isLoading={isLoadingChat}
               getIcon={getIcon}
+              getResultStorageId={getResultStorageId}
             />
             <ChatFooter
               attachmentFile={attachmentFile}

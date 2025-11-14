@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios, {
+  type InternalAxiosRequestConfig,
   type AxiosInstance,
   type AxiosRequestConfig,
   type AxiosResponse,
@@ -97,12 +98,6 @@ class AxiosClient {
       };
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
-    if (publicRoomKey) {
-      headers = { ...headers, "Request-Token": publicRoomKey };
-    }
-
     const apiBaseURL = combineUrl(origin, proxy, prefix);
     const paymentsURL = combineUrl(
       proxy,
@@ -130,6 +125,22 @@ class AxiosClient {
     });
 
     this.client = axios.create(apxiosConfig);
+
+    this.client.interceptors.request.use(
+      (config: InternalAxiosRequestConfig) => {
+        if (typeof window === "undefined") return config;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const publicRoomKey = urlParams.get("key") || urlParams.get("share");
+
+        if (publicRoomKey) {
+          config.headers = config.headers || {};
+          config.headers["Request-Token"] = publicRoomKey;
+        }
+
+        return config;
+      },
+    );
   };
 
   initSSR = (headersParam: Record<string, string>) => {

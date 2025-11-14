@@ -1,0 +1,21 @@
+{
+  "AIChat": "AI-Chat",
+  "CreateChat": "Vytvořit chat",
+  "CreateChatDescription": "Přejděte na záložku AI-Chat, abyste mohli začít.",
+  "EmptyKnowledgeDescription": "Soubory nahrané zde budou indexovány a použity jako kontext v záložce AI-Chat. Přidejte soubory, abyste se na ně zeptali AI, generovali obsah nebo společně analyzovali informace.",
+  "EmptyKnowledgeTitle": "Ještě nebyly nahrány žádné soubory.",
+  "EmptyResultsDescription": "Soubory generované v AI-Chat se zde automaticky zobrazí. Kdykoli vygenerujete obsah, zahájíte chat nebo odešlete zprávu s výstupem, výsledek bude uložen v této sekci.",
+  "EmptyResultsTitle": "Ještě žádné výsledky.",
+  "Knowledge": "Znalosti",
+  "KnowledgeDescription": "Nahrajte soubory z vašeho počítače nebo z {{productName}}, abyste poskytli lepší kontext pro chat. Upozornění: během konverzace mohou být některé nebo všechny nahrané soubory zobrazeny.",
+  "KnowledgeSelectIn": "Vybrat v {{productName}}",
+  "KnowledgeUnavailable": "Znalostní báze nedostupná",
+  "KnowledgeUnavailableDescription": "Znalostní báze je momentálně vypnuta. Pro aktivaci sémantického vyhledávání a zpracování dokumentů pro vaše AI agenty, prosím, nakonfigurujte poskytovatele embeddingů v nastavení {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Znalostní báze je momentálně deaktivovaná. Pro aktivaci sémantického vyhledávání a zpracování dokumentů pro AI agenty, kontaktujte prosím administrátora vašeho {{productName}}, aby nakonfiguroval poskytovatele embeddingů.",
+  "MCP": "MCP nástroje pro tuto místnost",
+  "Model": "Poskytovatel a model",
+  "ModelDescription": "Vyberte poskytovatele AI a model, který se bude používat v chatu v této místnosti. Toto nastavení je povinné a platí pro všechny účastníky.",
+  "ResultStorage": "Úložiště výsledků",
+  "UploadFilesDevice": "Nahrajte soubory z vašeho osobního zařízení.",
+  "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}"
+}

@@ -3,7 +3,7 @@
   "content": "Users invited",
   "content_en_sha1_hash": "72c2af47b22442f2b4c2dd3ce416b620691f6ca7",
   "created_at": "2025-05-19T21:30:49.475Z",
-  "updated_at": "2025-10-13T20:39:40.031Z",
+  "updated_at": "2025-11-03T12:10:35.050Z",
   "comment": {
     "text": "The \"UsersInvited\" translation key is used to display a success message when a user is invited. It is typically displayed after an invite button is clicked and the invitation is processed, providing feedback to the user that they have been successfully invited.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 354,
+      "line_number": 353,
       "context": "setIsNewUserByCurrentUser(true);\n }\n setIsLoading(false);\n \n onClose();\n toastr.success(t(\"Common:UsersInvited\"));\n \n if (result?.warning) {\n toastr.warning(result?.warning);\n }",
       "module": "/packages/client"
     }

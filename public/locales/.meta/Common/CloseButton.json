@@ -3,7 +3,7 @@
   "content": "Close",
   "content_en_sha1_hash": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
   "created_at": "2025-05-19T21:30:43.485Z",
-  "updated_at": "2025-09-23T07:24:24.081Z",
+  "updated_at": "2025-11-13T07:58:07.793Z",
   "comment": {
     "text": "This translation key is used for the label \"Close\", which represents a button that closes a dialog or modal window, found in various places such as buttons, dialogs, and modals.",
     "is_auto": true,
@@ -35,15 +35,27 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
-      "line_number": 170,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 203,
       "context": "))}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:CloseButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"service-backup-dialog-close-button\"\n />",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 224,
-      "context": "};\n \n if (SHOW_CLOSE && !sdkConfig?.isSDK) {\n newConfig.editorConfig.customization.close = {\n visible: SHOW_CLOSE,\n text: t(\"Common:CloseButton\"),\n };\n }\n }\n \n try {",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
+      "line_number": 152,
+      "context": "))}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:CloseButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"service-backup-dialog-close-button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/WebSearch/WebSearchDialog.tsx",
+      "line_number": 148,
+      "context": "))}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:CloseButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"service-backup-dialog-close-button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/hooks/useGoBackAndClose.ts",
+      "line_number": 92,
+      "context": "const close =\n showClose && !sdkConfig?.isSDK\n ? {\n visible: true,\n text: t(\"Common:CloseButton\"),\n }\n : undefined;\n \n return { goBack, close };\n };",
       "module": "/packages/doceditor"
     },
     {

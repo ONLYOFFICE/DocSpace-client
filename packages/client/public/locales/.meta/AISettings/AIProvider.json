@@ -1,0 +1,34 @@
+{
+  "key_path": "AIProvider",
+  "content": "AI provider",
+  "content_en_sha1_hash": "f81714b57309b6c32065a1d1c2804f1c4658bb33",
+  "created_at": "2025-10-27T16:14:31.638Z",
+  "updated_at": "2025-11-13T14:53:11.257Z",
+  "comment": {
+    "text": "This key refers to the title of a dialog or section related to AI providers within the AI settings page. It appears as the header of a modal window used for managing or adding AI providers. Translators should consider this as a label for an AI provider configuration element.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:56:47.165Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 114,
+      "context": "}, [standalone]);\n \n React.useEffect(() => {\n const titleKey =\n currentTabId === \"providers\"\n ? \"AISettings:AIProvider\"\n : currentTabId === \"search\"\n ? \"AISettings:Search\"\n : currentTabId === \"knowledge\"\n ? \"AIRoom:Knowledge\"\n : \"AISettings:MCPSettingTitle\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 223,
+      "context": "visible\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"AISettings:AIProvider\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <form className={styles.modalBody} onSubmit={onSubmit}>\n <FieldContainer\n labelText={t(\"AISettings:Provider\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

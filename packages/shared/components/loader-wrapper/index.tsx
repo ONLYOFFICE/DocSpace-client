@@ -39,6 +39,9 @@ export const LoaderWrapper = ({
         opacity: isLoading ? 0.5 : 1,
         pointerEvents: isLoading ? "none" : "auto",
         transition: "opacity 0.3s ease-in-out",
+        display: "flex",
+        flexDirection: "column",
+        flexGrow: 1,
       }}
       data-testid={testId}
     >

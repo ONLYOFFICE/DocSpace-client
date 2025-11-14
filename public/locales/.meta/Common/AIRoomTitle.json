@@ -1,0 +1,52 @@
+{
+  "key_path": "AIRoomTitle",
+  "content": "AI Room",
+  "content_en_sha1_hash": "15189d5504dae70713278091f6294af7e43dcc58",
+  "created_at": "2025-10-27T16:14:10.316Z",
+  "updated_at": "2025-11-13T07:58:07.946Z",
+  "comment": {
+    "text": "This key displays the title for the \"AI Room\" type of room. It appears as a label in UI elements like room filters and selection lists, indicating a room powered by AI functionality. Translators should ensure the term \"AI\" is appropriate for the target locale.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:53:56.494Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
+      "line_number": 48,
+      "context": "switch (room) {\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRooms\");\n \n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n \n case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1094,
+      "context": "case RoomsType.AIRoom:\n return {\n id: \"filter_type-ai\",\n key: RoomsType.AIRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:AIRoomTitle\"),\n };\n case RoomsType.CustomRoom:\n default:\n return {\n id: \"filter_type-custom\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
+      "line_number": 107,
+      "context": "roomType: RoomsType.CustomRoom,\n // dataTestId: \"room_type_custom_option\",\n },\n {\n key: \"room-type-ai\",\n label: t(\"Common:AIRoomTitle\"),\n roomType: RoomsType.AIRoom,\n },\n ];\n \n const [version, onSetVersion] = useState(sdkVersion[210]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
+      "line_number": 135,
+      "context": "label: t(\"Common:CustomRoomTitle\"),\n roomType: RoomsType.CustomRoom,\n },\n {\n key: \"room-type-ai\",\n label: t(\"Common:AIRoomTitle\"),\n roomType: RoomsType.AIRoom,\n },\n ];\n \n const filterOptions = [",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 19,
+      "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n default:",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

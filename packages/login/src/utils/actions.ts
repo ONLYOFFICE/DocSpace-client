@@ -349,6 +349,41 @@ export async function getUserByName() {
   }
 }
 
+export async function getUserByEncEmail(
+  userEncEmail: string,
+  confirmKey: string | null = null,
+) {
+  logger.debug(`Start GET /people/email?encemail=${userEncEmail}`);
+  try {
+    const [getUserByEmai] = await createRequest(
+      [`/people/email?encemail=${userEncEmail}`],
+      [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+      "GET",
+    );
+
+    const res = IS_TEST
+      ? selfHandler(null, await headers())
+      : await fetch(getUserByEmai);
+
+    if (!res.ok) {
+      logger.error(
+        `GET /people/email?encemail=${userEncEmail} failed: ${res.status}`,
+      );
+      return;
+    }
+
+    const user = await res.json();
+
+    if (user.response && user.response.displayName) {
+      user.response.displayName = Encoder.htmlDecode(user.response.displayName);
+    }
+
+    return user.response as TUser;
+  } catch (error) {
+    logger.error(`Error in getUserByEncEmail: ${error}`);
+  }
+}
+
 export async function getUserByEmail(
   userEmail: string,
   confirmKey: string | null = null,
@@ -719,6 +754,7 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
 
     if (!response.ok) {
       logger.error(`POST /authentication/confirm failed: ${response.status}`);
+
       throw new Error(response.statusText);
     }
 

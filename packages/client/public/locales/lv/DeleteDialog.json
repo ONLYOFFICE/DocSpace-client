@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Aģents <strong>\"{{agentName}}\"</strong> tiks izdzēsts pavisam. Visi dati un lietotāju piekļuves tiks zaudēti.",
+  "DeleteAIAgentTitle": "Dzēst šo aģentu?",
+  "DeleteAIAgentWarning": "Es saprotu sekmes un vēlos dzēst aģentu.",
   "DeleteAllGroupDescription": "Atlasītās grupas tiks izdzēstas. Grupu lietotāji netiks noņemti no {{productName}}. Vai tiešām vēlaties turpināt?",
   "DeleteAllGroupsTitle": "Izdzēst grupas",
   "DeleteFiles": "Jūs gatavojaties pārvietot <strong>failus ({{filesCount}})</strong> uz {{trashSection}}.",
@@ -11,6 +14,7 @@
   "DeleteGroupTitle": "Izdzēst grupu",
   "DeleteItem": "Jūs gatavojaties pārvietot <strong>{{name}}</strong> uz {{trashSection}}.",
   "DeleteItemForever": "Jūs gatavojaties dzēst <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Ņemiet vērā: ja tos kopīgojāt ar kādu personu, tas kļūs nepieejams.",
   "DeleteRoom": "Istaba <strong>\"{{roomName}}\"</strong> tiks izdzēsta pavisam. Visi dati un lietotāju piekļuves tiks zaudēti.",
   "DeleteRoomTitle": "Dzēst šo istabu?",
   "DeleteRoomWarning": "Es saprotu sekmes un vēlos dzēst istabu.",

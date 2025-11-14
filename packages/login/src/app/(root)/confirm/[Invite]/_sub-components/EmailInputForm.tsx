@@ -101,6 +101,7 @@ const EmailInputForm = ({
           onValidateInput={onValidate}
           forwardedRef={ref}
           onKeyDown={onKeyPress}
+          dataTestId="email-input-invite"
         />
       </FieldContainer>
       <Button

@@ -1,0 +1,28 @@
+{
+  "key_path": "ProviderRemovedSuccess",
+  "content": "Provider removed successfully",
+  "content_en_sha1_hash": "6337064d8abb2bd3b99d9352046154d90cde8e04",
+  "created_at": "2025-10-27T16:14:31.655Z",
+  "updated_at": "2025-11-03T12:10:35.151Z",
+  "comment": {
+    "text": "This key displays a success message confirming that an AI provider has been successfully removed. It appears in a toast notification after a user deletes an AI provider within the Portal Settings. Translators should ensure the message clearly conveys successful removal.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:21:20.003Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
+      "line_number": 67,
+      "context": "const onSubmit = async () => {\n try {\n await deleteAIProvider?.(providerId);\n await getAIConfig?.();\n \n toastr.success(t(\"AISettings:ProviderRemovedSuccess\"));\n } catch (error) {\n console.error(error);\n toastr.error(error as string);\n } finally {\n setLoading(false);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "key_path": "ResetSettings",
+  "content": "Reset settings",
+  "content_en_sha1_hash": "9ba8d6e6aaec0b4ced7d02008b670d094f276531",
+  "created_at": "2025-10-27T16:14:26.774Z",
+  "updated_at": "2025-11-13T10:21:17.836Z",
+  "comment": {
+    "text": "This key is used for the label on a button that restores settings to their default values. It appears on a button within the AI settings section of the portal, likely used to reset user preferences. Translators should ensure the translation clearly conveys the action of reverting to original settings.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T18:00:21.540Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/dialogs/reset/index.tsx",
+      "line_number": 72,
+      "context": "}\n };\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Settings:ResetSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans t={t} i18nKey=\"ResetKnowledgeDescription\" ns=\"AISettings\" />\n </Text>\n </ModalDialog.Body>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
+      "line_number": 303,
+      "context": "isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Settings:ResetSettings\")}\n scale={false}\n onClick={onRestoreToDefault}\n isDisabled={\n !knowledgeConfig ||\n knowledgeConfig?.type === KnowledgeType.None ||",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
+      "line_number": 72,
+      "context": "}\n };\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Settings:ResetSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans t={t} i18nKey=\"ResetWebSearchDescription\" ns=\"AISettings\" />\n </Text>\n </ModalDialog.Body>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 294,
+      "context": "isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Settings:ResetSettings\")}\n scale={false}\n onClick={onRestoreToDefault}\n isDisabled={\n !webSearchConfig ||\n webSearchConfig?.type === WebSearchType.None ||",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

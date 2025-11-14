@@ -1,0 +1,28 @@
+{
+  "key_path": "TextTranslationDescription",
+  "content": "Translate text into your desired language instantly, while maintaining meaning and context.",
+  "content_en_sha1_hash": "954dda0c7896ff45f12e05ff4d45a0cde79e46dd",
+  "created_at": "2025-11-03T12:10:29.468Z",
+  "updated_at": "2025-11-03T12:25:05.197Z",
+  "comment": {
+    "text": "Translate text into another language quickly and accurately, preserving its original meaning. This description appears within the AI Tools section of the Portal Settings, likely as part of a service listing. It helps users understand what the \"Text Translation\" feature does.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:25:05.197Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 134,
+      "context": "icon: <SummarizationIcon />,\n },\n {\n id: \"text-translation\",\n title: t(\"TextTranslation\"),\n description: t(\"TextTranslationDescription\"),\n icon: <TranslationIcon />,\n },\n {\n id: \"ocr\",\n title: t(\"OCR\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

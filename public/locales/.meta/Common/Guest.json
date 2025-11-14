@@ -3,7 +3,7 @@
   "content": "Guest",
   "content_en_sha1_hash": "face83ee3014bdc8f98203cc94e2e89222452e90",
   "created_at": "2025-05-19T21:30:45.686Z",
-  "updated_at": "2025-10-13T13:22:35.577Z",
+  "updated_at": "2025-11-03T12:10:35.002Z",
   "comment": {
     "text": "The translation key \"Common:Guest\" is used to display a text indicating that the user being referred to is a guest. This text is typically displayed in a dialog or UI element, such as an icon badge, to provide context for users.",
     "is_auto": true,
@@ -30,19 +30,19 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
-      "line_number": 206,
+      "line_number": 199,
       "context": ": filteredAccesses.find((option) => option.access === +access);\n \n const typeLabel = isEmailInvite\n ? roomId === -1 || isRolePaid\n ? getUserTypeTranslation(roomId !== -1 ? type : defaultAccess.type, t)\n : t(\"Common:Guest\")\n : defaultAccess?.type === EmployeeType.RoomAdmin &&\n type !== EmployeeType.Admin &&\n type !== EmployeeType.Owner\n ? getUserTypeTranslation(defaultAccess.type, t)\n : getUserTypeTranslation(type, t);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 339,
+      "line_number": 350,
       "context": "return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };\n \n export function clickBackdrop() {\n const elms = document.getElementsByClassName(",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 339,
+      "line_number": 350,
       "context": "return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };\n \n export function clickBackdrop() {\n const elms = document.getElementsByClassName(",
       "module": "/packages/shared"
     }

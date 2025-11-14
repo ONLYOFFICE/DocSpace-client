@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Агентът <strong>\"{{agentName}}\"</strong> ще бъде изтрит необратимо. Всички данни и потребителски достъпи ще бъдат загубени.",
+  "DeleteAIAgentTitle": "Изтриване на този агент?",
+  "DeleteAIAgentWarning": "Разбирам последиците и искам да изтрия агента.",
   "DeleteAllGroupDescription": "Избраните групи ще бъдат изтрити. Потребителите в групите няма да бъдат премахнати от {{productName}}. Сигурни ли сте, че искате да продължите?",
   "DeleteAllGroupsTitle": "Изтрий групи",
   "DeleteFiles": "Предстои да преместите <strong>файлове ({{filesCount}})</strong> в {{trashSection}}.",
@@ -11,6 +14,7 @@
   "DeleteGroupTitle": "Изтрий група",
   "DeleteItem": "Предстои да преместите <strong>{{name}}</strong> в {{trashSection}}.",
   "DeleteItemForever": "Ще изтриете <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Молим да имате предвид, че ако сте ги споделили с някого, те ще станат недостъпни.",
   "DeleteRoom": "Стаята <strong>{{roomName}}</strong> ще бъде изтрита необратимо. Всички данни и потребителски достъпи ще бъдат загубени.",
   "DeleteRoomTitle": "Изтриване на тази стая?",
   "DeleteRoomWarning": "Разбирам последиците и искам да изтрия стаята.",

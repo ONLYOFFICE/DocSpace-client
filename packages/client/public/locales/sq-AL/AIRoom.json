@@ -1,0 +1,18 @@
+{
+  "AIChat": "Bisedë - IA",
+  "CreateChat": "Krijoni bisedë",
+  "CreateChatDescription": "Shkoni te skeda Bisedë - IA për të filluar.",
+  "EmptyKnowledgeDescription": "Skedarët e ngarkuar këtu do të indeksohen dhe do të përdoren si kontekst në skedën Bisedë - IA. Shtoni skedarë për të pyetur IA-në rreth tyre, për të gjeneruar përmbajtje ose për të analizuar informacionin së bashku.",
+  "EmptyKnowledgeTitle": "Nuk ka ende skedarë të ngarkuar",
+  "EmptyResultsDescription": "Skedarët e gjeneruar në Bisedë - IA do të shfaqen këtu automatikisht. Sa herë që gjeneroni përmbajtje, filloni një bisedë ose dërgoni një mesazh me rezultat, rezultati do të ruhet në këtë seksion.",
+  "EmptyResultsTitle": "Nuk ka ende rezultate",
+  "Knowledge": "Njohuri",
+  "KnowledgeDescription": "Ngarko skedarë nga kompjuteri yt ose {{productName}} për të ofruar kontekst më të mirë për bisedën. Shënim: një pjesë ose e gjithë përmbajtja e ngarkuar mund të ekspozohet gjatë bisedës.",
+  "KnowledgeSelectIn": "Zgjidh në {{productName}}",
+  "MCP": "Mjetet MCP për këtë dhomë",
+  "Model": "Ofruesi dhe modeli",
+  "ModelDescription": "Zgjidh ofruesin dhe modelin e inteligjencës artificiale që do të përdoret në bisedat e kësaj dhome. Ky cilësim është i detyrueshëm dhe zbatohet për të gjithë pjesëmarrësit.",
+  "ResultStorage": "Ruajtja e rezultateve",
+  "UploadFilesDevice": "Ngarko skedarë nga pajisja jote personale",
+  "UploadFilesPortal": "Ngarko skedarë nga {{sectionNameFirst}} ose {{sectionNameSecond}}"
+}

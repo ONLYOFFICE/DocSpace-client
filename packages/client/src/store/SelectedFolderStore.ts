@@ -26,7 +26,7 @@
 
 import { makeAutoObservable } from "mobx";
 
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import {
   FolderType,
@@ -65,7 +65,7 @@ export type TNavigationPath = {
   shared: boolean;
 };
 
-type ExcludeTypes = SettingsStore | ((...args: any[]) => any);
+type ExcludeTypes = SettingsStore | CallableFunction;
 
 export type TSelectedFolder = NonFunctionProperties<
   SelectedFolderStore,
@@ -107,6 +107,10 @@ class SelectedFolderStore {
   updated: Date | null = null;
 
   updatedBy: TCreatedBy | null = null;
+
+  ownedBy: TCreatedBy | null = null;
+
+  sharedBy: TCreatedBy | null = null;
 
   rootFolderType: FolderType | null = null;
 
@@ -176,6 +180,14 @@ class SelectedFolderStore {
 
   passwordProtected: boolean = false;
 
+  chatSettings:
+    | { modelId: string; providerId: number; prompt: string }
+    | undefined;
+
+  rootRoomType: Nullable<RoomsType> = null;
+
+  rootRoomId: number | string = "";
+
   shareSettings: TShareSettings | null = null;
 
   availableShareRights: Nullable<TAvailableShareRights> = null;
@@ -213,6 +225,7 @@ class SelectedFolderStore {
       pinned: this.pinned,
       isRoom: this.isRoom,
       isTemplate: this.isTemplate,
+      isAIAgent: this.isAIAgent,
       logo: this.logo,
       tags: this.tags,
       rootFolderId: this.rootFolderId,
@@ -238,9 +251,15 @@ class SelectedFolderStore {
       external: this.external,
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
+      isAIRoom: this.isAIRoom,
+      chatSettings: this.chatSettings,
+      rootRoomType: this.rootRoomType,
+      rootRoomId: this.rootRoomId,
       shareSettings: this.shareSettings,
       availableShareRights: this.availableShareRights,
       parentShared: this.parentShared,
+      ownedBy: this.ownedBy,
+      sharedBy: this.sharedBy,
     };
   };
 
@@ -294,9 +313,14 @@ class SelectedFolderStore {
     this.watermark = null;
     this.passwordProtected = false;
     this.external = false;
+    this.chatSettings = undefined;
+    this.rootRoomType = null;
+    this.rootRoomId = "";
     this.shareSettings = null;
     this.availableShareRights = null;
     this.parentShared = false;
+    this.ownedBy = null;
+    this.sharedBy = null;
   };
 
   setFilesCount = (filesCount: number) => {
@@ -473,6 +497,18 @@ class SelectedFolderStore {
       this.setChangeDocumentsTabs(false);
     }
   };
+
+  get isAIRoom() {
+    return (
+      this.roomType === RoomsType.AIRoom ||
+      this.navigationPath.some((r) => r.roomType === RoomsType.AIRoom) ||
+      this.rootRoomType === RoomsType.AIRoom
+    );
+  }
+
+  get isAIAgent() {
+    return this.roomType === RoomsType.AIRoom;
+  }
 }
 
 export default SelectedFolderStore;

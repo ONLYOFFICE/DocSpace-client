@@ -3,19 +3,13 @@
   "content": "Sync LDAP data",
   "content_en_sha1_hash": "eacc43f7e59fe313e63f3f6f031fcc75dac16efb",
   "created_at": "2025-05-19T21:30:54.316Z",
-  "updated_at": "2025-08-11T18:11:59.196Z",
+  "updated_at": "2025-10-27T16:14:33.453Z",
   "comment": {
     "text": "This translation key is used for the title \"Sync LDAP data\" and appears as a page title in the Portal Settings. It provides context for users navigating to the synchronization settings within LDAP integration.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:41:57.662Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 225,
-      "context": "case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
       "line_number": 61,
@@ -32,6 +26,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
       "line_number": 68,
       "context": "if (newUrl) navigate(newUrl);\n }\n };\n \n React.useEffect(() => {\n isMobileView && setDocumentTitle(t(\"Ldap:LdapSyncTitle\"));\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n \n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 231,
+      "context": "case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":",
       "module": "/packages/client"
     },
     {

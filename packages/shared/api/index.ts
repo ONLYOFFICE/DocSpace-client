@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import Filter from "./people/filter";
@@ -46,6 +45,7 @@ import * as oauth from "./oauth";
 import * as debuginfo from "./debuginfo";
 import * as apiKeys from "./api-keys";
 import * as backup from "./backup";
+import * as ai from "./ai";
 
 export default {
   Filter,
@@ -67,4 +67,5 @@ export default {
   management,
   debuginfo,
   apiKeys,
+  ai,
 };

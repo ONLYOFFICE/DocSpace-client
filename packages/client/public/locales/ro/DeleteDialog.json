@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Agentul <strong>\"{{agentName}}\"</strong> va fi șters definitiv. Toate datele și conectările utilizatorilor se vor pierde.",
+  "DeleteAIAgentTitle": "Doriți să ștergeți acest agent?",
+  "DeleteAIAgentWarning": "Confirm că înțeleg efectele și doresc să șterg acest agent",
   "DeleteAllGroupDescription": "Grupurile selectate vor fi șterse. Utilizatorii care fac parte din grupurile nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
   "DeleteAllGroupsTitle": "Ștergere grup",
   "DeleteFiles": "Sunteți pe cale să mutați <strong>fișiere ({{filesCount}})</strong> în {{trashSection}}.",
@@ -11,6 +14,7 @@
   "DeleteGroupTitle": "Ștergere grup",
   "DeleteItem": "Sunteți pe cale să mutați <strong>{{name}}</strong> în {{trashSection}} de gunoi.",
   "DeleteItemForever": "Sunteți pe cale să ștergeți <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Rețineți că, dacă le-ați partajat cu altcineva, aceste vor deveni indisponibile.",
   "DeleteRoom": "Sala <strong>\"{{roomName}}\"</strong> va fi ștearsă definitiv. Toate datele  și conectările utilizatorilor se vor pierde.",
   "DeleteRoomTitle": "Doriți să ștergeți această sală?",
   "DeleteRoomWarning": "Confirm că înțeleg efectele și doresc să șterg sala",

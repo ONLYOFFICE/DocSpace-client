@@ -35,6 +35,8 @@ import type {
 } from "@docspace/shared/enums";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
+import { AuthStore } from "@docspace/shared/store/AuthStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export type UploadType = "pdf" | "file" | "folder";
 
@@ -79,6 +81,7 @@ export interface InjectedEmptyViewContainerProps
       TStore["dialogsStore"],
       | "setSelectFileFormRoomDialogVisible"
       | "setQuotaWarningDialogVisible"
+      | "setSelectFileAiKnowledgeDialogVisible"
       | "setTemplateAccessSettingsVisible"
     >,
     Pick<
@@ -99,6 +102,12 @@ export interface InjectedEmptyViewContainerProps
   isVisitor?: boolean;
   isFrame?: boolean;
   logoText: string;
+  isKnowledgeTab?: boolean;
+  isResultsTab?: boolean;
+  isAIRoom?: boolean;
+  isPortalAdmin: AuthStore["isAdmin"];
+  aiReady?: boolean;
+  standalone: SettingsStore["standalone"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &
@@ -114,9 +123,10 @@ export type OptionActions = {
     t?: TTranslation,
   ) => void;
   uploadFromDocspace: (
-    filterParam: FilesSelectorFilterTypes | FilterType,
+    filterParam: FilesSelectorFilterTypes | FilterType | string,
     openRoot?: boolean,
   ) => void;
+  uploadFromDocspaceAiKnowledge: VoidFunction;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;
@@ -124,4 +134,7 @@ export type OptionActions = {
   inviteRootUser: ContactsConextOptionsStore["inviteUser"];
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
+  onCreateAIAgent: VoidFunction;
+  onGoToServices: VoidFunction;
+  onGoToAIProviderSettings: VoidFunction;
 };

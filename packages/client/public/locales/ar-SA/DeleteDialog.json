@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "سيتم حذف الوكيل <strong>\"{{agentName}}\"</strong> نهائيًا. سيتم فقدان جميع البيانات ووصول المستخدمين.",
+  "DeleteAIAgentTitle": "هل تريدون حذف هذا الوكيل؟",
+  "DeleteAIAgentWarning": "أنا أفهم العواقب وأريد حذف الوكيل",
   "DeleteAllGroupDescription": "سيتم حذف المجموعات المحددة. لن تتم إزالة المستخدمين في المجموعات من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteAllGroupsTitle": "حذف المجموعات",
   "DeleteFiles": "أنتم على وشك نقل <strong>ملفات ({{filesCount}})</strong> إلى {{trashSection}}.",
@@ -11,6 +14,7 @@
   "DeleteGroupTitle": "حذف المجموعة",
   "DeleteItem": "أنتم على وشك نقل <strong>{{name}}</strong> إلى {{trashSection}}. ",
   "DeleteItemForever": "أنتم على وشك حذف <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "يرجى العلم أنه إذا قمت بمشاركتهم مع أحدهم؛ فسيصبحوا غير متاحين.",
   "DeleteRoom": "سيتم حذف الغرفة <strong>\"\"{{roomName}}\"\"</strong> نهائيًا. ستفقدون جميع البيانات وصلاحيات وصول المستخدم. ",
   "DeleteRoomTitle": "هل تريدون حذف هذه الغرفة؟ ",
   "DeleteRoomWarning": "أنا أفهم العواقب وأريد حذف الغرفة ",

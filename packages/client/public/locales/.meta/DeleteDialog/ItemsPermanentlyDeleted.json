@@ -3,7 +3,7 @@
   "content": "These items will be permanently removed from the {{trashSection}}.",
   "content_en_sha1_hash": "210f25353b01ba80b5f4ad5b6e8835425939e450",
   "created_at": "2025-10-01T15:20:12.341Z",
-  "updated_at": "2025-10-01T15:20:17.766Z",
+  "updated_at": "2025-11-03T12:10:34.993Z",
   "comment": {
     "text": "This text explains that selected items will be permanently removed from the trash section. It appears within a confirmation dialog used when permanently deleting files and folders. Translators should ensure the wording accurately conveys the irreversible nature of the action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 133,
-      "context": "<Trans t={t} i18nKey=\"DeleteFilesAndFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {t(\"ItemsPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );",
+      "line_number": 152,
+      "context": "You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? t(\"ItemsPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
       "module": "/packages/client"
     }
   ],

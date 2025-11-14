@@ -33,6 +33,7 @@ interface ImageViewerProps {
   src?: string;
   thumbnailSrc?: string;
   isDecodedImage?: boolean;
+  isAnimatedImage?: boolean;
   imageId: number;
   version: number;
   errorTitle: string;

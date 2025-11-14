@@ -1,0 +1,28 @@
+{
+  "key_path": "ErrorChecking",
+  "content": "Error checking",
+  "content_en_sha1_hash": "f5c2b7865df76e15d4c3b162675500c5f27ce98d",
+  "created_at": "2025-11-03T12:10:29.443Z",
+  "updated_at": "2025-11-03T12:28:30.736Z",
+  "comment": {
+    "text": "This text represents an \"Error Checking\" feature within the AI Service Dialog. It's displayed as a section, likely in a list or panel, to describe a specific functionality related to error detection and validation. Translators should ensure the translation accurately conveys this error checking aspect of the AI service.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:28:30.736Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 157,
+      "context": "description: t(\"ImageGenerationDescription\"),\n icon: <ImageGenerationIcon />,\n },\n {\n id: \"error-checking\",\n title: t(\"ErrorChecking\"),\n description: t(\"ErrorCheckingDescription\"),\n icon: <ListIcon />,\n },\n {\n id: \"and-more\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

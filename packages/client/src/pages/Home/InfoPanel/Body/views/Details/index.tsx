@@ -31,7 +31,7 @@ import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
-import { FileType } from "@docspace/shared/enums";
+import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
@@ -73,6 +73,8 @@ type DetailsProps = {
   onCreateRoomFromTemplate?: FilesActionStore["onCreateRoomFromTemplate"];
 
   isDefaultRoomsQuotaSet?: boolean;
+  isDefaultAIAgentsQuotaSet?: boolean;
+  isAIAgentsFolderRoot?: boolean;
 
   getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
 
@@ -92,6 +94,9 @@ const Details = ({
   selectTag,
   isArchive,
   isDefaultRoomsQuotaSet,
+  isDefaultAIAgentsQuotaSet,
+  isAIAgentsFolderRoot,
+
   getLogoCoverModel,
   onChangeFile,
   roomLifetime,
@@ -120,11 +125,27 @@ const Details = ({
     culture: culture!,
     selectTag: selectTag!,
     isDefaultRoomsQuotaSet: isDefaultRoomsQuotaSet!,
+    isDefaultAIAgentsQuotaSet: isDefaultAIAgentsQuotaSet!,
+    isAIAgentsFolder: isAIAgentsFolderRoot!,
     roomLifetime: roomLifetime!,
   });
 
   const createThumbnailAction = useCallback(async () => {
-    setItemProperties(detailsHelper.getPropertyList());
+    let property = detailsHelper.getPropertyList();
+
+    const isAgent =
+      selection &&
+      "rootFolderType" in selection &&
+      "roomType" in selection &&
+      selection.roomType &&
+      selection.rootFolderType === FolderType.AIAgents;
+
+    if (isAgent)
+      property = property.filter((item) => {
+        return item.id !== "Type";
+      });
+
+    setItemProperties(property);
 
     if (
       "isFolder" in selection &&
@@ -296,6 +317,7 @@ export default inject(
     dialogsStore,
     avatarEditorDialogStore,
     selectedFolderStore,
+    treeFoldersStore,
   }: TStore) => {
     const { getInfoPanelItemIcon, openUser, infoPanelRoomSelection } =
       infoPanelStore;
@@ -309,8 +331,10 @@ export default inject(
     const isVisitor = user?.isVisitor;
     const isCollaborator = user?.isCollaborator;
 
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { isDefaultRoomsQuotaSet, isDefaultAIAgentsQuotaSet } =
+      currentQuotaStore;
 
+    const { isAIAgentsFolderRoot } = treeFoldersStore;
     return {
       culture,
       createThumbnail,
@@ -320,6 +344,8 @@ export default inject(
       isCollaborator,
       selectTag,
       isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
+      isAIAgentsFolderRoot,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
       onChangeFile: avatarEditorDialogStore.onChangeFile,
       roomLifetime:

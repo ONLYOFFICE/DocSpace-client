@@ -3,7 +3,7 @@
   "content": "See rooms details here",
   "content_en_sha1_hash": "0868f0cffa8c40cb52860e0077cc8801cd13670e",
   "created_at": "2025-05-19T21:30:54.947Z",
-  "updated_at": "2025-08-04T07:30:01.205Z",
+  "updated_at": "2025-11-03T12:10:35.092Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that there are no rooms available. It appears on an empty screen in a user interface, likely below a gallery of images or a list of available rooms. The goal is to provide clarity and transparency about room availability.",
     "is_auto": true,

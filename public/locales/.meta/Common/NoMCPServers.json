@@ -1,0 +1,28 @@
+{
+  "key_path": "NoMCPServers",
+  "content": "No MCP servers connected yet",
+  "content_en_sha1_hash": "9582e2f7bae7ec6bdc5f76bdc2dd2a83ce77a918",
+  "created_at": "2025-10-27T16:14:24.349Z",
+  "updated_at": "2025-11-13T10:21:18.103Z",
+  "comment": {
+    "text": "This text appears on an empty screen when no Minecraft server connections are available. It informs the user that no MCP servers are currently connected, and is used within a selector component. Translators should ensure the message conveys the lack of server connections clearly.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:32:24.653Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
+      "line_number": 169,
+      "context": "<Selector\n items={servers}\n emptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\")}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n searchEmptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -135,7 +135,7 @@ const getChannelContent = (
         href={`${THIRD_PARTY_SERVICES_URL}${type}`}
         target={LinkTarget.blank}
       >
-        {t("GoToSettings")}
+        {t("Common:GoToSettings")}
       </Link>
     );
   }

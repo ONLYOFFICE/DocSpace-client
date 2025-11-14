@@ -39,6 +39,7 @@ import { StyledStatistics, StyledMainTitle } from "./StyledComponent";
 
 import RoomsList from "./sub-components/RoomsList";
 import UsersList from "./sub-components/UsersList";
+import AIAgentList from "./sub-components/AIAgentList.js";
 
 const buttonProps = {
   className: "button-element",
@@ -116,6 +117,12 @@ const StatisticsComponent = (props) => {
             iconElement={iconElement}
           />
           <UsersList
+            buttonProps={buttonProps}
+            textElement={textElement}
+            quotaElement={quotaElement}
+            iconElement={iconElement}
+          />
+          <AIAgentList
             buttonProps={buttonProps}
             textElement={textElement}
             quotaElement={quotaElement}

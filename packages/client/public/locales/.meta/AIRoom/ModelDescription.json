@@ -1,0 +1,28 @@
+{
+  "key_path": "ModelDescription",
+  "content": "Select the AI provider and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
+  "content_en_sha1_hash": "9c83f4e388800821fb37bb548ebf8d40e545620b",
+  "created_at": "2025-10-27T16:14:31.671Z",
+  "updated_at": "2025-11-13T14:53:11.147Z",
+  "comment": {
+    "text": "This text explains that users must select an AI provider and model for the chat room, and this selection applies to everyone participating. It appears within the AI room settings dialog, providing context for the model selection process.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:59:24.102Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Model.tsx",
+      "line_number": 272,
+      "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"ModelDescription\")}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

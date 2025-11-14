@@ -1,0 +1,28 @@
+{
+  "key_path": "MCPSettingTitle",
+  "content": "MCP servers",
+  "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
+  "created_at": "2025-10-27T16:14:31.640Z",
+  "updated_at": "2025-11-06T18:29:15.765Z",
+  "comment": {
+    "text": "This key displays the title \"MCP servers\" in the AI Settings section of the Portal Settings. It's used as a tab title within the settings panel, indicating a section related to MCP server configurations. Translators should ensure the translation accurately reflects the content of this settings area.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:24:48.878Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 119,
+      "context": "? \"AISettings:AIProvider\"\n : currentTabId === \"search\"\n ? \"AISettings:Search\"\n : currentTabId === \"knowledge\"\n ? \"AIRoom:Knowledge\"\n : \"AISettings:MCPSettingTitle\";\n setDocumentTitle(t(titleKey));\n }, [t, currentTabId]);\n \n const serversData = [\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -25,26 +25,34 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { Trans } from "react-i18next";
 import styled from "styled-components";
 
-import AccountsIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
+import SharedOutlineIcon from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
+import GroupsIcon from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
+import MembersIcon from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 import RoomsIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import PortfolioIcon from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.svg?url";
 import ProjectsIcon from "PUBLIC_DIR/images/icons/16/catalog.projects.react.svg?url";
 import DocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
+import {
+  ImportOptionsKey,
+  ImportOptionsType,
+} from "SRC_DIR/store/ImportAccountsStore";
+
 import ImportSection from "../sub-components/ImportSection";
-import { ImportStepProps, InjectedImportStepProps } from "../types";
+import {
+  ImportOptionsKeys,
+  ImportStepProps,
+  InjectedImportStepProps,
+} from "../types";
 import { MigrationButtons } from "../sub-components/MigrationButtons";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
-
-  .save-cancel-buttons {
-    margin-top: 4px;
-  }
+  gap: 20px;
 `;
 
 const ImportStep = (props: ImportStepProps) => {
@@ -53,8 +61,7 @@ const ImportStep = (props: ImportStepProps) => {
     serviceName,
     usersExportDetails,
     personalExportDetails,
-    sharedFilesExportDetails,
-    sharedFoldersExportDetails,
+    sharedFilesAndFoldersExportDetails,
     hasCommonFiles = false,
     hasProjectFiles = false,
 
@@ -74,13 +81,31 @@ const ImportStep = (props: ImportStepProps) => {
     setCancelUploadDialogVisible,
   } = props as InjectedImportStepProps;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    name: ImportOptionsKey,
+  ) => {
+    const newImportOptions: Partial<ImportOptionsType> = {};
     const checked = e.target.checked;
-    setImportOptions({ [name]: checked });
-  };
 
-  const users =
-    t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
+    switch (name) {
+      case ImportOptionsKeys.ImportPersonalFiles:
+        {
+          newImportOptions[name] = checked;
+          const sharedFilesAndFolderValue =
+            importOptions[ImportOptionsKeys.ImportSharedFilesAndFolders];
+
+          newImportOptions[ImportOptionsKeys.ImportSharedFilesAndFolders] =
+            sharedFilesAndFolderValue ? checked : sharedFilesAndFolderValue;
+        }
+        break;
+      default:
+        newImportOptions[name] = checked;
+        break;
+    }
+
+    setImportOptions({ ...newImportOptions });
+  };
 
   const onCancelMigration = () => {
     cancelMigration();
@@ -98,7 +123,7 @@ const ImportStep = (props: ImportStepProps) => {
     <Wrapper>
       <ImportSection
         isChecked
-        sectionName={users}
+        sectionName={t("InfoPanel:Users")}
         description={t("Settings:UsersSectionDescription")}
         exportSection={{
           sectionName: usersExportDetails.name,
@@ -106,9 +131,9 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: usersExportDetails.icon,
         }}
         importSection={{
-          sectionName: t("Common:Contacts"),
+          sectionName: t("Common:Members"),
           workspace: t("Common:ProductName"),
-          sectionIcon: AccountsIcon,
+          sectionIcon: MembersIcon,
         }}
         isDisabled
         dataTestId="import_users_section"
@@ -118,18 +143,28 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importGroups}
         onChange={(e) => onChange(e, "importGroups")}
         sectionName={t("Common:Groups")}
-        description={t("Settings:GroupsDescription", {
-          serviceName,
-          contactsName: t("Common:Contacts"),
-        })}
+        description={
+          <Trans
+            t={t}
+            i18nKey="GroupsSectionDescription"
+            ns="Settings"
+            values={{
+              serviceName,
+              sectionName: t("Common:Contacts"),
+            }}
+            components={{
+              1: <span />,
+            }}
+          />
+        }
         exportSection={{
           sectionName: t("Common:Groups"),
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: t("Common:Contacts"),
+          sectionName: t("Common:Groups"),
           workspace: t("Common:ProductName"),
-          sectionIcon: AccountsIcon,
+          sectionIcon: GroupsIcon,
         }}
         isDisabled={false}
         dataTestId="import_groups_section"
@@ -139,16 +174,27 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importPersonalFiles}
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
-        description={t("Settings:ImportFilesLocation", {
-          sectionName: t("Common:MyDocuments"),
-        })}
+        description={
+          <Trans
+            t={t}
+            i18nKey="ImportFilesDescription"
+            ns="Settings"
+            values={{
+              serviceName,
+              sectionName: t("Common:MyDocuments"),
+            }}
+            components={{
+              1: <span />,
+            }}
+          />
+        }
         exportSection={{
           sectionName: personalExportDetails.name,
           workspace: serviceName,
           sectionIcon: personalExportDetails.icon,
         }}
         importSection={{
-          sectionName: t("Common:Documents"),
+          sectionName: t("Common:MyDocuments"),
           workspace: t("Common:ProductName"),
           sectionIcon: DocumentsIcon,
         }}
@@ -157,45 +203,52 @@ const ImportStep = (props: ImportStepProps) => {
       />
 
       <ImportSection
-        isChecked={importOptions.importSharedFiles}
-        onChange={(e) => onChange(e, "importSharedFiles")}
-        sectionName={t("Settings:SharedFiles")}
-        description={t("Settings:SharedFilesImportLocation", {
-          sectionName: t("Common:MyDocuments"),
-        })}
+        isChecked={importOptions.importSharedFilesAndFolders}
+        onChange={(e) => onChange(e, "importSharedFilesAndFolders")}
+        sectionName={t("Settings:SharedFilesAndFolders")}
+        description={
+          <Trans
+            t={t}
+            i18nKey="SharedFilesAndFoldersDescription"
+            ns="Settings"
+            values={{
+              sectionName: t("Common:SharedWithMe"),
+            }}
+            components={{
+              1: <span />,
+            }}
+          />
+        }
         exportSection={{
-          sectionName: sharedFilesExportDetails.name,
+          sectionName: sharedFilesAndFoldersExportDetails.name,
           workspace: serviceName,
-          sectionIcon: sharedFilesExportDetails.icon,
+          sectionIcon: sharedFilesAndFoldersExportDetails.icon,
         }}
         importSection={{
-          sectionName: t("Common:Documents"),
+          sectionName: t("Common:SharedWithMe"),
           workspace: t("Common:ProductName"),
-          sectionIcon: DocumentsIcon,
+          sectionIcon: SharedOutlineIcon,
         }}
-        isDisabled={false}
-        dataTestId="import_shared_files_section"
+        isDisabled={!importOptions.importPersonalFiles}
+        getTooltipContent={() => (
+          <Trans
+            t={t}
+            i18nKey="ImportSectionDisabled"
+            ns="Settings"
+            values={{
+              importSectionName: t(
+                "Settings:SharedFilesAndFolders",
+              ).toLocaleLowerCase(),
+              sectionName: t("Settings:PersonalFiles"),
+            }}
+            components={{
+              1: <b />,
+            }}
+          />
+        )}
+        dataTestId="import_shared_files_and_folders_section"
       />
-      <ImportSection
-        isChecked={importOptions.importSharedFolders}
-        onChange={(e) => onChange(e, "importSharedFolders")}
-        sectionName={t("Settings:SharedFolders")}
-        description={t("Settings:FolderToRoomImportNote", {
-          sectionName: t("Common:Rooms"),
-        })}
-        exportSection={{
-          sectionName: sharedFoldersExportDetails.name,
-          workspace: serviceName,
-          sectionIcon: sharedFoldersExportDetails.icon,
-        }}
-        importSection={{
-          sectionName: t("Common:Rooms"),
-          workspace: t("Common:ProductName"),
-          sectionIcon: RoomsIcon,
-        }}
-        isDisabled={false}
-        dataTestId="import_shared_folders_section"
-      />
+
       {hasCommonFiles ? (
         <ImportSection
           isChecked={importOptions.importCommonFiles}
@@ -203,6 +256,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionName={t("Common:CommonFiles")}
           description={t("Settings:CommonFilesDescription", {
             user: user?.displayName,
+            productName: t("Common:ProductName"),
           })}
           exportSection={{
             sectionName: t("Common:Common"),

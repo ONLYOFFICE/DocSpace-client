@@ -70,9 +70,9 @@ export const PasswordRow = ({
     updateDownloadedFilePassword(item.id, password, type);
   }, [item.id, onInputClick, password, type, updateDownloadedFilePassword]);
 
-  const onChangePassword = (pwd: string) => {
+  const onChangePassword = useCallback((pwd: string) => {
     setPassword(pwd);
-  };
+  }, []);
 
   const onChangeInOriginal = () => {
     if (!isFile(item)) return;

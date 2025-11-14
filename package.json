@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "3.5.0",
+  "version": "4.0.0",
   "private": true,
   "engines": {
     "node": ">=22",
@@ -22,7 +22,8 @@
     "storybook-serve": "pnpm nx storybook-serve @docspace/shared",
     "test": "pnpm nx test @docspace/shared",
     "wipe": "pnpm nx reset && shx rm -rf node_modules pnpm-lock.yaml packages/**/node_modules",
-    "licenses-audit": "pnpm licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
+    "licenses-audit": "node scripts/check-licenses.js",
+    "licenses-aggregate": "node scripts/aggregate-licenses.js",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
@@ -33,26 +34,30 @@
   "devDependencies": {
     "@types/node": "24.3.0",
     "@types/react-text-mask": "5.4.14",
+    "babel-plugin-react-compiler": "^1.0.0",
     "he": "1.2.0",
     "lefthook": "^1.13.0",
     "madge": "8.0.0",
     "nx": "21.5.2",
-    "react": "19.1.1",
+    "react": "19.2.0",
     "shx": "0.4.0",
     "terser": "5.43.1",
     "ts-node": "10.9.2",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3"
   },
-  "packageManager": "pnpm@10.15.1",
+  "packageManager": "pnpm@10.20.0",
   "resolutions": {
-    "@types/react": "19.1.4",
-    "@types/react-dom": "19.1.5",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
     "nth-check": "2.1.1"
   },
   "pnpm": {
     "overrides": {
-      "pnpm": "^10.15.1",
-      "on-headers": "^1.1.0"
+      "pnpm": "^10.20.0",
+      "on-headers": "^1.1.0",
+      "@types/react": "19.2.2",
+      "@types/react-dom": "19.2.2",
+      "koa": ">=2.16.3"
     }
   }
 }

@@ -88,6 +88,7 @@
   "Payer": "Ödəyici",
   "PayerDescription": "Bu istifadəçi ödəniş təfərrüatlarına daxil ola bilər və kvota təyin edib ödəniş edə bilən yeganə istifadəçidir. {{productName}} sahibi və ödəniş meneceri özləri Stripe müştəri portalından istifadə edərək ödəniş meneceri rolunu yenidən təyin edə bilərlər.",
   "PaymentMethod": "Ödəniş üsulu",
+  "PerAITools": "tokenə görə {{currency}}",
   "PerBackup": "{{currency}} per 1 ehtiyat nüsxə",
   "PerBackupWithBracket": "({{currency}} per 1 ehtiyat nüsxə))",
   "PerStorage": "{{currency}} hər {{amount}}/ay",

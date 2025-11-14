@@ -22,3 +22,9 @@ pre-push:
       follow: true
       skip_on_fail: false
       fail_text: See report ./common/tests/reports/tests-results.html
+    unit-tests:
+      run: pnpm run test
+      skip_empty: true
+      follow: true
+      skip_on_fail: false
+      fail_text: See report cd packages/shared && pnpm run test:open-report

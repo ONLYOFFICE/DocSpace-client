@@ -1,0 +1,18 @@
+{
+  "AIChat": "AI 对话",
+  "CreateChat": "创建对话",
+  "CreateChatDescription": "请前往 AI 对话标签页开始使用。",
+  "EmptyKnowledgeDescription": "此处上传的文件将被建立索引，并作为 AI 对话标签页的上下文信息。添加文件后可向 AI 提问、生成内容或共同分析信息。",
+  "EmptyKnowledgeTitle": "暂未上传文件",
+  "EmptyResultsDescription": "AI 对话中生成的文件将自动显示在此处。每当您生成内容、开启对话或发送带有输出的消息时，结果都会保存在此。",
+  "EmptyResultsTitle": "暂无结果",
+  "Knowledge": "知识库",
+  "KnowledgeDescription": "从您的计算机或{{productName}}上传文件，为对话提供上下文。注意：部分或全部上传内容可能会在对话期间显示。",
+  "KnowledgeSelectIn": "在{{productName}}中选择",
+  "MCP": "此房间的 MCP 工具",
+  "Model": "提供商和模型",
+  "ModelDescription": "选择本房间对话使用的 AI 提供商与模型。此为必填设置，对所有参与者生效。",
+  "ResultStorage": "结果存储",
+  "UploadFilesDevice": "从个人设备上传文件",
+  "UploadFilesPortal": "从{{sectionNameFirst}}或{{sectionNameSecond}}上传文件"
+}

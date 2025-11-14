@@ -120,6 +120,46 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "ai-agents",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent/chat",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "recent",
             element: (
               <PrivateRoute>
@@ -326,6 +366,7 @@ const ClientRoutes = [
       return { Component };
     },
   },
+
   {
     path: "/form-gallery/:fromFolderId",
     async lazy() {

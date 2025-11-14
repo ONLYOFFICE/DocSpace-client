@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Der Agent <strong>\"{{agentName}}\"</strong> wird endgültig gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
+  "DeleteAIAgentTitle": "Diesen Agenten löschen?",
+  "DeleteAIAgentWarning": "Ich verstehe die Konsequenzen und möchte den Agenten löschen.",
   "DeleteAllGroupDescription": "Die ausgewählten Gruppen werden gelöscht. Benutzer in den Gruppen werden nicht aus {{productName}} entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteAllGroupsTitle": "Gruppen löschen",
   "DeleteFiles": "Sie sind dabei, <strong>Dateien ({{filesCount}})</strong> in den {{trashSection}} zu verschieben.",
@@ -11,6 +14,7 @@
   "DeleteGroupTitle": "Gruppe löschen",
   "DeleteItem": "Sie sind dabei, <strong>{{name}}</strong> in den {{trashSection}} zu verschieben.",
   "DeleteItemForever": "Sie werden <strong>{{name}}</strong> löschen.",
+  "DeleteItemsSharedNote": "Bitte beachten Sie, dass die Daten nicht mehr verfügbar sind, wenn Sie diese mit jemandem geteilt haben.",
   "DeleteRoom": "Der Raum <strong>\"{{roomName}}\"</strong> wird dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
   "DeleteRoomTitle": "Raum löschen?",
   "DeleteRoomWarning": "Ich verstehe die Konsequenzen und möchte den Raum löschen.",

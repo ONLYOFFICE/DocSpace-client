@@ -3,7 +3,7 @@
   "content": "Select files",
   "content_en_sha1_hash": "ca89063ab3cda049e459ebc26a407b4b7c751d3d",
   "created_at": "2025-05-19T21:30:48.419Z",
-  "updated_at": "2025-06-30T12:20:31.402Z",
+  "updated_at": "2025-10-03T10:07:11.703Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting files in an import process. It appears as a button or label that prompts users to choose files, and its content may vary depending on the specific step of the import process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 48,
+      "line_number": 47,
       "context": "isTypeSelectEmpty: boolean,\n logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFiles\"),\n description: t(\"Settings:SelectFileDescriptionGoogle\"),\n component: (\n <SelectFileStep\n t={t}\n isMultipleUpload",
       "module": "/packages/client"
     },

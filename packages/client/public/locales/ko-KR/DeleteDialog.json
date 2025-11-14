@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "에이전트 <strong>\"{{agentName}}\"</strong>는 영구적으로 삭제됩니다. 모든 데이터 및 사용자 접근 권한은 사라집니다.",
+  "DeleteAIAgentTitle": "이 에이전트 삭제하시겠습니까?",
+  "DeleteAIAgentWarning": "결과를 이해하며 에이전트를 삭제하고 싶습니다.",
   "DeleteAllGroupDescription": "선택한 그룹이 삭제됩니다. 그룹의 사용자는 {{productName}}에서 삭제되지 않습니다. 정말로 계속하시겠습니까?",
   "DeleteAllGroupsTitle": "그룹 삭제",
   "DeleteFiles": "당신은 <strong>{{filesCount}}개의 파일</strong>을 {{trashSection}}으로 이동하려고 합니다.",
@@ -11,6 +14,7 @@
   "DeleteGroupTitle": "그룹 삭제",
   "DeleteItem": "<strong>{{name}}</strong>을 {{trashSection}}으로 이동하려고 합니다.",
   "DeleteItemForever": "삭제하시려는 대상은 <strong>{{name}}</strong>입니다.",
+  "DeleteItemsSharedNote": "사용할 수 없게 되므로, 다른 사람과 공유한 경우 주의하시기 바랍니다.",
   "DeleteRoom": "방 <strong>\"{{roomName}}\"</strong>은 영구적으로 삭제됩니다. 모든 데이터 및 사용자 접근 권한은 사라집니다.",
   "DeleteRoomTitle": "이 방 삭제하시겠습니까?",
   "DeleteRoomWarning": "결과를 이해하며 방을 삭제하고 싶습니다.",

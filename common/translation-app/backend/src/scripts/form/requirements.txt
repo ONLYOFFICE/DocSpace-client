@@ -1,0 +1,16 @@
+# Python dependencies for translation export and PDF form generation scripts
+
+# ONLYOFFICE Document Builder - required for PDF generation
+# Used by: build_oform.py, export_and_build_all.py
+document-builder>=9.0.4.72
+
+# Environment variable management - for loading .env files
+# Used by: build_oform.py, upload_to_docspace.py
+python-dotenv>=1.2.1
+
+# ONLYOFFICE DocSpace SDK - for DocSpace API integration
+# Used by: upload_to_docspace.py
+docspace-api-sdk>=3.5.1
+
+# HTTP requests library - for file upload
+requests>=2.32.5

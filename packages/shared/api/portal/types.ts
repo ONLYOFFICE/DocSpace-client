@@ -103,6 +103,10 @@ export type TPaymentQuota = {
     quota: number;
     enableQuota: boolean;
   };
+  aiAgentsQuota: {
+    defaultQuota: number;
+    enableQuota: boolean;
+  };
 };
 
 export type TPortal = {
@@ -178,6 +182,7 @@ export type TStorageRegion = {
 export type TBackupProgress = {
   progress: number;
   error?: TError;
+  warning?: string;
   link?: string;
   isCompleted: boolean;
 };

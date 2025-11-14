@@ -3,7 +3,7 @@
   "content": "Warning",
   "content_en_sha1_hash": "e9c45563358e813f157ba81b33143542165ba84e",
   "created_at": "2025-05-19T21:30:49.575Z",
-  "updated_at": "2025-10-16T07:29:35.478Z",
+  "updated_at": "2025-10-27T16:14:33.048Z",
   "comment": {
     "text": "This \"Warning\" translation key is used to display a caution message when sensitive information about file protection is detected in a file. It appears as a warning text in error messages or dialog boxes, providing context for users when accessing protected files.",
     "is_auto": true,
@@ -20,12 +20,6 @@
       "file_path": "/packages/client/src/components/dialogs/CloseEditIndexDialog/index.tsx",
       "line_number": 72,
       "context": "visible={closeEditIndexDialogVisible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Files:ExitWithoutSaving\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400}>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/IsPrivateParam/PrivacyLimitationsWarning.js",
-      "line_number": 102,
-      "context": "<ReactSVG\n className=\"warning-title-icon\"\n src={DangerAlertReactSvgUrl}\n />\n </div>\n <div className=\"warning-title-text\">{t(\"Common:Warning\")}</div>\n </div>\n <div className=\"warning-description\">\n {t(\"MakeRoomPrivateLimitationsWarningDescription\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
     {
@@ -48,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 140,
+      "line_number": 141,
       "context": "visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {isGracePeriod ? (\n contentForGracePeriod\n ) : isAccounts ? (\n <UsersContent />",
       "module": "/packages/client"
     },
@@ -108,13 +102,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 377,
+      "line_number": 380,
       "context": "} else {\n errorMessage = err;\n }\n \n if (errorMessage.indexOf(\"password\") == -1) {\n toastr.error(errorMessage, t(\"Common:Warning\"));\n return;\n }\n \n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n setFormCreationInfo({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 377,
+      "line_number": 380,
       "context": "} else {\n errorMessage = err;\n }\n \n if (errorMessage.indexOf(\"password\") == -1) {\n toastr.error(errorMessage, t(\"Common:Warning\"));\n return;\n }\n \n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n setFormCreationInfo({",
       "module": "/packages/client"
     },

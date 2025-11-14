@@ -85,7 +85,7 @@ const config = {
       disableDotRule: true,
       index: homepage,
     },
-    hot: false,
+    hot: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -293,6 +293,7 @@ const config = {
                 "@babel/preset-typescript",
               ],
               plugins: [
+                // "babel-plugin-react-compiler", // Switching between tabs breaks
                 "@babel/plugin-transform-runtime",
                 "@babel/plugin-transform-class-properties",
                 "@babel/plugin-proposal-export-default-from",
@@ -369,7 +370,7 @@ module.exports = (env, argv) => {
 
   const banner = getBanner(version);
 
-  config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
+  config.devtool = isProduction ? "source-map" : "eval-cheap-module-source-map"; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
 
   if (isProduction) {
     config.mode = "production";

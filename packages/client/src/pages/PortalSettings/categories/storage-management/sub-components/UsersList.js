@@ -28,6 +28,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
+import { TABLE_PEOPLE_COLUMNS } from "SRC_DIR/helpers/constants";
+
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import Filter from "@docspace/shared/api/people/filter";
@@ -55,6 +57,14 @@ const StatisticsComponent = (props) => {
     userFilterData.pageCount = defaultFilter.pageCount;
 
     const urlFilter = userFilterData.toUrlParams();
+
+    const peopleColumnsKey = `${TABLE_PEOPLE_COLUMNS}=${currentUserId}`;
+    const currentColumns = localStorage.getItem(peopleColumnsKey);
+
+    if (currentColumns && !currentColumns.includes("Storage")) {
+      const updatedColumns = `${currentColumns},Storage`;
+      localStorage.setItem(peopleColumnsKey, updatedColumns);
+    }
 
     if (currentUserId) removeUserFilter(`${FILTER_PEOPLE}=${currentUserId}`);
     navigate(`/accounts/people/filter?${urlFilter}`);
@@ -84,19 +94,21 @@ const StatisticsComponent = (props) => {
 
   return (
     <StyledStatistics>
-      <Text fontWeight={600} className="item-statistic">
-        {t("Top5Users")}
-      </Text>
-      {usersList}
+      <div className="statistics-container">
+        <Text fontWeight={600} className="item-statistic">
+          {t("Top5Users")}
+        </Text>
+        {usersList}
 
-      {peopleListLength > 5 ? (
-        <Button
-          {...buttonProps}
-          label={t("Common:ShowMore")}
-          onClick={onClickUsers}
-          testId="show_more_users_button"
-        />
-      ) : null}
+        {peopleListLength > 5 ? (
+          <Button
+            {...buttonProps}
+            label={t("Common:ShowMore")}
+            onClick={onClickUsers}
+            testId="show_more_users_button"
+          />
+        ) : null}
+      </div>
     </StyledStatistics>
   );
 };

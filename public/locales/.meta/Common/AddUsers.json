@@ -3,19 +3,13 @@
   "content": "Add users",
   "content_en_sha1_hash": "4bf1ec54401a70c2cb001d175de1313c924cef61",
   "created_at": "2025-09-23T07:24:16.851Z",
-  "updated_at": "2025-09-23T07:26:54.839Z",
+  "updated_at": "2025-11-13T07:58:08.525Z",
   "comment": {
     "text": "This text appears on a button or icon, typically used to add new users to a shared resource or space. It indicates the action of inviting or adding users, and may appear in a sharing dialog or settings panel. Translators should consider the context of user invitation or access granting.",
     "is_auto": true,
     "updated_at": "2025-09-23T07:26:54.839Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
-      "line_number": 209,
-      "context": "onClickInviteUsers();\n };\n \n const addUserTitle = canShare\n ? t(\"Common:AddUsers\")\n : isTemplate\n ? t(\"Files:AccessSettings\")\n : t(\"Common:InviteContacts\");\n \n const onSearchClick = () => setShowSearchBlock?.(true);",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/doceditor/src/components/ShareDialog/ShareDialog.header.tsx",
       "line_number": 76,

@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Ajan <strong>\"{{agentName}}\"</strong> kalıcı olarak silinecektir. Tüm veriler ve kullanıcı erişimleri kaybolacaktır.",
+  "DeleteAIAgentTitle": "Bu ajanı sil?",
+  "DeleteAIAgentWarning": "Sonuçların farkındayım ve ajanı silmek istiyorum",
   "DeleteAllGroupDescription": "Seçilen gruplar silinecektir. Gruplardaki kullanıcılar {{productName}}'den kaldırılmayacaktır. Devam etmek istediğinizden emin misiniz?",
   "DeleteAllGroupsTitle": "Grupları sil",
   "DeleteFiles": "Taşımaya hazır oluyorsunuz <strong>dosyaları ({{filesCount}})</strong> {{trashSection}}'a.",
@@ -11,6 +14,7 @@
   "DeleteGroupTitle": "Grubu sil",
   "DeleteItem": "Şu anda <strong>{{name}}</strong>'ı {{trashSection}}'a taşıyorsunuz.",
   "DeleteItemForever": "Silmek üzere olduğunuz öğe <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Bunları birisiyle paylaştıysanız kullanılamayacaklarını lütfen unutmayın.",
   "DeleteRoom": "Oda <strong>\"{{roomName}}\"</strong> kalıcı olarak silinecektir. Tüm veriler ve kullanıcı erişimleri kaybolacaktır.",
   "DeleteRoomTitle": "Bu odayı sil?",
   "DeleteRoomWarning": "Sonuçların farkındayım ve odayı silmek istiyorum",

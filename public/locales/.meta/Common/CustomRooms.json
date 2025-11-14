@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.377Z",
-  "updated_at": "2025-10-13T13:22:35.681Z",
+  "updated_at": "2025-11-13T07:58:07.945Z",
   "comment": {
     "text": "This translation key is used to display the text \"Custom\" in various contexts throughout the application, typically appearing on filters or buttons related to custom rooms. The text is rendered using the \"Common:CustomRooms\" translation from the i18n module, which provides a consistent and localized experience for users.",
     "is_auto": true,
@@ -13,18 +13,18 @@
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 45,
-      "context": "import i18n from \"../i18n\";\n \n export const getRoomTypeName = (room, t) => {\n switch (room) {\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRooms\");\n \n case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:",
+      "context": "import i18n from \"../i18n\";\n \n export const getRoomTypeName = (room, t) => {\n switch (room) {\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRooms\");\n \n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n \n case RoomsType.FillingFormsRoom:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 941,
+      "line_number": 1102,
       "context": "default:\n return {\n id: \"filter_type-custom\",\n key: RoomsType.CustomRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:CustomRooms\"),\n };\n }\n }),\n ]\n : [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 369,
+      "line_number": 376,
       "context": "return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");",
       "module": "/packages/shared"
     }

@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { CheckboxProps } from "./Checkbox.types";
 import { Checkbox } from ".";
@@ -59,7 +59,7 @@ describe("<Checkbox />", () => {
   });
 
   it("handles checked state correctly", async () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Checkbox {...defaultProps} onChange={handleChange} />);
 
     const checkbox = screen.getByRole("checkbox");
@@ -70,7 +70,7 @@ describe("<Checkbox />", () => {
   });
 
   it("handles disabled state correctly", async () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Checkbox {...defaultProps} isDisabled onChange={handleChange} />);
 
     const checkbox = screen.getByRole("checkbox");
@@ -111,7 +111,7 @@ describe("<Checkbox />", () => {
   });
 
   it("prevents checkbox state change on help button click", async () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     const helpButton = <button type="button">Help</button>;
 
     render(

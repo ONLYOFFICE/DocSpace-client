@@ -1,0 +1,28 @@
+{
+  "key_path": "AIDisabledInfoBlockAdminSaasDescription",
+  "content": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. To restore full functionality, enable AI features in the {{productName}} settings.",
+  "content_en_sha1_hash": "f87b5a251079cad1a629c8217bc304429aeddf88",
+  "created_at": "2025-11-03T12:10:13.586Z",
+  "updated_at": "2025-11-13T07:58:08.565Z",
+  "comment": {
+    "text": "This text explains to administrators that AI features are disabled, preventing the agent from processing chats or tasks. It appears within a chat information block to guide them to enable AI functionality in the product settings. Translators should ensure the terminology around AI and product settings aligns with local conventions.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:16:23.810Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-info-block/index.tsx",
+      "line_number": 52,
+      "context": "})\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:AIDisabledInfoBlockAdminSaasDescription\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <PublicRoomBar",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

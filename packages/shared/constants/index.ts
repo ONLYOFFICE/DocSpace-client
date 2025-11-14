@@ -58,10 +58,13 @@ export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
 export const YEAR_KEY = "year";
 export const BACKUP_SERVICE = "backup";
+export const AI_TOOLS = "aitools";
+export const WEB_SEARCH = "websearch";
 export const FREE_BACKUP = "free_backup";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
+export const INFO_PANEL_LOADER_EVENT = "info-panel-loader-event";
 
 export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 
@@ -274,10 +277,12 @@ export const CategoryType = Object.freeze({
   Settings: 8,
   Accounts: 9,
   PublicRoom: 10,
-  Flows: 11,
+  Chat: 11,
   SharedWithMe: 12,
   Groups: 13,
   Guests: 14,
+  AIAgents: 15,
+  AIAgent: 16,
 });
 
 export const AVATAR_ACTION_KEYS = {
@@ -293,3 +298,7 @@ export const ROOM_ACTION_KEYS = {
 
 export const SHARED_MEMBERS_COUNT = 100;
 export const SHARED_WITH_ME_PATH = "shared-with-me";
+
+export const EMPTY_ARRAY = Object.freeze([]) as [];
+export const EMPTY_OBJECT = Object.freeze({});
+export const FUNCTION_EMPTY = (): void => {};

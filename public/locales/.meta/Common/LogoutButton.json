@@ -3,7 +3,7 @@
   "content": "Sign out",
   "content_en_sha1_hash": "dc1649a16c1496db3e4073be6a73faf5121aeae7",
   "created_at": "2025-05-19T21:30:46.319Z",
-  "updated_at": "2025-10-03T13:19:30.454Z",
+  "updated_at": "2025-11-13T07:42:11.221Z",
   "comment": {
     "text": "This translation key is used to display the text \"Sign out\" in various parts of the application, including a logout button in a modal dialog and as the label for a button on the portal unavailable page. Its purpose is to provide a clear instruction for users to log out of their session.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 513,
+      "line_number": 516,
       "context": "if (showFrameSignOut) {\n actions.push({\n key: \"user-menu-logout\",\n icon: LogoutReactSvgUrl,\n label: t(\"Common:LogoutButton\"),\n onClick: () => this.onLogoutClick(t),\n isButton: true,\n });\n }",
       "module": "/packages/client"
     }

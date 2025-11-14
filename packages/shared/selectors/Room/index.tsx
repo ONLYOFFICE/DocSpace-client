@@ -41,6 +41,7 @@ import {
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
 import { TTranslation } from "../../types";
+import { useTheme } from "../../hooks/useTheme";
 
 import useSocketHelper from "../utils/hooks/useSocketHelper";
 import useRoomsHelper from "../utils/hooks/useRoomsHelper";
@@ -50,8 +51,6 @@ import {
   LoadersContext,
   LoadersContextProvider,
 } from "../utils/contexts/Loaders";
-
-import { useTheme } from "../../hooks/useTheme";
 
 const RoomSelectorComponent = ({
   id,
@@ -245,7 +244,10 @@ const RoomSelectorComponent = ({
       }
       emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
       emptyScreenDescription={
-        emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
+        emptyScreenDescription ??
+        t("Common:EmptyRoomsDescriptionText", {
+          sectionName: t("Common:Rooms"),
+        })
       }
       searchEmptyScreenImage={
         isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl

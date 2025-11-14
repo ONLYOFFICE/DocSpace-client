@@ -153,6 +153,8 @@ class FilesSettingsStore {
 
   hideConfirmCancelOperation = false;
 
+  extsFilesVectorized = [];
+
   documentServiceLocation = null;
 
   constructor(
@@ -437,7 +439,7 @@ class FilesSettingsStore {
   getIcon = (
     size = 32,
     fileExst = null,
-    providerKey = null, // eslint-disable-line @typescript-eslint/no-unused-vars
+    providerKey = null,
     contentLength = null,
     roomType = null,
     isArchive = null,
@@ -503,7 +505,9 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "customRoom.svg";
           break;
-
+        case RoomsType.AIRoom:
+          path = "aiRoom.svg";
+          break;
         case RoomsType.EditingRoom:
           path = "editingRoom.svg";
           break;

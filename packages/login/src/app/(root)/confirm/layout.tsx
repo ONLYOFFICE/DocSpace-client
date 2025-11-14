@@ -28,7 +28,7 @@ import { headers } from "next/headers";
 
 import ConfirmRoute from "@/components/ConfirmRoute";
 import { StyledBody } from "@/components/Confirm.styled";
-import { TConfirmLinkParams } from "@/types";
+import type { TConfirmLinkParams } from "@/types";
 import { checkConfirmLink, getSettings, getUser } from "@/utils/actions";
 import { ValidationResult } from "@/utils/enums";
 import { redirect } from "next/navigation";
@@ -70,8 +70,12 @@ export default async function Layout({
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
   if (isUserExisted) {
+    const path = confirmLinkResult.isAgent
+      ? `ai-agents/${confirmLinkResult?.roomId}/chat`
+      : `rooms/shared/${confirmLinkResult?.roomId}/filter`;
+
     const finalUrl = confirmLinkResult?.roomId
-      ? `${proto}://${hostName}/rooms/shared/${confirmLinkResult?.roomId}/filter?folder=${confirmLinkResult?.roomId}`
+      ? `${proto}://${hostName}/${path}?folder=${confirmLinkResult?.roomId}`
       : objectSettings?.defaultPage;
 
     logger.info("Confirm layout UserExisted");

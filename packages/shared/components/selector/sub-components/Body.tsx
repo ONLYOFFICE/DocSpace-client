@@ -94,6 +94,8 @@ const Body = ({
   injectedElement,
 
   isSSR,
+
+  hideBackButton,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
   const injectedElementRef = useRef<HTMLElement>(null);
@@ -215,8 +217,11 @@ const Body = ({
       if (infoEl) {
         const { height } = infoEl.getBoundingClientRect();
         setInfoBarHeight(height + CONTAINER_PADDING);
+        return;
       }
     }
+
+    setInfoBarHeight(0);
   }, [withInfoBar, itemsCount, visibleInfoBar]);
   useLayoutEffect(() => {
     if (injectedElement) {
@@ -332,6 +337,7 @@ const Body = ({
           withSearch={isSearch}
           items={items}
           inputItemVisible={inputItemVisible}
+          hideBackButton={hideBackButton}
         />
       ) : (
         <>

@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "智能体<strong>\"{{agentName}}\"</strong>将被永久删除。所有数据和用户访问权限都将丢失。",
+  "DeleteAIAgentTitle": "删除此智能体？",
+  "DeleteAIAgentWarning": "我了解后果并希望删除此智能体",
   "DeleteAllGroupDescription": "所选组将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteAllGroupsTitle": "删除群组",
   "DeleteFiles": "您将要把<strong>{{filesCount}}个文件</strong>移至{{trashSection}}。",
@@ -11,6 +14,7 @@
   "DeleteGroupTitle": "删除群组",
   "DeleteItem": "您即将把<strong>{{name}}</strong>移至{{trashSection}}。",
   "DeleteItemForever": "您将要删除<strong>{{name}}</strong>。",
+  "DeleteItemsSharedNote": "请注意，如果您已将它们分享给他人，它们将不可用。",
   "DeleteRoom": "房间<strong>“{{roomName}}”</strong>将被永久删除，所有数据及用户访问权限都将丢失。",
   "DeleteRoomTitle": "确定删除此房间吗？",
   "DeleteRoomWarning": "我已了解删除的后果，并确认删除此房间。",

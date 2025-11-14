@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, waitFor, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import {
   FileStatus,
   FileType,
@@ -38,45 +38,48 @@ import Share from "./index";
 // Mock window.matchMedia for tests
 Object.defineProperty(window, "matchMedia", {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: jest.fn(), // Deprecated
-    removeListener: jest.fn(), // Deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+    addListener: vi.fn(), // Deprecated
+    removeListener: vi.fn(), // Deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
   })),
 });
 
 // Mock the API client
-jest.mock("../../api/client", () => ({
+vi.mock("../../api/client", () => ({
   __esModule: true,
   default: {
-    get: jest.fn(),
-    post: jest.fn(),
-    put: jest.fn(),
-    delete: jest.fn(),
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    delete: vi.fn(),
   },
 }));
 
 // Mock the API files
-jest.mock("../../api/files", () => ({
+vi.mock("../../api/files", () => ({
   __esModule: true,
   filesApi: {
-    getSharedInfo: jest.fn().mockResolvedValue({ items: [] }),
-    updateSharedInfo: jest.fn(),
+    getSharedInfo: vi.fn().mockResolvedValue({ items: [] }),
+    updateSharedInfo: vi.fn(),
   },
-  getExternalLinks: jest.fn().mockResolvedValue({ items: [] }),
+  getExternalLinks: vi.fn().mockResolvedValue({ items: [] }),
+  addExternalLink: vi.fn().mockResolvedValue({}),
+  addExternalFolderLink: vi.fn().mockResolvedValue({}),
+  getFileSharedUsers: vi.fn().mockResolvedValue({ items: [] }),
 }));
 
 describe("Share component", () => {
   const createProps = (hideSharePanel: boolean) => ({
     hideSharePanel,
     selfId: "current-user-id",
-    setEditLinkPanelIsVisible: jest.fn(),
-    setLinkParams: jest.fn(),
+    setEditLinkPanelIsVisible: vi.fn(),
+    setLinkParams: vi.fn(),
     infoPanelSelection: {
       isFile: false,
       access: ShareAccessRights.None,
@@ -124,6 +127,7 @@ describe("Share component", () => {
         CreateRoomFrom: false,
         CopyLink: false,
         Embed: false,
+        Vectorization: false,
       },
       shared: true,
       thumbnailStatus: 0,

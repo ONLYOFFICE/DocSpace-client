@@ -3,7 +3,7 @@
   "content": "Shared with me",
   "content_en_sha1_hash": "f40ca84f04474455cba711b1643a006b59aa1210",
   "created_at": "2025-05-19T21:30:48.661Z",
-  "updated_at": "2025-10-07T15:39:07.401Z",
+  "updated_at": "2025-11-13T07:58:08.133Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Shared with me\" in various contexts within a workspace settings page. It likely appears as a label on buttons or sections related to shared files and folders, guiding users through the export process.",
     "is_auto": true,
@@ -11,15 +11,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 141,
-      "context": "personalExportDetails={{\n name: t(\"Common:MyDocuments\"),\n icon: UserSolidIcon,\n }}\n sharedFilesExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,\n }}\n sharedFoldersExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 215,
+      "context": "<Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"\n values={{\n sectionName: t(\"Common:SharedWithMe\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 215,
+      "context": "<Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"\n values={{\n sectionName: t(\"Common:SharedWithMe\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 141,
-      "context": "personalExportDetails={{\n name: t(\"Common:MyDocuments\"),\n icon: UserSolidIcon,\n }}\n sharedFilesExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,\n }}\n sharedFoldersExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,",
+      "line_number": 145,
+      "context": "personalExportDetails={{\n name: t(\"Common:MyDocuments\"),\n icon: UserSolidIcon,\n }}\n sharedFilesAndFoldersExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,\n }}\n hasCommonFiles\n hasProjectFiles\n />",
       "module": "/packages/client"
     },
     {
@@ -30,8 +36,8 @@
     },
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.js",
-      "line_number": 70,
-      "context": "switch (folder.rootFolderType) {\n case FolderType.USER:\n folder.title = i18n.t(\"Common:MyDocuments\");\n break;\n case FolderType.SHARE:\n folder.title = i18n.t(\"Common:SharedWithMe\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:",
+      "line_number": 73,
+      "context": "break;\n case FolderType.USER:\n folder.title = i18n.t(\"Common:MyDocuments\");\n break;\n case FolderType.SHARE:\n folder.title = i18n.t(\"Common:SharedWithMe\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:",
       "module": "/packages/client"
     }
   ],

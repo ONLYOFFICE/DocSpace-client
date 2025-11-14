@@ -1,0 +1,28 @@
+{
+  "key_path": "IntegrationURL",
+  "content": "Integration URL",
+  "content_en_sha1_hash": "6bf2444e08740f34e6b6654120d3a6b255f97e6b",
+  "created_at": "2025-10-27T16:14:31.644Z",
+  "updated_at": "2025-11-13T10:21:17.842Z",
+  "comment": {
+    "text": "This key displays the label \"Integration URL\" within a form field in the AI Settings section of the Portal Settings. It's used to prompt the user to enter a URL for integration purposes, and is marked as a required field. Translators should ensure the translation accurately conveys the purpose of this URL input.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:27:01.066Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
+      "line_number": 137,
+      "context": "<Text className={styles.fieldHint}>\n {t(\"AISettings:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"AISettings:IntegrationURL\")}\n isRequired\n isVertical\n removeMargin\n labelVisible\n errorMessage={urlError}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Third-party storage",
   "content_en_sha1_hash": "f9863ef0415f207037f70275c921c5f88e760b2e",
   "created_at": "2025-05-19T21:30:49.279Z",
-  "updated_at": "2025-10-14T01:09:07.125Z",
+  "updated_at": "2025-11-03T12:10:34.985Z",
   "comment": {
     "text": "This translation key is used to display a label for \"Third-party storage\" in various UI components, such as radio buttons and toggle parameters, indicating a storage option for files. It appears in dialog windows and page settings for data management and backup features.",
     "is_auto": true,
@@ -11,26 +11,26 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.js",
-      "line_number": 147,
-      "context": "return (\n <StyledThirdPartyStorage>\n <ToggleParam\n id=\"shared_third-party-storage-toggle\"\n title={t(\"Common:ThirdPartyStorage\")}\n description={t(\"Common:ThirdPartyStorageDescription\")}\n isChecked={storageLocation.isThirdparty}\n onCheckedChange={onChangeIsThirdparty}\n />",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.tsx",
+      "line_number": 186,
+      "context": "return (\n <StyledThirdPartyStorage>\n <ToggleParam\n id=\"shared_third-party-storage-toggle\"\n title={t(\"Common:ThirdPartyStorage\")}\n description={t(\"Common:ThirdPartyStorageDescription\")}\n isChecked={storageLocation.isThirdparty ?? false}\n onCheckedChange={onChangeIsThirdparty}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
-      "line_number": 107,
+      "line_number": 108,
       "context": "description: t(\"ThirdPartyResourceDescription\"),\n icon: <MoveIcon />,\n },\n {\n id: \"third-party-storage\",\n title: t(\"Common:ThirdPartyStorage\"),\n description: t(\"ThirdPartyStorageDescription\"),\n icon: <CloudsIcon />,\n },\n {\n id: \"automatic-backup\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 606,
+      "line_number": 615,
       "context": "</div>\n <div className={styles.modules}>\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-storage\"\n label={t(\"Common:ThirdPartyStorage\")}\n name={`${BackupStorageType.StorageModuleType}`}\n isChecked={isCheckedThirdPartyStorage}\n isDisabled={isLoadingData}\n testId=\"auto_backup_storage_radio_button\"\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 594,
+      "line_number": 610,
       "context": "[styles.isDisabled]: additionalDisabled,\n })}\n >\n <RadioButton\n id=\"third-party-storage\"\n label={t(\"Common:ThirdPartyStorage\")}\n name={THIRD_PARTY_STORAGE}\n key={3}\n isChecked={isCheckedThirdPartyStorage}\n isDisabled={additionalDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },

@@ -3,7 +3,7 @@
   "content": "The room is empty.",
   "content_en_sha1_hash": "d050ef95807538b5b041095a3aab5b11a11b5e2f",
   "created_at": "2025-05-19T21:30:56.439Z",
-  "updated_at": "2025-09-23T07:24:24.015Z",
+  "updated_at": "2025-11-03T12:10:34.913Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an empty room or space exists. It is typically displayed in a UI component related to collaboration or file management, such as an empty folder view or collaboration settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 277,
+      "line_number": 343,
       "context": "isNotAdmin: boolean,\n isArchiveFolderRoot: boolean,\n ) => {\n const isCollaborator = access === ShareAccessRights.Collaborator;\n \n if (isCollaborator) return t(\"EmptyView:CollaboratorEmptyTitle\");\n \n if (isNotAdmin || isArchiveFolderRoot) return t(\"Common:EmptyScreenFolder\");\n \n switch (type) {\n case RoomsType.FormRoom:",
       "module": "/packages/client"
     }

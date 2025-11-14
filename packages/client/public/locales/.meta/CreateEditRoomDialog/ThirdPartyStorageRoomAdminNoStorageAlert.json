@@ -3,7 +3,7 @@
   "content": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration.",
   "content_en_sha1_hash": "6d21f17fc8337aa5d64cc41bd098795b12ff02d3",
   "created_at": "2025-05-19T21:30:56.848Z",
-  "updated_at": "2025-05-24T13:40:49.789Z",
+  "updated_at": "2025-10-27T16:14:33.230Z",
   "comment": {
     "text": "This translation key is used to display a message when a third-party storage room's integration is not enabled. It prompts the user to contact the product owner/administrator to set up the integration in {{productName}} settings. This message appears in the CreateEditRoomDialog when no connected items are found.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.js",
-      "line_number": 90,
-      "context": "if (isDisabled) return;\n \n if (!connectItems.length) {\n const data = isRoomAdmin ? (\n <Text as=\"p\">\n {t(\"ThirdPartyStorageRoomAdminNoStorageAlert\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : (\n <Text as=\"p\">",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.tsx",
+      "line_number": 126,
+      "context": "if (isDisabled) return;\n \n if (!connectItems?.length) {\n const data = isRoomAdmin ? (\n <Text as=\"p\">\n {t(\"ThirdPartyStorageRoomAdminNoStorageAlert\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : (\n <Text as=\"p\">",
       "module": "/packages/client"
     }
   ],

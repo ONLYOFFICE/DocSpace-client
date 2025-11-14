@@ -1,0 +1,244 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import type { TCreatedBy, TPathParts } from "../../types";
+import type { TFile, TFolder } from "../files/types";
+import type { TRoom } from "../rooms/types";
+import type {
+  ContentType,
+  KnowledgeType,
+  ProviderType,
+  RoleType,
+  ServerType,
+  WebSearchType,
+} from "./enums";
+
+export type TCreateAiProvider = {
+  type: ProviderType;
+  title: string;
+  key: string;
+  url: string;
+};
+
+export type TAiProvider = {
+  id: number;
+  title: string;
+  type: ProviderType;
+  url: string;
+  createdOn: string;
+  modifiedOn: string;
+};
+
+export type TUpdateAiProvider = {
+  title?: TCreateAiProvider["title"];
+  key?: TCreateAiProvider["key"];
+  url?: TCreateAiProvider["url"];
+};
+
+export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
+
+export type TProviderTypeWithUrl = Pick<TAiProvider, "type" | "url">;
+
+export type TModel = {
+  providerId: TAiProvider["id"];
+  providerTitle: TAiProvider["title"];
+  modelId: string;
+  name?: string;
+};
+
+export type TModelList = TModel[];
+
+export type TChat = {
+  id: string;
+  title: string;
+  createdOn: string;
+  modifiedOn: string;
+  createdBy: TCreatedBy;
+};
+
+export type TToolCallResultSourceData = {
+  title: string;
+  text: string;
+  fileId?: number;
+  url?: string; // external page url
+  relativeUrl?: string; // knowledge doc url
+  faviconUrl?: string;
+};
+
+export type TToolCallResultSource = {
+  data: TToolCallResultSourceData | TToolCallResultSourceData[];
+  error?: string;
+};
+
+export type TToolCallContent = {
+  type: ContentType.Tool;
+  arguments: Record<string, unknown>;
+  name: string;
+  result?: Record<string, unknown> | TToolCallResultSource;
+  callId?: string;
+  mcpServerInfo?: {
+    serverId: string;
+    serverName: string;
+    serverType: ServerType;
+    icon: {
+      icon48: string;
+      icon32: string;
+      icon24: string;
+      icon16: string;
+    };
+  };
+  managed?: boolean;
+};
+
+export type TContent =
+  | {
+      type: ContentType.Text;
+      text: string;
+    }
+  | TToolCallContent
+  | {
+      type: ContentType.Files;
+      id: number;
+      title: string;
+      extension: string;
+    };
+
+export type TMessage = {
+  role: RoleType;
+  contents: TContent[];
+  createdOn: string;
+  id?: number;
+};
+
+export type TMCPTool = {
+  name: string;
+  enabled: boolean;
+};
+
+export type TServer = {
+  id: string;
+  name: string;
+  serverType: ServerType;
+  description?: string;
+  icon?: {
+    icon48: string;
+    icon32: string;
+    icon24: string;
+    icon16: string;
+  };
+  enabled?: boolean;
+  connected?: boolean;
+  headers: Record<string, string>;
+  endpoint: string;
+  authorizationEndpoint?: string;
+};
+
+export type TVectorizeOperation = {
+  error: string;
+  id: string;
+  isCompleted: boolean;
+  percentage: number;
+  status: number;
+};
+
+export type TAddNewServer = {
+  endpoint: string;
+  name: string;
+  description: string;
+  headers: Record<string, string>;
+  icon: string;
+};
+
+export type TUpdateServer = {
+  endpoint?: string;
+  name?: string;
+  description?: string;
+  headers?: Record<string, string>;
+  icon?: string;
+  updateIcon?: boolean;
+};
+
+export type WebSearchConfig = {
+  enabled: boolean;
+  type: WebSearchType;
+  key?: string;
+};
+
+export type KnowledgeConfig = {
+  type: KnowledgeType;
+  key?: string;
+};
+
+export type TAIConfig = {
+  vectorizationEnabled: boolean;
+  webSearchEnabled: boolean;
+  knowledgeSearchToolName: string;
+  webSearchToolName: string;
+  webCrawlingToolName: string;
+  aiReady: boolean;
+  embeddingModel: string;
+  portalMcpServerId: string;
+};
+
+export type TAgent = TRoom;
+
+export type TAgentLogo = {
+  tmpFile: string;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+};
+
+export type TChatSettings = {
+  prompt?: string;
+  providerId?: TAiProvider["id"];
+  modelId?: TModel["modelId"];
+};
+
+export type TCreateAgentData = {
+  title: string;
+  cover?: string;
+  color?: string;
+  tags?: string[];
+  logo?: TAgentLogo;
+  chatSettings?: TChatSettings;
+  quota?: number;
+  attachDefaultTools?: boolean;
+};
+
+export type TGetAgents = {
+  files: TFile[];
+  folders: TAgent[];
+  current: TFolder;
+  pathParts: TPathParts[];
+  startIndex: number;
+  count: number;
+  total: number;
+  new: number;
+};
+
+export type TEditAgentData = Partial<TCreateAgentData>;

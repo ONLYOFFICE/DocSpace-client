@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2025-10-16T07:29:35.694Z",
+  "updated_at": "2025-11-13T14:53:11.243Z",
   "comment": {
     "text": "This translation key is used for the text \"Info\", which is displayed as a header or label in various UI components, including an info panel and an OAuth information dialog. The purpose of this text is to provide basic information or context, often accompanied by icons. It appears in places such as headers, dialogs, and context options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 203,
+      "line_number": 214,
       "context": "className={classNames(styles.infoPanelHeader, {\n [styles.withTabs]: withTabs,\n })}\n >\n <AsideHeader\n header={t(\"Common:Info\")}\n onCloseClick={closeInfoPanel}\n withoutBorder\n className=\"header-text\"\n isCloseable\n dataTestId=\"info_panel_aside_header\"",
       "module": "/packages/client"
     },
@@ -66,19 +66,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2083,
+      "line_number": 2151,
       "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2083,
+      "line_number": 2151,
       "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2187,
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 154,
       "context": "case \"show-info\":\n if (isDesktop()) return null;\n return {\n id: \"menu-show-info\",\n key: \"show-info\",\n label: t(\"Common:Info\"),\n iconUrl: InfoOutlineReactSvgUrl,\n onClick: showInfoPanel,\n };\n case \"copy\":\n if (!this.isAvailableOption(\"copy\")) return null;",
       "module": "/packages/client"
     },

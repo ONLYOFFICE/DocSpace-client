@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, fireEvent, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { TimePicker } from ".";
 
 describe("<TimePicker />", () => {
-  const mockOnChange = jest.fn();
-  const mockOnBlur = jest.fn();
+  const mockOnChange = vi.fn();
+  const mockOnBlur = vi.fn();
 
   const baseProps = {
     initialTime: "2025-01-09T14:30:00",
@@ -40,7 +40,7 @@ describe("<TimePicker />", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {

@@ -1,0 +1,40 @@
+{
+  "key_path": "LeaveTheAgent",
+  "content": "Leave the agent",
+  "content_en_sha1_hash": "448360671ff7052f06a5a0518dca7ae432710746",
+  "created_at": "2025-10-27T16:14:30.382Z",
+  "updated_at": "2025-11-13T07:42:11.217Z",
+  "comment": {
+    "text": "Text for a button or link allowing a user to leave an agent or room, used in dialogs, panels, and context menus. The wording will change depending on whether the user is interacting with an AI agent or a regular room. Translators should ensure it clearly indicates the action of exiting.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:58:54.249Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 77,
+      "context": "document.removeEventListener(\"keyup\", onKeyUp, false);\n };\n }, []);\n \n const titleText = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
+      "line_number": 132,
+      "context": ": t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const selectorComponent = (\n <PeopleSelector\n withCancelButton",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2321,
+      "context": "item.id !== this.selectedFolderStore.id,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled:\n isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { isSafari, isTablet } from "react-device-detect";
 import throttle from "lodash/throttle";
@@ -96,10 +95,13 @@ const ModalDialog = ({
 
   ...rest
 }: ModalDialogProps) => {
-  const onCloseEvent = React.useCallback(() => {
-    if (embedded) return;
-    if (isCloseable) onClose?.();
-  }, [embedded, isCloseable, onClose]);
+  const onCloseEvent = React.useCallback(
+    (e?: React.MouseEvent) => {
+      if (embedded) return;
+      if (isCloseable) onClose?.(e);
+    },
+    [embedded, isCloseable, onClose],
+  );
 
   const [currentDisplayType, setCurrentDisplayType] = useState(
     getCurrentDisplayType(displayType, displayTypeDetailed),

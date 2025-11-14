@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Agentti <strong>\"{{agentName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
+  "DeleteAIAgentTitle": "Poista tämä agentti?",
+  "DeleteAIAgentWarning": "Ymmärrän seuraukset ja haluan poistaa agentin.",
   "DeleteAllGroupDescription": "Valitut ryhmät poistetaan. Ryhmien käyttäjiä ei poisteta {{productName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteAllGroupsTitle": "Poista ryhmiä",
   "DeleteFiles": "Olet siirtämässä <strong>tiedostoja ({{filesCount}})</strong> {{trashSection}}-kohtaan.",
@@ -11,6 +14,7 @@
   "DeleteGroupTitle": "Poista ryhmä",
   "DeleteItem": "Olet siirtämässä <strong>{{name}}</strong>-kohtaa {{trashSection}}-osioon.",
   "DeleteItemForever": "Olet aikeissa poistaa <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Ole hyvä ja huomioi, että jos olet jakanut tiedot jonkun kanssa, ne tiedot eivät ole enää saatavilla.",
   "DeleteRoom": "Huone <strong>\"{{roomName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
   "DeleteRoomTitle": "Poistetaanko tämä huone?",
   "DeleteRoomWarning": "Ymmärrän seuraukset ja haluan poistaa huoneen.",

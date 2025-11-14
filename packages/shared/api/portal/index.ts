@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { EmployeeType } from "../../enums";
@@ -41,6 +40,7 @@ import {
   TLicenseQuota,
 } from "./types";
 import { Nullable } from "../../types";
+import { Encoder } from "../../utils/encoder";
 
 const baseURL = "/apisystem";
 
@@ -471,15 +471,21 @@ export function getBalance(refresh?: boolean, signal?: AbortSignal) {
   }) as TBalance;
 }
 
-export function getWalletPayer(refresh?: boolean, signal?: AbortSignal) {
+export async function getWalletPayer(refresh?: boolean, signal?: AbortSignal) {
   const params = refresh ? { refresh: true } : {};
 
-  return request({
+  const user = (await request({
     method: "get",
     url: `/portal/payment/customerinfo`,
     params,
     signal,
-  }) as TCustomerInfo;
+  })) as TCustomerInfo;
+
+  if (user && user.payer?.displayName) {
+    user.payer.displayName = Encoder.htmlDecode(user.payer.displayName);
+  }
+
+  return user;
 }
 
 export async function getCardLinked(backUrl, signal?: AbortSignal) {

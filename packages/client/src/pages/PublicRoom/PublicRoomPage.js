@@ -32,11 +32,7 @@ import Section from "@docspace/shared/components/section";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import {
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { isPublicRoom } from "@docspace/shared/utils/common";
 
 import SectionWrapper from "SRC_DIR/components/Section";
@@ -99,6 +95,8 @@ const PublicRoomPage = (props) => {
         return t("Common:Reviewing");
       case ShareAccessRights.Editing:
         return t("Common:Editor");
+      case ShareAccessRights.FormFilling:
+        return t("Common:FillingOnly");
       default:
         return t("Common:ViewOnly");
     }
@@ -108,9 +106,6 @@ const PublicRoomPage = (props) => {
     const toastIsDisabled =
       sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === access?.toString();
 
-    const isFormRoom =
-      roomType === RoomsType.FormRoom || parentRoomType === FolderType.FormRoom;
-
     if (!access || !ready || toastIsDisabled || isFrame || isAuthenticated)
       return;
 
@@ -118,9 +113,7 @@ const PublicRoomPage = (props) => {
 
     sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, access?.toString());
 
-    const content = isFormRoom ? (
-      t("Common:FormAuthorizeToast", { productName: t("Common:ProductName") })
-    ) : (
+    const content = (
       <Trans
         t={t}
         ns="Common"

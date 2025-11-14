@@ -144,10 +144,11 @@ export default function withFileActions(WrappedFileItem) {
         setBufferSelection(item);
 
       if (
-        !canDrag ||
-        (!draggable && !isFileName && !isActive) ||
-        notSelectable ||
-        isThirdPartyFolder
+        (!canDrag ||
+          (!draggable && !isFileName && !isActive) ||
+          notSelectable ||
+          isThirdPartyFolder) &&
+        e.button !== 1
       ) {
         return e;
       }
@@ -159,7 +160,13 @@ export default function withFileActions(WrappedFileItem) {
           : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {
-        if (item.isPlugin) return this.onFilesClick(e);
+        const canWebEdit = item.viewAccessibility?.WebEdit;
+        const canViewedDocs = item.viewAccessibility?.WebView;
+        if (
+          (item?.isPlugin || !(canWebEdit || canViewedDocs)) &&
+          !item?.isFolder
+        )
+          return this.onFilesClick(e);
         return e;
       }
 
@@ -242,6 +249,7 @@ export default function withFileActions(WrappedFileItem) {
         // !!e.target.closest(".additional-badges") ||
         e.target.closest(".tag") ||
         e.target.closest(".mainIcons") ||
+        e.target.closest(".react-tooltip") ||
         isNewBadgePanelVisible ||
         isTrashFolder
       )
@@ -424,6 +432,7 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder,
         isTemplatesFolder,
         isRecentFolder,
+        isAIAgentsFolder,
       } = treeFoldersStore;
       const {
         dragging,
@@ -508,8 +517,9 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder ||
         isTemplatesFolder ||
         isRecentFolder ||
-        settingsStore.currentDeviceType !== DeviceType.desktop ||
-        inProgress;
+        inProgress ||
+        isAIAgentsFolder ||
+        isMobile;
 
       let isActive = false;
 

@@ -1,0 +1,21 @@
+{
+  "AIChat": "Yapay Zeka Sohbeti",
+  "CreateChat": "Sohbet oluştur",
+  "CreateChatDescription": "AI-Chat sekmesine giderek başlayın.",
+  "EmptyKnowledgeDescription": "Buraya yüklenen dosyalar, AI-Chat sekmesinde bağlam olarak indekslenecek ve kullanılacaktır. Yapay zekâya sorular sormak, içerik oluşturmak veya bilgileri birlikte analiz etmek için dosyalar ekleyin.",
+  "EmptyKnowledgeTitle": "Henüz dosya yüklenmedi",
+  "EmptyResultsDescription": "AI Sohbeti'nde oluşturulan dosyalar burada otomatik olarak görünür. İçerik oluşturduğunuzda, bir sohbet başlattığınızda veya çıktı içeren bir mesaj gönderdiğinizde, sonuç bu bölümde kaydedilecektir.",
+  "EmptyResultsTitle": "Henüz sonuç yok",
+  "Knowledge": "Bilgi",
+  "KnowledgeDescription": "Bilgisayarınızdan veya {{productName}}'den dosya yükleyerek sohbet için daha iyi bir bağlam sağlayın. Not: Yüklenen içeriğin bir kısmı veya tamamı konuşma sırasında görünür olabilir.",
+  "KnowledgeSelectIn": "{{productName}}'de Seçin",
+  "KnowledgeUnavailable": "Bilgi Tabanı kullanılamıyor",
+  "KnowledgeUnavailableDescription": "Bilgi tabanı şu anda devre dışı. Yapay zeka ajanlarınız için anlamsal arama ve belge işleme'yi etkinleştirmek için, {{productName}} ayarlarında gömme sağlayıcısını yapılandırın.",
+  "KnowledgeUnavailableDescriptionUser": "Bilgi tabanı şu anda devre dışı. Yapay zeka ajanları için anlamsal arama ve belge işleme'yi etkinleştirmek için lütfen {{productName}} yöneticinizle iletişime geçerek gömme sağlayıcısını yapılandırın.",
+  "MCP": "Bu oda için MCP araçları",
+  "Model": "Sağlayıcı ve model",
+  "ModelDescription": "Bu oda sohbetlerinde kullanılacak yapay zeka sağlayıcısı ve modeli seçin. Bu ayar zorunludur ve tüm katılımcılar için geçerlidir.",
+  "ResultStorage": "Sonuç depolama",
+  "UploadFilesDevice": "Kişisel cihazınızdan dosyalar yükleyin",
+  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin"
+}

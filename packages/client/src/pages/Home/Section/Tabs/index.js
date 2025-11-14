@@ -26,13 +26,16 @@
 import { inject, observer } from "mobx-react";
 
 import RoomTemplatesTabs from "./RoomTemplatesTabs";
+import AiRoomTabs from "./AiRoomTabs";
 
 const SectionSubmenuContent = ({
+  isAIRoom,
   isRoomsFolderRoot,
   isTemplatesFolder,
   allowInvitingGuests,
   checkGuests,
   currentClientView,
+  canUseChat,
 }) => {
   const isContacts =
     currentClientView === "users" || currentClientView === "groups";
@@ -42,13 +45,23 @@ const SectionSubmenuContent = ({
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
+  if (isAIRoom && canUseChat) return <AiRoomTabs />;
+
   if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
     return <RoomTemplatesTabs />;
   return null;
 };
 
 export default inject(
-  ({ treeFoldersStore, settingsStore, clientLoadingStore }) => {
+  ({
+    treeFoldersStore,
+    settingsStore,
+    clientLoadingStore,
+    selectedFolderStore,
+    accessRightsStore,
+  }) => {
+    const { canUseChat } = accessRightsStore;
+
     const { isRoomsFolderRoot, isTemplatesFolder } = treeFoldersStore;
 
     const { allowInvitingGuests, checkGuests } = settingsStore;
@@ -56,11 +69,13 @@ export default inject(
     const { currentClientView } = clientLoadingStore;
 
     return {
+      isAIRoom: selectedFolderStore.isAIRoom,
       isRoomsFolderRoot,
       isTemplatesFolder,
       allowInvitingGuests,
       checkGuests,
       currentClientView,
+      canUseChat,
     };
   },
 )(observer(SectionSubmenuContent));

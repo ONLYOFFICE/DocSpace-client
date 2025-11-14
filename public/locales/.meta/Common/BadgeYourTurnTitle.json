@@ -3,7 +3,7 @@
   "content": "This form requires your completion",
   "content_en_sha1_hash": "ff41e03f757ef8d24b69ca9e09e3507250a88f1b",
   "created_at": "2025-05-19T21:30:43.235Z",
-  "updated_at": "2025-10-13T13:22:36.075Z",
+  "updated_at": "2025-11-13T07:58:08.691Z",
   "comment": {
     "text": "This translation key is used for \"Your Turn\" badge title in a file filling form, indicating that the user's turn has started. It appears in the UI as a badge on buttons or dialog prompts when the form is in the \"Your Turn\" status.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 292,
+      "line_number": 298,
       "context": ") => {\n switch (status) {\n case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:BadgeYourTurnTitle\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:BadgeInProgressTitle\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:BadgeStoppedTitle\");\n case FileFillingFormStatus.Completed:",
       "module": "/packages/shared"
     }

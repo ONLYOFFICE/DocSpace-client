@@ -135,6 +135,7 @@ export const createDefaultHookSettingsProps = ({
     isInitialError: backupStore?.isInitialError,
     isEmptyContentBeforeLoader: backupStore?.isEmptyContentBeforeLoader,
     addAbortControllers: settingsStore?.addAbortControllers,
+    isNotPaidPeriod: currentTariffStatusStore?.isNotPaidPeriod,
   },
   integration: {
     isSSOAvailable: currentQuotaStore?.isSSOAvailable,

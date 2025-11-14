@@ -77,11 +77,6 @@ const StyledBody = styled.div`
         !props.theme.isBase &&
         css`
           svg {
-            path {
-              fill: ${({ theme }) =>
-                theme.client.settings.payment.benefitsContainer
-                  .iconsColor} !important;
-            }
             mask + path {
               fill: none !important;
               stroke: ${({ theme }) =>
@@ -138,6 +133,7 @@ const BenefitsContainer = ({ t, features }) => {
         return (
           <div className="payment-benefits" key={item.title || item.image}>
             <div
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
               dangerouslySetInnerHTML={{ __html: item.image }}
               className="icons-container"
             />

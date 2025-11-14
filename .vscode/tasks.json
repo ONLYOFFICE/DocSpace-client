@@ -571,6 +571,21 @@
       }
     },
     {
+      "label": "Test | Jest:ascii",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:ascii ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:dependencies",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; npm run open-report",
@@ -601,9 +616,9 @@
       }
     },
     {
-      "label": "Test | Test e2e docker build",
+      "label": "Test | Test e2e docker build (login)",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:build",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:build",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -616,9 +631,9 @@
       }
     },
     {
-      "label": "Test | Test e2e docker start",
+      "label": "Test | Test e2e docker start (login)",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:start",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/login",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -631,9 +646,9 @@
       }
     },
     {
-      "label": "Test | Test e2e docker clear",
+      "label": "Test | Test e2e docker clear (login)",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:clear",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:clear",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -646,7 +661,52 @@
       }
     },
     {
-      "label": "Test | ESLint",
+      "label": "Test | Test e2e docker build (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker start (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/sdk",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker clear (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Biome",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint",
       "group": {
@@ -661,7 +721,7 @@
       }
     },
     {
-      "label": "Test | ESLint:fix",
+      "label": "Test | Biome:fix",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint:fix",
       "group": {

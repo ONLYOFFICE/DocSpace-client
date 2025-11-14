@@ -5,7 +5,6 @@
   "DailyFeed": "Daily {{productName}} feed",
   "DailyFeedDescription": "Lees nieuws en gebeurtenissen uit uw {{productName}} in een dagelijkse samenvatting.",
   "FileActivityNotify": "Bestandsactiviteit notificaties",
-  "GoToSettings": "Ga naar Instellingen",
   "IsNotValid": "Is niet geldig",
   "LdapEmailTooltip": "Deze gebruikersaccount wordt geladen vanuit LDAP. Het e-mailadres van de gebruiker is niet gespecificeerd, en het huidige adres is automatisch gegenereerd en kan niet worden gebruikt om notificaties te verzenden.",
   "NotConfigured": "Niet geconfigureerd",

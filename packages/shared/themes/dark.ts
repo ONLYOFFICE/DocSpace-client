@@ -2843,7 +2843,7 @@ const Dark: TTheme = {
         },
 
         benefitsContainer: {
-          iconsColor: grayDark,
+          iconsColor: darkGrayDark,
         },
         contactContainer: {
           textColor: darkGrayDark,

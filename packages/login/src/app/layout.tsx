@@ -84,7 +84,7 @@ export default async function RootLayout({
     queryParams?.redirected &&
     !settings?.socketUrl
   ) {
-    redirectUrl = "login?emailChange=true";
+    redirectUrl = "/login?emailChange=true";
   }
 
   if (
@@ -92,7 +92,7 @@ export default async function RootLayout({
     typeof settings !== "string" &&
     !settings?.socketUrl
   ) {
-    redirectUrl = "login";
+    redirectUrl = "/login";
   }
 
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
@@ -103,7 +103,7 @@ export default async function RootLayout({
     const host = hdrs.get("host");
 
     const url = new URL(
-      config.wrongPortalNameUrl ??
+      config.wrongPortalNameUrl ||
         "https://www.onlyoffice.com/wrongportalname.aspx",
     );
 
@@ -113,21 +113,21 @@ export default async function RootLayout({
   }
 
   if (typeof settings !== "string" && settings?.wizardToken) {
-    redirectUrl = `wizard`;
+    redirectUrl = `/wizard`;
   }
 
   if (
     typeof settings !== "string" &&
     settings?.tenantStatus === TenantStatus.PortalRestore
   ) {
-    redirectUrl = `preparation-portal`;
+    redirectUrl = `/preparation-portal`;
   }
 
   if (
     typeof settings !== "string" &&
     settings?.tenantStatus === TenantStatus.PortalDeactivate
   ) {
-    redirectUrl = `unavailable`;
+    redirectUrl = `/unavailable`;
   }
 
   if (cookieLng && settings && typeof settings !== "string") {

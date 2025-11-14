@@ -45,6 +45,10 @@ const useSearch = ({
 }: SearchInputProps) => {
   const searchRef = React.useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = React.useState(initSearchValue ?? "");
+  const [caretPosition, setCaretPosition] = React.useState({
+    start: 0,
+    end: 0,
+  });
 
   const onClearSearch = React.useCallback(() => {
     onSearch?.("");
@@ -75,20 +79,32 @@ const useSearch = ({
     const value = getSelectedInputValue?.();
     if (value && searchRef.current) {
       searchRef.current.focus();
-      searchRef.current.setSelectionRange(value.length, value.length);
-    } else {
-      searchRef.current?.setSelectionRange(0, 0);
     }
+    searchRef.current?.setSelectionRange(
+      caretPosition.start,
+      caretPosition.end,
+    );
 
     setInputValue(value);
   }, [getSelectedInputValue]);
+
+  const onChange = React.useCallback(
+    (value: string) => {
+      onSearch?.(value);
+      setCaretPosition({
+        start: searchRef.current?.selectionStart || 0,
+        end: searchRef.current?.selectionEnd || 0,
+      });
+    },
+    [onSearch],
+  );
 
   const searchComponent = (
     <SearchInput
       forwardedRef={searchRef}
       placeholder={placeholder}
       value={inputValue}
-      onChange={onSearch}
+      onChange={onChange}
       onClearSearch={onClearSearch}
       id="filter_search-input"
       size={InputSize.base}

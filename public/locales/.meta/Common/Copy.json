@@ -3,7 +3,7 @@
   "content": "Copy",
   "content_en_sha1_hash": "af74f7c5362aaee985bf8cda3dd75fc80751ce51",
   "created_at": "2025-05-19T21:30:43.729Z",
-  "updated_at": "2025-11-06T18:29:15.582Z",
+  "updated_at": "2025-11-13T14:53:11.103Z",
   "comment": {
     "text": "This translation key is used to display the text \"Copy\" in various UI elements, such as buttons and labels, to provide a clear indication of the action being performed, typically copying files or data. It appears in buttons within the FilesSelector component, EmbeddingPanel, and GetCodeDialog modal dialog, helping users understand the purpose of each button's functionality.",
     "is_auto": true,
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 165,
+      "line_number": 162,
       "context": "};\n case \"copy\":\n if (!this.isAvailableOption(\"copy\")) return null;\n return {\n id: \"menu-copy\",\n label: t(\"Common:Copy\"),\n onClick: this.openCopyPanel,\n iconUrl: CopyToReactSvgUrl,\n };\n \n case \"create-room\":",
       "module": "/packages/client"
     },

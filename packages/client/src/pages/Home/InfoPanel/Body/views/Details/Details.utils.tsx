@@ -455,7 +455,7 @@ class DetailsHelper {
         <SpaceQuota
           item={this.item}
           isReadOnly={!this.item?.security?.EditRoom}
-          type="agent"
+          type={this.isAIAgentsFolder ? "agent" : "room"}
         />
       );
     }

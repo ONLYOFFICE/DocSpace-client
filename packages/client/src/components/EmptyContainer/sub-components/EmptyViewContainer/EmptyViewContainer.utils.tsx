@@ -90,6 +90,8 @@ import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.fo
 
 import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
+import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
 import {
   FilesSelectorFilterTypes,
@@ -414,8 +416,29 @@ export const getFolderIcon = (
   isBaseTheme: boolean,
   access: AccessType,
   folderType: Nullable<FolderType>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ) => {
   return match([roomType, folderType, access])
+    .with(
+      [
+        P._,
+        P.when(
+          () =>
+            security &&
+            "UseChat" in security &&
+            !security?.UseChat &&
+            isResultsTab,
+        ),
+        P._,
+      ],
+      () =>
+        isBaseTheme ? (
+          <ChatNoAccessRightsLightIcon />
+        ) : (
+          <ChatNoAccessRightsDarkIcon />
+        ),
+    )
     .with([FolderType.FormRoom, P._, P._], () =>
       isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
     )
@@ -432,6 +455,8 @@ export const getRoomIcon = (
   type: RoomsType,
   isBaseTheme: boolean,
   access: AccessType,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ) => {
   return match([type, access])
     .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
@@ -557,6 +582,24 @@ export const getRoomIcon = (
       ) : (
         <EmptyCustomRoomCollaboratorDarkIcon />
       ),
+    )
+    .with(
+      [
+        RoomsType.AIRoom,
+        P.when(
+          () =>
+            security &&
+            "UseChat" in security &&
+            !security?.UseChat &&
+            isResultsTab,
+        ), // viewer
+      ],
+      () =>
+        isBaseTheme ? (
+          <ChatNoAccessRightsLightIcon />
+        ) : (
+          <ChatNoAccessRightsDarkIcon />
+        ),
     )
     .with(
       [

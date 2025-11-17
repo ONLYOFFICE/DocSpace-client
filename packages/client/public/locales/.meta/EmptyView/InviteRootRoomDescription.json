@@ -3,7 +3,7 @@
   "content": "Send an invitation to add new members to your {{productName}}",
   "content_en_sha1_hash": "abbd8fb2bdab0b643dd2213a6498d3863b588070",
   "created_at": "2025-05-19T21:30:56.520Z",
-  "updated_at": "2025-11-13T07:58:07.685Z",
+  "updated_at": "2025-11-17T07:52:04.427Z",
   "comment": {
     "text": "This translation key is used for a button that invites new members to join a room in the product, typically displayed on an \"Empty View\" container. The button sends an invitation notification containing the product name. It appears as a visible action element.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 366,
+      "line_number": 382,
       "context": "disabled: !security?.Create,\n };\n \n const inviteRootRoom = {\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:InviteRootRoomDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: <InviteUserFormIcon />,\n key: \"invite-root-room\",\n onClick: () => actions.inviteRootUser(EmployeeType.User),",
       "module": "/packages/client"
     }

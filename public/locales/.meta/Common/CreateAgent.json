@@ -1,13 +1,13 @@
 {
   "key_path": "CreateAgent",
-  "content": "Create Agent",
-  "content_en_sha1_hash": "a23848cb58c448a3d7658e361ad1820c5a8c3a85",
-  "created_at": "2025-10-27T16:14:12.329Z",
-  "updated_at": "2025-11-13T10:21:17.753Z",
+  "content": "Create agent",
+  "content_en_sha1_hash": "17cf5f17ee7582a32c8aafee5e97afab41b7280c",
+  "created_at": "2025-11-17T07:51:13.979Z",
+  "updated_at": "2025-11-17T07:52:58.994Z",
   "comment": {
-    "text": "This key displays the text \"Create Agent\" as the header of a dialog used to create a new agent. The dialog allows users to input and submit agent parameters. Translators should ensure the translation accurately conveys the action of creating a new agent.",
+    "text": "This key displays the text \"Create agent\" as the header of a dialog used to create a new agent. Translators should ensure this phrase accurately reflects the action of initiating agent creation within the user interface.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:41:20.634Z"
+    "updated_at": "2025-11-17T07:52:58.994Z"
   },
   "usage": [
     {
@@ -19,6 +19,24 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -46,6 +46,7 @@ import {
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 class FilesSettingsStore {
   thirdPartyStore;
@@ -538,7 +539,7 @@ class FilesSettingsStore {
 
     const path = `${extension.replace(/^\./, "")}.svg`;
 
-    if (enablePlugins && fileItemsList) {
+    if (!isAIAgents() && enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
         ({ value }) => value.extension === extension && value.fileIcon,
       );

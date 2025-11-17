@@ -93,6 +93,7 @@ import {
   removeSeparator,
 } from "SRC_DIR/helpers/filesUtils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import {
   getUserFilter,
   setUserFilter,
@@ -4096,7 +4097,7 @@ class FilesStore {
 
       const pluginOptions = {};
 
-      if (enablePlugins && fileItemsList) {
+      if (!isAIAgents() && enablePlugins && fileItemsList) {
         fileItemsList.forEach(({ value }) => {
           if (value.extension === fileExst) {
             if (value.fileTypeName)

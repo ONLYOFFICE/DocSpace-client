@@ -621,7 +621,7 @@
   "NoFindingsFound": "No findings",
   "NoGroupsHere": "No groups here",
   "NoMCPServers": "No {{MCPServers}} connected yet",
-  "NoMCPServersDescription": "Please connect MCP servers in {{productName}} settings to use them in the AI agent.",
+  "NoMCPServersDescription": "Please connect {{MCPServers}} in {{productName}} settings to use them in the AI agent.",
   "NoRoomsFound": "No rooms found",
   "NoTags": "No tags",
   "NotAvailableUnderLicense": "Not available under this license",

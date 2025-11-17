@@ -170,6 +170,7 @@ const MCPServersSelector = ({
         MCPServers: t("Common:MCPServers"),
       })}
       emptyScreenDescription={t("Common:NoMCPServersDescription", {
+        MCPServers: t("Common:MCPServers"),
         productName: t("Common:ProductName"),
       })}
       searchEmptyScreenImage={

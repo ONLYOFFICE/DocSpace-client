@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Szablon pokoju <1>«{{title}}»</1> został zapisany",
   "ScheduledTrashMove": "{{date}} zostanie przeniesione do {{sectionName}}",
   "SendByEmail": "Wyślij e-mailem",
+  "SharedBy": "Udostępnił",
   "ShareFolder": "Udostępnij katalog",
   "ShareFolderDescription": "Zostanie utworzony nowy pokój, a cała zawartość wybranego katalogu zostanie do niego skopiowana. Następnie możesz zaprosić innych użytkowników do współpracy nad plikami w pokoju.",
   "SharePDFFormModalDescription": "Zostanie utworzony nowy pokój i formularz PDF zostanie do niego skopiowany. Następnie możesz zaprosić innych użytkowników do wypełnienia formularza w pokoju.",

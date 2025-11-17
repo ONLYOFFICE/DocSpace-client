@@ -70,6 +70,7 @@ const Message = ({
   userAvatar,
   isLast,
   getIcon,
+  getResultStorageId,
 }: MessageProps) => {
   const { currentChat } = useChatStore();
 
@@ -163,6 +164,7 @@ const Message = ({
           messageId={message.id}
           messageIndex={idx}
           getIcon={getIcon}
+          getResultStorageId={getResultStorageId}
         />
       ) : null}
     </div>

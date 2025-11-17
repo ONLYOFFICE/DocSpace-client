@@ -133,6 +133,7 @@
   "ImportFromPortal": "{{organizationName}} Workspace에서 가져오기",
   "ImportProcessingDescription": "데이터 마이그레이션이 진행 중입니다. 잠시만 기다려주세요.",
   "ImportSectionDescription": "가져오기할 섹션을 선택하세요. {{productName}}의 해당 섹션에 표시됩니다.",
+  "ImportSectionDisabled": "{{importSectionName}}을 가져오려면 먼저 \"<1>{{sectionName}}</1>\" 옵션을 활성화하세요.",
   "IncludedInBusiness": "비즈니스 요금제에 포함되어 있습니다",
   "IntegrationRequest": "{{organizationName}} {{productName}}에 유용한 통합 또는 구성 요소가 부족한가요? 저희 팀이 검토할 수 있도록 요청을 남겨주세요.",
   "InvitationSettings": "초대 설정",

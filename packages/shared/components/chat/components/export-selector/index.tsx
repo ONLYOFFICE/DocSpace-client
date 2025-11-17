@@ -45,7 +45,7 @@ type ExportSelectorProps = {
     fileName: string,
     isChecked: boolean,
   ) => Promise<void>;
-  roomId: string | number;
+  currentFolderId: string | number;
   getFileName: () => string;
 };
 
@@ -54,7 +54,7 @@ const ExportSelector = ({
   onCloseFolderSelector,
   getIcon,
   onSubmit,
-  roomId,
+  currentFolderId,
   getFileName,
 }: ExportSelectorProps) => {
   const { t } = useTranslation(["Common"]);
@@ -103,7 +103,7 @@ const ExportSelector = ({
       disabledItems={[]}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={roomId}
+      currentFolderId={currentFolderId}
       rootFolderType={FolderType.Rooms}
       footerCheckboxLabel={t("Common:OpenSavedDocument")}
       footerInputHeader={t("Common:FileName")}

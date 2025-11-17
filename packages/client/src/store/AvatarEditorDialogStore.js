@@ -65,6 +65,10 @@ class AvatarEditorDialogStore {
     this.uploadedFile = file;
   };
 
+  clearUploadedFile = () => {
+    this.uploadedFile = null;
+  };
+
   setImage = (image) => {
     this.image = { ...image, uploadedFile: this.uploadedFile };
   };

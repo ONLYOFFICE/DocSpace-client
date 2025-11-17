@@ -150,6 +150,7 @@ export default class ChatStore {
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
+      throw error;
     }
 
     if (this.currentChat?.id === id) {

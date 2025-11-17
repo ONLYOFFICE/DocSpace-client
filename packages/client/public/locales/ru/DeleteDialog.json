@@ -1,4 +1,6 @@
 {
+  "DeleteAIAgentChatDescription": "Вы собираетесь удалить <strong>{{chatName}}</strong>.\n Все сообщения и история чата будут удалены без возможности восстановления.",
+  "DeleteAIAgentChatTitle": "Удалить чат?",
   "DeleteAIAgentDescription": "Агент <strong>\"{{agentName}}\"</strong> будет удален без возможности восстановления. Все данные и доступ пользователей будут потеряны.",
   "DeleteAIAgentTitle": "Удалить этого агента?",
   "DeleteAIAgentWarning": "Я понимаю последствия и хочу удалить агента",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Эти элементы будут окончательно удалены через 30 дней.",
   "ItemsPermanentlyDeleted": "Эти элементы будут окончательно удалены из раздела {{trashSection}}.",
   "removeFromListDescription": "Вы собираетесь удалить <1>{{title}}</1> из списка. Продолжить?",
-  "removeFromListDescriptionPlural": "Вы собираетесь удалить <1>({{count}}) элементов</1> из списка. Продолжить?",
-  "DeleteAIAgentChatTitle": "Удалить чат?",
-  "DeleteAIAgentChatDescription": "Вы собираетесь удалить <strong>{{chatName}}</strong>.\n Все сообщения и история чата будут удалены без возможности восстановления."
+  "removeFromListDescriptionPlural": "Вы собираетесь удалить <1>({{count}}) элементов</1> из списка. Продолжить?"
 }

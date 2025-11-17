@@ -352,6 +352,7 @@ export const setInvitationLinks = async (
   access,
   linkId,
   expirationDate,
+  maxUseCount,
 ) => {
   const options = {
     method: "put",
@@ -361,6 +362,7 @@ export const setInvitationLinks = async (
       title,
       access,
       expirationDate,
+      maxUseCount,
     },
   };
   const skipRedirect = true;

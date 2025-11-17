@@ -85,14 +85,15 @@ const ExternalLinks = ({
   editLink,
   isLinksToggling,
   setIsLinksToggling,
-  showUsersLimitWarning,
-  usersNumber,
-  maxUsersNumber,
   theme,
   culture,
   isAIAgentsFolder,
 }) => {
   // const [actionLinksVisible, setActionLinksVisible] = useState(false);
+
+  const showUsersJoinedBlock = !!activeLink.maxUseCount;
+  const showUsersLimitWarning =
+    activeLink?.currentUseCount >= activeLink?.maxUseCount;
 
   const inputsRef = useRef();
 
@@ -104,6 +105,7 @@ const ExternalLinks = ({
         0,
         shareLinks[0].id
       ));
+    setActiveLink({});
     return setShareLinks([]);
   };
 
@@ -310,36 +312,38 @@ const ExternalLinks = ({
                 {getCorrectDate(culture ?? "en", activeLink.expirationDate)}
               </Text>
             </div>
-            <div className="invite-via-link-settings">
-              <IconButton
-                iconName={PersonPlusReactSvgUrl}
-                size={12}
-                isDisabled
-              />
-              <Text
-                className="invite-via-link-settings-text"
-                fontSize="12px"
-                fontWeight={400}
-              >
-                {t("Files:UsersJoined")}
-              </Text>
-              <Text fontSize="12px" fontWeight={600}>
-                {usersNumber}/{maxUsersNumber}
-              </Text>
-              {showUsersLimitWarning ? (
-                <HelpButton
-                  place="right"
-                  iconNode={<ButtonAlertIcon />}
-                  tooltipContent={<Text>{t("Files:WarningUsersLimit")}</Text>}
-                  className="invite-via-link-settings-warning"
-                  color={
-                    theme?.isBase
-                      ? globalColors.lightErrorStatus
-                      : globalColors.darkErrorStatus
-                  }
+            {showUsersJoinedBlock ? (
+              <div className="invite-via-link-settings">
+                <IconButton
+                  iconName={PersonPlusReactSvgUrl}
+                  size={12}
+                  isDisabled
                 />
-              ) : null}
-            </div>
+                <Text
+                  className="invite-via-link-settings-text"
+                  fontSize="12px"
+                  fontWeight={400}
+                >
+                  {t("Files:UsersJoined")}
+                </Text>
+                <Text fontSize="12px" fontWeight={600}>
+                  {activeLink.currentUseCount}/{activeLink.maxUseCount}
+                </Text>
+                {showUsersLimitWarning ? (
+                  <HelpButton
+                    place="right"
+                    iconNode={<ButtonAlertIcon />}
+                    tooltipContent={<Text>{t("Files:WarningUsersLimit")}</Text>}
+                    className="invite-via-link-settings-warning"
+                    color={
+                      theme?.isBase
+                        ? globalColors.lightErrorStatus
+                        : globalColors.darkErrorStatus
+                    }
+                  />
+                ) : null}
+              </div>
+            ) : null}
           </div>
         </>
       ) : null}

@@ -58,16 +58,22 @@ const LinkSettingsPanel = ({
   activeLink,
   defaultAccess,
   showUsersLimitWarning,
-  usersNumber,
-  maxUsersNumber,
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common", "Files"]);
+
+  const usersNumber = activeLink.currentUseCount ?? 0;
+  const maxUsersNumber = activeLink.maxUseCount ?? 20;
+
+  const limitIsChecked =
+    typeof activeLink.maxUseCount === "undefined" || activeLink.maxUseCount > 0
+      ? true
+      : false;
 
   const date = activeLink.expirationDate
     ? moment(activeLink.expirationDate)
     : moment().add(7, "days");
 
-  const [userLimitIsChecked, setUserLimitIsChecked] = useState(true);
+  const [userLimitIsChecked, setUserLimitIsChecked] = useState(limitIsChecked);
   const [limitDate, setLimitDate] = useState<moment.Moment>(date);
   const [maxNumber, setMaxNumber] = useState(String(maxUsersNumber));
   const [hasError, setHasError] = useState(false);
@@ -116,7 +122,13 @@ const LinkSettingsPanel = ({
           const linkToSubmit = {
             ...defaultLink,
             expirationDate: moment(limitDate).toISOString(),
-          } as TOption & { expirationDate: string };
+            maxUseCount: Number(maxNumber),
+            currentUseCount: usersNumber,
+          } as TOption & {
+            expirationDate: string;
+            maxUseCount: number;
+            currentUseCount: number;
+          };
 
           onSubmit(linkToSubmit);
         }

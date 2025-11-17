@@ -100,7 +100,7 @@ export const getDescription = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
-  security: Nullable<TFolderSecurity>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
@@ -121,7 +121,10 @@ export const getDescription = (
         </>
       );
 
-    if (isResultsTab) return t("AIRoom:EmptyResultsDescription");
+    if (isResultsTab)
+      return security && "UseChat" in security && security.UseChat
+        ? t("AIRoom:EmptyResultsDescription")
+        : t("AIRoom:EmptyResultsViewerDescription");
   }
 
   if (isRootEmptyPage)
@@ -159,6 +162,7 @@ export const getTitle = (
   isArchiveFolderRoot: boolean,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
@@ -171,7 +175,10 @@ export const getTitle = (
   if (isAIRoom) {
     if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeTitle");
 
-    if (isResultsTab) return t("AIRoom:EmptyResultsTitle");
+    if (isResultsTab)
+      return security && "UseChat" in security && security.UseChat
+        ? t("AIRoom:EmptyResultsTitle")
+        : t("Common:NothingToShowYet");
   }
 
   if (isRootEmptyPage)
@@ -206,11 +213,20 @@ export const getIcon = (
   parentRoomType: Nullable<FolderType>,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ): JSX.Element => {
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
   return isFolder
-    ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
-    : getRoomIcon(type, isBaseTheme, access)!;
+    ? getFolderIcon(
+        parentRoomType,
+        isBaseTheme,
+        access,
+        folderType,
+        security,
+        isResultsTab,
+      )
+    : getRoomIcon(type, isBaseTheme, access, security, isResultsTab)!;
 };
 
 export const getOptions = (

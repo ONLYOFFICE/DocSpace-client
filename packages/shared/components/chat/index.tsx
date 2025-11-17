@@ -53,8 +53,8 @@ const Chat = observer(
     toolsSettings,
     isAdmin = false,
     standalone = false,
-    canUseChat = false,
     aiReady = false,
+    getResultStorageId,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
@@ -66,12 +66,12 @@ const Chat = observer(
           selectedModel={selectedModel}
           isLoading={isLoadingChat}
           getIcon={getIcon}
+          getResultStorageId={getResultStorageId}
           roomId={roomId}
           aiReady={aiReady}
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen
-            canUseChat={canUseChat}
             aiReady={aiReady}
             standalone={standalone}
             isPortalAdmin={isAdmin}
@@ -82,6 +82,7 @@ const Chat = observer(
               userAvatar={userAvatar}
               isLoading={isLoadingChat}
               getIcon={getIcon}
+              getResultStorageId={getResultStorageId}
             />
             <ChatFooter
               attachmentFile={attachmentFile}
@@ -110,17 +111,15 @@ const ChatWrapper = (props: ChatProps) => {
 
     isAdmin = false,
     standalone = false,
-    canUseChat = false,
     aiReady = false,
   } = props;
 
   const isLoadingChat = isLoading || !roomId;
   const hasChats = initChats?.chats?.length > 0;
 
-  if (!isLoadingChat && (!canUseChat || (!aiReady && !hasChats))) {
+  if (!isLoadingChat && !aiReady && !hasChats) {
     return (
       <ChatNoAccessScreen
-        canUseChat={canUseChat}
         aiReady={aiReady}
         standalone={standalone}
         isPortalAdmin={isAdmin}

@@ -51,6 +51,7 @@ export type SelectChatProps = {
   isLoadingProp?: boolean;
   roomId: string | number;
   getIcon: TGetIcon;
+  getResultStorageId: () => number | null;
 };
 
 export type RenameChatProps = {
@@ -70,6 +71,7 @@ export type MessageProps = {
   userAvatar: string;
   isLast: boolean;
   getIcon: TGetIcon;
+  getResultStorageId: () => number | null;
 };
 
 export type MessageButtonsProps = {
@@ -79,6 +81,7 @@ export type MessageButtonsProps = {
   isLast: boolean;
   getIcon: TGetIcon;
   messageIndex: number;
+  getResultStorageId: () => number | null;
 };
 
 export type MessageCodeBlockProps = {
@@ -113,6 +116,7 @@ export type MessageBodyProps = {
   isLoading?: boolean;
 
   getIcon: TGetIcon;
+  getResultStorageId: () => number | null;
 };
 
 export type FilesListProps = {
@@ -176,8 +180,8 @@ export type ChatProps = {
   userAvatar: MessageBodyProps["userAvatar"];
   selectedModel: string;
   getIcon: ChatInputProps["getIcon"];
+  getResultStorageId: () => number | null;
   isLoading?: boolean;
-  canUseChat?: boolean;
   aiReady: boolean;
 
   attachmentFile: ChatInputProps["attachmentFile"];

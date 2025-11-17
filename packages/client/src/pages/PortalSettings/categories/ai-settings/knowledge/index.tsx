@@ -74,9 +74,21 @@ const KnowledgeComponent = ({
     React.useState<boolean>(false);
 
   const [isKeyHidden, setIsKeyHidden] = React.useState(!!knowledgeConfig?.key);
-  const [value, setValue] = React.useState(
-    knowledgeConfig?.key ? FAKE_KEY_VALUE : "",
-  );
+  const [valuesByProvider, setValuesByProvider] = React.useState<
+    Record<KnowledgeType, string>
+  >(() => {
+    const initial: Record<KnowledgeType, string> = {
+      [KnowledgeType.OpenAi]: "",
+      [KnowledgeType.OpenRouter]: "",
+      [KnowledgeType.None]: "",
+    };
+
+    if (knowledgeConfig?.type && knowledgeConfig.key) {
+      initial[knowledgeConfig.type] = FAKE_KEY_VALUE;
+    }
+
+    return initial;
+  });
   const [selectedOption, setSelectedOption] = React.useState<KnowledgeType>(
     () => {
       if (knowledgeConfig?.type === KnowledgeType.OpenAi)
@@ -88,7 +100,10 @@ const KnowledgeComponent = ({
   const [saveRequestRunning, setSaveRequestRunning] = React.useState(false);
 
   const onChange = (_: React.ChangeEvent<HTMLInputElement>, value?: string) => {
-    setValue(value || "");
+    setValuesByProvider((prev) => ({
+      ...prev,
+      [selectedOption]: value || "",
+    }));
   };
 
   const onRestoreToDefault = async () => {
@@ -96,7 +111,11 @@ const KnowledgeComponent = ({
   };
 
   const refreshData = () => {
-    setValue("");
+    setValuesByProvider({
+      [KnowledgeType.OpenAi]: "",
+      [KnowledgeType.OpenRouter]: "",
+      [KnowledgeType.None]: "",
+    });
     setSelectedOption(KnowledgeType.None);
     setIsKeyHidden(false);
 
@@ -110,9 +129,11 @@ const KnowledgeComponent = ({
   const onSave = async () => {
     if (isKeyHidden) return;
 
+    const currentValue = valuesByProvider[selectedOption] || "";
+
     setSaveRequestRunning(true);
     try {
-      await updateKnowledge?.(selectedOption, value);
+      await updateKnowledge?.(selectedOption, currentValue);
 
       toastr.success(t("AISettings:KnowledgeEnabledSuccess"));
     } catch (e) {
@@ -141,10 +162,19 @@ const KnowledgeComponent = ({
     return items.find((item) => item.key === selectedOption);
   }, [items, selectedOption]);
 
+  const currentValue = React.useMemo(() => {
+    return valuesByProvider[selectedOption] || "";
+  }, [valuesByProvider, selectedOption]);
+
   React.useEffect(() => {
     if (knowledgeConfig?.type) {
       setIsKeyHidden(true);
-      setValue(FAKE_KEY_VALUE);
+      if (knowledgeConfig.key) {
+        setValuesByProvider((prev) => ({
+          ...prev,
+          [knowledgeConfig.type!]: FAKE_KEY_VALUE,
+        }));
+      }
     }
 
     setSelectedOption(() => {
@@ -197,7 +227,7 @@ const KnowledgeComponent = ({
     );
 
   const isSaveDisabled =
-    !value || selectedOption === KnowledgeType.None || isKeyHidden;
+    !currentValue || selectedOption === KnowledgeType.None || isKeyHidden;
 
   const tooltipId = "tooltip-web-search";
 
@@ -270,7 +300,7 @@ const KnowledgeComponent = ({
                 <PasswordInput
                   className={styles.passwordInput}
                   placeholder={t("AISettings:EnterKey")}
-                  inputValue={value}
+                  inputValue={currentValue}
                   onChange={onChange}
                   scale
                   isSimulateType

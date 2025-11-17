@@ -7,6 +7,7 @@
   "EmptyKnowledgeDescriptionActions": "Try these actions to get started:",
   "EmptyKnowledgeTitle": "No files uploaded yet",
   "EmptyResultsDescription": "Files generated in AI-Chat will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.",
+  "EmptyResultsViewerDescription": "You’ll see the results of AI chat activity from other users here once they become available.",
   "EmptyResultsTitle": "No results yet",
   "InstructionsDescriptionAgent": "Describe how the AI agent should behave and respond. Define its role, tone, and main tasks.",
   "InstructionsDescriptionAgentExample": "Example: “You are an AI PR assistant that helps write and edit press releases. Maintain a professional, confident, and media-friendly tone. Highlight key messages clearly, avoid jargon, and keep the text concise and engaging.”",
@@ -23,5 +24,6 @@
   "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results.",
   "ResultStorage": "Result Storage",
   "UploadFilesDevice": "Upload files from your personal device",
-  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}"
+  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "You’re in <strong>view-only</strong> mode for this AI agent. You can see the results of AI chat activity from other users."
 }

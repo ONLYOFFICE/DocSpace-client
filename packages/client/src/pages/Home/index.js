@@ -164,7 +164,6 @@ const PureHome = (props) => {
 
     aiConfig,
     currentTab,
-    isAIRoom,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -417,7 +416,6 @@ const PureHome = (props) => {
         </Section.SectionWarning>
 
         {!isChat &&
-        !isAIRoom &&
         !isDisabledKnowledge &&
         shouldShowFilter &&
         !isProfile &&
@@ -469,7 +467,6 @@ export const Component = inject(
       setSelectedFolder,
       security: folderSecurity,
       title: selectedFolderTitle,
-      isAIRoom,
     } = selectedFolderStore;
 
     const canCreateSecurity = folderSecurity?.Create;
@@ -743,7 +740,6 @@ export const Component = inject(
 
       currentTab: aiRoomStore.currentTab,
       aiConfig: settingsStore.aiConfig,
-      isAIRoom,
     };
   }
 )(observer(Home));

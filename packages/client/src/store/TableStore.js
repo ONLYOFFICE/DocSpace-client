@@ -456,7 +456,7 @@ class TableStore {
         isPersonalReadOnly,
         isRecentFolder,
         isFavoritesFolder,
-        isSharedWithMeFolderRoot,
+        isSharedWithMeFolder,
         isAIAgentsFolder,
       } = this.treeFoldersStore;
 
@@ -491,7 +491,7 @@ class TableStore {
         return;
       }
 
-      if (isSharedWithMeFolderRoot) {
+      if (isSharedWithMeFolder) {
         this.setSharedByShareWithMeColumn(
           splitColumns.includes("SharedByShareWithMe"),
         );
@@ -888,7 +888,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
@@ -936,7 +936,7 @@ class TableStore {
       tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
     else if (isFavoritesFolder)
       tableStorageName = `${TABLE_FAVORITES_COLUMNS}=${userId}`;
-    else if (isSharedWithMeFolderRoot)
+    else if (isSharedWithMeFolder)
       tableStorageName = `${TABLE_SHARED_WITH_ME_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
@@ -957,7 +957,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
@@ -1007,7 +1007,7 @@ class TableStore {
       columnStorageName = `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnStorageName = `${COLUMNS_GROUPS_SIZE}=${userId}`;
-    else if (isSharedWithMeFolderRoot)
+    else if (isSharedWithMeFolder)
       columnStorageName = `${COLUMNS_SHARED_WITH_ME_SIZE}=${userId}`;
     else if (isDocumentsFolder) columnStorageName = `${COLUMNS_SIZE}=${userId}`;
     else columnStorageName = "";
@@ -1026,7 +1026,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
@@ -1077,7 +1077,7 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnInfoPanelStorageName = `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`;
-    else if (isSharedWithMeFolderRoot)
+    else if (isSharedWithMeFolder)
       columnInfoPanelStorageName = `${COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE}=${userId}`;
     else if (isDocumentsFolder)
       columnInfoPanelStorageName = `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;

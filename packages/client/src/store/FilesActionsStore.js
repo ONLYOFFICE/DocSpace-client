@@ -2709,7 +2709,7 @@ class FilesActionStore {
       }
 
       if ((fileStatus & FileStatus.IsNew) === FileStatus.IsNew)
-        this.onMarkAsRead(item);
+        await this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
         let shareKey = item.requestToken;
@@ -2790,7 +2790,12 @@ class FilesActionStore {
       CategoryType.Trash !== categoryType && urlFilter?.folder
     );
 
-    if (roomType === RoomsType.AIRoom) {
+    if (
+      roomType === RoomsType.AIRoom ||
+      categoryType === CategoryType.Chat ||
+      categoryType === CategoryType.AIAgent ||
+      categoryType === CategoryType.AIAgents
+    ) {
       return this.moveToAIAgentsPage();
     }
 

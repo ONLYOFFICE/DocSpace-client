@@ -1,5 +1,5 @@
 {
-  "AIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an MCP server.",
+  "AIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an {{mcpServer}}.",
   "AITools": "AI tools",
   "AItoolsConfirm": "Enabling the AI tools service will grant all {{productName}} users access to AI-powered features, provided the wallet has sufficient funds. Are you sure you want to continue?",
   "AIToolsEnabled": "AI tools service successfully enabled.",

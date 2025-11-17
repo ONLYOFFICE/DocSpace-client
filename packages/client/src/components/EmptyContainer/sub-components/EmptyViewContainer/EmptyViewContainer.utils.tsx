@@ -229,7 +229,9 @@ const getAIAgentsAIEnabledDescription = (
 ) => {
   return isUser(access)
     ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription")
-    : t("EmptyView:EmptyAIAgentsDescription");
+    : t("EmptyView:EmptyAIAgentsDescription", {
+        mcpServer: t("Common:MCPServer"),
+      });
 };
 
 export const getRootDescription = (

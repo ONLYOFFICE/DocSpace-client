@@ -22,7 +22,7 @@
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Connect your wallet and enable AI features",
   "EmptyAIAgentsAIDisabledUserTitle": "AI agents are not available yet",
   "EmptyAIAgentsAIEnabledUserDescription": "Once your team invites you to collaborate, AI agents will appear here, ready to assist with documents, knowledge management, and everyday tasks.",
-  "EmptyAIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an MCP server. Invite your colleagues to collaborate and make the most of the agent’s chat capabilities.",
+  "EmptyAIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an {{mcpServer}}. Invite your colleagues to collaborate and make the most of the agent’s chat capabilities.",
   "EmptyAIAgentsTitle": "Create your AI agent",
   "EmptyAIAgentsUserTitle": "No AI agents available yet",
   "EmptyDescription": "Get started with quick actions:",

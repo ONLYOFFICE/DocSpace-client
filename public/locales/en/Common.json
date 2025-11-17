@@ -182,7 +182,7 @@
   "ConnectFolderTitle": "Folder title",
   "ConnectingAccount": "Connecting account",
   "ConnectionUrl": "Connection URL",
-  "ConnectMCPServers": "To use manage connection, you need to connect MCP Servers inside room settings",
+  "ConnectMCPServers": "To use manage connection, you need to connect {{MCPServers}} inside room settings",
   "ConnectWebSearch": "To use web search, you need to connect it in the {{productName}} settings.",
   "Contacts": "Contacts",
   "ContactUs": "For sales questions, contact us at",
@@ -1069,6 +1069,6 @@
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
-  "MCPServer": "MCP Server",
-  "MCPServers": "MCP Servers"
+  "MCPServer": "MCP server",
+  "MCPServers": "MCP servers"
 }

@@ -360,7 +360,13 @@ const ToolsSettings = ({
               },
               icon: ManageConnectionsReactSvgUrl,
               disabled: !showManageConnectionItem,
-              getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
+              getTooltipContent: () => (
+                <Text>
+                  {t("ConnectMCPServers", {
+                    MCPServers: t("Common:MCPServers"),
+                  })}
+                </Text>
+              ),
             },
           ]
         : []),

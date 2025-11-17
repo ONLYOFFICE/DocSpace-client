@@ -3,7 +3,7 @@
   "content": "Upload a ready PDF form to the room from your device.",
   "content_en_sha1_hash": "922cf3023c5789a82845f3b3593e0386d2421b27",
   "created_at": "2025-05-19T21:30:56.548Z",
-  "updated_at": "2025-11-17T07:52:04.408Z",
+  "updated_at": "2025-11-17T11:52:35.135Z",
   "comment": {
     "text": "This translation key is used for the \"Upload a ready PDF form to the room from your device\" option in a files selector filter, likely appearing as a button or dialog title.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 297,
+      "line_number": 301,
       "context": "FilesSelectorFilterTypes.ALL,\n );\n \n const uploadFromDevicePDF = createUploadFromDeviceOption(\n t(\"EmptyView:UploadDevicePDFFormOptionTitle\"),\n t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(\n t(\"Common:InviteContacts\"),",
       "module": "/packages/client"
     }

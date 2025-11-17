@@ -3,7 +3,7 @@
   "content": "Please note that if you have shared them with someone, they will become unavailable.",
   "content_en_sha1_hash": "840b5acfff4dfd6368270d6e180b41874d1ce417",
   "created_at": "2025-10-27T16:14:31.232Z",
-  "updated_at": "2025-11-03T12:10:34.993Z",
+  "updated_at": "2025-11-17T13:24:55.369Z",
   "comment": {
     "text": "This key displays a warning message within a delete dialog, informing the user that shared items will become unavailable after deletion. It appears as a note to explain the consequence of deleting items that have been shared with others. Translators should ensure the message accurately conveys the impact of deleting shared items.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 134,
+      "line_number": 149,
       "context": "trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n const items = separateItems(selection);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 134,
+      "line_number": 149,
       "context": "trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n const items = separateItems(selection);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 134,
+      "line_number": 149,
       "context": "trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n const items = separateItems(selection);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 134,
+      "line_number": 149,
       "context": "trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n const items = separateItems(selection);",
       "module": "/packages/client"
     }

@@ -220,7 +220,7 @@ const AddUpdateDialogComponent = ({
       onClose={onClose}
       withBodyScroll
     >
-      <ModalDialog.Header>{t("AISettings:AIProvider")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:AIProvider")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <form className={styles.modalBody} onSubmit={onSubmit}>

@@ -111,19 +111,19 @@ const AiSettings = ({
   React.useEffect(() => {
     const titleKey =
       currentTabId === "providers"
-        ? "AISettings:AIProvider"
+        ? "Common:AIProvider"
         : currentTabId === "search"
           ? "Common:WebSearchAI"
           : currentTabId === "knowledge"
             ? "AIRoom:Knowledge"
-            : "AISettings:MCPSettingTitle";
+            : "Common:MCPSettingTitle";
     setDocumentTitle(t(titleKey));
   }, [t, currentTabId]);
 
   const serversData = [
     {
       id: "servers",
-      name: t("AISettings:MCPSettingTitle"),
+      name: t("Common:MCPSettingTitle"),
       content: <MCPServers standalone={standalone} />,
       onClick: initMCPServers,
     },
@@ -133,7 +133,7 @@ const AiSettings = ({
     ? [
         {
           id: "providers",
-          name: t("AISettings:AIProvider"),
+          name: t("Common:AIProvider"),
           content: <AIProvider />,
           onClick: initAIProviders,
         },

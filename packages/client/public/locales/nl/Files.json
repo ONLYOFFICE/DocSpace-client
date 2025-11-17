@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Kamer sjabloon <1>«{{title}}»</1> opgeslagen",
   "ScheduledTrashMove": "{{date}} wordt verplaatst naar {{sectionName}}",
   "SendByEmail": "Verstuur per e-mail",
+  "SharedBy": "Gedeeld door",
   "ShareFolder": "Deel map",
   "ShareFolderDescription": "Er wordt een nieuwe kamer aangemaakt en al het materiaal van de geselecteerde map wordt daarheen gekopieerd. Daarna kunt u andere gebruikers uitnodigen om samen te werken aan de bestanden binnen een kamer.",
   "SharePDFFormModalDescription": "Er wordt een nieuwe kamer aangemaakt en het PDF formulier wordt daarheen gekopieerd. U kunt dan andere gebruikers uitnodigen om het formulier in de kamer in te vullen.",

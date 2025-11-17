@@ -39,6 +39,7 @@ import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 import styles from "./Header.module.scss";
 import InfoPanelHeaderContentProps from "./Header.types";
@@ -159,7 +160,7 @@ const InfoPanelHeaderContent = ({
     });
   }
 
-  if (enablePlugins && infoPanelItemsList.length > 0) {
+  if (!isAIAgents() && enablePlugins && infoPanelItemsList.length > 0) {
     const isRoom = selection && "roomType" in selection && selection.roomType;
     const isFile = selection && "fileExst" in selection && selection.fileExst;
 

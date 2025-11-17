@@ -146,6 +146,7 @@ import {
   isFolder as isFolderUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import {
   getInfoPanelOpen,
   hideInfoPanel,
@@ -1015,6 +1016,7 @@ class ContextOptionsStore {
   // };
 
   onLoadPlugins = (item) => {
+    if (isAIAgents()) return [];
     const { contextOptions } = item;
     const { enablePlugins } = this.settingsStore;
 
@@ -3327,7 +3329,12 @@ class ContextOptionsStore {
             showUploadFolder ? uploadFolder : null,
           ];
 
-    if (mainButtonItemsList && enablePlugins && !isRoomsFolder) {
+    if (
+      !isAIAgents() &&
+      mainButtonItemsList &&
+      enablePlugins &&
+      !isRoomsFolder
+    ) {
       const pluginItems = [];
 
       mainButtonItemsList.forEach((option) => {

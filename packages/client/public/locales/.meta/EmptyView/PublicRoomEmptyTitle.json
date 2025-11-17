@@ -3,7 +3,7 @@
   "content": "Welcome to the Public room",
   "content_en_sha1_hash": "6489988fc5bed134cddf8d85fa49090d3f4e975e",
   "created_at": "2025-05-19T21:30:56.528Z",
-  "updated_at": "2025-11-03T12:10:34.913Z",
+  "updated_at": "2025-11-17T07:52:04.490Z",
   "comment": {
     "text": "This translation key is used for the title displayed in a public room, appearing as a welcome message when users enter the space. The text changes depending on the type of room. Translators should adapt this message to fit the tone and style of different languages while maintaining its welcoming nature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 353,
+      "line_number": 355,
       "context": "case RoomsType.FormRoom:\n return t(\"EmptyView:FormRoomEmptyTitle\");\n case RoomsType.EditingRoom:\n return t(\"EmptyView:CollaborationRoomEmptyTitle\");\n case RoomsType.PublicRoom:\n return t(\"EmptyView:PublicRoomEmptyTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"EmptyView:VirtualDataRoomEmptyTitle\");\n case RoomsType.CustomRoom:\n return t(\"EmptyView:CustomRoomEmptyTitle\");\n default:",
       "module": "/packages/client"
     }

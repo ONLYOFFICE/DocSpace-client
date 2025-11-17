@@ -133,6 +133,7 @@
   "ImportFromPortal": "Importar do espaço de trabalho {{organizationName}}",
   "ImportProcessingDescription": "Migração de dados em andamento. Por favor, aguarde.",
   "ImportSectionDescription": "Selecione seções para importação. Eles aparecerão nas seções correspondentes do {{productName}}.",
+  "ImportSectionDisabled": "Para importar {{importSectionName}}, ative primeiro a opção \"<1>{{sectionName}}</1>\".",
   "IncludedInBusiness": "Incluído no plano de negócios",
   "IntegrationRequest": "Está a faltar uma integração ou componente útil no {{organizationName}} {{productName}}? Deixe um pedido à nossa equipa e analisaremos o assunto.",
   "InvitationSettings": "Configurações do Convite",

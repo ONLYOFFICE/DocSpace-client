@@ -81,6 +81,7 @@ const ChangeRoomOwner = (props) => {
     userId,
     useModal = true,
     isAIAgent,
+    updateInfoPanelMembers,
   } = props;
 
   const handleClosePanel = () => {
@@ -99,6 +100,7 @@ const ChangeRoomOwner = (props) => {
       onOwnerChange && onOwnerChange(user[0]);
     } else {
       await changeRoomOwner(t, user[0]?.id, isChecked);
+      updateInfoPanelMembers();
     }
     handleClosePanel();
   };
@@ -192,10 +194,13 @@ export default inject(
     selectedFolderStore,
     filesActionsStore,
     userStore,
+    infoPanelStore,
   }) => {
     const { changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible } =
       dialogsStore;
     const { selection, bufferSelection } = filesStore;
+
+    const { updateInfoPanelMembers } = infoPanelStore;
 
     const room = selection.length
       ? selection[0]
@@ -210,6 +215,7 @@ export default inject(
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
       isAIAgent: room?.isAIAgent,
+      updateInfoPanelMembers,
     };
   },
 )(

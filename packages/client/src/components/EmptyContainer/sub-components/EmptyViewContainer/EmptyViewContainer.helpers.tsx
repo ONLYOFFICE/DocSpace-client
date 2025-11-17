@@ -115,7 +115,11 @@ export const getDescription = (
       return (
         <>
           {t("AIRoom:EmptyKnowledgeDescription")}
-          <Text fontSize="12px" style={{ marginTop: "8px" }}>
+          <Text
+            as="span"
+            fontSize="12px"
+            style={{ display: "block", marginTop: "8px" }}
+          >
             {t("AIRoom:EmptyKnowledgeDescriptionActions")}
           </Text>
         </>

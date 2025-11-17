@@ -66,6 +66,8 @@ const SelectChat = ({
   roomId,
   getIcon,
   getResultStorageId,
+  setIsAIAgentChatDelete,
+  setDeleteDialogVisible,
 }: SelectChatProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -110,22 +112,52 @@ const SelectChat = ({
     setIsRenameOpen((value) => !value);
   }, [isRequestRunning]);
 
+  const getFileName = () => {
+    const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+
+    return title ?? "";
+  };
+
   const onDeleteAction = React.useCallback(async () => {
-    if (isRequestRunning) return;
-    await deleteChat(hoveredItem);
-    if (hoveredItem === currentChat?.id) {
-      startNewChat();
-      updateUrlChatId("");
+    try {
+      await deleteChat(hoveredItem);
+
+      if (hoveredItem === currentChat?.id) {
+        startNewChat();
+        updateUrlChatId("");
+      }
+      setIsOpen(false);
+      setHoveredItem("");
+
+      toastr.success(t("Common:ChatSuccessDeleted"));
+    } catch (error) {
+      console.error(error);
     }
-    setIsOpen(false);
-    setHoveredItem("");
   }, [
     hoveredItem,
     deleteChat,
-    isRequestRunning,
     currentChat?.id,
     startNewChat,
     updateUrlChatId,
+    t,
+  ]);
+
+  const onDelete = React.useCallback(() => {
+    if (isRequestRunning) return;
+
+    setIsAIAgentChatDelete?.({
+      visible: true,
+      itemName: getFileName(),
+      onDeleteAction: onDeleteAction,
+    });
+    setDeleteDialogVisible?.(true);
+  }, [
+    isRequestRunning,
+    hoveredItem,
+    chats,
+    onDeleteAction,
+    setIsAIAgentChatDelete,
+    setDeleteDialogVisible,
   ]);
 
   const onSaveToFileAction = React.useCallback(async () => {
@@ -133,12 +165,6 @@ const SelectChat = ({
     setIsExportOpen(true);
     setIsOpen(false);
   }, [hoveredItem, chats, isRequestRunning, t]);
-
-  const getFileName = () => {
-    const title = chats.find((chat) => chat.id === hoveredItem)?.title;
-
-    return title ?? "";
-  };
 
   const onSubmit = React.useCallback(
     async (
@@ -220,10 +246,10 @@ const SelectChat = ({
         key: "remove",
         label: t("Common:Delete"),
         icon: RemoveSvgUrl,
-        onClick: onDeleteAction,
+        onClick: onDelete,
       },
     ];
-  }, [t, onDeleteAction, onRenameToggle, onSaveToFileAction]);
+  }, [t, onDelete, onRenameToggle, onSaveToFileAction]);
 
   const rowHeight = getSelectChatRowHeight();
 

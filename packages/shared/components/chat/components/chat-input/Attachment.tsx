@@ -32,13 +32,13 @@ import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
 import { DeviceType, FolderType } from "../../../../enums";
 import { isDesktop, isTablet } from "../../../../utils";
 
-import { TFile } from "../../../../api/files/types";
+import type { TFile } from "../../../../api/files/types";
 
 import FilesSelector from "../../../../selectors/Files";
 
-import { TSelectorItem } from "../../../selector";
+import type { TSelectorItem } from "../../../selector";
 
-import { AttachmentProps } from "../../Chat.types";
+import type { AttachmentProps } from "../../Chat.types";
 import {
   CHAT_SUPPORTED_FORMATS,
   CHAT_MAX_FILE_COUNT,

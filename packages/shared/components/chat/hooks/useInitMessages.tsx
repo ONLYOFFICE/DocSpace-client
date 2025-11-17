@@ -24,43 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef } from "react";
-import { observer } from "mobx-react";
+import React from "react";
+import { useLocation } from "react-router";
 
-import { ChatHeaderProps } from "../../Chat.types";
+import { getChatMessages } from "../../../api/ai";
+import type { TMessage } from "../../../api/ai/types";
 
-import styles from "./ChatHeader.module.scss";
+const useInitMessages = () => {
+  const [messages, setMessages] = React.useState<TMessage[]>([]);
+  const [chatId, setChatId] = React.useState("");
+  const [total, setTotal] = React.useState(0);
+  const location = useLocation();
 
-import SelectChat from "./sub-components/SelectChat";
-import CreateChat from "./sub-components/CreateChat";
-import SelectModel from "./sub-components/SelectModel";
+  const initMessages = React.useCallback(async () => {
+    const currChatId = new URLSearchParams(location.search).get("chat");
 
-const ChatHeader = ({
-  selectedModel,
-  isLoading,
-  getIcon,
-  roomId,
-  aiReady,
-  getResultStorageId,
-  setIsAIAgentChatDelete,
-  setDeleteDialogVisible,
-}: ChatHeaderProps) => {
-  const headerRef = useRef<HTMLDivElement>(null);
+    if (!currChatId) {
+      setMessages([]);
+      setTotal(0);
+      setChatId("");
+      return;
+    }
 
-  return (
-    <div ref={headerRef} className={`${styles.chatHeader} chat-header`}>
-      <SelectChat
-        isLoadingProp={isLoading}
-        getIcon={getIcon}
-        getResultStorageId={getResultStorageId}
-        roomId={roomId}
-        setIsAIAgentChatDelete={setIsAIAgentChatDelete}
-        setDeleteDialogVisible={setDeleteDialogVisible}
-      />
-      <CreateChat isLoadingProp={isLoading} isDisabled={!aiReady} />
-      <SelectModel selectedModel={selectedModel} isLoading={isLoading} />
-    </div>
-  );
+    const { items, total } = await getChatMessages(currChatId, 0);
+
+    const reversedItems = items.reverse();
+
+    setMessages(reversedItems);
+    setTotal(total > 100 ? 100 : total);
+    setChatId(currChatId);
+  }, [location.search]);
+
+  return {
+    messages,
+    chatId,
+    total,
+    initMessages,
+  };
 };
 
-export default observer(ChatHeader);
+export default useInitMessages;

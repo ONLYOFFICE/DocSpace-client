@@ -113,7 +113,7 @@ const AiSettings = ({
       currentTabId === "providers"
         ? "AISettings:AIProvider"
         : currentTabId === "search"
-          ? "AISettings:Search"
+          ? "Common:WebSearchAI"
           : currentTabId === "knowledge"
             ? "AIRoom:Knowledge"
             : "AISettings:MCPSettingTitle";
@@ -140,7 +140,7 @@ const AiSettings = ({
         ...serversData,
         {
           id: "search",
-          name: t("AISettings:Search"),
+          name: t("Common:WebSearchAI"),
           content: <Search />,
           onClick: initWebSearch,
         },

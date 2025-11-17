@@ -183,7 +183,7 @@
   "ConnectingAccount": "Connecting account",
   "ConnectionUrl": "Connection URL",
   "ConnectMCPServers": "To use manage connection, you need to connect {{mcpServers}} inside room settings",
-  "ConnectWebSearch": "To use web search, you need to connect it in the {{productName}} settings.",
+  "ConnectWebSearch": "To use {{webSearch}}, you need to connect it in the {{productName}} settings.",
   "Contacts": "Contacts",
   "ContactUs": "For sales questions, contact us at",
   "ContainsSpecCharacter": "The title can't contain any of the following characters: *+:\"<>?|/",

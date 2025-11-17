@@ -56,7 +56,11 @@ const ResetWebSearchDialogComponent = ({
 
     try {
       await restoreWebSearch?.();
-      toastr.success(t("AISettings:WebSearchDisabledSuccess"));
+      toastr.success(
+        t("AISettings:WebSearchDisabledSuccess", {
+          webSearch: t("Common:WebSearchAI"),
+        }),
+      );
       onSuccess?.();
     } catch (error) {
       console.error(error);
@@ -72,7 +76,9 @@ const ResetWebSearchDialogComponent = ({
       <ModalDialog.Header>{t("Settings:ResetSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
-          <Trans t={t} i18nKey="ResetWebSearchDescription" ns="AISettings" />
+          {t("AISettings:ResetWebSearchDescription", {
+            webSearch: t("Common:WebSearchAI"),
+          })}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

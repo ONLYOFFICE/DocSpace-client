@@ -114,7 +114,11 @@ const SearchComponent = ({
     try {
       await updateWebSearch?.(true, selectedOption, value);
 
-      toastr.success(t("AISettings:WebSearchEnabledSuccess"));
+      toastr.success(
+        t("AISettings:WebSearchEnabledSuccess", {
+          webSearch: t("Common:WebSearchAI"),
+        }),
+      );
     } catch (e) {
       console.error(e);
       toastr.error(e as string);
@@ -200,13 +204,14 @@ const SearchComponent = ({
         data-tooltip-content={
           !hasAIProviders
             ? t("AISettings:ToUseAddProvider", {
-                value: t("AISettings:Search"),
+                value: t("Common:WebSearchAI"),
               })
             : undefined
         }
       >
         <Text className={generalStyles.description}>
           {t("AISettings:SearchDescription", {
+            webSearch: t("Common:WebSearchAI"),
             productName: t("Common:ProductName"),
           })}
         </Text>
@@ -227,7 +232,9 @@ const SearchComponent = ({
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("AISettings:SearchEngine")}
+            labelText={t("AISettings:SearchEngine", {
+              webSearch: t("Common:WebSearchAI"),
+            })}
             removeMargin
           >
             <ComboBox
@@ -273,7 +280,9 @@ const SearchComponent = ({
                   autoComplete="off"
                 />
                 <Text className={styles.hiddenKeyDescription}>
-                  {t("AISettings:WebSearchKeyDescription")}
+                  {t("AISettings:WebSearchKeyDescription", {
+                    webSearch: t("Common:WebSearchAI"),
+                  })}
                 </Text>
               </>
             )}

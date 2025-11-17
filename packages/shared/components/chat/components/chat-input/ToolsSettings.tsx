@@ -327,6 +327,7 @@ const ToolsSettings = ({
           <>
             <Text>
               {t("ConnectWebSearch", {
+                webSearch: t("Common:WebSearchAI"),
                 productName: t("Common:ProductName"),
               })}
             </Text>

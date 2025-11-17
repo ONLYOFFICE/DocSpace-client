@@ -133,6 +133,7 @@
   "ImportFromPortal": "Importeren vanuit {{organizationName}} Workspace",
   "ImportProcessingDescription": "Gegevensmigratie in uitvoering. Een moment geduld.",
   "ImportSectionDescription": "Selecteer secties om te importeren. Ze verschijnen in de overeenkomstige secties van {{productName}}.",
+  "ImportSectionDisabled": "Om {{importSectionName}} te importeren, schakel eerst de \"<1>{{sectionName}}</1>\" optie in.",
   "IncludedInBusiness": "Inbegrepen in Business plan",
   "IntegrationRequest": "Mist u een handige integratie of component in {{organizationName}} {{productName}}? Laat een verzoek achter bij ons team en wij zullen ernaar kijken.",
   "InvitationSettings": "Uitnodigingsinstellingen",

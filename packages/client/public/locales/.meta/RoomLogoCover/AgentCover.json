@@ -3,7 +3,7 @@
   "content": "Agent cover",
   "content_en_sha1_hash": "e32d1df54cb16aa495e5e330a82c5e326f523fa1",
   "created_at": "2025-11-13T14:53:05.216Z",
-  "updated_at": "2025-11-13T14:55:45.302Z",
+  "updated_at": "2025-11-17T07:52:04.624Z",
   "comment": {
     "text": "This key displays the text \"Agent cover\" in the header of a dialog. The dialog appears when a user is potentially viewing agent-related content within a room logo cover setting. Translators should consider this refers to a covering or visual element specifically associated with agents.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 294,
+      "line_number": 296,
       "context": "isScrollLocked={openColorPicker}\n dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>\n {isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"RoomLogoCover:RoomCover\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n forwardedRef={contentRef}",
       "module": "/packages/client"
     }

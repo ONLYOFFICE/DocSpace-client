@@ -3,7 +3,7 @@
   "content": "Open saved document in new tab",
   "content_en_sha1_hash": "7394664878c77b8982f77653fdf6ac8d29843f01",
   "created_at": "2025-05-19T21:30:57.133Z",
-  "updated_at": "2025-11-06T18:29:16.007Z",
+  "updated_at": "2025-11-17T07:52:05.012Z",
   "comment": {
     "text": "\"Opens a saved document in a new tab.\"",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/shared/components/chat/components/export-selector/index.tsx",
       "line_number": 108,
-      "context": "disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={roomId}\n rootFolderType={FolderType.Rooms}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={getFileName()}\n descriptionText=\"\"\n getFilesArchiveError={() => \"\"}\n withAIAgentsTreeFolder",
+      "context": "disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={currentFolderId}\n rootFolderType={FolderType.Rooms}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={getFileName()}\n descriptionText=\"\"\n getFilesArchiveError={() => \"\"}\n withAIAgentsTreeFolder",
       "module": "/packages/shared"
     }
   ],

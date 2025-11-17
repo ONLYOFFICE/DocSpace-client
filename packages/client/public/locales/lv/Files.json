@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Telpas veidne <1>«{{title}}»</1> saglabāta",
   "ScheduledTrashMove": "{{date}} tiks pārvietota uz {{sectionName}}",
   "SendByEmail": "Sūtīt pa e-pastu",
+  "SharedBy": "Kopīgojis",
   "ShareFolder": "Kopīgot mapi",
   "ShareFolderDescription": "Tiks izveidota jauna telpa, un tur tiks kopēts viss atlasītās mapes saturs. Pēc tam varat uzaicināt citus lietotājus sadarboties ar telpas failiem.",
   "SharePDFFormModalDescription": "Tiks izveidota jauna telpa, un tajā tiks kopēta PDF veidlapa. Pēc tam varat uzaicināt citus lietotājus aizpildīt veidlapu telpā.",

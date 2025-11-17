@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-11-13T10:21:17.697Z",
+  "updated_at": "2025-11-17T07:52:04.391Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -324,85 +324,85 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 259,
+      "line_number": 275,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 259,
+      "line_number": 275,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 259,
+      "line_number": 275,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 259,
+      "line_number": 275,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 259,
+      "line_number": 275,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 259,
+      "line_number": 275,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 259,
+      "line_number": 275,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 157,
+      "line_number": 159,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 157,
+      "line_number": 159,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 157,
+      "line_number": 159,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 157,
+      "line_number": 159,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 157,
+      "line_number": 159,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 157,
+      "line_number": 159,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 157,
+      "line_number": 159,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
@@ -1343,6 +1343,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
+      "line_number": 51,
+      "context": "<MobileCategoryWrapper\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper\n title={t(\"QuotaPerUser\")}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
       "line_number": 62,
       "context": "{...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={1}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n );\n };",
@@ -1770,20 +1776,20 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 73,
-      "context": "? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
+      "line_number": 68,
+      "context": "const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 73,
-      "context": "? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
+      "line_number": 68,
+      "context": "const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 73,
-      "context": "? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
+      "line_number": 68,
+      "context": "const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {",
       "module": "/packages/shared"
     },
     {

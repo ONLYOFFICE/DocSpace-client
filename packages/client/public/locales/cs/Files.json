@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Šablona místnosti <1>«{{title}}»</1> uložena",
   "ScheduledTrashMove": "{{date}} bude přesunut do {{sectionName}}",
   "SendByEmail": "Odeslat emailem",
+  "SharedBy": "Sdíleno společností",
   "ShareFolder": "Sdílet složku",
   "ShareFolderDescription": "Vytvoří se nová místnost a veškerý obsah vybrané složky se do ní zkopíruje. Poté můžete ke spolupráci na souborech v místnosti přizvat další uživatele.",
   "SharePDFFormModalDescription": "Vytvoří se nová místnost a PDF formulář se do ní zkopíruje. Do místnosti pak můžete pozvat další uživatele, aby formulář vyplnili.",

@@ -48,8 +48,6 @@
   "AIAgentSpaceQuotaExceeded": "Przekroczono limit przestrzeni dla agenta AI ({{size}}).",
   "AICanMakeMistakes": "AI może popełniać błędy. Proszę, zweryfikuj odpowiedzi.",
   "AIChatInput": "Czat ze sztuczną inteligencją",
-  "AIChatNoAccessDescription": "Można wyświetlić tego agenta i jego zapisane wyniki, ale rozpoczynanie nowych rozmów z AI nie jest dozwolone dla Twojej obecnej roli. Potrzebujesz dostępu? Skontaktuj się z administratorem lub właścicielem agenta, aby poprosić o uprawnienia.",
-  "AIChatNoAccessTitle": "Dostęp do czatu AI ograniczony",
   "AIChatOfferHelp": "Jak mogę pomóc?",
   "AIDisabledInfoBlockAdminSaasDescription": "Możliwości AI są obecnie wyłączone, co oznacza, że agent nie może przetwarzać rozmów ani zadań. Aby przywrócić pełną funkcjonalność, włącz funkcje AI w ustawieniach {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Możliwości AI są obecnie wyłączone, co oznacza, że agent nie może przetwarzać rozmów ani zadań. Połącz własną usługę AI, aby odblokować zaawansowane funkcje w {{productName}}.",

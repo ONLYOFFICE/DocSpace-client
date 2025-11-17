@@ -46,8 +46,6 @@
   "AgentOwner": "エージェント所有者",
   "AIAgents": "AIエージェント",
   "AIChatInput": "AIとチャットする",
-  "AIChatNoAccessDescription": "このエージェントとその保存内容は確認できますが、現在の権限では新しいAIチャットを開始できません。アクセス権限が必要ですか？管理者またはエージェントの所有者に連絡して、許可をリクエストしてください。",
-  "AIChatNoAccessTitle": "AIチャットへのアクセスが制限されています",
   "AIDisabledInfoBlockAdminSaasDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。完全な機能を復元するには、{{productName}}の設定でAI機能を有効にしてください。",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。{{productName}}の高度な機能を有効にするには、ご自身のAIサービスを接続してください。",
   "AIDisabledInfoBlockUserDescription": "AI機能は現在無効化されています。これにより、このエージェントはチャットやタスクを処理できません。正常に機能させるには、{{productName}}の管理者までAI機能を有効化するようにご連絡ください。",

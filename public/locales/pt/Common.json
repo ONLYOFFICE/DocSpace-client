@@ -48,8 +48,6 @@
   "AIAgentSpaceQuotaExceeded": "Limite de espaço do Agente de IA excedido ({{size}}).",
   "AICanMakeMistakes": "A IA pode cometer erros. Por favor, verifique as respostas.",
   "AIChatInput": "Converse com IA",
-  "AIChatNoAccessDescription": "Você pode visualizar este agente e seus resultados armazenados, mas iniciar novos chats de IA não é permitido para sua função atual. Precisa de acesso? Entre em contato com seu administrador ou o proprietário do agente para solicitar permissão.",
-  "AIChatNoAccessTitle": "Acesso ao chat de IA restrito",
   "AIChatOfferHelp": "Como posso ajudar?",
   "AIDisabledInfoBlockAdminSaasDescription": "As capacidades de IA estão atualmente desativadas, o que significa que este agente não pode processar chats ou tarefas. Para restaurar a funcionalidade total, ative os recursos de IA nas configurações do {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "As capacidades de IA estão atualmente desativadas, o que significa que este agente não pode processar chats ou tarefas. Conecte seu próprio serviço de IA para desbloquear recursos avançados em {{productName}}.",

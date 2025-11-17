@@ -46,8 +46,6 @@
   "AgentOwner": "Propietario del agente",
   "AIAgents": "Agentes de IA",
   "AIChatInput": "Chatear con la IA",
-  "AIChatNoAccessDescription": "Puede ver este agente y sus resultados almacenados, pero iniciar nuevos chats de IA no está permitido para su rol actual. ¿Necesita acceso? Póngase en contacto con su administrador o con el propietario del agente para solicitar permiso.",
-  "AIChatNoAccessTitle": "Acceso restringido al chat de IA",
   "AIDisabledInfoBlockAdminSaasDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Para restaurar la funcionalidad completa, active las funciones de IA en los ajustes de {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Conecte su propio servicio de IA para desbloquear funciones avanzadas en {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "Las capacidades de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Para volver a activarlo, pídale al administrador de {{productName}} que habilite las funciones de IA.",

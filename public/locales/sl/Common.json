@@ -48,8 +48,6 @@
   "AIAgentSpaceQuotaExceeded": "Presežena je kvota prostora za agente umetne inteligence ({{size}}).",
   "AICanMakeMistakes": "Umetna inteligenca lahko dela napake. Prosimo, dvakrat preverite odgovore.",
   "AIChatInput": "Pogovor z umetno inteligenco",
-  "AIChatNoAccessDescription": "Lahko si ogledate tega agenta in njegovih shranjenih rezultatov, vendar začetek novih pogovorov z umetno inteligenco ni dovoljen za vašo trenutno vlogo. Potrebujete dostop? Obrnite se na administratorja ali lastnika agenta, da zahtevate dovoljenje.",
-  "AIChatNoAccessTitle": "Omejen dostop do klepetalnega AI.",
   "AIChatOfferHelp": "Kako vam lahko pomagam?",
   "AIDisabledInfoBlockAdminSaasDescription": "AI zmogljivosti so trenutno onemogočene, kar pomeni, da ta agent ne more obdelovati klepetalnih oken ali nalog. Za ponovno omogočitev polne funkcionalnosti omogočite funkcije umetne inteligence v nastavitvah {{productName}}.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "Zmogljivosti umetne inteligence so trenutno onemogočene, kar pomeni, da ta agent ne more obdelovati klepetalnih pogovorov ali opravil. Povežite svojo storitev umetne inteligence, da odklenete napredne funkcije v {{productName}}.",

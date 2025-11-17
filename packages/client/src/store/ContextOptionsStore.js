@@ -2368,7 +2368,7 @@ class ContextOptionsStore {
           : isAIAgent
             ? t("DeleteAgent")
             : item.isTemplate
-              ? t("DeleteTemplate")
+              ? t("Files:DeleteTemplate")
               : item.isRoom
                 ? t("Common:DeleteRoom")
                 : t("Common:Delete"),

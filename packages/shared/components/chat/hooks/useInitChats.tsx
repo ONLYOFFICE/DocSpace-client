@@ -27,9 +27,7 @@
 import React from "react";
 
 import { getChats } from "../../../api/ai";
-import { TChat } from "../../../api/ai/types";
-
-import { toastr } from "../../toast";
+import type { TChat } from "../../../api/ai/types";
 
 const useInitChats = ({ roomId }: { roomId: string | number }) => {
   const [isLoading, setIsLoading] = React.useState(false);

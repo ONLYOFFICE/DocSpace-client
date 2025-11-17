@@ -111,6 +111,7 @@ import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 class FilesActionStore {
   settingsStore;
@@ -2684,7 +2685,7 @@ class FilesActionStore {
         return;
       }
 
-      if (fileItemsList && enablePlugins) {
+      if (!isAIAgents() && fileItemsList && enablePlugins) {
         let currPluginItem = null;
 
         fileItemsList.forEach((i) => {

@@ -63,11 +63,7 @@ const LinkSettingsPanel = ({
 
   const usersNumber = activeLink.currentUseCount ?? 0;
   const maxUsersNumber = activeLink.maxUseCount ?? 20;
-
-  const limitIsChecked =
-    typeof activeLink.maxUseCount === "undefined" || activeLink.maxUseCount > 0
-      ? true
-      : false;
+  const limitIsChecked = !activeLink.maxUseCount ? false : true;
 
   const date = activeLink.expirationDate
     ? moment(activeLink.expirationDate)
@@ -116,7 +112,7 @@ const LinkSettingsPanel = ({
       isLoading={!ready}
       onSubmit={() => {
         const defaultLink = filteredAccesses.find(
-          (a) => a.access === defaultAccess,
+          (a) => a.access === currentAccess?.access,
         );
         if (defaultLink) {
           const linkToSubmit = {

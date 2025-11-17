@@ -59,6 +59,7 @@ import ItemsList from "./sub-components/ItemsList";
 import LinkSettingsPanel from "../LinkSettingsPanel";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import { getInviteLink, setInviteLink } from "@docspace/shared/api/portal";
 
 const InvitePanel = ({
   folders,
@@ -97,6 +98,7 @@ const InvitePanel = ({
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [activeLink, setActiveLink] = useState({});
+  const [accountsLink, setAccountsLink] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [linkSettingsPanelVisible, setLinkSettingsPanelVisible] =
     useState(false);
@@ -107,6 +109,7 @@ const InvitePanel = ({
   const [showGuestsTab, setShowGuestsTab] = useState(true);
   const [linkSelectedAccess, setLinkSelectedAccess] = useState(null);
   const [isLinksToggling, setIsLinksToggling] = useState(false);
+  const [requestIsRunning, setRequestIsRunning] = useState(false);
 
   const navigate = useNavigate();
 
@@ -285,6 +288,42 @@ const InvitePanel = ({
     document.addEventListener("keyup", onKeyPress);
     return () => document.removeEventListener("keyup", onKeyPress);
   });
+
+  const getContactsInviteLink = async () => {
+    if (requestIsRunning) return;
+
+    try {
+      setRequestIsRunning(true);
+
+      const linkData = await getInviteLink(defaultAccess);
+      setAccountsLink(true);
+
+      if (!linkData) {
+        return;
+      }
+
+      onChangeExternalLinksVisible(true);
+
+      const newLinkData = {
+        ...linkData,
+        access: linkData.employeeType,
+        shareLink: linkData.url,
+        expirationDate: linkData.expiration,
+      };
+
+      setActiveLink(newLinkData);
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setRequestIsRunning(false);
+    }
+  };
+
+  useEffect(() => {
+    if (roomId === -1 && !accountsLink) {
+      getContactsInviteLink();
+    }
+  }, [roomId, getContactsInviteLink, accountsLink]);
 
   const onClickPayments = () => {
     const paymentPageUrl = combineUrl(
@@ -488,11 +527,24 @@ const InvitePanel = ({
     const selectedAccess = access.access;
 
     if (roomId === -1) {
-      link = shareLinks.find((l) => l.access === selectedAccess);
+      try {
+        const linkData = await getInviteLink(selectedAccess);
+        if (!linkData) return setExternalLinksVisible(false);
 
-      link.shareLink = await getPortalInviteLink(selectedAccess);
+        const linkDataObj = {
+          ...linkData,
+          access: linkData.employeeType,
+          shareLink: linkData.url,
+          expirationDate: linkData.expiration,
+        };
 
-      setActiveLink(link);
+        setActiveLink(linkDataObj);
+        copyLink(linkDataObj.shareLink);
+        setExternalLinksVisible(true);
+        return;
+      } catch (error) {
+        toastr.error(error);
+      }
     } else {
       try {
         const newLink = await api.rooms.setInvitationLinks(
@@ -536,6 +588,34 @@ const InvitePanel = ({
     copyLink(link.shareLink);
   };
 
+  const setInviteContactsLink = async (defaultLink) => {
+    if (requestIsRunning) return;
+
+    setRequestIsRunning(true);
+    try {
+      const link = await setInviteLink({
+        employeeType: defaultLink?.access ?? defaultAccess,
+        maxUseCount: defaultLink?.maxUseCount,
+        expiration: defaultLink?.expirationDate,
+      });
+
+      const linkData = {
+        ...link,
+        access: link.employeeType,
+        shareLink: link.url,
+        expirationDate: link.expiration,
+      };
+
+      setActiveLink(linkData);
+      copyLink(link.url);
+      onChangeExternalLinksVisible(true);
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setRequestIsRunning(false);
+    }
+  };
+
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
@@ -556,6 +636,7 @@ const InvitePanel = ({
           editLink={editLink}
           isLinksToggling={isLinksToggling}
           setIsLinksToggling={setIsLinksToggling}
+          setInviteContactsLink={setInviteContactsLink}
         />
 
         <InviteInput
@@ -598,6 +679,7 @@ const InvitePanel = ({
     scrollAllPanelContent,
     hasInvitedUsers,
     invitePanelBodyRef,
+    setInviteContactsLink,
   ]);
 
   const closeUsersPanel = () => {
@@ -656,6 +738,11 @@ const InvitePanel = ({
     roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
 
   const onSubmitLinkSettingsPanel = (defaultLink) => {
+    if (roomId === -1) {
+      setInviteContactsLink(defaultLink);
+      return onCloseLinkSettingsPanel();
+    }
+
     const defaultLinkAccess = (linkSelectedAccess ?? defaultLink).access;
 
     onCloseLinkSettingsPanel();
@@ -676,7 +763,8 @@ const InvitePanel = ({
       onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
       containerVisible={
-        !hideSelector ? addUsersPanelVisible || linkSettingsPanelVisible : false
+        linkSettingsPanelVisible ??
+        (!hideSelector ? addUsersPanelVisible : false)
       }
       isLoading={invitePanelIsLoding}
       withBodyScroll
@@ -723,7 +811,7 @@ const InvitePanel = ({
         </ModalDialog.Container>
       ) : null}
 
-      {!hideSelector && linkSettingsPanelVisible ? (
+      {linkSettingsPanelVisible ? (
         <ModalDialog.Container>
           <LinkSettingsPanel
             isVisible={linkSettingsPanelVisible}

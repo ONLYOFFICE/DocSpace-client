@@ -645,3 +645,33 @@ export async function getLicenseQuota() {
   const res = (await request(options)) as TLicenseQuota;
   return res;
 }
+
+export async function getInviteLink(employeeType) {
+  const options = {
+    method: "get",
+    url: `/portal/users/invitationlink/${employeeType}`,
+  };
+  const res = await request(options);
+  return res;
+}
+
+export async function setInviteLink(data) {
+  const options = {
+    method: "post",
+    url: `/portal/users/invitationlink`,
+    data,
+  };
+  const res = await request(options);
+  return res;
+}
+
+export async function deleteInviteLink(id) {
+  const data = { id };
+  const options = {
+    method: "delete",
+    url: "/portal/users/invitationlink",
+    data,
+  };
+  const res = await request(options);
+  return res;
+}

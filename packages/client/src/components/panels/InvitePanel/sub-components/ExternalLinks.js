@@ -60,6 +60,7 @@ import {
 } from "../StyledInvitePanel";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
+import { deleteInviteLink } from "@docspace/shared/api/portal";
 
 const ExternalLinks = ({
   t,
@@ -75,7 +76,6 @@ const ExternalLinks = ({
   setActiveLink,
   activeLink,
   isMobileView,
-  getPortalInviteLink,
   isUserTariffLimit,
   standalone,
   allowInvitingGuests,
@@ -88,10 +88,11 @@ const ExternalLinks = ({
   theme,
   culture,
   isAIAgentsFolder,
+  setInviteContactsLink,
 }) => {
   // const [actionLinksVisible, setActionLinksVisible] = useState(false);
 
-  const showUsersJoinedBlock = !!activeLink.maxUseCount;
+  const showUsersJoinedBlock = !!activeLink?.maxUseCount;
   const showUsersLimitWarning =
     activeLink?.currentUseCount >= activeLink?.maxUseCount;
 
@@ -117,12 +118,9 @@ const ExternalLinks = ({
     try {
       if (roomId === -1) {
         if (e?.target?.checked) {
-          const link = shareLinks.find((l) => l.access === defaultAccess);
-
-          link.shareLink = await getPortalInviteLink(defaultAccess);
-
-          setActiveLink(link);
-          copyLink(link.shareLink);
+          setInviteContactsLink();
+        } else {
+          deleteInviteLink(activeLink.id);
         }
       } else {
         !externalLinksVisible ? await editLink() : await disableLink();
@@ -216,13 +214,11 @@ const ExternalLinks = ({
       <StyledSubHeader $inline>
         {t("InviteViaLink")}
 
-        {roomId !== -1 ? (
-          <IconButton
-            iconName={SettingsReactSvgUrl}
-            size={16}
-            onClick={() => setLinkSettingsPanelVisible(true)}
-          />
-        ) : null}
+        <IconButton
+          iconName={SettingsReactSvgUrl}
+          size={16}
+          onClick={() => setLinkSettingsPanelVisible(true)}
+        />
 
         {/* {false ? (
           <div style={{ position: "relative" }}>
@@ -363,7 +359,6 @@ export default inject(
     const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
-    const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
     const { theme, standalone, allowInvitingGuests, culture } = settingsStore;
     const { isAIAgentsFolder } = treeFoldersStore;
@@ -376,11 +371,10 @@ export default inject(
       defaultAccess,
       isOwner,
       isAdmin,
-      getPortalInviteLink,
       isUserTariffLimit,
       standalone,
       allowInvitingGuests,
       isAIAgentsFolder,
     };
-  }
+  },
 )(observer(ExternalLinks));

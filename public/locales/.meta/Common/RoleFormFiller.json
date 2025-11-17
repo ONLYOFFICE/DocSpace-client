@@ -3,7 +3,7 @@
   "content": "Form filler",
   "content_en_sha1_hash": "36309bd9112093f7939d015f5678b7699adce63e",
   "created_at": "2025-05-19T21:30:48.030Z",
-  "updated_at": "2025-11-03T12:10:35.123Z",
+  "updated_at": "2025-11-17T11:52:35.401Z",
   "comment": {
     "text": "This translation key is used to display the role \"Form filler\" and its corresponding description in various parts of the UI, likely on access control settings or room information pages. It provides a clear label for users and reviewers in different contexts.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 80,
+      "line_number": 82,
       "context": "};\n \n const getFormFillerDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleFormFillerFormRoomDescription\");\n default:\n return t(\"Common:RoleFormFillerDescription\");\n }\n };",
       "module": "/packages/shared"
     },

@@ -3,7 +3,7 @@
   "content": "More",
   "content_en_sha1_hash": "4bab2d8fe13fa6ab57f80098b414f0f734c5dd25",
   "created_at": "2025-05-19T21:30:46.613Z",
-  "updated_at": "2025-11-13T07:42:11.017Z",
+  "updated_at": "2025-11-17T11:52:35.090Z",
   "comment": {
     "text": "This translation key is used for the label of a button that displays the word \"More\". It appears in a dropdown menu next to a main action button on an article page, allowing users to access additional options.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3094,
+      "line_number": 3096,
       "context": "// const moreActions = {\n //   id: \"personal_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3094,
+      "line_number": 3096,
       "context": "// const moreActions = {\n //   id: \"personal_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-11-17T07:52:04.391Z",
+  "updated_at": "2025-11-17T11:52:35.085Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -324,43 +324,43 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 275,
+      "line_number": 279,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 275,
+      "line_number": 279,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 275,
+      "line_number": 279,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 275,
+      "line_number": 279,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 275,
+      "line_number": 279,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 275,
+      "line_number": 279,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 275,
+      "line_number": 279,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
@@ -620,6 +620,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
       "line_number": 88,
       "context": "];\n };\n \n const name =\n item.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n const description =\n item.serverType === ServerType.Portal\n ? t(\"AISettings:MCPProductDescription\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
+      "line_number": 91,
+      "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <MobileCategoryWrapper\n title={t(\"PortalRenaming\", { productName: t(\"Common:ProductName\") })}\n subtitle={t(\"PortalRenamingNavDescription\")}\n url=\"/portal-settings/customization/general/portal-renaming\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}",
       "module": "/packages/client"
     },
     {
@@ -1530,19 +1536,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2168,
+      "line_number": 2170,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2168,
+      "line_number": 2170,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2168,
+      "line_number": 2170,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -1992,19 +1998,19 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 101,
+      "line_number": 103,
       "context": "const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 101,
+      "line_number": 103,
       "context": "const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 101,
+      "line_number": 103,
       "context": "const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
       "module": "/packages/shared"
     }

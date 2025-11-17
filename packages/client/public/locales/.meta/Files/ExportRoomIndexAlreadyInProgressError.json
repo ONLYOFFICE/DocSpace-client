@@ -3,7 +3,7 @@
   "content": "Room index export is already in progress. Please wait until the current export is completed to start the new one.",
   "content_en_sha1_hash": "b928d51c336243ae9175762494646752b00726e4",
   "created_at": "2025-05-19T21:30:55.662Z",
-  "updated_at": "2025-11-17T07:52:04.996Z",
+  "updated_at": "2025-11-17T11:52:35.756Z",
   "comment": {
     "text": "This translation key is used to display an error message when a room index export is already in progress. The message instructs the user to wait until the current export is completed before starting a new one. It appears as an error toast notification in the application's UI, typically triggered by a button click or action related to file exports.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3485,
+      "line_number": 3486,
       "context": "exportRoomIndex = async (t, roomId) => {\n const previousExportInProgress =\n await this.checkPreviousExportRoomIndexInProgress();\n \n if (previousExportInProgress) {\n return toastr.error(t(\"Files:ExportRoomIndexAlreadyInProgressError\"));\n }\n \n const { setSecondaryProgressBarData } =\n this.uploadDataStore.secondaryProgressDataStore;",
       "module": "/packages/client"
     }

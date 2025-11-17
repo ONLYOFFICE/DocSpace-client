@@ -3,7 +3,7 @@
   "content": "AI Agent space quota exceeded ({{size}}).",
   "content_en_sha1_hash": "a49e3d033b2a49cb327c3136aceef13abeeb3d42",
   "created_at": "2025-11-06T18:28:52.137Z",
-  "updated_at": "2025-11-06T18:31:16.797Z",
+  "updated_at": "2025-11-17T11:52:35.732Z",
   "comment": {
     "text": "This key displays an error message informing the user that they have exceeded the storage quota for AI Agents. The message includes the quota limit size, and appears when a user attempts to add more AI Agents beyond the allowed limit. Translators should ensure the size unit is handled correctly within the localized message.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 397,
+      "line_number": 398,
       "context": "});\n \n const size = getConvertedSize(t, roomFolder.quotaLimit);\n \n const error = isAIAgentsFolderRoot\n ? t(\"Common:AIAgentSpaceQuotaExceeded\", {\n size,\n })\n : t(\"Common:RoomSpaceQuotaExceeded\", {\n size,\n });",
       "module": "/packages/client"
     }

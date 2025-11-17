@@ -3,7 +3,7 @@
   "content": "Access settings",
   "content_en_sha1_hash": "7b34b38f3e6a5710c25a3765304dc0c570600dd3",
   "created_at": "2025-05-19T21:30:55.184Z",
-  "updated_at": "2025-11-13T10:21:17.758Z",
+  "updated_at": "2025-11-17T11:52:35.300Z",
   "comment": {
     "text": "This translation key is used for \"Access settings\" content that appears in a link within an edit room dialog and as a header title in a panel. It provides the label for access-related settings or configurations, likely prompting users to review or adjust their access permissions.",
     "is_auto": true,
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 953,
+      "line_number": 954,
       "context": "event.item = { ...item, isEdit: true };\n window.dispatchEvent(event);\n };\n \n onOpenTemplateAccessOptions = () => {\n this.dialogsStore.setTemplateAccessSettingsVisible(true);\n };\n \n // onLoadLinks = async (t, item) => {\n //   const promise = new Promise(async (resolve, reject) => {\n //     let linksArray = [];",
       "module": "/packages/client"
     }

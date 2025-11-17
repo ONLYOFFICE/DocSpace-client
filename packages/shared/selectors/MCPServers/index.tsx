@@ -166,7 +166,9 @@ const MCPServersSelector = ({
       emptyScreenImage={
         isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl
       }
-      emptyScreenHeader={t("Common:NoMCPServers")}
+      emptyScreenHeader={t("Common:NoMCPServers", {
+        MCPServers: t("Common:MCPServers"),
+      })}
       emptyScreenDescription={t("Common:NoMCPServersDescription", {
         productName: t("Common:ProductName"),
       })}

@@ -459,14 +459,14 @@ const View = ({
           view = "profile";
         } else if (isChatPage) {
           await Promise.all([
+            getFilesRef.current(),
             initToolsRef.current(),
             initChatsRef.current(),
-            getFilesRef.current(),
           ]);
 
-          prevCategoryType.current = getCategoryType(location);
-
           view = "chat";
+
+          prevCategoryType.current = getCategoryType(location);
 
           setContactsTab(false);
         } else if (!isContactsPage) {

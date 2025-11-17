@@ -146,7 +146,7 @@
   "ChatExported": "Chat <1>{{title}}</1> exported to file: <2>{{fileName}}</2>",
   "ChatHistory": "Chat history",
   "ChooseAIAgent": "Choose an AI agent",
-  "ChooseAIAgentDescription": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent or create a new one.",
+  "ChooseAIAgentDescription": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent.",
   "ChooseAnother": "Choose another",
   "ChooseExpirationDate": "Limit availability period for this link by setting an expiration date.",
   "ChooseFormatText": "Choose the format for each file to be downloaded",

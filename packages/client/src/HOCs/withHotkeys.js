@@ -76,6 +76,7 @@ const withHotkeys = (Component) => {
       isArchiveFolder,
       isRoomsFolder,
       isAIAgentsFolder,
+      isAIRoom,
 
       getSelection,
       setFavoriteAction,
@@ -130,6 +131,7 @@ const withHotkeys = (Component) => {
       isRoomsFolder ||
       isVisitor ||
       isAIAgentsFolder ||
+      isAIRoom ||
       !security?.Create;
 
     const onCreate = (extension) => {
@@ -601,6 +603,7 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
         isAIAgentsFolder,
+        isAIRoom: selectedFolderStore.isAIRoom,
         isIndexEditingMode: indexingStore.isIndexEditingMode,
 
         getSelection,

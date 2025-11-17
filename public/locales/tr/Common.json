@@ -143,7 +143,6 @@
   "ChangeUserPermissions": "Davet edilen kişilerin kullanıcı izinlerini değiştirin veya <1>tarife planınızı yükseltin</1>.",
   "ChatExported": "Sohbet <1>{{title}}</1> şu dosyaya aktarıldı: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Bir yapay zeka aracısı seçin",
-  "ChooseAIAgentDescription": "Seçtiğiniz dosya hakkında yapay zeka ile sohbet etmek istediğiniz aracı seçin. Mevcut bir aracı seçebilir veya yeni bir tane oluşturabilirsiniz.",
   "ChooseAnother": "Başka bir tane seçin",
   "ChooseExpirationDate": "Bir son kullanma tarihi belirleyerek bu bağlantının kullanılabilirlik süresini sınırlandırın.",
   "ChooseFormatText": "İndirilecek her bir dosyanın türünü seçin",

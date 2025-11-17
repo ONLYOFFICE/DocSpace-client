@@ -143,7 +143,6 @@
   "ChangeUserPermissions": "Thay đổi quyền của người dùng thành những người được mời hoặc <1>nâng cấp gói dịch vụ của bạn </1>.",
   "ChatExported": "Trò chuyện <1>{{title}}</1> được xuất ra tệp: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Chọn một tác nhân AI",
-  "ChooseAIAgentDescription": "Chọn agent mà bạn muốn trò chuyện với AI về tệp đã chọn. Bạn có thể chọn một agent hiện có hoặc tạo một agent mới.",
   "ChooseAnother": "Chọn khác",
   "ChooseExpirationDate": "Giới hạn thời gian còn hiệu lực cho liên kết này bằng cách đặt ngày hết hạn.",
   "ChooseFormatText": "Chọn định dạng cho từng tệp được tải xuống",

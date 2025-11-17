@@ -140,7 +140,6 @@
   "ChangeUserPermissions": "Změňte uživatelská oprávnění na pozvané osoby nebo <1>upgradujte svůj tarifní plán</1>.",
   "ChatExported": "Chat <1>{{title}}</1> exportován do souboru: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Vyberte si AI agenta",
-  "ChooseAIAgentDescription": "Vyberte agenta, se kterým chcete chatovat s AI o vybraném souboru. Můžete si vybrat existujícího agenta nebo vytvořit nového.",
   "ChooseAnother": "Vyberte si jiný",
   "ChooseExpirationDate": "Omezte dobu dostupnosti tohoto odkazu nastavením data vypršení platnosti.",
   "ChooseFormatText": "Zvolte formát každého stahovaného souboru",

@@ -139,7 +139,6 @@
   "ChangeUserPermissions": "将用户权限修改为受邀人员或<1>升级费用版本</1>。",
   "ChatExported": "对话<1>{{title}}</1>已导出到文件：<2>{{fileName}}</2>",
   "ChooseAIAgent": "选择 AI 智能体",
-  "ChooseAIAgentDescription": "选择您想要就所选文件与 AI 对话的智能体。您可以选择现有智能体或创建新智能体。",
   "ChooseAnother": "选择另一个",
   "ChooseExpirationDate": "通过设置失效日期，限制此链接的有效期。",
   "ChooseFormatText": "选择要下载的文件格式",

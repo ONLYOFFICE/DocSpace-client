@@ -140,7 +140,6 @@
   "ChangeUserPermissions": "Spremenite uporabniška dovoljenja za povabljene osebe ali <1>nadgradite svoj tarifni načrt</1>.",
   "ChatExported": "Klepetal <1>{{title}}</1> izvožen v datoteko: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Izberite AI agenta",
-  "ChooseAIAgentDescription": "Izberite agenta, kjer želite klepetati z umetno inteligenco o izbranem datoteko. Lahko izberete obstoječega agenta ali ustvarite novega.",
   "ChooseAnother": "Izberi drugo",
   "ChooseExpirationDate": "Omejite obdobje razpoložljivosti te povezave tako, da nastavite datum poteka.",
   "ChooseFormatText": "Izberite format za vsako datoteko, ki jo želite prenesti",

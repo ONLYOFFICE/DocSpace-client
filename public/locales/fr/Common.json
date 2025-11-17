@@ -139,7 +139,6 @@
   "ChangeUserPermissions": "Modifiez les droits d'accès des personnes invitées ou <1>modifiez votre plan tarifaire</1>.",
   "ChatExported": "Discussion <1>{{title}}</1> exportée vers le fichier : <2>{{fileName}}</2>",
   "ChooseAIAgent": "Choisissez un agent IA",
-  "ChooseAIAgentDescription": "Sélectionnez l'agent avec lequel vous souhaitez discuter avec l'IA au sujet du fichier sélectionné. Vous pouvez choisir un agent existant ou en créer un nouveau.",
   "ChooseAnother": "Choisir un autre",
   "ChooseExpirationDate": "Limitez la période de disponibilité de ce lien en fixant une date d'expiration.",
   "ChooseFormatText": "Choisissez le format de chaque fichier à télécharger",

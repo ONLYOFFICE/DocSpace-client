@@ -139,7 +139,6 @@
   "ChangeUserPermissions": "Promenite dozvole korisnicima koje ste pozvali ili <1>nadogradite svoj tarifni plan</1>.",
   "ChatExported": "Razgovor <1>{{title}}</1> eksportovan u fajl: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Izaberite AI agenta",
-  "ChooseAIAgentDescription": "Izaberite agenta sa kojim želite da razgovarate sa AI o izabranoj datoteci. Možete odabrati postojećeg agenta ili kreirati novog.",
   "ChooseAnother": "Izaberite drugi",
   "ChooseExpirationDate": "Ograniči period dostupnosti za ovaj link postavljanjem roka upotrebe.",
   "ChooseFormatText": "Izaberite format za svaku datoteku koju želite da preuzmete",

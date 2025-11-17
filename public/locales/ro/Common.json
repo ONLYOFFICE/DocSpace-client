@@ -139,7 +139,6 @@
   "ChangeUserPermissions": "Schimbaţi permisiuni de acces acordate invitaților sau <1>sau selectaţi un alt plan tarifar</1>.",
   "ChatExported": "Chat-ul <1>{{title}}</1> exportat în fișierul: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Alegeți un agent de IA",
-  "ChooseAIAgentDescription": "Selectați agentul pe care doriți să folosiți pentru conversaţia cu IA privind fişierul selectat. Puteți alege un agent existent sau puteți crea unul nou.",
   "ChooseAnother": "Alegeți altceva",
   "ChooseExpirationDate": "Indicați data expirării pentru a limita perioada de disponibilitate a acestui link.",
   "ChooseFormatText": "Selectați formatul pentru fiecare fișier de încărcat",

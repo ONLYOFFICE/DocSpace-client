@@ -140,7 +140,6 @@
   "ChangeUserPermissions": "Wijzig de gebruikersrechten voor de uitgenodigde personen of <1>upgrade uw tariefplan</1>.",
   "ChatExported": "Chat <1>{{title}}</1> geëxporteerd naar bestand: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Kies een AI-agent",
-  "ChooseAIAgentDescription": "Selecteer de agent waar u met AI over het geselecteerde bestand wilt chatten. U kunt een bestaande agent kiezen of er een nieuwe aanmaken.",
   "ChooseAnother": "Kies een andere",
   "ChooseExpirationDate": "Beperk de beschikbaarheidsperiode voor deze link door een vervaldatum in te stellen.",
   "ChooseFormatText": "Kies het formaat voor elk te downloaden bestand",

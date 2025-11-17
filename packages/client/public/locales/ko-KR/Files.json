@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "<1>«{{title}}»</1> 룸 템플릿이 저장되었습니다",
   "ScheduledTrashMove": "{{date}}은(는) {{sectionName}}으로 이동될 예정입니다.",
   "SendByEmail": "이메일로 전송",
+  "SharedBy": "공유됨",
   "ShareFolder": "폴더 공유",
   "ShareFolderDescription": "새 방이 생성되고 선택한 폴더의 모든 내용이 해당 방에 복사됩니다. 그 다음 다른 사용자를 초대하여 방에 있는 파일을 공동작업할 수 있습니다.",
   "SharePDFFormModalDescription": "새로운 룸이 생성되고 해당 룸에 PDF 양식이 복사됩니다. 그 다음 다른 사용자를 해당 룸에 초대하여 양식을 작성하도록 할 수 있습니다.",

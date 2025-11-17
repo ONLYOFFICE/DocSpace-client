@@ -133,6 +133,7 @@
   "ImportFromPortal": "Tuo {{organizationName}} Workspacesta",
   "ImportProcessingDescription": "Tietojen siirto on käynnissä. Ole hyvä ja odota.",
   "ImportSectionDescription": "Valitse osiot tuontia varten. Ne ilmestyvät vastaaviin {{productName}}-n osioihin.",
+  "ImportSectionDisabled": "Ladataaksesi {{importSectionName}}, ota ensin käyttöön \"<1>{{sectionName}}</1>\"-vaihtoehto.",
   "IncludedInBusiness": "Sisältyy Business-tilaukseen",
   "IntegrationRequest": "Puuttuuko {{organizationName}} {{productName}}-sta käytännöllinen integraatio tai komponentti? Jätä pyyntö tiimillemme, niin tutkimme asiaa.",
   "InvitationSettings": "Kutsuasetukset",

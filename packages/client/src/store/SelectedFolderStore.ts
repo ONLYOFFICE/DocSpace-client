@@ -252,6 +252,8 @@ class SelectedFolderStore {
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
       isAIRoom: this.isAIRoom,
+      isInsideResultStorage: this.isInsideResultStorage,
+      isInsideKnowledge: this.isInsideKnowledge,
       chatSettings: this.chatSettings,
       rootRoomType: this.rootRoomType,
       rootRoomId: this.rootRoomId,
@@ -508,6 +510,20 @@ class SelectedFolderStore {
 
   get isAIAgent() {
     return this.roomType === RoomsType.AIRoom;
+  }
+
+  get isInsideResultStorage() {
+    return (
+      this.type === FolderType.ResultStorage ||
+      this.pathParts.some((r) => r.folderType === FolderType.ResultStorage)
+    );
+  }
+
+  get isInsideKnowledge() {
+    return (
+      this.type === FolderType.Knowledge ||
+      this.pathParts.some((r) => r.folderType === FolderType.Knowledge)
+    );
   }
 }
 

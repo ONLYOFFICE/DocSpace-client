@@ -133,6 +133,7 @@
   "ImportFromPortal": "Nhập từ {{organizationName}} Workspace",
   "ImportProcessingDescription": "Đang di chuyển dữ liệu. Xin vui lòng chờ.",
   "ImportSectionDescription": "Chọn các phần để nhập. Chúng sẽ xuất hiện trong các phần tương ứng của {{productName}}.",
+  "ImportSectionDisabled": "Để nhập {{importSectionName}}, hãy bật tùy chọn \"<1>{{sectionName}}</1>\" trước.",
   "IncludedInBusiness": "Đã bao gồm trong gói Business",
   "IntegrationRequest": "Bạn thấy thiếu một tích hợp hoặc thành phần hữu ích trong {{organizationName}} {{productName}}? Xin hãy gửi yêu cầu cho nhóm của chúng tôi và chúng tôi sẽ xem xét điều đó.",
   "InvitationSettings": "Cài đặt Mời",

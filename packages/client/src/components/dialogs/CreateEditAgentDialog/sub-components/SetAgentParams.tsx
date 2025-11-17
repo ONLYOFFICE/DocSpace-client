@@ -154,6 +154,7 @@ type setAgentParamsProps = {
   getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
   getInfoPanelItemIcon?: InfoPanelStore["getInfoPanelItemIcon"];
   uploadFile?: AvatarEditorDialogStore["uploadFile"];
+  clearUploadedFile?: AvatarEditorDialogStore["clearUploadedFile"];
   avatarEditorDialogVisible?: AvatarEditorDialogStore["avatarEditorDialogVisible"];
   setAvatarEditorDialogVisible?: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
   roomLogoCoverDialogVisible?: DialogsStore["roomLogoCoverDialogVisible"];
@@ -184,6 +185,7 @@ const setAgentParams = ({
   getLogoCoverModel,
   getInfoPanelItemIcon,
   uploadFile,
+  clearUploadedFile,
   avatarEditorDialogVisible,
   setAvatarEditorDialogVisible,
   roomLogoCoverDialogVisible,
@@ -214,6 +216,12 @@ const setAgentParams = ({
     selection?.title || infoPanelSelection?.title || "",
   );
   const [createAgentTitle, setCreateAgentTitle] = useState(agentParams.title);
+
+  const originalIconRef = React.useRef({
+    icon: agentParams.icon,
+    previewIcon: agentParams.previewIcon,
+    iconWasUpdated: agentParams.iconWasUpdated,
+  });
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -293,6 +301,12 @@ const setAgentParams = ({
   };
 
   const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    originalIconRef.current = {
+      icon: agentParams.icon,
+      previewIcon: agentParams.previewIcon,
+      iconWasUpdated: agentParams.iconWasUpdated,
+    };
+
     const uploadedFile = await uploadFile?.(t, e);
 
     setAgentParams({
@@ -302,6 +316,20 @@ const setAgentParams = ({
     });
 
     onChangeIcon({ ...agentParams.icon, uploadedFile });
+  };
+
+  const onCloseAvatarEditor = () => {
+    setPreviewIcon(originalIconRef.current.previewIcon);
+    setAvatarEditorDialogVisible?.(false);
+
+    clearUploadedFile?.();
+
+    setAgentParams({
+      ...agentParams,
+      icon: originalIconRef.current.icon,
+      previewIcon: originalIconRef.current.previewIcon,
+      iconWasUpdated: originalIconRef.current.iconWasUpdated,
+    });
   };
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -531,7 +559,7 @@ const setAgentParams = ({
             image={agentParams.icon}
             setPreview={setPreviewIcon}
             onChangeImage={onChangeIcon}
-            onClose={() => setAvatarEditorDialogVisible?.(false)}
+            onClose={onCloseAvatarEditor}
             onSave={onSaveAvatar}
             onChangeFile={onChangeFile}
             classNameWrapperImageCropper="icon-editor"
@@ -563,6 +591,7 @@ export default inject(
 
     const {
       uploadFile,
+      clearUploadedFile,
       avatarEditorDialogVisible,
       setAvatarEditorDialogVisible,
     } = avatarEditorDialogStore;
@@ -587,6 +616,7 @@ export default inject(
       selection: bufferSelection,
       getInfoPanelItemIcon,
       uploadFile,
+      clearUploadedFile,
       avatarEditorDialogVisible,
       setAvatarEditorDialogVisible,
       setRoomCoverDialogProps,

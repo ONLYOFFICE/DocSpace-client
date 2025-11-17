@@ -269,7 +269,9 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             className="set_room_params-info-description"
             noSelect
           >
-            {t("ModelDescription")}
+            {t("ModelDescription", {
+              aiProvider: t("Common:AIProvider"),
+            })}
           </Text>
           <Text
             fontSize="12px"

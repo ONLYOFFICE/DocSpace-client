@@ -20,7 +20,7 @@
   "MCP": "MCP tools for this room",
   "MCPDescriptionServers": "Use MCP servers connected by the administrator to enhance chat experience with AI. MCP servers can assist with data extraction, summaries, smart suggestions, etc.",
   "Model": "Provider and model",
-  "ModelDescription": "Select the AI provider and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
+  "ModelDescription": "Select the {{aiProvider}} and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
   "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results.",
   "ResultStorage": "Result Storage",
   "UploadFilesDevice": "Upload files from your personal device",

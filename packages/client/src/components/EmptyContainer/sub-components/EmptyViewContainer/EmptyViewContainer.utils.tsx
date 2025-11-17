@@ -192,7 +192,9 @@ const getAIAgentsAIDisabledTitle = (
 ) => {
   return match([standalone, isPortalAdmin])
     .with([true, true], () =>
-      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle"),
+      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
+        aiProvider: t("Common:AIProvider"),
+      }),
     )
     .with([false, true], () =>
       t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),

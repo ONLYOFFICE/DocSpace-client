@@ -29,7 +29,6 @@
   "ProviderUpdatedSuccess": "Provajder uspešno ažuriran",
   "ProviderURL": "URL",
   "ResetProviderKeyDescription": "API ključ se prikazuje samo jednom nakon čuvanja, a zatim je skriven iz bezbednosnih razloga. Ako se resetuje, mora se obezbediti novi ključ; u suprotnom, AI funkcije, uključujući ćaskanje, neće biti dostupne.",
-  "Search": "Veb pretraga",
   "SearchDescription": "Povežite veb pretraživač da poboljšate AI ćaskanje sa informacijama u realnom vremenu sa interneta. Kada bude konfigurisan, biće dostupan svim korisnicima u {{productName}}.",
   "SearchEngine": "Veb pretraživač",
   "ServerAddedSuccess": "Server uspešno dodat",

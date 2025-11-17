@@ -33,7 +33,6 @@
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Vnesite URL končne točke API-ja, ki jo zagotavlja vaša storitev umetne inteligence.",
   "ResetProviderKeyDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit zaradi varnostnih razlogov. Če ga ponastavite, je potreben nov ključ, sicer funkcije umetne inteligence, vključno s klepnom, ne bodo na voljo.",
-  "Search": "Web iskanje",
   "SearchDescription": "Povežite iskalnik na spletu, da izboljšate pogovore z umetno inteligenco z informacijami iz interneta v realnem času. Ko bo konfiguriran, bo na voljo vsem uporabnikom v {{productName}}.",
   "SearchEngine": "Spletni iskalnik",
   "ServerAddedSuccess": "Uspešno dodan strežnik",

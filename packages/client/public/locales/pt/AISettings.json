@@ -33,7 +33,6 @@
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Insira a URL do endpoint da API fornecida pelo seu serviço de IA.",
   "ResetProviderKeyDescription": "A chave da API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança. Se for redefinida, uma nova chave deve ser fornecida; caso contrário, os recursos de IA, incluindo o chat, ficarão indisponíveis.",
-  "Search": "Pesquisa na Web",
   "SearchDescription": "Conecte um motor de busca na web para aprimorar os chats de IA com informações em tempo real da internet. Uma vez configurado, ele estará disponível para todos os usuários em {{productName}}.",
   "SearchEngine": "Motor de Busca na Web",
   "ServerAddedSuccess": "Servidor adicionado com sucesso",

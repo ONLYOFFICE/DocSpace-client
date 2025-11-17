@@ -29,7 +29,6 @@
   "ProviderUpdatedSuccess": "Ofruesi u përditësua me sukses.",
   "ProviderURL": "URL",
   "ResetProviderKeyDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie. Nëse rivendoset, duhet të jepet një çelës i ri; përndryshe, funksionet e inteligjencës artificiale, përfshirë bisedën, nuk do të jenë të disponueshme.",
-  "Search": "Kërkim në internet",
   "SearchDescription": "Lidh një motor kërkimi në internet për të përmirësuar bisedat e inteligjencës artificiale me informacion në kohë reale nga interneti. Pasi të konfigurohet, do të jetë i disponueshëm për të gjithë përdoruesit në {{productName}}.",
   "SearchEngine": "Motori i Kërkimit në Ueb",
   "ServerAddedSuccess": "Serveri u shtua me sukses",

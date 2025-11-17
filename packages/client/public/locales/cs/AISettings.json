@@ -33,7 +33,6 @@
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Zadejte URL koncového bodu API poskytovaného vaší službou umělé inteligence.",
   "ResetProviderKeyDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů. Pokud je resetován, musí být poskytnut nový klíč, jinak budou funkce AI, včetně chatu, nedostupné.",
-  "Search": "Webové vyhledávání",
   "SearchDescription": "Propojte vyhledávač webu, abyste vylepšili AI chaty o informace z internetu v reálném čase. Jakmile bude nakonfigurován, bude dostupný všem uživatelům v {{productName}}.",
   "SearchEngine": "Webový vyhledávač",
   "ServerAddedSuccess": "Server úspěšně přidán",

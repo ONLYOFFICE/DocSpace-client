@@ -33,7 +33,6 @@
   "ProviderURL": "URL",
   "ProviderURLInputHint": "AI hizmetiniz tarafından sağlanan API uç nokta URL'sini girin.",
   "ResetProviderKeyDescription": "API anahtarı, yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir. Sıfırlandığında, yeni bir anahtar sağlanmalıdır; aksi takdirde, sohbet de dahil olmak üzere yapay zeka özellikleri kullanılamaz.",
-  "Search": "Web arama",
   "SearchDescription": "İnternetten gerçek zamanlı bilgiyle yapay zeka sohbetlerini geliştirmek için bir web arama motoru bağlayın. Yapılandırıldıktan sonra, {{productName}}'deki tüm kullanıcıların kullanımına açık olacaktır.",
   "SearchEngine": "Web Arama Motoru",
   "ServerAddedSuccess": "Sunucu başarıyla eklendi",

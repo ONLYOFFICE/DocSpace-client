@@ -29,7 +29,6 @@
   "ProviderUpdatedSuccess": "提供商更新成功",
   "ProviderURL": "URL",
   "ResetProviderKeyDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。如果重置密钥，必须提供新密钥；否则，包括对话在内的 AI 功能将不可用。",
-  "Search": "网络搜索",
   "SearchDescription": "连接网络搜索引擎，通过来自互联网的实时信息增强 AI 对话。配置后，{{productName}}中的所有用户均可使用该功能。",
   "SearchEngine": "网络搜索引擎",
   "ServerAddedSuccess": "服务器添加成功",

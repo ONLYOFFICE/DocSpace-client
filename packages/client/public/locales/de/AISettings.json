@@ -29,7 +29,6 @@
   "ProviderUpdatedSuccess": "Anbieter erfolgreich aktualisiert",
   "ProviderURL": "URL",
   "ResetProviderKeyDescription": "Der API-Schlüssel wird nur einmal beim Speichern angezeigt und anschließend aus Sicherheitsgründen ausgeblendet. Wird er zurückgesetzt, muss ein neuer Schlüssel angegeben werden; andernfalls stehen die KI-Funktionen, einschließlich des Chats, nicht zur Verfügung.",
-  "Search": "Websuche",
   "SearchDescription": "Verbinden Sie eine Websuchmaschine, um KI-Chats mit Echtzeitinformationen aus dem Internet anzureichern. Nach der Konfiguration steht diese Funktion allen Nutzern in {{productName}} zur Verfügung.",
   "SearchEngine": "Websuchmaschine",
   "ServerAddedSuccess": "Server erfolgreich hinzugefügt",

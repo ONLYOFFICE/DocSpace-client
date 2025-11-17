@@ -28,7 +28,6 @@
   "ProviderUpdatedSuccess": "Provedor atualizado com sucesso",
   "ProviderURL": "URL",
   "ResetProviderKeyDescription": "A chave API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança. Se for redefinida, uma nova chave deverá ser fornecida; caso contrário, os recursos de IA, incluindo o chat, ficarão indisponíveis.",
-  "Search": "Pesquisa na Web",
   "SearchDescription": "Conecte um mecanismo de pesquisa na web para aprimorar os chats de IA com informações em tempo real da internet. Depois de configurado, ele estará disponível para todos os usuários no {{productName}}.",
   "SearchEngine": "Mecanismo de Pesquisa na Web",
   "ServerAddedSuccess": "Servidor adicionado com sucesso",

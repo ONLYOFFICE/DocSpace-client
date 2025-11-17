@@ -29,7 +29,6 @@
   "ProviderUpdatedSuccess": "Furnizorul a fost actualizat cu succes",
   "ProviderURL": "Adresa URL",
   "ResetProviderKeyDescription": "Cheia API se afișează o singură dată, la salvare și este ascunsă ulterior din motive de securitate. Odată ce cheia este resetată, trebuie furnizată o cheie nouă, în caz contrar, funcțiile de IA, inclusiv chat-ul, vor deveni indisponibile.",
-  "Search": "Căutare pe web",
   "SearchDescription": "Conectați un motor de căutare web pentru a îmbunătăți conversațiile cu IA și a accesa cu informații în timp real de pe internet. Odată configurată, căutarea pe web devine disponibilă pentru toți utilizatorii {{productName}}.",
   "SearchEngine": "Motor de căutare pe web",
   "ServerAddedSuccess": "Serverul a fost adăugat cu succes",

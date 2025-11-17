@@ -33,7 +33,6 @@
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Ievadiet AI pakalpojuma sniegto API galapunkta URL",
   "ResetProviderKeyDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos. Ja tā tiek atiestatīta, jānorāda jauna atslēga; citādi AI funkcijas, tostarp tērzēšana, nebūs pieejamas.",
-  "Search": "Tīmekļa meklēšana",
   "SearchDescription": "Pievienojiet vietnes meklētājprogrammu, lai papildinātu AI sarunas ar reāllaika informāciju no internetā. Kad tas būs konfigurēts, tas būs pieejams visiem lietotājiem {{productName}}.",
   "SearchEngine": "Web meklētājprogramma",
   "ServerAddedSuccess": "Serveris veiksmīgi pievienots",

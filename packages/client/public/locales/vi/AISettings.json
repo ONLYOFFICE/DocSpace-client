@@ -33,7 +33,6 @@
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Nhập URL điểm cuối API do dịch vụ AI của bạn cung cấp",
   "ResetProviderKeyDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn vì mục đích bảo mật. Nếu nó bị đặt lại, bạn phải cung cấp một key mới; nếu không, các tính năng AI, bao gồm cả tính năng trò chuyện, sẽ không khả dụng.",
-  "Search": "Tìm kiếm trên web",
   "SearchDescription": "Kết nối một công cụ tìm kiếm trên web để nâng cao các cuộc trò chuyện AI với thông tin thời gian thực từ internet. Sau khi được cấu hình, nó sẽ có sẵn cho tất cả người dùng trong {{productName}}.",
   "SearchEngine": "Công cụ tìm kiếm trên web",
   "ServerAddedSuccess": "Đã thêm máy chủ thành công",

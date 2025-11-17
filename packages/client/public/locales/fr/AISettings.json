@@ -29,7 +29,6 @@
   "ProviderUpdatedSuccess": "Fournisseur mis à jour avec succès",
   "ProviderURL": "URL",
   "ResetProviderKeyDescription": "La clé API est affichée une seule fois lors de l'enregistrement, puis masquée pour des raisons de sécurité. Si elle est réinitialisée, une nouvelle clé doit être fournie ; sinon, les fonctionnalités IA, y compris la discussion, seront indisponibles.",
-  "Search": "Recherche Web",
   "SearchDescription": "Connectez un moteur de recherche Web pour enrichir les discussions IA avec des informations en temps réel provenant d'Internet. Une fois configuré, il sera disponible pour tous les utilisateurs dans {{productName}}.",
   "SearchEngine": "Moteur de recherche Web",
   "ServerAddedSuccess": "Serveur ajouté avec succès",

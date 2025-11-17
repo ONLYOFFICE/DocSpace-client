@@ -33,7 +33,6 @@
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Sizə AI xidmətiniz tərəfindən verilən API endpoint URL-ini daxil edin.",
   "ResetProviderKeyDescription": "API açarı yadda saxlanıldıqda yalnız bir dəfə göstərilir və təhlükəsizlik məqsədləri üçün gizlədilir. Sıfırlanarsa, yeni bir açar təqdim edilməlidir; əks halda, söhbət də daxil olmaqla, süni intellekt xüsusiyyətləri əlçatan olmayacaq.",
-  "Search": "Veb axtarışı",
   "SearchDescription": "İnternetdən real vaxt məlumatları ilə süni intellekt söhbətlərini təkmilləşdirmək üçün veb axtarış sistemini qoşun. Konfiqurasiya edildikdən sonra, {{productName}} bütün istifadəçilər üçün mövcud olacaq.",
   "SearchEngine": "Veb Axtarış Mühərriki",
   "ServerAddedSuccess": "Server uğurla əlavə edildi",

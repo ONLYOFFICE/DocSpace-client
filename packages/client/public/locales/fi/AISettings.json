@@ -33,7 +33,6 @@
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Syötä AI-palvelusi tarjoaman API-päätepisteen URL-osoite",
   "ResetProviderKeyDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja piilotetaan sen jälkeen tietoturvasyistä. Jos se nollataan, on toimitettava uusi avain, muuten tekoälyominaisuudet, mukaan lukien chat, eivät ole käytettävissä.",
-  "Search": "Verkkohaku",
   "SearchDescription": "Yhdistä verkkohakukone tekoälykeskusteluihin tuodaksesi reaaliaikaista tietoa internetistä. Kun se on määritetty, se on kaikkien käyttäjien käytettävissä {{productName}}-palvelussa.",
   "SearchEngine": "Verkkohakukone",
   "ServerAddedSuccess": "Palvelin lisätty onnistuneesti",

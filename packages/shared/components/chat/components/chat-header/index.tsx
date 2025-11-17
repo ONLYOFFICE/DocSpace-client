@@ -42,6 +42,8 @@ const ChatHeader = ({
   roomId,
   aiReady,
   getResultStorageId,
+  setIsAIAgentChatDelete,
+  setDeleteDialogVisible,
 }: ChatHeaderProps) => {
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -52,6 +54,8 @@ const ChatHeader = ({
         getIcon={getIcon}
         getResultStorageId={getResultStorageId}
         roomId={roomId}
+        setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+        setDeleteDialogVisible={setDeleteDialogVisible}
       />
       <CreateChat isLoadingProp={isLoading} isDisabled={!aiReady} />
       <SelectModel selectedModel={selectedModel} isLoading={isLoading} />

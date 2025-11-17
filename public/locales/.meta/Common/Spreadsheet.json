@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2025-11-17T07:52:04.398Z",
+  "updated_at": "2025-11-17T11:52:35.099Z",
   "comment": {
     "text": "This translation key is used for the label \"Spreadsheet\" which appears on a button in the \"Actions\" dropdown menu, allowing users to create a new spreadsheet. It is also used as part of a dialog and links within the application, consistently displaying the term \"Spreadsheet\". The text should be translated to appear cohesively across these different contexts.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 460,
+      "line_number": 464,
       "context": "icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",\n label: t(\"Common:Spreadsheet\"),\n icon: SpreadsheetReactSvgUrl,\n onClick: () => actions.onCreate(\"xlsx\"),\n },\n {\n key: \"create-presentation\",",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Users can upload forms to the room and have full access to the Complete and In Process folders.",
   "content_en_sha1_hash": "9849e1297fdc864b5fce1c89ec6168c9f10bf41d",
   "created_at": "2025-05-19T21:30:48.077Z",
-  "updated_at": "2025-11-03T12:10:35.529Z",
+  "updated_at": "2025-11-17T11:52:35.888Z",
   "comment": {
     "text": "This translation key is used to describe a user's role and access permissions in the room. It appears on options screens or in UI elements that display role descriptions. Translators should focus on conveying the idea of full access to specific folders, as stated in the English content.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
       "line_number": 69,
-      "context": "};\n \n const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RolePowerUserFormRoomDescription\");\n case None:\n return t(\"Common:RoleNewUserDescription\");\n default:\n return t(\"Common:RoleContentCreatorDescription\");\n }",
+      "context": "};\n \n const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RolePowerUserFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAgentContentCreatorDescription\");\n case None:\n return t(\"Common:RoleNewUserDescription\");\n default:",
       "module": "/packages/shared"
     }
   ],

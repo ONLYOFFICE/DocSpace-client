@@ -3,7 +3,7 @@
   "content": "Mark as favorite",
   "content_en_sha1_hash": "a8e7d773cec432feb41d1356e6bfdd0f356ffc17",
   "created_at": "2025-05-19T21:30:55.804Z",
-  "updated_at": "2025-11-06T18:29:15.986Z",
+  "updated_at": "2025-11-17T11:52:35.717Z",
   "comment": {
     "text": "This translation key is used to display the label \"Mark as favorite\" in the UI, likely as a button or option. It should be translated in the context of a user interface where users can mark items as their favorites.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2237,
+      "line_number": 2239,
       "context": "disabled: false,\n },\n {\n id: \"option_mark-as-favorite\",\n key: \"mark-as-favorite\",\n label: t(\"MarkAsFavorite\"),\n icon: FavoritesReactSvgUrl,\n onClick: (e) => this.onClickFavorite(e, [item], t),\n disabled: false,\n \"data-action\": \"mark\",\n action: \"mark\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2237,
+      "line_number": 2239,
       "context": "disabled: false,\n },\n {\n id: \"option_mark-as-favorite\",\n key: \"mark-as-favorite\",\n label: t(\"MarkAsFavorite\"),\n icon: FavoritesReactSvgUrl,\n onClick: (e) => this.onClickFavorite(e, [item], t),\n disabled: false,\n \"data-action\": \"mark\",\n action: \"mark\",",
       "module": "/packages/client"
     }

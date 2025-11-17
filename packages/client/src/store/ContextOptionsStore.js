@@ -537,8 +537,9 @@ class ContextOptionsStore {
     }
 
     if (
-      item.rootFolderType === FolderType.Recent ||
-      item.rootFolderType === FolderType.SHARE
+      (item.rootFolderType === FolderType.Recent ||
+        item.rootFolderType === FolderType.SHARE) &&
+      item.webUrl
     ) {
       copy(item.webUrl);
       return toastr.success(t("Common:LinkCopySuccess"));
@@ -2368,7 +2369,7 @@ class ContextOptionsStore {
           : isAIAgent
             ? t("DeleteAgent")
             : item.isTemplate
-              ? t("DeleteTemplate")
+              ? t("Files:DeleteTemplate")
               : item.isRoom
                 ? t("Common:DeleteRoom")
                 : t("Common:Delete"),

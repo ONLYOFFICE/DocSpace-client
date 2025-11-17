@@ -3,7 +3,7 @@
   "content": "Files uploaded here will be indexed and used as context in the AI-Chat tab. Add files to ask AI questions, generate content, or collaborate on information.",
   "content_en_sha1_hash": "ff75b61809e0be8666cd98431ed0c5f0c3f46628",
   "created_at": "2025-11-13T07:58:04.725Z",
-  "updated_at": "2025-11-13T08:05:34.918Z",
+  "updated_at": "2025-11-17T11:52:35.121Z",
   "comment": {
     "text": "This text explains the purpose of the \"AI-Chat\" tab: uploaded files will be used as context for AI questions, content generation, and collaboration. It appears within the empty state of the AI Knowledge tab in an AI Room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 117,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"AIRoom:EmptyKnowledgeDescription\")}\n <Text fontSize=\"12px\" style={{ marginTop: \"8px\" }}>\n {t(\"AIRoom:EmptyKnowledgeDescriptionActions\")}\n </Text>\n </>\n );",
+      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"AIRoom:EmptyKnowledgeDescription\")}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}\n >",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Reviewer",
   "content_en_sha1_hash": "a74f16c11792da6a36979a58a1ba2b4333632f57",
   "created_at": "2025-05-19T21:30:48.086Z",
-  "updated_at": "2025-11-03T12:10:35.124Z",
+  "updated_at": "2025-11-17T11:52:35.402Z",
   "comment": {
     "text": "This translation key is used to display the role \"Reviewer\" in various contexts within the UI, including information panels and share helpers. It appears as a label or title, likely in buttons, dialogs, or form inputs, where it helps users understand their access level (Review) and role responsibilities.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 184,
+      "line_number": 186,
       "context": "access: ShareAccessRights.FormFilling,\n type: EmployeeType.User,\n },\n reviewer: {\n key: \"reviewer\",\n label: t(\"Common:RoleReviewer\"),\n description: t(\"Common:RoleReviewerDescription\"),\n access: ShareAccessRights.Review,\n type: EmployeeType.User,\n },\n commentator: {",
       "module": "/packages/shared"
     },

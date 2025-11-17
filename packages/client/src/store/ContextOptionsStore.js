@@ -537,8 +537,9 @@ class ContextOptionsStore {
     }
 
     if (
-      item.rootFolderType === FolderType.Recent ||
-      item.rootFolderType === FolderType.SHARE
+      (item.rootFolderType === FolderType.Recent ||
+        item.rootFolderType === FolderType.SHARE) &&
+      item.webUrl
     ) {
       copy(item.webUrl);
       return toastr.success(t("Common:LinkCopySuccess"));

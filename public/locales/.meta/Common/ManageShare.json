@@ -3,7 +3,7 @@
   "content": "Manage",
   "content_en_sha1_hash": "bf58d17e561b1b858e35f9202f811297dac2e9db",
   "created_at": "2025-09-26T15:20:48.291Z",
-  "updated_at": "2025-11-06T18:29:15.983Z",
+  "updated_at": "2025-11-17T11:52:35.711Z",
   "comment": {
     "text": "This key provides the text \"Manage\" for a button or option related to sharing capabilities. It appears within a UI element (likely a button) that allows users to manage sharing permissions for a specific item. Translators should consider the meaning of \"manage\" in the context of sharing control.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2099,
+      "line_number": 2101,
       "context": "disabled: !item.canShare,\n },\n {\n id: \"option_manage-links\",\n key: \"manage-links\",\n label: t(\"Common:ManageShare\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onClickShare(item),\n disabled: !item.canShare,\n },\n {",
       "module": "/packages/client"
     }

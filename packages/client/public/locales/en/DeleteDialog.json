@@ -1,4 +1,6 @@
 {
+  "DeleteAIAgentChatDescription": "You are about to delete <strong>{{chatName}}</strong>.\n All messages and chat history will be permanently removed and cannot be restored.",
+  "DeleteAIAgentChatTitle": "Delete chat?",
   "DeleteAIAgentDescription": "The agent <strong>\"{{agentName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
   "DeleteAIAgentTitle": "Delete this agent?",
   "DeleteAIAgentWarning": "I understand the consequences and want to delete the agent",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "These items will be permanently deleted in 30 days.",
   "ItemsPermanentlyDeleted": "These items will be permanently removed from the {{trashSection}}.",
   "removeFromListDescription": "You are about to remove <1>{{title}}</1> from the list. Are you sure you want to continue?",
-  "removeFromListDescriptionPlural": "You are about to remove <1>items ({{count}})</1> from the list. Are you sure you want to continue? ",
-  "DeleteAIAgentChatTitle": "Delete chat?",
-  "DeleteAIAgentChatDescription": "You are about to delete <strong>{{chatName}}</strong>.\n All messages and chat history will be permanently removed and cannot be restored."
+  "removeFromListDescriptionPlural": "You are about to remove <1>items ({{count}})</1> from the list. Are you sure you want to continue? "
 }

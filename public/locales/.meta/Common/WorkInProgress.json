@@ -3,7 +3,7 @@
   "content": "Work in progress",
   "content_en_sha1_hash": "e47daa7a6731608211a6729ba435943b8d544c06",
   "created_at": "2025-10-27T16:14:24.228Z",
-  "updated_at": "2025-11-07T13:41:06.124Z",
+  "updated_at": "2025-11-17T07:52:04.577Z",
   "comment": {
     "text": "This key displays a \"Work in progress\" message, typically shown in a toastr notification when an action is initiated but not yet completed. It appears in various components like dialogs and chat message buttons to inform the user that something is being processed and may take some time. Translators should ensure the translation conveys the meaning of an ongoing, incomplete process.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/Buttons.tsx",
-      "line_number": 180,
+      "line_number": 181,
       "context": "{/*{isLast ? (*/}\n {/*  <div*/}\n {/*    className={styles.buttonsBlockItem}*/}\n {/*    title={t(\"RefreshMessage\")}*/}\n {/*    onClick={() => {*/}\n {/*      toastr.info(t(\"Common:WorkInProgress\"));*/}\n {/*    }}*/}\n {/*  >*/}\n {/*    <ReactSVG src={RefreshIconUrl} />*/}\n {/*  </div>*/}\n {/*) : null}*/}",
       "module": "/packages/shared"
     }

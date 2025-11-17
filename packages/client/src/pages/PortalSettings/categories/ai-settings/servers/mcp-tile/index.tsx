@@ -105,7 +105,7 @@ export const MCPTile = ({
       tooltipText={
         disableActions
           ? t("AISettings:ToUseAddProvider", {
-              value: t("AISettings:MCPServer"),
+              value: t("Common:MCPServer"),
             })
           : undefined
       }

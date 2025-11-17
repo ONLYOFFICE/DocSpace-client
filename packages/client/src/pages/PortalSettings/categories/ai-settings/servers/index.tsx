@@ -271,7 +271,7 @@ const MCPServersComponent = ({
         tooltipText={
           isMCPActionsDisabled
             ? t("AISettings:ToUseAddProvider", {
-                value: t("AISettings:MCPServer"),
+                value: t("Common:MCPServer"),
               })
             : undefined
         }

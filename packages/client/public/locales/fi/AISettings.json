@@ -22,7 +22,6 @@
   "IntegrationName": "Integraation nimi",
   "IntegrationURL": "Integrointi-URL-osoite",
   "KnowledgeSettingsDescription": "Ota käyttöön tietokanta tekoälyagenttien käyttöön. Järjestelmä indeksoi dokumenttisi {{modelName}}-mallilla, jotta voit tehdä kysymyksiin perustuvaa hakua tietojesi avulla. Tämä ominaisuus keskittyy olennaisen tiedon löytämiseen, mutta ei tuota tiivistelmiä tai suorita kokonaisvaltaista analyysiä.",
-  "MCPServer": "MCP-palvelin",
   "MCPSettingTitle": "MCP-palvelimet",
   "Provider": "Palveluntarjoaja",
   "ProviderAddedSuccess": "Palveluntarjoaja lisätty onnistuneesti",

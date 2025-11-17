@@ -22,7 +22,6 @@
   "IntegrationName": "Entegrasyon adı",
   "IntegrationURL": "Entegrasyon URL'si",
   "KnowledgeSettingsDescription": "AI ajanları için bir bilgi tabanı etkinleştirin. Sistem, verilerinizde soru tabanlı arama desteği sağlamak için belgelerinizi {{modelName}} modeliyle dizine ekleyecektir. Bu özellik, ilgili bilgileri bulmaya odaklanmıştır ancak özetler oluşturmaz veya genel analiz yapmaz.",
-  "MCPServer": "MCP Sunucusu",
   "MCPSettingTitle": "MCP sunucuları",
   "Provider": "Sağlayıcı",
   "ProviderAddedSuccess": "Sağlayıcı başarıyla eklendi",

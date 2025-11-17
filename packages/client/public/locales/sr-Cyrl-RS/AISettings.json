@@ -21,7 +21,6 @@
   "HeaderValue": "Вредност заглавља",
   "IntegrationName": "Име интеграције",
   "IntegrationURL": "URL integracije",
-  "MCPServer": "MCP интеграције",
   "MCPSettingTitle": "MCP сервери",
   "Provider": "Провајдер",
   "ProviderAddedSuccess": "Провајдер успешно додат",

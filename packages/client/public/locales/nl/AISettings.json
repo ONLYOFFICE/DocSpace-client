@@ -22,7 +22,6 @@
   "IntegrationName": "Integratienaam",
   "IntegrationURL": "Integratie URL",
   "KnowledgeSettingsDescription": "Schakel een kennisbank in voor AI-agenten. Het systeem indexeert uw documenten met behulp van het {{modelName}} model om vraaggebaseerd zoeken door uw gegevens mogelijk te maken. Deze functie richt zich op het vinden van relevante informatie, maar genereert geen samenvattingen of voert geen globale analyse uit.",
-  "MCPServer": "MCP-server",
   "MCPSettingTitle": "MCP-servers",
   "Provider": "Provider",
   "ProviderAddedSuccess": "Provider succesvol toegevoegd",

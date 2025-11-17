@@ -22,7 +22,6 @@
   "IntegrationName": "Ime integracije",
   "IntegrationURL": "Integracijska URL",
   "KnowledgeSettingsDescription": "Omogočite bazo znanja za umetne agente. Sistem bo indeksiral vaše dokumente z uporabo modela {{modelName}} za podporo iskanju na podlagi vprašanj v vaših podatkih. Ta funkcija se osredotoča na iskanje relevantnih informacij, vendar ne ustvarja povzetkov ali izvaja globalno analizo.",
-  "MCPServer": "Strežnik MCP",
   "MCPSettingTitle": "MCP strežniki",
   "Provider": "Ponudnik",
   "ProviderAddedSuccess": "Ponudnik je bil uspešno dodan.",

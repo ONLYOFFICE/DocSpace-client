@@ -22,7 +22,6 @@
   "IntegrationName": "集成名称",
   "IntegrationURL": "集成 URL",
   "MCPProductDescription": "{{organizationName}} {{productName}} MCP服务器简化 AI 工作流程，将 LLM 与外部系统集成，实现高效安全的文档管理。",
-  "MCPServer": "MCP 服务器",
   "MCPSettingTitle": "MCP 服务器",
   "Provider": "提供商",
   "ProviderAddedSuccess": "提供商添加成功",

@@ -22,7 +22,6 @@
   "IntegrationName": "Nazwa integracji",
   "IntegrationURL": "Adres URL integracji",
   "KnowledgeSettingsDescription": "Włącz bazę wiedzy dla agentów AI. System będzie indeksować Twoje dokumenty przy użyciu modelu {{modelName}} w celu obsługi wyszukiwania opartego na pytaniach w Twoich danych. Ta funkcja koncentruje się na znajdowaniu istotnych informacji, ale nie generuje podsumowań ani nie wykonuje globalnej analizy.",
-  "MCPServer": "Serwer MCP",
   "MCPSettingTitle": "Serwery MCP",
   "Provider": "Dostawca",
   "ProviderAddedSuccess": "Dodano dostawcę pomyślnie",

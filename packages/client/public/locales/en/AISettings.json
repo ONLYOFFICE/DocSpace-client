@@ -26,7 +26,6 @@
   "KnowledgeKeyDescription": "Enter the API key obtained from your knowledge base provider",
   "KnowledgeSettingsDescription": "Enable a knowledge base for AI agents. The system will index your documents using the {{modelName}} model to support question-based search through your data. This feature focuses on finding relevant information but doesn't generate summaries or perform global analysis.",
   "MCPProductDescription": "The {{organizationName}} {{productName}} MCP Server streamlines AI-driven workflows, integrating LLMs with external systems for efficient and secure document management.",
-  "MCPServer": "MCP Server",
   "MCPServerAdvancedSettingsHint": "Use this section to pass additional HTTP headers, like authorization tokens.",
   "MCPServerDescriptionHint": "Write a brief explanation of the integration's purpose",
   "MCPServerIntegrationURLHint": "Enter the MCP server address provided by your service",

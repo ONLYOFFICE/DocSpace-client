@@ -21,7 +21,6 @@
   "HeaderValue": "Valor do cabeçalho",
   "IntegrationURL": "URL de integração",
   "MCPProductDescription": "O {{organizationName}} {{productName}} MCP Server otimiza fluxos de trabalho orientados por IA, integrando LLMs com sistemas externos para um gerenciamento de documentos eficiente e seguro.",
-  "MCPServer": "Servidor MCP",
   "MCPSettingTitle": "Servidores MCP",
   "Provider": "Provedor",
   "ProviderAddedSuccess": "Provedor adicionado com sucesso",

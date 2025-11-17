@@ -22,7 +22,6 @@
   "IntegrationName": "Ime integracije",
   "IntegrationURL": "URL integracije",
   "MCPProductDescription": "{{organizationName}} {{productName}} MCP server pojednostavljuje tokove rada vođene AI, integrišući LLM sa spoljnim sistemima za efikasno i bezbedno upravljanje dokumentima.",
-  "MCPServer": "MCP Server",
   "MCPSettingTitle": "MCP serveri",
   "Provider": "Provajder",
   "ProviderAddedSuccess": "Provajder uspešno dodat",

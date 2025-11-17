@@ -143,7 +143,6 @@
   "ChangeUserPermissions": "Vaihda käyttäjäoikeudet kutsutuille ihmisille tai <1>päivitä tilauksesi</1>.",
   "ChatExported": "Chat <1>{{title}}</1> on viety tiedostoon: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Valitse AI-agentti",
-  "ChooseAIAgentDescription": "Valitse agentti, jossa haluat keskustella valitun tiedoston kanssa tekoälyn kanssa. Voit valita olemassa olevan agentin tai luoda uuden.",
   "ChooseAnother": "Valitse toinen",
   "ChooseExpirationDate": "Rajoita saatavuusaika tälle linkille asettamalla viimeinen voimassaolopäivä.",
   "ChooseFormatText": "Valitse kunkin ladattavan tiedoston muoto",

@@ -105,7 +105,9 @@ const CustomizationNavbar = ({
       {isEnterprise ? (
         <MobileCategoryWrapper
           title={t("AdManagement")}
-          subtitle={t("AdManagementDescription")}
+          subtitle={t("AdManagementDescription", {
+            productName: t("Common:ProductName"),
+          })}
           url="/portal-settings/customization/general/ad-management"
           onClickLink={onClickLink}
         />

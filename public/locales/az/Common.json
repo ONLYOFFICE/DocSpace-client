@@ -143,7 +143,6 @@
   "ChangeUserPermissions": "Dəvət olunan şəxslərin istifadəçi icazələrini dəyişdirin və ya <1>tarif planınızı təkmilləşdirin</1>.",
   "ChatExported": "<1>{{title}}</1> söhbəti bu fayla ixrac edildi: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Səyahət agenti seç",
-  "ChooseAIAgentDescription": "Seçilmiş fayl haqqında Sİ ilə söhbət etmək istədiyiniz agenti seçin. Mövcud bir agenti seçə bilərsiniz və ya yeni bir agent yarada bilərsiniz.",
   "ChooseAnother": "Başqasını seçin",
   "ChooseExpirationDate": "İstifadə müddəti təyin etməklə bu keçidin mövcudluğunu məhdudlaşdırın.",
   "ChooseFormatText": "Yüklənəcək hər bir faylın formatını seçin ",

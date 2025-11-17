@@ -143,7 +143,6 @@
   "ChangeUserPermissions": "Mainiet lietotāju atļaujas uzaicinātajām personām vai <1>jauniniet savu tarifu plānu</1>.",
   "ChatExported": "Tērzēšana <1>{{title}}</1> eksportēts uz failu: <2>{{fileName}}</2>",
   "ChooseAIAgent": "Izvēlieties AI aģentu",
-  "ChooseAIAgentDescription": "Izvēlieties aģentu, kurā vēlaties saņemt AI sarunu par atlasīto failu. Jūs varat izvēlēties esošu aģentu vai izveidot jaunu.",
   "ChooseAnother": "Izvēlēties citu",
   "ChooseExpirationDate": "Ierobežojiet šīs saites pieejamības periodu, iestatot derīguma termiņu.",
   "ChooseFormatText": "Izvēlieties katra lejupielādējamā faila formātu",

@@ -58,6 +58,7 @@ import AccountsFilter from "@docspace/shared/api/people/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { PEOPLE_ROUTE_WITH_FILTER } from "SRC_DIR/helpers/contacts";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile/login");
@@ -528,7 +529,11 @@ class ProfileActionsStore {
       });
     }
 
-    if (this.pluginStore.profileMenuItemsList && enablePlugins) {
+    if (
+      !isAIAgents() &&
+      this.pluginStore.profileMenuItemsList &&
+      enablePlugins
+    ) {
       this.pluginStore.profileMenuItemsList.forEach((option) => {
         actions.splice(option.value.position, 0, {
           key: option.key,

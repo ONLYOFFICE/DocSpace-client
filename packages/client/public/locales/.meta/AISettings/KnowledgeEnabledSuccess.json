@@ -3,7 +3,7 @@
   "content": "Knowledge base successfully enabled",
   "content_en_sha1_hash": "3eb81e5c7fc2a94db1a2bba9d8971f25e486d4d7",
   "created_at": "2025-11-13T07:58:04.698Z",
-  "updated_at": "2025-11-13T08:11:52.068Z",
+  "updated_at": "2025-11-17T07:52:04.748Z",
   "comment": {
     "text": "This key displays a success message in the UI confirming that the knowledge base has been successfully enabled. It appears as a toast notification after a successful knowledge base update within the AI Settings section of the Portal Settings. Translators should ensure the message conveys a positive confirmation of the action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 117,
-      "context": "setSaveRequestRunning(true);\n try {\n await updateKnowledge?.(selectedOption, value);\n \n toastr.success(t(\"AISettings:KnowledgeEnabledSuccess\"));\n } catch (e) {\n console.error(e);\n toastr.error(e as string);\n }",
+      "line_number": 138,
+      "context": "setSaveRequestRunning(true);\n try {\n await updateKnowledge?.(selectedOption, currentValue);\n \n toastr.success(t(\"AISettings:KnowledgeEnabledSuccess\"));\n } catch (e) {\n console.error(e);\n toastr.error(e as string);\n }",
       "module": "/packages/client"
     }
   ],

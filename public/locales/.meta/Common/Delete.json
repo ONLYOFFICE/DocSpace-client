@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2025-11-13T14:53:11.123Z",
+  "updated_at": "2025-11-17T07:52:04.554Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -246,7 +246,7 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/SelectChat.tsx",
-      "line_number": 216,
+      "line_number": 221,
       "context": "onClick: onSaveToFileAction,\n },\n { key: \"separator\", isSeparator: true },\n {\n key: \"remove\",\n label: t(\"Common:Delete\"),\n icon: RemoveSvgUrl,\n onClick: onDeleteAction,\n },\n ];\n }, [t, onDeleteAction, onRenameToggle, onSaveToFileAction]);",
       "module": "/packages/shared"
     },

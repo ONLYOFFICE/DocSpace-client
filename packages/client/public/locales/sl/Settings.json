@@ -133,6 +133,7 @@
   "ImportFromPortal": "Uvoz iz {{organizationName}} Workspace",
   "ImportProcessingDescription": "Migracija podatkov v teku. Prosimo, počakajte.",
   "ImportSectionDescription": "Izberite razdelke za uvoz. Prikazali se bodo v ustreznih razdelkih {{productName}}.",
+  "ImportSectionDisabled": "Za uvoz {{importSectionName}}, najprej omogočite možnost \"<1>{{sectionName}}</1>\".",
   "IncludedInBusiness": "Vključeno v poslovni načrt",
   "IntegrationRequest": "Pogrešate uporabno integracijo ali komponento v {{organizationName}} {{productName}}? Zaupajte zahtevo naši ekipi in preučili jo bomo.",
   "InvitationSettings": "Nastavitve povabil",

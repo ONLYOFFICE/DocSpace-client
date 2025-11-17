@@ -109,6 +109,7 @@ const {
   darkGreyAction,
   darkActive,
   darkGreyHover,
+  grayLightText,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -2825,9 +2826,9 @@ const Dark: TTheme = {
         priceColor: darkGrayDark,
         storageSizeTitle: gray,
 
-        backgroundColor: lightDarkGrayHover,
+        backgroundColor: darkGrayLight,
         linkColor: link,
-        tariffText: grayDark,
+        tariffText: grayLightText,
         border: `1px solid ${grayDarkStrong}`,
         backgroundBenefitsColor: black,
         rectangleColor: lightDarkGrayHover,

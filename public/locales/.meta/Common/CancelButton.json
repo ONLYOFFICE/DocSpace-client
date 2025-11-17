@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-11-17T11:52:35.238Z",
+  "updated_at": "2025-11-17T13:24:55.341Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -144,7 +144,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 293,
+      "line_number": 318,
       "context": "testId=\"delete_dialog_modal_submit\"\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isLoading={isLoading}\n testId=\"delete_dialog_modal_cancel\"",
       "module": "/packages/client"
     },

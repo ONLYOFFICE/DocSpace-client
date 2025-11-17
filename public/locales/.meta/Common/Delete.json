@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2025-11-17T11:52:35.255Z",
+  "updated_at": "2025-11-17T13:24:55.348Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 194,
+      "line_number": 213,
       "context": "};\n }, [onKeyUp]);\n \n const getAccessButtonLabel = () => {\n if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete || isAIAgent) {\n return t(\"Common:DeletePermanently\");\n }",
       "module": "/packages/client"
     },
@@ -192,7 +192,7 @@
     },
     {
       "file_path": "/packages/client/src/store/DialogsStore.js",
-      "line_number": 1029,
+      "line_number": 1039,
       "context": "onClick: (ref) => ref.current.click(),\n },\n \n hasImage\n ? {\n label: t(\"Common:Delete\"),\n icon: TrashIconSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {",
       "module": "/packages/client"
     },
@@ -246,8 +246,8 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/SelectChat.tsx",
-      "line_number": 221,
-      "context": "onClick: onSaveToFileAction,\n },\n { key: \"separator\", isSeparator: true },\n {\n key: \"remove\",\n label: t(\"Common:Delete\"),\n icon: RemoveSvgUrl,\n onClick: onDeleteAction,\n },\n ];\n }, [t, onDeleteAction, onRenameToggle, onSaveToFileAction]);",
+      "line_number": 247,
+      "context": "onClick: onSaveToFileAction,\n },\n { key: \"separator\", isSeparator: true },\n {\n key: \"remove\",\n label: t(\"Common:Delete\"),\n icon: RemoveSvgUrl,\n onClick: onDelete,\n },\n ];\n }, [t, onDelete, onRenameToggle, onSaveToFileAction]);",
       "module": "/packages/shared"
     },
     {

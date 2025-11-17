@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
   "YourTurn": "Ваша очередь",
-  "MCPServer": "Сервер MCP"
+  "MCPServer": "Сервер MCP",
+  "MCPSettingTitle": "Серверы MCP"
 }

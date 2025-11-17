@@ -241,7 +241,9 @@ const MCPServersComponent = ({
   return (
     <div className={styles.mcpServers}>
       <Text className={styles.description}>
-        {t("AISettings:MCPSettingsDescription")}
+        {t("AISettings:MCPSettingsDescription", {
+          mcpServers: t("Common:MCPSettingTitle"),
+        })}
       </Text>
       {aiSettingsUrl ? (
         <Link
@@ -259,7 +261,9 @@ const MCPServersComponent = ({
       <Button
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddMCPServer")}
+        label={t("AISettings:AddMCPServer", {
+          mcpServer: t("Common:MCPSettingTitle"),
+        })}
         scale={false}
         className={styles.addProviderButton}
         onClick={showAddDialog}

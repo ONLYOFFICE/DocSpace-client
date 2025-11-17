@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
   "YourTurn": "Jste na řadě",
-  "MCPServer": "MCP Server"
+  "MCPServer": "MCP Server",
+  "MCPSettingTitle": "MCP servery"
 }

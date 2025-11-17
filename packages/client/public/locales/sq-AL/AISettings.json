@@ -22,7 +22,6 @@
   "IntegrationName": "Emri i integrimit",
   "IntegrationURL": "URL-ja e integrimit",
   "MCPProductDescription": "Serveri MCP i {{organizationName}} {{productName}} përmirëson rrjedhat e punës të drejtuara nga inteligjenca artificiale, duke integruar LLM-të me sisteme të jashtme për menaxhim efikas dhe të sigurt të dokumenteve.",
-  "MCPSettingTitle": "Serverat MCP",
   "Provider": "Ofruesi",
   "ProviderAddedSuccess": "Ofruesi u shtua me sukses",
   "ProviderKey": "Çelësi",

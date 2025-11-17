@@ -22,7 +22,6 @@
   "IntegrationName": "Tên tích hợp",
   "IntegrationURL": "Địa chỉ URL tích hợp",
   "KnowledgeSettingsDescription": "Bật khả năng cơ sở kiến thức cho các tác nhân AI. Hệ thống sẽ lập chỉ mục cho tài liệu của bạn bằng mô hình {{modelName}} để hỗ trợ tìm kiếm dựa trên câu hỏi trong dữ liệu của bạn. Tính năng này tập trung vào việc tìm kiếm thông tin liên quan nhưng không tạo ra bản tóm tắt hoặc thực hiện phân tích toàn cục.",
-  "MCPSettingTitle": "Máy chủ MCP",
   "Provider": "Nhà cung cấp",
   "ProviderAddedSuccess": "Đã thêm nhà cung cấp thành công",
   "ProviderKey": "Chìa khóa",

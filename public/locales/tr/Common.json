@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
   "YourTurn": "Sıra sizde",
-  "MCPServer": "MCP Sunucusu"
+  "MCPServer": "MCP Sunucusu",
+  "MCPSettingTitle": "MCP sunucuları"
 }

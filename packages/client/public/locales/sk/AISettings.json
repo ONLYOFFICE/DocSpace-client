@@ -22,7 +22,6 @@
   "IntegrationName": "Názov integrácie",
   "IntegrationURL": "Integračná URL adresa",
   "KnowledgeSettingsDescription": "Zapnite znalostnú bázu pre AI agentov. Systém bude indexovať vaše dokumenty pomocou modelu {{modelName}} na podporu vyhľadávania založeného na otázkach vo vašich dátach. Táto funkcia sa zameriava na vyhľadávanie relevantných informácií, ale nevytvára súhrny ani nevykonáva globálnu analýzu.",
-  "MCPSettingTitle": "MCP servery",
   "Provider": "Poskytovateľ",
   "ProviderAddedSuccess": "Dodávateľ bol úspešne pridaný.",
   "ProviderKey": "Kľúč",

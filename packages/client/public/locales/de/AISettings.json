@@ -22,7 +22,6 @@
   "IntegrationName": "Integrationsname",
   "IntegrationURL": "Integrations-URL",
   "MCPProductDescription": "Der {{organizationName}} {{productName}} MCP-Server optimiert KI-gesteuerte Arbeitsabläufe und integriert LLMs mit externen Systemen für ein effizientes und sicheres Dokumentenmanagement.",
-  "MCPSettingTitle": "MCP-Server",
   "Provider": "Anbieter",
   "ProviderAddedSuccess": "Anbieter erfolgreich hinzugefügt",
   "ProviderKey": "Schlüssel",

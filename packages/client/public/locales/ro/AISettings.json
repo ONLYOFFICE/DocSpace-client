@@ -22,7 +22,6 @@
   "IntegrationName": "Nume de integrare",
   "IntegrationURL": "Adresa URL a integrării",
   "MCPProductDescription": "Serverul MCP {{organizationName}} {{productName}} eficientizează fluxurile de lucru bazate pe inteligentă artificială și integrează modelele mari de limbaj (LLM) în sisteme externe pentru gestionarea eficientă și sigură a documentelor.",
-  "MCPSettingTitle": "Servere MCP",
   "Provider": "Furnizor",
   "ProviderAddedSuccess": "Furnizorul a fost adăugat cu succes",
   "ProviderKey": "Cheie",

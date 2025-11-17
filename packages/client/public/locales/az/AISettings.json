@@ -22,7 +22,6 @@
   "IntegrationName": "İnteqrasiya adı",
   "IntegrationURL": "İntegrasiya URL-i",
   "KnowledgeSettingsDescription": "Səyahət agentləri üçün məlumat bazasını aktiv edin. Sistem, {{modelName}} modeli ilə sizə məxsus sənədləri indeks edərək, məlumatlarınız üzrə suallar əsasında axtarışa dəstək olacaq. Bu funksiya, müvafiq məlumatları tapmağa yönəlibsə də, xülasələr yaratmaq və ya qlobal analiz etmək üçün nəzərdə tutulmayıb.",
-  "MCPSettingTitle": "MCP serverləri",
   "Provider": "Təminatçı",
   "ProviderAddedSuccess": "Təminatçı uğurla əlavə edildi",
   "ProviderKey": "Kunci",

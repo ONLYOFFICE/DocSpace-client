@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
   "YourTurn": "Ваш ред",
-  "MCPServer": "MCP Сървър"
+  "MCPServer": "MCP Сървър",
+  "MCPSettingTitle": "MCP сървъри"
 }

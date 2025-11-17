@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
   "YourTurn": "Vi ste na vrsti",
-  "MCPServer": "Strežnik MCP"
+  "MCPServer": "Strežnik MCP",
+  "MCPSettingTitle": "MCP strežniki"
 }

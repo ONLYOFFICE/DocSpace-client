@@ -363,7 +363,7 @@ const ToolsSettings = ({
               getTooltipContent: () => (
                 <Text>
                   {t("ConnectMCPServers", {
-                    mcpServers: t("Common:MCPServers"),
+                    mcpServers: t("Common:MCPSettingTitle"),
                   })}
                 </Text>
               ),

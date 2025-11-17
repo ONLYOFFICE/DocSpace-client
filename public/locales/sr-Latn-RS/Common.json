@@ -1056,5 +1056,6 @@
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
   "YourTurn": "Vaš red",
-  "MCPServer": "MCP Server"
+  "MCPServer": "MCP Server",
+  "MCPSettingTitle": "MCP serveri"
 }

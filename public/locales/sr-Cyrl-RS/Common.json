@@ -1056,5 +1056,6 @@
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
   "YourTurn": "Ваш ред",
-  "MCPServer": "MCP интеграције"
+  "MCPServer": "MCP интеграције",
+  "MCPSettingTitle": "MCP сервери"
 }

@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
   "YourTurn": "Uw beurt",
-  "MCPServer": "MCP-server"
+  "MCPServer": "MCP-server",
+  "MCPSettingTitle": "MCP-servers"
 }

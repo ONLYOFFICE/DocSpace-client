@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
   "YourTurn": "Jūsu kārta",
-  "MCPServer": "MCP serveris"
+  "MCPServer": "MCP serveris",
+  "MCPSettingTitle": "MCP serveri"
 }

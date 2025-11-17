@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
   "YourTurn": "고객님의 차례입니다",
-  "MCPServer": "MCP 서버"
+  "MCPServer": "MCP 서버",
+  "MCPSettingTitle": "MCP 서버"
 }

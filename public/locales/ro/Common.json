@@ -1056,5 +1056,6 @@
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
   "YourTurn": "Acum e rândul dvs.",
-  "MCPServer": "Server MCP"
+  "MCPServer": "Server MCP",
+  "MCPSettingTitle": "Servere MCP"
 }

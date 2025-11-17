@@ -22,7 +22,6 @@
   "IntegrationName": "통합 이름",
   "IntegrationURL": "통합 URL",
   "KnowledgeSettingsDescription": "AI 에이전트용 지식 베이스를 활성화합니다. 시스템은 {{modelName}} 모델을 사용하여 문서를 색인화하여 데이터에 대한 질문 기반 검색을 지원합니다. 이 기능은 관련 정보를 찾는 데 중점을 두지만 요약 생성이나 글로벌 분석은 수행하지 않습니다.",
-  "MCPSettingTitle": "MCP 서버",
   "Provider": "제공업체",
   "ProviderAddedSuccess": "제공자를 성공적으로 추가했습니다.",
   "ProviderKey": "키",

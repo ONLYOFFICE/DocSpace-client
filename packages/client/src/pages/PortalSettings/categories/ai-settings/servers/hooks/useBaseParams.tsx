@@ -152,7 +152,9 @@ export const useBaseParams = (initialValues?: {
           hasError={!!urlError}
         />
         <Text className={styles.fieldHint}>
-          {t("AISettings:MCPServerIntegrationURLHint")}
+          {t("AISettings:MCPServerIntegrationURLHint", {
+            mcpServer: t("Common:MCPServer"),
+          })}
         </Text>
       </FieldContainer>
       <FieldContainer

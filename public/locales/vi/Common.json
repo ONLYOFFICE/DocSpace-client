@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
   "YourTurn": "Phiên của bạn",
-  "MCPServer": "Máy chủ MCP"
+  "MCPServer": "Máy chủ MCP",
+  "MCPSettingTitle": "Máy chủ MCP"
 }

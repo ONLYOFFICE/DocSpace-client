@@ -22,7 +22,6 @@
   "IntegrationName": "Integrācijas nosaukums",
   "IntegrationURL": "Integrācijas URL",
   "KnowledgeSettingsDescription": "Iespējojiet zināšanu bāzi AI aģentiem. Sistēma indeksēs jūsu dokumentus, izmantojot {{modelName}} modeli, lai atbalstītu jautājumu balstītu meklēšanu caur jūsu datiem. Šī funkcija koncentrējas uz atbilstošas informācijas atrašanu, bet neģenerē kopsavilkumus vai neveic globālu analīzi.",
-  "MCPSettingTitle": "MCP serveri",
   "Provider": "Pārskatītājs",
   "ProviderAddedSuccess": "Pievienots pakalpojumu sniedzējs veiksmīgi",
   "ProviderKey": "Atslēga",

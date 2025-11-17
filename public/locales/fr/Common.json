@@ -1056,5 +1056,6 @@
   "YourCurrentDomain": "Votre domaine actuel",
   "YourLogo": "Votre logo",
   "YourTurn": "Votre tour",
-  "MCPServer": "Serveur MCP"
+  "MCPServer": "Serveur MCP",
+  "MCPSettingTitle": "Serveurs MCP"
 }

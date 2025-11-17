@@ -93,6 +93,7 @@ export const MCPTile = ({
       ? t("AISettings:MCPProductDescription", {
           organizationName: t("Common:OrganizationName"),
           productName: t("Common:ProductName"),
+          mcpServer: t("Common:MCPServer"),
         })
       : item.description;
 

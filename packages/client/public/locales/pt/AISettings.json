@@ -22,7 +22,6 @@
   "IntegrationName": "Nome da integração",
   "IntegrationURL": "URL de integração",
   "KnowledgeSettingsDescription": "Habilite uma base de conhecimento para agentes de IA. O sistema indexará seus documentos usando o modelo {{modelName}} para suportar a pesquisa baseada em perguntas através de seus dados. Este recurso se concentra em encontrar informações relevantes, mas não gera resumos ou realiza análises globais.",
-  "MCPSettingTitle": "Servidores MCP",
   "Provider": "Fornecedor",
   "ProviderAddedSuccess": "Fornecedor adicionado com sucesso",
   "ProviderKey": "Chave",

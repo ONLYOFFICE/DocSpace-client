@@ -1058,5 +1058,6 @@
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
   "YourTurn": "Twoja kolej",
-  "MCPServer": "Serwer MCP"
+  "MCPServer": "Serwer MCP",
+  "MCPSettingTitle": "Serwery MCP"
 }

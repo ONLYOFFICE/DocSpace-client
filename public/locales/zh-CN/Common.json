@@ -1058,5 +1058,6 @@
   "YourTurn": "轮到您了",
   "MCPServer": "MCP 服务器",
   "MCPSettingTitle": "MCP 服务器",
-  "WebSearchAI": "网络搜索"
+  "WebSearchAI": "网络搜索",
+  "AIProvider": "AI 提供商"
 }

@@ -1060,5 +1060,6 @@
   "YourTurn": "Sıra sizde",
   "MCPServer": "MCP Sunucusu",
   "MCPSettingTitle": "MCP sunucuları",
-  "WebSearchAI": "Web arama"
+  "WebSearchAI": "Web arama",
+  "AIProvider": "Yapay zeka sağlayıcısı"
 }

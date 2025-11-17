@@ -1060,5 +1060,6 @@
   "YourTurn": "Jūsu kārta",
   "MCPServer": "MCP serveris",
   "MCPSettingTitle": "MCP serveri",
-  "WebSearchAI": "Tīmekļa meklēšana"
+  "WebSearchAI": "Tīmekļa meklēšana",
+  "AIProvider": "AI pakalpojumu sniedzējs"
 }

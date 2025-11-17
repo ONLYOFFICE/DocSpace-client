@@ -1060,5 +1060,6 @@
   "YourTurn": "Ваша черга",
   "MCPServer": "Сервер MCP",
   "MCPSettingTitle": "Сервери MCP",
-  "WebSearchAI": "Пошук у вебі"
+  "WebSearchAI": "Пошук у вебі",
+  "AIProvider": "Постачальник ШІ"
 }

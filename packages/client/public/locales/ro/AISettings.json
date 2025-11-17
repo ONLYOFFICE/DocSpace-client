@@ -2,7 +2,6 @@
   "AddAIProvider": "Adăugare furnizor de IA",
   "AddMCPServer": "Adăugare Server MCP",
   "AddMoreHeaders": "Adăugare mai multe antete",
-  "AIProvider": "Furnizor de IA",
   "AIProviderSettingDescription": "Conectați serviciu dvs de IA pentru a accesa funcțiile avansate ale {{productName}}. Odată conectat, acest serviciu va fi accesibil pentru toți utilizatorii ai chat-urilor cu IA.",
   "APIKey": "Cheie API",
   "ConnectProductToYourDataAndTools": "Conectați {{productName}} la datele și instrumentele dvs.",

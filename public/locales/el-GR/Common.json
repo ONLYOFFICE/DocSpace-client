@@ -1060,5 +1060,6 @@
   "YourTurn": "Η σειρά σας",
   "MCPServer": "Διακομιστής MCP",
   "MCPSettingTitle": "Διακομιστές MCP",
-  "WebSearchAI": "Αναζήτηση Ιστού"
+  "WebSearchAI": "Αναζήτηση Ιστού",
+  "AIProvider": "Παροχέας τεχνητής νοημοσύνης"
 }

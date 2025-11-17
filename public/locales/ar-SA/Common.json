@@ -1058,5 +1058,6 @@
   "YourTurn": "دوركم الآن",
   "MCPServer": "خادم MCP",
   "MCPSettingTitle": "خوادم MCP",
-  "WebSearchAI": "بحث الويب"
+  "WebSearchAI": "بحث الويب",
+  "AIProvider": "مزود الذكاء الاصطناعي"
 }

@@ -2,7 +2,6 @@
   "AddAIProvider": "Dodaj ponudnika umetne inteligence",
   "AddMCPServer": "Dodaj strežnik MCP",
   "AddMoreHeaders": "Dodaj več naslovov",
-  "AIProvider": "Ponudnik umetne inteligence",
   "AIProviderSettingDescription": "Povežite svojo AI storitev, da odklenete napredne funkcije v {{productName}}. Ko je dodana, bo na voljo vsem uporabnikom v pogovornih z AI.",
   "APIKey": "API Ključ",
   "ConnectProductToYourDataAndTools": "Povežite {{productName}} z vašimi podatki in orodji.",

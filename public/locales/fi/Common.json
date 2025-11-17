@@ -1060,5 +1060,6 @@
   "YourTurn": "Sinun vuorosi",
   "MCPServer": "MCP-palvelin",
   "MCPSettingTitle": "MCP-palvelimet",
-  "WebSearchAI": "Verkkohaku"
+  "WebSearchAI": "Verkkohaku",
+  "AIProvider": "AI-palveluntarjoaja"
 }

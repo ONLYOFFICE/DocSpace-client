@@ -1060,5 +1060,6 @@
   "YourTurn": "A sua vez",
   "MCPServer": "Servidor MCP",
   "MCPSettingTitle": "Servidores MCP",
-  "WebSearchAI": "Pesquisa na Web"
+  "WebSearchAI": "Pesquisa na Web",
+  "AIProvider": "Fornecedor de IA"
 }

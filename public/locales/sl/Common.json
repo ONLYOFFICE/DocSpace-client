@@ -1060,5 +1060,6 @@
   "YourTurn": "Vi ste na vrsti",
   "MCPServer": "Strežnik MCP",
   "MCPSettingTitle": "MCP strežniki",
-  "WebSearchAI": "Web iskanje"
+  "WebSearchAI": "Web iskanje",
+  "AIProvider": "Ponudnik umetne inteligence"
 }

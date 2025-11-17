@@ -1060,5 +1060,6 @@
   "YourTurn": "Uw beurt",
   "MCPServer": "MCP-server",
   "MCPSettingTitle": "MCP-servers",
-  "WebSearchAI": "Webzoekopdracht"
+  "WebSearchAI": "Webzoekopdracht",
+  "AIProvider": "AI-leverancier"
 }

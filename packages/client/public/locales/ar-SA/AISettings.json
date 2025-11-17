@@ -2,7 +2,6 @@
   "AddAIProvider": "إضافة مزود الذكاء الاصطناعي",
   "AddMCPServer": "إضافة خادم MCP",
   "AddMoreHeaders": "إضافة المزيد من الترويسات",
-  "AIProvider": "مزود الذكاء الاصطناعي",
   "AIProviderSettingDescription": "قوموا بتوصيل خدمة الذكاء الاصطناعي الخاصة بكم لفتح الميزات المتقدمة في {{productName}}. بمجرد إضافتها، ستكون متاحة لجميع المستخدمين في دردشات الذكاء الاصطناعي.",
   "APIKey": "مفتاح API",
   "ConnectProductToYourDataAndTools": "قوموا بتوصيل {{productName}} ببياناتكم وأدواتكم.",

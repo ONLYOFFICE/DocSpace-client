@@ -1060,5 +1060,6 @@
   "YourTurn": "Phiên của bạn",
   "MCPServer": "Máy chủ MCP",
   "MCPSettingTitle": "Máy chủ MCP",
-  "WebSearchAI": "Tìm kiếm trên web"
+  "WebSearchAI": "Tìm kiếm trên web",
+  "AIProvider": "Nhà cung cấp AI"
 }

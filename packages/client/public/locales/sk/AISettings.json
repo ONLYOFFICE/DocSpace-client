@@ -2,7 +2,6 @@
   "AddAIProvider": "Pridať poskytovateľa AI",
   "AddMCPServer": "Pridať server MCP",
   "AddMoreHeaders": "Pridať ďalšie nadpisy",
-  "AIProvider": "Poskytovateľ AI",
   "AIProviderSettingDescription": "Pripojte vlastnú AI službu a odomknite pokročilé funkcie v {{productName}}. Po pridávaní bude dostupná pre všetkých používateľov v AI chaty.",
   "APIKey": "API kľúč",
   "ConnectProductToYourDataAndTools": "Pripojte {{productName}} k svojim dátam a nástrojom.",

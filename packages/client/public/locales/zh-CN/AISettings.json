@@ -2,7 +2,6 @@
   "AddAIProvider": "添加 AI 提供商",
   "AddMCPServer": "添加 MCP 服务器",
   "AddMoreHeaders": "添加更多标头",
-  "AIProvider": "AI 提供商",
   "AIProviderSettingDescription": "连接您自己的 AI 服务以解锁{{productName}}中的高级功能。添加后，所有用户都可在 AI 对话中使用该服务。",
   "APIKey": "API 密钥",
   "ConnectProductToYourDataAndTools": "将{{productName}}连接到您的数据和工具。",

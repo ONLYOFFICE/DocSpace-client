@@ -1058,5 +1058,6 @@
   "YourTurn": "Vaš red",
   "MCPServer": "MCP Server",
   "MCPSettingTitle": "MCP serveri",
-  "WebSearchAI": "Veb pretraga"
+  "WebSearchAI": "Veb pretraga",
+  "AIProvider": "AI provajder"
 }

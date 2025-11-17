@@ -2,7 +2,6 @@
   "AddAIProvider": "Lisää AI-palveluntarjoaja",
   "AddMCPServer": "Lisää MCP-palvelin",
   "AddMoreHeaders": "Lisää otsikoita",
-  "AIProvider": "AI-palveluntarjoaja",
   "AIProviderSettingDescription": "Yhdistä oma tekoälypalvelusi avataksesi edistyneitä ominaisuuksia {{productName}}-palvelussa. Kun se on lisätty, se on kaikkien käyttäjien käytettävissä tekoälykeskusteluissa.",
   "APIKey": "API-avain",
   "ConnectProductToYourDataAndTools": "Yhdistä {{productName}} datasi ja työkalujesi kanssa.",

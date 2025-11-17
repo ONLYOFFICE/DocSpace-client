@@ -1071,5 +1071,6 @@
   "YourTurn": "Your turn",
   "MCPServer": "MCP server",
   "MCPSettingTitle": "MCP servers",
-  "WebSearchAI": "Web Search"
+  "WebSearchAI": "Web Search",
+  "AIProvider": "AI provider"
 }

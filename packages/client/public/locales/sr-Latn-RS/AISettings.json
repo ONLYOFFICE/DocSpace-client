@@ -2,7 +2,6 @@
   "AddAIProvider": "Dodajte AI provajdera",
   "AddMCPServer": "Dodajte MCP Server",
   "AddMoreHeaders": "Dodajte još zaglavlja",
-  "AIProvider": "AI provajder",
   "AIProviderSettingDescription": "Povežite sopstveni AI servis da biste otključali napredne funkcije u {{productName}}. Kada ga dodate, biće dostupan svim korisnicima u AI razgovorima.",
   "APIKey": "API ključ",
   "ConnectProductToYourDataAndTools": "Povežite {{productName}} sa svojim podacima i alatkama.",

@@ -1058,5 +1058,6 @@
   "YourTurn": "Acum e rândul dvs.",
   "MCPServer": "Server MCP",
   "MCPSettingTitle": "Servere MCP",
-  "WebSearchAI": "Căutare pe web"
+  "WebSearchAI": "Căutare pe web",
+  "AIProvider": "Furnizor de IA"
 }

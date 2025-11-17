@@ -2,7 +2,6 @@
   "AddAIProvider": "Adicionar provedor de IA",
   "AddMCPServer": "Adicionar servidor MCP",
   "AddMoreHeaders": "Adicionar mais cabeçalhos",
-  "AIProvider": "Provedor de IA",
   "AIProviderSettingDescription": "Conecte seu próprio serviço de IA para desbloquear recursos avançados no {{productName}}. Depois de adicionado, ele estará acessível a todos os usuários nos chats de IA.",
   "APIKey": "Chave API",
   "ConnectProductToYourDataAndTools": "Conecte {{productName}} aos seus dados e ferramentas.",

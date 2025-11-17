@@ -2,7 +2,6 @@
   "AddAIProvider": "Додајте ВИ провајдера",
   "AddMCPServer": "Додајте MCP сервер",
   "AddMoreHeaders": "Додајте још заглавља",
-  "AIProvider": "ВИ провајдер",
   "AIProviderSettingDescription": "Повежите сопствени ВИ сервис да бисте откључали напредне функције у {{productName}}. Када га додате, биће доступан свим корисницима у ВИ разговорима.",
   "APIKey": "API кључ",
   "ConnectProductToYourDataAndTools": "Повежите {{productName}} са својим подацима и алаткама.",

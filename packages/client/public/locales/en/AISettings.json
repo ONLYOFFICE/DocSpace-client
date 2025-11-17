@@ -2,7 +2,6 @@
   "AddAIProvider": "Add AI provider",
   "AddMCPServer": "Add {{mcpServer}}",
   "AddMoreHeaders": "Add more headers",
-  "AIProvider": "AI provider",
   "AIProviderSettingDescription": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in AI chats.",
   "APIKey": "API Key",
   "ConnectProductToYourDataAndTools": "Connect {{productName}} to your data and tools.",

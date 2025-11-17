@@ -3,7 +3,7 @@
   "content": "Create chat",
   "content_en_sha1_hash": "0ab18beec76b33e2266ae6544d0fd24d05ff4fc5",
   "created_at": "2025-10-27T16:14:31.663Z",
-  "updated_at": "2025-11-17T07:52:04.437Z",
+  "updated_at": "2025-11-17T11:52:35.220Z",
   "comment": {
     "text": "This text appears on a button or link that initiates the creation of a new chat room. It's used within a results tab, likely to allow users to start a chat based on search results. Translators should ensure the phrasing accurately reflects the action of creating a chat.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 559,
+      "line_number": 563,
       "context": "if (isResultsTab)\n return [\n {\n key: \"open-chat\",\n title: t(\"AIRoom:CreateChat\"),\n icon: <CreateChatIcon />,\n onClick: () => {\n const filesFilter = FilesFilter.getFilter(window.location);\n \n filesFilter.searchArea = SearchArea.Any;",
       "module": "/packages/client"
     }

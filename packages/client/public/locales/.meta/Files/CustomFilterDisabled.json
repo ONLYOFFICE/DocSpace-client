@@ -3,7 +3,7 @@
   "content": "Custom filter for the selected file disabled",
   "content_en_sha1_hash": "1d11469e70e8a29c47e8c754cb7c4fb1a3e30948",
   "created_at": "2025-05-19T21:30:55.395Z",
-  "updated_at": "2025-11-06T18:29:15.990Z",
+  "updated_at": "2025-11-17T11:52:35.733Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a custom filter for a selected file has been disabled. It is typically shown as a success notification in a UI dialog or toast when a user disables a custom filter feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1190,
+      "line_number": 1191,
       "context": "return enableCustomFilter(item.id, !item.customFilterEnabled)\n .then((res) => {\n if (res.customFilterEnabled) {\n toastr.success(t(\"CustomFilterEnabled\"));\n } else {\n toastr.success(t(\"CustomFilterDisabled\"));\n }\n })\n .catch((err) => {\n toastr.error(err);\n });",
       "module": "/packages/client"
     }

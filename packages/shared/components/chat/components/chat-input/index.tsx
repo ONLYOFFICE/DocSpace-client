@@ -29,7 +29,7 @@ import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TFile } from "../../../../api/files/types";
+import type { TFile } from "../../../../api/files/types";
 import { InfoPanelEvents } from "../../../../enums";
 import { RectangleSkeleton } from "../../../../skeletons";
 
@@ -39,7 +39,7 @@ import { Text } from "../../../text";
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
 
-import { ChatInputProps } from "../../Chat.types";
+import type { ChatInputProps } from "../../Chat.types";
 
 import Attachment from "./Attachment";
 import FilesList from "./FilesList";
@@ -136,7 +136,7 @@ const ChatInput = ({
       fetchChat(currentChatId);
     }
 
-    if (!prevSession.current) {
+    if (!prevSession.current || prevSession.current === currentChatId) {
       prevSession.current = currentChatId;
 
       return;
@@ -149,8 +149,7 @@ const ChatInput = ({
   }, [
     currentChatId,
     currentChat,
-    attachmentFile,
-    clearAttachmentFile,
+
     fetchChat,
   ]);
 

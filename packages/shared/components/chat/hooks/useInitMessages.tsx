@@ -25,43 +25,42 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useLocation } from "react-router";
 
-import { getChats } from "../../../api/ai";
-import type { TChat } from "../../../api/ai/types";
+import { getChatMessages } from "../../../api/ai";
+import type { TMessage } from "../../../api/ai/types";
 
-const useInitChats = ({ roomId }: { roomId: string | number }) => {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isRequestRunning, setIsRequestRunning] = React.useState(false);
-  const [chats, setChats] = React.useState<TChat[]>([]);
-  const [totalChats, setTotalChats] = React.useState<number>(0);
+const useInitMessages = () => {
+  const [messages, setMessages] = React.useState<TMessage[]>([]);
+  const [chatId, setChatId] = React.useState("");
+  const [total, setTotal] = React.useState(0);
+  const location = useLocation();
 
-  const fetchChats = async () => {
-    if (!roomId) return;
-    if (isRequestRunning) return;
+  const initMessages = React.useCallback(async () => {
+    const currChatId = new URLSearchParams(location.search).get("chat");
 
-    setIsLoading(true);
-    setIsRequestRunning(true);
-
-    try {
-      const { items, total } = await getChats(roomId);
-
-      setChats(items);
-      setTotalChats(total);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsRequestRunning(false);
-      setIsLoading(false);
+    if (!currChatId) {
+      setMessages([]);
+      setTotal(0);
+      setChatId("");
+      return;
     }
-  };
+
+    const { items, total } = await getChatMessages(currChatId, 0);
+
+    const reversedItems = items.reverse();
+
+    setMessages(reversedItems);
+    setTotal(total > 100 ? 100 : total);
+    setChatId(currChatId);
+  }, [location.search]);
 
   return {
-    isLoading,
-    isRequestRunning,
-    chats,
-    totalChats,
-    fetchChats,
+    messages,
+    chatId,
+    total,
+    initMessages,
   };
 };
 
-export default useInitChats;
+export default useInitMessages;

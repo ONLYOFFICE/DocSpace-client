@@ -29,7 +29,7 @@ import { observer } from "mobx-react";
 import { MessageStoreContextProvider } from "./store/messageStore";
 import { ChatStoreContextProvider, useChatStore } from "./store/chatStore";
 
-import { ChatProps } from "./Chat.types";
+import type { ChatProps } from "./Chat.types";
 
 import ChatContainer from "./components/chat-container";
 import ChatHeader from "./components/chat-header";
@@ -109,6 +109,8 @@ const ChatWrapper = (props: ChatProps) => {
 
     initChats,
 
+    messagesSettings,
+
     isAdmin = false,
     standalone = false,
     aiReady = false,
@@ -129,7 +131,7 @@ const ChatWrapper = (props: ChatProps) => {
 
   return (
     <ChatStoreContextProvider roomId={roomId} {...initChats}>
-      <MessageStoreContextProvider roomId={roomId}>
+      <MessageStoreContextProvider roomId={roomId} {...messagesSettings}>
         <ChatContainer>
           <Chat {...props} isLoadingChat={isLoadingChat} />
         </ChatContainer>

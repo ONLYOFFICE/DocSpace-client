@@ -25,12 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 
-import { TContent, TMessage, type TToolCallContent } from "../../api/ai/types";
-import { TGetIcon } from "../../selectors/utils/types";
-import { TFile } from "../../api/files/types";
+import type { TContent, TMessage, TToolCallContent } from "../../api/ai/types";
+import type { TGetIcon } from "../../selectors/utils/types";
+import type { TFile } from "../../api/files/types";
 
-import useToolsSettings from "./hooks/useToolsSettings";
-import useInitChats from "./hooks/useInitChats";
+import type useToolsSettings from "./hooks/useToolsSettings";
+import type useInitChats from "./hooks/useInitChats";
+import type useInitMessages from "./hooks/useInitMessages";
 
 export type TChatStoreProps = {
   roomId: string | number;
@@ -40,7 +41,7 @@ export type TChatStoreProps = {
 export type TMessageStoreProps = {
   roomId: string | number;
   children: React.ReactNode;
-};
+} & Omit<ReturnType<typeof useInitMessages>, "initMessages">;
 
 export type SelectModelProps = {
   selectedModel: string;
@@ -189,6 +190,7 @@ export type ChatProps = {
 
   toolsSettings: ChatInputProps["toolsSettings"];
   initChats: ReturnType<typeof useInitChats>;
+  messagesSettings: Omit<ReturnType<typeof useInitMessages>, "initMessages">;
   isAdmin?: boolean;
   standalone?: boolean;
 };

@@ -164,6 +164,7 @@
   "SaveAsTemplateToast": "Modello di stanza <1>«{{title}}»</1> salvato",
   "ScheduledTrashMove": "{{date}} verrà spostato in {{sectionName}}",
   "SendByEmail": "Invia per email",
+  "SharedBy": "Condiviso da",
   "ShareFolder": "Condividi cartella",
   "ShareFolderDescription": "Verrà creata una nuova stanza e tutto il contenuto della cartella selezionata verrà copiato lì. Successivamente, puoi invitare altri utenti a collaborare sui file all'interno di una stanza.",
   "SharePDFFormModalDescription": "Verrà creata una nuova stanza e il modulo PDF verrà copiato lì. Potrai quindi invitare altri utenti a compilare il modulo presente nella stanza.",

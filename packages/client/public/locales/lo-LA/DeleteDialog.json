@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatDescription": "ທ່ານກຳລັງຈະລຶບ <strong>{{chatName}</strong>.\nຂໍ້ຄວາມ ແລະ ປະຫວັດການສົນທະນາທັງໝົດຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ບໍ່ສາມາດກູ້ຄືນໄດ້.",
+  "DeleteAIAgentChatTitle": "ລຶບການສົນທະນາບໍ?",
+  "DeleteAIAgentDescription": "ຕົວແທນ <strong>\"{{agentName}}\"</strong> ຈະຖືກລຶບອອກຢ່າງຖາວອນ. ຂໍ້ມູນ ແລະ ການເຂົ້າເຖິງຂອງຜູ້ໃຊ້ທັງໝົດຈະສູນຫາຍໄປ.",
+  "DeleteAIAgentTitle": "ລຶບຕົວແທນນີ້ບໍ?",
+  "DeleteAIAgentWarning": "ຂ້ອຍເຂົ້າໃຈຜົນສະທ້ອນ ແລະ ຕ້ອງການລຶບຕົວແທນອອກ",
   "DeleteAllGroupDescription": "ຄະນະກຸ່ມທີ່ຖືກເລືອກຈະຖືກລົບອອກ. ຜູ້ໃຊ້ຢູ່ໃນກຸ່ມຈະບໍ່ຖືກຖອນອອກຈາກ {{productName}}. ທ່ານຕ້ອງການດໍາເນີນຕໍ່ບໍ?",
   "DeleteAllGroupsTitle": "ລົບລ້າງກຸ່ມ",
   "DeleteFiles": "ທ່ານກຳລັງຈະຍ້າຍ <strong>ໄຟລ໌ ({{filesCount}})</strong> ໄປໃສ່ {{trashSection}}.",

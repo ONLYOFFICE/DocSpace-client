@@ -17,7 +17,7 @@
   "CreateSpreadsheetDescription": "Führen Sie präzise Berechnungen mit minimalem Aufwand durch.",
   "CustomRoomEmptyTitle": "Willkommen im benutzerdefinierten Raum",
   "DefaultFolderDescription": "Dateien hier ablegen oder neue erstellen.",
-  "EmptyAIAgentsAIDisabledDescription": "In diesem Abschnitt können Benutzer mit KI-Agenten arbeiten – intelligenten Assistenten zur Bearbeitung von Dokumenten und anderen Aufgaben. Um diese zu nutzen, muss der KI-Funktionsdienst von Ihrem {{productName}}-Administrator aktiviert werden.",
+  "EmptyAIAgentsAIDisabledDescription": "In diesem Abschnitt können Benutzer mit KI-Agenten arbeiten – intelligenten Assistenten zur Bearbeitung von Dokumenten und anderen Aufgaben.\nUm diese zu nutzen, muss der KI-Funktionsdienst von Ihrem {{productName}}-Administrator aktiviert werden.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Um KI-Agenten zu erstellen und zu nutzen, verbinden Sie Ihre Wallet und aktivieren Sie den KI-Funktionsdienst in den {{productName}}-Einstellungen. Anschließend können Sie mit KI-Agenten arbeiten und mit Ihrem Team zusammenarbeiten.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Verbinden Sie Ihre Wallet und aktivieren Sie KI-Funktionen",
   "EmptyAIAgentsAIDisabledUserTitle": "KI-Agenten sind noch nicht verfügbar",

@@ -2215,16 +2215,16 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
-        key: "separator1",
-        isSeparator: true,
-      },
-      {
         id: "option_open-location",
         key: "open-location",
         label: t("OpenLocation"),
         icon: FolderLocationReactSvgUrl,
         onClick: () => this.onOpenLocation(item),
         disabled: !!item.requestToken,
+      },
+      {
+        key: "separator1",
+        isSeparator: true,
       },
       {
         id: "option_mark-read",
@@ -2583,12 +2583,23 @@ class ContextOptionsStore {
       (option) => !keysToRemove.includes(option.key),
     );
 
-    const separatorIndex = resultOptions.findIndex((option) =>
-      withAI ? option.key === "separator6" : option.key === "separator0",
-    );
-    const insertIndex = separatorIndex !== -1 ? separatorIndex + 1 : 1;
-
     if (menuGroups.length > 0) {
+      const openLocationIndex = resultOptions.findIndex(
+        (option) => option.key === "open-location",
+      );
+
+      const insertIndex =
+        openLocationIndex !== -1
+          ? openLocationIndex + 1
+          : (() => {
+              const separatorIndex = resultOptions.findIndex((option) =>
+                withAI
+                  ? option.key === "separator6"
+                  : option.key === "separator0",
+              );
+              return separatorIndex !== -1 ? separatorIndex + 1 : 1;
+            })();
+
       resultOptions.splice(insertIndex, 0, ...menuGroups);
     }
 

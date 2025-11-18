@@ -113,18 +113,6 @@ export const getIsDisabled = (
   isInsideResultStorage?: boolean,
   isAgents?: boolean,
 ) => {
-  console.log(
-    isFirstLoad,
-    isRequestRunning,
-    isDisabledFolder,
-    filterParam,
-    sameId,
-    isCopy,
-    isRooms,
-    isRoot,
-    isSelectedParentFolder,
-    security,
-  );
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;
   if (isDisabledFolder) return true;

@@ -1,7 +1,7 @@
 {
   "AddedRoomTags": "ටැග් එකතු කරන ලදි.",
   "Administration": "පරිපාලනය",
-  "AgentRenamed": "නියෝජිතයා <1>«{{oldRoomTitle}}»</1>«{{roomTitle}}»</2> ලෙස නැවත නම් කරන ලදී",
+  "AgentRenamed": "නියෝජිතයා <1>«{{oldRoomTitle}}»</1><2>«{{roomTitle}}»</2> ලෙස නැවත නම් කරන ලදී",
   "AIAgentsEmptyScreenTent": "AI නියෝජිතයින්ගේ විස්තර මෙතැනින් බලන්න.",
   "AndMoreLabel": "සහ <1>තවත් {{count}}</1>",
   "CreationDate": "සෑදූ දිනය",

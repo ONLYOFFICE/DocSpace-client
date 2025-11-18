@@ -492,7 +492,7 @@
   "InsufficientFundsWithContact": "Su monedero no tiene fondos suficientes. Por favor, póngase en contacto con el pagador (<1>email@example.com</1>) para recargarlo e intente realizar la compra de nuevo.",
   "InsufficientFundsWithTopUp": "Su monedero no tiene fondos suficientes. Por favor, <1>recargue su monedero</1> e intente realizar la compra de nuevo.",
   "InvalidLink": "Enlace no válido",
-  "InvitationToAgent": "<1>{{displayName}}</1> le invita a unirse al agente de IA <1>{agentName}}</1>. ",
+  "InvitationToAgent": "<1>{{displayName}}</1> le invita a unirse al agente de IA <1>{{agentName}}</1>. ",
   "InvitationToPortal": "<1>{{displayName}}</1> le invita a unirse al {{productName}} <1>{{spaceAddress}}</1> para una colaboración segura en documentos.",
   "InvitationToRoom": "<1>{{displayName}}</1> le invita a unirse a la sala <1>{{roomName}}</1> para una colaboración segura en documentos.",
   "Invite": "Invitar",

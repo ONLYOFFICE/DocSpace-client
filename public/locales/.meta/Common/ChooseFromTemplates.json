@@ -3,7 +3,7 @@
   "content": "Choose from Templates",
   "content_en_sha1_hash": "8e45ce4bac54530298690bc33665f4627cd46fb2",
   "created_at": "2025-05-19T21:30:43.457Z",
-  "updated_at": "2025-11-17T11:52:35.088Z",
+  "updated_at": "2025-11-18T14:41:49.615Z",
   "comment": {
     "text": "The translation key \"ChooseFromTemplates\" is used to display a label for a button that allows users to select from pre-defined templates. This key appears in the UI as part of a dropdown menu on a main button, providing an alternative way for users to configure their document.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3047,
+      "line_number": 3059,
       "context": "getContextOptionsPlusFormRoom = (t) => {\n const showSelectorFormRoomDocx = {\n id: \"actions_form-room_template_from-file\",\n className: \"main-button_drop-down_sub\",\n icon: FormGalleryReactSvgUrl,\n label: t(\"Common:ChooseFromTemplates\"),\n onClick: () => this.onShowGallery(t),\n key: \"form-file\",\n };\n \n const uploadReadyPDFFrom = {",
       "module": "/packages/client"
     }

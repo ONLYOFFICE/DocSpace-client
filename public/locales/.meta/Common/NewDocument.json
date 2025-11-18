@@ -3,7 +3,7 @@
   "content": "New document",
   "content_en_sha1_hash": "762b84690217181b9f127d2cfc1991e0892e844a",
   "created_at": "2025-05-19T21:30:46.732Z",
-  "updated_at": "2025-11-17T11:52:35.371Z",
+  "updated_at": "2025-11-18T14:41:49.852Z",
   "comment": {
     "text": "This translation key displays a label for new document creation options in the editor. It is used in buttons and contexts where users can create a new document, such as file formats dropdowns or dialog prompts.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3169,
+      "line_number": 3181,
       "context": "(parentRoomType === FolderType.FormRoom && isFolder);\n \n const createNewDoc = {\n id: \"personal_new-document\",\n key: \"new-document\",\n label: t(\"Common:NewDocument\"),\n onClick: () => this.onCreate(\"docx\"),\n icon: ActionsDocumentsReactSvgUrl,\n };\n \n const createNewSpreadsheet = {",
       "module": "/packages/client"
     },

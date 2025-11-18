@@ -3,7 +3,7 @@
   "content": "AI agent unpinned",
   "content_en_sha1_hash": "a87e0a2cbc7edf27d4fb803b62e8f863ecf8a731",
   "created_at": "2025-11-03T12:10:32.743Z",
-  "updated_at": "2025-11-17T11:52:35.735Z",
+  "updated_at": "2025-11-18T14:41:50.120Z",
   "comment": {
     "text": "This key displays the text when an AI agent is unpinned. It appears as a label or status indicator, likely on a UI element related to AI agent management, indicating the agent is no longer pinned. Translators should ensure this accurately reflects the action of removing a \"pin\" from an AI agent.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1334,
-      "context": "let translationForSeverals;\n \n if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\")\n : t(\"AIAgentUnpinned\");\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { ...itemCount })\n : t(\"AIAgentsUnpinned\", { ...itemCount });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");",
+      "line_number": 1332,
+      "context": "let translationForSeverals;\n \n if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"AIAgentPinned\")\n : t(\"AIAgentUnpinned\");\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\")\n : t(\"AIAgentsUnpinned\");\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");",
       "module": "/packages/client"
     }
   ],

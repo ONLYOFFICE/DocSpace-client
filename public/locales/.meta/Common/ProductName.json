@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-11-17T11:52:35.085Z",
+  "updated_at": "2025-11-18T14:41:49.611Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -20,6 +20,24 @@
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
       "line_number": 414,
       "context": "const uploadFromDocSpace = {\n id: \"actions_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", { productName: t(\"Common:ProductName\") }),\n key: \"actions_upload-from-docspace\",\n disabled: false,\n onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 118,
+      "context": "const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: t(\"Common:ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"BackupPortal\", { productName: t(\"Common:ProductName\") }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 118,
+      "context": "const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: t(\"Common:ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"BackupPortal\", { productName: t(\"Common:ProductName\") }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 118,
+      "context": "const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: t(\"Common:ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"BackupPortal\", { productName: t(\"Common:ProductName\") }),",
       "module": "/packages/client"
     },
     {
@@ -420,61 +438,67 @@
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 79,
-      "context": "};\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
+      "line_number": 58,
+      "context": "};\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 79,
-      "context": "};\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
+      "line_number": 58,
+      "context": "};\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 79,
-      "context": "};\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
+      "line_number": 58,
+      "context": "};\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 79,
-      "context": "};\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
+      "line_number": 58,
+      "context": "};\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 79,
-      "context": "};\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
+      "line_number": 58,
+      "context": "};\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 79,
-      "context": "};\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
+      "line_number": 58,
+      "context": "};\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 79,
-      "context": "};\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
+      "line_number": 58,
+      "context": "};\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 79,
-      "context": "};\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
+      "line_number": 58,
+      "context": "};\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
+      "line_number": 58,
+      "context": "};\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 125,
+      "line_number": 127,
       "context": "? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Files:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 125,
+      "line_number": 127,
       "context": "? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Files:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     },
@@ -1439,6 +1463,18 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
+      "line_number": 40,
+      "context": "switch (stepIndex) {\n case 1:\n return t(\"Settings:SelectFileDescriptionGoogle\");\n case 2:\n return t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
+      "line_number": 40,
+      "context": "switch (stepIndex) {\n case 1:\n return t(\"Settings:SelectFileDescriptionGoogle\");\n case 2:\n return t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
       "line_number": 569,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"8-1-6\",\n icon: \"\",\n link: \"docspace\",\n tKey: \"Common:ProductName\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-plugin-sdk\",",
@@ -1536,19 +1572,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2170,
+      "line_number": 2171,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2170,
+      "line_number": 2171,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2170,
+      "line_number": 2171,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },

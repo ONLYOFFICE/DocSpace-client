@@ -159,7 +159,7 @@ const StartFillingPanel = ({
           console.log(err);
         });
       startTransition(() => {
-        closeStartFillingPanel();
+        setStartFillingPanelVisible(false);
       });
     });
   };
@@ -278,7 +278,7 @@ const StartFillingPanel = ({
           onCancel={() => setUnsavedChangesDialogVisible(false)}
           onConfirm={() => {
             setUnsavedChangesDialogVisible(false);
-            closeStartFillingPanel();
+            setStartFillingPanelVisible(false);
           }}
         />
       ) : null}

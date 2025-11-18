@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-11-13T14:53:11.109Z",
+  "updated_at": "2025-11-17T13:24:55.341Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -144,7 +144,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 293,
+      "line_number": 318,
       "context": "testId=\"delete_dialog_modal_submit\"\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isLoading={isLoading}\n testId=\"delete_dialog_modal_cancel\"",
       "module": "/packages/client"
     },
@@ -300,7 +300,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 329,
+      "line_number": 331,
       "context": "<Button\n scale\n tabIndex={0}\n onClick={onCloseRoomLogo}\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n testId=\"room_logo_cover_cancel_button\"\n />\n </ModalDialog.Footer>\n </StyledModalDialog>\n );",
       "module": "/packages/client"
     },
@@ -630,7 +630,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
-      "line_number": 349,
+      "line_number": 330,
       "context": "/>\n <Button\n size=\"normal\"\n scale\n id=\"cancel-button\"\n label={t(\"Common:CancelButton\")}\n isLoading={isLoading}\n isDisabled={isLoading}\n onClick={onModalClose}\n testId=\"consumer_dialog_cancel_button\"\n />",
       "module": "/packages/client"
     },
@@ -738,7 +738,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 380,
+      "line_number": 381,
       "context": "<Button\n isDisabled={isSavingComment}\n size=\"extraSmall\"\n scale\n onClick={onCancelClick}\n label={t(\"Common:CancelButton\")}\n testId=\"version_cancel_button\"\n />\n </div>\n </div>\n ) : null}",
       "module": "/packages/client"
     },
@@ -847,7 +847,7 @@
     {
       "file_path": "/packages/shared/components/chat/components/export-selector/index.tsx",
       "line_number": 101,
-      "context": "withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterCheckbox\n withFooterInput\n cancelButtonLabel={t(\"Common:CancelButton\")}\n submitButtonLabel={t(\"Common:SaveButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={roomId}",
+      "context": "withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterCheckbox\n withFooterInput\n cancelButtonLabel={t(\"Common:CancelButton\")}\n submitButtonLabel={t(\"Common:SaveButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={currentFolderId}",
       "module": "/packages/shared"
     },
     {

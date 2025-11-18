@@ -573,17 +573,15 @@ const SectionHeaderContent = (props) => {
     moveToPublicRoom(rootFolderId);
   }, [isFrame, rootFolderId, moveToPublicRoom]);
 
-  const isSectionHeaderVisible =
-    isUsersHeaderVisible || isGroupsHeaderVisible || isHeaderVisible;
-
   const filesHeaderMenu =
-    !isSectionHeaderVisible || filesSelection.length === 0
+    !isHeaderVisible || filesSelection.length === 0
       ? EMPTY_ARRAY
       : getHeaderMenu(t);
 
-  const contactsHeaderMenu = !isSectionHeaderVisible
-    ? EMPTY_ARRAY
-    : getContactsHeaderMenu(t, isContactsGroupsPage);
+  const contactsHeaderMenu =
+    !isUsersHeaderVisible && !isGroupsHeaderVisible
+      ? EMPTY_ARRAY
+      : getContactsHeaderMenu(t, isContactsGroupsPage);
 
   const indexEditingMenu = React.useMemo(() => {
     if (!isIndexEditingMode) return EMPTY_ARRAY;
@@ -1254,7 +1252,8 @@ export default inject(
 
     const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
     isPublicRoom ||
-    isSharedWithMeFolderRoot
+    isSharedWithMeFolderRoot ||
+    isArchive
       ? false
       : security?.Read && isShared);
 

@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2025-11-13T10:21:17.733Z",
+  "updated_at": "2025-11-17T11:52:35.252Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 102,
+      "line_number": 103,
       "context": "const setDetails = () => setView(InfoPanelView.infoDetails);\n const setShare = () => setView(InfoPanelView.infoShare);\n \n const memberTab = {\n id: \"info_members\",\n name: isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n onClick: setMembers,\n content: null,\n };\n \n const detailsTab = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 799,
+      "line_number": 797,
       "context": "const accountsNavigationPath = React.useMemo(() => {\n if (isContactsInsideGroupPage) {\n return [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];\n }",
       "module": "/packages/client"
     },
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 429,
+      "line_number": 430,
       "context": "const accounts =\n !isNotPaidPeriod && !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
       "module": "/packages/client"
     },

@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Mẫu phòng <1>«{{title}}»</1> đã được lưu",
   "ScheduledTrashMove": "{{date}} sẽ được chuyển đến {{sectionName}}",
   "SendByEmail": "Gửi qua email",
+  "SharedBy": "Chia sẻ bởi",
   "ShareFolder": "Chia sẻ thư mục",
   "ShareFolderDescription": "Một phòng mới sẽ được tạo và tất cả nội dung của thư mục đã chọn sẽ được sao chép vào đó. Sau đó, bạn có thể mời những người dùng khác cộng tác trên các tập tin trong phòng.",
   "SharePDFFormModalDescription": "Một phòng mới sẽ được tạo và biểu mẫu PDF sẽ được sao chép ở đó. Sau đó, bạn có thể mời những người dùng khác điền vào biểu mẫu trong phòng.",

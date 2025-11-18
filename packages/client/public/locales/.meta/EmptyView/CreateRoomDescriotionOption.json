@@ -3,7 +3,7 @@
   "content": "Start the portal by creating a room",
   "content_en_sha1_hash": "99cae1f0427752b2aa0b67fb8e7bee1a68325ee2",
   "created_at": "2025-05-19T21:30:56.461Z",
-  "updated_at": "2025-11-13T07:58:07.684Z",
+  "updated_at": "2025-11-17T11:52:35.154Z",
   "comment": {
     "text": "This translation key is used for a button label that prompts users to create a room. It appears on a UI element in an application where users can initiate room creation. The text will be translated by the translator to support different languages and cultures.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 348,
+      "line_number": 368,
       "context": "disabled: !security?.Create,\n };\n \n const createRoom = {\n title: t(\"EmptyView:CreateRoomTitleOption\"),\n description: t(\"EmptyView:CreateRoomDescriotionOption\"),\n icon: <CreateRoom />,\n key: \"create-room\",\n onClick: actions.onCreateRoom,\n disabled: false,\n };",
       "module": "/packages/client"
     }

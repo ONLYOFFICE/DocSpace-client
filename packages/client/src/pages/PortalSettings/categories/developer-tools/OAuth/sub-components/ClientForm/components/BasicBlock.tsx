@@ -137,7 +137,7 @@ const BasicBlock = ({
       <BlockHeader header={t("BasicInfo")} />
       <StyledInputBlock>
         <InputGroup
-          label={t("AppName")}
+          label={t("OAuth:AppName")}
           name="name"
           placeholder={t("Common:EnterName")}
           value={nameValue}

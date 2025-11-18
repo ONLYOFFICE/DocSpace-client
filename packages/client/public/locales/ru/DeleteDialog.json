@@ -1,4 +1,6 @@
 {
+  "DeleteAIAgentChatDescription": "Вы собираетесь удалить <strong>{{chatName}}</strong>.\n Все сообщения и история чата будут удалены без возможности восстановления.",
+  "DeleteAIAgentChatTitle": "Удалить чат?",
   "DeleteAIAgentDescription": "Агент <strong>\"{{agentName}}\"</strong> будет удален без возможности восстановления. Все данные и доступ пользователей будут потеряны.",
   "DeleteAIAgentTitle": "Удалить этого агента?",
   "DeleteAIAgentWarning": "Я понимаю последствия и хочу удалить агента",

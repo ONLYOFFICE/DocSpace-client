@@ -27,9 +27,9 @@
  */
 
 import AnthropicSvgUrl from "PUBLIC_DIR/images/ai-providers/anthropic.svg?url";
+import OllamaSvgUrl from "PUBLIC_DIR/images/ai-providers/ollama.svg?url";
 import OpenaiSvgUrl from "PUBLIC_DIR/images/ai-providers/openai.svg?url";
 import TogetherAiSvgUrl from "PUBLIC_DIR/images/ai-providers/together_ai.svg?url";
-import OllamaSvgUrl from "PUBLIC_DIR/images/ai-providers/ollama.svg?url";
 
 import { ProviderType } from "../../api/ai/enums";
 
@@ -43,6 +43,8 @@ export const getAiProviderIcon = (type: ProviderType) => {
       return TogetherAiSvgUrl;
     case ProviderType.OpenAiCompatible:
       return OllamaSvgUrl;
+    case ProviderType.OpenRouter:
+      return null;
     default:
       return null;
   }

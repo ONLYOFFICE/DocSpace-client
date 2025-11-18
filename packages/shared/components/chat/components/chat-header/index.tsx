@@ -41,12 +41,22 @@ const ChatHeader = ({
   getIcon,
   roomId,
   aiReady,
+  getResultStorageId,
+  setIsAIAgentChatDelete,
+  setDeleteDialogVisible,
 }: ChatHeaderProps) => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div ref={headerRef} className={`${styles.chatHeader} chat-header`}>
-      <SelectChat isLoadingProp={isLoading} getIcon={getIcon} roomId={roomId} />
+      <SelectChat
+        isLoadingProp={isLoading}
+        getIcon={getIcon}
+        getResultStorageId={getResultStorageId}
+        roomId={roomId}
+        setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+        setDeleteDialogVisible={setDeleteDialogVisible}
+      />
       <CreateChat isLoadingProp={isLoading} isDisabled={!aiReady} />
       <SelectModel selectedModel={selectedModel} isLoading={isLoading} />
     </div>

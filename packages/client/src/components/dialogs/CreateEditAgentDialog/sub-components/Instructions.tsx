@@ -79,6 +79,7 @@ const InstructionsSettings = ({
           onChange={handleChange}
           heightTextArea={144}
           placeholder={t("InstructionsDescriptionAgentExample")}
+          tabIndex={2}
         />
       </div>
     </StyledParam>

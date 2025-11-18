@@ -1,1 +1,18 @@
-{}
+{
+  "AIChat": "Chat con IA",
+  "CreateChat": "Crear chat",
+  "CreateChatDescription": "Vaya a la pestaña Chat con IA para empezar.",
+  "EmptyKnowledgeDescription": "Los archivos cargados aquí se indexarán y se utilizarán como contexto en la pestaña Chat con IA. Añada archivos para preguntar a AI sobre ellos, generar contenido o analizar información juntos.",
+  "EmptyKnowledgeTitle": "Aún no se han cargado archivos",
+  "EmptyResultsDescription": "Los archivos generados en la sección Chat con IA aparecerán aquí automáticamente. Siempre que genere contenido, inicie un chat o envíe un mensaje con salida, el resultado se guardará en esta sección.",
+  "EmptyResultsTitle": "Aún no hay resultados.",
+  "Knowledge": "Conocimientos",
+  "KnowledgeDescription": "Suba archivos de su ordenador o {{productName}} para proporcionar un mejor contexto a la conversación. Nota: parte o la totalidad del contenido subido puede quedar expuesto durante la conversación.",
+  "KnowledgeSelectIn": "Seleccionar en {{productName}}",
+  "MCP": "Herramientas MCP para esta sala",
+  "Model": "Proveedor y modelo",
+  "ModelDescription": "Seleccione el proveedor y el modelo de IA que se utilizará en los chats de esta sala. Esta configuración es obligatoria y se aplica a todos los participantes.",
+  "ResultStorage": "Almacenamiento de resultados",
+  "UploadFilesDevice": "Suba archivos desde su dispositivo personal",
+  "UploadFilesPortal": "Subir archivos de {{sectionNameFirst}} o {{sectionNameSecond}}"
+}

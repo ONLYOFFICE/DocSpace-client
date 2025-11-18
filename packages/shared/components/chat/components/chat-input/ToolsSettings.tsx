@@ -380,6 +380,7 @@ const ToolsSettings = ({
   return (
     <>
       <div
+        title={t("AIToolsHint")}
         className={classNames(
           styles.chatInputButton,
           styles.chatInputToolsButton,

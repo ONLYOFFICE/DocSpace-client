@@ -26,7 +26,22 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+const MODEL_NAME_MAP: Record<string, string> = {
+  "openai/gpt-5.1": "GPT-5.1",
+  "anthropic/claude-haiku-4.5": "Claude Haiku 4.5",
+  "anthropic/claude-sonnet-4.5": "Claude Sonnet 4.5",
+  "x-ai/grok-4": "Grok 4",
+  "google/gemini-2.5-flash": "Gemini 2.5 Flash",
+  "google/gemini-2.5-pro": "Gemini 2.5 Pro",
+  "deepseek/deepseek-chat-v3.1": "DeepSeek V3.1",
+  "qwen/qwen3-235b-a22b-2507": "Qwen 3",
+};
+
 export const getAiModelName = (id: string) => {
+  if (MODEL_NAME_MAP[id]) {
+    return MODEL_NAME_MAP[id];
+  }
+
   switch (id) {
     case "gpt-5":
       return "GPT-5";

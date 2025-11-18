@@ -26,7 +26,7 @@
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import styled from "styled-components";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -54,8 +54,8 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const AboutHeader = (props) => {
-  const { t } = props;
+const AboutHeader = () => {
+  const { t, ready } = useTranslation("Common");
 
   const navigate = useNavigate();
 
@@ -73,10 +73,10 @@ const AboutHeader = (props) => {
         className="arrow-button"
       />
       <Heading type="content" truncate>
-        {t("AboutHeader")}
+        {!ready ? "" : t("AboutHeader")}
       </Heading>
     </HeaderContainer>
   );
 };
 
-export default withTranslation(["About"])(AboutHeader);
+export default AboutHeader;

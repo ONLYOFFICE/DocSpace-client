@@ -262,10 +262,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
-    if (isAboutPage && !displayAbout) {
-      return <Navigate replace to="/error/404" />;
-    }
-
     if (isManagement && !isPortalManagement && !isFileManagement) {
       if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
       if ((user && !user?.isAdmin) || limitedAccessSpace)

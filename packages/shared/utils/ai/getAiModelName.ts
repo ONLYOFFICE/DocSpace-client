@@ -33,8 +33,9 @@ const MODEL_NAME_MAP: Record<string, string> = {
   "x-ai/grok-4": "Grok 4",
   "google/gemini-2.5-flash": "Gemini 2.5 Flash",
   "google/gemini-2.5-pro": "Gemini 2.5 Pro",
-  "deepseek/deepseek-chat-v3.1": "DeepSeek V3.1",
   "qwen/qwen3-235b-a22b-2507": "Qwen 3",
+  "deepseek/deepseek-v3.1-terminus": "DeepSeek V3.1",
+  "qwen/qwen3-max": "Qwen 3 Max",
 };
 
 export const getAiModelName = (id: string) => {

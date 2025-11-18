@@ -291,10 +291,14 @@ export default class MessageStore {
   };
 
   handleMetadata = (jsonData: string) => {
-    const { chatId } = JSON.parse(jsonData);
+    const { chatId, error } = JSON.parse(jsonData);
 
     if (chatId) {
       this.setCurrentChatId(chatId);
+    }
+
+    if (error) {
+      toastr.error(error as string);
     }
   };
 

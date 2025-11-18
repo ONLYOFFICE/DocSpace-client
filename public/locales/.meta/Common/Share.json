@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2025-11-17T11:52:35.246Z",
+  "updated_at": "2025-11-18T14:41:49.696Z",
   "comment": {
     "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2478,
+      "line_number": 2479,
       "context": "needsGrouping: true,\n minItemsCount: 1,\n },\n {\n groupKey: \"share\",\n groupLabel: t(\"Common:Share\"),\n groupIcon: ShareReactSvgUrl,\n itemKeys: [\n \"invite-users-to-room\",\n \"copy-shared-link\",\n \"manage-links\",",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Upload from {{productName}}",
   "content_en_sha1_hash": "252a750aa281d129a14c2dd82d20fb5352f42391",
   "created_at": "2025-05-19T21:30:56.552Z",
-  "updated_at": "2025-11-17T11:52:35.092Z",
+  "updated_at": "2025-11-18T14:41:49.619Z",
   "comment": {
     "text": "This translation key is used to display a title when uploading a file from a portal or document space. The placeholder {productName} will be replaced with the actual product name. This text appears as part of an upload option in the UI.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3281,
+      "line_number": 3293,
       "context": "return [\n {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n onClick: this.onShowAiKnowledgeSelectFileDialog,\n key: \"upload-files-product\",\n },",
       "module": "/packages/client"
     }

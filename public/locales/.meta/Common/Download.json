@@ -3,7 +3,7 @@
   "content": "Download",
   "content_en_sha1_hash": "a479c9c34e878d07b4d67a73a48f432ad7dc53c8",
   "created_at": "2025-05-19T21:30:44.645Z",
-  "updated_at": "2025-11-17T11:52:35.693Z",
+  "updated_at": "2025-11-18T14:41:50.090Z",
   "comment": {
     "text": "This translation key is used for the label and icon of a \"Download\" button, typically found on a version history page or in a file listing. The label displays the content's download size when available, and the button triggers an action to download the file. It appears as a clickable element, allowing users to initiate the download process.",
     "is_auto": true,
@@ -18,19 +18,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1496,
+      "line_number": 1497,
       "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1496,
+      "line_number": 1497,
       "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1496,
+      "line_number": 1497,
       "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },

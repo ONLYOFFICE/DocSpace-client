@@ -106,6 +106,7 @@ export const MCPTile = ({
         disableActions
           ? t("AISettings:ToUseAddProvider", {
               value: t("Common:MCPServer"),
+              aiProvider: t("Common:AIProvider"),
             })
           : undefined
       }

@@ -272,6 +272,7 @@ const MCPServersComponent = ({
           isMCPActionsDisabled
             ? t("AISettings:ToUseAddProvider", {
                 value: t("Common:MCPServer"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }

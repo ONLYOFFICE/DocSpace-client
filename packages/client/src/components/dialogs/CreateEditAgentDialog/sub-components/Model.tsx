@@ -260,7 +260,9 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Model")}
+            {t("Model", {
+              aiProvider: t("Common:AIProvider"),
+            })}
           </Text>
           <Text
             fontSize="12px"

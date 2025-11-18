@@ -205,6 +205,7 @@ const SearchComponent = ({
           !hasAIProviders
             ? t("AISettings:ToUseAddProvider", {
                 value: t("Common:WebSearchAI"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }

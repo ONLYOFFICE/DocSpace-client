@@ -240,6 +240,7 @@ const KnowledgeComponent = ({
           !hasAIProviders
             ? t("AISettings:ToUseAddProvider", {
                 value: t("AIRoom:Knowledge"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }

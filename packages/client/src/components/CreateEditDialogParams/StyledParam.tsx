@@ -52,6 +52,8 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
     flex-direction: column;
     gap: ${(props) => (props.increaseGap ? 12 : 4)}px;
 
+    overflow: hidden;
+
     .set_room_params-info-title {
       display: flex;
       flex-direction: row;

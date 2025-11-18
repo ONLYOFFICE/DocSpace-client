@@ -3,7 +3,7 @@
   "content": "Control who can use this template",
   "content_en_sha1_hash": "7a70fe763658974b816d93c8d2eced737b8a3e72",
   "created_at": "2025-10-13T13:22:31.517Z",
-  "updated_at": "2025-11-17T07:52:04.406Z",
+  "updated_at": "2025-11-17T11:52:35.127Z",
   "comment": {
     "text": "This text explains the purpose of a setting related to template access. It appears within a UI element (likely a button or setting) allowing users to manage permissions for who can utilize a specific template. Translators should ensure the meaning of controlling template usage is preserved.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 270,
+      "line_number": 274,
       "context": "createUploadFromDeviceOption,\n } = helperOptions(actions, security, isFrame);\n \n const templateAccess = createTemplateAccessOption(\n t(\"EmptyView:ManageAccess\"),\n t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     }

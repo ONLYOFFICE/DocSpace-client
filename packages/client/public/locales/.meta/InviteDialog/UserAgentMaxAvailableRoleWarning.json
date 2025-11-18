@@ -3,7 +3,7 @@
   "content": "Guests and Users cannot be assigned as Agent managers. Only Room and {{productName}} admins are suitable for the specified role.",
   "content_en_sha1_hash": "f1a44b3f52e1e85e4213c623f1ac2e5ee63ac846",
   "created_at": "2025-11-03T12:10:31.363Z",
-  "updated_at": "2025-11-03T12:23:48.033Z",
+  "updated_at": "2025-11-17T11:52:35.400Z",
   "comment": {
     "text": "This text explains limitations on assigning users as agent managers. It appears as a tooltip warning when attempting to assign a \"manager\" role, clarifying that only Room and {{productName}} admins are eligible. Translators should ensure the wording accurately conveys this restriction.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 141,
+      "line_number": 143,
       "context": "},\n agentManager: {\n key: \"agentManager\",\n label: t(\"Common:AgentManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserAgentMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
       "module": "/packages/shared"
     }

@@ -179,10 +179,20 @@ const ChangePortalOwnerDialog = ({
         </StyledOwnerInfo>
 
         <StyledPeopleSelectorInfo>
-          <Text className="new-owner" title={t("NewPortalOwner")}>
+          <Text
+            className="new-owner"
+            title={t("NewPortalOwner", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("NewPortalOwner", { productName: t("Common:ProductName") })}
           </Text>
-          <Text className="description" title={t("ChangeInstruction")}>
+          <Text
+            className="description"
+            title={t("ChangeInstruction", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("ChangeInstruction", { productName: t("Common:ProductName") })}
           </Text>
         </StyledPeopleSelectorInfo>
@@ -223,7 +233,12 @@ const ChangePortalOwnerDialog = ({
         )}
 
         <StyledAvailableList>
-          <Text className="list-header" title={t("PortalOwnerCan")}>
+          <Text
+            className="list-header"
+            title={t("PortalOwnerCan", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("PortalOwnerCan", { productName: t("Common:ProductName") })}
           </Text>
 

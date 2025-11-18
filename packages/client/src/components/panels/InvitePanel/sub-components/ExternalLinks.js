@@ -87,7 +87,7 @@ const ExternalLinks = ({
       toastr.success(
         `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
           days_count: 7,
-        })}`
+        })}`,
       );
 
       copyShareLink(link);
@@ -100,7 +100,7 @@ const ExternalLinks = ({
         roomId,
         "Invite",
         0,
-        shareLinks[0].id
+        shareLinks[0].id,
       ));
     return setShareLinks([]);
   };
@@ -187,8 +187,8 @@ const ExternalLinks = ({
   // const shareEmail = useCallback(
   //   (link) => {
   //     const { title, shareLink } = link;
-  //     const subject = t("SharingPanel:ShareEmailSubject", { title });
-  //     const body = t("SharingPanel:ShareEmailBody", { title, shareLink });
+  //     const subject = t("SharingPanel:ShareEmailSubject", { itemName: title });
+  //     const body = t("SharingPanel:ShareEmailBody", { itemName: title, shareLink });
 
   //     const mailtoLink = `mailto:${objectToGetParams({
   //       subject,
@@ -227,7 +227,7 @@ const ExternalLinks = ({
     true,
     isOwner,
     isAdmin,
-    standalone
+    standalone,
   );
 
   const filteredAccesses =
@@ -239,16 +239,16 @@ const ExternalLinks = ({
           productName: t("Common:ProductName"),
         })
       : isAIAgentsFolder
-      ? allowInvitingGuests
-        ? t("InviteViaLinkDescriptionAgentGuest")
-        : t("InviteViaLinkDescriptionAgentMembers", {
-            productName: t("Common:ProductName"),
-          })
-      : allowInvitingGuests
-      ? t("InviteViaLinkDescriptionRoomGuest")
-      : t("InviteViaLinkDescriptionRoomMembers", {
-          productName: t("Common:ProductName"),
-        });
+        ? allowInvitingGuests
+          ? t("InviteViaLinkDescriptionAgentGuest")
+          : t("InviteViaLinkDescriptionAgentMembers", {
+              productName: t("Common:ProductName"),
+            })
+        : allowInvitingGuests
+          ? t("InviteViaLinkDescriptionRoomGuest")
+          : t("InviteViaLinkDescriptionRoomMembers", {
+              productName: t("Common:ProductName"),
+            });
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
@@ -355,5 +355,5 @@ export default inject(
       allowInvitingGuests,
       isAIAgentsFolder,
     };
-  }
+  },
 )(observer(ExternalLinks));

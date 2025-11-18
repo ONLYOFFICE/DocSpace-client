@@ -3,7 +3,7 @@
   "content": "No files uploaded yet",
   "content_en_sha1_hash": "118574e18f8e491fcdabd4289071cb6479b05c9e",
   "created_at": "2025-10-27T16:14:31.664Z",
-  "updated_at": "2025-11-17T07:52:04.405Z",
+  "updated_at": "2025-11-17T11:52:35.124Z",
   "comment": {
     "text": "This translation key displays a message when no files have been uploaded to a knowledge tab within an AI Room. It appears in the empty state of the knowledge tab to inform the user that no files are currently present. Translators should ensure the message clearly indicates the absence of uploaded files.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 176,
+      "line_number": 180,
       "context": "isPortalAdmin: boolean = false,\n ): string => {\n const isNotAdmin = isUser(access);\n \n if (isAIRoom) {\n if (isKnowledgeTab) return t(\"AIRoom:EmptyKnowledgeTitle\");\n \n if (isResultsTab)\n return security && \"UseChat\" in security && security.UseChat\n ? t(\"AIRoom:EmptyResultsTitle\")\n : t(\"Common:NothingToShowYet\");",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Enable Custom filter",
   "content_en_sha1_hash": "347ea46e6b8619e12adca52dc59d4182968077ea",
   "created_at": "2025-05-19T21:30:55.402Z",
-  "updated_at": "2025-11-06T18:29:15.984Z",
+  "updated_at": "2025-11-17T11:52:35.716Z",
   "comment": {
     "text": "This translation key enables a custom filter option to be displayed as \"Enable Custom filter\". It is used in a UI component to toggle the state of this feature. In a dialog or button related to file options, it provides the label for an on/off switch controlling the custom filter's visibility.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2196,
+      "line_number": 2198,
       "context": "{\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: item.customFilterEnabled\n ? t(\"Files:CustomFilterDisable\")\n : t(\"Files:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => this.onSetUpCustomFilter(item, t),\n disabled: Boolean(\n !isRoomAdmin &&\n item.customFilterEnabled &&",
       "module": "/packages/client"
     }

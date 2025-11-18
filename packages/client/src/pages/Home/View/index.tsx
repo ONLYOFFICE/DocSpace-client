@@ -97,6 +97,8 @@ type ViewProps = UseContactsProps &
 
     aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
     setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
+    setIsAIAgentChatDelete: DialogsStore["setIsAIAgentChatDelete"];
+    setDeleteDialogVisible: DialogsStore["setDeleteDialogVisible"];
 
     canUseChat: AccessRightsStore["canUseChat"];
     isAdmin: AuthStore["isAdmin"];
@@ -173,6 +175,8 @@ const View = ({
 
   aiAgentSelectorDialogProps,
   setAiAgentSelectorDialogProps,
+  setIsAIAgentChatDelete,
+  setDeleteDialogVisible,
 
   canUseChat,
   isAdmin,
@@ -467,15 +471,15 @@ const View = ({
           view = "profile";
         } else if (isChatPage) {
           await Promise.all([
+            getFilesRef.current(),
             initToolsRef.current(),
             initChatsRef.current(),
             initMessagesRef.current(),
-            getFilesRef.current(),
           ]);
 
-          prevCategoryType.current = getCategoryType(location);
-
           view = "chat";
+
+          prevCategoryType.current = getCategoryType(location);
 
           setContactsTab(false);
         } else if (!isContactsPage) {
@@ -591,6 +595,8 @@ const View = ({
               aiReady={aiConfig?.aiReady || false}
               standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
               getResultStorageId={getResultStorageId}
+              setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+              setDeleteDialogVisible={setDeleteDialogVisible}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -695,8 +701,12 @@ export const ViewComponent = inject(
 
     const { checkTg } = telegramStore;
 
-    const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
-      dialogsStore;
+    const {
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
+      setIsAIAgentChatDelete,
+      setDeleteDialogVisible,
+    } = dialogsStore;
 
     return {
       setContactsTab,
@@ -762,6 +772,8 @@ export const ViewComponent = inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
+      setIsAIAgentChatDelete,
+      setDeleteDialogVisible,
 
       canUseChat,
       isAdmin,

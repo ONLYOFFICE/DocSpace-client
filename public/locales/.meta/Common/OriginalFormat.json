@@ -3,7 +3,7 @@
   "content": "Original format",
   "content_en_sha1_hash": "32d4ceda713d1116543fff259f4533b8366ff84f",
   "created_at": "2025-05-19T21:30:47.157Z",
-  "updated_at": "2025-11-13T07:42:11.925Z",
+  "updated_at": "2025-11-17T13:24:55.520Z",
   "comment": {
     "text": "The translation key \"OriginalFormat\" is used to display the original format when a file has a custom format or is an image. It appears in the download dialog box and will be displayed if the file does not have a specified single document format.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2503,
+      "line_number": 2505,
       "context": "if (downloadOption && downloadAsOption) {\n const originalDownloadOption = {\n ...downloadOption,\n key: \"download-original\",\n label: t(\"Common:OriginalFormat\"),\n };\n \n newOptions = [\n ...newOptions.filter((option) => option.key !== \"download\"),\n originalDownloadOption,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/DialogsStore.js",
-      "line_number": 514,
+      "line_number": 524,
       "context": "itemList.forEach((item) => {\n if (item.checked) {\n if (!!item.fileExst || item.contentLength) {\n const format =\n !item.format || item.format === t(\"Common:OriginalFormat\")\n ? item.fileExst\n : item.format;\n if (!singleFileUrl) {\n singleFileUrl = item.viewUrl;\n }",
       "module": "/packages/client"
     },

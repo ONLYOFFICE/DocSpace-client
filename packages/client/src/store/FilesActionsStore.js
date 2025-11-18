@@ -1323,8 +1323,6 @@ class FilesActionStore {
     const updatingFolderList = (elems, isPin = false) => {
       if (elems.length === 0) return;
 
-      const itemCount = { count: elems.length };
-
       let translationForOneItem;
       let translationForSeverals;
 
@@ -1333,13 +1331,13 @@ class FilesActionStore {
           ? t("AIAgentPinned")
           : t("AIAgentUnpinned");
         translationForSeverals = isPin
-          ? t("AIAgentsPinned", { ...itemCount })
-          : t("AIAgentsUnpinned", { ...itemCount });
+          ? t("AIAgentsPinned")
+          : t("AIAgentsUnpinned");
       } else {
         translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
         translationForSeverals = isPin
-          ? t("RoomsPinned", { ...itemCount })
-          : t("RoomsUnpinned", { ...itemCount });
+          ? t("RoomsPinned", { count: elems.length })
+          : t("RoomsUnpinned", { count: elems.length });
       }
 
       toastr.success(

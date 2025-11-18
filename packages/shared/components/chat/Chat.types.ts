@@ -53,6 +53,12 @@ export type SelectChatProps = {
   roomId: string | number;
   getIcon: TGetIcon;
   getResultStorageId: () => number | null;
+  setIsAIAgentChatDelete?: (value: {
+    visible: boolean;
+    itemName: string;
+    onDeleteAction: () => void;
+  }) => void;
+  setDeleteDialogVisible?: (value: boolean) => void;
 };
 
 export type RenameChatProps = {
@@ -64,6 +70,12 @@ export type RenameChatProps = {
 export type ChatHeaderProps = SelectModelProps &
   Omit<SelectChatProps, "isLoadingProp"> & {
     aiReady: boolean;
+    setIsAIAgentChatDelete?: (value: {
+      visible: boolean;
+      itemName: string;
+      onDeleteAction: () => void;
+    }) => void;
+    setDeleteDialogVisible?: (value: boolean) => void;
   };
 
 export type MessageProps = {
@@ -193,4 +205,11 @@ export type ChatProps = {
   messagesSettings: Omit<ReturnType<typeof useInitMessages>, "initMessages">;
   isAdmin?: boolean;
   standalone?: boolean;
+
+  setIsAIAgentChatDelete?: (value: {
+    visible: boolean;
+    itemName: string;
+    onDeleteAction: () => void;
+  }) => void;
+  setDeleteDialogVisible?: (value: boolean) => void;
 };

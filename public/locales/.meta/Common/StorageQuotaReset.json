@@ -3,7 +3,7 @@
   "content": "Storage quota successfully set to default.",
   "content_en_sha1_hash": "b6fea99a34e64a58d31ebe5913e5b51c86e315db",
   "created_at": "2025-05-19T21:30:49.128Z",
-  "updated_at": "2025-11-13T14:53:11.118Z",
+  "updated_at": "2025-11-17T11:52:35.250Z",
   "comment": {
     "text": "This translation key is used for a success message when setting a storage quota to its default value, typically displayed after a button click or operation in the FilesActionsStore and SpaceQuota components. It informs users that the quota has been successfully reset to its original size.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
-      "line_number": 159,
+      "line_number": 169,
       "context": "options.forEach((o) => {\n if (o.key === \"default-quota\") o.label = defaultQuotaSize;\n });\n \n successCallback(items);\n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n abortCallback();\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     },
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2265,
+      "line_number": 2266,
       "context": "return item?.id ? item.id : item;\n });\n \n try {\n await resetRoomQuota(userIDs);\n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2265,
+      "line_number": 2266,
       "context": "return item?.id ? item.id : item;\n });\n \n try {\n await resetRoomQuota(userIDs);\n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     }

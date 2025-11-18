@@ -55,6 +55,8 @@ const Chat = observer(
     standalone = false,
     aiReady = false,
     getResultStorageId,
+    setIsAIAgentChatDelete,
+    setDeleteDialogVisible,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
@@ -69,6 +71,8 @@ const Chat = observer(
           getResultStorageId={getResultStorageId}
           roomId={roomId}
           aiReady={aiReady}
+          setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+          setDeleteDialogVisible={setDeleteDialogVisible}
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen

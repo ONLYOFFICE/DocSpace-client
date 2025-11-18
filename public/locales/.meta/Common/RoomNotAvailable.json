@@ -3,7 +3,7 @@
   "content": "Room not available",
   "content_en_sha1_hash": "9133dc18fe95f3b8f20a7849bdab1ce0384389ce",
   "created_at": "2025-05-19T21:30:48.227Z",
-  "updated_at": "2025-11-17T11:52:35.383Z",
+  "updated_at": "2025-11-18T14:41:49.862Z",
   "comment": {
     "text": "The \"RoomNotAvailable\" translation key is used to display a message indicating that a room is not available, typically appearing in error messages or notifications on expired shared links. This message aims to inform users of the room's unavailability. It is used within error handling contexts, such as in error messages or password entry dialogs.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2619,
+      "line_number": 2617,
       "context": "const title = isFile\n ? t(\"Common:FileNotAvailable\")\n : isFolder\n ? t(\"Common:FolderNotAvailable\")\n : t(\"Common:RoomNotAvailable\");\n \n return toastr.error(description, title);\n }\n \n if (isLockedSharedRoom(item))",
       "module": "/packages/client"
     }

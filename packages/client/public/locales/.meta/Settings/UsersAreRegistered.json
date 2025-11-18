@@ -3,7 +3,7 @@
   "content": "You selected users registered in your {{productName}}, with the roles already set. Please proceed to the next step or go back to select more users.",
   "content_en_sha1_hash": "104753af899631f4905c0728d34f77017a7fa816",
   "created_at": "2025-05-19T21:30:53.146Z",
-  "updated_at": "2025-10-03T10:07:11.707Z",
+  "updated_at": "2025-11-18T14:41:49.922Z",
   "comment": {
     "text": "This translation key is used for the description of a user registration confirmation message in a data import stepper, informing users that their roles are set and they have selected users registered in the product. It appears on a screen with multiple workspace options, providing context for translators to ensure the message is consistent across different platforms.",
     "is_auto": true,
@@ -30,14 +30,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 47,
-      "context": "});\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans\n t={t}",
+      "line_number": 48,
+      "context": "case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n </>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 47,
-      "context": "});\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans\n t={t}",
+      "line_number": 48,
+      "context": "case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n </>\n ) : (",
       "module": "/packages/client"
     }
   ],

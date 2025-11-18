@@ -69,7 +69,7 @@ export default defineConfig({
     // Global test settings
     globals: true,
     clearMocks: true,
-    pool: "threads",
+    pool: process.env.POOL || "threads",
 
     // TypeScript configuration
     typecheck: {

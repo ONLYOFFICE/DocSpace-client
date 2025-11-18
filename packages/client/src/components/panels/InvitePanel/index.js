@@ -529,7 +529,7 @@ const InvitePanel = ({
     if (roomId === -1) {
       try {
         const linkData = await getInviteLink(selectedAccess);
-        if (!linkData) return setExternalLinksVisible(false);
+        if (!linkData) return setInviteContactsLink({ access: selectedAccess });
 
         const linkDataObj = {
           ...linkData,
@@ -580,12 +580,11 @@ const InvitePanel = ({
         setActiveLink(newActiveLink);
 
         setLinkSelectedAccess(access);
+        copyLink(link.shareLink);
       } catch (error) {
         toastr.error(error);
       }
     }
-
-    copyLink(link.shareLink);
   };
 
   const setInviteContactsLink = async (defaultLink) => {

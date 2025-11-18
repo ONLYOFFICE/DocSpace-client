@@ -100,7 +100,10 @@ const Header = ({
 
         {hasError ? (
           <>
-            <LoadErrorIcon data-tooltip-id={tooltipId} />
+            <LoadErrorIcon
+              className={styles.errorIcon}
+              data-tooltip-id={tooltipId}
+            />
             <Tooltip
               id={tooltipId}
               place="bottom"

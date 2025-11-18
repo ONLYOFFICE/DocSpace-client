@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { observer } from "mobx-react";
 
 import { MessageStoreContextProvider } from "./store/messageStore";
@@ -61,6 +62,16 @@ const Chat = observer(
     const { currentChat } = useChatStore();
 
     const showEmptyScreen = !isLoadingChat && !aiReady && !currentChat;
+
+    React.useEffect(() => {
+      window.dispatchEvent(
+        new CustomEvent("select-chat", {
+          detail: {
+            chatId: currentChat?.id,
+          },
+        }),
+      );
+    }, [currentChat?.id]);
 
     return (
       <>

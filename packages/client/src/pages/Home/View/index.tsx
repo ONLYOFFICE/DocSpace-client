@@ -298,7 +298,7 @@ const View = ({
     roomId: roomId ?? "",
   });
 
-  const { initMessages, ...messagesSettings } = useInitMessages();
+  const { initMessages, ...messagesSettings } = useInitMessages(roomId ?? "");
 
   const { initTools } = toolsSettings;
   const { fetchChats } = initChats;

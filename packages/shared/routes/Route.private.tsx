@@ -57,7 +57,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     identityServerEnabled,
     baseDomain,
     limitedAccessSpace,
-    displayAbout,
 
     limitedAccessDevToolsForUsers,
     standalone,
@@ -135,7 +134,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const isBonusPageUnavailable =
       location.pathname.includes("bonus") && !isCommunity;
 
-    const isAboutPage = location.pathname.includes("about");
     const isDeveloperToolsPage = location.pathname.includes("/developer-tools");
 
     if (location.pathname === "/shared/invalid-link") {

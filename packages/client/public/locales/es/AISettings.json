@@ -41,7 +41,6 @@
   "ResetKnowledgeDescription": "Esta acción eliminará la clave de la API configurada y desactivará la indexación de documentos para la base de conocimientos. No será posible añadir nuevos documentos a la base de conocimientos ni trabajar con ellos hasta que se proporcione una nueva clave.",
   "ResetProviderKeyDescription": "La clave de la API sólo se muestra una vez al guardar y luego se oculta por motivos de seguridad. Si se restablece, debe proporcionarse una nueva clave; de lo contrario, las funciones de IA, incluido el chat, no estarán disponibles.",
   "ResetWebSearchDescription": "Esta acción eliminará la clave de la API configurada y desconectará la integración de la búsqueda web. Los chats de IA ya no podrán acceder a información en tiempo real de Internet hasta que se añada una nueva clave.",
-  "Search": "Búsqueda web",
   "SearchDescription": "Conecte un motor de búsqueda web para mejorar los chats de IA con información en tiempo real procedente de Internet. Una vez configurado, estará disponible para todos los usuarios de {{productName}}.",
   "SearchEngine": "Motor de búsqueda web",
   "ServerAddedSuccess": "Servidor añadido correctamente",

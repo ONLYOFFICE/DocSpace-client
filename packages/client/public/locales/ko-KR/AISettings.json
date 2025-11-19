@@ -42,7 +42,6 @@
   "ResetKnowledgeDescription": "이 작업은 구성된 API 키를 제거하고 지식 베이스의 문서 인덱싱을 비활성화합니다. 새로운 키가 제공될 때까지 지식 베이스에 새 문서를 추가하고 작업하는 기능은 사용할 수 없습니다.",
   "ResetProviderKeyDescription": "API 키는 저장 시에 한 번만 표시되고, 보안을 위해 이후에는 숨겨집니다. 재설정 시에는 새로운 키를 제공해야 하며, 그렇지 않으면 채팅을 포함한 AI 기능이 사용 불가능합니다.",
   "ResetWebSearchDescription": "이 작업은 구성된 API 키를 제거하고 웹 검색 통합을 연결 해제합니다. 새로운 키가 추가될 때까지 AI 채팅은 인터넷에서 실시간 정보를 액세스할 수 없습니다.",
-  "Search": "웹 검색",
   "SearchDescription": "인터넷에서 실시간 정보를 가져와 AI 채팅을 향상시키기 위해 웹 검색 엔진을 연결합니다. 구성이 완료되면 {{productName}}의 모든 사용자가 사용할 수 있습니다.",
   "SearchEngine": "웹 검색 엔진",
   "ServerAddedSuccess": "서버가 성공적으로 추가되었습니다.",

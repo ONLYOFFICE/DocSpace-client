@@ -42,7 +42,6 @@
   "ResetKnowledgeDescription": "Šis rīcības veids izdzēsīs konfigurēto API atslēgu un atslēgs dokumentu indeksēšanu zināšanu bāzei. Pievienojot jaunus dokumentus zināšanu bāzei un strādājot ar tiem, nebūs iespējams, līdz netiks sniegta jauna atslēga.",
   "ResetProviderKeyDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos. Ja tā tiek atiestatīta, jānorāda jauna atslēga; citādi AI funkcijas, tostarp tērzēšana, nebūs pieejamas.",
   "ResetWebSearchDescription": "Šis rīcības veids noņemēs konfigurēto API atslēgu un atvienosies no tīmekļa meklēšanas integrāciju. AI čati vairs nevarēs piekļūt reāllaika informācijai no interneta, līdz pievieno jaunu atslēgu.",
-  "Search": "Tīmekļa meklēšana",
   "SearchDescription": "Pievienojiet vietnes meklētājprogrammu, lai papildinātu AI sarunas ar reāllaika informāciju no internetā. Kad tas būs konfigurēts, tas būs pieejams visiem lietotājiem {{productName}}.",
   "SearchEngine": "Web meklētājprogramma",
   "ServerAddedSuccess": "Serveris veiksmīgi pievienots",

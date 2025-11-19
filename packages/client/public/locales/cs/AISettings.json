@@ -42,7 +42,6 @@
   "ResetKnowledgeDescription": "Tento postup odstraní nakonfigurovaný API klíč a vypne indexování dokumentů pro znalostní bázi. Přidávání nových dokumentů do znalostní báze a práce s nimi nebude dostupná, dokud nebude poskytnut nový klíč.",
   "ResetProviderKeyDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů. Pokud je resetován, musí být poskytnut nový klíč, jinak budou funkce AI, včetně chatu, nedostupné.",
   "ResetWebSearchDescription": "Tento postup odstraní nakonfigurovaný API klíč a odpojí integraci webového vyhledávání. AI chaty nebudou mít přístup k informacím v reálném čase z internetu, dokud nebude přidán nový klíč.",
-  "Search": "Webové vyhledávání",
   "SearchDescription": "Připojte webový vyhledávač a vylepšete AI chaty pomocí informací z internetu v reálném čase. Jakmile bude nakonfigurován, bude dostupný všem uživatelům v {{productName}}.",
   "SearchEngine": "Webový vyhledávač",
   "ServerAddedSuccess": "Server úspěšně přidán",

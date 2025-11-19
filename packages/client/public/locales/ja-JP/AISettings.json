@@ -28,7 +28,6 @@
   "ProviderUpdatedSuccess": "プロバイダーが正常に更新されました",
   "ProviderURL": "URL",
   "ResetProviderKeyDescription": "APIキーは保存時に一度だけ表示され、その後はセキュリティ上の理由で非表示になります。リセットされた場合、新しいキーを提供する必要があります。そうしないと、チャットを含むAI機能が利用できなくなります。",
-  "Search": "ウェブ検索",
   "SearchDescription": "ウェブ検索エンジンを接続し、インターネットからのリアルタイム情報でAIチャットを強化します。設定が完了すると、{{productName}}の全ユーザーが利用可能になります。",
   "SearchEngine": "ウェブ検索エンジン",
   "ServerAddedSuccess": "サーバーが正常に追加されました",

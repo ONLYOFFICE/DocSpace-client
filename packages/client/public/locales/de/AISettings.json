@@ -42,7 +42,6 @@
   "ResetKnowledgeDescription": "Diese Aktion entfernt den konfigurierten API-Schlüssel und deaktiviert die Dokumentenindizierung für die Wissensdatenbank. Das Hinzufügen neuer Dokumente zur Wissensdatenbank und die Bearbeitung dieser Dokumente sind erst wieder möglich, nachdem ein neuer Schlüssel bereitgestellt wurde.",
   "ResetProviderKeyDescription": "Der API-Schlüssel wird nur einmal beim Speichern angezeigt und anschließend aus Sicherheitsgründen ausgeblendet. Wird er zurückgesetzt, muss ein neuer Schlüssel angegeben werden; andernfalls stehen die KI-Funktionen, einschließlich des Chats, nicht zur Verfügung.",
   "ResetWebSearchDescription": "Diese Aktion entfernt den konfigurierten API-Schlüssel und deaktiviert die Websuchintegration. KI-Chats können erst wieder auf Echtzeitinformationen aus dem Internet zugreifen, wenn ein neuer Schlüssel hinzugefügt wurde.",
-  "Search": "Websuche",
   "SearchDescription": "Verbinden Sie eine Websuchmaschine, um KI-Chats mit Echtzeitinformationen aus dem Internet anzureichern. Nach der Konfiguration steht diese Funktion allen Nutzern in {{productName}} zur Verfügung.",
   "SearchEngine": "Websuchmaschine",
   "ServerAddedSuccess": "Server erfolgreich hinzugefügt",

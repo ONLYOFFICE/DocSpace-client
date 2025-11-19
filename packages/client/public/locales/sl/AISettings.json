@@ -42,7 +42,6 @@
   "ResetKnowledgeDescription": "To delovanje bo odstranilo konfiguriran ključ API-ja in onemogočilo indeksiranje dokumentov za bazo znanja. Dodajanje novih dokumentov v bazo znanja in delo z njimi ne bo na voljo, dokler ne bo zagotovljen nov ključ.",
   "ResetProviderKeyDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit zaradi varnostnih razlogov. Če ga ponastavite, je potreben nov ključ, sicer funkcije umetne inteligence, vključno s klepnom, ne bodo na voljo.",
   "ResetWebSearchDescription": "To delovanje bo odstranilo nastavljeni ključ API-ja in odklopilo integracijo iskanja po spletu. Pogovori z umetno inteligenco ne bodo več mogli dostopati do informacij v realnem času iz interneta, dokler ne bo dodan nov ključ.",
-  "Search": "Web iskanje",
   "SearchDescription": "Povežite iskalnik na spletu, da izboljšate pogovore z umetno inteligenco z informacijami iz interneta v realnem času. Ko bo konfiguriran, bo na voljo vsem uporabnikom v {{productName}}.",
   "SearchEngine": "Spletni iskalnik",
   "ServerAddedSuccess": "Uspešno dodan strežnik",

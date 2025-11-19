@@ -42,7 +42,6 @@
   "ResetKnowledgeDescription": "Ta akcja usunie skonfigurowany klucz API i wyłączy indeksowanie dokumentów dla bazy wiedzy. Dodawanie nowych dokumentów do bazy wiedzy i praca z nimi będzie niedostępna do momentu podania nowego klucza.",
   "ResetProviderKeyDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania i następnie jest ukrywany ze względów bezpieczeństwa. Jeśli zostanie zresetowany, należy podać nowy klucz, w przeciwnym razie funkcje AI, w tym czat, będą niedostępne.",
   "ResetWebSearchDescription": "Ta akcja usunie skonfigurowany klucz API i odłączy integrację wyszukiwania w sieci. Czaty AI nie będą mogły już uzyskiwać dostępu do informacji w czasie rzeczywistym z internetu, dopóki nie zostanie dodany nowy klucz.",
-  "Search": "Wyszukiwanie w internecie",
   "SearchDescription": "Podłącz wyszukiwarkę, aby wzbogacić czat AI o najnowsze informacje z internetu. Po skonfigurowaniu będzie ona dostępna dla wszystkich użytkowników w {{productName}}.",
   "SearchEngine": "Wyszukiwarka internetowa",
   "ServerAddedSuccess": "Dodano serwer pomyślnie",

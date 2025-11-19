@@ -42,7 +42,6 @@
   "ResetKnowledgeDescription": "Táto akcia odstráni nakonfigurovaný API kľúč a vypne indexovanie dokumentov pre znalostnú bázu. Pridávanie nových dokumentov do znalostnej bázy a práca s nimi nebude dostupná, kým nebude poskytnutý nový kľúč.",
   "ResetProviderKeyDescription": "Kľúč API sa zobrazí len raz pri uložení a následne je skrytý z dôvodu bezpečnosti. Ak sa resetuje, musí byť poskytnutý nový kľúč, inak budú funkcie AI, vrátane chatu, nedostupné.",
   "ResetWebSearchDescription": "Táto akcia odstráni nakonfigurovaný API kľúč a odpojí integráciu webovej vyhľadávania. Chaty s AI už nebudú môcť pristupovať k informáciám v reálnom čase z internetu, kým sa nepridá nový kľúč.",
-  "Search": "Webové vyhľadávanie",
   "SearchDescription": "Pripojte webový vyhľadávač, aby mohol AI chat využívať aktuálne údaje z internetu v reálnom čase. Po konfigurácii bude dostupný všetkým používateľom v {{productName}}.",
   "SearchEngine": "Webový vyhľadáva",
   "ServerAddedSuccess": "Server úspešne pridaný",

@@ -42,7 +42,6 @@
   "ResetKnowledgeDescription": "Tämä toiminto poistaa määritetyn API-avaimen ja poistaa käytöstä dokumenttien indeksoinnin tietopohjassa. Uusien dokumenttien lisääminen tietopohjaan ja niiden kanssa työskentely ei ole mahdollista ennen kuin uusi avain on annettu.",
   "ResetProviderKeyDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja piilotetaan sen jälkeen tietoturvasyistä. Jos se nollataan, on toimitettava uusi avain, muuten tekoälyominaisuudet, mukaan lukien chat, eivät ole käytettävissä.",
   "ResetWebSearchDescription": "Tämä toiminto poistaa määritetyn API-avaimen ja katkaisee verkkohakuintegraation. AI-keskustelut eivät enää pääse käsiksi reaaliaikaiseen tietoon internetistä ennen kuin uusi avain on lisätty.",
-  "Search": "Verkkohaku",
   "SearchDescription": "Yhdistä verkkohakukone tekoälykeskusteluihin tuodaksesi reaaliaikaista tietoa internetistä. Kun se on määritetty, se on kaikkien käyttäjien käytettävissä {{productName}}-palvelussa.",
   "SearchEngine": "Verkkohakukone",
   "ServerAddedSuccess": "Palvelin lisätty onnistuneesti",

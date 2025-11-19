@@ -10,7 +10,6 @@
   "KnowledgeDescription": "Carregue arquivos do seu computador ou {{productName}} para fornecer um contexto melhor para o chat. Observação: parte ou todo o conteúdo carregado pode ser exposto durante a conversa.",
   "KnowledgeSelectIn": "Selecione em {{productName}}",
   "MCP": "Ferramentas MCP para esta sala",
-  "Model": "Fornecedor e modelo",
   "ModelDescription": "Selecione o provedor de IA e o modelo a ser usado nos chats desta sala. Esta configuração é obrigatória e aplica-se a todos os participantes.",
   "ResultStorage": "Armazenamento de resultados",
   "UploadFilesDevice": "Carregue arquivos a partir do seu dispositivo pessoal",

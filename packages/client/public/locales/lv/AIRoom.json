@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "Zināšanu bāze šobrīd ir deaktivizēta. Lai aktivizētu semantisko meklēšanu un dokumentu apstrādi AI aģentiem, lūdzu, sazinieties ar savu {{productName}} administratoru, lai konfigurētu vektortrāķa nodrošinātāju.",
   "MCP": "MCP rīki šai telpai",
   "MCPDescriptionServers": "Izmantojiet MCP serverus, kas savienoti ar administratoru, lai uzlabotu tērzēšanas pieredzi ar AI. MCP serveri var palīdzēt ar datu izguvi, kopsavilkumiem, viediem ieteikumiem u.c.",
-  "Model": "Pakalpojuma sniedzējs un modelis",
   "ModelDescription": "Izvēlieties AI pakalpojumu sniedzēju un modeli, kas tiks izmantots šīs telpas sarunās. Šis iestatījums ir obligāts un attiecas uz visiem dalībniekiem.",
   "ResponseQualityNode": "<1>Piezīme:</1> Atbildes kvalitāte var atšķirties atkarībā no modeļa; labākiem rezultātiem ieteicami jaunāki modeļi.",
   "ResultStorage": "Rezultātu glabāšana",

@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "Bilgi tabanı şu anda devre dışı. Yapay zeka ajanları için anlamsal arama ve belge işleme'yi etkinleştirmek için lütfen {{productName}} yöneticinizle iletişime geçerek gömme sağlayıcısını yapılandırın.",
   "MCP": "Bu oda için MCP araçları",
   "MCPDescriptionServers": "Yönetici tarafından bağlanan MCP sunucularını, yapay zeka ile sohbet deneyimini geliştirmek için kullanın. MCP sunucuları, veri çıkarma, özetler, akıllı öneriler vb. konularında yardımcı olabilir.",
-  "Model": "Sağlayıcı ve model",
   "ModelDescription": "Bu oda sohbetlerinde kullanılacak yapay zeka sağlayıcısı ve modeli seçin. Bu ayar zorunludur ve tüm katılımcılar için geçerlidir.",
   "ResponseQualityNode": "<1>Not:</1> Yanıt kalitesi modele göre değişiklik gösterebilir; en iyi sonuçlar için daha yeni modeller önerilir.",
   "ResultStorage": "Sonuç depolama",

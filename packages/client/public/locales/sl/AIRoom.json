@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "Baza znanja je trenutno onemogočena. Za omogočitev semantičnega iskanja in obdelave dokumentov za AI agente, se obrnite na administratorja {{productName}}, da konfigurira ponudnika vgrajenih podatkov.",
   "MCP": "MCP orodja za to sobo",
   "MCPDescriptionServers": "Uporabite MCP strežnike, povezane z administratorjem, za izboljšanje izkušnje s klepanjem z umetno inteligenco. MCP strežniki lahko pomagajo pri izvlečenju podatkov, povzetkih, pametnih predlogih itd.",
-  "Model": "Ponudnik in model",
   "ModelDescription": "Izberite ponudnika umetne inteligence in modela, ki se bo uporabljal v klepetalnici. Ta nastavitev je obvezna in velja za vse udeležence.",
   "ResponseQualityNode": "<1>Opomba:</1> Kakovost odgovorov se lahko razlikuje glede na model; za najboljše rezultate priporočamo novejše modele.",
   "ResultStorage": "Shranjevanje rezultatov",

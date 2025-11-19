@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "Znalostná báza je momentálne vypnutá. Aby ste aktivovali sémantické vyhľadávanie a spracovanie dokumentov pre AI agentov, kontaktujte prosím administrátora {{productName}} a nakonfigurujte poskytovateľa vložieb.",
   "MCP": "MCP nástroje pre túto miestnosť",
   "MCPDescriptionServers": "Využívajte MCP servery prepojené administrátorom na zlepšenie chatovacej skúsenosti s AI. MCP servery môžu pomôcť s extrakciou dát, súhrnmi, inteligentnými návrhmi a pod.",
-  "Model": "Poskytovateľ a model",
   "ModelDescription": "Vyberte poskytovateľa AI a model, ktorý sa bude používať v chatovaní v tejto miestnosti. Toto nastavenie je povinné a vzťahuje sa na všetkých účastníkov.",
   "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovede sa môže líšiť v závislosti od modelu; na dosiahnutie najlepších výsledkov sa odporúčajú novšie modely.",
   "ResultStorage": "Ukladanie výsledkov",

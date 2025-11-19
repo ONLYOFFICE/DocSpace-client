@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "La base de conocimientos está actualmente desactivada. Para activar la búsqueda semántica y el procesamiento de documentos para agentes de IA, por favor, póngase en contacto con el administrador de su {{productName}} para configurar el proveedor de incrustaciones.",
   "MCP": "Herramientas MCP para esta sala",
   "MCPDescriptionServers": "Utilice servidores MCP conectados por el administrador para mejorar la experiencia de chat con IA. Los servidores MCP pueden ayudar con la extracción de datos, resúmenes, sugerencias inteligentes, etc.",
-  "Model": "Proveedor y modelo",
   "ModelDescription": "Seleccione el proveedor y el modelo de IA que se utilizará en los chats de esta sala. Esta configuración es obligatoria y se aplica a todos los participantes.",
   "ResponseQualityNode": "<1>Nota:</1> La calidad de la respuesta puede variar según el modelo; se recomiendan los modelos más nuevos para obtener mejores resultados.",
   "ResultStorage": "Almacenamiento de resultados",

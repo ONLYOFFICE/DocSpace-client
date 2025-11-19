@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla agentów AI, skontaktuj się z administratorem {{productName}}, aby skonfigurować dostawcę osadzeń.",
   "MCP": "Narzędzia MCP do tego pomieszczenia",
   "MCPDescriptionServers": "Wykorzystaj serwery MCP połączone przez administratora, aby ulepszyć doświadczenie czatu z wykorzystaniem AI. Serwery MCP mogą pomagać w ekstrakcji danych, podsumowaniach, inteligentnych sugestiach, itp.",
-  "Model": "Dostawca i model",
   "ModelDescription": "Wybierz dostawcę i model AI, które będą używane w rozmowach w tym pokoju. To ustawienie jest obowiązkowe i dotyczy wszystkich uczestników.",
   "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
   "ResultStorage": "Przechowywanie wyników",

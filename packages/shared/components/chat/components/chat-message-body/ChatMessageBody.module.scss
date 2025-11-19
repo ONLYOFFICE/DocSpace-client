@@ -45,6 +45,7 @@
 
   &.empty {
     max-height: fit-content;
+    flex-grow: 0;
   }
 
   @include mixins.tablet-and-below {

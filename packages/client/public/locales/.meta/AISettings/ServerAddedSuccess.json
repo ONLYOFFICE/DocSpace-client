@@ -3,7 +3,7 @@
   "content": "Server added successfully",
   "content_en_sha1_hash": "71c59f07e31d46ed034d0f31fc0aae5017e415d6",
   "created_at": "2025-10-27T16:14:31.650Z",
-  "updated_at": "2025-10-27T17:17:17.090Z",
+  "updated_at": "2025-11-13T07:42:11.530Z",
   "comment": {
     "text": "This key displays a success message in a dialog after a new server has been successfully added in the AI settings portal. It's used to confirm the successful creation of a new server to the user.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/add/index.tsx",
-      "line_number": 87,
+      "line_number": 100,
       "context": "headers,\n };\n \n try {\n await addNewMCP?.(data);\n toastr.success(t(\"AISettings:ServerAddedSuccess\"));\n onClose();\n } catch (e) {\n console.error(e);\n toastr.error(e as TData);\n } finally {",
       "module": "/packages/client"
     }

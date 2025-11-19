@@ -60,6 +60,18 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "restart": true
+    },
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Debug Python Script (upload_to_docspace)",
+      "program": "${workspaceFolder}/backend/src/scripts/form/upload_to_docspace.py",
+      "cwd": "${workspaceFolder}/backend",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend/src"
+      }
     }
   ]
 }

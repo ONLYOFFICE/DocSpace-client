@@ -1,1 +1,27 @@
-{}
+{
+  "AIChat": "AI-Chat",
+  "AIInstructions": "AI Ohjeet",
+  "CreateChat": "Luo chat",
+  "CreateChatDescription": "Siirry AI-Chat-välilehteen aloittaaksesi.",
+  "EmptyKnowledgeDescription": "Tähän ladatut tiedostot indeksoidaan ja niitä käytetään AI-Chat -välilehden kontekstina. Lisää tiedostoja, jotta voit kysyä AI:lta niistä, luoda sisältöä tai analysoida tietoja yhdessä.",
+  "EmptyKnowledgeDescriptionActions": "Kokeile näitä toimintoja päästäksesi alkuun:",
+  "EmptyKnowledgeTitle": "Ei tiedostoja vielä ladattu",
+  "EmptyResultsDescription": "Tekoälykeskusteluissa luoduista tiedostoista ilmestyy tiedot tähän automaattisesti. Aina kun luot sisältöä, aloitat keskustelun tai lähetät viestin, jossa on tuloste, tulos tallennetaan tähän osioon.",
+  "EmptyResultsTitle": "Ei tuloksia vielä",
+  "InstructionsDescriptionAgent": "Kuvaile, miten tekoälyagentin tulisi käyttäytyä ja reagoida. Määrittele sen rooli, sävy ja päätehtävät.",
+  "InstructionsDescriptionAgentExample": "Esimerkki: \"Olet tekoälyviestintäavustaja, joka auttaa kirjoittamaan ja muokkaamaan lehdistötiedotteita. Säilytä ammattimainen, itsevarma ja mediaystävällinen sävy. Korosta keskeisiä viestejä selkeästi, vältä ammattikieltä ja pidä teksti ytimekkäänä ja kiinnostavana.\"",
+  "Knowledge": "Tieto",
+  "KnowledgeDescription": "Lataa tiedostoja tietokoneeltasi tai {{productName}}-palvelusta, jotta chatissa on parempi konteksti. Huomio: osa tai kaikki ladatut tiedot voivat näkyä keskustelun aikana.",
+  "KnowledgeSelectIn": "Valitse {{productName}}",
+  "KnowledgeUnavailable": "Tietokanta ei ole käytettävissä",
+  "KnowledgeUnavailableDescription": "Tietokanta on tällä hetkellä poissa käytöstä. Jotta voit ottaa semanttisen haun ja dokumenttien käsittelyn käyttöön AI-agenttiesi osalta, määritä upotusten tarjoaja {{productName}} -asetuksissa.",
+  "KnowledgeUnavailableDescriptionUser": "Tietokanta on tällä hetkellä poissa käytöstä. Jotta voit ottaa semanttisen haun ja dokumenttien käsittelyn käyttöön AI-agentteja varten, ota yhteyttä {{productName}}-järjestelmän ylläpitäjään upotusten tarjoajan määrittämiseksi.",
+  "MCP": "MCP työkalut tähän huoneeseen",
+  "MCPDescriptionServers": "Käytä ylläpitäjän yhdistämiä MCP-palvelimia parantaaksesi chat-kokemusta tekoälyn avulla. MCP-palvelimet voivat auttaa datan poiminnassa, tiivistelmissä, älykkäissä ehdotuksissa jne.",
+  "Model": "Palveluntarjoaja ja malli",
+  "ModelDescription": "Valitse tässä huoneessa käytettävä tekoälyn tarjoaja ja malli. Tämä asetus on pakollinen ja koskee kaikkia osallistujia.",
+  "ResponseQualityNode": "<1>Huomautus:</1> Vastausten laatu voi vaihdella mallista riippuen; parempien tulosten saavuttamiseksi suositellaan uusia malleja.",
+  "ResultStorage": "Tulosten tallennus",
+  "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",
+  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}"
+}

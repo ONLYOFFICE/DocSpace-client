@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2025-11-03T12:10:35.037Z",
+  "updated_at": "2025-11-17T11:52:35.342Z",
   "comment": {
     "text": "This translation key is used to display a paid status label. It appears on a badge component in the contacts list, indicating that an account has made payments and should be considered paid. The text changes depending on whether a user is paying or not, using the \"Paid\" label for paid accounts.",
     "is_auto": true,
@@ -120,13 +120,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
-      "line_number": 73,
+      "line_number": 76,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"paid-badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
-      "line_number": 101,
+      "line_number": 102,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"paid-badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
@@ -198,25 +198,25 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 104,
+      "line_number": 106,
       "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 104,
+      "line_number": 106,
       "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 104,
+      "line_number": 106,
       "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 104,
+      "line_number": 106,
       "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
       "module": "/packages/shared"
     }

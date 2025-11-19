@@ -3,7 +3,7 @@
   "content": "Apply",
   "content_en_sha1_hash": "cfea419c3b4e8b02ee586e70a28bf846e44cdda4",
   "created_at": "2025-05-19T21:30:43.032Z",
-  "updated_at": "2025-10-27T16:14:33.295Z",
+  "updated_at": "2025-11-17T07:52:04.624Z",
   "comment": {
     "text": "The \"Apply\" translation key is used to display the label for an apply button that confirms changes or applies settings in a color selection dialog. It appears as part of a larger dialog component and is also referenced as the primary action button within another variant of the same dialog. This translation can be found on buttons with the id \"applyButtonLabel\" in various dialogs.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 312,
+      "line_number": 322,
       "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n testId=\"room_logo_cover_apply_button\"\n />\n <Button\n scale",
       "module": "/packages/client"
     },
@@ -30,8 +30,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 526,
-      "context": "onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",\n label: t(\"Common:ApplyButton\"),\n onClick: onIndexApply,\n iconUrl: CheckIcon,\n },\n ]\n : isContactsPage",
+      "line_number": 598,
+      "context": "onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",\n label: t(\"Common:ApplyButton\"),\n onClick: onIndexApply,\n iconUrl: CheckIcon,\n },\n ];\n }, [t, onIndexReorder, onIndexApply]);",
       "module": "/packages/client"
     },
     {

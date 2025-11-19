@@ -1,1 +1,18 @@
-{}
+{
+  "AIChat": "Chat IA",
+  "CreateChat": "Créer une discussion",
+  "CreateChatDescription": "Accédez à l'onglet Chat IA pour commencer.",
+  "EmptyKnowledgeDescription": "Les fichiers téléchargés ici seront indexés et utilisés comme contexte dans l'onglet Chat IA. Ajoutez des fichiers pour interroger l'IA à leur sujet, générer du contenu ou analyser des informations ensemble.",
+  "EmptyKnowledgeTitle": "Aucun fichier téléchargé pour le moment",
+  "EmptyResultsDescription": "Les fichiers générés dans Chat IA apparaîtront ici automatiquement. Chaque fois que vous générez du contenu, démarrez une discussion ou envoyez un message avec un résultat, celui-ci sera enregistré dans cette section.",
+  "EmptyResultsTitle": "Aucun résultat pour le moment",
+  "Knowledge": "Connaissances",
+  "KnowledgeDescription": "Téléchargez des fichiers depuis votre ordinateur ou {{productName}} pour fournir un meilleur contexte à la discussion. Remarque : une partie ou la totalité du contenu téléchargé peut être exposée pendant la conversation.",
+  "KnowledgeSelectIn": "Sélectionner dans {{productName}}",
+  "MCP": "Outils MCP pour cette salle",
+  "Model": "Fournisseur et modèle",
+  "ModelDescription": "Sélectionnez le fournisseur et le modèle d'IA à utiliser dans les discussions de cette salle. Ce paramètre est obligatoire et s'applique à tous les participants.",
+  "ResultStorage": "Stockage des résultats",
+  "UploadFilesDevice": "élécharger des fichiers depuis votre appareil personnel",
+  "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}"
+}

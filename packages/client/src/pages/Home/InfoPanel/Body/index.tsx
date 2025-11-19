@@ -65,6 +65,7 @@ type BodyProps = {
   maxImageUploadSize: SettingsStore["maxImageUploadSize"];
 
   editRoomDialogProps: DialogsStore["editRoomDialogProps"];
+  editAgentDialogProps: DialogsStore["editAgentDialogProps"];
   createRoomDialogProps: DialogsStore["createRoomDialogProps"];
   templateEventVisible: DialogsStore["templateEventVisible"];
 
@@ -105,6 +106,7 @@ const InfoPanelBodyContent = ({
   onChangeFile,
   setImage,
   checkIsExpiredLinkAsync,
+  editAgentDialogProps,
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
@@ -121,8 +123,8 @@ const InfoPanelBodyContent = ({
   const isAgent =
     selection &&
     "rootFolderType" in selection &&
-    "roomType" in selection &&
-    selection.roomType &&
+    // "roomType" in selection &&
+    // selection.roomType &&
     selection.rootFolderType === FolderType.AIAgents;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
@@ -157,7 +159,7 @@ const InfoPanelBodyContent = ({
     ) {
       setView(InfoPanelView.infoDetails);
     }
-  }, [fileView, selection, isTemplatesRoom]);
+  }, [fileView, selection, isTemplatesRoom, isAgent]);
 
   const isExpiredLink = useEventCallback(() =>
     checkIsExpiredLinkAsync(selection),
@@ -234,6 +236,7 @@ const InfoPanelBodyContent = ({
 
       {avatarEditorDialogVisible &&
       !editRoomDialogProps.visible &&
+      !editAgentDialogProps.visible &&
       !createRoomDialogProps.visible &&
       !Array.isArray(selection) ? (
         <AvatarEditorDialog
@@ -276,8 +279,12 @@ export default inject(
     } = infoPanelStore;
 
     const { isExpiredLinkAsync } = filesActionsStore;
-    const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
-      dialogsStore;
+    const {
+      editRoomDialogProps,
+      editAgentDialogProps,
+      createRoomDialogProps,
+      templateEventVisible,
+    } = dialogsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -305,6 +312,7 @@ export default inject(
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 
       editRoomDialogProps,
+      editAgentDialogProps,
       createRoomDialogProps,
       templateEventVisible,
 

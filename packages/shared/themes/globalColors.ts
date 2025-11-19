@@ -44,6 +44,7 @@ export const globalColors = {
   darkGrayDark: "#ADADAD",
   grayText: "#555F65",
   grayDarkText: "#5C5C5C",
+  grayLightText: "#CCC",
 
   lightBlueMain: "#4781D1",
   lightBlueMainHover: "rgba(71, 129, 209, 0.85)",
@@ -163,4 +164,6 @@ export const globalColors = {
 
   lightEditorBackground: "#F3F3F3",
   darkEditorBackground: "#222222",
+
+  coralPink: "#F2557C",
 };

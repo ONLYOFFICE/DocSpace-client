@@ -1,1 +1,27 @@
-{}
+{
+  "AIChat": "Chat con IA",
+  "AIInstructions": "Instrucciones para la IA ",
+  "CreateChat": "Crear chat",
+  "CreateChatDescription": "Vaya a la pestaña Chat con IA para empezar.",
+  "EmptyKnowledgeDescription": "Los archivos cargados aquí se indexarán y se utilizarán como contexto en la pestaña Chat con IA. Añada archivos para preguntar a AI sobre ellos, generar contenido o analizar información juntos.",
+  "EmptyKnowledgeDescriptionActions": "Pruebe estas acciones para empezar: ",
+  "EmptyKnowledgeTitle": "Aún no se han cargado archivos",
+  "EmptyResultsDescription": "Los archivos generados en la sección Chat con IA aparecerán aquí automáticamente. Siempre que genere contenido, inicie un chat o envíe un mensaje con salida, el resultado se guardará en esta sección.",
+  "EmptyResultsTitle": "Aún no hay resultados.",
+  "InstructionsDescriptionAgent": "Describa cómo debe comportarse y responder el agente de IA. Defina su papel, su tono y sus tareas principales.",
+  "InstructionsDescriptionAgentExample": "Ejemplo: \"Eres un asistente de relaciones públicas de AI que ayuda a redactar y editar comunicados de prensa. Mantén un tono profesional, seguro y cercano a los medios de comunicación. Resalta claramente los mensajes clave, evita la jerga y mantén el texto conciso y atractivo.\"",
+  "Knowledge": "Conocimientos",
+  "KnowledgeDescription": "Suba archivos de su ordenador o {{productName}} para proporcionar un mejor contexto a la conversación. Nota: parte o la totalidad del contenido subido puede quedar expuesto durante la conversación.",
+  "KnowledgeSelectIn": "Seleccionar en {{productName}}",
+  "KnowledgeUnavailable": "Base de conocimientos no disponible ",
+  "KnowledgeUnavailableDescription": "La base de conocimientos está actualmente desactivada. Para activar la búsqueda semántica y el procesamiento de documentos para sus agentes de IA, configure el proveedor de incrustaciones en los ajustes de {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "La base de conocimientos está actualmente desactivada. Para activar la búsqueda semántica y el procesamiento de documentos para agentes de IA, por favor, póngase en contacto con el administrador de su {{productName}} para configurar el proveedor de incrustaciones.",
+  "MCP": "Herramientas MCP para esta sala",
+  "MCPDescriptionServers": "Utilice servidores MCP conectados por el administrador para mejorar la experiencia de chat con IA. Los servidores MCP pueden ayudar con la extracción de datos, resúmenes, sugerencias inteligentes, etc.",
+  "Model": "Proveedor y modelo",
+  "ModelDescription": "Seleccione el proveedor y el modelo de IA que se utilizará en los chats de esta sala. Esta configuración es obligatoria y se aplica a todos los participantes.",
+  "ResponseQualityNode": "<1>Nota:</1> La calidad de la respuesta puede variar según el modelo; se recomiendan los modelos más nuevos para obtener mejores resultados.",
+  "ResultStorage": "Almacenamiento de resultados",
+  "UploadFilesDevice": "Suba archivos desde su dispositivo personal",
+  "UploadFilesPortal": "Subir archivos de {{sectionNameFirst}} o {{sectionNameSecond}}"
+}

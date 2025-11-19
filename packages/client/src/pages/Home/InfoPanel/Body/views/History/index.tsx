@@ -172,7 +172,7 @@ const History = ({
           </div>,
           ...feeds.map((feed, i) => (
             <HistoryBlock
-              key={`${feed.action.id}_${feed.date}`}
+              key={feed.id}
               feed={feed}
               isLastEntity={i === feeds.length - 1 ? !isLoading : false}
               dataTestId={`history_block_${idx}`}

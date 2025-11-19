@@ -1,1 +1,20 @@
-{}
+{
+  "KnowledgeDisabledSuccess": "Knowledge Base disattivata con successo",
+  "KnowledgeEnabledSuccess": "Knowledge Base disattivata con successo",
+  "KnowledgeKeyDescription": "Inserisci la chiave API ottenuta dal tuo provider di knowledge base",
+  "KnowledgeSettingsDescription": "Abilita una knowledge base per gli agenti AI. Il sistema indicizzerà i tuoi documenti usando il modello {{modelName}} per supportare la ricerca basata su domande sui tuoi dati. Questa funzione si concentra sul trovare informazioni rilevanti ma non genera riepiloghi né esegue analisi globali.",
+  "MCPServerAdvancedSettingsHint": "Usa questa sezione per inviare intestazioni HTTP aggiuntive, come token di autorizzazione.",
+  "MCPServerDescriptionHint": "Scrivi una breve spiegazione dello scopo dell’integrazione",
+  "MCPServerIntegrationURLHint": "Inserisci l’indirizzo del server MCP fornito dal tuo servizio",
+  "MCPSettingsDescription": "Questa sezione ti permette di gestire i server MCP per le chat AI all’interno delle stanze. Puoi abilitare i server MCP di sistema o aggiungerne di personalizzati secondo le esigenze della tua azienda. Una volta abilitati, questi server saranno accessibili anche ad altri utenti per i loro compiti.",
+  "ProviderKeyInputHint": "Inserisci la chiave API generata dal pannello del tuo provider AI",
+  "ProviderNameInputHint": "Usa qualsiasi nome che ti sia comodo per identificare questa connessione",
+  "ProviderUnavailableError": "Il provider AI non è disponibile",
+  "ProviderURL": "URL",
+  "ProviderURLInputHint": "Inserisci l’URL dell’endpoint API fornito dal tuo servizio AI",
+  "ResetKnowledgeDescription": "Questa azione rimuoverà la chiave API configurata e disabiliterà l’indicizzazione dei documenti per la knowledge base. L’aggiunta di nuovi documenti e il loro utilizzo non sarà disponibile finché non verrà fornita una nuova chiave.",
+  "ResetWebSearchDescription": "Questa azione rimuoverà la chiave API configurata e disconnetterà l’integrazione di ricerca web. Le chat AI non potranno più accedere a informazioni in tempo reale da Internet finché non verrà aggiunta una nuova chiave.",
+  "WebSearchDisabledSuccess": "Ricerca web disabilitata con successo",
+  "WebSearchEnabledSuccess": "Ricerca web abilitata con successo",
+  "WebSearchKeyDescription": "Inserisci la chiave API ottenuta dal tuo provider di ricerca web"
+}

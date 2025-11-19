@@ -27,7 +27,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import equal from "fast-deep-equal/react";
-
+import classNames from "classnames";
+import { ALLOWED_MCP_CHARACTERS } from "@docspace/shared/constants";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
   TextInput,
@@ -35,6 +36,11 @@ import {
   InputSize,
 } from "@docspace/shared/components/text-input";
 import { Textarea } from "@docspace/shared/components/textarea";
+import { Text } from "@docspace/shared/components/text";
+
+import styles from "./useBaseParams.module.scss";
+
+const regex = /^[a-zA-Z0-9_-]+$/;
 
 export const useBaseParams = (initialValues?: {
   name?: string;
@@ -46,7 +52,7 @@ export const useBaseParams = (initialValues?: {
   const [name, setName] = React.useState(initialValues?.name || "");
   const [url, setUrl] = React.useState(initialValues?.url || "");
   const [description, setDescription] = React.useState(
-    initialValues?.description || "",
+    initialValues?.description || ""
   );
 
   const initBaseParams = React.useRef({
@@ -58,6 +64,7 @@ export const useBaseParams = (initialValues?: {
   const [nameError, setNameError] = React.useState("");
   const [urlError, setUrlError] = React.useState("");
   const [descriptionError, setDescriptionError] = React.useState("");
+  const [hasError, setHasError] = React.useState(false);
 
   const onChangeName = (value: string) => {
     setName(value);
@@ -103,6 +110,10 @@ export const useBaseParams = (initialValues?: {
 
   const hasChanges = !equal(initBaseParams.current, { name, url, description });
 
+  const handleBlur = () => setHasError(Boolean(name && !regex.test(name)));
+
+  const baseParamsError = !name || !url || !description || hasError;
+
   const baseParamsComponent = (
     <>
       <FieldContainer
@@ -119,10 +130,21 @@ export const useBaseParams = (initialValues?: {
           size={InputSize.base}
           value={name}
           onChange={(e) => onChangeName(e.target.value)}
+          onBlur={handleBlur}
           placeholder={t("Common:EnterName")}
           scale
-          hasError={!!nameError}
+          hasError={hasError || !!nameError}
+          maxLength={128}
         />
+        <Text
+          className={classNames(styles.fieldHint, {
+            [styles.errorText]: hasError,
+          })}
+        >
+          {hasError
+            ? `${t("Common:AllowedCharacters")}: ${ALLOWED_MCP_CHARACTERS}`
+            : t("AISettings:ProviderNameInputHint")}
+        </Text>
       </FieldContainer>
       <FieldContainer
         labelText={t("AISettings:IntegrationURL")}
@@ -142,6 +164,9 @@ export const useBaseParams = (initialValues?: {
           scale
           hasError={!!urlError}
         />
+        <Text className={styles.fieldHint}>
+          {t("AISettings:MCPServerIntegrationURLHint")}
+        </Text>
       </FieldContainer>
       <FieldContainer
         labelText={t("Common:Description")}
@@ -157,7 +182,11 @@ export const useBaseParams = (initialValues?: {
           value={description}
           onChange={(e) => onChangeDescription(e.target.value)}
           placeholder={t("OAuth:EnterDescription")}
+          maxLength={256}
         />
+        <Text className={styles.fieldHint}>
+          {t("AISettings:MCPServerDescriptionHint")}
+        </Text>
       </FieldContainer>
     </>
   );
@@ -166,5 +195,6 @@ export const useBaseParams = (initialValues?: {
     getBaseParams,
     baseParamsComponent,
     baseParamsChanged: hasChanges,
+    baseParamsError,
   };
 };

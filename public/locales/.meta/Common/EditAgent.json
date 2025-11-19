@@ -3,7 +3,7 @@
   "content": "Edit Agent",
   "content_en_sha1_hash": "07c504c5b4e6c55a509698a594e6e99f8b1b3ec9",
   "created_at": "2025-10-27T16:14:13.848Z",
-  "updated_at": "2025-10-27T16:40:47.935Z",
+  "updated_at": "2025-11-18T14:41:49.742Z",
   "comment": {
     "text": "This translation key is used as the title for a dialog or panel that allows a user to edit agent details. It appears in the UI header and likely refers to an \"Edit Agent\" action or screen. Translators should ensure the meaning conveys the ability to modify agent settings.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/EditAgentDialog.tsx",
-      "line_number": 188,
-      "context": "onClose={onCloseRoomOwnerPanel}\n />\n </ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>{t(\"Common:EditAgent\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetAgentParams\n tagHandler={tagHandler}\n agentParams={agentParams}",
+      "line_number": 223,
+      "context": "initedSelectedServers={initSelectedServers}\n />\n </ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>{t(\"Common:EditAgent\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetAgentParams\n tagHandler={tagHandler}\n agentParams={agentParams}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1997,
+      "line_number": 2004,
       "context": "disabled: !isTemplateOwner,\n },\n {\n id: \"option_edit-agent\",\n key: \"edit-agent\",\n label: t(\"Common:EditAgent\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onClickEditAgent(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }

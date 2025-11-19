@@ -67,6 +67,8 @@ const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Common:RolePowerUserFormRoomDescription");
+    case RoomsType.AIRoom:
+      return t("Common:RoleAgentContentCreatorDescription");
     case None:
       return t("Common:RoleNewUserDescription");
     default:
@@ -90,7 +92,7 @@ export const getAccessOptions = (
   withSeparator = false,
   isOwner = false,
   isAdmin = false,
-  standalone = false
+  standalone = false,
 ) => {
   let options: Array<AccessOptionType | SeparatorOptionType> = [];
   const accesses = {
@@ -136,7 +138,7 @@ export const getAccessOptions = (
     },
     agentManager: {
       key: "agentManager",
-      label: t("Common:AgentManager"),   
+      label: t("Common:AgentManager"),
       description: getRoomAdminDescription(roomType, t),
       tooltip: t("UserAgentMaxAvailableRoleWarning", {
         productName: t("Common:ProductName"),
@@ -294,7 +296,7 @@ export const getAccessOptions = (
               key: "s1",
               isSeparator: withSeparator,
             },
-          ]
+          ],
         );
       }
 

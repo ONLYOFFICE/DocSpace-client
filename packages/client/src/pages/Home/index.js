@@ -164,11 +164,20 @@ const PureHome = (props) => {
 
     aiConfig,
     currentTab,
+    setIsAboutDialogVisible,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
 
   const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.state?.openAboutDialog && setIsAboutDialogVisible) {
+      setIsAboutDialogVisible(true);
+      // clear state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state, setIsAboutDialogVisible]);
 
   // console.log(t("Common:ComingSoon"))
 
@@ -296,6 +305,7 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+      sectionProps.fullHeightBody = isChat;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
@@ -461,6 +471,7 @@ export const Component = inject(
     dialogsStore,
     filesSettingsStore,
     aiRoomStore,
+    profileActionsStore,
   }) => {
     const {
       setSelectedFolder,
@@ -739,6 +750,8 @@ export const Component = inject(
 
       currentTab: aiRoomStore.currentTab,
       aiConfig: settingsStore.aiConfig,
+
+      setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
     };
   },
 )(observer(Home));

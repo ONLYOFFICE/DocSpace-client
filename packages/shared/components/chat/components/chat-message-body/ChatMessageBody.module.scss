@@ -39,6 +39,7 @@
   flex-direction: column;
   align-items: center;
   align-self: stretch;
+  flex-grow: 1;
 
   box-sizing: border-box;
 
@@ -51,21 +52,19 @@
   }
 }
 
-.chatScrollBody {
-  padding-inline: 0 !important;
-}
-
 .chatMessageContainer {
+  box-sizing: border-box;
+
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 
   gap: 24px;
 
+  width: 100%;
   max-width: 700px;
 
   padding: 20px;
-
-  margin: auto;
+  margin: 0 auto;
 }
 
 .chatEmptyHelpMessage {

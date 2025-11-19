@@ -108,6 +108,10 @@ class SelectedFolderStore {
 
   updatedBy: TCreatedBy | null = null;
 
+  ownedBy: TCreatedBy | null = null;
+
+  sharedBy: TCreatedBy | null = null;
+
   rootFolderType: FolderType | null = null;
 
   pathParts: TPathParts[] = [];
@@ -248,12 +252,16 @@ class SelectedFolderStore {
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
       isAIRoom: this.isAIRoom,
+      isInsideResultStorage: this.isInsideResultStorage,
+      isInsideKnowledge: this.isInsideKnowledge,
       chatSettings: this.chatSettings,
       rootRoomType: this.rootRoomType,
       rootRoomId: this.rootRoomId,
       shareSettings: this.shareSettings,
       availableShareRights: this.availableShareRights,
       parentShared: this.parentShared,
+      ownedBy: this.ownedBy,
+      sharedBy: this.sharedBy,
     };
   };
 
@@ -313,6 +321,8 @@ class SelectedFolderStore {
     this.shareSettings = null;
     this.availableShareRights = null;
     this.parentShared = false;
+    this.ownedBy = null;
+    this.sharedBy = null;
   };
 
   setFilesCount = (filesCount: number) => {
@@ -500,6 +510,20 @@ class SelectedFolderStore {
 
   get isAIAgent() {
     return this.roomType === RoomsType.AIRoom;
+  }
+
+  get isInsideResultStorage() {
+    return (
+      this.type === FolderType.ResultStorage ||
+      this.pathParts.some((r) => r.folderType === FolderType.ResultStorage)
+    );
+  }
+
+  get isInsideKnowledge() {
+    return (
+      this.type === FolderType.Knowledge ||
+      this.pathParts.some((r) => r.folderType === FolderType.Knowledge)
+    );
   }
 }
 

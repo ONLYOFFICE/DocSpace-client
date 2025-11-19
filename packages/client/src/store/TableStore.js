@@ -29,6 +29,7 @@ import {
   TableVersions,
   TABLE_ROOMS_COLUMNS,
   TABLE_PEOPLE_COLUMNS,
+  TABLE_AI_AGENTS_COLUMNS,
 } from "SRC_DIR/helpers/constants";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
@@ -36,7 +37,6 @@ const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 const TABLE_GUESTS_COLUMNS = `guestsTableColumns_ver-${TableVersions.Guests}`;
 const TABLE_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
 const TABLE_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
-const TABLE_AI_AGENTS_COLUMNS = `aiAgentsTableColumns_ver-${TableVersions.AIAgents}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
 const TABLE_FAVORITES_COLUMNS = `favoritesTableColumns_ver-${TableVersions.Favorites}`;
@@ -134,6 +134,8 @@ class TableStore {
   lastOpenedRecentColumnIsEnabled = true;
 
   authorShareWithMeColumnIsEnabled = true;
+
+  sharedByShareWithMeColumnIsEnabled = true;
 
   accessLevelShareWithMeColumnIsEnabled = true;
 
@@ -385,6 +387,10 @@ class TableStore {
     this.accessLevelShareWithMeColumnIsEnabled = enable;
   };
 
+  setSharedByShareWithMeColumn = (enable) => {
+    this.sharedByShareWithMeColumnIsEnabled = enable;
+  };
+
   setModifiedShareWithMeColumn = (enable) =>
     (this.modifiedShareWithMeColumnIsEnabled = enable);
 
@@ -450,7 +456,7 @@ class TableStore {
         isPersonalReadOnly,
         isRecentFolder,
         isFavoritesFolder,
-        isSharedWithMeFolderRoot,
+        isSharedWithMeFolder,
         isAIAgentsFolder,
       } = this.treeFoldersStore;
 
@@ -485,7 +491,10 @@ class TableStore {
         return;
       }
 
-      if (isSharedWithMeFolderRoot) {
+      if (isSharedWithMeFolder) {
+        this.setSharedByShareWithMeColumn(
+          splitColumns.includes("SharedByShareWithMe"),
+        );
         this.setAuthorShareWithMeColumn(
           splitColumns.includes("AuthorShareWithMe"),
         );
@@ -763,6 +772,12 @@ class TableStore {
         );
         return;
 
+      case "SharedByShareWithMe":
+        this.setSharedByShareWithMeColumn(
+          !this.sharedByShareWithMeColumnIsEnabled,
+        );
+        return;
+
       case "ModifiedShareWithMe":
         this.setModifiedShareWithMeColumn(
           !this.modifiedShareWithMeColumnIsEnabled,
@@ -873,7 +888,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
@@ -921,7 +936,7 @@ class TableStore {
       tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
     else if (isFavoritesFolder)
       tableStorageName = `${TABLE_FAVORITES_COLUMNS}=${userId}`;
-    else if (isSharedWithMeFolderRoot)
+    else if (isSharedWithMeFolder)
       tableStorageName = `${TABLE_SHARED_WITH_ME_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
@@ -942,7 +957,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
@@ -992,7 +1007,7 @@ class TableStore {
       columnStorageName = `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnStorageName = `${COLUMNS_GROUPS_SIZE}=${userId}`;
-    else if (isSharedWithMeFolderRoot)
+    else if (isSharedWithMeFolder)
       columnStorageName = `${COLUMNS_SHARED_WITH_ME_SIZE}=${userId}`;
     else if (isDocumentsFolder) columnStorageName = `${COLUMNS_SIZE}=${userId}`;
     else columnStorageName = "";
@@ -1011,7 +1026,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
@@ -1062,7 +1077,7 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnInfoPanelStorageName = `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`;
-    else if (isSharedWithMeFolderRoot)
+    else if (isSharedWithMeFolder)
       columnInfoPanelStorageName = `${COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE}=${userId}`;
     else if (isDocumentsFolder)
       columnInfoPanelStorageName = `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;

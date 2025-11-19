@@ -78,7 +78,6 @@ const InjectedEmptyViewContainer = inject<
     publicRoomStore,
     peopleStore,
     settingsStore,
-    aiRoomStore,
     authStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
@@ -107,7 +106,13 @@ const InjectedEmptyViewContainer = inject<
       setTemplateAccessSettingsVisible,
     } = dialogsStore;
 
-    const { security, access, rootFolderType } = selectedFolderStore;
+    const {
+      security,
+      access,
+      rootFolderType,
+      isInsideKnowledge,
+      isInsideResultStorage,
+    } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
@@ -138,9 +143,9 @@ const InjectedEmptyViewContainer = inject<
       isVisitor: userStore?.user?.isVisitor,
       isFrame,
       logoText,
-      isKnowledgeTab: aiRoomStore.isKnowledgeTab,
-      isResultsTab: aiRoomStore.isResultTab,
-      isDocSpaceAdmin: authStore.isAdmin,
+      isKnowledgeTab: isInsideKnowledge,
+      isResultsTab: isInsideResultStorage,
+      isPortalAdmin: authStore.isAdmin,
       aiReady: aiConfig?.aiReady,
       standalone,
     };

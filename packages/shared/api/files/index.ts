@@ -1391,7 +1391,7 @@ export async function restoreDocumentsVersion(
   doc: null | number | string,
 ) {
   const options: AxiosRequestConfig = {
-    method: "get",
+    method: "post",
     url: `files/file/${fileId}/restoreversion?version=${version}&doc=${doc}`,
   };
 

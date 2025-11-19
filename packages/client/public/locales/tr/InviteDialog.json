@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "İsim veya e-postaya ile ara ve davet et",
   "InviteViaLink": "Bağlantı yoluyla davet et",
   "InviteViaLinkDescriptionAccounts": "{{productName}}'te kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",
+  "InviteViaLinkDescriptionAgentGuest": "Misafir olarak aracıdaki kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
+  "InviteViaLinkDescriptionAgentMembers": "{{productName}} üyeleri için, acentada kendi yetkilendirmeleri için evrensel bir bağlantı oluşturun.",
   "InviteViaLinkDescriptionRoomGuest": "Oda içinde misafir olarak kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
   "InviteViaLinkDescriptionRoomMembers": "{{productName}} üyeleri için odada kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
   "LinkCopySuccess": "Bağlantı kopyalandı",
   "SendInvitation": "Davetiye gönder",
+  "UserAgentMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar, Ajan yöneticisi olarak atanemez. Sadece Oda ve {{productName}} yöneticileri belirtilen rol için uygundur.",
   "UserMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar Oda yöneticisi olarak atanamaz. Belirtilen rol için yalnızca Oda ve {{productName}} yöneticileri uygundur.",
   "UsersAlreadyAdded": "Bazı kullanıcılar zaten eklenmiş",
   "UsersCannotBeAdded": "Devre dışı bırakılmış kişiler bir odaya eklenemez."

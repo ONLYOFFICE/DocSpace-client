@@ -88,6 +88,7 @@
   "Payer": "Payeur",
   "PayerDescription": "Cet utilisateur a accès aux détails des paiements et est le seul à pouvoir ajuster le quota et effectuer des paiements. Le propriétaire de {{productName}}, ainsi que le gestionnaire de paiement lui-même, peuvent réattribuer le rôle de gestionnaire de paiement en utilisant le portail client Stripe.",
   "PaymentMethod": "Méthode de paiement",
+  "PerAITools": "{{currency}} par jeton",
   "PerBackup": "{{currency}} par sauvegarde",
   "PerBackupWithBracket": "({{currency}} par sauvegarde)",
   "PerStorage": "{{currency}} par {{amount}}/mois",

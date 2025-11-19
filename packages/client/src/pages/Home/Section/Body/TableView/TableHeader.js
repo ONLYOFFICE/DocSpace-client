@@ -77,7 +77,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isRecentFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isFavoritesFolder,
       isArchiveFolder,
       isIndexEditingMode,
@@ -107,7 +107,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
       isRecentFolder !== prevProps.isRecentFolder ||
-      isSharedWithMeFolderRoot !== prevProps.isSharedWithMeFolderRoot ||
+      isSharedWithMeFolder !== prevProps.isSharedWithMeFolder ||
       isFavoritesFolder !== prevProps.isFavoritesFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
@@ -214,11 +214,11 @@ class FilesTableHeader extends React.Component {
       isFavoritesFolder,
       isTemplatesFolder,
       isIndexing,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = this.props;
 
-    if (isSharedWithMeFolderRoot) return this.getSharedWithMeFolderColumns();
+    if (isSharedWithMeFolder) return this.getSharedWithMeFolderColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isAIAgentsFolder) return this.getAIAgentsColumns();
@@ -414,6 +414,7 @@ class FilesTableHeader extends React.Component {
       nameColumnIsEnabled,
       authorShareWithMeColumnIsEnabled,
       accessLevelShareWithMeColumnIsEnabled,
+      sharedByShareWithMeColumnIsEnabled,
       modifiedShareWithMeColumnIsEnabled,
       sizeShareWithMeColumnIsEnabled,
       typeShareWithMeColumnIsEnabled,
@@ -429,6 +430,13 @@ class FilesTableHeader extends React.Component {
         enable: nameColumnIsEnabled,
         sortBy: SortByFieldName.Name,
         onClick: this.onFilter,
+      },
+      {
+        key: "SharedByShareWithMe",
+        title: t("SharedBy"),
+        enable: sharedByShareWithMeColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
       },
       {
         key: "AuthorShareWithMe",
@@ -760,7 +768,7 @@ class FilesTableHeader extends React.Component {
   getAIAgentsColumns = () => {
     const {
       t,
-      isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       showStorageInfo,
       aiAgentColumnNameIsEnabled,
       aiAgentColumnTagsIsEnabled,
@@ -813,7 +821,7 @@ class FilesTableHeader extends React.Component {
     showStorageInfo &&
       columns.splice(columns.length, 0, {
         key: "StorageAIAgents",
-        title: isDefaultRoomsQuotaSet
+        title: isDefaultAIAgentsQuotaSet
           ? t("Common:StorageAndQuota")
           : t("Common:Storage"),
         enable: aiAgentColumnQuotaIsEnable,
@@ -1030,7 +1038,11 @@ export default inject(
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
+    const {
+      isDefaultRoomsQuotaSet,
+      showStorageInfo,
+      isDefaultAIAgentsQuotaSet,
+    } = currentQuotaStore;
 
     const { isIndexEditingMode } = indexingStore;
 
@@ -1053,7 +1065,7 @@ export default inject(
       isPersonalReadOnly,
       isRecentFolder,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isAIAgentsFolder,
     } = treeFoldersStore;
     const withContent = canShare;
@@ -1093,6 +1105,7 @@ export default inject(
 
       authorShareWithMeColumnIsEnabled,
       accessLevelShareWithMeColumnIsEnabled,
+      sharedByShareWithMeColumnIsEnabled,
       modifiedShareWithMeColumnIsEnabled,
       sizeShareWithMeColumnIsEnabled,
       typeShareWithMeColumnIsEnabled,
@@ -1181,6 +1194,7 @@ export default inject(
 
       authorShareWithMeColumnIsEnabled,
       accessLevelShareWithMeColumnIsEnabled,
+      sharedByShareWithMeColumnIsEnabled,
       modifiedShareWithMeColumnIsEnabled,
       sizeShareWithMeColumnIsEnabled,
       typeShareWithMeColumnIsEnabled,
@@ -1220,12 +1234,13 @@ export default inject(
       isFrame,
       isAIAgentsFolder,
       isRecentFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
       isFavoritesFolder,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      isDefaultAIAgentsQuotaSet,
       isIndexEditingMode,
 
       indexColumnSize,

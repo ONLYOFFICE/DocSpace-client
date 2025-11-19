@@ -3,7 +3,7 @@
   "content": "The rooms are archived",
   "content_en_sha1_hash": "de470fe0cbfca725b66465dd7aec74208860139c",
   "created_at": "2025-05-19T21:30:55.272Z",
-  "updated_at": "2025-11-03T12:10:35.382Z",
+  "updated_at": "2025-11-18T14:41:50.129Z",
   "comment": {
     "text": "This translation key is used for the action of archiving rooms, appearing in file management actions. It's likely shown as a button label or dialog title, prompting users to archive specific rooms.",
     "is_auto": true,

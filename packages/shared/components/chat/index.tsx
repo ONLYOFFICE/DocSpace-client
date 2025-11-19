@@ -24,19 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { observer } from "mobx-react";
 
 import { MessageStoreContextProvider } from "./store/messageStore";
 import { ChatStoreContextProvider, useChatStore } from "./store/chatStore";
 
-import { ChatProps } from "./Chat.types";
+import type { ChatProps } from "./Chat.types";
 
 import ChatContainer from "./components/chat-container";
 import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
 import { ChatNoAccessScreen } from "./components/chat-no-access-screen";
-import { ChatInfoBlock } from "./components/chat-info-block";
+import ChatFooter from "./components/chat-footer";
 
 import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
 
@@ -54,12 +54,24 @@ const Chat = observer(
     toolsSettings,
     isAdmin = false,
     standalone = false,
-    canUseChat = false,
     aiReady = false,
+    getResultStorageId,
+    setIsAIAgentChatDelete,
+    setDeleteDialogVisible,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
     const showEmptyScreen = !isLoadingChat && !aiReady && !currentChat;
+
+    React.useEffect(() => {
+      window.dispatchEvent(
+        new CustomEvent("select-chat", {
+          detail: {
+            chatId: currentChat?.id,
+          },
+        }),
+      );
+    }, [currentChat?.id]);
 
     return (
       <>
@@ -67,15 +79,17 @@ const Chat = observer(
           selectedModel={selectedModel}
           isLoading={isLoadingChat}
           getIcon={getIcon}
+          getResultStorageId={getResultStorageId}
           roomId={roomId}
           aiReady={aiReady}
+          setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+          setDeleteDialogVisible={setDeleteDialogVisible}
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen
-            canUseChat={canUseChat}
             aiReady={aiReady}
             standalone={standalone}
-            isDocSpaceAdmin={isAdmin}
+            isPortalAdmin={isAdmin}
           />
         ) : (
           <>
@@ -83,22 +97,18 @@ const Chat = observer(
               userAvatar={userAvatar}
               isLoading={isLoadingChat}
               getIcon={getIcon}
+              getResultStorageId={getResultStorageId}
             />
-            {!isLoadingChat && !aiReady ? (
-              <ChatInfoBlock
-                standalone={standalone}
-                isDocSpaceAdmin={isAdmin}
-              />
-            ) : null}
-            <ChatInput
+            <ChatFooter
               attachmentFile={attachmentFile}
               clearAttachmentFile={clearAttachmentFile}
               isLoading={isLoadingChat}
               getIcon={getIcon}
               selectedModel={selectedModel}
               toolsSettings={toolsSettings}
-              isAdmin={isAdmin}
+              isPortalAdmin={isAdmin}
               aiReady={aiReady}
+              standalone={standalone}
             />
           </>
         )}
@@ -114,29 +124,29 @@ const ChatWrapper = (props: ChatProps) => {
 
     initChats,
 
+    messagesSettings,
+
     isAdmin = false,
     standalone = false,
-    canUseChat = false,
     aiReady = false,
   } = props;
 
   const isLoadingChat = isLoading || !roomId;
   const hasChats = initChats?.chats?.length > 0;
 
-  if (!isLoadingChat && (!canUseChat || (!aiReady && !hasChats))) {
+  if (!isLoadingChat && !aiReady && !hasChats) {
     return (
       <ChatNoAccessScreen
-        canUseChat={canUseChat}
         aiReady={aiReady}
         standalone={standalone}
-        isDocSpaceAdmin={isAdmin}
+        isPortalAdmin={isAdmin}
       />
     );
   }
 
   return (
     <ChatStoreContextProvider roomId={roomId} {...initChats}>
-      <MessageStoreContextProvider roomId={roomId}>
+      <MessageStoreContextProvider roomId={roomId} {...messagesSettings}>
         <ChatContainer>
           <Chat {...props} isLoadingChat={isLoadingChat} />
         </ChatContainer>

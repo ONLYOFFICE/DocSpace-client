@@ -64,6 +64,7 @@ const Buttons = ({
   // isLast,
   getIcon,
   messageIndex,
+  getResultStorageId,
 }: MessageButtonsProps) => {
   const { t } = useTranslation(["Common"]);
   const { roomId, findPreviousUserMessage } = useMessageStore();
@@ -97,6 +98,8 @@ const Buttons = ({
 
     await exportChatMessage(messageId, selectedItemId, fileName);
 
+    console.log(socket?.socketSubscribers);
+
     socket?.on(SocketEvents.ExportChat, (data) => {
       const { resultFile } = data;
 
@@ -123,6 +126,7 @@ const Buttons = ({
 
       toastr.success(toastMsg);
 
+      socket?.off(SocketEvents.ExportChat);
       socket?.emit(SocketCommands.Unsubscribe, {
         roomParts: chatParts,
         individual: true,
@@ -193,7 +197,7 @@ const Buttons = ({
         <ExportSelector
           onCloseFolderSelector={onCloseFolderSelector}
           onSubmit={onExportMessage}
-          roomId={roomId}
+          currentFolderId={getResultStorageId() || roomId}
           getFileName={getExportedFileName}
           getIcon={getIcon}
           showFolderSelector={showFolderSelector}

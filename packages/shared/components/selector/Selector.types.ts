@@ -305,15 +305,14 @@ type TWithAccessRightsProps = {
   accessRightsMode?: SelectorAccessRightsMode;
 };
 
-export type TSelectorWithAside = WithFlag<
-  "useAside",
-  {
-    useAside: true;
-    onClose: VoidFunction;
-    withoutBackground?: boolean;
-    withBlur?: boolean;
-  }
->;
+type TAsideCommonProps = {
+  withoutBackground?: boolean;
+  withBlur?: boolean;
+};
+
+export type TSelectorWithAside =
+  | ({ useAside: true; onClose: VoidFunction } & TAsideCommonProps)
+  | ({ useAside?: false; onClose?: VoidFunction } & TAsideCommonProps);
 
 export type TSelectorAccessRights = WithFlag<
   "withAccessRights",
@@ -401,6 +400,7 @@ export type SelectorProps = TSelectorHeader &
 
     isMultiSelect: boolean;
     selectedItems?: TSelectorItem[];
+    maxSelectedItems?: number;
 
     disableFirstFetch?: boolean;
     loadNextPage: (startIndex: number) => Promise<void>;

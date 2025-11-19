@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -114,6 +114,7 @@ type MCPServersProps = {
   updateMCPStatus?: AISettingsStore["updateMCPStatus"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   mcpServersInitied?: AISettingsStore["mcpServersInitied"];
+  aiSettingsUrl?: string;
 };
 
 const MCPServersComponent = ({
@@ -123,6 +124,7 @@ const MCPServersComponent = ({
   updateMCPStatus,
   hasAIProviders,
   mcpServersInitied,
+  aiSettingsUrl,
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
@@ -142,11 +144,18 @@ const MCPServersComponent = ({
     server: null,
   });
 
+  const pendingTogglesRef = useRef<Set<TServer["id"]>>(new Set());
+
   const isMCPActionsDisabled = standalone && !hasAIProviders;
 
   const showMCPHeadings = !!customMCPServers?.length;
 
   const onMCPToggle = async (id: TServer["id"], enabled: boolean) => {
+    // Prevent double-click/concurrent toggles
+    if (pendingTogglesRef.current.has(id)) {
+      return;
+    }
+
     if (!enabled) {
       setDisableDialogData({
         visible: true,
@@ -156,12 +165,16 @@ const MCPServersComponent = ({
       return;
     }
 
+    pendingTogglesRef.current.add(id);
+
     try {
       await updateMCPStatus?.(id, enabled);
       toastr.success(t("AISettings:ServerEnabledSuccess"));
     } catch (e) {
       console.error(e);
       toastr.error(e as TData);
+    } finally {
+      pendingTogglesRef.current.delete(id);
     }
   };
 
@@ -228,22 +241,21 @@ const MCPServersComponent = ({
   return (
     <div className={styles.mcpServers}>
       <Text className={styles.description}>
-        {t("AISettings:MCPSettingDescription", {
-          organizationName: t("Common:OrganizationName"),
-          productName: t("Common:ProductName"),
-        })}
+        {t("AISettings:MCPSettingsDescription")}
       </Text>
-      <Link
-        className={styles.learnMoreLink}
-        target={LinkTarget.blank}
-        type={LinkType.page}
-        fontWeight={600}
-        isHovered
-        href=""
-        color="accent"
-      >
-        {t("Common:LearnMore")}
-      </Link>
+      {aiSettingsUrl ? (
+        <Link
+          className={styles.learnMoreLink}
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          fontWeight={600}
+          isHovered
+          href={aiSettingsUrl}
+          color="accent"
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
       <Button
         primary
         size={ButtonSize.small}
@@ -307,20 +319,23 @@ const MCPServersComponent = ({
   );
 };
 
-export const MCPServers = inject(({ aiSettingsStore }: TStore) => {
-  const {
-    customMCPServers,
-    systemMCPServers,
-    updateMCPStatus,
-    hasAIProviders,
-    mcpServersInitied,
-  } = aiSettingsStore;
+export const MCPServers = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    const {
+      customMCPServers,
+      systemMCPServers,
+      updateMCPStatus,
+      hasAIProviders,
+      mcpServersInitied,
+    } = aiSettingsStore;
 
-  return {
-    customMCPServers,
-    systemMCPServers,
-    updateMCPStatus,
-    hasAIProviders,
-    mcpServersInitied,
-  };
-})(observer(MCPServersComponent));
+    return {
+      customMCPServers,
+      systemMCPServers,
+      updateMCPStatus,
+      hasAIProviders,
+      mcpServersInitied,
+      aiSettingsUrl: settingsStore.aiSettingsUrl,
+    };
+  },
+)(observer(MCPServersComponent));

@@ -3,7 +3,7 @@
   "content": "Rooms unpinned: {{count}}",
   "content_en_sha1_hash": "5eb4f28c5d0f49b6b98ea0f7832d0d5a2e74d5eb",
   "created_at": "2025-05-19T21:30:56.138Z",
-  "updated_at": "2025-11-03T12:10:35.379Z",
+  "updated_at": "2025-11-18T14:41:50.125Z",
   "comment": {
     "text": "This translation key displays the number of unpinned rooms. It is used to inform the user about the state change in a list or grid view, likely on a button or dialog related to room management. The count is derived from the length of an array representing the unpinned elements.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1338,
-      "context": ": t(\"AIAgentsUnpinned\", { ...itemCount });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { ...itemCount })\n : t(\"RoomsUnpinned\", { ...itemCount });\n }\n \n toastr.success(\n elems.length > 1 ? translationForSeverals : translationForOneItem,\n );",
+      "line_number": 1340,
+      "context": ": t(\"AIAgentsUnpinned\");\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { count: elems.length })\n : t(\"RoomsUnpinned\", { count: elems.length });\n }\n \n toastr.success(\n elems.length > 1 ? translationForSeverals : translationForOneItem,\n );",
       "module": "/packages/client"
     }
   ],

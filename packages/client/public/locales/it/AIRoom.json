@@ -1,1 +1,11 @@
-{}
+{
+  "AIInstructions": "Istruzioni AI",
+  "EmptyKnowledgeDescriptionActions": "Prova queste azioni per iniziare:",
+  "InstructionsDescriptionAgent": "Descrivi come l’agente AI dovrebbe comportarsi e rispondere. Definisci ruolo, tono e compiti principali.",
+  "InstructionsDescriptionAgentExample": "Esempio: “Sei un assistente PR AI che aiuta a scrivere e modificare comunicati stampa. Mantieni un tono professionale, sicuro e adatto ai media. Evidenzia chiaramente i messaggi chiave, evita il gergo e rendi il testo conciso e coinvolgente.”",
+  "KnowledgeUnavailable": "Knowledge Base non disponibile",
+  "KnowledgeUnavailableDescription": "La Knowledge Base è attualmente disattivata. Per attivare la ricerca semantica e l’elaborazione dei documenti per i tuoi agenti AI, configura il provider di embeddings nelle impostazioni di {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "La Knowledge Base è attualmente disattivata. Per attivare la ricerca semantica e l’elaborazione dei documenti per gli agenti AI, contatta il tuo admin di {{productName}} per configurare il provider di embeddings.",
+  "MCPDescriptionServers": "Usa i server MCP collegati dall’amministratore per migliorare l’esperienza di chat con l’AI. I server MCP possono aiutare con estrazione dati, riepiloghi, suggerimenti intelligenti, ecc.",
+  "ResponseQualityNode": "<1>Nota:</1> La qualità delle risposte può variare a seconda del modello; per i migliori risultati si consigliano modelli più recenti."
+}

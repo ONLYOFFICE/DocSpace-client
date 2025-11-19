@@ -3,7 +3,7 @@
   "content": "User files and documents will be imported into <1>{{sectionName}}</1>.",
   "content_en_sha1_hash": "a233453e375951494b46863dca81b3b1cf6f3d48",
   "created_at": "2025-10-03T10:06:58.941Z",
-  "updated_at": "2025-10-17T14:44:56.378Z",
+  "updated_at": "2025-11-13T07:58:08.216Z",
   "comment": {
     "text": "This text explains where user files and documents will be imported. It appears within an import process, likely associated with a step or dialog, and the destination is dynamically determined by the `sectionName` (e.g., \"My Documents\"). Translators should ensure the `sectionName` is translated appropriately to accurately reflect the import location.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 154,
+      "line_number": 180,
       "context": "onChange={(e) => onChange(e, \"importPersonalFiles\")}\n sectionName={t(\"Settings:PersonalFiles\")}\n description={\n <Trans\n t={t}\n i18nKey=\"ImportFilesDescription\"\n ns=\"Settings\"\n values={{\n serviceName,\n sectionName: t(\"Common:MyDocuments\"),\n }}",
       "module": "/packages/client"
     }

@@ -177,7 +177,7 @@ const ViewerInfoWatermark = ({
       dataTabs: tabsOptions(t),
       tabs: getInitialTabs(initialSettings?.additions, isEdit, t),
       rotate: getInitialRotate(initialSettings?.rotate, isEdit, isImage, t),
-      text: getInitialText(initialSettings.text!, isEdit),
+      text: getInitialText(initialSettings?.text!, isEdit),
     };
 
     elements.current = getInitialState(initialInfo.current.tabs);

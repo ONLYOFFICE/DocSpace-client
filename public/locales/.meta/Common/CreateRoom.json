@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2025-11-03T12:10:34.979Z",
+  "updated_at": "2025-11-18T14:41:49.746Z",
   "comment": {
     "text": "This translation key is used for the \"Create room\" button label in various UI components, such as buttons and dialog headers. It appears when a user clicks on the \"Create room\" link or button to initiate the creation of a new room.",
     "is_auto": true,
@@ -36,43 +36,43 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
-      "line_number": 223,
+      "line_number": 230,
       "context": "className={styles.roomTemplateText}\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n <Button\n label={t(\"Common:CreateRoom\")}\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}\n size={ButtonSize.extraSmall}\n primary\n testId=\"info_panel_details_create_room_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1973,
+      "line_number": 1980,
       "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1973,
+      "line_number": 1980,
       "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1973,
+      "line_number": 1980,
       "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2301,
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 171,
       "context": "case \"create-room\":\n if (!this.isAvailableOption(\"create-room\")) return null;\n return {\n id: \"menu-create-room\",\n label: t(\"Common:CreateRoom\"),\n onClick: this.onClickCreateRoom,\n iconUrl: CatalogRoomsReactSvgUrl,\n };\n \n case \"download\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 601,
+      "line_number": 602,
       "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n hoverColor=\"accent\"\n />\n ) : null}\n {showNew && !isTile ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 239,
+      "line_number": 241,
       "context": "className=\"badge create-room icons-group\"\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
       "module": "/packages/shared"
     }

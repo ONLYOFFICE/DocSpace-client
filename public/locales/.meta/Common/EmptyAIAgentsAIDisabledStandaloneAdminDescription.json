@@ -3,7 +3,7 @@
   "content": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in AI chats.",
   "content_en_sha1_hash": "f65c00479e173279940cf144a990184968ac2c4c",
   "created_at": "2025-11-03T12:10:17.263Z",
-  "updated_at": "2025-11-03T12:13:58.570Z",
+  "updated_at": "2025-11-17T07:52:04.457Z",
   "comment": {
     "text": "This text explains that connecting a custom AI service unlocks advanced features within the product, making them available to all users in AI chats. It's displayed in empty states or when AI chat access is unavailable, specifically for standalone administrators and, potentially, other admin roles. Translators should ensure the wording accurately reflects the AI service integration and its impact on user access.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 208,
-      "context": "standalone: boolean,\n isDocSpaceAdmin: boolean,\n ) => {\n return match([standalone, isDocSpaceAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([false, true], () =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription\", {",
+      "line_number": 210,
+      "context": "standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n return match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([false, true], () =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 72,
-      "context": "const description = !canUseChat\n ? t(\"Common:AIChatNoAccessDescription\")\n : match([standalone, isDocSpaceAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>",
+      "line_number": 67,
+      "context": ": t(\"Common:AIFeaturesAreCurrentlyDisabled\");\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>",
       "module": "/packages/shared"
     }
   ],

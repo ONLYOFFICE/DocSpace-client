@@ -3,7 +3,7 @@
   "content": "File name",
   "content_en_sha1_hash": "09979a78c9954035af250cb7f4619ed9d606f0ef",
   "created_at": "2025-05-28T09:32:58.904Z",
-  "updated_at": "2025-11-03T12:10:35.400Z",
+  "updated_at": "2025-11-17T07:52:05.011Z",
   "comment": {
     "text": "File name is displayed as a header in a footer input field within a folder selector dialog, guiding users to enter a file name. It appears in select folders and chat message body components. The text \"File name\" assists translators in understanding its role as a placeholder or label for the input field.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/export-selector/index.tsx",
-      "line_number": 110,
-      "context": "isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={roomId}\n rootFolderType={FolderType.Rooms}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={getFileName()}\n descriptionText=\"\"\n getFilesArchiveError={() => \"\"}\n withAIAgentsTreeFolder\n currentDeviceType={",
+      "line_number": 109,
+      "context": "isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={currentFolderId}\n rootFolderType={FolderType.Rooms}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={getFileName()}\n descriptionText=\"\"\n getFilesArchiveError={() => \"\"}\n withAIAgentsTreeFolder\n currentDeviceType={",
       "module": "/packages/shared"
     }
   ],

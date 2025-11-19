@@ -146,6 +146,7 @@ import {
   isFolder as isFolderUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import {
   getInfoPanelOpen,
   hideInfoPanel,
@@ -536,8 +537,9 @@ class ContextOptionsStore {
     }
 
     if (
-      item.rootFolderType === FolderType.Recent ||
-      item.rootFolderType === FolderType.SHARE
+      (item.rootFolderType === FolderType.Recent ||
+        item.rootFolderType === FolderType.SHARE) &&
+      item.webUrl
     ) {
       copy(item.webUrl);
       return toastr.success(t("Common:LinkCopySuccess"));
@@ -1014,6 +1016,7 @@ class ContextOptionsStore {
   // };
 
   onLoadPlugins = (item) => {
+    if (isAIAgents()) return [];
     const { contextOptions } = item;
     const { enablePlugins } = this.settingsStore;
 
@@ -2212,16 +2215,16 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
-        key: "separator1",
-        isSeparator: true,
-      },
-      {
         id: "option_open-location",
         key: "open-location",
         label: t("OpenLocation"),
         icon: FolderLocationReactSvgUrl,
         onClick: () => this.onOpenLocation(item),
         disabled: !!item.requestToken,
+      },
+      {
+        key: "separator1",
+        isSeparator: true,
       },
       {
         id: "option_mark-read",
@@ -2322,10 +2325,7 @@ class ContextOptionsStore {
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled:
-          isArchive ||
-          (!item.inRoom && !isAIAgent) ||
-          isPublicRoom ||
-          Boolean(item.external),
+          isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
         id: "option_archive-room",
@@ -2369,7 +2369,7 @@ class ContextOptionsStore {
           : isAIAgent
             ? t("DeleteAgent")
             : item.isTemplate
-              ? t("DeleteTemplate")
+              ? t("Files:DeleteTemplate")
               : item.isRoom
                 ? t("Common:DeleteRoom")
                 : t("Common:Delete"),
@@ -2583,12 +2583,23 @@ class ContextOptionsStore {
       (option) => !keysToRemove.includes(option.key),
     );
 
-    const separatorIndex = resultOptions.findIndex((option) =>
-      withAI ? option.key === "separator6" : option.key === "separator0",
-    );
-    const insertIndex = separatorIndex !== -1 ? separatorIndex + 1 : 1;
-
     if (menuGroups.length > 0) {
+      const openLocationIndex = resultOptions.findIndex(
+        (option) => option.key === "open-location",
+      );
+
+      const insertIndex =
+        openLocationIndex !== -1
+          ? openLocationIndex + 1
+          : (() => {
+              const separatorIndex = resultOptions.findIndex((option) =>
+                withAI
+                  ? option.key === "separator6"
+                  : option.key === "separator0",
+              );
+              return separatorIndex !== -1 ? separatorIndex + 1 : 1;
+            })();
+
       resultOptions.splice(insertIndex, 0, ...menuGroups);
     }
 
@@ -3329,7 +3340,12 @@ class ContextOptionsStore {
             showUploadFolder ? uploadFolder : null,
           ];
 
-    if (mainButtonItemsList && enablePlugins && !isRoomsFolder) {
+    if (
+      !isAIAgents() &&
+      mainButtonItemsList &&
+      enablePlugins &&
+      !isRoomsFolder
+    ) {
       const pluginItems = [];
 
       mainButtonItemsList.forEach((option) => {

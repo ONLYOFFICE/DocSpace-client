@@ -3,7 +3,7 @@
   "content": "This document is encrypted",
   "content_en_sha1_hash": "bcb0db122a3fba433a7d7bc8a1f4b05a5bcac4ca",
   "created_at": "2025-05-19T21:30:53.431Z",
-  "updated_at": "2025-05-24T06:17:28.623Z",
+  "updated_at": "2025-11-18T14:41:50.069Z",
   "comment": {
     "text": "This translation key is used for a header that displays a warning about encryption when viewing private rooms. It appears in a prominent center-aligned text on the Private Rooms page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
-      "line_number": 161,
+      "line_number": 165,
       "context": "<Text\n textAlign=\"center\"\n className=\"privacy-rooms-text-header\"\n fontSize=\"38px\"\n >\n {t(\"PrivacyHeader\")}\n </Text>\n \n <Text as=\"div\" textAlign=\"center\" fontSize=\"20px\" fontWeight={300}>\n <Trans\n t={t}",
       "module": "/packages/client"
     }

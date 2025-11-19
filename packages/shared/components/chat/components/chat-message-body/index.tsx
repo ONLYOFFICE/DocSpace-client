@@ -31,8 +31,6 @@ import { useTranslation } from "react-i18next";
 
 import socket, { SocketCommands, SocketEvents } from "../../../../utils/socket";
 
-import { Scrollbar } from "../../../scrollbar";
-import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
 import { Loader, LoaderTypes } from "../../../loader";
 
 import { useMessageStore } from "../../store/messageStore";
@@ -43,12 +41,14 @@ import { MessageBodyProps } from "../../Chat.types";
 import EmptyScreen from "./sub-components/EmptyScreen";
 import Message from "./sub-components/message";
 
+import { useChatScroll } from "./hooks/useChatScroll";
 import styles from "./ChatMessageBody.module.scss";
 
 const ChatMessageBody = ({
   userAvatar,
   getIcon,
   isLoading,
+  getResultStorageId,
 }: MessageBodyProps) => {
   const {
     messages,
@@ -61,11 +61,7 @@ const ChatMessageBody = ({
 
   const { t } = useTranslation(["Common"]);
 
-  const scrollbarRef = useRef<CustomScrollbar>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
-  const prevBodyHeight = useRef(0);
-  const prevScrollTopRef = useRef(0);
-  const disableAutoScrollRef = useRef(false);
 
   const isEmpty = messages.length === 0 || isLoading;
 
@@ -89,60 +85,13 @@ const ChatMessageBody = ({
     });
   }, [addMessageId]);
 
-  useEffect(() => {
-    disableAutoScrollRef.current = false;
-  }, [currentChat]);
-
-  useEffect(() => {
-    if (isEmpty) return;
-
-    if (disableAutoScrollRef.current) return;
-
-    requestAnimationFrame(() => {
-      if (scrollbarRef.current?.scrollToBottom) {
-        scrollbarRef.current.scrollToBottom();
-      }
-    });
+  useChatScroll({
+    chatBodyRef,
+    isEmpty,
+    fetchNextMessages,
+    currentChat,
+    messages,
   });
-
-  useEffect(() => {
-    if (!chatBodyRef.current) return;
-
-    const bodyHeight = chatBodyRef.current?.clientHeight;
-    const diff = bodyHeight - prevBodyHeight.current;
-    if (diff !== 0) {
-      prevBodyHeight.current = bodyHeight;
-    }
-
-    if (prevScrollTopRef.current === 0 && diff > 0) {
-      scrollbarRef.current?.scrollTo(0, diff);
-    }
-  }, [messages.length]);
-
-  const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const currentHeight =
-      e.currentTarget.scrollTop + e.currentTarget.clientHeight;
-
-    const chatBodyOffsetHeight = chatBodyRef.current?.offsetHeight || 0;
-
-    if (prevScrollTopRef.current > e.currentTarget.scrollTop) {
-      disableAutoScrollRef.current = true;
-    }
-
-    if (
-      currentHeight === chatBodyOffsetHeight ||
-      Math.abs(currentHeight - chatBodyOffsetHeight) < 5 ||
-      chatBodyOffsetHeight < currentHeight
-    ) {
-      disableAutoScrollRef.current = false;
-    }
-
-    if (e.currentTarget.scrollTop < 500 + e.currentTarget.clientHeight) {
-      fetchNextMessages();
-    }
-
-    prevScrollTopRef.current = e.currentTarget.scrollTop;
-  };
 
   return (
     <div
@@ -153,37 +102,30 @@ const ChatMessageBody = ({
       {isEmpty ? (
         <EmptyScreen isLoading={isLoading} />
       ) : (
-        <Scrollbar
-          ref={scrollbarRef}
-          className="chat-scroll-bar"
-          scrollBodyClassName={styles.chatScrollBody}
-          onScroll={onScroll}
-          fixedSize
+        <div
+          className={classNames(styles.chatMessageContainer)}
+          ref={chatBodyRef}
         >
-          <div
-            className={classNames(styles.chatMessageContainer)}
-            ref={chatBodyRef}
-          >
-            {!isStreamRunning && isRequestRunning ? (
-              <div className={styles.chatLoader}>
-                <Loader type={LoaderTypes.track} />
-                {t("Common:Analyzing")}
-              </div>
-            ) : null}
-            {messages.map((message, index) => {
-              return (
-                <Message
-                  key={`${currentChat?.id}-${message.createdOn}-${index * 2}`}
-                  message={message}
-                  idx={index}
-                  userAvatar={userAvatar}
-                  isLast={index === 0}
-                  getIcon={getIcon}
-                />
-              );
-            })}
-          </div>
-        </Scrollbar>
+          {messages.map((message, index) => {
+            return (
+              <Message
+                key={`${currentChat?.id}-${message.createdOn}-${index * 2}`}
+                message={message}
+                idx={index}
+                userAvatar={userAvatar}
+                isLast={index === 0}
+                getIcon={getIcon}
+                getResultStorageId={getResultStorageId}
+              />
+            );
+          })}
+          {!isStreamRunning && isRequestRunning ? (
+            <div className={styles.chatLoader}>
+              <Loader type={LoaderTypes.track} />
+              {t("Common:Analyzing")}
+            </div>
+          ) : null}
+        </div>
       )}
     </div>
   );

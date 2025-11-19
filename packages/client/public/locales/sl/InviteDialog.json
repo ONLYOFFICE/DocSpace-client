@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Išči in povabi po imenu ali e-pošti",
   "InviteViaLink": "Povabite s povezavo",
   "InviteViaLinkDescriptionAccounts": "Ustvari univerzalno povezavo za samodejno avtorizacijo v {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Ustvarite splošno povezavo za samopoveriljenje v agentu kot gost.",
+  "InviteViaLinkDescriptionAgentMembers": "Ustvarite unikatno povezavo za člane {{productName}} za samopoveriljenje v agentu.",
   "InviteViaLinkDescriptionRoomGuest": "Ustvarite splošno povezavo za samopoveriljenje v sobi kot gost.",
   "InviteViaLinkDescriptionRoomMembers": "Ustvarite unikatno povezavo za člane {{productName}} za samopoveriljenje v sobi.",
   "LinkCopySuccess": "Povezava je bila kopirana",
   "SendInvitation": "Pošlji povabilo",
+  "UserAgentMaxAvailableRoleWarning": "Gostje in uporabniki ne morejo biti dodeljeni kot skrbniki agentov. Samo skrbniki sob in {{productName}} so primerni za to vlogo.",
   "UserMaxAvailableRoleWarning": "Gostov in uporabnikov ni mogoče določiti za upravitelje sob. Samo skrbniki sobe in {{productName}} so primerni za to vlogo.",
   "UsersAlreadyAdded": "Nekateri uporabniki so že dodani",
   "UsersCannotBeAdded": "Onemogočeni kontakti se ne morejo dodati v sobo."

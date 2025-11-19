@@ -109,7 +109,10 @@ describe("<DropDown />", () => {
     );
 
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).toHaveClass(styles.notReady);
+
+    expect(dropdown).toBeInTheDocument();
+    expect(dropdown).toHaveClass(styles.open);
+    expect(dropdown).not.toHaveClass(styles.notReady);
   });
 
   it("doesn't handle click outside when enableOnClickOutside is false", () => {

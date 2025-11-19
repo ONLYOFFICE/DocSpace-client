@@ -1191,4 +1191,236 @@ describe("Locales Tests", () => {
 
     expect(exists, message).toBe(false);
   });
+
+  test("MissingTranslationVariablesTest: Verify that all required variables are passed when using translation keys with variables", () => {
+    let message = "The following translation keys are missing required variables:\r\n\r\n";
+    let missingVariables = [];
+
+    // Get all English translations with variables
+    const regVariables = new RegExp("\\{\\{([^\\{].?[^\\}]+)\\}\\}", "gm");
+    
+    const enTranslationsWithVariables = translationFiles
+      .filter((file) => file.language === "en")
+      .flatMap((file) =>
+        file.translations
+          .map((t) => {
+            const variables = [...t.value.matchAll(regVariables)].map((m) =>
+              m[1]?.trim().replace(", lowercase", "")
+            );
+            return {
+              key: `${file.namespace}:${t.key}`,
+              namespace: file.namespace,
+              translationKey: t.key,
+              value: t.value,
+              variables,
+            };
+          })
+          .filter((t) => t.variables.length > 0)
+      );
+
+    // Create a map for quick lookup
+    const variablesMap = new Map();
+    enTranslationsWithVariables.forEach((t) => {
+      variablesMap.set(t.key, t.variables);
+    });
+
+    // Pattern to find t() calls with variables object
+    // We need to manually parse to handle nested braces in template literals
+    const findTCallsWithVariables = (text) => {
+      const results = [];
+      const tCallPattern = /t\??\(["'`]([a-zA-Z0-9_.:/-]+)["'`]\s*,\s*\{/g;
+      
+      let match;
+      while ((match = tCallPattern.exec(text)) !== null) {
+        const key = match[1];
+        const startPos = match.index + match[0].length - 1; // Position of opening {
+        
+        // Find matching closing brace by counting nested braces
+        let braceCount = 1;
+        let endPos = startPos + 1;
+        let inString = false;
+        let stringChar = null;
+        let inTemplate = false;
+        
+        while (endPos < text.length && braceCount > 0) {
+          const char = text[endPos];
+          const prevChar = text[endPos - 1];
+          
+          // Handle string literals
+          if ((char === '"' || char === "'" || char === '`') && prevChar !== '\\') {
+            if (!inString) {
+              inString = true;
+              stringChar = char;
+              inTemplate = char === '`';
+            } else if (char === stringChar) {
+              inString = false;
+              stringChar = null;
+              inTemplate = false;
+            }
+          }
+          
+          // Count braces only outside strings, but include template literal braces
+          if (!inString || inTemplate) {
+            if (char === '{') {
+              braceCount++;
+            } else if (char === '}') {
+              braceCount--;
+            }
+          }
+          
+          endPos++;
+        }
+        
+        if (braceCount === 0) {
+          const variablesString = text.substring(startPos + 1, endPos - 1);
+          results.push({ key, variablesString, fullMatch: text.substring(match.index, endPos) });
+        }
+      }
+      
+      return results;
+    };
+
+    javascriptFiles.forEach((jsFile) => {
+      const jsFileText = fs.readFileSync(jsFile.path, "utf8");
+      const matches = findTCallsWithVariables(jsFileText);
+
+      matches.forEach((match) => {
+        const fullKey = match.key;
+        const variablesString = match.variablesString;
+        
+        // Parse the key (it might have namespace or not)
+        const keyParts = fullKey.split(":");
+        const hasNamespace = keyParts.length > 1;
+        const namespace = hasNamespace ? keyParts[0] : null;
+        const translationKey = hasNamespace ? keyParts[1] : keyParts[0];
+        
+        // Try to find the key in our map
+        let expectedVariables = variablesMap.get(fullKey);
+        
+        if (!expectedVariables && hasNamespace) {
+          // If namespace is specified, ONLY look in that namespace
+          // Don't fall back to searching in other namespaces
+          return; // Key not found in the specified namespace with variables
+        }
+        
+        if (!expectedVariables && !hasNamespace) {
+          // If no namespace specified, try to find by key only in any namespace
+          for (const [mapKey, vars] of variablesMap.entries()) {
+            if (mapKey.endsWith(`:${translationKey}`)) {
+              expectedVariables = vars;
+              break;
+            }
+          }
+        }
+
+        if (!expectedVariables) return; // Key not found in translations with variables
+
+        // Extract variable names from the object
+        // Handle both full syntax (key: value) and shorthand syntax (key)
+        const passedVariables = [];
+        
+        // Split by comma to get individual properties
+        const properties = variablesString.split(',').map(p => p.trim());
+        
+        for (const prop of properties) {
+          if (!prop) continue;
+          
+          // Check if it contains a colon (full syntax: key: value)
+          if (prop.includes(':')) {
+            const keyMatch = prop.match(/^(\w+)\s*:/);
+            if (keyMatch) {
+              passedVariables.push(keyMatch[1]);
+            }
+          } else {
+            // Shorthand syntax: just the key name
+            const keyMatch = prop.match(/^(\w+)/);
+            if (keyMatch) {
+              passedVariables.push(keyMatch[1]);
+            }
+          }
+        }
+
+        // Check if all expected variables are passed
+        const missingVars = expectedVariables.filter(
+          (v) => !passedVariables.includes(v)
+        );
+
+        if (missingVars.length > 0) {
+          missingVariables.push({
+            file: jsFile.path,
+            key: fullKey,
+            expectedVariables,
+            passedVariables,
+            missingVars,
+            line: match.fullMatch,
+          });
+        }
+      });
+    });
+
+    // Also check for t() calls WITHOUT variables object where variables are expected
+    const tCallWithoutVariablesPattern = /t\??\(["'`]([a-zA-Z0-9_.:/-]+)["'`]\s*\)/g;
+
+    javascriptFiles.forEach((jsFile) => {
+      const jsFileText = fs.readFileSync(jsFile.path, "utf8");
+      const matches = [...jsFileText.matchAll(tCallWithoutVariablesPattern)];
+
+      matches.forEach((match) => {
+        const fullKey = match[1];
+        
+        // Parse the key (it might have namespace or not)
+        const keyParts = fullKey.split(":");
+        const hasNamespace = keyParts.length > 1;
+        const namespace = hasNamespace ? keyParts[0] : null;
+        const translationKey = hasNamespace ? keyParts[1] : keyParts[0];
+        
+        // Try to find the key in our map
+        let expectedVariables = variablesMap.get(fullKey);
+        
+        if (!expectedVariables && hasNamespace) {
+          // If namespace is specified, ONLY look in that namespace
+          // Don't fall back to searching in other namespaces
+          return; // Key not found in the specified namespace with variables
+        }
+        
+        if (!expectedVariables && !hasNamespace) {
+          // If no namespace specified, try to find by key only in any namespace
+          for (const [mapKey, vars] of variablesMap.entries()) {
+            if (mapKey.endsWith(`:${translationKey}`)) {
+              expectedVariables = vars;
+              break;
+            }
+          }
+        }
+
+        if (expectedVariables && expectedVariables.length > 0) {
+          missingVariables.push({
+            file: jsFile.path,
+            key: fullKey,
+            expectedVariables,
+            passedVariables: [],
+            missingVars: expectedVariables,
+            line: match[0],
+          });
+        }
+      });
+    });
+
+    if (missingVariables.length > 0) {
+      let i = 1;
+      message += missingVariables
+        .map(
+          (item) =>
+            `${i++}. File: ${path.relative(BASE_DIR, item.file)}\n` +
+            `   Key: ${item.key}\n` +
+            `   Expected variables: [${item.expectedVariables.join(", ")}]\n` +
+            `   Passed variables: [${item.passedVariables.join(", ")}]\n` +
+            `   Missing variables: [${item.missingVars.join(", ")}]\n` +
+            `   Code: ${item.line}\n`
+        )
+        .join("\n");
+    }
+
+    expect(missingVariables.length, message).toBe(0);
+  });
 });

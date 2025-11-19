@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Agjenti <strong>\"{{agentName}}\"</strong> do të fshihet përgjithmonë. Të gjitha të dhënat dhe qasjet e përdoruesve do të humbasin.",
+  "DeleteAIAgentTitle": "Të fshihet ky agjent?",
+  "DeleteAIAgentWarning": "Unë i kuptoj pasojat dhe dua ta fshij agjentin",
   "DeleteAllGroupDescription": "Grupet e selektuara do të fshihen. Përdoruesit në grupe nuk do të hiqen nga {{productName}}. Jeni të sigurt që dëshironi të vazhdoni?",
   "DeleteAllGroupsTitle": "Fshini grupet",
   "DeleteFiles": "Jeni gati të zhvendosni në {{trashSection}} <strong>skedarët ({{filesCount}})</strong>.",

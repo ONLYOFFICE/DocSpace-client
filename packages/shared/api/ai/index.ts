@@ -28,12 +28,13 @@ import { toastr } from "../../components/toast";
 import { getCookie } from "../../utils";
 
 import { request } from "../client";
-import { TFile } from "../files/types";
-import { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
+import type { TFile } from "../files/types";
+import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
 import { checkFilterInstance } from "../../utils/common";
+import { getAiModelName } from "../../utils/ai";
 
-import {
+import type {
   TCreateAiProvider,
   TAiProvider,
   TUpdateAiProvider,
@@ -44,12 +45,12 @@ import {
   TMCPTool,
   TServer,
   TVectorizeOperation,
-  type TProviderTypeWithUrl,
-  type TAddNewServer,
-  type TUpdateServer,
-  type WebSearchConfig,
-  type KnowledgeConfig,
-  type TAIConfig,
+  TProviderTypeWithUrl,
+  TAddNewServer,
+  TUpdateServer,
+  WebSearchConfig,
+  KnowledgeConfig,
+  TAIConfig,
   TAgent,
   TCreateAgentData,
   TEditAgentData,
@@ -109,7 +110,10 @@ export const getAvailableProviderUrls = async () => {
   return res;
 };
 
-export const getModels = async (providerId?: TAiProvider["id"]) => {
+export const getModels = async (
+  providerId?: TAiProvider["id"],
+  abortController?: AbortController | null,
+) => {
   const searchParams = new URLSearchParams();
   if (providerId) {
     searchParams.append("provider", providerId.toString());
@@ -120,9 +124,28 @@ export const getModels = async (providerId?: TAiProvider["id"]) => {
   const res = (await request({
     method: "get",
     url: `${baseUrl}/chats/models${strSearch}`,
+    signal: abortController?.signal,
   })) as TModelList;
 
-  return res;
+  return res.map((m) => ({
+    ...m,
+    name: getAiModelName(m.modelId),
+  })) as TModelList;
+};
+
+export const getProviderAvailabilityStatus = async (
+  id: number,
+  abortController?: AbortController | null,
+) => {
+  return getModels(id, abortController)
+    .then(() => ({
+      id: id,
+      available: true,
+    }))
+    .catch(() => ({
+      id: id,
+      available: false,
+    }));
 };
 
 export const startNewChat = async (
@@ -522,19 +545,13 @@ export const updateWebSearchConfig = async (
   type: WebSearchType,
   key: string,
 ) => {
-  try {
-    const res = await request({
-      method: "put",
-      url: `${baseUrl}/config/web-search`,
-      data: { enabled, type, key },
-    });
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/config/web-search`,
+    data: { enabled, type, key },
+  });
 
-    return res;
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-    throw e;
-  }
+  return res as WebSearchConfig;
 };
 
 export const getKnowledgeConfig = async () => {
@@ -555,19 +572,13 @@ export const updateKnowledgeConfig = async (
   type: KnowledgeType,
   key: string,
 ) => {
-  try {
-    const res = await request({
-      method: "put",
-      url: `${baseUrl}/config/vectorization`,
-      data: { type, key },
-    });
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/config/vectorization`,
+    data: { type, key },
+  });
 
-    return res;
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-    throw e;
-  }
+  return res as KnowledgeConfig;
 };
 
 export const createAIAgent = async (data: TCreateAgentData) => {
@@ -596,7 +607,7 @@ export const getAIAgents = async (
   filter: RoomsFilter,
   signal?: AbortSignal,
 ) => {
-  let params;
+  let params: string = "";
 
   if (filter) {
     checkFilterInstance(filter, RoomsFilter);
@@ -615,4 +626,43 @@ export const getAIAgents = async (
 
 export const deleteAIAgent = async (id: TAgent["id"]) => {
   await request({ method: "DELETE", url: `${baseUrl}/agents/${id}` });
+};
+
+export const resetAIAgentQuota = async (roomIds: TAgent["id"]) => {
+  const data = {
+    roomIds,
+  };
+  const options = {
+    method: "put",
+    url: `${baseUrl}/agents/resetquota`,
+    data,
+  };
+
+  return request(options);
+};
+
+export function setCustomAIAgentQuota(roomIds: TAgent["id"], quota: number) {
+  const data = {
+    roomIds,
+    quota,
+  };
+
+  const options = {
+    method: "put",
+    url: `${baseUrl}/agents/agentquota`,
+    data,
+  };
+
+  return request(options);
+}
+
+export const getMCPServerById = async (id: string) => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/servers/${id}`,
+  };
+
+  const res = await request(options);
+
+  return res as TServer;
 };

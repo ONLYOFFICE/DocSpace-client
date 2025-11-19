@@ -1,1 +1,27 @@
-{}
+{
+  "AIChat": "AI-Čats",
+  "AIInstructions": "AI instrukcijas",
+  "CreateChat": "Izveidot tērzēšanu",
+  "CreateChatDescription": "Dodieties uz AI-Čata cilni, lai sāktu.",
+  "EmptyKnowledgeDescription": "Faili, kas tiek augšupielādēti šeit, tiks indeksēti un izmantoti kā konteksts AI-Čat cilnē. Pievienojiet failus, lai jautātu AI par tiem, ģenerētu saturu vai analizētu informāciju kopā.",
+  "EmptyKnowledgeDescriptionActions": "Izmēģiniet šos soļus, lai sāktu:",
+  "EmptyKnowledgeTitle": "Vēl nav pievienoti faili",
+  "EmptyResultsDescription": "Faili, kas ģenerēti AI-Chat, automātiski parādīsies šeit. Katreiz, kad ģenerējat saturu, sākat tērzēšanu vai nosūtāt ziņojumu ar izvadi, rezultāts tiks saglabāts šajā sadaļā.",
+  "EmptyResultsTitle": "Vēl nav rezultātu",
+  "InstructionsDescriptionAgent": "Aprakstiet, kā mākslīgā intelekta aģents vajadzētu uzvesties un reaģēt. Definējiet tā lomu, toni un galvenos uzdevumus.",
+  "InstructionsDescriptionAgentExample": "Piemērs: \"Jūs esat AI PR asistents, kas palīdz rakstīt un rediģēt preses paziņojumus. Saglabājiet profesionālu, pārliecinātu un plašsaziņas līdzekļiem draudzīgu toni. Skaidri izcelt galvenos ziņojumus, izvairieties no žargona un saglabājiet tekstu saīsinātu un saistošu.\"",
+  "Knowledge": "Zināšanas",
+  "KnowledgeDescription": "Augšupielādējiet failus no sava datora vai {{productName}}, lai nodrošinātu labāku kontekstu sarunai. Piezīme: sarunas laikā var tikt atklāti daži vai visi augšupielādētie faili.",
+  "KnowledgeSelectIn": "Izvēlēties {{productName}}",
+  "KnowledgeUnavailable": "Zinu bāze nav pieejama",
+  "KnowledgeUnavailableDescription": "Zināšanu bāze šobrīd ir deaktivizēta. Lai aktivizētu semantisko meklēšanu un dokumentu apstrādi jūsu AI aģentiem, lūdzu, konfigurējiet vektortrāķa nodrošinātāju {{productName}} iestatējumos.",
+  "KnowledgeUnavailableDescriptionUser": "Zināšanu bāze šobrīd ir deaktivizēta. Lai aktivizētu semantisko meklēšanu un dokumentu apstrādi AI aģentiem, lūdzu, sazinieties ar savu {{productName}} administratoru, lai konfigurētu vektortrāķa nodrošinātāju.",
+  "MCP": "MCP rīki šai telpai",
+  "MCPDescriptionServers": "Izmantojiet MCP serverus, kas savienoti ar administratoru, lai uzlabotu tērzēšanas pieredzi ar AI. MCP serveri var palīdzēt ar datu izguvi, kopsavilkumiem, viediem ieteikumiem u.c.",
+  "Model": "Pakalpojuma sniedzējs un modelis",
+  "ModelDescription": "Izvēlieties AI pakalpojumu sniedzēju un modeli, kas tiks izmantots šīs telpas sarunās. Šis iestatījums ir obligāts un attiecas uz visiem dalībniekiem.",
+  "ResponseQualityNode": "<1>Piezīme:</1> Atbildes kvalitāte var atšķirties atkarībā no modeļa; labākiem rezultātiem ieteicami jaunāki modeļi.",
+  "ResultStorage": "Rezultātu glabāšana",
+  "UploadFilesDevice": "Augšupielādējiet failus no sava personīgā ierīces",
+  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}."
+}

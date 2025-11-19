@@ -64,4 +64,16 @@
   gap: 16px;
 
   margin-bottom: 8px;
+
+  .titleBlock {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    gap: 8px;
+  }
+
+  .errorIcon {
+    flex-shrink: 0;
+  }
 }

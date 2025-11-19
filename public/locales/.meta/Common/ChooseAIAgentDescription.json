@@ -1,24 +1,42 @@
 {
   "key_path": "ChooseAIAgentDescription",
-  "content": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent or create a new one.",
-  "content_en_sha1_hash": "6facf3ba48ff8d55ac28da5f5fb336c3294064d1",
-  "created_at": "2025-11-03T12:10:14.754Z",
-  "updated_at": "2025-11-03T12:14:20.731Z",
+  "content": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent.",
+  "content_en_sha1_hash": "d501d9f264fdff39ef143d4e36f2c7ad9a8d514c",
+  "created_at": "2025-11-17T11:52:13.064Z",
+  "updated_at": "2025-11-17T11:53:32.736Z",
   "comment": {
-    "text": "This text appears within an informational dialog or bar. It explains that users should select an existing AI agent or create a new one to chat about the currently selected file. The description helps users understand how to proceed after choosing a file for AI interaction.",
+    "text": "This text appears in an info bar within the UI, prompting the user to choose an AI agent to interact with a selected file. It explains that users can select an existing agent for conversation. The purpose is to guide the user in selecting the appropriate agent for AI-powered file interaction.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:14:20.731Z"
+    "updated_at": "2025-11-17T11:53:32.736Z"
   },
   "usage": [
     {
       "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 263,
+      "line_number": 279,
       "context": "withInfoBar={withInfo}\n infoBarData={{\n title: t(\"Common:ChooseAIAgent\"),\n icon: InfoIconSvgUrl,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"Common:ChooseAIAgentDescription\"),\n }}\n hideBackButton\n />\n );\n };",
       "module": "/packages/shared"
     }
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

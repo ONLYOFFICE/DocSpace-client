@@ -90,6 +90,8 @@ import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.fo
 
 import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
+import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
 import {
   FilesSelectorFilterTypes,
@@ -186,9 +188,9 @@ const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
 const getAIAgentsAIDisabledTitle = (
   t: TTranslation,
   standalone: boolean,
-  isDocSpaceAdmin: boolean,
+  isPortalAdmin: boolean,
 ) => {
-  return match([standalone, isDocSpaceAdmin])
+  return match([standalone, isPortalAdmin])
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle"),
     )
@@ -201,9 +203,9 @@ const getAIAgentsAIDisabledTitle = (
 const getAIAgentsAIDisabledDescription = (
   t: TTranslation,
   standalone: boolean,
-  isDocSpaceAdmin: boolean,
+  isPortalAdmin: boolean,
 ) => {
-  return match([standalone, isDocSpaceAdmin])
+  return match([standalone, isPortalAdmin])
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
         productName: t("Common:ProductName"),
@@ -238,7 +240,7 @@ export const getRootDescription = (
   security: Nullable<TFolderSecurity>,
   standalone: boolean,
   aiReady: boolean,
-  isDocSpaceAdmin: boolean,
+  isPortalAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
     .with(
@@ -246,7 +248,7 @@ export const getRootDescription = (
       () =>
         aiReady
           ? getAIAgentsAIEnabledDescription(t, access)
-          : getAIAgentsAIDisabledDescription(t, true, isDocSpaceAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+          : getAIAgentsAIDisabledDescription(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
@@ -366,7 +368,7 @@ export const getRootTitle = (
   rootFolderType: Nullable<FolderType>,
   aiReady: boolean,
   standalone: boolean,
-  isDocSpaceAdmin: boolean,
+  isPortalAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
     .with(
@@ -374,7 +376,7 @@ export const getRootTitle = (
       () =>
         aiReady
           ? getAIAgentsAIEnabledTitle(t, access)
-          : getAIAgentsAIDisabledTitle(t, true, isDocSpaceAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+          : getAIAgentsAIDisabledTitle(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
     )
     .with(
       [
@@ -414,8 +416,29 @@ export const getFolderIcon = (
   isBaseTheme: boolean,
   access: AccessType,
   folderType: Nullable<FolderType>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ) => {
   return match([roomType, folderType, access])
+    .with(
+      [
+        P._,
+        P.when(
+          () =>
+            security &&
+            "UseChat" in security &&
+            !security?.UseChat &&
+            isResultsTab,
+        ),
+        P._,
+      ],
+      () =>
+        isBaseTheme ? (
+          <ChatNoAccessRightsLightIcon />
+        ) : (
+          <ChatNoAccessRightsDarkIcon />
+        ),
+    )
     .with([FolderType.FormRoom, P._, P._], () =>
       isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
     )
@@ -432,6 +455,8 @@ export const getRoomIcon = (
   type: RoomsType,
   isBaseTheme: boolean,
   access: AccessType,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ) => {
   return match([type, access])
     .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
@@ -557,6 +582,24 @@ export const getRoomIcon = (
       ) : (
         <EmptyCustomRoomCollaboratorDarkIcon />
       ),
+    )
+    .with(
+      [
+        RoomsType.AIRoom,
+        P.when(
+          () =>
+            security &&
+            "UseChat" in security &&
+            !security?.UseChat &&
+            isResultsTab,
+        ), // viewer
+      ],
+      () =>
+        isBaseTheme ? (
+          <ChatNoAccessRightsLightIcon />
+        ) : (
+          <ChatNoAccessRightsDarkIcon />
+        ),
     )
     .with(
       [

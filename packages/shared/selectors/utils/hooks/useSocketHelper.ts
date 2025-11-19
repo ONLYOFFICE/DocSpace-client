@@ -46,6 +46,7 @@ import {
 
 import { UseSocketHelperProps } from "../types";
 import { SettingsContext } from "../contexts/Settings";
+import socket from "../../../utils/socket";
 
 const useSocketHelper = ({
   disabledItems,
@@ -55,6 +56,7 @@ const useSocketHelper = ({
   setItems,
   setBreadCrumbs,
   setTotal,
+  disableBySecurity,
 }: UseSocketHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const { getIcon } = React.use(SettingsContext);
@@ -133,7 +135,13 @@ const useSocketHelper = ({
 
       if (opt?.type === "file" && "folderId" in data) {
         const file = await getFileInfo(data.id);
-        [item] = convertFilesToItems([file], getIcon, filterParam);
+        [item] = convertFilesToItems(
+          [file],
+          getIcon,
+          filterParam,
+          undefined,
+          disableBySecurity,
+        );
       } else if (opt?.type === "folder" && !("folderId" in data)) {
         if ("roomType" in data) {
           const room = await getRoomInfo(data.id);
@@ -205,6 +213,7 @@ const useSocketHelper = ({
       setTotal,
       t,
       withCreate,
+      disableBySecurity,
     ],
   );
 
@@ -229,7 +238,13 @@ const useSocketHelper = ({
 
       if (opt?.type === "file" && "folderId" in data) {
         const file = await getFileInfo(data.id);
-        [item] = convertFilesToItems([file], getIcon, filterParam);
+        [item] = convertFilesToItems(
+          [file],
+          getIcon,
+          filterParam,
+          undefined,
+          disableBySecurity,
+        );
       } else if (opt?.type === "folder") {
         if ("roomType" in data) {
           const room = await getRoomInfo(data.id);
@@ -301,6 +316,7 @@ const useSocketHelper = ({
       setBreadCrumbs,
       setItems,
       t,
+      disableBySecurity,
     ],
   );
 
@@ -341,7 +357,7 @@ const useSocketHelper = ({
 
     initRef.current = true;
 
-    SocketHelper?.on(SocketEvents.ModifyFolder, (opt?: TOptSocket) => {
+    const callback = (opt?: TOptSocket) => {
       switch (opt?.cmd) {
         case "create":
           addItem(opt);
@@ -354,7 +370,13 @@ const useSocketHelper = ({
           break;
         default:
       }
-    });
+    };
+
+    SocketHelper?.on(SocketEvents.ModifyFolder, callback);
+
+    return () => {
+      socket?.off(SocketEvents.ModifyFolder, callback);
+    };
   }, [addItem, updateItem, deleteItem]);
 
   React.useEffect(() => {

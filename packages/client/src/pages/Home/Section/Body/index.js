@@ -103,7 +103,7 @@ const SectionBodyContent = (props) => {
     isArchiveFolderRoot,
     setDropTargetPreview,
     aiConfig,
-    currentTab,
+    isInsideKnowledge,
   } = props;
 
   useEffect(() => {
@@ -467,7 +467,7 @@ const SectionBodyContent = (props) => {
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 
-  if (currentTab === "knowledge" && !aiConfig?.vectorizationEnabled)
+  if (isInsideKnowledge && !aiConfig?.vectorizationEnabled)
     return <KnowledgeDisabledContainer />;
 
   if (
@@ -494,7 +494,6 @@ export default inject(
     dialogsStore,
     userStore,
     contextOptionsStore,
-    aiRoomStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -556,12 +555,12 @@ export default inject(
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
+      isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
       userId: userStore?.user?.id,
       onEnableFormFillingGuid,
       setDropTargetPreview,
-      currentTab: aiRoomStore.currentTab,
     };
   },
 )(

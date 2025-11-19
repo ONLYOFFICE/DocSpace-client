@@ -3,7 +3,7 @@
   "content": "Go to Settings",
   "content_en_sha1_hash": "afc288b1ffb91b961cd8fa6fbe17bd6255268ca9",
   "created_at": "2025-11-03T12:10:26.886Z",
-  "updated_at": "2025-11-03T12:12:51.612Z",
+  "updated_at": "2025-11-17T11:52:35.116Z",
   "comment": {
     "text": "This text is used as a button label or link text that directs users to the application's settings page. It appears in components like EmptyViewContainer and in the Profile section, and should be translated to clearly indicate navigation to settings.",
     "is_auto": true,
@@ -11,14 +11,20 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 78,
+      "context": ": [\n {\n type: \"button\",\n onClick: goToSettings,\n key: \"disabled-view-go-to-settings\",\n title: t(\"Common:GoToSettings\"),\n },\n ],\n };\n \n return <EmptyView {...propsRoomNotFoundOrMoved} />;",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 368,
+      "line_number": 397,
       "context": "disabled: false,\n };\n \n // const goToServices = {\n //   type: \"button\",\n //   title: t(\"Common:GoToSettings\"),\n //   key: \"go-to-services\",\n //   onClick: actions.onGoToServices,\n // } as const;\n \n const goToAIProviderSettings = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 368,
+      "line_number": 397,
       "context": "disabled: false,\n };\n \n // const goToServices = {\n //   type: \"button\",\n //   title: t(\"Common:GoToSettings\"),\n //   key: \"go-to-services\",\n //   onClick: actions.onGoToServices,\n // } as const;\n \n const goToAIProviderSettings = {",
       "module": "/packages/client"
     },
@@ -30,19 +36,19 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 334,
+      "line_number": 340,
       "context": "type={LinkType.action}\n isHovered\n fontWeight={600}\n onClick={onGoToWebSearchPage}\n >\n {t(\"Common:GoToSettings\")}\n </Link>\n ) : null}\n </>\n ),\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 100,
+      "line_number": 95,
       "context": "return navigate(\"/portal-settings/ai-settings/providers\");\n }, []);\n \n const goToServices = {\n type: \"button\",\n title: t(\"Common:GoToSettings\"),\n key: \"go-to-services\",\n onClick: onGoToServices,\n } as const;\n \n const goToAIProviderSettings = {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 100,
+      "line_number": 95,
       "context": "return navigate(\"/portal-settings/ai-settings/providers\");\n }, []);\n \n const goToServices = {\n type: \"button\",\n title: t(\"Common:GoToSettings\"),\n key: \"go-to-services\",\n onClick: onGoToServices,\n } as const;\n \n const goToAIProviderSettings = {",
       "module": "/packages/shared"
     }

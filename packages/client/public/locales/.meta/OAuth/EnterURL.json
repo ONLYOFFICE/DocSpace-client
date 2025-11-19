@@ -3,7 +3,7 @@
   "content": "Enter URL",
   "content_en_sha1_hash": "ae5afe234b1427d8cf89877643fbda2757a1d47d",
   "created_at": "2025-05-19T21:30:53.881Z",
-  "updated_at": "2025-11-03T12:10:35.149Z",
+  "updated_at": "2025-11-18T14:41:49.897Z",
   "comment": {
     "text": "\"Please enter a URL as required.\" \nThis translation key is used to display a placeholder text in an input group field.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 257,
-      "context": "size={InputSize.base}\n type={InputType.text}\n value={providerUrl}\n onChange={(e) => setProviderUrl(e.target.value)}\n scale\n placeholder={t(\"OAuth:EnterURL\")}\n isDisabled={isRequestRunning}\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"AISettings:ProviderKey\")}",
+      "line_number": 320,
+      "context": "size={InputSize.base}\n type={InputType.text}\n value={providerUrl}\n onChange={(e) => setProviderUrl(e.target.value)}\n scale\n placeholder={t(\"OAuth:EnterURL\")}\n isDisabled={\n isRequestRunning ||\n selectedOption.key !== ProviderType.OpenAiCompatible\n }\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 141,
-      "context": "<TextInput\n type={InputType.text}\n size={InputSize.base}\n value={url}\n onChange={(e) => onChangeUrl(e.target.value)}\n placeholder={t(\"OAuth:EnterURL\")}\n scale\n hasError={!!urlError}\n />\n </FieldContainer>\n <FieldContainer",
+      "line_number": 150,
+      "context": "<TextInput\n type={InputType.text}\n size={InputSize.base}\n value={url}\n onChange={(e) => onChangeUrl(e.target.value)}\n placeholder={t(\"OAuth:EnterURL\")}\n scale\n hasError={!!urlError}\n />\n <Text className={styles.fieldHint}>\n {t(\"AISettings:MCPServerIntegrationURLHint\")}",
       "module": "/packages/client"
     },
     {

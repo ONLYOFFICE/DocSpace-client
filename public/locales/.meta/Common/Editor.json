@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2025-11-03T12:10:35.123Z",
+  "updated_at": "2025-11-17T11:52:35.401Z",
   "comment": {
     "text": "The translation key \"Editor\" is used to display the label for an editing feature within a user interface, likely in a settings or configuration panel. It appears as a title and is linked to navigate to an editor view or functionality. The translated term should describe this editing capability in a neutral and descriptive manner.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 545,
+      "line_number": 555,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_editor\",\n key: \"8-1-4\",\n icon: \"\",\n link: \"editor\",\n tKey: \"Common:Editor\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"8-1-5\",\n icon: \"\",",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 170,
+      "line_number": 172,
       "context": "roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },\n editor: {\n key: \"editor\",\n label: t(\"Common:Editor\"),\n description: t(\"Common:RoleEditorDescription\"),\n access: ShareAccessRights.Editing,\n type: EmployeeType.User,\n },\n formFiller: {",
       "module": "/packages/shared"
     },

@@ -3,7 +3,7 @@
   "content": "Room template",
   "content_en_sha1_hash": "fdbb1ce823b57a9b8c778f4202dca453bf47d748",
   "created_at": "2025-05-19T21:30:56.152Z",
-  "updated_at": "2025-10-27T16:14:33.378Z",
+  "updated_at": "2025-11-17T07:52:04.683Z",
   "comment": {
     "text": "Room template is a key used to translate the text \"Room template\" in the UI, which appears on a bar component (/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.js, line 144), likely as part of a file management system.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
-      "line_number": 211,
+      "line_number": 218,
       "context": "<>\n {isTemplate ? (\n <div className={styles.publicRoomBar}>\n <PublicRoomBar\n className={styles.roomTemplateBar}\n headerText={t(\"Files:RoomTemplate\")}\n iconName={FormReactSvgUrl}\n bodyText={\n <>\n <Text\n fontSize=\"12px\"",
       "module": "/packages/client"
     }

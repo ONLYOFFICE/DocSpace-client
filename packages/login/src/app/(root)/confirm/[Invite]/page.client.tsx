@@ -125,6 +125,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const emailFromLink = confirmLinkResult?.email ? confirmLinkResult.email : "";
   const roomName = roomData?.title;
   const roomId = roomData?.roomId;
+  const isAgent = roomData?.isAgent;
 
   const [email, setEmail] = useState(emailFromLink);
   const [emailValid, setEmailValid] = useState(true);
@@ -193,8 +194,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           throw new Error("Empty API response");
         }
 
+        const path = isAgent
+          ? `ai-agents/${roomData?.roomId}/chat`
+          : `rooms/shared/${roomData?.roomId}/filter`;
+
         const finalUrl = roomData.roomId
-          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
+          ? `/${path}?folder=${roomData.roomId}`
           : defaultPage;
 
         if (response.confirmUrl) {
@@ -227,6 +232,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       linkData.emplType,
       linkData.key,
       roomData.roomId,
+      roomData.isAgent,
       linkData.confirmHeader,
     ],
   );
@@ -258,8 +264,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         "max-age": COOKIE_EXPIRATION_YEAR,
       });
 
-      const finalUrl = roomId
-        ? `/rooms/shared/${roomId}/filter?folder=${roomId}`
+      const path = isAgent
+        ? `ai-agents/${roomData?.roomId}/chat`
+        : `rooms/shared/${roomData?.roomId}/filter`;
+
+      const finalUrl = roomData.roomId
+        ? `/${path}?folder=${roomData.roomId}`
         : defaultPage;
 
       if (roomId) {
@@ -322,8 +332,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       return window.location.replace(res.confirmUrl);
     }
 
+    const path = isAgent
+      ? `ai-agents/${roomData?.roomId}/chat`
+      : `rooms/shared/${roomData?.roomId}/filter`;
+
     const finalUrl = roomData.roomId
-      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
+      ? `/${path}?folder=${roomData.roomId}`
       : defaultPage;
 
     const isConfirm = typeof res === "string" && res.includes("confirm");

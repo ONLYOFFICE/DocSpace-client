@@ -199,7 +199,6 @@ const SectionHeaderContent = (props) => {
     isArchive,
     isSharedWithMeFolderRoot,
     isAIAgentsFolder,
-    userSelection,
     filesSelection,
   } = props;
 
@@ -574,16 +573,13 @@ const SectionHeaderContent = (props) => {
     moveToPublicRoom(rootFolderId);
   }, [isFrame, rootFolderId, moveToPublicRoom]);
 
-  const isSectionHeaderVisible =
-    isUsersHeaderVisible || isGroupsHeaderVisible || isHeaderVisible;
-
   const filesHeaderMenu =
-    !isSectionHeaderVisible || filesSelection.length === 0
+    !isHeaderVisible || filesSelection.length === 0
       ? EMPTY_ARRAY
       : getHeaderMenu(t);
 
   const contactsHeaderMenu =
-    !isSectionHeaderVisible || userSelection.length === 0
+    !isUsersHeaderVisible && !isGroupsHeaderVisible
       ? EMPTY_ARRAY
       : getContactsHeaderMenu(t, isContactsGroupsPage);
 
@@ -906,7 +902,12 @@ const SectionHeaderContent = (props) => {
     if (!lengthList || lengthList === 0) return false;
 
     return true;
-  }, [getContextOptionsPlus, isContactsPage, isContactsGroupsPage, allowInvitingMembers]);
+  }, [
+    getContextOptionsPlus,
+    isContactsPage,
+    isContactsGroupsPage,
+    allowInvitingMembers,
+  ]);
 
   const withMenu = !isRoomsFolder && !isContactsGroupsPage && !isAIAgentsFolder;
 
@@ -1084,7 +1085,6 @@ export default inject(
 
     const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
-    const userSelection = peopleStore.usersStore.selection;
 
     const {
       setSelected,
@@ -1252,7 +1252,8 @@ export default inject(
 
     const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
     isPublicRoom ||
-    isSharedWithMeFolderRoot
+    isSharedWithMeFolderRoot ||
+    isArchive
       ? false
       : security?.Read && isShared);
 
@@ -1405,7 +1406,6 @@ export default inject(
       isArchive,
       isSharedWithMeFolderRoot,
       isAIAgentsFolder,
-      userSelection,
       filesSelection,
     };
   },

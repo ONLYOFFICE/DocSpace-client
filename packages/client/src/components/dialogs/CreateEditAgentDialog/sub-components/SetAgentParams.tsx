@@ -49,6 +49,7 @@ import {
   TAgentIconParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
+import type { TSelectorItem } from "@docspace/shared/components/selector";
 import { Nullable } from "@docspace/shared/types";
 import { TAgent } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
@@ -130,7 +131,7 @@ type TClientCover = {
 
 type setAgentParamsProps = {
   agentParams: TAgentParams;
-  setAgentParams: (value: TAgentParams) => void;
+  setAgentParams: (value: Partial<TAgentParams>) => void;
   tagHandler: TagHandler;
   setIsScrollLocked: (value: boolean) => void;
   isEdit?: boolean;
@@ -141,6 +142,10 @@ type setAgentParamsProps = {
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: VoidFunction;
+  portalMcpServerId?: string;
+  onClickAction?: () => void;
+  selectedServers?: TSelectorItem[];
+  setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 
   // Store props
   folderFormValidation?: SettingsStore["folderFormValidation"];
@@ -149,6 +154,7 @@ type setAgentParamsProps = {
   getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
   getInfoPanelItemIcon?: InfoPanelStore["getInfoPanelItemIcon"];
   uploadFile?: AvatarEditorDialogStore["uploadFile"];
+  clearUploadedFile?: AvatarEditorDialogStore["clearUploadedFile"];
   avatarEditorDialogVisible?: AvatarEditorDialogStore["avatarEditorDialogVisible"];
   setAvatarEditorDialogVisible?: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
   roomLogoCoverDialogVisible?: DialogsStore["roomLogoCoverDialogVisible"];
@@ -157,7 +163,7 @@ type setAgentParamsProps = {
   cover?: Nullable<TClientCover>;
   covers?: Nullable<TServerCover[]>;
   setCover?: DialogsStore["setCover"];
-  isDefaultAgentsQuotaSet?: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+  isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
 };
 
@@ -179,6 +185,7 @@ const setAgentParams = ({
   getLogoCoverModel,
   getInfoPanelItemIcon,
   uploadFile,
+  clearUploadedFile,
   avatarEditorDialogVisible,
   setAvatarEditorDialogVisible,
   roomLogoCoverDialogVisible,
@@ -188,8 +195,12 @@ const setAgentParams = ({
   covers,
   setCover,
   onOwnerChange,
-  isDefaultAgentsQuotaSet,
+  isDefaultAIAgentsQuotaSet,
   infoPanelSelection,
+  portalMcpServerId,
+  onClickAction,
+  selectedServers,
+  setSelectedServers,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -202,9 +213,15 @@ const setAgentParams = ({
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
   const [previewTitle, setPreviewTitle] = useState(
-    selection?.title || infoPanelSelection?.title || ""
+    selection?.title || infoPanelSelection?.title || "",
   );
   const [createAgentTitle, setCreateAgentTitle] = useState(agentParams.title);
+
+  const originalIconRef = React.useRef({
+    icon: agentParams.icon,
+    previewIcon: agentParams.previewIcon,
+    iconWasUpdated: agentParams.iconWasUpdated,
+  });
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -236,7 +253,7 @@ const setAgentParams = ({
 
     if (cover && cover.cover) {
       const currentCoverData = covers?.filter(
-        (item) => item.id === cover.cover
+        (item) => item.id === cover.cover,
       )[0].data;
 
       return { ...cover, data: currentCoverData };
@@ -259,22 +276,22 @@ const setAgentParams = ({
       globalColors.logoColors[
         Math.floor(Math.random() * globalColors.logoColors.length)
       ].replace("#", ""),
-    []
+    [],
   );
 
   const currentIcon = selection
     ? selection?.logo?.large
       ? selection?.logo?.large
       : selection?.logo?.cover
-      ? selection?.logo
-      : getInfoPanelItemIcon?.(selection, 96)
+        ? selection?.logo
+        : getInfoPanelItemIcon?.(selection, 96)
     : infoPanelSelection
-    ? infoPanelSelection?.logo?.large
       ? infoPanelSelection?.logo?.large
-      : infoPanelSelection?.logo?.cover
-      ? infoPanelSelection?.logo
-      : getInfoPanelItemIcon?.(infoPanelSelection, 96)
-    : undefined;
+        ? infoPanelSelection?.logo?.large
+        : infoPanelSelection?.logo?.cover
+          ? infoPanelSelection?.logo
+          : getInfoPanelItemIcon?.(infoPanelSelection, 96)
+      : undefined;
 
   const onChangeIcon = (icon: TAgentIconParams) => {
     if (!icon.uploadedFile !== disableImageRescaling)
@@ -284,6 +301,12 @@ const setAgentParams = ({
   };
 
   const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    originalIconRef.current = {
+      icon: agentParams.icon,
+      previewIcon: agentParams.previewIcon,
+      iconWasUpdated: agentParams.iconWasUpdated,
+    };
+
     const uploadedFile = await uploadFile?.(t, e);
 
     setAgentParams({
@@ -293,6 +316,20 @@ const setAgentParams = ({
     });
 
     onChangeIcon({ ...agentParams.icon, uploadedFile });
+  };
+
+  const onCloseAvatarEditor = () => {
+    setPreviewIcon(originalIconRef.current.previewIcon);
+    setAvatarEditorDialogVisible?.(false);
+
+    clearUploadedFile?.();
+
+    setAgentParams({
+      ...agentParams,
+      icon: originalIconRef.current.icon,
+      previewIcon: originalIconRef.current.previewIcon,
+      iconWasUpdated: originalIconRef.current.iconWasUpdated,
+    });
   };
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -334,7 +371,9 @@ const setAgentParams = ({
   };
 
   const onDeleteAvatar = () => {
-    setCover?.(`#${randomColor}`, "");
+    if (previewIcon) setPreviewIcon(null);
+    else setCover?.(`#${randomColor}`, "");
+
     setAgentParams({
       ...agentParams,
       icon: {
@@ -344,28 +383,33 @@ const setAgentParams = ({
         y: 0.5,
         zoom: 1,
       },
+      iconWasUpdated: false,
     });
   };
 
   const hasImage = isEdit
-    ? agentParams.icon.uploadedFile && selection?.logo?.original
+    ? !!(
+        agentParams.iconWasUpdated ||
+        (agentParams.icon.uploadedFile &&
+          (selection?.logo?.original || infoPanelSelection?.logo?.original))
+      )
     : false;
   const model = getLogoCoverModel?.(t, hasImage);
 
   const isEditRoomModel = model?.map((item) =>
     item.key === "create_edit_room_delete"
       ? { ...item, onClick: onDeleteAvatar }
-      : item
+      : item,
   );
 
   const isEmptyIcon =
     createAgentTitle || cover?.color
       ? false
       : avatarEditorDialogVisible
-      ? true
-      : previewIcon
-      ? false
-      : !createAgentTitle;
+        ? true
+        : previewIcon
+          ? false
+          : !createAgentTitle;
 
   const roomIconLogo = currentCover
     ? { cover: currentCover }
@@ -374,8 +418,8 @@ const setAgentParams = ({
   const itemIconLogo = currentCover
     ? { cover: currentCover }
     : avatarEditorDialogVisible
-    ? currentIcon
-    : previewIcon || currentIcon;
+      ? currentIcon
+      : previewIcon || currentIcon;
 
   const showDefault =
     cover && cover.cover
@@ -488,9 +532,16 @@ const setAgentParams = ({
         setAgentParams={setAgentParams}
       />
       {/* <KnowledgeSettings /> */}
-      <MCPSettings setAgentParams={setAgentParams} agentParams={agentParams} />
+      <MCPSettings
+        setAgentParams={setAgentParams}
+        agentParams={agentParams}
+        portalMcpServerId={portalMcpServerId}
+        onClickAction={onClickAction}
+        selectedServers={selectedServers}
+        setSelectedServers={setSelectedServers}
+      />
 
-      {isDefaultAgentsQuotaSet ? (
+      {isDefaultAIAgentsQuotaSet ? (
         <RoomQuota
           setRoomParams={setAgentParams}
           roomParams={agentParams}
@@ -508,7 +559,7 @@ const setAgentParams = ({
             image={agentParams.icon}
             setPreview={setPreviewIcon}
             onChangeImage={onChangeIcon}
-            onClose={() => setAvatarEditorDialogVisible?.(false)}
+            onClose={onCloseAvatarEditor}
             onSave={onSaveAvatar}
             onChangeFile={onChangeFile}
             classNameWrapperImageCropper="icon-editor"
@@ -532,7 +583,7 @@ export default inject(
     avatarEditorDialogStore,
     currentQuotaStore,
   }: TStore) => {
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     const { bufferSelection } = filesStore;
@@ -540,6 +591,7 @@ export default inject(
 
     const {
       uploadFile,
+      clearUploadedFile,
       avatarEditorDialogVisible,
       setAvatarEditorDialogVisible,
     } = avatarEditorDialogStore;
@@ -564,6 +616,7 @@ export default inject(
       selection: bufferSelection,
       getInfoPanelItemIcon,
       uploadFile,
+      clearUploadedFile,
       avatarEditorDialogVisible,
       setAvatarEditorDialogVisible,
       setRoomCoverDialogProps,
@@ -572,8 +625,8 @@ export default inject(
       cover,
       covers,
       setCover,
-      isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       infoPanelSelection,
     };
-  }
+  },
 )(observer(setAgentParams));

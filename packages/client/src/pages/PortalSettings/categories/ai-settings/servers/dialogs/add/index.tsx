@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -48,15 +48,25 @@ import { useIcon } from "../../hooks/useIcon";
 type AddMCPDialogProps = {
   onClose: VoidFunction;
   addNewMCP?: AISettingsStore["addNewMCP"];
+  aiSettingsUrl?: string;
 };
 
-const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
+const AddMCPDialogComponent = ({
+  onClose,
+  addNewMCP,
+  aiSettingsUrl,
+}: AddMCPDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const [loading, setLoading] = React.useState(false);
 
-  const { getBaseParams, baseParamsComponent, baseParamsChanged } =
-    useBaseParams();
+  const {
+    getBaseParams,
+    baseParamsComponent,
+    baseParamsChanged,
+    baseParamsError,
+  } = useBaseParams();
   const { headersComponent, getAPIHeaders, advancedSettingsChanged } =
     useAdvancedSettings();
   const { iconComponent, getIcon, iconChanged } = useIcon();
@@ -64,7 +74,10 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
   const hasChanges =
     baseParamsChanged || advancedSettingsChanged || iconChanged;
 
-  const onSubmitAction = async () => {
+  const onSubmitAction = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!hasChanges) return;
+
     const headers = getAPIHeaders();
     const baseParams = getBaseParams();
 
@@ -94,6 +107,10 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
     }
   };
 
+  const handleSubmitClick = () => {
+    if (hasChanges) submitButtonRef.current?.click();
+  };
+
   return (
     <ModalDialog
       visible
@@ -103,29 +120,37 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
     >
       <ModalDialog.Header>{t("AISettings:MCPServer")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.bodyContainer}>
+        <form onSubmit={onSubmitAction} className={styles.bodyContainer}>
           <div className={styles.connectDocspace}>
             <Text className={styles.connectDocspaceDescription}>
               {t("AISettings:ConnectProductToYourDataAndTools", {
                 productName: t("Common:ProductName"),
               })}
             </Text>
-            <Link
-              className={styles.learnMoreLink}
-              target={LinkTarget.blank}
-              type={LinkType.page}
-              fontWeight={600}
-              isHovered
-              href=""
-              color="accent"
-            >
-              {t("Common:LearnMore")}
-            </Link>
+            {aiSettingsUrl ? (
+              <Link
+                className={styles.learnMoreLink}
+                target={LinkTarget.blank}
+                type={LinkType.page}
+                fontWeight={600}
+                isHovered
+                href={aiSettingsUrl}
+                color="accent"
+              >
+                {t("Common:LearnMore")}
+              </Link>
+            ) : null}
           </div>
           {iconComponent}
           {baseParamsComponent}
           {headersComponent}
-        </div>
+          <button
+            type="submit"
+            ref={submitButtonRef}
+            hidden
+            aria-label="submit"
+          />
+        </form>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -133,9 +158,9 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
           size={ButtonSize.normal}
           label={t("Common:SaveButton")}
           scale
-          onClick={onSubmitAction}
+          onClick={handleSubmitClick}
           isLoading={loading}
-          isDisabled={!hasChanges}
+          isDisabled={baseParamsError ? true : !hasChanges}
         />
         <Button
           size={ButtonSize.normal}
@@ -149,8 +174,11 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
   );
 };
 
-export const AddMCPDialog = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    addNewMCP: aiSettingsStore.addNewMCP,
-  };
-})(observer(AddMCPDialogComponent));
+export const AddMCPDialog = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    return {
+      addNewMCP: aiSettingsStore.addNewMCP,
+      aiSettingsUrl: settingsStore.aiSettingsUrl,
+    };
+  },
+)(observer(AddMCPDialogComponent));

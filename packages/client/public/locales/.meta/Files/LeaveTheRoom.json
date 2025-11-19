@@ -3,7 +3,7 @@
   "content": "Leave the room",
   "content_en_sha1_hash": "0494f65ff12e4895fbbc91bd002080a4361c346d",
   "created_at": "2025-05-19T21:30:55.737Z",
-  "updated_at": "2025-10-27T16:14:33.284Z",
+  "updated_at": "2025-11-18T14:41:49.806Z",
   "comment": {
     "text": "This translation key is used for the label of a \"Leave Room\" button in a modal dialog, which allows users to exit a room. The text appears as part of a header and is also used as a filter option in a panel that manages room ownership.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 133,
+      "line_number": 135,
       "context": "productName: t(\"Common:ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const selectorComponent = (\n <PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2317,
-      "context": "item.id !== this.selectedFolderStore.id,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: item.isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled:\n isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),\n },",
+      "line_number": 2324,
+      "context": "item.id !== this.selectedFolderStore.id,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled:\n isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),\n },",
       "module": "/packages/client"
     }
   ],

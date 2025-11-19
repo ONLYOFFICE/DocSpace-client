@@ -93,6 +93,7 @@ import {
   removeSeparator,
 } from "SRC_DIR/helpers/filesUtils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import {
   getUserFilter,
   setUserFilter,
@@ -1347,9 +1348,8 @@ class FilesStore {
   };
 
   updateRoomMute = (index, status) => {
-    if (index < 0) return;
-
     this.folders[index].mute = status;
+    this.updateSelection(this.folders[index].id);
   };
 
   setFile = (file) => {
@@ -1845,6 +1845,8 @@ class FilesStore {
 
         let currentFolder = data.current;
 
+        let isChatTab = false;
+
         let navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive, AIAgents } = FolderType;
@@ -1974,6 +1976,7 @@ class FilesStore {
             isRoom: true,
           };
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
+          isChatTab = true;
           this.aiRoomStore.setCurrentTab("chat");
           this.aiRoomStore.setKnowledgeId(null);
           this.aiRoomStore.setResultId(null);
@@ -2038,12 +2041,14 @@ class FilesStore {
             this.setIsEmptyPage(isEmptyList);
           }
 
-          this.setFolders(
-            isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.folders,
-          );
-          this.setFiles(
-            isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.files,
-          );
+          if (!isChatTab) {
+            this.setFolders(
+              isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.folders,
+            );
+            this.setFiles(
+              isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.files,
+            );
+          }
         });
 
         if (clearFilter) {
@@ -2547,7 +2552,7 @@ class FilesStore {
     inAgent = false,
     filter = null,
   ) => {
-    const agents = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
+    const agents = await api.ai.setCustomAIAgentQuota(itemsIDs, +quotaSize);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -2573,7 +2578,7 @@ class FilesStore {
   };
 
   resetAIAgentQuota = async (itemsIDs, inAgent = false, filter = null) => {
-    const agents = await api.rooms.resetRoomQuota(itemsIDs);
+    const agents = await api.ai.resetAIAgentQuota(itemsIDs);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -2760,7 +2765,7 @@ class FilesStore {
         "stop-filling",
       ];
 
-      if (!item?.security?.AscAi) {
+      if (!item?.security?.AskAi) {
         fileOptions = removeOptions(fileOptions, ["ask-ai", "separator6"]);
       }
 
@@ -4097,7 +4102,7 @@ class FilesStore {
 
       const pluginOptions = {};
 
-      if (enablePlugins && fileItemsList) {
+      if (!isAIAgents() && enablePlugins && fileItemsList) {
         fileItemsList.forEach(({ value }) => {
           if (value.extension === fileExst) {
             if (value.fileTypeName)
@@ -4462,6 +4467,20 @@ class FilesStore {
     return rooms.length > 0;
   }
 
+  get hasAIAgentsToResetQuota() {
+    const canResetCustomQuota = (item) => {
+      const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
+
+      if (!isDefaultAIAgentsQuotaSet) return false;
+
+      return item.security?.EditRoom && item.isCustomQuota;
+    };
+
+    const aiAgents = this.selection.filter((x) => canResetCustomQuota(x));
+
+    return aiAgents.length > 0;
+  }
+
   get hasRoomsToDisableQuota() {
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
@@ -4478,6 +4497,20 @@ class FilesStore {
     return rooms.length > 0;
   }
 
+  get hasAIAgentsToDisableQuota() {
+    const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canDisableQuota = (item) => {
+      if (!isDefaultAIAgentsQuotaSet) return false;
+
+      return item.security?.EditRoom;
+    };
+
+    const aiAgents = this.selection.filter((x) => canDisableQuota(x));
+
+    return aiAgents.length > 0;
+  }
+
   get hasRoomsToChangeQuota() {
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
@@ -4492,6 +4525,20 @@ class FilesStore {
     const rooms = this.selection.filter((x) => canChangeQuota(x));
 
     return rooms.length > 0;
+  }
+
+  get hasAIAgentsToChangeQuota() {
+    const { isDefaultAIAgentsQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canChangeQuota = (item) => {
+      if (!isDefaultAIAgentsQuotaSet) return false;
+
+      return item.security?.EditRoom;
+    };
+
+    const aiAgents = this.selection.filter((x) => canChangeQuota(x));
+
+    return aiAgents.length > 0;
   }
 
   get hasOneSelection() {
@@ -4994,6 +5041,7 @@ class FilesStore {
       withSubfolders,
       filterType,
       searchInContent,
+      sharedBy,
     } = this.filter;
 
     const isFiltered =
@@ -5012,7 +5060,8 @@ class FilesStore {
           search ||
           withSubfolders ||
           filterType ||
-          searchInContent;
+          searchInContent ||
+          sharedBy;
 
     return isFiltered;
   }

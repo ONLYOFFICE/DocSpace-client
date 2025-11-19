@@ -75,7 +75,7 @@ export const useEmptyView = (
     selectedFolder,
     isKnowledgeTab,
     isResultsTab,
-    isDocSpaceAdmin,
+    isPortalAdmin,
     aiReady,
     standalone,
   }: EmptyViewContainerProps,
@@ -107,7 +107,7 @@ export const useEmptyView = (
       isAIRoom,
       aiReady,
       standalone,
-      isDocSpaceAdmin,
+      isPortalAdmin,
     );
     const title = getTitle(
       type,
@@ -119,12 +119,13 @@ export const useEmptyView = (
       isArchiveFolderRoot,
       isRootEmptyPage,
       rootFolderType,
+      security,
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
       aiReady,
       standalone,
-      isDocSpaceAdmin,
+      isPortalAdmin,
     );
     const icon = getIcon(
       type,
@@ -135,6 +136,8 @@ export const useEmptyView = (
       parentRoomType,
       isRootEmptyPage,
       rootFolderType,
+      security,
+      isResultsTab,
     );
 
     return { description, title, icon };
@@ -194,7 +197,7 @@ export const useOptions = (
     isResultsTab,
     aiReady,
     standalone,
-    isDocSpaceAdmin,
+    isPortalAdmin,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -381,7 +384,7 @@ export const useOptions = (
         isAIRoom,
         aiReady,
         standalone,
-        isDocSpaceAdmin,
+        isPortalAdmin,
       ),
     [
       type,

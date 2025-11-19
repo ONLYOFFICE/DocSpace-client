@@ -62,6 +62,15 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         })}
         isDisabled={isDisabled}
       />
+      <MobileCategoryWrapper
+        title={t("QuotaPerAIAgent")}
+        onClickLink={onClickLink}
+        url="/portal-settings/management/disk-space/quota-per-ai-agent"
+        subtitle={t("SetDefaultAIAgentQuota", {
+          productName: t("Common:ProductName"),
+        })}
+        isDisabled={isDisabled}
+      />
     </StyledBaseQuotaComponent>
   );
 };

@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Kết nối {{productName}} với dữ liệu và các công cụ của bạn.",
   "CustomMCPListTitle": "Tùy chỉnh",
   "DeleteImage": "Xóa ảnh",
-  "DeleteProvider": "Xóa nhà cung cấp",
   "DeleteProviderDescription": "Xóa nhà cung cấp này sẽ thu hồi quyền truy cập của tất cả người dùng và các cài đặt của nó sẽ bị xóa vĩnh viễn.\nĐể sử dụng lại nhà cung cấp này, bạn sẽ cần thiết lập lại từ đầu.",
   "DeleteServer": "Xóa máy chủ",
   "DeleteServerDescription": "Xóa máy chủ này sẽ thu hồi quyền truy cập của tất cả người dùng và các cài đặt của nó sẽ bị xóa vĩnh viễn.\nĐể sử dụng lại máy chủ, bạn sẽ cần thiết lập lại nó từ đầu.",

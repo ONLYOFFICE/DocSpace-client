@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Pripojte {{productName}} k svojim dátam a nástrojom.",
   "CustomMCPListTitle": "Vlastné",
   "DeleteImage": "Vymazať obrázok",
-  "DeleteProvider": "Zmazať poskytovateľa",
   "DeleteProviderDescription": "Zmazanie tohto poskytovateľa zruší prístup pre všetkých používateľov a jeho nastavenia budú nenávratne vymazané.\n Ak chcete poskytovateľa použiť znova, budete ho musieť nastaviť od začiatku.",
   "DeleteServer": "Vymazať server",
   "DeleteServerDescription": "Zmazanie tohto servera zruší prístup pre všetkých používateľov a jeho nastavenia budú trvale vymazané.\n Ak chcete server znova použiť, budete ho musieť nastaviť odznova.",

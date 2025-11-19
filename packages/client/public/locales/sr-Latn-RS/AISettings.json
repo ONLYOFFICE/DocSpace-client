@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Povežite {{productName}} sa svojim podacima i alatkama.",
   "CustomMCPListTitle": "Prilagođeno",
   "DeleteImage": "Obrišite sliku",
-  "DeleteProvider": "Obrišite provajdera",
   "DeleteProviderDescription": "Brisanjem ovog dobavljača biće ukinut pristup za sve korisnike, a njegova podešavanja biće trajno izbrisana. Da biste ponovo koristili ovog dobavljača, moraćete da ga podesite od početka.",
   "DeleteServer": "Obrišite server",
   "DeleteServerDescription": "Brisanjem ovog servera će se opozvati pristup svim korisnicima, a njegova podešavanja će biti trajno izbrisana.\n Da biste ponovo koristili server, moraćete da ga podesite od nule.",

@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Conectați {{productName}} la datele și instrumentele dvs.",
   "CustomMCPListTitle": "Particularizare",
   "DeleteImage": "Ștergere imagine",
-  "DeleteProvider": "Ștergere furnizor",
   "DeleteProviderDescription": "După ștergerea furnizorului, accesul truturor utilizatorilor va fi revocat, iar setările furnizorului vor fi șterse definitiv. Pentru a utiliza furnizorul din nou, setarea trebuie repetată de la zero.",
   "DeleteServer": "Ștergere server",
   "DeleteServerDescription": "După ştergerea serverului, accesul truturor utilizatorilor va fi revocat, iar setările furnizorului vor fi șterse definitiv.\n Pentru a utiliza serverul din nou, setarea trebuie repetată de la zero.",

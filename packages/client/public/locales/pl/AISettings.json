@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Połącz {{productName}} z Twoimi danymi i narzędziami.",
   "CustomMCPListTitle": "Niestandardowe",
   "DeleteImage": "Usuń obraz",
-  "DeleteProvider": "Usuń dostawcę",
   "DeleteProviderDescription": "Usunięcie tego dostawcy spowoduje unieważnienie dostępu dla wszystkich użytkowników, a jego ustawienia zostaną trwale usunięte.\nAby ponownie użyć tego dostawcy, konieczne będzie jego ponowne skonfigurowanie od podstaw.",
   "DeleteServer": "Usuń serwer",
   "DeleteServerDescription": "Usunięcie tego serwera spowoduje unieważnienie dostępu dla wszystkich użytkowników, a jego ustawienia zostaną trwale usunięte.\nAby ponownie użyć tego serwera, konieczne będzie jego skonfigurowanie od nowa.",

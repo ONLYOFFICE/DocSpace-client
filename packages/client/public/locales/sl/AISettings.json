@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Povežite {{productName}} z vašimi podatki in orodji.",
   "CustomMCPListTitle": "Prilagojene",
   "DeleteImage": "Izbriši sliko",
-  "DeleteProvider": "Izbriši ponudnika",
   "DeleteProviderDescription": "Izbris tega ponudnika bo preklical dostop za vse uporabnike, in njegove nastavitve bodo trajno izbrisane.\n Če želite ponovno uporabiti ponudnika, ga boste morali ponovno nastaviti od začetka.",
   "DeleteServer": "Izbriši strežnik",
   "DeleteServerDescription": "Izbris tega strežnika bo preklical dostop za vse uporabnike, in njegove nastavitve bodo trajno izbrisane.\n Če želite ponovno uporabiti strežnik, ga boste morali ponovno nastaviti od začetka.",

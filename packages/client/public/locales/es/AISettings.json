@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Conecte {{productName}} a sus datos y herramientas.",
   "CustomMCPListTitle": "Personalizado",
   "DeleteImage": "Eliminar imagen",
-  "DeleteProvider": "Eliminar proveedor",
   "DeleteProviderDescription": "La eliminación de este proveedor revocará el acceso de todos los usuarios y su configuración se borrará permanentemente.\nPara volver a utilizar el proveedor, deberá configurarlo desde cero.",
   "DeleteServer": "Eliminar servidor",
   "DeleteServerDescription": "La eliminación de este servidor revocará el acceso de todos los usuarios, y su configuración se borrará permanentemente.\n Para volver a utilizar el servidor, deberá configurarlo desde cero.",

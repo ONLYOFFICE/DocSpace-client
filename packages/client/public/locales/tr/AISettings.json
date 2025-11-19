@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "{{productName}}'i veri ve araçlarınıza bağlayın.",
   "CustomMCPListTitle": "Özel",
   "DeleteImage": "Resmi sil",
-  "DeleteProvider": "Sağlayıcıyı sil",
   "DeleteProviderDescription": "Bu sağlayıcıyı silmek, tüm kullanıcıların erişimini iptal edecek ve ayarlarını kalıcı olarak silecektir.\nSağlayıcıyı tekrar kullanmak için, sıfırdan yeniden yapılandırmanız gerekecektir.",
   "DeleteServer": "Sunucuyu sil",
   "DeleteServerDescription": "Bu sunucuyu silmek, tüm kullanıcıların erişimini iptal edecek ve ayarlarını kalıcı olarak silecektir.\nSunucuyu tekrar kullanmak için, sıfırdan kurmanız gerekecektir.",

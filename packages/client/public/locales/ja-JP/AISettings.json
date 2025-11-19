@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "{{productName}}をデータやツールに接続します。",
   "CustomMCPListTitle": "カスタム",
   "DeleteImage": "画像を削除",
-  "DeleteProvider": "プロバイダーを削除",
   "DeleteProviderDescription": "このプロバイダーを削除すると、すべてのユーザーのアクセス権が取り消され、設定は完全に消去されます。再度使用するには、最初から設定し直す必要があります。",
   "DeleteServer": "サーバーを削除",
   "DeleteServerDescription": "このサーバーを削除すると、すべてのユーザーのアクセス権が取り消され、設定は永久に消去されます。サーバーを再度使用するには、最初から設定し直す必要があります。",

@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Pievienojiet {{productName}} pie jūsu datu un instrumentu.",
   "CustomMCPListTitle": "Pielāgoti",
   "DeleteImage": "Dzēst attēlu",
-  "DeleteProvider": "Dzēst pakalpojumu sniedzēju",
   "DeleteProviderDescription": "Dzēšot šo pakalpojumu sniedzēju, tiks atņemta piekļuve visiem lietotājiem, un tā iestatījumi tiks neatgriežami dzēsti.\nLai vēlreiz izmantotu šo pakalpojumu sniedzēju, jums būs jāuzstāda tas no nulles.",
   "DeleteServer": "Dzēst serveri",
   "DeleteServerDescription": "Dzēšot šo serveri, tiks atņemta piekļuve visiem lietotājiem, un tā iestatījumi tiks neatgriežami dzēsti.\nLai vēlreiz izmantotu serveri, jums būs jāuzstāda tas no nulles.",

@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Yhdistä {{productName}} datasi ja työkalujesi kanssa.",
   "CustomMCPListTitle": "Mukautetut",
   "DeleteImage": "Poista kuva",
-  "DeleteProvider": "Poista palveluntarjoaja",
   "DeleteProviderDescription": "Tämän palveluntarjoajan poistaminen peruuttaa pääsyn kaikille käyttäjille, ja sen asetukset poistetaan pysyvästi.\nKäyttääksesi palveluntarjoajaa uudelleen, sinun on asetettava se alusta alkaen.",
   "DeleteServer": "Poista palvelin",
   "DeleteServerDescription": "Palvelimen poistaminen poistaa pääsyn kaikilta käyttäjiltä, ja sen asetukset poistetaan pysyvästi.\n Jotta voit käyttää palvelinta uudelleen, sinun on asetettava se alusta alkaen.",

@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "将{{productName}}连接到您的数据和工具。",
   "CustomMCPListTitle": "自定义",
   "DeleteImage": "删除图片",
-  "DeleteProvider": "删除提供商",
   "DeleteProviderDescription": "删除此服务提供商将撤销所有用户的访问权限，其设置将被永久清除。如需再次使用此服务提供商，您需要从头开始重新设置。",
   "DeleteServer": "删除服务器",
   "DeleteServerDescription": "删除此服务器将撤销所有用户的访问权限，其设置将被永久清除。\n如需再次使用该服务器，您需要从头开始重新设置。",

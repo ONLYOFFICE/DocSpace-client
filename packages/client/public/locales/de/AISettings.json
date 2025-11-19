@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Verbinden Sie {{productName}} mit Ihren Daten und Tools.",
   "CustomMCPListTitle": "Benutzerdefiniert",
   "DeleteImage": "Bild löschen",
-  "DeleteProvider": "Anbieter löschen",
   "DeleteProviderDescription": "Durch das Löschen dieses Anbieters wird der Zugriff für alle Benutzer widerrufen und seine Einstellungen werden dauerhaft gelöscht.\nUm den Anbieter erneut zu verwenden, müssen Sie ihn komplett neu einrichten.",
   "DeleteServer": "Server löschen",
   "DeleteServerDescription": "Durch das Löschen dieses Servers wird der Zugriff für alle Benutzer widerrufen und seine Einstellungen werden dauerhaft gelöscht.\n Um den Server erneut zu verwenden, müssen Sie ihn von Grund auf neu einrichten.",

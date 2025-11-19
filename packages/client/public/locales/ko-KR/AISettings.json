@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "{{productName}}을 데이터 및 도구에 연결하세요.",
   "CustomMCPListTitle": "커스텀",
   "DeleteImage": "이미지 삭제",
-  "DeleteProvider": "제공자 삭제",
   "DeleteProviderDescription": "이 제공자를 삭제하면 모든 사용자의 접근 권한이 취소되며, 설정은 영구적으로 삭제됩니다.\n다시 사용하려면 처음부터 다시 설정해야 합니다.",
   "DeleteServer": "서버 삭제",
   "DeleteServerDescription": "이 서버를 삭제하면 모든 사용자의 접근 권한이 취소되며, 설정은 영구적으로 삭제됩니다.\n 서버를 다시 사용하려면 처음부터 다시 설정해야 합니다.",

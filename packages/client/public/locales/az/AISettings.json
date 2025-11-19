@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "{{productName}} ilə məlumatlarınızı və alətlərinizi birləşdirin.",
   "CustomMCPListTitle": "Xüsusi",
   "DeleteImage": "Şəkil sil",
-  "DeleteProvider": "Təminatçını sil",
   "DeleteProviderDescription": "Bu təminatçını silməklə bütün istifadəçilərin ona olan girişi ləğv ediləcək və onun parametrləri daimi olaraq silinəcək.\nTəminatçını yenidən istifadə etmək üçün, onu başdan başlayaraq təzədən qurmanız lazımdır.",
   "DeleteServer": "Serveri sil",
   "DeleteServerDescription": "Bu serveri silmək bütün istifadəçilərin giriş imkanını ləğv edəcək və onun parametrləri daimi olaraq silinəcək.\nServeri yenidən istifadə etmək üçün, onu başdan yaratmaq (yenidən qurmaq) zərurət olacaq.",

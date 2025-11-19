@@ -5,7 +5,6 @@
   "ConnectProductToYourDataAndTools": "Lidh {{productName}} me të dhënat dhe mjetet e tua.",
   "CustomMCPListTitle": "Personalizuar",
   "DeleteImage": "Fshij imazhin",
-  "DeleteProvider": "Fshi ofruesin",
   "DeleteProviderDescription": "Fshirja e këtij ofruesi do të anulojë qasjen për të gjithë përdoruesit dhe cilësimet e tij do të fshihen përgjithmonë. Për ta përdorur përsëri ofruesin, do t'ju duhet ta konfiguroni nga e para.",
   "DeleteServer": "Fshij serverin",
   "DeleteServerDescription": "Fshirja e këtij serveri do të anulojë aksesin për të gjithë përdoruesit dhe cilësimet e tij do të fshihen përgjithmonë.\nPër ta përdorur përsëri serverin, do t'ju duhet ta konfiguroni nga e para.",

@@ -785,7 +785,6 @@
   "Reviewing": "Đánh giá",
   "RevokeLink": "Thu hồi liên kết",
   "Role": "Vai trò",
-  "RoleAgentManagerDescription": "Các quản lý đại lý có thể quản lý các đại lý được chỉ định, mời người dùng mới và phân quyền cho những người dưới cấp của họ.",
   "RoleCommentator": "Người nhận xét",
   "RoleCommentatorDescription": "Hoạt động với các tập tin hiện có: xem, nhận xét.",
   "RoleContentCreatorDescription": "Người tạo nội dung có thể tạo và chỉnh sửa các tập tin trong phòng, nhưng không thể quản lý người dùng hoặc truy cập cài đặt.",

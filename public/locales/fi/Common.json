@@ -785,7 +785,6 @@
   "Reviewing": "Tarkistaminen",
   "RevokeLink": "Peru linkki",
   "Role": "Rooli",
-  "RoleAgentManagerDescription": "Agenttien johtajat voivat hallinnoida määritettyjä agentteja, kutsua uusia käyttäjiä ja määrittää rooleja heidän alapuolellaan.",
   "RoleCommentator": "Kommentaattori",
   "RoleCommentatorDescription": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, kommentointi.",
   "RoleContentCreatorDescription": "Sisällöntuottajat voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi hallita käyttäjiä tai asetuksia. ",

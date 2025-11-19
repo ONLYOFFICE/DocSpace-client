@@ -785,7 +785,6 @@
   "Reviewing": "검토 중",
   "RevokeLink": "링크 취소",
   "Role": "역할",
-  "RoleAgentManagerDescription": "에이전트 관리자는 할당된 에이전트를 관리하고, 새로운 사용자를 초대하며, 자신의 레벨 아래의 역할을 할당할 수 있습니다.",
   "RoleCommentator": "주석자",
   "RoleCommentatorDescription": "기존 파일 작업: 보기, 주석 달기.",
   "RoleContentCreatorDescription": "콘텐츠 작성자는 룸에서 파일을 만들고 편집할 수 있지만, 사용자를 관리하거나 설정에 액세스할 수는 없습니다.",

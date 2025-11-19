@@ -785,7 +785,6 @@
   "Reviewing": "审阅中",
   "RevokeLink": "撤销链接",
   "Role": "角色",
-  "RoleAgentManagerDescription": "智能体管理员可以管理分配的智能体，邀请新用户并分配低于其级别的角色。",
   "RoleCommentator": "可评论",
   "RoleCommentatorDescription": "支持的文件操作：查看、评论。",
   "RoleContentCreatorDescription": "内容创作者可以在房间中创建和编辑文件，但无法管理用户或访问设置。",

@@ -785,7 +785,6 @@
   "Reviewing": "Gözden geçiriliyor",
   "RevokeLink": "Bağlantıyı iptal et",
   "Role": "Rol",
-  "RoleAgentManagerDescription": "Yetkili yöneticiler, atanan yetkilileri yönetebilir, yeni kullanıcıları davet edebilir ve kendi seviyelerinin altındaki rolleri atayabilirler.",
   "RoleCommentator": "Yorumcu",
   "RoleCommentatorDescription": "Mevcut dosyalarla işlemler: görüntüleme, yorum yapma.",
   "RoleContentCreatorDescription": "İçerik oluşturucular odada dosya oluşturabilir ve düzenleyebilir fakat kullanıcıları yönetemez veya ayarlara erişemez.",

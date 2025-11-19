@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2025-11-18T14:41:49.658Z",
+  "updated_at": "2025-11-19T15:02:40.923Z",
   "comment": {
     "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 234,
+      "line_number": 237,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"save\"\n key=\"AvatarEditorSaveBtn\"\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n scale\n primary\n onClick={onSave ? () => onSaveAction(image) : onSaveClick}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
@@ -121,7 +121,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/add/index.tsx",
       "line_number": 159,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n scale\n onClick={handleSubmitClick}\n isLoading={loading}\n isDisabled={baseParamsEmpty ? true : !hasChanges}\n />",
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n scale\n onClick={handleSubmitClick}\n isLoading={loading}\n isDisabled={baseParamsError ? true : !hasChanges}\n />",
       "module": "/packages/client"
     },
     {

@@ -787,7 +787,6 @@
   "Reviewing": "レビューの追加",
   "RevokeLink": "リンクの取り消し",
   "Role": "役割",
-  "RoleAgentManagerDescription": "エージェント管理者は、割り当てられたエージェントを管理し、新規ユーザーを招待し、自身のレベルより下のユーザーに役割を割り当てることができます。",
   "RoleCommentator": "コメンテーター",
   "RoleCommentatorDescription": "既存ファイルに対する操作：閲覧、コメント。",
   "RoleContentCreatorDescription": "コンテンツ作成者はルーム内でファイルの作成や編集を行うことができますが、ユーザー管理や設定へのアクセスはできません。",

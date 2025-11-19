@@ -785,7 +785,6 @@
   "Reviewing": "pregledovanje",
   "RevokeLink": "Prekliči povezavo",
   "Role": "Vloga",
-  "RoleAgentManagerDescription": "Vodje agentov lahko upravljajo dodeljenim agentom, povabijo nove uporabnike in dodelijo vloge pod njihovo raven.",
   "RoleCommentator": "Komentator",
   "RoleCommentatorDescription": "Operacije z obstoječimi datotekami: ogledovanje, komentiranje.",
   "RoleContentCreatorDescription": "Ustvarjalci vsebine lahko ustvarjajo in urejajo datoteke v sobi, ne morejo pa upravljati uporabnikov ali dostopati do nastavitev.",

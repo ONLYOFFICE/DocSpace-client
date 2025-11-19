@@ -785,7 +785,6 @@
   "Reviewing": "prehliadanie",
   "RevokeLink": "Zrušiť odkaz",
   "Role": "Rola",
-  "RoleAgentManagerDescription": "Manažéri agentov môžu spravovať pridelených agentov, pozývať nových používateľov a prideľovať im role pod ich úrovňou.",
   "RoleCommentator": "Komentátor",
   "RoleCommentatorDescription": "Operácie s existujúcimi súbormi: prezeranie, komentovanie.",
   "RoleContentCreatorDescription": "Tvorcovia obsahu môžu vytvárať a upravovať súbory v miestnosti, ale nemôžu spravovať používateľov ani nastavenia.",

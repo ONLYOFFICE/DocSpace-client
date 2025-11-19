@@ -1192,7 +1192,7 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  test("MissingTranslationVariablesTest: Verify that all required variables are passed when using translation keys with variables", () => {
+  it("MissingTranslationVariablesTest: Verify that all required variables are passed when using translation keys with variables", () => {
     let message = "The following translation keys are missing required variables:\r\n\r\n";
     let missingVariables = [];
 

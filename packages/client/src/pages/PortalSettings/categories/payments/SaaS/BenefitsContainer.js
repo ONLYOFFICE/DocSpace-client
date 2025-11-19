@@ -164,9 +164,7 @@ const BenefitsContainer = ({ t, features }) => {
               className="icons-container"
             />
             <div className="payment-benefits_feature">
-              <Text noSelect as="span">
-                {item.title}
-              </Text>
+              <Text as="span">{item.title}</Text>
               {item.id === FREE_BACKUP ? renderTooltip() : null}
             </div>
           </div>

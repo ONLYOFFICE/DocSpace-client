@@ -16,11 +16,12 @@
     "test:colors": "vitest run colors.test.js",
     "test:ascii": "vitest run ascii.test.js",
     "test:dependencies": "vitest run dependencies.test.js",
-    "open-report": "npx vite preview --open --outDir reports"
+    "open-report": "open-cli reports/tests-report.html"
   },
   "devDependencies": {
     "@vitest/ui": "4.0.7",
     "cross-env": "^7.0.3",
-    "vitest": "4.0.7"
+    "vitest": "4.0.7",
+    "open-cli": "^8.0.0"
   }
 }

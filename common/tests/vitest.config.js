@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { defineConfig } from "vitest/config";
+import HtmlStaticReporter from "./html-static-reporter";
 
 export default defineConfig({
   test: {
@@ -33,9 +34,6 @@ export default defineConfig({
     hookTimeout: 3600000,
     globals: false,
     include: ["test/**/*.test.js"],
-    reporters: ["verbose", "html"],
-    outputFile: {
-      html: "./reports/index.html",
-    },
+    reporters: ["verbose", new HtmlStaticReporter()],
   },
 });

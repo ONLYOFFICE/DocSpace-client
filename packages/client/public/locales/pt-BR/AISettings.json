@@ -1,5 +1,4 @@
 {
-  "AddMCPServer": "Adicionar servidor MCP",
   "AddMoreHeaders": "Adicionar mais cabeçalhos",
   "AIProviderSettingDescription": "Conecte seu próprio serviço de IA para desbloquear recursos avançados no {{productName}}. Depois de adicionado, ele estará acessível a todos os usuários nos chats de IA.",
   "APIKey": "Chave API",

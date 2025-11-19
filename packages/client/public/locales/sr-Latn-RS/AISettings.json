@@ -1,5 +1,4 @@
 {
-  "AddMCPServer": "Dodajte MCP Server",
   "AddMoreHeaders": "Dodajte još zaglavlja",
   "AIProviderSettingDescription": "Povežite sopstveni AI servis da biste otključali napredne funkcije u {{productName}}. Kada ga dodate, biće dostupan svim korisnicima u AI razgovorima.",
   "APIKey": "API ključ",

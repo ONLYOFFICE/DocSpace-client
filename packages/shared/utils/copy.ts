@@ -121,3 +121,13 @@ export const clearTextSelection = () => {
     if (selection) selection.removeAllRanges();
   }
 };
+
+export const handleCopy = (e: ClipboardEvent) => {
+  if (!e.clipboardData) return;
+
+  const selection = window.getSelection();
+  if (!selection || selection.toString().length === 0) return;
+
+  e.clipboardData.setData("text/plain", selection.toString());
+  e.preventDefault();
+};

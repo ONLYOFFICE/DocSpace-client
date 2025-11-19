@@ -352,32 +352,32 @@ const useSocketHelper = ({
     [setItems, setTotal],
   );
 
+  const handleSocketEvent = React.useEffectEvent((opt?: TOptSocket) => {
+    switch (opt?.cmd) {
+      case "create":
+        addItem(opt);
+        break;
+      case "update":
+        updateItem(opt);
+        break;
+      case "delete":
+        deleteItem(opt);
+        break;
+      default:
+    }
+  });
+
   React.useEffect(() => {
     if (initRef.current) return;
 
     initRef.current = true;
 
-    const callback = (opt?: TOptSocket) => {
-      switch (opt?.cmd) {
-        case "create":
-          addItem(opt);
-          break;
-        case "update":
-          updateItem(opt);
-          break;
-        case "delete":
-          deleteItem(opt);
-          break;
-        default:
-      }
-    };
-
-    SocketHelper?.on(SocketEvents.ModifyFolder, callback);
+    SocketHelper?.on(SocketEvents.ModifyFolder, handleSocketEvent);
 
     return () => {
-      socket?.off(SocketEvents.ModifyFolder, callback);
+      socket?.off(SocketEvents.ModifyFolder, handleSocketEvent);
     };
-  }, [addItem, updateItem, deleteItem]);
+  }, []);
 
   React.useEffect(() => {
     return () => {

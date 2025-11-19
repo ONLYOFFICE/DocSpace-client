@@ -1,5 +1,4 @@
 {
-  "AddAIProvider": "Dodaj dostawcę AI",
   "AddMCPServer": "Dodaj serwer MCP",
   "AddMoreHeaders": "Dodaj więcej nagłówków",
   "AIProviderSettingDescription": "Podłącz własną usługę AI, aby odblokować zaawansowane funkcje w {{productName}}. Po dodaniu będzie ona dostępna dla wszystkich użytkowników w czatach AI.",

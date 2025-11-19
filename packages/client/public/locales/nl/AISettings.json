@@ -1,5 +1,4 @@
 {
-  "AddAIProvider": "Voeg AI-provider toe",
   "AddMCPServer": "MCP-server toevoegen",
   "AddMoreHeaders": "Voeg meer koppen toe",
   "AIProviderSettingDescription": "Koppel uw eigen AI-service om geavanceerde functies in {{productName}} te ontgrendelen. Zodra deze is toegevoegd, is deze toegankelijk voor alle gebruikers in AI-chats.",

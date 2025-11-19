@@ -1,5 +1,4 @@
 {
-  "AddAIProvider": "AIプロバイダーを追加",
   "AddMCPServer": "MCPサーバーを追加",
   "AddMoreHeaders": "ヘッダーをさらに追加",
   "AIProviderSettingDescription": "{{productName}}の高度な機能を解放するには、独自のAIサービスを接続してください。追加後、AIチャットで全ユーザーが利用可能になります。",

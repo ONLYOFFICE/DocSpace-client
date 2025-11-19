@@ -1,5 +1,4 @@
 {
-  "AddAIProvider": "Thêm nhà cung cấp AI",
   "AddMCPServer": "Thêm Máy Chủ MCP",
   "AddMoreHeaders": "Thêm các tiêu đề khác",
   "AIProviderSettingDescription": "Kết nối dịch vụ AI của riêng bạn để mở khóa các tính năng nâng cao trong {{productName}}. Sau khi thêm, nó sẽ có thể truy cập được cho tất cả người dùng trong các cuộc trò chuyện AI.",

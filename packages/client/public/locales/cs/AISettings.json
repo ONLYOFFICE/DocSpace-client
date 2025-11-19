@@ -1,5 +1,4 @@
 {
-  "AddAIProvider": "Přidat poskytovatele AI",
   "AddMCPServer": "Přidat MCP server",
   "AddMoreHeaders": "Přidejte další hlavičky",
   "AIProviderSettingDescription": "Propojte vlastní AI službu a odemkněte pokročilé funkce v {{productName}}. Jakmile bude přidána, bude dostupná všem uživatelům v AI chatech.",

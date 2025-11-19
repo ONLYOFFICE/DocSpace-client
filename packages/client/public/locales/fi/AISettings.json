@@ -1,5 +1,4 @@
 {
-  "AddAIProvider": "Lisää AI-palveluntarjoaja",
   "AddMCPServer": "Lisää MCP-palvelin",
   "AddMoreHeaders": "Lisää otsikoita",
   "AIProviderSettingDescription": "Yhdistä oma tekoälypalvelusi avataksesi edistyneitä ominaisuuksia {{productName}}-palvelussa. Kun se on lisätty, se on kaikkien käyttäjien käytettävissä tekoälykeskusteluissa.",

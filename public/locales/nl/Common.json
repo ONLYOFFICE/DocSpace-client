@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "AIToolsHint": "AI-tools en -integraties",
+  "ChatHistory": "Chatgeschiedenis",
+  "ChatSuccessDeleted": "Chat succesvol verwijderd",
+  "ChooseAIAgentDescription": "Selecteer de agent waar u een gesprek met AI wilt voeren over het geselecteerde bestand. U kunt een bestaande agent kiezen.",
+  "CreateAgent": "Agent aanmaken",
+  "NothingToShowYet": "Nog niets te zien.",
+  "RoleAgentContentCreatorDescription": "Content creators kunnen bestanden aanmaken en bewerken in de agent, maar ze kunnen geen gebruikers beheren of toegang krijgen tot instellingen.",
+  "AddFiles": "Bestanden toevoegen"
 }

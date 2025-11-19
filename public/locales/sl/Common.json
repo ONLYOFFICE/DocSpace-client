@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "AIToolsHint": "Orodja in integracije umetne inteligence",
+  "ChatHistory": "Zgodovina klepeta",
+  "ChatSuccessDeleted": "Spletni klepetal je bil uspešno izbrisan.",
+  "ChooseAIAgentDescription": "Izberite agenta, kjer želite klepetati z umetno inteligenco o izbranem datoteko. Lahko izberete obstoječega agenta.",
+  "CreateAgent": "Ustvari agenta",
+  "NothingToShowYet": "Še ni nič za prikaz.",
+  "RoleAgentContentCreatorDescription": "Ustvarjalci vsebin lahko ustvarjajo in urejajo datoteke v agentu, vendar ne morejo upravljati uporabnikov ali dostopati do nastavitev.",
+  "AddFiles": "Dodaj datoteke"
 }

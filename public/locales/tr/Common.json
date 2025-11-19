@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "AIToolsHint": "Yapay zeka araçları ve entegrasyonları",
+  "ChatHistory": "Sohbet geçmişi",
+  "ChatSuccessDeleted": "Sohbet başarıyla silindi",
+  "ChooseAIAgentDescription": "Seçtiğiniz dosya hakkında yapay zeka ile sohbet etmek istediğiniz aracı seçin. Mevcut bir aracı seçebilirsiniz.",
+  "CreateAgent": "Ara madde oluştur",
+  "NothingToShowYet": "Henüz gösterilecek bir şey yok",
+  "RoleAgentContentCreatorDescription": "İçerik oluşturucular, dosyaları ajan içinde oluşturabilir ve düzenleyebilir, ancak kullanıcıları yönetemez veya ayarlara erişemezler.",
+  "AddFiles": "Dosya ekle"
 }

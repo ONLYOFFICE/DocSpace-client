@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "AIToolsHint": "AI-työkalut ja integraatiot",
+  "ChatHistory": "Chat-historia",
+  "ChatSuccessDeleted": "Chat poistettu onnistuneesti",
+  "ChooseAIAgentDescription": "Valitse agentti, jossa haluat keskustella valitun tiedoston kanssa tekoälyn kanssa. Voit valita olemassa olevan agentin.",
+  "CreateAgent": "Luo agentti",
+  "NothingToShowYet": "Ei ole vielä mitään näytettävää",
+  "RoleAgentContentCreatorDescription": "Sisällöntuottajat voivat luoda ja muokata tiedostoja agentissa, mutta he eivät voi hallita käyttäjiä tai käyttää asetuksia.",
+  "AddFiles": "Lisää tiedostot"
 }

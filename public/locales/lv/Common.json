@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "AIToolsHint": "AI rīki un integrācijas",
+  "ChatHistory": "Čata vēsture",
+  "ChatSuccessDeleted": "Čats veiksmīgi dzēsts",
+  "ChooseAIAgentDescription": "Izvēlieties aģentu, kurā vēlaties saņemt AI sarunu par atlasīto failu. Jūs varat izvēlēties esošu aģentu.",
+  "CreateAgent": "Izveidot aģentu",
+  "NothingToShowYet": "Vēl nav ko parādīt",
+  "RoleAgentContentCreatorDescription": "Saturs radītāji var izveidot un rediģēt failus aģentā, bet nevar pārvaldīt lietotājus vai piekļūt iestatījumiem.",
+  "AddFiles": "Pievienot failus"
 }

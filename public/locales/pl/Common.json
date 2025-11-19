@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "AIToolsHint": "Narzędzia AI i integracje",
+  "ChatHistory": "Historia czatu",
+  "ChatSuccessDeleted": "Usunięto czat pomyślnie",
+  "ChooseAIAgentDescription": "Wybierz agenta, z którym chcesz porozmawiać o wybranym pliku. Możesz wybrać istniejącego agenta.",
+  "CreateAgent": "Utwórz agenta",
+  "NothingToShowYet": "Nie ma jeszcze nic do wyświetlenia.",
+  "RoleAgentContentCreatorDescription": "Twórcy treści mogą tworzyć i edytować pliki w agencie, ale nie mogą zarządzać użytkownikami ani uzyskiwać dostępu do ustawień.",
+  "AddFiles": "Dodaj pliki"
 }

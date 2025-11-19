@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
-  "YourTurn": "A sua vez"
+  "YourTurn": "A sua vez",
+  "AIToolsHint": "Ferramentas e integrações de IA",
+  "ChatHistory": "Histórico do chat",
+  "ChatSuccessDeleted": "Chat excluído com sucesso",
+  "ChooseAIAgentDescription": "Selecione o agente onde você quer conversar com a IA sobre o arquivo selecionado. Você pode escolher um agente existente.",
+  "CreateAgent": "Criar agente",
+  "NothingToShowYet": "Ainda não há nada para mostrar.",
+  "RoleAgentContentCreatorDescription": "Criadores de conteúdo podem criar e editar arquivos no agente, mas não podem gerenciar usuários, ou acessar configurações.",
+  "AddFiles": "Adicionar arquivos"
 }

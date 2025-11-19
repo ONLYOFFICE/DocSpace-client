@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "AIToolsHint": "İSİ nəticələri və inteqrasiyalar",
+  "AddFiles": "Faylları əlavə et",
+  "ChatHistory": "Söhbət tarixində",
+  "ChatSuccessDeleted": "Söhbət uğurla silindi",
+  "ChooseAIAgentDescription": "Seçilmiş fayl haqqında süni intellektlə söhbət etmək istədiyiniz agenti seçin. Mövcud agentlərdən birini seçə bilərsiniz.",
+  "CreateAgent": "Agent yarat",
+  "NothingToShowYet": "Hələlik göstəriləcək heç nə yoxdur",
+  "RoleAgentContentCreatorDescription": "Kontent yaradıcıları agentdə faylları yarada və redaktə edə bilər, lakin onlar istifadəçiləri idarə edə və ya parametrlərə daxil ola bilməz."
 }

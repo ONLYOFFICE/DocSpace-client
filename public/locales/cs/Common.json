@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "AddFiles": "Přidat soubory",
+  "AIToolsHint": "Nástroje AI a integrace",
+  "ChatHistory": "Historie chatu",
+  "ChatSuccessDeleted": "Chat úspěšně smazán",
+  "ChooseAIAgentDescription": "Vyberte agenta, se kterým chcete chatovat s AI o vybraném souboru. Můžete si vybrat existujícího agenta.",
+  "CreateAgent": "Vytvořit agenta",
+  "NothingToShowYet": "Ještě nic k zobrazení.",
+  "RoleAgentContentCreatorDescription": "Tvorci obsahu mohou vytvářet a upravovat soubory v agentovi, ale nemohou spravovat uživatele ani přistupovat k nastavení."
 }

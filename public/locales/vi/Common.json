@@ -1062,5 +1062,13 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "AIToolsHint": "Các công cụ và tích hợp AI",
+  "ChatHistory": "Lịch trò chuyện",
+  "ChatSuccessDeleted": "Đã xóa cuộc trò chuyện thành công",
+  "ChooseAIAgentDescription": "Chọn agent mà bạn muốn trò chuyện với AI về tệp đã chọn. Bạn có thể chọn một agent hiện có.",
+  "CreateAgent": "Tạo tác nhân",
+  "NothingToShowYet": "Chưa có gì để hiển thị",
+  "RoleAgentContentCreatorDescription": "Nhà sáng tạo nội dung có thể tạo và chỉnh sửa tệp trong agent, nhưng không thể quản lý người dùng hoặc truy cập cài đặt.",
+  "AddFiles": "Thêm tệp tin"
 }

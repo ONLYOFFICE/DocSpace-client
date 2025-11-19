@@ -44,8 +44,9 @@
   box-sizing: border-box;
 
   &.empty {
-    max-height: fit-content;
+    height: auto;
     flex-grow: 0;
+    max-height: fit-content;
   }
 
   @include mixins.tablet-and-below {

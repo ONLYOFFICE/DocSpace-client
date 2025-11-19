@@ -64,26 +64,37 @@ const useInitMessages = (roomId: string | number) => {
   }, []);
 
   const initMessages = React.useCallback(async () => {
-    const currChatId =
-      new URLSearchParams(location.search).get("chat") ??
-      cacheChatId.get("chat");
+    try {
+      const currChatId =
+        new URLSearchParams(location.search).get("chat") ??
+        cacheChatId.get("chat");
 
-    if (!currChatId) {
-      setMessages([]);
-      setTotal(0);
-      setChatId("");
-      return;
+      if (!currChatId) {
+        setMessages([]);
+        setTotal(0);
+        setChatId("");
+        return;
+      }
+
+      cacheChatId.set("chat", currChatId);
+
+      const { items, total } = await getChatMessages(currChatId, 0);
+
+      const reversedItems = items.reverse();
+
+      setMessages(reversedItems);
+      setTotal(total > 100 ? 100 : total);
+      setChatId(currChatId);
+    } catch (error) {
+      console.error(error);
+      const currentSearch = new URLSearchParams(window.location.search);
+      currentSearch.delete("chat");
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}?${currentSearch.toString()}`,
+      );
     }
-
-    cacheChatId.set("chat", currChatId);
-
-    const { items, total } = await getChatMessages(currChatId, 0);
-
-    const reversedItems = items.reverse();
-
-    setMessages(reversedItems);
-    setTotal(total > 100 ? 100 : total);
-    setChatId(currChatId);
   }, [location.search]);
 
   return {

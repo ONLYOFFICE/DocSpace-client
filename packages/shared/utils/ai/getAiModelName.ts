@@ -26,18 +26,35 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+const MODEL_NAME_MAP: Record<string, string> = {
+  "openai/gpt-5.1": "GPT-5.1",
+  "anthropic/claude-haiku-4.5": "Claude Haiku 4.5",
+  "anthropic/claude-sonnet-4.5": "Claude Sonnet 4.5",
+  "anthropic/claude-opus-4.1": "Claude Opus 4.1",
+  "x-ai/grok-4": "Grok 4",
+  "google/gemini-2.5-flash": "Gemini 2.5 Flash",
+  "google/gemini-2.5-pro": "Gemini 2.5 Pro",
+  "qwen/qwen3-235b-a22b-2507": "Qwen 3",
+  "deepseek/deepseek-v3.1-terminus": "DeepSeek V3.1",
+  "qwen/qwen3-max": "Qwen 3 Max",
+};
+
 export const getAiModelName = (id: string) => {
+  if (MODEL_NAME_MAP[id]) {
+    return MODEL_NAME_MAP[id];
+  }
+
   switch (id) {
     case "gpt-5":
-      return "Gpt-5";
+      return "GPT-5";
     case "gpt-4.1":
-      return "Gpt-4.1";
+      return "GPT-4.1";
     case "deepseek-ai/DeepSeek-V3.1":
       return "DeepSeek-V3.1";
     case "Qwen/Qwen3-235B-A22B-fp8-tput":
       return "Qwen3";
     default:
-      if (id.includes("gpt-5.1")) return "Gpt-5.1";
+      if (id.includes("gpt-5.1")) return "GPT-5.1";
       if (id.includes("claude-haiku-4-5")) return "Claude Haiku 4.5";
       if (id.includes("claude-sonnet-4-5")) return "Claude Sonnet 4.5";
       if (id.includes("claude-opus-4-1")) return "Claude Opus 4.1";

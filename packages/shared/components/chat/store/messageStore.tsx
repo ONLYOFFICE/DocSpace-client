@@ -150,6 +150,17 @@ export default class MessageStore {
     this.setTotalMessages(0);
   };
 
+  setInitMessages = (
+    messages: TMessage[],
+    totalMessages: number,
+    chatId: string,
+  ) => {
+    this.setMessages(messages);
+    this.setStartIndex(totalMessages > 100 ? 100 : totalMessages);
+    this.setTotalMessages(totalMessages);
+    this.setCurrentChatId(chatId);
+  };
+
   fetchMessages = async (chatId: string) => {
     if (this.isGetMessageRequestRunning) return;
 
@@ -280,10 +291,14 @@ export default class MessageStore {
   };
 
   handleMetadata = (jsonData: string) => {
-    const { chatId } = JSON.parse(jsonData);
+    const { chatId, error } = JSON.parse(jsonData);
 
     if (chatId) {
       this.setCurrentChatId(chatId);
+    }
+
+    if (error) {
+      toastr.error(error as string);
     }
   };
 
@@ -594,6 +609,9 @@ export const MessageStoreContext = React.createContext<MessageStore>(
 export const MessageStoreContextProvider = ({
   children,
   roomId,
+  messages,
+  chatId,
+  total,
 }: TMessageStoreProps) => {
   const store = React.useMemo(() => new MessageStore(), []);
 
@@ -602,9 +620,8 @@ export const MessageStoreContextProvider = ({
   }, [store, roomId]);
 
   React.useEffect(() => {
-    const chatId = new URLSearchParams(window.location.search).get("chat");
-    if (chatId) store.fetchMessages(chatId);
-  }, [store]);
+    if (chatId) store.setInitMessages(messages, total, chatId);
+  }, [chatId, store, messages, total]);
 
   return (
     <MessageStoreContext.Provider value={store}>

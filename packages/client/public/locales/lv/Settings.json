@@ -133,6 +133,7 @@
   "ImportFromPortal": "Importēt no {{organizationName}} darbvietas",
   "ImportProcessingDescription": "Notiek datu migrācija. Uzgaidiet.",
   "ImportSectionDescription": "Atlasiet sadaļas importēšanai. Tās būs redzamas attiecīgajās {{productName}} sadaļās.",
+  "ImportSectionDisabled": "Lai importētu {{importSectionName}}, vispirms aktivizējiet \"<1>{{sectionName}}</1>\" opciju.",
   "IncludedInBusiness": "Iekļauts Biznesa plānā",
   "IntegrationRequest": "Vai {{organizationName}} {{productName}} trūkst noderīgas integrācijas vai komponenta? Atstājiet pieprasījumu mūsu komandai, un mēs to izskatīsim.",
   "InvitationSettings": "Ielūgumu iestatījumi",

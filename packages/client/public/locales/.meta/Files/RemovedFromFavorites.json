@@ -3,7 +3,7 @@
   "content": "Removed from favorites",
   "content_en_sha1_hash": "c259d9197c21c066bff3db7e0f183ec9c293053c",
   "created_at": "2025-05-19T21:30:56.030Z",
-  "updated_at": "2025-11-13T14:53:11.080Z",
+  "updated_at": "2025-11-18T14:41:49.607Z",
   "comment": {
     "text": "This translation key \"RemovedFromFavorites\" is used to display a message when an item is removed from favorites. It is typically displayed as a success toast after removing an item from favorites in the UI.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/HOCs/withHotkeys.js",
-      "line_number": 386,
+      "line_number": 388,
       "context": "if (isRecentFolder) return;\n \n if (isFavoritesFolder) {\n const selection = getSelection();\n setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n \n return;\n }",
       "module": "/packages/client"
     },
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 467,
+      "line_number": 468,
       "context": "this.filesActionsStore\n .setFavoriteAction(action, items)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"MarkedAsFavorite\"))\n : toastr.success(t(\"RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };\n \n lockFile = (item, t) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2458,
+      "line_number": 2457,
       "context": "label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesFillReactSvgUrl,\n onClick: () => {\n this.setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n },\n }) */\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     }

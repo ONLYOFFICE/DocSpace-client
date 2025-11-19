@@ -133,6 +133,7 @@
   "ImportFromPortal": "Імпорт з {{organizationName}} Workspace",
   "ImportProcessingDescription": "Виконується перенесення даних. Зачекайте.",
   "ImportSectionDescription": "Виберіть розділи для імпорту. Вони з’являться у відповідних розділах простору {{productName}}.",
+  "ImportSectionDisabled": "Щоб імпортувати {{importSectionName}}, спочатку увімкніть опцію \"<1>{{sectionName}}</1>\".",
   "IncludedInBusiness": "Входить до плану Business",
   "IntegrationRequest": "Не вистачає корисної інтеграції чи компонента в {{organizationName}} {{productName}}? Залиште заявку нашій команді, і ми її розглянемо.",
   "InvitationSettings": "Налаштування запрошень",

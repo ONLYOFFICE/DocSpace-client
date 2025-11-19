@@ -162,7 +162,7 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
     },
     {
       id: "and-more",
-      title: t("AndMore"),
+      title: t("Services:AndMore"),
       description: t("NewAIfeatures"),
       icon: <MoreIcon />,
     },

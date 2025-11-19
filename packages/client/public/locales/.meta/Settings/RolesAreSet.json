@@ -3,7 +3,7 @@
   "content": "Roles already set for the selected users.",
   "content_en_sha1_hash": "257dd5e7c55b84f09c6e056798f95277ffabdfb9",
   "created_at": "2025-05-19T21:30:52.435Z",
-  "updated_at": "2025-10-03T10:07:11.706Z",
+  "updated_at": "2025-11-18T14:41:49.921Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that roles have already been set for selected users. It appears as a label in a UI component to inform users about their role settings.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
       "line_number": 46,
-      "context": "organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans",
+      "context": "organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
       "line_number": 46,
-      "context": "organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans",
+      "context": "organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>",
       "module": "/packages/client"
     }
   ],

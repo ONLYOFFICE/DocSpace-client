@@ -133,6 +133,7 @@
   "ImportFromPortal": "{{organizationName}} Çalışma Alanından içe aktar",
   "ImportProcessingDescription": "Veri migrasyonu devam ediyor. Lütfen bekleyin.",
   "ImportSectionDescription": "İçe aktarma için bölümleri seçin. {{productName}}’in ilgili bölümlerinde görüneceklerdir.",
+  "ImportSectionDisabled": "{{importSectionName}}'yi içe aktarmak için öncelikle \"<1>{{sectionName}}</1>\" seçeneğini etkinleştirin.",
   "IncludedInBusiness": "Business planına dahil",
   "IntegrationRequest": "{{organizationName}} {{productName}}'te yararlı bir entegrasyon veya bileşen mi eksik? Ekibimize bir talep bırakın, bununla ilgilenelim.",
   "InvitationSettings": "Davet Ayarları",

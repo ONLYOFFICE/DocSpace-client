@@ -111,6 +111,7 @@ import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 class FilesActionStore {
   settingsStore;
@@ -1322,8 +1323,6 @@ class FilesActionStore {
     const updatingFolderList = (elems, isPin = false) => {
       if (elems.length === 0) return;
 
-      const itemCount = { count: elems.length };
-
       let translationForOneItem;
       let translationForSeverals;
 
@@ -1332,13 +1331,13 @@ class FilesActionStore {
           ? t("AIAgentPinned")
           : t("AIAgentUnpinned");
         translationForSeverals = isPin
-          ? t("AIAgentsPinned", { ...itemCount })
-          : t("AIAgentsUnpinned", { ...itemCount });
+          ? t("AIAgentsPinned")
+          : t("AIAgentsUnpinned");
       } else {
         translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
         translationForSeverals = isPin
-          ? t("RoomsPinned", { ...itemCount })
-          : t("RoomsUnpinned", { ...itemCount });
+          ? t("RoomsPinned", { count: elems.length })
+          : t("RoomsUnpinned", { count: elems.length });
       }
 
       toastr.success(
@@ -2684,7 +2683,7 @@ class FilesActionStore {
         return;
       }
 
-      if (fileItemsList && enablePlugins) {
+      if (!isAIAgents() && fileItemsList && enablePlugins) {
         let currPluginItem = null;
 
         fileItemsList.forEach((i) => {

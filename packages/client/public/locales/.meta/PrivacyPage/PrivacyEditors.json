@@ -3,7 +3,7 @@
   "content": "Don't have {{organizationName}} Desktop Editors?",
   "content_en_sha1_hash": "69a48202776287e511596cd90337409ffe14d506",
   "created_at": "2025-05-19T21:30:53.430Z",
-  "updated_at": "2025-05-24T06:18:12.566Z",
+  "updated_at": "2025-11-18T14:41:50.069Z",
   "comment": {
     "text": "The \"Don't have {{organizationName}} Desktop Editors?\" translation key is used to display a question message when the user does not have permission to access desktop editors. It appears in a UI element that prompts the user to grant or confirm their permissions for specific actions.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
-      "line_number": 135,
-      "context": "setIsDisabled(true);\n checkProtocol(location.search.split(\"=\")[1])\n .then(() => setIsDisabled(false))\n .catch(() => {\n setIsDisabled(false);\n toastr.info(t(\"PrivacyEditors\"));\n });\n };\n \n return !tReady ? (\n <Loader className=\"pageLoader\" type=\"rombs\" size=\"40px\" />",
+      "line_number": 136,
+      "context": "checkProtocol(location.search.split(\"=\")[1])\n .then(() => setIsDisabled(false))\n .catch(() => {\n setIsDisabled(false);\n toastr.info(\n t(\"PrivacyEditors\", {\n organizationName: logoText,\n }),\n );\n });\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
-      "line_number": 135,
-      "context": "setIsDisabled(true);\n checkProtocol(location.search.split(\"=\")[1])\n .then(() => setIsDisabled(false))\n .catch(() => {\n setIsDisabled(false);\n toastr.info(t(\"PrivacyEditors\"));\n });\n };\n \n return !tReady ? (\n <Loader className=\"pageLoader\" type=\"rombs\" size=\"40px\" />",
+      "line_number": 136,
+      "context": "checkProtocol(location.search.split(\"=\")[1])\n .then(() => setIsDisabled(false))\n .catch(() => {\n setIsDisabled(false);\n toastr.info(\n t(\"PrivacyEditors\", {\n organizationName: logoText,\n }),\n );\n });\n };",
       "module": "/packages/client"
     }
   ],

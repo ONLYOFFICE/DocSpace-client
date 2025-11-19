@@ -3,7 +3,7 @@
   "content": "Invite contacts",
   "content_en_sha1_hash": "43f0bde391682834922b0b6b0e4c82714e94586e",
   "created_at": "2025-05-19T21:30:45.983Z",
-  "updated_at": "2025-11-13T07:58:07.677Z",
+  "updated_at": "2025-11-18T14:41:49.645Z",
   "comment": {
     "text": "The translation key \"InviteContacts\" is used to display the phrase \"Invite contacts\". It appears as a button label on a UI element, allowing users to add new contact information.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 286,
+      "line_number": 306,
       "context": "t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(\n t(\"Common:InviteContacts\"),\n t(\"EmptyView:InviteUsersOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n );",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2074,
+      "line_number": 2077,
       "context": "disabled: !isTemplateOwner,\n },\n {\n id: \"option_invite-users-to-room\",\n key: \"invite-users-to-room\",\n label: t(\"Common:InviteContacts\"),\n icon: PersonReactSvgUrl,\n onClick: (e) => this.onClickInviteUsers(e, item.roomType),\n disabled: false,\n action: item.id,\n },",
       "module": "/packages/client"
     }

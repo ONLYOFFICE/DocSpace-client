@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import equal from "fast-deep-equal/react";
@@ -88,6 +88,10 @@ const providerTypes: TOption[] = [
     key: ProviderType.OpenAiCompatible,
     label: getAiProviderLabel(ProviderType.OpenAiCompatible),
   },
+  {
+    key: ProviderType.OpenRouter,
+    label: getAiProviderLabel(ProviderType.OpenRouter),
+  },
 ];
 
 const getSelectedOptionByProviderType = (type?: ProviderType) => {
@@ -129,6 +133,17 @@ const AddUpdateDialogComponent = ({
     variant === "update",
   );
   const [isRequestRunning, setIsRequestRunning] = useState(false);
+
+  const valuesByProvider = useRef<
+    Record<ProviderType, { title: string; url: string; key: string }>
+  >({
+    [ProviderType.OpenAi]: { title: "", url: "", key: "" },
+    [ProviderType.Anthropic]: { title: "", url: "", key: "" },
+    [ProviderType.TogetherAi]: { title: "", url: "", key: "" },
+    [ProviderType.OpenAiCompatible]: { title: "", url: "", key: "" },
+    [ProviderType.OpenRouter]: { title: "", url: "", key: "" },
+  });
+
   const initFormData = useRef({
     selectedOption,
     providerTitle,
@@ -148,10 +163,29 @@ const AddUpdateDialogComponent = ({
   const canSubmit = requiredFieldsFilled && hasChanges;
 
   const onSelectProvider = (option: TOption) => {
+    const currentProviderType = selectedOption.key as ProviderType;
+    const newProviderType = option.key as ProviderType;
+
+    valuesByProvider.current[currentProviderType] = {
+      title: providerTitle,
+      url: providerUrl,
+      key: providerKey,
+    };
+
     setSelectedOption(option);
-    setProviderUrl(
-      getURLByProviderType(option.key as ProviderType, aiProviderTypesWithUrls),
-    );
+
+    const savedValues = valuesByProvider.current[newProviderType];
+    if (savedValues.title || savedValues.url || savedValues.key) {
+      setProviderTitle(savedValues.title);
+      setProviderUrl(savedValues.url);
+      setProviderKey(savedValues.key);
+    } else {
+      setProviderTitle("");
+      setProviderUrl(
+        getURLByProviderType(newProviderType, aiProviderTypesWithUrls),
+      );
+      setProviderKey("");
+    }
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -220,6 +254,16 @@ const AddUpdateDialogComponent = ({
       aiProviderTypesWithUrls.find((p) => p.type === item.key),
     );
   }, [aiProviderTypesWithUrls]);
+
+  useEffect(() => {
+    if (providerData?.type) {
+      valuesByProvider.current[providerData.type] = {
+        title: providerData.title || "",
+        url: providerData.url || "",
+        key: "",
+      };
+    }
+  }, [providerData]);
 
   return (
     <ModalDialog

@@ -3,7 +3,7 @@
   "content": "Change the agent owner",
   "content_en_sha1_hash": "c2076e53359b7dba4156826f419c8405ea1726a4",
   "created_at": "2025-10-27T16:14:30.035Z",
-  "updated_at": "2025-10-27T17:59:24.582Z",
+  "updated_at": "2025-11-18T14:41:49.829Z",
   "comment": {
     "text": "This translation key displays a label indicating the ability to change the owner of an agent. It's used in a panel, likely a button or similar UI element, allowing users to transfer ownership. Translators should consider the context of agent ownership transfer.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 120,
+      "line_number": 122,
       "context": "}, []);\n \n const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Files:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     }

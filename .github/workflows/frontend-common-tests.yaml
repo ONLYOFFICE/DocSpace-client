@@ -334,6 +334,7 @@ jobs:
         continue-on-error: true
         env:
           CI: true
+          POOL: "forks"
 
       # Check test results
       - name: Check test results

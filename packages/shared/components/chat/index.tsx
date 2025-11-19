@@ -24,12 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { observer } from "mobx-react";
 
 import { MessageStoreContextProvider } from "./store/messageStore";
 import { ChatStoreContextProvider, useChatStore } from "./store/chatStore";
 
-import { ChatProps } from "./Chat.types";
+import type { ChatProps } from "./Chat.types";
 
 import ChatContainer from "./components/chat-container";
 import ChatHeader from "./components/chat-header";
@@ -55,10 +56,22 @@ const Chat = observer(
     standalone = false,
     aiReady = false,
     getResultStorageId,
+    setIsAIAgentChatDelete,
+    setDeleteDialogVisible,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
     const showEmptyScreen = !isLoadingChat && !aiReady && !currentChat;
+
+    React.useEffect(() => {
+      window.dispatchEvent(
+        new CustomEvent("select-chat", {
+          detail: {
+            chatId: currentChat?.id,
+          },
+        }),
+      );
+    }, [currentChat?.id]);
 
     return (
       <>
@@ -69,6 +82,8 @@ const Chat = observer(
           getResultStorageId={getResultStorageId}
           roomId={roomId}
           aiReady={aiReady}
+          setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+          setDeleteDialogVisible={setDeleteDialogVisible}
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen
@@ -109,6 +124,8 @@ const ChatWrapper = (props: ChatProps) => {
 
     initChats,
 
+    messagesSettings,
+
     isAdmin = false,
     standalone = false,
     aiReady = false,
@@ -129,7 +146,7 @@ const ChatWrapper = (props: ChatProps) => {
 
   return (
     <ChatStoreContextProvider roomId={roomId} {...initChats}>
-      <MessageStoreContextProvider roomId={roomId}>
+      <MessageStoreContextProvider roomId={roomId} {...messagesSettings}>
         <ChatContainer>
           <Chat {...props} isLoadingChat={isLoadingChat} />
         </ChatContainer>

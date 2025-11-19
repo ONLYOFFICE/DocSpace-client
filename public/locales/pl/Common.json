@@ -785,7 +785,6 @@
   "Reviewing": "recenzowanie",
   "RevokeLink": "Unieważnij link",
   "Role": "Rola",
-  "RoleAgentManagerDescription": "Kierownicy agentów mogą zarządzać przydzielonymi agentami, zapraszać nowych użytkowników i przydzielać im role na niższym poziomie.",
   "RoleCommentator": "Komentujący",
   "RoleCommentatorDescription": "Operacje na istniejących plikach: przeglądanie, komentowanie.",
   "RoleContentCreatorDescription": "Twórcy treści mogą tworzyć oraz edytować pliki w pokoju, ale nie mogą zarządzać użytkownikami i nie mają dostępu do ustawień.",

@@ -787,7 +787,6 @@
   "Reviewing": "revisión",
   "RevokeLink": "Revocar enlace",
   "Role": "Rol",
-  "RoleAgentManagerDescription": "Los gerentes de agentes pueden gestionar los agentes asignados, invitar a nuevos usuarios y asignar funciones por debajo de su nivel.",
   "RoleCommentator": "Comentarista",
   "RoleCommentatorDescription": "Operaciones con archivos existentes: visualización, comentarios.",
   "RoleContentCreatorDescription": "Los creadores de contenido pueden crear y editar archivos en la sala, pero no pueden gestionar usuarios ni acceder a la configuración. ",

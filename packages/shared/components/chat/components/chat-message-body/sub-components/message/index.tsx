@@ -149,7 +149,9 @@ const Message = ({
     <div key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}>
       {message.contents.map((c, mId) => {
         if (c.type === ContentType.Text)
-          return <Markdown key={c.text} chatMessage={c.text} />;
+          return (
+            <Markdown key={c.text} chatMessage={c.text} isFirst={mId === 0} />
+          );
 
         if (c.type === ContentType.Tool)
           return <ToolCallMessage key={`${c.name}_${mId * 2}`} content={c} />;

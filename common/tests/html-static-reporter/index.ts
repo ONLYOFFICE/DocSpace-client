@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Reporter, TestModule, SerializedError } from 'vitest/node';
-import { writeFileSync } from 'fs'
+import { writeFileSync, mkdirSync } from 'fs'
 import { resolve } from 'path'
 import { HtmlReportGenerator } from './html-report-generator'
 
@@ -101,7 +101,9 @@ export default class HtmlStaticReporter implements Reporter {
     const generator = new HtmlReportGenerator(this.passedModules, this.errors, this.unhandledErrors)
     const html = generator.generateHtml()
     const reportPath = resolve(process.cwd(), 'reports/tests-report.html')
+    const reportDir = resolve(process.cwd(), 'reports')
 
+    mkdirSync(reportDir, { recursive: true })
     writeFileSync(reportPath, html, 'utf-8')
     console.log(`Test report generated: ${reportPath}`)
   }

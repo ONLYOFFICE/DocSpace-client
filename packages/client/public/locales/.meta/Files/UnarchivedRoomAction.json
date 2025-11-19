@@ -3,7 +3,7 @@
   "content": "The room '{{name}}' is unarchived.",
   "content_en_sha1_hash": "d68b761bc18ae09882e723fde8fedb83e39a13de",
   "created_at": "2025-05-19T21:30:56.275Z",
-  "updated_at": "2025-11-17T11:52:35.749Z",
+  "updated_at": "2025-11-18T14:41:50.133Z",
   "comment": {
     "text": "The \"UnarchivedRoomAction\" translation key is used to display a success message when a room is successfully unarchived in the UI, typically after a button or action is clicked. The text will replace \"{name}\" with the actual room name or title. It appears in the application's feedback system, such as toastr notifications.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1567,
+      "line_number": 1565,
       "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"UnarchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"UnarchivedRoomAction\", { name: folders[0].title })\n : t(\"UnarchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n })\n .then(() => setSelected(\"close\"))",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1567,
+      "line_number": 1565,
       "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"UnarchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"UnarchivedRoomAction\", { name: folders[0].title })\n : t(\"UnarchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n })\n .then(() => setSelected(\"close\"))",
       "module": "/packages/client"
     }

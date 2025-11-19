@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatDescription": "ඔබ <strong>{{chatName}}</strong> මකා දැමීමට ආසන්නයි.\nසියලුම පණිවිඩ සහ කතාබස් ඉතිහාසය ස්ථිරවම ඉවත් කරනු ලබන අතර ප්‍රතිසාධනය කළ නොහැක.",
+  "DeleteAIAgentChatTitle": "කතාබහ මකන්නද?",
+  "DeleteAIAgentDescription": "නියෝජිතයා <strong>\"{{agentName}}\"</strong> ස්ථිරවම මකා දැමෙනු ඇත. සියලුම දත්ත සහ පරිශීලක ප්‍රවේශයන් නැති වී යනු ඇත.",
+  "DeleteAIAgentTitle": "මෙම නියෝජිතයා මකන්නද?",
+  "DeleteAIAgentWarning": "මට ප්‍රතිවිපාක තේරෙනවා, ඒ නිසා නියෝජිතයා මකා දැමීමට අවශ්‍යයි.",
   "DeleteAllGroupDescription": "තෝරාගත් සමූහ ඉවත් කරනු ලැබේ. එම සමූහවල සිටින පරිශීලකයින් {{productName}} වෙතින් ඉවත් කරනු නොලැබේ. ඔබට ඉදිරියට යාමට අවශ්‍යද?",
   "DeleteAllGroupsTitle": "ප්‍රජාව ඉවත් කරන්න",
   "DeleteFiles": "ඔබ <strong>ගොනු ({{filesCount}})</strong> {{trashSection}} වෙත ගෙන යාමට ආසන්නයි.",

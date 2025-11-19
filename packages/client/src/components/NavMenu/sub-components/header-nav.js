@@ -70,7 +70,7 @@ const HeaderNav = ({
   getActions,
   hideProfileMenu,
 }) => {
-  const { t } = useTranslation(["Common", "About"]);
+  const { t } = useTranslation(["Common"]);
   const userActions = useMemo(() => getActions(t), [getActions, t]);
 
   return (

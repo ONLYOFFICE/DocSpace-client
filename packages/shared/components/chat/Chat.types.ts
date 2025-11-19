@@ -114,6 +114,7 @@ export type MessageFilesProps = {
 export type MessageMarkdownFieldProps = {
   chatMessage: string;
   propLanguage?: string;
+  isFirst?: boolean;
 };
 
 export type MessageToolCallProps = {

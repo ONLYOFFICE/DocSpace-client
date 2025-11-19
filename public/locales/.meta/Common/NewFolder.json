@@ -3,7 +3,7 @@
   "content": "New folder",
   "content_en_sha1_hash": "a711999b72aaf4c3d8e7523718231bf1c8d7cb4d",
   "created_at": "2025-05-19T21:30:46.744Z",
-  "updated_at": "2025-11-17T11:52:35.372Z",
+  "updated_at": "2025-11-18T14:41:49.854Z",
   "comment": {
     "text": "The \"NewFolder\" translation key is used to display the label for a new folder creation option in the UI. It will appear on a button or dialog that allows users to create a new folder, as seen in the code snippet from /packages/client/src/helpers/filesUtils.js and /packages/shared/selectors/Files/hooks/useFilesHelper.ts.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3228,
+      "line_number": 3240,
       "context": "};\n \n const createNewFolder = {\n id: \"personal_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:NewFolder\"),\n onClick: () => this.onCreate(),\n icon: CatalogFolderReactSvgUrl,\n };\n \n const uploadFiles = {",
       "module": "/packages/client"
     },

@@ -1845,6 +1845,8 @@ class FilesStore {
 
         let currentFolder = data.current;
 
+        let isChatTab = false;
+
         let navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive, AIAgents } = FolderType;
@@ -1974,6 +1976,7 @@ class FilesStore {
             isRoom: true,
           };
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
+          isChatTab = true;
           this.aiRoomStore.setCurrentTab("chat");
           this.aiRoomStore.setKnowledgeId(null);
           this.aiRoomStore.setResultId(null);
@@ -2038,12 +2041,14 @@ class FilesStore {
             this.setIsEmptyPage(isEmptyList);
           }
 
-          this.setFolders(
-            isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.folders,
-          );
-          this.setFiles(
-            isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.files,
-          );
+          if (!isChatTab) {
+            this.setFolders(
+              isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.folders,
+            );
+            this.setFiles(
+              isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.files,
+            );
+          }
         });
 
         if (clearFilter) {

@@ -3,7 +3,7 @@
   "content": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>",
   "content_en_sha1_hash": "d3fb9b35c837c5329abc87569daecaa83b8fff21",
   "created_at": "2025-05-19T21:30:54.114Z",
-  "updated_at": "2025-10-01T08:28:21.892Z",
+  "updated_at": "2025-11-18T14:41:49.666Z",
   "comment": {
     "text": "This translation key describes a message displayed to users when they try to upload files or create new folders and do not have enough disk space. The message directs them to manage quota per user in Storage management settings. It appears as a tooltip on the QuotasBar component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 161,
+      "line_number": 164,
       "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"PersonalUserQuotaAdminsDescription\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }

@@ -30,6 +30,7 @@ const MODEL_NAME_MAP: Record<string, string> = {
   "openai/gpt-5.1": "GPT-5.1",
   "anthropic/claude-haiku-4.5": "Claude Haiku 4.5",
   "anthropic/claude-sonnet-4.5": "Claude Sonnet 4.5",
+  "anthropic/claude-opus-4.1": "Claude Opus 4.1",
   "x-ai/grok-4": "Grok 4",
   "google/gemini-2.5-flash": "Gemini 2.5 Flash",
   "google/gemini-2.5-pro": "Gemini 2.5 Pro",

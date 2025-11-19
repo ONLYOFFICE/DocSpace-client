@@ -32,11 +32,15 @@ import type { TMessage } from "../../../api/ai/types";
 
 const cacheChatId = new Map<string, string>();
 
-const useInitMessages = () => {
+const useInitMessages = (roomId: string | number) => {
   const [messages, setMessages] = React.useState<TMessage[]>([]);
   const [chatId, setChatId] = React.useState("");
   const [total, setTotal] = React.useState(0);
   const location = useLocation();
+
+  React.useEffect(() => {
+    if (!roomId) cacheChatId.delete("chat");
+  }, [roomId]);
 
   React.useEffect(() => {
     const onCacheChat = (e: Event) => {

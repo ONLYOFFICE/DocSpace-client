@@ -339,6 +339,8 @@
         display: flex;
         flex-direction: row;
 
+        max-width: calc(100% - 24px);
+
         span {
           color: var(--chat-file-item-exst-color);
         }

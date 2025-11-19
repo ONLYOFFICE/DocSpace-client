@@ -56,22 +56,19 @@ const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
               style={{ maxWidth: "300px" }}
             >
               <ReactSVG
-                src={getIcon(24, file.fileExst!)}
+                src={getIcon(24, file.fileExst ?? "")}
                 className={styles.filesListItemIcon}
               />
 
               <div className={styles.filesListItemInfo}>
-                <div
-                  className={styles.filesListItemInfoText}
-                  style={{ maxWidth: "100%" }}
-                >
+                <div className={styles.filesListItemInfoText}>
                   <Text
                     fontSize="12px"
                     lineHeight="16px"
                     fontWeight={600}
                     truncate
                   >
-                    {file.title}
+                    {file.title?.replaceAll(file?.fileExst || "", "")}
                   </Text>
                   <Text
                     fontSize="12px"

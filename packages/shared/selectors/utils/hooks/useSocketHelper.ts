@@ -46,6 +46,7 @@ import {
 
 import { UseSocketHelperProps } from "../types";
 import { SettingsContext } from "../contexts/Settings";
+import socket from "../../../utils/socket";
 
 const useSocketHelper = ({
   disabledItems,
@@ -356,7 +357,7 @@ const useSocketHelper = ({
 
     initRef.current = true;
 
-    SocketHelper?.on(SocketEvents.ModifyFolder, (opt?: TOptSocket) => {
+    const callback = (opt?: TOptSocket) => {
       switch (opt?.cmd) {
         case "create":
           addItem(opt);
@@ -369,7 +370,13 @@ const useSocketHelper = ({
           break;
         default:
       }
-    });
+    };
+
+    SocketHelper?.on(SocketEvents.ModifyFolder, callback);
+
+    return () => {
+      socket?.off(SocketEvents.ModifyFolder, callback);
+    };
   }, [addItem, updateItem, deleteItem]);
 
   React.useEffect(() => {

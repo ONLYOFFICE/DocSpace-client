@@ -3,7 +3,7 @@
   "content": "Click Open <1>{{organizationName}} Desktop</1> in the browser dialog to work with the encrypted documents.",
   "content_en_sha1_hash": "298ae4c705879cda5990adf8297f7850d3bb68c8",
   "created_at": "2025-05-19T21:30:53.424Z",
-  "updated_at": "2025-05-24T06:21:20.647Z",
+  "updated_at": "2025-11-18T14:41:50.070Z",
   "comment": {
     "text": "This translation key is used for a button label that displays instructions on how to open an encrypted document from the browser dialog. It appears in the Private Rooms Page and should be translated to facilitate understanding of this feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
-      "line_number": 167,
+      "line_number": 171,
       "context": "</Text>\n \n <Text as=\"div\" textAlign=\"center\" fontSize=\"20px\" fontWeight={300}>\n <Trans\n t={t}\n i18nKey=\"PrivacyClick\"\n ns=\"PrivacyPage\"\n values={{\n organizationName: logoText,\n }}\n components={{",
       "module": "/packages/client"
     }

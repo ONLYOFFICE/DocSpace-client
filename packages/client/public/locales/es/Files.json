@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Plantilla de sala <1>«{{title}}»</1> guardada",
   "ScheduledTrashMove": "{{date}} se moverá a {{sectionName}}",
   "SendByEmail": "Enviar por correo electrónico",
+  "SharedBy": "Compartido por",
   "ShareFolder": "Compartir carpeta",
   "ShareFolderDescription": "Se creará una nueva sala y allí se copiará todo el contenido de la carpeta seleccionada. Luego, puede invitar a otros usuarios a colaborar en los archivos dentro de una sala.",
   "SharePDFFormModalDescription": "Se creará una nueva sala y allí se copiará el formulario PDF. Luego puede invitar a otros usuarios a rellenar el formulario en la sala.",

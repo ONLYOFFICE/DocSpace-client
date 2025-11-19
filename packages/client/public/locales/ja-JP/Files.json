@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "ルームテンプレート <1>«{{title}}»</1> が保存されました",
   "ScheduledTrashMove": "{{date}} は {{sectionName}} に移動されます",
   "SendByEmail": "メールで送信",
+  "SharedBy": "共有者",
   "ShareFolder": "共有フォルダ",
   "ShareFolderDescription": "新しいルームが作成され、選択したフォルダのすべての内容がそこにコピーされます。その後、あなたはルーム内のファイル上で共同作業を行うために他のユーザーを招待することができます。",
   "SharePDFFormModalDescription": "新しいルームが作成され、PDFフォームがそこにコピーされます。他のユーザーを招待して、そのルームでフォームに記入してもらうことができます。",

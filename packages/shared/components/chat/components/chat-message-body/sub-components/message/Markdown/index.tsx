@@ -47,6 +47,7 @@ import { createMarkdownComponents } from "./Markdown.utils";
 const MarkdownField = ({
   chatMessage,
   propLanguage,
+  isFirst,
 }: MessageMarkdownFieldProps) => {
   // Process the chat message to handle <think> tags
   // const processedChatMessage = preprocessChatMessage(chatMessage);
@@ -65,7 +66,7 @@ const MarkdownField = ({
   return (
     <div style={{ width: "100%" }} className={styles.markdownField}>
       {thinkBlock ? (
-        <Think isSingleContent={splitedMsg.length === 1}>
+        <Think isSingleContent={splitedMsg.length === 1} isFirst={isFirst}>
           <Markdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}

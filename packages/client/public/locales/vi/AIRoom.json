@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "Cơ sở kiến ​​thức hiện đang bị vô hiệu hóa. Để kích hoạt tìm kiếm ngữ nghĩa và xử lý tài liệu cho các tác nhân AI, vui lòng liên hệ với quản trị viên {{productName}} của bạn để cấu hình nhà cung cấp nhúng.",
   "MCP": "Công cụ MCP cho phòng này",
   "MCPDescriptionServers": "Sử dụng các máy chủ MCP được kết nối bởi quản trị viên để nâng cao trải nghiệm trò chuyện với AI. Các máy chủ MCP có thể hỗ trợ trích xuất dữ liệu, tóm tắt, gợi ý thông minh, v.v.",
-  "ModelDescription": "Chọn nhà cung cấp AI và mô hình sẽ được sử dụng trong các cuộc trò chuyện của phòng này. Cài đặt này là bắt buộc và áp dụng cho tất cả người tham gia.",
   "ResponseQualityNode": "<1>Lưu ý:</1> Chất lượng phản hồi có thể khác nhau tùy theo mô hình; nên sử dụng các mô hình mới hơn để có kết quả tốt nhất.",
   "ResultStorage": "Lưu trữ kết quả",
   "UploadFilesDevice": "Tải lên tệp từ thiết bị cá nhân của bạn.",

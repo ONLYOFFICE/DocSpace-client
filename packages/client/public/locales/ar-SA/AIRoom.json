@@ -10,7 +10,6 @@
   "KnowledgeDescription": "قوموا بتحميل ملفات من جهاز الحاسوب الخاص بكم أو {{productName}} لتوفير سياق أفضل للدردشة. ملاحظة: قد يتم عرض بعض أو كل المحتوى الذي تم تحميله أثناء المحادثة.",
   "KnowledgeSelectIn": "تحديد في {{productName}}",
   "MCP": "أدوات MCP لهذه الغرفة",
-  "ModelDescription": "حددوا مزود ونموذج الذكاء الاصطناعي لاستخدامه في دردشات هذه الغرفة. هذا الإعداد إلزامي وينطبق على جميع المشاركين.",
   "ResultStorage": "تخزين النتائج",
   "UploadFilesDevice": "تحميل الملفات من جهازكم الشخصي",
   "UploadFilesPortal": "تحميل الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}"

@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "지식 베이스는 현재 비활성화되어 있습니다. AI 에이전트의 의미론적 검색 및 문서 처리를 활성화하려면 {{productName}} 관리자에게 임베딩 제공자 구성을 문의하십시오.",
   "MCP": "이 방을 위한 MCP 도구들",
   "MCPDescriptionServers": "관리자가 연결한 MCP 서버를 사용하여 AI와의 채팅 경험을 향상시키세요. MCP 서버는 데이터 추출, 요약, 스마트 제안 등을 지원할 수 있습니다.",
-  "ModelDescription": "이 방 채팅에 사용할 AI 제공업체 및 모델을 선택하세요. 이 설정은 필수이며 모든 참가자에게 적용됩니다.",
   "ResponseQualityNode": "<1>참고:</1> 응답 품질은 모델에 따라 다를 수 있습니다. 최상의 결과를 얻으려면 최신 모델을 사용하는 것이 좋습니다.",
   "ResultStorage": "결과 저장",
   "UploadFilesDevice": "개인 기기에서 파일 업로드",

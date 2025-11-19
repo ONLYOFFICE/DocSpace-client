@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "De kennisbank is momenteel uitgeschakeld. Om semantisch zoeken en documentverwerking voor AI-agenten te activeren, neem dan contact op met uw {{productName}} beheerder om de embeddings provider te configureren.",
   "MCP": "MCP tools voor deze kamer",
   "MCPDescriptionServers": "Gebruik MCP servers verbonden door de beheerder om de chatervaring te verbeteren met AI. MCP servers kunnen helpen met data-extractie, samenvattingen, slimme suggesties, etc.",
-  "ModelDescription": "Selecteer de AI-provider en het model dat in de chats van deze ruimte gebruikt moet worden. Deze instelling is verplicht en is van toepassing op alle deelnemers.",
   "ResponseQualityNode": "<1>Let op:</1> De kwaliteit van de antwoorden kan variëren per model; nieuwere modellen worden aanbevolen voor de beste resultaten.",
   "ResultStorage": "Resultaatopslag",
   "UploadFilesDevice": "Upload bestanden vanaf uw persoonlijke apparaat",

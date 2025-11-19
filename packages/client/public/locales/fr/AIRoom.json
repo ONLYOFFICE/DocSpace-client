@@ -10,7 +10,6 @@
   "KnowledgeDescription": "Téléchargez des fichiers depuis votre ordinateur ou {{productName}} pour fournir un meilleur contexte à la discussion. Remarque : une partie ou la totalité du contenu téléchargé peut être exposée pendant la conversation.",
   "KnowledgeSelectIn": "Sélectionner dans {{productName}}",
   "MCP": "Outils MCP pour cette salle",
-  "ModelDescription": "Sélectionnez le fournisseur et le modèle d'IA à utiliser dans les discussions de cette salle. Ce paramètre est obligatoire et s'applique à tous les participants.",
   "ResultStorage": "Stockage des résultats",
   "UploadFilesDevice": "élécharger des fichiers depuis votre appareil personnel",
   "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}"

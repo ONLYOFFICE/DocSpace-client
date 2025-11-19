@@ -10,7 +10,6 @@
   "KnowledgeDescription": "お使いのコンピューターまたは{{productName}}からファイルをアップロードすると、チャットの文脈がより明確になります。ご注意：アップロードされたコンテンツの一部または全部が会話中に出てくる可能性があります。",
   "KnowledgeSelectIn": "{{productName}}で選択",
   "MCP": "このルーム用のMCPツール",
-  "ModelDescription": "このルームのチャットで使用するAIプロバイダーとモデルを選択してください。この設定は必須であり、すべての参加者に適用されます。",
   "ResultStorage": "結果ストレージ",
   "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",
   "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする"

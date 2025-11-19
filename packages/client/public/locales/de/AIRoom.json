@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "Die Wissensdatenbank ist derzeit deaktiviert. Um die semantische Suche und die Dokumentenverarbeitung für KI-Agenten zu aktivieren, wenden Sie sich bitte an Ihren {{productName}}-Administrator, um den Einbettungsanbieter zu konfigurieren.",
   "MCP": "MCP-Tools für diesen Raum",
   "MCPDescriptionServers": "Nutzen Sie die vom Administrator verbundenen MCP-Server, um das Chat-Erlebnis mithilfe von KI zu verbessern. MCP-Server können bei der Datenextraktion, der Erstellung von Zusammenfassungen, intelligenten Vorschlägen usw. helfen.",
-  "ModelDescription": "Wählen Sie den KI-Anbieter und das KI-Modell aus, die in den Chats dieses Raums verwendet werden sollen. Diese Einstellung ist obligatorisch und gilt für alle Teilnehmer.",
   "ResponseQualityNode": "<1>Hinweis:</1> Die Antwortqualität kann je nach Modell variieren; für beste Ergebnisse werden neuere Modelle empfohlen.",
   "ResultStorage": "Ergebnisspeicherung",
   "UploadFilesDevice": "Laden Sie Dateien von Ihrem persönlichen Gerät hoch",

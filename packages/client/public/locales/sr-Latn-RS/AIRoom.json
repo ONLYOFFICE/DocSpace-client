@@ -10,7 +10,6 @@
   "KnowledgeDescription": "Otpremite datoteke sa svog računara ili sa {{productName}} da biste obezbedili bolji kontekst za ćaskanje. Napomena: deo ili ceo otpremljeni sadržaj može biti otkriven tokom razgovora.",
   "KnowledgeSelectIn": "Izaberite u {{productName}}",
   "MCP": "MCP alati za ovu sobu",
-  "ModelDescription": "Izaberite AI provajdera i model koji će se koristiti u razgovorima u ovoj sobi. Ovo podešavanje je obavezno i odnosi se na sve učesnike.",
   "ResultStorage": "Skladištenje rezultata",
   "UploadFilesDevice": "Otpremite datoteke sa svog ličnog uređaja",
   "UploadFilesPortal": "Otpremite datoteke sa {{sectionNameFirst}} ili {{sectionNameSecond}}"

@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "Tietokanta on tällä hetkellä poissa käytöstä. Jotta voit ottaa semanttisen haun ja dokumenttien käsittelyn käyttöön AI-agentteja varten, ota yhteyttä {{productName}}-järjestelmän ylläpitäjään upotusten tarjoajan määrittämiseksi.",
   "MCP": "MCP työkalut tähän huoneeseen",
   "MCPDescriptionServers": "Käytä ylläpitäjän yhdistämiä MCP-palvelimia parantaaksesi chat-kokemusta tekoälyn avulla. MCP-palvelimet voivat auttaa datan poiminnassa, tiivistelmissä, älykkäissä ehdotuksissa jne.",
-  "ModelDescription": "Valitse tässä huoneessa käytettävä tekoälyn tarjoaja ja malli. Tämä asetus on pakollinen ja koskee kaikkia osallistujia.",
   "ResponseQualityNode": "<1>Huomautus:</1> Vastausten laatu voi vaihdella mallista riippuen; parempien tulosten saavuttamiseksi suositellaan uusia malleja.",
   "ResultStorage": "Tulosten tallennus",
   "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",

@@ -2,7 +2,6 @@
   "AddAIProvider": "Ավելացնել ԱԲ պրովայդեր",
   "AddMCPServer": "Ավելացնել MCP Սերվեր",
   "AddMoreHeaders": "Ավելացնել ավելի շատ վերնագրեր",
-  "AIProvider": "ԱԲ պրովայդեր",
   "AIProviderSettingDescription": "Միացրեք ձեր սեփական ԱԲ ծառայությունը՝ {{productName}}-ի առաջադեմ ֆունկցիաները բացելու համար: Ավելացվելուց հետո այն հասանելի կլինի ԱԲ չատերի բոլոր օգտատերերի համար:",
   "APIKey": "API բանալի",
   "ConnectProductToYourDataAndTools": "Միացրեք {{productName}}-ը ձեր տվյալների և գործիքների հետ։",

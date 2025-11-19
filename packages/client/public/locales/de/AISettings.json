@@ -2,7 +2,6 @@
   "AddAIProvider": "KI-Anbieter hinzufügen",
   "AddMCPServer": "MCP-Server hinzufügen",
   "AddMoreHeaders": "Weitere Header hinzufügen",
-  "AIProvider": "KI-Anbieter",
   "AIProviderSettingDescription": "Verbinden Sie Ihren eigenen KI-Dienst, um erweiterte Funktionen in {{productName}} freizuschalten. Nach der Hinzufügung steht er allen Nutzern in KI-Chats zur Verfügung.",
   "APIKey": "API-Schlüssel",
   "ConnectProductToYourDataAndTools": "Verbinden Sie {{productName}} mit Ihren Daten und Tools.",

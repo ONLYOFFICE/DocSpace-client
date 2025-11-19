@@ -2,7 +2,6 @@
   "AddAIProvider": "AI 제공업체 추가",
   "AddMCPServer": "MCP 서버 추가",
   "AddMoreHeaders": "더 많은 헤더 추가",
-  "AIProvider": "AI 제공업체",
   "AIProviderSettingDescription": "{{productName}}에 자체 AI 서비스를 연결하여 고급 기능을 잠금 해제하세요. 추가되면 AI 채팅에서 모든 사용자가 액세스할 수 있습니다.",
   "APIKey": "API 키",
   "ConnectProductToYourDataAndTools": "{{productName}}을 데이터 및 도구에 연결하세요.",

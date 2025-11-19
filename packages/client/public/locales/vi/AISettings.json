@@ -2,7 +2,6 @@
   "AddAIProvider": "Thêm nhà cung cấp AI",
   "AddMCPServer": "Thêm Máy Chủ MCP",
   "AddMoreHeaders": "Thêm các tiêu đề khác",
-  "AIProvider": "Nhà cung cấp AI",
   "AIProviderSettingDescription": "Kết nối dịch vụ AI của riêng bạn để mở khóa các tính năng nâng cao trong {{productName}}. Sau khi thêm, nó sẽ có thể truy cập được cho tất cả người dùng trong các cuộc trò chuyện AI.",
   "APIKey": "Khóa API",
   "ConnectProductToYourDataAndTools": "Kết nối {{productName}} với dữ liệu và các công cụ của bạn.",

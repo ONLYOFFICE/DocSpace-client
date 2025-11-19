@@ -2,7 +2,6 @@
   "AddAIProvider": "Добавить ИИ-провайдера",
   "AddMCPServer": "Добавить сервер MCP",
   "AddMoreHeaders": "Добавить больше заголовков",
-  "AIProvider": "ИИ-провайдер",
   "AIProviderSettingDescription": "Подключите собственный ИИ-сервис, чтобы включить расширенные функциональные возможности в {{productName}}. После добавления он станет доступен всем пользователям ИИ-чатов",
   "APIKey": "Ключ API",
   "ConnectProductToYourDataAndTools": "Подключите {{productName}} к своим данным и инструментам.",

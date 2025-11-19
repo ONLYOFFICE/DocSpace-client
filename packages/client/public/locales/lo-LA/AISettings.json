@@ -2,7 +2,6 @@
   "AddAIProvider": "ເພີ່ມຜູ້ໃຫ້ບໍລິການ AI",
   "AddMCPServer": "ເພີ່ມເຊີບເວີ MCP",
   "AddMoreHeaders": "ເພີ່ມຫົວຂໍ້ເພີ່ມເຕີມ",
-  "AIProvider": "ຜູ້ໃຫ້ບໍລິການ AI",
   "AIProviderSettingDescription": "ເຊື່ອມຕໍ່ການບໍລິການ AI ຂອງທ່ານເອງເພື່ອປົດລັອກຄຸນສົມບັດຂັ້ນສູງໃນ {{productName}}. ເມື່ອເພີ່ມແລ້ວ, ມັນຈະສາມາດເຂົ້າເຖິງໄດ້ໂດຍຜູ້ໃຊ້ທຸກຄົນໃນການສົນທະນາ AI.",
   "APIKey": "ລະຫັດ API",
   "ConnectProductToYourDataAndTools": "ເຊື່ອມຕໍ່ {{productName}} ກັບຂໍ້ມູນ ແລະ ເຄື່ອງມືຂອງທ່ານ.",

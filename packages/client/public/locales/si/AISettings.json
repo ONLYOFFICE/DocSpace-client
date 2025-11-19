@@ -2,7 +2,6 @@
   "AddAIProvider": "AI සැපයුම්කරු එක් කරන්න",
   "AddMCPServer": "MCP සේවාදායකය එක් කරන්න",
   "AddMoreHeaders": "තවත් ශීර්ෂ එකතු කරන්න",
-  "AIProvider": "AI සැපයුම්කරු",
   "AIProviderSettingDescription": "{{productName}} හි උසස් විශේෂාංග අගුළු හැරීමට ඔබේම AI සේවාව සම්බන්ධ කරන්න. එක් කළ පසු, එය AI කතාබස්වල සිටින සියලුම පරිශීලකයින්ට ප්‍රවේශ විය හැකිය.",
   "APIKey": "API යතුර",
   "ConnectProductToYourDataAndTools": "{{productName}} ඔබගේ දත්ත සහ මෙවලම් වෙත සම්බන්ධ කරන්න.",

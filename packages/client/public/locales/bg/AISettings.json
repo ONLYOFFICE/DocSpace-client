@@ -2,7 +2,6 @@
   "AddAIProvider": "Добави доставчик на AI",
   "AddMCPServer": "Добавяне на MCP сървър",
   "AddMoreHeaders": "Добавете още заглавия",
-  "AIProvider": "Доставчик на изкуствен интелект",
   "AIProviderSettingDescription": "Свържете собствената си AI услуга, за да отключите разширени функции в {{productName}}. След като бъде добавена, тя ще бъде достъпна за всички потребители в AI чатовете.",
   "APIKey": "API ключ",
   "ConnectProductToYourDataAndTools": "Свържете {{productName}} с вашите данни и инструменти.",

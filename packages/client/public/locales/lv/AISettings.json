@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Ievadiet API atslēgu, kas iegūta no jūsu zināšanu bāzes pakalpojuma sniedzēja.",
   "KnowledgeSettingsDescription": "Iespējojiet zināšanu bāzi AI aģentiem. Sistēma indeksēs jūsu dokumentus, izmantojot {{modelName}} modeli, lai atbalstītu jautājumu balstītu meklēšanu caur jūsu datiem. Šī funkcija koncentrējas uz atbilstošas informācijas atrašanu, bet neģenerē kopsavilkumus vai neveic globālu analīzi.",
   "MCPProductDescription": "{{organizationName}} {{productName}} MCP serveris vienkāršo mākslīgā intelekta vadītas darbplūsmas, integrējot tiesību zinātņu vadītājus (LLM) ar ārējām sistēmām efektīvai un drošai dokumentu pārvaldībai.",
-  "MCPServer": "MCP serveris",
   "MCPServerAdvancedSettingsHint": "Izmantojiet šo sadaļu, lai nodotu papildu HTTP galvenes, piemēram, autorizācijas žetonus.",
   "MCPServerDescriptionHint": "Rakstiet īsu skaidrojumu par integrācijas mērķi.",
   "MCPServerIntegrationURLHint": "Ievadiet MCP server adresi, ko sniedz jūsu pakalpojums.",

@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Syötä API-avain, jonka olet saanut tietopohjapalveluntarjoajaltasi.",
   "KnowledgeSettingsDescription": "Ota käyttöön tietokanta tekoälyagenttien käyttöön. Järjestelmä indeksoi dokumenttisi {{modelName}}-mallilla, jotta voit tehdä kysymyksiin perustuvaa hakua tietojesi avulla. Tämä ominaisuus keskittyy olennaisen tiedon löytämiseen, mutta ei tuota tiivistelmiä tai suorita kokonaisvaltaista analyysiä.",
   "MCPProductDescription": "{{organizationName}} {{productName}} MCP Server virtaviivaistaa tekoälypohjaisia työnkulkuja, yhdistäen LLM:t ulkoisiin järjestelmiin tehokkaan ja turvallisen dokumenttienhallinnan mahdollistamiseksi.",
-  "MCPServer": "MCP-palvelin",
   "MCPServerAdvancedSettingsHint": "Käytä tätä osiota lisä-HTTP-otsakkeiden, kuten tunnistetietojen, välittämiseen.",
   "MCPServerDescriptionHint": "Kirjoita lyhyt selitys integraation tarkoituksesta.",
   "MCPServerIntegrationURLHint": "Syötä palvelusi antama MCP-palvelimen osoite",

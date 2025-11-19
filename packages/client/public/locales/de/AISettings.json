@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Geben Sie den API-Schlüssel ein, den Sie von Ihrem Wissensdatenbankanbieter erhalten haben.",
   "KnowledgeSettingsDescription": "Aktivieren Sie eine Wissensdatenbank für KI-Agenten. Das System indexiert Ihre Dokumente mithilfe des {{modelName}}-Modells, um die fragenbasierte Suche in Ihren Daten zu unterstützen. Diese Funktion konzentriert sich auf das Auffinden relevanter Informationen, erstellt jedoch keine Zusammenfassungen und führt keine globalen Analysen durch.",
   "MCPProductDescription": "Der {{organizationName}} {{productName}} MCP-Server optimiert KI-gesteuerte Arbeitsabläufe und integriert LLMs mit externen Systemen für ein effizientes und sicheres Dokumentenmanagement.",
-  "MCPServer": "MCP-Server",
   "MCPServerAdvancedSettingsHint": "In diesem Abschnitt können Sie zusätzliche HTTP-Header wie Autorisierungstoken übergeben.",
   "MCPServerDescriptionHint": "Verfassen Sie eine kurze Erläuterung zum Zweck der Integration",
   "MCPServerIntegrationURLHint": "Geben Sie die von Ihrem Dienst bereitgestellte MCP-Serveradresse ein",

@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "지식 베이스 제공업체로부터 얻은 API 키를 입력하세요.",
   "KnowledgeSettingsDescription": "AI 에이전트용 지식 베이스를 활성화합니다. 시스템은 {{modelName}} 모델을 사용하여 문서를 색인화하여 데이터에 대한 질문 기반 검색을 지원합니다. 이 기능은 관련 정보를 찾는 데 중점을 두지만 요약 생성이나 글로벌 분석은 수행하지 않습니다.",
   "MCPProductDescription": "{{organizationName}} {{productName}} MCP 서버는 AI 기반 워크플로우를 간소화하여 LLM을 외부 시스템과 통합하여 효율적이고 안전한 문서 관리를 지원합니다.",
-  "MCPServer": "MCP 서버",
   "MCPServerAdvancedSettingsHint": "이 섹션을 사용하여 추가 HTTP 헤더(인증 토큰과 같은)를 전달하십시오.",
   "MCPServerDescriptionHint": "통합의 목적에 대한 간략한 설명을 작성하세요.",
   "MCPServerIntegrationURLHint": "서비스 제공업체에서 제공하는 MCP 서버 주소를 입력하세요.",

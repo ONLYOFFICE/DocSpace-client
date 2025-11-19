@@ -21,7 +21,6 @@
   "IntegrationName": "連携の名前",
   "IntegrationURL": "連携のURL",
   "MCPProductDescription": "{{organizationName}}の{{productName}}のMCPサーバーは、AI駆動型ワークフローを効率化し、LLMを外部システムと統合することで、効率的かつ安全な文書管理を実現します。",
-  "MCPServer": "MCPサーバー",
   "MCPSettingTitle": "MCPサーバー",
   "Provider": "プロバイダー",
   "ProviderAddedSuccess": "プロバイダーが正常に追加されました",

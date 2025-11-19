@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Voer de API-sleutel in die u van uw kennisbankprovider heeft verkregen",
   "KnowledgeSettingsDescription": "Schakel een kennisbank in voor AI-agenten. Het systeem indexeert uw documenten met behulp van het {{modelName}} model om vraaggebaseerd zoeken door uw gegevens mogelijk te maken. Deze functie richt zich op het vinden van relevante informatie, maar genereert geen samenvattingen of voert geen globale analyse uit.",
   "MCPProductDescription": "De {{organizationName}} {{productName}} MCP Server stroomlijnt AI-gestuurde workflows, door LLM's te integreren met externe systemen voor efficiënt en veilig documentbeheer.",
-  "MCPServer": "MCP-server",
   "MCPServerAdvancedSettingsHint": "Gebruik dit gedeelte om aanvullende HTTP-headers door te geven, zoals autorisatietokens.",
   "MCPServerDescriptionHint": "Schrijf een korte uitleg over het doel van de integratie",
   "MCPServerIntegrationURLHint": "Voer het MCP serveradres in dat door uw service is verstrekt",

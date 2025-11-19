@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Zadajte API kľúč získaný od vášho poskytovateľa znalostnej bázy.",
   "KnowledgeSettingsDescription": "Zapnite znalostnú bázu pre AI agentov. Systém bude indexovať vaše dokumenty pomocou modelu {{modelName}} na podporu vyhľadávania založeného na otázkach vo vašich dátach. Táto funkcia sa zameriava na vyhľadávanie relevantných informácií, ale nevytvára súhrny ani nevykonáva globálnu analýzu.",
   "MCPProductDescription": "Server MCP od {{organizationName}} {{productName}} zjednodušuje AI-pohánané pracovné postupy, integruje LLM s externými systémami pre efektívne a bezpečné riadenie dokumentov.",
-  "MCPServer": "Server MCP",
   "MCPServerAdvancedSettingsHint": "Použite túto sekciu na prenos ďalších HTTP hlavičiek, ako sú autorizačné tokeny.",
   "MCPServerDescriptionHint": "Vysvetlite stručne účel integrácie.",
   "MCPServerIntegrationURLHint": "Zadajte adresu MCP servera poskytnutú vašou službou.",

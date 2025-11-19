@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Bilgi tabanı sağlayıcınızdan aldığınız API anahtarını girin.",
   "KnowledgeSettingsDescription": "AI ajanları için bir bilgi tabanı etkinleştirin. Sistem, verilerinizde soru tabanlı arama desteği sağlamak için belgelerinizi {{modelName}} modeliyle dizine ekleyecektir. Bu özellik, ilgili bilgileri bulmaya odaklanmıştır ancak özetler oluşturmaz veya genel analiz yapmaz.",
   "MCPProductDescription": "{{organizationName}} {{productName}} MCP Sunucusu, yapay zeka destekli iş akışlarını kolaylaştırarak, verimli ve güvenli belge yönetimi için LLM'leri harici sistemlerle entegre eder.",
-  "MCPServer": "MCP Sunucusu",
   "MCPServerAdvancedSettingsHint": "Bu bölümü, yetkilendirme belirteçleri gibi ek HTTP başlıkları iletmek için kullanın.",
   "MCPServerDescriptionHint": "Entegrasyonun amacını kısaca açıklayın",
   "MCPServerIntegrationURLHint": "Hizmetiniz tarafından sağlanan MCP sunucu adresini girin",

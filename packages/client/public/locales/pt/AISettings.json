@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Insira a chave da API obtida do seu provedor de base de conhecimento",
   "KnowledgeSettingsDescription": "Habilite uma base de conhecimento para agentes de IA. O sistema indexará seus documentos usando o modelo {{modelName}} para suportar a pesquisa baseada em perguntas através de seus dados. Este recurso se concentra em encontrar informações relevantes, mas não gera resumos ou realiza análises globais.",
   "MCPProductDescription": "O {{organizationName}} {{productName}} MCP Server otimiza fluxos de trabalho impulsionados por IA, integrando LLMs com sistemas externos para gerenciamento de documentos eficiente e seguro.",
-  "MCPServer": "Servidor MCP",
   "MCPServerAdvancedSettingsHint": "Use este seção para passar cabeçalhos HTTP adicionais, como tokens de autorização.",
   "MCPServerDescriptionHint": "Escreva uma breve explicação do propósito da integração.",
   "MCPServerIntegrationURLHint": "Insira o endereço do servidor MCP fornecido pelo seu serviço",

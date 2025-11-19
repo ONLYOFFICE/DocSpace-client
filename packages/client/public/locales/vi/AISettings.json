@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Nhập khóa API đã lấy được từ nhà cung cấp cơ sở kiến thức của bạn.",
   "KnowledgeSettingsDescription": "Bật khả năng cơ sở kiến thức cho các tác nhân AI. Hệ thống sẽ lập chỉ mục cho tài liệu của bạn bằng mô hình {{modelName}} để hỗ trợ tìm kiếm dựa trên câu hỏi trong dữ liệu của bạn. Tính năng này tập trung vào việc tìm kiếm thông tin liên quan nhưng không tạo ra bản tóm tắt hoặc thực hiện phân tích toàn cục.",
   "MCPProductDescription": "Máy chủ {{organizationName}} {{productName}} MCP hợp lý hóa các quy trình làm việc được hỗ trợ bởi AI, tích hợp LLM với các hệ thống bên ngoài để quản lý tài liệu hiệu quả và an toàn.",
-  "MCPServer": "Máy chủ MCP",
   "MCPServerAdvancedSettingsHint": "Sử dụng phần này để truyền các tiêu đề HTTP bổ sung, như các mã thông báo xác thực.",
   "MCPServerDescriptionHint": "Viết một giải thích ngắn gọn về mục đích của tích hợp này.",
   "MCPServerIntegrationURLHint": "Nhập địa chỉ máy chủ MCP được cung cấp bởi dịch vụ của bạn.",

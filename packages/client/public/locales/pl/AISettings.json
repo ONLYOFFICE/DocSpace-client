@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Wprowadź klucz API uzyskany od dostawcy bazy wiedzy.",
   "KnowledgeSettingsDescription": "Włącz bazę wiedzy dla agentów AI. System będzie indeksować Twoje dokumenty przy użyciu modelu {{modelName}} w celu obsługi wyszukiwania opartego na pytaniach w Twoich danych. Ta funkcja koncentruje się na znajdowaniu istotnych informacji, ale nie generuje podsumowań ani nie wykonuje globalnej analizy.",
   "MCPProductDescription": "Serwer {{organizationName}} {{productName}} MCP usprawnia przepływy pracy oparte na sztucznej inteligencji, integrując LLM-y z systemami zewnętrznymi w celu efektywnego i bezpiecznego zarządzania dokumentami.",
-  "MCPServer": "Serwer MCP",
   "MCPServerAdvancedSettingsHint": "Użyj tej sekcji, aby przekazywać dodatkowe nagłówki HTTP, takie jak tokeny autoryzacyjne.",
   "MCPServerDescriptionHint": "Napisz krótkie wyjaśnienie celu integracji.",
   "MCPServerIntegrationURLHint": "Wprowadź adres serwera MCP podany przez twoją usługę.",

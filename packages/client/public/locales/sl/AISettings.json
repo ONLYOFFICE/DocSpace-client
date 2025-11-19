@@ -25,7 +25,6 @@
   "KnowledgeKeyDescription": "Vnesite ključ API, pridobljen od ponudnika vaše baze znanja.",
   "KnowledgeSettingsDescription": "Omogočite bazo znanja za umetne agente. Sistem bo indeksiral vaše dokumente z uporabo modela {{modelName}} za podporo iskanju na podlagi vprašanj v vaših podatkih. Ta funkcija se osredotoča na iskanje relevantnih informacij, vendar ne ustvarja povzetkov ali izvaja globalno analizo.",
   "MCPProductDescription": "Strežnik {{organizationName}} {{productName}} MCP poenostavlja delovne tokove, ki jih poganja umetna inteligenca, in integrira LLM z zunanjimi sistemi za učinkovito in varno upravljanje dokumentov.",
-  "MCPServer": "Strežnik MCP",
   "MCPServerAdvancedSettingsHint": "Uporabite ta razdelek za pošiljanje dodatnih HTTP glavic, kot so avtorizacijski žetoni.",
   "MCPServerDescriptionHint": "Napišite kratek opis namena integracije.",
   "MCPServerIntegrationURLHint": "Vnesite naslov MCP strežnika, ki ga je zagotovila vaša storitev.",

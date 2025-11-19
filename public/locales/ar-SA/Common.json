@@ -726,7 +726,7 @@
   "ProviderNotConnected": "المزود غير متصل بحسابك",
   "ProviderSsoSetting": "تسجيل الدخول الموحد",
   "ProviderTelegram": "Telegram",
-  "ProviderTwitter": "تويتر",
+  "ProviderTwitter": "X",
   "ProviderWechat": "WeChat",
   "ProviderZoom": "زووم",
   "PublicAuthorizeToast": "هذه الغرفة مفتوحة في الوضع <1>{{roomMode}}</1>. إذا كان لديك حساب في {{productName}}، يرجى التفويض.",

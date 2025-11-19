@@ -1246,11 +1246,11 @@ class UsersStore {
   }
 
   get hasOnlyOneUserToRemove() {
-    const { canRemoveOnlyOneUser } = this.accessRightsStore;
+    const { canRemoveUser } = this.accessRightsStore;
 
     if (!this.isOneUserSelection) return false;
 
-    const users = this.selection.filter((x) => canRemoveOnlyOneUser(x));
+    const users = this.selection.filter((x) => canRemoveUser(x));
 
     return users.length === 1;
   }

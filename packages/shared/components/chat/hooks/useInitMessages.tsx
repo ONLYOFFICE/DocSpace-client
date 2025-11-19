@@ -30,14 +30,43 @@ import { useLocation } from "react-router";
 import { getChatMessages } from "../../../api/ai";
 import type { TMessage } from "../../../api/ai/types";
 
-const useInitMessages = () => {
+const cacheChatId = new Map<string, string>();
+
+const useInitMessages = (roomId: string | number) => {
   const [messages, setMessages] = React.useState<TMessage[]>([]);
   const [chatId, setChatId] = React.useState("");
   const [total, setTotal] = React.useState(0);
   const location = useLocation();
 
+  React.useEffect(() => {
+    if (!roomId) cacheChatId.delete("chat");
+  }, [roomId]);
+
+  React.useEffect(() => {
+    const onCacheChat = (e: Event) => {
+      const chatId = (e as CustomEvent<{ chatId: string }>).detail.chatId;
+
+      if (chatId) {
+        cacheChatId.set("chat", chatId);
+      } else {
+        cacheChatId.delete("chat");
+        setMessages([]);
+        setTotal(0);
+        setChatId("");
+      }
+    };
+
+    window.addEventListener("select-chat", onCacheChat);
+
+    return () => {
+      window.removeEventListener("select-chat", onCacheChat);
+    };
+  }, []);
+
   const initMessages = React.useCallback(async () => {
-    const currChatId = new URLSearchParams(location.search).get("chat");
+    const currChatId =
+      new URLSearchParams(location.search).get("chat") ??
+      cacheChatId.get("chat");
 
     if (!currChatId) {
       setMessages([]);
@@ -45,6 +74,8 @@ const useInitMessages = () => {
       setChatId("");
       return;
     }
+
+    cacheChatId.set("chat", currChatId);
 
     const { items, total } = await getChatMessages(currChatId, 0);
 

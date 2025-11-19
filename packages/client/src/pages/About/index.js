@@ -47,7 +47,7 @@ const BodyWrapper = inject(({ settingsStore }) => {
     buildVersionInfo,
     theme,
   };
-})(withTranslation(["About", "Common"])(observer(Body)));
+})(withTranslation(["Common"])(observer(Body)));
 
 export const About = (props) => {
   return (

@@ -42,6 +42,7 @@ import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 // import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
@@ -231,7 +232,11 @@ const ExternalLinks = ({
   );
 
   const filteredAccesses =
-    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+    roomType === -1
+      ? accesses
+      : roomType === RoomsType.AIRoom
+        ? filterNotReadOnlyOptions(accesses)
+        : filterPaidRoleOptions(accesses);
 
   const description =
     roomId === -1

@@ -47,6 +47,8 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
+  RoomsType,
+  ShareAccessRights,
 } from "@docspace/shared/enums";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
@@ -74,8 +76,10 @@ import AccessSelector from "../../../AccessSelector";
 import {
   fixAccess,
   getTopFreeRole,
+  getViewerRole,
   isPaidUserRole,
   makeFreeRole,
+  makeViewerRole,
 } from "../utils";
 
 const minSearchValue = 2;
@@ -322,6 +326,7 @@ const InviteInput = ({
       isGroup = false,
       status,
       isSystem,
+      isVisitor,
     } = item;
 
     const isDisabled = status === EmployeeStatus.Disabled;
@@ -340,11 +345,21 @@ const InviteInput = ({
       } else if (shared) {
         toastr.warning(t("UsersAlreadyAdded"));
       } else {
+        const guestWrongRoleInAgent =
+          isVisitor &&
+          roomType === RoomsType.AIRoom &&
+          item.access !== ShareAccessRights.ReadOnly;
+
         if (isGroup && checkIfAccessPaid(item.access)) {
           item = fixAccess(item, t, roomType);
         }
 
+        if (guestWrongRoleInAgent) {
+          item = makeViewerRole(item, t, getViewerRole(t, roomType));
+        }
+
         if (
+          !guestWrongRoleInAgent &&
           isPaidUserRole(item.access) &&
           (item.isVisitor || item.isCollaborator)
         ) {
@@ -421,6 +436,16 @@ const InviteInput = ({
               ? isPaidUserAccess(item.access)
               : isPaidUserRole(item.access);
 
+          const shouldMakeViewerRole =
+            roomType === RoomsType.AIRoom &&
+            item.isEmailInvite &&
+            item.access !== ShareAccessRights.ReadOnly;
+
+          if (shouldMakeViewerRole) {
+            item = makeViewerRole(item, t, getViewerRole(t, roomType));
+            return item;
+          }
+
           if (isRolePaid && item.isEmailInvite) {
             const topFreeRole =
               roomId === -1 ? EmployeeType.User : getTopFreeRole(t, roomType);
@@ -436,12 +461,16 @@ const InviteInput = ({
         userItem.access = selectedAccess;
         userItem.userType = getUserType(item);
 
-        const isAccessPaid = checkIfAccessPaid(userItem.access);
+        const shouldMakeFreeRole =
+          checkIfAccessPaid(userItem.access) &&
+          (userItem.isGroup || userItem.isVisitor || userItem.isCollaborator);
 
-        if (
-          isAccessPaid &&
-          (userItem.isGroup || userItem.isVisitor || userItem.isCollaborator)
-        ) {
+        const shouldMakeViewerRole =
+          roomType === RoomsType.AIRoom &&
+          userItem.isVisitor &&
+          userItem.access !== ShareAccessRights.ReadOnly;
+
+        if (shouldMakeFreeRole || shouldMakeViewerRole) {
           userItem = fixAccess(userItem, t, roomType);
 
           if (isUserTariffLimit) {

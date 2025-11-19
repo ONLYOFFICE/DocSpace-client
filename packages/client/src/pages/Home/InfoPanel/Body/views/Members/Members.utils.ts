@@ -64,6 +64,9 @@ class MembersHelper {
         key: "collaborator",
         label: this.t("Common:ContentCreator"),
         access: ShareAccessRights.Collaborator,
+        tooltip: this.t("InviteDialog:GuestAgentMaxAvailableRoleWarning", {
+          productName: this.t("Common:ProductName"),
+        }),
         type: "collaborator",
       },
       viewer: {

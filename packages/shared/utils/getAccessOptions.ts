@@ -163,6 +163,12 @@ export const getAccessOptions = (
       key: "contentCreator",
       label: t("Common:ContentCreator"),
       description: getUserDescription(roomType, t),
+      tooltip:
+        roomType === RoomsType.AIRoom
+          ? t("GuestAgentMaxAvailableRoleWarning", {
+              productName: t("Common:ProductName"),
+            })
+          : undefined,
       access:
         roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,
       type: EmployeeType.User,

@@ -29,7 +29,6 @@
   "MCPServerDescriptionHint": "Kirjoita lyhyt selitys integraation tarkoituksesta.",
   "MCPServerIntegrationURLHint": "Syötä palvelusi antama MCP-palvelimen osoite",
   "MCPSettingsDescription": "Tämä osio mahdollistaa MCP-palvelimien hallinnan AI-keskusteluille huoneissa. Voit ottaa käyttöön järjestelmän MCP-palvelimia tai lisätä mukautettuja palvelimia yrityksesi tarpeisiin. Kun ne on otettu käyttöön, nämä palvelimet ovat muiden käyttäjien käytettävissä heidän tehtäviään varten.",
-  "MCPSettingTitle": "MCP-palvelimet",
   "Provider": "Palveluntarjoaja",
   "ProviderAddedSuccess": "Palveluntarjoaja lisätty onnistuneesti",
   "ProviderKey": "Avain",

@@ -29,7 +29,6 @@
   "MCPServerDescriptionHint": "İnteqrasiyanın məqsədini qısaca izah edin.",
   "MCPServerIntegrationURLHint": "Xidmətiniz tərəfindən verilən MCP server ünvanını daxil edin.",
   "MCPSettingsDescription": "Bu bölmə otaqlar daxilində süni intellekt söhbətləri üçün MCP serverlərini idarə etməyə imkan verir. Siz sistem MCP serverlərini aktiv edə bilərsiniz və ya şirkətinizin ehtiyaclarını ödəmək üçün xüsusi olanları əlavə edə bilərsiniz. Aktiv edildikdən sonra, bu serverlər digər istifadəçilər üçün onların tapşırıqları üçün əlçatmaz olacaq.",
-  "MCPSettingTitle": "MCP serverləri",
   "Provider": "Təminatçı",
   "ProviderAddedSuccess": "Təminatçı uğurla əlavə edildi",
   "ProviderKey": "Kunci",

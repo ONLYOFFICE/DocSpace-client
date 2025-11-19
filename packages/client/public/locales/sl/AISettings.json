@@ -29,7 +29,6 @@
   "MCPServerDescriptionHint": "Napišite kratek opis namena integracije.",
   "MCPServerIntegrationURLHint": "Vnesite naslov MCP strežnika, ki ga je zagotovila vaša storitev.",
   "MCPSettingsDescription": "Ta razdelek vam omogoča upravljanje MCP strežnikov za pogovore z umetno inteligenco v sobah. Lahko omogočite sistemske MCP strežnike ali dodate po meri, da ustrezate potrebam vašega podjetja. Ko so ti strežniki omogočeni, bodo na voljo drugim uporabnikom za njihove naloge.",
-  "MCPSettingTitle": "MCP strežniki",
   "Provider": "Ponudnik",
   "ProviderAddedSuccess": "Ponudnik je bil uspešno dodan.",
   "ProviderKey": "Kluč",

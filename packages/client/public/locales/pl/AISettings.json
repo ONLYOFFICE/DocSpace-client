@@ -29,7 +29,6 @@
   "MCPServerDescriptionHint": "Napisz krótkie wyjaśnienie celu integracji.",
   "MCPServerIntegrationURLHint": "Wprowadź adres serwera MCP podany przez twoją usługę.",
   "MCPSettingsDescription": "Ta sekcja umożliwia zarządzanie serwerami MCP dla czatów AI w pokojach. Możesz włączyć systemowe serwery MCP lub dodać własne, aby spełnić potrzeby Twojej firmy. Po włączeniu te serwery będą dostępne dla innych użytkowników do ich zadań.",
-  "MCPSettingTitle": "Serwery MCP",
   "Provider": "Dostawca",
   "ProviderAddedSuccess": "Dodano dostawcę pomyślnie",
   "ProviderKey": "Klucz",

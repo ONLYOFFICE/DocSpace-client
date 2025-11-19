@@ -28,7 +28,6 @@
   "MCPServerDescriptionHint": "Escriba una breve explicación del propósito de la integración ",
   "MCPServerIntegrationURLHint": "Introduzca la dirección del servidor MCP proporcionada por su servicio",
   "MCPSettingsDescription": "Esta sección le permite gestionar servidores MCP para chats de IA dentro de las salas. Puede habilitar servidores MCP del sistema o añadir otros personalizados para satisfacer las necesidades de su empresa. Una vez habilitados, estos servidores serán accesibles a otros usuarios para sus tareas.",
-  "MCPSettingTitle": "Servidores MCP",
   "Provider": "Proveedor",
   "ProviderAddedSuccess": "Proveedor añadido correctamente",
   "ProviderKey": "Clave",

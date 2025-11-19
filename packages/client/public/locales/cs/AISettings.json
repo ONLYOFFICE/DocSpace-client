@@ -29,7 +29,6 @@
   "MCPServerDescriptionHint": "Napište stručné vysvětlení účelu integrace.",
   "MCPServerIntegrationURLHint": "Zadejte adresu MCP serveru poskytnutou vaší službou.",
   "MCPSettingsDescription": "Tato sekce umožňuje spravovat MCP servery pro AI chaty v místnostech. Můžete povolit systémové MCP servery nebo přidat vlastní, aby vyhovovaly potřebám vaší společnosti. Jakmile budou povoleny, tyto servery budou pro ostatní uživatele dostupné pro jejich úkoly.",
-  "MCPSettingTitle": "MCP servery",
   "Provider": "Poskytovatel",
   "ProviderAddedSuccess": "Poskytovatel byl úspěšně přidán",
   "ProviderKey": "Klíč",

@@ -29,7 +29,6 @@
   "MCPServerDescriptionHint": "Verfassen Sie eine kurze Erläuterung zum Zweck der Integration",
   "MCPServerIntegrationURLHint": "Geben Sie die von Ihrem Dienst bereitgestellte MCP-Serveradresse ein",
   "MCPSettingsDescription": "In diesem Abschnitt können Sie MCP-Server für KI-Chats in Räumen verwalten. Sie können System-MCP-Server aktivieren oder benutzerdefinierte Server hinzufügen, um die Anforderungen Ihres Unternehmens zu erfüllen. Nach der Aktivierung stehen diese Server anderen Benutzern für ihre Aufgaben zur Verfügung.",
-  "MCPSettingTitle": "MCP-Server",
   "Provider": "Anbieter",
   "ProviderAddedSuccess": "Anbieter erfolgreich hinzugefügt",
   "ProviderKey": "Schlüssel",

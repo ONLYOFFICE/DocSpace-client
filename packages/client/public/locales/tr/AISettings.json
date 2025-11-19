@@ -29,7 +29,6 @@
   "MCPServerDescriptionHint": "Entegrasyonun amacını kısaca açıklayın",
   "MCPServerIntegrationURLHint": "Hizmetiniz tarafından sağlanan MCP sunucu adresini girin",
   "MCPSettingsDescription": "Bu bölüm, odvlarda yapay zeka sohbetleri için MCP sunucularını yönetmenize olanak tanır. Sistem MCP sunucularını etkinleştirebilir veya şirketinizin ihtiyaçlarını karşılamak için özel sunucular ekleyebilirsiniz. Bir kez etkinleştirildikten sonra, bu sunucular diğer kullanıcıların görevleri için erişilebilir olacaktır.",
-  "MCPSettingTitle": "MCP sunucuları",
   "Provider": "Sağlayıcı",
   "ProviderAddedSuccess": "Sağlayıcı başarıyla eklendi",
   "ProviderKey": "Anahtar",

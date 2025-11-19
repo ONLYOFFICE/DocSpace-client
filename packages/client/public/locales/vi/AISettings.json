@@ -29,7 +29,6 @@
   "MCPServerDescriptionHint": "Viết một giải thích ngắn gọn về mục đích của tích hợp này.",
   "MCPServerIntegrationURLHint": "Nhập địa chỉ máy chủ MCP được cung cấp bởi dịch vụ của bạn.",
   "MCPSettingsDescription": "Phần này cho phép bạn quản lý các máy chủ MCP cho các cuộc trò chuyện AI trong phòng. Bạn có thể bật các máy chủ MCP hệ thống hoặc thêm các máy chủ tùy chỉnh để đáp ứng nhu cầu của công ty bạn. Sau khi được bật, các máy chủ này sẽ có thể truy cập được cho những người dùng khác để thực hiện các tác vụ của họ.",
-  "MCPSettingTitle": "Máy chủ MCP",
   "Provider": "Nhà cung cấp",
   "ProviderAddedSuccess": "Đã thêm nhà cung cấp thành công",
   "ProviderKey": "Chìa khóa",

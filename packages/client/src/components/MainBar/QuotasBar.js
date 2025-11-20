@@ -317,6 +317,7 @@ const QuotasBar = ({
       opacity={1}
       onLoad={onLoad}
       onAction={onCloseAction}
+      showIcon
     />
   ) : null;
 };

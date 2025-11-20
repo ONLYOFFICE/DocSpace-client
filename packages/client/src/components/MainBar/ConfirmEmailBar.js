@@ -63,6 +63,7 @@ const ConfirmEmailBar = ({
         opacity={1}
         onLoad={onLoad}
         onAction={onClose}
+        showIcon
       />
     )
   );

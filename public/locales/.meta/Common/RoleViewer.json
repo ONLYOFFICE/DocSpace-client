@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-05-19T21:30:48.141Z",
-  "updated_at": "2025-11-19T19:15:01.102Z",
+  "updated_at": "2025-11-20T14:22:10.457Z",
   "comment": {
     "text": "The translation key \"Common:RoleViewer\" is used to display the text \"Viewer\" in various UI elements, such as buttons and labels. It appears in dialogues like the Create Edit Room Dialog and in page components like the InfoPanel Body's MembersHelper. The text is meant to represent a role or access level for users.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 71,
-      "context": "access: ShareAccessRights.Collaborator,\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",\n label: this.t(\"Common:RoleViewer\"),\n access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",",
+      "line_number": 74,
+      "context": "}),\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",\n label: this.t(\"Common:RoleViewer\"),\n access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 200,
+      "line_number": 206,
       "context": "access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {\n key: \"viewer\",\n label: t(\"Common:RoleViewer\"),\n description:\n roomType === RoomsType.AIRoom\n ? t(\"Common:RoleAIAgentViewerDescription\")\n : t(\"Common:RoleViewerDescription\"),\n access: ShareAccessRights.ReadOnly,",
       "module": "/packages/shared"
     },

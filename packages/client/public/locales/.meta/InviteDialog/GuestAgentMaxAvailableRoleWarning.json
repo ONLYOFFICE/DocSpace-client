@@ -1,31 +1,31 @@
 {
-  "key_path": "RoleCommentator",
-  "content": "Commenter",
-  "content_en_sha1_hash": "bf4df9c00c605d80b4491471e60b45b6eaaca147",
-  "created_at": "2025-05-19T21:30:47.984Z",
-  "updated_at": "2025-11-20T14:22:11.279Z",
+  "key_path": "GuestAgentMaxAvailableRoleWarning",
+  "content": "Guests cannot be assigned as Content creator.\nOnly Room admins, {{productName}} admins and Users are eligible for this role.",
+  "content_en_sha1_hash": "bacaf2f76e9af70543835bf7fba7c43feaf4363e",
+  "created_at": "2025-11-20T14:21:54.083Z",
+  "updated_at": "2025-11-20T14:22:10.977Z",
   "comment": {
-    "text": "This translation key is used to display \"Commenter\" as a role label in the application's UI. It appears on various screens where user roles are displayed, such as information panels and room member settings, helping users understand their permissions and access levels.",
-    "is_auto": true,
-    "updated_at": "2025-05-20T09:34:38.915Z"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/utils/index.js",
+      "line_number": 95,
+      "context": "item.warning =\n item.access === ShareAccessRights.RoomManager\n ? t(\"UserAgentMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"GuestAgentMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n });\n item.access = viewerRole.access;\n \n return item;",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 98,
-      "context": "access: ShareAccessRights.Review,\n type: \"user\",\n },\n commentator: {\n key: \"commentator\",\n label: this.t(\"Common:RoleCommentator\"),\n access: ShareAccessRights.Comment,\n type: \"user\",\n },\n };\n };",
+      "line_number": 67,
+      "context": "},\n collaborator: {\n key: \"collaborator\",\n label: this.t(\"Common:ContentCreator\"),\n access: ShareAccessRights.Collaborator,\n tooltip: this.t(\"InviteDialog:GuestAgentMaxAvailableRoleWarning\", {\n productName: this.t(\"Common:ProductName\"),\n }),\n type: \"collaborator\",\n },\n viewer: {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 199,
-      "context": "access: ShareAccessRights.Review,\n type: EmployeeType.User,\n },\n commentator: {\n key: \"commentator\",\n label: t(\"Common:RoleCommentator\"),\n description: t(\"Common:RoleCommentatorDescription\"),\n access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/utils/room-members/getUserRoleOptions.ts",
-      "line_number": 75,
-      "context": "access: ShareAccessRights.Review,\n type: \"user\",\n },\n commentator: {\n key: \"commentator\",\n label: t(\"Common:RoleCommentator\"),\n access: ShareAccessRights.Comment,\n type: \"user\",\n },\n });",
+      "line_number": 168,
+      "context": "key: \"contentCreator\",\n label: t(\"Common:ContentCreator\"),\n description: getUserDescription(roomType, t),\n tooltip:\n roomType === RoomsType.AIRoom\n ? t(\"GuestAgentMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n })\n : undefined,\n access:\n roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,",
       "module": "/packages/shared"
     }
   ],
@@ -117,13 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ນັກສະແດງຄວາມຄິດເຫັນ' literally translates to 'person who expresses opinions/thoughts'. While not entirely wrong, it's a more verbose and formal translation of 'Commenter'. A more concise and commonly used translation would be better.",
-          "suggestion": "Consider 'ຄຳເຫັນ' or 'ຜູ້ໃຫ້ຄຳເຫັນ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +141,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Comentador\" is not the most natural or accurate translation of \"Commenter\". While it is technically a valid word, \"Comentador\" has connotations of someone who excessively comments or criticizes, which may not align with the intended meaning of 'Commenter'. A better translation would be 'Comentário' or 'Participante'.",
-          "suggestion": "Consider using 'Comentário' (Comment) or 'Participante' (Participant) instead of 'Comentador'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -177,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'අදහස් දක්වන්නා' is a literal translation of 'Commenter,' it's quite formal and lengthy. A more natural and concise translation might be 'අදහස් කියන්නෙක්' or simply 'අදහස්කාරයා'.",
-          "suggestion": "Consider 'අදහස් කියන්නෙක්' or 'අදහස්කාරයා' for a more natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -193,6 +175,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -225,25 +213,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Người nhận xét\" is a possible translation, \"Commenter\" generally refers to someone who leaves comments, not necessarily someone who reviews or critiques. \"Người bình luận\" would be a more accurate translation.",
-          "suggestion": "Người bình luận"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'可评论' translates to 'can comment' or 'able to comment', which doesn't accurately represent the meaning of 'Commenter'. A 'Commenter' is someone who comments.",
-          "suggestion": "评论者 (píng lùn zhě)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "KB",
   "content_en_sha1_hash": "315b39a0fc19fb45d146c17b813d46c7acb0b872",
   "created_at": "2025-05-19T21:30:46.020Z",
-  "updated_at": "2025-11-03T12:10:35.448Z",
+  "updated_at": "2025-11-20T14:22:11.958Z",
   "comment": {
     "text": "This translation key \"KB\" is used to display \"Kilobyte\", a unit of digital information. It will appear in options lists and menus where file sizes or storage options are displayed, typically on screens related to quotas or data management.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/quota-form/index.tsx",
-      "line_number": 79,
+      "line_number": 85,
       "context": "return 2;\n };\n \n const getOptions = (t: TTranslation) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];",
       "module": "/packages/shared"
     },

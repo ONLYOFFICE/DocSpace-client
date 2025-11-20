@@ -3,7 +3,7 @@
   "content": "You are about to delete <strong>folders ({{foldersCount}})</strong>.",
   "content_en_sha1_hash": "29271e8bfcc6505957cc2925f0e39a43b3f8d337",
   "created_at": "2025-10-01T15:20:12.183Z",
-  "updated_at": "2025-11-17T13:24:55.370Z",
+  "updated_at": "2025-11-20T14:22:10.514Z",
   "comment": {
     "text": "This key displays a confirmation message within a dialog, informing the user they are about to delete a specific number of folders. The message includes the count of folders being deleted, providing clarity before a permanent deletion occurs. This is likely part of a confirmation dialog during a folder deletion process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 195,
+      "line_number": 196,
       "context": "}\n \n if (foldersCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? t(\"FoldersPermanentlyDeleted\", {",
       "module": "/packages/client"
     }

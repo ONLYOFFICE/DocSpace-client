@@ -39,6 +39,8 @@ import {
   InputSize,
   InputType,
 } from "@docspace/shared/components/text-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { useTranslation } from "react-i18next";
 
 const StyledPlusIcon = styled(PlusIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
@@ -57,12 +59,25 @@ const StyledTrashIcon = styled(TrashIcon)`
 `;
 
 const StyledInputWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
   margin-bottom: 8px;
   width: ${(props) => (props.hideDeleteIcon ? "324px" : "350px")};
+
+  .field-container {
+    width: 100%;
+    margin: 0;
+  }
+
+  .input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .text-input {
+    width: 100%;
+  }
 
   @media ${mobile} {
     width: ${(props) => (props.hideDeleteIcon ? "calc(100% - 26px)" : "100%")};
@@ -92,6 +107,7 @@ const UserFields = (props) => {
     buttonLabel,
     onChangeInput,
     onDeleteInput,
+    onBlurAction,
     onClickAdd,
     inputs,
     regexp,
@@ -101,19 +117,22 @@ const UserFields = (props) => {
     deleteIconDataTestId,
     addButtonDataTestId,
     hideDeleteIcon = false,
+    errorMessages,
   } = props;
 
   const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
-  const prevInputs = usePrevious(inputs.length);
+  const prevInputsCount = usePrevious(inputs.length);
 
   useEffect(() => {
-    if (inputs.length > prevInputs) setErrors([...errors, false]);
+    if (inputs.length > prevInputsCount) setErrors([...errors, false]);
   }, [inputs]);
 
   const onBlur = (index) => {
     const newErrors = Array.from(errors);
     newErrors[index] = true;
     setErrors(newErrors);
+
+    onBlurAction?.(index);
   };
 
   const onFocus = (index) => {
@@ -145,37 +164,50 @@ const UserFields = (props) => {
             const error = newInput2
               ? (input && input.split("-").length - 1 > 1) ||
                 !regexp.test(newInput1) ||
-                !regexp.test(newInput2)
-              : !regexp.test(input);
+                !regexp.test(newInput2) ||
+                errorMessages?.[index]
+              : !regexp.test(input) || errorMessages?.[index];
 
             return (
               <StyledInputWrapper
                 key={`user-input-${inputs.length - index}`}
                 hideDeleteIcon={hideDeleteIcon}
               >
-                <TextInput
-                  type={InputType.text}
-                  size={InputSize.base}
-                  tabIndex={index}
-                  className={`${classNameAdditional}-input`}
-                  id={`user-input-${input}`}
-                  isAutoFocussed={isAutoFocussed}
-                  keepCharPositions
-                  value={input}
-                  onChange={(e) => onChangeInput(e, index)}
-                  onBlur={() => onBlur(index)}
-                  onFocus={() => onFocus(index)}
-                  hasError={errors[index] ? error : null}
-                  testId={inputDataTestId}
-                />
-                {hideDeleteIcon ? null : (
-                  <StyledTrashIcon
-                    className={`${classNameAdditional}-delete-icon`}
-                    size="medium"
-                    onClick={() => onDelete(index)}
-                    data-testid={deleteIconDataTestId}
-                  />
-                )}
+                <FieldContainer
+                  className="field-container"
+                  isVertical
+                  labelVisible={false}
+                  hasError={error}
+                  errorMessage={errorMessages?.[index]}
+                >
+                  <div className="input-wrapper">
+                    <TextInput
+                      type={InputType.text}
+                      size={InputSize.base}
+                      tabIndex={index}
+                      className={`${classNameAdditional}-input text-input`}
+                      id={`user-input-${input}`}
+                      isAutoFocussed={isAutoFocussed}
+                      keepCharPositions
+                      value={input}
+                      onChange={(e) => onChangeInput(e, index)}
+                      onBlur={() => onBlur(index)}
+                      onFocus={() => onFocus(index)}
+                      hasError={
+                        errors[index] || errorMessages?.[index] ? error : null
+                      }
+                      testId={inputDataTestId}
+                    />
+                    {hideDeleteIcon ? null : (
+                      <StyledTrashIcon
+                        className={`${classNameAdditional}-delete-icon`}
+                        size="medium"
+                        onClick={() => onDelete(index)}
+                        data-testid={deleteIconDataTestId}
+                      />
+                    )}
+                  </div>
+                </FieldContainer>
               </StyledInputWrapper>
             );
           })

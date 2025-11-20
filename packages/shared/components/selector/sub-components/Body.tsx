@@ -96,6 +96,7 @@ const Body = ({
   isSSR,
 
   hideBackButton,
+  isLimitReached,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
   const injectedElementRef = useRef<HTMLElement>(null);
@@ -388,6 +389,7 @@ const Body = ({
                       savedInputValue,
                       setSavedInputValue,
                       listHeight,
+                      isLimitReached,
                     }}
                   />
                 </div>
@@ -432,6 +434,7 @@ const Body = ({
                     savedInputValue,
                     setSavedInputValue,
                     listHeight,
+                    isLimitReached,
                   }}
                   itemSize={getItemSize}
                   onItemsRendered={onItemsRendered}

@@ -98,7 +98,9 @@ export const getDialogContent = (
           i18nKey="DeleteAIChatDescription"
           ns="DeleteDialog"
           values={{ chatName: isAIAgentChatDelete.itemName }}
-          components={{ 1: <Text fontWeight={400} as="span" /> }}
+          components={{
+            1: <Text key="chat-title" fontWeight={400} as="span" />,
+          }}
         ></Trans>{" "}
         {t("Common:WantToContinue")}
       </>

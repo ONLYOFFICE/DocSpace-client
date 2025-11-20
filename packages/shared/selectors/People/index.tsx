@@ -362,7 +362,10 @@ const PeopleSelector = ({
 
         const data = response.items
           .filter((item) => {
-            if (excludeItems && excludeItems.includes(item.id)) {
+            if (
+              (excludeItems && excludeItems.includes(item.id)) ||
+              ("status" in item && item.status === EmployeeStatus.Disabled)
+            ) {
               totalDifferent += 1;
               return false;
             }

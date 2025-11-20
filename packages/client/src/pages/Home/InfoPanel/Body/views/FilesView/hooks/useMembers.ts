@@ -31,6 +31,7 @@ import axios from "axios";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 import {
   EmployeeActivationStatus,
+  EmployeeStatus,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -145,7 +146,8 @@ export const useMembers = ({
       const groups: TInfoPanelMember[] = [];
       const guests: TInfoPanelMember[] = [];
 
-      membersList?.forEach(({ access, canEditAccess, sharedTo }) => {
+      membersList?.forEach((memberList) => {
+        const { access, canEditAccess, sharedTo } = memberList;
         const member: TInfoPanelMember = {
           access,
           canEditAccess,
@@ -153,6 +155,12 @@ export const useMembers = ({
         };
 
         if (
+          "status" in sharedTo &&
+          sharedTo.status === EmployeeStatus.Disabled &&
+          !memberList.isOwner
+        ) {
+          setTotal((value) => value - 1);
+        } else if (
           "activationStatus" in member &&
           member.activationStatus === EmployeeActivationStatus.Pending
         ) {

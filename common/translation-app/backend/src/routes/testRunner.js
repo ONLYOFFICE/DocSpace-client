@@ -18,7 +18,7 @@ async function testRunnerRoutes(fastify) {
       // Get app root path
       const appRootPath = path.resolve(__dirname, "../../../../..");
       const testsDir = path.join(appRootPath, "common/tests");
-      const reportPath = path.join(testsDir, "reports/tests-results.html");
+      const reportPath = path.join(testsDir, "reports/tests-report.html");
 
       // Check if report exists
       if (!fs.existsSync(reportPath)) {
@@ -158,7 +158,7 @@ async function testRunnerRoutes(fastify) {
         }
 
         // Check if report file exists regardless of command success
-        const reportPath = path.join(testsDir, "reports/tests-results.html");
+        const reportPath = path.join(testsDir, "reports/tests-report.html");
         const reportExists = fs.existsSync(reportPath);
 
         // Always return report URL if the file exists

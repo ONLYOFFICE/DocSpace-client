@@ -26,9 +26,9 @@
 
 const fs = require("fs");
 
-const findImagesIntoFiles = (fileList, imageList) => {
+const findImagesIntoFiles = (fileList, imageList, fileContentsCache = null) => {
   const imgCollection = [];
-  const usedImages = [];
+  const usedImages = new Set();
 
   imageList.forEach((i) => {
     if (
@@ -37,30 +37,46 @@ const findImagesIntoFiles = (fileList, imageList) => {
       i.path.indexOf("notifications") > -1 ||
       i.path.indexOf("errors") > -1 ||
       i.path.indexOf("folder") > -1
-    )
-      return usedImages.push(i.fileName);
+    ) {
+      usedImages.add(i.fileName);
+      return;
+    }
 
     imgCollection.push(i.fileName);
   });
 
+  if (imgCollection.length === 0) {
+    return Array.from(usedImages);
+  }
+
+  console.time('Finding images in files');
+  
   fileList.forEach(({ path: filePath }) => {
-    const data = fs.readFileSync(filePath, "utf8");
+    let data;
+    if (fileContentsCache && fileContentsCache.has(filePath)) {
+      data = fileContentsCache.get(filePath);
+    } else {
+      try {
+        data = fs.readFileSync(filePath, "utf8");
+      } catch (err) {
+        return;
+      }
+    }
 
     imgCollection.forEach((i) => {
+      if (usedImages.has(i)) return;
+
       const contentImg = `/${i}`;
-
-      const idx = data.indexOf(contentImg);
-      const idx2 = data.indexOf(`${i}`);
-
-      if (idx > -1 || idx2 > -1) {
-        usedImages.push(i);
+      
+      if (data.includes(contentImg) || data.includes(i)) {
+        usedImages.add(i);
       }
     });
   });
+  
+  console.timeEnd('Finding images in files');
 
-  return usedImages.filter(
-    (i, index) => usedImages.findIndex((usedImg) => usedImg === i) === index
-  );
+  return Array.from(usedImages);
 };
 
 module.exports = { findImagesIntoFiles };

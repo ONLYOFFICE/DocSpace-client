@@ -58,14 +58,6 @@ const meta = {
       control: "text",
       description: "Text for the action button",
     },
-    textColor: {
-      control: "color",
-      description: "Color of the text content",
-    },
-    backgroundColor: {
-      control: "color",
-      description: "Background color of the snackbar",
-    },
     showIcon: {
       control: "boolean",
       description: "Whether to show the icon",
@@ -89,8 +81,6 @@ type Story = StoryObj<typeof meta>;
 
 const baseArgs = {
   backgroundImg: "",
-  backgroundColor: globalColors.lightToastInfo,
-  textColor: globalColors.darkBlack,
   opacity: 1,
   headerText: "Attention",
   text: "Important notification message",
@@ -148,7 +138,6 @@ export const Maintenance: Story = {
     isMaintenance: true,
     headerText: "Maintenance Notice",
     text: "System maintenance is scheduled for tonight at 10 PM",
-    backgroundColor: globalColors.lightToastWarning,
   },
   render: (args) => <SnackBarWrapper {...args} />,
 };

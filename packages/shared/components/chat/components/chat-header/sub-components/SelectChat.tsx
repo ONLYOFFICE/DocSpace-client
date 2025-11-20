@@ -126,7 +126,6 @@ const SelectChat = ({
         startNewChat();
         updateUrlChatId("");
       }
-      setIsOpen(false);
       setHoveredItem("");
 
       toastr.success(t("Common:ChatSuccessDeleted"));
@@ -151,6 +150,7 @@ const SelectChat = ({
       onDeleteAction: onDeleteAction,
     });
     setDeleteDialogVisible?.(true);
+    setIsOpen(false);
   }, [
     isRequestRunning,
     hoveredItem,

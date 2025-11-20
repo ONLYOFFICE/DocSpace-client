@@ -616,6 +616,51 @@
       }
     },
     {
+      "label": "Test | Test e2e docker build (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker start (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker clear (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker build (login)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:build",

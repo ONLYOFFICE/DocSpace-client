@@ -259,6 +259,21 @@
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
           },
           {
+            "label": "Test Client E2E build docker",
+            "task": "Test | Test e2e docker build (client)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
+          },
+          {
+            "label": "Test Client E2E start docker",
+            "task": "Test | Test e2e docker start (client)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
+          },
+          {
+            "label": "Test Client E2E clear docker",
+            "task": "Test | Test e2e docker clear (client)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
             "label": "Test Login E2E build docker",
             "task": "Test | Test e2e docker build (login)",
             "tooltip": "🛠️ Start the \"test build in docker\" task"

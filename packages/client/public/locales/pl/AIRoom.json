@@ -1,1 +1,27 @@
-{}
+{
+  "AIChat": "AI-Chat",
+  "AIInstructions": "Instrukcje AI",
+  "CreateChat": "Utwórz czat",
+  "CreateChatDescription": "Przejdź do zakładki AI-Chat, aby rozpocząć.",
+  "EmptyKnowledgeDescription": "Pliki przesłane tutaj zostaną zindeksowane i wykorzystane jako kontekst w zakładce AI-Chat. Dodawaj pliki, aby pytać AI o nie, generować treści lub wspólnie analizować informacje.",
+  "EmptyKnowledgeDescriptionActions": "Spróbuj wykonać te czynności, aby zacząć:",
+  "EmptyKnowledgeTitle": "Jeszcze nie przesłano żadnych plików.",
+  "EmptyResultsDescription": "Pliki generowane w AI-Chat pojawią się tutaj automatycznie. Za każdym razem, gdy wygenerujesz treść, rozpoczniesz czat lub wyślesz wiadomość z wynikiem, rezultat zostanie zapisany w tej sekcji.",
+  "EmptyResultsTitle": "Brak wyników na razie",
+  "InstructionsDescriptionAgent": "Opisz, jak agent AI powinien się zachowywać i odpowiadać. Zdefiniuj jego rolę, ton i główne zadania.",
+  "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga w pisaniu i redagowaniu komunikatów prasowych. Zachowuj profesjonalny, pewny siebie i przyjazny mediom ton. Wyraźnie podkreślaj kluczowe przesłania, unikaj żargonu i utrzymuj tekst zwięzły i angażujący.”",
+  "Knowledge": "Wiedza",
+  "KnowledgeDescription": "Prześlij pliki z komputera lub {{productName}}, aby zapewnić lepszy kontekst dla rozmowy. Zwróć uwagę: część lub całość przesłanych treści może zostać ujawniona podczas rozmowy.",
+  "KnowledgeSelectIn": "Wybierz w {{productName}}",
+  "KnowledgeUnavailable": "Baza wiedzy niedostępna",
+  "KnowledgeUnavailableDescription": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla Twoich agentów AI, skonfiguruj dostawcę osadzeń w ustawieniach {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla agentów AI, skontaktuj się z administratorem {{productName}}, aby skonfigurować dostawcę osadzeń.",
+  "MCP": "Narzędzia MCP do tego pomieszczenia",
+  "MCPDescriptionServers": "Wykorzystaj serwery MCP połączone przez administratora, aby ulepszyć doświadczenie czatu z wykorzystaniem AI. Serwery MCP mogą pomagać w ekstrakcji danych, podsumowaniach, inteligentnych sugestiach, itp.",
+  "Model": "Dostawca i model",
+  "ModelDescription": "Wybierz dostawcę i model AI, które będą używane w rozmowach w tym pokoju. To ustawienie jest obowiązkowe i dotyczy wszystkich uczestników.",
+  "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
+  "ResultStorage": "Przechowywanie wyników",
+  "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
+  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}"
+}

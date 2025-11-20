@@ -3,7 +3,7 @@
   "content": "Choose from list",
   "content_en_sha1_hash": "e284f61fe00c23c301b217153f5427eb75cab3eb",
   "created_at": "2025-05-19T21:30:49.956Z",
-  "updated_at": "2025-10-27T16:14:33.185Z",
+  "updated_at": "2025-11-18T14:41:49.724Z",
   "comment": {
     "text": "This translation key is used to display a message that prompts the user to select from a list of options in various UI components, including buttons and dialogs. The purpose of this text is to provide clear instructions to the user in moments when they need to make a choice from a predefined set of values. It appears as a label on a button component, guiding users through interactive elements.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 217,
+      "line_number": 227,
       "context": ") : (\n <StyledPeopleSelector>\n <SelectorAddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Translations:ChooseFromList\")}\n noSelect\n titleText={t(\"Translations:ChooseFromList\")}\n testId=\"change_portal_owner_choose_from_list_button\"\n />\n </StyledPeopleSelector>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 217,
+      "line_number": 227,
       "context": ") : (\n <StyledPeopleSelector>\n <SelectorAddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Translations:ChooseFromList\")}\n noSelect\n titleText={t(\"Translations:ChooseFromList\")}\n testId=\"change_portal_owner_choose_from_list_button\"\n />\n </StyledPeopleSelector>",
       "module": "/packages/client"
     },
@@ -36,20 +36,26 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 592,
+      "line_number": 585,
       "context": "type=\"action\"\n isHovered\n onClick={openUsersPanel}\n dataTestId=\"invite_panel_choose_from_list_link\"\n >\n {t(\"Translations:ChooseFromList\")}\n </StyledLink>\n ) : null}\n </StyledSubHeader>\n <StyledDescription\n noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
-      "line_number": 261,
+      "line_number": 253,
       "context": "type={LinkType.action}\n isHovered\n onClick={openUsersPanel}\n dataTestId=\"template_access_settings_choose_from_list_link\"\n >\n {t(\"Translations:ChooseFromList\")}\n </StyledLink>\n </StyledSubHeader>\n <StyledDescription>\n {t(\"Files:AddUsersOrGroupsDescription\")}\n </StyledDescription>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 855,
-      "context": "{\n id: \"filter_author-user-button\",\n key: FilterKeys.user,\n group: FilterGroups.filterAuthor,\n displaySelectorType: \"button\",\n label: t(\"Translations:ChooseFromList\"),\n },\n ];\n \n return [\n {",
+      "line_number": 864,
+      "context": "{\n id: \"filter_author-user-button\",\n key: FilterKeys.user,\n group: FilterGroups.filterSharedBy,\n displaySelectorType: \"button\",\n label: t(\"Translations:ChooseFromList\"),\n },\n ];\n }, [t, isSharedWithMeFolder, isVisitor, isCollaborator]);\n \n const getAuthorFilter = React.useCallback(() => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 864,
+      "context": "{\n id: \"filter_author-user-button\",\n key: FilterKeys.user,\n group: FilterGroups.filterSharedBy,\n displaySelectorType: \"button\",\n label: t(\"Translations:ChooseFromList\"),\n },\n ];\n }, [t, isSharedWithMeFolder, isVisitor, isCollaborator]);\n \n const getAuthorFilter = React.useCallback(() => {",
       "module": "/packages/client"
     }
   ],

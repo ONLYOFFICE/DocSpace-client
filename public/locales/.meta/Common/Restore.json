@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2025-10-27T16:14:33.144Z",
+  "updated_at": "2025-11-18T14:41:49.656Z",
   "comment": {
     "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
     "is_auto": true,
@@ -36,44 +36,44 @@
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 217,
+      "line_number": 218,
       "context": "},\n index !== 0 &&\n canChangeVersionFileHistory && {\n key: \"restore\",\n icon: RestoreAuthReactSvgUrl,\n label: t(\"Common:Restore\"),\n onClick: onRestoreClick,\n },\n {\n key: \"download\",\n icon: DownloadReactSvgUrl,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2268,
+      "line_number": 2275,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2268,
+      "line_number": 2275,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2268,
+      "line_number": 2275,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2268,
+      "line_number": 2275,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2353,
-      "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: () => this.archiveRooms(\"unarchive\"),\n disabled: false,\n };\n case \"change-quota\":",
+      "line_number": 2479,
+      "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"restore\", {\n id: \"menu-restore\",\n label: t(\"Common:Restore\"),\n onClick: () => setRestorePanelVisible(true),\n iconUrl: MoveReactSvgUrl,\n })\n .set(\"delete\", deleteOption)\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2353,
-      "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: () => this.archiveRooms(\"unarchive\"),\n disabled: false,\n };\n case \"change-quota\":",
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 235,
+      "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: this.unarchiveHandle,\n disabled: false,\n };\n case \"change-quota\":",
       "module": "/packages/client"
     },
     {

@@ -38,12 +38,14 @@ import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 
-import styles from "../styles/AddEditDialog.module.scss";
+import addEditStyles from "../styles/AddEditDialog.module.scss";
+import baseParamsStyles from "./useBaseParams.module.scss";
 
 export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
   const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);
-  const [showAdvancedSettings, setShowAdvancedSettings] =
-    useState(!!initialValues);
+  const [showAdvancedSettings, setShowAdvancedSettings] = useState(
+    !!initialValues,
+  );
 
   const [headerCounts, setHeaderCounts] = React.useState(
     initialValues ? Object.keys(initialValues).length : 1,
@@ -101,20 +103,28 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
 
   const headersComponent = (
     <>
-      <div className={styles.advancedSettings}>
-        <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
-          {t("SingleSignOn:AdvancedSettings")}
-        </Text>
-        <Link
-          onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
-          type={LinkType.action}
-        >
-          {t(showAdvancedSettings ? "Common:Hide" : "SingleSignOn:Show")}
-        </Link>
+      <div>
+        <div className={addEditStyles.advancedSettings}>
+          <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
+            {t("SingleSignOn:AdvancedSettings")}
+          </Text>
+          <Link
+            onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
+            type={LinkType.action}
+            isHovered
+          >
+            {t(showAdvancedSettings ? "Common:Hide" : "SingleSignOn:Show")}
+          </Link>
+        </div>
+        {showAdvancedSettings ? (
+          <Text className={baseParamsStyles.fieldHint}>
+            {t("AISettings:MCPServerAdvancedSettingsHint")}
+          </Text>
+        ) : null}
       </div>
       {showAdvancedSettings ? (
         <div>
-          <div className={styles.headersContainer}>
+          <div className={addEditStyles.headersContainer}>
             {Array.from({ length: headerCounts }).map((_, index) => (
               <React.Fragment key={`header-${index * 2}`}>
                 <FieldContainer

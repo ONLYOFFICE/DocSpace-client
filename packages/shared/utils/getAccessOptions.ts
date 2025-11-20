@@ -52,6 +52,8 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Common:RoleRoomAdminFormRoomDescription");
+    case RoomsType.AIRoom:
+      return t("Common:RoleAIAgentManagerDescription");
     case None:
       return t("Common:RoleRoomAdminDescription", {
         sectionName: t("Common:MyDocuments"),
@@ -65,6 +67,8 @@ const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Common:RolePowerUserFormRoomDescription");
+    case RoomsType.AIRoom:
+      return t("Common:RoleAIAgentContentCreatorDescription");
     case None:
       return t("Common:RoleNewUserDescription");
     default:
@@ -132,6 +136,21 @@ export const getAccessOptions = (
           : ShareAccessRights.RoomManager,
       type: EmployeeType.RoomAdmin,
     },
+    agentManager: {
+      key: "agentManager",
+      label: t("Common:AgentManager"),
+      description: getRoomAdminDescription(roomType, t),
+      tooltip: t("UserAgentMaxAvailableRoleWarning", {
+        productName: t("Common:ProductName"),
+      }),
+      ...(!standalone && { quota: t("Common:Paid") }),
+      color: globalColors.favoritesStatus,
+      access:
+        roomType === None
+          ? EmployeeType.RoomAdmin
+          : ShareAccessRights.RoomManager,
+      type: EmployeeType.RoomAdmin,
+    },
     user: {
       key: "newUser",
       label: getUserTypeTranslation(EmployeeType.User, t),
@@ -144,6 +163,12 @@ export const getAccessOptions = (
       key: "contentCreator",
       label: t("Common:ContentCreator"),
       description: getUserDescription(roomType, t),
+      tooltip:
+        roomType === RoomsType.AIRoom
+          ? t("GuestAgentMaxAvailableRoleWarning", {
+              productName: t("Common:ProductName"),
+            })
+          : undefined,
       access:
         roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,
       type: EmployeeType.User,
@@ -179,7 +204,10 @@ export const getAccessOptions = (
     viewer: {
       key: "viewer",
       label: t("Common:RoleViewer"),
-      description: t("Common:RoleViewerDescription"),
+      description:
+        roomType === RoomsType.AIRoom
+          ? t("Common:RoleAIAgentViewerDescription")
+          : t("Common:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
       type: EmployeeType.User,
     },
@@ -259,7 +287,7 @@ export const getAccessOptions = (
 
     case RoomsType.AIRoom:
       options = [
-        accesses.roomManager,
+        accesses.agentManager,
         accesses.contentCreator,
         { key: "s1", isSeparator: withSeparator },
         accesses.viewer,

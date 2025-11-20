@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useRef } from "react";
 import { observer } from "mobx-react";
 
 import { ChatHeaderProps } from "../../Chat.types";
@@ -39,11 +40,24 @@ const ChatHeader = ({
   isLoading,
   getIcon,
   roomId,
+  aiReady,
+  getResultStorageId,
+  setIsAIAgentChatDelete,
+  setDeleteDialogVisible,
 }: ChatHeaderProps) => {
+  const headerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className={`${styles.chatHeader} chat-header`}>
-      <SelectChat isLoadingProp={isLoading} getIcon={getIcon} roomId={roomId} />
-      <CreateChat isLoadingProp={isLoading} />
+    <div ref={headerRef} className={`${styles.chatHeader} chat-header`}>
+      <SelectChat
+        isLoadingProp={isLoading}
+        getIcon={getIcon}
+        getResultStorageId={getResultStorageId}
+        roomId={roomId}
+        setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+        setDeleteDialogVisible={setDeleteDialogVisible}
+      />
+      <CreateChat isLoadingProp={isLoading} isDisabled={!aiReady} />
       <SelectModel selectedModel={selectedModel} isLoading={isLoading} />
     </div>
   );

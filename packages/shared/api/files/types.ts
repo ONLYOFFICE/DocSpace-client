@@ -83,12 +83,17 @@ export type TFileSecurity = {
   CopyLink: boolean;
   Embed: boolean;
   Vectorization: boolean;
-  AscAi?: boolean;
+  AskAi?: boolean;
 };
 
 export type TShareSettings = {
   ExternalLink?: number;
   PrimaryExternalLink?: number;
+};
+
+type TDimensions = {
+  width: number;
+  height: number;
 };
 
 export type TFile = {
@@ -119,6 +124,8 @@ export type TFile = {
   title: string;
   updated: string;
   updatedBy: TCreatedBy;
+  sharedBy?: TCreatedBy;
+  ownedBy?: TCreatedBy;
   version: number;
   versionGroup: number;
   viewAccessibility: TFileViewAccessibility;
@@ -150,6 +157,7 @@ export type TFile = {
   sharedForUser?: boolean;
   external?: boolean;
   isLinkExpired?: boolean;
+  dimensions?: TDimensions;
 };
 
 export type TOpenEditRequest = {
@@ -226,6 +234,8 @@ export type TFolder = {
   createdBy: TCreatedBy;
   updated: string;
   updatedBy: TCreatedBy;
+  sharedBy?: TCreatedBy;
+  ownedBy?: TCreatedBy;
   rootFolderType: FolderType;
   isArchive?: boolean;
   roomType?: RoomsType;

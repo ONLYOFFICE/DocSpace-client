@@ -52,7 +52,6 @@ import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
 import ThirdPartyStorage from "./ThirdPartyStorage";
 import TemplateAccess from "./TemplateAccess/TemplateAccess";
-import AiRoomSettings from "./AiRoomSettings";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -137,6 +136,7 @@ const SetRoomParams = ({
   getLogoCoverModel,
   getInfoPanelItemIcon,
   uploadFile,
+  clearUploadedFile,
   avatarEditorDialogVisible,
   setAvatarEditorDialogVisible,
   roomLogoCoverDialogVisible,
@@ -154,6 +154,7 @@ const SetRoomParams = ({
   hideConfirmRoomLifetime,
   templateIsAvailable,
   fromTemplate,
+  infoPanelSelection,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -161,8 +162,16 @@ const SetRoomParams = ({
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
-  const [previewTitle, setPreviewTitle] = useState(selection?.title || "");
+  const [previewTitle, setPreviewTitle] = useState(
+    selection?.title || infoPanelSelection?.title || "",
+  );
   const [createRoomTitle, setCreateRoomTitleTitle] = useState(roomParams.title);
+
+  const originalIconRef = React.useRef({
+    icon: roomParams.icon,
+    previewIcon: roomParams.previewIcon,
+    iconWasUpdated: roomParams.iconWasUpdated,
+  });
 
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
@@ -232,11 +241,19 @@ const SetRoomParams = ({
     [],
   );
 
-  const currentIcon = selection?.logo?.large
+  const currentIcon = selection
     ? selection?.logo?.large
-    : selection?.logo?.cover
-      ? selection?.logo
-      : getInfoPanelItemIcon(selection, 96);
+      ? selection?.logo?.large
+      : selection?.logo?.cover
+        ? selection?.logo
+        : getInfoPanelItemIcon(selection, 96)
+    : infoPanelSelection
+      ? infoPanelSelection?.logo?.large
+        ? infoPanelSelection?.logo?.large
+        : infoPanelSelection?.logo?.cover
+          ? infoPanelSelection?.logo
+          : getInfoPanelItemIcon?.(infoPanelSelection, 96)
+      : undefined;
 
   const onChangeIcon = (icon) => {
     if (!icon.uploadedFile !== disableImageRescaling)
@@ -246,6 +263,12 @@ const SetRoomParams = ({
   };
 
   const onChangeFile = async (e) => {
+    originalIconRef.current = {
+      icon: roomParams.icon,
+      previewIcon: roomParams.previewIcon,
+      iconWasUpdated: roomParams.iconWasUpdated,
+    };
+
     const uploadedFile = await uploadFile(t, e);
 
     setRoomParams({
@@ -255,6 +278,20 @@ const SetRoomParams = ({
     });
 
     onChangeIcon({ ...roomParams.icon, uploadedFile });
+  };
+
+  const onCloseAvatarEditor = () => {
+    setPreviewIcon(originalIconRef.current.previewIcon);
+    setAvatarEditorDialogVisible(false);
+
+    clearUploadedFile?.();
+
+    setRoomParams({
+      ...roomParams,
+      icon: originalIconRef.current.icon,
+      previewIcon: originalIconRef.current.previewIcon,
+      iconWasUpdated: originalIconRef.current.iconWasUpdated,
+    });
   };
 
   const onChangeName = (e) => {
@@ -296,7 +333,9 @@ const SetRoomParams = ({
   };
 
   const onDeleteAvatar = () => {
-    setCover(`#${randomColor}`, "");
+    if (previewIcon) setPreviewIcon(null);
+    else setCover(`#${randomColor}`, "");
+
     setRoomParams({
       ...roomParams,
       icon: {
@@ -306,6 +345,7 @@ const SetRoomParams = ({
         y: 0.5,
         zoom: 1,
       },
+      iconWasUpdated: false,
     });
   };
 
@@ -322,12 +362,19 @@ const SetRoomParams = ({
 
   const hasImage =
     isEdit || isTemplate || fromTemplate
-      ? roomParams.icon.uploadedFile && selection?.logo?.original
+      ? !!(
+          roomParams.iconWasUpdated ||
+          (roomParams.icon.uploadedFile &&
+            (selection?.logo?.original || infoPanelSelection?.logo?.original))
+        )
       : false;
+
   const model = getLogoCoverModel(t, hasImage);
 
   const isEditRoomModel = model.map((item) =>
-    item.key === "delete" ? { ...item, onClick: onDeleteAvatar } : item,
+    item.key === "create_edit_room_delete"
+      ? { ...item, onClick: onDeleteAvatar }
+      : item,
   );
 
   const isEmptyIcon =
@@ -338,6 +385,16 @@ const SetRoomParams = ({
         : previewIcon
           ? false
           : !createRoomTitle;
+
+  const showDefault =
+    cover && cover.cover
+      ? false
+      : (!previewIcon &&
+          !selection?.logo?.cover &&
+          !selection?.logo?.large &&
+          !infoPanelSelection?.logo?.cover &&
+          !infoPanelSelection?.logo?.large) ||
+        cover?.color;
 
   const element =
     isEdit || isTemplate || fromTemplate ? (
@@ -354,16 +411,12 @@ const SetRoomParams = ({
               ? currentIcon
               : previewIcon || currentIcon
         }
-        showDefault={
-          cover && cover.cover
-            ? false
-            : (!previewIcon &&
-                !selection?.logo?.cover &&
-                !selection?.logo?.large) ||
-              cover?.color
-        }
+        showDefault={showDefault}
         color={
-          cover ? cover.color : (selection?.logo?.color ?? selection?.color)
+          cover
+            ? cover.color
+            : (selection?.logo?.color ?? selection?.color) ||
+              infoPanelSelection.logo?.color
         }
         size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
         radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
@@ -511,10 +564,6 @@ const SetRoomParams = ({
         />
       ) : null}
 
-      {roomParams.type === RoomsType.AIRoom ? (
-        <AiRoomSettings roomParams={roomParams} setRoomParams={setRoomParams} />
-      ) : null}
-
       {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey ? (
         <RoomQuota
           setRoomParams={setRoomParams}
@@ -547,7 +596,7 @@ const SetRoomParams = ({
             image={roomParams.icon}
             setPreview={setPreviewIcon}
             onChangeImage={onChangeIcon}
-            onClose={() => setAvatarEditorDialogVisible(false)}
+            onClose={onCloseAvatarEditor}
             onSave={onSaveAvatar}
             onChangeFile={onChangeFile}
             classNameWrapperImageCropper="icon-editor"
@@ -584,6 +633,7 @@ export default inject(
 
     const {
       uploadFile,
+      clearUploadedFile,
       avatarEditorDialogVisible,
       setAvatarEditorDialogVisible,
       image,
@@ -624,6 +674,7 @@ export default inject(
       getInfoPanelItemIcon,
       setCoverSelection,
       uploadFile,
+      clearUploadedFile,
       avatarEditorDialogVisible,
       setAvatarEditorDialogVisible,
       setRoomCoverDialogProps,
@@ -636,6 +687,7 @@ export default inject(
       setCover,
       setLifetimeDialogVisible,
       hideConfirmRoomLifetime,
+      infoPanelSelection,
     };
   },
 )(

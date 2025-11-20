@@ -38,12 +38,14 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import type { TAiProvider } from "@docspace/shared/api/ai/types";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 type Props = {
   providerId: TAiProvider["id"];
   deleteAIProvider?: AISettingsStore["deleteAIProvider"];
+  getAIConfig?: SettingsStore["getAIConfig"];
   onClose: VoidFunction;
 };
 
@@ -51,6 +53,7 @@ const DeleteDialogComponent = ({
   providerId,
   deleteAIProvider,
   onClose,
+  getAIConfig,
 }: Props) => {
   const { t } = useTranslation(["Common", "AISettings"]);
 
@@ -59,6 +62,7 @@ const DeleteDialogComponent = ({
   const onSubmit = async () => {
     try {
       await deleteAIProvider?.(providerId);
+      await getAIConfig?.();
 
       toastr.success(t("AISettings:ProviderRemovedSuccess"));
     } catch (error) {
@@ -80,7 +84,7 @@ const DeleteDialogComponent = ({
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:OKButton")}
+          label={t("Common:Delete")}
           scale
           onClick={onSubmit}
           isLoading={loading}
@@ -97,8 +101,11 @@ const DeleteDialogComponent = ({
   );
 };
 
-export const DeleteAIProviderDialog = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    deleteAIProvider: aiSettingsStore.deleteAIProvider,
-  };
-})(observer(DeleteDialogComponent));
+export const DeleteAIProviderDialog = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    return {
+      deleteAIProvider: aiSettingsStore.deleteAIProvider,
+      getAIConfig: settingsStore.getAIConfig,
+    };
+  },
+)(observer(DeleteDialogComponent));

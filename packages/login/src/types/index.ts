@@ -103,6 +103,7 @@ export type TConfirmRouteContext = {
   roomData: {
     roomId?: string;
     title?: string;
+    isAgent?: boolean;
   };
   confirmLinkResult: {
     result?: ValidationResult;
@@ -127,6 +128,7 @@ export type TConfirmLinkResult = {
   result: ValidationResult;
   roomId?: string;
   title?: string;
+  isAgent?: boolean;
   email?: string;
 };
 

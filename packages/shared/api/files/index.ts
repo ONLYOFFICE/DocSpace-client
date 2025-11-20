@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
@@ -1392,7 +1391,7 @@ export async function restoreDocumentsVersion(
   doc: null | number | string,
 ) {
   const options: AxiosRequestConfig = {
-    method: "get",
+    method: "post",
     url: `files/file/${fileId}/restoreversion?version=${version}&doc=${doc}`,
   };
 

@@ -34,7 +34,7 @@ import {
   TSelectorHeader,
   TSelectorItem,
 } from "@docspace/shared/components/selector/Selector.types";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { TTheme } from "@docspace/shared/themes";
 
 export type FilesSelectorProps = TSelectorHeader & {
@@ -85,6 +85,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 
   selection: (TFolder | TFile)[];
   disabledItems: string[] | number[];
+  disabledFolderType?: FolderType;
   setMoveToPanelVisible: (value: boolean) => void;
   setRestorePanelVisible: (value: boolean) => void;
   setCopyPanelVisible: (value: boolean) => void;
@@ -161,4 +162,5 @@ export type FilesSelectorProps = TSelectorHeader & {
   logoText: string;
 
   isMultiSelect?: boolean;
+  maxSelectedItems?: number;
 };

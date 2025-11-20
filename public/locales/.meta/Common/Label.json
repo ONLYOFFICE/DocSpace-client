@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2025-10-27T16:14:33.219Z",
+  "updated_at": "2025-11-18T14:41:49.745Z",
   "comment": {
     "text": "The \"Label\" translation key is used to display a descriptive title for input fields, such as group names or room tags. It appears in a dialog box, specifically within the CreateEditGroupDialog and CreateEditRoomDialog components, where it provides context for users to enter a name. Translators should replace the English content with a translated version of \"Name\" while maintaining this descriptive purpose.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 415,
+      "line_number": 468,
       "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTags\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>\n {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (\n <RoomType",
       "module": "/packages/client"
     },
@@ -90,19 +90,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1424,
+      "line_number": 1469,
       "context": "const commonOptions = [];\n \n const name = {\n id: \"sort-by_name\",\n key: SortByFieldName.Name,\n label: t(\"Common:Label\"),\n default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 223,
+      "line_number": 287,
       "context": "scaledOptions\n isDisabled={variant === \"update\" || isRequestRunning}\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Label\")}\n labelVisible\n isVertical\n removeMargin\n isRequired\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 374,
+      "line_number": 373,
       "context": "{!isEdit ? (\n <Text>{t(\"Settings:CreateNewSecretKeyDialogDescription\")}</Text>\n ) : null}\n <div className=\"api-key_name\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:Label\")}\n </Text>\n <TextInput\n placeholder={t(\"Settings:NewSecretKey\")}\n value={inputValue}\n type={InputType.text}",
       "module": "/packages/client"
     },

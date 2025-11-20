@@ -122,6 +122,7 @@ const AvatarEditorDialog = (props) => {
     isProfileUpload,
     setPreview,
     dataTestId,
+    isAIAgentsFolderRoot,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -132,7 +133,9 @@ const AvatarEditorDialog = (props) => {
 
   const avatarTitle = isProfileUpload
     ? t("Ldap:LdapAvatar")
-    : t("RoomLogoCover:RoomCover");
+    : isAIAgentsFolderRoot
+      ? t("RoomLogoCover:AgentCover")
+      : t("RoomLogoCover:RoomCover");
 
   const onResize = () => {
     const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
@@ -253,18 +256,22 @@ const AvatarEditorDialog = (props) => {
   );
 };
 
-export default inject(({ peopleStore, settingsStore, userStore }) => {
-  const { targetUserStore } = peopleStore;
-  const { maxImageUploadSize } = settingsStore;
+export default inject(
+  ({ peopleStore, settingsStore, userStore, treeFoldersStore }) => {
+    const { targetUserStore } = peopleStore;
+    const { maxImageUploadSize } = settingsStore;
 
-  const { user: profile } = userStore;
+    const { user: profile } = userStore;
 
-  const { updateCreatedAvatar, setHasAvatar } = targetUserStore;
+    const { updateCreatedAvatar, setHasAvatar } = targetUserStore;
+    const { isAIAgentsFolderRoot } = treeFoldersStore;
 
-  return {
-    profile,
-    setHasAvatar,
-    updateCreatedAvatar,
-    maxImageUploadSize,
-  };
-})(observer(AvatarEditorDialog));
+    return {
+      profile,
+      setHasAvatar,
+      updateCreatedAvatar,
+      maxImageUploadSize,
+      isAIAgentsFolderRoot,
+    };
+  },
+)(observer(AvatarEditorDialog));

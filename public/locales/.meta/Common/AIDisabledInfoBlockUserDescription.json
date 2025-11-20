@@ -1,0 +1,28 @@
+{
+  "key_path": "AIDisabledInfoBlockUserDescription",
+  "content": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. To get back on track, ask your {{productName}} admin to enable AI features.",
+  "content_en_sha1_hash": "b586f9691b5442ebacd7e527ad626e87d0309aa8",
+  "created_at": "2025-11-03T12:10:13.557Z",
+  "updated_at": "2025-11-13T07:58:08.563Z",
+  "comment": {
+    "text": "This text explains to users that AI features are currently disabled, preventing chat and task processing. It appears within a chat information block and instructs users to contact their {{productName}} administrator to re-enable AI functionality. Translators should ensure the language is clear and conveys the reason for limited functionality.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:15:39.524Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-info-block/index.tsx",
+      "line_number": 45,
+      "context": "isPortalAdmin,\n }: ChatInfoBlockProps) => {\n const { t } = useTranslation(\"Common\");\n \n const bodyText = !isPortalAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,1 +1,27 @@
-{}
+{
+  "AIChat": "AI-Chat",
+  "AIInstructions": "Pokyny pro AI",
+  "CreateChat": "Vytvořit chat",
+  "CreateChatDescription": "Přejděte na záložku AI-Chat, abyste mohli začít.",
+  "EmptyKnowledgeDescription": "Soubory nahrané zde budou indexovány a použity jako kontext v záložce AI-Chat. Přidejte soubory, abyste se na ně zeptali AI, generovali obsah nebo společně analyzovali informace.",
+  "EmptyKnowledgeDescriptionActions": "Vyzkoušejte tyto akce pro začátek:",
+  "EmptyKnowledgeTitle": "Ještě nebyly nahrány žádné soubory.",
+  "EmptyResultsDescription": "Soubory generované v AI-Chat se zde automaticky zobrazí. Kdykoli vygenerujete obsah, zahájíte chat nebo odešlete zprávu s výstupem, výsledek bude uložen v této sekci.",
+  "EmptyResultsTitle": "Ještě žádné výsledky.",
+  "InstructionsDescriptionAgent": "Popište, jak by měl AI agent reagovat a chovat se. Definujte jeho roli, tón a hlavní úkoly.",
+  "InstructionsDescriptionAgentExample": "Příklad: „Jste AI PR asistent, který pomáhá s psaním a úpravou tiskových zpráv. Udržujte profesionální, sebevědomý a mediálně vstřícný tón. Jasně zdůrazněte klíčové poselství, vyhýbejte se žargonu a udržujte text stručný a poutavý.“",
+  "Knowledge": "Znalosti",
+  "KnowledgeDescription": "Nahrajte soubory z vašeho počítače nebo z {{productName}}, abyste poskytli lepší kontext pro chat. Upozornění: během konverzace mohou být některé nebo všechny nahrané soubory zobrazeny.",
+  "KnowledgeSelectIn": "Vybrat v {{productName}}",
+  "KnowledgeUnavailable": "Znalostní báze nedostupná",
+  "KnowledgeUnavailableDescription": "Znalostní báze je momentálně vypnuta. Pro aktivaci sémantického vyhledávání a zpracování dokumentů pro vaše AI agenty, prosím, nakonfigurujte poskytovatele embeddingů v nastavení {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Znalostní báze je momentálně deaktivovaná. Pro aktivaci sémantického vyhledávání a zpracování dokumentů pro AI agenty, kontaktujte prosím administrátora vašeho {{productName}}, aby nakonfiguroval poskytovatele embeddingů.",
+  "MCP": "MCP nástroje pro tuto místnost",
+  "MCPDescriptionServers": "Používejte MCP servery propojené administrátorem pro vylepšení chatovacího zážitku s pomocí AI. MCP servery mohou pomoci s extrakcí dat, shrnutími, chytrými návrhy atd.",
+  "Model": "Poskytovatel a model",
+  "ModelDescription": "Vyberte poskytovatele AI a model, který se bude používat v chatu v této místnosti. Toto nastavení je povinné a platí pro všechny účastníky.",
+  "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovědí se může lišit v závislosti na modelu; pro nejlepší výsledky se doporučují novější modely.",
+  "ResultStorage": "Úložiště výsledků",
+  "UploadFilesDevice": "Nahrajte soubory z vašeho osobního zařízení.",
+  "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}"
+}

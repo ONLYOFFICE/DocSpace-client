@@ -25,15 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
+import { describe, it, expect, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { SelectedItem } from "./SelectedItem";
 
 const baseProps = {
   label: "sample text",
-  onClose: () => jest.fn(),
+  onClose: () => vi.fn(),
   propKey: "",
 };
 

@@ -75,6 +75,9 @@ export const useEmptyView = (
     selectedFolder,
     isKnowledgeTab,
     isResultsTab,
+    isPortalAdmin,
+    aiReady,
+    standalone,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
@@ -102,6 +105,9 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      aiReady,
+      standalone,
+      isPortalAdmin,
     );
     const title = getTitle(
       type,
@@ -113,9 +119,13 @@ export const useEmptyView = (
       isArchiveFolderRoot,
       isRootEmptyPage,
       rootFolderType,
+      security,
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      aiReady,
+      standalone,
+      isPortalAdmin,
     );
     const icon = getIcon(
       type,
@@ -126,6 +136,8 @@ export const useEmptyView = (
       parentRoomType,
       isRootEmptyPage,
       rootFolderType,
+      security,
+      isResultsTab,
     );
 
     return { description, title, icon };
@@ -183,6 +195,9 @@ export const useOptions = (
     logoText,
     isKnowledgeTab,
     isResultsTab,
+    aiReady,
+    standalone,
+    isPortalAdmin,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -213,6 +228,14 @@ export const useOptions = (
       state,
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
+
+  const onGoToServices = useCallback(() => {
+    return navigate("/portal-settings/services");
+  }, []);
+
+  const onGoToAIProviderSettings = useCallback(() => {
+    return navigate("/portal-settings/ai-settings/providers");
+  }, []);
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -350,6 +373,8 @@ export const useOptions = (
           onGoToShared,
           onOpenAccessSettings,
           onCreateAIAgent,
+          onGoToServices,
+          onGoToAIProviderSettings,
         },
         logoText,
         isVisitor,
@@ -357,6 +382,9 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
+        aiReady,
+        standalone,
+        isPortalAdmin,
       ),
     [
       type,

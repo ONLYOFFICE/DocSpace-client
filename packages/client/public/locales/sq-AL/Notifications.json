@@ -5,7 +5,6 @@
   "DailyFeed": "Furnizimi ditor i {{productName}}",
   "DailyFeedDescription": "Lexoni lajmet dhe ngjarjet nga {{productName}} në një përmbledhje të përditshme.",
   "FileActivityNotify": "Njoftime për aktivitetet në skedarë",
-  "GoToSettings": "Shkoni te Cilësimet",
   "IsNotValid": "Nuk është i vlefshëm",
   "LdapEmailTooltip": "Kjo llogari është e ngarkuar nga LDAP. Email-i nuk është specifikuar dhe është gjeneruar automatikisht, nuk mund të përdoret për të dërguar njoftime.",
   "NotConfigured": "Nuk është konfiguruar",

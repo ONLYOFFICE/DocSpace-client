@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 import { TUser } from "../api/people/types";
 import { TGroup } from "../api/groups/types";
+import { TFile } from "../api/files/types";
 
 import { addLog } from ".";
 
@@ -77,6 +76,7 @@ export const enum SocketEvents {
   SelfRestrictionFile = "s:self-restriction-file",
   SelfRestrictionFolder = "s:self-restriction-folder",
   ChaneFolderAccessRights = "s:change-access-rights-folder",
+  ExportChat = "s:export-chat",
 }
 
 /**
@@ -302,6 +302,7 @@ export type TListenEventCallbackMap = {
     id: number;
     data: string;
   }) => void;
+  [SocketEvents.ExportChat]: (data: { resultFile: TFile }) => void;
 };
 
 /**

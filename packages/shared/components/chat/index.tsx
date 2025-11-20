@@ -24,66 +24,135 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { MessageStoreContextProvider } from "./store/messageStore";
-import { ChatStoreContextProvider } from "./store/chatStore";
+import React from "react";
+import { observer } from "mobx-react";
 
-import { ChatProps } from "./Chat.types";
+import { MessageStoreContextProvider } from "./store/messageStore";
+import { ChatStoreContextProvider, useChatStore } from "./store/chatStore";
+
+import type { ChatProps } from "./Chat.types";
 
 import ChatContainer from "./components/chat-container";
 import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
 import { ChatNoAccessScreen } from "./components/chat-no-access-screen";
+import ChatFooter from "./components/chat-footer";
 
 import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
 
 export { CHAT_SUPPORTED_FORMATS };
 
-const Chat = ({
-  roomId,
-  userAvatar,
-  selectedModel,
-  isLoading,
-  canUseChat,
+const Chat = observer(
+  ({
+    isLoadingChat,
+    selectedModel,
+    getIcon,
+    roomId,
+    userAvatar,
+    attachmentFile,
+    clearAttachmentFile,
+    toolsSettings,
+    isAdmin = false,
+    standalone = false,
+    aiReady = false,
+    getResultStorageId,
+    setIsAIAgentChatDelete,
+    setDeleteDialogVisible,
+  }: ChatProps & { isLoadingChat: boolean }) => {
+    const { currentChat } = useChatStore();
 
-  getIcon,
-  attachmentFile,
-  clearAttachmentFile,
-}: ChatProps) => {
-  if (!roomId) {
-    return null;
-  }
+    const showEmptyScreen = !isLoadingChat && !aiReady && !currentChat;
 
-  if (!canUseChat) {
-    return <ChatNoAccessScreen />;
+    React.useEffect(() => {
+      window.dispatchEvent(
+        new CustomEvent("select-chat", {
+          detail: {
+            chatId: currentChat?.id,
+          },
+        }),
+      );
+    }, [currentChat?.id]);
+
+    return (
+      <>
+        <ChatHeader
+          selectedModel={selectedModel}
+          isLoading={isLoadingChat}
+          getIcon={getIcon}
+          getResultStorageId={getResultStorageId}
+          roomId={roomId}
+          aiReady={aiReady}
+          setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+          setDeleteDialogVisible={setDeleteDialogVisible}
+        />
+        {showEmptyScreen ? (
+          <ChatNoAccessScreen
+            aiReady={aiReady}
+            standalone={standalone}
+            isPortalAdmin={isAdmin}
+          />
+        ) : (
+          <>
+            <ChatMessageBody
+              userAvatar={userAvatar}
+              isLoading={isLoadingChat}
+              getIcon={getIcon}
+              getResultStorageId={getResultStorageId}
+            />
+            <ChatFooter
+              attachmentFile={attachmentFile}
+              clearAttachmentFile={clearAttachmentFile}
+              isLoading={isLoadingChat}
+              getIcon={getIcon}
+              selectedModel={selectedModel}
+              toolsSettings={toolsSettings}
+              isPortalAdmin={isAdmin}
+              aiReady={aiReady}
+              standalone={standalone}
+            />
+          </>
+        )}
+      </>
+    );
+  },
+);
+
+const ChatWrapper = (props: ChatProps) => {
+  const {
+    roomId,
+    isLoading,
+
+    initChats,
+
+    messagesSettings,
+
+    isAdmin = false,
+    standalone = false,
+    aiReady = false,
+  } = props;
+
+  const isLoadingChat = isLoading || !roomId;
+  const hasChats = initChats?.chats?.length > 0;
+
+  if (!isLoadingChat && !aiReady && !hasChats) {
+    return (
+      <ChatNoAccessScreen
+        aiReady={aiReady}
+        standalone={standalone}
+        isPortalAdmin={isAdmin}
+      />
+    );
   }
 
   return (
-    <ChatStoreContextProvider roomId={roomId}>
-      <MessageStoreContextProvider roomId={roomId}>
+    <ChatStoreContextProvider roomId={roomId} {...initChats}>
+      <MessageStoreContextProvider roomId={roomId} {...messagesSettings}>
         <ChatContainer>
-          <ChatHeader
-            selectedModel={selectedModel}
-            isLoading={isLoading}
-            getIcon={getIcon}
-            roomId={roomId}
-          />
-          <ChatMessageBody
-            userAvatar={userAvatar}
-            isLoading={isLoading}
-            getIcon={getIcon}
-          />
-          <ChatInput
-            attachmentFile={attachmentFile}
-            clearAttachmentFile={clearAttachmentFile}
-            isLoading={isLoading}
-            getIcon={getIcon}
-            selectedModel={selectedModel}
-          />
+          <Chat {...props} isLoadingChat={isLoadingChat} />
         </ChatContainer>
       </MessageStoreContextProvider>
     </ChatStoreContextProvider>
   );
 };
 
-export default Chat;
+export default ChatWrapper;

@@ -26,15 +26,19 @@
 
 import React from "react";
 import { decode } from "he";
+import type { TFunction } from "i18next";
 
 import { getCorrectDate } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Tag } from "@docspace/shared/components/tag";
+import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
-import { TCreatedBy, TTranslation } from "@docspace/shared/types";
-import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
+
+import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
+import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
@@ -93,6 +97,8 @@ type DetailsHelperProps = {
   isCollaborator: boolean;
   selectTag: (tag: { label: string }) => void;
   isDefaultRoomsQuotaSet: boolean;
+  isDefaultAIAgentsQuotaSet: boolean;
+  isAIAgentsFolder: boolean;
   roomLifetime: TRoomLifetime;
 };
 
@@ -113,6 +119,10 @@ class DetailsHelper {
 
   isDefaultRoomsQuotaSet: boolean;
 
+  isDefaultAIAgentsQuotaSet: boolean;
+
+  isAIAgentsFolder: boolean;
+
   roomLifetime: TRoomLifetime;
 
   constructor(props: DetailsHelperProps) {
@@ -124,6 +134,8 @@ class DetailsHelper {
     this.isCollaborator = props.isCollaborator;
     this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
+    this.isDefaultAIAgentsQuotaSet = props.isDefaultAIAgentsQuotaSet;
+    this.isAIAgentsFolder = props.isAIAgentsFolder;
     this.roomLifetime = props.roomLifetime;
   }
 
@@ -152,7 +164,7 @@ class DetailsHelper {
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
-              "Owner",
+              "ownedBy" in this.item && this.item.ownedBy ? "OwnedBy" : "Owner",
               // "Location",
               "Type",
               "Content",
@@ -160,19 +172,34 @@ class DetailsHelper {
               "Last modified by",
               "Creation date",
               this.item.order && "Index",
+              "ownedBy" in this.item &&
+                this.item.ownedBy &&
+                this.item.createdBy &&
+                "Author",
+              this.item.sharedBy && "Shared by",
+              this.item.access && "Access level",
             ]
           : [
-              "Owner",
+              "ownedBy" in this.item && this.item.ownedBy ? "OwnedBy" : "Owner",
               // "Location",
               "Type",
               "File extension",
               "Size",
+              "dimensions" in this.item &&
+                this.item?.dimensions &&
+                "Resolution",
               "Date modified",
               "Last modified by",
               "Creation date",
               "expired" in this.item && this.item.expired && "Lifetime ends",
               "Versions",
               "order" in this.item && this.item.order && "Index",
+              "ownedBy" in this.item &&
+                this.item.ownedBy &&
+                this.item.createdBy &&
+                "Author",
+              "sharedBy" in this.item && this.item.sharedBy && "Shared by",
+              this.item.access && "Access level",
               "Comments",
             ]
     ).filter((nP) => nP) as string[];
@@ -181,6 +208,7 @@ class DetailsHelper {
   getPropertyTitle = (propertyId: string) => {
     switch (propertyId) {
       case "Owner":
+      case "OwnedBy":
         return this.t("Common:Owner");
       case "Location":
         return this.t("Common:Location");
@@ -197,7 +225,8 @@ class DetailsHelper {
         return this.t("Common:Content");
       case "Size":
         return this.t("Common:Size");
-
+      case "Resolution":
+        return this.t("InfoPanel:Resolution");
       case "Date modified":
         return this.t("DateModified");
       case "Last modified by":
@@ -216,10 +245,21 @@ class DetailsHelper {
         return this.t("Common:Comments");
       case "Tags":
         return this.t("Common:Tags");
+
+      case "Author":
+        return this.t("Files:ByAuthor");
+      case "Shared by":
+        return this.t("Files:SharedBy");
+      case "Access level":
+        return this.t("Files:AccessLevel");
+
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
-          return this.isDefaultRoomsQuotaSet &&
-            this.item.quotaLimit !== undefined
+          const isDefaultQuotaSet = this.isAIAgentsFolder
+            ? this.isDefaultAIAgentsQuotaSet
+            : this.isDefaultRoomsQuotaSet;
+
+          return isDefaultQuotaSet && this.item.quotaLimit !== undefined
             ? this.t("Common:StorageAndQuota")
             : this.t("Common:Storage");
         }
@@ -234,6 +274,8 @@ class DetailsHelper {
     switch (propertyId) {
       case "Owner":
         return this.getAuthorDecoration("createdBy");
+      case "OwnedBy":
+        return this.getAuthorDecoration("ownedBy");
       case "Location":
         return text("...");
 
@@ -254,7 +296,8 @@ class DetailsHelper {
         return this.getItemContent();
       case "Size":
         return this.getItemSize();
-
+      case "Resolution":
+        return this.getItemDimensions();
       case "Date modified":
         return this.getItemDateModified();
       case "Last modified by":
@@ -272,9 +315,20 @@ class DetailsHelper {
         return this.getItemTags();
       case "Storage":
         return this.getQuotaItem();
+      case "Author":
+        return this.getAuthorDecoration();
+      case "Shared by":
+        return this.getAuthorDecoration("sharedBy");
+      case "Access level":
+        return this.getItemAccessLevel();
       default:
         break;
     }
+  };
+
+  getItemAccessLevel = () => {
+    if (!("access" in this.item) || isRoom(this.item)) return null;
+    return text(getAccessLabel(this.t as TFunction, this.item));
   };
 
   getAuthorDecoration = (byField = "createdBy") => {
@@ -336,6 +390,13 @@ class DetailsHelper {
     return text(this.item.contentLength);
   };
 
+  getItemDimensions = () => {
+    if (!("dimensions" in this.item)) return null;
+    return text(
+      `${this.item?.dimensions?.width} x ${this.item?.dimensions?.height} px`,
+    );
+  };
+
   getItemIndex = () => {
     if (!("order" in this.item)) return null;
     return text(this.item.order);
@@ -385,6 +446,7 @@ class DetailsHelper {
         <SpaceQuota
           item={this.item}
           isReadOnly={!this.item?.security?.EditRoom}
+          type={this.isAIAgentsFolder ? "agent" : "room"}
         />
       );
     }

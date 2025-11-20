@@ -1,4 +1,7 @@
 {
+  "DeleteAIAgentDescription": "Агентът <strong>\"{{agentName}}\"</strong> ще бъде изтрит необратимо. Всички данни и потребителски достъпи ще бъдат загубени.",
+  "DeleteAIAgentTitle": "Изтриване на този агент?",
+  "DeleteAIAgentWarning": "Разбирам последиците и искам да изтрия агента.",
   "DeleteAllGroupDescription": "Избраните групи ще бъдат изтрити. Потребителите в групите няма да бъдат премахнати от {{productName}}. Сигурни ли сте, че искате да продължите?",
   "DeleteAllGroupsTitle": "Изтрий групи",
   "DeleteFiles": "Предстои да преместите <strong>файлове ({{filesCount}})</strong> в {{trashSection}}.",

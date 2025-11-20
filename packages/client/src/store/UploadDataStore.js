@@ -1022,10 +1022,14 @@ class UploadDataStore {
     const { isAIRoom } = this.selectedFolderStore;
     const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
 
+    const checkConflicts =
+      uploadData.files.findIndex((f) => f.toFolderId === toFolderId) > -1;
+
     try {
-      let conflicts = isAIRoom
-        ? []
-        : await checkIsFileExist(toFolderId, filesArray);
+      let conflicts =
+        isAIRoom || !checkConflicts
+          ? []
+          : await checkIsFileExist(toFolderId, filesArray);
       const folderInfo = await getFolderInfo(toFolderId);
 
       conflicts = conflicts.map((fileTitle) => ({
@@ -1186,7 +1190,7 @@ class UploadDataStore {
         (x) => x.id === currentFile?.fileInfo?.id,
       );
 
-      let folderInfo = null;
+      const folderInfo = null;
       const index = path.findIndex((x) => x === this.selectedFolderStore.id);
       const folderId = index !== -1 ? path[index + 1] : null;
       // if (folderId && folderId !== this.aiRoomStore.knowledgeId)

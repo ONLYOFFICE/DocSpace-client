@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyRoomsHeaderAgent",
+  "content": "No agents here yet",
+  "content_en_sha1_hash": "e6f0a167840ed14c72445fd927a603c17bf1fa27",
+  "created_at": "2025-11-03T12:10:17.484Z",
+  "updated_at": "2025-11-13T14:53:11.608Z",
+  "comment": {
+    "text": "This text appears on a screen to indicate that there are no agents currently present. It's used as a header for an empty agent listing screen. Translators should maintain a similar tone to indicate an empty agent list.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:13:00.230Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 227,
+      "context": "return t(\"Common:SelectorEmptyScreenHeaderKnowledge\");\n }\n \n if (isEmptyFilesRootScreen) return t(\"Common:SelectorEmptyScreenHeader\");\n \n if (isEmptyAgentsRootScreen) return t(\"Common:EmptyRoomsHeaderAgent\");\n \n return t(\"Common:EmptyRoomsHeader\");\n }, [t, isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen]);\n \n const emptyScreenDescription = isEmptyFilesRootScreen",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

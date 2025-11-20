@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyAIAgentsAIEnabledUserDescription",
+  "content": "Once your team invites you to collaborate, AI agents will appear here, ready to assist with documents, knowledge management, and everyday tasks.",
+  "content_en_sha1_hash": "4ed356a9ab186ec8112a2808053da0674a03b5bb",
+  "created_at": "2025-11-03T12:10:32.827Z",
+  "updated_at": "2025-11-17T07:52:04.463Z",
+  "comment": {
+    "text": "This text explains what will happen when AI agents are enabled for a user – they will appear in this area to help with documents, knowledge management, and tasks. It's displayed within an empty state view, likely in a section where AI agents would be listed. This message is meant to inform users about the functionality.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:18:52.145Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 231,
+      "context": "const getAIAgentsAIEnabledDescription = (\n t: TTranslation,\n access: AccessType,\n ) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsAIEnabledUserDescription\")\n : t(\"EmptyView:EmptyAIAgentsDescription\");\n };\n \n export const getRootDescription = (\n t: TTranslation,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

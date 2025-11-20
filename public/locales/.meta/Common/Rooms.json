@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2025-10-27T16:14:33.112Z",
+  "updated_at": "2025-11-17T11:52:35.116Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 244,
+      "line_number": 293,
       "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 244,
+      "line_number": 293,
       "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
@@ -48,19 +48,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 790,
+      "line_number": 806,
       "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 790,
+      "line_number": 806,
       "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 790,
+      "line_number": 806,
       "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },
@@ -72,13 +72,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 225,
+      "line_number": 267,
       "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 225,
+      "line_number": 267,
       "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
       "module": "/packages/client"
     },
@@ -114,8 +114,8 @@
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 214,
-      "context": "? t(\"Common:SelectorEmptyScreenHeader\")\n : t(\"Common:EmptyRoomsHeader\");\n const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const SelectorBody = (\n <Selector\n {...headerSelectorProps}",
+      "line_number": 239,
+      "context": ": isEmptyAgentsRootScreen\n ? t(\"Common:EmptyRoomsDescriptionTextAgent\", {\n sectionName: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const SelectorBody = (\n <Selector\n {...headerSelectorProps}",
       "module": "/packages/shared"
     },
     {

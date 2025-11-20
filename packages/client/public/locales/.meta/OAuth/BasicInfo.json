@@ -3,7 +3,7 @@
   "content": "Basic info",
   "content_en_sha1_hash": "3ecb5ba01e3c3b1b8e4bc1cf1d7f66708803d22c",
   "created_at": "2025-05-19T21:30:53.828Z",
-  "updated_at": "2025-06-30T12:20:31.464Z",
+  "updated_at": "2025-11-18T14:41:49.958Z",
   "comment": {
     "text": "The \"BasicInfo\" translation key is used to display the label for a section describing basic information about an application or user. This text appears in a UI block on a form, typically as part of a settings page or configuration process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
       "line_number": 137,
-      "context": "const isWebsiteError = errorFields.includes(\"website_url\");\n const isLogoRequiredError = requiredErrorFields.includes(\"logo\");\n \n return (\n <StyledBlock>\n <BlockHeader header={t(\"BasicInfo\")} />\n <StyledInputBlock>\n <InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}",
+      "context": "const isWebsiteError = errorFields.includes(\"website_url\");\n const isLogoRequiredError = requiredErrorFields.includes(\"logo\");\n \n return (\n <StyledBlock>\n <BlockHeader header={t(\"BasicInfo\")} />\n <StyledInputBlock>\n <InputGroup\n label={t(\"OAuth:AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}",
       "module": "/packages/client"
     }
   ],

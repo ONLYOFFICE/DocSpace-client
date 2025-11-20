@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 const { getAllFiles, getWorkSpaces, BASE_DIR } = require("../utils/files");
@@ -54,6 +55,8 @@ beforeAll(() => {
     "storybook-static",
     "node_modules",
     ".meta",
+    "coverage",
+    "vitest"
   ];
 
   const excludePatterns = [
@@ -117,7 +120,7 @@ beforeAll(() => {
 });
 
 describe("Color Tests", () => {
-  test("NotGlogalColorTest: Verify that there are no inline color definitions in the code and that global color variables are used instead.", () => {
+  it("NotGlogalColorTest: Verify that there are no inline color definitions in the code and that global color variables are used instead.", () => {
     const issues = Object.keys(hexColorIssues);
 
     let message =

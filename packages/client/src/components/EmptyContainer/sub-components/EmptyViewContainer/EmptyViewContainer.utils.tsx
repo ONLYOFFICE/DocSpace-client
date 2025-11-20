@@ -90,6 +90,8 @@ import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.fo
 
 import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
+import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
 import {
   FilesSelectorFilterTypes,
@@ -177,16 +179,76 @@ export const getRoomDescription = (
   return t("EmptyView:EmptyDescription");
 };
 
+const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
+  return isUser(access)
+    ? t("EmptyView:EmptyAIAgentsUserTitle")
+    : t("EmptyView:EmptyAIAgentsTitle");
+};
+
+const getAIAgentsAIDisabledTitle = (
+  t: TTranslation,
+  standalone: boolean,
+  isPortalAdmin: boolean,
+) => {
+  return match([standalone, isPortalAdmin])
+    .with([true, true], () =>
+      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle"),
+    )
+    .with([false, true], () =>
+      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),
+    )
+    .otherwise(() => t("EmptyView:EmptyAIAgentsAIDisabledUserTitle"));
+};
+
+const getAIAgentsAIDisabledDescription = (
+  t: TTranslation,
+  standalone: boolean,
+  isPortalAdmin: boolean,
+) => {
+  return match([standalone, isPortalAdmin])
+    .with([true, true], () =>
+      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
+        productName: t("Common:ProductName"),
+      }),
+    )
+    .with([false, true], () =>
+      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
+        productName: t("Common:ProductName"),
+      }),
+    )
+    .otherwise(() =>
+      t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
+        productName: t("Common:ProductName"),
+      }),
+    );
+};
+
+const getAIAgentsAIEnabledDescription = (
+  t: TTranslation,
+  access: AccessType,
+) => {
+  return isUser(access)
+    ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription")
+    : t("EmptyView:EmptyAIAgentsDescription");
+};
+
 export const getRootDescription = (
   t: TTranslation,
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
   security: Nullable<TFolderSecurity>,
+  standalone: boolean,
+  aiReady: boolean,
+  isPortalAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.AIAgents, P._], () =>
-      t("EmptyView:EmptyAIAgentsDescription"),
+    .with(
+      [FolderType.AIAgents, P._],
+      () =>
+        aiReady
+          ? getAIAgentsAIEnabledDescription(t, access)
+          : getAIAgentsAIDisabledDescription(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
@@ -304,9 +366,18 @@ export const getRootTitle = (
   t: TTranslation,
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
+  aiReady: boolean,
+  standalone: boolean,
+  isPortalAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.AIAgents, P._], () => t("EmptyView:EmptyAIAgentsTitle"))
+    .with(
+      [FolderType.AIAgents, P._],
+      () =>
+        aiReady
+          ? getAIAgentsAIEnabledTitle(t, access)
+          : getAIAgentsAIDisabledTitle(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+    )
     .with(
       [
         FolderType.Rooms,
@@ -345,8 +416,29 @@ export const getFolderIcon = (
   isBaseTheme: boolean,
   access: AccessType,
   folderType: Nullable<FolderType>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ) => {
   return match([roomType, folderType, access])
+    .with(
+      [
+        P._,
+        P.when(
+          () =>
+            security &&
+            "UseChat" in security &&
+            !security?.UseChat &&
+            isResultsTab,
+        ),
+        P._,
+      ],
+      () =>
+        isBaseTheme ? (
+          <ChatNoAccessRightsLightIcon />
+        ) : (
+          <ChatNoAccessRightsDarkIcon />
+        ),
+    )
     .with([FolderType.FormRoom, P._, P._], () =>
       isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
     )
@@ -363,6 +455,8 @@ export const getRoomIcon = (
   type: RoomsType,
   isBaseTheme: boolean,
   access: AccessType,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ) => {
   return match([type, access])
     .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
@@ -488,6 +582,24 @@ export const getRoomIcon = (
       ) : (
         <EmptyCustomRoomCollaboratorDarkIcon />
       ),
+    )
+    .with(
+      [
+        RoomsType.AIRoom,
+        P.when(
+          () =>
+            security &&
+            "UseChat" in security &&
+            !security?.UseChat &&
+            isResultsTab,
+        ), // viewer
+      ],
+      () =>
+        isBaseTheme ? (
+          <ChatNoAccessRightsLightIcon />
+        ) : (
+          <ChatNoAccessRightsDarkIcon />
+        ),
     )
     .with(
       [

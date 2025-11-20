@@ -3,7 +3,7 @@
   "content": "Files generated in AI-Chat will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.",
   "content_en_sha1_hash": "94fe061248622d192f170e0effa0b931ce7fbcc4",
   "created_at": "2025-10-27T16:14:31.665Z",
-  "updated_at": "2025-10-27T17:09:08.816Z",
+  "updated_at": "2025-11-17T11:52:35.122Z",
   "comment": {
     "text": "This text appears within the \"Results\" tab of an AI Room to explain to users where files generated from AI-Chat are saved. It informs users that results are automatically saved whenever they generate content or send messages with output. Translators should maintain the instructional tone.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 112,
-      "context": "const isNotAdmin = isUser(access);\n \n if (isAIRoom) {\n if (isKnowledgeTab) return t(\"AIRoom:EmptyKnowledgeDescription\");\n \n if (isResultsTab) return t(\"AIRoom:EmptyResultsDescription\");\n }\n \n if (isRootEmptyPage)\n return getRootDescription(\n t,",
+      "line_number": 130,
+      "context": "</>\n );\n \n if (isResultsTab)\n return security && \"UseChat\" in security && security.UseChat\n ? t(\"AIRoom:EmptyResultsDescription\")\n : t(\"AIRoom:EmptyResultsViewerDescription\");\n }\n \n if (isRootEmptyPage)\n return getRootDescription(",
       "module": "/packages/client"
     }
   ],

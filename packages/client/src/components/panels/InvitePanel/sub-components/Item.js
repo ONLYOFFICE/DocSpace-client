@@ -50,6 +50,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
@@ -70,6 +71,7 @@ import {
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
   getTopFreeRole,
+  getViewerRole,
   isPaidUserRole,
 } from "../utils";
 
@@ -135,20 +137,14 @@ const Item = ({
       return;
     }
 
-    const isPublicRoomType = roomType === RoomsType.PublicRoom;
-
     const filter = Filter.getDefault();
-
-    const searchArea = isPublicRoomType
-      ? AccountsSearchArea.People
-      : AccountsSearchArea.Any;
 
     filter.search = value;
 
     const users =
       roomId === -1
         ? await getUserList(filter)
-        : await getMembersList(searchArea, roomId, filter);
+        : await getMembersList(AccountsSearchArea.People, roomId, filter);
 
     setSearchRequestRunning(false);
 
@@ -183,20 +179,26 @@ const Item = ({
       : isRolePaid &&
         (type === EmployeeType.Guest || type === EmployeeType.User);
 
+  const isReadOnlyFiltered =
+    roomType === RoomsType.AIRoom && EmployeeType.Guest;
+
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
   const filteredAccesses =
     roomId === -1
       ? accesses
-      : item.isGroup ||
-          isUserRolesFilterd ||
-          type === EmployeeType.Guest ||
-          type === EmployeeType.User
-        ? filterPaidRoleOptions(accesses)
-        : accesses;
+      : isReadOnlyFiltered
+        ? filterNotReadOnlyOptions(accesses)
+        : item.isGroup ||
+            isUserRolesFilterd ||
+            type === EmployeeType.Guest ||
+            type === EmployeeType.User
+          ? filterPaidRoleOptions(accesses)
+          : accesses;
 
-  const defaultAccess =
-    isUserRolesFilterd || isGroupRoleFiltered
+  const defaultAccess = isReadOnlyFiltered
+    ? getViewerRole(t, roomType)
+    : isUserRolesFilterd || isGroupRoleFiltered
       ? getTopFreeRole(t, roomType)
       : filteredAccesses.find((option) => option.access === +access);
 

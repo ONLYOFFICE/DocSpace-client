@@ -3,7 +3,7 @@
   "content": "Sorting Index",
   "content_en_sha1_hash": "fbd51b4c3b96b0eedc634a5831a2a1c4ec82f26e",
   "created_at": "2025-05-19T21:30:48.953Z",
-  "updated_at": "2025-10-27T16:14:33.446Z",
+  "updated_at": "2025-11-17T07:52:04.727Z",
   "comment": {
     "text": "The \"SortingIndex\" translation key is used to display the label for a sorting index feature in the application. It appears as part of header labels on the home page when in edit mode, and is intended to help users understand what this feature does. Translators should provide a clear and concise description that reflects this functionality.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 703,
-      "context": "const navigationButtonLabel = showNavigationButton\n ? t(\"Files:ShareRoom\")\n : null;\n \n const headerProps = isIndexEditingMode\n ? { headerLabel: t(\"Common:SortingIndex\") }\n : {};\n \n const closeProps = isIndexEditingMode\n ? { isCloseable: true, onCloseClick: onCloseIndexMenu }\n : {};",
+      "line_number": 839,
+      "context": "const navigationButtonLabel = showNavigationButton\n ? t(\"Files:ShareRoom\")\n : null;\n \n const headerProps = React.useMemo(\n () => (isIndexEditingMode ? { headerLabel: t(\"Common:SortingIndex\") } : {}),\n [isIndexEditingMode, t],\n );\n \n const closeProps = React.useMemo(\n () =>",
       "module": "/packages/client"
     }
   ],

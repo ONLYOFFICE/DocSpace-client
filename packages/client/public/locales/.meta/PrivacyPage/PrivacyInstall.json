@@ -3,7 +3,7 @@
   "content": "Install now",
   "content_en_sha1_hash": "8607e4bae1d0e9652aa19e26a8ea7706b6066429",
   "created_at": "2025-05-19T21:30:53.433Z",
-  "updated_at": "2025-05-24T06:17:21.951Z",
+  "updated_at": "2025-11-18T14:41:50.072Z",
   "comment": {
     "text": "This translation key is used for a button label that says \"Install now\" and is typically displayed as a link in private room invitations. Its purpose is to prompt users to initiate the installation process of a privacy-related feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
-      "line_number": 215,
+      "line_number": 219,
       "context": "className=\"privacy-rooms-link privacy-rooms-install-text\"\n fontSize=\"16px\"\n isHovered\n href={desktopUrl}\n >\n {t(\"PrivacyInstall\")}\n </Link>\n </div>\n \n <Text\n as=\"div\"",
       "module": "/packages/client"
     }

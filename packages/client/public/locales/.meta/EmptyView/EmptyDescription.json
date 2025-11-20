@@ -3,7 +3,7 @@
   "content": "Get started with quick actions:",
   "content_en_sha1_hash": "83f9fb1fdf30cf22d37c1769bbed32d2d93c8a9d",
   "created_at": "2025-05-19T21:30:56.474Z",
-  "updated_at": "2025-10-27T16:14:33.128Z",
+  "updated_at": "2025-11-17T07:52:04.453Z",
   "comment": {
     "text": "This translation key is used to provide a placeholder description when there's no content available for an archive folder root or user empty view. It will appear in UI elements where a descriptive title is expected, such as button labels or dialog titles.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 177,
-      "context": "isArchiveFolderRoot: boolean,\n ) => {\n if (isNotAdmin || isArchiveFolderRoot)\n return t(\"Common:UserEmptyDescription\");\n \n return t(\"EmptyView:EmptyDescription\");\n };\n \n export const getRootDescription = (\n t: TTranslation,\n access: AccessType,",
+      "line_number": 179,
+      "context": "isArchiveFolderRoot: boolean,\n ) => {\n if (isNotAdmin || isArchiveFolderRoot)\n return t(\"Common:UserEmptyDescription\");\n \n return t(\"EmptyView:EmptyDescription\");\n };\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\")",
       "module": "/packages/client"
     }
   ],

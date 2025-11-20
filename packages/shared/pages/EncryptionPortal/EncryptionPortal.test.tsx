@@ -25,19 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, waitFor, act, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { EncryptionPortal } from "./index";
+import styles from "./EncryptionPortal.module.scss";
 
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import * as settingsApi from "../../api/settings";
 
 // Mock the socket helper
-jest.mock("../../utils/socket", () => ({
+vi.mock("../../utils/socket", () => ({
   __esModule: true,
   default: {
-    on: jest.fn(),
+    on: vi.fn(),
   },
   SocketEvents: {
     EncryptionProgress: "encryption-progress",
@@ -45,18 +46,18 @@ jest.mock("../../utils/socket", () => ({
 }));
 
 // Mock the settings API
-jest.mock("../../api/settings", () => ({
-  getEncryptionProgress: jest.fn().mockResolvedValue(50),
-  getEncryptionSettings: jest.fn().mockResolvedValue({ status: 1 }),
+vi.mock("../../api/settings", () => ({
+  getEncryptionProgress: vi.fn().mockResolvedValue(50),
+  getEncryptionSettings: vi.fn().mockResolvedValue({ status: 1 }),
 }));
 
 // Mock the utils
-jest.mock("./EncryptionPortal.utils", () => ({
-  returnToPortal: jest.fn(),
+vi.mock("./EncryptionPortal.utils", () => ({
+  returnToPortal: vi.fn(),
 }));
 
 // Mock the translation hook
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     ready: true,
@@ -64,17 +65,22 @@ jest.mock("react-i18next", () => ({
 }));
 
 describe("EncryptionPortal", () => {
-  // Add a test for the loader state
-  test("renders loader when not ready", async () => {
-    // Mock the useTranslation hook to return ready: false
-    jest
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+  });
 
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      .spyOn(require("react-i18next"), "useTranslation")
-      .mockImplementation(() => ({
+  // Add a test for the loader state
+  it("renders loader when not ready", async () => {
+    // Mock the useTranslation hook to return ready: false
+    vi.doMock("react-i18next", () => ({
+      useTranslation: () => ({
         t: (key: string) => key,
         ready: false,
-      }));
+      }),
+    }));
+
+    const { EncryptionPortal } = await import("./index");
 
     await act(async () => render(<EncryptionPortal />));
 
@@ -85,28 +91,18 @@ describe("EncryptionPortal", () => {
     );
 
     // Restore the original mock
-    jest
-
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      .spyOn(require("react-i18next"), "useTranslation")
-      .mockImplementation(() => ({
-        t: (key: string) => key,
-        ready: true,
-      }));
-  });
-  beforeEach(() => {
-    jest.clearAllMocks();
+    vi.restoreAllMocks();
   });
 
-  test("renders state initially", async () => {
+  it("renders state initially", async () => {
     await act(async () => render(<EncryptionPortal />));
 
     const portalElement = screen.getByTestId("encryption-portal");
     expect(portalElement).toBeInTheDocument();
   });
 
-  test("renders progress bar when encryption is in progress", async () => {
-    (settingsApi.getEncryptionProgress as jest.Mock).mockResolvedValue(50);
+  it("renders progress bar when encryption is in progress", async () => {
+    vi.mocked(settingsApi.getEncryptionProgress).mockResolvedValue(50);
 
     await act(async () => render(<EncryptionPortal />));
 
@@ -138,9 +134,9 @@ describe("EncryptionPortal", () => {
     expect(progressBar).toHaveAttribute("aria-label", "Encryption Progress");
   });
 
-  test("renders error message when API call fails", async () => {
+  it("renders error message when API call fails", async () => {
     const errorMessage = "API Error";
-    (settingsApi.getEncryptionProgress as jest.Mock).mockRejectedValue({
+    vi.mocked(settingsApi.getEncryptionProgress).mockRejectedValue({
       response: {
         data: {
           error: {
@@ -168,23 +164,28 @@ describe("EncryptionPortal", () => {
     expect(errorContainer).toHaveAttribute("data-error", "true");
     expect(errorContainer).toHaveAttribute("aria-live", "assertive");
     expect(portalElement).toHaveAttribute("aria-busy", "false");
-    expect(portalElement).toHaveClass("encryptionPortal");
-    expect(portalElement).toHaveClass("error");
+    expect(portalElement).toHaveClass(styles.encryptionPortal);
+    expect(portalElement).toHaveClass(styles.error);
     expect(portalBody).toHaveAttribute("data-error", "true");
   });
 
-  test("updates progress via socket events", async () => {
-    (settingsApi.getEncryptionProgress as jest.Mock).mockResolvedValue(30);
+  it("updates progress via socket events", async () => {
+    vi.mocked(settingsApi.getEncryptionProgress).mockResolvedValue(30);
 
     // Capture the socket callback
     let socketCallback:
       | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
-    (SocketHelper?.on as jest.Mock).mockImplementation((event, callback) => {
-      if (event === SocketEvents.EncryptionProgress) {
-        socketCallback = callback;
-      }
-    });
+    vi.mocked(SocketHelper!.on).mockImplementation(
+      (event, callback: unknown) => {
+        if (event === SocketEvents.EncryptionProgress) {
+          socketCallback = callback as (data: {
+            percentage: number;
+            error: string | null;
+          }) => void;
+        }
+      },
+    );
 
     await act(async () => render(<EncryptionPortal />));
 
@@ -222,18 +223,23 @@ describe("EncryptionPortal", () => {
     expect(portalBody).toHaveAttribute("data-progress", "true");
   });
 
-  test("handles socket error events", async () => {
-    (settingsApi.getEncryptionProgress as jest.Mock).mockResolvedValue(30);
+  it("handles socket error events", async () => {
+    vi.mocked(settingsApi.getEncryptionProgress).mockResolvedValue(30);
 
     // Capture the socket callback
     let socketCallback:
       | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
-    (SocketHelper?.on as jest.Mock).mockImplementation((event, callback) => {
-      if (event === SocketEvents.EncryptionProgress) {
-        socketCallback = callback;
-      }
-    });
+    vi.mocked(SocketHelper!.on).mockImplementation(
+      (event, callback: unknown) => {
+        if (event === SocketEvents.EncryptionProgress) {
+          socketCallback = callback as (data: {
+            percentage: number;
+            error: string | null;
+          }) => void;
+        }
+      },
+    );
 
     await act(async () => render(<EncryptionPortal />));
 
@@ -268,8 +274,8 @@ describe("EncryptionPortal", () => {
     expect(errorContainer).toHaveAttribute("data-error", "true");
     expect(errorContainer).toHaveAttribute("aria-live", "assertive");
     expect(portalElement).toHaveAttribute("aria-busy", "false");
-    expect(portalElement).toHaveClass("encryptionPortal");
-    expect(portalElement).toHaveClass("error");
+    expect(portalElement).toHaveClass(styles.encryptionPortal);
+    expect(portalElement).toHaveClass(styles.error);
     expect(portalBody).toHaveAttribute("data-error", "true");
     expect(portalBody).toHaveAttribute("data-socket-error", "true");
   });

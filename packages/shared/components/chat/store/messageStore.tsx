@@ -24,25 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { makeAutoObservable } from "mobx";
-
-import {
-  TContent,
-  TMessage,
-  type TToolCallContent,
-} from "../../../api/ai/types";
+import React from "react";
 import {
   getChatMessages,
-  startNewChat,
   sendMessageToChat,
+  startNewChat,
 } from "../../../api/ai";
 import { ContentType, EventType, RoleType } from "../../../api/ai/enums";
-import { TFile } from "../../../api/files/types";
+import type {
+  TContent,
+  TMessage,
+  TToolCallContent,
+} from "../../../api/ai/types";
+import type { TFile } from "../../../api/files/types";
 
 import { toastr } from "../../toast";
 
-import { TMessageStoreProps } from "../Chat.types";
+import type { TMessageStoreProps } from "../Chat.types";
 
 export default class MessageStore {
   messages: TMessage[] = [];
@@ -69,11 +68,40 @@ export default class MessageStore {
 
   webCrawlingToolName: string = "";
 
-  constructor(roomId: number | string) {
-    makeAutoObservable(this);
+  toolsConfirmQueue: string[] = [];
 
-    this.roomId = roomId;
+  constructor() {
+    makeAutoObservable(this);
   }
+
+  addToToolsConfirmQueue = (id: string) => {
+    this.toolsConfirmQueue.push(id);
+  };
+
+  removeFromToolsConfirmQueue = (id: string) => {
+    this.toolsConfirmQueue = this.toolsConfirmQueue.filter(
+      (item) => item !== id,
+    );
+  };
+
+  addMessage = (message: TMessage) => {
+    this.messages.push(message);
+  };
+
+  replaceLastMessage = (newMessage: TMessage) => {
+    const lastIndex = this.messages.length - 1;
+    if (lastIndex < 0) return;
+
+    this.messages[lastIndex] = newMessage;
+  };
+
+  getLastMessage() {
+    return this.messages.at(-1) ?? null;
+  }
+
+  setRoomId = (roomId: number | string) => {
+    this.roomId = roomId;
+  };
 
   setCurrentChatId = (chatId: string) => {
     this.currentChatId = chatId;
@@ -122,6 +150,17 @@ export default class MessageStore {
     this.setTotalMessages(0);
   };
 
+  setInitMessages = (
+    messages: TMessage[],
+    totalMessages: number,
+    chatId: string,
+  ) => {
+    this.setMessages(messages);
+    this.setStartIndex(totalMessages > 100 ? 100 : totalMessages);
+    this.setTotalMessages(totalMessages);
+    this.setCurrentChatId(chatId);
+  };
+
   fetchMessages = async (chatId: string) => {
     if (this.isGetMessageRequestRunning) return;
 
@@ -129,8 +168,9 @@ export default class MessageStore {
 
     try {
       const { items, total } = await getChatMessages(chatId, 0);
+      const reversedItems = items.reverse();
 
-      this.setMessages(items);
+      this.setMessages(reversedItems);
       this.setStartIndex(total > 100 ? 100 : total);
       this.setTotalMessages(total);
       this.setCurrentChatId(chatId);
@@ -156,8 +196,9 @@ export default class MessageStore {
         this.currentChatId,
         this.startIndex,
       );
+      const reversedItems = items.reverse();
 
-      this.setMessages([...this.messages, ...items]);
+      this.setMessages([...reversedItems, ...this.messages]);
       this.setStartIndex(this.startIndex + 100);
       this.setTotalMessages(total);
     } catch (error) {
@@ -169,16 +210,19 @@ export default class MessageStore {
   };
 
   addMessageId = (id: number) => {
-    this.messages[0] = { ...this.messages[0], id };
+    const lastMessage = this.getLastMessage();
+    if (!lastMessage) return;
+
+    this.replaceLastMessage({ ...lastMessage, id });
   };
 
   addUserMessage = (message: string, files: Partial<TFile>[]) => {
     const filesContent: TContent[] = files.map((f) => {
       return {
         type: ContentType.Files,
-        extension: f.fileExst!,
-        title: f.title!,
-        id: f.id!,
+        extension: f.fileExst ? f.fileExst : "",
+        title: f.title ? f.title : "",
+        id: f.id ? Number(f.id) : 0,
       };
     });
 
@@ -188,10 +232,12 @@ export default class MessageStore {
       contents: [{ type: ContentType.Text, text: message }, ...filesContent],
     };
 
-    if (this.messages[0]?.role === RoleType.Error) {
-      this.messages[0] = newMsg;
+    const lastMessage = this.getLastMessage();
+
+    if (lastMessage?.role === RoleType.Error) {
+      this.replaceLastMessage(newMsg);
     } else {
-      this.setMessages([newMsg, ...this.messages]);
+      this.addMessage(newMsg);
     }
 
     this.setTotalMessages(this.totalMessages + 1);
@@ -199,16 +245,18 @@ export default class MessageStore {
   };
 
   addNewAIMessage = (message: string) => {
-    if (this.messages[0].role === RoleType.AssistantMessage) {
+    const lastMessage = this.getLastMessage();
+
+    if (lastMessage?.role === RoleType.AssistantMessage) {
       const newMsg: TMessage = {
-        ...this.messages[0],
+        ...lastMessage,
         contents: [
-          ...this.messages[0].contents,
+          ...lastMessage.contents,
           { type: ContentType.Text, text: message },
         ],
       };
 
-      this.setMessages([newMsg, ...this.messages.slice(1)]);
+      this.replaceLastMessage(newMsg);
       return;
     } else {
       const newMsg: TMessage = {
@@ -217,7 +265,7 @@ export default class MessageStore {
         contents: [{ type: ContentType.Text, text: message }],
       };
 
-      this.setMessages([newMsg, ...this.messages]);
+      this.addMessage(newMsg);
 
       this.setTotalMessages(this.totalMessages + 1);
       this.setStartIndex(this.startIndex + 1);
@@ -225,10 +273,13 @@ export default class MessageStore {
   };
 
   continueAIMessage = (message: string) => {
+    const lastMessage = this.getLastMessage();
+    if (!lastMessage) return;
+
     const msg: TMessage = {
-      ...this.messages[0],
+      ...lastMessage,
       contents: [
-        ...this.messages[0].contents.slice(0, -1),
+        ...lastMessage.contents.slice(0, -1),
         {
           type: ContentType.Text,
           text: message,
@@ -236,22 +287,27 @@ export default class MessageStore {
       ],
     };
 
-    this.setMessages([msg, ...this.messages.slice(1)]);
+    this.replaceLastMessage(msg);
   };
 
   handleMetadata = (jsonData: string) => {
-    const { chatId } = JSON.parse(jsonData);
+    const { chatId, error } = JSON.parse(jsonData);
 
     if (chatId) {
       this.setCurrentChatId(chatId);
+    }
+
+    if (error) {
+      toastr.error(error as string);
     }
   };
 
   handleToolCall = (jsonData: string) => {
     const { name, arguments: args, callId, ...rest } = JSON.parse(jsonData);
+    const lastMessage = this.getLastMessage();
 
     const shouldCreateNewMessage =
-      this.messages[0].role !== RoleType.AssistantMessage;
+      lastMessage?.role !== RoleType.AssistantMessage;
 
     const content = {
       type: ContentType.Tool,
@@ -268,25 +324,27 @@ export default class MessageStore {
         contents: [content],
       };
 
-      this.setMessages([newMsg, ...this.messages]);
+      this.addMessage(newMsg);
       this.setTotalMessages(this.totalMessages + 1);
       this.setStartIndex(this.startIndex + 1);
     } else {
       const newMsg: TMessage = {
-        ...this.messages[0],
-        contents: [...this.messages[0].contents, content],
+        ...lastMessage,
+        contents: [...lastMessage.contents, content],
       };
 
-      this.setMessages([newMsg, ...this.messages.slice(1)]);
+      this.replaceLastMessage(newMsg);
     }
   };
 
   handleToolResult = (jsonData: string) => {
     const { result, callId } = JSON.parse(jsonData);
+    const lastMessage = this.getLastMessage();
+    if (!lastMessage) return;
 
-    const lstMsgContents = this.messages[0].contents;
+    const lstMsgContents = lastMessage.contents;
 
-    const idx = lstMsgContents.findIndex(
+    const idx = lstMsgContents?.findIndex(
       (c) => (c as TToolCallContent).callId === callId,
     );
 
@@ -297,7 +355,7 @@ export default class MessageStore {
     } as TToolCallContent;
 
     const newMsg: TMessage = {
-      ...this.messages[0],
+      ...lastMessage,
 
       contents: [
         ...lstMsgContents.slice(0, idx),
@@ -306,7 +364,7 @@ export default class MessageStore {
       ],
     };
 
-    this.setMessages([newMsg, ...this.messages.slice(1)]);
+    this.replaceLastMessage(newMsg);
   };
 
   handleStreamError = (jsonData: string) => {
@@ -324,7 +382,7 @@ export default class MessageStore {
       contents: [{ type: ContentType.Text, text: message }],
     };
 
-    this.setMessages([newMsg, ...this.messages]);
+    this.addMessage(newMsg);
   };
 
   startStream = async (stream?: ReadableStream<Uint8Array> | null) => {
@@ -496,7 +554,7 @@ export default class MessageStore {
       const stream = await startNewChat(
         this.roomId,
         message,
-        files.map((f) => f.id!.toString()),
+        files.map((f) => (f.id ? f.id.toString() : "")),
         this.abortController,
       );
 
@@ -518,7 +576,7 @@ export default class MessageStore {
     const stream = await sendMessageToChat(
       this.currentChatId,
       message,
-      files.map((f) => f.id!.toString()),
+      files.map((f) => (f.id ? f.id.toString() : "")),
       this.abortController,
     );
 
@@ -536,7 +594,7 @@ export default class MessageStore {
   };
 
   findPreviousUserMessage = (fromIndex: number) => {
-    for (let i = fromIndex + 1; i <= this.messages.length; i++) {
+    for (let i = fromIndex - 1; i >= 0; i--) {
       if (this.messages[i].role === RoleType.UserMessage)
         return this.messages[i];
     }
@@ -545,19 +603,25 @@ export default class MessageStore {
 }
 
 export const MessageStoreContext = React.createContext<MessageStore>(
-  undefined!,
+  {} as MessageStore,
 );
 
 export const MessageStoreContextProvider = ({
   children,
   roomId,
+  messages,
+  chatId,
+  total,
 }: TMessageStoreProps) => {
-  const store = React.useMemo(() => new MessageStore(roomId), [roomId]);
+  const store = React.useMemo(() => new MessageStore(), []);
 
   React.useEffect(() => {
-    const chatId = new URLSearchParams(window.location.search).get("chat");
-    if (chatId) store.fetchMessages(chatId);
-  }, [store]);
+    store.setRoomId(roomId);
+  }, [store, roomId]);
+
+  React.useEffect(() => {
+    if (chatId) store.setInitMessages(messages, total, chatId);
+  }, [chatId, store, messages, total]);
 
   return (
     <MessageStoreContext.Provider value={store}>

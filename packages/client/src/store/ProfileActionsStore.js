@@ -58,6 +58,7 @@ import AccountsFilter from "@docspace/shared/api/people/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { PEOPLE_ROUTE_WITH_FILTER } from "SRC_DIR/helpers/contacts";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile/login");
@@ -294,7 +295,7 @@ class ProfileActionsStore {
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
-
+    const isNotPaidPeriod = this.currentTariffStatusStore.isNotPaidPeriod;
     const { isVisitor, isCollaborator } = this.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
@@ -306,16 +307,17 @@ class ProfileActionsStore {
       debugInfo,
     } = this.settingsStore;
 
-    const settings = isAdmin
-      ? {
-          key: "user-menu-settings",
-          icon: CatalogSettingsReactSvgUrl,
-          label: t("Common:Settings"),
-          onClick: (obj) => this.onSettingsClick("/portal-settings", obj),
-          url: SETTINGS_URL,
-          preventNewTab: true,
-        }
-      : null;
+    const settings =
+      isAdmin && !isNotPaidPeriod
+        ? {
+            key: "user-menu-settings",
+            icon: CatalogSettingsReactSvgUrl,
+            label: t("Common:Settings"),
+            onClick: (obj) => this.onSettingsClick("/portal-settings", obj),
+            url: SETTINGS_URL,
+            preventNewTab: true,
+          }
+        : null;
 
     const protocol = window?.location?.protocol;
 
@@ -421,7 +423,7 @@ class ProfileActionsStore {
     }
 
     const accounts =
-      !isVisitor && !isCollaborator
+      !isNotPaidPeriod && !isVisitor && !isCollaborator
         ? {
             key: "user-menu-accounts",
             icon: CatalogAccountsReactSvgUrl,
@@ -442,7 +444,7 @@ class ProfileActionsStore {
       this.settingsStore.frameConfig?.showSignOut;
 
     const actions = [
-      {
+      !isNotPaidPeriod && {
         key: "user-menu-profile",
         icon: ProfileReactSvgUrl,
         label: t("Common:Profile"),
@@ -453,7 +455,8 @@ class ProfileActionsStore {
       accounts,
       settings,
       management,
-      isAdmin &&
+      !isNotPaidPeriod &&
+        isAdmin &&
         !isCommunity && {
           key: "user-menu-payments",
           icon: PaymentsReactSvgUrl,
@@ -463,7 +466,7 @@ class ProfileActionsStore {
           url: PAYMENTS_URL,
           preventNewTab: true,
         },
-      {
+      !isNotPaidPeriod && {
         isSeparator: true,
         key: "separator1",
       },
@@ -526,7 +529,11 @@ class ProfileActionsStore {
       });
     }
 
-    if (this.pluginStore.profileMenuItemsList && enablePlugins) {
+    if (
+      !isAIAgents() &&
+      this.pluginStore.profileMenuItemsList &&
+      enablePlugins
+    ) {
       this.pluginStore.profileMenuItemsList.forEach((option) => {
         actions.splice(option.value.position, 0, {
           key: option.key,

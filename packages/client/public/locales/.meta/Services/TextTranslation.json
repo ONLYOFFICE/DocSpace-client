@@ -1,0 +1,28 @@
+{
+  "key_path": "TextTranslation",
+  "content": "Text translation",
+  "content_en_sha1_hash": "9f4748548c1925a86d1ff284f865f296c8df2549",
+  "created_at": "2025-11-03T12:10:29.466Z",
+  "updated_at": "2025-11-03T12:25:21.395Z",
+  "comment": {
+    "text": "This key represents the title for a text translation service option. It appears as a title within a list of AI service options in a dialog, likely used to select and utilize a text translation tool. Translators should ensure the translation accurately conveys the function of text translation.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:25:21.395Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 133,
+      "context": "description: t(\"SummarizationDescription\"),\n icon: <SummarizationIcon />,\n },\n {\n id: \"text-translation\",\n title: t(\"TextTranslation\"),\n description: t(\"TextTranslationDescription\"),\n icon: <TranslationIcon />,\n },\n {\n id: \"ocr\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

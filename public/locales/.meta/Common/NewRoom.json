@@ -3,7 +3,7 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2025-10-27T16:14:33.106Z",
+  "updated_at": "2025-11-18T14:41:49.626Z",
   "comment": {
     "text": "This translation key is used for the label of a button that invites users to create a new room. The button appears in various UI elements, including main buttons and folder input dialogs. It displays the text \"New room\" to guide users through the process of creating a new room.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 838,
+      "line_number": 840,
       "context": "/>\n ) : isRoomsFolder ? (\n <StyledButton\n className=\"create-room-button\"\n id=\"rooms-shared_create-room-button\"\n label={t(\"Common:NewRoom\")}\n onClick={onCreateRoom}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 838,
+      "line_number": 840,
       "context": "/>\n ) : isRoomsFolder ? (\n <StyledButton\n className=\"create-room-button\"\n id=\"rooms-shared_create-room-button\"\n label={t(\"Common:NewRoom\")}\n onClick={onCreateRoom}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 810,
+      "line_number": 974,
       "context": "toggleInfoPanel={isProfile ? undefined : onToggleInfoPanel}\n isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}\n titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3311,
+      "line_number": 3327,
       "context": "? isFlowsFolder\n ? []\n : [\n {\n key: \"new-room\",\n label: t(\"Common:NewRoom\"),\n onClick: this.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n ]\n : [",
       "module": "/packages/client"
     },
@@ -66,7 +66,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorState.ts",
-      "line_number": 87,
+      "line_number": 94,
       "context": "return [\n ...((withCreate && [\n {\n isCreateNewItem: true,\n label: initSelectedItemType === \"files\" ? t(\"NewFolder\") : t(\"NewRoom\"),\n id: \"create-folder-item\",\n key: \"create-folder-item\",\n hotkey: \"f\",\n onBackClick: () => {},\n },",
       "module": "/packages/shared"
     },

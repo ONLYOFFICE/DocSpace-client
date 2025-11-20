@@ -1,0 +1,76 @@
+{
+  "key_path": "MCPProductDescription",
+  "content": "The {{organizationName}} {{productName}} MCP Server streamlines AI-driven workflows, integrating LLMs with external systems for efficient and secure document management.",
+  "content_en_sha1_hash": "a9051627fb33c2beb38352c5c4bb01e20b93a1f3",
+  "created_at": "2025-11-13T07:58:04.508Z",
+  "updated_at": "2025-11-13T08:10:55.609Z",
+  "comment": {
+    "text": "This key provides a short description of the MCP Server, explaining that it streamlines AI workflows by integrating LLMs with external systems for secure document management. It appears as a description for an MCP Server tile within the AI settings portal. Translators should ensure the description accurately conveys the server's functionality in a clear and concise way.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:10:55.609Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
+      "line_number": 93,
+      "context": "? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : item.name;\n \n const description =\n item.serverType === ServerType.Portal\n ? t(\"AISettings:MCPProductDescription\", {\n organizationName: t(\"Common:OrganizationName\"),\n productName: t(\"Common:ProductName\"),\n })\n : item.description;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

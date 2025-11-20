@@ -40,11 +40,24 @@
     background-color: var(--chat-input-background-color);
 
     min-height: 66px;
+
+    text-align: var(--input-text-align);
   }
 
   .chatInputTextArea {
     min-height: 56px !important;
     max-height: 112px !important;
+
+    &.disabled {
+      textarea {
+        background-color: var(--chat-input-background-color) !important;
+      }
+
+      textarea::placeholder {
+        color: var(--chat-input-placeholder-disabled-color) !important;
+        -webkit-text-fill-color: var(--chat-input-placeholder-disabled-color) !important;
+      }
+    }
   }
 
   .chatInputTextAreaWrapper {
@@ -109,13 +122,56 @@
 
     svg {
       cursor: pointer;
+
       path {
         fill: var(--chat-input-tools-button-color);
       }
     }
 
-    &:hover {
+    &:hover:not(.disabled) {
       background-color: var(--chat-input-tools-button-hover-background);
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+
+      svg {
+        cursor: not-allowed;
+
+        path {
+          fill: var(--chat-input-tools-button-disabled-color);
+        }
+      }
+    }
+
+    &.chatInputToolsButton {
+      svg {
+        circle {
+          stroke: var(--chat-input-tools-button-color)
+        }
+      }
+
+      &.activeChatInputButton {
+        svg {
+          circle {
+            stroke: var(--chat-input-tools-button-active-color);
+          }
+        }
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+
+        p {
+          color: var(--chat-input-tools-button-disabled-color);
+        }
+
+        svg {
+          circle {
+            stroke: var(--chat-input-tools-button-disabled-color);
+          }
+        }
+      }
     }
   }
 
@@ -282,6 +338,8 @@
       .filesListItemInfoText {
         display: flex;
         flex-direction: row;
+
+        max-width: calc(100% - 24px);
 
         span {
           color: var(--chat-file-item-exst-color);

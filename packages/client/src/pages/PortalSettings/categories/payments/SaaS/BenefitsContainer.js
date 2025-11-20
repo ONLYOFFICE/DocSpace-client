@@ -77,9 +77,35 @@ const StyledBody = styled.div`
         !props.theme.isBase &&
         css`
           svg {
-            mask + path {
-              fill: none !important;
+         
+            path[stroke],
+            g[stroke],
+            circle[stroke],
+            rect[stroke] {
               stroke: ${({ theme }) =>
+                theme.client.settings.payment.benefitsContainer
+                  .iconsColor} !important;
+            }
+            
+            path[fill]:not([fill="none"]),
+            g[fill]:not([fill="none"]),
+            circle[fill]:not([fill="none"]),
+            rect[fill]:not([fill="none"]) {
+              fill: ${({ theme }) =>
+                theme.client.settings.payment.benefitsContainer
+                  .iconsColor} !important;
+            }
+            
+            path:not([stroke]):not([fill]),
+            g:not([stroke]):not([fill]) path:not([stroke]):not([fill]) {
+              fill: ${({ theme }) =>
+                theme.client.settings.payment.benefitsContainer
+                  .iconsColor} !important;
+            }
+            
+
+            mask path {
+              fill: ${({ theme }) =>
                 theme.client.settings.payment.benefitsContainer
                   .iconsColor} !important;
             }
@@ -133,13 +159,12 @@ const BenefitsContainer = ({ t, features }) => {
         return (
           <div className="payment-benefits" key={item.title || item.image}>
             <div
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
               dangerouslySetInnerHTML={{ __html: item.image }}
               className="icons-container"
             />
             <div className="payment-benefits_feature">
-              <Text noSelect as="span">
-                {item.title}
-              </Text>
+              <Text as="span">{item.title}</Text>
               {item.id === FREE_BACKUP ? renderTooltip() : null}
             </div>
           </div>

@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Pesquisar e convidar por nome ou e-mail",
   "InviteViaLink": "Convidar pelo link",
   "InviteViaLinkDescriptionAccounts": "Crie um link universal para autoautorização no {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Crie um link universal para autorização automática no agente como convidado.",
+  "InviteViaLinkDescriptionAgentMembers": "Crie um link universal para membros {{productName}} para autoautorização no agente.",
   "InviteViaLinkDescriptionRoomGuest": "Criar um link universal para autoautorização na sala como convidado.",
   "InviteViaLinkDescriptionRoomMembers": "Criar um link universal para membros do {{productName}} para autoautorização na sala.",
   "LinkCopySuccess": "O link foi copiado",
   "SendInvitation": "Enviar convite",
+  "UserAgentMaxAvailableRoleWarning": "Os hóspedes e usuários não podem ser designados como gerentes de agentes. Apenas os administradores do Room e do {{productName}} são adequados para a função especificada.",
   "UserMaxAvailableRoleWarning": "Convidados e usuários não podem ser designados como gerentes de sala. Somente administradores de salas e de {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados",
   "UsersCannotBeAdded": "Contatos desativados não podem ser adicionados a uma sala."

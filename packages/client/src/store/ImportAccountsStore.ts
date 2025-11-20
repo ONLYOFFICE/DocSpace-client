@@ -82,7 +82,7 @@ export const ImportOptionsKeys = {
 export type ImportOptionsKey =
   (typeof ImportOptionsKeys)[keyof typeof ImportOptionsKeys];
 
-type ImportOptionsType = Record<ImportOptionsKey, boolean>;
+export type ImportOptionsType = Record<ImportOptionsKey, boolean>;
 
 class ImportAccountsStore {
   private currentQuotaStore: CurrentQuotasStore | null = null;

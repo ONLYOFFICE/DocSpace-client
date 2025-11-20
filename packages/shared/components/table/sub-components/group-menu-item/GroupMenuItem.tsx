@@ -35,80 +35,86 @@ import { DropDownItem } from "../../../drop-down-item";
 import { TGroupMenuItem } from "../../Table.types";
 import styles from "./GroupMenuItem.module.scss";
 
-const GroupMenuItem = ({
-  item,
-  isBlocked,
-  dataTestId,
-}: {
-  item: TGroupMenuItem;
-  isBlocked?: boolean;
-  dataTestId?: string;
-}) => {
-  const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+const GroupMenuItem = React.memo(
+  ({
+    item,
+    isBlocked,
+    dataTestId,
+  }: {
+    item: TGroupMenuItem;
+    isBlocked?: boolean;
+    dataTestId?: string;
+  }) => {
+    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 
-  const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-  const {
-    label,
-    disabled,
-    onClick,
-    iconUrl,
-    title,
-    withDropDown,
-    options,
-    id,
-  } = item;
+    const {
+      label,
+      disabled,
+      onClick,
+      iconUrl,
+      title,
+      withDropDown,
+      options,
+      id,
+    } = item;
 
-  const onClickOutside = () => {
-    setOpen(false);
-  };
+    const onClickOutside = () => {
+      setOpen(false);
+    };
 
-  const onClickAction = (e: React.MouseEvent) => {
-    if (isBlocked) return;
+    const onClickAction = (e: React.MouseEvent) => {
+      if (isBlocked) return;
 
-    onClick?.(e);
+      onClick?.(e);
 
-    if (withDropDown) {
-      setOpen(true);
-    }
-  };
+      if (withDropDown) {
+        setOpen(true);
+      }
+    };
 
-  return disabled ? null : (
-    <div
-      data-testid={dataTestId ?? "group-menu-item"}
-      className={styles.groupMenuItem}
-    >
-      <Button
-        id={id}
-        className={classNames(styles.button, styles.overrideNativeStyles, {
-          [styles.oldChrome]: isChrome && +browserVersion <= 85,
-          [styles.isBlocked]: isBlocked,
-        })}
-        label={label}
-        title={title || label}
-        isDisabled={isBlocked}
-        onClick={onClickAction}
-        icon={<ReactSVG src={iconUrl} className="combo-button_selected-icon" />}
-        ref={buttonRef as React.RefObject<HTMLButtonElement>}
-        size={ButtonSize.extraSmall}
-        testId="group-menu-item-button"
-      />
-      {withDropDown ? (
-        <DropDown
-          open={open}
-          clickOutsideAction={onClickOutside}
-          forwardedRef={buttonRef as unknown as React.RefObject<HTMLDivElement>}
-          zIndex={250}
-        >
-          {options?.map((option) => {
-            const { key, ...rest } = option;
-
-            return <DropDownItem key={key} {...rest} setOpen={setOpen} />;
+    return disabled ? null : (
+      <div
+        data-testid={dataTestId ?? "group-menu-item"}
+        className={styles.groupMenuItem}
+      >
+        <Button
+          id={id}
+          className={classNames(styles.button, styles.overrideNativeStyles, {
+            [styles.oldChrome]: isChrome && +browserVersion <= 85,
+            [styles.isBlocked]: isBlocked,
           })}
-        </DropDown>
-      ) : null}
-    </div>
-  );
-};
+          label={label}
+          title={title || label}
+          isDisabled={isBlocked}
+          onClick={onClickAction}
+          icon={
+            <ReactSVG src={iconUrl} className="combo-button_selected-icon" />
+          }
+          ref={buttonRef as React.RefObject<HTMLButtonElement>}
+          size={ButtonSize.extraSmall}
+          testId="group-menu-item-button"
+        />
+        {withDropDown ? (
+          <DropDown
+            open={open}
+            clickOutsideAction={onClickOutside}
+            forwardedRef={
+              buttonRef as unknown as React.RefObject<HTMLDivElement>
+            }
+            zIndex={250}
+          >
+            {options?.map((option) => {
+              const { key, ...rest } = option;
+
+              return <DropDownItem key={key} {...rest} setOpen={setOpen} />;
+            })}
+          </DropDown>
+        ) : null}
+      </div>
+    );
+  },
+);
 
 export { GroupMenuItem };

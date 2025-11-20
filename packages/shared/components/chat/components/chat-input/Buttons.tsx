@@ -27,6 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
@@ -47,15 +48,22 @@ const Buttons = ({
   sendMessageAction,
   value,
   selectedModel,
+  toolsSettings,
+  isAdmin,
+  aiReady,
 }: ButtonsProps) => {
   const { isRequestRunning, stopMessage } = useMessageStore();
 
-  const isDisabled = !isRequestRunning ? !value || !selectedModel : false;
+  const { t } = useTranslation(["Common"]);
+
+  const isSendButtonDisabled = !isRequestRunning
+    ? !value || !selectedModel
+    : false;
 
   const sendIconProps = !isRequestRunning
     ? {
         onClick: sendMessageAction,
-        isDisabled,
+        isDisabled: isSendButtonDisabled,
         iconNode: null,
       }
     : {
@@ -64,32 +72,41 @@ const Buttons = ({
         iconNode: <div className={styles.square} />,
       };
 
+  const onAttachmentToggleClick = () => {
+    if (!aiReady) return;
+
+    toggleFilesSelector();
+  };
+
   return (
     <div
       className={styles.chatInputButtons}
       style={{ width: `${inputWidth}px` }}
     >
-      <div className={styles.chatInputButtonsTools}>
+      <div className={styles.chatInputButtonsTools} title={t("AddFiles")}>
         <div
           className={classNames(styles.chatInputButton, {
             [styles.activeChatInputButton]: isFilesSelectorVisible,
+            [styles.disabled]: !aiReady,
           })}
-          onClick={toggleFilesSelector}
+          onClick={onAttachmentToggleClick}
         >
           <IconButton
             iconName={AttachmentReactSvgUrl}
             size={16}
             isFill={false}
+            isDisabled={!aiReady}
+            className={classNames({ [styles.disabled]: !aiReady })}
           />
         </div>
-        <ToolsSettings />
+        <ToolsSettings {...toolsSettings} isAdmin={isAdmin} aiReady={aiReady} />
       </div>
       <IconButton
         iconName={SendReactSvgUrl}
         size={16}
         isClickable
         className={classNames(styles.chatInputButtonsSend, {
-          [styles.disabled]: isDisabled,
+          [styles.disabled]: isSendButtonDisabled,
         })}
         {...sendIconProps}
       />

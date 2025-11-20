@@ -28,29 +28,54 @@ import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
-import { MessageMarkdownFieldProps } from "../../../../../Chat.types";
+import type { MessageMarkdownFieldProps } from "../../../../../Chat.types";
 
 import styles from "../../../ChatMessageBody.module.scss";
 
+import Think from "../Think";
+
 import { createMarkdownComponents } from "./Markdown.utils";
 
-// Function to replace <think> tags with a placeholder before markdown processing
-const preprocessChatMessage = (text: string): string => {
-  // Replace <think> tags with `<span class="think-tag">think:</span>`
-  return text
-    .replace(/<think>/g, "`<think>`")
-    .replace(/<\/think>/g, "`</think>`");
-};
+// // Function to replace <think> tags with a placeholder before markdown processing
+// const preprocessChatMessage = (text: string): string => {
+//   // Replace <think> tags with `<span class="think-tag">think:</span>`
+//   return text
+//     .replace(/<think>/g, "`<think>`")
+//     .replace(/<\/think>/g, "`</think>`");
+// };
 
 const MarkdownField = ({
   chatMessage,
   propLanguage,
+  isFirst,
 }: MessageMarkdownFieldProps) => {
   // Process the chat message to handle <think> tags
-  const processedChatMessage = preprocessChatMessage(chatMessage);
+  // const processedChatMessage = preprocessChatMessage(chatMessage);
+
+  const withThinkBlock = chatMessage.includes("<think>");
+  const splitedMsg = withThinkBlock
+    ? chatMessage.split("</think>\n")
+    : [chatMessage];
+
+  const thinkBlock = withThinkBlock
+    ? splitedMsg[0].replace("<think>\n", "")
+    : "";
+
+  const processedChatMessage = withThinkBlock ? splitedMsg[1] : chatMessage;
 
   return (
     <div style={{ width: "100%" }} className={styles.markdownField}>
+      {thinkBlock ? (
+        <Think isSingleContent={splitedMsg.length === 1} isFirst={isFirst}>
+          <Markdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+            components={createMarkdownComponents({ propLanguage })}
+          >
+            {thinkBlock}
+          </Markdown>
+        </Think>
+      ) : null}
       <Markdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}

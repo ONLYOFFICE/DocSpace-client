@@ -45,7 +45,7 @@ type ExportSelectorProps = {
     fileName: string,
     isChecked: boolean,
   ) => Promise<void>;
-  roomId: string | number;
+  currentFolderId: string | number;
   getFileName: () => string;
 };
 
@@ -54,7 +54,7 @@ const ExportSelector = ({
   onCloseFolderSelector,
   getIcon,
   onSubmit,
-  roomId,
+  currentFolderId,
   getFileName,
 }: ExportSelectorProps) => {
   const { t } = useTranslation(["Common"]);
@@ -72,7 +72,8 @@ const ExportSelector = ({
         isRoot,
         selectedItemSecurity,
       ) => {
-        if (selectedItemType === "rooms") return true;
+        if (selectedItemType === "rooms" || selectedItemType === "agents")
+          return true;
 
         if (
           selectedItemSecurity &&
@@ -95,21 +96,21 @@ const ExportSelector = ({
       withoutBackButton
       withCancelButton
       withCreate={false}
-      // TODO: restore when api will be ready
-      withFooterCheckbox={false}
+      withFooterCheckbox
       withFooterInput
       cancelButtonLabel={t("Common:CancelButton")}
       submitButtonLabel={t("Common:SaveButton")}
       disabledItems={[]}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={roomId}
+      currentFolderId={currentFolderId}
       rootFolderType={FolderType.Rooms}
       footerCheckboxLabel={t("Common:OpenSavedDocument")}
       footerInputHeader={t("Common:FileName")}
       currentFooterInputValue={getFileName()}
       descriptionText=""
       getFilesArchiveError={() => ""}
+      withAIAgentsTreeFolder
       currentDeviceType={
         isDesktop()
           ? DeviceType.desktop
@@ -117,6 +118,7 @@ const ExportSelector = ({
             ? DeviceType.tablet
             : DeviceType.mobile
       }
+      renderInPortal
     />
   );
 };

@@ -3,7 +3,7 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:49.950Z",
-  "updated_at": "2025-10-27T16:14:33.318Z",
+  "updated_at": "2025-11-17T11:52:35.349Z",
   "comment": {
     "text": "This translation key is used as the label for a \"Done\" button, appearing on conversion and upload buttons in the UI, indicating completion or readiness. The translation key will be rendered when the value of \"Ready\" matches the content of this key, which should display as \"Done\".",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/UploadPanel/FileRow.js",
-      "line_number": 319,
+      "line_number": 320,
       "context": "<Button\n className=\"conversion-button\"\n size=\"small\"\n scale\n primary\n label={t(\"Ready\")}\n onClick={this.onButtonClick}\n isDisabled={!password}\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }

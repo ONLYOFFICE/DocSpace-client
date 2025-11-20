@@ -313,9 +313,7 @@ export enum FeedTarget {
   Room = "room",
   Agent = "agent",
   RoomTag = "roomTag",
-  AgentTag = "agentTag",
   RoomLogo = "roomLogo",
-  AgentLogo = "agentLogo",
   RoomExternalLink = "roomExternalLink",
   User = "user",
   Group = "group",
@@ -386,24 +384,12 @@ export enum FeedActionKeys {
   RoomGroupRemove = "RoomGroupRemove",
   AgentCreated = "AgentCreated",
   AgentRenamed = "AgentRenamed",
-  AddedAgentTags = "AddedAgentTags",
-  DeletedAgentTags = "DeletedAgentTags",
-  AgentLogoCreated = "AgentLogoCreated",
-  AgentLogoDeleted = "AgentLogoDeleted",
-  AgentColorChanged = "AgentColorChanged",
-  AgentCoverChanged = "AgentCoverChanged",
-  AgentCreateUser = "AgentCreateUser",
-  AgentUpdateAccessForUser = "AgentUpdateAccessForUser",
-  AgentRemoveUser = "AgentRemoveUser",
-  AgentInviteResend = "AgentInviteResend",
-  AgentGroupAdded = "AgentGroupAdded",
-  AgentUpdateAccessForGroup = "AgentUpdateAccessForGroup",
-  AgentGroupRemove = "AgentGroupRemove",
 }
 
 export type CapitalizedFeedAction = Capitalize<FeedAction>;
 
 export type TFeedAction<T = TFeedData> = {
+  id: number;
   action: {
     id: number;
     key: FeedActionKeys;

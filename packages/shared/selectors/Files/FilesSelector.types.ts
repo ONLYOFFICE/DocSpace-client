@@ -79,8 +79,10 @@ export type UseSocketHelperProps = {
   setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
+  disabledFolderType?: FolderType;
   filterParam?: string;
   withCreate?: boolean;
+  disableBySecurity?: string;
 };
 
 export type UseRoomsHelperProps = TUseInputItemHelper & {
@@ -126,6 +128,7 @@ export type UseFilesHelpersProps = {
   setIsInit: (value: boolean) => void;
   searchValue?: string;
   disabledItems: (string | number)[];
+  disabledFolderType?: FolderType;
   includedItems?: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
@@ -158,6 +161,8 @@ export type UseFilesHelpersProps = {
   setIsInsideResultStorage: (value: boolean) => void;
 
   applyFilterOption?: ApplyFilterOption;
+
+  disableBySecurity?: string;
 };
 
 export type TUseInputItemHelper = {
@@ -200,6 +205,7 @@ export type FilesSelectorProps = TInfoBar &
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
     disabledItems: (string | number)[];
+    disabledFolderType?: FolderType;
     includedItems?: (string | number)[];
     filterParam?: string | number;
     withoutBackButton: boolean;
@@ -283,4 +289,7 @@ export type FilesSelectorProps = TInfoBar &
 
     isMultiSelect?: boolean;
     onSelectItem?: (item: TSelectorItem) => void;
+    maxSelectedItems?: number;
+    renderInPortal?: boolean;
+    disableBySecurity?: string;
   };

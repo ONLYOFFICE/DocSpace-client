@@ -126,6 +126,7 @@ export type UserProps = {
   searchValue: string;
 
   index?: number;
+  isAIAgentsFolderRoot?: boolean;
 
   changeUserRole: (
     option: TOption,

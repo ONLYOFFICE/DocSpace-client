@@ -3,7 +3,7 @@
   "content": "Access rights changed",
   "content_en_sha1_hash": "cdefb979afa2c5e08443d77985f7b5d925f6b122",
   "created_at": "2025-10-03T13:19:11.191Z",
-  "updated_at": "2025-10-13T13:22:35.743Z",
+  "updated_at": "2025-11-17T07:52:04.712Z",
   "comment": {
     "text": "This message confirms that a user's access rights have been modified. It appears as a success notification (using `toastr`) within the Members view, likely after updating a user’s sharing permissions or role. Translators should ensure the message clearly indicates a change in user access.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
-      "line_number": 118,
+      "line_number": 122,
       "context": "notify: false,\n sharingMessage: \"\",\n force,\n })\n .then(async (item) => {\n toastr.success(t(\"Common:AccessRightsChanged\"));\n \n if (item?.error === RoomSecurityError.FormRoleBlockingDeletion) {\n return setRemoveUserConfirmation!(true, async () => {\n await updateRole(option, true);\n });",
       "module": "/packages/client"
     },

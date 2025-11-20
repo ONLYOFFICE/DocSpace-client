@@ -3,7 +3,9 @@
 
 .link {
   text-decoration: var(--link-text-decoration);
+  -webkit-text-decoration: var(--link-text-decoration);
   text-underline-offset: 2px;
+  text-decoration-skip-ink: auto;
   cursor: var(--link-cursor);
   color: var(--link-color);
   line-height: var(--link-line-height);
@@ -27,19 +29,23 @@
 
   &:hover:not(.noHover) {
     text-decoration: var(--link-hover-text-decoration);
+    -webkit-text-decoration: var(--link-hover-text-decoration);
   }
 
   &.isHovered:not(.noHover) {
     text-decoration: var(--link-hover-text-decoration);
+    -webkit-text-decoration: var(--link-hover-text-decoration);
   }
 
   &.page {
     &:hover:not(.noHover) {
       text-decoration: var(--link-hover-page-text-decoration);
+      -webkit-text-decoration: var(--link-hover-page-text-decoration);
     }
 
     &.isHovered:not(.noHover) {
       text-decoration: var(--link-hover-page-text-decoration);
+      -webkit-text-decoration: var(--link-hover-page-text-decoration);
     }
   }
 }

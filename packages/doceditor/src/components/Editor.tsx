@@ -42,7 +42,7 @@ import { useTheme } from "@docspace/shared/hooks/useTheme";
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
 import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
 
-import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
+import { IS_DESKTOP_EDITOR, IS_ZOOM } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
   onSDKRequestHistoryClose,
@@ -53,6 +53,7 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import { isPDFDocument } from "@/utils";
 
 const Editor = ({
@@ -146,6 +147,17 @@ const Editor = ({
     organizationName,
   });
 
+  const { goBack, close } = useGoBackAndClose(
+    fileInfo,
+    sdkConfig,
+    user,
+    successAuth,
+    openOnNewPage,
+    i18n,
+    t,
+    config?.editorConfig?.customization?.goback?.url,
+  );
+
   const newConfig: IConfig = useMemo(() => {
     return config
       ? {
@@ -162,68 +174,9 @@ const Editor = ({
 
   // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
-  let goBack: TGoBack = {} as TGoBack;
-
-  if (fileInfo) {
-    const editorGoBack = sdkConfig?.editorGoBack;
-
-    const openFileLocationText = (
-      (
-        i18n.getDataByLanguage(i18n.language) as unknown as {
-          Editor: { [key: string]: string };
-        }
-      )?.Editor as {
-        [key: string]: string;
-      }
-    )?.FileLocation; // t("FileLocation");
-
-    if (editorGoBack === false || user?.isVisitor || !user) {
-      console.log("goBack", goBack);
-    } else if (editorGoBack === "event") {
-      goBack = {
-        requestClose: true,
-        text: openFileLocationText,
-        blank: openOnNewPage,
-      };
-    } else {
-      goBack = {
-        requestClose:
-          typeof window !== "undefined"
-            ? (window.ClientConfig?.editor?.requestClose ?? false)
-            : false,
-        text: openFileLocationText,
-        blank: openOnNewPage,
-      };
-      if (
-        typeof window !== "undefined" &&
-        !window.ClientConfig?.editor?.requestClose
-      ) {
-        goBack.url = newConfig.editorConfig?.customization?.goback?.url;
-      }
-    }
-  }
-
   const sdkCustomization: NonNullable<
     IConfig["editorConfig"]
   >["customization"] = sdkConfig?.editorCustomization;
-
-  const theme = sdkCustomization?.uiTheme || user?.theme;
-
-  if (newConfig.editorConfig) {
-    newConfig.editorConfig.customization = {
-      ...newConfig.editorConfig.customization,
-      ...sdkCustomization,
-      goback: { ...goBack },
-      uiTheme: getEditorTheme(theme as ThemeKeys),
-    };
-
-    if (SHOW_CLOSE && !sdkConfig?.isSDK) {
-      newConfig.editorConfig.customization.close = {
-        visible: SHOW_CLOSE,
-        text: t("Common:CloseButton"),
-      };
-    }
-  }
 
   try {
     if (
@@ -249,6 +202,18 @@ const Editor = ({
     console.error(error);
   }
 
+  if (newConfig.editorConfig) {
+    const theme = sdkCustomization?.uiTheme || user?.theme;
+
+    newConfig.editorConfig.customization = {
+      ...newConfig.editorConfig.customization,
+      ...sdkCustomization,
+      uiTheme: getEditorTheme(theme as ThemeKeys),
+      goback: { ...goBack },
+      close,
+    };
+  }
+
   newConfig.events = {
     onDocumentReady,
     onRequestHistoryClose: onSDKRequestHistoryClose,
@@ -267,6 +232,15 @@ const Editor = ({
     onSubmit,
     onRequestRefreshFile,
   };
+
+  if (
+    (typeof window !== "undefined" &&
+      window.ClientConfig?.editor?.requestClose) ||
+    close?.visible ||
+    IS_ZOOM
+  ) {
+    newConfig.events.onRequestClose = onSDKRequestClose;
+  }
 
   if (
     typeof window !== "undefined" &&
@@ -323,15 +297,6 @@ const Editor = ({
 
   if (fileInfo?.security.EditHistory) {
     newConfig.events.onRequestRestore = onSDKRequestRestore;
-  }
-
-  if (
-    (typeof window !== "undefined" &&
-      window.ClientConfig?.editor?.requestClose) ||
-    SHOW_CLOSE ||
-    IS_ZOOM
-  ) {
-    newConfig.events.onRequestClose = onSDKRequestClose;
   }
 
   if (config?.startFilling && !IS_ZOOM) {

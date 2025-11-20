@@ -29,13 +29,13 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
-import { TAgentParams } from "@docspace/shared/utils/aiAgents";
+import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 type InstructionsSettingsProps = {
   agentParams: TAgentParams;
-  setAgentParams: (value: TAgentParams) => void;
+  setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const InstructionsSettings = ({
@@ -53,17 +53,16 @@ const InstructionsSettings = ({
     if (agentParams.prompt === value) return;
 
     setAgentParams({
-      ...agentParams,
       prompt: value,
     });
-  }, [value, agentParams]);
+  }, [value, agentParams.prompt, setAgentParams]);
 
   return (
     <StyledParam increaseGap>
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Instructions")}
+            {t("AIInstructions")}
           </Text>
           <Text
             fontSize="12px"
@@ -72,14 +71,15 @@ const InstructionsSettings = ({
             className="set_room_params-info-description"
             noSelect
           >
-            {t("InstructionsDescription")}
+            {t("InstructionsDescriptionAgent")}
           </Text>
         </div>
         <Textarea
           value={value}
           onChange={handleChange}
           heightTextArea={144}
-          placeholder={t("InstructionsPlaceholder")}
+          placeholder={t("InstructionsDescriptionAgentExample")}
+          tabIndex={2}
         />
       </div>
     </StyledParam>

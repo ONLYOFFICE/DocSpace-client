@@ -24,17 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { makeAutoObservable } from "mobx";
-
-import { Nullable } from "../../../types";
-import { TChat } from "../../../api/ai/types";
-import { getChat, getChats, deleteChat, renameChat } from "../../../api/ai";
-
-import { toastr } from "../../toast";
-
-import { TChatStoreProps } from "../Chat.types";
+import React from "react";
+import { deleteChat, getChat, getChats, renameChat } from "../../../api/ai";
+import type { TChat } from "../../../api/ai/types";
+import type { Nullable } from "../../../types";
 import socket, { SocketEvents } from "../../../utils/socket";
+import { toastr } from "../../toast";
+import type { TChatStoreProps } from "../Chat.types";
 
 export default class ChatStore {
   currentChat: Nullable<TChat> = null;
@@ -43,17 +40,19 @@ export default class ChatStore {
 
   totalChats: number = 0;
 
-  roomId: TChatStoreProps["roomId"];
+  roomId: TChatStoreProps["roomId"] = "";
 
   isLoading: boolean = false;
 
   isRequestRunning: boolean = false;
 
-  constructor(roomId: TChatStoreProps["roomId"]) {
-    this.roomId = roomId;
-
+  constructor() {
     makeAutoObservable(this);
   }
+
+  setRoomId = (value: TChatStoreProps["roomId"]) => {
+    this.roomId = value;
+  };
 
   setTotalChats = (value: number) => {
     this.totalChats = value;
@@ -102,30 +101,11 @@ export default class ChatStore {
 
       if (!this.chats.some((c) => c.id === chat.id)) {
         this.chats = [chat, ...this.chats];
+        this.setTotalChats(this.totalChats + 1);
       }
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
-    }
-  };
-
-  fetchChats = async () => {
-    if (this.isRequestRunning) return;
-
-    this.setIsLoading(true);
-    this.setIsRequestRunning(true);
-
-    try {
-      const { items, total } = await getChats(this.roomId);
-
-      this.setChats(items);
-      this.setTotalChats(total);
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
-    } finally {
-      this.setIsRequestRunning(false);
-      this.setIsLoading(false);
     }
   };
 
@@ -170,8 +150,12 @@ export default class ChatStore {
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
+      throw error;
     }
 
+    if (this.currentChat?.id === id) {
+      this.setCurrentChat(null);
+    }
     this.chats = this.chats.filter((chat) => chat.id !== id);
 
     this.setTotalChats(this.totalChats - 1);
@@ -189,17 +173,28 @@ export default class ChatStore {
   }
 }
 
-export const ChatStoreContext = React.createContext<ChatStore>(undefined!);
+export const ChatStoreContext = React.createContext<ChatStore>({} as ChatStore);
 
 export const ChatStoreContextProvider = ({
   roomId,
+
+  chats,
+  totalChats,
   children,
 }: TChatStoreProps) => {
-  const store = React.useMemo(() => new ChatStore(roomId), [roomId]);
+  const store = React.useMemo(() => new ChatStore(), []);
 
   React.useEffect(() => {
-    if (roomId) store.fetchChats();
+    store.setRoomId(roomId);
   }, [store, roomId]);
+
+  React.useEffect(() => {
+    store.setChats(chats);
+  }, [store, chats]);
+
+  React.useEffect(() => {
+    store.setTotalChats(totalChats);
+  }, [store, totalChats]);
 
   React.useEffect(() => {
     const callback = ({

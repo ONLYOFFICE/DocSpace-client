@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { KeyboardEvent } from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TFile } from "../../../../api/files/types";
+import type { TFile } from "../../../../api/files/types";
 import { InfoPanelEvents } from "../../../../enums";
 import { RectangleSkeleton } from "../../../../skeletons";
 
@@ -39,7 +39,7 @@ import { Text } from "../../../text";
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
 
-import { ChatInputProps } from "../../Chat.types";
+import type { ChatInputProps } from "../../Chat.types";
 
 import Attachment from "./Attachment";
 import FilesList from "./FilesList";
@@ -53,10 +53,14 @@ const ChatInput = ({
   attachmentFile,
   clearAttachmentFile,
   selectedModel,
+  toolsSettings,
+  isPortalAdmin,
+  aiReady,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const { startChat, sendMessage, currentChatId } = useMessageStore();
+  const { startChat, sendMessage, currentChatId, isRequestRunning } =
+    useMessageStore();
   const { fetchChat, currentChat } = useChatStore();
 
   const [value, setValue] = React.useState("");
@@ -97,16 +101,21 @@ const ChatInput = ({
       setValue("");
       setSelectedFiles([]);
     } catch (e) {
-      console.log("from here");
       console.log(e);
     }
   }, [currentChatId, startChat, sendMessage, value, selectedFiles]);
 
   const onKeyEnter = React.useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Enter" && !e.shiftKey) return sendMessageAction();
+    (e: KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+
+        if (!isRequestRunning) {
+          sendMessageAction();
+        }
+      }
     },
-    [sendMessageAction],
+    [sendMessageAction, isRequestRunning],
   );
 
   const showFilesSelector = () => {
@@ -122,19 +131,11 @@ const ChatInput = ({
   };
 
   React.useEffect(() => {
-    window.addEventListener("keydown", onKeyEnter);
-
-    return () => {
-      window.removeEventListener("keydown", onKeyEnter);
-    };
-  }, [onKeyEnter]);
-
-  React.useEffect(() => {
     if (currentChatId && !currentChat) {
       fetchChat(currentChatId);
     }
 
-    if (!prevSession.current) {
+    if (!prevSession.current || prevSession.current === currentChatId) {
       prevSession.current = currentChatId;
 
       return;
@@ -147,8 +148,7 @@ const ChatInput = ({
   }, [
     currentChatId,
     currentChat,
-    attachmentFile,
-    clearAttachmentFile,
+
     fetchChat,
   ]);
 
@@ -187,7 +187,9 @@ const ChatInput = ({
               onChange={handleChange}
               value={value}
               isFullHeight
-              className={styles.chatInputTextArea}
+              className={classNames(styles.chatInputTextArea, {
+                [styles.disabled]: !aiReady,
+              })}
               wrapperClassName={classNames({
                 [styles.chatInputTextAreaWrapper]: true,
                 [styles.chatInputTextAreaWrapperFiles]:
@@ -196,6 +198,8 @@ const ChatInput = ({
               placeholder={t("Common:AIChatInput")}
               isChatMode
               fontSize={15}
+              isDisabled={!aiReady}
+              onKeyDown={onKeyEnter}
             />
 
             <FilesList
@@ -211,6 +215,9 @@ const ChatInput = ({
               sendMessageAction={sendMessageAction}
               value={value}
               selectedModel={selectedModel}
+              toolsSettings={toolsSettings}
+              isAdmin={isPortalAdmin}
+              aiReady={aiReady}
             />
           </>
         )}
@@ -223,14 +230,16 @@ const ChatInput = ({
         attachmentFile={attachmentFile}
         clearAttachmentFile={clearAttachmentFile}
       />
-      <Text
-        fontSize="10px"
-        fontWeight={400}
-        className={styles.chatInputText}
-        noSelect
-      >
-        {t("Common:CheckAIInfo")}
-      </Text>
+      {!isLoading ? (
+        <Text
+          fontSize="10px"
+          fontWeight={400}
+          className={styles.chatInputText}
+          noSelect
+        >
+          {t("Common:AICanMakeMistakes")}
+        </Text>
+      ) : null}
     </>
   );
 };

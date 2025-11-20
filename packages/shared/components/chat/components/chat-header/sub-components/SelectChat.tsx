@@ -37,13 +37,19 @@ import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 import { RectangleSkeleton } from "../../../../../skeletons";
 import { exportChat } from "../../../../../api/ai";
 
+import socket, {
+  SocketCommands,
+  SocketEvents,
+} from "../../../../../utils/socket";
+
 import { DropDown } from "../../../../drop-down";
+import { TBreadCrumb } from "../../../../selector/Selector.types";
 import { toastr } from "../../../../toast";
-import { Link, LinkType, LinkTarget } from "../../../../link";
+import { Link, LinkType } from "../../../../link";
 
 import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
-
+import { openFile } from "../../../utils";
 import { SelectChatProps } from "../../../Chat.types";
 
 import ExportSelector from "../../export-selector";
@@ -51,14 +57,18 @@ import ExportSelector from "../../export-selector";
 import styles from "../ChatHeader.module.scss";
 
 import RenameChat from "./RenameChat";
-import {
-  CHAT_LIST_MAX_HEIGHT,
-  CHAT_LIST_ROW_HEIGHT,
-  CHAT_LIST_WIDTH,
-} from "../constants";
+import { CHAT_LIST_MAX_HEIGHT, CHAT_LIST_WIDTH } from "../constants";
+import { getSelectChatRowHeight } from "../utils";
 import { ChatList } from "./ChatList";
 
-const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
+const SelectChat = ({
+  isLoadingProp,
+  roomId,
+  getIcon,
+  getResultStorageId,
+  setIsAIAgentChatDelete,
+  setDeleteDialogVisible,
+}: SelectChatProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -102,61 +112,120 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
     setIsRenameOpen((value) => !value);
   }, [isRequestRunning]);
 
-  const onDeleteAction = React.useCallback(async () => {
-    if (isRequestRunning) return;
-    await deleteChat(hoveredItem);
-    if (hoveredItem === currentChat?.id) {
-      startNewChat();
-      updateUrlChatId("");
-    }
-    setIsOpen(false);
-    setHoveredItem("");
-  }, [
-    hoveredItem,
-    deleteChat,
-    isRequestRunning,
-    currentChat?.id,
-    startNewChat,
-    updateUrlChatId,
-  ]);
-
-  const onSaveToFileAction = React.useCallback(async () => {
-    if (isRequestRunning) return;
-    setIsExportOpen(true);
-  }, [hoveredItem, chats, isRequestRunning, t]);
-
   const getFileName = () => {
     const title = chats.find((chat) => chat.id === hoveredItem)?.title;
 
     return title ?? "";
   };
 
-  const onSubmit = React.useCallback(async () => {
-    const res = await exportChat(hoveredItem);
+  const onDeleteAction = React.useCallback(async () => {
+    try {
+      await deleteChat(hoveredItem);
 
-    const title = chats.find((chat) => chat.id === hoveredItem)?.title;
-    const toastMsg = (
-      <Trans
-        ns="Common"
-        i18nKey="ChatExported"
-        t={t}
-        values={{ fileName: res?.title, title }}
-        components={{
-          1: <b />,
-          2: (
-            <Link
-              type={LinkType.page}
-              target={LinkTarget.blank}
-              href={res?.webUrl}
-            />
-          ),
-        }}
-      />
-    );
+      if (hoveredItem === currentChat?.id) {
+        startNewChat();
+        updateUrlChatId("");
+      }
+      setIsOpen(false);
+      setHoveredItem("");
 
-    toastr.success(toastMsg);
-    setIsExportOpen(false);
+      toastr.success(t("Common:ChatSuccessDeleted"));
+    } catch (error) {
+      console.error(error);
+    }
+  }, [
+    hoveredItem,
+    deleteChat,
+    currentChat?.id,
+    startNewChat,
+    updateUrlChatId,
+    t,
+  ]);
+
+  const onDelete = React.useCallback(() => {
+    if (isRequestRunning) return;
+
+    setIsAIAgentChatDelete?.({
+      visible: true,
+      itemName: getFileName(),
+      onDeleteAction: onDeleteAction,
+    });
+    setDeleteDialogVisible?.(true);
+  }, [
+    isRequestRunning,
+    hoveredItem,
+    chats,
+    onDeleteAction,
+    setIsAIAgentChatDelete,
+    setDeleteDialogVisible,
+  ]);
+
+  const onSaveToFileAction = React.useCallback(async () => {
+    if (isRequestRunning) return;
+    setIsExportOpen(true);
+    setIsOpen(false);
   }, [hoveredItem, chats, isRequestRunning, t]);
+
+  const onSubmit = React.useCallback(
+    async (
+      selectedItemId: string | number | undefined,
+      folderTitle: string,
+      isPublic: boolean,
+      breadCrumbs: TBreadCrumb[],
+      fileName: string,
+      isChecked: boolean,
+    ) => {
+      if (!selectedItemId) return;
+
+      const chatParts = ["CHAT-" + hoveredItem];
+
+      socket?.emit(SocketCommands.Subscribe, {
+        roomParts: ["CHAT-" + hoveredItem],
+        individual: true,
+      });
+
+      await exportChat(hoveredItem, selectedItemId, fileName);
+
+      socket?.on(SocketEvents.ExportChat, (data) => {
+        const { resultFile } = data;
+
+        const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+
+        if (isChecked) {
+          openFile(resultFile.id.toString());
+        }
+
+        const toastMsg = (
+          <Trans
+            ns="Common"
+            i18nKey="ChatExported"
+            t={t}
+            values={{ fileName, title }}
+            components={{
+              1: <b />,
+              2: (
+                <Link
+                  type={LinkType.action}
+                  onClick={() => openFile(resultFile.id.toString())}
+                />
+              ),
+            }}
+          />
+        );
+
+        toastr.success(toastMsg);
+
+        socket?.off(SocketEvents.ExportChat);
+        socket?.emit(SocketCommands.Unsubscribe, {
+          roomParts: chatParts,
+          individual: true,
+        });
+      });
+
+      setIsExportOpen(false);
+    },
+    [hoveredItem, chats, isRequestRunning, t],
+  );
 
   const contextModel = React.useMemo(() => {
     return [
@@ -177,21 +246,35 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
         key: "remove",
         label: t("Common:Delete"),
         icon: RemoveSvgUrl,
-        onClick: onDeleteAction,
+        onClick: onDelete,
       },
     ];
-  }, [t, onDeleteAction, onRenameToggle, onSaveToFileAction]);
+  }, [t, onDelete, onRenameToggle, onSaveToFileAction]);
+
+  const rowHeight = getSelectChatRowHeight();
 
   const maxHeight =
-    chats.length > 7
-      ? CHAT_LIST_MAX_HEIGHT
-      : CHAT_LIST_ROW_HEIGHT * chats.length;
+    chats.length > 7 ? CHAT_LIST_MAX_HEIGHT : rowHeight * chats.length;
 
   React.useEffect(() => {
     if (isRequestRunning) {
       setIsOpen(false);
     }
   }, [isRequestRunning]);
+
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const onResize = () => {
+      setIsOpen(false);
+    };
+
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [isOpen]);
 
   if (isLoadingProp) {
     return (
@@ -209,6 +292,7 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
   return (
     <>
       <div
+        title={t("Common:ChatHistory")}
         className={classNames(styles.selectChat, { [styles.open]: isOpen })}
         onClick={toggleOpen}
         ref={parentRef}
@@ -254,7 +338,7 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
           getIcon={getIcon}
           showFolderSelector={isExportOpen}
           onCloseFolderSelector={closeExportSelector}
-          roomId={roomId}
+          currentFolderId={getResultStorageId() || roomId}
           getFileName={getFileName}
           onSubmit={onSubmit}
         />

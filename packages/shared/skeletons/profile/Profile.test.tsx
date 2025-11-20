@@ -1,12 +1,12 @@
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { ProfileViewLoader } from "./Profile.view";
 import { ProfileFooterLoader } from "./Profile.footer";
 import styles from "./Profile.module.scss";
 
-jest.mock("../../utils", () => ({
+vi.mock("../../utils", () => ({
   isDesktop: () => true,
   isMobile: () => false,
 }));

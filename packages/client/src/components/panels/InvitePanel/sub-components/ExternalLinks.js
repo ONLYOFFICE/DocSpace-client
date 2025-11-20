@@ -42,7 +42,9 @@ import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 // import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
+import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
@@ -186,8 +188,8 @@ const ExternalLinks = ({
   // const shareEmail = useCallback(
   //   (link) => {
   //     const { title, shareLink } = link;
-  //     const subject = t("SharingPanel:ShareEmailSubject", { title });
-  //     const body = t("SharingPanel:ShareEmailBody", { title, shareLink });
+  //     const subject = t("SharingPanel:ShareEmailSubject", { itemName: title });
+  //     const body = t("SharingPanel:ShareEmailBody", { itemName: title, shareLink });
 
   //     const mailtoLink = `mailto:${objectToGetParams({
   //       subject,
@@ -230,7 +232,28 @@ const ExternalLinks = ({
   );
 
   const filteredAccesses =
-    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+    roomType === -1
+      ? accesses
+      : roomType === RoomsType.AIRoom
+        ? filterNotReadOnlyOptions(accesses)
+        : filterPaidRoleOptions(accesses);
+
+  const description =
+    roomId === -1
+      ? t("InviteViaLinkDescriptionAccounts", {
+          productName: t("Common:ProductName"),
+        })
+      : roomType === RoomsType.AIRoom
+        ? allowInvitingGuests
+          ? t("InviteViaLinkDescriptionAgentGuest")
+          : t("InviteViaLinkDescriptionAgentMembers", {
+              productName: t("Common:ProductName"),
+            })
+        : allowInvitingGuests
+          ? t("InviteViaLinkDescriptionRoomGuest")
+          : t("InviteViaLinkDescriptionRoomMembers", {
+              productName: t("Common:ProductName"),
+            });
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
@@ -271,17 +294,7 @@ const ExternalLinks = ({
           dataTestId="invite_panel_external_links_toggle"
         />
       </StyledSubHeader>
-      <StyledDescription>
-        {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts", {
-              productName: t("Common:ProductName"),
-            })
-          : !allowInvitingGuests
-            ? t("InviteViaLinkDescriptionRoomMembers", {
-                productName: t("Common:ProductName"),
-              })
-            : t("InviteViaLinkDescriptionRoomGuest")}
-      </StyledDescription>
+      <StyledDescription>{description}</StyledDescription>
       {externalLinksVisible ? (
         <StyledInviteInputContainer key={activeLink.id}>
           <StyledInviteInput isShowCross>

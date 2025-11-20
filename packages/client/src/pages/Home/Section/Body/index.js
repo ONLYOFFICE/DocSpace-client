@@ -36,6 +36,7 @@ import {
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
+import { EMPTY_ARRAY } from "@docspace/shared/constants";
 import {
   DeviceType,
   VDRIndexingAction,
@@ -44,6 +45,7 @@ import {
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
+import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
@@ -100,6 +102,8 @@ const SectionBodyContent = (props) => {
     onEnableFormFillingGuid,
     isArchiveFolderRoot,
     setDropTargetPreview,
+    aiConfig,
+    isInsideKnowledge,
   } = props;
 
   useEffect(() => {
@@ -196,7 +200,7 @@ const SectionBodyContent = (props) => {
       e.target.closest("#filter_search-input") ||
       isHeaderOptionButton(e)
     ) {
-      setSelection([]);
+      setSelection(EMPTY_ARRAY);
       setBufferSelection(null);
       setHotkeyCaretStart(null);
       setHotkeyCaret(null);
@@ -463,6 +467,9 @@ const SectionBodyContent = (props) => {
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 
+  if (isInsideKnowledge && !aiConfig?.vectorizationEnabled)
+    return <KnowledgeDisabledContainer />;
+
   if (
     isEmptyFilesList &&
     !welcomeFormFillingTipsVisible &&
@@ -543,10 +550,12 @@ export default inject(
       uploaded,
       onClickBack: filesActionsStore.onClickBack,
       currentDeviceType: settingsStore.currentDeviceType,
+      aiConfig: settingsStore.aiConfig,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
+      isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
       userId: userStore?.user?.id,

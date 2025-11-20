@@ -74,6 +74,7 @@ const Modal = ({
   withBorder = false,
   dataTestId,
   scrollbarCreateContext,
+  closeOnBackdropClick = true,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -93,7 +94,8 @@ const Modal = ({
 
   const validateOnMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
-    if (target.id === "modal-onMouseDown-close") onClose?.();
+    if (target.id === "modal-onMouseDown-close" && closeOnBackdropClick)
+      onClose?.();
   };
 
   const headerProps = React.isValidElement(header)

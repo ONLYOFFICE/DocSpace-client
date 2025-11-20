@@ -26,7 +26,7 @@
 import type { TSelectorItem } from "../../../components/selector";
 import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
-import { RoomsType } from "../../../enums";
+import { RoomsType, FolderType } from "../../../enums";
 import { TRoomSecurity } from "../../../api/rooms/types";
 
 import {
@@ -109,6 +109,8 @@ export type UseSocketHelperProps = {
   setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
+  disabledFolderType?: FolderType;
   filterParam?: string | number;
   withCreate?: boolean;
+  disableBySecurity?: string;
 };

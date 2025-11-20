@@ -1,18 +1,18 @@
 {
   "key_path": "ProviderTwitter",
-  "content": "Twitter",
-  "content_en_sha1_hash": "5392c950bdde4be7e5f5b8fdc6a1ca5f21e905cf",
-  "created_at": "2025-05-19T21:30:47.613Z",
-  "updated_at": "2025-10-27T16:14:33.786Z",
+  "content": "X",
+  "content_en_sha1_hash": "c032adc1ff629c9b66f22749ad667e6beadf144b",
+  "created_at": "2025-11-18T14:41:31.343Z",
+  "updated_at": "2025-11-18T14:44:13.821Z",
   "comment": {
-    "text": "This translation key is used for displaying social media providers on a platform, commonly found on authentication or sign-up buttons. It is likely used to display \"Twitter\" as one of the available provider options.",
+    "text": "This key represents the display name for the \"Twitter\" (now \"X\") login provider. It's used to label the provider option, likely on a login or signup button or selection list. Translators should ensure this accurately reflects the platform's current branding.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:52.395Z"
+    "updated_at": "2025-11-18T14:44:13.821Z"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 399,
+      "line_number": 412,
       "context": "case \"google\":\n return t(\"Common:ProviderGoogle\");\n case \"facebook\":\n return t(\"Common:ProviderFacebook\");\n case \"twitter\":\n return t(\"Common:ProviderTwitter\");\n case \"linkedin\":\n return t(\"Common:ProviderLinkedIn\");\n case \"microsoft\":\n return t(\"Common:ProviderMicrosoft\");\n case \"sso\":",
       "module": "/packages/shared"
     }
@@ -93,18 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes a parenthetical explanation \"(旧Twitter)\" which may not be appropriate for all contexts. It's useful for clarity for some audiences but might be unnecessary or jarring in others.",
-          "suggestion": "Consider whether the parenthetical explanation is necessary. If not, simply use \"X\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"X（旧Twitter）\" is currently accurate given Twitter's rebranding, it's a dynamic translation. The \"旧Twitter\" portion will become obsolete.  A more robust translation would handle future branding changes.",
-          "suggestion": "Consider a translation approach that avoids directly incorporating the old name, or a system for automatically updating the translation when the brand changes."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -128,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'X (Twitter)' doesn't accurately reflect the original English term. While 'X' is now used, retaining '(Twitter)' might be confusing or unnecessary for users who are still familiar with the original name.",
-          "suggestion": "Consider using just 'X' or 'X (voorheen Twitter)' to provide context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -170,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Sinhala translation 'ට්ටිටර්' appears to be a transliteration of 'Twitter' and may not be the most accurate or readily understood representation in Sinhala. While it attempts to capture the sound, a more established or localized term might be preferable.",
-          "suggestion": "Consider researching and using a more established Sinhala term for 'Twitter' if one exists. Otherwise, ensure this transliteration is consistent across all materials."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -186,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -224,13 +207,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Twitter推特\" includes both the English word \"Twitter\" and its Chinese transliteration \"推特\". This is redundant and unnecessary. While \"推特\" is a common transliteration, it's not needed when the English name is already present.",
-          "suggestion": "Twitter"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

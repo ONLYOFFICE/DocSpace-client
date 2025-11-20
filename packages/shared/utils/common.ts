@@ -112,14 +112,6 @@ export const desktopConstants = Object.freeze({
 let timer: null | ReturnType<typeof setTimeout> = null;
 type I18n = I18nextProviderProps["i18n"];
 
-export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
-  return currentLng
-    ? i18n.language !== currentLng
-      ? i18n.changeLanguage(currentLng)
-      : Promise.resolve((...args: string[]) => i18n.t(...args))
-    : i18n.changeLanguage("en");
-}
-
 export function createPasswordHash(
   password: string,
   hashSettings?: TPasswordHash,
@@ -281,18 +273,6 @@ export function showLoader() {
   // }, 500);
 }
 
-export function showProgress() {
-  if (isMobile) return;
-  TopLoaderService.cancel();
-  TopLoaderService.start();
-}
-
-export function isMe(user: TUser, userName: string) {
-  return (
-    user && user.id && (userName === "@self" || user.userName === userName)
-  );
-}
-
 export function isAdmin(currentUser: TUser) {
   return (
     currentUser.isAdmin ||
@@ -351,17 +331,7 @@ export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
   }
 };
 
-export function clickBackdrop() {
-  const elms = document.getElementsByClassName(
-    "backdrop-active",
-  ) as HTMLCollectionOf<HTMLDivElement>;
-
-  if (elms && elms.length > 0) {
-    elms[0].click();
-  }
-}
-
-export function objectToGetParams(obj: object, prefix = ''): string {
+export function objectToGetParams(obj: object, prefix = ""): string {
   const params: string[] = [];
 
   for (const [key, value] of Object.entries(obj)) {
@@ -371,33 +341,22 @@ export function objectToGetParams(obj: object, prefix = ''): string {
 
     if (Array.isArray(value)) {
       for (const item of value) {
-        params.push(`${encodeURIComponent(paramKey)}[]=${encodeURIComponent(String(item))}`);
+        params.push(
+          `${encodeURIComponent(paramKey)}[]=${encodeURIComponent(String(item))}`,
+        );
       }
-    } else if (typeof value === 'object') {
+    } else if (typeof value === "object") {
       const nested = objectToGetParams(value, paramKey);
       if (nested) params.push(nested);
     } else {
-      params.push(`${encodeURIComponent(paramKey)}=${encodeURIComponent(String(value))}`);
+      params.push(
+        `${encodeURIComponent(paramKey)}=${encodeURIComponent(String(value))}`,
+      );
     }
   }
 
-  if (!params.length) return '';
-  return prefix ? params.join('&') : `?${params.join('&')}`;
-}
-
-export function toCommunityHostname(hostname: string) {
-  let communityHostname;
-  try {
-    communityHostname =
-      hostname.indexOf("m.") > -1
-        ? hostname.substring(2, hostname.length)
-        : hostname;
-  } catch (e) {
-    console.error(e);
-    communityHostname = hostname;
-  }
-
-  return communityHostname;
+  if (!params.length) return "";
+  return prefix ? params.join("&") : `?${params.join("&")}`;
 }
 
 export function getProviderLabel(provider: string, t: (key: string) => string) {
@@ -503,27 +462,6 @@ export const getDirectionByLanguage = (lng: string) => {
   return isLanguageRtl(lng) ? "rtl" : "ltr";
 };
 
-// temporary function needed to replace rtl language in Editor to ltr
-export const getLtrLanguageForEditor = (
-  userLng: string | undefined,
-  portalLng: string,
-  isEditor: boolean = false,
-): string => {
-  let isEditorPath;
-  if (typeof window !== "undefined") {
-    isEditorPath = window?.location.pathname.indexOf("doceditor") !== -1;
-  }
-  const isUserLngRtl = isLanguageRtl(userLng || "en");
-  // const isPortalLngRtl = isLanguageRtl(portalLng);
-
-  if (userLng === undefined && portalLng) return portalLng;
-
-  if ((!isEditor && !isEditorPath) || (userLng && !isUserLngRtl))
-    return userLng || "en";
-
-  return "en";
-};
-
 export function loadScript(
   url: string,
   id: string,
@@ -586,12 +524,6 @@ export function convertToLanguage(key: string) {
   if (splittedKey.length > 1) return splittedKey[0];
 
   return key;
-}
-
-export function sleep(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
 }
 
 export function isElementInViewport(el: HTMLElement) {

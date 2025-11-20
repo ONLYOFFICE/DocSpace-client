@@ -244,7 +244,7 @@ export const StyledPeopleRow = styled(TableRow)<{
 
   .me-label {
     padding-inline-start: 4px;
-    color: ${({ theme }) => theme.text.disableColor};
+    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
   }
 `;
 

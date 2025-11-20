@@ -180,7 +180,7 @@ export const StyledRowContent = styled(RowContent)`
   
   .me-label {
     padding-inline-start: 4px;
-    color: ${({ theme }) => theme.text.disableColor};
+    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
   }
 
   @media ${tablet} {

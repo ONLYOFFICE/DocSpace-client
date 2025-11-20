@@ -2999,3 +2999,17 @@
   --profile-mobile-row-background: #{$light-dark-gray-hover};
   --profile-mobile-label: #{$gray-dark};
 }
+
+.light {
+  --snackbar-background-color: #{$snackbar-light-background};
+  --snackbar-border-color: #{$light-status-warning};
+  --snackbar-color: #{$black};
+  --snackbar-icon-color: #{$light-status-warning};
+}
+
+.dark {
+  --snackbar-background-color: #{$light-dark-gray-hover};
+  --snackbar-border-color: #{$light-status-warning};
+  --snackbar-color: #{$white};
+  --snackbar-icon-color: #{$light-status-warning};
+}

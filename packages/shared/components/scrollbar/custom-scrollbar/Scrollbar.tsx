@@ -145,7 +145,7 @@ export type ScrollbarState = {
   isRTL?: boolean;
 };
 
-export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
+class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
   static contextType = ScrollbarContext;
 
   static defaultProps = {

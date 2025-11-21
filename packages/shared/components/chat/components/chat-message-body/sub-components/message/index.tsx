@@ -71,6 +71,7 @@ const Message = ({
   isLast,
   getIcon,
   getResultStorageId,
+  folderFormValidation,
 }: MessageProps) => {
   const { currentChat } = useChatStore();
 
@@ -167,10 +168,11 @@ const Message = ({
           messageIndex={idx}
           getIcon={getIcon}
           getResultStorageId={getResultStorageId}
+          folderFormValidation={folderFormValidation}
         />
       ) : null}
     </div>
   );
 };
 
-export default Message;
+export default React.memo(Message);

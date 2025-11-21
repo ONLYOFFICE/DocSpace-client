@@ -49,6 +49,7 @@ const ChatMessageBody = ({
   getIcon,
   isLoading,
   getResultStorageId,
+  folderFormValidation,
 }: MessageBodyProps) => {
   const {
     messages,
@@ -116,6 +117,7 @@ const ChatMessageBody = ({
                 isLast={index === 0}
                 getIcon={getIcon}
                 getResultStorageId={getResultStorageId}
+                folderFormValidation={folderFormValidation}
               />
             );
           })}

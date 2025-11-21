@@ -58,6 +58,7 @@ const Chat = observer(
     getResultStorageId,
     setIsAIAgentChatDelete,
     setDeleteDialogVisible,
+    folderFormValidation,
   }: ChatProps & { isLoadingChat: boolean }) => {
     const { currentChat } = useChatStore();
 
@@ -84,6 +85,7 @@ const Chat = observer(
           aiReady={aiReady}
           setIsAIAgentChatDelete={setIsAIAgentChatDelete}
           setDeleteDialogVisible={setDeleteDialogVisible}
+          folderFormValidation={folderFormValidation}
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen
@@ -98,6 +100,7 @@ const Chat = observer(
               isLoading={isLoadingChat}
               getIcon={getIcon}
               getResultStorageId={getResultStorageId}
+              folderFormValidation={folderFormValidation}
             />
             <ChatFooter
               attachmentFile={attachmentFile}

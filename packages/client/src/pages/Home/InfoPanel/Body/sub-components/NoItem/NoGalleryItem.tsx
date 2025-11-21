@@ -28,22 +28,22 @@ import FormGalleryEmptyInfoReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.f
 import FormGalleryEmptyInfoReactSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.form.templates.dark.svg?url";
 
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import styles from "./NoItem.module.scss";
 
 const NoGalleryItem = () => {
   const { t } = useTranslation(["InfoPanel"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   return (
     <div className={styles.galleryEmptyScreen}>
       <img
         className={styles.galleryEmptyScreenImg}
         src={
-          theme.isBase
+          isBase
             ? FormGalleryEmptyInfoReactSvgUrl
             : FormGalleryEmptyInfoReactSvgDarkUrl
         }

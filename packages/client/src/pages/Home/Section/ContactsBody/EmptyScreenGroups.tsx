@@ -27,10 +27,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Events } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import EmptyGroupLightIcon from "PUBLIC_DIR/images/emptyview/empty.groups.light.svg";
 import EmptyGroupDarkIcon from "PUBLIC_DIR/images/emptyview/empty.groups.dark.svg";
@@ -61,7 +61,7 @@ const EmptyScreenGroups = ({
     "Common",
   ]);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const onCreateGroup = () => {
     const event = new Event(Events.GROUP_CREATE);
@@ -81,14 +81,14 @@ const EmptyScreenGroups = ({
 
   const getIcon = () => {
     if (groupsIsFiltered) {
-      return theme.isBase ? (
+      return isBase ? (
         <EmptyScreenPersonSvgLight />
       ) : (
         <EmptyScreenPersonSvgDark />
       );
     }
 
-    return theme.isBase ? <EmptyGroupLightIcon /> : <EmptyGroupDarkIcon />;
+    return isBase ? <EmptyGroupLightIcon /> : <EmptyGroupDarkIcon />;
   };
 
   const getDescription = () => {

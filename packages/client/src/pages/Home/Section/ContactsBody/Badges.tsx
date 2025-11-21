@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import styled, { css, useTheme } from "styled-components";
+import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
@@ -34,6 +34,7 @@ import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
 import { Badge } from "@docspace/shared/components/badge";
 import { commonIconsStyles, IconSizeType } from "@docspace/shared/utils";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 
@@ -88,7 +89,7 @@ const Badges = ({
 }: BadgeProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
 
   const onClickPaid = () => {
@@ -124,9 +125,7 @@ const Badges = ({
           label={t("Common:LDAP")}
           color={globalColors.white}
           backgroundColor={
-            theme.isBase
-              ? globalColors.secondPurple
-              : globalColors.secondPurpleDark
+            isBase ? globalColors.secondPurple : globalColors.secondPurpleDark
           }
           fontSize="9px"
           fontWeight={800}
@@ -140,9 +139,7 @@ const Badges = ({
           label={t("SSO")}
           color={globalColors.white}
           backgroundColor={
-            theme.isBase
-              ? globalColors.secondGreen
-              : globalColors.secondGreenDark
+            isBase ? globalColors.secondGreen : globalColors.secondGreenDark
           }
           fontSize="9px"
           fontWeight={800}
@@ -155,7 +152,7 @@ const Badges = ({
           className="paid-badge accounts-badge"
           label={t("Paid")}
           backgroundColor={
-            theme.isBase
+            isBase
               ? globalColors.favoritesStatus
               : globalColors.favoriteStatusDark
           }

@@ -26,7 +26,6 @@
 
 import { useRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 import { decode } from "he";
 
 import { Text } from "@docspace/shared/components/text";
@@ -44,6 +43,7 @@ import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
@@ -71,7 +71,7 @@ const ItemTitle = ({
     "DeleteProfileEverDialog",
   ]);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const itemTitleRef = useRef<HTMLDivElement | null>(null);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
@@ -167,9 +167,7 @@ const ItemTitle = ({
               label={t("Common:SSO")}
               color={globalColors.white}
               backgroundColor={
-                theme.isBase
-                  ? globalColors.secondGreen
-                  : globalColors.secondGreenDark
+                isBase ? globalColors.secondGreen : globalColors.secondGreenDark
               }
               fontSize="9px"
               fontWeight={800}
@@ -189,7 +187,7 @@ const ItemTitle = ({
               label={t("Common:LDAP")}
               color={globalColors.white}
               backgroundColor={
-                theme.isBase
+                isBase
                   ? globalColors.secondPurple
                   : globalColors.secondPurpleDark
               }

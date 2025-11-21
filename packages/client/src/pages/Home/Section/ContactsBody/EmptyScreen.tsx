@@ -27,7 +27,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import {
   EmptyView,
@@ -36,6 +35,7 @@ import {
 import { UserStore } from "@docspace/shared/store/UserStore";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { Nullable } from "@docspace/shared/types";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import InviteUserIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import TrashIcon from "PUBLIC_DIR/images/emptyview/trash.svg";
@@ -76,7 +76,7 @@ const EmptyScreen = ({
     "EmptyView",
     "DeleteDialog",
   ]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const isEmptyGroup = contactsTab === "inside_group";
   const isEmptyGuests = contactsTab === "guests";
@@ -107,7 +107,7 @@ const EmptyScreen = ({
     resetFilter(contactsTab!, currentGroup?.id);
   };
 
-  const icon = theme.isBase ? (
+  const icon = isBase ? (
     <EmptyScreenPersonSvgLight />
   ) : (
     <EmptyScreenPersonSvgDark />

@@ -248,24 +248,17 @@ const Selector = ({
           return value;
         });
       } else {
-        let wasLimitReached = false;
+        if (maxSelectedItems && newSelectedItems.length >= maxSelectedItems) {
+          return;
+        }
 
         setNewSelectedItems((value) => {
-          if (maxSelectedItems && value.length >= maxSelectedItems) {
-            wasLimitReached = true;
-            return value;
-          }
-
           value.push({
             ...item,
           });
 
           return [...value];
         });
-
-        if (wasLimitReached) {
-          return;
-        }
 
         if (activeTabId) {
           setSelectedTabItems((value) => {
@@ -559,6 +552,11 @@ const Selector = ({
       : newSelectedItems.length === tempRenderedItemsLength &&
         tempRenderedItemsLength !== 0;
 
+  const isLimitReached = React.useMemo(() => {
+    if (!maxSelectedItems) return false;
+    return newSelectedItems.length >= maxSelectedItems;
+  }, [maxSelectedItems, newSelectedItems.length]);
+
   const onSelectAllProps: TSelectorSelectAll = withSelectAll
     ? {
         withSelectAll,
@@ -722,6 +720,7 @@ const Selector = ({
           injectedElement={injectedElement}
           isSSR={isSSR}
           hideBackButton={hideBackButton}
+          isLimitReached={isLimitReached}
           // info
           {...infoProps}
         />

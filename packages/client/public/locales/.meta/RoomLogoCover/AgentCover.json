@@ -3,13 +3,19 @@
   "content": "Agent cover",
   "content_en_sha1_hash": "e32d1df54cb16aa495e5e330a82c5e326f523fa1",
   "created_at": "2025-11-13T14:53:05.216Z",
-  "updated_at": "2025-11-17T07:52:04.624Z",
+  "updated_at": "2025-11-19T15:02:40.908Z",
   "comment": {
     "text": "This key displays the text \"Agent cover\" in the header of a dialog. The dialog appears when a user is potentially viewing agent-related content within a room logo cover setting. Translators should consider this refers to a covering or visual element specifically associated with agents.",
     "is_auto": true,
     "updated_at": "2025-11-13T14:55:45.302Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
+      "line_number": 137,
+      "context": "const editorBorderRadius = isProfileUpload ? 400 : 110;\n \n const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"RoomLogoCover:RoomCover\");\n \n const onResize = () => {\n const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;\n const screenHeight = document.documentElement.clientHeight;",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
       "line_number": 296,

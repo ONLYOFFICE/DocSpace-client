@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Șablon de sală <1>«{{title}}»</1> a fost salvat",
   "ScheduledTrashMove": "La data de {{date}} va fi mutat în {{sectionName}}",
   "SendByEmail": "Trimite prin email",
+  "SharedBy": "Partajat de",
   "ShareFolder": "Partajare folder",
   "ShareFolderDescription": "O sală nouă va fi creată și tot conținutul folderului selectat va fi copiat acolo. Ulterior, puteți invita alți utilizatori să colaboreze la fișiere în cadrul unei săli.",
   "SharePDFFormModalDescription": "O sală nouă va fi creată și formularul PDF va fi copiat acolo. Apoi puteți invita alți utilizatori să completeze formularul în sală.",

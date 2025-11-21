@@ -1157,12 +1157,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.3.4
         version: 2.3.4
-      '@playwright/test':
-        specifier: 1.56.1
-        version: 1.56.1
       '@msw/playwright':
         specifier: ^0.3.1
-        version: 0.3.1(msw@2.10.2(@types/node@20.17.14)(typescript@5.6.3))
+        version: 0.3.1(msw@2.11.1(@types/node@22.7.5)(typescript@5.9.3))
       '@storybook/addon-actions':
         specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.6.2))
@@ -2859,16 +2856,14 @@ packages:
       '@types/react': 19.2.2
       react: '>=16'
 
-  '@mswjs/interceptors@0.39.6':
-    resolution: {integrity: sha512-bndDP83naYYkfayr/qhBHMhk0YGwS1iv6vaEGcr0SQbO0IZtbOPqjKjds/WcG+bJA+1T5vCx6kprKOzn5Bg+Vw==}
   '@msw/playwright@0.3.1':
     resolution: {integrity: sha512-S4pf65FFBabegRdRb+K/IUZl+hlRK8NXiP5mAbr+DazipFvH1lX6c/6oem5IRsmgdYgmVAyBJrXgFQBlCXx30A==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       msw: ^2.10.1
 
-  '@mswjs/interceptors@0.39.2':
-    resolution: {integrity: sha512-RuzCup9Ct91Y7V79xwCb146RaBRHZ7NBbrIUySumd1rpKqHL5OonaqrGIbug5hNwP/fRyxFMA6ISgw4FTtYFYg==}
+  '@mswjs/interceptors@0.39.6':
+    resolution: {integrity: sha512-bndDP83naYYkfayr/qhBHMhk0YGwS1iv6vaEGcr0SQbO0IZtbOPqjKjds/WcG+bJA+1T5vCx6kprKOzn5Bg+Vw==}
     engines: {node: '>=18'}
 
   '@napi-rs/wasm-runtime@0.2.4':
@@ -11503,10 +11498,10 @@ snapshots:
       '@types/react': 19.2.2
       react: 19.2.0
 
-  '@msw/playwright@0.3.1(msw@2.10.2(@types/node@20.17.14)(typescript@5.6.3))':
+  '@msw/playwright@0.3.1(msw@2.11.1(@types/node@22.7.5)(typescript@5.9.3))':
     dependencies:
-      '@mswjs/interceptors': 0.39.2
-      msw: 2.10.2(@types/node@20.17.14)(typescript@5.6.3)
+      '@mswjs/interceptors': 0.39.6
+      msw: 2.11.1(@types/node@22.7.5)(typescript@5.9.3)
       outvariant: 1.4.3
 
   '@mswjs/interceptors@0.39.6':
@@ -13458,43 +13453,6 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
-
-  babel-plugin-styled-components@2.1.4(styled-components@5.3.11(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0))(supports-color@5.5.0):
-    dependencies:
-      '@babel/helper-annotate-as-pure': 7.25.9
-      '@babel/helper-module-imports': 7.25.9(supports-color@5.5.0)
-      '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.25.8)
-      lodash: 4.17.21
-      picomatch: 2.3.1
-      styled-components: 5.3.11(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - supports-color
-
-  babel-preset-current-node-syntax@1.1.0(@babel/core@7.25.8):
-    dependencies:
-      '@babel/core': 7.25.8
-      '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.25.8)
-      '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.25.8)
-      '@babel/plugin-syntax-class-properties': 7.12.13(@babel/core@7.25.8)
-      '@babel/plugin-syntax-class-static-block': 7.14.5(@babel/core@7.25.8)
-      '@babel/plugin-syntax-import-attributes': 7.26.0(@babel/core@7.25.8)
-      '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.25.8)
-      '@babel/plugin-syntax-json-strings': 7.8.3(@babel/core@7.25.8)
-      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.25.8)
-      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.25.8)
-      '@babel/plugin-syntax-numeric-separator': 7.10.4(@babel/core@7.25.8)
-      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.25.8)
-      '@babel/plugin-syntax-optional-catch-binding': 7.8.3(@babel/core@7.25.8)
-      '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.25.8)
-      '@babel/plugin-syntax-private-property-in-object': 7.14.5(@babel/core@7.25.8)
-      '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.25.8)
-
-  babel-preset-jest@29.6.3(@babel/core@7.25.8):
-    dependencies:
-      '@babel/core': 7.25.8
-      babel-plugin-jest-hoist: 29.6.3
-      babel-preset-current-node-syntax: 1.1.0(@babel/core@7.25.8)
 
   bail@2.0.2: {}
 
@@ -18241,25 +18199,7 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
 
-  styled-components@5.3.11(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0):
-    dependencies:
-      '@babel/helper-module-imports': 7.27.1(supports-color@5.5.0)
-      '@babel/traverse': 7.27.4(supports-color@5.5.0)
-      '@emotion/is-prop-valid': 1.3.1
-      '@emotion/stylis': 0.8.5
-      '@emotion/unitless': 0.7.5
-      babel-plugin-styled-components: 2.1.4(styled-components@5.3.11(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0))(supports-color@5.5.0)
-      css-to-react-native: 3.2.0
-      hoist-non-react-statics: 3.3.2
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-      react-is: 18.3.1
-      shallowequal: 1.1.0
-      supports-color: 5.5.0
-    transitivePeerDependencies:
-      - '@babel/core'
-
-  styled-jsx@5.1.6(@babel/core@7.25.8)(react@19.1.0):
+  styled-jsx@5.1.6(@babel/core@7.25.8)(react@19.2.0):
     dependencies:
       client-only: 0.0.1
       react: 19.2.0

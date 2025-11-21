@@ -238,12 +238,9 @@ const IpSecurity = (props) => {
   };
 
   const onSaveClick = async () => {
-    const newIps = ips.filter((ip) => ip.trim() !== "");
-
-    setIps(newIps);
     setIsSaving(true);
 
-    const valid = newIps.map((ip, index) => {
+    const valid = ips.map((ip, index) => {
       return onCheckValid(ip, index);
     });
 
@@ -252,7 +249,7 @@ const IpSecurity = (props) => {
       return;
     }
 
-    const ipsObjectArr = newIps.map((ip) => {
+    const ipsObjectArr = ips.map((ip) => {
       return { ip };
     });
 
@@ -261,11 +258,11 @@ const IpSecurity = (props) => {
 
       saveToSessionStorage("currentIPSettings", {
         enable,
-        ips: newIps,
+        ips,
       });
       saveToSessionStorage("defaultIPSettings", {
         enable,
-        ips: newIps,
+        ips,
       });
       setShowReminder(false);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));

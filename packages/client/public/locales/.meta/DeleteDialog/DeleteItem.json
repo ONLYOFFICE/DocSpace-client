@@ -3,7 +3,7 @@
   "content": "You are about to move <strong>{{name}}</strong> to {{trashSection}}.",
   "content_en_sha1_hash": "c403a2ff69c05675813fd3ca9ae2562df4e86005",
   "created_at": "2025-10-01T15:20:12.210Z",
-  "updated_at": "2025-11-20T14:22:10.521Z",
+  "updated_at": "2025-11-21T07:41:41.605Z",
   "comment": {
     "text": "This translation key displays a confirmation message in a delete dialog, informing the user they are about to permanently delete a selected item (named `{{name}}`) and move it to the trash section (`{{trashSection}}`). It appears when deleting items directly to the trash, bypassing the recycle bin. Translators should ensure the phrasing accurately conveys the irreversible nature of the deletion.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 138,
+      "line_number": 140,
       "context": "if (isRecycleBinFolder || isThirdParty) {\n if (isSingle) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteItemForever\" ns=\"DeleteDialog\">\n You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? isFolder",
       "module": "/packages/client"
     }

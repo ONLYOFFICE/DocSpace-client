@@ -3,17 +3,17 @@
   "content": "You are about to delete <strong>{{chatName}}<1>.</1></strong>\n All messages and chat history will be permanently removed and cannot be restored.",
   "content_en_sha1_hash": "d87c5d2ee8a8264920525dc32861e456aff3ba2a",
   "created_at": "2025-11-20T15:30:33.871Z",
-  "updated_at": "2025-11-20T15:30:41.937Z",
+  "updated_at": "2025-11-21T07:43:04.227Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key provides a confirmation message displayed within a dialog. It informs the user they are about to permanently delete a specific AI chat (identified by `chatName`) and its associated history, which cannot be recovered. This message appears before finalizing the chat deletion.",
+    "is_auto": true,
+    "updated_at": "2025-11-21T07:43:04.227Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
       "line_number": 98,
-      "context": "if (isAIAgentChatDelete.visible) {\n return (\n <>\n <Trans\n t={t}\n i18nKey=\"DeleteAIChatDescription\"\n ns=\"DeleteDialog\"\n values={{ chatName: isAIAgentChatDelete.itemName }}\n components={{ 1: <Text fontWeight={400} as=\"span\" /> }}\n ></Trans>{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "context": "if (isAIAgentChatDelete.visible) {\n return (\n <>\n <Trans\n t={t}\n i18nKey=\"DeleteAIChatDescription\"\n ns=\"DeleteDialog\"\n values={{ chatName: isAIAgentChatDelete.itemName }}\n components={{\n 1: <Text key=\"chat-title\" fontWeight={400} as=\"span\" />,\n }}",
       "module": "/packages/client"
     }
   ],

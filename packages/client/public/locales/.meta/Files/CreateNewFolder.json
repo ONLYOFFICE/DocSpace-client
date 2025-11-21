@@ -3,7 +3,7 @@
   "content": "Create new Folder",
   "content_en_sha1_hash": "7b9586f7ba02a0921bd879908cb87f65dee16c08",
   "created_at": "2025-05-19T21:30:55.371Z",
-  "updated_at": "2025-11-18T14:41:49.614Z",
+  "updated_at": "2025-11-21T07:41:41.525Z",
   "comment": {
     "text": "CreateNewFolder is used as a label on a main button drop-down menu to prompt users to create a new folder. It appears in an article component where users can select actions related to folders and files.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3097,
+      "line_number": 3099,
       "context": "const createNewFolder = {\n id: \"actions_new-folder\",\n className: \"main-button_drop-down\",\n icon: CatalogFolderReactSvgUrl,\n label: t(\"Files:CreateNewFolder\"),\n onClick: () => this.onCreate(),\n key: \"new-folder\",\n };\n \n // const showUploadFolder = !(isMobile || isTablet);",
       "module": "/packages/client"
     }

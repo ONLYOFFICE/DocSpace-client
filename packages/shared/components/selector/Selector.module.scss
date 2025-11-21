@@ -132,10 +132,15 @@
     .newNameHeader {
       margin-bottom: 4px;
     }
+  }
 
-    .newFileInput {
-      margin-bottom: 16px;
-    }
+  .newFileInputContainer {
+    margin-bottom: 16px;
+  }
+
+  .errorText {
+    margin-top: 4px;
+    color: var(--input-error-color);
   }
 
   .buttonContainer {

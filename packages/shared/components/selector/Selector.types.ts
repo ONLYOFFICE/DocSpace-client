@@ -418,6 +418,7 @@ export type SelectorProps = TSelectorHeader &
     dataTestId?: string;
 
     hideBackButton?: boolean;
+    folderFormValidation: RegExp;
   };
 
 export type BodyProps = TSelectorInfo &
@@ -440,6 +441,7 @@ export type BodyProps = TSelectorInfo &
 
     withFooterInput?: boolean;
     withFooterCheckbox?: boolean;
+    withErrorFooter?: boolean;
     descriptionText?: string;
     withInfoBadge?: boolean;
     injectedElement?: React.ReactElement;
@@ -456,6 +458,7 @@ export type FooterProps = TSelectorFooterSubmitButton &
     isMultiSelect: boolean;
     selectedItemsCount: number;
     requestRunning?: boolean;
+    withErrorFooter?: boolean;
   };
 
 type TSelectorItemEmpty = {

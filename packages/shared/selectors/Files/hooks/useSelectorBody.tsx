@@ -105,6 +105,7 @@ const useSelectorBody = ({
   withFooterInput,
   footerInputHeader,
   currentFooterInputValue,
+  folderFormValidation,
 
   // footer checkbox
   withFooterCheckbox,
@@ -191,6 +192,7 @@ const useSelectorBody = ({
         withFooterInput,
         footerInputHeader,
         currentFooterInputValue,
+        folderFormValidation,
       }
     : {};
 

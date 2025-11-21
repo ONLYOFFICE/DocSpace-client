@@ -65,6 +65,7 @@ const Buttons = ({
   getIcon,
   messageIndex,
   getResultStorageId,
+  folderFormValidation,
 }: MessageButtonsProps) => {
   const { t } = useTranslation(["Common"]);
   const { roomId, findPreviousUserMessage } = useMessageStore();
@@ -201,6 +202,7 @@ const Buttons = ({
           getFileName={getExportedFileName}
           getIcon={getIcon}
           showFolderSelector={showFolderSelector}
+          folderFormValidation={folderFormValidation}
         />
       ) : null}
     </>

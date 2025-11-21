@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "为 AI 智能体启用知识库。系统将使用 {{modelName}} 模型对您的文档进行索引，以支持基于问题的搜索。此功能侧重于查找相关信息，但不会生成摘要或执行全局分析。",
   "MCPServerAdvancedSettingsHint": "用此部分传递其他 HTTP 标头，例如授权令牌。",
   "MCPServerDescriptionHint": "简要解释说明集成的用途",
-  "MCPSettingsDescription": "此部分用于管理房间内 AI 对话的 MCP 服务器。您可以启用系统 MCP 服务器，也可以添加自定义服务器以满足公司需求。启用后，其他用户即可访问这些服务器以执行其任务。",
   "Provider": "提供商",
   "ProviderAddedSuccess": "提供商添加成功",
   "ProviderKey": "密钥",

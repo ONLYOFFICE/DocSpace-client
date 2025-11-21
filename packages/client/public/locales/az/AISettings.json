@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Səyahət agentləri üçün məlumat bazasını aktiv edin. Sistem, {{modelName}} modeli ilə sizə məxsus sənədləri indeks edərək, məlumatlarınız üzrə suallar əsasında axtarışa dəstək olacaq. Bu funksiya, müvafiq məlumatları tapmağa yönəlibsə də, xülasələr yaratmaq və ya qlobal analiz etmək üçün nəzərdə tutulmayıb.",
   "MCPServerAdvancedSettingsHint": "Bu hissəni əlavə HTTP başliqlarını, məsələn, səlahiyyət lövhələrini ötürmək üçün istifadə edin.",
   "MCPServerDescriptionHint": "İnteqrasiyanın məqsədini qısaca izah edin.",
-  "MCPSettingsDescription": "Bu bölmə otaqlar daxilində süni intellekt söhbətləri üçün MCP serverlərini idarə etməyə imkan verir. Siz sistem MCP serverlərini aktiv edə bilərsiniz və ya şirkətinizin ehtiyaclarını ödəmək üçün xüsusi olanları əlavə edə bilərsiniz. Aktiv edildikdən sonra, bu serverlər digər istifadəçilər üçün onların tapşırıqları üçün əlçatmaz olacaq.",
   "Provider": "Təminatçı",
   "ProviderAddedSuccess": "Təminatçı uğurla əlavə edildi",
   "ProviderKey": "Kunci",

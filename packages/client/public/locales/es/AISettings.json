@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Habilite una base de conocimientos para agentes de IA. El sistema indexará sus documentos utilizando el modelo {{modelName}} para apoyar la búsqueda basada en preguntas a través de sus datos. Esta función se centra en encontrar información relevante, pero no genera resúmenes ni realiza análisis globales. ",
   "MCPServerAdvancedSettingsHint": "Utilice esta sección para pasar encabezados HTTP adicionales, como tokens de autorización. ",
   "MCPServerDescriptionHint": "Escriba una breve explicación del propósito de la integración ",
-  "MCPSettingsDescription": "Esta sección le permite gestionar servidores MCP para chats de IA dentro de las salas. Puede habilitar servidores MCP del sistema o añadir otros personalizados para satisfacer las necesidades de su empresa. Una vez habilitados, estos servidores serán accesibles a otros usuarios para sus tareas.",
   "Provider": "Proveedor",
   "ProviderAddedSuccess": "Proveedor añadido correctamente",
   "ProviderKey": "Clave",

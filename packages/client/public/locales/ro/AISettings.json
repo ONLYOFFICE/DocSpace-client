@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Activați o bază de cunoștințe pentru agenți de IA. Sistemul v-a indexa documentele folosind modelul {{modelName}} pentru a sprijini căutarea datelor bazată pe întrebări. Această caracteristică presupune căutarea informaţiilor relevante, dar nu și generarea rezumatelor sau efectuarea analizei globale.",
   "MCPServerAdvancedSettingsHint": "Utilizați această secțiune pentru a transmite antete HTTP suplimentare, cum ar fi token-uri de autorizare.",
   "MCPServerDescriptionHint": "Scrieți o scurtă explicație despre scopul integrării.",
-  "MCPSettingsDescription": "Această secțiune vă permite să gestionați servere MCP pentru chat-ul cu IA în săli. Puteți activa servere MCP de sistem sau puteți adăuga servere personalizate pentru a vă îndeplini nevoile companiei. Odată activate, aceste servere vor fi accesibile pentru toți utilizatorii în îndeplinirea sarcinilor lor.",
   "Provider": "Furnizor",
   "ProviderAddedSuccess": "Furnizorul a fost adăugat cu succes",
   "ProviderKey": "Cheie",

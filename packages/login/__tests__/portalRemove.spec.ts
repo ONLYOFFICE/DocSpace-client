@@ -39,8 +39,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
 ];
 
@@ -59,11 +59,10 @@ test("portal remove render", async ({ page, baseUrl }) => {
 test("portal remove delete", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Delete" }).click();
+  const deleteButton = page.getByTestId("delete_portal_button");
+  await deleteButton.click();
 
-  await page
-    .getByRole("button", { name: "Delete" })
-    .waitFor({ state: "detached" });
+  await deleteButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -71,7 +70,7 @@ test("portal remove delete", async ({ page, baseUrl }) => {
     "portal-remove-delete.png",
   ]);
 
-  await page.getByTestId("link").click();
+  await page.getByTestId("redirect_site_link").click();
 
   await page.waitForURL(new RegExp("^(http|https)://(.*)"), {
     waitUntil: "commit",
@@ -87,7 +86,7 @@ test("portal remove delete", async ({ page, baseUrl }) => {
 test("portal remove cancel", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByTestId("cancel_button").click();
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 

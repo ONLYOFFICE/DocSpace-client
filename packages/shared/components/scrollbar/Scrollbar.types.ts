@@ -31,7 +31,16 @@ import {
 
 type PickedScrollbarLibraryProps = Pick<
   ScrollbarLibraryProps,
-  "id" | "className" | "style" | "noScrollY" | "noScrollX" | "createContext"
+  | "id"
+  | "className"
+  | "style"
+  | "noScrollY"
+  | "noScrollX"
+  | "createContext"
+  | "translateContentSizeYToHolder"
+  | "translateContentSizeXToHolder"
+  | "translateContentSizesToHolder"
+  | "rtl"
 >;
 
 export type ScrollbarProps = PickedScrollbarLibraryProps & {
@@ -39,6 +48,8 @@ export type ScrollbarProps = PickedScrollbarLibraryProps & {
   ref?: React.Ref<CustomScrollbar | null>;
   /** This class will be placed on scroller element */
   scrollClass?: string;
+  /** This class will be placed on scroller body element */
+  scrollBodyClassName?: string;
   /** Enable tracks auto hiding.  */
   autoHide?: boolean;
   /** Fix scrollbar size. */

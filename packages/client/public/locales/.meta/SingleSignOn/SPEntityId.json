@@ -3,7 +3,7 @@
   "content": "SP Entity Id (link to metadata XML)",
   "content_en_sha1_hash": "4f511e076ad748fe91c1e8f019f742f025d91a46",
   "created_at": "2025-05-19T21:30:50.162Z",
-  "updated_at": "2025-05-24T03:04:24.238Z",
+  "updated_at": "2025-09-26T15:21:06.401Z",
   "comment": {
     "text": "This translation key is used for the label and tooltip of a field that displays a link to an entity's metadata XML in a Single Sign-On (SSO) provider settings page. The text appears as a button label in a PortalSettings categories integration setting.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
-      "line_number": 81,
-      "context": "}, []);\n \n return (\n <StyledWrapper>\n <MetadataUrlField\n labelText={t(\"SPEntityId\")}\n name=\"spEntityId\"\n placeholder={`${url}/sso/metadata`}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SPEntityIdTooltip\")}</Text>}\n tooltipClass=\"sp-entity-id-tooltip icon-button\"\n />",
+      "line_number": 83,
+      "context": "if (!ready) return null;\n \n return (\n <StyledWrapper>\n <MetadataUrlField\n labelText={t(\"SPEntityId\")}\n name=\"spEntityId\"\n placeholder={`${url}/sso/metadata`}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SPEntityIdTooltip\")}</Text>}\n tooltipClass=\"sp-entity-id-tooltip icon-button\"\n dataTestId=\"sp_entity_id\"",
       "module": "/packages/client"
     }
   ],

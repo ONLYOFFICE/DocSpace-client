@@ -3,7 +3,7 @@
   "content": "All types supported by {{organizationName}} editors",
   "content_en_sha1_hash": "e88815dbb9850791b79a763a35440577b1498286",
   "created_at": "2025-05-19T21:30:54.362Z",
-  "updated_at": "2025-05-24T09:44:11.457Z",
+  "updated_at": "2025-08-04T07:30:01.388Z",
   "comment": {
     "text": "The translation key \"AllTypesSupportedByEditor\" is used to display a label that indicates all types supported by {{organizationName}} editors. This label appears in a file selector dialog and is intended to provide clarity to users about the editor's capabilities.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 91,
-      "context": "const fileTypeDisplay = [\n { value: FilesSelectorFilterTypes.ALL, label: t(\"AllTypes\") },\n {\n value: \"EditorSupportedTypes\",\n label: t(\"AllTypesSupportedByEditor\", {\n organizationName: logoText,\n }),\n },\n { value: \"SelectorTypes\", label: t(\"SelectTypes\") },\n ];",
+      "line_number": 95,
+      "context": "label: t(\"AllTypes\"),\n dataTestId: \"all_types_radio_button\",\n },\n {\n value: \"EditorSupportedTypes\",\n label: t(\"AllTypesSupportedByEditor\", {\n organizationName: logoText,\n }),\n dataTestId: \"editor_radio_button\",\n },\n {",
       "module": "/packages/client"
     }
   ],

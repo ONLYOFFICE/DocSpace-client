@@ -3,7 +3,7 @@
   "content": "Site",
   "content_en_sha1_hash": "5b6825d3c67a35898b7b65fd986a7fe6ca47771d",
   "created_at": "2025-05-19T21:30:57.076Z",
-  "updated_at": "2025-06-08T12:02:32.874Z",
+  "updated_at": "2025-10-14T05:24:19.867Z",
   "comment": {
     "text": "The \"Site\" translation key is used to display the content \"Site\" as a label on an About page element. It appears in a row of elements and is part of a larger UI component. Translators should replace this text with the target language equivalent to maintain site-specific information.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 205,
-      "context": "</Link>\n </div>\n \n <div className=\"row\">\n <Text className=\"row-el\" fontSize=\"13px\">\n {t(\"Site\")}:\n </Text>\n \n <Link\n tag=\"a\"\n className=\"row-el\"",
+      "line_number": 264,
+      "context": "</Link>\n </div>\n \n <div className={classNames(styles.row, \"row\")}>\n <Text className={classNames(styles.rowEl, \"row-el\")} fontSize=\"13px\">\n {t(\"Site\")}:\n </Text>\n \n <Link\n tag=\"a\"\n className={classNames(styles.rowEl, \"row-el\")}",
       "module": "/packages/shared"
     }
   ],
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Website' is a common translation for 'Site', it doesn't capture the full range of meanings. 'Site' can refer to a physical location, a construction site, or a general area, not just a web presence. 'Website' is too specific.",
+          "suggestion": "Consider 'Standort' or 'Bereich' as more general translations, depending on the context. If it *always* refers to a website, 'Website' is acceptable, but a more versatile term might be preferable."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ເວັບໄຊ' is a common transliteration of 'website,' 'Site' on its own often refers to a physical location or a domain. 'ເວັບໄຊ' implies a website, which may not be the intended meaning. A more neutral translation might be 'ແນວແດນ' (naew daen) for 'site' in a more general sense.",
+          "suggestion": "Consider 'ແນວແດນ' (naew daen) if 'Site' refers to a location or general area."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Website' is a possible translation for 'Site', it's a more specific meaning. 'Site' can refer to a physical location as well as a website. A more accurate and flexible translation would be 'Local' or 'Sítio'. 'Website' implies exclusively the digital version.",
+          "suggestion": "Consider 'Local' or 'Sítio' for a more general translation of 'Site'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,7 +177,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Webové stránky\" is a common translation for 'Site' in the context of websites, it's a broader term. 'Site' can also refer to a geographical location or a place. 'Webové stránky' doesn't cover these other meanings.",
+          "suggestion": "Consider a more general translation like \"Miesto\" or \"Lokalita\" if the context allows.  If it *always* refers to a website, then 'Webové stránky' is acceptable."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -202,6 +226,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Faqe' can translate to 'Page' in some contexts, 'Site' generally refers to a website or online platform. 'Faqe' is more suitable for a single webpage. A more appropriate translation for 'Site' would be 'Ndarje' or 'Webfaqe'.",
+          "suggestion": "Consider 'Ndarje' or 'Webfaqe' as alternatives."
+        }
+      ],
       "approved_at": null
     }
   }

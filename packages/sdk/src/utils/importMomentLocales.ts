@@ -26,8 +26,6 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-/* eslint-disable import/no-dynamic-require */
-
 function importMomentLocale(locale: string) {
   const splittedLocale = locale.split("-");
 

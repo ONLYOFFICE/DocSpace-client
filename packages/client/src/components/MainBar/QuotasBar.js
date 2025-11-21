@@ -53,7 +53,10 @@ const QuotasBar = ({
   };
 
   const getTenantCustomQuota = () => {
-    if (!isAdmin) return t("RemoveFilesOrContactToUpgradeQuota");
+    if (!isAdmin)
+      return t("RemoveFilesOrContactToUpgradeQuota", {
+        productName: t("Common:ProductName"),
+      });
 
     return (
       <Trans
@@ -99,7 +102,8 @@ const QuotasBar = ({
   };
 
   const getUserTariffLimit = () => {
-    if (!isAdmin) return t("UserTariffReached");
+    if (!isAdmin)
+      return t("UserTariffReached", { productName: t("Common:ProductName") });
 
     return (
       <Trans

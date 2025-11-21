@@ -46,6 +46,7 @@ export async function oAuthLogin(profile: string) {
       window.location.href = redirectPath;
     }
   } catch (e) {
+    console.error(e);
     isSuccess = false;
     return isSuccess;
   }

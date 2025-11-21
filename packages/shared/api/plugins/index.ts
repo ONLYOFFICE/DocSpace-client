@@ -24,13 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { request } from "../client";
 import { TAPIPlugin } from "./types";
 
-export const getPlugins = async (enabled: null | boolean) => {
+export const getPlugins = async (
+  enabled: null | boolean,
+  signal?: AbortSignal,
+) => {
   const url = enabled
     ? `/settings/webplugins?enabled=${enabled}`
     : `/settings/webplugins`;
@@ -38,6 +40,7 @@ export const getPlugins = async (enabled: null | boolean) => {
   const res = (await request({
     method: "GET",
     url,
+    signal,
   })) as TAPIPlugin[];
 
   return res;

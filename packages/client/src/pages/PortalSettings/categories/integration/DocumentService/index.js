@@ -35,8 +35,8 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { toastr } from "@docspace/shared/components/toast";
-import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
 
@@ -46,14 +46,14 @@ const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
 
 const DocumentService = ({
-  getDocumentServiceLocation,
   changeDocumentServiceLocation,
   currentColorScheme,
   integrationSettingsUrl,
+  initialDocumentServiceData,
+  showPortalSettingsLoader,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
-  const [isLoading, setIsLoading] = useState(true);
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
 
@@ -83,29 +83,27 @@ const DocumentService = ({
 
   useEffect(() => {
     setDocumentTitle(t("DocumentService"));
-    setIsLoading(true);
-    getDocumentServiceLocation()
-      .then((result) => {
-        setIsDefaultSettings(result?.isDefault || false);
-        setPortalUrl(result?.docServicePortalUrl);
-        setSecretKey(result?.docServiceSignatureSecret);
-        setAuthHeader(result?.docServiceSignatureHeader);
-        setInternalUrl(result?.docServiceUrlInternal);
-        setDocServiceUrl(result?.docServiceUrl);
-        setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+  }, [t]);
 
-        setInitPortalUrl(result?.docServicePortalUrl);
-        setInitSecretKey(result?.docServiceSignatureSecret);
-        setInitAuthHeader(result?.docServiceSignatureHeader);
-        setInitDocServiceUrl(result?.docServiceUrl);
-        setInitInternalUrl(result?.docServiceUrlInternal);
-        setInitIsDisabledCertificat(
-          !result?.docServiceSslVerification || false,
-        );
-      })
-      .catch((error) => toastr.error(error))
-      .finally(() => setIsLoading(false));
-  }, []);
+  useEffect(() => {
+    if (initialDocumentServiceData) {
+      const result = initialDocumentServiceData;
+      setIsDefaultSettings(result?.isDefault || false);
+      setPortalUrl(result?.docServicePortalUrl);
+      setSecretKey(result?.docServiceSignatureSecret);
+      setAuthHeader(result?.docServiceSignatureHeader);
+      setInternalUrl(result?.docServiceUrlInternal);
+      setDocServiceUrl(result?.docServiceUrl);
+      setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+
+      setInitPortalUrl(result?.docServicePortalUrl);
+      setInitSecretKey(result?.docServiceSignatureSecret);
+      setInitAuthHeader(result?.docServiceSignatureHeader);
+      setInitDocServiceUrl(result?.docServiceUrl);
+      setInitInternalUrl(result?.docServiceUrlInternal);
+      setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
+    }
+  }, [initialDocumentServiceData]);
 
   const onChangeDocServiceUrl = (e) => {
     setDocServiceUrl(e.target.value);
@@ -221,14 +219,14 @@ const DocumentService = ({
     portalUrl == initPortalUrl &&
     isDisabledCertificat == initIsDisabledCertificat;
 
-  if (isLoading || !ready) return <SettingsDSConnectSkeleton />;
-
   const saveButtonDisabled =
     isFormEmpty ||
     isValuesInit ||
     !allInputsValid ||
     isSaveLoading ||
     isResetLoading;
+
+  if (showPortalSettingsLoader || !ready) return <SettingsDSConnectSkeleton />;
 
   return (
     <Styled.Location>
@@ -243,6 +241,7 @@ const DocumentService = ({
             isHovered
             target="_blank"
             href={integrationSettingsUrl}
+            dataTestId="integration_settings_link"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -268,6 +267,7 @@ const DocumentService = ({
               placeholder={EDITOR_URL_PLACEHOLDER}
               hasError={!docServiceUrlIsValid}
               isDisabled={isSaveLoading || isResetLoading}
+              dataTestId="editor_url_input_block"
             />
             <Text className="subtitle">
               {t("Common:Example", {
@@ -281,6 +281,7 @@ const DocumentService = ({
               isChecked={isDisabledCertificat}
               onChange={onChangeIsDisabledCertificat}
               isDisabled={isSaveLoading || isResetLoading}
+              dataTestId="disable_certificat_checkbox"
             />
           </div>
           <div className="input-wrapper">
@@ -303,6 +304,7 @@ const DocumentService = ({
               onChange={onChangeSecretKey}
               isDisabled={isSaveLoading || isResetLoading}
               className="password-input"
+              testId="secret_key_input"
             />
             <Text className="subtitle">
               {t("Settings:DocumentServiceSecretKeySubtitle")}
@@ -318,6 +320,7 @@ const DocumentService = ({
               type="action"
               isHovered
               onClick={onChangeIsShowAdvancedSettings}
+              dataTestId="show_hide_advanced_settings_link"
             >
               {!isShowAdvancedSettings
                 ? t("Settings:DocumentServiceShow")
@@ -342,6 +345,7 @@ const DocumentService = ({
                   value={authHeader}
                   onChange={onChangeAuthHeader}
                   isDisabled={isSaveLoading || isResetLoading}
+                  dataTestId="auth_header_input_block"
                 />
                 <Text className="subtitle">
                   {t("Settings:DocumentServiceAuthHeaderSubtitle")}
@@ -366,6 +370,7 @@ const DocumentService = ({
                   placeholder={EDITOR_URL_PLACEHOLDER}
                   hasError={!internalUrlIsValid}
                   isDisabled={isSaveLoading || isResetLoading}
+                  dataTestId="editor_url_input_block"
                 />
                 <Text className="subtitle">
                   {t("Common:Example", {
@@ -392,6 +397,7 @@ const DocumentService = ({
                   placeholder={DNS_PLACEHOLDER}
                   hasError={!portalUrlIsValid}
                   isDisabled={isSaveLoading || isResetLoading}
+                  dataTestId="dns_input_block"
                 />
                 <Text className="subtitle">
                   {t("Common:Example", {
@@ -416,22 +422,31 @@ const DocumentService = ({
           displaySettings
           isSaving={isSaveLoading || isResetLoading}
           showReminder={!saveButtonDisabled}
+          saveButtonDataTestId="settings_save_button"
+          cancelButtonDataTestId="default_settings_button"
         />
       </Styled.LocationForm>
     </Styled.Location>
   );
 };
 
-export default inject(({ settingsStore, filesSettingsStore }) => {
-  const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
-    settingsStore;
-  const { getDocumentServiceLocation, changeDocumentServiceLocation } =
-    filesSettingsStore;
-  return {
-    getDocumentServiceLocation,
-    changeDocumentServiceLocation,
-    currentColorScheme,
-    integrationSettingsUrl,
-    currentDeviceType,
-  };
-})(observer(DocumentService));
+export default inject(
+  ({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
+    const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
+      settingsStore;
+    const {
+      changeDocumentServiceLocation,
+      documentServiceLocation: initialDocumentServiceData,
+    } = filesSettingsStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
+    return {
+      changeDocumentServiceLocation,
+      currentColorScheme,
+      integrationSettingsUrl,
+      currentDeviceType,
+      showPortalSettingsLoader,
+      initialDocumentServiceData,
+    };
+  },
+)(observer(DocumentService));

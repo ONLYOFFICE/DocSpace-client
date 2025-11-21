@@ -1,0 +1,28 @@
+{
+  "key_path": "ResetWebSearchDescription",
+  "content": "This action will remove the configured API key and disconnect the web search integration. AI chats will no longer be able to access real-time information from the internet until a new key is added.",
+  "content_en_sha1_hash": "e69d05e306b44837d7013f6f31908490f4cc489a",
+  "created_at": "2025-11-13T07:58:04.636Z",
+  "updated_at": "2025-11-13T08:07:45.326Z",
+  "comment": {
+    "text": "This text explains the effect of resetting the web search integration. It appears within a dialog to inform users that resetting will remove the API key and prevent AI chats from accessing real-time web information until a new key is added. Translators should convey the loss of internet access for AI chats.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:07:45.326Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
+      "line_number": 75,
+      "context": "return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Settings:ResetSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans t={t} i18nKey=\"ResetWebSearchDescription\" ns=\"AISettings\" />\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Abort transfer",
   "content_en_sha1_hash": "309717a4f34d5f39915141f686fada68cd473b70",
   "created_at": "2025-05-19T21:30:56.725Z",
-  "updated_at": "2025-05-26T07:57:32.281Z",
+  "updated_at": "2025-09-22T13:39:52.368Z",
   "comment": {
     "text": "This translation key is used to display the text \"Abort transfer\" on a button in a data reassignment dialog. The label changes depending on the transfer status, indicating whether to restart or confirm the action. It appears as part of the footer component of the dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Footer/index.js",
-      "line_number": 56,
+      "line_number": 55,
       "context": "label={\n isAbortTransfer && percent !== 100\n ? t(\"DataReassignmentDialog:StartTransferAgain\")\n : percent === 100\n ? t(\"Common:OKButton\")\n : t(\"DataReassignmentDialog:AbortTransfer\")\n }\n size=\"normal\"\n scale\n onClick={\n isAbortTransfer && percent !== 100",
       "module": "/packages/client"
     }

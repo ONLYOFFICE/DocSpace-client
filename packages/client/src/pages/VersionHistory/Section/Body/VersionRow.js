@@ -51,6 +51,7 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StyledVersionRow } from "./StyledVersionHistory";
 import VersionBadge from "./VersionBadge/VersionBadge";
+import { isAIAgents } from "../../../../helpers/plugins/utils";
 
 const VersionRow = (props) => {
   const {
@@ -83,6 +84,7 @@ const VersionRow = (props) => {
     canDeleteVersion,
     versionSelectedForDeletion,
     versionDeletionProcess,
+    dataTestId,
   } = props;
 
   const navigate = useNavigate();
@@ -148,7 +150,7 @@ const VersionRow = (props) => {
       );
     }
 
-    if (fileItemsList && enablePlugins) {
+    if (!isAIAgents() && fileItemsList && enablePlugins) {
       let currPluginItem = null;
 
       fileItemsList.forEach((i) => {
@@ -260,6 +262,7 @@ const VersionRow = (props) => {
       isEditing={isEditing}
       contextTitle={t("Common:Actions")}
       versionDeleteProcess={versionDeletionProcess}
+      dataTestId={dataTestId}
       versionDeleteRow={
         versionDeletionProcess
           ? versionSelectedForDeletion === info.versionGroup
@@ -294,6 +297,7 @@ const VersionRow = (props) => {
               title={versionDate}
               isTextOverflow
               className="version-link-file"
+              dataTestId="version_link_file"
             >
               {versionDate}
             </Link>
@@ -314,6 +318,7 @@ const VersionRow = (props) => {
                 title={title}
                 isTextOverflow
                 className="version-link-file"
+                dataTestId="version_link_user"
               >
                 {title}
               </Link>
@@ -341,6 +346,7 @@ const VersionRow = (props) => {
               isDisabled={isSavingComment}
               autoFocus
               areaSelect
+              dataTestId="version_textarea"
             />
           ) : null}
 
@@ -363,6 +369,7 @@ const VersionRow = (props) => {
                 primary
                 onClick={onSaveClick}
                 label={t("Common:SaveButton")}
+                testId="version_save_button"
               />
             </div>
             <div className="version_edit-comment-button-second">
@@ -372,6 +379,7 @@ const VersionRow = (props) => {
                 scale
                 onClick={onCancelClick}
                 label={t("Common:CancelButton")}
+                testId="version_cancel_button"
               />
             </div>
           </div>

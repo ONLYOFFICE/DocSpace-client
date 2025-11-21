@@ -37,6 +37,7 @@ export const StyledForm = styled.div`
   gap: 80px;
   flex-direction: row;
   justify-content: center;
+  margin-top: 24px;
 
   @media ${tablet} {
     display: flex;
@@ -65,6 +66,7 @@ export const StyledForm = styled.div`
   }
 
   .logo-wrapper {
+    max-width: 386px;
     height: 44px;
     width: auto;
 
@@ -94,9 +96,12 @@ export const StyledForm = styled.div`
   }
 
   .set-app-title {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
+  .set-app-subtitle {
+    margin-bottom: 20px;
+  }
   .set-app-text {
     margin-top: 8px;
   }
@@ -117,5 +122,44 @@ export const StyledForm = styled.div`
   .app-code-input,
   .app-code-continue-btn {
     box-sizing: border-box;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    .description-item {
+      display: flex;
+      gap: 12px;
+    }
+
+    .icon-container {
+      position: relative;
+      height: 32px;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+    }
+
+    .icon-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--accent-main);
+      opacity: 0.1;
+      border-radius: 6px;
+      z-index: -1;
+    }
+  }
+
+  strong {
+    user-select: text;
   }
 `;

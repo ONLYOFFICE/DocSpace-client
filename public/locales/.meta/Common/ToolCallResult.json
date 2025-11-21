@@ -1,0 +1,28 @@
+{
+  "key_path": "ToolCallResult",
+  "content": "Tool call result:",
+  "content_en_sha1_hash": "6728251cdacea3a1d50429b0e46eda31df97e940",
+  "created_at": "2025-10-27T16:14:24.101Z",
+  "updated_at": "2025-10-27T16:26:14.485Z",
+  "comment": {
+    "text": "This key displays the label \"Tool call result:\" above a code snippet or JSON data within a chat message. It appears in the ToolCallMessage component to indicate the output from a tool execution. Translators should ensure this phrase clearly identifies the result of a tool call.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:26:14.485Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallBody/CodeView.tsx",
+      "line_number": 83,
+      "context": "/>\n </div>\n {showResult ? (\n <div className={styles.toolCallCodeViewItem}>\n <Text fontSize=\"15px\" lineHeight=\"16px\" fontWeight={600}>\n {t(\"Common:ToolCallResult\")}\n </Text>\n <MarkdownField\n chatMessage={formatJsonWithMarkdown(\n isJson ? JSON.parse(result) : result,\n )}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

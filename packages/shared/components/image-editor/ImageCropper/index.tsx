@@ -108,7 +108,7 @@ const ImageCropper = ({
         .getImageScaledToCanvas()
         ?.toDataURL();
       setPreviewImage(newPreviewImage);
-    } catch (e) {
+    } catch {
       // console.error(e);
     }
   }, 300);
@@ -152,6 +152,7 @@ const ImageCropper = ({
         className={styles.iconCropperChangeButton}
         onClick={() => inputFilesElement.current?.click()}
         title={t("Common:ChooseAnother")}
+        data-testid="change_image_button"
       >
         <ReactSVG src={RefreshReactSvgUrl} />
         <div className={styles.iconCropperChangeButtonText}>
@@ -181,6 +182,7 @@ const ImageCropper = ({
             isFill
             isClickable={false}
             isDisabled={isDisabled}
+            dataTestId="zoom_out_icon_button"
           />
 
           <Slider
@@ -200,6 +202,7 @@ const ImageCropper = ({
             isFill
             isClickable={false}
             isDisabled={isDisabled}
+            dataTestId="zoom_in_icon_button"
           />
         </div>
       ) : null}

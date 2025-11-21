@@ -3,7 +3,7 @@
   "content": "No OAuth applications",
   "content_en_sha1_hash": "028f0e7642805c7f7a4b4c084907a60307bacd55",
   "created_at": "2025-05-19T21:30:53.921Z",
-  "updated_at": "2025-05-26T07:57:32.660Z",
+  "updated_at": "2025-08-04T07:30:01.438Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"No OAuth applications\" in a UI component. It is likely used as a title or heading on an empty screen where no OAuth apps are available, found in developer tools within Portal Settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
-      "line_number": 104,
+      "line_number": 105,
       "context": ");\n \n return (\n <EmptyView\n icon={icon}\n title={t(\"NoOAuthAppHeader\")}\n description={description}\n options={[]}\n />\n );\n };",
       "module": "/packages/client"
     }

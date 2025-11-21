@@ -38,15 +38,6 @@ import type {
 import type { TThirdParties } from "../../api/files/types";
 import type { TBreadCrumb } from "../selector/Selector.types";
 
-export type StyledComboBoxItemProps = {
-  isDisabled?: boolean;
-};
-
-export type StyledBackupProps = {
-  isConnectedAccount?: boolean;
-  isMobileScale?: boolean;
-};
-
 export type DirectThirdPartyConnectionState = {
   // folderList: {};
   isLoading: boolean;
@@ -55,6 +46,7 @@ export type DirectThirdPartyConnectionState = {
 };
 
 export interface DirectThirdPartyConnectionProps {
+  className?: string;
   openConnectWindow: (
     serviceName: string,
     modal: Window | null,
@@ -91,6 +83,8 @@ export interface DirectThirdPartyConnectionProps {
   setBasePath: (folders: TBreadCrumb[]) => void;
   toDefault: VoidFunction;
   setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+
+  setDefaultFolderId?: (id: string | number | null) => void;
   // other
 
   isError?: boolean;
@@ -109,4 +103,5 @@ export interface DirectThirdPartyConnectionProps {
   ) => void;
   onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
   checkCreating?: boolean;
+  dataTestId?: string;
 }

@@ -3,7 +3,7 @@
   "content": "Group Membership",
   "content_en_sha1_hash": "55e2f520df1da58560087151c9a25a57b1f4e8ff",
   "created_at": "2025-05-19T21:30:54.216Z",
-  "updated_at": "2025-05-24T08:32:15.137Z",
+  "updated_at": "2025-08-11T18:11:59.244Z",
   "comment": {
     "text": "Group Membership is a toggle button that enables or disables group membership for LDAP connections. When clicked, it controls visibility and interaction in the Portal Settings categories integration section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
       "line_number": 97,
-      "context": "<div className=\"group_membership-header\">\n <ToggleButton\n className=\"toggle\"\n isChecked={groupMembership}\n onChange={setIsGroupMembership}\n label={t(\"LdapGroupMembership\")}\n isDisabled={!isLdapEnabled || isUIDisabled}\n />\n <HelpButton\n tooltipContent={t(\"LdapGroupMembershipTooltip\", {\n productName: t(\"Common:ProductName\"),",
+      "context": "<div className=\"group_membership-header\">\n <ToggleButton\n className=\"toggle\"\n isChecked={groupMembership}\n onChange={setIsGroupMembership}\n label={t(\"LdapGroupMembership\")}\n isDisabled={!isLdapEnabled || isUIDisabled}\n dataTestId=\"group_membership_toggle_button\"\n />\n <HelpButton\n tooltipContent={t(\"LdapGroupMembershipTooltip\", {",
       "module": "/packages/client"
     }
   ],

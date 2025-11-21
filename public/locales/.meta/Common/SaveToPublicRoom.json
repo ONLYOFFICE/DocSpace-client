@@ -3,7 +3,7 @@
   "content": "Save to Public room",
   "content_en_sha1_hash": "b0398b1b707409a986e91a9ea5fb56db1a4d3012",
   "created_at": "2025-05-19T21:30:48.318Z",
-  "updated_at": "2025-05-26T07:57:32.934Z",
+  "updated_at": "2025-08-12T19:46:26.363Z",
   "comment": {
     "text": "The translation key \"SaveToPublicRoom\" is used to display the text \"Save to Public room\" in a public room backup confirmation dialog. This text is expected to appear on a button or label within the dialog, prompting the user to save changes to a publicly accessible location.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/dialogs/backup-to-public-room-dialog/index.tsx",
       "line_number": 78,
-      "context": "};\n }, [onKeyUp]);\n \n return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:SaveToPublicRoom\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text noSelect>{t(\"Common:MoveToPublicRoom\")}</Text>\n </div>\n </ModalDialog.Body>",
+      "context": "};\n }, [onKeyUp]);\n \n return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:SaveToPublicRoom\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text>{t(\"Common:MoveToPublicRoom\")}</Text>\n </div>\n </ModalDialog.Body>",
       "module": "/packages/shared"
     }
   ],

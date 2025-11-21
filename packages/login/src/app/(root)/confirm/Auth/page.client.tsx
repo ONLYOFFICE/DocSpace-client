@@ -51,8 +51,9 @@ const AuthHandler = () => {
 
   const [authorized, setAuthorized] = useState(false);
 
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { email = "", key = "" } = linkData;
+  const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
+  const { key = "" } = linkData;
+  const { email = "" } = confirmLinkResult;
 
   const referenceUrl = searchParams?.get("referenceUrl");
   const isFileHandler =

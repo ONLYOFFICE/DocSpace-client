@@ -88,7 +88,7 @@ const styleBlock = `<style>
         line-height: 14px;
         user-select: none;
 
-        font-family: Roboto, "Open Sans", sans-serif, Arial;
+        font-family: Roboto, "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
     }
 
     .docspace-button:hover {
@@ -211,11 +211,12 @@ const PreviewDialog = ({
               onClick={() => {
                 window.open(link, "login", linkParams);
               }}
+              dataTestId="social_OAuth_button"
             />
           </StyledPreviewContainer>
           <StyledBlocksContainer>
             <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                 HTML
               </Text>
               <Textarea
@@ -223,10 +224,11 @@ const PreviewDialog = ({
                 enableCopy
                 isReadOnly
                 value={htmlBlock}
+                dataTestId="html_block_textarea"
               />
             </div>
             <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                 CSS
               </Text>
               <Textarea
@@ -234,10 +236,11 @@ const PreviewDialog = ({
                 enableCopy
                 isReadOnly
                 value={styleBlock}
+                dataTestId="style_block_textarea"
               />
             </div>
             <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                 JavaScript
               </Text>
               <Textarea
@@ -245,10 +248,11 @@ const PreviewDialog = ({
                 enableCopy
                 isReadOnly
                 value={scriptBlock}
+                dataTestId="script_block_textarea"
               />
             </div>
             <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                 {t("OAuth:AuthorizeLink")}
               </Text>
               <Textarea
@@ -256,17 +260,13 @@ const PreviewDialog = ({
                 enableCopy
                 isReadOnly
                 value={link}
+                dataTestId="authorize_link_textarea"
               />
             </div>
 
             {!isClientSecretPost ? (
               <div className="block-container">
-                <Text
-                  fontWeight={600}
-                  lineHeight="20px"
-                  fontSize="13px"
-                  noSelect
-                >
+                <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                   {t("OAuth:CodeVerifier")}
                 </Text>
                 <Textarea
@@ -274,6 +274,7 @@ const PreviewDialog = ({
                   enableCopy
                   isReadOnly
                   value={codeVerifier}
+                  dataTestId="code_verifier_textarea"
                 />
               </div>
             ) : null}
@@ -286,6 +287,7 @@ const PreviewDialog = ({
           scale
           label={t("Common:OKButton")}
           onClick={onClose}
+          testId="preview_dialog_ok_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

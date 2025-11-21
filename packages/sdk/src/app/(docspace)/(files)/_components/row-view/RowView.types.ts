@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TSortBy } from "@docspace/shared/types";
+import { type Nullable, TSortBy } from "@docspace/shared/types";
 import type { IndexRange } from "react-virtualized";
 
 import { TFileItem, TFolderItem } from "../../../_hooks/useItemList";
 
 export type RowContentProps = {
   item: TFolderItem | TFileItem;
-  filterSortBy: TSortBy;
+  filterSortBy: Nullable<TSortBy>;
   timezone: string;
   displayFileExtension: boolean;
   badgesComponent?: React.ReactNode;

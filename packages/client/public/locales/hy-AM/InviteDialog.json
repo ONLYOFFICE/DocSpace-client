@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Որոնեք և հրավիրեք անունով կամ էլ․հասցեով",
   "InviteViaLink": "Հրավիրեք հղման միջոցով",
   "InviteViaLinkDescriptionAccounts": "Ստեղծեք ունիվերսալ հղում {{productName}}-ում ինքնալիազորման համար",
+  "InviteViaLinkDescriptionAgentGuest": "Ստեղծեք ունիվերսալ հղում գործակալում որպես հյուր ինքնահաստատման համար։",
+  "InviteViaLinkDescriptionAgentMembers": "Ստեղծեք համընդհանուր հղում {{productName}} անդամների համար՝ գործակալում ինքնահավաստագրման համար։",
   "InviteViaLinkDescriptionRoomGuest": "Ստեղծեք ունիվերսալ հղում սենյակում որպես հյուր ինքնալիազորման համար։",
   "InviteViaLinkDescriptionRoomMembers": "Ստեղծեք ունիվերսալ հղում {{productName}} անդամների համար՝ սենյակում ինքնահավաստագրման համար։",
   "LinkCopySuccess": "Հղումը պատճենվել է",
   "SendInvitation": "Ուղարկել հրավոր",
+  "UserAgentMaxAvailableRoleWarning": "Հյուրերը և օգտատերերը չեն կարող նշանակվել որպես գործակալի կառավարիչներ: Միայն սենյակի և {{productName}}-ի ադմինիստրատորներն են հարմար նշված դերի համար:",
   "UserMaxAvailableRoleWarning": "Հյուրերը և օգտատերերը չեն կարող նշանակվել որպես Սենյակի մենեջերներ: Նշված դերի համար հարմար են միայն Սենյակի և {{productName}} ադմինիստրատորները:",
   "UsersAlreadyAdded": "Որոշ օգտվողներ արդեն ավելացվել են",
   "UsersCannotBeAdded": "Անջրկված կոնտակտները չեն կարող ավելացվել դրանցում։"

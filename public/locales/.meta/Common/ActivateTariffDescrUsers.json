@@ -1,0 +1,28 @@
+{
+  "key_path": "ActivateTariffDescrUsers",
+  "content": "You are using {{organizationName}} {{productName}} {{license}} for <1>{{editingCount}}/{{limit}}</1> users.",
+  "content_en_sha1_hash": "fc8824f903419dfbfec80b3c858dc7f474ba087b",
+  "created_at": "2025-09-19T15:39:04.596Z",
+  "updated_at": "2025-09-19T15:52:28.309Z",
+  "comment": {
+    "text": "This key displays the current user count and limit for a user's subscription to a product. It appears within the tariff title section of the payments subscription area, informing users about their usage status. Translators should ensure the text accurately reflects the organization's product name and license type.",
+    "is_auto": true,
+    "updated_at": "2025-09-19T15:52:28.309Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
+      "line_number": 123,
+      "context": "<div className={styles.paymentsSubscription}>\n <div className={styles.title}>\n <Text fontWeight={600} fontSize=\"13px\" as=\"span\">\n {usersStatistics ? (\n <Trans\n i18nKey=\"ActivateTariffDescrUsers\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

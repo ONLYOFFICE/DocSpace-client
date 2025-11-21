@@ -129,5 +129,6 @@ WithAction.args = {
   style: {
     maxWidth: "210px",
   },
-  onAction: () => console.log("Button clicked"),
+
+  onAction: () => alert("Button clicked"),
 };

@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive directory",
   "FolderTitleWebDav": "WebDAV Directory",
   "FolderTitleYandex": "Yandex Directory",
-  "GuestReleaseTipLink": "Meer informatie over gebruikerstypen",
-  "LinkHasExpiredAndHasBeenDisabled": "De link is verlopen en uitgeschakeld",
   "LinkValidTime": "Deze link is slechts {{days_count}} dagen geldig.",
   "NewForm": "PDF-formulier",
   "OwnerChange": "Wijzig eigenaar",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Wijzig de info van derden",
   "ThirdPartyTitle": "Diensten van derden",
   "TitleShowActions": "Bestand acties tonen",
-  "TitleShowFolderActions": "Toon folder acties"
+  "TitleShowFolderActions": "Toon folder acties",
+  "TrashItemsDeleteSuccess": "De geselecteerde elementen zijn succesvol verwijderd uit {{sectionName}}"
 }

@@ -548,7 +548,6 @@ export const ViewerPlayer = ({
       setIsError(true);
       setIsLoading(false);
 
-      // eslint-disable-next-line no-console
       console.error("video error", error);
     },
     [setIsError],
@@ -596,7 +595,6 @@ export const ViewerPlayer = ({
   useLayoutEffect(() => {
     setIsLoading(true);
     resetState();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src]);
 
   useEffect(() => {

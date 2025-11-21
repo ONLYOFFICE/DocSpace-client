@@ -30,6 +30,7 @@ export const RowContent = ({ sectionWidth, item }: RowContentProps) => {
             type={LinkType.page}
             target={LinkTarget.blank}
             isHovered
+            dataTestId="website_link"
           >
             {item.websiteUrl}
           </Link>

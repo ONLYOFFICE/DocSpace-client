@@ -31,12 +31,15 @@ const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
+const { getBuildDate, getBanner } =
+  require("@docspace/shared/utils/build").default;
 
 const path = require("path");
 
@@ -82,7 +85,7 @@ const config = {
       disableDotRule: true,
       index: homepage,
     },
-    hot: false,
+    hot: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -197,7 +200,17 @@ const config = {
             loader: "@svgr/webpack",
             options: {
               svgoConfig: {
-                plugins: [{ removeViewBox: false }],
+                plugins: [
+                  {
+                    name: "preset-default",
+                    params: {
+                      overrides: {
+                        removeViewBox: false,
+                        cleanupIds: false,
+                      },
+                    },
+                  },
+                ],
               },
             },
           },
@@ -280,6 +293,7 @@ const config = {
                 "@babel/preset-typescript",
               ],
               plugins: [
+                // "babel-plugin-react-compiler", // Switching between tabs breaks
                 "@babel/plugin-transform-runtime",
                 "@babel/plugin-transform-class-properties",
                 "@babel/plugin-proposal-export-default-from",
@@ -330,21 +344,7 @@ const config = {
   },
 };
 
-const getBuildDate = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
-};
-
-const getBuildYear = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return today.getFullYear();
-};
-
 module.exports = (env, argv) => {
-  config.devtool = "source-map";
-
   const isProduction = argv.mode === "production";
   const styleLoader = isProduction
     ? MiniCssExtractPlugin.loader
@@ -368,11 +368,34 @@ module.exports = (env, argv) => {
     return rule;
   });
 
+  const banner = getBanner(version);
+
+  config.devtool = isProduction ? "source-map" : "eval-cheap-module-source-map"; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
+
   if (isProduction) {
     config.mode = "production";
     config.optimization.splitChunks.chunks = "all";
     config.optimization.minimize = !env.minimize;
     config.optimization.minimizer = [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: {
+                removeAll: false,
+                remove: (comment) => {
+                  // Keep copyright comments that contain the copyright text
+                  const isCopyright =
+                    comment.includes("Copyright Ascensio System SIA") &&
+                    comment.includes("https://www.onlyoffice.com/");
+                  return !isCopyright;
+                },
+              },
+            },
+          ],
+        },
+      }),
       new TerserPlugin({
         terserOptions: {
           format: {
@@ -436,16 +459,12 @@ module.exports = (env, argv) => {
     config.plugins.push(new BundleAnalyzerPlugin());
   }
 
+  // Add banner to JS files
   config.plugins.push(
     new BannerPlugin({
       raw: true,
-      banner: `/*
-* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
-*
-* https://www.onlyoffice.com/
-*
-* Version: ${version} (build: ${getBuildDate()})
-*/`,
+      test: /\.(js|css)$/,
+      banner,
     }),
   );
 

@@ -20,46 +20,6 @@
   }
 }
 
-.mainContent {
-  height: 156px;
-
-  .content {
-    box-sizing: border-box;
-    border: var(--files-section-tiles-view-tile-border);
-    border-bottom-style: none;
-    border-radius: 6px 6px 0 0;
-  }
-}
-
-.bottom {
-  display: flex;
-  align-items: center;
-  border: var(--files-section-tiles-view-tile-border);
-  border-radius: 6px;
-  padding: 15px;
-
-  .firstContent {
-    height: 32px;
-    width: 32px;
-    min-width: 32px;
-  }
-
-  .secondContent {
-    width: 100%;
-    margin-inline-start: 8px;
-  }
-
-  &.file {
-    border-top-style: none;
-    border-radius: 0 0 6px 6px;
-  }
-
-  .optionButton {
-    min-width: 16px;
-    margin-inline-start: 8px;
-  }
-}
-
 .roomTile {
   border-radius: 6px;
   height: 120px;
@@ -87,26 +47,44 @@
 .tilesSkeleton {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(216px, 13.4vw, 360px), 1fr)
+  );
   grid-gap: 16px;
 
   @include mixins.tablet-and-below {
-    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(clamp(216px, 13.4vw, 360px), 1fr)
+    );
   }
 
   @include mixins.mobile {
-    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(clamp(216px, 13.4vw, 360px), 1fr)
+    );
   }
 
   .tilesSkeletonRooms {
-    grid-template-columns: repeat(auto-fill, minmax(275mpx, 1fr));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(clamp(275px, 13.4vw, 350px), 1fr)
+    );
 
     @include mixins.tablet-and-below {
-      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(clamp(275px, 13.4vw, 350px), 1fr)
+      );
     }
 
     @include mixins.mobile {
-      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(clamp(275px, 13.4vw, 350px), 1fr)
+      );
     }
   }
 }

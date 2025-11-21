@@ -3,7 +3,7 @@
   "content": "All the documents you upload will be converted into Office Open XML format (docx, xlsx or pptx) for faster editing.",
   "content_en_sha1_hash": "2e0cacc0374dbb077e3d556252c1a9b8b7a9b243",
   "created_at": "2025-05-19T21:30:56.874Z",
-  "updated_at": "2025-06-02T10:20:51.101Z",
+  "updated_at": "2025-09-23T07:24:24.080Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that uploaded documents will be converted into Office Open XML format for faster editing. It appears in a file conversion dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 172,
+      "line_number": 173,
       "context": "<Text>\n {convertSingleFile\n ? isXML\n ? t(\"ConversionXmlMessage\")\n : t(\"OpenFileMessage\")\n : t(\"ConversionMessage\")}\n </Text>\n \n {isXML ? (\n <div style={{ boxSizing: \"border-box\", padding: \"16px 0 0\" }}>\n <Text>{t(\"SelectFileType\")}</Text>",
       "module": "/packages/client"
     }

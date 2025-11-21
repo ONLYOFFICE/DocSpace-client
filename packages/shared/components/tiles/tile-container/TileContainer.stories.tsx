@@ -27,7 +27,7 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 
-import ImageReactSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
+import ImageReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg?url";
 import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import { ReactSVG } from "react-svg";
 import { FileTile } from "../file-tile/FileTile";

@@ -7,7 +7,7 @@
   "DeleteGuest": "ආගන්තුකයෙකු මකන්න",
   "DeleteGuests": "ආගන්තුකයින් ඉවත් කරන්න",
   "DeletePersonalDataApplicable": "*තෝරාගත් පරිශීලකයින් සඳහා අදාළ වන අතර ඔවුන් එවැනි ෆයිල් සහ ෆෝල්ඩර් තිබේ නම්.*",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} මෙම පරිශ්‍රීලකයා සාදන ලද කාමර සහ ගබඩා කර තිබෙන ලේඛන මකා දමන පරිපාලකයෙකු වෙත ස්වයංක්‍රීයව යළි පවරනු ලැබේ: <1>{{userPerformedDeletion}} ({{userYou}})</1>. දත්ත යළි පැවරීමට වෙනත් පරිශ්‍රීලකයෙක් තෝරා ගැනීම සඳහා අතින් පවරන්න.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} මෙම සම්බන්ධතාවය විසින් නිර්මාණය කරන ලද සියලුම බෙදාගත් ගොනු මෙන්ම කාමර ස්වයංක්‍රීයව මකාදැමීම සිදු කරන පරිපාලකයෙකුට නැවත පවරනු ලැබේ: <1>{{userPerformedDeletion}} ({{userYou}})</1>. නැවත පැවරීම සඳහා වෙනත් ගමනාන්ත පරිශීලකයෙකු තෝරා ගැනීමට දත්ත අතින් නැවත පවරන්න.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} යොදවන ලද සියලු කාමර වලින් ඉවත් කරනු ලැබේ. කාමර තුළ මෙම {{userCaption}} විසින් සාදන ලද ලේඛන කාමර හිමියන්ට ස්වයංක්‍රීයව නැවත පවරනු ලැබේ.",
   "DeleteUser": "පරිශ්‍රීලකයා මක්නන",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> මකා දැමෙනු ඇත. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.",

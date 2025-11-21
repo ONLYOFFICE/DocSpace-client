@@ -3,7 +3,7 @@
   "content": "and <1>{{count}} more</1>",
   "content_en_sha1_hash": "a3f1d7063a4cc3d879b42663726817ec56372d51",
   "created_at": "2025-05-19T21:30:43.003Z",
-  "updated_at": "2025-05-26T07:57:32.195Z",
+  "updated_at": "2025-10-13T13:22:35.646Z",
   "comment": {
     "text": "This translation key \"AndMore\" is used to display a phrase indicating that there are additional items beyond what's visible in a list. It appears as a label on a button or similar element, likely used to prompt users to view more items when only a portion of the total count is shown.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanelFileList.tsx",
       "line_number": 63,
-      "context": "noSelect\n >\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"AndMore\"\n values={{ count: items.length - 3 }}\n components={{\n 1: (\n <Link\n className=\"more-items__link\"",
+      "context": "noSelect\n >\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"AndMore\"\n values={{ count: items.length - 3 }}\n components={{\n 1: (\n <Link\n key=\"more-items-link\"",
       "module": "/packages/client"
     }
   ],

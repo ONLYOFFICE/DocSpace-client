@@ -23,82 +23,26 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { StyledUsersInfoWrapper } from "../StyledDataImport";
 import { UsersInfoBlockProps } from "../types";
+import { StyledInfoBlock } from "../StyledDataImport";
 
-const UsersInfo = ({
-  quota,
-  totalUsedUsers,
-  numberOfSelectedUsers,
-  totalUsers,
-}: UsersInfoBlockProps) => {
+const UsersInfoBlock = ({ selectedUsers, totalUsers }: UsersInfoBlockProps) => {
   const { t } = useTranslation(["Settings"]);
 
   return (
-    quota &&
-    quota.max && (
-      <StyledUsersInfoWrapper
-        selectedUsers={totalUsedUsers!}
-        totalLicenceLimit={quota!.max}
-      >
-        {totalUsedUsers! > quota!.max ? (
-          <Text className="license-limit-warning">
-            {t("Settings:UserLimitExceeded", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-        ) : null}
-
-        <div className="users-info-wrapper">
-          <Text className="selected-users-count" truncate>
-            {t("Settings:SelectedUsersCounter", {
-              selectedUsers: numberOfSelectedUsers,
-              totalUsers,
-            })}
-          </Text>
-          <Text as="div" className="selected-admins-count" truncate>
-            {t("Settings:LicenseLimitCounter")}
-            <Text as="span">
-              {totalUsedUsers}/{quota.max}
-            </Text>
-          </Text>
-          <HelpButton
-            place="right"
-            offsetRight={0}
-            tooltipContent={
-              <Text fontSize="12px">
-                {t("Settings:LicenseLimitDescription", {
-                  productName: t("Common:ProductName"),
-                  maxLimit: quota.max,
-                })}
-              </Text>
-            }
-          />
-        </div>
-      </StyledUsersInfoWrapper>
-    )
+    <StyledInfoBlock>
+      <div className="info-block-wrapper">
+        <Text className="selected-users-count" truncate>
+          {t("SelectedUsersCounter", {
+            selectedUsers,
+            totalUsers,
+          })}
+        </Text>
+      </div>
+    </StyledInfoBlock>
   );
 };
 
-const UsersInfoBlock = inject<TStore>(({ importAccountsStore }) => {
-  const { quota, totalUsedUsers, numberOfSelectedUsers, totalUsers } =
-    importAccountsStore;
-
-  return {
-    quota,
-    totalUsedUsers,
-    numberOfSelectedUsers,
-    totalUsers,
-  };
-})(observer(UsersInfo));
-
-const UsersInfoBlockWrapper = (props: UsersInfoBlockProps) => (
-  <UsersInfoBlock {...props} />
-);
-UsersInfoBlockWrapper.displayName = "UsersInfoBlockWrapper";
-
-export default UsersInfoBlockWrapper;
+export default UsersInfoBlock;

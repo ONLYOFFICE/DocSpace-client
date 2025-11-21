@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+
 import { Text } from "@docspace/shared/components/text";
 
 const StyledHistoryText = styled.span`
@@ -38,7 +39,7 @@ const StyledHistoryText = styled.span`
 const HistoryText = ({ title }: { title: string }) => (
   <StyledHistoryText title={title} className="history-text_wrapper">
     <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
-      «
+      "
     </Text>
     <Text
       fontWeight={600}
@@ -49,7 +50,7 @@ const HistoryText = ({ title }: { title: string }) => (
       {title}
     </Text>
     <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
-      »
+      "
     </Text>
   </StyledHistoryText>
 );

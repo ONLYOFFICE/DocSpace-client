@@ -32,6 +32,7 @@ import { Text } from "@docspace/shared/components/text";
 import { isMobile } from "@docspace/shared/utils";
 
 import AccessSelector from "SRC_DIR/components/AccessSelector";
+import type { TOption } from "@docspace/shared/components/combobox";
 import StyledInputWrapper from "./styled-containers/StyledInputWrapper";
 
 interface UsersTypeProps {
@@ -48,8 +49,10 @@ const UsersType = (props: UsersTypeProps) => {
   const { usersType, setUsersType, enableSso, isLoadingXml, isOwner, isAdmin } =
     props;
 
-  const onChangeUserType = (option: any) => {
-    setUsersType(option.access);
+  const onChangeUserType = (option: TOption) => {
+    if ("access" in option && typeof option.access === "number") {
+      setUsersType(option.access);
+    }
   };
 
   return (

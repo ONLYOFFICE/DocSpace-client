@@ -68,12 +68,14 @@ export const SearchTerm = ({ t, config, setConfig }) => {
           placeholder={t("Common:Search")}
           value={value}
           tabIndex={5}
+          testId="search_term_text_input"
         />
         <Checkbox
           className="checkbox"
           label={t("Common:WithSubfolders")}
           onChange={onChangeWithSubfolders}
           isChecked={config.withSubfolders}
+          dataTestId="with_subfolders_checkbox"
         />
       </ColumnContainer>
     </>

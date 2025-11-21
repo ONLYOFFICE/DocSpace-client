@@ -3,7 +3,7 @@
   "content": "Use SDK init method to create SDK frame:",
   "content_en_sha1_hash": "f918dd606674c0e23eb21baaf22bc89c54ee4049",
   "created_at": "2025-05-19T21:30:54.611Z",
-  "updated_at": "2025-05-26T07:57:32.636Z",
+  "updated_at": "2025-08-04T07:30:01.404Z",
   "comment": {
     "text": "\"Describe how to initialize an SDK frame using its init method. This description is used on a text area in the 'developer tools' section of Portal settings.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 116,
+      "line_number": 123,
       "context": "heightTextArea={32}\n isReadOnly\n enableCopy\n />\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeUsageStep\")}\n </Text>\n <Textarea\n value=\"sdk.init(config);\"\n heightTextArea={32}\n isReadOnly",
       "module": "/packages/client"
     }

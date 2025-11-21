@@ -3,7 +3,7 @@
   "content": "Terms of Service",
   "content_en_sha1_hash": "0c8a9a95e21aeb403402ed64338810d787cc5f91",
   "created_at": "2025-05-19T21:30:54.051Z",
-  "updated_at": "2025-05-24T07:04:47.449Z",
+  "updated_at": "2025-08-12T19:46:26.145Z",
   "comment": {
     "text": "The \"TermsOfService\" translation key is used to display the label for a link to view the terms of service in an OAuth information dialog, likely found on a portal settings page. The link is used when hovering over a button or similar element, indicating its purpose.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
-      "line_number": 343,
-      "context": "isHovered\n href={client?.termsUrl}\n type={LinkType.action}\n target={LinkTarget.blank}\n >\n {t(\"TermsOfService\")}\n </Link>\n </Text>\n {!isProfile ? (\n <>\n <Text",
+      "line_number": 326,
+      "context": "href={client?.termsUrl}\n type={LinkType.action}\n target={LinkTarget.blank}\n dataTestId=\"client_info_terms_link\"\n >\n {t(\"TermsOfService\")}\n </Link>\n </Text>\n {!isProfile ? (\n <>\n <Text",
       "module": "/packages/client"
     }
   ],

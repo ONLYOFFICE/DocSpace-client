@@ -37,14 +37,20 @@ const CreatePluginFile = ({
   title,
   startValue,
   onSave,
+  onChange,
+  onError,
   onCancel,
   onClose,
   isCreateDialog,
+  isCreateDisabled,
+  isCloseAfterCreate = true,
   options,
   selectedOption,
   onSelect,
   extension,
   pluginName,
+  errorText,
+  isAutoFocusOnError,
   updatePluginStatus,
   setCurrentSettingsDialogPlugin,
   setSettingsPluginDialogVisible,
@@ -56,6 +62,7 @@ const CreatePluginFile = ({
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
+  updateCreatePluginFileProps,
 }) => {
   const { t } = useTranslation(["Translations", "Common", "Files"]);
 
@@ -67,49 +74,111 @@ const CreatePluginFile = ({
   const onSaveAction = async (e, value) => {
     if (!onSave) return onCloseAction();
 
-    const message = await onSave(e, value);
+    try {
+      const message = await onSave(e, value);
 
-    messageActions(
-      message,
-      null,
-      pluginName,
-      setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin,
-      updatePluginStatus,
-      null,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-    );
-    onCloseAction();
+      messageActions({
+        message,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
+      isCloseAfterCreate && onCloseAction();
+    } catch (error) {
+      if (!onError) return;
+
+      if (isAutoFocusOnError) {
+        setTimeout(() => {
+          const input = document?.getElementById("create-text-input");
+          if (input) {
+            input.focus();
+          }
+        }, 50);
+      }
+
+      const message = await onError(error);
+
+      messageActions({
+        message,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
+    }
   };
 
   const onSelectAction = (option) => {
     if (!onSelect) return;
-    const message = onSelect(option);
 
-    messageActions(
-      message,
-      null,
-      pluginName,
-      setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin,
-      updatePluginStatus,
-      null,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-    );
+    try {
+      const message = onSelect(option);
+
+      messageActions({
+        message,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onChangeAction = async (value) => {
+    if (!onChange) return;
+
+    try {
+      const message = onChange(value);
+
+      messageActions({
+        message,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -119,6 +188,7 @@ const CreatePluginFile = ({
       title={title}
       startValue={startValue}
       onSave={onSaveAction}
+      onChange={onChangeAction}
       onCancel={onCloseAction}
       onClose={onCloseAction}
       isCreateDialog={isCreateDialog}
@@ -126,6 +196,8 @@ const CreatePluginFile = ({
       selectedOption={selectedOption}
       onSelect={onSelectAction}
       extension={extension}
+      errorText={errorText}
+      isCreateDisabled={isCreateDisabled}
     />
   );
 };

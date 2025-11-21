@@ -29,4 +29,15 @@
 export type PreparationPortalProgressProps = {
   text: string;
   percent: number;
+
+  // Accessibility attributes
+  role?: string;
+  "aria-valuemin"?: number;
+  "aria-valuemax"?: number;
+  "aria-valuenow"?: number;
+  "aria-label"?: string;
+
+  // Testing attributes
+  "data-testid"?: string;
+  "data-percent"?: number;
 };

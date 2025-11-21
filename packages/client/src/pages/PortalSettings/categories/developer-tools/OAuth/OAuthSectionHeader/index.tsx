@@ -64,6 +64,7 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
               isFill
               onClick={onBack}
               className="arrow-button"
+              dataTestId="arrow_back_button"
             />
 
             {isEdit ? t("EditApp") : t("NewApp")}

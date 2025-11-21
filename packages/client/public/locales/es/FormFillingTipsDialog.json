@@ -1,5 +1,5 @@
 {
-  "DescriptionUploading": "Cree formularios PDF en {{productName}}, por ejemplo, en sus {{sectionName}}, y cargue los listos en la sala. Haga uso de la biblioteca integrada de plantillas y elija entre numerosas plantillas PDF listas para usar.",
+  "DescriptionUploading": "Cree formularios PDF en {{productName}}, por ejemplo, en sus {{sectionName}}, y cargue las listas en la sala. Haga uso de la biblioteca integrada de plantillas y elija entre numerosas plantillas PDF listas para usar.",
   "HeaderComplete": "Análisis conveniente de las respuestas recopiladas",
   "HeaderSharing": "Uso compartido rápido",
   "HeaderStarting": "Iniciando el proceso de rellenado del formulario",
@@ -7,7 +7,7 @@
   "HeaderUploading": "Fácil carga de formularios",
   "TitleComplete": "Revise los formularios rellenados y analice los datos recopilados automáticamente en una hoja de cálculo. Todo dentro de una sala.",
   "TitleSharing": "Invite a otros miembros de {{productName}} a la sala para rellenar los formularios PDF cargados. Copie un enlace de acceso público para compartir la sala con usuarios externos.",
-  "TitleStarting": "Cuando un formularios se abre para su rellenado, se crea una copia individual para cada respondedor y se guarda en la carpeta Progreso. Esto significa que el formulario ha sido iniciado, pero no se ha completado todavía.",
+  "TitleStarting": "Cuando un formularios se abre para su rellenado, se crea una copia individual para cada participante y se guarda en la carpeta Progreso. Esto significa que el formulario ha sido iniciado, pero no se ha completado todavía.",
   "TitleSubmitting": "Una vez que se haga clic en el botón Completar y enviar en la copia del formulario abierto, se moverá a la carpeta Completado.",
   "WelcomeDescription": "Aquí puede organizar el rellenado de formularios PDF de manera sencilla, recopilar y analizar respuestas fácilmente. ¿Está listo para comenzar?",
   "WelcomeFillingForm": "¡Bienvenido/a a la sala para rellenar formularios!",

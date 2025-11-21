@@ -76,7 +76,11 @@ const Integration: React.FC<{
         {t("IntegrationDescription", { productName: t("Common:ProductName") })}
       </Text>
       <div className="icons">
-        <div className="icon" title={zoomTitle}>
+        <div
+          data-testid="integration_zoom_container"
+          className="icon"
+          title={zoomTitle}
+        >
           <ReactSVG
             className="icon-zoom"
             src={ZoomIcon}
@@ -84,7 +88,11 @@ const Integration: React.FC<{
           />
         </div>
 
-        <div className="icon" title={wordPressTitle}>
+        <div
+          data-testid="integration_wordpress_container"
+          className="icon"
+          title={wordPressTitle}
+        >
           <ReactSVG
             className="icon-wordpress"
             src={WordpressIcon}
@@ -92,7 +100,11 @@ const Integration: React.FC<{
           />
         </div>
 
-        <div className="icon" title={drupalTitle}>
+        <div
+          data-testid="integration_drupal_container"
+          className="icon"
+          title={drupalTitle}
+        >
           <ReactSVG
             className="icon-drupal"
             src={DrupalIcon}
@@ -102,6 +114,7 @@ const Integration: React.FC<{
       </div>
       <div className="link-container">
         <Link
+          data-testid="all_connectors_link"
           className="link"
           noHover
           color={currentColorScheme.main?.accent}
@@ -110,7 +123,7 @@ const Integration: React.FC<{
           {t("SeeAllConnectors")}
         </Link>
 
-        <div className="icon">
+        <div data-testid="all_connectors_icon" className="icon">
           <ReactSVG
             className="icon-arrow"
             src={ArrowIcon}

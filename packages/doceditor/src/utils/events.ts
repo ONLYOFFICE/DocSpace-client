@@ -31,7 +31,7 @@ import { TTranslation } from "@docspace/shared/types";
 
 import { convertDocumentUrl } from ".";
 
-export type TInfoEvent = { data: { mode: string } };
+export type TInfoEvent = { data: { mode: "view" | "edit" } };
 
 export const onSDKInfo = (event: object) => {
   const data = (event as TInfoEvent).data;

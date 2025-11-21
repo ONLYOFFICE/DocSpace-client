@@ -38,6 +38,7 @@ import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
+import { QuotaPerAIAgentComponentSection } from "./sub-components/QuotaPerAIAgent";
 
 const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
   if (isMobile())
@@ -45,11 +46,13 @@ const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
 
   return (
     <>
-      <QuotaPerRoomComponentSection isDisabled={!isStatisticsAvailable} />
+      <QuotaPerRoomComponentSection />
       <QuotaPerUserComponentSection />
+      <QuotaPerAIAgentComponentSection />
     </>
   );
 };
+
 const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const theme = useTheme();
@@ -85,6 +88,7 @@ const QuotasComponent = (props) => {
             target="_blank"
             href={storageManagementUrl}
             color="accent"
+            dataTestId="help_center_link"
           >
             {t("Common:HelpCenter")}
           </Link>

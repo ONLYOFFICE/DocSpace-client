@@ -26,6 +26,8 @@
 
 import React from "react";
 import classNames from "classnames";
+import equal from "fast-deep-equal/react";
+
 import styles from "./Text.module.scss";
 import type { TextProps } from "./Text.types";
 
@@ -51,8 +53,7 @@ const TextPure = ({
   truncate,
   className,
   style,
-  containerWidth,
-  containerMinWidth,
+  dataTestId,
   ...rest
 }: TextProps) => {
   const elementType = !as && tag ? tag : as;
@@ -87,7 +88,7 @@ const TextPure = ({
     <Element
       ref={ref}
       title={title}
-      data-testid="text"
+      data-testid={dataTestId ?? "text"}
       onClick={onClick}
       className={textClassName}
       style={textStyles}
@@ -112,6 +113,6 @@ const TextPure = ({
 
 TextPure.displayName = "TextPure";
 
-const Text = React.memo(TextPure);
+const Text = React.memo(TextPure, equal);
 
 export { Text };

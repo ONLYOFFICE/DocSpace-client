@@ -59,4 +59,8 @@ export type SelectorAddButtonProps = {
   truncate?: boolean;
   /** Size  the icon container */
   size?: string;
+  /** Test id */
+  testId?: string;
+  /** Shows loading state with spinner */
+  isLoading?: boolean;
 };

@@ -3,7 +3,7 @@
   "content": "Personal data, all personal files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in {{productName}}.",
   "content_en_sha1_hash": "82efe26f171e64da1f9a5952e525fc023af5ef30",
   "created_at": "2025-05-19T21:30:56.673Z",
-  "updated_at": "2025-06-30T12:20:31.237Z",
+  "updated_at": "2025-09-02T07:59:28.382Z",
   "comment": {
     "text": "This translation key is used for a warning message informing users that their personal data will be permanently deleted from specific sections of their account, while files in common sections remain intact. It appears in a dialog box prompting users to delete their profile. The content describes the scope and consequences of deleting personal data.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
       "line_number": 121,
-      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"text-warning\">{t(\"PleaseNote\")}</Text>\n <Text className=\"text-delete-description\">\n {t(\"PersonalDataDeletionInfo\", {\n productName: t(\"Common:ProductName\"),\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n })}\n </Text>",
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"text-warning\">{t(\"PleaseNote\")}</Text>\n <Text className=\"text-delete-description\">\n {t(\"PersonalDataDeletionInfo\", {\n productName: t(\"Common:ProductName\"),\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n })}\n </Text>",
       "module": "/packages/client"
     }
   ],

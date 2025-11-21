@@ -1,0 +1,28 @@
+{
+  "key_path": "RoleAIAgentContentCreatorDescription",
+  "content": "Content creators can use the chat and work with files in Result storage.\nThey can upload files to the knowledge base but can’t manage users or access agent settings.",
+  "content_en_sha1_hash": "e27411f3623a5d8953b04314ff55c986854b2ed2",
+  "created_at": "2025-11-19T19:14:48.494Z",
+  "updated_at": "2025-11-19T19:17:29.637Z",
+  "comment": {
+    "text": "This key provides a description of the role \"Content Creator\" in an AI Room. It explains their ability to chat, work with files, upload to the knowledge base, but not manage users or agent settings. Translators should ensure this accurately reflects the content creator's permissions.",
+    "is_auto": true,
+    "updated_at": "2025-11-19T19:17:29.637Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 71,
+      "context": "const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RolePowerUserFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentContentCreatorDescription\");\n case None:\n return t(\"Common:RoleNewUserDescription\");\n default:\n return t(\"Common:RoleContentCreatorDescription\");\n }",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

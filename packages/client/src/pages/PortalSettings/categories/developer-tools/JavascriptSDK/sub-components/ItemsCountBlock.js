@@ -61,6 +61,7 @@ export const ItemsCountBlock = ({ t, count, setConfig }) => {
           tooltipContent={
             <Text fontSize="12px">{t("ItemsCountDescription")}</Text>
           }
+          dataTestId="items_count_help_button"
         />
       </LabelGroup>
       <TextInput
@@ -69,6 +70,7 @@ export const ItemsCountBlock = ({ t, count, setConfig }) => {
         placeholder={t("EnterCount")}
         value={value}
         tabIndex={6}
+        testId="items_count_input"
       />
     </ControlsGroup>
   );

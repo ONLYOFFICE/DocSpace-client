@@ -3,7 +3,7 @@
   "content": "This token can be used to access your account (<1>{{supportEmail}}</1>) via API calls. Don't share it with anyone. Make sure you copy this token now as you won't see it again.",
   "content_en_sha1_hash": "9631ed702f217ba0c462057da6317a7f1e0b872e",
   "created_at": "2025-05-19T21:30:53.903Z",
-  "updated_at": "2025-05-24T07:25:26.197Z",
+  "updated_at": "2025-08-04T07:30:01.442Z",
   "comment": {
     "text": "This translation key is used for a warning message that advises users not to share their API token and provides instructions on how to copy it. It appears in a generate developer token dialog, prompting users to take action before the token is lost.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 199,
+      "line_number": 207,
       "context": "<>\n <Text style={{ marginBottom: \"16px\" }}>\n <Trans\n t={t}\n ns=\"OAuth\"\n i18nKey=\"GenerateTokenWarning\"\n values={{\n supportEmail: email,\n }}\n components={{\n 1: (",
       "module": "/packages/client"
     }

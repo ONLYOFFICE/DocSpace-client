@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Vyhľadať a pozvať podľa mena alebo e-mailu",
   "InviteViaLink": "Pozvať cez odkaz",
   "InviteViaLinkDescriptionAccounts": "Vytvorte univerzálny odkaz na autorizáciu v {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Vytvorte univerzívny odkaz na samoautorizáciu v agentovi ako hosť.",
+  "InviteViaLinkDescriptionAgentMembers": "Vytvorte univerzity link pre členov {{productName}} na vlastnú autorizáciu v agente.",
   "InviteViaLinkDescriptionRoomGuest": "Vytvorte univerzívny odkaz na sebaautorizáciu v miestnosti ako hosť.",
   "InviteViaLinkDescriptionRoomMembers": "Vytvorte univerzity link pre členov {{productName}} na vlastnú autorizáciu v miestnosti.",
   "LinkCopySuccess": "Odkaz bol skopírovaný",
   "SendInvitation": "Poslať pozvánku",
+  "UserAgentMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť priradení ako manažéri agentov. Na danú úlohu sú vhodní len administrátori izieb a {{productName}}.",
   "UserMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť označení ako manažéri miestnosti. Iba administrátorom miestnosti a administrátorom {{productName}} môže byť pridelená táto rola.",
   "UsersAlreadyAdded": "Niektorí používatelia už boli pridaní",
   "UsersCannotBeAdded": "Zakázaní kontakty je možné pridať do miestnosti."

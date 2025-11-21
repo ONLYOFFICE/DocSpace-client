@@ -1,6 +1,5 @@
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
-@use "../../styles/common-input-styles";
 
 .copyIconWrapper {
   position: absolute;
@@ -69,10 +68,9 @@
 }
 
 .textarea {
-  @include common-input-styles.common-input-color-styles;
+  @include mixins.common-input-color-styles;
 
   width: 100%;
-  height: 100%;
   display: block;
   width: -webkit-fill-available;
   border: none;
@@ -85,7 +83,6 @@
   line-height: 1.5;
   padding-inline-start: var(--padding-inline-start);
   -webkit-background-clip: unset !important;
-  min-height: var(--height-textarea);
 
   &[data-dir="rtl"] {
     &:placeholder-shown {
@@ -100,21 +97,21 @@
 }
 
 .scrollbar {
-  @include common-input-styles.common-input-styles;
+  @include mixins.common-input-styles;
   -webkit-background-clip: unset !important;
 
   width: 100% !important;
   height: 93px;
 
   &.defaultHeight {
-    height: calc(var(--height-textarea) + 2px);
+    height: var(--height-textarea);
   }
 
   &.isFullHeight {
-    height: calc(var(--full-height) + 2px);
+    height: var(--full-height);
   }
 
   &.heightScale {
-    height: calc(67vh + 2px);
+    height: 67vh;
   }
 }

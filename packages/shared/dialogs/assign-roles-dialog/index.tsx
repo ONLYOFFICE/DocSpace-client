@@ -51,9 +51,9 @@ export const AssignRolesDialog = ({
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("Common:AssignRoles")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:AssignRecipients")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {t("Common:AssignRolesDescription", { roomName })}
+        {t("Common:AssignRecipientsDescription", { roomName })}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

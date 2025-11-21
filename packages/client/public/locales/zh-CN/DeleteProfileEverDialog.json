@@ -7,7 +7,7 @@
   "DeleteGuest": "删除访客",
   "DeleteGuests": "删除多个访客",
   "DeletePersonalDataApplicable": "*适用于拥有此类文件和文件夹的选定用户。",
-  "DeleteReassignDescriptionUser": "此用户创建的 {{warningMessageMyDocuments}} 房间及存储在房间中的文档将被自动转让给执行删除操作的管理员：<1>{{userPerformedDeletion}} ({{userYou}})</1>。您可以手动转让数据，选择其他转让目标用户。",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} 此联系人创建的所有共享文件以及房间都将被自动重新分配给执行删除操作的管理员：<1>{{userPerformedDeletion}} ({{userYou}})</1>。手动重新分配数据以选择另一个目标用户进行重新分配。",
   "DeleteReqassignDescriptionGuest": "该{{userCaption}}将从其受邀加入的所有房间中删除。该{{userCaption}}在房间中创建的文档将自动重新分配给房间所有者。",
   "DeleteUser": "删除用户",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> 将被删除。此操作无法撤消。",

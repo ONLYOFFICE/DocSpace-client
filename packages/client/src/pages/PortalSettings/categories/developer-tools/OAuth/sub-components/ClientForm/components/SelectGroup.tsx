@@ -41,6 +41,8 @@ interface SelectGroupProps {
   description: string;
 
   onSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  dataTestId?: string;
 }
 
 const SelectGroup = ({
@@ -52,6 +54,7 @@ const SelectGroup = ({
   description,
 
   onSelect,
+  dataTestId,
 }: SelectGroupProps) => {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -70,7 +73,7 @@ const SelectGroup = ({
   };
 
   return (
-    <StyledInputGroup>
+    <StyledInputGroup data-testid={dataTestId}>
       <div className="label">
         <Text
           fontSize="13px"

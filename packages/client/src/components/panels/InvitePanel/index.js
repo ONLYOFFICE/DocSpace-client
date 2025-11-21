@@ -48,7 +48,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Link } from "@docspace/shared/components/link";
-import { checkIfAccessPaid } from "SRC_DIR/helpers";
+import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { fixAccess } from "./utils";
@@ -68,7 +68,6 @@ const InvitePanel = ({
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
-  isRoomMembersPanelOpen,
   setInviteLanguage,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
@@ -117,6 +116,10 @@ const InvitePanel = ({
     setInviteItems([]);
   };
 
+  const onBackClick = () => {
+    if (!hideSelector && addUsersPanelVisible) setAddUsersPanelVisible(false);
+  };
+
   const onCheckHeight = () => {
     setScrollAllPanelContent(!isDesktop());
     setIsMobileView(isMobile());
@@ -127,7 +130,6 @@ const InvitePanel = ({
   };
 
   const roomType = selectedRoom ? selectedRoom.roomType : -1;
-  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
@@ -354,9 +356,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      if (isRoomMembersPanelOpen) {
-        updateInfoPanelMembers(t);
-      }
+      updateInfoPanelMembers();
     } catch (err) {
       let error = err;
 
@@ -470,15 +470,19 @@ const InvitePanel = ({
   const addItems = (users, access) => {
     users.forEach((u) => {
       u.access = access.access;
-      const isAccessPaid = checkIfAccessPaid(u.access);
+      const shouldMakeFreeRole =
+        checkIfAccessPaid(u.access) &&
+        (u.isGroup || u.isVisitor || u.isCollaborator);
+      const shouldMakeViewerRole =
+        roomType === RoomsType.AIRoom &&
+        u.isVisitor &&
+        u.access !== ShareAccessRights.ReadOnly;
 
-      if (isAccessPaid) {
-        if (u.isGroup || u.isVisitor || u.isCollaborator) {
-          u = fixAccess(u, t, roomType);
+      if (shouldMakeFreeRole || shouldMakeViewerRole) {
+        u = fixAccess(u, t, roomType);
 
-          if (isUserTariffLimit) {
-            toastr.error(<PaidQuotaLimitError />);
-          }
+        if (isUserTariffLimit) {
+          toastr.error(<PaidQuotaLimitError />);
         }
       }
     });
@@ -519,11 +523,13 @@ const InvitePanel = ({
     <ModalDialog
       visible={isVisible}
       onClose={onClose}
+      onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
       containerVisible={!hideSelector ? addUsersPanelVisible : null}
       isLoading={invitePanelIsLoding}
       withBodyScroll
       isInvitePanelLoader
+      id="invite_panel_modal"
     >
       {!hideSelector && addUsersPanelVisible ? (
         <ModalDialog.Container>
@@ -542,11 +548,13 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups={!isPublicRoomType}
+            withGroups
             roomId={roomId}
+            isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}
             withHeader
+            dataTestId="invite_panel_people_selector"
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
               headerLabel: t("Common:Contacts"),
@@ -575,6 +583,7 @@ const InvitePanel = ({
           onClick={onClickSend}
           label={t("SendInvitation")}
           isLoading={isLoading}
+          testId="invite_panel_send_button"
         />
         <Button
           className="cancel-button"
@@ -583,6 +592,7 @@ const InvitePanel = ({
           onClick={onClose}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
+          testId="invite_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -605,7 +615,6 @@ export default inject(
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
     } = infoPanelStore;
 
     const {
@@ -638,7 +647,6 @@ export default inject(
       getFolderInfo,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,

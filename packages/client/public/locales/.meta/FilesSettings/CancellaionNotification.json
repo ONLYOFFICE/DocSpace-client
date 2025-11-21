@@ -3,7 +3,7 @@
   "content": "Don't display cancellation notification again",
   "content_en_sha1_hash": "537727f09456ab87cd615e057378ddfcf8cdf4b9",
   "created_at": "2025-05-19T21:30:55.169Z",
-  "updated_at": "2025-06-02T10:20:51.489Z",
+  "updated_at": "2025-08-11T18:11:59.297Z",
   "comment": {
     "text": "\"Don't display cancellation notification again\" is a message that allows users to toggle off the display of a confirmation notification when canceling an operation. This option appears as a button in a file management interface and helps avoid repetitive notifications.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
-      "line_number": 160,
-      "context": "<ToggleButton\n className=\"cancelletion-notification toggle-btn\"\n onChange={onChangeCancellationNotification}\n isChecked={hideConfirmCancelOperation}\n />\n <Text>{t(\"CancellaionNotification\")}</Text>\n </div>\n </div>\n </StyledWrapper>\n );\n };",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 179,
+      "context": ")}\n onChange={onChangeCancellationNotification}\n isChecked={hideConfirmCancelOperation}\n dataTestId=\"cancelletion_notification_toggle_button\"\n />\n <Text>{t(\"CancellaionNotification\")}</Text>\n </div>\n </div>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "You can disable the ability for users to manage and customize file information columns in list view.",
   "content_en_sha1_hash": "76868dd0a3859dca5c680f703c78401724009d5e",
   "created_at": "2025-05-19T21:30:54.686Z",
-  "updated_at": "2025-05-24T08:47:53.845Z",
+  "updated_at": "2025-08-04T07:30:01.396Z",
   "comment": {
     "text": "You can disable the ability for users to manage and customize file information columns in list view. This setting is typically found on a portal settings page or similar configuration option.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 495,
-      "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SettingUpColumns\")}\n description={t(\"SettingUpColumnsDescription\")}\n img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}\n />\n }\n />\n </LabelGroup>",
+      "line_number": 503,
+      "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SettingUpColumns\")}\n description={t(\"SettingUpColumnsDescription\")}\n img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}\n />\n }\n dataTestId=\"show_settings_help_button\"\n />",
       "module": "/packages/client"
     }
   ],

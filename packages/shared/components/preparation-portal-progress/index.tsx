@@ -36,9 +36,10 @@ import styles from "./PreparationPortalProgress.module.scss";
 export const PreparationPortalProgress = ({
   text,
   percent,
+  ...rest
 }: PreparationPortalProgressProps) => {
   return (
-    <div data-testid="preparation-portal-progress">
+    <div data-testid="preparation-portal-progress" {...rest}>
       <div className={styles.preparationPortalProgress}>
         <div className={styles.preparationPortalProgressBar}>
           <div

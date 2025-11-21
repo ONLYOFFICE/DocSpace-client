@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Fjalëkalimi është ndryshuar me sukses",
   "CodeTitle": "Kodi ju është dërguar me email",
+  "ConfirmEmailChange": "Konfirmoni ndryshimin e emailit",
+  "ConfirmEmailChangeText": "Keni kërkuar të ndryshoni adresën e emailit në llogarinë tuaj të {{productName}}. Për të vazhduar, ju lutemi identifikohuni me kredencialet aktuale.",
   "ErrorInvalidText": "për 10 sekonda do të ridrejtoheni te <1>{{productName}}</1>",
   "ForgotPassword": "Keni harruar fjalëkalimin tuaj?",
   "LDAPUsernamePlaceholder": "Emri i përdoruesit të {{ldap_domain}}",

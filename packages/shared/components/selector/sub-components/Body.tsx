@@ -26,7 +26,7 @@
 
 import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
-import { FixedSizeList as List } from "react-window";
+import { VariableSizeList as List } from "react-window";
 import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
@@ -94,6 +94,8 @@ const Body = ({
   injectedElement,
 
   isSSR,
+
+  hideBackButton,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
   const injectedElementRef = useRef<HTMLElement>(null);
@@ -215,8 +217,11 @@ const Body = ({
       if (infoEl) {
         const { height } = infoEl.getBoundingClientRect();
         setInfoBarHeight(height + CONTAINER_PADDING);
+        return;
       }
     }
+
+    setInfoBarHeight(0);
   }, [withInfoBar, itemsCount, visibleInfoBar]);
   useLayoutEffect(() => {
     if (injectedElement) {
@@ -268,6 +273,14 @@ const Body = ({
   };
 
   const cloneProps = { ref: injectedElementRef };
+
+  const getItemSize = (index: number): number => {
+    if (items[index]?.isSeparator) {
+      return 16;
+    }
+
+    return 48;
+  };
 
   return (
     <div
@@ -324,6 +337,7 @@ const Body = ({
           withSearch={isSearch}
           items={items}
           inputItemVisible={inputItemVisible}
+          hideBackButton={hideBackButton}
         />
       ) : (
         <>
@@ -419,7 +433,7 @@ const Body = ({
                     setSavedInputValue,
                     listHeight,
                   }}
-                  itemSize={48}
+                  itemSize={getItemSize}
                   onItemsRendered={onItemsRendered}
                   ref={ref}
                   outerElementType={VirtualScroll}

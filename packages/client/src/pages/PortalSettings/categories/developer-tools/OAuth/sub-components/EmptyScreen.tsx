@@ -88,6 +88,7 @@ const OAuthEmptyScreen = ({
             tag="a"
             style={{ marginBottom: "20px" }}
             color="accent"
+            dataTestId="oauth_guide_link"
           >
             {t("OAuth:OAuth")} {t("Common:Guide")}
           </Link>

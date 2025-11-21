@@ -94,14 +94,11 @@ const StyledContainer = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const HeaderNavigationIcon = ({
-  id,
   iconUrl,
-  link,
   active,
   badgeNumber,
   onItemClick,
   onBadgeClick,
-  url,
   ...rest
 }) => {
   return (

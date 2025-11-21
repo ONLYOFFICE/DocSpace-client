@@ -3,7 +3,7 @@
   "content": "To set a storage quota for user, add an attribute in the LDAP directory (for example, UsersQuotaLimit) and enter an integer value for this attribute. It will display the quota value in bytes. Here, specify the attribute name only. This attribute will be applied only during the first setup and can be later changed manually in the {{contactsName}} section.",
   "content_en_sha1_hash": "7daa3230a2e4d6ba298be6e8080a39fae3c263a7",
   "created_at": "2025-05-19T21:30:54.335Z",
-  "updated_at": "2025-05-24T08:11:11.591Z",
+  "updated_at": "2025-08-11T18:11:59.237Z",
   "comment": {
     "text": "This translation key is used to provide a tooltip explaining how to set a storage quota for a user in an LDAP directory. It appears as part of a form element where users can input an attribute value, and it helps clarify the purpose of this action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 212,
-      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n >\n <TextInput",
+      "line_number": 223,
+      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n dataTestId=\"quota_field_container\"\n >",
       "module": "/packages/client"
     }
   ],

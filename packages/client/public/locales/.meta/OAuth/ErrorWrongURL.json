@@ -3,7 +3,7 @@
   "content": "URL not valid, example",
   "content_en_sha1_hash": "350049133db4d2b9f084821bdef5f6282c6d77ec",
   "created_at": "2025-05-19T21:30:53.887Z",
-  "updated_at": "2025-06-30T12:20:31.466Z",
+  "updated_at": "2025-08-04T07:30:01.425Z",
   "comment": {
     "text": "The \"ErrorWrongURL\" translation key is used to display a generic error message when an invalid URL is entered. It appears in various UI elements, including input fields and support blocks, providing a clear indication that the URL is not valid. Translators should provide a descriptive message that conveys this information while maintaining consistency across different contexts.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 157,
+      "line_number": 158,
       "context": "name=\"website_url\"\n placeholder={t(\"EnterURL\")}\n value={websiteUrlValue}\n error={\n isWebsiteError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n onChange={onChange}\n disabled={isEdit}\n isRequired",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/MultiInputGroup.tsx",
-      "line_number": 180,
-      "context": "value={value}\n placeholder={placeholder}\n onChange={onChange}\n error={\n isError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n isRequired\n isError={isError || hasError}\n >",
+      "line_number": 183,
+      "context": "value={value}\n placeholder={placeholder}\n onChange={onChange}\n error={\n isError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n isRequired\n isError={isError || hasError}\n dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}",
       "module": "/packages/client"
     },
     {

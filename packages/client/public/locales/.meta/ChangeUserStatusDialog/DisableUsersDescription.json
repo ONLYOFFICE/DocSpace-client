@@ -3,7 +3,7 @@
   "content": "If you Disable these users, they won’t be able to log in to {{productName}}, while their documents and data will remain intact.",
   "content_en_sha1_hash": "2f72747c134d6f27fe2f9ae5dc69eb20b8c55ee6",
   "created_at": "2025-05-19T21:30:56.961Z",
-  "updated_at": "2025-05-24T14:15:55.776Z",
+  "updated_at": "2025-08-04T07:30:01.063Z",
   "comment": {
     "text": "This translation key is used to display a message describing what happens when users are disabled. It appears in a change user status dialog and indicates that disabling users will prevent them from accessing the application while their data remains intact.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 181,
+      "line_number": 177,
       "context": ": t(\"DisableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"DisableGuestsDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"DisableUsersDescription\", {\n productName: t(\"Common:ProductName\"),\n });\n \n bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")",
       "module": "/packages/client"
     }

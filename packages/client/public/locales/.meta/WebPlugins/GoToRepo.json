@@ -3,7 +3,7 @@
   "content": "Go to repository",
   "content_en_sha1_hash": "7cec9604549289db044b7db17751318a97d2170a",
   "created_at": "2025-05-19T21:30:49.909Z",
-  "updated_at": "2025-05-24T01:58:47.898Z",
+  "updated_at": "2025-08-04T07:30:01.449Z",
   "comment": {
     "text": "The translation key \"GoToRepo\" represents the English content \"Go to repository\", used as a button label in a portal settings page, prompting users to open a repository in their default browser.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
       "line_number": 109,
-      "context": "</Text>\n <Button\n icon={icon}\n onClick={() => window.open(p.homePage, \"_blank\")}\n scale\n label={t(\"GoToRepo\")}\n size=\"small\"\n />\n </div>\n ));",
+      "context": "</Text>\n <Button\n icon={icon}\n onClick={() => window.open(p.homePage, \"_blank\")}\n scale\n label={t(\"GoToRepo\")}\n size=\"small\"\n testId={`${p.name}_go_to_repo_button`}\n />\n </div>\n ));",
       "module": "/packages/client"
     }
   ],

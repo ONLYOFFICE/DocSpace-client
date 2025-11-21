@@ -62,6 +62,7 @@ const FileInputPure = ({
   isDocumentIcon = false,
   isMultiple = true,
   className,
+  "data-test-id": dataTestId,
   ...rest
 }: FileInputProps) => {
   const { t } = useTranslation("Common");
@@ -97,14 +98,6 @@ const FileInputPure = ({
       case InputSize.middle:
         iconSize = 15;
         buttonSize = ButtonSize.small;
-        break;
-      case InputSize.big:
-        iconSize = 16;
-        buttonSize = ButtonSize.normal;
-        break;
-      case InputSize.huge:
-        iconSize = 16;
-        buttonSize = ButtonSize.medium;
         break;
       case InputSize.large:
         iconSize = 16;
@@ -163,7 +156,7 @@ const FileInputPure = ({
         <div
           className={wrapperClasses}
           id={idButton}
-          data-testid="file-input"
+          data-testid={dataTestId ?? "file-input"}
           aria-disabled={isDisabled ? "true" : "false"}
           role="button"
           {...rest}
@@ -185,6 +178,7 @@ const FileInputPure = ({
           />
           {!fromStorage ? (
             <input
+              data-testid="upload-click-input"
               type="file"
               id={id}
               ref={inputRef}

@@ -133,8 +133,13 @@ export const MigrationButtons = ({
         additionalClassCancelButton={additionalClassCancelButton}
         saveButtonDisabled={saveButtonDisabled}
         getTopComponent={getTopComponent}
+        saveButtonDataTestId="next_step_button"
+        cancelButtonDataTestId="previos_step_button"
       />
-      <CancelMigrationButton onClick={onMigrationCancelClick}>
+      <CancelMigrationButton
+        data-testid="cancel_import_button"
+        onClick={onMigrationCancelClick}
+      >
         {migrationCancelLabel}
       </CancelMigrationButton>
     </MigrationButtonsWrapper>

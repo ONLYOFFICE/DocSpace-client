@@ -43,6 +43,7 @@ export const StyledWrapper = styled.header`
 `;
 
 export const StyledHeader = styled.header`
+  height: 48px;
   width: 100%;
   font-size: 17px;
   font-style: normal;
@@ -50,6 +51,7 @@ export const StyledHeader = styled.header`
   line-height: 22px;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 export const StyledMenuIcon = styled(MenuIcon)`

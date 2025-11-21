@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "Katalog OneDrive",
   "FolderTitleWebDav": "Katalog WebDAV",
   "FolderTitleYandex": "Katalog Yandex",
-  "GuestReleaseTipLink": "Dowiedz się więcej o różnych rodzajach użytkowników",
-  "LinkHasExpiredAndHasBeenDisabled": "Link wygasł i został wyłączony",
   "LinkValidTime": "Link jest ważny tylko przez {{days_count}} dni.",
   "NewForm": "Formularz PDF",
   "OwnerChange": "Zmień właściciela",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Zmień dane podmiotu trzeciego",
   "ThirdPartyTitle": "Usługi podmiotów trzecich",
   "TitleShowActions": "Działania na plikach",
-  "TitleShowFolderActions": "Działania na folderach"
+  "TitleShowFolderActions": "Działania na folderach",
+  "TrashItemsDeleteSuccess": "Wybrane elementy zostały pomyślnie usunięte z {{sectionName}}"
 }

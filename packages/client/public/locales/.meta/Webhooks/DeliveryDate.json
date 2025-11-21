@@ -3,7 +3,7 @@
   "content": "Delivery date",
   "content_en_sha1_hash": "1093fae5fbc2f03091a8f32f8add755d266e6d58",
   "created_at": "2025-05-19T21:30:49.690Z",
-  "updated_at": "2025-05-24T02:30:26.493Z",
+  "updated_at": "2025-08-04T07:30:01.457Z",
   "comment": {
     "text": "The \"DeliveryDate\" translation key is used to display the date related to deliveries. It appears in a filter dialog within the application, allowing users to select and manage dates. Translators should provide an alternative text for this date format as it may vary across languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 141,
+      "line_number": 142,
       "context": ") : null}\n </div>\n );\n };\n \n const DeliveryDatePicker = ({\n filters,\n setFilters,\n isApplied,\n setIsApplied,\n }) => {",
       "module": "/packages/client"
     }

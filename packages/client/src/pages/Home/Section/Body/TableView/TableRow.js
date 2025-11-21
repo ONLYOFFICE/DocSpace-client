@@ -24,25 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import equal from "fast-deep-equal";
 import { withTranslation } from "react-i18next";
+import React, { useState, useEffect, memo, useCallback, useMemo } from "react";
+
 import { classNames } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
+import { EMPTY_OBJECT, FUNCTION_EMPTY } from "@docspace/shared/constants";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
+
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
+import AIAgentsRowDataComponent from "./sub-components/AIAgentsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
 import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
+import SharedWithMeRowDataComponent from "./sub-components/SharedWithMeRowData";
+import FavoritesRowDataComponent from "./sub-components/FavoritesRowData";
+
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
-const FilesTableRow = (props) => {
+const FilesTableRow = memo((props) => {
   const {
     t,
     fileContextClick,
@@ -50,6 +60,7 @@ const FilesTableRow = (props) => {
     checkedProps,
     className,
     value,
+    documentTitle,
     onMouseClick,
     dragging,
     isDragging,
@@ -76,7 +87,10 @@ const FilesTableRow = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
-    isRecentTab,
+    isRecentFolder,
+    isFavoritesFolder,
+    isSharedWithMeFolder,
+    isAIAgentsFolder,
     canDrag,
     onEditIndex,
     isIndexUpdated,
@@ -86,6 +100,10 @@ const FilesTableRow = (props) => {
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
+    setDropTargetPreview,
+    selectedFolderTitle,
+    canCreateSecurity,
+    disableDrag,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -113,41 +131,60 @@ const FilesTableRow = (props) => {
     />
   );
 
-  const selectionProp = {
-    className: `files-item ${className} ${value}`,
-    value,
-  };
+  const selectionProp = useMemo(() => {
+    return {
+      className: classNames("files-item", className, value),
+      value,
+      documentTitle,
+    };
+  }, [className, value, documentTitle]);
 
   const [isDragActive, setIsDragActive] = useState(false);
 
-  const dragStyles = {
-    style: {
-      background:
-        dragging && isDragging && !isIndexEditingMode
-          ? isDragActive
-            ? acceptBackground
-            : background
-          : "none",
+  const isDragDisabled = dragging && !isDragging;
+
+  const dragStyles = useMemo(() => {
+    return {
+      style: {
+        background:
+          dragging && isDragging && !isIndexEditingMode
+            ? isDragActive
+              ? acceptBackground
+              : background
+            : "none",
+        opacity: isDragDisabled ? 0.4 : 1,
+      },
+    };
+  }, [
+    dragging,
+    isDragging,
+    isIndexEditingMode,
+    isDragActive,
+    acceptBackground,
+    background,
+  ]);
+
+  const onChangeIndex = useCallback(
+    (action) => {
+      return onEditIndex(action, item, t);
     },
-  };
+    [onEditIndex, item, t],
+  );
 
-  const onChangeIndex = (action) => {
-    return onEditIndex(action, item, t);
-  };
-
-  const onDragOverEvent = (dragActive, e) => {
+  const onDragOverEvent = useEventCallback((dragActive, e) => {
     onDragOver && onDragOver(e);
 
     if (dragActive !== isDragActive) {
       setIsDragActive(dragActive);
     }
-  };
+  });
 
-  const onDragLeaveEvent = (e) => {
+  const onDragLeaveEvent = useEventCallback((e) => {
     onDragLeave && onDragLeave(e);
 
+    setDropTargetPreview(null);
     setIsDragActive(false);
-  };
+  });
 
   useEffect(() => {
     if (index === 0) {
@@ -180,21 +217,45 @@ const FilesTableRow = (props) => {
     };
   }, [deleteRefMap, setRefMap]);
 
+  useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        if (isDragActive) setDropTargetPreview(item.title);
+      } else if (!disableDrag && canCreateSecurity) {
+        setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
+      }
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    selectedFolderTitle,
+    setDropTargetPreview,
+    disableDrag,
+  ]);
+
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
     : (item.id ?? "");
 
-  const contextOptionProps = isIndexEditingMode
-    ? {}
-    : {
-        contextOptions: item.contextOptions,
-        getContextModel,
-      };
+  const contextOptionProps = useMemo(() => {
+    return isIndexEditingMode
+      ? EMPTY_OBJECT
+      : {
+          contextOptions: item.contextOptions,
+          getContextModel,
+        };
+  }, [isIndexEditingMode, item.contextOptions, getContextModel]);
 
-  const changeIndex = (e, action) => {
-    e.stopPropagation();
-    onChangeIndex(action);
-  };
+  const changeIndex = useCallback(
+    (e, action) => {
+      e.stopPropagation();
+      onChangeIndex(action);
+    },
+    [onChangeIndex],
+  );
 
   return (
     <StyledDragAndDrop
@@ -210,17 +271,19 @@ const FilesTableRow = (props) => {
       dragging={dragging ? isDragging : null}
       onDragOver={onDragOverEvent}
       onDragLeave={onDragLeaveEvent}
+      isDragDisabled={isDragDisabled}
     >
       <StyledTableRow
         key={item.id}
         className="table-row"
         forwardedRef={rowRef}
         contextMenuCellStyle={dragStyles.style}
+        dataTestId={`table-row-${index}`}
         isDragging={dragging}
         dragging={dragging ? isDragging : null}
         selectionProp={selectionProp}
         fileContextClick={fileContextClick}
-        onClick={isIndexEditingMode ? () => {} : onMouseClick}
+        onClick={isIndexEditingMode ? FUNCTION_EMPTY : onMouseClick}
         isActive={isActive}
         isIndexEditingMode={isIndexEditingMode}
         isBlockingOperation={isBlockingOperation}
@@ -228,7 +291,7 @@ const FilesTableRow = (props) => {
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
-        onDoubleClick={isIndexEditingMode ? () => {} : onDoubleClick}
+        onDoubleClick={isIndexEditingMode ? FUNCTION_EMPTY : onDoubleClick}
         checked={checkedProps || isIndexUpdated}
         isIndexing={isIndexing}
         isIndexUpdated={isIndexUpdated}
@@ -259,14 +322,33 @@ const FilesTableRow = (props) => {
             dragStyles={dragStyles}
             {...props}
           />
+        ) : isAIAgentsFolder ? (
+          <AIAgentsRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
         ) : isTrashFolder ? (
           <TrashRowDataComponent
             element={element}
             dragStyles={dragStyles}
             {...props}
           />
-        ) : isRecentTab ? (
+        ) : isSharedWithMeFolder ? (
+          <SharedWithMeRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isRecentFolder ? (
           <RecentRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            selectionProp={selectionProp}
+            {...props}
+          />
+        ) : isFavoritesFolder ? (
+          <FavoritesRowDataComponent
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}
@@ -294,7 +376,7 @@ const FilesTableRow = (props) => {
       </StyledTableRow>
     </StyledDragAndDrop>
   );
-};
+}, equal);
 
 export default withTranslation([
   "Files",

@@ -55,6 +55,7 @@ export const SelectTextInput = ({ t, config, setConfig }) => {
         placeholder={t("Common:SelectAction")}
         value={value}
         tabIndex={7}
+        testId="select_text_input"
       />
     </>
   );

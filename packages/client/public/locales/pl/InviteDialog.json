@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Wyszukaj i zaproś według nazwy użytkownika lub adresu e-mail",
   "InviteViaLink": "Zaproś poprzez link",
   "InviteViaLinkDescriptionAccounts": "Utwórz uniwersalny link do samodzielnej autoryzacji w {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Utwórz uniwersalny link do autoryzacji w agencie jako gość.",
+  "InviteViaLinkDescriptionAgentMembers": "Utwórz uniwersalny link dla członków {{productName}} w celu samodzielnej autoryzacji w agencie.",
   "InviteViaLinkDescriptionRoomGuest": "Utwórz uniwersalny link do autoryzacji własnej w pokoju jako gość.",
   "InviteViaLinkDescriptionRoomMembers": "Utwórz uniwersalny link dla członków {{productName}} w celu samodzielnego uwierzytelnienia w pokoju.",
   "LinkCopySuccess": "Link został skopiowany",
   "SendInvitation": "Wyślij zaproszenie",
+  "UserAgentMaxAvailableRoleWarning": "Goście i Użytkownicy nie mogą być przypisani jako menedżerowie agentów. Tylko administratorzy pokoi i {{productName}} są odpowiedni do określonej roli.",
   "UserMaxAvailableRoleWarning": "Nie można przypisać roli menedżera pokoju gościom ani użytkownikom. Tylko administratorzy pokoi i  {{productName}} mogą przyjąć daną rolę.",
   "UsersAlreadyAdded": "Niektórzy użytkownicy zostali już dodani",
   "UsersCannotBeAdded": "Wyłączone kontakty nie mogą być dodane do pokoju"

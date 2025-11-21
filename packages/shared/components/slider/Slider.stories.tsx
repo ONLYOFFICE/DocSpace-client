@@ -12,170 +12,99 @@
 // the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
 //
 // You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { Slider } from "./index";
+import { Slider } from ".";
 import { SliderProps } from "./Slider.types";
 
-const meta = {
-  title: "Components/Slider",
+const meta: Meta<typeof Slider> = {
+  title: "Form Controls/Slider",
   component: Slider,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          "A customizable slider component that allows users to select a value from a range.",
-      },
-    },
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=505-4112&mode=design&t=TBNCKMQKQMxr44IZ-0",
-    },
-  },
   argTypes: {
-    min: {
-      description: "Minimum value of the slider",
-      control: { type: "number" },
-    },
-    max: {
-      description: "Maximum value of the slider",
-      control: { type: "number" },
-    },
-    value: {
-      description: "Current value of the slider",
-      control: { type: "number" },
-    },
-    step: {
-      description: "Step increment value",
-      control: { type: "number" },
-    },
-    thumbWidth: {
-      description: "Width of the slider thumb",
-      control: { type: "text" },
-    },
-    thumbHeight: {
-      description: "Height of the slider thumb",
-      control: { type: "text" },
-    },
-    thumbBorderWidth: {
-      description: "Border width of the slider thumb",
-      control: { type: "text" },
-    },
-    runnableTrackHeight: {
-      description: "Height of the slider track",
-      control: { type: "text" },
-    },
-    isDisabled: {
-      description: "Whether the slider is disabled",
-      control: { type: "boolean" },
-    },
-    withPouring: {
-      description: "Whether to show background color in the track",
-      control: { type: "boolean" },
-    },
+    min: { control: "number" },
+    max: { control: "number" },
+    step: { control: "number" },
+    value: { control: "number" },
+    isDisabled: { control: "boolean" },
+    withPouring: { control: "boolean" },
+    onChange: { action: "onChange" },
   },
-} satisfies Meta<typeof Slider>;
-
-type Story = StoryObj<typeof meta>;
+  args: {
+    min: 0,
+    max: 100,
+    step: 1,
+    value: 50,
+    isDisabled: false,
+    withPouring: true,
+  },
+};
 
 export default meta;
+type Story = StoryObj<typeof Slider>;
 
-const Template = ({ ...args }: SliderProps) => {
-  const [value, setValue] = useState(args.value || 0);
+const SliderWithState = (props: SliderProps) => {
+  const { value: initialValue, onChange } = props;
+  const [value, setValue] = useState<number>(initialValue || 50);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(e.target.value);
     setValue(newValue);
-    args.onChange?.(e);
+    onChange?.(e);
   };
 
-  return <Slider {...args} value={value} onChange={handleChange} />;
+  return <Slider {...props} value={value} onChange={handleChange} />;
 };
 
 export const Default: Story = {
-  render: Template,
-  args: {
-    min: 0,
-    max: 100,
-    value: 50,
-    step: 1,
-    thumbWidth: "24px",
-    thumbHeight: "24px",
-    thumbBorderWidth: "6px",
-    runnableTrackHeight: "8px",
-    withPouring: true,
-  },
-};
-
-export const CustomSized: Story = {
-  render: Template,
-  args: {
-    min: 0,
-    max: 100,
-    value: 75,
-    step: 1,
-    thumbWidth: "30px",
-    thumbHeight: "30px",
-    thumbBorderWidth: "6px",
-    runnableTrackHeight: "14px",
-    withPouring: true,
-  },
+  render: (args) => <SliderWithState {...args} />,
 };
 
 export const Disabled: Story = {
-  render: Template,
   args: {
-    min: 0,
-    max: 100,
-    value: 25,
-    step: 1,
-    thumbWidth: "24px",
-    thumbHeight: "24px",
-    thumbBorderWidth: "6px",
-    runnableTrackHeight: "8px",
     isDisabled: true,
-    withPouring: true,
   },
+  render: (args) => <SliderWithState {...args} />,
 };
 
-export const PreciseControl: Story = {
-  render: Template,
+export const WithCustomSteps: Story = {
   args: {
     min: 0,
-    max: 1,
-    value: 0.5,
-    step: 0.01,
-    thumbWidth: "24px",
-    thumbHeight: "24px",
-    thumbBorderWidth: "6px",
-    runnableTrackHeight: "8px",
-    withPouring: true,
+    max: 10,
+    step: 5,
+    value: 5,
   },
+  render: (args) => <SliderWithState {...args} />,
 };
 
 export const WithoutPouring: Story = {
-  render: Template,
   args: {
-    min: 0,
-    max: 100,
-    value: 50,
-    step: 1,
-    thumbWidth: "24px",
-    thumbHeight: "24px",
-    thumbBorderWidth: "6px",
-    runnableTrackHeight: "8px",
     withPouring: false,
   },
+  render: (args) => <SliderWithState {...args} />,
+};
+
+export const WithCustomSize: Story = {
+  args: {
+    thumbWidth: "24px",
+    thumbHeight: "24px",
+    thumbBorderWidth: "2px",
+    runnableTrackHeight: "8px",
+  },
+  render: (args) => (
+    <div style={{ width: "300px", padding: "20px" }}>
+      <SliderWithState {...args} />
+    </div>
+  ),
+};
+
+export const RTL: Story = {
+  parameters: {
+    direction: "rtl",
+  },
+  render: (args) => (
+    <div dir="rtl" style={{ width: "300px", padding: "20px" }}>
+      <SliderWithState {...args} />
+    </div>
+  ),
 };

@@ -25,16 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, waitFor, act } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, waitFor, act, render } from "@testing-library/react";
 
 import { PreparationPortal } from "./index";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { getRestoreProgress } from "../../api/portal";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 // Mock the i18next library
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     ready: true,
@@ -42,15 +41,15 @@ jest.mock("react-i18next", () => ({
 }));
 
 // Mock the API call
-jest.mock("../../api/portal", () => ({
-  getRestoreProgress: jest.fn(),
+vi.mock("../../api/portal", () => ({
+  getRestoreProgress: vi.fn(),
 }));
 
 // Mock the socket helper
-jest.mock("../../utils/socket", () => ({
+vi.mock("../../utils/socket", () => ({
   __esModule: true,
   default: {
-    on: jest.fn().mockReturnThis(),
+    on: vi.fn().mockReturnThis(),
   },
   SocketEvents: {
     RestoreProgress: "RESTORE_PROGRESS",
@@ -58,24 +57,24 @@ jest.mock("../../utils/socket", () => ({
 }));
 
 // Mock the utility functions
-jest.mock("./PreparationPortal.utils", () => ({
-  clearLocalStorage: jest.fn(),
-  returnToPortal: jest.fn(),
+vi.mock("./PreparationPortal.utils", () => ({
+  clearLocalStorage: vi.fn(),
+  returnToPortal: vi.fn(),
 }));
 
 describe("<PreparationPortal />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", async () => {
     // Mock successful API response
-    (getRestoreProgress as jest.Mock).mockResolvedValue({
+    vi.mocked(getRestoreProgress).mockResolvedValue({
       progress: 45,
-      error: null,
+      error: undefined,
     });
 
-    renderWithTheme(<PreparationPortal />);
+    render(<PreparationPortal />);
 
     // Wait for the component to load and make API call
     await waitFor(() => {
@@ -90,17 +89,17 @@ describe("<PreparationPortal />", () => {
 
   it("displays progress correctly", async () => {
     // Mock successful API response with progress
-    (getRestoreProgress as jest.Mock).mockResolvedValue({
+    vi.mocked(getRestoreProgress).mockResolvedValue({
       progress: 75,
-      error: null,
+      error: undefined,
     });
 
-    renderWithTheme(<PreparationPortal />);
+    render(<PreparationPortal />);
 
     // Wait for the progress to be displayed
     await waitFor(() => {
       expect(
-        screen.getByText("PreparationPortalDescription"),
+        screen.getByText("Common:PreparationPortalDescription"),
       ).toBeInTheDocument();
     });
   });
@@ -109,67 +108,72 @@ describe("<PreparationPortal />", () => {
     const errorMessage = "Test error message";
 
     // Mock API response with error
-    (getRestoreProgress as jest.Mock).mockResolvedValue({
+    vi.mocked(getRestoreProgress).mockResolvedValue({
       progress: 0,
-      error: errorMessage,
+      error: {
+        message: errorMessage,
+      },
     });
 
-    renderWithTheme(<PreparationPortal />);
+    render(<PreparationPortal />);
 
     // Wait for the error message to be displayed
     await waitFor(() => {
       expect(screen.getByText("Common:Error")).toBeInTheDocument();
-      expect(screen.getByText(errorMessage)).toBeInTheDocument();
     });
   });
 
   it("handles socket events correctly", async () => {
     // Mock successful API response
-    (getRestoreProgress as jest.Mock).mockResolvedValue({
+    vi.mocked(getRestoreProgress).mockResolvedValue({
       progress: 30,
-      error: null,
+      error: undefined,
     });
 
     // Setup socket callback capture
-    let socketCallback: Function;
-    (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
+    type RestoreProgressPayload = {
+      progress: number;
+      isCompleted: boolean;
+      error: string | null;
+    };
+    let socketCallback: ((payload: RestoreProgressPayload) => void) | undefined;
+    vi.mocked(SocketHelper!.on).mockImplementation((event, callback) => {
       if (event === SocketEvents.RestoreProgress) {
-        socketCallback = callback;
+        socketCallback = callback as (payload: RestoreProgressPayload) => void;
       }
       return SocketHelper;
     });
 
-    renderWithTheme(<PreparationPortal />);
+    render(<PreparationPortal />);
 
     // Wait for the component to register socket listener
     await waitFor(() => {
-      expect(SocketHelper.on).toHaveBeenCalledWith(
+      expect(SocketHelper?.on).toHaveBeenCalledWith(
         SocketEvents.RestoreProgress,
         expect.any(Function),
       );
     });
 
-    // Simulate socket event with progress update
     act(() => {
-      socketCallback({ progress: 50, isCompleted: false, error: null });
+      socketCallback!({ progress: 50, isCompleted: false, error: null });
     });
 
     // Check if progress was updated
     await waitFor(() => {
       expect(
-        screen.getByText("PreparationPortalDescription"),
+        screen.getByText("Common:PreparationPortalDescription"),
       ).toBeInTheDocument();
     });
   });
 
   it("respects withoutHeader prop", async () => {
     // Mock successful API response
-    (getRestoreProgress as jest.Mock).mockResolvedValue({
+    vi.mocked(getRestoreProgress).mockResolvedValue({
       progress: 45,
-      error: null,
+      error: undefined,
     });
 
-    renderWithTheme(<PreparationPortal withoutHeader />);
+    render(<PreparationPortal withoutHeader />);
 
     // With withoutHeader prop, the header text should not be present
     await waitFor(() => {

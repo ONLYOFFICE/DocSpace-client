@@ -3,7 +3,7 @@
   "content": "Pending",
   "content_en_sha1_hash": "96f608c16cef16caa06bf38901fb5f618a35a70b",
   "created_at": "2025-05-19T21:30:53.490Z",
-  "updated_at": "2025-05-26T07:57:32.279Z",
+  "updated_at": "2025-08-12T19:46:25.892Z",
   "comment": {
     "text": "This translation key \"PendingTitle\" is used to display a status indicating that data transfer or processing is pending. It appears in a progress indicator within a data reassignment dialog, providing users with visual feedback on the current state of the process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
       "line_number": 148,
-      "context": "</div>\n );\n \n const pendingNode = (\n <Text className=\"status status-pending\" noSelect>\n {t(\"PeopleTranslations:PendingTitle\")}...\n </Text>\n );\n \n const allDataTransferredNode = (\n <div className=\"transfer-information\">",
+      "context": "</div>\n );\n \n const pendingNode = (\n <Text className=\"status status-pending\">\n {t(\"PeopleTranslations:PendingTitle\")}...\n </Text>\n );\n \n const allDataTransferredNode = (\n <div className=\"transfer-information\">",
       "module": "/packages/client"
     }
   ],

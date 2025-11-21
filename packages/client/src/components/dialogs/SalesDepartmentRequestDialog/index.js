@@ -174,6 +174,7 @@ const SalesDepartmentRequestDialog = ({
           hasError={!isValidName}
           labelVisible={false}
           errorMessage={t("Common:RequiredField")}
+          dataTestId="request_name_field"
         >
           <TextInput
             id="your-name"
@@ -188,6 +189,7 @@ const SalesDepartmentRequestDialog = ({
             isDisabled={isLoading}
             value={name}
             onChange={onChangeName}
+            testId="request_name_input"
           />
         </FieldContainer>
 
@@ -198,6 +200,7 @@ const SalesDepartmentRequestDialog = ({
           labelVisible={false}
           hasError={!isValidEmail}
           errorMessage={emailError}
+          dataTestId="request_email_field"
         >
           <EmailInput
             id="registration-email"
@@ -208,6 +211,7 @@ const SalesDepartmentRequestDialog = ({
             onValidateInput={onValidateEmailInput}
             hasError={!isValidEmail}
             placeholder={t("SMTPSettings:EnterEmail")}
+            testId="request_email_input"
           />
         </FieldContainer>
 
@@ -218,6 +222,7 @@ const SalesDepartmentRequestDialog = ({
           hasError={!isValidDescription}
           labelVisible={false}
           errorMessage={t("Common:RequiredField")}
+          dataTestId="request_description_field"
         >
           <Textarea
             id="request-details"
@@ -230,6 +235,7 @@ const SalesDepartmentRequestDialog = ({
             isDisabled={isLoading}
             heightTextArea={100}
             maxLength={255}
+            dataTestId="request_description_textarea"
           />
         </FieldContainer>
       </ModalDialog.Body>
@@ -243,6 +249,7 @@ const SalesDepartmentRequestDialog = ({
           isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={3}
+          testId="send_sales_request_button"
         />
         <Button
           className="cancel-button"
@@ -252,6 +259,7 @@ const SalesDepartmentRequestDialog = ({
           isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={3}
+          testId="cancel_sales_request_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

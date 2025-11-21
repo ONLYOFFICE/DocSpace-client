@@ -30,6 +30,7 @@ import classNames from "classnames";
 
 import Planet12ReactSvg from "PUBLIC_DIR/images/icons/12/planet.react.svg";
 import LifetimeRoomIcon from "PUBLIC_DIR/images/lifetime-room.react.svg";
+import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 
 import { SettingsContext } from "../../../selectors/utils/contexts/Settings";
 import { getUserTypeTranslation } from "../../../utils/common";
@@ -38,12 +39,15 @@ import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
 import { RoomIcon } from "../../room-icon";
 import { Tooltip } from "../../tooltip";
+import { MCPIcon, MCPIconSize } from "../../mcp-icon";
 
-import { ItemProps, Data, TSelectorItem } from "../Selector.types";
+import { Data, ItemProps, TSelectorItem } from "../Selector.types";
 import { EmployeeType, RoomsType } from "../../../enums";
 import NewItem from "./NewItem";
 import InputItem from "./InputItem";
 import styles from "../Selector.module.scss";
+import { useTheme } from "../../../hooks/useTheme";
+import { globalColors } from "../../../themes";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -83,6 +87,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
   const { t } = useTranslation(["Common"]);
 
   const { displayFileExtension } = use(SettingsContext);
+  const { isBase } = useTheme();
 
   const isLoaded = isItemLoaded(index);
 
@@ -124,7 +129,28 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       userType,
       fileExst: ext,
       isTemplate,
+      disableMultiSelect,
+      isSeparator,
+      isSystem,
+      isMCP,
     } = item;
+
+    if (isSeparator) {
+      return (
+        <div style={style}>
+          <div
+            style={{
+              backgroundColor: isBase
+                ? globalColors.grayLightMid
+                : globalColors.grayDarkStrong,
+            }}
+            className={styles.selectorSeparator}
+          >
+            {"\u00A0"}
+          </div>
+        </div>
+      );
+    }
 
     if (isInputItem) {
       return (
@@ -202,6 +228,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       </Text>
     );
 
+    const itemAvatar = avatar ?? (isGroup && isSystem ? EveryoneIconUrl : "");
+
     return (
       <div
         key={`${label}-${avatar}-${role}`}
@@ -211,13 +239,16 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           [styles.disabled]: isDisabled,
           [styles.selectedSingle]: isSelected && !isMultiSelect,
           [styles.hoverable]: !isDisabled,
+          [styles.isSystem]: isSystem,
         })}
         data-testid={`selector-item-${index}`}
       >
-        {avatar || isGroup ? (
+        {isMCP ? (
+          <MCPIcon title={label} imgSrc={icon} size={MCPIconSize.Big} />
+        ) : avatar || isGroup ? (
           <Avatar
             className={styles.userAvatar}
-            source={avatar ?? ""}
+            source={itemAvatar}
             role={currentRole}
             size={AvatarSize.min}
             isGroup={isGroup}
@@ -256,7 +287,13 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         {renderCustomItem ? (
           renderCustomItem(label, typeLabel, email, isGroup, status)
         ) : (
-          <div className={styles.selectorItemName}>
+          <div
+            className={
+              isMultiSelect
+                ? styles.selectorItemNameMultiSelect
+                : styles.selectorItemName
+            }
+          >
             <Text
               className={classNames(styles.selectorItemLabel, "label-disabled")}
               fontWeight={600}
@@ -303,16 +340,14 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           >
             {disabledText}
           </Text>
-        ) : (
-          isMultiSelect && (
-            <Checkbox
-              className={classNames(styles.checkbox, "checkbox")}
-              isChecked={isSelected}
-              isDisabled={isDisabled}
-              onChange={onChangeAction}
-            />
-          )
-        )}
+        ) : disableMultiSelect ? null : isMultiSelect ? (
+          <Checkbox
+            className={classNames(styles.checkbox, "checkbox")}
+            isChecked={isSelected}
+            isDisabled={isDisabled}
+            onChange={onChangeAction}
+          />
+        ) : null}
       </div>
     );
   };

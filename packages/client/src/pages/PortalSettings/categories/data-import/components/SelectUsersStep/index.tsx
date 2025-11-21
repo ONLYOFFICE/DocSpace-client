@@ -45,6 +45,7 @@ import {
 } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
 import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
+import { NoEmailUsersBlock } from "../../sub-components/NoEmailUsersBlock";
 
 const REFRESH_TIMEOUT = 100;
 const PAGE_SIZE = 25;
@@ -58,6 +59,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
     incrementStep,
     decrementStep,
     withEmailUsers,
+    withoutEmailUsers,
     searchValue,
     setSearchValue,
     areCheckedUsersEmpty,
@@ -71,8 +73,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
 
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-    totalUsedUsers,
-    quota,
+    selectedWithEmail,
   } = props as InjectedSelectUsersStepProps;
 
   const [dataPortion, setDataPortion] = useState(
@@ -125,14 +126,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
       cancelButtonLabel={t("Common:Back")}
       showReminder
       displaySettings
-      saveButtonDisabled={
-        canDisable
-          ? areCheckedUsersEmpty ||
-            (quota.max && typeof quota.max === "number"
-              ? totalUsedUsers > quota.max
-              : false)
-          : false
-      }
+      saveButtonDisabled={canDisable ? areCheckedUsersEmpty : false}
       migrationCancelLabel={t("Settings:CancelImport")}
       onMigrationCancelClick={showCancelDialog}
     />
@@ -140,11 +134,21 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
 
   return (
     <Wrapper>
+      {withoutEmailUsers.length > 0 ? (
+        <NoEmailUsersBlock
+          t={t as TFunction}
+          users={withoutEmailUsers.length}
+          isSelectUsersStep
+        />
+      ) : null}
       {withEmailUsers.length > 0 ? (
         <>
           {Buttons}
 
-          <UsersInfoBlock />
+          <UsersInfoBlock
+            selectedUsers={selectedWithEmail}
+            totalUsers={withEmailUsers.length}
+          />
 
           <SearchInput
             id="search-users-input"
@@ -154,6 +158,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
             refreshTimeout={REFRESH_TIMEOUT}
             onClearSearch={onClearSearchInput}
             size={InputSize.base}
+            dataTestId="search_users_input"
           />
 
           <AccountsTable t={t as TFunction} accountsData={filteredAccounts} />
@@ -166,6 +171,8 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
               pagesPerPage={PAGE_SIZE}
             />
           ) : null}
+
+          {filteredAccounts.length > 0 ? Buttons : null}
         </>
       ) : (
         <>
@@ -175,8 +182,6 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
           {Buttons}
         </>
       )}
-
-      {filteredAccounts.length > 0 ? Buttons : null}
 
       {cancelUploadDialogVisible ? (
         <CancelUploadDialog
@@ -198,6 +203,7 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     decrementStep,
     users,
     withEmailUsers,
+    withoutEmailUsers,
     searchValue,
     setSearchValue,
     cancelMigration,
@@ -209,8 +215,7 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     setWorkspace,
     setMigratingWorkspace,
     setMigrationPhase,
-    totalUsedUsers,
-    quota,
+    selectedWithEmail,
   } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
@@ -220,6 +225,7 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     decrementStep,
     users,
     withEmailUsers,
+    withoutEmailUsers,
     searchValue,
     setSearchValue,
     cancelMigration,
@@ -234,7 +240,6 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
 
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-    totalUsedUsers,
-    quota,
+    selectedWithEmail,
   };
 })(observer(SelectUsersStep));

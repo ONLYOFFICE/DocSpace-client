@@ -50,6 +50,7 @@ const UserContent = ({
   standalone,
 
   isRoomAdmin: isRoomAdminUser,
+  itemIndex,
 }: UserContentProps) => {
   const { t } = useTranslation(["People", "Common"]);
   const theme = useTheme();
@@ -69,6 +70,7 @@ const UserContent = ({
   } = item;
 
   const isGuests = contactsTab === "guests";
+  const prefix = isGuests ? "contacts_guests" : "contacts_users";
 
   const isPending = statusType === "pending";
   const isDisabled = statusType === "disabled";
@@ -110,6 +112,7 @@ const UserContent = ({
         isTextOverflow
         noHover
         truncate
+        dataTestId={`${prefix}_name_link_${itemIndex}`}
       >
         {statusType === "pending"
           ? email
@@ -130,6 +133,7 @@ const UserContent = ({
         fontWeight={400}
         color={sideInfoColor}
         isTextOverflow
+        dataTestId={`${prefix}_role_or_email_link_${itemIndex}`}
       >
         {isGuests ? email : roleLabel}
       </Link>
@@ -141,6 +145,7 @@ const UserContent = ({
           fontWeight={400}
           color={sideInfoColor}
           isTextOverflow
+          dataTestId={`${prefix}_created_by_or_email_link_${itemIndex}`}
         >
           {isGuests ? item.createdBy?.displayName : email}
         </Link>
@@ -155,6 +160,7 @@ const UserContent = ({
           fontWeight={400}
           color={sideInfoColor}
           isTextOverflow
+          dataTestId={`${prefix}_registration_date_link_${itemIndex}`}
         >
           {item.registrationDate}
         </Link>
@@ -168,6 +174,7 @@ const UserContent = ({
           fontWeight={400}
           color={sideInfoColor}
           isTextOverflow
+          dataTestId={`${prefix}_space_quota_link_${itemIndex}`}
         >
           {spaceQuota}
         </Link>

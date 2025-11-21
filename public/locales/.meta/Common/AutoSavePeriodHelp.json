@@ -3,7 +3,7 @@
   "content": "The time shown below corresponds to the time zone set in the {{productName}}.",
   "content_en_sha1_hash": "fc425c15b268cad321e77bf210b8507fc99e1b7e",
   "created_at": "2025-05-26T07:15:40.662Z",
-  "updated_at": "2025-05-26T08:07:33.987Z",
+  "updated_at": "2025-08-04T07:30:01.748Z",
   "comment": {
     "text": "This translation key is used to provide contextual information about auto-saving periods in a scheduling component. It displays the time shown below in relation to the user's set time zone and is likely found within a schedule or calendar interface.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/auto-backup/sub-components/ScheduleComponent/ScheduleComponent.tsx",
-      "line_number": 74,
-      "context": "};\n }, [selectedPeriodNumber]);\n \n const renderHelpContent = () => (\n <Text className=\"schedule_description\" fontSize=\"12px\">\n {t(\"Common:AutoSavePeriodHelp\", { productName: t(\"Common:ProductName\") })}\n </Text>\n );\n \n return (\n <StyledScheduleComponent",
+      "file_path": "/packages/shared/pages/backup/auto-backup/sub-components/ScheduleComponent/ScheduleComponent.tsx",
+      "line_number": 78,
+      "context": "const renderHelpContent = () => (\n <Text\n className={classNames(styles.scheduleDescription, \"schedule_description\")}\n fontSize=\"12px\"\n >\n {t(\"Common:AutoSavePeriodHelp\", { productName: t(\"Common:ProductName\") })}\n </Text>\n );\n \n return (\n <div",
       "module": "/packages/shared"
     }
   ],

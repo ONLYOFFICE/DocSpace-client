@@ -76,8 +76,8 @@ test("link invite email render", async ({ page, baseUrl }) => {
 test("link invite login render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
+  await page.getByTestId("email_continue_button").click();
 
   await page.waitForURL(`${baseUrl}/login?loginData**`, {
     waitUntil: "load",
@@ -99,8 +99,8 @@ test("link invite registration render standalone", async ({
   clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
+  await page.getByTestId("email_continue_button").click();
 
   await page
     .locator("p")
@@ -128,8 +128,8 @@ test("link invite registration render no standalone", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
+  await page.getByTestId("email_continue_button").click();
 
   await page
     .locator("p")
@@ -152,8 +152,8 @@ test("link invite email error", async ({
   clientRequestInterceptor.use(selfGetByEmailHandler(port));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail.com");
+  await page.getByTestId("email_continue_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -165,15 +165,15 @@ test("link invite email error", async ({
 test("link invite login success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
+  await page.getByTestId("email_continue_button").click();
 
   await page.waitForURL(`${baseUrl}/login?loginData**`, {
     waitUntil: "load",
   });
 
-  await page.getByTestId("text-input").fill("qwerty123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "qwerty123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -203,15 +203,16 @@ test("link invite login error", async ({
   );
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
+  await page.getByTestId("email_continue_button").click();
 
   await page.waitForURL(`${baseUrl}/login?loginData**`, {
     waitUntil: "load",
   });
 
-  await page.getByTestId("text-input").fill("123");
-  await page.getByTestId("button").click();
+  await page.fill("[name='password']", "123");
+
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -229,16 +230,13 @@ test("link invite registration success standalone", async ({
   clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
+  await page.getByTestId("email_continue_button").click();
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "qwerty123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -272,19 +270,16 @@ test("link invite registration success no standalone", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
+  await page.getByTestId("email_continue_button").click();
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("checkbox").click();
+  await page.getByTestId("news_checkbox").click();
 
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -292,7 +287,7 @@ test("link invite registration success no standalone", async ({
     "link-invite-registration-success-no-standalone.png",
   ]);
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
@@ -311,13 +306,13 @@ test("link invite registration error standalone", async ({
   clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
+  await page.getByTestId("email_continue_button").click();
+  await page.fill("[name='password']", "123");
 
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.getByTestId("password_input_eye_off_icon").click();
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot(
     ["desktop", "link-invite", "link-invite-registration-error-standalone.png"],
@@ -339,13 +334,14 @@ test("link invite registration error no standalone", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email-input-invite").fill("mail@mail.com");
+  await page.getByTestId("email_continue_button").click();
 
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "123");
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("password_input_eye_off_icon").click();
+
+  await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot(
     [

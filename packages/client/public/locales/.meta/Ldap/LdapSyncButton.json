@@ -3,7 +3,7 @@
   "content": "Sync users",
   "content_en_sha1_hash": "ef3b2becca7b9d065d4fc56d36dab3c502ddc054",
   "created_at": "2025-05-19T21:30:54.308Z",
-  "updated_at": "2025-05-24T08:16:35.538Z",
+  "updated_at": "2025-08-21T11:22:39.894Z",
   "comment": {
     "text": "This translation key is used for the \"Sync users\" label on a button that triggers LDAP synchronization. The button appears in a sync container component and is disabled when LDAP integration is not enabled or UID is disabled.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
-      "line_number": 120,
-      "context": "tabIndex={-1}\n className=\"manual-sync-button\"\n size={buttonSize}\n primary\n onClick={onSync}\n label={t(\"LdapSyncButton\")}\n isDisabled={!isLdapEnabledOnServer || isUIDisabled}\n />\n \n <ProgressContainer operation={LDAPOperation.Sync} />",
+      "line_number": 118,
+      "context": "tabIndex={-1}\n className=\"manual-sync-button\"\n size={buttonSize}\n primary\n onClick={onSync}\n label={t(\"LdapSyncButton\")}\n isDisabled={!isLdapEnabledOnServer || isUIDisabled}\n testId=\"manual_sync_button\"\n />\n \n <ProgressContainer operation={LDAPOperation.Sync} />",
       "module": "/packages/client"
     }
   ],

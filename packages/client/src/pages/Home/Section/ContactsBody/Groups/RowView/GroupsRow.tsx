@@ -49,7 +49,7 @@ import {
 type GroupsRowProps = {
   item: TGroup;
   sectionWidth: number;
-
+  itemIndex: number;
   selection?: GroupsStore["selection"];
   bufferSelection?: GroupsStore["bufferSelection"];
   getGroupContextOptions?: GroupsStore["getGroupContextOptions"];
@@ -61,6 +61,7 @@ type GroupsRowProps = {
 
 const GroupsRowComponent = ({
   item,
+  itemIndex,
   selection,
   bufferSelection,
   getGroupContextOptions,
@@ -91,6 +92,9 @@ const GroupsRowComponent = ({
 
   const getContextModel = () => getModel!(t, item);
 
+  // used for selection-area
+  const value = `group_${item.id}_false_index_${itemIndex}`;
+
   return (
     <GroupsRowWrapper
       isChecked={isChecked}
@@ -98,7 +102,7 @@ const GroupsRowComponent = ({
       className={`group-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
       } ${item.id}`}
-      value={item.id}
+      value={value}
     >
       <div className="group-item">
         <GroupsRow
@@ -121,6 +125,7 @@ const GroupsRowComponent = ({
           getContextModel={getContextModel}
           mode="modern"
           className="group-row"
+          dataTestId={`contacts_groups_row_${itemIndex}`}
         >
           <GroupsRowContent
             className="group-row-content"
@@ -137,6 +142,7 @@ const GroupsRowComponent = ({
               isTextOverflow
               onClick={onOpenGroup}
               truncate
+              dataTestId={`contacts_groups_title_link_${itemIndex}`}
             >
               {item.name}
             </Link>
@@ -151,6 +157,7 @@ const GroupsRowComponent = ({
               lineHeight="20px"
               isTextOverflow
               onClick={onOpenGroup}
+              dataTestId={`contacts_groups_members_count_link_${itemIndex}`}
             >
               {t("PeopleTranslations:MembersCount", {
                 count: item.membersCount,

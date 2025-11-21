@@ -154,8 +154,8 @@ const RoomLogoCover = ({
   );
 
   const SelectedCover = React.useMemo(() => {
-    return covers?.filter((item) => item.id === cover?.cover?.id)[0];
-  }, [cover?.cover?.id, covers]);
+    return covers?.filter((item) => item.id === cover?.cover)[0];
+  }, [cover?.cover, covers]);
 
   const roomColor = cover?.color
     ? `#${cover?.color}`

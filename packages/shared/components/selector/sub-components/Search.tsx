@@ -75,6 +75,7 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
       onClearSearch={onClearSearchAction}
       size={InputSize.base}
       resetOnBlur
+      dataTestId="selector_search_input"
     />
   );
 });

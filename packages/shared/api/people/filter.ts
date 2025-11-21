@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import type { Location } from "react-router";
@@ -39,6 +38,7 @@ import {
 import { Nullable } from "../../types";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TFilterArea, TFilterSortBy, TSortOrder } from "./types";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 100;
@@ -62,6 +62,7 @@ const DEFAULT_INVITED_BY_ME = false;
 const DEFAULT_AREA = null;
 const DEFAULT_INCLUDE_STRANGERS = false;
 const DEFAULT_INCLUDE_SHARED = null;
+const DEFAULT_SELECT_USER_ID = null;
 
 const ACTIVE_EMPLOYEE_STATUS = EmployeeStatus.Active;
 
@@ -84,6 +85,25 @@ const INVITED_BY_ME = "invitedbyme";
 const AREA = "area";
 const INCLUDE_STRANGERS = "includeStrangers";
 const INCLUDE_SHARED = "includeShared";
+
+export const typeDefinition = {
+  sortBy: [
+    "AZ",
+    "displayname",
+    "type",
+    "department",
+    "email",
+    "usedspace",
+    "registrationDate",
+    "createdby",
+  ] as TFilterSortBy[],
+  sortOrder: ["ascending", "descending"] as TSortOrder[],
+  employeeStatus: Object.values(EmployeeStatus).map((value) => String(value)),
+  role: Object.values(EmployeeType).map((value) => String(value)),
+  payments: Object.values(PaymentsType).map((value) => String(value)),
+  accountLoginType: Object.values(AccountLoginType),
+  area: ["all", "people", "guests"] as TFilterArea[],
+};
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -112,6 +132,7 @@ class Filter {
       DEFAULT_AREA,
       DEFAULT_INCLUDE_STRANGERS,
       DEFAULT_INCLUDE_SHARED,
+      DEFAULT_SELECT_USER_ID,
     );
   }
 
@@ -202,6 +223,7 @@ class Filter {
       inviterId,
       area,
       includeStrangers,
+      DEFAULT_SELECT_USER_ID,
     );
 
     return newFilter;
@@ -230,6 +252,7 @@ class Filter {
     public area: Nullable<TFilterArea> = DEFAULT_AREA,
     public includeStrangers: boolean = DEFAULT_INCLUDE_STRANGERS,
     public includeShared: Nullable<boolean> = DEFAULT_INCLUDE_SHARED,
+    public selectUserId: Nullable<string | number> = DEFAULT_SELECT_USER_ID,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -250,6 +273,7 @@ class Filter {
     this.inviterId = inviterId;
     this.area = area;
     this.includeStrangers = includeStrangers;
+    this.selectUserId = selectUserId;
   }
 
   getStartIndex = () => {
@@ -265,6 +289,8 @@ class Filter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       pageCount,
       sortBy,
@@ -283,7 +309,7 @@ class Filter {
       area,
       includeStrangers,
       includeShared,
-    } = this;
+    } = fixedValidObject;
 
     let employeetype = null;
 
@@ -320,6 +346,8 @@ class Filter {
   };
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       pageCount,
       sortBy,
@@ -339,7 +367,7 @@ class Filter {
       area,
       includeStrangers,
       includeShared,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: {
       [PAGE]: typeof page;
@@ -431,6 +459,7 @@ class Filter {
           this.area,
           this.includeStrangers,
           this.includeShared,
+          this.selectUserId,
         );
   }
 

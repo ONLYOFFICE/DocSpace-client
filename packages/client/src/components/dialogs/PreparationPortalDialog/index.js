@@ -68,7 +68,7 @@ const PreparationPortalDialogWrapper = inject(({ backup }, { visible }) => {
     preparationPortalVisible,
     setVisible,
   };
-})(withTranslation("PreparationPortal")(observer(PreparationPortalDialog)));
+})(withTranslation("Common")(observer(PreparationPortalDialog)));
 
 const PreparationPortalDialogWrapperWithProps = (props) => (
   <PreparationPortalDialogWrapper {...props} />

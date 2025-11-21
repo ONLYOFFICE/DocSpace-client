@@ -31,7 +31,7 @@ import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { githubLightInit, githubDarkInit } from "@uiw/codemirror-theme-github";
 import { globalColors } from "@docspace/shared/themes";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div.attrs(injectDefaultTheme)`
   border: 1px solid ${(props) => props.theme.plugins.borderColor};
@@ -43,6 +43,10 @@ const StyledContainer = styled.div.attrs(injectDefaultTheme)`
 
   .cm-scroller {
     overflow-x: hidden;
+  }
+
+  .cm-gutters {
+    ${NoUserSelect}
   }
 `;
 

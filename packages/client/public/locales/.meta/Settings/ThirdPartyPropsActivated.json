@@ -3,7 +3,7 @@
   "content": "Updated successfully",
   "content_en_sha1_hash": "6d518cb77f8fee6fb91d236f4b3c5be23b28d204",
   "created_at": "2025-05-19T21:30:52.896Z",
-  "updated_at": "2025-05-24T03:55:23.045Z",
+  "updated_at": "2025-08-11T18:11:59.269Z",
   "comment": {
     "text": "This translation key is used for success messages when a consumer's third-party properties are updated successfully. It appears in a modal dialog after updating the consumer's properties via a specific button action. Translators should provide a message that conveys a positive outcome of this update process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
-      "line_number": 161,
+      "line_number": 163,
       "context": "};\n updateConsumerProps(data)\n .then(() => {\n onChangeLoading(false);\n hideLoader();\n toastr.success(t(\"ThirdPartyPropsActivated\"));\n \n const channel = new BroadcastChannel(\"thirdpartyActivation\");\n channel.postMessage(true);\n })\n .catch((error) => {",
       "module": "/packages/client"
     }

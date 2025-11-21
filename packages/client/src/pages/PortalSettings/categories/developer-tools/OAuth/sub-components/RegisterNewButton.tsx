@@ -58,6 +58,7 @@ const RegisterNewButton = ({
       primary
       onClick={onClick}
       isDisabled={isDisabled}
+      testId="register_new_app_button"
     />
   );
 };

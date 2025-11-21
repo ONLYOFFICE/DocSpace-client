@@ -1,0 +1,28 @@
+{
+  "key_path": "NoAIAgentsDescription",
+  "content": "It looks like there are no agents ready to continue this chat. Create a new agent to pick up the conversation right where it left off.",
+  "content_en_sha1_hash": "b8f3801ce205d8ab2b39d02905f634cb46d49e34",
+  "created_at": "2025-10-27T16:14:24.547Z",
+  "updated_at": "2025-11-13T10:21:18.101Z",
+  "comment": {
+    "text": "This text explains to the user that no AI agents are currently available to continue the conversation. It appears as a description on an empty screen, prompting them to create a new agent to resume the chat. Translators should focus on conveying the message that a new agent is needed to proceed.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:33:50.699Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
+      "line_number": 248,
+      "context": "isBase\n ? EmptyScreenAIAgentsSelectorSvgUrl\n : EmptyScreenAIAgentsSelectorSvgUrlDark\n }\n emptyScreenHeader={t(\"Common:NoAIAgents\")}\n emptyScreenDescription={t(\"Common:NoAIAgentsDescription\")}\n searchEmptyScreenImage={\n isBase\n ? EmptyScreenAIAgentsSelectorSvgUrl\n : EmptyScreenAIAgentsSelectorSvgUrlDark\n }",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

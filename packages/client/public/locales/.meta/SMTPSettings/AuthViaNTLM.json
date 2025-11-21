@@ -3,7 +3,7 @@
   "content": "Auth via NTLM",
   "content_en_sha1_hash": "207bb87de2e4b6d870453e16a0021127ffef3143",
   "created_at": "2025-05-19T21:30:53.288Z",
-  "updated_at": "2025-05-24T02:50:23.747Z",
+  "updated_at": "2025-08-11T18:11:59.252Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Auth via NTLM\" as a label for a checkbox in a settings UI. When checked, it likely enables authentication using NTLM protocol. It appears in the SMTP Settings page under Custom Settings.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 154,
-      "context": "/>\n \n <Checkbox\n className=\"smtp_settings_checkbox\"\n name={USE_NTLM}\n label={t(\"AuthViaNTLM\")}\n isChecked={settings[USE_NTLM]}\n onChange={onChangeCheckbox}\n isDisabled={isLoading || !settings[AUTHENTICATION]}\n />\n </div>",
+      "line_number": 157,
+      "context": "/>\n \n <Checkbox\n className=\"smtp_settings_checkbox\"\n name={USE_NTLM}\n label={t(\"AuthViaNTLM\")}\n isChecked={settings[USE_NTLM]}\n onChange={onChangeCheckbox}\n isDisabled={isLoading || !settings[AUTHENTICATION]}\n dataTestId=\"smtp_auth_ntlm_checkbox\"\n />",
       "module": "/packages/client"
     }
   ],

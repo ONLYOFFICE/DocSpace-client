@@ -39,13 +39,17 @@ export interface CampaignsBannerProps {
   campaignTranslate: ITranslate;
   /** Config */
   campaignConfig: IConfig;
+  /** Disable text fitting */
+  disableFitText?: boolean;
   /** Button/Link action */
   onAction(type?: string, url?: string): void;
   /** Close action */
   onClose(): void;
+  /** Action icon */
+  actionIcon?: string;
 }
 
-interface ITranslate {
+export interface ITranslate {
   Header?: string;
   SubHeader?: string;
   Text?: string;
@@ -57,6 +61,7 @@ interface IStyle {
   color?: string;
   fontSize?: string;
   fontWeight?: string;
+  lineHeight?: string;
 }
 
 interface IAction {

@@ -3,7 +3,7 @@
   "content": "Enter the user object attribute used to determine whether this user is a member of the groups.",
   "content_en_sha1_hash": "bfa3ad99e6bf224eef7059ceb7179482fd4d1859",
   "created_at": "2025-05-19T21:30:54.226Z",
-  "updated_at": "2025-05-24T08:30:28.923Z",
+  "updated_at": "2025-08-11T18:11:59.245Z",
   "comment": {
     "text": "This translation key describes a tooltip that will be displayed when users are entering an LDAP user attribute to determine group membership. The tooltip is used in the \"LdapUserAttribute\" field on the Portal Settings page, providing context for users as they enter their LDAP user attribute values.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 136,
-      "context": "style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.userAttribute}\n labelText={t(\"LdapUserAttribute\")}\n isRequired\n tooltipContent={t(\"LdapGroupUserAttributeTooltip\")}\n >\n <LdapFieldComponent\n className=\"field-input\"\n onChange={onChange}\n name={USER_ATTRIBUTE}",
+      "line_number": 140,
+      "context": "style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.userAttribute}\n labelText={t(\"LdapUserAttribute\")}\n isRequired\n tooltipContent={t(\"LdapGroupUserAttributeTooltip\")}\n dataTestId=\"user_attribute_field_container\"\n >\n <LdapFieldComponent\n className=\"field-input\"\n onChange={onChange}",
       "module": "/packages/client"
     }
   ],

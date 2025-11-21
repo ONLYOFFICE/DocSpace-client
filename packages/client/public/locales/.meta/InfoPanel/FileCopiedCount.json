@@ -3,13 +3,19 @@
   "content": "Files copied ({{count}}).",
   "content_en_sha1_hash": "a934606c440fb99de1855571a1ee37bacb4a0754",
   "created_at": "2025-05-19T21:30:54.794Z",
-  "updated_at": "2025-06-30T12:20:31.338Z",
+  "updated_at": "2025-08-04T07:30:01.222Z",
   "comment": {
     "text": "This translation key is used to display a count of files that have been copied within an info panel on a file history page. It appears as part of the UI in a specific view when related items are present and helps users understand the scope of changes made to a file.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:41:07.519Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 91,
+      "context": "return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FileCopied\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 85,

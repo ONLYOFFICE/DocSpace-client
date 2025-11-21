@@ -24,11 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useMemo, useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
 import { getCountTilesInRow } from "@docspace/shared/utils";
+
+const getCountOfMissingFilesTiles = (itemsLength, countTilesInRow) => {
+  const division = itemsLength % countTilesInRow;
+  return division ? countTilesInRow - division : 0;
+};
 
 const SelectionArea = (props) => {
   const {
@@ -40,6 +45,8 @@ const SelectionArea = (props) => {
     filesLength,
     isInfoPanelVisible,
     isIndexEditingMode,
+    selectionAreaIsEnabled,
+    setWithContentSelection,
   } = props;
 
   const [countTilesInRow, setCountTilesInRow] = useState();
@@ -63,33 +70,49 @@ const SelectionArea = (props) => {
     };
   }, [isInfoPanelVisible, onResize]);
 
-  const onMove = ({ added, removed, clear }) => {
-    setSelections(added, removed, clear);
-  };
+  const onMove = useCallback(
+    ({ added, removed, clear }) => {
+      setSelections(added, removed, clear);
+    },
+    [setSelections],
+  );
+
+  const onMouseDown = useCallback(() => {
+    setWithContentSelection(false);
+  }, [setWithContentSelection]);
 
   const selectableClass = viewAs === "tile" ? "files-item" : "window-item";
 
-  const getCountOfMissingFilesTiles = (itemsLength) => {
-    const division = itemsLength % countTilesInRow;
-    return division ? countTilesInRow - division : 0;
-  };
+  const arrayTypes = useMemo(
+    () => [
+      {
+        type: "file",
+        rowCount: Math.ceil(filesLength / countTilesInRow),
+        rowGap: 14,
+        countOfMissingTiles: getCountOfMissingFilesTiles(
+          filesLength,
+          countTilesInRow,
+        ),
+      },
+      {
+        type: "folder",
+        rowCount: Math.ceil(foldersLength / countTilesInRow),
+        rowGap: isRooms ? 14 : 12,
+        countOfMissingTiles: getCountOfMissingFilesTiles(
+          foldersLength,
+          countTilesInRow,
+        ),
+      },
+    ],
+    [filesLength, foldersLength, countTilesInRow, isRooms],
+  );
 
-  const arrayTypes = [
-    {
-      type: "file",
-      rowCount: Math.ceil(filesLength / countTilesInRow),
-      rowGap: 14,
-      countOfMissingTiles: getCountOfMissingFilesTiles(filesLength),
-    },
-    {
-      type: "folder",
-      rowCount: Math.ceil(foldersLength / countTilesInRow),
-      rowGap: isRooms ? 14 : 12,
-      countOfMissingTiles: getCountOfMissingFilesTiles(foldersLength),
-    },
-  ];
+  const isEnabled =
+    selectionAreaIsEnabled && !isMobile && !dragging && !isIndexEditingMode;
 
-  return isMobile || dragging || isIndexEditingMode ? null : (
+  if (!isEnabled) return null;
+
+  return (
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"
@@ -103,16 +126,24 @@ const SelectionArea = (props) => {
       folderHeaderHeight={35}
       defaultHeaderHeight={46}
       arrayTypes={arrayTypes}
+      onMouseDown={onMouseDown}
     />
   );
 };
 
 export default inject(
-  ({ filesStore, treeFoldersStore, infoPanelStore, indexingStore }) => {
+  ({
+    filesStore,
+    treeFoldersStore,
+    infoPanelStore,
+    indexingStore,
+    hotkeyStore,
+  }) => {
     const { dragging, viewAs, setSelections, folders, files } = filesStore;
     const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
     const { isVisible: isInfoPanelVisible } = infoPanelStore;
     const { isIndexEditingMode } = indexingStore;
+    const { selectionAreaIsEnabled, setWithContentSelection } = hotkeyStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -125,6 +156,8 @@ export default inject(
       filesLength: files.length,
       isInfoPanelVisible,
       isIndexEditingMode,
+      selectionAreaIsEnabled,
+      setWithContentSelection,
     };
   },
 )(observer(SelectionArea));

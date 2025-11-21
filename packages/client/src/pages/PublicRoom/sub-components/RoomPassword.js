@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import { PublicRoomPasswordForm } from "@docspace/shared/pages/PublicRoom";
 
 const RoomPassword = (props) => {
-  const { t, roomKey, setRoomData, roomTitle, gotoFolder } = props;
+  const { t, roomKey, setRoomData, gotoFolder, validationData } = props;
 
   const onSuccessValidation = (res) => {
     if (res.shared) {
@@ -45,7 +45,7 @@ const RoomPassword = (props) => {
     <PublicRoomPasswordForm
       t={t}
       roomKey={roomKey}
-      roomTitle={roomTitle}
+      validationData={validationData}
       onSuccessValidationCallback={onSuccessValidation}
     />
   );
@@ -54,12 +54,12 @@ const RoomPassword = (props) => {
 export default inject(({ publicRoomStore }) => {
   const { validatePublicRoomPassword, setRoomData, gotoFolder } =
     publicRoomStore;
-  const { roomTitle } = publicRoomStore;
+  const { validationData } = publicRoomStore;
 
   return {
     validatePublicRoomPassword,
     setRoomData,
-    roomTitle,
     gotoFolder,
+    validationData,
   };
 })(withTranslation(["Common", "UploadPanel"])(observer(RoomPassword)));

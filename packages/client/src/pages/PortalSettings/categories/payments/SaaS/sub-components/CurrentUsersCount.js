@@ -64,7 +64,6 @@ const CurrentUsersCountContainer = (props) => {
         fontSize="44px"
         fontWeight={700}
         textAlign="center"
-        noSelect
         className="current-admins-number"
       >
         {maxCountManagersByQuota}

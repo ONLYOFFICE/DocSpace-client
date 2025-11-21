@@ -51,6 +51,7 @@ const Modal = ({
   autoMaxHeight,
   autoMaxWidth,
   onClose,
+  onBackClick,
   isLoading,
   header,
   body,
@@ -62,15 +63,18 @@ const Modal = ({
   containerVisible,
   isDoubleFooterLine,
 
-  embedded,
   withForm,
   withoutPadding,
+  withoutHeaderMargin,
   hideContent,
 
   isInvitePanelLoader = false,
   onSubmit,
   withBodyScrollForcibly = false,
   withBorder = false,
+  dataTestId,
+  scrollbarCreateContext,
+  closeOnBackdropClick = true,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -90,7 +94,8 @@ const Modal = ({
 
   const validateOnMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
-    if (target.id === "modal-onMouseDown-close") onClose?.();
+    if (target.id === "modal-onMouseDown-close" && closeOnBackdropClick)
+      onClose?.();
   };
 
   const headerProps = React.isValidElement(header)
@@ -155,6 +160,7 @@ const Modal = ({
     headerProps.className,
     {
       [styles.displayTypeModal]: currentDisplayType === "modal",
+      [styles.withoutHeaderMargin]: withoutHeaderMargin,
     },
   );
 
@@ -188,7 +194,7 @@ const Modal = ({
       className={classNames(styles.modal, {
         [styles.modalActive]: visible,
       })}
-      data-testid="modal"
+      data-testid={dataTestId ?? "modal"}
     >
       <ModalBackdrop
         className={classNames({
@@ -238,6 +244,7 @@ const Modal = ({
                       className={headerClassName}
                       header={headerComponent}
                       onCloseClick={onClose}
+                      onBackClick={onBackClick}
                       {...rest}
                     />
                   ) : null}
@@ -255,6 +262,7 @@ const Modal = ({
                           className="modal-scroll"
                           noScrollY={isScrollLocked}
                           paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+                          createContext={scrollbarCreateContext}
                         >
                           {bodyComponent}
                         </Scrollbar>

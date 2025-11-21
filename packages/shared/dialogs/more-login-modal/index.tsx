@@ -30,7 +30,6 @@ import { ReactSVG } from "react-svg";
 import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 
 import { Text } from "../../components/text";
-import { Button, ButtonSize } from "../../components/button";
 import { PROVIDERS_DATA } from "../../constants";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { getProviderLabel } from "../../utils/common";
@@ -59,12 +58,17 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
       onClose={onClose}
       displayType={ModalDialogType.aside}
       withBodyScroll
+      withoutPadding
     >
       <ModalDialog.Header>{t("Common:ContinueWith")}</ModalDialog.Header>
       <ModalDialog.Body>
         {ssoUrl ? (
-          <div className={styles.providerRow} key="ProviderItemSSO">
-            <ReactSVG src={SsoReactSvgUrl} />
+          <div
+            className={styles.providerRow}
+            key="ProviderItemSSO"
+            onClick={() => (window.location.href = ssoUrl)}
+          >
+            <ReactSVG className={styles.providerIcon} src={SsoReactSvgUrl} />
             <Text
               fontSize="14px"
               fontWeight="600"
@@ -73,12 +77,6 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
             >
               {ssoLabel || getProviderLabel("sso-full", t)}
             </Text>
-            <Button
-              label={t("Common:ContinueButton")}
-              className="signin-button"
-              size={ButtonSize.small}
-              onClick={() => (window.location.href = ssoUrl)}
-            />
           </div>
         ) : null}
         {providers?.map((item) => {
@@ -90,8 +88,17 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
           const IconComponent = icon;
 
           return (
-            <div className={styles.providerRow} key={`ProviderItem${label}`}>
-              <IconComponent />
+            <div
+              className={styles.providerRow}
+              key={`ProviderItem${label}`}
+              data-url={item.url}
+              data-providername={item.provider}
+              onClick={onSocialLoginClick}
+              data-testid={`more-login-provider-item-${label}`}
+            >
+              <div className={styles.providerIcon}>
+                <IconComponent />
+              </div>
               <Text
                 fontSize="14px"
                 fontWeight="600"
@@ -100,14 +107,6 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
               >
                 {getProviderLabel(label, t)}
               </Text>
-              <Button
-                label={t("Common:ContinueButton")}
-                className="signin-button"
-                size={ButtonSize.small}
-                data-url={item.url}
-                data-providername={item.provider}
-                onClick={onSocialLoginClick}
-              />
             </div>
           );
         })}

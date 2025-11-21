@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "නම හෝ විද්‍යුත් ලිපිනයෙන් සොයා සහ ආරාධනා කරන්න",
   "InviteViaLink": "සබැඳියකින් ආරාධනය",
   "InviteViaLinkDescriptionAccounts": "{{productName}} වෙත ඉබේම පිවිසීමට විශ්ව සබැඳියක් සාදන්න",
+  "InviteViaLinkDescriptionAgentGuest": "ආගන්තුකයෙකු ලෙස නියෝජිතයා තුළ ස්වයං-අවසරය සඳහා විශ්වීය සබැඳියක් සාදන්න.",
+  "InviteViaLinkDescriptionAgentMembers": "නියෝජිතයා තුළ ස්වයං-අවසරය ලබා ගැනීම සඳහා {{productName}} සාමාජිකයින් සඳහා විශ්වීය සබැඳියක් සාදන්න.",
   "InviteViaLinkDescriptionRoomGuest": "මානයන්ගේ තනි අවසරයකට විශ්වීය සබැඳියක්, කාමරයකට ආගන්තුකයා ලෙස සාදා ගන්න.",
   "InviteViaLinkDescriptionRoomMembers": "{{productName}} සාමාජිකයන් සඳහා, පහසුවෙන් තහවුරු කිරීමේ පහසුකමක් සදහා විශ්වීය සබැඳියක් සාදා ගන්න.",
   "LinkCopySuccess": "සබැඳිය පිටපත් විය",
   "SendInvitation": "ආරාධනය යවන්න",
+  "UserAgentMaxAvailableRoleWarning": "අමුත්තන් සහ පරිශීලකයින් නියෝජිත කළමනාකරුවන් ලෙස පැවරිය නොහැක. නිශ්චිත භූමිකාව සඳහා සුදුසු වන්නේ කාමර සහ {{productName}} පරිපාලකයින් පමණි.",
   "UserMaxAvailableRoleWarning": "ආගන්තුකයින් සහ පරිශීලකයින් කාමර කළමණාකරුවන් ලෙස පත් කළ නොහැකි අතර, කාමර සහ {{productName}} පරිපාලකයින් පමණක් එම නිශ්චිත භූමිකාව සඳහා සුදුසු වේ.",
   "UsersAlreadyAdded": "ඇතැම් අය දැනටමත් එක් කර ඇත",
   "UsersCannotBeAdded": "අවලංගු සම්බන්ධතා ක්‍රියාවලියට එක් කිරීමට නොහැකිය."

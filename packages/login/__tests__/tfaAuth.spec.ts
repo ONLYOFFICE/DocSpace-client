@@ -38,10 +38,9 @@ const QUERY_PARAMS = [
     name: "type",
     value: "TfaAuth",
   },
-
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
 ];
 
@@ -75,7 +74,7 @@ test("tfa auth render", async ({ page, baseUrl }) => {
 test("tfa auth success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -83,7 +82,7 @@ test("tfa auth success", async ({ page, baseUrl }) => {
     "tfa-auth-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_code_continue_button").click();
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
@@ -105,9 +104,9 @@ test("tfa auth error not validated", async ({
   clientRequestInterceptor.use(tfaAppValidateHandler(port, 400));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_code_continue_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -126,8 +125,8 @@ test("tfa auth redirects to room after successful submission", async ({
     sessionStorage.setItem("referenceUrl", "/rooms/shared/1");
   });
 
-  await page.getByTestId("text-input").fill("123456");
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_code_input").fill("123456");
+  await page.getByTestId("app_code_continue_button").click();
 
   await page.waitForURL(`${baseUrl}/rooms/shared/1`);
 

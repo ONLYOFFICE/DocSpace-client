@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TRoom } from "../api/rooms/types";
+import { TCreatedBy } from "../types";
+import { TRoom, TRoomLifetime, TWatermark } from "../api/rooms/types";
+import { TConnectingStorage } from "../api/files/types";
+
 import { RoomsType } from "../enums";
 
 const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
@@ -54,11 +57,68 @@ const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
   return startRoomParams;
 };
 
+export type TRoomStorageLocation = {
+  title: string;
+  parentId: number;
+  providerKey?: string;
+  iconSrc: string;
+  thirdpartyAccount?: unknown;
+  storageFolderId?: string;
+  isThirdparty?: boolean;
+  provider?: TConnectingStorage;
+};
+
+export type TRoomTagsParams = {
+  id: string | number;
+  name: string;
+  isNew?: boolean;
+  isDefault?: boolean;
+};
+
+export type TRoomIconParams = {
+  uploadedFile: string | null;
+  tmpFile: string;
+  x: number;
+  y: number;
+  zoom: number;
+};
+
+export type TRoomParams = {
+  roomId: number;
+  type: RoomsType;
+  title: string;
+  tags: TRoomTagsParams[];
+  isPrivate: boolean;
+  storageLocation: TRoomStorageLocation;
+  icon: TRoomIconParams;
+  withCover: boolean;
+  previewIcon: string | null;
+  roomOwner: TCreatedBy;
+  canChangeRoomOwner: boolean;
+  indexing?: boolean;
+  lifetime?: TRoomLifetime;
+  denyDownload?: boolean;
+  watermark?: TWatermark;
+  quota?: number;
+  invitations?: unknown[];
+  isAvailable?: boolean;
+  roomType?: RoomsType;
+  logo?: unknown;
+  createAsNewFolder?: boolean;
+  isTemplate?: boolean;
+  copyLogo?: boolean;
+  prompt?: string;
+  providerId?: number;
+  modelId?: string;
+  mcpServers?: string[];
+  mcpServersInitial?: string[];
+};
+
 const getFetchedRoomParams = (
   item: TRoom,
   getThirdPartyIcon: (provider: string) => string,
   isDefaultRoomsQuotaSet: boolean,
-) => {
+): TRoomParams => {
   const startTags = Object.values(item.tags);
   const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
 
@@ -76,7 +136,7 @@ const getFetchedRoomParams = (
     },
     isPrivate: false,
     icon: {
-      uploadedFile: item.logo.original,
+      uploadedFile: item?.logo?.original,
       tmpFile: "",
       x: 0.5,
       y: 0.5,
@@ -90,6 +150,9 @@ const getFetchedRoomParams = (
     lifetime: item.lifetime,
     denyDownload: item.denyDownload,
     watermark: item.watermark,
+    prompt: item.chatSettings?.prompt,
+    providerId: item.chatSettings?.providerId,
+    modelId: item.chatSettings?.modelId,
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,
     }),

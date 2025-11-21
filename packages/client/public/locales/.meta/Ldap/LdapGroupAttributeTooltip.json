@@ -3,7 +3,7 @@
   "content": "Enter the group object attribute which specifies what users this group includes.",
   "content_en_sha1_hash": "5b3d1b4bb763948324a201aba42a863bc2eb8189",
   "created_at": "2025-05-19T21:30:54.204Z",
-  "updated_at": "2025-05-24T08:35:05.779Z",
+  "updated_at": "2025-08-11T18:11:59.246Z",
   "comment": {
     "text": "Enter the group object attribute that specifies which users are included in this group. This tooltip is used to provide context and guidance while filling out the Group Attribute field on the Portal Settings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 200,
-      "context": "labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.groupAttribute}\n labelText={t(\"LdapGroupAttribute\")}\n isRequired\n tooltipContent={t(\"LdapGroupAttributeTooltip\")}\n >\n <LdapFieldComponent\n className=\"field-input\"\n onChange={onChange}\n name={GROUP_ATTRIBUTE}",
+      "line_number": 210,
+      "context": "labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.groupAttribute}\n labelText={t(\"LdapGroupAttribute\")}\n isRequired\n tooltipContent={t(\"LdapGroupAttributeTooltip\")}\n dataTestId=\"group_attribute_field_container\"\n >\n <LdapFieldComponent\n className=\"field-input\"\n onChange={onChange}",
       "module": "/packages/client"
     }
   ],

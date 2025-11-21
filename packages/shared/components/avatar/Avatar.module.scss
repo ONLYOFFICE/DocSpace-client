@@ -1,9 +1,8 @@
 @use "../../styles/variables/colors";
-@use "../../styles/common-icons-style";
 @use "../../styles/mixins";
 
 .emptyIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
   border-radius: var(--avatar-image-border-radius);
 }
 
@@ -297,5 +296,5 @@
 
 .adminIcon,
 .ownerIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
 }

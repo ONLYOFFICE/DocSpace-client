@@ -3,7 +3,7 @@
   "content": "Share folder",
   "content_en_sha1_hash": "687c04c1582283164463bd86282100f45da05c54",
   "created_at": "2025-05-19T21:30:56.180Z",
-  "updated_at": "2025-05-26T07:57:32.335Z",
+  "updated_at": "2025-08-12T19:46:25.944Z",
   "comment": {
     "text": "This translation key is used to display a folder sharing label on a file-related modal dialog. The phrase \"Share folder\" will be shown when the user interacts with the dialog related to sharing files within the application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ShareFolderDialog/index.js",
       "line_number": 56,
-      "context": "onClose();\n };\n \n return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Files:ShareFolder\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400} noSelect>\n {t(\"Files:ShareFolderDescription\")}\n </Text>\n </ModalDialog.Body>",
+      "context": "onClose();\n };\n \n return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Files:ShareFolder\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Files:ShareFolderDescription\")}\n </Text>\n </ModalDialog.Body>",
       "module": "/packages/client"
     }
   ],

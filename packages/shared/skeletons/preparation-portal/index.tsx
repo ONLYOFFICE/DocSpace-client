@@ -56,7 +56,10 @@ import styles from "./PreparationPortal.module.scss";
 
 const PreparationPortalLoader = () => {
   return (
-    <div className={styles.preparationPortal}>
+    <div
+      className={styles.preparationPortal}
+      data-testid="preparation-portal-loader"
+    >
       <RectangleSkeleton
         className={styles.rectangleSkeleton1}
         width="100%"

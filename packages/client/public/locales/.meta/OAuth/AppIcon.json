@@ -3,7 +3,7 @@
   "content": "App icon",
   "content_en_sha1_hash": "abde7a74c8a0f938af0073398f6c0e085a7f83b7",
   "created_at": "2025-05-19T21:30:53.793Z",
-  "updated_at": "2025-06-30T12:20:31.466Z",
+  "updated_at": "2025-08-04T07:30:01.425Z",
   "comment": {
     "text": "The AppIcon translation key is used to display the label for a select component that allows users to choose an app icon in the ClientForm. This text appears as the header of the select group and should be translated to provide the correct option label.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 174,
-      "context": "errorMessage={t(\"ThisRequiredField\")}\n hasError={isLogoRequiredError}\n className=\"icon-field\"\n >\n <SelectGroup\n label={t(\"AppIcon\")}\n value={logoValue}\n selectLabel={t(\"SelectNewImage\")}\n description={t(\"IconDescription\")}\n onSelect={onSelect}\n />",
+      "line_number": 177,
+      "context": "hasError={isLogoRequiredError}\n className=\"icon-field\"\n dataTestId=\"app_icon_field\"\n >\n <SelectGroup\n label={t(\"AppIcon\")}\n value={logoValue}\n selectLabel={t(\"SelectNewImage\")}\n description={t(\"IconDescription\")}\n onSelect={onSelect}\n dataTestId=\"select_new_image_container\"",
       "module": "/packages/client"
     }
   ],

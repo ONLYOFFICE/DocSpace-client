@@ -3,7 +3,7 @@
   "content": "Go to service",
   "content_en_sha1_hash": "200befc35fcfc552c218e3f4166e067b196bc0c2",
   "created_at": "2025-06-24T16:31:06.722Z",
-  "updated_at": "2025-06-30T12:20:31.271Z",
+  "updated_at": "2025-08-11T18:11:59.159Z",
   "comment": {
     "text": "The translation key \"GoToService\" is used to translate the phrase \"Go to service\" which is displayed on a button in a modal dialog. The button prompts the user to take action, likely to access a service or view more information.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
       "line_number": 157,
-      "context": ") : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={t(\"GoToService\")}\n size={ButtonSize.normal}\n primary\n onClick={onClick}\n />\n <Button",
+      "context": ") : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={t(\"GoToService\")}\n size={ButtonSize.normal}\n primary\n onClick={onClick}\n testId=\"go_to_service_button\"\n />",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Expires",
   "content_en_sha1_hash": "a99be3da0c9da2f3c64500b5ef8a8e48f503d127",
   "created_at": "2025-05-19T21:30:53.889Z",
-  "updated_at": "2025-05-24T07:28:53.393Z",
+  "updated_at": "2025-08-04T07:30:01.442Z",
   "comment": {
     "text": "This translation key \"Expires\" is used to display a label for the expiration date of an item in the user interface. It appears in a modal dialog body and is part of a specific UI component that displays information about created dates and expiration times.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 231,
-      "context": "maxLength={10000}\n />\n <Text className=\"dates\">\n <strong>{t(\"Files:ByCreation\")}</strong>: {dates.created}\n <br />\n <strong>{t(\"Expires\")}</strong>: {dates.expires}\n </Text>\n </>\n )}\n </StyledGenerateDevelopTokenContainer>\n </ModalDialog.Body>",
+      "line_number": 241,
+      "context": "testId=\"generate_token_input\"\n />\n <Text dataTestId=\"generate_token_dates\" className=\"dates\">\n <strong>{t(\"Files:ByCreation\")}</strong>: {dates.created}\n <br />\n <strong>{t(\"Expires\")}</strong>: {dates.expires}\n </Text>\n </>\n )}\n </StyledGenerateDevelopTokenContainer>\n </ModalDialog.Body>",
       "module": "/packages/client"
     }
   ],

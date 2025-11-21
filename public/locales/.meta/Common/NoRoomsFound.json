@@ -3,7 +3,7 @@
   "content": "No rooms found",
   "content_en_sha1_hash": "ad2c3ebdb031938200e1b48e4c1f024860a8d3b2",
   "created_at": "2025-05-19T21:30:46.846Z",
-  "updated_at": "2025-05-26T07:57:32.921Z",
+  "updated_at": "2025-08-12T19:46:26.355Z",
   "comment": {
     "text": "The translation key \"NoRoomsFound\" is used to display a message indicating that no rooms are available for selection in an empty screen form. It appears as a heading on an empty room selection screen and provides context for users when no rooms can be found.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
       "line_number": 73,
-      "context": "className=\"empty-image\"\n src={formRoomEmptyScreenImage}\n alt=\"empty-screen\"\n />\n <Heading level={3} className=\"empty-header\">\n {t(\"Common:NoRoomsFound\")}\n </Heading>\n <Text className=\"empty-description\" noSelect>\n {description}\n </Text>\n <div className=\"empty_button-wrapper\" onClick={onCreateClickAction}>",
+      "context": "className=\"empty-image\"\n src={formRoomEmptyScreenImage}\n alt=\"empty-screen\"\n />\n <Heading level={3} className=\"empty-header\">\n {t(\"Common:NoRoomsFound\")}\n </Heading>\n <Text className=\"empty-description\">{description}</Text>\n <div className=\"empty_button-wrapper\" onClick={onCreateClickAction}>\n <SelectorAddButton\n isAction",
       "module": "/packages/shared"
     }
   ],

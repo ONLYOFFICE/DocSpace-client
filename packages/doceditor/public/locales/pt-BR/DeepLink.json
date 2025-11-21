@@ -1,9 +1,9 @@
 {
+  "DeepLinkOnlyAppText": "Você pode abrir o documento apenas no aplicativo móvel.",
   "DeepLinkText": "Você pode abrir o documento no portal ou no aplicativo móvel",
+  "DownloadApp": "Baixe o aplicativo",
   "OpenInApp": "Abra no aplicativo",
   "OpeningDocument": "Abrindo um documento",
   "RememberChoice": "Lembre-se da escolha ao abrir documentos na próxima vez",
-  "StayInBrowser": "Fique no navegador",
-  "DeepLinkOnlyAppText": "Você pode abrir o documento apenas no aplicativo móvel.",
-  "DownloadApp": "Baixe o aplicativo"
+  "StayInBrowser": "Fique no navegador"
 }

@@ -23,37 +23,30 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { createGlobalStyle } from "styled-components";
+
 import OperationContainer from "./index";
 import { OperationContainerProps } from "./OperationContainer.types";
 
-jest.mock("PUBLIC_DIR/images/downloading.react.svg", () => {
-  const MockSvgComponent = () => {
+vi.mock("PUBLIC_DIR/images/downloading.react.svg", () => ({
+  default: () => {
     return <div data-testid="operation-logo" />;
-  };
-  return MockSvgComponent;
-});
+  },
+}));
 
-jest.mock("PUBLIC_DIR/images/downloading.dark.react.svg", () => {
-  const MockSvgComponent = () => {
+vi.mock("PUBLIC_DIR/images/downloading.dark.react.svg", () => ({
+  default: () => {
     return <div data-testid="operation-logo" />;
-  };
-  return MockSvgComponent;
-});
+  },
+}));
 
 // Mock portal logo component
-jest.mock("../portal-logo/PortalLogo", () => {
-  const MockPortalLogo = () => {
+vi.mock("../portal-logo/PortalLogo", () => ({
+  default: () => {
     return <div data-testid="portal-logo" />;
-  };
-  MockPortalLogo.displayName = "MockPortalLogo";
-  return MockPortalLogo;
-});
-
-// Setup test environment
-const GlobalStyle = createGlobalStyle``;
+  },
+}));
 
 describe("OperationContainer", () => {
   const defaultProps: OperationContainerProps = {
@@ -62,46 +55,37 @@ describe("OperationContainer", () => {
     description: "Test Description",
   };
 
-  const renderComponent = (props: OperationContainerProps = defaultProps) => {
-    return render(
-      <>
-        <GlobalStyle />
-        <OperationContainer {...props} />
-      </>,
-    );
-  };
-
   it("renders title and description", () => {
-    renderComponent();
+    render(<OperationContainer {...defaultProps} />);
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByText("Test Description")).toBeInTheDocument();
   });
 
   it("renders OperationContainer", () => {
-    renderComponent();
+    render(<OperationContainer {...defaultProps} />);
     expect(screen.getByTestId("operation-container")).toBeInTheDocument();
   });
 
   it("renders portal logo", () => {
-    renderComponent();
+    render(<OperationContainer {...defaultProps} />);
     expect(screen.getByTestId("portal-logo")).toBeInTheDocument();
   });
 
   it("renders operation logo", () => {
-    renderComponent();
+    render(<OperationContainer {...defaultProps} />);
     expect(screen.getByTestId("operation-logo")).toBeInTheDocument();
   });
 
   it("redirects when url is provided and user is authorized", () => {
     const originalLocation = window.location;
-    const mockReplace = jest.fn();
+    const mockReplace = vi.fn();
     // Mock window.location
     Object.defineProperty(window, "location", {
       configurable: true,
       value: { replace: mockReplace },
     });
     const testUrl = "https://test.com";
-    renderComponent({ ...defaultProps, url: testUrl, authorized: true });
+    render(<OperationContainer {...defaultProps} url={testUrl} authorized />);
     expect(mockReplace).toHaveBeenCalledWith(testUrl);
     // Restore original location
     Object.defineProperty(window, "location", {
@@ -112,7 +96,7 @@ describe("OperationContainer", () => {
 
   it("does not redirect when unauthorized", () => {
     const originalLocation = window.location;
-    const mockReplace = jest.fn();
+    const mockReplace = vi.fn();
 
     // Mock window.location
     Object.defineProperty(window, "location", {
@@ -121,7 +105,9 @@ describe("OperationContainer", () => {
     });
 
     const testUrl = "https://test.com";
-    renderComponent({ ...defaultProps, url: testUrl, authorized: false });
+    render(
+      <OperationContainer {...defaultProps} url={testUrl} authorized={false} />,
+    );
 
     expect(mockReplace).not.toHaveBeenCalled();
 

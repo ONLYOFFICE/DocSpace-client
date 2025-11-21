@@ -45,4 +45,4 @@ const ErasureCell = ({ t, sideColor, item }) => {
   );
 };
 
-export default ErasureCell;
+export default React.memo(ErasureCell);

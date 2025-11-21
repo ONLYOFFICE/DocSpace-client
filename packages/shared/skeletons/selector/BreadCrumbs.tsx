@@ -34,12 +34,7 @@ interface BreadCrumbsProps extends RectangleSkeletonProps {
   style?: React.CSSProperties;
 }
 
-const BreadCrumbsLoader = ({
-  id,
-  className,
-  style,
-  ...rest
-}: BreadCrumbsProps) => {
+const BreadCrumbsLoader = ({ style, ...rest }: BreadCrumbsProps) => {
   return (
     <div className={styles.container} data-testid="bread-crumbs-loader">
       <RectangleSkeleton

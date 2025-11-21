@@ -1,9 +1,9 @@
 {
+  "DeepLinkOnlyAppText": "Dokument je možné otvoriť len v mobilnej aplikácii.",
   "DeepLinkText": "Môžete otvoriť dokument na portáli alebo v mobilnej aplikácii",
+  "DownloadApp": "Stiahnite si aplikáciu",
   "OpenInApp": "Otvoriť v aplikácii",
   "OpeningDocument": "Otvorenie dokumentu",
   "RememberChoice": "Zapamätať voľbu pre otváranie dokumentov nabudúce",
-  "StayInBrowser": "Zostať v prehliadači",
-  "DeepLinkOnlyAppText": "Dokument je možné otvoriť len v mobilnej aplikácii.",
-  "DownloadApp": "Stiahnite si aplikáciu"
+  "StayInBrowser": "Zostať v prehliadači"
 }

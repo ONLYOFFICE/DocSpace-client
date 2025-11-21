@@ -108,4 +108,8 @@ export type DropDownItemProps = {
   tabIndex?: number;
   /** Sets minimum width for the root element */
   minWidth?: string;
+
+  testId?: string;
+
+  tooltip?: string;
 };

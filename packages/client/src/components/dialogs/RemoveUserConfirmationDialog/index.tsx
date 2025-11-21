@@ -80,7 +80,7 @@ const RemoveUserConfirmationDialog = ({
     >
       <ModalDialog.Header>{t("People:RemoveUser")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{t("People:RemoveUserConfirmationText")}</Text>
+        <Text>{t("People:RemoveUserConfirmationText")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

@@ -3,7 +3,7 @@
   "content": "By clicking \"Disable my account\" you agree with our <1>Privacy policy.</1>",
   "content_en_sha1_hash": "9a8408d029b9d65fcd00960edd1f41137c81c3ef",
   "created_at": "2025-05-19T21:30:57.348Z",
-  "updated_at": "2025-05-24T15:33:27.582Z",
+  "updated_at": "2025-08-21T11:22:39.932Z",
   "comment": {
     "text": "This translation key is used to display a message related to the user's agreement with privacy policy when disabling their account. It appears in a UI element where users are confirming the deletion of their profile.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/ProfileRemove/page.client.tsx",
-      "line_number": 132,
-      "context": "className=\"delete-profile-confirm\"\n >\n {t(\"DeleteProfileConfirmation\")}\n </Text>\n <Text>\n <Trans i18nKey=\"DeleteProfileConfirmationInfo\" ns=\"Confirm\" t={t}>\n By clicking &quot;Disable my account&quot; you agree with our\n Privacy policy\n <Link\n type={LinkType.page}\n href={legalTerms}",
+      "line_number": 170,
+      "context": "</Text>\n </div>\n </div>\n \n <Text>\n <Trans i18nKey=\"DeleteProfileConfirmationInfo\" ns=\"Confirm\" t={t}>\n By clicking &quot;Disable my account&quot; you agree with our\n Privacy policy\n <Link\n type={LinkType.page}\n href={legalTerms}",
       "module": "/packages/login"
     }
   ],

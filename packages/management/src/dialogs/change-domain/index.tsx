@@ -66,7 +66,7 @@ export const ChangeDomainDialog = observer(() => {
   const router = useRouter();
   const { spacesStore } = useStores();
   const [domainNameError, setDomainNameError] =
-    React.useState<null | Array<object>>(null);
+    React.useState<null | Array<string>>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const {
     setDomainName,
@@ -111,9 +111,7 @@ export const ChangeDomainDialog = observer(() => {
     >
       <ModalDialog.Header>{t("DomainSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect fontSize="13px">
-          {t("ChangeDomainDescription")}
-        </Text>
+        <Text fontSize="13px">{t("ChangeDomainDescription")}</Text>
         <div className="create-portal-input-block">
           <Text
             fontSize="13px"

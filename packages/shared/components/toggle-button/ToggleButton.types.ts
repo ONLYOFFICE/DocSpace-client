@@ -58,4 +58,8 @@ export type ToggleButtonProps = PickedTextProps &
     isLoading?: boolean;
     /** Whether animations are disabled */
     noAnimation?: boolean;
+    /** Data test id for the toggle button */
+    dataTestId?: string;
+    /** Data tooltip id for the toggle button */
+    dataTooltipId?: string;
   };

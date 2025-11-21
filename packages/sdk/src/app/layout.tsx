@@ -29,6 +29,7 @@ import type { Metadata } from "next";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -99,6 +100,8 @@ export default async function RootLayout({
     "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
 
     "--interface-direction": dirClass,
+
+    "--font-family": getFontFamilyDependingOnLanguage(locale),
   } as React.CSSProperties;
 
   return (

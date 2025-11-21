@@ -55,6 +55,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
         disabled={!isLdapEnabled}
+        dataTestId="ldap_settings"
       />
       <MobileCategoryWrapper
         title={t("Ldap:LdapSyncTitle")}
@@ -64,6 +65,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
         disabled={!isLdapEnabled}
+        dataTestId="sync_data"
       />
     </StyledWrapper>
   );

@@ -3,7 +3,7 @@
   "content": "Role",
   "content_en_sha1_hash": "c3f104d1365744b538bfde9f4adb6a6df4b80355",
   "created_at": "2025-05-19T21:30:47.956Z",
-  "updated_at": "2025-06-30T12:20:31.240Z",
+  "updated_at": "2025-10-07T15:39:07.697Z",
   "comment": {
     "text": "This translation key is used for the title of a dropdown menu or select field, typically appearing as \"Role\". It is displayed in various contexts within the application, including dialogs and info panels, to identify the user's role.",
     "is_auto": true,
@@ -11,28 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/sub-components/GroupMember/index.tsx",
-      "line_number": 195,
-      "context": "options={userRoleOptions as TOption[]}\n scaled={false}\n withBackdrop={isMobile}\n size={ComboBoxSize.content}\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption\n onSelect={onChangeRole}",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/components/share/sub-components/User.tsx",
+      "line_number": 253,
+      "context": "// fixedDirection={isMobile}\n shouldShowBackdrop={isMobile}\n dataTestId=\"info_panel_members_user_role_combobox\"\n />\n ) : (\n <div className=\"disabled-role-combobox\" title={t(\"Common:Role\")}>\n {selectedOption.label}\n </div>\n )}\n </div>\n ) : null}",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/sub-components/GroupMember/index.tsx",
-      "line_number": 195,
-      "context": "options={userRoleOptions as TOption[]}\n scaled={false}\n withBackdrop={isMobile}\n size={ComboBoxSize.content}\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption\n onSelect={onChangeRole}",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/sub-components/GroupMember/index.tsx",
+      "line_number": 229,
+      "context": "accessOptions={options as TOption[]}\n scaled={false}\n withBackdrop={isMobile}\n size={ComboBoxSize.content}\n modernView\n title={t(\"Common:Role\")}\n manualWidth={manualWidth}\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption\n onSelect={onChangeRole}",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
-      "line_number": 445,
-      "context": "onSelect={onOptionClick}\n scaled={false}\n withBackdrop={isMobile}\n size=\"content\"\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isLoading={isLoading}\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
-      "line_number": 445,
-      "context": "onSelect={onOptionClick}\n scaled={false}\n withBackdrop={isMobile}\n size=\"content\"\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isLoading={isLoading}\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/sub-components/GroupMember/index.tsx",
+      "line_number": 229,
+      "context": "accessOptions={options as TOption[]}\n scaled={false}\n withBackdrop={isMobile}\n size={ComboBoxSize.content}\n modernView\n title={t(\"Common:Role\")}\n manualWidth={manualWidth}\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption\n onSelect={onChangeRole}",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

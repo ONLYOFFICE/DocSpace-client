@@ -16,15 +16,14 @@
  */
 
 import React from "react";
-import { screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { renderWithTheme } from "../../utils/render-with-theme";
+import { describe, it, expect } from "vitest";
+import { screen, render } from "@testing-library/react";
 import { FormWrapper } from "./index";
 
 describe("FormWrapper", () => {
-  test("renders children content correctly", () => {
+  it("renders children content correctly", () => {
     const testContent = "Test Content";
-    renderWithTheme(
+    render(
       <FormWrapper>
         <div>{testContent}</div>
       </FormWrapper>,
@@ -34,11 +33,11 @@ describe("FormWrapper", () => {
     expect(screen.getByText(testContent)).toBeInTheDocument();
   });
 
-  test("applies custom className and style", () => {
+  it("applies custom className and style", () => {
     const customClass = "custom-class";
     const customStyle = { backgroundColor: "red" };
 
-    renderWithTheme(
+    render(
       <FormWrapper className={customClass} style={customStyle}>
         <div>Content</div>
       </FormWrapper>,
@@ -49,10 +48,10 @@ describe("FormWrapper", () => {
     expect(wrapper).toHaveStyle({ backgroundColor: "red" });
   });
 
-  test("applies custom id", () => {
+  it("applies custom id", () => {
     const customId = "custom-id";
 
-    renderWithTheme(
+    render(
       <FormWrapper id={customId}>
         <div>Content</div>
       </FormWrapper>,

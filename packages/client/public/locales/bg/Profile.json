@@ -1,13 +1,13 @@
 {
   "ActiveSessions": "Активни сесии",
   "AutoDeleteTitle": "Всички по-стари от 60 дни сесии ще бъдат автоматично изтрити.",
-  "ChangeEmailSuccess": "Имейлът беше променен успешно ",
   "ChangePasswordAfterLoggingOut": "Промяна на паролата след отписване",
   "ConnectSocialNetworks": "Свържете вашите социални мрежи",
   "DescriptionForSecurity": "За повече сигурност трябва да смените паролата си.",
   "DesktopTheme": "Синхронизирай с Редакторските настройки на работния плот",
   "DesktopThemeDescription": "Автоматично превключване между светли и тъмни теми в зависимост от текущата тема на настолните редактори.",
   "EditPhoto": "Редактирай снимка",
+  "EmailChangeSuccess": "Вашият имейл е променен успешно.",
   "EmailNotVerified": "Имейлът не е потвърден",
   "ErrorAccountAlreadyUse": "Свързаният профил вече се използва от друг потребител",
   "FileManagement": "Управление на файлове",
@@ -18,6 +18,7 @@
   "LogoutDescription": "Забележка. Всички активни връзки с изключение на тази ще бъдат отписани, тъй като тази връзка се използва в момента.",
   "LogoutFrom": "Изход от {{platform}} {{browser}}?",
   "MyProfile": "Моят профил",
+  "NotificationsChannels": "Канали за известия",
   "ProviderSuccessfullyConnected": "Доставчикът е свързан успешно",
   "ProviderSuccessfullyDisconnected": "Връзката с доставчика беше прекъсната успешно",
   "SendAgain": "Повторно изпращане",
@@ -25,6 +26,10 @@
   "SuccessLogout": "Активната връзка беше отписана: {{platform}}, {{browser}}",
   "SystemTheme": "Използвайте системна тема",
   "SystemThemeDescription": "Автоматично превключване между светли и тъмни теми, в съответствие със системата ви.",
+  "TelegramAccount": "Телеграм акаунт",
+  "TelegramAccountDescription": "За да свържете TelegramBot към вашия акаунт, следвайте секретния линк и кликнете на бутона “Свържете Telegram”.",
+  "TelegramAccountDisconnect": "Прекратяване на връзката с Telegram",
+  "TelegramAccountDisconnectDescription": "Вашият акаунт @{{username}} е свързан за известия от Telegram. Можете да се откажете от този акаунт. В този случай няма да получавате известия.",
   "TerminateAllSessions": "Прекратете всички сесии освен текущата",
   "TwoFactorDescription": "Двуфакторното удостоверяване чрез приложението за генериране на кодове беше активирано за всички потребители от администратора."
 }

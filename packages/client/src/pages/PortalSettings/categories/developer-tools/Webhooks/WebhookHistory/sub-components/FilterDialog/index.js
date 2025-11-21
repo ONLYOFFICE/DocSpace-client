@@ -160,12 +160,14 @@ const FilterDialog = (props) => {
               primary
               onClick={handleApplyFilters}
               isDisabled={filters.deliveryTo <= filters.deliveryFrom}
+              testId="apply_filter_button"
             />
             <Button
               className="cancel-button"
               label={t("Common:CancelButton")}
               size="normal"
               onClick={closeModal}
+              testId="cancel_filter_button"
             />
           </Footer>
         </ModalDialog.Footer>

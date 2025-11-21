@@ -31,6 +31,7 @@ import { ContextMenuModel } from "../context-menu";
 
 export interface TableContainerProps {
   forwardedRef: React.Ref<HTMLDivElement>;
+  noSelect?: boolean;
   useReactWindow: boolean;
   children?: React.ReactNode;
   className?: string;
@@ -139,6 +140,8 @@ export interface TableRowProps {
   isActive?: boolean;
   checked?: boolean;
   dragging?: boolean;
+  dataTestId?: string;
+  contextMenuTestId?: string;
 }
 
 export interface TableCellProps {
@@ -149,6 +152,8 @@ export interface TableCellProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   value?: string;
+  dataTestId?: string;
+  documentTitle?: string;
 }
 
 export type TGroupMenuItem = {
@@ -178,6 +183,12 @@ interface TableGroupMenuBased {
   withComboBox?: boolean;
   headerLabel?: string;
 }
+
+export type TGroupMenuProps = Pick<
+  TableGroupMenuBased,
+  "headerMenu" | "isBlocked"
+>;
+
 export type TableGroupMenuProps =
   | (TableGroupMenuBased & {
       isCloseable?: undefined;

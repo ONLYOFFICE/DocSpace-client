@@ -124,8 +124,8 @@ export const FillingStatusPanel = ({
       <ModalDialog.Body>
         {value ? (
           <PublicRoomBar
-            headerText={t("Common:FillingStatusBarTitle")}
-            bodyText={t("Common:FillingStatusBarDescription")}
+            headerText={t("Common:StartFillingBarHeader")}
+            bodyText={t("Common:StartFillingBarDescription")}
             iconName={InfoSvgUrl}
             onClose={() => setValue(false)}
             className={styles.infoBar}

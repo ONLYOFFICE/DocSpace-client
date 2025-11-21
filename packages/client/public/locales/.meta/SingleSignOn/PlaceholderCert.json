@@ -3,7 +3,7 @@
   "content": "Paste or type text",
   "content_en_sha1_hash": "02f3028a3ce8d031866a3dd4465234dcb4a7c713",
   "created_at": "2025-05-19T21:30:50.118Z",
-  "updated_at": "2025-05-24T03:16:46.075Z",
+  "updated_at": "2025-08-12T19:46:26.210Z",
   "comment": {
     "text": "This translation key is used as a placeholder text in modal dialogs and form fields, instructing users to paste or type text into the provided field. It appears in various UI elements, such as text areas and labels, within application settings and certificate management pages.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddSpCertificateModal.js",
       "line_number": 90,
-      "context": "className=\"text-area\"\n name=\"spCertificate\"\n onChange={setInput}\n value={spCertificate}\n isDisabled={isGeneratedCertificate}\n placeholder={t(\"PlaceholderCert\")}\n heightTextArea=\"72px\"\n />\n \n <Text isBold className=\"text-area-label\" noSelect>\n {t(\"PrivateKey\")}",
+      "context": "className=\"text-area\"\n name=\"spCertificate\"\n onChange={setInput}\n value={spCertificate}\n isDisabled={isGeneratedCertificate}\n placeholder={t(\"PlaceholderCert\")}\n heightTextArea=\"72px\"\n />\n \n <Text isBold className=\"text-area-label\">\n {t(\"PrivateKey\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddSpCertificateModal.js",
       "line_number": 90,
-      "context": "className=\"text-area\"\n name=\"spCertificate\"\n onChange={setInput}\n value={spCertificate}\n isDisabled={isGeneratedCertificate}\n placeholder={t(\"PlaceholderCert\")}\n heightTextArea=\"72px\"\n />\n \n <Text isBold className=\"text-area-label\" noSelect>\n {t(\"PrivateKey\")}",
+      "context": "className=\"text-area\"\n name=\"spCertificate\"\n onChange={setInput}\n value={spCertificate}\n isDisabled={isGeneratedCertificate}\n placeholder={t(\"PlaceholderCert\")}\n heightTextArea=\"72px\"\n />\n \n <Text isBold className=\"text-area-label\">\n {t(\"PrivateKey\")}",
       "module": "/packages/client"
     }
   ],

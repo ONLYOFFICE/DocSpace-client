@@ -35,6 +35,21 @@ export type TileItem = {
   /** Unique identifier for the item */
   id: number | string;
   isTemplate?: boolean;
+  /** Optional display title */
+  title?: string;
+  /** Optional alternative display name */
+  displayName?: string;
+  /** Optional icon identifier */
+  icon?: string;
+  /** Optional logo data used by tiles/headers */
+  logo?: {
+    original?: string;
+    large?: string;
+    medium?: string;
+    small?: string;
+    color?: string;
+    cover?: string | { data: string; id: string };
+  };
 };
 
 /** Common properties for tile items */
@@ -92,4 +107,6 @@ export type TileContainerProps = {
   headingFiles?: React.ReactNode;
   /** Flag to indicate descending order */
   isDesc?: boolean;
+  /** Disables text selection */
+  noSelect?: boolean;
 };

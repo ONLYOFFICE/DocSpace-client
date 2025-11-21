@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "Каталог OneDrive",
   "FolderTitleWebDav": "Каталог WebDAV",
   "FolderTitleYandex": "Каталог Яндекса",
-  "GuestReleaseTipLink": "Подробнее о типах пользователей",
-  "LinkHasExpiredAndHasBeenDisabled": "Срок действия ссылки истек, она отключена",
   "LinkValidTime": "Эта ссылка действительна только {{days_count}} дней.",
   "NewForm": "PDF-форма",
   "OwnerChange": "Сменить владельца",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Изменить настройки подключения",
   "ThirdPartyTitle": "Сторонние сервисы",
   "TitleShowActions": "Показать действия над файлом",
-  "TitleShowFolderActions": "Показать действия над папкой"
+  "TitleShowFolderActions": "Показать действия над папкой",
+  "TrashItemsDeleteSuccess": "Выбранные элементы были успешно удалены из раздела {{sectionName}}"
 }

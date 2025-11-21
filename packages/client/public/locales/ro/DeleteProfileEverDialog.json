@@ -7,7 +7,7 @@
   "DeleteGuest": "Ștergere invitat",
   "DeleteGuests": "Ștergere invitați",
   "DeletePersonalDataApplicable": "*Se referă la toți utilizatorii selectați, care au astfel de fișiere și foldere.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sălile create de acest utilizator și documentele stocate în aceste săli vor fi reatribuite automat administratorului care efectuează ștergerea: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reatribuiți datele manual pentru a alege un alt destinatar datelor reatribuite.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Toate fișierele partajate, precum și camerele create de acest contact, vor fi realocate automat unui administrator care efectuează ștergerea: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Realocați datele manual pentru a alege un alt utilizator de destinație pentru realocare.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} va fi eliminat din toate sălile la care a fost invitat. Documentele create de acest utilizator {{userCaption}} în sălile vor fi reatribuite automat proprietarilor acestor săli.",
   "DeleteUser": "Șterge utilizatorul",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> va fi șters. Această acțiune nu poate fi anulată.",

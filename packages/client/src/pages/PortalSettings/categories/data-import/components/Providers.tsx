@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useEffect, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
@@ -39,23 +39,22 @@ import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextc
 import WorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
 import { LinkType } from "@docspace/shared/components/link/Link.enums";
-import { Link } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import DataImportLoader from "../sub-components/DataImportLoader";
 import { WorkspacesContainer } from "../StyledDataImport";
+import DataImportLoader from "../sub-components/DataImportLoader";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
 
 const Providers = (props: ProvidersProps) => {
   const {
     theme,
     services,
-    setServices,
-    getMigrationList,
     setWorkspace,
     logoText,
+    showPortalSettingsLoader,
+    dataImportUrl,
+    currentColorScheme,
   } = props as InjectedProvidersProps;
-
-  const [areProvidersReady, setAreProvidersReady] = useState(false);
 
   const { t, ready } = useTranslation(["Settings"]);
 
@@ -76,21 +75,12 @@ const Providers = (props: ProvidersProps) => {
     }));
   }, [theme.isBase, services]);
 
-  const handleMigrationCheck = useCallback(async () => {
-    const migrationList = await getMigrationList();
-    setAreProvidersReady(true);
-    setServices(migrationList);
-  }, [getMigrationList, setServices]);
-
-  useEffect(() => {
-    handleMigrationCheck();
-  }, [handleMigrationCheck]);
-
   useEffect(() => {
     if (ready) setDocumentTitle(t("DataImport"));
   }, [ready, t]);
 
-  if (!areProvidersReady) return <DataImportLoader />;
+  if (showPortalSettingsLoader || !ready) return <DataImportLoader />;
+
   return (
     <WorkspacesContainer>
       <Text className="data-import-description">
@@ -98,7 +88,21 @@ const Providers = (props: ProvidersProps) => {
           productName: t("Common:ProductName"),
           organizationName: logoText,
         })}
+
+        {dataImportUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme?.main?.accent}
+            target={LinkTarget.blank}
+            isHovered
+            href={dataImportUrl}
+            fontWeight="600"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </Text>
+
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
 
       <div className="workspace-list">
@@ -107,6 +111,7 @@ const Providers = (props: ProvidersProps) => {
             key={workspace.title}
             className="workspace-item"
             onClick={() => setWorkspace(workspace.title)}
+            data-testid={`workspace_item_${workspace.title}`}
           >
             <ReactSVG src={workspace.logo} className="workspace-logo" />
 
@@ -117,6 +122,7 @@ const Providers = (props: ProvidersProps) => {
               isHovered
               isTextOverflow
               color="accent"
+              dataTestId={`workspace_item_${workspace.title}_import_link`}
             >
               {t("Import")}
             </Link>
@@ -127,19 +133,22 @@ const Providers = (props: ProvidersProps) => {
   );
 };
 export const Component = inject<TStore>(
-  ({ settingsStore, importAccountsStore }) => {
-    const { services, setServices, getMigrationList, setWorkspace } =
-      importAccountsStore;
+  ({ settingsStore, importAccountsStore, clientLoadingStore }) => {
+    const { services, setWorkspace } = importAccountsStore;
 
-    const { theme, logoText } = settingsStore;
+    const { theme, logoText, dataImportUrl, currentColorScheme } =
+      settingsStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       services,
-      setServices,
-      getMigrationList,
       logoText,
       theme,
       setWorkspace,
+      showPortalSettingsLoader,
+      dataImportUrl,
+      currentColorScheme,
     };
   },
 )(observer(Providers));

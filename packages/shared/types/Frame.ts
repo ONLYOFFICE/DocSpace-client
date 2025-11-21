@@ -105,6 +105,8 @@ export type TFrameEvents = {
   onNotFound?: null | (() => void);
   onSelectCallback?: null | ((e: Event | object) => void);
   onSignOut?: null | (() => void);
+  onEditorOpen?: null | ((e: Event | object) => void);
+  onFileManagerClick?: null | ((e: Event | object) => void);
 };
 
 export type TFrameConfig = {

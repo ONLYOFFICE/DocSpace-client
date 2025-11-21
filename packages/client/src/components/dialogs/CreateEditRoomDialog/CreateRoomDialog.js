@@ -35,7 +35,8 @@ import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import { FolderType } from "@docspace/shared/enums";
-import TagHandler from "./handlers/TagHandler";
+
+import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 
@@ -154,6 +155,11 @@ const CreateRoomDialog = ({
     if ((hasFocus && value.length === 0) || !hasFocus) onCreateRoom();
   };
 
+  const onCloseCreateFromTemplateDialog = () => {
+    setRoomParams({ ...startRoomParams });
+    setTemplateDialogIsVisible(false);
+  };
+
   const goBack = () => {
     if (isLoading) return;
     if (isTemplateSelected) {
@@ -170,6 +176,8 @@ const CreateRoomDialog = ({
 
     if (isScrollLocked) setIsScrollLocked(false);
     setRoomParams({ ...startRoomParams });
+
+    if (templateDialogIsVisible) onCloseCreateFromTemplateDialog();
   };
 
   const onCloseAndDisconnectThirdparty = async () => {
@@ -197,7 +205,6 @@ const CreateRoomDialog = ({
     setTemplateItem({ ...item, title: item.label });
 
     const newRoomParams = getFetchedRoomParams(
-      // { ...roomParams, id: item?.id, title: item?.label, logo: item?.logo },
       { ...roomParams, ...item },
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
@@ -209,11 +216,6 @@ const CreateRoomDialog = ({
       logo: item?.logo,
       isTemplate: item.rootFolderType === FolderType.RoomTemplates,
     });
-  };
-
-  const onCloseCreateFromTemplateDialog = () => {
-    setRoomParams({ ...startRoomParams });
-    setTemplateDialogIsVisible(false);
   };
 
   const isTemplate = !roomParams.type && !isTemplateSelected;
@@ -232,7 +234,7 @@ const CreateRoomDialog = ({
       hideContent={isOauthWindowOpen}
       isTemplate={isTemplate}
       isBackButton={roomParams.type}
-      onBackClick={goBack}
+      onBackClick={roomParams.type ? goBack : null}
       onSubmit={handleSubmit}
       withForm
       containerVisible={isTemplate ? templateDialogIsVisible : false}
@@ -309,6 +311,7 @@ const CreateRoomDialog = ({
             isLoading={isLoading}
             type="submit"
             onClick={onCreateRoom}
+            testId="create_room_dialog_save"
           />
           <Button
             id="shared_create-room-modal_cancel"
@@ -318,6 +321,7 @@ const CreateRoomDialog = ({
             scale
             isDisabled={isLoading}
             onClick={onCloseAndDisconnectThirdparty}
+            testId="create_room_dialog_cancel"
           />
         </ModalDialog.Footer>
       ) : null}

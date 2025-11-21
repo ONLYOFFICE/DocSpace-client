@@ -34,8 +34,7 @@ const areEqual = (
   prevProps: SectionContextMenuProps,
   nextProps: SectionContextMenuProps,
 ) => {
-  if (!isEqual(prevProps, nextProps)) return true;
-  return false;
+  return isEqual(prevProps, nextProps);
 };
 
 const SectionContextMenu = React.memo(

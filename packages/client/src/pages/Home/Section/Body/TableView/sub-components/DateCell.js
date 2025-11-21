@@ -33,9 +33,9 @@ const DateCell = ({
   createdDate,
   sideColor,
   lastOpenedDate,
-  isRecentTab,
+  isRecentFolder,
 }) => {
-  const date = isRecentTab
+  const date = isRecentFolder
     ? lastOpenedDate
     : create
       ? createdDate
@@ -55,4 +55,4 @@ const DateCell = ({
   );
 };
 
-export default DateCell;
+export default React.memo(DateCell);

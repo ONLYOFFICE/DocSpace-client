@@ -31,7 +31,7 @@ import { Select } from "./Select";
 import type { MonthsProps } from "../Cron.types";
 
 export const Months = memo(
-  ({ months, unit, setMonths, t, isDisabled }: MonthsProps) => {
+  ({ months, unit, setMonths, t, isDisabled, dataTestId }: MonthsProps) => {
     return (
       <Select
         unit={unit}
@@ -40,6 +40,7 @@ export const Months = memo(
         dropDownMaxHeight={300}
         placeholder={t("EveryMonth")}
         isDisabled={isDisabled}
+        dataTestId={dataTestId}
       />
     );
   },

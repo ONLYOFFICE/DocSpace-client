@@ -3,7 +3,7 @@
   "content": "Enable guest",
   "content_en_sha1_hash": "f541937ff47f4169e43e5e8bb074927f6ee3bf2d",
   "created_at": "2025-05-19T21:30:56.963Z",
-  "updated_at": "2025-05-24T14:15:39.093Z",
+  "updated_at": "2025-08-04T07:30:01.065Z",
   "comment": {
     "text": "This translation key determines the label displayed on a button or link to enable guest access in a user management dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 195,
+      "line_number": 191,
       "context": "? t(\"Common:Disable\")\n : t(\"PeopleTranslations:DisableUserButton\");\n } else {\n header = onlyOneUser\n ? isGuests\n ? t(\"EnableGuest\")\n : t(\"EnableUser\")\n : isGuests\n ? t(\"EnableGuests\")\n : t(\"EnableUsers\");",
       "module": "/packages/client"
     }

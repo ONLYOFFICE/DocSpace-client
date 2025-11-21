@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable jsx-a11y/tabindex-no-positive */
-
 import React from "react";
 import { InputSize, InputType, TextInput } from "../text-input";
 import { useDidMount } from "../../hooks/useDidMount";
@@ -91,6 +89,7 @@ const RackspaceSettings = ({
         tabIndex={1}
         type={InputType.text}
         size={InputSize.base}
+        testId="rackspace_private_container_input"
       />
       <TextInput
         id="public-container-input"
@@ -105,6 +104,7 @@ const RackspaceSettings = ({
         tabIndex={2}
         type={InputType.text}
         size={InputSize.base}
+        testId="rackspace_public_container_input"
       />
       <TextInput
         id="region-input"
@@ -119,6 +119,7 @@ const RackspaceSettings = ({
         tabIndex={3}
         type={InputType.text}
         size={InputSize.base}
+        testId="rackspace_region_input"
       />
       {isNeedFilePath ? (
         <TextInput
@@ -134,6 +135,7 @@ const RackspaceSettings = ({
           hasError={isError[FILE_PATH]}
           type={InputType.text}
           size={InputSize.base}
+          testId="rackspace_file_path_input"
         />
       ) : null}
     </>

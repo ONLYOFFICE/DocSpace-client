@@ -3,7 +3,7 @@
   "content": "Backup file is being uploaded to the server. Please wait.",
   "content_en_sha1_hash": "bf96cd48a3238c89c4cac8b7174e01265e5b8b52",
   "created_at": "2025-05-19T21:30:50.677Z",
-  "updated_at": "2025-05-26T07:57:32.539Z",
+  "updated_at": "2025-09-07T07:53:15.241Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a backup file is being uploaded to the server. It is displayed as a label on a progress bar in the data import process, and its purpose is to inform users of the current status of the upload process.",
     "is_auto": true,

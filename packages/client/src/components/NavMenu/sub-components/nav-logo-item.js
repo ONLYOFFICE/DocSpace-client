@@ -59,7 +59,7 @@ const NavLogoItem = ({ opened, onClick }) => {
         <img
           alt="logo"
           className="nav-logo-icon"
-          src={getLogoUrl(WhiteLabelLogoType.LightSmall)}
+          src={getLogoUrl(WhiteLabelLogoType.LightSmall, false, "", true)}
         />
       </Link>
     </LogoItem>

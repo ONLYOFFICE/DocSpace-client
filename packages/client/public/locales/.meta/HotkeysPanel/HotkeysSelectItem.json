@@ -3,7 +3,7 @@
   "content": "Select or deselect item",
   "content_en_sha1_hash": "c55dd249fffabde37969cf62f277edca80967e6b",
   "created_at": "2025-05-19T21:30:55.089Z",
-  "updated_at": "2025-05-24T10:33:32.131Z",
+  "updated_at": "2025-08-12T19:46:25.974Z",
   "comment": {
     "text": "This translation key is used to display a label indicating whether an item can be selected or deselected in a hotkey panel. It typically appears as part of a UI component that allows users to toggle an item's selection status. The description should help translators understand the purpose and context of this text, such as in a button or dialog related to item management.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 36,
-      "context": "const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {\n return (\n <>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectItem\")}</Text>\n <Text {...keyTextStyles}>x</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "context": "const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey, AltKey }) => {\n return (\n <>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectItem\")}</Text>\n <Text {...keyTextStyles}>x</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
       "module": "/packages/client"
     }
   ],

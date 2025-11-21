@@ -39,8 +39,10 @@ import {
   getThirdPartyProviders,
   getUserFromConfirm,
   getInvitationSettings,
+  getUserByEncEmail,
 } from "@/utils/actions";
 import { logger } from "logger.mjs";
+import { TConfirmLinkParams } from "@/types";
 import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
@@ -51,15 +53,16 @@ type LinkInviteProps = {
 async function Page(props: LinkInviteProps) {
   logger.info("Invite page");
   const { searchParams: sp, params: p } = props;
-  const searchParams = await sp;
+  const searchParams = (await sp) as TConfirmLinkParams;
   const params = await p;
   if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite") {
     logger.info(`Invite page notFound params.Invite: ${params.Invite}`);
     return notFound();
   }
 
-  const type = searchParams.type;
+  const type = searchParams.type ?? "";
   const uid = searchParams.uid;
+  const encemail = searchParams.encemail ?? "";
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = await headers();
@@ -76,7 +79,9 @@ async function Page(props: LinkInviteProps) {
     passwordSettings,
     invitationSettings,
   ] = await Promise.all([
-    getUserFromConfirm(uid, confirmKey),
+    uid
+      ? getUserFromConfirm(uid, confirmKey)
+      : getUserByEncEmail(encemail, confirmKey),
     getSettings(),
     getThirdPartyProviders(true),
     getCapabilities(),
@@ -105,8 +110,8 @@ async function Page(props: LinkInviteProps) {
           passwordSettings={passwordSettings}
           capabilities={capabilities}
           thirdPartyProviders={thirdParty}
-          legalTerms={settings.externalResources.common?.entries.legalterms}
-          licenseUrl={settings.externalResources.common?.entries.license}
+          legalTerms={settings.externalResources?.common?.entries?.legalterms}
+          licenseUrl={settings.externalResources?.common?.entries?.license}
           isStandalone={settings.standalone}
           logoText={settings.logoText}
           invitationSettings={invitationSettings}

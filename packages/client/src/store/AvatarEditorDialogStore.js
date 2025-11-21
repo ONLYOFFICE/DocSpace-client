@@ -50,12 +50,11 @@ class AvatarEditorDialogStore {
 
   avatarEditorDialogVisible = false;
 
-  constructor(filesStore, settingsStore, infoPanelStore) {
+  constructor(filesStore, settingsStore) {
     makeAutoObservable(this);
 
     this.filesStore = filesStore;
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
   }
 
   setAvatarEditorDialogVisible = (visible) => {
@@ -64,6 +63,10 @@ class AvatarEditorDialogStore {
 
   setUploadedFile = (file) => {
     this.uploadedFile = file;
+  };
+
+  clearUploadedFile = () => {
+    this.uploadedFile = null;
   };
 
   setImage = (image) => {
@@ -117,7 +120,6 @@ class AvatarEditorDialogStore {
         }
 
         needUpdate && updateRoom(item, room);
-        needUpdate && this.infoPanelStore.updateInfoPanelSelection(room);
         URL.revokeObjectURL(img.src);
         setActiveFolders([]);
         resolve();
@@ -206,6 +208,7 @@ class AvatarEditorDialogStore {
           }
         });
     } catch (error) {
+      console.error(error);
       toastr.error(t("Common:NotSupportedFormat"));
     }
   };

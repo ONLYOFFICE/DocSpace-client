@@ -1,0 +1,28 @@
+{
+  "key_path": "DefineQuotaPerAIAgent",
+  "content": "Define quota per AI agent",
+  "content_en_sha1_hash": "178f2177b437dee4fb2f2c045466cb60ae95dc0a",
+  "created_at": "2025-11-06T18:29:07.747Z",
+  "updated_at": "2025-11-06T18:39:57.191Z",
+  "comment": {
+    "text": "This text appears as a label, likely on a button or form field, allowing users to define a quota limit for each AI agent. It's used within the storage management settings of the portal, enabling control over AI agent resource usage. Translators should consider the concept of resource limits and allocation.",
+    "is_auto": true,
+    "updated_at": "2025-11-06T18:39:57.191Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
+      "line_number": 54,
+      "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\")}\n toggleLabel={t(\"DefineQuotaPerAIAgent\")}\n disableQuota={disableQuota}\n saveQuota={saveQuota}\n {...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={1}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Create sample {{productName}} embed",
   "content_en_sha1_hash": "c59cb50f9d5f5ea5e5cfde8f2b44e7cf682dcc85",
   "created_at": "2025-05-19T21:30:54.400Z",
-  "updated_at": "2025-05-24T09:38:28.064Z",
+  "updated_at": "2025-08-04T07:30:01.384Z",
   "comment": {
     "text": "This translation key is used to display a button label in the UI, prompting users to create a sample embed of the product name. It appears on the Portal Settings page, likely as part of a dialog or settings menu. The purpose is to provide a clear and concise instruction for developers to set up a sample portal.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 395,
-      "context": "return (\n <PresetWrapper\n description={t(\"CustomDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n header={t(\"CreateSamplePortal\", { productName: t(\"Common:ProductName\") })}\n >\n <Container>\n <PreviewBlock\n t={t}\n loadCurrentFrame={initFrame}",
+      "line_number": 399,
+      "context": "return (\n <PresetWrapper\n description={t(\"CustomDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n header={t(\"CreateSamplePortal\", { productName: t(\"Common:ProductName\") })}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }
   ],

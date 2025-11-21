@@ -2,5 +2,6 @@
   "CancellaionNotification": "Älä näytä peruutusilmoitusta enää",
   "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä ",
   "OpenSameTab": "Avaa {{organizationName}} editori samassa välilehdessä",
-  "OriginalCopy": "Tallenna kopio tiedostosta myös alkuperäisessä muodossa"
+  "OriginalCopy": "Tallenna kopio tiedostosta myös alkuperäisessä muodossa",
+  "TrashMoveConfirmation": "Näytä ilmoitus, kun siirretään kohteita {{sectionName}}-osioon"
 }

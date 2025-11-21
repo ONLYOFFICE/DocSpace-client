@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "ລະຫັດຜ່ານໄດ້ຖືກປ່ຽນແລ້ວ",
   "CodeTitle": "ລະຫັດໄດ້ຖືກສົ່ງອີເມວຫາທ່ານ",
+  "ConfirmEmailChange": "ຢືນຢັນການປ່ຽນແປງອີເມວຂອງທ່ານ",
+  "ConfirmEmailChangeText": "ທ່ານໄດ້ຮ້ອງຂໍໃຫ້ປ່ຽນທີ່ຢູ່ອີເມວໃນບັນຊີ {{productName}} ຂອງທ່ານ. ເພື່ອດໍາເນີນການ, ກະລຸນາເຂົ້າສູ່ລະບົບໂດຍໃຊ້ຂໍ້ມູນປະຈໍາຕົວປະຈຸບັນຂອງທ່ານ.",
   "ErrorInvalidText": "ໃນ 10 ວິນາທີທ່ານຈະຖືກໂອນໄປຫາ <1>{{productName}}</1>",
   "ForgotPassword": "ລືມລະຫັດຜ່ານຂອງທ່ານ?",
   "LDAPUsernamePlaceholder": "ຊື່ຜູ້ໃຊ້ຂອງ {{ldap_domain}}",

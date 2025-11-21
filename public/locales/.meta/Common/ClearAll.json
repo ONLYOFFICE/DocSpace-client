@@ -3,7 +3,7 @@
   "content": "Clear all",
   "content_en_sha1_hash": "c043160a89ba0acd714977735d49455f662b1c79",
   "created_at": "2025-05-19T21:30:43.466Z",
-  "updated_at": "2025-05-28T09:30:02.939Z",
+  "updated_at": "2025-08-27T10:14:35.563Z",
   "comment": {
     "text": "This translation key is used to display a button label in a filter component that clears all filters. It appears as a link within a filter control element. Translators should provide an alternative text that conveys the action of clearing all filters.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/filter/index.tsx",
-      "line_number": 279,
-      "context": "fontWeight={600}\n isSemitransparent\n type={LinkType.action}\n onClick={clearAll}\n >\n {t(\"Common:ClearAll\")}\n </Link>\n ) : null}\n </div>\n ) : null}\n </div>",
+      "line_number": 290,
+      "context": "isSemitransparent\n type={LinkType.action}\n onClick={clearAll}\n dataTestId=\"filter_clear_all_link\"\n >\n {t(\"Common:ClearAll\")}\n </Link>\n ) : null}\n </div>\n ) : null}\n </div>",
       "module": "/packages/shared"
     }
   ],

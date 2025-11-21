@@ -1,0 +1,28 @@
+{
+  "key_path": "ToolCallArg",
+  "content": "Tool call arguments:",
+  "content_en_sha1_hash": "110e03f58b1b1fbd0eceebf15972282c7f9490fd",
+  "created_at": "2025-10-27T16:14:24.087Z",
+  "updated_at": "2025-10-27T16:27:03.117Z",
+  "comment": {
+    "text": "Label for the arguments section within a tool call message displayed in the chat. It introduces the formatted JSON representation of the tool's arguments. Translators should ensure the phrasing accurately conveys the purpose of presenting this data.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:27:03.117Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallBody/CodeView.tsx",
+      "line_number": 74,
+      "context": "return (\n <>\n <div className={styles.toolCallCodeViewItem}>\n <Text fontSize=\"15px\" lineHeight=\"16px\" fontWeight={600}>\n {t(\"Common:ToolCallArg\")}\n </Text>\n <MarkdownField\n chatMessage={formatJsonWithMarkdown(content.arguments)}\n />\n </div>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

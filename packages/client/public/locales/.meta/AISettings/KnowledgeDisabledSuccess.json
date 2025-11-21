@@ -1,0 +1,28 @@
+{
+  "key_path": "KnowledgeDisabledSuccess",
+  "content": "Knowledge base successfully disabled",
+  "content_en_sha1_hash": "32a12c2e2f5e35f800042408285aaf5c30bd51c6",
+  "created_at": "2025-11-13T07:58:04.693Z",
+  "updated_at": "2025-11-13T10:21:17.836Z",
+  "comment": {
+    "text": "This key displays a success message in the UI, confirming that the knowledge base has been successfully disabled. It appears after a user disables knowledge base settings, likely within a dialog or notification area. Translators should ensure the message conveys a positive outcome related to disabling knowledge base functionality.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:12:24.451Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/dialogs/reset/index.tsx",
+      "line_number": 59,
+      "context": "const onSubmitAction = async () => {\n setLoading(true);\n \n try {\n await restoreKnowledge?.();\n toastr.success(t(\"AISettings:KnowledgeDisabledSuccess\"));\n onSuccess?.();\n } catch (error) {\n console.error(error);\n toastr.error(error as string);\n } finally {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

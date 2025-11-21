@@ -24,31 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TTranslation } from "@docspace/shared/types";
-import type { TFolder } from "@docspace/shared/api/files/types";
-import type { ManualBackupProps } from "@docspace/shared/pages/manual-backup/ManualBackup.types";
+import type { ManualBackupProps } from "@docspace/shared/pages/backup/manual-backup/ManualBackup.types";
+import type {
+  ConnectedThirdPartyAccountType,
+  Nullable,
+} from "@docspace/shared/types";
 
 export interface InjectedManualBackupProps
   extends Omit<
     ManualBackupProps,
-    | "maxWidth"
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isInitialLoading"
-    | "isEmptyContentBeforeLoader"
+    "maxWidth" | "buttonSize" | "isNeedFilePath"
   > {
-  getProgress: (t: TTranslation) => Promise<void>;
-  setStorageRegions: (regions: unknown) => void;
-  setThirdPartyStorage: (list: unknown) => void;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
   resetDownloadingProgress: VoidFunction;
+  setConnectedThirdPartyAccount: (
+    account: Nullable<ConnectedThirdPartyAccountType>,
+  ) => void;
+  setBackupsCount: (count: number) => void;
+  setIsInited: (inited: boolean) => void;
+  isBackupPaid: boolean;
+  setIsEmptyContentBeforeLoader: (value: boolean) => void;
 }
 
-export interface ExternalManualBackupProps
-  extends Pick<
-    ManualBackupProps,
-    "maxWidth" | "buttonSize" | "isNeedFilePath"
-  > {}
+export type ExternalManualBackupProps = Pick<
+  ManualBackupProps,
+  "maxWidth" | "buttonSize" | "isNeedFilePath"
+>;
 
 export interface ManualBackupWrapperProps
   extends InjectedManualBackupProps,

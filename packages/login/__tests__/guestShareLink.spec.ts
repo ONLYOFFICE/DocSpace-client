@@ -43,8 +43,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -85,7 +85,7 @@ test("guest share link approve", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Approve" }).click();
+  await page.getByTestId("approve_button").click();
 
   await page.waitForURL(`${baseUrl}/accounts/guests/filter?**`, {
     waitUntil: "load",
@@ -110,7 +110,7 @@ test("guest share link deny", async ({
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Deny" }).click();
+  await page.getByTestId("deny_button").click();
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 

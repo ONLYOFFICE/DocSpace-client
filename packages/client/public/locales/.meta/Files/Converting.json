@@ -3,7 +3,7 @@
   "content": "Converting",
   "content_en_sha1_hash": "3bcef0a610e933857faac2e83c490abb8af3cab1",
   "created_at": "2025-05-19T21:30:55.347Z",
-  "updated_at": "2025-05-26T07:57:32.396Z",
+  "updated_at": "2025-10-27T16:14:33.362Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that files are being converted. It appears in a file upload UI and is meant to provide feedback to users about the progress of the conversion process. Translators should consider the nuances of converting files in their native language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 284,
+      "line_number": 287,
       "context": "case upload:\n if (progress > 0 && progress < 100)\n return i18n.t(\"Files:UploadingProgress\", { progress });\n return i18n.t(\"Files:Uploading\");\n case convert:\n return i18n.t(\"Files:Converting\");\n case deleteVersionFile:\n return i18n.t(\"Files:DeletingVersion\");\n \n default:\n return i18n.t(\"Files:OtherProcesses\");",
       "module": "/packages/client"
     }

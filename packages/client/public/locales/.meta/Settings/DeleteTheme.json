@@ -3,7 +3,7 @@
   "content": "Delete theme",
   "content_en_sha1_hash": "bd17efc386422720b42d5a367d2b782acd621131",
   "created_at": "2025-05-19T21:30:51.143Z",
-  "updated_at": "2025-05-26T07:57:32.484Z",
+  "updated_at": "2025-08-04T07:30:01.298Z",
   "comment": {
     "text": "Delete theme button label, used in a delete dialog when the \"DeleteTheme\" option is enabled.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 829,
-      "context": "isDisabled={isDisabledEditButton}\n />\n {isShowDeleteButton ? (\n <Button\n className=\"delete-theme button\"\n label={t(\"Settings:DeleteTheme\")}\n onClick={onOpenDialogDelete}\n size={buttonSize}\n isDisabled={isDisabledDeleteButton}\n />\n ) : null}",
+      "line_number": 842,
+      "context": "testId=\"appearance_edit_button\"\n />\n {isShowDeleteButton ? (\n <Button\n className=\"delete-theme button\"\n label={t(\"Settings:DeleteTheme\")}\n onClick={onOpenDialogDelete}\n size={buttonSize}\n isDisabled={isDisabledDeleteButton}\n testId=\"appearance_delete_button\"\n />",
       "module": "/packages/client"
     }
   ],

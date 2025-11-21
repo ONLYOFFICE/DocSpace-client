@@ -24,22 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { decode } from "he";
-import { TTranslation } from "@docspace/shared/types";
+import classNames from "classnames";
+
 import { Text } from "@docspace/shared/components/text";
-import { StyledHistoryDisplaynameBlock } from "../../../styles/history";
-import { Feed } from "./HistoryBlockContent.types";
+import {
+  TFeedAction,
+  TFeedData,
+  RoomMember,
+} from "@docspace/shared/api/rooms/types";
 
-interface HistoryMainTextProps {
-  t: TTranslation;
-  feed: Feed;
-}
+import styles from "../History.module.scss";
 
-const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
+type HistoryMainTextProps = {
+  feed: TFeedAction<RoomMember | TFeedData>;
+};
+
+const HistoryMainText = ({ feed }: HistoryMainTextProps) => {
+  const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
   return (
-    <StyledHistoryDisplaynameBlock className="message">
+    <span className={classNames("message", styles.historyBlockMessage)}>
       <span className="main-message">
         <Text className="name">
           {feed.initiator?.isAnonim
@@ -47,7 +53,7 @@ const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
             : decode(feed.initiator.displayName)}
         </Text>
       </span>
-    </StyledHistoryDisplaynameBlock>
+    </span>
   );
 };
 
@@ -56,4 +62,4 @@ export default inject<TStore>(({ infoPanelStore }) => {
   return {
     infoPanelSelection,
   };
-})(withTranslation(["InfoPanel", "Translations"])(observer(HistoryMainText)));
+})(observer(HistoryMainText));

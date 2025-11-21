@@ -3,7 +3,7 @@
   "content": "The selected disabled users will be removed from {{productName}}. This action cannot be undone.",
   "content_en_sha1_hash": "00684d428b17255bcdd0514a8aac68e4f38ec5f3",
   "created_at": "2025-05-19T21:30:56.640Z",
-  "updated_at": "2025-06-30T12:20:31.236Z",
+  "updated_at": "2025-09-07T07:53:15.095Z",
   "comment": {
     "text": "This translation key is used in a confirmation dialog to inform users that removing selected disabled users from an application is irreversible. It provides a descriptive message for users to review before confirming the action.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 358,
+      "line_number": 363,
       "context": "}}\n />\n </Text>\n <Text className=\"text-warning\">\n <Trans\n i18nKey=\"ActionCannotBeUndone\"\n ns=\"Payments\"\n t={t}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}",
       "module": "/packages/client"
     }

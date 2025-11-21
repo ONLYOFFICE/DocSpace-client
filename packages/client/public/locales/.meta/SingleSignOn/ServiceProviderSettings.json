@@ -3,7 +3,7 @@
   "content": "{{organizationName}} SP Settings",
   "content_en_sha1_hash": "bfbd7d95c8767887e77950d3041a33ab5f3eecd8",
   "created_at": "2025-05-19T21:30:50.127Z",
-  "updated_at": "2025-05-26T07:57:32.750Z",
+  "updated_at": "2025-09-29T11:28:56.234Z",
   "comment": {
     "text": "The ServiceProviderSettings translation key is used to display the title of a settings page, which provides configuration options for single sign-on services. This key appears as the title of a button or dialog in the UI, and its content should include the name of the organization. Translators should use this key to provide a consistent and informative label for users navigating the application's settings.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
-      "line_number": 88,
-      "context": "<>\n <ToggleSSO />\n \n <HideButton\n id=\"sp-settings-hide-button\"\n text={t(\"ServiceProviderSettings\", {\n organizationName: logoText,\n })}\n label={SERVICE_PROVIDER_SETTINGS}\n value={serviceProviderSettings}\n // isDisabled={!isSSOAvailable}",
+      "line_number": 99,
+      "context": "<>\n <ToggleSSO />\n \n <HideButton\n id=\"sp-settings-hide-button\"\n text={t(\"ServiceProviderSettings\", {\n organizationName: logoText,\n })}\n label={SERVICE_PROVIDER_SETTINGS}\n value={serviceProviderSettings}\n dataTestId=\"sp_settings_hide_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 358,
+      "line_number": 365,
       "context": "{\n id: \"portal-settings_catalog-sso-settings\",\n key: \"4-2-0\",\n icon: \"\",\n link: \"settings\",\n tKey: \"SingleSignOn:ServiceProviderSettings\",\n },\n {\n id: \"portal-settings_catalog-sso-metadata\",\n key: \"4-2-1\",\n icon: \"\",",
       "module": "/packages/client"
     }

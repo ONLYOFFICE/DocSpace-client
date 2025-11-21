@@ -3,7 +3,7 @@
   "content": "all file types available for editing in {{organizationName}}",
   "content_en_sha1_hash": "42ee1df816cd28253a891bc310d8e038628b2ed1",
   "created_at": "2025-05-19T21:30:42.993Z",
-  "updated_at": "2025-05-26T07:57:32.995Z",
+  "updated_at": "2025-08-04T07:30:01.765Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that all file types are available for editing in a specific organization. It appears in a UI element related to file format selection, likely on a dialog or button that allows users to select an editing option. Translators should provide a message that accurately conveys this information while respecting the organization's name.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/getSelectFormatTranslation.ts",
-      "line_number": 79,
+      "line_number": 82,
       "context": "case FilterType.PDFForm:\n return getTranslatedType(getManyPDFTitle(t, true));\n \n case \"EditorSupportedTypes\":\n return getTranslatedType(\n t(\"Common:AllTypesAvailableForEditing\", { organizationName: logoText }),\n false,\n );\n \n default:\n return \"\";",
       "module": "/packages/shared"
     }

@@ -38,10 +38,9 @@ const QUERY_PARAMS = [
     name: "type",
     value: "TfaActivation",
   },
-
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
 ];
 
@@ -75,7 +74,7 @@ test("tfa activation render", async ({ page, baseUrl }) => {
 test("tfa activation success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -83,7 +82,7 @@ test("tfa activation success", async ({ page, baseUrl }) => {
     "tfa-activation-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_connect_button").click();
 
   await page.waitForURL(`${baseUrl}/profile`, {
     waitUntil: "load",
@@ -103,9 +102,9 @@ test("tfa activation success with link data", async ({
 }) => {
   await page.goto(`${baseUrl}${URL_WITH_LINK_DATA_PARAMS}`);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_connect_button").click();
 
   await page.waitForURL(`${baseUrl}/profile`, {
     waitUntil: "load",
@@ -129,9 +128,9 @@ test("tfa activation error not validated", async ({
   clientRequestInterceptor.use(tfaAppValidateHandler(port, 400));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_connect_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",

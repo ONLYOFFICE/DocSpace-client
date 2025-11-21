@@ -3,7 +3,7 @@
   "content": "Check ready-to-use {{productName}} integrations",
   "content_en_sha1_hash": "f87add241b0df885895ab3a4a735efef0979ff99",
   "created_at": "2025-05-19T21:30:54.530Z",
-  "updated_at": "2025-05-24T09:15:18.795Z",
+  "updated_at": "2025-08-04T07:30:01.407Z",
   "comment": {
     "text": "This translation key is used to display a descriptive text next to examples of ready-to-use integrations of a specific product. It appears on a UI element in the developer tools section, likely as a header or caption, and provides context for users to understand the content of the integration examples.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
       "line_number": 76,
-      "context": ">\n <CategoryHeader className=\"integration-header\">\n {t(\"IntegrationExamples\")}\n </CategoryHeader>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"IntegrationDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div className=\"icons\">\n <div className=\"icon\" title={zoomTitle}>\n <ReactSVG\n className=\"icon-zoom\"",
+      "context": ">\n <CategoryHeader className=\"integration-header\">\n {t(\"IntegrationExamples\")}\n </CategoryHeader>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"IntegrationDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div className=\"icons\">\n <div\n data-testid=\"integration_zoom_container\"\n className=\"icon\"",
       "module": "/packages/client"
     }
   ],

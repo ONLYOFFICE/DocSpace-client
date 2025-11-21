@@ -34,7 +34,7 @@ import type { Nullable } from "../types";
 
 type ItemType = {
   shared: boolean;
-  roomType: RoomsType;
+  roomType?: RoomsType;
   external?: boolean;
 };
 

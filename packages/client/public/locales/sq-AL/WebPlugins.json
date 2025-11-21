@@ -8,6 +8,8 @@
   "NeedSettings": "Duhet të futni cilësimet",
   "NoPlugins": "Asnjë shtojcë e shtuar",
   "NotNeedSettings": "Not need enter settings",
+  "PluginIsNotCompatible": "Versioni i SDK-së së shtojcës nuk përputhet me versionin e {{productName}}. Ju lutemi, përditësoni në një version të përputhshëm.",
+  "PluginLoadedSuccessfully": "Shtojca u ngarkua me sukses",
   "PluginSamples": "Mostrat e shtojcave",
   "PluginSDK": "Shtojca SDK",
   "PluginSDKDescription": "Duke përdorur Plugin SDK, mund të zgjeroni funksionalitetin tuaj të {{productName}}, të lidhni shërbimet e palëve të treta ose të përmirësoni përvojën ekzistuese të përdoruesit. Këtu mund të gjeni mostrat e shtojcave me burim kodi të disponueshëm në GitHub.",

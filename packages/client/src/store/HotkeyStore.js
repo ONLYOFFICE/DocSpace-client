@@ -33,6 +33,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
+import { clearTextSelection } from "@docspace/shared/utils/copy";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -59,6 +60,10 @@ class HotkeyStore {
   elemOffset = 0;
 
   hotkeysClipboardAction = null;
+
+  selectionAreaIsEnabled = true;
+
+  withContentSelection = false;
 
   constructor(
     filesStore,
@@ -136,7 +141,7 @@ class HotkeyStore {
       return e;
 
     const isDefaultKeys =
-      ["PageUp", "PageDown", "Home", "End"].indexOf(e.code) > -1;
+      ["PageUp", "PageDown", "Home", "End", "KeyV"].indexOf(e.code) > -1;
 
     if (
       ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(
@@ -547,7 +552,7 @@ class HotkeyStore {
       this.filesStore;
 
     setSelected("all");
-    if (!hotkeyCaret) {
+    if (!hotkeyCaret && filesList.length) {
       this.setCaret(filesList[0]);
       setHotkeyCaretStart(filesList[0]);
     }
@@ -694,8 +699,6 @@ class HotkeyStore {
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
           } else {
-            if (!isCopy) this.filesStore.setMovingInProgress(!isCopy);
-
             await itemOperationToFolder(operationData);
           }
         })
@@ -736,6 +739,25 @@ class HotkeyStore {
       .catch((err) => {
         toastr.error(err, null, 0, true);
       });
+  };
+
+  setSelectionAreaIsEnabled = (selectionAreaIsEnabled) => {
+    this.selectionAreaIsEnabled = selectionAreaIsEnabled;
+  };
+
+  setWithContentSelection = (withContentSelection) => {
+    this.withContentSelection = withContentSelection;
+  };
+
+  enableSelection = (e) => {
+    if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      clearTextSelection();
+      this.setSelectionAreaIsEnabled(false);
+      this.setWithContentSelection(true);
+    } else if (e.type === "keyup") {
+      this.setSelectionAreaIsEnabled(true);
+    }
+    e.preventDefault();
   };
 
   get countTilesInRow() {

@@ -118,14 +118,19 @@ class BackupCodesDialogComponent extends React.Component {
               {backupCodesCount} {t("CodesCounter")}
             </Text>
 
-            <Text className="backup-codes-codes" isBold>
+            <Text
+              className="backup-codes-codes"
+              isBold
+              dataTestId="backup_codes_container"
+            >
               {backupCodes.length > 0
-                ? backupCodes.map((item) => {
+                ? backupCodes.map((item, index) => {
                     if (!item.isUsed) {
                       return (
                         <strong
                           key={item.code}
                           className="backup-codes-code"
+                          data-testid={`backup_code_${index}`}
                           dir="auto"
                         >
                           {item.code} <br />
@@ -146,12 +151,14 @@ class BackupCodesDialogComponent extends React.Component {
               size="normal"
               primary
               onClick={this.getNewBackupCodes}
+              testId="request_new_backup_codes_button"
             />
             <Button
               key="PrintBtn"
               label={t("Common:CancelButton")}
               size="normal"
               onClick={onClose}
+              testId="backup_codes_cancel_button"
             />
             {isDesktop() ? (
               <div className="backup-codes-print-link-wrapper">
@@ -161,6 +168,7 @@ class BackupCodesDialogComponent extends React.Component {
                   fontWeight={600}
                   isHovered
                   onClick={this.printPage}
+                  dataTestId="print_backup_codes_link"
                 >
                   {t("PrintButton")}
                 </Link>

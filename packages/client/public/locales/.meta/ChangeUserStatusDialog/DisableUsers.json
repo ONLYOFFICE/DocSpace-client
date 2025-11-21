@@ -3,7 +3,7 @@
   "content": "Disable users",
   "content_en_sha1_hash": "5ef860f2fa309fc100b93c2a14da76b891617550",
   "created_at": "2025-05-19T21:30:56.959Z",
-  "updated_at": "2025-05-24T14:16:10.199Z",
+  "updated_at": "2025-08-04T07:30:01.062Z",
   "comment": {
     "text": "This translation key is used to display a message that disables user accounts. It is typically displayed as a button label or in a dialog when changing user status, informing users that their account will be disabled.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 171,
+      "line_number": 167,
       "context": "? isGuests\n ? t(\"DisableGuest\")\n : t(\"DisableUser\")\n : isGuests\n ? t(\"DisableGuests\")\n : t(\"DisableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"DisableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"DisableUserDescription\", { productName: t(\"Common:ProductName\") })",
       "module": "/packages/client"
     }

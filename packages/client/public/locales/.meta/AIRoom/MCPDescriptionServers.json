@@ -1,0 +1,28 @@
+{
+  "key_path": "MCPDescriptionServers",
+  "content": "Use MCP servers connected by the administrator to enhance chat experience with AI. MCP servers can assist with data extraction, summaries, smart suggestions, etc.",
+  "content_en_sha1_hash": "ec6a3c2d1e80796c7f6e6cc62ee20e2b016a6377",
+  "created_at": "2025-11-13T14:53:09.568Z",
+  "updated_at": "2025-11-13T14:55:03.583Z",
+  "comment": {
+    "text": "This text describes the functionality of MCP servers, explaining they enhance the chat experience with AI features like data extraction and suggestions. It appears as a description within the Create/Edit Agent dialog, specifically near controls for MCP server selection. Translators should convey that these servers provide AI-powered assistance.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T14:55:03.583Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
+      "line_number": 75,
+      "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"MCPDescriptionServers\")}\n </Text>\n </div>\n <div className=\"ai-mcp-group\">\n <SelectorAddButton onClick={onClickAction} />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

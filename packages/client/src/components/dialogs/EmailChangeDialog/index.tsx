@@ -90,6 +90,7 @@ const EmailChangeDialog = ({
             onBlur={checkEmailValidity}
             isAutoFocussed
             scale
+            dataTestId="change_email_input"
           />
         </DialogBodyWrapper>
       </ModalDialog.Body>
@@ -101,12 +102,14 @@ const EmailChangeDialog = ({
           primary
           onClick={handleSave}
           isDisabled={hasError}
+          testId="change_email_save_button"
         />
         <Button
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           scale
           onClick={onClose}
+          testId="change_email_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

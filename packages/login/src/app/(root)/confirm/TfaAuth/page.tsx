@@ -24,42 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { logger } from "logger.mjs";
+
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
-import { getStringFromSearchParams, encodeParams } from "@/utils";
-import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
-import { logger } from "logger.mjs";
 import TfaAuthForm from "./page.client";
 
-type TfaAuthProps = {
-  searchParams: Promise<{ [key: string]: string }>;
-};
-
-async function Page(props: TfaAuthProps) {
+async function Page() {
   logger.info("TfaAuth page");
-  const { searchParams: sp } = props;
-  const searchParams = await sp;
-  const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
-  const uid = searchParams.uid;
 
-  const [settings, user] = await Promise.all([
-    getSettings(),
-    getUserFromConfirm(uid, confirmKey),
-  ]);
-
-  return settings && typeof settings !== "string" ? (
+  return (
     <>
       <GreetingContainer />
       <FormWrapper id="tfa-auth-form">
-        <TfaAuthForm
-          passwordHash={settings.passwordHash}
-          userName={user?.userName}
-        />
+        <TfaAuthForm />
       </FormWrapper>
     </>
-  ) : null;
+  );
 }
 
 export default Page;

@@ -29,6 +29,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
+import { TABLE_ROOMS_COLUMNS } from "SRC_DIR/helpers/constants";
+
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -45,6 +47,7 @@ const RoomsListComponent = (props) => {
 
     roomsListLength,
     roomFilterData,
+    id,
   } = props;
   const { t } = useTranslation("Settings");
 
@@ -56,6 +59,14 @@ const RoomsListComponent = (props) => {
     roomFilterData.provider = defaultFilter.provider;
 
     const urlFilter = roomFilterData.toUrlParams();
+
+    const roomsColumnsKey = `${TABLE_ROOMS_COLUMNS}=${id}`;
+    const currentColumns = localStorage.getItem(roomsColumnsKey);
+
+    if (currentColumns && !currentColumns.includes("Storage")) {
+      const updatedColumns = `${currentColumns},Storage`;
+      localStorage.setItem(roomsColumnsKey, updatedColumns);
+    }
 
     navigate(`/rooms/shared/filter?${urlFilter}`);
   };
@@ -100,6 +111,7 @@ const RoomsListComponent = (props) => {
             {...buttonProps}
             label={t("Common:ShowMore")}
             onClick={onClickRooms}
+            testId="show_more_rooms_button"
           />
         ) : null}
       </div>

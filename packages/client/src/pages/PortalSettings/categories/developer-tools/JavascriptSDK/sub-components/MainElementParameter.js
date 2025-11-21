@@ -49,7 +49,11 @@ export const MainElementParameter = ({
   isButtonMode = false,
 }) => {
   const elementDisplayOptions = [
-    { value: "element", label: t("ElementItself") },
+    {
+      value: "element",
+      label: t("ElementItself"),
+      dataTestId: "element_radio_button",
+    },
     {
       value: "button",
       label: (
@@ -58,6 +62,7 @@ export const MainElementParameter = ({
           <Text color="gray">{`(${t("ElementCalledAfterClicking")})`}</Text>
         </RowContainer>
       ),
+      dataTestId: "button_radio_button",
     },
   ];
 
@@ -110,6 +115,7 @@ export const MainElementParameter = ({
         onClick={toggleButtonMode}
         spacing="8px"
         isDisabled
+        dataTestId="element_display_radio_button_group"
       />
       {config.isButtonMode ? (
         <>
@@ -120,6 +126,7 @@ export const MainElementParameter = ({
               scale
               handleChange={setButtonColor}
               defaultColor={globalColors.lightSecondMain}
+              dataTestId="button_mode_color_input"
             />
           </ControlsGroup>
           <ControlsGroup>
@@ -132,12 +139,14 @@ export const MainElementParameter = ({
               })}
               value={buttonValue}
               tabIndex={3}
+              testId="button_mode_text_input"
             />
             <Checkbox
               className="checkbox"
               label={t("Logo")}
               onChange={toggleWithLogo}
               isChecked={config.buttonWithLogo}
+              dataTestId="button_mode_logo_checkbox"
             />
           </ControlsGroup>
         </>

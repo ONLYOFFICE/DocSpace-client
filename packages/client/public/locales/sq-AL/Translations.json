@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "Drejtoria e OneDrive",
   "FolderTitleWebDav": "Drejtori WebDAV",
   "FolderTitleYandex": "Drejtoria Yandex",
-  "GuestReleaseTipLink": "Mësoni më shumë rreth llojeve të përdoruesve",
-  "LinkHasExpiredAndHasBeenDisabled": "Lidhja ka skaduar dhe është çaktivizuar",
   "LinkValidTime": "Kjo lidhje është e vlefshme vetëm për {{days_count}} ditë.",
   "NewForm": "Formulari PDF",
   "OwnerChange": "Ndryshoni pronarin",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Ndryshoni informacionin e palës së tretë",
   "ThirdPartyTitle": "Shërbime të palëve të treta",
   "TitleShowActions": "Shfaqni veprimet e skedarit",
-  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve"
+  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve",
+  "TrashItemsDeleteSuccess": "Elementet e përzgjedhura u fshinë me sukses nga {{sectionName}}"
 }

@@ -136,6 +136,7 @@ const SecretKeyInput = (props) => {
                   href={webhooksGuideUrl}
                   target="_blank"
                   className="link"
+                  dataTestId="webhooks_guide_link"
                 >
                   {t("ReadMore")}
                 </Link>
@@ -143,6 +144,7 @@ const SecretKeyInput = (props) => {
             </Text>
           }
           place="bottom"
+          dataTestId="secret_key_help_button"
         />
       </Header>
       {isResetVisible ? (
@@ -155,6 +157,7 @@ const SecretKeyInput = (props) => {
             isHovered
             onClick={hideReset}
             className="link"
+            dataTestId="reset_key_link"
           >
             {t("ResetKey")}
           </Link>
@@ -176,6 +179,7 @@ const SecretKeyInput = (props) => {
           passwordSettings={passwordSettings}
           key={passwordInputKey}
           isDisabled={isDisabled}
+          dataTestId="secret_key_input"
         />
         <Link
           id="generate-link"
@@ -184,6 +188,7 @@ const SecretKeyInput = (props) => {
           isHovered
           onClick={generatePassword}
           className="link dotted"
+          dataTestId="generate_link"
         >
           {t("Generate")}
         </Link>

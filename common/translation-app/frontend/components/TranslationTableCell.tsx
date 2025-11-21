@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import Modal from "./Modal";
 import * as api from "../lib/api";
 
@@ -87,7 +88,11 @@ const TranslationTableCell: React.FC<TranslationTableCellProps> = ({
         <div className="group flex items-start">
           <div className="flex items-start flex-1">
             <div
-              className={`flex-1 break-words ${!currentEntry?.translations[lang] ? "text-gray-400 dark:text-gray-500 italic" : "text-gray-800 dark:text-gray-200"}`}
+              className={`flex-1 break-words ${
+                !currentEntry?.translations[lang]
+                  ? "text-gray-400 dark:text-gray-500 italic"
+                  : "text-gray-800 dark:text-gray-200"
+              }`}
               onClick={() =>
                 handleEditStart(
                   currentEntry?.path,
@@ -140,17 +145,19 @@ const TranslationTableCell: React.FC<TranslationTableCellProps> = ({
                 <button
                   onClick={() => {
                     const sourceText = currentEntry?.translations[lang] || "";
-                    const url = `https://translate.google.com/?sl=auto&tl=en&text=${encodeURIComponent(sourceText)}`;
+                    const url = `https://translate.google.com/?sl=auto&tl=en&text=${encodeURIComponent(
+                      sourceText
+                    )}`;
                     window.open(url, "_blank");
                   }}
                   className="text-xs btn btn-secondary py-0 px-2"
                   title="Open in Google Translate"
                 >
-                  <img
+                  <Image
                     src="/GT_logo.svg"
                     alt="Google Translate"
-                    width="16"
-                    height="16"
+                    width={16}
+                    height={16}
                     style={{ verticalAlign: "middle" }}
                   />
                 </button>

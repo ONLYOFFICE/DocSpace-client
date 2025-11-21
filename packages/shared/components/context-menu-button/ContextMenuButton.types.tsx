@@ -68,6 +68,8 @@ export interface ContextMenuButtonProps {
   directionX?: TDirectionX;
   /** Direction Y */
   directionY?: TDirectionY;
+  /** Fixes the direction of the dropdown */
+  fixedDirection?: boolean;
   /** Accepts class */
   className?: string;
   /** Accepts id */
@@ -91,4 +93,5 @@ export interface ContextMenuButtonProps {
   isFill?: boolean;
   zIndex?: number;
   asideHeader?: React.ReactNode;
+  testId?: string;
 }

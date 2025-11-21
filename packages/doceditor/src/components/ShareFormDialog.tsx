@@ -23,28 +23,32 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import FormDataCollectionIcon from "PUBLIC_DIR/images/icons/32/form.data.collection.svg";
 import RoleBasedFillingIcon from "PUBLIC_DIR/images/icons/32/role.based.filling.svg";
+import ShareFileToUsersIcon from "PUBLIC_DIR/images/icons/32/shareFileToUsers.svg";
 import ShareSvg from "PUBLIC_DIR/images/icons/32/share.svg";
 
 import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/dialogs/share-form-dialog";
+import { ShareSelector } from "@docspace/shared/components/share/selector";
 
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
-
-import { StartFillingSelectorDialogProps } from "@/types";
 import {
-  addExternalLink,
-  editExternalLink,
-  getExternalLinks,
-} from "@docspace/shared/api/files";
-import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
+
+import { addExternalLink, getExternalLinks } from "@docspace/shared/api/files";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { toastr } from "@docspace/shared/components/toast";
 import { Nullable, TResolver } from "@docspace/shared/types";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+
+import { StartFillingSelectorDialogProps } from "@/types";
+
 import StartFillingSelectorDialog from "./StartFillingSelectDialog";
 
 type SubmitFn = StartFillingSelectorDialogProps["onSubmit"];
@@ -85,9 +89,17 @@ const ShareFormDialog = ({
 }: ShareFormDialogProps) => {
   const { t } = useTranslation("Common");
 
+  const [isShareFormDialogVisible, setIsShareFormDialogVisible] =
+    useState(false);
+
+  const onCloseShareFormDialog = () => {
+    setIsShareFormDialogVisible(false);
+  };
+
   const handleClose = () => {
     onClose();
     onCloseStartFillingSelectDialog();
+    onCloseShareFormDialog();
   };
 
   const onSubmit: SubmitFn = async (...args) => {
@@ -106,10 +118,11 @@ const ShareFormDialog = ({
           false,
           false,
         );
-        return copyDocumentShareLink(link, t);
+        copyShareLink(file, link, t);
+        return;
       }
 
-      if (res.items.length === 1) {
+      if (res.items.length >= 1) {
         const [link] = res.items;
 
         if (link.access !== ShareAccessRights.FormFilling) {
@@ -122,19 +135,20 @@ const ShareFormDialog = ({
             });
           });
 
-          const updatedLink = await editExternalLink(
-            file.id,
-            link.sharedTo.id,
-            ShareAccessRights.FormFilling,
-            false,
-            false,
-            moment(null),
-          );
+          const updatedLink = await ShareLinkService.editLink(file, {
+            ...link,
+            access: ShareAccessRights.FormFilling,
+            sharedTo: {
+              ...link.sharedTo,
+              expirationDate: null,
+            },
+          });
 
-          return copyDocumentShareLink(updatedLink, t);
+          copyShareLink(file, updatedLink, t);
+          return;
         }
 
-        return copyDocumentShareLink(link, t);
+        copyShareLink(file, link, t);
       }
     } catch (error) {
       if (error === "canceled") {
@@ -148,6 +162,8 @@ const ShareFormDialog = ({
     }
   };
 
+  const shareFileToUsers = async () => setIsShareFormDialogVisible(true);
+
   const cards = [
     {
       id: "quick-sharing",
@@ -159,6 +175,20 @@ const ShareFormDialog = ({
       disabled: !file.canShare,
     },
     {
+      id: "share-with-users",
+      title: t("Common:ShareWithPortalUsers", {
+        productName: t("Common:ProductName"),
+      }),
+      description: t("Common:ShareWithPortalUsersDescription", {
+        productName: t("Common:ProductName"),
+      }),
+      buttonLabel: t("Common:Share"),
+      onClick: shareFileToUsers,
+      icon: <ShareFileToUsersIcon />,
+      // HACK: Hide share option for rooms — remove after implementation is ready
+      disabled: !file.canShare || file.rootFolderType === FolderType.Rooms,
+    },
+    {
       id: "form-room",
       title: t("Common:FormDataCollection"),
       description: t("Common:FormDataCollectionDescription"),
@@ -168,8 +198,8 @@ const ShareFormDialog = ({
     },
     {
       id: "virtual-data-room",
-      title: t("Common:RoleBasedFilling"),
-      description: t("Common:RoleBasedFillingDescription"),
+      title: t("Common:RecipientBasedFilling"),
+      description: t("Common:RecipientBasedFillingDescription"),
       buttonLabel: t("Common:ShareInTheRoom"),
       onClick: onClickVirtualDataRoom,
       icon: <RoleBasedFillingIcon />,
@@ -182,25 +212,40 @@ const ShareFormDialog = ({
       withBorder
       cards={cards}
       onClose={handleClose}
-      containerVisible={isVisibleStartFillingSelectDialog}
+      containerVisible={
+        isVisibleStartFillingSelectDialog || isShareFormDialogVisible
+      }
       title={t("Common:ShareToFillOut")}
       container={
-        <StartFillingSelectorDialog
-          isVisible
-          fileInfo={file}
-          onSubmit={onSubmit}
-          filesSettings={filesSettings}
-          header={{
-            withoutBorder: false,
-            onCloseClick: handleClose,
-            withoutBackButton: false,
-            headerLabel: headerLabelSFSDialog,
-            onBackClick: onCloseStartFillingSelectDialog,
-          }}
-          onClose={handleClose}
-          createDefineRoomType={createDefineRoomType}
-          getIsDisabled={getIsDisabledStartFillingSelectDialog}
-        />
+        <>
+          {isVisibleStartFillingSelectDialog ? (
+            <StartFillingSelectorDialog
+              isVisible
+              fileInfo={file}
+              onSubmit={onSubmit}
+              filesSettings={filesSettings}
+              header={{
+                withoutBorder: false,
+                onCloseClick: handleClose,
+                withoutBackButton: false,
+                headerLabel: headerLabelSFSDialog,
+                onBackClick: onCloseStartFillingSelectDialog,
+              }}
+              onClose={handleClose}
+              createDefineRoomType={createDefineRoomType}
+              getIsDisabled={getIsDisabledStartFillingSelectDialog}
+            />
+          ) : null}
+
+          {isShareFormDialogVisible ? (
+            <ShareSelector
+              item={file}
+              onClose={handleClose}
+              onBackClick={onCloseShareFormDialog}
+              onCloseClick={handleClose}
+            />
+          ) : null}
+        </>
       }
     />
   );

@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { ContextMenu } from "../../../context-menu/ContextMenu";
 import { ToolbarActionType } from "../../MediaViewer.enums";
 import { ViewerToolbar } from "./index";
@@ -34,25 +34,25 @@ import type { ToolbarItemType } from "./ViewerToolbar.props";
 const DotsIcon = () => <div data-testid="dots-icon">Dots</div>;
 
 // Mock useClickOutside hook
-jest.mock("../../../../utils/useClickOutside", () => ({
+vi.mock("../../../../utils/useClickOutside", () => ({
   useClickOutside: (ref: HTMLElement, callback: () => void) => {
     // Mock implementation that just stores the callback
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: TODO fix
     (window as any).clickOutsideCallback = callback;
   },
 }));
 
 // Mock classnames
-jest.mock("classnames", () => ({
+vi.mock("classnames", () => ({
   __esModule: true,
   default: (...args: string[]) => args.filter(Boolean).join(" "),
 }));
 
 describe("ViewerToolbar", () => {
-  const mockToolbarEvent = jest.fn();
-  const mockGenerateContextMenu = jest.fn();
-  const mockSetIsOpenContextMenu = jest.fn();
+  const mockToolbarEvent = vi.fn();
+  const mockGenerateContextMenu = vi.fn();
+  const mockSetIsOpenContextMenu = vi.fn();
 
   const defaultToolbarItems: ToolbarItemType[] = [
     {
@@ -84,7 +84,7 @@ describe("ViewerToolbar", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders toolbar with all items", () => {

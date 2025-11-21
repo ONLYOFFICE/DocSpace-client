@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -32,7 +32,7 @@ import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 import { RoomSearchArea } from "@docspace/shared/enums";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const RoomTemplatesTabs = ({
@@ -45,6 +45,8 @@ const RoomTemplatesTabs = ({
   userId,
 }) => {
   const { t } = useTranslation(["Common"]);
+
+  const [selectedTab, setSelectedTab] = React.useState("rooms");
 
   const tabs = [
     {
@@ -63,6 +65,8 @@ const RoomTemplatesTabs = ({
   const onSelect = (e) => {
     const templates = e.id === "templates";
 
+    setSelectedTab(e.id);
+
     const newRoomsFilter = RoomsFilter.getDefault(
       userId,
       templates ? RoomSearchArea.Templates : RoomSearchArea.Active,
@@ -78,16 +82,22 @@ const RoomTemplatesTabs = ({
     });
   };
 
-  const startSelectId =
-    getObjectByLocation(window.DocSpace.location)?.searchArea ===
-    RoomSearchArea.Templates
-      ? "templates"
-      : "rooms";
+  React.useEffect(() => {
+    const templatesTab =
+      getObjectByLocation(window.DocSpace.location)?.searchArea ===
+      RoomSearchArea.Templates;
+    setSelectedTab(templatesTab ? "templates" : "rooms");
+  }, [window.DocSpace.location]);
 
   if (showTabs && showTabsLoader) return <SectionSubmenuSkeleton />;
 
   return showTabs ? (
-    <Tabs items={tabs} selectedItemId={startSelectId} onSelect={onSelect} />
+    <Tabs
+      items={tabs}
+      selectedItemId={selectedTab}
+      onSelect={onSelect}
+      withAnimation
+    />
   ) : null;
 };
 

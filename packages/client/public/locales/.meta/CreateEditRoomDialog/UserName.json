@@ -3,7 +3,7 @@
   "content": "User Name",
   "content_en_sha1_hash": "a951840b9198d73fc05820af063286d958ede53b",
   "created_at": "2025-05-19T21:30:56.855Z",
-  "updated_at": "2025-05-24T13:39:17.753Z",
+  "updated_at": "2025-10-27T16:14:33.237Z",
   "comment": {
     "text": "This translation key is used for the label of a tab or section in a user interface, specifically in the \"Viewer Info\" component. It displays the text \"User Name\", likely to represent a user's name in a profile or account settings section. Translators should provide a translated version of this text that reflects its intended use in the application.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.js",
-      "line_number": 40,
-      "context": "import { Tabs, TabsTypes } from \"@docspace/shared/components/tabs\";\n import { StyledWatermark } from \"./StyledComponent\";\n \n const tabsOptions = (t) => [\n {\n id: \"UserName\",\n name: t(\"UserName\"),\n index: 0,\n },\n {\n id: \"UserEmail\",",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.tsx",
+      "line_number": 43,
+      "context": "import { StyledWatermark } from \"./StyledComponent\";\n \n const tabsOptions = (t: TFunction) => [\n {\n id: \"UserName\",\n name: t(\"UserName\"),\n index: 0,\n content: null,\n },\n {",
       "module": "/packages/client"
     }
   ],

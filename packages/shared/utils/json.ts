@@ -28,7 +28,7 @@ const isJSON = (jsonString: string) => {
   try {
     const parsedJson = JSON.parse(jsonString);
     return parsedJson && typeof parsedJson === "object";
-  } catch (e) {
+  } catch {
     return false;
   }
 };

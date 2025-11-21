@@ -1,0 +1,28 @@
+{
+  "key_path": "WebSearchDisabledSuccess",
+  "content": "Web search successfully disabled",
+  "content_en_sha1_hash": "e2e1227d84876fe94ee5016e1886c5b75f090f05",
+  "created_at": "2025-11-13T07:58:04.700Z",
+  "updated_at": "2025-11-13T08:07:09.700Z",
+  "comment": {
+    "text": "This key displays a success message after web search functionality is disabled within the AI settings. It appears as a toast notification confirming the action was completed successfully, likely triggered by a button or action within a dialog. Translators should ensure the message clearly indicates web search has been turned off.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:07:09.700Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
+      "line_number": 59,
+      "context": "const onSubmitAction = async () => {\n setLoading(true);\n \n try {\n await restoreWebSearch?.();\n toastr.success(t(\"AISettings:WebSearchDisabledSuccess\"));\n onSuccess?.();\n } catch (error) {\n console.error(error);\n toastr.error(error as string);\n } finally {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

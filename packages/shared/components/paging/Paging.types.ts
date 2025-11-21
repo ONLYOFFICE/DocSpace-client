@@ -61,4 +61,6 @@ export interface PagingProps {
   style?: React.CSSProperties;
   /** Displays a combobox with the number of items per page */
   showCountItem?: boolean;
+  /** Unique test id */
+  dataTestId?: string;
 }

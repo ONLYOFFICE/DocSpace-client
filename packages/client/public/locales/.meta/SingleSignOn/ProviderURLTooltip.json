@@ -3,7 +3,7 @@
   "content": "Identity Provider Entity Id (Issuer URL)",
   "content_en_sha1_hash": "76ee57556703e4be7173bf6ab9458305b3c58297",
   "created_at": "2025-05-19T21:30:50.125Z",
-  "updated_at": "2025-05-24T03:15:19.602Z",
+  "updated_at": "2025-10-02T08:48:56.525Z",
   "comment": {
     "text": "The translation key \"ProviderURLTooltip\" is used to display a tooltip for the \"Issuer URL\" label in the Single Sign On settings page, helping users understand the purpose of entering an entity ID. This tooltip appears next to a field where users can enter a provider's URL.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 107,
-      "context": "<SsoFormField\n labelText={t(\"ProviderURL\")}\n name=\"entityId\"\n placeholder={PROVIDER_URL}\n tabIndex={5}\n tooltipContent={<Text fontSize=\"12px\">{t(\"ProviderURLTooltip\")}</Text>}\n tooltipClass=\"provider-url-tooltip icon-button\"\n value={entityId}\n hasError={entityIdHasError}\n />",
+      "line_number": 101,
+      "context": "<SsoFormField\n labelText={t(\"ProviderURL\")}\n name=\"entityId\"\n placeholder={PROVIDER_URL}\n tabIndex={5}\n tooltipContent={<Text fontSize=\"12px\">{t(\"ProviderURLTooltip\")}</Text>}\n tooltipClass=\"provider-url-tooltip icon-button\"\n value={entityId}\n hasError={entityIdHasError}\n dataTestId=\"entity_id\"\n />",
       "module": "/packages/client"
     }
   ],

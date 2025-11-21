@@ -3,7 +3,7 @@
   "content": "Sender Email Address",
   "content_en_sha1_hash": "6024d73decdbc08c243c279344fce41f143a2909",
   "created_at": "2025-05-19T21:30:53.309Z",
-  "updated_at": "2025-05-24T02:46:14.310Z",
+  "updated_at": "2025-08-11T18:11:59.253Z",
   "comment": {
     "text": "This translation key represents the label for an email address input field in a user interface, likely found within settings or configuration pages. It is used to display the prompt \"Sender Email Address\" on-screen, guiding users to enter their sender's email address.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 210,
-      "context": "value={settings[SENDER_DISPLAY_NAME]}\n scale\n />\n \n <div className=\"smtp-settings_title\">\n <Text {...commonTextProps}>{t(\"SenderEmailAddress\")}</Text>\n <Text as=\"span\" {...requirementColor}>\n *\n </Text>\n </div>\n <FieldContainer",
+      "line_number": 217,
+      "context": "scale\n testId=\"smtp_sender_display_name_input\"\n />\n \n <div className=\"smtp-settings_title\">\n <Text {...commonTextProps}>{t(\"SenderEmailAddress\")}</Text>\n <Text as=\"span\" {...requirementColor}>\n *\n </Text>\n </div>\n <FieldContainer",
       "module": "/packages/client"
     }
   ],

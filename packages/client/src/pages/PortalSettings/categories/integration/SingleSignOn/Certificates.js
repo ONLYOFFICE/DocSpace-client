@@ -108,7 +108,7 @@ const Certificates = (props) => {
   return (
     <StyledWrapper>
       <div className="certificates-box">
-        <Text as="h2" fontSize="15px" fontWeight={600} noSelect>
+        <Text as="h2" fontSize="15px" fontWeight={600}>
           {prefix === "idp" ? t("idpCertificates") : t("spCertificates")}
         </Text>
 
@@ -126,6 +126,11 @@ const Certificates = (props) => {
               ? "idp-certificates-tooltip icon-button"
               : "sp-certificates-tooltip icon-button"
           }
+          dataTestId={
+            prefix === "idp"
+              ? "idp_certificates_help_button"
+              : "sp_certificates_help_button"
+          }
         />
       </div>
 
@@ -141,6 +146,7 @@ const Certificates = (props) => {
               onClick={openIdpModal}
               size="small"
               tabIndex={9}
+              testId="idp_add_certificate_button"
             />
             <AddIdpCertificateModal />
           </>
@@ -155,6 +161,7 @@ const Certificates = (props) => {
               onClick={openSpModal}
               size="small"
               tabIndex={9}
+              testId="sp_add_certificate_button"
             />
             <AddSpCertificateModal />
           </>
@@ -169,6 +176,11 @@ const Certificates = (props) => {
               : "spShowAdditionalParameters"
           }
           isAdditionalParameters
+          dataTestId={
+            prefix === "idp"
+              ? "idp_hide_show_parameters_button"
+              : "sp_hide_show_parameters_button"
+          }
         />
       </div>
 
@@ -184,6 +196,7 @@ const Certificates = (props) => {
               options={verifyAlgorithmsOptions}
               tabIndex={14}
               value={idpVerifyAlgorithm}
+              dataTestId="idp_signing_combobox"
             />
           ) : null}
 
@@ -196,6 +209,7 @@ const Certificates = (props) => {
                 options={verifyAlgorithmsOptions}
                 tabIndex={14}
                 value={spSigningAlgorithm}
+                dataTestId="sp_signing_combobox"
               />
 
               <SsoComboBox
@@ -205,6 +219,7 @@ const Certificates = (props) => {
                 options={decryptAlgorithmsOptions}
                 tabIndex={15}
                 value={spEncryptAlgorithm}
+                dataTestId="sp_decryption_combobox"
               />
             </>
           ) : null}

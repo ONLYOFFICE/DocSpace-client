@@ -104,6 +104,7 @@ const ToggleAutoSync = ({
         isChecked={isCronEnabled}
         onChange={onChangeToggle}
         isDisabled={!isLdapEnabledOnServer || isUIDisabled}
+        dataTestId="auto_sync_toggle_button"
       />
 
       <div className="toggle-caption">
@@ -134,7 +135,6 @@ const ToggleAutoSync = ({
           fontWeight={400}
           lineHeight="16px"
           className="settings_unavailable"
-          noSelect
         >
           {t("LdapAutoSyncToggleDescription")}
         </Text>

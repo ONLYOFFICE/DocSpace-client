@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "OneDriveディレクトリ",
   "FolderTitleWebDav": "WebDAVディレクトリ",
   "FolderTitleYandex": "Yandexディレクトリ",
-  "GuestReleaseTipLink": "ユーザーのタイプについて、さらに詳しく",
-  "LinkHasExpiredAndHasBeenDisabled": "リンクは有効期限が切れたため無効になっています",
   "LinkValidTime": "このリンクは {{days_count}} 日間のみ有効です。",
   "NewForm": "PDFフォーム",
   "OwnerChange": "オーナー変更",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "第三者機関情報の変更",
   "ThirdPartyTitle": "サードパーティのサービス",
   "TitleShowActions": "ファイルアクションを表示",
-  "TitleShowFolderActions": "フォルダアクションを表示"
+  "TitleShowFolderActions": "フォルダアクションを表示",
+  "TrashItemsDeleteSuccess": "選択した要素は{{sectionName}}から正常に削除されました"
 }

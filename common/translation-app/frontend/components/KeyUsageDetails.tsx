@@ -166,7 +166,7 @@ const KeyUsageDetails: React.FC<KeyUsageDetailsProps> = ({ translationKey }) => 
           No usage information found for key: {translationKey}
         </p>
         <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
-          This key might not be used in the codebase or the usage analysis hasn't been run yet.
+          This key might not be used in the codebase or the usage analysis hasn&apos;t been run yet.
         </p>
       </div>
     );

@@ -3,7 +3,7 @@
   "content": "Terms of Service URL",
   "content_en_sha1_hash": "1d0ab1807370d36d35f88a288b43b90708325459",
   "created_at": "2025-05-19T21:30:54.053Z",
-  "updated_at": "2025-05-24T07:04:36.883Z",
+  "updated_at": "2025-08-04T07:30:01.434Z",
   "comment": {
     "text": "The \"Terms of Service URL\" translation key is used to display a label for a field that requires users to enter a URL related to terms of service. It appears in an input group component within a form. Translators should provide a string that explains or references the purpose of this field, such as \"URL of Terms of Service Agreement\".",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/SupportBlock.tsx",
-      "line_number": 96,
-      "context": "isRequired\n isError={policyError || policyRequiredError}\n onBlur={onBlur}\n />\n <InputGroup\n label={t(\"TermsOfServiceURL\")}\n name=\"terms_url\"\n placeholder={t(\"EnterURL\")}\n value={termsUrlValue}\n error={\n termsError",
+      "line_number": 97,
+      "context": "isError={policyError || policyRequiredError}\n onBlur={onBlur}\n dataTestId=\"policy_url_input_group\"\n />\n <InputGroup\n label={t(\"TermsOfServiceURL\")}\n name=\"terms_url\"\n placeholder={t(\"EnterURL\")}\n value={termsUrlValue}\n error={\n termsError",
       "module": "/packages/client"
     }
   ],

@@ -51,6 +51,7 @@ const DowngradePlanButtonContainer = ({
         isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}
         onClick={onDowngradeTariff}
         isLoading={isLoading}
+        testId="downgrade_plan_button"
       />
     </StyledBody>
   );

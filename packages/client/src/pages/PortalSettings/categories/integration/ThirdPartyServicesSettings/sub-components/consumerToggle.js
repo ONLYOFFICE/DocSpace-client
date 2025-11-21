@@ -79,7 +79,7 @@ class ConsumerToggle extends React.Component {
   };
 
   render() {
-    const { consumer, isDisabled } = this.props;
+    const { consumer, isDisabled, dataTestId } = this.props;
     const { toggleActive } = this.state;
     const { onToggleClick } = this;
 
@@ -93,6 +93,7 @@ class ConsumerToggle extends React.Component {
             ? true
             : toggleActive
         }
+        dataTestId={dataTestId}
       />
     );
   }

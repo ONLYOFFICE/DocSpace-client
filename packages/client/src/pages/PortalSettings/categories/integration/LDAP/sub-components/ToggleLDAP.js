@@ -98,6 +98,7 @@ const ToggleLDAP = ({
         isChecked={isLdapEnabled}
         onChange={onChangeToggle}
         isDisabled={isUIDisabled}
+        dataTestId="ldap_toggle_button"
       />
 
       <div className="toggle-caption">
@@ -128,7 +129,6 @@ const ToggleLDAP = ({
           fontWeight={400}
           lineHeight="16px"
           className="settings_unavailable"
-          noSelect
         >
           {t("LdapToggleDescription", {
             productName: t("Common:ProductName"),

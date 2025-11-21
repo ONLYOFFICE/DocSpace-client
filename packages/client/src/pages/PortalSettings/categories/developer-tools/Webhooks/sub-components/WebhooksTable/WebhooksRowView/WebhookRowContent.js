@@ -105,6 +105,7 @@ export const WebhookRowContent = ({
 
       <ToggleButtonWrapper>
         <ToggleButton
+          dataTestId={`toggle_button_${webhook.name}`}
           className="toggle toggleButton"
           id="toggle id"
           isChecked={isChecked}

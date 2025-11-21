@@ -26,7 +26,7 @@
 
 export type TextProps = {
   /** Ref to access the DOM element or React component instance */
-  ref?: React.RefObject<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement | null>;
   /** Sets the tag through which the component is rendered */
   as?: React.ElementType;
   /** Accepts the tag id */
@@ -83,6 +83,8 @@ export type TextProps = {
   containerWidth?: string;
   /** Used in container component */
   containerMinWidth?: string;
+  /** Test id */
+  dataTestId?: string;
 };
 
 export type StyledTextProps = {

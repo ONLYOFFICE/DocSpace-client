@@ -3,7 +3,7 @@
   "content": "<1>{{price}}</1> per admin/year",
   "content_en_sha1_hash": "987b8087151652bd918224d758d69340380f993e",
   "created_at": "2025-06-26T08:14:36.313Z",
-  "updated_at": "2025-06-26T19:00:33.887Z",
+  "updated_at": "2025-09-01T14:09:50.117Z",
   "comment": {
     "text": "The PerUserYear translation key is used to display the price per admin user per year in a formatted manner. It appears as part of the payment information on the portal settings page, specifically in the PaymentContainer component. Translators should focus on formatting the numerical value with the correct currency symbol and units (per year).",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 330,
-      "context": "className=\"payment-info_managers-price\"\n >\n {isYearTariff ? (\n <Trans\n t={t}\n i18nKey=\"PerUserYear\"\n ns=\"Common\"\n values={{ price: formatPaymentCurrency(startValue) }}\n components={{ 1: <span /> }}\n />\n ) : (",
+      "line_number": 313,
+      "context": "className=\"payment-info_managers-price\"\n >\n {isYearTariff ? (\n <Trans\n t={t}\n i18nKey=\"PerUserYear\"\n ns=\"Common\"\n values={{ price: formatPaymentCurrency(startValue) }}\n components={{ 1: <span key=\"price-span\" /> }}\n />\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PriceCalculation.js",
       "line_number": 142,
-      "context": "}\n >\n {isYearTariff ? (\n <Trans\n t={t}\n i18nKey=\"PerUserYear\"\n ns=\"Common\"\n values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}\n components={{ 1: <strong style={{ fontSize: \"16px\" }} /> }}\n />\n ) : (",
+      "context": "}\n >\n {isYearTariff ? (\n <Trans\n t={t}\n i18nKey=\"PerUserYear\"\n ns=\"Common\"\n values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}\n components={{\n 1: <strong key=\"price-year\" style={{ fontSize: \"16px\" }} />,\n }}",
       "module": "/packages/client"
     }
   ],

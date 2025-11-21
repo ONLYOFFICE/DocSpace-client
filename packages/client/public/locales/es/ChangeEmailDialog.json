@@ -1,5 +1,5 @@
 {
-  "EmailActivationDescription": "Las instrucciones de activación se enviarán al email introducido.",
-  "EmailChangeTitle": "Cambio de email",
-  "EnterEmail": "Escriba una nueva dirección de email."
+  "EmailActivationDescription": "Las instrucciones de activación se enviarán a la dirección de correo electrónico especificada.",
+  "EmailChangeTitle": "Cambiar correo electrónico",
+  "EnterEmail": "Introduzca un nuevo correo electrónico"
 }

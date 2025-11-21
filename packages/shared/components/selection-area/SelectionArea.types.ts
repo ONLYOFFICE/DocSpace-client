@@ -65,4 +65,6 @@ export type SelectionAreaProps = {
   countTilesInRow?: number;
   /** Default height of header */
   defaultHeaderHeight?: number;
+  /** Callback function for mouse down event */
+  onMouseDown?: (event: MouseEvent) => void;
 };

@@ -83,7 +83,9 @@ const Row = observer(
         viewAs="row"
         showNew={false}
         onFilesClick={() => {
-          !item.isFolder && openFile(item);
+          if (!item.isFolder) {
+            openFile(item);
+          }
         }}
       />
     );

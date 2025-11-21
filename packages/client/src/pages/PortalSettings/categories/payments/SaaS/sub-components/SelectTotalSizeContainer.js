@@ -57,7 +57,6 @@ const SelectTotalSizeContainer = ({
     <StyledBody theme={theme}>
       <Text
         textAlign="center"
-        noSelect
         fontWeight={600}
         fontSize="11px"
         className="select-total-size_title"

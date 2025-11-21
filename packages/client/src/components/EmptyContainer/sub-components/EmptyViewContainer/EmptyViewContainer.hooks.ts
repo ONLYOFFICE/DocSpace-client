@@ -27,23 +27,25 @@
 import { useTheme } from "styled-components";
 import { useMemo, useCallback } from "react";
 import { useNavigate, LinkProps } from "react-router";
+import { isMobile } from "react-device-detect";
 
+import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,
   FileExtensions,
   FilesSelectorFilterTypes,
   FilterType,
   RoomSearchArea,
+  RoomsType,
 } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TTranslation } from "@docspace/shared/types";
+import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 
-import { isMobile } from "react-device-detect";
-import { toastr } from "@docspace/shared/components/toast";
 import {
   getDescription,
   getIcon,
@@ -70,10 +72,22 @@ export const useEmptyView = (
     rootFolderType,
     isPublicRoom,
     security,
+    selectedFolder,
+    isKnowledgeTab,
+    isResultsTab,
+    isPortalAdmin,
+    aiReady,
+    standalone,
   }: EmptyViewContainerProps,
+
   t: TTranslation,
 ) => {
   const theme = useTheme();
+
+  const isAIRoom =
+    selectedFolder?.roomType === RoomsType.AIRoom ||
+    isKnowledgeTab ||
+    isResultsTab;
 
   const emptyViewOptions = useMemo(() => {
     const description = getDescription(
@@ -88,6 +102,12 @@ export const useEmptyView = (
       rootFolderType,
       isPublicRoom,
       security,
+      isKnowledgeTab,
+      isResultsTab,
+      isAIRoom,
+      aiReady,
+      standalone,
+      isPortalAdmin,
     );
     const title = getTitle(
       type,
@@ -99,6 +119,13 @@ export const useEmptyView = (
       isArchiveFolderRoot,
       isRootEmptyPage,
       rootFolderType,
+      security,
+      isKnowledgeTab,
+      isResultsTab,
+      isAIRoom,
+      aiReady,
+      standalone,
+      isPortalAdmin,
     );
     const icon = getIcon(
       type,
@@ -109,6 +136,8 @@ export const useEmptyView = (
       parentRoomType,
       isRootEmptyPage,
       rootFolderType,
+      security,
+      isResultsTab,
     );
 
     return { description, title, icon };
@@ -124,6 +153,9 @@ export const useEmptyView = (
     isArchiveFolderRoot,
     rootFolderType,
     isPublicRoom,
+    isAIRoom,
+    isKnowledgeTab,
+    isResultsTab,
   ]);
 
   return emptyViewOptions;
@@ -154,14 +186,27 @@ export const useOptions = (
     onCreateAndCopySharedLink,
     setQuotaWarningDialogVisible,
     setSelectFileFormRoomDialogVisible,
+    setSelectFileAiKnowledgeDialogVisible,
     inviteUser: inviteRootUser,
+    setTemplateAccessSettingsVisible,
+
     isVisitor,
     isFrame,
     logoText,
+    isKnowledgeTab,
+    isResultsTab,
+    aiReady,
+    standalone,
+    isPortalAdmin,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
   const navigate = useNavigate();
+
+  const isAIRoom =
+    selectedFolder?.roomType === RoomsType.AIRoom ||
+    isKnowledgeTab ||
+    isResultsTab;
 
   const onGoToShared = useCallback(() => {
     const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
@@ -183,6 +228,14 @@ export const useOptions = (
       state,
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
+
+  const onGoToServices = useCallback(() => {
+    return navigate("/portal-settings/services");
+  }, []);
+
+  const onGoToAIProviderSettings = useCallback(() => {
+    return navigate("/portal-settings/ai-settings/providers");
+  }, []);
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -216,10 +269,17 @@ export const useOptions = (
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible]);
 
+  const onCreateAIAgent = useCallback(() => {
+    // TODO: AI: Add quota if it needed
+
+    const event = new Event(Events.AGENT_CREATE);
+    window.dispatchEvent(event);
+  }, []);
+
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);
 
-    setViewInfoPanel?.("info_members");
+    setViewInfoPanel?.(InfoPanelView.infoMembers);
   }, [setViewInfoPanel, setVisibleInfoPanel, isVisibleInfoPanel]);
 
   const onUploadAction = useCallback((uploadType: UploadType) => {
@@ -239,13 +299,17 @@ export const useOptions = (
 
   const uploadFromDocspace = useCallback(
     (
-      filterParam: FilesSelectorFilterTypes | FilterType,
+      filterParam: FilesSelectorFilterTypes | FilterType | string,
       openRoot: boolean = true,
     ) => {
       setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
     },
     [setSelectFileFormRoomDialogVisible],
   );
+
+  const uploadFromDocspaceAiKnowledge = useCallback(() => {
+    setSelectFileAiKnowledgeDialogVisible?.(true);
+  }, [setSelectFileAiKnowledgeDialogVisible]);
 
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {
@@ -277,6 +341,10 @@ export const useOptions = (
     onCreateAndCopySharedLink?.(selectedFolder, t);
   }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
+  const onOpenAccessSettings = () => {
+    setTemplateAccessSettingsVisible(true);
+  };
+
   const options = useMemo(
     () =>
       getOptions(
@@ -294,6 +362,7 @@ export const useOptions = (
           inviteUser,
           onCreate,
           uploadFromDocspace,
+          uploadFromDocspaceAiKnowledge,
           onUploadAction,
           createAndCopySharedLink,
           openInfoPanel,
@@ -302,10 +371,20 @@ export const useOptions = (
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onOpenAccessSettings,
+          onCreateAIAgent,
+          onGoToServices,
+          onGoToAIProviderSettings,
         },
         logoText,
         isVisitor,
         isFrame,
+        isKnowledgeTab,
+        isResultsTab,
+        isAIRoom,
+        aiReady,
+        standalone,
+        isPortalAdmin,
       ),
     [
       type,
@@ -319,7 +398,9 @@ export const useOptions = (
       rootFolderType,
       t,
       inviteUser,
+      onOpenAccessSettings,
       uploadFromDocspace,
+      uploadFromDocspaceAiKnowledge,
       onUploadAction,
       createAndCopySharedLink,
       onCreate,
@@ -332,6 +413,9 @@ export const useOptions = (
       isVisitor,
       isFrame,
       logoText,
+      isKnowledgeTab,
+      isResultsTab,
+      isAIRoom,
     ],
   );
 

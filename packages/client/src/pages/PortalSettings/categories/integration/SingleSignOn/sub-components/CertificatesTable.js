@@ -93,7 +93,7 @@ const CertificatesTable = (props) => {
         <ReactSVG src={FileSvgUrl} />
         <div className="column">
           <div className="column-row">
-            <Text fontWeight={600} fontSize="14px" lineHeight="16px" noSelect>
+            <Text fontWeight={600} fontSize="14px" lineHeight="16px">
               {certificate.domainName}
             </Text>
           </div>
@@ -103,7 +103,6 @@ const CertificatesTable = (props) => {
               fontSize="12px"
               fontWeight={600}
               lineHeight="16px"
-              noSelect
             >
               {certificate.action}
               {" | "}

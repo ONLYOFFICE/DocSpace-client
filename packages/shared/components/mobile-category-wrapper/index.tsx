@@ -51,6 +51,7 @@ export const MobileCategoryWrapper = ({
   isDisabled,
   withPaidBadge,
   badgeLabel,
+  dataTestId,
 }: IMobileCategoryWrapperProps) => {
   const { isBase } = useTheme();
 
@@ -58,13 +59,14 @@ export const MobileCategoryWrapper = ({
   const onHrefProp = isDisabled ? {} : { href: url };
 
   return (
-    <div className={styles.mobileCategoryWrapper}>
+    <div className={styles.mobileCategoryWrapper} data-testid={dataTestId}>
       <div className={styles.categoryItemHeading}>
         <Link
           className={classNames(styles.inheritTitleLink, "header")}
           noHover={isDisabled}
           {...onClickProp}
           {...onHrefProp}
+          dataTestId={dataTestId ? `${dataTestId}_category_link` : undefined}
         >
           {title}
         </Link>

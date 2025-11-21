@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { screen, render, cleanup } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 import { ViewSelector } from ".";
 import { TViewSelectorOption } from "./ViewSelector.types";
 
-jest.mock("react-svg", () => ({
+vi.mock("react-svg", () => ({
   ReactSVG: () => <div data-testid="mocked-svg" />,
 }));
 
@@ -57,14 +57,14 @@ const mockViewSettings: TViewSelectorOption[] = [
 const defaultProps = {
   isDisabled: false,
   isFilter: false,
-  onChangeView: jest.fn(),
+  onChangeView: vi.fn(),
   viewAs: "row",
   viewSettings: mockViewSettings,
 };
 
 describe("<ViewSelector />", () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     cleanup();
   });
 
@@ -80,7 +80,7 @@ describe("<ViewSelector />", () => {
   });
 
   it("calls onChangeView when clicking a view option", async () => {
-    const onChangeView = jest.fn();
+    const onChangeView = vi.fn();
     render(<ViewSelector {...defaultProps} onChangeView={onChangeView} />);
 
     const icons = screen.getAllByTestId("view-selector-icon");
@@ -93,7 +93,7 @@ describe("<ViewSelector />", () => {
   });
 
   it("does not call onChangeView when disabled", async () => {
-    const onChangeView = jest.fn();
+    const onChangeView = vi.fn();
     render(
       <ViewSelector {...defaultProps} onChangeView={onChangeView} isDisabled />,
     );
@@ -130,7 +130,7 @@ describe("<ViewSelector />", () => {
   });
 
   it("executes callback function when provided in viewSettings", async () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     const settingsWithCallback = [
       { ...mockViewSettings[0], callback },
       mockViewSettings[1],

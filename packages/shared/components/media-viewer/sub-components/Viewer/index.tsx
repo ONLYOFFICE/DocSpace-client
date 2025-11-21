@@ -35,7 +35,7 @@ import { DeviceType } from "../../../../enums";
 import { includesMethod } from "../../../../utils/typeGuards";
 import type { ContextMenuRefType } from "../../../context-menu";
 
-import { isHeic, isTiff } from "../../MediaViewer.utils";
+import { isGif, isHeic, isTiff, isWebp } from "../../MediaViewer.utils";
 import styles from "./Viewer.module.scss";
 
 import { NextButton } from "../Buttons/NextButton";
@@ -197,7 +197,6 @@ export const Viewer = (props: ViewerProps) => {
 
   useEffect(() => {
     resetToolbarVisibleTimer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -237,6 +236,9 @@ export const Viewer = (props: ViewerProps) => {
 
   const isDecodedImage =
     isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
+
+  const isAnimatedImage =
+    isGif(playlistFile.fileExst) || isWebp(playlistFile.fileExst);
 
   const mediaType = isPdf
     ? "PDF"
@@ -281,6 +283,7 @@ export const Viewer = (props: ViewerProps) => {
         <ImageViewer
           key={targetFile?.id}
           isDecodedImage={isDecodedImage}
+          isAnimatedImage={isAnimatedImage}
           devices={devices}
           toolbar={toolbar}
           errorTitle={errorTitle}

@@ -3,7 +3,7 @@
   "content": "Create sample Viewer embed",
   "content_en_sha1_hash": "77e46f467ad0af7310c64afe014ff7ce67b032fe",
   "created_at": "2025-05-19T21:30:54.408Z",
-  "updated_at": "2025-05-24T09:35:32.041Z",
+  "updated_at": "2025-08-04T07:30:01.400Z",
   "comment": {
     "text": "This translation key is used for the \"Create Sample Viewer\" button header in the Developer Tools category of Portal Settings. It provides a title for a preset that allows users to embed sample viewers.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
       "line_number": 182,
-      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"ViewerDescription\")}\n header={t(\"CreateSampleViewer\")}\n >\n <Container>\n <PreviewBlock\n t={t}\n loadCurrentFrame={initFrame}",
+      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"ViewerDescription\")}\n header={t(\"CreateSampleViewer\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }
   ],

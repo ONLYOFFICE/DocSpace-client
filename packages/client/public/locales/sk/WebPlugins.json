@@ -8,6 +8,8 @@
   "NeedSettings": "Potrebujete zadať nastavenia",
   "NoPlugins": "Nie sú pridané žiadne pluginy",
   "NotNeedSettings": "Nemusíte zadávať nastavenia",
+  "PluginIsNotCompatible": "Verzia plugin SDK nezodpovedá verzii {{productName}}. Prosím, aktualizujte na kompatibilnú verziu.",
+  "PluginLoadedSuccessfully": "Plugin bol úspešne načítaný.",
   "PluginSamples": "Ukážky pluginov",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Pomocou pluginu SDK môžete rozšíriť funkčnosť {{productName}}, pripojiť služby tretích strán alebo vylepšiť skúsenosti existujúcich používateľov. Tu nájdete ukážky pluginov so zdrojovým kódom, ktoré sú k dispozícii na GitHub.",

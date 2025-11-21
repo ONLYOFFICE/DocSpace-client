@@ -43,17 +43,19 @@ const InfoBadge: FC<InfoBadgeProps> = ({
   place = "bottom",
   tooltipDescription,
   tooltipTitle,
+  dataTestId,
 }) => {
   const id = useId();
 
   const tooltipRef = useRef<TooltipRefProps>(null);
 
-  const onClose = useCallback(() => {
+  const onClose = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     tooltipRef.current?.close();
   }, []);
 
   return (
-    <div data-testid="info-badge">
+    <div data-testid={dataTestId ?? "info-badge"}>
       <Badge
         noHover
         fontSize="9px"
@@ -82,6 +84,7 @@ const InfoBadge: FC<InfoBadgeProps> = ({
                 {tooltipTitle}
               </h3>
               <IconButton
+                data-testid="close-tooltip-button"
                 isFill
                 size={16}
                 onClick={onClose}

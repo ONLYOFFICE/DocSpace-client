@@ -39,8 +39,8 @@ const LeaveRoomDialog = (props) => {
     setIsVisible,
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
+    isAIAgent,
     onLeaveRoomAction,
-    updateInfoPanelSelection,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -54,8 +54,8 @@ const LeaveRoomDialog = (props) => {
     } else {
       setIsLoading(true);
       await onLeaveRoomAction(t, isRoomOwner);
+
       setIsLoading(false);
-      updateInfoPanelSelection();
       onClose();
     }
   };
@@ -73,16 +73,26 @@ const LeaveRoomDialog = (props) => {
     };
   }, []);
 
+  const titleText = isAIAgent
+    ? t("Files:LeaveTheAgent")
+    : t("Files:LeaveTheRoom");
+
+  const roomDescription = isRoomOwner
+    ? t("Files:LeaveRoomDescription")
+    : t("Files:WantLeaveRoom");
+
+  const agentDescription = isRoomOwner
+    ? t("Files:LeaveAgentDescription")
+    : t("Files:WantLeaveAgent");
+
+  const descriptionText = isAIAgent ? agentDescription : roomDescription;
+
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
-      <ModalDialog.Header>{t("Files:LeaveTheRoom")}</ModalDialog.Header>
+      <ModalDialog.Header>{titleText}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>
-            {isRoomOwner
-              ? t("Files:LeaveRoomDescription")
-              : t("Files:WantLeaveRoom")}
-          </Text>
+          <Text>{descriptionText}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -94,6 +104,7 @@ const LeaveRoomDialog = (props) => {
           scale
           onClick={onLeaveRoom}
           isDisabled={isLoading}
+          testId="leave_room_modal_submit"
         />
         <Button
           key="CancelButton"
@@ -102,6 +113,7 @@ const LeaveRoomDialog = (props) => {
           scale
           onClick={onClose}
           isDisabled={isLoading}
+          testId="leave_room_modal_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -115,7 +127,6 @@ export default inject(
     filesStore,
     selectedFolderStore,
     filesActionsStore,
-    infoPanelStore,
   }) => {
     const {
       leaveRoomDialogVisible: visible,
@@ -124,20 +135,20 @@ export default inject(
     } = dialogsStore;
     const { user } = userStore;
     const { selection, bufferSelection } = filesStore;
-    const { updateInfoPanelSelection } = infoPanelStore;
 
     const selections = selection.length ? selection : [bufferSelection];
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
+    const isAIAgent = folderItem?.isAIAgent;
 
     return {
       visible,
       setIsVisible,
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
+      isAIAgent,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
-      updateInfoPanelSelection,
     };
   },
 )(observer(withTranslation(["Common", "Files"])(LeaveRoomDialog)));

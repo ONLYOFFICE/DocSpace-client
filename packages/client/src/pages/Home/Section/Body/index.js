@@ -36,6 +36,7 @@ import {
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
+import { EMPTY_ARRAY } from "@docspace/shared/constants";
 import {
   DeviceType,
   VDRIndexingAction,
@@ -44,6 +45,7 @@ import {
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
+import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
@@ -88,7 +90,6 @@ const SectionBodyContent = (props) => {
     uploaded,
     onClickBack,
     isEmptyPage,
-    movingInProgress,
     currentDeviceType,
     isIndexEditingMode,
     changeIndex,
@@ -100,6 +101,9 @@ const SectionBodyContent = (props) => {
     userId,
     onEnableFormFillingGuid,
     isArchiveFolderRoot,
+    setDropTargetPreview,
+    aiConfig,
+    isInsideKnowledge,
   } = props;
 
   useEffect(() => {
@@ -189,13 +193,14 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".not-selectable") &&
         !e.target.closest(".info-panel") &&
         !e.target.closest(".table-container_group-menu") &&
-        !e.target.closest(".document-catalog")) ||
+        !e.target.closest(".document-catalog") &&
+        !e.target.closest("#share_calendar")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
       e.target.closest("#filter_search-input") ||
       isHeaderOptionButton(e)
     ) {
-      setSelection([]);
+      setSelection(EMPTY_ARRAY);
       setBufferSelection(null);
       setHotkeyCaretStart(null);
       setHotkeyCaret(null);
@@ -243,6 +248,12 @@ const SectionBodyContent = (props) => {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
+
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
+
           const classElements = document.getElementsByClassName(value);
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
@@ -256,6 +267,11 @@ const SectionBodyContent = (props) => {
             droppableSeparator.remove();
           }
         } else {
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
+
           currentDroppable.classList.remove("droppable-hover");
         }
       }
@@ -264,6 +280,12 @@ const SectionBodyContent = (props) => {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
+
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
+
           const classElements = document.getElementsByClassName(value);
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
@@ -280,7 +302,14 @@ const SectionBodyContent = (props) => {
           currentDroppable.classList.add("droppable-hover");
           currentDroppable = droppable;
           droppableSeparator = indexSeparatorNode;
+
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
         }
+      } else {
+        setDropTargetPreview(null);
       }
     } else if (isIndexEditingMode) {
       droppableSeparator && droppableSeparator.remove();
@@ -344,8 +373,9 @@ const SectionBodyContent = (props) => {
       (folder) => folder.id == selectedFolderId,
     );
 
-    if (!isIndexEditingMode)
+    if (!isIndexEditingMode && selectedFolderId) {
       return onMoveTo(selectedFolderId, title, destFolderInfo);
+    }
     if (filesList.length === 1) return;
 
     const replaceableItemId = Number.isNaN(+selectedFolderId)
@@ -381,17 +411,24 @@ const SectionBodyContent = (props) => {
 
   const onDragOver = (e) => {
     e.preventDefault();
-    if (
-      e.dataTransfer.items.length > 0 &&
-      e.dataTransfer.dropEffect !== "none"
-    ) {
+
+    const hasFiles =
+      e.dataTransfer.types.includes("Files") ||
+      e.dataTransfer.types.includes("application/x-moz-file");
+
+    if (hasFiles && e.dataTransfer.dropEffect !== "none") {
       setDragging(true);
     }
   };
 
   const onDragLeaveDoc = (e) => {
     e.preventDefault();
-    if (!e.relatedTarget || !e.dataTransfer.items.length) {
+
+    const hasFiles =
+      e.dataTransfer.types.includes("Files") ||
+      e.dataTransfer.types.includes("application/x-moz-file");
+
+    if (!e.relatedTarget || !hasFiles) {
       setDragging(false);
     }
   };
@@ -430,7 +467,8 @@ const SectionBodyContent = (props) => {
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 
-  if (isEmptyFilesList && movingInProgress) return null;
+  if (isInsideKnowledge && !aiConfig?.vectorizationEnabled)
+    return <KnowledgeDisabledContainer />;
 
   if (
     isEmptyFilesList &&
@@ -475,7 +513,6 @@ export default inject(
       setScrollToItem,
       filesList,
       isEmptyPage,
-      movingInProgress,
       isErrorRoomNotAvailable,
     } = filesStore;
 
@@ -483,6 +520,8 @@ export default inject(
       dialogsStore;
 
     const { onEnableFormFillingGuid } = contextOptionsStore;
+    const { primaryProgressDataStore, uploaded } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
 
     return {
       dragging,
@@ -508,18 +547,20 @@ export default inject(
       scrollToItem,
       setScrollToItem,
       filesList,
-      uploaded: uploadDataStore.uploaded,
+      uploaded,
       onClickBack: filesActionsStore.onClickBack,
-      movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
+      aiConfig: settingsStore.aiConfig,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
+      isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
       userId: userStore?.user?.id,
       onEnableFormFillingGuid,
+      setDropTargetPreview,
     };
   },
 )(

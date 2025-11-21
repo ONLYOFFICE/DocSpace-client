@@ -38,7 +38,12 @@ export type ApiKeysProps = {
   t: TTranslation;
   viewAs: TStore["setup"]["viewAs"];
   currentColorScheme: TColorScheme;
-  apiKeysLink: string;
+  apiKeysUrl: string;
+  isUser: boolean;
+  error: Error | null;
+  apiKeys: TApiKey[];
+  permissions: string[];
+  setApiKeys: React.Dispatch<React.SetStateAction<TApiKey[]>>;
 };
 
 export type ApiKeyViewProps = {
@@ -115,6 +120,7 @@ export type CreateApiKeyDialogProps = {
   setActionItem: React.Dispatch<React.SetStateAction<TApiKey | null>>;
   onChangeApiKeyParams: ApiKeyViewProps["onChangeApiKeyParams"];
   isRequestRunning: boolean;
+  isUser: boolean;
 };
 
 export type DeleteApiKeyDialogProps = {
@@ -128,7 +134,7 @@ export type DeleteApiKeyDialogProps = {
 
 export type TPermissionsList = {
   [key: string]: {
-    isRead: { isChecked: boolean; name: string };
-    isWrite: { isChecked: boolean; name: string };
+    isRead: { isChecked: boolean; name: string; isDisabled?: boolean };
+    isWrite: { isChecked: boolean; name: string; isDisabled?: boolean };
   };
 };

@@ -3,7 +3,7 @@
   "content": "Group DN",
   "content_en_sha1_hash": "3397f4fba3474be0c8aa59f505c6e91b1d928406",
   "created_at": "2025-05-19T21:30:54.206Z",
-  "updated_at": "2025-05-24T08:34:37.099Z",
+  "updated_at": "2025-08-11T18:11:59.244Z",
   "comment": {
     "text": "The \"Group DN\" translation key is used to display the LdapGroupDN field label in the Portal Settings integration, which prompts users to enter a Group DN value. This field is required and appears on the LDAP settings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 112,
-      "context": "<FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n >\n <LdapFieldComponent",
+      "line_number": 114,
+      "context": "<FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"\n >",
       "module": "/packages/client"
     }
   ],

@@ -25,9 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { AxiosError } from "axios";
 import { isMobile } from "react-device-detect";
+import { redirect, LoaderFunctionArgs, redirectDocument } from "react-router";
 import { useState, useEffect, useCallback } from "react";
+
 import { getDeviceTypeByWidth } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, ValidationStatus } from "@docspace/shared/enums";
+import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
+import { getSettingsFiles } from "@docspace/shared/api/files";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 export const useDeviceType = () => {
   const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>(() =>
@@ -67,4 +72,29 @@ export const isAxiosError = (error: unknown): error is AxiosError => {
     typeof error.isAxiosError === "boolean" &&
     error.isAxiosError
   );
+};
+
+export const publicPreviewLoader = async ({ request }: LoaderFunctionArgs) => {
+  const url = new URL(request.url);
+  const searchParams = url.searchParams;
+
+  const key = searchParams.get("share") || searchParams.get("key");
+
+  if (!key) {
+    return redirect("/");
+  }
+
+  const [validateData, settings] = await Promise.all([
+    validatePublicRoomKey(key),
+    getSettingsFiles(),
+  ]);
+
+  if (
+    validateData?.status === ValidationStatus.Ok &&
+    validateData?.isAuthenticated
+  ) {
+    return redirectDocument(`${MEDIA_VIEW_URL}${validateData.id}?key=${key}`);
+  }
+
+  return { validateData, key, settings };
 };

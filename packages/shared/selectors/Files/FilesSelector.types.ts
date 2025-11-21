@@ -68,6 +68,9 @@ export interface UseRootHelperProps {
 
   setIsInit: (value: boolean) => void;
   treeFolders?: TFolder[];
+  withRecentTreeFolder?: boolean;
+  withFavoritesTreeFolder?: boolean;
+  withAIAgentsTreeFolder?: boolean;
   isUserOnly?: boolean;
 }
 
@@ -76,8 +79,10 @@ export type UseSocketHelperProps = {
   setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
+  disabledFolderType?: FolderType;
   filterParam?: string;
   withCreate?: boolean;
+  disableBySecurity?: string;
 };
 
 export type UseRoomsHelperProps = TUseInputItemHelper & {
@@ -101,7 +106,7 @@ export type UseRoomsHelperProps = TUseInputItemHelper & {
   setTotal: (value: number) => void;
   setIsRoot?: (value: boolean) => void;
   setSelectedItemType?: React.Dispatch<
-    React.SetStateAction<"rooms" | "files" | undefined>
+    React.SetStateAction<"rooms" | "files" | "agents" | undefined>
   >;
   setSelectedItemSecurity?: React.Dispatch<
     React.SetStateAction<
@@ -123,6 +128,7 @@ export type UseFilesHelpersProps = {
   setIsInit: (value: boolean) => void;
   searchValue?: string;
   disabledItems: (string | number)[];
+  disabledFolderType?: FolderType;
   includedItems?: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
@@ -147,11 +153,16 @@ export type UseFilesHelpersProps = {
   withCreate: boolean;
   shareKey?: string;
   setSelectedItemId: (value: number | string) => void;
-  setSelectedItemType: (value?: "rooms" | "files") => void;
+  setSelectedItemType: (value?: "rooms" | "files" | "agents") => void;
 
   withInit?: boolean;
 
+  setIsInsideKnowledge: (value: boolean) => void;
+  setIsInsideResultStorage: (value: boolean) => void;
+
   applyFilterOption?: ApplyFilterOption;
+
+  disableBySecurity?: string;
 };
 
 export type TUseInputItemHelper = {
@@ -177,7 +188,7 @@ export type TFilesSelectorInit = WithFlag<
     initHasNextPage: boolean;
     initItems: TRoom[] | (TFolder | TFile)[];
     initBreadCrumbs: TBreadCrumb[];
-    initSelectedItemType: "rooms" | "files";
+    initSelectedItemType: "rooms" | "files" | "agents";
     initSelectedItemId: string | number;
     initSearchValue?: Nullable<string>;
   }
@@ -194,6 +205,7 @@ export type FilesSelectorProps = TInfoBar &
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
     disabledItems: (string | number)[];
+    disabledFolderType?: FolderType;
     includedItems?: (string | number)[];
     filterParam?: string | number;
     withoutBackButton: boolean;
@@ -203,6 +215,10 @@ export type FilesSelectorProps = TInfoBar &
     shareKey?: string;
 
     treeFolders?: TFolder[];
+    withRecentTreeFolder?: boolean;
+    withFavoritesTreeFolder?: boolean;
+    withAIAgentsTreeFolder?: boolean;
+
     onSetBaseFolderPath?: (
       value: number | string | undefined | TBreadCrumb[],
     ) => void;
@@ -227,12 +243,14 @@ export type FilesSelectorProps = TInfoBar &
       isChecked: boolean,
       selectedTreeNode: TFolder,
       selectedFileInfo: TSelectedFileInfo,
+      isInsideKnowledge?: boolean,
+      isInsideResultStorage?: boolean,
     ) => void | Promise<void>;
     getIsDisabled: (
       isFirstLoad: boolean,
       isSelectedParentFolder: boolean,
       selectedItemId: string | number | undefined,
-      selectedItemType: "rooms" | "files" | undefined,
+      selectedItemType: "rooms" | "files" | "agents" | undefined,
       isRoot: boolean,
       selectedItemSecurity:
         | TFileSecurity
@@ -241,6 +259,8 @@ export type FilesSelectorProps = TInfoBar &
         | undefined,
       selectedFileInfo: TSelectedFileInfo,
       isDisabledFolder?: boolean,
+      isInsideKnowledge?: boolean,
+      isInsideResultStorage?: boolean,
     ) => boolean;
     setIsDataReady?: (value: boolean) => void;
     submitButtonLabel: string;
@@ -269,4 +289,7 @@ export type FilesSelectorProps = TInfoBar &
 
     isMultiSelect?: boolean;
     onSelectItem?: (item: TSelectorItem) => void;
+    maxSelectedItems?: number;
+    renderInPortal?: boolean;
+    disableBySecurity?: string;
   };

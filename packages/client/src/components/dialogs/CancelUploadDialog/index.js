@@ -66,6 +66,7 @@ const CancelUploadDialog = ({
           primary
           onClick={onCancelProcess}
           isLoading={loading}
+          testId="confirm_cancel_upload_button"
         />
         <Button
           label={t("Common:No")}
@@ -73,6 +74,7 @@ const CancelUploadDialog = ({
           scale
           onClick={onClose}
           isDisabled={loading}
+          testId="cancel_confirmation_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

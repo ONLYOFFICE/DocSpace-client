@@ -83,6 +83,8 @@ export const successSelf = {
   statusCode: 200,
 };
 
+export const usersSuccess = { response: [successSelf] };
+
 export const selfError404 = {
   response: {
     data: {

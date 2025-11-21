@@ -3,7 +3,7 @@
   "content": "Use system theme",
   "content_en_sha1_hash": "b416b727b7b81cc355879b99623709aaf02f49bb",
   "created_at": "2025-05-19T21:30:53.388Z",
-  "updated_at": "2025-05-24T06:07:20.397Z",
+  "updated_at": "2025-08-11T18:11:59.297Z",
   "comment": {
     "text": "This translation key is used for the \"Use system theme\" option on a user preference interface. It instructs users to apply the system's default theme settings.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
-      "line_number": 39,
-      "context": "import { RadioButtonGroup } from \"@docspace/shared/components/radio-button-group\";\n import { toastr } from \"@docspace/shared/components/toast\";\n \n import { ThemeKeys } from \"@docspace/shared/enums\";\n \n import { mobile, getSystemTheme, getEditorTheme } from \"@docspace/shared/utils\";\n import { showLoader } from \"@docspace/shared/utils/common\";\n \n import ThemePreview from \"./theme-preview\";\n \n const StyledWrapper = styled.div`",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 109,
+      "context": "const isSystemTheme = currentTheme === ThemeKeys.SystemStr;\n const systemThemeValue = getSystemTheme();\n \n const systemThemeLabel = isDesktopClient\n ? t(\"Profile:DesktopTheme\")\n : t(\"Profile:SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"Profile:DesktopThemeDescription\")\n : t(\"Profile:SystemThemeDescription\");\n \n return (",
       "module": "/packages/client"
     }
   ],

@@ -85,6 +85,8 @@ const FilesSelectorInput = ({
   checkCreating,
   openRoot,
   formProps,
+  dataTestId,
+  withAIAgentsTreeFolder,
 }: FilesSelectorInputProps) => {
   const { t } = useTranslation("Common");
 
@@ -143,15 +145,20 @@ const FilesSelectorInput = ({
     isRoot,
     selectedItemSecurity,
     selectedFileInfo,
+    isDisabledFolder,
+    isInsideKnowledge,
+    isInsideResultStorage,
   ) => {
     return getIsDisabled(
       isFirstLoad,
       isSelectedParentFolder,
-      selectedItemType === "rooms",
+      selectedItemType === "rooms" || selectedItemType === "agents",
       isRoot,
       filterParam,
       !!selectedFileInfo,
       id === Number(selectedItemId),
+      isInsideKnowledge,
+      isInsideResultStorage,
     );
   };
 
@@ -236,6 +243,9 @@ const FilesSelectorInput = ({
           rootFolderType={FolderType.Rooms}
           currentDeviceType={currentDeviceType ?? DeviceType.desktop}
           {...filesSelectorSettings}
+          withRecentTreeFolder={isFilesSelection}
+          withFavoritesTreeFolder={isFilesSelection}
+          withAIAgentsTreeFolder={withAIAgentsTreeFolder}
         />
       </Aside>
     </>
@@ -245,7 +255,7 @@ const FilesSelectorInput = ({
     <div
       className={classNames(styles.filesSelectorInput, className)}
       style={{ maxWidth }}
-      data-testid="files-selector-input"
+      data-testid={dataTestId ?? "files-selector-input"}
     >
       <FileInput
         scale

@@ -3,7 +3,7 @@
   "content": "Enable two-factor authentication for a more secure {{productName}} access for users.",
   "content_en_sha1_hash": "6ce1a1af78378b2613e5ff44bb9f6cce9bf8079c",
   "created_at": "2025-05-19T21:30:53.013Z",
-  "updated_at": "2025-06-18T17:11:42.491Z",
+  "updated_at": "2025-10-16T07:29:35.903Z",
   "comment": {
     "text": "This translation key is used to display a message explaining the benefits of enabling two-factor authentication in {{productName}}, which appears on a settings page or during a confirmation dialog. It helps users understand why two-factor authentication enhances security for accessing {{productName}}.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 172,
+      "line_number": 175,
       "context": "{t(\"TwoFactorAuth\")}\n </Text>\n \n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"TwoFactorAuthSave\" />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 185,
-      "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link",
+      "line_number": 246,
+      "context": "return (\n <MainContainer id=\"tfa-section\" ref={targetRef}>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     }
   ],

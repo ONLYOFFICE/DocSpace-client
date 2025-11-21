@@ -34,6 +34,10 @@
   padding: var(--selector-add-button-padding);
   cursor: pointer;
 
+  &.isLoading {
+    padding: 6px;
+  }
+
   :global(.icon-button_svg) {
     svg {
       path {

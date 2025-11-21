@@ -1,0 +1,28 @@
+{
+  "key_path": "PreparingForAIInfo",
+  "content": "We’re analyzing and processing this file so that it can be used by AI as part of the knowledge base. Once preparation is complete, the file will be available for search, summaries, and other AI-powered features.",
+  "content_en_sha1_hash": "8bc3ada3b8ab51a09bf8d5919d81bcf8a3a5d5cb",
+  "created_at": "2025-10-27T16:14:24.410Z",
+  "updated_at": "2025-11-06T18:29:16.027Z",
+  "comment": {
+    "text": "This text explains that a file is currently being processed for use with AI features. It appears as informational text within a UI element, likely near a badge or status indicator, to let users know why a file might not be immediately searchable or usable. Translators should maintain the explanation of AI processing.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:29:03.797Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/badges/index.tsx",
+      "line_number": 288,
+      "context": "<div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAI\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAIInfo\")}\n </Text>\n </div>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

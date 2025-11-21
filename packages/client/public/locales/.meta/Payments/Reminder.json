@@ -3,7 +3,7 @@
   "content": "Reminder:",
   "content_en_sha1_hash": "ecad37f9b3850ac8c48d2f17f5a77c854889d954",
   "created_at": "2025-06-24T16:31:06.844Z",
-  "updated_at": "2025-06-24T16:31:59.808Z",
+  "updated_at": "2025-08-21T14:45:44.122Z",
   "comment": {
     "text": "This translation key is used to display a reminder message in a modal dialog. It appears as part of a notification when a service's grace period is activated, indicating that users need to take action or face consequences.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/GracePeriodModal.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/GracePeriodModal.tsx",
       "line_number": 78,
-      "context": "<ModalDialog.Body>\n <Text fontWeight={600}>\n {t(\"ServiceManagementUnavailable\", { planName: tariffPlanTitle })}\n </Text>\n <br />\n <Text fontWeight={600}>{t(\"Reminder\")}</Text>\n <Text as=\"span\">\n <Trans\n i18nKey=\"GracePeriodActivatedInfo\"\n ns=\"Payments\"\n t={t}",
+      "context": "<ModalDialog.Body>\n <Text fontWeight={600}>\n {t(\"ServiceManagementUnavailable\", { planName: tariffPlanTitle })}\n </Text>\n <br />\n <Text fontWeight={600}>{t(\"Reminder\")}</Text>\n <Text as=\"span\" dataTestId=\"grace_period_info\">\n <Trans\n i18nKey=\"GracePeriodActivatedInfo\"\n ns=\"Payments\"\n t={t}",
       "module": "/packages/client"
     }
   ],

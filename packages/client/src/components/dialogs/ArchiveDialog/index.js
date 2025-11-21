@@ -42,6 +42,8 @@ const ArchiveDialogComponent = (props) => {
     setArchiveDialogVisible,
     setArchiveAction,
     items,
+    setSelection,
+    setBufferSelection,
   } = props;
 
   const [isLoading, seIsLoading] = useState(false);
@@ -56,12 +58,15 @@ const ArchiveDialogComponent = (props) => {
     await setArchiveAction("archive", items, t);
     seIsLoading(false);
     setArchiveDialogVisible(false);
+    setBufferSelection(null);
+    setSelection([]);
   };
 
   const onKeyPress = (e) => {
     if (e.key === "Escape") {
       onClose();
     }
+    if (e.key === "Enter") onAction();
   };
 
   useEffect(() => {
@@ -92,7 +97,7 @@ const ArchiveDialogComponent = (props) => {
         })}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{description}</Text>
+        <Text>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -105,6 +110,7 @@ const ArchiveDialogComponent = (props) => {
           scale
           isDisabled={isLoading}
           isLoading={isLoading}
+          testId="move_to_archived_modal_submit"
         />
         <Button
           id="shared_move-to-archived-modal_cancel"
@@ -114,6 +120,7 @@ const ArchiveDialogComponent = (props) => {
           onClick={onClose}
           scale
           isDisabled={isLoading}
+          testId="move_to_archived_modal_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -126,7 +133,13 @@ const ArchiveDialog = withTranslation(["Files", "ArchiveDialog", "Common"])(
 
 export default inject(
   ({ filesStore, filesActionsStore, dialogsStore, selectedFolderStore }) => {
-    const { roomsForRestore, selection, bufferSelection } = filesStore;
+    const {
+      roomsForRestore,
+      selection,
+      bufferSelection,
+      setSelection,
+      setBufferSelection,
+    } = filesStore;
     const { setArchiveAction } = filesActionsStore;
 
     const {
@@ -149,6 +162,8 @@ export default inject(
       setArchiveDialogVisible,
       setArchiveAction,
       items,
+      setSelection,
+      setBufferSelection,
     };
   },
 )(observer(ArchiveDialog));

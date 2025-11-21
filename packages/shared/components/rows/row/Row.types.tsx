@@ -107,4 +107,6 @@ export type RowProps = {
   onChangeIndex?: (action: VDRIndexingAction) => void;
   /** The item data for the row */
   item?: RowItemType;
+  /** Data test id for the row */
+  dataTestId?: string;
 };

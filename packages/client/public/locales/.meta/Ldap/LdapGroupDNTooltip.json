@@ -3,7 +3,7 @@
   "content": "Enter the distinguished name to the directory containing groups you want to add.",
   "content_en_sha1_hash": "e4d789cb73a3a124370d816d4d69d1727ac9b474",
   "created_at": "2025-05-19T21:30:54.209Z",
-  "updated_at": "2025-05-24T08:34:10.539Z",
+  "updated_at": "2025-08-11T18:11:59.244Z",
   "comment": {
     "text": "The \"LdapGroupDNTooltip\" translation key is used to display a tooltip explaining the purpose of an input field in the Group Membership settings. This tooltip appears when the user hovers over or clicks on the field and provides context for adding group memberships via LDAP. It informs users to enter the distinguished name of the directory containing the desired groups.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 115,
-      "context": "style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n >\n <LdapFieldComponent\n className=\"field-input\"\n onChange={onChange}\n name={GROUP_DN}",
+      "line_number": 117,
+      "context": "style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"\n >\n <LdapFieldComponent\n className=\"field-input\"\n onChange={onChange}",
       "module": "/packages/client"
     }
   ],

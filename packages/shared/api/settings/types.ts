@@ -154,7 +154,6 @@ export type TGetColorTheme = {
 };
 
 export type TApiEntries = {
-  apikeys: string;
   docspace: string;
   "javascript-sdk": string;
   "plugins-sdk": string;
@@ -185,24 +184,19 @@ export type THelpCenterEntries = {
   connectamazon: string;
   connectapple: string;
   connectbox: string;
-  connectclickatell: string;
-  connectdocusign: string;
   connectdropbox: string;
   connectfacebook: string;
   connectfirebase: string;
   connectgoogle: string;
   connectgooglecloudstorage: string;
   connectlinkedin: string;
-  connectmailru: string;
   connectmicrosoft: string;
   connectonedrive: string;
   connectrackspace: string;
-  connectselectel: string;
-  connectsmsc: string;
   connecttelegram: string;
-  connectvk: string;
-  connectwordpress: string;
-  connectyandex: string;
+  connecttwitter: string;
+  connectwechat: string;
+  connectzoom: string;
   creatingbackup: string;
   configuringsettings: string;
   docspacemanagingrooms: string;
@@ -227,6 +221,15 @@ export type THelpCenterEntries = {
   welcomepage: string;
   limiteddevtools: string;
   encryption: string;
+  docspacefaq: string;
+  configureDeepLink: string;
+  invitationSettings: string;
+  singleSignOn: string;
+  pluginsSdk: string;
+  smtp: string;
+  dataImport: string;
+  apikeys: string;
+  aisettings: string;
 };
 
 export type TIntegrationsEntries = {
@@ -517,4 +520,14 @@ export type TEncryptionSettings = {
   password: string;
   status: EncryptionStatus;
   notifyUsers: boolean;
+};
+
+export type TTelegramCheck = {
+  status: string;
+  username?: string;
+};
+
+export type TNotificationChannel = {
+  name: string;
+  isEnabled: boolean;
 };

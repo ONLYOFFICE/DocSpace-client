@@ -3,7 +3,7 @@
   "content": "User IP Address",
   "content_en_sha1_hash": "25ba2cc4f787525ede67ab0d09bd7a76bda2a68c",
   "created_at": "2025-05-19T21:30:56.852Z",
-  "updated_at": "2025-05-24T13:39:34.638Z",
+  "updated_at": "2025-10-27T16:14:33.237Z",
   "comment": {
     "text": "The \"UserIPAddress\" translation key is used to display the user's IP address. It appears in a dialog component, specifically in the \"ViewerInfo\" sub-component, and is likely shown on a button or in a informational text. Translators should provide an equivalent phrase for this context.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.js",
-      "line_number": 51,
-      "context": "name: t(\"UserEmail\"),\n index: 1,\n },\n {\n id: \"UserIpAdress\",\n name: t(\"UserIPAddress\"),\n index: 2,\n },\n {\n id: \"CurrentDate\",\n name: t(\"Common:CurrentDate\"),",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.tsx",
+      "line_number": 56,
+      "context": "index: 1,\n content: null,\n },\n {\n id: \"UserIpAdress\",\n name: t(\"UserIPAddress\"),\n index: 2,\n content: null,\n },\n {\n id: \"CurrentDate\",",
       "module": "/packages/client"
     }
   ],

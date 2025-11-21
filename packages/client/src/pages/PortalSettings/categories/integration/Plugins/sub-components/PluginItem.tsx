@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation } from "react-i18next";
+
 import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
@@ -35,70 +37,96 @@ import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?u
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
-import { PluginScopes } from "SRC_DIR/helpers/plugins/enums";
 
 import { StyledPluginItem, StyledPluginHeader } from "../Plugins.styled";
 import { PluginItemProps } from "../Plugins.types";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 const PluginItem = ({
   name,
   version,
+  compatible,
   description,
 
   enabled,
   updatePlugin,
 
-  scopes,
   openSettingsDialog,
 
   image,
   url,
+  dataTestId,
+  theme,
 }: PluginItemProps) => {
-  const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
+  const { t } = useTranslation(["Common"]);
 
-  const withSettings = scopes.includes(PluginScopes.Settings);
+  const imgSrc = image
+    ? getPluginUrl(url, `/assets/${image}?hash=${version}`)
+    : null;
 
   const onChangeStatus = () => {
-    updatePlugin?.(name, !enabled, undefined);
+    updatePlugin?.(name, !enabled, undefined, t);
   };
 
   const onOpenSettingsDialog = () => {
     openSettingsDialog?.(name);
   };
 
+  const badgeId = `plugin_version_${name}_badge`;
+
   return (
-    <StyledPluginItem description={description}>
+    <StyledPluginItem description={description} data-testid={dataTestId}>
       <img
         className="plugin-logo"
         src={imgSrc || PluginDefaultLogoUrl}
         alt="Plugin logo"
+        data-testid="plugin_logo"
       />
       <div className="plugin-info">
         <StyledPluginHeader>
           <Heading className="plugin-name">{name}</Heading>
           <div className="plugin-controls">
-            {withSettings ? (
-              <IconButton
-                iconName={PluginSettingsIconUrl}
-                size={16}
-                onClick={onOpenSettingsDialog}
-              />
-            ) : null}
+            <IconButton
+              iconName={PluginSettingsIconUrl}
+              size={16}
+              onClick={onOpenSettingsDialog}
+              data-testid="open_settings_icon_button"
+            />
             <ToggleButton
               className="plugin-toggle-button"
               onChange={onChangeStatus}
               isChecked={enabled}
+              dataTestId="enable_plugin_toggle_button"
             />
           </div>
         </StyledPluginHeader>
 
         <Badge
+          id={badgeId}
           label={version}
           fontSize="12px"
           fontWeight={700}
-          noHover
-          backgroundColor={globalColors.mainGreen}
+          noHover={compatible}
+          backgroundColor={
+            compatible
+              ? globalColors.mainGreen
+              : theme.isBase
+                ? globalColors.lightErrorStatus
+                : globalColors.darkErrorStatus
+          }
+          dataTestId={badgeId}
         />
+        {!compatible ? (
+          <Tooltip
+            anchorSelect={`#${badgeId.replace(/\./g, "\\.")}`}
+            place="bottom"
+            getContent={() =>
+              t("WebPlugins:PluginIsNotCompatible", {
+                productName: t("ProductName"),
+              })
+            }
+          />
+        ) : null}
 
         {imgSrc && description ? (
           <Text

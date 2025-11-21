@@ -3,7 +3,7 @@
   "content": "Google Drive's Files",
   "content_en_sha1_hash": "03293463a6f92221c71c20964b6eac4df743685f",
   "created_at": "2025-05-19T21:30:51.588Z",
-  "updated_at": "2025-06-30T12:20:31.406Z",
+  "updated_at": "2025-10-03T10:07:11.709Z",
   "comment": {
     "text": "Google Drive's Files is used to describe a setting or option related to Google Drive files, likely appearing in a settings or configuration area. This key could be used for translations of labels or descriptions about Google Drive file management or export options.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 135,
-      "context": "usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{",
+      "line_number": 133,
+      "context": "serviceName=\"Google Workspace\"\n usersExportDetails={{\n name: t(\"InfoPanel:Users\"),\n }}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}\n sharedFilesAndFoldersExportDetails={{\n name: t(\"Settings:SharedFilesAndFoldersDetails\"),\n }}\n />",
       "module": "/packages/client"
     }
   ],

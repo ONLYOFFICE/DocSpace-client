@@ -3,7 +3,7 @@
   "content": "Request new",
   "content_en_sha1_hash": "dcd6607ffe7ae11855f513bef49e00ebee86c9db",
   "created_at": "2025-05-19T21:30:57.039Z",
-  "updated_at": "2025-05-24T14:28:11.569Z",
+  "updated_at": "2025-08-11T18:11:59.119Z",
   "comment": {
     "text": "This translation key is used to display the label \"Request new\" on a button that triggers an action in a backup codes dialog. The button is likely located at the footer of a modal dialog component, and its purpose is to prompt the user to request new backup codes.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
-      "line_number": 145,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <StyledFooterContent>\n <Button\n key=\"RequestNewBtn\"\n label={t(\"RequestNewButton\")}\n size=\"normal\"\n primary\n onClick={this.getNewBackupCodes}\n />\n <Button",
+      "line_number": 150,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <StyledFooterContent>\n <Button\n key=\"RequestNewBtn\"\n label={t(\"RequestNewButton\")}\n size=\"normal\"\n primary\n onClick={this.getNewBackupCodes}\n testId=\"request_new_backup_codes_button\"\n />",
       "module": "/packages/client"
     }
   ],

@@ -42,6 +42,7 @@ import {
 import { checkingForUnfixedSize, getSubstring } from "../Table.utils";
 import { isDesktop } from "../../../utils";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { useTableHeaderPosition } from "./useTableHeaderPosition";
 
 type TPrevHeaderData = Nullable<
   Pick<TableHeaderProps, "columnStorageName" | "sortBy" | "sorted" | "columns">
@@ -945,7 +946,6 @@ export const TableHeader = (props: TableHeaderProps) => {
         let overWidth = 0;
 
         if (!hideColumns && !hideColumnsConst) {
-          // eslint-disable-next-line guard-for-in, no-restricted-syntax
           for (const index in tableContainer) {
             const item = tableContainer[index];
 
@@ -1233,6 +1233,8 @@ export const TableHeader = (props: TableHeaderProps) => {
   useEffect(() => {
     isMountedRef.current = true;
   }, []);
+
+  useTableHeaderPosition(headerRef);
 
   return (
     <>

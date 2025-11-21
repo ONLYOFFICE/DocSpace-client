@@ -3,7 +3,7 @@
   "content": "Video",
   "content_en_sha1_hash": "bc17c1f0179a888f2a7e8389f67d4f2cf5cf4531",
   "created_at": "2025-05-19T21:30:49.512Z",
-  "updated_at": "2025-05-26T07:57:32.453Z",
+  "updated_at": "2025-10-13T20:21:56.330Z",
   "comment": {
     "text": "This translation key is used to display the type of a file. It appears as \"Video\" on files categorized as videos in a UI component.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 12,
+      "line_number": 15,
       "context": "case FileType.Unknown:\n return t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:",
       "module": "/packages/shared"
     }
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"දෘශ්‍යකය\" (drusyakaya) is a literal translation of 'visual' and while not entirely incorrect, it's not the most natural or common translation for 'Video' in Sinhala. It feels overly formal and technical. A more natural and common translation would be 'වීඩියෝ' (videyo), which is the transliteration of the English word.",
-          "suggestion": "වීඩියෝ (videyo)"
+          "description": "The Sinhala translation \"දෘශ්‍යකය\" while technically meaning 'visual' or 'image', isn't the most natural or common translation for 'Video'. It's a bit too literal and formal. A more common and readily understood translation would be \"වීඩියෝ\" (videyo), which is a transliteration of the English word.",
+          "suggestion": "වීඩියෝ"
         }
       ],
       "approved_at": null
@@ -211,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -494,6 +494,7 @@ const FilterBlock = ({
       onClose={hideFilterBlock}
       withBodyScroll
       containerVisible={showSelector.show}
+      data-testid="filter_modal_dialog"
     >
       {showSelector.show ? (
         <ModalDialog.Container>
@@ -551,7 +552,10 @@ const FilterBlock = ({
       ) : null}
 
       <ModalDialog.Header>
-        <div className={styles.filterBlockHeader}>
+        <div
+          className={styles.filterBlockHeader}
+          data-testid="filter_block_header"
+        >
           {filterHeader}
 
           <div className="additional-icons-container">
@@ -564,6 +568,7 @@ const FilterBlock = ({
                 onClick={onClearFilter}
                 isClickable
                 isFill
+                dataTestId="filter_clear_button"
               />
             ) : null}
           </div>
@@ -612,6 +617,7 @@ const FilterBlock = ({
           scale
           onClick={onFilterAction}
           isDisabled={!showFooter}
+          testId="filter_apply_button"
         />
         <Button
           id="filter_cancel-button"
@@ -620,6 +626,7 @@ const FilterBlock = ({
           scale
           onClick={hideFilterBlock}
           isDisabled={isLoading}
+          testId="filter_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

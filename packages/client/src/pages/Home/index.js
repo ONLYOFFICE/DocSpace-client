@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useLocation, Outlet } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
@@ -37,6 +37,8 @@ import {
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
 import Section from "@docspace/shared/components/section";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
+import { toastr } from "@docspace/shared/components/toast";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -53,36 +55,26 @@ import AccountsDialogs from "./Section/ContactsBody/Dialogs";
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
 
-import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
+import {
+  InfoPanelActions,
+  InfoPanelBodyContent,
+  InfoPanelHeaderContent,
+} from "./InfoPanel";
 
 import MediaViewer from "./MediaViewer";
 
-import {
-  useFiles,
-  useSDK,
-  useOperations,
-  useContacts,
-  useSettings,
-} from "./Hooks";
+import { useSDK, useOperations } from "./Hooks";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 const PureHome = (props) => {
   const {
-    fetchFiles,
-    fetchRooms,
+    currentClientView,
+    isChangePageRequestRunning,
 
-    // homepage,
-    setIsSectionHeaderLoading,
-    setIsSectionBodyLoading,
     isLoading,
 
-    setToPreviewFile,
-    playlist,
-
     folderSecurity,
-    getFileInfo,
-    gallerySelected,
-    setIsUpdatingRowItem,
-    setIsPreview,
+
     selectedFolderStore,
     t,
     startUpload,
@@ -123,10 +115,7 @@ const PureHome = (props) => {
     isEmptyPage,
 
     contactsViewAs,
-    getUsersList,
-    getGroups,
-    updateCurrentGroup,
-    setSelectedNode,
+
     onClickBack,
 
     showFilterLoader,
@@ -141,13 +130,9 @@ const PureHome = (props) => {
     userId,
     getFolderModel,
     getContactsModel,
-    scrollToTop,
     isEmptyGroups,
-    wsCreatedPDFForm,
-    setContactsTab,
+
     isUsersEmptyView,
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
     secondaryOperationsCompleted,
     primaryOperationsCompleted,
     secondaryActiveOperations,
@@ -165,16 +150,36 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    chatFiles,
 
     allowInvitingGuests,
     checkGuests,
-    hasGuests,
     sectionWithTabs,
+    dropTargetPreview,
+    setDropTargetPreview,
+    selectedFolderTitle,
+    clearDropPreviewLocation,
+    canCreateSecurity,
+    startDropPreview,
+
+    aiConfig,
+    currentTab,
+    setIsAboutDialogVisible,
   } = props;
 
-  // console.log(t("ComingSoon"))
+  const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
 
   const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.state?.openAboutDialog && setIsAboutDialogVisible) {
+      setIsAboutDialogVisible(true);
+      // clear state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state, setIsAboutDialogVisible]);
+
+  // console.log(t("Common:ComingSoon"))
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
@@ -182,57 +187,36 @@ const PureHome = (props) => {
 
   const view = getContactsView(location);
   if (allowInvitingGuests === false && view === "guests") checkGuests();
-  const contactsView = allowInvitingGuests
-    ? view
-    : typeof hasGuests === "boolean" && view === "guests" && !hasGuests
-      ? "people"
-      : view;
 
-  const isContactsPage = !!contactsView;
+  const isContactsPage =
+    currentClientView === "users" || currentClientView === "groups";
+  const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
-    contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
+    currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
+  const isChat = currentClientView === "chat";
 
-  const setIsLoading = React.useCallback(
-    (param, withoutTimer, withHeaderLoader) => {
-      if (withHeaderLoader)
-        return setIsSectionHeaderLoading(param, !withoutTimer);
+  const onDrop = useEventCallback((f, uploadToFolder) => {
+    if (isContactsPage || isProfile) return;
 
-      setIsSectionBodyLoading(param, !withoutTimer);
-    },
-    [setIsSectionHeaderLoading, setIsSectionBodyLoading],
-  );
+    if (
+      folderSecurity &&
+      hasOwnProperty(folderSecurity, "Create") &&
+      !folderSecurity.Create
+    )
+      return;
 
-  const { onDrop } = useFiles({
-    t,
-    dragging,
-    setDragging,
-    disableDrag,
-    createFoldersTree,
-    startUpload,
-    fetchFiles,
-    fetchRooms,
-    setIsLoading,
+    const dragged = dragging;
+    dragging && setDragging(false);
 
-    isContactsPage,
-    isSettingsPage,
+    if (disableDrag) return;
 
-    location,
-
-    playlist,
-
-    getFileInfo,
-    setToPreviewFile,
-    setIsPreview,
-
-    setIsUpdatingRowItem,
-
-    gallerySelected,
-    folderSecurity,
-    userId,
-
-    scrollToTop,
-    selectedFolderStore,
-    wsCreatedPDFForm,
+    createFoldersTree(t, f, uploadToFolder, dragged)
+      .then((fItem) => {
+        if (fItem.length > 0) startUpload(fItem, uploadToFolder, t);
+      })
+      .catch((err) => {
+        toastr.error(err, null, 0, true);
+      });
   });
 
   useOperations({
@@ -240,30 +224,6 @@ const PureHome = (props) => {
     clearUploadedFiles,
     primaryOperationsArray,
     clearConversionData,
-  });
-
-  useContacts({
-    isContactsPage,
-    contactsView,
-
-    setContactsTab,
-
-    setIsLoading,
-    scrollToTop,
-    setSelectedNode,
-
-    getUsersList,
-    getGroups,
-    updateCurrentGroup,
-
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
-  });
-
-  useSettings({
-    t,
-    isSettingsPage,
-    setIsLoading,
   });
 
   useSDK({
@@ -292,20 +252,21 @@ const PureHome = (props) => {
     isLoading,
   });
 
-  const getContextModel = () => {
-    if (isFrame) return null;
+  const getContextModel = useCallback(() => {
+    if (isFrame || isProfile) return null;
+
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
-  };
+  }, [isFrame, isProfile, isContactsPage, getContactsModel, getFolderModel]);
 
-  const onCancelUpload = () => {
+  const onCancelUpload = useCallback(() => {
     if (hideConfirmCancelOperation) {
       cancelUpload(t);
       return;
     }
 
     setOperationCancelVisible(true);
-  };
+  }, [hideConfirmCancelOperation, cancelUpload, setOperationCancelVisible]);
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
@@ -329,11 +290,12 @@ const PureHome = (props) => {
       isLoaded: !firstLoad,
       viewAs: contactsViewAs,
       isAccounts: isContactsPage,
+      chatFiles,
     };
 
     if (!isContactsPage) {
       sectionProps.dragging = dragging;
-      sectionProps.uploadFiles = true;
+      sectionProps.uploadFiles = !isChat;
       sectionProps.onDrop =
         isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
 
@@ -343,21 +305,60 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+      sectionProps.fullHeightBody = isChat;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
   }
 
+  const onDragOverEmpty = React.useCallback(
+    (isDragActive) => {
+      if (
+        isDragActive &&
+        selectedFolderTitle &&
+        !disableDrag &&
+        canCreateSecurity
+      ) {
+        setDropTargetPreview(selectedFolderTitle);
+      }
+    },
+    [selectedFolderTitle, setDropTargetPreview, disableDrag, canCreateSecurity],
+  );
+
+  const onDragLeaveEmpty = React.useCallback(
+    (e) => {
+      if (setDropTargetPreview) {
+        // Check if mouse is over preview button or progress bar elements
+        const target =
+          e?.relatedTarget ||
+          document.elementFromPoint(e?.clientX || 0, e?.clientY || 0);
+
+        const isOverPreviewButton =
+          target?.closest(".previewFloatingButtonContainer") ||
+          target?.closest(".layout-progress-bar") ||
+          target?.closest(".layout-progress-bar_wrapper") ||
+          target?.closest('[role="tooltip"]');
+
+        if (!isOverPreviewButton) {
+          setDropTargetPreview(null);
+        }
+      }
+    },
+    [setDropTargetPreview],
+  );
+
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 
-  sectionProps.getContextModel = getContextModel;
+  sectionProps.getContextModel = isChat ? null : getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
   sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
+  sectionProps.dropTargetPreview = dropTargetPreview;
   sectionProps.clearSecondaryProgressData = clearSecondaryProgressData;
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
+  sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   sectionProps.cancelUpload = onCancelUpload;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
@@ -365,6 +366,10 @@ const PureHome = (props) => {
   sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
   sectionProps.withTabs = sectionWithTabs;
+  sectionProps.onDragOverEmpty = onDragOverEmpty;
+  sectionProps.onDragLeaveEmpty = onDragLeaveEmpty;
+  sectionProps.dragging = dragging;
+  sectionProps.startDropPreview = startDropPreview;
 
   const hasVisibleContent =
     !isEmptyPage ||
@@ -378,12 +383,21 @@ const PureHome = (props) => {
   const shouldRenderSectionFilter =
     (isValidMainContent || isValidContactsContent) && !isSettingsPage;
 
+  React.useEffect(() => {
+    if (isChangePageRequestRunning) return;
+
+    setShouldShowFilter(shouldRenderSectionFilter);
+  }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
+
+  const isDisabledKnowledge =
+    !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
+
   return (
     <>
-      {isSettingsPage ? null : isContactsPage ? (
+      {isSettingsPage ? null : isContactsPage || isProfile ? (
         <>
           <AccountsDialogs />
-          <ContactsSelectionArea />
+          {isProfile ? null : <ContactsSelectionArea />}
         </>
       ) : (
         <>
@@ -392,8 +406,11 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <SectionWrapper {...sectionProps}>
-        {!isErrorRoomNotAvailable || isContactsPage || isSettingsPage ? (
+      <SectionWrapper {...sectionProps} withoutFooter={isChat}>
+        {!isErrorRoomNotAvailable ||
+        isContactsPage ||
+        isProfile ||
+        isSettingsPage ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -407,17 +424,17 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {shouldRenderSectionFilter ? (
+        {!isChat &&
+        !isDisabledKnowledge &&
+        shouldShowFilter &&
+        !isProfile &&
+        (!isFrame || showFilter) ? (
           <Section.SectionFilter>
-            {isFrame ? (
-              showFilter && <SectionFilterContent />
-            ) : (
-              <SectionFilterContent />
-            )}
+            <SectionFilterContent />
           </Section.SectionFilter>
         ) : null}
 
-        <Section.SectionBody isAccounts={isContactsPage}>
+        <Section.SectionBody>
           <Outlet />
         </Section.SectionBody>
 
@@ -428,6 +445,7 @@ const PureHome = (props) => {
           <InfoPanelBodyContent />
         </Section.InfoPanelBody>
       </SectionWrapper>
+      <InfoPanelActions />
     </>
   );
 };
@@ -452,8 +470,17 @@ export const Component = inject(
     indexingStore,
     dialogsStore,
     filesSettingsStore,
+    aiRoomStore,
+    profileActionsStore,
   }) => {
-    const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
+    const {
+      setSelectedFolder,
+      security: folderSecurity,
+      title: selectedFolderTitle,
+    } = selectedFolderStore;
+
+    const canCreateSecurity = folderSecurity?.Create;
+
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -466,11 +493,12 @@ export const Component = inject(
 
     const {
       firstLoad,
-      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
       showFilterLoader,
+      isChangePageRequestRunning,
+      currentClientView,
     } = clientLoadingStore;
 
     const { getFolderModel } = contextOptionsStore;
@@ -507,6 +535,8 @@ export const Component = inject(
       scrollToTop,
       wsCreatedPDFForm,
       mainButtonVisible,
+
+      removeActiveItem,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -519,8 +549,6 @@ export const Component = inject(
       isRoomsFolder,
       isArchiveFolder,
       setSelectedNode,
-      isPersonalRoom,
-      isRecentTab,
       isRoomsFolderRoot,
       isTemplatesFolder,
       isRoot,
@@ -533,6 +561,10 @@ export const Component = inject(
       primaryOperationsAlert,
       isErrorChecking,
       isPrimaryProgressVisbile,
+      dropTargetPreview,
+      setDropTargetPreview,
+      clearDropPreviewLocation,
+      startDropPreview,
     } = primaryProgressDataStore;
 
     const {
@@ -557,7 +589,6 @@ export const Component = inject(
       isFrame,
       enablePlugins,
       getSettings,
-      showGuestReleaseTip,
       allowInvitingGuests,
       checkGuests,
       hasGuests,
@@ -578,19 +609,15 @@ export const Component = inject(
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
-    const {
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
-      setGuestReleaseTipDialogVisible,
-    } = dialogsStore;
+    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
+      dialogsStore;
 
     const { isRoomAdmin, isAdmin } = authStore;
 
-    const withDocumentTabs = isPersonalRoom || isRecentTab;
     const withRoomsTabs =
       (isRoomsFolderRoot || isTemplatesFolder) && (isRoomAdmin || isAdmin);
 
-    const sectionWithTabs = (withDocumentTabs || withRoomsTabs) && isRoot;
+    const sectionWithTabs = withRoomsTabs && isRoot;
 
     // if (!firstLoad) {
     //   if (isLoading) {
@@ -601,6 +628,8 @@ export const Component = inject(
     // }
 
     return {
+      currentClientView,
+      isChangePageRequestRunning,
       // homepage: config.homepage,
       firstLoad,
       dragging,
@@ -628,7 +657,6 @@ export const Component = inject(
       setExpandedKeys,
 
       setDragging,
-      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
@@ -689,8 +717,6 @@ export const Component = inject(
       isEmptyGroups,
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
-      showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible,
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
 
@@ -710,10 +736,22 @@ export const Component = inject(
       setOperationCancelVisible,
       hideConfirmCancelOperation,
 
+      removeActiveItem,
       allowInvitingGuests,
       checkGuests,
       hasGuests,
       sectionWithTabs,
+      dropTargetPreview,
+      setDropTargetPreview,
+      selectedFolderTitle,
+      clearDropPreviewLocation,
+      canCreateSecurity,
+      startDropPreview,
+
+      currentTab: aiRoomStore.currentTab,
+      aiConfig: settingsStore.aiConfig,
+
+      setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
     };
   },
 )(observer(Home));

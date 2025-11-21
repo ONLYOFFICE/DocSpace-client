@@ -56,6 +56,8 @@ export type SliderProps = {
   isDisabled?: boolean;
   /** Accepts css */
   style?: React.CSSProperties;
+  /** Accepts dataTestId */
+  dataTestId?: string;
 };
 
 export type SliderThemeProps = SliderProps & {

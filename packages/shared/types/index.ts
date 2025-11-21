@@ -24,10 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type { TBreadCrumb } from "../components/selector/Selector.types";
-import { RoomsType, ShareAccessRights } from "../enums";
-import { TTheme, TColorScheme } from "../themes";
-import FirebaseHelper from "../utils/firebase";
+import type {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  ShareRights,
+} from "../enums";
+import type { TTheme, TColorScheme } from "../themes";
+import type FirebaseHelper from "../utils/firebase";
+import type { TRoom } from "../api/rooms/types";
 
 export type Option = {
   key: string;
@@ -81,17 +88,19 @@ export type BackupToPublicRoomOptionType = {
 
 export type TSortOrder = "descending" | "ascending";
 export type TSortBy =
+  | "DateAndTime"
   | "DateAndTimeCreation"
   | "Tags"
+  | "Type"
   | "AZ"
   | "Author"
-  | "Type"
+  | "roomType"
   | "usedspace"
   | "Size";
 
 export type TTranslation = (
   key: string,
-  params?: { [key: string]: string | string[] | number },
+  params?: Record<string, unknown>,
 ) => string;
 
 export type Nullable<T> = T | null;
@@ -124,6 +133,7 @@ export type TPathParts = {
   id: number;
   title: string;
   roomType?: RoomsType;
+  folderType?: FolderType;
 };
 
 export type TCreatedBy = {
@@ -184,13 +194,49 @@ export interface StaticImageData {
   blurHeight?: number;
 }
 
+export interface LinkParamsType {
+  link: TFileLink;
+  item: TFile | TFolder | TRoom;
+
+  updateLink?: (newLink: TFileLink) => void;
+}
+
+export type TShareRightsType =
+  | "ExternalLink"
+  | "Group"
+  | "PrimaryExternalLink"
+  | "User";
+
+export type TAvailableShareRights = Partial<
+  Record<TShareRightsType, ShareRights[]>
+>;
+
+export type TShareLinkAccessRightOption = {
+  key: string;
+  icon: string;
+  label: string;
+  access: ShareAccessRights;
+  description?: string;
+  title?: string;
+};
+
+export type TShareToUserAccessRightOption = {
+  key: string;
+  label: string;
+  access: ShareAccessRights;
+  description?: string;
+  isSeparator?: boolean;
+};
+
+export type ValueOf<T> = T[keyof T];
+
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
     Asc: unknown;
     zESettings: unknown;
     zE: {
-      apply: Function;
+      apply: (...args: unknown[]) => void;
     };
     i18n: {
       loaded: {
@@ -198,11 +244,13 @@ declare global {
       };
     };
     timezone: string;
-    snackbar?: {};
+    snackbar?: object;
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
       location: Location & { state: unknown };
+      displayFileExtension?: boolean;
     };
+    loginCallback?: ((profile: unknown) => void) | null;
     logs: {
       socket: string[];
     };
@@ -261,7 +309,7 @@ declare global {
     cloudCryptoCommand: (
       type: string,
       params: { [key: string]: string | boolean },
-      callback: (obj?: {}) => void,
+      callback: (obj?: object) => void,
     ) => void;
     onSystemMessage: (e: {
       type: string;
@@ -271,7 +319,9 @@ declare global {
     RendererProcessVariable: {
       theme?: { id: string; system: string; type: string; addlocal: string };
     };
-    Tiff: new (arg: object) => {
+    Tiff: new (
+      arg: object,
+    ) => {
       toDataURL: () => string;
     };
     dataLayer?: Record<string, unknown>[];

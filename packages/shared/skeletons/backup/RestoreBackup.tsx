@@ -30,12 +30,7 @@ import { RectangleSkeleton } from "../rectangle";
 import styles from "./Backup.module.scss";
 import type { BackupLoaderProps } from "./Backup.types";
 
-const RestoreBackupLoader = ({
-  id,
-  className,
-  style,
-  ...rest
-}: BackupLoaderProps) => {
+const RestoreBackupLoader = (props: BackupLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -45,7 +40,7 @@ const RestoreBackupLoader = ({
     foregroundOpacity,
     speed,
     animate,
-  } = rest;
+  } = props;
 
   return (
     <div className={styles.restoreBackup} data-testid="restore-backup-loader">

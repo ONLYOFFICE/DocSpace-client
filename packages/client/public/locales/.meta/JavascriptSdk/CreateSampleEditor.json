@@ -3,7 +3,7 @@
   "content": "Create sample Editor embed",
   "content_en_sha1_hash": "6275f4c2aaf8b2179793a98c49222a86f56c560e",
   "created_at": "2025-05-19T21:30:54.394Z",
-  "updated_at": "2025-05-24T09:40:41.951Z",
+  "updated_at": "2025-08-04T07:30:01.385Z",
   "comment": {
     "text": "This translation key is used for the header title \"Create Sample Editor\" in a JavaScript SDK preset editor. It appears as the main heading of an editor preset settings container, guiding users to create a sample editor embed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
       "line_number": 181,
-      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"EditorDescription\")}\n header={t(\"CreateSampleEditor\")}\n >\n <Container>\n <PreviewBlock\n t={t}\n loadCurrentFrame={initFrame}",
+      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"EditorDescription\")}\n header={t(\"CreateSampleEditor\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }
   ],

@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Consumer } from "@docspace/shared/utils/context";
 
-import withLoader from "SRC_DIR/HOCs/withLoader";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
@@ -37,7 +35,7 @@ import RowView from "./RowView";
 import TableView from "./TableView";
 
 type UsersProps = {
-  contactsViewAs: TContactsViewAs;
+  contactsViewAs?: TContactsViewAs;
 };
 
 const Users = ({ contactsViewAs }: UsersProps) => {
@@ -55,10 +53,5 @@ const Users = ({ contactsViewAs }: UsersProps) => {
 };
 
 export default inject(({ peopleStore }: { peopleStore: PeopleStore }) => ({
-  peopleList: peopleStore.usersStore!.peopleList,
   contactsViewAs: peopleStore.viewAs,
-}))(
-  withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(Users))(),
-  ),
-);
+}))(observer(Users));

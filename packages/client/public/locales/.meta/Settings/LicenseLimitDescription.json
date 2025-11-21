@@ -3,7 +3,7 @@
   "content": "The license limit counter consists of: already existing accounts in {{productName}} and new users that you want to import. If you import users who already have a {{productName}} account, they will not be counted again in the counter. Your {{productName}} license allows you to have a maximum of {{maxLimit}} users.",
   "content_en_sha1_hash": "48bb127c07477ce132bbeea9ad21b81eedf91b24",
   "created_at": "2025-05-19T21:30:51.797Z",
-  "updated_at": "2025-06-30T12:20:31.426Z",
+  "updated_at": "2025-10-27T16:14:33.500Z",
   "comment": {
     "text": "This translation key is used to display a descriptive message about the license limit counter in the Portal Settings page. It explains that the limit applies to existing accounts and new users being imported, without counting duplicate users. The text appears as a tooltip when clicking the \"Help\" button on this page.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/UsersInfoBlock.tsx",
-      "line_number": 74,
-      "context": "<HelpButton\n place=\"right\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"Settings:LicenseLimitDescription\", {\n productName: t(\"Common:ProductName\"),\n maxLimit: quota.max,\n })}\n </Text>\n }",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
+      "line_number": 65,
+      "context": "dataTestId=\"license_limit_help_button\"\n place=\"right\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"LicenseLimitDescription\", {\n productName: t(\"Common:ProductName\"),\n maxLimit: limitAdmins,\n })}\n </Text>\n }",
       "module": "/packages/client"
     }
   ],

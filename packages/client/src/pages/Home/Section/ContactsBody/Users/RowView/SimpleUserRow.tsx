@@ -47,7 +47,11 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
     isActive,
     value,
     inProgress,
+    contactsTab,
+    itemIndex,
   } = props;
+
+  const isGuests = contactsTab === "guests";
 
   const isChecked = checkedProps!.checked;
 
@@ -83,6 +87,11 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
           onRowClick={() => {}}
           isIndexEditingMode={false}
           inProgress={inProgress}
+          dataTestId={
+            isGuests
+              ? `contacts_guests_row_${itemIndex}`
+              : `contacts_users_row_${itemIndex}`
+          }
         >
           <UserContent {...props} />
         </StyledSimpleUserRow>

@@ -67,6 +67,7 @@ const ButtonsBlock = ({
         size={buttonSize}
         scale={!isDesktop}
         onClick={onSaveClick}
+        testId="oauth_save_button"
       />
 
       <Button
@@ -75,6 +76,7 @@ const ButtonsBlock = ({
         size={buttonSize}
         scale={!isDesktop}
         onClick={onCancelClick}
+        testId="oauth_cancel_button"
       />
     </StyledButtonContainer>
   );

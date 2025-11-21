@@ -142,7 +142,9 @@ const PriceCalculation = ({
             i18nKey="PerUserYear"
             ns="Common"
             values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}
-            components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
+            components={{
+              1: <strong key="price-year" style={{ fontSize: "16px" }} />,
+            }}
           />
         ) : (
           <Trans
@@ -150,7 +152,9 @@ const PriceCalculation = ({
             i18nKey="PerUserMonth"
             ns="Common"
             values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}
-            components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
+            components={{
+              1: <strong key="price-month" style={{ fontSize: "16px" }} />,
+            }}
           />
         )}
       </Text>
@@ -161,12 +165,7 @@ const PriceCalculation = ({
 
   return (
     <StyledBody className="price-calculation-container" isDisabled={isDisabled}>
-      <Text
-        fontSize="16px"
-        fontWeight={600}
-        noSelect
-        className="payment_main-title"
-      >
+      <Text fontSize="16px" fontWeight={600} className="payment_main-title">
         {isGracePeriod || isNotPaidPeriod
           ? t("YourPrice")
           : t("PriceCalculation")}

@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { FileType } from "../../../enums";
 
@@ -34,28 +34,30 @@ import { FileTile } from "./FileTile";
 import { FileItemType } from "./FileTile.types";
 
 // Mock translations
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
 // Mock ReactSVG component
-jest.mock("react-svg", () => ({
+vi.mock("react-svg", () => ({
   ReactSVG: () => <div data-testid="mock-svg" />,
 }));
 
-// Mock styles
-jest.mock("./FileTile.module.scss", () => ({
-  fileTile: "fileTile",
-  isBlockingOperation: "isBlockingOperation",
-  showHotkeyBorder: "showHotkeyBorder",
-  highlight: "highlight",
-  loader: "loader",
-  icons: "icons",
-  iconContainer: "iconContainer",
+// Mock styles - return default export for CSS Modules
+vi.mock("./FileTile.module.scss", () => ({
+  default: {
+    fileTile: "fileTile",
+    isBlockingOperation: "isBlockingOperation",
+    showHotkeyBorder: "showHotkeyBorder",
+    highlight: "highlight",
+    loader: "loader",
+    icons: "icons",
+    iconContainer: "iconContainer",
+  },
 }));
 
 // Mock Checkbox component
-jest.mock("@docspace/shared/components/checkbox", () => ({
+vi.mock("@docspace/shared/components/checkbox", () => ({
   Checkbox: ({
     isChecked,
     onChange,
@@ -114,13 +116,13 @@ describe("FileTile", () => {
       </FileTile>,
     );
 
-    const checkbox = screen.getByTestId("checkbox") as HTMLInputElement;
+    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
     expect(checkbox).toBeTruthy();
     expect(checkbox.checked).toBe(true);
   });
 
   it("calls onSelect when checkbox is clicked", () => {
-    const onSelect = jest.fn();
+    const onSelect = vi.fn();
     render(
       <FileTile {...defaultProps} onSelect={onSelect}>
         <FileContent />
@@ -144,7 +146,7 @@ describe("FileTile", () => {
   });
 
   it("calls thumbnailClick when thumbnail is clicked", () => {
-    const thumbnailClick = jest.fn();
+    const thumbnailClick = vi.fn();
     render(
       <FileTile
         {...defaultProps}

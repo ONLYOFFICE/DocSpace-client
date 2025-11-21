@@ -86,6 +86,8 @@ async function Page(props: {
 
   const culture = cookieStore.get(LANGUAGE)?.value ?? settingsCulture;
 
+  const currentScopes = cookieStore.get("x-scopes")?.value?.split(";");
+
   return settings && typeof settings !== "string" ? (
     <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
       <>
@@ -96,6 +98,9 @@ async function Page(props: {
         <Consent
           client={client}
           scopes={scopes}
+          currentScopesProp={
+            currentScopes?.length ? currentScopes : client.scopes
+          }
           user={user}
           baseUrl={config?.oauth2?.origin}
         />

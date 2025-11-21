@@ -29,13 +29,15 @@ import { ButtonSize } from "./Button.enums";
 
 type BaseButtonProps = {
   /** Ref to access the DOM element or React component instance */
-  ref?: React.RefObject<HTMLButtonElement>;
+  ref?: React.Ref<HTMLButtonElement>;
   /** Button text */
   label: string;
   /** Optional title attribute */
   title?: string;
   /** Sets the button primary */
   primary?: boolean;
+  filled?: boolean;
+  filledStroke?: boolean;
   /** Size of the button.
    * The normal size equals 36px and 40px in height on the Desktop and Touchscreen devices. */
   size?: ButtonSize;
@@ -77,6 +79,8 @@ export type ButtonProps = BaseButtonProps & {
   "aria-disabled"?: "true" | "false";
   /** ARIA busy state */
   "aria-busy"?: "true" | "false";
+  /** Tooltip text */
+  tooltipText?: string;
 };
 
 /** Props for the styled ButtonTheme component */

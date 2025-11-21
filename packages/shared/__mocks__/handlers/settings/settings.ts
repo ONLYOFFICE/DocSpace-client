@@ -473,6 +473,25 @@ export const settingsPortalDeactivate = {
   response: { ...settingsNoAuth.response, tenantStatus: 1 },
 };
 
+export const settingsWithEnabledJoin = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, enabledJoin: true },
+};
+
+export const settingsWithEnableAdmMess = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, enableAdmMess: true },
+};
+
+export const settingsWithHCaptcha = {
+  ...settingsNoAuth,
+  response: {
+    ...settingsNoAuth.response,
+    recaptchaType: 3,
+    recaptchaPublicKey: "10000000-ffff-ffff-ffff-000000000001",
+  },
+};
+
 export const settingsResolver = (
   type: TypeSettings = TypeSettings.NoAuth,
 ): Response => {

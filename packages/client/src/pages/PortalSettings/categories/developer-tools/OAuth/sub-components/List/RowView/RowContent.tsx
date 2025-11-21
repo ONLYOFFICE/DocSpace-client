@@ -66,6 +66,7 @@ export const RowContent = ({
           id="toggle id"
           isChecked={item.enabled}
           onChange={handleToggleEnabled}
+          dataTestId={`${item.name}_toggle_button`}
         />
       </ToggleButtonWrapper>
     </StyledRowContent>

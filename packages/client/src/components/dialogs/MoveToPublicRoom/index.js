@@ -47,7 +47,6 @@ const MoveToPublicRoomComponent = (props) => {
     moveToPublicRoomData,
     checkFileConflicts,
     setConflictDialogData,
-    setMovingInProgress,
     itemOperationToFolder,
     clearActiveOperations,
     setSelectedItems,
@@ -71,7 +70,7 @@ const MoveToPublicRoomComponent = (props) => {
   };
 
   const onMoveTo = () => {
-    const { destFolderId, folderIds, fileIds, isCopy } = moveToPublicRoomData;
+    const { destFolderId, folderIds, fileIds } = moveToPublicRoomData;
 
     if (!timerId)
       timerId = setTimeout(() => {
@@ -87,8 +86,6 @@ const MoveToPublicRoomComponent = (props) => {
         } else {
           setIsLoading(false);
           onClosePanels();
-          const move = !isCopy;
-          if (move) setMovingInProgress(move);
           await itemOperationToFolder(moveToPublicRoomData);
         }
       })
@@ -128,7 +125,7 @@ const MoveToPublicRoomComponent = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>{t("Common:MoveToPublicRoom")}</Text>
+          <Text>{t("Common:MoveToPublicRoom")}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -165,7 +162,7 @@ const MoveToPublicRoomDialog = withTranslation([
 
 export default inject(
   ({ dialogsStore, filesActionsStore, filesStore, uploadDataStore }) => {
-    const { setMovingInProgress, setSelected } = filesStore;
+    const { setSelected } = filesStore;
 
     const {
       moveToPublicRoomVisible,
@@ -193,7 +190,6 @@ export default inject(
       moveToPublicRoomData,
       checkFileConflicts,
       setConflictDialogData,
-      setMovingInProgress,
       itemOperationToFolder,
       clearActiveOperations,
       setSelectedItems,

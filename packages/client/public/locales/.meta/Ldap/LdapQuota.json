@@ -3,7 +3,7 @@
   "content": "User quota",
   "content_en_sha1_hash": "e848c684e600a150cf50f9258ca8622add08c8f9",
   "created_at": "2025-05-19T21:30:54.255Z",
-  "updated_at": "2025-05-24T08:24:00.731Z",
+  "updated_at": "2025-08-11T18:11:59.237Z",
   "comment": {
     "text": "The \"User quota\" translation key is used to display a label in UI elements, such as field labels and tooltips. It provides a clear and concise description of the quota setting being configured or edited within the LDAP integration settings.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 211,
-      "context": "<FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n >",
+      "line_number": 222,
+      "context": "<FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n dataTestId=\"quota_field_container\"",
       "module": "/packages/client"
     }
   ],

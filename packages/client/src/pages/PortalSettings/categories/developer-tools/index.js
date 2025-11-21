@@ -36,6 +36,7 @@ import { Tabs } from "@docspace/shared/components/tabs";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import SSOLoader from "./sub-components/ssoLoader";
 
 import JavascriptSDK from "./JavascriptSDK";
 import Webhooks from "./Webhooks";
@@ -43,18 +44,27 @@ import Api from "./Api";
 import PluginSDK from "./PluginSDK";
 import OAuth from "./OAuth";
 
-import SSOLoader from "./sub-components/ssoLoader";
 import ApiKeys from "./ApiKeys";
+import useDeveloperTools from "./useDeveloperTools";
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 const DeveloperToolsWrapper = (props) => {
-  const { currentDeviceType, identityServerEnabled } = props;
+  const {
+    currentDeviceType,
+    identityServerEnabled,
+
+    settingsStore,
+    webhooksStore,
+    oauthStore,
+    clearAbortControllerArr,
+    showPortalSettingsLoader,
+  } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoading, setIsLoading] = useState(false);
   const [currentTabId, setCurrentTabId] = useState();
 
-  const { t } = useTranslation([
+  const { t, ready } = useTranslation([
     "JavascriptSdk",
     "Webhooks",
     "Settings",
@@ -62,7 +72,20 @@ const DeveloperToolsWrapper = (props) => {
     "Common",
     "OAuth",
   ]);
-  // const [, startTransition] = useTransition();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    webhooksStore,
+    oauthStore,
+  });
+
+  const {
+    getJavascriptSDKData,
+    getWebhooksData,
+    getOAuthData,
+    errorOAuth,
+    getKeysData,
+  } = useDeveloperTools(defaultProps.developerTools);
 
   const sdkLabel = (
     <div style={{ boxSizing: "border-box", display: "flex", gap: "8px" }}>
@@ -80,7 +103,11 @@ const DeveloperToolsWrapper = (props) => {
     ? {
         id: "oauth",
         name: t("OAuth:OAuth"),
-        content: <OAuth />,
+        content: <OAuth error={errorOAuth} />,
+        onClick: async () => {
+          clearAbortControllerArr();
+          await getOAuthData();
+        },
       }
     : {};
 
@@ -89,27 +116,41 @@ const DeveloperToolsWrapper = (props) => {
       id: "api",
       name: t("Settings:Api"),
       content: <Api />,
+      onClick: () => {},
     },
     {
       id: "javascript-sdk",
       name: sdkLabel,
       content: <JavascriptSDK />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getJavascriptSDKData();
+      },
     },
     {
       id: "plugin-sdk",
       name: pluginLabel,
       content: <PluginSDK />,
+      onClick: () => {},
     },
     {
       id: "webhooks",
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getWebhooksData();
+      },
     },
     { ...oauthData },
     {
       id: "api-keys",
       name: t("Settings:ApiKeys"),
       content: <ApiKeys />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getKeysData();
+      },
     },
   ];
 
@@ -122,11 +163,9 @@ const DeveloperToolsWrapper = (props) => {
         path === `/developer-tools/${item.id}`,
     );
 
-    if (currentTab !== -1 && data.length) {
-      setCurrentTabId(currentTab.id);
+    if (currentTab !== undefined && data.length) {
+      setCurrentTabId(currentTab?.id);
     }
-
-    setIsLoading(true);
   }, [location.pathname]);
 
   const onSelect = (e) => {
@@ -143,7 +182,7 @@ const DeveloperToolsWrapper = (props) => {
     setCurrentTabId(e.id);
   };
 
-  if (!isLoading) return <SSOLoader />;
+  if (showPortalSettingsLoader || !ready) return <SSOLoader />;
 
   return (
     <Tabs
@@ -151,20 +190,35 @@ const DeveloperToolsWrapper = (props) => {
       selectedItemId={currentTabId}
       onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
-export const Component = inject(({ setup, settingsStore, authStore }) => {
-  const { initSettings } = setup;
+export const Component = inject(
+  ({
+    settingsStore,
+    authStore,
+    webhooksStore,
+    oauthStore,
+    clientLoadingStore,
+  }) => {
+    const identityServerEnabled =
+      authStore?.capabilities?.identityServerEnabled;
 
-  const identityServerEnabled = authStore?.capabilities?.identityServerEnabled;
+    const { currentDeviceType, clearAbortControllerArr } = settingsStore;
 
-  return {
-    currentDeviceType: settingsStore.currentDeviceType,
-    loadBaseInfo: async () => {
-      await initSettings();
-    },
-    identityServerEnabled,
-  };
-})(observer(DeveloperToolsWrapper));
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
+    return {
+      currentDeviceType,
+      identityServerEnabled,
+
+      settingsStore,
+      webhooksStore,
+      oauthStore,
+      clearAbortControllerArr,
+      showPortalSettingsLoader,
+    };
+  },
+)(observer(DeveloperToolsWrapper));

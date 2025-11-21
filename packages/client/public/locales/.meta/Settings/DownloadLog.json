@@ -3,7 +3,7 @@
   "content": "Download log",
   "content_en_sha1_hash": "97b1248a2147299746e5cc6dae4da0ceebc6b304",
   "created_at": "2025-05-19T21:30:51.443Z",
-  "updated_at": "2025-05-26T07:57:32.523Z",
+  "updated_at": "2025-08-11T09:02:43.945Z",
   "comment": {
     "text": "This translation key is used to describe the \"Download Log\" button in a file import completion step, prompting users to download log data. It appears on a cancel button and is meant to provide visual clarity for translators to ensure accurate rendering of this specific label.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
-      "line_number": 178,
-      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onFinishClick}\n onCancelClick={onDownloadLog}\n saveButtonLabel={t(\"Common:Finish\")}\n cancelButtonLabel={t(\"Settings:DownloadLog\")}\n displaySettings\n showReminder\n />\n </>\n );",
+      "line_number": 180,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onFinishClick}\n onCancelClick={onDownloadLog}\n saveButtonLabel={t(\"Common:Finish\")}\n cancelButtonLabel={t(\"Settings:DownloadLog\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"finish_import_button\"\n cancelButtonDataTestId=\"download_log_button\"\n />",
       "module": "/packages/client"
     }
   ],

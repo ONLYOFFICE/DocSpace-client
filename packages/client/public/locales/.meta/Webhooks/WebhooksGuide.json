@@ -3,7 +3,7 @@
   "content": "Webhooks Guide",
   "content_en_sha1_hash": "426d1aa73a91fb4aa937d1af4f1bdc8b411b5146",
   "created_at": "2025-05-19T21:30:49.890Z",
-  "updated_at": "2025-06-08T12:02:32.788Z",
+  "updated_at": "2025-08-04T07:30:01.472Z",
   "comment": {
     "text": "The \"WebhooksGuide\" translation key is used to display a title for a webpage or section related to webhooks, which appears as a clickable link on a portal settings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookInfo.js",
-      "line_number": 69,
-      "context": "target={LinkTarget.blank}\n type={LinkType.page}\n isHovered\n color=\"accent\"\n >\n {t(\"WebhooksGuide\")}\n </Link>\n ) : null}\n </div>\n );\n };",
+      "line_number": 70,
+      "context": "type={LinkType.page}\n isHovered\n color=\"accent\"\n dataTestId=\"webhooks_info_link\"\n >\n {t(\"WebhooksGuide\")}\n </Link>\n ) : null}\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

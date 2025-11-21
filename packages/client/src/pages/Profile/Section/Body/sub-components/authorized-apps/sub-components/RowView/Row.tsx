@@ -14,6 +14,7 @@ export const OAuthRow = (props: RowProps) => {
     inProgress,
     getContextMenuItems,
     setSelection,
+    dataTestId,
   } = props;
 
   const { t } = useTranslation(["OAuth", "Common", "Files"]);
@@ -36,6 +37,7 @@ export const OAuthRow = (props: RowProps) => {
       onRowClick={() => {}}
       className={`oauth2-row${isChecked ? " oauth2-row-selected" : ""}`}
       isIndexEditingMode={false}
+      dataTestId={dataTestId}
     >
       <RowContent
         sectionWidth={sectionWidth}

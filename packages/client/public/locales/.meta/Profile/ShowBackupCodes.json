@@ -3,7 +3,7 @@
   "content": "Show backup codes",
   "content_en_sha1_hash": "ef39b662d908a8305219bddff4da149f743f9ad9",
   "created_at": "2025-05-19T21:30:53.382Z",
-  "updated_at": "2025-05-24T06:07:58.557Z",
+  "updated_at": "2025-08-11T18:11:59.300Z",
   "comment": {
     "text": "The translation key \"ShowBackupCodes\" represents a button label that displays instructions to show backup codes for two-factor authentication. It is used in a login settings page, where clicking this button will toggle a dialog open for managing backup codes. Translators should ensure the phrase provides clarity and accuracy in this context.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login-settings/index.js",
-      "line_number": 76,
-      "context": "<Text className=\"description\">{t(\"TwoFactorDescription\")}</Text>\n </div>\n <div className=\"actions\">\n <Button\n className=\"button\"\n label={t(\"ShowBackupCodes\")}\n onClick={() => setBackupCodesDialogVisible(true)}\n size=\"small\"\n />\n <Link\n fontWeight=\"600\"",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/login-settings/index.tsx",
+      "line_number": 84,
+      "context": "<Text className=\"description\">{t(\"TwoFactorDescription\")}</Text>\n </div>\n <div className=\"actions\">\n <Button\n className=\"button\"\n label={t(\"ShowBackupCodes\")}\n onClick={() => setBackupCodesDialogVisible(true)}\n size={ButtonSize.small}\n testId=\"show_backup_codes_button\"\n />\n <Link",
       "module": "/packages/client"
     }
   ],

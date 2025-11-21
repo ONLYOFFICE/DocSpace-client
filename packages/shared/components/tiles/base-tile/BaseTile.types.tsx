@@ -67,20 +67,25 @@ export type BaseTileProps = {
   onRoomClick?: (e: React.MouseEvent) => void;
   checkboxContainerRef?: React.RefObject<HTMLDivElement | null>;
   forwardRef?: React.RefObject<HTMLDivElement | null>;
+  /** Data test id for the tile */
+  dataTestId?: string;
+  badgeUrl?: string;
+};
+
+export type ItemProps = {
+  title?: string;
+  icon?: string;
+  logo?: {
+    original?: string;
+    large?: string;
+    medium?: string;
+    small?: string;
+    color?: string;
+    cover?: string | { data: string; id: string };
+  };
+  displayName?: string;
 };
 
 export type TileChildProps = {
-  item: {
-    title?: string;
-    icon?: string;
-    logo?: {
-      original?: string;
-      large?: string;
-      medium?: string;
-      small?: string;
-      color?: string;
-      cover?: string | { data: string; id: string };
-    };
-    displayName?: string;
-  };
+  item: ItemProps;
 };

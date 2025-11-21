@@ -1,9 +1,9 @@
 {
+  "DeepLinkOnlyAppText": "Možete otvoriti dokument samo u mobilnoj aplikaciji",
   "DeepLinkText": "Možete otvoriti dokument na portalu ili u mobilnoj aplikaciji",
+  "DownloadApp": "Preuzmite aplikaciju",
   "OpenInApp": "Otvori u aplikaciji",
   "OpeningDocument": "Otvaranje dokumenta",
   "RememberChoice": "Zapamti izbor kada otvaraš dokumente sledeći put ",
-  "StayInBrowser": "Ostani u pregledaču",
-  "DeepLinkOnlyAppText": "Možete otvoriti dokument samo u mobilnoj aplikaciji",
-  "DownloadApp": "Preuzmite aplikaciju"
+  "StayInBrowser": "Ostani u pregledaču"
 }

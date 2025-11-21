@@ -3,7 +3,7 @@
   "content": "Enter the LDAP server without the port number.",
   "content_en_sha1_hash": "680c834775f4c15824cec517ae01ba2229a60c4e",
   "created_at": "2025-05-19T21:30:54.271Z",
-  "updated_at": "2025-05-24T08:21:34.787Z",
+  "updated_at": "2025-08-11T18:11:59.241Z",
   "comment": {
     "text": "The \"LdapServerTooltip\" translation key is used to provide a tooltip when the user types into the LDAP server field, explaining that the port number should not be included. This appears as an inline help message next to the label for the LDAP server input field in the Connection Settings section of the Portal Settings page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
       "line_number": 96,
-      "context": "isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.server}\n labelText={t(\"LdapServer\")}\n tooltipContent={t(\"LdapServerTooltip\")}\n inlineHelpButton\n isRequired\n >\n <LdapFieldComponent\n name={SERVER}",
+      "context": "isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.server}\n labelText={t(\"LdapServer\")}\n tooltipContent={t(\"LdapServerTooltip\")}\n inlineHelpButton\n isRequired\n dataTestId=\"server_field_container\"\n >\n <LdapFieldComponent",
       "module": "/packages/client"
     }
   ],

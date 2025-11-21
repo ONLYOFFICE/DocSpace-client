@@ -1,0 +1,28 @@
+{
+  "key_path": "ResetKnowledgeDescription",
+  "content": "This action will remove the configured API key and disable document indexing for the knowledge base. Adding new documents to the knowledge base and working with them will be unavailable until a new key is provided.",
+  "content_en_sha1_hash": "dab9c295a5b8a3691c1a58338b8cc0812cf4bea6",
+  "created_at": "2025-11-13T07:58:04.631Z",
+  "updated_at": "2025-11-13T08:08:15.963Z",
+  "comment": {
+    "text": "This text explains the consequences of resetting the knowledge base API key. It appears in a dialog to inform the user that resetting the key will disable document indexing and prevent access to the knowledge base until a new key is provided. Translators should convey the full impact of this action.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:08:15.963Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/dialogs/reset/index.tsx",
+      "line_number": 75,
+      "context": "return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Settings:ResetSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans t={t} i18nKey=\"ResetKnowledgeDescription\" ns=\"AISettings\" />\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

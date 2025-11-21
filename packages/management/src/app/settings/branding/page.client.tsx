@@ -64,6 +64,7 @@ const BrandingPage = ({
   licenseAgreementsUrl,
   isEnterprise,
   logoText,
+  isMobile,
 }: {
   whiteLabelLogos: ILogo[];
   whiteLabelText: string;
@@ -78,10 +79,11 @@ const BrandingPage = ({
   licenseAgreementsUrl: string;
   isEnterprise: boolean;
   logoText: string;
+  isMobile?: boolean;
 }) => {
   const router = useRouter();
   const { currentDeviceType } = useDeviceType();
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = isMobile || currentDeviceType === DeviceType.mobile;
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
   const isSettingPaid = getIsSettingsPaid(isCustomizationAvailable, portals);

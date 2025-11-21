@@ -45,6 +45,7 @@ export const SocialButton = memo((props: SocialButtonProps) => {
     isDisabled = false,
     noHover = false,
     className,
+    dataTestId,
     $iconOptions,
     ...otherProps
   } = props;
@@ -62,7 +63,7 @@ export const SocialButton = memo((props: SocialButtonProps) => {
         [styles.small]: size !== "base",
         [styles.noHover]: noHover,
       })}
-      data-testid="social-button"
+      data-testid={dataTestId ?? "social-button"}
       data-icon-options-color={$iconOptions ? $iconOptions.color : null}
       style={buttonStyle}
       tabIndex={tabIndex}

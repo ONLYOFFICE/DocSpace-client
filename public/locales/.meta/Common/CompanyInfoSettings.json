@@ -3,7 +3,7 @@
   "content": "Company info settings",
   "content_en_sha1_hash": "192f2a8a9bec6d013a113f97fc1ce9b3cdd0c794",
   "created_at": "2025-05-26T07:15:41.404Z",
-  "updated_at": "2025-06-30T12:20:31.601Z",
+  "updated_at": "2025-08-04T07:30:01.570Z",
   "comment": {
     "text": "This translation key is used for the label \"Company info settings\" that appears on a page, likely in a portal or branding section, and is displayed as a header or button. It provides a brief description of the content users will access when clicking the link or navigating to this setting. The text is typically shown in a dialog or modal context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 117,
+      "line_number": 124,
       "context": "{\n id: \"portal-settings_catalog-company-info-settings\",\n key: \"0-1-2\",\n icon: \"\",\n link: \"company-info\",\n tKey: \"Common:CompanyInfoSettings\",\n },\n {\n id: \"portal-settings_catalog-additional-resources\",\n key: \"0-1-3\",\n icon: \"\",",
       "module": "/packages/client"
     },

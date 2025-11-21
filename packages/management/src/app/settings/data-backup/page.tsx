@@ -29,7 +29,6 @@ import {
   getBackupProgress,
   getBackupSchedule,
   getBackupStorage,
-  getFoldersTree,
   getPortalTariff,
   getSettingsFiles,
   getSettingsThirdParty,
@@ -50,7 +49,6 @@ async function Page() {
 
     portals,
     settingsFiles,
-    foldersTree,
     portalTariff,
   ] = await Promise.all([
     getSettingsThirdParty(),
@@ -60,14 +58,12 @@ async function Page() {
     getBackupProgress(),
     getAllPortals(),
     getSettingsFiles(),
-    getFoldersTree(),
     getPortalTariff(),
   ]);
 
   return (
     <DataBackup
       account={account}
-      foldersTree={foldersTree}
       portalTariff={portalTariff}
       filesSettings={settingsFiles}
       portals={portals?.tenants || []}

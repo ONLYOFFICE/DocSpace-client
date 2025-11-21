@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-export const GroupMemberRow = styled.div<{}>`
+export const GroupMemberRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;

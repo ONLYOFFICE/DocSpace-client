@@ -3,7 +3,7 @@
   "content": "See all connectors",
   "content_en_sha1_hash": "a539ba0228d0ead28c404acb9364e7d9b0f2a540",
   "created_at": "2025-05-19T21:30:54.665Z",
-  "updated_at": "2025-05-24T08:52:17.101Z",
+  "updated_at": "2025-08-04T07:30:01.407Z",
   "comment": {
     "text": "This translation key is used to display a button label that opens a URL in a new tab when clicked. It appears as a \"See all connectors\" link within a portal settings page, likely to provide users with access to additional connection options.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
-      "line_number": 110,
-      "context": "className=\"link\"\n noHover\n color={currentColorScheme.main?.accent}\n onClick={() => window.open(allConnectorsUrl, \"_blank\")}\n >\n {t(\"SeeAllConnectors\")}\n </Link>\n \n <div className=\"icon\">\n <ReactSVG\n className=\"icon-arrow\"",
+      "line_number": 123,
+      "context": "className=\"link\"\n noHover\n color={currentColorScheme.main?.accent}\n onClick={() => window.open(allConnectorsUrl, \"_blank\")}\n >\n {t(\"SeeAllConnectors\")}\n </Link>\n \n <div data-testid=\"all_connectors_icon\" className=\"icon\">\n <ReactSVG\n className=\"icon-arrow\"",
       "module": "/packages/client"
     }
   ],

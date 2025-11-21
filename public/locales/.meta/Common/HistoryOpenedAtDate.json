@@ -3,7 +3,7 @@
   "content": "Opened the form to fill out",
   "content_en_sha1_hash": "ba71e193153034a9fff8236f5236eb1cacef1cb3",
   "created_at": "2025-05-19T21:30:45.773Z",
-  "updated_at": "2025-05-28T09:30:02.937Z",
+  "updated_at": "2025-10-13T15:42:20.016Z",
   "comment": {
     "text": "\"This translation key defines the content for a status message indicating when a form was opened, typically displayed on a button or in a dialogue related to role history management.\"",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/components/filling-role-process/sub-components/role-histories/RoleHistories.tsx",
       "line_number": 49,
-      "context": "const stoppedByUserName = stoppedBy ? decode(stoppedBy.displayName) : \"\";\n \n const historyTexts = useMemo(() => {\n return {\n [FillingFormStatusHistory.OpenedAtDate.toString()]: t(\n \"Common:HistoryOpenedAtDate\",\n ),\n [FillingFormStatusHistory.SubmissionDate.toString()]: t(\n \"Common:HistorySubmissionDate\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (",
+      "context": "const stoppedByUserName = stoppedBy ? decode(stoppedBy.displayName) : \"\";\n \n const historyTexts = useMemo(() => {\n return {\n [FillingFormStatusHistory.OpenedAtDate.toString()]: t(\n \"Common:HistoryOpenedAtDate\",\n ),\n [FillingFormStatusHistory.SubmissionDate.toString()]: t(\n \"Common:HistorySubmittedPartDescription\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (",
       "module": "/packages/shared"
     }
   ],

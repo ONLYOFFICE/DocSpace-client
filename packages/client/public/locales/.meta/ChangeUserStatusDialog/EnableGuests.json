@@ -3,7 +3,7 @@
   "content": "Enable guests",
   "content_en_sha1_hash": "160e61b5e02191e607c2c62478b654f447e6a4b0",
   "created_at": "2025-05-19T21:30:56.966Z",
-  "updated_at": "2025-05-24T14:15:04.768Z",
+  "updated_at": "2025-08-04T07:30:01.065Z",
   "comment": {
     "text": "This translation key is used to display a header or button label that enables guests to access a system. It appears in a change user status dialog and is used when only one guest can be granted access.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 198,
+      "line_number": 194,
       "context": "header = onlyOneUser\n ? isGuests\n ? t(\"EnableGuest\")\n : t(\"EnableUser\")\n : isGuests\n ? t(\"EnableGuests\")\n : t(\"EnableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"EnableGuestDescription\", { productName: t(\"Common:ProductName\") })",
       "module": "/packages/client"
     }

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 
 import Filter from "@docspace/shared/api/people/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -39,6 +40,7 @@ import {
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
 import { SortByFieldName, RoomsProviderType } from "@docspace/shared/enums";
+import { getAIAgents } from "@docspace/shared/api/ai";
 
 const FILTER_COUNT = 6;
 
@@ -58,6 +60,8 @@ class StorageManagement {
   rooms = [];
 
   accounts = [];
+
+  aIAgents = [];
 
   needRecalculating = false;
 
@@ -98,30 +102,58 @@ class StorageManagement {
     this.roomFilterData.sortOrder = "descending";
     this.roomFilterData.provider = RoomsProviderType.Storage;
 
-    const requests = [
-      getPortal(),
-      getPortalUsersCount(),
-      getFilesUsedSpace(),
-      getQuotaSettings(),
-    ];
+    const portalAbortRequests = new AbortController();
+    const portalUsersCountAbortRequests = new AbortController();
+    const filesUsedSpaceAbortRequests = new AbortController();
+    const quotaSettingsAbortRequests = new AbortController();
 
-    if (!isFreeTariff || standalone) {
-      requests.push(
-        getUserList(this.userFilterData),
-        getRooms(this.roomFilterData),
-      );
-    }
+    const userAbortRequests = new AbortController();
+    const roomAbortRequests = new AbortController();
+
+    const checkRecalculateQuotaAbortRequests = new AbortController();
+    const recalculateQuotaAbortRequests = new AbortController();
+
+    this.settingsStore.addAbortControllers([
+      portalAbortRequests,
+      portalUsersCountAbortRequests,
+      filesUsedSpaceAbortRequests,
+      quotaSettingsAbortRequests,
+
+      userAbortRequests,
+      roomAbortRequests,
+
+      checkRecalculateQuotaAbortRequests,
+      recalculateQuotaAbortRequests,
+    ]);
 
     this.needRecalculating = false;
 
     try {
-      if (isInit) this.needRecalculating = await checkRecalculateQuota();
+      if (isInit)
+        this.needRecalculating = await checkRecalculateQuota(
+          checkRecalculateQuotaAbortRequests.signal,
+        );
 
       if (!this.needRecalculating && this.isRecalculating)
         this.setIsRecalculating(false);
 
       let roomsList;
       let accountsList;
+      let aIAgentsList;
+
+      const requests = [
+        getPortal(portalAbortRequests.signal),
+        getPortalUsersCount(portalUsersCountAbortRequests.signal),
+        getFilesUsedSpace(filesUsedSpaceAbortRequests.signal),
+        getQuotaSettings(quotaSettingsAbortRequests.signal),
+      ];
+      if (!isFreeTariff || standalone) {
+        requests.push(
+          getUserList(this.userFilterData, userAbortRequests.signal),
+          getRooms(this.roomFilterData, roomAbortRequests.signal),
+          getAIAgents(this.roomFilterData, roomAbortRequests.signal),
+        );
+      }
 
       [
         this.portalInfo,
@@ -130,9 +162,13 @@ class StorageManagement {
         this.quotaSettings,
         accountsList,
         roomsList,
+        aIAgentsList,
       ] = await Promise.all(requests);
 
       if (roomsList) this.rooms = getFilesListItems(roomsList?.folders);
+
+      if (aIAgentsList)
+        this.aIAgents = getFilesListItems(aIAgentsList?.folders);
 
       if (accountsList)
         this.accounts = accountsList.items.map((user) =>
@@ -143,10 +179,11 @@ class StorageManagement {
         this.setIsRecalculating(true);
 
         try {
-          await recalculateQuota();
+          await recalculateQuota(recalculateQuotaAbortRequests.signal);
 
           this.getIntervalCheckRecalculate();
         } catch (e) {
+          if (axios.isCancel(e)) return;
           toastr.error(e);
 
           this.setIsRecalculating(false);
@@ -160,6 +197,7 @@ class StorageManagement {
         this.getIntervalCheckRecalculate();
       }
     } catch (e) {
+      if (axios.isCancel(e)) return;
       toastr.error(e);
     }
   };
@@ -190,7 +228,9 @@ class StorageManagement {
 
     type === "user"
       ? requests.push(getUserList(userFilterData))
-      : requests.push(getRooms(roomFilterData));
+      : type === "agent"
+        ? requests.push(getAIAgents(roomFilterData))
+        : requests.push(getRooms(roomFilterData));
 
     try {
       const [, items] = await Promise.all(requests);
@@ -199,6 +239,12 @@ class StorageManagement {
         this.accounts = items.items.map((user) => getPeopleListItem(user));
         return;
       }
+      if (type === "agent") {
+        console.log("agent", items.folders);
+        this.aIAgents = getFilesListItems(items.folders);
+        return;
+      }
+
       this.rooms = getFilesListItems(items.folders);
     } catch (e) {
       toastr.error(e);

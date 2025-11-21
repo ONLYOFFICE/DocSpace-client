@@ -53,6 +53,8 @@ const PluginDialog = ({
   dialogHeader,
   dialogBody,
   dialogFooter,
+  withoutBodyPadding = false,
+  withoutHeaderMargin = false,
   onClose,
   onLoad,
   eventListeners,
@@ -90,54 +92,46 @@ const PluginDialog = ({
     if (modalRequestRunning) return;
     const message = await onClose();
 
-    messageActions(
+    messageActions({
       message,
-      null,
-
       pluginName,
-
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
       updatePluginStatus,
-      null,
       setPluginDialogVisible,
       setPluginDialogProps,
-
       updateContextMenuItems,
       updateInfoPanelItems,
       updateMainButtonItems,
       updateProfileMenuItems,
       updateEventListenerItems,
       updateFileItems,
-    );
+    });
   };
 
   React.useEffect(() => {
     if (eventListeners) {
       eventListeners.forEach((e) => {
         const onAction = async (evt) => {
+          setModalRequestRunning(true);
           const message = await e.onAction(evt);
+          setModalRequestRunning(false);
 
-          messageActions(
+          messageActions({
             message,
-            null,
-
             pluginName,
-
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
             updatePluginStatus,
-            null,
             setPluginDialogVisible,
             setPluginDialogProps,
-
             updateContextMenuItems,
             updateInfoPanelItems,
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
             updateFileItems,
-          );
+          });
         };
 
         functionsRef.current.push(onAction);
@@ -179,10 +173,17 @@ const PluginDialog = ({
           props: dialogBodyProps,
         }}
         setModalRequestRunning={setModalRequestRunning}
+        modalRequestRunning={modalRequestRunning}
       />
     </StyledFullScreen>
   ) : (
-    <ModalDialog visible={isVisible} onClose={onCloseAction} {...rest}>
+    <ModalDialog
+      visible={isVisible}
+      onClose={onCloseAction}
+      withoutPadding={withoutBodyPadding}
+      withoutHeaderMargin={withoutHeaderMargin}
+      {...rest}
+    >
       <ModalDialog.Header>{dialogHeaderProps}</ModalDialog.Header>
       <ModalDialog.Body>
         <WrappedComponent
@@ -192,6 +193,7 @@ const PluginDialog = ({
             props: dialogBodyProps,
           }}
           setModalRequestRunning={setModalRequestRunning}
+          modalRequestRunning={modalRequestRunning}
         />
       </ModalDialog.Body>
       {dialogFooterProps ? (
@@ -203,6 +205,7 @@ const PluginDialog = ({
               props: dialogFooterProps,
             }}
             setModalRequestRunning={setModalRequestRunning}
+            modalRequestRunning={modalRequestRunning}
           />
         </ModalDialog.Footer>
       ) : null}

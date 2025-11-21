@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Търси и покани по име или имейл",
   "InviteViaLink": "Поканете чрез линк",
   "InviteViaLinkDescriptionAccounts": "Създайте универсален линк за самоупълномощаване в {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Създайте универсален линк за самооторизация в агента като гост.",
+  "InviteViaLinkDescriptionAgentMembers": "Създайте универсален линк за членовете на {{productName}} за самооторизация в агента.",
   "InviteViaLinkDescriptionRoomGuest": "Създайте универсален линк за самооторизация в стаята като гост.",
   "InviteViaLinkDescriptionRoomMembers": "Създайте универсален линк за членовете на {{productName}} за самолегитимиране в стаята.",
   "LinkCopySuccess": "Връзката беше копирана",
   "SendInvitation": "Изпращане на покана",
+  "UserAgentMaxAvailableRoleWarning": "Гостите и потребителите не могат да бъдат назначени за мениджъри на агенти. Само администраторите на стаи и {{productName}} са подходящи за тази роля.",
   "UserMaxAvailableRoleWarning": "Гостите и потребителите не могат да бъдат назначени като мениджъри на стаи. Само администратори на стая и {{productName}} са подходящи за посочената роля.",
   "UsersAlreadyAdded": "Някои потребители вече са добавени",
   "UsersCannotBeAdded": "Деактивираните контакти не могат да се добавят към стая"

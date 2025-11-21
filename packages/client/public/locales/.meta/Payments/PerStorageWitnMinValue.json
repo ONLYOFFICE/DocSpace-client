@@ -3,7 +3,7 @@
   "content": "{{currency}} per {{amount}}/month <1>(min {{minValue}}{{storageUnit}})</1>",
   "content_en_sha1_hash": "7d6e997bf41f6d9e4fc04c7db3d80f1f97e482d2",
   "created_at": "2025-06-24T16:31:06.817Z",
-  "updated_at": "2025-06-30T12:20:31.595Z",
+  "updated_at": "2025-08-21T14:45:44.125Z",
   "comment": {
     "text": "This translation key is used for a price display format in a UI component, showing the cost of storage per unit amount. It's likely to appear on a settings page or configuration dialog, displaying pricing information with currency and unit details. The value placeholders ({{currency}}, {{amount}}, {{minValue}}, etc.) should be filled by the application context to provide accurate translations.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/SelectionAmount.tsx",
-      "line_number": 157,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/SelectionAmount.tsx",
+      "line_number": 134,
       "context": "const underContorlsTitle = (\n <Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"PerStorageWitnMinValue\"\n values={{\n currency: formatWalletCurrency!(storagePriceIncrement),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n storageUnit: t(\"Common:Gigabyte\"),\n minValue: MIN_VALUE,",
       "module": "/packages/client"
     }

@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "@docspace/shared/types";
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
-
 import moment from "moment";
-import { FeedActionKeys } from "./FeedInfo";
+import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
+import { TTranslation } from "@docspace/shared/types";
+
 import { HistoryText } from "./HistoryText";
 import { Feed } from "./HistoryBlockContent/HistoryBlockContent.types";
 
@@ -138,6 +138,44 @@ export const useFeedTranslation = (
           count,
         });
       return t("InfoPanel:FolderDeleted");
+    case FeedActionKeys.AgentCreated:
+      return (
+        <Trans
+          t={t as TFunction}
+          ns="InfoPanel"
+          i18nKey="HistoryAgentCreated"
+          values={{ roomTitle: feed.data.title }}
+          components={{
+            1: <HistoryText key={feed.data.title!} title={feed.data.title!} />,
+          }}
+        />
+      );
+    case FeedActionKeys.AgentRenamed:
+      return (
+        <Trans
+          t={t as TFunction}
+          ns="InfoPanel"
+          i18nKey="AgentRenamed"
+          values={{
+            oldRoomTitle: feed.data.oldTitle,
+            roomTitle: feed.data.newTitle,
+          }}
+          components={{
+            1: (
+              <HistoryText
+                key={feed.data.oldTitle!}
+                title={feed.data.oldTitle!}
+              />
+            ),
+            2: (
+              <HistoryText
+                key={feed.data.newTitle!}
+                title={feed.data.newTitle!}
+              />
+            ),
+          }}
+        />
+      );
     case FeedActionKeys.RoomCreated:
       return (
         <Trans
@@ -227,7 +265,7 @@ export const useFeedTranslation = (
       );
     case FeedActionKeys.RoomCreateUser:
       if (hasRelatedItems) return t("InfoPanel:RoomCreateUserCount", { count });
-      return t("InfoPanel:RoomCreateUser");
+      return t("Common:RoomCreateUser");
     case FeedActionKeys.RoomUpdateAccessForUser:
       return t("InfoPanel:RoomUpdateAccess");
     case FeedActionKeys.RoomRemoveUser:
@@ -300,7 +338,7 @@ export const useFeedTranslation = (
       });
     case FeedActionKeys.RoomIndexExportSaved:
       return t("InfoPanel:RoomIndexExportLocation", {
-        sectionName: t("Common:MyFilesSection"),
+        sectionName: t("Common:MyDocuments"),
       });
     case FeedActionKeys.FormSubmit:
       return t("InfoPanel:FilledOutForm");

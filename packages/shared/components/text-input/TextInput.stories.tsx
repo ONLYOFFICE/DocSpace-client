@@ -26,10 +26,9 @@
 
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-
 import { TextInput } from ".";
-import { TextInputProps } from "./TextInput.types";
 import { InputSize, InputType } from "./TextInput.enums";
+import type { TextInputProps } from "./TextInput.types";
 
 const meta = {
   title: "Form Controls/TextInput",
@@ -53,53 +52,9 @@ const meta = {
       options: Object.values(InputSize),
     },
     type: {
-      description: "Type of the input field",
       control: "select",
       options: Object.values(InputType),
     },
-    scale: {
-      description:
-        "When true, the input field will scale according to its content",
-      control: "boolean",
-    },
-    hasError: {
-      description: "Shows error state",
-      control: "boolean",
-    },
-    hasWarning: {
-      description: "Shows warning state",
-      control: "boolean",
-    },
-    isDisabled: {
-      description: "Disables the input field",
-      control: "boolean",
-    },
-    isReadOnly: {
-      description: "Makes the input field read-only",
-      control: "boolean",
-    },
-    withBorder: {
-      description: "Shows border around the input",
-      control: "boolean",
-    },
-    mask: {
-      description: "Text mask pattern for formatting input",
-      control: "object",
-    },
-    keepCharPositions: {
-      description: "Keeps character positions when using mask",
-      control: "boolean",
-    },
-    guide: {
-      description: "Shows guide characters for mask",
-      control: "boolean",
-    },
-    onBlur: { action: "onBlur" },
-    onFocus: { action: "onFocus" },
-    onChange: { action: "onChange" },
-    onKeyDown: { action: "onKeyDown" },
-    onClick: { action: "onClick" },
-    onContextMenu: { action: "onContextMenu" },
   },
 } satisfies Meta<typeof TextInput>;
 
@@ -107,17 +62,49 @@ type Story = StoryObj<typeof TextInput>;
 
 export default meta;
 
-const Template = ({ onChange, value, ...args }: TextInputProps) => {
+const Template = ({
+  onChange,
+  value,
+  type,
+  placeholder,
+  size,
+  isDisabled,
+  isReadOnly,
+  hasError,
+  hasWarning,
+  scale,
+  withBorder,
+  maxLength,
+  autoComplete,
+  tabIndex,
+  mask,
+  guide,
+  keepCharPositions,
+}: TextInputProps) => {
   const [val, setValue] = useState(value);
 
   return (
     <TextInput
-      {...args}
+      type={type || InputType.text}
+      placeholder={placeholder || "Enter text here"}
       value={val}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
         onChange?.(e);
       }}
+      size={size}
+      isDisabled={isDisabled}
+      isReadOnly={isReadOnly}
+      hasError={hasError}
+      hasWarning={hasWarning}
+      scale={scale}
+      withBorder={withBorder}
+      maxLength={maxLength}
+      autoComplete={autoComplete}
+      tabIndex={tabIndex}
+      mask={mask}
+      guide={guide}
+      keepCharPositions={keepCharPositions}
     />
   );
 };

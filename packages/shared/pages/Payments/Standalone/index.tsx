@@ -26,13 +26,13 @@
 
 import React from "react";
 
-import { LicenseContainer } from "./LicenseContainer";
-import { ContactContainer } from "./ContactConrainer";
-import { EnterpriseContainer } from "./EnterpriseContainer";
-import { TrialContainer } from "./TrialContainer";
+import { LicenseContainer } from "./sub-components/LicenseContainer";
+import { ContactContainer } from "./sub-components/ContactContainer";
+import { EnterpriseContainer } from "./sub-components/EnterpriseContainer";
+import { TrialContainer } from "./sub-components/TrialContainer";
 
-import { StyledPageWrapper } from "./Payments.styled";
-import { IPaymentsProps } from "./Payments.types";
+import { IPaymentsProps } from "./Standalone.types";
+import styles from "./Standalone.module.scss";
 
 export const StandalonePage = ({
   isTrial,
@@ -47,9 +47,12 @@ export const StandalonePage = ({
   paymentDate,
   isEnterprise,
   logoText,
+  docspaceFaqUrl,
+  licenseQuota,
+  openOnNewPage,
 }: IPaymentsProps) => {
   return (
-    <StyledPageWrapper>
+    <div data-testid="standalone-page" className={styles.pageWrapper}>
       {isTrial ? (
         <TrialContainer
           isDeveloper={isDeveloper}
@@ -60,6 +63,9 @@ export const StandalonePage = ({
           paymentDate={paymentDate}
           isEnterprise={isEnterprise}
           logoText={logoText}
+          docspaceFaqUrl={docspaceFaqUrl}
+          licenseQuota={licenseQuota}
+          openOnNewPage={openOnNewPage}
         />
       ) : (
         <EnterpriseContainer
@@ -72,6 +78,9 @@ export const StandalonePage = ({
           paymentDate={paymentDate}
           isEnterprise={isEnterprise}
           logoText={logoText}
+          docspaceFaqUrl={docspaceFaqUrl}
+          licenseQuota={licenseQuota}
+          openOnNewPage={openOnNewPage}
         />
       )}
       <LicenseContainer
@@ -81,6 +90,6 @@ export const StandalonePage = ({
         isTrial={isTrial}
       />
       <ContactContainer salesEmail={salesEmail} />
-    </StyledPageWrapper>
+    </div>
   );
 };

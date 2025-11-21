@@ -51,7 +51,7 @@ const EmptyTrashDialogComponent = (props) => {
   const sectionName = isArchiveFolder
     ? t("Common:Archive")
     : isPersonalReadOnly
-      ? t("Common:MyFilesSection")
+      ? t("Common:MyDocuments")
       : t("Common:TrashSection");
 
   const onEmptyTrash = () => {
@@ -97,7 +97,7 @@ const EmptyTrashDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("DeleteForeverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{description}</Text>
+        <Text>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

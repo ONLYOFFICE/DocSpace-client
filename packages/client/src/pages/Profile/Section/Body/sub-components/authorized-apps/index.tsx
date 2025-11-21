@@ -20,12 +20,12 @@ import EmptyScreen from "./sub-components/EmptyScreen";
 
 const AuthorizedApps = ({
   consents,
-  fetchConsents,
+
   viewAs,
   setViewAs,
   currentDeviceType,
   infoDialogVisible,
-  fetchScopes,
+
   revokeDialogVisible,
   setRevokeDialogVisible,
   selection,
@@ -35,19 +35,10 @@ const AuthorizedApps = ({
 }: AuthorizedAppsProps) => {
   const { t } = useTranslation(["OAuth"]);
 
-  const getConsentList = React.useCallback(async () => {
-    fetchScopes?.();
-    await fetchConsents?.();
-  }, [fetchConsents, fetchScopes]);
-
-  React.useEffect(() => {
-    getConsentList();
-  }, [getConsentList]);
-
   useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
+    view: viewAs!,
+    setView: setViewAs!,
+    currentDeviceType: currentDeviceType!,
   });
 
   return (
@@ -83,12 +74,12 @@ const AuthorizedApps = ({
       {revokeDialogVisible ? (
         <RevokeDialog
           visible={revokeDialogVisible}
-          onClose={() => setRevokeDialogVisible(false)}
-          currentDeviceType={currentDeviceType}
-          onRevoke={revokeClient}
-          selection={selection}
-          bufferSelection={bufferSelection}
-          logoText={logoText}
+          onClose={() => setRevokeDialogVisible!(false)}
+          currentDeviceType={currentDeviceType!}
+          onRevoke={revokeClient!}
+          selection={selection!}
+          bufferSelection={bufferSelection!}
+          logoText={logoText!}
         />
       ) : null}
     </StyledContainer>
@@ -105,14 +96,11 @@ export default inject(
   }) => {
     const {
       consents,
-      fetchConsents,
-      fetchScopes,
       viewAs,
       setViewAs,
       infoDialogVisible,
       revokeDialogVisible,
       setRevokeDialogVisible,
-
       selection,
       bufferSelection,
       revokeClient,
@@ -122,12 +110,10 @@ export default inject(
 
     return {
       consents,
-      fetchConsents,
       viewAs,
       setViewAs,
       currentDeviceType,
       infoDialogVisible,
-      fetchScopes,
       revokeDialogVisible,
       setRevokeDialogVisible,
       selection,

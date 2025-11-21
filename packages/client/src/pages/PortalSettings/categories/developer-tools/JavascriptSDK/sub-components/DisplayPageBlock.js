@@ -59,6 +59,7 @@ export const DisplayPageBlock = ({ t, config, setConfig }) => {
         value={value}
         isDisabled={!config.filter.count}
         tabIndex={7}
+        testId="display_page_text_input"
       />
     </ControlsGroup>
   );

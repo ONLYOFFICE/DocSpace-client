@@ -42,6 +42,7 @@ export const Logo = (props: ILogoProps) => {
     linkId,
     imageClass,
     name,
+    dataTestId,
   } = props;
 
   const currentLogo = getLogoFromPath(src) as string;
@@ -87,6 +88,7 @@ export const Logo = (props: ILogoProps) => {
           isHovered
           type={LinkType.action}
           className="settings_unavailable"
+          dataTestId={dataTestId}
         >
           {onChangeText}
         </Link>

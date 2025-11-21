@@ -3,7 +3,7 @@
   "content": "Encrypt storage",
   "content_en_sha1_hash": "0e0fb4690a088a4bca5d843112222d63b9352241",
   "created_at": "2025-05-19T21:30:57.448Z",
-  "updated_at": "2025-05-26T07:57:33.003Z",
+  "updated_at": "2025-08-21T11:22:39.970Z",
   "comment": {
     "text": "The \"EncryptStorage\" translation key is used to display the label for a button that initiates encryption of storage. When encrypted, this button displays \"Decrypt Storage\", and when not encrypted, it displays \"Encrypt Storage\". This key appears on a button in a dialog box within a file management interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
-      "line_number": 131,
+      "line_number": 132,
       "context": "<Button\n primary\n label={\n status === EncryptionStatus.Encrypted\n ? t(\"DecryptStorage\")\n : t(\"EncryptStorage\")\n }\n size={ButtonSize.normal}\n onClick={() => setEncryptWarningDialogVisible(true)}\n isDisabled={isDisabled}\n />",
       "module": "/packages/management"
     }

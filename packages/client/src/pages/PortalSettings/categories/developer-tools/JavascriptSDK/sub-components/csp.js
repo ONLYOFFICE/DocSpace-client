@@ -127,7 +127,6 @@ const InfoBar = styled.div`
 const CSP = ({
   cspDomains,
   currentColorScheme,
-  getCSPSettings,
   installationGuidesUrl,
   setCSPSettings,
   standalone,
@@ -138,10 +137,6 @@ const CSP = ({
 }) => {
   const [domain, changeDomain] = useState("");
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    getCSPSettings();
-  }, []);
 
   const addDomain = async () => {
     if (!domain.trim()) return;
@@ -258,6 +253,7 @@ const CSP = ({
                   fontSize="13px"
                   fontWeight="400"
                   onClick={() => window.open(installationGuidesUrl, "_blank")}
+                  dataTestId="csp_info_link"
                 >
                   {t("Common:LearnMore")}
                 </Link>
@@ -274,8 +270,13 @@ const CSP = ({
           tabIndex={1}
           hasError={error}
           isDisabled={disableCSP}
+          testId="allowed_domains_text_input"
         />
-        <SelectorAddButton isDisabled={!domain.trim()} onClick={addDomain} />
+        <SelectorAddButton
+          testId="allowed_domains_add_button"
+          isDisabled={!domain.trim()}
+          onClick={addDomain}
+        />
       </Container>
       <Text
         lineHeight="20px"
@@ -292,7 +293,6 @@ export default inject(({ settingsStore, userStore }) => {
   const {
     cspDomains,
     currentColorScheme,
-    getCSPSettings,
     installationGuidesUrl,
     setCSPSettings,
     standalone,
@@ -306,7 +306,6 @@ export default inject(({ settingsStore, userStore }) => {
   return {
     cspDomains,
     currentColorScheme,
-    getCSPSettings,
     installationGuidesUrl,
     setCSPSettings,
     standalone,

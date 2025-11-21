@@ -3,7 +3,7 @@
   "content": "We recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "content_en_sha1_hash": "9892967bb06c7eefb95a79087af920be8fb6dea6",
   "created_at": "2025-05-19T21:30:53.697Z",
-  "updated_at": "2025-06-08T12:02:32.812Z",
+  "updated_at": "2025-08-11T18:11:59.271Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user attempts to save their payment information without an active subscription. The message recommends switching to a new Payer who can access subscription settings in {{productName}}. It appears as part of the payment form validation process in SaaS plans.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
-      "line_number": 124,
+      "line_number": 132,
       "context": "productName: t(\"Common:ProductName\"),\n });\n \n if (isNotPaidPeriod) {\n invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InvalidEmailWithoutActiveSubscriptionByAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     }

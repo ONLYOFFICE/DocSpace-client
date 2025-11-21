@@ -1,0 +1,28 @@
+{
+  "key_path": "UnitCount",
+  "content": "{{unit}}: {{count}}",
+  "content_en_sha1_hash": "df646ff517dcc5bff3e00f6c38ae47a5148c11e6",
+  "created_at": "2025-09-01T14:09:45.511Z",
+  "updated_at": "2025-09-01T14:10:32.311Z",
+  "comment": {
+    "text": "Displays the quantity of a service, formatted as \"unit: count\". This string is used to show the amount of a service, likely within a user interface element like a list or table. The `unit` and `count` values are passed as variables for localization.",
+    "is_auto": true,
+    "updated_at": "2025-09-01T14:10:32.311Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/utils/index.tsx",
+      "line_number": 76,
+      "context": "t: TTranslation,\n quantity: number,\n serviceUnit?: string,\n ) => {\n if (!serviceUnit) return \"—\";\n return t(\"UnitCount\", { unit: serviceUnit, count: quantity });\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

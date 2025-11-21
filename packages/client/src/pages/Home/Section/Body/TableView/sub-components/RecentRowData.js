@@ -26,23 +26,28 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+
 import { TableCell } from "@docspace/shared/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
+
+import {
+  StyledBadgesContainer,
+  StyledQuickButtonsContainer,
+} from "../StyledTable";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { StyledBadgesContainer } from "../StyledTable";
+import LocationCell from "./LocationCell";
 
 const RecentRowDataComponent = (props) => {
   const {
+    locationRecentColumnIsEnabled,
     authorRecentColumnIsEnabled,
-    createdRecentColumnIsEnabled,
-    modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    lastOpenedColumnIsEnabled,
+    lastOpenedRecentColumnIsEnabled,
 
     dragStyles,
     selectionProp,
@@ -54,15 +59,25 @@ const RecentRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
+    quickButtonsComponent,
     tableStorageName,
+    item,
+    index,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
+
+  const quickButtonsComponentNode = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`recent-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
@@ -80,10 +95,12 @@ const RecentRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
+        {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 
       {authorRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-author-${index}`}
           style={
             !authorRecentColumnIsEnabled
               ? { background: "none" }
@@ -99,73 +116,55 @@ const RecentRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "AuthorRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
       )}
 
-      {createdRecentColumnIsEnabled ? (
+      {locationRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-location-${index}`}
           style={
-            !createdRecentColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            lastColumn === "CreatedRecent" ? "no-extra-space" : "",
-          )}
-        >
-          <DateCell
-            create
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
-        </TableCell>
-      ) : (
-        <div />
-      )}
-
-      {lastOpenedColumnIsEnabled ? (
-        <TableCell
-          style={
-            !lastOpenedColumnIsEnabled
+            !locationRecentColumnIsEnabled
               ? { background: "none" }
               : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "LastOpened" ? "no-extra-space" : "",
+            lastColumn === "AuthorRecent" ? "no-extra-space" : "",
           )}
         >
-          <DateCell
+          <LocationCell
+            item={item}
             sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
           />
+          {lastColumn === "LocationRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
       )}
 
-      {modifiedRecentColumnIsEnabled ? (
+      {lastOpenedRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-lastopened-${index}`}
           style={
-            !modifiedRecentColumnIsEnabled
+            !lastOpenedRecentColumnIsEnabled
               ? { background: "none" }
               : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "ModifiedRecent" ? "no-extra-space" : "",
+            lastColumn === "LastOpenedRecent" ? "no-extra-space" : "",
           )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "LastOpenedRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -173,6 +172,7 @@ const RecentRowDataComponent = (props) => {
 
       {sizeRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-size-${index}`}
           style={
             !sizeRecentColumnIsEnabled
               ? { background: "none" }
@@ -188,6 +188,7 @@ const RecentRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "SizeRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -195,6 +196,7 @@ const RecentRowDataComponent = (props) => {
 
       {typeRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-type-${index}`}
           style={
             !typeRecentColumnIsEnabled
               ? { background: "none !important" }
@@ -210,6 +212,7 @@ const RecentRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "TypeRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -220,22 +223,20 @@ const RecentRowDataComponent = (props) => {
 
 export default inject(({ tableStore }) => {
   const {
+    locationRecentColumnIsEnabled,
     authorRecentColumnIsEnabled,
-    createdRecentColumnIsEnabled,
-    modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    lastOpenedColumnIsEnabled,
+    lastOpenedRecentColumnIsEnabled,
     tableStorageName,
   } = tableStore;
 
   return {
+    locationRecentColumnIsEnabled,
     authorRecentColumnIsEnabled,
-    createdRecentColumnIsEnabled,
-    modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    lastOpenedColumnIsEnabled,
+    lastOpenedRecentColumnIsEnabled,
     tableStorageName,
   };
 })(observer(RecentRowDataComponent));

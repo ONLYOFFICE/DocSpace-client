@@ -31,6 +31,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { Nullable } from "@docspace/shared/types";
 import { isMobile } from "@docspace/shared/utils";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
@@ -76,7 +77,7 @@ const NewFilesBadge = ({
   const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
   const disableBadgeTimerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
 
-  const calculatePosition = () => {
+  const calculatePosition = React.useCallback(() => {
     if (!badgeRef.current) return;
 
     let badgeRects = badgeRef.current.getClientRects()[0];
@@ -146,14 +147,14 @@ const NewFilesBadge = ({
 
     setPanelPosition(pos);
     setPanelDirection(direction);
-  };
+  }, [parentDOMId]);
 
-  const onPanelOpen = () => {
+  const onPanelOpen = React.useCallback(() => {
     if (disableBadgeClick) return;
     setShowPanel(true);
     setNewFilesPanelFolderId?.(folderId);
     calculatePosition();
-  };
+  }, [folderId, disableBadgeClick, calculatePosition]);
 
   const onPanelHide = React.useCallback(() => {
     setShowPanel(false);
@@ -189,21 +190,21 @@ const NewFilesBadge = ({
     [onPanelHide],
   );
 
-  const onMouseOver = () => {
+  const onMouseOver = useEventCallback(() => {
     if (timerRef.current) return;
     timerRef.current = setTimeout(() => {
       onPanelOpen();
 
       timerRef.current = null;
     }, 1500);
-  };
+  });
 
-  const onMouseLeave = () => {
+  const onMouseLeave = useEventCallback(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
     timerRef.current = null;
-  };
+  });
 
   const onMouseMove = React.useCallback(
     (e: MouseEvent) => {

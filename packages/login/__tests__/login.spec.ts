@@ -42,3 +42,128 @@ test("login render", async ({
 
   await expect(page).toHaveScreenshot(["desktop", "login", "login-render.png"]);
 });
+
+// test("login error authentication failed", async ({ page, mockRequest }) => {
+//   await mockRequest.router([endpoints.loginError]);
+
+//   await page.goto("/login");
+
+//   await page.getByTestId("email-input").fill("email@mail.ru");
+
+//   await page.fill("[name='password']", "qwerty123");
+
+//   await page.getByTestId("login_button").click();
+
+//   await expect(page).toHaveScreenshot([
+//     "desktop",
+//     "login",
+//     "login-error-authentication-failed.png",
+//   ]);
+// });
+
+test("login error not validated", async ({ page }) => {
+  await page.goto("/login");
+
+  await page.getByTestId("email-input").fill("");
+
+  await page.fill("[name='password']", "");
+
+  await page.getByTestId("login_button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-error-not-validated.png",
+  ]);
+});
+
+test("login error incorrect email", async ({ page }) => {
+  await page.goto("/login");
+
+  await page.getByTestId("email-input").fill("email");
+
+  await page.fill("[name='password']", "qwerty123");
+
+  await page.getByTestId("login_button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-error-incorrect-email.png",
+  ]);
+});
+
+test("login error incorrect email domain", async ({ page }) => {
+  await page.goto("/login");
+
+  await page.getByTestId("email-input").fill("email@mail.com2");
+
+  await page.fill("[name='password']", "qwerty123");
+
+  await page.getByTestId("login_button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-error-incorrect-email-domain.png",
+  ]);
+});
+
+// test("login with with a registration button", async ({ page, mockRequest }) => {
+//   await mockRequest.setHeaders("/login", [HEADER_ENABLED_JOIN_SETTINGS]);
+
+//   await page.goto("/login");
+
+//   await expect(page).toHaveScreenshot([
+//     "desktop",
+//     "login",
+//     "login-with-registration-button.png",
+//   ]);
+
+//   await page.locator("#login_register").click();
+
+//   await expect(page).toHaveScreenshot([
+//     "desktop",
+//     "login",
+//     "login-with-registration-button-modal.png",
+//   ]);
+// });
+
+// test("login with with access recovery", async ({ page, mockRequest }) => {
+//   await mockRequest.setHeaders("/login", [HEADER_ENABLE_ADM_MESS_SETTINGS]);
+
+//   await page.goto("/login");
+
+//   await expect(page).toHaveScreenshot([
+//     "desktop",
+//     "login",
+//     "login-with-access-recovery.png",
+//   ]);
+
+//   await page.getByTestId("recover_access_link").click();
+
+//   await expect(page).toHaveScreenshot([
+//     "desktop",
+//     "login",
+//     "login-with-access-recovery-modal.png",
+//   ]);
+// });
+
+// test("login with with hcaptcha", async ({ page, mockRequest }) => {
+//   await mockRequest.setHeaders("/login", [HEADER_HCAPTCHA_SETTINGS]);
+//   await mockRequest.router([endpoints.loginError403]);
+
+//   await page.goto("/login");
+
+//   await page.getByTestId("email-input").fill("email@mail.com");
+
+//   await page.fill("[name='password']", "qwerty1234");
+
+//   await page.getByTestId("login_button").click();
+
+//   await expect(page).toHaveScreenshot([
+//     "desktop",
+//     "login",
+//     "login-with-hcaptcha.png",
+//   ]);
+// });

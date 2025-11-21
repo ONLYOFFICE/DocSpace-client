@@ -43,7 +43,7 @@
     margin-top: 16px;
     margin-bottom: 16px;
     line-height: 20px;
-    color: var(--settings-coommon-description-color);
+    color: var(--settings-common-description-color);
 
     @include mixins.mobile {
       margin-top: 0;
@@ -72,5 +72,10 @@
 
   .brandNameButtons {
     margin-top: 20px;
+  }
+
+  .errorText {
+    color: var(--input-error-color);
+    margin-top: 4px;
   }
 }

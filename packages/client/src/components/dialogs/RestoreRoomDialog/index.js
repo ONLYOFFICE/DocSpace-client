@@ -98,7 +98,7 @@ const RestoreRoomDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("Common:Restore")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{description}</Text>
+        <Text>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -109,6 +109,7 @@ const RestoreRoomDialogComponent = (props) => {
           primary
           onClick={onAction}
           scale
+          testId="restore_room_dialog_submit"
         />
         <Button
           id="restore-all_cancel"
@@ -117,6 +118,7 @@ const RestoreRoomDialogComponent = (props) => {
           size="normal"
           onClick={onClose}
           scale
+          testId="restore_room_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

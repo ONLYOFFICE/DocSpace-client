@@ -34,7 +34,14 @@ class PrimaryProgressDataStore {
 
   primaryOperationsArray = [];
 
-  constructor() {
+  dropTargetPreview = null;
+
+  startDropPreview = true;
+
+  constructor(filesStore, selectedFolderStore) {
+    this.filesStore = filesStore;
+    this.selectedFolderStore = selectedFolderStore;
+
     makeAutoObservable(this);
   }
 
@@ -100,7 +107,7 @@ class PrimaryProgressDataStore {
         ...incompleteOperations,
       );
 
-      console.log("clearPrimaryProgressData", this.primaryOperationsArray);
+      // console.log("clearPrimaryProgressData", this.primaryOperationsArray);
       return;
     }
 
@@ -113,6 +120,13 @@ class PrimaryProgressDataStore {
     this.primaryOperationsArray.splice(operationIndex, 1);
 
     console.log("clearPrimaryProgressData", this.primaryOperationsArray);
+  };
+
+  clearDropPreviewLocation = () => {
+    // console.log("clearDropPreviewLocation");
+
+    this.setStartDropPreview(false);
+    this.dropTargetPreview = null;
   };
 
   get primaryOperationsCompleted() {
@@ -142,6 +156,27 @@ class PrimaryProgressDataStore {
     } else {
       this.needErrorChecking = [];
     }
+  };
+
+  setStartDropPreview = (visible) => {
+    if (this.startDropPreview === visible) return;
+
+    this.startDropPreview = visible;
+  };
+
+  setDropTargetPreview = (title) => {
+    if (this.filesStore.startDrag && title === this.selectedFolderStore.title) {
+      this.dropTargetPreview = null;
+      return;
+    }
+
+    if (!title && !this.startDropPreview) return;
+
+    if (this.dropTargetPreview === title) return;
+
+    this.setStartDropPreview(true);
+
+    this.dropTargetPreview = title;
   };
 }
 

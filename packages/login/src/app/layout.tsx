@@ -30,6 +30,7 @@ import { Toast } from "@docspace/shared/components/toast";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
@@ -78,11 +79,20 @@ export default async function RootLayout({
   ]);
 
   if (
+    type === "EmailChange" &&
+    typeof settings !== "string" &&
+    queryParams?.redirected &&
+    !settings?.socketUrl
+  ) {
+    redirectUrl = "/login?emailChange=true";
+  }
+
+  if (
     type === "GuestShareLink" &&
     typeof settings !== "string" &&
     !settings?.socketUrl
   ) {
-    redirectUrl = "login";
+    redirectUrl = "/login";
   }
 
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
@@ -93,7 +103,7 @@ export default async function RootLayout({
     const host = hdrs.get("host");
 
     const url = new URL(
-      config.wrongPortalNameUrl ??
+      config.wrongPortalNameUrl ||
         "https://www.onlyoffice.com/wrongportalname.aspx",
     );
 
@@ -103,21 +113,21 @@ export default async function RootLayout({
   }
 
   if (typeof settings !== "string" && settings?.wizardToken) {
-    redirectUrl = `wizard`;
+    redirectUrl = `/wizard`;
   }
 
   if (
     typeof settings !== "string" &&
     settings?.tenantStatus === TenantStatus.PortalRestore
   ) {
-    redirectUrl = `preparation-portal`;
+    redirectUrl = `/preparation-portal`;
   }
 
   if (
     typeof settings !== "string" &&
     settings?.tenantStatus === TenantStatus.PortalDeactivate
   ) {
-    redirectUrl = `unavailable`;
+    redirectUrl = `/unavailable`;
   }
 
   if (cookieLng && settings && typeof settings !== "string") {
@@ -143,6 +153,8 @@ export default async function RootLayout({
     "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
 
     "--interface-direction": dirClass,
+
+    "--font-family": getFontFamilyDependingOnLanguage(locale),
   } as React.CSSProperties;
 
   return (
@@ -162,7 +174,11 @@ export default async function RootLayout({
         />
         <meta name="google" content="notranslate" />
       </head>
-      <body style={styles} className={`${dirClass} ${themeClass}`}>
+      <body
+        style={styles}
+        className={`${dirClass} ${themeClass}`}
+        suppressHydrationWarning
+      >
         <StyledComponentsRegistry>
           <Providers
             value={{

@@ -127,6 +127,7 @@ const Row = (props: RowProps) => {
         getContextModel={getContextMenuModel}
         isIndexEditingMode={false}
         badgeUrl=""
+        dataTestId={`${item.name}_table_row`}
       >
         <TableCell className="table-container_file-name-cell">
           <NameCell
@@ -149,6 +150,7 @@ const Row = (props: RowProps) => {
             as="span"
             fontWeight={400}
             className="mr-8 textOverflow description-text"
+            dataTestId="app_modified_date_cell"
           >
             {modifiedDate}
           </Text>
@@ -158,6 +160,7 @@ const Row = (props: RowProps) => {
             as="span"
             fontWeight={400}
             className="mr-8 textOverflow description-text"
+            dataTestId="app_scopes_tags_cell"
           >
             <Tags
               tags={item.scopes}
@@ -172,6 +175,7 @@ const Row = (props: RowProps) => {
             className="toggle toggleButton"
             isChecked={item.enabled}
             onChange={handleToggleEnabled}
+            dataTestId={`${item.name}_toggle_button`}
           />
         </TableCell>
       </StyledTableRow>

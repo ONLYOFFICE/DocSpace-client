@@ -1,0 +1,337 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@docspace/shared/styles/mixins";
+
+@mixin text-overflow {
+  white-space: pre-wrap;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+@mixin text-user-select {
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+.infoPanelBody {
+  height: auto;
+  padding-block: 0 24px;
+  padding-inline: 20px 3px;
+  color: var(--info-panel-text-color);
+  background-color: var(--info-panel-background-color);
+
+  :global(.no-item) {
+    text-align: center;
+  }
+
+  :global(.current-folder-loader-wrapper) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 96px;
+    margin-top: 116.56px;
+  }
+
+  @include mixins.mobile {
+    padding-block: 0;
+    padding-inline: 16px 8px;
+  }
+}
+
+.link {
+  display: flex;
+  padding: 8px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  a,
+  .link {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 15px;
+  }
+}
+
+.subtitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 24px 0;
+}
+
+.searchContainer {
+  width: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  inset-inline: 0 -20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 68px;
+  padding: 0 16px;
+  border-radius: 0 0 6px 6px;
+  background-color: var(--info-panel-background-color);
+  z-index: 101;
+  box-shadow: var(--info-panel-box-shadow);
+
+  @include mixins.tablet-and-below {
+    inset-inline: 0;
+  }
+
+  @include mixins.mobile {
+    inset-inline: 0 -14px;
+  }
+}
+
+.title {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding-block: 24px;
+  padding-inline: 20px 0;
+  margin-inline-start: -20px;
+  padding-inline-end: 20px;
+
+  background: var(--info-panel-background-color);
+
+  display: flex;
+  flex-wrap: no-wrap;
+  flex-direction: row;
+  align-items: center;
+  height: 32px;
+
+  :global(.info_title-icons) {
+    display: flex;
+    margin-inline-start: auto;
+    gap: 14px;
+    :global(.icon) {
+      cursor: pointer;
+      path,
+      rect {
+        fill: var(--info-panel-members-icon-color);
+      }
+      &:hover {
+        path,
+        rect {
+          fill: var(--info-panel-members-icon-hover-color);
+        }
+      }
+    }
+  }
+
+  // :global(.icon) {
+  //   display: flex;
+  //   align-items: center;
+  //   svg {
+  //     height: 32px;
+  //     width: 32px;
+  //   }
+  // }
+
+  :global(.is-room) {
+    border-radius: 6px;
+    outline: var(--info-panel-border-color);
+  }
+
+  :global(.info-panel_header-text) {
+    margin: 0 8px;
+  }
+
+  :global(.text) {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    max-height: 44px;
+    margin: 0 8px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-align: start;
+  }
+
+  :global(.file-extension) {
+    color: var(--info-panel-file-exst-color);
+  }
+
+  :global(.free-label) {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+
+    margin-block: 0;
+    margin-inline: auto 0;
+  }
+
+  &.withBottomBorder {
+    width: calc(100% + 20px);
+    margin: 0 -20px;
+    padding-block: 23px;
+    padding-inline: 20px 0;
+    border-bottom: var(--info-panel-border-color);
+  }
+
+  @include mixins.desktop {
+    width: 360px;
+  }
+
+  @include mixins.tablet-and-below {
+    width: 440px;
+    padding: 24px 20px;
+  }
+
+  @include mixins.mobile {
+    width: calc(100vw - 24px);
+    padding-block: 24px;
+    padding-inline: 16px 12px;
+
+    &.withBottomBorder {
+      width: calc(100% + 16px);
+      padding-block: 23px;
+      padding-inline: 16px 0;
+      margin: 0 -16px;
+    }
+  }
+}
+
+.properties {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  padding-bottom: 20px;
+
+  :global(.property) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    grid-column-gap: 24px;
+
+    -webkit-box-align: baseline;
+    align-items: baseline;
+
+    :global(.property-title) {
+      font-size: 13px;
+    }
+
+    :global(.property-content) {
+      max-width: 100%;
+      margin: auto 0;
+      font-weight: 600;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    :global(.property-tag_list) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+
+      :global(.property-tag) {
+        max-width: 195px;
+        margin: 0;
+
+        p {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    :global(.property-comment_editor) {
+      :global(.property-comment_editor-display) {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        :global(.edit_toggle) {
+          cursor: pointer;
+          display: flex;
+          flex-direction: row;
+          gap: 6px;
+          :global(.edit_toggle-icon) {
+            svg {
+              width: 12px;
+              height: 12px;
+              path {
+                fill: var(--info-panel-comment-editor-icon-color);
+              }
+            }
+          }
+          :global(.edit_toggle-text) {
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            text-underline-offset: 2px;
+          }
+        }
+      }
+
+      :global(.property-comment_editor-editor) {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        :global(.property-comment_editor-editor-buttons) {
+          display: flex;
+          flex-direction: row;
+          gap: 4px;
+        }
+      }
+
+      :global(.property-content) {
+        @include text-overflow;
+      }
+    }
+  }
+
+  :global(.info_details_comments) {
+    align-items: start;
+  }
+
+  :global(.info_details_lifetime) {
+    :global(.property-content) {
+      @include text-overflow;
+    }
+  }
+}

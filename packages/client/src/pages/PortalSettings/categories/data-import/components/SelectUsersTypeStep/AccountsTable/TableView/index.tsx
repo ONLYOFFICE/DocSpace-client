@@ -24,10 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg?url";
+import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
+
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { globalColors } from "@docspace/shared/themes";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -37,11 +41,9 @@ import {
   TableBody,
   TGroupMenuItem,
 } from "@docspace/shared/components/table";
-
-import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
-import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
-import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+
 import { StyledTableContainer } from "../../../../StyledDataImport";
 import UsersTableRow from "./UsersTableRow";
 import UsersTableHeader from "./UsersTableHeader";
@@ -111,6 +113,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
     setSearchValue,
     filteredUsers,
   } = props as InjectedTypeSelectTableViewProps;
+  const theme = useTheme();
   const tableRef = useRef<HTMLDivElement>(null);
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -195,8 +198,10 @@ const TableView = (props: TypeSelectTableViewProps) => {
         </>
       ) : (
         <EmptyScreenContainer
-          imageSrc={EmptyScreenUserReactSvgUrl}
-          imageAlt="Empty Screen user image"
+          imageSrc={
+            theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl
+          }
+          imageAlt={t("Common:NotFoundUsers")}
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={

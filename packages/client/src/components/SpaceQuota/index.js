@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { getConvertedQuota } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
@@ -73,6 +74,7 @@ const getOptions = (t, item, spaceLimited) => {
 
   return items;
 };
+
 const SpaceQuota = (props) => {
   const {
     hideColumns,
@@ -90,10 +92,13 @@ const SpaceQuota = (props) => {
     needResetSelection,
     setSelected,
     inRoom,
+    dataTestId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["Common"]);
+  const timeoutId = useRef(false);
+  const theme = useTheme();
 
   const usedQuota = getConvertedQuota(t, item?.usedSpace);
   const spaceLimited = getConvertedQuota(t, item?.quotaLimit);
@@ -101,38 +106,49 @@ const SpaceQuota = (props) => {
 
   const options = getOptions(t, item, spaceLimited);
 
+  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutId.current);
+    };
+  }, []);
+
   const successCallback = (users) => {
     onSuccess && onSuccess(users);
     setIsLoading(false);
-
+    clearTimeout(timeoutId.current);
     needResetSelection && setSelected("close");
   };
 
   const abortCallback = () => {
     onAbort && onAbort();
     setIsLoading(false);
-
+    clearTimeout(timeoutId.current);
     needResetSelection && setSelected("close");
   };
 
   const onChange = async ({ action }) => {
-    setIsLoading(true);
-
     if (action === "change") {
       changeQuota([item], successCallback, abortCallback);
 
       return;
     }
 
+    timeoutId.current = setTimeout(() => {
+      setIsLoading(true);
+    }, 500);
+
     if (action === "no-quota") {
       try {
-        const items = await updateQuota([item.id], -1, inRoom);
+        const items = await updateQuota([item.id], -1, inRoom());
+
+        successCallback(items);
 
         options.forEach((o) => {
           if (o.key === "no-quota") o.label = t("Common:Unlimited");
         });
 
-        successCallback(items);
         toastr.success(t("Common:StorageQuotaDisabled"));
       } catch (e) {
         abortCallback();
@@ -143,7 +159,7 @@ const SpaceQuota = (props) => {
     }
 
     try {
-      const items = await resetQuota([item.id], inRoom);
+      const items = await resetQuota([item.id], inRoom());
 
       options.forEach((o) => {
         if (o.key === "default-quota") o.label = defaultQuotaSize;
@@ -160,6 +176,9 @@ const SpaceQuota = (props) => {
   const action = item?.quotaLimit === -1 ? "no-quota" : "current-size";
 
   const selectedOption = options.find((elem) => elem.action === action);
+  const comboboxOptions = options.filter(
+    (elem) => elem.action !== "current-size",
+  );
 
   if (item.providerType) {
     return (
@@ -171,7 +190,7 @@ const SpaceQuota = (props) => {
 
   if (withoutLimitQuota || item?.quotaLimit === undefined) {
     return (
-      <StyledText fontWeight={600} $withoutLimitQuota>
+      <StyledText fontWeight={600} $withoutLimitQuota color={sideInfoColor}>
         {usedQuota}
       </StyledText>
     );
@@ -179,7 +198,7 @@ const SpaceQuota = (props) => {
 
   if (isReadOnly) {
     return (
-      <StyledText fontWeight={600} $isReadOnly>
+      <StyledText fontWeight={600} $isReadOnly color={sideInfoColor}>
         {usedQuota} / {spaceLimited}
       </StyledText>
     );
@@ -190,13 +209,14 @@ const SpaceQuota = (props) => {
       hideColumns={hideColumns}
       className={className}
       isLoading={isLoading}
+      data-testid={dataTestId}
     >
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox
         className="combobobox-space-quota"
         selectedOption={selectedOption}
-        options={options}
+        options={comboboxOptions}
         onSelect={onChange}
         scaled={false}
         size="content"
@@ -223,35 +243,61 @@ export default inject(
     const { usersStore } = peopleStore;
     const { needResetUserSelection, setSelected: setUsersSelected } =
       usersStore;
-    const { changeRoomQuota } = filesActionsStore;
+    const { changeRoomQuota, changeAIAgentsQuota } = filesActionsStore;
     const {
       setCustomRoomQuota,
-      setSelected: setRoomsSelected,
+      setCustomAIAgentQuota,
       resetRoomQuota,
+      resetAIAgentQuota,
+      setSelected: setRoomsSelected,
       needResetFilesSelection,
     } = filesStore;
 
     const {
       isDefaultUsersQuotaSet,
       isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       defaultUsersQuota,
       defaultRoomsQuota,
+      defaultAIAgentsQuota,
     } = currentQuotaStore;
 
-    const { infoPanelSelection } = infoPanelStore;
-    const inRoom = !!infoPanelSelection?.navigationPath;
+    const { inRoom, isVisible: infoPanelVisible } = infoPanelStore;
 
-    const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
+    const changeQuota =
+      type === "user"
+        ? changeUserQuota
+        : type === "agent"
+          ? changeAIAgentsQuota
+          : changeRoomQuota;
+
     const updateQuota =
-      type === "user" ? api.people.setCustomUserQuota : setCustomRoomQuota;
+      type === "user"
+        ? api.people.setCustomUserQuota
+        : type === "agent"
+          ? setCustomAIAgentQuota
+          : setCustomRoomQuota;
 
     const resetQuota =
-      type === "user" ? api.people.resetUserQuota : resetRoomQuota;
+      type === "user"
+        ? api.people.resetUserQuota
+        : type === "agent"
+          ? resetAIAgentQuota
+          : resetRoomQuota;
 
     const withoutLimitQuota =
-      type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;
+      type === "user"
+        ? !isDefaultUsersQuotaSet
+        : type === "agent"
+          ? !isDefaultAIAgentsQuotaSet
+          : !isDefaultRoomsQuotaSet;
 
-    const defaultSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+    const defaultSize =
+      type === "user"
+        ? defaultUsersQuota
+        : type === "agent"
+          ? defaultAIAgentsQuota
+          : defaultRoomsQuota;
 
     const needResetSelection =
       type === "user" ? needResetUserSelection : needResetFilesSelection;
@@ -265,7 +311,7 @@ export default inject(
       updateQuota,
       resetQuota,
       defaultSize,
-      needResetSelection,
+      needResetSelection: !infoPanelVisible || needResetSelection,
       inRoom,
     };
   },

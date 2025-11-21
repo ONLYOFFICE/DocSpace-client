@@ -140,6 +140,7 @@ const RegistrationForm = ({
                 target={LinkTarget.blank}
                 fontSize="13px"
                 color="accent"
+                dataTestId="license_url"
               />
             ),
             2: (
@@ -150,6 +151,7 @@ const RegistrationForm = ({
                 target={LinkTarget.blank}
                 fontSize="13px"
                 color="accent"
+                dataTestId="legal_terms_url"
               />
             ),
           }}
@@ -177,6 +179,7 @@ const RegistrationForm = ({
             ? t("Common:RequiredField")
             : t("Common:IncorrectFirstName"))
         }
+        dataTestId="first_name_field_container"
       >
         <TextInput
           id="first-name"
@@ -192,6 +195,7 @@ const RegistrationForm = ({
           onChange={onChangeFname}
           onKeyDown={onKeyPress}
           isAutoFocussed
+          testId="first_name_input"
         />
       </FieldContainer>
       <FieldContainer
@@ -205,6 +209,7 @@ const RegistrationForm = ({
             ? t("Common:RequiredField")
             : t("Common:IncorrectLastName"))
         }
+        dataTestId="last_name_field_container"
       >
         <TextInput
           id="last-name"
@@ -219,6 +224,7 @@ const RegistrationForm = ({
           isDisabled={isLoading}
           onChange={onChangeSname}
           onKeyDown={onKeyPress}
+          testId="last_name_input"
         />
       </FieldContainer>
       <FieldContainer
@@ -229,6 +235,7 @@ const RegistrationForm = ({
         errorMessage={
           password ? t("Common:IncorrectPassword") : t("Common:RequiredField")
         }
+        dataTestId="password_field_container"
       >
         <PasswordInput
           simpleView={false}
@@ -269,6 +276,7 @@ const RegistrationForm = ({
             isDisabled={isLoading}
             label={newsletter}
             truncate={false}
+            dataTestId="news_checkbox"
           />
         </div>
       ) : null}
@@ -286,6 +294,7 @@ const RegistrationForm = ({
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}
+        testId="signup_button"
       />
     </div>
   );

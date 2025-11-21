@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React from "react";
 
 import { InputSize, InputType, TextInput } from "../text-input";
@@ -78,6 +77,7 @@ const GoogleCloudSettings = ({
         placeholder={bucketPlaceholder || ""}
         type={InputType.text}
         size={InputSize.base}
+        testId="google_cloud_bucket_input"
       />
 
       {isNeedFilePath ? (
@@ -94,6 +94,7 @@ const GoogleCloudSettings = ({
           hasError={isError[FILE_PATH]}
           value={formSettings[FILE_PATH]}
           isDisabled={isLoadingData || isLoading || isDisabled}
+          testId="google_cloud_file_path_input"
         />
       ) : null}
     </>

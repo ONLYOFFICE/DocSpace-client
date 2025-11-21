@@ -40,7 +40,7 @@ import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
 import styles from "./Selector.module.scss";
 
-import {
+import type {
   TAccessRight,
   SelectorProps,
   TSelectorBreadCrumbs,
@@ -120,6 +120,7 @@ const Selector = ({
   renderCustomItem,
   isMultiSelect,
   selectedItems,
+  maxSelectedItems,
 
   onSelect,
 
@@ -154,6 +155,9 @@ const Selector = ({
 
   isSSR,
   selectedItem: selectedItemProp,
+  dataTestId,
+
+  hideBackButton,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -215,6 +219,8 @@ const Selector = ({
     );
 
     if (isMultiSelect) {
+      if (item.disableMultiSelect) return;
+
       if (item.isSelected) {
         setNewSelectedItems((value) => {
           const newValue = value.filter((x) => x.id !== item.id);
@@ -231,14 +237,36 @@ const Selector = ({
             return newValue;
           });
         }
+        setRenderedItems((valueProp) => {
+          const value = [...valueProp];
+          const idx = value.findIndex((x) => item.id === x.id);
+
+          if (idx === -1) return value;
+
+          value[idx] = { ...value[idx], isSelected: false };
+
+          return value;
+        });
       } else {
+        let wasLimitReached = false;
+
         setNewSelectedItems((value) => {
+          if (maxSelectedItems && value.length >= maxSelectedItems) {
+            wasLimitReached = true;
+            return value;
+          }
+
           value.push({
             ...item,
           });
 
           return [...value];
         });
+
+        if (wasLimitReached) {
+          return;
+        }
+
         if (activeTabId) {
           setSelectedTabItems((value) => {
             const newValue = { ...value };
@@ -249,17 +277,17 @@ const Selector = ({
             return newValue;
           });
         }
+        setRenderedItems((valueProp) => {
+          const value = [...valueProp];
+          const idx = value.findIndex((x) => item.id === x.id);
+
+          if (idx === -1) return value;
+
+          value[idx] = { ...value[idx], isSelected: true };
+
+          return value;
+        });
       }
-      setRenderedItems((valueProp) => {
-        const value = [...valueProp];
-        const idx = value.findIndex((x) => item.id === x.id);
-
-        if (idx === -1) return value;
-
-        value[idx] = { ...value[idx], isSelected: !value[idx].isSelected };
-
-        return value;
-      });
     } else {
       setRenderedItems((value) => {
         const idx = value.findIndex((x) => item.id === x.id);
@@ -298,15 +326,30 @@ const Selector = ({
           newSelectedItems.length !== items.filter((i) => !i.isDisabled).length;
 
     if (query) {
-      const cloneItems = items
+      let cloneItems = items
         .map((x) => ({ ...x }))
         .filter((x) => !x.isDisabled);
 
+      if (maxSelectedItems) {
+        if (activeTabId) {
+          const otherTabsSelectedCount = newSelectedItems.filter(
+            (item) => !items.some((i) => i.id === item.id),
+          ).length;
+          const availableSlots = maxSelectedItems - otherTabsSelectedCount;
+          cloneItems = cloneItems.slice(0, Math.max(0, availableSlots));
+        } else {
+          cloneItems = cloneItems.slice(0, maxSelectedItems);
+        }
+      }
+
       setRenderedItems((i) => {
-        const cloneRenderedItems = i.map((x) => ({
-          ...x,
-          isSelected: !x.isDisabled,
-        }));
+        const cloneRenderedItems = i.map((x) => {
+          const shouldSelect = cloneItems.some((item) => item.id === x.id);
+          return {
+            ...x,
+            isSelected: shouldSelect && !x.isDisabled,
+          };
+        });
 
         return cloneRenderedItems;
       });
@@ -358,6 +401,8 @@ const Selector = ({
     newSelectedItems.length,
     onSelectAll,
     selectedTabItems,
+    maxSelectedItems,
+    newSelectedItems,
   ]);
 
   const onChangeAccessRightsAction = React.useCallback(
@@ -616,12 +661,24 @@ const Selector = ({
     });
   }, [tabsData]);
 
+  const bodyItems =
+    isSSR && renderedItems.length === 0
+      ? items.map((x) => ({ ...x, isSelected: false }))
+      : [...renderedItems];
+
+  const separator = { id: "separator", isSeparator: true };
+
+  if (bodyItems.findIndex((x) => x.isSystem) > -1) {
+    bodyItems.sort((el) => (el.isSystem ? -1 : 1));
+    bodyItems.splice(1, 0, separator as TSelectorItem);
+  }
+
   const selectorComponent = (
     <div
       id={id}
       className={classNames(styles.selector, className)}
       style={style}
-      data-testid="selector"
+      data-testid={dataTestId || "selector"}
     >
       <Providers
         emptyScreenProps={{
@@ -647,11 +704,7 @@ const Selector = ({
           withHeader={withHeader}
           withPadding={withPadding}
           footerVisible={footerVisible || !!alwaysShowFooter}
-          items={
-            isSSR && renderedItems.length === 0
-              ? items.map((x) => ({ ...x, isSelected: false }))
-              : [...renderedItems]
-          }
+          items={bodyItems}
           isMultiSelect={isMultiSelect}
           onSelect={onSelectAction}
           hasNextPage={hasNextPage}
@@ -668,6 +721,7 @@ const Selector = ({
           setInputItemVisible={setInputItemVisible}
           injectedElement={injectedElement}
           isSSR={isSSR}
+          hideBackButton={hideBackButton}
           // info
           {...infoProps}
         />

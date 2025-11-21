@@ -40,7 +40,6 @@ const SectionBody = React.memo(
     autoFocus = false,
     children,
     onDrop,
-    uploadFiles = false,
     viewAs,
     withScroll = true,
 
@@ -49,6 +48,10 @@ const SectionBody = React.memo(
     getContextModel,
     isIndexEditingMode,
     pathname,
+    withoutFooter,
+    onDragLeaveEmpty,
+    onDragOverEmpty,
+    fullHeightBody,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -92,11 +95,11 @@ const SectionBody = React.memo(
         }
       : {};
 
-    return uploadFiles ? (
+    return (
       <DragAndDrop
         className={classNames(
-          styles.dropzone,
           {
+            [styles.dropzone]: true,
             [styles.withScroll]: withScroll,
             [styles.isDesktop]: isDesktop,
             [styles.isRowView]: viewAs === "row",
@@ -105,62 +108,69 @@ const SectionBody = React.memo(
             [styles.isProfileView]: viewAs === "profile",
             [styles.isFormGallery]: isFormGallery,
             [styles.isStudio]: settingsStudio,
+            [styles.fullHeightBody]: fullHeightBody,
             [styles.common]: true,
           },
           "section-body",
         )}
         onDrop={onDrop}
+        onDragOver={onDragOverEmpty}
+        onDragLeave={onDragLeaveEmpty}
         isDropZone
       >
         {withScroll ? (
           <div className="section-wrapper">
             <div className="section-wrapper-content" {...focusProps}>
               {children}
-              <div className={classNames(styles.spacer)} />
+              {withoutFooter ? null : (
+                <div className={classNames(styles.spacer)} />
+              )}
             </div>
           </div>
         ) : (
           <div className="section-wrapper">
             {children}
-            <div className={classNames(styles.spacer)} />
+            {withoutFooter ? null : (
+              <div className={classNames(styles.spacer)} />
+            )}
           </div>
         )}
 
-        {!isIndexEditingMode ? (
+        {!isIndexEditingMode && getContextModel ? (
           <SectionContextMenu getContextModel={getContextModel} />
         ) : null}
       </DragAndDrop>
-    ) : (
-      <div
-        className={classNames(
-          styles.sectionBody,
-          {
-            [styles.withScroll]: withScroll,
-            [styles.isDesktop]: isDesktop,
-            [styles.isRowView]: viewAs === "row",
-            [styles.isTile]: viewAs === "tile",
-            [styles.isSettingsView]: viewAs === "settings",
-            [styles.isProfileView]: viewAs === "profile",
-            [styles.isFormGallery]: isFormGallery,
-            [styles.isStudio]: settingsStudio,
-            [styles.common]: true,
-          },
-          "section-body",
-        )}
-      >
-        {withScroll ? (
-          <div className="section-wrapper">
-            <div className="section-wrapper-content" {...focusProps}>
-              {children}
-              <div className={classNames(styles.spacer, "settings-mobile")} />
-            </div>
-          </div>
-        ) : (
-          <div className="section-wrapper">{children}</div>
-        )}
-        <SectionContextMenu getContextModel={getContextModel} />
-      </div>
     );
+    //   <div
+    //     className={classNames(
+    //       styles.sectionBody,
+    //       {
+    //         [styles.withScroll]: withScroll,
+    //         [styles.isDesktop]: isDesktop,
+    //         [styles.isRowView]: viewAs === "row",
+    //         [styles.isTile]: viewAs === "tile",
+    //         [styles.isSettingsView]: viewAs === "settings",
+    //         [styles.isProfileView]: viewAs === "profile",
+    //         [styles.isFormGallery]: isFormGallery,
+    //         [styles.isStudio]: settingsStudio,
+    //         [styles.common]: true,
+    //       },
+    //       "section-body",
+    //     )}
+    //   >
+    //     {withScroll ? (
+    //       <div className="section-wrapper">
+    //         <div className="section-wrapper-content" {...focusProps}>
+    //           {children}
+    //           <div className={classNames(styles.spacer, "settings-mobile")} />
+    //         </div>
+    //       </div>
+    //     ) : (
+    //       <div className="section-wrapper">{children}</div>
+    //     )}
+    //     <SectionContextMenu getContextModel={getContextModel} />
+    //   </div>
+    // );
   },
 );
 

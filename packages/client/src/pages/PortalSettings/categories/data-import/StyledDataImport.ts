@@ -50,6 +50,11 @@ export const WorkspacesContainer = styled.div`
     max-width: 675px;
   }
 
+  .link-learn-more {
+    display: block;
+    margin-top: 8px;
+  }
+
   .data-import-subtitle {
     margin-bottom: 21px;
     font-weight: 600;
@@ -111,7 +116,8 @@ export const WorkspacesContainer = styled.div`
 export const Wrapper = styled.div`
   .users-without-email {
     font-size: 12px;
-    margin: 0 0 16px;
+    margin-top: -8px;
+    margin-bottom: 16px;
   }
 
   .upper-buttons {
@@ -141,10 +147,6 @@ export const Wrapper = styled.div`
     margin-bottom: 17px;
   }
 
-  .importUsersSearch {
-    margin-top: 20px;
-  }
-
   .sendLetterBlockWrapper {
     display: flex;
     align-items: center;
@@ -154,23 +156,12 @@ export const Wrapper = styled.div`
       margin-inline-end: 8px;
     }
   }
-`;
 
-export const UsersInfoBlock = styled.div`
-  display: flex;
-  align-items: center;
-  max-width: 660px;
-  background: ${(props) => props.theme.client.settings.migration.background};
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin: 16px 0;
-
-  .selected-users-count {
-    margin-inline-end: 24px;
-  }
-
-  .selected-admins-count {
-    margin-inline-end: 8px;
+  .step-info-block {
+    display: inline-flex;
+    gap: 8px;
+    background: ${(props) =>
+      props.theme.client.settings.migration.infoBlockBackground};
   }
 `;
 
@@ -244,43 +235,31 @@ export const StyledTableContainer = styled(TableContainer).attrs(
   }
 `;
 
-export const StyledUsersInfoWrapper = styled.div.attrs(injectDefaultTheme)<{
-  selectedUsers: number;
-  totalLicenceLimit: number;
+export const StyledInfoBlock = styled.div.attrs(injectDefaultTheme)<{
+  isLimitReached?: boolean;
+  isAdmins?: boolean;
 }>`
-  margin: 16px 0;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: ${(props) => (props.isAdmins ? "20px" : "16px")};
 
-  .license-limit-warning {
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: ${(props) => props.theme.client.settings.migration.errorTextColor};
-  }
-
-  .users-info-wrapper {
+  .info-block-wrapper {
     display: flex;
     align-items: center;
-    width: fit-content;
-    min-width: 660px;
+
     background: ${(props) =>
       props.theme.client.settings.migration.infoBlockBackground};
     box-sizing: border-box;
     padding: 12px 16px;
     border-radius: 6px;
-    margin: 16px 0;
 
-    @media (max-width: 1140px) {
+    @media ${mobile} {
       width: 100%;
     }
 
-    @media ${mobile} {
-      flex-wrap: wrap;
-      min-width: auto;
-      gap: 12px;
-    }
-
     .selected-users-count {
-      margin-inline-end: 24px;
       color: ${(props) =>
         props.theme.client.settings.migration.infoBlockTextColor};
       font-weight: 700;
@@ -299,10 +278,17 @@ export const StyledUsersInfoWrapper = styled.div.attrs(injectDefaultTheme)<{
         font-size: 14px;
         margin-inline-start: 4px;
         color: ${(props) =>
-          props.selectedUsers > props.totalLicenceLimit
+          props.isLimitReached
             ? props.theme.client.settings.migration.errorTextColor
             : props.theme.client.settings.migration.infoBlockTextColor};
       }
     }
+  }
+
+  .info-error-text {
+    color: ${(props) =>
+      props.isLimitReached
+        ? props.theme.client.settings.migration.errorTextColor
+        : props.theme.client.settings.migration.infoBlockTextColor};
   }
 `;

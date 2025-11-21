@@ -1,13 +1,13 @@
 {
   "ActiveSessions": "Các phiên Hoạt động",
   "AutoDeleteTitle": "Tất cả các phiên giao dịch trên 60 ngày sẽ tự động bị xóa.",
-  "ChangeEmailSuccess": "Email đã được thay đổi thành công",
   "ChangePasswordAfterLoggingOut": "Thay đổi mật khẩu sau khi đăng xuất",
   "ConnectSocialNetworks": "Kết nối mạng xã hội của bạn",
   "DescriptionForSecurity": "Để bảo mật hơn, bạn cần thay đổi mật khẩu của mình.",
   "DesktopTheme": "Đồng bộ hóa với cài đặt Trình chỉnh sửa trên máy tính",
   "DesktopThemeDescription": "Tự động chuyển đổi giữa chế độ nền sáng và tối tùy thuộc vào hình nền hiện tại của trình chỉnh sửa máy tính để bàn.",
   "EditPhoto": "Chỉnh sửa ảnh",
+  "EmailChangeSuccess": "Email của bạn đã được thay đổi thành công.",
   "EmailNotVerified": "Email chưa được xác minh",
   "ErrorAccountAlreadyUse": "Tài khoản được liên kết đã được sử dụng bởi người dùng khác",
   "FileManagement": "Quản lý tập tin",
@@ -18,6 +18,7 @@
   "LogoutDescription": "Lưu ý. Tất cả các kết nối đang hoạt động ngoại trừ kết nối này sẽ được đăng xuất, vì nó hiện đang được sử dụng.",
   "LogoutFrom": "Đăng xuất khỏi {{platform}} {{browser}}?",
   "MyProfile": "Hồ sơ của tôi",
+  "NotificationsChannels": "Kênh thông báo",
   "ProviderSuccessfullyConnected": "Đã kết nối nhà cung cấp thành công",
   "ProviderSuccessfullyDisconnected": " Đã ngắt kết nối nhà cung cấp thành công",
   "SendAgain": "Gửi lại",
@@ -25,6 +26,10 @@
   "SuccessLogout": "Kết nối hoạt động đã được đăng xuất: {{platform}}, {{browser}}",
   "SystemTheme": "Sử dụng chủ đề hệ thống",
   "SystemThemeDescription": "Tự động chuyển đổi giữa các chế độ sáng và tối khi hệ thống của bạn hoạt động.",
+  "TelegramAccount": "Tài khoản Telegram",
+  "TelegramAccountDescription": "Để kết nối TelegramBot với tài khoản của bạn, hãy làm theo liên kết bí mật và nhấp vào nút “Kết nối Telegram”.",
+  "TelegramAccountDisconnect": "Ngắt kết nối Telegram",
+  "TelegramAccountDisconnectDescription": "Tài khoản @{{username}} của bạn đang được kết nối để nhận thông báo từ telegram. Bạn có thể ngắt kết nối khỏi tài khoản này. Trong trường hợp đó, bạn sẽ không nhận được thông báo.",
   "TerminateAllSessions": "Chấm dứt tất cả các phiên giao dịch ngoại trừ phiên hiện tại",
   "TwoFactorDescription": " Xác thực hai yếu tố qua ứng dụng tạo mã đã được quản trị viên bật cho tất cả người dùng."
 }

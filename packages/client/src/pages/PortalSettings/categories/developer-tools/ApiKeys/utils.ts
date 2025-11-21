@@ -59,6 +59,7 @@ export const getCategoryTranslation = (
 
 export const getFilteredOptions = (
   permissions: string[],
+  isUser: boolean,
   itemPermissions: string[] = [],
 ) => {
   const options = {} as TPermissionsList;
@@ -69,15 +70,15 @@ export const getFilteredOptions = (
     const isRead = permission.includes("read");
 
     const defaultObj = {
-      isRead: { isChecked, name: "" },
-      isWrite: { isChecked, name: "" },
+      isRead: { isChecked, name: "", isDisabled: false },
+      isWrite: { isChecked, name: "", isDisabled: false },
     };
 
     if (permission.includes("accounts.self")) {
       if (!options.profile) options.profile = defaultObj;
       if (isRead) options.profile.isRead = obj;
       else options.profile.isWrite = obj;
-    } else if (permission.includes("accounts")) {
+    } else if (permission.includes("accounts") && !isUser) {
       if (!options.accounts) options.accounts = defaultObj;
       if (isRead) options.accounts.isRead = obj;
       else options.accounts.isWrite = obj;
@@ -88,7 +89,7 @@ export const getFilteredOptions = (
     } else if (permission.includes("rooms")) {
       if (!options.rooms) options.rooms = defaultObj;
       if (isRead) options.rooms.isRead = obj;
-      else options.rooms.isWrite = obj;
+      else options.rooms.isWrite = { ...obj, isDisabled: isUser };
     }
   });
 

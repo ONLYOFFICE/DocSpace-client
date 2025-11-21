@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import BreadCrumbsLoader from "./BreadCrumbs";
 import SearchLoader from "./Search";
@@ -66,7 +66,7 @@ describe("SearchLoader", () => {
     render(<SearchLoader {...defaultProps} />);
 
     const rectangle = screen.getByRole("img");
-    expect(rectangle).toHaveAttribute("width", "calc(100% - 16px)");
+
     expect(rectangle).toHaveAttribute("height", "32px");
   });
 

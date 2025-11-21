@@ -64,4 +64,5 @@ export type SocialButtonProps = Partial<StyledSocialButtonProps> & {
   "data-providername"?: string;
 
   IconComponent?: JSX.ElementType;
+  dataTestId?: string;
 };

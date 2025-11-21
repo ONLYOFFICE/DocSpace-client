@@ -3,7 +3,7 @@
   "content": "Enable users",
   "content_en_sha1_hash": "17c615111e9de5f0bb43739d228fa20668b04a5e",
   "created_at": "2025-05-19T21:30:56.973Z",
-  "updated_at": "2025-05-24T14:13:37.358Z",
+  "updated_at": "2025-08-04T07:30:01.065Z",
   "comment": {
     "text": "This translation key is used to display the text \"Enable users\" in a change user status dialog, indicating a user's permission level. It appears on a button or similar UI element, allowing users to enable or disable their permissions. The key should be translated for use with non-English products and platforms.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 199,
+      "line_number": 195,
       "context": "? isGuests\n ? t(\"EnableGuest\")\n : t(\"EnableUser\")\n : isGuests\n ? t(\"EnableGuests\")\n : t(\"EnableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"EnableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUserDescription\", { productName: t(\"Common:ProductName\") })",
       "module": "/packages/client"
     }

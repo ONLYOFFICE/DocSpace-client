@@ -11,15 +11,16 @@ newInstance
     load: "currentOnly",
     ns: ["Common"],
     defaultNS: "Common",
+    fallbackNS: ["Common"],
     backend: {
-      backendOptions: [
-        {
-          loadPath: "../../client/public/locales/{{lng}}/{{ns}}.json",
-        },
-        {
-          loadPath: "../../../public/locales/{{lng}}/{{ns}}.json",
-        },
-      ],
+      // Route Common from the shared public dir ('/locales/...')
+      // and other namespaces from packages/client/public mounted at '/client-public'
+      loadPath: (lngs, namespaces) => {
+        const ns = Array.isArray(namespaces) ? namespaces[0] : namespaces;
+        return ns === "Common"
+          ? "/locales/{{lng}}/{{ns}}.json"
+          : "/client-public/locales/{{lng}}/{{ns}}.json";
+      },
     },
     lng: "en",
     fallbackLng: "en",

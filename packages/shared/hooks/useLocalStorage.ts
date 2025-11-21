@@ -100,7 +100,7 @@ export function useLocalStorage<T>(
       const raw = window.localStorage.getItem(key);
       return raw ? deserializer(raw) : initialValueToUse;
     } catch (error) {
-      console.warn(`Error reading localStorage key “${key}”:`, error);
+      console.warn(`Error reading localStorage key "${key}":`, error);
       return initialValueToUse;
     }
   }, [initialValue, key, deserializer]);
@@ -116,7 +116,7 @@ export function useLocalStorage<T>(
   const setValue: Dispatch<SetStateAction<T>> = useEventCallback((value) => {
     if (IS_SERVER) {
       console.warn(
-        `Tried setting localStorage key “${key}” even though environment is not a client`,
+        `Tried setting localStorage key "${key}" even though environment is not a client`,
       );
     }
 
@@ -129,14 +129,14 @@ export function useLocalStorage<T>(
 
       window.dispatchEvent(new StorageEvent("local-storage", { key }));
     } catch (error) {
-      console.warn(`Error setting localStorage key “${key}”:`, error);
+      console.warn(`Error setting localStorage key "${key}":`, error);
     }
   });
 
   const removeValue = useEventCallback(() => {
     if (IS_SERVER) {
       console.warn(
-        `Tried removing localStorage key “${key}” even though environment is not a client`,
+        `Tried removing localStorage key "${key}" even though environment is not a client`,
       );
     }
 
@@ -152,7 +152,6 @@ export function useLocalStorage<T>(
 
   useEffect(() => {
     setStoredValue(readValue());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
   const handleStorageChange = useCallback(

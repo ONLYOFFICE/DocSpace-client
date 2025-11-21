@@ -3,7 +3,7 @@
   "content": "Dropbox directory",
   "content_en_sha1_hash": "1a991dfb32e8cd8808fd95385917355bc689cb86",
   "created_at": "2025-05-19T21:30:49.974Z",
-  "updated_at": "2025-05-26T07:57:32.387Z",
+  "updated_at": "2025-10-27T16:14:33.350Z",
   "comment": {
     "text": "This translation key is used to display the title of a Dropbox directory. It appears as part of file names or folder labels in the application, and its value will be translated by users based on their language settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 100,
+      "line_number": 103,
       "context": "case \"BoxNet\":\n return t(\"Translations:FolderTitleBoxNet\");\n \n case \"DropBox\":\n case \"DropboxV2\":\n return t(\"Translations:FolderTitleDropBox\");\n \n case \"DocuSign\":\n return t(\"Translations:FolderTitleDocuSign\");\n \n case \"Google\":",
       "module": "/packages/client"
     }

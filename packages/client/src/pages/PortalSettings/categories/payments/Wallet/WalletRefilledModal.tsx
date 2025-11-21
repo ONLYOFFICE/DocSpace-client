@@ -36,7 +36,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
-import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
+import AutomaticPaymentsBlock from "../../../../../components/panels/TopUpBalance/sub-components/AutoPayments";
 
 import styles from "./styles/Wallet.module.scss";
 
@@ -141,6 +141,7 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
             !upToBalance
           }
           isLoading={isLoading}
+          testId="wallet_refilled_save_button"
         />
         <Button
           key="CancelButton"
@@ -148,6 +149,7 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
           size={ButtonSize.normal}
           scale
           onClick={onCloseDialog}
+          testId="wallet_refilled_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

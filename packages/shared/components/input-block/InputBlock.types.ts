@@ -36,6 +36,8 @@ type CommonProps = {
   className?: string;
   /** Component style */
   style?: React.CSSProperties;
+  /** Data test id for testing */
+  dataTestId?: string;
 
   /** Forwarded ref */
   forwardedRef?: React.Ref<HTMLInputElement>;

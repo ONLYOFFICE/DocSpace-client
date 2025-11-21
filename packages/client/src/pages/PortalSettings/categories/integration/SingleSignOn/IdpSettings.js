@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -76,13 +75,7 @@ const IdpSettings = (props) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
-    isInit,
-    init,
   } = props;
-
-  useEffect(() => {
-    if (!isInit) init();
-  }, [isInit]);
 
   return (
     <StyledWrapper>
@@ -97,6 +90,7 @@ const IdpSettings = (props) => {
         tooltipClass="custom-entry-tooltip icon-button"
         value={spLoginLabel}
         hasError={spLoginLabelHasError}
+        dataTestId="sp_login_label"
       />
 
       <SsoFormField
@@ -108,6 +102,7 @@ const IdpSettings = (props) => {
         tooltipClass="provider-url-tooltip icon-button"
         value={entityId}
         hasError={entityIdHasError}
+        dataTestId="entity_id"
       />
 
       <SsoFormField
@@ -129,6 +124,7 @@ const IdpSettings = (props) => {
             ? ssoUrlPostHasError
             : ssoUrlRedirectHasError
         }
+        dataTestId="sso_endpoint_url"
       >
         <div className="radio-button-box">
           <Text fontSize="12px" fontWeight={400} noSelect>
@@ -144,6 +140,7 @@ const IdpSettings = (props) => {
             selected={ssoBinding}
             spacing="20px"
             tabIndex={6}
+            dataTestId="sso_binding"
           />
         </div>
       </SsoFormField>
@@ -163,10 +160,11 @@ const IdpSettings = (props) => {
         tooltipClass="logout-endpoint-url-tooltip icon-button"
         value={sloBinding?.includes("POST") ? sloUrlPost : sloUrlRedirect}
         hasError={
-          ssoBinding?.includes("POST")
+          sloBinding?.includes("POST")
             ? sloUrlPostHasError
             : sloUrlRedirectHasError
         }
+        dataTestId="slo_endpoint_url"
       >
         <div className="radio-button-box">
           <Text fontSize="12px" fontWeight={400}>
@@ -192,6 +190,7 @@ const IdpSettings = (props) => {
         name="nameIdFormat"
         options={nameIdOptions}
         tabIndex={8}
+        dataTestId="name_id_format_combobox"
       />
     </StyledWrapper>
   );
@@ -216,8 +215,6 @@ export default inject(({ ssoStore }) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
-    init,
-    isInit,
   } = ssoStore;
 
   return {
@@ -238,7 +235,5 @@ export default inject(({ ssoStore }) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
-    init,
-    isInit,
   };
 })(observer(IdpSettings));

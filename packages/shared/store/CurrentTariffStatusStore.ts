@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import moment from "moment-timezone";
+import axios from "axios";
 
 import api from "../api";
 import { getWalletPayer } from "../api/portal";
@@ -38,9 +38,12 @@ import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining } from "../utils/common";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
+import { SettingsStore } from "./SettingsStore";
 
 class CurrentTariffStatusStore {
   userStore: UserStore;
+
+  settingsStore: SettingsStore;
 
   portalTariffStatus: Nullable<TPortalTariff> = null;
 
@@ -59,10 +62,11 @@ class CurrentTariffStatusStore {
     payer: null,
   };
 
-  constructor(userStore: UserStore) {
+  constructor(userStore: UserStore, settingsStore: SettingsStore) {
     makeAutoObservable(this);
 
     this.userStore = userStore;
+    this.settingsStore = settingsStore;
   }
 
   setLanguage = (language: string) => {
@@ -245,46 +249,69 @@ class CurrentTariffStatusStore {
   }
 
   fetchPayerInfo = async (isRefresh?: boolean) => {
-    const res = await getWalletPayer(isRefresh);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
-    if (!res) return;
+    try {
+      const res = await getWalletPayer(isRefresh, abortController.signal);
 
-    this.payerInfo = res;
+      if (!res) return;
 
-    return res;
+      this.payerInfo = res;
+
+      return res;
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        return;
+      }
+      console.error(e);
+      throw e;
+    }
   };
 
   fetchPortalTariff = async (refresh?: boolean) => {
-    return api.portal.getPortalTariff(refresh).then((res) => {
-      if (!res) return;
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
-      const { user } = this.userStore;
+    return api.portal
+      .getPortalTariff(refresh, abortController.signal)
+      .then((res) => {
+        if (!res) return;
 
-      runInAction(() => {
-        this.portalTariffStatus = res;
+        const { user } = this.userStore;
 
-        if (user?.isAdmin) {
-          const quota = res.quotas.find((q) => q.wallet === true);
+        runInAction(() => {
+          this.portalTariffStatus = res;
 
-          if (quota) {
-            if (quota.state === QuotaState.Overdue) {
-              this.previousWalletQuota = [quota];
-              this.walletQuotas = [];
+          if (user?.isAdmin) {
+            const quota = res.quotas.find((q) => q.wallet === true);
+
+            if (quota) {
+              if (quota.state === QuotaState.Overdue) {
+                this.previousWalletQuota = [quota];
+                this.walletQuotas = [];
+              } else {
+                this.walletQuotas = [quota];
+                this.previousWalletQuota = [];
+              }
             } else {
-              this.walletQuotas = [quota];
+              this.walletQuotas = [];
               this.previousWalletQuota = [];
             }
-          } else {
-            this.walletQuotas = [];
-            this.previousWalletQuota = [];
           }
-        }
+        });
+
+        this.setIsLoaded(true);
+
+        return {
+          res: this.portalTariffStatus,
+          walletQuotas: this.walletQuotas,
+        };
+      })
+      .catch((err) => {
+        if (axios.isCancel(err)) return;
+        throw err;
       });
-
-      this.setIsLoaded(true);
-
-      return { res: this.portalTariffStatus, walletQuotas: this.walletQuotas };
-    });
   };
 }
 

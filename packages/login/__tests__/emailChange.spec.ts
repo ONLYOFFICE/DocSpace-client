@@ -29,6 +29,7 @@ import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmailChange";
+const NEXT_REQUEST_URL = "*/**/login/confirm/EmailChange";
 
 const QUERY_PARAMS = [
   {
@@ -40,21 +41,35 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
     value: "123",
   },
+  {
+    name: "redirected",
+    value: "true",
+  },
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
+test("email change without auth", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "email-change",
+    "email-change-without-auth.png",
+  ]);
+});
+
 test("email change success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL(`${baseUrl}/profile?email_change=success`, {
+  await page.waitForURL(`${baseUrl}/profile/login?email_change=success`, {
     waitUntil: "load",
   });
 

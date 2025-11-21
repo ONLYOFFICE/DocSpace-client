@@ -52,4 +52,5 @@ export interface OAuthProps {
 
   apiOAuthLink: string;
   logoText: string;
+  error: Error | null;
 }

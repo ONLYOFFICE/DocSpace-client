@@ -31,8 +31,14 @@ import { inject, observer } from "mobx-react";
 import { BrandName as BrandNamePage } from "@docspace/shared/pages/Branding/BrandName";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
+import { BRAND_NAME_REGEX } from "@docspace/shared/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import LoaderBrandName from "../sub-components/loaderBrandName";
+import useCommon from "../useCommon";
+import { brandingRedirectUrl } from "./constants";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const BrandNameComponent = (props) => {
   const {
@@ -46,12 +52,29 @@ const BrandNameComponent = (props) => {
     isBrandNameLoaded,
     setBrandName,
     saveBrandName,
-    getBrandName,
+    brandingStore,
   } = props;
+
+  const isMobileView = deviceType === DeviceType.mobile;
+
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "brand-name",
+    deviceType,
+  });
+
+  const defaultProps = createDefaultHookSettingsProps({
+    isMobileView,
+    brandingStore,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
+
   const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    getBrandName();
+    if (isMobileView) getCommonInitialValue();
   }, []);
 
   const onSave = async (data) => {
@@ -61,11 +84,26 @@ const BrandNameComponent = (props) => {
       setBrandName(data.logoText);
 
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
-    } catch (error) {
-      toastr.error(error);
+    } catch (err) {
+      toastr.error(err);
     } finally {
       setIsSaving(false);
     }
+  };
+
+  const handleValidation = (value) => {
+    let errorCode = "";
+
+    if (!value) {
+      errorCode = "Empty";
+    } else if (value.length < 2) {
+      errorCode = "MinLength";
+    } else if (!BRAND_NAME_REGEX.test(value)) {
+      errorCode = "SpecSymbols";
+    }
+
+    setError(errorCode);
+    return errorCode;
   };
 
   return !isBrandNameLoaded ? (
@@ -82,6 +120,8 @@ const BrandNameComponent = (props) => {
       brandName={brandName}
       onSave={onSave}
       deviceType={deviceType}
+      error={error}
+      onValidate={handleValidation}
     />
   );
 };
@@ -92,7 +132,6 @@ export const BrandName = inject(
       brandName,
       defaultBrandName,
       isBrandNameLoaded,
-      getBrandName,
       setBrandName,
       saveBrandName,
     } = brandingStore;
@@ -114,9 +153,9 @@ export const BrandName = inject(
       brandName,
       defaultBrandName,
       isBrandNameLoaded,
-      getBrandName,
       setBrandName,
       saveBrandName,
+      brandingStore,
     };
   },
 )(

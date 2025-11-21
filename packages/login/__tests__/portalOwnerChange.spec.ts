@@ -39,8 +39,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -63,11 +63,10 @@ test("portal owner change render", async ({ page, baseUrl }) => {
 test("portal owner change save", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Save" }).click();
+  const changeOwnerButton = page.getByTestId("save_change_owner_button");
+  await changeOwnerButton.click();
 
-  await page
-    .getByRole("button", { name: "Save" })
-    .waitFor({ state: "detached" });
+  await changeOwnerButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -79,7 +78,7 @@ test("portal owner change save", async ({ page, baseUrl }) => {
 test("portal owner change cancel", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByTestId("cancel_button").click();
 
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 

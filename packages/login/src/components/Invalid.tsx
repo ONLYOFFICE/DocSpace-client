@@ -92,6 +92,7 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
                 key="component_key"
                 className="error_description_link"
                 href={proxyHomepageUrl}
+                data-testid="invalid_error_link"
               />
             ),
           }}

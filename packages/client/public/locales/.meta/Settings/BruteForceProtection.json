@@ -3,7 +3,7 @@
   "content": "Brute Force Protection",
   "content_en_sha1_hash": "ad05e298131255f6f589995a3c3f681dfa43a007",
   "created_at": "2025-05-19T21:30:50.820Z",
-  "updated_at": "2025-06-18T17:11:42.493Z",
+  "updated_at": "2025-08-04T07:30:01.546Z",
   "comment": {
     "text": "This translation key is used to display a description of \"Brute Force Protection\" in the portal settings category, particularly on the mobile view and within the security access portal. It appears as a subtitle next to the category title, helping users understand its purpose.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 210,
+      "line_number": 217,
       "context": "{\n id: \"portal-settings_catalog-brute-force-protection\",\n key: \"1-0-6\",\n icon: \"\",\n link: \"brute-force-protection\",\n tKey: \"BruteForceProtection\",\n },\n {\n id: \"portal-settings_catalog-admin-message\",\n key: \"1-0-7\",\n icon: \"\",",
       "module": "/packages/client"
     }

@@ -28,6 +28,7 @@ import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import Folder32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
+import ImageReactSvgUrl from "PUBLIC_DIR/images/icons/96/folder.svg?url";
 import { Link } from "../../link";
 import { Badge } from "../../badge";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
@@ -140,6 +141,35 @@ export const Default: Story = {
     docs: {
       description: {
         story: "Basic folder tile with selection functionality",
+      },
+    },
+  },
+};
+
+export const Big: Story = {
+  render: Template,
+  args: {
+    item: {
+      id: "folder-1",
+      title: "My Folder",
+      isFolder: true,
+      contextOptions: ["copy-to", "move-to"],
+    },
+    element,
+    contextOptions,
+    badges,
+    isBigFolder: true,
+    temporaryIcon: ImageReactSvgUrl,
+    onSelect: () => {},
+    setSelection: () => {},
+    withCtrlSelect: () => {},
+    withShiftSelect: () => {},
+    getContextModel: () => contextOptions,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Big folder tile with selection functionality",
       },
     },
   },

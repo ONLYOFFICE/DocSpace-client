@@ -3,7 +3,7 @@
   "content": "New application",
   "content_en_sha1_hash": "3c9a5e52344fe5d1311b3b6f36b19391cf89eac0",
   "created_at": "2025-05-19T21:30:53.916Z",
-  "updated_at": "2025-05-24T07:23:51.322Z",
+  "updated_at": "2025-08-04T07:30:01.422Z",
   "comment": {
     "text": "This translation key is used for \"New application\" and appears as a header title when editing or accessing OAuth settings. It is displayed on a button in the portal settings UI.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthSectionHeader/index.tsx",
-      "line_number": 69,
-      "context": "isFill\n onClick={onBack}\n className=\"arrow-button\"\n />\n \n {isEdit ? t(\"EditApp\") : t(\"NewApp\")}\n </div>\n </Heading>\n </HeaderContainer>\n </StyledContainer>\n );",
+      "line_number": 70,
+      "context": "onClick={onBack}\n className=\"arrow-button\"\n dataTestId=\"arrow_back_button\"\n />\n \n {isEdit ? t(\"EditApp\") : t(\"NewApp\")}\n </div>\n </Heading>\n </HeaderContainer>\n </StyledContainer>\n );",
       "module": "/packages/client"
     }
   ],

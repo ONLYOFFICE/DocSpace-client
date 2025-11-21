@@ -3,7 +3,7 @@
   "content": "Creating items",
   "content_en_sha1_hash": "49705184c3d9cebcb3af7ae213c55471e517ad0d",
   "created_at": "2025-05-19T21:30:55.045Z",
-  "updated_at": "2025-05-24T10:43:44.838Z",
+  "updated_at": "2025-08-12T19:46:25.979Z",
   "comment": {
     "text": "\"This translation key is used to display a heading that indicates 'Creating items' in a component panel. It is likely displayed above or within a block that allows users to create items, possibly with a keyboard shortcut (AltKey) associated with it.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/index.js",
-      "line_number": 103,
+      "line_number": 102,
       "context": "AltKey={AltKey}\n />\n {!isVisitor ? (\n <>\n <Heading className=\"hotkeys_sub-header\">\n {t(\"HotkeysCreatingObjects\")}\n </Heading>\n <CreationBlock\n t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}",
       "module": "/packages/client"
     }

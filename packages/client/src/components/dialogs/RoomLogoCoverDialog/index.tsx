@@ -42,7 +42,7 @@ import {
 } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
-import { CoverDialogProps, ILogo } from "./RoomLogoCoverDialog.types";
+import { CoverDialogProps, ILogoCover } from "./RoomLogoCoverDialog.types";
 
 const PADDING_HEIGHT = 84;
 const HEIGHT_WITHOUT_BODY = 158;
@@ -126,6 +126,11 @@ const RoomLogoCoverDialog = ({
   roomCoverDialogProps,
   roomLogoCoverDialogVisible,
   setEnabledHotkeys,
+  createAgentDialogVisible,
+  editAgentDialogVisible,
+  uploadedFile,
+  setUploadedFile,
+  isAIAgentsFolderRoot,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover"]);
   const theme = useTheme();
@@ -213,10 +218,7 @@ const RoomLogoCoverDialog = ({
     getCovers();
   }, [getCovers]);
 
-  const onCloseRoomLogo = (
-    e?: React.MouseEvent<HTMLButtonElement>,
-    withSelection = true,
-  ) => {
+  const onCloseRoomLogo = (e?: React.MouseEvent, withSelection = true) => {
     if (openColorPicker) return;
     setRoomCoverDialogProps({
       ...roomCoverDialogProps,
@@ -224,6 +226,8 @@ const RoomLogoCoverDialog = ({
       withSelection,
     });
     setRoomLogoCoverDialogVisible(false);
+
+    if (uploadedFile) setUploadedFile(null);
   };
 
   const handleSubmit = () => {
@@ -236,9 +240,12 @@ const RoomLogoCoverDialog = ({
     if (
       createRoomDialogVisible ||
       editRoomDialogPropsVisible ||
+      createAgentDialogVisible ||
+      editAgentDialogVisible ||
       templateEventVisible
     ) {
       onCloseRoomLogo(undefined, false);
+      if (uploadedFile) setUploadedFile(null);
       return;
     }
 
@@ -282,8 +289,13 @@ const RoomLogoCoverDialog = ({
       scrollBodyHeight={scrollBodyHeight}
       withBodyScrollForcibly={!!scrollBodyHeight}
       isScrollLocked={openColorPicker}
+      dataTestId="room_logo_cover_dialog"
     >
-      <ModalDialog.Header>{t("RoomLogoCover:RoomCover")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isAIAgentsFolderRoot
+          ? t("RoomLogoCover:AgentCover")
+          : t("RoomLogoCover:RoomCover")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <RoomLogoCover
           forwardedRef={contentRef}
@@ -294,7 +306,7 @@ const RoomLogoCoverDialog = ({
           generalScroll={!!scrollBodyHeight}
           isScrollLocked={openColorPicker}
           setCover={setCover}
-          cover={roomCoverDialogProps.icon as ILogo}
+          cover={roomCoverDialogProps.icon as unknown as ILogoCover}
           currentColorScheme={theme.currentColorScheme!}
           setRoomCoverDialogProps={setRoomCoverDialogProps}
           roomCoverDialogProps={roomCoverDialogProps}
@@ -309,6 +321,7 @@ const RoomLogoCoverDialog = ({
           size={ButtonSize.normal}
           label={t("Common:ApplyButton")}
           onClick={handleSubmit}
+          testId="room_logo_cover_apply_button"
         />
         <Button
           scale
@@ -316,39 +329,58 @@ const RoomLogoCoverDialog = ({
           onClick={onCloseRoomLogo}
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
+          testId="room_logo_cover_cancel_button"
         />
       </ModalDialog.Footer>
     </StyledModalDialog>
   );
 };
 
-export default inject<TStore>(({ dialogsStore, filesStore }) => {
-  const {
-    setCover,
-    getCovers,
-    createRoomDialogProps,
-    editRoomDialogProps,
-    setRoomLogoCoverDialogVisible,
-    roomLogoCoverDialogVisible,
+export default inject<TStore>(
+  ({ dialogsStore, filesStore, avatarEditorDialogStore, treeFoldersStore }) => {
+    const {
+      setCover,
+      getCovers,
+      createRoomDialogProps,
+      editRoomDialogProps,
+      createAgentDialogProps,
+      editAgentDialogProps,
+      setRoomLogoCoverDialogVisible,
+      roomLogoCoverDialogVisible,
 
-    covers,
-    setRoomLogoCover,
-    setRoomCoverDialogProps,
-    roomCoverDialogProps,
-    templateEventVisible,
-  } = dialogsStore;
-  return {
-    setRoomLogoCoverDialogVisible,
-    roomLogoCoverDialogVisible,
-    getCovers,
-    covers,
-    setCover,
-    setRoomLogoCover,
-    setRoomCoverDialogProps,
-    roomCoverDialogProps,
-    createRoomDialogVisible: createRoomDialogProps.visible,
-    editRoomDialogPropsVisible: editRoomDialogProps.visible,
-    templateEventVisible,
-    setEnabledHotkeys: filesStore.setEnabledHotkeys,
-  };
-})(observer(RoomLogoCoverDialog));
+      covers,
+      setRoomLogoCover,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
+      templateEventVisible,
+    } = dialogsStore;
+
+    const {
+      uploadedFile,
+
+      setUploadedFile,
+    } = avatarEditorDialogStore;
+
+    const { isAIAgentsFolderRoot } = treeFoldersStore;
+    return {
+      setRoomLogoCoverDialogVisible,
+      roomLogoCoverDialogVisible,
+      getCovers,
+      covers,
+      setCover,
+      setRoomLogoCover,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
+      createRoomDialogVisible: createRoomDialogProps.visible,
+      editRoomDialogPropsVisible: editRoomDialogProps.visible,
+      createAgentDialogVisible: createAgentDialogProps.visible,
+      editAgentDialogVisible: editAgentDialogProps.visible,
+      templateEventVisible,
+      setEnabledHotkeys: filesStore.setEnabledHotkeys,
+      uploadedFile,
+
+      setUploadedFile,
+      isAIAgentsFolderRoot,
+    };
+  },
+)(observer(RoomLogoCoverDialog));

@@ -1,0 +1,28 @@
+{
+  "key_path": "HistorySubmittedPartDescription",
+  "content": "Submitted their part. The form was sent to the next recipient.",
+  "content_en_sha1_hash": "ac28d650168db48183ff89dd841048e4ac6db235",
+  "created_at": "2025-10-13T15:41:56.780Z",
+  "updated_at": "2025-10-13T15:43:43.832Z",
+  "comment": {
+    "text": "This text describes when a portion of a form has been submitted and forwarded to the next person in the process. It appears in the role history section of the filling form process, displaying the submission date as part of a timeline. Translators should ensure the meaning is clear and accurately reflects the form submission event.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T15:43:43.832Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/filling-role-process/sub-components/role-histories/RoleHistories.tsx",
+      "line_number": 52,
+      "context": "return {\n [FillingFormStatusHistory.OpenedAtDate.toString()]: t(\n \"Common:HistoryOpenedAtDate\",\n ),\n [FillingFormStatusHistory.SubmissionDate.toString()]: t(\n \"Common:HistorySubmittedPartDescription\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (\n <Trans\n t={t}\n i18nKey=\"HistoryStopDate\"",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

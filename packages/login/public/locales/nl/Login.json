@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Wachtwoord is succesvol gewijzigd",
   "CodeTitle": "De code is naar u gemaild",
+  "ConfirmEmailChange": "Bevestig uw e-mailwijziging",
+  "ConfirmEmailChangeText": "U heeft aangevraagd om het e-mailadres van uw {{productName}} account te wijzigen. Om verder te gaan, log in alstublieft met uw huidige inloggegevens.",
   "ErrorInvalidText": "Over 10 seconden wordt u doorverwezen naar de <1>{{productName}}</1>",
   "ForgotPassword": "Wachtwoord vergeten?",
   "LDAPUsernamePlaceholder": "Gebruikersnaam van {{ldap_domain}} ",

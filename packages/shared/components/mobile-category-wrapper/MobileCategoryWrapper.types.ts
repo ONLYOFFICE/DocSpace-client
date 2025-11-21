@@ -34,4 +34,5 @@ export type IMobileCategoryWrapperProps = {
   isDisabled?: boolean;
   withPaidBadge: boolean;
   badgeLabel: string;
+  dataTestId?: string;
 };

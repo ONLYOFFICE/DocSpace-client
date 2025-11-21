@@ -50,4 +50,6 @@ export type DropzoneProps = BaseDropzoneProps & {
   accept: string | string[];
   /** Callback when files are dropped */
   onDrop?: FileDropHandler;
+  /** Data test id */
+  dataTestId?: string;
 };

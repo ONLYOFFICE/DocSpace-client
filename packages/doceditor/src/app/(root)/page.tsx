@@ -138,7 +138,9 @@ async function Page(props: RootPageProps) {
       logger.debug(
         `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open file password component`,
       );
-      return <FilePassword {...roomData.response} shareKey={share} />;
+      return (
+        <FilePassword validationData={roomData.response} shareKey={share} />
+      );
     }
   }
 

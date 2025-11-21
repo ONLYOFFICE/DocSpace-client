@@ -3,7 +3,7 @@
   "content": "Create sample Public room embed",
   "content_en_sha1_hash": "1b93783d2de58b201928a571c81e9ce53f4ce3b9",
   "created_at": "2025-05-19T21:30:54.403Z",
-  "updated_at": "2025-05-24T09:37:44.451Z",
+  "updated_at": "2025-08-04T07:30:01.400Z",
   "comment": {
     "text": "This translation key is used for the button header that creates a sample public room embed. It appears in a preset settings page and is used to provide a descriptive text for the button that triggers this action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
       "line_number": 275,
-      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"JavascriptSdk:PublicRoomPresetInfo\")}\n header={t(\"CreateSamplePublicRoom\")}\n >\n <Container>\n <PreviewBlock\n t={t}\n loadCurrentFrame={initFrame}",
+      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"JavascriptSdk:PublicRoomPresetInfo\")}\n header={t(\"CreateSamplePublicRoom\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }
   ],

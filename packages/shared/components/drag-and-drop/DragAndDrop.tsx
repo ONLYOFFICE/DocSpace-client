@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import React from "react";
 import classNames from "classnames";
+import equal from "fast-deep-equal";
 import { useDropzone } from "react-dropzone";
 
 import getFilesFromEvent from "../../utils/get-files-from-event";
@@ -40,7 +40,7 @@ const DragAndDrop = (props: DragAndDropProps) => {
     children,
     dragging,
     className,
-    forwardedRef,
+    isDragDisabled,
 
     onDragOver,
     onDrop,
@@ -74,6 +74,8 @@ const DragAndDrop = (props: DragAndDropProps) => {
   const rootClassName = classNames(styles.dragAndDrop, classNameProp, {
     [styles.dragging]: dragging,
     [styles.dragAccept]: isDragActive,
+    [styles.dragDisabled]: isDragDisabled,
+
     "drag-and-drop": true,
   });
 
@@ -84,4 +86,4 @@ const DragAndDrop = (props: DragAndDropProps) => {
   );
 };
 
-export default DragAndDrop;
+export default React.memo(DragAndDrop, equal);

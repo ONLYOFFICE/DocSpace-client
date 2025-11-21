@@ -3,7 +3,7 @@
   "content": "Uploading items",
   "content_en_sha1_hash": "4a40257e25730f672c9e3cabe78c8ba98a8af632",
   "created_at": "2025-05-19T21:30:55.102Z",
-  "updated_at": "2025-05-24T10:29:58.359Z",
+  "updated_at": "2025-08-12T19:46:25.979Z",
   "comment": {
     "text": "Uploading objects is displayed on a sub-header. It appears below a button in the \"Hotkeys\" panel. This text should be translated to indicate the action being performed when uploading items, such as files or other data.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/index.js",
-      "line_number": 112,
+      "line_number": 111,
       "context": "textStyles={textStyles}\n keyTextStyles={keyTextStyles}\n AltKey={AltKey}\n />\n <Heading className=\"hotkeys_sub-header\">\n {t(\"HotkeysUploadingObjects\")}\n </Heading>\n <UploadBlock\n t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}",
       "module": "/packages/client"
     }

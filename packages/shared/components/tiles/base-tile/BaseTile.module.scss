@@ -32,10 +32,10 @@
   cursor: pointer;
   max-height: 104px;
 
-  box-sizing: content-box; 
+  box-sizing: content-box;
 
   background: var(--tile-background-color);
-  border: var(--tile-border);
+  border: var(--tile-room-border);
   border-radius: var(--tile-room-border-radius);
 
   display: flex;

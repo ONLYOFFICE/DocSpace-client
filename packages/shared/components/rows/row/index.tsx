@@ -26,9 +26,10 @@
 
 "use client";
 
+import equal from "fast-deep-equal";
+import classNames from "classnames";
 import React, { useRef } from "react";
 import { isMobile } from "react-device-detect"; // TODO: isDesktop=true for IOS(Firefox & Safari)
-import classNames from "classnames";
 
 import { VDRIndexingAction } from "../../../enums";
 import { isMobile as isMobileUtils } from "../../../utils/device";
@@ -46,7 +47,7 @@ import { RowProps } from "./Row.types";
 import { hasOwnProperty } from "../../../utils/object";
 import styles from "./Row.module.scss";
 
-const Row = (props: RowProps) => {
+const Row = React.memo((props: RowProps) => {
   const {
     checked,
     children,
@@ -73,6 +74,7 @@ const Row = (props: RowProps) => {
     badgeUrl,
     isDisabled,
     isIndexEditingMode,
+    dataTestId,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -164,6 +166,7 @@ const Row = (props: RowProps) => {
       onContextMenu={onContextMenu}
       className={classNames(
         styles.row,
+        checked ? "checked" : "",
         {
           [styles.withoutBorder]: withoutBorder,
           [styles.modern]: mode === "modern",
@@ -172,7 +175,7 @@ const Row = (props: RowProps) => {
         },
         className,
       )}
-      data-testid="row"
+      data-testid={dataTestId ?? "row"}
     >
       {inProgress ? (
         <Loader
@@ -296,6 +299,6 @@ const Row = (props: RowProps) => {
       </div>
     </div>
   );
-};
+}, equal);
 
 export { Row };

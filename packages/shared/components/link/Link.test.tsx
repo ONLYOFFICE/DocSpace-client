@@ -25,22 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
+import { screen, render } from "@testing-library/react";
 
 import { Link, LinkType } from ".";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
-
-// Mock CSS modules
-jest.mock("./Link.module.scss", () => ({
-  link: "link",
-  semitransparent: "semitransparent",
-  isHovered: "isHovered",
-  textOverflow: "textOverflow",
-  noHover: "noHover",
-  enableUserSelect: "enableUserSelect",
-  page: "page",
+// Mock CSS modules - return default export for CSS Modules
+vi.mock("./Link.module.scss", () => ({
+  default: {
+    link: "link",
+    semitransparent: "semitransparent",
+    isHovered: "isHovered",
+    textOverflow: "textOverflow",
+    noHover: "noHover",
+    enableUserSelect: "enableUserSelect",
+    page: "page",
+  },
 }));
 
 const baseProps = {
@@ -51,12 +51,12 @@ const baseProps = {
 
 describe("<Link />", () => {
   it("renders without error", () => {
-    renderWithTheme(<Link {...baseProps}>link</Link>);
+    render(<Link {...baseProps}>link</Link>);
     expect(screen.queryByTestId("link")).toBeInTheDocument();
   });
 
   it("renders with custom data-testid", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} dataTestId="custom-link">
         link
       </Link>,
@@ -65,7 +65,7 @@ describe("<Link />", () => {
   });
 
   it("renders with isBold prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} isBold>
         link
       </Link>,
@@ -75,67 +75,67 @@ describe("<Link />", () => {
   });
 
   it("renders with isHovered prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} isHovered>
         link
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("isHovered");
+    expect(link.className).toContain("isHovered");
   });
 
   it("renders with isSemitransparent prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} isSemitransparent>
         link
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("semitransparent");
+    expect(link.className).toContain("semitransparent");
   });
 
   it("renders with isTextOverflow prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} isTextOverflow>
         link
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("textOverflow");
+    expect(link.className).toContain("textOverflow");
   });
 
   it("renders with noHover prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} noHover>
         link
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("noHover");
+    expect(link.className).toContain("noHover");
   });
 
   it("renders with enableUserSelect prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} enableUserSelect>
         link
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("enableUserSelect");
+    expect(link.className).toContain("enableUserSelect");
   });
 
   it("renders with type prop action", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} type={LinkType.action}>
         link
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).not.toHaveClass("page");
+    expect(link.className).not.toContain("page");
   });
 
   it("renders with custom fontSize and lineHeight", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} fontSize="16px" lineHeight="24px">
         link
       </Link>,
@@ -145,7 +145,7 @@ describe("<Link />", () => {
   });
 
   it("accepts id", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} id="testId">
         link
       </Link>,
@@ -156,7 +156,7 @@ describe("<Link />", () => {
 
   it("accepts className", () => {
     const className = "custom-class";
-    renderWithTheme(
+    render(
       <Link {...baseProps} className={className}>
         link
       </Link>,
@@ -166,7 +166,7 @@ describe("<Link />", () => {
   });
 
   it("sets aria-label", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} ariaLabel="Custom label">
         link
       </Link>,
@@ -176,13 +176,13 @@ describe("<Link />", () => {
   });
 
   it("uses children as aria-label when ariaLabel prop is not provided", () => {
-    renderWithTheme(<Link {...baseProps}>Custom text</Link>);
+    render(<Link {...baseProps}>Custom text</Link>);
     const link = screen.getByTestId("link");
     expect(link).toHaveAttribute("aria-label", "Custom text");
   });
 
   it("renders with custom rel attribute", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} rel="noopener">
         link
       </Link>,
@@ -192,7 +192,7 @@ describe("<Link />", () => {
   });
 
   it("renders with custom tabIndex", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} tabIndex={-1}>
         link
       </Link>,

@@ -3,7 +3,7 @@
   "content": "To activate the renewal you already bought, upload it below and click the Activate button.",
   "content_en_sha1_hash": "44652f8b7615a6229d376a59d8e429fdd28a95ca",
   "created_at": "2025-05-26T07:15:40.090Z",
-  "updated_at": "2025-05-26T08:08:42.699Z",
+  "updated_at": "2025-08-04T07:30:01.740Z",
   "comment": {
     "text": "This translation key is used to describe the action of activating a renewal purchase. It appears as a button or link in a UI component, instructing users to upload their existing renewal and click an \"Activate\" button to complete the process.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/LicenseContainer.tsx",
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/LicenseContainer.tsx",
       "line_number": 105,
-      "context": "<Text\n fontWeight={400}\n fontSize=\"14px\"\n className=\"payments_license-description\"\n >\n {!isTrial ? t(\"ActivateRenewalDescr\") : t(\"ActivateUploadDescr\")}\n </Text>\n <FileInput\n className=\"payments_file-input\"\n scale\n size={InputSize.base}",
+      "context": "<Text\n fontWeight={400}\n fontSize=\"14px\"\n className={styles.paymentsLicenseDescription}\n >\n {!isTrial ? t(\"ActivateRenewalDescr\") : t(\"ActivateUploadDescr\")}\n </Text>\n <FileInput\n className={styles.paymentsFileInput}\n scale\n size={InputSize.base}",
       "module": "/packages/shared"
     }
   ],

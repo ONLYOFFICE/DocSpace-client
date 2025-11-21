@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { InputSize, InputType } from "../text-input";
 import { PasswordInput } from ".";
@@ -69,8 +67,8 @@ const baseProps = {
   passwordSettings: basePasswordSettings,
   isDisabled: false,
   placeholder: "password",
-  onChange: jest.fn(),
-  onValidateInput: jest.fn(),
+  onChange: vi.fn(),
+  onValidateInput: vi.fn(),
 };
 
 describe("<PasswordInput />", () => {
@@ -91,7 +89,7 @@ describe("<PasswordInput />", () => {
   });
 
   it("handles input value changes", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const user = userEvent.setup();
     render(<PasswordInput {...baseProps} onChange={onChange} />);
 
@@ -117,7 +115,7 @@ describe("<PasswordInput />", () => {
     expect(input).toHaveAttribute("type", "password");
   });
 
-  it("shows tooltip with password requirements on focus", async () => {
+  it("shows tooltip with password requirements", async () => {
     const user = userEvent.setup();
     render(
       <PasswordInput
@@ -133,7 +131,7 @@ describe("<PasswordInput />", () => {
     );
 
     const input = screen.getByTestId("password-input").querySelector("input");
-    await user.click(input!);
+    await user.type(input!, "testpassword");
 
     expect(screen.getByText("Password must contain:")).toBeInTheDocument();
     expect(screen.getByText("from 6 to 30 characters")).toBeInTheDocument();
@@ -152,7 +150,7 @@ describe("<PasswordInput />", () => {
   });
 
   it("validates password requirements", async () => {
-    const onValidateInput = jest.fn();
+    const onValidateInput = vi.fn();
     const user = userEvent.setup();
     render(
       <PasswordInput
@@ -175,7 +173,7 @@ describe("<PasswordInput />", () => {
   });
 
   it("handles blur event correctly", async () => {
-    const onBlur = jest.fn();
+    const onBlur = vi.fn();
     const user = userEvent.setup();
     render(<PasswordInput {...baseProps} onBlur={onBlur} />);
 
@@ -215,7 +213,7 @@ describe("<PasswordInput />", () => {
 
   // Additional test coverage
   it("handles keyDown events", async () => {
-    const onKeyDown = jest.fn();
+    const onKeyDown = vi.fn();
     const user = userEvent.setup();
     render(<PasswordInput {...baseProps} onKeyDown={onKeyDown} />);
 
@@ -302,7 +300,7 @@ describe("<PasswordInput />", () => {
 
   describe("Password Validation", () => {
     it("validates minimum length requirement", async () => {
-      const onValidateInput = jest.fn();
+      const onValidateInput = vi.fn();
       const user = userEvent.setup();
       render(
         <PasswordInput
@@ -331,7 +329,7 @@ describe("<PasswordInput />", () => {
     });
 
     it("validates special characters requirement", async () => {
-      const onValidateInput = jest.fn();
+      const onValidateInput = vi.fn();
       const user = userEvent.setup();
       render(
         <PasswordInput
@@ -363,7 +361,7 @@ describe("<PasswordInput />", () => {
 
   describe("Input Behavior", () => {
     it("handles paste event correctly", async () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       const user = userEvent.setup();
       render(<PasswordInput {...baseProps} onChange={onChange} />);
 

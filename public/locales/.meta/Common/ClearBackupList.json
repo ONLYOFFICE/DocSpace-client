@@ -3,7 +3,7 @@
   "content": "Delete all backups",
   "content_en_sha1_hash": "5cabdc609272c7a869a9ffb8c11071fd32fff07a",
   "created_at": "2025-05-26T07:15:41.237Z",
-  "updated_at": "2025-05-26T08:06:33.414Z",
+  "updated_at": "2025-08-11T09:02:44.098Z",
   "comment": {
     "text": "This translation key is used for a button that deletes all backups in an application. When clicked, it triggers a cleanup of backup data, making this text appear on a restore and backup dialog box.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 235,
-      "context": "id=\"delete-backups\"\n onClick={onCleanBackupList}\n fontWeight={600}\n style={{ textDecoration: \"underline dotted\" }}\n >\n {t(\"Common:ClearBackupList\")}\n </Link>\n </div>\n ) : null}\n \n <div className=\"backup-restore_dialog-scroll-body\">",
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
+      "line_number": 255,
+      "context": "onClick={onCleanBackupList}\n fontWeight={600}\n style={{ textDecoration: \"underline dotted\" }}\n dataTestId=\"delete_backups_link\"\n >\n {t(\"Common:ClearBackupList\")}\n </Link>\n </div>\n ) : null}\n \n <div",
       "module": "/packages/shared"
     }
   ],

@@ -111,7 +111,6 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
           fontWeight="700"
           fontSize="16px"
           lineHeight="22px"
-          truncate
         >
           {t("WelcomeFillingForm")}
         </Text>

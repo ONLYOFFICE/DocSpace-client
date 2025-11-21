@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
@@ -162,3 +161,16 @@ export const getAvailablePortals = async (data: {
 
   return res.tenants;
 };
+
+export async function createLicenseQuotaReport() {
+  const res = (await request({
+    baseURL,
+    method: "post",
+    url: "/portal/licensequota/report",
+    params: {
+      useCache: false,
+    },
+  })) as { result: string };
+
+  return res.result;
+}

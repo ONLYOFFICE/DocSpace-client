@@ -83,6 +83,7 @@ const Item = ({
         title={title}
         className={styles.text}
         data-root={isRoot ? "true" : "false"}
+        noSelect
       >
         {title}
       </Text>

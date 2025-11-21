@@ -3,7 +3,7 @@
   "content": "Activity history will be shown here",
   "content_en_sha1_hash": "4b5dabb38bf7263ad4beff9d5a35d1a36b679bf6",
   "created_at": "2025-05-19T21:30:54.876Z",
-  "updated_at": "2025-05-24T10:12:04.322Z",
+  "updated_at": "2025-08-04T07:30:01.205Z",
   "comment": {
     "text": "The \"HistoryEmptyScreenText\" translation key displays a message indicating that activity history will be shown on an empty screen in the app's InfoPanel. It appears as a centered text element. Translators should provide a phrase that conveys the idea of displaying historical data when no items are present, such as \"Activity history will be shown here\".",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/NoHistory.js",
-      "line_number": 47,
-      "context": "<StyledNoItemContainer className=\"info-panel_gallery-empty-screen\">\n <div className=\"no-thumbnail-img-wrapper\">\n <img src={imageSrc} alt=\"No History\" />\n </div>\n <Text className=\"no-history-text\" textAlign=\"center\">\n {t(\"HistoryEmptyScreenText\")}\n </Text>\n </StyledNoItemContainer>\n );\n };",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoHistory.tsx",
+      "line_number": 55,
+      "context": ">\n <div className=\"no-thumbnail-img-wrapper\">\n <img src={imageSrc} alt=\"No History\" />\n </div>\n <Text className=\"no-history-text\" textAlign=\"center\">\n {t(\"HistoryEmptyScreenText\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

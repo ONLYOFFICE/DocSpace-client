@@ -24,22 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation } from "react-i18next";
+import moment from "moment";
+
 import { Text } from "@docspace/shared/components/text";
-import { classNames } from "@docspace/shared/utils";
-import { useFeedTranslation } from "../useFeedTranslation";
-import { getDateTime } from "../../../helpers/HistoryHelper";
+import { classNames, getCookie } from "@docspace/shared/utils";
+import {
+  TFeedAction,
+  TFeedData,
+  RoomMember,
+} from "@docspace/shared/api/rooms/types";
+import { LANGUAGE } from "@docspace/shared/constants";
+
+import { useFeedTranslation } from "../hooks/useFeedTranslation";
+
 import { getFeedInfo } from "../FeedInfo";
 import HistoryUserList from "./UserList";
 import HistoryGroupList from "./GroupList";
 import HistoryRoomExternalLink from "./RoomExternalLink";
 import HistoryMainTextFolderInfo from "./MainTextFolderInfo";
 
-import { HistoryBlockContentProps } from "./HistoryBlockContent.types";
+const getDateTime = (date: Date | string) => {
+  moment.locale(getCookie(LANGUAGE));
 
-const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
+  const given = moment(date);
+  return given.format("LT");
+};
+
+const HistoryTitleBlock = ({
+  feed,
+}: {
+  feed: TFeedAction<TFeedData | RoomMember>;
+}) => {
+  const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
+
   const { actionType, targetType } = getFeedInfo(feed);
 
   const hasRelatedItems = feed.related.length > 0;
+
+  const { getFeedTranslation } = useFeedTranslation(feed, hasRelatedItems);
 
   const isDisplayFolderInfo =
     ((targetType === "file" || targetType === "folder") &&
@@ -53,13 +76,13 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
       })}
     >
       {targetType === "user" && actionType === "update" ? (
-        <HistoryUserList feed={feed} />
+        <HistoryUserList feed={feed as TFeedAction<RoomMember>} />
       ) : null}
 
       {targetType === "group" && actionType === "update" ? (
         <>
           {t("Common:Group")}
-          <HistoryGroupList feed={feed} />
+          <HistoryGroupList feed={feed as TFeedAction<TFeedData>} />
         </>
       ) : null}
 
@@ -74,7 +97,7 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
               (targetType === "roomExternalLink" && actionType === "create"),
           })}
         >
-          {useFeedTranslation(t, feed, hasRelatedItems)}
+          {getFeedTranslation()}
         </Text>
         {isDisplayFolderInfo ? (
           <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
@@ -82,16 +105,25 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
         {feed.related.length === 0 &&
         targetType === "group" &&
         actionType !== "update" ? (
-          <HistoryGroupList feed={feed} withWrapping />
+          <HistoryGroupList
+            feed={feed as TFeedAction<TFeedData>}
+            withWrapping
+          />
         ) : null}
 
         {feed.related.length === 0 &&
         targetType === "user" &&
         actionType !== "update" ? (
-          <HistoryUserList feed={feed} withWrapping />
+          <HistoryUserList
+            feed={feed as TFeedAction<RoomMember>}
+            withWrapping
+          />
         ) : null}
         {targetType === "roomExternalLink" && actionType === "create" ? (
-          <HistoryRoomExternalLink feedData={feed.data} withWrapping />
+          <HistoryRoomExternalLink
+            feedData={feed.data as TFeedData}
+            withWrapping
+          />
         ) : null}
       </div>
 

@@ -1,0 +1,28 @@
+{
+  "key_path": "EditUserInfo",
+  "content": "<1>Already editing:</1> {{editingCount}}",
+  "content_en_sha1_hash": "5d6d62d1f126698d0a3ed8b4add5a87a18e1df35",
+  "created_at": "2025-09-19T15:39:07.627Z",
+  "updated_at": "2025-09-19T15:43:32.860Z",
+  "comment": {
+    "text": "This translation key displays a message indicating how many users are currently being edited. It appears within a User Statistics Dialog, specifically informing the user about the number of users in the editing process. Translators should ensure the wording accurately conveys the ongoing editing status.",
+    "is_auto": true,
+    "updated_at": "2025-09-19T15:43:32.860Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/UserStatisticsDialog/sub-components/UserStatisticsInfo.tsx",
+      "line_number": 82,
+      "context": "components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />\n </Text>\n <Text lineHeight=\"20px\">\n <Trans\n i18nKey=\"EditUserInfo\"\n t={t}\n values={{\n editingCount: totalUsers,\n count: portalUsers,\n externalCount: externalUsers,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

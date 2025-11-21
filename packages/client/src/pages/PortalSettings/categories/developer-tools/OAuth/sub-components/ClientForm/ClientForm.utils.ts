@@ -30,7 +30,7 @@ export function isValidUrl(url: string, withoutParams?: boolean) {
     if (withoutParams && (newUrl.search || newUrl.hash)) return false;
     if (newUrl) return true;
     return false;
-  } catch (err: unknown) {
+  } catch {
     return false;
   }
 }

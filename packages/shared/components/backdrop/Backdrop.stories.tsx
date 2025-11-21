@@ -168,8 +168,10 @@ const Template = (args: BackdropProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisible = () => setIsVisible(!isVisible);
 
+  const isDarkTheme = document.body.classList.contains("dark");
+
   return (
-    <>
+    <div style={{ height: "200px" }}>
       <Button
         label="Toggle Backdrop"
         primary
@@ -179,12 +181,18 @@ const Template = (args: BackdropProps) => {
       <Backdrop {...args} visible={isVisible} onClick={toggleVisible} />
       {isVisible ? (
         <div
+          onClick={toggleVisible}
           style={{
             position: "fixed",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            color: "#333",
+            color: isDarkTheme ? "#fff" : "#333",
+            backgroundColor: isDarkTheme
+              ? "rgba(32, 32, 32, 0.8)"
+              : "rgba(255, 255, 255, 0.8)",
+            padding: "10px 16px",
+            borderRadius: "6px",
             fontSize: "16px",
             zIndex: 204,
           }}
@@ -192,7 +200,7 @@ const Template = (args: BackdropProps) => {
           Click anywhere to close
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 
@@ -236,8 +244,10 @@ const ModalTemplate = (args: BackdropProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisible = () => setIsVisible(!isVisible);
 
+  const isDarkTheme = document.body.classList.contains("dark");
+
   return (
-    <>
+    <div style={{ height: "300px" }}>
       <Button
         label="Show Modal"
         primary
@@ -252,23 +262,31 @@ const ModalTemplate = (args: BackdropProps) => {
       />
       {isVisible ? (
         <div
+          onClick={toggleVisible}
           style={{
             position: "fixed",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            background: "white",
+            background: isDarkTheme ? "#333" : "white",
+            color: isDarkTheme ? "#fff" : "#333",
             padding: "2rem",
             borderRadius: "8px",
             zIndex: 204,
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+            boxShadow: isDarkTheme
+              ? "0 4px 12px rgba(0, 0, 0, 0.5)"
+              : "0 4px 12px rgba(0, 0, 0, 0.15)",
           }}
         >
-          <h2>Modal Content</h2>
-          <p>Click outside to close</p>
+          <h2 style={{ color: isDarkTheme ? "#fff" : "#333" }}>
+            Modal Content
+          </h2>
+          <p style={{ color: isDarkTheme ? "#ccc" : "#666" }}>
+            Click outside to close
+          </p>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 

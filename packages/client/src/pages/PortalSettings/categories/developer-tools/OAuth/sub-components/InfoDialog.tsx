@@ -135,13 +135,7 @@ const InfoDialog = ({
                 src={client?.logo}
               />
 
-              <Text
-                fontSize="16px"
-                lineHeight="22px"
-                fontWeight="700"
-                noSelect
-                truncate
-              >
+              <Text fontSize="16px" lineHeight="22px" fontWeight="700" truncate>
                 {client?.name}
               </Text>
             </div>
@@ -149,6 +143,7 @@ const InfoDialog = ({
             <ContextMenuButton
               displayType={ContextMenuButtonDisplayType.dropdown}
               getData={getContextOptions}
+              testId="client_info_context_menu_button"
             />
           </div>
           {!isProfile ? (
@@ -158,7 +153,6 @@ const InfoDialog = ({
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("Creator")}
@@ -174,7 +168,6 @@ const InfoDialog = ({
                   fontSize="14px"
                   lineHeight="16px"
                   fontWeight="600"
-                  noSelect
                   truncate
                 >
                   {client?.creatorDisplayName}
@@ -189,7 +182,6 @@ const InfoDialog = ({
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("Common:Description")}
@@ -201,7 +193,6 @@ const InfoDialog = ({
                 fontSize="13px"
                 lineHeight="20px"
                 fontWeight="400"
-                noSelect
               >
                 {client?.description}
               </Text>
@@ -214,6 +205,7 @@ const InfoDialog = ({
                   isHovered
                   onClick={() => setShowDescription((val) => !val)}
                   type={LinkType.action}
+                  dataTestId="client_info_description_link"
                 >
                   {showDescription ? "Hide" : "Show more"}
                 </Link>
@@ -225,7 +217,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="16px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("Common:Website")}
@@ -238,6 +229,7 @@ const InfoDialog = ({
             href={client?.websiteUrl}
             type={LinkType.action}
             target={LinkTarget.blank}
+            dataTestId="client_info_website_link"
           >
             {client?.websiteUrl}
           </Link>
@@ -246,7 +238,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="16px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("Access")}
@@ -261,7 +252,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="16px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("Scopes")}
@@ -283,19 +273,12 @@ const InfoDialog = ({
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("AccessGranted")}
               </Text>
 
-              <Text
-                fontSize="13px"
-                lineHeight="20px"
-                fontWeight="600"
-                noSelect
-                truncate
-              >
+              <Text fontSize="13px" lineHeight="20px" fontWeight="600" truncate>
                 {modifiedDate}
               </Text>
             </>
@@ -305,7 +288,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="20px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("SupportAndLegalInfo")}
@@ -315,7 +297,6 @@ const InfoDialog = ({
             fontSize="13px"
             lineHeight="15px"
             fontWeight="600"
-            noSelect
             truncate
           >
             <Link
@@ -326,6 +307,7 @@ const InfoDialog = ({
               href={client?.policyUrl}
               type={LinkType.action}
               target={LinkTarget.blank}
+              dataTestId="client_info_policy_link"
             >
               {t("PrivacyPolicy")}
             </Link>
@@ -339,6 +321,7 @@ const InfoDialog = ({
               href={client?.termsUrl}
               type={LinkType.action}
               target={LinkTarget.blank}
+              dataTestId="client_info_terms_link"
             >
               {t("TermsOfService")}
             </Link>
@@ -350,8 +333,8 @@ const InfoDialog = ({
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
+                dataTestId="client_info_last_modified"
               >
                 {t("LastModified")}
               </Text>
@@ -360,8 +343,8 @@ const InfoDialog = ({
                 fontSize="13px"
                 lineHeight="20px"
                 fontWeight="600"
-                noSelect
                 truncate
+                dataTestId="client_info_modified"
               >
                 {modifiedDate}
               </Text>

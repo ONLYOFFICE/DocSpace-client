@@ -6,8 +6,6 @@
   margin-inline-end: 10px;
   max-width: 23ch;
 
-  @include mixins.no-user-select;
-
   @include mixins.truncate;
 
   &.disabled {

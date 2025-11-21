@@ -25,32 +25,33 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { InputSize } from "../text-input";
 import { FileInput } from "./FileInput";
+import styles from "./FileInput.module.scss";
 
 // Mock images
-jest.mock(
+vi.mock(
   "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url",
   () => "test-file-stub",
 );
-jest.mock("PUBLIC_DIR/images/document.react.svg?url", () => "test-file-stub");
+vi.mock("PUBLIC_DIR/images/document.react.svg?url", () => "test-file-stub");
 
 // Mock react-i18next
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
 // Mock toastr
-jest.mock("../toast", () => ({
+vi.mock("../toast", () => ({
   toastr: {
-    error: jest.fn(),
+    error: vi.fn(),
   },
 }));
 
 describe("<FileInput />", () => {
-  const mockOnInput = jest.fn();
+  const mockOnInput = vi.fn();
   const defaultProps = {
     size: InputSize.base,
     onInput: mockOnInput,
@@ -58,7 +59,7 @@ describe("<FileInput />", () => {
 
   beforeEach(() => {
     mockOnInput.mockClear();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
@@ -93,7 +94,7 @@ describe("<FileInput />", () => {
     const fileInput = screen.getByTestId("file-input");
 
     // Check for disabled class
-    expect(fileInput).toHaveClass("disabled");
+    expect(fileInput).toHaveClass(styles.disabled);
 
     // Check that the TextInput is disabled
     const textInput = screen.getByRole("textbox");

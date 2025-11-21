@@ -3,7 +3,7 @@
   "content": "Icon",
   "content_en_sha1_hash": "716f63b96e0c263222949a3b8a00cdb4f46d3183",
   "created_at": "2025-05-19T21:30:56.808Z",
-  "updated_at": "2025-05-26T07:57:32.328Z",
+  "updated_at": "2025-08-11T09:02:43.880Z",
   "comment": {
     "text": "This translation key represents the label for an \"Icon\" component used in a room logo cover dialog. It is displayed as a color name and appears in a button element. The translation should be provided in a context that reflects the creation or editing of rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectIcon.tsx",
       "line_number": 150,
-      "context": "};\n \n return (\n <div>\n <div className=\"icon-container\">\n <div className=\"color-name\">{t(\"CreateEditRoomDialog:Icon\")}</div>\n <StyledWithoutIcon onClick={toggleWithoutIcon} isSelected={withoutIcon}>\n {t(\"WithoutIcon\")}\n </StyledWithoutIcon>\n </div>",
+      "context": "};\n \n return (\n <div>\n <div className=\"icon-container\">\n <div className=\"color-name\">{t(\"CreateEditRoomDialog:Icon\")}</div>\n <StyledWithoutIcon\n onClick={toggleWithoutIcon}\n isSelected={withoutIcon}\n data-testid=\"room_logo_cover_without_icon\"\n >",
       "module": "/packages/client"
     }
   ],

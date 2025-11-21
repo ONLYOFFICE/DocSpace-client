@@ -26,8 +26,9 @@
 
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-
 import { PreparationPortal } from ".";
+
+import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 import { restoreProgressHandler } from "../../__mocks__/handlers/portal/restoreProgress";
 
 const meta = {
@@ -56,6 +57,7 @@ const meta = {
     },
   },
   decorators: [
+    i18nextStoryDecorator,
     (Story) => (
       <div style={{ height: "800px", width: "100%", overflow: "hidden" }}>
         <Story />

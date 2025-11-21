@@ -3,7 +3,7 @@
   "content": "Your account has been successfully reactivated. In 10 seconds you will be redirected to the <1>portal</1>.",
   "content_en_sha1_hash": "195e32502a9fca30b006e6c21cb6247dacd2348c",
   "created_at": "2025-05-19T21:30:57.398Z",
-  "updated_at": "2025-06-30T12:20:31.658Z",
+  "updated_at": "2025-08-21T11:22:39.930Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that appears after account reactivation, guiding the user to the portal. It's displayed in the UI as part of a page continue dialog. The goal is to inform the user of their successful reactivation and redirect them to the portal within 10 seconds.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx",
       "line_number": 78,
-      "context": "window.location.href = \"/\";\n };\n \n return isReactivate ? (\n <Text>\n <Trans t={t} i18nKey=\"SuccessReactivate\" ns=\"Confirm\">\n Your account has been successfully reactivated. In 10 seconds you will\n be redirected to the\n <Link isHovered href=\"/\">\n portal\n </Link>",
+      "context": "window.location.href = \"/\";\n };\n \n return isReactivate ? (\n <Text>\n <Trans t={t} i18nKey=\"SuccessReactivate\" ns=\"Confirm\">\n Your account has been successfully reactivated. In 10 seconds you will\n be redirected to the\n <Link isHovered href=\"/\" dataTestId=\"redirect_portal_link\">\n portal\n </Link>",
       "module": "/packages/login"
     }
   ],

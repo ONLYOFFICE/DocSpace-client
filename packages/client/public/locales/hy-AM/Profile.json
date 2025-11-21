@@ -1,13 +1,13 @@
 {
   "ActiveSessions": "Ակտիվ սեսիաներ",
   "AutoDeleteTitle": "60 օրից բոլոր հին սեանսները ինքնաբերաբար կջնջվեն։",
-  "ChangeEmailSuccess": "Էլփոստը հաջողությամբ փոխվել է",
   "ChangePasswordAfterLoggingOut": "Դուրս գալուց հետո փոխեք գաղտնաբառը",
   "ConnectSocialNetworks": "Միացրեք ձեր սոցիալական ցանցերը",
   "DescriptionForSecurity": "Ավելի լավ անվտանգության համար դուք պետք է փոխեք ձեր գաղտնաբառը:",
   "DesktopTheme": "Համաժամեցրեք աշխատասեղանի խմբագրիչի կարգավորումների հետ",
   "DesktopThemeDescription": "Ավտոմատ կերպով անցում կատարեք բաց և մուգ թեմաների միջև՝ կախված աշխատասեղանի խմբագիրների ընթացիկ թեմայից:",
   "EditPhoto": "Խմբագրել լուսանկարը",
+  "EmailChangeSuccess": "Ձեր էլ. փոստը հաջողությամբ փոխվել է։",
   "EmailNotVerified": "Էլփոստը հաստատված չէ",
   "ErrorAccountAlreadyUse": "Կապված հաշիվն արդեն օգտագործվում է մեկ այլ օգտվողի կողմից",
   "FileManagement": "Ֆայլերի կառավարում",
@@ -18,6 +18,7 @@
   "LogoutDescription": "Նշում. Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
   "LogoutFrom": "Դուրս գալ {{platform}} {{browser}}-ից:",
   "MyProfile": "Իմ էջը",
+  "NotificationsChannels": "Ծանուցումների ալիքներ",
   "ProviderSuccessfullyConnected": "Մատակարարը հաջողությամբ միացավ",
   "ProviderSuccessfullyDisconnected": "Մատակարարը հաջողությամբ անջատվեց",
   "SendAgain": "Ուղարկել կրկին",
@@ -25,6 +26,10 @@
   "SuccessLogout": "Ակտիվ կապը դուրս է եկել՝ {{platform}}, {{browser}}",
   "SystemTheme": "Օգտագործեք համակարգի ոճը",
   "SystemThemeDescription": "Ավտոմատ կերպով անցեք բաց և մուգ ոճերի միջև, երբ ձեր համակարգը դա անում է:",
+  "TelegramAccount": "Telegram հաշիվ",
+  "TelegramAccountDescription": "Ձեր հաշիվը TelegramBot-ին միացնելու համար հետևեք գաղտնի հղմանը և սեղմեք «Միացնել Telegram» կոճակը։",
+  "TelegramAccountDisconnect": "Անջատել Telegram-ը",
+  "TelegramAccountDisconnectDescription": "Ձեր @{{username}} հաշիվը միացված է Telegram ծանուցումների համար։ Կարող եք անջատել այս հաշվից։ Այդ դեպքում այլևս ծանուցումներ չեք ստանա։",
   "TerminateAllSessions": "Դադարեցնել բոլոր սեանսները, բացի ընթացիկից",
   "TwoFactorDescription": "Ադմինիստրատորի կողմից բոլոր օգտատերերի համար միացվել է իսկորոշման նույնականացումը կոդ ստեղծող հավելվածի միջոցով:"
 }

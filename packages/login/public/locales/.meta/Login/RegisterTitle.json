@@ -3,7 +3,7 @@
   "content": "Registration request",
   "content_en_sha1_hash": "779bea698fc3797476f3fd58d392b75d7f321c09",
   "created_at": "2025-05-19T21:30:57.262Z",
-  "updated_at": "2025-06-30T12:20:31.681Z",
+  "updated_at": "2025-08-12T19:46:26.329Z",
   "comment": {
     "text": "Registration request title is displayed on a modal dialog header, used to introduce the registration process. It appears in the modal when the user opens the register modal dialog.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
       "line_number": 98,
-      "context": "displayType={ModalDialogType.modal}\n visible={visible}\n onClose={onRegisterModalClose}\n isLarge\n >\n <ModalDialog.Header>{t(\"RegisterTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <ModalDialogContainer>\n <Text key=\"text-body\" isBold={false} fontSize=\"13px\" noSelect>\n {getDomainsBlock()}\n {t(\"RegisterTextBodyAfterDomainsList\")}",
+      "context": "displayType={ModalDialogType.modal}\n visible={visible}\n onClose={onRegisterModalClose}\n isLarge\n >\n <ModalDialog.Header>{t(\"RegisterTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <ModalDialogContainer>\n <Text key=\"text-body\" isBold={false} fontSize=\"13px\">\n {getDomainsBlock()}\n {t(\"RegisterTextBodyAfterDomainsList\")}",
       "module": "/packages/login"
     }
   ],

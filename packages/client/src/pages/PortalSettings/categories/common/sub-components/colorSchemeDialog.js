@@ -157,6 +157,7 @@ const ColorSchemeDialog = (props) => {
             <div
               id="accent"
               className="modal-add-theme accent-box"
+              data-testid="color_scheme_dialog_accent"
               onClick={onClickColor}
             />
 
@@ -168,6 +169,7 @@ const ColorSchemeDialog = (props) => {
             <div
               id="buttons"
               className="modal-add-theme buttons-box"
+              data-testid="color_scheme_dialog_buttons"
               onClick={onClickColor}
             />
 
@@ -185,6 +187,7 @@ const ColorSchemeDialog = (props) => {
           scale
           onClick={onSaveColorSchemeDialog}
           isDisabled={!showSaveButtonDialog}
+          testId="color_scheme_dialog_save"
         />
         <Button
           className="cancel-button"
@@ -192,6 +195,7 @@ const ColorSchemeDialog = (props) => {
           size="normal"
           scale
           onClick={onClose}
+          testId="color_scheme_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

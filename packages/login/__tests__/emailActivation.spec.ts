@@ -40,8 +40,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -54,7 +54,7 @@ const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 test("email activation success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL(`${baseUrl}/login?confirmedEmail=**`, {
+  await page.waitForURL(`${baseUrl}/login`, {
     waitUntil: "load",
   });
 

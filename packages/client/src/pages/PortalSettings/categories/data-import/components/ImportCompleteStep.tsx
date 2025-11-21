@@ -121,7 +121,7 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
 
   useEffect(() => {
     try {
-      getMigrationStatus().then((res) =>
+      getMigrationStatus()?.then((res) =>
         setImportResult({
           succeedUsers: res?.parseResult.successedUsers || 0,
           failedUsers: res?.parseResult.failedUsers || 0,
@@ -159,6 +159,7 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
           label={t("Settings:SendInviteLetter")}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
+          dataTestId="send_invite_letter_checkbox"
         />
         <HelpButton
           place="right"
@@ -167,6 +168,7 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
           tooltipContent={
             <Text fontSize="12px">{t("Settings:InviteLetterTooltip")}</Text>
           }
+          dataTestId="invite_letter_help_button"
         />
       </Wrapper>
 
@@ -178,6 +180,8 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
         cancelButtonLabel={t("Settings:DownloadLog")}
         displaySettings
         showReminder
+        saveButtonDataTestId="finish_import_button"
+        cancelButtonDataTestId="download_log_button"
       />
     </>
   );

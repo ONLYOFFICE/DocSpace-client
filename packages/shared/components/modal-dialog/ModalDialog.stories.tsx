@@ -130,7 +130,6 @@ const Template = ({ ...args }: ModalDialogProps) => {
           {Array(blocksCount)
             .fill(null)
             .map((_, index) => (
-              // eslint-disable-next-line react/no-array-index-key
               <div key={index}>
                 <h3>Section 1</h3>
                 <p>

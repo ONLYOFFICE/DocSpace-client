@@ -75,26 +75,34 @@ This mapping supports the enhanced folder structure with the public/locales dire
 The easiest way to run the application locally is using the provided convenience scripts:
 
 **For Windows:**
+
 ```bash
 # From the translation-app directory
 run.translation-app.bat
 ```
 
 **For macOS/Linux:**
+
 ```bash
 # From the translation-app directory
 ./run.translation-app.sh
 ```
 
 These scripts will:
+
 1. Check for Node.js installation
 2. Install all necessary dependencies for backend and frontend
-3. Start both the backend and frontend servers
-4. Wait for the backend to fully initialize
-5. Automatically open your browser to the application
-6. Properly shut down all processes when you exit (Ctrl+C)
+3. Run important metadata generation scripts:
+   - `generate-metadata.js` - Creates metadata files for all translation keys
+   - `save-meta-keys-usage.js` - Updates usage information for translation keys
+   - `generate-auto-comments-metadata.js` - Generates AI-powered comments for keys
+4. Start both the backend and frontend servers
+5. Wait for the backend to fully initialize
+6. Automatically open your browser to the application
+7. Properly shut down all processes when you exit (Ctrl+C)
 
 Once running, you can access:
+
 - Frontend interface: http://localhost:3000
 - Backend API: http://localhost:3001
 
@@ -107,6 +115,7 @@ python build.docker.py
 ```
 
 This script will:
+
 1. Install all necessary dependencies for backend, frontend, and tests
 2. Configure environment variables automatically
 3. Build and start Docker containers for the application
@@ -268,3 +277,71 @@ frontend/
 - The base language (default: 'en') is used as the source for translations
 - Socket.IO is used for real-time updates during translation operations
 - Ollama provides AI translation capabilities with local language models
+
+## Utility Scripts
+
+The application includes several utility scripts in the `backend/src/scripts` directory that help manage translation metadata and quality:
+
+### generate-metadata.js
+
+A script that scans locales directories and generates metadata files for all translation keys, preserving existing metadata where available.
+
+```bash
+node src/scripts/generate-metadata.js
+```
+
+Features:
+
+- Creates `.meta` directories with metadata for each translation key
+- Preserves existing comments, usage data, and other metadata
+- Tracks content hashes to detect changes
+- Cleans up stale metadata files
+- Provides detailed statistics about processed keys
+
+### save-meta-keys-usage.js
+
+Scans the codebase to find where translation keys are used and updates the usage metadata.
+
+```bash
+node src/scripts/save-meta-keys-usage.js
+```
+
+Features:
+
+- Scans JavaScript/TypeScript files for translation key usage
+- Identifies file paths, line numbers, and code context
+- Updates metadata files with usage information
+- Supports multiple key formats (t(), i18nKey, etc.)
+- Handles workspace-specific translations
+
+### generate-auto-comments-metadata.js
+
+Generates automatic comments for translation keys using Ollama AI models to provide context for translators.
+
+```bash
+node src/scripts/generate-auto-comments-metadata.js
+```
+
+Features:
+
+- Uses Ollama to generate descriptive comments for translation keys
+- Analyzes key usage contexts to create meaningful descriptions
+- Only generates comments for keys without existing comments
+- Supports retry mechanisms for API failures
+- Works with configurable language models
+
+### verify-translations-spell-check.js
+
+Verifies translations against the English version using Ollama AI to identify spelling, grammar, and other issues.
+
+```bash
+node src/scripts/verify-translations-spell-check.js [languages]
+```
+
+Features:
+
+- Compares non-English translations with English originals
+- Uses AI to detect spelling errors, grammar issues, and mistranslations
+- Updates metadata with identified issues
+- Supports filtering by specific languages
+- Provides detailed verification statistics

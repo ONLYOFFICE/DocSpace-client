@@ -64,6 +64,7 @@ const DisplayBlock = ({
           className="embedding-panel_input"
           value={inputValue}
           onChange={onInputChange}
+          testId="embedding_panel_size_input"
         />
         <ComboBox
           size={ComboBoxSize.content}
@@ -74,6 +75,7 @@ const DisplayBlock = ({
           selectedOption={selectedOption}
           displaySelectedOption
           directionY="bottom"
+          dataTestId="embedding_panel_size_combobox"
         />
       </div>
     </div>

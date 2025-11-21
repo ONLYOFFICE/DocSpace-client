@@ -144,7 +144,7 @@ const Progress = ({
   );
 
   const pendingNode = (
-    <Text className="status status-pending" noSelect>
+    <Text className="status status-pending">
       {t("PeopleTranslations:PendingTitle")}...
     </Text>
   );
@@ -199,12 +199,10 @@ const Progress = ({
       <div className="progress-container">
         <div className="progress-section">
           {!noRooms ? (
-            <Text className="progress-section-text" noSelect>
-              {t("Common:Rooms")}
-            </Text>
+            <Text className="progress-section-text">{t("Common:Rooms")}</Text>
           ) : null}
           {noRoomFilesToMove ? null : (
-            <Text className="progress-section-text" noSelect>
+            <Text className="progress-section-text">
               {t("Common:Documents")}
             </Text>
           )}
@@ -236,7 +234,7 @@ const Progress = ({
         percent={isAbortTransfer ? percentAllReassignment : percent}
       />
 
-      <Text lineHeight="20px" className="description" noSelect>
+      <Text lineHeight="20px" className="description">
         {t("DataReassignmentDialog:ProcessComplete")}
       </Text>
     </StyledProgress>

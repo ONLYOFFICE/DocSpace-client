@@ -38,6 +38,7 @@ const MoveKeyModal: React.FC<MoveKeyModalProps> = ({
         fetchNamespaces(sourceProjectName);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, sourceProjectName, sourceNamespace]);
 
   // Fetch namespaces when project changes
@@ -45,6 +46,7 @@ const MoveKeyModal: React.FC<MoveKeyModalProps> = ({
     if (selectedProject) {
       fetchNamespaces(selectedProject);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedProject]);
 
   const fetchProjects = async () => {

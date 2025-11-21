@@ -3,7 +3,7 @@
   "content": "Save the file copy in the original format as well",
   "content_en_sha1_hash": "590aa54a4acb697b9b402769bb231a09e8ad806a",
   "created_at": "2025-05-19T21:30:55.182Z",
-  "updated_at": "2025-05-24T11:00:43.190Z",
+  "updated_at": "2025-08-11T18:11:59.295Z",
   "comment": {
     "text": "Save file copy in original format. This text is used as a confirmation message when a user decides to save a file copy that maintains its original formatting. It appears on a dialog box within the file management section of the profile settings page.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
-      "line_number": 73,
-      "context": "window.DocSpace.location.pathname.includes(\"portal-settings\");\n \n if (prefix) getData();\n }, []);\n \n const onChangeOriginalCopy = React.useCallback(() => {\n setStoreOriginal(!storeOriginalFiles, \"storeOriginalFiles\");\n }, [setStoreOriginal, storeOriginalFiles]);\n \n const onChangeDeleteConfirm = React.useCallback(() => {\n setConfirmDelete(!confirmDelete, \"confirmDelete\");",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 84,
+      "context": "hideConfirmCancelOperation,\n setHideConfirmCancelOperation,\n }: FileManagementProps) => {\n const { t } = useTranslation([\"FilesSettings\", \"Common\"]);\n \n const onChangeOriginalCopy = React.useCallback(() => {\n setStoreOriginal?.(!storeOriginalFiles, \"storeOriginalFiles\");\n }, [setStoreOriginal, storeOriginalFiles]);\n \n const onChangeDeleteConfirm = React.useCallback(() => {\n setConfirmDelete?.(!confirmDelete, \"confirmDelete\");",
       "module": "/packages/client"
     }
   ],

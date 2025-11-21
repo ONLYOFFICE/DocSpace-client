@@ -79,6 +79,7 @@ class ConsumerModalDialog extends React.Component {
           isHovered={false}
           target="_blank"
           href={this.thirdPartyServicesUrl()}
+          dataTestId="dialog_help_center_link"
         >
           Help Center
         </Link>
@@ -96,6 +97,7 @@ class ConsumerModalDialog extends React.Component {
             isHovered={false}
             target="_blank"
             href={feedbackAndSupportUrl}
+            dataTestId="dialog_support_team_link"
           >
             Support Team
           </Link>
@@ -178,7 +180,7 @@ class ConsumerModalDialog extends React.Component {
 
   mapTokenNameToState = () => {
     const { selectedConsumer } = this.props;
-    selectedConsumer.props.forEach((prop) => {
+    selectedConsumer.props?.forEach((prop) => {
       this.requiredRef.push(prop.name);
 
       this.setState({
@@ -191,38 +193,28 @@ class ConsumerModalDialog extends React.Component {
     const {
       selectedConsumer,
       portalSettingsUrl,
-      docuSignUrl,
       dropboxUrl,
       boxUrl,
-      mailRuUrl,
       oneDriveUrl,
       microsoftUrl,
       googleUrl,
       facebookUrl,
       linkedinUrl,
-      clickatellUrl,
-      smsclUrl,
       firebaseUrl,
       appleIDUrl,
       telegramUrl,
-      wordpressUrl,
       awsUrl,
       googleCloudUrl,
       rackspaceUrl,
-      selectelUrl,
-      yandexUrl,
-      vkUrl,
+      twitterHelpUrl,
+      wechatHelpUrl,
+      zoomHelpUrl,
     } = this.props;
     switch (selectedConsumer.name) {
-      case "docusign":
-      case "docuSign":
-        return docuSignUrl;
       case "dropbox":
         return dropboxUrl;
       case "box":
         return boxUrl;
-      case "mailru":
-        return mailRuUrl;
       case "skydrive":
         return oneDriveUrl;
       case "microsoft":
@@ -233,30 +225,24 @@ class ConsumerModalDialog extends React.Component {
         return facebookUrl;
       case "linkedin":
         return linkedinUrl;
-      case "clickatell":
-        return clickatellUrl;
-      case "smsc":
-        return smsclUrl;
       case "firebase":
         return firebaseUrl;
       case "appleID":
         return appleIDUrl;
       case "telegram":
         return telegramUrl;
-      case "wordpress":
-        return wordpressUrl;
+      case "twitter":
+        return twitterHelpUrl;
+      case "weixin":
+        return wechatHelpUrl;
+      case "zoom":
+        return zoomHelpUrl;
       case "s3":
         return awsUrl;
       case "googlecloud":
         return googleCloudUrl;
       case "rackspace":
         return rackspaceUrl;
-      case "selectel":
-        return selectelUrl;
-      case "yandex":
-        return yandexUrl;
-      case "vk":
-        return vkUrl;
       default:
         return portalSettingsUrl;
     }
@@ -291,6 +277,7 @@ class ConsumerModalDialog extends React.Component {
               isDisabled={isLoading}
               onChange={onChangeHandler}
               maxLength={maxLength[item.name] ?? defaultMaxLength}
+              testId={`${item.name}_input`}
             />
           </div>
         </div>
@@ -321,11 +308,7 @@ class ConsumerModalDialog extends React.Component {
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>
           <div style={{ padding: "16px 0 16px" }}>{consumerInstruction}</div>
-          <>
-            {selectedConsumer.props.map((prop, i) =>
-              this.inputsRender(prop, i),
-            )}
-          </>
+          {selectedConsumer.props?.map((prop, i) => this.inputsRender(prop, i))}
           {description}
         </ModalDialog.Body>
         <ModalDialog.Footer>
@@ -338,6 +321,7 @@ class ConsumerModalDialog extends React.Component {
             isDisabled={isLoading || isDisabled}
             scale
             onClick={updateConsumerValues}
+            testId="consumer_dialog_enable_button"
           />
           <Button
             size="normal"
@@ -347,6 +331,7 @@ class ConsumerModalDialog extends React.Component {
             isLoading={isLoading}
             isDisabled={isLoading}
             onClick={onModalClose}
+            testId="consumer_dialog_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>
@@ -370,27 +355,22 @@ export default inject(({ setup, settingsStore }) => {
     theme,
     feedbackAndSupportUrl,
     portalSettingsUrl,
-    docuSignUrl,
     dropboxUrl,
     boxUrl,
-    mailRuUrl,
     oneDriveUrl,
     microsoftUrl,
     googleUrl,
     facebookUrl,
     linkedinUrl,
-    clickatellUrl,
-    smsclUrl,
     firebaseUrl,
     appleIDUrl,
     telegramUrl,
-    wordpressUrl,
     awsUrl,
     googleCloudUrl,
     rackspaceUrl,
-    selectelUrl,
-    yandexUrl,
-    vkUrl,
+    twitterHelpUrl,
+    wechatHelpUrl,
+    zoomHelpUrl,
   } = settingsStore;
   const { integration } = setup;
   const { selectedConsumer } = integration;
@@ -400,26 +380,21 @@ export default inject(({ setup, settingsStore }) => {
     selectedConsumer,
     feedbackAndSupportUrl,
     portalSettingsUrl,
-    docuSignUrl,
     dropboxUrl,
     boxUrl,
-    mailRuUrl,
     oneDriveUrl,
     microsoftUrl,
     googleUrl,
     facebookUrl,
     linkedinUrl,
-    clickatellUrl,
-    smsclUrl,
     firebaseUrl,
     appleIDUrl,
     telegramUrl,
-    wordpressUrl,
     awsUrl,
     googleCloudUrl,
     rackspaceUrl,
-    selectelUrl,
-    yandexUrl,
-    vkUrl,
+    twitterHelpUrl,
+    wechatHelpUrl,
+    zoomHelpUrl,
   };
 })(observer(ConsumerModalDialog));

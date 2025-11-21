@@ -1,0 +1,28 @@
+{
+  "key_path": "HotkeysDisablesSelectionArea",
+  "content": "Disable the selection area",
+  "content_en_sha1_hash": "457c279db83d4e1a50ca11970ff683688cc1d7b6",
+  "created_at": "2025-08-12T19:46:16.154Z",
+  "updated_at": "2025-08-12T19:51:18.266Z",
+  "comment": {
+    "text": "This text describes the hotkeys used to disable the selection area. It appears in the Hotkeys Panel, specifically within the section related to selection area controls, and informs the user which keys will deactivate the selection.",
+    "is_auto": true,
+    "updated_at": "2025-08-12T19:51:18.266Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
+      "line_number": 104,
+      "context": "<Text {...keyTextStyles}>Shift + n {t(\"Common:Or\")} Esc</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysDisablesSelectionArea\")}</Text>\n <Text {...keyTextStyles}>\n {CtrlKey} + {AltKey}\n </Text>\n </>\n </Row>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -40,7 +40,7 @@ const MainInfoComponent = (props) => {
 
   return (
     <StyledMainInfo>
-      <Text fontSize="14px" fontWeight={400}>
+      <Text fontSize="14px" fontWeight={400} dataTestId="portal_created_date">
         {t("PortalCreatedDate", { date: creationDate })}
       </Text>
       <Text fontSize="14px" fontWeight={400}>

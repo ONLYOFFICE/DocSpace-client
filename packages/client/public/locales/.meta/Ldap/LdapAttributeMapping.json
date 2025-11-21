@@ -3,7 +3,7 @@
   "content": "Attribute mapping",
   "content_en_sha1_hash": "27eab1836ffd4c37244c32f6e2d3186e58553f97",
   "created_at": "2025-05-19T21:30:54.168Z",
-  "updated_at": "2025-05-24T08:41:48.278Z",
+  "updated_at": "2025-08-11T18:11:59.236Z",
   "comment": {
     "text": "The \"LdapAttributeMapping\" translation key refers to the label for an attribute mapping component in a LDAP integration settings page. It is used to display a descriptive title for this setting, likely appearing as a header or section title within a dialog or settings panel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
       "line_number": 123,
-      "context": "return (\n <>\n <div className=\"ldap_attribute-mapping-text\">\n <Text fontWeight={600} fontSize=\"14px\">\n {t(\"LdapAttributeMapping\")}\n </Text>\n <HelpButton tooltipContent={t(\"LdapAdvancedSettingsTooltip\")} />\n </div>\n <div className=\"ldap_attribute-mapping\">\n <FieldContainer",
+      "context": "return (\n <>\n <div className=\"ldap_attribute-mapping-text\">\n <Text fontWeight={600} fontSize=\"14px\">\n {t(\"LdapAttributeMapping\")}\n </Text>\n <HelpButton\n dataTestId=\"attribute_mapping_help_button\"\n tooltipContent={t(\"LdapAdvancedSettingsTooltip\")}\n />",
       "module": "/packages/client"
     }
   ],

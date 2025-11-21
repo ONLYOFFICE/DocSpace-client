@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/shared/components/button";
-import { useState, useEffect, useTransition, Suspense } from "react";
+import { useState } from "react";
 
 import { inject, observer } from "mobx-react";
 
@@ -78,19 +78,18 @@ const WebhookInfoWrapper = styled.div`
 
 const Webhooks = (props) => {
   const {
-    loadWebhooks,
     addWebhook,
     isWebhooksEmpty,
     currentWebhook,
     editWebhook,
     deleteWebhook,
     errorWebhooks,
+
+    isLoadedArticleBody,
+    isLoadedSectionHeader,
   } = props;
 
-  const { t, ready } = useTranslation(["Webhooks", "Common"]);
-
-  const [, startTranslation] = useTransition();
-  const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation(["Webhooks", "Common"]);
 
   setDocumentTitle(t("Webhooks"));
 
@@ -118,93 +117,78 @@ const Webhooks = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (ready) {
-      setIsLoading(true);
-      startTranslation(async () => {
-        try {
-          await loadWebhooks();
-        } finally {
-          setIsLoading(false);
-        }
-      });
-    }
-  }, [ready]);
+  isLoadedArticleBody && isLoadedSectionHeader ? (
+    <WebhookConfigsLoader />
+  ) : null;
 
   return (
-    <Suspense fallback={<WebhookConfigsLoader />}>
-      <MainWrapper>
-        <WebhookInfoWrapper withEmptyScreen={errorWebhooks}>
-          <WebhookInfo />
-        </WebhookInfoWrapper>
+    <MainWrapper>
+      <WebhookInfoWrapper withEmptyScreen={errorWebhooks}>
+        <WebhookInfo />
+      </WebhookInfoWrapper>
 
-        {errorWebhooks ? (
-          <EmptyServerErrorContainer />
-        ) : (
-          <>
-            {isMobile() ? (
-              <ButtonSeating>
-                <StyledCreateButton
-                  label={t("CreateWebhook")}
-                  primary
-                  size="normal"
-                  onClick={openCreateModal}
-                  isDisabled={isLoading}
-                />
-              </ButtonSeating>
-            ) : (
-              <Button
-                id="create-webhook-button"
+      {errorWebhooks ? (
+        <EmptyServerErrorContainer />
+      ) : (
+        <>
+          {isMobile() ? (
+            <ButtonSeating>
+              <StyledCreateButton
                 label={t("CreateWebhook")}
                 primary
-                size="small"
+                size="normal"
                 onClick={openCreateModal}
-                isDisabled={isLoading}
+                testId="create_webhook_button"
               />
-            )}
-
-            {!isLoading ? (
-              !isWebhooksEmpty ? (
-                <WebhooksTable
-                  openSettingsModal={openSettingsModal}
-                  openDeleteModal={openDeleteModal}
-                />
-              ) : null
-            ) : null}
-          </>
-        )}
-        <WebhookDialog
-          visible={isCreateOpened}
-          onClose={closeCreateModal}
-          header={t("CreateWebhook")}
-          onSubmit={addWebhook}
-          additionalId="create-webhook"
-          isSettingsModal={false}
-        />
-        <WebhookDialog
-          visible={isSettingsOpened}
-          onClose={closeSettingsModal}
-          header={t("SettingsWebhook")}
-          isSettingsModal
-          webhook={currentWebhook}
-          onSubmit={handleWebhookUpdate}
-          additionalId="settings-webhook"
-        />
-        <DeleteWebhookDialog
-          visible={isDeleteOpened}
-          onClose={closeDeleteModal}
-          header={t("DeleteWebhookForeverQuestion")}
-          handleSubmit={handleWebhookDelete}
-        />
-      </MainWrapper>
-    </Suspense>
+            </ButtonSeating>
+          ) : (
+            <Button
+              id="create-webhook-button"
+              label={t("CreateWebhook")}
+              primary
+              size="small"
+              onClick={openCreateModal}
+              testId="create_webhook_button"
+            />
+          )}
+          {!isWebhooksEmpty ? (
+            <WebhooksTable
+              openSettingsModal={openSettingsModal}
+              openDeleteModal={openDeleteModal}
+            />
+          ) : null}
+        </>
+      )}
+      <WebhookDialog
+        visible={isCreateOpened}
+        onClose={closeCreateModal}
+        header={t("CreateWebhook")}
+        onSubmit={addWebhook}
+        additionalId="create-webhook"
+        isSettingsModal={false}
+      />
+      <WebhookDialog
+        visible={isSettingsOpened}
+        onClose={closeSettingsModal}
+        header={t("SettingsWebhook")}
+        isSettingsModal
+        webhook={currentWebhook}
+        onSubmit={handleWebhookUpdate}
+        additionalId="settings-webhook"
+      />
+      <DeleteWebhookDialog
+        visible={isDeleteOpened}
+        onClose={closeDeleteModal}
+        header={t("DeleteWebhookForeverQuestion")}
+        handleSubmit={handleWebhookDelete}
+      />
+    </MainWrapper>
   );
 };
 
-export default inject(({ webhooksStore }) => {
+export default inject(({ webhooksStore, common }) => {
   const {
     state,
-    loadWebhooks,
     addWebhook,
     isWebhooksEmpty,
     currentWebhook,
@@ -213,14 +197,17 @@ export default inject(({ webhooksStore }) => {
     errorWebhooks,
   } = webhooksStore;
 
+  const { isLoadedArticleBody, isLoadedSectionHeader } = common;
+
   return {
     state,
-    loadWebhooks,
     addWebhook,
     isWebhooksEmpty,
     currentWebhook,
     editWebhook,
     deleteWebhook,
     errorWebhooks,
+    isLoadedArticleBody,
+    isLoadedSectionHeader,
   };
 })(observer(Webhooks));

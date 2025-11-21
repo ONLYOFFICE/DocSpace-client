@@ -3,7 +3,7 @@
   "content": "Next",
   "content_en_sha1_hash": "bc981983e7f547dc62e19a1e383acfe00782a6d5",
   "created_at": "2025-05-19T21:30:46.809Z",
-  "updated_at": "2025-06-08T12:02:32.745Z",
+  "updated_at": "2025-08-04T07:30:01.321Z",
   "comment": {
     "text": "This translation key is used for the \"Next\" button label in a guidance component, typically appearing as a \"Next\" or \"Got It\" button in a dialog or modal. Its purpose is to provide a clear progression indicator and prompt the user to proceed with the next step.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",
-      "line_number": 395,
+      "line_number": 396,
       "context": ") : null}\n <Button\n id=\"form-filling_tips_next\"\n key=\"TipsNext\"\n primary\n label={isLastStep ? t(\"Common:GotIt\") : t(\"Common:Next\")}\n size={ButtonSize.extraSmall}\n onClick={isLastStep ? onClose : onNext}\n />\n </div>\n </div>",
       "module": "/packages/shared"
     }

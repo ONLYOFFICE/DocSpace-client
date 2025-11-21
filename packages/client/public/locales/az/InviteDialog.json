@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Ad və ya e-poçt ilə axtarın və dəvət edin",
   "InviteViaLink": "Keçidlə dəvət edin",
   "InviteViaLinkDescriptionAccounts": "{{productName}}-də avtorizasiya üçün universal keçid yaradın",
+  "InviteViaLinkDescriptionAgentGuest": "Agent kimi qonaq üçün özünütəsdiq üçün universal link yaradın.",
+  "InviteViaLinkDescriptionAgentMembers": "{{productName}} üzvləri üçün agentdə özləri müəyyən edilmələri üçün universal link yaradın.",
   "InviteViaLinkDescriptionRoomGuest": "Otaqda qonaq olaraq özünütəsdiq etmək üçün universal link yaradın.",
   "InviteViaLinkDescriptionRoomMembers": "{{productName}} üzvləri üçün otaqda özləri müəyyən edilmələri üçün universal link yaradın.",
   "LinkCopySuccess": "Link köçürüldü",
   "SendInvitation": "Dəvət göndərin",
+  "UserAgentMaxAvailableRoleWarning": "Qonaqlar və İstifadəçilər agent menecerləri təyin edilə bilməz. Yalnız Otaq və {{productName}} adminləri göstərilən rol üçün uyğundur.",
   "UserMaxAvailableRoleWarning": "Qonaq və İstifadəçilər Otaq administratoru kimi təyin edilə bilməz. Yalnız Otaq və {{productName}} administratorları göstərilən rol üçün uyğundur.",
   "UsersAlreadyAdded": "Bəzi istifadəçilər artıq əlavə olunub",
   "UsersCannotBeAdded": "İstifadəsiz kontaktlar otağa əlavə edilə bilməz."

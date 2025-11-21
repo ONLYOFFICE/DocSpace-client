@@ -1,0 +1,28 @@
+{
+  "key_path": "ServerRemovedSuccess",
+  "content": "Server removed successfully",
+  "content_en_sha1_hash": "2534ef8dc4cd80a0cf9f6d58cf579643bfdfd510",
+  "created_at": "2025-10-27T16:14:31.650Z",
+  "updated_at": "2025-10-27T17:15:24.414Z",
+  "comment": {
+    "text": "Confirmation message displayed in a toast notification after a server is successfully deleted within the AI settings section of the portal. It confirms the deletion action to the user. Translators should ensure the tone aligns with a success message.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:15:24.414Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/delete/index.tsx",
+      "line_number": 60,
+      "context": "const [loading, setLoading] = React.useState(false);\n \n const onSubmitAction = async () => {\n try {\n await deleteMCP?.(serverId);\n toastr.success(t(\"AISettings:ServerRemovedSuccess\"));\n } catch (error) {\n console.error(error);\n toastr.error(error as string);\n } finally {\n setLoading(false);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

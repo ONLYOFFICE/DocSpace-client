@@ -49,7 +49,8 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
@@ -70,12 +71,14 @@ import {
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
   getTopFreeRole,
+  getViewerRole,
   isPaidUserRole,
 } from "../utils";
 
 const Item = ({
   t,
   item,
+  index,
   theme,
   setInviteItems,
   inviteItems,
@@ -134,20 +137,14 @@ const Item = ({
       return;
     }
 
-    const isPublicRoomType = roomType === RoomsType.PublicRoom;
-
     const filter = Filter.getDefault();
-
-    const searchArea = isPublicRoomType
-      ? AccountsSearchArea.People
-      : AccountsSearchArea.Any;
 
     filter.search = value;
 
     const users =
       roomId === -1
         ? await getUserList(filter)
-        : await getMembersList(searchArea, roomId, filter);
+        : await getMembersList(AccountsSearchArea.People, roomId, filter);
 
     setSearchRequestRunning(false);
 
@@ -182,20 +179,26 @@ const Item = ({
       : isRolePaid &&
         (type === EmployeeType.Guest || type === EmployeeType.User);
 
+  const isReadOnlyFiltered =
+    roomType === RoomsType.AIRoom && EmployeeType.Guest;
+
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
   const filteredAccesses =
     roomId === -1
       ? accesses
-      : item.isGroup ||
-          isUserRolesFilterd ||
-          type === EmployeeType.Guest ||
-          type === EmployeeType.User
-        ? filterPaidRoleOptions(accesses)
-        : accesses;
+      : isReadOnlyFiltered
+        ? filterNotReadOnlyOptions(accesses)
+        : item.isGroup ||
+            isUserRolesFilterd ||
+            type === EmployeeType.Guest ||
+            type === EmployeeType.User
+          ? filterPaidRoleOptions(accesses)
+          : accesses;
 
-  const defaultAccess =
-    isUserRolesFilterd || isGroupRoleFiltered
+  const defaultAccess = isReadOnlyFiltered
+    ? getViewerRole(t, roomType)
+    : isUserRolesFilterd || isGroupRoleFiltered
       ? getTopFreeRole(t, roomType)
       : filteredAccesses.find((option) => option.access === +access);
 
@@ -319,7 +322,7 @@ const Item = ({
         <div
           className={isGroup ? "invite-user-box group-name" : "invite-user-box"}
         >
-          <Text {...textProps} truncate noSelect>
+          <Text {...textProps} truncate>
             {inputValue}
           </Text>
           {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
@@ -330,7 +333,6 @@ const Item = ({
             className="label about-label"
             fontWeight={400}
             fontSize="12px"
-            noSelect
             truncate
           >
             {`${typeLabel} | ${email}`}
@@ -357,6 +359,7 @@ const Item = ({
             className="delete-icon"
             size="medium"
             onClick={removeItem}
+            dataTestId="invite_panel_item_delete_button"
           />
         </ErrorWrapper>
       ) : (
@@ -383,6 +386,7 @@ const Item = ({
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}
             noBorder
+            dataTestId="invite_panel_item_access_selector"
             {...((roomId === -1 || !avatar || isVisitor) && {
               isSelectionDisabled: isUserTariffLimit,
               selectionErrorText: <PaidQuotaLimitError />,
@@ -399,13 +403,23 @@ const Item = ({
 
   const editBody = (
     <>
-      <StyledEditInput value={inputValue} onChange={changeValue} scale />
+      <StyledEditInput
+        value={inputValue}
+        onChange={changeValue}
+        scale
+        dataTestId="invite_panel_item_edit_input"
+      />
       <StyledEditButton
         icon={okIcon}
         onClick={saveEdit}
         isDisabled={searchRequestRunning}
+        dataTestId="invite_panel_item_save_button"
       />
-      <StyledEditButton icon={cancelIcon} onClick={cancelEdit} />
+      <StyledEditButton
+        icon={cancelIcon}
+        onClick={cancelEdit}
+        dataTestId="invite_panel_item_cancel_button"
+      />
     </>
   );
 
@@ -416,6 +430,7 @@ const Item = ({
       className="row-item"
       hasWarning={!!item.warning}
       edit={edit}
+      dataTestId={`invite_panel_item_${index}`}
     >
       <Avatar
         size="min"
@@ -423,6 +438,7 @@ const Item = ({
         source={source}
         isGroup={isGroup}
         userName={groupName}
+        dataTestId={`invite_panel_item_avatar_${index}`}
       />
       {edit ? editBody : displayBody}
     </StyledRow>

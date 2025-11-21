@@ -29,6 +29,8 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
 
+import withLoading from "SRC_DIR/HOCs/withLoading";
+
 import { Text } from "@docspace/shared/components/text";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -37,25 +39,53 @@ import { DeviceType } from "@docspace/shared/enums";
 import { setAdManagement } from "@docspace/shared/api/settings";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import CommonStore from "SRC_DIR/store/CommonStore";
 
 import styles from "./customization.module.scss";
+import LoaderCustomization from "../sub-components/loaderCustomization";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
+import useCommon from "../useCommon";
 
 const AdManagementComponent = ({
   isMobileView,
   displayBanners,
   setDisplayBanners,
+  isLoaded,
+  loadBaseInfo,
+  common,
+  settingsStore,
+  isLoadedPage,
+  setIsLoadedAdManagement,
 }: {
   isMobileView: boolean;
   displayBanners: boolean;
   setDisplayBanners: (value: boolean) => void;
+  isLoaded: boolean;
+  loadBaseInfo: (page: string) => Promise<void>;
+  common: CommonStore;
+  settingsStore: SettingsStore;
+  isLoadedPage: boolean;
+  setIsLoadedAdManagement: (value: boolean) => void;
 }) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
   const location = useLocation();
 
   const [type, setType] = useState(0);
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const isLoadedSetting = isLoaded && ready;
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    common,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
 
   const getSettings = () => {
     const currentSettings = getFromSessionStorage("currentDisplayBanners");
@@ -75,10 +105,15 @@ const AdManagementComponent = ({
   };
 
   useEffect(() => {
-    const defaultSettings = getFromSessionStorage("defaultDisplayBanners");
+    if (isMobileView) getCommonInitialValue();
+  }, [isMobileView]);
 
-    console.log("defaultSettings", defaultSettings);
-    console.log("type", type);
+  useEffect(() => {
+    if (isLoadedSetting) setIsLoadedAdManagement(isLoadedSetting);
+  }, [isLoadedSetting]);
+
+  useEffect(() => {
+    const defaultSettings = getFromSessionStorage("defaultDisplayBanners");
 
     if (defaultSettings === type) {
       setShowReminder(false);
@@ -129,6 +164,8 @@ const AdManagementComponent = ({
     setShowReminder(false);
   };
 
+  if (!isLoadedPage) return <LoaderCustomization adManagement />;
+
   return (
     <div className={styles.wrapper}>
       {!isMobileView ? (
@@ -150,11 +187,13 @@ const AdManagementComponent = ({
             id: "disable",
             label: t("Common:Disable"),
             value: 0,
+            dataTestId: "ad_management_disable",
           },
           {
             id: "enable",
             label: t("Common:Enable"),
             value: 1,
+            dataTestId: "ad_management_enable",
           },
         ]}
         selected={type}
@@ -165,24 +204,34 @@ const AdManagementComponent = ({
         onSaveClick={onSave}
         onCancelClick={onCancel}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
         hasScroll={false}
         isSaving={isSaving}
+        saveButtonDataTestId="ad_management_save_button"
+        cancelButtonDataTestId="ad_management_cancel_button"
       />
     </div>
   );
 };
 
-export const AdManagement = inject<TStore>(({ settingsStore }) => {
-  const { displayBanners, setDisplayBanners, currentDeviceType } =
-    settingsStore;
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+export const AdManagement = inject<TStore>(({ settingsStore, common }) => {
+  const { displayBanners, setDisplayBanners, deviceType } = settingsStore;
+  const { isLoaded, initSettings, setIsLoadedAdManagement } = common;
+  const isMobileView = deviceType === DeviceType.mobile;
   return {
     isMobileView,
     displayBanners,
     setDisplayBanners,
+    isLoaded,
+    setIsLoadedAdManagement,
+
+    loadBaseInfo: async (page: string) => {
+      await initSettings(page);
+    },
+    common,
+    settingsStore,
   };
-})(observer(AdManagementComponent));
+})(withLoading(observer(AdManagementComponent)));

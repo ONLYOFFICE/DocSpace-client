@@ -228,7 +228,7 @@ const FilesMediaViewer = (props) => {
     }
 
     setMediaViewerData({ visible: false, id: null });
-    const url = await getFirstUrl();
+    const url = getFirstUrl();
 
     if (!url) {
       return;
@@ -393,19 +393,33 @@ export default inject(
     const fileExst = item?.fileExst;
 
     const pluginContextMenuKeys = [
-      ...(getContextMenuKeysByType() || []),
       ...(getContextMenuKeysByType(PluginFileType.Image, fileExst) || []),
       ...(getContextMenuKeysByType(PluginFileType.Video, fileExst) || []),
     ];
 
-    const pluginContextMenuItems =
-      contextMenuItemsList?.filter((i) => {
-        if (pluginContextMenuKeys.includes(i.key)) {
-          return true;
+    const pluginContextMenuItems = [];
+
+    contextMenuItemsList?.forEach(({ value }) => {
+      if (pluginContextMenuKeys.includes(value.key)) {
+        if (value.items && value.items.length > 0) {
+          const processedOptionValues = [];
+
+          value.items.forEach((nestedItem) => {
+            if (pluginContextMenuKeys.includes(nestedItem.key)) {
+              processedOptionValues.push(nestedItem);
+            }
+          });
+
+          if (processedOptionValues.length > 0) {
+            pluginContextMenuItems.push(...processedOptionValues);
+          }
         }
 
-        return false;
-      }) || [];
+        if (!value.items) {
+          pluginContextMenuItems.push(value);
+        }
+      }
+    });
 
     return {
       files,

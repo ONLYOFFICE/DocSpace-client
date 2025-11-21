@@ -26,17 +26,19 @@
 
 "use client";
 
+import isNil from "lodash/isNil";
 import React, { useCallback } from "react";
 
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { getPrimaryLink } from "@docspace/shared/api/rooms";
 import RoomSelector from "@docspace/shared/selectors/Room";
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+
 import type { TGetRooms } from "@docspace/shared/api/rooms/types";
 import type { TSelectorItem } from "@docspace/shared/components/selector";
 
 import { getRoomsIcon } from "@/utils";
-import useDocumentTitle from "@/hooks/useDocumentTitle";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
@@ -85,7 +87,7 @@ export default function RoomSelectorClient({
         selectedItem.roomType === RoomsType.FormRoom) &&
         selectedItem.shared);
 
-    if (isSharedRoom) {
+    if (isSharedRoom && !isNil(selectedItem.id)) {
       const response = (await getPrimaryLink(selectedItem.id)) as {
         sharedTo: {
           id: string;

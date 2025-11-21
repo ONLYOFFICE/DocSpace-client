@@ -3,7 +3,7 @@
   "content": "Appearance",
   "content_en_sha1_hash": "41def7a0febe741da87c5b79ce78ce27b83f3ae7",
   "created_at": "2025-05-19T21:30:50.583Z",
-  "updated_at": "2025-05-26T07:57:32.482Z",
+  "updated_at": "2025-09-17T13:43:01.737Z",
   "comment": {
     "text": "This translation key is used to display the label \"Appearance\" in the Portal Settings categories. It appears as a section title and is likely used on a page or tab related to visual customization options. The translation of this key will determine the text displayed for this category.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 191,
+      "line_number": 195,
       "context": "//   }\n // };\n \n useEffect(() => {\n // getSettings();\n setDocumentTitle(t(\"Settings:Appearance\"));\n }, []);\n \n useEffect(() => {\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n }, [selectThemeId]);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.js",
-      "line_number": 39,
-      "context": "import withLoading from \"SRC_DIR/HOCs/withLoading\";\n import { DeviceType } from \"@docspace/shared/enums\";\n import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n import Customization from \"./customization\";\n import Branding from \"./branding\";\n import Appearance from \"./appearance\";\n import LoaderTabs from \"./sub-components/loaderTabs\";\n import { resetSessionStorage } from \"../../utils\";\n \n const TabsCommon = (props) => {\n const {",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
+      "line_number": 46,
+      "context": "import BrandingStore from \"SRC_DIR/store/portal-settings/BrandingStore\";\n import CommonStore from \"SRC_DIR/store/CommonStore\";\n \n import Customization from \"./customization\";\n import Branding from \"./branding\";\n import Appearance from \"./appearance\";\n import LoaderTabs from \"./sub-components/loaderTabs\";\n import useCommon from \"./useCommon\";\n import { resetSessionStorage } from \"../../utils\";\n import { createDefaultHookSettingsProps } from \"../../utils/createDefaultHookSettingsProps\";",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 133,
+      "line_number": 140,
       "context": "{\n id: \"portal-settings_catalog-appearance\",\n key: \"0-2\",\n icon: \"\",\n link: \"appearance\",\n tKey: \"Appearance\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-appearance_subLink\",\n key: \"0-2-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 133,
+      "line_number": 140,
       "context": "{\n id: \"portal-settings_catalog-appearance\",\n key: \"0-2\",\n icon: \"\",\n link: \"appearance\",\n tKey: \"Appearance\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-appearance_subLink\",\n key: \"0-2-0\",",
       "module": "/packages/client"
     }

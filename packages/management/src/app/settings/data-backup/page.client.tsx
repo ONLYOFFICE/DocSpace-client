@@ -29,18 +29,16 @@
 import { useMemo } from "react";
 import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
-import { useTranslation } from "react-i18next";
 
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
-import ManualBackup from "@docspace/shared/pages/manual-backup";
+import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import { TariffState } from "@docspace/shared/enums";
 
 import type {
   SettingsThirdPartyType,
   TFilesSettings,
-  TFolder,
 } from "@docspace/shared/api/files/types";
 import type {
   TBackupProgress,
@@ -58,7 +56,6 @@ import { useBackup } from "@/hooks/useBackup";
 import { useStores } from "@/hooks/useStores";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
 import { getDataBackupUrl } from "@/lib";
-import { useTreeFolders } from "@/hooks/useTreeFolders";
 
 interface DataBackupProps {
   account: SettingsThirdPartyType | undefined;
@@ -67,7 +64,6 @@ interface DataBackupProps {
   newStorageRegions: TStorageRegion[];
   portals: TPortals[];
   filesSettings: TFilesSettings;
-  foldersTree: TFolder[];
   portalTariff: TPortalTariff | undefined;
   backupProgress: TBackupProgress | TError | undefined;
 }
@@ -79,7 +75,6 @@ const DataBackup = ({
   newStorageRegions,
   portals,
   filesSettings,
-  foldersTree,
   portalTariff,
   backupProgress,
 }: DataBackupProps) => {
@@ -87,8 +82,6 @@ const DataBackup = ({
   const { backupStore, spacesStore } = useStores();
 
   const { currentColorScheme } = useTheme();
-
-  const { t } = useTranslation(["Common"]);
 
   const {
     accounts,
@@ -103,7 +96,7 @@ const DataBackup = ({
     errorInformation,
     isFormReady,
     clearLocalStorage,
-    setErrorInformation,
+
     setTemporaryLink,
     deleteValueFormSetting,
     setRequiredFormSettings,
@@ -130,6 +123,8 @@ const DataBackup = ({
     backupProgressError,
     setBackupProgressError,
     setIsBackupProgressVisible,
+    backupProgressWarning,
+    setBackupProgressWarning,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -145,8 +140,6 @@ const DataBackup = ({
     setNewPath,
     toDefaultFileSelector,
   } = useFilesSelectorInput();
-
-  const rootFoldersTitles = useTreeFolders({ foldersTree });
 
   const dataBackupUrl = useMemo(() => getDataBackupUrl(settings), [settings]);
 
@@ -167,7 +160,6 @@ const DataBackup = ({
       isManagement
       isInitialLoading={false}
       isEmptyContentBeforeLoader={false}
-      //
       settingsFileSelector={{
         filesSettings,
       }}
@@ -189,7 +181,6 @@ const DataBackup = ({
       isFormReady={isFormReady}
       isValidForm={isValidForm}
       clearLocalStorage={clearLocalStorage}
-      setErrorInformation={(err: unknown) => setErrorInformation(err, t)}
       setTemporaryLink={setTemporaryLink}
       deleteValueFormSetting={deleteValueFormSetting}
       setRequiredFormSettings={setRequiredFormSettings}
@@ -216,7 +207,6 @@ const DataBackup = ({
       setConnectDialogVisible={spacesStore.setConnectDialogVisible}
       setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
       isNotPaidPeriod={isNotPaidPeriod}
-      rootFoldersTitles={rootFoldersTitles}
       removeItem={selectedThirdPartyAccount as ThirdPartyAccountType}
       providers={backupStore.providers}
       deleteThirdParty={deleteThirdParty}
@@ -225,6 +215,8 @@ const DataBackup = ({
       backupProgressError={backupProgressError}
       setBackupProgressError={setBackupProgressError}
       setIsBackupProgressVisible={setIsBackupProgressVisible}
+      backupProgressWarning={backupProgressWarning}
+      setBackupProgressWarning={setBackupProgressWarning}
     />
   );
 };

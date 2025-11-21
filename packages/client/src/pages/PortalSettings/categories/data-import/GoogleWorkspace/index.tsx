@@ -68,7 +68,6 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
       }
       setIsMigrationInit(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!ready) return <SelectFileLoader />;

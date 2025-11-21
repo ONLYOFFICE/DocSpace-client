@@ -64,6 +64,7 @@ const ButtonContainer = ({
           isDisabled={isLoading || isDisabled}
           onClick={goToStripePortal}
           isLoading={isLoading}
+          testId="pay_button"
         />
       ) : isNeedRequest ? (
         <RequestButtonContainer isDisabled={isDisabled} t={t} />

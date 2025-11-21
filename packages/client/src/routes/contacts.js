@@ -26,8 +26,6 @@
 
 import { Navigate } from "react-router";
 
-import componentLoader from "@docspace/shared/utils/component-loader";
-
 import {
   GUESTS_ROUTE,
   GUESTS_ROUTE_WITH_FILTER,
@@ -39,14 +37,17 @@ import {
   PEOPLE_ROUTE_WITH_FILTER,
   CONTACTS_ROUTE,
 } from "SRC_DIR/helpers/contacts";
+
+import { ViewComponent } from "SRC_DIR/pages/Home/View";
+
 import PrivateRoute from "../components/PrivateRouteWrapper";
 
-export const contanctsRoutes = [
+export const contactsRoutes = [
   {
     path: CONTACTS_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={PEOPLE_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${PEOPLE_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -54,7 +55,7 @@ export const contanctsRoutes = [
     path: "accounts/filter",
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={PEOPLE_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${PEOPLE_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -63,7 +64,7 @@ export const contanctsRoutes = [
     element: (
       <PrivateRoute restricted withManager>
         <Navigate
-          to={PEOPLE_ROUTE_WITH_FILTER}
+          to={`/${PEOPLE_ROUTE_WITH_FILTER}`}
           state={{ openChangeOwnerDialog: true }}
           replace
         />
@@ -74,104 +75,64 @@ export const contanctsRoutes = [
     path: PEOPLE_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={PEOPLE_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${PEOPLE_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
   {
     path: PEOPLE_ROUTE_WITH_FILTER,
-    async lazy() {
-      const { ContactsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Contacts"),
-      );
-
-      const Component = () => {
-        return (
-          <PrivateRoute restricted withManager>
-            <ContactsView />
-          </PrivateRoute>
-        );
-      };
-
-      return { Component };
-    },
+    element: (
+      <PrivateRoute restricted withManager>
+        <ViewComponent />
+      </PrivateRoute>
+    ),
   },
   {
     path: GROUPS_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={GROUPS_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${GROUPS_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
   {
     path: GROUPS_ROUTE_WITH_FILTER,
-    async lazy() {
-      const { ContactsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Contacts"),
-      );
-
-      const Component = () => {
-        return (
-          <PrivateRoute restricted withManager>
-            <ContactsView />
-          </PrivateRoute>
-        );
-      };
-
-      return { Component };
-    },
+    element: (
+      <PrivateRoute restricted withManager>
+        <ViewComponent />
+      </PrivateRoute>
+    ),
   },
   {
     path: INSIDE_GROUP_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={INSIDE_GROUP_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${INSIDE_GROUP_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
   {
     path: INSIDE_GROUP_ROUTE_WITH_FILTER,
-    async lazy() {
-      const { ContactsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Contacts"),
-      );
-
-      const Component = () => {
-        return (
-          <PrivateRoute restricted withManager>
-            <ContactsView />
-          </PrivateRoute>
-        );
-      };
-
-      return { Component };
-    },
+    element: (
+      <PrivateRoute restricted withManager>
+        <ViewComponent />
+      </PrivateRoute>
+    ),
   },
   {
     path: GUESTS_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={GUESTS_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${GUESTS_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
   {
     path: GUESTS_ROUTE_WITH_FILTER,
-    async lazy() {
-      const { ContactsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Contacts"),
-      );
-
-      const Component = () => {
-        return (
-          <PrivateRoute restricted withManager>
-            <ContactsView />
-          </PrivateRoute>
-        );
-      };
-
-      return { Component };
-    },
+    element: (
+      <PrivateRoute restricted withManager>
+        <ViewComponent />
+      </PrivateRoute>
+    ),
   },
 ];

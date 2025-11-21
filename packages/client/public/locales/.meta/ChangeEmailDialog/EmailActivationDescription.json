@@ -3,7 +3,7 @@
   "content": "The activation instructions will be sent to the specified email address.",
   "content_en_sha1_hash": "1bef7b688f726b26cbcf758d60de8e07d56b4ea1",
   "created_at": "2025-05-19T21:30:57.019Z",
-  "updated_at": "2025-05-24T14:27:41.082Z",
+  "updated_at": "2025-08-11T18:11:59.122Z",
   "comment": {
     "text": "The \"EmailActivationDescription\" translation key is used to display instructions about activation via email. It appears in a modal dialog when prompting users to change their email address, and its purpose is to inform them that activation details will be sent to their specified email address.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
-      "line_number": 195,
+      "line_number": 194,
       "context": "displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"EmailChangeTitle\")}</ModalDialog.Header>\n <ModalDialog.Body className=\"email-dialog-body\">\n <StyledBodyContent>\n <Text className=\"text-body\">{t(\"EmailActivationDescription\")}</Text>\n <FieldContainer\n isVertical\n style={{ margin: \"0\" }}\n // labelText={t(\"EnterEmail\")}\n errorMessage={errorMessage}",
       "module": "/packages/client"
     }

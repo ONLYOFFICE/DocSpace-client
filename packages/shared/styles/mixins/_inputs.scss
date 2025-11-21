@@ -1,0 +1,198 @@
+/*!
+ * (c) Copyright Ascensio System SIA 2009-2025
+ *
+ * This program is a free software product.
+ * You can redistribute it and/or modify it under the terms
+ * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+ * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+ * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+ * any third-party rights.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+ * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ *
+ * The  interactive user interfaces in modified source and object code versions of the Program must
+ * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ *
+ * Pursuant to Section 7(b) of the License you must retain the original Product logo when
+ * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+ * trademark law for use of our trademarks.
+ *
+ * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+ * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+ * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ */
+
+@use "text";
+
+@mixin common-input-color-styles {
+  background-color: var(--input-bg);
+  color: var(--input-color);
+  caret-color: var(--input-color);
+  -webkit-text-fill-color: var(--input-color);
+
+  border-radius: var(--input-border-radius);
+  -moz-border-radius: var(--input-border-radius);
+  -webkit-border-radius: var(--input-border-radius);
+
+  box-shadow: var(--input-box-shadow);
+  box-sizing: var(--input-box-sizing);
+  border: var(--input-border);
+  border-color: var(--input-border-color);
+
+  -webkit-background-clip: text !important;
+
+  &[data-error="true"] {
+    border-color: var(--input-error-border);
+    &:hover {
+      border-color: var(--input-error-border-hover);
+    }
+    &:focus,
+    &[data-focus="true"] {
+      border-color: var(--input-error-border-focus);
+    }
+  }
+
+  &[data-warning="true"] {
+    border-color: var(--input-warning-border);
+    &:hover {
+      border-color: var(--input-warning-border-hover);
+    }
+    &:focus,
+    &[data-focus="true"] {
+      border-color: var(--input-warning-border-focus);
+    }
+  }
+  &[data-disabled="true"],
+  &:disabled {
+    background-color: var(--input-disabled-bg);
+    color: var(--input-disabled-color);
+    caret-color: var(--input-disabled-color);
+    -webkit-text-fill-color: var(--input-disabled-color);
+
+    border-color: var(--input-disabled-border);
+    cursor: default;
+
+    &::placeholder {
+      color: var(--text-input-placeholder-disabled-color);
+    }
+    &::-webkit-input-placeholder {
+      color: var(--text-input-placeholder-disabled-color);
+      -webkit-text-fill-color: var(--text-input-placeholder-disabled-color);
+    }
+    &::-moz-placeholder {
+      color: var(--text-input-placeholder-disabled-color);
+      -webkit-text-fill-color: var(--text-input-placeholder-disabled-color);
+    }
+    &:-ms-input-placeholder {
+      color: var(--text-input-placeholder-disabled-color);
+      -webkit-text-fill-color: var(--text-input-placeholder-disabled-color);
+    }
+    &:-moz-placeholder {
+      color: var(--text-input-placeholder-disabled-color);
+      -webkit-text-fill-color: var(--text-input-placeholder-disabled-color);
+    }
+  }
+
+  &::placeholder {
+    color: var(--text-input-placeholder-color);
+    -webkit-text-fill-color: var(--text-input-placeholder-color);
+    @include text.no-user-select;
+  }
+
+  &::-webkit-input-placeholder {
+    color: var(--text-input-placeholder-color);
+    -webkit-text-fill-color: var(--text-input-placeholder-color);
+    @include text.no-user-select;
+  }
+
+  &::-moz-placeholder {
+    color: var(--text-input-placeholder-color);
+    -webkit-text-fill-color: var(--text-input-placeholder-color);
+    @include text.no-user-select;
+  }
+
+  &:-ms-input-placeholder {
+    color: var(--text-input-placeholder-color);
+    -webkit-text-fill-color: var(--text-input-placeholder-color);
+    @include text.no-user-select;
+  }
+
+  &:-moz-placeholder {
+    color: var(--text-input-placeholder-color);
+    -webkit-text-fill-color: var(--text-input-placeholder-color);
+    @include text.no-user-select;
+  }
+
+  &:not(:disabled):not(&[data-disabled="true"]) {
+    &:hover {
+      border-color: var(--input-border-hover);
+    }
+    &:focus,
+    &[data-focus="true"] {
+      border-color: var(--input-border-focus);
+    }
+    cursor: text;
+  }
+
+  &[readonly] {
+    cursor: default;
+  }
+
+  &:placeholder-shown {
+    direction: var(--interface-direction);
+  }
+
+  // RTL Support
+  [dir="rtl"] & {
+    &::placeholder {
+      text-align: right;
+    }
+
+    &[type="tel"]:placeholder-shown {
+      direction: ltr;
+    }
+
+    &[type="search"] {
+      unicode-bidi: plaintext;
+    }
+  }
+
+  &::selection {
+    color: var(--input-selection-text-color);
+    background: var(--input-selection-color);
+  }
+}
+
+@mixin common-input-styles {
+  @include common-input-color-styles;
+
+  &[data-size="base"] {
+    width: var(--input-width-base);
+    line-height: var(--text-input-line-height-base);
+    font-size: var(--text-input-font-size-base);
+    padding: var(--text-input-padding-base);
+    font-weight: var(--text-input-font-weight-base);
+  }
+  &[data-size="middle"] {
+    width: var(--input-width-middle);
+    line-height: var(--text-input-line-height-middle);
+    font-size: var(--text-input-font-size-middle);
+    padding: var(--text-input-padding-middle);
+    font-weight: var(--text-input-font-weight-middle);
+  }
+  &[data-size="large"] {
+    width: var(--input-width-large);
+    line-height: var(--text-input-line-height-large);
+    font-size: var(--text-input-font-size-large);
+    padding: var(--text-input-padding-large);
+    font-weight: var(--text-input-font-weight-large);
+  }
+
+  &[data-scale="true"] {
+    width: 100%;
+  }
+}

@@ -12,10 +12,13 @@
   "InviteToRoomSearchPlaceholder": "Buscar e invitar por nombre o correo electrónico",
   "InviteViaLink": "Invitar mediante enlace",
   "InviteViaLinkDescriptionAccounts": "Cree un enlace universal para la autorización en {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Crear un enlace universal para la autoautorización en el agente como invitado.",
+  "InviteViaLinkDescriptionAgentMembers": "Crear un enlace universal para los miembros de {{productName}} para la autoautorización en el agente.",
   "InviteViaLinkDescriptionRoomGuest": "Crear un enlace universal para la autoautorización en la sala como invitado.",
   "InviteViaLinkDescriptionRoomMembers": "Cree un enlace universal para los miembros de {{productName}} para su autoautorización en la sala.",
   "LinkCopySuccess": "El enlace se ha copiado",
   "SendInvitation": "Enviar invitación",
+  "UserAgentMaxAvailableRoleWarning": "Los Invitados y Usuarios no pueden ser asignados como Administradores de agentes. Solo los Administradores de sala y de {{productName}} son aptos para el rol especificado.",
   "UserMaxAvailableRoleWarning": "Los invitados y los usuarios no pueden ser asignados como gestores de sala. Solo los administradores de sala y administradores de {{productName}} son adecuados para el rol especificado.",
   "UsersAlreadyAdded": "Algunos usuarios ya se han añadido",
   "UsersCannotBeAdded": "Los contactos deshabilitados no se pueden agregar a una sala."

@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
 import api from "@docspace/shared/api";
 import {
@@ -21,6 +22,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
@@ -39,6 +41,8 @@ export type ViewAsType = "table" | "row";
 
 class OAuthStore {
   userStore: Nullable<UserStore> = null;
+
+  settingsStore: Nullable<SettingsStore> = null;
 
   viewAs: ViewAsType = "table";
 
@@ -92,11 +96,18 @@ class OAuthStore {
 
   setJwtTokenRunning: boolean = false;
 
-  constructor(userStore: UserStore) {
+  errorOAuth: Error | null = null;
+
+  constructor(userStore: UserStore, settingsStore: SettingsStore) {
     this.userStore = userStore;
+    this.settingsStore = settingsStore;
 
     makeAutoObservable(this);
   }
+
+  setErrorOAuth = (error: Error | null) => {
+    this.errorOAuth = error;
+  };
 
   setJwtToken = async () => {
     let cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
@@ -225,9 +236,16 @@ class OAuthStore {
   fetchClients = async () => {
     await this.setJwtToken();
 
+    const clientListAbortController = new AbortController();
+    this.settingsStore?.addAbortControllers(clientListAbortController);
+
     try {
       this.setClientsIsLoading(true);
-      const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
+      const clientList: IClientListProps = await getClientList(
+        0,
+        PAGE_LIMIT,
+        clientListAbortController.signal,
+      );
 
       const fetchUsers = async () => {
         const { id, displayName, avatarSmall } = this.userStore!.user!;
@@ -238,7 +256,12 @@ class OAuthStore {
           .filter((c, idx, arr) => arr.indexOf(c) === idx);
 
         const users = await Promise.all(
-          newUsers.map((u) => api.people.getUserById(u)),
+          newUsers.map((u) => {
+            const controller = new AbortController();
+            this.settingsStore?.addAbortControllers(controller);
+
+            return api.people.getUserById(u, controller.signal);
+          }),
         );
 
         clientList.data.forEach((client) => {
@@ -277,6 +300,8 @@ class OAuthStore {
       this.setClientsIsLoading(false);
     } catch (e) {
       const err = e as TData;
+      if (axios.isCancel(err)) return;
+
       toastr.error(err);
       throw new Error(err.message);
     }
@@ -465,14 +490,20 @@ class OAuthStore {
   };
 
   fetchScopes = async () => {
-    await this.setJwtToken();
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
     try {
-      const scopes = await getScopeList();
+      await this.setJwtToken();
+
+      const scopes = await getScopeList(abortController.signal);
 
       this.scopes = scopes;
     } catch (e) {
       const err = e as TData;
+
+      if (axios.isCancel(err)) return;
+
       toastr.error(err);
       throw new Error(err.message);
     }
@@ -692,6 +723,7 @@ class OAuthStore {
       label: t("Files:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
       disabled: isInfo,
+      dataTestId: "oauth_files_open_option",
     };
 
     const infoOption = {
@@ -700,6 +732,7 @@ class OAuthStore {
       label: t("Common:Info"),
       onClick: onShowInfo,
       disabled: isInfo,
+      dataTestId: "oauth_info_option",
     };
 
     if (!isSettings) {
@@ -722,6 +755,7 @@ class OAuthStore {
         label: t("Revoke"),
         onClick: () => this.onRevoke(clientId),
         disabled: false,
+        dataTestId: "oauth_revoke_option",
       });
 
       return items;
@@ -732,6 +766,7 @@ class OAuthStore {
       icon: PencilReactSvgUrl,
       label: t("Common:EditButton"),
       onClick: () => this.editClient(clientId),
+      dataTestId: "oauth_edit_option",
     };
 
     const authButtonOption = {
@@ -740,6 +775,7 @@ class OAuthStore {
       label: t("AuthButton"),
       onClick: onShowPreview,
       disabled: !item.enabled,
+      dataTestId: "oauth_auth_option",
     };
 
     const enableOption = {
@@ -754,6 +790,7 @@ class OAuthStore {
       icon: RemoveReactSvgUrl,
       label: t("Common:Disable"),
       onClick: () => this.onDisable(clientId),
+      dataTestId: "oauth_disable_option",
     };
 
     const generateDeveloperTokenOption = {
@@ -762,6 +799,7 @@ class OAuthStore {
       label: t("OAuth:GenerateToken"),
       onClick: onGenerateDeveloperToken,
       disabled: !item.enabled,
+      dataTestId: "oauth_generate_token_option",
     };
 
     const revokeDeveloperTokenOption = {
@@ -770,6 +808,7 @@ class OAuthStore {
       label: t("OAuth:RevokeDialogHeader"),
       onClick: onRevokeDeveloperToken,
       disabled: !item.enabled,
+      dataTestId: "oauth_revoke_token_option",
     };
 
     const contextOptions: ContextMenuModel[] = [
@@ -778,6 +817,7 @@ class OAuthStore {
         label: t("Common:Delete"),
         icon: DeleteIconUrl,
         onClick: () => this.onDelete(clientId),
+        dataTestId: "oauth_delete_option",
       },
     ];
 
@@ -826,6 +866,7 @@ class OAuthStore {
           label: t("OAuth:Revoke"),
           onClick: this.onRevoke,
           disabled: false,
+          dataTestId: "oauth_revoke_option",
         },
       ];
 
@@ -836,6 +877,7 @@ class OAuthStore {
         label: t("Common:Enable"),
         onClick: () => this.onEnable(t, ""),
         disabled: !this.withEnabledOptions,
+        dataTestId: "oauth_enable_option",
       },
       {
         key: "disable",
@@ -843,12 +885,14 @@ class OAuthStore {
         label: t("Common:Disable"),
         onClick: this.onDisable,
         disabled: !this.withDisabledOptions,
+        dataTestId: "oauth_disable_option",
       },
       {
         key: "delete",
         label: t("Common:Delete"),
         iconUrl: DeleteIconUrl,
         onClick: this.onDelete,
+        dataTestId: "oauth_delete_option",
       },
     ];
   };

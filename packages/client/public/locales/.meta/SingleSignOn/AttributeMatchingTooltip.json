@@ -3,7 +3,7 @@
   "content": "The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.",
   "content_en_sha1_hash": "c7591a0a501267c1ec099b33a718569ff4884c4e",
   "created_at": "2025-05-19T21:30:50.065Z",
-  "updated_at": "2025-05-24T03:30:09.524Z",
+  "updated_at": "2025-08-11T18:11:59.256Z",
   "comment": {
     "text": "This translation key is used for a tooltip that describes the purpose of matching Single Sign-On attributes to account entries in the 'Accounts' section. It appears as an icon button next to a form field on a settings page. Translators should provide a clear and concise explanation of this process for internationalization purposes.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
       "line_number": 74,
-      "context": "<HelpButton\n className=\"attribute-matching-tooltip icon-button\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"AttributeMatchingTooltip\")}</Text>\n }\n />\n </div>\n \n <SsoFormField",
+      "context": "<HelpButton\n className=\"attribute-matching-tooltip icon-button\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"AttributeMatchingTooltip\")}</Text>\n }\n dataTestId=\"attribute_mapping_help_button\"\n />\n </div>",
       "module": "/packages/client"
     }
   ],

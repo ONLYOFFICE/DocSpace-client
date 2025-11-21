@@ -24,11 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 // import { BooleanValue, StringValue } from "react-values";
 
@@ -451,7 +448,6 @@ const Template = () => (
       <div style={{ padding: "8px 0" }}>
         {/* {rowArray[0]} */}
         {rowArray.map((item, idx) => {
-          // eslint-disable-next-line react/no-array-index-key
           return <div key={`${idx}`}>{item}</div>;
         })}
       </div>

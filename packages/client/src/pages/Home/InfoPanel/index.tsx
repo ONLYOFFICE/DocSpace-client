@@ -26,3 +26,4 @@
 
 export { default as InfoPanelHeaderContent } from "./Header";
 export { default as InfoPanelBodyContent } from "./Body";
+export { default as InfoPanelActions } from "./Actions";

@@ -3,7 +3,7 @@
   "content": "Lifetime (min)",
   "content_en_sha1_hash": "20610b86435a234a6314cab2a967b3e0bbfd719f",
   "created_at": "2025-05-19T21:30:51.805Z",
-  "updated_at": "2025-05-24T04:44:56.689Z",
+  "updated_at": "2025-09-17T13:43:01.892Z",
   "comment": {
     "text": "This translation key describes the minimum lifetime of a session. It is used to set the duration for which user data remains stored in session storage.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
       "line_number": 44,
-      "context": "import isEqual from \"lodash/isEqual\";\n \n import { DeviceType } from \"@docspace/shared/enums\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n import SessionLifetimeLoader from \"../sub-components/loaders/session-lifetime-loader\";\n import { LearnMoreWrapper } from \"../StyledSecurity\";\n \n const MainContainer = styled.div`\n width: 100%;",
+      "context": "import isEqual from \"lodash/isEqual\";\n \n import { DeviceType } from \"@docspace/shared/enums\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n import SessionLifetimeLoader from \"../sub-components/loaders/session-lifetime-loader\";\n import { LearnMoreWrapper } from \"../StyledSecurity\";\n import useSecurity from \"../useSecurity\";\n import { createDefaultHookSettingsProps } from \"../../../utils/createDefaultHookSettingsProps\";\n \n const MainContainer = styled.div`",
       "module": "/packages/client"
     }
   ],

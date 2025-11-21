@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import equal from "fast-deep-equal/react";
-// import { useTheme } from "styled-components";
 import React, { useMemo, memo, useCallback } from "react";
 
 import classNames from "classnames";
@@ -100,7 +99,6 @@ const ViewerWrapper = memo(
         <DropDown
           className={styles.dropDown}
           open={isOpen}
-          fixedDirection
           directionY="top"
           withBackdrop={false}
           isDefaultMode={false}

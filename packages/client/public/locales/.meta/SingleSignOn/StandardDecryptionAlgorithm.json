@@ -3,7 +3,7 @@
   "content": "Default Decrypt Algorithm",
   "content_en_sha1_hash": "619446c4bdadbe754814d7355bf5c6666d7bac32",
   "created_at": "2025-05-19T21:30:50.187Z",
-  "updated_at": "2025-05-24T02:54:19.396Z",
+  "updated_at": "2025-08-11T18:11:59.255Z",
   "comment": {
     "text": "The translation key \"StandardDecryptionAlgorithm\" is used to display the default decryption algorithm name as a label in the Single Sign-On certificate settings page. It appears in a dropdown list and is typically used by users to select or review the encryption method. This term should be translated accordingly to provide consistency across different languages.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 203,
-      "context": "value={spSigningAlgorithm}\n />\n \n <SsoComboBox\n isDisabled={isDisabledSpEncrypt}\n labelText={t(\"StandardDecryptionAlgorithm\")}\n name=\"spEncryptAlgorithm\"\n options={decryptAlgorithmsOptions}\n tabIndex={15}\n value={spEncryptAlgorithm}\n />",
+      "line_number": 217,
+      "context": "dataTestId=\"sp_signing_combobox\"\n />\n \n <SsoComboBox\n isDisabled={isDisabledSpEncrypt}\n labelText={t(\"StandardDecryptionAlgorithm\")}\n name=\"spEncryptAlgorithm\"\n options={decryptAlgorithmsOptions}\n tabIndex={15}\n value={spEncryptAlgorithm}\n dataTestId=\"sp_decryption_combobox\"",
       "module": "/packages/client"
     }
   ],

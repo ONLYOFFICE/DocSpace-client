@@ -3,7 +3,7 @@
   "content": "Default Sign Verifying Algorithm",
   "content_en_sha1_hash": "4efdddea5f21717488ef95e4e69bbf2ef43a5df9",
   "created_at": "2025-05-19T21:30:50.101Z",
-  "updated_at": "2025-05-24T03:21:29.333Z",
+  "updated_at": "2025-08-11T18:11:59.255Z",
   "comment": {
     "text": "This translation key describes the default signing algorithm used by an Identity Provider. It is displayed as a label in a combo box used to select or configure this setting in the Single Sign-On settings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 182,
-      "context": "<CheckboxSet prefix={prefix} />\n \n {provider === \"IdentityProvider\" ? (\n <SsoComboBox\n isDisabled={isDisabledIdpSigning}\n labelText={t(\"idpSigningAlgorithm\")}\n name=\"idpVerifyAlgorithm\"\n options={verifyAlgorithmsOptions}\n tabIndex={14}\n value={idpVerifyAlgorithm}\n />",
+      "line_number": 194,
+      "context": "<CheckboxSet prefix={prefix} />\n \n {provider === \"IdentityProvider\" ? (\n <SsoComboBox\n isDisabled={isDisabledIdpSigning}\n labelText={t(\"idpSigningAlgorithm\")}\n name=\"idpVerifyAlgorithm\"\n options={verifyAlgorithmsOptions}\n tabIndex={14}\n value={idpVerifyAlgorithm}\n dataTestId=\"idp_signing_combobox\"",
       "module": "/packages/client"
     }
   ],

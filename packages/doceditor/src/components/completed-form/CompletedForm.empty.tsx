@@ -57,7 +57,10 @@ export const CompletedFormEmpty = () => {
   const iconUrl = theme.isBase ? CompletedFormLightIcon : CompletedFormDarkIcon;
 
   return (
-    <ContainerCompletedForm bgPattern={bgPattern}>
+    <ContainerCompletedForm
+      bgPattern={bgPattern}
+      data-testid="completed_form_empty_container"
+    >
       <CompletedFormLayout className="completed-form__default-layout">
         <picture className="completed-form__logo">
           <source media={mobile} srcSet={smallLogoUrl} />
@@ -74,7 +77,7 @@ export const CompletedFormEmpty = () => {
         />
         <TextWrapper className="completed-form__empty">
           <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
-          <Text noSelect>{t("CompletedForm:Description")}</Text>
+          <Text>{t("CompletedForm:Description")}</Text>
         </TextWrapper>
       </CompletedFormLayout>
     </ContainerCompletedForm>

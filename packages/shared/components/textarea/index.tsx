@@ -69,6 +69,8 @@ const Textarea = ({
   isFullHeight = false,
   classNameCopyIcon,
   isChatMode = false,
+  dataTestId,
+  onKeyDown,
 }: TextareaProps) => {
   const { isRTL } = useInterfaceDirection();
 
@@ -105,8 +107,11 @@ const Textarea = ({
   }, [modifiedValue, fontSize, heightTextArea, hasNumeration]);
 
   const handleTextareaClick = useCallback(() => {
-    if (areaRef.current && enableCopy) {
-      areaRef.current.select();
+    if (areaRef.current) {
+      areaRef.current.focus();
+      if (enableCopy) {
+        areaRef.current.select();
+      }
     }
   }, [enableCopy]);
 
@@ -220,9 +225,11 @@ const Textarea = ({
           ref={areaRef}
           dir="auto"
           data-dir={isRTL ? "rtl" : undefined}
-          data-testid="textarea"
+          data-testid={dataTestId ?? "textarea"}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
+          onClick={(e) => e.stopPropagation()}
+          onKeyDown={onKeyDown}
         />
       </Scrollbar>
     </div>

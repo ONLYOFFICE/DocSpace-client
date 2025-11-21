@@ -31,12 +31,19 @@ import Section, { SectionProps } from "@docspace/shared/components/section";
 
 const SectionWrapper = ({
   children,
+  viewAs,
 
   ...rest
 }: SectionProps) => {
   const location = useLocation();
+  const isInfoPanelAvailable = viewAs !== "settings";
+
   return (
-    <Section {...rest} pathname={location.pathname}>
+    <Section
+      {...rest}
+      pathname={location.pathname}
+      isInfoPanelAvailable={isInfoPanelAvailable}
+    >
       {children}
     </Section>
   );
@@ -48,14 +55,17 @@ export default inject(
     dialogsStore,
     infoPanelStore,
     indexingStore,
+    filesSettingsStore,
+    selectedFolderStore,
+    userStore,
   }: {
-    settingsStore: any;
-    dialogsStore: any;
-    infoPanelStore: any;
-    indexingStore: any;
-    filesSettingsStore: any;
-    selectedFolderStore: any;
-    userStore: any;
+    settingsStore: TStore["settingsStore"];
+    dialogsStore: TStore["dialogsStore"];
+    infoPanelStore: TStore["infoPanelStore"];
+    indexingStore: TStore["indexingStore"];
+    filesSettingsStore: TStore["filesSettingsStore"];
+    selectedFolderStore: TStore["selectedFolderStore"];
+    userStore: TStore["userStore"];
   }) => {
     const {
       isDesktopClient: isDesktop,
@@ -81,6 +91,12 @@ export default inject(
 
     const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
 
+    const { getIcon, displayFileExtension } = filesSettingsStore;
+
+    const { id } = selectedFolderStore;
+
+    const { user } = userStore;
+
     return {
       isDesktop,
       currentDeviceType,
@@ -95,6 +111,12 @@ export default inject(
       snackbarExist,
       showText,
       isInfoPanelScrollLocked,
+
+      getIcon,
+      displayFileExtension,
+      aiSelectedFolder: id,
+
+      user,
     };
   },
 )(observer(SectionWrapper));

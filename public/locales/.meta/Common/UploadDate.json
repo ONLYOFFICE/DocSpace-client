@@ -3,7 +3,7 @@
   "content": "Upload date",
   "content_en_sha1_hash": "176ef9cf9d99c91f93d8c6ccfedafea96c16e2ca",
   "created_at": "2025-05-19T21:30:49.425Z",
-  "updated_at": "2025-05-26T07:57:32.334Z",
+  "updated_at": "2025-10-13T21:19:32.393Z",
   "comment": {
     "text": "The \"UploadDate\" translation key is used to display the upload date of a file. It appears in a settings plugin dialog and is displayed next to an uploaded file's timestamp. The translation should be provided as a plain text representation, likely in a format like \"YYYY-MM-DD\".",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 150,
-      "context": "fontWeight={400}\n lineHeight=\"20px\"\n noSelect\n truncate\n >\n {t(\"Common:UploadDate\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\" noSelect>\n {uploadDate}\n </Text>\n </>",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
+      "line_number": 122,
+      "context": "fontWeight={400}\n lineHeight=\"20px\"\n truncate\n dataTestId=\"plugin_upload_date\"\n >\n {t(\"Common:UploadDate\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {uploadDate}\n </Text>\n </>",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Качи дата' is a literal translation of 'Upload date' but doesn't convey the intended meaning. 'Качи' means 'upload' and 'дата' means 'date,' but it's not idiomatic Bulgarian. The correct translation should indicate a date when something was uploaded.",
-          "suggestion": "Дата на качване"
+          "description": "The Bulgarian translation 'Качи дата' is not an accurate translation of 'Upload date'. 'Качи' means 'upload' or 'put up' and 'дата' means 'date'. The literal translation is 'Upload date', but it lacks the proper phrasing for a user-facing label.",
+          "suggestion": "The correct translation should be something like 'Дата на качване' which means 'Date of upload'."
         }
       ],
       "approved_at": null
@@ -150,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Încărcare data\" is not an accurate translation of \"Upload date.\" \"Încărcare\" means \"uploading\" or \"loading.\"  It doesn't convey the meaning of a date associated with uploading.",
+          "description": "The Romanian translation 'Încărcare data' is not the accurate translation of 'Upload date'. 'Încărcare' means 'uploading', but the translation requires a noun form.",
           "suggestion": "Data încărcării"
         }
       ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Naloži datum\" does not accurately convey the meaning of \"Upload date.\" \"Naloži\" means \"upload\" or \"load,\" which is redundant. The intended meaning is the date when something was uploaded.",
-          "suggestion": "Datumi nalaganja"
+          "description": "The Slovenian translation 'Naloži datum' doesn't accurately convey the meaning of 'Upload date'. 'Naloži' means 'upload' or 'load', which is redundant. It should describe the date of upload.",
+          "suggestion": "Datums nalaganja"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Датум отпреме\" doesn't accurately convey the meaning of \"Upload date.\" \"Отпреме\" means \"shipped\" or \"sent,\" not \"uploaded.\" A more accurate translation would involve words related to uploading, such as 'носилац' (uploader) or a more descriptive phrase.",
-          "suggestion": "Consider \"Датум уноса\" (Date of entry/input) or \"Датум закачивања\" (Date of attachment) or \"Датум отпреме на сервер\" (Date of upload to server)."
+          "description": "The Serbian (Cyrillic) translation \"Датум отпреме\" doesn't accurately convey the meaning of \"Upload date.\" \"Отпреме\" typically refers to shipping or dispatch, not uploading.",
+          "suggestion": "The correct translation should be \"Датум закачивања\" or \"Датум учитавања\"."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Datum otpreme\" translates to \"Shipping date\" or \"Dispatch date\", not \"Upload date\". It misses the nuance of uploading a file or data.",
-          "suggestion": "Datum učitavanja"
+          "description": "The Serbian translation \"Datum otpreme\" translates to \"Shipping date\" or \"Dispatch date,\" not \"Upload date.\" \"Upload date\" would be better translated as \"Datum otpreme na server\" or \"Datum kačenja\".",
+          "suggestion": "Datum kačenja"
         }
       ],
       "approved_at": null
@@ -229,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

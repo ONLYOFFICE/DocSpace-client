@@ -121,6 +121,8 @@ const AvatarEditorDialog = (props) => {
     onChangeFile,
     isProfileUpload,
     setPreview,
+    dataTestId,
+    isAIAgentsFolderRoot,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -131,7 +133,9 @@ const AvatarEditorDialog = (props) => {
 
   const avatarTitle = isProfileUpload
     ? t("Ldap:LdapAvatar")
-    : t("RoomLogoCover:RoomCover");
+    : isAIAgentsFolderRoot
+      ? t("RoomLogoCover:AgentCover")
+      : t("RoomLogoCover:RoomCover");
 
   const onResize = () => {
     const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;
@@ -187,6 +191,14 @@ const AvatarEditorDialog = (props) => {
     }
   };
 
+  const onSaveAction = async (img) => {
+    setIsLoading(true);
+
+    await onSave(img);
+
+    setIsLoading(false);
+  };
+
   return (
     <StyledModalDialog
       displayType="modal"
@@ -196,6 +208,7 @@ const AvatarEditorDialog = (props) => {
       withFooterBorder
       withBodyScrollForcibly={!!scrollBodyHeight}
       scrollBodyHeight={scrollBodyHeight}
+      dataTestId={dataTestId}
     >
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>
@@ -225,8 +238,9 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           primary
-          onClick={onSave ? () => onSave(image) : onSaveClick}
+          onClick={onSave ? () => onSaveAction(image) : onSaveClick}
           isLoading={isLoading}
+          testId="avatar_editor_save_button"
         />
         <Button
           className="cancel-button"
@@ -235,26 +249,29 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           onClick={onCloseModal}
+          testId="avatar_editor_cancel_button"
         />
       </ModalDialog.Footer>
     </StyledModalDialog>
   );
 };
 
-export default inject(({ peopleStore, settingsStore }) => {
-  const { targetUserStore } = peopleStore;
-  const { maxImageUploadSize } = settingsStore;
+export default inject(
+  ({ peopleStore, settingsStore, userStore, treeFoldersStore }) => {
+    const { targetUserStore } = peopleStore;
+    const { maxImageUploadSize } = settingsStore;
 
-  const {
-    targetUser: profile,
-    updateCreatedAvatar,
-    setHasAvatar,
-  } = targetUserStore;
+    const { user: profile } = userStore;
 
-  return {
-    profile,
-    setHasAvatar,
-    updateCreatedAvatar,
-    maxImageUploadSize,
-  };
-})(observer(AvatarEditorDialog));
+    const { updateCreatedAvatar, setHasAvatar } = targetUserStore;
+    const { isAIAgentsFolderRoot } = treeFoldersStore;
+
+    return {
+      profile,
+      setHasAvatar,
+      updateCreatedAvatar,
+      maxImageUploadSize,
+      isAIAgentsFolderRoot,
+    };
+  },
+)(observer(AvatarEditorDialog));

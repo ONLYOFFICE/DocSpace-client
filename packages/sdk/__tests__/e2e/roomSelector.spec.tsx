@@ -1717,7 +1717,7 @@ describe("Room selector actions", () => {
       if (msg.text().includes("onSelectCallback")) logs.push(msg.text());
     });
 
-    const button = page.getByTestId("button");
+    const button = page.getByTestId("selector_submit_button");
 
     expect(button).toBeDisabled();
 

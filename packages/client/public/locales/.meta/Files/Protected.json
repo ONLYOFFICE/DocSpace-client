@@ -3,7 +3,7 @@
   "content": "protected",
   "content_en_sha1_hash": "964cab4bb4a5111731b0c00dbb43f794698d8731",
   "created_at": "2025-05-19T21:30:56.010Z",
-  "updated_at": "2025-06-30T12:20:31.282Z",
+  "updated_at": "2025-08-26T11:15:14.112Z",
   "comment": {
     "text": "This translation key is used to display a status indicator for protected files in a file listing or grid. It's displayed as a label next to a file title and appears in the /packages/client/src/components/panels/EmbeddingPanel component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 396,
+      "line_number": 394,
       "context": "isTextOverflow\n >\n {linkTitle}\n </Link>\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"Files:Protected\")}\n </Text>\n </div>\n );\n \n return (",
       "module": "/packages/client"
     }

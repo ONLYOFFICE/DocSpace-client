@@ -3,7 +3,7 @@
   "content": "Decrypt storage",
   "content_en_sha1_hash": "2ae114849bb95cfb13d5eb2d05d02b8708d00d3e",
   "created_at": "2025-05-19T21:30:57.424Z",
-  "updated_at": "2025-05-26T07:57:33.002Z",
+  "updated_at": "2025-08-21T11:22:39.970Z",
   "comment": {
     "text": "DecryptStorage button label: Used to toggle between \"Encrypt\" and \"Decrypt\" buttons on the File Management screen.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
-      "line_number": 130,
+      "line_number": 131,
       "context": "/>\n <Button\n primary\n label={\n status === EncryptionStatus.Encrypted\n ? t(\"DecryptStorage\")\n : t(\"EncryptStorage\")\n }\n size={ButtonSize.normal}\n onClick={() => setEncryptWarningDialogVisible(true)}\n isDisabled={isDisabled}",
       "module": "/packages/management"
     }

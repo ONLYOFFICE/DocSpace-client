@@ -1,0 +1,362 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@mixin strike-through-styles {
+  color: var(--info-panel-me-label-color);
+  text-decoration: line-through;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+}
+
+.historySubtitle {
+  position: sticky;
+  background: var(--info-panel-background-color);
+  top: 80px;
+  z-index: 99;
+
+  padding: 16px 0 12px;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--info-panel-subtitle-color);
+}
+
+.historyBlock {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+
+  &.withBottomDivider {
+    border-bottom: solid 1px var(--info-panel-border-color);
+  }
+
+  :global(.avatar) {
+    min-width: 32px;
+  }
+
+  :global(.info) {
+    width: 100%;
+    overflow: hidden;
+
+    :global(.title) {
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 4px;
+
+      :global(.name) {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      :global(.date) {
+        white-space: nowrap;
+        display: inline-block;
+        align-self: flex-start;
+        margin-inline-start: auto;
+        font-weight: 600;
+        font-size: 12px;
+        color: var(--info-panel-me-label-color);
+      }
+
+      :global(.users-counter) {
+        margin-bottom: 1px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+
+    :global(.without-break) {
+      word-break: unset;
+    }
+
+    :global(.action-title) {
+      text-wrap: nowrap;
+      :global(.action-title-text) {
+        font-size: 14px;
+        font-weight: 600;
+        white-space: wrap;
+      }
+
+      :global(.text-combined) {
+        text-wrap: nowrap;
+        padding-right: 4px;
+      }
+    }
+  }
+}
+
+.historyDisplaynameBlock {
+  :global(.name) {
+    color: var(--info-panel-subtitle-color);
+  }
+}
+
+.historyBlockMessage {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+
+  gap: 4px;
+  max-width: 100%;
+
+  :global(.main-message) {
+    max-width: 100%;
+    padding-inline-end: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px 4px;
+
+    :global(.name) {
+      color: var(--info-panel-me-label-color);
+    }
+  }
+
+  strong {
+    max-width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  :global(.folder-label),
+  :global(.source-folder-label) {
+    max-width: 100%;
+    color: var(--info-panel-me-label-color);
+    text-wrap: wrap;
+  }
+
+  :global(.source-folder-label) {
+    color: var(--info-panel-comment-editor-icon-color);
+  }
+
+  :global(.old-role) {
+    color: var(--info-panel-role-color);
+    font-weight: 600;
+    text-decoration: line-through;
+  }
+}
+
+.historyLink {
+  width: fit-content;
+  max-width: 100%;
+  display: inline-flex;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  :global(.text) {
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  :global(.link) {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    text-decoration: underline dashed;
+    text-underline-offset: 2px;
+  }
+
+  :global(.space) {
+    display: inline-block;
+    width: 4px;
+    height: 15px;
+  }
+}
+
+.groupLink {
+  &.notClickable {
+    // text-decoration: none;
+    cursor: default;
+  }
+}
+
+.historyBlockTagList {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.historyBlockFilesList {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  border-radius: 3px;
+}
+
+.historyBlockFile {
+  padding: 4px 0px;
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+
+  :global(.icon) {
+    width: 24px;
+    height: 24px;
+    margin-inline-end: 5px;
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  :global(.item-wrapper),
+  :global(.old-item-wrapper) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid var(--info-panel-item-border-color);
+    border-radius: 6px;
+    padding: 6px 8px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--info-panel-item-selected-color);
+    }
+  }
+
+  :global(.old-item-wrapper) {
+    border: none;
+    &:hover {
+      cursor: auto;
+      background-color: transparent;
+    }
+  }
+
+  :global(.item-title) {
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    min-width: 0;
+    gap: 0;
+
+    :global(.name) {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    :global(.exst) {
+      flex-shrink: 0;
+      color: var(--info-panel-file-exst-color);
+    }
+
+    :global(.old-item-value) {
+      :global(.name) {
+        @include strike-through-styles;
+      }
+      :global(.exst) {
+        @include strike-through-styles;
+      }
+    }
+  }
+
+  :global(.old-item-title) {
+    :global(.name),
+    :global(.exst) {
+      @include strike-through-styles;
+    }
+  }
+
+  :global(.location-btn) {
+    margin-inline-start: 8px;
+    min-width: 16px;
+    opacity: 0;
+  }
+
+  &:hover {
+    :global(.location-btn) {
+      opacity: 1;
+    }
+  }
+
+  :global(.index) {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  :global(.change-index) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    :global(.arrow-index) {
+      transform: rotate(-90deg);
+
+      path {
+        fill: var(--info-panel-me-label-color);
+      }
+    }
+
+    :global(.old-index) {
+      @include strike-through-styles;
+    }
+  }
+}
+
+.historyBlockExpandLink {
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+
+  &.filesListExpandLink {
+    margin-top: 8px;
+    margin-inline-start: 5px;
+  }
+
+  &.userListExpandLink {
+    display: inline-block;
+    position: relative;
+    top: 0;
+  }
+
+  strong {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 2px;
+  }
+}

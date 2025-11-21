@@ -78,7 +78,7 @@ const BackupToPublicRoom = ({
       <ModalDialog.Header>{t("Common:SaveToPublicRoom")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>{t("Common:MoveToPublicRoom")}</Text>
+          <Text>{t("Common:MoveToPublicRoom")}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -90,6 +90,7 @@ const BackupToPublicRoom = ({
           primary
           scale
           onClick={onBackupTo}
+          testId="save_backup_to_room_button"
         />
         <Button
           id="delete-file-modal_cancel"
@@ -98,6 +99,7 @@ const BackupToPublicRoom = ({
           size={ButtonSize.normal}
           scale
           onClick={onClose}
+          testId="cancel_backup_to_room_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

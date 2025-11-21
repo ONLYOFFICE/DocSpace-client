@@ -39,6 +39,7 @@ export interface ILogo {
   path: ILogoPath;
   size: ILogoSize;
   name: string;
+  type: number;
 }
 
 export interface IWhiteLabelData {
@@ -84,6 +85,7 @@ export interface ILogoProps {
   linkId: string;
   imageClass?: string;
   name: string;
+  dataTestId?: string;
 }
 
 export interface ILogoOptions {

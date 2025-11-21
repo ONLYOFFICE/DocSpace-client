@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
 import api from "@docspace/shared/api";
 import { setDNSSettings } from "@docspace/shared/api/settings";
@@ -62,6 +63,10 @@ class CommonStore {
   isLoadedCustomizationNavbar = false;
 
   isLoadedWelcomePageSettings = false;
+
+  isLoadedAdManagement = false;
+
+  isLoadedConfigureDeepLink = false;
 
   greetingSettingsIsDefault = true;
 
@@ -130,10 +135,22 @@ class CommonStore {
   };
 
   getGreetingSettingsIsDefault = async () => {
-    const isDefault = await api.settings.getGreetingSettingsIsDefault();
-    runInAction(() => {
-      this.greetingSettingsIsDefault = isDefault;
-    });
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      const isDefault = await api.settings.getGreetingSettingsIsDefault(
+        abortController.signal,
+      );
+
+      runInAction(() => {
+        this.greetingSettingsIsDefault = isDefault;
+      });
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+
+      throw error;
+    }
   };
 
   get isDefaultDNS() {
@@ -161,18 +178,26 @@ class CommonStore {
   };
 
   getMappedDomain = async () => {
-    const res = await api.portal.getPortal();
-    const { mappedDomain } = res;
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
-    const tempObject = {};
+    try {
+      const res = await api.portal.getPortal(abortController.signal);
+      const { mappedDomain } = res;
 
-    tempObject.enable = !!mappedDomain;
+      const tempObject = {};
 
-    if (tempObject.enable) {
-      tempObject.dnsName = mappedDomain;
+      tempObject.enable = !!mappedDomain;
+
+      if (tempObject.enable) {
+        tempObject.dnsName = mappedDomain;
+      }
+
+      this.setDNSSettings(tempObject);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
     }
-
-    this.setDNSSettings(tempObject);
   };
 
   saveDNSSettings = async () => {
@@ -220,6 +245,14 @@ class CommonStore {
     this.isLoadedDNSSettings = isLoadedDNSSettings;
   };
 
+  setIsLoadedAdManagement = (isLoadedAdManagement) => {
+    this.isLoadedAdManagement = isLoadedAdManagement;
+  };
+
+  setIsLoadedConfigureDeepLink = (isLoadedConfigureDeepLink) => {
+    this.isLoadedConfigureDeepLink = isLoadedConfigureDeepLink;
+  };
+
   setIsLoadedCustomization = (isLoadedCustomization) => {
     this.isLoadedCustomization = isLoadedCustomization;
   };
@@ -233,8 +266,18 @@ class CommonStore {
   };
 
   getDeepLinkSettings = async () => {
-    const res = await api.settings.getDeepLinkSettings();
-    this.deepLinkSettings = res?.handlingMode;
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      const res = await api.settings.getDeepLinkSettings(
+        abortController.signal,
+      );
+      this.deepLinkSettings = res?.handlingMode;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 }
 

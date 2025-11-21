@@ -35,12 +35,3 @@ export const NoUserSelect = css`
   -ms-user-select: none;
   -khtml-user-select: none;
 `;
-
-export const TextUserSelect = css`
-  -webkit-touch-callout: text;
-  -webkit-user-select: text;
-  -khtml-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-`;

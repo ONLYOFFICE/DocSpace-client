@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "Diretório OneDrive",
   "FolderTitleWebDav": "Diretório WebDAV",
   "FolderTitleYandex": "Diretório Yandex",
-  "GuestReleaseTipLink": "Saiba mais sobre os tipos de usuários",
-  "LinkHasExpiredAndHasBeenDisabled": "O link expirou e foi desativado",
   "LinkValidTime": "Este link é válido apenas por {{days_count}} dias.",
   "NewForm": "Formulário PDF",
   "OwnerChange": "Alterar proprietário",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Alterar as informações de terceiros",
   "ThirdPartyTitle": "Serviços terceirizados",
   "TitleShowActions": "Exibir ações do arquivo",
-  "TitleShowFolderActions": "Exibir ações da pasta"
+  "TitleShowFolderActions": "Exibir ações da pasta",
+  "TrashItemsDeleteSuccess": "Os elementos selecionados foram excluídos com sucesso de {{sectionName}}"
 }

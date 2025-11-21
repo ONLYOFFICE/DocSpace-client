@@ -78,7 +78,7 @@ const ContinuePortalForm = () => {
       <Trans t={t} i18nKey="SuccessReactivate" ns="Confirm">
         Your account has been successfully reactivated. In 10 seconds you will
         be redirected to the
-        <Link isHovered href="/">
+        <Link isHovered href="/" dataTestId="redirect_portal_link">
           portal
         </Link>
       </Trans>
@@ -98,6 +98,7 @@ const ContinuePortalForm = () => {
           label={t("Reactivate")}
           tabIndex={1}
           onClick={onRestoreClick}
+          testId="continue_reactivate_button"
         />
         <Button
           scale
@@ -105,6 +106,7 @@ const ContinuePortalForm = () => {
           label={t("Common:CancelButton")}
           tabIndex={1}
           onClick={onCancelClick}
+          testId="continue_cancel_button"
         />
       </ButtonsWrapper>
     </>

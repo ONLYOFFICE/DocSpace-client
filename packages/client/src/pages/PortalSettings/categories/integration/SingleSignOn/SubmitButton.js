@@ -66,6 +66,8 @@ const SubmitResetButtons = (props) => {
         }
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"
+        saveButtonDataTestId="save_sso_settings_button"
+        cancelButtonDataTestId="restore_sso_settings_button"
       />
       {confirmationResetModal ? (
         <ResetConfirmationModal

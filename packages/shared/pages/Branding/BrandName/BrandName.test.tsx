@@ -25,18 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router";
 import { ThemeProvider } from "../../../components/theme-provider";
 import Base from "../../../themes/base";
 import { BrandName } from "./index";
+import buttonStyles from "../../../components/button/Button.module.scss";
 
-jest.mock("react-device-detect", () => ({
+vi.mock("react-device-detect", () => ({
   isMobile: false,
 }));
 
-const onSave = jest.fn();
+const onSave = vi.fn();
 
 const defaultProps = {
   showNotAvailable: false,
@@ -61,7 +62,7 @@ const renderComponent = (props = {}) => {
 
 describe("BrandName", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without crashing", () => {
@@ -91,14 +92,14 @@ describe("BrandName", () => {
 
   it("updates brandNameWhiteLabel when input changes", () => {
     renderComponent();
-    const input = screen.getByTestId("logo-text-input");
+    const input = screen.getByTestId("brand_name_input");
     fireEvent.change(input, { target: { value: "New Brand" } });
     expect(input).toHaveValue("New Brand");
   });
 
   it("calls onSave with correct data when save button is clicked", () => {
     renderComponent();
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("brand_name_save_button");
     fireEvent.click(saveButton);
     expect(onSave).toHaveBeenCalledWith({
       logoText: "Current Brand",
@@ -108,8 +109,8 @@ describe("BrandName", () => {
 
   it("resets to defaultBrandName when cancel button is clicked", () => {
     renderComponent();
-    const input = screen.getByTestId("logo-text-input");
-    const cancelButton = screen.getByTestId("cancel-button");
+    const input = screen.getByTestId("brand_name_input");
+    const cancelButton = screen.getByTestId("brand_name_cancel_button");
     fireEvent.change(input, { target: { value: "New Brand" } });
     fireEvent.click(cancelButton);
     expect(input).toHaveValue("Default Brand");
@@ -117,20 +118,22 @@ describe("BrandName", () => {
 
   it("disables save button when text is equal to defaultBrandName", () => {
     renderComponent({ brandName: "Default Brand" });
-    const saveButton = screen.getByTestId("save-button");
-    expect(saveButton).toHaveClass("isDisabled");
+    const saveButton = screen.getByTestId("brand_name_save_button");
+    expect(saveButton).toHaveClass(buttonStyles.isDisabled);
   });
 
   it("shows reminder when text is different from defaultBrandName", () => {
     renderComponent();
-    const input = screen.getByTestId("logo-text-input");
+    const input = screen.getByTestId("brand_name_input");
     fireEvent.change(input, { target: { value: "New Brand" } });
-    expect(screen.getByText("YouHaveUnsavedChanges")).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:YouHaveUnsavedChanges"),
+    ).toBeInTheDocument();
   });
 
   it("disables input when isSettingPaid is false", () => {
     renderComponent({ isSettingPaid: false });
-    const input = screen.getByTestId("logo-text-input");
+    const input = screen.getByTestId("brand_name_input");
     expect(input).toBeDisabled();
   });
 });

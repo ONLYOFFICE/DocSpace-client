@@ -70,7 +70,12 @@ const PlusButton = ({
   const model = getData();
 
   return (
-    <div ref={forwardedRef} className={className} {...rest}>
+    <div
+      ref={forwardedRef}
+      className={className}
+      {...rest}
+      data-testid="plus-button"
+    >
       <IconButton
         onClick={onClick}
         iconName={PlusReactSvgUrl}

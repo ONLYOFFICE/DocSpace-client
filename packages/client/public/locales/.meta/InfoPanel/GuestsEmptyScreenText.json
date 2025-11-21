@@ -3,7 +3,7 @@
   "content": "See guests details here",
   "content_en_sha1_hash": "a0a6455e4fbd9e1024f64ec4e84317bb959c5f15",
   "created_at": "2025-05-19T21:30:54.874Z",
-  "updated_at": "2025-05-26T07:57:32.442Z",
+  "updated_at": "2025-08-04T07:30:01.204Z",
   "comment": {
     "text": "The \"See guests details here\" translation key is used to display a message when there are no guest items to show. It appears in an InfoPanel Body view on the Home page and is rendered below an empty screen image. This text prompts users to explore further for guests' information.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/NoContactsItem.tsx",
-      "line_number": 57,
-      "context": "<div className=\"no-thumbnail-img-wrapper\">\n <img src={imgSrc} alt=\"empty screen\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {isGuests\n ? t(\"InfoPanel:GuestsEmptyScreenText\")\n : isGroups\n ? t(\"InfoPanel:GroupsEmptyScreenText\")\n : t(\"InfoPanel:MembersEmptyScreenText\")}\n </Text>\n </StyledNoItemContainer>",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoContactsItem.tsx",
+      "line_number": 58,
+      "context": "<div className=\"no-thumbnail-img-wrapper\">\n <img src={imgSrc} alt=\"empty screen\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {isGuests\n ? t(\"InfoPanel:GuestsEmptyScreenText\")\n : isGroups\n ? t(\"InfoPanel:GroupsEmptyScreenText\")\n : t(\"InfoPanel:MembersEmptyScreenText\")}\n </Text>\n </div>",
       "module": "/packages/client"
     }
   ],

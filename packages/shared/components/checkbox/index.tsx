@@ -36,32 +36,34 @@ import { Text } from "../text";
 import { CheckboxProps } from "./Checkbox.types";
 import styles from "./Checkbox.module.scss";
 
-const RenderCheckboxIcon = ({
-  isChecked,
-  isIndeterminate,
-  tabIndex,
-}: {
-  isChecked: boolean;
-  isIndeterminate: boolean;
-  tabIndex: number;
-}) => {
-  return isIndeterminate ? (
-    <CheckboxIndeterminateIcon
-      tabIndex={tabIndex}
-      className={classNames(styles.checkbox, "not-selectable")}
-    />
-  ) : isChecked ? (
-    <CheckboxCheckedIcon
-      tabIndex={tabIndex}
-      className={classNames(styles.checkbox, "not-selectable")}
-    />
-  ) : (
-    <CheckboxIcon
-      tabIndex={tabIndex}
-      className={classNames(styles.checkbox, "not-selectable")}
-    />
-  );
-};
+const RenderCheckboxIcon = React.memo(
+  ({
+    isChecked,
+    isIndeterminate,
+    tabIndex,
+  }: {
+    isChecked: boolean;
+    isIndeterminate: boolean;
+    tabIndex: number;
+  }) => {
+    return isIndeterminate ? (
+      <CheckboxIndeterminateIcon
+        tabIndex={tabIndex}
+        className={classNames(styles.checkbox, "not-selectable")}
+      />
+    ) : isChecked ? (
+      <CheckboxCheckedIcon
+        tabIndex={tabIndex}
+        className={classNames(styles.checkbox, "not-selectable")}
+      />
+    ) : (
+      <CheckboxIcon
+        tabIndex={tabIndex}
+        className={classNames(styles.checkbox, "not-selectable")}
+      />
+    );
+  },
+);
 
 const CheckboxPure = ({
   id,
@@ -79,6 +81,7 @@ const CheckboxPure = ({
   name,
   tabIndex = -1,
   helpButton,
+  dataTestId,
   ...rest
 }: CheckboxProps) => {
   const [checked, setChecked] = React.useState(isChecked);
@@ -122,7 +125,7 @@ const CheckboxPure = ({
         [styles.error]: hasError,
       })}
       title={title}
-      data-testid="checkbox"
+      data-testid={dataTestId ?? "checkbox"}
     >
       <input
         className={styles.hiddenInput}

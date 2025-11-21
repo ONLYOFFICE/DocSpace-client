@@ -3,7 +3,7 @@
   "AllDataTransferred": "All data transferred",
   "DataReassignment": "Data reassignment",
   "DeleteProfileIsFinished": "Delete profile when reassignment is finished",
-  "DescriptionDataReassignment": "We will transfer rooms created by user and documents stored in user’s rooms.",
+  "DescriptionDataReassignment": "We will transfer shared files and rooms created by contact.",
   "Interrupted": "Interrupted, some data could not be transferred",
   "MoreAboutDataTransfer": "More about data transfer",
   "NewDataOwner": "New data owner",

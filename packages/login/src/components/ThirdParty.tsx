@@ -26,9 +26,8 @@
 
 "use client";
 
-import React, { useCallback, useEffect, useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "next/navigation";
 import styled from "styled-components";
 
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
@@ -51,36 +50,20 @@ const StyledThirdParty = styled.div<{ isVisible: boolean }>`
 type ThirdPartyProps = {
   thirdParty?: TThirdPartyProvider[];
   capabilities?: TCapabilities;
-  ssoUrl?: string;
   ssoExists?: boolean;
   oauthDataExists?: boolean;
-  hideAuthPage?: boolean;
 };
 
 const ThirdParty = ({
   thirdParty,
   capabilities,
-  ssoUrl,
   ssoExists,
   oauthDataExists,
-  hideAuthPage,
 }: ThirdPartyProps) => {
   const { isLoading } = useContext(LoginValueContext);
   const { setIsModalOpen } = useContext(LoginDispatchContext);
 
-  const searchParams = useSearchParams();
-
   const { t } = useTranslation(["Login", "Common"]);
-
-  useEffect(() => {
-    if (
-      ssoUrl &&
-      hideAuthPage &&
-      searchParams?.get("skipssoredirect") !== "true"
-    ) {
-      window.location.replace(ssoUrl);
-    }
-  }, [capabilities, searchParams, ssoUrl, hideAuthPage]);
 
   const onSocialButtonClick = useCallback(
     (e: React.MouseEvent<Element, MouseEvent>) => {

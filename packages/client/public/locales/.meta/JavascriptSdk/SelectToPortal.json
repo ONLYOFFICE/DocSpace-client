@@ -3,7 +3,7 @@
   "content": "Select to {{productName}}",
   "content_en_sha1_hash": "a4087cedfe5229e56d7a33ecd56a49f3bb29e90d",
   "created_at": "2025-05-19T21:30:54.675Z",
-  "updated_at": "2025-05-24T08:50:07.169Z",
+  "updated_at": "2025-08-04T07:30:01.410Z",
   "comment": {
     "text": "This translation key is used for a placeholder text that displays when users select an option in a user interface element, providing a default message to be displayed next to a product name. It appears on a form or input field within a developer tool and should display the name of a specific product.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 130,
-      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"ButtonText\")} />\n <TextInput\n scale\n onChange={setButtonText}\n placeholder={t(\"SelectToPortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n value={buttonValue}\n tabIndex={3}\n />",
+      "line_number": 137,
+      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"ButtonText\")} />\n <TextInput\n scale\n onChange={setButtonText}\n placeholder={t(\"SelectToPortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n value={buttonValue}\n tabIndex={3}\n testId=\"button_mode_text_input\"",
       "module": "/packages/client"
     }
   ],

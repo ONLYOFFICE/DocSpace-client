@@ -38,12 +38,12 @@ export const Header = memo(
   }: HeaderProps) => (
     <div className={className} ref={ref}>
       <h3
-        title={t("Common:RoleFields", {
-          roleName,
+        title={t("Common:RecipientFields", {
+          recipientName: roleName,
         })}
       >
-        {t("Common:RoleFields", {
-          roleName,
+        {t("Common:RecipientFields", {
+          recipientName: roleName,
         })}
       </h3>
       {canEditRoom ? (

@@ -14,9 +14,6 @@ export default {
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@storybook/addon-actions"),
-    getAbsolutePath("@storybook/addon-controls"),
-    getAbsolutePath("@storybook/addon-viewport"),
     getAbsolutePath("@storybook/addon-designs"),
     {
       name: "@storybook/addon-docs",

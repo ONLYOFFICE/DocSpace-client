@@ -3,7 +3,7 @@
   "content": "Embed",
   "content_en_sha1_hash": "ad02e14e2841dfbd22ab2caa12b5541c5b01a53a",
   "created_at": "2025-08-26T11:15:03.751Z",
-  "updated_at": "2025-11-18T14:41:49.877Z",
+  "updated_at": "2025-11-21T07:41:41.682Z",
   "comment": {
     "text": "This key is used to label an option or button related to embedding content or functionality. It likely appears as a button or menu item allowing users to embed something, often related to sharing or security settings. Translators should consider the context of embedding, which often involves sharing or integrating content elsewhere.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2133,
+      "line_number": 2135,
       "context": "// onLoad: () => this.onLoadLinks(t, item),\n },\n {\n id: \"option_embedding-setting\",\n key: \"embedding-settings\",\n label: t(\"Common:Embed\"),\n icon: CodeReactSvgUrl,\n onClick: () => this.onOpenEmbeddingSettings(item),\n disabled: !item.security?.Embed,\n },\n {",
       "module": "/packages/client"
     },

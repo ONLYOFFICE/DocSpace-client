@@ -71,6 +71,7 @@ const Message = ({
   isLast,
   getIcon,
   getResultStorageId,
+  folderFormValidation,
 }: MessageProps) => {
   const { currentChat } = useChatStore();
 
@@ -167,6 +168,7 @@ const Message = ({
           messageIndex={idx}
           getIcon={getIcon}
           getResultStorageId={getResultStorageId}
+          folderFormValidation={folderFormValidation}
         />
       ) : null}
     </div>

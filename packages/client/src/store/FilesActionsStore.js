@@ -1733,6 +1733,8 @@ class FilesActionStore {
   };
 
   nameWithoutExtension = (title) => {
+    if (!title) return "";
+
     const indexPoint = title.lastIndexOf(".");
     const splitTitle = title.split(".");
     const splitTitleLength = splitTitle.length;

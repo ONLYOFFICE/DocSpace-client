@@ -780,7 +780,6 @@
   "Reviewing": "pregled",
   "RevokeLink": "Opozovi link",
   "Role": "Uloga",
-  "RoleAgentManagerDescription": "Menadžeri agenata mogu da upravljaju dodeljenim agentima, pozivaju nove korisnike i dodeljuju uloge ispod njihovog nivoa.",
   "RoleCommentator": "Komentator",
   "RoleCommentatorDescription": "Operacije sa postojećim datotekama: pregledanje, komentarisanje.",
   "RoleContentCreatorDescription": "Kreatori sadržaja mogu kreirati i uređivati fajlove u prostoriji, ali ne mogu upravljati korisnicima niti pristupiti podešavanjima.",

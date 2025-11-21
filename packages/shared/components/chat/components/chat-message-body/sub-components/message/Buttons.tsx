@@ -65,6 +65,7 @@ const Buttons = ({
   getIcon,
   messageIndex,
   getResultStorageId,
+  folderFormValidation,
 }: MessageButtonsProps) => {
   const { t } = useTranslation(["Common"]);
   const { roomId, findPreviousUserMessage } = useMessageStore();
@@ -75,7 +76,7 @@ const Buttons = ({
   const onCloseFolderSelector = () => setShowFolderSelector(false);
 
   const onCopyAction = () => {
-    copy(text);
+    copy(text, { format: "text/plain" });
     toastr.success(t("MessageCopiedSuccess"));
   };
 
@@ -201,6 +202,7 @@ const Buttons = ({
           getFileName={getExportedFileName}
           getIcon={getIcon}
           showFolderSelector={showFolderSelector}
+          folderFormValidation={folderFormValidation}
         />
       ) : null}
     </>

@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "房间模板<1>«{{title}}»</1>已保存",
   "ScheduledTrashMove": "{{date}}将被移至{{sectionName}}",
   "SendByEmail": "通过邮件发送",
+  "SharedBy": "共享自",
   "ShareFolder": "共享文件夹",
   "ShareFolderDescription": "系统会创建一个新房间，并将所选文件夹的所有内容复制到其中。之后，您可以邀请其他用户在房间内协作处理文件。",
   "SharePDFFormModalDescription": "将创建一个新房间，并将 PDF 表单复制到其中。然后，您可以邀请其他用户在房间中填写表单。",

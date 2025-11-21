@@ -175,4 +175,4 @@ const Message = ({
   );
 };
 
-export default Message;
+export default React.memo(Message);

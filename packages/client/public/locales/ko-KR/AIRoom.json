@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>참고:</1> 응답 품질은 모델에 따라 다를 수 있습니다. 최상의 결과를 얻으려면 최신 모델을 사용하는 것이 좋습니다.",
   "ResultStorage": "결과 저장",
   "UploadFilesDevice": "개인 기기에서 파일 업로드",
-  "UploadFilesPortal": "{{sectionNameFirst}} 또는 {{sectionNameSecond}}에서 파일을 업로드하세요."
+  "UploadFilesPortal": "{{sectionNameFirst}} 또는 {{sectionNameSecond}}에서 파일을 업로드하세요.",
+  "AgentInViewModeWarning": "이 AI 에이전트는 <strong>보기 전용</strong> 모드입니다. 다른 사용자의 AI 채팅 활동 결과를 볼 수 있습니다.",
+  "EmptyResultsViewerDescription": "다른 사용자의 AI 채팅 활동 결과가 사용 가능하게 되면 여기에서 확인할 수 있습니다."
 }

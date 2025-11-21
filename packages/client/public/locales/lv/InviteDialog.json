@@ -21,5 +21,6 @@
   "UserAgentMaxAvailableRoleWarning": "Viesi un lietotāji nevar tikt iecelti par aģentu vadītājiem. Šī amata funkcijai ir piemēroti tikai Istabu un {{productName}} administratori.",
   "UserMaxAvailableRoleWarning": "Viesi un lietotāji nevar būt telpu pārvaldnieki. Norādītajai lomai ir piemērota tikai telpa un {{productName}} administratori.",
   "UsersAlreadyAdded": "Daži lietotāji jau ir pievienoti",
-  "UsersCannotBeAdded": "Invalid kontaktpersonas nevar pievienot telpai"
+  "UsersCannotBeAdded": "Invalid kontaktpersonas nevar pievienot telpai",
+  "GuestAgentMaxAvailableRoleWarning": "Viesi nevar tikt iecelti par satura veidotāju.\nTikai Istabu administratori, {{productName}} administratori un Lietotāji ir tiesīgi ieņemt šo amatu."
 }

@@ -11,7 +11,6 @@
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Inserisci l’URL dell’endpoint API fornito dal tuo servizio AI",
   "ResetKnowledgeDescription": "Questa azione rimuoverà la chiave API configurata e disabiliterà l’indicizzazione dei documenti per la knowledge base. L’aggiunta di nuovi documenti e il loro utilizzo non sarà disponibile finché non verrà fornita una nuova chiave.",
-  "ResetWebSearchDescription": "Questa azione rimuoverà la chiave API configurata e disconnetterà l’integrazione di ricerca web. Le chat AI non potranno più accedere a informazioni in tempo reale da Internet finché non verrà aggiunta una nuova chiave.",
   "WebSearchDisabledSuccess": "Ricerca web disabilitata con successo",
   "WebSearchEnabledSuccess": "Ricerca web abilitata con successo",
   "WebSearchKeyDescription": "Inserisci la chiave API ottenuta dal tuo provider di ricerca web"

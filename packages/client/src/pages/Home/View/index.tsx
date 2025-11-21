@@ -101,6 +101,9 @@ type ViewProps = UseContactsProps &
     setDeleteDialogVisible: DialogsStore["setDeleteDialogVisible"];
 
     canUseChat: AccessRightsStore["canUseChat"];
+
+    isErrorAIAgentNotAvailable: FilesStore["isErrorAIAgentNotAvailable"];
+
     isAdmin: AuthStore["isAdmin"];
     aiConfig: SettingsStore["aiConfig"];
     standalone: SettingsStore["standalone"];
@@ -184,6 +187,7 @@ const View = ({
   standalone,
   isResultTab,
   resultId,
+  isErrorAIAgentNotAvailable,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common", "AIRoom"]);
@@ -579,7 +583,7 @@ const View = ({
               sectionWidth={context.sectionWidth}
               currentView={currentView}
             />
-          ) : currentView === "chat" ? (
+          ) : currentView === "chat" && !isErrorAIAgentNotAvailable ? (
             <Chat
               userAvatar={userAvatar}
               roomId={isLoading && !showHeaderLoader ? "-1" : roomId!}
@@ -667,6 +671,7 @@ export const ViewComponent = inject(
       aiAgentsController,
 
       clearFiles,
+      isErrorAIAgentNotAvailable,
     } = filesStore;
 
     const {
@@ -775,6 +780,7 @@ export const ViewComponent = inject(
       setIsAIAgentChatDelete,
       setDeleteDialogVisible,
 
+      isErrorAIAgentNotAvailable,
       canUseChat,
       isAdmin,
       aiConfig,

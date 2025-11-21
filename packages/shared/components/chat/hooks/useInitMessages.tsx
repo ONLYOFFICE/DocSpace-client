@@ -88,6 +88,7 @@ const useInitMessages = (roomId: string | number) => {
     } catch (error) {
       console.error(error);
       const currentSearch = new URLSearchParams(window.location.search);
+      cacheChatId.delete("chat");
       currentSearch.delete("chat");
       window.history.replaceState(
         null,

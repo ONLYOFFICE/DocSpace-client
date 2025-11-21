@@ -105,6 +105,7 @@ const PureHome = (props) => {
     isPrivacyFolder,
     isRecycleBinFolder,
     isErrorRoomNotAvailable,
+    isErrorAIAgentNotAvailable,
     isIndexEditingMode,
 
     isSecondaryProgressVisbile,
@@ -392,6 +393,9 @@ const PureHome = (props) => {
   const isDisabledKnowledge =
     !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
 
+  const isErrorAvailable =
+    isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage || isProfile ? (
@@ -407,10 +411,7 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps} withoutFooter={isChat}>
-        {!isErrorRoomNotAvailable ||
-        isContactsPage ||
-        isProfile ||
-        isSettingsPage ? (
+        {!isErrorAvailable || isContactsPage || isProfile || isSettingsPage ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -530,6 +531,7 @@ export const Component = inject(
 
       disableDrag,
       isErrorRoomNotAvailable,
+      isErrorAIAgentNotAvailable,
       setIsPreview,
       getRooms,
       scrollToTop,
@@ -748,6 +750,7 @@ export const Component = inject(
       canCreateSecurity,
       startDropPreview,
 
+      isErrorAIAgentNotAvailable,
       currentTab: aiRoomStore.currentTab,
       aiConfig: settingsStore.aiConfig,
 

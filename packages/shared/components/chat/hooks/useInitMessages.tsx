@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useLocation } from "react-router";
 
 import { getChatMessages } from "../../../api/ai";
@@ -37,6 +37,13 @@ const useInitMessages = (roomId: string | number) => {
   const [chatId, setChatId] = React.useState("");
   const [total, setTotal] = React.useState(0);
   const location = useLocation();
+
+  const resetChat = useCallback(() => {
+    setMessages([]);
+    setTotal(0);
+    setChatId("");
+    cacheChatId.delete("chat");
+  }, []);
 
   React.useEffect(() => {
     if (!roomId) cacheChatId.delete("chat");
@@ -58,14 +65,7 @@ const useInitMessages = (roomId: string | number) => {
     return () => {
       window.removeEventListener("select-chat", onCacheChat);
     };
-  }, []);
-
-  const resetChat = () => {
-    setMessages([]);
-    setTotal(0);
-    setChatId("");
-    cacheChatId.delete("chat");
-  };
+  }, [resetChat]);
 
   const initMessages = React.useCallback(async () => {
     try {
@@ -98,7 +98,7 @@ const useInitMessages = (roomId: string | number) => {
       );
       resetChat();
     }
-  }, [location.search]);
+  }, [location.search, resetChat]);
 
   return {
     messages,

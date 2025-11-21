@@ -62,6 +62,9 @@ import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import type AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import NoAccessContainer, {
+  NoAccessContainerType,
+} from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -605,6 +608,8 @@ const View = ({
               setDeleteDialogVisible={setDeleteDialogVisible}
               folderFormValidation={folderFormValidation}
             />
+          ) : currentView === "chat" && isErrorAIAgentNotAvailable ? (
+            <NoAccessContainer type={NoAccessContainerType.Agent} />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
           ) : (

@@ -49,10 +49,7 @@ const useInitMessages = (roomId: string | number) => {
       if (chatId) {
         cacheChatId.set("chat", chatId);
       } else {
-        cacheChatId.delete("chat");
-        setMessages([]);
-        setTotal(0);
-        setChatId("");
+        resetChat();
       }
     };
 
@@ -63,6 +60,13 @@ const useInitMessages = (roomId: string | number) => {
     };
   }, []);
 
+  const resetChat = () => {
+    setMessages([]);
+    setTotal(0);
+    setChatId("");
+    cacheChatId.delete("chat");
+  };
+
   const initMessages = React.useCallback(async () => {
     try {
       const currChatId =
@@ -70,9 +74,7 @@ const useInitMessages = (roomId: string | number) => {
         cacheChatId.get("chat");
 
       if (!currChatId) {
-        setMessages([]);
-        setTotal(0);
-        setChatId("");
+        resetChat();
         return;
       }
 
@@ -88,13 +90,13 @@ const useInitMessages = (roomId: string | number) => {
     } catch (error) {
       console.error(error);
       const currentSearch = new URLSearchParams(window.location.search);
-      cacheChatId.delete("chat");
       currentSearch.delete("chat");
       window.history.replaceState(
         null,
         "",
         `${window.location.pathname}?${currentSearch.toString()}`,
       );
+      resetChat();
     }
   }, [location.search]);
 

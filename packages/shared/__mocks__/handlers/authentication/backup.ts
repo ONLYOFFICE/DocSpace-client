@@ -24,19 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { http, HttpResponse } from "msw";
+import { http } from "msw";
 
-import { BASE_URL } from "../../utils";
+import { API_PREFIX } from "../../e2e/utils";
 
-const deletePath = `${BASE_URL}/portal/deletebackup/:backupId`;
-const startPath = `${BASE_URL}/portal/startbackup`;
+const deletePath = `portal/deletebackup/:backupId`;
+const startPath = `portal/startbackup`;
 
-export const createDeleteBackupHandler = () =>
-  http.delete(deletePath, () => {
-    return HttpResponse.json();
+export const createDeleteBackupHandler = (port: string) =>
+  http.delete(`http://localhost:${port}/${API_PREFIX}/${deletePath}`, () => {
+    return new Response(JSON.stringify({}));
   });
 
-export const createStartBackupHandler = () =>
-  http.post(startPath, () => {
-    return HttpResponse.json();
+export const createStartBackupHandler = (port: string) =>
+  http.post(`http://localhost:${port}/${API_PREFIX}/${startPath}`, () => {
+    return new Response(JSON.stringify({}));
   });

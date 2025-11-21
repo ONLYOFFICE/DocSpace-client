@@ -27,38 +27,17 @@
 import { confirmHandler, ErrorConfirm } from "./confirm";
 import { loginHandler } from "./login";
 import { loginWithTfaCodeHandler } from "./loginWithTfaCode";
+import { createDeleteBackupHistoryHandler, createGetBackupHistoryHandler } from "./backupHistory";
+import { createDeleteBackupHandler, createStartBackupHandler } from "./backup";
 
 export { confirmHandler, loginHandler, loginWithTfaCodeHandler, ErrorConfirm };
 
-<<<<<<<< HEAD:packages/shared/__mocks__/handlers/authentication/index.ts
 export const authenticationHandlers = (port: string) => [
   loginHandler(port),
   confirmHandler(port),
   loginWithTfaCodeHandler(port),
+  createGetBackupHistoryHandler(port),
+  createDeleteBackupHistoryHandler(port),
+  createDeleteBackupHandler(port),
+  createStartBackupHandler(port),
 ];
-========
-const getProgressPath = `${BASE_URL}/portal/getrestoreprogress`;
-const startRestorePath = `${BASE_URL}/portal/startrestore`;
-
-export const createGetRestoreProgressHandler = ({
-  progress = 0,
-  error,
-}: {
-  progress?: number;
-  error?: string;
-}) =>
-  http.get(getProgressPath, () => {
-    const response: { progress: number; error?: string } = { progress };
-
-    if (error) {
-      response.error = error;
-    }
-
-    return HttpResponse.json({ response });
-  });
-
-export const createStartRestoreHandler = () =>
-  http.post(startRestorePath, () => {
-    return HttpResponse.json();
-  });
->>>>>>>> develop:packages/shared/__mocks__/handlers/authentication/restore.ts

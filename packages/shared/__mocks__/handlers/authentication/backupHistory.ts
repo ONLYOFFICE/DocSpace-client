@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { http, HttpResponse } from "msw";
+import { http } from "msw";
 
-import { BASE_URL } from "../../utils";
+import { API_PREFIX } from "../../e2e/utils";
 
-const getPath = `${BASE_URL}/portal/getbackuphistory`;
-const deletePath = `${BASE_URL}/portal/deletebackuphistory`;
+const getPath = `portal/getbackuphistory`;
+const deletePath = `portal/deletebackuphistory`;
 
 const backupList = [
   {
@@ -48,12 +48,12 @@ const backupList = [
   },
 ];
 
-export const createGetBackupHistoryHandler = () =>
-  http.get(getPath, () => {
-    return HttpResponse.json({ response: backupList });
+export const createGetBackupHistoryHandler = (port: string) =>
+  http.get(`http://localhost:${port}/${API_PREFIX}/${getPath}`, () => {
+    return new Response(JSON.stringify({ response: backupList }));
   });
 
-export const createDeleteBackupHistoryHandler = () =>
-  http.delete(deletePath, () => {
-    return HttpResponse.json();
+export const createDeleteBackupHistoryHandler = (port: string) =>
+  http.delete(`http://localhost:${port}/${API_PREFIX}/${deletePath}`, () => {
+    return new Response(JSON.stringify({}));
   });

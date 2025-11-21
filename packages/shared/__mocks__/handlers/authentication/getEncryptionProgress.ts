@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { http, HttpResponse } from "msw";
+import { http } from "msw";
 
-import { BASE_URL } from "../../utils";
+import { BASE_URL } from "../../e2e/utils";
 
 const url = `${BASE_URL}/settings/encryption/progress`;
 
@@ -51,17 +51,17 @@ export const createGetEncryptionProgressHandler = ({
   http.get(url, () => {
     if (error) {
       // Return an error response that matches the expected format
-      return HttpResponse.json(
-        {
+      return new Response(
+        JSON.stringify({
           error: { message: error },
-        },
+        }),
         { status: 500 },
       );
     }
 
     // Return the progress value in the expected format
     // The AxiosClient expects a 'response' property
-    return HttpResponse.json({ response: progress });
+    return new Response(JSON.stringify({ response: progress }));
   });
 
 export const createGetEncryptionHistoryHandler = (
@@ -69,5 +69,5 @@ export const createGetEncryptionHistoryHandler = (
 ) =>
   http.get(`${BASE_URL}/settings/encryption/history`, () => {
     // Return the history data in the expected format with a 'response' property
-    return HttpResponse.json({ response: historyData });
+    return new Response(JSON.stringify({ response: historyData }));
   });

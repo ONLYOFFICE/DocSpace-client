@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Ενημερώθηκε ο διακομιστής με επιτυχία",
   "ServiceIcon": "Εικονίδιο υπηρεσίας",
   "SystemMCPListTitle": "Σύστημα",
-  "WebSearchEnabledSuccess": "Επιτυχής ενεργοποίηση αναζήτησης ιστού",
   "WebSearchKeyHiddenDescription": "Το κλειδί API εμφανίζεται μόνο μία φορά κατά την αποθήκευση και στη συνέχεια κρύβεται για λόγους ασφαλείας."
 }

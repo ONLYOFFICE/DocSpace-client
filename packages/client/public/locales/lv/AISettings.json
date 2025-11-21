@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Serveris atjaunināts veiksmīgi",
   "ServiceIcon": "Pakalpojuma ikona",
   "SystemMCPListTitle": "Sistēma",
-  "WebSearchEnabledSuccess": "Web meklēšana veiksmīgi ieslēgta",
   "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos."
 }

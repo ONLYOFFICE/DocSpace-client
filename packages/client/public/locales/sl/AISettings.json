@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Server posodobljen uspešno",
   "ServiceIcon": "Ikona storitve",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchEnabledSuccess": "Omogočeno uspešno iskanje po spletu",
   "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov."
 }

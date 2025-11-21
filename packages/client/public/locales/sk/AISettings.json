@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Server bol úspešne aktualizovaný.",
   "ServiceIcon": "Ikona služby",
   "SystemMCPListTitle": "Systém",
-  "WebSearchEnabledSuccess": "Webové vyhľadávanie bolo úspešne povolené",
   "WebSearchKeyHiddenDescription": "Kľúč API sa zobrazí len raz pri uložení a následne je skrytý z dôvodu bezpečnosti."
 }

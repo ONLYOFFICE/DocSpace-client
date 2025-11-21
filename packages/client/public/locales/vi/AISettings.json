@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Đã cập nhật máy chủ thành công",
   "ServiceIcon": "Biểu tượng dịch vụ",
   "SystemMCPListTitle": "Hệ thống",
-  "WebSearchEnabledSuccess": "Đã bật tìm kiếm trên web thành công",
   "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn."
 }

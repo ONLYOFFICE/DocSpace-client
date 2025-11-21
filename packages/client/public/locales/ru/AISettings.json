@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Сервер успешно обновлен",
   "ServiceIcon": "Значок сервиса",
   "SystemMCPListTitle": "Система",
-  "WebSearchEnabledSuccess": "Веб-поиск успешно включен",
   "WebSearchKeyHiddenDescription": "Ключ API отображается только один раз при сохранении, а затем скрывается в целях безопасности."
 }

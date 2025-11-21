@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Palvelin päivitetty onnistuneesti",
   "ServiceIcon": "Palveluikoni",
   "SystemMCPListTitle": "Järjestelmä",
-  "WebSearchEnabledSuccess": "Verkkohaku käytössä onnistuneesti",
   "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä."
 }

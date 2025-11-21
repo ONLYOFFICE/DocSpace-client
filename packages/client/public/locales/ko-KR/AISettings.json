@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "서버 업데이트 성공",
   "ServiceIcon": "서비스 아이콘",
   "SystemMCPListTitle": "시스템",
-  "WebSearchEnabledSuccess": "웹 검색 활성화 성공",
   "WebSearchKeyHiddenDescription": "API 키는 저장 시에 한 번만 표시된 후 보안을 위해 숨겨집니다."
 }

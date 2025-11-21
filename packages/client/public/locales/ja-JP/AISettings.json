@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "サーバーが正常に更新されました",
   "ServiceIcon": "サービスのアイコン",
   "SystemMCPListTitle": "システム",
-  "WebSearchEnabledSuccess": "ウェブ検索が正常に有効化されました",
   "WebSearchKeyHiddenDescription": "APIキーは保存時に一度だけ表示され、その後はセキュリティ上の理由で非表示になります。"
 }

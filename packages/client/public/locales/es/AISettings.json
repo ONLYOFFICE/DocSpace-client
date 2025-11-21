@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Servidor actualizado correctamente",
   "ServiceIcon": "Icono del servicio",
   "SystemMCPListTitle": "Sistema",
-  "WebSearchEnabledSuccess": "Búsqueda web activada correctamente",
   "WebSearchKeyHiddenDescription": "La clave de la API sólo se muestra una vez al guardar y luego se oculta por motivos de seguridad."
 }

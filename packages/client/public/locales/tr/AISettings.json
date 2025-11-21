@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Sunucu başarıyla güncellendi",
   "ServiceIcon": "Hizmet simgesi",
   "SystemMCPListTitle": "Sistem",
-  "WebSearchEnabledSuccess": "Web araması başarıyla etkinleştirildi",
   "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir."
 }

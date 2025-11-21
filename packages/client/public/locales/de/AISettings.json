@@ -39,6 +39,5 @@
   "ServerUpdatedSuccess": "Server erfolgreich aktualisiert",
   "ServiceIcon": "Service-Symbol",
   "SystemMCPListTitle": "System",
-  "WebSearchEnabledSuccess": "Websuche erfolgreich aktiviert",
   "WebSearchKeyHiddenDescription": "Der API-Schlüssel wird nur einmal beim Speichern angezeigt und anschließend aus Sicherheitsgründen ausgeblendet."
 }

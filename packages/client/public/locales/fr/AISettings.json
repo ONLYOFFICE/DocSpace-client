@@ -17,7 +17,6 @@
   "HeaderValue": "Valeur de l'en-tête",
   "IntegrationName": "Nom de l'intégration",
   "IntegrationURL": "URL d'intégration",
-  "MCPProductDescription": "Le serveur MCP {{organizationName}} {{productName}} rationalise les flux de travail pilotés par l'IA, en intégrant les LLM avec des systèmes externes pour une gestion de documents efficace et sécurisée.",
   "Provider": "Fournisseur",
   "ProviderAddedSuccess": "Fournisseur ajouté avec succès",
   "ProviderKey": "Clé",

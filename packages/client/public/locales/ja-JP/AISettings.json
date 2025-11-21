@@ -21,7 +21,6 @@
   "KnowledgeEnabledSuccess": "知識ベースが正常に有効化されました",
   "KnowledgeKeyDescription": "知識ベースプロバイダーから取得したAPIキーを入力してください",
   "KnowledgeSettingsDescription": "AIエージェント用のナレッジベースを有効にします。このシステムは {{modelName}} モデルを使用してドキュメントをインデックス化し、質問に基づく検索を可能にします。この機能は、関連情報の検索に焦点を当てており、要約生成や高度な分析は行いません。",
-  "MCPProductDescription": "{{organizationName}}の{{productName}}のMCPサーバーは、AI駆動型ワークフローを効率化し、LLMを外部システムと統合することで、効率的かつ安全な文書管理を実現します。",
   "MCPServerAdvancedSettingsHint": "このセクションでは、認証トークンなどの追加HTTPヘッダーを設定できます。",
   "MCPServerDescriptionHint": "統合の目的について簡潔に書いてください",
   "MCPServerIntegrationURLHint": "サービスから提供されたMCPサーバーアドレスを入力してください",

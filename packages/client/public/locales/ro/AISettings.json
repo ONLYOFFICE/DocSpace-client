@@ -21,7 +21,6 @@
   "KnowledgeEnabledSuccess": "Baza de cunoștințe a fost activată cu succes",
   "KnowledgeKeyDescription": "Introduceți cheia API oferită de furnizorul bazei de cunoștințe",
   "KnowledgeSettingsDescription": "Activați o bază de cunoștințe pentru agenți de IA. Sistemul v-a indexa documentele folosind modelul {{modelName}} pentru a sprijini căutarea datelor bazată pe întrebări. Această caracteristică presupune căutarea informaţiilor relevante, dar nu și generarea rezumatelor sau efectuarea analizei globale.",
-  "MCPProductDescription": "Serverul MCP {{organizationName}} {{productName}} eficientizează fluxurile de lucru bazate pe inteligentă artificială și integrează modelele mari de limbaj (LLM) în sisteme externe pentru gestionarea eficientă și sigură a documentelor.",
   "MCPServerAdvancedSettingsHint": "Utilizați această secțiune pentru a transmite antete HTTP suplimentare, cum ar fi token-uri de autorizare.",
   "MCPServerDescriptionHint": "Scrieți o scurtă explicație despre scopul integrării.",
   "MCPServerIntegrationURLHint": "Introduceți adresa serverului MCP oferită de serviciul dvs.",

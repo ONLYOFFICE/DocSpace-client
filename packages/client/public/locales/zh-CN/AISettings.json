@@ -21,7 +21,6 @@
   "KnowledgeEnabledSuccess": "知识库已启用",
   "KnowledgeKeyDescription": "输入从知识库提供商处获得的 API 密钥",
   "KnowledgeSettingsDescription": "为 AI 智能体启用知识库。系统将使用 {{modelName}} 模型对您的文档进行索引，以支持基于问题的搜索。此功能侧重于查找相关信息，但不会生成摘要或执行全局分析。",
-  "MCPProductDescription": "{{organizationName}} {{productName}} MCP服务器简化 AI 工作流程，将 LLM 与外部系统集成，实现高效安全的文档管理。",
   "MCPServerAdvancedSettingsHint": "用此部分传递其他 HTTP 标头，例如授权令牌。",
   "MCPServerDescriptionHint": "简要解释说明集成的用途",
   "MCPServerIntegrationURLHint": "输入服务商提供的 MCP 服务器地址",

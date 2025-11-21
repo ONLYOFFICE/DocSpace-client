@@ -22,19 +22,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-
-
 .think {
-    margin-bottom: 16px;
+    // margin-bottom: 16px;
 
     &.withMarginTop {
         margin-top: 16px;
     }
 
     .thinkBlock {
-        opacity: 0.7;
-
-        padding-left: 16px;
+        background-color: var(--chat-message-tool-block-color);
+        padding: 12px;
     }
 
     .thinkTitle {
@@ -45,14 +42,50 @@
 
         gap: 8px;
 
+        height: 32px;
+
         cursor: pointer;
+
+        .toolFinishIcon {
+            width: 12px;
+            height: 12px;
+
+            div {
+                width: 12px;
+                height: 12px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            svg {
+                height: 12px;
+
+                path {
+                    fill: var(--chat-input-send-button-background);
+                    
+                }
+            }
+        }
+    }
+
+    .thinkTitleOpened {
+        margin-bottom: 6px;
     }
 
     .icon {
         transition: transform 0.2s ease;
+
+        width: 12px;
+        height: 12px;
+
+        path {
+            fill: var(--text-color) !important;
+        }
     }
 
     .iconOpened {
-        transform: rotate(-180deg);
+        transform: rotate(90deg);
     }
 }

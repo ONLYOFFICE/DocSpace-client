@@ -4961,12 +4961,15 @@ class FilesStore {
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
+    const { isInsideResultStorage } = this.selectedFolderStore;
+
     return (
       isRecycleBinFolder ||
       isRoomsFolder ||
       isArchiveFolder ||
       isFavoritesFolder ||
       isRecentFolder ||
+      isInsideResultStorage ||
       isAIAgentsFolder
     );
   }

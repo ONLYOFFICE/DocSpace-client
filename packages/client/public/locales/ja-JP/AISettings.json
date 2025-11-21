@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "AIエージェント用のナレッジベースを有効にします。このシステムは {{modelName}} モデルを使用してドキュメントをインデックス化し、質問に基づく検索を可能にします。この機能は、関連情報の検索に焦点を当てており、要約生成や高度な分析は行いません。",
   "MCPServerAdvancedSettingsHint": "このセクションでは、認証トークンなどの追加HTTPヘッダーを設定できます。",
   "MCPServerDescriptionHint": "統合の目的について簡潔に書いてください",
-  "MCPServerIntegrationURLHint": "サービスから提供されたMCPサーバーアドレスを入力してください",
   "MCPSettingsDescription": "このセクションでは、ルーム内のAIチャットで使用するMCPサーバーを管理できます。システムMCPサーバーを有効化したり、企業ニーズに応じてカスタムサーバーを追加できます。有効化後、これらのサーバーは他のユーザーも利用できるようになります。",
   "Provider": "プロバイダー",
   "ProviderAddedSuccess": "プロバイダーが正常に追加されました",

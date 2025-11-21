@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Zapnite znalostnú bázu pre AI agentov. Systém bude indexovať vaše dokumenty pomocou modelu {{modelName}} na podporu vyhľadávania založeného na otázkach vo vašich dátach. Táto funkcia sa zameriava na vyhľadávanie relevantných informácií, ale nevytvára súhrny ani nevykonáva globálnu analýzu.",
   "MCPServerAdvancedSettingsHint": "Použite túto sekciu na prenos ďalších HTTP hlavičiek, ako sú autorizačné tokeny.",
   "MCPServerDescriptionHint": "Vysvetlite stručne účel integrácie.",
-  "MCPServerIntegrationURLHint": "Zadajte adresu MCP servera poskytnutú vašou službou.",
   "MCPSettingsDescription": "Táto sekcia umožňuje spravovať servery MCP pre AI chaty v rámci miestností. Môžete povoliť systémové servery MCP alebo pridať vlastné, aby ste uspokojili potreby vašej spoločnosti. Po aktivácii budú tieto servery dostupné pre ostatných používateľov na ich úlohy.",
   "Provider": "Poskytovateľ",
   "ProviderAddedSuccess": "Dodávateľ bol úspešne pridaný.",

@@ -23,7 +23,6 @@
   "KnowledgeSettingsDescription": "Ota käyttöön tietokanta tekoälyagenttien käyttöön. Järjestelmä indeksoi dokumenttisi {{modelName}}-mallilla, jotta voit tehdä kysymyksiin perustuvaa hakua tietojesi avulla. Tämä ominaisuus keskittyy olennaisen tiedon löytämiseen, mutta ei tuota tiivistelmiä tai suorita kokonaisvaltaista analyysiä.",
   "MCPServerAdvancedSettingsHint": "Käytä tätä osiota lisä-HTTP-otsakkeiden, kuten tunnistetietojen, välittämiseen.",
   "MCPServerDescriptionHint": "Kirjoita lyhyt selitys integraation tarkoituksesta.",
-  "MCPServerIntegrationURLHint": "Syötä palvelusi antama MCP-palvelimen osoite",
   "MCPSettingsDescription": "Tämä osio mahdollistaa MCP-palvelimien hallinnan AI-keskusteluille huoneissa. Voit ottaa käyttöön järjestelmän MCP-palvelimia tai lisätä mukautettuja palvelimia yrityksesi tarpeisiin. Kun ne on otettu käyttöön, nämä palvelimet ovat muiden käyttäjien käytettävissä heidän tehtäviään varten.",
   "Provider": "Palveluntarjoaja",
   "ProviderAddedSuccess": "Palveluntarjoaja lisätty onnistuneesti",

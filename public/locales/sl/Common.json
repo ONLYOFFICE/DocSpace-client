@@ -1068,5 +1068,8 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "RoleAIAgentContentCreatorDescription": "Ustvarjalci vsebin lahko uporabljajo klepet in delajo z datotekami v shrambi rezultatov.\nLahko nalagajo datoteke v bazo znanja, vendar ne morejo upravljati uporabnikov ali dostopati do nastavitve agenta.",
+  "RoleAIAgentManagerDescription": "Vodje agentov lahko upravljajo dodeljenega umetnega inteligence agenta, povabijo nove uporabnike in dodelijo vloge pod svojo raven.\nLahko uporabljajo klepetalni pogovor, naložijo datoteke z znanjem, delajo z shranjevanjem rezultatov in upravljajo nastavitve klepetalnega pogovora.",
+  "RoleAIAgentViewerDescription": "Gledalci lahko ogledajo datoteke v shrambi rezultatov samo z izpisi, ki so jih ustvarili drugi.\nNiso jim omogočen dostop do klepeta ali baze znanja."
 }

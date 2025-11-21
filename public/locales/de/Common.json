@@ -1061,5 +1061,15 @@
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
-  "YourTurn": "Jetzt sind Sie dran"
+  "YourTurn": "Jetzt sind Sie dran",
+  "AddFiles": "Dateien hinzufügen",
+  "AIToolsHint": "KI-Tools und Integrationen",
+  "ChatHistory": "Chatverlauf",
+  "ChatSuccessDeleted": "Chat erfolgreich gelöscht",
+  "ChooseAIAgentDescription": "Wählen Sie den Agenten aus, mit dem Sie über die ausgewählte Datei mithilfe der KI chatten möchten. Sie können einen bereits vorhandenen Agenten auswählen.",
+  "CreateAgent": "Agenten erstellen",
+  "NothingToShowYet": "Noch nichts zu zeigen",
+  "RoleAIAgentViewerDescription": "Betrachter können nur Dateien im Result-Speicher ansehen, die von anderen generiert wurden.\nSie haben keinen Zugriff auf den Chat oder die Wissensdatenbank.",
+  "RoleAIAgentManagerDescription": "Agentmanager können den zugewiesenen KI-Agenten verwalten, neue Benutzer einladen und Rollen unterhalb ihrer Ebene zuweisen.\nSie können den Chat nutzen, Wissensdateien hochladen, mit dem Ergebnis-Speicher arbeiten und Chat-Einstellungen verwalten.",
+  "RoleAIAgentContentCreatorDescription": "Content Creators können den Chat nutzen und mit Dateien im Result-Speicher arbeiten.\nSie können Dateien in die Wissensdatenbank hochladen, dürfen aber keine Benutzer verwalten oder auf Agenteneinstellungen zugreifen."
 }

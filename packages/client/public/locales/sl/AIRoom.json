@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Opomba:</1> Kakovost odgovorov se lahko razlikuje glede na model; za najboljše rezultate priporočamo novejše modele.",
   "ResultStorage": "Shranjevanje rezultatov",
   "UploadFilesDevice": "Naložite datoteke iz vaše osebne naprave.",
-  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}"
+  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Nahajate se v načinu <strong>le za ogled</strong> za tega umetnega inteligence. Lahko vidite rezultate dejavnosti klepeta z umetno inteligenco od drugih uporabnikov.",
+  "EmptyResultsViewerDescription": "Tukaj boste videli rezultate dejavnosti klepetalnega asistenta drugih uporabnikov, ko bodo na voljo."
 }

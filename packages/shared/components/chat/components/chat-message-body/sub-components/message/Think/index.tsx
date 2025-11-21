@@ -22,50 +22,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 
 import cn from "classnames";
 
-import TriangleDownIcon from "PUBLIC_DIR/images/triangle.down.react.svg";
+import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
+import TriangleDownIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 import { IconSizeType } from "../../../../../../../utils";
 
+import { Loader, LoaderTypes } from "../../../../../../loader";
 import { Text } from "../../../../../../text";
 
 import styles from "./Think.module.scss";
 
 const Think = ({
   children,
-  isSingleContent,
   isFirst,
+  isFinished,
 }: {
   children: React.ReactNode;
-  isSingleContent?: boolean;
   isFirst?: boolean;
+  isFinished?: boolean;
 }) => {
+  const { t } = useTranslation(["Common"]);
   const [isOpen, setIsOpen] = useState(false);
-  const isOpened = isSingleContent || isOpen;
 
   const onToggle = () => {
-    if (isSingleContent) return;
-
     setIsOpen((val) => !val);
   };
 
   return (
     <div className={cn(styles.think, { [styles.withMarginTop]: !isFirst })}>
-      <div onClick={onToggle} className={styles.thinkTitle}>
-        <Text fontSize="15px" lineHeight="22px" isBold>
-          Thought
+      <div
+        onClick={onToggle}
+        className={cn(styles.thinkTitle, { [styles.thinkTitleOpened]: isOpen })}
+      >
+        {isFinished ? (
+          <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
+        ) : (
+          <Loader type={LoaderTypes.track} size="12px" />
+        )}
+
+        <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
+          {t("Thinking")}
         </Text>
 
         <TriangleDownIcon
-          data-size={IconSizeType.medium}
-          className={cn(styles.icon, { [styles.iconOpened]: isOpened })}
+          data-size={IconSizeType.scale}
+          className={cn(styles.icon, { [styles.iconOpened]: isOpen })}
         />
       </div>
 
-      {isOpened ? <div className={styles.thinkBlock}>{children}</div> : null}
+      {isOpen ? <div className={styles.thinkBlock}>{children}</div> : null}
     </div>
   );
 };

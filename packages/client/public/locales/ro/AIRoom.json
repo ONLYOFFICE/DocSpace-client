@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": "Baza de cunoștințe este în prezent dezactivată. Pentru a activa căutarea semantică și procesarea documentelor pentru agenții de IA, contactați administratorul de {{productName}} pentru a configura furnizorul de integrări.",
   "MCP": "Instrumente MCP în această sală",
   "MCPDescriptionServers": "Folosiți serverele MCP conectate de administrator pentru a îmbunătăți experiența de interacțiune în chat-ul cu IA. Servere MCP vă pot ajuta cu extragerea datelor, rezumate, sugestii inteligente, etc.",
-  "ModelDescription": "Selectați furnizorul și modelul de IA de utilizat în conversaţiile din această sală. Această opțiune setează în mod obligatoriu și se aplică tuturor participanţilor.",
   "ResponseQualityNode": "<1>Notă:</1> Calitatea răspunsurilor depinde de model; recomandăm să folosiţi modele cele mai noi pentru rezultate mai performante.",
   "ResultStorage": "Stocare rezultate",
   "UploadFilesDevice": "Încărcați fișierele de pe diapozitivul dvs peronal",

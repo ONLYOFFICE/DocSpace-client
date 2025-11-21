@@ -18,7 +18,6 @@
   "KnowledgeUnavailableDescriptionUser": " 現在、知識ベースは無効になっています。AIエージェント用ナレッジベースを有効にするには、埋め込みプロバイダーの設定を{{productName}}管理者に依頼してください。",
   "MCP": "このルーム用のMCPツール",
   "MCPDescriptionServers": "管理者が接続したMCPサーバーを利用してAIとのチャット体験を向上させましょう。MCPサーバーはデータ抽出、要約、スマート提案などの処理に役立ちます。",
-  "ModelDescription": "このルームのチャットで使用するAIプロバイダーとモデルを選択してください。この設定は必須であり、すべての参加者に適用されます。",
   "ResponseQualityNode": "<1>注:</1> モデルによって応答品質は異なります。最新のモデルを使用すると最良の結果が得られます。",
   "ResultStorage": "結果ストレージ",
   "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",

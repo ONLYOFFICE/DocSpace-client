@@ -22,7 +22,6 @@
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "AI機能を有効にするには、ウォレットを接続してください",
   "EmptyAIAgentsAIDisabledUserTitle": "AIエージェントはまだご利用いただけません",
   "EmptyAIAgentsAIEnabledUserDescription": "チームから共同作業への招待が届くと、ここにAIエージェントが表示され、文書作成、知識管理、日常業務のサポートを開始します。",
-  "EmptyAIAgentsDescription": "チーム専用のパーソナライズされたアシスタントを設定するには、知識ベースを追加し、最適なモデルを選択し、MCPサーバーを接続します。同僚を招待して共同作業を行い、エージェントのチャット機能を最大限に活用しましょう。",
   "EmptyAIAgentsTitle": "AIエージェントを作成",
   "EmptyAIAgentsUserTitle": "利用できるAIエージェントはまだありません",
   "EmptyDescription": "クイックアクションで始めましょう：",

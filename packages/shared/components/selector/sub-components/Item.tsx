@@ -66,7 +66,8 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
     prevItem?.label === nextItem?.label &&
     prevItem?.isSelected === nextItem?.isSelected &&
     nextData?.inputItemVisible === prevData?.inputItemVisible &&
-    nextData?.listHeight === prevData?.listHeight
+    nextData?.listHeight === prevData?.listHeight &&
+    nextData?.isLimitReached === prevData?.isLimitReached
   );
 };
 
@@ -83,6 +84,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     savedInputValue,
     setSavedInputValue,
     listHeight,
+    isLimitReached,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -133,6 +135,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       isSeparator,
       isSystem,
       isMCP,
+      isFolder,
     } = item;
 
     if (isSeparator) {
@@ -217,6 +220,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       )
         return;
 
+      if (isMultiSelect && isLimitReached && !isSelected && !isFolder) return;
+
       const isDoubleClick = e.detail === 2;
 
       onSelect?.(item, isDoubleClick);
@@ -230,15 +235,19 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const itemAvatar = avatar ?? (isGroup && isSystem ? EveryoneIconUrl : "");
 
+    const isItemDisabled =
+      isDisabled ||
+      (isMultiSelect && isLimitReached && !isSelected && !isFolder);
+
     return (
       <div
         key={`${label}-${avatar}-${role}`}
         style={style}
         onClick={onClick}
         className={classNames(styles.selectorItem, {
-          [styles.disabled]: isDisabled,
+          [styles.disabled]: isItemDisabled,
           [styles.selectedSingle]: isSelected && !isMultiSelect,
-          [styles.hoverable]: !isDisabled,
+          [styles.hoverable]: !isItemDisabled,
           [styles.isSystem]: isSystem,
         })}
         data-testid={`selector-item-${index}`}
@@ -344,7 +353,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           <Checkbox
             className={classNames(styles.checkbox, "checkbox")}
             isChecked={isSelected}
-            isDisabled={isDisabled}
+            isDisabled={isItemDisabled}
             onChange={onChangeAction}
           />
         ) : null}

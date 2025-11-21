@@ -785,7 +785,6 @@
   "Reviewing": "Überprüfung",
   "RevokeLink": "Link widerrufen",
   "Role": "Stelle",
-  "RoleAgentManagerDescription": "Agentenmanager können die ihnen zugewiesenen Agenten verwalten, neue Benutzer einladen und Rollen unterhalb ihrer Ebene zuweisen.",
   "RoleCommentator": "Kommentator",
   "RoleCommentatorDescription": "Vorgänge mit bestehenden Dateien: Anzeigen, Kommentieren.",
   "RoleContentCreatorDescription": "Content-Ersteller können Dateien im Raum erstellen und bearbeiten, jedoch keine Benutzer verwalten oder auf Einstellungen zugreifen.",

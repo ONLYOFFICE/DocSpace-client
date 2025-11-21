@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
@@ -54,6 +54,14 @@ const QuotaPerItemComponent = (props) => {
   const [isToggleChecked, setIsToggleChecked] = useState(isQuotaSet);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const quotaFormRef = useRef(null);
+
+  useEffect(() => {
+    if (isToggleChecked && quotaFormRef.current) {
+      quotaFormRef.current?.focus();
+    }
+  }, [isToggleChecked]);
 
   const onToggleChange = async (e) => {
     const { checked } = e.currentTarget;
@@ -109,6 +117,7 @@ const QuotaPerItemComponent = (props) => {
         </Text>
         {isToggleChecked ? (
           <QuotaForm
+            ref={quotaFormRef}
             isButtonsEnable
             label={formLabel}
             maxInputWidth="214px"

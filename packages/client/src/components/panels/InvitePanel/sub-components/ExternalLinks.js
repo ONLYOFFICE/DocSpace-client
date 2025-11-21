@@ -42,7 +42,9 @@ import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 // import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
+import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
@@ -74,7 +76,6 @@ const ExternalLinks = ({
   isUserTariffLimit,
   standalone,
   allowInvitingGuests,
-  isAIAgentsFolder,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -231,14 +232,18 @@ const ExternalLinks = ({
   );
 
   const filteredAccesses =
-    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+    roomType === -1
+      ? accesses
+      : roomType === RoomsType.AIRoom
+        ? filterNotReadOnlyOptions(accesses)
+        : filterPaidRoleOptions(accesses);
 
   const description =
     roomId === -1
       ? t("InviteViaLinkDescriptionAccounts", {
           productName: t("Common:ProductName"),
         })
-      : isAIAgentsFolder
+      : roomType === RoomsType.AIRoom
         ? allowInvitingGuests
           ? t("InviteViaLinkDescriptionAgentGuest")
           : t("InviteViaLinkDescriptionAgentMembers", {
@@ -333,7 +338,6 @@ export default inject(
     peopleStore,
     currentQuotaStore,
     settingsStore,
-    treeFoldersStore,
   }) => {
     const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
@@ -341,7 +345,6 @@ export default inject(
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
     const { standalone, allowInvitingGuests } = settingsStore;
-    const { isAIAgentsFolder } = treeFoldersStore;
 
     return {
       roomId,
@@ -353,7 +356,6 @@ export default inject(
       isUserTariffLimit,
       standalone,
       allowInvitingGuests,
-      isAIAgentsFolder,
     };
   },
 )(observer(ExternalLinks));

@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Thiết lập một trợ lý cá nhân hóa cho nhóm của bạn bằng cách thêm cơ sở kiến thức, chọn mô hình lý tưởng và kết nối một máy chủ MCP.",
   "AITools": "Công cụ AI",
   "AItoolsConfirm": "Kích hoạt dịch vụ công cụ AI sẽ cấp quyền truy cập vào các tính năng hỗ trợ AI cho tất cả người dùng {{productName}}, với điều kiện ví có đủ tiền. Bạn có chắc chắn muốn tiếp tục không?",
   "AIToolsEnabled": "Các công cụ hỗ trợ AI đã được kích hoạt thành công.",

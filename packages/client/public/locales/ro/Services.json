@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Configurați un asistent particularizat pentru echipa dvs: adăugați o bază de cunoștințe, alegeți modelul potrivit și conectați un server MCP.",
   "AITools": "Instrumente de IA",
   "AItoolsConfirm": "Activarea instrumentelor de IA va acorda tuturor utilizatorilor {{productName}} accesul la funcții de inteligență artificială dacă fondurile din portofelul sunt suficiente. Sigur doriţi să continuați?",
   "AIToolsEnabled": "Instrumente de IA au fost activate cu succes.",

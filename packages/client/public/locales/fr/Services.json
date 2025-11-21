@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Configurez un assistant personnalisé pour votre équipe en ajoutant une base de connaissances, en sélectionnant le modèle idéal et en connectant un serveur MCP.",
   "AITools": "Outils IA",
   "AItoolsConfirm": "L'activation du service d'outils IA permettra à tous les utilisateurs de {{productName}} d'accéder aux fonctionnalités basées sur l'IA, à condition que le wallet dispose de fonds suffisants. Souhaitez-vous vraiment continuer ?",
   "AIToolsEnabled": "Service d'outils IA activé avec succès.",

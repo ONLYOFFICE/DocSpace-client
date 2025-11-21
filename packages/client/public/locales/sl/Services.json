@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Nastavite osebnega asistenta za vašo ekipo z dodajanjem baze znanja, izbiro idealnega modela in povezavo MCP strežnika.",
   "AITools": "AI orodja",
   "AItoolsConfirm": "Omogočanje storitve AI orodij bo vsem uporabnikom {{productName}} omogočilo dostop do funkcij, ki jih poganja umetna inteligenca, če ima denarnica zadostna sredstva. Ste prepričani, da želite nadaljevati?",
   "AIToolsEnabled": "Orodja umetne inteligence so bila uspešno omogočena.",

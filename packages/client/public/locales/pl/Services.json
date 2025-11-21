@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Skonfiguruj spersonalizowanego asystenta dla swojego zespołu, dodając bazę wiedzy, wybierając idealny model i podłączając serwer MCP.",
   "AITools": "Narzędzia AI",
   "AItoolsConfirm": "Włączenie usługi narzędzi AI zapewni wszystkim użytkownikom {{productName}} dostęp do funkcji opartych na sztucznej inteligencji, pod warunkiem, że portfel posiada wystarczające środki. Czy na pewno chcesz kontynuować?",
   "AIToolsEnabled": "Usługa narzędzi AI włączona pomyślnie.",

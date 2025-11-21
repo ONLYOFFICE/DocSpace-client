@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Podesite personalizovanog asistenta za svoj tim dodavanjem baze znanja, odabirom idealnog modela i povezivanjem MCP servera.",
   "AITools": "AI alati",
   "AItoolsConfirm": "Omogućavanje usluge alatki veštačke inteligencije omogućiće svim korisnicima {{productName}} pristup funkcijama koje pokreće veštačka inteligencija, pod uslovom da novčanik ima dovoljno sredstava. Da li ste sigurni da želite da nastavite?",
   "AIToolsEnabled": "Usluga AI alata je uspešno omogućena.",

@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Nastavte si personalizovaného asistenta pre váš tím pridaním databázy znalostí, výberom ideálneho modelu a pripojením MCP servera.",
   "AITools": "AI nástroje",
   "AItoolsConfirm": "Aktivácia služby nástrojov AI umožní všetkým používateľom {{productName}} prístup k funkciám poháňaným AI, za predpokladu, že peňaženka má dostatok prostriedkov. Ste si istý/á, že chcete pokračovať?",
   "AIToolsEnabled": "Služba nástrojov AI bola úspešne povolená.",

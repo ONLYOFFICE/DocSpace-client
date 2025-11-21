@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Konfiguroni një asistent të personalizuar për ekipin tuaj duke shtuar një bazë njohurish, duke zgjedhur modelin ideal dhe duke lidhur një server MCP.",
   "AITools": "Mjetet e inteligjencës artificiale",
   "AItoolsConfirm": "Aktivizimi i shërbimit të mjeteve të inteligjencës artificiale do t'u japë të gjithë përdoruesve të {{productName}} qasje në veçoritë e mundësuara nga inteligjenca artificiale, me kusht që portofoli të ketë fonde të mjaftueshme. A jeni i sigurt që doni të vazhdoni?",
   "AIToolsEnabled": "Shërbimi i mjeteve të inteligjencës artificiale u aktivizua me sukses.",

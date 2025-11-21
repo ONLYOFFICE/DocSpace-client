@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Luo tiimillesi personoitu avustaja lisäämällä tietokanta, valitsemalla sopivan mallin ja yhdistämällä MCP-palvelin.",
   "AITools": "AI-työkalut",
   "AItoolsConfirm": "AI-työkalupalvelun käyttöönotto antaa kaikille {{productName}}-käyttäjille pääsyn tekoälypohjaisiin ominaisuuksiin, edellyttäen että lompakossa on riittävästi varoja. Oletko varma, että haluat jatkaa?",
   "AIToolsEnabled": "AI-työkalupalvelu otettu onnistuneesti käyttöön.",

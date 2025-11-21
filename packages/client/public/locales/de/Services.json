@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Richten Sie einen personalisierten Assistenten für Ihr Team ein, indem Sie eine Wissensdatenbank hinzufügen, das ideale Modell auswählen und einen MCP-Server verbinden.",
   "AITools": "KI-Tools",
   "AItoolsConfirm": "Durch die Aktivierung der KI-Tools erhalten alle {{productName}}-Nutzer Zugriff auf KI-gestützte Funktionen, sofern ausreichend Guthaben im Wallet vorhanden ist. Möchten Sie fortfahren?",
   "AIToolsEnabled": "KI-Tools erfolgreich aktiviert",

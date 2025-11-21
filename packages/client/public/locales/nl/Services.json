@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Stel een persoonlijke assistent in voor uw team door een kennisbank toe te voegen, het ideale model te selecteren en een MCP-server te verbinden.",
   "AITools": "AI-tools",
   "AItoolsConfirm": "Het inschakelen van de AI-tools service geeft alle {{productName}} gebruikers toegang tot AI-gestuurde functies, mits de wallet voldoende saldo heeft. Ben je zeker dat je verder wilt gaan?",
   "AIToolsEnabled": "AI-tools service succesvol ingeschakeld.",

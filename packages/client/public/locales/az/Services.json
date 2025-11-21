@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Komandanız üçün fərdiləşmiş bir müavini, bir bilik bazası əlavə etməklə, ideal modeli seçməklə və bir MCP serveri qoşmaqla təmin edin.",
   "AITools": "Süni İntellekt alətləri",
   "AItoolsConfirm": "Süni intellekt alətləri xidmətini aktiv etmək, bütün {{productName}} istifadəçilərinə, əgər hesab kifayət qədər vəsaitə malikdirsə, süni intellektlə təmin edilmiş funksiyalara daxil olmağa imkan verəcəkdir. Davam etmək istəyirsinizmi?",
   "AIToolsEnabled": "Süni intellekt alətləri xidməti uğurla aktivləşdirildi.",

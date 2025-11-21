@@ -1,5 +1,4 @@
 {
-  "AIAgentsDescription": "Iestatiet personalizētu palīdzību savai komandai, pievienojot zināšanu bāzi, atlasot ideālo modeli un pievienojot MCP serveri.",
   "AITools": "AI rīki",
   "AItoolsConfirm": "Iespējot AI rīku pakalpojums piešķirs visiem {{productName}} lietotājiem piekļuvi AI darbināmiem rīkiem, ja vien portfelī ir pietiekami līdzekļi. Vai esat pārliecināts, ka vēlaties turpināt?",
   "AIToolsEnabled": "AI rīku pakalpojums veiksmīgi aktivizēts.",

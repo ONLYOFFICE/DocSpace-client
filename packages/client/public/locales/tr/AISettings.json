@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Sunucu başarıyla güncellendi",
   "ServiceIcon": "Hizmet simgesi",
   "SystemMCPListTitle": "Sistem",
-  "ToUseAddProvider": "{{value}}’yi kullanmak için öncelikle en az bir sağlayıcı bağladığınızdan emin olun.",
-  "WebSearchDisabledSuccess": "Web araması başarıyla devre dışı bırakıldı",
   "WebSearchEnabledSuccess": "Web araması başarıyla etkinleştirildi",
-  "WebSearchKeyDescription": "Web arama sağlayıcınızdan aldığınız API anahtarını girin.",
   "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir."
 }

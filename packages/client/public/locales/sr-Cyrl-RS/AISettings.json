@@ -28,6 +28,5 @@
   "ServerUpdatedSuccess": "Сервер успешно ажуриран",
   "ServiceIcon": "Икона услуге",
   "SystemMCPListTitle": "Систем",
-  "ToUseAddProvider": "Да бисте користили {{value}}, уверите се да сте прво повезали бар једног провајдера.",
   "WebSearchKeyHiddenDescription": "API кључ се приказује само једном након чувања, а затим је скривен из безбедносних разлога."
 }

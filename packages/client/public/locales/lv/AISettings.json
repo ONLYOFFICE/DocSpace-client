@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Serveris atjaunināts veiksmīgi",
   "ServiceIcon": "Pakalpojuma ikona",
   "SystemMCPListTitle": "Sistēma",
-  "ToUseAddProvider": "Lai izmantotu {{value}}, vispirms pārliecinieties, ka savienojat vismaz vienu pakalpojumu sniedzēju.",
-  "WebSearchDisabledSuccess": "Web meklēšana veiksmīgi atslēgta",
   "WebSearchEnabledSuccess": "Web meklēšana veiksmīgi ieslēgta",
-  "WebSearchKeyDescription": "Ievadiet API atslēgu, kas iegūta no jūsu tiešsaistes meklēšanas pakalpojuma.",
   "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos."
 }

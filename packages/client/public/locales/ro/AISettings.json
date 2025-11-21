@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Serverul a fost actualizat cu succes",
   "ServiceIcon": "Pictogramă Serviciu",
   "SystemMCPListTitle": "Sistem",
-  "ToUseAddProvider": "Pentru a folosi {{value}}, mai întâi trebuie să conectați cel puțin un furnizor.",
-  "WebSearchDisabledSuccess": "Căutare pe web a fost dezactivată cu succes",
   "WebSearchEnabledSuccess": "Căutare pe web a fost activată cu succes",
-  "WebSearchKeyDescription": "Întroduceți cheia API oferită de furnizorul serviciului de căutare pe web",
   "WebSearchKeyHiddenDescription": "Cheia API se afișează o singură dată la salvare și este ascunsă ulterior din motive de securitate."
 }

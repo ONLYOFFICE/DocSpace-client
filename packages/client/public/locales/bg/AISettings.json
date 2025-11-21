@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Успешно актуализиран сървър",
   "ServiceIcon": "Икона на услугата",
   "SystemMCPListTitle": "Система",
-  "ToUseAddProvider": "За да използвате {{value}}, уверете се, че първо сте свързали поне един доставчик.",
-  "WebSearchDisabledSuccess": "Успешно деактивирано уеб търсене",
   "WebSearchEnabledSuccess": "Успешно активирано уеб търсене",
-  "WebSearchKeyDescription": "Въведете API ключа, получен от вашия доставчик на уеб търсене.",
   "WebSearchKeyHiddenDescription": "Ключът за API се показва само веднъж при запазване и след това се скрива за целите на сигурността."
 }

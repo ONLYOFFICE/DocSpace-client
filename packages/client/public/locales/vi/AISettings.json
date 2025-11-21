@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Đã cập nhật máy chủ thành công",
   "ServiceIcon": "Biểu tượng dịch vụ",
   "SystemMCPListTitle": "Hệ thống",
-  "ToUseAddProvider": "Để sử dụng {{value}}, hãy chắc chắn kết nối ít nhất một nhà cung cấp trước.",
-  "WebSearchDisabledSuccess": "Tìm kiếm trên web đã bị tắt thành công",
   "WebSearchEnabledSuccess": "Đã bật tìm kiếm trên web thành công",
-  "WebSearchKeyDescription": "Nhập khóa API đã lấy được từ nhà cung cấp tìm kiếm trên web của bạn.",
   "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn."
 }

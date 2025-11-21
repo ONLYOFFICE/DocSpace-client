@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Server erfolgreich aktualisiert",
   "ServiceIcon": "Service-Symbol",
   "SystemMCPListTitle": "System",
-  "ToUseAddProvider": "Um {{value}} nutzen zu können, müssen Sie zunächst mindestens einen Anbieter verbinden.",
-  "WebSearchDisabledSuccess": "Websuche erfolgreich deaktiviert",
   "WebSearchEnabledSuccess": "Websuche erfolgreich aktiviert",
-  "WebSearchKeyDescription": "Geben Sie den API-Schlüssel ein, den Sie von Ihrem Websuchanbieter erhalten haben",
   "WebSearchKeyHiddenDescription": "Der API-Schlüssel wird nur einmal beim Speichern angezeigt und anschließend aus Sicherheitsgründen ausgeblendet."
 }

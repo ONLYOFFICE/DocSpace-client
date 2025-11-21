@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "サーバーが正常に更新されました",
   "ServiceIcon": "サービスのアイコン",
   "SystemMCPListTitle": "システム",
-  "ToUseAddProvider": "{{value}}を使用するには、まず少なくとも1つのプロバイダーを接続してください。",
-  "WebSearchDisabledSuccess": "ウェブ検索が正常に無効化されました",
   "WebSearchEnabledSuccess": "ウェブ検索が正常に有効化されました",
-  "WebSearchKeyDescription": "ウェブ検索プロバイダーから取得したAPIキーを入力してください",
   "WebSearchKeyHiddenDescription": "APIキーは保存時に一度だけ表示され、その後はセキュリティ上の理由で非表示になります。"
 }

@@ -28,6 +28,5 @@
   "ServerUpdatedSuccess": "تم تحديث الخادم بنجاح",
   "ServiceIcon": "أيقونة الخدمة",
   "SystemMCPListTitle": "النظام",
-  "ToUseAddProvider": "لاستخدام {{value}}، تأكدوا من توصيل مزود واحد على الأقل أولاً.",
   "WebSearchKeyHiddenDescription": "يتم عرض مفتاح API مرة واحدة فقط عند الحفظ ثم يتم إخفاؤه لأغراض أمنية."
 }

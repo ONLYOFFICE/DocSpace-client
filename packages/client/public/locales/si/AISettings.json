@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "සේවාදායකය සාර්ථකව යාවත්කාලීන කරන ලදී",
   "ServiceIcon": "සේවා නිරූපකය",
   "SystemMCPListTitle": "පද්ධතිය",
-  "ToUseAddProvider": "{{value}} භාවිතා කිරීමට, පළමුව අවම වශයෙන් එක් සැපයුම්කරුවෙකු සම්බන්ධ කිරීමට වග බලා ගන්න.",
-  "WebSearchDisabledSuccess": "වෙබ් සෙවීම සාර්ථකව අබල කරන ලදී.",
   "WebSearchEnabledSuccess": "වෙබ් සෙවීම සාර්ථකව සක්‍රීය කරන ලදී",
-  "WebSearchKeyDescription": "ඔබගේ වෙබ් සෙවුම් සපයන්නාගෙන් ලබාගත් API යතුර ඇතුළත් කරන්න.",
   "WebSearchKeyHiddenDescription": "සුරැකීමෙන් පසු API යතුර එක් වරක් පමණක් දර්ශනය වන අතර පසුව ආරක්ෂක අරමුණු සඳහා සඟවනු ලැබේ."
 }

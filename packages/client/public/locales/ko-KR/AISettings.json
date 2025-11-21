@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "서버 업데이트 성공",
   "ServiceIcon": "서비스 아이콘",
   "SystemMCPListTitle": "시스템",
-  "ToUseAddProvider": "{{value}}을 사용하려면 먼저 최소한 하나의 제공업체를 연결해야 합니다.",
-  "WebSearchDisabledSuccess": "웹 검색을 성공적으로 비활성화했습니다.",
   "WebSearchEnabledSuccess": "웹 검색 활성화 성공",
-  "WebSearchKeyDescription": "웹 검색 제공업체로부터 얻은 API 키를 입력하세요.",
   "WebSearchKeyHiddenDescription": "API 키는 저장 시에 한 번만 표시된 후 보안을 위해 숨겨집니다."
 }

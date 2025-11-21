@@ -28,6 +28,5 @@
   "ServerUpdatedSuccess": "Servidor atualizado com sucesso",
   "ServiceIcon": "Ícone de serviço",
   "SystemMCPListTitle": "Sistema",
-  "ToUseAddProvider": "Para usar {{value}}, certifique-se de conectar pelo menos um provedor primeiro.",
   "WebSearchKeyHiddenDescription": "A chave API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança."
 }

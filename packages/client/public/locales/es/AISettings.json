@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Servidor actualizado correctamente",
   "ServiceIcon": "Icono del servicio",
   "SystemMCPListTitle": "Sistema",
-  "ToUseAddProvider": "Para utilizar {{value}}, asegúrese de conectar primero al menos un proveedor.",
-  "WebSearchDisabledSuccess": "Búsqueda web desactivada correctamente",
   "WebSearchEnabledSuccess": "Búsqueda web activada correctamente",
-  "WebSearchKeyDescription": "Introduzca la clave de la API obtenida de su proveedor de búsqueda web",
   "WebSearchKeyHiddenDescription": "La clave de la API sólo se muestra una vez al guardar y luego se oculta por motivos de seguridad."
 }

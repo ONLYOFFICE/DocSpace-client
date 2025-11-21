@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Serwer został zaktualizowany pomyślnie",
   "ServiceIcon": "Ikona usługi",
   "SystemMCPListTitle": "System",
-  "ToUseAddProvider": "Aby użyć {{value}}, upewnij się, że najpierw połączono przynajmniej jednego dostawcę.",
-  "WebSearchDisabledSuccess": "Wyszukiwanie w sieci zostało pomyślnie wyłączone.",
   "WebSearchEnabledSuccess": "Wyszukiwanie w sieci włączone pomyślnie",
-  "WebSearchKeyDescription": "Wprowadź klucz API uzyskany od dostawcy wyszukiwarki internetowej.",
   "WebSearchKeyHiddenDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania, a następnie jest ukrywany ze względów bezpieczeństwa."
 }

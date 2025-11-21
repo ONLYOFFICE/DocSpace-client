@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Server bol úspešne aktualizovaný.",
   "ServiceIcon": "Ikona služby",
   "SystemMCPListTitle": "Systém",
-  "ToUseAddProvider": "Na použitie {{value}} sa najprv uistite, že ste pripojili aspoň jedného poskytovateľa.",
-  "WebSearchDisabledSuccess": "Webová vyhľadávanie bolo úspešne vypnuté",
   "WebSearchEnabledSuccess": "Webové vyhľadávanie bolo úspešne povolené",
-  "WebSearchKeyDescription": "Zadajte API kľúč získaný od vášho poskytovateľa webovej vyhľadávania.",
   "WebSearchKeyHiddenDescription": "Kľúč API sa zobrazí len raz pri uložení a následne je skrytý z dôvodu bezpečnosti."
 }

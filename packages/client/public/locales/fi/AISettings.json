@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Palvelin päivitetty onnistuneesti",
   "ServiceIcon": "Palveluikoni",
   "SystemMCPListTitle": "Järjestelmä",
-  "ToUseAddProvider": "Käyttääksesi {{value}}, varmista, että olet ensin yhdistänyt vähintään yhden palveluntarjoajan.",
-  "WebSearchDisabledSuccess": "Web-haun poistaminen käytöstä onnistui",
   "WebSearchEnabledSuccess": "Verkkohaku käytössä onnistuneesti",
-  "WebSearchKeyDescription": "Syötä web-hakupalveluntarjoajaltasi hankittu API-avain.",
   "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä."
 }

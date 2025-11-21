@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Сервер успішно оновлено",
   "ServiceIcon": "Іконка сервісу",
   "SystemMCPListTitle": "Система",
-  "ToUseAddProvider": "Щоб використовувати {{value}}, переконайтеся, що спочатку підключено щонайменше одного провайдера.",
-  "WebSearchDisabledSuccess": "Успішно вимкнено веб-пошук",
   "WebSearchEnabledSuccess": "Успішно ввімкнено веб-пошук",
-  "WebSearchKeyDescription": "Введіть API-ключ, отриманий від вашого пошукового сервісу.",
   "WebSearchKeyHiddenDescription": "Ключ API відображається лише один раз під час збереження, після чого він прихований з міркувань безпеки."
 }

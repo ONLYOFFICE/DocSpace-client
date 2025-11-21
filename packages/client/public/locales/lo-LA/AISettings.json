@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "ອັບເດດເຊີບເວີສຳເລັດແລ້ວ",
   "ServiceIcon": "ໄອຄອນການບໍລິການ",
   "SystemMCPListTitle": "ລະບົບ",
-  "ToUseAddProvider": "ເພື່ອໃຊ້ {{value}}, ໃຫ້ແນ່ໃຈວ່າໄດ້ເຊື່ອມຕໍ່ຜູ້ໃຫ້ບໍລິການຢ່າງໜ້ອຍໜຶ່ງຄົນກ່ອນ.",
-  "WebSearchDisabledSuccess": "ປິດການຄົ້ນຫາເວັບສຳເລັດແລ້ວ",
   "WebSearchEnabledSuccess": "ເປີດໃຊ້ການຄົ້ນຫາເວັບສຳເລັດແລ້ວ",
-  "WebSearchKeyDescription": "ໃສ່ລະຫັດ API ທີ່ໄດ້ຮັບຈາກຜູ້ໃຫ້ບໍລິການຄົ້ນຫາເວັບຂອງທ່ານ",
   "WebSearchKeyHiddenDescription": "ລະຫັດ API ຈະສະແດງພຽງຄັ້ງດຽວຫຼັງຈາກບັນທຶກແລ້ວ ແລະ ຫຼັງຈາກນັ້ນຈະຖືກເຊື່ອງໄວ້ເພື່ອຈຸດປະສົງດ້ານຄວາມປອດໄພ."
 }

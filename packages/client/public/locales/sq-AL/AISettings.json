@@ -28,6 +28,5 @@
   "ServerUpdatedSuccess": "Serveri u përditësua me sukses.",
   "ServiceIcon": "Ikona e shërbimit",
   "SystemMCPListTitle": "Sistemi",
-  "ToUseAddProvider": "Për të përdorur {{value}}, sigurohuni që të lidhni së pari të paktën një ofrues.",
   "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie."
 }

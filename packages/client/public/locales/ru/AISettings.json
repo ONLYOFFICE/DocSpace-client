@@ -39,9 +39,6 @@
   "ServerUpdatedSuccess": "Сервер успешно обновлен",
   "ServiceIcon": "Значок сервиса",
   "SystemMCPListTitle": "Система",
-  "ToUseAddProvider": "Чтобы использовать {{value}}, сначала обязательно подключите хотя бы одного провайдера.",
-  "WebSearchDisabledSuccess": "Веб-поиск успешно отключен",
   "WebSearchEnabledSuccess": "Веб-поиск успешно включен",
-  "WebSearchKeyDescription": "Введите ключ API, полученный от вашего провайдера веб-поиска.",
   "WebSearchKeyHiddenDescription": "Ключ API отображается только один раз при сохранении, а затем скрывается в целях безопасности."
 }

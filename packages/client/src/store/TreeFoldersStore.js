@@ -26,7 +26,7 @@
 
 import { makeAutoObservable } from "mobx";
 import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import i18n from "../i18n";
@@ -446,7 +446,8 @@ class TreeFoldersStore {
 
   get isVDRRoomRoot() {
     return (
-      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType
+      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType ||
+      this.selectedFolderStore.roomType === RoomsType.VirtualDataRoom // need when changing the room settings, because parentRoomType is reset
     );
   }
 

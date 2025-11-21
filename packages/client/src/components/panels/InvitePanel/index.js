@@ -470,15 +470,19 @@ const InvitePanel = ({
   const addItems = (users, access) => {
     users.forEach((u) => {
       u.access = access.access;
-      const isAccessPaid = checkIfAccessPaid(u.access);
+      const shouldMakeFreeRole =
+        checkIfAccessPaid(u.access) &&
+        (u.isGroup || u.isVisitor || u.isCollaborator);
+      const shouldMakeViewerRole =
+        roomType === RoomsType.AIRoom &&
+        u.isVisitor &&
+        u.access !== ShareAccessRights.ReadOnly;
 
-      if (isAccessPaid) {
-        if (u.isGroup || u.isVisitor || u.isCollaborator) {
-          u = fixAccess(u, t, roomType);
+      if (shouldMakeFreeRole || shouldMakeViewerRole) {
+        u = fixAccess(u, t, roomType);
 
-          if (isUserTariffLimit) {
-            toastr.error(<PaidQuotaLimitError />);
-          }
+        if (isUserTariffLimit) {
+          toastr.error(<PaidQuotaLimitError />);
         }
       }
     });

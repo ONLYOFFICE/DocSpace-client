@@ -3,7 +3,7 @@
   "content": "Folder not available",
   "content_en_sha1_hash": "e2620e8a4f8771e2e1c12697fa8bb94fd77939c9",
   "created_at": "2025-10-13T13:22:03.877Z",
-  "updated_at": "2025-11-18T14:41:49.861Z",
+  "updated_at": "2025-11-20T14:22:11.194Z",
   "comment": {
     "text": "This text is displayed as the title when a folder is unavailable to the user. It appears in error messages, likely presented via a toastr notification, to explain why a folder cannot be accessed. Translators should ensure the wording conveys that the folder is inaccessible and may require action.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2616,
+      "line_number": 2618,
       "context": ": t(\"Common:RoomLinkExpired\");\n \n const title = isFile\n ? t(\"Common:FileNotAvailable\")\n : isFolder\n ? t(\"Common:FolderNotAvailable\")\n : t(\"Common:RoomNotAvailable\");\n \n return toastr.error(description, title);\n }",
       "module": "/packages/client"
     }

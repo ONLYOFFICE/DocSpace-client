@@ -24,7 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -86,203 +92,220 @@ const getConvertedSize = (value: string, power: number) => {
   if (value.trim() === "") return "";
   return conversionToBytes(Number(value), power);
 };
-export const QuotaForm = ({
-  isLoading,
-  isDisabled,
-  maxInputWidth,
-  onSetQuotaBytesSize,
-  initialSize = 0,
-  isError,
-  isButtonsEnable = false,
-  onSave,
-  onCancel,
-  label,
-  checkboxLabel,
-  description,
-  isAutoFocussed = false,
-  tabIndex,
-  dataTestId,
-}: QuotaFormProps) => {
-  const initPower = getInitialPower(initialSize);
-  const initSize = getInitialSize(initialSize, initPower);
+export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
+  (
+    {
+      isLoading,
+      isDisabled,
+      maxInputWidth,
+      onSetQuotaBytesSize,
+      initialSize = 0,
+      isError,
+      isButtonsEnable = false,
+      onSave,
+      onCancel,
+      label,
+      checkboxLabel,
+      description,
+      isAutoFocussed = false,
+      tabIndex,
+      dataTestId,
+    },
+    ref,
+  ) => {
+    const initPower = getInitialPower(initialSize);
+    const initSize = getInitialSize(initialSize, initPower);
 
-  const [power, setPower] = useState(initPower);
-  const [size, setSize] = useState(initSize);
-  const [hasError, setHasError] = useState(false);
-  const [isChecked, setIsChecked] = useState(initialSize === -1);
+    const [power, setPower] = useState(initPower);
+    const [size, setSize] = useState(initSize);
+    const [hasError, setHasError] = useState(false);
+    const [isChecked, setIsChecked] = useState(initialSize === -1);
 
-  useEffect(() => {
-    setSize(initSize);
-    setPower(initPower);
-  }, [initSize, initPower, setSize, setPower]);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-  const { t } = useTranslation(["Common"]);
-  const options = getOptions(t);
+    useEffect(() => {
+      setSize(initSize);
+      setPower(initPower);
+    }, [initSize, initPower, setSize, setPower]);
 
-  const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, validity } = e.target;
+    useImperativeHandle(ref, () => ({
+      focus: () => {
+        inputRef.current?.focus();
+        inputRef.current?.select();
+      },
+    }));
 
-    if (validity.valid) {
-      const transmittedSize = getConvertedSize(value, power);
+    const { t } = useTranslation(["Common"]);
+    const options = getOptions(t);
 
-      if (onSetQuotaBytesSize) onSetQuotaBytesSize(transmittedSize);
-      setSize(value);
-    }
-  };
+    const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value, validity } = e.target;
 
-  const onSelectComboBox = (option: TOption) => {
-    const { key } = option;
+      if (validity.valid) {
+        const transmittedSize = getConvertedSize(value, power);
 
-    if (onSetQuotaBytesSize && size.trim() !== "")
-      onSetQuotaBytesSize(conversionToBytes(Number(size), Number(key)));
-
-    setPower(Number(key));
-  };
-
-  const onChangeCheckbox = () => {
-    const changeCheckbox = !isChecked;
-
-    setIsChecked(changeCheckbox);
-
-    const sizeValue = changeCheckbox ? -1 : getConvertedSize(size, power);
-
-    if (onSetQuotaBytesSize) onSetQuotaBytesSize(sizeValue.toString());
-  };
-
-  const isSizeError = () => {
-    if (size.trim() === "") {
-      setHasError(true);
-      return true;
-    }
-
-    return false;
-  };
-
-  const onSaveClick = async () => {
-    if (isSizeError()) return;
-
-    if (onSave) onSave(conversionToBytes(Number(size), Number(power)));
-
-    setHasError(false);
-  };
-
-  const onKeyDownInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.keyCode === 13 || e.which === 13) {
-      if (isButtonsEnable) {
-        if (isSizeError()) return;
-
-        onSaveClick();
-
-        setHasError(false);
+        if (onSetQuotaBytesSize) onSetQuotaBytesSize(transmittedSize);
+        setSize(value);
       }
-    }
-  };
+    };
 
-  const onCancelClick = () => {
-    if (onCancel) onCancel();
+    const onSelectComboBox = (option: TOption) => {
+      const { key } = option;
 
-    setSize(initSize);
-    setPower(initPower);
-  };
+      if (onSetQuotaBytesSize && size.trim() !== "")
+        onSetQuotaBytesSize(conversionToBytes(Number(size), Number(key)));
 
-  const isDisable =
-    isLoading ||
-    isDisabled ||
-    (checkboxLabel !== undefined && checkboxLabel.length > 0 && isChecked);
+      setPower(Number(key));
+    };
 
-  const isDefaultQuota = isDefaultValue(
-    initPower,
-    Number(initSize),
-    power,
-    Number(size),
-    initialSize,
-  );
+    const onChangeCheckbox = () => {
+      const changeCheckbox = !isChecked;
 
-  return (
-    <div
-      className={classNames(styles.quotaForm, {
-        [styles.isCheckbox]: !!checkboxLabel,
-        [styles.isLabel]: !!label,
-        [styles.isButtonsEnable]: isButtonsEnable,
-      })}
-      data-testid={dataTestId ?? "quota-form"}
-    >
-      {label ? <Text fontWeight={600}>{label}</Text> : null}
-      {description ? (
-        <Text
-          fontSize="12px"
-          className={classNames(styles.quotaDescription, "quota_description")}
-        >
-          {description}
-        </Text>
-      ) : null}
-      <div className={classNames(styles.quotaContainer, "quota-container")}>
-        <TextInput
-          type={InputType.text}
-          className={classNames(styles.quotaLimit, "quota_limit")}
-          style={{ maxWidth: maxInputWidth }}
-          isAutoFocussed={isAutoFocussed}
-          value={size}
-          onChange={onChangeTextInput}
-          isDisabled={isDisable}
-          onKeyDown={onKeyDownInput}
-          hasError={isError || hasError}
-          pattern="^\d+(?:\.\d{0,2})?"
-          scale
-          withBorder
-          tabIndex={tabIndex}
-          testId={dataTestId ? `${dataTestId}_input` : "quota-text-input"}
-        />
-        <ComboBox
-          className={classNames(styles.quotaValue, "quota_value")}
-          options={options}
-          isDisabled={isDisable}
-          selectedOption={options.find((elem) => elem.key === power)!}
-          size={ComboBoxSize.content}
-          onSelect={onSelectComboBox}
-          showDisabledItems
-          manualWidth="auto"
-          directionY="both"
-          dataTestId={
-            dataTestId ? `${dataTestId}_size_combo_box` : "quota-combo-box"
-          }
-        />
+      setIsChecked(changeCheckbox);
+
+      const sizeValue = changeCheckbox ? -1 : getConvertedSize(size, power);
+
+      if (onSetQuotaBytesSize) onSetQuotaBytesSize(sizeValue.toString());
+    };
+
+    const isSizeError = () => {
+      if (size.trim() === "") {
+        setHasError(true);
+        return true;
+      }
+
+      return false;
+    };
+
+    const onSaveClick = async () => {
+      if (isSizeError()) return;
+
+      if (onSave) onSave(conversionToBytes(Number(size), Number(power)));
+
+      setHasError(false);
+    };
+
+    const onKeyDownInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.keyCode === 13 || e.which === 13) {
+        if (isButtonsEnable) {
+          if (isSizeError()) return;
+
+          onSaveClick();
+
+          setHasError(false);
+        }
+      }
+    };
+
+    const onCancelClick = () => {
+      if (onCancel) onCancel();
+
+      setSize(initSize);
+      setPower(initPower);
+    };
+
+    const isDisable =
+      isLoading ||
+      isDisabled ||
+      (checkboxLabel !== undefined && checkboxLabel.length > 0 && isChecked);
+
+    const isDefaultQuota = isDefaultValue(
+      initPower,
+      Number(initSize),
+      power,
+      Number(size),
+      initialSize,
+    );
+
+    return (
+      <div
+        className={classNames(styles.quotaForm, {
+          [styles.isCheckbox]: !!checkboxLabel,
+          [styles.isLabel]: !!label,
+          [styles.isButtonsEnable]: isButtonsEnable,
+        })}
+        data-testid={dataTestId ?? "quota-form"}
+      >
+        {label ? <Text fontWeight={600}>{label}</Text> : null}
+        {description ? (
+          <Text
+            fontSize="12px"
+            className={classNames(styles.quotaDescription, "quota_description")}
+          >
+            {description}
+          </Text>
+        ) : null}
+        <div className={classNames(styles.quotaContainer, "quota-container")}>
+          <TextInput
+            forwardedRef={inputRef}
+            type={InputType.text}
+            className={classNames(styles.quotaLimit, "quota_limit")}
+            style={{ maxWidth: maxInputWidth }}
+            isAutoFocussed={isAutoFocussed}
+            value={size}
+            onChange={onChangeTextInput}
+            isDisabled={isDisable}
+            onKeyDown={onKeyDownInput}
+            hasError={isError || hasError}
+            pattern="^\d+(?:\.\d{0,2})?"
+            scale
+            withBorder
+            tabIndex={tabIndex}
+            testId={dataTestId ? `${dataTestId}_input` : "quota-text-input"}
+          />
+          <ComboBox
+            className={classNames(styles.quotaValue, "quota_value")}
+            options={options}
+            isDisabled={isDisable}
+            selectedOption={options.find((elem) => elem.key === power)!}
+            size={ComboBoxSize.content}
+            onSelect={onSelectComboBox}
+            showDisabledItems
+            manualWidth="auto"
+            directionY="both"
+            dataTestId={
+              dataTestId ? `${dataTestId}_size_combo_box` : "quota-combo-box"
+            }
+          />
+        </div>
+        {checkboxLabel ? (
+          <Checkbox
+            label={checkboxLabel}
+            isChecked={isChecked}
+            className={classNames(styles.quotaCheckbox, "quota_checkbox", {
+              [styles.isButtonsEnable]: isButtonsEnable,
+            })}
+            onChange={onChangeCheckbox}
+            isDisabled={isLoading || isDisabled}
+            dataTestId={
+              dataTestId ? `${dataTestId}_checkbox` : "quota-checkbox"
+            }
+          />
+        ) : null}
+
+        {isButtonsEnable ? (
+          <SaveCancelButtons
+            isSaving={isLoading}
+            onSaveClick={onSaveClick}
+            onCancelClick={onCancelClick}
+            saveButtonLabel={t("Common:SaveButton")}
+            cancelButtonLabel={t("Common:CancelButton")}
+            reminderText={t("Common:YouHaveUnsavedChanges")}
+            displaySettings
+            saveButtonDisabled={isDefaultQuota}
+            disableRestoreToDefault={isDefaultQuota}
+            showReminder={!isDefaultQuota}
+            saveButtonDataTestId={
+              dataTestId ? `${dataTestId}_save_button` : "quota-save-button"
+            }
+            cancelButtonDataTestId={
+              dataTestId ? `${dataTestId}_cancel_button` : "quota-cancel-button"
+            }
+          />
+        ) : null}
       </div>
-      {checkboxLabel ? (
-        <Checkbox
-          label={checkboxLabel}
-          isChecked={isChecked}
-          className={classNames(styles.quotaCheckbox, "quota_checkbox", {
-            [styles.isButtonsEnable]: isButtonsEnable,
-          })}
-          onChange={onChangeCheckbox}
-          isDisabled={isLoading || isDisabled}
-          dataTestId={dataTestId ? `${dataTestId}_checkbox` : "quota-checkbox"}
-        />
-      ) : null}
-
-      {isButtonsEnable ? (
-        <SaveCancelButtons
-          isSaving={isLoading}
-          onSaveClick={onSaveClick}
-          onCancelClick={onCancelClick}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-          reminderText={t("Common:YouHaveUnsavedChanges")}
-          displaySettings
-          saveButtonDisabled={isDefaultQuota}
-          disableRestoreToDefault={isDefaultQuota}
-          showReminder={!isDefaultQuota}
-          saveButtonDataTestId={
-            dataTestId ? `${dataTestId}_save_button` : "quota-save-button"
-          }
-          cancelButtonDataTestId={
-            dataTestId ? `${dataTestId}_cancel_button` : "quota-cancel-button"
-          }
-        />
-      ) : null}
-    </div>
-  );
-};
+    );
+  },
+);
 
 export default QuotaForm;

@@ -448,6 +448,7 @@ export type BodyProps = TSelectorInfo &
 
     isSSR?: boolean;
     hideBackButton?: boolean;
+    isLimitReached?: boolean;
   };
 
 export type FooterProps = TSelectorFooterSubmitButton &
@@ -662,6 +663,7 @@ export type Data = {
   savedInputValue: Nullable<string>;
   setSavedInputValue: (value: Nullable<string>) => void;
   listHeight: number;
+  isLimitReached?: boolean;
 };
 
 export interface ItemProps {

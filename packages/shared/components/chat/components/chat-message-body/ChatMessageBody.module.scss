@@ -44,6 +44,8 @@
   box-sizing: border-box;
 
   &.empty {
+    height: auto;
+    flex-grow: 0;
     max-height: fit-content;
   }
 

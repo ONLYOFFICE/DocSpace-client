@@ -76,7 +76,7 @@ const Buttons = ({
   const onCloseFolderSelector = () => setShowFolderSelector(false);
 
   const onCopyAction = () => {
-    copy(text);
+    copy(text, { format: "text/plain" });
     toastr.success(t("MessageCopiedSuccess"));
   };
 

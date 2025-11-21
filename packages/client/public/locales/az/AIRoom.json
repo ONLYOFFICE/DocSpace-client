@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Qeyd:</1> Müxbirə görə cavabın keyfiyyəti dəyişə bilər; daha yaxşı nəticələr üçün daha yeni modellər tövsiyə edilir.",
   "ResultStorage": "Nəticə saxlanması",
   "UploadFilesDevice": "Şəxsi cihazınızdan faylları yükləyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin"
+  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin",
+  "AgentInViewModeWarning": "Bu süni intellekt agenti üçün <strong>yalnız baxış</strong> rejimindəsiniz. Digər istifadəçilərin süni intellekt söhbət fəaliyyətinin nəticələrini görə bilərsiniz.",
+  "EmptyResultsViewerDescription": "Digər istifadəçilərin süni intellekt söhbət fəaliyyətinin nəticələrini onlar mövcud olduqdan sonra burada görəcəksiniz."
 }

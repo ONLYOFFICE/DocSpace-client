@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Тези елементи ще бъдат изтрити трайно след 30 дни.",
   "ItemsPermanentlyDeleted": "Тези артикули ще бъдат трайно премахнати от {{trashSection}}.",
   "removeFromListDescription": "Ще премахнете <1>{{title}}</1> от списъка. Сигурни ли сте, че искате да продължите?",
-  "removeFromListDescriptionPlural": "Ще изтриете <1>{{count}} елемента(а)</1>. Сигурни ли сте, че искате да продължите?"
+  "removeFromListDescriptionPlural": "Ще изтриете <1>{{count}} елемента(а)</1>. Сигурни ли сте, че искате да продължите?",
+  "DeleteAIChatDescription": "Ще изтриете <strong>{{chatName}}<1>.</1></strong>\n Всички съобщения и история на чата ще бъдат трайно премахнати и не могат да бъдат възстановени.",
+  "DeleteAIAgentChatTitle": "Изтриване на чата?"
 }

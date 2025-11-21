@@ -21,5 +21,6 @@
   "UserAgentMaxAvailableRoleWarning": "Convidados e Usuários não podem ser designados como gerentes de Agentes. Apenas administradores de Quartos e {{productName}} são adequados para a função especificada.",
   "UserMaxAvailableRoleWarning": "Hóspedes e Utilizadors não podem ser atribuídos como gerentes de quarto. Apenas os administradores Room e {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados",
-  "UsersCannotBeAdded": "Os contactos desativados não podem ser adicionados a uma sala"
+  "UsersCannotBeAdded": "Os contactos desativados não podem ser adicionados a uma sala",
+  "GuestAgentMaxAvailableRoleWarning": "Convidados não podem ser designados como Criador de conteúdo.\nApenas administradores de salas, administradores do {{productName}} e usuários são elegíveis para este papel."
 }

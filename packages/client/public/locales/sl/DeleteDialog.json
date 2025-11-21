@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Ti predmeti bodo trajno izbrisani v 30 dneh.",
   "ItemsPermanentlyDeleted": "Ti predmeti bodo trajno odstranjeni iz {{trashSection}}.",
   "removeFromListDescription": "Odstranite <1>{{title}}</1> iz seznama. Ste prepričani, da želite nadaljevati?",
-  "removeFromListDescriptionPlural": "Odstranite boste <1>{{count}} postavko/postavke</1>. Želite nadaljevati?"
+  "removeFromListDescriptionPlural": "Odstranite boste <1>{{count}} postavko/postavke</1>. Želite nadaljevati?",
+  "DeleteAIChatDescription": "Brišete <strong>{{chatName}}<1>.</1></strong>\n Vse objave in zgodovina klepeta bodo trajno izbrisane in jih ne bo mogoče obnoviti.",
+  "DeleteAIAgentChatTitle": "Izbrisiti klepetal?"
 }

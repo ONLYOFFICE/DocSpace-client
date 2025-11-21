@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
   "ResultStorage": "Przechowywanie wyników",
   "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
-  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}"
+  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Jesteś w trybie <strong>tylko do odczytu</strong> dla tego agenta AI. Możesz zobaczyć wyniki aktywności czatu AI od innych użytkowników.",
+  "EmptyResultsViewerDescription": "Wraz z ich dostępnością, tutaj zobaczysz wyniki aktywności czatu AI od innych użytkowników."
 }

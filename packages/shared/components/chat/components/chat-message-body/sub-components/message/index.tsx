@@ -34,7 +34,7 @@ import { Link, LinkTarget } from "../../../../../link";
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
 import { Text } from "../../../../../text";
 
-import { MessageProps } from "../../../../Chat.types";
+import type { MessageProps } from "../../../../Chat.types";
 import { useChatStore } from "../../../../store/chatStore";
 
 import styles from "../../ChatMessageBody.module.scss";
@@ -151,7 +151,11 @@ const Message = ({
       {message.contents.map((c, mId) => {
         if (c.type === ContentType.Text)
           return (
-            <Markdown key={c.text} chatMessage={c.text} isFirst={mId === 0} />
+            <Markdown
+              key={`${message.id}_${c.type}_${mId}`}
+              chatMessage={c.text}
+              isFirst={mId === 0}
+            />
           );
 
         if (c.type === ContentType.Tool)
@@ -175,4 +179,4 @@ const Message = ({
   );
 };
 
-export default Message;
+export default React.memo(Message);

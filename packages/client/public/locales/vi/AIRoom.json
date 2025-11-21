@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Lưu ý:</1> Chất lượng phản hồi có thể khác nhau tùy theo mô hình; nên sử dụng các mô hình mới hơn để có kết quả tốt nhất.",
   "ResultStorage": "Lưu trữ kết quả",
   "UploadFilesDevice": "Tải lên tệp từ thiết bị cá nhân của bạn.",
-  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}"
+  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Bạn đang ở chế độ <strong>chỉ xem</strong> cho tác nhân AI này. Bạn có thể xem kết quả hoạt động trò chuyện AI từ những người dùng khác.",
+  "EmptyResultsViewerDescription": "Bạn sẽ thấy kết quả hoạt động trò chuyện AI từ những người dùng khác ở đây khi chúng có sẵn."
 }

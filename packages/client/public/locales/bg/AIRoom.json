@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Забележка:</1> Качеството на отговорите може да варира в зависимост от модела; препоръчват се по-новите модели за най-добри резултати.",
   "ResultStorage": "Резултатно съхранение",
   "UploadFilesDevice": "Качете файлове от вашето лично устройство.",
-  "UploadFilesPortal": "Качете файлове от {{sectionNameFirst}} или {{sectionNameSecond}}"
+  "UploadFilesPortal": "Качете файлове от {{sectionNameFirst}} или {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Вие сте в режим <strong>само за четене</strong> за този AI агент. Можете да виждате резултатите от AI чат активността на други потребители.",
+  "EmptyResultsViewerDescription": "Ще видите резултатите от дейността на AI чат от други потребители тук, след като станат достъпни."
 }

@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Estes itens serão permanentemente eliminados em 30 dias.",
   "ItemsPermanentlyDeleted": "Estes itens serão removidos permanentemente da {{trashSection}}.",
   "removeFromListDescription": "Você está prestes a remover <1>{{title}}</1> da lista. Tem certeza de que deseja continuar?",
-  "removeFromListDescriptionPlural": "Você está prestes a remover <1>items ({{count}})</1> da lista. Tem certeza de que deseja continuar?"
+  "removeFromListDescriptionPlural": "Você está prestes a remover <1>items ({{count}})</1> da lista. Tem certeza de que deseja continuar?",
+  "DeleteAIChatDescription": "Você está prestes a excluir <strong>{{chatName}}<1>.</1></strong>\n Todas as mensagens e histórico do chat serão removidos permanentemente e não poderão ser restaurados.",
+  "DeleteAIAgentChatTitle": "Apagar chat?"
 }

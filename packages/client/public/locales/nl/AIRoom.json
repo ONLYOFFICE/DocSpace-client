@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Let op:</1> De kwaliteit van de antwoorden kan variëren per model; nieuwere modellen worden aanbevolen voor de beste resultaten.",
   "ResultStorage": "Resultaatopslag",
   "UploadFilesDevice": "Upload bestanden vanaf uw persoonlijke apparaat",
-  "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}"
+  "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Je bevindt je in <strong>view-only</strong> modus voor deze AI agent. Je kunt de resultaten van AI chat activiteit van andere gebruikers zien.",
+  "EmptyResultsViewerDescription": "U ziet hier de resultaten van AI-chatactiviteit van andere gebruikers zodra deze beschikbaar zijn."
 }

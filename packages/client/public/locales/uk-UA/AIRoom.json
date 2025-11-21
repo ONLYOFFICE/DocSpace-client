@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Примітка:</1> Якість відповідей може відрізнятися залежно від моделі; для найкращих результатів рекомендуються новіші моделі.",
   "ResultStorage": "Збереження результатів",
   "UploadFilesDevice": "Завантажте файли з вашого особистого пристрою.",
-  "UploadFilesPortal": "Завантажте файли з {{sectionNameFirst}} або {{sectionNameSecond}}"
+  "UploadFilesPortal": "Завантажте файли з {{sectionNameFirst}} або {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Ви перебуваєте в режимі <strong>лише перегляд</strong> для цього ШI агента. Ви можете бачити результати активності чат-бота від інших користувачів.",
+  "EmptyResultsViewerDescription": "Тут ви побачите результати активності чат-бота від інших користувачів, коли вони стануть доступними."
 }

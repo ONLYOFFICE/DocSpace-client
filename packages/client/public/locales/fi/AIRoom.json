@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Huomautus:</1> Vastausten laatu voi vaihdella mallista riippuen; parempien tulosten saavuttamiseksi suositellaan uusia malleja.",
   "ResultStorage": "Tulosten tallennus",
   "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",
-  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}"
+  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Olet <strong >vain luku</strong > -tilassa tälle tekoälyagentille. Voit nähdä muiden käyttäjien tekoälykeskustelujen tulokset.",
+  "EmptyResultsViewerDescription": "Täällä näet muiden käyttäjien tekoälykeskustelujen tulokset, kun ne ovat saatavilla."
 }

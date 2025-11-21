@@ -360,3 +360,19 @@
     text-underline-offset: 2px;
   }
 }
+
+.historyTextWrapper {
+  overflow: hidden;
+
+  .historyText {
+    min-width: fit-content;
+  }
+}
+
+.thirdPartyEmptyScreen {
+  width: fit-content;
+
+  :global(.ec-image) {
+    width: 150px;
+  }
+}

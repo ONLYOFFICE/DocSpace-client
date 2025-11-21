@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
@@ -33,20 +32,15 @@ import { useTheme } from "@docspace/shared/hooks/useTheme";
 import EmptyCanceledLight from "PUBLIC_DIR/images/emptyview/empty.records.light.svg?url";
 import EmptyCanceledDark from "PUBLIC_DIR/images/emptyview/empty.records.dark.svg?url";
 
-const StyledEmptyScreenContainer = styled(EmptyScreenContainer)`
-  width: fit-content;
-
-  .ec-image {
-    width: 150px;
-  }
-`;
+import styles from "../History.module.scss";
 
 const ThirdPartyComponent = () => {
   const { t } = useTranslation("InfoPanel");
   const { isBase } = useTheme();
 
   return (
-    <StyledEmptyScreenContainer
+    <EmptyScreenContainer
+      className={styles.thirdPartyEmptyScreen}
       imageSrc={isBase ? EmptyCanceledLight : EmptyCanceledDark}
       headerText={t("NoRecordsFound")}
       descriptionText={t("HistoryThirdParty")}

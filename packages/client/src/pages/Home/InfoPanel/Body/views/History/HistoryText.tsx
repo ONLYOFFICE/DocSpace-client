@@ -24,21 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
 import { Text } from "@docspace/shared/components/text";
 
-const StyledHistoryText = styled.span`
-  overflow: hidden;
-
-  .history-text {
-    min-width: fit-content;
-  }
-`;
+import styles from "./History.module.scss";
 
 const HistoryText = ({ title }: { title: string }) => (
-  <StyledHistoryText title={title} className="history-text_wrapper">
-    <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
+  <div title={title} className={styles.historyTextWrapper}>
+    <Text
+      fontWeight={600}
+      as="span"
+      fontSize="14px"
+      className={styles.historyText}
+    >
       "
     </Text>
     <Text
@@ -49,10 +46,15 @@ const HistoryText = ({ title }: { title: string }) => (
     >
       {title}
     </Text>
-    <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
+    <Text
+      fontWeight={600}
+      as="span"
+      fontSize="14px"
+      className={styles.historyText}
+    >
       "
     </Text>
-  </StyledHistoryText>
+  </div>
 );
 
 export { HistoryText };

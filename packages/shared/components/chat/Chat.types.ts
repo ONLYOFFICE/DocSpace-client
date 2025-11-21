@@ -219,4 +219,6 @@ export type ChatProps = {
   }) => void;
   setDeleteDialogVisible?: (value: boolean) => void;
   folderFormValidation: RegExp;
+  renderNoAccess?: React.ReactNode;
+  isNoAccess?: boolean;
 };

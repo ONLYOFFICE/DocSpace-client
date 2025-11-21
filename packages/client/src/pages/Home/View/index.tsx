@@ -97,6 +97,7 @@ type ViewProps = UseContactsProps &
     aiAgentsAbortController: Nullable<AbortController>;
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
+    showArticleLoader: ClientLoadingStore["showArticleLoader"];
 
     aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
     setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
@@ -162,6 +163,7 @@ const View = ({
   chatSettings,
   showBodyLoader,
   showHeaderLoader,
+  showArticleLoader,
 
   getFilesSettings,
   setSubscriptions,
@@ -588,13 +590,13 @@ const View = ({
               sectionWidth={context.sectionWidth}
               currentView={currentView}
             />
-          ) : currentView === "chat" && !isErrorAIAgentNotAvailable ? (
+          ) : currentView === "chat" ? (
             <Chat
               userAvatar={userAvatar}
               roomId={isLoading && !showHeaderLoader ? "-1" : roomId!}
               getIcon={getIcon}
               selectedModel={chatSettings?.modelId ?? ""}
-              isLoading={showBodyLoader}
+              isLoading={showBodyLoader || showArticleLoader}
               attachmentFile={attachmentFile}
               clearAttachmentFile={onClearAttachmentFile}
               toolsSettings={toolsSettings}
@@ -607,9 +609,11 @@ const View = ({
               setIsAIAgentChatDelete={setIsAIAgentChatDelete}
               setDeleteDialogVisible={setDeleteDialogVisible}
               folderFormValidation={folderFormValidation}
+              renderNoAccess={
+                <NoAccessContainer type={NoAccessContainerType.Agent} />
+              }
+              isNoAccess={isErrorAIAgentNotAvailable}
             />
-          ) : currentView === "chat" && isErrorAIAgentNotAvailable ? (
-            <NoAccessContainer type={NoAccessContainerType.Agent} />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
           ) : (
@@ -688,6 +692,7 @@ export const ViewComponent = inject(
       setIsSectionHeaderLoading,
       setIsProfileLoaded,
 
+      showArticleLoader,
       showHeaderLoader,
     } = clientLoadingStore;
 
@@ -766,6 +771,7 @@ export const ViewComponent = inject(
       chatSettings: selectedFolderStore?.chatSettings,
       showBodyLoader: clientLoadingStore.showBodyLoader,
       showHeaderLoader,
+      showArticleLoader,
 
       getFilesSettings,
       setSubscriptions,

@@ -180,7 +180,7 @@ const Item = ({
         (type === EmployeeType.Guest || type === EmployeeType.User);
 
   const isReadOnlyFiltered =
-    roomType === RoomsType.AIRoom && EmployeeType.Guest;
+    roomType === RoomsType.AIRoom && type === EmployeeType.Guest;
 
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 

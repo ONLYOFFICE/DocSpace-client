@@ -339,6 +339,7 @@ export type TSelectorInput = WithFlag<
 
 export type TSelectorFooterInput = TSelectorInput & {
   setNewFooterInputValue: React.Dispatch<React.SetStateAction<string>>;
+  withErrorFooter?: boolean;
 };
 
 // footer checkbox
@@ -418,7 +419,7 @@ export type SelectorProps = TSelectorHeader &
     dataTestId?: string;
 
     hideBackButton?: boolean;
-    folderFormValidation: RegExp;
+    folderFormValidation?: RegExp;
   };
 
 export type BodyProps = TSelectorInfo &

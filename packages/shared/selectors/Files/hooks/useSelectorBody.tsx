@@ -192,7 +192,6 @@ const useSelectorBody = ({
         withFooterInput,
         footerInputHeader,
         currentFooterInputValue,
-        folderFormValidation,
       }
     : {};
 
@@ -283,6 +282,7 @@ const useSelectorBody = ({
       infoBarData={infoBarData}
       withPadding={withPadding}
       isSSR={withInit}
+      folderFormValidation={folderFormValidation}
     />
   );
 

@@ -292,5 +292,5 @@ export type FilesSelectorProps = TInfoBar &
     maxSelectedItems?: number;
     renderInPortal?: boolean;
     disableBySecurity?: string;
-    folderFormValidation: RegExp;
+    folderFormValidation?: RegExp;
   };

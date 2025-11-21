@@ -21,5 +21,6 @@
   "UserAgentMaxAvailableRoleWarning": "Vieraat ja käyttäjät eivät voi olla agenttien päälliköitä. Vain huone- ja {{productName}}-ylläpitäjät soveltuvat määritettyyn rooliin.",
   "UserMaxAvailableRoleWarning": "Vieraita ja käyttäjiä ei voida asettaa huoneen johtajiksi. Vain huoneen ja {{productName}} pääkäyttäjät ovat sopivia tähän rooliin.",
   "UsersAlreadyAdded": "Jotkut käyttäjät on jo lisätty.",
-  "UsersCannotBeAdded": "Poistetut yhteystiedot ei voi lisätä huoneeseen"
+  "UsersCannotBeAdded": "Poistetut yhteystiedot ei voi lisätä huoneeseen",
+  "GuestAgentMaxAvailableRoleWarning": "Vieraat eivät voi olla sisällöntuottajia.\nVain huoneen ylläpitäjät, {{productName}}-ylläpitäjät ja Käyttäjät ovat kelpoisia tähän rooliin."
 }

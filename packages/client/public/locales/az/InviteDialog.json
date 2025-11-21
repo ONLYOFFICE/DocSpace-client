@@ -21,5 +21,6 @@
   "UserAgentMaxAvailableRoleWarning": "Qonaqlar və İstifadəçilər agent menecerləri təyin edilə bilməz. Yalnız Otaq və {{productName}} adminləri göstərilən rol üçün uyğundur.",
   "UserMaxAvailableRoleWarning": "Qonaq və İstifadəçilər Otaq administratoru kimi təyin edilə bilməz. Yalnız Otaq və {{productName}} administratorları göstərilən rol üçün uyğundur.",
   "UsersAlreadyAdded": "Bəzi istifadəçilər artıq əlavə olunub",
-  "UsersCannotBeAdded": "İstifadəsiz kontaktlar otağa əlavə edilə bilməz."
+  "UsersCannotBeAdded": "İstifadəsiz kontaktlar otağa əlavə edilə bilməz.",
+  "GuestAgentMaxAvailableRoleWarning": "Qonaqlar Təcrübə yaradıcısı kimi təyin edilə bilməzlər.\nBu rola yalnız Otaq administratorları, {{productName}} administratorları və İstifadəçiləri layiqdir."
 }

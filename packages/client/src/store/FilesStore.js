@@ -2929,7 +2929,6 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, [
           "mark-read",
           "mark-as-favorite",
-          "remove-from-favorites",
         ]);
       }
 

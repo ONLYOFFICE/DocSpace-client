@@ -318,6 +318,7 @@ const ExternalLinks = ({
             onSelectAccess={onSelectAccess}
             containerRef={inputsRef}
             isOwner={isOwner}
+            isAdmin={isAdmin}
             isMobileView={isMobileView}
             isSelectionDisabled={isUserTariffLimit}
             selectionErrorText={<PaidQuotaLimitError />}

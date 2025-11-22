@@ -25,48 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
+import classNames from "classnames";
+import { ReactSVG } from "react-svg";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
 import { Badge } from "@docspace/shared/components/badge";
-import { commonIconsStyles, IconSizeType } from "@docspace/shared/utils";
+import { IconSizeType } from "@docspace/shared/utils";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
+import CatalogSpamIconUrl from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg?url";
+
+import styles from "./badges.module.scss";
 
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
-
-const StyledBadgesContainer = styled.div<{ infoPanelVisible?: boolean }>`
-  height: 100%;
-
-  display: flex;
-
-  align-items: center;
-
-  ${(props) =>
-    props.infoPanelVisible &&
-    css`
-      .accounts-badge:last-child {
-        margin-inline-end: 12px;
-      }
-    `}
-`;
-
-const StyledPaidBadge = styled(Badge)`
-  margin-inline-end: 8px;
-`;
-
-const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.accountsBadges.disabledColor};
-  }
-`;
 
 type BadgeProps = {
   statusType?: string;
@@ -115,9 +91,12 @@ const Badges = ({
   };
 
   return (
-    <StyledBadgesContainer
-      className="badges additional-badges"
-      infoPanelVisible={infoPanelVisible}
+    <div
+      className={classNames(
+        "badges additional-badges",
+        styles.badgesContainer,
+        { [styles.infoPanelVisible]: infoPanelVisible },
+      )}
     >
       {isLDAP ? (
         <Badge
@@ -148,8 +127,8 @@ const Badges = ({
         />
       ) : null}
       {!withoutPaid && isPaid ? (
-        <StyledPaidBadge
-          className="paid-badge accounts-badge"
+        <Badge
+          className={classNames("paid-badge accounts-badge", styles.paidBadge)}
           label={t("Paid")}
           backgroundColor={
             isBase
@@ -171,12 +150,15 @@ const Badges = ({
         />
       ) : null}
       {statusType === "disabled" ? (
-        <StyledCatalogSpamIcon
-          className="disabled-badge accounts-badge"
-          size={IconSizeType.small}
+        <ReactSVG
+          src={CatalogSpamIconUrl}
+          className={classNames(
+            "disabled-badge accounts-badge",
+            styles.catalogSpamIcon,
+          )}
         />
       ) : null}
-    </StyledBadgesContainer>
+    </div>
   );
 };
 

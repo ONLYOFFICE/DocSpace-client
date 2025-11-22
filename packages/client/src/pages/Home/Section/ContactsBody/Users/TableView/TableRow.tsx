@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -42,6 +41,8 @@ import {
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { globalColors } from "@docspace/shared/themes";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -89,7 +90,7 @@ const PeopleTableRow = ({
   itemIndex,
   withContentSelection,
 }: TableRowProps) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
 
   const {
@@ -111,9 +112,13 @@ const PeopleTableRow = ({
   const isPending = statusType === "pending" || statusType === "disabled";
 
   const nameColor = isPending
-    ? theme.peopleTableRow.pendingNameColor
-    : theme.peopleTableRow.nameColor;
-  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
+    ? isBase
+      ? globalColors.gray
+      : globalColors.grayDark
+    : isBase
+      ? globalColors.black
+      : globalColors.white;
+  const sideInfoColor = isBase ? globalColors.gray : globalColors.grayDark;
 
   const getTypesOptions = React.useCallback(() => {
     const options = getUsersChangeTypeOptions!(t, item);

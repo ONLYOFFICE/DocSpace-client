@@ -26,7 +26,6 @@
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
 
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import {
@@ -34,7 +33,9 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { TGroup } from "@docspace/shared/api/groups/types";
+import { globalColors } from "@docspace/shared/themes";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
@@ -72,7 +73,7 @@ const GroupsRowComponent = ({
   changeGroupContextSelection,
 }: GroupsRowProps) => {
   const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const isChecked = selection?.some((el) => el.id === item.id);
   const isActive = bufferSelection?.id === item?.id;
@@ -130,7 +131,7 @@ const GroupsRowComponent = ({
           <GroupsRowContent
             className="group-row-content"
             sectionWidth={sectionWidth}
-            sideColor={theme.peopleTableRow.sideInfoColor}
+            sideColor={isBase ? globalColors.gray : globalColors.grayDark}
           >
             <Link
               key="group-title"

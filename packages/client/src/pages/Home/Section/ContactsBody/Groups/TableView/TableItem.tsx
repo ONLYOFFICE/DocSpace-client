@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
@@ -80,7 +79,6 @@ const GroupsTableItem = ({
   withContentSelection,
 }: GroupsTableItemProps) => {
   const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
-  const theme = useTheme();
   const isActive = bufferSelection?.id === item.id;
 
   const onChange = () => {
@@ -191,7 +189,7 @@ const GroupsTableItem = ({
               fontWeight="600"
               fontSize="13px"
               className="table-cell_group-people"
-              color={theme.filesSection.tableView.row.sideColor}
+              color={globalColors.gray}
             >
               {item.membersCount}
             </Text>

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -33,6 +32,8 @@ import {
   getUserTypeName,
 } from "@docspace/shared/utils/common";
 import { Link, LinkType } from "@docspace/shared/components/link";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { globalColors } from "@docspace/shared/themes";
 
 import Badges from "../../Badges";
 
@@ -53,7 +54,7 @@ const UserContent = ({
   itemIndex,
 }: UserContentProps) => {
   const { t } = useTranslation(["People", "Common"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const {
     displayName,
     email,
@@ -77,12 +78,20 @@ const UserContent = ({
 
   const nameColor =
     isPending || isDisabled
-      ? theme.peopleTableRow.pendingNameColor
-      : theme.peopleTableRow.nameColor;
+      ? isBase
+        ? globalColors.gray
+        : globalColors.grayDark
+      : isBase
+        ? globalColors.black
+        : globalColors.white;
   const sideInfoColor =
     isPending || isDisabled
-      ? theme.peopleTableRow.pendingSideInfoColor
-      : theme.peopleTableRow.sideInfoColor;
+      ? isBase
+        ? globalColors.grayStrong
+        : globalColors.grayDarkStrong
+      : isBase
+        ? globalColors.gray
+        : globalColors.grayDark;
 
   const roleLabel = getUserTypeName(
     isOwner,

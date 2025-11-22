@@ -25,11 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+
+import { Text } from "@docspace/shared/components/text";
 import { FileType } from "@docspace/shared/enums";
 import { getSinglePDFTitle } from "@docspace/shared/utils/getPDFTite";
 
-import { StyledTypeCell } from "./CellStyles";
 import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
+
+import styles from "../table.module.scss";
 
 const TypeCell = ({ t, item, sideColor }) => {
   const { fileExst, fileTypeName, fileType, roomType, isPDFForm } = item;
@@ -68,7 +71,8 @@ const TypeCell = ({ t, item, sideColor }) => {
   const data = Exst ? `${Exst} ${type}` : type;
 
   return (
-    <StyledTypeCell
+    <Text
+      className={styles.cellTypeText}
       fontSize="12px"
       fontWeight="600"
       color={sideColor}
@@ -84,7 +88,7 @@ const TypeCell = ({ t, item, sideColor }) => {
         </>
       ) : null}
       <span className="type">{type}</span>
-    </StyledTypeCell>
+    </Text>
   );
 };
 export default React.memo(TypeCell);

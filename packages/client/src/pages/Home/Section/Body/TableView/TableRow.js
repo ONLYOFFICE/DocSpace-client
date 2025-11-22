@@ -33,6 +33,8 @@ import { FolderType } from "@docspace/shared/enums";
 import { EMPTY_OBJECT, FUNCTION_EMPTY } from "@docspace/shared/constants";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import { TableRow } from "@docspace/shared/components/table";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
@@ -50,7 +52,7 @@ import RowDataComponent from "./sub-components/RowData";
 import SharedWithMeRowDataComponent from "./sub-components/SharedWithMeRowData";
 import FavoritesRowDataComponent from "./sub-components/FavoritesRowData";
 
-import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
+import styles from "./table.module.scss";
 
 const FilesTableRow = memo((props) => {
   const {
@@ -258,14 +260,20 @@ const FilesTableRow = memo((props) => {
   );
 
   return (
-    <StyledDragAndDrop
+    <DragAndDrop
       id={id}
       data-title={item.title}
       value={value}
-      className={classNames("files-item", className, idWithFileExst, {
-        "table-hotkey-border": showHotkeyBorder,
-        "table-row-selected": !showHotkeyBorder && (checkedProps || isActive),
-      })}
+      className={classNames(
+        styles.dragAndDrop,
+        "files-item",
+        className,
+        idWithFileExst,
+        {
+          "table-hotkey-border": showHotkeyBorder,
+          "table-row-selected": !showHotkeyBorder && (checkedProps || isActive),
+        },
+      )}
       onDrop={onDrop}
       onMouseDown={onMouseDown}
       dragging={dragging ? isDragging : null}
@@ -273,40 +281,40 @@ const FilesTableRow = memo((props) => {
       onDragLeave={onDragLeaveEvent}
       isDragDisabled={isDragDisabled}
     >
-      <StyledTableRow
+      <TableRow
         key={item.id}
-        className="table-row"
+        className={classNames(styles.tableRow, "table-row", {
+          [styles.isDragging]: dragging,
+          [styles.dragging]: dragging && isDragging,
+          [styles.isActive]: isActive,
+          [styles.indexEditingMode]: isIndexEditingMode,
+          [styles.isBlockingOperation]: isBlockingOperation,
+          [styles.inProgress]: inProgress,
+          [styles.isThirdPartyFolder]: item.isThirdPartyFolder,
+          [styles.checked]: checkedProps || isIndexUpdated,
+          [styles.isIndexing]: isIndexing,
+          [styles.isIndexUpdated]: isIndexUpdated,
+          [styles.showHotkeyBorder]: showHotkeyBorder && !isTutorialEnabled,
+          [styles.isRoom]: item.isRoom,
+          [styles.isHighlight]: isHighlight,
+          [styles.canDrag]: canDrag,
+        })}
         forwardedRef={rowRef}
         contextMenuCellStyle={dragStyles.style}
         dataTestId={`table-row-${index}`}
-        isDragging={dragging}
-        dragging={dragging ? isDragging : null}
         selectionProp={selectionProp}
         fileContextClick={fileContextClick}
         onClick={isIndexEditingMode ? FUNCTION_EMPTY : onMouseClick}
-        isActive={isActive}
-        isIndexEditingMode={isIndexEditingMode}
-        isBlockingOperation={isBlockingOperation}
-        inProgress={inProgress}
-        isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
-        isThirdPartyFolder={item.isThirdPartyFolder}
         onDoubleClick={isIndexEditingMode ? FUNCTION_EMPTY : onDoubleClick}
-        checked={checkedProps || isIndexUpdated}
-        isIndexing={isIndexing}
-        isIndexUpdated={isIndexUpdated}
-        showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
         displayFileExtension={displayFileExtension}
         title={
           item.isFolder
             ? t("Translations:TitleShowFolderActions")
             : t("Translations:TitleShowActions")
         }
-        isRoom={item.isRoom}
-        isHighlight={isHighlight}
         hideColumns={hideColumns}
         badgeUrl={badgeUrl}
-        canDrag={canDrag}
         {...contextOptionProps}
       >
         {isTemplates ? (
@@ -373,8 +381,8 @@ const FilesTableRow = memo((props) => {
             {...props}
           />
         )}
-      </StyledTableRow>
-    </StyledDragAndDrop>
+      </TableRow>
+    </DragAndDrop>
   );
 }, equal);
 

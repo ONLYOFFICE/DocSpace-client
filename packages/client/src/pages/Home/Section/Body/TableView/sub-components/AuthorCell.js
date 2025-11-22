@@ -31,8 +31,8 @@ import { useTranslation } from "react-i18next";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
 import { Avatar } from "@docspace/shared/components/avatar";
-
-import { StyledText, StyledAuthorCell } from "./CellStyles";
+import { Text } from "@docspace/shared/components/text";
+import styles from "../table.module.scss";
 
 const AuthorCell = ({ fileOwner, sideColor, item }) => {
   const { t } = useTranslation();
@@ -47,13 +47,14 @@ const AuthorCell = ({ fileOwner, sideColor, item }) => {
   );
 
   return (
-    <StyledAuthorCell className="author-cell">
+    <Text className={styles.cellAuthorContainer}>
       <Avatar
         source={avatarSource}
-        className="author-avatar-cell"
+        className={styles.authorAvatarCell}
         role="user"
       />
-      <StyledText
+      <Text
+        className={styles.cellText}
         color={sideColor}
         fontSize="12px"
         fontWeight={600}
@@ -61,8 +62,8 @@ const AuthorCell = ({ fileOwner, sideColor, item }) => {
         truncate
       >
         {name}
-      </StyledText>
-    </StyledAuthorCell>
+      </Text>
+    </Text>
   );
 };
 

@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { StyledText } from "./CellStyles";
+import { Text } from "@docspace/shared/components/text";
+import styles from "../table.module.scss";
 
 const DateCell = ({
   create,
@@ -42,16 +43,16 @@ const DateCell = ({
       : updatedDate;
 
   return (
-    <StyledText
+    <Text
       title={date}
       fontSize="12px"
       fontWeight={600}
       color={sideColor}
-      className="row_update-text"
+      className={styles.cellText}
       truncate
     >
       {date || null}
-    </StyledText>
+    </Text>
   );
 };
 

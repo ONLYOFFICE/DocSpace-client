@@ -25,14 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 
-import { StyledText } from "./CellStyles";
+import { Text } from "@docspace/shared/components/text";
+import styles from "../table.module.scss";
 
 const SizeCell = ({ item, sideColor }) => {
   const { fileExst, contentLength } = item;
   const date = fileExst || contentLength ? contentLength : "";
 
   return (
-    <StyledText
+    <Text
+      className={styles.cellText}
       color={sideColor}
       fontSize="12px"
       fontWeight={600}
@@ -40,7 +42,7 @@ const SizeCell = ({ item, sideColor }) => {
       truncate
     >
       {date}
-    </StyledText>
+    </Text>
   );
 };
 

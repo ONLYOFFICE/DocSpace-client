@@ -25,23 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { StyledText } from "./CellStyles";
+import { Text } from "@docspace/shared/components/text";
+import styles from "../table.module.scss";
 
 const ErasureCell = ({ t, sideColor, item }) => {
   const { daysRemaining } = item;
   const title = t("Files:DaysRemaining", { daysRemaining });
 
   return (
-    <StyledText
+    <Text
       title={title}
       fontSize="12px"
       fontWeight={600}
       color={sideColor}
-      className="row_update-text"
+      className={styles.cellText}
       truncate
     >
       {title}
-    </StyledText>
+    </Text>
   );
 };
 

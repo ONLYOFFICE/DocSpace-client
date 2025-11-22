@@ -30,16 +30,13 @@ import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import SizeCell from "./SizeCell";
 import LocationCell from "./LocationCell";
 import DateCell from "./DateCell";
+import styles from "../table.module.scss";
 
 const FavoritesRowDataComponent = (props) => {
   const {
@@ -56,7 +53,6 @@ const FavoritesRowDataComponent = (props) => {
     checkedProps,
     element,
     inProgress,
-    showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
     tableStorageName,
@@ -71,9 +67,7 @@ const FavoritesRowDataComponent = (props) => {
   }, [lastColumn, tableStorageName]);
 
   const quickButtonsComponentNode = (
-    <StyledQuickButtonsContainer>
-      {quickButtonsComponent}
-    </StyledQuickButtonsContainer>
+    <div className={styles.quickButtonsContainer}>{quickButtonsComponent}</div>
   );
 
   return (
@@ -95,9 +89,7 @@ const FavoritesRowDataComponent = (props) => {
           inProgress={inProgress}
           {...props}
         />
-        <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
-          {badgesComponent}
-        </StyledBadgesContainer>
+        <div className={styles.badgesContainer}>{badgesComponent}</div>
         {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 

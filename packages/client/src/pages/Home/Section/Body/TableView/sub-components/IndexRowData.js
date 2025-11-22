@@ -35,10 +35,7 @@ import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import IndexCell from "./IndexCell";
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
+import styles from "../table.module.scss";
 
 const IndexRowDataComponent = (props) => {
   const {
@@ -56,7 +53,6 @@ const IndexRowDataComponent = (props) => {
     checkedProps,
     element,
     inProgress,
-    showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
 
@@ -69,9 +65,7 @@ const IndexRowDataComponent = (props) => {
   const lastColumn = getLastColumn(tableStorageName);
 
   const quickButtonsComponentNode = (
-    <StyledQuickButtonsContainer>
-      {quickButtonsComponent}
-    </StyledQuickButtonsContainer>
+    <div className={styles.quickButtonsContainer}>{quickButtonsComponent}</div>
   );
 
   const indexComponentNode = (
@@ -129,9 +123,7 @@ const IndexRowDataComponent = (props) => {
           inProgress={inProgress}
           {...props}
         />
-        <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
-          {badgesComponent}
-        </StyledBadgesContainer>
+        <div className={styles.badgesContainer}>{badgesComponent}</div>
         {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
 

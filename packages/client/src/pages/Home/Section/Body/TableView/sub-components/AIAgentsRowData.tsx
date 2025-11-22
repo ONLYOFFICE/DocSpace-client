@@ -33,13 +33,10 @@ import FileNameCell from "./FileNameCell";
 import TagsCell from "./TagsCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
 import { TTheme } from "@docspace/shared/themes";
 import { TAgent } from "@docspace/shared/api/ai/types";
 import { TTranslation } from "@docspace/shared/types";
+import styles from "../table.module.scss";
 
 type AIAgentsRowDataComponentProps = {
   aiAgentColumnTagsIsEnabled: boolean;
@@ -102,9 +99,7 @@ const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {
 
   const lastColumn = getLastColumn(tableStorageName);
   const quickButtonsComponentNode = (
-    <StyledQuickButtonsContainer>
-      {quickButtonsComponent}
-    </StyledQuickButtonsContainer>
+    <div className={styles.quickButtonsContainer}>{quickButtonsComponent}</div>
   );
 
   return (
@@ -128,7 +123,7 @@ const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {
           isIndexEditingMode={props.isIndexEditingMode}
           displayFileExtension={props.displayFileExtension}
         />
-        <StyledBadgesContainer>{badgesComponent}</StyledBadgesContainer>
+        <div className={styles.badgesContainer}>{badgesComponent}</div>
         {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 

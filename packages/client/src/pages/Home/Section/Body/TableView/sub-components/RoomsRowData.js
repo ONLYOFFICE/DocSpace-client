@@ -36,10 +36,7 @@ import TypeCell from "./TypeCell";
 import TagsCell from "./TagsCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
+import styles from "../table.module.scss";
 
 const RoomsRowDataComponent = (props) => {
   const {
@@ -58,7 +55,6 @@ const RoomsRowDataComponent = (props) => {
     checkedProps,
     element,
     inProgress,
-    showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
     item,
@@ -74,9 +70,7 @@ const RoomsRowDataComponent = (props) => {
   );
 
   const quickButtonsComponentNode = (
-    <StyledQuickButtonsContainer>
-      {quickButtonsComponent}
-    </StyledQuickButtonsContainer>
+    <div className={styles.quickButtonsContainer}>{quickButtonsComponent}</div>
   );
 
   return (
@@ -103,9 +97,7 @@ const RoomsRowDataComponent = (props) => {
           isIndexEditingMode={props.isIndexEditingMode}
           displayFileExtension={props.displayFileExtension}
         />
-        <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
-          {badgesComponent}
-        </StyledBadgesContainer>
+        <div className={styles.badgesContainer}>{badgesComponent}</div>
         {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 

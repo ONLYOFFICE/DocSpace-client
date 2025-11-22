@@ -31,12 +31,9 @@ import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
 import TagsCell from "./TagsCell";
 import DateCell from "./DateCell";
+import styles from "../table.module.scss";
 
 const TemplatesRowData = (props) => {
   const {
@@ -55,7 +52,6 @@ const TemplatesRowData = (props) => {
     checkedProps,
     element,
     inProgress,
-    showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
     tableStorageName,
@@ -65,9 +61,7 @@ const TemplatesRowData = (props) => {
 
   const lastColumn = getLastColumn(tableStorageName);
   const quickButtonsComponentNode = (
-    <StyledQuickButtonsContainer>
-      {quickButtonsComponent}
-    </StyledQuickButtonsContainer>
+    <div className={styles.quickButtonsContainer}>{quickButtonsComponent}</div>
   );
 
   return (
@@ -89,9 +83,7 @@ const TemplatesRowData = (props) => {
           inProgress={inProgress}
           {...props}
         />
-        <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
-          {badgesComponent}
-        </StyledBadgesContainer>
+        <div className={styles.badgesContainer}>{badgesComponent}</div>
         {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 

@@ -33,10 +33,10 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-
-import { StyledText, StyledAuthorCell } from "./CellStyles";
+import { Text } from "@docspace/shared/components/text";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
+import styles from "../table.module.scss";
 interface SharedByCellProps {
   sideColor: string;
   item: TFolder | TFile;
@@ -53,14 +53,15 @@ const SharedByCell: FC<SharedByCellProps> = ({
   const name = React.useMemo(() => decode(displayName ?? ""), [displayName]);
 
   return (
-    <StyledAuthorCell className="author-cell">
+    <Text className={styles.cellAuthorContainer}>
       <Avatar
         source={avatarSource}
-        className="author-avatar-cell"
+        className={styles.authorAvatarCell}
         role={AvatarRole.user}
         size={AvatarSize.small}
       />
-      <StyledText
+      <Text
+        className={styles.cellText}
         color={sideColor}
         fontSize="12px"
         fontWeight={600}
@@ -68,8 +69,8 @@ const SharedByCell: FC<SharedByCellProps> = ({
         truncate
       >
         {name}
-      </StyledText>
-    </StyledAuthorCell>
+      </Text>
+    </Text>
   );
 };
 

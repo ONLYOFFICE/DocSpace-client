@@ -29,8 +29,9 @@ import type { TFunction } from "i18next";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { StyledText } from "./CellStyles";
+import { Text } from "@docspace/shared/components/text";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
+import styles from "../table.module.scss";
 
 export type AccessLevelCellProps = {
   t: TFunction;
@@ -42,7 +43,8 @@ const AccessLevelCell = ({ t, item, sideColor }: AccessLevelCellProps) => {
   const accessLabel = useMemo(() => getAccessLabel(t, item), [t, item]);
 
   return (
-    <StyledText
+    <Text
+      className={styles.cellText}
       truncate
       fontSize="12px"
       fontWeight={600}
@@ -50,7 +52,7 @@ const AccessLevelCell = ({ t, item, sideColor }: AccessLevelCellProps) => {
       title={accessLabel}
     >
       {accessLabel}
-    </StyledText>
+    </Text>
   );
 };
 

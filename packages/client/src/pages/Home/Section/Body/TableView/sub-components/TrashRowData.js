@@ -33,9 +33,9 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { StyledBadgesContainer } from "../StyledTable";
 import ErasureCell from "./ErasureCell";
 import LocationCell from "./LocationCell";
+import styles from "../table.module.scss";
 
 const TrashRowDataComponent = (props) => {
   const {
@@ -53,7 +53,6 @@ const TrashRowDataComponent = (props) => {
     checkedProps,
     element,
     inProgress,
-    showHotkeyBorder,
     badgesComponent,
     tableStorageName,
     index,
@@ -80,9 +79,7 @@ const TrashRowDataComponent = (props) => {
           inProgress={inProgress}
           {...props}
         />
-        <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
-          {badgesComponent}
-        </StyledBadgesContainer>
+        <div className={styles.badgesContainer}>{badgesComponent}</div>
       </TableCell>
 
       {locationColumnIsEnabled ? (

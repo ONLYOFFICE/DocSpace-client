@@ -35,11 +35,6 @@ import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { LinkProps } from "@docspace/shared/utils/plugin-file-utils";
 import { getLastColumn } from "@docspace/shared/utils";
 
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
-
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import TypeCell from "./TypeCell";
@@ -47,6 +42,7 @@ import AuthorCell from "./AuthorCell";
 import FileNameCell from "./FileNameCell";
 import AccessLevelCell from "./AccessLevelCell";
 import SharedByCell from "./SharedByCell";
+import styles from "../table.module.scss";
 
 interface SharedWithMeRowDataProps {
   t: TFunction;
@@ -123,9 +119,7 @@ const SharedWithMeRowData: FC<
   const lastColumn = getLastColumn(tableStorageName);
 
   const lastColumnContent = (
-    <StyledQuickButtonsContainer>
-      {quickButtonsComponent}
-    </StyledQuickButtonsContainer>
+    <div className={styles.quickButtonsContainer}>{quickButtonsComponent}</div>
   );
 
   const sideColor = theme.filesSection.tableView.row.sideColor;
@@ -154,7 +148,7 @@ const SharedWithMeRowData: FC<
           isIndexEditingMode={props.isIndexEditingMode}
           displayFileExtension={props.displayFileExtension}
         />
-        <StyledBadgesContainer>{badgesComponent}</StyledBadgesContainer>
+        <div className={styles.badgesContainer}>{badgesComponent}</div>
         {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
 

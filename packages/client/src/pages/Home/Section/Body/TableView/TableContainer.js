@@ -25,96 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import elementResizeDetectorMaker from "element-resize-detector";
 import React, { useEffect, useRef, useCallback, useMemo, use } from "react";
+import classNames from "classnames";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { TableContainer, TableBody } from "@docspace/shared/components/table";
-import { Context, injectDefaultTheme } from "@docspace/shared/utils";
+import { Context } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import withContainer from "../../../../../HOCs/withContainer";
-
-const fileNameCss = css`
-  margin-inline-start: -24px;
-  padding-inline-start: 24px;
-`;
-
-const contextCss = css`
-  margin-inline-end: -20px;
-  padding-inline-end: 20px;
-`;
-
-const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
-  .table-row-selected {
-    .table-container_file-name-cell {
-      ${fileNameCss}
-    }
-    .table-container_index-cell {
-      ${fileNameCss}
-    }
-
-    .table-container_row-context-menu-wrapper {
-      ${contextCss}
-    }
-  }
-  .table-container_index-cell {
-    margin-inline-end: 0;
-    padding-inline-end: 0;
-  }
-
-  .table-row-selected + .table-row-selected {
-    .table-row {
-      .table-container_file-name-cell,
-      .table-container_index-cell,
-      .table-container_row-context-menu-wrapper {
-        border-image-slice: 1;
-      }
-      .table-container_file-name-cell,
-      .table-container_index-cell {
-        ${fileNameCss}
-        border-inline: 0; //for Safari macOS
-
-        border-image-source: ${(props) => `linear-gradient(to right, 
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
-      }
-      .table-container_row-context-menu-wrapper {
-        ${contextCss}
-
-        border-image-source: ${(props) => `linear-gradient(to left,
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
-      }
-    }
-  }
-
-  .files-item:not(.table-row-selected) + .table-row-selected {
-    .table-row {
-      .table-container_file-name-cell,
-      .table-container_index-cell {
-        ${fileNameCss}
-      }
-
-      .table-container_row-context-menu-wrapper {
-        ${contextCss}
-      }
-    }
-  }
-
-  .resize-handle {
-    ${(props) =>
-      props.isIndexEditingMode &&
-      css`
-        cursor: default;
-        &:hover {
-          border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
-        }
-      `}
-  }
-`;
+import styles from "./table.module.scss";
 
 const elementResizeDetector = elementResizeDetectorMaker({
   strategy: "scroll",
@@ -266,11 +190,13 @@ const Table = ({
   ]);
 
   return (
-    <StyledTableContainer
+    <TableContainer
       noSelect={!withContentSelection}
       useReactWindow
       forwardedRef={ref}
-      isIndexEditingMode={isIndexEditingMode}
+      className={classNames(styles.tableContainer, {
+        [styles.indexEditingMode]: isIndexEditingMode,
+      })}
     >
       <TableHeader
         sectionWidth={sectionWidth}
@@ -298,7 +224,7 @@ const Table = ({
       >
         {filesListNode}
       </TableBody>
-    </StyledTableContainer>
+    </TableContainer>
   );
 };
 

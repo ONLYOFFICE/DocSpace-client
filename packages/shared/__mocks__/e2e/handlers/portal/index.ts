@@ -15,3 +15,15 @@ export {
   deleteSuccess,
   PATH as DELETE_PATH,
 } from "./delete";
+
+export {
+  quotaSuccess,
+  quotaHandler,
+  PATH_QUOTA,
+} from "./quota";
+
+export {
+  tariffSuccess,
+  tariffHandler,
+  PATH_TARIFF,
+} from "./tariff";

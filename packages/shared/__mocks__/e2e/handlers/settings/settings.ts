@@ -1,3 +1,4 @@
+import { PATH_WITH_PARAMS } from "./../authentication/login";
 import {
   API_PREFIX,
   BASE_URL,
@@ -11,7 +12,8 @@ import {
   HEADER_HCAPTCHA_SETTINGS,
 } from "../../utils";
 
-const PATH = "settings";
+export const PATH = "settings";
+export const PATH_WITH_QUERY = `${PATH}?**`;
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

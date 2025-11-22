@@ -43,6 +43,8 @@ import {
   selfHandler,
 } from "./people";
 import {
+  colorThemeHandler,
+  PATH_COLOR_THEME,
   COMPLETE_PATH,
   completeHandler,
   LICENCE_PATH,
@@ -51,14 +53,23 @@ import {
   ownerHandler,
   TFA_APP_VALIDATE_PATH,
   tfaAppValidateHandler,
+  settingsHandler,
+  PATH_SETTINGS,
+  PATH_SETTINGS_WITH_QUERY,
+  PATH_BUILD,
+  buildHandler,
 } from "./settings";
 import {
   CONTINUE_PATH,
   continuePortalHandler,
   DELETE_PATH,
   deletePortalHandler,
+  PATH_QUOTA,
+  PATH_TARIFF,
+  quotaHandler,
   SUSPEND_PATH,
   suspendHandler,
+  tariffHandler,
 } from "./portal";
 import {
   folderHandler,
@@ -66,12 +77,17 @@ import {
   PATH_ROOMS_LIST,
   roomListHandler,
 } from "./files";
+import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
+
 import {
+  HEADER_AUTHENTICATED_SETTINGS,
   HEADER_EMPTY_FOLDER,
   HEADER_FILTERED_FOLDER,
   HEADER_FILTERED_ROOMS_LIST,
+  HEADER_LIST_CAPABILITIES,
   HEADER_ROOMS_LIST,
 } from "../utils";
+import { PATH_DELETE_USER } from "./people/self";
 
 export type TEndpoint = {
   url: string;
@@ -84,7 +100,7 @@ export type TEndpoints = {
 
 const BASE_URL = "*/**/api/2.0/";
 
-export const endpoints: TEndpoints = {
+export const endpoints = {
   wizardComplete: {
     url: `${BASE_URL}${COMPLETE_PATH}`,
     dataHandler: completeHandler,
@@ -215,4 +231,39 @@ export const endpoints: TEndpoints = {
     url: `${BASE_URL}${PATH_ADD_GUEST}`,
     dataHandler: selfHandler,
   },
-};
+  capabilities: {
+    url: `${BASE_URL}${PATH_CAPABILITIES}`,
+    dataHandler: () =>
+      capabilitiesHandler(new Headers({ [HEADER_LIST_CAPABILITIES]: "true" })),
+  },
+  colorTheme: {
+    url: `${BASE_URL}${PATH_COLOR_THEME}`,
+    dataHandler: colorThemeHandler,
+  },
+  settings: {
+    url: `${BASE_URL}${PATH_SETTINGS}`,
+    dataHandler: () =>
+      settingsHandler(new Headers({ [HEADER_AUTHENTICATED_SETTINGS]: "true" })),
+  },
+  settingsWithQuery: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(new Headers({ [HEADER_AUTHENTICATED_SETTINGS]: "true" })),
+  },
+  self: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: selfHandler,
+  },
+  build: {
+    url: `${BASE_URL}${PATH_BUILD}`,
+    dataHandler: buildHandler,
+  },
+  quota: {
+    url: `${BASE_URL}${PATH_QUOTA}`,
+    dataHandler: quotaHandler,
+  },
+  tariff: {
+    url: `${BASE_URL}${PATH_TARIFF}`,
+    dataHandler: tariffHandler,
+  },
+} satisfies TEndpoints;

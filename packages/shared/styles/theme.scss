@@ -3015,6 +3015,7 @@
   --profile-pending-email-text-color: #{$gray};
   --profile-mobile-row-background: #{$gray-light};
   --profile-mobile-label: #{$gray};
+  --accounts-badges-disabled-color: #{$light-error-status};
 }
 
 .dark {
@@ -3024,4 +3025,5 @@
   --profile-pending-email-text-color: #{$gray-dark};
   --profile-mobile-row-background: #{$light-dark-gray-hover};
   --profile-mobile-label: #{$gray-dark};
+  --accounts-badges-disabled-color: #{$dark-error-status};
 }

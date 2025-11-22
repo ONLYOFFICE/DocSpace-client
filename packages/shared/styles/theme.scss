@@ -2129,6 +2129,32 @@
 }
 
 .light {
+  --table-row-border-color: #{$gray-light-mid};
+  --table-row-border-color-transition: #{$light-gray-hover};
+  --table-row-background-active: #{$light-gray-hover};
+  --table-row-index-update: #{$light-active};
+  --table-row-index-active: #{$light-blue-action};
+  --file-exst-color: #{$gray};
+  --animation-color: #{$light-second-main};
+  --share-hover-color: #{$light-icons};
+  --tap-highlight: #{$tap-highlight};
+  --light-second-main: #{$light-second-main};
+}
+
+.dark {
+  --table-row-border-color: #{$gray-dark-strong};
+  --table-row-border-color-transition: #{$light-dark-gray-hover};
+  --table-row-background-active: #{$light-dark-gray-hover};
+  --table-row-index-update: #{$dark-active};
+  --table-row-index-active: #{$dark-grey-action};
+  --file-exst-color: #{$gray-dark};
+  --animation-color: #{$light-second-main};
+  --share-hover-color: #{$dark-icon};
+  --tap-highlight: #{$tap-highlight};
+  --light-second-main: #{$light-second-main};
+}
+
+.light {
   --download-dialog-bg: #{$gray-light};
   --download-dialog-text-color: #{$gray};
   --download-dialog-warning-color: #{$light-error-status};

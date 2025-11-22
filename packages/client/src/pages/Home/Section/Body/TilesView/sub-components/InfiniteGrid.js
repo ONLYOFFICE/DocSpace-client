@@ -27,22 +27,22 @@
 import { inject, observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import uniqueid from "lodash/uniqueId";
+import classNames from "classnames";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { getCountTilesInRow } from "@docspace/shared/utils";
+import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
-import {
-  StyledCard,
-  StyledItem,
-  StyledHeaderItem,
-  StyledInfiniteLoader,
-} from "./StyledInfiniteGrid";
+import styles from "../tiles.module.scss";
 
 const HeaderItem = ({ children, className, ...rest }) => {
   return (
-    <StyledHeaderItem className={`${className} header-item`} {...rest}>
+    <div
+      className={classNames(styles.headerItem, className, "header-item")}
+      {...rest}
+    >
       {children}
-    </StyledHeaderItem>
+    </div>
   );
 };
 
@@ -74,24 +74,34 @@ const Card = ({ children, ...rest }) => {
   const cardHeight = getItemSize(children);
 
   return (
-    <StyledCard className="Card" cardHeight={cardHeight} {...rest}>
+    <div
+      className={classNames(styles.card, "Card")}
+      style={{ height: `${cardHeight}px` }}
+      {...rest}
+    >
       {children}
-    </StyledCard>
+    </div>
   );
 };
 
 const Item = ({ children, className, ...rest }) => {
   const isRoom = className === "isRoom";
   const isTemplate = className === "isTemplate";
+  const isFile = className === "isFile";
+  const isFolder = className === "isFolder";
+
   return (
-    <StyledItem
-      className={`Item ${className}`}
-      isRoom={isRoom}
-      isTemplate={isTemplate}
+    <div
+      className={classNames(styles.item, "Item", className, {
+        [styles.itemRoom]: isRoom,
+        [styles.itemTemplate]: isTemplate,
+        [styles.itemFile]: isFile,
+        [styles.itemFolder]: isFolder,
+      })}
       {...rest}
     >
       {children}
-    </StyledItem>
+    </div>
   );
 };
 
@@ -244,19 +254,19 @@ const InfiniteGrid = (props) => {
     addItemToList(listKey, type);
   }
   return (
-    <StyledInfiniteLoader
+    <InfiniteLoaderComponent
       viewAs="tile"
       countTilesInRow={countTilesInRow}
       filesLength={filesLength}
       hasMoreFiles={hasMoreFiles}
       itemCount={hasMoreFiles ? list.length + 1 : list.length}
       loadMoreItems={fetchMoreFiles}
-      className={`TileList ${className}`}
+      className={classNames(styles.infiniteLoader, "TileList", className)}
       currentFolderId={currentFolderId}
       {...rest}
     >
       {list}
-    </StyledInfiniteLoader>
+    </InfiniteLoaderComponent>
   );
 };
 

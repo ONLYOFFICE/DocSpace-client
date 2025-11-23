@@ -347,6 +347,9 @@ class TreeFoldersStore {
   get isSharedWithMeFolderRoot() {
     return this.selectedFolderStore.rootFolderType === FolderType.SHARE;
   }
+  get isInSharedFolder() {
+    return !this.isSharedWithMeFolder && this.isSharedWithMeFolderRoot;
+  }
 
   get isFavoritesFolder() {
     return (

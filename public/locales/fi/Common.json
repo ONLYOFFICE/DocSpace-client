@@ -1068,5 +1068,8 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "RoleAIAgentContentCreatorDescription": "Sisällöntuottajat voivat käyttää chattia ja työskennellä tulostallennustilassa olevien tiedostojen kanssa.\nHe voivat ladata tiedostoja tietopankkiin, mutta he eivät voi hallita käyttäjiä tai käyttää agentin asetuksia.",
+  "RoleAIAgentManagerDescription": "Agenttien johtajat voivat hallita määritettyä tekoälyagenttia, kutsua uusia käyttäjiä ja määrittää rooleja heidän tasollaan alemmaksi.\nHe voivat käyttää chattiä, ladata tietotiedostoja, työskennellä Tulosten tallennuksen kanssa ja hallita chattiasetuksia.",
+  "RoleAIAgentViewerDescription": "Katsojat voivat tarkastella vain tiedostoja Tulossäilytyksessä, jotka muut ovat luoneet.\nHeillä ei ole pääsyä chattiin tai tietopankkiin."
 }

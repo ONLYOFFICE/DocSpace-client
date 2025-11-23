@@ -111,6 +111,7 @@ const Selector = ({
   withFooterInput,
   footerInputHeader,
   currentFooterInputValue,
+  folderFormValidation,
 
   withFooterCheckbox,
   footerCheckboxLabel,
@@ -186,6 +187,7 @@ const Selector = ({
   const [inputItemVisible, setInputItemVisible] = React.useState(false);
 
   const [requestRunning, setRequestRunning] = React.useState(false);
+  const [withErrorFooter, setWithErrorFooter] = React.useState(false);
 
   const onSubmitAction = React.useCallback(
     async (item?: TSelectorItem | React.MouseEvent, fromCallback?: boolean) => {
@@ -414,6 +416,13 @@ const Selector = ({
   );
 
   React.useEffect(() => {
+    if (folderFormValidation)
+      setWithErrorFooter(
+        Boolean(newFooterInputValue.match(folderFormValidation)),
+      );
+  }, [newFooterInputValue, folderFormValidation]);
+
+  React.useEffect(() => {
     if (disableFirstFetch) return;
     loadNextPage(0);
   }, [disableFirstFetch, loadNextPage]);
@@ -598,6 +607,7 @@ const Selector = ({
         footerInputHeader,
         currentFooterInputValue: newFooterInputValue,
         setNewFooterInputValue,
+        withErrorFooter,
       }
     : { setNewFooterInputValue };
 
@@ -720,6 +730,7 @@ const Selector = ({
           injectedElement={injectedElement}
           isSSR={isSSR}
           hideBackButton={hideBackButton}
+          withErrorFooter={withErrorFooter}
           isLimitReached={isLimitReached}
           // info
           {...infoProps}

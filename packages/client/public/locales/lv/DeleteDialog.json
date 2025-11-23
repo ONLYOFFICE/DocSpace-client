@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Šie objekti tiks neatgriežami dzēsti 30 dienu laikā.",
   "ItemsPermanentlyDeleted": "Šie priekšmeti tiks pastāvīgi izņemti no {{trashSection}}.",
   "removeFromListDescription": "Jūs gatavojaties izdzēst <1>{{title}}</1> no saraksta. Vai esat pārliecināts, ka vēlaties turpināt?",
-  "removeFromListDescriptionPlural": "Jūs gatavojaties izdzēst <1>vienumus ({{count}})</1> no saraksta. Vai esat pārliecināts, ka vēlaties turpināt?"
+  "removeFromListDescriptionPlural": "Jūs gatavojaties izdzēst <1>vienumus ({{count}})</1> no saraksta. Vai esat pārliecināts, ka vēlaties turpināt?",
+  "DeleteAIChatDescription": "Jūs gatavojaties dzēst <strong>{{chatName}}<1>.</1></strong>\n Visi ziņojumi un tērzēšanas vēsture tiks neatgriežami izdzēsta un to nevarēs atjaunot.",
+  "DeleteAIAgentChatTitle": "Dzēst sarunu?"
 }

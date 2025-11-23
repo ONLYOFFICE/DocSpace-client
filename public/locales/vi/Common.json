@@ -1068,5 +1068,8 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "RoleAIAgentContentCreatorDescription": "Người tạo nội dung có thể sử dụng tính năng trò chuyện và làm việc với các tệp trong bộ nhớ Kết quả.\nHọ có thể tải tệp lên cơ sở kiến thức nhưng không thể quản lý người dùng hoặc truy cập cài đặt của agent.",
+  "RoleAIAgentManagerDescription": "Các giám sát viên đại lý có thể quản lý đại lý AI được chỉ định, mời người dùng mới và phân công vai trò ở cấp độ thấp hơn.\nHọ có thể sử dụng trò chuyện, tải lên các tệp kiến thức, làm việc với bộ nhớ Kết quả và quản lý cài đặt trò chuyện.",
+  "RoleAIAgentViewerDescription": "Người xem chỉ có thể xem các tệp trong bộ nhớ Kết quả với các đầu ra được tạo bởi những người khác.\nHọ không có quyền truy cập vào trò chuyện hoặc cơ sở kiến thức."
 }

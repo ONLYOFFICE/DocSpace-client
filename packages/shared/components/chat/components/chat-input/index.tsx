@@ -89,7 +89,7 @@ const ChatInput = ({
   };
 
   const sendMessageAction = React.useCallback(async () => {
-    if (!value) return;
+    if (!value.trim()) return;
 
     try {
       if (!currentChatId) {

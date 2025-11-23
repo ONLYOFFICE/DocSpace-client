@@ -1060,5 +1060,16 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs."
+  "YourTurn": "Acum e rândul dvs.",
+  "AddFiles": "Adaugă fișiere",
+  "AIToolsHint": "Instrumente și integrări AI",
+  "ChatHistory": "Istoric chat",
+  "ChatSuccessDeleted": "Conversația a fost ștearsă cu succes.",
+  "ChooseAIAgentDescription": "Selectează agentul cu care dorești să discuți cu AI despre fișierul selectat. Poți alege un agent existent.",
+  "CreateAgent": "Creează agent",
+  "InvitationToAgent": "<1>{{displayName}}</1> te invită să te alături agentului AI <1>{{agentName}}</1>.",
+  "NothingToShowYet": "Încă nimic de afișat.",
+  "RoleAIAgentContentCreatorDescription": "Creatorii de conținut pot folosi chat-ul și pot lucra cu fișiere în stocarea rezultatelor. Pot încărca fișiere în baza de cunoștințe, dar nu pot gestiona utilizatorii sau accesa setările agentului.",
+  "RoleAIAgentManagerDescription": "Managerii de agenți pot gestiona agentul AI alocat, pot invita utilizatori noi și pot atribui roluri de nivel inferior.\nPot folosi chat-ul, încărca fișiere de cunoștințe, lucra cu stocarea rezultatelor și pot gestiona setările chat-ului.",
+  "RoleAIAgentViewerDescription": "Utilizatorii pot vizualiza doar fișiere în stocarea rezultatelor cu ieșiri generate de alții. Nu au acces la chat sau la baza de cunoștințe."
 }

@@ -1068,5 +1068,8 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "RoleAIAgentContentCreatorDescription": "Satura veidotāji var izmantot tērzēšanu un strādāt ar failiem rezultātu krātuvē.\nViņi var augšupielādēt failus uz zināšanu bāzi, bet nevar pārvaldīt lietotājus vai piekļūt aģenta iestatījumiem.",
+  "RoleAIAgentManagerDescription": "Aģentu vadītāji var pārvaldīt piešķirto AI aģentu, uzaicināt jaunus lietotājus un piešķirt lomas zem sava līmeņa.\nViņi var izmantot tērzēšanu, augšupielādēt zināšanu failus, strādāt ar rezultātu krātuvi un pārvaldīt tērzēšanas iestatījumus.",
+  "RoleAIAgentViewerDescription": "Skatītāji var skatīties failus tikai rezultātu krātuvē ar citu radītiem izvadiem.\nViņiem nav piekļuves tērzēšanai vai zināšanu bāzei."
 }

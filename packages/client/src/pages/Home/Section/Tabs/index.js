@@ -65,7 +65,6 @@ export default inject(
     clientLoadingStore,
     selectedFolderStore,
     accessRightsStore,
-    filesStore,
   }) => {
     const { canUseChat } = accessRightsStore;
 
@@ -76,8 +75,6 @@ export default inject(
     const { currentClientView, showArticleLoader, showTabsLoader } =
       clientLoadingStore;
 
-    const { isErrorAIAgentNotAvailable } = filesStore;
-
     return {
       isAIRoom: selectedFolderStore.isAIRoom,
       isRoomsFolderRoot,
@@ -86,7 +83,6 @@ export default inject(
       checkGuests,
       currentClientView,
       canUseChat,
-      isErrorAIAgentNotAvailable,
       showArticleLoader,
       showTabsLoader,
     };

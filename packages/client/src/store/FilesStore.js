@@ -1833,13 +1833,6 @@ class FilesStore {
           }
         });
 
-        if (this.isPreview) {
-          // save filter for after closing preview change url
-          this.setTempFilter(filterData);
-        } else {
-          this.setFilesFilter(filterData, folderId); // TODO: FILTER
-        }
-
         const isPrivacyFolder =
           data.current.rootFolderType === FolderType.Privacy;
 
@@ -2002,6 +1995,13 @@ class FilesStore {
         }
 
         runInAction(() => {
+          if (this.isPreview) {
+            // save filter for after closing preview change url
+            this.setTempFilter(filterData);
+          } else {
+            this.setFilesFilter(filterData, folderId); // TODO: FILTER
+          }
+
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             isRoom: !!data.current.roomType,

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
+import AIAgentsIcon from "PUBLIC_DIR/images/icons/12/AI.svg";
 import ManageAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
 import ManageAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg";
 
@@ -129,9 +130,9 @@ const NoAccessContainer = (props: Props) => {
     // TODO: for AI agents
     case NoAccessContainerType.Agent:
       emptyViewProps = {
-        title: t("NoAccessRoomTitle"),
-        description: t("RoomAccessRedirectNote", {
-          sectionName: t("Common:Rooms"),
+        title: t("AIRoom:NoAccessAIAgentTitle"),
+        description: t("AIRoom:AIAgentAccessRedirectNote", {
+          sectionName: t("Common:AIAgents"),
         }),
         icon: theme.isBase ? (
           <ManageAccessRightsLightIcon />
@@ -143,10 +144,12 @@ const NoAccessContainer = (props: Props) => {
           : [
               {
                 to: "",
-                icon: <FolderIcon />,
+                icon: <AIAgentsIcon />,
                 onClick: onGoTo,
                 key: "empty-view-goto-agents",
-                description: t("GoToMyRooms"),
+                description: t("GoToSection", {
+                  sectionName: t("Common:AIAgents"),
+                }),
               },
             ],
       };
@@ -181,4 +184,4 @@ export default inject<TStore>(
       userId: userStore?.user?.id,
     };
   },
-)(withTranslation(["Files"])(observer(NoAccessContainer)));
+)(withTranslation(["Files", "AIRoom"])(observer(NoAccessContainer)));

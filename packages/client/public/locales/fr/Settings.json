@@ -286,5 +286,12 @@
   "WantToCancelUpload": "Voulez-vous annuler le téléchargement?",
   "WantToContinue": "Voulez-vous continuer ou modifier le quota de stockage de l'utilisateur ?",
   "WhiteLabelSubtitle": "Saisissez le nom de votre entreprise, téléchargez le logo et personnalisez le style pour qu’il corresponde à votre image de marque.",
-  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante."
+  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
+  "AIAgentQuotaDisabled": "Le quota de l'agent IA a été désactivé avec succès.",
+  "AIAgentQuotaEnabled": "Le quota de l'agent IA a été activé avec succès.",
+  "DefineQuotaPerAIAgent": "Définir le quota par agent IA",
+  "ImportSectionDisabled": "Pour importer {{importSectionName}}, activez d'abord l'option « <1>{{sectionName}}</1> ».",
+  "QuotaPerAIAgent": "Quota par agent IA",
+  "SetDefaultAIAgentQuota": "Définissez le quota de stockage par défaut pour les agents IA dans ce {{productName}}. Il peut être ajusté ultérieurement dans les paramètres ou personnalisé individuellement lors de la création de chaque agent IA.",
+  "Top5AIAgents": "Top 5 des agents IA par utilisation du stockage :"
 }

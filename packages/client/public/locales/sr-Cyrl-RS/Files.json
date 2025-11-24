@@ -218,5 +218,6 @@
   "WillBeDeletedPermanently": "{{date }} ће бити трајно обрисан",
   "YouLeftTheAgent": "Оставили сте агента",
   "YouLeftTheRoom": "Напустили сте собу",
-  "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>.",
+  "SharedBy": "Дељено од"
 }

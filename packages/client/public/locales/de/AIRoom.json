@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Hinweis:</1> Die Antwortqualität kann je nach Modell variieren; für beste Ergebnisse werden neuere Modelle empfohlen.",
   "ResultStorage": "Ergebnisspeicherung",
   "UploadFilesDevice": "Laden Sie Dateien von Ihrem persönlichen Gerät hoch",
-  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch"
+  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch",
+  "AgentInViewModeWarning": "Sie befinden sich für diesen KI-Agenten im <strong>Nur-Anzeige</strong>-Modus. Sie können die Ergebnisse der KI-Chataktivitäten anderer Nutzer einsehen.",
+  "EmptyResultsViewerDescription": "Die Ergebnisse der KI-Chataktivitäten anderer Nutzer werden Ihnen hier angezeigt, sobald sie verfügbar sind."
 }

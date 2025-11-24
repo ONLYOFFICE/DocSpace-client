@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Nota:</1> La calidad de la respuesta puede variar según el modelo; se recomiendan los modelos más nuevos para obtener mejores resultados.",
   "ResultStorage": "Almacenamiento de resultados",
   "UploadFilesDevice": "Suba archivos desde su dispositivo personal",
-  "UploadFilesPortal": "Subir archivos de {{sectionNameFirst}} o {{sectionNameSecond}}"
+  "UploadFilesPortal": "Subir archivos de {{sectionNameFirst}} o {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Está en modo <strong>solo ver</strong> para este agente de IA. Puede ver los resultados de la actividad de chat de IA de otros usuarios.",
+  "EmptyResultsViewerDescription": "Aquí podrá ver los resultados de la actividad del chat de IA de otros usuarios una vez que estén disponibles."
 }

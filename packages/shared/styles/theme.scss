@@ -2994,6 +2994,8 @@
   --profile-text-color: #{$gray};
   --profile-active-sessions-cell-color: #{$gray};
   --profile-active-sessions-divider-color: #{$gray-strong};
+  --profile-notifications-description: #{$gray};
+  --profile-notifications-border: 1px solid #{$gray-light-mid};
 }
 
 .dark {
@@ -3008,4 +3010,6 @@
   --profile-text-color: #{$gray-dark};
   --profile-active-sessions-cell-color: #{$gray-dark};
   --profile-active-sessions-divider-color: #{$gray-dark-strong};
+  --profile-notifications-description: #{$gray-dark};
+  --profile-notifications-border: 1px solid #{$gray-dark-strong};
 }

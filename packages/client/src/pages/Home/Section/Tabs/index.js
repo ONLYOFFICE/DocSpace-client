@@ -36,6 +36,8 @@ const SectionSubmenuContent = ({
   checkGuests,
   currentClientView,
   canUseChat,
+  showArticleLoader,
+  showTabsLoader,
 }) => {
   const isContacts =
     currentClientView === "users" || currentClientView === "groups";
@@ -45,7 +47,11 @@ const SectionSubmenuContent = ({
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
-  if (isAIRoom && canUseChat) return <AiRoomTabs />;
+  if (
+    (isAIRoom && canUseChat) ||
+    (currentClientView === "chat" && (showTabsLoader || showArticleLoader))
+  )
+    return <AiRoomTabs />;
 
   if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
     return <RoomTemplatesTabs />;
@@ -59,6 +65,7 @@ export default inject(
     clientLoadingStore,
     selectedFolderStore,
     accessRightsStore,
+    filesStore,
   }) => {
     const { canUseChat } = accessRightsStore;
 
@@ -66,7 +73,10 @@ export default inject(
 
     const { allowInvitingGuests, checkGuests } = settingsStore;
 
-    const { currentClientView } = clientLoadingStore;
+    const { currentClientView, showArticleLoader, showTabsLoader } =
+      clientLoadingStore;
+
+    const { isErrorAIAgentNotAvailable } = filesStore;
 
     return {
       isAIRoom: selectedFolderStore.isAIRoom,
@@ -76,6 +86,9 @@ export default inject(
       checkGuests,
       currentClientView,
       canUseChat,
+      isErrorAIAgentNotAvailable,
+      showArticleLoader,
+      showTabsLoader,
     };
   },
 )(observer(SectionSubmenuContent));

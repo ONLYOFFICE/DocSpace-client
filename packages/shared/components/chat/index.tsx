@@ -132,16 +132,10 @@ const ChatWrapper = (props: ChatProps) => {
     isAdmin = false,
     standalone = false,
     aiReady = false,
-    renderNoAccess,
-    isNoAccess,
   } = props;
 
   const isLoadingChat = isLoading || !roomId;
   const hasChats = initChats?.chats?.length > 0;
-
-  if (!isLoadingChat && isNoAccess && renderNoAccess) {
-    return renderNoAccess;
-  }
 
   if (!isLoadingChat && !aiReady && !hasChats) {
     return (

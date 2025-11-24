@@ -120,6 +120,7 @@ const PureHome = (props) => {
     onClickBack,
 
     showFilterLoader,
+    showHeaderLoader,
 
     getSettings,
     logout,
@@ -411,7 +412,11 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps} withoutFooter={isChat}>
-        {!isErrorAvailable || isContactsPage || isProfile || isSettingsPage ? (
+        {!isErrorAvailable ||
+        isContactsPage ||
+        isProfile ||
+        isSettingsPage ||
+        showHeaderLoader ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -426,6 +431,7 @@ const PureHome = (props) => {
         </Section.SectionWarning>
 
         {!isChat &&
+        !isErrorAvailable &&
         !isDisabledKnowledge &&
         shouldShowFilter &&
         !isProfile &&
@@ -497,6 +503,7 @@ export const Component = inject(
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
+      showHeaderLoader,
       showFilterLoader,
       isChangePageRequestRunning,
       currentClientView,
@@ -697,6 +704,7 @@ export const Component = inject(
       onClickBack,
 
       showFilterLoader,
+      showHeaderLoader,
 
       getSettings,
       logout: authStore.logout,

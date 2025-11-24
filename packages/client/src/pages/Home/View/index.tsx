@@ -590,13 +590,14 @@ const View = ({
               sectionWidth={context.sectionWidth}
               currentView={currentView}
             />
-          ) : currentView === "chat" ? (
+          ) : currentView === "chat" &&
+            (!isErrorAIAgentNotAvailable || showArticleLoader) ? (
             <Chat
               userAvatar={userAvatar}
               roomId={isLoading && !showHeaderLoader ? "-1" : roomId!}
               getIcon={getIcon}
               selectedModel={chatSettings?.modelId ?? ""}
-              isLoading={showBodyLoader || showArticleLoader}
+              isLoading={showBodyLoader}
               attachmentFile={attachmentFile}
               clearAttachmentFile={onClearAttachmentFile}
               toolsSettings={toolsSettings}
@@ -609,11 +610,9 @@ const View = ({
               setIsAIAgentChatDelete={setIsAIAgentChatDelete}
               setDeleteDialogVisible={setDeleteDialogVisible}
               folderFormValidation={folderFormValidation}
-              renderNoAccess={
-                <NoAccessContainer type={NoAccessContainerType.Agent} />
-              }
-              isNoAccess={isErrorAIAgentNotAvailable}
             />
+          ) : currentView === "chat" && isErrorAIAgentNotAvailable ? (
+            <NoAccessContainer type={NoAccessContainerType.Agent} />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
           ) : (

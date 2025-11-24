@@ -571,13 +571,29 @@ class SettingsSetupStore {
     }
   };
 
-  fetchAndSetConsumers = async (consumerName) => {
+  fetchAndSetConsumers = async (consumerName, isThirdPartyAvailable) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     try {
+      // console.log("fetchAndSetConsumers:", consumerName);
       const res = await api.settings.getConsumersList(abortController.signal);
-      const consumer = res.find((c) => c.name === consumerName);
+      let consumer = res.find((c) => c.name === consumerName);
+
+      const saveAvailable =
+        (consumer && !consumer.paid && consumer.canSet) ||
+        this.settingsStore?.standalone ||
+        isThirdPartyAvailable;
+
+      // console.log("Found consumer:", {
+      //   consumer,
+      //   saveAvailable,
+      //   isThirdPartyAvailable,
+      //   standalone: this.settingsStore?.standalone,
+      // });
+
+      if (!saveAvailable) consumer = undefined;
+
       this.integration.selectedConsumer = consumer || {};
       this.setConsumers(res);
 

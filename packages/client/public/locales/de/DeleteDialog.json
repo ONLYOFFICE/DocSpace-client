@@ -34,5 +34,5 @@
   "removeFromListDescription": "Sie werden <1>{{title}}</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?",
   "removeFromListDescriptionPlural": "Sie werden <1>({{count}}) Elemente</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteAIAgentChatTitle": "Chat löschen?",
-  "DeleteAIChatDescription": "Sie sind im Begriff, <strong>{{chatName}}</strong> zu löschen. Alle Nachrichten und der gesamte Chatverlauf werden endgültig gelöscht und können nicht wiederhergestellt werden.\n"
+  "DeleteAIChatDescription": "Sie sind im Begriff, <strong>{{chatName}}<1>.</1></strong> zu löschen. Alle Nachrichten und der gesamte Chatverlauf werden endgültig gelöscht und können nicht wiederhergestellt werden.\n"
 }

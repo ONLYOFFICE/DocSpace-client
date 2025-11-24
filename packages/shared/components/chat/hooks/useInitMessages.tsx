@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useLocation } from "react-router";
 
 import { getChatMessages } from "../../../api/ai";
@@ -38,6 +38,13 @@ const useInitMessages = (roomId: string | number) => {
   const [total, setTotal] = React.useState(0);
   const location = useLocation();
 
+  const resetChat = useCallback(() => {
+    setMessages([]);
+    setTotal(0);
+    setChatId("");
+    cacheChatId.delete("chat");
+  }, []);
+
   React.useEffect(() => {
     if (!roomId) cacheChatId.delete("chat");
   }, [roomId]);
@@ -49,10 +56,7 @@ const useInitMessages = (roomId: string | number) => {
       if (chatId) {
         cacheChatId.set("chat", chatId);
       } else {
-        cacheChatId.delete("chat");
-        setMessages([]);
-        setTotal(0);
-        setChatId("");
+        resetChat();
       }
     };
 
@@ -61,30 +65,40 @@ const useInitMessages = (roomId: string | number) => {
     return () => {
       window.removeEventListener("select-chat", onCacheChat);
     };
-  }, []);
+  }, [resetChat]);
 
   const initMessages = React.useCallback(async () => {
-    const currChatId =
-      new URLSearchParams(location.search).get("chat") ??
-      cacheChatId.get("chat");
+    try {
+      const currChatId =
+        new URLSearchParams(location.search).get("chat") ??
+        cacheChatId.get("chat");
 
-    if (!currChatId) {
-      setMessages([]);
-      setTotal(0);
-      setChatId("");
-      return;
+      if (!currChatId) {
+        resetChat();
+        return;
+      }
+
+      cacheChatId.set("chat", currChatId);
+
+      const { items, total } = await getChatMessages(currChatId, 0);
+
+      const reversedItems = items.reverse();
+
+      setMessages(reversedItems);
+      setTotal(total > 100 ? 100 : total);
+      setChatId(currChatId);
+    } catch (error) {
+      console.error(error);
+      const currentSearch = new URLSearchParams(window.location.search);
+      currentSearch.delete("chat");
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}?${currentSearch.toString()}`,
+      );
+      resetChat();
     }
-
-    cacheChatId.set("chat", currChatId);
-
-    const { items, total } = await getChatMessages(currChatId, 0);
-
-    const reversedItems = items.reverse();
-
-    setMessages(reversedItems);
-    setTotal(total > 100 ? 100 : total);
-    setChatId(currChatId);
-  }, [location.search]);
+  }, [location.search, resetChat]);
 
   return {
     messages,

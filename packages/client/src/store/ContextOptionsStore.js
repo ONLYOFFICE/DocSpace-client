@@ -1787,7 +1787,7 @@ class ContextOptionsStore {
     const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
       : item.shared
-        ? item.security.CopySharedLink
+        ? item.security?.CopySharedLink
         : item.security?.EditAccess;
 
     const { isFiltered } = this.filesStore;

@@ -57,7 +57,7 @@ const Buttons = ({
   const { t } = useTranslation(["Common"]);
 
   const isSendButtonDisabled = !isRequestRunning
-    ? !value || !selectedModel
+    ? !value.trim() || !selectedModel
     : false;
 
   const sendIconProps = !isRequestRunning

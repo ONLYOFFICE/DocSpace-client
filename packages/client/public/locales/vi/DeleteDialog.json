@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Những mục này sẽ bị xóa vĩnh viễn trong 30 ngày.",
   "ItemsPermanentlyDeleted": "Những mục này sẽ bị xóa vĩnh viễn khỏi {{trashSection}}.",
   "removeFromListDescription": "Bạn sắp xóa <1>{{title}}</1> khỏi danh sách. Bạn có chắc chắn muốn tiếp tục không?",
-  "removeFromListDescriptionPlural": "Bạn sắp xóa <1>items ({{count}})</1> khỏi danh sách. Bạn có chắc chắn muốn tiếp tục không?"
+  "removeFromListDescriptionPlural": "Bạn sắp xóa <1>items ({{count}})</1> khỏi danh sách. Bạn có chắc chắn muốn tiếp tục không?",
+  "DeleteAIChatDescription": "Bạn sắp xóa <strong>{{chatName}}<1>.</1></strong>\n Tất cả tin nhắn và lịch sử trò chuyện sẽ bị xóa vĩnh viễn và không thể khôi phục.",
+  "DeleteAIAgentChatTitle": "Xóa cuộc trò chuyện?"
 }

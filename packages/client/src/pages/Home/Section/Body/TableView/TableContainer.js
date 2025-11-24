@@ -152,6 +152,7 @@ const Table = ({
   withContentSelection,
   isFavoritesFolder,
   isSharedWithMeFolder,
+  isInSharedFolder,
   isAIAgentsFolder,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
@@ -229,6 +230,7 @@ const Table = ({
         isTrashFolder={isTrashFolder}
         isFavoritesFolder={isFavoritesFolder}
         isSharedWithMeFolder={isSharedWithMeFolder}
+        isInSharedFolder={isInSharedFolder}
         isAIAgentsFolder={isAIAgentsFolder}
         hideColumns={hideColumns}
         isHighlight={
@@ -326,6 +328,7 @@ export default inject(
       isTemplatesFolder,
       isFavoritesFolder,
       isSharedWithMeFolder,
+      isInSharedFolder,
       isAIAgentsFolder,
     } = treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
@@ -392,6 +395,7 @@ export default inject(
       withContentSelection,
       isFavoritesFolder,
       isSharedWithMeFolder,
+      isInSharedFolder,
       isAIAgentsFolder,
     };
   },

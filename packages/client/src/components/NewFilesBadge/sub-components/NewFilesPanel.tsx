@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
-import { TNewFiles } from "@docspace/shared/api/rooms/types";
+import type { TNewFiles } from "@docspace/shared/api/rooms/types";
 import { Portal } from "@docspace/shared/components/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -38,12 +38,12 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { Nullable } from "@docspace/shared/types";
+import type { Nullable } from "@docspace/shared/types";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import {
+import type {
   NewFilesPanelInjectStore,
   NewFilesPanelProps,
 } from "../NewFilesBadge.types";
@@ -74,6 +74,7 @@ export const NewFilesPanelComponent = ({
   const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
 
   const isRooms = folderId === "rooms";
+  const isAgents = folderId === "agents";
 
   const markAsReadAction = React.useCallback(async () => {
     if (isMarkAsReadRunning) return;
@@ -114,7 +115,9 @@ export const NewFilesPanelComponent = ({
 
         const newFiles = isRooms
           ? await api.files.getNewFiles(folderId)
-          : await api.files.getNewFolderFiles(folderId);
+          : isAgents
+            ? await api.files.getNewFilesAgents()
+            : await api.files.getNewFolderFiles(folderId);
 
         dataFetched.current = true;
         requestRunning.current = false;
@@ -124,9 +127,11 @@ export const NewFilesPanelComponent = ({
 
         const ms = currentDate.getTime() - startLoaderTime.getTime();
         if (ms < MIN_LOADER_TIMER) {
-          return (timerRef.current = setTimeout(() => {
+          timerRef.current = setTimeout(() => {
             setIsLoading(false);
-          }, MIN_LOADER_TIMER - ms));
+
+            return;
+          }, MIN_LOADER_TIMER - ms);
         }
 
         setIsLoading(false);
@@ -175,23 +180,22 @@ export const NewFilesPanelComponent = ({
   );
 
   const content = isLoading ? (
-    <NewFilesPanelLoader isRooms={isRooms} />
+    <NewFilesPanelLoader isRooms={isRooms || isAgents} />
   ) : (
-    <>
-      {data.map(({ date, items }, index) => {
-        return (
-          <NewFilesPanelItem
-            key={date}
-            date={date}
-            items={items}
-            isRooms={isRooms}
-            isFirst={index === 0}
-            culture={culture}
-            onClose={onClose}
-          />
-        );
-      })}
-    </>
+    data.map(({ date, items }, index) => {
+      return (
+        <NewFilesPanelItem
+          key={date}
+          date={date}
+          items={items}
+          isRooms={isRooms}
+          isAgents={isAgents}
+          isFirst={index === 0}
+          culture={culture}
+          onClose={onClose}
+        />
+      );
+    })
   );
 
   const panel = (

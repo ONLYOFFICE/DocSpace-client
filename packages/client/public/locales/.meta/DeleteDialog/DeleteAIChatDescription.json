@@ -1,32 +1,20 @@
 {
-  "key_path": "RoleCommentator",
-  "content": "Commenter",
-  "content_en_sha1_hash": "bf4df9c00c605d80b4491471e60b45b6eaaca147",
-  "created_at": "2025-05-19T21:30:47.984Z",
-  "updated_at": "2025-11-20T14:22:11.279Z",
+  "key_path": "DeleteAIChatDescription",
+  "content": "You are about to delete <strong>{{chatName}}<1>.</1></strong>\n All messages and chat history will be permanently removed and cannot be restored.",
+  "content_en_sha1_hash": "d87c5d2ee8a8264920525dc32861e456aff3ba2a",
+  "created_at": "2025-11-20T15:30:33.871Z",
+  "updated_at": "2025-11-21T07:43:04.227Z",
   "comment": {
-    "text": "This translation key is used to display \"Commenter\" as a role label in the application's UI. It appears on various screens where user roles are displayed, such as information panels and room member settings, helping users understand their permissions and access levels.",
+    "text": "This translation key provides a confirmation message displayed within a dialog. It informs the user they are about to permanently delete a specific AI chat (identified by `chatName`) and its associated history, which cannot be recovered. This message appears before finalizing the chat deletion.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:38.915Z"
+    "updated_at": "2025-11-21T07:43:04.227Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
       "line_number": 98,
-      "context": "access: ShareAccessRights.Review,\n type: \"user\",\n },\n commentator: {\n key: \"commentator\",\n label: this.t(\"Common:RoleCommentator\"),\n access: ShareAccessRights.Comment,\n type: \"user\",\n },\n };\n };",
+      "context": "if (isAIAgentChatDelete.visible) {\n return (\n <>\n <Trans\n t={t}\n i18nKey=\"DeleteAIChatDescription\"\n ns=\"DeleteDialog\"\n values={{ chatName: isAIAgentChatDelete.itemName }}\n components={{\n 1: <Text key=\"chat-title\" fontWeight={400} as=\"span\" />,\n }}",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 199,
-      "context": "access: ShareAccessRights.Review,\n type: EmployeeType.User,\n },\n commentator: {\n key: \"commentator\",\n label: t(\"Common:RoleCommentator\"),\n description: t(\"Common:RoleCommentatorDescription\"),\n access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/utils/room-members/getUserRoleOptions.ts",
-      "line_number": 75,
-      "context": "access: ShareAccessRights.Review,\n type: \"user\",\n },\n commentator: {\n key: \"commentator\",\n label: t(\"Common:RoleCommentator\"),\n access: ShareAccessRights.Comment,\n type: \"user\",\n },\n });",
-      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -117,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ນັກສະແດງຄວາມຄິດເຫັນ' literally translates to 'person who expresses opinions/thoughts'. While not entirely wrong, it's a more verbose and formal translation of 'Commenter'. A more concise and commonly used translation would be better.",
-          "suggestion": "Consider 'ຄຳເຫັນ' or 'ຜູ້ໃຫ້ຄຳເຫັນ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Comentador\" is not the most natural or accurate translation of \"Commenter\". While it is technically a valid word, \"Comentador\" has connotations of someone who excessively comments or criticizes, which may not align with the intended meaning of 'Commenter'. A better translation would be 'Comentário' or 'Participante'.",
-          "suggestion": "Consider using 'Comentário' (Comment) or 'Participante' (Participant) instead of 'Comentador'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -177,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'අදහස් දක්වන්නා' is a literal translation of 'Commenter,' it's quite formal and lengthy. A more natural and concise translation might be 'අදහස් කියන්නෙක්' or simply 'අදහස්කාරයා'.",
-          "suggestion": "Consider 'අදහස් කියන්නෙක්' or 'අදහස්කාරයා' for a more natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -193,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -225,25 +201,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Người nhận xét\" is a possible translation, \"Commenter\" generally refers to someone who leaves comments, not necessarily someone who reviews or critiques. \"Người bình luận\" would be a more accurate translation.",
-          "suggestion": "Người bình luận"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'可评论' translates to 'can comment' or 'able to comment', which doesn't accurately represent the meaning of 'Commenter'. A 'Commenter' is someone who comments.",
-          "suggestion": "评论者 (píng lùn zhě)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

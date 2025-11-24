@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatDescription": "ඔබ <strong>{{chatName}}</strong> මකා දැමීමට ආසන්නයි.\nසියලුම පණිවිඩ සහ කතාබස් ඉතිහාසය ස්ථිරවම ඉවත් කරනු ලබන අතර ප්‍රතිසාධනය කළ නොහැක.",
   "DeleteAIAgentChatTitle": "කතාබහ මකන්නද?",
   "DeleteAIAgentDescription": "නියෝජිතයා <strong>\"{{agentName}}\"</strong> ස්ථිරවම මකා දැමෙනු ඇත. සියලුම දත්ත සහ පරිශීලක ප්‍රවේශයන් නැති වී යනු ඇත.",
   "DeleteAIAgentTitle": "මෙම නියෝජිතයා මකන්නද?",
@@ -34,5 +33,6 @@
   "ItemsDeletedAfter": "මෙම අයිතම දින 30කින් ස්ථිරවම මකා දැමෙනු ඇත.",
   "ItemsPermanentlyDeleted": "මෙම අයිතම {{trashSection}} වෙතින් ස්ථිරවම ඉවත් කරනු ලැබේ.",
   "removeFromListDescription": "ඔබ ලැයිස්තුවෙන් <1>{{title}}</1> ඉවත් කිරීමට සූදානම්. ඔබට ඉදිරියට යාමට අවශ්‍ය බව විශ්වාසද?",
-  "removeFromListDescriptionPlural": "ඔබ ලැයිස්තුවෙන් <1>අයිතම ({{count}})</1> ඉවත් කිරීමට සූදානම්. ඔබට ඉදිරියට යාමට අවශ්‍ය බව විශ්වාසද?"
+  "removeFromListDescriptionPlural": "ඔබ ලැයිස්තුවෙන් <1>අයිතම ({{count}})</1> ඉවත් කිරීමට සූදානම්. ඔබට ඉදිරියට යාමට අවශ්‍ය බව විශ්වාසද?",
+  "DeleteAIChatDescription": "ඔබ <strong>{{chatName}}<1>.</1></strong> මකා දැමීමට ආසන්නයි සියලුම පණිවිඩ සහ කතාබස් ඉතිහාසය ස්ථිරවම ඉවත් කරනු ලබන අතර ප්‍රතිසාධනය කළ නොහැක."
 }

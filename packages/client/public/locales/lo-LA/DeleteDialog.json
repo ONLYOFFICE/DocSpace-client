@@ -1,5 +1,4 @@
 {
-  "DeleteAIAgentChatDescription": "ທ່ານກຳລັງຈະລຶບ <strong>{{chatName}}</strong>.\nຂໍ້ຄວາມ ແລະ ປະຫວັດການສົນທະນາທັງໝົດຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ບໍ່ສາມາດກູ້ຄືນໄດ້.",
   "DeleteAIAgentChatTitle": "ລຶບການສົນທະນາບໍ?",
   "DeleteAIAgentDescription": "ຕົວແທນ <strong>\"{{agentName}}\"</strong> ຈະຖືກລຶບອອກຢ່າງຖາວອນ. ຂໍ້ມູນ ແລະ ການເຂົ້າເຖິງຂອງຜູ້ໃຊ້ທັງໝົດຈະສູນຫາຍໄປ.",
   "DeleteAIAgentTitle": "ລຶບຕົວແທນນີ້ບໍ?",
@@ -34,5 +33,6 @@
   "ItemsDeletedAfter": "ລາຍການເຫຼົ່ານີ້ຈະຖືກລຶບອອກຖາວອນໃນ 30 ມື້.",
   "ItemsPermanentlyDeleted": "ລາຍການເຫຼົ່ານີ້ຈະຖືກລຶບອອກຈາກ {{trashSection}} ຢ່າງຖາວອນ.",
   "removeFromListDescription": "ທ່ານກຳລັງຈະລຶບ <1>{{title}}</1> ອອກຈາກລາຍຊື່. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
-  "removeFromListDescriptionPlural": "ທ່ານກຳລັງຈະລຶບ <1>ລາຍການ ({{count}})</1> ອອກຈາກລາຍຊື່. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?"
+  "removeFromListDescriptionPlural": "ທ່ານກຳລັງຈະລຶບ <1>ລາຍການ ({{count}})</1> ອອກຈາກລາຍຊື່. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
+  "DeleteAIChatDescription": "ທ່ານກຳລັງຈະລຶບ <strong>{{chatName}}<1>.</1></strong>\nຂໍ້ຄວາມ ແລະ ປະຫວັດການສົນທະນາທັງໝົດຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ບໍ່ສາມາດກູ້ຄືນໄດ້."
 }

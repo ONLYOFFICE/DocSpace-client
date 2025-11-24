@@ -106,6 +106,7 @@ type ViewProps = UseContactsProps &
     standalone: SettingsStore["standalone"];
     isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
+    folderFormValidation: RegExp;
   };
 
 const View = ({
@@ -184,6 +185,7 @@ const View = ({
   standalone,
   isResultTab,
   resultId,
+  folderFormValidation,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common", "AIRoom"]);
@@ -597,6 +599,7 @@ const View = ({
               getResultStorageId={getResultStorageId}
               setIsAIAgentChatDelete={setIsAIAgentChatDelete}
               setDeleteDialogVisible={setDeleteDialogVisible}
+              folderFormValidation={folderFormValidation}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -632,7 +635,7 @@ export const ViewComponent = inject(
     aiRoomStore,
   }: TStore) => {
     const { isResultTab, resultId } = aiRoomStore;
-    const { aiConfig, standalone } = settingsStore;
+    const { aiConfig, standalone, folderFormValidation } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
 
@@ -781,6 +784,7 @@ export const ViewComponent = inject(
       standalone,
       isResultTab,
       resultId,
+      folderFormValidation,
     };
   },
 )(observer(View));

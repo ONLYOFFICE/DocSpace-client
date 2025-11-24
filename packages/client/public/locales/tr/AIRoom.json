@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Not:</1> Yanıt kalitesi modele göre değişiklik gösterebilir; en iyi sonuçlar için daha yeni modeller önerilir.",
   "ResultStorage": "Sonuç depolama",
   "UploadFilesDevice": "Kişisel cihazınızdan dosyalar yükleyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin"
+  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin",
+  "AgentInViewModeWarning": "Bu yapay zeka aracında <strong>sadece görüntüleme</strong> modundasınız. Diğer kullanıcıların yapay zeka sohbeti etkinliğinin sonuçlarını görebilirsiniz.",
+  "EmptyResultsViewerDescription": "Diğer kullanıcıların yapay zeka sohbeti etkinliğinin sonuçlarını burada, kullanılabilir hale geldiklerinde göreceksiniz."
 }

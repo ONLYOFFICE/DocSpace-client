@@ -3,7 +3,7 @@
   "content": "You have been granted access to the {{itemName}} document. Click the link below to open the document right now: {{shareLink}}.",
   "content_en_sha1_hash": "2a78affd4c07725e72c3433bf9f67169874016fd",
   "created_at": "2025-05-19T21:30:50.256Z",
-  "updated_at": "2025-11-18T14:41:49.837Z",
+  "updated_at": "2025-11-20T14:22:10.852Z",
   "comment": {
     "text": "This translation key is used to display a notification email body when sharing a document externally. It will be inserted into an email template and includes a link to open the shared document.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 191,
+      "line_number": 192,
       "context": "// const shareEmail = useCallback(\n //   (link) => {\n //     const { title, shareLink } = link;\n //     const subject = t(\"SharingPanel:ShareEmailSubject\", { itemName: title });\n //     const body = t(\"SharingPanel:ShareEmailBody\", { itemName: title, shareLink });\n \n //     const mailtoLink = `mailto:${objectToGetParams({\n //       subject,\n //       body,\n //     })}`;",
       "module": "/packages/client"
     }

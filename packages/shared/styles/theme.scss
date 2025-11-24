@@ -2989,6 +2989,8 @@
   --profile-pending-email-text-color: #{$gray};
   --profile-mobile-row-background: #{$gray-light};
   --profile-mobile-label: #{$gray};
+  --profile-theme-preview-border: 1px solid #{$gray-light-mid};
+  --profile-theme-preview-description: #{$gray};
 }
 
 .dark {
@@ -2998,4 +3000,6 @@
   --profile-pending-email-text-color: #{$gray-dark};
   --profile-mobile-row-background: #{$light-dark-gray-hover};
   --profile-mobile-label: #{$gray-dark};
+  --profile-theme-preview-border: 1px solid #{$gray-dark-strong};
+  --profile-theme-preview-description: #{$gray-dark};
 }

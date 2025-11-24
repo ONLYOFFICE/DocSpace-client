@@ -887,6 +887,15 @@ export async function getNewFiles(folderId: number | string) {
   return res;
 }
 
+export async function getNewFilesAgents() {
+  const res = (await request({
+    method: "get",
+    url: `/ai/agents/news`,
+  })) as TNewFiles[];
+
+  return res;
+}
+
 export async function getNewFolderFiles(folderId: number | string) {
   const res = (await request({
     method: "get",

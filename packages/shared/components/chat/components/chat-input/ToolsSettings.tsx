@@ -154,9 +154,9 @@ const ToolsSettings = ({
     [MCPTools, roomId, setMCPTools],
   );
 
-  const onGoToWebSearchPage = () => {
+  const onGoToWebSearchPage = React.useCallback(() => {
     navigate("/portal-settings/ai-settings/search");
-  };
+  }, [navigate]);
 
   const openOauthWindow = async (serverId: string, type: string) => {
     const url = await openConnectWindow(type);
@@ -368,11 +368,14 @@ const ToolsSettings = ({
   }, [
     MCPTools,
     isBase,
+    isAdmin,
     servers,
     t,
     toggleTool,
     webSearchEnabled,
     webSearchPortalEnabled,
+    onGoToWebSearchPage,
+    onWebSearchToggle,
   ]);
 
   if (!isFetched) return;

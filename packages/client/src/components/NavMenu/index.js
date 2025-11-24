@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-
-import { injectDefaultTheme, isMobile, mobile } from "@docspace/shared/utils";
+import classNames from "classnames";
+import { isMobile, isDesktop as isDesktopUtil } from "@docspace/shared/utils";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 
@@ -44,41 +43,7 @@ import { isPublicPreview } from "@docspace/shared/utils/common";
 import HeaderUnAuth from "./sub-components/header-unauth";
 import HeaderNav from "./sub-components/header-nav";
 import Header from "./sub-components/header";
-
-const StyledContainer = styled.header.attrs(injectDefaultTheme)`
-  height: ${(props) => props.theme.header.height};
-  position: relative;
-  align-items: center;
-  background-color: ${(props) => props.theme.header.backgroundColor};
-
-  ${(props) =>
-    !props.isLoaded
-      ? css`
-          @media ${mobile} {
-            width: 100vw; // fixes space between header loader and screen edge
-          }
-        `
-      : css`
-          @media ${mobile} {
-            .navMenuHeader,
-            .profileMenuIcon,
-            .navMenuHeaderUnAuth {
-              position: absolute;
-              z-index: 160;
-              top: 0;
-              // top: ${({ isVisible }) => (isVisible ? "0" : "-48px")};
-
-              transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-              -moz-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-              -ms-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-              -webkit-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-              -o-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            }
-
-            width: 100vw;
-          }
-        `}
-`;
+import styles from "./nav.module.scss";
 
 const NavMenu = (props) => {
   const {
@@ -104,13 +69,61 @@ const NavMenu = (props) => {
 
   const location = useLocation();
 
-  const [isBackdropVisible, setIsBackdropVisible] = React.useState(
+  const [isBackdropVisible, setIsBackdropVisible] = useState(
     isBackdropVisibleProp,
   );
-  const [isNavOpened, setIsNavOpened] = React.useState(isNavHoverEnabledProp);
-  const [isAsideVisible, setIsAsideVisible] = React.useState(isNavOpenedProp);
+  const [isNavOpened, setIsNavOpened] = useState(isNavHoverEnabledProp);
+  const [isAsideVisible, setIsAsideVisible] = useState(isNavOpenedProp);
   const [isNavHoverEnabled, setIsNavHoverEnabled] =
-    React.useState(isAsideVisibleProp);
+    useState(isAsideVisibleProp);
+  const [scrollTop, setScrollTop] = useState(0);
+  const [isFixed, setIsFixed] = useState(true);
+
+  const onScroll = useCallback(
+    (e) => {
+      const eventTarget = e.target;
+      const currentScrollTop = Math.max(0, eventTarget.scrollTop);
+      const scrollHeight = eventTarget.scrollHeight;
+      const clientHeight = eventTarget.clientHeight;
+
+      setScrollTop(currentScrollTop ?? 0);
+
+      const scrollShift = scrollTop - currentScrollTop;
+
+      const isNearBottom =
+        scrollHeight - (currentScrollTop + clientHeight) < 100;
+
+      if (scrollShift > 0 && !isNearBottom) {
+        setIsFixed(true);
+      } else if (scrollShift <= 0) {
+        setIsFixed(false);
+      }
+    },
+    [scrollTop],
+  );
+
+  useEffect(() => {
+    const scroll = isMobile()
+      ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
+      : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
+    scroll?.addEventListener("scroll", onScroll);
+
+    return () => {
+      scroll?.removeEventListener("scroll", onScroll);
+    };
+  }, [onScroll]);
+
+  useEffect(() => {
+    if (isFixed) {
+      document.documentElement.style.setProperty("--nav-offset", "48px");
+    } else {
+      document.documentElement.style.removeProperty("--nav-offset");
+    }
+
+    return () => {
+      document.documentElement.style.removeProperty("--nav-offset");
+    };
+  }, [isFixed]);
 
   const backdropClick = () => {
     setIsBackdropVisible(false);
@@ -166,7 +179,11 @@ const NavMenu = (props) => {
   const isPreparationPortal = location.pathname === "/preparation-portal";
 
   return (
-    <StyledContainer isLoaded={isLoaded}>
+    <header
+      className={classNames(styles.header, {
+        [styles.isFixed]: isFixed,
+      })}
+    >
       <Backdrop
         visible={isBackdropVisible}
         onClick={backdropClick}
@@ -203,7 +220,7 @@ const NavMenu = (props) => {
           {asideContent}
         </Aside>
       ) : null}
-    </StyledContainer>
+    </header>
   );
 };
 

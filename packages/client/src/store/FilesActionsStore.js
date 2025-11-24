@@ -462,9 +462,11 @@ class FilesActionStore {
       newSelection ||
       (this.filesStore.selection.length
         ? this.filesStore.selection
-        : [bufferSelection]);
+        : bufferSelection
+          ? [bufferSelection]
+          : []);
 
-    selection = selection.filter((item) => item.security.Delete);
+    selection = selection.filter((item) => item?.security?.Delete);
 
     //  const isThirdPartyFile = selection.some((f) => f.providerKey);
 

@@ -2996,6 +2996,10 @@
   --profile-active-sessions-divider-color: #{$gray-strong};
   --profile-notifications-description: #{$gray};
   --profile-notifications-border: 1px solid #{$gray-light-mid};
+  --profile-oauth-description-color: #{$gray};
+  --profile-oauth-row-background: #{$light-gray-hover};
+  --profile-oauth-row-border: 1px solid #{$gray-light-mid};
+  --profile-oauth-checked-background: #{$light-gray-hover};
 }
 
 .dark {
@@ -3012,4 +3016,8 @@
   --profile-active-sessions-divider-color: #{$gray-dark-strong};
   --profile-notifications-description: #{$gray-dark};
   --profile-notifications-border: 1px solid #{$gray-dark-strong};
+  --profile-oauth-description-color: #{$gray-dark};
+  --profile-oauth-row-background: #{$light-dark-gray-hover};
+  --profile-oauth-row-border: 1px solid #{$gray-dark-strong};
+  --profile-oauth-checked-background: #{$light-dark-gray-hover};
 }

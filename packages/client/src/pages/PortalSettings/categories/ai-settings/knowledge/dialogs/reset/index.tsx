@@ -28,76 +28,83 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
-  ModalDialog,
-  ModalDialogType,
+	ModalDialog,
+	ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import { inject, observer } from "mobx-react";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 type ResetKnowledgeDialogProps = {
-  onSuccess?: VoidFunction;
-  onClose: VoidFunction;
-  restoreKnowledge?: AISettingsStore["restoreKnowledge"];
+	onSuccess?: VoidFunction;
+	onClose: VoidFunction;
+	restoreKnowledge?: AISettingsStore["restoreKnowledge"];
+	getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const ResetKnowledgeDialogComponent = ({
-  onSuccess,
-  onClose,
-  restoreKnowledge,
+	onSuccess,
+	onClose,
+	restoreKnowledge,
+	getAIConfig,
 }: ResetKnowledgeDialogProps) => {
-  const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
+	const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
 
-  const [loading, setLoading] = React.useState(false);
+	const [loading, setLoading] = React.useState(false);
 
-  const onSubmitAction = async () => {
-    setLoading(true);
+	const onSubmitAction = async () => {
+		setLoading(true);
 
-    try {
-      await restoreKnowledge?.();
-      toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
-      onSuccess?.();
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
-    } finally {
-      setLoading(false);
-      onClose();
-    }
-  };
+		try {
+			await restoreKnowledge?.();
+			toastr.success(t("AISettings:KnowledgeDisabledSuccess"));
+			onSuccess?.();
+			getAIConfig?.();
+		} catch (error) {
+			console.error(error);
+			toastr.error(error as string);
+		} finally {
+			setLoading(false);
+			onClose();
+		}
+	};
 
-  return (
-    <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("Settings:ResetSettings")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <Text>
-          <Trans t={t} i18nKey="ResetKnowledgeDescription" ns="AISettings" />
-        </Text>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          primary
-          size={ButtonSize.normal}
-          label={t("OAuth:Reset")}
-          scale
-          onClick={onSubmitAction}
-          isLoading={loading}
-        />
-        <Button
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          scale
-          onClick={onClose}
-          isDisabled={loading}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+	return (
+		<ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
+			<ModalDialog.Header>{t("Settings:ResetSettings")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<Text>
+					<Trans t={t} i18nKey="ResetKnowledgeDescription" ns="AISettings" />
+				</Text>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					primary
+					size={ButtonSize.normal}
+					label={t("OAuth:Reset")}
+					scale
+					onClick={onSubmitAction}
+					isLoading={loading}
+				/>
+				<Button
+					size={ButtonSize.normal}
+					label={t("Common:CancelButton")}
+					scale
+					onClick={onClose}
+					isDisabled={loading}
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
-export const ResetKnowledgeDialog = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    restoreKnowledge: aiSettingsStore.restoreKnowledge,
-  };
-})(observer(ResetKnowledgeDialogComponent));
+export const ResetKnowledgeDialog = inject(
+	({ aiSettingsStore, settingsStore }: TStore) => {
+		return {
+			restoreKnowledge: aiSettingsStore.restoreKnowledge,
+			getAIConfig: settingsStore.getAIConfig,
+		};
+	},
+)(observer(ResetKnowledgeDialogComponent));

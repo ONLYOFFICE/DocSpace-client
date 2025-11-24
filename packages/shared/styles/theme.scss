@@ -2991,6 +2991,9 @@
   --profile-mobile-label: #{$gray};
   --profile-theme-preview-border: 1px solid #{$gray-light-mid};
   --profile-theme-preview-description: #{$gray};
+  --profile-text-color: #{$gray};
+  --profile-active-sessions-cell-color: #{$gray};
+  --profile-active-sessions-divider-color: #{$gray-strong};
 }
 
 .dark {
@@ -3002,4 +3005,7 @@
   --profile-mobile-label: #{$gray-dark};
   --profile-theme-preview-border: 1px solid #{$gray-dark-strong};
   --profile-theme-preview-description: #{$gray-dark};
+  --profile-text-color: #{$gray-dark};
+  --profile-active-sessions-cell-color: #{$gray-dark};
+  --profile-active-sessions-divider-color: #{$gray-dark-strong};
 }

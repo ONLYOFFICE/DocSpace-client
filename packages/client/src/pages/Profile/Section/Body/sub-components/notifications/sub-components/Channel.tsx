@@ -52,7 +52,6 @@ type ChannelProps = {
   isNeedConfig?: boolean;
   isAdmin?: boolean;
   isNotValid?: boolean;
-  isThirdPartyAvailable?: boolean;
 };
 
 const getIcon = (type: ChannelProps["type"]) => {
@@ -161,10 +160,8 @@ const Channel = ({
   isNeedConfig,
   isAdmin,
   isNotValid,
-  isThirdPartyAvailable,
 }: ChannelProps) => {
   const { t } = useTranslation(["Notifications", "Common"]);
-  const { isBase } = useTheme();
 
   return (
     <div

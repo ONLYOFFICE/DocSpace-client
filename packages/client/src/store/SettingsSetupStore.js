@@ -576,7 +576,6 @@ class SettingsSetupStore {
     this.settingsStore.addAbortControllers(abortController);
 
     try {
-      // console.log("fetchAndSetConsumers:", consumerName);
       const res = await api.settings.getConsumersList(abortController.signal);
       let consumer = res.find((c) => c.name === consumerName);
 
@@ -584,13 +583,6 @@ class SettingsSetupStore {
         (consumer && !consumer.paid && consumer.canSet) ||
         this.settingsStore?.standalone ||
         isThirdPartyAvailable;
-
-      // console.log("Found consumer:", {
-      //   consumer,
-      //   saveAvailable,
-      //   isThirdPartyAvailable,
-      //   standalone: this.settingsStore?.standalone,
-      // });
 
       if (!saveAvailable) consumer = undefined;
 

@@ -36,11 +36,11 @@ import ManageConnectionsReactSvgUrl from "PUBLIC_DIR/images/manage.connection.re
 
 import { openConnectWindow } from "../../../../api/files";
 import {
-	changeMCPToolsForRoom,
-	connectServer,
-	disconnectServer,
-	getMCPToolsForRoom,
-	updateWebSearchInRoom,
+  changeMCPToolsForRoom,
+  connectServer,
+  disconnectServer,
+  getMCPToolsForRoom,
+  updateWebSearchInRoom,
 } from "../../../../api/ai";
 import { ServerType } from "../../../../api/ai/enums";
 import { getOAuthToken } from "../../../../utils/common";
@@ -64,418 +64,418 @@ import styles from "./ChatInput.module.scss";
 import { Link, LinkType } from "../../../link";
 
 const ToolsSettings = ({
-	servers,
-	MCPTools,
-	webSearchPortalEnabled,
-	webSearchEnabled,
-	isFetched,
-	knowledgeSearchToolName,
-	webSearchToolName,
-	webCrawlingToolName,
-	setServers,
-	setMCPTools,
-	setWebSearchEnabled,
-	isAdmin,
-	aiReady,
+  servers,
+  MCPTools,
+  webSearchPortalEnabled,
+  webSearchEnabled,
+  isFetched,
+  knowledgeSearchToolName,
+  webSearchToolName,
+  webCrawlingToolName,
+  setServers,
+  setMCPTools,
+  setWebSearchEnabled,
+  isAdmin,
+  aiReady,
 }: ReturnType<typeof useToolsSettings> & {
-	isAdmin?: boolean;
-	aiReady: boolean;
+  isAdmin?: boolean;
+  aiReady: boolean;
 }) => {
-	const { t } = useTranslation(["Common"]);
-	const navigate = useNavigate();
+  const { t } = useTranslation(["Common"]);
+  const navigate = useNavigate();
 
-	const { roomId } = useChatStore();
-	const {
-		setKnowledgeSearchToolName,
-		setWebSearchToolName,
-		setWebCrawlingToolName,
-	} = useMessageStore();
-	const { isBase } = useTheme();
+  const { roomId } = useChatStore();
+  const {
+    setKnowledgeSearchToolName,
+    setWebSearchToolName,
+    setWebCrawlingToolName,
+  } = useMessageStore();
+  const { isBase } = useTheme();
 
-	const [showManageConnections, setShowManageConnections] =
-		React.useState(false);
+  const [showManageConnections, setShowManageConnections] =
+    React.useState(false);
 
-	const [isMcpToolsVisible, setIsMcpToolsVisible] = React.useState(false);
+  const [isMcpToolsVisible, setIsMcpToolsVisible] = React.useState(false);
 
-	const contextMenuRef = React.useRef<ContextMenuRefType>(null);
+  const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
-	const toggleTool = React.useCallback(
-		async (mcpId: string, toolId: string) => {
-			const countTools = MCPTools.get(mcpId)?.length ?? 0;
-			const disabledTools =
-				MCPTools.get(mcpId)
-					?.filter((tool) => !tool.enabled)
-					.map((tool) => tool.name) ?? [];
+  const toggleTool = React.useCallback(
+    async (mcpId: string, toolId: string) => {
+      const countTools = MCPTools.get(mcpId)?.length ?? 0;
+      const disabledTools =
+        MCPTools.get(mcpId)
+          ?.filter((tool) => !tool.enabled)
+          .map((tool) => tool.name) ?? [];
 
-			if (toolId === "all_tools") {
-				const enabled = disabledTools.length === countTools;
-				const newTools =
-					MCPTools.get(mcpId)?.map((tool) => ({
-						...tool,
-						enabled,
-					})) ?? [];
+      if (toolId === "all_tools") {
+        const enabled = disabledTools.length === countTools;
+        const newTools =
+          MCPTools.get(mcpId)?.map((tool) => ({
+            ...tool,
+            enabled,
+          })) ?? [];
 
-				if (enabled) {
-					await changeMCPToolsForRoom(Number(roomId), mcpId, []);
-				} else {
-					await changeMCPToolsForRoom(
-						Number(roomId),
-						mcpId,
-						newTools.map((tool) => tool.name),
-					);
-				}
+        if (enabled) {
+          await changeMCPToolsForRoom(Number(roomId), mcpId, []);
+        } else {
+          await changeMCPToolsForRoom(
+            Number(roomId),
+            mcpId,
+            newTools.map((tool) => tool.name),
+          );
+        }
 
-				setMCPTools(new Map([...MCPTools, [mcpId, newTools]]));
-			} else {
-				const enabled = disabledTools.includes(toolId);
+        setMCPTools(new Map([...MCPTools, [mcpId, newTools]]));
+      } else {
+        const enabled = disabledTools.includes(toolId);
 
-				const newTools =
-					MCPTools.get(mcpId)?.map((tool) => ({
-						...tool,
-						enabled: tool.name === toolId ? enabled : tool.enabled,
-					})) ?? [];
+        const newTools =
+          MCPTools.get(mcpId)?.map((tool) => ({
+            ...tool,
+            enabled: tool.name === toolId ? enabled : tool.enabled,
+          })) ?? [];
 
-				setMCPTools(new Map([...MCPTools, [mcpId, newTools]]));
+        setMCPTools(new Map([...MCPTools, [mcpId, newTools]]));
 
-				if (enabled) {
-					await changeMCPToolsForRoom(
-						Number(roomId),
-						mcpId,
-						disabledTools.filter((tool) => tool !== toolId),
-					);
-				} else {
-					await changeMCPToolsForRoom(Number(roomId), mcpId, [
-						...disabledTools,
-						toolId,
-					]);
-				}
-			}
-		},
-		[MCPTools, roomId, setMCPTools],
-	);
+        if (enabled) {
+          await changeMCPToolsForRoom(
+            Number(roomId),
+            mcpId,
+            disabledTools.filter((tool) => tool !== toolId),
+          );
+        } else {
+          await changeMCPToolsForRoom(Number(roomId), mcpId, [
+            ...disabledTools,
+            toolId,
+          ]);
+        }
+      }
+    },
+    [MCPTools, roomId, setMCPTools],
+  );
 
-	const onGoToWebSearchPage = React.useCallback(() => {
-		navigate("/portal-settings/ai-settings/search");
-	}, [navigate]);
+  const onGoToWebSearchPage = React.useCallback(() => {
+    navigate("/portal-settings/ai-settings/search");
+  }, [navigate]);
 
-	const openOauthWindow = async (serverId: string, type: string) => {
-		const url = await openConnectWindow(type);
+  const openOauthWindow = async (serverId: string, type: string) => {
+    const url = await openConnectWindow(type);
 
-		const newWindow = window.open(
-			"",
-			t("Common:Authorization"),
-			"height=600, width=1020",
-		);
+    const newWindow = window.open(
+      "",
+      t("Common:Authorization"),
+      "height=600, width=1020",
+    );
 
-		if (newWindow) {
-			newWindow.location = url;
-		}
+    if (newWindow) {
+      newWindow.location = url;
+    }
 
-		getOAuthToken(newWindow)
-			.then(async (token) => {
-				if (token) {
-					try {
-						await connectServer(Number(roomId), serverId, token);
+    getOAuthToken(newWindow)
+      .then(async (token) => {
+        if (token) {
+          try {
+            await connectServer(Number(roomId), serverId, token);
 
-						newWindow?.close();
+            newWindow?.close();
 
-						const newTools = await getMCPToolsForRoom(Number(roomId), serverId);
+            const newTools = await getMCPToolsForRoom(Number(roomId), serverId);
 
-						if (!newTools) return;
+            if (!newTools) return;
 
-						setMCPTools((prev) => {
-							const newMap = new Map(prev);
-							newMap.set(serverId, newTools);
-							return newMap;
-						});
-						setServers((prev) => {
-							const newServers = [...prev];
-							const serverIndex = newServers.findIndex(
-								(s) => s.id === serverId,
-							);
-							newServers[serverIndex].connected = true;
-							return newServers;
-						});
-					} catch (e) {
-						console.log(e);
-					}
-				}
-			})
-			.catch((e) => console.log(e));
-	};
+            setMCPTools((prev) => {
+              const newMap = new Map(prev);
+              newMap.set(serverId, newTools);
+              return newMap;
+            });
+            setServers((prev) => {
+              const newServers = [...prev];
+              const serverIndex = newServers.findIndex(
+                (s) => s.id === serverId,
+              );
+              newServers[serverIndex].connected = true;
+              return newServers;
+            });
+          } catch (e) {
+            console.log(e);
+          }
+        }
+      })
+      .catch((e) => console.log(e));
+  };
 
-	const disconnectServerAction = async (serverId: string) => {
-		try {
-			await disconnectServer(Number(roomId), serverId);
+  const disconnectServerAction = async (serverId: string) => {
+    try {
+      await disconnectServer(Number(roomId), serverId);
 
-			setMCPTools((prev) => {
-				const newMap = new Map(prev);
-				newMap.delete(serverId);
-				return newMap;
-			});
-			setServers((prev) => {
-				const newServers = [...prev];
-				const serverIndex = newServers.findIndex((s) => s.id === serverId);
-				newServers[serverIndex].connected = false;
-				return newServers;
-			});
-		} catch (e) {
-			console.log(e);
-		}
-	};
+      setMCPTools((prev) => {
+        const newMap = new Map(prev);
+        newMap.delete(serverId);
+        return newMap;
+      });
+      setServers((prev) => {
+        const newServers = [...prev];
+        const serverIndex = newServers.findIndex((s) => s.id === serverId);
+        newServers[serverIndex].connected = false;
+        return newServers;
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-	const showMcpTools = (e: React.MouseEvent<HTMLElement>) => {
-		if (!aiReady || showManageConnections) return;
+  const showMcpTools = (e: React.MouseEvent<HTMLElement>) => {
+    if (!aiReady || showManageConnections) return;
 
-		setIsMcpToolsVisible(true);
-		contextMenuRef.current?.show(e);
-	};
+    setIsMcpToolsVisible(true);
+    contextMenuRef.current?.show(e);
+  };
 
-	const hideMcpTools = React.useCallback(() => {
-		setIsMcpToolsVisible(false);
-	}, []);
+  const hideMcpTools = React.useCallback(() => {
+    setIsMcpToolsVisible(false);
+  }, []);
 
-	const onWebSearchToggle = React.useCallback(() => {
-		if (!webSearchPortalEnabled) return;
+  const onWebSearchToggle = React.useCallback(() => {
+    if (!webSearchPortalEnabled) return;
 
-		updateWebSearchInRoom(Number(roomId), !webSearchEnabled);
-		setWebSearchEnabled(!webSearchEnabled);
-	}, [roomId, webSearchEnabled, webSearchPortalEnabled, setWebSearchEnabled]);
+    updateWebSearchInRoom(Number(roomId), !webSearchEnabled);
+    setWebSearchEnabled(!webSearchEnabled);
+  }, [roomId, webSearchEnabled, webSearchPortalEnabled, setWebSearchEnabled]);
 
-	React.useEffect(() => {
-		setKnowledgeSearchToolName(knowledgeSearchToolName);
-	}, [knowledgeSearchToolName, setKnowledgeSearchToolName]);
+  React.useEffect(() => {
+    setKnowledgeSearchToolName(knowledgeSearchToolName);
+  }, [knowledgeSearchToolName, setKnowledgeSearchToolName]);
 
-	React.useEffect(() => {
-		setWebSearchToolName(webSearchToolName);
-	}, [webSearchToolName, setWebSearchToolName]);
+  React.useEffect(() => {
+    setWebSearchToolName(webSearchToolName);
+  }, [webSearchToolName, setWebSearchToolName]);
 
-	React.useEffect(() => {
-		setWebCrawlingToolName(webCrawlingToolName);
-	}, [webCrawlingToolName, setWebCrawlingToolName]);
+  React.useEffect(() => {
+    setWebCrawlingToolName(webCrawlingToolName);
+  }, [webCrawlingToolName, setWebCrawlingToolName]);
 
-	const model = React.useMemo(() => {
-		const serverItems = Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
-			const server = servers.find((s) => s.id === mcpId);
+  const model = React.useMemo(() => {
+    const serverItems = Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
+      const server = servers.find((s) => s.id === mcpId);
 
-			if (!server)
-				return {
-					key: "",
-					label: "",
-				};
+      if (!server)
+        return {
+          key: "",
+          label: "",
+        };
 
-			const items = [
-				{
-					key: "all_tools",
-					label: "All tools",
-					withToggle: true,
-					checked: tools.some((tool) => tool.enabled),
-					onClick: () => {
-						toggleTool(mcpId, "all_tools");
-					},
-				},
-				{
-					key: "separator-sub-menu-1",
-					isSeparator: true,
-				},
-				...tools
-					.map((tool) => ({
-						key: tool.name,
-						label: tool.name,
-						withToggle: true,
-						checked: tool.enabled,
-						onClick: () => {
-							toggleTool(mcpId, tool.name);
-						},
-					}))
-					.filter(Boolean),
-			];
+      const items = [
+        {
+          key: "all_tools",
+          label: "All tools",
+          withToggle: true,
+          checked: tools.some((tool) => tool.enabled),
+          onClick: () => {
+            toggleTool(mcpId, "all_tools");
+          },
+        },
+        {
+          key: "separator-sub-menu-1",
+          isSeparator: true,
+        },
+        ...tools
+          .map((tool) => ({
+            key: tool.name,
+            label: tool.name,
+            withToggle: true,
+            checked: tool.enabled,
+            onClick: () => {
+              toggleTool(mcpId, tool.name);
+            },
+          }))
+          .filter(Boolean),
+      ];
 
-			const name =
-				server.serverType === ServerType.Portal
-					? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
-					: server.name;
+      const name =
+        server.serverType === ServerType.Portal
+          ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+          : server.name;
 
-			return {
-				key: mcpId,
-				label: name,
-				icon:
-					(server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
-					"",
-				withMCPIcon: true,
-				items,
-			};
-		});
+      return {
+        key: mcpId,
+        label: name,
+        icon:
+          (server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
+          "",
+        withMCPIcon: true,
+        items,
+      };
+    });
 
-		const showManageConnectionItem = servers.some(
-			(server) =>
-				server.serverType !== ServerType.Portal &&
-				server.serverType !== ServerType.Custom,
-		);
+    const showManageConnectionItem = servers.some(
+      (server) =>
+        server.serverType !== ServerType.Portal &&
+        server.serverType !== ServerType.Custom,
+    );
 
-		return [
-			{
-				key: "web-search",
-				label: "Web Search",
-				icon: WebSearchIconUrl,
-				withToggle: true,
-				checked: webSearchEnabled && webSearchPortalEnabled,
-				onClick: onWebSearchToggle,
-				disabled: !webSearchPortalEnabled,
-				tooltipTarget: "toggle",
-				getTooltipContent: () => (
-					<>
-						<Text>
-							{t("ConnectWebSearch", {
-								productName: t("Common:ProductName"),
-							})}
-						</Text>
-						{isAdmin ? (
-							<Link
-								type={LinkType.action}
-								isHovered
-								fontWeight={600}
-								onClick={onGoToWebSearchPage}
-							>
-								{t("Common:GoToSettings")}
-							</Link>
-						) : null}
-					</>
-				),
-			},
-			...(showManageConnectionItem || serverItems.length > 0
-				? [{ key: "separator-1", isSeparator: true }]
-				: []),
-			...serverItems,
-			...(serverItems.length > 0 && showManageConnectionItem
-				? [{ key: "separator-2", isSeparator: true }]
-				: []),
-			...(showManageConnectionItem
-				? [
-						{
-							key: "manage-connections",
-							label: t("ManageConnection"),
-							onClick: () => {
-								setShowManageConnections(true);
-							},
-							icon: ManageConnectionsReactSvgUrl,
-							disabled: !showManageConnectionItem,
-							getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
-						},
-					]
-				: []),
-		] as ContextMenuModel[];
-	}, [
-		MCPTools,
-		isBase,
-		isAdmin,
-		servers,
-		t,
-		toggleTool,
-		webSearchEnabled,
-		webSearchPortalEnabled,
-		onGoToWebSearchPage,
-		onWebSearchToggle,
-	]);
+    return [
+      {
+        key: "web-search",
+        label: "Web Search",
+        icon: WebSearchIconUrl,
+        withToggle: true,
+        checked: webSearchEnabled && webSearchPortalEnabled,
+        onClick: onWebSearchToggle,
+        disabled: !webSearchPortalEnabled,
+        tooltipTarget: "toggle",
+        getTooltipContent: () => (
+          <>
+            <Text>
+              {t("ConnectWebSearch", {
+                productName: t("Common:ProductName"),
+              })}
+            </Text>
+            {isAdmin ? (
+              <Link
+                type={LinkType.action}
+                isHovered
+                fontWeight={600}
+                onClick={onGoToWebSearchPage}
+              >
+                {t("Common:GoToSettings")}
+              </Link>
+            ) : null}
+          </>
+        ),
+      },
+      ...(showManageConnectionItem || serverItems.length > 0
+        ? [{ key: "separator-1", isSeparator: true }]
+        : []),
+      ...serverItems,
+      ...(serverItems.length > 0 && showManageConnectionItem
+        ? [{ key: "separator-2", isSeparator: true }]
+        : []),
+      ...(showManageConnectionItem
+        ? [
+            {
+              key: "manage-connections",
+              label: t("ManageConnection"),
+              onClick: () => {
+                setShowManageConnections(true);
+              },
+              icon: ManageConnectionsReactSvgUrl,
+              disabled: !showManageConnectionItem,
+              getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
+            },
+          ]
+        : []),
+    ] as ContextMenuModel[];
+  }, [
+    MCPTools,
+    isBase,
+    isAdmin,
+    servers,
+    t,
+    toggleTool,
+    webSearchEnabled,
+    webSearchPortalEnabled,
+    onGoToWebSearchPage,
+    onWebSearchToggle,
+  ]);
 
-	if (!isFetched) return;
+  if (!isFetched) return;
 
-	return (
-		<>
-			<div
-				title={t("AIToolsHint")}
-				className={classNames(
-					styles.chatInputButton,
-					styles.chatInputToolsButton,
-					{
-						[styles.activeChatInputButton]: isMcpToolsVisible,
-						[styles.disabled]: !aiReady,
-					},
-				)}
-				onClick={showMcpTools}
-			>
-				<IconButton iconName={McpToolReactSvgUrl} size={16} isFill={false} />
-				<Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
-					{t("Tools")}
-				</Text>
-				<ContextMenu
-					ref={contextMenuRef}
-					model={model}
-					onHide={hideMcpTools}
-					maxHeightLowerSubmenu={360}
-					showDisabledItems
-					// ignoreChangeView
-					headerOnlyMobile
-					withoutBackHeaderButton
-				/>
-			</div>
-			{showManageConnections ? (
-				<Portal
-					visible
-					element={
-						<>
-							<Aside
-								header={t("ManageConnection")}
-								onClose={() => setShowManageConnections(false)}
-								visible={showManageConnections}
-							>
-								<div className={styles.toolSettingsWrapper}>
-									{servers.map((server) => {
-										if (
-											server.serverType === ServerType.Portal ||
-											server.serverType === ServerType.Custom
-										)
-											return null;
+  return (
+    <>
+      <div
+        title={t("AIToolsHint")}
+        className={classNames(
+          styles.chatInputButton,
+          styles.chatInputToolsButton,
+          {
+            [styles.activeChatInputButton]: isMcpToolsVisible,
+            [styles.disabled]: !aiReady,
+          },
+        )}
+        onClick={showMcpTools}
+      >
+        <IconButton iconName={McpToolReactSvgUrl} size={16} isFill={false} />
+        <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
+          {t("Tools")}
+        </Text>
+        <ContextMenu
+          ref={contextMenuRef}
+          model={model}
+          onHide={hideMcpTools}
+          maxHeightLowerSubmenu={360}
+          showDisabledItems
+          // ignoreChangeView
+          headerOnlyMobile
+          withoutBackHeaderButton
+        />
+      </div>
+      {showManageConnections ? (
+        <Portal
+          visible
+          element={
+            <>
+              <Aside
+                header={t("ManageConnection")}
+                onClose={() => setShowManageConnections(false)}
+                visible={showManageConnections}
+              >
+                <div className={styles.toolSettingsWrapper}>
+                  {servers.map((server) => {
+                    if (
+                      server.serverType === ServerType.Portal ||
+                      server.serverType === ServerType.Custom
+                    )
+                      return null;
 
-										return (
-											<div key={server.id} className={styles.toolSettingsItem}>
-												<div className={styles.toolSettingsItemInfo}>
-													<img
-														src={
-															(server.icon?.icon16 ||
-																getServerIcon(server.serverType, isBase)) ??
-															""
-														}
-														alt={server.name}
-													/>
-													<Text
-														fontSize="14px"
-														lineHeight="16px"
-														fontWeight={600}
-													>
-														{server.name}
-													</Text>
-												</div>
-												<Button
-													label={
-														server.connected ? t("Disconnect") : t("Connect")
-													}
-													size={ButtonSize.small}
-													onClick={() => {
-														if (server.connected) {
-															disconnectServerAction(server.id);
-														} else {
-															openOauthWindow(server.id, server.name);
-														}
-													}}
-												/>
-											</div>
-										);
-									})}
-								</div>
-							</Aside>
-							<Backdrop
-								isAside
-								onClick={() => setShowManageConnections(false)}
-								visible={showManageConnections}
-								withBackground
-							/>
-						</>
-					}
-				/>
-			) : null}
-		</>
-	);
+                    return (
+                      <div key={server.id} className={styles.toolSettingsItem}>
+                        <div className={styles.toolSettingsItemInfo}>
+                          <img
+                            src={
+                              (server.icon?.icon16 ||
+                                getServerIcon(server.serverType, isBase)) ??
+                              ""
+                            }
+                            alt={server.name}
+                          />
+                          <Text
+                            fontSize="14px"
+                            lineHeight="16px"
+                            fontWeight={600}
+                          >
+                            {server.name}
+                          </Text>
+                        </div>
+                        <Button
+                          label={
+                            server.connected ? t("Disconnect") : t("Connect")
+                          }
+                          size={ButtonSize.small}
+                          onClick={() => {
+                            if (server.connected) {
+                              disconnectServerAction(server.id);
+                            } else {
+                              openOauthWindow(server.id, server.name);
+                            }
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </Aside>
+              <Backdrop
+                isAside
+                onClick={() => setShowManageConnections(false)}
+                visible={showManageConnections}
+                withBackground
+              />
+            </>
+          }
+        />
+      ) : null}
+    </>
+  );
 };
 
 export default observer(ToolsSettings);

@@ -28,8 +28,8 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
-	ModalDialog,
-	ModalDialogType,
+  ModalDialog,
+  ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
@@ -38,73 +38,73 @@ import { inject, observer } from "mobx-react";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 type ResetWebSearchDialogProps = {
-	onSuccess?: VoidFunction;
-	onClose: VoidFunction;
-	restoreWebSearch?: AISettingsStore["restoreWebSearch"];
-	getAIConfig?: SettingsStore["getAIConfig"];
+  onSuccess?: VoidFunction;
+  onClose: VoidFunction;
+  restoreWebSearch?: AISettingsStore["restoreWebSearch"];
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const ResetWebSearchDialogComponent = ({
-	onSuccess,
-	onClose,
-	restoreWebSearch,
-	getAIConfig,
+  onSuccess,
+  onClose,
+  restoreWebSearch,
+  getAIConfig,
 }: ResetWebSearchDialogProps) => {
-	const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
+  const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
 
-	const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
-	const onSubmitAction = async () => {
-		setLoading(true);
+  const onSubmitAction = async () => {
+    setLoading(true);
 
-		try {
-			await restoreWebSearch?.();
-			toastr.success(t("AISettings:WebSearchDisabledSuccess"));
-			onSuccess?.();
-			getAIConfig?.();
-		} catch (error) {
-			console.error(error);
-			toastr.error(error as string);
-		} finally {
-			setLoading(false);
-			onClose();
-		}
-	};
+    try {
+      await restoreWebSearch?.();
+      toastr.success(t("AISettings:WebSearchDisabledSuccess"));
+      onSuccess?.();
+      getAIConfig?.();
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      setLoading(false);
+      onClose();
+    }
+  };
 
-	return (
-		<ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-			<ModalDialog.Header>{t("Settings:ResetSettings")}</ModalDialog.Header>
-			<ModalDialog.Body>
-				<Text>
-					<Trans t={t} i18nKey="ResetWebSearchDescription" ns="AISettings" />
-				</Text>
-			</ModalDialog.Body>
-			<ModalDialog.Footer>
-				<Button
-					primary
-					size={ButtonSize.normal}
-					label={t("OAuth:Reset")}
-					scale
-					onClick={onSubmitAction}
-					isLoading={loading}
-				/>
-				<Button
-					size={ButtonSize.normal}
-					label={t("Common:CancelButton")}
-					scale
-					onClick={onClose}
-					isDisabled={loading}
-				/>
-			</ModalDialog.Footer>
-		</ModalDialog>
-	);
+  return (
+    <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
+      <ModalDialog.Header>{t("Settings:ResetSettings")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Text>
+          <Trans t={t} i18nKey="ResetWebSearchDescription" ns="AISettings" />
+        </Text>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          primary
+          size={ButtonSize.normal}
+          label={t("OAuth:Reset")}
+          scale
+          onClick={onSubmitAction}
+          isLoading={loading}
+        />
+        <Button
+          size={ButtonSize.normal}
+          label={t("Common:CancelButton")}
+          scale
+          onClick={onClose}
+          isDisabled={loading}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 export const ResetWebSearchDialog = inject(
-	({ aiSettingsStore, settingsStore }: TStore) => {
-		return {
-			restoreWebSearch: aiSettingsStore.restoreWebSearch,
-			getAIConfig: settingsStore.getAIConfig,
-		};
-	},
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    return {
+      restoreWebSearch: aiSettingsStore.restoreWebSearch,
+      getAIConfig: settingsStore.getAIConfig,
+    };
+  },
 )(observer(ResetWebSearchDialogComponent));

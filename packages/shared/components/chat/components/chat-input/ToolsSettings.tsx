@@ -44,7 +44,7 @@ import {
 } from "../../../../api/ai";
 import { ServerType } from "../../../../api/ai/enums";
 import { getOAuthToken } from "../../../../utils/common";
-import { getServerIcon } from "../../../../utils";
+import { getServerIcon, isMobile } from "../../../../utils";
 import { useTheme } from "../../../../hooks/useTheme";
 
 import { Text } from "../../../text";
@@ -404,7 +404,8 @@ const ToolsSettings = ({
           onHide={hideMcpTools}
           maxHeightLowerSubmenu={360}
           showDisabledItems
-          // ignoreChangeView
+          withBackdrop={isMobile()}
+          //ignoreChangeView
           headerOnlyMobile
           withoutBackHeaderButton
         />

@@ -32,14 +32,14 @@ export class MockRequest {
   constructor(public readonly page: Page) {}
 
   async router(endpoints: TEndpoint[]) {
-    await Promise.all(
+    return Promise.all(
       endpoints.map(async (endpoint) => {
-        await this.page.route(endpoint.url, async (route) => {
+        return this.page.route(endpoint.url, async (route) => {
           const json = await endpoint.dataHandler().json();
 
           await route.fulfill({ json, status: json.statusCode ?? 200 });
         });
-      })
+      }),
     );
   }
 

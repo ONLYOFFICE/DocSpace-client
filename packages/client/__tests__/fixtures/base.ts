@@ -50,17 +50,46 @@ export const test = base.extend<{
         path: `../../public/images/${imagePath}`,
       });
     });
+    await page.route("*/**/static/scripts/**", async (route, request) => {
+      const scripts = request
+        .url()
+        .split("/static/scripts")
+        .at(-1)!
+        .split("?")[0];
+      await route.fulfill({
+        path: `../../public/scripts/${scripts}`,
+      });
+    });
 
     // Route for public images (direct access)
-    await page.route("*/**/client/images/**", async (route, request) => {
+    await page.route("*/**/static/images/**", async (route, request) => {
       const imagePath = request
         .url()
-        .split("/client/images/")
+        .split("/static/images/")
         .at(-1)!
         .split("?")[0];
       await route.fulfill({
         path: `../../public/images/${imagePath}`,
       });
+    });
+
+    // Route for public locales (direct access)
+    await page.route("*/**/locales/**", async (route, request) => {
+      const url = request.url();
+
+      const hasStatic = url.includes("static");
+
+      const local = url.split("/locales/").at(-1)!.split("?")[0];
+
+      const path = hasStatic
+        ? `../../public/locales/${local}`
+        : `./public/locales/${local}`;
+
+      await route
+        .fulfill({
+          path,
+        })
+        .catch((e) => {});
     });
 
     // Route for static assets

@@ -79,6 +79,7 @@ const Item = ({
   getLinkData,
   onBadgeClick,
   roomsFolderId,
+  aiAgentsFolderId,
   setDropTargetPreview,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
@@ -209,7 +210,13 @@ const Item = ({
         badgeComponent={
           <NewFilesBadge
             newFilesCount={labelBadge}
-            folderId={item.id === roomsFolderId ? "rooms" : item.id}
+            folderId={
+              item.id === roomsFolderId
+                ? "rooms"
+                : item.id === aiAgentsFolderId
+                  ? "agents"
+                  : item.id
+            }
             parentDOMId={folderId}
             onBadgeClick={onBadgeClick}
           />
@@ -263,6 +270,7 @@ const Items = ({
 
   getLinkData,
   roomsFolderId,
+  aiAgentsFolderId,
   setDropTargetPreview,
 }) => {
   const getFolderIcon = React.useCallback((item) => {
@@ -377,6 +385,7 @@ const Items = ({
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
             roomsFolderId={roomsFolderId}
+            aiAgentsFolderId={aiAgentsFolderId}
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
             setDropTargetPreview={setDropTargetPreview}
@@ -474,6 +483,7 @@ export default inject(
       commonFolderId,
       isPrivacyFolder,
       roomsFolderId,
+      aiAgentsFolderId,
     } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
@@ -521,6 +531,7 @@ export default inject(
       folderAccess,
       currentColorScheme,
       roomsFolderId,
+      aiAgentsFolderId,
       isIndexEditingMode,
       setDropTargetPreview,
     };

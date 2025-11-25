@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -36,7 +36,7 @@ import { Loader, LoaderTypes } from "../../../loader";
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
 
-import { MessageBodyProps } from "../../Chat.types";
+import type { MessageBodyProps } from "../../Chat.types";
 
 import EmptyScreen from "./sub-components/EmptyScreen";
 import Message from "./sub-components/message";

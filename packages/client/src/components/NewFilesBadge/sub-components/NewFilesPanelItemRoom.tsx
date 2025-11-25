@@ -30,7 +30,7 @@ import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Text } from "@docspace/shared/components/text";
 
 import { StyledRoomItem } from "../NewFilesBadge.styled";
-import { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
+import type { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
 
 const NewFilesPanelItemRoomComponent = ({
   room,
@@ -38,7 +38,7 @@ const NewFilesPanelItemRoomComponent = ({
   onClose,
 }: NewFilesPanelItemRoomProps) => {
   const onClick = async () => {
-    openItemAction!({ ...room, isFolder: true });
+    openItemAction?.({ ...room, isFolder: true });
     onClose();
   };
 

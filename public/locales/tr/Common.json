@@ -1071,5 +1071,6 @@
   "YourTurn": "Sıra sizde",
   "RoleAIAgentContentCreatorDescription": "İçerik oluşturucular sohbeti kullanabilir ve Sonuç depolamasında dosyalara çalışabilirler.\nDosyaları bilgi tabanına yükleyebilirler ancak kullanıcıları yönetemez veya aracı ayarlarını değiştiremezler.",
   "RoleAIAgentManagerDescription": "Temsilci yöneticileri, atanan yapay zeka temsilcisini yönetebilir, yeni kullanıcıları davet edebilir ve kendi seviyelerinin altındaki rolleri atayabilirler.\nŞu özellikleri kullanabilirler: sohbeti kullanma, bilgi dosyalarını yükleme, Sonuç depolaması ile çalışma ve sohbet ayarlarını yönetme.",
-  "RoleAIAgentViewerDescription": "İzleyiciler, yalnızca başkaları tarafından oluşturulan çıktılara sahip Sonuç depolamasındaki dosyalara erişebilirler.\nOnların sohbet veya bilgi tabanına erişimleri yoktur."
+  "RoleAIAgentViewerDescription": "İzleyiciler, yalnızca başkaları tarafından oluşturulan çıktılara sahip Sonuç depolamasındaki dosyalara erişebilirler.\nOnların sohbet veya bilgi tabanına erişimleri yoktur.",
+  "Thinking": "Düşünme"
 }

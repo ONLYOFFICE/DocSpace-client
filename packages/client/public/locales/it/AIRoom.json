@@ -25,5 +25,7 @@
   "CreateChat": "Crea chat",
   "EmptyKnowledgeTitle": "Nessun file caricato finora",
   "EmptyResultsDescription": "I file generati in chat AI appariranno qui automaticamente. Ogni volta che generi contenuti, inizi una chat o invii un messaggio con output, il risultato verrà salvato in questa sezione.",
-  "EmptyResultsViewerDescription": "Qui vedrai i risultati dell'attività di chat AI di altri utenti non appena saranno disponibili."
+  "EmptyResultsViewerDescription": "Qui vedrai i risultati dell'attività di chat AI di altri utenti non appena saranno disponibili.",
+  "NoAccessAIAgentTitle": "Spiacenti, non hai accesso a questo agente AI.",
+  "AIAgentAccessRedirectNote": "Verrai reindirizzato automaticamente alla sezione {{sectionName}} tra 5 secondi."
 }

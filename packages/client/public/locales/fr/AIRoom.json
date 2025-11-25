@@ -25,5 +25,7 @@
   "KnowledgeUnavailableDescription": "La base de connaissances est actuellement désactivée. Pour activer la recherche sémantique et le traitement des documents pour vos agents IA, veuillez configurer le fournisseur d'embeddings dans les paramètres {{productName}}.",
   "KnowledgeUnavailableDescriptionUser": "La base de connaissances est actuellement désactivée. Pour activer la recherche sémantique et le traitement des documents pour les agents IA, veuillez contacter votre administrateur {{productName}} pour configurer le fournisseur d'embeddings.",
   "MCPDescriptionServers": "Utilisez les serveurs MCP connectés par l'administrateur pour améliorer l'expérience de chat avec l'IA. Les serveurs MCP peuvent aider à l'extraction de données, aux résumés, aux suggestions intelligentes, etc.",
-  "ResponseQualityNode": "<1>Remarque :</1> La qualité des réponses peut varier selon le modèle ; les modèles plus récents sont recommandés pour de meilleurs résultats."
+  "ResponseQualityNode": "<1>Remarque :</1> La qualité des réponses peut varier selon le modèle ; les modèles plus récents sont recommandés pour de meilleurs résultats.",
+  "NoAccessAIAgentTitle": "Malheureusement, vous n'avez pas accès à cet agent IA.",
+  "AIAgentAccessRedirectNote": "Vous serez automatiquement redirigé vers la section {{sectionName}} dans 5 secondes."
 }

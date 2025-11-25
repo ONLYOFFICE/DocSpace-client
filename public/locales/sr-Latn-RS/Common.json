@@ -1071,5 +1071,6 @@
   "RoleAIAgentViewerDescription": "Gledaoci mogu da pregledaju samo datoteke u skladištu rezultata sa izlazima generisanim od strane drugih.\nOni nemaju pristup chatu ili bazi znanja.",
   "SelectorEmptyScreenHeaderKnowledge": "Ovde još uvek nema fajlova",
   "SelectorFilesLimit": "Maksimalno je dozvoljeno {{count}} fajlova",
-  "SelectorFilesLimitDescription": "Kada otpremate veliku količinu podataka, kontekst može biti delimično skraćen, što može smanjiti tačnost odgovora. Preporučuje se da ograničite broj fajlova i njihovu ukupnu veličinu."
+  "SelectorFilesLimitDescription": "Kada otpremate veliku količinu podataka, kontekst može biti delimično skraćen, što može smanjiti tačnost odgovora. Preporučuje se da ograničite broj fajlova i njihovu ukupnu veličinu.",
+  "Thinking": "Razmišljam"
 }

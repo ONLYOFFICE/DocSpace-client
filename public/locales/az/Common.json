@@ -1071,5 +1071,6 @@
   "YourTurn": "Sizin növbəniz",
   "RoleAIAgentContentCreatorDescription": "Kontent yaradıcıları çatdan istifadə edə və Nəticə yaddaşındakı fayllarla işləyə bilərlər.\nOnlar faylları məlumat bazasına yükləyə bilər, lakin istifadəçiləri idarə edə və ya agent parametrlərinə daxil ola bilməz.",
   "RoleAIAgentManagerDescription": "Agent menecerləri təyin edilmiş AI agentini idarə edə, yeni istifadəçiləri dəvət edə və onların səviyyəsindən aşağıdakılara rollar verə bilərlər.\nOnlar söhbətdən istifadə edə, bilik fayllarını yükləyə, Nəticə yaddaşı ilə işləyə və söhbət parametrlərini idarə edə bilərlər.",
-  "RoleAIAgentViewerDescription": "İzləyicilər yalnız başqaları tərəfindən yaradılan nəticələrlə Nəticə yaddaşındakı faylları görə bilərlər.\nOnların söhbətə və ya məlumat bazasına çıxışı yoxdur."
+  "RoleAIAgentViewerDescription": "İzləyicilər yalnız başqaları tərəfindən yaradılan nəticələrlə Nəticə yaddaşındakı faylları görə bilərlər.\nOnların söhbətə və ya məlumat bazasına çıxışı yoxdur.",
+  "Thinking": "Düşünmə"
 }

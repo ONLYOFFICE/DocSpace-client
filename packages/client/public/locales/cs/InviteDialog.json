@@ -21,5 +21,6 @@
   "UserAgentMaxAvailableRoleWarning": "Hosté a uživatelé nemohou být přidáni jako manažeři agentů. Pro danou roli jsou vhodní pouze administrátoři pokojů a {{productName}}.",
   "UserMaxAvailableRoleWarning": "Hosty a uživatele nelze přiřadit jako správce místnosti. Pro zadanou roli jsou vhodní pouze správci místností a {{productName}}.",
   "UsersAlreadyAdded": "Někteří uživatelé již byli přidáni",
-  "UsersCannotBeAdded": "Vypnuté kontakty nelze přidat do místnosti."
+  "UsersCannotBeAdded": "Vypnuté kontakty nelze přidat do místnosti.",
+  "GuestAgentMaxAvailableRoleWarning": "Hosté nemohou být přidáni jako tvůrci obsahu.\nPro tuto roli jsou způsobilí pouze administrátoři pokojů, administrátoři {{productName}} a Uživatelé."
 }

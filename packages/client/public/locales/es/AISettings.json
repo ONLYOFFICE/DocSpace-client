@@ -58,5 +58,6 @@
   "WebSearchDisabledSuccess": "Búsqueda web desactivada correctamente",
   "WebSearchEnabledSuccess": "Búsqueda web activada correctamente",
   "WebSearchKeyDescription": "Introduzca la clave de la API obtenida de su proveedor de búsqueda web",
-  "WebSearchKeyHiddenDescription": "La clave de la API sólo se muestra una vez al guardar y luego se oculta por motivos de seguridad."
+  "WebSearchKeyHiddenDescription": "La clave de la API sólo se muestra una vez al guardar y luego se oculta por motivos de seguridad.",
+  "MCPProductDescription": "El servidor {{organizationName}} {{productName}} MCP optimiza los flujos de trabajo impulsados por IA, integrando LLM con sistemas externos para una gestión de documentos eficiente y segura."
 }

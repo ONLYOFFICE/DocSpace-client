@@ -37,5 +37,7 @@
   "UserName": "Nome utente",
   "ViewerInfo": "Informzioni sul visualizzatore",
   "WatermarkPreview": "Anteprima della filigrana",
-  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file."
+  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file.",
+  "DisableRoomQuotaAgent": "Disabilita la quota per questo agente",
+  "StorageDescriptionAgent": "Quota di archiviazione impostata per agente. Puoi modificare questo valore o disattivare il limite di archiviazione."
 }

@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>注:</1> モデルによって応答品質は異なります。最新のモデルを使用すると最良の結果が得られます。",
   "ResultStorage": "結果ストレージ",
   "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",
-  "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする"
+  "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする",
+  "AgentInViewModeWarning": "このAIエージェントは<strong>閲覧専用</strong>モードで表示されています。他のユーザーのAIチャットアクティビティの結果を見ることができます。",
+  "EmptyResultsViewerDescription": "他のユーザーのAIチャットの活動結果は、利用可能になり次第こちらに表示されます。"
 }

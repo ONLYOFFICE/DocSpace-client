@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Aceste elemente vor fi şterse definitiv după 30 de zile.",
   "ItemsPermanentlyDeleted": "Aceste elemente vor fi şterse definitiv din {{trashSection}} de gunoi.",
   "removeFromListDescription": "Sunteți pe cale să eliminați <1>{{title}}</1> din listă. Sunteți sigur că doriți să continuați?",
-  "removeFromListDescriptionPlural": "Sunteți pe cale să eliminați <1>elemente ({{count}})</1> din listă. Sunteți sigur că doriți să continuați?"
+  "removeFromListDescriptionPlural": "Sunteți pe cale să eliminați <1>elemente ({{count}})</1> din listă. Sunteți sigur că doriți să continuați?",
+  "DeleteAIAgentChatTitle": "Șterge conversație?",
+  "DeleteAIChatDescription": "Pe cale să ștergeți <strong>{{chatName}}<1>.</1></strong>\n Toate mesajele și istoricul conversației vor fi șterse permanent și nu pot fi recuperate."
 }

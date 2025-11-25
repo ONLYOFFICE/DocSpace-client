@@ -286,5 +286,12 @@
   "WantToCancelUpload": "Da li želite da otkažete otpremanje?",
   "WantToContinue": "Da li želite da nastavite ili da promenite korisničku kvotu za skladište?",
   "WhiteLabelSubtitle": "Unesite naziv svoje kompanije, otpremite logotip i prilagodite stil da odgovara vašem brendu.",
-  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak."
+  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak.",
+  "AIAgentQuotaDisabled": "Kvota prostora za AI agenta je uspešno onemogućena.",
+  "AIAgentQuotaEnabled": "Kvota prostora za AI agenta je uspešno omogućena.",
+  "DefineQuotaPerAIAgent": "Definišite kvotu po AI agentu",
+  "ImportSectionDisabled": "Da biste uvezli {{importSectionName}}, prvo omogućite opciju „<1>{{sectionName}}</1>”.",
+  "QuotaPerAIAgent": "Kvota po AI agentu",
+  "SetDefaultAIAgentQuota": "Podesite podrazumevanu kvotu skladišta za AI agente u ovom {{productName}}. Može se kasnije prilagoditi u podešavanjima ili individualno pri kreiranju svakog AI agenta.",
+  "Top5AIAgents": "Top 5 AI agenata prema korišćenju skladišnog prostora:"
 }

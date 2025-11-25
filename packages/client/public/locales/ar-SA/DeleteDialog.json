@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "سيتم حذف هذه العناصر نهائيًا في غضون 30 يومًا. ",
   "ItemsPermanentlyDeleted": "سيتم حذف هذه العناصر نهائيًا من {{trashSection}}.",
   "removeFromListDescription": "أنتم على وشك إزالة <1>{{title}}</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟",
-  "removeFromListDescriptionPlural": "أنتم على وشك إزالة <1>عناصر ({{count}})</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟"
+  "removeFromListDescriptionPlural": "أنتم على وشك إزالة <1>عناصر ({{count}})</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟",
+  "DeleteAIAgentChatTitle": "حذف الدردشة؟",
+  "DeleteAIChatDescription": "أنت على وشك حذف <strong>{{chatName}}<1>.</1></strong> ستتم إزالة جميع الرسائل وسجل الدردشة نهائيًا ولا يمكن استعادتها."
 }

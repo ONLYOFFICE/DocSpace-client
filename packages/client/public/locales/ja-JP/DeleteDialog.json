@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "これらのアイテムは30日後に永久に削除されます。",
   "ItemsPermanentlyDeleted": "これらのアイテムは{{trashSection}}から永久に削除されます。",
   "removeFromListDescription": "<1>{{title}}</1> をリストから削除しようとしています。続行しますか？",
-  "removeFromListDescriptionPlural": "<1>{{count}}個のアイテム</1>をリストから削除しようとしています。続行しますか？"
+  "removeFromListDescriptionPlural": "<1>{{count}}個のアイテム</1>をリストから削除しようとしています。続行しますか？",
+  "DeleteAIAgentChatTitle": "チャットを削除しますか？",
+  "DeleteAIChatDescription": "削除しようとしています：<strong>{{chatName}}<1>.</1></strong>\nすべてのメッセージとチャット履歴が完全に削除され、復元できません。"
 }

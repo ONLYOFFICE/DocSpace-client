@@ -32,5 +32,7 @@
   "ItemsDeletedAfter": "Tyto položky budou trvale smazány za 30 dní.",
   "ItemsPermanentlyDeleted": "Tyto položky budou trvale odstraněny z {{trashSection}}.",
   "removeFromListDescription": "Odstraníte <1>{{title}}</1> ze seznamu. Jste si jistí, že chcete pokračovat?",
-  "removeFromListDescriptionPlural": "Odstraníte <1>položek ({{count}})</1>. Jste si jistí, že chcete pokračovat?"
+  "removeFromListDescriptionPlural": "Odstraníte <1>položek ({{count}})</1>. Jste si jistí, že chcete pokračovat?",
+  "DeleteAIChatDescription": "Mazat se chystáte <strong>{{chatName}}<1>.</1></strong>\n Všechny zprávy a historie chatu budou trvale smazány a nelze je obnovit.",
+  "DeleteAIAgentChatTitle": "Smazat chat?"
 }

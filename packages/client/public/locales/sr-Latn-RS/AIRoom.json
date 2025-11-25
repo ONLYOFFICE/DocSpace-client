@@ -14,5 +14,16 @@
   "ModelDescription": "Izaberite AI provajdera i model koji će se koristiti u razgovorima u ovoj sobi. Ovo podešavanje je obavezno i odnosi se na sve učesnike.",
   "ResultStorage": "Skladištenje rezultata",
   "UploadFilesDevice": "Otpremite datoteke sa svog ličnog uređaja",
-  "UploadFilesPortal": "Otpremite datoteke sa {{sectionNameFirst}} ili {{sectionNameSecond}}"
+  "UploadFilesPortal": "Otpremite datoteke sa {{sectionNameFirst}} ili {{sectionNameSecond}}",
+  "AIInstructions": "AI instrukcije",
+  "EmptyKnowledgeDescriptionActions": "Probajte ove radnje da biste započeli:",
+  "InstructionsDescriptionAgent": "Opišite kako AI agent treba da se ponaša i odgovara. Definišite njegovu ulogu, ton i glavne zadatke.",
+  "InstructionsDescriptionAgentExample": "Primer: „Vi ste AI PR asistent koji pomaže u pisanju i uređivanju saopštenja za medije. Održavajte profesionalan, samouveren i medijski prihvatljiv ton. Jasno istaknite ključne poruke, izbegavajte žargon i držite tekst konciznim i privlačnim.”",
+  "KnowledgeUnavailable": "Baza znanja je nedostupna",
+  "KnowledgeUnavailableDescription": "Baza znanja je trenutno onemogućena. Da biste aktivirali semantičko pretraživanje i obradu dokumenata za vaše AI agente, podesite provajdera vektorskih ugrađivanja u podešavanjima {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Baza znanja je trenutno onemogućena. Da biste aktivirali semantičko pretraživanje i obradu dokumenata za AI agente, kontaktirajte vašeg {{productName}} administratora da podesi provajdera vektorskih ugrađivanja.",
+  "MCPDescriptionServers": "Koristite MCP servere povezane od strane administratora da poboljšate iskustvo sa AI četom. MCP serveri mogu pomoći sa ekstrakcijom podataka, rezimeima, pametnim sugestijama itd.",
+  "ResponseQualityNode": "<1>Napomena:</1> Kvalitet odgovora može varirati u zavisnosti od modela; noviji modeli se preporučuju za najbolje rezultate.",
+  "AgentInViewModeWarning": "Nalazite se u režimu <strong>samo za pregled</strong> za ovog AI agenta. Možete videti rezultate aktivnosti AI ćaskanja od drugih korisnika.",
+  "EmptyResultsViewerDescription": "Videćete rezultate aktivnosti AI ćaskanja od drugih korisnika ovde čim budu dostupni."
 }

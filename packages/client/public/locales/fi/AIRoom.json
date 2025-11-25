@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",
   "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}",
   "AgentInViewModeWarning": "Olet <strong >vain luku</strong > -tilassa tälle tekoälyagentille. Voit nähdä muiden käyttäjien tekoälykeskustelujen tulokset.",
-  "EmptyResultsViewerDescription": "Täällä näet muiden käyttäjien tekoälykeskustelujen tulokset, kun ne ovat saatavilla."
+  "EmptyResultsViewerDescription": "Täällä näet muiden käyttäjien tekoälykeskustelujen tulokset, kun ne ovat saatavilla.",
+  "NoAccessAIAgentTitle": "Olen pahoillani, sinulla ei ole käyttöoikeutta tähän tekoälyavustajaan.",
+  "AIAgentAccessRedirectNote": "Ohjaat automaattisesti {{sectionName}}-osioon 5 sekunnissa."
 }

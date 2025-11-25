@@ -1071,5 +1071,6 @@
   "RoleAIAgentViewerDescription": "Les spectateurs ne peuvent consulter les fichiers que dans le stockage des résultats avec les sorties générées par d'autres. Ils n'ont pas accès au chat ni à la base de connaissances.",
   "SelectorEmptyScreenHeaderKnowledge": "Aucun fichier ici pour le moment",
   "SelectorFilesLimit": "Maximum {{count}} fichiers autorisés",
-  "SelectorFilesLimitDescription": "Lors du téléchargement d'une grande quantité de données, le contexte peut être partiellement tronqué, ce qui peut réduire la précision des réponses. Il est recommandé de limiter le nombre de fichiers et leur taille totale."
+  "SelectorFilesLimitDescription": "Lors du téléchargement d'une grande quantité de données, le contexte peut être partiellement tronqué, ce qui peut réduire la précision des réponses. Il est recommandé de limiter le nombre de fichiers et leur taille totale.",
+  "Thinking": "Réflexion"
 }

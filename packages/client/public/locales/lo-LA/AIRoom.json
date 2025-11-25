@@ -25,5 +25,7 @@
   "ResponseQualityNode": "<1>ໝາຍເຫດ:</1> ຄຸນນະພາບການຕອບສະໜອງອາດແຕກຕ່າງກັນໄປຕາມຮຸ່ນ; ແນະນຳໃຫ້ໃຊ້ຮຸ່ນໃໝ່ກວ່າເພື່ອໃຫ້ໄດ້ຜົນດີທີ່ສຸດ.",
   "ResultStorage": "ການເກັບຮັກສາຜົນໄດ້ຮັບ",
   "UploadFilesDevice": "ອັບໂຫຼດໄຟລ໌ຈາກອຸປະກອນສ່ວນຕົວຂອງທ່ານ",
-  "UploadFilesPortal": "ອັບໂຫຼດໄຟລ໌ຈາກ {{sectionNameFirst}} ຫຼື {{sectionNameSecond}}"
+  "UploadFilesPortal": "ອັບໂຫຼດໄຟລ໌ຈາກ {{sectionNameFirst}} ຫຼື {{sectionNameSecond}}",
+  "NoAccessAIAgentTitle": "ຂໍອະໄພ, ທ່ານບໍ່ມີສິດເຂົ້າເຖິງຕົວແທນ AI ນີ້",
+  "AIAgentAccessRedirectNote": "ທ່ານຈະຖືກປ່ຽນເສັ້ນທາງໄປຫາພາກສ່ວນ {{sectionName}} ໂດຍອັດຕະໂນມັດພາຍໃນ 5 ວິນາທີ."
 }

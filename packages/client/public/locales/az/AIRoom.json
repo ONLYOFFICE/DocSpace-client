@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Şəxsi cihazınızdan faylları yükləyin",
   "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin",
   "AgentInViewModeWarning": "Bu süni intellekt agenti üçün <strong>yalnız baxış</strong> rejimindəsiniz. Digər istifadəçilərin süni intellekt söhbət fəaliyyətinin nəticələrini görə bilərsiniz.",
-  "EmptyResultsViewerDescription": "Digər istifadəçilərin süni intellekt söhbət fəaliyyətinin nəticələrini onlar mövcud olduqdan sonra burada görəcəksiniz."
+  "EmptyResultsViewerDescription": "Digər istifadəçilərin süni intellekt söhbət fəaliyyətinin nəticələrini onlar mövcud olduqdan sonra burada görəcəksiniz.",
+  "NoAccessAIAgentTitle": "Bağışlayın, bu süni intellekt agentinə girişiniz yoxdur",
+  "AIAgentAccessRedirectNote": "5 saniyədən sonra siz {{sectionName}} bölməsinə avtomatik olaraq yönləndiriləcəksiniz."
 }

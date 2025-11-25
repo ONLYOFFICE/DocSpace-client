@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Augšupielādējiet failus no sava personīgā ierīces",
   "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}.",
   "AgentInViewModeWarning": "Jūs atrodaties <strong>tikai skatīšanai</strong> režīmā šim AI aģentam. Jūs varat redzēt AI čat aktivitātes rezultātus no citiem lietotājiem.",
-  "EmptyResultsViewerDescription": "Jūs redzēsiet AI čat aktivitātes rezultātus no citiem lietotājiem šeit, kad tie būs pieejami."
+  "EmptyResultsViewerDescription": "Jūs redzēsiet AI čat aktivitātes rezultātus no citiem lietotājiem šeit, kad tie būs pieejami.",
+  "NoAccessAIAgentTitle": "Atvainojiet, jums nav piekļuves šim AI aģentam.",
+  "AIAgentAccessRedirectNote": "Jūs tiksiet automātiski novirzīts uz {{sectionName}} sadaļu 5 sekundēs."
 }

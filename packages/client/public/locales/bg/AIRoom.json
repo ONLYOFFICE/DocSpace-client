@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Качете файлове от вашето лично устройство.",
   "UploadFilesPortal": "Качете файлове от {{sectionNameFirst}} или {{sectionNameSecond}}",
   "AgentInViewModeWarning": "Вие сте в режим <strong>само за четене</strong> за този AI агент. Можете да виждате резултатите от AI чат активността на други потребители.",
-  "EmptyResultsViewerDescription": "Ще видите резултатите от дейността на AI чат от други потребители тук, след като станат достъпни."
+  "EmptyResultsViewerDescription": "Ще видите резултатите от дейността на AI чат от други потребители тук, след като станат достъпни.",
+  "NoAccessAIAgentTitle": "Съжалявам, нямате достъп до този AI агент.",
+  "AIAgentAccessRedirectNote": "Ще бъдете автоматично пренасочени към секция {{sectionName}} след 5 секунди."
 }

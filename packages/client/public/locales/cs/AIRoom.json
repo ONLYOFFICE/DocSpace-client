@@ -23,5 +23,7 @@
   "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovědí se může lišit v závislosti na modelu; pro nejlepší výsledky se doporučují novější modely.",
   "ResultStorage": "Úložiště výsledků",
   "UploadFilesDevice": "Nahrajte soubory z vašeho osobního zařízení.",
-  "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}"
+  "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Jste v režimu <strong>pouze pro zobrazení</strong> pro tohoto AI agenta. Můžete vidět výsledky AI chat aktivit od ostatních uživatelů.",
+  "EmptyResultsViewerDescription": "Zde uvidíte výsledky aktivity AI chatu od ostatních uživatelů, jakmile budou dostupné."
 }

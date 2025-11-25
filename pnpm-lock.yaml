@@ -66,8 +66,8 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@onlyoffice/docspace-sdk-js':
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2976,9 +2976,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/docspace-sdk-js@2.0.0':
-    resolution: {integrity: sha512-Oqppiv0+1+81fkKCOLAoBcjN80TEJGb+a5GoOBKalkxgy4I4KSqPRiKuOnN+vSGn2nHNyO5787MGXoulLQqBNg==}
-    engines: {node: '>=22', pnpm: '>=9'}
+  '@onlyoffice/docspace-sdk-js@2.1.0':
+    resolution: {integrity: sha512-Jgqr6LblkWIW/m8OH1z8qm6DQ6AhoW07oMhQYSHZFVvwLEtTP0tMryZ+pOuXOCoh4/XHF/AwSKETkj89W0xgmw==}
+    engines: {node: '>=22', pnpm: '>=10'}
 
   '@onlyoffice/document-editor-react@2.1.1':
     resolution: {integrity: sha512-b0SnFPmT+OEyJons18PPHpwtFABVCI4nr3gPtAAImar1PhN9tNc9703Yo5KPYsHhIgVq+FqHSWgunI9GJnKa5w==}
@@ -7530,11 +7530,6 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
 
-  pnpm@10.20.0:
-    resolution: {integrity: sha512-z5mYIiFi3YWGTQqBAueJLnukzq3rv1ox+cL85I384xepxTufZGTR75BCy6LgKuAqn3wUOitDjNk8kYQPAZK53Q==}
-    engines: {node: '>=18.12'}
-    hasBin: true
-
   polished@4.3.1:
     resolution: {integrity: sha512-OBatVyC/N7SCW/FaDHrSd+vn0o5cS855TOmYi4OkdWUMSJCET/xip//ch8xGUvtr3i44X9LVyWwQlRMTN3pwSA==}
     engines: {node: '>=10'}
@@ -11575,9 +11570,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@21.5.2':
     optional: true
 
-  '@onlyoffice/docspace-sdk-js@2.0.0':
-    dependencies:
-      pnpm: 10.20.0
+  '@onlyoffice/docspace-sdk-js@2.1.0': {}
 
   '@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
@@ -16816,8 +16809,6 @@ snapshots:
       fsevents: 2.3.2
 
   pluralize@8.0.0: {}
-
-  pnpm@10.20.0: {}
 
   polished@4.3.1:
     dependencies:

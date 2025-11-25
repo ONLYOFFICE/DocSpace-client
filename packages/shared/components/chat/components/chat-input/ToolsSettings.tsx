@@ -44,7 +44,7 @@ import {
 } from "../../../../api/ai";
 import { ServerType } from "../../../../api/ai/enums";
 import { getOAuthToken } from "../../../../utils/common";
-import { getServerIcon } from "../../../../utils";
+import { getServerIcon, isMobile } from "../../../../utils";
 import { useTheme } from "../../../../hooks/useTheme";
 
 import { Text } from "../../../text";
@@ -154,9 +154,9 @@ const ToolsSettings = ({
     [MCPTools, roomId, setMCPTools],
   );
 
-  const onGoToWebSearchPage = () => {
+  const onGoToWebSearchPage = React.useCallback(() => {
     navigate("/portal-settings/ai-settings/search");
-  };
+  }, [navigate]);
 
   const openOauthWindow = async (serverId: string, type: string) => {
     const url = await openConnectWindow(type);
@@ -368,11 +368,14 @@ const ToolsSettings = ({
   }, [
     MCPTools,
     isBase,
+    isAdmin,
     servers,
     t,
     toggleTool,
     webSearchEnabled,
     webSearchPortalEnabled,
+    onGoToWebSearchPage,
+    onWebSearchToggle,
   ]);
 
   if (!isFetched) return;
@@ -401,7 +404,8 @@ const ToolsSettings = ({
           onHide={hideMcpTools}
           maxHeightLowerSubmenu={360}
           showDisabledItems
-          // ignoreChangeView
+          withBackdrop={isMobile()}
+          //ignoreChangeView
           headerOnlyMobile
           withoutBackHeaderButton
         />

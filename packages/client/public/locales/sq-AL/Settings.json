@@ -286,5 +286,12 @@
   "WantToCancelUpload": "Dëshironi ta anuloni ngarkimin?",
   "WantToContinue": "Dëshironi të vazhdoni apo të ndryshoni kuotën e ruajtjes së përdoruesit?",
   "WhiteLabelSubtitle": "Ngarkoni logove me sfond transparent (PNG, SVG, JPG) për tema të lehta dhe të errëta, ose gjeneroni një menjëherë duke futur logon tuaj më poshtë.",
-  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër."
+  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër.",
+  "AIAgentQuotaDisabled": "Kuota e agjentit AI është çaktivizuar me sukses.",
+  "AIAgentQuotaEnabled": "Kuota e agjentit AI është aktivizuar me sukses.",
+  "DefineQuotaPerAIAgent": "Përcaktoni kuotën për çdo agjent AI.",
+  "ImportSectionDisabled": "Për të importuar {{importSectionName}}, aktivizoni opsionin \"<1>{{sectionName}}</1>\" së pari.",
+  "QuotaPerAIAgent": "Kuota për agjent AI",
+  "SetDefaultAIAgentQuota": "Vendosni kuotën e parazgjedhur të hapësirës për agjentët AI në këtë {{productName}}. Mund të rregullohet më vonë në cilësime ose të personalizohet individualisht kur krijoni çdo agjent AI.",
+  "Top5AIAgents": "Top 5 agjentët AI sipas përdorimit të hapësirës:"
 }

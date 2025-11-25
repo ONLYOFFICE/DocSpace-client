@@ -14,5 +14,16 @@
   "ModelDescription": "Sélectionnez le fournisseur et le modèle d'IA à utiliser dans les discussions de cette salle. Ce paramètre est obligatoire et s'applique à tous les participants.",
   "ResultStorage": "Stockage des résultats",
   "UploadFilesDevice": "élécharger des fichiers depuis votre appareil personnel",
-  "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}"
+  "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Vous êtes en mode <strong>lecture seule</strong> pour cet agent IA. Vous pouvez voir les résultats de l'activité de chat IA des autres utilisateurs.",
+  "AIInstructions": "Instructions IA",
+  "EmptyKnowledgeDescriptionActions": "Essayez ces actions pour commencer :",
+  "EmptyResultsViewerDescription": "Vous verrez ici les résultats de l'activité de chat IA des autres utilisateurs une fois qu'ils seront disponibles.",
+  "InstructionsDescriptionAgent": "Décrivez comment l'agent IA doit se comporter et répondre. Définissez son rôle, son ton et ses tâches principales.",
+  "InstructionsDescriptionAgentExample": "Exemple : « Vous êtes un assistant IA en relations publiques qui aide à rédiger et modifier des communiqués de presse. Maintenez un ton professionnel, confiant et adapté aux médias. Mettez en évidence les messages clés de manière claire, évitez le jargon et gardez le texte concis et engageant. »",
+  "KnowledgeUnavailable": "Base de connaissances indisponible",
+  "KnowledgeUnavailableDescription": "La base de connaissances est actuellement désactivée. Pour activer la recherche sémantique et le traitement des documents pour vos agents IA, veuillez configurer le fournisseur d'embeddings dans les paramètres {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "La base de connaissances est actuellement désactivée. Pour activer la recherche sémantique et le traitement des documents pour les agents IA, veuillez contacter votre administrateur {{productName}} pour configurer le fournisseur d'embeddings.",
+  "MCPDescriptionServers": "Utilisez les serveurs MCP connectés par l'administrateur pour améliorer l'expérience de chat avec l'IA. Les serveurs MCP peuvent aider à l'extraction de données, aux résumés, aux suggestions intelligentes, etc.",
+  "ResponseQualityNode": "<1>Remarque :</1> La qualité des réponses peut varier selon le modèle ; les modèles plus récents sont recommandés pour de meilleurs résultats."
 }

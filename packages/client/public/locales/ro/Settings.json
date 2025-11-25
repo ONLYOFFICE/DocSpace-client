@@ -289,5 +289,9 @@
   "WantToCancelUpload": "Doriți să anulați încărcarea?",
   "WantToContinue": "Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?",
   "WhiteLabelSubtitle": "Introduceţi numele companiei dvs, încărcați sigla şi particularizați stilul pentru a se potrivi cu brandingul dvs.",
-  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare."
+  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
+  "DefineQuotaPerAIAgent": "Definează cota per agent AI",
+  "ImportSectionDisabled": "Pentru a importa {{importSectionName}}, activați mai întâi opțiunea \"<1>{{sectionName}}</1>\".",
+  "QuotaPerAIAgent": "Cota per agent AI",
+  "SetDefaultAIAgentQuota": "Stabilește cota de stocare implicită pentru agenții AI în {{productName}}. Aceasta poate fi ajustată ulterior în setări sau personalizată individual la crearea fiecărui agent AI."
 }

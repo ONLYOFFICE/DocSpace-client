@@ -42,5 +42,22 @@
   "ServiceIcon": "Ikona usluge",
   "SystemMCPListTitle": "Sistem",
   "ToUseAddProvider": "Da biste koristili {{value}}, uverite se da ste prvo povezali bar jednog provajdera.",
-  "WebSearchKeyHiddenDescription": "API ključ se prikazuje samo jednom nakon čuvanja, a zatim je skriven iz bezbednosnih razloga."
+  "WebSearchKeyHiddenDescription": "API ključ se prikazuje samo jednom nakon čuvanja, a zatim je skriven iz bezbednosnih razloga.",
+  "KnowledgeDisabledSuccess": "Baza znanja je uspešno onemogućena",
+  "KnowledgeEnabledSuccess": "Baza znanja je uspešno omogućena",
+  "KnowledgeSettingsDescription": "Omogućite bazu znanja za AI agente. Sistem će indeksirati vaše dokumente pomoću modela {{modelName}} kako bi podržao pretraživanje zasnovano na pitanjima kroz vaše podatke. Ova funkcija je fokusirana na pronalaženje relevantnih informacija, ali ne generiše rezimee niti globalnu analizu.",
+  "MCPServerAdvancedSettingsHint": "Ovaj odeljak vam omogućava da prosledite dodatne HTTP zaglavlja, kao što su autorizacioni tokeni.",
+  "MCPServerDescriptionHint": "Napišite kratko objašnjenje svrhe integracije",
+  "MCPServerIntegrationURLHint": "Unesite MCP server adresu koju vam je dostavila vaša usluga",
+  "MCPSettingsDescription": "Ovaj odeljak vam omogućava da upravljate MCP serverima za AI četove u okviru soba. Možete omogućiti sistemske MCP servere ili dodati prilagođene radi ispunjavanja potreba vaše kompanije. Kada se omoguće, ovi serveri će biti dostupni drugim korisnicima za njihove zadatke.",
+  "ProviderKeyInputHint": "Unesite API ključ generisan na kontrolnoj tabli vašeg AI provajdera",
+  "ProviderNameInputHint": "Koristite bilo koje ime koje vam odgovara za identifikaciju ove konekcije",
+  "ProviderUnavailableError": "AI provajder nije dostupan",
+  "ProviderURLInputHint": "Unesite URL API krajnje tačke koju je obezbedio vaš AI servis",
+  "ResetKnowledgeDescription": "Ova radnja će ukloniti konfigurisan API ključ i onemogućiti indeksiranje dokumenata za bazu znanja. Dodavanje novih dokumenata u bazu znanja i rad sa njima neće biti dostupni dok se ne obezbedi novi ključ.",
+  "ResetWebSearchDescription": "Ova radnja će ukloniti konfigurisan API ključ i isključiti integraciju za veb pretragu. AI četovi više neće imati pristup informacijama u realnom vremenu sa interneta dok se ne doda novi ključ.",
+  "WebSearchDisabledSuccess": "Veb pretraga je uspešno onemogućena",
+  "WebSearchEnabledSuccess": "Veb pretraga je uspešno omogućena",
+  "WebSearchKeyDescription": "Unesite API ključ dobijen od vašeg provajdera veb pretrage",
+  "KnowledgeKeyDescription": "Unesite API ključ dobijen od vašeg provajdera baze znanja"
 }

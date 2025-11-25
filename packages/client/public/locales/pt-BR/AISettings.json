@@ -42,5 +42,22 @@
   "ServiceIcon": "Ícone de serviço",
   "SystemMCPListTitle": "Sistema",
   "ToUseAddProvider": "Para usar {{value}}, certifique-se de conectar pelo menos um provedor primeiro.",
-  "WebSearchKeyHiddenDescription": "A chave API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança."
+  "WebSearchKeyHiddenDescription": "A chave API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança.",
+  "KnowledgeDisabledSuccess": "Base de conhecimento desativada com sucesso",
+  "KnowledgeEnabledSuccess": "Base de conhecimento ativada com sucesso",
+  "KnowledgeKeyDescription": "Insira a chave de API obtida do seu provedor de base de conhecimento",
+  "KnowledgeSettingsDescription": "Habilite uma base de conhecimento para agentes de IA. O sistema irá indexar seus documentos usando o modelo {{modelName}} para suportar a busca baseada em perguntas através de seus dados. Este recurso se concentra em encontrar informações relevantes, mas não gera resumos nem realiza análises globais.",
+  "MCPServerAdvancedSettingsHint": "Use esta seção para passar cabeçalhos HTTP adicionais, como tokens de autorização.",
+  "MCPServerDescriptionHint": "Escreva uma breve explicação do propósito da integração.",
+  "MCPServerIntegrationURLHint": "Insira o endereço do servidor MCP fornecido pelo seu serviço.",
+  "MCPSettingsDescription": "Esta seção permite que você gerencie servidores MCP para chats de IA dentro de salas. Você pode habilitar servidores MCP do sistema ou adicionar servidores personalizados para atender às necessidades da sua empresa. Uma vez habilitados, esses servidores estarão acessíveis a outros usuários para suas tarefas.",
+  "ProviderKeyInputHint": "Insira a chave da API gerada no painel do seu provedor de IA",
+  "ProviderNameInputHint": "Use qualquer nome que seja conveniente para você identificar esta conexão.",
+  "ProviderUnavailableError": "O provedor de IA está indisponível.",
+  "ProviderURLInputHint": "Insira o URL do endpoint da API fornecido pelo seu serviço de IA",
+  "ResetKnowledgeDescription": "Esta ação removerá a chave de API configurada e desativará a indexação de documentos para a base de conhecimento. Adicionar novos documentos à base de conhecimento e trabalhar com eles ficará indisponível até que uma nova chave seja fornecida.",
+  "ResetWebSearchDescription": "Esta ação removerá a chave da API configurada e desconectará a integração de pesquisa na web. As conversas com IA não poderão mais acessar informações em tempo real da internet até que uma nova chave seja adicionada.",
+  "WebSearchDisabledSuccess": "Pesquisa na web desativada com sucesso",
+  "WebSearchEnabledSuccess": "Pesquisa na web ativada com sucesso",
+  "WebSearchKeyDescription": "Introduza a chave API obtida do seu provedor de pesquisa web"
 }

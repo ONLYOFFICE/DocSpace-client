@@ -1068,5 +1068,8 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "RoleAIAgentContentCreatorDescription": "Tvorci obsahu mohou používat chat a pracovat se soubory v úložišti výsledků.\nMohou nahrávat soubory do znalostní báze, ale nemohou spravovat uživatele nebo přistupovat k nastavení agenta.",
+  "RoleAIAgentManagerDescription": "Manažeři agentů mohou spravovat přiřazeného AI agenta, pozývat nové uživatele a přidělovat role pod svou úrovní.\nMohou používat chat, nahrávat soubory s poznatky, pracovat s úložištěm výsledků a spravovat nastavení chatu.",
+  "RoleAIAgentViewerDescription": "Diváci mohou prohlížet soubory pouze v úložišti výsledků s výstupy generovanými ostatními.\nNemají přístup do chatu ani do znalostní báze."
 }

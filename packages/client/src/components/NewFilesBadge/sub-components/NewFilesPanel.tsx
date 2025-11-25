@@ -83,10 +83,11 @@ export const NewFilesPanelComponent = ({
 
     const folderIDs: (string | number)[] = [];
 
-    if (isRooms) {
+    if (isRooms || isAgents) {
       data.forEach(({ items }) => {
         items.forEach((item) => {
           if ("room" in item) folderIDs.push(item.room.id);
+          if ("agent" in item) folderIDs.push(item.agent.id);
         });
       });
     } else {
@@ -97,7 +98,15 @@ export const NewFilesPanelComponent = ({
     setIsMarkAsReadRunning(false);
 
     onClose();
-  }, [folderId, isMarkAsReadRunning, isRooms, data, markAsRead, onClose]);
+  }, [
+    folderId,
+    isMarkAsReadRunning,
+    isRooms,
+    isAgents,
+    data,
+    markAsRead,
+    onClose,
+  ]);
 
   React.useEffect(() => {
     return () => {

@@ -218,5 +218,6 @@
   "WillBeDeletedPermanently": "{{date}} sera supprimé définitivement",
   "YouLeftTheAgent": "Vous avez quitté l'agent",
   "YouLeftTheRoom": "Vous avez quitté la salle",
-  "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>“{{userType}}”</1> par l'administrateur de {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>“{{userType}}”</1> par l'administrateur de {{productName}} <1>{{adminName}}</1>.",
+  "SharedBy": "Partagé par"
 }

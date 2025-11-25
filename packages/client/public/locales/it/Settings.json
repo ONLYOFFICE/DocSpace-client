@@ -281,5 +281,17 @@
   "WantToCancelUpload": "Vuoi annullare il caricamento?",
   "WantToContinue": "Vuoi continuare o modificare la quota di archiviazione degli utenti?",
   "WhiteLabelSubtitle": "Inserisci il nome della tua azienda, carica il logo e personalizza lo stile in modo che corrisponda al tuo marchio.",
-  "WithoutEmailHint": "Non hai utenti senza email. Ti preghiamo di procedere al passaggio successivo."
+  "WithoutEmailHint": "Non hai utenti senza email. Ti preghiamo di procedere al passaggio successivo.",
+  "AccountsUsersWithoutEmails": "Abbiamo trovato <1>{{users}}</1> utenti senza email. Puoi aggiungere i dati necessari ai loro account nel passaggio successivo.",
+  "AccountsWithoutEmails": "Abbiamo trovato <1>{{users}}</1> utenti senza email. Puoi compilare le loro email o continuare senza questa azione.",
+  "AISettings": "Impostazioni AI",
+  "DataImportAdminLimitExceeded": "Limite amministratori superato. Per continuare, regola il numero di amministratori o aumenta il limite degli amministratori.",
+  "GroupsSectionDescription": "Gli utenti che hai selezionato nel passaggio precedente verranno importati nei gruppi creati in {{serviceName}}. I gruppi appariranno nella sezione <1>{{sectionName}}</1>.",
+  "ImportFilesDescription": "I file e i documenti degli utenti verranno importati in <1>{{sectionName}}</1>.",
+  "ResetSettings": "Reimposta impostazioni",
+  "SharedFilesAndFolders": "File e cartelle condivisi",
+  "SharedFilesAndFoldersDescription": "I file e le cartelle condivisi da altri utenti verranno importati in <1>{{sectionName}}</1>.<br><1>Attenzione:</1> alcuni diritti di accesso potrebbero andare persi durante l’importazione.",
+  "SharedFilesAndFoldersDetails": "File e cartelle condivisi",
+  "ImportSectionDisabled": "Per importare {{importSectionName}}, abilita prima l'opzione \"<1>{{sectionName}}</1>\".",
+  "QuotaPerAIAgent": "Quota per agente AI"
 }

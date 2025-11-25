@@ -25,5 +25,7 @@
   "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",
   "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする",
   "AgentInViewModeWarning": "このAIエージェントは<strong>閲覧専用</strong>モードで表示されています。他のユーザーのAIチャットアクティビティの結果を見ることができます。",
-  "EmptyResultsViewerDescription": "他のユーザーのAIチャットの活動結果は、利用可能になり次第こちらに表示されます。"
+  "EmptyResultsViewerDescription": "他のユーザーのAIチャットの活動結果は、利用可能になり次第こちらに表示されます。",
+  "NoAccessAIAgentTitle": "申し訳ありませんが、このAIエージェントへのアクセス権がありません。",
+  "AIAgentAccessRedirectNote": "5秒後に {{sectionName}} セクションに自動的にリダイレクトされます。"
 }

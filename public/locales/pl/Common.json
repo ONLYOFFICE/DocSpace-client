@@ -1071,5 +1071,6 @@
   "YourTurn": "Twoja kolej",
   "RoleAIAgentContentCreatorDescription": "Twórcy treści mogą korzystać z czatu i pracować z plikami w magazynie wyników.\nMogą wgrywać pliki do bazy wiedzy, ale nie mogą zarządzać użytkownikami ani uzyskiwać dostępu do ustawień agenta.",
   "RoleAIAgentManagerDescription": "Menedżerowie agentów mogą zarządzać przypisanym agentem AI, zapraszać nowych użytkowników i przydzielać role na niższym poziomie.\nMogą korzystać z czatu, wgrywać pliki wiedzy, pracować z przechowywaniem wyników i zarządzać ustawieniami czatu.",
-  "RoleAIAgentViewerDescription": "Osoby oglądające mogą przeglądać tylko pliki w przestrzeni dyskowej wyników z wyjściami wygenerowanymi przez innych.\nNie mają dostępu do czatu ani bazy wiedzy."
+  "RoleAIAgentViewerDescription": "Osoby oglądające mogą przeglądać tylko pliki w przestrzeni dyskowej wyników z wyjściami wygenerowanymi przez innych.\nNie mają dostępu do czatu ani bazy wiedzy.",
+  "Thinking": "Myślenie"
 }

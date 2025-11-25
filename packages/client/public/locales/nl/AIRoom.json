@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Upload bestanden vanaf uw persoonlijke apparaat",
   "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}",
   "AgentInViewModeWarning": "Je bevindt je in <strong>view-only</strong> modus voor deze AI agent. Je kunt de resultaten van AI chat activiteit van andere gebruikers zien.",
-  "EmptyResultsViewerDescription": "U ziet hier de resultaten van AI-chatactiviteit van andere gebruikers zodra deze beschikbaar zijn."
+  "EmptyResultsViewerDescription": "U ziet hier de resultaten van AI-chatactiviteit van andere gebruikers zodra deze beschikbaar zijn.",
+  "NoAccessAIAgentTitle": "Het spijt ons, u heeft geen toegang tot deze AI-agent.",
+  "AIAgentAccessRedirectNote": "U wordt automatisch doorgestuurd naar de {{sectionName}} sectie in 5 seconden."
 }

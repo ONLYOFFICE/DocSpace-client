@@ -1071,5 +1071,6 @@
   "CreateAgent": "创建代理",
   "NothingToShowYet": "还没有内容显示",
   "RoleAIAgentContentCreatorDescription": "内容创作者可以使用聊天功能并使用结果存储中的文件。\n他们可以上传文件到知识库，但无法管理用户或访问代理设置。",
-  "RoleAIAgentManagerDescription": "代理管理员可以管理分配的AI代理，邀请新用户，并分配其级别以下的权限。他们可以使用聊天功能，上传知识文件，使用结果存储，并管理聊天设置。"
+  "RoleAIAgentManagerDescription": "代理管理员可以管理分配的AI代理，邀请新用户，并分配其级别以下的权限。他们可以使用聊天功能，上传知识文件，使用结果存储，并管理聊天设置。",
+  "Thinking": "正在思考中"
 }

@@ -1071,5 +1071,6 @@
   "CreateAgent": "Crie agente",
   "InvitationToAgent": "<1>{{displayName}}</1> convida você para se juntar ao agente de IA <1>{{agentName}}</1>.",
   "NothingToShowYet": "Ainda não há nada para mostrar.",
-  "RoleAIAgentContentCreatorDescription": "Criadores de conteúdo podem usar o chat e trabalhar com arquivos no armazenamento de resultados.\nEles podem enviar arquivos para a base de conhecimento, mas não podem gerenciar usuários ou acessar as configurações do agente."
+  "RoleAIAgentContentCreatorDescription": "Criadores de conteúdo podem usar o chat e trabalhar com arquivos no armazenamento de resultados.\nEles podem enviar arquivos para a base de conhecimento, mas não podem gerenciar usuários ou acessar as configurações do agente.",
+  "Thinking": "Pensando"
 }

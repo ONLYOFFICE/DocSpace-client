@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Tải lên tệp từ thiết bị cá nhân của bạn.",
   "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
   "AgentInViewModeWarning": "Bạn đang ở chế độ <strong>chỉ xem</strong> cho tác nhân AI này. Bạn có thể xem kết quả hoạt động trò chuyện AI từ những người dùng khác.",
-  "EmptyResultsViewerDescription": "Bạn sẽ thấy kết quả hoạt động trò chuyện AI từ những người dùng khác ở đây khi chúng có sẵn."
+  "EmptyResultsViewerDescription": "Bạn sẽ thấy kết quả hoạt động trò chuyện AI từ những người dùng khác ở đây khi chúng có sẵn.",
+  "NoAccessAIAgentTitle": "Xin lỗi, bạn không có quyền truy cập vào trợ lý AI này.",
+  "AIAgentAccessRedirectNote": "Bạn sẽ tự động chuyển đến phần {{sectionName}} trong 5 giây."
 }

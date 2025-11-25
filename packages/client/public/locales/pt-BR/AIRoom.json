@@ -25,5 +25,7 @@
   "ResponseQualityNode": "<1>Nota:</1> A qualidade da resposta pode variar dependendo do modelo; modelos mais recentes são recomendados para melhores resultados.",
   "InstructionsDescriptionAgent": "Descreva como o agente de IA deve se comportar e responder. Defina seu papel, tom e principais tarefas.",
   "AgentInViewModeWarning": "Você está em modo <strong>somente visualização</strong> para este agente de IA. Você pode ver os resultados da atividade do chat de IA de outros usuários.",
-  "EmptyResultsViewerDescription": "Você verá os resultados da atividade do chat de IA de outros usuários aqui assim que estiverem disponíveis."
+  "EmptyResultsViewerDescription": "Você verá os resultados da atividade do chat de IA de outros usuários aqui assim que estiverem disponíveis.",
+  "NoAccessAIAgentTitle": "Desculpe, você não tem acesso a este agente de IA.",
+  "AIAgentAccessRedirectNote": "Você será redirecionado para a seção {{sectionName}} em 5 segundos."
 }

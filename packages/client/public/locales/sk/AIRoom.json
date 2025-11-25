@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Nahrajte súbory z vášho osobného zariadenia.",
   "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}",
   "AgentInViewModeWarning": "Ste v režime <strong>iba na prezeranie</strong> pre tohto AI agenta. Môžete vidieť výsledky AI chatovacej aktivity od iných používateľov.",
-  "EmptyResultsViewerDescription": "Tu uvidíte výsledky aktivity AI chat od iných používateľov, keď budú dostupné."
+  "EmptyResultsViewerDescription": "Tu uvidíte výsledky aktivity AI chat od iných používateľov, keď budú dostupné.",
+  "NoAccessAIAgentTitle": "Prepáčte, nemáte prístup k tomuto AI agentovi.",
+  "AIAgentAccessRedirectNote": "Budete automaticky presmerovaní do sekcie {{sectionName}} o 5 sekúnd."
 }

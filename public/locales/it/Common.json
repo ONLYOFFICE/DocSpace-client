@@ -1071,5 +1071,6 @@
   "NothingToShowYet": "Ancora niente da mostrare",
   "RoleAIAgentContentCreatorDescription": "I creatori di contenuti possono utilizzare la chat e lavorare con i file nell'archiviazione risultati.\nPossono caricare file nella knowledge base ma non possono gestire gli utenti o accedere alle impostazioni dell'agente.",
   "RoleAIAgentManagerDescription": "I responsabili degli agenti possono gestire l'agente AI assegnato, invitare nuovi utenti e assegnare ruoli di livello inferiore.\nPossono utilizzare la chat, caricare file di conoscenza, lavorare con l'archiviazione risultati e gestire le impostazioni della chat.",
-  "RoleAIAgentViewerDescription": "Gli spettatori possono visualizzare solo i file nell'archiviazione risultati con output generati da altri.\nNon hanno accesso alla chat o alla knowledge base."
+  "RoleAIAgentViewerDescription": "Gli spettatori possono visualizzare solo i file nell'archiviazione risultati con output generati da altri.\nNon hanno accesso alla chat o alla knowledge base.",
+  "Thinking": "Elaborazione"
 }

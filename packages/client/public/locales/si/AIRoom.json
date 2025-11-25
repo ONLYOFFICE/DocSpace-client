@@ -25,5 +25,7 @@
   "ResponseQualityNode": "<1>සටහන:</1> ප්‍රතිචාර ගුණාත්මකභාවය මාදිලිය අනුව වෙනස් විය හැකිය; හොඳම ප්‍රතිඵල සඳහා නව මාදිලි නිර්දේශ කෙරේ.",
   "ResultStorage": "ප්‍රතිඵල ගබඩාව",
   "UploadFilesDevice": "ඔබගේ පුද්ගලික උපාංගයෙන් ගොනු උඩුගත කරන්න",
-  "UploadFilesPortal": "{{sectionNameFirst}} හෝ {{sectionNameSecond}} වෙතින් ගොනු උඩුගත කරන්න"
+  "UploadFilesPortal": "{{sectionNameFirst}} හෝ {{sectionNameSecond}} වෙතින් ගොනු උඩුගත කරන්න",
+  "NoAccessAIAgentTitle": "කණගාටුයි, ඔබට මෙම AI නියෝජිතයා වෙත ප්‍රවේශය නොමැත.",
+  "AIAgentAccessRedirectNote": "තත්පර 5 කින් ඔබව ස්වයංක්‍රීයව {{sectionName}} කොටසට හරවා යවනු ලැබේ."
 }

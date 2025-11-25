@@ -1071,5 +1071,6 @@
   "ChatSuccessDeleted": "チャットを正常に削除しました。",
   "ChatHistory": "チャット履歴",
   "AIToolsHint": "AIツールと連携",
-  "AddFiles": "ファイルを追加"
+  "AddFiles": "ファイルを追加",
+  "Thinking": "思考中…"
 }

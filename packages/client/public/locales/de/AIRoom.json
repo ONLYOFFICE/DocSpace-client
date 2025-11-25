@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Laden Sie Dateien von Ihrem persönlichen Gerät hoch",
   "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch",
   "AgentInViewModeWarning": "Sie befinden sich für diesen KI-Agenten im <strong>Nur-Anzeige</strong>-Modus. Sie können die Ergebnisse der KI-Chataktivitäten anderer Nutzer einsehen.",
-  "EmptyResultsViewerDescription": "Die Ergebnisse der KI-Chataktivitäten anderer Nutzer werden Ihnen hier angezeigt, sobald sie verfügbar sind."
+  "EmptyResultsViewerDescription": "Die Ergebnisse der KI-Chataktivitäten anderer Nutzer werden Ihnen hier angezeigt, sobald sie verfügbar sind.",
+  "NoAccessAIAgentTitle": "Leider haben Sie keinen Zugriff auf diesen KI-Agenten",
+  "AIAgentAccessRedirectNote": "Sie werden in 5 Sekunden automatisch zum Abschnitt {{sectionName}} weitergeleitet."
 }

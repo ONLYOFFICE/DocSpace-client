@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Naložite datoteke iz vaše osebne naprave.",
   "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}",
   "AgentInViewModeWarning": "Nahajate se v načinu <strong>le za ogled</strong> za tega umetnega inteligence. Lahko vidite rezultate dejavnosti klepeta z umetno inteligenco od drugih uporabnikov.",
-  "EmptyResultsViewerDescription": "Tukaj boste videli rezultate dejavnosti klepetalnega asistenta drugih uporabnikov, ko bodo na voljo."
+  "EmptyResultsViewerDescription": "Tukaj boste videli rezultate dejavnosti klepetalnega asistenta drugih uporabnikov, ko bodo na voljo.",
+  "NoAccessAIAgentTitle": "Žal nimáte dostopa do tega AI agenta.",
+  "AIAgentAccessRedirectNote": "Samodejno boste preusmerjeni v razdelek {{sectionName}} v 5 sekundah."
 }

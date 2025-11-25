@@ -25,5 +25,7 @@
   "MCPDescriptionServers": "Koristite MCP servere povezane od strane administratora da poboljšate iskustvo sa AI četom. MCP serveri mogu pomoći sa ekstrakcijom podataka, rezimeima, pametnim sugestijama itd.",
   "ResponseQualityNode": "<1>Napomena:</1> Kvalitet odgovora može varirati u zavisnosti od modela; noviji modeli se preporučuju za najbolje rezultate.",
   "AgentInViewModeWarning": "Nalazite se u režimu <strong>samo za pregled</strong> za ovog AI agenta. Možete videti rezultate aktivnosti AI ćaskanja od drugih korisnika.",
-  "EmptyResultsViewerDescription": "Videćete rezultate aktivnosti AI ćaskanja od drugih korisnika ovde čim budu dostupni."
+  "EmptyResultsViewerDescription": "Videćete rezultate aktivnosti AI ćaskanja od drugih korisnika ovde čim budu dostupni.",
+  "NoAccessAIAgentTitle": "Izvinite, nemate pristup ovom AI agentu",
+  "AIAgentAccessRedirectNote": "Automatski ćete biti vraćeni na {{sectionName}} odeljak za 5 sekundi."
 }

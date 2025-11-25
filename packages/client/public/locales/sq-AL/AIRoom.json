@@ -25,5 +25,7 @@
   "InstructionsDescriptionAgentExample": "Shembull: “Ju jeni një asistent AI PR që ndihmon në shkrimin dhe redaktimin e komunikatave për media. Mbani një ton profesional, të sigurt dhe miqësor për mediat. Nxirrni qartë mesazhet kryesore, shmangni zhargonin dhe mbani tekstin të qartë dhe tërheqës.”",
   "KnowledgeUnavailable": "Baza e njohurive e paaktive",
   "AgentInViewModeWarning": "Jeni në modalitet <strong>vetëm shikim</strong> për këtë agent AI. Mund të shihni rezultatet e aktivitetit të bisedës AI nga përdorues të tjerë.",
-  "EmptyResultsViewerDescription": "Do të shihni rezultatet e aktivitetit të bisedës AI nga përdorues të tjerë këtu kur bëhen të disponueshme."
+  "EmptyResultsViewerDescription": "Do të shihni rezultatet e aktivitetit të bisedës AI nga përdorues të tjerë këtu kur bëhen të disponueshme.",
+  "NoAccessAIAgentTitle": "Më vjen keq, ju nuk keni qasje në këtë agent AI.",
+  "AIAgentAccessRedirectNote": "Ju do të ridrehtoheni automatikisht në seksionin {{sectionName}} në 5 sekonda."
 }

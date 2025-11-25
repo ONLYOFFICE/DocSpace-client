@@ -25,5 +25,7 @@
   "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
   "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}",
   "AgentInViewModeWarning": "Jesteś w trybie <strong>tylko do odczytu</strong> dla tego agenta AI. Możesz zobaczyć wyniki aktywności czatu AI od innych użytkowników.",
-  "EmptyResultsViewerDescription": "Wraz z ich dostępnością, tutaj zobaczysz wyniki aktywności czatu AI od innych użytkowników."
+  "EmptyResultsViewerDescription": "Wraz z ich dostępnością, tutaj zobaczysz wyniki aktywności czatu AI od innych użytkowników.",
+  "NoAccessAIAgentTitle": "Przepraszamy, nie masz dostępu do tego agenta AI.",
+  "AIAgentAccessRedirectNote": "Zostaniesz automatycznie przekierowany do sekcji {{sectionName}} za 5 sekund."
 }

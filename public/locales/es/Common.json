@@ -1071,5 +1071,6 @@
   "NothingToShowYet": "Nada que mostrar todavía",
   "RoleAIAgentContentCreatorDescription": "Los creadores de contenido pueden usar el chat y trabajar con archivos en el almacenamiento de resultados.\nPueden subir archivos a la base de conocimiento pero no pueden administrar usuarios ni acceder a la configuración del agente.",
   "RoleAIAgentManagerDescription": "Los administradores de agentes pueden gestionar el agente de IA asignado, invitar a nuevos usuarios y asignar roles por debajo de su nivel. Pueden usar el chat, cargar archivos de conocimiento, trabajar con el almacenamiento de resultados y gestionar la configuración del chat.",
-  "RoleAIAgentViewerDescription": "Los espectadores solo pueden ver archivos en el almacenamiento de resultados con salidas generadas por otros. No tienen acceso al chat ni a la base de conocimientos."
+  "RoleAIAgentViewerDescription": "Los espectadores solo pueden ver archivos en el almacenamiento de resultados con salidas generadas por otros. No tienen acceso al chat ni a la base de conocimientos.",
+  "Thinking": "Pensando"
 }

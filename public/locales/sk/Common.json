@@ -1071,5 +1071,6 @@
   "YourTurn": "Ste na rade",
   "RoleAIAgentContentCreatorDescription": "Tvorcovia obsahu môžu používať chat a pracovať so súbormi v úložisku výsledkov.\nMôžu nahrávať súbory do databázy vedomostí, ale nemôžu spravovať používateľov ani pristupovať k nastaveniam agenta.",
   "RoleAIAgentManagerDescription": "Manažéri agentov môžu spravovať prideleného AI agenta, pozývať nových používateľov a prideľovať role pod ich úrovňou.\nMôžu používať chat, nahrávať súbory s vedomosťami, pracovať s úložiskom výsledkov a spravovať nastavenia chatu.",
-  "RoleAIAgentViewerDescription": "Poznávatelia môžu prezerať súbory iba v úložisku výsledkov s výstupmi generovanými inými.\nNemajú prístup do chatu ani do databázy znalostí."
+  "RoleAIAgentViewerDescription": "Poznávatelia môžu prezerať súbory iba v úložisku výsledkov s výstupmi generovanými inými.\nNemajú prístup do chatu ani do databázy znalostí.",
+  "Thinking": "Premýšľanie"
 }

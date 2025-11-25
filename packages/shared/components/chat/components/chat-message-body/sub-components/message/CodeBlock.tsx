@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
@@ -38,16 +39,23 @@ import { useTheme } from "../../../../../../hooks/useTheme";
 import { Text } from "../../../../../text";
 import { IconButton } from "../../../../../icon-button";
 import { Scrollbar } from "../../../../../scrollbar";
+import { toastr } from "../../../../../toast";
 
 import styles from "../../ChatMessageBody.module.scss";
 
 import { MessageCodeBlockProps } from "../../../../Chat.types";
 
-const CodeBlock = ({ language, content }: MessageCodeBlockProps) => {
+const CodeBlock = ({
+  language,
+  content,
+  successCopyMessage,
+}: MessageCodeBlockProps) => {
   const { isBase } = useTheme();
+  const { t } = useTranslation(["Common"]);
 
   const onCopy = () => {
     copy(content);
+    toastr.success(successCopyMessage ?? t("Common:CopiedToClipboard"));
   };
 
   return (

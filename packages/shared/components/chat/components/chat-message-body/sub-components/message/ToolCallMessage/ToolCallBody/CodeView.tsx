@@ -77,6 +77,7 @@ export const CodeView = ({
         </Text>
         <MarkdownField
           chatMessage={formatJsonWithMarkdown(content.arguments)}
+          successCopyMessage={t("Common:ToolCallArgCopied")}
         />
       </div>
       {showResult ? (
@@ -89,6 +90,7 @@ export const CodeView = ({
               isJson ? JSON.parse(result) : result,
             )}
             propLanguage={isErrorResult && !isJson ? "text" : undefined}
+            successCopyMessage={t("Common:ToolCallResultCopied")}
           />
         </div>
       ) : null}

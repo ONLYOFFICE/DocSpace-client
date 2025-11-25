@@ -139,8 +139,9 @@ const useAgentsHelper = ({
       const itemList: TSelectorItem[] = convertRoomsToItems(folders, t)
         .filter((x) => (excludeItems ? !excludeItems.includes(x.id) : true))
         .map((item) => {
+          const security = item.security as TRoomSecurity | undefined;
           const isDisabledBySecurity = disableBySecurity
-            ? !item.security?.[disableBySecurity as keyof TRoomSecurity]
+            ? !security?.[disableBySecurity as keyof TRoomSecurity]
             : false;
           return {
             ...item,

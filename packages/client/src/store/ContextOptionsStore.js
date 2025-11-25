@@ -85,6 +85,7 @@ import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.re
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
+import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -2465,7 +2466,7 @@ class ContextOptionsStore {
       {
         groupKey: "more-options",
         groupLabel: t("Common:MoreOptions"),
-        groupIcon: SettingsReactSvgUrl, // TODO: MENU
+        groupIcon: DotsHorizontalUrl,
         itemKeys: [
           [
             { key: "save-as-template" },
@@ -2479,44 +2480,8 @@ class ContextOptionsStore {
           [{ key: "change-room-owner" }],
         ],
         needsGrouping: true,
-        minItemsCount: 3, // TODO: MENU
+        minItemsCount: 3,
       },
-      // {
-      //   groupKey: "manage",
-      //   groupLabel: t("Common:Manage"),
-      //   groupIcon: SettingsReactSvgUrl,
-      //   itemKeys: [
-      //     [
-      //       // { key: "edit-room" },
-      //       { key: "edit-agent" },
-      //       { key: "save-as-template" },
-      //     ],
-      //     [{ key: "download" }, { key: "duplicate-room" }],
-      //     [
-      //       { key: "change-room-owner" },
-      //       { key: "reconnect-storage" },
-      //       { key: "export-room-index" },
-      //     ],
-      //   ],
-      //   needsGrouping: true,
-      //   minItemsCount: 1,
-      // },
-      // {
-      //   groupKey: "share",
-      //   groupLabel: t("Common:Share"),
-      //   groupIcon: ShareReactSvgUrl,
-      //   itemKeys: [
-      //     // "invite-users-to-room",
-      //     "copy-shared-link",
-      //     "manage-links",
-      //     "link-for-room-members",
-      //     "external-link",
-      //     "embedding-settings",
-      //     "create-room-separator",
-      //     "create-room",
-      //   ],
-      //   minItemsCount: 1,
-      // },
     ];
 
     const downloadOption = newOptions.find(

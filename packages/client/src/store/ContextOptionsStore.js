@@ -1311,7 +1311,8 @@ class ContextOptionsStore {
       },
     ];
 
-    const canMute = item.security?.Mute && !this.publicRoomStore.isPublicRoom;
+    const canMute =
+      item.security?.Mute && !this.publicRoomStore.isPublicRoom && item.inRoom;
 
     const muteOptions = [
       {
@@ -1656,10 +1657,11 @@ class ContextOptionsStore {
 
     // const emailSendIsDisabled = true;
     const showSeparator0 =
-      hasInfoPanel ||
-      !isMedia ||
-      (item.external && item.isLinkExpired) ||
-      withAI; // || !emailSendIsDisabled;
+      item.inRoom &&
+      (hasInfoPanel ||
+        !isMedia ||
+        (item.external && item.isLinkExpired) ||
+        withAI); // || !emailSendIsDisabled;
 
     const separator0 = showSeparator0
       ? {
@@ -1891,6 +1893,7 @@ class ContextOptionsStore {
         onClick: () => this.onPreviewClick(item),
         disabled: false,
       },
+      separator0,
       {
         id: "option_view",
         key: "view",
@@ -1917,7 +1920,40 @@ class ContextOptionsStore {
       },
       ...pinOptions,
       ...muteOptions,
-      separator0,
+      {
+        key: "separator1",
+        isSeparator: true,
+      },
+      {
+        id: "option_edit-room",
+        key: "edit-room",
+        label: t("EditRoom"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => this.onClickEditRoom(item),
+        disabled: false,
+      },
+      {
+        id: "option_invite-users-to-room",
+        key: "invite-users-to-room",
+        label: t("Common:InviteContacts"),
+        icon: PersonReactSvgUrl,
+        onClick: (e) => this.onClickInviteUsers(e, item.roomType),
+        disabled: false,
+        action: item.id,
+      },
+      {
+        id: "option_link-for-room-members",
+        key: "link-for-room-members",
+        label: t("Common:CopyLink"),
+        icon: InvitationLinkReactSvgUrl,
+        onClick: () => this.onCopyLink(item, t),
+        disabled: item.isTemplate
+          ? false
+          : (isPublicRoomType && hasShareLinkRights) ||
+            Boolean(
+              item.external && (item.isLinkExpired || item.passwordProtected),
+            ),
+      },
       {
         id: "option_ask-ai",
         key: "ask-ai",
@@ -1986,14 +2022,6 @@ class ContextOptionsStore {
       },
       {
         id: "option_edit-room",
-        key: "edit-room",
-        label: t("EditRoom"),
-        icon: SettingsReactSvgUrl,
-        onClick: () => this.onClickEditRoom(item),
-        disabled: false,
-      },
-      {
-        id: "option_edit-room",
         key: "edit-template",
         label: t("EditTemplate"),
         icon: SettingsReactSvgUrl,
@@ -2017,37 +2045,12 @@ class ContextOptionsStore {
         disabled: !item.security?.Create || item.providerKey,
       },
       {
-        id: "option_download",
-        key: "download",
-        label: t("Common:Download"),
-        icon: DownloadReactSvgUrl,
-        onClick: () => {
-          if (isLockedSharedRoom(item))
-            return this.dialogsStore.setPasswordEntryDialog(true, item, true);
-
-          this.onClickDownload(item, t);
-        },
-        disabled:
-          (!item.security?.Download && !isLockedSharedRoom(item)) ||
-          Boolean(item.external && item.isLinkExpired),
-      },
-      {
         id: "option_create-duplicate-room",
         key: "duplicate-room",
         label: t("Common:Duplicate"),
         icon: DuplicateReactSvgUrl,
         onClick: () => this.onDuplicate(item, t),
         disabled: !item.security?.Duplicate,
-      },
-      {
-        id: "option_change-room-owner",
-        key: "change-room-owner",
-        label: isAIAgent
-          ? t("Translations:OwnerChange")
-          : t("Files:ChangeTheRoomOwner"),
-        icon: ReconnectSvgUrl,
-        onClick: this.onChangeRoomOwner,
-        disabled: false,
       },
       {
         id: "option_reconnect-storage",
@@ -2058,29 +2061,12 @@ class ContextOptionsStore {
         disabled: !item.security?.Reconnect || !item.security?.EditRoom,
       },
       {
-        id: "option_export-room-index",
-        key: "export-room-index",
-        label: t("Files:ExportRoomIndex"),
-        icon: ExportRoomIndexSvgUrl,
-        onClick: () => this.onExportRoomIndex(t, item.id),
-        disabled: !item.indexing || !item.security?.IndexExport,
-      },
-      {
         id: "option_access-settings",
         key: "access-settings",
         label: t("AccessSettings"),
         icon: PersonReactSvgUrl,
         onClick: () => this.onOpenTemplateAccessOptions(),
         disabled: !isTemplateOwner,
-      },
-      {
-        id: "option_invite-users-to-room",
-        key: "invite-users-to-room",
-        label: t("Common:InviteContacts"),
-        icon: PersonReactSvgUrl,
-        onClick: (e) => this.onClickInviteUsers(e, item.roomType),
-        disabled: false,
-        action: item.id,
       },
       // {
       //   id: "option_copy-general-link",
@@ -2107,19 +2093,6 @@ class ContextOptionsStore {
         disabled: !item.canShare,
       },
       {
-        id: "option_link-for-room-members",
-        key: "link-for-room-members",
-        label: t("Common:CopyLink"),
-        icon: InvitationLinkReactSvgUrl,
-        onClick: () => this.onCopyLink(item, t),
-        disabled: item.isTemplate
-          ? false
-          : (isPublicRoomType && hasShareLinkRights) ||
-            Boolean(
-              item.external && (item.isLinkExpired || item.passwordProtected),
-            ),
-      },
-      {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Common:CopySharedLink"),
@@ -2128,6 +2101,47 @@ class ContextOptionsStore {
           !hasShareLinkRights || Boolean(item.external && item.isLinkExpired),
         onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
+      },
+      {
+        id: "option_download",
+        key: "download",
+        label: t("Common:Download"),
+        icon: DownloadReactSvgUrl,
+        onClick: () => {
+          if (isLockedSharedRoom(item))
+            return this.dialogsStore.setPasswordEntryDialog(true, item, true);
+
+          this.onClickDownload(item, t);
+        },
+        disabled:
+          (!item.security?.Download && !isLockedSharedRoom(item)) ||
+          Boolean(item.external && item.isLinkExpired),
+      },
+      {
+        id: "option_room-info",
+        key: "room-info",
+        label: t("Common:RoomInfo"),
+        icon: InfoOutlineReactSvgUrl,
+        onClick: () => this.onShowInfoPanel(item),
+        disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
+      },
+      {
+        id: "option_export-room-index",
+        key: "export-room-index",
+        label: t("Files:ExportRoomIndex"),
+        icon: ExportRoomIndexSvgUrl,
+        onClick: () => this.onExportRoomIndex(t, item.id),
+        disabled: !item.indexing || !item.security?.IndexExport,
+      },
+      {
+        id: "option_change-room-owner",
+        key: "change-room-owner",
+        label: isAIAgent
+          ? t("Translations:OwnerChange")
+          : t("Files:ChangeTheRoomOwner"),
+        icon: ReconnectSvgUrl,
+        onClick: this.onChangeRoomOwner,
+        disabled: false,
       },
       {
         id: "option_embedding-setting",
@@ -2149,14 +2163,6 @@ class ContextOptionsStore {
         icon: CatalogRoomsReactSvgUrl,
         onClick: () => this.onCreateRoom(item, true),
         disabled: !item.security?.CreateRoomFrom,
-      },
-      {
-        id: "option_room-info",
-        key: "room-info",
-        label: t("Common:Info"),
-        icon: InfoOutlineReactSvgUrl,
-        onClick: () => this.onShowInfoPanel(item),
-        disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_owner-change",
@@ -2457,41 +2463,60 @@ class ContextOptionsStore {
 
     const menuGroupsConfig = [
       {
-        groupKey: "manage",
-        groupLabel: t("Common:Manage"),
-        groupIcon: SettingsReactSvgUrl,
+        groupKey: "more-options",
+        groupLabel: t("Common:MoreOptions"),
+        groupIcon: SettingsReactSvgUrl, // TODO: MENU
         itemKeys: [
           [
-            { key: "edit-room" },
-            { key: "edit-agent" },
             { key: "save-as-template" },
-          ],
-          [{ key: "download" }, { key: "duplicate-room" }],
-          [
-            { key: "change-room-owner" },
+            { key: "duplicate-room" },
+            { key: "download" },
+            { key: "room-info" },
+            { key: "embedding-settings" },
             { key: "reconnect-storage" },
             { key: "export-room-index" },
           ],
+          [{ key: "change-room-owner" }],
         ],
         needsGrouping: true,
-        minItemsCount: 1,
+        minItemsCount: 3, // TODO: MENU
       },
-      {
-        groupKey: "share",
-        groupLabel: t("Common:Share"),
-        groupIcon: ShareReactSvgUrl,
-        itemKeys: [
-          "invite-users-to-room",
-          "copy-shared-link",
-          "manage-links",
-          "link-for-room-members",
-          "external-link",
-          "embedding-settings",
-          "create-room-separator",
-          "create-room",
-        ],
-        minItemsCount: 1,
-      },
+      // {
+      //   groupKey: "manage",
+      //   groupLabel: t("Common:Manage"),
+      //   groupIcon: SettingsReactSvgUrl,
+      //   itemKeys: [
+      //     [
+      //       // { key: "edit-room" },
+      //       { key: "edit-agent" },
+      //       { key: "save-as-template" },
+      //     ],
+      //     [{ key: "download" }, { key: "duplicate-room" }],
+      //     [
+      //       { key: "change-room-owner" },
+      //       { key: "reconnect-storage" },
+      //       { key: "export-room-index" },
+      //     ],
+      //   ],
+      //   needsGrouping: true,
+      //   minItemsCount: 1,
+      // },
+      // {
+      //   groupKey: "share",
+      //   groupLabel: t("Common:Share"),
+      //   groupIcon: ShareReactSvgUrl,
+      //   itemKeys: [
+      //     // "invite-users-to-room",
+      //     "copy-shared-link",
+      //     "manage-links",
+      //     "link-for-room-members",
+      //     "external-link",
+      //     "embedding-settings",
+      //     "create-room-separator",
+      //     "create-room",
+      //   ],
+      //   minItemsCount: 1,
+      // },
     ];
 
     const downloadOption = newOptions.find(
@@ -2586,13 +2611,19 @@ class ContextOptionsStore {
     );
 
     if (menuGroups.length > 0) {
-      const openLocationIndex = resultOptions.findIndex(
-        (option) => option.key === "open-location",
+      const copySharedLinkIndex = resultOptions.findIndex(
+        (option) => option.key === "external-link",
+      );
+      const copyLinkIndex = resultOptions.findIndex(
+        (option) => option.key === "link-for-room-members",
       );
 
+      const menuIndex =
+        copySharedLinkIndex === -1 ? copyLinkIndex : copySharedLinkIndex;
+
       const insertIndex =
-        openLocationIndex !== -1
-          ? openLocationIndex + 1
+        menuIndex !== -1
+          ? menuIndex + 1
           : (() => {
               const separatorIndex = resultOptions.findIndex((option) =>
                 withAI

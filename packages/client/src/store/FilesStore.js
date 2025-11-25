@@ -3280,10 +3280,6 @@ class FilesStore {
         roomOptions = removeOptions(roomOptions, ["download"]);
       }
 
-      if (!canDownload && !canDuplicate) {
-        roomOptions = removeOptions(roomOptions, ["separator1"]);
-      }
-
       if (!item.providerKey) {
         roomOptions = removeOptions(roomOptions, ["reconnect-storage"]);
       }
@@ -3469,7 +3465,7 @@ class FilesStore {
     }
 
     if (!hasNew) {
-      folderOptions = removeOptions(folderOptions, ["mark-read"]);
+      // folderOptions = removeOptions(folderOptions, ["mark-read"]);
     }
 
     if (isThirdPartyFolder && isDesktopClient)

@@ -45,7 +45,7 @@ export const getPortalSuccess = {
         tenantId: 1,
         tenantAlias: BASE_URL,
         tenantDomain: BASE_URL,
-        storageSize: 9223372036854776000n,
+        storageSize: 9223372036854776000,
         usedSize: 4690191,
         maxRoomAdminsCount: 2147483647,
         roomAdminCount: 2,

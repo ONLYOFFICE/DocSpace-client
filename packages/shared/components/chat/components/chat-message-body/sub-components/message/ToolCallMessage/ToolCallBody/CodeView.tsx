@@ -66,6 +66,8 @@ export const CodeView = ({
   }
 
   const showResult = placement === "message" && content.result;
+  const isErrorResult =
+    content.result && "isError" in content.result && content.result?.isError;
 
   return (
     <>
@@ -86,6 +88,7 @@ export const CodeView = ({
             chatMessage={formatJsonWithMarkdown(
               isJson ? JSON.parse(result) : result,
             )}
+            propLanguage={isErrorResult && !isJson ? "text" : undefined}
           />
         </div>
       ) : null}

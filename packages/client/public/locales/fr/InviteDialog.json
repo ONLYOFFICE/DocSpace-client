@@ -21,5 +21,6 @@
   "UserAgentMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires d'agents. Seuls les administrateurs de salle et de {{productName}} peuvent occuper ce rôle.",
   "UserMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires de salle. Seuls les administrateurs de salle et de {{productName}} peuvent jouer le rôle spécifié.",
   "UsersAlreadyAdded": "Certains utilisateurs ont déjà été ajoutés",
-  "UsersCannotBeAdded": "Les contacts désactivés ne peuvent pas être ajoutés à une salle."
+  "UsersCannotBeAdded": "Les contacts désactivés ne peuvent pas être ajoutés à une salle.",
+  "GuestAgentMaxAvailableRoleWarning": "Les invités ne peuvent pas être désignés comme créateur de contenu.\nSeuls les administrateurs de chambre, les administrateurs {{productName}} et les Utilisateurs sont éligibles pour ce rôle."
 }

@@ -21,5 +21,6 @@
   "UserAgentMaxAvailableRoleWarning": "Gosti i korisnici ne mogu biti dodeljeni kao menadžeri agenata. Samo administratori sobe i {{productName}} su pogodni za navedenu ulogu.",
   "UserMaxAvailableRoleWarning": "Gosti i Korisnici ne mogu biti postavljeni kao Menadžeri sobe. Samo administratori sobe i {{productName}} su pogodni za određenu ulogu.",
   "UsersAlreadyAdded": "Neki korisnici su već dodati",
-  "UsersCannotBeAdded": "Onemogućeni kontakti ne mogu biti dodati u sobu."
+  "UsersCannotBeAdded": "Onemogućeni kontakti ne mogu biti dodati u sobu.",
+  "GuestAgentMaxAvailableRoleWarning": "Gosti ne mogu biti dodeljenima kao kreatori sadržaja.\nSamo administratori soba, {{productName}} administratori i Korisnici su kvalifikovani za ovu ulogu."
 }

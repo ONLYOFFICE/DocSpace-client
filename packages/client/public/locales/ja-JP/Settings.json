@@ -292,5 +292,6 @@
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
   "WantToContinue": "ユーザーストレージ容量制限を継続または変更しますか？",
   "WhiteLabelSubtitle": "会社名を入力し、ロゴをアップロードし、ブランディングに合わせたスタイリングにカスタマイズをしましょう。",
-  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。"
+  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
+  "ImportSectionDisabled": "{{importSectionName}} をインポートするには、まず \"<1>{{sectionName}}</1>\" オプションを有効にしてください。"
 }

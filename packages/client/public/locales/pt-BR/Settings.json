@@ -286,5 +286,12 @@
   "WantToCancelUpload": "Deseja cancelar o upload?",
   "WantToContinue": "Você quer continuar ou alterar a cota de armazenamento do usuário?",
   "WhiteLabelSubtitle": "Insira o nome da sua empresa, carregue o logotipo e personalize o estilo para combinar com a sua marca.",
-  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
+  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
+  "AIAgentQuotaDisabled": "A quota do agente de IA foi desativada com sucesso.",
+  "AIAgentQuotaEnabled": "A quota de agentes de IA foi ativada com sucesso.",
+  "DefineQuotaPerAIAgent": "Definir cota por agente de IA",
+  "ImportSectionDisabled": "Para importar {{importSectionName}}, primeiro ative a opção \"<1>{{sectionName}}</1>\".",
+  "QuotaPerAIAgent": "Cota por agente de IA",
+  "SetDefaultAIAgentQuota": "Defina a cota de armazenamento padrão para agentes de IA neste {{productName}}. Ela pode ser ajustada posteriormente nas configurações ou personalizada individualmente ao criar cada agente de IA.",
+  "Top5AIAgents": "Top 5 agentes de IA por uso de armazenamento:"
 }

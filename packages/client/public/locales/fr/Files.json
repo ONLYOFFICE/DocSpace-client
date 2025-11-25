@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Modèle de salle <1>«{{title}}»</1> enregistré",
   "ScheduledTrashMove": "{{date}} sera déplacé vers {{sectionName}}",
   "SendByEmail": "Envoyer par émail",
+  "SharedBy": "Partagé par",
   "ShareFolder": "Partager le dossier",
   "ShareFolderDescription": "Une nouvelle salle sera créée et tout le contenu du dossier sélectionné y sera copié. Vous pouvez ensuite inviter d'autres utilisateurs à collaborer sur les fichiers d'une salle.",
   "SharePDFFormModalDescription": "Une nouvelle salle sera créée et le formulaire PDF y sera copié. Vous pouvez ensuite inviter d'autres utilisateurs à remplir le formulaire dans la salle.",
@@ -218,6 +219,5 @@
   "WillBeDeletedPermanently": "{{date}} sera supprimé définitivement",
   "YouLeftTheAgent": "Vous avez quitté l'agent",
   "YouLeftTheRoom": "Vous avez quitté la salle",
-  "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>“{{userType}}”</1> par l'administrateur de {{productName}} <1>{{adminName}}</1>.",
-  "SharedBy": "Partagé par"
+  "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>“{{userType}}”</1> par l'administrateur de {{productName}} <1>{{adminName}}</1>."
 }

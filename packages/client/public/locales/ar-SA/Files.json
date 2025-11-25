@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "تم حفظ قالب الغرفة <1>«{{title}}»</1>",
   "ScheduledTrashMove": "سيتم نقل {{date}} إلى {{sectionName}} ",
   "SendByEmail": "ارسل بالبريد الإلكترونى",
+  "SharedBy": "تمت مشاركته بواسطة",
   "ShareFolder": "مشاركة المجلد",
   "ShareFolderDescription": "سيتم إنشاء غرفة جديدة وسيتم نسخ جميع محتويات المجلد المحدد هناك. وبعد ذلك، يمكنك دعوة مستخدمين آخرين للتعاون في الملفات الموجودة داخل الغرفة.",
   "SharePDFFormModalDescription": "سيتم إنشاء غرفة جديدة وسيتم نسخ نموذج PDF هناك. يمكنك بعد ذلك دعوة مستخدمين آخرين لتعبئة النموذج الموجود في الغرفة.",
@@ -218,6 +219,5 @@
   "WillBeDeletedPermanently": "سيتم حذف {{date}} نهائيًا",
   "YouLeftTheAgent": "لقد غادرتم الوكيل",
   "YouLeftTheRoom": "لقد قمت بمغادرة الغرفة",
-  "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بكم إلى <1>«{{userType}}»</1> من قِبل مسؤول {{productName}} <1>{{adminName}}</1>.",
-  "SharedBy": "تمت مشاركته بواسطة"
+  "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بكم إلى <1>«{{userType}}»</1> من قِبل مسؤول {{productName}} <1>{{adminName}}</1>."
 }

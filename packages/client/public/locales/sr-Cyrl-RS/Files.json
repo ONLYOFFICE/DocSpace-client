@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Шаблон собе <1>«{{title}}»</1> сачуван",
   "ScheduledTrashMove": "{{date}} ће бити премештен у {{sectionName}}",
   "SendByEmail": "Пошаљи путем емаил-а",
+  "SharedBy": "Дељено од",
   "ShareFolder": "Дели фолдер",
   "ShareFolderDescription": "Нова соба ц́е бити креирана и сав садржај изабраног фолдера ц́е бити копиран тамо. Након тога, можете позвати друге кориснике да сарађују на датотекама у соби.",
   "SharePDFFormModalDescription": "Нова просторија ће бити креирана и PDF формулар ће бити тамо копиран. Затим можете позвати друге кориснике да попуне формулар у просторији.",
@@ -218,6 +219,5 @@
   "WillBeDeletedPermanently": "{{date }} ће бити трајно обрисан",
   "YouLeftTheAgent": "Оставили сте агента",
   "YouLeftTheRoom": "Напустили сте собу",
-  "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>.",
-  "SharedBy": "Дељено од"
+  "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>."
 }

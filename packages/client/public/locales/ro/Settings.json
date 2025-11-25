@@ -74,6 +74,7 @@
   "DataImportProcessing": "Procesare import date",
   "DeactivateOrDeletePortal": "Dezactivarea sau ștergerea spațiului.",
   "DefaultSettings": "Setări implicite",
+  "DefineQuotaPerAIAgent": "Definează cota per agent AI",
   "DefineQuotaPerRoom": "Stabilire cotă per sală",
   "DefineQuotaPerUser": "Stabilire cotă per utilizator",
   "DeletePortal": "Ștergere {{productName}}",
@@ -132,6 +133,7 @@
   "ImportFromPortal": "Import din {{organizationName}} Workspace",
   "ImportProcessingDescription": "Migrare de date în desfășurare Vă rugăm așteptați.",
   "ImportSectionDescription": "Selectați secțiuni pentru imoprt. Aceste secţiuni  vor apărea în secțiunile corespunzătoare ale spațiului {{productName}}.",
+  "ImportSectionDisabled": "Pentru a importa {{importSectionName}}, activați mai întâi opțiunea \"<1>{{sectionName}}</1>\".",
   "IncludedInBusiness": "Inclus în abonamentul Business",
   "IntegrationRequest": "Vă lipsește o soluție de integrare sau o componentă utilă în {{productName}} {{organizationName}}? Trimiteți o solicitare către echipa noastră și vom analiza propunerea dvs.",
   "InvitationSettings": "Setări de invitație",
@@ -196,6 +198,7 @@
   "PreviewTooltipDescription": "Previzualizați interfața în culoarea selectată",
   "ProjectsDescription": "Fiecare proiect este importat într-o sală separată, care conţine toate documentele și utilizatorii din acest proiect. Manager de proiect va deveni proprietarul sălii.",
   "ProvideChoice": "La alegere (web sau aplicație)",
+  "QuotaPerAIAgent": "Cota per agent AI",
   "QuotaPerRoom": "Cotă per sală",
   "QuotaPerUser": "Cotă per utilizator",
   "Quotas": "Cote",
@@ -228,6 +231,7 @@
   "SessionLifetime": "Durata de expirare a sesiunii ",
   "SessionLifetimeMobileDescription": "Durata de expirare a sesiunii permite stabilirea perioadei de timp (exprimată în minute) înainte ca utilizatorii spațiului {{productName}} vor fi nevoiți să introducă din nou datele de autentificare pentru a accesa spaţiul.",
   "SessionLifetimeSettingDescription": "Configurați durata de expirare a sesiunii pentru a stabili o perioadă de timp până la deconectarea automată. După salvare, toți utilizatorii vor fi deconectați.",
+  "SetDefaultAIAgentQuota": "Stabilește cota de stocare implicită pentru agenții AI în {{productName}}. Aceasta poate fi ajustată ulterior în setări sau personalizată individual la crearea fiecărui agent AI.",
   "SetDefaultRoomQuota": "Stabilire cotă de stocare implicită pentru sălile în acest {{productName}}. Administrator de sală poate configura cote de stocare mai târziu individual pentru fiecare sală.",
   "SettingPasswordDescription": "Configurați setări nivelului de complexitate a parolei pentru a crea parole puternice și le securiza.",
   "SettingPasswordStrengthMobileDescription": "Setarea nivelului de complexitate a parolei este o măsură de a determina eficacitatea parolei împotriva ghicirii sau atacuri cu forță brută.",
@@ -289,9 +293,5 @@
   "WantToCancelUpload": "Doriți să anulați încărcarea?",
   "WantToContinue": "Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?",
   "WhiteLabelSubtitle": "Introduceţi numele companiei dvs, încărcați sigla şi particularizați stilul pentru a se potrivi cu brandingul dvs.",
-  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
-  "DefineQuotaPerAIAgent": "Definează cota per agent AI",
-  "ImportSectionDisabled": "Pentru a importa {{importSectionName}}, activați mai întâi opțiunea \"<1>{{sectionName}}</1>\".",
-  "QuotaPerAIAgent": "Cota per agent AI",
-  "SetDefaultAIAgentQuota": "Stabilește cota de stocare implicită pentru agenții AI în {{productName}}. Aceasta poate fi ajustată ulterior în setări sau personalizată individual la crearea fiecărui agent AI."
+  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare."
 }

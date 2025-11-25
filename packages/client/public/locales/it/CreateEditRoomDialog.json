@@ -11,6 +11,7 @@
   "CreateTagOption": "Crea un tag",
   "Diagonal": "Diagonale",
   "DisableRoomQuota": "Disattiva la quota per questa stanza",
+  "DisableRoomQuotaAgent": "Disabilita la quota per questo agente",
   "FileLifetime": "Durata del file",
   "FileLifetimeDescription": "Imposta la durata dei file per eliminare automaticamente i file in questa stanza dopo un periodo definito. La durata inizia dalla data di caricamento/creazione del file.",
   "FilesOlderThan": "File più vecchi di:",
@@ -27,6 +28,7 @@
   "RoomEditing": "Modifica della stanza",
   "RootFolderLabel": "Cartella principale",
   "StorageDescription": "Quota di archiviazione impostata per stanza. Puoi modificare questo valore o disattivare il limite di spazio di archiviazione.",
+  "StorageDescriptionAgent": "Quota di archiviazione impostata per agente. Puoi modificare questo valore o disattivare il limite di archiviazione.",
   "TagsPlaceholder": "Aggiungi un tag",
   "ThirdPartyStorageComboBoxPlaceholder": "Seleziona spazio di archiviazione",
   "ThirdPartyStorageNoStorageAlert": "Prima è necessario collegare il servizio corrispondente nella sezione \"Integrazione\". Altrimenti la connessione non sarà possibile.",
@@ -37,7 +39,5 @@
   "UserName": "Nome utente",
   "ViewerInfo": "Informzioni sul visualizzatore",
   "WatermarkPreview": "Anteprima della filigrana",
-  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file.",
-  "DisableRoomQuotaAgent": "Disabilita la quota per questo agente",
-  "StorageDescriptionAgent": "Quota di archiviazione impostata per agente. Puoi modificare questo valore o disattivare il limite di archiviazione."
+  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file."
 }

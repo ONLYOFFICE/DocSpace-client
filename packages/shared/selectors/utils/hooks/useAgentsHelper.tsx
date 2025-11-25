@@ -32,6 +32,7 @@ import RoomsFilter from "../../../api/rooms/filter";
 import { RoomSearchArea } from "../../../enums";
 import type { TSelectorItem } from "../../../components/selector";
 import type { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type { TRoomSecurity } from "../../../api/rooms/types";
 
 import { LoadersContext } from "../contexts/Loaders";
 
@@ -63,6 +64,7 @@ const useAgentsHelper = ({
   subscribe,
   setSelectedItemSecurity,
   setSelectedTreeNode,
+  disableBySecurity,
 }: UseAgentsHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const {
@@ -134,9 +136,17 @@ const useAgentsHelper = ({
         setIsBreadCrumbsLoading(false);
       }
 
-      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t).filter(
-        (x) => (excludeItems ? !excludeItems.includes(x.id) : true),
-      );
+      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t)
+        .filter((x) => (excludeItems ? !excludeItems.includes(x.id) : true))
+        .map((item) => {
+          const isDisabledBySecurity = disableBySecurity
+            ? !item.security?.[disableBySecurity as keyof TRoomSecurity]
+            : false;
+          return {
+            ...item,
+            isDisabled: item.isDisabled || isDisabledBySecurity,
+          };
+        });
 
       setHasNextPage(count === PAGE_COUNT);
 
@@ -215,6 +225,7 @@ const useAgentsHelper = ({
       // addInputItem,
       excludeItems,
       setSelectedTreeNode,
+      disableBySecurity,
     ],
   );
 

@@ -51,4 +51,6 @@ export type AIAgentSelectorProps = {
   withPadding?: boolean;
 
   onClose: () => void;
+
+  disableBySecurity?: string;
 } & TInitValue;

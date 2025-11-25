@@ -27,3 +27,5 @@ export {
   tariffHandler,
   PATH_TARIFF,
 } from "./tariff";
+
+export { getPortalHandler, PATH_PORTAL_GET } from "./getPortal";

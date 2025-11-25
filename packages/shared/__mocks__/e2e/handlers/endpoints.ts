@@ -58,12 +58,24 @@ import {
   PATH_SETTINGS_WITH_QUERY,
   PATH_BUILD,
   buildHandler,
+  PATH_SETTINGS_ADDITIONAL,
+  settingsAdditionalHandler,
+  COMPANY_INFO_PATH,
+  companyInfoHandler,
+  PATH_CULTURES,
+  culturesHandler,
+  INVITATION_SETTINGS_PATH,
+  invitationSettingsHandler,
+  PATH_WEB_PLUGINS,
+  webPluginsHandler,
 } from "./settings";
 import {
   CONTINUE_PATH,
   continuePortalHandler,
   DELETE_PATH,
   deletePortalHandler,
+  getPortalHandler,
+  PATH_PORTAL_GET,
   PATH_QUOTA,
   PATH_TARIFF,
   quotaHandler,
@@ -72,10 +84,20 @@ import {
   tariffHandler,
 } from "./portal";
 import {
+  docServiceHandler,
+  filesSettingsHandler,
   folderHandler,
+  PATH_DOC_SERVICE,
+  PATH_FILES_SETTINGS,
   PATH_FOLDER,
   PATH_ROOMS_LIST,
+  PATH_THIRD_PARTY,
+  PATH_THIRD_PARTY_CAPABILITIES,
   roomListHandler,
+  ROOT_PATH,
+  rootHandler,
+  thirdPartyCapabilitiesHandler,
+  thirdPartyHandler,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -88,6 +110,7 @@ import {
   HEADER_ROOMS_LIST,
 } from "../utils";
 import { PATH_DELETE_USER } from "./people/self";
+import { aiConfigHandler, PATH_AI_CONFIG } from "./ai/config";
 
 export type TEndpoint = {
   url: string;
@@ -265,5 +288,53 @@ export const endpoints = {
   tariff: {
     url: `${BASE_URL}${PATH_TARIFF}`,
     dataHandler: tariffHandler,
+  },
+  aiConfig: {
+    url: `${BASE_URL}${PATH_AI_CONFIG}`,
+    dataHandler: aiConfigHandler,
+  },
+  additionalSettings: {
+    url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,
+    dataHandler: settingsAdditionalHandler,
+  },
+  companyInfo: {
+    url: `${BASE_URL}${COMPANY_INFO_PATH}`,
+    dataHandler: companyInfoHandler,
+  },
+  root: {
+    url: `${BASE_URL}${ROOT_PATH}`,
+    dataHandler: rootHandler,
+  },
+  filesSettings: {
+    url: `${BASE_URL}${PATH_FILES_SETTINGS}`,
+    dataHandler: filesSettingsHandler,
+  },
+  getPortal: {
+    url: `${BASE_URL}${PATH_PORTAL_GET}`,
+    dataHandler: getPortalHandler,
+  },
+  cultures: {
+    url: `${BASE_URL}${PATH_CULTURES}`,
+    dataHandler: culturesHandler,
+  },
+  invitationSettings: {
+    url: `${BASE_URL}${INVITATION_SETTINGS_PATH}`,
+    dataHandler: invitationSettingsHandler,
+  },
+  webPlugins: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsHandler,
+  },
+  thirdPartyCapabilities: {
+    url: `${BASE_URL}${PATH_THIRD_PARTY_CAPABILITIES}`,
+    dataHandler: thirdPartyCapabilitiesHandler,
+  },
+  thirdParty: {
+    url: `${BASE_URL}${PATH_THIRD_PARTY}`,
+    dataHandler: thirdPartyHandler,
+  },
+  docService: {
+    url: `${BASE_URL}${PATH_DOC_SERVICE}`,
+    dataHandler: docServiceHandler,
   },
 } satisfies TEndpoints;

@@ -74,3 +74,18 @@ export {
   buildHandler,
   PATH_BUILD,
 } from "./build";
+
+export {
+  settingsAdditionalHandler,
+  PATH_SETTINGS_ADDITIONAL,
+} from "./additional";
+
+export {
+  PATH_CULTURES,
+  culturesHandler,
+} from "./cultures";
+
+export {
+  PATH_WEB_PLUGINS,
+  webPluginsHandler,
+} from "./webplugins";

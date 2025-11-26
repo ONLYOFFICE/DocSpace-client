@@ -82,7 +82,6 @@ import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
-import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
@@ -2088,7 +2087,7 @@ class ContextOptionsStore {
       {
         id: "option_manage-links",
         key: "manage-links",
-        label: t("Common:ManageShare"),
+        label: t("Common:SharingSettings"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickShare(item),
         disabled: !item.canShare,
@@ -2194,7 +2193,7 @@ class ContextOptionsStore {
       {
         id: "option_show-info",
         key: "show-info",
-        label: t("Common:Info"),
+        label: item.isFolder ? t("Common:FolderInfo") : t("Common:FileInfo"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
         disabled: false,
@@ -2484,6 +2483,20 @@ class ContextOptionsStore {
       },
     ];
 
+    if (!item.isRoom) {
+      menuGroupsConfig.push({
+        groupKey: "share",
+        groupLabel: t("Common:Share"),
+        groupIcon: ShareReactSvgUrl,
+        itemKeys: [
+          [{ key: "copy-shared-link" }, { key: "manage-links" }],
+          [{ key: "create-room" }],
+        ],
+        needsGrouping: true,
+        minItemsCount: 1,
+      });
+    }
+
     const downloadOption = newOptions.find(
       (option) => option.key === "download",
     );
@@ -2523,10 +2536,15 @@ class ContextOptionsStore {
     if (showInfoOption && showVersionHistoryOption) {
       menuGroupsConfig.push({
         groupKey: "info",
-        groupLabel: t("InfoPanel:Properties"),
-        groupIcon: ViewRowsReactSvgUrl,
-        itemKeys: ["show-info", "show-version-history"],
-        needsGrouping: false,
+        groupLabel: t("Common:MoreOptions"),
+        groupIcon: DotsHorizontalUrl,
+        itemKeys: [
+          [{ key: "show-version-history" }, { key: "show-info" }],
+          pluginItems.map((plug) => {
+            return { key: plug.key };
+          }),
+        ],
+        needsGrouping: true,
         minItemsCount: 1,
       });
     }
@@ -2608,22 +2626,27 @@ class ContextOptionsStore {
       (option) => option.key === "move" || option.key === "copy-to",
     );
 
-    if (item.isFolder && !item.isRoom) {
-      const groups = [
-        ["select", "open"],
-        ["share", "show-info"],
-        [
-          "mark-as-favorite",
-          "mark-read",
-          "link-for-room-members",
-          "download",
-          "move",
-          "copy-to",
-          "rename",
-        ],
-        ["restore"],
-        ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
-      ];
+    if (!item.isRoom) {
+      const groups = item.isFolder
+        ? [
+            ["select", "open", "mark-read"],
+            ["share", "move", "copy-to", "download", "rename"],
+            ["mark-as-favorite", "link-for-room-members", "show-info"],
+            ["restore"],
+            ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
+          ]
+        : [
+            ["select", "view", "fill-form", "edit", "preview", "mark-read"],
+            ["share", "move", "copy-to", "download", "rename"],
+            [
+              "mark-as-favorite",
+              "block-unblock-version",
+              "custom-filter",
+              "info",
+            ],
+            ["restore"],
+            ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
+          ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);
       const result = [];

@@ -3465,7 +3465,7 @@ class FilesStore {
     }
 
     if (!hasNew) {
-      // folderOptions = removeOptions(folderOptions, ["mark-read"]);
+      folderOptions = removeOptions(folderOptions, ["mark-read"]);
     }
 
     if (isThirdPartyFolder && isDesktopClient)

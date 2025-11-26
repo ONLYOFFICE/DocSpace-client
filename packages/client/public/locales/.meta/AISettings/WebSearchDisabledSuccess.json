@@ -3,7 +3,7 @@
   "content": "{{webSearch}} successfully disabled",
   "content_en_sha1_hash": "0c484f67afd695059c31ad95118352880ccd298c",
   "created_at": "2025-11-21T09:16:06.068Z",
-  "updated_at": "2025-11-21T09:16:12.495Z",
+  "updated_at": "2025-11-26T15:05:37.572Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 60,
-      "context": "setLoading(true);\n \n try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n } catch (error) {",
+      "line_number": 63,
+      "context": "setLoading(true);\n \n try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n getAIConfig?.();",
       "module": "/packages/client"
     }
   ],

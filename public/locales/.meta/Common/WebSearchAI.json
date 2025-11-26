@@ -3,7 +3,7 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-11-21T08:21:51.294Z",
-  "updated_at": "2025-11-21T08:22:18.068Z",
+  "updated_at": "2025-11-26T15:05:37.558Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 61,
-      "context": "try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n } catch (error) {\n console.error(error);",
+      "line_number": 64,
+      "context": "try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n getAIConfig?.();\n } catch (error) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 61,
-      "context": "try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n } catch (error) {\n console.error(error);",
+      "line_number": 64,
+      "context": "try {\n await restoreWebSearch?.();\n toastr.success(\n t(\"AISettings:WebSearchDisabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n onSuccess?.();\n getAIConfig?.();\n } catch (error) {",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2025-11-21T09:16:11.570Z",
+  "updated_at": "2025-11-26T15:05:37.103Z",
   "comment": {
     "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
     "is_auto": true,
@@ -318,13 +318,13 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/export-selector/index.tsx",
-      "line_number": 90,
+      "line_number": 92,
       "context": "return true;\n }}\n onSubmit={onSubmit}\n withHeader\n headerProps={{\n headerLabel: t(\"Common:SaveButton\"),\n isCloseable: true,\n onCloseClick: onCloseFolderSelector,\n }}\n withSearch\n withBreadCrumbs",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/export-selector/index.tsx",
-      "line_number": 90,
+      "line_number": 92,
       "context": "return true;\n }}\n onSubmit={onSubmit}\n withHeader\n headerProps={{\n headerLabel: t(\"Common:SaveButton\"),\n isCloseable: true,\n onCloseClick: onCloseFolderSelector,\n }}\n withSearch\n withBreadCrumbs",
       "module": "/packages/shared"
     },

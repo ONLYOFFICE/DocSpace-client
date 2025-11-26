@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2025-11-21T09:16:11.656Z",
+  "updated_at": "2025-11-26T15:05:37.176Z",
   "comment": {
     "text": "The \"Label\" translation key is used to display a descriptive title for input fields, such as group names or room tags. It appears in a dialog box, specifically within the CreateEditGroupDialog and CreateEditRoomDialog components, where it provides context for users to enter a name. Translators should replace the English content with a translated version of \"Name\" while maintaining this descriptive purpose.",
     "is_auto": true,
@@ -36,55 +36,55 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 273,
+      "line_number": 277,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 273,
+      "line_number": 277,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 273,
+      "line_number": 277,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 273,
+      "line_number": 277,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 273,
+      "line_number": 277,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 273,
+      "line_number": 277,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 273,
+      "line_number": 277,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 273,
+      "line_number": 277,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 273,
+      "line_number": 277,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },

@@ -194,6 +194,7 @@
   "ContinueWith": "Kontynuuj z",
   "ConvertMessage": "Jeśli zdecydujesz się na konwersję pliku do innego formatu, niż oryginalny, ryzykujesz utratę części danych.",
   "ConvertToZip": "Pliki zostaną skompresowane do formatu <strong>.zip</strong>",
+  "CopiedToClipboard": "Skopiowano do schowka",
   "Copy": "Skopiuj",
   "CopyAndKeepAll": "Skopiuj i zachowaj wszystko",
   "CopyAndKeepBothFolders": "Skopiuj i zachowaj oba katalogi",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "Wybierz",
   "Today": "Dzisiaj",
   "ToolCallArg": "Argumenty wywołania narzędzia:",
+  "ToolCallArgCopied": "Pomyślnie skopiowano argumenty wywołania narzędzia do schowka",
   "ToolCallExecuted": "Wywołano wywołanie narzędzia",
   "ToolCallResult": "Wynik wywołania narzędzia:",
+  "ToolCallResultCopied": "Wynik wywołania narzędzia został pomyślnie skopiowany do schowka",
   "Tools": "Narzędzia",
   "TrashSection": "Kosz",
   "TrialDaysLeft": "Pozostałe dni okresu próbnego: {{count}}",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej",
-  "CopiedToClipboard": "Skopiowano do schowka",
-  "ToolCallArgCopied": "Pomyślnie skopiowano argumenty wywołania narzędzia do schowka",
-  "ToolCallResultCopied": "Wynik wywołania narzędzia został pomyślnie skopiowany do schowka"
+  "YourTurn": "Twoja kolej"
 }

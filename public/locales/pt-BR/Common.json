@@ -194,6 +194,7 @@
   "ContinueWith": "Continue com",
   "ConvertMessage": "Se você optar por converter o arquivo para um formato diferente do original, alguns dados poderão ser perdidos.",
   "ConvertToZip": "Os arquivos serão compactados no <strong>arquivo .zip</strong>",
+  "CopiedToClipboard": "Copiado para a área de transferência",
   "Copy": "Copiar",
   "CopyAndKeepAll": "Copiar e manter tudo",
   "CopyAndKeepBothFolders": "Copiar e manter ambas as pastas",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "Selecionar",
   "Today": "Hoje",
   "ToolCallArg": "Argumentos de chamada da ferramenta:",
+  "ToolCallArgCopied": "Argumentos da chamada da ferramenta copiados com sucesso para a área de transferência",
   "ToolCallExecuted": "Chamada de ferramenta executada",
   "ToolCallResult": "Resultado da chamada da ferramenta:",
+  "ToolCallResultCopied": "Resultado da chamada da ferramenta copiado com sucesso para a área de transferência",
   "Tools": "Ferramentas",
   "TrashSection": "Lixeira",
   "TrialDaysLeft": "Teste {{count}} dias",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
   "YourCurrentDomain": "Seu domínio atual",
   "YourLogo": "Seu logotipo",
-  "YourTurn": "Sua vez",
-  "CopiedToClipboard": "Copiado para a área de transferência",
-  "ToolCallArgCopied": "Argumentos da chamada da ferramenta copiados com sucesso para a área de transferência",
-  "ToolCallResultCopied": "Resultado da chamada da ferramenta copiado com sucesso para a área de transferência"
+  "YourTurn": "Sua vez"
 }

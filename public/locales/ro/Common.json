@@ -194,6 +194,7 @@
   "ContinueWith": "Continuare cu",
   "ConvertMessage": "Dacă doriți să convertiți fișierul într-un alt format decât cel de origine, unele date se pot pierde.",
   "ConvertToZip": "Fișiere vor fi comprimate în format <strong>.zip</strong>",
+  "CopiedToClipboard": "A fost copiat în clipboard",
   "Copy": "Copiere",
   "CopyAndKeepAll": "Copiază și păstrează toate",
   "CopyAndKeepBothFolders": "Copiază și păstrează ambele foldere",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "Selectează",
   "Today": "Astăzi",
   "ToolCallArg": "Argumente pentru apelarea instrumentului:",
+  "ToolCallArgCopied": "Argumente de apelare a instrumentelor au fost copiate cu succes în clipboard",
   "ToolCallExecuted": "Apelare instrument executată",
   "ToolCallResult": "Rezultat apelare instrument:",
+  "ToolCallResultCopied": "Rezultatul obținut în urma apelării instrumentelor a fost copiat cu succes în clipboard",
   "Tools": "Instrumente",
   "TrashSection": "Recycle Bin",
   "TrialDaysLeft": "Versiunea de încercare {{count}} zile",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs.",
-  "CopiedToClipboard": "A fost copiat în clipboard",
-  "ToolCallArgCopied": "Argumente de apelare a instrumentelor au fost copiate cu succes în clipboard",
-  "ToolCallResultCopied": "Rezultatul obținut în urma apelării instrumentelor a fost copiat cu succes în clipboard"
+  "YourTurn": "Acum e rândul dvs."
 }

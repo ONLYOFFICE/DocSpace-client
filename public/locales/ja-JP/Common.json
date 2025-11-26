@@ -194,6 +194,7 @@
   "ContinueWith": "次の設定で進む",
   "ConvertMessage": "元のファイルとは異なる形式に変換した場合、一部のデータが失われる可能性があります。",
   "ConvertToZip": "ファイルは<strong>.zipファイル</strong>に圧縮されます",
+  "CopiedToClipboard": "クリップボードにコピーされました",
   "Copy": "コピー",
   "CopyAndKeepAll": "すべてコピーして保存する",
   "CopyAndKeepBothFolders": "両方のフォルダをコピーして保存する",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "選択",
   "Today": "今日",
   "ToolCallArg": "ツール呼び出し引数:",
+  "ToolCallArgCopied": "ツール呼び出し引数がクリップボードに正常にコピーされました",
   "ToolCallExecuted": "ツール呼び出しが実行されました",
   "ToolCallResult": "ツール呼び出し結果：",
+  "ToolCallResultCopied": "ツール呼び出し結果がクリップボードに正常にコピーされました",
   "Tools": "ツール",
   "TrashSection": "ごみ箱",
   "TrialDaysLeft": "試用期間{{count}}日",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
-  "YourTurn": "あなたの番です",
-  "CopiedToClipboard": "クリップボードにコピーされました",
-  "ToolCallArgCopied": "ツール呼び出しの引数がクリップボードに正常にコピーされました。",
-  "ToolCallResultCopied": "ツール呼び出しの結果をクリップボードにコピーしました。"
+  "YourTurn": "あなたの番です"
 }

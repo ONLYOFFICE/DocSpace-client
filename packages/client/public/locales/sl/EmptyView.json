@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "Pošljite povabilo za dodajanje novih članov v vaš {{productName}}",
   "InviteUsersOptionDescription": "Dodaj člane za skupno urejanje v sobi",
   "ManageAccess": "Upravljanje dostopa",
+  "MigrationDataDescription": "Prenesite svoje podatke v {{productName}} iz Workspace {{organizationName}}, Google Workspace ali Nextcloud.",
+  "MigrationDataTitle": "Uvozi podatke",
   "NoRecentFilesHereYet": "Še ni nobenih nedavnih datotek tukaj.",
   "PublicRoomEmptyTitle": "Dobrodošli v javni sobi",
   "SectionsUploadDescription": "Naložite datoteke katere koli vrste iz {{sectionNameFirst}} ali {{sectionNameSecond}}",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
   "UploadFromPortalTitle": "Naloži iz {{productName}}",
   "UploadPDFFormOptionDescription": "Izberi pripravljen PDF obrazec, ki je na voljo v {{productName}} in ga naloži v sobo.",
-  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi",
-  "MigrationDataDescription": "Prenesite svoje podatke v {{productName}} iz Workspace {{organizationName}}, Google Workspace ali Nextcloud.",
-  "MigrationDataTitle": "Uvozi podatke"
+  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi"
 }

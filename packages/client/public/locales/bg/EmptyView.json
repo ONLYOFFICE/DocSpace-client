@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "Изпратете покана за добавяне на нови членове към вашия {{productName}}",
   "InviteUsersOptionDescription": "Добавете членове за съвместно редактиране в стаята",
   "ManageAccess": "Управление на достъпа",
+  "MigrationDataDescription": "Прехвърлете данните си в {{productName}} от {{organizationName}} Workspace, Google Workspace или Nextcloud.",
+  "MigrationDataTitle": "Импортиране на данни",
   "NoRecentFilesHereYet": "Още няма скорошни файлове тук",
   "PublicRoomEmptyTitle": "Добре дошли в Обществената стая",
   "SectionsUploadDescription": "Качване на всякакви файлове от {{sectionNameFirst}} или {{sectionNameSecond}}",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Качете от устройство",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни",
-  "MigrationDataDescription": "Прехвърлете данните си в {{productName}} от {{organizationName}} Workspace, Google Workspace или Nextcloud.",
-  "MigrationDataTitle": "Импортиране на данни"
+  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
 }

@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "Στείλτε μια πρόσκληση για να προσθέσετε νέα μέλη στο {{productName}}",
   "InviteUsersOptionDescription": "Προσθέστε μέλη για κοινή επεξεργασία στην δωμάτιο",
   "ManageAccess": "Διαχείριση πρόσβασης",
+  "MigrationDataDescription": "Μεταφέρετε τα δεδομένα σας στο {{productName}} από το Workspace της {{organizationName}}, το Google Workspace ή το Nextcloud.",
+  "MigrationDataTitle": "Εισαγωγή δεδομένων",
   "NoRecentFilesHereYet": "Δεν υπάρχουν πρόσφατα αρχεία εδώ ακόμα",
   "PublicRoomEmptyTitle": "Καλώς ήρθατε στο Δημόσιο δωμάτιο",
   "SectionsUploadDescription": "Ανεβάστε αρχεία οποιουδήποτε τύπου από το {{sectionNameFirst}} ή το {{sectionNameSecond}}",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Μεταφόρτωση από τη συσκευή",
   "UploadFromPortalTitle": "Μεταφόρτωση από {{productName}}",
   "UploadPDFFormOptionDescription": "Επιλέξτε μια έτοιμη φόρμα PDF που είναι διαθέσιμη στο {{productName}} και μεταφορτώστε την στο δωμάτιο.",
-  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων",
-  "MigrationDataDescription": "Μεταφέρετε τα δεδομένα σας στο {{productName}} από το Workspace της {{organizationName}}, το Google Workspace ή το Nextcloud.",
-  "MigrationDataTitle": "Εισαγωγή δεδομένων"
+  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων"
 }

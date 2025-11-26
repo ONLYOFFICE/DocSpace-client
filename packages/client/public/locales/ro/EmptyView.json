@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "Trimiteți o invitație pentru a adăuga noi membri la {{productName}}",
   "InviteUsersOptionDescription": "Adăugați membrii pentru editarea colaborativă în sală.",
   "ManageAccess": "Gestionare acces",
+  "MigrationDataDescription": "Transferați datele spre {{productName}} din {{organizationName}} Workspace, Google Workspace sau Nextcloud.",
+  "MigrationDataTitle": "Importul de date",
   "NoRecentFilesHereYet": "Niciun fișier recent deocamdată aici",
   "PublicRoomEmptyTitle": "Bun venit în Sala publică",
   "SectionsUploadDescription": "Încărcați orice tip de fișier din {{sectionNameFirst}} sau {{sectionNameSecond}}",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
-  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date",
-  "MigrationDataDescription": "Transferați datele spre {{productName}} din {{organizationName}} Workspace, Google Workspace sau Nextcloud.",
-  "MigrationDataTitle": "Importul de date"
+  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
 }

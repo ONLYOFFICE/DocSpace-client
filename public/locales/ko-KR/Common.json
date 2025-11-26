@@ -194,6 +194,7 @@
   "ContinueWith": "또는 다음을 이용:",
   "ConvertMessage": "파일을 원본 형식과 다른 형식으로 변환할 경우, 일부 데이터가 손실될 수 있습니다.",
   "ConvertToZip": "파일이<strong>.zip 파일</strong>로 압축됩니다",
+  "CopiedToClipboard": "클립보드에 복사됨",
   "Copy": "복사",
   "CopyAndKeepAll": "모두 복사하여 보관",
   "CopyAndKeepBothFolders": "두 폴더 모두 복사하여 보관",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "선택",
   "Today": "오늘",
   "ToolCallArg": "도구 호출 인수:",
+  "ToolCallArgCopied": "도구 호출 인수가 클립보드에 성공적으로 복사되었습니다",
   "ToolCallExecuted": "도구 호출 완료",
   "ToolCallResult": "도구 호출 결과:",
+  "ToolCallResultCopied": "도구 호출 결과가 클립보드에 성공적으로 복사되었습니다",
   "Tools": "도구",
   "TrashSection": "휴지통",
   "TrialDaysLeft": "{{count}}일 평가판",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
-  "YourTurn": "고객님의 차례입니다",
-  "CopiedToClipboard": "클립보드에 복사됨",
-  "ToolCallArgCopied": "도구 호출 인수가 클립보드에 성공적으로 복사되었습니다",
-  "ToolCallResultCopied": "도구 호출 결과가 클립보드에 성공적으로 복사되었습니다"
+  "YourTurn": "고객님의 차례입니다"
 }

@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "Отправить приглашение, чтобы добавить новых участников в ваш {{productName}}",
   "InviteUsersOptionDescription": "Добавьте участников для совместного редактирования в комнате.",
   "ManageAccess": "Управлять доступом",
+  "MigrationDataDescription": "Перенесите ваши данные в {{productName}} из Workspace {{organizationName}}, Google Workspace или Nextcloud.",
+  "MigrationDataTitle": "Импортировать данные",
   "NoRecentFilesHereYet": "Здесь пока нет недавних файлов",
   "PublicRoomEmptyTitle": "Добро пожаловать в Публичную комнату",
   "SectionsUploadDescription": "Загрузите файлы любого типа из {{sectionNameFirst}} или {{sectionNameSecond}}",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Загрузить с устройства",
   "UploadFromPortalTitle": "Загрузить из {{productName}}",
   "UploadPDFFormOptionDescription": "Выберите готовую PDF-форму, доступную в {{productName}}, и загрузите ее в комнату.",
-  "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных",
-  "MigrationDataTitle": "Импортировать данные",
-  "MigrationDataDescription": "Перенесите ваши данные в {{productName}} из Workspace {{organizationName}}, Google Workspace или Nextcloud."
+  "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных"
 }

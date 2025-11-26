@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "Enviar um convite para adicionar novos membros ao seu {{productName}}",
   "InviteUsersOptionDescription": "Adicione membros para edição conjunta na sala",
   "ManageAccess": "Gerenciar acesso",
+  "MigrationDataDescription": "Transfira seus dados para o {{productName}} a partir do Workspace {{organizationName}}, Google Workspace ou Nextcloud.",
+  "MigrationDataTitle": "Importar dados",
   "NoRecentFilesHereYet": "Ainda não há arquivos recentes aqui.",
   "PublicRoomEmptyTitle": "Bem-vindo à Sala Pública",
   "SectionsUploadDescription": "Enviar qualquer tipo de arquivo da {{sectionNameFirst}} ou {{sectionNameSecond}}",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
-  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual",
-  "MigrationDataDescription": "Transfira seus dados para o {{productName}} a partir do Workspace {{organizationName}}, Google Workspace ou Nextcloud.",
-  "MigrationDataTitle": "Importar dados"
+  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual"
 }

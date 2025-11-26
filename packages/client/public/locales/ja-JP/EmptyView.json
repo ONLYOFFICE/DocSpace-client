@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "{{productName}}に新しいメンバーを追加するための招待状を送信する",
   "InviteUsersOptionDescription": "ルームに共同編集用のメンバーを追加してください。",
   "ManageAccess": "アクセス管理",
+  "MigrationDataDescription": "{{organizationName}} のWorkspace、Google Workspace、またはNextcloudから {{productName}} にデータを転送します。",
+  "MigrationDataTitle": "データのインポート",
   "NoRecentFilesHereYet": "最近のファイルはまだありません",
   "PublicRoomEmptyTitle": "パブリックルームへようこそ",
   "SectionsUploadDescription": "{{sectionNameFirst}} または {{sectionNameSecond}} から任意のタイプのファイルをアップロード",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ",
-  "MigrationDataDescription": "{{organizationName}} Workspace、Google Workspace、またはNextcloudから、データを{{productName}}に移行してください。",
-  "MigrationDataTitle": "データ取り込み"
+  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
 }

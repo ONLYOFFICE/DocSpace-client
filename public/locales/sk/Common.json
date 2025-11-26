@@ -194,6 +194,7 @@
   "ContinueWith": "Pokračovať s",
   "ConvertMessage": "Ak sa rozhodnete konvertovať súbor do formátu odlišného od pôvodného, niektoré údaje sa môžu stratiť.",
   "ConvertToZip": "Súbory budú komprimované do <strong>súboru .zip</strong>",
+  "CopiedToClipboard": "Skopírované do schránky",
   "Copy": "Kopírovať",
   "CopyAndKeepAll": "Skopírovať a uschovať všetky",
   "CopyAndKeepBothFolders": "Skopírovať a uschovať oba priečinky",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "Vybrať",
   "Today": "Dnes",
   "ToolCallArg": "Argumenty volaní nástroja:",
+  "ToolCallArgCopied": "Argumenty volania nástroja úspešne skopírované do schránky",
   "ToolCallExecuted": "Vykonané volanie nástroja",
   "ToolCallResult": "Výsledok volania nástroja:",
+  "ToolCallResultCopied": "Výsledok volania nástroja bol úspešne skopírovaný do schránky",
   "Tools": "Nástroje",
   "TrashSection": "Kôš",
   "TrialDaysLeft": "{{count}} skúšobný deň (dní)",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade",
-  "CopiedToClipboard": "Skopírované do schránky",
-  "ToolCallArgCopied": "Argumenty volania nástroja úspešne skopírované do schránky",
-  "ToolCallResultCopied": "Výsledok volania nástroja bol úspešne skopírovaný do schránky"
+  "YourTurn": "Ste na rade"
 }

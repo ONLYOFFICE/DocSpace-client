@@ -194,6 +194,7 @@
   "ContinueWith": "Pokračovat s",
   "ConvertMessage": "Pokud zvolíte převod souboru do jiného formátu než původního, může dojít ke ztrátě některých dat.",
   "ConvertToZip": "Soubory budou zkomprimovány do <strong>souboru .zip</strong>",
+  "CopiedToClipboard": "Zkopírováno do schránky",
   "Copy": "Zkopírovat",
   "CopyAndKeepAll": "Zkopírovat a uchovat všechny",
   "CopyAndKeepBothFolders": "Zkopírovat a uchovat obě složky",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "Vybrat",
   "Today": "Dnes",
   "ToolCallArg": "Argumenty volání nástroje:",
+  "ToolCallArgCopied": "Argumenty volání nástroje byly úspěšně zkopírovány do schránky",
   "ToolCallExecuted": "Volání nástroje provedeno",
   "ToolCallResult": "Výsledek volání nástroje:",
+  "ToolCallResultCopied": "Výsledek volání nástroje byl úspěšně zkopírován do schránky",
   "Tools": "Nástroje",
   "TrashSection": "Koš",
   "TrialDaysLeft": "Zkušební verze {{count}} dní",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě",
-  "CopiedToClipboard": "Zkopírováno do schránky",
-  "ToolCallArgCopied": "Argumenty volání nástroje byly úspěšně zkopírovány do schránky",
-  "ToolCallResultCopied": "Výsledek volání nástroje byl úspěšně zkopírován do schránky"
+  "YourTurn": "Jste na řadě"
 }

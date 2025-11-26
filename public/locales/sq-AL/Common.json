@@ -194,6 +194,7 @@
   "ContinueWith": "Vazhdoni me",
   "ConvertMessage": "Në qoftë se zgjidhni ta konvertoni skedarin në një format të ndryshëm nga origjinali, disa të dhëna mund të humbasin.",
   "ConvertToZip": "Skedarët do të kompesohen në <strong>.zip skedar</strong>",
+  "CopiedToClipboard": "Kopjuar në kujtesën e përkohshme",
   "Copy": "Kopjoni",
   "CopyAndKeepAll": "Kopjoni dhe ruani të gjithë/a",
   "CopyAndKeepBothFolders": "Kopjoni dhe mbani të dy dosjet",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "Selektoni",
   "Today": "Sot",
   "ToolCallArg": "Argumentet e thirrjes së mjetit:",
+  "ToolCallArgCopied": "Argumentet e thirrjes së mjetit u kopjuan me sukses në kujtesën e përkohshme",
   "ToolCallExecuted": "Thirrja e mjetit u ekzekutua",
   "ToolCallResult": "Rezultati i thirrjes së mjetit:",
+  "ToolCallResultCopied": "Rezultati i thirrjes së mjetit u kopjua me sukses në kujtesën e përkohshme",
   "Tools": "Mjete",
   "TrashSection": "Kosh",
   "TrialDaysLeft": "Provë {{count}} ditë",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
-  "YourTurn": "Radha jote",
-  "CopiedToClipboard": "Kopjuar në kujtesën e përkohshme",
-  "ToolCallArgCopied": "Argumentet e thirrjes së mjetit u kopjuan me sukses në kujtesën e përkohshme",
-  "ToolCallResultCopied": "Rezultati i thirrjes së mjetit u kopjua me sukses në kujtesën e përkohshme"
+  "YourTurn": "Radha jote"
 }

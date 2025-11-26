@@ -194,6 +194,7 @@
   "ContinueWith": "ile devam et",
   "ConvertMessage": "Dosyayı orijinalinden farklı bir türe dönüştürmeyi seçerseniz, bazı veriler kaybolabilir.",
   "ConvertToZip": "<strong>Dosyalar .zip</strong> dosyasına sıkıştırılacak",
+  "CopiedToClipboard": "Kliperne kopyalandı",
   "Copy": "Kopyala",
   "CopyAndKeepAll": "Tümünü kopyala ve sakla",
   "CopyAndKeepBothFolders": "Her iki klasörü de kopyala ve sakla",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "Seç",
   "Today": "Bugün",
   "ToolCallArg": "Araç çağrısı argümanları:",
+  "ToolCallArgCopied": "Araç çağrısı argümanları başarıyla panoya kopyalandı",
   "ToolCallExecuted": "Araç çağrısı yürütülmüş",
   "ToolCallResult": "Araç çağrısı sonucu:",
+  "ToolCallResultCopied": "Araç çağrısı sonucu panoya başarıyla kopyalandı",
   "Tools": "Araçlar",
   "TrashSection": "Çöp",
   "TrialDaysLeft": "{{count}} gün deneme",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde",
-  "CopiedToClipboard": "Kliperne kopyalandı",
-  "ToolCallArgCopied": "Araç çağrısı argümanları başarıyla panoya kopyalandı",
-  "ToolCallResultCopied": "Araç çağrısı sonucu panoya başarıyla kopyalandı"
+  "YourTurn": "Sıra sizde"
 }

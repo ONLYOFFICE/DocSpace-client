@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "{{productName}} ürününüze yeni üyeler eklemek için bir davetiye gönderin ",
   "InviteUsersOptionDescription": "Odada ortak düzenleme için üyeleri ekleyin",
   "ManageAccess": "İzini Yönet",
+  "MigrationDataDescription": "{{productName}}'e {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan verilerinizi aktarın.",
+  "MigrationDataTitle": "Veri aktarımı",
   "NoRecentFilesHereYet": "Burada henüz yeni dosyalar yok",
   "PublicRoomEmptyTitle": "Genel odaya hoş geldiniz",
   "SectionsUploadDescription": "{{sectionNameFirst}} veya {{sectionNameSecond}} bölümlerinden her türlü dosyayı yükle",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
-  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz",
-  "MigrationDataDescription": "{{productName}}'e {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan verilerinizi aktarın.",
-  "MigrationDataTitle": "Veri aktarımı"
+  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
 }

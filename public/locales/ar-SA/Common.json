@@ -194,6 +194,7 @@
   "ContinueWith": "المتابعة مع",
   "ConvertMessage": "إذا اخترت تحويل الملف إلى تنسيق مختلف عن التنسيق الأصلي، فقد يتم فقد بعض البيانات.",
   "ConvertToZip": "سيتم ضغط الملفات في <strong> ملف مضغوط </strong>",
+  "CopiedToClipboard": "تم النسخ إلى الحافظة",
   "Copy": "نسخ",
   "CopyAndKeepAll": "انسخ واحتفظ بالجميع",
   "CopyAndKeepBothFolders": "انسخ واحتفظ بكلتا المجلدين",
@@ -984,8 +985,10 @@
   "TitleSelectFile": "اختر",
   "Today": "اليوم",
   "ToolCallArg": "وسائط استدعاء الأداة:",
+  "ToolCallArgCopied": "تم نسخ وسائط استدعاء الأداة بنجاح إلى الحافظة",
   "ToolCallExecuted": "تم تنفيذ استدعاء الأداة",
   "ToolCallResult": "نتيجة استدعاء الأداة:",
+  "ToolCallResultCopied": "تم نسخ نتيجة استدعاء الأداة بنجاح إلى الحافظة",
   "Tools": "الأدوات",
   "TrashSection": "محذوفات",
   "TrialDaysLeft": "تجربة لمدة {{count}} يومًا.",
@@ -1072,8 +1075,5 @@
   "YouHaveUnsavedChanges": "لقد قمت بعدم حفظ التغييرات",
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
-  "YourTurn": "دوركم الآن",
-  "CopiedToClipboard": "تم النسخ إلى الحافظة",
-  "ToolCallArgCopied": "تم نسخ وسائط استدعاء الأداة بنجاح إلى الحافظة",
-  "ToolCallResultCopied": "تم نسخ نتيجة استدعاء الأداة بنجاح إلى الحافظة"
+  "YourTurn": "دوركم الآن"
 }

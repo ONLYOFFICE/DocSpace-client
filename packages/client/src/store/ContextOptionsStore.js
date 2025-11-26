@@ -1933,6 +1933,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_edit-agent",
+        key: "edit-agent",
+        label: t("Common:EditAgent"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => this.onClickEditAgent(item),
+        disabled: false,
+      },
+      {
         id: "option_invite-users-to-room",
         key: "invite-users-to-room",
         label: t("Common:InviteContacts"),
@@ -1966,15 +1974,6 @@ class ContextOptionsStore {
       {
         key: "separator6",
         isSeparator: true,
-      },
-      {
-        id: "option_submit-to-gallery",
-        key: "submit-to-gallery",
-        label: t("Common:SubmitToFormGallery"),
-        icon: FormFileReactSvgUrl,
-        onClick: () => this.onClickSubmitToFormGallery(item),
-        isOutsideLink: true,
-        disabled: !item.security?.SubmitToFormGallery,
       },
       {
         id: "option_start-filling",
@@ -2027,14 +2026,6 @@ class ContextOptionsStore {
         icon: SettingsReactSvgUrl,
         onClick: () => this.onEditRoomTemplate(item),
         disabled: !isTemplateOwner,
-      },
-      {
-        id: "option_edit-agent",
-        key: "edit-agent",
-        label: t("Common:EditAgent"),
-        icon: SettingsReactSvgUrl,
-        onClick: () => this.onClickEditAgent(item),
-        disabled: false,
       },
       {
         id: "option_save-as-template",
@@ -2120,7 +2111,7 @@ class ContextOptionsStore {
       {
         id: "option_room-info",
         key: "room-info",
-        label: t("Common:RoomInfo"),
+        label: item.isAIAgent ? t("Common:AgentInfo") : t("Common:RoomInfo"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
         disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
@@ -2132,16 +2123,6 @@ class ContextOptionsStore {
         icon: ExportRoomIndexSvgUrl,
         onClick: () => this.onExportRoomIndex(t, item.id),
         disabled: !item.indexing || !item.security?.IndexExport,
-      },
-      {
-        id: "option_change-room-owner",
-        key: "change-room-owner",
-        label: isAIAgent
-          ? t("Translations:OwnerChange")
-          : t("Files:ChangeTheRoomOwner"),
-        icon: ReconnectSvgUrl,
-        onClick: this.onChangeRoomOwner,
-        disabled: false,
       },
       {
         id: "option_embedding-setting",
@@ -2327,6 +2308,16 @@ class ContextOptionsStore {
           item.id !== this.selectedFolderStore.id,
       },
       {
+        id: "option_change-room-owner",
+        key: "change-room-owner",
+        label: isAIAgent
+          ? t("Translations:OwnerChange")
+          : t("Files:ChangeTheRoomOwner"),
+        icon: ReconnectSvgUrl,
+        onClick: this.onChangeRoomOwner,
+        disabled: false,
+      },
+      {
         id: "option_leave-room",
         key: "leave-room",
         label: isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
@@ -2461,6 +2452,20 @@ class ContextOptionsStore {
         !(isCollaborator && option.key === "create-room"),
     );
 
+    let minItemsCount = 3;
+    if (item.isAIAgent && item.inRoom) {
+      if (this.userStore?.user?.isAdmin) {
+        if (
+          item.access === ShareAccessRights.RoomManager ||
+          item.access === ShareAccessRights.None
+        ) {
+          minItemsCount = 1;
+        }
+      } else if (item.access === ShareAccessRights.RoomManager) {
+        minItemsCount = 1;
+      }
+    }
+
     const menuGroupsConfig = [
       {
         groupKey: "more-options",
@@ -2479,7 +2484,7 @@ class ContextOptionsStore {
           [{ key: "change-room-owner" }],
         ],
         needsGrouping: true,
-        minItemsCount: 3,
+        minItemsCount,
       },
     ];
 
@@ -2600,9 +2605,15 @@ class ContextOptionsStore {
       const copyLinkIndex = resultOptions.findIndex(
         (option) => option.key === "link-for-room-members",
       );
+      const inviteUsersIndex = resultOptions.findIndex(
+        (option) => option.key === "invite-users-to-room",
+      );
 
-      const menuIndex =
-        copySharedLinkIndex === -1 ? copyLinkIndex : copySharedLinkIndex;
+      const menuIndex = item.isAIAgent
+        ? inviteUsersIndex
+        : copySharedLinkIndex === -1
+          ? copyLinkIndex
+          : copySharedLinkIndex;
 
       const insertIndex =
         menuIndex !== -1

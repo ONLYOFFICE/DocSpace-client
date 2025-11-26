@@ -3187,7 +3187,7 @@ class FilesStore {
       const canEditRoom = item.security?.EditRoom;
 
       const canViewRoomInfo = item.security?.Read || isLockedSharedRoom(item);
-      const canMuteRoom = item.security?.Mute;
+      const canMuteRoom = item.security?.Mute && item.inRoom;
 
       const canChangeOwner = item.security?.ChangeOwner;
 

@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Nahrať zo zariadenia",
   "UploadFromPortalTitle": "Nahrať z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte pripravený PDF formulár dostupný v {{productName}} a nahrajte ho do miestnosti.",
-  "VirtualDataRoomEmptyTitle": "Vitajte vo Virtuálnej dátovej miestnosti"
+  "VirtualDataRoomEmptyTitle": "Vitajte vo Virtuálnej dátovej miestnosti",
+  "MigrationDataDescription": "Preneste svoje dáta do {{productName}} z pracovného priestoru {{organizationName}}, Google Workspace alebo Nextcloud.",
+  "MigrationDataTitle": "Import údajov"
 }

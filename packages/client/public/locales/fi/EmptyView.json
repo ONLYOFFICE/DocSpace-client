@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Lataa laitteesta",
   "UploadFromPortalTitle": "Lataa {{productName}}:sta",
   "UploadPDFFormOptionDescription": "Valitse valmis PDF-lomake, joka on {{productName}}:ssa ja lataa se huoneeseen.",
-  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen."
+  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen.",
+  "MigrationDataDescription": "Siirrä tietosi {{productName}}-palveluun {{organizationName}} Workspace -työtilasta, Google Workspace -ympäristöstä tai Nextcloudista.",
+  "MigrationDataTitle": "Tuo tietoa"
 }

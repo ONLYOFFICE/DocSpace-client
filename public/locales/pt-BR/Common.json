@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
   "YourCurrentDomain": "Seu domínio atual",
   "YourLogo": "Seu logotipo",
-  "YourTurn": "Sua vez"
+  "YourTurn": "Sua vez",
+  "CopiedToClipboard": "Copiado para a área de transferência",
+  "ToolCallArgCopied": "Argumentos da chamada da ferramenta copiados com sucesso para a área de transferência",
+  "ToolCallResultCopied": "Resultado da chamada da ferramenta copiado com sucesso para a área de transferência"
 }

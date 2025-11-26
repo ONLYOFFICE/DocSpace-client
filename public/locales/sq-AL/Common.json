@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
-  "YourTurn": "Radha jote"
+  "YourTurn": "Radha jote",
+  "CopiedToClipboard": "Kopjuar në kujtesën e përkohshme",
+  "ToolCallArgCopied": "Argumentet e thirrjes së mjetit u kopjuan me sukses në kujtesën e përkohshme",
+  "ToolCallResultCopied": "Rezultati i thirrjes së mjetit u kopjua me sukses në kujtesën e përkohshme"
 }

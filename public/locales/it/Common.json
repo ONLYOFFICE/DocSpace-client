@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Hai delle modifiche non salvate",
   "YourCurrentDomain": "Il tuo dominio attuale",
   "YourLogo": "Il tuo logo",
-  "YourTurn": "Il tuo turno"
+  "YourTurn": "Il tuo turno",
+  "CopiedToClipboard": "Copiato negli appunti",
+  "ToolCallArgCopied": "Gli argomenti della chiamata dello strumento sono stati copiati correttamente negli appunti.",
+  "ToolCallResultCopied": "Il risultato della chiamata dello strumento è stato copiato correttamente negli appunti."
 }

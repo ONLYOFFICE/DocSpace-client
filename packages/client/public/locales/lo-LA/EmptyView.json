@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "ອັບໂຫຼດຈາກເຄື່ອງມື",
   "UploadFromPortalTitle": "ດາວໂຫຼດຈາກ {{productName}}",
   "UploadPDFFormOptionDescription": "ເລືອກແບບຟອມ PDF ທີ່ກະກຽມໄວ້ແລ້ວໃນ {{productName}} ແລະອັບໂຫຼດມັນໃສ່ຫ້ອງ.",
-  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ"
+  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ",
+  "MigrationDataTitle": "ນຳເຂົ້າຂໍ້ມູນ",
+  "MigrationDataDescription": "ໂອນຂໍ້ມູນຂອງທ່ານໄປຍັງ {{productName}} ຈາກ {{organizationName}} Workspace, Google Workspace, ຫຼື Nextcloud."
 }

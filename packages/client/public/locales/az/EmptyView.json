@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükləyin",
   "UploadFromPortalTitle": "{{productName}} dan yükləyin",
   "UploadPDFFormOptionDescription": "{{productName}}-də mövcud olan hazır PDF formasını seçin və onu otağa yükləyin.",
-  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz"
+  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz",
+  "MigrationDataDescription": "{{productName}} məhsuluna {{organizationName}} Workspace, Google Workspace və ya Nextcloud-dan məlumatlarınızı köçürün.",
+  "MigrationDataTitle": "Məlumatları idxal edin"
 }

@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "CopiedToClipboard": "Iespējams, tas ir nokopēts starpliktē",
+  "ToolCallArgCopied": "Rīka izsaukuma argumenti veiksmīgi kopēti starpliktrūkā",
+  "ToolCallResultCopied": "Rīka darbības rezultāts veiksmīgi kopēts starpliktrī"
 }

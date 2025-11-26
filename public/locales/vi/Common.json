@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "CopiedToClipboard": "Đã sao chép vào bảng tạm",
+  "ToolCallArgCopied": "Các đối số gọi công cụ đã được sao chép thành công vào bảng tạm",
+  "ToolCallResultCopied": "Kết quả gọi công cụ đã được sao chép thành công vào bảng tạm"
 }

@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
   "UploadFromPortalTitle": "تحميل من {{productName}}",
   "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
-  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
+  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية",
+  "MigrationDataDescription": "نقلوا بياناتكم إلى {{productName}} من {{organizationName}} Workspace أو Google Workspace أو Nextcloud.",
+  "MigrationDataTitle": "ستيراد البيانات"
 }

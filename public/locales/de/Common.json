@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
-  "YourTurn": "Jetzt sind Sie dran"
+  "YourTurn": "Jetzt sind Sie dran",
+  "CopiedToClipboard": "In die Zwischenablage kopiert",
+  "ToolCallArgCopied": "Tool-Aufrufargumente erfolgreich in die Zwischenablage kopiert",
+  "ToolCallResultCopied": "Tool-Aufrufergebnis erfolgreich in die Zwischenablage kopiert"
 }

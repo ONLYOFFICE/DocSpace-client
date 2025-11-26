@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
-  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
+  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz",
+  "MigrationDataDescription": "{{productName}}'e {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan verilerinizi aktarın.",
+  "MigrationDataTitle": "Veri aktarımı"
 }

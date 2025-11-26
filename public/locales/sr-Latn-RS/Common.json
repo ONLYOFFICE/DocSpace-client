@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Imate nesačuvane promene",
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
-  "YourTurn": "Vaš red"
+  "YourTurn": "Vaš red",
+  "CopiedToClipboard": "Kopirano u privremenu memoriju",
+  "ToolCallArgCopied": "Argumenti poziva alata uspešno kopirani u privremenu memoriju",
+  "ToolCallResultCopied": "Rezultat poziva alata uspešno kopiran u privremenu memoriju"
 }

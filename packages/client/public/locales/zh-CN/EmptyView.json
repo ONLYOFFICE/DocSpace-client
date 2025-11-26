@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "从设备上传",
   "UploadFromPortalTitle": "从{{productName}}上传",
   "UploadPDFFormOptionDescription": "选择{{productName}}中可用的现成 PDF 表单并将其上传到房间。",
-  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"
+  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间",
+  "MigrationDataDescription": "将数据从{{organizationName}}的工作区、Google Workspace 或 Nextcloud 迁移到{{productName}}。",
+  "MigrationDataTitle": "导入数据"
 }

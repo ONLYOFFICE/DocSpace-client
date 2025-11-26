@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "CopiedToClipboard": "Kopioitu leikepöydälle",
+  "ToolCallArgCopied": "Työkalun kutsuargumentit kopioitiin onnistuneesti leikepöydälle",
+  "ToolCallResultCopied": "Työkalun kutsun tulos kopioitiin onnistuneesti leikepöydälle"
 }

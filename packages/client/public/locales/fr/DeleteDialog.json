@@ -1,7 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Supprimer le chat ?",
   "DeleteAIAgentDescription": "L'agent <strong>« {{agentName}} »</strong> sera définitivement supprimé. Toutes les données et les accès utilisateurs seront perdus.",
   "DeleteAIAgentTitle": "Supprimer cet agent ?",
   "DeleteAIAgentWarning": "Je comprends les conséquences et souhaite supprimer l'agent",
+  "DeleteAIChatDescription": "Vous êtes sur le point de supprimer <strong>{{chatName}}<1>.</1></strong> Tous les messages et l'historique du chat seront définitivement supprimés et ne pourront pas être restaurés.",
   "DeleteAllGroupDescription": "Les groupes sélectionnés seront supprimés. Les utilisateurs des groupes ne seront pas supprimés de {{productName}}. Souhaitez-vous vraiment continuer ?",
   "DeleteAllGroupsTitle": "Supprimer les groupes",
   "DeleteFiles": "Vous êtes sur le point de déplacer les <strong>fichiers ({{filesCount}})</strong> vers la {{trashSection}}.",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Ces éléments seront définitivement supprimés dans 30 jours.",
   "ItemsPermanentlyDeleted": "Ces éléments seront définitivement supprimés de la {{trashSection}}.",
   "removeFromListDescription": "Vous êtes sur le point de supprimer <1>{{title}}</1> de la liste. Souhaitez-vous vraiment continuer ?",
-  "removeFromListDescriptionPlural": "Vous êtes sur le point de supprimer <1>éléments ({{count}})</1> de la liste. Souhaitez-vous vraiment continuer ?",
-  "DeleteAIChatDescription": "Vous êtes sur le point de supprimer <strong>{{chatName}}<1>.</1></strong> Tous les messages et l'historique du chat seront définitivement supprimés et ne pourront pas être restaurés.",
-  "DeleteAIAgentChatTitle": "Supprimer le chat ?"
+  "removeFromListDescriptionPlural": "Vous êtes sur le point de supprimer <1>éléments ({{count}})</1> de la liste. Souhaitez-vous vraiment continuer ?"
 }

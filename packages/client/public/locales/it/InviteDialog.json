@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Indirizzo email non valido. Puoi modificare l'email facendo doppio clic su di essa.",
   "EmailErrorMessageUserNotFound": "Utente non trovato. Puoi modificare l’email facendoci doppio clic sopra",
   "GroupMaxAvailableRoleWarning": "I gruppi possono essere aggiunti a una stanza con al massimo il ruolo {{roleName}}. Tuttavia, puoi modificare il ruolo dei singoli utenti nel gruppo dopo che è stato aggiunto con successo.",
+  "GuestAgentMaxAvailableRoleWarning": "Gli ospiti non possono essere assegnati come creatore di contenuti.\nSolo gli amministratori della stanza, gli amministratori di {{productName}} e gli Utenti sono idonei per questo ruolo.",
   "InvitationLanguage": "Lingua dell'invito",
   "InviteMembersManuallyDescription": "Invita i nuovi membri a {{productName}} personalmente via email",
   "InviteMembersSearchPlaceholder": "Invita i membri via e-mail",
@@ -12,15 +13,14 @@
   "InviteToRoomSearchPlaceholder": "Cerca e invita per nome o per e-mail",
   "InviteViaLink": "Invita tramite link",
   "InviteViaLinkDescriptionAccounts": "Crea un link universale per l’auto-autorizzazione in {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Crea un link universale per l'auto-autorizzazione come ospite nell’agente.",
+  "InviteViaLinkDescriptionAgentMembers": "Crea un link universale per i membri di {{productName}} per l’auto-autorizzazione nell’agente.",
   "InviteViaLinkDescriptionRoomGuest": "Crea un link universale per l'autorizzazione automatica nella stanza come ospite.",
   "InviteViaLinkDescriptionRoomMembers": "Crea un link universale per i membri di {{productName}} per l'autorizzazione automatica nella stanza.",
   "LinkCopySuccess": "Il link di collegamento è stato copiato",
   "SendInvitation": "Invia invito",
+  "UserAgentMaxAvailableRoleWarning": "Ospiti e Utenti non possono essere assegnati come gestori dell’agente. Solo gli amministratori della stanza e di {{productName}} sono idonei per il ruolo specificato.",
   "UserMaxAvailableRoleWarning": "Gli ospiti e gli utenti non possono essere assegnati come gestori di stanze. Solo gli amministratori della Stanza e di {{productName}} sono adatti al ruolo specificato.",
   "UsersAlreadyAdded": "Sono già stati aggiunti alcuni utenti",
-  "UsersCannotBeAdded": "I contatti disabilitati non possono essere aggiunti a una stanza.",
-  "InviteViaLinkDescriptionAgentGuest": "Crea un link universale per l'auto-autorizzazione come ospite nell’agente.",
-  "InviteViaLinkDescriptionAgentMembers": "Crea un link universale per i membri di {{productName}} per l’auto-autorizzazione nell’agente.",
-  "UserAgentMaxAvailableRoleWarning": "Ospiti e Utenti non possono essere assegnati come gestori dell’agente. Solo gli amministratori della stanza e di {{productName}} sono idonei per il ruolo specificato.",
-  "GuestAgentMaxAvailableRoleWarning": "Gli ospiti non possono essere assegnati come creatore di contenuti.\nSolo gli amministratori della stanza, gli amministratori di {{productName}} e gli Utenti sono idonei per questo ruolo."
+  "UsersCannotBeAdded": "I contatti disabilitati non possono essere aggiunti a una stanza."
 }

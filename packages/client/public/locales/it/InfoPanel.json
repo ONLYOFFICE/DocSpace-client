@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Tag aggiunti.",
   "Administration": "Amministrazione",
+  "AgentRenamed": "Agente <1>«{{oldRoomTitle}}»</1> rinominato in <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Vedi qui i dettagli degli agenti AI",
   "AndMoreLabel": "e <1>{{count}} in più</1>",
   "CreationDate": "Data di creazione",
   "Data": "Dati",
@@ -51,6 +53,7 @@
   "GalleryEmptyScreenText": "Vedi i dettagli del modello di modulo qui",
   "GroupsEmptyScreenText": "Visualizza qui i dettagli dei gruppi",
   "GuestsEmptyScreenText": "Vedi i dettagli degli ospiti qui",
+  "HistoryAgentCreated": "Agente <1>«{{roomTitle}}»</1> creato",
   "HistoryEmptyScreenText": "La cronologia delle attività verrà visualizzata qui",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> stanza copiata",
   "HistoryRoomCreated": " <1>«{{roomTitle}}»</1> stanza creata",
@@ -62,6 +65,7 @@
   "MembersEmptyScreenText": "Vedi i dettagli dei membri qui",
   "NoRecordsFound": "Nessun record trovato",
   "Properties": "Proprietà",
+  "Resolution": "Risoluzione",
   "RoomCreateUserCount": "Utenti aggiunti ({{count}}).",
   "RoomDenyDownloadDisabled": "Download e copia senza limitazioni",
   "RoomDenyDownloadEnabled": "Download e copia limitati",
@@ -95,9 +99,5 @@
   "SubmenuHistory": "Cronologia",
   "UserFileUpdated": "File aggiornato.",
   "Users": "Utenti",
-  "Versions": "Versioni",
-  "AgentRenamed": "Agente <1>«{{oldRoomTitle}}»</1> rinominato in <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Vedi qui i dettagli degli agenti AI",
-  "HistoryAgentCreated": "Agente <1>«{{roomTitle}}»</1> creato",
-  "Resolution": "Risoluzione"
+  "Versions": "Versioni"
 }

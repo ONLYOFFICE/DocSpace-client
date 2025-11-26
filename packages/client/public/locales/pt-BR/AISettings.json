@@ -38,8 +38,5 @@
   "ServerUpdatedSuccess": "Servidor atualizado com sucesso",
   "ServiceIcon": "Ícone de serviço",
   "SystemMCPListTitle": "Sistema",
-  "WebSearchDisabledSuccess": "Pesquisa na web desativada com sucesso",
-  "WebSearchEnabledSuccess": "Pesquisa na web ativada com sucesso",
-  "WebSearchKeyDescription": "Introduza a chave API obtida do seu provedor de pesquisa web",
   "WebSearchKeyHiddenDescription": "A chave API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança."
 }

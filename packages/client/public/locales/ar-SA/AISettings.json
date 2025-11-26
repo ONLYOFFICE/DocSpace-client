@@ -38,8 +38,5 @@
   "ServerUpdatedSuccess": "تم تحديث الخادم بنجاح",
   "ServiceIcon": "أيقونة الخدمة",
   "SystemMCPListTitle": "النظام",
-  "WebSearchDisabledSuccess": "تم تعطيل بحث الويب بنجاح",
-  "WebSearchEnabledSuccess": "تم تمكين بحث الويب بنجاح",
-  "WebSearchKeyDescription": "أدخلوا مفتاح API الذي تم الحصول عليه من مزود بحث الويب الخاص بكم",
   "WebSearchKeyHiddenDescription": "يتم عرض مفتاح API مرة واحدة فقط عند الحفظ ثم يتم إخفاؤه لأغراض أمنية."
 }

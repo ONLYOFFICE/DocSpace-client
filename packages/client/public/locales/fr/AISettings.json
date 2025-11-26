@@ -38,8 +38,5 @@
   "ServerUpdatedSuccess": "Serveur mis à jour avec succès",
   "ServiceIcon": "Icône du service",
   "SystemMCPListTitle": "Système",
-  "WebSearchDisabledSuccess": "Recherche web désactivée avec succès",
-  "WebSearchEnabledSuccess": "Recherche web activée avec succès",
-  "WebSearchKeyDescription": "Saisissez la clé API obtenue auprès de votre fournisseur de recherche web",
   "WebSearchKeyHiddenDescription": "La clé API est affichée une seule fois lors de l'enregistrement, puis masquée pour des raisons de sécurité."
 }

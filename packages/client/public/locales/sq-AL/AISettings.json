@@ -38,8 +38,5 @@
   "ServerUpdatedSuccess": "Serveri u përditësua me sukses.",
   "ServiceIcon": "Ikona e shërbimit",
   "SystemMCPListTitle": "Sistemi",
-  "WebSearchDisabledSuccess": "Kërkimi në internet u çaktivizua me sukses",
-  "WebSearchEnabledSuccess": "Kërkimi në internet u aktivizua me sukses",
-  "WebSearchKeyDescription": "Futni çelësin API të marrë nga ofruesi i kërkimit në internet",
   "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie."
 }

@@ -148,7 +148,6 @@ export type FilesListProps = {
 };
 
 export type ButtonsProps = {
-  inputWidth: number;
   isFilesSelectorVisible: boolean;
 
   toggleFilesSelector: VoidFunction;

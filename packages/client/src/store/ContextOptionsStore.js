@@ -2648,6 +2648,7 @@ class ContextOptionsStore {
           ]
         : [
             ["select", "view", "fill-form", "edit", "preview", "mark-read"],
+            ["ask-ai"],
             ["share", "move", "copy-to", "download", "rename"],
             [
               "mark-as-favorite",
@@ -2675,7 +2676,7 @@ class ContextOptionsStore {
           const shouldAddSeparator =
             result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
 
-          if (group.includes("restore")) {
+          if (group.includes("restore") || group.includes("ask-ai")) {
             result.push({
               key: `separator${folderSeparatorIndex++}`,
               isSeparator: true,

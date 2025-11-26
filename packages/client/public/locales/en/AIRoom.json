@@ -1,5 +1,6 @@
 {
   "AgentInViewModeWarning": "You’re in <strong>view-only</strong> mode for this AI agent. You can see the results of AI chat activity from other users.",
+  "AIAgentAccessRedirectNote": "You will be automatically redirected to the {{sectionName}} section in 5 seconds.",
   "AIChat": "AI Chat",
   "AIInstructions": "AI Instructions",
   "CreateChat": "Create chat",
@@ -22,10 +23,9 @@
   "MCPDescriptionServers": "Use MCP servers connected by the administrator to enhance chat experience with AI. MCP servers can assist with data extraction, summaries, smart suggestions, etc.",
   "Model": "Provider and model",
   "ModelDescription": "Select the AI provider and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
+  "NoAccessAIAgentTitle": "Sorry, you don't have access to this AI agent",
   "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results.",
   "ResultStorage": "Result Storage",
   "UploadFilesDevice": "Upload files from your personal device",
-  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
-  "NoAccessAIAgentTitle": "Sorry, you don't have access to this AI agent",
-  "AIAgentAccessRedirectNote": "You will be automatically redirected to the {{sectionName}} section in 5 seconds."
+  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}"
 }

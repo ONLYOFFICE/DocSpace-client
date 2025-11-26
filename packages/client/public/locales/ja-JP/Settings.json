@@ -133,6 +133,7 @@
   "ImportFromPortal": "{{organizationName}} Workspaceからのインポート",
   "ImportProcessingDescription": "データ移行中です。しばらくお待ちください。",
   "ImportSectionDescription": "インポートするセクションを選択してください。このセクションは、{{productName}}の対応するセクションに表示されます。",
+  "ImportSectionDisabled": "{{importSectionName}} をインポートするには、まず \"<1>{{sectionName}}</1>\" オプションを有効にしてください。",
   "IncludedInBusiness": "BUSINESSプランに含まれています",
   "IntegrationRequest": "{{organizationName}} {{productName}}の便利な統合やコンポーネントをお探しですか？私たちのチームにリクエストをしてください。",
   "InvitationSettings": "招待設定",
@@ -292,6 +293,5 @@
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
   "WantToContinue": "ユーザーストレージ容量制限を継続または変更しますか？",
   "WhiteLabelSubtitle": "会社名を入力し、ロゴをアップロードし、ブランディングに合わせたスタイリングにカスタマイズをしましょう。",
-  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
-  "ImportSectionDisabled": "{{importSectionName}} をインポートするには、まず \"<1>{{sectionName}}</1>\" オプションを有効にしてください。"
+  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。"
 }

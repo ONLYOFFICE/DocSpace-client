@@ -1,4 +1,6 @@
 {
+  "AgentInViewModeWarning": "Olet <strong >vain luku</strong > -tilassa tälle tekoälyagentille. Voit nähdä muiden käyttäjien tekoälykeskustelujen tulokset.",
+  "AIAgentAccessRedirectNote": "Ohjaat automaattisesti {{sectionName}}-osioon 5 sekunnissa.",
   "AIChat": "AI-Chat",
   "AIInstructions": "AI Ohjeet",
   "CreateChat": "Luo chat",
@@ -8,6 +10,7 @@
   "EmptyKnowledgeTitle": "Ei tiedostoja vielä ladattu",
   "EmptyResultsDescription": "Tekoälykeskusteluissa luoduista tiedostoista ilmestyy tiedot tähän automaattisesti. Aina kun luot sisältöä, aloitat keskustelun tai lähetät viestin, jossa on tuloste, tulos tallennetaan tähän osioon.",
   "EmptyResultsTitle": "Ei tuloksia vielä",
+  "EmptyResultsViewerDescription": "Täällä näet muiden käyttäjien tekoälykeskustelujen tulokset, kun ne ovat saatavilla.",
   "InstructionsDescriptionAgent": "Kuvaile, miten tekoälyagentin tulisi käyttäytyä ja reagoida. Määrittele sen rooli, sävy ja päätehtävät.",
   "InstructionsDescriptionAgentExample": "Esimerkki: \"Olet tekoälyviestintäavustaja, joka auttaa kirjoittamaan ja muokkaamaan lehdistötiedotteita. Säilytä ammattimainen, itsevarma ja mediaystävällinen sävy. Korosta keskeisiä viestejä selkeästi, vältä ammattikieltä ja pidä teksti ytimekkäänä ja kiinnostavana.\"",
   "Knowledge": "Tieto",
@@ -20,12 +23,9 @@
   "MCPDescriptionServers": "Käytä ylläpitäjän yhdistämiä MCP-palvelimia parantaaksesi chat-kokemusta tekoälyn avulla. MCP-palvelimet voivat auttaa datan poiminnassa, tiivistelmissä, älykkäissä ehdotuksissa jne.",
   "Model": "Palveluntarjoaja ja malli",
   "ModelDescription": "Valitse tässä huoneessa käytettävä tekoälyn tarjoaja ja malli. Tämä asetus on pakollinen ja koskee kaikkia osallistujia.",
+  "NoAccessAIAgentTitle": "Olen pahoillani, sinulla ei ole käyttöoikeutta tähän tekoälyavustajaan.",
   "ResponseQualityNode": "<1>Huomautus:</1> Vastausten laatu voi vaihdella mallista riippuen; parempien tulosten saavuttamiseksi suositellaan uusia malleja.",
   "ResultStorage": "Tulosten tallennus",
   "UploadFilesDevice": "Lataa tiedostoja henkilökohtaiselta laitteeltasi",
-  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Olet <strong >vain luku</strong > -tilassa tälle tekoälyagentille. Voit nähdä muiden käyttäjien tekoälykeskustelujen tulokset.",
-  "EmptyResultsViewerDescription": "Täällä näet muiden käyttäjien tekoälykeskustelujen tulokset, kun ne ovat saatavilla.",
-  "NoAccessAIAgentTitle": "Olen pahoillani, sinulla ei ole käyttöoikeutta tähän tekoälyavustajaan.",
-  "AIAgentAccessRedirectNote": "Ohjaat automaattisesti {{sectionName}}-osioon 5 sekunnissa."
+  "UploadFilesPortal": "Lataa tiedostoja osiosta {{sectionNameFirst}} tai {{sectionNameSecond}}"
 }

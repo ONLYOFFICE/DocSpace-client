@@ -46,6 +46,10 @@ export const CodeView = ({
   const { t } = useTranslation(["Common"]);
 
   const getResult = () => {
+    if (content.result && typeof content.result === "string") {
+      return content.result;
+    }
+
     if (content.result && "content" in content.result) {
       return (content.result?.content as Record<string, unknown>[])?.[0]
         .text as string;
@@ -67,7 +71,10 @@ export const CodeView = ({
 
   const showResult = placement === "message" && content.result;
   const isErrorResult =
-    content.result && "isError" in content.result && content.result?.isError;
+    content.result &&
+    typeof content.result !== "string" &&
+    "isError" in content.result &&
+    content.result?.isError;
 
   return (
     <>

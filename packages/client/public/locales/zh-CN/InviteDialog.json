@@ -3,6 +3,7 @@
   "EmailErrorMessage": "邮件地址无效。您可双击邮件以进行编辑。",
   "EmailErrorMessageUserNotFound": "未找到用户。您可以通过双击电子邮件地址进行编辑。",
   "GroupMaxAvailableRoleWarning": "可以将群组添加到房间，最大角色为{{roleName}}。但是，成功添加群组后，您可以更改群组中各个用户的角色。",
+  "GuestAgentMaxAvailableRoleWarning": "客人不能被指定为内容创作者。\n只有房间管理员、{{productName}} 管理员和用户才有资格担任此角色。",
   "InvitationLanguage": "邀请语言",
   "InviteMembersManuallyDescription": "通过电子邮件亲自邀请新成员加入 {{productName}}",
   "InviteMembersSearchPlaceholder": "通过电子邮件邀请成员",

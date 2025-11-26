@@ -46,6 +46,7 @@ type AiRoomTabsProps = {
 
   currentClientView?: ClientLoadingStore["currentClientView"];
   showTabsLoader?: ClientLoadingStore["showTabsLoader"];
+  showArticleLoader?: ClientLoadingStore["showArticleLoader"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 
   currentTab?: AiRoomStore["currentTab"];
@@ -59,6 +60,7 @@ const AiRoomTabs = ({
   rootRoomId,
 
   showTabsLoader,
+  showArticleLoader,
   currentClientView,
   setIsSectionBodyLoading,
 
@@ -143,7 +145,7 @@ const AiRoomTabs = ({
 
   const isChat = currentClientView === "chat";
 
-  if (showTabsLoader)
+  if (showTabsLoader || showArticleLoader)
     return (
       <SectionSubmenuSkeleton style={{ marginBottom: isChat ? 0 : "20px" }} />
     );
@@ -167,8 +169,12 @@ export default inject(
     selectedFolderStore,
     accessRightsStore,
   }: TStore) => {
-    const { showTabsLoader, setIsSectionBodyLoading, currentClientView } =
-      clientLoadingStore;
+    const {
+      showTabsLoader,
+      showArticleLoader,
+      setIsSectionBodyLoading,
+      currentClientView,
+    } = clientLoadingStore;
 
     const { currentTab, setCurrentTab, setKnowledgeId, setResultId } =
       aiRoomStore;
@@ -180,6 +186,7 @@ export default inject(
       rootRoomId,
 
       showTabsLoader,
+      showArticleLoader,
       setIsSectionBodyLoading,
 
       currentTab,

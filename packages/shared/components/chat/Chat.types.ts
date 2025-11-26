@@ -59,6 +59,7 @@ export type SelectChatProps = {
     onDeleteAction: () => void;
   }) => void;
   setDeleteDialogVisible?: (value: boolean) => void;
+  folderFormValidation: RegExp;
 };
 
 export type RenameChatProps = {
@@ -76,6 +77,7 @@ export type ChatHeaderProps = SelectModelProps &
       onDeleteAction: () => void;
     }) => void;
     setDeleteDialogVisible?: (value: boolean) => void;
+    folderFormValidation: RegExp;
   };
 
 export type MessageProps = {
@@ -85,6 +87,7 @@ export type MessageProps = {
   isLast: boolean;
   getIcon: TGetIcon;
   getResultStorageId: () => number | null;
+  folderFormValidation: RegExp;
 };
 
 export type MessageButtonsProps = {
@@ -95,11 +98,13 @@ export type MessageButtonsProps = {
   getIcon: TGetIcon;
   messageIndex: number;
   getResultStorageId: () => number | null;
+  folderFormValidation: RegExp;
 };
 
 export type MessageCodeBlockProps = {
   language?: string;
   content: string;
+  successCopyMessage?: string;
 };
 
 export type MessageErrorProps = {
@@ -115,6 +120,7 @@ export type MessageMarkdownFieldProps = {
   chatMessage: string;
   propLanguage?: string;
   isFirst?: boolean;
+  successCopyMessage?: string;
 };
 
 export type MessageToolCallProps = {
@@ -131,6 +137,7 @@ export type MessageBodyProps = {
 
   getIcon: TGetIcon;
   getResultStorageId: () => number | null;
+  folderFormValidation: RegExp;
 };
 
 export type FilesListProps = {
@@ -141,7 +148,6 @@ export type FilesListProps = {
 };
 
 export type ButtonsProps = {
-  inputWidth: number;
   isFilesSelectorVisible: boolean;
 
   toggleFilesSelector: VoidFunction;
@@ -213,4 +219,5 @@ export type ChatProps = {
     onDeleteAction: () => void;
   }) => void;
   setDeleteDialogVisible?: (value: boolean) => void;
+  folderFormValidation: RegExp;
 };

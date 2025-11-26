@@ -46,8 +46,6 @@
   "InviteRootRoomDescription": "ඔබේ {{productName}} වෙත නව සාමාජිකයන් එක් කිරීමට ආරාධනාවක් යවන්න.",
   "InviteUsersOptionDescription": "කාමරයේ ඒකාබද්ධ සංස්කරණය සඳහා සාමාජිකයන් එක් කරන්න",
   "ManageAccess": "ප්‍රවේශය කළමනාකරණය කරන්න",
-  "MigrationDataDescription": "ඔබගේ {{productName}} වෙත {{organizationName}} Workspace, Google Workspace, හෝ Nextcloud වෙතින් දත්ත ආනයනය කරන්න.",
-  "MigrationDataTitle": "පාරිභාෂික දත්ත",
   "NoRecentFilesHereYet": "මෙහි තවමත් මෑත කාලීන ගොනු නොමැත",
   "PublicRoomEmptyTitle": "ජන කාමරයට සාදරයෙන් පිළිගන්නවා!",
   "SectionsUploadDescription": "{{sectionNameFirst}} හෝ {{sectionNameSecond}} වෙතින් ඕනෑම වර්ගයේ ගොනු උඩුගත කරන්න.",

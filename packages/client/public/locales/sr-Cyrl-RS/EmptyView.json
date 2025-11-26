@@ -46,8 +46,6 @@
   "InviteRootRoomDescription": "Пошаљите позив за додавање нових чланова у ваш {{productName}}",
   "InviteUsersOptionDescription": "Додај чланове за заједничко уређивање у просторији",
   "ManageAccess": "Управљање приступом",
-  "MigrationDataDescription": "Увезите податке у ваш {{productName}} са {{organizationName}} Workspace, Google Workspace или Nextcloud.",
-  "MigrationDataTitle": "Подаци о миграцији",
   "NoRecentFilesHereYet": "Нема недавних фајлова овде још",
   "PublicRoomEmptyTitle": "Добродошли у Јавну собу",
   "SectionsUploadDescription": "Отпремите датотеке било ког типа са {{sectionNameFirst}} или {{sectionNameSecond}}",

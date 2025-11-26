@@ -46,8 +46,6 @@
   "InviteRootRoomDescription": "Dërgoni një ftesë për të shtuar anëtarë të rinj në {{productName}}",
   "InviteUsersOptionDescription": "Shtoni anëtarë për redaktim të përbashkët në dhomë",
   "ManageAccess": "Menaxhoni aksesin",
-  "MigrationDataDescription": "Importoni të dhëna në {{productName}} nga {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
-  "MigrationDataTitle": "Të dhënat e migrimit",
   "NoRecentFilesHereYet": "Nuk ka skedarë të fundit ende.",
   "PublicRoomEmptyTitle": "Mirë se vini në dhomën publike",
   "SectionsUploadDescription": "Ngarkoni çdo lloj skedari nga {{sectionNameFirst}} ose {{sectionNameSecond}}",

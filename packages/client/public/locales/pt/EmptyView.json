@@ -46,8 +46,6 @@
   "InviteRootRoomDescription": "Enviar um convite para adicionar novos membros ao seu {{productName}}",
   "InviteUsersOptionDescription": "Adicione membros para edição conjunta na sala",
   "ManageAccess": "Gerenciar acesso",
-  "MigrationDataDescription": "Importe dados para o {{productName}} do {{organizationName}} Workspace, Google Workspace ou Nextcloud.",
-  "MigrationDataTitle": "Dados de migração",
   "NoRecentFilesHereYet": "Ainda não há arquivos recentes aqui.",
   "PublicRoomEmptyTitle": "Bem-vindo à Sala Pública",
   "SectionsUploadDescription": "Enviar qualquer tipo de arquivo da {{sectionNameFirst}} ou {{sectionNameSecond}}",

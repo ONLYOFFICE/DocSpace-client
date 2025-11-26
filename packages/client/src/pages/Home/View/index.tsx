@@ -62,6 +62,9 @@ import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import type AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import NoAccessContainer, {
+  NoAccessContainerType,
+} from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -94,6 +97,7 @@ type ViewProps = UseContactsProps &
     aiAgentsAbortController: Nullable<AbortController>;
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
+    showArticleLoader: ClientLoadingStore["showArticleLoader"];
 
     aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
     setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
@@ -101,11 +105,15 @@ type ViewProps = UseContactsProps &
     setDeleteDialogVisible: DialogsStore["setDeleteDialogVisible"];
 
     canUseChat: AccessRightsStore["canUseChat"];
+
+    isErrorAIAgentNotAvailable: FilesStore["isErrorAIAgentNotAvailable"];
+
     isAdmin: AuthStore["isAdmin"];
     aiConfig: SettingsStore["aiConfig"];
     standalone: SettingsStore["standalone"];
     isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
+    folderFormValidation: RegExp;
   };
 
 const View = ({
@@ -155,6 +163,7 @@ const View = ({
   chatSettings,
   showBodyLoader,
   showHeaderLoader,
+  showArticleLoader,
 
   getFilesSettings,
   setSubscriptions,
@@ -184,6 +193,8 @@ const View = ({
   standalone,
   isResultTab,
   resultId,
+  isErrorAIAgentNotAvailable,
+  folderFormValidation,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common", "AIRoom"]);
@@ -579,7 +590,8 @@ const View = ({
               sectionWidth={context.sectionWidth}
               currentView={currentView}
             />
-          ) : currentView === "chat" ? (
+          ) : currentView === "chat" &&
+            (!isErrorAIAgentNotAvailable || showArticleLoader) ? (
             <Chat
               userAvatar={userAvatar}
               roomId={isLoading && !showHeaderLoader ? "-1" : roomId!}
@@ -597,7 +609,10 @@ const View = ({
               getResultStorageId={getResultStorageId}
               setIsAIAgentChatDelete={setIsAIAgentChatDelete}
               setDeleteDialogVisible={setDeleteDialogVisible}
+              folderFormValidation={folderFormValidation}
             />
+          ) : currentView === "chat" && isErrorAIAgentNotAvailable ? (
+            <NoAccessContainer type={NoAccessContainerType.Agent} />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
           ) : (
@@ -632,7 +647,7 @@ export const ViewComponent = inject(
     aiRoomStore,
   }: TStore) => {
     const { isResultTab, resultId } = aiRoomStore;
-    const { aiConfig, standalone } = settingsStore;
+    const { aiConfig, standalone, folderFormValidation } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
 
@@ -667,6 +682,7 @@ export const ViewComponent = inject(
       aiAgentsController,
 
       clearFiles,
+      isErrorAIAgentNotAvailable,
     } = filesStore;
 
     const {
@@ -675,6 +691,7 @@ export const ViewComponent = inject(
       setIsSectionHeaderLoading,
       setIsProfileLoaded,
 
+      showArticleLoader,
       showHeaderLoader,
     } = clientLoadingStore;
 
@@ -753,6 +770,7 @@ export const ViewComponent = inject(
       chatSettings: selectedFolderStore?.chatSettings,
       showBodyLoader: clientLoadingStore.showBodyLoader,
       showHeaderLoader,
+      showArticleLoader,
 
       getFilesSettings,
       setSubscriptions,
@@ -775,12 +793,14 @@ export const ViewComponent = inject(
       setIsAIAgentChatDelete,
       setDeleteDialogVisible,
 
+      isErrorAIAgentNotAvailable,
       canUseChat,
       isAdmin,
       aiConfig,
       standalone,
       isResultTab,
       resultId,
+      folderFormValidation,
     };
   },
 )(observer(View));

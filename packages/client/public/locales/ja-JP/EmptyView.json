@@ -46,8 +46,6 @@
   "InviteRootRoomDescription": "{{productName}}に新しいメンバーを追加するための招待状を送信する",
   "InviteUsersOptionDescription": "ルームに共同編集用のメンバーを追加してください。",
   "ManageAccess": "アクセス管理",
-  "MigrationDataDescription": "{{organizationName}} のWorkspace、Google Workspace、または Nextcloud から、{{productName}} にデータをインポートできます。",
-  "MigrationDataTitle": "移行データ",
   "NoRecentFilesHereYet": "最近のファイルはまだありません",
   "PublicRoomEmptyTitle": "パブリックルームへようこそ",
   "SectionsUploadDescription": "{{sectionNameFirst}} または {{sectionNameSecond}} から任意のタイプのファイルをアップロード",

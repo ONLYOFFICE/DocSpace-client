@@ -3,6 +3,7 @@
   "EmailErrorMessage": "이메일 주소가 유효하지 않습니다. 이메일을 더블클릭하여 편집할 수 있습니다.",
   "EmailErrorMessageUserNotFound": "사용자를 찾을 수 없습니다. 이메일을 두 번 클릭하여 편집할 수 있습니다.",
   "GroupMaxAvailableRoleWarning": "최대 {{roleName}} 역할로 룸에 그룹을 추가할 수 있습니다. 그러나 추가된 후에 그룹에 포함된 개별 사용자의 역할을 변경할 수 있습니다. ",
+  "GuestAgentMaxAvailableRoleWarning": "손님은 콘텐츠 제작자로 지정할 수 없습니다.\n{{productName}} 관리자, 룸 관리자 및 사용자만 이 역할에 적격합니다.",
   "InvitationLanguage": "초대 언어",
   "InviteMembersManuallyDescription": "이메일을 통해 개인적으로 새 멤버를 {{productName}}에 초대하세요",
   "InviteMembersSearchPlaceholder": "이메일을 통한 멤버 초대",

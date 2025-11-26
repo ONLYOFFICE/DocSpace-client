@@ -35,17 +35,20 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import { inject, observer } from "mobx-react";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 type ResetWebSearchDialogProps = {
   onSuccess?: VoidFunction;
   onClose: VoidFunction;
   restoreWebSearch?: AISettingsStore["restoreWebSearch"];
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const ResetWebSearchDialogComponent = ({
   onSuccess,
   onClose,
   restoreWebSearch,
+  getAIConfig,
 }: ResetWebSearchDialogProps) => {
   const { t } = useTranslation(["AISettings", "Common", "OAuth", "Settings"]);
 
@@ -62,6 +65,7 @@ const ResetWebSearchDialogComponent = ({
         }),
       );
       onSuccess?.();
+      getAIConfig?.();
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
@@ -102,8 +106,11 @@ const ResetWebSearchDialogComponent = ({
   );
 };
 
-export const ResetWebSearchDialog = inject(({ aiSettingsStore }: TStore) => {
-  return {
-    restoreWebSearch: aiSettingsStore.restoreWebSearch,
-  };
-})(observer(ResetWebSearchDialogComponent));
+export const ResetWebSearchDialog = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    return {
+      restoreWebSearch: aiSettingsStore.restoreWebSearch,
+      getAIConfig: settingsStore.getAIConfig,
+    };
+  },
+)(observer(ResetWebSearchDialogComponent));

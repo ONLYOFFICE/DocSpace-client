@@ -46,8 +46,6 @@
   "InviteRootRoomDescription": "Gửi lời mời để thêm thành viên mới vào {{productName}} của bạn",
   "InviteUsersOptionDescription": "Thêm thành viên để cùng chỉnh sửa trong phòng",
   "ManageAccess": "Quản lý quyền truy cập",
-  "MigrationDataDescription": "Nhập dữ liệu {{productName}} của bạn từ {{organizationName}} Workspace, Google Workspace hoặc Nextcloud.",
-  "MigrationDataTitle": "Di chuyển Dữ liệu",
   "NoRecentFilesHereYet": "Chưa có tệp nào gần đây cả.",
   "PublicRoomEmptyTitle": "Chào mừng bạn đến với Phòng Công Cộng",
   "SectionsUploadDescription": "Tải lên bất kỳ loại tệp nào từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",

@@ -3,6 +3,7 @@
   "EmailErrorMessage": "E-poçt ünvanı etibarlı deyil. Siz e-poçtun üzərinə iki dəfə klikləməklə redaktə edə bilərsiniz.",
   "EmailErrorMessageUserNotFound": "İstifadəçi tapılmadı. E-poçtunu iki dəfə klikləməklə redaktə edə bilərsiniz.",
   "GroupMaxAvailableRoleWarning": "Qruplar maksimum {{roleName}} rolu olan otağa əlavə edilə bilər. Bununla belə, qrup uğurla əlavə edildikdən sonra qrupdakı fərdi istifadəçilərin rolunu dəyişə bilərsiniz.",
+  "GuestAgentMaxAvailableRoleWarning": "Qonaqlar Təcrübə yaradıcısı kimi təyin edilə bilməzlər.\nBu rola yalnız Otaq administratorları, {{productName}} administratorları və İstifadəçiləri layiqdir.",
   "InvitationLanguage": "Dəvət dili",
   "InviteMembersManuallyDescription": "E-poçt vasitəsilə {{productName}} məhsuluna yeni üzvləri şəxsən dəvət edin ",
   "InviteMembersSearchPlaceholder": "Üzvləri e-poçtla dəvət edin",

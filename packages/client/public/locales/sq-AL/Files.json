@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Model dhomne <1>«{{title}}»</1> ruajtë",
   "ScheduledTrashMove": "{{date}} do të zhvendoset te {{sectionName}}",
   "SendByEmail": "Dërgoni me email",
+  "SharedBy": "Ndarë nga",
   "ShareFolder": "Ndani dosjen",
   "ShareFolderDescription": "Do të krijohet një dhomë e re dhe e gjithë përmbajtja e dosjes së zgjedhur do të kopjohet atje. Më pas, mund të ftoni përdorues të tjerë të bashkëpunojnë për skedarët brenda një dhome.\"",
   "SharePDFFormModalDescription": "Do të krijohet një dhomë e re dhe formulari PDF do të kopjohet atje. Më pas mund të ftoni përdorues të tjerë të plotësojnë formularin në dhomë.",

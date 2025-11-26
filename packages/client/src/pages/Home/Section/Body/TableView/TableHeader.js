@@ -88,6 +88,7 @@ class FilesTableHeader extends React.Component {
       changeDocumentsTabs,
       withContent,
       headerBorder,
+      isInSharedFolder,
     } = this.props;
 
     const sortBy =
@@ -110,6 +111,7 @@ class FilesTableHeader extends React.Component {
       isSharedWithMeFolder !== prevProps.isSharedWithMeFolder ||
       isFavoritesFolder !== prevProps.isFavoritesFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
+      isInSharedFolder !== prevProps.isInSharedFolder ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
       (!changeDocumentsTabs && sortOrder !== stateSortOrder)
     ) {
@@ -215,10 +217,12 @@ class FilesTableHeader extends React.Component {
       isTemplatesFolder,
       isIndexing,
       isSharedWithMeFolder,
+      isInSharedFolder,
       isAIAgentsFolder,
     } = this.props;
 
-    if (isSharedWithMeFolder) return this.getSharedWithMeFolderColumns();
+    if (isSharedWithMeFolder || isInSharedFolder)
+      return this.getSharedWithMeFolderColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isAIAgentsFolder) return this.getAIAgentsColumns();
@@ -418,7 +422,32 @@ class FilesTableHeader extends React.Component {
       modifiedShareWithMeColumnIsEnabled,
       sizeShareWithMeColumnIsEnabled,
       typeShareWithMeColumnIsEnabled,
+      isInSharedFolder,
+      isPublicRoom,
     } = this.props;
+
+    const sharedByBlock =
+      !isPublicRoom && !isInSharedFolder
+        ? {
+            key: "SharedByShareWithMe",
+            title: t("SharedBy"),
+            enable: sharedByShareWithMeColumnIsEnabled,
+            resizable: true,
+            onChange: this.onColumnChange,
+          }
+        : {
+            key: "sharedBy-empty-key",
+          };
+
+    const author = !isPublicRoom
+      ? {
+          key: "AuthorShareWithMe",
+          title: t("ByAuthor"),
+          enable: authorShareWithMeColumnIsEnabled,
+          resizable: true,
+          onChange: this.onColumnChange,
+        }
+      : { key: "author-empty-key" };
 
     const columns = [
       {
@@ -431,20 +460,8 @@ class FilesTableHeader extends React.Component {
         sortBy: SortByFieldName.Name,
         onClick: this.onFilter,
       },
-      {
-        key: "SharedByShareWithMe",
-        title: t("SharedBy"),
-        enable: sharedByShareWithMeColumnIsEnabled,
-        resizable: true,
-        onChange: this.onColumnChange,
-      },
-      {
-        key: "AuthorShareWithMe",
-        title: t("ByAuthor"),
-        enable: authorShareWithMeColumnIsEnabled,
-        resizable: true,
-        onChange: this.onColumnChange,
-      },
+      sharedByBlock,
+      author,
       {
         key: "AccessLevelShareWithMe",
         title: t("AccessLevel"),
@@ -1066,6 +1083,7 @@ export default inject(
       isRecentFolder,
       isFavoritesFolder,
       isSharedWithMeFolder,
+      isInSharedFolder,
       isAIAgentsFolder,
     } = treeFoldersStore;
     const withContent = canShare;
@@ -1234,6 +1252,7 @@ export default inject(
       isFrame,
       isAIAgentsFolder,
       isRecentFolder,
+      isInSharedFolder,
       isSharedWithMeFolder,
       isFavoritesFolder,
       showSettings: frameConfig?.showSettings,

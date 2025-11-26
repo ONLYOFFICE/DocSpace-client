@@ -1,4 +1,6 @@
 {
+  "AgentInViewModeWarning": "Jesteś w trybie <strong>tylko do odczytu</strong> dla tego agenta AI. Możesz zobaczyć wyniki aktywności czatu AI od innych użytkowników.",
+  "AIAgentAccessRedirectNote": "Zostaniesz automatycznie przekierowany do sekcji {{sectionName}} za 5 sekund.",
   "AIChat": "AI-Chat",
   "AIInstructions": "Instrukcje AI",
   "CreateChat": "Utwórz czat",
@@ -8,6 +10,7 @@
   "EmptyKnowledgeTitle": "Jeszcze nie przesłano żadnych plików.",
   "EmptyResultsDescription": "Pliki generowane w AI-Chat pojawią się tutaj automatycznie. Za każdym razem, gdy wygenerujesz treść, rozpoczniesz czat lub wyślesz wiadomość z wynikiem, rezultat zostanie zapisany w tej sekcji.",
   "EmptyResultsTitle": "Brak wyników na razie",
+  "EmptyResultsViewerDescription": "Wraz z ich dostępnością, tutaj zobaczysz wyniki aktywności czatu AI od innych użytkowników.",
   "InstructionsDescriptionAgent": "Opisz, jak agent AI powinien się zachowywać i odpowiadać. Zdefiniuj jego rolę, ton i główne zadania.",
   "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga w pisaniu i redagowaniu komunikatów prasowych. Zachowuj profesjonalny, pewny siebie i przyjazny mediom ton. Wyraźnie podkreślaj kluczowe przesłania, unikaj żargonu i utrzymuj tekst zwięzły i angażujący.”",
   "Knowledge": "Wiedza",
@@ -18,6 +21,7 @@
   "KnowledgeUnavailableDescriptionUser": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla agentów AI, skontaktuj się z administratorem {{productName}}, aby skonfigurować dostawcę osadzeń.",
   "MCP": "Narzędzia MCP do tego pomieszczenia",
   "MCPDescriptionServers": "Wykorzystaj serwery MCP połączone przez administratora, aby ulepszyć doświadczenie czatu z wykorzystaniem AI. Serwery MCP mogą pomagać w ekstrakcji danych, podsumowaniach, inteligentnych sugestiach, itp.",
+  "NoAccessAIAgentTitle": "Przepraszamy, nie masz dostępu do tego agenta AI.",
   "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
   "ResultStorage": "Przechowywanie wyników",
   "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",

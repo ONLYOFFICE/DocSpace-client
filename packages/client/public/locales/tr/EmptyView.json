@@ -46,8 +46,6 @@
   "InviteRootRoomDescription": "{{productName}} ürününüze yeni üyeler eklemek için bir davetiye gönderin ",
   "InviteUsersOptionDescription": "Odada ortak düzenleme için üyeleri ekleyin",
   "ManageAccess": "İzini Yönet",
-  "MigrationDataDescription": "Verileri {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan {{productName}} üzerine aktarın.",
-  "MigrationDataTitle": "Taşınma Verileri",
   "NoRecentFilesHereYet": "Burada henüz yeni dosyalar yok",
   "PublicRoomEmptyTitle": "Genel odaya hoş geldiniz",
   "SectionsUploadDescription": "{{sectionNameFirst}} veya {{sectionNameSecond}} bölümlerinden her türlü dosyayı yükle",

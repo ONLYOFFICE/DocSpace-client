@@ -2,7 +2,7 @@
   "AddStaticText": "Statik metin ekleme",
   "AddWatermarkElements": "Filigran öğeleri ekleyin",
   "AddWatermarksToDocuments": "Belgelere filigran ekleme",
-  "AddWatermarksToDocumentsDescription": "Bu odadaki tüm belgeleri filigranlarla koruyun. Bir belge zaten bir filigran içeriyorsa, değiştirilmeyecektir.",
+  "AddWatermarksToDocumentsDescription": "Bu odadaki tüm belgeleri filigranlarla koruyun.\nBir belge zaten bir filigrana sahipse, değiştirilmeyecektir.\nBu ayar etkinleştirildiğinde, filigranın bozulmamasını sağlamak için belgeler yalnızca PDF olarak indirilebilir.",
   "AutomaticIndexing": "Otomatik dizinleme",
   "AutomaticIndexingDescription": "Dosya ve klasörleri seri numarasına göre dizinlemek için otomatik dizinlemeyi etkinleştirin. Numaraya göre sıralama tüm kullanıcılar için varsayılan olarak ayarlanacaktır.",
   "ChooseRoomType": "Oda tipini seç",

@@ -2,7 +2,7 @@
   "AddStaticText": "Thêm văn bản tĩnh",
   "AddWatermarkElements": "Thêm các phần watermark ",
   "AddWatermarksToDocuments": "Thêm watermark vào tài liệu",
-  "AddWatermarksToDocumentsDescription": "Bảo vệ tất cả các tài liệu trong phòng này bằng watermark. Nếu một tài liệu đã có một watermark, nó sẽ không được thay thế.",
+  "AddWatermarksToDocumentsDescription": "Bảo vệ tất cả các tài liệu trong phòng này bằng hình mờ nước.\nNếu một tài liệu đã chứa hình mờ nước, nó sẽ không được thay thế.\nKhi cài đặt này được bật, tài liệu chỉ có thể được tải xuống dưới dạng tệp PDF để đảm bảo hình mờ nước vẫn còn nguyên vẹn.",
   "AutomaticIndexing": "Tự động lập chỉ mục",
   "AutomaticIndexingDescription": "Cho phép lập chỉ mục tự động cho các tập tin và thư mục chỉ mục theo số seri. Sắp xếp theo số sẽ được đặt làm mặc định cho tất cả người dùng.",
   "ChooseRoomType": "Chọn loại phòng",

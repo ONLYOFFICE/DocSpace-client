@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "CopiedToClipboard": "Buferə kopyalandı",
+  "ToolCallArgCopied": "Alət çağırışı arqumentləri uğurla panoya kopyalandı",
+  "ToolCallResultCopied": "Alət çağırışının nəticəsi panoya uğurla kopyalandı"
 }

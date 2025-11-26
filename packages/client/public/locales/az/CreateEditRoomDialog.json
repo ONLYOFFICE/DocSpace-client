@@ -2,7 +2,7 @@
   "AddStaticText": "Statik mətn əlavə edin",
   "AddWatermarkElements": "Su nişanı elementləri əlavə edin",
   "AddWatermarksToDocuments": "Sənədlərə su nişanı əlavə edin",
-  "AddWatermarksToDocumentsDescription": "Bu otaqdakı bütün sənədləri su nişanları ilə qoruyun. Əgər sənəd artıq mövcuddursa, o, əvəz olunmayacaq.",
+  "AddWatermarksToDocumentsDescription": "Bu otaqda olan bütün sənədləri su nişanları ilə qoruyun.\nƏgər sənədə artıq su nişanı varsa, o dəyişdirilmayacaq.\nBu parametrin aktivləşdirildikdə, sənədlər yalnız PDF kimi yüklənə bilər ki, su nişanı bütünlüklə qalsın.",
   "AutomaticIndexing": "Avtomatik indeksləşdirmə",
   "AutomaticIndexingDescription": "Fayl və qovluqları seriya nömrəsinə görə indeksləşdirmək üçün avtomatik indeksləşdirməni aktivləşdirin. Nömrə üzrə çeşidləmə bütün istifadəçilər üçün standart olaraq təyin ediləcək.",
   "ChooseRoomType": "Otaq növünü seçin",

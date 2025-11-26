@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "උපාංගයෙන් උඩුගත කරන්න",
   "UploadFromPortalTitle": "{{productName}} වෙතින් උඩුගත කරන්න",
   "UploadPDFFormOptionDescription": "{{productName}} හි ඇති පෙරනිර්මාණය කරන ලද PDF ආකෘතියක් තෝරාගෙන එය කාමරයට උඩුගත කරන්න.",
-  "VirtualDataRoomEmptyTitle": "ආදරයෙන් පිළිගන්නවා, අන්තර්ජාල දත්ත කාමරයට!"
+  "VirtualDataRoomEmptyTitle": "ආදරයෙන් පිළිගන්නවා, අන්තර්ජාල දත්ත කාමරයට!",
+  "MigrationDataDescription": "{{organizationName}} Workspace, Google Workspace, හෝ Nextcloud වෙතින් ඔබේ දත්ත {{productName}} වෙත මාරු කරන්න.",
+  "MigrationDataTitle": "දත්ත ආයාත කරන්න"
 }

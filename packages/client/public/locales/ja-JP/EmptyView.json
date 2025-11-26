@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
+  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ",
+  "MigrationDataDescription": "{{organizationName}} Workspace、Google Workspace、またはNextcloudから、データを{{productName}}に移行してください。",
+  "MigrationDataTitle": "データ取り込み"
 }

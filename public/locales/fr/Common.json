@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
   "YourLogo": "Votre logo",
-  "YourTurn": "Votre tour"
+  "YourTurn": "Votre tour",
+  "CopiedToClipboard": "Copié dans le presse-papiers",
+  "ToolCallArgCopied": "Arguments d'appel de l'outil copiés avec succès dans le presse-papiers",
+  "ToolCallResultCopied": "Résultat de l'appel de l'outil copié avec succès dans le presse-papiers"
 }

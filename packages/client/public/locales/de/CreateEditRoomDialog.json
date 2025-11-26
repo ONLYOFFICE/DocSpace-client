@@ -2,7 +2,7 @@
   "AddStaticText": "Statischen Text hinzufügen",
   "AddWatermarkElements": "Wassermarkelemente hinzufügen",
   "AddWatermarksToDocuments": "Wasserzeichen zu Dokumenten hinzufügen",
-  "AddWatermarksToDocumentsDescription": "Schützen Sie alle Dokumente in diesem Raum mit Wasserzeichen. Wenn ein Dokument bereits ein Wasserzeichen enthält, wird dieses nicht ersetzt.",
+  "AddWatermarksToDocumentsDescription": "Alle Dokumente in diesem Raum mit Wasserzeichen schützen. Bestehende Wasserzeichen in Dokumenten werden nicht ersetzt. Wenn diese Einstellung aktiviert ist, können Dokumente nur als PDF heruntergeladen werden, um den Erhalt des Wasserzeichens zu gewährleisten.",
   "AutomaticIndexing": "Automatische Indexierung",
   "AutomaticIndexingDescription": "Aktivieren Sie die automatische Indexierung, um Dateien und Ordner nach Seriennummer zu indexieren. Die Sortierung nach Nummer wird für alle Benutzer als Standard festgelegt.",
   "ChooseRoomType": "Raumtyp wählen",

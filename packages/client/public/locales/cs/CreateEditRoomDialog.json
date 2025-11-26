@@ -2,7 +2,7 @@
   "AddStaticText": "Přidání statického textu",
   "AddWatermarkElements": "Přidání prvků vodoznaku",
   "AddWatermarksToDocuments": "Přidání vodoznaků do dokumentů",
-  "AddWatermarksToDocumentsDescription": "Chraňte všechny dokumenty v této místnosti vodoznakem. Pokud dokument již vodoznak obsahuje, nebude nahrazen.",
+  "AddWatermarksToDocumentsDescription": "Chraňte všechny dokumenty v této místnosti vodoznaky.\nPokud dokument již obsahuje vodoznak, nebude nahrazen.\nPři aktivaci tohoto nastavení lze dokumenty stahovat pouze jako PDF, aby vodoznak zůstal neporušený.",
   "AutomaticIndexing": "Automatické indexování",
   "AutomaticIndexingDescription": "Povolte automatické indexování pro indexování souborů a složek podle sériového čísla. Třídění podle čísla bude nastaveno jako výchozí pro všechny uživatele.",
   "ChooseRoomType": "Výběr typu místnosti",

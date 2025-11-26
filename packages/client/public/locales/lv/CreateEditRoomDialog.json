@@ -2,7 +2,7 @@
   "AddStaticText": "Pievienot statisku tekstu",
   "AddWatermarkElements": "Pievienojiet ūdenszīmes elementus",
   "AddWatermarksToDocuments": "Pievienot ūdenszīmes dokumentiem",
-  "AddWatermarksToDocumentsDescription": "Aizsargājiet visus šajā telpā esošos dokumentus ar ūdenszīmēm. Ja dokumentā tāds jau ir iekļauts, tas netiks aizstāts.",
+  "AddWatermarksToDocumentsDescription": "Aizsargājiet visus dokumentus šajā telpā ar ūdenszīmēm.\nJa dokumentā jau ir ūdenszīme, tā netiks nomainīta.\nIestatot šo opciju, dokumentus var lejupielādēt tikai PDF formātā, lai nodrošinātu, ka ūdenszīme paliek neskarta.",
   "AutomaticIndexing": "Automātiskā indeksēšana",
   "AutomaticIndexingDescription": "Iespējojiet automātisku indeksēšanu indeksa failiem un mapēm pēc sērijas numura. Kārtošana pēc numura tiks iestatīta kā noklusējums visiem lietotājiem.",
   "ChooseRoomType": "Izvēlieties telpas tipu",

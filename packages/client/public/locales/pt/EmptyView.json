@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
-  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual"
+  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual",
+  "MigrationDataDescription": "Transfira seus dados para o {{productName}} a partir do Workspace {{organizationName}}, Google Workspace ou Nextcloud.",
+  "MigrationDataTitle": "Importar dados"
 }

@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Tải lên từ thiết bị",
   "UploadFromPortalTitle": "Tải lên từ {{productName}}",
   "UploadPDFFormOptionDescription": "Chọn một biểu mẫu PDF sẵn có trong {{productName}} và tải nó lên phòng.",
-  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo"
+  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo",
+  "MigrationDataDescription": "Chuyển dữ liệu của bạn vào {{productName}} từ Workspace của {{organizationName}}, Google Workspace hoặc Nextcloud.",
+  "MigrationDataTitle": "Nhập dữ liệu"
 }

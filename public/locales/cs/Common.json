@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "CopiedToClipboard": "Zkopírováno do schránky",
+  "ToolCallArgCopied": "Argumenty volání nástroje byly úspěšně zkopírovány do schránky",
+  "ToolCallResultCopied": "Výsledek volání nástroje byl úspěšně zkopírován do schránky"
 }

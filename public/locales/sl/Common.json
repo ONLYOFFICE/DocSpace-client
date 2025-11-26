@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "CopiedToClipboard": "Izvlečeno v odložišče",
+  "ToolCallArgCopied": "Argumenti za klic orodja uspešno kopirani v odložišče",
+  "ToolCallResultCopied": "Rezultat klica orodja je uspešno prepisan v odložišče"
 }

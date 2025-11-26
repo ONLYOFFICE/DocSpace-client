@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "CopiedToClipboard": "已复制到剪贴板",
+  "ToolCallArgCopied": "工具调用参数已复制到剪贴板",
+  "ToolCallResultCopied": "工具调用结果已复制到剪贴板"
 }

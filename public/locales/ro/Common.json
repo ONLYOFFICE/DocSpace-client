@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs."
+  "YourTurn": "Acum e rândul dvs.",
+  "CopiedToClipboard": "A fost copiat în clipboard",
+  "ToolCallArgCopied": "Argumente de apelare a instrumentelor au fost copiate cu succes în clipboard",
+  "ToolCallResultCopied": "Rezultatul obținut în urma apelării instrumentelor a fost copiat cu succes în clipboard"
 }

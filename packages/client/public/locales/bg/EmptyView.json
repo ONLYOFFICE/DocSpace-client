@@ -62,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Качете от устройство",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
+  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни",
+  "MigrationDataDescription": "Прехвърлете данните си в {{productName}} от {{organizationName}} Workspace, Google Workspace или Nextcloud.",
+  "MigrationDataTitle": "Импортиране на данни"
 }

@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "CopiedToClipboard": "Копирано у привремену меморију",
+  "ToolCallArgCopied": "Аргументи позива алата успешно копирани у привремену меморију",
+  "ToolCallResultCopied": "Резултат позива алата успешно копиран у привремену меморију"
 }

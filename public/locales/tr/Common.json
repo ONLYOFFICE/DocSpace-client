@@ -1072,5 +1072,8 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "CopiedToClipboard": "Kliperne kopyalandı",
+  "ToolCallArgCopied": "Araç çağrısı argümanları başarıyla panoya kopyalandı",
+  "ToolCallResultCopied": "Araç çağrısı sonucu panoya başarıyla kopyalandı"
 }

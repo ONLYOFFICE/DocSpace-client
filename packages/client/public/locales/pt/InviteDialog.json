@@ -3,6 +3,7 @@
   "EmailErrorMessage": "O Endereço de email não é válido. Pode editar o email ao clicar duas vezes sobre ele.",
   "EmailErrorMessageUserNotFound": "Usuário não encontrado. Você pode editar o e-mail clicando duas vezes sobre ele.",
   "GroupMaxAvailableRoleWarning": "Grupos podem ser adicionados a uma sala com a função {{roleName}} no máximo. No entanto, você pode alterar a função de usuários individuais no grupo após ele ter sido adicionado com êxito.",
+  "GuestAgentMaxAvailableRoleWarning": "Convidados não podem ser designados como Criador de conteúdo.\nApenas administradores de salas, administradores do {{productName}} e usuários são elegíveis para este papel.",
   "InvitationLanguage": "Idioma do convite",
   "InviteMembersManuallyDescription": "Convide novos membros para {{productName}} pessoalmente por e-mail",
   "InviteMembersSearchPlaceholder": "Convide membros por e-mail",
@@ -21,6 +22,5 @@
   "UserAgentMaxAvailableRoleWarning": "Convidados e Usuários não podem ser designados como gerentes de Agentes. Apenas administradores de Quartos e {{productName}} são adequados para a função especificada.",
   "UserMaxAvailableRoleWarning": "Hóspedes e Utilizadors não podem ser atribuídos como gerentes de quarto. Apenas os administradores Room e {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados",
-  "UsersCannotBeAdded": "Os contactos desativados não podem ser adicionados a uma sala",
-  "GuestAgentMaxAvailableRoleWarning": "Convidados não podem ser designados como Criador de conteúdo.\nApenas administradores de salas, administradores do {{productName}} e usuários são elegíveis para este papel."
+  "UsersCannotBeAdded": "Os contactos desativados não podem ser adicionados a uma sala"
 }

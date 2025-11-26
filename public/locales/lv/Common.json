@@ -792,6 +792,9 @@
   "Reviewing": "Pārskatīšana",
   "RevokeLink": "Atsaukt saiti",
   "Role": "Loma",
+  "RoleAIAgentContentCreatorDescription": "Satura veidotāji var izmantot tērzēšanu un strādāt ar failiem rezultātu krātuvē.\nViņi var augšupielādēt failus uz zināšanu bāzi, bet nevar pārvaldīt lietotājus vai piekļūt aģenta iestatījumiem.",
+  "RoleAIAgentManagerDescription": "Aģentu vadītāji var pārvaldīt piešķirto AI aģentu, uzaicināt jaunus lietotājus un piešķirt lomas zem sava līmeņa.\nViņi var izmantot tērzēšanu, augšupielādēt zināšanu failus, strādāt ar rezultātu krātuvi un pārvaldīt tērzēšanas iestatījumus.",
+  "RoleAIAgentViewerDescription": "Skatītāji var skatīties failus tikai rezultātu krātuvē ar citu radītiem izvadiem.\nViņiem nav piekļuves tērzēšanai vai zināšanu bāzei.",
   "RoleCommentator": "Komentētājs",
   "RoleCommentatorDescription": "Darbības ar esošajiem failiem: skatīšana, komentēšana.",
   "RoleContentCreatorDescription": "Satura veidotāji var izveidot un rediģēt failus telpā, bet nevar pārvaldīt lietotājus vai piekļūt iestatījumiem.",
@@ -970,6 +973,7 @@
   "TemporaryStorage": "Pagaidu uzglabāšana",
   "TemporaryStorageDescription": "Dublējums tiek glabāts sadaļā 'Dublējums', to varēsiet lejupielādēt 24 stundu laikā pēc izveidošanas.",
   "Terabyte": "TB",
+  "Thinking": "Domāšana",
   "ThirdPartyDisconnectPrompt": "Vai tiešām vēlaties noņemt {{service}}? Tas nekādā veidā neietekmēs jūsu {{account}} kontu.",
   "ThirdPartyResource": "Trešās puses resurss",
   "ThirdPartyResourceDescription": "Dublējumu var saglabāt jūsu trešās puses kontā (Dropbox, Box.com, OneDrive vai Google Drive). Jums ir jāsavieno trešās puses konts (Dropbox, Box.com, OneDrive vai Google Drive) pirms varēsiet tur saglabāt savu dublējumu.",
@@ -1068,8 +1072,5 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta",
-  "RoleAIAgentContentCreatorDescription": "Satura veidotāji var izmantot tērzēšanu un strādāt ar failiem rezultātu krātuvē.\nViņi var augšupielādēt failus uz zināšanu bāzi, bet nevar pārvaldīt lietotājus vai piekļūt aģenta iestatījumiem.",
-  "RoleAIAgentManagerDescription": "Aģentu vadītāji var pārvaldīt piešķirto AI aģentu, uzaicināt jaunus lietotājus un piešķirt lomas zem sava līmeņa.\nViņi var izmantot tērzēšanu, augšupielādēt zināšanu failus, strādāt ar rezultātu krātuvi un pārvaldīt tērzēšanas iestatījumus.",
-  "RoleAIAgentViewerDescription": "Skatītāji var skatīties failus tikai rezultātu krātuvē ar citu radītiem izvadiem.\nViņiem nav piekļuves tērzēšanai vai zināšanu bāzei."
+  "YourTurn": "Jūsu kārta"
 }

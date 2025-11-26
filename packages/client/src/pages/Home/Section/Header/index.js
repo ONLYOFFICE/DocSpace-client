@@ -1253,7 +1253,8 @@ export default inject(
     const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
     isPublicRoom ||
     isSharedWithMeFolderRoot ||
-    isArchive
+    isArchive ||
+    !isRootRooms
       ? false
       : security?.Read && isShared);
 

@@ -361,7 +361,7 @@ export function clickBackdrop() {
   }
 }
 
-export function objectToGetParams(obj: object, prefix = ''): string {
+export function objectToGetParams(obj: object, prefix = ""): string {
   const params: string[] = [];
 
   for (const [key, value] of Object.entries(obj)) {
@@ -371,18 +371,22 @@ export function objectToGetParams(obj: object, prefix = ''): string {
 
     if (Array.isArray(value)) {
       for (const item of value) {
-        params.push(`${encodeURIComponent(paramKey)}[]=${encodeURIComponent(String(item))}`);
+        params.push(
+          `${encodeURIComponent(paramKey)}[]=${encodeURIComponent(String(item))}`,
+        );
       }
-    } else if (typeof value === 'object') {
+    } else if (typeof value === "object") {
       const nested = objectToGetParams(value, paramKey);
       if (nested) params.push(nested);
     } else {
-      params.push(`${encodeURIComponent(paramKey)}=${encodeURIComponent(String(value))}`);
+      params.push(
+        `${encodeURIComponent(paramKey)}=${encodeURIComponent(String(value))}`,
+      );
     }
   }
 
-  if (!params.length) return '';
-  return prefix ? params.join('&') : `?${params.join('&')}`;
+  if (!params.length) return "";
+  return prefix ? params.join("&") : `?${params.join("&")}`;
 }
 
 export function toCommunityHostname(hostname: string) {
@@ -829,6 +833,12 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (myFolder) sorted.push(myFolder);
 
+  const shareRoom = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Rooms,
+  );
+  if (shareRoom) sorted.push(shareRoom);
+
   const sharedWithMeFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.SHARE,
@@ -846,12 +856,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.Recent,
   );
   if (recentFolder) sorted.push(recentFolder);
-
-  const shareRoom = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.Rooms,
-  );
-  if (shareRoom) sorted.push(shareRoom);
 
   const archiveRoom = find(
     folders,

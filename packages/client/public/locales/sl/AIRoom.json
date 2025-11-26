@@ -1,4 +1,6 @@
 {
+  "AgentInViewModeWarning": "Nahajate se v načinu <strong>le za ogled</strong> za tega umetnega inteligence. Lahko vidite rezultate dejavnosti klepeta z umetno inteligenco od drugih uporabnikov.",
+  "AIAgentAccessRedirectNote": "Samodejno boste preusmerjeni v razdelek {{sectionName}} v 5 sekundah.",
   "AIChat": "AI-Klep",
   "AIInstructions": "Navodila za umetno inteligenco",
   "CreateChat": "Ustvari klepetal",
@@ -8,6 +10,7 @@
   "EmptyKnowledgeTitle": "Še nobena datoteka ni bila naložena.",
   "EmptyResultsDescription": "Datoteke, ustvarjene v AI-klepantu, se bodo samodejno pojavile tukaj. Kadar koli ustvarite vsebino, začnete klepet ali pošljete sporočilo z izhodom, bo rezultat shranjen v tem razdelku.",
   "EmptyResultsTitle": "Še ni rezultatov.",
+  "EmptyResultsViewerDescription": "Tukaj boste videli rezultate dejavnosti klepetalnega asistenta drugih uporabnikov, ko bodo na voljo.",
   "InstructionsDescriptionAgent": "Opisujte, kako naj se obnaša in odgovarja AI agent. Definirajte njegovo vlogo, ton in glavne naloge.",
   "InstructionsDescriptionAgentExample": "Primer: \"Vi ste AI PR pomočnik, ki pomaga pri pisanju in urejanju obvestil za javnost. Ohranite profesionalen, samozloben in medijsko prijazen ton. Izpostavite ključne poudarke jasno, izogibajte se žargonu in ohranite besedilo jedrnato in privlačno.\"",
   "Knowledge": "Znanje",
@@ -20,10 +23,9 @@
   "MCPDescriptionServers": "Uporabite MCP strežnike, povezane z administratorjem, za izboljšanje izkušnje s klepanjem z umetno inteligenco. MCP strežniki lahko pomagajo pri izvlečenju podatkov, povzetkih, pametnih predlogih itd.",
   "Model": "Ponudnik in model",
   "ModelDescription": "Izberite ponudnika umetne inteligence in modela, ki se bo uporabljal v klepetalnici. Ta nastavitev je obvezna in velja za vse udeležence.",
+  "NoAccessAIAgentTitle": "Žal nimáte dostopa do tega AI agenta.",
   "ResponseQualityNode": "<1>Opomba:</1> Kakovost odgovorov se lahko razlikuje glede na model; za najboljše rezultate priporočamo novejše modele.",
   "ResultStorage": "Shranjevanje rezultatov",
   "UploadFilesDevice": "Naložite datoteke iz vaše osebne naprave.",
-  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Nahajate se v načinu <strong>le za ogled</strong> za tega umetnega inteligence. Lahko vidite rezultate dejavnosti klepeta z umetno inteligenco od drugih uporabnikov.",
-  "EmptyResultsViewerDescription": "Tukaj boste videli rezultate dejavnosti klepetalnega asistenta drugih uporabnikov, ko bodo na voljo."
+  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}"
 }

@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Adresa e emailit nuk është e vlefshme. Ju mund ta modifikoni emailin duke klikuar dy herë mbi të.",
   "EmailErrorMessageUserNotFound": "Përdoruesi nuk u gjet. Ju mund ta modifikoni emailin duke klikuar dy herë mbi të.",
   "GroupMaxAvailableRoleWarning": "Grupet mund të shtohen në një dhomë me rolin {{roleName}} si maksimum. Megjithatë, ju mund të ndryshoni rolin e përdoruesve individualë në grup pasi të jetë shtuar me sukses.",
+  "GuestAgentMaxAvailableRoleWarning": "Mikpritësit nuk mund të caktohen si krijues përmbajtje.\nVetëm administratorët e Dhoma, administratorët {{productName}} dhe Përdoruesit janë të zotë për këtë rol.",
   "InvitationLanguage": "Gjuha e ftesës",
   "InviteMembersManuallyDescription": "Ftoni anëtarë të rinj në {{productName}} personalisht me email",
   "InviteMembersSearchPlaceholder": "Ftoni anëtarët me email",
@@ -21,6 +22,5 @@
   "UserAgentMaxAvailableRoleWarning": "Vizitorët dhe Përdoruesit nuk mund të caktohen si menaxherë të Agjentëve. Vetëm administratorët e Dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar.",
   "UserMaxAvailableRoleWarning": "Vizitorët dhe përdoruesit nuk mund të caktohen si menaxherë të dhomës. Vetëm administratorët e dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar.",
   "UsersAlreadyAdded": "Disa përdorues janë shtuar tashmë",
-  "UsersCannotBeAdded": "Kontaktet e çaktivizuara nuk mund të shtohen në një dhomë",
-  "GuestAgentMaxAvailableRoleWarning": "Mikpritësit nuk mund të caktohen si krijues përmbajtje.\nVetëm administratorët e Dhoma, administratorët {{productName}} dhe Përdoruesit janë të zotë për këtë rol."
+  "UsersCannotBeAdded": "Kontaktet e çaktivizuara nuk mund të shtohen në një dhomë"
 }

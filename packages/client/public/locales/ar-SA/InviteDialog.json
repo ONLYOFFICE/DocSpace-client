@@ -3,6 +3,7 @@
   "EmailErrorMessage": "عنوان البريد الإلكتروني غير صالح. بإمكانك تعديل البريد الإلكتروني بالنقر المزدوج عليه.",
   "EmailErrorMessageUserNotFound": "لم يتم العثور على المستخدم. بإمكانك تعديل البريد الإلكتروني بالنقر المزدوج عليه.",
   "GroupMaxAvailableRoleWarning": "يمكن إضافة المجموعات إلى غرفة مع وظيفة {{roleName}} كحد أقصى. ومع ذلك، يمكنك تغيير وظائف المستخدمين الفرديين في المجموعة بعد إضافتها بنجاح.",
+  "GuestAgentMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف كمنشئي محتوى.\nفقط مسؤولي الغرفة ومسؤولي {{productName}} والمستخدمين مؤهلون لهذا الدور.",
   "InvitationLanguage": "لغة الدعوة",
   "InviteMembersManuallyDescription": " قم بدعوة أعضاء جدد إلى {{productName}} شخصيًا عبر البريد الإلكتروني",
   "InviteMembersSearchPlaceholder": "دعوة الأعضاء عن طريق البريد الإلكتروني",
@@ -21,6 +22,5 @@
   "UserAgentMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديرين للوكيل. مسؤولو الغرفة ومسؤولو {{productName}} فقط هم المناسبون للدور المحدد.",
   "UserMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديري غرف. فقط مسؤولو الغرف وإدارة {{productName}} مناسبون لهذا الدور المحدد.",
   "UsersAlreadyAdded": "تمت إضافة بعض المستخدمين بالفعل",
-  "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة",
-  "GuestAgentMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف كمنشئي محتوى.\nفقط مسؤولي الغرفة ومسؤولي {{productName}} والمستخدمين مؤهلون لهذا الدور."
+  "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة"
 }

@@ -3,7 +3,7 @@
   "content": "ONLYOFFICE",
   "content_en_sha1_hash": "c1cd17a947d45060963b486bba7fd3346227bbee",
   "created_at": "2025-05-19T21:30:47.141Z",
-  "updated_at": "2025-11-19T15:02:41.037Z",
+  "updated_at": "2025-11-25T11:53:04.670Z",
   "comment": {
     "text": "This translation key is used to display the organization's name, such as \"ONLYOFFICE\", when a user needs help or wants to learn more about the product. It appears in various UI elements like dialog boxes and about pages, ensuring accessibility for users who need assistance with the application.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 230,
+      "line_number": 231,
       "context": "const several = selection.length > 1;\n \n // for backup\n if (!selection.length) return t(\"Common:BackupNotAllowedInFormRoom\");\n \n const option = { organizationName: t(\"Common:OrganizationName\") };\n \n if (isCopy)\n return several\n ? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);",
       "module": "/packages/client"
     },

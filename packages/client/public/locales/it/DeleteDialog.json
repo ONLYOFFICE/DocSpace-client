@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Elimina chat?",
+  "DeleteAIAgentDescription": "L'agente <strong>\"{{agentName}}\"</strong> verrà eliminato definitivamente. Tutti i dati e gli accessi degli utenti andranno persi.",
+  "DeleteAIAgentTitle": "Eliminare questo agente?",
+  "DeleteAIAgentWarning": "Capisco le conseguenze e desidero eliminare l'agente",
+  "DeleteAIChatDescription": "Sta per eliminare <strong>{{chatName}}<1>.</1></strong>\n Tutti i messaggi e la cronologia della chat verranno rimossi definitivamente e non potranno essere ripristinati.",
   "DeleteAllGroupDescription": "I gruppi selezionati verranno eliminati. Gli utenti dei gruppi non verranno rimossi da {{productName}}. Sei sicuro di voler continuare?",
   "DeleteAllGroupsTitle": "Elimina gruppi",
   "DeleteFiles": "Stai per spostare <strong>file ({{filesCount}})</strong> nel {{trashSection}}.",
@@ -29,10 +34,5 @@
   "ItemsDeletedAfter": "Questi elementi saranno eliminati definitivamente tra 30 giorni.",
   "ItemsPermanentlyDeleted": "Questi elementi saranno rimossi definitivamente dal {{trashSection}}.",
   "removeFromListDescription": "Stai per rimuovere <1>{{title}}</1> dall’elenco. Sei sicuro di voler continuare?",
-  "removeFromListDescriptionPlural": "Stai per rimuovere <1>elementi ({{count}})</1> dall’elenco. Sei sicuro di voler continuare?",
-  "DeleteAIAgentDescription": "L'agente <strong>\"{{agentName}}\"</strong> verrà eliminato definitivamente. Tutti i dati e gli accessi degli utenti andranno persi.",
-  "DeleteAIAgentTitle": "Eliminare questo agente?",
-  "DeleteAIAgentWarning": "Capisco le conseguenze e desidero eliminare l'agente",
-  "DeleteAIChatDescription": "Sta per eliminare <strong>{{chatName}}<1>.</1></strong>\n Tutti i messaggi e la cronologia della chat verranno rimossi definitivamente e non potranno essere ripristinati.",
-  "DeleteAIAgentChatTitle": "Elimina chat?"
+  "removeFromListDescriptionPlural": "Stai per rimuovere <1>elementi ({{count}})</1> dall’elenco. Sei sicuro di voler continuare?"
 }

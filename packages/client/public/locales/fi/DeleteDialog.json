@@ -1,7 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Poista keskustelu?",
   "DeleteAIAgentDescription": "Agentti <strong>\"{{agentName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
   "DeleteAIAgentTitle": "Poista tämä agentti?",
   "DeleteAIAgentWarning": "Ymmärrän seuraukset ja haluan poistaa agentin.",
+  "DeleteAIChatDescription": "Olet aikeissa poistaa <strong>{{chatName}}<1>.</1></strong>\n Kaikki viestit ja chat-historia poistetaan pysyvästi, eikä niitä voida palauttaa.",
   "DeleteAllGroupDescription": "Valitut ryhmät poistetaan. Ryhmien käyttäjiä ei poisteta {{productName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteAllGroupsTitle": "Poista ryhmiä",
   "DeleteFiles": "Olet siirtämässä <strong>tiedostoja ({{filesCount}})</strong> {{trashSection}}-kohtaan.",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Nämä kohteet poistetaan pysyvästi 30 päivän kuluttua.",
   "ItemsPermanentlyDeleted": "Nämä kohteet poistetaan pysyvästi {{trashSection}}-osiosta.",
   "removeFromListDescription": "Olet aikeissa poistaa <1>{{title}}</1> luettelosta. Oletko varma, että haluat jatkaa?",
-  "removeFromListDescriptionPlural": "Olet poistamassa <1>kohteita ({{count}})</1> luettelosta. Oletko varma, että haluat jatkaa?",
-  "DeleteAIChatDescription": "Olet aikeissa poistaa <strong>{{chatName}}<1>.</1></strong>\n Kaikki viestit ja chat-historia poistetaan pysyvästi, eikä niitä voida palauttaa.",
-  "DeleteAIAgentChatTitle": "Poista keskustelu?"
+  "removeFromListDescriptionPlural": "Olet poistamassa <1>kohteita ({{count}})</1> luettelosta. Oletko varma, että haluat jatkaa?"
 }

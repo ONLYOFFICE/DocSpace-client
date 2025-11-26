@@ -1,4 +1,6 @@
 {
+  "AgentInViewModeWarning": "Está en modo <strong>solo ver</strong> para este agente de IA. Puede ver los resultados de la actividad de chat de IA de otros usuarios.",
+  "AIAgentAccessRedirectNote": "Será redirigido automáticamente a la sección {{sectionName}} en 5 segundos.",
   "AIChat": "Chat con IA",
   "AIInstructions": "Instrucciones para la IA ",
   "CreateChat": "Crear chat",
@@ -8,6 +10,7 @@
   "EmptyKnowledgeTitle": "Aún no se han cargado archivos",
   "EmptyResultsDescription": "Los archivos generados en la sección Chat con IA aparecerán aquí automáticamente. Siempre que genere contenido, inicie un chat o envíe un mensaje con salida, el resultado se guardará en esta sección.",
   "EmptyResultsTitle": "Aún no hay resultados.",
+  "EmptyResultsViewerDescription": "Aquí podrá ver los resultados de la actividad del chat de IA de otros usuarios una vez que estén disponibles.",
   "InstructionsDescriptionAgent": "Describa cómo debe comportarse y responder el agente de IA. Defina su papel, su tono y sus tareas principales.",
   "InstructionsDescriptionAgentExample": "Ejemplo: \"Eres un asistente de relaciones públicas de AI que ayuda a redactar y editar comunicados de prensa. Mantén un tono profesional, seguro y cercano a los medios de comunicación. Resalta claramente los mensajes clave, evita la jerga y mantén el texto conciso y atractivo.\"",
   "Knowledge": "Conocimientos",
@@ -20,10 +23,9 @@
   "MCPDescriptionServers": "Utilice servidores MCP conectados por el administrador para mejorar la experiencia de chat con IA. Los servidores MCP pueden ayudar con la extracción de datos, resúmenes, sugerencias inteligentes, etc.",
   "Model": "Proveedor y modelo",
   "ModelDescription": "Seleccione el proveedor y el modelo de IA que se utilizará en los chats de esta sala. Esta configuración es obligatoria y se aplica a todos los participantes.",
+  "NoAccessAIAgentTitle": "Lo sentimos, no tiene acceso a este agente de IA.",
   "ResponseQualityNode": "<1>Nota:</1> La calidad de la respuesta puede variar según el modelo; se recomiendan los modelos más nuevos para obtener mejores resultados.",
   "ResultStorage": "Almacenamiento de resultados",
   "UploadFilesDevice": "Suba archivos desde su dispositivo personal",
-  "UploadFilesPortal": "Subir archivos de {{sectionNameFirst}} o {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Está en modo <strong>solo ver</strong> para este agente de IA. Puede ver los resultados de la actividad de chat de IA de otros usuarios.",
-  "EmptyResultsViewerDescription": "Aquí podrá ver los resultados de la actividad del chat de IA de otros usuarios una vez que estén disponibles."
+  "UploadFilesPortal": "Subir archivos de {{sectionNameFirst}} o {{sectionNameSecond}}"
 }

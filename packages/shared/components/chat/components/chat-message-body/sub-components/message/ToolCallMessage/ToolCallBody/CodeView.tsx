@@ -71,7 +71,10 @@ export const CodeView = ({
 
   const showResult = placement === "message" && content.result;
   const isErrorResult =
-    content.result && "isError" in content.result && content.result?.isError;
+    content.result &&
+    typeof content.result !== "string" &&
+    "isError" in content.result &&
+    content.result?.isError;
 
   return (
     <>

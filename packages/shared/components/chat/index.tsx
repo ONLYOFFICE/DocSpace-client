@@ -55,6 +55,7 @@ const Chat = observer(
     isAdmin = false,
     standalone = false,
     aiReady = false,
+    hideTools = false,
     getResultStorageId,
     setIsAIAgentChatDelete,
     setDeleteDialogVisible,
@@ -112,6 +113,7 @@ const Chat = observer(
               isPortalAdmin={isAdmin}
               aiReady={aiReady}
               standalone={standalone}
+              hideTools={hideTools}
             />
           </>
         )}

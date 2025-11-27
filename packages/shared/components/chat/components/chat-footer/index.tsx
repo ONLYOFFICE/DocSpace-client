@@ -41,6 +41,7 @@ const ChatFooter = ({
   getIcon,
   selectedModel,
   toolsSettings,
+  hideTools,
 }: ChatFooterProps) => {
   return (
     <div className={styles.chatFooter}>
@@ -56,6 +57,7 @@ const ChatFooter = ({
         toolsSettings={toolsSettings}
         isPortalAdmin={isPortalAdmin}
         aiReady={aiReady}
+        hideTools={hideTools}
       />
     </div>
   );

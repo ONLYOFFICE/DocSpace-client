@@ -55,6 +55,7 @@ const ChatInput = ({
   toolsSettings,
   isPortalAdmin,
   aiReady,
+  hideTools,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -190,6 +191,7 @@ const ChatInput = ({
               toolsSettings={toolsSettings}
               isAdmin={isPortalAdmin}
               aiReady={aiReady}
+              hideTools={hideTools}
             />
           </>
         )}

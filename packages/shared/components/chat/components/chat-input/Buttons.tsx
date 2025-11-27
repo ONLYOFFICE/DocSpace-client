@@ -50,6 +50,7 @@ const Buttons = ({
   toolsSettings,
   isAdmin,
   aiReady,
+  hideTools,
 }: ButtonsProps) => {
   const { isRequestRunning, stopMessage } = useMessageStore();
 
@@ -95,7 +96,13 @@ const Buttons = ({
             className={classNames({ [styles.disabled]: !aiReady })}
           />
         </div>
-        <ToolsSettings {...toolsSettings} isAdmin={isAdmin} aiReady={aiReady} />
+        {!hideTools && toolsSettings && (
+          <ToolsSettings
+            {...toolsSettings}
+            isAdmin={isAdmin}
+            aiReady={aiReady}
+          />
+        )}
       </div>
       <IconButton
         iconName={SendReactSvgUrl}

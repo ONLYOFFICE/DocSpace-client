@@ -2,7 +2,7 @@
   "AddStaticText": "Dodaj tekst statyczny",
   "AddWatermarkElements": "Dodaj elementy znaku wodnego",
   "AddWatermarksToDocuments": "Dodawaj znaki wodne do dokumentów",
-  "AddWatermarksToDocumentsDescription": "Zabezpiecz wszystkie dokumenty w tym pokoju znakami wodnymi. Jeśli dokument już go zawiera, nie zostanie on zastąpiony.",
+  "AddWatermarksToDocumentsDescription": "Zabezpiecz wszystkie dokumenty w tym pomieszczeniu znakami wodnymi.\nJeśli dokument już zawiera znak wodny, nie zostanie on zastąpiony.\nPo włączeniu tego ustawienia dokumenty można pobierać tylko w formacie PDF, aby zapewnić, że znak wodny pozostanie nienaruszony.",
   "AutomaticIndexing": "Automatyczne indeksowanie",
   "AutomaticIndexingDescription": "Włącz automatyczne indeksowanie, aby indeksować pliki i katalogi według numeru seryjnego. Sortowanie według numeru zostanie ustawione jako domyślne dla wszystkich użytkowników.",
   "ChooseRoomType": "Wybierz rodzaj pokoju",

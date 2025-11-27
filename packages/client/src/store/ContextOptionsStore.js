@@ -1893,7 +1893,11 @@ class ContextOptionsStore {
             ? t("Open")
             : t("Common:Preview"),
         icon: EyeReactSvgUrl,
-        onClick: () => this.onPreviewClick(item),
+        onClick: () =>
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? this.gotoDocEditor(item)
+            : this.onPreviewClick(item),
         disabled: false,
       },
       {

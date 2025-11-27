@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "发送邀请以添加新成员到您的{{productName}}",
   "InviteUsersOptionDescription": "添加成员以在房间中共同编辑。",
   "ManageAccess": "管理访问权限",
+  "MigrationDataDescription": "将数据从{{organizationName}}的工作区、Google Workspace 或 Nextcloud 迁移到{{productName}}。",
+  "MigrationDataTitle": "导入数据",
   "NoRecentFilesHereYet": "暂无最近文件",
   "PublicRoomEmptyTitle": "欢迎来到公共房间",
   "SectionsUploadDescription": "可从{{sectionNameFirst}}或{{sectionNameSecond}}上传任何类型的文件",

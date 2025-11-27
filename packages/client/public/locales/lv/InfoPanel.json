@@ -2,7 +2,7 @@
   "AddedRoomTags": "Pievienotas atzīmes.",
   "Administration": "Administrācija",
   "AgentRenamed": "Aģents <1>«{{oldRoomTitle}}»</1> pārdēvēts par <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Skatīt AI aģentu detalizējums šeit",
+  "AIAgentsEmptyScreenTent": "Skatīt MI aģentu detalizējums šeit",
   "AndMoreLabel": "un <1>{{count}} vēl</1>",
   "CreationDate": "Izveides datums",
   "Data": "Dati",

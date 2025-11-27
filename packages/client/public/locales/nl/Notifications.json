@@ -9,7 +9,6 @@
   "NotConfigured": "Niet geconfigureerd",
   "Notifications": "Meldingen",
   "RoomsActivityDescription": "Ontvang direct e-mail notificaties over nieuwe gedeelde bestanden/mappen en activiteit binnen uw {{sectionName}}.",
-  "RoomUpdateNotify": "Gedeelde content en {{sectionName}} activiteit",
   "SettingUpNotifications": "Meldingen instellen",
   "SuccessConnected": "{{serviceName}} is succesvol verbonden als notificatiekanaal. U ontvangt nu updates daar.",
   "SuccessDisconnected": "{{serviceName}} is succesvol losgekoppeld als notificatiekanaal. Er worden geen notificaties meer naar toe gestuurd.",

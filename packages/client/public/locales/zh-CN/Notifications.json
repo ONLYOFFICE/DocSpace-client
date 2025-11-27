@@ -9,7 +9,6 @@
   "NotConfigured": "未配置",
   "Notifications": "消息通知",
   "RoomsActivityDescription": "接收{{sectionName}}内新共享文件/文件夹及相关活动的即时邮件通知。",
-  "RoomUpdateNotify": "共享内容与{{sectionName}}活动",
   "SettingUpNotifications": "设置通知",
   "SuccessConnected": "{{serviceName}} 已成功关联为通知渠道，您将通过该渠道接收更新。",
   "SuccessDisconnected": "{{serviceName}} 已成功断开与通知渠道的关联，后续通知将不再发送至该渠道。",

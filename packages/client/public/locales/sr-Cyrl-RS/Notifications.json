@@ -9,7 +9,6 @@
   "NotConfigured": "Није конфигурисано",
   "Notifications": "Обавештења",
   "RoomsActivityDescription": "Добијај инстант емаил обавештења о новим дељеним фајловима/фолдерима и активностима унутар твог {{sectionName}}.",
-  "RoomUpdateNotify": "Дељени садржај и активности у {{sectionName}}",
   "SettingUpNotifications": "Подешавање обавештења",
   "SuccessConnected": "{{serviceName}} је успешно повезан као канал за обавештења. Сада ћеш тамо примати ажурирања.",
   "SuccessDisconnected": "{{serviceName}} је успешно искључен као канал за обавештења. Обавештења више неће бити слана тамо.",

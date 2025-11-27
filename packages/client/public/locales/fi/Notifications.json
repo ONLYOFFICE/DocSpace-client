@@ -9,7 +9,6 @@
   "NotConfigured": "Ei määritetty",
   "Notifications": "Ilmoitukset",
   "RoomsActivityDescription": "Hanki välittömiä sähköposti-ilmoituksia uusista jaetuista tiedostoista/kansioista ja toiminnasta {{sectionName}}-osiossasi.",
-  "RoomUpdateNotify": "Jaettu sisältö ja {{sectionName}} -toiminta",
   "SettingUpNotifications": "Ilmoitusten määritys",
   "SuccessConnected": "{{serviceName}} on yhdistetty onnistuneesti ilmoituskanavana. Saat sieltä nyt päivityksiä.",
   "SuccessDisconnected": "{{serviceName}} onnistui irrottamaan ilmoituskanavana. Ilmoituksia ei enää lähetetä sinne.",

@@ -9,7 +9,6 @@
   "NotConfigured": "Nuk është konfiguruar",
   "Notifications": "Njoftimet",
   "RoomsActivityDescription": "Merrni njoftime të menjëhershme me email për skedarët/dosjet e ndara dhe aktivitetet brenda seksionit {{sectionName}}.",
-  "RoomUpdateNotify": "Përmbajtje e ndarë dhe aktivitet në {{sectionName}}",
   "SettingUpNotifications": "Konfiguroni njoftimet",
   "SuccessConnected": "{{serviceName}} është lidhur me sukses si kanal njoftimi. Tani do të merrni përditësime atje.",
   "SuccessDisconnected": "{{serviceName}} është shkëputur me sukses. Njoftimet nuk do të dërgohen më atje.",

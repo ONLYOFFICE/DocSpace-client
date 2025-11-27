@@ -9,7 +9,6 @@
   "NotConfigured": "Nicht konfiguriert",
   "Notifications": "Benachrichtigungen",
   "RoomsActivityDescription": "Erhalten Sie sofortige E-Mail-Benachrichtigungen über neue freigegebene Dateien/Ordner und Aktivitäten in Ihrem {{sectionName}}.",
-  "RoomUpdateNotify": "Geteilte Inhalte und {{sectionName}}-Aktivitäten",
   "SettingUpNotifications": "Benachrichtigungen einrichten",
   "SuccessConnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal verbunden. Sie erhalten nun Updates darüber.",
   "SuccessDisconnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal getrennt. Benachrichtigungen werden dort nicht mehr gesendet.",

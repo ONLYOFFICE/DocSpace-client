@@ -10,7 +10,7 @@
   "NotConfigured": "Not configured",
   "Notifications": "Notifications",
   "RoomsActivityDescription": "Get instant email notifications about new shared files/folders and activity inside your {{sectionName}}.",
-  "RoomUpdateNotify": "Shared content and {{sectionName}} activity",
+  "RoomUpdateNotify": "Shared content, {{rooms}} and {{aiAgents}} activity",
   "SettingUpNotifications": "Setting up notifications",
   "SuccessConnected": "{{serviceName}} has been successfully connected as a notification channel. You will now receive updates there.",
   "SuccessDisconnected": "{{serviceName}} has been successfully disconnected as a notification channel. Notifications will no longer be sent there.",

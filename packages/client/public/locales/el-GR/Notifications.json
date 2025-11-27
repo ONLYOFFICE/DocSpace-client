@@ -9,7 +9,6 @@
   "NotConfigured": "Δεν έχει ρυθμιστεί",
   "Notifications": "Ειδοποιήσεις",
   "RoomsActivityDescription": "Λάβετε άμεσες ειδοποιήσεις email για νέα κοινόχρηστα αρχεία/φακέλους και δραστηριότητα μέσα στο {{sectionName}}.",
-  "RoomUpdateNotify": "Κοινό περιεχόμενο και δραστηριότητα {{sectionName}}",
   "SettingUpNotifications": "Ρύθμιση ειδοποιήσεων",
   "SuccessConnected": "{{serviceName}} συνδέθηκε επιτυχώς ως κανάλι ειδοποιήσεων. Θα λαμβάνετε πλέον ενημερώσεις εκεί.",
   "SuccessDisconnected": "Το {{serviceName}} έχει αποσυνδεθεί επιτυχώς ως κανάλι ειδοποιήσεων. Οι ειδοποιήσεις δεν θα αποστέλλονται εκεί πλέον.",

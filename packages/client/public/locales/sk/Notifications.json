@@ -9,7 +9,6 @@
   "NotConfigured": "Nakonfigurované",
   "Notifications": "Upozornenia",
   "RoomsActivityDescription": "Získajte okamžité upozornenia na e-mail o nových zdieľaných súboroch/zložkách a aktivitách vo vašom {{sectionName}}.",
-  "RoomUpdateNotify": "Zdieľaný obsah a aktivita {{sectionName}}",
   "SettingUpNotifications": "Nastavenie upozornení",
   "SuccessConnected": "{{serviceName}} bol úspešne pripojený ako kanál pre upozornenia. Teraz tam budete dostávať aktualizácie.",
   "SuccessDisconnected": "{{serviceName}} bol úspešne odpojený ako kanál pre upozornenia. Upozornenia tam už nebudú zasielané.",

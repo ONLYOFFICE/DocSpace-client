@@ -294,7 +294,7 @@ export type TListenEventCallbackMap = {
     chatId: string;
     chatTitle: string;
   }) => void;
-  [SocketEvents.UpdateTelegram]: (data: { username: string }) => void;
+  [SocketEvents.UpdateTelegram]: (data: string) => void;
   [SocketEvents.ConnectTelegram]: (data: string) => void;
   [SocketEvents.SelfRestrictionFile]: (data: {
     id: number;

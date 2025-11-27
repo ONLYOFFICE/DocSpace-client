@@ -26,10 +26,11 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import {
-  WebSearchConfig,
+  type WebSearchConfig,
+  type KnowledgeConfig,
   type TAddNewServer,
   type TAiProvider,
   type TCreateAiProvider,
@@ -49,8 +50,15 @@ import {
   updateServerStatus,
   getWebSearchConfig,
   updateWebSearchConfig,
+  updateKnowledgeConfig,
+  getKnowledgeConfig,
+  getProviderAvailabilityStatus,
 } from "@docspace/shared/api/ai";
-import { ServerType, WebSearchType } from "@docspace/shared/api/ai/enums";
+import {
+  ServerType,
+  WebSearchType,
+  KnowledgeType,
+} from "@docspace/shared/api/ai/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
 class AISettingsStore {
@@ -62,11 +70,19 @@ class AISettingsStore {
 
   webSearchConfig: WebSearchConfig | null = null;
 
+  knowledgeConfig: KnowledgeConfig | null = null;
+
   aiProvidersInitied = false;
+
+  knowledgeInitied = false;
 
   mcpServersInitied = false;
 
   webSearchInitied = false;
+
+  unavailableProvidersIdsSet: Set<number> = new Set<number>();
+
+  checkProvidersAbortController: AbortController | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -78,6 +94,10 @@ class AISettingsStore {
 
   setAiProvidersInitied = (value: boolean) => {
     this.aiProvidersInitied = value;
+  };
+
+  setKnowledgeInitied = (value: boolean) => {
+    this.knowledgeInitied = value;
   };
 
   setMCPServersInitied = (value: boolean) => {
@@ -100,6 +120,10 @@ class AISettingsStore {
     this.webSearchConfig = config;
   };
 
+  setKnowledgeConfig = (config: KnowledgeConfig | null) => {
+    this.knowledgeConfig = config;
+  };
+
   addAIProvider = async (provider: TCreateAiProvider) => {
     const newProvider = await createProvider(provider);
 
@@ -112,6 +136,14 @@ class AISettingsStore {
 
     if (index !== -1) {
       this.aiProviders[index] = newProvider;
+    }
+
+    if (this.unavailableProvidersIdsSet.has(id)) {
+      const res = await getProviderAvailabilityStatus(id);
+
+      if (res.available) {
+        this.unavailableProvidersIdsSet.delete(id);
+      }
     }
   };
 
@@ -166,21 +198,35 @@ class AISettingsStore {
     type: WebSearchType,
     key: string,
   ) => {
-    try {
-      await updateWebSearchConfig(enabled, type, key);
-      this.setWebSearchConfig({ enabled, type, key });
-    } catch {
-      //ignore
-    }
+    await updateWebSearchConfig(enabled, type, key);
+    this.setWebSearchConfig({ enabled, type, key });
   };
 
   restoreWebSearch = async () => {
+    await updateWebSearchConfig(false, WebSearchType.None, "");
+    this.setWebSearchConfig(null);
+  };
+
+  fetchKnowledge = async () => {
     try {
-      await updateWebSearchConfig(false, WebSearchType.None, "");
-      this.setWebSearchConfig(null);
-    } catch {
-      //ignore
+      const res = await getKnowledgeConfig();
+
+      this.setKnowledgeInitied(true);
+
+      if (res) this.setKnowledgeConfig(res);
+    } catch (e) {
+      console.error(e);
     }
+  };
+
+  updateKnowledge = async (type: KnowledgeType, key: string) => {
+    await updateKnowledgeConfig(type, key);
+    this.setKnowledgeConfig({ type, key });
+  };
+
+  restoreKnowledge = async () => {
+    await updateKnowledgeConfig(KnowledgeType.None, "");
+    this.setKnowledgeConfig(null);
   };
 
   addNewMCP = async (data: TAddNewServer) => {
@@ -227,6 +273,51 @@ class AISettingsStore {
     await Promise.all(actions);
 
     this.setIsInit(true);
+  };
+
+  checkUnavailableProviders = async () => {
+    if (this.aiProviders.length === 0) return;
+
+    this.cancelAvailabilityCheck();
+    const abortController = new AbortController();
+    this.checkProvidersAbortController = abortController;
+
+    const requests = this.aiProviders.map((provider) =>
+      getProviderAvailabilityStatus(provider.id, abortController),
+    );
+
+    const res = await Promise.allSettled(requests);
+
+    if (abortController.signal.aborted) {
+      this.checkProvidersAbortController = null;
+      return;
+    }
+
+    runInAction(() => {
+      this.unavailableProvidersIdsSet.clear();
+
+      res.forEach((p) => {
+        if (p.status === "fulfilled" && !p.value.available) {
+          this.unavailableProvidersIdsSet.add(p.value.id);
+        }
+
+        if (p.status === "rejected") {
+          console.error(p.reason);
+          return;
+        }
+      });
+    });
+
+    this.checkProvidersAbortController = null;
+  };
+
+  cancelAvailabilityCheck = () => {
+    this.checkProvidersAbortController?.abort();
+    this.checkProvidersAbortController = null;
+  };
+
+  isProviderAvailable = (id: number) => {
+    return !this.unavailableProvidersIdsSet.has(id);
   };
 
   get systemMCPServers() {

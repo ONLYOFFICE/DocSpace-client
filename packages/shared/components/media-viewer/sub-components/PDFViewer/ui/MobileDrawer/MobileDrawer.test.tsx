@@ -24,21 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { MobileDrawer } from ".";
 import { BookMarkType } from "../../PDFViewer.props";
 
 // Mock classNames
-jest.mock("classnames", () => ({
+vi.mock("classnames", () => ({
   __esModule: true,
   default: (...args: unknown[]) => args.join(" "),
 }));
 
 // Mock react-spring
-jest.mock("@react-spring/web", () => ({
-  useSpring: () => [{ y: 0, opacity: 1 }, { start: jest.fn() }],
+vi.mock("@react-spring/web", () => ({
+  useSpring: () => [{ y: 0, opacity: 1 }, { start: vi.fn() }],
   config: {
     stiff: {},
     wobbly: {},
@@ -58,21 +58,12 @@ jest.mock("@react-spring/web", () => ({
 }));
 
 // Mock use-gesture
-jest.mock("@use-gesture/react", () => ({
+vi.mock("@use-gesture/react", () => ({
   useDrag: () => () => ({}),
 }));
 
-// Mock styles
-jest.mock("./sub-components/PDFViewer/PDFViewer.module.scss", () => ({
-  container: "container",
-  wrapper: "wrapper",
-  header: "header",
-  thumbnails: "thumbnails",
-  visible: "visible",
-}));
-
 // Mock Bookmarks component
-jest.mock("../Bookmarks", () => ({
+vi.mock("../Bookmarks", () => ({
   Bookmarks: ({
     bookmarks,
     navigate,
@@ -94,13 +85,13 @@ describe("MobileDrawer", () => {
   const defaultProps = {
     bookmarks: [] as BookMarkType[],
     isOpenMobileDrawer: false,
-    navigate: jest.fn(),
-    setIsOpenMobileDrawer: jest.fn(),
-    resizePDFThumbnail: jest.fn(),
+    navigate: vi.fn(),
+    setIsOpenMobileDrawer: vi.fn(),
+    resizePDFThumbnail: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // Mock window.innerHeight
     Object.defineProperty(window, "innerHeight", {
       writable: true,
@@ -110,7 +101,7 @@ describe("MobileDrawer", () => {
   });
 
   afterEach(() => {
-    jest.resetModules();
+    vi.resetModules();
   });
 
   it("renders without crashing", () => {

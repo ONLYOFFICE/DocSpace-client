@@ -48,7 +48,7 @@ const EmptyScreen = ({ isLoading }: MessageEmptyProps) => {
       {isLoading ? (
         <RectangleSkeleton height="24px" width="140px" borderRadius="3px" />
       ) : (
-        t("Common:AIChatHelp")
+        t("Common:AIChatOfferHelp")
       )}
     </Text>
   );

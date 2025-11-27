@@ -24,141 +24,90 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
-import { TSelectorItem } from "@docspace/shared/components/selector";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { TAgentParams } from "@docspace/shared/utils/aiAgents";
-import { getServersListForRoom } from "@docspace/shared/api/ai";
-import { getServerIcon } from "@docspace/shared/utils";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { MCPIcon, MCPIconSize } from "@docspace/shared/components/mcp-icon";
 
-import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
+import type { TSelectorItem } from "@docspace/shared/components/selector";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 interface MCPSettingsProps {
   agentParams: TAgentParams;
-  setAgentParams: (value: TAgentParams) => void;
+  setAgentParams: (value: Partial<TAgentParams>) => void;
+  portalMcpServerId?: string;
+  onClickAction?: () => void;
+  selectedServers?: TSelectorItem[];
+  setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 }
 
-const MCPSettings = ({ agentParams, setAgentParams }: MCPSettingsProps) => {
+const MCPSettings = ({
+  agentParams,
+  setAgentParams,
+  portalMcpServerId,
+  onClickAction,
+  selectedServers,
+  setSelectedServers,
+}: MCPSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
 
-  const { isBase } = useTheme();
-
-  const [isSelectorVisible, setIsSelectorVisible] = React.useState(false);
-
-  const [selectedServers, setSelectedServers] = React.useState<TSelectorItem[]>(
-    [],
-  );
-  const [initialServers, setInitialServers] = React.useState<TSelectorItem[]>(
-    [],
-  );
-
-  const onClickAction = () => setIsSelectorVisible(true);
-
-  const onClose = () => setIsSelectorVisible(false);
-
-  const onSubmit = (servers: TSelectorItem[]) => {
-    setSelectedServers(servers);
-  };
-
-  const agentId = agentParams.agentId;
-
-  React.useEffect(() => {
-    if (agentId) {
-      getServersListForRoom(agentId).then((res) => {
-        if (res) {
-          const items = res.map((item) => ({
-            key: item.id,
-            id: item.id,
-            label: item.name,
-            icon:
-              (item.icon?.icon24 || getServerIcon(item.serverType, isBase)) ??
-              "",
-            isInputItem: false,
-            onAcceptInput: () => {},
-            onCancelInput: () => {},
-            defaultInputValue: "",
-            placeholder: "",
-          }));
-
-          setSelectedServers(items);
-          setInitialServers(items);
-        }
-      });
-    }
-  }, [agentId]);
-
-  React.useEffect(() => {
-    setAgentParams({
-      ...agentParams,
-      mcpServers: selectedServers
-        .map((server) => server.id?.toString() || "")
-        .filter((id) => id !== ""),
-      mcpServersInitial: initialServers
-        .map((server) => server.id?.toString() || "")
-        .filter((id) => id !== ""),
-    });
-  }, [selectedServers]);
-
   return (
-    <>
-      <StyledParam increaseGap>
-        <div className=" set_room_params-info">
-          <div>
-            <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-              {t("MCP")}
-            </Text>
-            <Text
-              fontSize="12px"
-              lineHeight="16px"
-              fontWeight={400}
-              className="set_room_params-info-description"
-              noSelect
-            >
-              {t("MCPDescription")}
-            </Text>
-          </div>
-          <div className="ai-mcp-group">
-            <SelectorAddButton onClick={onClickAction} />
-
-            {selectedServers.map((server) => (
-              <div className="ai-mcp-item" key={server.id}>
-                <img src={server.icon} alt="DocSpace" />
-                <Text
-                  fontSize="12px"
-                  fontWeight={600}
-                  lineHeight="16px"
-                  noSelect
-                >
-                  {server.label}
-                </Text>
-
-                <IconButton
-                  iconName={CrossReactSvgUrl}
-                  size={12}
-                  onClick={() => {
-                    setSelectedServers((prev) =>
-                      prev.filter((item) => item.id !== server.id),
-                    );
-                  }}
-                />
-              </div>
-            ))}
-          </div>
+    <StyledParam increaseGap>
+      <div className=" set_room_params-info">
+        <div>
+          <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+            {t("MCP")}
+          </Text>
+          <Text
+            fontSize="12px"
+            lineHeight="16px"
+            fontWeight={400}
+            className="set_room_params-info-description"
+            noSelect
+          >
+            {t("MCPDescriptionServers")}
+          </Text>
         </div>
-      </StyledParam>
+        <div className="ai-mcp-group">
+          <SelectorAddButton onClick={onClickAction} />
 
-      {isSelectorVisible ? (
-        <MCPServersSelector onSubmit={onSubmit} onClose={onClose} />
-      ) : null}
-    </>
+          {selectedServers?.map((server) => (
+            <div className="ai-mcp-item" key={server.id}>
+              <MCPIcon
+                title={server.label}
+                imgSrc={server.icon}
+                size={MCPIconSize.Small}
+              />
+              <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
+                {server.label}
+              </Text>
+
+              <IconButton
+                iconName={CrossReactSvgUrl}
+                size={12}
+                onClick={() => {
+                  setSelectedServers?.((prev) =>
+                    prev.filter((item) => item.id !== server.id),
+                  );
+                  if (portalMcpServerId && server.id === portalMcpServerId) {
+                    setAgentParams({
+                      attachDefaultTools: false,
+                    });
+                  }
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </StyledParam>
   );
 };
 

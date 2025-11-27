@@ -3,7 +3,7 @@
   "content": "Disable account",
   "content_en_sha1_hash": "198562d776cf89feb842e248f463dff4797e7cd5",
   "created_at": "2025-05-19T21:30:56.638Z",
-  "updated_at": "2025-05-26T07:57:32.296Z",
+  "updated_at": "2025-11-03T12:10:35.000Z",
   "comment": {
     "text": "The \"DeleteProfileTitle\" translation key is used to display the text \"Disable account\" in a modal dialog, specifically in the header section of the DeleteOwnerProfileDialog and DeleteSelfProfileDialog components. This text prompts the user to delete their profile.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteSelfProfileDialog/index.js",
-      "line_number": 75,
+      "line_number": 76,
       "context": "const { t, tReady, visible, email, onClose } = this.props;\n const { isRequestRunning } = this.state;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteProfileInfo\")}{\" \"}\n <Link\n type=\"page\"",
       "module": "/packages/client"
     }

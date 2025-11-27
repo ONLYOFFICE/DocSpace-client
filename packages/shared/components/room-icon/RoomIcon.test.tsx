@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { RoomIcon } from ".";
 import { TModel } from "./RoomIcon.types";
+import styles from "./RoomIcon.module.scss";
 
 const mockImgSrc = "test-image.jpg";
 const mockTitle = "Test Room";
@@ -48,19 +49,19 @@ const mockModel: TModel[] = [
     label: "Upload",
     icon: "upload.svg",
     key: "upload",
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   },
   {
     label: "Remove",
     icon: "remove.svg",
     key: "remove",
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   },
 ];
 
 describe("<RoomIcon />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
@@ -100,7 +101,7 @@ describe("<RoomIcon />", () => {
   });
 
   it("handles file input change", () => {
-    const onChangeFile = jest.fn();
+    const onChangeFile = vi.fn();
     render(
       <RoomIcon
         {...baseProps}
@@ -117,7 +118,7 @@ describe("<RoomIcon />", () => {
 
   it("renders badge correctly", () => {
     const badgeUrl = "badge.svg";
-    const onBadgeClick = jest.fn();
+    const onBadgeClick = vi.fn();
     render(
       <RoomIcon
         {...baseProps}
@@ -171,7 +172,7 @@ describe("<RoomIcon />", () => {
       />,
     );
     const badgeButton = screen.getByTestId("icon-button");
-    expect(badgeButton).toHaveClass("isHovered");
+    expect(badgeButton).toHaveClass(styles.isHovered);
   });
 
   it("does not add tooltip attributes when tooltipContent is not provided", () => {
@@ -179,7 +180,7 @@ describe("<RoomIcon />", () => {
     const badgeButton = screen.getByTestId("icon-button");
     expect(badgeButton).not.toHaveAttribute("data-tooltip-id");
     const buttonWithClass = screen.getByTestId("icon-button");
-    expect(buttonWithClass).not.toHaveClass("isHovered");
+    expect(buttonWithClass).not.toHaveClass(styles.isHovered);
   });
 
   it("handles template icon state", () => {

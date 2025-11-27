@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { TextInput } from ".";
 import { InputSize, InputType } from "./TextInput.enums";
@@ -37,7 +37,7 @@ describe("<TextInput />", () => {
     value: "text",
     size: InputSize.base,
     type: InputType.text,
-    onChange: jest.fn(),
+    onChange: vi.fn(),
   };
 
   it("renders without error", () => {
@@ -84,7 +84,7 @@ describe("<TextInput />", () => {
   });
 
   it("calls onChange when text is entered", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<TextInput {...defaultProps} onChange={onChange} />);
 
     const input = screen.getByTestId("text-input");
@@ -94,7 +94,7 @@ describe("<TextInput />", () => {
   });
 
   it("calls onFocus when input is focused", () => {
-    const onFocus = jest.fn();
+    const onFocus = vi.fn();
     render(<TextInput {...defaultProps} onFocus={onFocus} />);
 
     const input = screen.getByTestId("text-input");
@@ -104,7 +104,7 @@ describe("<TextInput />", () => {
   });
 
   it("calls onBlur when input loses focus", () => {
-    const onBlur = jest.fn();
+    const onBlur = vi.fn();
     render(<TextInput {...defaultProps} onBlur={onBlur} />);
 
     const input = screen.getByTestId("text-input");
@@ -207,7 +207,7 @@ describe("<TextInput />", () => {
   });
 
   it("calls onKeyDown when key is pressed", () => {
-    const onKeyDown = jest.fn();
+    const onKeyDown = vi.fn();
     render(<TextInput {...defaultProps} onKeyDown={onKeyDown} />);
 
     const input = screen.getByTestId("text-input");
@@ -217,7 +217,7 @@ describe("<TextInput />", () => {
   });
 
   it("calls onClick when clicked", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<TextInput {...defaultProps} onClick={onClick} />);
 
     const input = screen.getByTestId("text-input");
@@ -227,7 +227,7 @@ describe("<TextInput />", () => {
   });
 
   it("calls onContextMenu on right click", () => {
-    const onContextMenu = jest.fn();
+    const onContextMenu = vi.fn();
     render(<TextInput {...defaultProps} onContextMenu={onContextMenu} />);
 
     const input = screen.getByTestId("text-input");

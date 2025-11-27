@@ -26,7 +26,7 @@
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { TFunction } from "i18next";
 import { useEffect } from "react";
 
@@ -128,6 +128,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     checkTg,
   } = props;
   const navigate = useNavigate();
+  const location = useLocation();
 
   const checkEmailChangeParam = () => {
     const search = window.location.search;
@@ -228,7 +229,9 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     const arrayPaths = window.location.pathname.split("/");
     arrayPaths.splice(arrayPaths.length - 1);
     const path = arrayPaths.join("/");
-    navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });
+    navigate(`${path}/${e.id}`, {
+      state: { disableScrollToTop: true, fromUrl: location?.state?.fromUrl },
+    });
   };
 
   if (showProfileLoader) return <ProfileViewLoader />;

@@ -171,6 +171,8 @@ const AutomaticBackup = ({
   setBackupProgressError,
   setDefaultFolderId,
   isBackupPaid,
+  backupProgressWarning,
+  setBackupProgressWarning,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -200,11 +202,15 @@ const AutomaticBackup = ({
       );
       if (!options) return;
 
-      const { error, success } = options;
+      const { error, success, warning } = options;
 
       if (error) {
         toastr.error(error);
         setBackupProgressError(error);
+      }
+
+      if (warning) {
+        setBackupProgressWarning(warning);
       }
       if (success) toastr.success(success);
     };
@@ -395,7 +401,10 @@ const AutomaticBackup = ({
 
   return (
     <div data-testid="auto-backup" className={styles.autoBackup}>
-      <StatusMessage message={errorInformation} />
+      <StatusMessage
+        message={errorInformation || backupProgressWarning}
+        isWarning={!!backupProgressWarning}
+      />
       <div
         className={classNames(
           styles.backupModulesHeaderWrapper,

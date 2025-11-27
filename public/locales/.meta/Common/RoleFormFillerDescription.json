@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, form filling, reviewing, commenting.",
   "content_en_sha1_hash": "3474de7fd9cdc6860caeafd949a5852e84fd6ac8",
   "created_at": "2025-05-19T21:30:48.039Z",
-  "updated_at": "2025-09-17T13:43:02.060Z",
+  "updated_at": "2025-11-17T11:52:35.889Z",
   "comment": {
     "text": "This translation key provides a description of operations related to existing files, including viewing, form filling, reviewing, and commenting. It is used in UI elements where file management options are displayed, such as buttons or dialogs. Translators should focus on conveying a comprehensive overview of these file-related actions in different languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 80,
+      "line_number": 84,
       "context": "const getFormFillerDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleFormFillerFormRoomDescription\");\n default:\n return t(\"Common:RoleFormFillerDescription\");\n }\n };\n \n export const getAccessOptions = (\n t: TTranslation,",
       "module": "/packages/shared"
     }

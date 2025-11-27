@@ -3,7 +3,7 @@
   "content": "Open file location",
   "content_en_sha1_hash": "3e3e6fccc753b74da3c1194baf8f98ec4f2b9768",
   "created_at": "2025-05-19T21:30:57.126Z",
-  "updated_at": "2025-08-04T07:30:01.627Z",
+  "updated_at": "2025-11-13T07:58:08.530Z",
   "comment": {
     "text": "The \"Open file location\" translation key is used to display a button or link that opens the file location associated with the Editor component. It appears in a likely dialog or settings section where users can access or edit the editor's configuration.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 171,
+      "file_path": "/packages/doceditor/src/hooks/useGoBackAndClose.ts",
+      "line_number": 45,
       "context": "let goBack: TGoBack = {} as TGoBack;\n \n if (fileInfo) {\n const editorGoBack = sdkConfig?.editorGoBack;\n \n const openFileLocationText = (\n (\n i18n.getDataByLanguage(i18n.language) as unknown as {\n Editor: { [key: string]: string };\n }\n )?.Editor as {",
       "module": "/packages/doceditor"
     }

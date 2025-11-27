@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { FloatingButton } from ".";
 import { FloatingButtonIcons } from "./FloatingButton.enums";
 
@@ -60,7 +60,7 @@ describe("FloatingButton", () => {
   });
 
   it("handles click events", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     renderComponent(<FloatingButton {...defaultProps} onClick={onClick} />);
 
     const button = screen.getByTestId("floating-button");
@@ -91,7 +91,7 @@ describe("FloatingButton", () => {
   });
 
   it("calls clearUploadedFilesHistory after close icon click", () => {
-    const clearUploadedFilesHistory = jest.fn();
+    const clearUploadedFilesHistory = vi.fn();
     renderComponent(
       <FloatingButton
         {...defaultProps}
@@ -119,7 +119,7 @@ describe("FloatingButton", () => {
     });
 
     it("is keyboard accessible", () => {
-      const onClick = jest.fn();
+      const onClick = vi.fn();
       renderComponent(<FloatingButton {...defaultProps} onClick={onClick} />);
 
       const button = screen.getByTestId("floating-button");

@@ -42,6 +42,7 @@ import { Link, LinkType } from "../../link";
 
 import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";
+import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 
 import NewItemDropDown from "./NewItemDropDown";
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
@@ -73,6 +74,8 @@ const EmptyScreen = ({
     searchEmptyScreenHeader,
     searchEmptyScreenDescription,
   } = use(EmptyScreenContext);
+  const { withBreadCrumbs, breadCrumbs, onSelectBreadCrumb } =
+    React.use(BreadCrumbsContext);
 
   const { t } = useTranslation(["Common"]);
 
@@ -105,6 +108,10 @@ const EmptyScreen = ({
     createItem.onCreateClick?.();
   };
 
+  const onBackClick = () => {
+    onSelectBreadCrumb?.(breadCrumbs?.[breadCrumbs.length - 2]);
+  };
+
   if (
     !withSearch &&
     createItem?.isRoomsOnly &&
@@ -131,8 +138,8 @@ const EmptyScreen = ({
       </Heading>
 
       <Text className="empty-description">{currentDescription}</Text>
-      {createItem ? (
-        <div className="buttons">
+      <div className="buttons">
+        {createItem ? (
           <div
             className="empty-folder_container-links"
             onClick={onCreateClickAction}
@@ -152,31 +159,30 @@ const EmptyScreen = ({
               />
             ) : null}
           </div>
+        ) : null}
+
+        {(withBreadCrumbs || createItem) && (!hideBackButton || withSearch) ? (
           <div
             className="empty-folder_container-links"
             onClick={
               withSearch
                 ? () => onClearSearch?.(() => setIsSearch(false))
-                : createItem.onBackClick
+                : onBackClick
             }
           >
-            {!hideBackButton || withSearch ? (
-              <>
-                <IconButton
-                  className="empty-folder_container-icon"
-                  size={12}
-                  iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
-                  isFill
-                />
+            <IconButton
+              className="empty-folder_container-icon"
+              size={12}
+              iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
+              isFill
+            />
 
-                <Link {...linkStyles}>
-                  {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
-                </Link>
-              </>
-            ) : null}
+            <Link {...linkStyles}>
+              {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
+            </Link>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </div>
   );
 };

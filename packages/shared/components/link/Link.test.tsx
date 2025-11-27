@@ -25,20 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Link, LinkType } from ".";
 
-// Mock CSS modules
-jest.mock("./Link.module.scss", () => ({
-  link: "link",
-  semitransparent: "semitransparent",
-  isHovered: "isHovered",
-  textOverflow: "textOverflow",
-  noHover: "noHover",
-  enableUserSelect: "enableUserSelect",
-  page: "page",
+// Mock CSS modules - return default export for CSS Modules
+vi.mock("./Link.module.scss", () => ({
+  default: {
+    link: "link",
+    semitransparent: "semitransparent",
+    isHovered: "isHovered",
+    textOverflow: "textOverflow",
+    noHover: "noHover",
+    enableUserSelect: "enableUserSelect",
+    page: "page",
+  },
 }));
 
 const baseProps = {
@@ -79,7 +81,7 @@ describe("<Link />", () => {
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("isHovered");
+    expect(link.className).toContain("isHovered");
   });
 
   it("renders with isSemitransparent prop", () => {
@@ -89,7 +91,7 @@ describe("<Link />", () => {
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("semitransparent");
+    expect(link.className).toContain("semitransparent");
   });
 
   it("renders with isTextOverflow prop", () => {
@@ -99,7 +101,7 @@ describe("<Link />", () => {
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("textOverflow");
+    expect(link.className).toContain("textOverflow");
   });
 
   it("renders with noHover prop", () => {
@@ -109,7 +111,7 @@ describe("<Link />", () => {
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("noHover");
+    expect(link.className).toContain("noHover");
   });
 
   it("renders with enableUserSelect prop", () => {
@@ -119,7 +121,7 @@ describe("<Link />", () => {
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).toHaveClass("enableUserSelect");
+    expect(link.className).toContain("enableUserSelect");
   });
 
   it("renders with type prop action", () => {
@@ -129,7 +131,7 @@ describe("<Link />", () => {
       </Link>,
     );
     const link = screen.getByTestId("link");
-    expect(link).not.toHaveClass("page");
+    expect(link.className).not.toContain("page");
   });
 
   it("renders with custom fontSize and lineHeight", () => {

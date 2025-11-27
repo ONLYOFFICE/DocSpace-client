@@ -24,19 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import MoreLoginModal from "./index";
 import { MoreLoginModalProps } from "./MoreLoginModal.types";
-import "@testing-library/jest-dom";
 
 describe("<MoreLoginModal />", () => {
   const baseProps: MoreLoginModalProps = {
     visible: true,
-    onClose: jest.fn(),
-    onSocialLoginClick: jest.fn(),
+    onClose: vi.fn(),
+    onSocialLoginClick: vi.fn(),
     ssoLabel: "SSO Login",
     ssoUrl: "https://example.com/sso",
-    t: jest.fn((key: string) => key),
+    t: vi.fn((key: string) => key),
     providers: [
       { linked: false, provider: "google", url: "https://example.com/google" },
       {
@@ -48,7 +48,7 @@ describe("<MoreLoginModal />", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {

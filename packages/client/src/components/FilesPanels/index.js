@@ -290,6 +290,7 @@ const Panels = (props) => {
         isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
         withAIAgentsTreeFolder
+        disableBySecurity="UseChat"
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
@@ -459,6 +460,7 @@ const Panels = (props) => {
 
     formFillingTipsVisible ? (
       <Guidance
+        key="form-filling-tips-guidance"
         viewAs={viewAs}
         onClose={onCloseGuidance}
         getRefElement={getRefElement}

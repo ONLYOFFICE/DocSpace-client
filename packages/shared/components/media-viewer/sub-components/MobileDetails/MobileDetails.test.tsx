@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MobileDetails } from ".";
-import "@testing-library/jest-dom";
 
 describe("MobileDetails", () => {
   const defaultProps = {
@@ -36,10 +36,10 @@ describe("MobileDetails", () => {
     isError: false,
     isPreviewFile: false,
     isPublicFile: false,
-    onHide: jest.fn(),
-    onMaskClick: jest.fn(),
-    onContextMenu: jest.fn(),
-    contextModel: jest.fn(),
+    onHide: vi.fn(),
+    onMaskClick: vi.fn(),
+    onContextMenu: vi.fn(),
+    contextModel: vi.fn(),
   };
 
   const setup = (props = {}) => {
@@ -47,7 +47,7 @@ describe("MobileDetails", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("does not render back button when isPublicFile is true", () => {

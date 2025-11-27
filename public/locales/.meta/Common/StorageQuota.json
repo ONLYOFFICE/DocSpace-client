@@ -3,7 +3,7 @@
   "content": "Storage quota",
   "content_en_sha1_hash": "fbd20573f984732d839815359efcd0afd938b995",
   "created_at": "2025-05-19T21:30:49.110Z",
-  "updated_at": "2025-10-27T16:14:33.161Z",
+  "updated_at": "2025-11-13T07:58:07.739Z",
   "comment": {
     "text": "This translation key is used to display the storage quota label. It is displayed on a filter form and in room quota dialogs, indicating that it controls the maximum amount of space allowed for rooms. The goal is to provide clarity about the purpose of this setting, allowing users to make informed decisions when filtering or editing rooms.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
-      "line_number": 62,
-      "context": "const defaultValue = useRef(roomParams.quota!);\n \n return (\n <QuotaForm\n label={t(\"Common:StorageQuota\")}\n description={t(\"StorageDescription\")}\n checkboxLabel={t(\"DisableRoomQuota\")}\n onSetQuotaBytesSize={onSetQuotaBytesSize}\n initialSize={\n isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota!",
+      "line_number": 64,
+      "context": "const defaultValue = useRef(roomParams.quota!);\n \n return (\n <QuotaForm\n label={t(\"Common:StorageQuota\")}\n description={\n isAgent ? t(\"StorageDescriptionAgent\") : t(\"StorageDescription\")\n }\n checkboxLabel={\n isAgent ? t(\"DisableRoomQuotaAgent\") : t(\"DisableRoomQuota\")",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 896,
+      "line_number": 936,
       "context": "const getFilterData = React.useCallback(async () => {\n const quotaFilter = [\n {\n key: FilterGroups.filterQuota,\n group: FilterGroups.filterQuota,\n label: t(\"Common:StorageQuota\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     }

@@ -27,7 +27,7 @@
  */
 
 import React from "react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { IndexIconButtons } from ".";
@@ -73,7 +73,7 @@ describe("<IndexIconButtons />", () => {
   });
 
   it("calls onUpIndexClick when up icon is clicked", () => {
-    const handleUpClick = jest.fn();
+    const handleUpClick = vi.fn();
 
     render(<IndexIconButtons onUpIndexClick={handleUpClick} />);
 
@@ -84,7 +84,7 @@ describe("<IndexIconButtons />", () => {
   });
 
   it("calls onDownIndexClick when down icon is clicked", () => {
-    const handleDownClick = jest.fn();
+    const handleDownClick = vi.fn();
 
     render(<IndexIconButtons onDownIndexClick={handleDownClick} />);
 

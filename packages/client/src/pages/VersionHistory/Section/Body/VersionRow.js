@@ -51,6 +51,7 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StyledVersionRow } from "./StyledVersionHistory";
 import VersionBadge from "./VersionBadge/VersionBadge";
+import { isAIAgents } from "../../../../helpers/plugins/utils";
 
 const VersionRow = (props) => {
   const {
@@ -149,7 +150,7 @@ const VersionRow = (props) => {
       );
     }
 
-    if (fileItemsList && enablePlugins) {
+    if (!isAIAgents() && fileItemsList && enablePlugins) {
       let currPluginItem = null;
 
       fileItemsList.forEach((i) => {

@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Հեռացնել զրույցը։",
+  "DeleteAIAgentDescription": "Գործակալ <strong>\"{{agentName}}\"</strong>-ը ընդմիշտ կջնջվի։ Բոլոր տվյալները և օգտատիրոջ մուտքի իրավունքները կկորչեն։",
+  "DeleteAIAgentTitle": "Ջնջե՞լ այս գործակալին։",
+  "DeleteAIAgentWarning": "Ես հասկանում եմ հետևանքները և ցանկանում եմ հեռացնել գործակալին",
+  "DeleteAIChatDescription": "Դուք այժմ ջնջելու եք <strong>{{chatName}}<1>.</1></strong>։\nԲոլոր հաղորդագրություններն ու չափաբանության պատմությունը կջնջվեն մշտականօրինաբար և չեն կարող վերականգնվել։",
   "DeleteAllGroupDescription": "Ընտրված խմբերը կջնջվեն: Խմբերի օգտատերերը չեն հեռացվի {{productName}}-ից: Վստա՞հ եք, որ ցանկանում եք շարունակել:",
   "DeleteAllGroupsTitle": "Ջնջել խմբերը",
   "DeleteFiles": "Դուք պատրաստվում եք տեղափոխել <strong>ֆայլեր ({{filesCount}})</strong> {{trashSection}}։",

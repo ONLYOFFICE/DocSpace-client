@@ -31,15 +31,15 @@ import InfoIconSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EmptyScreenAIAgentsSelectorSvgUrl from "PUBLIC_DIR/images/emptyview/ai.agents.selector.light.svg?url";
 import EmptyScreenAIAgentsSelectorSvgUrlDark from "PUBLIC_DIR/images/emptyview/ai.agents.selector.dark.svg?url";
 
-import { Selector, TSelectorItem } from "../../components/selector";
-import {
+import { Selector, type TSelectorItem } from "../../components/selector";
+import type {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorSearch,
 } from "../../components/selector/Selector.types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
-import { TTranslation } from "../../types";
+import type { TTranslation } from "../../types";
 import { useTheme } from "../../hooks/useTheme";
 
 import useSocketHelper from "../utils/hooks/useSocketHelper";
@@ -49,7 +49,7 @@ import {
   LoadersContextProvider,
 } from "../utils/contexts/Loaders";
 
-import { AIAgentSelectorProps } from "./AIAgent.types";
+import type { AIAgentSelectorProps } from "./AIAgent.types";
 import { convertToItems } from "./AIAgent.utils";
 
 const AIAgentSelectorComponent = ({
@@ -72,6 +72,7 @@ const AIAgentSelectorComponent = ({
   initTotal,
   initHasNextPage,
   initSearchValue,
+  disableBySecurity,
 }: AIAgentSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -94,7 +95,7 @@ const AIAgentSelectorComponent = ({
   const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
   const [items, setItems] = React.useState<TSelectorItem[]>(
     withInit
-      ? convertToItems(initItems).filter((x) =>
+      ? convertToItems(initItems, disableBySecurity).filter((x) =>
           excludeItems ? !excludeItems.includes(x.id) : true,
         )
       : [],
@@ -112,8 +113,26 @@ const AIAgentSelectorComponent = ({
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
+    if (
+      item.security &&
+      "UseChat" in item.security &&
+      !item.security?.UseChat
+    ) {
+      setSelectedItem(null);
+
+      return;
+    }
+
     setSelectedItem((el) => {
       if (el?.id === item.id) return null;
+
+      if (
+        item.security &&
+        "UseChat" in item.security &&
+        !item.security?.UseChat
+      ) {
+        return null;
+      }
 
       return item;
     });
@@ -143,6 +162,7 @@ const AIAgentSelectorComponent = ({
     setTotal,
     setItems,
     disabledItems: [],
+    disableBySecurity,
   });
 
   const onClearSearchAction = React.useCallback(
@@ -169,15 +189,14 @@ const AIAgentSelectorComponent = ({
     setItems,
     withInit,
     subscribe,
+    disableBySecurity,
   });
 
   React.useEffect(() => {
     const withInfo =
       items.length > 1
         ? items.length === 2
-          ? items[1].isInputItem
-            ? false
-            : true
+          ? !items[1].isInputItem
           : true
         : false;
 

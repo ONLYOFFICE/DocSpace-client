@@ -5,7 +5,6 @@
   "DailyFeed": "Denný informačný kanál {{productName}}",
   "DailyFeedDescription": "Prečítajte si správy a udalosti z vášho {{productName}} v dennom prehľade.",
   "FileActivityNotify": "Notifikácie o aktivite súborov",
-  "GoToSettings": "Prejdite do Nastavení",
   "IsNotValid": "Nie je platné",
   "LdapEmailTooltip": "Tento používateľský účet je načítaný z LDAP. Používateľova e-mailová adresa nebola zadaná a aktuálna bola generovaná automaticky a nemožno ju použiť na odosielanie upozornení.",
   "NotConfigured": "Nakonfigurované",

@@ -32,6 +32,7 @@ const OPENAI_LABEL = "OpenAI";
 const TOGETHER_AI_LABEL = "TogetherAI";
 const OPENAI_COMPATIBLE_LABEL = "OpenAI-compatible";
 const ANTHROPIC_LABEL = "Anthropic";
+const OPENROUTER_LABEL = "OpenRouter";
 
 export const getAiProviderLabel = (type: ProviderType) => {
   switch (type) {
@@ -43,6 +44,8 @@ export const getAiProviderLabel = (type: ProviderType) => {
       return OPENAI_COMPATIBLE_LABEL;
     case ProviderType.Anthropic:
       return ANTHROPIC_LABEL;
+    case ProviderType.OpenRouter:
+      return OPENROUTER_LABEL;
     default:
       return "";
   }

@@ -179,7 +179,6 @@
   --context-menu-button-hover-border: #{$gray};
 
   --drag-and-drop-height: 100%;
-  --drag-and-drop-border: 1px solid transparent;
   --drag-and-drop-accept-bg: #{$dnd-hover-color};
   --drag-and-drop-bg: #{$dnd-color};
 
@@ -305,7 +304,6 @@
 
   --context-menu-header-text-margin: 0 0 0 8px;
   --context-menu-submenu-list-margin: 4px;
-  --drag-and-drop-border: 1px solid transparent;
   --empty-view-link-color: #{$light-blue-main};
 
   --aside-custom-z-index: unset;
@@ -1038,6 +1036,8 @@
   --section-header-height-mobile: 53px;
   --section-desktop-padding: -20px;
   --section-tablet-padding: -24px;
+
+  --section-submenu-height: 33px;
 }
 
 .light {
@@ -1084,6 +1084,8 @@
   --section-header-height-mobile: 53px;
   --section-desktop-padding: -20px;
   --section-tablet-padding: -24px;
+
+  --section-submenu-height: 33px;
 
   --section-header-bg: #{$white};
   --info-panel-blur-color: #{$blur-light};
@@ -1593,7 +1595,7 @@
   --input-selection-color: #{$gray-dark-text};
 
   --input-disabled-bg: #{$gray-dark-strong};
-  --input-disabled-color: #{$gray-dark-text};
+  --input-disabled-color: #{$gray-dark};
   --input-disabled-border: #{$gray-dark-strong};
 
   --input-error-border: #{$dark-error-status};
@@ -2193,6 +2195,7 @@
   --chat-header-button-svg-color: #{$black};
   --chat-header-button-hover-background: #{$light-gray-hover};
   --chat-header-button-active-background: #{$gray-light-mid};
+  --chat-header-button-disabled-color: #{$gray};
 
   --chat-file-item-border-color: #{$gray-light-mid};
   --chat-file-item-background-color: #{$white};
@@ -2203,12 +2206,14 @@
   --chat-input-file-background-color: #{$white};
   --chat-input-file-exst-color: #{$gray};
   --chat-input-tools-button-color: #{$gray-text};
+  --chat-input-tools-button-disabled-color: #{$gray};
   --chat-input-tools-button-hover-color: #{$gray-text};
   --chat-input-tools-button-hover-background: #{$light-gray-hover};
   --chat-input-tools-button-active-color: #{$black};
   --chat-input-tools-button-active-background: #{$gray-light-mid};
   --chat-input-send-button-color: #{$white};
   --chat-input-send-button-background: var(--accent-main);
+  --chat-input-placeholder-disabled-color: #{$gray-strong};
 
   --chat-message-color: #{$gray-text};
   --chat-message-user-background-color: var(--accent-main);
@@ -2239,6 +2244,7 @@
   --chat-header-button-svg-color: #{$white};
   --chat-header-button-hover-background: #{$light-dark-gray-hover};
   --chat-header-button-active-background: #{$gray-dark-mid};
+  --chat-header-button-disabled-color: #{$gray-dark};
 
   --chat-file-item-border-color: #{$gray-dark-strong};
   --chat-file-item-background-color: unset;
@@ -2249,12 +2255,14 @@
   --chat-input-file-background-color: #{$black};
   --chat-input-file-exst-color: #{$gray};
   --chat-input-tools-button-color: #{$dark-gray-dark};
+  --chat-input-tools-button-disabled-color: #{$gray-dark-strong};
   --chat-input-tools-button-hover-color: #{$dark-gray-dark};
   --chat-input-tools-button-hover-background: #{$light-dark-gray-hover};
   --chat-input-tools-button-active-color: #{$white};
   --chat-input-tools-button-active-background: #{$gray-dark-mid};
   --chat-input-send-button-color: #{$black};
   --chat-input-send-button-background: #{$active-color-dark};
+  --chat-input-placeholder-disabled-color: #{$gray-dark-strong};
 
   --chat-message-color: #{$dark-gray-dark};
   --chat-message-user-background-color: #{$white};
@@ -2351,6 +2359,9 @@
   --login-text-color: #{$gray};
   --login-captcha-error-border: 1px solid #{$light-error-status};
   --login-captcha-error-color: #{$light-error-status};
+  --login-register-background-color: #{$gray-light};
+  --login-simple-nav-background-color: #{$gray-light};
+  --login-register-text-color: var(--accent-main);
 }
 
 .dark {
@@ -2362,6 +2373,9 @@
   --login-text-color: #{$gray-dark};
   --login-captcha-error-border: 1px solid #{$dark-error-status};
   --login-captcha-error-color: #{$dark-error-status};
+  --login-register-background-color: #{$dark-gray-light};
+  --login-simple-nav-background-color: #{$dark-gray-light};
+  --login-register-text-color: var(--accent-main);
 }
 
 .light {
@@ -2808,7 +2822,7 @@
   --combobox-button-focus-open-border-color: var(--accent-main);
 
   --combobox-label-selected-color: #{$black};
-  --combobox-label-disabled-color: #{$gray-strong};
+  --combobox-label-disabled-color: #{$gray};  
   --combobox-label-alternative-color: #{$gray};
 
   --combobox-plus-badge-bg-color: #{$gray};

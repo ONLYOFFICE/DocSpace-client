@@ -1,0 +1,28 @@
+{
+  "key_path": "ChatBot",
+  "content": "ChatBot",
+  "content_en_sha1_hash": "ca67c98b89c14b65fb3e1625531dc54029f21d26",
+  "created_at": "2025-11-03T12:10:29.427Z",
+  "updated_at": "2025-11-03T12:30:08.735Z",
+  "comment": {
+    "text": "This key provides the title for a ChatBot service option within the AI Tools section of the Portal Settings. It appears as a listed service, likely in a dialog or panel displaying available AI services. Translators should ensure the translation accurately reflects a chatbot functionality.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:30:08.735Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 121,
+      "context": "description: t(\"AIAgentsDescription\"),\n icon: <ToolsIcon />,\n },\n {\n id: \"chatbot\",\n title: t(\"ChatBot\"),\n description: t(\"ChatBotDescription\"),\n icon: <ChatIcon />,\n },\n {\n id: \"summarization\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

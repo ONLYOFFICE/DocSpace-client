@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+
 import { Avatar } from ".";
 import { AvatarRole, AvatarSize } from "./Avatar.enums";
 
@@ -37,21 +38,21 @@ const baseProps = {
   editLabel: "Edit",
   userName: "Demo User",
   editing: false,
-  editAction: jest.fn(),
+  editAction: vi.fn(),
 };
 
 describe("<Avatar />", () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  test("renders avatar with default props", () => {
+  it("renders avatar with default props", () => {
     render(<Avatar {...baseProps} />);
     expect(screen.getByTestId("avatar")).toBeInTheDocument();
     expect(screen.getByText("DU")).toBeInTheDocument(); // Initials
   });
 
-  test("renders different avatar sizes", () => {
+  it("renders different avatar sizes", () => {
     const sizes = [
       AvatarSize.max,
       AvatarSize.big,
@@ -66,34 +67,34 @@ describe("<Avatar />", () => {
     });
   });
 
-  test("displays image when source is provided", () => {
+  it("displays image when source is provided", () => {
     const source = "https://example.com/avatar.jpg";
     render(<Avatar {...baseProps} source={source} />);
     const img = screen.getByRole("img");
     expect(img).toHaveAttribute("src", source);
   });
 
-  test("shows edit button when editing and hasAvatar are true", () => {
+  it("shows edit button when editing and hasAvatar are true", () => {
     render(<Avatar {...baseProps} editing hasAvatar />);
     const editButton = screen.getByTestId("edit_avatar_icon_button");
     expect(editButton).toBeInTheDocument();
   });
 
-  test("handles click events when onClick is provided", () => {
-    const onClick = jest.fn();
+  it("handles click events when onClick is provided", () => {
+    const onClick = vi.fn();
     render(<Avatar {...baseProps} onClick={onClick} />);
     const avatar = screen.getByTestId("avatar");
     fireEvent.click(avatar);
     expect(onClick).toHaveBeenCalled();
   });
 
-  test("displays correct initials for group avatar", () => {
+  it("displays correct initials for group avatar", () => {
     render(<Avatar {...baseProps} isGroup userName="Project Team" />);
     expect(screen.getByText("PT")).toBeInTheDocument();
   });
 
-  test("handles file change when onChangeFile is provided", () => {
-    const onChangeFile = jest.fn();
+  it("handles file change when onChangeFile is provided", () => {
+    const onChangeFile = vi.fn();
     render(<Avatar {...baseProps} editing onChangeFile={onChangeFile} />);
     const fileInput = screen.getByTestId("file-input");
     const file = new File(["test"], "test.png", { type: "image/png" });

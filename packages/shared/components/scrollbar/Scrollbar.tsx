@@ -55,6 +55,7 @@ const Scrollbar = (props: ScrollbarProps) => {
     tabIndex = -1,
     paddingAfterLastItem,
     paddingInlineEnd,
+    rtl: rtlProp,
     ...rest
   } = props;
 
@@ -179,7 +180,7 @@ const Scrollbar = (props: ScrollbarProps) => {
       {...rest}
       data-testid="scrollbar"
       disableTracksWidthCompensation
-      rtl={isRTL}
+      rtl={rtlProp ?? isRTL}
       className={classNames(styles.scrollbar, className, {
         [styles.fixedSize]: fixedSize,
         [styles.paddingAfterLastItem]: paddingAfterLastItem,

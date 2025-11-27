@@ -3,7 +3,7 @@
   "content": "Changes saved successfully",
   "content_en_sha1_hash": "f280abfbdd2b446b83b726202b040224495bff89",
   "created_at": "2025-05-19T21:30:43.416Z",
-  "updated_at": "2025-09-17T13:43:01.580Z",
+  "updated_at": "2025-11-19T15:02:40.911Z",
   "comment": {
     "text": "The translation key \"ChangesSavedSuccessfully\" is used to display a success message when changes are saved successfully in various dialogues. It informs users that their modifications have been applied and confirms the update process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 176,
+      "line_number": 179,
       "context": "const res = await loadAvatar(profile.id, avatarData);\n \n if (res.success) {\n res.data && updateCreatedAvatar(res.data);\n setHasAvatar(true);\n toastr.success(t(\"Common:ChangesSavedSuccessfully\"));\n } else {\n throw new Error(t(\"Common:ErrorInternalServer\"));\n }\n \n onClose();",
       "module": "/packages/client"
     },

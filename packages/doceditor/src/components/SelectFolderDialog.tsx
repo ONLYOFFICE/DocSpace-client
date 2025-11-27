@@ -30,7 +30,7 @@ import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 
 import { SelectFolderDialogProps } from "@/types";
 import { TSelectorCancelButton } from "@docspace/shared/components/selector/Selector.types";
@@ -84,6 +84,7 @@ const SelectFolderDialog = ({
       withoutBackButton
       withCancelButton
       disabledItems={[]}
+      disabledFolderType={FolderType.ResultStorage}
       onSubmit={onSubmit}
       submitButtonLabel={t("Common:SaveHereButton")}
       submitButtonId="select-file-modal-submit"

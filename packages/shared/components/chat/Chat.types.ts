@@ -25,19 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 
-import { TContent, TMessage, type TToolCallContent } from "../../api/ai/types";
-import { TGetIcon } from "../../selectors/utils/types";
-import { TFile } from "../../api/files/types";
+import type { TContent, TMessage, TToolCallContent } from "../../api/ai/types";
+import type { TGetIcon } from "../../selectors/utils/types";
+import type { TFile } from "../../api/files/types";
+
+import type useToolsSettings from "./hooks/useToolsSettings";
+import type useInitChats from "./hooks/useInitChats";
+import type useInitMessages from "./hooks/useInitMessages";
 
 export type TChatStoreProps = {
   roomId: string | number;
   children: React.ReactNode;
-};
+} & ReturnType<typeof useInitChats>;
 
 export type TMessageStoreProps = {
   roomId: string | number;
   children: React.ReactNode;
-};
+} & Omit<ReturnType<typeof useInitMessages>, "initMessages">;
 
 export type SelectModelProps = {
   selectedModel: string;
@@ -48,6 +52,14 @@ export type SelectChatProps = {
   isLoadingProp?: boolean;
   roomId: string | number;
   getIcon: TGetIcon;
+  getResultStorageId: () => number | null;
+  setIsAIAgentChatDelete?: (value: {
+    visible: boolean;
+    itemName: string;
+    onDeleteAction: () => void;
+  }) => void;
+  setDeleteDialogVisible?: (value: boolean) => void;
+  folderFormValidation: RegExp;
 };
 
 export type RenameChatProps = {
@@ -57,7 +69,16 @@ export type RenameChatProps = {
 };
 
 export type ChatHeaderProps = SelectModelProps &
-  Omit<SelectChatProps, "isLoadingProp">;
+  Omit<SelectChatProps, "isLoadingProp"> & {
+    aiReady: boolean;
+    setIsAIAgentChatDelete?: (value: {
+      visible: boolean;
+      itemName: string;
+      onDeleteAction: () => void;
+    }) => void;
+    setDeleteDialogVisible?: (value: boolean) => void;
+    folderFormValidation: RegExp;
+  };
 
 export type MessageProps = {
   message: TMessage;
@@ -65,6 +86,8 @@ export type MessageProps = {
   userAvatar: string;
   isLast: boolean;
   getIcon: TGetIcon;
+  getResultStorageId: () => number | null;
+  folderFormValidation: RegExp;
 };
 
 export type MessageButtonsProps = {
@@ -74,11 +97,14 @@ export type MessageButtonsProps = {
   isLast: boolean;
   getIcon: TGetIcon;
   messageIndex: number;
+  getResultStorageId: () => number | null;
+  folderFormValidation: RegExp;
 };
 
 export type MessageCodeBlockProps = {
   language?: string;
   content: string;
+  successCopyMessage?: string;
 };
 
 export type MessageErrorProps = {
@@ -93,6 +119,8 @@ export type MessageFilesProps = {
 export type MessageMarkdownFieldProps = {
   chatMessage: string;
   propLanguage?: string;
+  isFirst?: boolean;
+  successCopyMessage?: string;
 };
 
 export type MessageToolCallProps = {
@@ -108,6 +136,8 @@ export type MessageBodyProps = {
   isLoading?: boolean;
 
   getIcon: TGetIcon;
+  getResultStorageId: () => number | null;
+  folderFormValidation: RegExp;
 };
 
 export type FilesListProps = {
@@ -118,7 +148,6 @@ export type FilesListProps = {
 };
 
 export type ButtonsProps = {
-  inputWidth: number;
   isFilesSelectorVisible: boolean;
 
   toggleFilesSelector: VoidFunction;
@@ -126,6 +155,10 @@ export type ButtonsProps = {
 
   value: string;
   selectedModel: string;
+
+  toolsSettings: ReturnType<typeof useToolsSettings>;
+  isAdmin?: boolean;
+  aiReady: boolean;
 };
 
 export type AttachmentProps = {
@@ -145,7 +178,18 @@ export type ChatInputProps = {
   attachmentFile: AttachmentProps["attachmentFile"];
   clearAttachmentFile: AttachmentProps["clearAttachmentFile"];
   selectedModel: string;
+
+  toolsSettings: ReturnType<typeof useToolsSettings>;
+  isPortalAdmin: boolean;
+  aiReady: boolean;
 };
+
+export type ChatInfoBlockProps = {
+  standalone: boolean;
+  isPortalAdmin: boolean;
+};
+
+export type ChatFooterProps = ChatInputProps & ChatInfoBlockProps;
 
 export type ChatContainerProps = {
   children: React.ReactNode;
@@ -156,9 +200,24 @@ export type ChatProps = {
   userAvatar: MessageBodyProps["userAvatar"];
   selectedModel: string;
   getIcon: ChatInputProps["getIcon"];
+  getResultStorageId: () => number | null;
   isLoading?: boolean;
-  canUseChat?: boolean;
+  aiReady: boolean;
 
   attachmentFile: ChatInputProps["attachmentFile"];
   clearAttachmentFile: ChatInputProps["clearAttachmentFile"];
+
+  toolsSettings: ChatInputProps["toolsSettings"];
+  initChats: ReturnType<typeof useInitChats>;
+  messagesSettings: Omit<ReturnType<typeof useInitMessages>, "initMessages">;
+  isAdmin?: boolean;
+  standalone?: boolean;
+
+  setIsAIAgentChatDelete?: (value: {
+    visible: boolean;
+    itemName: string;
+    onDeleteAction: () => void;
+  }) => void;
+  setDeleteDialogVisible?: (value: boolean) => void;
+  folderFormValidation: RegExp;
 };

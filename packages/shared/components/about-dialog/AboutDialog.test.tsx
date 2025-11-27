@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { fireEvent, screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 
 import {
   mockBuildInfo,
@@ -35,7 +35,7 @@ import {
 } from "./mockData";
 import { AboutDialog } from "./index";
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (i18nKey: string) => i18nKey,
     ready: true,
@@ -47,10 +47,10 @@ describe("AboutDialog", () => {
   let testProps: typeof mockDefaultProps;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     testProps = {
       ...mockDefaultProps,
-      onClose: jest.fn(),
+      onClose: vi.fn(),
     };
   });
 

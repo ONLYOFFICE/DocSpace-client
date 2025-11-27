@@ -30,16 +30,17 @@ import { useTranslation } from "react-i18next";
 import { getAIAgents } from "../../../api/ai";
 import RoomsFilter from "../../../api/rooms/filter";
 import { RoomSearchArea } from "../../../enums";
-import { TSelectorItem } from "../../../components/selector";
-import { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type { TSelectorItem } from "../../../components/selector";
+import type { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type { TRoomSecurity } from "../../../api/rooms/types";
 
 import { LoadersContext } from "../contexts/Loaders";
 
 import { PAGE_COUNT } from "../constants";
-import { UseAgentsHelperProps } from "../types";
+import type { UseAgentsHelperProps } from "../types";
 import { convertRoomsToItems } from "..";
 
-import useInputItemHelper from "./useInputItemHelper";
+// import useInputItemHelper from "./useInputItemHelper";
 
 const useAgentsHelper = ({
   setHasNextPage,
@@ -48,20 +49,22 @@ const useAgentsHelper = ({
   setBreadCrumbs,
   setIsRoot,
   onSetBaseFolderPath,
-  createDefineLabel,
+  // createDefineLabel,
 
   searchValue,
   // isRoomsOnly,
 
   isInit,
   setIsInit,
-  withCreate,
+  // withCreate all time false for agent without billing
+  // withCreate = false,
   excludeItems,
-  getRootData,
-  setSelectedItemType,
+  // getRootData,
+  // setSelectedItemType,
   subscribe,
   setSelectedItemSecurity,
   setSelectedTreeNode,
+  disableBySecurity,
 }: UseAgentsHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const {
@@ -72,7 +75,7 @@ const useAgentsHelper = ({
     isFirstLoad,
   } = use(LoadersContext);
 
-  const { addInputItem } = useInputItemHelper({ withCreate, setItems });
+  // const { addInputItem } = useInputItemHelper({ withCreate, setItems });
 
   const requestRunning = React.useRef(false);
   const initRef = React.useRef(isInit);
@@ -93,11 +96,11 @@ const useAgentsHelper = ({
       requestRunning.current = true;
       setIsNextPageLoading(true);
 
-      let startIndex = sIndex;
+      const startIndex = sIndex;
 
-      if (withCreate) {
-        startIndex -= startIndex % 100;
-      }
+      // if (withCreate) {
+      //   startIndex -= startIndex % 100;
+      // }
 
       const filterValue = searchValue || "";
 
@@ -133,9 +136,18 @@ const useAgentsHelper = ({
         setIsBreadCrumbsLoading(false);
       }
 
-      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t).filter(
-        (x) => (excludeItems ? !excludeItems.includes(x.id) : true),
-      );
+      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t)
+        .filter((x) => (excludeItems ? !excludeItems.includes(x.id) : true))
+        .map((item) => {
+          const security = item.security as TRoomSecurity | undefined;
+          const isDisabledBySecurity = disableBySecurity
+            ? !security?.[disableBySecurity as keyof TRoomSecurity]
+            : false;
+          return {
+            ...item,
+            isDisabled: item.isDisabled || isDisabledBySecurity,
+          };
+        });
 
       setHasNextPage(count === PAGE_COUNT);
 
@@ -144,39 +156,39 @@ const useAgentsHelper = ({
       setSelectedTreeNode?.({ ...current, path: roomsFromApi.pathParts });
 
       if (firstLoadRef.current || startIndex === 0) {
-        const { security } = current;
+        // const { security } = current;
 
-        if (withCreate && security.Create) {
-          setTotal(total + 1);
-          const createItem: TSelectorItem = {
-            isCreateNewItem: true,
-            label: createDefineLabel ?? t("NewAgent"),
-            id: "create-room-item",
-            key: "create-room-item",
-            hotkey: "r",
-            // isRoomsOnly,
+        // if (withCreate && security.Create) {
+        //   setTotal(total + 1);
+        //   const createItem: TSelectorItem = {
+        //     isCreateNewItem: true,
+        //     label: createDefineLabel ?? t("NewAgent"),
+        //     id: "create-room-item",
+        //     key: "create-room-item",
+        //     hotkey: "r",
+        //     // isRoomsOnly,
 
-            onBackClick: () => {
-              setIsRoot?.(true);
-              setSelectedItemType?.(undefined);
-              setBreadCrumbs?.((val) => {
-                const newVal = [...val];
+        //     onBackClick: () => {
+        //       setIsRoot?.(true);
+        //       setSelectedItemType?.(undefined);
+        //       setBreadCrumbs?.((val) => {
+        //         const newVal = [...val];
 
-                newVal.pop();
+        //         newVal.pop();
 
-                return newVal;
-              });
-              getRootData?.();
-            },
-          };
+        //         return newVal;
+        //       });
+        //       getRootData?.();
+        //     },
+        //   };
 
-          createItem.onCreateClick = () =>
-            addInputItem("", "", undefined, createDefineLabel, true);
+        //   createItem.onCreateClick = () =>
+        //     addInputItem("", "", undefined, createDefineLabel, true);
 
-          itemList.unshift(createItem);
-        } else {
-          setTotal(total);
-        }
+        //   itemList.unshift(createItem);
+        // } else {
+        setTotal(total);
+        // }
         setItems?.(itemList);
       } else {
         setItems?.((prevState) => {
@@ -205,15 +217,16 @@ const useAgentsHelper = ({
       onSetBaseFolderPath,
       setBreadCrumbs,
       setIsBreadCrumbsLoading,
-      withCreate,
+      // withCreate,
       setItems,
       setTotal,
-      createDefineLabel,
-      setSelectedItemType,
-      getRootData,
-      addInputItem,
+      // createDefineLabel,
+      // setSelectedItemType,
+      // getRootData,
+      // addInputItem,
       excludeItems,
       setSelectedTreeNode,
+      disableBySecurity,
     ],
   );
 

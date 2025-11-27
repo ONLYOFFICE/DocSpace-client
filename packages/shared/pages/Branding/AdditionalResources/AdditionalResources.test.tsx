@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { AdditionalResources } from ".";
 import { DeviceType } from "../../../enums";
 
-jest.mock("../../../hooks/useResponsiveNavigation", () => ({
-  useResponsiveNavigation: jest.fn(),
+vi.mock("../../../hooks/useResponsiveNavigation", () => ({
+  useResponsiveNavigation: vi.fn(),
 }));
 
 const defaultProps = {
@@ -40,8 +40,8 @@ const defaultProps = {
   isSettingPaid: true,
   feedbackAndSupportEnabled: true,
   helpCenterEnabled: true,
-  onSave: jest.fn(),
-  onRestore: jest.fn(),
+  onSave: vi.fn(),
+  onRestore: vi.fn(),
   isLoading: false,
   additionalResourcesIsDefault: false,
   deviceType: DeviceType.desktop,
@@ -49,7 +49,7 @@ const defaultProps = {
 
 describe("<AdditionalResources />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
@@ -80,7 +80,7 @@ describe("<AdditionalResources />", () => {
   });
 
   it("calls onSave with correct parameters", () => {
-    const onSave = jest.fn();
+    const onSave = vi.fn();
     render(<AdditionalResources {...defaultProps} onSave={onSave} />);
 
     // Toggle feedback checkbox
@@ -134,7 +134,7 @@ describe("<AdditionalResources />", () => {
   });
 
   it("calls onRestore when restore button is clicked", () => {
-    const onRestore = jest.fn();
+    const onRestore = vi.fn();
     render(<AdditionalResources {...defaultProps} onRestore={onRestore} />);
 
     const restoreButton = screen.getByTestId(

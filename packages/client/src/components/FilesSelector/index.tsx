@@ -149,6 +149,7 @@ const FilesSelectorWrapper = ({
   folderIsShared,
   checkCreating,
   isMultiSelect,
+  disableBySecurity,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -300,11 +301,14 @@ const FilesSelectorWrapper = ({
 
         setSelectedItems();
         try {
-          const conflicts = (await checkFileConflicts(
-            selectedItemId,
-            folderIds,
-            fileIds,
-          )) as [];
+          const conflicts =
+            selectedTreeNode.type === FolderType.Knowledge
+              ? []
+              : ((await checkFileConflicts(
+                  selectedItemId,
+                  folderIds,
+                  fileIds,
+                )) as []);
 
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
@@ -428,6 +432,11 @@ const FilesSelectorWrapper = ({
     <FilesSelector
       openRoot={openRootVar}
       disabledItems={disabledItems}
+      disabledFolderType={
+        isMove || isCopy || isRestore || isRestoreAll
+          ? FolderType.ResultStorage
+          : undefined
+      }
       filterParam={filterParam}
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
@@ -489,6 +498,7 @@ const FilesSelectorWrapper = ({
       formProps={formProps}
       checkCreating={checkCreating}
       isMultiSelect={isMultiSelect}
+      disableBySecurity={disableBySecurity}
     />
   );
 };

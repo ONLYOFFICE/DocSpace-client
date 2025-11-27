@@ -1,0 +1,28 @@
+{
+  "key_path": "ProviderURLInputHint",
+  "content": "Enter the API endpoint URL provided by your AI service",
+  "content_en_sha1_hash": "eb45fcaf61601475fc1d5f0dbafbdd8ae8d000e6",
+  "created_at": "2025-11-07T13:41:03.792Z",
+  "updated_at": "2025-11-18T14:41:49.897Z",
+  "comment": {
+    "text": "This text provides a helpful hint to the user within a dialog box (likely for adding or updating AI service provider settings). It instructs the user to enter the API endpoint URL provided by their chosen AI service. Translators should ensure the wording accurately conveys the need for a specific URL for API communication.",
+    "is_auto": true,
+    "updated_at": "2025-11-07T13:42:57.111Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 327,
+      "context": "isRequestRunning ||\n selectedOption.key !== ProviderType.OpenAiCompatible\n }\n />\n <Text className={styles.fieldHint}>\n {t(\"AISettings:ProviderURLInputHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"AISettings:ProviderKey\")}\n labelVisible",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

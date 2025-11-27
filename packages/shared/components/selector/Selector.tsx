@@ -40,7 +40,7 @@ import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
 import styles from "./Selector.module.scss";
 
-import {
+import type {
   TAccessRight,
   SelectorProps,
   TSelectorBreadCrumbs,
@@ -111,6 +111,7 @@ const Selector = ({
   withFooterInput,
   footerInputHeader,
   currentFooterInputValue,
+  folderFormValidation,
 
   withFooterCheckbox,
   footerCheckboxLabel,
@@ -120,6 +121,7 @@ const Selector = ({
   renderCustomItem,
   isMultiSelect,
   selectedItems,
+  maxSelectedItems,
 
   onSelect,
 
@@ -185,6 +187,7 @@ const Selector = ({
   const [inputItemVisible, setInputItemVisible] = React.useState(false);
 
   const [requestRunning, setRequestRunning] = React.useState(false);
+  const [withErrorFooter, setWithErrorFooter] = React.useState(false);
 
   const onSubmitAction = React.useCallback(
     async (item?: TSelectorItem | React.MouseEvent, fromCallback?: boolean) => {
@@ -236,7 +239,21 @@ const Selector = ({
             return newValue;
           });
         }
+        setRenderedItems((valueProp) => {
+          const value = [...valueProp];
+          const idx = value.findIndex((x) => item.id === x.id);
+
+          if (idx === -1) return value;
+
+          value[idx] = { ...value[idx], isSelected: false };
+
+          return value;
+        });
       } else {
+        if (maxSelectedItems && newSelectedItems.length >= maxSelectedItems) {
+          return;
+        }
+
         setNewSelectedItems((value) => {
           value.push({
             ...item,
@@ -244,6 +261,7 @@ const Selector = ({
 
           return [...value];
         });
+
         if (activeTabId) {
           setSelectedTabItems((value) => {
             const newValue = { ...value };
@@ -254,17 +272,17 @@ const Selector = ({
             return newValue;
           });
         }
+        setRenderedItems((valueProp) => {
+          const value = [...valueProp];
+          const idx = value.findIndex((x) => item.id === x.id);
+
+          if (idx === -1) return value;
+
+          value[idx] = { ...value[idx], isSelected: true };
+
+          return value;
+        });
       }
-      setRenderedItems((valueProp) => {
-        const value = [...valueProp];
-        const idx = value.findIndex((x) => item.id === x.id);
-
-        if (idx === -1) return value;
-
-        value[idx] = { ...value[idx], isSelected: !value[idx].isSelected };
-
-        return value;
-      });
     } else {
       setRenderedItems((value) => {
         const idx = value.findIndex((x) => item.id === x.id);
@@ -303,15 +321,30 @@ const Selector = ({
           newSelectedItems.length !== items.filter((i) => !i.isDisabled).length;
 
     if (query) {
-      const cloneItems = items
+      let cloneItems = items
         .map((x) => ({ ...x }))
         .filter((x) => !x.isDisabled);
 
+      if (maxSelectedItems) {
+        if (activeTabId) {
+          const otherTabsSelectedCount = newSelectedItems.filter(
+            (item) => !items.some((i) => i.id === item.id),
+          ).length;
+          const availableSlots = maxSelectedItems - otherTabsSelectedCount;
+          cloneItems = cloneItems.slice(0, Math.max(0, availableSlots));
+        } else {
+          cloneItems = cloneItems.slice(0, maxSelectedItems);
+        }
+      }
+
       setRenderedItems((i) => {
-        const cloneRenderedItems = i.map((x) => ({
-          ...x,
-          isSelected: !x.isDisabled,
-        }));
+        const cloneRenderedItems = i.map((x) => {
+          const shouldSelect = cloneItems.some((item) => item.id === x.id);
+          return {
+            ...x,
+            isSelected: shouldSelect && !x.isDisabled,
+          };
+        });
 
         return cloneRenderedItems;
       });
@@ -363,6 +396,8 @@ const Selector = ({
     newSelectedItems.length,
     onSelectAll,
     selectedTabItems,
+    maxSelectedItems,
+    newSelectedItems,
   ]);
 
   const onChangeAccessRightsAction = React.useCallback(
@@ -379,6 +414,13 @@ const Selector = ({
     },
     [isNextPageLoading, loadNextPage],
   );
+
+  React.useEffect(() => {
+    if (folderFormValidation)
+      setWithErrorFooter(
+        Boolean(newFooterInputValue.match(folderFormValidation)),
+      );
+  }, [newFooterInputValue, folderFormValidation]);
 
   React.useEffect(() => {
     if (disableFirstFetch) return;
@@ -519,6 +561,11 @@ const Selector = ({
       : newSelectedItems.length === tempRenderedItemsLength &&
         tempRenderedItemsLength !== 0;
 
+  const isLimitReached = React.useMemo(() => {
+    if (!maxSelectedItems) return false;
+    return newSelectedItems.length >= maxSelectedItems;
+  }, [maxSelectedItems, newSelectedItems.length]);
+
   const onSelectAllProps: TSelectorSelectAll = withSelectAll
     ? {
         withSelectAll,
@@ -560,6 +607,7 @@ const Selector = ({
         footerInputHeader,
         currentFooterInputValue: newFooterInputValue,
         setNewFooterInputValue,
+        withErrorFooter,
       }
     : { setNewFooterInputValue };
 
@@ -682,6 +730,8 @@ const Selector = ({
           injectedElement={injectedElement}
           isSSR={isSSR}
           hideBackButton={hideBackButton}
+          withErrorFooter={withErrorFooter}
+          isLimitReached={isLimitReached}
           // info
           {...infoProps}
         />

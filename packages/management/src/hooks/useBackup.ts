@@ -118,6 +118,10 @@ export const useBackup = ({
   );
 
   const [errorInformation, setErrorInformationState] = useState<string>("");
+
+  const [backupProgressWarning, setBackupProgressWarning] =
+    useState<string>("");
+
   const [deleteThirdPartyDialogVisible, setDeleteThirdPartyDialogVisible] =
     useState(false);
 
@@ -303,7 +307,12 @@ export const useBackup = ({
 
   const getProgress = useCallback(async () => {
     if (backupProgress && "progress" in backupProgress) {
-      const { progress, link, error, isCompleted } = backupProgress;
+      const { progress, link, error, isCompleted, warning } = backupProgress;
+
+      if (warning) {
+        setBackupProgressWarning(warning);
+        return;
+      }
 
       if (error) {
         setProgress(100);
@@ -452,5 +461,7 @@ export const useBackup = ({
 
     backupProgressError: backupStore.backupProgressError,
     setBackupProgressError: backupStore.setBackupProgressError,
+    backupProgressWarning,
+    setBackupProgressWarning,
   };
 };

@@ -94,19 +94,21 @@ const StatisticsComponent = (props) => {
 
   return (
     <StyledStatistics>
-      <Text fontWeight={600} className="item-statistic">
-        {t("Top5Users")}
-      </Text>
-      {usersList}
+      <div className="statistics-container">
+        <Text fontWeight={600} className="item-statistic">
+          {t("Top5Users")}
+        </Text>
+        {usersList}
 
-      {peopleListLength > 5 ? (
-        <Button
-          {...buttonProps}
-          label={t("Common:ShowMore")}
-          onClick={onClickUsers}
-          testId="show_more_users_button"
-        />
-      ) : null}
+        {peopleListLength > 5 ? (
+          <Button
+            {...buttonProps}
+            label={t("Common:ShowMore")}
+            onClick={onClickUsers}
+            testId="show_more_users_button"
+          />
+        ) : null}
+      </div>
     </StyledStatistics>
   );
 };

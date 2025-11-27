@@ -26,20 +26,20 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { LoadingButton } from ".";
 
 describe("<LoadingButton />", () => {
-  test("renders without crashing", () => {
+  it("renders without crashing", () => {
     render(<LoadingButton />);
     const container = screen.getByTestId("loading-button-container");
     expect(container).toBeInTheDocument();
   });
 
-  test("calls onClick when clicked", () => {
-    const handleClick = jest.fn();
+  it("calls onClick when clicked", () => {
+    const handleClick = vi.fn();
     render(<LoadingButton onClick={handleClick} />);
     const container = screen.getByTestId("loading-button-container");
     fireEvent.click(container);

@@ -60,6 +60,11 @@ const Sdk = ({
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
+  const { mode } = useParams();
+  const selectorType = new URLSearchParams(window.location.search).get(
+    "selectorType",
+  );
+
   const callCommand = useCallback(
     () => frameCallCommand("setConfig", { src: window.location.origin }),
     [frameCallCommand],
@@ -83,15 +88,16 @@ const Sdk = ({
   }, [callCommandLoad, isDataReady]);
 
   useEffect(() => {
+    if (mode === "system" && !isDataReady) {
+      setIsDataReady(true);
+    }
+  }, [mode, isDataReady]);
+
+  useEffect(() => {
     if (window.ClientConfig && window.parent)
       window.ClientConfig.isFrame = true;
     getFilesSettings();
   }, []);
-
-  const { mode } = useParams();
-  const selectorType = new URLSearchParams(window.location.search).get(
-    "selectorType",
-  );
 
   const handleMessage = async (e) => {
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
@@ -123,7 +129,6 @@ const Sdk = ({
           case "getUserInfo":
             res = await loadCurrentUser();
             break;
-
           case "getHashSettings":
             {
               const settings = await getSettings();
@@ -136,7 +141,6 @@ const Sdk = ({
               res = await login(email, passwordHash);
             }
             break;
-
           case "logout":
             res = await logout();
             break;
@@ -276,6 +280,9 @@ const Sdk = ({
           withPadding={frameConfig?.showSelectorHeader}
         />
       );
+      break;
+    case "system":
+      component = <AppLoader />;
       break;
     default:
       component = <AppLoader />;

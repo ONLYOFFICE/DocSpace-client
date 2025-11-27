@@ -48,6 +48,7 @@ import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+import { isAIAgents } from "../../helpers/plugins/utils";
 
 const GlobalEvents = ({
   enablePlugins,
@@ -415,7 +416,7 @@ const GlobalEvents = ({
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
     window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
-    if (enablePlugins) {
+    if (!isAIAgents() && enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
         onCreatePluginFileDialog,
@@ -446,7 +447,7 @@ const GlobalEvents = ({
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
       window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
-      if (enablePlugins) {
+      if (!isAIAgents() && enablePlugins) {
         window.removeEventListener(
           Events.CREATE_PLUGIN_FILE,
           onCreatePluginFileDialog,

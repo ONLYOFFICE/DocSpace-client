@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { PlayerDesktopContextMenu } from ".";
 
 // Mock SVG components
-jest.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => {
+vi.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => {
   const DummyDownloadIcon = ({
     ref,
     ...props
@@ -42,10 +42,10 @@ jest.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => {
     </div>
   );
   DummyDownloadIcon.displayName = "DownloadReactSvgUrl";
-  return DummyDownloadIcon;
+  return { default: DummyDownloadIcon };
 });
 
-jest.mock("PUBLIC_DIR/images/icons/16/vertical-dots.react.svg", () => {
+vi.mock("PUBLIC_DIR/images/icons/16/vertical-dots.react.svg", () => {
   const DummyMediaContextMenu = ({
     ref,
     ...props
@@ -57,17 +57,8 @@ jest.mock("PUBLIC_DIR/images/icons/16/vertical-dots.react.svg", () => {
     </div>
   );
   DummyMediaContextMenu.displayName = "MediaContextMenu";
-  return DummyMediaContextMenu;
+  return { default: DummyMediaContextMenu };
 });
-
-// Mock styles
-jest.mock(
-  "./sub-components/PlayerDesktopContextMenu/PlayerDesktopContextMenu.module.scss",
-  () => ({
-    downloadIconWrapper: "downloadIconWrapper",
-    playerDesktopContextMenuWrapper: "playerDesktopContextMenuWrapper",
-  }),
-);
 
 describe("PlayerDesktopContextMenu", () => {
   const mockContextMenu = (
@@ -77,12 +68,12 @@ describe("PlayerDesktopContextMenu", () => {
     canDownload: true,
     isPreviewFile: false,
     hideContextMenu: false,
-    onDownloadClick: jest.fn(),
-    generateContextMenu: jest.fn((isOpen) => (isOpen ? mockContextMenu : null)),
+    onDownloadClick: vi.fn(),
+    generateContextMenu: vi.fn((isOpen) => (isOpen ? mockContextMenu : null)),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders download button when hideContextMenu is true and canDownload is true", () => {
@@ -101,7 +92,7 @@ describe("PlayerDesktopContextMenu", () => {
   });
 
   it("calls onDownloadClick when download button is clicked", () => {
-    const onDownloadClick = jest.fn();
+    const onDownloadClick = vi.fn();
     render(
       <PlayerDesktopContextMenu
         {...defaultProps}
@@ -116,7 +107,7 @@ describe("PlayerDesktopContextMenu", () => {
   });
 
   it("renders context menu button when hideContextMenu is false", () => {
-    const generateContextMenu = jest.fn(() => mockContextMenu);
+    const generateContextMenu = vi.fn(() => mockContextMenu);
     render(
       <PlayerDesktopContextMenu
         {...defaultProps}
@@ -141,7 +132,7 @@ describe("PlayerDesktopContextMenu", () => {
   });
 
   it("does not render anything when context is null", () => {
-    const generateContextMenu = jest.fn(() => null);
+    const generateContextMenu = vi.fn(() => null);
     render(
       <PlayerDesktopContextMenu
         {...defaultProps}
@@ -152,7 +143,7 @@ describe("PlayerDesktopContextMenu", () => {
   });
 
   it("calls generateContextMenu with correct parameters", async () => {
-    const generateContextMenu = jest.fn(() => mockContextMenu);
+    const generateContextMenu = vi.fn(() => mockContextMenu);
     render(
       <PlayerDesktopContextMenu
         {...defaultProps}

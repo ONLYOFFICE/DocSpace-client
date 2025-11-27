@@ -86,7 +86,9 @@ const GroupMemberRow = ({
         className="avatar"
         size={AvatarSize.min}
         role={avatarRole}
-        source={groupMember.avatarSmall ?? groupMember.avatar}
+        source={
+          groupMember.hasAvatar ? groupMember.avatar : groupMember.avatarSmall
+        }
         dataTestId="create_edit_group_member_row_avatar"
       />
       <div className="info" data-testid="create_edit_group_member_row_info">

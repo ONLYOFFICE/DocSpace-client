@@ -110,7 +110,7 @@ export const getInfoPanelOpen = () => {
 };
 
 let loader = false;
-export const forcedShowInfoPanelLoader = () => {
+export const showForcedInfoPanelLoader = () => {
   if (loader) return;
 
   loader = true;

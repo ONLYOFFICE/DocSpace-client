@@ -59,8 +59,6 @@ export const SimulatePassword = memo(
     const { t } = useTranslation("Common");
 
     const setPasswordSettings = (newPassword: string) => {
-      let newValue;
-
       const oldPassword = password;
       const oldPasswordLength = oldPassword.length;
       const position = forwardedRef.current?.selectionStart ?? 0;
@@ -84,22 +82,25 @@ export const SimulatePassword = memo(
       const countOfCharacters = oldPasswordLength - unchangedEndingCharacters;
       const endingPartOldPassword = oldPassword.substring(countOfCharacters);
 
-      newValue = startingPartOldPassword + addedCharacters;
+      let newValue = startingPartOldPassword + addedCharacters;
 
       if (unchangedEndingCharacters) {
         newValue += endingPartOldPassword;
       }
 
       setPassword(newValue);
+      return newValue;
     };
 
     const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newPassword = e.target.value;
 
       if (inputType === "password") {
-        setPasswordSettings(newPassword);
+        const updatedPassword = setPasswordSettings(newPassword);
+        onChange?.(updatedPassword);
       } else {
         setPassword(newPassword);
+        onChange?.(newPassword);
       }
     };
 
@@ -120,12 +121,10 @@ export const SimulatePassword = memo(
       inputType === "password" ? EyeOffReactSvgUrl : EyeReactSvgUrl;
 
     useEffect(() => {
-      onChange?.(password);
-
       if (caretPosition && inputType === "password") {
         forwardedRef.current?.setSelectionRange(caretPosition, caretPosition);
       }
-    }, [caretPosition, forwardedRef, inputType, onChange, password]);
+    }, [caretPosition, forwardedRef, inputType]);
 
     useEffect(() => {
       if (isDisabled && inputType !== "password") {
@@ -134,10 +133,10 @@ export const SimulatePassword = memo(
     }, [inputType, isDisabled]);
 
     useEffect(() => {
-      if (inputValue !== undefined) {
+      if (inputValue !== undefined && inputValue !== password) {
         setPassword(inputValue);
       }
-    }, [inputValue]);
+    }, [inputValue, password]);
 
     const inputBlockStyle = inputMaxWidth
       ? ({ maxWidth: inputMaxWidth } as React.CSSProperties)

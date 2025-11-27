@@ -117,7 +117,16 @@ const TagInput = ({
     onFocus && onFocus(event);
   };
 
-  const handleBlur = () => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (
+      e.relatedTarget &&
+      inputRef.current &&
+      e.relatedTarget.classList.contains("dropdown-item")
+    ) {
+      inputRef.current.focus();
+      return e;
+    }
+
     !isMobile?.() && closeDropdown();
     onBlur && onBlur();
   };

@@ -47,7 +47,7 @@ export const ToolCallBody = ({ content, placement }: ToolCallBodyProps) => {
   if (content.result?.error) {
     return (
       <div className={styles.toolCallBody}>
-        <Text fontSize="14px" fontWeight={600} lineHeight="20px" truncate>
+        <Text fontSize="14px" fontWeight={600} lineHeight="20px">
           {content.result?.error as string}
         </Text>
       </div>

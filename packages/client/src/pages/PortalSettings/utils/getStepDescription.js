@@ -44,7 +44,11 @@ export const getGoogleStepDescription = (
       return isTypeSelectEmpty ? (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
-          <div>{t("Settings:UsersAreRegistered")}</div>
+          <div>
+            {t("Settings:UsersAreRegistered", {
+              productName: t("Common:ProductName"),
+            })}
+          </div>
         </>
       ) : (
         <>
@@ -99,7 +103,11 @@ export const getWorkspaceStepDescription = (
       return isTypeSelectEmpty ? (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
-          <div>{t("Settings:UsersAreRegistered")}</div>
+          <div>
+            {t("Settings:UsersAreRegistered", {
+              productName: t("Common:ProductName"),
+            })}
+          </div>
         </>
       ) : (
         <>

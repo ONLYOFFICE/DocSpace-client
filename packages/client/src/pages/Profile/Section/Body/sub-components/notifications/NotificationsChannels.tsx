@@ -100,8 +100,8 @@ const NotificationsChannels = ({
     SocketHelper?.on(SocketEvents.ConnectTelegram, connectTelegramHandler);
 
     return () => {
-      SocketHelper?.off(SocketEvents.UpdateTelegram);
-      SocketHelper?.off(SocketEvents.ConnectTelegram);
+      SocketHelper?.off(SocketEvents.UpdateTelegram, updateTelegramHandler);
+      SocketHelper?.off(SocketEvents.ConnectTelegram, connectTelegramHandler);
     };
   }, []);
 

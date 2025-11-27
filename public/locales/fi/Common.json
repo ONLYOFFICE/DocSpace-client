@@ -790,6 +790,9 @@
   "Reviewing": "Tarkistaminen",
   "RevokeLink": "Peru linkki",
   "Role": "Rooli",
+  "RoleAIAgentContentCreatorDescription": "Sisällöntuottajat voivat käyttää chattia ja työskennellä tulostallennustilassa olevien tiedostojen kanssa.\nHe voivat ladata tiedostoja tietopankkiin, mutta he eivät voi hallita käyttäjiä tai käyttää agentin asetuksia.",
+  "RoleAIAgentManagerDescription": "Agenttien johtajat voivat hallita määritettyä tekoälyagenttia, kutsua uusia käyttäjiä ja määrittää rooleja heidän tasollaan alemmaksi.\nHe voivat käyttää chattiä, ladata tietotiedostoja, työskennellä Tulosten tallennuksen kanssa ja hallita chattiasetuksia.",
+  "RoleAIAgentViewerDescription": "Katsojat voivat tarkastella vain tiedostoja Tulossäilytyksessä, jotka muut ovat luoneet.\nHeillä ei ole pääsyä chattiin tai tietopankkiin.",
   "RoleCommentator": "Kommentaattori",
   "RoleCommentatorDescription": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, kommentointi.",
   "RoleContentCreatorDescription": "Sisällöntuottajat voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi hallita käyttäjiä tai asetuksia. ",
@@ -968,6 +971,7 @@
   "TemporaryStorage": "Väliaikainen varastointi",
   "TemporaryStorageDescription": "Varmuuskopiointi tallennetaan 'Varmuuskopiointi' -osioon, voit ladata sen 24 tunnin kuluessa luomisesta.",
   "Terabyte": "TB",
+  "Thinking": "Ajattelu",
   "ThirdPartyDisconnectPrompt": "Haluatko varmasti poistaa {{service}}? Tämä ei vaikuta {{account}}-tililläsi millään tavalla.",
   "ThirdPartyResource": "Kolmannen osapuolen resurssi",
   "ThirdPartyResourceDescription": "Varmuuskopio voidaan tallentaa kolmannen osapuolen tilillesi (Dropbox, Box.com, OneDrive tai Google Drive). Sinun on yhdistettävä kolmannen osapuolen tilisi (Dropbox, Box.com, OneDrive tai Google Drive), ennen kuin voit tallentaa varmuuskopiosi sinne.",
@@ -1066,8 +1070,5 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi",
-  "RoleAIAgentContentCreatorDescription": "Sisällöntuottajat voivat käyttää chattia ja työskennellä tulostallennustilassa olevien tiedostojen kanssa.\nHe voivat ladata tiedostoja tietopankkiin, mutta he eivät voi hallita käyttäjiä tai käyttää agentin asetuksia.",
-  "RoleAIAgentManagerDescription": "Agenttien johtajat voivat hallita määritettyä tekoälyagenttia, kutsua uusia käyttäjiä ja määrittää rooleja heidän tasollaan alemmaksi.\nHe voivat käyttää chattiä, ladata tietotiedostoja, työskennellä Tulosten tallennuksen kanssa ja hallita chattiasetuksia.",
-  "RoleAIAgentViewerDescription": "Katsojat voivat tarkastella vain tiedostoja Tulossäilytyksessä, jotka muut ovat luoneet.\nHeillä ei ole pääsyä chattiin tai tietopankkiin."
+  "YourTurn": "Sinun vuorosi"
 }

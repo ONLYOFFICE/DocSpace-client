@@ -1,4 +1,6 @@
 {
+  "AgentInViewModeWarning": "Ste v režime <strong>iba na prezeranie</strong> pre tohto AI agenta. Môžete vidieť výsledky AI chatovacej aktivity od iných používateľov.",
+  "AIAgentAccessRedirectNote": "Budete automaticky presmerovaní do sekcie {{sectionName}} o 5 sekúnd.",
   "AIChat": "AI-Chat",
   "AIInstructions": "AI pokyny",
   "CreateChat": "Vytvoriť chat",
@@ -8,6 +10,7 @@
   "EmptyKnowledgeTitle": "Zatiaľ neboli nahraté žiadne súbory.",
   "EmptyResultsDescription": "Súbory generované v AI-Chat sa tu zobrazia automaticky. Kedykoľvek vygenerujete obsah, spustíte chat alebo pošlete správu s výstupom, výsledok sa uloží v tejto sekcii.",
   "EmptyResultsTitle": "Zatiaľ žiadne výsledky.",
+  "EmptyResultsViewerDescription": "Tu uvidíte výsledky aktivity AI chat od iných používateľov, keď budú dostupné.",
   "InstructionsDescriptionAgent": "Popíšte, ako by mal AI agent fungovať a reagovať. Definujte jeho úlohu, tón a hlavné úlohy.",
   "InstructionsDescriptionAgentExample": "Príklad: „Ste AI PR asistent, ktorý pomáha písať a upravovať tlačové správy. Udržiavajte profesionálny, sebavedomý a pre médiá priateľský tón. Jasne zvýrazňujte kľúčové posolstvá, vyhýbajte sa žargónu a udržujte text stručný a zaujímavý.“",
   "Knowledge": "Vedomosti",
@@ -20,10 +23,9 @@
   "MCPDescriptionServers": "Využívajte MCP servery prepojené administrátorom na zlepšenie chatovacej skúsenosti s AI. MCP servery môžu pomôcť s extrakciou dát, súhrnmi, inteligentnými návrhmi a pod.",
   "Model": "Poskytovateľ a model",
   "ModelDescription": "Vyberte poskytovateľa AI a model, ktorý sa bude používať v chatovaní v tejto miestnosti. Toto nastavenie je povinné a vzťahuje sa na všetkých účastníkov.",
+  "NoAccessAIAgentTitle": "Prepáčte, nemáte prístup k tomuto AI agentovi.",
   "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovede sa môže líšiť v závislosti od modelu; na dosiahnutie najlepších výsledkov sa odporúčajú novšie modely.",
   "ResultStorage": "Ukladanie výsledkov",
   "UploadFilesDevice": "Nahrajte súbory z vášho osobného zariadenia.",
-  "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Ste v režime <strong>iba na prezeranie</strong> pre tohto AI agenta. Môžete vidieť výsledky AI chatovacej aktivity od iných používateľov.",
-  "EmptyResultsViewerDescription": "Tu uvidíte výsledky aktivity AI chat od iných používateľov, keď budú dostupné."
+  "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}"
 }

@@ -163,4 +163,6 @@ export type FilesSelectorProps = TSelectorHeader & {
 
   isMultiSelect?: boolean;
   maxSelectedItems?: number;
+
+  disableBySecurity?: string;
 };

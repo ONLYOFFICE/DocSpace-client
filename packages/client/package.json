@@ -1,6 +1,6 @@
 {
   "name": "@docspace/client",
-  "version": "4.0.0",
+  "version": "3.6.0",
   "private": true,
   "homepage": "",
   "scripts": {
@@ -26,7 +26,7 @@
     "@babel/runtime": "7.28.3",
     "@codemirror/lang-javascript": "6.2.2",
     "@docspace/shared": "workspace:*",
-    "@onlyoffice/docspace-sdk-js": "2.0.0",
+    "@onlyoffice/docspace-sdk-js": "2.1.0",
     "@react-spring/web": "9.7.5",
     "@uiw/codemirror-theme-github": "4.23.5",
     "@uiw/react-codemirror": "4.23.5",

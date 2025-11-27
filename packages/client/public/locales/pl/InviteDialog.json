@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Niepoprawny adres e-mail. Możesz poprawić adres e-mail klikając go dwukrotnie.",
   "EmailErrorMessageUserNotFound": "Użytkownik nie znaleziony. Możesz edytować e-mail, klikając go dwukrotnie.",
   "GroupMaxAvailableRoleWarning": "Grupy mogą zostać dodane do pokoju z maksymalną rolą {{roleName}}. Możesz jednak zmienić role poszczególnych użytkowników w grupie po jej pomyślnym dodaniu.",
+  "GuestAgentMaxAvailableRoleWarning": "Gości nie można przypisać jako Twórca treści.\nTylko administratorzy pokoi, administratorzy {{productName}} i Użytkownicy mogą ubiegać się o tę rolę.",
   "InvitationLanguage": "Język zaproszenia",
   "InviteMembersManuallyDescription": "Osobiście zaproś nowych członków do {{productName}} za pośrednictwem poczty e-mail.",
   "InviteMembersSearchPlaceholder": "Zaproś przez e-mail",
@@ -21,6 +22,5 @@
   "UserAgentMaxAvailableRoleWarning": "Goście i Użytkownicy nie mogą być przypisani jako menedżerowie agentów. Tylko administratorzy pokoi i {{productName}} są odpowiedni do określonej roli.",
   "UserMaxAvailableRoleWarning": "Nie można przypisać roli menedżera pokoju gościom ani użytkownikom. Tylko administratorzy pokoi i  {{productName}} mogą przyjąć daną rolę.",
   "UsersAlreadyAdded": "Niektórzy użytkownicy zostali już dodani",
-  "UsersCannotBeAdded": "Wyłączone kontakty nie mogą być dodane do pokoju",
-  "GuestAgentMaxAvailableRoleWarning": "Gości nie można przypisać jako Twórca treści.\nTylko administratorzy pokoi, administratorzy {{productName}} i Użytkownicy mogą ubiegać się o tę rolę."
+  "UsersCannotBeAdded": "Wyłączone kontakty nie mogą być dodane do pokoju"
 }

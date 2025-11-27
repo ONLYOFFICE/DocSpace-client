@@ -790,6 +790,9 @@
   "Reviewing": "beoordelen",
   "RevokeLink": "Link intrekken",
   "Role": "Rol",
+  "RoleAIAgentContentCreatorDescription": "Contentmakers kunnen gebruikmaken van de chat en werken met bestanden in de resultatenopslag.\nZe kunnen bestanden uploaden naar de kennisbank, maar ze kunnen geen gebruikers beheren of toegang krijgen tot agent instellingen.",
+  "RoleAIAgentManagerDescription": "Agentmanagers kunnen de toegewezen AI-agent beheren, nieuwe gebruikers uitnodigen en rollen toewijzen onder hun niveau.\nZe kunnen de chat gebruiken, kennisbestanden uploaden, met de resultaatopslag werken en chatinstellingen beheren.",
+  "RoleAIAgentViewerDescription": "Kijkers kunnen alleen bestanden in de resultatenopslag bekijken met outputs die door anderen zijn gegenereerd.\nZe hebben geen toegang tot de chat of de kennisbank.",
   "RoleCommentator": "Reageerder",
   "RoleCommentatorDescription": "Bewerkingen met bestaande bestanden: bekijken, opmerkingen plaatsen.",
   "RoleContentCreatorDescription": "Content makers kunnen bestanden in de ruimte aanmaken en bewerken, maar kunnen geen gebruikers beheren of instellingen openen.",
@@ -968,6 +971,7 @@
   "TemporaryStorage": "Tijdelijke opslag",
   "TemporaryStorageDescription": "De back-up wordt opgeslagen in de rubriek 'Back-up', u kunt hem binnen 24 uur na het maken downloaden",
   "Terabyte": "TB",
+  "Thinking": "Denken",
   "ThirdPartyDisconnectPrompt": "Weet u zeker dat u {{service}} wilt verwijderen? Dit heeft geen invloed op uw {{account}}-account.",
   "ThirdPartyResource": "Bron van derden",
   "ThirdPartyResourceDescription": "Back-ups kunt u opslaan in uw account van derden (Dropbox, Box.com, OneDrive of Google Drive). U moet uw account van derden (Dropbox, Box.com, OneDrive of Google Drive) verbinden voordat u uw back-up daar kunt opslaan.",
@@ -1066,8 +1070,5 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt",
-  "RoleAIAgentContentCreatorDescription": "Contentmakers kunnen gebruikmaken van de chat en werken met bestanden in de resultatenopslag.\nZe kunnen bestanden uploaden naar de kennisbank, maar ze kunnen geen gebruikers beheren of toegang krijgen tot agent instellingen.",
-  "RoleAIAgentManagerDescription": "Agentmanagers kunnen de toegewezen AI-agent beheren, nieuwe gebruikers uitnodigen en rollen toewijzen onder hun niveau.\nZe kunnen de chat gebruiken, kennisbestanden uploaden, met de resultaatopslag werken en chatinstellingen beheren.",
-  "RoleAIAgentViewerDescription": "Kijkers kunnen alleen bestanden in de resultatenopslag bekijken met outputs die door anderen zijn gegenereerd.\nZe hebben geen toegang tot de chat of de kennisbank."
+  "YourTurn": "Uw beurt"
 }

@@ -3,6 +3,7 @@
   "EmailErrorMessage": "メールアドレスが有効ではありません。メールアドレスをダブルクリックすると編集できます。",
   "EmailErrorMessageUserNotFound": "ユーザーが見つかりません。メールをダブルクリックして編集できます。",
   "GroupMaxAvailableRoleWarning": "グループは{{roleName}}役割を最大として、ルームに追加することができます。ただし、グループの追加に成功した後、グループ内の個々のユーザの役割を変更することができます。",
+  "GuestAgentMaxAvailableRoleWarning": "コンテンツクリエイターにはゲストを割り当てることができません。\nこの役割にふさわしいのは、ルーム管理者、{{productName}} 管理者、およびユーザーのみです。",
   "InvitationLanguage": "招待の言語",
   "InviteMembersManuallyDescription": "新しいメンバーを個人的に招待するには、{{productName}} からメールを送信してください",
   "InviteMembersSearchPlaceholder": "メンバーをメールで招待する",

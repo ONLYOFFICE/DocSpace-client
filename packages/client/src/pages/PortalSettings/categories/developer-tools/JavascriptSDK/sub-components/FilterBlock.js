@@ -111,6 +111,11 @@ const minSearchValue = 3;
 export const FilterBlock = ({ t, config, setConfig }) => {
   const roomTypeOptions = [
     {
+      key: "room-type-public",
+      label: t("Common:PublicRoom"),
+      roomType: RoomsType.PublicRoom,
+    },
+    {
       key: "room-filling-form-collaboration",
       label: t("Common:FormFilingRoomTitle"),
       roomType: RoomsType.FormRoom,
@@ -121,19 +126,14 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       roomType: RoomsType.EditingRoom,
     },
     {
-      key: "room-type-public",
-      label: t("Common:PublicRoom"),
-      roomType: RoomsType.PublicRoom,
+      key: "room-type-vdr",
+      label: t("Common:VirtualDataRoom"),
+      roomType: RoomsType.VirtualDataRoom,
     },
     {
       key: "room-type-custom",
       label: t("Common:CustomRoomTitle"),
       roomType: RoomsType.CustomRoom,
-    },
-    {
-      key: "room-type-ai",
-      label: t("Common:AIRoomTitle"),
-      roomType: RoomsType.AIRoom,
     },
   ];
 

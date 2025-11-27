@@ -39,8 +39,10 @@ import { Scrollbar } from "../../../../../../scrollbar";
 
 export const createMarkdownComponents = ({
   propLanguage,
+  successCopyMessage,
 }: {
   propLanguage?: string;
+  successCopyMessage?: string;
 }): Components => ({
   h1: ({ children }) => (
     <Heading
@@ -197,6 +199,7 @@ export const createMarkdownComponents = ({
         <CodeBlock
           language={propLanguage ?? match?.[1].toLowerCase()}
           content={content}
+          successCopyMessage={successCopyMessage}
         />
       );
     }

@@ -233,6 +233,8 @@ class FilesStore {
 
   isErrorRoomNotAvailable = false;
 
+  isErrorAIAgentNotAvailable = false;
+
   roomsController = null;
 
   filesController = null;
@@ -954,6 +956,10 @@ class FilesStore {
 
   setIsErrorRoomNotAvailable = (state) => {
     this.isErrorRoomNotAvailable = state;
+  };
+
+  setIsErrorAIAgentNotAvailable = (state) => {
+    this.isErrorAIAgentNotAvailable = state;
   };
 
   setTempActionFilesIds = (tempActionFilesIds) => {
@@ -1734,6 +1740,7 @@ class FilesStore {
       );
     }
 
+    this.setIsErrorAIAgentNotAvailable(false);
     this.setIsErrorRoomNotAvailable(false);
     this.setIsLoadedFetchFiles(false);
 
@@ -1832,13 +1839,6 @@ class FilesStore {
             );
           }
         });
-
-        if (this.isPreview) {
-          // save filter for after closing preview change url
-          this.setTempFilter(filterData);
-        } else {
-          this.setFilesFilter(filterData, folderId); // TODO: FILTER
-        }
 
         const isPrivacyFolder =
           data.current.rootFolderType === FolderType.Privacy;
@@ -2002,6 +2002,13 @@ class FilesStore {
         }
 
         runInAction(() => {
+          if (this.isPreview) {
+            // save filter for after closing preview change url
+            this.setTempFilter(filterData);
+          } else {
+            this.setFilesFilter(filterData, folderId); // TODO: FILTER
+          }
+
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             isRoom: !!data.current.roomType,
@@ -2142,7 +2149,16 @@ class FilesStore {
             frameCallEvent({ event: "onNoAccess" });
           }
 
-          this.setIsErrorRoomNotAvailable(true);
+          const categoryType = getCategoryType(window.location);
+
+          if (
+            categoryType === CategoryType.Chat ||
+            categoryType === CategoryType.AIAgent
+          ) {
+            this.setIsErrorAIAgentNotAvailable(true);
+          } else {
+            this.setIsErrorRoomNotAvailable(true);
+          }
         } else {
           toastr.error(err);
           if (isThirdPartyError) {
@@ -2503,7 +2519,7 @@ class FilesStore {
             this.roomsController = null;
           });
 
-          this.setIsErrorRoomNotAvailable(false);
+          this.setIsErrorAIAgentNotAvailable(false);
           return Promise.resolve(selectedFolder);
         })
         .catch((err) => {

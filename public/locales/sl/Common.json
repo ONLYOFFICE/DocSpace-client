@@ -790,6 +790,9 @@
   "Reviewing": "pregledovanje",
   "RevokeLink": "Prekliči povezavo",
   "Role": "Vloga",
+  "RoleAIAgentContentCreatorDescription": "Ustvarjalci vsebin lahko uporabljajo klepet in delajo z datotekami v shrambi rezultatov.\nLahko nalagajo datoteke v bazo znanja, vendar ne morejo upravljati uporabnikov ali dostopati do nastavitve agenta.",
+  "RoleAIAgentManagerDescription": "Vodje agentov lahko upravljajo dodeljenega umetnega inteligence agenta, povabijo nove uporabnike in dodelijo vloge pod svojo raven.\nLahko uporabljajo klepetalni pogovor, naložijo datoteke z znanjem, delajo z shranjevanjem rezultatov in upravljajo nastavitve klepetalnega pogovora.",
+  "RoleAIAgentViewerDescription": "Gledalci lahko ogledajo datoteke v shrambi rezultatov samo z izpisi, ki so jih ustvarili drugi.\nNiso jim omogočen dostop do klepeta ali baze znanja.",
   "RoleCommentator": "Komentator",
   "RoleCommentatorDescription": "Operacije z obstoječimi datotekami: ogledovanje, komentiranje.",
   "RoleContentCreatorDescription": "Ustvarjalci vsebine lahko ustvarjajo in urejajo datoteke v sobi, ne morejo pa upravljati uporabnikov ali dostopati do nastavitev.",
@@ -968,6 +971,7 @@
   "TemporaryStorage": "Začasno shranjevanje",
   "TemporaryStorageDescription": "Varnostna kopija je shranjena v razdelku 'Varnostno kopiranje', lahko jo boste prenesli v 24 urah po kreiranju.",
   "Terabyte": "TB",
+  "Thinking": "Razmišljanje",
   "ThirdPartyDisconnectPrompt": "Ali ste prepričani, da želite odstraniti {{service}}? To ne bo vplivalo na vaš račun {{account}}.",
   "ThirdPartyResource": "Shranjevanje pri zunanjem ponudniku",
   "ThirdPartyResourceDescription": "Varnostno kopijo lahko shranite s svojim računom pri zunanjem ponudniku (Dropbox, box.com, OneDrive ali Google Drive). Svoj račun pri zunanjem ponudniku (Dropbox, box.com, OneDrive ali Google Drive) morate predhodno povezati. Tam boste lahko shranili svojo varnostno kopijo.",
@@ -1066,8 +1070,5 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti",
-  "RoleAIAgentContentCreatorDescription": "Ustvarjalci vsebin lahko uporabljajo klepet in delajo z datotekami v shrambi rezultatov.\nLahko nalagajo datoteke v bazo znanja, vendar ne morejo upravljati uporabnikov ali dostopati do nastavitve agenta.",
-  "RoleAIAgentManagerDescription": "Vodje agentov lahko upravljajo dodeljenega umetnega inteligence agenta, povabijo nove uporabnike in dodelijo vloge pod svojo raven.\nLahko uporabljajo klepetalni pogovor, naložijo datoteke z znanjem, delajo z shranjevanjem rezultatov in upravljajo nastavitve klepetalnega pogovora.",
-  "RoleAIAgentViewerDescription": "Gledalci lahko ogledajo datoteke v shrambi rezultatov samo z izpisi, ki so jih ustvarili drugi.\nNiso jim omogočen dostop do klepeta ali baze znanja."
+  "YourTurn": "Vi ste na vrsti"
 }

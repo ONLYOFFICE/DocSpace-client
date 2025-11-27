@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "Pošlite pozvánku a pridajte nových členov do vášho {{productName}}",
   "InviteUsersOptionDescription": "Pridávajte členov na spoločné úpravy v miestnosti",
   "ManageAccess": "Spravovať prístup",
+  "MigrationDataDescription": "Preneste svoje dáta do {{productName}} z pracovného priestoru {{organizationName}}, Google Workspace alebo Nextcloud.",
+  "MigrationDataTitle": "Import údajov",
   "NoRecentFilesHereYet": "Zatiaľ tu nie sú žiadne nedávne súbory.",
   "PublicRoomEmptyTitle": "Vitajte vo Verejnej miestnosti",
   "SectionsUploadDescription": "Nahrať akékoľvek typy súborov z {{sectionNameFirst}} alebo {{sectionNameSecond}}",

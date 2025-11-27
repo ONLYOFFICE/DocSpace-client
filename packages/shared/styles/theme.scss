@@ -881,11 +881,13 @@
 .light {
   --header-background-color: #{$gray-light};
   --header-height: 48px;
+  --header-burger-color: #{$light-gray-dark};
 }
 
 .dark {
   --header-background-color: #{$dark-gray-light};
   --header-height: 48px;
+  --header-burger-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2998,4 +3000,18 @@
   --profile-pending-email-text-color: #{$gray-dark};
   --profile-mobile-row-background: #{$light-dark-gray-hover};
   --profile-mobile-label: #{$gray-dark};
+}
+
+.light {
+  --management-disable-color: #{$gray};
+  --management-badge-color: #{$light-status-positive};
+  --management-bar-background: #{$gray-light};
+  --management-text-color: #{$gray};
+}
+
+.dark {
+  --management-disable-color: #{$gray-dark};
+  --management-badge-color: #{$dark-status-positive};
+  --management-bar-background: #{$gray-dark};
+  --management-text-color: #{$gray-dark};
 }

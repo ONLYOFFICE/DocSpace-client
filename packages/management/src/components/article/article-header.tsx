@@ -28,9 +28,12 @@
 
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import classNames from "classnames";
+
 import { useStores } from "@/hooks/useStores";
 import { getMinifyTitle } from "@/lib";
-import { StyledArticleHeader } from "./article.styled";
+
+import styles from "./article.module.scss";
 
 export const ArticleHeader = observer(() => {
   const { t } = useTranslation(["Common"]);
@@ -42,5 +45,13 @@ export const ArticleHeader = observer(() => {
     ? getMinifyTitle(t("SpaceManagement"))
     : t("SpaceManagement");
 
-  return <StyledArticleHeader showText={showText}>{title}</StyledArticleHeader>;
+  return (
+    <h1
+      className={classNames(styles.articleHeader, {
+        [styles.notShowText]: !showText,
+      })}
+    >
+      {title}
+    </h1>
+  );
 });

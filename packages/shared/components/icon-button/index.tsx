@@ -33,7 +33,7 @@ import classNames from "classnames";
 import { isIconSizeType } from "../../utils";
 import { isDesktop } from "../../utils/device";
 
-import { Tooltip } from "../tooltip";
+import { Tooltip, DivWithTooltip } from "../tooltip";
 
 import styles from "./IconButton.module.scss";
 import { IconButtonProps } from "./IconButton.types";
@@ -239,8 +239,10 @@ const IconButton = memo(
       ...style,
     } as React.CSSProperties;
 
+    const Wrapper = title ? DivWithTooltip : "div";
+
     return (
-      <div
+      <Wrapper
         ref={buttonRef}
         className={buttonClasses}
         title={title}
@@ -279,7 +281,7 @@ const IconButton = memo(
         {tooltipId && tooltipContent ? (
           <Tooltip float={isDesktop()} id={tooltipId} place="bottom" />
         ) : null}
-      </div>
+      </Wrapper>
     );
   },
 );

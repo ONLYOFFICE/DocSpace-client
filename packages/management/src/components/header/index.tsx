@@ -26,11 +26,15 @@
 
 "use client";
 
+import MenuIcon from "PUBLIC_DIR/images/menu.react.svg?url";
+
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import { ReactSVG } from "react-svg";
+
 import { useStores } from "@/hooks/useStores";
 
-import { StyledWrapper, StyledHeader, StyledMenuIcon } from "./header.styled";
+import styles from "./header.module.scss";
 
 export const Header = observer(() => {
   const { t } = useTranslation("Common");
@@ -39,9 +43,13 @@ export const Header = observer(() => {
   } = useStores();
 
   return (
-    <StyledWrapper>
-      <StyledMenuIcon onClick={() => setArticleOpen(!articleOpen)} />
-      <StyledHeader>{t("SpaceManagement")}</StyledHeader>
-    </StyledWrapper>
+    <div className={styles.wrapper}>
+      <ReactSVG
+        className={styles.burgerIcon}
+        src={MenuIcon}
+        onClick={() => setArticleOpen(!articleOpen)}
+      />
+      <header className={styles.header}>{t("SpaceManagement")}</header>
+    </div>
   );
 });

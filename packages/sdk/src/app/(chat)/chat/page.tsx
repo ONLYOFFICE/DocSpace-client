@@ -49,9 +49,8 @@ export default async function Page({
   const chatClientProps = {
     ...baseConfig,
     userAvatar: self?.avatar || "",
-    agentId: "-1",
-    selectedModel: "test-model",
-    aiConfig: null,
+    agentId: baseConfig.id as string,
+    selectedModel: "",
   };
 
   return <ChatClient {...chatClientProps} />;

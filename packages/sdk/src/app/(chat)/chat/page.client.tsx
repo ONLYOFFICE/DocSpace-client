@@ -34,6 +34,9 @@ import useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import useInitMessages from "@/hooks/useInitMessages";
+import useDeviceType from "@/hooks/useDeviceType";
+
+import { DeviceType } from "@docspace/shared/enums";
 
 export type ChatClientProps = {
   userAvatar: string;
@@ -50,6 +53,8 @@ export default function ChatClient({
   useSDKConfig();
 
   useDocumentTitle("Chat");
+
+  const { currentDeviceType } = useDeviceType();
 
   const initChats = useInitChats({
     roomId: agentId ?? "",
@@ -75,8 +80,13 @@ export default function ChatClient({
     hideHeader: true,
   };
 
+  const scrollId =
+    currentDeviceType === DeviceType.mobile
+      ? "customScrollBar"
+      : "sectionScroll";
+
   return (
-    <Scrollbar>
+    <Scrollbar id={scrollId}>
       <Chat {...chatProps} />
     </Scrollbar>
   );

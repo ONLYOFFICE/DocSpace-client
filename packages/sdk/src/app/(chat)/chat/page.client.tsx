@@ -29,6 +29,7 @@
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
 import Chat from "@docspace/shared/components/chat";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
@@ -36,9 +37,9 @@ import useInitMessages from "@/hooks/useInitMessages";
 
 export type ChatClientProps = {
   userAvatar: string;
-  baseConfig?: object;
   agentId: string;
   selectedModel: string;
+  baseConfig?: object;
 };
 
 export default function ChatClient({
@@ -74,5 +75,9 @@ export default function ChatClient({
     hideHeader: true,
   };
 
-  return <Chat {...chatProps} />;
+  return (
+    <Scrollbar>
+      <Chat {...chatProps} />
+    </Scrollbar>
+  );
 }

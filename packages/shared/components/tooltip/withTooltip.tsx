@@ -155,18 +155,18 @@ function createTooltipWrapper<TProps extends Record<string, unknown>>(
       | MouseEventHandler
       | undefined;
 
+    const content = _tooltipContent || _title;
+    const contentString = typeof content === "string" ? content : undefined;
+
+    const tooltipHandlers = useTooltipControl(
+      originalOnClick,
+      originalOnMouseEnter,
+      originalOnMouseLeave,
+      contentString,
+      _tooltipPlace as TTooltipPlace,
+    );
+
     if (_title || _tooltipContent) {
-      const content = _tooltipContent || _title;
-      const contentString = typeof content === "string" ? content : undefined;
-
-      const tooltipHandlers = useTooltipControl(
-        originalOnClick,
-        originalOnMouseEnter,
-        originalOnMouseLeave,
-        contentString,
-        _tooltipPlace as TTooltipPlace,
-      );
-
       if (_tooltipFitToContent) {
         return (
           <span

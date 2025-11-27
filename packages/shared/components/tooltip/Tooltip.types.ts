@@ -112,6 +112,7 @@ export function omitTooltipProps<T extends Record<string, unknown>>(
   props: T & Partial<WithTooltipProps>,
 ): OmitTooltipProps<T> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // biome-ignore lint/correctness/noUnusedVariables: <we get these arguments from the components, but we don't pass them along>
   const { title, tooltipContent, tooltipPlace, tooltipFitToContent, ...rest } =
     props;
   return rest as OmitTooltipProps<T>;

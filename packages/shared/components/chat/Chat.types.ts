@@ -215,6 +215,7 @@ export type ChatProps = {
   isAdmin?: boolean;
   standalone?: boolean;
   hideTools?: boolean;
+  hideHeader?: boolean;
 
   setIsAIAgentChatDelete?: (value: {
     visible: boolean;

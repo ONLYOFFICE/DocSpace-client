@@ -56,6 +56,7 @@ const Chat = observer(
     standalone = false,
     aiReady = false,
     hideTools = false,
+    hideHeader = false,
     getResultStorageId,
     setIsAIAgentChatDelete,
     setDeleteDialogVisible,
@@ -77,17 +78,19 @@ const Chat = observer(
 
     return (
       <>
-        <ChatHeader
-          selectedModel={selectedModel}
-          isLoading={isLoadingChat}
-          getIcon={getIcon}
-          getResultStorageId={getResultStorageId}
-          roomId={roomId}
-          aiReady={aiReady}
-          setIsAIAgentChatDelete={setIsAIAgentChatDelete}
-          setDeleteDialogVisible={setDeleteDialogVisible}
-          folderFormValidation={folderFormValidation}
-        />
+        {!hideHeader && (
+          <ChatHeader
+            selectedModel={selectedModel}
+            isLoading={isLoadingChat}
+            getIcon={getIcon}
+            getResultStorageId={getResultStorageId}
+            roomId={roomId}
+            aiReady={aiReady}
+            setIsAIAgentChatDelete={setIsAIAgentChatDelete}
+            setDeleteDialogVisible={setDeleteDialogVisible}
+            folderFormValidation={folderFormValidation}
+          />
+        )}
         {showEmptyScreen ? (
           <ChatNoAccessScreen
             aiReady={aiReady}

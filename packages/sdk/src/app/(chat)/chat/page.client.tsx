@@ -71,6 +71,7 @@ export default function ChatClient({
     messagesSettings: messagesSettings,
     folderFormValidation: /[*+:"<>?|\\/]/gim,
     hideTools: true,
+    hideHeader: true,
   };
 
   return <Chat {...chatProps} />;

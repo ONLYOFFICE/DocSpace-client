@@ -162,4 +162,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   logoText: string;
 
   isMultiSelect?: boolean;
+  maxSelectedItems?: number;
+
+  disableBySecurity?: string;
 };

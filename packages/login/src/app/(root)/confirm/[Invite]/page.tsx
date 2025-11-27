@@ -39,8 +39,7 @@ import {
   getThirdPartyProviders,
   getUserFromConfirm,
   getInvitationSettings,
-  getUserByEmail,
-  checkConfirmLink,
+  getUserByEncEmail,
 } from "@/utils/actions";
 import { logger } from "logger.mjs";
 import { TConfirmLinkParams } from "@/types";
@@ -63,12 +62,11 @@ async function Page(props: LinkInviteProps) {
 
   const type = searchParams.type ?? "";
   const uid = searchParams.uid;
+  const encemail = searchParams.encemail ?? "";
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = await headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
-
-  const result = await checkConfirmLink(searchParams);
 
   const [
     user,
@@ -80,9 +78,7 @@ async function Page(props: LinkInviteProps) {
   ] = await Promise.all([
     uid
       ? getUserFromConfirm(uid, confirmKey)
-      : result?.email
-        ? getUserByEmail(result?.email, confirmKey)
-        : undefined,
+      : getUserByEncEmail(encemail, confirmKey),
     getSettings(),
     getThirdPartyProviders(true),
     getCapabilities(),

@@ -210,7 +210,7 @@ const ManualBackup = ({
       return;
     }
 
-    if (saveStorageType) setStorageType(saveStorageType);
+    if (saveStorageType && !isNotPaidPeriod) setStorageType(saveStorageType);
   });
 
   useEffect(() => {

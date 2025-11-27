@@ -64,6 +64,9 @@ class MembersHelper {
         key: "collaborator",
         label: this.t("Common:ContentCreator"),
         access: ShareAccessRights.Collaborator,
+        tooltip: this.t("InviteDialog:GuestAgentMaxAvailableRoleWarning", {
+          productName: this.t("Common:ProductName"),
+        }),
         type: "collaborator",
       },
       viewer: {
@@ -166,17 +169,17 @@ class MembersHelper {
 
   getOptionByUserAccess = (
     access: ShareAccessRights,
-    isAIAgentsFolder?: boolean
+    isAIAgentsFolderRoot?: boolean,
   ) => {
     if (!access) return;
 
     const options = this.getOptions();
 
-    if (isAIAgentsFolder && access === ShareAccessRights.RoomManager)
+    if (isAIAgentsFolderRoot && access === ShareAccessRights.RoomManager)
       return options.agentAdmin;
 
     const [userOption] = Object.values(options).filter(
-      (opt) => opt.access === access
+      (opt) => opt.access === access,
     );
 
     return userOption;

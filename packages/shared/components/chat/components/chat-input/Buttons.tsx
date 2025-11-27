@@ -27,6 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
@@ -41,7 +42,6 @@ import styles from "./ChatInput.module.scss";
 import ToolsSettings from "./ToolsSettings";
 
 const Buttons = ({
-  inputWidth,
   isFilesSelectorVisible,
   toggleFilesSelector,
   sendMessageAction,
@@ -53,8 +53,10 @@ const Buttons = ({
 }: ButtonsProps) => {
   const { isRequestRunning, stopMessage } = useMessageStore();
 
+  const { t } = useTranslation(["Common"]);
+
   const isSendButtonDisabled = !isRequestRunning
-    ? !value || !selectedModel
+    ? !value.trim() || !selectedModel
     : false;
 
   const sendIconProps = !isRequestRunning
@@ -76,11 +78,8 @@ const Buttons = ({
   };
 
   return (
-    <div
-      className={styles.chatInputButtons}
-      style={{ width: `${inputWidth}px` }}
-    >
-      <div className={styles.chatInputButtonsTools}>
+    <div className={styles.chatInputButtons}>
+      <div className={styles.chatInputButtonsTools} title={t("AddFiles")}>
         <div
           className={classNames(styles.chatInputButton, {
             [styles.activeChatInputButton]: isFilesSelectorVisible,

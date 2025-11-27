@@ -35,7 +35,7 @@ import { TAgentParams } from "@docspace/shared/utils/aiAgents";
 type RoomQuotaProps = {
   setRoomParams: (roomParams: TAgentParams | TRoomParams) => void;
   roomParams: TRoomParams | TAgentParams;
-  defaultRoomsQuota?: number;
+  defaultQuota?: number;
   isEdit?: boolean;
   isTemplate?: boolean;
   isLoading: boolean;
@@ -45,7 +45,7 @@ type RoomQuotaProps = {
 const RoomQuota = ({
   setRoomParams,
   roomParams,
-  defaultRoomsQuota,
+  defaultQuota,
   isEdit,
   isTemplate,
   isLoading,
@@ -69,9 +69,7 @@ const RoomQuota = ({
         isAgent ? t("DisableRoomQuotaAgent") : t("DisableRoomQuota")
       }
       onSetQuotaBytesSize={onSetQuotaBytesSize}
-      initialSize={
-        isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota!
-      }
+      initialSize={isEdit || isTemplate ? defaultValue.current : defaultQuota!}
       isDisabled={
         isLoading ||
         ("storageLocation" in roomParams &&
@@ -83,8 +81,10 @@ const RoomQuota = ({
   );
 };
 
-export default inject(({ currentQuotaStore }: TStore) => {
-  const { defaultRoomsQuota } = currentQuotaStore;
+export default inject(
+  ({ currentQuotaStore }: TStore, { isAgent }: { isAgent?: boolean }) => {
+    const { defaultRoomsQuota, defaultAIAgentsQuota } = currentQuotaStore;
 
-  return { defaultRoomsQuota };
-})(observer(RoomQuota));
+    return { defaultQuota: isAgent ? defaultAIAgentsQuota : defaultRoomsQuota };
+  },
+)(observer(RoomQuota));

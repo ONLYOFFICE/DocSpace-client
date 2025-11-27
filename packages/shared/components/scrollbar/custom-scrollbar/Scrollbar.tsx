@@ -30,6 +30,7 @@ import { cnb } from "cnbuilder";
 import * as React from "react";
 import { DraggableData } from "react-draggable";
 import { zoomLevel } from "zoom-level";
+import { uuid } from "../../../utils/";
 import Emittr from "./Emittr";
 import Loop from "./Loop";
 import ScrollbarThumb, { ScrollbarThumbProps } from "./ScrollbarThumb";
@@ -245,7 +246,7 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
       // @ts-expect-error error from custom scrollbar
       this.eventEmitter.on("scrollStop", props.onScrollStop);
 
-    this.id = util.uuid();
+    this.id = uuid();
   }
 
   get scrollTop() {

@@ -62,6 +62,7 @@ import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import { CategoryType } from "@docspace/shared/constants";
+import { Text } from "@docspace/shared/components/text";
 
 import type {
   EmptyViewItemType,
@@ -99,20 +100,35 @@ export const getDescription = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
-  security: Nullable<TFolderSecurity>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
-  isDocSpaceAdmin: boolean = false,
+  isPortalAdmin: boolean = false,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
   if (isAIRoom) {
-    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeDescription");
+    if (isKnowledgeTab)
+      return (
+        <>
+          {t("AIRoom:EmptyKnowledgeDescription")}
+          <Text
+            as="span"
+            fontSize="12px"
+            style={{ display: "block", marginTop: "8px" }}
+          >
+            {t("AIRoom:EmptyKnowledgeDescriptionActions")}
+          </Text>
+        </>
+      );
 
-    if (isResultsTab) return t("AIRoom:EmptyResultsDescription");
+    if (isResultsTab)
+      return security && "UseChat" in security && security.UseChat
+        ? t("AIRoom:EmptyResultsDescription")
+        : t("AIRoom:EmptyResultsViewerDescription");
   }
 
   if (isRootEmptyPage)
@@ -124,7 +140,7 @@ export const getDescription = (
       security,
       standalone,
       aiReady,
-      isDocSpaceAdmin,
+      isPortalAdmin,
     );
 
   if (isFolder)
@@ -150,19 +166,23 @@ export const getTitle = (
   isArchiveFolderRoot: boolean,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
-  isDocSpaceAdmin: boolean = false,
+  isPortalAdmin: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
   if (isAIRoom) {
     if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeTitle");
 
-    if (isResultsTab) return t("AIRoom:EmptyResultsTitle");
+    if (isResultsTab)
+      return security && "UseChat" in security && security.UseChat
+        ? t("AIRoom:EmptyResultsTitle")
+        : t("Common:NothingToShowYet");
   }
 
   if (isRootEmptyPage)
@@ -172,7 +192,7 @@ export const getTitle = (
       rootFolderType,
       aiReady,
       standalone,
-      isDocSpaceAdmin,
+      isPortalAdmin,
     );
 
   if (isFolder)
@@ -197,11 +217,20 @@ export const getIcon = (
   parentRoomType: Nullable<FolderType>,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
+  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  isResultsTab?: boolean,
 ): JSX.Element => {
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
   return isFolder
-    ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
-    : getRoomIcon(type, isBaseTheme, access)!;
+    ? getFolderIcon(
+        parentRoomType,
+        isBaseTheme,
+        access,
+        folderType,
+        security,
+        isResultsTab,
+      )
+    : getRoomIcon(type, isBaseTheme, access, security, isResultsTab)!;
 };
 
 export const getOptions = (
@@ -224,7 +253,7 @@ export const getOptions = (
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
-  isDocSpaceAdmin: boolean = false,
+  isPortalAdmin: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -462,7 +491,7 @@ export const getOptions = (
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
       .with([FolderType.AIAgents, P._, P._], () =>
-        match([aiReady, standalone, isDocSpaceAdmin])
+        match([aiReady, standalone, isPortalAdmin])
           .with([true, P._, P.when(() => isAdmin(access))], () => [
             createAIAgent,
           ])
@@ -536,7 +565,7 @@ export const getOptions = (
           onClick: () => {
             const filesFilter = FilesFilter.getFilter(window.location);
 
-            filesFilter.searchArea = SearchArea.ResultStorage;
+            filesFilter.searchArea = SearchArea.Any;
 
             const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
 

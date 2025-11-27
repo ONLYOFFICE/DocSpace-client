@@ -88,6 +88,7 @@
   "Payer": "Maksaja",
   "PayerDescription": "Tällä käyttäjällä on pääsy maksutietoihin ja on ainoa käyttäjä, joka voi muokata kiintiötä ja suorittaa maksuja. {{productName}}-n omistaja ja maksava johtaja voivat määrätä uudelleen maksavan johtajan rooliin käyttäen Stripe-asiakasportaalia.",
   "PaymentMethod": "Maksutapa",
+  "PerAITools": "{{currency}} per token",
   "PerBackup": "{{currency}} per 1 varmuuskopio",
   "PerBackupWithBracket": "({{currency}} per 1 varmuuskopio))",
   "PerStorage": "{{currency}} per {{amount}}/kuukausi",

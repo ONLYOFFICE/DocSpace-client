@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Email address not valid. You can edit the email by double-clicking on it.",
   "EmailErrorMessageUserNotFound": "User not found. You can edit the email by double-clicking on it.",
   "GroupMaxAvailableRoleWarning": "Groups can be added to a room with the {{roleName}} role as maximum. However, you can change the role of individual users in the group after it has been successfully added.",
+  "GuestAgentMaxAvailableRoleWarning": "Guests cannot be assigned as Content creator.\nOnly Room admins, {{productName}} admins and Users are eligible for this role.",
   "InvitationLanguage": "Invitation language",
   "InviteMembersManuallyDescription": "Invite new members to {{productName}} personally via email",
   "InviteMembersSearchPlaceholder": "Invite members by email",

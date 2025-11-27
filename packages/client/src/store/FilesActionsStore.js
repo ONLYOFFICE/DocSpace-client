@@ -111,6 +111,7 @@ import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 class FilesActionStore {
   settingsStore;
@@ -354,6 +355,7 @@ class FilesActionStore {
     //  console.log("createFoldersTree", files, folderId);
     const { uploaded, percent } = this.uploadDataStore;
 
+    const { isAIAgentsFolderRoot } = this.treeFoldersStore;
     const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
 
@@ -392,11 +394,14 @@ class FilesActionStore {
 
         const size = getConvertedSize(t, roomFolder.quotaLimit);
 
-        throw new Error(
-          t("Common:RoomSpaceQuotaExceeded", {
-            size,
-          }),
-        );
+        const error = isAIAgentsFolderRoot
+          ? t("Common:AIAgentSpaceQuotaExceeded", {
+              size,
+            })
+          : t("Common:RoomSpaceQuotaExceeded", {
+              size,
+            });
+        throw new Error(error);
       }
     }
 
@@ -457,9 +462,11 @@ class FilesActionStore {
       newSelection ||
       (this.filesStore.selection.length
         ? this.filesStore.selection
-        : [bufferSelection]);
+        : bufferSelection
+          ? [bufferSelection]
+          : []);
 
-    selection = selection.filter((item) => item.security.Delete);
+    selection = selection.filter((item) => item?.security?.Delete);
 
     //  const isThirdPartyFile = selection.some((f) => f.providerKey);
 
@@ -1318,21 +1325,21 @@ class FilesActionStore {
     const updatingFolderList = (elems, isPin = false) => {
       if (elems.length === 0) return;
 
-      const itemCount = { count: elems.length };
-
       let translationForOneItem;
       let translationForSeverals;
 
       if (isAIAgent) {
-        translationForOneItem = isPin ? t("AIAgentPinned") : t("AIAgentUnpinned");
+        translationForOneItem = isPin
+          ? t("AIAgentPinned")
+          : t("AIAgentUnpinned");
         translationForSeverals = isPin
-          ? t("AIAgentsPinned", { ...itemCount })
-          : t("AIAgentsUnpinned", { ...itemCount });
+          ? t("AIAgentsPinned")
+          : t("AIAgentsUnpinned");
       } else {
         translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
         translationForSeverals = isPin
-          ? t("RoomsPinned", { ...itemCount })
-          : t("RoomsUnpinned", { ...itemCount });
+          ? t("RoomsPinned", { count: elems.length })
+          : t("RoomsUnpinned", { count: elems.length });
       }
 
       toastr.success(
@@ -1360,9 +1367,9 @@ class FilesActionStore {
 
       updatingFolderList(withFinishedOperation, isPin);
 
-      if(isError){
-        isAIAgent 
-          ? toastr.error(t("AIAgentPinLimitMessage")) 
+      if (isError) {
+        isAIAgent
+          ? toastr.error(t("AIAgentPinLimitMessage"))
           : toastr.error(t("RoomsPinLimitMessage"));
       }
 
@@ -1392,7 +1399,7 @@ class FilesActionStore {
     const muteStatus = action === "mute";
 
     const folderIndex = id && folders.findIndex((x) => x.id == id);
-    if (folderIndex) updateRoomMute(folderIndex, muteStatus);
+    if (folderIndex > -1) updateRoomMute(folderIndex, muteStatus);
 
     const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
     const count = treeFolders[treeIndex].newItems;
@@ -1405,7 +1412,7 @@ class FilesActionStore {
     let notificationsDisabled = t("RoomNotificationsDisabled");
     let notificationsEnabled = t("RoomNotificationsEnabled");
 
-    if(isAIAgent){
+    if (isAIAgent) {
       notificationsDisabled = t("AIAgentNotificationsDisabled");
       notificationsEnabled = t("AIAgentNotificationsEnabled");
     }
@@ -1413,9 +1420,7 @@ class FilesActionStore {
     muteRoomNotification(id, muteStatus)
       .then(() =>
         toastr.success(
-          muteStatus
-            ? notificationsDisabled
-            : notificationsEnabled,
+          muteStatus ? notificationsDisabled : notificationsEnabled,
         ),
       )
       .catch((e) => toastr.error(e));
@@ -1594,6 +1599,8 @@ class FilesActionStore {
 
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
 
+    const categoryType = getCategoryType(window.DocSpace.location);
+
     const setIsLoading = (param) => {
       setIsSectionBodyLoading(param);
     };
@@ -1628,9 +1635,19 @@ class FilesActionStore {
     } else {
       newFilter.withoutTags = true;
     }
+
+    let pathName = window.DocSpace.location.pathname;
+
+    if (
+      categoryType === CategoryType.Chat ||
+      categoryType === CategoryType.AIAgent
+    ) {
+      pathName = getCategoryUrl(CategoryType.AIAgents);
+    }
+
     setIsLoading(true);
     window.DocSpace.navigate(
-      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,
+      `${pathName}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,
     );
   };
 
@@ -1718,6 +1735,8 @@ class FilesActionStore {
   };
 
   nameWithoutExtension = (title) => {
+    if (!title) return "";
+
     const indexPoint = title.lastIndexOf(".");
     const splitTitle = title.split(".");
     const splitTitleLength = splitTitle.length;
@@ -1961,6 +1980,9 @@ class FilesActionStore {
       hasRoomsToResetQuota,
       hasRoomsToDisableQuota,
       hasRoomsToChangeQuota,
+      hasAIAgentsToChangeQuota,
+      hasAIAgentsToDisableQuota,
+      hasAIAgentsToResetQuota,
     } = this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
@@ -2014,14 +2036,17 @@ class FilesActionStore {
         return canCreateRoom;
       }
       case "change-quota":
-      case "change-agent-quota":
         return hasRoomsToChangeQuota;
+      case "change-agent-quota":
+        return hasAIAgentsToChangeQuota;
       case "disable-quota":
-      case "disable-agent-quota":
         return hasRoomsToDisableQuota;
+      case "disable-agent-quota":
+        return hasAIAgentsToDisableQuota;
       case "default-quota":
-      case "default-agent-quota":
         return hasRoomsToResetQuota;
+      case "default-agent-quota":
+        return hasAIAgentsToResetQuota;
       case "vectorization":
         return selection.some((s) => s.security?.Vectorization);
       default:
@@ -2181,7 +2206,7 @@ class FilesActionStore {
     window.dispatchEvent(event);
   };
 
-  changeAIAgentQuota = (items, successCallback, abortCallback) => {
+  changeAIAgentsQuota = (items, successCallback, abortCallback) => {
     const event = new Event(Events.CHANGE_QUOTA);
 
     const itemsIDs = items.map((item) => {
@@ -2662,7 +2687,7 @@ class FilesActionStore {
         return;
       }
 
-      if (fileItemsList && enablePlugins) {
+      if (!isAIAgents() && fileItemsList && enablePlugins) {
         let currPluginItem = null;
 
         fileItemsList.forEach((i) => {
@@ -2687,7 +2712,7 @@ class FilesActionStore {
       }
 
       if ((fileStatus & FileStatus.IsNew) === FileStatus.IsNew)
-        this.onMarkAsRead(item);
+        await this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
         let shareKey = item.requestToken;
@@ -2768,7 +2793,12 @@ class FilesActionStore {
       CategoryType.Trash !== categoryType && urlFilter?.folder
     );
 
-    if (roomType === RoomsType.AIRoom) {
+    if (
+      roomType === RoomsType.AIRoom ||
+      categoryType === CategoryType.Chat ||
+      categoryType === CategoryType.AIAgent ||
+      categoryType === CategoryType.AIAgents
+    ) {
       return this.moveToAIAgentsPage();
     }
 

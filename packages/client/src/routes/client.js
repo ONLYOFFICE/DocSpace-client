@@ -466,6 +466,18 @@ const ClientRoutes = [
   {
     path: "/about",
     async lazy() {
+      const { isDesktop, isTablet } = await import("@docspace/shared/utils");
+
+      // On desktop/tablet we redirect to the home page with a flag to open the modal.
+      if (isDesktop() || isTablet()) {
+        const Component = () => {
+          return <Navigate to="/" replace state={{ openAboutDialog: true }} />;
+        };
+
+        return { Component };
+      }
+
+      // On mobile we show the full page.
       const { About } = await componentLoader(
         () => import("SRC_DIR/pages/About"),
       );

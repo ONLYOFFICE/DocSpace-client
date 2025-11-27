@@ -53,7 +53,7 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
     case RoomsType.FormRoom:
       return t("Common:RoleRoomAdminFormRoomDescription");
     case RoomsType.AIRoom:
-      return t("Common:RoleAgentManagerDescription");
+      return t("Common:RoleAIAgentManagerDescription");
     case None:
       return t("Common:RoleRoomAdminDescription", {
         sectionName: t("Common:MyDocuments"),
@@ -67,6 +67,8 @@ const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Common:RolePowerUserFormRoomDescription");
+    case RoomsType.AIRoom:
+      return t("Common:RoleAIAgentContentCreatorDescription");
     case None:
       return t("Common:RoleNewUserDescription");
     default:
@@ -90,7 +92,7 @@ export const getAccessOptions = (
   withSeparator = false,
   isOwner = false,
   isAdmin = false,
-  standalone = false
+  standalone = false,
 ) => {
   let options: Array<AccessOptionType | SeparatorOptionType> = [];
   const accesses = {
@@ -136,7 +138,7 @@ export const getAccessOptions = (
     },
     agentManager: {
       key: "agentManager",
-      label: t("Common:AgentManager"),   
+      label: t("Common:AgentManager"),
       description: getRoomAdminDescription(roomType, t),
       tooltip: t("UserAgentMaxAvailableRoleWarning", {
         productName: t("Common:ProductName"),
@@ -161,6 +163,12 @@ export const getAccessOptions = (
       key: "contentCreator",
       label: t("Common:ContentCreator"),
       description: getUserDescription(roomType, t),
+      tooltip:
+        roomType === RoomsType.AIRoom
+          ? t("GuestAgentMaxAvailableRoleWarning", {
+              productName: t("Common:ProductName"),
+            })
+          : undefined,
       access:
         roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,
       type: EmployeeType.User,
@@ -196,7 +204,10 @@ export const getAccessOptions = (
     viewer: {
       key: "viewer",
       label: t("Common:RoleViewer"),
-      description: t("Common:RoleViewerDescription"),
+      description:
+        roomType === RoomsType.AIRoom
+          ? t("Common:RoleAIAgentViewerDescription")
+          : t("Common:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
       type: EmployeeType.User,
     },
@@ -294,7 +305,7 @@ export const getAccessOptions = (
               key: "s1",
               isSeparator: withSeparator,
             },
-          ]
+          ],
         );
       }
 

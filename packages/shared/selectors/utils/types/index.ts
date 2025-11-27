@@ -102,6 +102,7 @@ export type UseAgentsHelperProps = TUseInputItemHelper & {
     >
   >;
   setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
+  disableBySecurity?: string;
 };
 
 export type UseSocketHelperProps = {
@@ -112,4 +113,5 @@ export type UseSocketHelperProps = {
   disabledFolderType?: FolderType;
   filterParam?: string | number;
   withCreate?: boolean;
+  disableBySecurity?: string;
 };

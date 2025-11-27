@@ -33,8 +33,9 @@ import { TTheme } from "@docspace/shared/themes";
 import { Text } from "@docspace/shared/components/text";
 import { Row, RowContent } from "@docspace/shared/components/rows";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
-
+import { Encoder } from "@docspace/shared/utils/encoder";
 import { getCorrectDate } from "@docspace/shared/utils";
+
 import styles from "../../styles/TransactionHistory.module.scss";
 import { accountingLedgersFormat, getServiceQuantity } from "../../utils";
 
@@ -95,7 +96,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
     if (transaction.participantDisplayName) {
       children.push(
         <Text key="participant" fontWeight={600} fontSize="11px">
-          {transaction.participantDisplayName}
+          {Encoder.htmlDecode(transaction.participantDisplayName)}
         </Text>,
       );
     }

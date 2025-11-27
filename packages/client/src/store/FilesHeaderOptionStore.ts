@@ -87,13 +87,10 @@ export default class FilesHeaderOptionStore {
     this.filesActionsStore.archiveRooms("unarchive");
 
   private changeRoomQuotaHandle = () =>
-    this.filesActionsStore.changeRoomQuota(this.filesStore.selection, this.t);
+    this.filesActionsStore.changeRoomQuota(this.filesStore.selection);
 
-  private changeAIAgentQuotaHandle = () =>
-    this.filesActionsStore.changeAIAgentQuota(
-      this.filesStore.selection,
-      this.t,
-    );
+  private changeAIAgentsQuotaHandle = () =>
+    this.filesActionsStore.changeAIAgentsQuota(this.filesStore.selection);
 
   private resetRoomQuotaHandle = () =>
     this.filesActionsStore.resetRoomQuota(this.filesStore.selection, this.t);
@@ -257,7 +254,7 @@ export default class FilesHeaderOptionStore {
           key: "change-agent-quota",
           label: t("Common:ChangeQuota"),
           iconUrl: ChangQuotaReactSvgUrl,
-          onClick: this.changeAIAgentQuotaHandle,
+          onClick: this.changeAIAgentsQuotaHandle,
           disabled: !showStorageInfo,
         };
       case "default-quota":

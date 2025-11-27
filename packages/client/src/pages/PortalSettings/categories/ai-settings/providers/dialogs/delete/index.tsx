@@ -84,7 +84,7 @@ const DeleteDialogComponent = ({
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:OKButton")}
+          label={t("Common:Delete")}
           scale
           onClick={onSubmit}
           isLoading={loading}

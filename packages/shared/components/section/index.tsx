@@ -130,6 +130,7 @@ const Section = (props: SectionProps) => {
     clearDropPreviewLocation,
     dropTargetPreview,
     startDropPreview,
+    fullHeightBody,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -241,7 +242,6 @@ const Section = (props: SectionProps) => {
     !primaryOperationsCompleted &&
     primaryOperationsArray.some((op) => op.operation === "upload");
 
-  const hideFilter = window.location.pathname.includes("chat");
   const isInfoVisible = canDisplay && isInfoPanelVisible;
 
   if (!isSectionAvailable) return null;
@@ -272,7 +272,6 @@ const Section = (props: SectionProps) => {
             ) : null}
 
             {isSectionFilterAvailable &&
-            !hideFilter &&
             currentDeviceType === DeviceType.desktop ? (
               <SubSectionFilter className="section-header_filter">
                 {sectionFilterContent}
@@ -297,6 +296,7 @@ const Section = (props: SectionProps) => {
             isIndexEditingMode={isIndexEditingMode}
             pathname={pathname}
             withoutFooter={withoutFooter}
+            fullHeightBody={fullHeightBody}
           >
             {isSectionHeaderAvailable &&
             currentDeviceType === DeviceType.mobile ? (
@@ -315,7 +315,6 @@ const Section = (props: SectionProps) => {
               <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
             ) : null}
             {isSectionFilterAvailable &&
-            !hideFilter &&
             currentDeviceType !== DeviceType.desktop ? (
               <SubSectionFilter
                 withTabs={withTabs}

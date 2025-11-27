@@ -24,42 +24,80 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
-import { MessageMarkdownFieldProps } from "../../../../../Chat.types";
+import type { MessageMarkdownFieldProps } from "../../../../../Chat.types";
 
 import styles from "../../../ChatMessageBody.module.scss";
 
+import Think from "../Think";
+
 import { createMarkdownComponents } from "./Markdown.utils";
 
-// Function to replace <think> tags with a placeholder before markdown processing
-const preprocessChatMessage = (text: string): string => {
-  // Replace <think> tags with `<span class="think-tag">think:</span>`
-  return text
-    .replace(/<think>/g, "`<think>`")
-    .replace(/<\/think>/g, "`</think>`");
-};
+// // Function to replace <think> tags with a placeholder before markdown processing
+// const preprocessChatMessage = (text: string): string => {
+//   // Replace <think> tags with `<span class="think-tag">think:</span>`
+//   return text
+//     .replace(/<think>/g, "`<think>`")
+//     .replace(/<\/think>/g, "`</think>`");
+// };
 
-const MarkdownField = ({
-  chatMessage,
-  propLanguage,
-}: MessageMarkdownFieldProps) => {
-  // Process the chat message to handle <think> tags
-  const processedChatMessage = preprocessChatMessage(chatMessage);
+const MarkdownField = React.memo(
+  ({
+    chatMessage,
+    propLanguage,
+    isFirst,
+    successCopyMessage,
+  }: MessageMarkdownFieldProps) => {
+    // Process the chat message to handle <think> tags
+    // const processedChatMessage = preprocessChatMessage(chatMessage);
 
-  return (
-    <div style={{ width: "100%" }} className={styles.markdownField}>
-      <Markdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
-        components={createMarkdownComponents({ propLanguage })}
-      >
-        {processedChatMessage}
-      </Markdown>
-    </div>
-  );
-};
+    const withThinkBlock = chatMessage.includes("<think>");
+    const splitedMsg = withThinkBlock
+      ? chatMessage.split("</think>\n")
+      : [chatMessage];
+
+    const thinkBlock = withThinkBlock
+      ? splitedMsg[0].replace("<think>\n", "")
+      : "";
+
+    const processedChatMessage = withThinkBlock ? splitedMsg[1] : chatMessage;
+
+    return (
+      <div style={{ width: "100%" }} className={styles.markdownField}>
+        {thinkBlock ? (
+          <Think
+            isFinished={chatMessage.includes("</think>")}
+            isFirst={isFirst}
+          >
+            <Markdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              components={createMarkdownComponents({
+                propLanguage,
+                successCopyMessage,
+              })}
+            >
+              {thinkBlock}
+            </Markdown>
+          </Think>
+        ) : null}
+        <Markdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={createMarkdownComponents({
+            propLanguage,
+            successCopyMessage,
+          })}
+        >
+          {processedChatMessage}
+        </Markdown>
+      </div>
+    );
+  },
+);
 
 export default MarkdownField;

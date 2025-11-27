@@ -3,7 +3,7 @@
   "content": "Mark as revision",
   "content_en_sha1_hash": "81c16fba6a6aa6f91ca729e449a37cbfbe71b54e",
   "created_at": "2025-05-19T21:30:55.809Z",
-  "updated_at": "2025-08-21T11:22:39.917Z",
+  "updated_at": "2025-11-17T11:52:35.693Z",
   "comment": {
     "text": "This translation key is used to display the text \"Mark as revision\" in a version history page. It marks a file as an incomplete or updated version, and appears on a button.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 286,
+      "line_number": 287,
       "context": "//  {...onClickProp}\n t={t}\n title={\n index > 0\n ? isVersion\n ? t(\"Files:MarkAsRevision\")\n : t(\"Files:MarkAsVersion\")\n : \"\"\n }\n />\n <div className=\"version-link-box\">",
       "module": "/packages/client"
     }

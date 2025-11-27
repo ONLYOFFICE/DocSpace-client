@@ -1022,10 +1022,14 @@ class UploadDataStore {
     const { isAIRoom } = this.selectedFolderStore;
     const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
 
+    const checkConflicts =
+      uploadData.files.findIndex((f) => f.toFolderId === toFolderId) > -1;
+
     try {
-      let conflicts = isAIRoom
-        ? []
-        : await checkIsFileExist(toFolderId, filesArray);
+      let conflicts =
+        isAIRoom || !checkConflicts
+          ? []
+          : await checkIsFileExist(toFolderId, filesArray);
       const folderInfo = await getFolderInfo(toFolderId);
 
       conflicts = conflicts.map((fileTitle) => ({

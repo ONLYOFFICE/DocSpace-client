@@ -3,7 +3,7 @@
   "content": "There are no rooms here yet",
   "content_en_sha1_hash": "a00289e348e163164ea7a94f54699117bbd7df83",
   "created_at": "2025-05-19T21:30:56.498Z",
-  "updated_at": "2025-11-03T12:10:34.916Z",
+  "updated_at": "2025-11-17T07:52:04.498Z",
   "comment": {
     "text": "This translation key is used for the empty room header message, displayed when there are no rooms available. It appears as part of a header component in an application related to room management and organization, likely on a list or view of empty rooms.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 396,
+      "line_number": 398,
       "context": "t(\"Common:EmptyRootRoomHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserTitle\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesTitle\"),\n )\n .with([FolderType.USER, ShareAccessRights.None], () =>",
       "module": "/packages/client"
     }

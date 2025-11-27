@@ -104,6 +104,10 @@ class InfoPanelStore {
   }
 
   setIsVisible = (visiable: boolean) => {
+    const selectedFolderIsAgentOrFolderInAgent =
+      this.selectedFolderStore?.parentRoomType ||
+      this.selectedFolderStore?.roomType;
+
     const selectedFolderIsRoomOrFolderInRoom =
       this.selectedFolderStore &&
       !this.selectedFolderStore.isRootFolder &&
@@ -124,7 +128,8 @@ class InfoPanelStore {
 
     if (
       (selectedFolderIsRoomOrFolderInRoom ||
-        archivedFolderIsRoomOrFolderInRoom) &&
+        archivedFolderIsRoomOrFolderInRoom ||
+        selectedFolderIsAgentOrFolderInAgent) &&
       isFolderOpenedThroughSectionHeader
     ) {
       this.setView(InfoPanelView.infoMembers);

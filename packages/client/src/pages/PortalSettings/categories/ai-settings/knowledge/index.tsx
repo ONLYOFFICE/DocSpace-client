@@ -35,6 +35,7 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { toastr } from "@docspace/shared/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { inject, observer } from "mobx-react";
@@ -44,15 +45,16 @@ import { useTranslation } from "react-i18next";
 import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Knowledge.module.scss";
+import { ResetKnowledgeDialog } from "./dialogs/reset";
 
 type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
   knowledgeConfig?: AISettingsStore["knowledgeConfig"];
-  restoreKnowledge?: AISettingsStore["restoreKnowledge"];
   updateKnowledge?: AISettingsStore["updateKnowledge"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
+  aiSettingsUrl?: string;
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -60,18 +62,33 @@ const FAKE_KEY_VALUE = "0000000000000000";
 const KnowledgeComponent = ({
   knowledgeInitied,
   knowledgeConfig,
-  restoreKnowledge,
   updateKnowledge,
   hasAIProviders,
   getAIConfig,
   aiConfig,
+  aiSettingsUrl,
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
 
+  const [resetDialogVisible, setResetDialogVisible] =
+    React.useState<boolean>(false);
+
   const [isKeyHidden, setIsKeyHidden] = React.useState(!!knowledgeConfig?.key);
-  const [value, setValue] = React.useState(
-    knowledgeConfig?.key ? FAKE_KEY_VALUE : "",
-  );
+  const [valuesByProvider, setValuesByProvider] = React.useState<
+    Record<KnowledgeType, string>
+  >(() => {
+    const initial: Record<KnowledgeType, string> = {
+      [KnowledgeType.OpenAi]: "",
+      [KnowledgeType.OpenRouter]: "",
+      [KnowledgeType.None]: "",
+    };
+
+    if (knowledgeConfig?.type && knowledgeConfig.key) {
+      initial[knowledgeConfig.type] = FAKE_KEY_VALUE;
+    }
+
+    return initial;
+  });
   const [selectedOption, setSelectedOption] = React.useState<KnowledgeType>(
     () => {
       if (knowledgeConfig?.type === KnowledgeType.OpenAi)
@@ -83,23 +100,47 @@ const KnowledgeComponent = ({
   const [saveRequestRunning, setSaveRequestRunning] = React.useState(false);
 
   const onChange = (_: React.ChangeEvent<HTMLInputElement>, value?: string) => {
-    setValue(value || "");
+    setValuesByProvider((prev) => ({
+      ...prev,
+      [selectedOption]: value || "",
+    }));
   };
 
   const onRestoreToDefault = async () => {
-    setValue("");
+    setResetDialogVisible(true);
+  };
+
+  const refreshData = () => {
+    setValuesByProvider({
+      [KnowledgeType.OpenAi]: "",
+      [KnowledgeType.OpenRouter]: "",
+      [KnowledgeType.None]: "",
+    });
     setSelectedOption(KnowledgeType.None);
     setIsKeyHidden(false);
 
-    restoreKnowledge?.();
     getAIConfig?.();
+  };
+
+  const closeDialog = () => {
+    setResetDialogVisible(false);
   };
 
   const onSave = async () => {
     if (isKeyHidden) return;
 
+    const currentValue = valuesByProvider[selectedOption] || "";
+
     setSaveRequestRunning(true);
-    await updateKnowledge?.(selectedOption, value);
+    try {
+      await updateKnowledge?.(selectedOption, currentValue);
+
+      toastr.success(t("AISettings:KnowledgeEnabledSuccess"));
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as string);
+    }
+
     getAIConfig?.();
     setSaveRequestRunning(false);
   };
@@ -121,10 +162,19 @@ const KnowledgeComponent = ({
     return items.find((item) => item.key === selectedOption);
   }, [items, selectedOption]);
 
+  const currentValue = React.useMemo(() => {
+    return valuesByProvider[selectedOption] || "";
+  }, [valuesByProvider, selectedOption]);
+
   React.useEffect(() => {
     if (knowledgeConfig?.type) {
       setIsKeyHidden(true);
-      setValue(FAKE_KEY_VALUE);
+      if (knowledgeConfig.key) {
+        setValuesByProvider((prev) => ({
+          ...prev,
+          [knowledgeConfig.type!]: FAKE_KEY_VALUE,
+        }));
+      }
     }
 
     setSelectedOption(() => {
@@ -177,7 +227,7 @@ const KnowledgeComponent = ({
     );
 
   const isSaveDisabled =
-    !value || selectedOption === KnowledgeType.None || isKeyHidden;
+    !currentValue || selectedOption === KnowledgeType.None || isKeyHidden;
 
   const tooltipId = "tooltip-web-search";
 
@@ -195,21 +245,23 @@ const KnowledgeComponent = ({
         }
       >
         <Text className={generalStyles.description}>
-          {t("AISettings:KnowledgeDescription", {
+          {t("AISettings:KnowledgeSettingsDescription", {
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
           })}
         </Text>
-        <Link
-          className={generalStyles.learnMoreLink}
-          target={LinkTarget.blank}
-          type={LinkType.page}
-          fontWeight={600}
-          isHovered
-          href=""
-          color="accent"
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {aiSettingsUrl ? (
+          <Link
+            className={generalStyles.learnMoreLink}
+            target={LinkTarget.blank}
+            type={LinkType.page}
+            fontWeight={600}
+            isHovered
+            href={aiSettingsUrl}
+            color="accent"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
         <div className={styles.knowledgeForm}>
           <FieldContainer
             labelVisible
@@ -228,7 +280,7 @@ const KnowledgeComponent = ({
                 setSelectedOption(option.key as KnowledgeType)
               }
               displaySelectedOption
-              isDisabled={!hasAIProviders}
+              isDisabled={!hasAIProviders || isKeyHidden}
             />
           </FieldContainer>
           <FieldContainer
@@ -237,23 +289,33 @@ const KnowledgeComponent = ({
             labelText={t("AISettings:APIKey")}
             removeMargin
           >
-            <PasswordInput
-              className={styles.passwordInput}
-              placeholder={t("AISettings:EnterKey")}
-              inputValue={value}
-              onChange={onChange}
-              scale
-              isSimulateType
-              isFullWidth
-              isDisableTooltip
-              isDisabled={isKeyHidden || selectedOption === KnowledgeType.None}
-              autoComplete="off"
-            />
             {isKeyHidden ? (
-              <Text className={styles.hiddenKeyDescription}>
-                {t("AISettings:WebSearchKeyHiddenDescription")}
-              </Text>
-            ) : null}
+              <div className={styles.aiBanner}>
+                <Text fontSize="12px" fontWeight={400} lineHeight="16px">
+                  {t("AISettings:WebSearchKeyHiddenDescription")}
+                </Text>
+              </div>
+            ) : (
+              <>
+                <PasswordInput
+                  className={styles.passwordInput}
+                  placeholder={t("AISettings:EnterKey")}
+                  inputValue={currentValue}
+                  onChange={onChange}
+                  scale
+                  isSimulateType
+                  isFullWidth
+                  isDisableTooltip
+                  isDisabled={
+                    isKeyHidden || selectedOption === KnowledgeType.None
+                  }
+                  autoComplete="off"
+                />
+                <Text className={styles.hiddenKeyDescription}>
+                  {t("AISettings:KnowledgeKeyDescription")}
+                </Text>
+              </>
+            )}
           </FieldContainer>
         </div>
         <div className={styles.buttonContainer}>
@@ -282,6 +344,9 @@ const KnowledgeComponent = ({
       {!hasAIProviders ? (
         <Tooltip id={tooltipId} place="bottom" offset={10} float />
       ) : null}
+      {resetDialogVisible ? (
+        <ResetKnowledgeDialog onSuccess={refreshData} onClose={closeDialog} />
+      ) : null}
     </>
   );
 };
@@ -291,11 +356,11 @@ export const Knowledge = inject(
     return {
       knowledgeInitied: aiSettingsStore.knowledgeInitied,
       knowledgeConfig: aiSettingsStore.knowledgeConfig,
-      restoreKnowledge: aiSettingsStore.restoreKnowledge,
       updateKnowledge: aiSettingsStore.updateKnowledge,
       hasAIProviders: aiSettingsStore.hasAIProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,
+      aiSettingsUrl: settingsStore.aiSettingsUrl,
     };
   },
 )(observer(KnowledgeComponent));

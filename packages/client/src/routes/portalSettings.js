@@ -467,6 +467,19 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "management/disk-space/quota-per-ai-agent",
+      async lazy() {
+        const { QuotaPerAIAgentComponentSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent"
+            ),
+        );
+
+        return { Component: QuotaPerAIAgentComponentSection };
+      },
+    },
+    {
       path: "data-import",
       element: <ViewComponent />,
     },

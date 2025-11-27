@@ -155,7 +155,7 @@ class CreateEditRoomStore {
     newParams: TAgentParams,
     agent: TAgent,
   ) => {
-    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
+    const { isDefaultAIAgentsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore!;
     const { changeRoomOwner } = this.filesActionsStore!;
@@ -190,7 +190,7 @@ class CreateEditRoomStore {
         tags,
       }),
 
-      ...(isDefaultRoomsQuotaSet &&
+      ...(isDefaultAIAgentsQuotaSet &&
         isQuotaChanged && {
           quota: +quotaLimit!,
         }),
@@ -296,6 +296,8 @@ class CreateEditRoomStore {
   onCreateAgent = async (t: TFunction, successToast: Element | null = null) => {
     const agentParams = this.agentParams!;
 
+    const { attachDefaultTools } = agentParams;
+
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
 
@@ -340,6 +342,10 @@ class CreateEditRoomStore {
           modelId,
         },
       }),
+
+      ...(typeof attachDefaultTools === "boolean" && {
+        attachDefaultTools,
+      }),
     };
 
     this.setIsLoading(true);
@@ -360,7 +366,7 @@ class CreateEditRoomStore {
 
       this.dialogsStore!.setIsNewRoomByCurrentUser(true);
 
-      if (agentParams.mcpServers) {
+      if (agentParams.mcpServers?.length) {
         addServersForRoom(agent.id, agentParams.mcpServers);
       }
 

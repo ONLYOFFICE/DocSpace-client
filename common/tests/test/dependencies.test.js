@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 
@@ -247,7 +248,7 @@ beforeAll(() => {
   );
 });
 
-test("UnusedDependenciesTest: Verify that all dependencies in package.json files are being used", async () => {
+it("UnusedDependenciesTest: Verify that all dependencies in package.json files are being used", async () => {
   const unusedDependencies = [];
 
   const sharedDeps = workspaceDeps.find(
@@ -401,7 +402,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
   expect(unusedDependencies.length, message).toBe(0);
 });
 
-test("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
+it("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
   // List of packages to be ignored
   const ignoredPackages = new Set([]);
 

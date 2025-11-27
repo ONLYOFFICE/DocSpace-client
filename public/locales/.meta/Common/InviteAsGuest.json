@@ -3,7 +3,7 @@
   "content": "invite as guest",
   "content_en_sha1_hash": "4af13b83671f74562036c77dedfbc2b8b7a372cd",
   "created_at": "2025-05-19T21:30:45.973Z",
-  "updated_at": "2025-11-03T12:10:35.060Z",
+  "updated_at": "2025-11-20T14:22:10.906Z",
   "comment": {
     "text": "This translation key is used for a button label that invites users to \"invite as guest\" when adding an email. It appears in an invite panel, likely on a website or application where users can send emails to others. The translator should provide a neutral description of this action.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 532,
+      "line_number": 561,
       "context": "truncate\n fontSize=\"12px\"\n fontWeight={400}\n className=\"email-list_invite-as-guest\"\n >\n {t(\"Common:InviteAsGuest\")}\n </Text>\n </div>\n )}\n </div>{\" \"}\n <div className=\"email-list_add-button\">",
       "module": "/packages/client"
     }

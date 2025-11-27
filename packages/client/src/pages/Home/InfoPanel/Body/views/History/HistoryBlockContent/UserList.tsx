@@ -66,14 +66,11 @@ const HistoryUserList = ({
   );
   const onExpand = () => setIsExpanded(true);
 
-  const usersData = [
-    feed.data,
-    ...feed.related.map((relatedFeed) => relatedFeed.data),
-  ];
+  const usersData = [feed, ...feed.related];
 
   return (
     <>
-      {usersData.map((member, i) => {
+      {usersData.map(({ id, data: member }, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         const withComma = !isExpanded
           ? i < EXPANSION_THRESHOLD - 1
@@ -88,7 +85,7 @@ const HistoryUserList = ({
 
         return (
           <div
-            key={user.id}
+            key={id}
             className={styles.historyLink}
             style={
               withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
@@ -133,7 +130,7 @@ const HistoryUserList = ({
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: usersData.length - EXPANSION_THRESHOLD }}
-            components={{ 1: <strong /> }}
+            components={{ 1: <strong key="count-strong" /> }}
           />
         </div>
       ) : null}

@@ -105,6 +105,7 @@ const PureHome = (props) => {
     isPrivacyFolder,
     isRecycleBinFolder,
     isErrorRoomNotAvailable,
+    isErrorAIAgentNotAvailable,
     isIndexEditingMode,
 
     isSecondaryProgressVisbile,
@@ -119,6 +120,7 @@ const PureHome = (props) => {
     onClickBack,
 
     showFilterLoader,
+    showHeaderLoader,
 
     getSettings,
     logout,
@@ -164,11 +166,20 @@ const PureHome = (props) => {
 
     aiConfig,
     currentTab,
+    setIsAboutDialogVisible,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
 
   const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.state?.openAboutDialog && setIsAboutDialogVisible) {
+      setIsAboutDialogVisible(true);
+      // clear state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state, setIsAboutDialogVisible]);
 
   // console.log(t("Common:ComingSoon"))
 
@@ -296,6 +307,7 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+      sectionProps.fullHeightBody = isChat;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
@@ -382,6 +394,9 @@ const PureHome = (props) => {
   const isDisabledKnowledge =
     !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
 
+  const isErrorAvailable =
+    isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage || isProfile ? (
@@ -397,10 +412,11 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps} withoutFooter={isChat}>
-        {!isErrorRoomNotAvailable ||
+        {!isErrorAvailable ||
         isContactsPage ||
         isProfile ||
-        isSettingsPage ? (
+        isSettingsPage ||
+        showHeaderLoader ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -415,6 +431,7 @@ const PureHome = (props) => {
         </Section.SectionWarning>
 
         {!isChat &&
+        !isErrorAvailable &&
         !isDisabledKnowledge &&
         shouldShowFilter &&
         !isProfile &&
@@ -461,6 +478,7 @@ export const Component = inject(
     dialogsStore,
     filesSettingsStore,
     aiRoomStore,
+    profileActionsStore,
   }) => {
     const {
       setSelectedFolder,
@@ -485,6 +503,7 @@ export const Component = inject(
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
+      showHeaderLoader,
       showFilterLoader,
       isChangePageRequestRunning,
       currentClientView,
@@ -519,6 +538,7 @@ export const Component = inject(
 
       disableDrag,
       isErrorRoomNotAvailable,
+      isErrorAIAgentNotAvailable,
       setIsPreview,
       getRooms,
       scrollToTop,
@@ -684,6 +704,7 @@ export const Component = inject(
       onClickBack,
 
       showFilterLoader,
+      showHeaderLoader,
 
       getSettings,
       logout: authStore.logout,
@@ -737,8 +758,11 @@ export const Component = inject(
       canCreateSecurity,
       startDropPreview,
 
+      isErrorAIAgentNotAvailable,
       currentTab: aiRoomStore.currentTab,
       aiConfig: settingsStore.aiConfig,
+
+      setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
     };
   },
 )(observer(Home));

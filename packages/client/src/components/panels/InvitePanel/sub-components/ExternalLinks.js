@@ -42,7 +42,9 @@ import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 // import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
+import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
@@ -74,7 +76,6 @@ const ExternalLinks = ({
   isUserTariffLimit,
   standalone,
   allowInvitingGuests,
-  isAIAgentsFolder,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -87,7 +88,7 @@ const ExternalLinks = ({
       toastr.success(
         `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
           days_count: 7,
-        })}`
+        })}`,
       );
 
       copyShareLink(link);
@@ -100,7 +101,7 @@ const ExternalLinks = ({
         roomId,
         "Invite",
         0,
-        shareLinks[0].id
+        shareLinks[0].id,
       ));
     return setShareLinks([]);
   };
@@ -187,8 +188,8 @@ const ExternalLinks = ({
   // const shareEmail = useCallback(
   //   (link) => {
   //     const { title, shareLink } = link;
-  //     const subject = t("SharingPanel:ShareEmailSubject", { title });
-  //     const body = t("SharingPanel:ShareEmailBody", { title, shareLink });
+  //     const subject = t("SharingPanel:ShareEmailSubject", { itemName: title });
+  //     const body = t("SharingPanel:ShareEmailBody", { itemName: title, shareLink });
 
   //     const mailtoLink = `mailto:${objectToGetParams({
   //       subject,
@@ -227,28 +228,32 @@ const ExternalLinks = ({
     true,
     isOwner,
     isAdmin,
-    standalone
+    standalone,
   );
 
   const filteredAccesses =
-    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+    roomType === -1
+      ? accesses
+      : roomType === RoomsType.AIRoom
+        ? filterNotReadOnlyOptions(accesses)
+        : filterPaidRoleOptions(accesses);
 
   const description =
     roomId === -1
       ? t("InviteViaLinkDescriptionAccounts", {
           productName: t("Common:ProductName"),
         })
-      : isAIAgentsFolder
-      ? allowInvitingGuests
-        ? t("InviteViaLinkDescriptionAgentGuest")
-        : t("InviteViaLinkDescriptionAgentMembers", {
-            productName: t("Common:ProductName"),
-          })
-      : allowInvitingGuests
-      ? t("InviteViaLinkDescriptionRoomGuest")
-      : t("InviteViaLinkDescriptionRoomMembers", {
-          productName: t("Common:ProductName"),
-        });
+      : roomType === RoomsType.AIRoom
+        ? allowInvitingGuests
+          ? t("InviteViaLinkDescriptionAgentGuest")
+          : t("InviteViaLinkDescriptionAgentMembers", {
+              productName: t("Common:ProductName"),
+            })
+        : allowInvitingGuests
+          ? t("InviteViaLinkDescriptionRoomGuest")
+          : t("InviteViaLinkDescriptionRoomMembers", {
+              productName: t("Common:ProductName"),
+            });
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
@@ -313,6 +318,7 @@ const ExternalLinks = ({
             onSelectAccess={onSelectAccess}
             containerRef={inputsRef}
             isOwner={isOwner}
+            isAdmin={isAdmin}
             isMobileView={isMobileView}
             isSelectionDisabled={isUserTariffLimit}
             selectionErrorText={<PaidQuotaLimitError />}
@@ -333,7 +339,6 @@ export default inject(
     peopleStore,
     currentQuotaStore,
     settingsStore,
-    treeFoldersStore,
   }) => {
     const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
@@ -341,7 +346,6 @@ export default inject(
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
     const { standalone, allowInvitingGuests } = settingsStore;
-    const { isAIAgentsFolder } = treeFoldersStore;
 
     return {
       roomId,
@@ -353,7 +357,6 @@ export default inject(
       isUserTariffLimit,
       standalone,
       allowInvitingGuests,
-      isAIAgentsFolder,
     };
-  }
+  },
 )(observer(ExternalLinks));

@@ -26,6 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+@use "@docspace/shared/styles/variables";
+
 .modalBody {
   display: flex;
   flex-direction: column;
@@ -43,4 +45,11 @@
   background: var(--ai-provider-key-hint-bg-color);
   color: var(--ai-provider-key-hint-color);
   margin-bottom: 4px;
+}
+
+.fieldHint {
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 4px;
+  color: variables.$gray;
 }

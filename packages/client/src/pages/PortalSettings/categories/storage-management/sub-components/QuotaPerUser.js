@@ -49,6 +49,10 @@ const QuotaPerUserComponent = (props) => {
       isQuotaSet={isDefaultUsersQuotaSet}
       tabIndex={2}
       dataTestId="quota_user"
+      toggleDescription={t("UserDefaultQuotaDescription", {
+        productName: t("Common:ProductName"),
+        sectionName: t("Common:MyDocuments"),
+      })}
     />
   );
 };

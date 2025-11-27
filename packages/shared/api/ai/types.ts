@@ -28,34 +28,34 @@ import type { TCreatedBy, TPathParts } from "../../types";
 import type { TFile, TFolder } from "../files/types";
 import type { TRoom } from "../rooms/types";
 import type {
-	ContentType,
-	KnowledgeType,
-	ProviderType,
-	RoleType,
-	ServerType,
-	WebSearchType,
+  ContentType,
+  KnowledgeType,
+  ProviderType,
+  RoleType,
+  ServerType,
+  WebSearchType,
 } from "./enums";
 
 export type TCreateAiProvider = {
-	type: ProviderType;
-	title: string;
-	key: string;
-	url: string;
+  type: ProviderType;
+  title: string;
+  key: string;
+  url: string;
 };
 
 export type TAiProvider = {
-	id: number;
-	title: string;
-	type: ProviderType;
-	url: string;
-	createdOn: string;
-	modifiedOn: string;
+  id: number;
+  title: string;
+  type: ProviderType;
+  url: string;
+  createdOn: string;
+  modifiedOn: string;
 };
 
 export type TUpdateAiProvider = {
-	title?: TCreateAiProvider["title"];
-	key?: TCreateAiProvider["key"];
-	url?: TCreateAiProvider["url"];
+  title?: TCreateAiProvider["title"];
+  key?: TCreateAiProvider["key"];
+  url?: TCreateAiProvider["url"];
 };
 
 export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
@@ -63,179 +63,182 @@ export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
 export type TProviderTypeWithUrl = Pick<TAiProvider, "type" | "url">;
 
 export type TModel = {
-	providerId: TAiProvider["id"];
-	providerTitle: TAiProvider["title"];
-	modelId: string;
+  providerId: TAiProvider["id"];
+  providerTitle: TAiProvider["title"];
+  modelId: string;
+  name?: string;
 };
 
 export type TModelList = TModel[];
 
 export type TChat = {
-	id: string;
-	title: string;
-	createdOn: string;
-	modifiedOn: string;
-	createdBy: TCreatedBy;
+  id: string;
+  title: string;
+  createdOn: string;
+  modifiedOn: string;
+  createdBy: TCreatedBy;
 };
 
 export type TToolCallResultSourceData = {
-	title: string;
-	text: string;
-	fileId?: number;
-	url?: string; // external page url
-	relativeUrl?: string; // knowledge doc url
-	faviconUrl?: string;
+  title: string;
+  text: string;
+  fileId?: number;
+  url?: string; // external page url
+  relativeUrl?: string; // knowledge doc url
+  faviconUrl?: string;
 };
 
 export type TToolCallResultSource = {
-	data: TToolCallResultSourceData | TToolCallResultSourceData[];
-	error?: string;
+  data: TToolCallResultSourceData | TToolCallResultSourceData[];
+  error?: string;
 };
 
 export type TToolCallContent = {
-	type: ContentType.Tool;
-	arguments: Record<string, unknown>;
-	name: string;
-	result?: Record<string, unknown> | TToolCallResultSource;
-	callId?: string;
-	mcpServerInfo?: {
-		serverId: string;
-		serverName: string;
-		serverType: ServerType;
-		icon: {
-			icon48: string;
-			icon32: string;
-			icon24: string;
-			icon16: string;
-		};
-	};
-	managed?: boolean;
+  type: ContentType.Tool;
+  arguments: Record<string, unknown>;
+  name: string;
+  result?: Record<string, unknown> | TToolCallResultSource;
+  callId?: string;
+  mcpServerInfo?: {
+    serverId: string;
+    serverName: string;
+    serverType: ServerType;
+    icon: {
+      icon48: string;
+      icon32: string;
+      icon24: string;
+      icon16: string;
+    };
+  };
+  managed?: boolean;
 };
 
 export type TContent =
-	| {
-			type: ContentType.Text;
-			text: string;
-	  }
-	| TToolCallContent
-	| {
-			type: ContentType.Files;
-			id: number;
-			title: string;
-			extension: string;
-	  };
+  | {
+      type: ContentType.Text;
+      text: string;
+    }
+  | TToolCallContent
+  | {
+      type: ContentType.Files;
+      id: number;
+      title: string;
+      extension: string;
+    };
 
 export type TMessage = {
-	role: RoleType;
-	contents: TContent[];
-	createdOn: string;
-	id?: number;
+  role: RoleType;
+  contents: TContent[];
+  createdOn: string;
+  id?: number;
 };
 
 export type TMCPTool = {
-	name: string;
-	enabled: boolean;
+  name: string;
+  enabled: boolean;
 };
 
 export type TServer = {
-	id: string;
-	name: string;
-	serverType: ServerType;
-	description?: string;
-	icon?: {
-		icon48: string;
-		icon32: string;
-		icon24: string;
-		icon16: string;
-	};
-	enabled?: boolean;
-	connected?: boolean;
-	headers: Record<string, string>;
-	endpoint: string;
-	authorizationEndpoint?: string;
+  id: string;
+  name: string;
+  serverType: ServerType;
+  description?: string;
+  icon?: {
+    icon48: string;
+    icon32: string;
+    icon24: string;
+    icon16: string;
+  };
+  enabled?: boolean;
+  connected?: boolean;
+  headers: Record<string, string>;
+  endpoint: string;
+  authorizationEndpoint?: string;
 };
 
 export type TVectorizeOperation = {
-	error: string;
-	id: string;
-	isCompleted: boolean;
-	percentage: number;
-	status: number;
+  error: string;
+  id: string;
+  isCompleted: boolean;
+  percentage: number;
+  status: number;
 };
 
 export type TAddNewServer = {
-	endpoint: string;
-	name: string;
-	description: string;
-	headers: Record<string, string>;
-	icon: string;
+  endpoint: string;
+  name: string;
+  description: string;
+  headers: Record<string, string>;
+  icon: string;
 };
 
 export type TUpdateServer = {
-	endpoint?: string;
-	name?: string;
-	description?: string;
-	headers?: Record<string, string>;
-	icon?: string;
-	updateIcon?: boolean;
+  endpoint?: string;
+  name?: string;
+  description?: string;
+  headers?: Record<string, string>;
+  icon?: string;
+  updateIcon?: boolean;
 };
 
 export type WebSearchConfig = {
-	enabled: boolean;
-	type: WebSearchType;
-	key?: string;
+  enabled: boolean;
+  type: WebSearchType;
+  key?: string;
 };
 
 export type KnowledgeConfig = {
-	type: KnowledgeType;
-	key?: string;
+  type: KnowledgeType;
+  key?: string;
 };
 
 export type TAIConfig = {
-	vectorizationEnabled: boolean;
-	webSearchEnabled: boolean;
-	knowledgeSearchToolName: string;
-	webSearchToolName: string;
-	webCrawlingToolName: string;
-	aiReady: boolean;
-	embeddingModel: string;
+  vectorizationEnabled: boolean;
+  webSearchEnabled: boolean;
+  knowledgeSearchToolName: string;
+  webSearchToolName: string;
+  webCrawlingToolName: string;
+  aiReady: boolean;
+  embeddingModel: string;
+  portalMcpServerId: string;
 };
 
 export type TAgent = TRoom;
 
 export type TAgentLogo = {
-	tmpFile: string;
-	height: number;
-	width: number;
-	x: number;
-	y: number;
+  tmpFile: string;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
 };
 
 export type TChatSettings = {
-	prompt?: string;
-	providerId?: TAiProvider["id"];
-	modelId?: TModel["modelId"];
+  prompt?: string;
+  providerId?: TAiProvider["id"];
+  modelId?: TModel["modelId"];
 };
 
 export type TCreateAgentData = {
-	title: string;
-	cover?: string;
-	color?: string;
-	tags?: string[];
-	logo?: TAgentLogo;
-	chatSettings?: TChatSettings;
-	quota?: number;
+  title: string;
+  cover?: string;
+  color?: string;
+  tags?: string[];
+  logo?: TAgentLogo;
+  chatSettings?: TChatSettings;
+  quota?: number;
+  attachDefaultTools?: boolean;
 };
 
 export type TGetAgents = {
-	files: TFile[];
-	folders: TAgent[];
-	current: TFolder;
-	pathParts: TPathParts[];
-	startIndex: number;
-	count: number;
-	total: number;
-	new: number;
+  files: TFile[];
+  folders: TAgent[];
+  current: TFolder;
+  pathParts: TPathParts[];
+  startIndex: number;
+  count: number;
+  total: number;
+  new: number;
 };
 
 export type TEditAgentData = Partial<TCreateAgentData>;

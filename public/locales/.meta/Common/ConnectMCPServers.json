@@ -3,7 +3,7 @@
   "content": "To use manage connection, you need to connect MCP Servers inside room settings",
   "content_en_sha1_hash": "9916fb4428aadf4315cfeb9f8dbe74b22141a3be",
   "created_at": "2025-10-27T16:14:24.623Z",
-  "updated_at": "2025-11-03T12:10:35.436Z",
+  "updated_at": "2025-11-13T07:58:08.572Z",
   "comment": {
     "text": "This text appears as a tooltip on a button that opens a dialog for managing connections to Minecraft: Pocket Edition (MCP) servers. It instructs users that they must connect to MCP servers within the room settings to manage connections.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 357,
-      "context": "onClick: () => {\n setShowManageConnections(true);\n },\n icon: ManageConnectionsReactSvgUrl,\n disabled: !showManageConnectionItem,\n getTooltipContent: () => <Text>{t(\"ConnectMCPServers\")}</Text>,\n },\n ]\n : []),\n ];\n }, [",
+      "line_number": 363,
+      "context": "onClick: () => {\n setShowManageConnections(true);\n },\n icon: ManageConnectionsReactSvgUrl,\n disabled: !showManageConnectionItem,\n getTooltipContent: () => <Text>{t(\"ConnectMCPServers\")}</Text>,\n },\n ]\n : []),\n ] as ContextMenuModel[];\n }, [",
       "module": "/packages/shared"
     }
   ],

@@ -29,22 +29,22 @@ import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 
 import api from "@docspace/shared/api";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { UserStore } from "@docspace/shared/store/UserStore";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { toastr } from "@docspace/shared/components/toast";
-import {
+import type {
   TFile,
   TFileSecurity,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
-import { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
-import { TTranslation } from "@docspace/shared/types";
+import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
+import type { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
+import type { TTranslation } from "@docspace/shared/types";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
-import {
+import type {
   IContextMenuItem,
   IContextMenuItemValidation,
   IEventListenerItem,
@@ -62,10 +62,10 @@ import {
   PluginScopes,
   PluginUsersType,
   PluginStatus,
-  PluginDevices,
+  type PluginDevices,
 } from "../helpers/plugins/enums";
 
-import SelectedFolderStore from "./SelectedFolderStore";
+import type SelectedFolderStore from "./SelectedFolderStore";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -236,10 +236,6 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
-    if (!this.userStore || !this.userStore.user) return;
-
-    const { isAdmin, isOwner } = this.userStore.user;
-
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
@@ -247,7 +243,7 @@ class PluginStore {
       this.plugins = [];
 
       const plugins = await api.plugins.getPlugins(
-        !isAdmin && !isOwner ? true : null,
+        null,
         abortController.signal,
       );
 

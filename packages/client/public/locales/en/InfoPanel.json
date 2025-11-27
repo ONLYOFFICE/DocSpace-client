@@ -1,6 +1,8 @@
 {
   "AddedRoomTags": "Tags added.",
   "Administration": "Administration",
+  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "See AI agents details here",
   "AndMoreLabel": "and <1>{{count}} more</1>",
   "CreationDate": "Creation date",
   "Data": "Data",
@@ -84,7 +86,6 @@
   "RoomLogoChanged": "Icon changed",
   "RoomRemoveUser": "User removed.",
   "RoomRenamed": "Room <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
-  "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "See rooms details here",
   "RoomToArchiveMove": "Room moved to {{sectionName}}",
   "RoomUpdateAccess": "has been assigned role",
@@ -98,6 +99,5 @@
   "SubmenuHistory": "History",
   "UserFileUpdated": "File updated.",
   "Users": "Users",
-  "Versions": "Versions",
-  "AIAgentsEmptyScreenTent": "See AI agents details here"
+  "Versions": "Versions"
 }

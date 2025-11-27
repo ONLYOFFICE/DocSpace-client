@@ -642,8 +642,12 @@ const SubMenu = (props: SubMenuProps) => {
         defaultContentOptions,
       );
     }
+    const toggleTooltipId = `context-menu-item-toggle-tooltip-${item.key}`;
+    const itemTooltipId = `context-menu-item-tooltip-${item.key}`;
 
     if (item.withToggle) {
+      const tooltipTargetId = item.tooltipTarget === "toggle" ? toggleTooltipId : itemTooltipId;
+
       return (
         <>
           <li
@@ -659,11 +663,7 @@ const SubMenu = (props: SubMenuProps) => {
             onMouseDown={onMouseDown}
             onMouseEnter={(e) => onItemMouseEnter(e, item)}
             onMouseLeave={() => onItemMouseLeave(item)}
-            data-tooltip-id={
-              item.disabled
-                ? `context-menu-item-tooltip-${item.key}`
-                : undefined
-            }
+            data-tooltip-id={item.disabled ? itemTooltipId : undefined}
           >
             {content}
             <ToggleButton
@@ -671,13 +671,14 @@ const SubMenu = (props: SubMenuProps) => {
               onChange={onClick}
               noAnimation
               isDisabled={item?.disabled ?? false}
+              dataTooltipId={item.disabled ? toggleTooltipId : undefined}
             />
           </li>
           {item.disabled && item.getTooltipContent ? (
             <Tooltip
               className="context-menu-item-tooltip"
               openOnClick={isTouchDevice}
-              id={`context-menu-item-tooltip-${item.key}`}
+              id={tooltipTargetId}
               getContent={item.getTooltipContent}
               place="bottom"
               zIndex={1003}
@@ -702,9 +703,7 @@ const SubMenu = (props: SubMenuProps) => {
           onMouseDown={onMouseDown}
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
           onMouseLeave={() => onItemMouseLeave(item)}
-          data-tooltip-id={
-            item.disabled ? `context-menu-item-tooltip-${item.key}` : undefined
-          }
+          data-tooltip-id={item.disabled ? itemTooltipId : undefined}
         >
           {content}
         </li>
@@ -712,7 +711,7 @@ const SubMenu = (props: SubMenuProps) => {
           <Tooltip
             float
             openOnClick={isTouchDevice}
-            id={`context-menu-item-tooltip-${item.key}`}
+            id={itemTooltipId}
             getContent={item.getTooltipContent}
             place="bottom-end"
             zIndex={1003}

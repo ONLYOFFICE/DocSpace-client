@@ -32,17 +32,16 @@ import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import PublicRoomBar from "../../../public-room-bar";
 
+import { ChatInfoBlockProps } from "../../Chat.types";
 import styles from "./ChatInfoBlock.module.scss";
 
-type Props = {
-  standalone: boolean;
-  isDocSpaceAdmin: boolean;
-};
-
-export const ChatInfoBlock = ({ standalone, isDocSpaceAdmin }: Props) => {
+export const ChatInfoBlock = ({
+  standalone,
+  isPortalAdmin,
+}: ChatInfoBlockProps) => {
   const { t } = useTranslation("Common");
 
-  const bodyText = !isDocSpaceAdmin
+  const bodyText = !isPortalAdmin
     ? t("Common:AIDisabledInfoBlockUserDescription", {
         productName: t("Common:ProductName"),
       })

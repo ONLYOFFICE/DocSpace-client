@@ -3,7 +3,7 @@
   "content": "Template available to everyone",
   "content_en_sha1_hash": "e71f8fb13ce6cf3f24e0a6866e0de334d336c883",
   "created_at": "2025-05-19T21:30:56.223Z",
-  "updated_at": "2025-11-03T12:10:34.983Z",
+  "updated_at": "2025-11-13T07:42:11.145Z",
   "comment": {
     "text": "This translation key is used to display the text \"Template available to everyone\" in a UI component, specifically in a dialog box that allows users to control access to templates. The text appears as the header and body of a public room bar. Translators should focus on making this text readable and clear for diverse user groups.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 124,
+      "line_number": 127,
       "context": "{`${t(\"Files:AccessToTemplate\")}:`}\n </Text>\n \n {isAvailable ? (\n <PublicRoomBar\n headerText={t(\"Files:TemplateAvailable\")}\n bodyText={\n <>\n <div className=\"template-access_description\">\n {t(\"Files:TemplateAvailableDescription\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     },

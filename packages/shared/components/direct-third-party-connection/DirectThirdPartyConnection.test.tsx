@@ -83,6 +83,11 @@ vi.mock("../files-selector-input", () => ({
   ),
 }));
 
+vi.mock("../../selectors/Files", () => ({
+  __esModule: true,
+  default: () => <div data-testid="files-selector">Files Selector</div>,
+}));
+
 vi.mock("react-i18next", () => ({
   useTranslation: () => {
     return {

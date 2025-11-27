@@ -40,6 +40,7 @@ type PickedScrollbarLibraryProps = Pick<
   | "translateContentSizeYToHolder"
   | "translateContentSizeXToHolder"
   | "translateContentSizesToHolder"
+  | "rtl"
 >;
 
 export type ScrollbarProps = PickedScrollbarLibraryProps & {

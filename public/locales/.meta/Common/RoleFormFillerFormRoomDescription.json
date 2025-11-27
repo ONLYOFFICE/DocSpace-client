@@ -3,7 +3,7 @@
   "content": "Form fillers can fill out forms and view only their completed/started forms within the Complete and In Process folders.",
   "content_en_sha1_hash": "feefe7fdf044fbc2fbabfaea05d182d09dbe37d8",
   "created_at": "2025-05-19T21:30:48.048Z",
-  "updated_at": "2025-11-03T12:10:35.531Z",
+  "updated_at": "2025-11-17T11:52:35.889Z",
   "comment": {
     "text": "Form fillers can view their completed and started forms within the Complete and In Process folders. This description is used to inform form fillers about the permissions they have in the Form Room. It appears in UI elements related to file access options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 80,
+      "line_number": 82,
       "context": "};\n \n const getFormFillerDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleFormFillerFormRoomDescription\");\n default:\n return t(\"Common:RoleFormFillerDescription\");\n }\n };",
       "module": "/packages/shared"
     }

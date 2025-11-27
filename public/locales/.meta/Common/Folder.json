@@ -3,7 +3,7 @@
   "content": "Folder",
   "content_en_sha1_hash": "30baa24967e08965d1594408031f0324ae11ccac",
   "created_at": "2025-05-19T21:30:45.416Z",
-  "updated_at": "2025-11-03T12:10:34.868Z",
+  "updated_at": "2025-11-17T11:52:35.100Z",
   "comment": {
     "text": "This translation key is used to display the label \"Folder\" in various UI components, such as buttons and icons. It is part of a folder-related functionality used in the application, where it appears in dropdown menus and action buttons for creating and uploading folders.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 401,
+      "line_number": 430,
       "context": "icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",\n label: t(\"Common:Folder\"),\n icon: FolderReactSvgUrl,\n onClick: () => actions.onUploadAction(\"folder\"),\n },\n ],\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 401,
+      "line_number": 430,
       "context": "icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",\n label: t(\"Common:Folder\"),\n icon: FolderReactSvgUrl,\n onClick: () => actions.onUploadAction(\"folder\"),\n },\n ],\n };",
       "module": "/packages/client"
     },

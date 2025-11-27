@@ -58,8 +58,10 @@ const Main = (props) => {
     let correctHeight = window.innerHeight;
 
     // 48 - its nav menu with burger, logo and user avatar
+    // 3 - its IndicatorLoader
     if (isMobileUtils() && !isFrame) {
       correctHeight -= 48;
+      correctHeight -= 3;
     }
 
     setMainHeight(correctHeight);

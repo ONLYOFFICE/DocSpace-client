@@ -61,6 +61,7 @@ export type TAgentParams = {
   mcpServers?: string[];
   mcpServersInitial?: string[];
   quota?: number;
+  attachDefaultTools?: boolean;
 };
 
 export const getStartAgentParams = (title: string): TAgentParams => {
@@ -82,7 +83,7 @@ export const getStartAgentParams = (title: string): TAgentParams => {
 
 export const getFetchedAgentParams = (
   item: TAgent,
-  isDefaultAgentsQuotaSet?: boolean,
+  isDefaultAIAgentsQuotaSet?: boolean,
 ): TAgentParams => {
   const startTags = Object.values(item.tags);
   const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
@@ -106,7 +107,7 @@ export const getFetchedAgentParams = (
     prompt: item.chatSettings?.prompt,
     providerId: item.chatSettings?.providerId,
     modelId: item.chatSettings?.modelId,
-    ...(isDefaultAgentsQuotaSet && {
+    ...(isDefaultAIAgentsQuotaSet && {
       quota: item.quotaLimit,
     }),
   };

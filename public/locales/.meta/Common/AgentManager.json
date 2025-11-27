@@ -3,7 +3,7 @@
   "content": "Agent manager",
   "content_en_sha1_hash": "9eb4782eb2942928e3b10def6aee29e8e6780164",
   "created_at": "2025-11-03T12:10:13.383Z",
-  "updated_at": "2025-11-03T12:14:48.417Z",
+  "updated_at": "2025-11-17T11:52:35.400Z",
   "comment": {
     "text": "This key refers to the text \"Agent manager,\" likely used as a label or title for a role or permission related to managing agents within a room or organization. It appears in UI elements like buttons or dialogs, granting access to agent management functions. Translators should ensure the description accurately reflects the agent management capabilities.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 139,
+      "line_number": 141,
       "context": ": ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n agentManager: {\n key: \"agentManager\",\n label: t(\"Common:AgentManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserAgentMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),",
       "module": "/packages/shared"
     }

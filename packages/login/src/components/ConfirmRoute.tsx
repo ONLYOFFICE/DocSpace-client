@@ -84,8 +84,9 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     if (isAuthenticated) i18n.changeLanguage(lng);
   }, [isAuthenticated, i18n]);
 
-
-  const isGuestShareLinkInvalid = confirmLinkParams.type === "GuestShareLink" && confirmLinkResult.result === ValidationResult.Invalid;
+  const isGuestShareLinkInvalid =
+    confirmLinkParams.type === "GuestShareLink" &&
+    confirmLinkResult.result === ValidationResult.Invalid;
 
   useEffect(() => {
     if (isGuestShareLinkInvalid) {
@@ -110,6 +111,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
         const roomData = {
           roomId: confirmLinkResult?.roomId,
           title: confirmLinkResult?.title,
+          isAgent: confirmLinkResult?.isAgent,
         };
         setStateData((val) => ({
           ...val,

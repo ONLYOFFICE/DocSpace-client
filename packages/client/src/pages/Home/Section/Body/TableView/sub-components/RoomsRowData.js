@@ -67,9 +67,10 @@ const RoomsRowDataComponent = (props) => {
     t,
   } = props;
 
+  const storageColumns = localStorage.getItem(tableStorageName);
   const lastColumn = useMemo(
     () => getLastColumn(tableStorageName),
-    [tableStorageName],
+    [tableStorageName, storageColumns],
   );
 
   const quickButtonsComponentNode = (

@@ -3,7 +3,7 @@
   "content": "Confirm your email change",
   "content_en_sha1_hash": "5355ee7b87f93930e62bd8a67820c70fc7278aef",
   "created_at": "2025-08-21T11:22:38.897Z",
-  "updated_at": "2025-08-21T11:23:12.992Z",
+  "updated_at": "2025-11-03T12:10:35.421Z",
   "comment": {
     "text": "This text appears as a title within the login flow, specifically indicating that the user's email address has been successfully changed. It's displayed prominently to confirm the email update and reassure the user. Translators should ensure the tone remains positive and informative.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
-      "line_number": 99,
+      "line_number": 90,
       "context": "fontSize=\"21px\"\n fontWeight={700}\n textAlign=\"center\"\n className=\"greeting-title confirm-email-change\"\n >\n {t(\"Login:ConfirmEmailChange\")}\n </Text>\n \n <Text fontSize=\"13px\" fontWeight={400} className=\"confirm-email-change\">\n <Trans\n t={t}",
       "module": "/packages/login"
     }

@@ -26,7 +26,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { v4 as uuidv4 } from "uuid";
+import { uuid as uuidv4 } from "../../../utils/";
 
 import { TableBody } from "./TableBody";
 import { TableRow } from "../table-row";

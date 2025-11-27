@@ -1,6 +1,6 @@
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import PublicRoomBar from "./index";
 
@@ -8,11 +8,11 @@ describe("PublicRoomBar", () => {
   const defaultProps = {
     headerText: "Test Header",
     bodyText: "Test Body",
-    onClose: jest.fn(),
+    onClose: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders with default props", () => {
@@ -40,7 +40,7 @@ describe("PublicRoomBar", () => {
   });
 
   it("does not render close button when onClose is not provided", () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // biome-ignore lint/correctness/noUnusedVariables: TODO fix
     const { onClose, ...propsWithoutClose } = defaultProps;
     render(<PublicRoomBar {...propsWithoutClose} />);
 
@@ -54,7 +54,7 @@ describe("PublicRoomBar", () => {
     const container = screen
       .getByText("Test Header")
       .closest("div[class*='container']");
-    expect(container).toHaveClass("barVisible");
+    expect(container?.className).toContain("barVisible");
   });
 
   it("renders header as div when headerText is not a string", () => {

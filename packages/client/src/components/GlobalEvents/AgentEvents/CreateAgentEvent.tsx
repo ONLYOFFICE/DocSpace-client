@@ -28,13 +28,15 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
+
 import TagsStore from "SRC_DIR/store/TagsStore";
 import CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import { CreateAgentDialog } from "../../dialogs";
-import { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 type CreateRoomEventProps = {
   title: string;
@@ -52,6 +54,8 @@ type CreateRoomEventProps = {
   setCover: DialogsStore["setCover"];
 
   selectionItems: FilesStore["selection"];
+
+  aiConfig: SettingsStore["aiConfig"];
 };
 
 const CreateRoomEvent = ({
@@ -69,6 +73,8 @@ const CreateRoomEvent = ({
   setCover,
 
   selectionItems,
+
+  aiConfig,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
@@ -103,6 +109,8 @@ const CreateRoomEvent = ({
     };
   }, []);
 
+  if (!visible) return null;
+
   return (
     <CreateAgentDialog
       title={title}
@@ -111,6 +119,7 @@ const CreateRoomEvent = ({
       onCreate={onCreate}
       fetchedTags={fetchedTags}
       isLoading={isLoading}
+      portalMcpServerId={aiConfig?.portalMcpServerId ?? ""}
     />
   );
 };
@@ -122,6 +131,7 @@ export default inject(
     dialogsStore,
     filesStore,
     currentQuotaStore,
+    settingsStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -146,6 +156,8 @@ export default inject(
       setCover,
       selectionItems,
       isDefaultRoomsQuotaSet,
+
+      aiConfig: settingsStore.aiConfig,
     };
   },
 )(observer(CreateRoomEvent));

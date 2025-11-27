@@ -44,6 +44,7 @@ import {
   ErrorFile,
   FileActions,
 } from "SRC_DIR/components/PanelComponents";
+import { isAIAgents } from "../../../helpers/plugins/utils";
 
 class FileRow extends Component {
   constructor(props) {
@@ -363,7 +364,7 @@ export default inject(
     let isPlugin = false;
     let onPluginClick = null;
 
-    if (fileItemsList && enablePlugins) {
+    if (!isAIAgents() && fileItemsList && enablePlugins) {
       let currPluginItem = null;
 
       fileItemsList.forEach((i) => {

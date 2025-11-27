@@ -35,19 +35,21 @@ import { TAgentParams } from "@docspace/shared/utils/aiAgents";
 type RoomQuotaProps = {
   setRoomParams: (roomParams: TAgentParams | TRoomParams) => void;
   roomParams: TRoomParams | TAgentParams;
-  defaultRoomsQuota?: number;
+  defaultQuota?: number;
   isEdit?: boolean;
   isTemplate?: boolean;
   isLoading: boolean;
+  isAgent?: boolean;
 };
 
 const RoomQuota = ({
   setRoomParams,
   roomParams,
-  defaultRoomsQuota,
+  defaultQuota,
   isEdit,
   isTemplate,
   isLoading,
+  isAgent,
 }: RoomQuotaProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
@@ -60,12 +62,14 @@ const RoomQuota = ({
   return (
     <QuotaForm
       label={t("Common:StorageQuota")}
-      description={t("StorageDescription")}
-      checkboxLabel={t("DisableRoomQuota")}
-      onSetQuotaBytesSize={onSetQuotaBytesSize}
-      initialSize={
-        isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota!
+      description={
+        isAgent ? t("StorageDescriptionAgent") : t("StorageDescription")
       }
+      checkboxLabel={
+        isAgent ? t("DisableRoomQuotaAgent") : t("DisableRoomQuota")
+      }
+      onSetQuotaBytesSize={onSetQuotaBytesSize}
+      initialSize={isEdit || isTemplate ? defaultValue.current : defaultQuota!}
       isDisabled={
         isLoading ||
         ("storageLocation" in roomParams &&
@@ -77,8 +81,10 @@ const RoomQuota = ({
   );
 };
 
-export default inject(({ currentQuotaStore }: TStore) => {
-  const { defaultRoomsQuota } = currentQuotaStore;
+export default inject(
+  ({ currentQuotaStore }: TStore, { isAgent }: { isAgent?: boolean }) => {
+    const { defaultRoomsQuota, defaultAIAgentsQuota } = currentQuotaStore;
 
-  return { defaultRoomsQuota };
-})(observer(RoomQuota));
+    return { defaultQuota: isAgent ? defaultAIAgentsQuota : defaultRoomsQuota };
+  },
+)(observer(RoomQuota));

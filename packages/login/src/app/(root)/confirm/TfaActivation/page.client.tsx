@@ -32,6 +32,7 @@ import CheckSvgUrl from "PUBLIC_DIR/images/check.toast.react.svg?url";
 
 import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import Image from "next/image";
 
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -84,7 +85,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
   useEffect(() => {
     proxyBaseUrl.current = combineUrl(
       window.ClientConfig?.proxy?.url,
-      "/profile",
+      "/profile"
     );
   }, []);
 
@@ -246,7 +247,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
       <FormWrapper id="tfa-activation-form">
         <div className="app-code-wrapper">
           <div className="qrcode-wrapper">
-            <img src={qrCode} height="180px" width="180px" alt="QR-code" />
+            <Image src={qrCode} height={180} width={180} alt="QR-code" />
           </div>
           <div className="app-code-input">
             <FieldContainer

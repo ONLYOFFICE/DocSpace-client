@@ -27,7 +27,11 @@
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
 
-import { setDefaultUserQuota, setDefaultRoomQuota } from "../api/settings";
+import {
+  setDefaultUserQuota,
+  setDefaultRoomQuota,
+  setDefaultAIAgentQuota,
+} from "../api/settings";
 
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
@@ -407,6 +411,10 @@ class CurrentQuotasStore {
     return this.currentPortalQuota?.usersQuota?.enableQuota;
   }
 
+  get isDefaultAIAgentsQuotaSet() {
+    return this.currentPortalQuota?.aiAgentsQuota?.enableQuota;
+  }
+
   get isTenantCustomQuotaSet() {
     return this.currentPortalQuota?.tenantCustomQuota?.enableQuota;
   }
@@ -417,6 +425,10 @@ class CurrentQuotasStore {
 
   get defaultUsersQuota() {
     return this.currentPortalQuota?.usersQuota?.defaultQuota;
+  }
+
+  get defaultAIAgentsQuota() {
+    return this.currentPortalQuota?.aiAgentsQuota?.defaultQuota;
   }
 
   get tenantCustomQuota() {
@@ -500,6 +512,24 @@ class CurrentQuotasStore {
       const toastrText = isEnable
         ? t("RoomQuotaEnabled")
         : t("RoomQuotaDisabled");
+
+      toastr.success(toastrText);
+    } catch (e: unknown) {
+      toastr.error(e as TData);
+    }
+  };
+
+  setAIAgentQuota = async (
+    quota: string | number,
+    t: (key: string) => string,
+  ) => {
+    const isEnable = +quota !== -1;
+
+    try {
+      await setDefaultAIAgentQuota(isEnable, +quota);
+      const toastrText = isEnable
+        ? t("AIAgentQuotaEnabled")
+        : t("AIAgentQuotaDisabled");
 
       toastr.success(toastrText);
     } catch (e: unknown) {

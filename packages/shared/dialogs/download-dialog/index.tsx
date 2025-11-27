@@ -402,23 +402,25 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     setDownloadDialogVisible(false);
   };
 
-  const getItemIcon = (item: TDownloadedFile) => {
-    const extension = "fileExst" in item && item?.fileExst;
-    const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
+  const handleIconBeforeInjection = useCallback((svg: SVGSVGElement) => {
+    svg.setAttribute("style", "margin-top: 4px; margin-inline-end: 12px;");
+  }, []);
 
-    return (
-      <ReactSVG
-        beforeInjection={(svg) => {
-          svg.setAttribute(
-            "style",
-            "margin-top: 4px; margin-inline-end: 12px;",
-          );
-        }}
-        src={icon}
-        loading={LoadingPlaceholder}
-      />
-    );
-  };
+  const getItemIcon = useCallback(
+    (item: TDownloadedFile) => {
+      const extension = isFile(item) ? item.fileExst : undefined;
+      const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
+
+      return (
+        <ReactSVG
+          beforeInjection={handleIconBeforeInjection}
+          src={icon}
+          loading={LoadingPlaceholder}
+        />
+      );
+    },
+    [getFolderIcon, getIcon, handleIconBeforeInjection],
+  );
 
   const checkedLength = getCheckedFileLength();
 

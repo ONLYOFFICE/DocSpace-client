@@ -84,11 +84,14 @@ const useIntegration = ({
 
   const getThirdPartyData = useCallback(async () => {
     const urlParts = window.location.href.split("?");
-    if (urlParts.length > 1 && isThirdPartyAvailable) {
+    if (urlParts.length > 1) {
       const queryValue = urlParts[1].split("=")[1];
-      await fetchAndSetConsumers?.(queryValue).then((isConsumerExist) => {
-        isConsumerExist && setOpenThirdPartyModal?.(true);
-      });
+      await fetchAndSetConsumers?.(queryValue, isThirdPartyAvailable).then(
+        (isConsumerExist) => {
+          console.log("isConsumerExist:", isConsumerExist);
+          isConsumerExist && setOpenThirdPartyModal?.(true);
+        },
+      );
     } else {
       await getConsumers?.();
     }

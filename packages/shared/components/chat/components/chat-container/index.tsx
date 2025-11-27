@@ -25,33 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { ChatContainerProps } from "../../Chat.types";
-
 import styles from "./ChatContainer.module.scss";
 
 const ChatContainer = ({ children }: ChatContainerProps) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    const sectionStickyContainer = document.getElementsByClassName(
-      "section-sticky-container",
-    );
-
-    const mainBar = document.getElementById("main-bar");
-
-    const resizeObserver = new ResizeObserver((el) => {
-      if (!containerRef.current || !el[0]) return;
-
-      containerRef.current.style.height = `${window.innerHeight - el[0].contentRect.height - (mainBar?.clientHeight || 0) - 40}px`;
-    });
-
-    if (sectionStickyContainer[0])
-      resizeObserver.observe(sectionStickyContainer[0] as HTMLElement);
-  }, []);
-
   return (
-    <div ref={containerRef} className={styles.chatContainer}>
+    <div className={classNames(styles.chatContainer, "chat-container")}>
       {children}
     </div>
   );

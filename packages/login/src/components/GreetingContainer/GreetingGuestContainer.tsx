@@ -27,14 +27,12 @@
 "use client";
 
 import { Trans, useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { getLogoUrl } from "@docspace/shared/utils";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import { DEFAULT_GUEST_TEXT } from "@/utils/constants";
 import { GreetingContainer } from "./GreetingCreateUserContainer/GreetingCreateUserContainer.styled";
+import { Logo } from "../Logo";
 
 type GreetingGuestContainerProps = {
   displayName?: string;
@@ -46,18 +44,10 @@ export const GreetingGuestContainer = ({
   culture,
 }: GreetingGuestContainerProps) => {
   const { t } = useTranslation(["Common"]);
-  const theme = useTheme();
-
-  const logoUrl = getLogoUrl(
-    WhiteLabelLogoType.LoginPage,
-    !theme.isBase,
-    false,
-    culture,
-  );
 
   return (
     <GreetingContainer>
-      <img src={logoUrl} className="portal-logo guest" alt="greeting-logo" />
+      <Logo culture={culture} className="guest" />
       <div className="tooltip guest">
         <Text fontSize="16px">
           <Trans

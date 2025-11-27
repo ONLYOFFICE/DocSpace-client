@@ -3,7 +3,7 @@
   "content": "OAuth 2.0",
   "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
   "created_at": "2025-05-19T21:30:53.924Z",
-  "updated_at": "2025-10-27T16:14:33.529Z",
+  "updated_at": "2025-11-06T18:29:15.825Z",
   "comment": {
     "text": "OAuth 2.0 is a translation key used to display the English content \"OAuth 2.0\" in various UI contexts throughout the application, primarily for title settings and button labels, such as on create and edit pages of OAuth-related settings.",
     "is_auto": true,
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 584,
+      "line_number": 594,
       "context": "{\n id: \"portal-settings_catalog-oauth\",\n key: \"8-4\",\n icon: \"\",\n link: \"oauth\",\n tKey: \"OAuth:OAuth\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-api-keys\",\n key: \"8-5\",",
       "module": "/packages/client"
     }

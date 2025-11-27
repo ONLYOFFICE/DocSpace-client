@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
 import { ViewerWrapper } from ".";
 import {
@@ -37,8 +37,8 @@ import type { TFile } from "../../../../api/files/types";
 import type { PlaylistType } from "../../MediaViewer.types";
 
 // Mock the Viewer component
-jest.mock("../Viewer", () => ({
-  Viewer: jest.fn(
+vi.mock("../Viewer", () => ({
+  Viewer: vi.fn(
     ({
       isImage,
       isPdf,
@@ -98,8 +98,8 @@ jest.mock("../Viewer", () => ({
 }));
 
 // Mock the VirtualList component
-jest.mock("../../../drop-down/sub-components/VirtualList", () => ({
-  VirtualList: jest.fn(({ children }) => <div>{children}</div>),
+vi.mock("../../../drop-down/sub-components/VirtualList", () => ({
+  VirtualList: vi.fn(({ children }) => <div>{children}</div>),
 }));
 
 describe("ViewerWrapper", () => {
@@ -228,13 +228,13 @@ describe("ViewerWrapper", () => {
     currentDeviceType: DeviceType.desktop,
     isPublicFile: false,
     autoPlay: false,
-    onClose: jest.fn(),
-    onNextClick: jest.fn(),
-    onPrevClick: jest.fn(),
+    onClose: vi.fn(),
+    onNextClick: vi.fn(),
+    onPrevClick: vi.fn(),
     contextModel: () => [],
-    onDeleteClick: jest.fn(),
-    onDownloadClick: jest.fn(),
-    onSetSelectionFile: jest.fn(),
+    onDeleteClick: vi.fn(),
+    onDownloadClick: vi.fn(),
+    onSetSelectionFile: vi.fn(),
   };
 
   it("renders without crashing", () => {
@@ -284,7 +284,7 @@ describe("ViewerWrapper", () => {
   });
 
   it("calls onClose when close button is clicked", () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     const { container } = render(
       <ViewerWrapper {...baseProps} onClose={onClose} />,
     );
@@ -298,8 +298,8 @@ describe("ViewerWrapper", () => {
   });
 
   it("calls navigation functions correctly", () => {
-    const onNextClick = jest.fn();
-    const onPrevClick = jest.fn();
+    const onNextClick = vi.fn();
+    const onPrevClick = vi.fn();
     const { container } = render(
       <ViewerWrapper
         {...baseProps}
@@ -331,7 +331,7 @@ describe("ViewerWrapper", () => {
 
   it("handles context menu correctly", () => {
     const contextModel = () => [
-      { key: "download", label: "Download", onClick: jest.fn() },
+      { key: "download", label: "Download", onClick: vi.fn() },
     ];
     const { container } = render(
       <ViewerWrapper {...baseProps} contextModel={contextModel} />,

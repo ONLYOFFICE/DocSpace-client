@@ -3,7 +3,7 @@
   "content": "Select sections for import. They will appear in the corresponding sections of {{productName}}.",
   "content_en_sha1_hash": "fdb4147ce80c84acaac01c116f234f42d5e0b2a7",
   "created_at": "2025-05-19T21:30:51.687Z",
-  "updated_at": "2025-10-03T10:07:11.709Z",
+  "updated_at": "2025-11-18T14:41:49.923Z",
   "comment": {
     "text": "This translation key is used to describe the action of selecting sections for import in various data import steps. It explains that selected sections will appear in corresponding sections of {{productName}} and is typically displayed as part of a button label or dialog description.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 66,
+      "line_number": 70,
       "context": "/>\n {renderTooltip}\n </>\n );\n case 4:\n return t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n });\n case 5:\n return t(\"Settings:ImportProcessingDescription\");\n case 6:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 66,
+      "line_number": 70,
       "context": "/>\n {renderTooltip}\n </>\n );\n case 4:\n return t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n });\n case 5:\n return t(\"Settings:ImportProcessingDescription\");\n case 6:",
       "module": "/packages/client"
     }

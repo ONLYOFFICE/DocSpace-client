@@ -3,7 +3,7 @@
   "content": "Deactivate {{productName}}",
   "content_en_sha1_hash": "54fe2d3e5e6088fc60b02a8e670df55142d8e8e1",
   "created_at": "2025-05-19T21:30:52.177Z",
-  "updated_at": "2025-10-27T16:14:33.502Z",
+  "updated_at": "2025-11-06T18:29:15.801Z",
   "comment": {
     "text": "Deactivate {{productName}} is used to display a button label in the Portal Settings page, which allows users to deactivate portal access. The translation key appears on a category page where users can manage their account settings.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 616,
+      "line_number": 626,
       "context": "},\n {\n key: \"9-1\",\n icon: \"\",\n link: \"deactivation\",\n tKey: \"PortalDeactivation\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }

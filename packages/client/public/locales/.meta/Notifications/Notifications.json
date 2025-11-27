@@ -3,7 +3,7 @@
   "content": "Notifications",
   "content_en_sha1_hash": "753a22b2eb617204efee4644795034b8ace1ee14",
   "created_at": "2025-05-19T21:30:54.085Z",
-  "updated_at": "2025-09-10T10:05:43.335Z",
+  "updated_at": "2025-11-06T18:29:15.963Z",
   "comment": {
     "text": "The \"Notifications\" translation key is used to display the title of a section that contains notification-related content in a dialog. It appears as part of a Connect Dialog login interface and indicates that it holds notifications information.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
-      "line_number": 186,
+      "line_number": 187,
       "context": "await openLoginTab();\n },\n },\n {\n id: \"notifications\",\n name: t?.(\"Notifications:Notifications\"),\n content: <Notifications />,\n onClick: async () => {\n await getNotificationsData();\n },\n },",
       "module": "/packages/client"
     }

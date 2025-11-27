@@ -3,7 +3,7 @@
   "content": "Plugin SDK",
   "content_en_sha1_hash": "db5137721d3c3c4eeffdfb6c023f6c7d28a1ca04",
   "created_at": "2025-05-19T21:30:49.920Z",
-  "updated_at": "2025-10-27T16:14:33.541Z",
+  "updated_at": "2025-11-06T18:29:15.840Z",
   "comment": {
     "text": "The translation key \"PluginSDK\" refers to the name of a plugin SDK used in developer tools. It is displayed as a label on a settings page and appears in a category title. Translators should provide a clear and concise translation for this text to be used consistently across different languages and regions.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 568,
+      "line_number": 578,
       "context": "{\n id: \"portal-settings_catalog-plugin-sdk\",\n key: \"8-2\",\n icon: \"\",\n link: \"plugin-sdk\",\n tKey: \"PluginSDK\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-webhooks\",\n key: \"8-3\",",
       "module": "/packages/client"
     }

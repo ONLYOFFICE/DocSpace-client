@@ -51,6 +51,7 @@ import {
   getTags,
   getQuotaFilter,
   getFilterLocation,
+  getSharedBy,
 } from "@docspace/shared/components/filter/Filter.utils";
 
 import {
@@ -294,6 +295,7 @@ const SectionFilterContent = ({
         const filterType = getFilterType(data) || null;
 
         const authorType = getAuthorType(data);
+        const sharedBy = getSharedBy(data);
 
         const withSubfolders = getSearchParams(data);
         const withContent = getFilterContent(data);
@@ -301,6 +303,7 @@ const SectionFilterContent = ({
         const roomId = getRoomId(data);
 
         const newFilter = filter.clone();
+
         newFilter.page = 0;
 
         newFilter.filterType = filterType;
@@ -314,6 +317,8 @@ const SectionFilterContent = ({
           newFilter.authorType = authorType ? `user_${authorType}` : null;
           newFilter.excludeSubject = null;
         }
+
+        newFilter.sharedBy = sharedBy;
 
         newFilter.withSubfolders =
           withSubfolders === FilterKeys.excludeSubfolders ? null : "true";
@@ -774,6 +779,17 @@ const SectionFilterContent = ({
         });
       }
 
+      if (filter.sharedBy) {
+        const user = await getUser(filter.sharedBy);
+        const label = user.displayName;
+
+        filterValues.push({
+          key: filter.sharedBy,
+          group: FilterGroups.filterSharedBy,
+          label,
+        });
+      }
+
       if (filter.roomId) {
         const room = await getRoomInfo(filter.roomId);
         const label = room.title;
@@ -803,6 +819,7 @@ const SectionFilterContent = ({
     return filterValues;
   }, [
     filter.authorType,
+    filter.sharedBy,
     filter.roomId,
     filter.filterType,
     filter.excludeSubject,
@@ -829,6 +846,26 @@ const SectionFilterContent = ({
     t,
   ]);
 
+  const getSharedByFilter = React.useCallback(() => {
+    if (!isSharedWithMeFolder || isVisitor || isCollaborator) return [];
+
+    return [
+      {
+        key: FilterGroups.filterSharedBy,
+        group: FilterGroups.filterSharedBy,
+        label: t("Files:SharedBy"),
+        isHeader: true,
+      },
+      {
+        id: "filter_author-user-button",
+        key: FilterKeys.user,
+        group: FilterGroups.filterSharedBy,
+        displaySelectorType: "button",
+        label: t("Translations:ChooseFromList"),
+      },
+    ];
+  }, [t, isSharedWithMeFolder, isVisitor, isCollaborator]);
+
   const getAuthorFilter = React.useCallback(() => {
     const selectedFolder = getSelectedFolder();
 
@@ -839,7 +876,9 @@ const SectionFilterContent = ({
 
     if (isFolderSharedWithMe) return [];
 
-    if (isSharedWithMeFolder)
+    if (isSharedWithMeFolder) {
+      if (isVisitor || isCollaborator) return [];
+
       return [
         {
           key: FilterGroups.filterAuthor,
@@ -855,6 +894,7 @@ const SectionFilterContent = ({
           label: t("Translations:ChooseFromList"),
         },
       ];
+    }
 
     return [
       {
@@ -886,7 +926,7 @@ const SectionFilterContent = ({
             },
           ]),
     ];
-  }, [getSelectedFolder, isSharedWithMeFolder, isCollaborator, isVisitor]);
+  }, [t, getSelectedFolder, isSharedWithMeFolder, isCollaborator, isVisitor]);
 
   const getFilterData = React.useCallback(async () => {
     const quotaFilter = [
@@ -1287,7 +1327,11 @@ const SectionFilterContent = ({
     } else {
       const authorOption = getAuthorFilter();
 
+      const sharedByOption = getSharedByFilter();
+
       !isPublicRoom && filterOptions.push(...authorOption);
+
+      filterOptions.push(...sharedByOption);
       filterOptions.push(...typeOptions);
 
       if (isTrash) {
@@ -1391,6 +1435,7 @@ const SectionFilterContent = ({
     isVisitor,
     getContactsFilterData,
     getAuthorFilter,
+    getSharedByFilter,
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
@@ -1621,6 +1666,11 @@ const SectionFilterContent = ({
           newFilter.authorType = null;
           newFilter.excludeSubject = null;
         }
+
+        if (group === FilterGroups.filterSharedBy) {
+          newFilter.sharedBy = null;
+        }
+
         if (group === FilterGroups.filterRoom) {
           newFilter.roomId = null;
         }

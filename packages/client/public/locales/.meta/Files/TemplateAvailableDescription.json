@@ -3,7 +3,7 @@
   "content": "All {{productName}} and Room admins will be able to create rooms using this template.",
   "content_en_sha1_hash": "5cc4f0b063c2dbf6c3a972370231acb6b2137322",
   "created_at": "2025-05-19T21:30:56.228Z",
-  "updated_at": "2025-10-13T14:41:02.782Z",
+  "updated_at": "2025-11-13T07:42:11.146Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that admins and specific users can create rooms using a certain template. It appears in a UI component, likely a settings panel or dialog, where users can toggle access to the template feature. The purpose of this text is to provide context for the user.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 128,
+      "line_number": 131,
       "context": "<PublicRoomBar\n headerText={t(\"Files:TemplateAvailable\")}\n bodyText={\n <>\n <div className=\"template-access_description\">\n {t(\"Files:TemplateAvailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <Link\n className=\"template-access_link\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 355,
+      "line_number": 354,
       "context": "onChange={onAvailableChange}\n dataTestId=\"template_access_settings_available\"\n />\n </StyledSubHeader>\n <StyledDescription>\n {t(\"Files:TemplateAvailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </StyledDescription>\n </StyledBlock>\n <StyledBody isDisabled={isAvailable}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 355,
+      "line_number": 354,
       "context": "onChange={onAvailableChange}\n dataTestId=\"template_access_settings_available\"\n />\n </StyledSubHeader>\n <StyledDescription>\n {t(\"Files:TemplateAvailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </StyledDescription>\n </StyledBlock>\n <StyledBody isDisabled={isAvailable}>",
       "module": "/packages/client"
     },

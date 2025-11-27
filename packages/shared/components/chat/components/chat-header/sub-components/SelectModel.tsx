@@ -24,11 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { getAiModelName } from "../../../../../utils/ai";
+
 import { RectangleSkeleton } from "../../../../../skeletons/rectangle";
 
 import { Text } from "../../../../text";
 
-import { SelectModelProps } from "../../../Chat.types";
+import type { SelectModelProps } from "../../../Chat.types";
 
 import styles from "../ChatHeader.module.scss";
 
@@ -44,6 +46,8 @@ const SelectModel = ({ selectedModel, isLoading }: SelectModelProps) => {
     );
   }
 
+  const name = getAiModelName(selectedModel);
+
   return (
     <Text
       fontSize="13px"
@@ -51,7 +55,7 @@ const SelectModel = ({ selectedModel, isLoading }: SelectModelProps) => {
       lineHeight="20px"
       className={styles.selectModel}
     >
-      {selectedModel}
+      {name}
     </Text>
   );
 };

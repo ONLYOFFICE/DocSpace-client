@@ -44,6 +44,8 @@ import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
 
+import { showForcedInfoPanelLoader } from "SRC_DIR/helpers/info-panel";
+
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
 import FilesSettingsStore from "./FilesSettingsStore";
@@ -102,6 +104,10 @@ class InfoPanelStore {
   }
 
   setIsVisible = (visiable: boolean) => {
+    const selectedFolderIsAgentOrFolderInAgent =
+      this.selectedFolderStore?.parentRoomType ||
+      this.selectedFolderStore?.roomType;
+
     const selectedFolderIsRoomOrFolderInRoom =
       this.selectedFolderStore &&
       !this.selectedFolderStore.isRootFolder &&
@@ -122,7 +128,8 @@ class InfoPanelStore {
 
     if (
       (selectedFolderIsRoomOrFolderInRoom ||
-        archivedFolderIsRoomOrFolderInRoom) &&
+        archivedFolderIsRoomOrFolderInRoom ||
+        selectedFolderIsAgentOrFolderInAgent) &&
       isFolderOpenedThroughSectionHeader
     ) {
       this.setView(InfoPanelView.infoMembers);
@@ -396,12 +403,30 @@ class InfoPanelStore {
     this.shareChanged = shareChanged;
   };
 
+  showForcedInfoPanelLoader = (id: string | number) => {
+    if (
+      this.isShareTabActive &&
+      !Array.isArray(this.infoPanelSelection) &&
+      this.infoPanelSelection?.id === id
+    ) {
+      showForcedInfoPanelLoader();
+    }
+  };
+
   get isShareTabActive(): boolean {
     return (
       this.roomsView === InfoPanelView.infoShare ||
       this.fileView === InfoPanelView.infoShare
     );
   }
+
+  inRoom = (): boolean => {
+    return (
+      this.infoPanelSelection !== null &&
+      "navigationPath" in this.infoPanelSelection &&
+      !!this.infoPanelSelection.navigationPath
+    );
+  };
 }
 
 export default InfoPanelStore;

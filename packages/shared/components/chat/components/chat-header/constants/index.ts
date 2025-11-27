@@ -28,4 +28,5 @@
 
 export const CHAT_LIST_MAX_HEIGHT = 224;
 export const CHAT_LIST_WIDTH = 280;
-export const CHAT_LIST_ROW_HEIGHT = 32;
+export const CHAT_LIST_ROW_HEIGHT_DESKTOP = 32;
+export const CHAT_LIST_ROW_HEIGHT_TABLET_AND_MOBILE = 36;

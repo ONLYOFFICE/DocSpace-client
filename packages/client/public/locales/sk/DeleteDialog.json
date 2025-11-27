@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Zmazať chat?",
+  "DeleteAIAgentDescription": "Agent <strong>\"{{agentName}}\"</strong> bude trvale odstránený. Všetky dáta a prístupy používateľov budú stratené.",
+  "DeleteAIAgentTitle": "Zmazať tohto agenta?",
+  "DeleteAIAgentWarning": "Rozumiem dôsledky a chcem zmazať agenta.",
+  "DeleteAIChatDescription": "Mazanie <strong>{{chatName}}<1>.</1></strong>\n Všetky správy a história chatu budú trvale odstránené a nebude možné ich obnoviť.",
   "DeleteAllGroupDescription": "Vybrané skupiny budú vymazané. Používatelia v skupinách nebudú z priestoru {{productName}} odstránení. Ste si istí, že chcete pokračovať?",
   "DeleteAllGroupsTitle": "Vymazať skupiny",
   "DeleteFiles": "Čoskoro presuniete <strong>súbory ({{filesCount}})</strong> do {{trashSection}}.",

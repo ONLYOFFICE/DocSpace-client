@@ -5,7 +5,6 @@
   "DailyFeed": "Dnevni vir {{productName}}",
   "DailyFeedDescription": "Preberi novice in dogodke iz svojega prostora {{productName}} v dnevnem povzetku.",
   "FileActivityNotify": "Obvestila o dejavnosti datotek",
-  "GoToSettings": "Pojdite v Nastavitve",
   "IsNotValid": "Ni veljavno",
   "LdapEmailTooltip": "Ta uporabniški račun je naložen iz LDAP. Uporabnikova e-poštna naslov ni bila navedena in trenutna je bila ustvarjena samodejno ter je ni mogoče uporabiti za pošiljanje obvestil.",
   "NotConfigured": "Ni konfigurirano",

@@ -25,12 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
 
 import GoogleIcon from "PUBLIC_DIR/images/share.google.react.svg";
 
 import { SocialButton } from "./SocialButton";
+import styles from "./SocialButton.module.scss";
 
 describe("<SocialButton />", () => {
   const defaultProps = {
@@ -63,7 +64,7 @@ describe("<SocialButton />", () => {
   });
 
   it("handles click events", () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<SocialButton {...defaultProps} onClick={handleClick} />);
 
     fireEvent.click(screen.getByTestId("social-button"));
@@ -75,25 +76,25 @@ describe("<SocialButton />", () => {
 
     const button = screen.getByTestId("social-button");
     expect(button).toBeDisabled();
-    expect(button).toHaveClass("disabled");
+    expect(button).toHaveClass(styles.disabled);
   });
 
   it("renders in small size", () => {
     render(<SocialButton {...defaultProps} size="small" />);
 
-    expect(screen.getByTestId("social-button")).toHaveClass("small");
+    expect(screen.getByTestId("social-button")).toHaveClass(styles.small);
   });
 
   it("renders in connected state", () => {
     render(<SocialButton {...defaultProps} isConnect />);
 
-    expect(screen.getByTestId("social-button")).toHaveClass("isConnect");
+    expect(screen.getByTestId("social-button")).toHaveClass(styles.isConnect);
   });
 
   it("renders without hover effects", () => {
     render(<SocialButton {...defaultProps} noHover />);
 
-    expect(screen.getByTestId("social-button")).toHaveClass("noHover");
+    expect(screen.getByTestId("social-button")).toHaveClass(styles.noHover);
   });
 
   it("renders with custom data attributes", () => {

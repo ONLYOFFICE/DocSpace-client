@@ -70,6 +70,7 @@ const DataManagementWrapper = (props) => {
     currentTariffStatusStore,
     settingsStore,
     clearAbortControllerArr,
+    isNotPaidPeriod,
   } = props;
 
   const navigate = useNavigate();
@@ -206,6 +207,11 @@ const DataManagementWrapper = (props) => {
     setCurrentTabId(e.id);
   };
 
+  if (isNotPaidPeriod)
+    return (
+      <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
+    );
+
   return (
     <Tabs
       items={data}
@@ -237,6 +243,7 @@ export const Component = inject(
 
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
+    const { isNotPaidPeriod } = currentTariffStatusStore;
     return {
       dataBackupUrl,
       automaticBackupUrl,
@@ -252,6 +259,7 @@ export const Component = inject(
       currentTariffStatusStore,
       settingsStore,
       clearAbortControllerArr,
+      isNotPaidPeriod,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

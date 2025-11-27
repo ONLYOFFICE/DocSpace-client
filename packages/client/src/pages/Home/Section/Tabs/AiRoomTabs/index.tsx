@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -38,15 +39,14 @@ import AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
-import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 
 type AiRoomTabsProps = {
   id?: SelectedFolderStore["id"];
   rootRoomId?: SelectedFolderStore["rootRoomId"];
-  canUseChat?: AccessRightsStore["canUseChat"];
 
   currentClientView?: ClientLoadingStore["currentClientView"];
   showTabsLoader?: ClientLoadingStore["showTabsLoader"];
+  showArticleLoader?: ClientLoadingStore["showArticleLoader"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 
   currentTab?: AiRoomStore["currentTab"];
@@ -58,9 +58,9 @@ type AiRoomTabsProps = {
 const AiRoomTabs = ({
   id,
   rootRoomId,
-  canUseChat,
 
   showTabsLoader,
+  showArticleLoader,
   currentClientView,
   setIsSectionBodyLoading,
 
@@ -74,8 +74,23 @@ const AiRoomTabs = ({
 
   const { t } = useTranslation(["AIRoom", "Common"]);
 
-  if (showTabsLoader)
-    return <SectionSubmenuSkeleton style={{ marginBottom: 0 }} />;
+  useEffect(() => {
+    return () => {
+      const currentSearch = new URLSearchParams(window.location.search);
+
+      const chatId = currentSearch.get("chat");
+
+      if (chatId) {
+        currentSearch.delete("chat");
+      }
+
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}?${currentSearch.toString()}`,
+      );
+    };
+  }, []);
 
   const onSelect = (tab: TTabItem) => {
     setCurrentTab(tab.id as "chat" | "knowledge" | "result");
@@ -117,26 +132,28 @@ const AiRoomTabs = ({
       content: null,
     },
     {
+      id: "knowledge",
+      name: t("Knowledge"),
+      content: null,
+    },
+    {
       id: "result",
       name: t("ResultStorage"),
       content: null,
     },
   ];
 
-  if (canUseChat) {
-    items.splice(1, 0, {
-      id: "knowledge",
-      name: t("Knowledge"),
-      content: null,
-    });
-  }
+  const isChat = currentClientView === "chat";
+
+  if (showTabsLoader || showArticleLoader)
+    return (
+      <SectionSubmenuSkeleton style={{ marginBottom: isChat ? 0 : "20px" }} />
+    );
 
   return (
     <Tabs
       className="ai-room-tabs"
-      selectedItemId={
-        currentClientView === "chat" ? "chat" : (currentTab ?? "chat")
-      }
+      selectedItemId={currentTab ?? "chat"}
       items={items}
       onSelect={onSelect}
       withoutStickyIntend={currentClientView === "chat"}
@@ -152,21 +169,24 @@ export default inject(
     selectedFolderStore,
     accessRightsStore,
   }: TStore) => {
-    const { showTabsLoader, setIsSectionBodyLoading, currentClientView } =
-      clientLoadingStore;
+    const {
+      showTabsLoader,
+      showArticleLoader,
+      setIsSectionBodyLoading,
+      currentClientView,
+    } = clientLoadingStore;
 
     const { currentTab, setCurrentTab, setKnowledgeId, setResultId } =
       aiRoomStore;
 
     const { id, rootRoomId } = selectedFolderStore;
-    const { canUseChat } = accessRightsStore;
 
     return {
       id,
       rootRoomId,
-      canUseChat,
 
       showTabsLoader,
+      showArticleLoader,
       setIsSectionBodyLoading,
 
       currentTab,

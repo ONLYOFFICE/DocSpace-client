@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { TFile } from "api/files/types";
 
 import { ImageViewer } from ".";
@@ -158,7 +158,7 @@ describe("ImageViewer", () => {
   });
 
   it("calls onMask callback when image is clicked", () => {
-    const onMask = jest.fn();
+    const onMask = vi.fn();
     const { getByTestId } = render(
       <ImageViewer {...mockProps} onMask={onMask} />,
     );

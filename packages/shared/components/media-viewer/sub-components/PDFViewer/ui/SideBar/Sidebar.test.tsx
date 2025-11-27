@@ -24,53 +24,56 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Sidebar } from ".";
 import { BookMarkType } from "../../PDFViewer.props";
 
 // Mock SVG components
-jest.mock("PUBLIC_DIR/images/view-rows.react.svg", () => {
-  return function DummyViewRowsIcon({
+vi.mock("PUBLIC_DIR/images/view-rows.react.svg", () => {
+  const DummyViewRowsIcon = ({
     className,
     style,
   }: {
     className?: string;
     style?: React.CSSProperties;
-  }) {
+  }) => {
     return (
       <div className={className} style={style}>
         View Rows Icon
       </div>
     );
   };
+  return { default: DummyViewRowsIcon };
 });
 
-jest.mock("PUBLIC_DIR/images/view-tiles.react.svg", () => {
-  return function DummyViewTilesIcon({
+vi.mock("PUBLIC_DIR/images/view-tiles.react.svg", () => {
+  const DummyViewTilesIcon = ({
     className,
     style,
   }: {
     className?: string;
     style?: React.CSSProperties;
-  }) {
+  }) => {
     return (
       <div className={className} style={style}>
         View Tiles Icon
       </div>
     );
   };
+  return { default: DummyViewTilesIcon };
 });
 
-jest.mock("PUBLIC_DIR/images/article-show-menu.react.svg", () => {
-  return function DummyArticleShowMenuIcon(props: React.ComponentProps<"div">) {
+vi.mock("PUBLIC_DIR/images/article-show-menu.react.svg", () => {
+  const DummyArticleShowMenuIcon = (props: React.ComponentProps<"div">) => {
     return <div {...props}>Article Show Menu Icon</div>;
   };
+  return { default: DummyArticleShowMenuIcon };
 });
 // Mock classnames
-jest.mock("classnames", () => {
-  return function dummyClassnames(...args: string[]) {
+vi.mock("classnames", () => {
+  const dummyClassnames = (...args: string[]) => {
     const [className, conditionalClasses] = args;
     if (typeof conditionalClasses === "object") {
       return Object.entries(conditionalClasses)
@@ -81,20 +84,11 @@ jest.mock("classnames", () => {
     }
     return args.filter(Boolean).join(" ");
   };
+  return { default: dummyClassnames };
 });
 
-// Mock styles
-jest.mock("./sub-components/PDFViewer/PDFViewer.module.scss", () => ({
-  sidebarContainer: "sidebarContainer",
-  isPanelOpen: "isPanelOpen",
-  sidebarHeader: "sidebarHeader",
-  hideSidebarIcon: "hideSidebarIcon",
-  thumbnails: "thumbnails",
-  visible: "visible",
-}));
-
 // Mock Bookmarks component
-jest.mock("../Bookmarks", () => ({
+vi.mock("../Bookmarks", () => ({
   Bookmarks: ({
     bookmarks,
     navigate,
@@ -121,12 +115,12 @@ describe("Sidebar", () => {
   const defaultProps = {
     bookmarks: mockBookmarks,
     isPanelOpen: false,
-    setIsPDFSidebarOpen: jest.fn(),
-    navigate: jest.fn(),
+    setIsPDFSidebarOpen: vi.fn(),
+    navigate: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("applies correct classes when panel is open", () => {
@@ -138,7 +132,7 @@ describe("Sidebar", () => {
   });
 
   it("closes sidebar when close button is clicked", () => {
-    const setIsPDFSidebarOpen = jest.fn();
+    const setIsPDFSidebarOpen = vi.fn();
     render(
       <Sidebar {...defaultProps} setIsPDFSidebarOpen={setIsPDFSidebarOpen} />,
     );

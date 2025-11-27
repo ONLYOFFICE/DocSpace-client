@@ -1,0 +1,28 @@
+{
+  "key_path": "KnowledgeUnavailable",
+  "content": "Knowledge Base unavailable",
+  "content_en_sha1_hash": "b3c1bffd3fe0dcecf5efb18b8110c2cf616f3a15",
+  "created_at": "2025-11-06T18:29:14.063Z",
+  "updated_at": "2025-11-06T18:35:52.743Z",
+  "comment": {
+    "text": "This key displays a message indicating the knowledge base is currently unavailable. It appears in the KnowledgeDisabledContainer component, likely within a section informing the user they lack access or the knowledge base is temporarily offline. Translators should ensure the message clearly conveys the unavailability of the knowledge base.",
+    "is_auto": true,
+    "updated_at": "2025-11-06T18:35:52.743Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 40,
+      "context": "import { EmptyView } from \"@docspace/shared/components/empty-view\";\n \n const KnowledgeDisabledContainer = (props) => {\n const { t, theme, isFrame, isAdmin, setKnowledgeId, setCurrentTab } = props;\n \n const titleRoomNoAccess = t(\"AIRoom:KnowledgeUnavailable\");\n const descriptionRoomNoAccess = isAdmin\n ? t(\"AIRoom:KnowledgeUnavailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"AIRoom:KnowledgeUnavailableDescriptionUser\", {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { act, render, screen, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { MCPIcon } from "./MCPIcon";
 import styles from "./MCPIcon.module.scss";
@@ -36,37 +36,37 @@ describe("<MCPIcon />", () => {
     return render(<MCPIcon title="Test" {...props} />);
   };
 
-  test("renders MCPIcon component without errors", () => {
+  it("renders MCPIcon component without errors", () => {
     renderComponent();
     const iconElement = screen.getByTestId("mcp-icon");
     expect(iconElement).toBeInTheDocument();
   });
 
-  test("renders with default size", () => {
+  it("renders with default size", () => {
     renderComponent();
     const iconElement = screen.getByTestId("mcp-icon");
-    expect(iconElement.classList.contains(styles.medium)).toBeTruthy();
+    expect(iconElement.classList.contains(styles.large)).toBeTruthy();
   });
 
-  test("renders with custom className", () => {
+  it("renders with custom className", () => {
     const customClass = "custom-icon";
     renderComponent({ className: customClass });
     const iconElement = screen.getByTestId("mcp-icon");
     expect(iconElement.className).toContain(customClass);
   });
 
-  test("renders with custom dataTestId", () => {
+  it("renders with custom dataTestId", () => {
     renderComponent({ dataTestId: "custom-test-id" });
     const iconElement = screen.getByTestId("custom-test-id");
     expect(iconElement).toBeInTheDocument();
   });
 
-  test("displays first character of title in uppercase", () => {
+  it("displays first character of title in uppercase", () => {
     renderComponent({ title: "hugging face" });
     expect(screen.getByText("H")).toBeInTheDocument();
   });
 
-  test("renders image when imgSrc is provided", () => {
+  it("renders image when imgSrc is provided", () => {
     renderComponent({
       title: "Test",
       imgSrc: "https://example.com/icon.svg",
@@ -76,7 +76,7 @@ describe("<MCPIcon />", () => {
     expect(imgElement).toHaveAttribute("src", "https://example.com/icon.svg");
   });
 
-  test("falls back to title when image fails to load", async () => {
+  it("falls back to title when image fails to load", async () => {
     renderComponent({ title: "Fallback", imgSrc: "invalid-url.jpg" });
 
     const imgElement = screen.getByRole("img");
@@ -90,7 +90,7 @@ describe("<MCPIcon />", () => {
     });
   });
 
-  test("resets error state when imgSrc changes", async () => {
+  it("resets error state when imgSrc changes", async () => {
     const { rerender } = renderComponent({
       title: "Test",
       imgSrc: "invalid-url.jpg",

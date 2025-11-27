@@ -1,7 +1,7 @@
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { Bonus } from "./index";
 

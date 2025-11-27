@@ -36,7 +36,6 @@ import classNames from "classnames";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType, LinkTarget } from "@docspace/shared/components/link";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Badge } from "@docspace/shared/components/badge";
 import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 
 import { globalColors } from "@docspace/shared/themes";
@@ -53,7 +52,6 @@ type ChannelProps = {
   isNeedConfig?: boolean;
   isAdmin?: boolean;
   isNotValid?: boolean;
-  isThirdPartyAvailable?: boolean;
 };
 
 const getIcon = (type: ChannelProps["type"]) => {
@@ -135,7 +133,7 @@ const getChannelContent = (
         href={`${THIRD_PARTY_SERVICES_URL}${type}`}
         target={LinkTarget.blank}
       >
-        {t("GoToSettings")}
+        {t("Common:GoToSettings")}
       </Link>
     );
   }
@@ -162,10 +160,8 @@ const Channel = ({
   isNeedConfig,
   isAdmin,
   isNotValid,
-  isThirdPartyAvailable,
 }: ChannelProps) => {
   const { t } = useTranslation(["Notifications", "Common"]);
-  const { isBase } = useTheme();
 
   return (
     <div
@@ -211,20 +207,6 @@ const Channel = ({
             }
           />
         </div>
-      ) : null}
-
-      {!isThirdPartyAvailable && isNeedConfig ? (
-        <Badge
-          className={styles.paidBadge}
-          fontWeight="700"
-          label={t("Common:Paid")}
-          backgroundColor={
-            isBase
-              ? globalColors.favoritesStatus
-              : globalColors.favoriteStatusDark
-          }
-          isPaidBadge
-        />
       ) : null}
     </div>
   );

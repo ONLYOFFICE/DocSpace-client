@@ -24,21 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { MainPanel } from ".";
 
 // Mock react-device-detect
-jest.mock("react-device-detect", () => ({
+vi.mock("react-device-detect", () => ({
   isDesktop: false,
-}));
-
-// Mock CSS module
-jest.mock("../MainPanel.module.scss", () => ({
-  wrapper: "wrapper",
-  content: "content",
-  isDesktop: "isDesktop",
 }));
 
 interface GestureHandlers {
@@ -47,10 +40,10 @@ interface GestureHandlers {
 }
 
 // Mock use-gesture
-jest.mock("@use-gesture/react", () => ({
+vi.mock("@use-gesture/react", () => ({
   useGesture: (handlers: GestureHandlers) => {
     // Store handlers for testing
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: TODO fix
     (global as any).gestureHandlers = handlers;
   },
 }));
@@ -61,13 +54,13 @@ describe("MainPanel component", () => {
     isLoading: false,
     isLastImage: false,
     isFistImage: false,
-    setZoom: jest.fn(),
-    onPrev: jest.fn(),
-    onNext: jest.fn(),
+    setZoom: vi.fn(),
+    onPrev: vi.fn(),
+    onNext: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // Mock window.innerWidth for swipe gesture tests
     Object.defineProperty(window, "innerWidth", {
       writable: true,
@@ -106,7 +99,7 @@ describe("MainPanel component", () => {
 
   it("calls onNext when swiping left", () => {
     render(<MainPanel {...mockProps} />);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: TODO fix
     const handlers = (global as any).gestureHandlers as GestureHandlers;
 
     // Simulate drag end with left swipe
@@ -116,7 +109,7 @@ describe("MainPanel component", () => {
 
   it("calls onPrev when swiping right", () => {
     render(<MainPanel {...mockProps} />);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: TODO fix
     const handlers = (global as any).gestureHandlers as GestureHandlers;
 
     // Simulate drag end with right swipe

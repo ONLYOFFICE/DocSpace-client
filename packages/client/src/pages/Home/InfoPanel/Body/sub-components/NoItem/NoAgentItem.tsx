@@ -35,7 +35,7 @@ import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empt
 
 import styles from "./NoItem.module.scss";
 
-const NoRoomItem = () => {
+const NoAgentItem = () => {
   const { isBase } = useTheme();
   const { t } = useTranslation(["InfoPanel"]);
 
@@ -51,13 +51,13 @@ const NoRoomItem = () => {
       )}
     >
       <div className="no-thumbnail-img-wrapper">
-        <img src={imageSrc} alt="No Room" />
+        <img src={imageSrc} alt="No AI agent" />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("RoomsEmptyScreenTent")}
+        {t("AIAgentsEmptyScreenTent")}
       </Text>
     </div>
   );
 };
 
-export default NoRoomItem;
+export default NoAgentItem;

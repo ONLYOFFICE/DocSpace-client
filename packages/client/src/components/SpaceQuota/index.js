@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -74,6 +74,7 @@ const getOptions = (t, item, spaceLimited) => {
 
   return items;
 };
+
 const SpaceQuota = (props) => {
   const {
     hideColumns,
@@ -96,7 +97,7 @@ const SpaceQuota = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["Common"]);
-
+  const timeoutId = useRef(false);
   const theme = useTheme();
 
   const usedQuota = getConvertedQuota(t, item?.usedSpace);
@@ -107,38 +108,47 @@ const SpaceQuota = (props) => {
 
   const sideInfoColor = theme.peopleTableRow.sideInfoColor;
 
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutId.current);
+    };
+  }, []);
+
   const successCallback = (users) => {
     onSuccess && onSuccess(users);
     setIsLoading(false);
-
+    clearTimeout(timeoutId.current);
     needResetSelection && setSelected("close");
   };
 
   const abortCallback = () => {
     onAbort && onAbort();
     setIsLoading(false);
-
+    clearTimeout(timeoutId.current);
     needResetSelection && setSelected("close");
   };
 
   const onChange = async ({ action }) => {
-    setIsLoading(true);
-
     if (action === "change") {
       changeQuota([item], successCallback, abortCallback);
 
       return;
     }
 
+    timeoutId.current = setTimeout(() => {
+      setIsLoading(true);
+    }, 500);
+
     if (action === "no-quota") {
       try {
-        const items = await updateQuota([item.id], -1, inRoom);
+        const items = await updateQuota([item.id], -1, inRoom());
+
+        successCallback(items);
 
         options.forEach((o) => {
           if (o.key === "no-quota") o.label = t("Common:Unlimited");
         });
 
-        successCallback(items);
         toastr.success(t("Common:StorageQuotaDisabled"));
       } catch (e) {
         abortCallback();
@@ -149,7 +159,7 @@ const SpaceQuota = (props) => {
     }
 
     try {
-      const items = await resetQuota([item.id], inRoom);
+      const items = await resetQuota([item.id], inRoom());
 
       options.forEach((o) => {
         if (o.key === "default-quota") o.label = defaultQuotaSize;
@@ -233,7 +243,7 @@ export default inject(
     const { usersStore } = peopleStore;
     const { needResetUserSelection, setSelected: setUsersSelected } =
       usersStore;
-    const { changeRoomQuota, changeAIAgentQuota } = filesActionsStore;
+    const { changeRoomQuota, changeAIAgentsQuota } = filesActionsStore;
     const {
       setCustomRoomQuota,
       setCustomAIAgentQuota,
@@ -246,18 +256,19 @@ export default inject(
     const {
       isDefaultUsersQuotaSet,
       isDefaultRoomsQuotaSet,
+      isDefaultAIAgentsQuotaSet,
       defaultUsersQuota,
       defaultRoomsQuota,
+      defaultAIAgentsQuota,
     } = currentQuotaStore;
 
-    const { infoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
-    const inRoom = !!infoPanelSelection?.navigationPath;
+    const { inRoom, isVisible: infoPanelVisible } = infoPanelStore;
 
     const changeQuota =
       type === "user"
         ? changeUserQuota
         : type === "agent"
-          ? changeAIAgentQuota
+          ? changeAIAgentsQuota
           : changeRoomQuota;
 
     const updateQuota =
@@ -275,9 +286,18 @@ export default inject(
           : resetRoomQuota;
 
     const withoutLimitQuota =
-      type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;
+      type === "user"
+        ? !isDefaultUsersQuotaSet
+        : type === "agent"
+          ? !isDefaultAIAgentsQuotaSet
+          : !isDefaultRoomsQuotaSet;
 
-    const defaultSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+    const defaultSize =
+      type === "user"
+        ? defaultUsersQuota
+        : type === "agent"
+          ? defaultAIAgentsQuota
+          : defaultRoomsQuota;
 
     const needResetSelection =
       type === "user" ? needResetUserSelection : needResetFilesSelection;

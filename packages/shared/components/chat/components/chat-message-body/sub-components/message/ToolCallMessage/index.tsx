@@ -52,6 +52,13 @@ const ToolCallMessage = ({ content }: MessageToolCallProps) => {
         ? ToolCallStatus.Failed
         : ToolCallStatus.Finished;
 
+  // cancel confirmation after timeout
+  React.useEffect(() => {
+    if (needConfirmation && !content.managed) {
+      setNeedConfirmation(false);
+    }
+  }, [content.managed, needConfirmation]);
+
   return (
     <div className={styles.toolCallMessage}>
       <ToolCall

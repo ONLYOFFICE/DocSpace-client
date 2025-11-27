@@ -39,8 +39,10 @@ import { Scrollbar } from "../../../../../../scrollbar";
 
 export const createMarkdownComponents = ({
   propLanguage,
+  successCopyMessage,
 }: {
   propLanguage?: string;
+  successCopyMessage?: string;
 }): Components => ({
   h1: ({ children }) => (
     <Heading
@@ -176,7 +178,7 @@ export const createMarkdownComponents = ({
     if (typeof content === "string") {
       if (content.length) {
         if (content[0] === " ") {
-          return <span className="form-modal-markdown-span" />;
+          return <span className="form-modal-markdown-span">{content}</span>;
         }
 
         // Specifically handle <think> tags that were wrapped in backticks
@@ -197,6 +199,7 @@ export const createMarkdownComponents = ({
         <CodeBlock
           language={propLanguage ?? match?.[1].toLowerCase()}
           content={content}
+          successCopyMessage={successCopyMessage}
         />
       );
     }

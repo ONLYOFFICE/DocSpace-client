@@ -107,6 +107,9 @@ export interface AutomaticBackupProps {
   backupProgressError: string;
   setBackupProgressError: (error: string) => void;
 
+  backupProgressWarning: string;
+  setBackupProgressWarning: (warning: string) => void;
+
   isChanged: boolean;
   isThirdStorageChanged: boolean;
   defaultStorageType: Nullable<string>;

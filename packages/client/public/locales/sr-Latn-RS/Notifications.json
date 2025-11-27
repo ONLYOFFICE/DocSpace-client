@@ -5,7 +5,6 @@
   "DailyFeed": "Dnevni sadržaj {{productName}}-a",
   "DailyFeedDescription": "Čitajte vesti i događaje iz vašeg {{productName}}-a u dnevnom pregledu.",
   "FileActivityNotify": "Obaveštenja o aktivnostima fajla",
-  "GoToSettings": "Idi na Podešavanja",
   "IsNotValid": "Nije validno",
   "LdapEmailTooltip": "Ovaj korisnički nalog je učitan sa LDAP-a. Email adresa korisnika nije navedena i trenutna je generisana automatski i ne može se koristiti za slanje obaveštenja.",
   "NotConfigured": "Nije konfigurisano",

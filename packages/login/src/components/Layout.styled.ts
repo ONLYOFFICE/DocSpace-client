@@ -42,6 +42,36 @@ export const ContentWrapper = styled.div.attrs(injectDefaultTheme)<{
     height: calc(100% - 48px);
   }
 
+  .logo-wrapper {
+    body.dark & {
+      &--dark {
+        display: block;
+      }
+
+      &--light {
+        display: none;
+      }
+
+      @media ${mobile} {
+        display: none;
+      }
+    }
+
+    body.light & {
+      &--dark {
+        display: none;
+      }
+
+      &--light {
+        display: block;
+      }
+
+      @media ${mobile} {
+        display: none;
+      }
+    }
+  }
+
   .bg-cover {
     background-image: ${(props) => props.bgPattern};
     background-repeat: no-repeat;

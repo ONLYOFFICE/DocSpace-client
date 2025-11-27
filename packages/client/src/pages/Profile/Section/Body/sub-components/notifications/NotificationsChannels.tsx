@@ -81,8 +81,8 @@ const NotificationsChannels = ({
       individual: true,
     });
 
-    SocketHelper?.on(SocketEvents.UpdateTelegram, (option) => {
-      if (typeof option === "string") {
+    const updateTelegramHandler = (data: string) => {
+      if (typeof data === "string") {
         checkTg?.();
         toastr.success(
           t("Notifications:SuccessConnected", {
@@ -90,13 +90,19 @@ const NotificationsChannels = ({
           }),
         );
       }
-    });
+    };
 
-    SocketHelper?.on(SocketEvents.ConnectTelegram, (option) => {
-      if (user && user.id === option) {
-        checkNotificationsChannels?.();
-      }
-    });
+    const connectTelegramHandler = () => {
+      checkNotificationsChannels?.();
+    };
+
+    SocketHelper?.on(SocketEvents.UpdateTelegram, updateTelegramHandler);
+    SocketHelper?.on(SocketEvents.ConnectTelegram, connectTelegramHandler);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.UpdateTelegram);
+      SocketHelper?.off(SocketEvents.ConnectTelegram);
+    };
   }, []);
 
   return (

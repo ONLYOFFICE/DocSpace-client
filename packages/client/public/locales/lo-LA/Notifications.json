@@ -1,5 +1,4 @@
 {
-  "ActionsWithFilesDescription": "ປ້າຍກຳກັບຈະເນັ້ນເຖິງການເຄື່ອນໄຫວຂອງໄຟລ໌ — ການອັບໂຫຼດ, ການແກ້ໄຂ, ຫຼືການແບ່ງປັນ — ໃນທົ່ວພາກສ່ວນ {{rooms}}, {{shared}}, ແລະ {{documents}}.",
   "AdminSetupRequired": "ຕ້ອງຕັ້ງຄ່າຜູ້ເບິ່ງແຍງລະບົບ",
   "Badges": "ປ້າຍ",
   "DailyFeed": "ຟີດ {{productName}} ປະຈໍາວັນ",

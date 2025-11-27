@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Badges will highlight file activity — uploads, edits, or shares — across the {{rooms}}, {{shared}}, and {{documents}} sections.",
+  "ActionsWithFilesDescription": "Badges will highlight file activity — uploads, edits, or shares — across the {{rooms}}, {{shared}}, {{documents}}, and {{aiAgents}} sections.",
   "AdminSetupRequired": "Admin setup required",
   "Badges": "Badges",
   "DailyFeed": "Daily {{productName}} feed",

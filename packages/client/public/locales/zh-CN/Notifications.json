@@ -1,5 +1,4 @@
 {
-  "ActionsWithFilesDescription": "标记将突出显示{{rooms}}、{{shared}}和{{documents}}板块中的文件活动（包括上传、编辑或共享）。",
   "AdminSetupRequired": "需要管理员设置",
   "Badges": "弹窗",
   "DailyFeed": "{{productName}}每日动态",

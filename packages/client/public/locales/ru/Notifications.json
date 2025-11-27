@@ -1,5 +1,4 @@
 {
-  "ActionsWithFilesDescription": "Значки будут отражать активность файлов — загрузки, редактирование или предоставление доступа — в разделах {{rooms}}, {{shared}} и {{documents}}.",
   "AdminSetupRequired": "Требуется настройка администратора",
   "Badges": "Бейджи",
   "DailyFeed": "Ежедневная лента {{productName}}",

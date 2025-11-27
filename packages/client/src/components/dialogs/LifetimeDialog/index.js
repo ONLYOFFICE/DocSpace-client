@@ -54,7 +54,12 @@ const LifetimeDialogComponent = (props) => {
   }, []);
 
   return (
-    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+    <ModalDialog
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+      autoMaxHeight
+    >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBodyContent className="modal-dialog-content-body">

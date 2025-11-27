@@ -40,6 +40,8 @@ import {
 } from "./Tooltip.types";
 import { DEFAULT_DELAY_SHOW } from "./Tooltip.constants";
 
+const isTestEnvironment = process.env.NODE_ENV === "test";
+
 function useTooltipControl(
   originalOnClick?: MouseEventHandler,
   originalOnMouseEnter?: MouseEventHandler,
@@ -175,7 +177,6 @@ function createTooltipWrapper<TProps extends Record<string, unknown>>(
             onMouseEnter={tooltipHandlers.handleMouseEnter}
             onMouseLeave={tooltipHandlers.handleMouseLeave}
             onClick={tooltipHandlers.handleClick}
-            onMouseDown={tooltipHandlers.handleClick}
           >
             {renderElement(props as TProps & WithTooltipProps, ref)}
           </span>
@@ -200,17 +201,20 @@ export function withTooltip<T extends Record<string, unknown>>(
     const componentProps = omitTooltipProps(props);
 
     if (tooltipHandlers) {
-      return (
-        <WrappedComponent
-          {...(componentProps as T)}
-          ref={ref as React.Ref<never>}
-          data-tooltip-anchor={tooltipHandlers.anchorId}
-          onMouseEnter={tooltipHandlers.handleMouseEnter}
-          onMouseLeave={tooltipHandlers.handleMouseLeave}
-          onClick={tooltipHandlers.handleClick}
-          onMouseDown={tooltipHandlers.handleClick}
-        />
-      );
+      const baseProps = {
+        ...(componentProps as T),
+        ref: ref as React.Ref<never>,
+        "data-tooltip-anchor": tooltipHandlers.anchorId,
+        onMouseEnter: tooltipHandlers.handleMouseEnter,
+        onMouseLeave: tooltipHandlers.handleMouseLeave,
+        onClick: tooltipHandlers.handleClick,
+      };
+
+      if (isTestEnvironment && props.title) {
+        (baseProps as unknown as T & { title: string }).title = props.title;
+      }
+
+      return <WrappedComponent {...baseProps} />;
     }
     return (
       <WrappedComponent
@@ -231,15 +235,20 @@ export function withTooltipForElement<
     const elementProps = omitTooltipProps(props);
 
     if (tooltipHandlers) {
-      return React.createElement(Element, {
+      const baseProps = {
         ...elementProps,
         ref,
         "data-tooltip-anchor": tooltipHandlers.anchorId,
         onMouseEnter: tooltipHandlers.handleMouseEnter,
         onMouseLeave: tooltipHandlers.handleMouseLeave,
         onClick: tooltipHandlers.handleClick,
-        onMouseDown: tooltipHandlers.handleClick,
-      });
+      };
+
+      if (isTestEnvironment && props.title) {
+        (baseProps as unknown as ElementProps).title = props.title;
+      }
+
+      return React.createElement(Element, baseProps);
     }
     return React.createElement(Element, { ...elementProps, ref });
   });

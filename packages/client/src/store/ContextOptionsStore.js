@@ -2655,6 +2655,7 @@ class ContextOptionsStore {
               "block-unblock-version",
               "custom-filter",
               "info",
+              "show-info",
             ],
             ["restore"],
             ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],

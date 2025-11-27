@@ -125,6 +125,7 @@ export const config = {
   matcher: [
     "/health",
     "/sdk",
+    "/chat",
     "/room-selector",
     "/file-selector",
     "/public-room",

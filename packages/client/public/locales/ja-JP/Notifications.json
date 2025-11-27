@@ -8,7 +8,6 @@
   "LdapEmailTooltip": "このユーザーアカウントはLDAPから読み込まれています。ユーザーのメールアドレスは指定されておらず、現在のものは自動的に生成されており、通知を送信するためには使用できません。",
   "NotConfigured": "設定されていません",
   "Notifications": "通知",
-  "RoomsActivityDescription": "新しい共有ファイル/フォルダーや {{sectionName}} 内のアクティビティに関する即時メール通知を受け取ります。",
   "SettingUpNotifications": "通知の設定",
   "SuccessConnected": "{{serviceName}} は通知チャネルとして正常に接続されました。これで、そちらで更新情報を受け取ることができます。",
   "SuccessDisconnected": "{{serviceName}}は通知チャネルとして正常に切断されました。通知はそこに送信されなくなります。",

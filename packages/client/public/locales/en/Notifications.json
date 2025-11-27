@@ -9,7 +9,7 @@
   "LdapEmailTooltip": "This user account is loaded from LDAP. The user's email address was not specified, and the current one was generated automatically and cannot be used to send notifications.",
   "NotConfigured": "Not configured",
   "Notifications": "Notifications",
-  "RoomsActivityDescription": "Get instant email notifications about new shared files/folders and activity inside your {{sectionName}}.",
+  "RoomsActivityDescription": "Get instant email notifications about new shared files/folders and activity inside your {{rooms}} and {{aiAgents}}.",
   "RoomUpdateNotify": "Shared content, {{rooms}} and {{aiAgents}} activity",
   "SettingUpNotifications": "Setting up notifications",
   "SuccessConnected": "{{serviceName}} has been successfully connected as a notification channel. You will now receive updates there.",

@@ -8,7 +8,6 @@
   "LdapEmailTooltip": "Deze gebruikersaccount wordt geladen vanuit LDAP. Het e-mailadres van de gebruiker is niet gespecificeerd, en het huidige adres is automatisch gegenereerd en kan niet worden gebruikt om notificaties te verzenden.",
   "NotConfigured": "Niet geconfigureerd",
   "Notifications": "Meldingen",
-  "RoomsActivityDescription": "Ontvang direct e-mail notificaties over nieuwe gedeelde bestanden/mappen en activiteit binnen uw {{sectionName}}.",
   "SettingUpNotifications": "Meldingen instellen",
   "SuccessConnected": "{{serviceName}} is succesvol verbonden als notificatiekanaal. U ontvangt nu updates daar.",
   "SuccessDisconnected": "{{serviceName}} is succesvol losgekoppeld als notificatiekanaal. Er worden geen notificaties meer naar toe gestuurd.",

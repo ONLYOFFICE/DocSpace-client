@@ -8,7 +8,6 @@
   "LdapEmailTooltip": "Bu istifadəçi hesabının məlumatları LDAP-dən yüklənib. İstifadəçinin e-poçt ünvanı göstərilməyib və hazırkı e-poçt ünvanı avtomatik yaradılıb, bildiriş göndərmək üçün istifadə edilə bilməz.",
   "NotConfigured": "Kəsilmədən hazırlanmayıb",
   "Notifications": "Bildirişlər",
-  "RoomsActivityDescription": "Yeni paylaşılmış fayllar/papqalar və {{sectionName}} içərisindəki fəaliyyət haqda dərhal e-poçt bildirişləri alın.",
   "SettingUpNotifications": "Bildirişləri təyin etmək",
   "SuccessConnected": "{{serviceName}} bildiriş kanalı kimi uğurla qoşulub. İndidən buraya yeniliklər gələcək.",
   "SuccessDisconnected": "{{serviceName}} bildiriş kanalı kimi uğurla əlaqədən kəsilmişdir. Bildirişlər oraya göndərilməyəcəkdir.",

@@ -78,7 +78,8 @@ const RoomsActivityContainer = ({
       </div>
       <Text {...textDescriptionsProps}>
         {t("RoomsActivityDescription", {
-          sectionName: t("Common:Rooms"),
+          rooms: t("Common:Rooms"),
+          aiAgents: t("Common:AIAgents"),
         })}
       </Text>
     </div>

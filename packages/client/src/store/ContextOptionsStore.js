@@ -1787,7 +1787,7 @@ class ContextOptionsStore {
     const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
       : item.shared
-        ? item.security.CopySharedLink
+        ? item.security?.CopySharedLink
         : item.security?.EditAccess;
 
     const { isFiltered } = this.filesStore;
@@ -1884,7 +1884,11 @@ class ContextOptionsStore {
       {
         id: "option_preview",
         key: "preview",
-        label: t("Common:Preview"),
+        label:
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? t("Open")
+            : t("Common:Preview"),
         icon: EyeReactSvgUrl,
         onClick: () => this.onPreviewClick(item),
         disabled: false,

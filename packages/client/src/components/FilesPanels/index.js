@@ -290,6 +290,7 @@ const Panels = (props) => {
         isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
         withAIAgentsTreeFolder
+        disableBySecurity="UseChat"
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,

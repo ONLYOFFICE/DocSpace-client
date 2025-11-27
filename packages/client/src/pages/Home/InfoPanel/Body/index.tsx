@@ -123,8 +123,8 @@ const InfoPanelBodyContent = ({
   const isAgent =
     selection &&
     "rootFolderType" in selection &&
-    "roomType" in selection &&
-    selection.roomType &&
+    // "roomType" in selection &&
+    // selection.roomType &&
     selection.rootFolderType === FolderType.AIAgents;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
@@ -159,10 +159,10 @@ const InfoPanelBodyContent = ({
     ) {
       setView(InfoPanelView.infoDetails);
     }
-  }, [fileView, selection, isTemplatesRoom]);
+  }, [fileView, selection, isTemplatesRoom, isAgent]);
 
   const isExpiredLink = useEventCallback(() =>
-    checkIsExpiredLinkAsync(selection)
+    checkIsExpiredLinkAsync(selection),
   );
 
   React.useEffect(() => {
@@ -205,8 +205,8 @@ const InfoPanelBodyContent = ({
               currentView === InfoPanelView.infoMembers
                 ? "members"
                 : currentView === InfoPanelView.infoHistory
-                ? "history"
-                : "details"
+                  ? "history"
+                  : "details"
             }
           />
         }
@@ -219,8 +219,6 @@ const InfoPanelBodyContent = ({
       </React.Suspense>
     );
   };
-
-
 
   return (
     <div className={commonStyles.infoPanelBody}>
@@ -327,5 +325,5 @@ export default inject(
       setImage,
       checkIsExpiredLinkAsync: isExpiredLinkAsync,
     };
-  }
+  },
 )(observer(InfoPanelBodyContent));

@@ -1,7 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "¿Eliminar el chat?",
   "DeleteAIAgentDescription": "El agente <strong>«{{agentName}}»</strong> se eliminará permanentemente. Se perderán todos los datos y accesos de usuario.",
   "DeleteAIAgentTitle": "¿Уliminar este agente?",
   "DeleteAIAgentWarning": "Entiendo las consecuencias y quiero eliminar el agente",
+  "DeleteAIChatDescription": "Está a punto de eliminar <strong>{{chatName}}<1>.</1></strong> Todos los mensajes y el historial del chat se eliminarán de forma permanente y no se podrán restaurar.",
   "DeleteAllGroupDescription": "Se eliminarán los grupos seleccionados. Los usuarios de los grupos no serán eliminados de {{productName}}. ¿Está seguro de que desea continuar?",
   "DeleteAllGroupsTitle": "Eliminar grupos",
   "DeleteFiles": "Está a punto de mover <strong>archivos ({{filesCount}})</strong> a la {{trashSection}}.",

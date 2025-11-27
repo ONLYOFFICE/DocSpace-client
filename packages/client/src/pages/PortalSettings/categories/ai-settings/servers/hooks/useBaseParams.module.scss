@@ -6,3 +6,7 @@
   margin-top: 4px;
   color: variables.$gray;
 }
+
+.errorText {
+  color: var(--input-error-color);
+}

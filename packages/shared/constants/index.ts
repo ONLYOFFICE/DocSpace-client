@@ -206,6 +206,9 @@ export const SDK_SCRIPT_URL =
 export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
+export const ALLOWED_MCP_CHARACTERS =
+  "A-Z, a-z, 0-9, _, -.";
+
 export const ThirdPartyServicesUrlName = Object.freeze({
   GoogleDrive: "google",
   Box: "box",

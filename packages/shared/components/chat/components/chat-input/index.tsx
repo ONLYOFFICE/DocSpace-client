@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { KeyboardEvent } from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import type { TFile } from "../../../../api/files/types";
-import { InfoPanelEvents } from "../../../../enums";
 import { RectangleSkeleton } from "../../../../skeletons";
 
 import { Textarea } from "../../../textarea";
@@ -59,11 +58,11 @@ const ChatInput = ({
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const { startChat, sendMessage, currentChatId } = useMessageStore();
+  const { startChat, sendMessage, currentChatId, isRequestRunning } =
+    useMessageStore();
   const { fetchChat, currentChat } = useChatStore();
 
   const [value, setValue] = React.useState("");
-  const [inputWidth, setInputWidth] = React.useState(0);
   const [selectedFiles, setSelectedFiles] = React.useState<Partial<TFile>[]>(
     [],
   );
@@ -71,7 +70,6 @@ const ChatInput = ({
     React.useState(false);
 
   const prevSession = React.useRef(currentChatId);
-  const inputRef = React.useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;
@@ -88,7 +86,7 @@ const ChatInput = ({
   };
 
   const sendMessageAction = React.useCallback(async () => {
-    if (!value) return;
+    if (!value.trim()) return;
 
     try {
       if (!currentChatId) {
@@ -105,10 +103,16 @@ const ChatInput = ({
   }, [currentChatId, startChat, sendMessage, value, selectedFiles]);
 
   const onKeyEnter = React.useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Enter" && !e.shiftKey) return sendMessageAction();
+    (e: KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+
+        if (!isRequestRunning) {
+          sendMessageAction();
+        }
+      }
     },
-    [sendMessageAction],
+    [sendMessageAction, isRequestRunning],
   );
 
   const showFilesSelector = () => {
@@ -122,14 +126,6 @@ const ChatInput = ({
       showFilesSelector();
     }
   };
-
-  React.useEffect(() => {
-    window.addEventListener("keydown", onKeyEnter);
-
-    return () => {
-      window.removeEventListener("keydown", onKeyEnter);
-    };
-  }, [onKeyEnter]);
 
   React.useEffect(() => {
     if (currentChatId && !currentChat) {
@@ -153,33 +149,9 @@ const ChatInput = ({
     fetchChat,
   ]);
 
-  React.useEffect(() => {
-    const onResize = () => {
-      setInputWidth(inputRef.current?.offsetWidth ?? 0);
-
-      setTimeout(() => setInputWidth(inputRef.current?.offsetWidth ?? 0), 0);
-    };
-
-    window.addEventListener("resize", onResize);
-
-    window.addEventListener(InfoPanelEvents.showInfoPanel, onResize);
-    window.addEventListener(InfoPanelEvents.hideInfoPanel, onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-      window.removeEventListener(InfoPanelEvents.showInfoPanel, onResize);
-    };
-  }, []);
-
   return (
     <>
-      <div
-        className={classNames(styles.chatInput, "chat-input")}
-        ref={(ref) => {
-          if (ref) setInputWidth(ref.offsetWidth);
-          inputRef.current = ref;
-        }}
-      >
+      <div className={classNames(styles.chatInput, "chat-input")}>
         {isLoading ? (
           <RectangleSkeleton width="100%" height="116px" borderRadius="3px" />
         ) : (
@@ -200,6 +172,7 @@ const ChatInput = ({
               isChatMode
               fontSize={15}
               isDisabled={!aiReady}
+              onKeyDown={onKeyEnter}
             />
 
             <FilesList
@@ -209,7 +182,6 @@ const ChatInput = ({
             />
 
             <Buttons
-              inputWidth={inputWidth}
               isFilesSelectorVisible={isFilesSelectorVisible}
               toggleFilesSelector={toggleFilesSelector}
               sendMessageAction={sendMessageAction}

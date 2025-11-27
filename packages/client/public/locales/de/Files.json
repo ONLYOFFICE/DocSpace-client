@@ -179,6 +179,7 @@
   "SaveAsTemplateToast": "Raumvorlage <1>«{{title}}»</1> gespeichert",
   "ScheduledTrashMove": "{{date}} wird nach {{sectionName}} verschoben",
   "SendByEmail": "Per E-Mail senden",
+  "SharedBy": "Geteilt von",
   "ShareFolder": "Ordner freigeben",
   "ShareFolderDescription": "Es wird ein neuer Raum erstellt und alle Inhalte des ausgewählten Ordners werden dorthin kopiert. Anschließend können Sie andere Benutzer zur Zusammenarbeit an den Dateien in einem Raum einladen.",
   "SharePDFFormModalDescription": "Es wird ein neuer Raum erstellt und das PDF-Formular wird dorthin kopiert. Sie können dann andere Benutzer einladen, das Formular in dem Raum auszufüllen.",

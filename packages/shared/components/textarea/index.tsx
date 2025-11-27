@@ -70,6 +70,7 @@ const Textarea = ({
   classNameCopyIcon,
   isChatMode = false,
   dataTestId,
+  onKeyDown,
 }: TextareaProps) => {
   const { isRTL } = useInterfaceDirection();
 
@@ -228,6 +229,7 @@ const Textarea = ({
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onClick={(e) => e.stopPropagation()}
+          onKeyDown={onKeyDown}
         />
       </Scrollbar>
     </div>

@@ -65,7 +65,7 @@ const AddMCPDialogComponent = ({
     getBaseParams,
     baseParamsComponent,
     baseParamsChanged,
-    baseParamsEmpty,
+    baseParamsError,
   } = useBaseParams();
   const { headersComponent, getAPIHeaders, advancedSettingsChanged } =
     useAdvancedSettings();
@@ -160,7 +160,7 @@ const AddMCPDialogComponent = ({
           scale
           onClick={handleSubmitClick}
           isLoading={loading}
-          isDisabled={baseParamsEmpty ? true : !hasChanges}
+          isDisabled={baseParamsError ? true : !hasChanges}
         />
         <Button
           size={ButtonSize.normal}

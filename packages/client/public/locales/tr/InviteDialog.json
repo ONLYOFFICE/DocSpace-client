@@ -3,6 +3,7 @@
   "EmailErrorMessage": "E-posta adresi geçerli değil. E-postayı çift tıklayarak düzenleyebilirsiniz.",
   "EmailErrorMessageUserNotFound": "Kullanıcı bulunamadı. E-postayı çift tıklayarak düzenleyebilirsiniz.",
   "GroupMaxAvailableRoleWarning": "Gruplar bir odaya en fazla {{roleName}} rolü ile eklenebilir. Fakat başarılı bir şekilde eklendikten sonra gruptaki bireysel kullanıcıların rolünü değiştirebilirsiniz.",
+  "GuestAgentMaxAvailableRoleWarning": "Misafirler İçerik oluşturucu olarak atanemez.\nSadece Oda yöneticileri, {{productName}} yöneticileri ve Kullanıcılar bu rol için uygun olabilir.",
   "InvitationLanguage": "Davet dili",
   "InviteMembersManuallyDescription": "Yeni üyeleri {{productName}} ürününe e-posta yoluyla kişisel olarak davet edin",
   "InviteMembersSearchPlaceholder": "Üyeleri e-posta yoluyla davet edin",

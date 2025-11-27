@@ -47,7 +47,9 @@ import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import api from "@docspace/shared/api";
+import { RoomsType } from "@docspace/shared/enums";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
@@ -87,11 +89,8 @@ const ExternalLinks = ({
   setIsLinksToggling,
   theme,
   culture,
-  isAIAgentsFolder,
   setInviteContactsLink,
 }) => {
-  // const [actionLinksVisible, setActionLinksVisible] = useState(false);
-
   const showUsersJoinedBlock = !!activeLink?.maxUseCount;
   const showUsersLimitWarning =
     activeLink?.currentUseCount >= activeLink?.maxUseCount;
@@ -190,14 +189,18 @@ const ExternalLinks = ({
   );
 
   const filteredAccesses =
-    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+    roomType === -1
+      ? accesses
+      : roomType === RoomsType.AIRoom
+        ? filterNotReadOnlyOptions(accesses)
+        : filterPaidRoleOptions(accesses);
 
   const description =
     roomId === -1
       ? t("InviteViaLinkDescriptionAccounts", {
           productName: t("Common:ProductName"),
         })
-      : isAIAgentsFolder
+      : roomType === RoomsType.AIRoom
         ? allowInvitingGuests
           ? t("InviteViaLinkDescriptionAgentGuest")
           : t("InviteViaLinkDescriptionAgentMembers", {
@@ -280,6 +283,7 @@ const ExternalLinks = ({
               onSelectAccess={onSelectAccess}
               containerRef={inputsRef}
               isOwner={isOwner}
+              isAdmin={isAdmin}
               isMobileView={isMobileView}
               isSelectionDisabled={isUserTariffLimit}
               selectionErrorText={<PaidQuotaLimitError />}
@@ -354,14 +358,12 @@ export default inject(
     peopleStore,
     currentQuotaStore,
     settingsStore,
-    treeFoldersStore,
   }) => {
     const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { isUserTariffLimit } = currentQuotaStore;
     const { theme, standalone, allowInvitingGuests, culture } = settingsStore;
-    const { isAIAgentsFolder } = treeFoldersStore;
 
     return {
       theme,
@@ -374,7 +376,6 @@ export default inject(
       isUserTariffLimit,
       standalone,
       allowInvitingGuests,
-      isAIAgentsFolder,
     };
   },
 )(observer(ExternalLinks));

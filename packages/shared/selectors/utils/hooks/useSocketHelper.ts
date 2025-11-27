@@ -46,6 +46,7 @@ import {
 
 import { UseSocketHelperProps } from "../types";
 import { SettingsContext } from "../contexts/Settings";
+import socket from "../../../utils/socket";
 
 const useSocketHelper = ({
   disabledItems,
@@ -351,26 +352,32 @@ const useSocketHelper = ({
     [setItems, setTotal],
   );
 
+  const handleSocketEvent = React.useEffectEvent((opt?: TOptSocket) => {
+    switch (opt?.cmd) {
+      case "create":
+        addItem(opt);
+        break;
+      case "update":
+        updateItem(opt);
+        break;
+      case "delete":
+        deleteItem(opt);
+        break;
+      default:
+    }
+  });
+
   React.useEffect(() => {
     if (initRef.current) return;
 
     initRef.current = true;
 
-    SocketHelper?.on(SocketEvents.ModifyFolder, (opt?: TOptSocket) => {
-      switch (opt?.cmd) {
-        case "create":
-          addItem(opt);
-          break;
-        case "update":
-          updateItem(opt);
-          break;
-        case "delete":
-          deleteItem(opt);
-          break;
-        default:
-      }
-    });
-  }, [addItem, updateItem, deleteItem]);
+    SocketHelper?.on(SocketEvents.ModifyFolder, handleSocketEvent);
+
+    return () => {
+      socket?.off(SocketEvents.ModifyFolder, handleSocketEvent);
+    };
+  }, []);
 
   React.useEffect(() => {
     return () => {

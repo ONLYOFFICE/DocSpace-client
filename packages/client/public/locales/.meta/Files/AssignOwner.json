@@ -3,7 +3,7 @@
   "content": "Assign Owner",
   "content_en_sha1_hash": "65778d169276fd3b457d09651534e9f5172891db",
   "created_at": "2025-05-19T21:30:55.291Z",
-  "updated_at": "2025-10-27T16:14:33.285Z",
+  "updated_at": "2025-11-18T14:41:49.809Z",
   "comment": {
     "text": "The \"Assign Owner\" translation key is used to display a button label that assigns room ownership. It appears in a file management context, specifically on a footer button within a modal dialog, where users can select a new owner for a room file.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 141,
+      "line_number": 143,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={showBackButton ? \"\" : t(\"Files:AssignOwner\")}\n onSubmit={onChangeRoomOwner}\n withHeader\n headerProps={{\n onCloseClick: handleClosePanel,\n onBackClick,",
       "module": "/packages/client"
     }

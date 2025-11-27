@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Email adresa nije važeća. Možete urediti email dvostrukim klikom na njega.",
   "EmailErrorMessageUserNotFound": "Korisnik nije pronađen. Možete izmeniti imejl tako što ćete na njega dvaput kliknuti.",
   "GroupMaxAvailableRoleWarning": "Grupe se mogu dodati u prostoriju sa {{roleName}} ulogom kao maksimum. Međutim, možete promeniti ulogu pojedinačnih korisnika u grupi nakon uspešnog dodavanja. ",
+  "GuestAgentMaxAvailableRoleWarning": "Gosti ne mogu biti dodeljenima kao kreatori sadržaja.\nSamo administratori soba, {{productName}} administratori i Korisnici su kvalifikovani za ovu ulogu.",
   "InvitationLanguage": "Jezik pozivnice",
   "InviteMembersManuallyDescription": "Pozovite nove članove u {{productName}} lično putem e-pošte",
   "InviteMembersSearchPlaceholder": "Pozovite članove putem e-pošte",

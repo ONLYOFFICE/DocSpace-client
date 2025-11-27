@@ -35,6 +35,7 @@ import SectionHeaderContent from "./Header";
 import SectionBodyContent from "./Body";
 import { InfoPanelBodyContent } from "../Home/InfoPanel";
 import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
+import InfoPanelActions from "../Home/InfoPanel/Actions";
 import SectionFilterContent from "./Filter";
 import Dialogs from "./Dialogs";
 import ErrorView from "./ErrorView";
@@ -61,7 +62,7 @@ const FormGallery = ({
     Promise.all([fetchOforms(firstLoadFilter), fetchOformLocales()]).finally(
       () => {
         setIsInitLoading(false);
-      },
+      }
     );
   }, []);
 
@@ -85,7 +86,7 @@ const FormGallery = ({
       const myDocumentsFolderId = 2;
       setOformFromFolderId(myDocumentsFolderId);
       navigate(
-        `/form-gallery/${myDocumentsFolderId}/filter?${oformsFilter.toUrlParams()}`,
+        `/form-gallery/${myDocumentsFolderId}/filter?${oformsFilter.toUrlParams()}`
       );
     }
   }, [fromFolderId]);
@@ -123,6 +124,7 @@ const FormGallery = ({
       </SectionWrapper>
 
       <Dialogs />
+      <InfoPanelActions />
     </>
   );
 };

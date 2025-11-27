@@ -111,6 +111,7 @@ const Selector = ({
   withFooterInput,
   footerInputHeader,
   currentFooterInputValue,
+  folderFormValidation,
 
   withFooterCheckbox,
   footerCheckboxLabel,
@@ -186,6 +187,7 @@ const Selector = ({
   const [inputItemVisible, setInputItemVisible] = React.useState(false);
 
   const [requestRunning, setRequestRunning] = React.useState(false);
+  const [withErrorFooter, setWithErrorFooter] = React.useState(false);
 
   const onSubmitAction = React.useCallback(
     async (item?: TSelectorItem | React.MouseEvent, fromCallback?: boolean) => {
@@ -248,24 +250,17 @@ const Selector = ({
           return value;
         });
       } else {
-        let wasLimitReached = false;
+        if (maxSelectedItems && newSelectedItems.length >= maxSelectedItems) {
+          return;
+        }
 
         setNewSelectedItems((value) => {
-          if (maxSelectedItems && value.length >= maxSelectedItems) {
-            wasLimitReached = true;
-            return value;
-          }
-
           value.push({
             ...item,
           });
 
           return [...value];
         });
-
-        if (wasLimitReached) {
-          return;
-        }
 
         if (activeTabId) {
           setSelectedTabItems((value) => {
@@ -421,6 +416,13 @@ const Selector = ({
   );
 
   React.useEffect(() => {
+    if (folderFormValidation)
+      setWithErrorFooter(
+        Boolean(newFooterInputValue.match(folderFormValidation)),
+      );
+  }, [newFooterInputValue, folderFormValidation]);
+
+  React.useEffect(() => {
     if (disableFirstFetch) return;
     loadNextPage(0);
   }, [disableFirstFetch, loadNextPage]);
@@ -559,6 +561,11 @@ const Selector = ({
       : newSelectedItems.length === tempRenderedItemsLength &&
         tempRenderedItemsLength !== 0;
 
+  const isLimitReached = React.useMemo(() => {
+    if (!maxSelectedItems) return false;
+    return newSelectedItems.length >= maxSelectedItems;
+  }, [maxSelectedItems, newSelectedItems.length]);
+
   const onSelectAllProps: TSelectorSelectAll = withSelectAll
     ? {
         withSelectAll,
@@ -600,6 +607,7 @@ const Selector = ({
         footerInputHeader,
         currentFooterInputValue: newFooterInputValue,
         setNewFooterInputValue,
+        withErrorFooter,
       }
     : { setNewFooterInputValue };
 
@@ -722,6 +730,8 @@ const Selector = ({
           injectedElement={injectedElement}
           isSSR={isSSR}
           hideBackButton={hideBackButton}
+          withErrorFooter={withErrorFooter}
+          isLimitReached={isLimitReached}
           // info
           {...infoProps}
         />

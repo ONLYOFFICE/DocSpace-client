@@ -1,0 +1,28 @@
+{
+  "key_path": "ToolCallResultCopied",
+  "content": "Tool call result successfully copied to clipboard",
+  "content_en_sha1_hash": "8b63e6b7899370bb88c052d110771279e9653b50",
+  "created_at": "2025-11-25T11:52:53.792Z",
+  "updated_at": "2025-11-25T11:53:44.444Z",
+  "comment": {
+    "text": "This text appears as a success message when a tool call result is copied to the user's clipboard. It confirms the action was completed successfully and is displayed within a MarkdownField component in a tool call message. Translators should ensure the tone remains positive and informative.",
+    "is_auto": true,
+    "updated_at": "2025-11-25T11:53:44.444Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallBody/CodeView.tsx",
+      "line_number": 93,
+      "context": "<MarkdownField\n chatMessage={formatJsonWithMarkdown(\n isJson ? JSON.parse(result) : result,\n )}\n propLanguage={isErrorResult && !isJson ? \"text\" : undefined}\n successCopyMessage={t(\"Common:ToolCallResultCopied\")}\n />\n </div>\n ) : null}\n </>\n );",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

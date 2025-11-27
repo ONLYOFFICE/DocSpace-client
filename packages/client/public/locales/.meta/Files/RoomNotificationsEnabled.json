@@ -3,7 +3,7 @@
   "content": "Room notifications enabled",
   "content_en_sha1_hash": "adb84d67ce76ed3d465ff82c4794d196b48c9f28",
   "created_at": "2025-05-19T21:30:56.105Z",
-  "updated_at": "2025-11-17T11:52:35.744Z",
+  "updated_at": "2025-11-25T06:36:56.984Z",
   "comment": {
     "text": "This translation key is used for the notification message displayed when room notifications are enabled or disabled. It typically appears in a toast notification or confirmation dialog box after an action related to room notifications is performed. The key ensures that users see the correct status message based on their current setting.",
     "is_auto": true,

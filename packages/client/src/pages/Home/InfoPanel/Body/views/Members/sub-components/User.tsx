@@ -29,13 +29,18 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
-import { FolderType, RoomSecurityError } from "@docspace/shared/enums";
+import {
+  FolderType,
+  RoomSecurityError,
+  RoomsType,
+} from "@docspace/shared/enums";
 import { User as ShareUser } from "@docspace/shared/components/share/sub-components/User";
 
 import type { TOption } from "@docspace/shared/components/combobox";
 import type { TGroup } from "@docspace/shared/api/groups/types";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 
 import MembersHelper from "../Members.utils";
 import type { UserProps } from "../Members.types";
@@ -95,9 +100,16 @@ const User = ({
     isAIAgentsFolderRoot,
   );
 
-  const userRoleOptions =
-    ("isGroup" in user && user.isGroup) ||
-    ("isAdmin" in user && !user.isAdmin && !user.isOwner && !user.isRoomAdmin)
+  const guestInAgent =
+    "isVisitor" in user && user.isVisitor && room.roomType === RoomsType.AIRoom;
+
+  const userRoleOptions = guestInAgent
+    ? filterNotReadOnlyOptions(fullRoomRoleOptions)
+    : ("isGroup" in user && user.isGroup) ||
+        ("isAdmin" in user &&
+          !user.isAdmin &&
+          !user.isOwner &&
+          !user.isRoomAdmin)
       ? (filterPaidRoleOptions(fullRoomRoleOptions) as TOption[])
       : (fullRoomRoleOptions as TOption[]);
 

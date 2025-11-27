@@ -42,7 +42,6 @@ import styles from "./ChatInput.module.scss";
 import ToolsSettings from "./ToolsSettings";
 
 const Buttons = ({
-  inputWidth,
   isFilesSelectorVisible,
   toggleFilesSelector,
   sendMessageAction,
@@ -57,7 +56,7 @@ const Buttons = ({
   const { t } = useTranslation(["Common"]);
 
   const isSendButtonDisabled = !isRequestRunning
-    ? !value || !selectedModel
+    ? !value.trim() || !selectedModel
     : false;
 
   const sendIconProps = !isRequestRunning
@@ -79,10 +78,7 @@ const Buttons = ({
   };
 
   return (
-    <div
-      className={styles.chatInputButtons}
-      style={{ width: `${inputWidth}px` }}
-    >
+    <div className={styles.chatInputButtons}>
       <div className={styles.chatInputButtonsTools} title={t("AddFiles")}>
         <div
           className={classNames(styles.chatInputButton, {

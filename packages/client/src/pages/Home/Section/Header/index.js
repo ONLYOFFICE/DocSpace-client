@@ -600,7 +600,7 @@ const SectionHeaderContent = (props) => {
         iconUrl: CheckIcon,
       },
     ];
-  }, [t, onIndexReorder, onIndexApply]);
+  }, [t, onIndexReorder, onIndexApply, isIndexEditingMode]);
 
   const headerMenu = React.useMemo(() => {
     if (isIndexEditingMode) return indexEditingMenu;
@@ -1253,7 +1253,8 @@ export default inject(
     const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
     isPublicRoom ||
     isSharedWithMeFolderRoot ||
-    isArchive
+    isArchive ||
+    !isRootRooms
       ? false
       : security?.Read && isShared);
 

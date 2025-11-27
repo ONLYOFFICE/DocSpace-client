@@ -589,6 +589,10 @@ class FilesActionStore {
     }
   };
 
+  askAIAction = (item) => {
+    this.dialogsStore.setAiAgentSelectorDialogProps(true, item);
+  };
+
   emptyTrash = async (translations) => {
     const {
       secondaryProgressDataStore,

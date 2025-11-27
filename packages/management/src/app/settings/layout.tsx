@@ -30,6 +30,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { usePathname, useRouter } from "next/navigation";
+import classNames from "classnames";
 
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { Tabs, type TTabItem } from "@docspace/shared/components/tabs";
@@ -42,7 +43,7 @@ import { pathsWithoutTabs } from "@/lib/constants";
 import useAppState from "@/hooks/useAppState";
 import { useEndAnimation } from "@/hooks/useEndAnimation";
 
-import { StyledWrapper } from "./layout.styled";
+import styles from "./layout.module.scss";
 
 const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation(["Common"]);
@@ -129,14 +130,16 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const hideTabs = pathsWithoutTabs.some((item) => pathname.includes(item));
 
   return (
-    <StyledWrapper hideTabs={hideTabs}>
+    <div
+      className={classNames(styles.wrapper, { [styles.hideTabs]: hideTabs })}
+    >
       <Tabs
         items={data}
         selectedItemId={selectedId}
         onSelect={(e) => onSelect(e)}
         withAnimation
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

@@ -56,6 +56,7 @@ type NotificationsChannelsProps = {
   isTelegramEnabled?: TargetUserStore["isTelegramEnabled"];
   isEmailNotValid?: TargetUserStore["isEmailNotValid"];
   checkTg?: TStore["telegramStore"]["checkTg"];
+  checkNotificationsChannels?: TargetUserStore["checkNotificationsChannels"];
 };
 
 const NotificationsChannels = ({
@@ -70,6 +71,7 @@ const NotificationsChannels = ({
   isTelegramEnabled,
   isEmailNotValid,
   checkTg,
+  checkNotificationsChannels,
 }: NotificationsChannelsProps) => {
   const { t } = useTranslation(["Profile", "Notifications", "Common"]);
 
@@ -87,6 +89,12 @@ const NotificationsChannels = ({
             serviceName: t("Common:ProviderTelegram"),
           }),
         );
+      }
+    });
+
+    SocketHelper?.on(SocketEvents.ConnectTelegram, (option) => {
+      if (user && user.id === option) {
+        checkNotificationsChannels?.();
       }
     });
   }, []);
@@ -144,8 +152,12 @@ export default inject(
     const { user } = userStore;
     const { isConnected, username, checkTg } = telegramStore;
 
-    const { isEmailEnabled, isTelegramEnabled, isEmailNotValid } =
-      peopleStore.targetUserStore!;
+    const {
+      isEmailEnabled,
+      isTelegramEnabled,
+      isEmailNotValid,
+      checkNotificationsChannels,
+    } = peopleStore.targetUserStore!;
 
     return {
       connectAccountDialogVisible,
@@ -159,6 +171,7 @@ export default inject(
       isTelegramEnabled,
       isEmailNotValid,
       checkTg,
+      checkNotificationsChannels,
     };
   },
 )(observer(NotificationsChannels));

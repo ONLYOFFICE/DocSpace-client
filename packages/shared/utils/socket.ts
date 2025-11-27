@@ -73,6 +73,7 @@ export const enum SocketEvents {
   ChatMessageId = "s:commit-chat-message",
   UpdateChat = "s:update-chat",
   UpdateTelegram = "s:update-telegram",
+  ConnectTelegram = "s:telegram",
   SelfRestrictionFile = "s:self-restriction-file",
   SelfRestrictionFolder = "s:self-restriction-folder",
   ChaneFolderAccessRights = "s:change-access-rights-folder",
@@ -294,6 +295,7 @@ export type TListenEventCallbackMap = {
     chatTitle: string;
   }) => void;
   [SocketEvents.UpdateTelegram]: (data: { username: string }) => void;
+  [SocketEvents.ConnectTelegram]: (data: string) => void;
   [SocketEvents.SelfRestrictionFile]: (data: {
     id: number;
     data: string;

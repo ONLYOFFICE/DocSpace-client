@@ -1784,6 +1784,9 @@ class ContextOptionsStore {
       (item.rootFolderType === FolderType.AIAgents &&
         item.roomType === RoomsType.AIRoom);
 
+    const isKnowledgeOrResult =
+      item.isAIAgent && (item.isInsideKnowledge || item.isInsideResultStorage);
+
     const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
       : item.shared
@@ -2328,8 +2331,9 @@ class ContextOptionsStore {
         label: isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
-        disabled:
-          isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
+        disabled: isKnowledgeOrResult
+          ? false
+          : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
         id: "option_archive-room",

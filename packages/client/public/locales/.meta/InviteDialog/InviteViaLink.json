@@ -3,7 +3,7 @@
   "content": "Invite via link",
   "content_en_sha1_hash": "a8314a068e610756fa8088a3772ae621fcd59e37",
   "created_at": "2025-05-19T21:30:54.730Z",
-  "updated_at": "2025-11-03T12:10:35.055Z",
+  "updated_at": "2025-11-20T14:22:10.879Z",
   "comment": {
     "text": "This translation key is used to display the text \"Invite via link\" in a UI component, likely as a button label or header. It appears in an external links panel and is associated with invite actions when accessing paid role options.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 238,
-      "context": "const filteredAccesses =\n roomType === -1 ? accesses : filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : isAIAgentsFolder\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")",
+      "line_number": 243,
+      "context": "? filterNotReadOnlyOptions(accesses)\n : filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : roomType === RoomsType.AIRoom\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")",
       "module": "/packages/client"
     }
   ],

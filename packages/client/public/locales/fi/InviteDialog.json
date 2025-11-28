@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Sähköpostiosoite ei ole olemassa. Voit muokata sähköpostia kaksoisnapsauttamalla sitä.",
   "EmailErrorMessageUserNotFound": "Käyttäjää ei löytynyt. Voit muokata sähköpostia tuplaamalla sen.",
   "GroupMaxAvailableRoleWarning": "Maksimimäärän ryhmiä voi nyt lisätä huoneeseen {{roleName}}-roolissa. Voit kuitenkin muuttaa yksittäisten käyttäjien rooleja ryhmässä sen jälkeen, kun se on lisätty.",
+  "GuestAgentMaxAvailableRoleWarning": "Vieraat eivät voi olla sisällöntuottajia.\nVain huoneen ylläpitäjät, {{productName}}-ylläpitäjät ja Käyttäjät ovat kelpoisia tähän rooliin.",
   "InvitationLanguage": "Kutsukieli",
   "InviteMembersManuallyDescription": "Kutsu uusia jäseniä {{productName}} :een henkilökohtaisesti sähköpostilla",
   "InviteMembersSearchPlaceholder": "Kutsu käyttäjiä sähköpostilla",

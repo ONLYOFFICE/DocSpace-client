@@ -24,28 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-module.exports = {
-  rootDir: ".",
-  testEnvironment: "node",
-  setupFilesAfterEnv: ["jest-expect-message"],
-  verbose: true,
-  // Set a very long timeout for long-running tests like the Ollama LLM translation validation
-  testTimeout: 3600000, // 1 hour
-  reporters: [
-    "default",
-    [
-      "./node_modules/jest-html-reporter",
-      {
-        pageTitle: "DocSpace Frontend tests report",
-        outputPath: "<rootDir>/reports/tests-results.html",
-        includeFailureMsg: true,
-        includeConsoleLog: true,
-        includeStackTrace: false,
-        inlineSource: true,
-        useCssFile: false,
-        sort: "titleAsc",
-        append: false,
-      },
-    ],
-  ],
+import { TFile, TFolder } from "../api/files/types";
+import { TRoom } from "../api/rooms/types";
+import { isFile, isFolder, isRoom } from "./typeGuards";
+
+export const isSameEntity = (
+  a: TFile | TFolder | TRoom | null | undefined,
+  b: TFile | TFolder | TRoom | null | undefined,
+): boolean => {
+  if (!a || !b) return false;
+
+  if (a.id !== b.id) return false;
+
+  if (isFile(a)) return isFile(b);
+  if (isFolder(a)) return isFolder(b);
+  if (isRoom(a)) return isRoom(b);
+
+  return false;
 };

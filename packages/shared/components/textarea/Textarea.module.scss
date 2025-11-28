@@ -37,6 +37,7 @@
 
   max-width: 1200px;
   height: 89px;
+  min-height: 89px;
 
   &.heightScale {
     height: 65vh;
@@ -48,6 +49,17 @@
 
   &.defaultHeight {
     height: var(--height-textarea);
+    min-height: var(--height-textarea);
+  }
+
+  @supports (-moz-appearance: none) {
+    &:has(.textarea:placeholder-shown) {
+      min-height: 120px;
+    }
+
+    &.defaultHeight:has(.textarea:placeholder-shown) {
+      min-height: 120px;
+    }
   }
 
   :global(.scroll-wrapper) {
@@ -84,6 +96,17 @@
   padding-inline-start: var(--padding-inline-start);
   -webkit-background-clip: unset !important;
 
+  &::placeholder {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  @supports (-moz-appearance: none) {
+    &:placeholder-shown {
+      min-height: 104px;
+    }
+  }
+
   &[data-dir="rtl"] {
     &:placeholder-shown {
       text-align: right;
@@ -102,9 +125,11 @@
 
   width: 100% !important;
   height: 93px;
+  min-height: 93px;
 
   &.defaultHeight {
     height: var(--height-textarea);
+    min-height: var(--height-textarea);
   }
 
   &.isFullHeight {
@@ -113,5 +138,15 @@
 
   &.heightScale {
     height: 67vh;
+  }
+
+  @supports (-moz-appearance: none) {
+    &:has(.textarea:placeholder-shown) {
+      min-height: 120px;
+    }
+
+    &.defaultHeight:has(.textarea:placeholder-shown) {
+      min-height: 120px;
+    }
   }
 }

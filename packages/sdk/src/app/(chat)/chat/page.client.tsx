@@ -62,7 +62,10 @@ export default function ChatClient({
 
   const messagesSettings = useInitMessages(agentId ?? "");
 
-  const getResultStorageId = () => agentId;
+  const getResultStorageId = () => {
+    const id = Number(agentId);
+    return Number.isNaN(id) ? null : id;
+  };
 
   const chatProps = {
     userAvatar: userAvatar,

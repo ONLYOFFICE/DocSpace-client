@@ -2,7 +2,7 @@
   "AddStaticText": "Adăugare text static",
   "AddWatermarkElements": "Adăugare elemente de incripționare",
   "AddWatermarksToDocuments": "Adăugare incripționare la documente",
-  "AddWatermarksToDocumentsDescription": "Protejează toate documentele din această sală cu incripționare. O incripționare deja existentă nu va fi înlocuită.",
+  "AddWatermarksToDocumentsDescription": "Protejați toate documentele din această sală cu incripționări.\nDacă documentul conține deja o incripționare, această nu va fi înlocuită.\nDacă această funcţie este activată, documente pot fi descărcate numai în formatul PDF pentru a asigura că inscripționarea rămâne intactă.",
   "AutomaticIndexing": "Indexare automată",
   "AutomaticIndexingDescription": "Activați indexarea automată pentru a indexa fișiere și foldere pe baza numărului de serie. Sortarea după număr va fi stabilită ca valoarea implicită pentru toți utilizatori.",
   "ChooseRoomType": "Alegeţi tipul de sală",

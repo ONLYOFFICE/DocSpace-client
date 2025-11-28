@@ -2,7 +2,7 @@
   "AddStaticText": "Dodajte statični tekst",
   "AddWatermarkElements": "Dodajte elemente vodenih žigova",
   "AddWatermarksToDocuments": "Dodajte vodene žigove dokumentima",
-  "AddWatermarksToDocumentsDescription": "Zaštitite sve dokumente u ovoj sobi vodenim žigovima. Ako dokument već sadrži vodeni žig, on neće biti zamenjen.",
+  "AddWatermarksToDocumentsDescription": "Zaštitite sve dokumente u ovoj prostoriji vodenim žigovima. Ako dokument već sadrži vodeni žig, on neće biti zamenjen. Kada je ova postavka omogućena, dokumenti se mogu preuzeti samo kao PDF datoteke kako bi vodeni žig ostao netaknut.",
   "AutomaticIndexing": "Automatsko indeksiranje",
   "AutomaticIndexingDescription": "Omogućite automatsko indeksiranje za indeksiranje fajlova i fascikli prema serijskom broju. Sortiranje po broju će biti postavljeno kao podrazumevano za sve korisnike.",
   "ChooseRoomType": "Izaberi tip sobe",

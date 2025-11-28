@@ -56,6 +56,7 @@ type NotificationsChannelsProps = {
   isTelegramEnabled?: TargetUserStore["isTelegramEnabled"];
   isEmailNotValid?: TargetUserStore["isEmailNotValid"];
   checkTg?: TStore["telegramStore"]["checkTg"];
+  checkNotificationsChannels?: TargetUserStore["checkNotificationsChannels"];
 };
 
 const NotificationsChannels = ({
@@ -70,6 +71,7 @@ const NotificationsChannels = ({
   isTelegramEnabled,
   isEmailNotValid,
   checkTg,
+  checkNotificationsChannels,
 }: NotificationsChannelsProps) => {
   const { t } = useTranslation(["Profile", "Notifications", "Common"]);
 
@@ -79,8 +81,8 @@ const NotificationsChannels = ({
       individual: true,
     });
 
-    SocketHelper?.on(SocketEvents.UpdateTelegram, (option) => {
-      if (typeof option === "string") {
+    const updateTelegramHandler = (data: string) => {
+      if (typeof data === "string") {
         checkTg?.();
         toastr.success(
           t("Notifications:SuccessConnected", {
@@ -88,7 +90,19 @@ const NotificationsChannels = ({
           }),
         );
       }
-    });
+    };
+
+    const connectTelegramHandler = () => {
+      checkNotificationsChannels?.();
+    };
+
+    SocketHelper?.on(SocketEvents.UpdateTelegram, updateTelegramHandler);
+    SocketHelper?.on(SocketEvents.ConnectTelegram, connectTelegramHandler);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.UpdateTelegram, updateTelegramHandler);
+      SocketHelper?.off(SocketEvents.ConnectTelegram, connectTelegramHandler);
+    };
   }, []);
 
   return (
@@ -144,8 +158,12 @@ export default inject(
     const { user } = userStore;
     const { isConnected, username, checkTg } = telegramStore;
 
-    const { isEmailEnabled, isTelegramEnabled, isEmailNotValid } =
-      peopleStore.targetUserStore!;
+    const {
+      isEmailEnabled,
+      isTelegramEnabled,
+      isEmailNotValid,
+      checkNotificationsChannels,
+    } = peopleStore.targetUserStore!;
 
     return {
       connectAccountDialogVisible,
@@ -159,6 +177,7 @@ export default inject(
       isTelegramEnabled,
       isEmailNotValid,
       checkTg,
+      checkNotificationsChannels,
     };
   },
 )(observer(NotificationsChannels));

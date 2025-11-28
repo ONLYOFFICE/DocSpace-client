@@ -99,7 +99,7 @@ class BackupStore {
   };
 
   public fetchConnectingStorages = async (): Promise<TConnectingStorages> => {
-    const res = await getConnectingStorages();
+    const res = await getConnectingStorages("excludewebdav=true");
 
     this.setConnectingStorages(
       res.map((storage) => ({

@@ -3009,7 +3009,7 @@
   --management-text-color: #{$gray};
   --management-error-color: #{$light-error-status};
   --management-row-border-color: #{$gray-light-mid};
-  --management-cross-icon-fill: #{$white};
+  --management-cross-icon-fill: #{$gray};
 }
 
 .dark {
@@ -3019,5 +3019,5 @@
   --management-text-color: #{$gray-dark};
   --management-error-color: #{$dark-error-status};
   --management-row-border-color: #{$gray-dark-strong};
-  --management-cross-icon-fill: #{$white};
+  --management-cross-icon-fill: #{$gray-dark};
 }

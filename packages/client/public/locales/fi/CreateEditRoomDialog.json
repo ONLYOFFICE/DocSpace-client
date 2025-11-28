@@ -2,7 +2,7 @@
   "AddStaticText": "Lisää staattista tekstiä",
   "AddWatermarkElements": "Lisää vesileimaelementit",
   "AddWatermarksToDocuments": "Lisää vesileimat asiakirjoihin",
-  "AddWatermarksToDocumentsDescription": "Suojaa kaikki tämän huoneen asiakirjat vesileimoilla. Jos asiakirjassa on jo vesileima, sitä ei korvata.",
+  "AddWatermarksToDocumentsDescription": "Suojaa kaikki tämän huoneen asiakirjat vesileimoilla.\nJos asiakirjassa on jo vesileima, sitä ei korvata.\nKun tämä asetus on käytössä, asiakirjoja voidaan ladata vain PDF-tiedostoina, jotta vesileima säilyy ehjänä.",
   "AutomaticIndexing": "Automaattinen indeksointi",
   "AutomaticIndexingDescription": "Ota käyttöön automaattinen indeksointi hakemistotiedostoihin ja kansioihin sarjanumeron perusteella. Numeron perusteella järjestäminen asetetaan oletuksena kaikille käyttäjille.",
   "ChooseRoomType": "Valitse huonetyyppi",

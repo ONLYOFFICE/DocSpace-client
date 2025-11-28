@@ -95,16 +95,16 @@
   }
 }
 
+.mobileArticleHeader {
+  height: 49px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
 .crossIcon {
   & > div {
-    position: absolute;
-    top: 37px;
-    right: 10px;
-
-    :global(.rtl){
-      left: 10px;
-    }
-
     border-radius: 100px;
     cursor: pointer;
     display: flex;

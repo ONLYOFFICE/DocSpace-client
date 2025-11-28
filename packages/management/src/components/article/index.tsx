@@ -30,7 +30,6 @@ import SpacesSvg from "PUBLIC_DIR/images/spaces.react.svg";
 import SettingsReactSvg from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg";
 import PaymentIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg";
 import GiftReactSvg from "PUBLIC_DIR/images/gift.react.svg";
-import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -154,15 +153,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           visible={articleOpen}
           onClick={() => setArticleOpen(false)}
           withBackground
-          // withBlur
         />
-        {articleOpen ? (
-          <ReactSVG
-            src={CrossIcon}
-            className={styles.crossIcon}
-            onClick={() => setArticleOpen(false)}
-          />
-        ) : null}
         {articleComponent}
       </>
     );

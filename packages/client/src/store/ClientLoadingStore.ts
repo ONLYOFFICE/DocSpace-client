@@ -242,7 +242,7 @@ class ClientLoadingStore {
     withTimer: boolean = true,
   ) => {
     return;
-    this.setIsLoading("body", isSectionBodyLoading, withTimer);
+    //this.setIsLoading("body", isSectionBodyLoading, withTimer);
   };
 
   get isLoading() {

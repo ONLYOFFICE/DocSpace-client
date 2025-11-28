@@ -525,6 +525,11 @@ const SubMenu = (props: SubMenuProps) => {
         defaultContentOptions,
       );
     }
+    const toggleTooltipId = `context-menu-item-toggle-tooltip-${item.key}`;
+    const itemTooltipId = `context-menu-item-tooltip-${item.key}`;
+
+    const tooltipTargetId =
+      item.tooltipTarget === "toggle" ? toggleTooltipId : itemTooltipId;
 
     const isActiveDescendant =
       currentIndex === index && activeLevel == menuLevel;
@@ -535,9 +540,7 @@ const SubMenu = (props: SubMenuProps) => {
         key={item.key}
         data-testid={item.dataTestId ?? item.key}
         data-focused={isActiveDescendant}
-        data-tooltip-id={
-          item.disabled ? `context-menu-item-tooltip-${item.key}` : undefined
-        }
+        data-tooltip-id={item.disabled ? itemTooltipId : undefined}
         role="none"
         className={
           item.withToggle
@@ -568,7 +571,7 @@ const SubMenu = (props: SubMenuProps) => {
           <Tooltip
             float
             openOnClick={isTouchDevice}
-            id={`context-menu-item-tooltip-${item.key}`}
+            id={tooltipTargetId}
             getContent={item.getTooltipContent}
             place="bottom-end"
             zIndex={1003}

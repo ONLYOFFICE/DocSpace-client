@@ -41,6 +41,7 @@ export const enum ProviderType {
   TogetherAi = 2,
   OpenAiCompatible = 3,
   Anthropic = 4,
+  OpenRouter = 5,
 }
 
 export const enum EventType {
@@ -68,4 +69,10 @@ export const enum ToolsPermission {
 export const enum WebSearchType {
   None,
   Exa,
+}
+
+export const enum KnowledgeType {
+  None,
+  OpenAi,
+  OpenRouter,
 }

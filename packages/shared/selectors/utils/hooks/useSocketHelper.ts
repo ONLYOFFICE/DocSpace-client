@@ -46,14 +46,17 @@ import {
 
 import { UseSocketHelperProps } from "../types";
 import { SettingsContext } from "../contexts/Settings";
+import socket from "../../../utils/socket";
 
 const useSocketHelper = ({
   disabledItems,
+  disabledFolderType,
   filterParam,
   withCreate,
   setItems,
   setBreadCrumbs,
   setTotal,
+  disableBySecurity,
 }: UseSocketHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const { getIcon } = React.use(SettingsContext);
@@ -132,14 +135,25 @@ const useSocketHelper = ({
 
       if (opt?.type === "file" && "folderId" in data) {
         const file = await getFileInfo(data.id);
-        [item] = convertFilesToItems([file], getIcon, filterParam);
+        [item] = convertFilesToItems(
+          [file],
+          getIcon,
+          filterParam,
+          undefined,
+          disableBySecurity,
+        );
       } else if (opt?.type === "folder" && !("folderId" in data)) {
         if ("roomType" in data) {
           const room = await getRoomInfo(data.id);
           item = convertRoomsToItems([room], t)[0];
         } else {
           const folder = await getFolderInfo(data.id);
-          item = convertFoldersToItems([folder], disabledItems, filterParam)[0];
+          item = convertFoldersToItems(
+            [folder],
+            disabledItems,
+            filterParam,
+            disabledFolderType,
+          )[0];
         }
       }
 
@@ -190,7 +204,17 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setItems, setTotal, t, withCreate],
+    [
+      disabledItems,
+      disabledFolderType,
+      filterParam,
+      getIcon,
+      setItems,
+      setTotal,
+      t,
+      withCreate,
+      disableBySecurity,
+    ],
   );
 
   const updateItem = React.useCallback(
@@ -214,14 +238,25 @@ const useSocketHelper = ({
 
       if (opt?.type === "file" && "folderId" in data) {
         const file = await getFileInfo(data.id);
-        [item] = convertFilesToItems([file], getIcon, filterParam);
+        [item] = convertFilesToItems(
+          [file],
+          getIcon,
+          filterParam,
+          undefined,
+          disableBySecurity,
+        );
       } else if (opt?.type === "folder") {
         if ("roomType" in data) {
           const room = await getRoomInfo(data.id);
           item = convertRoomsToItems([room], t)[0];
         } else {
           const folder = await getFolderInfo(data.id);
-          item = convertFoldersToItems([folder], disabledItems, filterParam)[0];
+          item = convertFoldersToItems(
+            [folder],
+            disabledItems,
+            filterParam,
+            disabledFolderType,
+          )[0];
         }
       }
 
@@ -273,7 +308,16 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setBreadCrumbs, setItems, t],
+    [
+      disabledItems,
+      disabledFolderType,
+      filterParam,
+      getIcon,
+      setBreadCrumbs,
+      setItems,
+      t,
+      disableBySecurity,
+    ],
   );
 
   const deleteItem = React.useCallback(
@@ -308,26 +352,32 @@ const useSocketHelper = ({
     [setItems, setTotal],
   );
 
+  const handleSocketEvent = React.useEffectEvent((opt?: TOptSocket) => {
+    switch (opt?.cmd) {
+      case "create":
+        addItem(opt);
+        break;
+      case "update":
+        updateItem(opt);
+        break;
+      case "delete":
+        deleteItem(opt);
+        break;
+      default:
+    }
+  });
+
   React.useEffect(() => {
     if (initRef.current) return;
 
     initRef.current = true;
 
-    SocketHelper?.on(SocketEvents.ModifyFolder, (opt?: TOptSocket) => {
-      switch (opt?.cmd) {
-        case "create":
-          addItem(opt);
-          break;
-        case "update":
-          updateItem(opt);
-          break;
-        case "delete":
-          deleteItem(opt);
-          break;
-        default:
-      }
-    });
-  }, [addItem, updateItem, deleteItem]);
+    SocketHelper?.on(SocketEvents.ModifyFolder, handleSocketEvent);
+
+    return () => {
+      socket?.off(SocketEvents.ModifyFolder, handleSocketEvent);
+    };
+  }, []);
 
   React.useEffect(() => {
     return () => {

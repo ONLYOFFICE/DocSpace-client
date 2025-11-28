@@ -3,7 +3,7 @@
   "content": "Quotas",
   "content_en_sha1_hash": "34ed58657019e0ff061ea2eef787a27a97813fe2",
   "created_at": "2025-05-19T21:30:52.354Z",
-  "updated_at": "2025-05-26T07:57:32.789Z",
+  "updated_at": "2025-11-06T18:29:15.950Z",
   "comment": {
     "text": "The translation key \"Quotas\" corresponds to a title that displays storage management quotas. It is used in the \"Storage Management\" category of the Portal Settings page, appearing as a main title on screen, likely in a section header or button label.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
       "line_number": 40,
-      "context": "import { Link } from \"@docspace/shared/components/link\";\n \n import { StyledBaseQuotaComponent, StyledMainTitle } from \"./StyledComponent\";\n import { QuotaPerRoomComponentSection } from \"./sub-components/QuotaPerRoom\";\n import { QuotaPerUserComponentSection } from \"./sub-components/QuotaPerUser\";\n import MobileQuotasComponent from \"./sub-components/MobileQuotas\";\n \n const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {\n if (isMobile())\n return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;",
+      "context": "import { Link } from \"@docspace/shared/components/link\";\n \n import { StyledBaseQuotaComponent, StyledMainTitle } from \"./StyledComponent\";\n import { QuotaPerRoomComponentSection } from \"./sub-components/QuotaPerRoom\";\n import { QuotaPerUserComponentSection } from \"./sub-components/QuotaPerUser\";\n import MobileQuotasComponent from \"./sub-components/MobileQuotas\";\n import { QuotaPerAIAgentComponentSection } from \"./sub-components/QuotaPerAIAgent\";\n \n const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {\n if (isMobile())\n return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;",
       "module": "/packages/client"
     }
   ],

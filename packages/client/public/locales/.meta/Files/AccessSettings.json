@@ -3,7 +3,7 @@
   "content": "Access settings",
   "content_en_sha1_hash": "7b34b38f3e6a5710c25a3765304dc0c570600dd3",
   "created_at": "2025-05-19T21:30:55.184Z",
-  "updated_at": "2025-10-27T16:14:33.227Z",
+  "updated_at": "2025-11-18T14:41:49.749Z",
   "comment": {
     "text": "This translation key is used for \"Access settings\" content that appears in a link within an edit room dialog and as a header title in a panel. It provides the label for access-related settings or configurations, likely prompting users to review or adjust their access permissions.",
     "is_auto": true,
@@ -12,32 +12,32 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 140,
+      "line_number": 143,
       "context": "type={LinkType.action}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onOpenAccessSettings}\n >\n {t(\"Files:AccessSettings\")}\n </Link>\n </>\n }\n />\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 140,
+      "line_number": 143,
       "context": "type={LinkType.action}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onOpenAccessSettings}\n >\n {t(\"Files:AccessSettings\")}\n </Link>\n </>\n }\n />\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 329,
+      "line_number": 328,
       "context": "isFill\n isClickable\n dataTestId=\"template_access_settings_back_button\"\n />\n <Text fontSize=\"21px\" fontWeight={700} className=\"header-component\">\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 329,
+      "line_number": 328,
       "context": "isFill\n isClickable\n dataTestId=\"template_access_settings_back_button\"\n />\n <Text fontSize=\"21px\" fontWeight={700} className=\"header-component\">\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
-      "line_number": 212,
-      "context": "};\n \n const addUserTitle = canShare\n ? t(\"Common:AddUsers\")\n : isTemplate\n ? t(\"Files:AccessSettings\")\n : t(\"Common:InviteContacts\");\n \n const onSearchClick = () => setShowSearchBlock?.(true);\n \n const isRoom = \"isRoom\" in selection && (selection.isRoom as boolean);",
+      "line_number": 182,
+      "context": "onClickInviteUsers();\n };\n \n const addUserTitle = isTemplate\n ? t(\"Files:AccessSettings\")\n : t(\"Common:InviteContacts\");\n \n const onSearchClick = () => setShowSearchBlock?.(true);\n \n const isRoom = \"isRoom\" in selection && (selection.isRoom as boolean);",
       "module": "/packages/client"
     },
     {
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 953,
+      "line_number": 955,
       "context": "event.item = { ...item, isEdit: true };\n window.dispatchEvent(event);\n };\n \n onOpenTemplateAccessOptions = () => {\n this.dialogsStore.setTemplateAccessSettingsVisible(true);\n };\n \n // onLoadLinks = async (t, item) => {\n //   const promise = new Promise(async (resolve, reject) => {\n //     let linksArray = [];",
       "module": "/packages/client"
     }

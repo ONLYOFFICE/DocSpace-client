@@ -107,6 +107,7 @@ const View = ({
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
+  fetchKnowledge,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -162,6 +163,7 @@ const View = ({
     fetchAIProviders,
     fetchMCPServers,
     fetchWebSearch,
+    fetchKnowledge,
     standalone: true,
   });
 
@@ -398,6 +400,7 @@ export const ViewComponent = inject(
       fetchAIProviders: aiSettingsStore.fetchAIProviders,
       fetchMCPServers: aiSettingsStore.fetchMCPServers,
       fetchWebSearch: aiSettingsStore.fetchWebSearch,
+      fetchKnowledge: aiSettingsStore.fetchKnowledge,
     };
   },
 )(observer(View));

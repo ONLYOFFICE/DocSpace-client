@@ -42,6 +42,7 @@ import EmptyFilterFilesDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import { SearchArea } from "@docspace/shared/enums";
 
 // import EmptyContainer from "./EmptyContainer";
 
@@ -60,6 +61,8 @@ const EmptyFilterContainer = ({
   isPublicRoom,
   publicRoomKey,
   userId,
+  isInsideKnowledge,
+  isInsideResultStorage,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -114,6 +117,14 @@ const EmptyFilterContainer = ({
       const newFilter = FilesFilter.getDefault({ isRecentFolder });
 
       newFilter.folder = selectedFolderId;
+
+      if (isInsideResultStorage) {
+        newFilter.searchArea = SearchArea.ResultStorage;
+      }
+
+      if (isInsideKnowledge) {
+        newFilter.searchArea = SearchArea.Knowledge;
+      }
 
       if (isPublicRoom) {
         navigate(
@@ -175,6 +186,8 @@ export default inject(
       setClearSearch: filesStore.setClearSearch,
       theme: settingsStore.theme,
       userId: user?.id,
+      isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
+      isInsideResultStorage: selectedFolderStore.isInsideResultStorage,
 
       isPublicRoom,
       publicRoomKey,

@@ -65,17 +65,20 @@ const StyledBox = styled.div.attrs(injectDefaultTheme)`
           opacity: 1;
         }
 
-        ${isLinkedIn &&
-        css`
+        ${
+          isLinkedIn &&
+          css`
           path:nth-child(8),
           path:nth-child(9) {
             fill: ${globalColors.black};
             opacity: 1;
           }
-        `}
+        `
+        }
 
-        ${isWeixin &&
-        css`
+        ${
+          isWeixin &&
+          css`
           path:nth-child(11),
           path:nth-child(12),
           path:nth-child(13),
@@ -83,16 +86,19 @@ const StyledBox = styled.div.attrs(injectDefaultTheme)`
             fill: ${globalColors.black};
             opacity: 1;
           }
-        `}
+        `
+        }
 
-        ${isTelegram &&
-        css`
+        ${
+          isTelegram &&
+          css`
           path:nth-child(11),
           path:nth-child(12) {
             fill: ${globalColors.black};
             opacity: 1;
           }
-        `}
+        `
+        }
       `}
 
     ${({ isThirdPartyAvailable, canSet }) =>
@@ -113,19 +119,21 @@ const ConsumerItem = ({
   updateConsumerProps,
   t,
   isThirdPartyAvailable,
+  standalone,
 }) => {
   const logo = thirdpartiesLogo?.get(`${consumer.name.toLowerCase()}.svg`);
   const isSet = !!(!consumer.canSet || consumer.props.find((p) => p.value));
+  const saveAvailable = !consumer.paid || standalone || isThirdPartyAvailable; // same logic on backend
 
   return (
-    <StyledItem isThirdPartyAvailable={isThirdPartyAvailable} isSet={isSet}>
+    <StyledItem isThirdPartyAvailable={saveAvailable} isSet={isSet}>
       <div className="item-box">
         <StyledBox
           canSet={consumer.canSet}
           isLinkedIn={consumer.name === "linkedin"}
           isWeixin={consumer.name === "weixin"}
           isTelegram={consumer.name === "telegram"}
-          isThirdPartyAvailable={isThirdPartyAvailable}
+          isThirdPartyAvailable={saveAvailable}
         >
           {logo ? (
             <ReactSVG
@@ -141,7 +149,7 @@ const ConsumerItem = ({
             onModalOpen={onModalOpen}
             updateConsumerProps={updateConsumerProps}
             t={t}
-            isDisabled={!isThirdPartyAvailable}
+            isDisabled={!saveAvailable}
             dataTestId="consumer_toggle_button"
           />
         </div>

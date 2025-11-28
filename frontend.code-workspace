@@ -32,21 +32,7 @@
   "settings": {
     "window.zoomLevel": 0,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "liveServer.settings.multiRootWorkspaceName": "✨ docspace",
-    "cSpell.words": ["docspace", "browserslist", "debuginfo", "doceditor"],
-    "jest.autoRun": {},
-    "jest.disabledWorkspaceFolders": [
-      "🌐 root",
-      "🔑 @docspace/login",
-      "🚀 @docspace/client",
-      "📄 @docspace/editor",
-      "📦 @docspace/common",
-      "🗂 @docspace/management"
-    ],
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
+    "editor.defaultFormatter": "biomejs.biome",
     "VsCodeTaskButtons.tasks": [
       {
         "label": "Server",
@@ -234,22 +220,27 @@
             "tooltip": "🛠️ Start the \"Test | Jest:common\" task"
           },
           {
-            "label": "Test translations",
+            "label": "Test ascii (common)",
+            "task": "Test | Jest:ascii",
+            "tooltip": "🛠️ Start the \"Test | Jest:ascii\" task"
+          },
+          {
+            "label": "Test translations (common)",
             "task": "Test | Jest:translations",
             "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
           },
           {
-            "label": "Test images",
+            "label": "Test images (common)",
             "task": "Test | Jest:images",
             "tooltip": "🛠️ Start the \"Test | Jest:images\" task"
           },
           {
-            "label": "Test colors",
+            "label": "Test colors (common)",
             "task": "Test | Jest:colors",
             "tooltip": "🛠️ Start the \"Test | Jest:colors\" task"
           },
           {
-            "label": "Test dependencies",
+            "label": "Test dependencies (common)",
             "task": "Test | Jest:dependencies",
             "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"
           },
@@ -259,29 +250,44 @@
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
           },
           {
-            "label": "Docker E2E build",
-            "task": "Test | Test e2e docker build",
+            "label": "Test Login E2E build docker",
+            "task": "Test | Test e2e docker build (login)",
             "tooltip": "🛠️ Start the \"test build in docker\" task"
           },
           {
-            "label": "Docker E2E start",
-            "task": "Test | Test e2e docker start",
+            "label": "Test Login E2E start docker",
+            "task": "Test | Test e2e docker start (login)",
             "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
           },
           {
-            "label": "Docker E2E clear",
-            "task": "Test | Test e2e docker clear",
+            "label": "Test Login E2E clear docker",
+            "task": "Test | Test e2e docker clear (login)",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
+            "label": "Test SDK E2E build docker",
+            "task": "Test | Test e2e docker build (SDK)",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
+          },
+          {
+            "label": "Test SDK E2E start docker",
+            "task": "Test | Test e2e docker start (SDK)",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
+          },
+          {
+            "label": "Test SDK E2E clear docker",
+            "task": "Test | Test e2e docker clear (SDK)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
           },
           {
             "label": "Lint",
-            "task": "Test | ESLint",
-            "tooltip": "🛠️ Start the \"eslint\" task"
+            "task": "Test | Biome",
+            "tooltip": "🛠️ Start the \"biome\" task"
           },
           {
             "label": "Lint:fix",
-            "task": "Test | ESLint:fix",
-            "tooltip": "🛠️ Start the \"eslint (autofix)\" task"
+            "task": "Test | Biome:fix",
+            "tooltip": "🛠️ Start the \"biome (autofix)\" task"
           },
           {
             "label": "Typescript issues (tsc)",
@@ -340,6 +346,26 @@
       "yaml",
       "yml"
     ],
-    "pnpmCatalogLens.enabled": true
+    "javascript.format.enable": true,
+    "typescript.format.enable": true,
+    "[javascript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "editor.codeActionsOnSave": {
+      "source.organizeImports.biome": "never",
+      "quickfix.biome": "never"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    }
   }
 }

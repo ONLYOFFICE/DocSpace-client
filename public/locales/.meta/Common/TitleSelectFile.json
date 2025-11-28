@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:49.307Z",
-  "updated_at": "2025-10-14T00:27:57.103Z",
+  "updated_at": "2025-11-06T18:29:15.747Z",
   "comment": {
     "text": "The translation key \"TitleSelectFile\" is used to display a file selection title in various places within the application. It appears as the label for checkboxes and dropdown menus related to file management, guiding users to select a file.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/FileNameCell.js",
-      "line_number": 82,
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/FileNameCell/index.tsx",
+      "line_number": 101,
       "context": "{!isIndexEditingMode ? (\n <Checkbox\n className=\"table-container_row-checkbox\"\n onChange={onChange}\n isChecked={checked}\n title={t(\"Common:TitleSelectFile\")}\n />\n ) : null}\n </div>\n </TableCell>\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/table/table-group-menu/TableGroupMenu.tsx",
-      "line_number": 121,
-      "context": "className={classNames(styles.combobox, \"not-selectable\")}\n options={[]}\n selectedOption={{} as TOption}\n manualY=\"42px\"\n manualX=\"-32px\"\n title={t(\"Common:TitleSelectFile\")}\n isMobileView={isMobileView}\n onSelect={() => {}}\n dataTestId=\"table_group_menu_combobox\"\n withBackground={isMobileView}\n />",
+      "line_number": 141,
+      "context": "className={classNames(styles.combobox, \"not-selectable\")}\n options={EMPTY_ARRAY}\n selectedOption={EMPTY_OBJECT as TOption}\n manualY=\"42px\"\n manualX=\"-32px\"\n title={t(\"Common:TitleSelectFile\")}\n isMobileView={isMobileView}\n onSelect={FUNCTION_EMPTY}\n dataTestId=\"table_group_menu_combobox\"\n withBackground={isMobileView}\n />",
       "module": "/packages/shared"
     }
   ],

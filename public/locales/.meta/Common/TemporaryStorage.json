@@ -3,7 +3,7 @@
   "content": "Temporary storage",
   "content_en_sha1_hash": "d90c9723bbf93c4c8895c55a1d770e8294c92b66",
   "created_at": "2025-05-26T07:15:48.746Z",
-  "updated_at": "2025-10-27T16:14:33.628Z",
+  "updated_at": "2025-11-03T12:10:35.347Z",
   "comment": {
     "text": "This translation key is used for the label \"Temporary storage\" which appears as a radio button option in a manual backup page. It should be translated to indicate temporary storage options or settings in this specific UI context.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 431,
+      "line_number": 447,
       "context": "})}\n >\n <RadioButton\n key={0}\n id=\"temporary-storage\"\n label={t(\"Common:TemporaryStorage\")}\n name={TEMPORARY_STORAGE}\n isChecked={isCheckedTemporaryStorage}\n isDisabled={isCreateButtonDisabled}\n {...commonRadioButtonProps}\n testId=\"temporary_storage_radio_button\"",
       "module": "/packages/shared"
     }

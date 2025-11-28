@@ -5,7 +5,6 @@
   "DailyFeed": "Fluxul zilnic {{productName}}",
   "DailyFeedDescription": "Citiţi ştirile şi evenimentele din spațiul dvs {{productName}} într-un rezumat zilnic.",
   "FileActivityNotify": "Notificări de activitate în fișiere",
-  "GoToSettings": "Acces Setări",
   "IsNotValid": "Nu este valabil",
   "LdapEmailTooltip": "Contul acestui utilizator este încărcat din LDAP. Adresa de email a utilizatorului nu a fost indicată, iar cea curentă a fost generată automat și nu poate fi folosită pentru a trimite notificări.",
   "NotConfigured": "Nu este configurat",

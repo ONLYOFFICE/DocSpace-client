@@ -54,4 +54,4 @@ const AccessLevelCell = ({ t, item, sideColor }: AccessLevelCellProps) => {
   );
 };
 
-export default AccessLevelCell;
+export default React.memo(AccessLevelCell);

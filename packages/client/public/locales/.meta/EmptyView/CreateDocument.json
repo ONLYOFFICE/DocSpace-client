@@ -3,7 +3,7 @@
   "content": "Create a new document",
   "content_en_sha1_hash": "1ac4035dabd41fab14825dd774683d4b43edcf04",
   "created_at": "2025-05-19T21:30:56.445Z",
-  "updated_at": "2025-10-27T16:14:33.119Z",
+  "updated_at": "2025-11-17T11:52:35.138Z",
   "comment": {
     "text": "Create a new document. This translation key is used to display the button's label when creating a new document, appearing in the EmptyViewContainer component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 284,
+      "line_number": 333,
       "context": "onClick: actions.createAndCopySharedLink,\n disabled: isFrame,\n };\n \n const createDoc = {\n title: t(\"EmptyView:CreateDocument\"),\n description: t(\"EmptyView:CreateDocumentDescription\"),\n icon: <CreateNewFormIcon />,\n key: \"create-doc-option\",\n onClick: () => actions.onCreate(\"docx\"),\n disabled: !security?.Create,",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Stay in the browser",
   "content_en_sha1_hash": "81b7ba0cbfecd3f0d72de65ec0ce734703a85210",
   "created_at": "2025-05-19T21:30:57.148Z",
-  "updated_at": "2025-07-10T11:11:07.115Z",
+  "updated_at": "2025-11-03T12:10:35.404Z",
   "comment": {
     "text": "The translation key \"StayInBrowser\" is used to display a button label that encourages users to stay within the current browser. It appears on a deep link component in the doceditor application, prompting users to remain within the browser window. This phrase helps maintain context and user engagement.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/deep-link/index.tsx",
-      "line_number": 166,
+      "line_number": 172,
       "context": "fontWeight=\"600\"\n isHovered\n color={theme.currentColorScheme?.main?.accent}\n onClick={onStayBrowserClick}\n >\n {t(\"DeepLink:StayInBrowser\")}\n </Link>\n )}\n </StyledActionsWrapper>\n </StyledDeepLink>\n </FormWrapper>",
       "module": "/packages/doceditor"
     }

@@ -25,10 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { SelectorAddButton } from ".";
+import styles from "./SelectorAddButton.module.scss";
+import iconButtonStyles from "../icon-button/IconButton.module.scss";
 
 const baseProps = {
   title: "Add item",
@@ -77,7 +79,7 @@ describe("<SelectorAddButton />", () => {
   });
 
   it("handles click when not disabled", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<SelectorAddButton {...baseProps} onClick={onClick} />);
 
     fireEvent.click(screen.getByTestId("selector-add-button"));
@@ -85,7 +87,7 @@ describe("<SelectorAddButton />", () => {
   });
 
   it("doesn't handle click when disabled", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<SelectorAddButton {...baseProps} isDisabled onClick={onClick} />);
 
     fireEvent.click(screen.getByTestId("selector-add-button"));
@@ -96,14 +98,14 @@ describe("<SelectorAddButton />", () => {
     render(<SelectorAddButton {...baseProps} isDisabled />);
 
     const button = screen.getByTestId("selector-add-button");
-    expect(button).toHaveClass("isDisabled");
+    expect(button).toHaveClass(styles.isDisabled);
   });
 
   it("applies isAction class when isAction prop is true", () => {
     render(<SelectorAddButton {...baseProps} isAction />);
 
     const button = screen.getByTestId("selector-add-button");
-    expect(button).toHaveClass("isAction");
+    expect(button).toHaveClass(styles.isAction);
   });
 
   it("renders IconButton with correct props", () => {
@@ -112,6 +114,6 @@ describe("<SelectorAddButton />", () => {
 
     const iconButton = screen.getByTestId("icon-button");
     expect(iconButton).toBeInTheDocument();
-    expect(iconButton).toHaveClass("disabled");
+    expect(iconButton).toHaveClass(iconButtonStyles.disabled);
   });
 });

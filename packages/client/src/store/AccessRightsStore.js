@@ -221,16 +221,6 @@ class AccessRightsStore {
     return false;
   };
 
-  canRemoveOnlyOneUser = (user) => {
-    const { id } = this.userStore.user;
-
-    const { status, id: userId } = user;
-
-    const needRemove = status === EmployeeStatus.Disabled && userId !== id;
-
-    return needRemove;
-  };
-
   canChangeQuota = () => {
     const { isOwner, isAdmin } = this.authStore.userStore.user;
     const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;

@@ -53,7 +53,7 @@ type AIAgentsRowDataComponentProps = {
   };
   value: string;
   theme: TTheme;
-  onContentFileSelect: VoidFunction;
+  onContentFileSelect: (checked: boolean, item: TAgent) => void;
   checkedProps: boolean;
   element: React.ReactNode;
   inProgress: boolean;
@@ -115,10 +115,18 @@ const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {
         className="table-container_file-name-cell"
         value={value}
       >
-        <FileNameCell
+        <FileNameCell<TAgent>
+          item={item}
           onContentSelect={onContentFileSelect}
+          titleWithoutExt={props.titleWithoutExt}
+          linkStyles={props.linkStyles}
+          element={props.element}
           checked={checkedProps}
-          {...props}
+          theme={props.theme}
+          t={props.t}
+          inProgress={props.inProgress}
+          isIndexEditingMode={props.isIndexEditingMode}
+          displayFileExtension={props.displayFileExtension}
         />
         <StyledBadgesContainer>{badgesComponent}</StyledBadgesContainer>
         {lastColumn === "Name" ? quickButtonsComponentNode : null}

@@ -139,7 +139,7 @@ const DeleteLinkDialogComponent = (props) => {
           primary
           scale
           onClick={onDelete}
-          isDisabled={isLoading}
+          isLoading={isLoading}
         />
         <Button
           id="delete-file-modal_cancel"

@@ -1,0 +1,28 @@
+{
+  "key_path": "DisableRoomQuotaAgent",
+  "content": "Disable quota for this agent",
+  "content_en_sha1_hash": "fd5154101e66376cb087fa58af6438c76bdde902",
+  "created_at": "2025-11-03T12:10:33.180Z",
+  "updated_at": "2025-11-13T07:58:07.739Z",
+  "comment": {
+    "text": "This text is used as a checkbox label to allow disabling the storage quota specifically for an agent. It appears within the Room Quota settings, likely in a settings panel or dialog where users can manage storage limits. Translators should ensure the meaning accurately conveys the action of removing quota restrictions for an agent.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:18:13.683Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
+      "line_number": 69,
+      "context": "label={t(\"Common:StorageQuota\")}\n description={\n isAgent ? t(\"StorageDescriptionAgent\") : t(\"StorageDescription\")\n }\n checkboxLabel={\n isAgent ? t(\"DisableRoomQuotaAgent\") : t(\"DisableRoomQuota\")\n }\n onSetQuotaBytesSize={onSetQuotaBytesSize}\n initialSize={isEdit || isTemplate ? defaultValue.current : defaultQuota!}\n isDisabled={\n isLoading ||",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

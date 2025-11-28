@@ -1,10 +1,10 @@
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { RowsSkeleton } from "./index";
 import RowSkeleton from "./sub-components/Row";
-import styles from "./sub-components/Row.module.scss";
+import styles from "./Rows.module.scss";
 
 describe("RowsSkeleton", () => {
   it("renders with default count", () => {

@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  checkConfirmLink,
   getSettings,
-  getUserByEmail,
+  getUserByEncEmail,
   getUserFromConfirm,
 } from "@/utils/actions";
 import { cookies } from "next/headers";
@@ -49,15 +48,14 @@ async function Page(props: GuestShareLinkProps) {
 
   const { searchParams: sp } = props;
   const searchParams = (await sp) as TConfirmLinkParams;
-  const uid = searchParams.uid;
+  const uid = searchParams.uid ?? "";
+  const encemail = searchParams.encemail ?? "";
   const confirmKey = getStringFromSearchParams(searchParams);
-
-  const result = await checkConfirmLink(searchParams);
 
   const [settings, initiator, guest] = await Promise.all([
     getSettings(),
-    getUserFromConfirm(uid ?? "", confirmKey),
-    getUserByEmail(result?.email ?? "", confirmKey),
+    getUserFromConfirm(uid, confirmKey),
+    getUserByEncEmail(encemail, confirmKey),
   ]);
 
   const settingsCulture =

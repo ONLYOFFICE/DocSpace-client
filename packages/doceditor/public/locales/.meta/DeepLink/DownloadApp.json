@@ -3,7 +3,7 @@
   "content": "Download the app",
   "content_en_sha1_hash": "5d62003d7e8ce27975fba2b1966dbea4606860a5",
   "created_at": "2025-07-01T15:57:23.967Z",
-  "updated_at": "2025-07-10T11:11:07.115Z",
+  "updated_at": "2025-11-03T12:10:35.404Z",
   "comment": {
     "text": "This translation key is used to display the text \"Download the app\" on a download button within an application, encouraging users to initiate app installation. It appears in the UI as part of a styled link component, likely within a mobile app's deep linking functionality.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/deep-link/index.tsx",
-      "line_number": 149,
+      "line_number": 155,
       "context": "<Button\n size={ButtonSize.medium}\n primary\n label={\n isOpenInAppOnly\n ? t(\"DeepLink:DownloadApp\")\n : t(\"DeepLink:OpenInApp\")\n }\n onClick={\n isOpenInAppOnly ? onDownloadAppClick : onOpenAppClick\n }",
       "module": "/packages/doceditor"
     }

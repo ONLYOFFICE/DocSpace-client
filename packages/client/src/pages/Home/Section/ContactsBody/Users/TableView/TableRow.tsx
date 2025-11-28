@@ -91,7 +91,6 @@ const PeopleTableRow = ({
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
-  const [isLoading, setIsLoading] = React.useState(false);
 
   const {
     displayName,
@@ -122,29 +121,11 @@ const PeopleTableRow = ({
     return options;
   }, [getUsersChangeTypeOptions, item, t]);
 
-  const onAbort = () => {
-    setIsLoading(false);
-  };
-
-  const onSuccess = () => {
-    setIsLoading(false);
-  };
-
   const onTypeChange = React.useCallback(
     (option: TOption) => {
       if (!option.action || option.key === role) return;
 
-      setIsLoading(true);
-      if (
-        !changeUserType(
-          option.action as EmployeeType,
-          [item],
-          onSuccess,
-          onAbort,
-        )
-      ) {
-        setIsLoading(false);
-      }
+      changeUserType(option.action as EmployeeType, [item]);
     },
     [item, changeUserType],
   );
@@ -229,7 +210,6 @@ const PeopleTableRow = ({
         displaySelectedOption
         modernView
         manualWidth="auto"
-        isLoading={isLoading}
       />
     );
 

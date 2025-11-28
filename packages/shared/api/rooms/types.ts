@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TFile, TFolder, TShareSettings } from "../files/types";
-import {
+import type {
   ExportRoomIndexTaskStatus,
   FolderType,
   LinkSharingEntityType,
@@ -38,8 +38,8 @@ import type {
   TCreatedBy,
   TPathParts,
 } from "../../types";
-import { TUser } from "../people/types";
-import { TGroup } from "../groups/types";
+import type { TUser } from "../people/types";
+import type { TGroup } from "../groups/types";
 
 export type ICover = {
   data: string;
@@ -166,7 +166,10 @@ export type TExportRoomIndexTask = {
   resultFileUrl: string;
 };
 
-export type TNewFilesItem = TFile[] | { room: TRoom; items: TFile[] };
+export type TNewFilesItem =
+  | TFile[]
+  | { room: TRoom; items: TFile[] }
+  | { agent: TRoom; items: TFile[] };
 
 export type TNewFiles = {
   date: string;
@@ -313,9 +316,7 @@ export enum FeedTarget {
   Room = "room",
   Agent = "agent",
   RoomTag = "roomTag",
-  AgentTag = "agentTag",
   RoomLogo = "roomLogo",
-  AgentLogo = "agentLogo",
   RoomExternalLink = "roomExternalLink",
   User = "user",
   Group = "group",
@@ -386,24 +387,12 @@ export enum FeedActionKeys {
   RoomGroupRemove = "RoomGroupRemove",
   AgentCreated = "AgentCreated",
   AgentRenamed = "AgentRenamed",
-  AddedAgentTags = "AddedAgentTags",
-  DeletedAgentTags = "DeletedAgentTags",
-  AgentLogoCreated = "AgentLogoCreated",
-  AgentLogoDeleted = "AgentLogoDeleted",
-  AgentColorChanged = "AgentColorChanged",
-  AgentCoverChanged = "AgentCoverChanged",
-  AgentCreateUser = "AgentCreateUser",
-  AgentUpdateAccessForUser = "AgentUpdateAccessForUser",
-  AgentRemoveUser = "AgentRemoveUser",
-  AgentInviteResend = "AgentInviteResend",
-  AgentGroupAdded = "AgentGroupAdded",
-  AgentUpdateAccessForGroup = "AgentUpdateAccessForGroup",
-  AgentGroupRemove = "AgentGroupRemove",
 }
 
 export type CapitalizedFeedAction = Capitalize<FeedAction>;
 
 export type TFeedAction<T = TFeedData> = {
+  id: number;
   action: {
     id: number;
     key: FeedActionKeys;

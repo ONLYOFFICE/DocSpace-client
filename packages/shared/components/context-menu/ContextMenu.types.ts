@@ -85,6 +85,7 @@ export type ContextMenuType = {
   isPaidBadge?: boolean;
   preventNewTab?: boolean;
   dataTestId?: string;
+  tooltipTarget?: "item" | "toggle";
   getTooltipContent?: () => React.ReactNode;
   withMCPIcon?: boolean;
 };
@@ -186,6 +187,7 @@ export interface ContextMenuProps {
   maxHeightLowerSubmenu?: number;
   showDisabledItems?: boolean;
   withHotkeys?: boolean;
+  withoutBackHeaderButton?: boolean;
 }
 
 export type TContextMenuRef = {

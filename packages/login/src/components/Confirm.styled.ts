@@ -85,6 +85,10 @@ export const StyledBody = styled.div`
     @media ${mobile} {
       display: none;
     }
+
+    &.guest {
+      padding-bottom: 20px;
+    }
   }
 
   .greeting-title {

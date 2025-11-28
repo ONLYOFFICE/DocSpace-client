@@ -34,7 +34,7 @@ import { Link, LinkTarget } from "../../../../../link";
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
 import { Text } from "../../../../../text";
 
-import { MessageProps } from "../../../../Chat.types";
+import type { MessageProps } from "../../../../Chat.types";
 import { useChatStore } from "../../../../store/chatStore";
 
 import styles from "../../ChatMessageBody.module.scss";
@@ -70,6 +70,8 @@ const Message = ({
   userAvatar,
   isLast,
   getIcon,
+  getResultStorageId,
+  folderFormValidation,
 }: MessageProps) => {
   const { currentChat } = useChatStore();
 
@@ -148,7 +150,13 @@ const Message = ({
     <div key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}>
       {message.contents.map((c, mId) => {
         if (c.type === ContentType.Text)
-          return <Markdown key={c.text} chatMessage={c.text} />;
+          return (
+            <Markdown
+              key={`${message.id}_${c.type}_${mId}`}
+              chatMessage={c.text}
+              isFirst={mId === 0}
+            />
+          );
 
         if (c.type === ContentType.Tool)
           return <ToolCallMessage key={`${c.name}_${mId * 2}`} content={c} />;
@@ -163,10 +171,12 @@ const Message = ({
           messageId={message.id}
           messageIndex={idx}
           getIcon={getIcon}
+          getResultStorageId={getResultStorageId}
+          folderFormValidation={folderFormValidation}
         />
       ) : null}
     </div>
   );
 };
 
-export default Message;
+export default React.memo(Message);

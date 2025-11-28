@@ -5,7 +5,6 @@
   "DailyFeed": "Gündəlik {{productName}} axını",
   "DailyFeedDescription": "{{productName}}-dəki xəbərləri və hadisələri gündəlik xülasədə oxuyun.",
   "FileActivityNotify": "Fəaliyyətə dair bildirişlər",
-  "GoToSettings": "İdarəyə keçid edin",
   "IsNotValid": "Mövcud deyil",
   "LdapEmailTooltip": "Bu istifadəçi hesabının məlumatları LDAP-dən yüklənib. İstifadəçinin e-poçt ünvanı göstərilməyib və hazırkı e-poçt ünvanı avtomatik yaradılıb, bildiriş göndərmək üçün istifadə edilə bilməz.",
   "NotConfigured": "Kəsilmədən hazırlanmayıb",

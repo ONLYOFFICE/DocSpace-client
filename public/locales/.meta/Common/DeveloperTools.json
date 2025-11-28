@@ -3,7 +3,7 @@
   "content": "Developer Tools",
   "content_en_sha1_hash": "b0608ab1bd96359355856ec5aafa9740f6d63c4d",
   "created_at": "2025-05-19T21:30:44.517Z",
-  "updated_at": "2025-10-27T16:14:33.454Z",
+  "updated_at": "2025-11-06T18:29:15.762Z",
   "comment": {
     "text": "The \"Developer Tools\" translation key is used to display a header title in the Portal Settings page. It appears as a heading on the page, providing a clear label for users to navigate to developer-related tools and settings.",
     "is_auto": true,
@@ -18,19 +18,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 493,
+      "line_number": 503,
       "context": "{\n id: \"portal-settings_catalog-developer-tools\",\n key: \"8\",\n type: PageType.developerTools,\n link: \"developer-tools\",\n tKey: \"Common:DeveloperTools\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-api\",\n key: \"8-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 493,
+      "line_number": 503,
       "context": "{\n id: \"portal-settings_catalog-developer-tools\",\n key: \"8\",\n type: PageType.developerTools,\n link: \"developer-tools\",\n tKey: \"Common:DeveloperTools\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-api\",\n key: \"8-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 493,
+      "line_number": 503,
       "context": "{\n id: \"portal-settings_catalog-developer-tools\",\n key: \"8\",\n type: PageType.developerTools,\n link: \"developer-tools\",\n tKey: \"Common:DeveloperTools\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-api\",\n key: \"8-0\",",
       "module": "/packages/client"
     },

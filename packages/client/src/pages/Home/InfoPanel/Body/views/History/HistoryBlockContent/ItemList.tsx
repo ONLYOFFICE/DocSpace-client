@@ -102,19 +102,21 @@ const HistoryItemList = ({
   const isFolder = targetType === "folder";
 
   const items = [
-    feed.data,
-    ...feed.related.map(
-      (relatedFeeds: { data: TFeedData }) => relatedFeeds.data,
-    ),
+    feed,
+    ...feed.related,
   ].map((item) => {
+
+    const { id, data } = item;
+
     const i: TFeedData & {
+      feedId: number;
       title: string;
       isFolder: boolean;
       fileExst: string;
-    } = { title: "", isFolder, ...item, fileExst: "" };
+    } = { feedId: id, title: "", isFolder, ...data, fileExst: "" };
 
-    i.fileExst = getFileExtension(item.title || item.newTitle || "");
-    i.title = nameWithoutExtension!(item.title || item.newTitle);
+    i.fileExst = getFileExtension(data.title || data.newTitle || "");
+    i.title = nameWithoutExtension!(data.title || data.newTitle);
     i.isFolder = actionType === FeedAction.Change ? !i.fileExst : isFolder;
 
     return i;
@@ -174,7 +176,7 @@ const HistoryItemList = ({
       {sortItems.map((item, index) => {
         if (!isExpanded && index > EXPANSION_THRESHOLD - 1) return null;
         return (
-          <Fragment key={`${feed.action.id}_${item.id}`}>
+          <Fragment key={item.feedId}>
             <div className={styles.historyBlockFile}>
               {actionType === "changeIndex" ? (
                 <div className="change-index">
@@ -278,7 +280,7 @@ const HistoryItemList = ({
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: items.length - EXPANSION_THRESHOLD }}
-            components={{ 1: <strong /> }}
+            components={{ 1: <strong key={'count-more'} /> }}
           />
         </div>
       ) : null}

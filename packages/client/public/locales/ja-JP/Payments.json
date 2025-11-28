@@ -88,6 +88,7 @@
   "Payer": "支払人",
   "PayerDescription": "このユーザーは、支払いの詳細へのアクセス権を持ち、クォータの調整と支払いを行うことができる唯一のユーザーです。{{productName}}の所有者だけでなく、支払いマネージャー自身も、Stripeカスタマーポータルを使用してペイイングマネージャーの役割を再割り当てすることができます。",
   "PaymentMethod": "お支払い方法",
+  "PerAITools": "トークンあたり{{currency}}",
   "PerBackup": "1 バックアップごとに {{currency}} ",
   "PerBackupWithBracket": "1 バックアップごとに（{{currency}}）",
   "PerStorage": "{{currency}}　{{amount}}/月",

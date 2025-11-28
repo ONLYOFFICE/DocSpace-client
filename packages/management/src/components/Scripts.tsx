@@ -29,7 +29,6 @@ import Script from "next/script";
 let runtime = null;
 
 try {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   runtime = require("../../../runtime.json");
 } catch (e) {
   console.log(e);

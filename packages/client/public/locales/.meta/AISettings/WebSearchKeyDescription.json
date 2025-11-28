@@ -1,0 +1,28 @@
+{
+  "key_path": "WebSearchKeyDescription",
+  "content": "Enter the API key obtained from your web search provider",
+  "content_en_sha1_hash": "e93a16407c2e25fa5c3da192481e8398da442ac2",
+  "created_at": "2025-11-13T07:58:04.680Z",
+  "updated_at": "2025-11-13T10:21:17.841Z",
+  "comment": {
+    "text": "This text provides a short description of where to obtain an API key for web search functionality. It appears as a hidden description next to an input field in the Portal Settings, specifically within the AI settings section for web search. Translators should ensure the description accurately guides users to find and enter their web search API key.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:05:51.819Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 276,
+      "context": "isKeyHidden || selectedOption === WebSearchType.None\n }\n autoComplete=\"off\"\n />\n <Text className={styles.hiddenKeyDescription}>\n {t(\"AISettings:WebSearchKeyDescription\")}\n </Text>\n </>\n )}\n </FieldContainer>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

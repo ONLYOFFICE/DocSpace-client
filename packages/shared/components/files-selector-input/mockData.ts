@@ -24,12 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { vi } from "vitest";
 import type { FilesSelectorSettings } from "./FilesSelectorInput.types";
 
-export const mockSetBasePath = jest.fn();
-export const mockToDefault = jest.fn();
-export const mockSetNewPath = jest.fn();
-export const mockOnSelectFolder = jest.fn();
+export const mockSetBasePath = vi.fn();
+export const mockToDefault = vi.fn();
+export const mockSetNewPath = vi.fn();
+export const mockOnSelectFolder = vi.fn();
 
 export const mockFilesSelectorSettings: FilesSelectorSettings = {
   filesSettings: {

@@ -62,7 +62,10 @@ const DeleteDialogComponent = (props) => {
     isPrivacyFolder,
     isRecycleBinFolder,
     isRoomDelete,
+    isAIAgentChatDelete,
+
     setIsRoomDelete,
+    setIsAIAgentChatDelete,
     deleteRoomsAction,
     isPersonalRoom,
     isSharedWithMeFolderRoot,
@@ -73,6 +76,7 @@ const DeleteDialogComponent = (props) => {
     setUnsubscribe,
     isAIAgentsFolderRoot,
   } = props;
+
   const [isChecked, setIsChecked] = useState(false);
 
   const selection = useMemo(
@@ -97,6 +101,11 @@ const DeleteDialogComponent = (props) => {
     setBufferSelection(null);
     setRemoveMediaItem(null);
     setIsRoomDelete(false);
+    setIsAIAgentChatDelete({
+      visible: false,
+      itemName: "",
+      onDeleteAction: null,
+    });
     setDeleteDialogVisible(false);
     setUnsubscribe(false);
   };
@@ -149,7 +158,17 @@ const DeleteDialogComponent = (props) => {
     await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
   };
 
+  const onDeleteAIAgentChat = () => {
+    isAIAgentChatDelete.onDeleteAction();
+    onClose();
+  };
+
   const onDeleteAction = useCallback(() => {
+    if (isAIAgentChatDelete.visible) {
+      onDeleteAIAgentChat();
+      return;
+    }
+
     if (isRoomDelete || isTemplate || isAIAgent) {
       if (!isChecked) return;
       onDeleteRoom();
@@ -198,7 +217,8 @@ const DeleteDialogComponent = (props) => {
       return t("Common:DeletePermanently");
     }
 
-    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverButton");
+    if (isRecycleBinFolder || isAIAgentChatDelete.visible)
+      return t("EmptyTrashDialog:DeleteForeverButton");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:OKButton");
@@ -209,6 +229,10 @@ const DeleteDialogComponent = (props) => {
   };
 
   const getDialogTitle = () => {
+    if (isAIAgentChatDelete.visible) {
+      return t("DeleteDialog:DeleteAIAgentChatTitle");
+    }
+
     if (isAIAgent) {
       return t("DeleteDialog:DeleteAIAgentTitle");
     }
@@ -246,6 +270,7 @@ const DeleteDialogComponent = (props) => {
     isAIAgent,
     isAIAgentsFolderRoot,
     unsubscribe,
+    isAIAgentChatDelete,
   );
 
   const title = getDialogTitle();
@@ -345,6 +370,8 @@ export default inject(
       isRoomDelete,
       setIsRoomDelete,
       setUnsubscribe,
+      isAIAgentChatDelete,
+      setIsAIAgentChatDelete,
     } = dialogsStore;
 
     const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
@@ -378,6 +405,8 @@ export default inject(
       onRemoveSharedFilesOrFolder,
       setUnsubscribe,
       isAIAgentsFolderRoot,
+      isAIAgentChatDelete,
+      setIsAIAgentChatDelete,
     };
   },
 )(observer(DeleteDialog));

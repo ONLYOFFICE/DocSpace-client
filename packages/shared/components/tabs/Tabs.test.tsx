@@ -24,23 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Tabs } from ".";
 import { TabsTypes } from "./Tabs.enums";
 import { TTabItem } from "./Tabs.types";
+import styles from "./Tabs.module.scss";
 
 // Mock IntersectionObserver
-const mockIntersectionObserver = jest.fn();
-mockIntersectionObserver.mockImplementation(() => {
-  return {
-    observe: jest.fn(),
-    unobserve: jest.fn(),
-    disconnect: jest.fn(),
-  };
-});
-window.IntersectionObserver = mockIntersectionObserver;
+class MockIntersectionObserver {
+  observe = vi.fn();
+  unobserve = vi.fn();
+  disconnect = vi.fn();
+
+  constructor() {
+    // Mock constructor
+  }
+}
+
+// @ts-expect-error - Mocking IntersectionObserver for tests
+window.IntersectionObserver = MockIntersectionObserver;
 
 const arrayItems: TTabItem[] = [
   {
@@ -95,7 +99,7 @@ describe("Tabs", () => {
         selectedItemId="tab1"
       />,
     );
-    expect(container.querySelector(".primary")).toBeInTheDocument();
+    expect(container.querySelector(`.${styles.primary}`)).toBeInTheDocument();
   });
 
   it("applies correct styles for secondary tabs", () => {
@@ -106,7 +110,7 @@ describe("Tabs", () => {
         selectedItemId="tab1"
       />,
     );
-    expect(container.querySelector(".secondary")).toBeInTheDocument();
+    expect(container.querySelector(`.${styles.secondary}`)).toBeInTheDocument();
   });
   it("shows badge when provided", () => {
     const itemsWithBadge = [{ ...arrayItems[0], badge: "New" }, arrayItems[1]];

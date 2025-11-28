@@ -3,7 +3,7 @@
   "content": "Agent removed",
   "content_en_sha1_hash": "90bf5de6760f897346d9be146912dc3e52573eee",
   "created_at": "2025-10-27T16:14:29.961Z",
-  "updated_at": "2025-10-27T17:59:57.774Z",
+  "updated_at": "2025-11-17T13:24:55.371Z",
   "comment": {
     "text": "This key displays a confirmation message when an agent is removed. It appears within a delete confirmation dialog, likely as a success message confirming the agent deletion. Translators should ensure this phrasing accurately reflects the action taken.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 130,
+      "line_number": 140,
       "context": "};\n \n const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: isAIAgent\n ? t(\"Files:AgentRemoved\")\n : t(\"Files:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Files:AgentsRemoved\")\n : t(\"Files:RoomsRemoved\"),\n };",
       "module": "/packages/client"
     }

@@ -35,6 +35,8 @@ import type {
 } from "@docspace/shared/enums";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
+import { AuthStore } from "@docspace/shared/store/AuthStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export type UploadType = "pdf" | "file" | "folder";
 
@@ -103,6 +105,9 @@ export interface InjectedEmptyViewContainerProps
   isKnowledgeTab?: boolean;
   isResultsTab?: boolean;
   isAIRoom?: boolean;
+  isPortalAdmin: AuthStore["isAdmin"];
+  aiReady?: boolean;
+  standalone: SettingsStore["standalone"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &
@@ -130,4 +135,6 @@ export type OptionActions = {
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
   onCreateAIAgent: VoidFunction;
+  onGoToServices: VoidFunction;
+  onGoToAIProviderSettings: VoidFunction;
 };

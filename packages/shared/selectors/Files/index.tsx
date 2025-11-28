@@ -33,12 +33,12 @@ import { createFile, deleteFile } from "../../api/files";
 
 import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
 
-import { TSelectorItem } from "../../components/selector";
+import type { TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
 import { Portal } from "../../components/portal";
 import { toastr } from "../../components/toast";
-import { TBreadCrumb } from "../../components/selector/Selector.types";
+import type { TBreadCrumb } from "../../components/selector/Selector.types";
 
 import useRoomsHelper from "../utils/hooks/useRoomsHelper";
 import useSocketHelper from "../utils/hooks/useSocketHelper";
@@ -49,7 +49,7 @@ import useRootHelper from "./hooks/useRootHelper";
 import useSelectorBody from "./hooks/useSelectorBody";
 import useSelectorState from "./hooks/useSelectorState";
 
-import { FilesSelectorProps } from "./FilesSelector.types";
+import type { FilesSelectorProps } from "./FilesSelector.types";
 import { SettingsContextProvider } from "../utils/contexts/Settings";
 import {
   LoadersContext,
@@ -60,6 +60,7 @@ import { getDefaultBreadCrumb } from "../utils";
 const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
     disabledItems,
+    disabledFolderType,
     includedItems,
     filterParam,
 
@@ -111,6 +112,10 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     applyFilterOption,
     onSelectItem,
+
+    renderInPortal,
+
+    disableBySecurity,
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } = use(LoadersContext);
@@ -121,6 +126,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const afterSearch = React.useRef(false);
   const ssrRendered = React.useRef(false);
   const ssrTypeRendered = React.useRef(false);
+  const clearSearchCallback = React.useRef<null | VoidFunction>(null);
 
   const withInitProps = withInit
     ? {
@@ -172,13 +178,16 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     disabledItems,
     filterParam,
     withCreate,
+    disableBySecurity,
     ...withInitProps,
   });
 
   const { subscribe, unsubscribe } = useSocketHelper({
     disabledItems,
+    disabledFolderType,
     filterParam,
     withCreate: withCreateState,
+    disableBySecurity,
     setItems,
     setBreadCrumbs,
     setTotal,
@@ -224,6 +233,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     setSelectedTreeNode,
     searchValue,
     withCreate: withCreateState,
+    disableBySecurity,
 
     withInit,
   });
@@ -276,6 +286,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     selectedItemId,
     searchValue,
     disabledItems,
+    disabledFolderType,
     includedItems,
     isThirdParty,
     filterParam,
@@ -289,6 +300,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     withInit,
     applyFilterOption,
+    disableBySecurity,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -543,7 +555,6 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     if (searchValue) {
       setIsFirstLoad(true);
-      setItems([]);
     }
   }, [searchValue, selectedItemType, setIsFirstLoad, setItems]);
 
@@ -551,12 +562,14 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     (callback?: VoidFunction) => {
       if (!searchValue) return;
       setIsFirstLoad(true);
-      setItems([]);
 
       setSearchValue("");
 
-      callback?.();
       afterSearch.current = true;
+
+      if (callback) {
+        clearSearchCallback.current = callback;
+      }
     },
     [searchValue, setIsFirstLoad, setItems, setSearchValue],
   );
@@ -633,6 +646,13 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     withInit,
   ]);
 
+  React.useEffect(() => {
+    if (clearSearchCallback.current && !isFirstLoad && !searchValue) {
+      clearSearchCallback.current();
+      clearSearchCallback.current = null;
+    }
+  }, [isFirstLoad, searchValue]);
+
   const withSearch = withSearchProp
     ? isRoot
       ? false
@@ -664,6 +684,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       isInsideKnowledge,
       isInsideResultStorage,
     ),
+
+    selectedTreeNode,
 
     breadCrumbs,
     onSelectBreadCrumb: onClickBreadCrumb,
@@ -710,8 +732,9 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     </>
   );
 
-  return (currentDeviceType === DeviceType.mobile ||
-    currentDeviceType === DeviceType.tablet) &&
+  return (renderInPortal ??
+    (currentDeviceType === DeviceType.mobile ||
+      currentDeviceType === DeviceType.tablet)) &&
     !embedded ? (
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (

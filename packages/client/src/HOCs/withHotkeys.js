@@ -76,8 +76,9 @@ const withHotkeys = (Component) => {
       isArchiveFolder,
       isRoomsFolder,
       isAIAgentsFolder,
+      isAIRoom,
 
-      selection,
+      getSelection,
       setFavoriteAction,
       filesIsLoading,
 
@@ -134,6 +135,7 @@ const withHotkeys = (Component) => {
       isRoomsFolder ||
       isVisitor ||
       isAIAgentsFolder ||
+      isAIRoom ||
       !security?.Create;
 
     const onCreate = (extension) => {
@@ -156,6 +158,8 @@ const withHotkeys = (Component) => {
     };
 
     const onRename = () => {
+      const selection = getSelection();
+
       if (selection.length === 1) {
         const item = selection[0];
 
@@ -163,6 +167,7 @@ const withHotkeys = (Component) => {
 
         const event = new Event(Events.RENAME);
         event.item = item;
+
         window.dispatchEvent(event);
       }
     };
@@ -393,6 +398,7 @@ const withHotkeys = (Component) => {
           if (isRecentFolder) return;
 
           if (isFavoritesFolder) {
+            const selection = getSelection();
             setFavoriteAction("remove", selection)
               .then(() => toastr.success(t("RemovedFromFavorites")))
               .catch((err) => toastr.error(err));
@@ -474,6 +480,7 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "Ctrl+Shift+c, command+Shift+c",
       (e) => {
+        const selection = getSelection();
         if (!selection.length) return e;
         e.preventDefault();
 
@@ -506,7 +513,7 @@ const withHotkeys = (Component) => {
         viewAs,
         setViewAs,
         enabledHotkeys,
-        selection,
+        getSelection,
         filesIsLoading,
       } = filesStore;
 
@@ -613,9 +620,10 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
         isAIAgentsFolder,
+        isAIRoom: selectedFolderStore.isAIRoom,
         isIndexEditingMode: indexingStore.isIndexEditingMode,
 
-        selection,
+        getSelection,
         setFavoriteAction,
         filesIsLoading,
 

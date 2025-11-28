@@ -26,6 +26,8 @@
 
 import React from "react";
 import classNames from "classnames";
+import equal from "fast-deep-equal/react";
+
 import styles from "./Text.module.scss";
 import type { TextProps } from "./Text.types";
 
@@ -111,6 +113,6 @@ const TextPure = ({
 
 TextPure.displayName = "TextPure";
 
-const Text = React.memo(TextPure);
+const Text = React.memo(TextPure, equal);
 
 export { Text };

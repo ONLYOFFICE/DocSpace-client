@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 
 import type { TOption } from "../combobox";
@@ -48,14 +48,14 @@ describe("Paging", () => {
       <Paging
         previousLabel="Previous"
         nextLabel="Next"
-        previousAction={jest.fn()}
-        nextAction={jest.fn()}
+        previousAction={vi.fn()}
+        nextAction={vi.fn()}
         pageItems={mockPageItems}
         countItems={mockCountItems}
         selectedPageItem={mockPageItems[0]}
         selectedCountItem={mockCountItems[0]}
-        onSelectPage={jest.fn()}
-        onSelectCount={jest.fn()}
+        onSelectPage={vi.fn()}
+        onSelectCount={vi.fn()}
       />,
     );
 
@@ -65,8 +65,8 @@ describe("Paging", () => {
   });
 
   it("calls previousAction and nextAction when buttons clicked", () => {
-    const prev = jest.fn();
-    const next = jest.fn();
+    const prev = vi.fn();
+    const next = vi.fn();
 
     render(
       <Paging
@@ -93,8 +93,8 @@ describe("Paging", () => {
       <Paging
         previousLabel="Prev"
         nextLabel="Next"
-        previousAction={jest.fn()}
-        nextAction={jest.fn()}
+        previousAction={vi.fn()}
+        nextAction={vi.fn()}
         disablePrevious
         disableNext
         pageItems={mockPageItems}
@@ -116,8 +116,8 @@ describe("Paging", () => {
       <Paging
         previousLabel="Prev"
         nextLabel="Next"
-        previousAction={jest.fn()}
-        nextAction={jest.fn()}
+        previousAction={vi.fn()}
+        nextAction={vi.fn()}
         pageItems={mockPageItems}
         countItems={mockCountItems}
         showCountItem={false}
@@ -131,15 +131,15 @@ describe("Paging", () => {
   });
 
   it("calls onSelectPage and onSelectCount", () => {
-    const onSelectPage = jest.fn();
-    const onSelectCount = jest.fn();
+    const onSelectPage = vi.fn();
+    const onSelectCount = vi.fn();
 
     render(
       <Paging
         previousLabel="Prev"
         nextLabel="Next"
-        previousAction={jest.fn()}
-        nextAction={jest.fn()}
+        previousAction={vi.fn()}
+        nextAction={vi.fn()}
         pageItems={mockPageItems}
         countItems={mockCountItems}
         onSelectPage={onSelectPage}

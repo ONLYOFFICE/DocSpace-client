@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
@@ -888,6 +887,15 @@ export async function getNewFiles(folderId: number | string) {
   return res;
 }
 
+export async function getNewFilesAgents() {
+  const res = (await request({
+    method: "get",
+    url: `/ai/agents/news`,
+  })) as TNewFiles[];
+
+  return res;
+}
+
 export async function getNewFolderFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
@@ -1392,7 +1400,7 @@ export async function restoreDocumentsVersion(
   doc: null | number | string,
 ) {
   const options: AxiosRequestConfig = {
-    method: "get",
+    method: "post",
     url: `files/file/${fileId}/restoreversion?version=${version}&doc=${doc}`,
   };
 

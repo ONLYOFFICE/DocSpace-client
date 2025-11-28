@@ -3,7 +3,7 @@
   "content": "Data import from {{organizationName}} Workspace to {{organizationName}} {{productName}} is complete!",
   "content_en_sha1_hash": "ea8ba6a6ff5ddf5f347029bd6ff6ae943f26e62e",
   "created_at": "2025-05-19T21:30:51.634Z",
-  "updated_at": "2025-08-11T09:02:43.943Z",
+  "updated_at": "2025-11-18T14:41:49.928Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that data import from an organization's Workspace has been completed successfully. It appears in the UI as part of a data import process, specifically on a completion step or button, and includes placeholders for the product name and organization name.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 127,
+      "line_number": 135,
       "context": "productName: t(\"Common:ProductName\"),\n });\n case 5:\n return t(\"Settings:ImportProcessingDescription\");\n case 6:\n return t(\"Settings:ImportCompleteDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n });\n default:\n }",
       "module": "/packages/client"
     }

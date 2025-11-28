@@ -26,7 +26,7 @@
 
 // import React from "react";
 // import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it } from "vitest";
 
 // import { Selector } from "./Selector";
 

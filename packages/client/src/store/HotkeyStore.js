@@ -778,7 +778,9 @@ class HotkeyStore {
 
     if (!selection.length) return;
 
-    const index = filesList.findIndex((i) => i.id === selection[0].id);
+    const index = filesList.findIndex(
+      (i) => i.id === selection[0].id && i.isFolder === selection[0].isFolder,
+    );
     const firstSelectedItem = filesList[index];
     const itemId = firstSelectedItem.isFolder
       ? `folder_${firstSelectedItem.id}`

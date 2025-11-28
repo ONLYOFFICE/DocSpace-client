@@ -40,9 +40,12 @@ export enum ErrorConfirm {
   QuotaFailed = "QuotaFailed",
 }
 
-export const getConfirmSuccess = (result: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0) => {
+export const getConfirmSuccess = (
+  result: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0,
+  withEmail?: boolean,
+) => {
   return {
-    response: { result },
+    response: { result, email: withEmail ? "mail@mail.com" : undefined },
     count: 1,
     links: [
       {
@@ -56,7 +59,10 @@ export const getConfirmSuccess = (result: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0) => {
   };
 };
 
-export const confirmResolver = (errorType?: ErrorConfirm): Response => {
+export const confirmResolver = (
+  errorType?: ErrorConfirm,
+  withEmail?: boolean,
+): Response => {
   switch (errorType) {
     case ErrorConfirm.Invalid:
       return new Response(JSON.stringify(getConfirmSuccess(1)));
@@ -71,12 +77,16 @@ export const confirmResolver = (errorType?: ErrorConfirm): Response => {
     case ErrorConfirm.QuotaFailed:
       return new Response(JSON.stringify(getConfirmSuccess(6)));
     default:
-      return new Response(JSON.stringify(getConfirmSuccess()));
+      return new Response(JSON.stringify(getConfirmSuccess(0, withEmail)));
   }
 };
 
-export const confirmHandler = (port: string, errorType?: ErrorConfirm) => {
+export const confirmHandler = (
+  port: string,
+  errorType?: ErrorConfirm,
+  withEmail?: boolean,
+) => {
   return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
-    return confirmResolver(errorType);
+    return confirmResolver(errorType, withEmail);
   });
 };

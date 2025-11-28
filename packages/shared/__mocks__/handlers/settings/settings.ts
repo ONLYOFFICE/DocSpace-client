@@ -36,6 +36,9 @@ export enum TypeSettings {
   NoStandalone = "noStandalone",
   Authenticated = "authenticated",
   NoAuth = "noAuth",
+  EnabledJoin = "enabledJoin",
+  EnableAdmMess = "enableAdmMess",
+  WithHCaptcha = "withHCaptcha"
 }
 
 export const settingsWizzard = {
@@ -505,6 +508,12 @@ export const settingsResolver = (
     return new Response(JSON.stringify(settingsNoAuthNoStandalone));
   if (type === TypeSettings.Authenticated)
     return new Response(JSON.stringify(settingsAuth));
+  if (type === TypeSettings.EnabledJoin)
+    return new Response(JSON.stringify(settingsWithEnabledJoin));
+  if (type === TypeSettings.EnableAdmMess)
+    return new Response(JSON.stringify(settingsWithEnableAdmMess));
+  if (type === TypeSettings.WithHCaptcha)
+    return new Response(JSON.stringify(settingsWithHCaptcha));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

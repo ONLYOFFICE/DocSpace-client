@@ -49,6 +49,18 @@ const successLogin = {
   statusCode: 200,
 };
 
+export const errorLogin401 = {
+  count: 1,
+  error: {
+    message: "User authentication failed",
+    type: null,
+    stack: null,
+    hresult: 0,
+  },
+  status: 1,
+  statusCode: 401,
+};
+
 export const loginError404 = {
   response: {
     title: "Required failed with status code 404",
@@ -59,14 +71,32 @@ export const loginError404 = {
   statusCode: 404,
 };
 
-export const loginResolver = (errorStatus: 404 | null = null) => {
+export const errorLogin403 = {
+  count: 1,
+  error: {
+    message: "Too many login attempts. Please try again later",
+    type: null,
+    stack: null,
+    hresult: 0,
+  },
+  status: 1,
+  statusCode: 403,
+};
+
+export const loginResolver = (errorStatus: 404 | 401 | 403 | null = null) => {
   if (errorStatus === 404)
     return new Response(JSON.stringify(loginError404), { status: 404 });
+    
+  if (errorStatus === 401)
+    return new Response(JSON.stringify(errorLogin401), { status: 401 });
+
+  if (errorStatus === 403)
+    return new Response(JSON.stringify(errorLogin403), { status: 403 });
 
   return new Response(JSON.stringify(successLogin));
 };
 
-export const loginHandler = (port: string, errorStatus: 404 | null = null) => {
+export const loginHandler = (port: string, errorStatus: 404 | 401 | 403 | null = null) => {
   return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
     return loginResolver(errorStatus);
   });

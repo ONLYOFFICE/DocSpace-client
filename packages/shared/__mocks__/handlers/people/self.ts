@@ -36,7 +36,6 @@ export const PATH_USER_BY_EMAIL = "people/email*";
 export const PATH_ADD_GUEST = "people/guests/share/approve";
 
 export const successSelf = {
-  response: {
     firstName: "Administrator",
     lastName: "",
     userName: "administrator",
@@ -71,16 +70,6 @@ export const successSelf = {
     profileUrl: "/accounts/people/filter?search=test%40gmail.com",
     hasAvatar: false,
     isAnonim: false,
-  },
-  count: 1,
-  links: [
-    {
-      href: `/${API_PREFIX}/${PATH}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
 };
 
 export const usersSuccess = { response: [successSelf] };
@@ -110,7 +99,7 @@ export const selfError400 = {
 };
 
 export const selfResolver = (
-  errorStatus: 400 | 404 | null = null,
+  errorStatus: 400 | 404 | null = null, isEmailActivated = false,
 ): Response => {
   if (errorStatus === 404)
     return new Response(JSON.stringify(selfError404), { status: 404 });
@@ -118,7 +107,11 @@ export const selfResolver = (
   if (errorStatus === 400)
     return new Response(JSON.stringify(selfError400), { status: 400 });
 
-  return new Response(JSON.stringify(successSelf));
+  if (isEmailActivated) {
+    return new Response(JSON.stringify(usersSuccess));
+  }
+
+  return new Response(JSON.stringify({ response: successSelf }));
 };
 
 export const selfHandler = (
@@ -163,11 +156,12 @@ export const selfChangeAuthDataHandler = (
 export const selfActivationStatusHandler = (
   port: string,
   errorStatus: 400 | 404 | null = null,
+  isEmailActivated: boolean = false,
 ) => {
   return http.put(
     `http://localhost:${port}/${API_PREFIX}/${PATH_ACTIVATION_STATUS}`,
     () => {
-      return selfResolver(errorStatus);
+      return selfResolver(errorStatus, isEmailActivated);
     },
   );
 };

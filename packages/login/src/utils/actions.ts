@@ -332,9 +332,7 @@ export async function getUserByEncEmail(
       "GET",
     );
 
-    const res = IS_TEST
-      ? selfHandler(null, await headers())
-      : await fetch(getUserByEmai);
+    const res = await fetch(getUserByEmai);
 
     if (!res.ok) {
       logger.error(

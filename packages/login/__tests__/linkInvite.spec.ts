@@ -181,7 +181,7 @@ test("link invite login success", async ({ page, baseUrl }) => {
     "link-invite-login-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("login_button").click();
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([

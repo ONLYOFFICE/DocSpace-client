@@ -51,7 +51,13 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("email activation success", async ({ page, baseUrl }) => {
+test("email activation success", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+}) => {
+  clientRequestInterceptor.use(selfActivationStatusHandler(port, null, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.waitForURL(`${baseUrl}/login`, {

@@ -24,12 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { selfChangeAuthDataHandler } from "@docspace/shared/__mocks__/handlers";
+import {
+  selfChangeAuthDataHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmailChange";
-const NEXT_REQUEST_URL = "*/**/login/confirm/EmailChange";
 
 const QUERY_PARAMS = [
   {
@@ -66,7 +69,15 @@ test("email change without auth", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("email change success", async ({ page, baseUrl }) => {
+test("email change success", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.waitForURL(`${baseUrl}/profile/login?email_change=success`, {
@@ -83,9 +94,13 @@ test("email change success", async ({ page, baseUrl }) => {
 test("email change error", async ({
   page,
   baseUrl,
-  clientRequestInterceptor,
   port,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
 }) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
   clientRequestInterceptor.use(selfChangeAuthDataHandler(port, 400));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 

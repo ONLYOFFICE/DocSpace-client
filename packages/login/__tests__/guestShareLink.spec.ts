@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
+  confirmHandler,
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
@@ -61,6 +62,7 @@ test("guest share link render", async ({
   baseUrl,
 }) => {
   serverRequestInterceptor.use(
+    confirmHandler(port, undefined, true),
     settingsHandler(port, TypeSettings.Authenticated),
   );
 

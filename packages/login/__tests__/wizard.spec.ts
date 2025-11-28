@@ -74,7 +74,7 @@ test("wizard success", async ({
     "wizard-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("wizard_continue_button").click();
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
   await page.waitForTimeout(1000);
 

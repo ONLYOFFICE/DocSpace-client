@@ -24,7 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { capabilitiesHandler } from "@docspace/shared/__mocks__/handlers";
+import {
+  capabilitiesHandler,
+  loginHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { thirdPartyProvidersHandler } from "@docspace/shared/__mocks__/handlers/people/thirdPartyProviders";
 
@@ -43,26 +48,31 @@ test("login render", async ({
   await expect(page).toHaveScreenshot(["desktop", "login", "login-render.png"]);
 });
 
-// test("login error authentication failed", async ({ page, mockRequest }) => {
-//   await mockRequest.router([endpoints.loginError]);
+test("login error authentication failed", async ({
+  page,
+  port,
+  clientRequestInterceptor,
+  baseUrl,
+}) => {
+  clientRequestInterceptor.use(loginHandler(port, 401));
 
-//   await page.goto("/login");
+  await page.goto(`${baseUrl}/login`);
 
-//   await page.getByTestId("email-input").fill("email@mail.ru");
+  await page.getByTestId("email-input").fill("email@mail.ru");
 
-//   await page.fill("[name='password']", "qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-//   await page.getByTestId("login_button").click();
+  await page.getByTestId("login_button").click();
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "login",
-//     "login-error-authentication-failed.png",
-//   ]);
-// });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-error-authentication-failed.png",
+  ]);
+});
 
-test("login error not validated", async ({ page }) => {
-  await page.goto("/login");
+test("login error not validated", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login`);
 
   await page.getByTestId("email-input").fill("");
 
@@ -77,8 +87,8 @@ test("login error not validated", async ({ page }) => {
   ]);
 });
 
-test("login error incorrect email", async ({ page }) => {
-  await page.goto("/login");
+test("login error incorrect email", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login`);
 
   await page.getByTestId("email-input").fill("email");
 
@@ -93,8 +103,8 @@ test("login error incorrect email", async ({ page }) => {
   ]);
 });
 
-test("login error incorrect email domain", async ({ page }) => {
-  await page.goto("/login");
+test("login error incorrect email domain", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login`);
 
   await page.getByTestId("email-input").fill("email@mail.com2");
 
@@ -109,61 +119,81 @@ test("login error incorrect email domain", async ({ page }) => {
   ]);
 });
 
-// test("login with with a registration button", async ({ page, mockRequest }) => {
-//   await mockRequest.setHeaders("/login", [HEADER_ENABLED_JOIN_SETTINGS]);
+test("login with with a registration button", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.EnabledJoin));
 
-//   await page.goto("/login");
+  await page.goto(`${baseUrl}/login`);
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "login",
-//     "login-with-registration-button.png",
-//   ]);
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-registration-button.png",
+  ]);
 
-//   await page.locator("#login_register").click();
+  await page.locator("#login_register").click();
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "login",
-//     "login-with-registration-button-modal.png",
-//   ]);
-// });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-registration-button-modal.png",
+  ]);
+});
 
-// test("login with with access recovery", async ({ page, mockRequest }) => {
-//   await mockRequest.setHeaders("/login", [HEADER_ENABLE_ADM_MESS_SETTINGS]);
+test("login with with access recovery", async ({
+  page,
+  serverRequestInterceptor,
+  port,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.EnableAdmMess),
+  );
 
-//   await page.goto("/login");
+  await page.goto(`${baseUrl}/login`);
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "login",
-//     "login-with-access-recovery.png",
-//   ]);
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-access-recovery.png",
+  ]);
 
-//   await page.getByTestId("recover_access_link").click();
+  await page.getByTestId("recover_access_link").click();
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "login",
-//     "login-with-access-recovery-modal.png",
-//   ]);
-// });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-access-recovery-modal.png",
+  ]);
+});
 
-// test("login with with hcaptcha", async ({ page, mockRequest }) => {
-//   await mockRequest.setHeaders("/login", [HEADER_HCAPTCHA_SETTINGS]);
-//   await mockRequest.router([endpoints.loginError403]);
+test("login with with hcaptcha", async ({
+  page,
+  port,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.WithHCaptcha),
+  );
+  clientRequestInterceptor.use(loginHandler(port, 403));
 
-//   await page.goto("/login");
+  await page.goto(`${baseUrl}/login`);
 
-//   await page.getByTestId("email-input").fill("email@mail.com");
+  await page.getByTestId("email-input").fill("email@mail.com");
 
-//   await page.fill("[name='password']", "qwerty1234");
+  await page.fill("[name='password']", "qwerty1234");
 
-//   await page.getByTestId("login_button").click();
+  await page.getByTestId("login_button").click();
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "login",
-//     "login-with-hcaptcha.png",
-//   ]);
-// });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-hcaptcha.png",
+  ]);
+});

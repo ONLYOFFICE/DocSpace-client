@@ -792,6 +792,9 @@
   "Reviewing": "Nəzərdən keçirilir",
   "RevokeLink": "Keçidi ləğv edin",
   "Role": "Rol",
+  "RoleAIAgentContentCreatorDescription": "Kontent yaradıcıları çatdan istifadə edə və Nəticə yaddaşındakı fayllarla işləyə bilərlər.\nOnlar faylları məlumat bazasına yükləyə bilər, lakin istifadəçiləri idarə edə və ya agent parametrlərinə daxil ola bilməz.",
+  "RoleAIAgentManagerDescription": "Agent menecerləri təyin edilmiş AI agentini idarə edə, yeni istifadəçiləri dəvət edə və onların səviyyəsindən aşağıdakılara rollar verə bilərlər.\nOnlar söhbətdən istifadə edə, bilik fayllarını yükləyə, Nəticə yaddaşı ilə işləyə və söhbət parametrlərini idarə edə bilərlər.",
+  "RoleAIAgentViewerDescription": "İzləyicilər yalnız başqaları tərəfindən yaradılan nəticələrlə Nəticə yaddaşındakı faylları görə bilərlər.\nOnların söhbətə və ya məlumat bazasına çıxışı yoxdur.",
   "RoleCommentator": "Şərhçi",
   "RoleCommentatorDescription": "Mövcud fayllarla əməliyyatlar: baxış, şərh.",
   "RoleContentCreatorDescription": "Məzmun yaradıcıları otaqda fayllar yarada və redaktə edə bilərlər, lakin istifadəçiləri idarə edə və ya parametrlərə daxil ola bilməzlər.",
@@ -970,6 +973,7 @@
   "TemporaryStorage": "Müvəqqəti yaddaş",
   "TemporaryStorageDescription": "Ehtiyat nüsxələr 'Yedəkləmə' bölməsində saxlanmışdır, siz onları yaratdıqdan sonra 24 saat ərzində endirə bilərsiniz.",
   "Terabyte": "TB",
+  "Thinking": "Düşünmə",
   "ThirdPartyDisconnectPrompt": "{{service}} xidmətini silmək istədiyinizə əminsiniz? Bu, {{account}} hesabınıza heç bir şəkildə təsir etməyəcək.",
   "ThirdPartyResource": "Üçüncü tərəf resursu",
   "ThirdPartyResourceDescription": "Ehtiyat nüsxələr üçüncü tərəf hesablarda da (Dropbox, Box.com, OneDrive və ya Google Drive) saxlana bilər. Buna görə də, ehtiyat nüsxələrinizi yadda saxlaya bilmək üçün əvvəlcə öz üçüncü tərəf hesabınızı (Dropbox, Box.com, OneDrive və ya Google Drive) ilə əlaqələndirməlisiniz.",
@@ -1068,8 +1072,5 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz",
-  "RoleAIAgentContentCreatorDescription": "Kontent yaradıcıları çatdan istifadə edə və Nəticə yaddaşındakı fayllarla işləyə bilərlər.\nOnlar faylları məlumat bazasına yükləyə bilər, lakin istifadəçiləri idarə edə və ya agent parametrlərinə daxil ola bilməz.",
-  "RoleAIAgentManagerDescription": "Agent menecerləri təyin edilmiş AI agentini idarə edə, yeni istifadəçiləri dəvət edə və onların səviyyəsindən aşağıdakılara rollar verə bilərlər.\nOnlar söhbətdən istifadə edə, bilik fayllarını yükləyə, Nəticə yaddaşı ilə işləyə və söhbət parametrlərini idarə edə bilərlər.",
-  "RoleAIAgentViewerDescription": "İzləyicilər yalnız başqaları tərəfindən yaradılan nəticələrlə Nəticə yaddaşındakı faylları görə bilərlər.\nOnların söhbətə və ya məlumat bazasına çıxışı yoxdur."
+  "YourTurn": "Sizin növbəniz"
 }

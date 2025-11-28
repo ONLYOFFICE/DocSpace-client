@@ -1884,9 +1884,11 @@ class ContextOptionsStore {
       {
         id: "option_preview",
         key: "preview",
-        label: this.treeFoldersStore.isRecentFolder
-          ? t("Open")
-          : t("Common:Preview"),
+        label:
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? t("Open")
+            : t("Common:Preview"),
         icon: EyeReactSvgUrl,
         onClick: () => this.onPreviewClick(item),
         disabled: false,

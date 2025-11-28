@@ -3,6 +3,7 @@
   "EmailErrorMessage": "E-mailová adresa není platná. E-mailovou adresu můžete upravit že na něj dvakrát kliknete.",
   "EmailErrorMessageUserNotFound": "Uživatel nenalezen. Můžete upravit e-mail tak, že na něj dvakrát kliknete.",
   "GroupMaxAvailableRoleWarning": "Skupiny lze do místnosti přidat maximálně s rolí {{roleName}}. Role jednotlivých uživatelů ve skupině však můžete změnit až po jejím úspěšném přidání.",
+  "GuestAgentMaxAvailableRoleWarning": "Hosté nemohou být přidáni jako tvůrci obsahu.\nPro tuto roli jsou způsobilí pouze administrátoři pokojů, administrátoři {{productName}} a Uživatelé.",
   "InvitationLanguage": "Jazyk pozvánky",
   "InviteMembersManuallyDescription": "Osobně pozvěte nové členy do {{productName}} prostřednictvím e-mailu",
   "InviteMembersSearchPlaceholder": "Pozvěte nové členy prostřednictvím e-mailu",

@@ -25,6 +25,7 @@
   "KnowledgeEnabledSuccess": "Base de conocimientos activada correctamente",
   "KnowledgeKeyDescription": "Introduzca la clave de la API obtenida de su proveedor de base de conocimientos",
   "KnowledgeSettingsDescription": "Habilite una base de conocimientos para agentes de IA. El sistema indexará sus documentos utilizando el modelo {{modelName}} para apoyar la búsqueda basada en preguntas a través de sus datos. Esta función se centra en encontrar información relevante, pero no genera resúmenes ni realiza análisis globales. ",
+  "MCPProductDescription": "El servidor {{organizationName}} {{productName}} MCP optimiza los flujos de trabajo impulsados por IA, integrando LLM con sistemas externos para una gestión de documentos eficiente y segura.",
   "MCPServer": "Servidor MCP",
   "MCPServerAdvancedSettingsHint": "Utilice esta sección para pasar encabezados HTTP adicionales, como tokens de autorización. ",
   "MCPServerDescriptionHint": "Escriba una breve explicación del propósito de la integración ",

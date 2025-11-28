@@ -1,7 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Dzēst sarunu?",
   "DeleteAIAgentDescription": "Aģents <strong>\"{{agentName}}\"</strong> tiks izdzēsts pavisam. Visi dati un lietotāju piekļuves tiks zaudēti.",
   "DeleteAIAgentTitle": "Dzēst šo aģentu?",
   "DeleteAIAgentWarning": "Es saprotu sekmes un vēlos dzēst aģentu.",
+  "DeleteAIChatDescription": "Jūs gatavojaties dzēst <strong>{{chatName}}<1>.</1></strong>\n Visi ziņojumi un tērzēšanas vēsture tiks neatgriežami izdzēsta un to nevarēs atjaunot.",
   "DeleteAllGroupDescription": "Atlasītās grupas tiks izdzēstas. Grupu lietotāji netiks noņemti no {{productName}}. Vai tiešām vēlaties turpināt?",
   "DeleteAllGroupsTitle": "Izdzēst grupas",
   "DeleteFiles": "Jūs gatavojaties pārvietot <strong>failus ({{filesCount}})</strong> uz {{trashSection}}.",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Šie objekti tiks neatgriežami dzēsti 30 dienu laikā.",
   "ItemsPermanentlyDeleted": "Šie priekšmeti tiks pastāvīgi izņemti no {{trashSection}}.",
   "removeFromListDescription": "Jūs gatavojaties izdzēst <1>{{title}}</1> no saraksta. Vai esat pārliecināts, ka vēlaties turpināt?",
-  "removeFromListDescriptionPlural": "Jūs gatavojaties izdzēst <1>vienumus ({{count}})</1> no saraksta. Vai esat pārliecināts, ka vēlaties turpināt?",
-  "DeleteAIChatDescription": "Jūs gatavojaties dzēst <strong>{{chatName}}<1>.</1></strong>\n Visi ziņojumi un tērzēšanas vēsture tiks neatgriežami izdzēsta un to nevarēs atjaunot.",
-  "DeleteAIAgentChatTitle": "Dzēst sarunu?"
+  "removeFromListDescriptionPlural": "Jūs gatavojaties izdzēst <1>vienumus ({{count}})</1> no saraksta. Vai esat pārliecināts, ka vēlaties turpināt?"
 }

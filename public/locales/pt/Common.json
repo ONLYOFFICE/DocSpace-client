@@ -792,6 +792,9 @@
   "Reviewing": "revisão",
   "RevokeLink": "Revogar link",
   "Role": "Função",
+  "RoleAIAgentContentCreatorDescription": "Criadores de conteúdo podem usar o chat e trabalhar com arquivos no armazenamento de resultados.\nEles podem enviar arquivos para a base de conhecimento, mas não podem gerenciar usuários ou acessar as configurações do agente.",
+  "RoleAIAgentManagerDescription": "Gerentes de agentes podem gerenciar o agente de IA designado, convidar novos usuários e atribuir funções abaixo do seu nível.\nEles podem usar o chat, enviar arquivos de conhecimento, trabalhar com armazenamento de resultados e gerenciar as configurações do chat.",
+  "RoleAIAgentViewerDescription": "Os espectadores só podem visualizar arquivos no armazenamento de resultados com saídas geradas por outros.\nEles não têm acesso ao chat ou à base de conhecimento.",
   "RoleCommentator": "Comentador",
   "RoleCommentatorDescription": "Operações com os ficheiros existentes: visualização, comentários.",
   "RoleContentCreatorDescription": "Os criadores de conteúdo podem criar e editar arquivos na sala, mas não podem gerenciar utilizadors ou acessar configurações.",
@@ -970,6 +973,7 @@
   "TemporaryStorage": "Armazenamento temporário",
   "TemporaryStorageDescription": "A cópia de segurança é armazenada na secção de 'Cópias de Segurança', poderá fazer o download da cópia dentro de 24 horas após a criação.",
   "Terabyte": "TB",
+  "Thinking": "Pensando",
   "ThirdPartyDisconnectPrompt": "Tem certeza que deseja remover o {{service}}? Isso não afetará sua conta {{account}} de forma alguma.",
   "ThirdPartyResource": "Recurso de terceiros",
   "ThirdPartyResourceDescription": "A cópia de segurança pode ser guardada na sua conta num serviço de terceiros (Dropbox, Box.com, OneDrive ou Google Drive). Precisa de conectar a sua conta do serviço oferecido por terceiros (Dropbox, Box.com, OneDrive ou Google Drive) antes que possa guardar a sua cópia de segurança lá.",
@@ -1068,8 +1072,5 @@
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
-  "YourTurn": "A sua vez",
-  "RoleAIAgentContentCreatorDescription": "Criadores de conteúdo podem usar o chat e trabalhar com arquivos no armazenamento de resultados.\nEles podem enviar arquivos para a base de conhecimento, mas não podem gerenciar usuários ou acessar as configurações do agente.",
-  "RoleAIAgentManagerDescription": "Gerentes de agentes podem gerenciar o agente de IA designado, convidar novos usuários e atribuir funções abaixo do seu nível.\nEles podem usar o chat, enviar arquivos de conhecimento, trabalhar com armazenamento de resultados e gerenciar as configurações do chat.",
-  "RoleAIAgentViewerDescription": "Os espectadores só podem visualizar arquivos no armazenamento de resultados com saídas geradas por outros.\nEles não têm acesso ao chat ou à base de conhecimento."
+  "YourTurn": "A sua vez"
 }

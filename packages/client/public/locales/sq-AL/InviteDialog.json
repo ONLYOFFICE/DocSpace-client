@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Adresa e emailit nuk është e vlefshme. Ju mund ta modifikoni emailin duke klikuar dy herë mbi të.",
   "EmailErrorMessageUserNotFound": "Përdoruesi nuk u gjet. Ju mund ta modifikoni emailin duke klikuar dy herë mbi të.",
   "GroupMaxAvailableRoleWarning": "Grupet mund të shtohen në një dhomë me rolin {{roleName}} si maksimum. Megjithatë, ju mund të ndryshoni rolin e përdoruesve individualë në grup pasi të jetë shtuar me sukses.",
+  "GuestAgentMaxAvailableRoleWarning": "Mikpritësit nuk mund të caktohen si krijues përmbajtje.\nVetëm administratorët e Dhoma, administratorët {{productName}} dhe Përdoruesit janë të zotë për këtë rol.",
   "InvitationLanguage": "Gjuha e ftesës",
   "InviteMembersManuallyDescription": "Ftoni anëtarë të rinj në {{productName}} personalisht me email",
   "InviteMembersSearchPlaceholder": "Ftoni anëtarët me email",

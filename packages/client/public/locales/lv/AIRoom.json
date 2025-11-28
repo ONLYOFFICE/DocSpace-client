@@ -1,4 +1,6 @@
 {
+  "AgentInViewModeWarning": "Jūs atrodaties <strong>tikai skatīšanai</strong> režīmā šim AI aģentam. Jūs varat redzēt AI čat aktivitātes rezultātus no citiem lietotājiem.",
+  "AIAgentAccessRedirectNote": "Jūs tiksiet automātiski novirzīts uz {{sectionName}} sadaļu 5 sekundēs.",
   "AIChat": "AI-Čats",
   "AIInstructions": "AI instrukcijas",
   "CreateChat": "Izveidot tērzēšanu",
@@ -8,6 +10,7 @@
   "EmptyKnowledgeTitle": "Vēl nav pievienoti faili",
   "EmptyResultsDescription": "Faili, kas ģenerēti AI-Chat, automātiski parādīsies šeit. Katreiz, kad ģenerējat saturu, sākat tērzēšanu vai nosūtāt ziņojumu ar izvadi, rezultāts tiks saglabāts šajā sadaļā.",
   "EmptyResultsTitle": "Vēl nav rezultātu",
+  "EmptyResultsViewerDescription": "Jūs redzēsiet AI čat aktivitātes rezultātus no citiem lietotājiem šeit, kad tie būs pieejami.",
   "InstructionsDescriptionAgent": "Aprakstiet, kā mākslīgā intelekta aģents vajadzētu uzvesties un reaģēt. Definējiet tā lomu, toni un galvenos uzdevumus.",
   "InstructionsDescriptionAgentExample": "Piemērs: \"Jūs esat AI PR asistents, kas palīdz rakstīt un rediģēt preses paziņojumus. Saglabājiet profesionālu, pārliecinātu un plašsaziņas līdzekļiem draudzīgu toni. Skaidri izcelt galvenos ziņojumus, izvairieties no žargona un saglabājiet tekstu saīsinātu un saistošu.\"",
   "Knowledge": "Zināšanas",
@@ -20,10 +23,9 @@
   "MCPDescriptionServers": "Izmantojiet MCP serverus, kas savienoti ar administratoru, lai uzlabotu tērzēšanas pieredzi ar AI. MCP serveri var palīdzēt ar datu izguvi, kopsavilkumiem, viediem ieteikumiem u.c.",
   "Model": "Pakalpojuma sniedzējs un modelis",
   "ModelDescription": "Izvēlieties AI pakalpojumu sniedzēju un modeli, kas tiks izmantots šīs telpas sarunās. Šis iestatījums ir obligāts un attiecas uz visiem dalībniekiem.",
+  "NoAccessAIAgentTitle": "Atvainojiet, jums nav piekļuves šim AI aģentam.",
   "ResponseQualityNode": "<1>Piezīme:</1> Atbildes kvalitāte var atšķirties atkarībā no modeļa; labākiem rezultātiem ieteicami jaunāki modeļi.",
   "ResultStorage": "Rezultātu glabāšana",
   "UploadFilesDevice": "Augšupielādējiet failus no sava personīgā ierīces",
-  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}.",
-  "AgentInViewModeWarning": "Jūs atrodaties <strong>tikai skatīšanai</strong> režīmā šim AI aģentam. Jūs varat redzēt AI čat aktivitātes rezultātus no citiem lietotājiem.",
-  "EmptyResultsViewerDescription": "Jūs redzēsiet AI čat aktivitātes rezultātus no citiem lietotājiem šeit, kad tie būs pieejami."
+  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}."
 }

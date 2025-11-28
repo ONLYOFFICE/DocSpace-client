@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Emailová adresa nie je platná. E-mail môžete upraviť dvojitým kliknutím naň.",
   "EmailErrorMessageUserNotFound": "Používateľ nebol nájdený. Môžete upraviť e-mail dvojitým kliknutím naň.",
   "GroupMaxAvailableRoleWarning": "Skupiny je možné pridať do miestnosti s maximálnou rolou {{roleName}}. Po úspešnom pridaní skupiny však môžete zmeniť rolu jednotlivých používateľov v skupine.",
+  "GuestAgentMaxAvailableRoleWarning": "Hostia nemôžu byť pridelení ako tvorca obsahu.\nLen administrátori izieb, administrátori {{productName}} a používatelia sú oprávnení pre túto rolu.",
   "InvitationLanguage": "Jazyk pozvánky",
   "InviteMembersManuallyDescription": "Pozvať nových členov do {{productName}} osobne prostredníctvom e-mailu",
   "InviteMembersSearchPlaceholder": "Pozvať členov e-mailom",
@@ -21,6 +22,5 @@
   "UserAgentMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť priradení ako manažéri agentov. Na danú úlohu sú vhodní len administrátori izieb a {{productName}}.",
   "UserMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť označení ako manažéri miestnosti. Iba administrátorom miestnosti a administrátorom {{productName}} môže byť pridelená táto rola.",
   "UsersAlreadyAdded": "Niektorí používatelia už boli pridaní",
-  "UsersCannotBeAdded": "Zakázaní kontakty je možné pridať do miestnosti.",
-  "GuestAgentMaxAvailableRoleWarning": "Hostia nemôžu byť pridelení ako tvorca obsahu.\nLen administrátori izieb, administrátori {{productName}} a používatelia sú oprávnení pre túto rolu."
+  "UsersCannotBeAdded": "Zakázaní kontakty je možné pridať do miestnosti."
 }

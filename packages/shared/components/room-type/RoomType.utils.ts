@@ -21,6 +21,8 @@ export const getRoomTypeTitleTranslation = (
       return t("Common:PublicRoom");
     case RoomsType.FormRoom:
       return t("Common:FormFilingRoomTitle");
+    case RoomsType.Private:
+      return t("Common:PrivateRoomTitle");
     default:
       return "";
   }
@@ -46,6 +48,8 @@ export const getRoomTypeDescriptionTranslation = (
       return t("Common:PublicRoomInfo");
     case RoomsType.FormRoom:
       return t("Common:FormFilingRoomInfo");
+    case RoomsType.Private:
+      return t("Common:PrivateRoomDescription");
     default:
       return "";
   }

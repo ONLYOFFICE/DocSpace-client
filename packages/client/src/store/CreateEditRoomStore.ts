@@ -574,6 +574,7 @@ class CreateEditRoomStore {
       prompt,
       providerId,
       modelId,
+      isPrivate,
     } = roomParams;
 
     const isThirdparty = storageLocation.isThirdparty;
@@ -596,9 +597,11 @@ class CreateEditRoomStore {
             color: (logo as { color: string }).color,
           }
         : null;
+
     const createRoomData = {
       roomId,
       roomType: type,
+      private: isPrivate,
       title: title || t("Common:NewRoom"),
       ...(isThirdPartyRoom && {
         createAsNewFolder: createAsNewFolder ?? true,

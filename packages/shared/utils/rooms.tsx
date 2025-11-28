@@ -35,7 +35,7 @@ const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
     type: startRoomType,
     title: title ?? "",
     tags: [],
-    isPrivate: false,
+    isPrivate: startRoomType === RoomsType.Private,
     storageLocation: {
       isThirdparty: false,
       provider: null,
@@ -134,7 +134,7 @@ const getFetchedRoomParams = (
       providerKey: item.providerKey,
       iconSrc: getThirdPartyIcon(item.providerKey || ""),
     },
-    isPrivate: false,
+    isPrivate: item.roomType === RoomsType.Private,
     icon: {
       uploadedFile: item?.logo?.original,
       tmpFile: "",

@@ -161,6 +161,12 @@ const InfoPanelBodyContent = ({
     }
   }, [fileView, selection, isTemplatesRoom, isAgent]);
 
+  React.useEffect(() => {
+    if (fileView.indexOf("info_plugin") > -1 && isAgent) {
+      setView(InfoPanelView.infoDetails);
+    }
+  }, [fileView, isAgent]);
+
   const isExpiredLink = useEventCallback(() =>
     checkIsExpiredLinkAsync(selection),
   );

@@ -62,7 +62,14 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("activation render", async ({ page, baseUrl }) => {
+test("activation render", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
@@ -72,7 +79,13 @@ test("activation render", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("activation success", async ({ page, baseUrl }) => {
+test("activation success", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='password']", "qwerty123");
@@ -95,7 +108,13 @@ test("activation success", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("activation error", async ({ page, baseUrl }) => {
+test("activation error", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='name']", "");

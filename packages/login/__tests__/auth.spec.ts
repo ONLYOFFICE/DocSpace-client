@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { confirmHandler } from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
@@ -73,7 +74,13 @@ const getUrlWithFileHandler = (baseUrl: string) => {
   return getUrlWithQueryParams(URL, getQueryParamsWithFileHandler(baseUrl));
 };
 
-test("auth success", async ({ page, baseUrl }) => {
+test("auth success", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("loader").waitFor({ state: "detached" });
@@ -83,7 +90,13 @@ test("auth success", async ({ page, baseUrl }) => {
   await expect(page).toHaveScreenshot(["desktop", "auth", "auth-success.png"]);
 });
 
-test("auth with reference url success", async ({ page, baseUrl }) => {
+test("auth with reference url success", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   await page.goto(`${baseUrl}${getUrlWithReferenceUrl(baseUrl)}`);
 
   await page.getByTestId("loader").waitFor({ state: "detached" });
@@ -99,7 +112,13 @@ test("auth with reference url success", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("auth with file handler success", async ({ page, baseUrl }) => {
+test("auth with file handler success", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   await page.goto(`${baseUrl}${getUrlWithFileHandler(baseUrl)}`, {
     waitUntil: "domcontentloaded",
   });

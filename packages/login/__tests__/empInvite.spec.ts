@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
+  confirmHandler,
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
@@ -54,7 +55,13 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("emp invite render standalone", async ({ page, baseUrl }) => {
+test("emp invite render standalone", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
@@ -70,6 +77,7 @@ test("emp invite render no standalone", async ({
   serverRequestInterceptor,
   port,
 }) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   serverRequestInterceptor.use(
     settingsHandler(port, TypeSettings.NoStandalone),
   );
@@ -82,7 +90,13 @@ test("emp invite render no standalone", async ({
   ]);
 });
 
-test("emp invite success standalone", async ({ page, baseUrl }) => {
+test("emp invite success standalone", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='first-name']", "firstName");
@@ -113,6 +127,7 @@ test("emp invite success no standalone", async ({
   port,
 }) => {
   serverRequestInterceptor.use(
+    confirmHandler(port, undefined, true),
     settingsHandler(port, TypeSettings.NoStandalone),
   );
 
@@ -142,7 +157,13 @@ test("emp invite success no standalone", async ({
   ]);
 });
 
-test("emp invite error standalone", async ({ page, baseUrl }) => {
+test("emp invite error standalone", async ({
+  page,
+  baseUrl,
+  port,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='password']", "123");
@@ -164,6 +185,7 @@ test("emp invite error no standalone", async ({
   port,
 }) => {
   serverRequestInterceptor.use(
+    confirmHandler(port, undefined, true),
     settingsHandler(port, TypeSettings.NoStandalone),
   );
 

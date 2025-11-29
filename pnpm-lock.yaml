@@ -12,6 +12,7 @@ overrides:
   on-headers: ^1.1.0
   koa: '>=2.16.3'
   js-yaml: '>=4.1.1'
+  node-forge: '>=1.3.2'
 
 importers:
 
@@ -66,8 +67,8 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@onlyoffice/docspace-sdk-js':
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2982,9 +2983,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/docspace-sdk-js@2.0.0':
-    resolution: {integrity: sha512-Oqppiv0+1+81fkKCOLAoBcjN80TEJGb+a5GoOBKalkxgy4I4KSqPRiKuOnN+vSGn2nHNyO5787MGXoulLQqBNg==}
-    engines: {node: '>=22', pnpm: '>=9'}
+  '@onlyoffice/docspace-sdk-js@2.1.0':
+    resolution: {integrity: sha512-Jgqr6LblkWIW/m8OH1z8qm6DQ6AhoW07oMhQYSHZFVvwLEtTP0tMryZ+pOuXOCoh4/XHF/AwSKETkj89W0xgmw==}
+    engines: {node: '>=22', pnpm: '>=10'}
 
   '@onlyoffice/document-editor-react@2.1.1':
     resolution: {integrity: sha512-b0SnFPmT+OEyJons18PPHpwtFABVCI4nr3gPtAAImar1PhN9tNc9703Yo5KPYsHhIgVq+FqHSWgunI9GJnKa5w==}
@@ -7251,8 +7252,8 @@ packages:
       encoding:
         optional: true
 
-  node-forge@1.3.1:
-    resolution: {integrity: sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==}
+  node-forge@1.3.2:
+    resolution: {integrity: sha512-6xKiQ+cph9KImrRh0VsjH2d8/GXA4FIMlgU4B757iI1ApvcyA9VlouP0yZJha01V+huImO+kKMU7ih+2+E14fw==}
     engines: {node: '>= 6.13.0'}
 
   node-machine-id@1.1.12:
@@ -7535,11 +7536,6 @@ packages:
   pluralize@8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
-
-  pnpm@10.20.0:
-    resolution: {integrity: sha512-z5mYIiFi3YWGTQqBAueJLnukzq3rv1ox+cL85I384xepxTufZGTR75BCy6LgKuAqn3wUOitDjNk8kYQPAZK53Q==}
-    engines: {node: '>=18.12'}
-    hasBin: true
 
   polished@4.3.1:
     resolution: {integrity: sha512-OBatVyC/N7SCW/FaDHrSd+vn0o5cS855TOmYi4OkdWUMSJCET/xip//ch8xGUvtr3i44X9LVyWwQlRMTN3pwSA==}
@@ -11587,9 +11583,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@21.5.2':
     optional: true
 
-  '@onlyoffice/docspace-sdk-js@2.0.0':
-    dependencies:
-      pnpm: 10.20.0
+  '@onlyoffice/docspace-sdk-js@2.1.0': {}
 
   '@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
@@ -16530,7 +16524,7 @@ snapshots:
     dependencies:
       whatwg-url: 5.0.0
 
-  node-forge@1.3.1: {}
+  node-forge@1.3.2: {}
 
   node-machine-id@1.1.12: {}
 
@@ -16828,8 +16822,6 @@ snapshots:
       fsevents: 2.3.2
 
   pluralize@8.0.0: {}
-
-  pnpm@10.20.0: {}
 
   polished@4.3.1:
     dependencies:
@@ -17734,7 +17726,7 @@ snapshots:
   selfsigned@2.4.1:
     dependencies:
       '@types/node-forge': 1.3.14
-      node-forge: 1.3.1
+      node-forge: 1.3.2
 
   semver@5.7.2: {}
 

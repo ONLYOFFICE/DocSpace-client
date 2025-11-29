@@ -33,6 +33,8 @@ import {
 } from "SRC_DIR/helpers/constants";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
+const GUEST_ID = "guest";
+
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 const TABLE_GUESTS_COLUMNS = `guestsTableColumns_ver-${TableVersions.Guests}`;
 const TABLE_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
@@ -43,6 +45,7 @@ const TABLE_FAVORITES_COLUMNS = `favoritesTableColumns_ver-${TableVersions.Favor
 const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_SHARED_WITH_ME_COLUMNS = `sharedWithMeTableColumns_ver-${TableVersions.SharedWithMe}`;
+const TABLE_IN_SHARED_FOLDER_COLUMNS = `inSharedFolderTableColumns_ver-${TableVersions.InSharedFolder}`;
 
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
@@ -57,6 +60,7 @@ const COLUMNS_GROUPS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE = `templatesRoomsColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_SHARED_WITH_ME_SIZE = `sharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
+const COLUMNS_IN_SHARED_FOLDER_SIZE = `inSharedFolderColumnsSize_ver-${TableVersions.InSharedFolder}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
@@ -71,6 +75,7 @@ const COLUMNS_GROUPS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVe
 const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL = `templatesRoomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE = `infoPanelSharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
+const COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE = `infoPanelInSharedColumnsSize_ver-${TableVersions.InSharedFolder}`;
 
 class TableStore {
   authStore;
@@ -457,6 +462,7 @@ class TableStore {
         isRecentFolder,
         isFavoritesFolder,
         isSharedWithMeFolder,
+        isInSharedFolder,
         isAIAgentsFolder,
       } = this.treeFoldersStore;
 
@@ -491,12 +497,17 @@ class TableStore {
         return;
       }
 
-      if (isSharedWithMeFolder) {
+      if (isSharedWithMeFolder || isInSharedFolder) {
+        const isPublicPage = this.treeFoldersStore.publicRoomStore.isPublicRoom;
+
         this.setSharedByShareWithMeColumn(
-          splitColumns.includes("SharedByShareWithMe"),
+          !isInSharedFolder &&
+            !isPublicPage &&
+            splitColumns.includes("SharedByShareWithMe"),
         );
+
         this.setAuthorShareWithMeColumn(
-          splitColumns.includes("AuthorShareWithMe"),
+          !isPublicPage && splitColumns.includes("AuthorShareWithMe"),
         );
         this.setAccessLevelShareWithMeColumn(
           splitColumns.includes("AccessLevelShareWithMe"),
@@ -889,6 +900,7 @@ class TableStore {
       isTemplatesFolder,
       isFavoritesFolder,
       isSharedWithMeFolder,
+      isInSharedFolder,
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
@@ -911,7 +923,7 @@ class TableStore {
       : contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
-    const userId = this.userStore.user?.id;
+    const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
 
@@ -938,6 +950,8 @@ class TableStore {
       tableStorageName = `${TABLE_FAVORITES_COLUMNS}=${userId}`;
     else if (isSharedWithMeFolder)
       tableStorageName = `${TABLE_SHARED_WITH_ME_COLUMNS}=${userId}`;
+    else if (isInSharedFolder)
+      tableStorageName = `${TABLE_IN_SHARED_FOLDER_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
     else if (isDocumentsFolder) tableStorageName = `${TABLE_COLUMNS}=${userId}`;
@@ -958,6 +972,7 @@ class TableStore {
       isTemplatesFolder,
       isFavoritesFolder,
       isSharedWithMeFolder,
+      isInSharedFolder,
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
@@ -980,7 +995,7 @@ class TableStore {
       : contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
-    const userId = this.userStore.user?.id;
+    const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
 
@@ -1009,6 +1024,8 @@ class TableStore {
       columnStorageName = `${COLUMNS_GROUPS_SIZE}=${userId}`;
     else if (isSharedWithMeFolder)
       columnStorageName = `${COLUMNS_SHARED_WITH_ME_SIZE}=${userId}`;
+    else if (isInSharedFolder)
+      columnStorageName = `${COLUMNS_IN_SHARED_FOLDER_SIZE}=${userId}`;
     else if (isDocumentsFolder) columnStorageName = `${COLUMNS_SIZE}=${userId}`;
     else columnStorageName = "";
 
@@ -1027,6 +1044,7 @@ class TableStore {
       isTemplatesFolder,
       isFavoritesFolder,
       isSharedWithMeFolder,
+      isInSharedFolder,
       isAIAgentsFolder,
     } = this.treeFoldersStore;
 
@@ -1049,7 +1067,7 @@ class TableStore {
       : contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
-    const userId = this.userStore.user?.id;
+    const userId = this.userStore.user?.id ?? GUEST_ID;
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms && !isAIAgentsFolder;
 
@@ -1079,6 +1097,8 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`;
     else if (isSharedWithMeFolder)
       columnInfoPanelStorageName = `${COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE}=${userId}`;
+    else if (isInSharedFolder)
+      columnInfoPanelStorageName = `${COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE}=${userId}`;
     else if (isDocumentsFolder)
       columnInfoPanelStorageName = `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
     else columnInfoPanelStorageName = "";

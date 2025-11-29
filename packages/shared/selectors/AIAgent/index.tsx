@@ -72,6 +72,7 @@ const AIAgentSelectorComponent = ({
   initTotal,
   initHasNextPage,
   initSearchValue,
+  disableBySecurity,
 }: AIAgentSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -94,7 +95,7 @@ const AIAgentSelectorComponent = ({
   const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
   const [items, setItems] = React.useState<TSelectorItem[]>(
     withInit
-      ? convertToItems(initItems).filter((x) =>
+      ? convertToItems(initItems, disableBySecurity).filter((x) =>
           excludeItems ? !excludeItems.includes(x.id) : true,
         )
       : [],
@@ -161,6 +162,7 @@ const AIAgentSelectorComponent = ({
     setTotal,
     setItems,
     disabledItems: [],
+    disableBySecurity,
   });
 
   const onClearSearchAction = React.useCallback(
@@ -187,6 +189,7 @@ const AIAgentSelectorComponent = ({
     setItems,
     withInit,
     subscribe,
+    disableBySecurity,
   });
 
   React.useEffect(() => {

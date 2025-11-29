@@ -79,6 +79,7 @@ const Item = ({
   getLinkData,
   onBadgeClick,
   roomsFolderId,
+  aiAgentsFolderId,
   setDropTargetPreview,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
@@ -209,7 +210,13 @@ const Item = ({
         badgeComponent={
           <NewFilesBadge
             newFilesCount={labelBadge}
-            folderId={item.id === roomsFolderId ? "rooms" : item.id}
+            folderId={
+              item.id === roomsFolderId
+                ? "rooms"
+                : item.id === aiAgentsFolderId
+                  ? "agents"
+                  : item.id
+            }
             parentDOMId={folderId}
             onBadgeClick={onBadgeClick}
           />
@@ -263,6 +270,7 @@ const Items = ({
 
   getLinkData,
   roomsFolderId,
+  aiAgentsFolderId,
   setDropTargetPreview,
 }) => {
   const getFolderIcon = React.useCallback((item) => {
@@ -377,6 +385,7 @@ const Items = ({
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
             roomsFolderId={roomsFolderId}
+            aiAgentsFolderId={aiAgentsFolderId}
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
             setDropTargetPreview={setDropTargetPreview}
@@ -386,11 +395,37 @@ const Items = ({
         );
       });
 
-      items.splice(1, 0, <CatalogDivider key="ai-agents-divider" />);
+      // guest doesn't have my documents by default, but has if he was downgraded from another type
+      const hasMyDocuments = elm.some(
+        (f) => f.rootFolderType === FolderType.USER,
+      );
 
-      items.splice(6, 0, <CatalogDivider key="doc-other-header" />);
+      const agentsDividerIndex = 1;
+      let roomsDividerIndex = 4;
+      let recentDividerIndex = 8;
 
-      items.splice(9, 0, <CatalogDivider key="trash-divider" />);
+      if (!hasMyDocuments) {
+        roomsDividerIndex = 3;
+        recentDividerIndex = 7;
+      }
+
+      items.splice(
+        agentsDividerIndex,
+        0,
+        <CatalogDivider key="ai-agents-divider" />,
+      );
+
+      items.splice(
+        roomsDividerIndex,
+        0,
+        <CatalogDivider key="rooms-divider" />,
+      );
+
+      items.splice(
+        recentDividerIndex,
+        0,
+        <CatalogDivider key="recent-divider" />,
+      );
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);
@@ -474,6 +509,7 @@ export default inject(
       commonFolderId,
       isPrivacyFolder,
       roomsFolderId,
+      aiAgentsFolderId,
     } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
@@ -521,6 +557,7 @@ export default inject(
       folderAccess,
       currentColorScheme,
       roomsFolderId,
+      aiAgentsFolderId,
       isIndexEditingMode,
       setDropTargetPreview,
     };

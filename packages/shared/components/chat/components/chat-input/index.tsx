@@ -30,7 +30,6 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import type { TFile } from "../../../../api/files/types";
-import { InfoPanelEvents } from "../../../../enums";
 import { RectangleSkeleton } from "../../../../skeletons";
 
 import { Textarea } from "../../../textarea";
@@ -64,7 +63,6 @@ const ChatInput = ({
   const { fetchChat, currentChat } = useChatStore();
 
   const [value, setValue] = React.useState("");
-  const [inputWidth, setInputWidth] = React.useState(0);
   const [selectedFiles, setSelectedFiles] = React.useState<Partial<TFile>[]>(
     [],
   );
@@ -72,7 +70,6 @@ const ChatInput = ({
     React.useState(false);
 
   const prevSession = React.useRef(currentChatId);
-  const inputRef = React.useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;
@@ -89,7 +86,7 @@ const ChatInput = ({
   };
 
   const sendMessageAction = React.useCallback(async () => {
-    if (!value) return;
+    if (!value.trim()) return;
 
     try {
       if (!currentChatId) {
@@ -152,33 +149,9 @@ const ChatInput = ({
     fetchChat,
   ]);
 
-  React.useEffect(() => {
-    const onResize = () => {
-      setInputWidth(inputRef.current?.offsetWidth ?? 0);
-
-      setTimeout(() => setInputWidth(inputRef.current?.offsetWidth ?? 0), 0);
-    };
-
-    window.addEventListener("resize", onResize);
-
-    window.addEventListener(InfoPanelEvents.showInfoPanel, onResize);
-    window.addEventListener(InfoPanelEvents.hideInfoPanel, onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-      window.removeEventListener(InfoPanelEvents.showInfoPanel, onResize);
-    };
-  }, []);
-
   return (
     <>
-      <div
-        className={classNames(styles.chatInput, "chat-input")}
-        ref={(ref) => {
-          if (ref) setInputWidth(ref.offsetWidth);
-          inputRef.current = ref;
-        }}
-      >
+      <div className={classNames(styles.chatInput, "chat-input")}>
         {isLoading ? (
           <RectangleSkeleton width="100%" height="116px" borderRadius="3px" />
         ) : (
@@ -209,7 +182,6 @@ const ChatInput = ({
             />
 
             <Buttons
-              inputWidth={inputWidth}
               isFilesSelectorVisible={isFilesSelectorVisible}
               toggleFilesSelector={toggleFilesSelector}
               sendMessageAction={sendMessageAction}

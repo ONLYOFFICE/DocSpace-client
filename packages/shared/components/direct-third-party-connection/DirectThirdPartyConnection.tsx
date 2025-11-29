@@ -209,10 +209,10 @@ const DirectThirdPartyConnection = ({
     const account = accounts.find((acc) => acc.name === name);
 
     if (!account?.connected) {
-      setSelectedThirdPartyAccount({
-        key: "0",
-        label: selectedThirdPartyAccount?.label,
-      });
+      // setSelectedThirdPartyAccount({
+      //   key: "0",
+      //   label: selectedThirdPartyAccount?.label,
+      // });
 
       return window.open(`${THIRD_PARTY_SERVICES_URL}${name}`, "_blank");
     }
@@ -366,7 +366,7 @@ const DirectThirdPartyConnection = ({
           label={t("Common:Connect")}
           onClick={onConnect}
           size={buttonSize}
-          isDisabled={isDisabledComponent}
+          isDisabled={isDisabledComponent || !selectedThirdPartyAccount}
           testId={
             buildDataTestId(dataTestId, "connect_account_button") ??
             "connect-button"

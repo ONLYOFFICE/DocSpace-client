@@ -29,11 +29,7 @@ import { expect, test } from "./fixtures/base";
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 test.describe("Shared with me", () => {
-  test("should navigate to shared with me page", async ({
-    page,
-    mockRequest,
-  }) => {
-    // Setup mock endpoints for authenticated user and folder data
+  test.beforeEach(async ({ mockRequest }) => {
     await mockRequest.router([
       endpoints.aiConfig,
       endpoints.settingsWithQuery,
@@ -51,11 +47,19 @@ test.describe("Shared with me", () => {
       endpoints.invitationSettings,
       endpoints.filesSettings,
       endpoints.webPlugins,
-      endpoints.sharedWithMe,
+
       endpoints.thirdPartyCapabilities,
       endpoints.thirdParty,
       endpoints.docService,
     ]);
+  });
+
+  test("should navigate to shared with me page", async ({
+    page,
+    mockRequest,
+  }) => {
+    // Setup mock endpoints for authenticated user and folder data
+    await mockRequest.router([endpoints.sharedWithMe]);
 
     // Navigate to shared with me page
     await page.goto("/shared-with-me/filter?folder=4");
@@ -70,7 +74,26 @@ test.describe("Shared with me", () => {
     // Wait for the element to be visible and have text
     await expect(title).toBeVisible();
     await expect(title).toHaveText("share test");
+  });
 
-    console.log("✅ Shared with me page navigation test passed!");
+  test("should handle empty shared files list", async ({
+    page,
+    mockRequest,
+  }) => {
+    // Create empty mock data
+    await mockRequest.router([endpoints.sharedWithMeEmpty]);
+
+    await page.goto("/shared-with-me/filter?folder=4");
+
+    const emptyView = page.getByTestId("empty-view");
+    await expect(emptyView).toBeVisible();
+
+    // Should not have any table list items
+
+    await expect(emptyView).toHaveScreenshot([
+      "desktop",
+      "shared-with-me",
+      "shared-with-me-empty.png",
+    ]);
   });
 });

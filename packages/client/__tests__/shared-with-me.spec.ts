@@ -40,7 +40,7 @@ test.describe("Shared with me", () => {
       endpoints.colorTheme,
       endpoints.build,
       endpoints.capabilities,
-      endpoints.self,
+      endpoints.selfEmailActivated,
       endpoints.tariff,
       endpoints.quota,
       endpoints.additionalSettings,
@@ -56,22 +56,20 @@ test.describe("Shared with me", () => {
       endpoints.thirdParty,
       endpoints.docService,
     ]);
+
     // Navigate to shared with me page
     await page.goto("/shared-with-me/filter?folder=4");
 
     // Wait for the page to load and table to be visible
     const table = page.getByTestId("table-body");
-    await expect(table).toBeVisible({ timeout: 10000 });
+    await expect(table).toBeVisible();
 
-    // Wait for the table to have content
-    await page.waitForSelector(".table-list-item", { timeout: 10000 });
-
-    // Find the file link
-    const title = table.locator(".table-list-item > a");
+    // Find the file link with more flexible selector (a tag anywhere within table-list-item)
+    const title = table.locator(".table-list-item a").first();
 
     // Wait for the element to be visible and have text
-    await expect(title).toBeVisible({ timeout: 5000 });
-    await expect(title).toHaveText("share test", { timeout: 5000 });
+    await expect(title).toBeVisible();
+    await expect(title).toHaveText("share test");
 
     console.log("✅ Shared with me page navigation test passed!");
   });

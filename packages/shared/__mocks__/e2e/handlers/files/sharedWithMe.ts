@@ -1,5 +1,7 @@
 import { BASE_URL, API_PREFIX } from "../../utils";
 
+type ResponseType = "success" | "empty";
+
 export const PATH_SHARED_WITH_ME = /.*\/api\/2\.0\/files\/\d+\?.*/;
 
 export const success = {
@@ -275,6 +277,22 @@ export const success = {
   statusCode: 200,
 };
 
-export const sharedWithMeHandler = () => {
-  return new Response(JSON.stringify(success));
+export const empty = {
+  ...success,
+  response: {
+    ...success.response,
+    files: [],
+    count: 0,
+    total: 0,
+  },
+};
+
+export const sharedWithMeHandler = (type: ResponseType) => {
+  switch (type) {
+    case "empty":
+      return new Response(JSON.stringify(empty));
+    case "success":
+    default:
+      return new Response(JSON.stringify(success));
+  }
 };

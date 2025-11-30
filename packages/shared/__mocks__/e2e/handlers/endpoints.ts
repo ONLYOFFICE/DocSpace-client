@@ -345,6 +345,10 @@ export const endpoints = {
   },
   sharedWithMe: {
     url: PATH_SHARED_WITH_ME,
-    dataHandler: sharedWithMeHandler,
+    dataHandler: sharedWithMeHandler.bind(null, "success"),
+  },
+  sharedWithMeEmpty: {
+    url: PATH_SHARED_WITH_ME,
+    dataHandler: sharedWithMeHandler.bind(null, "empty"),
   },
 } satisfies TEndpoints;

@@ -44,7 +44,7 @@ export const quotaSuccess = {
         value: 31,
         type: "count",
         used: {
-          value: 30,
+          value: 2,
           title: "Admins added:",
         },
         priceTitle: "Number of admins",

@@ -44,8 +44,8 @@ const successRoot = {
         indexing: false,
         denyDownload: false,
         fileEntryType: 1,
-        id: 176935,
-        rootFolderId: 176935,
+        id: 1,
+        rootFolderId: 1,
         canShare: false,
         security: {
           Read: true,
@@ -151,8 +151,8 @@ const successRoot = {
         indexing: false,
         denyDownload: false,
         fileEntryType: 1,
-        id: 28934,
-        rootFolderId: 28934,
+        id: 2,
+        rootFolderId: 2,
         canShare: false,
         security: {
           Read: true,
@@ -259,8 +259,8 @@ const successRoot = {
         indexing: false,
         denyDownload: false,
         fileEntryType: 1,
-        id: 11241,
-        rootFolderId: 11241,
+        id: 4,
+        rootFolderId: 4,
         canShare: false,
         security: {
           Read: true,

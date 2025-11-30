@@ -41,3 +41,5 @@ export * from "./thirdPartyCapabilities";
 export * from "./thirdParty";
 
 export * from "./docservice";
+
+export * from "./sharedWithMe";

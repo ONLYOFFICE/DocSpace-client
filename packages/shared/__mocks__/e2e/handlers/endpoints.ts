@@ -91,11 +91,13 @@ import {
   PATH_FILES_SETTINGS,
   PATH_FOLDER,
   PATH_ROOMS_LIST,
+  PATH_SHARED_WITH_ME,
   PATH_THIRD_PARTY,
   PATH_THIRD_PARTY_CAPABILITIES,
   roomListHandler,
   ROOT_PATH,
   rootHandler,
+  sharedWithMeHandler,
   thirdPartyCapabilitiesHandler,
   thirdPartyHandler,
 } from "./files";
@@ -113,7 +115,7 @@ import { PATH_DELETE_USER } from "./people/self";
 import { aiConfigHandler, PATH_AI_CONFIG } from "./ai/config";
 
 export type TEndpoint = {
-  url: string;
+  url: string | RegExp;
   dataHandler: () => Response;
 };
 
@@ -277,6 +279,10 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_DELETE_USER}`,
     dataHandler: selfHandler,
   },
+  selfEmailActivated: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: selfHandler.bind(null, null, null, true),
+  },
   build: {
     url: `${BASE_URL}${PATH_BUILD}`,
     dataHandler: buildHandler,
@@ -310,7 +316,7 @@ export const endpoints = {
     dataHandler: filesSettingsHandler,
   },
   getPortal: {
-    url: `${BASE_URL}${PATH_PORTAL_GET}`,
+    url: `${PATH_PORTAL_GET}`,
     dataHandler: getPortalHandler,
   },
   cultures: {
@@ -336,5 +342,9 @@ export const endpoints = {
   docService: {
     url: `${BASE_URL}${PATH_DOC_SERVICE}`,
     dataHandler: docServiceHandler,
+  },
+  sharedWithMe: {
+    url: PATH_SHARED_WITH_ME,
+    dataHandler: sharedWithMeHandler,
   },
 } satisfies TEndpoints;

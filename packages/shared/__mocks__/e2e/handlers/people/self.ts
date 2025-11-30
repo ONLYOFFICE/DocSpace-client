@@ -75,7 +75,9 @@ export const successSelf = {
   isAnonim: false,
 };
 
-export const usersSuccess = { response: [successSelf] };
+export const usersSuccess = {
+  response: { ...successSelf, activationStatus: 1 },
+};
 
 export const selfError404 = {
   response: {

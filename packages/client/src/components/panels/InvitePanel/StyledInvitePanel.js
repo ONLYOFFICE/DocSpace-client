@@ -138,6 +138,10 @@ const StyledExternalLink = styled.div`
 
   .invite-via-link-settings-warning {
     margin-top: -2px;
+
+    svg path:nth-child(1) {
+      fill: unset !important;
+    }
   }
 `;
 const StyledInviteUserBody = styled.div`

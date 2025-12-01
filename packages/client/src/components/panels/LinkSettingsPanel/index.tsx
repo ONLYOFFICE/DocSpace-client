@@ -275,7 +275,7 @@ const LinkSettingsPanel = ({
             className={styles.linkSettingsDatePicker}
             selectDateText={t("Common:SelectDate")}
             initialDate={limitDate}
-            minDate={new Date()}
+            minDate={moment().subtract(1, "days")}
             maxDate={maxDate}
             hideCross
           />

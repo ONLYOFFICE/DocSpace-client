@@ -242,6 +242,7 @@ const View = ({
     scrollToTop,
     selectedFolderStore,
     wsCreatedPDFForm,
+    currentView,
   });
 
   const { getProfileInitialValue } = useProfileBody({

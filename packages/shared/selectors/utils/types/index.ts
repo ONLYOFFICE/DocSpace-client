@@ -102,6 +102,7 @@ export type UseAgentsHelperProps = TUseInputItemHelper & {
     >
   >;
   setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
+  disableBySecurity?: string;
 };
 
 export type UseSocketHelperProps = {

@@ -2,7 +2,7 @@
   "AddStaticText": "静的テキストの追加",
   "AddWatermarkElements": "透かし要素の追加",
   "AddWatermarksToDocuments": "文書に透かしの追加",
-  "AddWatermarksToDocumentsDescription": "このルーム内のすべてのドキュメントに透かしを入れます。ドキュメントにすでに透かしが含まれている場合は、置き換えられません。",
+  "AddWatermarksToDocumentsDescription": "このルーム内のすべてのドキュメントを透かしで保護します。\n既にドキュメントに透かしが含まれている場合は、それを置き換えることができません。\nこの設定を有効にすると、透かしが損なわれないように、ドキュメントはPDFとしてのみダウンロードできます。",
   "AutomaticIndexing": "自動インデックス作成",
   "AutomaticIndexingDescription": "シリアル番号によるファイルとフォルダの自動インデックス作成を有効にします。番号によるソートがすべてのユーザーのデフォルトとして設定されます。",
   "ChooseRoomType": "タイプから選択する",

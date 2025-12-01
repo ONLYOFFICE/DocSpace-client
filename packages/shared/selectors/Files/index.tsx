@@ -233,6 +233,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     setSelectedTreeNode,
     searchValue,
     withCreate: withCreateState,
+    disableBySecurity,
 
     withInit,
   });

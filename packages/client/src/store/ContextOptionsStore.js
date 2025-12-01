@@ -1784,10 +1784,13 @@ class ContextOptionsStore {
       (item.rootFolderType === FolderType.AIAgents &&
         item.roomType === RoomsType.AIRoom);
 
+    const isKnowledgeOrResult =
+      item.isAIAgent && (item.isInsideKnowledge || item.isInsideResultStorage);
+
     const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
       : item.shared
-        ? item.security.CopySharedLink
+        ? item.security?.CopySharedLink
         : item.security?.EditAccess;
 
     const { isFiltered } = this.filesStore;
@@ -1884,11 +1887,17 @@ class ContextOptionsStore {
       {
         id: "option_preview",
         key: "preview",
-        label: this.treeFoldersStore.isRecentFolder
-          ? t("Open")
-          : t("Common:Preview"),
+        label:
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? t("Open")
+            : t("Common:Preview"),
         icon: EyeReactSvgUrl,
-        onClick: () => this.onPreviewClick(item),
+        onClick: () =>
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? this.gotoDocEditor(item)
+            : this.onPreviewClick(item),
         disabled: false,
       },
       {
@@ -2326,8 +2335,9 @@ class ContextOptionsStore {
         label: isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
-        disabled:
-          isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
+        disabled: isKnowledgeOrResult
+          ? false
+          : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
         id: "option_archive-room",

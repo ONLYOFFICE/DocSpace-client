@@ -64,6 +64,9 @@ export const HEADER_FILTERED_FOLDER = "x-test-data-filtered-folder";
 export const HEADER_AUTHENTICATED_SETTINGS =
   "x-test-data-authenticated-settings";
 
+export const HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS =
+  "x-test-data-authenticated-with-socket-settings";
+
 export const HEADER_ENABLED_JOIN_SETTINGS = "x-test-data-enabled-join-settings";
 
 export const HEADER_ENABLE_ADM_MESS_SETTINGS =

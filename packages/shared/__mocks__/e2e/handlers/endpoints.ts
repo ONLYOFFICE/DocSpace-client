@@ -107,6 +107,7 @@ import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
 import {
   HEADER_AUTHENTICATED_SETTINGS,
+  HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS,
   HEADER_EMPTY_FOLDER,
   HEADER_FILTERED_FOLDER,
   HEADER_FILTERED_ROOMS_LIST,
@@ -276,6 +277,16 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
     dataHandler: () =>
       settingsHandler(new Headers({ [HEADER_AUTHENTICATED_SETTINGS]: "true" })),
+  },
+  settingsWithSocket: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(
+        new Headers({
+          [HEADER_AUTHENTICATED_SETTINGS]: "true",
+          [HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS]: "true",
+        }),
+      ),
   },
   self: {
     url: `${BASE_URL}${PATH_DELETE_USER}`,

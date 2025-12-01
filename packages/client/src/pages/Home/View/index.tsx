@@ -566,7 +566,7 @@ const View = ({
   };
 
   const shouldRedirectToResultStorage =
-    currentView === "chat" && !!selectedFolderStore.id && !canUseChat;
+    currentView === "chat" && !!selectedFolderStore.id && !canUseChat && !showBodyLoader; 
 
   if (shouldRedirectToResultStorage) {
     const agentId = selectedFolderStore.id || "";

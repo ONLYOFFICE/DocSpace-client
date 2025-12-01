@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "{{productName}} məhsulunuza yeni üzvlər əlavə etmək üçün dəvət göndərin",
   "InviteUsersOptionDescription": "Otaqda birgə redaktə etmək üçün üzvləri əlavə edin",
   "ManageAccess": "İdarə etməyə giriş",
+  "MigrationDataDescription": "{{productName}} məhsuluna {{organizationName}} Workspace, Google Workspace və ya Nextcloud-dan məlumatlarınızı köçürün.",
+  "MigrationDataTitle": "Məlumatları idxal edin",
   "NoRecentFilesHereYet": "Hələlik burada yeni fayl yoxdur",
   "PublicRoomEmptyTitle": "Ümumi otağa xoş gəlmisiniz",
   "SectionsUploadDescription": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən istənilən tipdə faylları yükləyin",

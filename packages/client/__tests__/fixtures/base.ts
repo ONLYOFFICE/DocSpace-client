@@ -25,11 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { test as base, Page } from "@playwright/test";
-import { MockRequest } from "@docspace/shared/__mocks__/e2e";
+import {
+  MockRequest,
+  PlaywrightWebSocketMock,
+} from "@docspace/shared/__mocks__/e2e";
 
 export const test = base.extend<{
   page: Page;
   mockRequest: MockRequest;
+  wsMock: PlaywrightWebSocketMock;
 }>({
   page: async ({ page }, use) => {
     // Route for logos
@@ -131,6 +135,10 @@ export const test = base.extend<{
   mockRequest: async ({ page }, use) => {
     const mockRequest = new MockRequest(page);
     await use(mockRequest);
+  },
+  wsMock: async ({ page }, use) => {
+    const wsMock = new PlaywrightWebSocketMock(page);
+    await use(wsMock);
   },
 });
 

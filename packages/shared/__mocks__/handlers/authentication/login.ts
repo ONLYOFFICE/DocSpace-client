@@ -49,6 +49,25 @@ const successLogin = {
   statusCode: 200,
 };
 
+const successLoginWithTfa = (port: string) => ({
+  count: 1,
+  response: {
+    token: "6jo5…zjm/tny6TtDUAvu3fuuNo3ZE/kxQQ==",
+    expires: "0001-01-01T00:00:00",
+    sms: false,
+    tfa: true,
+    confirmUrl: `http://localhost:${port}/login/confirm/TfaAuth?type=TfaAuth&uid=d513b1f4`,
+  },
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+});
+
 export const errorLogin401 = {
   count: 1,
   error: {
@@ -83,21 +102,33 @@ export const errorLogin403 = {
   statusCode: 403,
 };
 
-export const loginResolver = (errorStatus: 404 | 401 | 403 | null = null) => {
+export const loginResolver = (
+  errorStatus: 404 | 401 | 403 | null = null,
+  withTfa?: boolean,
+  port?: string,
+) => {
   if (errorStatus === 404)
     return new Response(JSON.stringify(loginError404), { status: 404 });
-    
+
   if (errorStatus === 401)
     return new Response(JSON.stringify(errorLogin401), { status: 401 });
 
   if (errorStatus === 403)
     return new Response(JSON.stringify(errorLogin403), { status: 403 });
 
+  if (withTfa && port) {
+    return new Response(JSON.stringify(successLoginWithTfa(port)));
+  }
+
   return new Response(JSON.stringify(successLogin));
 };
 
-export const loginHandler = (port: string, errorStatus: 404 | 401 | 403 | null = null) => {
+export const loginHandler = (
+  port: string,
+  errorStatus: 404 | 401 | 403 | null = null,
+  withTfa?: boolean,
+) => {
   return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
-    return loginResolver(errorStatus);
+    return loginResolver(errorStatus, withTfa, port);
   });
 };

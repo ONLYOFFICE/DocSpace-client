@@ -236,6 +236,8 @@ class FilesStore {
 
   isErrorAIAgentNotAvailable = false;
 
+  isErrorAccountNotAvailable = false;
+
   roomsController = null;
 
   filesController = null;
@@ -961,6 +963,10 @@ class FilesStore {
 
   setIsErrorAIAgentNotAvailable = (state) => {
     this.isErrorAIAgentNotAvailable = state;
+  };
+
+  setIsErrorAccountNotAvailable = (state) => {
+    this.isErrorAccountNotAvailable = state;
   };
 
   setTempActionFilesIds = (tempActionFilesIds) => {
@@ -1724,6 +1730,7 @@ class FilesStore {
     withSubfolders = false,
     clearSelection = true,
   ) => {
+    console.log("fetchFilesfetchFiles");
     const { setSelectedNode } = this.treeFoldersStore;
     const { setIsIndexEditingMode } = this.indexingStore;
 
@@ -2115,6 +2122,7 @@ class FilesStore {
         return Promise.resolve(selectedFolder);
       })
       .catch((err) => {
+        console.log("herehere");
         if (err?.response?.status === 402)
           this.currentTariffStatusStore.setPortalTariff();
 

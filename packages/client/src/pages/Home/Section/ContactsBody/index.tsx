@@ -37,12 +37,16 @@ import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 
 import { useAccountsHotkeys } from "../../Hooks";
 
 import Users from "./Users";
 import Groups from "./Groups";
+import NoAccessContainer, {
+  NoAccessContainerType,
+} from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
 
 type SectionBodyContentProps = {
   currentView: string;
@@ -69,6 +73,7 @@ type SectionBodyContentProps = {
   viewAs: PeopleStore["viewAs"];
   membersSelection: UsersStore["selection"];
   groupsSelection: GroupsStore["selection"];
+  isErrorAccountNotAvailable?: boolean;
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -97,6 +102,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     viewAs,
     membersSelection,
     groupsSelection,
+    isErrorAccountNotAvailable,
   } = props;
 
   const location = useLocation();
@@ -175,6 +181,10 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     return () => window.removeEventListener("mousedown", onMouseDown);
   }, [onMouseDown, getTfaType]);
 
+  if (isErrorAccountNotAvailable) {
+    return <NoAccessContainer type={NoAccessContainerType.Account} />;
+  }
+
   return currentView !== "groups" ? <Users /> : <Groups />;
 };
 
@@ -183,10 +193,12 @@ export default inject(
     peopleStore,
     filesActionsStore,
     tfaStore,
+    filesStore,
   }: {
     peopleStore: PeopleStore;
     filesActionsStore: FilesActionStore;
     tfaStore: TfaStore;
+    filesStore: FilesStore;
   }) => {
     const {
       usersStore,
@@ -234,6 +246,8 @@ export default inject(
 
     const { getTfaType } = tfaStore;
 
+    const { isErrorAccountNotAvailable } = filesStore;
+
     return {
       isFiltered,
       setPeopleSelection,
@@ -262,6 +276,7 @@ export default inject(
       viewAs,
       membersSelection,
       groupsSelection,
+      isErrorAccountNotAvailable,
     };
   },
 )(

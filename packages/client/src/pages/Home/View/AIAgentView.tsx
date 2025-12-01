@@ -47,6 +47,7 @@ import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type DialogsStore from "SRC_DIR/store/DialogsStore";
+import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 
 type Props = {
   currentView: string;
@@ -71,6 +72,7 @@ type Props = {
   setIsAIAgentChatDelete?: DialogsStore["setIsAIAgentChatDelete"];
   setDeleteDialogVisible?: DialogsStore["setDeleteDialogVisible"];
   folderFormValidation?: RegExp;
+  canUseChat?: AccessRightsStore["canUseChat"];
 };
 
 const AIAgentViewComponent = ({
@@ -95,6 +97,7 @@ const AIAgentViewComponent = ({
   setIsAIAgentChatDelete,
   setDeleteDialogVisible,
   folderFormValidation,
+  canUseChat,
 }: Props) => {
   if (
     currentView === "chat" &&
@@ -104,7 +107,9 @@ const AIAgentViewComponent = ({
     return <NoAccessContainer type={NoAccessContainerType.Agent} />;
   }
 
-  const shouldRenderChat = !isErrorAIAgentNotAvailable || showArticleLoader;
+  const hasNoAccessToChat = !canUseChat && !showBodyLoader;
+  const shouldRenderChat =
+    !hasNoAccessToChat && (!isErrorAIAgentNotAvailable || showArticleLoader);
   const shouldRenderFiles = currentView !== "chat";
 
   return (
@@ -148,6 +153,7 @@ export const AIAgentView = inject(
     authStore,
     settingsStore,
     dialogsStore,
+    accessRightsStore,
   }: TStore) => {
     const { isErrorAIAgentNotAvailable } = filesStore;
 
@@ -166,6 +172,8 @@ export const AIAgentView = inject(
 
     const { setIsAIAgentChatDelete, setDeleteDialogVisible } = dialogsStore;
 
+    const { canUseChat } = accessRightsStore;
+
     return {
       isErrorAIAgentNotAvailable,
       showArticleLoader,
@@ -179,6 +187,7 @@ export const AIAgentView = inject(
       setIsAIAgentChatDelete,
       setDeleteDialogVisible,
       folderFormValidation,
+      canUseChat,
     };
   },
 )(observer(AIAgentViewComponent));

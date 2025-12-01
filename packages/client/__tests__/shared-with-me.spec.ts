@@ -23,10 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
-
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 test.describe("Shared with me", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -95,5 +94,63 @@ test.describe("Shared with me", () => {
       "shared-with-me",
       "shared-with-me-empty.png",
     ]);
+  });
+
+  test("should remove file from shared list via context menu and show empty state", async ({
+    page,
+    mockRequest,
+    wsMock,
+  }) => {
+    await mockRequest.router([
+      endpoints.sharedWithMe,
+      endpoints.settingsWithSocket,
+    ]);
+
+    await wsMock.setupWebSocketMock();
+
+    await page.goto("/shared-with-me/filter?folder=4");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const contextMenuButton = table.getByTestId("context-menu-button").first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
+
+    const removeFromListOption = page.getByTestId(
+      "remove-shared-folder-or-file",
+    );
+    await expect(removeFromListOption).toBeVisible();
+
+    await removeFromListOption.click();
+
+    const deleteDialog = page.getByTestId("delete-dialog");
+
+    const submitButton = deleteDialog.getByTestId("delete_dialog_modal_submit");
+
+    await expect(submitButton).toBeVisible();
+
+    await mockRequest.router([endpoints.shareDelete]);
+
+    submitButton.click();
+
+    const loader = table.getByTestId("loader").first();
+
+    await expect(loader).toBeVisible();
+
+    wsMock.emitModifyFolder({
+      cmd: "delete",
+      id: 1,
+      type: "file",
+      data: "",
+    });
+
+    await loader.waitFor({ state: "detached" });
+
+    const emptyView = page.getByTestId("empty-view");
+    await expect(emptyView).toBeVisible();
+
+    wsMock.closeConnection();
   });
 });

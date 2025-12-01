@@ -104,6 +104,7 @@ export type TConfirmRouteContext = {
     roomId?: string;
     title?: string;
     isAgent?: boolean;
+    withQuotaError?: boolean;
   };
   confirmLinkResult: {
     result?: ValidationResult;

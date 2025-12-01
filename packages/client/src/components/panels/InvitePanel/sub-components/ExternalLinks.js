@@ -90,6 +90,8 @@ const ExternalLinks = ({
   theme,
   culture,
   setInviteContactsLink,
+  hideSelector,
+  setInvitePanelOptions,
 }) => {
   const showUsersJoinedBlock = !!activeLink?.maxUseCount;
   const showUsersLimitWarning =
@@ -117,15 +119,21 @@ const ExternalLinks = ({
     try {
       if (roomId === -1) {
         if (e?.target?.checked) {
-          setInviteContactsLink();
+          await setInviteContactsLink();
         } else {
-          deleteInviteLink(activeLink.id);
+          setInvitePanelOptions({
+            visible: true,
+            hideSelector,
+            defaultAccess: activeLink.access,
+            roomId: -1,
+          });
+          await deleteInviteLink(activeLink.id);
           setActiveLink({});
+          onChangeExternalLinksVisible(false);
         }
       } else {
         !externalLinksVisible ? await editLink() : await disableLink();
       }
-      onChangeExternalLinksVisible(!externalLinksVisible);
     } catch (error) {
       toastr.error(error.message);
     } finally {
@@ -353,15 +361,9 @@ const ExternalLinks = ({
 };
 
 export default inject(
-  ({
-    userStore,
-    dialogsStore,
-    peopleStore,
-    currentQuotaStore,
-    settingsStore,
-  }) => {
+  ({ userStore, dialogsStore, currentQuotaStore, settingsStore }) => {
     const { isOwner, isAdmin } = userStore.user;
-    const { invitePanelOptions } = dialogsStore;
+    const { invitePanelOptions, setInvitePanelOptions } = dialogsStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { isUserTariffLimit } = currentQuotaStore;
     const { theme, standalone, allowInvitingGuests, culture } = settingsStore;
@@ -377,6 +379,7 @@ export default inject(
       isUserTariffLimit,
       standalone,
       allowInvitingGuests,
+      setInvitePanelOptions,
     };
   },
 )(observer(ExternalLinks));

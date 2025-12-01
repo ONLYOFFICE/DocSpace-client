@@ -110,7 +110,7 @@ const UserFields = (props) => {
     onBlurAction,
     onClickAdd,
     inputs,
-    regexp,
+    validateFunc,
     classNameAdditional,
     isAutoFocussed = false,
     inputDataTestId,
@@ -163,10 +163,10 @@ const UserFields = (props) => {
 
             const error = newInput2
               ? (input && input.split("-").length - 1 > 1) ||
-                !regexp.test(newInput1) ||
-                !regexp.test(newInput2) ||
+                !validateFunc(newInput1) ||
+                !validateFunc(newInput2) ||
                 errorMessages?.[index]
-              : !regexp.test(input) || errorMessages?.[index];
+              : !validateFunc(input) || errorMessages?.[index];
 
             return (
               <StyledInputWrapper

@@ -50,6 +50,7 @@ export const test = base.extend<{
         path: `../../public/images/${imagePath}`,
       });
     });
+
     await page.route("*/**/static/scripts/**", async (route, request) => {
       const scripts = request
         .url()
@@ -58,6 +59,17 @@ export const test = base.extend<{
         .split("?")[0];
       await route.fulfill({
         path: `../../public/scripts/${scripts}`,
+      });
+    });
+
+    await page.route("*/**/static/fonts/**", async (route, request) => {
+      const scripts = request
+        .url()
+        .split("/static/fonts")
+        .at(-1)!
+        .split("?")[0];
+      await route.fulfill({
+        path: `../../public/fonts/${scripts}`,
       });
     });
 

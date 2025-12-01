@@ -91,6 +91,7 @@ import {
   PATH_FILES_SETTINGS,
   PATH_FOLDER,
   PATH_ROOMS_LIST,
+  PATH_SHARE,
   PATH_SHARED_WITH_ME,
   PATH_THIRD_PARTY,
   PATH_THIRD_PARTY_CAPABILITIES,
@@ -98,6 +99,7 @@ import {
   ROOT_PATH,
   rootHandler,
   sharedWithMeHandler,
+  shareHandler,
   thirdPartyCapabilitiesHandler,
   thirdPartyHandler,
 } from "./files";
@@ -350,5 +352,9 @@ export const endpoints = {
   sharedWithMeEmpty: {
     url: PATH_SHARED_WITH_ME,
     dataHandler: sharedWithMeHandler.bind(null, "empty"),
+  },
+  shareDelete: {
+    url: `${BASE_URL}${PATH_SHARE}`,
+    dataHandler: shareHandler.bind(null, "Delete"),
   },
 } satisfies TEndpoints;

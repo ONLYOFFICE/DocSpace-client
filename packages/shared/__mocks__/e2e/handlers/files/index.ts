@@ -43,3 +43,5 @@ export * from "./thirdParty";
 export * from "./docservice";
 
 export * from "./sharedWithMe";
+
+export * from "./share";

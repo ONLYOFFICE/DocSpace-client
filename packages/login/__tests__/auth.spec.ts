@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { confirmHandler } from "@docspace/shared/__mocks__/handlers";
+import {
+  confirmHandler,
+  loginHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
@@ -135,5 +138,30 @@ test("auth with file handler success", async ({
     "desktop",
     "auth",
     "auth-with-file-handler-success-redirect.png",
+  ]);
+});
+
+test("auth with tfa success", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  clientRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+  clientRequestInterceptor.use(loginHandler(port, null, true));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
+
+  await page.getByTestId("loader").waitFor({ state: "detached" });
+
+  await page.waitForURL(
+    `${baseUrl}/login/confirm/TfaAuth?type=TfaAuth&uid=d513b1f4`,
+    { waitUntil: "load" },
+  );
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "auth",
+    "auth-with-tfa-success.png",
   ]);
 });

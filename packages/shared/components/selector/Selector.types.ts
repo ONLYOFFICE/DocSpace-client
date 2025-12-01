@@ -339,6 +339,7 @@ export type TSelectorInput = WithFlag<
 
 export type TSelectorFooterInput = TSelectorInput & {
   setNewFooterInputValue: React.Dispatch<React.SetStateAction<string>>;
+  withErrorFooter?: boolean;
 };
 
 // footer checkbox
@@ -418,6 +419,7 @@ export type SelectorProps = TSelectorHeader &
     dataTestId?: string;
 
     hideBackButton?: boolean;
+    folderFormValidation?: RegExp;
   };
 
 export type BodyProps = TSelectorInfo &
@@ -440,12 +442,14 @@ export type BodyProps = TSelectorInfo &
 
     withFooterInput?: boolean;
     withFooterCheckbox?: boolean;
+    withErrorFooter?: boolean;
     descriptionText?: string;
     withInfoBadge?: boolean;
     injectedElement?: React.ReactElement;
 
     isSSR?: boolean;
     hideBackButton?: boolean;
+    isLimitReached?: boolean;
   };
 
 export type FooterProps = TSelectorFooterSubmitButton &
@@ -456,6 +460,7 @@ export type FooterProps = TSelectorFooterSubmitButton &
     isMultiSelect: boolean;
     selectedItemsCount: number;
     requestRunning?: boolean;
+    withErrorFooter?: boolean;
   };
 
 type TSelectorItemEmpty = {
@@ -659,6 +664,7 @@ export type Data = {
   savedInputValue: Nullable<string>;
   setSavedInputValue: (value: Nullable<string>) => void;
   listHeight: number;
+  isLimitReached?: boolean;
 };
 
 export interface ItemProps {

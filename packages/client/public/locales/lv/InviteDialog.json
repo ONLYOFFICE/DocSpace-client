@@ -3,6 +3,7 @@
   "EmailErrorMessage": "E- pasta adrese ir nederīga. Jūs varat rediģēt e-pastu, veicot dubultklikšķi uz tā.",
   "EmailErrorMessageUserNotFound": "Lietotājs nav atrasts. Jūs varat rediģēt e-pastu, divreiz noklikšķinot uz tā.",
   "GroupMaxAvailableRoleWarning": "Grupas var pievienot telpai ar maksimālo {{roleName}} lomu. Tomēr jūs varat mainīt atsevišķu lietotāju lomu grupā pēc tam, kad tā ir veiksmīgi pievienota.",
+  "GuestAgentMaxAvailableRoleWarning": "Viesi nevar tikt iecelti par satura veidotāju.\nTikai Istabu administratori, {{productName}} administratori un Lietotāji ir tiesīgi ieņemt šo amatu.",
   "InvitationLanguage": "Uzaicinājuma valoda",
   "InviteMembersManuallyDescription": "Uzaicināt jaunus dalībniekus uz {{productName}} personīgi pa e-pastu",
   "InviteMembersSearchPlaceholder": "Uzaicināt dalībniekus pa e-pastu",

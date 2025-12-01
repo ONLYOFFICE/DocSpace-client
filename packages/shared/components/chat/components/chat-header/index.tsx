@@ -44,6 +44,7 @@ const ChatHeader = ({
   getResultStorageId,
   setIsAIAgentChatDelete,
   setDeleteDialogVisible,
+  folderFormValidation,
 }: ChatHeaderProps) => {
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -56,6 +57,7 @@ const ChatHeader = ({
         roomId={roomId}
         setIsAIAgentChatDelete={setIsAIAgentChatDelete}
         setDeleteDialogVisible={setDeleteDialogVisible}
+        folderFormValidation={folderFormValidation}
       />
       <CreateChat isLoadingProp={isLoading} isDisabled={!aiReady} />
       <SelectModel selectedModel={selectedModel} isLoading={isLoading} />

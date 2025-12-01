@@ -101,6 +101,11 @@ const Layout = ({
   const currentPath = window.location.pathname;
 
   useEffect(() => {
+    const sel = window.getSelection?.();
+    if (sel?.rangeCount) sel.removeAllRanges();
+  }, [location.pathname]);
+
+  useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
   }, [language, currentProductId, setCurrentProductId]);
 

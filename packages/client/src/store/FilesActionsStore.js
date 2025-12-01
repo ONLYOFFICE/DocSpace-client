@@ -462,9 +462,11 @@ class FilesActionStore {
       newSelection ||
       (this.filesStore.selection.length
         ? this.filesStore.selection
-        : [bufferSelection]);
+        : bufferSelection
+          ? [bufferSelection]
+          : []);
 
-    selection = selection.filter((item) => item.security.Delete);
+    selection = selection.filter((item) => item?.security?.Delete);
 
     //  const isThirdPartyFile = selection.some((f) => f.providerKey);
 
@@ -1733,6 +1735,8 @@ class FilesActionStore {
   };
 
   nameWithoutExtension = (title) => {
+    if (!title) return "";
+
     const indexPoint = title.lastIndexOf(".");
     const splitTitle = title.split(".");
     const splitTitleLength = splitTitle.length;

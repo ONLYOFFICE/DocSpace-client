@@ -90,6 +90,7 @@ const FilesTableRow = memo((props) => {
     isRecentFolder,
     isFavoritesFolder,
     isSharedWithMeFolder,
+    isInSharedFolder,
     isAIAgentsFolder,
     canDrag,
     onEditIndex,
@@ -334,7 +335,7 @@ const FilesTableRow = memo((props) => {
             dragStyles={dragStyles}
             {...props}
           />
-        ) : isSharedWithMeFolder ? (
+        ) : isSharedWithMeFolder || isInSharedFolder ? (
           <SharedWithMeRowDataComponent
             element={element}
             dragStyles={dragStyles}

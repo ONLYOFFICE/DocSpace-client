@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Adresa de email nu este valabilă. Puteţi modifica adresa de email făcând dublu clic pe acesta.",
   "EmailErrorMessageUserNotFound": "Nu s-au găsit utilizatorul. Puteţi modifica adresa de email făcând făcând dublu clic pe aceasta.",
   "GroupMaxAvailableRoleWarning": "Grupuri pot fi adăugate la o sală cu un rol maxim {{roleName}}. Cu toate acestea, puteți modifica rolul pentru utilizatori din grup în mod individual odată ce grupul a fost adăugat cu succes.",
+  "GuestAgentMaxAvailableRoleWarning": "Oaspeții nu pot fi desemnați ca și creator de conținut.\nDoar administratorii de camere, administratorii {{productName}} și Utilizatorii sunt eligibili pentru acest rol.",
   "InvitationLanguage": "Invitația în limba",
   "InviteMembersManuallyDescription": "Invitaţi membrii noi în {{productName}} personal prin email",
   "InviteMembersSearchPlaceholder": "Invitaţi membri prin email",

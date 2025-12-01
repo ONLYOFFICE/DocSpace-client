@@ -3,6 +3,7 @@
   "EmailErrorMessage": "E-mailadres niet geldig. U kunt de e-mail bewerken door erop te dubbelklikken.",
   "EmailErrorMessageUserNotFound": "Gebruiker niet gevonden. U kunt de e-mail bewerken door er dubbel op te klikken.",
   "GroupMaxAvailableRoleWarning": "Groepen kunnen aan een kamer worden toegevoegd met de {{roleName}} rol als maximum. U kunt echter de rol van individuele gebruikers in de groep wijzigen nadat deze met succes is toegevoegd.",
+  "GuestAgentMaxAvailableRoleWarning": "Gasten kunnen niet worden toegewezen als contentmaker.\nAlleen roombeheerders, {{productName}}-beheerders en gebruikers komen in aanmerking voor deze rol.",
   "InvitationLanguage": "Taal van de uitnodiging",
   "InviteMembersManuallyDescription": "Nodig nieuwe leden persoonlijk per e-mail uit voor {{productName}}",
   "InviteMembersSearchPlaceholder": "Leden per e-mail uitnodigen",

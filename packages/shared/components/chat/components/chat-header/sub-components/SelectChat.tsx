@@ -68,6 +68,7 @@ const SelectChat = ({
   getResultStorageId,
   setIsAIAgentChatDelete,
   setDeleteDialogVisible,
+  folderFormValidation,
 }: SelectChatProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -126,7 +127,6 @@ const SelectChat = ({
         startNewChat();
         updateUrlChatId("");
       }
-      setIsOpen(false);
       setHoveredItem("");
 
       toastr.success(t("Common:ChatSuccessDeleted"));
@@ -151,6 +151,7 @@ const SelectChat = ({
       onDeleteAction: onDeleteAction,
     });
     setDeleteDialogVisible?.(true);
+    setIsOpen(false);
   }, [
     isRequestRunning,
     hoveredItem,
@@ -341,6 +342,7 @@ const SelectChat = ({
           currentFolderId={getResultStorageId() || roomId}
           getFileName={getFileName}
           onSubmit={onSubmit}
+          folderFormValidation={folderFormValidation}
         />
       ) : null}
     </>

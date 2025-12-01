@@ -454,7 +454,7 @@ export default function withFileActions(WrappedFileItem) {
         withCtrlSelect,
         withShiftSelect,
       } = filesStore;
-      const { id } = selectedFolderStore;
+      const { id, isInsideResultStorage } = selectedFolderStore;
       const { startUpload, secondaryProgressDataStore } = uploadDataStore;
       const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
@@ -467,7 +467,8 @@ export default function withFileActions(WrappedFileItem) {
         (x) => x.id === item.id && x.fileExst === item?.fileExst,
       );
 
-      const isDisabledDropItem = item.security?.Create === false;
+      const isDisabledDropItem =
+        item.security?.Create === false || isInsideResultStorage;
 
       const draggable =
         !isRecycleBinFolder && selectedItem && !isDisabledDropItem;

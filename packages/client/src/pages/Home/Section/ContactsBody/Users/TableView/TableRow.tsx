@@ -88,7 +88,6 @@ const PeopleTableRow = ({
   inProgress,
   itemIndex,
   withContentSelection,
-  currentUserId,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
@@ -105,8 +104,6 @@ const PeopleTableRow = ({
     isCollaborator,
     isSSO,
     isLDAP,
-
-    id,
   } = item;
 
   const isGuests = contactsTab === "guests";
@@ -310,7 +307,6 @@ const PeopleTableRow = ({
           </TableCell>
 
           <Text
-            as="div"
             title={displayName}
             fontWeight="600"
             fontSize="13px"
@@ -325,11 +321,6 @@ const PeopleTableRow = ({
               : displayName?.trim()
                 ? displayName
                 : email}
-            {id === currentUserId ? (
-              <Text className="me-label" fontWeight="600" fontSize="13px">
-                ({t("Common:MeLabel")})
-              </Text>
-            ) : null}
           </Text>
           <Badges
             statusType={statusType}
@@ -462,7 +453,6 @@ export default inject(
 
       isRoomAdmin: userStore.user?.isRoomAdmin,
       withContentSelection,
-      currentUserId: userStore.user?.id,
     };
   },
 )(withContent(observer(PeopleTableRow)));

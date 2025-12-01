@@ -50,7 +50,6 @@ const PeopleRowContainer = ({
   isDefaultUsersQuotaSet,
   isRoomAdmin,
   withContentSelection,
-  currentUserId,
 }: RowViewProps) => {
   useViewEffect({
     view: viewAs!,
@@ -82,7 +81,6 @@ const PeopleRowContainer = ({
           showStorageInfo={showStorageInfo}
           isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
           isRoomAdmin={isRoomAdmin}
-          currentUserId={currentUserId}
         />
       ))}
     </StyledRowContainer>
@@ -135,7 +133,6 @@ export default inject(
       isDefaultUsersQuotaSet,
       isRoomAdmin,
       withContentSelection,
-      currentUserId: userStore.user?.id,
     };
   },
 )(observer(PeopleRowContainer));

@@ -171,7 +171,6 @@ export const StyledPeopleRow = styled(TableRow)<{
   }
 
   .table-cell_username {
-    display: flex;
     margin-inline-end: 12px;
   }
 
@@ -240,11 +239,6 @@ export const StyledPeopleRow = styled(TableRow)<{
 
   .plainTextItem {
     padding-inline-start: 8px;
-  }
-
-  .me-label {
-    padding-inline-start: 4px;
-    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
   }
 `;
 

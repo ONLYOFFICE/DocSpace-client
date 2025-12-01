@@ -120,14 +120,12 @@ export const StyledWrapper = styled.div<{
     ${(props) =>
       (props.checked || props.isActive) && marginStylesUserRowContainer};
 
-    ${
-      !isMobile &&
-      css`
+    ${!isMobile &&
+    css`
       :hover {
         ${marginStylesUserRowContainer}
       }
-    `
-    }
+    `}
   }
 `;
 
@@ -151,14 +149,12 @@ export const StyledSimpleUserRow = styled(Row)<{
   box-sizing: border-box;
   margin-top: -1px;
 
-  ${
-    !isMobile &&
-    css`
+  ${!isMobile &&
+  css`
     :hover {
       ${checkedStyle}
     }
-  `
-  }
+  `}
 
   position: unset;
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
@@ -171,16 +167,6 @@ export const StyledSimpleUserRow = styled(Row)<{
 export const StyledRowContent = styled(RowContent)`
   .row-content_tablet-side-info {
     white-space: nowrap;
-  }
-
-  .name-block{
-    display: flex;
-    align-items: center;
-  }
-  
-  .me-label {
-    padding-inline-start: 4px;
-    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
   }
 
   @media ${tablet} {

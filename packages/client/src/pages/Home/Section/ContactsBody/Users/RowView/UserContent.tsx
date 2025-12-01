@@ -33,7 +33,6 @@ import {
   getUserTypeName,
 } from "@docspace/shared/utils/common";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
 
 import Badges from "../../Badges";
 
@@ -52,7 +51,6 @@ const UserContent = ({
 
   isRoomAdmin: isRoomAdminUser,
   itemIndex,
-  currentUserId,
 }: UserContentProps) => {
   const { t } = useTranslation(["People", "Common"]);
   const theme = useTheme();
@@ -69,7 +67,6 @@ const UserContent = ({
     isRoomAdmin,
     usedSpace,
     quotaLimit,
-    id,
   } = item;
 
   const isGuests = contactsTab === "guests";
@@ -107,7 +104,6 @@ const UserContent = ({
   return (
     <StyledRowContent sideColor={sideInfoColor} sectionWidth={sectionWidth}>
       <Link
-        className="name-block"
         type={LinkType.page}
         title={displayName}
         fontWeight={600}
@@ -123,11 +119,6 @@ const UserContent = ({
           : displayName?.trim()
             ? displayName
             : email}
-        {id === currentUserId ? (
-          <Text as="div" className="me-label" fontWeight="600" fontSize="13px">
-            ({t("Common:MeLabel")})
-          </Text>
-        ) : null}
       </Link>
       <Badges
         statusType={statusType}

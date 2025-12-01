@@ -526,7 +526,7 @@ const InvitePanel = ({
     return setActiveLink(newShareLink);
   };
 
-  const onSelectAccess = async (access, maxUserCount) => {
+  const onSelectAccess = async (access) => {
     let link = null;
     const selectedAccess = access.access;
 
@@ -557,7 +557,7 @@ const InvitePanel = ({
           +selectedAccess,
           shareLinks[0]?.id ?? null,
           access.expirationDate,
-          maxUserCount,
+          access.maxUseCount,
         );
 
         const {
@@ -761,12 +761,15 @@ const InvitePanel = ({
     const defaultLinkAccess = (linkSelectedAccess ?? defaultLink).access;
 
     onCloseLinkSettingsPanel();
-    if (activeLink?.shareLink)
-      onSelectAccess(
-        linkSelectedAccess ?? defaultLink,
-        defaultLink.maxUseCount,
-      );
-    else editLink(defaultLinkAccess, defaultLink);
+    if (activeLink?.shareLink) {
+      const accessData = linkSelectedAccess ?? defaultLink;
+
+      onSelectAccess({
+        ...accessData,
+        maxUseCount: defaultLink.maxUseCount,
+        expirationDate: defaultLink.expirationDate,
+      });
+    } else editLink(defaultLinkAccess, defaultLink);
 
     onChangeExternalLinksVisible(true);
   };

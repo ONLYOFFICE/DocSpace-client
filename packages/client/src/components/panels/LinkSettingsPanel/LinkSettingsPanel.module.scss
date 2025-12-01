@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/shared/styles/variables";
+
 .linkSettingsBody {
   padding-left: 16px;
 
@@ -42,6 +44,16 @@
         display: flex;
         align-items: center;
         gap: 4px;
+
+        .userLimitInputText {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          .userLimitText {
+            color: variables.$gray;
+          }
+        }
 
         .linkSettingsHelpButton {
           svg path {

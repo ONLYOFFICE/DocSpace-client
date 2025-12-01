@@ -221,7 +221,7 @@
   "YouLeftTheRoom": "You have left the room",
   "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
   "UserLimitDescription": "Define the number of users who can join via this invite link.",
-  "MaxNumber": "Max. number",
+  "MaxNumber": "Max. number <1>(up to {{usersCount}} users)</1>",
   "LinkSettingsLimitDescription": "Once this limit is reached, registration via the link will become unavailable",
   "LinkSettingsJoinedUsers": "Users have joined via this link",
   "ValidUntil": "Valid until:",

@@ -26,7 +26,7 @@
 
 import { useState } from "react";
 import moment from "moment";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
@@ -180,8 +180,27 @@ const LinkSettingsPanel = ({
             {userLimitIsChecked ? (
               <div className={styles.userLimitInputBlock}>
                 <div className={styles.userLimitInputBlockText}>
-                  <Text fontSize="13px" fontWeight={600}>
-                    {t("Files:MaxNumber")}
+                  <Text
+                    fontSize="13px"
+                    fontWeight={600}
+                    as="div"
+                    className={styles.userLimitInputText}
+                  >
+                    <Trans
+                      t={t}
+                      ns="Files"
+                      i18nKey="MaxNumber"
+                      values={{ usersCount: MAX_USERS_COUNT }}
+                      components={{
+                        1: (
+                          <Text
+                            fontWeight={600}
+                            fontSize="13px"
+                            className={styles.userLimitText}
+                          />
+                        ),
+                      }}
+                    />
                   </Text>
                   {showUsersLimitWarning ? (
                     <HelpButton

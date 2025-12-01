@@ -34,7 +34,7 @@ const Plugin = ({ boxProps, pluginName, plugin, selection }) => {
   React.useEffect(() => {
     if (!selection) return;
 
-    plugin.subMenu.onClick(selection.id ? +selection.id : 0);
+    plugin?.subMenu.onClick(selection.id ? +selection.id : 0);
   }, [selection.id]);
 
   return (
@@ -49,25 +49,23 @@ const Plugin = ({ boxProps, pluginName, plugin, selection }) => {
   );
 };
 
-export default inject(
-  ({ pluginStore, infoPanelStore }, { isRooms, fileView, roomsView }) => {
-    const { infoPanelItemsList } = pluginStore;
+export default inject(({ pluginStore, infoPanelStore }, { isRooms }) => {
+  const { infoPanelItemsList } = pluginStore;
 
-    const currentView = isRooms ? roomsView : fileView;
+  const { infoPanelSelection, fileView, roomsView } = infoPanelStore;
 
-    const itemKey = currentView.replace("info_plugin-", "");
+  const currentView = isRooms ? roomsView : fileView;
 
-    const { value } = infoPanelItemsList.find((i) => i.key === itemKey);
+  const itemKey = currentView?.replace("info_plugin-", "");
 
-    const { infoPanelSelection } = infoPanelStore;
+  const { value } = infoPanelItemsList.find((i) => i.key === itemKey) ?? {};
 
-    return {
-      boxProps: value.body,
+  return {
+    boxProps: value?.body,
 
-      pluginName: value.name,
+    pluginName: value?.name,
 
-      plugin: value,
-      selection: infoPanelSelection,
-    };
-  },
-)(observer(Plugin));
+    plugin: value,
+    selection: infoPanelSelection,
+  };
+})(observer(Plugin));

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
@@ -358,7 +359,7 @@ beforeAll(() => {
 });
 
 describe("Locales Tests", () => {
-  test("ParseJsonTest: Verify that there are no errors in parsing JSON files", () => {
+  it("ParseJsonTest: Verify that there are no errors in parsing JSON files", () => {
     const message = `File path = '${parseJsonErrors
       .map((e) => e.path)
       .join(", ")}' failed to parse with error: '${parseJsonErrors
@@ -367,7 +368,7 @@ describe("Locales Tests", () => {
     expect(parseJsonErrors.length, message).toBe(0);
   });
 
-  test("SingleKeyFilesTest: Verify that there are no translation files in the project that contain only a single key for the English language.", () => {
+  it("SingleKeyFilesTest: Verify that there are no translation files in the project that contain only a single key for the English language.", () => {
     const singleKeyTranslationFiles = translationFiles.filter(
       (t) => t.language === "en" && t.translations.length === 1
     );
@@ -379,7 +380,7 @@ describe("Locales Tests", () => {
     expect(singleKeyTranslationFiles.length, message).toBe(0);
   });
 
-  test("FullEnDublicatesTest: Verify that there are no duplicate key-value pairs in the English translation files.", () => {
+  it("FullEnDublicatesTest: Verify that there are no duplicate key-value pairs in the English translation files.", () => {
     const fullEnDuplicates = translationFiles
       .filter((file) => file.language === "en")
       .flatMap((item) => item.translations)
@@ -405,7 +406,7 @@ describe("Locales Tests", () => {
     expect(duplicatesArray.length, message).toBe(0);
   });
 
-  test("NotFoundKeysTest: Verify that all translation keys used in the JavaScript files are present in the English translation files.", () => {
+  it("NotFoundKeysTest: Verify that all translation keys used in the JavaScript files are present in the English translation files.", () => {
     const allEnKeys = translationFiles
       .filter((file) => file.language === "en")
       .flatMap((item) => item.translations)
@@ -429,7 +430,7 @@ describe("Locales Tests", () => {
     expect(notFoundJsKeys.length, message).toBe(0);
   });
 
-  test("UselessTranslationKeysTest: Verify that all translation keys present in the English translation files are actually used in the JavaScript files.", () => {
+  it("UselessTranslationKeysTest: Verify that all translation keys present in the English translation files are actually used in the JavaScript files.", () => {
     const allEnKeys = translationFiles
       .filter((file) => file.language === "en")
       .flatMap((item) => item.translations)
@@ -455,7 +456,7 @@ describe("Locales Tests", () => {
     expect(notFoundi18nKeys.length, message).toBe(0);
   });
 
-  test("NotTranslatedToastsTest: Verify that all toast messages in the application are properly translated.", () => {
+  it("NotTranslatedToastsTest: Verify that all toast messages in the application are properly translated.", () => {
     let message = `Next text not translated in toasts:\r\n\r\n`;
 
     let i = 0;
@@ -478,7 +479,7 @@ describe("Locales Tests", () => {
     expect(notTranslatedToasts.length, message).toBe(0);
   });
 
-  test("NotTranslatedPropsTest: Verify that all specified properties (such as title, placeholder, label, and text) in all clients are properly translated.", () => {
+  it("NotTranslatedPropsTest: Verify that all specified properties (such as title, placeholder, label, and text) in all clients are properly translated.", () => {
     let message = `Next text not translated props (title, placeholder, label, text):\r\n\r\n`;
 
     let i = 0;
@@ -501,7 +502,7 @@ describe("Locales Tests", () => {
     expect(notTranslatedProps.length, message).toBe(0);
   });
 
-  test("WrongTranslationVariablesTest: Verify that translation keys across different languages have consistent variables.", () => {
+  it("WrongTranslationVariablesTest: Verify that translation keys across different languages have consistent variables.", () => {
     let message = `Next keys have wrong or empty variables:\r\n\r\n`;
     const regVariables = new RegExp("\\{\\{([^\\{].?[^\\}]+)\\}\\}", "gm");
 
@@ -580,7 +581,7 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
-  test("WrongTranslationTagsTest: Verify that HTML tags within translation strings are consistent across different languages.", () => {
+  it("WrongTranslationTagsTest: Verify that HTML tags within translation strings are consistent across different languages.", () => {
     let message = `Next keys have wrong or empty translation's html tags:\r\n\r\n`;
     const regString = "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>";
     const regTags = new RegExp(regString, "gm");
@@ -652,7 +653,7 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
-  test("ForbiddenValueElementsTest: Verify that certain forbidden values are not present in the translation strings across different languages.", () => {
+  it("ForbiddenValueElementsTest: Verify that certain forbidden values are not present in the translation strings across different languages.", () => {
     let message = `Next keys have forbidden values \`${forbiddenElements.join(
       ","
     )}\`:\r\n\r\n`;
@@ -690,7 +691,7 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  test("ForbiddenKeysElementsTest: Verify that translation keys do not contain any forbidden elements in their names.", () => {
+  it("ForbiddenKeysElementsTest: Verify that translation keys do not contain any forbidden elements in their names.", () => {
     let message = `Next keys have forbidden elements in names \`${forbiddenElements.join(
       ","
     )}\`:\r\n\r\n`;
@@ -745,7 +746,7 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  test("EmptyValueKeysTest: Verify that there are no translation keys with empty values across different languages in the translation files.", () => {
+  it("EmptyValueKeysTest: Verify that there are no translation keys with empty values across different languages in the translation files.", () => {
     let message = `Next files have empty keys:\r\n\r\n`;
 
     let exists = false;
@@ -792,7 +793,7 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  test("NotFoundEnKey: No English key variants: Verify that there are no translation keys in languages other than English that are not present in the English translation files.", () => {
+  it("NotFoundEnKey: No English key variants: Verify that there are no translation keys in languages other than English that are not present in the English translation files.", () => {
     let message = `Next keys are not found in 'en' language:\r\n\r\n`;
 
     let exists = false;
@@ -946,7 +947,7 @@ describe("Locales Tests", () => {
   });
 
   const skipBaseLanguagesTest = process.env.SKIP_BASE_LANGUAGES_TEST === "true";
-  (skipBaseLanguagesTest ? test.skip : test)(
+  (skipBaseLanguagesTest ? it.skip : it)(
     `NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(
       ","
     )}) are properly translated.`,
@@ -1007,7 +1008,7 @@ describe("Locales Tests", () => {
     }
   );
 
-  test("IncorrectNamespaceUsageTest: Verify that translation keys are used with their correct namespace", () => {
+  it("IncorrectNamespaceUsageTest: Verify that translation keys are used with their correct namespace", () => {
     let message = "The following keys are using incorrect namespaces:\r\n\r\n";
     let incorrectUsages = [];
 
@@ -1066,7 +1067,7 @@ describe("Locales Tests", () => {
     expect(incorrectUsages.length, message).toBe(0);
   });
 
-  test("MissingNamespacesTest: i18n namespace files should exist in public/locales", () => {
+  it("MissingNamespacesTest: i18n namespace files should exist in public/locales", () => {
     let exists = false;
     let message = "";
     let i = 0;
@@ -1191,7 +1192,7 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  test("MissingTranslationVariablesTest: Verify that all required variables are passed when using translation keys with variables", () => {
+  it("MissingTranslationVariablesTest: Verify that all required variables are passed when using translation keys with variables", () => {
     let message = "The following translation keys are missing required variables:\r\n\r\n";
     let missingVariables = [];
 

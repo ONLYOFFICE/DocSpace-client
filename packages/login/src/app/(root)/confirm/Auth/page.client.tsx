@@ -123,6 +123,10 @@ const AuthHandler = () => {
           }
         }
 
+        if (res && res.tfa && res.confirmUrl) {
+          return window.location.replace(res.confirmUrl);
+        }
+
         if (typeof res === "string") window.location.replace(res);
         else window.location.replace("/");
       } catch (error) {

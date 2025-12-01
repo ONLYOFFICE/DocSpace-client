@@ -473,7 +473,16 @@ class AuthStore {
   };
 
   logout = async (reset = true) => {
-    const ssoLogoutUrl = await api.user.logout();
+    if (typeof window !== "undefined") {
+      const w = window as unknown as { __redirectToLogin?: boolean };
+      w.__redirectToLogin = true;
+    }
+    let ssoLogoutUrl;
+    try {
+      ssoLogoutUrl = await api.user.logout();
+    } catch {
+      ssoLogoutUrl = undefined;
+    }
 
     this.isLogout = true;
 

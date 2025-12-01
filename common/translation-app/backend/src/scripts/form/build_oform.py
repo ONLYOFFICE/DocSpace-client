@@ -25,6 +25,7 @@ import json
 import sys
 import os
 from pathlib import Path
+import importlib.util
 
 try:
     from dotenv import load_dotenv
@@ -86,6 +87,53 @@ def set_docbuilder_license():
     return True
 
 
+def prepare_docbuilder_env(reexec_if_needed: bool = False):
+    """
+    Ensure macOS can locate bundled Document Builder frameworks when importing docbuilder.
+    The wheel ships native frameworks under site-packages/docbuilder/lib; we add that path
+    to DYLD_FRAMEWORK_PATH and DYLD_LIBRARY_PATH before import. Additionally, we eagerly
+    load key frameworks (graphics/kernel) via ctypes to help macOS resolve @rpath deps
+    when running under the latest Python builds.
+    """
+    if sys.platform != "darwin":
+        return
+
+    spec = importlib.util.find_spec("docbuilder")
+    if not spec or not spec.origin:
+        return
+
+    lib_dir = Path(spec.origin).resolve().parent / "lib"
+    if not lib_dir.exists():
+        return
+
+    missing = False
+    for env in ("DYLD_FRAMEWORK_PATH", "DYLD_LIBRARY_PATH"):
+        current = os.environ.get(env, "")
+        parts = [p for p in current.split(":") if p]
+        if str(lib_dir) not in parts:
+            parts.insert(0, str(lib_dir))
+            os.environ[env] = ":".join(parts)
+            missing = True
+
+    # If we just populated DYLD_* and were asked to reexec, restart the process so
+    # dyld sees the paths before loading native libraries.
+    if missing and reexec_if_needed and not os.environ.get("DOCBUILDER_ENV_PATCHED"):
+        os.environ["DOCBUILDER_ENV_PATCHED"] = "1"
+        os.execve(sys.executable, [sys.executable] + sys.argv, os.environ)
+
+    # Preload dependent frameworks so docbuilder.c can resolve @rpath references
+    try:
+        import ctypes
+
+        for fw in ("graphics", "kernel"):
+            fw_path = lib_dir / f"{fw}.framework" / fw
+            if fw_path.exists():
+                ctypes.CDLL(str(fw_path), mode=ctypes.RTLD_GLOBAL)
+    except Exception:
+        # Best-effort; if it fails we'll surface the import error later
+        pass
+
+
 def parse_translation_data(translation_data: dict) -> tuple:
     """
     Parse translation JSON and extract fields for form generation.
@@ -119,6 +167,9 @@ def parse_translation_data(translation_data: dict) -> tuple:
 
 def build_form(title: str, fields: list, pdf_path: str, base_language: str = "en", language: str = "ru"):
     """Build form using Python API directly and save as PDF."""
+    # Prepare native library search paths for macOS wheel
+    prepare_docbuilder_env()
+
     try:
         import docbuilder
     except ImportError as e:
@@ -135,23 +186,23 @@ def build_form(title: str, fields: list, pdf_path: str, base_language: str = "en
         api = globalObj['Api']
 
         # Get document
-        document = api.Call('GetDocument')
-        paragraph = document.Call('GetElement', 0)
-        headingStyle = document.Call('GetStyle', 'Heading 3')
+        document = api.GetDocument()
+        paragraph = document.GetElement(0)
+        headingStyle = document.GetStyle('Heading 3')
 
         # Add title
-        paragraph.Call('AddText', title)
-        paragraph.Call('SetStyle', headingStyle)
-        document.Call('Push', paragraph)
+        paragraph.AddText(title)
+        paragraph.SetStyle(headingStyle)
+        document.Push(paragraph)
 
         # Add spacer
-        paragraph = api.Call('CreateParagraph')
-        paragraph.Call('AddText', ' ')
-        document.Call('Push', paragraph)
+        paragraph = api.CreateParagraph()
+        paragraph.AddText(' ')
+        document.Push(paragraph)
 
         # Set up form roles - only TRANSLATOR role
         roles = document.GetFormRoles()
-        roles.Call('SetRoleColor', "Anyone", "#C6E0B3")
+        roles.SetRoleColor("Anyone", "#C6E0B3")
 
         # Process each field
         for i, f in enumerate(fields):
@@ -161,75 +212,72 @@ def build_form(title: str, fields: list, pdf_path: str, base_language: str = "en
             target = str(f.get("default") or "")
 
             # 1) Line: key name + checkbox "confirmed" on the right
-            paragraph = api.Call('CreateParagraph')
-            run = api.Call('CreateRun')
-            run.Call('AddText', f"{i+1}  {name}     ")
-            run.Call('SetBold', True)
-            paragraph.Call('AddElement', run)
-            document.Call('Push', paragraph)
+            paragraph = api.CreateParagraph()
+            run = api.CreateRun()
+            run.AddText(f"{i+1}  {name}     ")
+            run.SetBold(True)
+            paragraph.AddElement(run)
+            document.Push(paragraph)
 
-            paragraph = api.Call('CreateParagraph')
-            run = api.Call('CreateRun')
-            run.Call('AddText', comment)
-            run.Call('SetItalic', True)
-            run.Call('SetHighlight', "yellow")
-            paragraph.Call('AddElement', run)
-            document.Call('Push', paragraph)
+            paragraph = api.CreateParagraph()
+            run = api.CreateRun()
+            run.AddText(comment)
+            run.SetItalic(True)
+            run.SetHighlight("yellow")
+            paragraph.AddElement(run)
+            document.Push(paragraph)
 
             # 2) Line: Source: with field
-            paragraph = api.Call('CreateParagraph')
-            run = api.Call('CreateRun')
-            run.Call('AddText', f"Source ({base_language.upper()}):")
-            paragraph.Call('AddElement', run)
-            document.Call('Push', paragraph)
+            paragraph = api.CreateParagraph()
+            run = api.CreateRun()
+            run.AddText(f"Source ({base_language.upper()}):")
+            paragraph.AddElement(run)
+            document.Push(paragraph)
 
-            paragraph = api.Call('CreateParagraph')
-            run = api.Call('CreateRun')
-            run.Call('AddText', base_val)
-            run.Call('SetHighlight', "green")
-            paragraph.Call('AddElement', run)
-            document.Call('Push', paragraph)
+            paragraph = api.CreateParagraph()
+            run = api.CreateRun()
+            run.AddText(base_val)
+            run.SetHighlight("green")
+            paragraph.AddElement(run)
+            document.Push(paragraph)
 
             # 3) Line: Target: with field
-            paragraph = api.Call('CreateParagraph')
-            run = api.Call('CreateRun')
-            run.Call('AddText', f"Target ({language.upper()}): ")
-            paragraph.Call('AddElement', run)
+            paragraph = api.CreateParagraph()
+            run = api.CreateRun()
+            run.AddText(f"Target ({language.upper()}): ")
+            paragraph.AddElement(run)
 
             # Checkbox on the right
-            confirmed = api.Call('CreateCheckBoxForm')
-            confirmed.Call('SetFormKey', f"{name}_confirmed")
-            confirmed.Call('SetChecked', False)
-            confirmed.Call('SetRequired', True)
-            paragraph.Call('AddElement', confirmed)
+            confirmed = api.CreateCheckBoxForm()
+            confirmed.SetFormKey(f"{name}_confirmed")
+            confirmed.SetLabel(f" confirmed")
+            confirmed.SetChecked(False)
+            confirmed.SetRequired(True)
+            paragraph.AddElement(confirmed)
+            document.Push(paragraph)
 
-            run = api.Call('CreateRun')
-            run.Call('AddText', ' confirmed')
-            paragraph.Call('AddElement', run)
-            document.Call('Push', paragraph)
-
-            paragraph = api.Call('CreateParagraph')
-            targetField = api.Call('CreateTextForm')
-            targetField.Call('SetFormKey', f"{name}_target")
-            targetField.Call('SetText', target)
-            targetField.Call('SetRequired', True)
-            targetField.Call('SetPlaceholderText', "Enter translation")
-            targetField.Call('ToFixed', 10000, 2000)
-            targetField.Call('SetMultiline', True)
-            paragraph.Call('AddElement', targetField)
-            targetField.Call('SetBorderColor', "#000000")
-            document.Call('Push', paragraph)
+            paragraph = api.CreateParagraph()
+            targetField = api.CreateTextForm()
+            targetField.SetFormKey(f"{name}_target")
+            targetField.SetText(target)
+            targetField.SetRequired(True)
+            targetField.SetPlaceholderText("Enter translation")
+            targetField.ToFixed(10000, 2000)
+            targetField.SetMultiline(True)
+            paragraph.AddElement(targetField)
+            targetField.SetBorderColor("#000000")
+            document.Push(paragraph)
 
             # Spacer between items
-            paragraph = api.Call('CreateParagraph')
-            paragraph.Call('AddLineBreak')
-            document.Call('Push', paragraph)
+            paragraph = api.CreateParagraph()
+            paragraph.AddLineBreak()
+            document.Push(paragraph)
 
             # Progress indicator for large forms
             if (i + 1) % 100 == 0:
                 print(f"Processed {i + 1}/{len(fields)} fields...")
 
-        roles.Call('Remove', "Anyone")  # Explicitly remove Anyone role
+        # roles.Remove("Anyone")  # Explicitly remove Anyone role
 
         # Save as PDF
         builder.SaveFile(docbuilder.FileTypes.Document.OFORM_PDF, pdf_path)
@@ -248,6 +296,8 @@ def main():
     # Validate ONLYOFFICE Builder license if specified
     license_set = set_docbuilder_license()
     # Note: License validation output is handled in set_docbuilder_license()
+    # Ensure macOS can resolve docbuilder native libs (may re-exec with DYLD paths)
+    prepare_docbuilder_env(reexec_if_needed=True)
     
     parser = argparse.ArgumentParser(
         description="Build ONLYOFFICE Form for translation review")

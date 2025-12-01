@@ -222,6 +222,15 @@ class TargetUserStore {
     }
   };
 
+  checkNotificationsChannels = async () => {
+    try {
+      const res = await api.settings.getNotificationsSettings();
+      this.setNotificationChannels(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   get isEmailEnabled() {
     return this.notificationChannels?.find(
       (channel) => channel.name === "email.sender",

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 const {
@@ -117,7 +118,7 @@ beforeAll(() => {
   console.log(`Found files with non-ASCII symbols = ${asciiSymbolsFiles.length}.`);
 });
 describe("ASCII Symbols Tests", () => {
-  test("ASCIISymbolsTest: Verify that there are no non-ASCII symbols in the source code files", () => {
+  it("ASCIISymbolsTest: Verify that there are no non-ASCII symbols in the source code files", () => {
     let message = `Next files contain non-ASCII symbols:\r\n\r\n`;
     if (asciiSymbolsFiles.length > 0) {
       let i = 1;

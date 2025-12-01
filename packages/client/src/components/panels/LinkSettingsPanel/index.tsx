@@ -62,7 +62,7 @@ const LinkSettingsPanel = ({
   const { t, ready } = useTranslation(["Common", "Files"]);
 
   const usersNumber = activeLink.currentUseCount ?? 0;
-  const maxUsersNumber = activeLink.maxUseCount ?? 20;
+  const maxUsersNumber = activeLink.maxUseCount ?? 1;
   const limitIsChecked = !activeLink.maxUseCount ? false : true;
 
   const date = activeLink.expirationDate
@@ -80,11 +80,10 @@ const LinkSettingsPanel = ({
       (linkSelectedAccess?.access ?? activeLink?.access ?? defaultAccess),
   );
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value && !/^(?:[1-9][0-9]*)$/.test(e.target.value)) {
-      return;
-    }
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() + 1);
 
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHasError(false);
 
     if (
@@ -98,8 +97,25 @@ const LinkSettingsPanel = ({
     setMaxNumber(e.target.value);
   };
 
-  const maxDate = new Date();
-  maxDate.setFullYear(maxDate.getFullYear() + 1);
+  const onSubmitChanges = () => {
+    const defaultLink = filteredAccesses.find(
+      (a) => a.access === currentAccess?.access,
+    );
+    if (defaultLink) {
+      const linkToSubmit = {
+        ...defaultLink,
+        expirationDate: moment(limitDate).toISOString(),
+        maxUseCount: Number(maxNumber),
+        currentUseCount: usersNumber,
+      } as TOption & {
+        expirationDate: string;
+        maxUseCount: number;
+        currentUseCount: number;
+      };
+
+      onSubmit(linkToSubmit);
+    }
+  };
 
   return (
     <ModalDialog
@@ -110,25 +126,7 @@ const LinkSettingsPanel = ({
       onBackClick={onBackClick}
       withBodyScroll
       isLoading={!ready}
-      onSubmit={() => {
-        const defaultLink = filteredAccesses.find(
-          (a) => a.access === currentAccess?.access,
-        );
-        if (defaultLink) {
-          const linkToSubmit = {
-            ...defaultLink,
-            expirationDate: moment(limitDate).toISOString(),
-            maxUseCount: Number(maxNumber),
-            currentUseCount: usersNumber,
-          } as TOption & {
-            expirationDate: string;
-            maxUseCount: number;
-            currentUseCount: number;
-          };
-
-          onSubmit(linkToSubmit);
-        }
-      }}
+      onSubmit={onSubmitChanges}
       withForm
       withoutPadding
       isBackButton

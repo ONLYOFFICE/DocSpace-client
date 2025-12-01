@@ -59,7 +59,11 @@ import ItemsList from "./sub-components/ItemsList";
 import LinkSettingsPanel from "../LinkSettingsPanel";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import { getInviteLink, setInviteLink } from "@docspace/shared/api/portal";
+import {
+  getInviteLink,
+  setInviteLink,
+  updateInviteLink,
+} from "@docspace/shared/api/portal";
 
 const InvitePanel = ({
   folders,
@@ -590,13 +594,21 @@ const InvitePanel = ({
   const setInviteContactsLink = async (defaultLink) => {
     if (requestIsRunning) return;
 
+    const createNewLink =
+      activeLink?.access !== defaultLink?.access || !activeLink?.access;
+
     setRequestIsRunning(true);
     try {
-      const link = await setInviteLink({
+      const requestData = {
+        id: activeLink?.id,
         employeeType: defaultLink?.access ?? defaultAccess,
         maxUseCount: defaultLink?.maxUseCount,
         expiration: defaultLink?.expirationDate,
-      });
+      };
+
+      const link = createNewLink
+        ? await setInviteLink(requestData)
+        : await updateInviteLink(requestData);
 
       const linkData = {
         ...link,

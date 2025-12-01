@@ -120,6 +120,7 @@ const ExternalLinks = ({
           setInviteContactsLink();
         } else {
           deleteInviteLink(activeLink.id);
+          setActiveLink({});
         }
       } else {
         !externalLinksVisible ? await editLink() : await disableLink();

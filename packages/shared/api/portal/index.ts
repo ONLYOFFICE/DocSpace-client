@@ -675,3 +675,13 @@ export async function deleteInviteLink(id) {
   const res = await request(options);
   return res;
 }
+
+export async function updateInviteLink(data) {
+  const options = {
+    method: "PUT",
+    url: "/portal/users/invitationlink",
+    data,
+  };
+  const res = await request(options);
+  return res;
+}

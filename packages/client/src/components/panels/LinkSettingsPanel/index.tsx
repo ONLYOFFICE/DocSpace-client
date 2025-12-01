@@ -47,6 +47,8 @@ import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { TOption } from "@docspace/shared/components/combobox";
 
+const MAX_USERS_COUNT = 1000;
+
 const LinkSettingsPanel = ({
   isVisible,
   filteredAccesses,
@@ -89,7 +91,8 @@ const LinkSettingsPanel = ({
     if (
       !e.target.value ||
       Number(e.target.value) <= 0 ||
-      +e.target.value < +usersNumber
+      +e.target.value < +usersNumber ||
+      Number(e.target.value) >= MAX_USERS_COUNT
     ) {
       setHasError(true);
     }
@@ -196,7 +199,7 @@ const LinkSettingsPanel = ({
                   type={InputType.text}
                   value={maxNumber}
                   scale
-                  maxLength={3}
+                  maxLength={4}
                   onChange={onInputChange}
                   hasError={hasError}
                 />

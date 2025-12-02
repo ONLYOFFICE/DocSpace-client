@@ -34,7 +34,7 @@ const Plugin = ({ boxProps, pluginName, plugin, selection }) => {
   React.useEffect(() => {
     if (!selection) return;
 
-    plugin?.subMenu.onClick(selection.id ? +selection.id : 0);
+    plugin?.subMenu?.onClick?.(selection.id ? +selection.id : 0);
   }, [selection.id]);
 
   return (

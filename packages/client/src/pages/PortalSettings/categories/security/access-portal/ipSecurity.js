@@ -205,12 +205,14 @@ const IpSecurity = (props) => {
     setIps([...ips, ""]);
   };
 
+  const isValidIp = (input) => regexp.test(input);
+
   const onSaveClick = async () => {
     const newIps = ips.filter((ip) => ip.trim() !== "");
 
     setIps(newIps);
     setIsSaving(true);
-    const valid = newIps.map((ip) => regexp.test(ip));
+    const valid = newIps.map((ip) => isValidIp(ip));
 
     if (valid.includes(false)) {
       setIsSaving(false);
@@ -306,7 +308,7 @@ const IpSecurity = (props) => {
           onChangeInput={onChangeInput}
           onDeleteInput={onDeleteInput}
           onClickAdd={onClickAdd}
-          regexp={regexp}
+          validateFunc={isValidIp}
           classNameAdditional="add-allowed-ip-address"
           isAutoFocussed={autoFocus}
           inputDataTestId="ip_security_ip_input"

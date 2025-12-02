@@ -353,16 +353,15 @@ export const parseAddresses = (
  * @param {String} domain
  * @return {Bool} result
  */
-export const isValidDomainName = (domain: string) => {
-  const parsed = emailAddresses.parseOneAddress(`test@${domain}`);
+export const isValidDomainName = (
+  domain: string,
+  options: EmailSettings = new EmailSettings(),
+) => {
+  const parsed = parseOneAddress(`test@${domain}`, options);
+
   if (!parsed) return false;
 
-  return (
-    parsed &&
-    "domain" in parsed &&
-    parsed.domain === domain &&
-    domain.indexOf(".") !== -1
-  );
+  return parsed?.isValid() && parsed?.parseErrors?.length === 0;
 };
 
 /**

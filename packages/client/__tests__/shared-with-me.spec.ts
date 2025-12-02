@@ -233,6 +233,36 @@ test.describe("Shared with me", () => {
     await expect(sharedByColumn).toBeVisible();
   });
 
+  test("should hide 'Shared By' column when disabled in table settings", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.sharedWithMe]);
+
+    await page.goto("/shared-with-me/filter?folder=4");
+
+    const tableHeader = page.getByTestId("table-header");
+    await expect(tableHeader).toBeVisible();
+
+    const tableSettings = tableHeader.getByTestId("settings-block");
+    await expect(tableSettings).toBeVisible();
+
+    tableSettings.click();
+
+    const sharedByOption = page.getByTestId(
+      "table_settings_SharedByShareWithMe",
+    );
+
+    await expect(sharedByOption).toBeVisible();
+
+    await sharedByOption.uncheck();
+
+    const sharedByColumn = tableHeader.getByTestId(
+      "column-SharedByShareWithMe",
+    );
+    await expect(sharedByColumn).not.toBeVisible();
+  });
+
   test("should display 'Access Level' column in shared with me table header", async ({
     page,
     mockRequest,
@@ -248,5 +278,35 @@ test.describe("Shared with me", () => {
       "column-AccessLevelShareWithMe",
     );
     await expect(accessLevelColumn).toBeVisible();
+  });
+
+  test("should hide 'Access Level' column when disabled in table settings", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.sharedWithMe]);
+
+    await page.goto("/shared-with-me/filter?folder=4");
+
+    const tableHeader = page.getByTestId("table-header");
+    await expect(tableHeader).toBeVisible();
+
+    const tableSettings = tableHeader.getByTestId("settings-block");
+    await expect(tableSettings).toBeVisible();
+
+    tableSettings.click();
+
+    const accessLevelOption = page.getByTestId(
+      "table_settings_AccessLevelShareWithMe",
+    );
+
+    await expect(accessLevelOption).toBeVisible();
+
+    await accessLevelOption.uncheck();
+
+    const accessLevelColumn = tableHeader.getByTestId(
+      "column-AccessLevelShareWithMe",
+    );
+    await expect(accessLevelColumn).not.toBeVisible();
   });
 });

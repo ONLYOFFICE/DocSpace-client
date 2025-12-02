@@ -156,8 +156,8 @@ export function checkPwd() {
   if (!isSSR) {
     const data = {
       domain: desktopConstants.domain,
-      emailInput: "login",
-      pwdInput: "password",
+      emailInput: "login_username",
+      pwdInput: "login_password",
     };
     window.AscDesktopEditor.execCommand(
       "portal:checkpwd",

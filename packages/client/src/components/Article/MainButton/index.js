@@ -134,9 +134,10 @@ const ArticleMainButtonContent = (props) => {
     t,
     isMobileArticle,
 
-    isPrivacy,
-    encryptedFile,
-    encrypted,
+    isPrivateRoom,
+    isDesktopClient,
+    isEncryptionSupport,
+
     startUpload,
     setAction,
     setSelectFileDialogVisible,
@@ -303,7 +304,7 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onUploadFileClick = React.useCallback(() => {
-    if (isPrivacy) {
+    if (isPrivateRoom && isDesktopClient) {
       encryptionUploadDialog((f, isEncrypted) => {
         f.encrypted = isEncrypted;
         startUpload([f], null, t); // TODO: createFoldersTree
@@ -311,13 +312,7 @@ const ArticleMainButtonContent = (props) => {
     } else {
       inputFilesElement.current.click();
     }
-  }, [
-    isPrivacy,
-    encrypted,
-    encryptedFile,
-    encryptionUploadDialog,
-    startUpload,
-  ]);
+  }, [isPrivateRoom, isDesktopClient, startUpload, t]);
 
   const onUploadFolderClick = React.useCallback(() => {
     inputFolderElement.current.click();
@@ -394,7 +389,7 @@ const ArticleMainButtonContent = (props) => {
         icon: FormGalleryReactSvgUrl,
         label: t("Common:ChooseFromTemplates"),
         onClick: formGallery.onClick,
-        disabled: isPrivacy,
+        disabled: isPrivateRoom,
         key: "form-file",
       };
 
@@ -497,7 +492,7 @@ const ArticleMainButtonContent = (props) => {
         mobileMoreActions,
       };
     },
-    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick],
+    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick, isPrivateRoom],
   );
 
   React.useEffect(() => {
@@ -570,7 +565,7 @@ const ArticleMainButtonContent = (props) => {
       icon: FormFileReactSvgUrl,
       label: t("Translations:SubNewFormFile"),
       onClick: onShowSelectFileDialog,
-      disabled: isPrivacy,
+      disabled: isPrivateRoom,
       key: "form-file",
     };
 
@@ -580,7 +575,7 @@ const ArticleMainButtonContent = (props) => {
       icon: FormGalleryReactSvgUrl,
       label: t("Common:OFORMsGallery"),
       onClick: onShowGallery,
-      disabled: isPrivacy,
+      disabled: isPrivateRoom,
       key: "form-gallery",
     };
 
@@ -629,7 +624,7 @@ const ArticleMainButtonContent = (props) => {
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
         label: t("UploadFolder"),
-        disabled: isPrivacy,
+        disabled: isPrivateRoom,
         onClick: onUploadFolderClick,
         key: "upload-folder",
       });
@@ -679,7 +674,7 @@ const ArticleMainButtonContent = (props) => {
       createNewFolder,
     ];
 
-    if (pluginItems.length > 0) {
+    if (pluginItems.length > 0 && !isPrivateRoom) {
       // menuModel.push({
       //   id: "actions_more-plugins",
       //   className: "main-button_drop-down",
@@ -715,7 +710,7 @@ const ArticleMainButtonContent = (props) => {
     setActions(newActions);
   }, [
     t,
-    isPrivacy,
+    isPrivateRoom,
     currentFolderId,
     isAccountsPage,
     isSettingsPage,
@@ -795,6 +790,9 @@ const ArticleMainButtonContent = (props) => {
   const mainButtonText =
     isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
 
+  const canCreateEncrypted =
+    isDesktopClient && isEncryptionSupport && security?.Create;
+
   let isDisabled = false;
 
   if (isSettingsPage) {
@@ -803,6 +801,8 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else if ((isChatTab || isResultTab) && isAIRoom) {
     isDisabled = true;
+  } else if (isPrivateRoom) {
+    isDisabled = !canCreateEncrypted;
   } else {
     isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
@@ -967,7 +967,12 @@ export default inject(
       currentColorScheme,
       currentDeviceType,
       allowInvitingMembers,
+      isDesktopClient,
+      isEncryptionSupport,
+      frameConfig,
+      isFrame,
     } = settingsStore;
+
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const { security } = selectedFolderStore;
@@ -987,8 +992,6 @@ export default inject(
       oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
-    const { frameConfig, isFrame } = settingsStore;
-
     const { createFoldersTree } = filesActionsStore;
 
     return {
@@ -997,7 +1000,9 @@ export default inject(
       isMobileArticle: settingsStore.isMobileArticle,
 
       showArticleLoader,
-      isPrivacy: isPrivacyFolder,
+      isPrivateRoom: isPrivacyFolder,
+      isDesktopClient,
+      isEncryptionSupport,
       isFavoritesFolder,
       isRecentFolder,
       isRecycleBinFolder,

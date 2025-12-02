@@ -128,12 +128,12 @@ const ClientContent = (props) => {
         null,
         t,
       );
-      //   console.log(
-      //     "%c%s",
-      //     "color: green; font: 1.2em bold;",
-      //     "Current keys is: ",
-      //     encryptionKeys
-      //   );
+      console.log(
+        "%c%s",
+        "color: green; font: 1.2em bold;",
+        "Current keys is: ",
+        encryptionKeys,
+      );
     }
   }, [
     t,

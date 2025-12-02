@@ -46,6 +46,8 @@
   "InviteRootRoomDescription": "Stuur een uitnodiging om nieuwe leden toe te voegen aan uw {{productName}}",
   "InviteUsersOptionDescription": "Voeg deelnemers toe om samen te bewerken in een ruimte",
   "ManageAccess": "Beheer toegang",
+  "MigrationDataDescription": "Verplaats uw gegevens naar {{productName}} vanuit {{organizationName}} Workspace, Google Workspace of Nextcloud.",
+  "MigrationDataTitle": "Importeer data",
   "NoRecentFilesHereYet": "Nog geen recente bestanden hier.",
   "PublicRoomEmptyTitle": "Welkom in de Openbare kamer",
   "SectionsUploadDescription": "Upload bestanden van elk type uit {{sectionNameFirst}} of {{sectionNameSecond}}",

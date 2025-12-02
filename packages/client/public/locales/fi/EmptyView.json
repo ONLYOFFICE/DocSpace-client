@@ -46,6 +46,8 @@
   "InviteRootRoomDescription": "Lähetä kutsu lisätäksesi uusia jäseniä {{productName}}",
   "InviteUsersOptionDescription": "Lisää jäseniä huoneeseen yhteistä muokkausta varten",
   "ManageAccess": "Hallitse pääsyä",
+  "MigrationDataDescription": "Siirrä tietosi {{productName}}-palveluun {{organizationName}} Workspace -työtilasta, Google Workspace -ympäristöstä tai Nextcloudista.",
+  "MigrationDataTitle": "Tuo tietoa",
   "NoRecentFilesHereYet": "Ei viimeaikaisia tiedostoja vielä täällä",
   "PublicRoomEmptyTitle": "Tervetuloa julkiseen huoneeseen.",
   "SectionsUploadDescription": "Lataa mitä tahansa tiedostotyyppejä {{sectionNameFirst}}- tai {{sectionNameSecond}}-osiosta",

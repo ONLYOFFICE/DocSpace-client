@@ -887,6 +887,15 @@ export async function getNewFiles(folderId: number | string) {
   return res;
 }
 
+export async function getNewFilesAgents() {
+  const res = (await request({
+    method: "get",
+    url: `/ai/agents/news`,
+  })) as TNewFiles[];
+
+  return res;
+}
+
 export async function getNewFolderFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
@@ -1715,10 +1724,14 @@ export async function getFilesUsedSpace(signal?: AbortSignal) {
   return res;
 }
 
-export async function getConnectingStorages() {
+export async function getConnectingStorages(paramsString?: string) {
+  const url = paramsString
+    ? `files/thirdparty/providers?${paramsString}`
+    : "files/thirdparty/providers";
+
   const res = (await request({
     method: "get",
-    url: "files/thirdparty/providers",
+    url,
   })) as TConnectingStorages;
 
   return res;

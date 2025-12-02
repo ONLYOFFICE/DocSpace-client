@@ -3,6 +3,7 @@
   "EmailErrorMessage": "Địa chỉ Email không hợp lệ. Iu chan chỉnh sửa email sẽ tăng gấp đôi trên đó.",
   "EmailErrorMessageUserNotFound": "Không tìm thấy người dùng. Bạn có thể chỉnh sửa email bằng cách nhấp đúp vào nó.",
   "GroupMaxAvailableRoleWarning": "Các nhóm có thể được thêm vào một phòng với vai trò {{roleName}} là tối đa. Tuy nhiên, bạn có thể thay đổi vai trò của từng người dùng trong nhóm sau khi được thêm thành công.",
+  "GuestAgentMaxAvailableRoleWarning": "Khách không thể được chỉ định làm Người tạo nội dung.\nChỉ có quản trị viên phòng, quản trị viên {{productName}} và Người dùng mới đủ điều kiện cho vai trò này.",
   "InvitationLanguage": "Ngôn ngữ mời",
   "InviteMembersManuallyDescription": "Mời thành viên mới vào {{productName}} trực tiếp qua email",
   "InviteMembersSearchPlaceholder": "Mời thành viên qua email",

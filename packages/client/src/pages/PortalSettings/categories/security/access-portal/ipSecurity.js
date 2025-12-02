@@ -95,6 +95,7 @@ const IpSecurity = (props) => {
   const location = useLocation();
 
   const regexp = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/; // check ip valid
+  const isValidIp = (input) => regexp.test(input);
 
   const [enable, setEnable] = useState(false);
   const [ips, setIps] = useState();
@@ -208,7 +209,7 @@ const IpSecurity = (props) => {
 
   const getErrorMessage = (ip, index, ipsArray = ips) => {
     const isDuplicate = checkDuplicate(ipsArray, ip, index);
-    const isValidFormat = regexp.test(ip) && ip !== "";
+    const isValidFormat = isValidIp(ip) && ip !== "";
 
     if (isDuplicate) return t("Common:IpAlreadyAdded");
     if (!isValidFormat) return t("Common:IncorrectIp");
@@ -240,9 +241,7 @@ const IpSecurity = (props) => {
   const onSaveClick = async () => {
     setIsSaving(true);
 
-    const valid = ips.map((ip, index) => {
-      return onCheckValid(ip, index);
-    });
+    const valid = newIps.map((ip) => isValidIp(ip));
 
     if (valid.includes(false)) {
       setIsSaving(false);
@@ -340,7 +339,7 @@ const IpSecurity = (props) => {
           onDeleteInput={onDeleteInput}
           onClickAdd={onClickAdd}
           onBlurAction={(index) => onCheckValid(ips[index], index)}
-          regexp={regexp}
+          validateFunc={isValidIp}
           errorMessages={errorMessages}
           hideDeleteIcon={ips.length === 1}
           classNameAdditional="add-allowed-ip-address"

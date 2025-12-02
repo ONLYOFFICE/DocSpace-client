@@ -41,6 +41,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { DeviceType } from "@docspace/shared/enums";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { isValidDomainName } from "@docspace/shared/utils/email";
 import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
 import UserFields from "../sub-components/user-fields";
 import { LearnMoreWrapper } from "../StyledSecurity";
@@ -73,9 +74,6 @@ const TrustedMail = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  const regexp =
-    /^(?!-)[A-Za-z0-9-]{1,63}(?<!-)(\.(?!-)[A-Za-z0-9-]{1,63}(?<!-))+$/;
 
   const [type, setType] = useState("0");
   const [domains, setDomains] = useState([]);
@@ -191,7 +189,7 @@ const TrustedMail = (props) => {
   const getErrorMessage = (domain, index, domainsArray = domains) => {
     
     const isDuplicate = checkDuplicate(domainsArray, domain, index);
-    const isValidFormat = regexp.test(domain) && domain !== "";
+    const isValidFormat = isValidDomainName(domain) && domain !== "";
     
     if (isDuplicate) return t("Common:DomainAlreadyAdded");
     if (!isValidFormat) return t("Common:IncorrectDomain");
@@ -335,7 +333,7 @@ const TrustedMail = (props) => {
           onDeleteInput={onDeleteInput}
           onBlurAction={(index) => onCheckValid(domains[index], index)}
           onClickAdd={onClickAdd}
-          regexp={regexp}
+          validateFunc={isValidDomainName}
           classNameAdditional="add-trusted-domain"
           inputDataTestId="trusted_mail_domain_input"
           deleteIconDataTestId="trusted_mail_delete_domain_icon"

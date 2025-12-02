@@ -3,7 +3,7 @@
   "content": "You are about to move <strong>files ({{filesCount}})</strong> to {{trashSection}}.",
   "content_en_sha1_hash": "72a77c49883d04edfed07e946b1b55dc78b43806",
   "created_at": "2025-10-01T15:20:12.139Z",
-  "updated_at": "2025-11-17T13:24:55.371Z",
+  "updated_at": "2025-11-21T07:41:41.607Z",
   "comment": {
     "text": "This key displays a confirmation message within a delete dialog, informing the user that they are about to move a specific number of files to the trash. The message includes the count of files being moved, which is dynamically inserted using the `filesCount` variable. Translators should ensure the wording accurately conveys the action of moving files to the trash.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 161,
+      "line_number": 164,
       "context": "const foldersCount = items.folders.length;\n \n if (filesCount && foldersCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFilesAndFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty",
       "module": "/packages/client"
     }

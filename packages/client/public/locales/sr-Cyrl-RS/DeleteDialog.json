@@ -1,7 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Обрисати чат?",
   "DeleteAIAgentDescription": "Агент <strong>\"{{agentName}}\"</strong> ће бити трајно избрисан. Сви подаци и приступи корисника ће бити изгубљени.",
   "DeleteAIAgentTitle": "Обришите овог агента",
   "DeleteAIAgentWarning": "Разумем последице и желим да избришем агента",
+  "DeleteAIChatDescription": "Бришем <strong>{{chatName}}<1>.</1></strong> Све поруке и историја ћаскања биће трајно обрисане и неће моћи да буду враћене.",
   "DeleteAllGroupDescription": "Одабране групе ће бити обрисане. Корисници у групама неће бити уклоњени са {{productName}}-а. Да ли сте сигурни да желите да наставите?",
   "DeleteAllGroupsTitle": "Обриши групе",
   "DeleteFiles": "Управо ћеш преместити <strong>фајлове ({{filesCount}})</strong> у {{trashSection}}.",

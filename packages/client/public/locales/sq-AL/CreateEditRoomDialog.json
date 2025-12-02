@@ -2,7 +2,7 @@
   "AddStaticText": "Shtoni tekst statik",
   "AddWatermarkElements": "Shtoni elementë filigranë",
   "AddWatermarksToDocuments": "Shtoni filigranë",
-  "AddWatermarksToDocumentsDescription": "Mbroni të gjitha dokumentet në këtë dhomë me filigranë. Nëse një dokument tashmë përmban një të tillë, ai nuk do të zëvendësohet.",
+  "AddWatermarksToDocumentsDescription": "Mbroni të gjitha dokumentet në këtë dhomë me filigrane. Nëse një dokument përmban tashmë një filigran, ai nuk do të zëvendësohet. Kur ky cilësim është i aktivizuar, dokumentet mund të shkarkohen vetëm si PDF për të u siguruar që filigrani të mbetet i paprekur.",
   "AutomaticIndexing": "Indeksimi automatik",
   "AutomaticIndexingDescription": "Aktivizoni indeksimin automatik për të indeksuar skedarët dhe dosjet sipas numrit të serisë. Renditja sipas numrit do të vendoset si parazgjedhje për të gjithë përdoruesit.",
   "ChooseRoomType": "Zgjidhni llojin e dhomës",

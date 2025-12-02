@@ -320,7 +320,7 @@ class BackupStore {
   setThirdPartyAccountsInfo = async (t) => {
     const [connectedAccount, providers] = await Promise.all([
       getSettingsThirdParty(),
-      this.thirdPartyStore.fetchConnectingStorages(),
+      this.thirdPartyStore.fetchConnectingStorages("excludewebdav=true"),
     ]);
 
     this.setConnectedThirdPartyAccount(connectedAccount);

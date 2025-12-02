@@ -46,7 +46,12 @@ import { createMarkdownComponents } from "./Markdown.utils";
 // };
 
 const MarkdownField = React.memo(
-  ({ chatMessage, propLanguage, isFirst }: MessageMarkdownFieldProps) => {
+  ({
+    chatMessage,
+    propLanguage,
+    isFirst,
+    successCopyMessage,
+  }: MessageMarkdownFieldProps) => {
     // Process the chat message to handle <think> tags
     // const processedChatMessage = preprocessChatMessage(chatMessage);
 
@@ -71,7 +76,10 @@ const MarkdownField = React.memo(
             <Markdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
-              components={createMarkdownComponents({ propLanguage })}
+              components={createMarkdownComponents({
+                propLanguage,
+                successCopyMessage,
+              })}
             >
               {thinkBlock}
             </Markdown>
@@ -80,7 +88,10 @@ const MarkdownField = React.memo(
         <Markdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
-          components={createMarkdownComponents({ propLanguage })}
+          components={createMarkdownComponents({
+            propLanguage,
+            successCopyMessage,
+          })}
         >
           {processedChatMessage}
         </Markdown>

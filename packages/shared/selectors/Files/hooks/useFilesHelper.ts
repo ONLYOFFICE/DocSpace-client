@@ -301,7 +301,7 @@ const useFilesHelper = ({
         if (firstLoadRef.current || startIndex === 0) {
           const { security } = current;
 
-          if (withCreate && security.Create) {
+          if (withCreate && security?.Create) {
             setTotal(total + 1);
             itemList.unshift({
               isCreateNewItem: true,

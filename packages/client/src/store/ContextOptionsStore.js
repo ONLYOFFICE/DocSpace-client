@@ -1015,6 +1015,68 @@ class ContextOptionsStore {
   //   return promise;
   // };
 
+  onMultiLoadPlugins = (items) => {
+    if (isAIAgents()) return [];
+
+    const { enablePlugins } = this.settingsStore;
+
+    const pluginItems = [];
+    this.setLoaderTimer(true);
+
+    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
+      this.pluginStore.contextMenuItemsList.forEach((option) => {
+        const processOptionValue = (value) => {
+
+          const isEveryItemIncludesOption = items.every(({ contextOptions }) => contextOptions.includes(value.key));
+
+          if (isEveryItemIncludesOption && value.isGroupAction) {
+
+            const filesIds = items.map(({ id }) => id);
+
+            const onClick = async () => {
+              if (value.withActiveItem) {
+                const { setActiveFiles } = this.filesStore;
+
+                setActiveFiles(filesIds);
+
+                await value.onGroupClick(filesIds);
+
+                setActiveFiles([]);
+              } else {
+                value.onGroupClick(filesIds);
+              }
+            };
+
+            const processedOptionValue = {
+              key: value.key,
+              id: value.key,
+              label: value.label,
+              icon: value.icon,
+              disabled: false,
+              onClick,
+            };
+
+            return processedOptionValue;
+          }
+        };
+
+        if (option.items && option.items.length > 0) {
+          option.items.forEach((nestedItem) => {
+            const processedItem = processOptionValue(nestedItem);
+            processedItem && pluginItems.push(processedItem);
+          });
+        } else {
+          const value = processOptionValue(option.value);
+          value && pluginItems.push(value);
+        }
+      });
+    }
+
+    this.setLoaderTimer(false);
+
+    return pluginItems;
+  };
+
   onLoadPlugins = (item) => {
     if (isAIAgents()) return [];
     const { contextOptions } = item;
@@ -1784,10 +1846,13 @@ class ContextOptionsStore {
       (item.rootFolderType === FolderType.AIAgents &&
         item.roomType === RoomsType.AIRoom);
 
+    const isKnowledgeOrResult =
+      item.isAIAgent && (item.isInsideKnowledge || item.isInsideResultStorage);
+
     const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
       : item.shared
-        ? item.security.CopySharedLink
+        ? item.security?.CopySharedLink
         : item.security?.EditAccess;
 
     const { isFiltered } = this.filesStore;
@@ -1884,11 +1949,17 @@ class ContextOptionsStore {
       {
         id: "option_preview",
         key: "preview",
-        label: this.treeFoldersStore.isRecentFolder
-          ? t("Open")
-          : t("Common:Preview"),
+        label:
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? t("Open")
+            : t("Common:Preview"),
         icon: EyeReactSvgUrl,
-        onClick: () => this.onPreviewClick(item),
+        onClick: () =>
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? this.gotoDocEditor(item)
+            : this.onPreviewClick(item),
         disabled: false,
       },
       {
@@ -2326,8 +2397,9 @@ class ContextOptionsStore {
         label: isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
-        disabled:
-          isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
+        disabled: isKnowledgeOrResult
+          ? false
+          : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
         id: "option_archive-room",
@@ -2945,6 +3017,10 @@ class ContextOptionsStore {
     const { isCollaborator } = this.userStore?.user || {
       isCollaborator: false,
     };
+
+    const pluginItems = this.onMultiLoadPlugins(selection);
+
+    options.splice(1, 0, ...pluginItems);
 
     const newOptions = options.filter(
       (option, index) =>

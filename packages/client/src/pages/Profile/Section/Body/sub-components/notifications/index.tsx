@@ -33,7 +33,7 @@ import RoomsActionsContainer from "./sub-components/RoomsActionsContainer";
 import DailyFeedContainer from "./sub-components/DailyFeedContainer";
 import RoomsActivityContainer from "./sub-components/RoomsActivityContainer";
 import NotificationsChannels from "./NotificationsChannels";
-import { StyledSectionBodyContent, StyledTextContent } from "./StyledComponent";
+import styles from "./Notifications.module.scss";
 
 const Notifications = () => {
   const { t } = useTranslation(["Notifications", "Common"]);
@@ -42,17 +42,17 @@ const Notifications = () => {
   const textDescriptionsProps = {
     fontSize: "13px",
     fontWeight: "400",
-    className: "notification-container_description",
+    className: styles.notificationContainerDescription,
   };
 
   const badgesContent = (
     <>
-      <StyledTextContent>
+      <div className={styles.textContent}>
         <Text fontSize="14px" fontWeight={600}>
           {t("Badges")}
         </Text>
-      </StyledTextContent>
-      <div className="badges-container">
+      </div>
+      <div className={styles.badgesContainer}>
         <RoomsActionsContainer
           t={t}
           textProps={textProps}
@@ -64,13 +64,13 @@ const Notifications = () => {
 
   const emailContent = (
     <>
-      <StyledTextContent>
+      <div className={styles.textContent}>
         <Text fontSize="14px" fontWeight={600} className="email-title">
           {t("SettingUpNotifications")}
         </Text>
-      </StyledTextContent>
+      </div>
 
-      <div className="badges-container">
+      <div className={styles.badgesContainer}>
         <RoomsActivityContainer
           t={t}
           textProps={textProps}
@@ -91,11 +91,11 @@ const Notifications = () => {
   );
 
   return (
-    <StyledSectionBodyContent>
+    <div className={styles.sectionBody}>
       <NotificationsChannels />
       {badgesContent}
       {emailContent}
-    </StyledSectionBodyContent>
+    </div>
   );
 };
 

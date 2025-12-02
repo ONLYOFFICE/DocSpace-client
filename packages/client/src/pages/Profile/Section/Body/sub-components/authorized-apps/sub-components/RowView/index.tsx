@@ -1,12 +1,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
+import { RowContainer } from "@docspace/shared/components/rows";
+
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 import { OAuthRow } from "./Row";
 
 import { RowViewProps } from "./RowView.types";
-import { StyledRowContainer } from "./RowView.styled";
+import styles from "../../authorized-apps.module.scss";
 
 const RowView = (props: RowViewProps) => {
   const {
@@ -32,7 +34,8 @@ const RowView = (props: RowViewProps) => {
   );
 
   return (
-    <StyledRowContainer
+    <RowContainer
+      className={styles.rowContainer}
       itemHeight={59}
       filesLength={items.length}
       fetchMoreFiles={fetchMoreFiles}
@@ -54,7 +57,7 @@ const RowView = (props: RowViewProps) => {
           dataTestId={`auth_row_${index}`}
         />
       ))}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

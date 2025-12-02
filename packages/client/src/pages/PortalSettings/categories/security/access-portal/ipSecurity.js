@@ -95,6 +95,7 @@ const IpSecurity = (props) => {
   const location = useLocation();
 
   const regexp = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/; // check ip valid
+  const isValidIp = (input) => regexp.test(input);
 
   const [enable, setEnable] = useState(false);
   const [ips, setIps] = useState();
@@ -102,6 +103,7 @@ const IpSecurity = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [autoFocus, setAutoFocus] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const defaultProps = createDefaultHookSettingsProps({
     settingsStore,
@@ -194,24 +196,51 @@ const IpSecurity = (props) => {
     setIps(newInputs);
   };
 
+  const onClickAdd = () => {
+    if (!autoFocus) setAutoFocus(true);
+    setIps([...ips, ""]);
+    setErrorMessages((prev) => [...prev, null]);
+  };
+
+  const checkDuplicate = (ips, input, index) => {
+    const firstIndex = ips.findIndex((d) => d === input && d !== "");
+    return firstIndex !== -1 && firstIndex !== index;
+  };
+
+  const getErrorMessage = (ip, index, ipsArray = ips) => {
+    const isDuplicate = checkDuplicate(ipsArray, ip, index);
+    const isValidFormat = isValidIp(ip) && ip !== "";
+
+    if (isDuplicate) return t("Common:IpAlreadyAdded");
+    if (!isValidFormat) return t("Common:IncorrectIp");
+    return null;
+  };
+
+  const validateAllIps = (ipsArray) => {
+    return ipsArray.map((ip, index) => getErrorMessage(ip, index, ipsArray));
+  };
+
   const onDeleteInput = (index) => {
     const newInputs = Array.from(ips);
     newInputs.splice(index, 1);
     setIps(newInputs);
+    setErrorMessages(validateAllIps(newInputs));
   };
 
-  const onClickAdd = () => {
-    if (!autoFocus) setAutoFocus(true);
-    setIps([...ips, ""]);
-  };
+  const onCheckValid = (ip, index) => {
+    const errorMessage = getErrorMessage(ip, index);
 
-  const isValidIp = (input) => regexp.test(input);
+    setErrorMessages((prev) => {
+      const newErrors = [...prev];
+      newErrors[index] = errorMessage;
+      return newErrors;
+    });
+    return !errorMessage;
+  };
 
   const onSaveClick = async () => {
-    const newIps = ips.filter((ip) => ip.trim() !== "");
-
-    setIps(newIps);
     setIsSaving(true);
+
     const valid = newIps.map((ip) => isValidIp(ip));
 
     if (valid.includes(false)) {
@@ -219,7 +248,7 @@ const IpSecurity = (props) => {
       return;
     }
 
-    const ipsObjectArr = newIps.map((ip) => {
+    const ipsObjectArr = ips.map((ip) => {
       return { ip };
     });
 
@@ -228,11 +257,11 @@ const IpSecurity = (props) => {
 
       saveToSessionStorage("currentIPSettings", {
         enable,
-        ips: newIps,
+        ips,
       });
       saveToSessionStorage("defaultIPSettings", {
         enable,
-        ips: newIps,
+        ips,
       });
       setShowReminder(false);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
@@ -248,6 +277,7 @@ const IpSecurity = (props) => {
     setEnable(defaultSettings?.enable);
     setIps(defaultSettings?.ips);
     setShowReminder(false);
+    setErrorMessages([]);
   };
 
   if ((currentDeviceType === DeviceType.mobile && !isLoaded) || !tReady) {
@@ -308,7 +338,10 @@ const IpSecurity = (props) => {
           onChangeInput={onChangeInput}
           onDeleteInput={onDeleteInput}
           onClickAdd={onClickAdd}
+          onBlurAction={(index) => onCheckValid(ips[index], index)}
           validateFunc={isValidIp}
+          errorMessages={errorMessages}
+          hideDeleteIcon={ips.length === 1}
           classNameAdditional="add-allowed-ip-address"
           isAutoFocussed={autoFocus}
           inputDataTestId="ip_security_ip_input"

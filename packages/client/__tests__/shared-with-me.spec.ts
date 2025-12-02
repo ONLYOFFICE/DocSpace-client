@@ -217,4 +217,36 @@ test.describe("Shared with me", () => {
 
     wsMock.closeConnection();
   });
+
+  test("should display 'Shared By' column in shared with me table header", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.sharedWithMe]);
+
+    await page.goto("/shared-with-me/filter?folder=4");
+
+    const table = page.getByTestId("table-header");
+    await expect(table).toBeVisible();
+
+    const sharedByColumn = table.getByTestId("column-SharedByShareWithMe");
+    await expect(sharedByColumn).toBeVisible();
+  });
+
+  test("should display 'Access Level' column in shared with me table header", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.sharedWithMe]);
+
+    await page.goto("/shared-with-me/filter?folder=4");
+
+    const table = page.getByTestId("table-header");
+    await expect(table).toBeVisible();
+
+    const accessLevelColumn = table.getByTestId(
+      "column-AccessLevelShareWithMe",
+    );
+    await expect(accessLevelColumn).toBeVisible();
+  });
 });

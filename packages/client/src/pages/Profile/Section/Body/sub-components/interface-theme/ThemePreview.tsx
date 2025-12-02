@@ -29,7 +29,7 @@ import { RadioButton } from "@docspace/shared/components/radio-button";
 
 import Preview from "SRC_DIR/pages/PortalSettings/categories/common/Appearance/preview";
 
-import { StyledWrapper } from "./InterfaceTheme.styled";
+import styles from "./interface-theme.module.scss";
 
 type ThemePreviewProps = {
   label: string;
@@ -57,8 +57,8 @@ const ThemePreview = (props: ThemePreviewProps) => {
   } = props;
 
   return (
-    <StyledWrapper>
-      <div className="card-header">
+    <div className={styles.wrapper}>
+      <div className={styles.cardHeader}>
         <RadioButton
           classNameInput={`theme-${theme.toLowerCase()}`}
           name={`theme-option-${value}`}
@@ -72,14 +72,14 @@ const ThemePreview = (props: ThemePreviewProps) => {
       </div>
       <Preview
         appliedColorAccent={accentColor}
-        floatingButtonClass="floating-btn"
+        floatingButtonClass={styles.floatingBtn}
         selectThemeId={themeId}
         previewAccent={accentColor}
         themePreview={theme}
         withBorder={false}
         withTileActions={false}
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

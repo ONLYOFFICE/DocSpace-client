@@ -36,14 +36,12 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.re
 
 import TariffBar from "SRC_DIR/components/TariffBar";
 
-import { StyledHeader } from "./StyledHeader";
 import useProfileHeader from "./useProfileHeader";
+import styles from "./header.module.scss";
 
 const Header = (props) => {
   const {
     isAdmin,
-    isVisitor,
-    isCollaborator,
 
     profile,
     setChangeEmailVisible,
@@ -77,27 +75,22 @@ const Header = (props) => {
   if (showProfileLoader) return <SectionHeaderSkeleton />;
 
   return (
-    <StyledHeader
-      showContextButton={
-        (isAdmin && !profile?.isOwner) || (!profile?.isLDAP && !profile?.isSSO)
-      }
-      isVisitor={isVisitor || isCollaborator}
-    >
+    <div className={styles.header}>
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
         isFill
         onClick={onClickBack}
-        className="arrow-button"
+        className={styles.arrowButton}
         dataTestId="header_arrow_back_icon_button"
       />
 
       <div>
-        <Heading className="header-headline" type="content">
+        <Heading className={styles.headerHeadline} type="content">
           {t("Profile:MyProfile")}
         </Heading>
       </div>
-      <div className="action-button">
+      <div className={styles.actionButton}>
         {(isAdmin && !profile?.isOwner) ||
         (!profile?.isLDAP && !profile?.isSSO) ? (
           <ContextMenuButton
@@ -112,12 +105,12 @@ const Header = (props) => {
           />
         ) : null}
 
-        <div className="tariff-bar">
+        <div className={styles.tariffBar}>
           <TariffBar />
         </div>
       </div>
       {profileDialogs}
-    </StyledHeader>
+    </div>
   );
 };
 

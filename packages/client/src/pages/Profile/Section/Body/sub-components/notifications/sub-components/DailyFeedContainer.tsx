@@ -32,6 +32,7 @@ import { Text } from "@docspace/shared/components/text";
 import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+import styles from "../Notifications.module.scss";
 
 type DailyFeedContainerProps = {
   t: TFunction;
@@ -60,8 +61,8 @@ const DailyFeedContainer = ({
   };
 
   return (
-    <div className="notification-container">
-      <div className="row">
+    <div className={styles.notificationContainer}>
+      <div className={styles.row}>
         <Text {...textProps} className="subscription-title">
           {t("DailyFeed", { productName: t("Common:ProductName") })}
         </Text>

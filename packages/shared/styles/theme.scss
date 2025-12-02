@@ -2989,6 +2989,17 @@
   --profile-pending-email-text-color: #{$gray};
   --profile-mobile-row-background: #{$gray-light};
   --profile-mobile-label: #{$gray};
+  --profile-theme-preview-border: 1px solid #{$gray-light-mid};
+  --profile-theme-preview-description: #{$gray};
+  --profile-text-color: #{$gray};
+  --profile-active-sessions-cell-color: #{$gray};
+  --profile-active-sessions-divider-color: #{$gray-strong};
+  --profile-notifications-description: #{$gray};
+  --profile-notifications-border: 1px solid #{$gray-light-mid};
+  --profile-oauth-description-color: #{$gray};
+  --profile-oauth-row-background: #{$light-gray-hover};
+  --profile-oauth-row-border: 1px solid #{$gray-light-mid};
+  --profile-oauth-checked-background: #{$light-gray-hover};
 }
 
 .dark {
@@ -2998,6 +3009,17 @@
   --profile-pending-email-text-color: #{$gray-dark};
   --profile-mobile-row-background: #{$light-dark-gray-hover};
   --profile-mobile-label: #{$gray-dark};
+  --profile-theme-preview-border: 1px solid #{$gray-dark-strong};
+  --profile-theme-preview-description: #{$gray-dark};
+  --profile-text-color: #{$gray-dark};
+  --profile-active-sessions-cell-color: #{$gray-dark};
+  --profile-active-sessions-divider-color: #{$gray-dark-strong};
+  --profile-notifications-description: #{$gray-dark};
+  --profile-notifications-border: 1px solid #{$gray-dark-strong};
+  --profile-oauth-description-color: #{$gray-dark};
+  --profile-oauth-row-background: #{$light-dark-gray-hover};
+  --profile-oauth-row-border: 1px solid #{$gray-dark-strong};
+  --profile-oauth-checked-background: #{$light-dark-gray-hover};
 }
 
 .light {

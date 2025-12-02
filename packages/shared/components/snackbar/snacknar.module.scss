@@ -53,6 +53,7 @@
   background-color: var(--snackbar-background-color);
   background-image: var(--background-image);
   border-inline-start: 4px solid var(--snackbar-border-color);
+  box-sizing: border-box;
 
   & > div,
   & > button {

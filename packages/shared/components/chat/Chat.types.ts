@@ -104,6 +104,7 @@ export type MessageButtonsProps = {
 export type MessageCodeBlockProps = {
   language?: string;
   content: string;
+  successCopyMessage?: string;
 };
 
 export type MessageErrorProps = {
@@ -119,6 +120,7 @@ export type MessageMarkdownFieldProps = {
   chatMessage: string;
   propLanguage?: string;
   isFirst?: boolean;
+  successCopyMessage?: string;
 };
 
 export type MessageToolCallProps = {
@@ -146,7 +148,6 @@ export type FilesListProps = {
 };
 
 export type ButtonsProps = {
-  inputWidth: number;
   isFilesSelectorVisible: boolean;
 
   toggleFilesSelector: VoidFunction;

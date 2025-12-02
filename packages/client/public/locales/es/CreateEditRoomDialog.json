@@ -2,7 +2,7 @@
   "AddStaticText": "Añadir texto estático",
   "AddWatermarkElements": "Añadir elementos de marca de agua",
   "AddWatermarksToDocuments": "Añadir marcas de agua a los documentos",
-  "AddWatermarksToDocumentsDescription": "Proteja todos los documentos de esta sala con marcas de agua. Si un documento ya contiene una, no se sustituirá.",
+  "AddWatermarksToDocumentsDescription": "Proteja todos los documentos de esta sala con marcas de agua.\nSi un documento ya contiene una marca de agua, no se sustituirá.\nCuando esta configuración está habilitada, los documentos solo se pueden descargar como archivos PDF para garantizar que la marca de agua permanezca intacta.",
   "AutomaticIndexing": "Indización automática",
   "AutomaticIndexingDescription": "Active la indización automática para indexar archivos y carpetas por número de serie. La ordenación por número se establecerá de forma predeterminada para todos los usuarios.",
   "ChooseRoomType": "Elegir el tipo de sala",

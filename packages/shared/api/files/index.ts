@@ -1724,10 +1724,14 @@ export async function getFilesUsedSpace(signal?: AbortSignal) {
   return res;
 }
 
-export async function getConnectingStorages() {
+export async function getConnectingStorages(paramsString?: string) {
+  const url = paramsString
+    ? `files/thirdparty/providers?${paramsString}`
+    : "files/thirdparty/providers";
+
   const res = (await request({
     method: "get",
-    url: "files/thirdparty/providers",
+    url,
   })) as TConnectingStorages;
 
   return res;

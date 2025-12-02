@@ -55,6 +55,7 @@ import {
   isSystemFolder,
 } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
+import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
@@ -232,6 +233,8 @@ class FilesStore {
   tempActionFoldersIds = EMPTY_ARRAY;
 
   isErrorRoomNotAvailable = false;
+
+  isErrorAIAgentNotAvailable = false;
 
   roomsController = null;
 
@@ -956,6 +959,10 @@ class FilesStore {
     this.isErrorRoomNotAvailable = state;
   };
 
+  setIsErrorAIAgentNotAvailable = (state) => {
+    this.isErrorAIAgentNotAvailable = state;
+  };
+
   setTempActionFilesIds = (tempActionFilesIds) => {
     this.tempActionFilesIds = tempActionFilesIds;
   };
@@ -1002,7 +1009,9 @@ class FilesStore {
 
   checkSelection = (file) => {
     if (this.selection) {
-      const foundIndex = this.selection?.findIndex((x) => x.id === file.id);
+      const foundIndex = this.selection?.findIndex((x) =>
+        isSameEntity(x, file),
+      );
       if (foundIndex > -1) {
         runInAction(() => {
           this.selection[foundIndex] = file;
@@ -1010,15 +1019,10 @@ class FilesStore {
       }
     }
 
-    if (this.bufferSelection) {
-      const foundIndex = [this.bufferSelection].findIndex(
-        (x) => x.id === file.id,
-      );
-      if (foundIndex > -1) {
-        runInAction(() => {
-          this.bufferSelection[foundIndex] = file;
-        });
-      }
+    if (isSameEntity(this.bufferSelection, file)) {
+      runInAction(() => {
+        this.bufferSelection = file;
+      });
     }
   };
 
@@ -1349,7 +1353,7 @@ class FilesStore {
 
   updateRoomMute = (index, status) => {
     this.folders[index].mute = status;
-    this.updateSelection(this.folders[index].id);
+    this.updateSelection(this.folders[index]);
   };
 
   setFile = (file) => {
@@ -1358,7 +1362,7 @@ class FilesStore {
     if (index !== -1) {
       this.files[index] = file;
       this.createThumbnail(file);
-      this.updateSelection(file.id);
+      this.updateSelection(file);
     }
   };
 
@@ -1380,21 +1384,26 @@ class FilesStore {
     this.setSelection(newSelection);
   };
 
-  updateSelection = (id) => {
-    const indexFileList = this.filesList.findIndex(
-      (filelist) => filelist.id === id,
+  updateSelection = (item) => {
+    const indexFileList = this.filesList.findIndex((file) =>
+      isSameEntity(file, item),
     );
-    const indexSelectedRoom = this.selection.findIndex(
-      (room) => room.id === id,
+    const indexSelectedRoom = this.selection.findIndex((selectionItem) =>
+      isSameEntity(selectionItem, item),
     );
 
     if (~indexFileList && ~indexSelectedRoom) {
       this.selection[indexSelectedRoom] = this.filesList[indexFileList];
     }
+
     if (this.bufferSelection) {
-      this.bufferSelection = this.filesList.find(
-        (file) => file.id === this.bufferSelection.id,
+      const newBuffer = this.filesList.find((file) =>
+        isSameEntity(file, this.bufferSelection),
       );
+
+      if (!newBuffer) return;
+
+      this.bufferSelection = newBuffer;
     }
   };
 
@@ -1406,7 +1415,7 @@ class FilesStore {
   updateFolder = (index, folder) => {
     if (index !== -1) this.folders[index] = folder;
 
-    this.updateSelection(folder.id);
+    this.updateSelection(folder);
   };
 
   setFolder = (folder) => {
@@ -1734,6 +1743,7 @@ class FilesStore {
       );
     }
 
+    this.setIsErrorAIAgentNotAvailable(false);
     this.setIsErrorRoomNotAvailable(false);
     this.setIsLoadedFetchFiles(false);
 
@@ -1832,13 +1842,6 @@ class FilesStore {
             );
           }
         });
-
-        if (this.isPreview) {
-          // save filter for after closing preview change url
-          this.setTempFilter(filterData);
-        } else {
-          this.setFilesFilter(filterData, folderId); // TODO: FILTER
-        }
 
         const isPrivacyFolder =
           data.current.rootFolderType === FolderType.Privacy;
@@ -2002,6 +2005,13 @@ class FilesStore {
         }
 
         runInAction(() => {
+          if (this.isPreview) {
+            // save filter for after closing preview change url
+            this.setTempFilter(filterData);
+          } else {
+            this.setFilesFilter(filterData, folderId); // TODO: FILTER
+          }
+
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             isRoom: !!data.current.roomType,
@@ -2142,7 +2152,16 @@ class FilesStore {
             frameCallEvent({ event: "onNoAccess" });
           }
 
-          this.setIsErrorRoomNotAvailable(true);
+          const categoryType = getCategoryType(window.location);
+
+          if (
+            categoryType === CategoryType.Chat ||
+            categoryType === CategoryType.AIAgent
+          ) {
+            this.setIsErrorAIAgentNotAvailable(true);
+          } else {
+            this.setIsErrorRoomNotAvailable(true);
+          }
         } else {
           toastr.error(err);
           if (isThirdPartyError) {
@@ -2503,7 +2522,7 @@ class FilesStore {
             this.roomsController = null;
           });
 
-          this.setIsErrorRoomNotAvailable(false);
+          this.setIsErrorAIAgentNotAvailable(false);
           return Promise.resolve(selectedFolder);
         })
         .catch((err) => {

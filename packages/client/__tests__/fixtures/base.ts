@@ -43,18 +43,6 @@ export const test = base.extend<{
       });
     });
 
-    // Route for client React static images (webpack bundled)
-    await page.route("*/**/client/static/media/**", async (route, request) => {
-      const imagePath = request
-        .url()
-        .split("/client/static/media/")
-        .at(-1)!
-        .split("?")[0];
-      await route.fulfill({
-        path: `../../public/images/${imagePath}`,
-      });
-    });
-
     await page.route("*/**/static/scripts/**", async (route, request) => {
       const scripts = request
         .url()

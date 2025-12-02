@@ -96,7 +96,7 @@ test.describe("Shared with me", () => {
     ]);
   });
 
-  test("should remove file from shared list via context menu and show empty state", async ({
+  test("should remove shared file via context menu and display empty state", async ({
     page,
     mockRequest,
     wsMock,
@@ -120,6 +120,70 @@ test.describe("Shared with me", () => {
 
     const removeFromListOption = page.getByTestId(
       "remove-shared-folder-or-file",
+    );
+    await expect(removeFromListOption).toBeVisible();
+
+    await removeFromListOption.click();
+
+    const deleteDialog = page.getByTestId("delete-dialog");
+
+    const submitButton = deleteDialog.getByTestId("delete_dialog_modal_submit");
+
+    await expect(submitButton).toBeVisible();
+
+    await mockRequest.router([endpoints.shareDelete]);
+
+    submitButton.click();
+
+    const loader = table.getByTestId("loader").first();
+
+    await expect(loader).toBeVisible();
+
+    wsMock.emitModifyFolder({
+      cmd: "delete",
+      id: 1,
+      type: "file",
+      data: "",
+    });
+
+    await loader.waitFor({ state: "detached" });
+
+    const emptyView = page.getByTestId("empty-view");
+    await expect(emptyView).toBeVisible();
+
+    wsMock.closeConnection();
+  });
+
+  test("should remove shared file via header menu and display empty state", async ({
+    page,
+    mockRequest,
+    wsMock,
+  }) => {
+    await mockRequest.router([
+      endpoints.sharedWithMe,
+      endpoints.settingsWithSocket,
+    ]);
+
+    await wsMock.setupWebSocketMock();
+
+    await page.goto("/shared-with-me/filter?folder=4");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const fileRow = table.locator("#file_1");
+    await expect(fileRow).toBeVisible();
+
+    const icon = fileRow.getByTestId("room-icon");
+
+    await icon.click();
+
+    const checkBox = fileRow.getByRole("checkbox");
+
+    await checkBox.check();
+
+    const removeFromListOption = page.locator(
+      "#menu-remove-from-shared-with-me",
     );
     await expect(removeFromListOption).toBeVisible();
 

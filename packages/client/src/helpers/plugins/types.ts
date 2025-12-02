@@ -152,7 +152,11 @@ export interface IContextMenuItem {
   key: string;
   label: string;
   icon: string;
-  onClick: (id: number) => Promise<IMessage> | Promise<void> | IMessage | void;
+  onClick?: (id: number) => Promise<IMessage> | Promise<void> | IMessage | void;
+  onGroupClick?: (
+    ids: number[],
+  ) => Promise<IMessage> | Promise<void> | IMessage | void;
+  isGroupAction?: boolean;
   withActiveItem?: boolean;
   fileExt?: string[];
   fileType?: PluginFileType[];

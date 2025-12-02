@@ -1015,6 +1015,68 @@ class ContextOptionsStore {
   //   return promise;
   // };
 
+  onMultiLoadPlugins = (items) => {
+    if (isAIAgents()) return [];
+
+    const { enablePlugins } = this.settingsStore;
+
+    const pluginItems = [];
+    this.setLoaderTimer(true);
+
+    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
+      this.pluginStore.contextMenuItemsList.forEach((option) => {
+        const processOptionValue = (value) => {
+
+          const isEveryItemIncludesOption = items.every(({ contextOptions }) => contextOptions.includes(value.key));
+
+          if (isEveryItemIncludesOption && value.isGroupAction) {
+
+            const filesIds = items.map(({ id }) => id);
+
+            const onClick = async () => {
+              if (value.withActiveItem) {
+                const { setActiveFiles } = this.filesStore;
+
+                setActiveFiles(filesIds);
+
+                await value.onGroupClick(filesIds);
+
+                setActiveFiles([]);
+              } else {
+                value.onGroupClick(filesIds);
+              }
+            };
+
+            const processedOptionValue = {
+              key: value.key,
+              id: value.key,
+              label: value.label,
+              icon: value.icon,
+              disabled: false,
+              onClick,
+            };
+
+            return processedOptionValue;
+          }
+        };
+
+        if (option.items && option.items.length > 0) {
+          option.items.forEach((nestedItem) => {
+            const processedItem = processOptionValue(nestedItem);
+            processedItem && pluginItems.push(processedItem);
+          });
+        } else {
+          const value = processOptionValue(option.value);
+          value && pluginItems.push(value);
+        }
+      });
+    }
+
+    this.setLoaderTimer(false);
+
+    return pluginItems;
+  };
+
   onLoadPlugins = (item) => {
     if (isAIAgents()) return [];
     const { contextOptions } = item;
@@ -2955,6 +3017,10 @@ class ContextOptionsStore {
     const { isCollaborator } = this.userStore?.user || {
       isCollaborator: false,
     };
+
+    const pluginItems = this.onMultiLoadPlugins(selection);
+
+    options.splice(1, 0, ...pluginItems);
 
     const newOptions = options.filter(
       (option, index) =>

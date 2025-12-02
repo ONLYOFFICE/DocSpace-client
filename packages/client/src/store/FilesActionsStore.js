@@ -2413,6 +2413,8 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       .set("delete", {
+        id: "menu-remove-from-shared-with-me",
+        key: "remove-from-shared-with-me",
         label: t("Common:RemoveFromList"),
         onClick: () => {
           setUnsubscribe(true);

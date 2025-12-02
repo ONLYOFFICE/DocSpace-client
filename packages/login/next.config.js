@@ -31,8 +31,7 @@ const fs = require("fs");
 
 // Use fs.readFileSync instead of require to avoid module system issues
 const packagePath = path.resolve(__dirname, "package.json");
-const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
-console.log("Package loaded successfully:", pkg.name, pkg.version);
+const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
 const BannerPlugin = require("webpack").BannerPlugin;
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");

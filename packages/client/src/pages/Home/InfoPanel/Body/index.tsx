@@ -163,7 +163,7 @@ const InfoPanelBodyContent = ({
 
   React.useEffect(() => {
     if (fileView.indexOf("info_plugin") > -1 && isAgent) {
-      setView(InfoPanelView.infoDetails);
+      setView(InfoPanelView.infoMembers);
     }
   }, [fileView, isAgent]);
 

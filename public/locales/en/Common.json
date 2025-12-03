@@ -1077,6 +1077,8 @@
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
   "DomainAlreadyAdded": "This domain has already been added",
+  "IpAlreadyAdded": "This IP address has already been added",
+  "IncorrectIp": "Incorrect IP address",
   "PrivateRoomTitle": "Private Room",
   "PrivateRoomDescription": "All files in this room will be encrypted"
 }

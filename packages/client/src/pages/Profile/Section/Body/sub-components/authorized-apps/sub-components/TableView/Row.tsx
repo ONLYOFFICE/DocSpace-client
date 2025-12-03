@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-
-import { TableCell } from "@docspace/shared/components/table";
+import classNames from "classnames";
+import { TableCell, TableRow } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
@@ -10,8 +10,8 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import NameCell from "./columns/name";
 
-import { StyledRowWrapper, StyledTableRow } from "./TableView.styled";
 import { RowProps } from "./TableView.types";
+import styles from "../../authorized-apps.module.scss";
 
 const Row = (props: RowProps) => {
   const {
@@ -36,8 +36,9 @@ const Row = (props: RowProps) => {
     getContextMenuItems ? getContextMenuItems(t, item, false, false) : [];
 
   return (
-    <StyledRowWrapper className="handle">
-      <StyledTableRow
+    <div className={classNames(styles.rowWrapper, "handle")}>
+      <TableRow
+        className={styles.tableRow}
         contextOptions={contextOptions}
         getContextModel={getContextMenuModel}
         isIndexEditingMode={false}
@@ -59,10 +60,14 @@ const Row = (props: RowProps) => {
           <Text
             as="span"
             fontWeight={400}
-            className="mr-8 textOverflow description-text"
+            className={classNames(
+              styles.descriptionText,
+              styles.textOverflow,
+              styles.mr8,
+            )}
           >
             <Link
-              className="description-text"
+              className={styles.descriptionText}
               href={item.websiteUrl}
               type={LinkType.action}
               target={LinkTarget.blank}
@@ -78,14 +83,18 @@ const Row = (props: RowProps) => {
           <Text
             as="span"
             fontWeight={400}
-            className="mr-8 textOverflow description-text"
+            className={classNames(
+              styles.descriptionText,
+              styles.textOverflow,
+              styles.mr8,
+            )}
             dataTestId="modified_date_text"
           >
             {modifiedDate}
           </Text>
         </TableCell>
-      </StyledTableRow>
-    </StyledRowWrapper>
+      </TableRow>
+    </div>
   );
 };
 

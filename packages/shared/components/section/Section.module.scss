@@ -211,7 +211,7 @@
       outline: none;
       @include paddingStyles;
 
-      &:has(.chat-container) {
+      &:has(.chat-container:not([style*="display: none"])) {
         padding-block: 0;
       }
 

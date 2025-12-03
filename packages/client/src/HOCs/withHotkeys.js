@@ -97,6 +97,7 @@ const withHotkeys = (Component) => {
       isParentFolderFormRoom,
       isIndexEditingMode,
       enableSelection,
+      openContextMenu,
       askAIAction,
     } = props;
 
@@ -116,8 +117,11 @@ const withHotkeys = (Component) => {
     };
 
     const onKeyDown = (e) => {
+      const contextMenuIsOpen =
+        document.getElementsByClassName("p-contextmenu").length;
+
       const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
+      setIsEnabled(!someDialogIsOpen || !contextMenuIsOpen);
 
       if (isIndexEditingMode) return;
 
@@ -224,8 +228,11 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "*",
       (e) => {
+        const contextMenuIsOpen =
+          document.getElementsByClassName("p-contextmenu").length;
         const someDialogIsOpen = checkDialogsOpen();
-        if (someDialogIsOpen) return;
+
+        if (someDialogIsOpen || contextMenuIsOpen) return e;
 
         if (
           (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
@@ -256,6 +263,9 @@ const withHotkeys = (Component) => {
           case "ArrowLeft":
           case "h": {
             return selectLeft();
+          }
+          case "Enter": {
+            return openItem();
           }
 
           default:
@@ -315,7 +325,7 @@ const withHotkeys = (Component) => {
     useHotkeys("ctrl+RIGHT, command+RIGHT", moveCaretRight, hotkeysFilter);
 
     // Open item
-    useHotkeys("Enter", () => openItem(t), hotkeysFilter);
+    // useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     // Back to parent folder
     useHotkeys(
@@ -377,6 +387,11 @@ const withHotkeys = (Component) => {
 
     // Crete room
     useHotkeys("Shift+r", () => onCreateRoom(), {
+      ...hotkeysFilter,
+      ...{ keyup: true },
+    });
+
+    useHotkeys("Shift+c", openContextMenu, {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
@@ -552,6 +567,7 @@ const withHotkeys = (Component) => {
         uploadFile,
         copyToClipboard,
         uploadClipboardFiles,
+        openContextMenu,
         enableSelection,
       } = hotkeyStore;
 
@@ -622,6 +638,7 @@ const withHotkeys = (Component) => {
         deselectAll,
         activateHotkeys,
         onClickBack,
+        openContextMenu,
 
         uploadFile,
         enabledHotkeys,

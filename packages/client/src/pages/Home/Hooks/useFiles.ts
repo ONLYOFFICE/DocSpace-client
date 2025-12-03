@@ -64,6 +64,7 @@ export type UseFilesProps = {
   setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
   scrollToTop: FilesStore["scrollToTop"];
   wsCreatedPDFForm: FilesStore["wsCreatedPDFForm"];
+  setHotkeyCaret: FilesStore["setHotkeyCaret"];
 
   playlist: MediaViewerDataStore["playlist"];
   setToPreviewFile: MediaViewerDataStore["setToPreviewFile"];
@@ -84,6 +85,7 @@ const useFiles = ({
   setIsUpdatingRowItem,
   scrollToTop,
   wsCreatedPDFForm,
+  setHotkeyCaret,
 
   playlist,
   setToPreviewFile,
@@ -96,6 +98,16 @@ const useFiles = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
+
+  const setFocus = () => {
+    const scroll = document.getElementsByClassName("section-body");
+
+    if (scroll && scroll[0]) {
+      const firstChild = scroll[0] as HTMLElement;
+      firstChild.focus();
+      setHotkeyCaret(null);
+    }
+  };
 
   const fetchDefaultFiles = (categoryType: ValueOf<typeof CategoryType>) => {
     const filter = FilesFilter.getDefault({
@@ -340,6 +352,7 @@ const useFiles = ({
         }
       })
       .finally(() => {
+        setFocus();
         scrollToTop();
       });
   }, [

@@ -2776,7 +2776,7 @@ class FilesActionStore {
   onClickBack = (fromHotkeys = true) => {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
-    const { clearFiles, setBufferSelection } = this.filesStore;
+    const { clearFiles, setBufferSelection, setSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
@@ -2786,6 +2786,7 @@ class FilesActionStore {
     }
 
     setBufferSelection(null);
+    setSelection([]);
 
     const categoryType = getCategoryType(window.DocSpace.location);
 

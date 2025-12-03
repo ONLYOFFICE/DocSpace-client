@@ -40,7 +40,7 @@ import {
   BackupCodesDialog,
 } from "SRC_DIR/components/dialogs";
 
-import { StyledWrapper } from "./LoginSettings.styled";
+import styles from "../login.module.scss";
 
 type LoginSettingsProps = {
   profile?: TUser;
@@ -71,16 +71,16 @@ const LoginSettings = (props: LoginSettingsProps) => {
   }, []);
 
   return (
-    <StyledWrapper>
-      <div className="header">
+    <div className={styles.loginSettingsWrapper}>
+      <div className={styles.header}>
         <Text fontSize="16px" fontWeight={700} lineHeight="22px">
           {t("Settings:TwoFactorAuth")}
         </Text>
-        <Text className="description">{t("TwoFactorDescription")}</Text>
+        <Text className={styles.description}>{t("TwoFactorDescription")}</Text>
       </div>
-      <div className="actions">
+      <div className={styles.actions}>
         <Button
-          className="button"
+          className={styles.button}
           label={t("ShowBackupCodes")}
           onClick={() => setBackupCodesDialogVisible(true)}
           size={ButtonSize.small}
@@ -122,7 +122,7 @@ const LoginSettings = (props: LoginSettingsProps) => {
           setBackupCodes={setBackupCodes}
         />
       ) : null}
-    </StyledWrapper>
+    </div>
   );
 };
 

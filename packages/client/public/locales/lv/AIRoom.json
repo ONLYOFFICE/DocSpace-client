@@ -5,7 +5,6 @@
   "AIInstructions": "MI instrukcijas",
   "CreateChat": "Izveidot tērzēšanu",
   "CreateChatDescription": "Dodieties uz MI-Čata cilni, lai sāktu.",
-  "EmptyKnowledgeDescription": "Faili, kas tiek augšupielādēti šeit, tiks indeksēti un izmantoti kā konteksts MI-Čat cilnē. Pievienojiet failus, lai jautātu AI par tiem, ģenerētu saturu vai analizētu informāciju kopā.",
   "EmptyKnowledgeDescriptionActions": "Izmēģiniet šos soļus, lai sāktu:",
   "EmptyKnowledgeTitle": "Vēl nav pievienoti faili",
   "EmptyResultsDescription": "Faili, kas ģenerēti MI-Chat, automātiski parādīsies šeit. Katreiz, kad ģenerējat saturu, sākat tērzēšanu vai nosūtāt ziņojumu ar izvadi, rezultāts tiks saglabāts šajā sadaļā.",

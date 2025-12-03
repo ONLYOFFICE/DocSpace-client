@@ -5,7 +5,6 @@
   "AIInstructions": "AI Talimatları",
   "CreateChat": "Sohbet oluştur",
   "CreateChatDescription": "AI-Chat sekmesine giderek başlayın.",
-  "EmptyKnowledgeDescription": "Buraya yüklenen dosyalar, AI-Chat sekmesinde bağlam olarak indekslenecek ve kullanılacaktır. Yapay zekâya sorular sormak, içerik oluşturmak veya bilgileri birlikte analiz etmek için dosyalar ekleyin.",
   "EmptyKnowledgeDescriptionActions": "Başlamak için aşağıdaki eylemleri deneyin:",
   "EmptyKnowledgeTitle": "Henüz dosya yüklenmedi",
   "EmptyResultsDescription": "AI Sohbeti'nde oluşturulan dosyalar burada otomatik olarak görünür. İçerik oluşturduğunuzda, bir sohbet başlattığınızda veya çıktı içeren bir mesaj gönderdiğinizde, sonuç bu bölümde kaydedilecektir.",

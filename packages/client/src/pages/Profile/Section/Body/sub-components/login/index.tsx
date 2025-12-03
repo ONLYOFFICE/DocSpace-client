@@ -29,7 +29,7 @@ import SocialNetworks from "./social-networks";
 import ActiveSession from "./active-session";
 import LoginCampaign from "./campaign";
 
-import { StyledWrapper } from "./Login.styled";
+import styles from "./login.module.scss";
 
 type LoginContentProps = {
   tfaOn: boolean;
@@ -37,12 +37,12 @@ type LoginContentProps = {
 
 const LoginContent = ({ tfaOn }: LoginContentProps) => {
   return (
-    <StyledWrapper>
+    <div className={styles.wrapper}>
       <LoginCampaign />
       {tfaOn ? <LoginSettings /> : null}
       <SocialNetworks />
       <ActiveSession />
-    </StyledWrapper>
+    </div>
   );
 };
 

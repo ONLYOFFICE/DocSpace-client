@@ -64,6 +64,7 @@ const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
       onClick={onClick}
       folderId="document_catalog-bonus"
       style={{ marginBottom: "16px" }}
+      linkData={{ path: bonusUrl }}
       $currentColorScheme={currentColorScheme}
     />
   );

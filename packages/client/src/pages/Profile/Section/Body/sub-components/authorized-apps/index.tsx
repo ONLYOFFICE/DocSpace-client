@@ -10,13 +10,13 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import InfoDialog from "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog";
 
-import { StyledContainer } from "./AuthorizedApps.styled";
 import { AuthorizedAppsProps } from "./AuthorizedApps.types";
 
 import TableView from "./sub-components/TableView";
 import RowView from "./sub-components/RowView";
 import RevokeDialog from "./sub-components/RevokeDialog";
 import EmptyScreen from "./sub-components/EmptyScreen";
+import styles from "./authorized-apps.module.scss";
 
 const AuthorizedApps = ({
   consents,
@@ -42,7 +42,7 @@ const AuthorizedApps = ({
   });
 
   return (
-    <StyledContainer>
+    <div className={styles.container}>
       {consents && consents?.length > 0 ? (
         <>
           <Text fontSize="12px" fontWeight="400" lineHeight="16px">
@@ -82,7 +82,7 @@ const AuthorizedApps = ({
           logoText={logoText!}
         />
       ) : null}
-    </StyledContainer>
+    </div>
   );
 };
 

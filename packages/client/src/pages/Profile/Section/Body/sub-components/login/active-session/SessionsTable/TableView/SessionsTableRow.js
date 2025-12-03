@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
@@ -34,36 +33,7 @@ import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import { globalColors } from "@docspace/shared/themes";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const StyledTableRow = styled(TableRow).attrs(injectDefaultTheme)`
-  .session-platform {
-    font-weight: 600;
-    margin-inline-end: 5px;
-  }
-
-  .session-info {
-    font-weight: 600;
-    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-  }
-
-  .divider {
-    display: inline-block;
-    height: 12px;
-    width: 2px;
-    background-color: ${(props) =>
-      props.theme.profile.activeSessions.dividerColor};
-    margin: -2px 5px;
-  }
-
-  .tick-icon {
-    margin-inline-start: 8px;
-  }
-
-  .remove-cell {
-    justify-content: flex-end;
-  }
-`;
+import styles from "../../active-sessions.module.scss";
 
 const SessionsTableRow = (props) => {
   const {
@@ -90,23 +60,23 @@ const SessionsTableRow = (props) => {
   };
 
   return (
-    <StyledTableRow
+    <TableRow
       key={item.id}
       hideColumns={hideColumns}
       dataTestId={`session_row_${item.id}`}
     >
       <TableCell>
-        <Text className="session-platform" dataTestId="session_platform">
+        <Text className={styles.sessionPlatform} dataTestId="session_platform">
           {platform}
         </Text>
         <Text
-          className="session-info"
+          className={styles.sessionInfo}
           dataTestId="session_browser"
         >{`(${browser})`}</Text>
         {showTickIcon ? (
           <IconButton
             size={12}
-            className="tick-icon"
+            className={styles.tickIcon}
             color={globalColors.tickColor}
             iconName={TickSvgUrl}
           />
@@ -114,13 +84,17 @@ const SessionsTableRow = (props) => {
       </TableCell>
 
       <TableCell>
-        <Text className="session-info" truncate dataTestId="session_date">
+        <Text className={styles.sessionInfo} truncate dataTestId="session_date">
           {getCorrectDate(locale, date)}
         </Text>
       </TableCell>
 
       <TableCell>
-        <Text className="session-info" truncate dataTestId="session_location">
+        <Text
+          className={styles.sessionInfo}
+          truncate
+          dataTestId="session_location"
+        >
           {country || city ? (
             <>
               {country}
@@ -134,7 +108,7 @@ const SessionsTableRow = (props) => {
       </TableCell>
 
       {showRemoveIcon ? (
-        <TableCell className="remove-cell">
+        <TableCell className={styles.removeCell}>
           <IconButton
             size={20}
             iconName={RemoveSessionSvgUrl}
@@ -144,7 +118,7 @@ const SessionsTableRow = (props) => {
           />
         </TableCell>
       ) : null}
-    </StyledTableRow>
+    </TableRow>
   );
 };
 

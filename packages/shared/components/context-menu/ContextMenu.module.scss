@@ -391,6 +391,10 @@
   }
 }
 
+.activeDescendant {
+  background-color: var(--drop-down-item-hover-color);
+}
+
 .menuItemWithToggle {
   justify-content: space-between;
 }

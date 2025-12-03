@@ -1,19 +1,19 @@
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { RowContent as RowContentComponent } from "@docspace/shared/components/rows";
 import { globalColors } from "@docspace/shared/themes";
 
-import {
-  StyledRowContent,
-  ContentWrapper,
-  FlexWrapper,
-} from "./RowView.styled";
 import { RowContentProps } from "./RowView.types";
+import styles from "../../authorized-apps.module.scss";
 
 export const RowContent = ({ sectionWidth, item }: RowContentProps) => {
   return (
-    <StyledRowContent sectionWidth={sectionWidth}>
-      <ContentWrapper>
-        <FlexWrapper>
+    <RowContentComponent
+      sectionWidth={sectionWidth}
+      className={styles.rowContent}
+    >
+      <div className={styles.contentWrapper}>
+        <div className={styles.flexWrapper}>
           <Text
             fontWeight={600}
             fontSize="14px"
@@ -21,7 +21,7 @@ export const RowContent = ({ sectionWidth, item }: RowContentProps) => {
           >
             {item.name}
           </Text>
-        </FlexWrapper>
+        </div>
 
         <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
           <Link
@@ -35,8 +35,8 @@ export const RowContent = ({ sectionWidth, item }: RowContentProps) => {
             {item.websiteUrl}
           </Link>
         </Text>
-      </ContentWrapper>
+      </div>
       <div />
-    </StyledRowContent>
+    </RowContentComponent>
   );
 };

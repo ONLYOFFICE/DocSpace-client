@@ -186,6 +186,7 @@ export interface ContextMenuProps {
   dataTestId?: string;
   maxHeightLowerSubmenu?: number;
   showDisabledItems?: boolean;
+  withHotkeys?: boolean;
   withoutBackHeaderButton?: boolean;
 }
 

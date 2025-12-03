@@ -2,7 +2,7 @@
   "AddStaticText": "정적 텍스트 추가",
   "AddWatermarkElements": "워터마크 요소 추가",
   "AddWatermarksToDocuments": "문서에 워터마크 추가",
-  "AddWatermarksToDocumentsDescription": "이 룸의 모든 문서를 워터마크로 보호합니다. 문서에 이미 워터마크가 포함되어 있는 경우 대체되지 않습니다. ",
+  "AddWatermarksToDocumentsDescription": "이 방의 모든 문서에 워터마크를 적용합니다.\n문서에 이미 워터마크가 있는 경우, 워터마크는 대체되지 않습니다.\n이 설정을 활성화하면 워터마크가 손상되지 않도록 문서 다운로드가 PDF 형식으로만 가능합니다.",
   "AutomaticIndexing": "자동 인덱싱",
   "AutomaticIndexingDescription": "일련 번호로 파일과 폴더를 인덱싱하기 위해 자동 인덱싱을 활성화하세요. 모든 사용자에게 번호순 정렬이 기본으로 설정됩니다.",
   "ChooseRoomType": "방 유형 선택",

@@ -55,6 +55,7 @@ import {
   isSystemFolder,
 } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
+import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
@@ -1008,7 +1009,9 @@ class FilesStore {
 
   checkSelection = (file) => {
     if (this.selection) {
-      const foundIndex = this.selection?.findIndex((x) => x.id === file.id);
+      const foundIndex = this.selection?.findIndex((x) =>
+        isSameEntity(x, file),
+      );
       if (foundIndex > -1) {
         runInAction(() => {
           this.selection[foundIndex] = file;
@@ -1016,15 +1019,10 @@ class FilesStore {
       }
     }
 
-    if (this.bufferSelection) {
-      const foundIndex = [this.bufferSelection].findIndex(
-        (x) => x.id === file.id,
-      );
-      if (foundIndex > -1) {
-        runInAction(() => {
-          this.bufferSelection[foundIndex] = file;
-        });
-      }
+    if (isSameEntity(this.bufferSelection, file)) {
+      runInAction(() => {
+        this.bufferSelection = file;
+      });
     }
   };
 
@@ -1355,7 +1353,7 @@ class FilesStore {
 
   updateRoomMute = (index, status) => {
     this.folders[index].mute = status;
-    this.updateSelection(this.folders[index].id);
+    this.updateSelection(this.folders[index]);
   };
 
   setFile = (file) => {
@@ -1364,7 +1362,7 @@ class FilesStore {
     if (index !== -1) {
       this.files[index] = file;
       this.createThumbnail(file);
-      this.updateSelection(file.id);
+      this.updateSelection(file);
     }
   };
 
@@ -1386,21 +1384,26 @@ class FilesStore {
     this.setSelection(newSelection);
   };
 
-  updateSelection = (id) => {
-    const indexFileList = this.filesList.findIndex(
-      (filelist) => filelist.id === id,
+  updateSelection = (item) => {
+    const indexFileList = this.filesList.findIndex((file) =>
+      isSameEntity(file, item),
     );
-    const indexSelectedRoom = this.selection.findIndex(
-      (room) => room.id === id,
+    const indexSelectedRoom = this.selection.findIndex((selectionItem) =>
+      isSameEntity(selectionItem, item),
     );
 
     if (~indexFileList && ~indexSelectedRoom) {
       this.selection[indexSelectedRoom] = this.filesList[indexFileList];
     }
+
     if (this.bufferSelection) {
-      this.bufferSelection = this.filesList.find(
-        (file) => file.id === this.bufferSelection.id,
+      const newBuffer = this.filesList.find((file) =>
+        isSameEntity(file, this.bufferSelection),
       );
+
+      if (!newBuffer) return;
+
+      this.bufferSelection = newBuffer;
     }
   };
 
@@ -1412,7 +1415,7 @@ class FilesStore {
   updateFolder = (index, folder) => {
     if (index !== -1) this.folders[index] = folder;
 
-    this.updateSelection(folder.id);
+    this.updateSelection(folder);
   };
 
   setFolder = (folder) => {

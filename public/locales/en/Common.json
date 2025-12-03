@@ -1079,5 +1079,8 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "DomainAlreadyAdded": "This domain has already been added",
+  "IpAlreadyAdded": "This IP address has already been added",
+  "IncorrectIp": "Incorrect IP address"
 }

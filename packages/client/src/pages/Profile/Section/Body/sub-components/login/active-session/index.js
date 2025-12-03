@@ -29,7 +29,6 @@ import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -43,28 +42,7 @@ import {
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import SessionsTable from "./SessionsTable";
-
-const StyledWrapper = styled.div`
-  .auto-delete-title {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 20px;
-    margin-top: 8px;
-    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-  }
-  .terminate-session-container {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 10px 0 0;
-  }
-  .terminate-all-sessions {
-    font-size: 13px;
-    font-weight: 600;
-    margin-inline-end: 5px;
-  }
-`;
+import styles from "./active-sessions.module.scss";
 
 const ActiveSessions = ({
   t,
@@ -145,17 +123,17 @@ const ActiveSessions = ({
   );
 
   return (
-    <StyledWrapper>
+    <div>
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("Profile:ActiveSessions")}
       </Text>
 
       {/* TODO: Uncomment after fix on backend */}
-      {/* <Text className="auto-delete-title">{t("Profile:AutoDeleteTitle")}</Text> */}
+      {/* <Text className={styles.autoDeleteTitle}>{t("Profile:AutoDeleteTitle")}</Text> */}
 
-      <div className="terminate-session-container">
+      <div className={styles.terminateSessionContainer}>
         <Link
-          className="terminate-all-sessions"
+          className={styles.terminateAllSessions}
           type="action"
           isHovered
           onClick={() => setLogoutAllDialogVisible(true)}
@@ -194,7 +172,7 @@ const ActiveSessions = ({
           onRemoveAllExceptThis={onClickRemoveAllExceptThis}
         />
       ) : null}
-    </StyledWrapper>
+    </div>
   );
 };
 

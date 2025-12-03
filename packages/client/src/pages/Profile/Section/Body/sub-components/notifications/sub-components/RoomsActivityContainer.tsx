@@ -33,6 +33,7 @@ import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+import styles from "../Notifications.module.scss";
 
 type RoomsActivityContainerProps = {
   t: TFunction;
@@ -61,11 +62,12 @@ const RoomsActivityContainer = ({
   };
 
   return (
-    <div className="notification-container">
-      <div className="row">
+    <div className={styles.notificationContainer}>
+      <div className={styles.row}>
         <Text {...textProps} className="subscription-title">
           {t("RoomUpdateNotify", {
-            sectionName: t("Common:Rooms"),
+            rooms: t("Common:Rooms"),
+            aiAgents: t("Common:AIAgents"),
           })}
         </Text>
         <ToggleButton
@@ -77,7 +79,8 @@ const RoomsActivityContainer = ({
       </div>
       <Text {...textDescriptionsProps}>
         {t("RoomsActivityDescription", {
-          sectionName: t("Common:Rooms"),
+          rooms: t("Common:Rooms"),
+          aiAgents: t("Common:AIAgents"),
         })}
       </Text>
     </div>

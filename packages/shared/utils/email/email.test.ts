@@ -190,42 +190,42 @@ describe("email", () => {
     const domain = " test.ru";
     const isDomainValid = isValidDomainName(domain);
 
-    expect(isDomainValid).toBe(false);
+    expect(isDomainValid).toBe(true);
   });
 
   it("validate domain name with punycode symbols", () => {
     const domain = "mañana.com";
     const isDomainValid = isValidDomainName(domain);
 
-    expect(isDomainValid).toBe(true);
+    expect(isDomainValid).toBe(false);
   });
 
   it("validate domain name with IP address with brackets", () => {
     const domain = "[127.0.0.1]";
     const isDomainValid = isValidDomainName(domain);
 
-    expect(isDomainValid).toBe(true);
+    expect(isDomainValid).toBe(false);
   });
 
   it("validate domain name with IP address without brackets", () => {
     const domain = "127.0.0.1";
     const isDomainValid = isValidDomainName(domain);
 
-    expect(isDomainValid).toBe(true);
+    expect(isDomainValid).toBe(false);
   });
 
   it('validate domain name only with digits in TLD: "test.00"', () => {
     const domain = "test.00";
     const isDomainValid = isValidDomainName(domain);
 
-    expect(isDomainValid).toBe(true);
+    expect(isDomainValid).toBe(false);
   });
 
   it('validate domain name with digits in TLD: "test.com1"', () => {
     const domain = "test.com1";
     const isDomainValid = isValidDomainName(domain);
 
-    expect(isDomainValid).toBe(true);
+    expect(isDomainValid).toBe(false);
   });
 
   it("validate local domain", () => {

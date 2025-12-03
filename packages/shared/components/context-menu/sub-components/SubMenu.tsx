@@ -62,9 +62,6 @@ const SUBMENU_LIST_MARGIN = 4; // Indentation of the second level menu from the 
 const SECTION_PADDING = 16; // Screen margin
 const MIN_SUBMENU_WIDTH = 240; // Minimum width for submenu on mobile devices
 
-const OPEN_DELAY = 200;
-const HIDE_DELAY = 400;
-
 type SubMenuProps = {
   model: ContextMenuModel[];
   root?: boolean;
@@ -77,12 +74,26 @@ type SubMenuProps = {
   onLoad?: () => Promise<ContextMenuModel[]>;
   changeView?: boolean;
   withHeader?: boolean;
-  onSubMenuMouseEnter?: () => void;
 
   isLowerSubmenu?: boolean;
   maxHeightLowerSubmenu?: number;
-  menuHovered?: boolean;
+
+  mouseMoveHandler?: (
+    index: number,
+    model: ContextMenuModel[],
+    level: number,
+  ) => void;
+  currentIndex?: number;
+  menuLevel?: number;
+  activeLevel: number;
   showDisabledItems?: boolean;
+  setActiveHotkeysModel: (
+    item: ContextMenuType,
+    model: ContextMenuModel[],
+    level: number,
+  ) => void;
+  activeItems: ContextMenuType[] | null;
+  setActiveItems: (items: ContextMenuType[]) => void;
 };
 
 const SubMenu = (props: SubMenuProps) => {
@@ -96,77 +107,28 @@ const SubMenu = (props: SubMenuProps) => {
 
     changeView,
     withHeader,
-    onSubMenuMouseEnter,
     isLowerSubmenu,
     maxHeightLowerSubmenu,
-    menuHovered,
+    mouseMoveHandler,
+    currentIndex,
+    activeLevel,
+    menuLevel = 0,
+    setActiveHotkeysModel,
+
+    activeItems,
+    setActiveItems,
     showDisabledItems,
   } = props;
 
   const [model, setModel] = useState(props?.model);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeItem, setActiveItem] = useState<ContextMenuType | null>(null);
-  const [activeItemKey, setActiveItemKey] = useState<string | number | null>(
-    null,
-  );
+  // const [activeItemKey, setActiveItemKey] = useState<string | number | null>(
+  //   null,
+  // );
   const [widthSubMenu, setWidthSubMenu] = useState<null | number>(null);
 
   const prevWidthSubMenu = useRef<number | null>(null);
   const subMenuRef = useRef<HTMLUListElement>(null);
-
-  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const keepClosingRef = useRef<boolean>(false);
-  const openTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const subMenuHoveredRef = useRef<boolean>(false);
-
-  const clearOpen = () => {
-    if (openTimeoutRef.current) {
-      clearTimeout(openTimeoutRef.current);
-      openTimeoutRef.current = null;
-    }
-  };
-
-  const clearHide = () => {
-    if (hideTimeoutRef.current) {
-      clearTimeout(hideTimeoutRef.current);
-      hideTimeoutRef.current = null;
-    }
-  };
-
-  const cancelAll = () => {
-    clearOpen();
-    clearHide();
-    keepClosingRef.current = false;
-  };
-
-  const scheduleOpen = (itm: ContextMenuType, delay = OPEN_DELAY) => {
-    clearOpen();
-    clearHide();
-    keepClosingRef.current = false;
-    if (delay === 0) {
-      setActiveItem(itm);
-      setActiveItemKey(itm.key);
-      return;
-    }
-    openTimeoutRef.current = setTimeout(() => {
-      if (keepClosingRef.current) return;
-      setActiveItem(itm);
-      setActiveItemKey(itm.key);
-    }, delay);
-  };
-
-  const scheduleHide = (delay = HIDE_DELAY) => {
-    clearOpen();
-    keepClosingRef.current = true;
-    clearHide();
-    hideTimeoutRef.current = setTimeout(() => {
-      if (keepClosingRef.current) {
-        setActiveItem(null);
-        setActiveItemKey(null);
-        keepClosingRef.current = false;
-      }
-    }, delay);
-  };
 
   const { isBase } = useTheme();
   const { isRTL } = useInterfaceDirection();
@@ -177,75 +139,8 @@ const SubMenu = (props: SubMenuProps) => {
       return;
     }
 
-    const hasSubMenu = !!(item.items || item.onLoad);
-
-    if (keepClosingRef.current) {
-      if (hasSubMenu) {
-        keepClosingRef.current = false;
-        clearHide();
-      }
-    }
-
-    if (activeItem && !hasSubMenu) {
-      if (!hideTimeoutRef.current) scheduleHide(HIDE_DELAY);
-      return;
-    }
-
-    if (keepClosingRef.current) return;
-
-    if (hasSubMenu) {
-      if (root) {
-        cancelAll();
-        setActiveItem(item);
-        setActiveItemKey(item.key);
-        return;
-      }
-
-      scheduleOpen(item, OPEN_DELAY);
-      return;
-    }
-
-    if (!hideTimeoutRef.current) scheduleHide(HIDE_DELAY);
+    setActiveHotkeysModel(item, model, menuLevel);
   };
-
-  const onItemMouseLeave = (item: ContextMenuType) => {
-    if (isMobileDevice) return;
-
-    if (item.items || item.onLoad) {
-      clearOpen();
-      scheduleHide(HIDE_DELAY);
-    }
-  };
-
-  const handleSubMenuMouseEnter = () => {
-    if (isMobileDevice) return;
-
-    clearHide();
-
-    keepClosingRef.current = false;
-    clearOpen();
-    subMenuHoveredRef.current = true;
-  };
-
-  const handleSubMenuMouseLeave = () => {
-    if (isMobileDevice) return;
-    subMenuHoveredRef.current = false;
-    scheduleHide(HIDE_DELAY);
-  };
-
-  useEffect(() => {
-    if (isMobileDevice) return;
-    if (menuHovered === undefined) return;
-
-    if (!menuHovered) {
-      // Don't schedule hide if the pointer is currently over the submenu
-      if (!subMenuHoveredRef.current) {
-        scheduleHide(HIDE_DELAY);
-      }
-    } else {
-      if (!keepClosingRef.current && hideTimeoutRef.current) clearHide();
-    }
-  }, [menuHovered]);
 
   const onItemClick = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -277,8 +172,8 @@ const SubMenu = (props: SubMenuProps) => {
     onClick?.({ originalEvent: e, action, item });
 
     if ((items || item.onLoad) && isMobileDevice) {
-      setActiveItem(item);
-      setActiveItemKey(item.key);
+      setActiveItems([item]);
+      // setActiveItemKey(item.key);
 
       e.stopPropagation();
       return;
@@ -471,22 +366,6 @@ const SubMenu = (props: SubMenuProps) => {
     }
   }, [props.model]);
 
-  useEffect(() => {
-    if (!activeItemKey) return;
-
-    const item = model.find(
-      (item) => item.key === activeItemKey,
-    ) as ContextMenuType;
-
-    setActiveItem(item || null);
-  }, [model, activeItemKey]);
-
-  useEffect(() => {
-    return () => {
-      cancelAll();
-    };
-  }, []);
-
   const renderSeparator = (index: number, style: React.CSSProperties) => (
     <li
       key={`separator_${index}`}
@@ -503,7 +382,11 @@ const SubMenu = (props: SubMenuProps) => {
   ) => {
     if (showDisabledItems ? false : item.disabled) return;
     // TODO: Not render disabled items
-    const active = activeItem === item;
+
+    const activeItemsactiveItems = activeItems?.find((x) => x.key === item.key);
+
+    const active = !!activeItemsactiveItems;
+
     const className = classNames(
       "p-menuitem",
       { "p-menuitem-active": active },
@@ -645,79 +528,56 @@ const SubMenu = (props: SubMenuProps) => {
     const toggleTooltipId = `context-menu-item-toggle-tooltip-${item.key}`;
     const itemTooltipId = `context-menu-item-tooltip-${item.key}`;
 
-    if (item.withToggle) {
-      const tooltipTargetId = item.tooltipTarget === "toggle" ? toggleTooltipId : itemTooltipId;
+    const tooltipTargetId =
+      item.tooltipTarget === "toggle" ? toggleTooltipId : itemTooltipId;
 
-      return (
-        <>
-          <li
-            id={item.id}
-            key={item.key}
-            data-testid={item.dataTestId ?? item.key}
-            role="none"
-            className={classNames(className, styles.subMenuItem, {
-              [styles.noHover]: item.disabled,
-            })}
-            style={{ ...item.style, ...style }}
-            onClick={onClick}
-            onMouseDown={onMouseDown}
-            onMouseEnter={(e) => onItemMouseEnter(e, item)}
-            onMouseLeave={() => onItemMouseLeave(item)}
-            data-tooltip-id={item.disabled ? itemTooltipId : undefined}
-          >
-            {content}
-            <ToggleButton
-              isChecked={item.checked || false}
-              onChange={onClick}
-              noAnimation
-              isDisabled={item?.disabled ?? false}
-              dataTooltipId={item.disabled ? toggleTooltipId : undefined}
-            />
-          </li>
-          {item.disabled && item.getTooltipContent ? (
-            <Tooltip
-              className="context-menu-item-tooltip"
-              openOnClick={isTouchDevice}
-              id={tooltipTargetId}
-              getContent={item.getTooltipContent}
-              place="bottom"
-              zIndex={1003}
-              clickable
-            />
-          ) : null}
-        </>
-      );
-    }
+    const isActiveDescendant =
+      currentIndex === index && activeLevel == menuLevel;
 
     return (
-      <>
-        <li
-          id={item.id}
-          key={item.key}
-          data-testid={item.dataTestId ?? item.key}
-          role="none"
-          className={className || ""}
-          style={{ ...item.style, ...style }}
-          onClick={onClick}
-          onDoubleClick={onDoubleClick}
-          onMouseDown={onMouseDown}
-          onMouseEnter={(e) => onItemMouseEnter(e, item)}
-          onMouseLeave={() => onItemMouseLeave(item)}
-          data-tooltip-id={item.disabled ? itemTooltipId : undefined}
-        >
-          {content}
-        </li>
+      <li
+        id={item.id}
+        key={item.key}
+        data-testid={item.dataTestId ?? item.key}
+        data-focused={isActiveDescendant}
+        data-tooltip-id={item.disabled ? itemTooltipId : undefined}
+        role="none"
+        className={
+          item.withToggle
+            ? classNames(className, styles.subMenuItem, {
+                [styles.activeDescendant]: isActiveDescendant,
+              })
+            : classNames(className, {
+                [styles.activeDescendant]: isActiveDescendant,
+              })
+        }
+        style={{ ...item.style, ...style }}
+        onClick={onClick}
+        onDoubleClick={onDoubleClick}
+        onMouseDown={onMouseDown}
+        onMouseEnter={(e) => onItemMouseEnter(e, item)}
+        onMouseMove={() => mouseMoveHandler?.(index, model, menuLevel)}
+      >
+        {content}
+        {item.withToggle ? (
+          <ToggleButton
+            isChecked={item.checked || false}
+            onChange={onClick}
+            noAnimation
+            isDisabled={item?.disabled ?? false}
+          />
+        ) : null}
         {item.disabled && item.getTooltipContent ? (
           <Tooltip
             float
             openOnClick={isTouchDevice}
-            id={itemTooltipId}
+            id={tooltipTargetId}
             getContent={item.getTooltipContent}
             place="bottom-end"
             zIndex={1003}
           />
         ) : null}
-      </>
+      </li>
     );
   };
 
@@ -777,6 +637,10 @@ const SubMenu = (props: SubMenuProps) => {
     model.forEach((item) => {
       const contextMenuTypeItem = item as ContextMenuType;
 
+      const level = menuLevel + 1;
+
+      const activeItemactiveItem = activeItems?.find((x) => x.key === item.key);
+
       if (contextMenuTypeItem?.items || contextMenuTypeItem?.onLoad) {
         submenu.push(
           <SubMenu
@@ -786,10 +650,16 @@ const SubMenu = (props: SubMenuProps) => {
                 ? [loaderItem]
                 : contextMenuTypeItem?.items || []
             }
-            resetMenu={item !== activeItem}
+            resetMenu={!activeItemactiveItem}
             onLeafClick={onLeafClick}
             onLoad={contextMenuTypeItem?.onLoad}
-            onSubMenuMouseEnter={handleSubMenuMouseEnter}
+            mouseMoveHandler={mouseMoveHandler}
+            menuLevel={level}
+            activeLevel={activeLevel}
+            currentIndex={currentIndex}
+            setActiveHotkeysModel={setActiveHotkeysModel}
+            activeItems={activeItems}
+            setActiveItems={setActiveItems}
             isLowerSubmenu
             maxHeightLowerSubmenu={maxHeightLowerSubmenu}
           />,
@@ -863,8 +733,6 @@ const SubMenu = (props: SubMenuProps) => {
                 }),
             } as React.CSSProperties
           }
-          onMouseEnter={onSubMenuMouseEnter || handleSubMenuMouseEnter}
-          onMouseLeave={handleSubMenuMouseLeave}
         >
           <Scrollbar style={{ height: listHeight }}>{submenu}</Scrollbar>
           {submenuLower}

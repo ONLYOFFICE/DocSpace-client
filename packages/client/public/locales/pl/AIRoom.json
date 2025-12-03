@@ -5,7 +5,6 @@
   "AIInstructions": "Instrukcje AI",
   "CreateChat": "Utwórz czat",
   "CreateChatDescription": "Przejdź do zakładki AI-Chat, aby rozpocząć.",
-  "EmptyKnowledgeDescription": "Pliki przesłane tutaj zostaną zindeksowane i wykorzystane jako kontekst w zakładce AI-Chat. Dodawaj pliki, aby pytać AI o nie, generować treści lub wspólnie analizować informacje.",
   "EmptyKnowledgeDescriptionActions": "Spróbuj wykonać te czynności, aby zacząć:",
   "EmptyKnowledgeTitle": "Jeszcze nie przesłano żadnych plików.",
   "EmptyResultsDescription": "Pliki generowane w AI-Chat pojawią się tutaj automatycznie. Za każdym razem, gdy wygenerujesz treść, rozpoczniesz czat lub wyślesz wiadomość z wynikiem, rezultat zostanie zapisany w tej sekcji.",

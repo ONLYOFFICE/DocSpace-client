@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Badges will highlight file activity — uploads, edits, or shares — across the {{rooms}}, {{shared}}, and {{documents}} sections.",
+  "ActionsWithFilesDescription": "Badges will highlight file activity — uploads, edits, or shares — across the {{rooms}}, {{shared}}, {{documents}}, and {{aiAgents}} sections.",
   "AdminSetupRequired": "Admin setup required",
   "Badges": "Badges",
   "DailyFeed": "Daily {{productName}} feed",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "This user account is loaded from LDAP. The user's email address was not specified, and the current one was generated automatically and cannot be used to send notifications.",
   "NotConfigured": "Not configured",
   "Notifications": "Notifications",
-  "RoomsActivityDescription": "Get instant email notifications about new shared files/folders and activity inside your {{sectionName}}.",
-  "RoomUpdateNotify": "Shared content and {{sectionName}} activity",
+  "RoomsActivityDescription": "Get instant email notifications about new shared files/folders and activity inside your {{rooms}} and {{aiAgents}}.",
+  "RoomUpdateNotify": "Shared content, {{rooms}} and {{aiAgents}} activity",
   "SettingUpNotifications": "Setting up notifications",
   "SuccessConnected": "{{serviceName}} has been successfully connected as a notification channel. You will now receive updates there.",
   "SuccessDisconnected": "{{serviceName}} has been successfully disconnected as a notification channel. Notifications will no longer be sent there.",

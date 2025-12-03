@@ -154,6 +154,7 @@ const View = ({
 
   selectedFolderStore,
   wsCreatedPDFForm,
+  setHotkeyCaret,
   clearFiles,
 
   setIsSectionHeaderLoading,
@@ -271,6 +272,7 @@ const View = ({
     scrollToTop,
     selectedFolderStore,
     wsCreatedPDFForm,
+    setHotkeyCaret,
   });
 
   const { getProfileInitialValue } = useProfileBody({
@@ -566,7 +568,7 @@ const View = ({
   };
 
   const shouldRedirectToResultStorage =
-    currentView === "chat" && !!selectedFolderStore.id && !canUseChat;
+    currentView === "chat" && !!selectedFolderStore.id && !canUseChat && !showBodyLoader; 
 
   if (shouldRedirectToResultStorage) {
     const agentId = selectedFolderStore.id || "";
@@ -676,6 +678,7 @@ export const ViewComponent = inject(
       setIsPreview,
       setIsUpdatingRowItem,
       wsCreatedPDFForm,
+      setHotkeyCaret,
 
       filesController,
       roomsController,
@@ -741,6 +744,7 @@ export const ViewComponent = inject(
       setIsPreview,
       setIsUpdatingRowItem,
       wsCreatedPDFForm,
+      setHotkeyCaret,
 
       setIsChangePageRequestRunning,
       setCurrentClientView,

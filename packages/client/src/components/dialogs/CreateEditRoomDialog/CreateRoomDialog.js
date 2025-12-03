@@ -310,7 +310,6 @@ const CreateRoomDialog = ({
             isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
             type="submit"
-            onClick={onCreateRoom}
             testId="create_room_dialog_save"
           />
           <Button

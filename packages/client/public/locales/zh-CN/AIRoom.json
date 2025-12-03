@@ -5,7 +5,6 @@
   "AIInstructions": "AI 指令",
   "CreateChat": "创建对话",
   "CreateChatDescription": "请前往 AI 对话标签页开始使用。",
-  "EmptyKnowledgeDescription": "此处上传的文件将被建立索引，并作为 AI 对话标签页的上下文信息。添加文件后可向 AI 提问、生成内容或共同分析信息。",
   "EmptyKnowledgeDescriptionActions": "尝试以下操作以开始使用：",
   "EmptyKnowledgeTitle": "暂未上传文件",
   "EmptyResultsDescription": "AI 对话中生成的文件将自动显示在此处。每当您生成内容、开启对话或发送带有输出的消息时，结果都会保存在此。",

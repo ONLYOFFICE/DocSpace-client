@@ -87,6 +87,7 @@ const RoomsActionsContainer = ({
           rooms: t("Common:Rooms"),
           shared: t("Common:SharedWithMe"),
           documents: t("Common:MyDocuments"),
+          aiAgents: t("Common:AIAgents"),
         })}
       </Text>
     </div>

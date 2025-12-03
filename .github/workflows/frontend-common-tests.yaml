@@ -158,7 +158,7 @@ jobs:
       - name: Install pnpm dependencies
         run: pnpm install --frozen-lockfile
       - name: Install common test npm dependencies
-        working-directory: ./common/Tests
+        working-directory: ./common/tests
         run: npm ci --prefer-offline
 
       # Run Biome (if needed)
@@ -197,7 +197,7 @@ jobs:
       - name: Run images tests
         id: images
         if: needs.changes.outputs.images == 'true' || needs.changes.outputs.workflow == 'true'
-        working-directory: ./common/Tests
+        working-directory: ./common/tests
         run: |
           echo "🖼️ Running images tests..."
           if npm run test:images; then
@@ -214,7 +214,7 @@ jobs:
       - name: Run colors tests
         id: colors
         if: needs.changes.outputs.colors == 'true' || needs.changes.outputs.workflow == 'true'
-        working-directory: ./common/Tests
+        working-directory: ./common/tests
         run: |
           echo "🎨 Running colors tests..."
           if npm run test:colors; then
@@ -231,7 +231,7 @@ jobs:
       - name: Run ascii tests
         id: ascii
         if: needs.changes.outputs.ascii == 'true' || needs.changes.outputs.workflow == 'true'
-        working-directory: ./common/Tests
+        working-directory: ./common/tests
         run: |
           echo "🔤 Running ascii tests..."
           if npm run test:ascii; then
@@ -248,7 +248,7 @@ jobs:
       - name: Run locales tests
         id: locales
         if: needs.changes.outputs.locales == 'true' || needs.changes.outputs.workflow == 'true'
-        working-directory: ./common/Tests
+        working-directory: ./common/tests
         run: |
           echo "🌐 Running locales tests..."
           if npm run test:skip-base-languages; then
@@ -280,7 +280,7 @@ jobs:
 
           # Run dependency tests
           echo "🔍 Running dependency tests..."
-          cd ./common/Tests
+          cd ./common/tests
           if ! npm run test:dependencies; then
             echo "❌ Dependency tests failed"
             DEPS_TEST_SUCCESS=false

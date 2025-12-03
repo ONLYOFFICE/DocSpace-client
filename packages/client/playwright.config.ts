@@ -51,7 +51,21 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [["html", { outputFolder: "../../playwright-report/client" }]],
+  reporter: [
+    [
+      process.env.CI ? "dot" : "html",
+      {
+        outputFolder: "../../playwright-report/client",
+        open: "never",
+      },
+    ],
+    [
+      "json",
+      {
+        outputFile: "../../playwright-report/client/test-results.json",
+      },
+    ],
+  ],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -64,7 +78,7 @@ export default defineConfig({
   snapshotPathTemplate: "{testDir}/screenshots{/projectName}/{arg}{ext}",
   expect: {
     toHaveScreenshot: {
-      maxDiffPixelRatio: 0.01,
+      threshold: 0.16,
     },
   },
 
@@ -72,7 +86,10 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1440, height: 1024 },
+      },
     },
     /*     {
       name: "firefox",

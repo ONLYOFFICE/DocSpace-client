@@ -36,6 +36,7 @@ import { showSuccessCreateFolder } from "SRC_DIR/helpers/toast-helpers";
 import config from "PACKAGE_FILE";
 
 import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
+import { setEncryptionAccess } from "SRC_DIR/helpers/desktop";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { frameCallEvent } from "@docspace/shared/utils/common";
@@ -79,6 +80,9 @@ const CreateEvent = ({
 
   isFrame,
   frameConfig,
+
+  updatePrivateFile,
+  isPrivacyFolder,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -145,7 +149,11 @@ const CreateEvent = ({
           });
       } else {
         try {
-          if (openEditor && !(isFrame && frameConfig?.events?.onEditorOpen)) {
+          if (
+            openEditor &&
+            !(isFrame && frameConfig?.events?.onEditorOpen) &&
+            !isPrivacyFolder
+          ) {
             const searchParams = new URLSearchParams();
 
             searchParams.append("parentId", parentId);
@@ -189,23 +197,34 @@ const CreateEvent = ({
             return;
           }
 
-          await createFile(
-            +parentId,
-            `${newValue}.${extension}`,
-            templateId,
-            gallerySelected?.id,
-          )
-            .then((data) => {
-              if (isFrame && frameConfig?.events?.onEditorOpen) {
-                frameCallEvent({
-                  event: "onEditorOpen",
-                  data,
-                });
+          try {
+            const data = await createFile(
+              +parentId,
+              `${newValue}.${extension}`,
+              templateId,
+              gallerySelected?.id,
+            );
+
+            if (isPrivacyFolder) {
+              const encryptedFile = await setEncryptionAccess(data);
+
+              if (encryptedFile) {
+                toastr.success(t("Common:EncryptedFileSaving"));
+
+                await api.files.updateFileStream(
+                  data.id,
+                  encryptedFile,
+                  true,
+                  false,
+                );
+                await updatePrivateFile(data.id);
               }
-            })
-            .catch((error) => {
-              toastr.error(error);
-            });
+            } else if (isFrame && frameConfig?.events?.onEditorOpen) {
+              frameCallEvent({ event: "onEditorOpen", data });
+            }
+          } catch (error) {
+            toastr.error(error);
+          }
         } catch (error) {
           toastr.error(error);
         } finally {
@@ -297,6 +316,7 @@ export default inject(
 
       setIsUpdatingRowItem,
       setCreatedItem,
+      updatePrivateFile,
     } = filesStore;
 
     const { gallerySelected, setGallerySelected } = oformsStore;
@@ -339,7 +359,6 @@ export default inject(
       isIndexing: isIndexedFolder,
 
       isDesktop: isDesktopClient,
-      isPrivacy: isPrivacyFolder,
       isTrashFolder: isRecycleBinFolder,
       completeAction,
       openItemAction,
@@ -356,6 +375,9 @@ export default inject(
 
       isFrame,
       frameConfig,
+
+      updatePrivateFile,
+      isPrivacyFolder,
     };
   },
 )(observer(CreateEvent));

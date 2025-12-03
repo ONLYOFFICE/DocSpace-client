@@ -1344,6 +1344,14 @@ class FilesStore {
     this.files[index].fileStatus = status;
   };
 
+  updatePrivateFile = (id) => {
+    const index = this.getFileIndex(id);
+
+    if (index < 0) return;
+
+    this.files[index].encrypted = true;
+  }
+
   updateFileVectorizationStatus = (fileId, status) => {
     const foundIndex = this.files.findIndex((file) => file.id === fileId);
     if (foundIndex < 0) return;

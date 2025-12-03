@@ -1258,25 +1258,25 @@ export async function getEncryptionKeys() {
 export async function getEncryptionAccess(fileId: number | string) {
   const res = (await request({
     method: "get",
-    url: `privacyroom/access/${fileId}`,
+    url: `files/${fileId}/access`,
     data: fileId,
   })) as { [key: string]: string | boolean };
 
   return res;
 }
 
-// export function updateFileStream(file, fileId, encrypted, forcesave) {
-//   let fd = new FormData();
-//   fd.append("file", file);
-//   fd.append("encrypted", encrypted);
-//   fd.append("forcesave", forcesave);
+export function updateFileStream(fileId, file, encrypted, forcesave) {
+  const fd = new FormData();
+  fd.append("file", file);
+  fd.append("encrypted", encrypted);
+  fd.append("forcesave", forcesave);
 
-//   return request({
-//     method: "put",
-//     url: `/files/${fileId}/update`,
-//     data: fd,
-//   });
-// }
+  return request({
+    method: "put",
+    url: `/files/${fileId}/update`,
+    data: fd,
+  });
+}
 
 export async function setFavoritesSetting(set: boolean) {
   const res = (await request({

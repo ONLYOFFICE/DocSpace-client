@@ -5,7 +5,6 @@
   "AIInstructions": "Udhëzimet e AI",
   "CreateChat": "Krijoni bisedë",
   "CreateChatDescription": "Shkoni te skeda Bisedë - IA për të filluar.",
-  "EmptyKnowledgeDescription": "Skedarët e ngarkuar këtu do të indeksohen dhe do të përdoren si kontekst në skedën Bisedë - IA. Shtoni skedarë për të pyetur IA-në rreth tyre, për të gjeneruar përmbajtje ose për të analizuar informacionin së bashku.",
   "EmptyKnowledgeDescriptionActions": "Provoni këto veprime për të filluar:",
   "EmptyKnowledgeTitle": "Nuk ka ende skedarë të ngarkuar",
   "EmptyResultsDescription": "Skedarët e gjeneruar në Bisedë - IA do të shfaqen këtu automatikisht. Sa herë që gjeneroni përmbajtje, filloni një bisedë ose dërgoni një mesazh me rezultat, rezultati do të ruhet në këtë seksion.",

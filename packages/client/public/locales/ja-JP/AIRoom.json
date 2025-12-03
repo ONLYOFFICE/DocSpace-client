@@ -5,7 +5,6 @@
   "AIInstructions": "AIの使い方",
   "CreateChat": "チャットを作成",
   "CreateChatDescription": "始めるにはAIチャットタブに移動してください。",
-  "EmptyKnowledgeDescription": "ここにアップロードされたファイルはインデックス化され、AIチャットタブのコンテキストとして使用されます。ファイルを追加してAIに質問したり、コンテンツを生成したり、情報を共同で分析したりできます。",
   "EmptyKnowledgeDescriptionActions": "まずは次のアクションを試してください：",
   "EmptyKnowledgeTitle": "ファイルはまだアップロードされていません",
   "EmptyResultsDescription": "AIチャットで生成されたファイルはここに自動的に表示されます。コンテンツを生成したり、チャットを開始したり、出力結果を含むメッセージを送信したりするたびに、結果はこのセクションに保存されます。",

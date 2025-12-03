@@ -1906,7 +1906,11 @@ class ContextOptionsStore {
       {
         id: "option_view",
         key: "view",
-        label: t("Common:View"),
+        label:
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? t("Open")
+            : t("Common:View"),
         icon: EyeReactSvgUrl,
         onClick: (fileId) => this.onMediaFileClick(fileId, item),
         disabled: false,

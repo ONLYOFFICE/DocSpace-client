@@ -154,6 +154,7 @@ const View = ({
 
   selectedFolderStore,
   wsCreatedPDFForm,
+  setHotkeyCaret,
   clearFiles,
 
   setIsSectionHeaderLoading,
@@ -271,6 +272,7 @@ const View = ({
     scrollToTop,
     selectedFolderStore,
     wsCreatedPDFForm,
+    setHotkeyCaret,
   });
 
   const { getProfileInitialValue } = useProfileBody({
@@ -676,6 +678,7 @@ export const ViewComponent = inject(
       setIsPreview,
       setIsUpdatingRowItem,
       wsCreatedPDFForm,
+      setHotkeyCaret,
 
       filesController,
       roomsController,
@@ -741,6 +744,7 @@ export const ViewComponent = inject(
       setIsPreview,
       setIsUpdatingRowItem,
       wsCreatedPDFForm,
+      setHotkeyCaret,
 
       setIsChangePageRequestRunning,
       setCurrentClientView,

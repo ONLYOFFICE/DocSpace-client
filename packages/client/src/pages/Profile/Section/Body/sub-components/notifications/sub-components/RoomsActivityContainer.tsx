@@ -66,7 +66,8 @@ const RoomsActivityContainer = ({
       <div className={styles.row}>
         <Text {...textProps} className="subscription-title">
           {t("RoomUpdateNotify", {
-            sectionName: t("Common:Rooms"),
+            rooms: t("Common:Rooms"),
+            aiAgents: t("Common:AIAgents"),
           })}
         </Text>
         <ToggleButton
@@ -78,7 +79,8 @@ const RoomsActivityContainer = ({
       </div>
       <Text {...textDescriptionsProps}>
         {t("RoomsActivityDescription", {
-          sectionName: t("Common:Rooms"),
+          rooms: t("Common:Rooms"),
+          aiAgents: t("Common:AIAgents"),
         })}
       </Text>
     </div>

@@ -5,7 +5,6 @@
   "AIInstructions": "AI pokyny",
   "CreateChat": "Vytvoriť chat",
   "CreateChatDescription": "Pre začatie kliknite na záložku AI-Chat.",
-  "EmptyKnowledgeDescription": "Súbory nahrané sem budú indexované a použité ako kontext v záložke AI-Chat. Pridajte súbory, aby ste sa ich opýtali AI, generovali obsah alebo analyzovali informácie spoločne.",
   "EmptyKnowledgeDescriptionActions": "Skúste tieto kroky, aby ste začali:",
   "EmptyKnowledgeTitle": "Zatiaľ neboli nahraté žiadne súbory.",
   "EmptyResultsDescription": "Súbory generované v AI-Chat sa tu zobrazia automaticky. Kedykoľvek vygenerujete obsah, spustíte chat alebo pošlete správu s výstupom, výsledok sa uloží v tejto sekcii.",

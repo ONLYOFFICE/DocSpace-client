@@ -120,7 +120,7 @@ const FilesView = ({
       return ShareLinkService.getPrimaryLink(selection);
   });
 
-  const { isPlugin, infoPanelItem, isPluginTitleVisible } = usePlugin(
+  const { isPlugin, infoPanelItem, isPluginHeaderVisible } = usePlugin(
     currentView,
     infoPanelItemsList,
   );
@@ -383,7 +383,7 @@ const FilesView = ({
   const pluginProps = isPlugin
     ? {
         isPlugin,
-        isPluginTitleVisible,
+        isPluginHeaderVisible,
       }
     : {};
 

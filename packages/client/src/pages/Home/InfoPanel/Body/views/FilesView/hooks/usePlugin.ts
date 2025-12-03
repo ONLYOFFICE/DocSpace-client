@@ -1,4 +1,3 @@
-import { IInfoPanelItem } from "SRC_DIR/helpers/plugins/types";
 import PluginStore from "SRC_DIR/store/PluginStore";
 
 export const usePlugin = (
@@ -8,15 +7,16 @@ export const usePlugin = (
   const isPlugin = currentView.indexOf("info_plugin") > -1;
   const infoPanelItemKey = currentView.replace("info_plugin-", "");
 
-  const infoPanelItem: IInfoPanelItem | undefined = infoPanelItemsList?.find(
+  const infoPanelItem = infoPanelItemsList?.find(
     (i) => i.key === infoPanelItemKey,
   )?.value;
 
-  const isPluginTitleVisible = !!infoPanelItem && infoPanelItem.isTitleVisible;
+  const isPluginHeaderVisible =
+    !!infoPanelItem && infoPanelItem.isHeaderVisible;
 
   return {
     isPlugin,
-    isPluginTitleVisible,
+    isPluginHeaderVisible,
     infoPanelItem,
   };
 };

@@ -76,6 +76,7 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
       size={InputSize.base}
       resetOnBlur
       dataTestId="selector_search_input"
+      tabIndex={1}
     />
   );
 });

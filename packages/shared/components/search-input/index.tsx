@@ -64,6 +64,7 @@ const SearchInput = ({
   onFocus,
   children,
   dataTestId,
+  tabIndex,
 }: SearchInputProps) => {
   const [inputValue, setInputValue] = useState(value);
 
@@ -165,6 +166,7 @@ const SearchInput = ({
           !!inputValue || showClearButton ? handleClearSearch : undefined
         }
         placeholder={placeholder}
+        tabIndex={tabIndex}
       >
         {children}
       </InputBlock>

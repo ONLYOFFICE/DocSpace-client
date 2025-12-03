@@ -27,7 +27,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { isMobile, isDesktop as isDesktopUtil } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 
@@ -66,41 +66,37 @@ const NavMenu = (props) => {
   } = props;
 
   const timeout = React.useRef(null);
+  const scrollTopRef = React.useRef(0);
 
   const location = useLocation();
 
   const [isBackdropVisible, setIsBackdropVisible] = useState(
     isBackdropVisibleProp,
   );
-  const [isNavOpened, setIsNavOpened] = useState(isNavHoverEnabledProp);
-  const [isAsideVisible, setIsAsideVisible] = useState(isNavOpenedProp);
-  const [isNavHoverEnabled, setIsNavHoverEnabled] =
-    useState(isAsideVisibleProp);
-  const [scrollTop, setScrollTop] = useState(0);
+  const [isNavOpened, setIsNavOpened] = useState(isNavOpenedProp);
+  const [isAsideVisible, setIsAsideVisible] = useState(isAsideVisibleProp);
+  const [isNavHoverEnabled, setIsNavHoverEnabled] = useState(
+    isNavHoverEnabledProp,
+  );
   const [isFixed, setIsFixed] = useState(true);
 
-  const onScroll = useCallback(
-    (e) => {
-      const eventTarget = e.target;
-      const currentScrollTop = Math.max(0, eventTarget.scrollTop);
-      const scrollHeight = eventTarget.scrollHeight;
-      const clientHeight = eventTarget.clientHeight;
+  const onScroll = useCallback((e) => {
+    const eventTarget = e.target;
+    const currentScrollTop = Math.max(0, eventTarget.scrollTop);
+    const scrollHeight = eventTarget.scrollHeight;
+    const clientHeight = eventTarget.clientHeight;
 
-      setScrollTop(currentScrollTop ?? 0);
+    const scrollShift = scrollTopRef.current - currentScrollTop;
+    scrollTopRef.current = currentScrollTop;
 
-      const scrollShift = scrollTop - currentScrollTop;
+    const isNearBottom = scrollHeight - (currentScrollTop + clientHeight) < 100;
 
-      const isNearBottom =
-        scrollHeight - (currentScrollTop + clientHeight) < 100;
-
-      if (scrollShift > 0 && !isNearBottom) {
-        setIsFixed(true);
-      } else if (scrollShift <= 0) {
-        setIsFixed(false);
-      }
-    },
-    [scrollTop],
-  );
+    if (scrollShift > 0 && !isNearBottom) {
+      setIsFixed(true);
+    } else if (scrollShift <= 0) {
+      setIsFixed(false);
+    }
+  }, []);
 
   useEffect(() => {
     const scroll = isMobile()

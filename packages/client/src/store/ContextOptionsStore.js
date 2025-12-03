@@ -2847,6 +2847,8 @@ class ContextOptionsStore {
       (x) => x.providerKey && x.id === x.rootFolderId,
     );
 
+    const canCreateRoom = selection.some((k) => k.security?.CreateRoomFrom);
+
     const options = [
       /* {
         key: "mark-as-favorite",
@@ -2863,7 +2865,7 @@ class ContextOptionsStore {
         label: t("Common:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
         onClick: () => this.onCreateRoom(null, true),
-        disabled: !selection.security?.CreateRoomFrom,
+        disabled: !canCreateRoom,
       },
       {
         key: "vectorization",

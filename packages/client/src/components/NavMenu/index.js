@@ -121,6 +121,11 @@ const NavMenu = (props) => {
     };
   }, [isFixed]);
 
+  useEffect(() => {
+    setIsFixed(false);
+    scrollTopRef.current = 0;
+  }, [location.pathname]);
+
   const backdropClick = () => {
     setIsBackdropVisible(false);
     setIsNavOpened(false);

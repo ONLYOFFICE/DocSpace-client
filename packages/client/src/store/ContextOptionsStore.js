@@ -1828,7 +1828,10 @@ class ContextOptionsStore {
         label: t("Open"),
         icon: FolderReactSvgUrl,
         onClick: () => this.onOpenFolder(item, t),
-        disabled: Boolean(item.external && item.isLinkExpired),
+        disabled:
+          !this.treeFoldersStore.isFavoritesFolder &&
+          !this.treeFoldersStore.isRecentFolder &&
+          Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_fill-form",
@@ -2624,7 +2627,7 @@ class ContextOptionsStore {
 
     if (item.isFolder && !item.isRoom) {
       const groups = [
-        ["select", "open"],
+        ["select", "open", "open-location"],
         ["share", "show-info"],
         [
           "mark-as-favorite",

@@ -55,8 +55,10 @@ import Share from "../Share";
 import Plugin from "../Plugin";
 
 import { useHistory } from "./hooks/useHistory";
+import { usePlugin } from "./hooks/usePlugin";
 import { useMembers } from "./hooks/useMembers";
 import { useShare } from "./hooks/useShare";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
 type FilesViewProps = {
   currentView: InfoPanelView | `info_plugin-${string}`;
@@ -66,6 +68,7 @@ type FilesViewProps = {
 
   setExternalLinks?: PublicRoomStore["setExternalLinks"];
 
+  infoPanelItemsList?: PluginStore["infoPanelItemsList"];
   infoPanelRoomSelection?: InfoPanelStore["infoPanelRoomSelection"];
   isMembersPanelUpdating?: InfoPanelStore["isMembersPanelUpdating"];
   setIsMembersPanelUpdating?: InfoPanelStore["setIsMembersPanelUpdating"];
@@ -76,6 +79,8 @@ const FilesView = ({
   selection,
   isArchive,
   setExternalLinks,
+
+  infoPanelItemsList,
 
   infoPanelRoomSelection,
   isMembersPanelUpdating,
@@ -114,6 +119,11 @@ const FilesView = ({
     )
       return ShareLinkService.getPrimaryLink(selection);
   });
+
+  const { isPlugin, infoPanelItem, isPluginTitleVisible } = usePlugin(
+    currentView,
+    infoPanelItemsList,
+  );
 
   const {
     history,
@@ -350,8 +360,8 @@ const FilesView = ({
       );
     }
 
-    // @ts-expect-error fixed after rewrite plugin to ts
-    if (currentView.indexOf("info_plugin") > -1) return <Plugin />;
+    if (isPlugin)
+      return <Plugin selection={selection} infoPanelItem={infoPanelItem} />;
 
     return value;
   };
@@ -370,6 +380,13 @@ const FilesView = ({
       }
     : {};
 
+  const pluginProps = isPlugin
+    ? {
+        isPlugin,
+        isPluginTitleVisible,
+      }
+    : {};
+
   return (
     <div data-testid="info_panel_files_view_container">
       <ItemTitle
@@ -378,6 +395,7 @@ const FilesView = ({
             ? { ...infoPanelRoomSelection!, isRoom: true }!
             : selection
         }
+        {...pluginProps}
         {...roomMembersProps}
       />
       <LoaderWrapper
@@ -413,21 +431,27 @@ const FilesView = ({
 
 FilesView.displayName = "FilesView";
 
-export default inject(({ publicRoomStore, infoPanelStore }: TStore) => {
-  const { setExternalLinks } = publicRoomStore;
+export default inject(
+  ({ publicRoomStore, infoPanelStore, pluginStore }: TStore) => {
+    const { setExternalLinks } = publicRoomStore;
 
-  const {
-    infoPanelRoomSelection,
-    isMembersPanelUpdating,
-    setIsMembersPanelUpdating,
-  } = infoPanelStore;
+    const {
+      infoPanelRoomSelection,
+      isMembersPanelUpdating,
+      setIsMembersPanelUpdating,
+    } = infoPanelStore;
 
-  return {
-    infoPanelRoomSelection,
+    const { infoPanelItemsList } = pluginStore;
 
-    setExternalLinks,
+    return {
+      infoPanelRoomSelection,
 
-    isMembersPanelUpdating,
-    setIsMembersPanelUpdating,
-  };
-})(observer(FilesView));
+      infoPanelItemsList,
+
+      setExternalLinks,
+
+      isMembersPanelUpdating,
+      setIsMembersPanelUpdating,
+    };
+  },
+)(observer(FilesView));

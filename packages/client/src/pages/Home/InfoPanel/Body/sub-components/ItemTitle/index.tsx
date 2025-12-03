@@ -36,6 +36,8 @@ type ItemTitleProps = {
   isNoItem?: boolean;
   isGallery?: boolean;
   isContacts?: boolean;
+  isPlugin?: boolean;
+  isPluginTitleVisible?: boolean;
 } & (
   | {
       isRoomMembersPanel: true;
@@ -56,9 +58,13 @@ const ItemTitle = ({
   isContacts,
 
   isRoomMembersPanel,
+  isPluginTitleVisible,
+  isPlugin,
   searchProps,
 }: ItemTitleProps) => {
   if (!infoPanelSelection) return null;
+
+  if (isPlugin && !isPluginTitleVisible) return null;
 
   if (isNoItem || isContacts || isGallery) return null;
 

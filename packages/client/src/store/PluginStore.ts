@@ -840,6 +840,7 @@ class PluginStore {
 
       this.infoPanelItems.set(key, {
         ...value,
+        isTitleVisible: value.isTitleVisible ?? true,
         subMenu: submenu,
 
         pluginName: plugin.name,

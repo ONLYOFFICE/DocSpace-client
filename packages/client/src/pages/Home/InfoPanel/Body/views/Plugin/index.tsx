@@ -24,48 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
+import { useCallback, useEffect, useState } from "react";
+import { observer } from "mobx-react";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
+import { IInfoPanelItem } from "SRC_DIR/helpers/plugins/types";
+import { TSelection } from "@docspace/shared/utils/copy";
 
-const Plugin = ({ boxProps, pluginName, plugin, selection }) => {
-  React.useEffect(() => {
+type Props = {
+  infoPanelItem?: IInfoPanelItem;
+  selection?: TSelection;
+};
+
+const Plugin = ({ infoPanelItem, selection }: Props) => {
+  const { body: boxProps, subMenu, onLoad, pluginName } = infoPanelItem || {};
+
+  const [bodyProps, setBodyProps] = useState(boxProps || {});
+
+  useEffect(() => {
     if (!selection) return;
 
-    plugin?.subMenu?.onClick?.(selection.id ? +selection.id : 0);
-  }, [selection.id]);
+    subMenu?.onClick?.(selection.id ? +selection.id : 0);
+  }, [selection?.id]);
+
+  const onLoadAction = useCallback(async () => {
+    if (!onLoad) return;
+    const res = await onLoad();
+
+    const { body } = res;
+
+    if (body) {
+      setBodyProps({ ...body });
+    }
+  }, [onLoad]);
+
+  useEffect(() => {
+    onLoadAction();
+  }, [onLoadAction]);
 
   return (
     <div
-      data-testid={`info_panel_plugin_${pluginName?.toLowerCase().replace(/\s+/g, "_")}`}
+      data-testid={`info_panel_plugin_${pluginName?.toLowerCase()?.replace(/\s+/g, "_")}`}
     >
       <WrappedComponent
         pluginName={pluginName}
-        component={{ component: PluginComponents.box, props: boxProps }}
+        component={{ component: PluginComponents.box, props: bodyProps }}
+        saveButton={undefined}
+        setSaveButtonProps={undefined}
+        setModalRequestRunning={undefined}
+        modalRequestRunning={undefined}
       />
     </div>
   );
 };
 
-export default inject(({ pluginStore, infoPanelStore }, { isRooms }) => {
-  const { infoPanelItemsList } = pluginStore;
-
-  const { infoPanelSelection, fileView, roomsView } = infoPanelStore;
-
-  const currentView = isRooms ? roomsView : fileView;
-
-  const itemKey = currentView?.replace("info_plugin-", "");
-
-  const { value } = infoPanelItemsList.find((i) => i.key === itemKey) ?? {};
-
-  return {
-    boxProps: value?.body,
-
-    pluginName: value?.name,
-
-    plugin: value,
-    selection: infoPanelSelection,
-  };
-})(observer(Plugin));
+export default observer(Plugin);

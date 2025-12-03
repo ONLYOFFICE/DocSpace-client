@@ -214,7 +214,8 @@ export interface IInfoPanelItem {
   key: string;
   subMenu: IInfoPanelSubMenu;
   body: BoxProps;
-  onLoad: () => Promise<{ body: BoxProps }>;
+  isTitleVisible?: boolean;
+  onLoad?: () => Promise<{ body: BoxProps }>;
   filesType?: PluginFileType[];
   filesExsts?: string[];
   usersTypes?: PluginUsersType[];

@@ -27,6 +27,7 @@
 import { ShareAccessRights } from "../../../../enums";
 
 import { API_PREFIX, BASE_URL } from "../../utils";
+import type { MethodType } from "../../types";
 
 export type LinkTemplateOptions = {
   linkId?: string;
@@ -36,7 +37,8 @@ export type LinkTemplateOptions = {
   access: ShareAccessRights;
 };
 
-export const LINK_PATH = /.*\/api\/2\.0\/files\/file\/\d+\/link.*/;
+export const LINK_FILE_PATH = /.*\/api\/2\.0\/files\/file\/\d+\/link.*/;
+export const LINKS_FILE_PATH = /.*\/api\/2\.0\/files\/file\/\d+\/links.*/;
 
 const id = "00000000-0000-0000-0000-000000000000";
 const shareLink = `${BASE_URL}/s/linkId`;
@@ -86,35 +88,48 @@ export const linkHandle = {
   statusCode: 200,
 };
 
+const createLink = (option: LinkTemplateOptions) => {
+  return {
+    ...linkHandle.response,
+    access: option.access ?? ShareAccessRights.ReadOnly,
+    sharedTo: {
+      ...linkHandle.response.sharedTo,
+      id: option.linkId ?? id,
+      title: option.title ?? "Shared link",
+      shareLink: option.shareLink ?? shareLink,
+      requestToken: option.requestToken ?? "requestToken",
+    },
+    sharedLink: {
+      ...linkHandle.response.sharedLink,
+      id: option.linkId ?? id,
+      title: option.title ?? "Shared link",
+      shareLink: option.shareLink ?? shareLink,
+      requestToken: option.requestToken ?? "requestToken",
+    },
+  };
+};
+
 export const createLinkRoute = (
-  option: LinkTemplateOptions,
-  url: string | RegExp = LINK_PATH,
+  option: LinkTemplateOptions | LinkTemplateOptions[],
+  method: MethodType = "POST",
+  url: string | RegExp = LINK_FILE_PATH,
+  withTotal = false,
 ) => {
+  const isArray = Array.isArray(option);
+
+  const count = isArray ? option.length : 1;
+
   const data = {
     ...linkHandle,
-    response: {
-      ...linkHandle.response,
-      access: option.access ?? ShareAccessRights.ReadOnly,
-      sharedTo: {
-        ...linkHandle.response.sharedTo,
-        id: option.linkId ?? id,
-        title: option.title ?? "Shared link",
-        shareLink: option.shareLink ?? shareLink,
-        requestToken: option.requestToken ?? "requestToken",
-      },
-      sharedLink: {
-        ...linkHandle.response.sharedLink,
-        id: option.linkId ?? id,
-        title: option.title ?? "Shared link",
-        shareLink: option.shareLink ?? shareLink,
-        requestToken: option.requestToken ?? "requestToken",
-      },
-    },
+    response: isArray ? option.map(createLink) : createLink(option),
+    count,
+    ...(withTotal ? { total: count } : {}),
   };
 
   return {
     url,
     dataHandler: () => new Response(JSON.stringify(data)),
+    method,
   };
 };
 

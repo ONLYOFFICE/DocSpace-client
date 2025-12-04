@@ -418,7 +418,10 @@ class PluginStore {
   };
 
   installPluginCss = async (plugin: TPlugin) => {
-    const cssUrl = getPluginUrl(plugin.url, `plugin.css?hash=${plugin.version}`);
+    const cssUrl = getPluginUrl(
+      plugin.url,
+      `plugin.css?hash=${plugin.version}`,
+    );
 
     const linkId = `plugin-styles-${plugin.pluginName}`;
     const existingLink = document.getElementById(linkId) as HTMLLinkElement;
@@ -871,6 +874,7 @@ class PluginStore {
 
       this.infoPanelItems.set(key, {
         ...value,
+        isHeaderVisible: value.isHeaderVisible ?? true,
         subMenu: submenu,
 
         pluginName: plugin.name,

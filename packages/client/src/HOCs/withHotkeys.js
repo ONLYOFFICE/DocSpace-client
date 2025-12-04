@@ -98,6 +98,7 @@ const withHotkeys = (Component) => {
       isIndexEditingMode,
       enableSelection,
       openContextMenu,
+      askAIAction,
     } = props;
 
     const navigate = useNavigate();
@@ -181,6 +182,25 @@ const withHotkeys = (Component) => {
 
         const event = new Event(Events.ROOM_CREATE);
         window.dispatchEvent(event);
+      }
+    };
+
+    const onCreateAIAgent = () => {
+      if (!isVisitor && isAIAgentsFolder && security?.Create) {
+        const event = new Event(Events.AGENT_CREATE);
+        window.dispatchEvent(event);
+      }
+    };
+
+    const onAskAI = () => {
+      const selection = getSelection();
+
+      if (selection.length === 1) {
+        const item = selection[0];
+
+        if (!item.contextOptions.includes("ask-ai")) return;
+
+        askAIAction(item);
       }
     };
 
@@ -281,7 +301,7 @@ const withHotkeys = (Component) => {
 
     // Select all files and folders
     useHotkeys(
-      "shift+a, ctrl+a, command+a",
+      "ctrl+a, command+a",
       (e) => {
         e.preventDefault();
         selectAll();
@@ -376,6 +396,12 @@ const withHotkeys = (Component) => {
       ...{ keyup: true },
     });
 
+    // Create AI agent
+    useHotkeys("Shift+a", () => onCreateAIAgent(), {
+      ...hotkeysFilter,
+      ...{ keyup: true },
+    });
+
     // Delete selection
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
@@ -453,6 +479,9 @@ const withHotkeys = (Component) => {
     );
 
     useHotkeys("f2", onRename, hotkeysFilter);
+
+    // Ask AI
+    useHotkeys("Ctrl+i, command+i", onAskAI, hotkeysFilter);
 
     // Upload file
     useHotkeys(
@@ -555,6 +584,7 @@ const withHotkeys = (Component) => {
         deleteRooms,
         archiveRooms,
         isGroupMenuBlocked,
+        askAIAction,
       } = filesActionsStore;
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
@@ -643,6 +673,7 @@ const withHotkeys = (Component) => {
         isFormRoom,
         isParentFolderFormRoom,
         enableSelection,
+        askAIAction,
       };
     },
   )(observer(WithHotkeys));

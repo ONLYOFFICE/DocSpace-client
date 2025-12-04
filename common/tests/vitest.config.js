@@ -24,41 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import { defineConfig } from "vitest/config";
+import HtmlStaticReporter from "./html-static-reporter";
 
-import { mobile } from "@docspace/shared/utils";
-
-export const StyledWrapper = styled.div`
-  max-width: 660px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  .header {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .description {
-    color: ${(props) => props.theme.profile.login.textColor};
-  }
-
-  .actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-
-    @media ${mobile} {
-      flex-direction: column;
-      gap: 12px;
-      align-items: flex-start;
-
-      .button {
-        width: 100%;
-        height: 40px;
-        font-size: 14px;
-      }
-    }
-  }
-`;
+export default defineConfig({
+  test: {
+    environment: "node",
+    testTimeout: 3600000,
+    hookTimeout: 3600000,
+    globals: false,
+    include: ["test/**/*.test.js"],
+    reporters: ["verbose", new HtmlStaticReporter()],
+  },
+});

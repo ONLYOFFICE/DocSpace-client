@@ -5,7 +5,6 @@
   "AIInstructions": "Instruções de IA",
   "CreateChat": "Criar chat",
   "CreateChatDescription": "Vá para a guia chat de IA para começar.",
-  "EmptyKnowledgeDescription": "Os arquivos enviados aqui serão indexados e usados como contexto na guia chat de IA. Adicione arquivos para perguntar à IA sobre eles, gerar conteúdo ou analisar informações em conjunto.",
   "EmptyKnowledgeDescriptionActions": "Experimente estas ações para começar:",
   "EmptyKnowledgeTitle": "Ainda não há arquivos enviados",
   "EmptyResultsDescription": "Os arquivos gerados no chat de IA aparecerão aqui automaticamente. Sempre que você gerar conteúdo, iniciar um chat ou enviar uma mensagem com saída, o resultado será salvo nesta seção.",

@@ -456,10 +456,7 @@ class ContextOptionsStore {
     });
   };
 
-  onClickFavorite = (e, items, t) => {
-    const data = (e.currentTarget && e.currentTarget.dataset) || e;
-    const { action } = data;
-
+  onClickFavorite = (action, items, t) => {
     this.filesActionsStore
       .setFavoriteAction(action, items)
       .then(() =>
@@ -1015,6 +1012,68 @@ class ContextOptionsStore {
   //   return promise;
   // };
 
+  onMultiLoadPlugins = (items) => {
+    if (isAIAgents()) return [];
+
+    const { enablePlugins } = this.settingsStore;
+
+    const pluginItems = [];
+    this.setLoaderTimer(true);
+
+    if (enablePlugins && this.pluginStore.contextMenuItemsList) {
+      this.pluginStore.contextMenuItemsList.forEach((option) => {
+        const processOptionValue = (value) => {
+
+          const isEveryItemIncludesOption = items.every(({ contextOptions }) => contextOptions.includes(value.key));
+
+          if (isEveryItemIncludesOption && value.isGroupAction) {
+
+            const filesIds = items.map(({ id }) => id);
+
+            const onClick = async () => {
+              if (value.withActiveItem) {
+                const { setActiveFiles } = this.filesStore;
+
+                setActiveFiles(filesIds);
+
+                await value.onGroupClick(filesIds);
+
+                setActiveFiles([]);
+              } else {
+                value.onGroupClick(filesIds);
+              }
+            };
+
+            const processedOptionValue = {
+              key: value.key,
+              id: value.key,
+              label: value.label,
+              icon: value.icon,
+              disabled: false,
+              onClick,
+            };
+
+            return processedOptionValue;
+          }
+        };
+
+        if (option.items && option.items.length > 0) {
+          option.items.forEach((nestedItem) => {
+            const processedItem = processOptionValue(nestedItem);
+            processedItem && pluginItems.push(processedItem);
+          });
+        } else {
+          const value = processOptionValue(option.value);
+          value && pluginItems.push(value);
+        }
+      });
+    }
+
+    this.setLoaderTimer(false);
+
+    return pluginItems;
+  };
+
   onLoadPlugins = (item) => {
     if (isAIAgents()) return [];
     const { contextOptions } = item;
@@ -1081,11 +1140,7 @@ class ContextOptionsStore {
     return pluginItems;
   };
 
-  onClickInviteUsers = (e, roomType) => {
-    const data = (e.currentTarget && e.currentTarget.dataset) || e;
-
-    const { action } = data;
-
+  onClickInviteUsers = (roomId, roomType) => {
     const { isGracePeriod } = this.currentTariffStatusStore;
 
     if (isGracePeriod) {
@@ -1093,23 +1148,18 @@ class ContextOptionsStore {
     } else {
       this.dialogsStore.setInvitePanelOptions({
         visible: true,
-        roomId: action || e,
+        roomId,
         hideSelector: false,
         defaultAccess: getDefaultAccessUser(roomType),
       });
     }
   };
 
-  onClickPin = (e, id, t, isAIAgent = false) => {
-    const data = (e.currentTarget && e.currentTarget.dataset) || e;
-    const { action } = data;
-
+  onClickPin = (action, id, t, isAIAgent = false) => {
     this.filesActionsStore.setPinAction(action, id, t, isAIAgent);
   };
 
-  onClickArchive = (e) => {
-    const data = (e.currentTarget && e.currentTarget.dataset) || e;
-    const { action } = data;
+  onClickArchive = (action) => {
     const { isWarningRoomsDialog } = this.currentQuotaStore;
     const {
       setArchiveDialogVisible,
@@ -1149,10 +1199,7 @@ class ContextOptionsStore {
     toastr.warning(t("Files:WaitOperation"));
   };
 
-  onClickMute = (e, item, t) => {
-    const data = (e.currentTarget && e.currentTarget.dataset) || e;
-    const { action } = data;
-
+  onClickMute = (action, item, t) => {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
@@ -1290,24 +1337,20 @@ class ContextOptionsStore {
         key: "pin-room",
         label: t("PinToTop"),
         icon: PinReactSvgUrl,
-        onClick: (e) => this.onClickPin(e, item.id, t, item.isAIAgent),
+        onClick: () => this.onClickPin("pin", item.id, t, item.isAIAgent),
         disabled:
           this.publicRoomStore.isPublicRoom ||
           Boolean(item.external && item.isLinkExpired),
-        "data-action": "pin",
-        action: "pin",
       },
       {
         id: "option_unpin-room",
         key: "unpin-room",
         label: t("Unpin"),
         icon: UnpinReactSvgUrl,
-        onClick: (e) => this.onClickPin(e, item.id, t, item.isAIAgent),
+        onClick: () => this.onClickPin("unpin", item.id, t, item.isAIAgent),
         disabled:
           this.publicRoomStore.isPublicRoom ||
           Boolean(item.external && item.isLinkExpired),
-        "data-action": "unpin",
-        action: "unpin",
       },
     ];
 
@@ -1319,20 +1362,16 @@ class ContextOptionsStore {
         key: "unmute-room",
         label: t("EnableNotifications"),
         icon: UnmuteReactSvgUrl,
-        onClick: (e) => this.onClickMute(e, item, t),
+        onClick: () => this.onClickMute("unmute", item, t),
         disabled: !canMute,
-        "data-action": "unmute",
-        action: "unmute",
       },
       {
         id: "option_mute-room",
         key: "mute-room",
         label: t("DisableNotifications"),
         icon: MuteReactSvgUrl,
-        onClick: (e) => this.onClickMute(e, item, t),
+        onClick: () => this.onClickMute("mute", item, t),
         disabled: !canMute,
-        "data-action": "mute",
-        action: "mute",
       },
     ];
 
@@ -1828,7 +1867,10 @@ class ContextOptionsStore {
         label: t("Open"),
         icon: FolderReactSvgUrl,
         onClick: () => this.onOpenFolder(item, t),
-        disabled: Boolean(item.external && item.isLinkExpired),
+        disabled:
+          !this.treeFoldersStore.isFavoritesFolder &&
+          !this.treeFoldersStore.isRecentFolder &&
+          Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_fill-form",
@@ -1903,7 +1945,11 @@ class ContextOptionsStore {
       {
         id: "option_view",
         key: "view",
-        label: t("Common:View"),
+        label:
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? t("Open")
+            : t("Common:View"),
         icon: EyeReactSvgUrl,
         onClick: (fileId) => this.onMediaFileClick(fileId, item),
         disabled: false,
@@ -1932,8 +1978,7 @@ class ContextOptionsStore {
         key: "ask-ai",
         label: t("Common:AskAI"),
         icon: AISvgUrl,
-        onClick: () =>
-          this.dialogsStore.setAiAgentSelectorDialogProps(true, item),
+        onClick: () => this.filesActionsStore.askAIAction(item),
         disabled: false,
       },
       {
@@ -2087,9 +2132,8 @@ class ContextOptionsStore {
         key: "invite-users-to-room",
         label: t("Common:InviteContacts"),
         icon: PersonReactSvgUrl,
-        onClick: (e) => this.onClickInviteUsers(e, item.roomType),
+        onClick: () => this.onClickInviteUsers(item.id, item.roomType),
         disabled: false,
-        action: item.id,
       },
       // {
       //   id: "option_copy-general-link",
@@ -2250,10 +2294,8 @@ class ContextOptionsStore {
         key: "mark-as-favorite",
         label: t("MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
-        onClick: (e) => this.onClickFavorite(e, [item], t),
+        onClick: () => this.onClickFavorite("mark", [item], t),
         disabled: false,
-        "data-action": "mark",
-        action: "mark",
       },
       {
         id: "option_create-duplicate-room",
@@ -2344,20 +2386,16 @@ class ContextOptionsStore {
         key: "archive-room",
         label: t("MoveToArchive"),
         icon: RoomArchiveSvgUrl,
-        onClick: (e) => this.onClickArchive(e),
+        onClick: () => this.onClickArchive("archive"),
         disabled: false,
-        "data-action": "archive",
-        action: "archive",
       },
       {
         id: "option_unarchive-room",
         key: "unarchive-room",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: (e) => this.onClickArchive(e),
+        onClick: (e) => this.onClickArchive("unarchive"),
         disabled: false,
-        "data-action": "unarchive",
-        action: "unarchive",
       },
       {
         key: "separator5",
@@ -2368,10 +2406,8 @@ class ContextOptionsStore {
         key: "remove-from-favorites",
         label: t("RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
-        onClick: (e) => this.onClickFavorite(e, [item], t),
+        onClick: () => this.onClickFavorite("remove", [item], t),
         disabled: false,
-        "data-action": "remove",
-        action: "remove",
       },
       {
         id: "option_delete",
@@ -2624,7 +2660,7 @@ class ContextOptionsStore {
 
     if (item.isFolder && !item.isRoom) {
       const groups = [
-        ["select", "open"],
+        ["select", "open", "open-location"],
         ["share", "show-info"],
         [
           "mark-as-favorite",
@@ -2761,10 +2797,8 @@ class ContextOptionsStore {
           key: "archive-room",
           label: t("MoveToArchive"),
           icon: RoomArchiveSvgUrl,
-          onClick: (e) => this.onClickArchive(e),
+          onClick: (e) => this.onClickArchive("archive"),
           disabled: false,
-          "data-action": "archive",
-          action: "archive",
         };
       }
       if (canRestoreRoom) {
@@ -2772,10 +2806,8 @@ class ContextOptionsStore {
           key: "unarchive-room",
           label: t("Common:Restore"),
           icon: MoveReactSvgUrl,
-          onClick: (e) => this.onClickArchive(e),
+          onClick: () => this.onClickArchive("unarchive"),
           disabled: false,
-          "data-action": "unarchive",
-          action: "unarchive",
         };
       }
 
@@ -2845,10 +2877,8 @@ class ContextOptionsStore {
         key: "mark-as-favorite",
         label: t("MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
-        onClick: (e) => this.onClickFavorite(e, favoriteItems, t),
+        onClick: (e) => this.onClickFavorite("mark", favoriteItems, t),
         disabled: !favoriteItems.length,
-        "data-action": "mark",
-        action: "mark",
       }, */
       {
         id: "create_room",
@@ -2922,10 +2952,8 @@ class ContextOptionsStore {
         key: "remove-from-favorites",
         label: t("RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
-        onClick: (e) => this.onClickFavorite(e, removeFromFavoriteItems, t),
+        onClick: (e) => this.onClickFavorite("remove", removeFromFavoriteItems, t),
         disabled: favoriteItems.length || !removeFromFavoriteItems.length,
-        "data-action": "remove",
-        action: "remove",
       }, */
       {
         key: "delete",
@@ -2955,6 +2983,10 @@ class ContextOptionsStore {
     const { isCollaborator } = this.userStore?.user || {
       isCollaborator: false,
     };
+
+    const pluginItems = this.onMultiLoadPlugins(selection);
+
+    options.splice(1, 0, ...pluginItems);
 
     const newOptions = options.filter(
       (option, index) =>

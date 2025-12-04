@@ -1,5 +1,4 @@
 {
-  "ActionsWithFilesDescription": "标记将突出显示{{rooms}}、{{shared}}和{{documents}}板块中的文件活动（包括上传、编辑或共享）。",
   "AdminSetupRequired": "需要管理员设置",
   "Badges": "弹窗",
   "DailyFeed": "{{productName}}每日动态",
@@ -9,8 +8,6 @@
   "LdapEmailTooltip": "此用户帐户通过 LDAP 加载。用户的邮箱地址未指定，当前的为自动生成，无法用于发送通知。",
   "NotConfigured": "未配置",
   "Notifications": "消息通知",
-  "RoomsActivityDescription": "接收{{sectionName}}内新共享文件/文件夹及相关活动的即时邮件通知。",
-  "RoomUpdateNotify": "共享内容与{{sectionName}}活动",
   "SettingUpNotifications": "设置通知",
   "SuccessConnected": "{{serviceName}} 已成功关联为通知渠道，您将通过该渠道接收更新。",
   "SuccessDisconnected": "{{serviceName}} 已成功断开与通知渠道的关联，后续通知将不再发送至该渠道。",

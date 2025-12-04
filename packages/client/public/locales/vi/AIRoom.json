@@ -5,7 +5,6 @@
   "AIInstructions": "Hướng dẫn AI",
   "CreateChat": "Tạo cuộc trò chuyện",
   "CreateChatDescription": "Đến tab AI-Chat để bắt đầu.",
-  "EmptyKnowledgeDescription": "Các tệp được tải lên ở đây sẽ được lập chỉ mục và sử dụng làm ngữ cảnh trong tab AI-Chat. Thêm các tệp để hỏi AI về chúng, tạo nội dung hoặc phân tích thông tin cùng nhau.",
   "EmptyKnowledgeDescriptionActions": "Thử các hành động sau để bắt đầu:",
   "EmptyKnowledgeTitle": "Chưa có tệp nào được tải lên.",
   "EmptyResultsDescription": "Các tệp được tạo trong AI-Chat sẽ tự động xuất hiện ở đây. Bất cứ khi nào bạn tạo nội dung, bắt đầu một cuộc trò chuyện hoặc gửi một tin nhắn có đầu ra, kết quả sẽ được lưu trong phần này.",

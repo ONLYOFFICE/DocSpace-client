@@ -66,6 +66,21 @@ export const createTooltipWrapper = <TProps extends object>(
         tooltipPlace as TTooltipPlace,
       );
 
+      const isTestEnvironment = process.env.NODE_ENV === "test";
+
+      if (isTestEnvironment && contentString) {
+        return (
+          <Component
+            ref={ref}
+            {...(componentProps as TProps)}
+            title={contentString}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          />
+        );
+      }
+
       if (!contentString) {
         return (
           <Component

@@ -74,6 +74,8 @@ export type UseFilesProps = {
   userId: string;
 
   selectedFolderStore: SelectedFolderStore;
+
+  currentView: string;
 };
 
 const useFiles = ({
@@ -94,6 +96,7 @@ const useFiles = ({
   userId,
 
   selectedFolderStore,
+  currentView,
 }: UseFilesProps) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -353,7 +356,10 @@ const useFiles = ({
       })
       .finally(() => {
         setFocus();
-        scrollToTop();
+
+        if (currentView !== "chat" && categoryType !== CategoryType.Chat) {
+          scrollToTop();
+        }
       });
   }, [
     location.pathname,

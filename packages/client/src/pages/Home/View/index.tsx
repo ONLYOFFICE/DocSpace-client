@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router";
 
-import Chat from "@docspace/shared/components/chat";
 import useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
 import useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
 import useInitMessages from "@docspace/shared/components/chat/hooks/useInitMessages";
@@ -42,29 +41,23 @@ import type { Nullable } from "@docspace/shared/types";
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
-import type { TUser } from "@docspace/shared/api/people/types";
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { toastr } from "@docspace/shared/components/toast";
 import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType, SearchArea } from "@docspace/shared/enums";
 
-import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
-import type FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 import type AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import NoAccessContainer, {
-  NoAccessContainerType,
-} from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
+import { AIAgentView } from "SRC_DIR/pages/Home/View/AIAgentView";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -85,10 +78,6 @@ type ViewProps = UseContactsProps &
 
     clearFiles: FilesStore["clearFiles"];
 
-    userAvatar: TUser["avatar"];
-    getIcon: FilesSettingsStore["getIcon"];
-    chatSettings: SelectedFolderStore["chatSettings"];
-
     usersAbortController: Nullable<AbortController>;
     groupsAbortController: Nullable<AbortController>;
 
@@ -97,23 +86,15 @@ type ViewProps = UseContactsProps &
     aiAgentsAbortController: Nullable<AbortController>;
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
-    showArticleLoader: ClientLoadingStore["showArticleLoader"];
 
     aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
     setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
-    setIsAIAgentChatDelete: DialogsStore["setIsAIAgentChatDelete"];
-    setDeleteDialogVisible: DialogsStore["setDeleteDialogVisible"];
 
     canUseChat: AccessRightsStore["canUseChat"];
 
-    isErrorAIAgentNotAvailable: FilesStore["isErrorAIAgentNotAvailable"];
-
-    isAdmin: AuthStore["isAdmin"];
     aiConfig: SettingsStore["aiConfig"];
-    standalone: SettingsStore["standalone"];
     isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
-    folderFormValidation: RegExp;
   };
 
 const View = ({
@@ -159,12 +140,8 @@ const View = ({
 
   setIsSectionHeaderLoading,
 
-  userAvatar,
-  getIcon,
-  chatSettings,
   showBodyLoader,
   showHeaderLoader,
-  showArticleLoader,
 
   getFilesSettings,
   setSubscriptions,
@@ -185,17 +162,11 @@ const View = ({
 
   aiAgentSelectorDialogProps,
   setAiAgentSelectorDialogProps,
-  setIsAIAgentChatDelete,
-  setDeleteDialogVisible,
 
   canUseChat,
-  isAdmin,
   aiConfig,
-  standalone,
   isResultTab,
   resultId,
-  isErrorAIAgentNotAvailable,
-  folderFormValidation,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common", "AIRoom"]);
@@ -273,6 +244,7 @@ const View = ({
     selectedFolderStore,
     wsCreatedPDFForm,
     setHotkeyCaret,
+    currentView,
   });
 
   const { getProfileInitialValue } = useProfileBody({
@@ -592,29 +564,18 @@ const View = ({
               sectionWidth={context.sectionWidth}
               currentView={currentView}
             />
-          ) : currentView === "chat" &&
-            (!isErrorAIAgentNotAvailable || showArticleLoader) ? (
-            <Chat
-              userAvatar={userAvatar}
-              roomId={isLoading && !showHeaderLoader ? "-1" : roomId!}
-              getIcon={getIcon}
-              selectedModel={chatSettings?.modelId ?? ""}
-              isLoading={showBodyLoader}
+          ) : currentView === "chat" || selectedFolderStore.isAIRoom ? (
+            <AIAgentView
+              currentView={currentView}
+              isViewLoading={isLoading}
+              roomId={roomId}
               attachmentFile={attachmentFile}
-              clearAttachmentFile={onClearAttachmentFile}
+              onClearAttachmentFile={onClearAttachmentFile}
               toolsSettings={toolsSettings}
               initChats={initChats}
               messagesSettings={messagesSettings}
-              isAdmin={isAdmin}
-              aiReady={aiConfig?.aiReady || false}
-              standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
               getResultStorageId={getResultStorageId}
-              setIsAIAgentChatDelete={setIsAIAgentChatDelete}
-              setDeleteDialogVisible={setDeleteDialogVisible}
-              folderFormValidation={folderFormValidation}
             />
-          ) : currentView === "chat" && isErrorAIAgentNotAvailable ? (
-            <NoAccessContainer type={NoAccessContainerType.Agent} />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
           ) : (
@@ -649,7 +610,7 @@ export const ViewComponent = inject(
     aiRoomStore,
   }: TStore) => {
     const { isResultTab, resultId } = aiRoomStore;
-    const { aiConfig, standalone, folderFormValidation } = settingsStore;
+    const { aiConfig } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
 
@@ -685,7 +646,6 @@ export const ViewComponent = inject(
       aiAgentsController,
 
       clearFiles,
-      isErrorAIAgentNotAvailable,
     } = filesStore;
 
     const {
@@ -694,7 +654,6 @@ export const ViewComponent = inject(
       setIsSectionHeaderLoading,
       setIsProfileLoaded,
 
-      showArticleLoader,
       showHeaderLoader,
     } = clientLoadingStore;
 
@@ -715,18 +674,14 @@ export const ViewComponent = inject(
     const { tfaSettings, setBackupCodes, getTfaType } = tfaStore;
 
     const { setProviders } = peopleStore.usersStore;
-    const { getCapabilities, isAdmin } = authStore;
+    const { getCapabilities } = authStore;
 
     const { getSessions } = setup;
 
     const { checkTg } = telegramStore;
 
-    const {
-      aiAgentSelectorDialogProps,
-      setAiAgentSelectorDialogProps,
-      setIsAIAgentChatDelete,
-      setDeleteDialogVisible,
-    } = dialogsStore;
+    const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
+      dialogsStore;
 
     return {
       setContactsTab,
@@ -769,12 +724,8 @@ export const ViewComponent = inject(
 
       setIsSectionHeaderLoading,
 
-      userAvatar: userStore.user?.avatar,
-      getIcon: filesSettingsStore.getIcon,
-      chatSettings: selectedFolderStore?.chatSettings,
       showBodyLoader: clientLoadingStore.showBodyLoader,
       showHeaderLoader,
-      showArticleLoader,
 
       getFilesSettings,
       setSubscriptions,
@@ -794,17 +745,11 @@ export const ViewComponent = inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
-      setIsAIAgentChatDelete,
-      setDeleteDialogVisible,
 
-      isErrorAIAgentNotAvailable,
       canUseChat,
-      isAdmin,
       aiConfig,
-      standalone,
       isResultTab,
       resultId,
-      folderFormValidation,
     };
   },
 )(observer(View));

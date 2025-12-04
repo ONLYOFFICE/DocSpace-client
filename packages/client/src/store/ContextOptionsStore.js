@@ -1869,7 +1869,10 @@ class ContextOptionsStore {
         label: t("Open"),
         icon: FolderReactSvgUrl,
         onClick: () => this.onOpenFolder(item, t),
-        disabled: Boolean(item.external && item.isLinkExpired),
+        disabled:
+          !this.treeFoldersStore.isFavoritesFolder &&
+          !this.treeFoldersStore.isRecentFolder &&
+          Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_fill-form",
@@ -1945,7 +1948,11 @@ class ContextOptionsStore {
       {
         id: "option_view",
         key: "view",
-        label: t("Common:View"),
+        label:
+          this.treeFoldersStore.isRecentFolder ||
+          this.treeFoldersStore.isFavoritesFolder
+            ? t("Open")
+            : t("Common:View"),
         icon: EyeReactSvgUrl,
         onClick: (fileId) => this.onMediaFileClick(fileId, item),
         disabled: false,
@@ -2680,7 +2687,7 @@ class ContextOptionsStore {
     if (!item.isRoom) {
       const groups = item.isFolder
         ? [
-            ["select", "open", "mark-read"],
+            ["select", "open", "mark-read", "open-location"],
             ["share", "move", "copy-to", "download", "rename"],
             ["mark-as-favorite", "link-for-room-members", "show-info"],
             ["restore"],

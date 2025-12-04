@@ -49,6 +49,7 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType, SearchArea } from "@docspace/shared/enums";
 

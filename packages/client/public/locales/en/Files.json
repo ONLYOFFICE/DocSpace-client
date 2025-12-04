@@ -226,5 +226,5 @@
   "LinkSettingsJoinedUsers": "Users have joined via this link",
   "ValidUntil": "Valid until:",
   "UsersJoined": "Users joined:",
-  "WarningUsersLimit": "Registration via the link is no longer available since the limit has been exceeded. Increase the limit in settings, otherwise the link will remain accessible only to registered users."
+  "WarningUsersLimit": "Registration via the link is no longer available since the limit has been exceeded. Adjust the limit in settings or create a new link to enable new user registrations."
 }

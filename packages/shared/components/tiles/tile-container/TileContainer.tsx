@@ -68,6 +68,7 @@ export const TileContainer = ({
       Folders.push(
         <div
           className={classNames(
+            "tile-item",
             styles.tileItemWrapper,
             styles.folder,
             "folder",
@@ -81,6 +82,7 @@ export const TileContainer = ({
       Templates.push(
         <div
           className={classNames(
+            "tile-item",
             styles.tileItemWrapper,
             styles.template,
             "template",
@@ -93,7 +95,12 @@ export const TileContainer = ({
     } else if (isRoom) {
       Rooms.push(
         <div
-          className={classNames(styles.tileItemWrapper, styles.room, "room")}
+          className={classNames(
+            "tile-item",
+            styles.tileItemWrapper,
+            styles.room,
+            "room",
+          )}
           key={itemId}
         >
           {item}
@@ -102,7 +109,12 @@ export const TileContainer = ({
     } else {
       Files.push(
         <div
-          className={classNames(styles.tileItemWrapper, styles.file, "file")}
+          className={classNames(
+            "tile-item",
+            styles.tileItemWrapper,
+            styles.file,
+            "file",
+          )}
           key={itemId}
         >
           {item}

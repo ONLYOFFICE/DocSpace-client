@@ -26,32 +26,15 @@
 
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { TableContainer, TableBody } from "@docspace/shared/components/table";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 import SessionsTableRow from "./SessionsTableRow";
 import SessionsTableHeader from "./SessionsTableHeader";
+import styles from "../../active-sessions.module.scss";
 
 const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `sessionsColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelSessionsColumnsSize_ver-${TABLE_VERSION}`;
-
-const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
-  margin: 0 0 20px;
-
-  .table-container_header {
-    position: absolute;
-    padding: 0px 20px;
-    border-image-source: ${(props) =>
-      props.theme.tableContainer.header.borderImageSource} !important;
-  }
-
-  .header-container-text {
-    color: ${(props) => props.theme.tableContainer.header.textColor};
-    font-size: 12px;
-  }
-`;
 
 const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
   const [hideColumns, setHideColumns] = useState(false);
@@ -61,7 +44,11 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return (
-    <StyledTableContainer forwardedRef={ref} useReactWindow>
+    <TableContainer
+      className={styles.tableContainer}
+      forwardedRef={ref}
+      useReactWindow
+    >
       <SessionsTableHeader
         t={t}
         userId={userId}
@@ -92,7 +79,7 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
           />
         ))}
       </TableBody>
-    </StyledTableContainer>
+    </TableContainer>
   );
 };
 

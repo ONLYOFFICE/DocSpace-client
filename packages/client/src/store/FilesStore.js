@@ -3528,7 +3528,13 @@ class FilesStore {
     //   ]);
     // }
 
-    if (!(isMyFolder && (this.filterType || this.filterSearch))) {
+    if (
+      !(
+        isRecentFolder ||
+        isFavoritesFolder ||
+        (isMyFolder && (this.filterType || this.filterSearch))
+      )
+    ) {
       folderOptions = removeOptions(folderOptions, ["open-location"]);
     }
 

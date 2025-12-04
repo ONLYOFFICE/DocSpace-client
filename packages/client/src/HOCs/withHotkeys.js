@@ -301,7 +301,7 @@ const withHotkeys = (Component) => {
 
     // Select all files and folders
     useHotkeys(
-      "shift+a, ctrl+a, command+a",
+      "ctrl+a, command+a",
       (e) => {
         e.preventDefault();
         selectAll();
@@ -397,7 +397,7 @@ const withHotkeys = (Component) => {
     });
 
     // Create AI agent
-    useHotkeys("Alt+Shift+a", () => onCreateAIAgent(), {
+    useHotkeys("Shift+a", () => onCreateAIAgent(), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });

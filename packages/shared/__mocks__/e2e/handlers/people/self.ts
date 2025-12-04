@@ -76,7 +76,11 @@ export const successSelf = {
 };
 
 export const usersSuccess = {
-  response: { ...successSelf, activationStatus: 1 },
+  response: [successSelf],
+};
+
+export const usersSuccessForClient = {
+  response: {...successSelf, activationStatus:1 },
 };
 
 export const selfError404 = {
@@ -107,6 +111,7 @@ export const self = (
   errorStatus: 400 | 404 | null = null,
   headers?: Headers | null,
   isEmailActivated?: boolean,
+  isClient = false,
 ) => {
   if (errorStatus === 404 || headers?.get(HEADER_SELF_ERROR_404))
     return new Response(JSON.stringify(selfError404));
@@ -115,7 +120,7 @@ export const self = (
     return new Response(JSON.stringify(selfError400));
 
   if (isEmailActivated) {
-    return new Response(JSON.stringify(usersSuccess));
+    return new Response(JSON.stringify(isClient ? usersSuccessForClient : usersSuccess));
   }
 
   return new Response(JSON.stringify({ response: successSelf }));

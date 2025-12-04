@@ -296,6 +296,10 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_DELETE_USER}`,
     dataHandler: selfHandler.bind(null, null, null, true),
   },
+  selfEmailActivatedClient: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: selfHandler.bind(null, null, null, true, true),
+  },
   build: {
     url: `${BASE_URL}${PATH_BUILD}`,
     dataHandler: buildHandler,

@@ -35,7 +35,7 @@ test.describe("Shared with me", () => {
       endpoints.colorTheme,
       endpoints.build,
       endpoints.capabilities,
-      endpoints.selfEmailActivated,
+      endpoints.selfEmailActivatedClient,
       endpoints.tariff,
       endpoints.quota,
       endpoints.additionalSettings,

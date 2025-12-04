@@ -116,6 +116,7 @@ import {
 } from "../utils";
 import { PATH_DELETE_USER } from "./people/self";
 import { aiConfigHandler, PATH_AI_CONFIG } from "./ai/config";
+import { LINK_PATH, LinkHandler } from "./share";
 
 export type TEndpoint = {
   url: string | RegExp;
@@ -371,5 +372,9 @@ export const endpoints = {
   shareDelete: {
     url: `${BASE_URL}${PATH_SHARE}`,
     dataHandler: shareHandler.bind(null, "Delete"),
+  },
+  shareLink: {
+    url: LINK_PATH,
+    dataHandler: LinkHandler,
   },
 } satisfies TEndpoints;

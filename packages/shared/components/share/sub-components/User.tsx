@@ -50,7 +50,7 @@ import { AccessRightSelect } from "../../access-right-select";
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
 import { LinkWithTooltip as Link, LinkType } from "../../link";
-import { DivWithTooltip } from "../../tooltip";
+import { TooltipContainer } from "../../tooltip";
 
 import styles from "../Share.module.scss";
 import type { UserProps } from "../Share.types";
@@ -251,12 +251,13 @@ export const User = ({
               dataTestId="info_panel_members_user_role_combobox"
             />
           ) : (
-            <DivWithTooltip
+            <TooltipContainer
+              as="div"
               className="disabled-role-combobox"
               title={t("Common:Role")}
             >
               {selectedOption.label}
-            </DivWithTooltip>
+            </TooltipContainer>
           )}
         </div>
       ) : null}

@@ -87,7 +87,7 @@ export type TooltipProps = Pick<
   tooltipStyle?: React.CSSProperties;
 };
 
-export type MouseEventHandler = (e: React.MouseEvent) => void;
+export type MouseEventHandler = (e: React.MouseEvent<HTMLElement>) => void;
 
 export type TooltipHandlers = {
   anchorId: string;

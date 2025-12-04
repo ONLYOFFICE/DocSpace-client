@@ -30,7 +30,7 @@ import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/17/vertical-dots.react
 
 import { IconButton } from "../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
-import { DivWithTooltip } from "../../tooltip";
+import { TooltipContainer } from "../../tooltip";
 
 import { TContextButtonProps } from "../Navigation.types";
 
@@ -58,8 +58,6 @@ const ContextButton = ({
   const menuRef = useRef<ContextMenuRefType>(null);
   const [animationPlayed, setAnimationPlayed] = useState(false);
   const cleanupRef = useRef<(() => void) | null>(null);
-
-  const Wrapper = title ? DivWithTooltip : "div";
 
   const resetAnimation = useCallback(() => {
     if (cleanupRef.current) {
@@ -137,7 +135,8 @@ const ContextButton = ({
   const model = getData();
 
   return (
-    <Wrapper
+    <TooltipContainer
+      as="div"
       ref={ref}
       className={`${className} ${animationClasses.join(" ")}`}
       title={title}
@@ -162,7 +161,7 @@ const ContextButton = ({
         header={contextMenuHeader}
         badgeUrl={contextMenuHeader?.badgeUrl}
       />
-    </Wrapper>
+    </TooltipContainer>
   );
 };
 

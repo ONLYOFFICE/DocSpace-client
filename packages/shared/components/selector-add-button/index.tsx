@@ -31,7 +31,7 @@ import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touc
 import { useTheme } from "../../hooks/useTheme";
 import { TextWithTooltip as Text } from "../text";
 import { IconButton } from "../icon-button";
-import { DivWithTooltip } from "../tooltip";
+import { TooltipContainer } from "../tooltip";
 import styles from "./SelectorAddButton.module.scss";
 import { SelectorAddButtonProps } from "./SelectorAddButton.types";
 import { Loader, LoaderTypes } from "../loader";
@@ -93,14 +93,13 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
       } as React.CSSProperties)
     : style;
 
-  const ButtonWrapper = title ? DivWithTooltip : "div";
-
   return (
     <div
       data-testid="selector-add-button-container"
       className={containerClassName}
     >
-      <ButtonWrapper
+      <TooltipContainer
+        as="div"
         {...rest}
         id={id}
         style={buttonStyle}
@@ -120,7 +119,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
             isClickable={!isDisabled}
           />
         )}
-      </ButtonWrapper>
+      </TooltipContainer>
 
       {label ? (
         <Text

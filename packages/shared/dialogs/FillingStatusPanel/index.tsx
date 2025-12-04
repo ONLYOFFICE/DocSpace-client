@@ -43,7 +43,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { FileFillingFormStatus } from "../../enums";
 
 import { TextWithTooltip as Text } from "../../components/text";
-import { DivWithTooltip } from "../../components/tooltip";
+import { TooltipContainer } from "../../components/tooltip";
 import { toastr } from "../../components/toast";
 import PublicRoomBar from "../../components/public-room-bar";
 import { Heading, HeadingLevel } from "../../components/heading";
@@ -138,13 +138,14 @@ export const FillingStatusPanel = ({
             {fileName}
           </Text>
           {fillingStatus ? (
-            <DivWithTooltip
+            <TooltipContainer
+              as="div"
               title={fileStatusTitle}
               className={styles.fileStatus}
               style={{ backgroundColor: color }}
             >
               <span>{fileStatusLabel}</span>
-            </DivWithTooltip>
+            </TooltipContainer>
           ) : null}
         </div>
         <div className={styles.processContainer}>

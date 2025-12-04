@@ -25,17 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { DivWithTooltip } from "../../tooltip";
+import { TooltipContainer } from "../../tooltip";
 import styles from "../Navigation.module.scss";
 
 const WarningComponent = ({ title }: { title?: React.ReactNode }) => {
   const tooltip = typeof title === "string" ? title : undefined;
-  const Wrapper = tooltip ? DivWithTooltip : "div";
 
   return (
-    <Wrapper className={`${styles.warningText}`} title={tooltip}>
+    <TooltipContainer
+      as="div"
+      className={`${styles.warningText}`}
+      title={tooltip}
+    >
       <div className="warning-text">{title}</div>
-    </Wrapper>
+    </TooltipContainer>
   );
 };
 

@@ -28,7 +28,7 @@ import { type FC } from "react";
 import { ReactSVG } from "react-svg";
 
 import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
-import { DivWithTooltip } from "../../tooltip";
+import { TooltipContainer } from "../../tooltip";
 
 import { type TOption } from "../../combobox";
 
@@ -40,7 +40,8 @@ export interface IconDisplayProps {
 
 export const IconDisplay: FC<IconDisplayProps> = ({ option }) => {
   return (
-    <DivWithTooltip
+    <TooltipContainer
+      as="div"
       className={styles.iconContainer}
       title={option.title || option.label}
     >
@@ -52,6 +53,6 @@ export const IconDisplay: FC<IconDisplayProps> = ({ option }) => {
         />
         <ReactSVG className={styles.icon} src={option.icon as string} />
       </div>
-    </DivWithTooltip>
+    </TooltipContainer>
   );
 };

@@ -36,7 +36,7 @@ import { Avatar, AvatarSize, AvatarRole } from "../avatar";
 
 import styles from "./FillingRoleSelector.module.scss";
 import type { IFillingRoleSelectorProps } from "./FillingRoleSelector.types";
-import { ButtonWithTooltip } from "../tooltip";
+import { TooltipContainer } from "../tooltip";
 
 const FillingRoleSelector = ({
   roles,
@@ -87,7 +87,8 @@ const FillingRoleSelector = ({
               />
             </>
           ) : (
-            <ButtonWithTooltip
+            <TooltipContainer
+              as="button"
               title={role.name}
               type="button"
               className={styles.button}
@@ -97,7 +98,7 @@ const FillingRoleSelector = ({
                 style={{ backgroundColor: role.color }}
               />
               <span className={styles.name}>{role.name}</span>
-            </ButtonWithTooltip>
+            </TooltipContainer>
           )}
         </li>
       ))}

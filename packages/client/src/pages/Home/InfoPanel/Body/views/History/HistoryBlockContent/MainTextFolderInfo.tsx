@@ -30,7 +30,7 @@ import classNames from "classnames";
 import { TTranslation } from "@docspace/shared/types";
 import { FolderType } from "@docspace/shared/enums";
 import { FeedAction } from "@docspace/shared/api/rooms/types";
-import { SpanWithTooltip } from "@docspace/shared/components/tooltip";
+import { TooltipContainer } from "@docspace/shared/components/tooltip";
 
 import { Feed } from "./HistoryBlockContent.types";
 import styles from "../History.module.scss";
@@ -99,12 +99,13 @@ const HistoryMainTextFolderInfo = ({
 
   return (
     <span className={classNames("message", styles.historyBlockMessage)}>
-      <SpanWithTooltip
+      <TooltipContainer
+        as="span"
         className={className}
         title={isFromFolder ? fromParentTitle : parentTitle}
       >
         {` ${isFromFolder ? sourceDestination : destination}`}
-      </SpanWithTooltip>
+      </TooltipContainer>
     </span>
   );
 };

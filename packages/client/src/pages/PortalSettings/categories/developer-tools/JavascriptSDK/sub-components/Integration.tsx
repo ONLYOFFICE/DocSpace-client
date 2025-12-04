@@ -27,7 +27,7 @@ import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { DivWithTooltip } from "@docspace/shared/components/tooltip";
+import { TooltipContainer } from "@docspace/shared/components/tooltip";
 import { inject, observer } from "mobx-react";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { useTranslation } from "react-i18next";
@@ -77,7 +77,8 @@ const Integration: React.FC<{
         {t("IntegrationDescription", { productName: t("Common:ProductName") })}
       </Text>
       <div className="icons">
-        <DivWithTooltip
+        <TooltipContainer
+          as="div"
           data-testid="integration_zoom_container"
           className="icon"
           title={zoomTitle}
@@ -87,9 +88,10 @@ const Integration: React.FC<{
             src={ZoomIcon}
             onClick={() => window.open(zoomUrl, "_blank")}
           />
-        </DivWithTooltip>
+        </TooltipContainer>
 
-        <DivWithTooltip
+        <TooltipContainer
+          as="div"
           data-testid="integration_wordpress_container"
           className="icon"
           title={wordPressTitle}
@@ -99,9 +101,10 @@ const Integration: React.FC<{
             src={WordpressIcon}
             onClick={() => window.open(wordPressUrl, "_blank")}
           />
-        </DivWithTooltip>
+        </TooltipContainer>
 
-        <DivWithTooltip
+        <TooltipContainer
+          as="div"
           data-testid="integration_drupal_container"
           className="icon"
           title={drupalTitle}
@@ -111,7 +114,7 @@ const Integration: React.FC<{
             src={DrupalIcon}
             onClick={() => window.open(drupalUrl, "_blank")}
           />
-        </DivWithTooltip>
+        </TooltipContainer>
       </div>
       <div className="link-container">
         <Link

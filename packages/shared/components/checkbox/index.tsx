@@ -32,7 +32,7 @@ import CheckboxCheckedIcon from "PUBLIC_DIR/images/checkbox.checked.react.svg";
 import CheckboxIcon from "PUBLIC_DIR/images/checkbox.react.svg";
 
 import { TextWithTooltip as Text } from "../text";
-import { LabelWithTooltip } from "../tooltip";
+import { TooltipContainer } from "../tooltip";
 
 import { CheckboxProps } from "./Checkbox.types";
 import styles from "./Checkbox.module.scss";
@@ -117,7 +117,8 @@ const CheckboxPure = ({
   };
 
   return (
-    <LabelWithTooltip
+    <TooltipContainer
+      as="label"
       id={id}
       style={style}
       className={classNames(styles.label, className, {
@@ -167,7 +168,7 @@ const CheckboxPure = ({
           </span>
         ) : null}
       </div>
-    </LabelWithTooltip>
+    </TooltipContainer>
   );
 };
 

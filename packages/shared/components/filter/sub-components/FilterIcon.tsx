@@ -30,7 +30,7 @@ import classNames from "classnames";
 import styles from "../Filter.module.scss";
 
 import { IconButton } from "../../icon-button";
-import { DivWithTooltip } from "../../tooltip";
+import { TooltipContainer } from "../../tooltip";
 
 type FilterIconProps = {
   onClick: () => void;
@@ -49,10 +49,9 @@ const FilterIcon = ({
   isShowIndicator,
   dataTestId,
 }: FilterIconProps) => {
-  const Wrapper = title ? DivWithTooltip : "div";
-
   return (
-    <Wrapper
+    <TooltipContainer
+      as="div"
       id={id}
       onClick={onClick}
       title={title}
@@ -66,7 +65,7 @@ const FilterIcon = ({
       {isShowIndicator ? (
         <div className={styles.indicator} data-testid="filter_icon_indicator" />
       ) : null}
-    </Wrapper>
+    </TooltipContainer>
   );
 };
 

@@ -37,7 +37,7 @@ import AvatarEditor from "react-avatar-editor";
 import { Slider } from "@docspace/shared/components/slider";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { DivWithTooltip } from "@docspace/shared/components/tooltip";
+import { TooltipContainer } from "@docspace/shared/components/tooltip";
 
 const StyledAvatarCropper = styled.div.attrs(injectDefaultTheme)`
   max-width: 216px;
@@ -189,7 +189,8 @@ const AvatarCropper = ({
         />
       </div>
 
-      <DivWithTooltip
+      <TooltipContainer
+        as="div"
         className="icon_cropper-delete_button"
         onClick={handleDeleteImage}
         title={t("Common:Delete")}
@@ -198,7 +199,7 @@ const AvatarCropper = ({
         <div className="icon_cropper-delete_button-text">
           {t("Common:Delete")}
         </div>
-      </DivWithTooltip>
+      </TooltipContainer>
 
       <div className="icon_cropper-zoom-container">
         <IconButton

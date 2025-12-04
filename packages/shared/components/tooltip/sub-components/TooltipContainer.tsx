@@ -28,8 +28,9 @@ import React, { forwardRef } from "react";
 import { createTooltipWrapper } from "./createTooltipWrapper";
 
 type TooltipContainerBaseProps = {
-  as?: keyof React.JSX.IntrinsicElements;
+  as?: React.ElementType;
   children?: React.ReactNode;
+  type?: string;
 } & React.HTMLAttributes<HTMLElement>;
 
 const TooltipContainerBase = forwardRef<HTMLElement, TooltipContainerBaseProps>(

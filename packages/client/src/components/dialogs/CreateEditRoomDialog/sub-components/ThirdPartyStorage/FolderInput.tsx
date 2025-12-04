@@ -31,7 +31,7 @@ import { TFunction } from "i18next";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { DivWithTooltip } from "@docspace/shared/components/tooltip";
+import { TooltipContainer } from "@docspace/shared/components/tooltip";
 import { TFolder } from "@docspace/shared/api/files/types";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
@@ -191,7 +191,11 @@ const FolderInput = ({
   return (
     <>
       <StyledFolderInput onClick={onOpen}>
-        <DivWithTooltip className="folder-path-wrapper" title={title}>
+        <TooltipContainer
+          as="div"
+          className="folder-path-wrapper"
+          title={title}
+        >
           <span className="root_label">
             {createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
           </span>
@@ -201,13 +205,14 @@ const FolderInput = ({
               {(path ? "/" : "") + (roomTitle || t("Common:NewRoom"))}
             </span>
           ) : null}
-        </DivWithTooltip>
-        <DivWithTooltip
+        </TooltipContainer>
+        <TooltipContainer
+          as="div"
           title={t("Common:SelectFolder")}
           className="icon-wrapper"
         >
           <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
-        </DivWithTooltip>
+        </TooltipContainer>
       </StyledFolderInput>
 
       {isDialogOpen ? (

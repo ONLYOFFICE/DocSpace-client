@@ -29,9 +29,9 @@ import { TTooltipPlace, MouseEventHandler } from "../Tooltip.types";
 import { DEFAULT_DELAY_SHOW } from "../Tooltip.constants";
 
 export const useTooltipControl = (
-  originalOnClick?: MouseEventHandler,
-  originalOnMouseEnter?: MouseEventHandler,
-  originalOnMouseLeave?: MouseEventHandler,
+  originalOnClick?: (e: React.MouseEvent<HTMLElement>) => void,
+  originalOnMouseEnter?: (e: React.MouseEvent<HTMLElement>) => void,
+  originalOnMouseLeave?: (e: React.MouseEvent<HTMLElement>) => void,
   contentString?: string,
   tooltipPlace: TTooltipPlace = "bottom",
 ) => {
@@ -51,7 +51,7 @@ export const useTooltipControl = (
       }, DEFAULT_DELAY_SHOW);
 
       if (originalOnMouseEnter) {
-        originalOnMouseEnter(e);
+        originalOnMouseEnter(e as React.MouseEvent<HTMLElement>);
       }
     },
     [originalOnMouseEnter],
@@ -66,7 +66,7 @@ export const useTooltipControl = (
       setIsReady(false);
 
       if (originalOnMouseLeave) {
-        originalOnMouseLeave(e);
+        originalOnMouseLeave(e as React.MouseEvent<HTMLElement>);
       }
     },
     [originalOnMouseLeave],
@@ -81,7 +81,7 @@ export const useTooltipControl = (
       setIsReady(false);
 
       if (originalOnClick) {
-        originalOnClick(e);
+        originalOnClick(e as React.MouseEvent<HTMLElement>);
       }
     },
     [originalOnClick],

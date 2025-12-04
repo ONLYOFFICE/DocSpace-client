@@ -28,7 +28,7 @@ import React, { useEffect, useRef } from "react";
 import { flip, shift, offset } from "@floating-ui/dom";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import classNames from "classnames";
-import { withTooltipForElement } from "./withTooltip";
+// import { withTooltipForElement } from "./sub-components/withTooltip";
 
 import { Portal } from "../portal";
 
@@ -178,9 +178,10 @@ Tooltip.displayName = "Tooltip";
 export type { TFallbackAxisSideDirection, TTooltipPlace, TGetTooltipContent };
 
 export { Tooltip };
-export { withTooltip, withTooltipForElement } from "./withTooltip";
+export { withTooltip } from "./sub-components/withTooltip";
+export { TooltipContainer } from "./sub-components/TooltipContainer";
 
-export const DivWithTooltip = withTooltipForElement("div");
-export const SpanWithTooltip = withTooltipForElement("span");
-export const LabelWithTooltip = withTooltipForElement("label");
-export const ButtonWithTooltip = withTooltipForElement("button");
+//export const DivWithTooltip = withTooltipForElement("div");
+//export const SpanWithTooltip = withTooltipForElement("span");
+//export const LabelWithTooltip = withTooltipForElement("label");
+//export const ButtonWithTooltip = withTooltipForElement("button");

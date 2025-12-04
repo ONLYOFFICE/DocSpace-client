@@ -1978,8 +1978,7 @@ class ContextOptionsStore {
         key: "ask-ai",
         label: t("Common:AskAI"),
         icon: AISvgUrl,
-        onClick: () =>
-          this.dialogsStore.setAiAgentSelectorDialogProps(true, item),
+        onClick: () => this.filesActionsStore.askAIAction(item),
         disabled: false,
       },
       {

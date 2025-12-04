@@ -71,6 +71,7 @@ export const StyledBody = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 386px;
     width: 100%;
     height: 44px;
     padding-bottom: 40px;
@@ -83,6 +84,10 @@ export const StyledBody = styled.div`
 
     @media ${mobile} {
       display: none;
+    }
+
+    &.guest {
+      padding-bottom: 20px;
     }
   }
 
@@ -107,6 +112,7 @@ export const StyledBody = styled.div`
     align-items: center;
     justify-content: center;
     padding-bottom: 40px;
+    max-width: 386px;
     width: 100%;
     height: 44px;
 

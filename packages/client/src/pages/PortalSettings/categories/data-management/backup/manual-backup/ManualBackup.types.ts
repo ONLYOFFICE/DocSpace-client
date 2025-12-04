@@ -25,6 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { ManualBackupProps } from "@docspace/shared/pages/backup/manual-backup/ManualBackup.types";
+import type {
+  ConnectedThirdPartyAccountType,
+  Nullable,
+} from "@docspace/shared/types";
 
 export interface InjectedManualBackupProps
   extends Omit<
@@ -32,7 +36,9 @@ export interface InjectedManualBackupProps
     "maxWidth" | "buttonSize" | "isNeedFilePath"
   > {
   resetDownloadingProgress: VoidFunction;
-  setConnectedThirdPartyAccount: (account: any) => void;
+  setConnectedThirdPartyAccount: (
+    account: Nullable<ConnectedThirdPartyAccountType>,
+  ) => void;
   setBackupsCount: (count: number) => void;
   setIsInited: (inited: boolean) => void;
   isBackupPaid: boolean;

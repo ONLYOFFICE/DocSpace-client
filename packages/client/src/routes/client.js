@@ -120,6 +120,46 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "ai-agents",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent/chat",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "recent",
             element: (
               <PrivateRoute>
@@ -326,6 +366,7 @@ const ClientRoutes = [
       return { Component };
     },
   },
+
   {
     path: "/form-gallery/:fromFolderId",
     async lazy() {
@@ -425,6 +466,18 @@ const ClientRoutes = [
   {
     path: "/about",
     async lazy() {
+      const { isDesktop, isTablet } = await import("@docspace/shared/utils");
+
+      // On desktop/tablet we redirect to the home page with a flag to open the modal.
+      if (isDesktop() || isTablet()) {
+        const Component = () => {
+          return <Navigate to="/" replace state={{ openAboutDialog: true }} />;
+        };
+
+        return { Component };
+      }
+
+      // On mobile we show the full page.
       const { About } = await componentLoader(
         () => import("SRC_DIR/pages/About"),
       );

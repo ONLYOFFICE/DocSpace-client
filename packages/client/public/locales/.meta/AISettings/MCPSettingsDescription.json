@@ -1,0 +1,28 @@
+{
+  "key_path": "MCPSettingsDescription",
+  "content": "This section lets you manage MCP servers for AI chats within rooms. You can enable system MCP servers or add custom ones to meet your company's needs. Once enabled, these servers will be accessible to other users for their tasks.",
+  "content_en_sha1_hash": "b2e9d72fb73c178eb152d76422714d2230258aa4",
+  "created_at": "2025-11-13T07:58:04.455Z",
+  "updated_at": "2025-11-13T08:09:05.190Z",
+  "comment": {
+    "text": "This text describes the MCP server management section, allowing users to enable system or add custom servers for AI chats in rooms. It appears as a description within the AI settings portal, explaining the purpose of the server configuration options.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:09:05.190Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
+      "line_number": 244,
+      "context": ");\n \n return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"AISettings:MCPSettingsDescription\")}\n </Text>\n {aiSettingsUrl ? (\n <Link\n className={styles.learnMoreLink}\n target={LinkTarget.blank}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

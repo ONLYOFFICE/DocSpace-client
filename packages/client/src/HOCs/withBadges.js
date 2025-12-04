@@ -89,11 +89,11 @@ export default function withBadges(WrappedComponent) {
 
       const { t, setPinAction } = this.props;
 
-      const { action, id } = e.target.closest(".is-pinned").dataset;
+      const { action, id, isaiagent = false } = e.target.closest(".is-pinned").dataset;
 
       if (!action && !id) return;
 
-      setPinAction(action, id, t).then(() => {
+      setPinAction(action, id, t, isaiagent).then(() => {
         this.setState({ disableUnpinClick: false });
       });
     };
@@ -155,6 +155,12 @@ export default function withBadges(WrappedComponent) {
       const { item, onCreateRoomFromTemplate } = this.props;
 
       onCreateRoomFromTemplate(item, true);
+    };
+
+    onRetryVectorization = () => {
+      const { item, retryVectorization } = this.props;
+
+      retryVectorization([item]);
     };
 
     onClickLock = () => {
@@ -236,6 +242,7 @@ export default function withBadges(WrappedComponent) {
           onBadgeClick={this.onBadgeClick}
           onUnpinClick={this.onUnpinClick}
           onUnmuteClick={this.onUnmuteClick}
+          onRetryVectorization={this.onRetryVectorization}
           openLocationFile={this.openLocationFile}
           setConvertDialogVisible={this.setConvertDialogVisible}
           onClickLock={this.onClickLock}
@@ -299,6 +306,7 @@ export default function withBadges(WrappedComponent) {
         setMuteAction,
         checkAndOpenLocationAction,
         onCreateRoomFromTemplate,
+        retryVectorization,
         setFavoriteAction,
       } = filesActionsStore;
       const {
@@ -347,6 +355,7 @@ export default function withBadges(WrappedComponent) {
         onCreateRoomFromTemplate,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
+        retryVectorization,
         setFavoriteAction,
         isRecentFolder,
       };

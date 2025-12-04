@@ -3,7 +3,7 @@
   "content": "Before, you need to connect the corresponding service in the “Integration” section. Otherwise, the connection will not be possible.",
   "content_en_sha1_hash": "2feb1762a1140fb97479d8150fe486ac65e755b3",
   "created_at": "2025-05-19T21:30:56.844Z",
-  "updated_at": "2025-05-24T13:42:37.586Z",
+  "updated_at": "2025-10-27T16:14:33.230Z",
   "comment": {
     "text": "This translation key is used to display an alert message indicating that a connection to third-party storage is required in order to proceed. It appears as a pop-up notification when attempting to create or edit a room without having connected the necessary service.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.js",
-      "line_number": 96,
-      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : (\n <Text as=\"p\">\n {t(\"ThirdPartyStorageNoStorageAlert\")}{\" \"}\n <Link\n href=\"/portal-settings/integration/third-party-services\"\n type=\"page\"\n noHover\n color={currentColorScheme.main?.accent}",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.tsx",
+      "line_number": 132,
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : (\n <Text as=\"p\">\n {t(\"ThirdPartyStorageNoStorageAlert\")}{\" \"}\n <Link\n href=\"/portal-settings/integration/third-party-services\"\n type={LinkType.page}\n noHover\n color={currentColorScheme?.main?.accent}",
       "module": "/packages/client"
     }
   ],

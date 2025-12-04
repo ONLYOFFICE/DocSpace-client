@@ -3,7 +3,7 @@
   "content": "Statistics",
   "content_en_sha1_hash": "2086b21f8f49274138c38d476bee317a84a8aecc",
   "created_at": "2025-05-19T21:30:52.769Z",
-  "updated_at": "2025-05-24T04:01:25.633Z",
+  "updated_at": "2025-11-06T18:29:15.952Z",
   "comment": {
     "text": "The \"Statistics\" translation key is used to display a title for a page that displays statistical information about storage management. It likely appears on a button or heading within a portal settings category page. The translation should reflect the specific context in which it will be displayed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
       "line_number": 38,
-      "context": "import { globalColors } from \"@docspace/shared/themes\";\n \n import ItemIcon from \"SRC_DIR/components/ItemIcon\";\n import SpaceQuota from \"SRC_DIR/components/SpaceQuota\";\n \n import { StyledStatistics, StyledMainTitle } from \"./StyledComponent\";\n \n import RoomsList from \"./sub-components/RoomsList\";\n import UsersList from \"./sub-components/UsersList\";\n \n const buttonProps = {",
+      "context": "import { globalColors } from \"@docspace/shared/themes\";\n \n import ItemIcon from \"SRC_DIR/components/ItemIcon\";\n import SpaceQuota from \"SRC_DIR/components/SpaceQuota\";\n \n import { StyledStatistics, StyledMainTitle } from \"./StyledComponent\";\n \n import RoomsList from \"./sub-components/RoomsList\";\n import UsersList from \"./sub-components/UsersList\";\n import AIAgentList from \"./sub-components/AIAgentList.js\";",
       "module": "/packages/client"
     }
   ],

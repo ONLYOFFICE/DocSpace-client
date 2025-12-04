@@ -23,11 +23,10 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
-import { TFile } from "@docspace/shared/api/files/types";
+import type { TFile } from "@docspace/shared/api/files/types";
 
 import { StyledItem } from "../NewFilesBadge.styled";
-import { NewFilesPanelItemProps } from "../NewFilesBadge.types";
+import type { NewFilesPanelItemProps } from "../NewFilesBadge.types";
 
 import { NewFilesPanelItemDate } from "./NewFilesPanelItemDate";
 import { NewFilesPanelItemRoom } from "./NewFilesPanelItemRoom";
@@ -37,16 +36,33 @@ export const NewFilesPanelItem = ({
   date,
   items,
   isRooms,
+  isAgents,
   isFirst,
   onClose,
 
   culture,
 }: NewFilesPanelItemProps) => {
   return (
-    <StyledItem isRooms={isRooms} isFirst={isFirst}>
+    <StyledItem isRooms={isRooms || isAgents} isFirst={isFirst}>
       <NewFilesPanelItemDate date={date} culture={culture} />
-      {isRooms ? (
+      {isRooms || isAgents ? (
         items.map((value) => {
+          if ("agent" in value) {
+            return (
+              <div
+                key={`${date}-${value.agent.id}`}
+                className="room-items-container"
+              >
+                <NewFilesPanelItemRoom room={value.agent} onClose={onClose} />
+                <NewFilesPanelFileList
+                  items={value.items}
+                  isRooms
+                  onClose={onClose}
+                />
+              </div>
+            );
+          }
+
           if ("room" in value)
             return (
               <div

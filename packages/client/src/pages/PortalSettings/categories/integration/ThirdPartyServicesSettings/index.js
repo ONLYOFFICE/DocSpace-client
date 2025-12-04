@@ -180,15 +180,17 @@ class ThirdPartyServices extends React.Component {
       supportEmail,
       logoText,
       tReady,
+      standalone,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
 
-    const freeConsumers = consumers.filter(
-      (consumer) => consumer.canSet === false,
-    );
     const paidConsumers = consumers.filter(
-      (consumer) => !freeConsumers.includes(consumer),
+      (consumer) => consumer.paid === true,
+    );
+
+    const freeConsumers = consumers.filter(
+      (consumer) => !paidConsumers.includes(consumer),
     );
 
     const imgSrc = theme.isBase ? IntegrationSvgUrl : IntegrationDarkSvgUrl;
@@ -258,6 +260,7 @@ class ThirdPartyServices extends React.Component {
                     updateConsumerProps={updateConsumerProps}
                     t={t}
                     isThirdPartyAvailable={isThirdPartyAvailable}
+                    standalone={standalone}
                   />
                 </div>
               ))}
@@ -296,6 +299,7 @@ class ThirdPartyServices extends React.Component {
                     updateConsumerProps={updateConsumerProps}
                     t={t}
                     isThirdPartyAvailable={isThirdPartyAvailable}
+                    standalone={standalone}
                   />
                 </div>
               ))}
@@ -334,6 +338,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     currentColorScheme,
     companyInfoSettingsData,
     logoText,
+    standalone,
   } = settingsStore;
   const {
     integration,
@@ -357,5 +362,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     supportEmail: companyInfoSettingsData?.email,
     logoText,
     openThirdPartyModal,
+    standalone,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

@@ -37,7 +37,7 @@ interface IAccountsItem {
   showText: boolean;
   activeItemId: string;
   onClick: (e: React.MouseEvent, folderId: string) => void;
-  getLinkData: (folderId: string) => { path: string; state: any };
+  getLinkData: (folderId: string) => { path: string; state: object };
   hideGuests: boolean;
 }
 

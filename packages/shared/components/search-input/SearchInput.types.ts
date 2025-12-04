@@ -68,4 +68,6 @@ export type SearchInputProps = {
   resetOnBlur?: boolean;
   /** Added data-testid for testing  */
   dataTestId?: string;
+  /** HTML tabindex property */
+  tabIndex?: number;
 };

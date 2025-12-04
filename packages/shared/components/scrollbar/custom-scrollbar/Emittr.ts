@@ -228,7 +228,6 @@ export default class Emittr {
     delete handlers.removeHandler;
     let idx;
     let eventName;
-    // eslint-disable-next-line guard-for-in,no-restricted-syntax
     for (eventName in handlers) {
       for (idx = handlers[eventName].length - 1; idx >= 0; idx--) {
         Emittr._callEventHandlers(this, removeHandlers, [

@@ -153,6 +153,12 @@ class DialogsStore {
 
   isRoomDelete = false;
 
+  isAIAgentChatDelete = {
+    visible: false,
+    itemName: "",
+    onDeleteAction: () => {},
+  };
+
   convertItem = null;
 
   formCreationInfo = null;
@@ -168,6 +174,8 @@ class DialogsStore {
   saveAfterReconnectOAuth = false;
 
   createRoomDialogVisible = false;
+
+  createAgentDialogVisible = false;
 
   createRoomConfirmDialogVisible = false;
 
@@ -246,11 +254,28 @@ class DialogsStore {
     onClose: null,
   };
 
+  createAgentDialogProps = {
+    title: "",
+    visible: false,
+    onClose: null,
+  };
+
+  editAgentDialogProps = {
+    visible: false,
+    item: null,
+    onClose: null,
+  };
+
   createPDFFormFileProps = {
     visible: false,
     file: null,
     localKey: "",
     onClose: null,
+  };
+
+  aiAgentSelectorDialogProps = {
+    visible: false,
+    file: null,
   };
 
   newFilesPanelFolderId = null;
@@ -302,6 +327,8 @@ class DialogsStore {
 
   socialAuthWelcomeDialogVisible = false;
 
+  selectFileAiKnowledgeDialogVisible = false;
+
   connectAccountDialogVisible = false;
 
   disconnectAccountDialogVisible = false;
@@ -338,6 +365,18 @@ class DialogsStore {
     this.newFilesPanelFolderId = folderId;
   };
 
+  setAiAgentSelectorDialogProps = (visible, file) => {
+    this.aiAgentSelectorDialogProps = {
+      visible,
+      file:
+        file === null ? null : (file ?? this.aiAgentSelectorDialogProps.file),
+    };
+  };
+
+  setIsAIAgentChatDelete = ({ visible, itemName, onDeleteAction }) => {
+    this.isAIAgentChatDelete = { visible, itemName, onDeleteAction };
+  };
+
   setEditRoomDialogProps = (props) => {
     this.editRoomDialogProps = props;
   };
@@ -348,6 +387,14 @@ class DialogsStore {
 
   setCreateRoomDialogProps = (props) => {
     this.createRoomDialogProps = props;
+  };
+
+  setCreateAgentDialogProps = (props) => {
+    this.createAgentDialogProps = props;
+  };
+
+  setEditAgentDialogProps = (props) => {
+    this.editAgentDialogProps = props;
   };
 
   setInviteLanguage = (culture) => {
@@ -688,6 +735,10 @@ class DialogsStore {
     this.selectFileFormRoomOpenRoot = openRoot;
   };
 
+  setSelectFileAiKnowledgeDialogVisible = (visible) => {
+    this.selectFileAiKnowledgeDialogVisible = visible;
+  };
+
   createMasterForm = async (fileInfo, options) => {
     const { extension = "pdf", withoutDialog, preview } = options;
 
@@ -765,6 +816,10 @@ class DialogsStore {
 
   setCreateRoomDialogVisible = (createRoomDialogVisible) => {
     this.createRoomDialogVisible = createRoomDialogVisible;
+  };
+
+  setCreateAgentDialogVisible = (value) => {
+    this.createAgentDialogVisible = value;
   };
 
   setCreateRoomConfirmDialogVisible = (createRoomConfirmDialogVisible) => {

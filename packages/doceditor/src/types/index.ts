@@ -312,7 +312,7 @@ export interface SelectFolderDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -320,6 +320,9 @@ export interface SelectFolderDialogProps {
       | TRoomSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => boolean;
   onClose: () => void;
   onSubmit: (
@@ -348,7 +351,7 @@ export interface SelectFileDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -469,7 +472,7 @@ export type StartFillingSelectorDialogProps = {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity

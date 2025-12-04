@@ -32,9 +32,13 @@ import { Text } from "../text";
 
 interface StatusMessageProps {
   message: string | React.ReactNode;
+  isWarning?: boolean;
 }
 
-const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
+const StatusMessage: React.FC<StatusMessageProps> = ({
+  message,
+  isWarning,
+}) => {
   const [isVisible, setIsVisible] = React.useState(true);
 
   const [isShowComponent, setIsShowComponent] = React.useState(!!message);
@@ -109,7 +113,7 @@ const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
   return (
     <div
       ref={messageRef}
-      className={`${styles.body} ${!isVisible ? styles.hide : ""}`}
+      className={`${styles.body} ${!isVisible ? styles.hide : ""} ${isWarning ? styles.warning : ""}`}
     >
       <DangerToastReactSvg
         className={styles.dangerToastIcon}

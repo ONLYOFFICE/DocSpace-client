@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
@@ -39,7 +39,7 @@ const baseData = (): ContextMenuModel[] => [
   {
     key: "key",
     label: "label",
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   },
 ];
 

@@ -38,7 +38,7 @@ export const test = base.extend<{
       });
     });
     await page.route(
-      "*/**/login/_next/public/images/**/*",
+      "*/**/login/_next/public/images/**",
       async (route, request) => {
         const imagePath = request
           .url()

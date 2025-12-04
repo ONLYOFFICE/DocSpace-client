@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import {
   screen,
   createEvent,
@@ -32,7 +33,7 @@ import {
   render,
 } from "@testing-library/react";
 import Dropzone from "./index";
-import "@testing-library/jest-dom";
+import styles from "./Dropzone.module.scss";
 
 describe("Dropzone", () => {
   const defaultProps = {
@@ -42,11 +43,11 @@ describe("Dropzone", () => {
     exstsText: "Supported file types: PDF, DOC, DOCX",
     accept: [".pdf", ".doc", ".docx"],
 
-    onDrop: jest.fn(),
+    onDrop: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
@@ -87,7 +88,7 @@ describe("Dropzone", () => {
   });
 
   it("handles file upload correctly", async () => {
-    const onDrop = jest.fn();
+    const onDrop = vi.fn();
 
     render(<Dropzone {...defaultProps} onDrop={onDrop} />);
 
@@ -123,7 +124,7 @@ describe("Dropzone", () => {
     render(<Dropzone {...defaultProps} isLoading />);
 
     const wrapper = screen.getByTestId("dropzone");
-    expect(wrapper).toHaveClass("isLoading");
+    expect(wrapper).toHaveClass(styles.isLoading);
     expect(wrapper).toHaveAttribute("aria-busy", "true");
   });
 

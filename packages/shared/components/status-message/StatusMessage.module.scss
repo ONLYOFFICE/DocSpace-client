@@ -58,6 +58,11 @@
   }
 }
 
+.warning {
+  background: var(--toast-warning-bg);
+  border: var(--toast-warning-border);
+}
+
 @keyframes SlideIn {
   0% {
     opacity: 0;

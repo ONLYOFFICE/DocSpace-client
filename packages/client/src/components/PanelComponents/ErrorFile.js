@@ -63,7 +63,7 @@ const ErrorFile = ({
         maxWidth="320px"
         color={theme.tooltip.backgroundColor}
       />
-      {item.error !== t("Files:EmptyFile") && !item.needPassword ? (
+      {!item.needPassword ? (
         <Text
           className="enter-password"
           fontWeight="600"

@@ -40,7 +40,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 
 import { PluginComponents } from "./enums";
 
-import { messageActions } from "./utils";
+import { borderToStyle, messageActions } from "./utils";
 
 const PLUGIN_IFRAME_TITLE = "Plugin iframe";
 
@@ -146,27 +146,33 @@ export const PluginComponent = inject(({ pluginStore }) => {
             padding: paddingProp,
             margin: marginProp,
             display: displayProp,
-            border: borderProp,
             background: backgroundProp,
             flex: flexProp,
             overflow: overflowProp,
+            ...borderToStyle(borderProp),
             ...elementRest,
           };
         }
 
         switch (componentName) {
           case PluginComponents.box: {
-            const childrenComponents = elementProps?.children?.map(
-              (item, index) => (
-                <PluginComponent
-                  key={`${pluginName}-box-${item.component}-${index}`}
-                  component={item}
-                  pluginName={pluginName}
-                />
-              ),
-            );
+            const childrenComponents = elementProps?.children?.map((item, index) => (
+              <PluginComponent
+                key={`${pluginName}-box-${item.component}-${index}`}
+                component={item}
+                pluginName={pluginName}
+              />
+            ));
 
-            return <div style={elementStyles}>{childrenComponents}</div>;
+            return (
+              <div
+                id={elementProps?.id}
+                className={elementProps?.className}
+                style={elementStyles}
+              >
+                {childrenComponents}
+              </div>
+            );
           }
 
           case PluginComponents.text: {
@@ -326,8 +332,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
               setIsRequestRunning && setIsRequestRunning(false);
               setModalRequestRunning && setModalRequestRunning(false);
               if (isSaveButton) {
-                setSettingsModalRequestRunning &&
-                  setSettingsModalRequestRunning(false);
+                setSettingsModalRequestRunning && setSettingsModalRequestRunning(false);
                 onCloseAction && onCloseAction();
               }
             };
@@ -409,8 +414,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
       const element = getElement();
 
       return element;
-    },
-  ),
+    }
+  )
 );
 
 const WrappedComponent = ({
@@ -451,12 +456,7 @@ const WrappedComponent = ({
       setModalRequestRunning,
       modalRequestRunning,
     }),
-    [
-      contextProps,
-      isRequestRunning,
-      setModalRequestRunning,
-      modalRequestRunning,
-    ],
+    [contextProps, isRequestRunning, setModalRequestRunning, modalRequestRunning]
   );
 
   return (

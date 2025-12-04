@@ -1,0 +1,28 @@
+{
+  "key_path": "OCRDescription",
+  "content": "Recognize and extract text from scanned PDFs and images.",
+  "content_en_sha1_hash": "8d7036bc08f8a686e0edad064aa530e7c55d592e",
+  "created_at": "2025-11-03T12:10:29.455Z",
+  "updated_at": "2025-11-03T12:26:36.902Z",
+  "comment": {
+    "text": "Extract text from scanned documents and images. This description appears in the AI Service Dialog to explain the OCR tool. It helps users understand the function of this AI service.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:26:36.902Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 140,
+      "context": "icon: <TranslationIcon />,\n },\n {\n id: \"ocr\",\n title: t(\"OCR\"),\n description: t(\"OCRDescription\"),\n icon: <OcrIcon />,\n },\n {\n id: \"text-generation\",\n title: t(\"TextGeneration\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -29,7 +29,11 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
-import { BACKUP_SERVICE, TOTAL_SIZE } from "@docspace/shared/constants";
+import {
+  AI_TOOLS,
+  BACKUP_SERVICE,
+  TOTAL_SIZE,
+} from "@docspace/shared/constants";
 import {
   calculateTotalPrice,
   getConvertedSize,
@@ -162,6 +166,10 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
       case BACKUP_SERVICE:
         return t("PerBackup", {
           currency: formatWalletCurrency!(priceValue!, 2),
+        });
+      case AI_TOOLS:
+        return t("PerAITools", {
+          currency: formatWalletCurrency!(priceValue!, 4),
         });
       default:
         return "";

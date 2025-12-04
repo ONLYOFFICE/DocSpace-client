@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import moment from "moment";
-import isEqual from "lodash/isEqual";
 import { useTranslation } from "react-i18next";
-import {
+import React, {
   useState,
   useEffect,
   useMemo,
@@ -86,6 +85,7 @@ import type {
   ShareOptionType,
   EditLinkPanelRef,
 } from "./EditLinkPanel.types";
+import { useUnsavedChanges } from "../../hooks/useUnsavedChanges";
 
 const EditLinkPanel: FC<EditLinkPanelProps> = ({
   ref,
@@ -194,13 +194,43 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
 
-  const [hasChanges, setHasChanges] = useState(false);
   const [isSameDate, setIsSameDate] = useState(false);
 
   const [passwordAccessIsChecked, setPasswordAccessIsChecked] =
     useState(isLocked);
 
   const [denyDownload, setDenyDownload] = useState(isDenyDownload);
+
+  const initData = useMemo(() => {
+    return {
+      passwordValue: password,
+      passwordAccessIsChecked: isLocked,
+      denyDownload: isDenyDownload,
+      accessLink: accessLink ?? ShareAccessRights.ReadOnly,
+      internal: link?.sharedTo?.internal ?? false,
+      linkTitle: link?.sharedTo?.title ?? "",
+    };
+  }, [password, isLocked, isDenyDownload, accessLink, link]);
+
+  const currentDate = useMemo(() => {
+    return {
+      passwordValue,
+      passwordAccessIsChecked,
+      denyDownload,
+      accessLink: selectedAccessOption.access,
+      internal: selectedLinkAccess.internal,
+      linkTitle: deferredLinkTitle.trim(),
+    };
+  }, [
+    passwordValue,
+    passwordAccessIsChecked,
+    denyDownload,
+    selectedAccessOption.access,
+    selectedLinkAccess.internal,
+    deferredLinkTitle.trim(),
+  ]);
+
+  const hasChanges = useUnsavedChanges(initData, currentDate) || !isSameDate;
 
   const onPasswordAccessChange = () =>
     setPasswordAccessIsChecked(!passwordAccessIsChecked);
@@ -211,8 +241,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     setIsVisible(false);
   }, [setIsVisible]);
 
-  const onClosePanel = () => {
-    if (hasChanges) {
+  const onClosePanel = (e?: React.MouseEvent) => {
+    const checkChanges = !e;
+
+    if (checkChanges && hasChanges) {
       setUnsavedChangesDialog(true);
       return;
     }
@@ -340,44 +372,11 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     }
   }, [validateInputs, buildUpdatedLink, executeApiCall, onClose]);
 
-  const initState = useMemo(() => {
-    return {
-      passwordValue: password,
-      passwordAccessIsChecked: isLocked,
-      denyDownload: isDenyDownload,
-      accessLink: accessLink ?? ShareAccessRights.ReadOnly,
-      internal: link?.sharedTo?.internal ?? false,
-      linkTitle: link?.sharedTo?.title ?? "",
-    };
-  }, [password, isLocked, isDenyDownload, accessLink, link]);
-
   useEffect(() => {
-    const data = {
-      passwordValue,
-      passwordAccessIsChecked,
-      denyDownload,
-      accessLink: selectedAccessOption.access,
-      internal: selectedLinkAccess.internal,
-      linkTitle: deferredLinkTitle.trim(),
-    };
-
     const isSameDateCheck =
       date || expirationDate ? moment(date).isSame(expirationDate) : true;
-
     setIsSameDate(isSameDateCheck);
-
-    setHasChanges(!isEqual(data, initState) || !isSameDateCheck);
-  }, [
-    date,
-    denyDownload,
-    expirationDate,
-    initState,
-    passwordAccessIsChecked,
-    passwordValue,
-    selectedAccessOption.access,
-    selectedLinkAccess.internal,
-    deferredLinkTitle,
-  ]);
+  }, [date, expirationDate]);
 
   useEventListener("keydown", (e: KeyboardEvent) => {
     if (e.key === "Enter" && !unsavedChangesDialogVisible) {

@@ -211,6 +211,10 @@
       outline: none;
       @include paddingStyles;
 
+      &:has(.chat-container:not([style*="display: none"])) {
+        padding-block: 0;
+      }
+
       .section-wrapper {
         display: flex;
         flex-direction: column;
@@ -273,6 +277,18 @@
           padding: 0px 16px 16px !important;
         }
       }
+    }
+  }
+
+  &.fullHeightBody {
+    display: flex;
+    flex-direction: column;
+
+    :global(.section-wrapper),
+    :global(.section-wrapper-content) {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
   }
 
@@ -347,7 +363,7 @@
     .section-body_header {
       width: 100%;
       position: sticky;
-      top: 0;
+      top: var(--nav-offset, 0);
       background: var(--section-header-bg);
       padding-inline-end: 0;
       z-index: 201;
@@ -379,7 +395,7 @@
   margin: 0 -16px !important;
 
   @include mixins.mobile {
-    top: 53px;
+    top: calc(53px + var(--nav-offset, 0));
   }
 }
 
@@ -387,7 +403,7 @@
   top: 114px;
 
   @include mixins.mobile {
-    top: 106px;
+    top: calc(106px + var(--nav-offset, 0));
   }
 }
 

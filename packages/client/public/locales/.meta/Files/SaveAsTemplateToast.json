@@ -3,7 +3,7 @@
   "content": "Room template <1>«{{title}}»</1> saved",
   "content_en_sha1_hash": "496cf170e612670afa1b398b24d8e9cdd2c96d27",
   "created_at": "2025-05-19T21:30:56.171Z",
-  "updated_at": "2025-05-24T11:24:45.222Z",
+  "updated_at": "2025-10-27T16:14:33.149Z",
   "comment": {
     "text": "This translation key is used to display a success toast notification when a room template is saved as a template in the UI. The notification includes the title of the saved template and is displayed after saving. It appears in the application's global events section.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/GlobalEvents/SaveAsTemplateEvent.tsx",
-      "line_number": 126,
+      "line_number": 127,
       "context": ".then(() => {\n toastr.success(\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"SaveAsTemplateToast\"\n values={{\n title: roomParams.title,\n }}\n components={{\n 1: <Text as=\"span\" fontWeight={600} fontSize=\"12px\" />,",
       "module": "/packages/client"
     }

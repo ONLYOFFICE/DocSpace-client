@@ -134,6 +134,56 @@
     }
   }
 
+  // Filled variant
+  &.filled {
+    background: var(--filled-button-background-color);
+    color: var(--filled-button-text-color);
+    border: none;
+    opacity: 1;
+
+    &:not(.filledStroke) {
+      path {
+        fill: var(--filled-button-text-color-hover);
+      }
+    }
+
+    &.filledStroke {
+      svg {
+        path {
+          stroke: var(--filled-button-text-color-hover);
+        }
+      }
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--filled-button-hover-background-color);
+      color: var(--filled-button-text-color-hover);
+
+      border: none;
+
+      &:not(.filledStroke) {
+        path {
+          fill: var(--filled-button-text-color-hover);
+        }
+      }
+
+      &.filledStroke {
+        svg {
+          path {
+            stroke: var(--filled-button-text-color-hover);
+          }
+        }
+      }
+    }
+
+    &:active:not(:disabled) {
+      background: var(--filled-button-active-background-color);
+      color: var(--filled-button-text-color-hover);
+
+      border: none;
+    }
+  }
+
   // Disabled state
   &:disabled {
     cursor: default;
@@ -214,7 +264,7 @@
 
   &.isDisabled {
     cursor: default;
-    pointer-events: none;
+    // pointer-events: none;
     background-color: var(--button-background-base-disabled);
     color: var(--button-color-base-disabled);
     border-color: var(--button-border-base-disabled);

@@ -36,10 +36,18 @@ import PortfolioIcon from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.sv
 import ProjectsIcon from "PUBLIC_DIR/images/icons/16/catalog.projects.react.svg?url";
 import DocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
+import {
+  ImportOptionsKey,
+  ImportOptionsType,
+} from "SRC_DIR/store/ImportAccountsStore";
+
 import ImportSection from "../sub-components/ImportSection";
-import { ImportStepProps, InjectedImportStepProps } from "../types";
+import {
+  ImportOptionsKeys,
+  ImportStepProps,
+  InjectedImportStepProps,
+} from "../types";
 import { MigrationButtons } from "../sub-components/MigrationButtons";
-import { ImportOptionsKey } from "SRC_DIR/store/ImportAccountsStore";
 
 const Wrapper = styled.div`
   display: flex;
@@ -77,8 +85,26 @@ const ImportStep = (props: ImportStepProps) => {
     e: React.ChangeEvent<HTMLInputElement>,
     name: ImportOptionsKey,
   ) => {
+    const newImportOptions: Partial<ImportOptionsType> = {};
     const checked = e.target.checked;
-    setImportOptions({ [name]: checked });
+
+    switch (name) {
+      case ImportOptionsKeys.ImportPersonalFiles:
+        {
+          newImportOptions[name] = checked;
+          const sharedFilesAndFolderValue =
+            importOptions[ImportOptionsKeys.ImportSharedFilesAndFolders];
+
+          newImportOptions[ImportOptionsKeys.ImportSharedFilesAndFolders] =
+            sharedFilesAndFolderValue ? checked : sharedFilesAndFolderValue;
+        }
+        break;
+      default:
+        newImportOptions[name] = checked;
+        break;
+    }
+
+    setImportOptions({ ...newImportOptions });
   };
 
   const onCancelMigration = () => {
@@ -203,7 +229,23 @@ const ImportStep = (props: ImportStepProps) => {
           workspace: t("Common:ProductName"),
           sectionIcon: SharedOutlineIcon,
         }}
-        isDisabled={false}
+        isDisabled={!importOptions.importPersonalFiles}
+        getTooltipContent={() => (
+          <Trans
+            t={t}
+            i18nKey="ImportSectionDisabled"
+            ns="Settings"
+            values={{
+              importSectionName: t(
+                "Settings:SharedFilesAndFolders",
+              ).toLocaleLowerCase(),
+              sectionName: t("Settings:PersonalFiles"),
+            }}
+            components={{
+              1: <b />,
+            }}
+          />
+        )}
         dataTestId="import_shared_files_and_folders_section"
       />
 

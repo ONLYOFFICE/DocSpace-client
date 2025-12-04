@@ -79,10 +79,9 @@ export const PDFViewer = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const { isRTL } = useInterfaceDirection();
 
-  // TODO: Add types
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: TODO: Add types
   const pdfViewer = useRef<any>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: TODO: Add types
   const pdfThumbnail = useRef<any>(null);
 
   const toolbarRef = useRef<ImperativeHandle>(null);
@@ -106,7 +105,6 @@ export const PDFViewer = ({
   const initViewer = () => {
     console.log("init PDF Viewer");
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     pdfViewer.current = new window.AscViewer.CViewer("mainPanel", {
       theme: { type: "dark" },
@@ -170,7 +168,6 @@ export const PDFViewer = ({
   }, []);
 
   const resize = useCallback(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     window?.AscViewer?.checkApplicationScale();
     pdfViewer.current?.resize();

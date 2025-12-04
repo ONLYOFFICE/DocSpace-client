@@ -33,6 +33,7 @@ const TABLET_WIDTH = 480;
 export const GreetingContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100%;
   width: ${DESKTOP_WIDTH}px;
 
@@ -41,7 +42,8 @@ export const GreetingContainer = styled.div`
     max-width: ${TABLET_WIDTH}px;
   }
 
-  .portal-logo{
+  .portal-logo {
+    max-width: 386px;
     padding-bottom: 40px;
 
     &.guest {
@@ -51,7 +53,7 @@ export const GreetingContainer = styled.div`
 
   .tooltip {
     margin-bottom: 32px;
-  
+
     &.guest {
       margin-bottom: 40px;
     }
@@ -68,7 +70,5 @@ export const GreetingContainer = styled.div`
       margin-top: 0;
       padding: 0 25px;
     }
-  }
-
   }
 `;

@@ -66,10 +66,22 @@ import styles from "./styles/TransactionHistory.module.scss";
 import TableLoader from "./sub-components/TableLoader";
 import { Link } from "@docspace/shared/components/link";
 
+type TransactionHistoryReportResponse = {
+  error?: string;
+  isCompleted: boolean;
+  resultFileUrl?: string;
+};
+
 type TransactionHistoryProps = {
   getStartTransactionDate?: () => string;
   getEndTransactionDate?: () => string;
-  fetchTransactionHistory?: any;
+  fetchTransactionHistory?: (
+    startDate: moment.Moment,
+    endDate: moment.Moment,
+    isCredit: boolean,
+    isDebit: boolean,
+    participantName?: string,
+  ) => Promise<void>;
   openOnNewPage?: boolean;
   isTransactionHistoryExist?: boolean;
   isMobile?: boolean;
@@ -264,14 +276,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     if (isMobile) closeFilterDialog();
 
-    await fetchTransactions(
-      fetchTransactionHistory,
-      setIsLoading,
-      initialState.selectedType.key as string,
-      initialState.startDate,
-      initialState.endDate,
-      initialState.selectedContact?.id,
-    );
+    if (fetchTransactionHistory) {
+      await fetchTransactions(
+        fetchTransactionHistory,
+        setIsLoading,
+        initialState.selectedType.key as string,
+        initialState.startDate,
+        initialState.endDate,
+        initialState.selectedContact?.id,
+      );
+    }
   };
 
   const shouldShowClearButton = isStateModified({
@@ -301,14 +315,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     setSelectedType(option);
 
-    await fetchTransactions(
-      fetchTransactionHistory,
-      setIsLoading,
-      option.key as string,
-      startDate,
-      endDate,
-      selectedContact?.id,
-    );
+    if (fetchTransactionHistory) {
+      await fetchTransactions(
+        fetchTransactionHistory,
+        setIsLoading,
+        option.key as string,
+        startDate,
+        endDate,
+        selectedContact?.id,
+      );
+    }
   };
 
   const onStartDateChange = async (
@@ -329,14 +345,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     setStartDate(date);
 
-    await fetchTransactions(
-      fetchTransactionHistory,
-      setIsLoading,
-      selectedType.key as string,
-      date,
-      endDate,
-      selectedContact?.id,
-    );
+    if (fetchTransactionHistory) {
+      await fetchTransactions(
+        fetchTransactionHistory,
+        setIsLoading,
+        selectedType.key as string,
+        date,
+        endDate,
+        selectedContact?.id,
+      );
+    }
   };
 
   const onEndDateChange = async (date: moment.Moment | null): Promise<void> => {
@@ -355,14 +373,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     setEndDate(date);
 
-    await fetchTransactions(
-      fetchTransactionHistory,
-      setIsLoading,
-      selectedType.key as string,
-      startDate,
-      date,
-      selectedContact?.id,
-    );
+    if (fetchTransactionHistory) {
+      await fetchTransactions(
+        fetchTransactionHistory,
+        setIsLoading,
+        selectedType.key as string,
+        startDate,
+        date,
+        selectedContact?.id,
+      );
+    }
   };
 
   const onSubmitContactSelector = async (contacts: TSelectorItem[]) => {
@@ -379,14 +399,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     setSelectedContact(contacts[0] as unknown as TUser);
 
-    await fetchTransactions(
-      fetchTransactionHistory,
-      setIsLoading,
-      selectedType.key as string,
-      startDate,
-      endDate,
-      contacts[0].id as string,
-    );
+    if (fetchTransactionHistory) {
+      await fetchTransactions(
+        fetchTransactionHistory,
+        setIsLoading,
+        selectedType.key as string,
+        startDate,
+        endDate,
+        contacts[0].id as string,
+      );
+    }
   };
 
   const onCloseSelectedContact = async () => {
@@ -401,13 +423,15 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     setSelectedContact(null);
 
-    await fetchTransactions(
-      fetchTransactionHistory,
-      setIsLoading,
-      selectedType.key as string,
-      startDate,
-      endDate,
-    );
+    if (fetchTransactionHistory) {
+      await fetchTransactions(
+        fetchTransactionHistory,
+        setIsLoading,
+        selectedType.key as string,
+        startDate,
+        endDate,
+      );
+    }
   };
 
   const onApplyFilter = async () => {
@@ -420,14 +444,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     setIsFilterDialogVisible(false);
     setIsChanged(false);
 
-    await fetchTransactions(
-      fetchTransactionHistory,
-      setIsLoading,
-      mobileFilterState.selectedType.key as string,
-      mobileFilterState.startDate,
-      mobileFilterState.endDate,
-      mobileFilterState.selectedContact?.id,
-    );
+    if (fetchTransactionHistory) {
+      await fetchTransactions(
+        fetchTransactionHistory,
+        setIsLoading,
+        mobileFilterState.selectedType.key as string,
+        mobileFilterState.startDate,
+        mobileFilterState.endDate,
+        mobileFilterState.selectedContact?.id,
+      );
+    }
   };
 
   const getReport = async () => {
@@ -444,34 +470,36 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         isDebit,
       );
 
-      const result = await new Promise<any>((resolve, reject) => {
-        const checkStatus = async () => {
-          try {
-            const response = await checkTransactionHistoryReport();
+      const result = await new Promise<TransactionHistoryReportResponse>(
+        (resolve, reject) => {
+          const checkStatus = async () => {
+            try {
+              const response = await checkTransactionHistoryReport();
 
-            if (!response) {
-              reject(new Error(t("Common:UnexpectedError")));
-              return;
+              if (!response) {
+                reject(new Error(t("Common:UnexpectedError")));
+                return;
+              }
+
+              if (response.error) {
+                reject(new Error(response.error));
+                return;
+              }
+
+              if (response.isCompleted) {
+                resolve(response);
+                return;
+              }
+
+              setTimeout(checkStatus, 1000);
+            } catch (err) {
+              reject(err);
             }
+          };
 
-            if (response.error) {
-              reject(new Error(response.error));
-              return;
-            }
-
-            if (response.isCompleted) {
-              resolve(response);
-              return;
-            }
-
-            setTimeout(checkStatus, 1000);
-          } catch (err) {
-            reject(err);
-          }
-        };
-
-        checkStatus();
-      });
+          checkStatus();
+        },
+      );
 
       if (!result || !result.resultFileUrl) {
         throw new Error(t("Common:UnexpectedError"));

@@ -40,7 +40,6 @@ import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {
   ExternalRestoreBackupWrapperProps,
-  InjectedRestoreBackupWrapperProps,
   RestoreBackupWrapperProps,
 } from "./RestoreBackup.types";
 
@@ -82,11 +81,7 @@ const RestoreBackupWrapper = ({
   );
 };
 
-export default inject<
-  TStore,
-  ExternalRestoreBackupWrapperProps,
-  InjectedRestoreBackupWrapperProps
->(
+export default inject(
   ({
     backup,
     currentQuotaStore,
@@ -96,7 +91,7 @@ export default inject<
     filesSelectorInput,
     thirdPartyStore,
     clientLoadingStore,
-  }) => {
+  }: TStore) => {
     const {
       errorInformation,
       selectedThirdPartyAccount,

@@ -43,6 +43,7 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
     "Files",
     "Common",
     "Translations",
+    "AIRoom",
   ]);
 
   const options = useOptions(props, t);
@@ -77,10 +78,11 @@ const InjectedEmptyViewContainer = inject<
     publicRoomStore,
     peopleStore,
     settingsStore,
+    authStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame, logoText } = settingsStore;
+    const { isFrame, logoText, aiConfig, standalone } = settingsStore;
 
     const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
@@ -100,10 +102,17 @@ const InjectedEmptyViewContainer = inject<
     const {
       setSelectFileFormRoomDialogVisible,
       setQuotaWarningDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       setTemplateAccessSettingsVisible,
     } = dialogsStore;
 
-    const { security, access, rootFolderType } = selectedFolderStore;
+    const {
+      security,
+      access,
+      rootFolderType,
+      isInsideKnowledge,
+      isInsideResultStorage,
+    } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
@@ -129,10 +138,16 @@ const InjectedEmptyViewContainer = inject<
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
       setQuotaWarningDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       setTemplateAccessSettingsVisible,
       isVisitor: userStore?.user?.isVisitor,
       isFrame,
       logoText,
+      isKnowledgeTab: isInsideKnowledge,
+      isResultsTab: isInsideResultStorage,
+      isPortalAdmin: authStore.isAdmin,
+      aiReady: aiConfig?.aiReady,
+      standalone,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

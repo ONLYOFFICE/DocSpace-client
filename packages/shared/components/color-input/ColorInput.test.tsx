@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, vi } from "vitest";
 import { screen, render, fireEvent } from "@testing-library/react";
 import { ColorInput } from "./ColorInput";
-import "@testing-library/jest-dom";
 import { globalColors } from "../../themes";
+import dropdownStyles from "../drop-down/DropDown.module.scss";
+import colorInputStyles from "./ColorInput.module.scss";
 
 describe("ColorInput component", () => {
   it("renders without error", () => {
@@ -49,7 +51,7 @@ describe("ColorInput component", () => {
   });
 
   it("calls handleChange when color is changed", () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     const newColor = "#00FF00";
     render(<ColorInput handleChange={handleChange} />);
     const input = screen.getByRole("textbox") as HTMLInputElement;
@@ -98,20 +100,24 @@ describe("ColorInput component", () => {
 
   it("toggles color picker on color block click", () => {
     render(<ColorInput />);
-    const colorBlock = screen.getByRole("textbox")
-      .nextElementSibling as HTMLElement;
+    const wrapper = screen.getByTestId("color-input");
+    const colorBlock = wrapper.querySelector(
+      `.${colorInputStyles.colorBlock}`,
+    ) as HTMLElement;
+
+    // Ensure colorBlock exists
+    expect(colorBlock).toBeInTheDocument();
 
     // Initially picker should be closed
     const dropdown = screen.getByTestId("dropdown");
-    expect(dropdown).not.toHaveClass("open");
+    expect(dropdown).not.toHaveClass(dropdownStyles.open);
 
     // Open picker
     fireEvent.click(colorBlock);
-    expect(dropdown).toHaveClass("open");
+    expect(dropdown).toHaveClass(dropdownStyles.open);
 
-    // Close picker by clicking the backdrop
-    const backdrop = document.querySelector(".backdrop") as HTMLElement;
-    fireEvent.click(backdrop);
-    expect(dropdown).not.toHaveClass("open");
+    // Close picker by clicking the color block again
+    fireEvent.click(colorBlock);
+    expect(dropdown).not.toHaveClass(dropdownStyles.open);
   });
 });

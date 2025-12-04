@@ -31,6 +31,8 @@ import { Events } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./enums";
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryType } from "@docspace/shared/utils/common";
 
 export const messageActions = ({
   message,
@@ -213,3 +215,25 @@ export const getPluginUrl = (url, file) => {
     file,
   );
 };
+
+export const isAIAgents = () => {
+  const categoryType = getCategoryType(window.location);
+
+  return (
+    categoryType === CategoryType.Chat ||
+    categoryType === CategoryType.AIAgent ||
+    categoryType === CategoryType.AIAgents ||
+    window.location.pathname.startsWith("/ai-agents")
+  );
+};
+
+export function borderToStyle(border = {}) {
+  const { width, style, color, radius } = border;
+
+  const borderValue = [width, style, color].filter(Boolean).join(" ");
+
+  return {
+    ...(borderValue ? { border: borderValue } : {}),
+    ...(radius ? { borderRadius: radius } : {}),
+  };
+}

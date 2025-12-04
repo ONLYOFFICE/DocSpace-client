@@ -26,8 +26,9 @@
 
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { Nullable } from "@docspace/shared/types";
-
-import { InfoPanelEvents } from "./enums";
+import { InfoPanelEvents } from "@docspace/shared/enums";
+import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
+import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 
 export const showInfoPanel = () => {
   const event = new CustomEvent(InfoPanelEvents.showInfoPanel);
@@ -54,6 +55,12 @@ export const setInfoPanelSelectedRoom = (
 
 export const openShareTab = () => {
   const event = new CustomEvent(InfoPanelEvents.openShareTab);
+
+  window.dispatchEvent(event);
+};
+
+export const refreshInfoPanel = () => {
+  const event = new CustomEvent(InfoPanelEvents.refreshInfoPanel);
 
   window.dispatchEvent(event);
 };
@@ -100,4 +107,26 @@ export const getInfoPanelOpen = () => {
   const isVisible = !!document.getElementsByClassName("info-panel").length;
 
   return isVisible;
+};
+
+let loader = false;
+export const showForcedInfoPanelLoader = () => {
+  if (loader) return;
+
+  loader = true;
+
+  const event = new CustomEvent(INFO_PANEL_LOADER_EVENT, {
+    detail: true,
+  });
+
+  window.dispatchEvent(event);
+  window.dispatchEvent(new CustomEvent(AnimationEvents.Forced_Animation));
+
+  setTimeout(() => {
+    loader = false;
+    const event = new CustomEvent(INFO_PANEL_LOADER_EVENT, {
+      detail: false,
+    });
+    window.dispatchEvent(event);
+  }, 400);
 };

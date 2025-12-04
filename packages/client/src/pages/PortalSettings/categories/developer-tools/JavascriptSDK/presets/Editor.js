@@ -208,6 +208,7 @@ const Editor = (props) => {
                   filterParam={FilesSelectorFilterTypes.ALL}
                   isSelect
                   isDocumentIcon
+                  withAIAgentsTreeFolder
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>

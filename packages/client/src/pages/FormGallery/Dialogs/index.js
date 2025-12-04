@@ -49,6 +49,7 @@ const Dialogs = ({
         onClose={onCloseSelectFileDialogVisible}
         withRecentTreeFolder
         withFavoritesTreeFolder
+        withAIAgentsTreeFolder
       />
     ),
     submitToGalleryDialogVisible && (

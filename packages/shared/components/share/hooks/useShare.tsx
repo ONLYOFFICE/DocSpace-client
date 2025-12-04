@@ -448,7 +448,9 @@ export const useShare = ({
       />
     );
 
-    if (fileLinks.length === 0)
+    if (fileLinks.length === 0) {
+      if (!canAddLink) return [];
+
       return [
         header,
         <CreateButton
@@ -457,7 +459,7 @@ export const useShare = ({
           title={t("Common:CreateAndCopy")}
         />,
       ];
-
+    }
     return [
       header,
       ...fileLinks.map((link) => (

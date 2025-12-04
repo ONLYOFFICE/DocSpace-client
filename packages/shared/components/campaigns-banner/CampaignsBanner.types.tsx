@@ -49,7 +49,7 @@ export interface CampaignsBannerProps {
   actionIcon?: string;
 }
 
-interface ITranslate {
+export interface ITranslate {
   Header?: string;
   SubHeader?: string;
   Text?: string;

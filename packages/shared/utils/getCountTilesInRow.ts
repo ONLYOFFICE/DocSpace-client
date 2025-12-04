@@ -41,6 +41,7 @@ function getTileWidth(
 export const getCountTilesInRow = (
   isRooms?: boolean,
   isTemplates?: boolean,
+  isFormGallery?: boolean,
 ) => {
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
@@ -71,6 +72,8 @@ export const getCountTilesInRow = (
   let minTileWidth;
   if (isRooms || isTemplates) {
     minTileWidth = getTileWidth(275, 350) + tileGap;
+  } else if (isFormGallery) {
+    minTileWidth = 216 + tileGap;
   } else {
     minTileWidth = getTileWidth(216, 360) + tileGap;
   }

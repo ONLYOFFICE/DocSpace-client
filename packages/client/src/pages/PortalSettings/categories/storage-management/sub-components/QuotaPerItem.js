@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
@@ -49,13 +48,20 @@ const QuotaPerItemComponent = (props) => {
 
     tabIndex,
     dataTestId,
+    toggleDescription,
   } = props;
-
-  const { t } = useTranslation("Settings");
 
   const [isToggleChecked, setIsToggleChecked] = useState(isQuotaSet);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const quotaFormRef = useRef(null);
+
+  useEffect(() => {
+    if (isToggleChecked && quotaFormRef.current) {
+      quotaFormRef.current?.focus();
+    }
+  }, [isToggleChecked]);
 
   const onToggleChange = async (e) => {
     const { checked } = e.currentTarget;
@@ -107,17 +113,11 @@ const QuotaPerItemComponent = (props) => {
           dataTestId={dataTestId ? `${dataTestId}_button` : undefined}
         />
         <Text className="toggle_label" fontSize="12px">
-          {type === "user"
-            ? t("UserDefaultQuotaDescription", {
-                productName: t("Common:ProductName"),
-                sectionName: t("Common:MyDocuments"),
-              })
-            : t("SetDefaultRoomQuota", {
-                productName: t("Common:ProductName"),
-              })}
+          {toggleDescription}
         </Text>
         {isToggleChecked ? (
           <QuotaForm
+            ref={quotaFormRef}
             isButtonsEnable
             label={formLabel}
             maxInputWidth="214px"
@@ -136,16 +136,13 @@ const QuotaPerItemComponent = (props) => {
 };
 
 export default inject(({ currentQuotaStore, storageManagement }, { type }) => {
-  const { setUserQuota, defaultUsersQuota, defaultRoomsQuota } =
-    currentQuotaStore;
+  const { setUserQuota } = currentQuotaStore;
   const { isStatisticsAvailable } = currentQuotaStore;
 
   const { updateQuotaInfo } = storageManagement;
 
-  const defaultQuota = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
   return {
     setUserQuota,
-    defaultQuota,
     isDisabled: !isStatisticsAvailable,
     updateQuotaInfo,
   };

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useNavigate, useLocation } from "react-router";
 
@@ -87,22 +87,34 @@ const useProfileHeader = ({
   const [deleteOwnerProfileDialog, setDeleteOwnerProfileDialog] =
     useState(false);
 
-  const onChangePasswordClick = () => {
+  const onChangePasswordClick = useCallback(() => {
     const email = profile?.email;
     setDialogData?.({ email });
     setChangePasswordVisible?.(true);
-  };
+  }, [profile, setDialogData, setChangePasswordVisible]);
 
-  const onChangeEmailClick = () => {
+  const onChangeEmailClick = useCallback(() => {
     setDialogData?.(profile);
     setChangeEmailVisible?.(true);
-  };
+  }, [profile, setDialogData, setChangeEmailVisible]);
 
-  const onChangeNameClick = () => {
+  const onChangeNameClick = useCallback(() => {
     setChangeNameVisible(true);
-  };
+  }, [setChangeNameVisible]);
 
-  const getUserContextOptions = () => {
+  const onEditPhotoClick = useCallback(() => {
+    setChangeAvatarVisible(true);
+  }, [setChangeAvatarVisible]);
+
+  const onDeleteProfileClick = useCallback(() => {
+    if (profile?.isOwner) {
+      setDeleteOwnerProfileDialog(true);
+    } else {
+      setDeleteSelfProfileDialog(true);
+    }
+  }, [profile?.isOwner]);
+
+  const getUserContextOptions = useCallback(() => {
     const options = [
       {
         key: "change-name",
@@ -128,7 +140,7 @@ const useProfileHeader = ({
       {
         key: "edit-photo",
         label: t("Profile:EditPhoto"),
-        onClick: () => setChangeAvatarVisible?.(true),
+        onClick: onEditPhotoClick,
         disabled: true,
         icon: ImageReactSvgUrl,
       },
@@ -136,19 +148,23 @@ const useProfileHeader = ({
       {
         key: "delete-profile",
         label: t("PeopleTranslations:DeleteSelfProfile"),
-        onClick: () =>
-          profile?.isOwner
-            ? setDeleteOwnerProfileDialog(true)
-            : setDeleteSelfProfileDialog(true),
+        onClick: onDeleteProfileClick,
         disabled: false,
         icon: CatalogTrashReactSvgUrl,
       },
     ];
 
     return options;
-  };
+  }, [
+    t,
+    onChangeNameClick,
+    onChangeEmailClick,
+    onChangePasswordClick,
+    onEditPhotoClick,
+    onDeleteProfileClick,
+  ]);
 
-  const onClickBack = () => {
+  const onClickBack = useCallback(() => {
     if (location?.state?.fromUrl && profileClicked) {
       navigate(location?.state?.fromUrl);
 
@@ -170,7 +186,7 @@ const useProfileHeader = ({
     setIsLoading?.();
 
     navigate(backUrl);
-  };
+  }, [location, navigate, setIsLoading, userId]);
 
   useHotkeys(
     "Backspace",

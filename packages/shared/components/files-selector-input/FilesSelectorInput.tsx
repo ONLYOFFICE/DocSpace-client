@@ -86,6 +86,7 @@ const FilesSelectorInput = ({
   openRoot,
   formProps,
   dataTestId,
+  withAIAgentsTreeFolder,
 }: FilesSelectorInputProps) => {
   const { t } = useTranslation("Common");
 
@@ -144,15 +145,20 @@ const FilesSelectorInput = ({
     isRoot,
     selectedItemSecurity,
     selectedFileInfo,
+    isDisabledFolder,
+    isInsideKnowledge,
+    isInsideResultStorage,
   ) => {
     return getIsDisabled(
       isFirstLoad,
       isSelectedParentFolder,
-      selectedItemType === "rooms",
+      selectedItemType === "rooms" || selectedItemType === "agents",
       isRoot,
       filterParam,
       !!selectedFileInfo,
       id === Number(selectedItemId),
+      isInsideKnowledge,
+      isInsideResultStorage,
     );
   };
 
@@ -239,6 +245,7 @@ const FilesSelectorInput = ({
           {...filesSelectorSettings}
           withRecentTreeFolder={isFilesSelection}
           withFavoritesTreeFolder={isFilesSelection}
+          withAIAgentsTreeFolder={withAIAgentsTreeFolder}
         />
       </Aside>
     </>

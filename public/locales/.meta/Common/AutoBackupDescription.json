@@ -3,7 +3,7 @@
   "content": "The Automatic backup option is used to automate the {{productName}} data backup process to be able to restore it later to a local server.",
   "content_en_sha1_hash": "0608438dab5d4f80dcf5d2e97d9bb60476afac87",
   "created_at": "2025-05-26T07:15:40.640Z",
-  "updated_at": "2025-10-01T15:17:48.496Z",
+  "updated_at": "2025-11-03T12:10:35.499Z",
   "comment": {
     "text": "The Automatic backup option automatically backs up {{productName}} data to a local server for future restoration. This description appears on the settings page where users can enable or disable auto-backup functionality.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 412,
+      "line_number": 421,
       "context": "styles.backupModulesDescription,\n styles.settingsUnavailable,\n \"backup_modules-description settings_unavailable\",\n )}\n >\n {t(\"Common:AutoBackupDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!isManagement ? (\n <Link",
       "module": "/packages/shared"
     }

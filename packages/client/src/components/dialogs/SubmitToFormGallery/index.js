@@ -141,11 +141,10 @@ const SubmitToFormGallery = ({
         onClose={onCloseFormSelector}
         withRecentTreeFolder
         withFavoritesTreeFolder
+        withAIAgentsTreeFolder
         isSelect
       />
     );
-
-  console.log(formItem);
 
   return (
     <Styled.ModalDialogStyled

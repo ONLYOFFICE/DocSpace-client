@@ -40,11 +40,7 @@ import { LinkType } from "@docspace/shared/components/link";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";
-import {
-  AccountsSearchArea,
-  EmployeeType,
-  RoomsType,
-} from "@docspace/shared/enums";
+import { AccountsSearchArea, EmployeeType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
@@ -67,7 +63,6 @@ type InviteInputProps = {
   t: TTranslation;
   roomId: string | number;
 
-  roomType: RoomsType;
   inviteItems: TSelectorItem[];
   setInviteItems: (items: TSelectorItem[]) => void;
   setAddUsersPanelVisible: (visible: boolean) => void;
@@ -77,7 +72,6 @@ type InviteInputProps = {
 const InviteInput = ({
   t,
   roomId,
-  roomType,
   inviteItems,
   setInviteItems,
   setAddUsersPanelVisible,
@@ -90,8 +84,6 @@ const InviteInput = ({
   const [dropDownWidth, setDropDownWidth] = useState(0);
   const [searchRequestRunning, setSearchRequestRunning] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
-
-  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const dropDownMaxHeight = usersList.length > 5 ? { maxHeight: 240 } : {};
 
@@ -120,14 +112,14 @@ const InviteInput = ({
       if (query.length >= MIN_SEARCH_VALUE) {
         const filter = Filter.getDefault();
 
-        const searchArea = isPublicRoomType
-          ? AccountsSearchArea.People
-          : AccountsSearchArea.Any;
-
         filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
         filter.search = query;
 
-        const users = await getMembersList(searchArea, roomId, filter);
+        const users = await getMembersList(
+          AccountsSearchArea.Any,
+          roomId,
+          filter,
+        );
 
         setUsersList(users.items);
 
@@ -140,7 +132,7 @@ const InviteInput = ({
 
       setSearchRequestRunning(false);
     },
-    [isPublicRoomType, roomId],
+    [roomId],
   );
 
   const debouncedSearch = useCallback(

@@ -24,11 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 import React from "react";
+
 import styled from "styled-components";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
+
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
 const StyledHelpButton = styled(HelpButton)`
   border-radius: 50%;

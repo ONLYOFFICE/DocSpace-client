@@ -1,12 +1,12 @@
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { TViewAs } from "../../types";
 
 import { SelectionArea } from ".";
 
-const mockOnMove = jest.fn();
+const mockOnMove = vi.fn();
 
 const defaultProps = {
   containerClass: "container-class",
@@ -44,7 +44,7 @@ const renderComponent = (props = {}) => {
 
 describe("SelectionArea", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without crashing", () => {

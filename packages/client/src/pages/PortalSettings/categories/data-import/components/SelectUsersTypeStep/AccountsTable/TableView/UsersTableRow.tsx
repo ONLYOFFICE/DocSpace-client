@@ -172,6 +172,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
             size={ComboBoxSize.content}
             displaySelectedOption
             modernView
+            directionY="both"
             manualWidth="auto"
             dataTestId="user_type_combobox"
           />

@@ -138,6 +138,44 @@ export const useFeedTranslation = (
           count,
         });
       return t("InfoPanel:FolderDeleted");
+    case FeedActionKeys.AgentCreated:
+      return (
+        <Trans
+          t={t as TFunction}
+          ns="InfoPanel"
+          i18nKey="HistoryAgentCreated"
+          values={{ roomTitle: feed.data.title }}
+          components={{
+            1: <HistoryText key={feed.data.title!} title={feed.data.title!} />,
+          }}
+        />
+      );
+    case FeedActionKeys.AgentRenamed:
+      return (
+        <Trans
+          t={t as TFunction}
+          ns="InfoPanel"
+          i18nKey="AgentRenamed"
+          values={{
+            oldRoomTitle: feed.data.oldTitle,
+            roomTitle: feed.data.newTitle,
+          }}
+          components={{
+            1: (
+              <HistoryText
+                key={feed.data.oldTitle!}
+                title={feed.data.oldTitle!}
+              />
+            ),
+            2: (
+              <HistoryText
+                key={feed.data.newTitle!}
+                title={feed.data.newTitle!}
+              />
+            ),
+          }}
+        />
+      );
     case FeedActionKeys.RoomCreated:
       return (
         <Trans

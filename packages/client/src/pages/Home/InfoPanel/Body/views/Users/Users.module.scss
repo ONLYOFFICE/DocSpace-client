@@ -68,6 +68,11 @@
     .infoWrapper {
       display: flex;
       flex-direction: row;
+
+      .isMeLabel {
+        padding-inline-start: 4px;
+        color: var(--info-panel-me-label-color);
+      }
     }
 
     :global(.badges) {

@@ -538,7 +538,7 @@ const PeopleSelector = ({
     email?: string,
     isGroup?: boolean,
     status?: EmployeeStatus,
-    id?: string,
+    id?: string | number,
   ) => {
     return (
       <div
@@ -566,7 +566,7 @@ const PeopleSelector = ({
           >
             {label}
           </Text>
-          {!isGroup && id === currentUserId ? (
+          {!isGroup && String(id) === currentUserId ? (
             <Text className={styles.isMeLabel} fontWeight={600} fontSize="14px">
               ({t("Common:MeLabel")})
             </Text>

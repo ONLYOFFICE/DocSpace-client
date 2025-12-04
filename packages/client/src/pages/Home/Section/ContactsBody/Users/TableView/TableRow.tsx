@@ -88,7 +88,7 @@ const PeopleTableRow = ({
   inProgress,
   itemIndex,
   withContentSelection,
-  currentUserId,
+  isMe,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
@@ -326,7 +326,7 @@ const PeopleTableRow = ({
               : displayName?.trim()
                 ? displayName
                 : email}
-            {id === currentUserId ? (
+            {isMe?.(id) ? (
               <Text className="me-label" fontWeight="600" fontSize="13px">
                 ({t("Common:MeLabel")})
               </Text>
@@ -463,7 +463,7 @@ export default inject(
 
       isRoomAdmin: userStore.user?.isRoomAdmin,
       withContentSelection,
-      currentUserId: userStore.user?.id,
+      isMe: userStore.isMe,
     };
   },
 )(withContent(observer(PeopleTableRow)));

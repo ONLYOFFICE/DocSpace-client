@@ -52,7 +52,7 @@ const UserContent = ({
 
   isRoomAdmin: isRoomAdminUser,
   itemIndex,
-  currentUserId,
+  isMe,
 }: UserContentProps) => {
   const { t } = useTranslation(["People", "Common"]);
   const theme = useTheme();
@@ -123,7 +123,7 @@ const UserContent = ({
           : displayName?.trim()
             ? displayName
             : email}
-        {id === currentUserId ? (
+        {isMe?.(id) ? (
           <Text as="div" className="me-label" fontWeight="600" fontSize="13px">
             ({t("Common:MeLabel")})
           </Text>

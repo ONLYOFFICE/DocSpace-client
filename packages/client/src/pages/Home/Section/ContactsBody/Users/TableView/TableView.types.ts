@@ -210,5 +210,5 @@ export type TableRowProps = {
   ) => void;
 
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
-  currentUserId?: string;
+  isMe?: UserStore["isMe"];
 } & TableColumns;

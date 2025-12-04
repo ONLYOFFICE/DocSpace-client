@@ -107,7 +107,11 @@ export function regDesktop(
     const handlers: Record<string, () => void> = {
       encryptionKeys: () => setEncryptionKeys?.(params),
       updateEncryptionKeys: () => setEncryptionKeys?.(params),
-      relogin: () => reLogin(),
+      relogin: () => {
+        toastr.info(t?.("Common:EncryptionKeysReload"));
+
+        reLogin();
+      },
       getsharingkeys: () => {
         if (!isEditor || typeof getEncryptionAccess !== "function") {
           callback({});

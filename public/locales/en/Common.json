@@ -1077,5 +1077,8 @@
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
-  "UserLimit": "User limit"
+  "UserLimit": "User limit",
+  "DomainAlreadyAdded": "This domain has already been added",
+  "IpAlreadyAdded": "This IP address has already been added",
+  "IncorrectIp": "Incorrect IP address"
 }

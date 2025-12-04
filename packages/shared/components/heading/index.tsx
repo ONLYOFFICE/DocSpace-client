@@ -30,7 +30,7 @@ import { classNames } from "../../utils";
 import styles from "./Heading.module.scss";
 import { HeadingProps } from "./Heading.types";
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
-import { withTooltip } from "../tooltip/withTooltip";
+import { withTooltip } from "../tooltip";
 
 export const HeadingPure = ({
   id,

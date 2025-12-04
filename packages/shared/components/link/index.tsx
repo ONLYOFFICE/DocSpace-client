@@ -33,7 +33,7 @@ import { Text } from "../text";
 import type { LinkProps } from "./Link.types";
 import { LinkType, LinkTarget } from "./Link.enums";
 import styles from "./Link.module.scss";
-import { withTooltip } from "../tooltip/withTooltip";
+import { withTooltip } from "../tooltip";
 
 const Link: React.FC<LinkProps> = React.memo(
   ({

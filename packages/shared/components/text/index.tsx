@@ -30,7 +30,7 @@ import equal from "fast-deep-equal/react";
 
 import styles from "./Text.module.scss";
 import type { TextProps } from "./Text.types";
-import { withTooltip } from "../tooltip/withTooltip";
+import { withTooltip } from "../tooltip";
 
 const TextPure = ({
   ref,

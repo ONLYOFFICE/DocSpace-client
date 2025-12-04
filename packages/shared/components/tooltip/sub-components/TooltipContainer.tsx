@@ -24,11 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Button } from "./Button";
-import { withTooltip } from "../tooltip";
-export type { ButtonProps } from "./Button.types";
-export { ButtonSize } from "./Button.enums";
+import React, { forwardRef } from "react";
+import { createTooltipWrapper } from "./createTooltipWrapper";
 
-const ButtonWithTooltip = withTooltip(Button);
+type TooltipContainerBaseProps = {
+  as?: keyof React.JSX.IntrinsicElements;
+  children?: React.ReactNode;
+} & React.HTMLAttributes<HTMLElement>;
 
-export { ButtonWithTooltip, Button };
+const TooltipContainerBase = forwardRef<HTMLElement, TooltipContainerBaseProps>(
+  (props, ref) => {
+    const { as: Element = "div", children, ...restProps } = props;
+    return React.createElement(Element, { ...restProps, ref }, children);
+  },
+);
+
+TooltipContainerBase.displayName = "TooltipContainerBase";
+
+export const TooltipContainer = createTooltipWrapper(TooltipContainerBase);
+
+TooltipContainer.displayName = "TooltipContainer";

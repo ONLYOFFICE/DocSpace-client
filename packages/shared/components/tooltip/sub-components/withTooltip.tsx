@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Button } from "./Button";
-import { withTooltip } from "../tooltip";
-export type { ButtonProps } from "./Button.types";
-export { ButtonSize } from "./Button.enums";
+import React, { ComponentType } from "react";
+import { createTooltipWrapper } from "./createTooltipWrapper";
 
-const ButtonWithTooltip = withTooltip(Button);
-
-export { ButtonWithTooltip, Button };
+export function withTooltip<T extends object>(
+  WrappedComponent: ComponentType<T>,
+) {
+  return createTooltipWrapper(WrappedComponent);
+}

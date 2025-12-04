@@ -24,36 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import classNames from "classnames";
+import { useCallback, useEffect, useState } from "react";
+import { observer } from "mobx-react";
 
-import { RowContainer } from "@docspace/shared/components/rows";
+import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
+import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
+import { IInfoPanelItem } from "SRC_DIR/helpers/plugins/types";
+import { TSelection } from "@docspace/shared/utils/copy";
 
-import SessionsRow from "./SessionsRow";
-import styles from "../../active-sessions.module.scss";
+type Props = {
+  infoPanelItem?: IInfoPanelItem;
+  selection?: TSelection;
+};
 
-const RowView = (props) => {
-  const { t, sectionWidth, sessionsData } = props;
+const Plugin = ({ infoPanelItem, selection }: Props) => {
+  const { body: boxProps, subMenu, onLoad, pluginName } = infoPanelItem || {};
+
+  const [bodyProps, setBodyProps] = useState(boxProps || {});
+
+  useEffect(() => {
+    if (!selection) return;
+
+    subMenu?.onClick?.(selection.id ? +selection.id : 0);
+  }, [selection?.id]);
+
+  const onLoadAction = useCallback(async () => {
+    if (!onLoad) return;
+    const res = await onLoad();
+
+    const { body } = res;
+
+    if (body) {
+      setBodyProps({ ...body });
+    }
+  }, [onLoad]);
+
+  useEffect(() => {
+    onLoadAction();
+  }, [onLoadAction]);
 
   return (
-    <RowContainer
-      className={classNames(styles.rowContainer, "sessions-row-container")}
-      useReactWindow={false}
-      hasMoreFiles={false}
-      itemHeight={58}
-      itemCount={sessionsData.length}
-      filesLength={sessionsData.length}
-      fetchMoreFiles={() => {}}
+    <div
+      data-testid={`info_panel_plugin_${pluginName?.toLowerCase()?.replace(/\s+/g, "_")}`}
     >
-      {sessionsData.map((item) => (
-        <SessionsRow
-          t={t}
-          key={item.id}
-          item={item}
-          sectionWidth={sectionWidth}
-        />
-      ))}
-    </RowContainer>
+      <WrappedComponent
+        pluginName={pluginName}
+        component={{ component: PluginComponents.box, props: bodyProps }}
+        saveButton={undefined}
+        setSaveButtonProps={undefined}
+        setModalRequestRunning={undefined}
+        modalRequestRunning={undefined}
+      />
+    </div>
   );
 };
 
-export default RowView;
+export default observer(Plugin);

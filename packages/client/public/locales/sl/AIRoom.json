@@ -5,7 +5,6 @@
   "AIInstructions": "Navodila za umetno inteligenco",
   "CreateChat": "Ustvari klepetal",
   "CreateChatDescription": "Pojdite na zavihek AI-Chat, da začnete.",
-  "EmptyKnowledgeDescription": "Datoteke, ki so naložene tukaj, bodo indeksirane in uporabljene kot kontekst v zavihku AI-Chat. Dodajte datoteke, da vprašate AI o njih, ustvarite vsebino ali analizirajte informacije skupaj.",
   "EmptyKnowledgeDescriptionActions": "Poskusite naslednje ukaze za začetek:",
   "EmptyKnowledgeTitle": "Še nobena datoteka ni bila naložena.",
   "EmptyResultsDescription": "Datoteke, ustvarjene v AI-klepantu, se bodo samodejno pojavile tukaj. Kadar koli ustvarite vsebino, začnete klepet ali pošljete sporočilo z izhodom, bo rezultat shranjen v tem razdelku.",

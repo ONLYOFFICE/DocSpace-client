@@ -1178,8 +1178,6 @@ export default inject(
 
     const {
       onClickEditRoom,
-      onClickInviteUsers,
-      onClickArchive,
       onCopyLink,
       onCreateAndCopySharedLink,
       getFolderModel,
@@ -1320,8 +1318,6 @@ export default inject(
       selectedFolder,
 
       onClickEditRoom,
-      onClickInviteUsers,
-      onClickArchive,
       onCopyLink,
 
       isGroupMenuBlocked,

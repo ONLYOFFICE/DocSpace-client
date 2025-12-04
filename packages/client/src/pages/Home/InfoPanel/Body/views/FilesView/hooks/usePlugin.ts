@@ -24,48 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
-import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
-import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
+export const usePlugin = (
+  currentView: string,
+  infoPanelItemsList?: PluginStore["infoPanelItemsList"],
+) => {
+  const isPlugin = currentView.indexOf("info_plugin") > -1;
+  const infoPanelItemKey = currentView.replace("info_plugin-", "");
 
-const Plugin = ({ boxProps, pluginName, plugin, selection }) => {
-  React.useEffect(() => {
-    if (!selection) return;
+  const infoPanelItem = infoPanelItemsList?.find(
+    (i) => i.key === infoPanelItemKey,
+  )?.value;
 
-    plugin?.subMenu.onClick(selection.id ? +selection.id : 0);
-  }, [selection.id]);
-
-  return (
-    <div
-      data-testid={`info_panel_plugin_${pluginName?.toLowerCase().replace(/\s+/g, "_")}`}
-    >
-      <WrappedComponent
-        pluginName={pluginName}
-        component={{ component: PluginComponents.box, props: boxProps }}
-      />
-    </div>
-  );
-};
-
-export default inject(({ pluginStore, infoPanelStore }, { isRooms }) => {
-  const { infoPanelItemsList } = pluginStore;
-
-  const { infoPanelSelection, fileView, roomsView } = infoPanelStore;
-
-  const currentView = isRooms ? roomsView : fileView;
-
-  const itemKey = currentView?.replace("info_plugin-", "");
-
-  const { value } = infoPanelItemsList.find((i) => i.key === itemKey) ?? {};
+  const isPluginHeaderVisible =
+    !!infoPanelItem && infoPanelItem.isHeaderVisible;
 
   return {
-    boxProps: value?.body,
-
-    pluginName: value?.name,
-
-    plugin: value,
-    selection: infoPanelSelection,
+    isPlugin,
+    isPluginHeaderVisible,
+    infoPanelItem,
   };
-})(observer(Plugin));
+};

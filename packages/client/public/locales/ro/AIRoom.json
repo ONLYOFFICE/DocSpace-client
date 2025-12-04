@@ -5,7 +5,6 @@
   "AIInstructions": "Instrucțiuni pentru IA",
   "CreateChat": "Creare chat",
   "CreateChatDescription": "Accesați fila Chat cu IA pentru a începe lucrul",
-  "EmptyKnowledgeDescription": "Fișierele încărcate aici vor fi indexate și vor servi ca context în fila Chat cu IA. Adăugați fișiere despre care doriți să înrebați IA, să generați conţinutul sau să analizaţi informaţiile în întregime.",
   "EmptyKnowledgeDescriptionActions": "Încercați aceste acțiuni pentru a începe:",
   "EmptyKnowledgeTitle": "Niciun fișier nu a fost deocamdată încărcat",
   "EmptyResultsDescription": "Fișierele generate de IA în chatul vor apărea automat aici. De fiecare dată când generali conţinutul, începeţi o conversaţie în chat sau trimiteţi un mesaj cu conţinut generat, rezultatul va fi salvat în această secţiune.",

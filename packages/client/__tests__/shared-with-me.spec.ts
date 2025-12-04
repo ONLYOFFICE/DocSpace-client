@@ -23,7 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
+import { BASE_URL, endpoints } from "@docspace/shared/__mocks__/e2e";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { createLinkRoute } from "@docspace/shared/__mocks__/e2e/handlers/share";
 
 import { expect, test } from "./fixtures/base";
 
@@ -308,5 +310,58 @@ test.describe("Shared with me", () => {
       "column-AccessLevelShareWithMe",
     );
     await expect(accessLevelColumn).not.toBeVisible();
+  });
+
+  test("should copy shared link to clipboard via context menu", async ({
+    page,
+    mockRequest,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await mockRequest.router([endpoints.sharedWithMe]);
+
+    await page.goto("/shared-with-me/filter?folder=4");
+
+    const tableBody = page.getByTestId("table-body");
+    await expect(tableBody).toBeVisible();
+
+    const contextMenuButton = tableBody
+      .getByTestId("context-menu-button")
+      .first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
+
+    const shareOption = page.getByTestId("share");
+    await expect(shareOption).toBeVisible();
+
+    await shareOption.click();
+
+    const copyLinkOption = page.getByTestId("option_copy-shared-link");
+    await expect(copyLinkOption).toBeVisible();
+
+    const shareLink = `${BASE_URL}/s/0000000`;
+
+    await mockRequest.router([
+      createLinkRoute({
+        title: "Shared link",
+        shareLink: shareLink,
+        access: ShareAccessRights.ReadOnly,
+      }),
+    ]);
+
+    await copyLinkOption.click();
+
+    await page.getByTestId("toast-content").waitFor({
+      state: "attached",
+    });
+
+    const handle = await page.evaluateHandle(() =>
+      navigator.clipboard.readText(),
+    );
+
+    const text = await handle.jsonValue();
+
+    expect(text).toBe(shareLink);
   });
 });

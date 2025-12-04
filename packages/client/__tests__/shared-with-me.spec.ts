@@ -25,7 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { BASE_URL, endpoints } from "@docspace/shared/__mocks__/e2e";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { createLinkRoute } from "@docspace/shared/__mocks__/e2e/handlers/share";
+import {
+  createLinkRoute,
+  LINKS_FILE_PATH,
+} from "@docspace/shared/__mocks__/e2e/handlers/share";
 
 import { expect, test } from "./fixtures/base";
 
@@ -363,5 +366,84 @@ test.describe("Shared with me", () => {
     const text = await handle.jsonValue();
 
     expect(text).toBe(shareLink);
+  });
+
+  test("should open info panel when clicking manage link in copy notification toast", async ({
+    page,
+    mockRequest,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await mockRequest.router([endpoints.sharedWithMe]);
+
+    await page.goto("/shared-with-me/filter?folder=4");
+
+    const tableBody = page.getByTestId("table-body");
+    await expect(tableBody).toBeVisible();
+
+    const contextMenuButton = tableBody
+      .getByTestId("context-menu-button")
+      .first();
+    await expect(contextMenuButton).toBeVisible();
+
+    await contextMenuButton.click();
+
+    const shareOption = page.getByTestId("share");
+    await expect(shareOption).toBeVisible();
+
+    await shareOption.click();
+
+    const copyLinkOption = page.getByTestId("option_copy-shared-link");
+    await expect(copyLinkOption).toBeVisible();
+
+    await mockRequest.router([
+      createLinkRoute(
+        {
+          linkId: "1",
+          title: "Shared link",
+          shareLink: `${BASE_URL}/s/0000000`,
+          access: ShareAccessRights.ReadOnly,
+        },
+        "POST",
+      ),
+    ]);
+
+    await copyLinkOption.click();
+
+    const toastContent = page.getByTestId("toast-content");
+    await expect(toastContent).toBeVisible();
+
+    await toastContent.hover();
+
+    const manageOption = toastContent.getByTestId("link");
+    await expect(manageOption).toBeVisible();
+
+    await mockRequest.router([
+      createLinkRoute(
+        [
+          {
+            linkId: "1",
+            title: "Shared link",
+            shareLink: `${BASE_URL}/s/0000000`,
+            access: ShareAccessRights.ReadOnly,
+          },
+          {
+            linkId: "2",
+            title: "Shared link",
+            shareLink: `${BASE_URL}/s/0000000`,
+            access: ShareAccessRights.ReadOnly,
+          },
+        ],
+        "GET",
+        LINKS_FILE_PATH,
+        true,
+      ),
+      endpoints.shareToUser,
+    ]);
+
+    await manageOption.click();
+
+    const infoPanel = page.getByTestId("info_panel_files_view_share");
+    await expect(infoPanel).toBeVisible();
   });
 });

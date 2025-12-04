@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IInitialConfig } from "@/types";
+import type { IInitialConfig } from "@/types";
 import {
   setEncryptionKeys,
   getEncryptionAccess,
 } from "@docspace/shared/api/files";
-import { TUser } from "@docspace/shared/api/people/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 import { toastr } from "@docspace/shared/components/toast";
-import { Nullable, TTranslation } from "@docspace/shared/types";
+import type { Nullable, TTranslation } from "@docspace/shared/types";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 
 const initDesktop = (
@@ -53,7 +53,10 @@ const initDesktop = (
       getEncryptionAccess?.(fileId)
         ?.then((keys) => {
           const data = {
-            keys,
+            keys: keys as unknown as Array<{
+              userId: string;
+              publicKey: string;
+            }>,
           };
 
           callback?.(data);

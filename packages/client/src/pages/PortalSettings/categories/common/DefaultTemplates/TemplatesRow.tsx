@@ -40,14 +40,20 @@ import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
 
+import { TItem } from "./TemplatesRow.types";
 import styles from "./DefaultTemplates.module.scss";
 
-const TemplatesRow = ({ item, getFileIcon }) => {
+type Props = {
+  item: TItem;
+  getFileIcon?: TStore["filesSettingsStore"]["getFileIcon"];
+};
+
+const TemplatesRow = ({ item, getFileIcon }: Props) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const [isSelectorVisible, setIsSelectorVisible] = useState(false);
 
   const getOptions = () => {
-    const options = [
+    const selectOption = [
       {
         key: "select",
         label: t("Common:SelectAction"),
@@ -57,8 +63,9 @@ const TemplatesRow = ({ item, getFileIcon }) => {
       },
     ];
 
-    if (item.isModified) {
-      options.push(
+    if (item?.isModified) {
+      return [
+        ...selectOption,
         {
           key: "preview",
           label: t("Preview"),
@@ -77,12 +84,13 @@ const TemplatesRow = ({ item, getFileIcon }) => {
           disabled: false,
           icon: ResetIcon,
         },
-      );
+      ];
     }
-    return options;
+    return selectOption;
   };
 
-  const icon = getFileIcon(item.extension);
+  const icon = getFileIcon?.(item.extension);
+
   const badgeBackgroundColor = item.isModified
     ? "var(--modified-badge-active-background-color)"
     : "var(--modified-badge-background-color)";
@@ -120,6 +128,7 @@ const TemplatesRow = ({ item, getFileIcon }) => {
         directionX="left"
         getData={getOptions}
       />
+      {/* @ts-expect-error need pass all props */}
       <FilesSelector
         key="select-default-template-dialog"
         filterParam={FilesSelectorFilterTypes.ALL}

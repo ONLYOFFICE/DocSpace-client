@@ -126,7 +126,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const roomName = roomData?.title;
   const roomId = roomData?.roomId;
   const isAgent = roomData?.isAgent;
-  const withQuotaError = roomData?.withQuotaError;
 
   const [email, setEmail] = useState(emailFromLink);
   const [emailValid, setEmailValid] = useState(true);
@@ -145,9 +144,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
 
-  const [isEmailErrorShow, setIsEmailErrorShow] = useState(
-    withQuotaError ?? false,
-  );
+  const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
 
   const [registrationForm, setRegistrationForm] = useState(!!emailFromLink);
@@ -585,7 +582,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           onValidate={onValidateEmail}
           onBlur={onBlurEmail}
           onKeyPress={onKeyPress}
-          withQuotaError={withQuotaError}
         />
         {registrationForm ? (
           <RegistrationForm

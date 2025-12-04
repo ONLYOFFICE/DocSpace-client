@@ -48,7 +48,6 @@ type EmailInputFormProps = {
   onValidate(result: TValidate): undefined;
   onBlur(): void;
   onKeyPress(e: KeyboardEvent<HTMLInputElement>): void;
-  withQuotaError?: boolean;
 };
 
 const EmailInputForm = ({
@@ -65,7 +64,6 @@ const EmailInputForm = ({
   onValidate,
   onBlur,
   onKeyPress,
-  withQuotaError,
 }: EmailInputFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -80,11 +78,9 @@ const EmailInputForm = ({
         labelVisible={false}
         hasError={isEmailErrorShow ? !emailValid : undefined}
         errorMessage={
-          withQuotaError
-            ? t("RegistrationLimit")
-            : emailErrorText
-              ? t(`Common:${emailErrorText}`)
-              : t("Common:RequiredField")
+          emailErrorText
+            ? t(`Common:${emailErrorText}`)
+            : t("Common:RequiredField")
         }
         dataTestId="email_field_container"
       >

@@ -100,8 +100,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
 
   if (!stateData) {
     switch (confirmLinkResult.result) {
-      case ValidationResult.Ok:
-      case ValidationResult.QuotaFailed: {
+      case ValidationResult.Ok: {
         const confirmHeader = searchParams?.toString();
 
         const linkData = {
@@ -113,8 +112,6 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           roomId: confirmLinkResult?.roomId,
           title: confirmLinkResult?.title,
           isAgent: confirmLinkResult?.isAgent,
-          withQuotaError:
-            confirmLinkResult.result === ValidationResult.QuotaFailed,
         };
         setStateData((val) => ({
           ...val,
@@ -142,12 +139,12 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           validationResult: confirmLinkResult.result,
         });
         throw new Error(t("Common:QuotaPaidUserLimitError"));
-      // case ValidationResult.QuotaFailed:
-      //   console.error("access below quota", {
-      //     confirmLinkParams,
-      //     validationResult: confirmLinkResult.result,
-      //   });
-      // throw new Error(t("Common:Error"));
+      case ValidationResult.QuotaFailed:
+        console.error("access below quota", {
+          confirmLinkParams,
+          validationResult: confirmLinkResult.result,
+        });
+        throw new Error(t("Common:Error"));
       default:
         console.error("unknown link", {
           confirmLinkParams,

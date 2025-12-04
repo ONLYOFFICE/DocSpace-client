@@ -97,6 +97,8 @@ const withHotkeys = (Component) => {
       isParentFolderFormRoom,
       isIndexEditingMode,
       enableSelection,
+      openContextMenu,
+      askAIAction,
     } = props;
 
     const navigate = useNavigate();
@@ -115,8 +117,11 @@ const withHotkeys = (Component) => {
     };
 
     const onKeyDown = (e) => {
+      const contextMenuIsOpen =
+        document.getElementsByClassName("p-contextmenu").length;
+
       const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
+      setIsEnabled(!someDialogIsOpen || !contextMenuIsOpen);
 
       if (isIndexEditingMode) return;
 
@@ -180,6 +185,25 @@ const withHotkeys = (Component) => {
       }
     };
 
+    const onCreateAIAgent = () => {
+      if (!isVisitor && isAIAgentsFolder && security?.Create) {
+        const event = new Event(Events.AGENT_CREATE);
+        window.dispatchEvent(event);
+      }
+    };
+
+    const onAskAI = () => {
+      const selection = getSelection();
+
+      if (selection.length === 1) {
+        const item = selection[0];
+
+        if (!item.contextOptions.includes("ask-ai")) return;
+
+        askAIAction(item);
+      }
+    };
+
     const onPaste = async (e) => {
       const someDialogIsOpen = checkDialogsOpen();
 
@@ -204,8 +228,11 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "*",
       (e) => {
+        const contextMenuIsOpen =
+          document.getElementsByClassName("p-contextmenu").length;
         const someDialogIsOpen = checkDialogsOpen();
-        if (someDialogIsOpen) return;
+
+        if (someDialogIsOpen || contextMenuIsOpen) return e;
 
         if (
           (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
@@ -236,6 +263,9 @@ const withHotkeys = (Component) => {
           case "ArrowLeft":
           case "h": {
             return selectLeft();
+          }
+          case "Enter": {
+            return openItem();
           }
 
           default:
@@ -271,7 +301,7 @@ const withHotkeys = (Component) => {
 
     // Select all files and folders
     useHotkeys(
-      "shift+a, ctrl+a, command+a",
+      "ctrl+a, command+a",
       (e) => {
         e.preventDefault();
         selectAll();
@@ -295,7 +325,7 @@ const withHotkeys = (Component) => {
     useHotkeys("ctrl+RIGHT, command+RIGHT", moveCaretRight, hotkeysFilter);
 
     // Open item
-    useHotkeys("Enter", () => openItem(t), hotkeysFilter);
+    // useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     // Back to parent folder
     useHotkeys(
@@ -357,6 +387,17 @@ const withHotkeys = (Component) => {
 
     // Crete room
     useHotkeys("Shift+r", () => onCreateRoom(), {
+      ...hotkeysFilter,
+      ...{ keyup: true },
+    });
+
+    useHotkeys("Shift+c", openContextMenu, {
+      ...hotkeysFilter,
+      ...{ keyup: true },
+    });
+
+    // Create AI agent
+    useHotkeys("Shift+a", () => onCreateAIAgent(), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
@@ -438,6 +479,9 @@ const withHotkeys = (Component) => {
     );
 
     useHotkeys("f2", onRename, hotkeysFilter);
+
+    // Ask AI
+    useHotkeys("Ctrl+i, command+i", onAskAI, hotkeysFilter);
 
     // Upload file
     useHotkeys(
@@ -523,6 +567,7 @@ const withHotkeys = (Component) => {
         uploadFile,
         copyToClipboard,
         uploadClipboardFiles,
+        openContextMenu,
         enableSelection,
       } = hotkeyStore;
 
@@ -539,6 +584,7 @@ const withHotkeys = (Component) => {
         deleteRooms,
         archiveRooms,
         isGroupMenuBlocked,
+        askAIAction,
       } = filesActionsStore;
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
@@ -592,6 +638,7 @@ const withHotkeys = (Component) => {
         deselectAll,
         activateHotkeys,
         onClickBack,
+        openContextMenu,
 
         uploadFile,
         enabledHotkeys,
@@ -626,6 +673,7 @@ const withHotkeys = (Component) => {
         isFormRoom,
         isParentFolderFormRoom,
         enableSelection,
+        askAIAction,
       };
     },
   )(observer(WithHotkeys));

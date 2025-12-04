@@ -63,6 +63,7 @@ export type RowViewProps = {
 
   isRoomAdmin?: TUser["isRoomAdmin"];
   withContentSelection?: ContactsHotkeysStore["withContentSelection"];
+  isMe?: UserStore["isMe"];
 };
 
 export type TItem = ReturnType<UsersStore["getPeopleListItem"]>;
@@ -105,6 +106,7 @@ export type SimpleUserRowProps = {
 
   inProgress?: boolean;
   itemIndex?: number;
+  isMe?: UserStore["isMe"];
 };
 
 export type UserContentProps = {
@@ -120,4 +122,5 @@ export type UserContentProps = {
 
   isRoomAdmin?: TUser["isRoomAdmin"];
   itemIndex?: number;
+  isMe?: UserStore["isMe"];
 };

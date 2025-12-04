@@ -5,7 +5,6 @@
   "AIInstructions": "AI Instructies",
   "CreateChat": "Maak chat",
   "CreateChatDescription": "Ga naar het tabblad AI-Chat om te beginnen.",
-  "EmptyKnowledgeDescription": "Bestanden die hier worden geüpload, worden geïndexeerd en gebruikt als context in het AI-Chat tabblad. Voeg bestanden toe om AI er vragen over te stellen, content te genereren of informatie samen te analyseren.",
   "EmptyKnowledgeDescriptionActions": "Probeer deze acties om aan de slag te gaan:",
   "EmptyKnowledgeTitle": "Nog geen bestanden geüpload.",
   "EmptyResultsDescription": "Bestanden die in AI-Chat worden gegenereerd, verschijnen hier automatisch. Telkens wanneer u inhoud genereert, een chat start of een bericht met output verzendt, wordt het resultaat in dit gedeelte opgeslagen.",

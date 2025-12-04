@@ -5,7 +5,6 @@
   "AIInstructions": "AI 지침",
   "CreateChat": "채팅 만들기",
   "CreateChatDescription": "시작하려면 AI-채팅 탭으로 이동하세요.",
-  "EmptyKnowledgeDescription": "여기 업로드되는 파일은 AI-Chat 탭에서 컨텍스트로 색인화되어 사용됩니다. AI에게 질문하거나, 콘텐츠를 생성하거나, 정보를 함께 분석하기 위해 파일을 추가하세요.",
   "EmptyKnowledgeDescriptionActions": "시작하려면 다음 작업을 해보세요:",
   "EmptyKnowledgeTitle": "아직 파일이 업로드되지 않았습니다.",
   "EmptyResultsDescription": "AI-Chat에서 생성된 파일들은 여기 자동으로 나타납니다. 콘텐츠를 생성하거나, 채팅을 시작하거나, 출력이 포함된 메시지를 보낼 때마다 결과는 이 섹션에 저장됩니다.",

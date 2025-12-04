@@ -636,6 +636,8 @@ export const MessageStoreContextProvider = ({
   }, [store, roomId]);
 
   React.useEffect(() => {
+    if (store.isRequestRunning) return;
+
     if (chatId) store.setInitMessages(messages, total, chatId);
   }, [chatId, store, messages, total]);
 

@@ -67,6 +67,7 @@ type SectionBodyContentProps = {
   selectAll?: ContactsHotkeysStore["selectAll"];
   deselectAll?: ContactsHotkeysStore["deselectAll"];
   openItem?: ContactsHotkeysStore["openItem"];
+  openContextMenu: ContactsHotkeysStore["openContextMenu"];
   onClickBack?: FilesActionStore["onClickBack"];
   getTfaType?: TfaStore["getTfaType"];
   enableSelection: ContactsHotkeysStore["enableSelection"];
@@ -103,6 +104,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     membersSelection,
     groupsSelection,
     isErrorAccountNotAvailable,
+    openContextMenu,
   } = props;
 
   const location = useLocation();
@@ -123,6 +125,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     enableSelection,
     viewAs,
     selection,
+    openContextMenu,
   });
 
   const onMouseDown = useCallback(
@@ -238,6 +241,7 @@ export default inject(
       selectAll,
       deselectAll,
       openItem,
+      openContextMenu,
 
       enableSelection,
     } = contactsHotkeysStore!;
@@ -269,6 +273,7 @@ export default inject(
       deselectAll,
       openItem,
       onClickBack,
+      openContextMenu,
 
       getTfaType,
 

@@ -35,6 +35,13 @@ export class MockRequest {
     return Promise.all(
       endpoints.map(async (endpoint) => {
         return this.page.route(endpoint.url, async (route) => {
+          const method = route.request().method();
+
+          if (endpoint.method && endpoint.method !== method) {
+            await route.continue();
+            return;
+          }
+
           const json = await endpoint.dataHandler().json();
 
           await route.fulfill({ json, status: json.statusCode ?? 200 });

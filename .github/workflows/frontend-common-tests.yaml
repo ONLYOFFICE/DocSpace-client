@@ -88,7 +88,7 @@ jobs:
           fi
 
           # Check for locales changes
-          if echo "$CHANGED_FILES" | grep -E "(public/locales/|common/Tests/)"; then
+          if echo "$CHANGED_FILES" | grep -E "(public/locales/|common/tests/)"; then
             echo "locales=true" >> $GITHUB_OUTPUT
             echo "✅ Locales changes detected"
           else

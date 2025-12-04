@@ -1,3 +1,4 @@
+import { shareToUserHandle } from "./share/shareToUser";
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
@@ -116,11 +117,13 @@ import {
 } from "../utils";
 import { PATH_DELETE_USER } from "./people/self";
 import { aiConfigHandler, PATH_AI_CONFIG } from "./ai/config";
-import { LINK_PATH, LinkHandler } from "./share";
+import { LINK_FILE_PATH, LinkHandler, PATH_SHARE_TO_USERS_FILE } from "./share";
+import { MethodType } from "../types";
 
 export type TEndpoint = {
   url: string | RegExp;
   dataHandler: () => Response;
+  method?: MethodType;
 };
 
 export type TEndpoints = {
@@ -374,7 +377,12 @@ export const endpoints = {
     dataHandler: shareHandler.bind(null, "Delete"),
   },
   shareLink: {
-    url: LINK_PATH,
+    url: LINK_FILE_PATH,
     dataHandler: LinkHandler,
+    method: "POST",
+  },
+  shareToUser: {
+    url: PATH_SHARE_TO_USERS_FILE,
+    dataHandler: shareToUserHandle,
   },
 } satisfies TEndpoints;

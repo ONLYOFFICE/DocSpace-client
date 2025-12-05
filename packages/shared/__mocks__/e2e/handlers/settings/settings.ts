@@ -1,3 +1,4 @@
+import { PATH_WITH_PARAMS } from "./../authentication/login";
 import {
   API_PREFIX,
   BASE_URL,
@@ -9,9 +10,11 @@ import {
   HEADER_ENABLED_JOIN_SETTINGS,
   HEADER_ENABLE_ADM_MESS_SETTINGS,
   HEADER_HCAPTCHA_SETTINGS,
+  HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS,
 } from "../../utils";
 
-const PATH = "settings";
+export const PATH = "settings";
+export const PATH_WITH_QUERY = `${PATH}?**`;
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
@@ -306,6 +309,11 @@ export const settingsAuth = {
   response: { ...settingsNoAuth.response, socketUrl: "123" },
 };
 
+export const settingAuthWithSocket = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, socketUrl: "/socket.io" },
+};
+
 export const settingsNoAuthNoStandalone = {
   response: {
     trustedDomainsType: 0,
@@ -518,7 +526,12 @@ export const settings = (headers?: Headers): Response => {
     return new Response(JSON.stringify(settingsPortalDeactivate));
   if (isNoStandalone)
     return new Response(JSON.stringify(settingsNoAuthNoStandalone));
-  if (isAuthenticated) return new Response(JSON.stringify(settingsAuth));
+  if (isAuthenticated) {
+    if (headers?.get(HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS)) {
+      return new Response(JSON.stringify(settingAuthWithSocket));
+    }
+    return new Response(JSON.stringify(settingsAuth));
+  }
   if (isEnableJoin)
     return new Response(JSON.stringify(settingsWithEnabledJoin));
   if (isEnableAdmMess)

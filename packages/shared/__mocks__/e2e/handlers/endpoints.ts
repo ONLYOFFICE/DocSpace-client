@@ -43,6 +43,8 @@ import {
   selfHandler,
 } from "./people";
 import {
+  colorThemeHandler,
+  PATH_COLOR_THEME,
   COMPLETE_PATH,
   completeHandler,
   LICENCE_PATH,
@@ -51,31 +53,81 @@ import {
   ownerHandler,
   TFA_APP_VALIDATE_PATH,
   tfaAppValidateHandler,
+  settingsHandler,
+  PATH_SETTINGS,
+  PATH_SETTINGS_WITH_QUERY,
+  PATH_BUILD,
+  buildHandler,
+  PATH_SETTINGS_ADDITIONAL,
+  settingsAdditionalHandler,
+  COMPANY_INFO_PATH,
+  companyInfoHandler,
+  PATH_CULTURES,
+  culturesHandler,
+  INVITATION_SETTINGS_PATH,
+  invitationSettingsHandler,
+  PATH_WEB_PLUGINS,
+  webPluginsHandler,
 } from "./settings";
 import {
   CONTINUE_PATH,
   continuePortalHandler,
   DELETE_PATH,
   deletePortalHandler,
+  getPortalHandler,
+  PATH_PORTAL_GET,
+  PATH_QUOTA,
+  PATH_TARIFF,
+  quotaHandler,
   SUSPEND_PATH,
   suspendHandler,
+  tariffHandler,
 } from "./portal";
 import {
+  docServiceHandler,
+  filesSettingsHandler,
   folderHandler,
+  PATH_DOC_SERVICE,
+  PATH_FILES_SETTINGS,
   PATH_FOLDER,
   PATH_ROOMS_LIST,
+  PATH_SHARE,
+  PATH_SHARED_WITH_ME,
+  PATH_THIRD_PARTY,
+  PATH_THIRD_PARTY_CAPABILITIES,
   roomListHandler,
+  ROOT_PATH,
+  rootHandler,
+  sharedWithMeHandler,
+  shareHandler,
+  thirdPartyCapabilitiesHandler,
+  thirdPartyHandler,
 } from "./files";
+import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
+
 import {
+  HEADER_AUTHENTICATED_SETTINGS,
+  HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS,
   HEADER_EMPTY_FOLDER,
   HEADER_FILTERED_FOLDER,
   HEADER_FILTERED_ROOMS_LIST,
+  HEADER_LIST_CAPABILITIES,
   HEADER_ROOMS_LIST,
 } from "../utils";
+import { PATH_DELETE_USER } from "./people/self";
+import { aiConfigHandler, PATH_AI_CONFIG } from "./ai/config";
+import {
+  LINK_FILE_PATH,
+  LinkHandler,
+  PATH_SHARE_TO_USERS_FILE,
+  shareToUserHandle,
+} from "./share";
+import { MethodType } from "../types";
 
 export type TEndpoint = {
-  url: string;
+  url: string | RegExp;
   dataHandler: () => Response;
+  method?: MethodType;
 };
 
 export type TEndpoints = {
@@ -84,7 +136,7 @@ export type TEndpoints = {
 
 const BASE_URL = "*/**/api/2.0/";
 
-export const endpoints: TEndpoints = {
+export const endpoints = {
   wizardComplete: {
     url: `${BASE_URL}${COMPLETE_PATH}`,
     dataHandler: completeHandler,
@@ -215,4 +267,126 @@ export const endpoints: TEndpoints = {
     url: `${BASE_URL}${PATH_ADD_GUEST}`,
     dataHandler: selfHandler,
   },
-};
+  capabilities: {
+    url: `${BASE_URL}${PATH_CAPABILITIES}`,
+    dataHandler: () =>
+      capabilitiesHandler(new Headers({ [HEADER_LIST_CAPABILITIES]: "true" })),
+  },
+  colorTheme: {
+    url: `${BASE_URL}${PATH_COLOR_THEME}`,
+    dataHandler: colorThemeHandler,
+  },
+  settings: {
+    url: `${BASE_URL}${PATH_SETTINGS}`,
+    dataHandler: () =>
+      settingsHandler(new Headers({ [HEADER_AUTHENTICATED_SETTINGS]: "true" })),
+  },
+  settingsWithQuery: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(new Headers({ [HEADER_AUTHENTICATED_SETTINGS]: "true" })),
+  },
+  settingsWithSocket: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(
+        new Headers({
+          [HEADER_AUTHENTICATED_SETTINGS]: "true",
+          [HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS]: "true",
+        }),
+      ),
+  },
+  self: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: selfHandler,
+  },
+  selfEmailActivated: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: selfHandler.bind(null, null, null, true),
+  },
+  selfEmailActivatedClient: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: selfHandler.bind(null, null, null, true, true),
+  },
+  build: {
+    url: `${BASE_URL}${PATH_BUILD}`,
+    dataHandler: buildHandler,
+  },
+  quota: {
+    url: `${BASE_URL}${PATH_QUOTA}`,
+    dataHandler: quotaHandler,
+  },
+  tariff: {
+    url: `${BASE_URL}${PATH_TARIFF}`,
+    dataHandler: tariffHandler,
+  },
+  aiConfig: {
+    url: `${BASE_URL}${PATH_AI_CONFIG}`,
+    dataHandler: aiConfigHandler,
+  },
+  additionalSettings: {
+    url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,
+    dataHandler: settingsAdditionalHandler,
+  },
+  companyInfo: {
+    url: `${BASE_URL}${COMPANY_INFO_PATH}`,
+    dataHandler: companyInfoHandler,
+  },
+  root: {
+    url: `${BASE_URL}${ROOT_PATH}`,
+    dataHandler: rootHandler,
+  },
+  filesSettings: {
+    url: `${BASE_URL}${PATH_FILES_SETTINGS}`,
+    dataHandler: filesSettingsHandler,
+  },
+  getPortal: {
+    url: `${PATH_PORTAL_GET}`,
+    dataHandler: getPortalHandler,
+  },
+  cultures: {
+    url: `${BASE_URL}${PATH_CULTURES}`,
+    dataHandler: culturesHandler,
+  },
+  invitationSettings: {
+    url: `${BASE_URL}${INVITATION_SETTINGS_PATH}`,
+    dataHandler: invitationSettingsHandler,
+  },
+  webPlugins: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsHandler,
+  },
+  thirdPartyCapabilities: {
+    url: `${BASE_URL}${PATH_THIRD_PARTY_CAPABILITIES}`,
+    dataHandler: thirdPartyCapabilitiesHandler,
+  },
+  thirdParty: {
+    url: `${BASE_URL}${PATH_THIRD_PARTY}`,
+    dataHandler: thirdPartyHandler,
+  },
+  docService: {
+    url: `${BASE_URL}${PATH_DOC_SERVICE}`,
+    dataHandler: docServiceHandler,
+  },
+  sharedWithMe: {
+    url: PATH_SHARED_WITH_ME,
+    dataHandler: sharedWithMeHandler.bind(null, "success"),
+  },
+  sharedWithMeEmpty: {
+    url: PATH_SHARED_WITH_ME,
+    dataHandler: sharedWithMeHandler.bind(null, "empty"),
+  },
+  shareDelete: {
+    url: `${BASE_URL}${PATH_SHARE}`,
+    dataHandler: shareHandler.bind(null, "Delete"),
+  },
+  shareLink: {
+    url: LINK_FILE_PATH,
+    dataHandler: LinkHandler,
+    method: "POST",
+  },
+  shareToUser: {
+    url: PATH_SHARE_TO_USERS_FILE,
+    dataHandler: shareToUserHandle,
+  },
+} satisfies TEndpoints;

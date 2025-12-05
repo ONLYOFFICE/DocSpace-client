@@ -219,11 +219,11 @@ type TOptQuota =
  * @extends TOptQuota
  */
 export type TOptSocket = {
-  featureId: string;
-  value: number;
+  featureId?: string;
+  value?: number;
   data?: string;
   type?: "folder" | "file";
-  id?: string;
+  id?: string | number;
   cmd?: "create" | "update" | "delete";
 } & TOptQuota;
 

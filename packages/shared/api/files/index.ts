@@ -1231,12 +1231,7 @@ export async function getIsEncryptionSupport() {
 }
 
 // TODO: Need update res type
-export function setEncryptionKeys(keys: { [key: string]: string | boolean }) {
-  const data = {
-    publicKey: keys.publicKey,
-    privateKeyEnc: keys.privateKeyEnc,
-    update: keys.update,
-  };
+export function setEncryptionKeys(data: { [key: string]: string | boolean }) {
   console.log(data);
   return request({
     method: "put",

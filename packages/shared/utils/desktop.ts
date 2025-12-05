@@ -71,6 +71,28 @@ export function regDesktop(
 ): void {
   if (isSSR) return;
 
+  window.cloudCryptoCommand = (type, params, callback) => {
+    switch (type) {
+      case "encryptionKeys":
+        setEncryptionKeys?.({ ...params, update: false });
+        break;
+      case "updateEncryptionKeys":
+        setEncryptionKeys?.({ ...params, update: true });
+        break;
+      case "relogin":
+        toastr.info(t?.("Common:EncryptionKeysReload"));
+        reLogin();
+        break;
+      case "getsharingkeys":
+        if (isEditor && typeof getEncryptionAccess === "function") {
+          getEncryptionAccess(callback as TGetSharingKeysCallback);
+        } else {
+          callback({});
+        }
+        break;
+    }
+  };
+
   const loginData: TLoginData = {
     displayName: user.displayName,
     email: user.email,
@@ -96,34 +118,14 @@ export function regDesktop(
       ...loginData,
       encryptionKeys,
     };
+
+    setTimeout(() => {
+      window.AscDesktopEditor?.execCommand(
+        "portal:login",
+        JSON.stringify(extendedData),
+      );
+    }, 1000);
   }
-
-  window.AscDesktopEditor?.execCommand(
-    "portal:login",
-    JSON.stringify(extendedData),
-  );
-
-  window.cloudCryptoCommand = (type, params, callback) => {
-    switch (type) {
-      case "encryptionKeys":
-        setEncryptionKeys?.(params);
-        break;
-      case "updateEncryptionKeys":
-        setEncryptionKeys?.({ ...params, update: true });
-        break;
-      case "relogin":
-        toastr.info(t?.("Common:EncryptionKeysReload"));
-        reLogin();
-        break;
-      case "getsharingkeys":
-        if (isEditor && typeof getEncryptionAccess === "function") {
-          getEncryptionAccess(callback as TGetSharingKeysCallback);
-        } else {
-          callback({});
-        }
-        break;
-    }
-  };
 
   window.onSystemMessage = (e) => {
     if (e.type !== "operation") return;

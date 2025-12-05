@@ -26,11 +26,10 @@
 
 "use client";
 
-import MenuIcon from "PUBLIC_DIR/images/menu.react.svg?url";
+import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { ReactSVG } from "react-svg";
 
 import { useStores } from "@/hooks/useStores";
 
@@ -44,11 +43,7 @@ export const Header = observer(() => {
 
   return (
     <div className={styles.wrapper}>
-      <ReactSVG
-        className={styles.burgerIcon}
-        src={MenuIcon}
-        onClick={() => setArticleOpen(!articleOpen)}
-      />
+      <MenuIcon onClick={() => setArticleOpen(!articleOpen)} />
       <header className={styles.header}>{t("SpaceManagement")}</header>
     </div>
   );

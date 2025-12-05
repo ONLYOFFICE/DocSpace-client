@@ -37,6 +37,15 @@
     display: flex;
     align-items: center;
   }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    path {
+      fill: var(--header-burger-color);
+    }
+  }
 }
 
 .header {
@@ -49,20 +58,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.burgerIcon {
-  & > div {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-
-    svg {
-      width: 20px;
-      height: 20px;
-      path {
-        fill: var(--header-burger-color);
-      }
-    }
-  }
 }

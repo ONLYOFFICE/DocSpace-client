@@ -1235,9 +1235,9 @@ export function setEncryptionKeys(keys: { [key: string]: string | boolean }) {
   const data = {
     publicKey: keys.publicKey,
     privateKeyEnc: keys.privateKeyEnc,
-    enable: keys.enable,
     update: keys.update,
   };
+  console.log(data);
   return request({
     method: "put",
     url: "privacyroom/keys",

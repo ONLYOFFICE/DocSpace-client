@@ -104,24 +104,25 @@ export function regDesktop(
   );
 
   window.cloudCryptoCommand = (type, params, callback) => {
-    const handlers: Record<string, () => void> = {
-      encryptionKeys: () => setEncryptionKeys?.(params),
-      updateEncryptionKeys: () => setEncryptionKeys?.(params),
-      relogin: () => {
+    switch (type) {
+      case "encryptionKeys":
+        setEncryptionKeys?.(params);
+        break;
+      case "updateEncryptionKeys":
+        setEncryptionKeys?.({ ...params, update: true });
+        break;
+      case "relogin":
         toastr.info(t?.("Common:EncryptionKeysReload"));
-
         reLogin();
-      },
-      getsharingkeys: () => {
-        if (!isEditor || typeof getEncryptionAccess !== "function") {
+        break;
+      case "getsharingkeys":
+        if (isEditor && typeof getEncryptionAccess === "function") {
+          getEncryptionAccess(callback as TGetSharingKeysCallback);
+        } else {
           callback({});
-          return;
         }
-        getEncryptionAccess(callback as TGetSharingKeysCallback);
-      },
-    };
-
-    handlers[type]?.();
+        break;
+    }
   };
 
   window.onSystemMessage = (e) => {

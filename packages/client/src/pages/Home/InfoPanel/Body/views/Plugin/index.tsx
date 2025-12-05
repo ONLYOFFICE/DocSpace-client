@@ -24,57 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { useCallback, useEffect, useState } from "react";
+import { observer } from "mobx-react";
 
-import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { useNavigate } from "react-router";
-import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
+import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
+import { IInfoPanelItem } from "SRC_DIR/helpers/plugins/types";
+import { TSelection } from "@docspace/shared/utils/copy";
 
-const PROXY_BASE_URL = combineUrl(
-  window.ClientConfig?.proxy?.url,
-  "/portal-settings",
-);
+type Props = {
+  infoPanelItem?: IInfoPanelItem;
+  selection?: TSelection;
+};
 
-const bonusUrl = combineUrl(PROXY_BASE_URL, "/bonus");
-const BonusItem = ({ showText, toggleArticleOpen, currentColorScheme }) => {
-  const { t } = useTranslation("Common");
+const Plugin = ({ infoPanelItem, selection }: Props) => {
+  const { body: boxProps, subMenu, onLoad, pluginName } = infoPanelItem || {};
 
-  const navigate = useNavigate();
+  const [bodyProps, setBodyProps] = useState(boxProps || {});
 
-  const onClick = React.useCallback((e) => {
-    if (openingNewTab(bonusUrl, e)) return;
+  useEffect(() => {
+    if (!selection) return;
 
-    navigate(bonusUrl);
-    toggleArticleOpen();
-  }, []);
+    subMenu?.onClick?.(selection.id ? +selection.id : 0);
+  }, [selection?.id]);
 
-  const title = t("Common:Bonus");
+  const onLoadAction = useCallback(async () => {
+    if (!onLoad) return;
+    const res = await onLoad();
+
+    const { body } = res;
+
+    if (body) {
+      setBodyProps({ ...body });
+    }
+  }, [onLoad]);
+
+  useEffect(() => {
+    onLoadAction();
+  }, [onLoadAction]);
 
   return (
-    <ArticleItem
-      key="bonus"
-      text={title}
-      title={title}
-      icon={GiftReactSvgUrl}
-      showText={showText}
-      onClick={onClick}
-      folderId="document_catalog-bonus"
-      style={{ marginBottom: "16px" }}
-      linkData={{ path: bonusUrl }}
-      $currentColorScheme={currentColorScheme}
-    />
+    <div
+      data-testid={`info_panel_plugin_${pluginName?.toLowerCase()?.replace(/\s+/g, "_")}`}
+    >
+      <WrappedComponent
+        pluginName={pluginName}
+        component={{ component: PluginComponents.box, props: bodyProps }}
+        saveButton={undefined}
+        setSaveButtonProps={undefined}
+        setModalRequestRunning={undefined}
+        modalRequestRunning={undefined}
+      />
+    </div>
   );
 };
 
-export default inject(({ settingsStore }) => {
-  const { showText, toggleArticleOpen, currentColorScheme } = settingsStore;
-  return {
-    showText,
-    toggleArticleOpen,
-    currentColorScheme,
-  };
-})(observer(BonusItem));
+export default observer(Plugin);

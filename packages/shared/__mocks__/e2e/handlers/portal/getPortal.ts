@@ -24,64 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL, HEADER_LIST_CAPABILITIES } from "../utils";
+import { BASE_URL } from "../../utils";
 
-export const PATH_CAPABILITIES = "capabilities";
+export const PATH_PORTAL_GET = "apisystem/portal/get?statistics=true";
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH_CAPABILITIES}`;
-
-export const emptySuccessCapabilities = {
-  response: {
-    ldapEnabled: false,
-    providers: [],
-    ssoLabel: "",
-    oauthEnabled: false,
-    ssoUrl: "",
-    identityServerEnabled: false,
-  },
-  count: 1,
-  links: [
+export const getPortalSuccess = {
+  tenants: [
     {
-      href: url,
-      action: "GET",
+      created: "2021-03-09T17:46:59",
+      domain: BASE_URL,
+      industry: 0,
+      language: "en-US",
+      name: "Web Office",
+      ownerId: "00000000-0000-0000-0000-000000000000",
+      portalName: BASE_URL,
+      status: "Active",
+      tenantId: 1,
+      timeZoneName: "UTC",
+      quotaUsage: {
+        tenantId: 1,
+        tenantAlias: BASE_URL,
+        tenantDomain: BASE_URL,
+        storageSize: 9223372036854776000,
+        usedSize: 4690191,
+        maxRoomAdminsCount: 2147483647,
+        roomAdminCount: 2,
+        maxUsers: -1,
+        usersCount: 0,
+        maxRoomsCount: -1,
+        roomsCount: 4,
+        maxAIAgentsCount: -1,
+        aiAgentsCount: 0,
+      },
+      customQuota: -1,
+      owner: {
+        id: "00000000-0000-0000-0000-000000000000",
+        email: "test@gmail.com",
+        displayName: "Administrator ",
+      },
+      wizardSettings: {
+        completed: true,
+        lastModified: "2021-03-09T17:46:59",
+      },
     },
   ],
-  status: 0,
-  statusCode: 200,
 };
 
-export const successCapabilities = {
-  response: {
-    ldapEnabled: false,
-    providers: [
-      "google",
-      "zoom",
-      "linkedin",
-      "facebook",
-      "twitter",
-      "microsoft",
-    ],
-    ssoLabel: "Single Sign-on",
-    oauthEnabled: true,
-    ssoUrl: `${BASE_URL}/sso/login`,
-    identityServerEnabled: true,
-  },
-  count: 1,
-  links: [
-    {
-      href: url,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-  ok: true,
-};
-
-export const capabilitiesHandler = (headers: Headers) => {
-  if (headers.get(HEADER_LIST_CAPABILITIES)) {
-    return new Response(JSON.stringify(successCapabilities));
-  }
-
-  return new Response(JSON.stringify(emptySuccessCapabilities));
+export const getPortalHandler = (): Response => {
+  return new Response(JSON.stringify(getPortalSuccess));
 };

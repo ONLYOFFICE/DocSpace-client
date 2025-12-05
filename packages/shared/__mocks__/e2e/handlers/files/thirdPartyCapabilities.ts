@@ -24,22 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL, HEADER_LIST_CAPABILITIES } from "../utils";
+import { BASE_URL, API_PREFIX } from "../../utils";
 
-export const PATH_CAPABILITIES = "capabilities";
+export const PATH_THIRD_PARTY_CAPABILITIES = "files/thirdparty/capabilities";
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH_CAPABILITIES}`;
+const url = `${BASE_URL}/${API_PREFIX}/${PATH_THIRD_PARTY_CAPABILITIES}`;
 
-export const emptySuccessCapabilities = {
-  response: {
-    ldapEnabled: false,
-    providers: [],
-    ssoLabel: "",
-    oauthEnabled: false,
-    ssoUrl: "",
-    identityServerEnabled: false,
-  },
-  count: 1,
+export const CAPABILITIES = {
+  response: [],
+  count: 0,
   links: [
     {
       href: url,
@@ -50,38 +43,6 @@ export const emptySuccessCapabilities = {
   statusCode: 200,
 };
 
-export const successCapabilities = {
-  response: {
-    ldapEnabled: false,
-    providers: [
-      "google",
-      "zoom",
-      "linkedin",
-      "facebook",
-      "twitter",
-      "microsoft",
-    ],
-    ssoLabel: "Single Sign-on",
-    oauthEnabled: true,
-    ssoUrl: `${BASE_URL}/sso/login`,
-    identityServerEnabled: true,
-  },
-  count: 1,
-  links: [
-    {
-      href: url,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-  ok: true,
-};
-
-export const capabilitiesHandler = (headers: Headers) => {
-  if (headers.get(HEADER_LIST_CAPABILITIES)) {
-    return new Response(JSON.stringify(successCapabilities));
-  }
-
-  return new Response(JSON.stringify(emptySuccessCapabilities));
+export const thirdPartyCapabilitiesHandler = () => {
+  return new Response(JSON.stringify(CAPABILITIES));
 };

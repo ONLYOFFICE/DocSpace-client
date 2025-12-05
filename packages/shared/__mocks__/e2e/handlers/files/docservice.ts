@@ -24,25 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL, HEADER_LIST_CAPABILITIES } from "../utils";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-export const PATH_CAPABILITIES = "capabilities";
+export const PATH_DOC_SERVICE = "files/docservice";
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH_CAPABILITIES}`;
-
-export const emptySuccessCapabilities = {
+export const docServiceSuccess = {
   response: {
-    ldapEnabled: false,
-    providers: [],
-    ssoLabel: "",
-    oauthEnabled: false,
-    ssoUrl: "",
-    identityServerEnabled: false,
+    version: "",
+    docServiceUrlApi: `${BASE_URL}/ds-vpath/web-apps/apps/api/documents/api.js`,
+    docServiceUrl: "/ds-vpath/",
+    docServicePreloadUrl: `${BASE_URL}/ds-vpath/web-apps/apps/api/documents/preload.html`,
+    docServiceUrlInternal: "http://onlyoffice-document-server/",
+    docServicePortalUrl: "http://host.docker.internal/",
+    docServiceSignatureHeader: "AuthorizationJwt",
+    docServiceSslVerification: true,
+    isDefault: true,
   },
   count: 1,
   links: [
     {
-      href: url,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_DOC_SERVICE}`,
       action: "GET",
     },
   ],
@@ -50,38 +51,6 @@ export const emptySuccessCapabilities = {
   statusCode: 200,
 };
 
-export const successCapabilities = {
-  response: {
-    ldapEnabled: false,
-    providers: [
-      "google",
-      "zoom",
-      "linkedin",
-      "facebook",
-      "twitter",
-      "microsoft",
-    ],
-    ssoLabel: "Single Sign-on",
-    oauthEnabled: true,
-    ssoUrl: `${BASE_URL}/sso/login`,
-    identityServerEnabled: true,
-  },
-  count: 1,
-  links: [
-    {
-      href: url,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-  ok: true,
-};
-
-export const capabilitiesHandler = (headers: Headers) => {
-  if (headers.get(HEADER_LIST_CAPABILITIES)) {
-    return new Response(JSON.stringify(successCapabilities));
-  }
-
-  return new Response(JSON.stringify(emptySuccessCapabilities));
+export const docServiceHandler = () => {
+  return new Response(JSON.stringify(docServiceSuccess));
 };

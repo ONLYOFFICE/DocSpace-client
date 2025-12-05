@@ -24,52 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL, HEADER_LIST_CAPABILITIES } from "../utils";
+import { BASE_URL, API_PREFIX } from "../../utils";
 
-export const PATH_CAPABILITIES = "capabilities";
+export const PATH_TARIFF = "portal/tariff";
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH_CAPABILITIES}`;
-
-export const emptySuccessCapabilities = {
+export const tariffSuccess = {
   response: {
-    ldapEnabled: false,
-    providers: [],
-    ssoLabel: "",
-    oauthEnabled: false,
-    ssoUrl: "",
-    identityServerEnabled: false,
-  },
-  count: 1,
-  links: [
-    {
-      href: url,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-};
-
-export const successCapabilities = {
-  response: {
-    ldapEnabled: false,
-    providers: [
-      "google",
-      "zoom",
-      "linkedin",
-      "facebook",
-      "twitter",
-      "microsoft",
+    openSource: false,
+    enterprise: false,
+    developer: false,
+    id: 1,
+    state: 1,
+    dueDate: "2026-06-05T13:03:34.0000000+04:00",
+    delayDueDate: "0001-01-01T00:00:00.0000000Z",
+    licenseDate: "0001-01-01T00:00:00.0000000Z",
+    customerId: "test@gmail.com",
+    quotas: [
+      {
+        id: 1,
+        quantity: 31,
+        wallet: false,
+      },
     ],
-    ssoLabel: "Single Sign-on",
-    oauthEnabled: true,
-    ssoUrl: `${BASE_URL}/sso/login`,
-    identityServerEnabled: true,
   },
   count: 1,
   links: [
     {
-      href: url,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_TARIFF}`,
       action: "GET",
     },
   ],
@@ -78,10 +59,6 @@ export const successCapabilities = {
   ok: true,
 };
 
-export const capabilitiesHandler = (headers: Headers) => {
-  if (headers.get(HEADER_LIST_CAPABILITIES)) {
-    return new Response(JSON.stringify(successCapabilities));
-  }
-
-  return new Response(JSON.stringify(emptySuccessCapabilities));
+export const tariffHandler = () => {
+  return new Response(JSON.stringify(tariffSuccess));
 };

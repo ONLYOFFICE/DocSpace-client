@@ -1,4 +1,3 @@
-import { shareToUserHandle } from "./share/shareToUser";
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
@@ -117,7 +116,12 @@ import {
 } from "../utils";
 import { PATH_DELETE_USER } from "./people/self";
 import { aiConfigHandler, PATH_AI_CONFIG } from "./ai/config";
-import { LINK_FILE_PATH, LinkHandler, PATH_SHARE_TO_USERS_FILE } from "./share";
+import {
+  LINK_FILE_PATH,
+  LinkHandler,
+  PATH_SHARE_TO_USERS_FILE,
+  shareToUserHandle,
+} from "./share";
 import { MethodType } from "../types";
 
 export type TEndpoint = {

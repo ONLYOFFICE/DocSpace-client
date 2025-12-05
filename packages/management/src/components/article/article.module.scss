@@ -80,6 +80,10 @@
     &.articleOpen {
       display: flex;
     }
+
+    .articleContent {
+      padding: 0 8px;
+    }
   }
 }
 

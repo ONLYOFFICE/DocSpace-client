@@ -36,6 +36,8 @@
   }
 
   @include mixins.mobile {
+    width: calc(100% - 16px);
+    
     &.hideTabs {
       :global(.sticky),
       :global(.sticky-indent) {

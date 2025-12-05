@@ -1263,7 +1263,7 @@ export async function updateEncryptionKeys(data: {
 }
 
 export async function getEncryptionKeys() {
-  console.log("getEncryptionKeys api: ", data);
+  console.log("getEncryptionKeys api");
 
   const options: AxiosRequestConfig = {
     method: "get",

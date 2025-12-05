@@ -91,6 +91,7 @@ const InvitePanel = ({
   checkGuests,
   hasGuests,
   getPortalInviteLink,
+  currentUserId,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -825,6 +826,7 @@ const InvitePanel = ({
                 closeUsersPanel();
               },
             }}
+            currentUserId={currentUserId}
           />
         </ModalDialog.Container>
       ) : null}
@@ -939,6 +941,7 @@ export default inject(
       checkGuests,
       hasGuests,
       getPortalInviteLink,
+      currentUserId: userStore.user.id,
     };
   },
 )(

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { PropsWithChildren, useCallback } from "react";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
@@ -35,7 +35,26 @@ import styles from "../../../ChatMessageBody.module.scss";
 
 import Think from "../Think";
 
-import { createMarkdownComponents } from "./Markdown.utils";
+import {
+  Anchor,
+  Blockquote,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  Table,
+  Hr,
+  Th,
+  Td,
+  Tr,
+  Paragraph,
+  Ol,
+  Ul,
+  Li,
+  Code,
+} from "./Markdown.utils";
 
 // // Function to replace <think> tags with a placeholder before markdown processing
 // const preprocessChatMessage = (text: string): string => {
@@ -64,6 +83,38 @@ const MarkdownField = React.memo(
       ? splitedMsg[0].replace("<think>\n", "")
       : "";
 
+    const CodeWithProps = useCallback(
+      (props: PropsWithChildren<{ className?: string }>) => (
+        <Code
+          {...props}
+          propLanguage={propLanguage}
+          successCopyMessage={successCopyMessage}
+        />
+      ),
+      [propLanguage, successCopyMessage],
+    );
+
+    const components = {
+      h1: H1,
+      h2: H2,
+      h3: H3,
+      h4: H4,
+      h5: H5,
+      h6: H6,
+      a: Anchor,
+      blockquote: Blockquote,
+      hr: Hr,
+      table: Table,
+      th: Th,
+      td: Td,
+      tr: Tr,
+      p: Paragraph,
+      ol: Ol,
+      ul: Ul,
+      li: Li,
+      code: CodeWithProps,
+    };
+
     const processedChatMessage = withThinkBlock ? splitedMsg[1] : chatMessage;
 
     return (
@@ -76,10 +127,7 @@ const MarkdownField = React.memo(
             <Markdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
-              components={createMarkdownComponents({
-                propLanguage,
-                successCopyMessage,
-              })}
+              components={components}
             >
               {thinkBlock}
             </Markdown>
@@ -88,10 +136,7 @@ const MarkdownField = React.memo(
         <Markdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
-          components={createMarkdownComponents({
-            propLanguage,
-            successCopyMessage,
-          })}
+          components={components}
         >
           {processedChatMessage}
         </Markdown>

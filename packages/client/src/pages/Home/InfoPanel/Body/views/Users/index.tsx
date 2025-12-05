@@ -44,6 +44,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
@@ -75,6 +76,8 @@ type UsersProps = {
   userSelection?: TPeopleListItem[] | Nullable<TPeopleListItem>;
 
   isGuests?: boolean;
+
+  isMe?: UserStore["isMe"];
 };
 
 const Users = ({
@@ -90,6 +93,7 @@ const Users = ({
   standalone,
   userSelection,
   isGuests,
+  isMe,
 }: UsersProps) => {
   const { t, ready } = useTranslation([
     "People",
@@ -221,6 +225,7 @@ const Users = ({
       <ItemTitle
         userSelection={userSelection}
         getUserContextOptions={getUserContextOptions!}
+        isMe={isMe!}
       />
       <div className={styles.userContent}>
         <div className={styles.header}>
@@ -347,6 +352,7 @@ export default inject(
     accessRightsStore,
     currentQuotaStore,
     settingsStore,
+    userStore,
   }: TStore) => {
     const { usersStore, contextOptionsStore } = peopleStore;
 
@@ -385,6 +391,7 @@ export default inject(
       standalone,
 
       userSelection,
+      isMe: userStore!.isMe,
     };
   },
 )(observer(Users));

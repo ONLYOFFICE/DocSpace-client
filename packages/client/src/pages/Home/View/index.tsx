@@ -540,7 +540,10 @@ const View = ({
   };
 
   const shouldRedirectToResultStorage =
-    currentView === "chat" && !!selectedFolderStore.id && !canUseChat && !showBodyLoader; 
+    currentView === "chat" &&
+    selectedFolderStore.isAIRoom &&
+    !canUseChat &&
+    !showBodyLoader;
 
   if (shouldRedirectToResultStorage) {
     const agentId = selectedFolderStore.id || "";

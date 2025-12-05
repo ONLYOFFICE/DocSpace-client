@@ -32,7 +32,7 @@ export class MockRequest {
   constructor(public readonly page: Page) {}
 
   async router(endpoints: TEndpoint[]) {
-    return Promise.all(
+    await Promise.all(
       endpoints.map(async (endpoint) => {
         return this.page.route(endpoint.url, async (route) => {
           const method = route.request().method();

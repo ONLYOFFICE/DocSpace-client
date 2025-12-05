@@ -50,7 +50,6 @@ export async function setEncryptionAccess(file) {
           keys,
         },
         (obj) => {
-          console.log("setEncryptionAccess cloudCryptoCommand share:", obj);
           const newFile = obj.isCrypto
             ? new File([obj.bytes], "temp_name")
             : null;

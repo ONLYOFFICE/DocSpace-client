@@ -53,9 +53,9 @@ type TLoginData = {
   encryptionKeys?: TEncryptionKeys;
 };
 
-type TGetSharingKeysCallback = (data?: {
-  keys?: Array<{ userId: string; publicKey: string }>;
-}) => void;
+type TGetSharingKeysCallback = (
+  keys?: Array<{ userId: string; publicKey: string }>,
+) => void;
 
 export function regDesktop(
   user: TUser,

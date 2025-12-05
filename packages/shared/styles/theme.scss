@@ -2204,6 +2204,7 @@
   --chat-file-item-exst-color: #{$gray};
 
   --chat-input-background-color: #{$gray-light};
+  --chat-input-border: unset;
   --chat-input-file-border-color: #{$gray-light-mid};
   --chat-input-file-background-color: #{$white};
   --chat-input-file-exst-color: #{$gray};
@@ -2225,13 +2226,13 @@
   --chat-message-code-block-background-color: #{$white};
   --chat-message-code-block-border: 1px solid #{$gray-light-mid};
   --chat-message-code-block-separator-color: #{$gray-light-mid};
-  --chat-message-tool-block-color: #{$gray-light};
+  --chat-message-tool-block-color: #{$light-gray-hover};
   --chat-message-hr-color: #{$gray};
   --chat-message-table-row-border-color: #{$gray-light-mid};
   --chat-message-blockquote-bg-color: var(--accent-main);
   --chat-message-blockquote-color: #{$gray-text};
   --chat-message-source-url-color: #{$light-gray-dark};
-  --chat-message-source-bg-hover-color: #{$gray-light-mid};
+  --chat-message-source-bg-hover-color: #{$light-gray-selected};
   --chat-message-source-bg-pressed-color: #{$gray-strong};
   --chat-message-external-link-icon-color: #{$gray};
 }
@@ -2252,7 +2253,8 @@
   --chat-file-item-background-color: unset;
   --chat-file-item-exst-color: #{$gray-dark};
 
-  --chat-input-background-color: #{$dark-gray-light};
+  --chat-input-background-color: #{$gray-dark-mid};
+  --chat-input-border: 1px solid #{$black};
   --chat-input-file-border-color: #{$black};
   --chat-input-file-background-color: #{$black};
   --chat-input-file-exst-color: #{$gray};

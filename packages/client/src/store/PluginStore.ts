@@ -74,7 +74,6 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 
-
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
 const { url: proxyURL } = proxyConf;
@@ -425,6 +424,10 @@ class PluginStore {
   };
 
   installPluginCss = async (plugin: TPlugin) => {
+    const cssUrl = getPluginUrl(
+      plugin.url,
+      `plugin.css?hash=${plugin.version}`,
+    );
     const cssUrl = getPluginUrl(
       plugin.url,
       `plugin.css?hash=${plugin.version}`,
@@ -881,6 +884,7 @@ class PluginStore {
 
       this.infoPanelItems.set(key, {
         ...value,
+        isHeaderVisible: value.isHeaderVisible ?? true,
         subMenu: { ...value.subMenu, onClick },
         pluginName: plugin.name,
       });

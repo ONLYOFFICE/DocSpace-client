@@ -24,66 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
-import { SearchProps } from "../Search";
+import { useCallback, useEffect, useState } from "react";
+import { observer } from "mobx-react";
 
-import { TSelection } from "./ContextButton";
+import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
+import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
+import { IInfoPanelItem } from "SRC_DIR/helpers/plugins/types";
+import { TSelection } from "@docspace/shared/utils/copy";
 
-import RoomsItemHeader from "./RoomsItemTitle";
+type Props = {
+  infoPanelItem?: IInfoPanelItem;
+  selection?: TSelection;
+};
 
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
+const Plugin = ({ infoPanelItem, selection }: Props) => {
+  const { body: boxProps, subMenu, onLoad, pluginName } = infoPanelItem || {};
+
+  const [bodyProps, setBodyProps] = useState(boxProps || {});
+
+  useEffect(() => {
+    if (!selection) return;
+
+    subMenu?.onClick?.(selection.id ? +selection.id : 0);
+  }, [selection?.id]);
+
+  const onLoadAction = useCallback(async () => {
+    if (!onLoad) return;
+    const res = await onLoad();
+
+    const { body } = res;
+
+    if (body) {
+      setBodyProps({ ...body });
     }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
+  }, [onLoad]);
 
-const ItemTitle = ({
-  infoPanelSelection,
-
-  isNoItem,
-
-  isGallery,
-  isContacts,
-
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
-
-  if (isPlugin && !isPluginHeaderVisible) return null;
-
-  if (isNoItem || isContacts || isGallery) return null;
-
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        roomsView={InfoPanelView.infoMembers}
-        searchProps={searchProps}
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-      />
-    );
+  useEffect(() => {
+    onLoadAction();
+  }, [onLoadAction]);
 
   return (
-    <RoomsItemHeader
-      selection={infoPanelSelection}
-      isRoomMembersPanel={isRoomMembersPanel}
-    />
+    <div
+      data-testid={`info_panel_plugin_${pluginName?.toLowerCase()?.replace(/\s+/g, "_")}`}
+    >
+      <WrappedComponent
+        pluginName={pluginName}
+        component={{ component: PluginComponents.box, props: bodyProps }}
+        saveButton={undefined}
+        setSaveButtonProps={undefined}
+        setModalRequestRunning={undefined}
+        modalRequestRunning={undefined}
+      />
+    </div>
   );
 };
 
-export default ItemTitle;
+export default observer(Plugin);

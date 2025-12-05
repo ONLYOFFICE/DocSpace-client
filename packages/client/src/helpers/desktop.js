@@ -36,31 +36,29 @@ export function encryptionUploadDialog(callback) {
   );
 }
 
-export function setEncryptionAccess(file) {
-  return api.files.getEncryptionAccess(file.id).then((keys) => {
-    const promise = new Promise((resolve, reject) => {
-      try {
-        window.AscDesktopEditor.cloudCryptoCommand(
-          "share",
-          {
-            cryptoEngineId: desktopConstants.cryptoEngineId,
-            file: [file.viewUrl],
-            keys,
-          },
-          (obj) => {
-            let newFile = null;
-            if (obj.isCrypto) {
-              const bytes = obj.bytes;
-              const filename = "temp_name";
-              newFile = new File([bytes], filename);
-            }
-            resolve(newFile);
-          },
-        );
-      } catch (e) {
-        reject(e);
-      }
-    });
-    return promise;
+export async function setEncryptionAccess(file) {
+  const data = await api.files.getEncryptionAccess(file.id);
+  const keys = data.keys ? JSON.parse(data.keys) : [];
+
+  return new Promise((resolve, reject) => {
+    try {
+      window.AscDesktopEditor.cloudCryptoCommand(
+        "share",
+        {
+          cryptoEngineId: desktopConstants.cryptoEngineId,
+          file: [file.viewUrl],
+          keys,
+        },
+        (obj) => {
+          console.log("setEncryptionAccess cloudCryptoCommand share:", obj);
+          const newFile = obj.isCrypto
+            ? new File([obj.bytes], "temp_name")
+            : null;
+          resolve(newFile);
+        },
+      );
+    } catch (e) {
+      reject(e);
+    }
   });
 }

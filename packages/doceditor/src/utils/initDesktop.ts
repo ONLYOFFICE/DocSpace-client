@@ -42,6 +42,7 @@ const initDesktop = (
   t: Nullable<TTranslation>,
 ) => {
   const encryptionKeys = cfg?.editorConfig?.encryptionKeys;
+
   regDesktop(
     user,
     !!encryptionKeys,
@@ -55,15 +56,9 @@ const initDesktop = (
     true,
     (callback) => {
       getEncryptionAccess?.(fileId)
-        ?.then((keys) => {
-          const data = {
-            keys: keys as unknown as Array<{
-              userId: string;
-              publicKey: string;
-            }>,
-          };
-
-          callback?.(data);
+        ?.then((data) => {
+          const keys = data.keys ? JSON.parse(data.keys) : [];
+          callback?.(keys);
         })
         .catch((error) => {
           toastr.error(

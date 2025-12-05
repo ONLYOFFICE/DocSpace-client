@@ -1275,7 +1275,6 @@ export async function getEncryptionKeys() {
   return res;
 }
 
-// TODO: Need update res type
 export async function getEncryptionAccess(fileId: number | string) {
   const res = (await request({
     method: "get",
@@ -1286,17 +1285,25 @@ export async function getEncryptionAccess(fileId: number | string) {
   return res;
 }
 
-export function updateFileStream(fileId, file, encrypted, forcesave) {
+export async function updateFileStream(
+  fileId: number | string,
+  file: File,
+  encrypted: boolean,
+  forcesave: boolean,
+) {
   const fd = new FormData();
-  fd.append("file", file);
-  fd.append("encrypted", encrypted);
-  fd.append("forcesave", forcesave);
 
-  return request({
+  fd.append("file", file);
+  fd.append("encrypted", String(encrypted));
+  fd.append("forcesave", String(forcesave));
+
+  const res = await request({
     method: "put",
     url: `/files/${fileId}/update`,
     data: fd,
   });
+
+  return res;
 }
 
 export async function setFavoritesSetting(set: boolean) {

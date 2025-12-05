@@ -28,6 +28,7 @@ import type { IInitialConfig } from "@/types";
 import {
   setEncryptionKeys,
   getEncryptionAccess,
+  updateEncryptionKeys,
 } from "@docspace/shared/api/files";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { toastr } from "@docspace/shared/components/toast";
@@ -47,6 +48,9 @@ const initDesktop = (
     encryptionKeys,
     (keys) => {
       setEncryptionKeys(keys);
+    },
+    (keys) => {
+      updateEncryptionKeys(keys);
     },
     true,
     (callback) => {

@@ -86,6 +86,7 @@ const ClientContent = (props) => {
     isEncryption,
     encryptionKeys,
     setEncryptionKeys,
+    updateEncryptionKeys,
     isLoaded,
     isDesktop,
     showMenu,
@@ -124,6 +125,7 @@ const ClientContent = (props) => {
         isEncryption,
         encryptionKeys,
         setEncryptionKeys,
+        updateEncryptionKeys,
         isEditor,
         null,
         t,
@@ -142,6 +144,7 @@ const ClientContent = (props) => {
     isEncryption,
     encryptionKeys,
     setEncryptionKeys,
+    updateEncryptionKeys,
     isLoaded,
     isDesktop,
   ]);
@@ -210,6 +213,7 @@ export const Client = inject(
       isDesktopClient,
       encryptionKeys,
       setEncryptionKeys,
+      updateEncryptionKeys,
       isEncryptionSupport,
       enablePlugins,
       isDesktopClientInit,
@@ -250,6 +254,7 @@ export const Client = inject(
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
       setEncryptionKeys,
+      updateEncryptionKeys,
       showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];

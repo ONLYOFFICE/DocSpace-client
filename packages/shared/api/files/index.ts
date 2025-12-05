@@ -1230,21 +1230,47 @@ export async function getIsEncryptionSupport() {
   return res;
 }
 
-// TODO: Need update res type
-export function setEncryptionKeys(data: { [key: string]: string | boolean }) {
-  console.log(data);
-  return request({
+export async function setEncryptionKeys(data: {
+  [key: string]: string | boolean;
+}) {
+  console.log("setEncryptionKeys api: ", data);
+
+  const options: AxiosRequestConfig = {
+    method: "post",
+    url: "privacyroom/keys",
+    data,
+  };
+
+  const res = (await request(options)) as { [key: string]: string | boolean };
+
+  return res;
+}
+
+export async function updateEncryptionKeys(data: {
+  [key: string]: string | boolean;
+}) {
+  console.log("updateEncryptionKeys api: ", data);
+
+  const options: AxiosRequestConfig = {
     method: "put",
     url: "privacyroom/keys",
     data,
-  });
+  };
+
+  const res = (await request(options)) as { [key: string]: string | boolean };
+
+  return res;
 }
 
 export async function getEncryptionKeys() {
-  const res = (await request({
+  console.log("getEncryptionKeys api: ", data);
+
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "privacyroom/keys",
-  })) as { [key: string]: string | boolean };
+  };
+
+  const res = (await request(options)) as { [key: string]: string | boolean };
 
   return res;
 }

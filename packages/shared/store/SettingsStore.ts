@@ -1116,15 +1116,26 @@ class SettingsStore {
     this.setIsEncryptionSupport(isEncryptionSupport);
   };
 
-  updateEncryptionKeys = (encryptionKeys: {
-    [key: string]: string | boolean;
-  }) => {
-    this.encryptionKeys = encryptionKeys ?? {};
+  updateInStoreEncryptionKeys = (keys: { [key: string]: string | boolean }) => {
+    this.encryptionKeys = keys ?? {};
   };
 
   setEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
     await api.files.setEncryptionKeys(keys);
-    this.updateEncryptionKeys(keys);
+
+    this.updateInStoreEncryptionKeys(keys);
+  };
+
+  updateEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
+    await api.files.updateEncryptionKeys(keys);
+
+    this.updateInStoreEncryptionKeys(keys);
+  };
+
+  getEncryptionKeys = async () => {
+    const encryptionKeys = await api.files.getEncryptionKeys();
+
+    this.updateInStoreEncryptionKeys(encryptionKeys);
   };
 
   setCompanyInfoSettingsData = (data: TCompanyInfo) => {
@@ -1192,11 +1203,6 @@ class SettingsStore {
 
   getPortals = async () => {
     await this.getAllPortals();
-  };
-
-  getEncryptionKeys = async () => {
-    const encryptionKeys = await api.files.getEncryptionKeys();
-    this.updateEncryptionKeys(encryptionKeys);
   };
 
   setModuleInfo = (homepage: string, productId: string) => {

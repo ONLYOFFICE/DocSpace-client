@@ -50,9 +50,6 @@ type TLoginData = {
   provider: string;
   userId: string;
   uiTheme: string;
-};
-
-type TExtendedLoginData = TLoginData & {
   encryptionKeys?: TEncryptionKeys;
 };
 
@@ -65,32 +62,47 @@ export function regDesktop(
   isEncryption: boolean,
   keys?: { [key: string]: string | boolean },
   setEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
+  updateEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
   isEditor?: boolean,
   getEncryptionAccess?: (callback?: TGetSharingKeysCallback) => void,
   t?: Nullable<TTranslation>,
 ): void {
   if (isSSR) return;
 
-  window.cloudCryptoCommand = (type, params, callback) => {
-    switch (type) {
-      case "encryptionKeys":
-        setEncryptionKeys?.({ ...params, update: false });
-        break;
-      case "updateEncryptionKeys":
-        setEncryptionKeys?.({ ...params, update: true });
-        break;
-      case "relogin":
-        toastr.info(t?.("Common:EncryptionKeysReload"));
-        reLogin();
-        break;
-      case "getsharingkeys":
-        if (isEditor && typeof getEncryptionAccess === "function") {
-          getEncryptionAccess(callback as TGetSharingKeysCallback);
-        } else {
-          callback({});
-        }
-        break;
-    }
+  if (isEncryption) {
+    window.cloudCryptoCommand = (type, params, callback) => {
+      switch (type) {
+        case "encryptionKeys":
+          setEncryptionKeys?.(params);
+          break;
+        case "updateEncryptionKeys":
+          updateEncryptionKeys?.(params);
+          break;
+        case "relogin":
+          toastr.info(t?.("Common:EncryptionKeysReload"));
+          reLogin();
+          break;
+        case "getsharingkeys":
+          if (isEditor && getEncryptionAccess) {
+            getEncryptionAccess(callback as TGetSharingKeysCallback);
+          } else {
+            callback?.({});
+          }
+          break;
+      }
+    };
+  }
+
+  window.onSystemMessage = (e) => {
+    if (e.type !== "operation") return;
+
+    const message =
+      e.opMessage ||
+      (e.opType === 0 && t?.("Common:EncryptionFilePreparing")) ||
+      (e.opType === 1 && t?.("Common:EncryptingFile")) ||
+      t?.("Common:LoadingProcessing");
+
+    toastr.info(message);
   };
 
   const loginData: TLoginData = {
@@ -102,44 +114,17 @@ export function regDesktop(
     uiTheme: getEditorTheme(user.theme || ThemeKeys.BaseStr),
   };
 
-  let extendedData: TExtendedLoginData = { ...loginData };
-
   if (isEncryption) {
-    const encryptionKeys: TEncryptionKeys = {
+    loginData.encryptionKeys = {
       cryptoEngineId: desktopConstants.cryptoEngineId,
+      ...(!isEmpty(keys) && omit(keys, ["userId"])),
     };
-
-    if (!isEmpty(keys)) {
-      const filteredKeys = omit(keys, ["userId"]);
-      Object.assign(encryptionKeys, filteredKeys);
-    }
-
-    extendedData = {
-      ...loginData,
-      encryptionKeys,
-    };
-
-    setTimeout(() => {
-      window.AscDesktopEditor?.execCommand(
-        "portal:login",
-        JSON.stringify(extendedData),
-      );
-    }, 1000);
   }
 
-  window.onSystemMessage = (e) => {
-    if (e.type !== "operation") return;
-
-    const messages: Record<number, string | undefined> = {
-      0: t?.("Common:EncryptionFilePreparing"),
-      1: t?.("Common:EncryptingFile"),
-    };
-
-    const message =
-      e.opMessage || messages[e.opType] || t?.("Common:LoadingProcessing");
-
-    toastr.info(message);
-  };
+  window.AscDesktopEditor?.execCommand(
+    "portal:login",
+    JSON.stringify(loginData),
+  );
 }
 
 export function reLogin(): void {

@@ -35,9 +35,14 @@ import { toastr } from "@docspace/shared/components/toast";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 
-type TGetSharingKeysCallback = (
-  keys?: Array<{ userId: string; publicKey: string }>,
-) => void;
+type TSharingKeys = Array<{ userId: string; publicKey: string }>;
+
+type TGetSharingKeysResult = {
+  keys: TSharingKeys;
+  error?: string;
+};
+
+type TGetSharingKeysCallback = (result: TGetSharingKeysResult) => void;
 
 const initDesktop = (
   cfg: IInitialConfig,
@@ -51,15 +56,18 @@ const initDesktop = (
   const getAccess = (callback?: TGetSharingKeysCallback) => {
     getEncryptionAccess(fileId)
       .then((data) => {
-        const keys =
+        const keys: TSharingKeys =
           data.keys && typeof data.keys === "string"
             ? JSON.parse(data.keys)
             : [];
-        callback?.(keys);
+
+        callback?.({ keys });
       })
       .catch((error) => {
-        toastr.error(typeof error === "string" ? error : error.message);
-        callback?.([]);
+        const errorMessage = typeof error === "string" ? error : error.message;
+
+        toastr.error(errorMessage);
+        callback?.({ keys: [] });
       });
   };
 

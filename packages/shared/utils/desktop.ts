@@ -53,9 +53,14 @@ type TLoginData = {
   encryptionKeys?: TEncryptionKeys;
 };
 
-type TGetSharingKeysCallback = (
-  keys?: Array<{ userId: string; publicKey: string }>,
-) => void;
+type TSharingKeys = Array<{ userId: string; publicKey: string }>;
+
+type TGetSharingKeysResult = {
+  keys: TSharingKeys;
+  error?: string;
+};
+
+type TGetSharingKeysCallback = (result: TGetSharingKeysResult) => void;
 
 export function regDesktop(
   user: TUser,
@@ -86,7 +91,7 @@ export function regDesktop(
           if (isEditor && getEncryptionAccess) {
             getEncryptionAccess(callback as TGetSharingKeysCallback);
           } else {
-            callback?.({});
+            callback?.({ keys: [] });
           }
           break;
       }

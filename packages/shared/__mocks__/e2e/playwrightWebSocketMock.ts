@@ -25,27 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Page, WebSocketRoute } from "@playwright/test";
+import type { TOptSocket } from "../../utils/socket";
 
-type TOptSocket = {
-  data?: string;
-  type?: "folder" | "file";
-  id?: number;
-  cmd?: "create" | "update" | "delete";
-};
-
-type SocketIOMessage =
+type ServerMessage =
   | string
   | [string, unknown?]
   | unknown[]
   | Record<string, unknown>;
 
-type ServerMessage = SocketIOMessage;
-
 type SocketEventData =
   | TOptSocket
   | { roomParts: string | string[] }
-  | { message: string }
-  | unknown;
+  | { message: string };
 
 export class PlaywrightWebSocketMock {
   private wsRoute: WebSocketRoute | null = null;

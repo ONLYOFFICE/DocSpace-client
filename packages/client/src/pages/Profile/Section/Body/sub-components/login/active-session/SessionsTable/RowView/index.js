@@ -24,21 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import classNames from "classnames";
 
 import { RowContainer } from "@docspace/shared/components/rows";
-import SessionsRow from "./SessionsRow";
 
-const StyledRowContainer = styled(RowContainer)`
-  margin: 2px 0 20px;
-`;
+import SessionsRow from "./SessionsRow";
+import styles from "../../active-sessions.module.scss";
 
 const RowView = (props) => {
   const { t, sectionWidth, sessionsData } = props;
 
   return (
-    <StyledRowContainer
-      className="sessions-row-container"
+    <RowContainer
+      className={classNames(styles.rowContainer, "sessions-row-container")}
       useReactWindow={false}
       hasMoreFiles={false}
       itemHeight={58}
@@ -54,7 +52,7 @@ const RowView = (props) => {
           sectionWidth={sectionWidth}
         />
       ))}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

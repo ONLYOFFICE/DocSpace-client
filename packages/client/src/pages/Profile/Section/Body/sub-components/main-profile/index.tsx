@@ -30,7 +30,6 @@ import { ReactSVG } from "react-svg";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobileOnly } from "react-device-detect";
-import { useTheme } from "styled-components";
 
 import {
   Avatar,
@@ -61,6 +60,8 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TAvatarModel } from "@docspace/shared/components/avatar/Avatar.types";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 
 import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";
 import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
@@ -177,32 +178,34 @@ const MainProfile = (props: MainProfileProps) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [dropDownMaxHeight, setDropDownMaxHeight] = useState(352);
   const [directionY, setDirectionY] = useState("both");
-  const { interfaceDirection, isBase } = useTheme();
-  const dirTooltip = interfaceDirection === "rtl" ? "left" : "right";
+  const { isBase } = useTheme();
+  const { isRTL } = useInterfaceDirection();
+  const dirTooltip = isRTL ? "left" : "right";
 
   const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { isOwner, isAdmin, isRoomAdmin, isCollaborator } = profile!;
 
-  const isProfileMobile = isMobile(profileContainerRef.current?.offsetWidth); 
+  const isProfileMobile = isMobile(profileContainerRef.current?.offsetWidth);
 
   const updateDropDownMaxHeight = () => {
-
-    const comboBox = comboBoxRef.current?.offsetParent !== null 
-    ? comboBoxRef.current 
-    : mobileComboBoxRef.current;
+    const comboBox =
+      comboBoxRef.current?.offsetParent !== null
+        ? comboBoxRef.current
+        : mobileComboBoxRef.current;
 
     const padding = 32;
     if (comboBox && !isProfileMobile) {
       const comboBoxRect = comboBox.getBoundingClientRect();
-      const availableSpaceBottom = window.innerHeight - comboBoxRect.bottom - padding;
+      const availableSpaceBottom =
+        window.innerHeight - comboBoxRect.bottom - padding;
       const availableSpaceTop = comboBoxRect.top - padding;
       const max = Math.max(availableSpaceBottom, availableSpaceTop);
-      
+
       if (max === availableSpaceBottom) setDirectionY("bottom");
       else setDirectionY("top");
 
-      const newDropDownMaxHeight = Math.min(max, 352)
+      const newDropDownMaxHeight = Math.min(max, 352);
       setDropDownMaxHeight(newDropDownMaxHeight);
     } else {
       const max = window.innerHeight * 0.75;
@@ -225,7 +228,9 @@ const MainProfile = (props: MainProfileProps) => {
   useEffect(() => {
     updateDropDownMaxHeight();
 
-    const scroll = !isMobile() ? document.querySelector("#sectionScroll .scroll-wrapper > .scroller") : null;
+    const scroll = !isMobile()
+      ? document.querySelector("#sectionScroll .scroll-wrapper > .scroller")
+      : null;
 
     window.addEventListener("resize", handleResize);
     scroll?.addEventListener("scroll", handleScroll);
@@ -755,7 +760,10 @@ const MainProfile = (props: MainProfileProps) => {
                   />
                 ) : null}
               </Text>
-              <div className="mobile-language__wrapper-combo-box" ref={mobileComboBoxRef}>
+              <div
+                className="mobile-language__wrapper-combo-box"
+                ref={mobileComboBoxRef}
+              >
                 <ComboBox
                   className="language-combo-box"
                   directionY={isMobileHorizontalOrientation ? "bottom" : "both"}

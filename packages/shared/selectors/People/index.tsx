@@ -60,6 +60,7 @@ import { useTheme } from "../../hooks/useTheme";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 import StyledSendClockIcon from "./components/SendClockIcon";
+import styles from "./PeopleSelector.module.scss";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
@@ -72,7 +73,7 @@ const toListItem = (
   disableInvitedUsers?: string[],
   isRoom?: boolean,
   checkIfUserInvited?: (user: TUser) => void,
-  disabledInvitedText?: string
+  disabledInvitedText?: string,
 ): TSelectorItem => {
   if ("displayName" in item) {
     const {
@@ -108,10 +109,10 @@ const toListItem = (
       disableDisabledUsers && status === EmployeeStatus.Disabled;
 
     const disabledText = isInvited
-      ? disabledInvitedText ?? t("Common:Invited")
+      ? (disabledInvitedText ?? t("Common:Invited"))
       : isDisabled
-      ? t("Common:Disabled")
-      : "";
+        ? t("Common:Disabled")
+        : "";
 
     const avatarRole = getUserAvatarRoleByType(role);
 
@@ -149,7 +150,7 @@ const toListItem = (
 
   const isInvited = disableInvitedUsers?.includes(id) || (isRoom && shared);
   const disabledText = isInvited
-    ? disabledInvitedText ?? t("Common:Invited")
+    ? (disabledInvitedText ?? t("Common:Invited"))
     : "";
 
   return {
@@ -240,7 +241,7 @@ const PeopleSelector = ({
   const { isBase } = useTheme();
 
   const [activeTabId, setActiveTabId] = useState<string>(
-    isGuestsOnly ? GUESTS_TAB_ID : isGroupsOnly ? GROUP_TAB_ID : PEOPLE_TAB_ID
+    isGuestsOnly ? GUESTS_TAB_ID : isGroupsOnly ? GROUP_TAB_ID : PEOPLE_TAB_ID,
   );
 
   const [itemsList, setItemsList] = useState<TSelectorItem[]>([]);
@@ -260,7 +261,7 @@ const PeopleSelector = ({
   const onSelect = (
     item: TSelectorItem,
     isDoubleClick: boolean,
-    doubleClickCallback: () => void
+    doubleClickCallback: () => void,
   ) => {
     setSelectedItems((prevItems) => {
       if (!isMultiSelect) {
@@ -279,7 +280,7 @@ const PeopleSelector = ({
   const moveCurrentUserToTopOfList = useCallback(
     (listUser: TSelectorItem[]) => {
       const currentUserIndex = listUser.findIndex(
-        (user) => user.id === currentUserId
+        (user) => user.id === currentUserId,
       );
 
       // return if the current user is already at the top of the list or not found
@@ -291,7 +292,7 @@ const PeopleSelector = ({
 
       return listUser;
     },
-    [currentUserId]
+    [currentUserId],
   );
 
   const removeCurrentUserFromList = useCallback(
@@ -301,7 +302,7 @@ const PeopleSelector = ({
       }
       return listUser.filter((user) => user.id !== currentUserId);
     },
-    [currentUserId, filterUserId]
+    [currentUserId, filterUserId],
   );
 
   const loadNextPage = useCallback(
@@ -328,7 +329,7 @@ const PeopleSelector = ({
         const currentFilter: Filter =
           typeof filter === "function"
             ? filter()
-            : filter ?? Filter.getDefault();
+            : (filter ?? Filter.getDefault());
 
         currentFilter.page = startIndex / pageCount;
         currentFilter.pageCount = pageCount;
@@ -355,7 +356,7 @@ const PeopleSelector = ({
               roomId,
               currentFilter,
               abortControllerRef.current?.signal,
-              targetEntityType
+              targetEntityType,
             );
 
         let totalDifferent = startIndex ? response.total - totalRef.current : 0;
@@ -379,8 +380,8 @@ const PeopleSelector = ({
               disableInvitedUsers,
               !!roomId,
               checkIfUserInvited,
-              disabledInvitedText
-            )
+              disabledInvitedText,
+            ),
           );
 
         const newTotal = withOutCurrentAuthorizedUser
@@ -400,7 +401,7 @@ const PeopleSelector = ({
 
             const ids = new Set();
             const filteredTempItems = tempItems.filter(
-              (item) => !ids.has(item.id) && ids.add(item.id)
+              (item) => !ids.has(item.id) && ids.add(item.id),
             );
 
             const newItems = withOutCurrentAuthorizedUser
@@ -442,7 +443,7 @@ const PeopleSelector = ({
       withOutCurrentAuthorizedUser,
       onlyRoomMembers,
       targetEntityType,
-    ]
+    ],
   );
 
   const resetSelectorList = useCallback(() => {
@@ -464,7 +465,7 @@ const PeopleSelector = ({
       });
       callback?.();
     },
-    [activeTabId, resetSelectorList]
+    [activeTabId, resetSelectorList],
   );
 
   const onClearSearch = useCallback(
@@ -480,7 +481,7 @@ const PeopleSelector = ({
 
       callback?.();
     },
-    [resetSelectorList, loadNextPage]
+    [resetSelectorList, loadNextPage],
   );
 
   const emptyScreenImage = isBase
@@ -536,7 +537,8 @@ const PeopleSelector = ({
     userType?: string,
     email?: string,
     isGroup?: boolean,
-    status?: EmployeeStatus
+    status?: EmployeeStatus,
+    id?: string | number,
   ) => {
     return (
       <div
@@ -550,7 +552,6 @@ const PeopleSelector = ({
             display: "flex",
             boxSizing: "border-box",
             alignItems: "center",
-            gap: "8px",
           }}
         >
           <Text
@@ -565,6 +566,11 @@ const PeopleSelector = ({
           >
             {label}
           </Text>
+          {!isGroup && String(id) === currentUserId ? (
+            <Text className={styles.isMeLabel} fontWeight={600} fontSize="14px">
+              ({t("Common:MeLabel")})
+            </Text>
+          ) : null}
           {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
         </div>
         {!isGroup ? (
@@ -593,7 +599,7 @@ const PeopleSelector = ({
       onSearch("");
       resetSelectorList();
     },
-    [onSearch, resetSelectorList, setActiveTab]
+    [onSearch, resetSelectorList, setActiveTab],
   );
 
   const withTabsProps: TSelectorTabs =
@@ -677,8 +683,8 @@ const PeopleSelector = ({
         (activeTabId === GUESTS_TAB_ID
           ? t("Common:NotFoundGuests")
           : activeTabId === PEOPLE_TAB_ID
-          ? t("Common:EmptyHeader")
-          : t("Common:NotFoundGroups"))
+            ? t("Common:EmptyHeader")
+            : t("Common:NotFoundGroups"))
       }
       emptyScreenDescription={
         emptyScreenDescription ??
@@ -687,25 +693,25 @@ const PeopleSelector = ({
             ? t("Common:NotFoundGuestsDescriptionAgent")
             : t("Common:NotFoundGuestsDescription")
           : activeTabId === PEOPLE_TAB_ID
-          ? t("Common:EmptyDescription", {
-              productName: t("Common:ProductName"),
-            })
-          : t("Common:GroupsNotFoundDescription"))
+            ? t("Common:EmptyDescription", {
+                productName: t("Common:ProductName"),
+              })
+            : t("Common:GroupsNotFoundDescription"))
       }
       searchEmptyScreenImage={emptyScreenImage}
       searchEmptyScreenHeader={
         activeTabId === GUESTS_TAB_ID
           ? t("Common:NotFoundGuestsFilter")
           : activeTabId === PEOPLE_TAB_ID
-          ? t("Common:NotFoundMembers")
-          : t("Common:NotFoundGroups")
+            ? t("Common:NotFoundMembers")
+            : t("Common:NotFoundGroups")
       }
       searchEmptyScreenDescription={
         activeTabId === GUESTS_TAB_ID
           ? t("Common:NotFoundFilterGuestsDescription")
           : activeTabId === PEOPLE_TAB_ID
-          ? t("Common:NotFoundUsersDescription")
-          : t("Common:GroupsNotFoundDescription")
+            ? t("Common:NotFoundUsersDescription")
+            : t("Common:GroupsNotFoundDescription")
       }
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}

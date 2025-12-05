@@ -136,6 +136,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       isSystem,
       isMCP,
       isFolder,
+      id,
     } = item;
 
     if (isSeparator) {
@@ -294,7 +295,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           />
         ) : null}
         {renderCustomItem ? (
-          renderCustomItem(label, typeLabel, email, isGroup, status)
+          renderCustomItem(label, typeLabel, email, isGroup, status, id)
         ) : (
           <div
             className={

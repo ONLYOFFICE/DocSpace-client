@@ -64,6 +64,7 @@ export type UseFilesProps = {
   setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
   scrollToTop: FilesStore["scrollToTop"];
   wsCreatedPDFForm: FilesStore["wsCreatedPDFForm"];
+  setHotkeyCaret: FilesStore["setHotkeyCaret"];
 
   playlist: MediaViewerDataStore["playlist"];
   setToPreviewFile: MediaViewerDataStore["setToPreviewFile"];
@@ -73,6 +74,8 @@ export type UseFilesProps = {
   userId: string;
 
   selectedFolderStore: SelectedFolderStore;
+
+  currentView: string;
 };
 
 const useFiles = ({
@@ -84,6 +87,7 @@ const useFiles = ({
   setIsUpdatingRowItem,
   scrollToTop,
   wsCreatedPDFForm,
+  setHotkeyCaret,
 
   playlist,
   setToPreviewFile,
@@ -92,10 +96,21 @@ const useFiles = ({
   userId,
 
   selectedFolderStore,
+  currentView,
 }: UseFilesProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
+
+  const setFocus = () => {
+    const scroll = document.getElementsByClassName("section-body");
+
+    if (scroll && scroll[0]) {
+      const firstChild = scroll[0] as HTMLElement;
+      firstChild.focus();
+      setHotkeyCaret(null);
+    }
+  };
 
   const fetchDefaultFiles = (categoryType: ValueOf<typeof CategoryType>) => {
     const filter = FilesFilter.getDefault({
@@ -340,7 +355,11 @@ const useFiles = ({
         }
       })
       .finally(() => {
-        scrollToTop();
+        setFocus();
+
+        if (currentView !== "chat" && categoryType !== CategoryType.Chat) {
+          scrollToTop();
+        }
       });
   }, [
     location.pathname,

@@ -51,6 +51,7 @@ import type {
   IFileItem,
   IInfoPanelItem,
   IMainButtonItem,
+  IMessage,
   IProfileMenuItem,
   IframeWindow,
   TPlugin,
@@ -128,6 +129,31 @@ class PluginStore {
 
     makeAutoObservable(this);
   }
+
+  private dispatchMessage = (
+    message: Promise<IMessage> | Promise<void> | IMessage | void,
+    pluginName: string,
+  ) => {
+    messageActions({
+      message,
+      pluginName,
+      setElementProps: null,
+      setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
+      setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
+      updatePluginStatus: this.updatePluginStatus,
+      updatePropsContext: null,
+      setPluginDialogVisible: this.setPluginDialogVisible,
+      setPluginDialogProps: this.setPluginDialogProps,
+      updateContextMenuItems: this.updateContextMenuItems,
+      updateInfoPanelItems: this.updateInfoPanelItems,
+      updateMainButtonItems: this.updateMainButtonItems,
+      updateProfileMenuItems: this.updateProfileMenuItems,
+      updateEventListenerItems: this.updateEventListenerItems,
+      updateFileItems: this.updateFileItems,
+      updateCreateDialogProps: null,
+      updatePlugin: null,
+    });
+  };
 
   setNeedPageReload = (value: boolean) => {
     this.needPageReload = value;
@@ -352,11 +378,9 @@ class PluginStore {
 
           newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
 
-          const isPluginCompatible = this.checkPluginCompatibility(
+          newPlugin.compatible = this.checkPluginCompatibility(
             plugin.minDocSpaceVersion,
           );
-
-          newPlugin.compatible = isPluginCompatible;
 
           this.installPlugin(newPlugin);
 
@@ -393,6 +417,38 @@ class PluginStore {
     });
   };
 
+  installPluginCss = async (plugin: TPlugin) => {
+    const cssUrl = getPluginUrl(
+      plugin.url,
+      `plugin.css?hash=${plugin.version}`,
+    );
+
+    const linkId = `plugin-styles-${plugin.pluginName}`;
+    const existingLink = document.getElementById(linkId) as HTMLLinkElement;
+
+    if (existingLink) {
+      // update existing link
+      existingLink.href = cssUrl;
+      return;
+    }
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = cssUrl;
+    link.id = linkId;
+    document.head.appendChild(link);
+  };
+
+  uninstallPluginCss = (plugin: TPlugin) => {
+    const linkId = `plugin-styles-${plugin.pluginName}`;
+    const link = document.getElementById(linkId) as HTMLLinkElement;
+
+    if (link) {
+      link.remove();
+    }
+  };
+
   installPlugin = async (plugin: TPlugin, addToList = true) => {
     if (addToList) {
       const idx = this.plugins.findIndex((p) => p.name === plugin.name);
@@ -423,6 +479,8 @@ class PluginStore {
     }
 
     if (plugin.status === PluginStatus.hide) return;
+
+    this.installPluginCss(plugin);
 
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
       this.updateContextMenuItems(name);
@@ -509,6 +567,8 @@ class PluginStore {
 
     plugin.enabled = false;
     plugin.settings = "";
+
+    this.uninstallPluginCss(plugin);
 
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
       this.deactivateContextMenuItems(plugin);
@@ -722,25 +782,15 @@ class PluginStore {
 
         const message = await value.onClick(fileId);
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage(message, plugin.name);
+      };
+
+      const onGroupClick = async (filesId: number[]) => {
+        if (!value.onGroupClick || !value.isGroupAction || value.items) return;
+
+        const message = await value.onGroupClick(filesId);
+
+        this.dispatchMessage(message, plugin.name);
       };
 
       const { items, ...rest } = value;
@@ -749,6 +799,7 @@ class PluginStore {
       const processedItem: IContextMenuItem = {
         ...rest,
         onClick,
+        onGroupClick,
         pluginName: plugin.name,
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       };
@@ -815,25 +866,7 @@ class PluginStore {
         const onClick = async (id: number) => {
           const message = await value?.subMenu?.onClick?.(id);
 
-          messageActions({
-            message,
-            setElementProps: null,
-            pluginName: plugin.name,
-            setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-            updatePluginStatus: this.updatePluginStatus,
-            updatePropsContext: null,
-            setPluginDialogVisible: this.setPluginDialogVisible,
-            setPluginDialogProps: this.setPluginDialogProps,
-            updateContextMenuItems: this.updateContextMenuItems,
-            updateInfoPanelItems: this.updateInfoPanelItems,
-            updateMainButtonItems: this.updateMainButtonItems,
-            updateProfileMenuItems: this.updateProfileMenuItems,
-            updateEventListenerItems: this.updateEventListenerItems,
-            updateFileItems: this.updateFileItems,
-            updateCreateDialogProps: null,
-            updatePlugin: null,
-          });
+          this.dispatchMessage(message, plugin.name);
         };
 
         submenu.onClick = onClick;
@@ -841,6 +874,7 @@ class PluginStore {
 
       this.infoPanelItems.set(key, {
         ...value,
+        isHeaderVisible: value.isHeaderVisible ?? true,
         subMenu: submenu,
 
         pluginName: plugin.name,
@@ -893,27 +927,7 @@ class PluginStore {
           const onClick = async () => {
             const message = await i?.onClick?.(storeId);
 
-            messageActions({
-              message,
-              setElementProps: null,
-              pluginName: plugin.name,
-              setSettingsPluginDialogVisible:
-                this.setSettingsPluginDialogVisible,
-              setCurrentSettingsDialogPlugin:
-                this.setCurrentSettingsDialogPlugin,
-              updatePluginStatus: this.updatePluginStatus,
-              updatePropsContext: null,
-              setPluginDialogVisible: this.setPluginDialogVisible,
-              setPluginDialogProps: this.setPluginDialogProps,
-              updateContextMenuItems: this.updateContextMenuItems,
-              updateInfoPanelItems: this.updateInfoPanelItems,
-              updateMainButtonItems: this.updateMainButtonItems,
-              updateProfileMenuItems: this.updateProfileMenuItems,
-              updateEventListenerItems: this.updateEventListenerItems,
-              updateFileItems: this.updateFileItems,
-              updateCreateDialogProps: null,
-              updatePlugin: null,
-            });
+            this.dispatchMessage(message, plugin.name);
           };
 
           newItems.push({
@@ -931,25 +945,7 @@ class PluginStore {
 
         const message = await value.onClick(currStoreId);
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage(message, plugin.name);
       };
 
       this.mainButtonItems.set(key, {
@@ -1006,25 +1002,7 @@ class PluginStore {
 
         const message = await value.onClick();
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage(message, plugin.name);
       };
 
       this.profileMenuItems.set(key, {
@@ -1079,25 +1057,7 @@ class PluginStore {
 
         const message = await value.eventHandler();
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage(message, plugin.name);
       };
 
       this.eventListenerItems.set(key, {
@@ -1174,25 +1134,7 @@ class PluginStore {
 
         const message = await value.onClick(item);
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage(message, plugin.name);
       };
 
       this.fileItems.set(key, {

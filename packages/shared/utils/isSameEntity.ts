@@ -24,55 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
+import { TFile, TFolder } from "../api/files/types";
+import { TRoom } from "../api/rooms/types";
+import { isFile, isFolder, isRoom } from "./typeGuards";
 
-export const StyledHeader = styled.div`
-  position: relative;
+export const isSameEntity = (
+  a: TFile | TFolder | TRoom | null | undefined,
+  b: TFile | TFolder | TRoom | null | undefined,
+): boolean => {
+  if (!a || !b) return false;
 
-  display: flex;
-  align-items: center;
+  if (a.id !== b.id) return false;
 
-  .action-button {
-    width: 100%;
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-direction: row;
-    margin-inline-start: 17px;
+  if (isFile(a)) return isFile(b);
+  if (isFolder(a)) return isFolder(b);
+  if (isRoom(a)) return isRoom(b);
 
-    @media ${tablet} {
-      flex-direction: row-reverse;
-      margin-inline-start: auto;
-
-      & > div:first-child {
-        padding-block: 8px;
-        padding-inline: 0 16px;
-        margin-inline-end: -16px;
-      }
-    }
-
-    .tariff-bar {
-      margin-inline-start: auto;
-    }
-  }
-  .arrow-button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    @media ${tablet} {
-      padding: 8px 16px;
-      margin-inline: -16px;
-    }
-
-    padding-top: 1px;
-    width: 17px;
-    min-width: 17px;
-  }
-
-  .header-headline {
-    white-space: nowrap;
-    line-height: 25px;
-
-    margin-inline-start: 17px;
-  }
-`;
+  return false;
+};

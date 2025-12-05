@@ -116,6 +116,7 @@ const GroupsTableItem = ({
 
   return (
     <GroupsRowWrapper
+      id={item.id}
       className={`group-item ${
         (isChecked || isActive) && "table-row-selected"
       } ${item.id}`}

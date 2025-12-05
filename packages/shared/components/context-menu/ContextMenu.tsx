@@ -54,6 +54,7 @@ import {
   TMobileMenuStackItem,
 } from "./ContextMenu.types";
 import styles from "./ContextMenu.module.scss";
+import useContextMenuHotkeys from "./hooks/useContextMenuHotkeys";
 
 const MARGIN_BORDER = 16; // Indentation from the border of the screen
 
@@ -64,7 +65,6 @@ const ContextMenu = (props: ContextMenuProps) => {
   const [model, setModel] = React.useState<ContextMenuModel[] | null>(null);
   const [changeView, setChangeView] = React.useState(false);
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
-  const [menuHovered, setMenuHovered] = React.useState(false);
   const [mobileSubMenuItems, setMobileSubMenuItems] = React.useState<
     ContextMenuModel[] | undefined
   >([]);
@@ -115,6 +115,7 @@ const ContextMenu = (props: ContextMenuProps) => {
     dataTestId,
     maxHeightLowerSubmenu,
     showDisabledItems,
+    withHotkeys = true,
     withoutBackHeaderButton,
   } = props;
 
@@ -124,11 +125,6 @@ const ContextMenu = (props: ContextMenuProps) => {
 
   const onMenuMouseEnter = () => {
     setResetMenu(false);
-    setMenuHovered(true);
-  };
-
-  const onMenuMouseLeave = () => {
-    setMenuHovered(false);
   };
 
   const show = React.useCallback(
@@ -595,6 +591,21 @@ const ContextMenu = (props: ContextMenuProps) => {
     return { show, hide, toggle, menuRef };
   }, [hide, show, toggle]);
 
+  const {
+    currentIndex,
+    activeLevel,
+    activeItems,
+    setActiveItems,
+    onMouseMove,
+    setActiveHotkeysModel,
+  } = useContextMenuHotkeys({
+    visible,
+    withHotkeys,
+    model: model ?? getContextModel?.() ?? propsModel,
+    currentEvent,
+    hide,
+  });
+
   const renderContextMenu = () => {
     const currentClassName = className
       ? classNames("p-contextmenu p-component", className) ||
@@ -638,7 +649,6 @@ const ContextMenu = (props: ContextMenuProps) => {
             style={style}
             onClick={onMenuClick}
             onMouseEnter={onMenuMouseEnter}
-            onMouseLeave={onMenuMouseLeave}
           >
             {changeView && (withHeader || isHeaderMobileSubMenu) ? (
               <div className="contextmenu-header">
@@ -730,7 +740,12 @@ const ContextMenu = (props: ContextMenuProps) => {
                 changeView={changeView}
                 withHeader={withHeader}
                 maxHeightLowerSubmenu={maxHeightLowerSubmenu}
-                menuHovered={menuHovered}
+                mouseMoveHandler={onMouseMove}
+                currentIndex={currentIndex}
+                activeLevel={activeLevel}
+                setActiveHotkeysModel={setActiveHotkeysModel}
+                activeItems={activeItems}
+                setActiveItems={setActiveItems}
                 showDisabledItems={showDisabledItems}
               />
             )}

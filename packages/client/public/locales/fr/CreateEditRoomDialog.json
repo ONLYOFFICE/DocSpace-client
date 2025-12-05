@@ -2,7 +2,7 @@
   "AddStaticText": "Ajouter un texte statique",
   "AddWatermarkElements": "Ajouter des filigranes",
   "AddWatermarksToDocuments": "Ajouter des filigranes aux documents",
-  "AddWatermarksToDocumentsDescription": "Protégez tous les documents de cette salle avec des filigranes. Si un document en contient déjà un, il ne sera pas remplacé.",
+  "AddWatermarksToDocumentsDescription": "Protégez tous les documents de cette salle à l'aide de filigranes.\nSi un document contient déjà un filigrane, celui-ci ne sera pas remplacé.\nLorsque ce paramètre est activé, les documents ne peuvent être téléchargés qu'au format PDF afin de garantir que le filigrane reste intact.",
   "AutomaticIndexing": "Indexation automatique",
   "AutomaticIndexingDescription": "Activez l'indexation automatique pour indexer les fichiers et les dossiers par numéro de série. Le tri par numéro sera défini par défaut pour tous les utilisateurs.",
   "ChooseRoomType": "Choisir le type de salle",

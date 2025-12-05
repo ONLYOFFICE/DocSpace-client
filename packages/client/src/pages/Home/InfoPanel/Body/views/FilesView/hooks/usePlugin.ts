@@ -24,76 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
-import { tablet, mobile } from "@docspace/shared/utils";
+export const usePlugin = (
+  currentView: string,
+  infoPanelItemsList?: PluginStore["infoPanelItemsList"],
+) => {
+  const isPlugin = currentView.indexOf("info_plugin") > -1;
+  const infoPanelItemKey = currentView.replace("info_plugin-", "");
 
-export const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: ${(props) => props.theme.profile.themePreview.border};
-  border-radius: 12px;
-  height: 284px;
-  width: 318px;
-  overflow: hidden;
+  const infoPanelItem = infoPanelItemsList?.find(
+    (i) => i.key === infoPanelItemKey,
+  )?.value;
 
-  @media ${tablet} {
-    width: 100%;
-  }
+  const isPluginHeaderVisible =
+    !!infoPanelItem && infoPanelItem.isHeaderVisible;
 
-  .card-header {
-    padding: 11px 19px;
-    border-bottom: ${(props) => props.theme.profile.themePreview.border};
-    line-height: 20px;
-  }
-
-  .floating-btn {
-    bottom: 100px !important;
-    inset-inline-end: 16px !important;
-  }
-`;
-
-export const StyledWrapperInterfaceTheme = styled.div`
-  width: 100%;
-  max-width: 660px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  .system-theme-checkbox {
-    display: inline-flex;
-  }
-
-  .checkbox {
-    height: 20px;
-    margin-inline-end: 8px !important;
-  }
-
-  .system-theme-description {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 16px;
-    padding-inline-start: 24px;
-    max-width: 295px;
-    color: ${(props) => props.theme.profile.themePreview.descriptionColor};
-  }
-
-  .themes-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-
-    @media ${mobile} {
-      display: none;
-    }
-  }
-
-  .mobile-themes-container {
-    display: none;
-
-    @media ${mobile} {
-      display: flex;
-      padding-inline-start: 30px;
-    }
-  }
-`;
+  return {
+    isPlugin,
+    isPluginHeaderVisible,
+    infoPanelItem,
+  };
+};

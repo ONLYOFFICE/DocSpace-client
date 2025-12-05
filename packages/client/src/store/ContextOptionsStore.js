@@ -2693,7 +2693,15 @@ class ContextOptionsStore {
             ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
           ]
         : [
-            ["select", "view", "fill-form", "edit", "preview", "mark-read"],
+            [
+              "select",
+              "view",
+              "fill-form",
+              "edit",
+              "preview",
+              "mark-read",
+              "open-location",
+            ],
             ["ask-ai"],
             ["share", "move", "copy-to", "download", "rename"],
             [

@@ -114,7 +114,7 @@
     "@types/react-window": "1.8.8",
     "@types/react-window-infinite-loader": "1.0.9",
     "@types/styled-components": "5.1.34",
-    "@onlyoffice/docspace-plugin-sdk": "file:./onlyoffice-docspace-plugin-sdk-2.0.0.tgz",
+    "@onlyoffice/docspace-plugin-sdk": "file:./onlyoffice-docspace-plugin-sdk-2.1.0.tgz",
     "babel-loader": "8.4.1",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "9.1.0",

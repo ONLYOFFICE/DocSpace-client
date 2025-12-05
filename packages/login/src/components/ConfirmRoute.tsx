@@ -144,7 +144,8 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           confirmLinkParams,
           validationResult: confirmLinkResult.result,
         });
-        throw new Error(t("Common:Error"));
+        window.location.href = "/login/error/link-quota";
+        return;
       default:
         console.error("unknown link", {
           confirmLinkParams,

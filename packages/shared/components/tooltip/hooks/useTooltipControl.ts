@@ -28,6 +28,15 @@ import { useCallback, useRef, useState, useEffect } from "react";
 import { TTooltipPlace, MouseEventHandler } from "../Tooltip.types";
 import { DEFAULT_DELAY_SHOW } from "../Tooltip.constants";
 
+const shouldHandleTooltipEvent = (
+  target: HTMLElement,
+  currentTarget: HTMLElement,
+): boolean => {
+  const anchorElement =
+    target.closest && target.closest("[data-tooltip-anchor]");
+  return anchorElement === currentTarget;
+};
+
 export const useTooltipControl = (
   originalOnClick?: (e: React.MouseEvent<HTMLElement>) => void,
   originalOnMouseEnter?: (e: React.MouseEvent<HTMLElement>) => void,
@@ -43,6 +52,13 @@ export const useTooltipControl = (
 
   const handleMouseEnter = useCallback(
     (e: React.MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const currentTarget = e.currentTarget as HTMLElement;
+
+      if (!shouldHandleTooltipEvent(target, currentTarget)) {
+        return;
+      }
+
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
@@ -59,6 +75,13 @@ export const useTooltipControl = (
 
   const handleMouseLeave = useCallback(
     (e: React.MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const currentTarget = e.currentTarget as HTMLElement;
+
+      if (!shouldHandleTooltipEvent(target, currentTarget)) {
+        return;
+      }
+
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
         timeoutRef.current = null;

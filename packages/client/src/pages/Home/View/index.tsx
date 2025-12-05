@@ -95,6 +95,7 @@ type ViewProps = UseContactsProps &
     aiConfig: SettingsStore["aiConfig"];
     isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
+    setHotkeyCaret: FilesStore["setHotkeyCaret"];
   };
 
 const View = ({
@@ -240,11 +241,8 @@ const View = ({
     gallerySelected,
     userId,
 
-    scrollToTop,
     selectedFolderStore,
     wsCreatedPDFForm,
-    setHotkeyCaret,
-    currentView,
   });
 
   const { getProfileInitialValue } = useProfileBody({
@@ -501,6 +499,20 @@ const View = ({
 
     getView();
   }, [location, isContactsPage, isProfilePage, isChatPage, showToastAccess]);
+
+  React.useEffect(() => {
+    if (isLoading || currentView === "chat") return;
+
+    const scroll = document.getElementsByClassName("section-body");
+
+    if (scroll && scroll[0]) {
+      const firstChild = scroll[0] as HTMLElement;
+      firstChild.focus();
+      setHotkeyCaret(null);
+    }
+
+    scrollToTop();
+  }, [isLoading, currentView, scrollToTop]);
 
   React.useEffect(() => {
     if (isResultTab && !canUseChat && !showBodyLoader) {

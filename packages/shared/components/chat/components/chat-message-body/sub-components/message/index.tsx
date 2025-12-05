@@ -152,7 +152,7 @@ const Message = ({
         if (c.type === ContentType.Text)
           return (
             <Markdown
-              key={`${message.id}_${c.type}_${mId}`}
+              key={`${idx}_${c.type}_${mId}`}
               chatMessage={c.text}
               isFirst={mId === 0}
             />

@@ -31,7 +31,7 @@ import CheckboxIndeterminateIcon from "PUBLIC_DIR/images/checkbox.indeterminate.
 import CheckboxCheckedIcon from "PUBLIC_DIR/images/checkbox.checked.react.svg";
 import CheckboxIcon from "PUBLIC_DIR/images/checkbox.react.svg";
 
-import { TextWithTooltip as Text } from "../text";
+import { Text } from "../text";
 import { TooltipContainer } from "../tooltip";
 
 import { CheckboxProps } from "./Checkbox.types";

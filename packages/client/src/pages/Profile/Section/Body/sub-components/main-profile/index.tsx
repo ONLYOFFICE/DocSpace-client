@@ -36,7 +36,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { IconButton } from "@docspace/shared/components/icon-button";

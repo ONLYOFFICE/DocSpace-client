@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import { decode } from "he";
 
-import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,

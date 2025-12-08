@@ -31,7 +31,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
-import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import { withTranslation, Trans } from "react-i18next";
 import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";

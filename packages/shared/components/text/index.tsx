@@ -114,8 +114,8 @@ const TextPure = ({
 
 TextPure.displayName = "TextPure";
 
-const Text = React.memo(TextPure, equal);
+const TextBase = React.memo(TextPure, equal);
 
-const TextWithTooltip = withTooltip(Text);
+const Text = withTooltip(TextBase);
 
-export { Text, TextWithTooltip };
+export { Text };

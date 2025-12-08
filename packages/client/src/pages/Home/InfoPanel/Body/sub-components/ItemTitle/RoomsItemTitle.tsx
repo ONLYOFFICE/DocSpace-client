@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
-import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { RoomIcon } from "@docspace/shared/components/room-icon";

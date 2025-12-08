@@ -33,7 +33,7 @@ import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { IconButton } from "../icon-button";
-import { TextWithTooltip as Text } from "../text";
+import { Text } from "../text";
 import { TooltipContainer } from "../tooltip";
 
 import type { TagProps } from "./Tag.types";

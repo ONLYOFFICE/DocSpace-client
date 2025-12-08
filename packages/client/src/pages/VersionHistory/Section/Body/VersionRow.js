@@ -34,7 +34,7 @@ import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import { Link } from "@docspace/shared/components/link";
-import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";

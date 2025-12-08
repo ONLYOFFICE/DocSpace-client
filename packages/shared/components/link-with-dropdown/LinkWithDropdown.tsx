@@ -37,7 +37,7 @@ import { DropDownItem } from "../drop-down-item";
 import { Scrollbar } from "../scrollbar";
 
 import styles from "./LinkWithDropdown.module.scss";
-import { TextWithTooltip as Text } from "../text";
+import { Text } from "../text";
 import { LinkWithDropDownProps } from "./LinkWithDropdown.types";
 
 const LinkWithDropdown = ({

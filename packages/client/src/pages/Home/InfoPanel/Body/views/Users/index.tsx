@@ -32,7 +32,7 @@ import classNames from "classnames";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { Link } from "@docspace/shared/components/link";
-import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 import {
   ComboBox,
   ComboBoxSize,

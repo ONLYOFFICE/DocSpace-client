@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { TableCell } from "@docspace/shared/components/table";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { EmployeeType } from "@docspace/shared/enums";
 import {

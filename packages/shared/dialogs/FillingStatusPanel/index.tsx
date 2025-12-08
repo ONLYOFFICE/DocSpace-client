@@ -42,7 +42,7 @@ import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { FileFillingFormStatus } from "../../enums";
 
-import { TextWithTooltip as Text } from "../../components/text";
+import { Text } from "../../components/text";
 import { TooltipContainer } from "../../components/tooltip";
 import { toastr } from "../../components/toast";
 import PublicRoomBar from "../../components/public-room-bar";

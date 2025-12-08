@@ -36,7 +36,7 @@ import Filter from "@docspace/shared/api/people/filter";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";

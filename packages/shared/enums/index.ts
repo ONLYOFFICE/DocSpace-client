@@ -920,8 +920,11 @@ export enum VectorizationStatus {
  * Enum for start page routes.
  * @readonly
  */
-export enum StartPageRoutes {
-  Documents = "/rooms/personal",
-  Rooms = "/rooms/shared",
-  Recent = "/recent",
+export enum DefaultPageRoutes {
+  AIAgents = "ai-agents",
+  MyDocuments = "rooms/personal",
+  Rooms = "rooms/shared",
+  SharedWithMe = "shared-with-me",
+  Favorites = "files/favorite",
+  Recent = "recent",
 }

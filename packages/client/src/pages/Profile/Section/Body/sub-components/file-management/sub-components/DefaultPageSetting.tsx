@@ -32,44 +32,59 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
-import { StartPageRoutes } from "@docspace/shared/enums";
+import { DefaultPageRoutes } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 type Props = {
-  startPage?: SettingsStore["startPage"];
-  setStartPage?: SettingsStore["setStartPage"];
+  defaultPage?: SettingsStore["defaultPage"];
+  setDefaultPage?: SettingsStore["setDefaultPage"];
 };
 
-const StartPageSettingComponent = ({ startPage, setStartPage }: Props) => {
+const StartPageSettingComponent = ({ defaultPage, setDefaultPage }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
   const startPageOptions = [
     {
-      label: t("Common:Rooms"),
-      key: StartPageRoutes.Rooms,
+      label: t("Common:AIAgents"),
+      key: DefaultPageRoutes.AIAgents,
     },
     {
       label: t("Common:Documents"),
-      key: StartPageRoutes.Documents,
+      key: DefaultPageRoutes.MyDocuments,
+    },
+    {
+      label: t("Common:Rooms"),
+      key: DefaultPageRoutes.Rooms,
+    },
+    {
+      label: t("Common:SharedWithMe"),
+      key: DefaultPageRoutes.SharedWithMe,
+    },
+    {
+      label: t("Common:Favorites"),
+      key: DefaultPageRoutes.Favorites,
     },
     {
       label: t("Common:Recent"),
-      key: StartPageRoutes.Recent,
+      key: DefaultPageRoutes.Recent,
     },
   ];
 
   const getSelectedStartPage = () => {
+    const route = defaultPage || DefaultPageRoutes.Rooms;
+
     return (
-      startPageOptions.find((option) => option.key === startPage) ||
+      startPageOptions.find((option) => option.key === route) ||
       startPageOptions[0]
     );
   };
 
   const onSelectStartPage = (option: TOption) => {
-    setStartPage!(option.key as StartPageRoutes);
+    setDefaultPage!(option.key as DefaultPageRoutes);
   };
+
   return (
-    <div className="start-page-setting">
+    <div className="default-page-setting">
       <Text lineHeight="20px" fontWeight={600}>
         {t("FilesSettings:StartPageSettingTitle")}
       </Text>
@@ -85,8 +100,8 @@ const StartPageSettingComponent = ({ startPage, setStartPage }: Props) => {
   );
 };
 
-export const StartPageSetting = inject(({ settingsStore }: TStore) => {
-  const { startPage, setStartPage } = settingsStore;
+export const DefaultPageSetting = inject(({ settingsStore }: TStore) => {
+  const { defaultPage, setDefaultPage } = settingsStore;
 
-  return { startPage, setStartPage };
+  return { defaultPage, setDefaultPage };
 })(observer(StartPageSettingComponent));

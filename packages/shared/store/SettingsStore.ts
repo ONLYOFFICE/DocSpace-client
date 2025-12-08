@@ -52,14 +52,14 @@ import type {
 } from "../api/settings/types";
 import { toastr } from "../components/toast";
 import type { TData } from "../components/toast/Toast.type";
-import { COOKIE_EXPIRATION_YEAR, LANGUAGE, MEDIA_VIEW_URL } from "../constants";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import {
   DeepLinkType,
   type RecaptchaType,
   TenantStatus,
   ThemeKeys,
   type UrlActionType,
-  StartPageRoutes,
+  DefaultPageRoutes,
 } from "../enums";
 import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
@@ -141,12 +141,9 @@ class SettingsStore {
 
   utcHoursOffset = 0;
 
-  defaultPage = "/";
+  defaultPage = DefaultPageRoutes.Rooms;
 
   homepage = "";
-
-  // TODO: Temp value. Change later. Maybe defaultPage should be used.
-  startPage = StartPageRoutes.Rooms;
 
   datePattern = "M/d/yyyy";
 
@@ -894,7 +891,7 @@ class SettingsStore {
     this.snackbarExist = snackbar;
   };
 
-  setDefaultPage = (defaultPage: string) => {
+  setDefaultPage = (defaultPage: DefaultPageRoutes) => {
     this.defaultPage = defaultPage;
   };
 
@@ -912,11 +909,6 @@ class SettingsStore {
 
   getSettings = async () => {
     const settings: Nullable<TSettings> = await api.settings.getSettings(true);
-
-    if (window.AscDesktopEditor !== undefined) {
-      const dp = combineUrl(window.ClientConfig?.proxy?.url, MEDIA_VIEW_URL);
-      this.setDefaultPage(dp);
-    }
 
     if (!settings) return;
 
@@ -1740,10 +1732,6 @@ class SettingsStore {
 
   setDisplayBanners = (displayBanners: boolean) => {
     this.displayBanners = displayBanners;
-  };
-
-  setStartPage = (startPage: StartPageRoutes) => {
-    this.startPage = startPage;
   };
 }
 

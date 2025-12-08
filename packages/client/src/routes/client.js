@@ -32,7 +32,7 @@ import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import { publicPreviewLoader } from "SRC_DIR/pages/PublicPreview/PublicPreview.helpers";
-import { StartPageRedirect } from "SRC_DIR/pages/Home/StartPageRedirect";
+import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
@@ -76,7 +76,7 @@ const ClientRoutes = [
             index: true,
             element: (
               <PrivateRoute>
-                <StartPageRedirect />
+                <DefaultPageRedirect />
               </PrivateRoute>
             ),
           },

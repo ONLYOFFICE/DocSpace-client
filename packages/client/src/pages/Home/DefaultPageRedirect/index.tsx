@@ -30,16 +30,16 @@ import { inject, observer } from "mobx-react";
 import { Navigate } from "react-router";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { StartPageRoutes } from "@docspace/shared/enums";
+import { DefaultPageRoutes } from "@docspace/shared/enums";
 
 type Props = {
-  startPage?: SettingsStore["startPage"];
+  defaultPage?: SettingsStore["defaultPage"];
 };
 
-const StartPageRedirectComponent = ({ startPage }: Props) => {
-  return <Navigate to={startPage || StartPageRoutes.Rooms} replace />;
+const DefaultPageRedirectComponent = ({ defaultPage }: Props) => {
+  return <Navigate to={`/${defaultPage || DefaultPageRoutes.Rooms}`} replace />;
 };
 
-export const StartPageRedirect = inject(({ settingsStore }: TStore) => ({
-  startPage: settingsStore.startPage,
-}))(observer(StartPageRedirectComponent));
+export const DefaultPageRedirect = inject(({ settingsStore }: TStore) => ({
+  defaultPage: settingsStore.defaultPage,
+}))(observer(DefaultPageRedirectComponent));

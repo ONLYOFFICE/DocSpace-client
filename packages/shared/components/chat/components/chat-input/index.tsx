@@ -47,286 +47,284 @@ import Buttons from "./Buttons";
 import styles from "./ChatInput.module.scss";
 
 const ChatInput = ({
-	getIcon,
-	isLoading,
-	attachmentFile,
-	clearAttachmentFile,
-	selectedModel,
-	toolsSettings,
-	isPortalAdmin,
-	aiReady,
+  getIcon,
+  isLoading,
+  attachmentFile,
+  clearAttachmentFile,
+  selectedModel,
+  toolsSettings,
+  isPortalAdmin,
+  aiReady,
 }: ChatInputProps) => {
-	const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common"]);
 
-	const { startChat, sendMessage, currentChatId, isRequestRunning, roomId } =
-		useMessageStore();
-	const { fetchChat, currentChat } = useChatStore();
+  const { startChat, sendMessage, currentChatId, isRequestRunning, roomId } =
+    useMessageStore();
+  const { fetchChat, currentChat } = useChatStore();
 
-	const [value, setValue] = React.useState("");
-	const [selectedFiles, setSelectedFiles] = React.useState<Partial<TFile>[]>(
-		[],
-	);
-	const [isFilesSelectorVisible, setIsFilesSelectorVisible] =
-		React.useState(false);
+  const [value, setValue] = React.useState("");
+  const [selectedFiles, setSelectedFiles] = React.useState<Partial<TFile>[]>(
+    [],
+  );
+  const [isFilesSelectorVisible, setIsFilesSelectorVisible] =
+    React.useState(false);
 
-	const prevSession = React.useRef(currentChatId);
+  const prevSession = React.useRef<string>(null);
 
-	const saveChangesToStorage = React.useCallback(
-		(value: string | null, selectedFiles: Partial<TFile>[]) => {
-			if (!roomId) return;
+  const saveChangesToStorage = React.useCallback(
+    (value: string | null, selectedFiles: Partial<TFile>[]) => {
+      if (!roomId) return;
 
-			const localStorageId = `chat-${roomId}`;
+      const localStorageId = `chat-${roomId}`;
 
-			const saved = localStorage.getItem(localStorageId);
+      const saved = localStorage.getItem(localStorageId);
 
-			const parsedSaved = saved ? JSON.parse(saved) : {};
+      const parsedSaved = saved ? JSON.parse(saved) : {};
 
-			const currentChat = currentChatId || "empty";
+      const currentChat = currentChatId || "empty";
 
-			const obj: Record<string, Record<string, unknown>> = {
-				...parsedSaved,
-			};
+      const obj: Record<string, Record<string, unknown>> = {
+        ...parsedSaved,
+      };
 
-			obj[currentChat] = {
-				value: value === null ? obj[currentChat]?.value || "" : value || "",
-				selectedFiles: selectedFiles.length
-					? selectedFiles
-					: obj[currentChat]?.selectedFiles || [],
-				time: Date.now(),
-			};
+      obj[currentChat] = {
+        value: value === null ? obj[currentChat]?.value || "" : value || "",
+        selectedFiles: selectedFiles.length
+          ? selectedFiles
+          : obj[currentChat]?.selectedFiles || [],
+        time: Date.now(),
+      };
 
-			if (!value && !selectedFiles.length) {
-				delete obj[currentChat];
-			}
+      if (!value && !selectedFiles.length) {
+        delete obj[currentChat];
+      }
 
-			localStorage.setItem(localStorageId, JSON.stringify(obj));
-		},
-		[currentChatId, roomId],
-	);
+      localStorage.setItem(localStorageId, JSON.stringify(obj));
+    },
+    [currentChatId, roomId],
+  );
 
-	const handleSelectFile = React.useCallback(
-		(file: Partial<TFile>[]) => {
-			saveChangesToStorage(null, file);
-			setSelectedFiles(file);
-		},
-		[saveChangesToStorage],
-	);
+  const handleSelectFile = React.useCallback(
+    (file: Partial<TFile>[]) => {
+      saveChangesToStorage(null, file);
+      setSelectedFiles(file);
+    },
+    [saveChangesToStorage],
+  );
 
-	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const val = e.target.value;
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const val = e.target.value;
 
-		if (val === "\n") {
-			return;
-		}
+    if (val === "\n") {
+      return;
+    }
 
-		setValue(val);
+    setValue(val);
 
-		saveChangesToStorage(val, selectedFiles);
-	};
+    saveChangesToStorage(val, selectedFiles);
+  };
 
-	const handleRemoveFile = (file: Partial<TFile>) => {
-		setSelectedFiles((prev) => prev.filter((f) => f.id !== file.id));
-	};
+  const handleRemoveFile = (file: Partial<TFile>) => {
+    handleSelectFile(selectedFiles.filter((f) => f.id !== file.id));
+  };
 
-	const sendMessageAction = React.useCallback(async () => {
-		if (!value.trim()) return;
+  const sendMessageAction = React.useCallback(async () => {
+    if (!value.trim()) return;
 
-		try {
-			if (!currentChatId) {
-				startChat(value, selectedFiles);
-			} else {
-				sendMessage(value, selectedFiles);
-			}
+    try {
+      if (!currentChatId) {
+        startChat(value, selectedFiles);
+      } else {
+        sendMessage(value, selectedFiles);
+      }
 
-			setValue("");
-			setSelectedFiles([]);
-			saveChangesToStorage("", []);
-		} catch (e) {
-			console.log(e);
-		}
-	}, [
-		currentChatId,
-		startChat,
-		sendMessage,
-		saveChangesToStorage,
-		value,
-		selectedFiles,
-	]);
+      setValue("");
+      setSelectedFiles([]);
+      saveChangesToStorage("", []);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [
+    currentChatId,
+    startChat,
+    sendMessage,
+    saveChangesToStorage,
+    value,
+    selectedFiles,
+  ]);
 
-	const onKeyEnter = React.useCallback(
-		(e: KeyboardEvent<HTMLTextAreaElement>) => {
-			if (e.key === "Enter" && !e.shiftKey) {
-				e.preventDefault();
+  const onKeyEnter = React.useCallback(
+    (e: KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
 
-				if (!isRequestRunning) {
-					sendMessageAction();
-				}
-			}
-		},
-		[sendMessageAction, isRequestRunning],
-	);
+        if (!isRequestRunning) {
+          sendMessageAction();
+        }
+      }
+    },
+    [sendMessageAction, isRequestRunning],
+  );
 
-	const showFilesSelector = () => {
-		setIsFilesSelectorVisible(true);
-	};
-	const hideFilesSelector = () => setIsFilesSelectorVisible(false);
-	const toggleFilesSelector = () => {
-		if (isFilesSelectorVisible) {
-			hideFilesSelector();
-		} else {
-			showFilesSelector();
-		}
-	};
+  const showFilesSelector = () => {
+    setIsFilesSelectorVisible(true);
+  };
+  const hideFilesSelector = () => setIsFilesSelectorVisible(false);
 
-	React.useEffect(() => {
-		if (currentChatId && !currentChat) {
-			fetchChat(currentChatId);
-		}
+  const toggleFilesSelector = () => {
+    if (isFilesSelectorVisible) {
+      hideFilesSelector();
+    } else {
+      showFilesSelector();
+    }
+  };
 
-		// if (!prevSession.current || prevSession.current === currentChatId) {
-		// 	prevSession.current = currentChatId;
+  React.useEffect(() => {
+    if (currentChatId && !currentChat) {
+      fetchChat(currentChatId);
+    }
 
-		// 	return;
-		// }
+    if (!roomId) return;
 
-		prevSession.current = currentChatId;
+    if (prevSession.current === currentChatId) {
+      return;
+    }
 
-		if (!roomId) return;
+    prevSession.current = currentChatId;
 
-		const localStorageId = `chat-${roomId}`;
+    const localStorageId = `chat-${roomId}`;
 
-		const saved = localStorage.getItem(localStorageId);
+    const saved = localStorage.getItem(localStorageId);
 
-		const currentChatName = currentChatId || "empty";
+    const currentChatName = currentChatId || "empty";
 
-		const parsedSaved: Record<string, Record<string, unknown>> = saved
-			? JSON.parse(saved)
-			: {};
+    const parsedSaved: Record<string, Record<string, unknown>> = saved
+      ? JSON.parse(saved)
+      : {};
 
-		if (Object.keys(parsedSaved).length === 0) {
-			setValue("");
-			setSelectedFiles([]);
-		}
+    if (Object.keys(parsedSaved).length === 0) {
+      setValue("");
+      setSelectedFiles([]);
 
-		// Validate and remove items older than 5 minutes
-		const FIVE_MINUTES = 5 * 60 * 1000;
-		const now = Date.now();
-		const validatedSaved: Record<string, Record<string, unknown>> = {};
+      return;
+    }
 
-		for (const [key, item] of Object.entries(parsedSaved)) {
-			const time = (item.time as number) || 0;
-			if (now - time < FIVE_MINUTES) {
-				validatedSaved[key] = item;
-			}
-		}
+    // Validate and remove items older than 5 minutes
+    const FIVE_MINUTES = 5 * 60 * 1000;
+    const now = Date.now();
+    const validatedSaved: Record<string, Record<string, unknown>> = {};
 
-		// Update localStorage with validated items
-		if (
-			Object.keys(validatedSaved).length !== Object.keys(parsedSaved).length
-		) {
-			localStorage.setItem(localStorageId, JSON.stringify(validatedSaved));
-		}
+    for (const [key, item] of Object.entries(parsedSaved)) {
+      const time = (item.time as number) || 0;
+      if (now - time < FIVE_MINUTES) {
+        validatedSaved[key] = item;
+      }
+    }
 
-		if (validatedSaved[currentChatName]) {
-			if (validatedSaved[currentChatName].value) {
-				setValue(validatedSaved[currentChatName].value as string);
-			}
-			if (validatedSaved[currentChatName].selectedFiles) {
-				setSelectedFiles(
-					validatedSaved[currentChatName].selectedFiles as Partial<TFile>[],
-				);
-			}
-		} else {
-			setValue("");
-			setSelectedFiles([]);
-		}
-	}, [
-		roomId,
-		currentChatId,
-		currentChat,
+    // Update localStorage with validated items
+    if (
+      Object.keys(validatedSaved).length !== Object.keys(parsedSaved).length
+    ) {
+      localStorage.setItem(localStorageId, JSON.stringify(validatedSaved));
+    }
 
-		fetchChat,
-	]);
+    if (validatedSaved[currentChatName]) {
+      setValue(validatedSaved[currentChatName].value as string);
 
-	React.useEffect(() => {
-		if (attachmentFile) {
-			const file = [
-				{
-					id: Number(attachmentFile.id),
-					title: attachmentFile.title,
-					fileExst: attachmentFile.fileExst,
-				},
-			];
-			handleSelectFile(file);
-			clearAttachmentFile();
-		}
-	}, [attachmentFile, handleSelectFile, clearAttachmentFile]);
+      setSelectedFiles(
+        validatedSaved[currentChatName].selectedFiles as Partial<TFile>[],
+      );
+    } else {
+      setValue("");
+      setSelectedFiles([]);
+    }
+  }, [
+    roomId,
+    currentChatId,
+    currentChat,
 
-	return (
-		<>
-			<div className={classNames(styles.chatInput, "chat-input")}>
-				{isLoading ? (
-					<RectangleSkeleton width="100%" height="116px" borderRadius="3px" />
-				) : (
-					<>
-						<Textarea
-							onChange={handleChange}
-							value={value}
-							isFullHeight
-							className={classNames(styles.chatInputTextArea, {
-								[styles.disabled]: !aiReady,
-							})}
-							wrapperClassName={classNames({
-								[styles.chatInputTextAreaWrapper]: true,
-								[styles.chatInputTextAreaWrapperFiles]:
-									selectedFiles.length > 0,
-							})}
-							placeholder={t("Common:AIChatInput")}
-							isChatMode
-							fontSize={15}
-							isDisabled={!aiReady}
-							onKeyDown={onKeyEnter}
-						/>
+    fetchChat,
+  ]);
 
-						<FilesList
-							files={selectedFiles}
-							getIcon={getIcon}
-							onRemove={handleRemoveFile}
-						/>
+  React.useEffect(() => {
+    if (attachmentFile) {
+      setTimeout(() => {
+        const file = [
+          {
+            id: Number(attachmentFile.id),
+            title: attachmentFile.title,
+            fileExst: attachmentFile.fileExst,
+          },
+        ];
+        handleSelectFile(file);
+        clearAttachmentFile();
+      }, 0);
+    }
+  }, [attachmentFile, handleSelectFile, clearAttachmentFile]);
 
-						<Buttons
-							isFilesSelectorVisible={isFilesSelectorVisible}
-							toggleFilesSelector={toggleFilesSelector}
-							sendMessageAction={sendMessageAction}
-							value={value}
-							selectedModel={selectedModel}
-							toolsSettings={toolsSettings}
-							isAdmin={isPortalAdmin}
-							aiReady={aiReady}
-						/>
-					</>
-				)}
-			</div>
-			<Attachment
-				isVisible={isFilesSelectorVisible}
-				toggleAttachment={toggleFilesSelector}
-				getIcon={getIcon}
-				setSelectedFiles={handleSelectFile}
-				attachmentFile={attachmentFile}
-				clearAttachmentFile={clearAttachmentFile}
-			/>
-			{!isLoading ? (
-				<Text
-					fontSize="10px"
-					fontWeight={400}
-					className={styles.chatInputText}
-					noSelect
-				>
-					{t("Common:AICanMakeMistakes")}
-				</Text>
-			) : null}
-		</>
-	);
+  return (
+    <>
+      <div className={classNames(styles.chatInput, "chat-input")}>
+        {isLoading ? (
+          <RectangleSkeleton width="100%" height="116px" borderRadius="3px" />
+        ) : (
+          <>
+            <Textarea
+              onChange={handleChange}
+              value={value}
+              isFullHeight
+              className={classNames(styles.chatInputTextArea, {
+                [styles.disabled]: !aiReady,
+              })}
+              wrapperClassName={classNames({
+                [styles.chatInputTextAreaWrapper]: true,
+                [styles.chatInputTextAreaWrapperFiles]:
+                  selectedFiles.length > 0,
+              })}
+              placeholder={t("Common:AIChatInput")}
+              isChatMode
+              fontSize={15}
+              isDisabled={!aiReady}
+              onKeyDown={onKeyEnter}
+            />
+
+            <FilesList
+              files={selectedFiles}
+              getIcon={getIcon}
+              onRemove={handleRemoveFile}
+            />
+
+            <Buttons
+              isFilesSelectorVisible={isFilesSelectorVisible}
+              toggleFilesSelector={toggleFilesSelector}
+              sendMessageAction={sendMessageAction}
+              value={value}
+              selectedModel={selectedModel}
+              toolsSettings={toolsSettings}
+              isAdmin={isPortalAdmin}
+              aiReady={aiReady}
+            />
+          </>
+        )}
+      </div>
+      <Attachment
+        isVisible={isFilesSelectorVisible}
+        toggleAttachment={toggleFilesSelector}
+        getIcon={getIcon}
+        setSelectedFiles={handleSelectFile}
+      />
+      {!isLoading ? (
+        <Text
+          fontSize="10px"
+          fontWeight={400}
+          className={styles.chatInputText}
+          noSelect
+        >
+          {t("Common:AICanMakeMistakes")}
+        </Text>
+      ) : null}
+    </>
+  );
 };
 
 export default observer(ChatInput);

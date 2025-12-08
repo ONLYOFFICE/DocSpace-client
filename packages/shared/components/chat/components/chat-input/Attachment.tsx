@@ -40,139 +40,124 @@ import type { TSelectorItem } from "../../../selector";
 
 import type { AttachmentProps } from "../../Chat.types";
 import {
-  CHAT_SUPPORTED_FORMATS,
-  CHAT_MAX_FILE_COUNT,
+	CHAT_SUPPORTED_FORMATS,
+	CHAT_MAX_FILE_COUNT,
 } from "../../Chat.constants";
 
 const Attachment = ({
-  isVisible,
-  toggleAttachment,
-  getIcon,
-  setSelectedFiles,
-  attachmentFile,
-  clearAttachmentFile,
+	isVisible,
+	toggleAttachment,
+	getIcon,
+	setSelectedFiles,
 }: AttachmentProps) => {
-  const { t } = useTranslation(["Common"]);
+	const { t } = useTranslation(["Common"]);
 
-  const [tempSelectedFiles, setTempSelectedFiles] = React.useState<
-    Partial<TFile>[]
-  >([]);
+	const [tempSelectedFiles, setTempSelectedFiles] = React.useState<
+		Partial<TFile>[]
+	>([]);
 
-  const [withInfo, setWithInfo] = React.useState(true);
+	const [withInfo, setWithInfo] = React.useState(true);
 
-  const onSelectItem = (item: TSelectorItem) => {
-    if (!item.id || !item.fileExst) return;
+	const onSelectItem = (item: TSelectorItem) => {
+		if (!item.id || !item.fileExst) return;
 
-    if (tempSelectedFiles.some((file) => file.id === item.id)) {
-      setTempSelectedFiles((prev) =>
-        prev.filter((file) => file.id !== item.id),
-      );
-      return;
-    }
+		if (tempSelectedFiles.some((file) => file.id === item.id)) {
+			setTempSelectedFiles((prev) =>
+				prev.filter((file) => file.id !== item.id),
+			);
+			return;
+		}
 
-    setTempSelectedFiles((prev) => {
-      if (prev.length >= CHAT_MAX_FILE_COUNT) {
-        return prev;
-      }
+		setTempSelectedFiles((prev) => {
+			if (prev.length >= CHAT_MAX_FILE_COUNT) {
+				return prev;
+			}
 
-      return [
-        ...prev,
-        { id: Number(item.id), title: item.label, fileExst: item.fileExst },
-      ];
-    });
-  };
+			return [
+				...prev,
+				{ id: Number(item.id), title: item.label, fileExst: item.fileExst },
+			];
+		});
+	};
 
-  useEffect(() => {
-    if (attachmentFile) {
-      setSelectedFiles([
-        {
-          id: Number(attachmentFile.id),
-          title: attachmentFile.title,
-          fileExst: attachmentFile.fileExst,
-        },
-      ]);
-      clearAttachmentFile();
-    }
-  }, [attachmentFile, clearAttachmentFile, setSelectedFiles]);
+	if (!isVisible) return null;
 
-  if (!isVisible) return null;
+	return (
+		<FilesSelector
+			isPanelVisible={isVisible}
+			onCancel={toggleAttachment}
+			openRoot
+			getIcon={getIcon}
+			getIsDisabled={(
+				isFirstLoad,
+				isSelectedParentFolder,
+				selectedItemId,
+				selectedItemType,
+				isRoot,
+				selectedItemSecurity,
+				selectedFileInfo,
+			) => {
+				if (!selectedItemSecurity?.Read) return true;
 
-  return (
-    <FilesSelector
-      isPanelVisible={isVisible}
-      onCancel={toggleAttachment}
-      openRoot
-      getIcon={getIcon}
-      getIsDisabled={(
-        isFirstLoad,
-        isSelectedParentFolder,
-        selectedItemId,
-        selectedItemType,
-        isRoot,
-        selectedItemSecurity,
-        selectedFileInfo,
-      ) => {
-        if (!selectedItemSecurity?.Read) return true;
+				if (!selectedFileInfo) return true;
 
-        if (!selectedFileInfo) return true;
-
-        return false;
-      }}
-      onSubmit={() => {
-        setSelectedFiles(tempSelectedFiles);
-        setTempSelectedFiles([]);
-        toggleAttachment();
-      }}
-      onSelectItem={onSelectItem}
-      withHeader
-      headerProps={{
-        headerLabel: t("Common:SelectFile"),
-        isCloseable: true,
-        onCloseClick: toggleAttachment,
-      }}
-      withSearch
-      withBreadCrumbs
-      withoutBackButton
-      withCancelButton
-      withCreate={false}
-      withFooterCheckbox={false}
-      withFooterInput={false}
-      cancelButtonLabel={t("Common:CancelButton")}
-      submitButtonLabel={t("Common:AddButton")}
-      disabledItems={[]}
-      isRoomsOnly={false}
-      isThirdParty={false}
-      currentFolderId=""
-      rootFolderType={FolderType.Rooms}
-      footerCheckboxLabel=""
-      footerInputHeader=""
-      currentFooterInputValue=""
-      descriptionText=""
-      getFilesArchiveError={() => ""}
-      filterParam={CHAT_SUPPORTED_FORMATS}
-      isMultiSelect
-      withRecentTreeFolder
-      withFavoritesTreeFolder
-      withAIAgentsTreeFolder
-      disableBySecurity="AskAi"
-      currentDeviceType={
-        isDesktop()
-          ? DeviceType.desktop
-          : isTablet()
-            ? DeviceType.tablet
-            : DeviceType.mobile
-      }
-      withInfoBar={withInfo}
-      maxSelectedItems={CHAT_MAX_FILE_COUNT}
-      infoBarData={{
-        title: t("Common:SelectorFilesLimit", { count: CHAT_MAX_FILE_COUNT }),
-        icon: AttachmentReactSvgUrl,
-        onClose: () => setWithInfo(!withInfo),
-        description: t("Common:SelectorFilesLimitDescription"),
-      }}
-      renderInPortal
-    />
-  );
+				return false;
+			}}
+			onSubmit={() => {
+				setSelectedFiles(tempSelectedFiles);
+				setTempSelectedFiles([]);
+				toggleAttachment();
+			}}
+			onSelectItem={onSelectItem}
+			withHeader
+			headerProps={{
+				headerLabel: t("Common:SelectFile"),
+				isCloseable: true,
+				onCloseClick: toggleAttachment,
+			}}
+			withSearch
+			withBreadCrumbs
+			withoutBackButton
+			withCancelButton
+			withCreate={false}
+			withFooterCheckbox={false}
+			withFooterInput={false}
+			cancelButtonLabel={t("Common:CancelButton")}
+			submitButtonLabel={t("Common:AddButton")}
+			disabledItems={[]}
+			isRoomsOnly={false}
+			isThirdParty={false}
+			currentFolderId=""
+			rootFolderType={FolderType.Rooms}
+			footerCheckboxLabel=""
+			footerInputHeader=""
+			currentFooterInputValue=""
+			descriptionText=""
+			getFilesArchiveError={() => ""}
+			filterParam={CHAT_SUPPORTED_FORMATS}
+			isMultiSelect
+			withRecentTreeFolder
+			withFavoritesTreeFolder
+			withAIAgentsTreeFolder
+			disableBySecurity="AskAi"
+			currentDeviceType={
+				isDesktop()
+					? DeviceType.desktop
+					: isTablet()
+						? DeviceType.tablet
+						: DeviceType.mobile
+			}
+			withInfoBar={withInfo}
+			maxSelectedItems={CHAT_MAX_FILE_COUNT}
+			infoBarData={{
+				title: t("Common:SelectorFilesLimit", { count: CHAT_MAX_FILE_COUNT }),
+				icon: AttachmentReactSvgUrl,
+				onClose: () => setWithInfo(!withInfo),
+				description: t("Common:SelectorFilesLimitDescription"),
+			}}
+			renderInPortal
+		/>
+	);
 };
 
 export default Attachment;

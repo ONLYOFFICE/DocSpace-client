@@ -48,7 +48,7 @@ const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/
 const DocumentService = ({
   changeDocumentServiceLocation,
   currentColorScheme,
-  integrationSettingsUrl,
+  documentServiceSettingsUrl,
   initialDocumentServiceData,
   showPortalSettingsLoader,
 }) => {
@@ -234,13 +234,13 @@ const DocumentService = ({
         <div className="main">
           {t("Settings:DocumentServiceLocationHeaderHelp")}
         </div>
-        {integrationSettingsUrl ? (
+        {documentServiceSettingsUrl ? (
           <Link
             className="third-party-link"
             color={currentColorScheme.main?.accent}
             isHovered
             target="_blank"
-            href={integrationSettingsUrl}
+            href={documentServiceSettingsUrl}
             dataTestId="integration_settings_link"
           >
             {t("Common:LearnMore")}
@@ -432,8 +432,11 @@ const DocumentService = ({
 
 export default inject(
   ({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
-    const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
-      settingsStore;
+    const {
+      currentColorScheme,
+      documentServiceSettingsUrl,
+      currentDeviceType,
+    } = settingsStore;
     const {
       changeDocumentServiceLocation,
       documentServiceLocation: initialDocumentServiceData,
@@ -443,7 +446,7 @@ export default inject(
     return {
       changeDocumentServiceLocation,
       currentColorScheme,
-      integrationSettingsUrl,
+      documentServiceSettingsUrl,
       currentDeviceType,
       showPortalSettingsLoader,
       initialDocumentServiceData,

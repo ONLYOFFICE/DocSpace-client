@@ -3214,7 +3214,7 @@ class FilesStore {
       const canEditRoom = item.security?.EditRoom;
 
       const canViewRoomInfo = item.security?.Read || isLockedSharedRoom(item);
-      const canMuteRoom = item.security?.Mute;
+      const canMuteRoom = item.security?.Mute && item.inRoom;
 
       const canChangeOwner = item.security?.ChangeOwner;
 
@@ -3305,10 +3305,6 @@ class FilesStore {
 
       if (!canDownload) {
         roomOptions = removeOptions(roomOptions, ["download"]);
-      }
-
-      if (!canDownload && !canDuplicate) {
-        roomOptions = removeOptions(roomOptions, ["separator1"]);
       }
 
       if (!item.providerKey) {

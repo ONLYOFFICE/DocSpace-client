@@ -166,17 +166,14 @@ export type AttachmentProps = {
   toggleAttachment: VoidFunction;
   getIcon: TGetIcon;
   setSelectedFiles: (files: Partial<TFile>[]) => void;
-
-  attachmentFile: Partial<TFile> | null;
-  clearAttachmentFile: VoidFunction;
 };
 
 export type ChatInputProps = {
   getIcon: AttachmentProps["getIcon"];
   isLoading?: boolean;
 
-  attachmentFile: AttachmentProps["attachmentFile"];
-  clearAttachmentFile: AttachmentProps["clearAttachmentFile"];
+  attachmentFile: Partial<TFile> | null;
+  clearAttachmentFile: VoidFunction;
   selectedModel: string;
 
   toolsSettings: ReturnType<typeof useToolsSettings>;

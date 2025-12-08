@@ -143,10 +143,105 @@ const LoginForm = ({
     frameCallCommand("setIsLoaded");
   }, [loginData]);
 
+  const oauth2CallbackAction = useCallback(
+    async (user: string, hash: string, captchaToken?: string | null) => {
+      if (!client) return;
+      const portals = await getAvailablePortals({
+        Email: user,
+        PasswordHash: hash,
+        recaptchaResponse: captchaToken,
+        recaptchaType: reCaptchaType,
+      });
+
+      if (portals.error) {
+        const error = portals;
+
+        let errorMessage = "";
+        if (typeof error === "object") {
+          errorMessage =
+            (error as { response: { data: { message: string } } })?.response
+              ?.data?.message ||
+            (error as { statusText: string })?.statusText ||
+            (error as { message: string })?.message ||
+            "";
+        } else {
+          errorMessage = error as string;
+        }
+
+        if (
+          reCaptchaPublicKey &&
+          (error as { response: { status: number } })?.response?.status === 403
+        ) {
+          captcha.request();
+        } else if (captcha.isVisible) {
+          captcha.reset();
+        }
+
+        setIsEmailErrorShow(true);
+        setErrorText(errorMessage);
+        setPasswordValid(!errorMessage);
+        setIsLoading(false);
+        return;
+      }
+
+      if (portals?.length === 1) {
+        const name =
+          !baseDomain || portals[0].portalName.includes(baseDomain)
+            ? portals[0].portalName
+            : `${portals[0].portalName}.${baseDomain}`;
+
+        let redirectUrl = getRedirectURL();
+        let portalLink = portals[0].portalLink;
+
+        const isLocalhost = name === "http://localhost";
+
+        if (!isLocalhost && redirectUrl)
+          redirectUrl = redirectUrl.replace(window.location.origin, name);
+
+        if (isLocalhost)
+          portalLink = portalLink.replace(name, window.location.origin);
+
+        // deleteCookie("x-redirect-authorization-uri");
+
+        window.open(`${portalLink}&referenceUrl=${redirectUrl}`, "_self");
+
+        return;
+      }
+
+      const newSearchParams = new URLSearchParams();
+
+      const portalsString = JSON.stringify({ portals });
+
+      newSearchParams.set("clientId", client.clientId);
+
+      sessionStorage.setItem("tenant-list", portalsString);
+
+      router.push(`/tenant-list?${newSearchParams.toString()}`);
+
+      setIsLoading(false);
+      return;
+    },
+    [
+      baseDomain,
+      client,
+      captcha.request,
+      captcha.isVisible,
+      captcha.reset,
+      reCaptchaPublicKey,
+      reCaptchaType,
+      router,
+      setIsLoading,
+    ],
+  );
+
   const authCallback = useCallback(
     async (profile: string) => {
       localStorage.removeItem("profile");
       localStorage.removeItem("code");
+
+      if (client?.isPublic && profile) {
+        oauth2CallbackAction(profile, "", null);
+      }
 
       try {
         const response = (await thirdPartyLogin(profile, currentCulture)) as {
@@ -196,7 +291,14 @@ const LoginForm = ({
         );
       }
     },
-    [t, referenceUrl, currentCulture, isPublicAuth],
+    [
+      t,
+      referenceUrl,
+      currentCulture,
+      isPublicAuth,
+      client?.isPublic,
+      oauth2CallbackAction,
+    ],
   );
 
   useEffect(() => {
@@ -314,79 +416,7 @@ const LoginForm = ({
     const session = !isChecked;
 
     if (client?.isPublic && hash) {
-      const portals = await getAvailablePortals({
-        Email: user,
-        PasswordHash: hash,
-        recaptchaResponse: captchaToken,
-        recaptchaType: reCaptchaType,
-      });
-
-      if (portals.error) {
-        const error = portals;
-
-        let errorMessage = "";
-        if (typeof error === "object") {
-          errorMessage =
-            (error as { response: { data: { message: string } } })?.response
-              ?.data?.message ||
-            (error as { statusText: string })?.statusText ||
-            (error as { message: string })?.message ||
-            "";
-        } else {
-          errorMessage = error as string;
-        }
-
-        if (
-          reCaptchaPublicKey &&
-          (error as { response: { status: number } })?.response?.status === 403
-        ) {
-          captcha.request();
-        } else if (captcha.isVisible) {
-          captcha.reset();
-        }
-
-        setIsEmailErrorShow(true);
-        setErrorText(errorMessage);
-        setPasswordValid(!errorMessage);
-        setIsLoading(false);
-        return;
-      }
-
-      if (portals?.length === 1) {
-        const name =
-          !baseDomain || portals[0].portalName.includes(baseDomain)
-            ? portals[0].portalName
-            : `${portals[0].portalName}.${baseDomain}`;
-
-        let redirectUrl = getRedirectURL();
-        let portalLink = portals[0].portalLink;
-
-        const isLocalhost = name === "http://localhost";
-
-        if (!isLocalhost && redirectUrl)
-          redirectUrl = redirectUrl.replace(window.location.origin, name);
-
-        if (isLocalhost)
-          portalLink = portalLink.replace(name, window.location.origin);
-
-        // deleteCookie("x-redirect-authorization-uri");
-
-        window.open(`${portalLink}&referenceUrl=${redirectUrl}`, "_self");
-
-        return;
-      }
-
-      const newSearchParams = new URLSearchParams();
-
-      const portalsString = JSON.stringify({ portals });
-
-      newSearchParams.set("clientId", client.clientId);
-
-      sessionStorage.setItem("tenant-list", portalsString);
-
-      router.push(`/tenant-list?${newSearchParams.toString()}`);
-
-      setIsLoading(false);
+      oauth2CallbackAction(user, hash, captchaToken);
       return;
     }
 
@@ -487,15 +517,13 @@ const LoginForm = ({
     isDesktop,
     isChecked,
     client?.isPublic,
-    client?.clientId,
     currentCulture,
     reCaptchaType,
     linkData,
-    router,
-    baseDomain,
     clientId,
     isPublicAuth,
     referenceUrl,
+    oauth2CallbackAction,
   ]);
 
   const onBlurEmail = () => {

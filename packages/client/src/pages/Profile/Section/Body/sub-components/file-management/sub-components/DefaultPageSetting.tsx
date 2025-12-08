@@ -32,43 +32,63 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
-import { DefaultPageRoutes } from "@docspace/shared/enums";
+import { DefaultPageRoutes, EmployeeType } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 type Props = {
   defaultPage?: SettingsStore["defaultPage"];
   setDefaultPage?: SettingsStore["setDefaultPage"];
+  userType?: UserStore["userType"];
 };
 
-const StartPageSettingComponent = ({ defaultPage, setDefaultPage }: Props) => {
+const StartPageSettingComponent = ({
+  defaultPage,
+  setDefaultPage,
+  userType,
+}: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
-  const startPageOptions = [
-    {
-      label: t("Common:AIAgents"),
-      key: DefaultPageRoutes.AIAgents,
-    },
-    {
-      label: t("Common:Documents"),
-      key: DefaultPageRoutes.MyDocuments,
-    },
-    {
-      label: t("Common:Rooms"),
-      key: DefaultPageRoutes.Rooms,
-    },
-    {
-      label: t("Common:SharedWithMe"),
-      key: DefaultPageRoutes.SharedWithMe,
-    },
-    {
-      label: t("Common:Favorites"),
-      key: DefaultPageRoutes.Favorites,
-    },
-    {
-      label: t("Common:Recent"),
-      key: DefaultPageRoutes.Recent,
-    },
-  ];
+  const getStartPageOptions = () => {
+    const isGuest = userType === EmployeeType.Guest;
+
+    const unavailableOptions: DefaultPageRoutes[] = [];
+
+    if (isGuest) {
+      unavailableOptions.push(DefaultPageRoutes.MyDocuments);
+    }
+
+    const options = [
+      {
+        label: t("Common:AIAgents"),
+        key: DefaultPageRoutes.AIAgents,
+      },
+      {
+        label: t("Common:MyDocuments"),
+        key: DefaultPageRoutes.MyDocuments,
+      },
+      {
+        label: t("Common:Rooms"),
+        key: DefaultPageRoutes.Rooms,
+      },
+      {
+        label: t("Common:SharedWithMe"),
+        key: DefaultPageRoutes.SharedWithMe,
+      },
+      {
+        label: t("Common:Favorites"),
+        key: DefaultPageRoutes.Favorites,
+      },
+      {
+        label: t("Common:Recent"),
+        key: DefaultPageRoutes.Recent,
+      },
+    ];
+
+    return options.filter((option) => !unavailableOptions.includes(option.key));
+  };
+
+  const startPageOptions = getStartPageOptions();
 
   const getSelectedStartPage = () => {
     const route = defaultPage || DefaultPageRoutes.Rooms;
@@ -100,8 +120,12 @@ const StartPageSettingComponent = ({ defaultPage, setDefaultPage }: Props) => {
   );
 };
 
-export const DefaultPageSetting = inject(({ settingsStore }: TStore) => {
-  const { defaultPage, setDefaultPage } = settingsStore;
+export const DefaultPageSetting = inject(
+  ({ settingsStore, userStore }: TStore) => {
+    const { defaultPage, setDefaultPage } = settingsStore;
 
-  return { defaultPage, setDefaultPage };
-})(observer(StartPageSettingComponent));
+    const { userType } = userStore;
+
+    return { defaultPage, setDefaultPage, userType };
+  },
+)(observer(StartPageSettingComponent));

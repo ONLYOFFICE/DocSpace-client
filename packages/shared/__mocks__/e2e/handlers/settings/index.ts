@@ -88,4 +88,12 @@ export {
 export {
   PATH_WEB_PLUGINS,
   webPluginsHandler,
+  webPluginsAddHandler,
+  webPluginsUpdateHandler,
+  webPluginsDeleteHandler,
+  mockPlugin1,
+  mockPlugin2,
+  mockPlugin3,
+  webPluginsEmpty,
+  webPluginsWithData,
 } from "./webplugins";

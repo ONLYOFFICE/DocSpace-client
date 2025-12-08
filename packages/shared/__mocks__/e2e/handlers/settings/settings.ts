@@ -11,6 +11,7 @@ import {
   HEADER_ENABLE_ADM_MESS_SETTINGS,
   HEADER_HCAPTCHA_SETTINGS,
   HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS,
+  HEADER_PLUGINS_SETTINGS,
 } from "../../utils";
 
 export const PATH = "settings";
@@ -314,6 +315,18 @@ export const settingAuthWithSocket = {
   response: { ...settingsNoAuth.response, socketUrl: "/socket.io" },
 };
 
+export const settingsWithPlugins = {
+  ...settingsAuth,
+  response: {
+    ...settingsAuth.response,
+    plugins: {
+      enabled: true,
+      upload: true,
+      delete: true,
+    },
+  },
+};
+
 export const settingsNoAuthNoStandalone = {
   response: {
     trustedDomainsType: 0,
@@ -486,6 +499,7 @@ export const settings = (headers?: Headers): Response => {
   let isEnableJoin = false;
   let isEnableAdmMess = false;
   let isHCaptcha = false;
+  let isPlugins = false;
 
   if (headers?.get(HEADER_WIZARD_SETTINGS)) {
     isWizard = true;
@@ -519,6 +533,10 @@ export const settings = (headers?: Headers): Response => {
     isHCaptcha = true;
   }
 
+  if (headers?.get(HEADER_PLUGINS_SETTINGS)) {
+    isPlugins = true;
+  }
+
   if (isWizard) return new Response(JSON.stringify(settingsWizzard));
   if (isWizardWithAmi)
     return new Response(JSON.stringify(settingsWizzardWithAmi));
@@ -530,6 +548,7 @@ export const settings = (headers?: Headers): Response => {
     if (headers?.get(HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS)) {
       return new Response(JSON.stringify(settingAuthWithSocket));
     }
+    if (isPlugins) return new Response(JSON.stringify(settingsWithPlugins));
     return new Response(JSON.stringify(settingsAuth));
   }
   if (isEnableJoin)

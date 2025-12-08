@@ -30,21 +30,17 @@ import PropTypes from "prop-types";
 import { StyledGridWrapper, StyledTileContainer } from "../StyledTileView";
 import InfiniteGrid from "./InfiniteGrid";
 
-class TileContainer extends React.PureComponent {
-  render() {
-    const { children, useReactWindow, ...rest } = this.props;
-
-    return (
-      <StyledTileContainer {...rest}>
-        {useReactWindow ? (
-          <InfiniteGrid>{children}</InfiniteGrid>
-        ) : (
-          <StyledGridWrapper>{children}</StyledGridWrapper>
-        )}
-      </StyledTileContainer>
-    );
-  }
-}
+const TileContainer = ({ children, useReactWindow, ...rest }) => {
+  return (
+    <StyledTileContainer {...rest}>
+      {useReactWindow ? (
+        <InfiniteGrid>{children}</InfiniteGrid>
+      ) : (
+        <StyledGridWrapper>{children}</StyledGridWrapper>
+      )}
+    </StyledTileContainer>
+  );
+};
 
 TileContainer.propTypes = {
   children: PropTypes.any.isRequired,

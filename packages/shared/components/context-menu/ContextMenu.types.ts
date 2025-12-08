@@ -85,6 +85,9 @@ export type ContextMenuType = {
   isPaidBadge?: boolean;
   preventNewTab?: boolean;
   dataTestId?: string;
+  tooltipTarget?: "item" | "toggle";
+  getTooltipContent?: () => React.ReactNode;
+  withMCPIcon?: boolean;
 };
 
 export type SeparatorType = {
@@ -105,10 +108,23 @@ export type HeaderType =
       avatar?: string;
       logo?: string;
       icon?: string;
+      badgeUrl?: string;
     })
-  | { title: string; icon: string };
+  | { title: string; icon: string; badgeUrl?: string };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
+
+export type TMobileMenuStackItem = {
+  items: ContextMenuModel[];
+  header: string;
+};
+
+export type TOnMobileItemClick = (
+  e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  label: string,
+  items?: ContextMenuModel[],
+  loadFunc?: () => Promise<ContextMenuModel[]>,
+) => void;
 
 export type TGetContextMenuModel = () => ContextMenuModel[];
 
@@ -168,9 +184,13 @@ export interface ContextMenuProps {
   badgeUrl?: string;
   headerOnlyMobile?: boolean;
   dataTestId?: string;
+  maxHeightLowerSubmenu?: number;
+  showDisabledItems?: boolean;
+  withHotkeys?: boolean;
+  withoutBackHeaderButton?: boolean;
 }
 
 export type TContextMenuRef = {
   show: (e: React.MouseEvent) => void;
-  hide: (e: React.MouseEvent) => {};
+  hide: (e: React.MouseEvent) => object | void;
 };

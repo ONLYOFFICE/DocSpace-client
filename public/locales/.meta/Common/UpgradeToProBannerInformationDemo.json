@@ -3,7 +3,7 @@
   "content": "Request demonstration <1>here</1>",
   "content_en_sha1_hash": "5a17e37a14adcdf587aa798979c9909eed1f5cd0",
   "created_at": "2025-05-26T07:15:49.130Z",
-  "updated_at": "2025-08-11T18:11:59.375Z",
+  "updated_at": "2025-10-13T23:00:26.657Z",
   "comment": {
     "text": "This translation key is used to display a button or link that requests a demonstration, likely in a user interface related to upgrading to a premium plan. It appears as \"Request demonstration\" and is translated from \"UpgradeToProBannerInformationDemo\".",
     "is_auto": true,
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets '<1>' and '</1>' are present in both the English and Arabic translations. They seem to be placeholders and should be removed or replaced with appropriate markup depending on the intended display context. Assuming they are not intended to be displayed directly, they should be removed.",
+          "suggestion": "Remove the angle brackets '<1>' and '</1>.'"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Request demonstration\" is not accurately translated. \"Tələb edin\" generally means \"request\" but in this context, \"Göstərin\" or \"Nümayiş et\" would be more natural and convey the meaning of \"demonstration request\".",
+          "suggestion": "Demonstrasiyanı <1>buradan</1> istəyin"
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets (<1> and </1>) appear to be intended as HTML tags. This is fine if the intent is to preserve HTML tags in the Azerbaijani translation. However, it's important to ensure consistency with the surrounding text.",
+          "suggestion": "No change necessary if HTML tags are intentional. Otherwise, remove the brackets."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +68,30 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Request demonstration\" is more accurately translated as \"Vereinbaren Sie eine Demo\" or \"Bitten Sie um eine Demo\" in German. \"Fordern Sie Demo...an\" is grammatically correct, but sounds less natural and slightly clunky.",
+          "suggestion": "Vereinbaren Sie eine Demo"
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1> and </1> appear to be placeholders for content that should be dynamically inserted. These should be checked to ensure consistency with the English format and that the insertion happens correctly.",
+          "suggestion": "Verify that the <1> and </1> tags are handled correctly in the German implementation."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Greek versions. These tags should be reviewed for their purpose and whether they are necessary. If they represent placeholders, they need to be handled appropriately.",
+          "suggestion": "Determine the purpose of the <1> and </1> tags and handle them appropriately. This might involve removing them, replacing them with dynamic content, or applying specific styling."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,19 +103,37 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'here' in the English content 'here' refers to a location or link. 'tästä' in Finnish translates to 'from this' or 'about this'. It doesn't convey the meaning of a request for a demonstration at a specific location or link.",
+          "suggestion": "Consider a more precise translation for 'here' that indicates a link or location for requesting a demonstration. Possible alternatives include 'täällä' (here), or phrasing that directs the user to a specific URL (e.g., 'Lue lisää ja pyydä esittelyä tästä linkistä' - 'Read more and request a demo from this link'). The best alternative depends on the context of the banner."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <1> and </1> are inconsistent between the English and French versions. The English uses <1> and </1>, while the French uses the same.",
+          "suggestion": "Ensure consistent tag usage across languages. Consider removing the tags completely if they are just placeholders."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ցուցադրումը պահանջեք <1>այստեղ</1>\" is a literal translation of \"Request demonstration <1>here</1>\" but doesn't convey the intended meaning naturally in Armenian. A more idiomatic translation would be something like \"Դիտեք ցուցադրությունը <1>այստեղ</1>\" (Watch the demonstration <1>here</1>) or \"Մամլոյի դիմում <1>այստեղ</1>\" (Request a demo <1>here</1>).",
+          "suggestion": "Մամլոյի դիմում <1>այստեղ</1> or Դիտեք ցուցադրությունը <1>այստեղ</1>"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,13 +145,30 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Request demonstration' is not accurately translated. 'でデモを依頼するには' is closer to 'To request a demonstration'. The original implies a direct action, which isn't fully captured.",
+          "suggestion": "検討: デモをリクエストするには"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are not standard. They seem to be placeholders or custom tags and may need to be removed or replaced with proper HTML or a different tagging system.",
+          "suggestion": "Remove or replace the custom tags `<1>` and `</1>` with appropriate HTML or a different tagging system."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation retains the HTML tags '<1>' and '</1>'. These tags are likely meant to be removed or replaced with appropriate formatting, as they are not standard for Korean text.",
+          "suggestion": "Remove or replace the '<1>' and '</1>' tags with appropriate formatting for Korean text (e.g., bolding, linking) if necessary. If the tags are meant to be HTML, ensure they are valid within the target context."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,13 +186,25 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Request demonstration\" is not perfectly captured by \"Vraag een demonstratie aan\". While understandable, a more accurate translation would be something like \"Verzoek om een demonstratie\" or \"Aanvraag voor een demonstratie\". \"Vraag...aan\" is more commonly used for asking questions or requesting something simple.",
+          "suggestion": "Verzoek om een demonstratie"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets '<1>' are present in both the English and Polish content. This likely indicates a placeholder that needs to be addressed by the development team, not a translation issue.",
+          "suggestion": "Confirm with the development team if the '<1>' tag needs to be included in the translated content. If not, remove it."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -153,7 +234,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation includes angle brackets <1> and </1> which mirror the English content. This is likely unnecessary and should be removed to match standard Sinhala text formatting.",
+          "suggestion": "Remove the angle brackets:මෙතනින් ආදර්ශනයක් ඉල්ලන්න"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ආදර්ශනයක් ඉල්ලන්න' translates to 'Request a demonstration', it might be more natural to use a more active phrasing. 'Request demonstration' implies a direct request, which can be conveyed with slightly different wording in Sinhala.",
+          "suggestion": "Consider 'ඔබට ආදර්ශනයක් ලබා ගැනීමට ඉල්ලුම් කරන්න' (Obata aadarschanayak pawana lakununu kenek)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +263,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Request demonstration\" is better translated as \"Закажите демонстрацију\" instead of \"Затражи демонстрацију\". While \"Затражи\" isn't wrong, \"Закажите\" is more common and natural in this context.",
+          "suggestion": "Закажите демонстрацију"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Zatraži' is misspelled. It should be 'Zatražite'.",
+          "suggestion": "Zatražite"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent. The opening tag uses <1> and the closing tag uses </1>. They should be the same.",
+          "suggestion": "Change </1> to <1> to match the opening tag."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -199,6 +309,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening and closing tags <1> and </1> are inconsistent between the English and Chinese versions. The English version uses <1> and </1>, while the Chinese translation uses the same.",
+          "suggestion": "Ensure consistent tag usage across both versions. In this case, either use <1> and </1> for both or use a different, consistent tag."
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

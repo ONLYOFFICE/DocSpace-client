@@ -3,7 +3,7 @@
   "content": "Total",
   "content_en_sha1_hash": "b25928c69902557b0ef0a628490a3a1768d7b82f",
   "created_at": "2025-06-03T20:59:26.871Z",
-  "updated_at": "2025-06-03T21:00:09.968Z",
+  "updated_at": "2025-08-21T14:45:44.126Z",
   "comment": {
     "text": "This translation key displays the total amount, likely as a summary value in a payment or subscription settings page. It is used to show the overall cost or balance of the user's account. Translators should provide a concise and accurate representation of this numerical value.",
     "is_auto": true,
@@ -11,7 +11,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/StorageSummary.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/StorageSummary.tsx",
       "line_number": 79,
       "context": "return t(\"YourCurrentPayment\");\n }\n \n if (hasStorageSubscription) return t(\"StartingNextMonth\");\n \n return t(\"Total\");\n };\n \n const getDescription = () => {\n if (!hasStorageSubscription) return t(\"NewStorageImmidiatelyAvailable\");",
       "module": "/packages/client"

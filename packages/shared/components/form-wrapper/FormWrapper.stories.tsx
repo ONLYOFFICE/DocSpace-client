@@ -42,7 +42,7 @@ export const WithLoginForm: Story = {
           type="password"
           placeholder="Password"
         />
-        <button className={styles.demoButton} type="submit">
+        <button className={styles.demoButton} type="button">
           Sign In
         </button>
       </form>
@@ -70,7 +70,7 @@ export const WithRegistrationForm: Story = {
           type="password"
           placeholder="Confirm Password"
         />
-        <button className={styles.demoButton} type="submit">
+        <button className={styles.demoButton} type="button">
           Create Account
         </button>
       </form>

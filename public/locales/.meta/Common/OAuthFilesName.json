@@ -3,7 +3,7 @@
   "content": "Files & Folders",
   "content_en_sha1_hash": "96caf6283cd48a7add2d2a99add1e7e2e180be29",
   "created_at": "2025-05-19T21:30:46.992Z",
-  "updated_at": "2025-05-26T07:57:32.562Z",
+  "updated_at": "2025-09-07T07:53:15.257Z",
   "comment": {
     "text": "This translation key is used to display the label \"Files & Folders\" in various contexts within the application. It appears on file-related menus and settings pages, guiding users through navigation options.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/oauth/index.ts",
-      "line_number": 140,
+      "line_number": 139,
       "context": "};\n \n export const getScopeTKeyName = (group: ScopeGroup, t: TTranslation) => {\n switch (group) {\n case ScopeGroup.files:\n return t(\"Common:OAuthFilesName\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n return t(\"Common:OAuthAccountsName\");\n case ScopeGroup.profiles:\n return t(\"Common:OAuthProfilesName\");",
       "module": "/packages/shared"
     }

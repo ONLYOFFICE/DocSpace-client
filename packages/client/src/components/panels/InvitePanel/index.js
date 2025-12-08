@@ -48,7 +48,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Link } from "@docspace/shared/components/link";
-import { checkIfAccessPaid } from "SRC_DIR/helpers";
+import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { fixAccess } from "./utils";
@@ -81,6 +81,7 @@ const InvitePanel = ({
   allowInvitingGuests,
   checkGuests,
   hasGuests,
+  currentUserId,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -130,7 +131,6 @@ const InvitePanel = ({
   };
 
   const roomType = selectedRoom ? selectedRoom.roomType : -1;
-  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
@@ -471,15 +471,19 @@ const InvitePanel = ({
   const addItems = (users, access) => {
     users.forEach((u) => {
       u.access = access.access;
-      const isAccessPaid = checkIfAccessPaid(u.access);
+      const shouldMakeFreeRole =
+        checkIfAccessPaid(u.access) &&
+        (u.isGroup || u.isVisitor || u.isCollaborator);
+      const shouldMakeViewerRole =
+        roomType === RoomsType.AIRoom &&
+        u.isVisitor &&
+        u.access !== ShareAccessRights.ReadOnly;
 
-      if (isAccessPaid) {
-        if (u.isGroup || u.isVisitor || u.isCollaborator) {
-          u = fixAccess(u, t, roomType);
+      if (shouldMakeFreeRole || shouldMakeViewerRole) {
+        u = fixAccess(u, t, roomType);
 
-          if (isUserTariffLimit) {
-            toastr.error(<PaidQuotaLimitError />);
-          }
+        if (isUserTariffLimit) {
+          toastr.error(<PaidQuotaLimitError />);
         }
       }
     });
@@ -545,8 +549,9 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups={!isPublicRoomType}
+            withGroups
             roomId={roomId}
+            isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}
             withHeader
@@ -563,6 +568,7 @@ const InvitePanel = ({
                 closeUsersPanel();
               },
             }}
+            currentUserId={currentUserId}
           />
         </ModalDialog.Container>
       ) : null}
@@ -654,6 +660,7 @@ export default inject(
       allowInvitingGuests,
       checkGuests,
       hasGuests,
+      currentUserId: userStore.user.id,
     };
   },
 )(

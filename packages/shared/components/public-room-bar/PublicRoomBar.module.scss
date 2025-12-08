@@ -33,6 +33,12 @@
   overflow: hidden;
 }
 
+.headerIcon {
+  path {
+    fill: #{colors.$light-gray-dark};
+  }
+}
+
 .body {
   color: var(--info-block-description-color);
 }

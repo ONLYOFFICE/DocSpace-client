@@ -1,0 +1,28 @@
+{
+  "key_path": "AIToolsEnabled",
+  "content": "AI tools service successfully enabled.",
+  "content_en_sha1_hash": "9a62f200a7539e34bc3515218fda64241b53fa78",
+  "created_at": "2025-11-03T12:10:29.423Z",
+  "updated_at": "2025-11-03T12:31:02.344Z",
+  "comment": {
+    "text": "This key displays a success message to the user after enabling AI tools. It appears within a confirmation dialog or similar UI element indicating successful activation of the AI tools service. Translators should ensure the message conveys a positive outcome related to AI tool functionality.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:31:02.344Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 281,
+      "context": "const getSuccessMessage = () => {\n if (confirmActionType === BACKUP_SERVICE) {\n return t(\"Services:BackupServiceEnabled\");\n }\n if (confirmActionType === AI_TOOLS) {\n return t(\"Services:AIToolsEnabled\");\n }\n if (confirmActionType === WEB_SEARCH) {\n return t(\"Services:WebSearchEnabled\");\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

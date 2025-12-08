@@ -30,8 +30,8 @@ import classNames from "classnames";
 import { Text } from "@docspace/shared/components/text";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
-import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
+import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.light.svg?url";
+import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.dark.svg?url";
 
 import styles from "./NoItem.module.scss";
 

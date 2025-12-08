@@ -102,6 +102,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
           tabIndex={2}
           isDisabled={false}
           onClick={onChangeOwnerClick}
+          testId="save_change_owner_button"
         />
         <Button
           scale
@@ -110,6 +111,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
           tabIndex={2}
           isDisabled={false}
           onClick={onCancelClick}
+          testId="cancel_button"
         />
       </ButtonsWrapper>
     </>

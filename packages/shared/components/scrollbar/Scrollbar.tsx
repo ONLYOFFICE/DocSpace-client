@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-param-reassign */
-
 "use client";
 
 import React, {
@@ -57,6 +55,7 @@ const Scrollbar = (props: ScrollbarProps) => {
     tabIndex = -1,
     paddingAfterLastItem,
     paddingInlineEnd,
+    rtl: rtlProp,
     ...rest
   } = props;
 
@@ -181,7 +180,7 @@ const Scrollbar = (props: ScrollbarProps) => {
       {...rest}
       data-testid="scrollbar"
       disableTracksWidthCompensation
-      rtl={isRTL}
+      rtl={rtlProp ?? isRTL}
       className={classNames(styles.scrollbar, className, {
         [styles.fixedSize]: fixedSize,
         [styles.paddingAfterLastItem]: paddingAfterLastItem,

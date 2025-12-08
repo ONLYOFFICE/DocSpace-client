@@ -3,7 +3,7 @@
   "content": "Here you can check the apps info to which you have granted the auth access, and revoke consent if needed.",
   "content_en_sha1_hash": "dcca0e452a98870510105db47286029b6900db85",
   "created_at": "2025-05-19T21:30:53.978Z",
-  "updated_at": "2025-08-11T18:11:59.294Z",
+  "updated_at": "2025-09-22T10:04:14.011Z",
   "comment": {
     "text": "This translation key is used to display a message explaining what authorized apps are and allowing users to revoke consent. It appears on an empty screen when there are no granted auth access apps.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/EmptyScreen.tsx",
-      "line_number": 12,
-      "context": "return (\n <EmptyScreenContainer\n imageSrc={EmptyScreenPersonsSvgUrl}\n imageAlt=\"Empty apps list\"\n headerText={t(\"NoAuthorizedApps\")}\n descriptionText={t(\"ProfileDescription\")}\n />\n );\n };\n \n export default EmptyScreen;",
+      "line_number": 16,
+      "context": "return (\n <EmptyScreenContainer\n imageSrc={isBase ? EmptyScreenOauthSvgUrl : EmptyScreenOauthDarkSvgUrl}\n imageAlt=\"Empty apps list\"\n headerText={t(\"NoAuthorizedApps\")}\n descriptionText={t(\"ProfileDescription\")}\n />\n );\n };\n \n export default EmptyScreen;",
       "module": "/packages/client"
     }
   ],

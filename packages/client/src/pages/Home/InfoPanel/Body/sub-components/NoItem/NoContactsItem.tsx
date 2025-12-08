@@ -27,8 +27,8 @@
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyview/empty.contacts.info.light.svg?url";
+import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.contacts.info.dark.svg?url";
 
 import { Text } from "@docspace/shared/components/text";
 

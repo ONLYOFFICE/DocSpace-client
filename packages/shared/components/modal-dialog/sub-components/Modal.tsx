@@ -63,9 +63,9 @@ const Modal = ({
   containerVisible,
   isDoubleFooterLine,
 
-  embedded,
   withForm,
   withoutPadding,
+  withoutHeaderMargin,
   hideContent,
 
   isInvitePanelLoader = false,
@@ -73,6 +73,8 @@ const Modal = ({
   withBodyScrollForcibly = false,
   withBorder = false,
   dataTestId,
+  scrollbarCreateContext,
+  closeOnBackdropClick = true,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -92,7 +94,8 @@ const Modal = ({
 
   const validateOnMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
-    if (target.id === "modal-onMouseDown-close") onClose?.();
+    if (target.id === "modal-onMouseDown-close" && closeOnBackdropClick)
+      onClose?.();
   };
 
   const headerProps = React.isValidElement(header)
@@ -157,6 +160,7 @@ const Modal = ({
     headerProps.className,
     {
       [styles.displayTypeModal]: currentDisplayType === "modal",
+      [styles.withoutHeaderMargin]: withoutHeaderMargin,
     },
   );
 
@@ -258,6 +262,7 @@ const Modal = ({
                           className="modal-scroll"
                           noScrollY={isScrollLocked}
                           paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+                          createContext={scrollbarCreateContext}
                         >
                           {bodyComponent}
                         </Scrollbar>

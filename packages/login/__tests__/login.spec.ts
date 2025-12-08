@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import {
+  HEADER_ENABLED_JOIN_SETTINGS,
+  HEADER_ENABLE_ADM_MESS_SETTINGS,
+  HEADER_HCAPTCHA_SETTINGS,
   HEADER_LIST_CAPABILITIES,
   HEADER_LIST_THIRD_PARTY_PROVIDERS,
   endpoints,
@@ -47,9 +50,9 @@ test("login error authentication failed", async ({ page, mockRequest }) => {
 
   await page.getByTestId("email-input").fill("email@mail.ru");
 
-  await page.getByTestId("text-input").fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("form-wrapper").getByTestId("button").click();
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -63,9 +66,9 @@ test("login error not validated", async ({ page }) => {
 
   await page.getByTestId("email-input").fill("");
 
-  await page.getByTestId("text-input").fill("");
+  await page.fill("[name='password']", "");
 
-  await page.getByTestId("form-wrapper").getByTestId("button").click();
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -79,9 +82,9 @@ test("login error incorrect email", async ({ page }) => {
 
   await page.getByTestId("email-input").fill("email");
 
-  await page.getByTestId("text-input").fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("form-wrapper").getByTestId("button").click();
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -95,13 +98,72 @@ test("login error incorrect email domain", async ({ page }) => {
 
   await page.getByTestId("email-input").fill("email@mail.com2");
 
-  await page.getByTestId("text-input").fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("form-wrapper").getByTestId("button").click();
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
     "login",
     "login-error-incorrect-email-domain.png",
+  ]);
+});
+
+test("login with with a registration button", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders("/login", [HEADER_ENABLED_JOIN_SETTINGS]);
+
+  await page.goto("/login");
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-registration-button.png",
+  ]);
+
+  await page.locator("#login_register").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-registration-button-modal.png",
+  ]);
+});
+
+test("login with with access recovery", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders("/login", [HEADER_ENABLE_ADM_MESS_SETTINGS]);
+
+  await page.goto("/login");
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-access-recovery.png",
+  ]);
+
+  await page.getByTestId("recover_access_link").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-access-recovery-modal.png",
+  ]);
+});
+
+test("login with with hcaptcha", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders("/login", [HEADER_HCAPTCHA_SETTINGS]);
+  await mockRequest.router([endpoints.loginError403]);
+
+  await page.goto("/login");
+
+  await page.getByTestId("email-input").fill("email@mail.com");
+
+  await page.fill("[name='password']", "qwerty1234");
+
+  await page.getByTestId("login_button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-with-hcaptcha.png",
   ]);
 });

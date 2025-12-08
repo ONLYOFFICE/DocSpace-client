@@ -82,6 +82,7 @@ const SubList = ({
             onClick={onCategoryClick}
             onMouseDown={onPreventDefault}
             title={categoryTitle}
+            testId={`category_sub_list_${categoryType}_${category.id}`}
           >
             <div
               className="item-content"

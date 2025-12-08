@@ -28,7 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 
@@ -59,6 +59,7 @@ export const SectionWrapper = observer(
     showFilter = true,
   }: SectionProps) => {
     const searchParams = useSearchParams();
+    const pathname = usePathname();
 
     const getValue = (key: string) => {
       const value = searchParams.get(key);
@@ -70,6 +71,7 @@ export const SectionWrapper = observer(
     const [isFiltered, setIsFiltered] = React.useState(() =>
       FilesFilter.getFilter({
         search: `?${filesFilter}`,
+        pathname,
       } as Location)!.isFiltered(),
     );
 

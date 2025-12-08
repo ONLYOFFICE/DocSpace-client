@@ -26,9 +26,9 @@
 
 import { API_PREFIX, BASE_URL, HEADER_LIST_CAPABILITIES } from "../utils";
 
-const PATH = "capabilities";
+export const PATH_CAPABILITIES = "capabilities";
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+const url = `${BASE_URL}/${API_PREFIX}/${PATH_CAPABILITIES}`;
 
 export const emptySuccessCapabilities = {
   response: {
@@ -75,6 +75,7 @@ export const successCapabilities = {
   ],
   status: 0,
   statusCode: 200,
+  ok: true,
 };
 
 export const capabilitiesHandler = (headers: Headers) => {

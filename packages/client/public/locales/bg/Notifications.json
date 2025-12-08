@@ -1,11 +1,16 @@
 {
-  "ActionsWithFilesDescription": "Значките ще Ви уведомяват за действия като качване, създаване и промени на файлове.",
+  "AdminSetupRequired": "Необходима е административна настройка",
   "Badges": "Баджове",
   "DailyFeed": "Ежедневен {{productName}} фийд",
   "DailyFeedDescription": "Четете новини и събития от вашия {{productName}} в ежедневен бюлетин.",
-  "ManageNotifications": "Управление",
+  "FileActivityNotify": "Уведомявания за активност на файлове",
+  "IsNotValid": "Не е валидно",
+  "LdapEmailTooltip": "Този потребителски акаунт е зареден от LDAP. Имейл адресът на потребителя не е посочен и текущият е генериран автоматично и не може да се използва за изпращане на известия.",
+  "NotConfigured": "Не е конфигурирано",
   "Notifications": "Известия",
-  "RoomsActivityDescription": "Ежечасни известия. Бъдете в течение за всички дейности във вашите стаи.",
+  "SettingUpNotifications": "Настройка на известия",
+  "SuccessConnected": "{{serviceName}} беше успешно свързан като канал за известия. Сега ще получавате актуализации там.",
+  "SuccessDisconnected": "{{serviceName}} беше успешно премахнат като канал за известия. Известия вече няма да се изпращат там.",
   "UsefulTips": "Полезни съвети за {{productName}}",
   "UsefulTipsDescription": "Поучавайте полезни напътствия за {{productName}}"
 }

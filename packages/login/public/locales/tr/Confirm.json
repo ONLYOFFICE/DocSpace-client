@@ -2,6 +2,8 @@
   "AccountWillBeCreated": "<1>{{email}}</1> için bir {{productName}} hesabı oluşturulacaktır. Lütfen kaydınızı tamamlayın:",
   "ConfirmOwnerPortalSuccessMessage": "{{productName}} sahibi başarıyla değiştirildi. 10 saniye içinde yönlendirileceksiniz.",
   "ConfirmOwnerPortalTitle": "{{productName}} sahibini {{newOwner}} olarak değiştirmek istediğinizi lütfen onaylayın.",
+  "ConnectApp": "Uygulama'yı bağlayın",
+  "ConnectAppDescription": "Sağlayıcı uygulamanızla sağlanan QR kodunu tarayın. Alternatif olarak, uygulamanıza verilen gizli anahtarı manuel olarak girin: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Güncel mobil telefon numaranız",
   "DeleteProfileBtn": "Hesabımı sil",
   "DeleteProfileConfirmation": "Dikkat! Hesabınızı silmek üzeresiniz.",
@@ -16,6 +18,8 @@
   "EnterEmailHeader": "E-posta girin",
   "EnterPhone": "Cep telefonu numarası giriniz",
   "GetCode": "Kod al",
+  "GetSuitableApp": "Uygun bir uygulama edinin",
+  "GetSuitableAppDescription": "Google Authenticator gibi uyumlu bir uygulama kullanın <1>Android</1> ve <4>iOS</4> için veya Authenticator <8>Windows Phone</8> için.",
   "LoginRegistryButton": "Katıl",
   "Newsletter": "{{organizationName}} haber bültenine abone olmak istiyorum",
   "PassworResetTitle": "Şimdi yeni şifre oluşturabilirsiniz.",
@@ -29,5 +33,9 @@
   "SuccessDeactivate": "Hesabınız başarıyla devre dışı bırakıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz",
   "SuccessReactivate": "Hesabınız başarıyla yeniden etkinleştirildi. 10 saniye içinde <1>portal</1>'a yönlendirileceksiniz.",
   "SuccessRemoved": "Hesabınız başarıyla kaldırıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz.",
-  "TermsAndConditions": "Devam ederek, <1>Şartlar ve koşullar</1> ve <2>Gizlilik bildirimimizi</2> anlıyor ve kabul ediyor olduğunuzu beyan etmiş olursunuz."
+  "TermsAndConditions": "Devam ederek, <1>Şartlar ve koşullar</1> ve <2>Gizlilik bildirimimizi</2> anlıyor ve kabul ediyor olduğunuzu beyan etmiş olursunuz.",
+  "TfaSubTitle": "Bu {{productName}}'de çalışmaya devam etmek için basit adımları izleyin:",
+  "TfaTitle": "İki faktörlü kimlik doğrulama, güvenli erişim için etkinleştirildi",
+  "VerifyConnection": "Bağlantıyı doğrula",
+  "VerifyConnectionDescription": "Aşağıdaki alana, kimlik doğrulama uygulamanız tarafından oluşturulan 6 haneli kodu girerek kurulumu tamamlayın."
 }

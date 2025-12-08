@@ -3,7 +3,7 @@
   "content": "Add the allowed domains for this {{productName}}",
   "content_en_sha1_hash": "8cbe1b75222e16c6dccda5647c12182590561f7f",
   "created_at": "2025-06-08T12:02:20.098Z",
-  "updated_at": "2025-06-08T12:02:56.921Z",
+  "updated_at": "2025-09-17T13:43:01.794Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that allowed domains are being added for a specific product. It appears in a category header on a settings page and is likely used as a tooltip or title for a dropdown or button related to content security policy configuration.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 222,
+      "line_number": 217,
       "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,",
       "module": "/packages/client"
     }

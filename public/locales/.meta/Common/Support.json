@@ -3,7 +3,7 @@
   "content": "Support",
   "content_en_sha1_hash": "f32d5a3b17e614297417cc279a7ec1cd02274d65",
   "created_at": "2025-05-19T21:30:49.224Z",
-  "updated_at": "2025-05-28T09:30:02.924Z",
+  "updated_at": "2025-10-14T02:11:50.610Z",
   "comment": {
     "text": "This translation key is used to display \"Support\" as a label for live chat widgets. It appears on the web widget settings page and will be displayed in both the launcher and chat sections. The translated version of this key should be used to provide support-related content to users.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/article/sub-components/LiveChat.tsx",
-      "line_number": 91,
+      "line_number": 93,
       "context": "if (ready)\n zendeskAPI.addChanges(\"webWidget\", \"updateSettings\", {\n launcher: {\n label: {\n \"*\": t(\"Common:Support\"),\n },\n chatLabel: {\n \"*\": t(\"Common:Support\"),\n },\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/article/sub-components/LiveChat.tsx",
-      "line_number": 91,
+      "line_number": 93,
       "context": "if (ready)\n zendeskAPI.addChanges(\"webWidget\", \"updateSettings\", {\n launcher: {\n label: {\n \"*\": t(\"Common:Support\"),\n },\n chatLabel: {\n \"*\": t(\"Common:Support\"),\n },\n },",
       "module": "/packages/shared"
     }
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"지원하다\" (jiwonhada) means \"to support\" as a verb. \"Support\" as a noun (the key name 'Common:Support') should ideally be translated as a noun as well, like \"지원\" (jiwon) which means 'support' or 'assistance'.",
-          "suggestion": "지원 (jiwon)"
+          "description": "The Korean translation '지원하다' means 'to support' as a verb. 'Support' as a noun requires a different translation, like '지원' which means 'support' as a noun or '후원' for sponsorship.",
+          "suggestion": "Consider translating 'Support' as '지원' or '후원' depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Lao translation 'ສະ ໜັບ ສະ ໜູນ' contains a typo. The consonant 'ໜ' is repeated unnecessarily.",
-          "suggestion": "ສະຫນັບສະຫນູນ"
+          "description": "The Lao translation 'ສະ ໜັບ ສະ ໜູນ' contains an inconsistent use of Lao consonants. The 'ໜ' should be consistent.",
+          "suggestion": "ສະໜັບສະໜູນ"
         }
       ],
       "approved_at": null
@@ -217,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

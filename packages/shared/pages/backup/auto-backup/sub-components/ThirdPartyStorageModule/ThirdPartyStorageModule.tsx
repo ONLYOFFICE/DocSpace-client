@@ -48,6 +48,7 @@ import { AmazonStorage } from "../storages/AmazonStorage";
 
 import styles from "../../AutoBackup.module.scss";
 import type { ThirdPartyStorageModuleProps } from "./ThirdPartyStorageModule.types";
+import NoteComponent from "../../../sub-components/NoteComponent";
 
 const ThirdPartyStorageModule = ({
   thirdPartyStorage,
@@ -83,6 +84,8 @@ const ThirdPartyStorageModule = ({
   defaultRegion,
   deleteValueFormSetting,
   selectedStorageId,
+  isBackupPaid,
+  isFreeBackupsLimitReached,
 }: ThirdPartyStorageModuleProps) => {
   const {
     comboBoxOptions,
@@ -193,55 +196,60 @@ const ThirdPartyStorageModule = ({
   );
 
   return (
-    <div
-      className={classNames(
-        styles.autoBackupStoragesModule,
-        "auto-backup_storages-module",
-      )}
-    >
-      <ComboBox
-        options={[]}
-        advancedOptions={advancedOptions}
-        selectedOption={{
-          key: 0,
-          label: storageTitle,
-        }}
-        isDisabled={isLoadingData}
-        manualWidth="400px"
-        directionY="both"
-        displaySelectedOption
-        noBorder={false}
-        isDefaultMode
-        hideMobileView={false}
-        forceCloseClickOutside
-        scaledOptions
-        showDisabledItems
-        displayArrow
-        className={classNames(styles.backupCombo, "backup_combo")}
-        dataTestId="auto_backup_storage_combobox"
-      />
-
-      {selectedStorageId === ThirdPartyStorages.GoogleId ? (
-        <GoogleCloudStorage {...commonProps} />
-      ) : null}
-
-      {selectedStorageId === ThirdPartyStorages.RackspaceId ? (
-        <RackspaceStorage {...commonProps} />
-      ) : null}
-
-      {selectedStorageId === ThirdPartyStorages.SelectelId ? (
-        <SelectelStorage {...commonProps} />
-      ) : null}
-
-      {selectedStorageId === ThirdPartyStorages.AmazonId ? (
-        <AmazonStorage
-          storageRegions={storageRegions}
-          defaultRegion={defaultRegion}
-          deleteValueFormSetting={deleteValueFormSetting}
-          {...commonProps}
+    <>
+      <div
+        className={classNames(
+          styles.autoBackupStoragesModule,
+          "auto-backup_storages-module",
+        )}
+      >
+        <ComboBox
+          options={[]}
+          advancedOptions={advancedOptions}
+          selectedOption={{
+            key: 0,
+            label: storageTitle,
+          }}
+          isDisabled={isLoadingData}
+          manualWidth="400px"
+          directionY="both"
+          displaySelectedOption
+          noBorder={false}
+          isDefaultMode
+          hideMobileView={false}
+          forceCloseClickOutside
+          scaledOptions
+          showDisabledItems
+          displayArrow
+          className={classNames(styles.backupCombo, "backup_combo")}
+          dataTestId="auto_backup_storage_combobox"
         />
-      ) : null}
-    </div>
+
+        {selectedStorageId === ThirdPartyStorages.GoogleId ? (
+          <GoogleCloudStorage {...commonProps} />
+        ) : null}
+
+        {selectedStorageId === ThirdPartyStorages.RackspaceId ? (
+          <RackspaceStorage {...commonProps} />
+        ) : null}
+
+        {selectedStorageId === ThirdPartyStorages.SelectelId ? (
+          <SelectelStorage {...commonProps} />
+        ) : null}
+
+        {selectedStorageId === ThirdPartyStorages.AmazonId ? (
+          <AmazonStorage
+            storageRegions={storageRegions}
+            defaultRegion={defaultRegion}
+            deleteValueFormSetting={deleteValueFormSetting}
+            {...commonProps}
+          />
+        ) : null}
+      </div>
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+      />
+    </>
   );
 };
 

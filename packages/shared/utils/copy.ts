@@ -43,14 +43,13 @@ export const copyShareLink = async (link: string) => {
   if (navigator.clipboard && window.isSecureContext) {
     try {
       await navigator.clipboard.writeText(link);
+      return;
     } catch (err) {
       console.error(err);
     }
-  } else {
-    await wait(100);
-
-    copy(link);
   }
+  await wait(100);
+  copy(link);
 };
 
 const copyRowSelectedText = (e: KeyboardEvent) => {
@@ -112,4 +111,23 @@ export const copySelectedText = (
     default:
       return e;
   }
+};
+
+export const clearTextSelection = () => {
+  if (typeof window === "undefined") return;
+
+  if (window.getSelection) {
+    const selection = window.getSelection();
+    if (selection) selection.removeAllRanges();
+  }
+};
+
+export const handleCopy = (e: ClipboardEvent) => {
+  if (!e.clipboardData) return;
+
+  const selection = window.getSelection();
+  if (!selection || selection.toString().length === 0) return;
+
+  e.clipboardData.setData("text/plain", selection.toString());
+  e.preventDefault();
 };

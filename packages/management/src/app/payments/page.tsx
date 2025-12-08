@@ -32,6 +32,8 @@ import {
   getQuota,
   getPortalTariff,
   getPaymentSettings,
+  getLicenseQuota,
+  getSettingsFiles,
 } from "@/lib/actions";
 
 import PaymentsPage from "./page.client";
@@ -40,11 +42,20 @@ import { logger } from "../../../logger.mjs";
 async function Page() {
   logger.info("Payments page");
 
-  const [settings, quota, portalTariff, paymentSettings] = await Promise.all([
+  const [
+    settings,
+    quota,
+    portalTariff,
+    paymentSettings,
+    licenseQuota,
+    filesSettings,
+  ] = await Promise.all([
     getSettings(),
     getQuota(),
     getPortalTariff(),
     getPaymentSettings(),
+    getLicenseQuota(),
+    getSettingsFiles(),
   ]);
 
   if (settings === "access-restricted") {
@@ -53,16 +64,27 @@ async function Page() {
     const baseURL = await getBaseUrl();
     redirect(`${baseURL}/${settings}`);
   }
-  if (!settings || !quota || !portalTariff || !paymentSettings) {
+  if (
+    !settings ||
+    !quota ||
+    !portalTariff ||
+    !paymentSettings ||
+    !licenseQuota ||
+    !filesSettings
+  ) {
     logger.info(
-      `Payments page settings: ${settings}, quota: ${quota}, portalTariff: ${portalTariff}, paymentSettings: ${paymentSettings}`,
+      `Payments page settings: ${settings}, quota: ${quota}, portalTariff: ${portalTariff}, paymentSettings: ${paymentSettings}, licenseQuota: ${licenseQuota}, filesSettings: ${filesSettings}`,
     );
 
     const baseURL = await getBaseUrl();
     redirect(`${baseURL}/login`);
   }
 
-  const { logoText } = settings;
+  const { logoText, externalResources } = settings;
+  const { helpcenter } = externalResources;
+
+  const docspaceFaqUrl = helpcenter.domain + helpcenter.entries.docspacefaq;
+
   const { trial } = quota;
   const { enterprise, developer, dueDate, openSource } = portalTariff;
   const { salesEmail, buyUrl } = paymentSettings;
@@ -83,6 +105,9 @@ async function Page() {
       dueDate={dueDate}
       isEnterprise={enterprise}
       logoText={logoText}
+      docspaceFaqUrl={docspaceFaqUrl}
+      licenseQuota={licenseQuota}
+      filesSettings={filesSettings}
     />
   );
 }

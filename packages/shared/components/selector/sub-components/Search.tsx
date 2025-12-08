@@ -68,13 +68,15 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
 
   return (
     <SearchInput
-      className="search-input"
+      className="search-input selector-search-input"
       placeholder={searchPlaceholder}
       value={searchValue ?? ""}
       onChange={onSearchAction}
       onClearSearch={onClearSearchAction}
       size={InputSize.base}
       resetOnBlur
+      dataTestId="selector_search_input"
+      tabIndex={1}
     />
   );
 });

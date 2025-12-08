@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import crypto from "crypto-js";
 import sha256 from "crypto-js/sha256";
 

@@ -1,7 +1,7 @@
 .wrapper {
-  width: 500px;
-  height: 600px;
+  height: 400px;
   position: relative;
+  right: 530px;
 }
 
 .isAutoDocs {
@@ -9,5 +9,6 @@
   height: 500px;
   position: relative;
   margin-block: 0 -20px;
+  right: inherit;
   margin-inline: -20px 0;
 }

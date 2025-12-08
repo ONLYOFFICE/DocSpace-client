@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import FormRoomEmptyDarkImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.dark.svg?url";
@@ -33,6 +32,7 @@ import FormRoomEmptyLightImageUrl from "PUBLIC_DIR/images/emptyview/selector.for
 import Plus16SvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg?url";
 
 import { RoomsType } from "../../../../enums";
+import { useTheme } from "../../../../hooks/useTheme";
 
 import { Text } from "../../../text";
 import { Heading } from "../../../heading";
@@ -46,9 +46,9 @@ const EmptyScreenFormRoom = ({
 }: EmptyScreenFormRoomProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const formRoomEmptyScreenImage = theme.isBase
+  const formRoomEmptyScreenImage = isBase
     ? FormRoomEmptyLightImageUrl
     : FormRoomEmptyDarkImageUrl;
 

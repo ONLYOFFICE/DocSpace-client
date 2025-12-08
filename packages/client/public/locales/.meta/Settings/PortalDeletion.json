@@ -3,7 +3,7 @@
   "content": "{{productName}} Deletion",
   "content_en_sha1_hash": "693540a2e226ddffcbfa72d1c31476a39f461691",
   "created_at": "2025-05-19T21:30:52.200Z",
-  "updated_at": "2025-08-04T07:30:01.281Z",
+  "updated_at": "2025-11-06T18:29:15.761Z",
   "comment": {
     "text": "The translation key \"PortalDeletion\" is used to display a message indicating that an artifact will be deleted. In the UI, it appears in a portal settings page as part of a deletion confirmation dialog. The phrase should refer to the specific product or application being deleted, using the product name provided by the user.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 228,
+      "line_number": 234,
       "context": "return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 566,
-      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"8\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"8-0\",\n icon: \"\",",
+      "line_number": 612,
+      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"9\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"9-0\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 566,
-      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"8\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"8-0\",\n icon: \"\",",
+      "line_number": 612,
+      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"9\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"9-0\",\n icon: \"\",",
       "module": "/packages/client"
     }
   ],

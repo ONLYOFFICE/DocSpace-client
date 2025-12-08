@@ -65,6 +65,7 @@ interface RackspaceStorageProps {
     values: Record<string, string>,
     module?: string,
   ) => void;
+  isThirdPartyAvailable: boolean;
 }
 
 const RackspaceStorage = ({
@@ -84,6 +85,7 @@ const RackspaceStorage = ({
   setCompletedFormFields,
   onMakeCopyIntoStorage,
   t,
+  isThirdPartyAvailable,
 }: RackspaceStorageProps) => {
   const isDisabled = selectedStorage && !selectedStorage.isSet;
 
@@ -105,18 +107,20 @@ const RackspaceStorage = ({
 
   return (
     <div data-testid="rackspace-storage">
-      <RackspaceSettings
-        t={t}
-        isLoading={isLoading}
-        formSettings={formSettings}
-        isLoadingData={isLoadingData}
-        isNeedFilePath={isNeedFilePath}
-        selectedStorage={selectedStorage}
-        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
-        addValueInFormSettings={addValueInFormSettings}
-        setRequiredFormSettings={setRequiredFormSettings}
-        setIsThirdStorageChanged={setIsThirdStorageChanged}
-      />
+      {isThirdPartyAvailable ? (
+        <RackspaceSettings
+          t={t}
+          isLoading={isLoading}
+          formSettings={formSettings}
+          isLoadingData={isLoadingData}
+          isNeedFilePath={isNeedFilePath}
+          selectedStorage={selectedStorage}
+          errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+          addValueInFormSettings={addValueInFormSettings}
+          setRequiredFormSettings={setRequiredFormSettings}
+          setIsThirdStorageChanged={setIsThirdStorageChanged}
+        />
+      ) : null}
       <div
         className={classNames(
           styles.manualBackupButtons,

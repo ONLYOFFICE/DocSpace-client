@@ -2,5 +2,6 @@
   "CancellaionNotification": "Không hiển thị lại thông báo hủy",
   "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin",
   "OpenSameTab": "Mở trình chỉnh sửa {{organizationName}} trong cùng một tab",
-  "OriginalCopy": "Lưu cả bản sao của tệp ở định dạng gốc"
+  "OriginalCopy": "Lưu cả bản sao của tệp ở định dạng gốc",
+  "TrashMoveConfirmation": "Hiển thị thông báo khi di chuyển các mục đến {{sectionName}}"
 }

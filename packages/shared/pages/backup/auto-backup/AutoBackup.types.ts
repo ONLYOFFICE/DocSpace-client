@@ -35,7 +35,6 @@ import type {
   TWeekdaysLabel,
 } from "../../../types";
 import type { TOption } from "../../../components/combobox";
-import type { FolderType } from "../../../enums";
 import type { ButtonSize } from "../../../components/button";
 import type { TColorScheme } from "../../../themes";
 import type { FilesSelectorSettings } from "../../../components/files-selector-input";
@@ -45,6 +44,7 @@ import type { TThirdParties } from "../../../api/files/types";
 
 export interface AutomaticBackupProps {
   isManagement?: boolean;
+  isBackupPaid?: boolean;
 
   isInitialLoading: boolean;
   isEmptyContentBeforeLoader: boolean;
@@ -107,6 +107,9 @@ export interface AutomaticBackupProps {
   backupProgressError: string;
   setBackupProgressError: (error: string) => void;
 
+  backupProgressWarning: string;
+  setBackupProgressWarning: (warning: string) => void;
+
   isChanged: boolean;
   isThirdStorageChanged: boolean;
   defaultStorageType: Nullable<string>;
@@ -145,11 +148,6 @@ export interface AutomaticBackupProps {
   setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;
   // end backup
 
-  // treeFoldersStore Store
-  rootFoldersTitles: Partial<Record<FolderType, { title: string; id: number }>>;
-
-  // end treeFoldersStore
-
   // settingsStore
   automaticBackupUrl?: string;
   currentColorScheme?: TColorScheme;
@@ -182,4 +180,6 @@ export interface AutomaticBackupProps {
   setConnectDialogVisible: (visible: boolean) => void;
   setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
   // end dialogsStore
+
+  setDefaultFolderId?: (id: string | number | null) => void;
 }

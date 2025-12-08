@@ -29,11 +29,7 @@ import { RectangleSkeleton } from "../rectangle";
 import styles from "./Payments.module.scss";
 import type { PaymentsLoaderProps } from "./Payments.types";
 
-const EnterpriseLoader = ({
-  className,
-  style,
-  ...rest
-}: PaymentsLoaderProps) => {
+const EnterpriseLoader = ({ ...rest }: PaymentsLoaderProps) => {
   const {
     title,
     borderRadius,

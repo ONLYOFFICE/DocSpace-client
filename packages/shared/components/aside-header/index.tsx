@@ -53,6 +53,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
     withoutBorder = false,
     headerHeight,
     headerComponent,
+    dataTestId,
   } = props;
 
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -65,6 +66,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
       onClick={onBackClick}
       isFill
       isClickable
+      dataTestId="aside_header_back_icon_button"
     />
   );
 
@@ -77,6 +79,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
       isClickable
       isStroke
       aria-label="close"
+      dataTestId="aside_header_close_icon_button"
     />
   );
 
@@ -144,7 +147,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
         [styles.customHeaderHeight]: headerHeight,
       })}
       style={style}
-      data-testid="aside-header"
+      data-testid={dataTestId ?? "aside-header"}
     >
       {isLoading ? loaderComponent : mainComponent}
     </div>

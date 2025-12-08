@@ -3,7 +3,7 @@
   "content": "Subscription expired",
   "content_en_sha1_hash": "310acecb5306e8088502cf4b53539a4c5b3657be",
   "created_at": "2025-05-19T21:30:49.193Z",
-  "updated_at": "2025-05-28T09:30:02.174Z",
+  "updated_at": "2025-10-14T02:46:01.080Z",
   "comment": {
     "text": "This translation key is used to display a message when a subscription has expired. It appears as a label on a UI element and indicates that a subscription has ended its term, often prompting the user to renew or manage their subscription. Translators should focus on conveying a clear and concise meaning of \"subscription has expired\" in different languages.",
     "is_auto": true,
@@ -105,18 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ການສັນຈອງສູບສະຄຣິບລາຍໝົດອາຍຸ\" is overly literal and doesn't flow naturally in Lao. 'Subscription' is a specific concept that might be better conveyed with a more understandable term.",
-          "suggestion": "Consider alternatives like \"ເວລາຈົດຊື້ມົດຫມົດໄລຍະ\" (Time for subscription ended) or \"ການເປັນສະມາຊິກຫມົດອາຍຸ\" (Membership expired) depending on the specific context."
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'ສູບສະຄຣິບ' seems like a direct transliteration of 'subscription' and might be confusing for Lao speakers. It could be ambiguous.",
-          "suggestion": "Re-evaluate the best Lao term to represent 'subscription' to ensure clarity and cultural appropriateness.  Possibly use a different phrasing if a single word isn't readily available."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -125,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Abonementa derīguma termiņš ir beidzies' is a very literal and lengthy translation of 'Subscription expired'. While technically correct, it sounds awkward and overly formal in Latvian. A more natural and concise translation would be preferred.",
-          "suggestion": "Abonements ir beidzies"
+          "description": "The Latvian translation 'Abonementa derīguma termiņš ir beidzies' is a very literal and formal translation of 'Subscription expired'. It's overly verbose and not how a native Latvian speaker would typically express this. A more natural and concise translation would be preferred.",
+          "suggestion": "Izbeidzies abonements"
         }
       ],
       "approved_at": null
@@ -216,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

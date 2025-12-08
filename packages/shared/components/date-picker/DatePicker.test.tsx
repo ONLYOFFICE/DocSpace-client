@@ -26,23 +26,19 @@
 
 import React from "react";
 import moment from "moment";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { DatePicker } from "./DatePicker";
 
 // Mock selector-add-button
-jest.mock("../selector-add-button", () => ({
+vi.mock("../selector-add-button", () => ({
   SelectorAddButton: ({
     children,
-    ...props
+    // ...props
   }: {
     children: React.ReactNode;
-  }) => (
-    <div data-testid="mock-selector-add-button" {...props}>
-      {children}
-    </div>
-  ),
+  }) => <div data-testid="mock-selector-add-button">{children}</div>,
 }));
 
 describe("DatePicker tests", () => {
@@ -52,11 +48,11 @@ describe("DatePicker tests", () => {
     openDate: moment(),
     locale: "en",
     selectDateText: "Select date",
-    onChange: jest.fn(),
+    onChange: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without selected date", () => {
@@ -107,7 +103,7 @@ describe("DatePicker tests", () => {
   });
 
   it("opens calendar on click and handles date selection", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<DatePicker {...defaultProps} onChange={onChange} />);
 
     const dateSelector = screen.getByTestId("date-selector");
@@ -130,7 +126,7 @@ describe("DatePicker tests", () => {
   });
 
   it("handles date deletion", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const initialDate = moment("2024-01-15");
     const { rerender } = render(
       <DatePicker

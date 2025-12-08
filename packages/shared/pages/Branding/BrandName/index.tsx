@@ -196,8 +196,8 @@ export const BrandName = ({
             saveButtonDisabled={isEqualText || hasError}
             disableRestoreToDefault={isEqualText}
             showReminder={showReminder}
-            saveButtonDataTestId="brand_name_cancel_button"
-            cancelButtonDataTestId="brand_name_save_button"
+            saveButtonDataTestId="brand_name_save_button"
+            cancelButtonDataTestId="brand_name_cancel_button"
           />
         </FieldContainer>
       </div>

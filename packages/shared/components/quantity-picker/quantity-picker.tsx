@@ -314,6 +314,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
                 label={item.name}
                 onSelect={onSelectTab}
                 allowNoSelection
+                dataTestId={`add_${item.id}_tab_item`}
               />
             );
           })}

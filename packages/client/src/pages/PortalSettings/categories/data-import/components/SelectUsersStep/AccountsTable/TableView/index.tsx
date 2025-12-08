@@ -24,16 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg?url";
+import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { TableBody } from "@docspace/shared/components/table";
-import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
-import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
+
 import UsersTableRow from "./UsersTableRow";
 import UsersTableHeader from "./UsersTableHeader";
 import { StyledTableContainer } from "../../../../StyledDataImport";
@@ -58,6 +62,7 @@ const TableView = (props: TableViewProps) => {
     isAccountChecked,
     setSearchValue,
   } = props as SelectUserTableProps;
+  const theme = useTheme();
   const tableRef = useRef<HTMLDivElement>(null);
 
   const toggleAll = (e?: React.ChangeEvent<HTMLInputElement>) =>
@@ -134,8 +139,10 @@ const TableView = (props: TableViewProps) => {
         </>
       ) : (
         <EmptyScreenContainer
-          imageSrc={EmptyScreenUserReactSvgUrl}
-          imageAlt="Empty Screen user image"
+          imageSrc={
+            theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl
+          }
+          imageAlt={t("Common:NotFoundUsers")}
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={

@@ -44,6 +44,7 @@ export const FilesRowWrapper = (
     isIndexUpdated,
     showHotkeyBorder,
     children,
+    ...rest
   } = props;
 
   const classes = classNames(styles.filesRowWrapper, className, {
@@ -58,7 +59,7 @@ export const FilesRowWrapper = (
   });
 
   return (
-    <div data-testid="files-row-wrapper" className={classes}>
+    <div data-testid="files-row-wrapper" className={classes} {...rest}>
       {children}
     </div>
   );

@@ -1,47 +1,45 @@
 import React from "react";
-import { screen, fireEvent, act } from "@testing-library/react";
-
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, fireEvent, act, render } from "@testing-library/react";
 
 import { DeviceType } from "../../enums";
-import { renderWithTheme } from "../../utils/render-with-theme";
 import Article from "./index";
 
 // Mock child components
-jest.mock("./sub-components/Header", () => ({
+vi.mock("./sub-components/Header", () => ({
   __esModule: true,
   default: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="article-header">{children}</div>
   ),
 }));
 
-jest.mock("./sub-components/Profile", () => ({
+vi.mock("./sub-components/Profile", () => ({
   __esModule: true,
   default: () => <div data-testid="article-profile">Profile</div>,
 }));
 
-jest.mock("./sub-components/LiveChat", () => ({
+vi.mock("./sub-components/LiveChat", () => ({
   __esModule: true,
   default: () => <div data-testid="article-live-chat">LiveChat</div>,
 }));
 
-jest.mock("./sub-components/Apps", () => ({
+vi.mock("./sub-components/Apps", () => ({
   __esModule: true,
   default: () => <div data-testid="article-apps">Apps</div>,
 }));
 
-jest.mock("./sub-components/DevToolsBar", () => ({
+vi.mock("./sub-components/DevToolsBar", () => ({
   __esModule: true,
   default: () => <div data-testid="article-dev-tools">DevTools</div>,
 }));
 
-jest.mock("./sub-components/HideMenuButton", () => ({
+vi.mock("./sub-components/HideMenuButton", () => ({
   __esModule: true,
   default: () => <div data-testid="article-hide-menu">HideMenu</div>,
 }));
 
 // Mock react-device-detect
-jest.mock("react-device-detect", () => ({
+vi.mock("react-device-detect", () => ({
   isMobile: false,
   isMobileOnly: false,
   isIOS: false,
@@ -49,11 +47,11 @@ jest.mock("react-device-detect", () => ({
 
 const defaultProps = {
   showText: true,
-  setShowText: jest.fn(),
+  setShowText: vi.fn(),
   articleOpen: false,
-  toggleShowText: jest.fn(),
-  toggleArticleOpen: jest.fn(),
-  setIsMobileArticle: jest.fn(),
+  toggleShowText: vi.fn(),
+  toggleArticleOpen: vi.fn(),
+  setIsMobileArticle: vi.fn(),
   hideProfileBlock: false,
   hideAppsBlock: false,
   currentColorScheme: {
@@ -61,7 +59,7 @@ const defaultProps = {
       accent: "#000",
     },
   },
-  setArticleOpen: jest.fn(),
+  setArticleOpen: vi.fn(),
   withSendAgain: false,
   mainBarVisible: false,
   isLiveChatAvailable: true,
@@ -87,12 +85,12 @@ const defaultProps = {
 };
 
 const renderComponent = (props = {}) => {
-  return renderWithTheme(<Article {...defaultProps} {...props} />);
+  return render(<Article {...defaultProps} {...props} />);
 };
 
 describe("Article", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     localStorage.clear();
   });
 
@@ -145,8 +143,16 @@ describe("Article", () => {
     expect(screen.getByTestId("article-dev-tools")).toBeInTheDocument();
   });
 
-  it("hides dev tools when user is not admin", () => {
-    renderComponent({ isAdmin: false });
+  it("hides dev tools when user is visitor", () => {
+    renderComponent({ user: { isVisitor: true } });
+    expect(screen.queryByTestId("article-dev-tools")).not.toBeInTheDocument();
+  });
+
+  it("hides dev tools when user is not admin and limitedAccessDevToolsForUsers is true", () => {
+    renderComponent({
+      user: { isAdmin: false },
+      limitedAccessDevToolsForUsers: true,
+    });
     expect(screen.queryByTestId("article-dev-tools")).not.toBeInTheDocument();
   });
 
@@ -161,7 +167,7 @@ describe("Article", () => {
   });
 
   it("handles mobile back action", () => {
-    const setArticleOpen = jest.fn();
+    const setArticleOpen = vi.fn();
     renderComponent({
       currentDeviceType: DeviceType.mobile,
       setArticleOpen,
@@ -175,8 +181,8 @@ describe("Article", () => {
   });
 
   it("updates mobile article state based on device type", () => {
-    const setIsMobileArticle = jest.fn();
-    const setShowText = jest.fn();
+    const setIsMobileArticle = vi.fn();
+    const setShowText = vi.fn();
 
     renderComponent({
       currentDeviceType: DeviceType.mobile,
@@ -189,8 +195,8 @@ describe("Article", () => {
   });
 
   it("handles tablet device type correctly", () => {
-    const setIsMobileArticle = jest.fn();
-    const setShowText = jest.fn();
+    const setIsMobileArticle = vi.fn();
+    const setShowText = vi.fn();
 
     renderComponent({
       currentDeviceType: DeviceType.tablet,
@@ -211,7 +217,7 @@ describe("Article", () => {
   });
 
   it("calls toggleArticleOpen when mobile backdrop is clicked", () => {
-    const toggleArticleOpen = jest.fn();
+    const toggleArticleOpen = vi.fn();
     renderComponent({
       currentDeviceType: DeviceType.mobile,
       articleOpen: true,

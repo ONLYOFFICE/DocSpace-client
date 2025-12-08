@@ -3,7 +3,7 @@
   "content": "Reload page",
   "content_en_sha1_hash": "37614e96d9e32dc327e92508fa0e8ec4ca3d2c51",
   "created_at": "2025-05-19T21:30:47.790Z",
-  "updated_at": "2025-06-08T12:02:32.574Z",
+  "updated_at": "2025-10-13T14:41:02.842Z",
   "comment": {
     "text": "The translation key \"ReloadPage\" is used to display a button label indicating that a page should be reloaded. It appears in an error message component, prompting users to reload the page after an error occurs.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/shared/components/errors/Error520.tsx",
-      "line_number": 114,
-      "context": "fontWeight={600}\n type={LinkType.action}\n onClick={onReloadClick}\n color={currentColorScheme?.main?.accent}\n >\n {t(\"ReloadPage\")}\n </Link>\n <ReportDialog\n user={user}\n error={errorLog ?? customErrorLog}\n version={version}",
+      "line_number": 113,
+      "context": "fontWeight={600}\n type={LinkType.action}\n onClick={onReloadClick}\n color={currentColorScheme?.main?.accent}\n >\n {t(\"ReloadPage\")}\n </Link>\n </ErrorContainer>\n \n <ReportDialog\n user={user}",
       "module": "/packages/shared"
     }
   ],

@@ -92,8 +92,8 @@ const RowView = ({
         <GroupsRow
           key={item.id}
           item={item}
-          itemIndex={index}
           sectionWidth={sectionWidth!}
+          itemIndex={index}
         />
       ))}
     </GroupsRowContainer>

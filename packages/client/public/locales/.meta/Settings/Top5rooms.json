@@ -3,7 +3,7 @@
   "content": "Top 5 rooms by storage usage:",
   "content_en_sha1_hash": "800ff672a507fc931c2e9ea57c1cf8454972e65d",
   "created_at": "2025-05-19T21:30:52.959Z",
-  "updated_at": "2025-05-24T03:51:21.982Z",
+  "updated_at": "2025-10-27T16:14:33.634Z",
   "comment": {
     "text": "This translation key is used to display a label for a list of rooms sorted by storage usage. It appears in the \"Rooms List\" component and is shown when the user selects more than 5 rooms to view.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/RoomsList.js",
-      "line_number": 94,
+      "line_number": 105,
       "context": "return (\n <StyledStatistics>\n <div className=\"statistics-container\">\n <Text fontWeight={600} className=\"item-statistic\">\n {t(\"Top5rooms\")}\n </Text>\n {roomsList}\n \n {roomsListLength > 5 ? (\n <Button",
       "module": "/packages/client"
     }

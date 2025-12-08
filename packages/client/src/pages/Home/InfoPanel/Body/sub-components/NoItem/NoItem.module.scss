@@ -49,9 +49,9 @@
   gap: 32px;
 
   :global(.no-item-text) {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
     text-align: center;
   }
 
@@ -63,11 +63,12 @@
   }
 
   :global(.no-thumbnail-img-wrapper) {
-    width: 75px;
-    height: 75px;
+    width: 150px;
+    height: 105px;
+
     img {
-      width: 75px;
-      height: 75px;
+      width: 150px;
+      height: 105px;
     }
   }
 
@@ -98,11 +99,11 @@
   cursor: pointer;
   border: none;
 
-  color: var(--empty-content-button-color-link);
+  color: var(--accent-main);
 
   svg {
     path {
-      fill: var(--empty-content-button-color-link);
+      fill: var(--accent-main);
     }
   }
 

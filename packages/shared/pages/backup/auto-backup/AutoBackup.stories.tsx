@@ -26,7 +26,7 @@
 
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { FolderType, ThirdPartyStorages } from "../../../enums";
+import { ThirdPartyStorages } from "../../../enums";
 
 import { createGetRoomsHandler } from "../../../__mocks__/storybook/handlers/files/rooms";
 import {
@@ -50,7 +50,6 @@ import {
 import type { AutomaticBackupProps } from "./AutoBackup.types";
 
 const AutoBackupWithToggle = ({
-  selectedEnableSchedule,
   selectedStorageType,
   ...rest
 }: AutomaticBackupProps) => {
@@ -103,7 +102,6 @@ const meta: Meta<typeof AutomaticBackup> = {
     setThirdPartyStorage: { table: { disable: true } },
     setBackupSchedule: { table: { disable: true } },
     setConnectedThirdPartyAccount: { table: { disable: true } },
-    rootFoldersTitles: { table: { disable: true } },
     seStorageType: { table: { disable: true } },
     setSelectedEnableSchedule: { table: { disable: true } },
     toDefault: { table: { disable: true } },
@@ -178,11 +176,6 @@ export const Default: Story = {
       title: "Amazon S3",
       providerId: "amazon",
       providerKey: "amazon",
-    },
-    rootFoldersTitles: {
-      [FolderType.USER]: { title: "My Documents", id: 1 },
-      [FolderType.SHARE]: { title: "Shared with me", id: 2 },
-      [FolderType.COMMON]: { title: "Common Documents", id: 3 },
     },
     selectedStorageType: "0",
     selectedFolderId: "1",

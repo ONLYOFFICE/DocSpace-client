@@ -2,6 +2,8 @@
   "AccountWillBeCreated": "Konto {{productName}} zostanie utworzone dla adresu <1>{{email}}</1>. Zakończ rejestrację:",
   "ConfirmOwnerPortalSuccessMessage": "Właściciel {{productName}} został pomyślnie zmieniony. Przekierowanie nastąpi za 10 sekund.",
   "ConfirmOwnerPortalTitle": "Potwierdź zmianę właściciela {{productName}} na {{newOwner}}.",
+  "ConnectApp": "Połącz aplikację",
+  "ConnectAppDescription": "Zeskanuj podany kod QR za pomocą aplikacji uwierzytelniającej. Alternatywnie, ręcznie wprowadź podany klucz tajny do aplikacji: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Twój aktualny numer telefonu komórkowego",
   "DeleteProfileBtn": "Usuń moje konto",
   "DeleteProfileConfirmation": "Uwaga! Zamierzasz usunąć swoje konto.",
@@ -16,6 +18,8 @@
   "EnterEmailHeader": "Wpisz adres e-mail",
   "EnterPhone": "Wpisz numer telefonu komórkowego",
   "GetCode": "Uzyskaj kod",
+  "GetSuitableApp": "Pobierz odpowiednią aplikację.",
+  "GetSuitableAppDescription": "Użyj kompatybilnej aplikacji, takiej jak Google Authenticator dla <1>Androida</1> i <4>iOS</4>, lub Authenticator dla <8>Windows Phone</8>.",
   "LoginRegistryButton": "Dołącz",
   "Newsletter": "Chcę otrzymywać newsletter {{organizationName}}",
   "PassworResetTitle": "Teraz możesz utworzyć nowe hasło.",
@@ -29,5 +33,9 @@
   "SuccessDeactivate": "Twoje konto zostało dezaktywowane. Za 10 sekund nastąpi przekierowanie na <1>site</1>.",
   "SuccessReactivate": "Twoje konto zostało reaktywowane. Za 10 sekund nastąpi przekierowanie do <1>portal</1>.",
   "SuccessRemoved": "Twoje konto zostało usunięte. Za 10 sekund nastąpi przekierowanie na <1>site</1>.",
-  "TermsAndConditions": "Kontynuując, użytkownik potwierdza, że rozumie i wyraża zgodę na warunki naszego <1>Regulaminu użytkowania</1> oraz <2>Polityki prywatności</2>."
+  "TermsAndConditions": "Kontynuując, użytkownik potwierdza, że rozumie i wyraża zgodę na warunki naszego <1>Regulaminu użytkowania</1> oraz <2>Polityki prywatności</2>.",
+  "TfaSubTitle": "Postępuj zgodnie z prostymi krokami, aby kontynuować pracę w tym {{productName}}:",
+  "TfaTitle": "Uwierzytelnianie dwuskładnikowe włączone dla bezpiecznego dostępu",
+  "VerifyConnection": "Zweryfikuj połączenie",
+  "VerifyConnectionDescription": "Wprowadź 6-cyfrowy kod wygenerowany przez Twoją aplikację uwierzytelniającą do pola poniżej, aby zakończyć konfigurację."
 }

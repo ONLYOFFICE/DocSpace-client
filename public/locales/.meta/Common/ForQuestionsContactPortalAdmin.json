@@ -3,7 +3,7 @@
   "content": "For any questions, please contact your {{productName}} admin.",
   "content_en_sha1_hash": "3c577caeeab1ab722445f462b6c19dd04e02860b",
   "created_at": "2025-05-19T21:30:45.549Z",
-  "updated_at": "2025-06-02T10:20:51.161Z",
+  "updated_at": "2025-09-02T07:59:28.391Z",
   "comment": {
     "text": "This translation key provides a message to be displayed when users need assistance or have questions about their account. It instructs them to contact the admin of their {{productName}} product. This message appears in a dialog box within the client application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
       "line_number": 66,
-      "context": "values={{ sectionName: t(\"Common:MyFilesSection\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </StyledText>\n <StyledText>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </StyledText>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "context": "values={{ sectionName: t(\"Common:MyDocuments\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </StyledText>\n <StyledText>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </StyledText>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],

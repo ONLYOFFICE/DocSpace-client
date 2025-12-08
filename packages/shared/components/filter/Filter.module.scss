@@ -542,7 +542,9 @@
 }
 
 .viewSelector {
-  @include mixins.tablet-and-below {
-    display: none;
+  &.desktopOnly {
+    @include mixins.tablet-and-below {
+      display: none;
+    }
   }
 }

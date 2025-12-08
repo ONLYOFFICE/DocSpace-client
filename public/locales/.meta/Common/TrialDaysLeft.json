@@ -3,7 +3,7 @@
   "content": "Trial {{count}} days",
   "content_en_sha1_hash": "9c538da52c03c4af1cda11f0c9a7ecfa5601131f",
   "created_at": "2025-05-19T21:30:49.334Z",
-  "updated_at": "2025-05-26T07:57:32.204Z",
+  "updated_at": "2025-10-14T00:19:04.480Z",
   "comment": {
     "text": "The \"TrialDaysLeft\" translation key is used to display the remaining trial period days in a formatted manner. It appears on the tariff bar component and is displayed when the license date has not expired, indicating the number of days left for a trial period.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation uses a period (.) at the end of the sentence. While not strictly incorrect, it might be better to omit it for consistency with other similar UI elements, where similar phrases often don't include a period.",
-          "suggestion": "تجربة لمدة {{count}} يومًا"
+          "description": "The Arabic translation uses a period (.) at the end of the sentence. While grammatically correct, in UI text, periods are often omitted to prevent extra line breaks or spacing issues. It's best practice to check with the design team to see if the period is intended.",
+          "suggestion": "Consider removing the period ('.') at the end of the sentence: 'تجربة لمدة {{count}} يومًا'"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Trial {{count}} days\" refers to the number of days remaining in a trial period. The Azerbaijani translation \"Sınaq {{count}} günləri\" literally translates to \"Trial {{count}} days\" but uses the plural form of 'days' (günləri) which is incorrect in this context. It should be singular.",
-          "suggestion": "Sınaq {{count}} gün"
+          "description": "The translation 'Sınaq {{count}} günləri' directly translates to 'Trial {{count}} days' but sounds unnatural in Azerbaijani. 'Günləri' (days) implies a plural, which isn't correct when referring to the remaining trial days. It should be singular 'günü'.",
+          "suggestion": "Sınaq {{count}} günü"
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Bulgarian translation lacks the proper spacing after '{{count}}'. It should be '{{count}} пробни дни'.",
-          "suggestion": "{{count}} пробни дни"
+          "description": "The Bulgarian translation lacks a space between the count placeholder and the word 'пробни'.",
+          "suggestion": "\"{{count}} пробни дни\" should be \"{{count}} пробни дни\""
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Période d'essai {{count}} jours' is not a direct translation of 'Trial {{count}} days'. While it conveys a similar meaning (trial period), it's a more formal phrasing. A more literal translation might be 'Essai de {{count}} jours'. However, 'Période d'essai' is acceptable and commonly used.",
-          "suggestion": "Consider 'Essai de {{count}} jours' for a more literal translation, but 'Période d'essai {{count}} jours' is also acceptable."
+          "description": "The translation \"Période d'essai {{count}} jours\" is a bit too literal and doesn't flow naturally in French. \"Trial\" implies a limited time period, but \"Période d'essai\" can sometimes refer to a specific testing phase, not just a limited time. It's not *wrong*, but a more natural translation might be better.",
+          "suggestion": "Essai de {{count}} jours"
         }
       ],
       "approved_at": null
@@ -107,9 +107,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Armenian translation lacks a space after the curly braces. It should be \"Փորձնական {{count}} օր\" -> \"Փորձնական {{count}} օր\".",
-          "suggestion": "Փորձնական {{count}} օր"
+          "type": "grammar",
+          "description": "The Armenian translation 'Փորձնական {{count}} օր' is grammatically incorrect. It should be 'Փորձնային {{count}} օրեր' to agree with the count variable and make more sense in context.",
+          "suggestion": "Փորձնային {{count}} օրեր"
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Italian translation lacks the word 'di' before 'prova'. It should be '{{count}} giorni di prova'",
+          "suggestion": "{{count}} giorni di prova"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -132,7 +138,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation lacks a space between the count variable and the word '일'.",
+          "description": "The Korean translation lacks a space before '일'. It should be \"{{count}} 일 평가판\"",
           "suggestion": "{{count}} 일 평가판"
         }
       ],
@@ -141,7 +147,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ມື້' (days) is spelled correctly, but its usage in this context might be slightly unnatural. While technically correct, 'ມື້' typically refers to a full day. A more idiomatic expression for 'days' in this context might be considered.",
+          "suggestion": "Consider using a more nuanced term for 'days' that reflects the remaining trial period, but this requires deeper understanding of Lao usage. Without further context, the current spelling is acceptable but potentially not ideal."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -150,12 +162,12 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Latvian translation 'Izmēģinājuma periods: {{count}} diena (-s)' is grammatically awkward. It includes the plural marker '(-s)' which doesn't always agree with the count. It should be 'Izmēģinājuma periods: {{count}} dienas' to be grammatically correct for all counts or be adapted to properly decline 'diena' depending on the context and count.",
+          "description": "The Latvian translation includes both singular and plural forms ('diena (-s)'). While grammatically correct, it's less elegant and might be perceived as awkward. The gender agreement needs to match the count variable's number.",
           "suggestion": "Izmēģinājuma periods: {{count}} dienas"
         },
         {
           "type": "formatting",
-          "description": "The colon after 'Izmēģinājuma periods' might be stylistically incorrect or inconsistent with other similar strings. Consider removing it.",
+          "description": "The colon after 'Izmēģinājuma periods' might be unnecessary and create visual clutter, especially if the surrounding text does not consistently use colons in similar situations. Consider removing it to align with style guides or best practices.",
           "suggestion": "Izmēģinājuma periods {{count}} dienas"
         }
       ],
@@ -172,14 +184,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Pozostałe dni okresu próbnego: {{count}}\" is too verbose and doesn't directly convey \"Trial {{count}} days\". A more direct translation would be better.",
-          "suggestion": "Pozostało dni próbnych: {{count}}"
-        },
-        {
           "type": "formatting",
-          "description": "The colon ':' after \"Pozostałe dni okresu próbnego\" makes it feel too formal for a simple notification.  A more conversational tone might be better.",
-          "suggestion": "Pozostałe dni okresu próbnego {{count}}"
+          "description": "The Polish translation includes a colon and a label (\"Pozostałe dni okresu próbnego:\") which is not present in the English version. This makes the translation more verbose and rigid.",
+          "suggestion": "Consider translating as \"Pozostało {{count}} dni okresu próbnego\" or \"{{count}} dni okresu próbnego\" to match the English formatting."
         }
       ],
       "approved_at": null
@@ -190,13 +197,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{count}} Dias do período de avaliação\" is too literal and not idiomatic Portuguese. A more natural translation would be something like \"{{count}} dias de teste\" or \"{{count}} dias de avaliação\".",
+          "description": "The translation \"{{count}} Dias do período de avaliação\" is too literal and doesn't flow naturally in Portuguese. 'Trial' is better translated as 'teste' or 'experimental'.  'Período de avaliação' is also a bit formal for this context.",
           "suggestion": "{{count}} dias de teste"
         },
         {
           "type": "formatting",
-          "description": "The placement of 'do' is grammatically correct but sounds unnatural in this context. Combining 'do' with 'período' creates a less fluent phrase.",
-          "suggestion": "{{count}} dias de avaliação"
+          "description": "The use of '{{count}}' suggests a variable. Ensure this is correctly implemented in the application and displays the correct number of trial days.",
+          "suggestion": "Verify variable implementation."
         }
       ],
       "approved_at": null
@@ -213,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Versiunea de încercare {{count}} zile' is a literal translation but doesn't quite convey the natural phrasing in Romanian for 'Trial X days'. A more natural translation would be 'Încercare: {{count}} zile' or 'Perioadă de încercare: {{count}} zile'.",
-          "suggestion": "Încercare: {{count}} zile"
+          "description": "The translation 'Versiunea de încercare {{count}} zile' is a literal translation and could be improved for natural Romanian phrasing. 'Versiunea de încercare' directly translates to 'Trial Version'. A more natural phrasing might be 'Încercare gratuită' or 'Perioadă de încercare'.",
+          "suggestion": "Perioada de încercare {{count}} zile"
         }
       ],
       "approved_at": null
@@ -222,7 +229,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Russian translation lacks the English's \"Trial\" label. It should ideally be something like \"пробный период\" or a similar phrase indicating a trial.",
+          "suggestion": "\"{{count}} дней пробного периода\""
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -231,8 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"නැහැසුම දවස් {{count}}\" is not an accurate translation of \"Trial {{count}} days\". \"නැහැසුම\" translates to \"rejection\" or \"exclusion\", not \"trial\". A more appropriate translation would convey the meaning of 'trial period'.",
-          "suggestion": "Consider a translation like \"පරීක්ෂණ කාලය {{count}} දවස්\" (Parikshana Kaalaya {{count}} Davas) which translates to 'Trial Period {{count}} days'."
+          "description": "The translation \"නැහැසුම දවස් {{count}}\" doesn't accurately convey the meaning of \"Trial {{count}} days\". \"නැහැසුම\" translates to \"removal\" or \"rejection\", not \"trial\". A more accurate translation would reflect 'trial period' or 'remaining trial days'.",
+          "suggestion": "Consider a translation like \"පරීක්ෂණ දවස් {{count}}\" (Parīkṣaṇa davas {{count}}) which translates to 'Testing/Trial days {{count}}' or \"නැවතී ඇති පරීක්ෂණ දවස් {{count}}\" (Nāteī aṭa parīkṣaṇa davas {{count}}) meaning 'Remaining trial days {{count}}'."
         }
       ],
       "approved_at": null
@@ -243,13 +256,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovak translation uses both singular ('deň') and plural ('dní') forms. It should agree with the 'count' value. If 'count' is 1, use 'deň'. Otherwise, use 'dní'.",
-          "suggestion": "Use conditional logic to determine the correct form: \"{{if count == 1}} deň {{else}} dni {{endif}}\" or \"{{count}} skúšobných dní\""
+          "description": "The Slovak translation uses both singular and plural forms of 'day' (deň and dni) without proper context. The correct form depends on the value of '{{count}}'.",
+          "suggestion": "Consider using a conditional or pluralization logic within the translation to correctly display 'deň' (singular) or 'dni' (plural) based on the value of '{{count}}'. For example: '{{count}} deň/dni'."
         },
         {
           "type": "formatting",
-          "description": "The Slovak translation contains an unnecessary space before the opening parenthesis.",
-          "suggestion": "Remove the space before the parenthesis: \"{{count}} skúšobný deň(dní)\""
+          "description": "The Slovak translation includes parentheses around 'dní'. This is unconventional and reduces readability.",
+          "suggestion": "Remove the parentheses. The translation should be '{{count}} deň/dni'."
         }
       ],
       "approved_at": null
@@ -265,9 +278,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Serbian translation lacks a space after 'Проба'.",
-          "suggestion": "Проба  {{count}} дана"
+          "type": "incorrect_translation",
+          "description": "The translation 'Проба {{count}} дана' is a literal translation but might sound slightly awkward in Serbian. A more natural phrasing would be '{{count}} дана бесплатно' ({{count}} days free) or 'Испробајте бесплатно за {{count}} дана' (Try it free for {{count}} days).",
+          "suggestion": "Испробајте бесплатно за {{count}} дана"
         }
       ],
       "approved_at": null
@@ -278,8 +291,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English \"Trial\" is not directly translated. \"Probni period\" would be a more accurate translation, although \"Proba\" is understandable in context. \"Trial\" implies a test or evaluation period.",
-          "suggestion": "Proba is acceptable, but consider \"Probni period\" for greater accuracy."
+          "description": "The translation 'Proba {{count}} dana' is a functional translation but not the most natural or idiomatic way to express 'Trial {{count}} days' in Serbian. 'Probni period {{count}} dana' would be a more accurate and common phrasing.",
+          "suggestion": "Probni period {{count}} dana"
         }
       ],
       "approved_at": null
@@ -290,13 +303,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{count}} gün deneme\" is a literal translation but doesn't convey the intended meaning of 'Trial days left'. A more natural Turkish translation would incorporate 'kalan' (remaining) to indicate the number of trial days remaining.",
-          "suggestion": "{{count}} gün deneme hakkı kaldı"
+          "description": "The English phrase 'Trial' is not accurately translated. 'Deneme' translates to 'trial' or 'experiment', but in this context, it would be more appropriate to use a term indicating a 'trial period'.",
+          "suggestion": "\"Deneme süresi {{count}} gün\""
         },
         {
           "type": "formatting",
-          "description": "While the format uses {{count}}, it's unclear if this is the expected format and if it will be correctly processed in the target system. This should be confirmed.",
-          "suggestion": "Confirm that {{count}} is the expected placeholder format for the target system."
+          "description": "The translation lacks the article 'of' which creates a more natural flow. The literal translation creates a slightly awkward sentence.",
+          "suggestion": "Consider adding 'of' after 'gün'.  For example: '{{count}} gün deneme süresi'."
         }
       ],
       "approved_at": null
@@ -307,7 +320,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The abbreviation 'д.' is used for 'days' which is less formal than the English 'days'. While acceptable, consider using 'дні' for a more consistent tone.",
+          "description": "The abbreviation 'д.' is not consistently used for 'days' in Ukrainian. Using 'дні' would be more common and natural.",
           "suggestion": "Пробна версія: {{count}} дні"
         }
       ],
@@ -316,16 +329,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Vietnamese translation lacks a space after the opening curly brace {{count}}.",
-          "suggestion": "{{count}} Ngày dùng thử"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

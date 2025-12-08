@@ -3,7 +3,7 @@
   "content": "Delete profile when reassignment is finished",
   "content_en_sha1_hash": "4a8d4cbb088198138bba5a169f3ad78255855047",
   "created_at": "2025-05-19T21:30:56.737Z",
-  "updated_at": "2025-05-26T07:57:32.282Z",
+  "updated_at": "2025-09-22T13:39:52.368Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that deleting a profile is allowed when reassignment is finished. It appears in a footer component within a data reassignment dialog.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Footer/index.js",
-      "line_number": 83,
-      "context": "className=\"delete-profile-checkbox\"\n isChecked={isDeleteProfile}\n onClick={onToggleDeleteProfile}\n />\n <Text fontSize=\"13px\" fontWeight=\"400\" lineHeight=\"20px\" noSelect>\n {t(\"DataReassignmentDialog:DeleteProfileIsFinished\")}\n </Text>\n </div>\n ) : null}\n <div className=\"button-wrapper\">\n <Button",
+      "line_number": 77,
+      "context": "return (\n <StyledFooterWrapper>\n {showDeleteProfileCheckbox ? (\n <div className=\"delete-profile-container\">\n <Checkbox\n label={t(\"DataReassignmentDialog:DeleteProfileIsFinished\")}\n className=\"delete-profile-checkbox\"\n isChecked={isDeleteProfile}\n onClick={onToggleDeleteProfile}\n />\n </div>",
       "module": "/packages/client"
     }
   ],

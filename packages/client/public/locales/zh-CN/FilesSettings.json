@@ -2,5 +2,6 @@
   "CancellaionNotification": "不再显示取消通知",
   "DisplayFileExtension": "在文件名称旁显示文件扩展名",
   "OpenSameTab": "在同一选项卡中打开 {{organizationName}} 编辑器",
-  "OriginalCopy": "以原始格式保存文件副本"
+  "OriginalCopy": "以原始格式保存文件副本",
+  "TrashMoveConfirmation": "将项目移至{{sectionName}}时显示通知"
 }

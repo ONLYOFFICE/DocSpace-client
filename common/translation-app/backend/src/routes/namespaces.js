@@ -12,17 +12,21 @@ async function routes(fastify, options) {
     try {
       const { projectName, language } = request.params;
       const { untranslatedOnly, baseLanguage } = request.query;
-      
+
       // Parse boolean query parameter
-      const showUntranslatedOnly = untranslatedOnly === 'true';
-      
+      const showUntranslatedOnly = untranslatedOnly === "true";
+
       // Options for the getNamespaces function
       const options = {
         untranslatedOnly: showUntranslatedOnly,
-        baseLanguage: baseLanguage || translationConfig.baseLanguage
+        baseLanguage: baseLanguage || translationConfig.baseLanguage,
       };
-      
-      const namespaces = await fsUtils.getNamespaces(projectName, language, options);
+
+      const namespaces = await fsUtils.getNamespaces(
+        projectName,
+        language,
+        options
+      );
 
       return { success: true, data: namespaces };
     } catch (error) {
@@ -67,12 +71,18 @@ async function routes(fastify, options) {
 
       for (const language of languages) {
         if (language !== baseLanguage) {
-          await fsUtils.writeTranslationFile(
+          let ok = await fsUtils.writeTranslationFile(
             projectName,
             language,
             namespace,
             {}
           );
+
+          if (!ok) {
+            throw new Error(
+              `Failed to create empty namespace file for language ${language}`
+            );
+          }
         }
       }
 
@@ -120,12 +130,10 @@ async function routes(fastify, options) {
       };
     } catch (error) {
       request.log.error(error);
-      return reply
-        .code(500)
-        .send({
-          success: false,
-          error: error.message || "Failed to rename namespace",
-        });
+      return reply.code(500).send({
+        success: false,
+        error: error.message || "Failed to rename namespace",
+      });
     }
   });
 
@@ -175,12 +183,10 @@ async function routes(fastify, options) {
       };
     } catch (error) {
       request.log.error(error);
-      return reply
-        .code(500)
-        .send({
-          success: false,
-          error: error.message || "Failed to move namespace",
-        });
+      return reply.code(500).send({
+        success: false,
+        error: error.message || "Failed to move namespace",
+      });
     }
   });
 
@@ -206,12 +212,10 @@ async function routes(fastify, options) {
       };
     } catch (error) {
       request.log.error(error);
-      return reply
-        .code(500)
-        .send({
-          success: false,
-          error: error.message || "Failed to delete namespace",
-        });
+      return reply.code(500).send({
+        success: false,
+        error: error.message || "Failed to delete namespace",
+      });
     }
   });
 }

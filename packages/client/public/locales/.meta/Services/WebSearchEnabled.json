@@ -1,0 +1,28 @@
+{
+  "key_path": "WebSearchEnabled",
+  "content": "AI Web search service successfully enabled.",
+  "content_en_sha1_hash": "cd9f04ec794e65551b91f0b27f0a0c10600556ef",
+  "created_at": "2025-11-03T12:10:29.425Z",
+  "updated_at": "2025-11-03T12:24:48.491Z",
+  "comment": {
+    "text": "Confirmation message displayed when the AI web search service is successfully enabled. This message appears within the Portal Settings UI, likely in a dialog or confirmation panel, to inform the user that the web search functionality is active. Translators should maintain a positive and informative tone.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:24:48.491Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 284,
+      "context": "}\n if (confirmActionType === AI_TOOLS) {\n return t(\"Services:AIToolsEnabled\");\n }\n if (confirmActionType === WEB_SEARCH) {\n return t(\"Services:WebSearchEnabled\");\n }\n };\n \n try {\n const result = await setServiceState(raw);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

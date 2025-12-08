@@ -57,7 +57,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof EmailInput>;
 
-const Template = ({ value: initialValue, ...args }: EmailInputProps) => {
+const Template = ({
+  value: initialValue,
+  size,
+  isDisabled,
+  isReadOnly,
+  hasError,
+  scale,
+  placeholder,
+}: EmailInputProps) => {
   const [value, setValue] = useState(initialValue || "");
   const [validationState, setValidationState] = useState<TValidate>();
 
@@ -74,11 +82,16 @@ const Template = ({ value: initialValue, ...args }: EmailInputProps) => {
   return (
     <div style={{ width: "320px" }}>
       <EmailInput
-        {...args}
+        placeholder={placeholder || "Enter email address"}
         value={value}
         emailSettings={settings}
         onChange={(e) => setValue(e.target.value)}
         onValidateInput={(data) => setValidationState(data)}
+        size={size}
+        isDisabled={isDisabled}
+        isReadOnly={isReadOnly}
+        hasError={hasError}
+        scale={scale}
       />
       {validationState ? (
         <div style={{ marginTop: "8px", fontSize: "12px" }}>
@@ -97,6 +110,11 @@ export const Default: Story = {
   args: {
     placeholder: "Enter email address",
     size: InputSize.base,
+    isDisabled: false,
+    isReadOnly: false,
+    hasError: false,
+    scale: false,
+    value: "",
   },
 };
 
@@ -112,6 +130,7 @@ export const WithCustomValidation: Story = {
   render: Template,
   args: {
     ...Default.args,
+    scale: true,
     placeholder: "Enter @custom-domain.com email",
     customValidate: (value) => ({
       value,

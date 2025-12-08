@@ -114,6 +114,7 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
       [styles.isDisabled]: isDisabled,
       [styles.defaultOption]: defaultOption,
       [styles.isLoading]: isLoading,
+      [styles.onlyIcon]: type === "onlyIcon",
     },
   );
 
@@ -144,14 +145,16 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
 
           {imageIcon && typeof imageIcon === "string" ? (
             <img
+              className={styles.imageIcon}
               style={{ userSelect: "text" }}
               src={imageIcon}
               alt={`\n${imageAlt}`}
             />
-          ) : typeof selectedOption.icon === "string" ? (
+          ) : null}
+          {typeof selectedOption.icon === "string" ? (
             <ReactSVG
               src={selectedOption.icon}
-              className={classNames({
+              className={classNames(styles.selectedIcon, {
                 [styles.comboButtonSelectedIcon]: fillIcon,
                 "combo-button_selected-icon": fillIcon,
               })}
@@ -166,7 +169,6 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
           color={selectedOption.color}
           backgroundColor={selectedOption.backgroundColor}
           border={`2px solid ${selectedOption.border}`}
-          compact={!!selectedOption.border}
           data-test-id="combo-button-badge"
         />
       ) : type === "descriptive" ? (

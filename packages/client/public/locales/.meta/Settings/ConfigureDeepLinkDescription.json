@@ -3,7 +3,7 @@
   "content": "When handling documents in a mobile browser, users can be offered (or not) the choice of opening the file in a browser or in the mobile app.",
   "content_en_sha1_hash": "afb876d6cee5ba727fb68bd3489940d7d4460ac1",
   "created_at": "2025-05-19T21:30:50.957Z",
-  "updated_at": "2025-08-04T07:30:01.285Z",
+  "updated_at": "2025-09-29T11:28:56.099Z",
   "comment": {
     "text": "When users are configuring deep linking options for mobile documents, this translation key is used to provide a brief explanation of how the file can be opened in either a browser or the mobile app. It appears alongside a radio button group and a mobile category wrapper in the Portal Settings customization page.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 154,
-      "context": "{!isMobileView ? (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigureDeepLink\")}\n </Text>\n ) : null}\n <Text>{t(\"ConfigureDeepLinkDescription\")}</Text>\n <RadioButtonGroup\n className=\"radio-button-group\"\n fontSize=\"13px\"\n fontWeight={400}\n dataTestId=\"configure_deep_link_radio-button\"",
+      "line_number": 202,
+      "context": "{!isMobileView ? (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigureDeepLink\")}\n </Text>\n ) : null}\n <Text>{t(\"ConfigureDeepLinkDescription\")}</Text>\n {configureDeepLinkUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}\n target={LinkTarget.blank}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 103,
+      "line_number": 101,
       "context": "badgeLabel={t(\"Common:Paid\")}\n />\n ) : null}\n <MobileCategoryWrapper\n title={t(\"ConfigureDeepLink\")}\n subtitle={t(\"ConfigureDeepLinkDescription\")}\n url=\"/portal-settings/customization/general/configure-deep-link\"\n onClickLink={onClickLink}\n />\n {isEnterprise ? (\n <MobileCategoryWrapper",
       "module": "/packages/client"
     }

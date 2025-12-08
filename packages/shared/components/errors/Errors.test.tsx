@@ -1,6 +1,6 @@
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { Error401 } from "./Error401";
 import { Error403 } from "./Error403";
 import Error404 from "./Error404";
@@ -13,21 +13,21 @@ import type { TColorScheme } from "../../themes";
 import { DeviceType } from "../../enums";
 
 // Mock react-svg
-jest.mock("react-svg", () => ({
+vi.mock("react-svg", () => ({
   ReactSVG: ({ src }: { src: string }) => (
     <div data-testid="mock-svg">{src}</div>
   ),
 }));
 
 // Mock toast components
-jest.mock("../toast/sub-components/Toastr", () => ({
+vi.mock("../toast/sub-components/Toastr", () => ({
   Check: () => <div data-test-id="check-toast">Check Toast</div>,
   Danger: () => <div data-test-id="danger-toast">Danger Toast</div>,
   Info: () => <div data-test-id="info-toast">Info Toast</div>,
 }));
 
 // Mock translations
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (str: string) => str,
     ready: true,
@@ -36,46 +36,50 @@ jest.mock("react-i18next", () => ({
 }));
 
 // Mock loader components
-jest.mock("../loader", () => ({
+vi.mock("../loader", () => ({
   default: () => <div>Loading...</div>,
 }));
 
 // Mock FirebaseHelper
-jest.mock("../../utils/firebase", () => {
-  return jest.fn().mockImplementation(() => ({
-    remoteConfig: null,
-    firebaseConfig: null,
-    firebaseStorage: null,
-    firebaseDB: null,
-    isEnabledDB: true,
-    sendCrashReport: jest.fn(),
-    config: null,
-    isEnabled: true,
-  }));
+vi.mock("../../utils/firebase", () => {
+  const MockFirebaseHelper = vi.fn().mockImplementation(function (
+    this: Record<string, unknown>,
+  ) {
+    this.remoteConfig = null;
+    this.firebaseConfig = null;
+    this.firebaseStorage = null;
+    this.firebaseDB = null;
+    this.isEnabledDB = true;
+    this.sendCrashReport = vi.fn();
+    this.config = null;
+    this.isEnabled = true;
+  });
+
+  return {
+    default: MockFirebaseHelper,
+  };
 });
 
 // Mock getCrashReport and getCurrentDate
-jest.mock("../../utils/crashReport", () => ({
-  getCrashReport: jest
-    .fn()
-    .mockReturnValue({ description: "Test crash report" }),
-  getCurrentDate: jest.fn().mockReturnValue("2023-01-01"),
+vi.mock("../../utils/crashReport", () => ({
+  getCrashReport: vi.fn().mockReturnValue({ description: "Test crash report" }),
+  getCurrentDate: vi.fn().mockReturnValue("2023-01-01"),
 }));
 
 // Mock zendeskAPI
-jest.mock("../zendesk/Zendesk.utils", () => ({
+vi.mock("../zendesk/Zendesk.utils", () => ({
   zendeskAPI: {
-    addChanges: jest.fn(),
+    addChanges: vi.fn(),
   },
 }));
 
 // Mock sessionStorage
 const mockSessionStorage = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
-  key: jest.fn(),
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
+  key: vi.fn(),
   length: 0,
 };
 
@@ -90,7 +94,7 @@ const renderWithProviders = (ui: React.ReactElement) => {
 
 describe("Error Components", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockSessionStorage.getItem.mockReset();
     mockSessionStorage.setItem.mockReset();
     mockSessionStorage.removeItem.mockReset();
@@ -273,7 +277,7 @@ describe("Error Components", () => {
     });
 
     it("auto sends crash report when firebase is enabled", () => {
-      const sendCrashReportSpy = jest.spyOn(
+      const sendCrashReportSpy = vi.spyOn(
         mockFirebaseHelper,
         "sendCrashReport",
       );

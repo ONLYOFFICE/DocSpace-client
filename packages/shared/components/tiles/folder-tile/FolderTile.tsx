@@ -27,7 +27,7 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "../../../utils";
 import { ReactSVG } from "react-svg";
 import { Checkbox } from "../../checkbox";
 import {
@@ -123,7 +123,7 @@ export const FolderTile = ({
   };
 
   const onFolderIconClick = () => {
-    if (!isMobile) return;
+    if (!isMobile()) return;
     if (onSelect) {
       onSelect(true, item);
     }
@@ -157,7 +157,9 @@ export const FolderTile = ({
       e.detail === 1 &&
       !(e.target as HTMLElement).closest(".badges") &&
       !(e.target as HTMLElement).closest(".item-file-name") &&
-      !(e.target as HTMLElement).closest(`.${styles.checkbox}`)
+      !(e.target as HTMLElement).closest(`.${styles.checkbox}`) &&
+      !(e.target as HTMLElement).closest(".expandButton") &&
+      !(e.target as HTMLElement).closest(".p-contextmenu")
     ) {
       if (
         (e.target as HTMLElement).nodeName !== "IMG" &&
@@ -322,6 +324,8 @@ export const FolderTile = ({
             ref={cmRef}
             header={contextMenuHeader}
             withBackdrop
+            ignoreChangeView={isMobile()}
+            headerOnlyMobile
           />
         </div>
       </div>

@@ -26,6 +26,7 @@
 
 import React from "react";
 import moment from "moment";
+import axios from "axios";
 
 import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
@@ -38,7 +39,7 @@ import {
   TRoom,
 } from "@docspace/shared/api/rooms/types";
 
-import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
+import type PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 
 import { getFeedInfo } from "../../History/FeedInfo";
 import { TSelectionHistory } from "../../History/History.types";
@@ -173,7 +174,7 @@ export const useHistory = ({
       setExternalLinks([]);
       setHistory(parseHistory(response.items));
     } catch (error) {
-      console.error("Error fetching history:", error);
+      if (axios.isCancel(error)) return;
       throw error;
     } finally {
       setIsFirstLoading(false);
@@ -259,6 +260,7 @@ export const useHistory = ({
       setHistory(mergedHistory);
       setTotal(data.total);
     } catch (e) {
+      if (axios.isCancel(e)) return;
       console.log(e);
     } finally {
       setIsLoading(false);

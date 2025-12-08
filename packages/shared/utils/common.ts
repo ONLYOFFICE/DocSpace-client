@@ -24,10 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
-/* eslint-disable no-multi-str */
-/* eslint-disable no-plusplus */
-
 import type { Location } from "react-router";
 import find from "lodash/find";
 import moment from "moment-timezone";
@@ -75,9 +71,11 @@ import {
   ErrorKeys,
   WhiteLabelLogoType,
   EmployeeType,
+  EmployeeTypeString,
   UrlActionType,
 } from "../enums";
 import {
+  CategoryType,
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   PUBLIC_MEDIA_VIEW_URL,
@@ -85,7 +83,7 @@ import {
   TIMEZONE,
 } from "../constants";
 
-import { TI18n, TTranslation } from "../types";
+import { TI18n, TTranslation, ValueOf } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
@@ -100,8 +98,10 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
+import { isFile, isFolder } from "./typeGuards";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -149,8 +149,9 @@ export function createPasswordHash(
 
 export const isPublicRoom = () => {
   return (
-    window.location.pathname === "/rooms/share" ||
-    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
+    typeof window !== "undefined" &&
+    (window.location.pathname === "/rooms/share" ||
+      window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL))
   );
 };
 
@@ -160,7 +161,7 @@ export const isPublicPreview = () => {
 
 export const parseDomain = (
   domain: string,
-  setError: Function,
+  setError: (error: string[] | null) => void,
   t: (key: string) => string,
 ) => {
   const parsedDomain = parseAddress(`test@${domain}`);
@@ -199,7 +200,7 @@ export const parseDomain = (
 export const validatePortalName = (
   value: string,
   nameValidator: TDomainValidator,
-  setError: Function,
+  setError: (error: string | null) => void,
   t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
@@ -323,6 +324,15 @@ export const getUserType = (user: TUser) => {
   return EmployeeType.Guest;
 };
 
+export const getStringUserType = (user: TUser) => {
+  if (user.isOwner) return EmployeeTypeString.Owner;
+  if (isAdmin(user)) return EmployeeTypeString.Admin;
+  if (user.isRoomAdmin) return EmployeeTypeString.RoomAdmin;
+  if (user.isCollaborator) return EmployeeTypeString.User;
+  if (user.isVisitor) return EmployeeTypeString.Guest;
+  return EmployeeTypeString.Guest;
+};
+
 export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
   switch (type) {
     case EmployeeType.Owner:
@@ -351,15 +361,32 @@ export function clickBackdrop() {
   }
 }
 
-export function objectToGetParams(object: {}) {
-  const params = Object.entries(object)
-    .filter(([, value]) => value !== undefined && value !== null)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`,
-    );
+export function objectToGetParams(obj: object, prefix = ""): string {
+  const params: string[] = [];
 
-  return params.length > 0 ? `?${params.join("&")}` : "";
+  for (const [key, value] of Object.entries(obj)) {
+    if (value == null) continue;
+
+    const paramKey = prefix ? `${prefix}[${key}]` : key;
+
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        params.push(
+          `${encodeURIComponent(paramKey)}[]=${encodeURIComponent(String(item))}`,
+        );
+      }
+    } else if (typeof value === "object") {
+      const nested = objectToGetParams(value, paramKey);
+      if (nested) params.push(nested);
+    } else {
+      params.push(
+        `${encodeURIComponent(paramKey)}=${encodeURIComponent(String(value))}`,
+      );
+    }
+  }
+
+  if (!params.length) return "";
+  return prefix ? params.join("&") : `?${params.join("&")}`;
 }
 
 export function toCommunityHostname(hostname: string) {
@@ -377,16 +404,43 @@ export function toCommunityHostname(hostname: string) {
   return communityHostname;
 }
 
+export function getProviderLabel(provider: string, t: (key: string) => string) {
+  switch (provider) {
+    case "apple":
+      return t("Common:ProviderApple");
+    case "google":
+      return t("Common:ProviderGoogle");
+    case "facebook":
+      return t("Common:ProviderFacebook");
+    case "twitter":
+      return t("Common:ProviderTwitter");
+    case "linkedin":
+      return t("Common:ProviderLinkedIn");
+    case "microsoft":
+      return t("Common:ProviderMicrosoft");
+    case "sso":
+      return t("Common:SSO");
+    case "zoom":
+      return t("Common:ProviderZoom");
+    case "weixin":
+      return t("Common:ProviderWechat");
+    case "sso-full":
+      return t("Common:ProviderSsoSetting");
+    default:
+      return "";
+  }
+}
+
 export function getProviderTranslation(
   provider: string,
   t: (key: string) => string,
   linked = false,
   signUp = false,
 ) {
-  const capitalizeProvider =
-    provider.charAt(0).toUpperCase() + provider.slice(1);
+  const providerLabel = getProviderLabel(provider, t);
+
   if (linked) {
-    return `${t("Common:Disconnect")} ${capitalizeProvider}`;
+    return `${t("Common:Disconnect")} ${providerLabel}`;
   }
 
   switch (provider) {
@@ -416,30 +470,10 @@ export function getProviderTranslation(
       return signUp ? t("Common:SignUpWithSso") : t("Common:SignInWithSso");
     case "zoom":
       return signUp ? t("Common:SignUpWithZoom") : t("Common:SignInWithZoom");
-    default:
-      return "";
-  }
-}
-export function getProviderLabel(provider: string, t: (key: string) => string) {
-  switch (provider) {
-    case "apple":
-      return t("Common:ProviderApple");
-    case "google":
-      return t("Common:ProviderGoogle");
-    case "facebook":
-      return t("Common:ProviderFacebook");
-    case "twitter":
-      return t("Common:ProviderTwitter");
-    case "linkedin":
-      return t("Common:ProviderLinkedIn");
-    case "microsoft":
-      return t("Common:ProviderMicrosoft");
-    case "sso":
-      return t("Common:SSO");
-    case "zoom":
-      return t("Common:ProviderZoom");
-    case "sso-full":
-      return t("Common:ProviderSsoSetting");
+    case "weixin":
+      return signUp
+        ? t("Common:SignUpWithWechat")
+        : t("Common:SignInWithWechat");
     default:
       return "";
   }
@@ -579,18 +613,18 @@ export function isElementInViewport(el: HTMLElement) {
 }
 
 export function assign(
-  objParam: { [key: string]: {} },
+  objParam: Record<string, unknown>,
   keyPath: string[],
-  value: {},
+  value: unknown,
 ) {
-  let obj = objParam;
+  let obj: Record<string, unknown> = objParam;
   const lastKeyIndex = keyPath.length - 1;
   for (let i = 0; i < lastKeyIndex; ++i) {
     const key = keyPath[i];
     if (!(key in obj)) {
       obj[key] = {};
     }
-    obj = obj[key];
+    obj = obj[key] as Record<string, unknown>;
   }
   obj[keyPath[lastKeyIndex]] = value;
 }
@@ -787,6 +821,12 @@ export const getFileExtension = (fileTitleParam: string) => {
 export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   const sorted = [];
 
+  const aiAgentsFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.AIAgents,
+  );
+  if (aiAgentsFolder) sorted.push(aiAgentsFolder);
+
   const myFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.USER,
@@ -799,17 +839,11 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (shareRoom) sorted.push(shareRoom);
 
-  const archiveRoom = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.Archive,
-  );
-  if (archiveRoom) sorted.push(archiveRoom);
-
-  const shareFolder = find(
+  const sharedWithMeFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.SHARE,
   );
-  if (shareFolder) sorted.push(shareFolder);
+  if (sharedWithMeFolder) sorted.push(sharedWithMeFolder);
 
   const favoritesFolder = find(
     folders,
@@ -822,6 +856,12 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.Recent,
   );
   if (recentFolder) sorted.push(recentFolder);
+
+  const archiveRoom = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Archive,
+  );
+  if (archiveRoom) sorted.push(archiveRoom);
 
   const privateFolder = find(
     folders,
@@ -852,6 +892,8 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
 
 export const getFolderClassNameByType = (folderType: FolderType) => {
   switch (folderType) {
+    case FolderType.AIAgents:
+      return "tree-node-ai-agents";
     case FolderType.USER:
       return "tree-node-my";
     case FolderType.SHARE:
@@ -906,8 +948,8 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
 };
 
 export const checkFilterInstance = (
-  filterObject: {},
-  certainClass: { prototype: {} },
+  filterObject: object,
+  certainClass: { prototype: object },
 ) => {
   const isInstance =
     filterObject.constructor.name === certainClass.prototype.constructor.name;
@@ -1017,7 +1059,8 @@ export function tryParseArray(str: string) {
 }
 
 export const RoomsTypeValues = Object.values(RoomsType).filter(
-  (item): item is number => typeof item === "number",
+  (item): item is number =>
+    typeof item === "number" && item !== RoomsType.AIRoom,
 );
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
@@ -1239,8 +1282,22 @@ export function getLogoUrl(
   dark: boolean = false,
   def: boolean = false,
   culture?: string,
+  update: boolean = false,
 ) {
-  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}`;
+  let logoTimestamp = "";
+
+  if (update) {
+    const timestamp = window.sessionStorage?.getItem("logoUpdateTimestamp");
+    if (timestamp) logoTimestamp = `&t=${timestamp}`;
+  }
+
+  const url = `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}${logoTimestamp}`;
+
+  return url;
+}
+
+export function updateLogoTimestamp() {
+  window.sessionStorage?.setItem("logoUpdateTimestamp", Date.now().toString());
 }
 
 export const getUserTypeName = (
@@ -1271,12 +1328,12 @@ export const getUserTypeDescription = (
   if (isPortalAdmin)
     return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isRoomAdmin)
     return t("Common:RoleRoomAdminDescription", {
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isCollaborator) return t("Common:RoleNewUserDescription");
@@ -1362,7 +1419,6 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     }
 
     return new Promise((resolve) => {
-      // eslint-disable-next-line no-promise-executor-return
       return resolve(newFile);
     }).then(() => resizeRecursiveAsync(img, compressionRatio + 1, depth + 1));
   }
@@ -1379,22 +1435,31 @@ export const getBackupProgressInfo = (
     isCompleted?: boolean;
     link?: string;
     error?: string;
+    warning?: string;
   },
   t: TTranslation,
   setBackupProgress: (progress: number) => void,
   setLink: (link: string) => void,
 ) => {
-  const { isCompleted, link, error, progress } = opt;
-  setBackupProgress(progress);
+  const { isCompleted, link, error, progress, warning } = opt;
+
+  if (progress !== 100) {
+    setBackupProgress(progress);
+  }
 
   if (isCompleted) {
-    if (error) {
-      setBackupProgress(100);
-      return { error };
-    }
+    setBackupProgress(100);
 
     if (link && link.slice(0, 1) === "/") {
       setLink(link);
+    }
+
+    if (warning) {
+      return { warning };
+    }
+
+    if (error) {
+      return { error };
     }
 
     return { success: t("Common:BackupCreatedSuccess") };
@@ -1509,4 +1574,97 @@ export function buildDataTestId(
 ): string | undefined {
   if (!dataTestId) return undefined;
   return `${dataTestId}_${suffix}`;
+}
+
+export const getErrorInfo = (
+  err: unknown,
+  t: TTranslation,
+  customText: string | React.ReactNode,
+) => {
+  let message;
+
+  const knownError = err as {
+    response?: { status: number; data: { error: { message: string } } };
+    message?: string;
+  };
+
+  if (customText) {
+    message = customText;
+  } else if (typeof err === "string") {
+    message = err;
+  } else {
+    message =
+      ("response" in knownError && knownError.response?.data?.error?.message) ||
+      ("message" in knownError && knownError.message) ||
+      "";
+  }
+
+  if (knownError?.response?.status === 502)
+    message = t("Common:UnexpectedError");
+
+  return message ?? t("Common:UnexpectedError");
+};
+
+export const getCategoryType = (location: { pathname: string }) => {
+  let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
+  const { pathname } = location;
+
+  if (pathname.startsWith("/rooms")) {
+    if (pathname.indexOf("personal") > -1) {
+      categoryType = CategoryType.Personal;
+    } else if (pathname.indexOf("shared") > -1) {
+      const regexp = /(rooms)\/shared\/(\d+)/;
+
+      categoryType = !regexp.test(location.pathname)
+        ? CategoryType.Shared
+        : CategoryType.SharedRoom;
+    } else if (pathname.indexOf("share") > -1) {
+      categoryType = CategoryType.PublicRoom;
+    } else if (pathname.indexOf("archive") > -1) {
+      categoryType = CategoryType.Archive;
+    }
+  } else if (pathname.startsWith("/files/favorite")) {
+    categoryType = CategoryType.Favorite;
+  } else if (pathname.startsWith("/favorite")) {
+    categoryType = CategoryType.Favorite;
+  } else if (pathname.startsWith("/recent")) {
+    categoryType = CategoryType.Recent;
+  } else if (pathname.startsWith("/files/trash")) {
+    categoryType = CategoryType.Trash;
+  } else if (pathname.startsWith("/settings")) {
+    categoryType = CategoryType.Settings;
+  } else if (pathname.startsWith("/accounts")) {
+    categoryType = CategoryType.Accounts;
+  } else if (pathname.startsWith("/shared-with-me")) {
+    categoryType = CategoryType.SharedWithMe;
+  } else if (pathname.startsWith("/ai-agents")) {
+    const agentRegexp = /(ai-agents)\/(\d+)/;
+    const chatRegexp = /(ai-agents)\/(\d+)\/chat/;
+
+    if (chatRegexp.test(location.pathname)) {
+      categoryType = CategoryType.Chat;
+    } else if (agentRegexp.test(location.pathname)) {
+      categoryType = CategoryType.AIAgent;
+    } else {
+      categoryType = CategoryType.AIAgents;
+    }
+  }
+
+  return categoryType;
+};
+export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
+  const initial = {
+    fileIds: [] as Array<string | number>,
+    folderIds: [] as Array<string | number>,
+  };
+
+  return (items ?? []).reduce((acc, item) => {
+    const id = (item as TFolder | TFile)?.id;
+    if (id === undefined || id === null) return acc;
+
+    if (isFolder(item)) acc.folderIds.push(id);
+    else if (isFile(item)) acc.fileIds.push(id);
+
+    return acc;
+  }, initial);
 }

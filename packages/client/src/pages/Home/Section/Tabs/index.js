@@ -23,74 +23,68 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import ContactsTabs from "./ContactsTabs";
-import MyDocumentsTabs from "./MyDocumentsTabs";
 import RoomTemplatesTabs from "./RoomTemplatesTabs";
+import AiRoomTabs from "./AiRoomTabs";
 
 const SectionSubmenuContent = ({
-  isPersonalRoom,
-  isRecentTab,
+  isAIRoom,
   isRoomsFolderRoot,
   isTemplatesFolder,
   allowInvitingGuests,
   checkGuests,
-  hasGuests,
   currentClientView,
+  canUseChat,
+  showArticleLoader,
+  showTabsLoader,
 }) => {
-  const [showGuestsTab, setShowGuestsTab] = useState(true);
-  const [isCheckGuests, setIsCheckGuests] = useState(false);
-
   const isContacts =
     currentClientView === "users" || currentClientView === "groups";
   const isProfile = currentClientView === "profile";
-
-  useEffect(() => {
-    if (typeof hasGuests !== "boolean") return;
-    if (!hasGuests) setShowGuestsTab(hasGuests);
-    setIsCheckGuests(true);
-  }, [hasGuests]);
 
   if (isProfile) return null;
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
-  if (isContacts && (allowInvitingGuests || isCheckGuests))
-    return (
-      <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
-    );
+  if (
+    (isAIRoom && canUseChat) ||
+    (currentClientView === "chat" && (showTabsLoader || showArticleLoader))
+  )
+    return <AiRoomTabs />;
 
-  if (!isContacts && (isPersonalRoom || isRecentTab))
-    return <MyDocumentsTabs />;
   if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
     return <RoomTemplatesTabs />;
   return null;
 };
 
 export default inject(
-  ({ treeFoldersStore, settingsStore, clientLoadingStore }) => {
-    const {
-      isPersonalRoom,
-      isRecentTab,
-      isRoomsFolderRoot,
-      isTemplatesFolder,
-    } = treeFoldersStore;
+  ({
+    treeFoldersStore,
+    settingsStore,
+    clientLoadingStore,
+    selectedFolderStore,
+    accessRightsStore,
+  }) => {
+    const { canUseChat } = accessRightsStore;
 
-    const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
+    const { isRoomsFolderRoot, isTemplatesFolder } = treeFoldersStore;
 
-    const { currentClientView } = clientLoadingStore;
+    const { allowInvitingGuests, checkGuests } = settingsStore;
+
+    const { currentClientView, showArticleLoader, showTabsLoader } =
+      clientLoadingStore;
 
     return {
-      isPersonalRoom,
-      isRecentTab,
+      isAIRoom: selectedFolderStore.isAIRoom,
       isRoomsFolderRoot,
       isTemplatesFolder,
       allowInvitingGuests,
       checkGuests,
-      hasGuests,
       currentClientView,
+      canUseChat,
+      showArticleLoader,
+      showTabsLoader,
     };
   },
 )(observer(SectionSubmenuContent));

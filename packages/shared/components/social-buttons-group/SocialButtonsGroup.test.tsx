@@ -25,15 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
 import { SocialButtonsGroup } from ".";
 import type { SocialButtonProps } from "./SocialButtonsGroup.types";
-
-const renderWithTheme = (component: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
-};
 
 describe("<SocialButtonsGroup />", () => {
   const baseProps: SocialButtonProps = {
@@ -42,28 +37,22 @@ describe("<SocialButtonsGroup />", () => {
       { provider: "facebook", url: "facebook.com", linked: false },
     ],
     t: (key: string) => key,
-    onClick: jest.fn(),
+    onClick: vi.fn(),
     isDisabled: false,
   };
 
   it("renders without error", () => {
-    const { container } = renderWithTheme(
-      <SocialButtonsGroup {...baseProps} />,
-    );
+    const { container } = render(<SocialButtonsGroup {...baseProps} />);
     expect(container).toBeTruthy();
   });
 
   it("renders correct number of social buttons", () => {
-    const { container } = renderWithTheme(
-      <SocialButtonsGroup {...baseProps} />,
-    );
+    const { container } = render(<SocialButtonsGroup {...baseProps} />);
     expect(container.querySelectorAll(".social-button")).toHaveLength(2);
   });
 
   it("handles click events", () => {
-    const { container } = renderWithTheme(
-      <SocialButtonsGroup {...baseProps} />,
-    );
+    const { container } = render(<SocialButtonsGroup {...baseProps} />);
     const button = container.querySelector(".social-button");
     if (button) fireEvent.click(button);
     expect(baseProps.onClick).toHaveBeenCalled();

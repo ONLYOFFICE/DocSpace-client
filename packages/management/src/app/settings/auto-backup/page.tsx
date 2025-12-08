@@ -32,7 +32,6 @@ import {
   getAllPortals,
   getQuota,
   getSettingsFiles,
-  getFoldersTree,
   getBackupProgress,
 } from "@/lib/actions";
 
@@ -52,7 +51,6 @@ async function Page() {
     portals,
     quota,
     settingsFiles,
-    foldersTree,
   ] = await Promise.all([
     getSettingsThirdParty(),
     getBackupSchedule(),
@@ -62,13 +60,11 @@ async function Page() {
     getAllPortals(),
     getQuota(),
     getSettingsFiles(),
-    getFoldersTree(),
   ]);
 
   return (
     <AutoBackup
       account={account}
-      foldersTree={foldersTree}
       filesSettings={settingsFiles}
       portals={portals?.tenants || []}
       features={quota?.features || []}

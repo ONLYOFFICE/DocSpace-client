@@ -57,7 +57,7 @@ export const EncryptWarningDialog = ({
   const onConfirm = async () => {
     try {
       await startEncryption(isNotifyChecked);
-      SocketHelper.emit(SocketCommands.StorageEncryption);
+      SocketHelper?.emit(SocketCommands.StorageEncryption);
       setEncryptWarningDialogVisible(false);
       window.location.href = "/encryption-portal";
     } catch (error) {

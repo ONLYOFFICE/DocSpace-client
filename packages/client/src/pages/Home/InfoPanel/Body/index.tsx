@@ -23,13 +23,18 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import {
+  isRoom as isRoomUtil,
+  isFolder as isFolderUtil,
+} from "@docspace/shared/utils/typeGuards";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
@@ -54,11 +59,13 @@ type BodyProps = {
   fileView: InfoPanelStore["fileView"];
   getIsFiles: InfoPanelStore["getIsFiles"];
   getIsRooms: InfoPanelStore["getIsRooms"];
+  getIsAIAgent: InfoPanelStore["getIsAIAgent"];
   setView: InfoPanelStore["setView"];
 
   maxImageUploadSize: SettingsStore["maxImageUploadSize"];
 
   editRoomDialogProps: DialogsStore["editRoomDialogProps"];
+  editAgentDialogProps: DialogsStore["editAgentDialogProps"];
   createRoomDialogProps: DialogsStore["createRoomDialogProps"];
   templateEventVisible: DialogsStore["templateEventVisible"];
 
@@ -71,6 +78,7 @@ type BodyProps = {
   setImage: AvatarEditorDialogStore["setImage"];
 
   contactsTab: UsersStore["contactsTab"];
+  checkIsExpiredLinkAsync: TStore["filesActionsStore"]["isExpiredLinkAsync"];
 };
 
 const InfoPanelBodyContent = ({
@@ -81,6 +89,7 @@ const InfoPanelBodyContent = ({
   fileView,
   getIsFiles,
   getIsRooms,
+  getIsAIAgent,
   setView,
 
   maxImageUploadSize,
@@ -96,48 +105,77 @@ const InfoPanelBodyContent = ({
   onSaveRoomLogo,
   onChangeFile,
   setImage,
+  checkIsExpiredLinkAsync,
+  editAgentDialogProps,
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
+  const isAgents = getIsAIAgent();
   const isGallery = window.location.pathname.includes("form-gallery");
   const isGroups = contactsTab === "groups";
   const isGuests = contactsTab === "guests";
   const isUsers = contactsTab === "inside_group" || contactsTab === "people";
+  const isTemplatesRoom =
+    !Array.isArray(selection) &&
+    selection?.rootFolderType === FolderType.RoomTemplates;
 
-  const isRoom = selection && "expired" in selection && "external" in selection;
+  const isRoom = isRoomUtil(selection);
+  const isAgent =
+    selection &&
+    "rootFolderType" in selection &&
+    // "roomType" in selection &&
+    // selection.roomType &&
+    selection.rootFolderType === FolderType.AIAgents;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
+  const id = !Array.isArray(selection) ? selection?.id : null;
 
   const isLockedSharedRoom = isRoom && isLockedSharedRoomUtil(selection);
 
   const isSeveralItems = Array.isArray(selection) && selection.length > 1;
   const isNoItem =
     !selection ||
-    (isRoom && selection.expired && selection.external) ||
+    (!Array.isArray(selection) &&
+      selection.isLinkExpired &&
+      selection.external) ||
     isLockedSharedRoom ||
     (isRoot && !isGallery);
 
-  const [currentView, setCurrentView] = React.useState(
-    isRooms ? roomsView : fileView,
-  );
+  const currentView = useMemo(() => {
+    return isRoom || isTemplatesRoom || isAgent ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView, isTemplatesRoom, isAgent]);
 
-  const defferedCurrentView = React.useDeferredValue(currentView);
-
-  React.useEffect(() => {
-    setCurrentView(isRooms ? roomsView : fileView);
-  }, [isRooms, roomsView, fileView]);
+  const deferredCurrentView = React.useDeferredValue(currentView);
 
   React.useEffect(() => {
     if (
       fileView === InfoPanelView.infoShare &&
       selection &&
-      "isFolder" in selection &&
-      selection?.isFolder
+      isFolderUtil(selection) &&
+      !selection?.canShare &&
+      !isTemplatesRoom &&
+      !isAgent
     ) {
       setView(InfoPanelView.infoDetails);
     }
-  }, [fileView, selection]);
+  }, [fileView, selection, isTemplatesRoom, isAgent]);
+
+  React.useEffect(() => {
+    if (fileView.indexOf("info_plugin") > -1 && isAgent) {
+      setView(InfoPanelView.infoMembers);
+    }
+  }, [fileView, isAgent]);
+
+  const isExpiredLink = useEventCallback(() =>
+    checkIsExpiredLinkAsync(selection),
+  );
+
+  React.useEffect(() => {
+    if (!id) return;
+
+    isExpiredLink();
+  }, [id, isExpiredLink]);
 
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
@@ -151,12 +189,15 @@ const InfoPanelBodyContent = ({
 
     if (isNoItem || !selection) {
       const lockedSharedRoomProps = isLockedSharedRoom
-        ? { isLockedSharedRoom, infoPanelSelection: selection }
+        ? { isLockedSharedRoom }
         : {};
       return (
         <NoItem
           isRooms={isRooms}
           isFiles={isFiles}
+          isTemplatesRoom={isTemplatesRoom}
+          isAgents={isAgents}
+          infoPanelSelection={selection}
           {...lockedSharedRoomProps}
         />
       );
@@ -177,7 +218,7 @@ const InfoPanelBodyContent = ({
         }
       >
         <FilesView
-          currentView={defferedCurrentView}
+          currentView={deferredCurrentView}
           selection={selection}
           isArchive={selection.rootFolderType === FolderType.Archive}
         />
@@ -201,6 +242,7 @@ const InfoPanelBodyContent = ({
 
       {avatarEditorDialogVisible &&
       !editRoomDialogProps.visible &&
+      !editAgentDialogProps.visible &&
       !createRoomDialogProps.visible &&
       !Array.isArray(selection) ? (
         <AvatarEditorDialog
@@ -229,6 +271,7 @@ export default inject(
     avatarEditorDialogStore,
     dialogsStore,
     peopleStore,
+    filesActionsStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
     const {
@@ -237,11 +280,17 @@ export default inject(
 
       getIsFiles,
       getIsRooms,
+      getIsAIAgent,
       setView,
     } = infoPanelStore;
 
-    const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
-      dialogsStore;
+    const { isExpiredLinkAsync } = filesActionsStore;
+    const {
+      editRoomDialogProps,
+      editAgentDialogProps,
+      createRoomDialogProps,
+      templateEventVisible,
+    } = dialogsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -263,11 +312,13 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
+      getIsAIAgent,
       setView,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 
       editRoomDialogProps,
+      editAgentDialogProps,
       createRoomDialogProps,
       templateEventVisible,
 
@@ -278,6 +329,7 @@ export default inject(
       onSaveRoomLogo,
       onChangeFile,
       setImage,
+      checkIsExpiredLinkAsync: isExpiredLinkAsync,
     };
   },
 )(observer(InfoPanelBodyContent));

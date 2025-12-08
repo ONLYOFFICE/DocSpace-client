@@ -65,7 +65,6 @@ export default function withCultureNames<
       if (cultures && cultures.length > 0) return;
 
       getPortalCultures?.();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const cultureNames = useMemo(

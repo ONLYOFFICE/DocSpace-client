@@ -24,43 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable react/display-name */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable func-names */
-
-/* global jest */
-
-const react_i18next: {
-  translate: () => (
-    Component: React.JSXElementConstructor<{
-      t: () => string;
-    }>,
-  ) => (props: {}) => React.JSX.Element;
-  useTranslation: (value: string) => {
-    t: (key: string) => string;
-    i18n: {
-      language: string;
-    };
-  };
-  language: string;
-  i18n: {
-    language: string;
-  };
-} = jest.genMockFromModule("react-i18next");
+import { vi } from "vitest";
+import React from "react";
 
 const translate =
   () => (Component: React.JSXElementConstructor<{ t: () => string }>) =>
-    function (props: {}) {
+    function (props: object) {
       return <Component t={() => ""} {...props} />;
     };
 
-react_i18next.translate = translate;
-react_i18next.useTranslation = () => ({
-  t: () => "",
+export const useTranslation = () => ({
+  t: (key: string) => key,
   i18n: {
     language: "en",
+    changeLanguage: vi.fn(),
   },
+  ready: true,
 });
-react_i18next.i18n = { language: "en" };
 
-module.exports = react_i18next;
+export const Trans = ({ children }: { children: React.ReactNode }) => children;
+
+export const initReactI18next = {
+  type: "3rdParty",
+  init: vi.fn(),
+};
+
+export const I18nextProvider = ({ children }: { children: React.ReactNode }) =>
+  children;
+
+export { translate };
+
+export default {
+  useTranslation,
+  Trans,
+  initReactI18next,
+  I18nextProvider,
+  translate,
+};

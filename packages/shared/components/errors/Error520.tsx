@@ -61,7 +61,6 @@ const Error520 = ({
 
   useEffect(() => {
     if (firebaseHelper?.isEnabledDB) autoSendReport();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -102,17 +101,19 @@ const Error520 = ({
         isPrimaryButton={false}
         headerText={t("SomethingWentWrong")}
         customizedBodyText={errorLog?.message ?? customErrorLog?.message}
-      />
-      <Link
-        isHovered
-        className="link"
-        fontWeight={600}
-        type={LinkType.action}
-        onClick={onReloadClick}
-        color={currentColorScheme?.main?.accent}
       >
-        {t("ReloadPage")}
-      </Link>
+        <Link
+          isHovered
+          className="link"
+          fontWeight={600}
+          type={LinkType.action}
+          onClick={onReloadClick}
+          color={currentColorScheme?.main?.accent}
+        >
+          {t("ReloadPage")}
+        </Link>
+      </ErrorContainer>
+
       <ReportDialog
         user={user}
         error={errorLog ?? customErrorLog}

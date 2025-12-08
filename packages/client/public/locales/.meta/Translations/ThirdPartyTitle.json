@@ -3,7 +3,7 @@
   "content": "Third-party services",
   "content_en_sha1_hash": "871d2b6d2f4209a2045939948478b5ad9e16f6a2",
   "created_at": "2025-05-19T21:30:50.013Z",
-  "updated_at": "2025-05-26T07:57:32.267Z",
+  "updated_at": "2025-10-27T16:14:33.231Z",
   "comment": {
     "text": "This translation key is used to display \"Third-party services\" as a title in various UI components, such as a link and a category name, often found in settings or configuration pages. It appears on a page that lists integration options for third-party services.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.js",
-      "line_number": 103,
-      "context": "href=\"/portal-settings/integration/third-party-services\"\n type=\"page\"\n noHover\n color={currentColorScheme.main?.accent}\n >\n {t(\"Translations:ThirdPartyTitle\")}\n </Link>\n </Text>\n );\n \n toastr.warning(data, null, 5000, true, false);",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.tsx",
+      "line_number": 139,
+      "context": "href=\"/portal-settings/integration/third-party-services\"\n type={LinkType.page}\n noHover\n color={currentColorScheme?.main?.accent}\n >\n {t(\"Translations:ThirdPartyTitle\")}\n </Link>\n </Text>\n );\n \n toastr.warning(data, \"\", 5000, true, false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 77,
-      "context": "name: t(\"SingleSignOn\"),\n content: <SSO />,\n },\n {\n id: \"third-party-services\",\n name: t(\"Translations:ThirdPartyTitle\"),\n content: <ThirdParty />,\n },\n {\n id: \"smtp-settings\",\n name: t(\"SMTPSettings\"),",
+      "line_number": 107,
+      "context": "await getSSOData();\n },\n },\n {\n id: \"third-party-services\",\n name: t(\"Translations:ThirdPartyTitle\"),\n content: <ThirdParty />,\n onClick: async () => {\n clearAbortControllerArr();\n await getThirdPartyData();\n },",
       "module": "/packages/client"
     }
   ],

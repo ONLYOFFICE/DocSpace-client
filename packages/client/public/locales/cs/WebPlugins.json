@@ -8,6 +8,8 @@
   "NeedSettings": "Potřebujete zadat nastavení",
   "NoPlugins": "Nebyly přidány žádné zásuvné moduly",
   "NotNeedSettings": "Potřebujete zadat nastavení",
+  "PluginIsNotCompatible": "Verze plugin SDK neodpovídá verzi {{productName}}. Prosím, aktualizujte na kompatibilní verzi.",
+  "PluginLoadedSuccessfully": "Plugin načten úspěšně",
   "PluginSamples": "Ukázky zásuvných modulů",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Pomocí sady Plugin SDK můžete rozšířit funkčnost svého systému {{productName}}, připojit služby třetích stran nebo vylepšit stávající uživatelské prostředí. Zde najdete ukázky zásuvných modulů se zdrojovým kódem, které jsou k dispozici na GitHubu.",

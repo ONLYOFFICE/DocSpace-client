@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2025-08-11T09:02:43.839Z",
+  "updated_at": "2025-11-13T10:21:17.733Z",
   "comment": {
     "text": "This translation key is used to display the text \"Add\" as a button label in various UI elements, such as buttons, input fields, and dialogs. It appears in contexts where users need to add new items or content, including form submissions, editing comments, and OAuth client settings. Translators should provide a clear and concise alternative for this key to ensure consistent and accurate display across the application.",
     "is_auto": true,
@@ -33,6 +33,18 @@
       "line_number": 312,
       "context": "/>\n </TimePickerCell>\n ) : (\n <TimePickerCell>\n <SelectorAddButton\n title={t(\"Common:AddButton\")}\n onClick={showTimePicker}\n className=\"mr-8 add-delivery-time-button\"\n label={t(\"SelectDeliveryTime\")}\n />\n </TimePickerCell>",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/Attachment.tsx",
+      "line_number": 141,
+      "context": "withCancelButton\n withCreate={false}\n withFooterCheckbox={false}\n withFooterInput={false}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n submitButtonLabel={t(\"Common:AddButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId=\"\"\n rootFolderType={FolderType.Rooms}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
+      "line_number": 178,
+      "context": "searchEmptyScreenImage={\n isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:SearchEmptyRoomsDescription\")}\n submitButtonLabel={t(\"Common:AddButton\")}\n disableSubmitButton={false}\n onSubmit={onSubmitAction}\n rowLoader={<RowLoader />}\n hasNextPage={servers.length < totalServers}\n isNextPageLoading={false}",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

@@ -64,6 +64,8 @@ export type PeopleSelectorProps = TSelectorHeader &
   TSelectorAccessRights &
   TSelectorWithAside &
   TSelectorSubmitButton & {
+    targetEntityType?: "file" | "folder" | "room";
+    disabledInvitedText?: string;
     id?: string;
     className?: string;
     style?: React.CSSProperties;
@@ -90,6 +92,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     injectedElement?: React.ReactElement;
     alwaysShowFooter?: boolean;
     onlyRoomMembers?: boolean;
+    isAgent?: boolean;
     // Accessibility attributes
     "aria-label"?: string;
     "data-selector-type"?: string;

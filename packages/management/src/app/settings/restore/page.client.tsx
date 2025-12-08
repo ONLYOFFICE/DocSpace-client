@@ -177,7 +177,6 @@ const Restore = ({
 
     const uploadUrl = combineUrl(window.ClientConfig?.proxy?.url, url);
 
-    // eslint-disable-next-line no-restricted-syntax
     for await (const value of uploadBackupFile(requestsDataArray, uploadUrl)) {
       if (!value) return false;
 

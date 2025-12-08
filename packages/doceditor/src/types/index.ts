@@ -301,8 +301,6 @@ export type TEvent = {
   data: TEventData;
 };
 
-export interface UseSelectFolderDialogProps {}
-
 export interface UseSelectFileDialogProps {
   instanceId: string;
 }
@@ -314,7 +312,7 @@ export interface SelectFolderDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -322,6 +320,9 @@ export interface SelectFolderDialogProps {
       | TRoomSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => boolean;
   onClose: () => void;
   onSubmit: (
@@ -337,7 +338,6 @@ export interface SelectFolderDialogProps {
   fileInfo: TFile;
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
-  organizationName: string;
   selectedFolderId?: string | number;
 }
 
@@ -351,7 +351,7 @@ export interface SelectFileDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -435,7 +435,7 @@ export type TDocEditor = {
     history,
   }: {
     currentVersion?: number;
-    history?: {};
+    history?: object;
     error?: string;
   }) => void;
   setHistoryData?: (obj: THistoryData) => void;
@@ -443,6 +443,7 @@ export type TDocEditor = {
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
   startFilling?: VoidFunction;
   requestRoles?: VoidFunction;
+  setFavorite?: (favorite: boolean) => void;
 };
 
 export type TCatchError =
@@ -471,7 +472,7 @@ export type StartFillingSelectorDialogProps = {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -501,7 +502,7 @@ export type ConflictStateType = {
   resolve: (
     value: ConflictResolveType | PromiseLike<ConflictResolveType>,
   ) => void;
-  reject: (reason?: any) => void;
+  reject: (reason?: unknown) => void;
   fileName: string;
   folderName: string;
 };

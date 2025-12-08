@@ -3,7 +3,7 @@
   "content": "In Google Play",
   "content_en_sha1_hash": "f8161e2969498169b03965ff3eb0f64d9b8a7d20",
   "created_at": "2025-05-19T21:30:50.049Z",
-  "updated_at": "2025-05-26T07:57:32.200Z",
+  "updated_at": "2025-10-01T15:17:48.186Z",
   "comment": {
     "text": "\"In Google Play\" is a text that appears on a button or similar element, indicating that users can download an app from the Google Play store. It is used in a Smart Banner component to provide alternative language options for users accessing the app through different platforms (iOS, Android).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
-      "line_number": 69,
+      "line_number": 72,
       "context": "checkBanner();\n }, [location]);\n \n const storeText = {\n ios: t(\"SmartBanner:AppStore\"),\n android: t(\"SmartBanner:GooglePlay\"),\n windows: \"\",\n kindle: \"\",\n };\n \n const priceText = {",
       "module": "/packages/client"
     }

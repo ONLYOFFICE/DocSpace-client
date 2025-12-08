@@ -88,6 +88,17 @@ const getFilterType = (filterValues: TGroupItem[] | TItem[]) => {
   return filterType?.toString() ? +filterType : null;
 };
 
+const getFilterLocation = (filterValues: TGroupItem[] | TItem[]) => {
+  const filterType = result(
+    find(filterValues, (value) => {
+      return value.group === FilterGroups.filterLocation;
+    }),
+    "key",
+  );
+
+  return filterType?.toString() ? +filterType : null;
+};
+
 const getSubjectFilter = (filterValues: TGroupItem[] | TItem[]) => {
   const subjectFilter = result(
     find(filterValues, (value) => {
@@ -108,6 +119,17 @@ const getAuthorType = (filterValues: TGroupItem[] | TItem[]) => {
   );
 
   return authorType || null;
+};
+
+const getSharedBy = (filterValues: TGroupItem[] | TItem[]) => {
+  const sharedBy = result(
+    find(filterValues, (value) => {
+      return value.group === FilterGroups.filterSharedBy;
+    }),
+    "key",
+  );
+
+  return sharedBy || null;
 };
 
 const getRoomId = (filterValues: TGroupItem[] | TItem[]) => {
@@ -284,6 +306,8 @@ const replaceEqualFilterValuesWithPrev = (
 
 export {
   getFilterType,
+  getSharedBy,
+  getFilterLocation,
   getSubjectFilter,
   getAuthorType,
   getRoomId,

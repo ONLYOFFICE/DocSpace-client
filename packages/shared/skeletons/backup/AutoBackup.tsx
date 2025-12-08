@@ -30,12 +30,7 @@ import { RectangleSkeleton } from "../rectangle";
 import styles from "./Backup.module.scss";
 import type { BackupLoaderProps } from "./Backup.types";
 
-const AutoBackupLoader = ({
-  id,
-  className,
-  style,
-  ...rest
-}: BackupLoaderProps) => {
+const AutoBackupLoader = ({ style, ...rest }: BackupLoaderProps) => {
   const {
     title,
     borderRadius,

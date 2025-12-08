@@ -43,7 +43,6 @@ import { TNavigationProps } from "./Navigation.types";
 import Badges from "./sub-components/Badges";
 
 const Navigation = ({
-  showText,
   isRootFolder,
   title,
   canCreate,
@@ -53,9 +52,6 @@ const Navigation = ({
   getContextOptionsFolder,
   onBackToParentFolder,
   isTrashFolder,
-  clearTrash,
-  showFolderInfo,
-  isCurrentFolderInfo,
   toggleInfoPanel,
   isInfoPanelVisible,
   titles,
@@ -63,7 +59,6 @@ const Navigation = ({
   onPlusClick,
   isEmptyPage,
   isDesktop: isDesktopClient,
-  isRoom,
   isFrame,
   hideInfoPanel,
   showRootFolderTitle,
@@ -90,6 +85,7 @@ const Navigation = ({
   isContextButtonVisible,
   isPlusButtonVisible,
   showBackButton,
+  contextMenuHeader,
 
   ...rest
 }: TNavigationProps) => {
@@ -331,11 +327,13 @@ const Navigation = ({
               isEmptyPage={isEmptyPage}
               onContextOptionsClick={onContextOptionsClick}
               isMobile={currentDeviceType !== DeviceType.desktop}
+              isMobileOnly={currentDeviceType === DeviceType.mobile}
               contextButtonAnimation={contextButtonAnimation}
               guidAnimationVisible={guidAnimationVisible}
               setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
               isPlusButtonVisible={isPlusButtonVisible}
+              contextMenuHeader={contextMenuHeader}
             />
           </div>
 

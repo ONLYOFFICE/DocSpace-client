@@ -2,5 +2,6 @@
   "CancellaionNotification": "Kündigungsbenachrichtigung nicht mehr anzeigen",
   "DisplayFileExtension": "Dateierweiterung neben dem Dateinamen anzeigen",
   "OpenSameTab": "{{organizationName}}-Editor in derselben Registerkarte öffnen",
-  "OriginalCopy": "Dateikopie auch im Originalformat speichern"
+  "OriginalCopy": "Dateikopie auch im Originalformat speichern",
+  "TrashMoveConfirmation": "Benachrichtigung beim Verschieben von Elementen nach {{sectionName}} anzeigen"
 }

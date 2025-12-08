@@ -51,12 +51,19 @@ const FileRow = observer(
     index,
     theme,
     convertFileFromFiles,
+    retryConvertFiles,
   }) => {
     const [showPasswordInput, setShowPasswordInput] = useState(false);
     const [password, setPassword] = useState("");
     const [passwordValid, setPasswordValid] = useState(true);
     const inputRef = useRef(null);
     const { t } = useTranslation("UploadPanel");
+
+    const onRetryClick = () => {
+      const { fileId } = item;
+
+      retryConvertFiles(t, fileId);
+    };
 
     const onTextClick = useCallback(() => {
       const newState = !showPasswordInput;
@@ -160,6 +167,7 @@ const FileRow = observer(
               onTextClick={onTextClick}
               showPasswordInput={showPasswordInput}
               theme={theme}
+              onRetryClick={onRetryClick}
             />
           ) : (
             <div className="actions-wrapper">
@@ -197,7 +205,8 @@ export default inject(
     const { theme } = settingsStore;
     const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =
       filesSettingsStore;
-    const { uploaded, convertFileFromFiles } = uploadDataStore;
+    const { uploaded, convertFileFromFiles, retryConvertFiles } =
+      uploadDataStore;
 
     const ext = item.fileInfo.fileExst;
 
@@ -216,6 +225,7 @@ export default inject(
       name: title,
       downloadInCurrentTab,
       convertFileFromFiles,
+      retryConvertFiles,
     };
   },
 )(FileRow);

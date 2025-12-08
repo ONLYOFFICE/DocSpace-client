@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { FC } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
@@ -38,6 +38,11 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { copyShareLink as clipboardCopy } from "@docspace/shared/utils/copy";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { toastr } from "@docspace/shared/components/toast";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { getFileInfo } from "@docspace/shared/api/files";
 
 import { Wrapper } from "./CreatedPDFFormDialog.styled";
 import type {
@@ -45,75 +50,95 @@ import type {
   InjectedCreatedPDFFormDialogProps,
 } from "./CreatedPDFFormDialog.types";
 
-export const CreatedPDFFormDialog = inject<TStore>(
-  ({ contextOptionsStore }) => {
-    const { onCopyLink } = contextOptionsStore;
+const CreatedPDFFormDialogComponent = ({
+  file,
+  localKey,
+  onClose,
+  visible,
+  getItemUrl,
+  getManageLinkOptions,
+  getFilesListItems,
+}: CreatedPDFFormDialogProps & InjectedCreatedPDFFormDialogProps) => {
+  const { t } = useTranslation(["PDFFormDialog", "Common"]);
+  const theme = useTheme();
 
-    return { onCopyLink };
-  },
-)(
-  observer(
-    ({
-      file,
-      localKey,
-      onClose,
-      onCopyLink,
-      visible,
-    }: CreatedPDFFormDialogProps & InjectedCreatedPDFFormDialogProps) => {
-      const { t } = useTranslation(["PDFFormDialog", "Common"]);
-      const theme = useTheme();
+  const onSubmit = async () => {
+    try {
+      const currentFile = await getFileInfo(file.id);
 
-      const onSubmit = () => {
-        onCopyLink(file, t);
-        onClose();
-      };
+      const [fileItem] = getFilesListItems([currentFile]);
 
-      const handleChangeCheckbox = (
-        event: React.ChangeEvent<HTMLInputElement>,
-      ) => {
-        localStorage.setItem(localKey, event.target.checked.toString());
-      };
+      const primaryLink = await ShareLinkService.getFilePrimaryLink(fileItem);
 
-      const description = t("PDFFormSuccessfullyCreatedDescription");
-      const primaryButtonLabel = t("Common:CopyPublicLink");
+      copyShareLink(fileItem, primaryLink, t, getManageLinkOptions(fileItem));
+    } catch (error) {
+      const url = getItemUrl(file.id, false, false, false);
+      if (url) {
+        clipboardCopy(url);
+        toastr.success(t("Common:LinkCopySuccess"));
+      }
 
-      return (
-        <ModalDialog
-          autoMaxHeight
-          visible={visible}
-          onClose={onClose}
-          displayType={ModalDialogType.modal}
-        >
-          <ModalDialog.Header>{t("PDFform")}</ModalDialog.Header>
-          <ModalDialog.Body>
-            <Wrapper>
-              {theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
-              <span>{description}</span>
-              <Checkbox
-                className="created-pdf__checkbox"
-                onChange={handleChangeCheckbox}
-                label={t("Common:DontShowAgain")}
-              />
-            </Wrapper>
-          </ModalDialog.Body>
-          <ModalDialog.Footer>
-            <Button
-              scale
-              primary
-              tabIndex={0}
-              size={ButtonSize.normal}
-              label={primaryButtonLabel}
-              onClick={onSubmit}
-            />
-            <Button
-              tabIndex={0}
-              onClick={onClose}
-              size={ButtonSize.normal}
-              label={t("Common:Later")}
-            />
-          </ModalDialog.Footer>
-        </ModalDialog>
-      );
-    },
-  ),
-) as unknown as React.FC<CreatedPDFFormDialogProps>;
+      console.error(error);
+    } finally {
+      onClose();
+    }
+  };
+
+  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    localStorage.setItem(localKey, event.target.checked.toString());
+  };
+
+  const description = t("PDFFormSuccessfullyCreatedDescription");
+  const primaryButtonLabel = t("Common:CopyPublicLink");
+
+  return (
+    <ModalDialog
+      autoMaxHeight
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>{t("PDFform")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <Wrapper>
+          {theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
+          <span>{description}</span>
+          <Checkbox
+            className="created-pdf__checkbox"
+            onChange={handleChangeCheckbox}
+            label={t("Common:DontShowAgain")}
+            dataTestId="created_pdf_form_dialog_dont_show_again"
+          />
+        </Wrapper>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          scale
+          primary
+          tabIndex={0}
+          size={ButtonSize.normal}
+          label={primaryButtonLabel}
+          onClick={onSubmit}
+          testId="created_pdf_form_dialog_copy_public_link"
+        />
+        <Button
+          tabIndex={0}
+          onClick={onClose}
+          size={ButtonSize.normal}
+          label={t("Common:Later")}
+          testId="created_pdf_form_dialog_later"
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};
+
+export const CreatedPDFFormDialog = inject<
+  TStore,
+  CreatedPDFFormDialogProps,
+  InjectedCreatedPDFFormDialogProps
+>((store) => ({
+  getItemUrl: store.filesStore.getItemUrl,
+  getManageLinkOptions: store.contextOptionsStore.getManageLinkOptions,
+  getFilesListItems: store.filesStore.getFilesListItems,
+}))(observer(CreatedPDFFormDialogComponent as FC<CreatedPDFFormDialogProps>));

@@ -29,15 +29,14 @@ import styled, { useTheme } from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
-import EmptyCanceledLight from "PUBLIC_DIR/images/emptyview/empty.canceled.light.svg?url";
-import EmptyCanceledDark from "PUBLIC_DIR/images/emptyview/empty.canceled.dark.svg?url";
+import EmptyCanceledLight from "PUBLIC_DIR/images/emptyview/empty.records.light.svg?url";
+import EmptyCanceledDark from "PUBLIC_DIR/images/emptyview/empty.records.dark.svg?url";
 
 const StyledEmptyScreenContainer = styled(EmptyScreenContainer)`
   width: fit-content;
 
   .ec-image {
-    width: 75px;
-    height: 75px;
+    width: 150px;
   }
 `;
 

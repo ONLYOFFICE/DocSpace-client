@@ -56,6 +56,12 @@ class AccessRightsStore {
     return security?.Create;
   }
 
+  get canUseChat() {
+    const { security } = this.selectedFolderStore;
+
+    return !!security && "UseChat" in security && security.UseChat;
+  }
+
   canMoveItems = (item) => {
     const { editing: fileEditing, security, rootFolderType } = item;
 
@@ -213,16 +219,6 @@ class AccessRightsStore {
     if (isAdmin) return needRemove && !userIsAdmin && !userIsOwner;
 
     return false;
-  };
-
-  canRemoveOnlyOneUser = (user) => {
-    const { id } = this.userStore.user;
-
-    const { status, id: userId } = user;
-
-    const needRemove = status === EmployeeStatus.Disabled && userId !== id;
-
-    return needRemove;
   };
 
   canChangeQuota = () => {

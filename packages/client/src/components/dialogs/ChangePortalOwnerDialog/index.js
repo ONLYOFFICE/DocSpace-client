@@ -160,6 +160,7 @@ const ChangePortalOwnerDialog = ({
             currentUserId={id}
             disableDisabledUsers
             filter={filter}
+            dataTestId="change_portal_owner_people_selector"
           />
         </ModalDialog.Container>
       ) : null}
@@ -178,10 +179,20 @@ const ChangePortalOwnerDialog = ({
         </StyledOwnerInfo>
 
         <StyledPeopleSelectorInfo>
-          <Text className="new-owner" title={t("NewPortalOwner")}>
+          <Text
+            className="new-owner"
+            title={t("NewPortalOwner", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("NewPortalOwner", { productName: t("Common:ProductName") })}
           </Text>
-          <Text className="description" title={t("ChangeInstruction")}>
+          <Text
+            className="description"
+            title={t("ChangeInstruction", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("ChangeInstruction", { productName: t("Common:ProductName") })}
           </Text>
         </StyledPeopleSelectorInfo>
@@ -194,6 +205,7 @@ const ChangePortalOwnerDialog = ({
                 className="cross-icon"
                 onClick={onClearSelectedItem}
                 src={CrossReactSvgUrl}
+                data-testid="change_portal_owner_clear_selected_owner_button"
               />
             </StyledSelectedOwner>
 
@@ -202,6 +214,7 @@ const ChangePortalOwnerDialog = ({
               isHovered
               fontWeight={600}
               onClick={onTogglePeopleSelector}
+              dataTestId="change_portal_owner_change_user_link"
             >
               {t("ChangeUser")}
             </Link>
@@ -214,12 +227,18 @@ const ChangePortalOwnerDialog = ({
               label={t("Translations:ChooseFromList")}
               noSelect
               titleText={t("Translations:ChooseFromList")}
+              testId="change_portal_owner_choose_from_list_button"
             />
           </StyledPeopleSelector>
         )}
 
         <StyledAvailableList>
-          <Text className="list-header" title={t("PortalOwnerCan")}>
+          <Text
+            className="list-header"
+            title={t("PortalOwnerCan", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("PortalOwnerCan", { productName: t("Common:ProductName") })}
           </Text>
 
@@ -245,6 +264,7 @@ const ChangePortalOwnerDialog = ({
               isDisabled={!selectedUser}
               onClick={onChangeAction}
               isLoading={isLoading}
+              testId="change_portal_owner_change_button"
             />
             <Button
               tabIndex={5}
@@ -253,6 +273,7 @@ const ChangePortalOwnerDialog = ({
               scale
               onClick={onCloseAction}
               isDisabled={isLoading}
+              testId="change_portal_owner_cancel_button"
             />
           </div>
         </StyledFooterWrapper>

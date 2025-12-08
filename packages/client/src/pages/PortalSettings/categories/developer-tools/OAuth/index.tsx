@@ -46,20 +46,13 @@ import DeleteDialog from "./sub-components/DeleteDialog";
 
 import List from "./sub-components/List";
 
-const MIN_LOADER_TIME = 0;
-
 const OAuth = ({
   clientList,
   viewAs,
 
   setViewAs,
-  fetchClients,
-  fetchScopes,
 
   currentDeviceType,
-
-  isInit,
-  setIsInit,
 
   infoDialogVisible,
   previewDialogVisible,
@@ -69,62 +62,15 @@ const OAuth = ({
   revokeDeveloperTokenDialogVisible,
   apiOAuthLink,
   logoText,
+  error,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
-
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [error, setError] = React.useState<null | Error>(null);
-
-  const startLoadingRef = React.useRef<null | Date>(null);
-
-  const getData = React.useCallback(async () => {
-    if (startLoadingRef.current) return;
-    const actions: Promise<void>[] = [];
-
-    try {
-      if (!isInit) {
-        actions.push(fetchScopes());
-      }
-
-      actions.push(fetchClients());
-
-      startLoadingRef.current = new Date();
-
-      await Promise.all(actions);
-    } catch (e) {
-      setError(e as Error);
-    }
-
-    if (startLoadingRef.current) {
-      const currentDate = new Date();
-
-      const ms = Math.abs(
-        startLoadingRef.current.getTime() - currentDate.getTime(),
-      );
-
-      if (ms < MIN_LOADER_TIME)
-        return setTimeout(() => {
-          setIsLoading(false);
-          setIsInit(true);
-        }, MIN_LOADER_TIME - ms);
-    }
-
-    setIsLoading(false);
-    startLoadingRef.current = null;
-    setIsInit(true);
-  }, [fetchClients, fetchScopes, isInit, setIsInit]);
 
   useViewEffect({
     view: viewAs,
     setView: setViewAs,
     currentDeviceType,
   });
-
-  React.useEffect(() => {
-    if (startLoadingRef.current) return;
-    setIsLoading(true);
-    getData();
-  }, [getData]);
 
   React.useEffect(() => {
     setDocumentTitle(t("OAuth"));
@@ -143,7 +89,6 @@ const OAuth = ({
         currentDeviceType={currentDeviceType}
         apiOAuthLink={apiOAuthLink}
         logoText={logoText}
-        isLoading={isLoading}
         isError={!!error}
       />
       {infoDialogVisible ? <InfoDialog visible={infoDialogVisible} /> : null}
@@ -177,11 +122,6 @@ export default inject(
       viewAs,
 
       setViewAs,
-      fetchClients,
-      fetchScopes,
-
-      isInit,
-      setIsInit,
 
       infoDialogVisible,
       previewDialogVisible,
@@ -196,13 +136,8 @@ export default inject(
       viewAs,
 
       setViewAs,
-      fetchClients,
-      fetchScopes,
 
       currentDeviceType,
-
-      isInit,
-      setIsInit,
 
       infoDialogVisible,
       previewDialogVisible,

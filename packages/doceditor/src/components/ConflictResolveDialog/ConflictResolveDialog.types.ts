@@ -25,4 +25,4 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { ConflictStateType } from "../../types/index";
 
-export interface ConflictResolveProps extends ConflictStateType {}
+export type ConflictResolveProps = ConflictStateType;

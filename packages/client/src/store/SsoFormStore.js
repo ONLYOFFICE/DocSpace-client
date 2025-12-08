@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 import isEqual from "lodash/isEqual";
 import {
   generateCerts,
@@ -215,24 +216,36 @@ class SsoFormStore {
 
   isInit = false;
 
-  constructor() {
+  settingsStore = null;
+
+  constructor(settingsStore) {
     makeAutoObservable(this);
+    this.settingsStore = settingsStore;
   }
 
-  init = () => {
+  init = async () => {
     if (this.isInit) return;
-    this.isInit = true;
-    this.load();
+    await this.load();
+  };
+
+  setIsInit = (isInit) => {
+    this.isInit = isInit;
   };
 
   load = async () => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
     try {
-      const res = await getCurrentSsoSettings();
+      const res = await getCurrentSsoSettings(abortController.signal);
       this.setIsSsoEnabled(res.enableSso);
       this.setSpMetadata(res.enableSso);
       this.setDefaultSettings(res);
       this.setFields(res);
+      this.setIsInit(true);
     } catch (err) {
+      if (axios.isCancel(err)) return;
+
       console.log(err);
     }
   };

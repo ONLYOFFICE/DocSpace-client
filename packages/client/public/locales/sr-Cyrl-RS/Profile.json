@@ -7,6 +7,7 @@
   "DesktopTheme": "Синхронизација са подешавањима Десктоп Уређивача",
   "DesktopThemeDescription": "Аутоматски мењај између светлих и тамних тема у зависности од тренутне теме Десктоп Уређивача.",
   "EditPhoto": "Уреди слику",
+  "EmailChangeSuccess": "Твој емаил је успешно промењен.",
   "EmailNotVerified": "Емаил није потврђен",
   "ErrorAccountAlreadyUse": "Повезани налог већ користи други корисник",
   "FileManagement": "Управљање датотекама",
@@ -17,6 +18,7 @@
   "LogoutDescription": "Обратите пажњу. Све активне конекције осим ове конекције ће бити одјављене, зато што је тренутно у употреби.",
   "LogoutFrom": "Одјавите се са {{platform}} {{browser}}?",
   "MyProfile": "Мој профил",
+  "NotificationsChannels": "Канали за обавештења",
   "ProviderSuccessfullyConnected": "Провајдер успешно повезан",
   "ProviderSuccessfullyDisconnected": "Провајдер успешно прекинут",
   "SendAgain": "Пошаљи поново",
@@ -24,6 +26,10 @@
   "SuccessLogout": "Активна конекција је одјављена: {{platform}}, {{browser}}",
   "SystemTheme": "Користи тему система",
   "SystemThemeDescription": "Аутоматски мењај између светлих и тамних тема када твој систем то ради.",
+  "TelegramAccount": "Телеграм налог",
+  "TelegramAccountDescription": "Да повежеш ТелеграмБот са својим налогом, испрати тајни линк и кликни на дугме “Повежи Телеграм”.",
+  "TelegramAccountDisconnect": "Искључи Телеграм",
+  "TelegramAccountDisconnectDescription": "Твој @{{username}} налог је повезан за Телеграм обавештења. Можеш се искључити са овог налога. У том случају, нећеш примати обавештења.",
   "TerminateAllSessions": "Прекини све сесије осим тренутне",
   "TwoFactorDescription": "Двофакторска аутентификација преко апликације за генерисање кода је омогућена за све кориснике од стране администратора."
 }

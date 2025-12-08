@@ -44,8 +44,11 @@ export interface ThirdPartyModuleProps
       | "onSelectFile"
     >,
     ScheduleComponentProps {
+  isBackupPaid?: boolean;
+  isFreeBackupsLimitReached?: boolean;
   isLoadingData: boolean;
   setSelectedFolder: (id: string) => void;
   defaultStorageType: Nullable<string>;
   defaultFolderId: Nullable<string>;
+  setDefaultFolderId?: (id: string | number | null) => void;
 }

@@ -39,6 +39,7 @@ const LeaveRoomDialog = (props) => {
     setIsVisible,
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
+    isAIAgent,
     onLeaveRoomAction,
   } = props;
 
@@ -72,16 +73,26 @@ const LeaveRoomDialog = (props) => {
     };
   }, []);
 
+  const titleText = isAIAgent
+    ? t("Files:LeaveTheAgent")
+    : t("Files:LeaveTheRoom");
+
+  const roomDescription = isRoomOwner
+    ? t("Files:LeaveRoomDescription")
+    : t("Files:WantLeaveRoom");
+
+  const agentDescription = isRoomOwner
+    ? t("Files:LeaveAgentDescription")
+    : t("Files:WantLeaveAgent");
+
+  const descriptionText = isAIAgent ? agentDescription : roomDescription;
+
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
-      <ModalDialog.Header>{t("Files:LeaveTheRoom")}</ModalDialog.Header>
+      <ModalDialog.Header>{titleText}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text>
-            {isRoomOwner
-              ? t("Files:LeaveRoomDescription")
-              : t("Files:WantLeaveRoom")}
-          </Text>
+          <Text>{descriptionText}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -129,12 +140,14 @@ export default inject(
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
+    const isAIAgent = folderItem?.isAIAgent;
 
     return {
       visible,
       setIsVisible,
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
+      isAIAgent,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
     };
   },

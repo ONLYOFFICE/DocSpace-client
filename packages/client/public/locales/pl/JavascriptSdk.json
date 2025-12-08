@@ -90,7 +90,7 @@
   "RoomFilter": "Filtr pokoi",
   "RoomOrFolder": "Pokój lub Katalog",
   "RoomOrFolderDescription": "Możesz wybrać sekcję, pokój lub katalog, który będzie się wyświetlać",
-  "RoomPreview": "Podgląd pok",
+  "RoomPreview": "Podgląd pokoju",
   "RoomSelectorDescription": "Osadź selektor pokojów, aby umożliwić użytkownikom dostęp do dowolnego pokoju z listy dostępnych.",
   "RoomTypeDisplay": "Wyświetlanie rodzaju pokojów",
   "Rotate": "Obróć",
@@ -116,6 +116,5 @@
   "Subtitle": "Podtytuł",
   "SubtitleDescription": "Podtytuł z dodatkowymi komentarzami lub opisami do bieżącego katalogu.",
   "TabPlugins": "Karta z wtyczkami",
-  "Viewer": "Przeglądarka",
   "ViewerDescription": "Osadź przeglądarkę, aby umożliwić użytkownikom otwarcie pliku do przeglądania z odpowiedniego pokoju."
 }

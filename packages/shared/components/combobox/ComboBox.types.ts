@@ -55,6 +55,7 @@ export type TBaseOption = {
   onClick?: (opt: TContextMenuValueTypeOnClick) => void;
   pageNumber?: number;
   count?: number;
+  tooltip?: string;
 };
 
 export type TRegularOption = TBaseOption & {
@@ -171,8 +172,6 @@ export type TComboboxProps = {
   title?: string;
   /** Top space */
   topSpace?: number;
-  /** Test id */
-  testId?: string;
   /** Type */
   type?: TCombobox;
   /** Use portal backdrop */

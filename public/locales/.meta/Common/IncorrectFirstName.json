@@ -3,7 +3,7 @@
   "content": "Incorrect first name",
   "content_en_sha1_hash": "cb0f8aba1a2ba9ca01a2add1595e6bb8a36ef169",
   "created_at": "2025-05-19T21:30:45.864Z",
-  "updated_at": "2025-08-11T18:11:59.124Z",
+  "updated_at": "2025-08-21T11:22:39.796Z",
   "comment": {
     "text": "This translation key \"IncorrectFirstName\" is used to display an error message when a user enters an invalid first name. In the UI, it appears as part of a dialog's validation error messages in the /packages/client/src/components/dialogs/ChangeNameDialog component.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 178,
-      "context": "hasError={!fnameValid}\n errorMessage={\n errorText ||\n (fname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"))\n }\n >\n <TextInput\n id=\"first-name\"\n name=\"first-name\"",
+      "line_number": 180,
+      "context": "hasError={!fnameValid}\n errorMessage={\n errorText ||\n (fname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"))\n }\n dataTestId=\"first_name_field_container\"\n >\n <TextInput\n id=\"first-name\"",
       "module": "/packages/login"
     }
   ],

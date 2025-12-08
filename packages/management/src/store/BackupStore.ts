@@ -99,7 +99,7 @@ class BackupStore {
   };
 
   public fetchConnectingStorages = async (): Promise<TConnectingStorages> => {
-    const res = await getConnectingStorages();
+    const res = await getConnectingStorages("excludewebdav=true");
 
     this.setConnectingStorages(
       res.map((storage) => ({
@@ -130,6 +130,7 @@ class BackupStore {
       : `${serviceTitle} (${t("Common:ActivationRequired")})`;
 
     const isConnected =
+      provider.name === this.connectedThirdPartyAccount?.providerKey ||
       provider.name === this.connectedThirdPartyAccount?.title;
 
     const isDisabled = !provider.connected && !isAdmin;

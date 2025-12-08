@@ -83,7 +83,7 @@ const AccessSelector = (props: AccessSelectorProps) => {
       directionX="left"
       directionY="top"
       fixedDirection={isMobileView}
-      manualWidth={isMobileView ? "auto" : `${width}px`}
+      manualWidth={isMobileView ? "100%" : `${width}px`}
       isAside={isMobileView}
       manualY={isMobileView ? "0px" : undefined}
       withoutBackground={isMobileView}

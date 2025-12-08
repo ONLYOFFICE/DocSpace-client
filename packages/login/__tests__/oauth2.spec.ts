@@ -51,12 +51,9 @@ test("oauth2 with list render", async ({ page, mockRequest }) => {
   await page.goto(`/login?client_id=${successClient.client_id}`);
 
   await page.fill("[name='login']", "email@mail.ru");
-  await page
-    .getByTestId("password-input")
-    .getByTestId("text-input")
-    .fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("login_button").click();
   await page.waitForURL("/login/tenant-list?**", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
@@ -75,15 +72,12 @@ test("oauth2 back button after list render", async ({ page, mockRequest }) => {
   await page.goto(`/login?client_id=${successClient.client_id}`);
 
   await page.fill("[name='login']", "email@mail.ru");
-  await page
-    .getByTestId("password-input")
-    .getByTestId("text-input")
-    .fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("login_button").click();
   await page.waitForURL("/login/tenant-list?**", { waitUntil: "load" });
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("back_to_login_button").click();
   await page.waitForURL(
     `/login?type=oauth2&client_id=0aac3e2a-f41f-4fde-89d5-7208a13fbbc5`,
     {

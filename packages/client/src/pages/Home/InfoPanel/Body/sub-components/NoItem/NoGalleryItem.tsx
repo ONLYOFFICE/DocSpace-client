@@ -24,25 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
+import FormGalleryEmptyInfoReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.form.templates.light.svg?url";
+import FormGalleryEmptyInfoReactSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.form.templates.dark.svg?url";
 
-import FormGalleryEmptyInfoReactSvgUrl from "PUBLIC_DIR/images/form-gallery-empty-info.react.svg?url";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+
 import { Text } from "@docspace/shared/components/text";
 
 import styles from "./NoItem.module.scss";
 
 const NoGalleryItem = () => {
-  const { t } = useTranslation(["FormGallery"]);
+  const { t } = useTranslation(["InfoPanel"]);
+  const theme = useTheme();
 
   return (
     <div className={styles.galleryEmptyScreen}>
       <img
         className={styles.galleryEmptyScreenImg}
-        src={FormGalleryEmptyInfoReactSvgUrl}
+        src={
+          theme.isBase
+            ? FormGalleryEmptyInfoReactSvgUrl
+            : FormGalleryEmptyInfoReactSvgDarkUrl
+        }
         alt="Empty Screen Gallery"
       />
       <Text className={styles.galleryEmptyScreenText}>
-        {t("InfoPanel:GalleryEmptyScreenText")}
+        {t("GalleryEmptyScreenText")}
       </Text>
     </div>
   );

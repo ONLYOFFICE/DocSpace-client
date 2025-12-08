@@ -32,8 +32,13 @@ import { BrandName as BrandNamePage } from "@docspace/shared/pages/Branding/Bran
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { BRAND_NAME_REGEX } from "@docspace/shared/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import LoaderBrandName from "../sub-components/loaderBrandName";
+import useCommon from "../useCommon";
+import { brandingRedirectUrl } from "./constants";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const BrandNameComponent = (props) => {
   const {
@@ -47,13 +52,29 @@ const BrandNameComponent = (props) => {
     isBrandNameLoaded,
     setBrandName,
     saveBrandName,
-    getBrandName,
+    brandingStore,
   } = props;
+
+  const isMobileView = deviceType === DeviceType.mobile;
+
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "brand-name",
+    deviceType,
+  });
+
+  const defaultProps = createDefaultHookSettingsProps({
+    isMobileView,
+    brandingStore,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
+
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    getBrandName();
+    if (isMobileView) getCommonInitialValue();
   }, []);
 
   const onSave = async (data) => {
@@ -111,7 +132,6 @@ export const BrandName = inject(
       brandName,
       defaultBrandName,
       isBrandNameLoaded,
-      getBrandName,
       setBrandName,
       saveBrandName,
     } = brandingStore;
@@ -133,9 +153,9 @@ export const BrandName = inject(
       brandName,
       defaultBrandName,
       isBrandNameLoaded,
-      getBrandName,
       setBrandName,
       saveBrandName,
+      brandingStore,
     };
   },
 )(

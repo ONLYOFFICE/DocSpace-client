@@ -170,6 +170,18 @@ const RoomsItemHeader = ({
     setTemplateAccessSettingsVisible?.(true);
   };
 
+  const onClickAddUser = () => {
+    if (isTemplate) {
+      return onOpenTemplateAccessOptions();
+    }
+
+    onClickInviteUsers();
+  };
+
+  const addUserTitle = isTemplate
+    ? t("Files:AccessSettings")
+    : t("Common:InviteContacts");
+
   const onSearchClick = () => setShowSearchBlock?.(true);
 
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
@@ -213,6 +225,7 @@ const RoomsItemHeader = ({
           tooltipContent={tooltipContent ?? undefined}
           hoverSrc={
             isRoom &&
+            selection?.security &&
             "EditRoom" in selection.security &&
             selection.security?.EditRoom
               ? Camera10ReactSvgUrl
@@ -254,16 +267,10 @@ const RoomsItemHeader = ({
           <IconButton
             id="info_add-user"
             className="icon"
-            title={
-              isTemplate
-                ? t("Files:AccessSettings")
-                : t("Common:InviteContacts")
-            }
+            title={addUserTitle}
             iconName={PersonPlusReactSvgUrl}
             isFill
-            onClick={
-              isTemplate ? onOpenTemplateAccessOptions : onClickInviteUsers
-            }
+            onClick={onClickAddUser}
             size={16}
           />
         ) : null}

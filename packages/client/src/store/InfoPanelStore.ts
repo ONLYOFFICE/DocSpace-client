@@ -24,36 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import {
-  FileType,
-  FolderType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
-import {
-  DEFAULT_CREATE_LINK_SETTINGS,
-  getExpirationDate,
-} from "@docspace/shared/components/share/Share.helpers";
 import { getTemplateAvailable } from "@docspace/shared/api/rooms";
-import {
-  getPrimaryLink,
-  editExternalLink,
-  addExternalLink,
-  getPrimaryLinkIfNotExistCreate,
-} from "@docspace/shared/api/files";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TLogo, TRoom } from "@docspace/shared/api/rooms/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
-import { ShareProps } from "@docspace/shared/components/share/Share.types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { isFolder } from "@docspace/shared/utils/typeGuards";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { getUserType } from "@docspace/shared/utils/common";
+import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
+
+import { showForcedInfoPanelLoader } from "SRC_DIR/helpers/info-panel";
 
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -113,6 +104,10 @@ class InfoPanelStore {
   }
 
   setIsVisible = (visiable: boolean) => {
+    const selectedFolderIsAgentOrFolderInAgent =
+      this.selectedFolderStore?.parentRoomType ||
+      this.selectedFolderStore?.roomType;
+
     const selectedFolderIsRoomOrFolderInRoom =
       this.selectedFolderStore &&
       !this.selectedFolderStore.isRootFolder &&
@@ -133,7 +128,8 @@ class InfoPanelStore {
 
     if (
       (selectedFolderIsRoomOrFolderInRoom ||
-        archivedFolderIsRoomOrFolderInRoom) &&
+        archivedFolderIsRoomOrFolderInRoom ||
+        selectedFolderIsAgentOrFolderInAgent) &&
       isFolderOpenedThroughSectionHeader
     ) {
       this.setView(InfoPanelView.infoMembers);
@@ -191,6 +187,29 @@ class InfoPanelStore {
     this.infoPanelRoom = infoPanelRoom;
   };
 
+  refreshInfoPanel = () => {
+    const selection = this.infoPanelSelection;
+
+    if (!selection || Array.isArray(selection)) return;
+
+    const isRoomSelection = "isRoom" in selection && Boolean(selection.isRoom);
+
+    if (isRoomSelection) {
+      if (
+        this.roomsView === InfoPanelView.infoMembers &&
+        this.infoPanelRoomSelection?.id === selection.id
+      ) {
+        void this.updateInfoPanelMembers();
+      }
+
+      return;
+    }
+
+    if (this.isShareTabActive) {
+      this.setShareChanged(true);
+    }
+  };
+
   openUser = async (user: TCreatedBy) => {
     if (user.id === this.userStore?.user?.id) {
       this.peopleStore.profileActionsStore.onProfileClick();
@@ -205,22 +224,30 @@ class InfoPanelStore {
       fetchedUser.isVisitor ? "/accounts/guests" : "/accounts/people",
     ];
 
-    const defaultFilter = Filter.getDefault();
+    const filter = Filter.getDefault();
+    filter.page = 0;
+    filter.search = fetchedUser.email;
+    filter.selectUserId = fetchedUser.id;
 
-    const newFilter = {
-      ...defaultFilter,
-      page: 0,
-      search: fetchedUser.email,
-      selectUserId: user.id,
-    };
-
-    path.push(`filter?${newFilter.toUrlParams()}`);
+    path.push(`filter?${filter.toUrlParams()}`);
 
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
     this.filesStore.resetSelections();
 
-    window.DocSpace.navigate(combineUrl(...path), { state: { user } });
+    const locale = getCookie(LANGUAGE) || "en";
+
+    fetchedUser.registrationDate = getCorrectDate(
+      locale,
+      fetchedUser?.registrationDate || "",
+    );
+
+    const userRole = { role: getUserType(fetchedUser) };
+    const stateUserItem = { ...fetchedUser, ...userRole };
+
+    window.DocSpace.navigate(combineUrl(...path), {
+      state: { user: toJS(stateUserItem) },
+    });
   };
 
   getInfoPanelItemIcon = (
@@ -232,13 +259,12 @@ class InfoPanelStore {
     const isRoom = "isRoom" in item && item.isRoom;
     const roomType = "roomType" in item && item.roomType;
 
-    const isFolder = "isFolder" in item && item.isFolder;
     const folderType = "type" in item && item.type;
 
     if ((isRoom || roomType) && "logo" in item)
       return item.logo?.cover ? item.logo : item.logo?.medium;
 
-    if (isFolder)
+    if (isFolder(item))
       return this.filesSettingsStore.getIconByFolderType(folderType, size);
 
     const fileExst = "fileExst" in item && item.fileExst;
@@ -305,7 +331,7 @@ class InfoPanelStore {
     this.roomsView =
       view === InfoPanelView.infoShare ? InfoPanelView.infoMembers : view;
     this.fileView =
-      view === InfoPanelView.infoMembers ? InfoPanelView.infoDetails : view;
+      view === InfoPanelView.infoMembers ? InfoPanelView.infoShare : view;
     this.isScrollLocked = false;
   };
 
@@ -316,6 +342,7 @@ class InfoPanelStore {
   // Routing helpers //
 
   getCanDisplay = () => {
+    const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
     const isAccounts =
@@ -323,7 +350,12 @@ class InfoPanelStore {
       getContactsView(window.location) !== false;
     const isGallery = window.location.pathname.includes("form-gallery");
 
-    return isRooms || isFiles || isGallery || isAccounts;
+    return isRooms || isFiles || isGallery || isAccounts || isAIAgent;
+  };
+
+  getIsAIAgent = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return pathname.indexOf("ai-agent") !== -1;
   };
 
   getIsFiles = () => {
@@ -331,7 +363,9 @@ class InfoPanelStore {
     return (
       pathname.indexOf("files") !== -1 ||
       pathname.indexOf("personal") !== -1 ||
-      pathname.indexOf("media") !== -1
+      pathname.indexOf("media") !== -1 ||
+      pathname.indexOf("recent") !== -1 ||
+      pathname.indexOf(SHARED_WITH_ME_PATH) !== -1
     );
   };
 
@@ -347,85 +381,51 @@ class InfoPanelStore {
     return pathname.indexOf("files/trash") !== -1;
   };
 
-  getPrimaryFileLink = async (fileId: number) => {
-    const file = this.filesStore.files.find((item) => item.id === fileId);
+  // getPrimaryFileLink = async (file: TFile) => {
+  //   if (!isFile(file)) return;
 
-    const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
+  //   const { getFileInfo } = this.filesStore;
 
-    if (value && file.isForm) {
-      value.access = ShareAccessRights.Editing;
-    }
+  //   const res = ShareLinkService.getFilePrimaryLink(file);
 
-    if (
-      value &&
-      !file.isForm &&
-      file.fileType === FileType.PDF &&
-      (value.access === ShareAccessRights.Editing ||
-        value.access === ShareAccessRights.FormFilling)
-    ) {
-      value.access = ShareAccessRights.ReadOnly;
-    }
+  //   await getFileInfo(file.id);
 
-    const { getFileInfo } = this.filesStore;
+  //   return res;
+  // };
 
-    const res = await (value
-      ? getPrimaryLinkIfNotExistCreate(
-          fileId,
-          value.access,
-          value.internal,
-          getExpirationDate(value.diffExpirationDate),
-        )
-      : getPrimaryLink(fileId));
+  // getPrimaryFolderLink = async (folder: TFolder) => {
+  //   if (!isFolder(folder)) return;
 
-    await getFileInfo(fileId);
-
-    return res;
-  };
-
-  editFileLink: ShareProps["editFileLink"] = async (
-    fileId,
-    linkId,
-    access,
-    primary,
-    internal,
-    expirationDate,
-  ) => {
-    const { getFileInfo } = this.filesStore;
-
-    const res = await editExternalLink(
-      fileId,
-      linkId,
-      access,
-      primary,
-      internal,
-      expirationDate,
-    );
-    await getFileInfo(fileId);
-    return res;
-  };
-
-  addFileLink: ShareProps["addFileLink"] = async (
-    fileId,
-    access,
-    primary,
-    internal,
-    expirationDate,
-  ) => {
-    const { getFileInfo } = this.filesStore;
-
-    const res = await addExternalLink(
-      fileId,
-      access,
-      primary,
-      internal,
-      expirationDate,
-    );
-    await getFileInfo(fileId);
-    return res;
-  };
+  //   return ShareLinkService.getFolderPrimaryLink(folder);
+  // };
 
   setShareChanged = (shareChanged: boolean) => {
     this.shareChanged = shareChanged;
+  };
+
+  showForcedInfoPanelLoader = (id: string | number) => {
+    if (
+      this.isShareTabActive &&
+      !Array.isArray(this.infoPanelSelection) &&
+      this.infoPanelSelection?.id === id
+    ) {
+      showForcedInfoPanelLoader();
+    }
+  };
+
+  get isShareTabActive(): boolean {
+    return (
+      this.roomsView === InfoPanelView.infoShare ||
+      this.fileView === InfoPanelView.infoShare
+    );
+  }
+
+  inRoom = (): boolean => {
+    return (
+      this.infoPanelSelection !== null &&
+      "navigationPath" in this.infoPanelSelection &&
+      !!this.infoPanelSelection.navigationPath
+    );
   };
 }
 

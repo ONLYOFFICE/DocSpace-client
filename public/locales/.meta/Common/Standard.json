@@ -3,7 +3,7 @@
   "content": "Standard",
   "content_en_sha1_hash": "2dfa66079d9b7229409430972fd5f1567d78a3b6",
   "created_at": "2025-05-19T21:30:49.027Z",
-  "updated_at": "2025-08-04T07:30:01.297Z",
+  "updated_at": "2025-10-14T04:23:10.381Z",
   "comment": {
     "text": "This translation key is used to display the \"Standard\" theme name in a portal settings category. It appears as part of the \"Appearance\" section and is displayed below a button that toggles its visibility.",
     "is_auto": true,
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Standardno' is an adverbial form, while the English word 'Standard' is a noun. A more accurate noun translation would be 'Standard'.",
-          "suggestion": "Standard"
+          "description": "The Slovenian translation 'Standardno' is an adverbial form, while the English 'Standard' is a noun. This translation doesn't accurately convey the meaning of the English term in this context. A more appropriate translation would likely be 'Standard' (as a direct borrowing) or 'Norma' (if referring to a set of rules/guidelines).",
+          "suggestion": "Consider using 'Standard' or 'Norma' depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -177,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian (Cyrillic) translation 'Стандард' is a phonetic transcription of the English word 'Standard' but it is not the officially accepted Serbian term for 'Standard'.",
+          "suggestion": "The correct Serbian (Cyrillic) translation is 'Стандард'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -205,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

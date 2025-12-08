@@ -3,7 +3,7 @@
   "content": "Copy public link",
   "content_en_sha1_hash": "a06b066cea1096a0cf9ea23b4ac87cb7383239a1",
   "created_at": "2025-05-19T21:30:43.800Z",
-  "updated_at": "2025-05-28T09:30:02.248Z",
+  "updated_at": "2025-11-13T07:42:11.106Z",
   "comment": {
     "text": "This translation key is used for a button that copies a public link when clicked. In the context of a file upload process, this link can be shared publicly to provide quick access to the uploaded content. It appears as a primary button in a dialog box, allowing users to easily share their files.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreatedPDFFormDialog/CreatedPDFFormDialog.tsx",
-      "line_number": 78,
-      "context": ") => {\n localStorage.setItem(localKey, event.target.checked.toString());\n };\n \n const description = t(\"PDFFormSuccessfullyCreatedDescription\");\n const primaryButtonLabel = t(\"Common:CopyPublicLink\");\n \n return (\n <ModalDialog\n autoMaxHeight\n visible={visible}",
+      "line_number": 92,
+      "context": "const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {\n localStorage.setItem(localKey, event.target.checked.toString());\n };\n \n const description = t(\"PDFFormSuccessfullyCreatedDescription\");\n const primaryButtonLabel = t(\"Common:CopyPublicLink\");\n \n return (\n <ModalDialog\n autoMaxHeight\n visible={visible}",
       "module": "/packages/client"
     }
   ],

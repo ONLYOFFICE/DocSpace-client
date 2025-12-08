@@ -1,7 +1,5 @@
 {
   "ExternalLink": "බාහිර සබැඳිය",
-  "LinkName": "සබැඳියේ නම",
-  "RoleForLink": "මුද්දරයක් සඳහා භූමිකාව",
   "ShareEmailBody": "ඔබට {{itemName}} ලේඛනයට ප්‍රවේශය ලබා දී ඇත. දැන් ලේඛනය ඇරීමට පහත සබැඳිය ඔබන්න: {{shareLink}}.",
   "ShareEmailSubject": "ඔබට {{itemName}} ලේඛනයට ප්‍රවේශය ලබා දී ඇත"
 }

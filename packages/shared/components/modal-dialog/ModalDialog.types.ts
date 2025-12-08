@@ -58,7 +58,7 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   /** **`MODAL-ONLY`** Sets max-width: auto */
   autoMaxWidth?: boolean;
   /** Callback function when modal is closed */
-  onClose: () => void;
+  onClose: (e?: React.MouseEvent) => void;
   /** Shows loader in body */
   isLoading?: boolean;
   /** Content for the modal header */
@@ -81,6 +81,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   isDoubleFooterLine?: boolean;
   /** Sets the displayed dialog to be closed or open */
   isCloseable?: boolean;
+  /**  Disables closing the modal when the backdrop is clicked */
+  closeOnBackdropClick?: boolean;
   /** Enables embedded mode */
   embedded?: boolean;
   /** Wraps content in form element */
@@ -89,6 +91,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
   /** Removes default padding from body */
   withoutPadding?: boolean;
+  /** Removes default margin from header */
+  withoutHeaderMargin?: boolean;
   /** Hides modal content */
   hideContent?: boolean;
   /** Sets backdrop blur value */
@@ -101,6 +105,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   withBorder?: boolean;
   /** Test id */
   dataTestId?: string;
+
+  scrollbarCreateContext?: boolean;
 };
 
 export type ModalDialogProps = Partial<

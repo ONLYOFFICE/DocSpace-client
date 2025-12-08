@@ -3,7 +3,7 @@
   "content": "Uploading",
   "content_en_sha1_hash": "de27240983ef2f1432e07df25dd609712f69a107",
   "created_at": "2025-05-19T21:30:56.289Z",
-  "updated_at": "2025-05-26T07:57:32.380Z",
+  "updated_at": "2025-10-27T16:14:33.340Z",
   "comment": {
     "text": "This translation key is used to display the state of file upload progress. It appears on an upload panel and changes depending on whether an upload is in progress, completed successfully, or failed. The phrase is translated from \"Uploading\" and should reflect the progress or status of the upload operation.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 281,
+      "line_number": 284,
       "context": "return i18n.t(\"Files:MarkingRead\");\n case deletePermanently:\n return i18n.t(\"Files:DeletingPermanently\");\n case upload:\n if (progress > 0 && progress < 100)\n return i18n.t(\"Files:UploadingProgress\", { progress });\n return i18n.t(\"Files:Uploading\");\n case convert:\n return i18n.t(\"Files:Converting\");\n case deleteVersionFile:\n return i18n.t(\"Files:DeletingVersion\");",
       "module": "/packages/client"
     }

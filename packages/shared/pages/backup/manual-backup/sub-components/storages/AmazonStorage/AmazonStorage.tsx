@@ -71,6 +71,7 @@ interface AmazonStorageProps {
     module?: string,
   ) => void;
   onMakeCopyIntoStorage: () => Promise<void>;
+  isThirdPartyAvailable: boolean;
 }
 
 const AmazonStorage = ({
@@ -92,6 +93,7 @@ const AmazonStorage = ({
   addValueInFormSettings,
   setIsThirdStorageChanged,
   setRequiredFormSettings,
+  isThirdPartyAvailable,
 }: AmazonStorageProps) => {
   useDidMount(() => {
     const basicValues = formNames(storageRegions[0].systemName);
@@ -113,21 +115,23 @@ const AmazonStorage = ({
 
   return (
     <div data-testid="amazon-storage">
-      <AmazonSettings
-        t={t}
-        isLoading={isLoading}
-        formSettings={formSettings}
-        isLoadingData={isLoadingData}
-        defaultRegion={defaultRegion}
-        storageRegions={storageRegions}
-        isNeedFilePath={isNeedFilePath}
-        selectedStorage={selectedStorage}
-        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
-        deleteValueFormSetting={deleteValueFormSetting}
-        addValueInFormSettings={addValueInFormSettings}
-        setIsThirdStorageChanged={setIsThirdStorageChanged}
-        setRequiredFormSettings={setRequiredFormSettings}
-      />
+      {isThirdPartyAvailable ? (
+        <AmazonSettings
+          t={t}
+          isLoading={isLoading}
+          formSettings={formSettings}
+          isLoadingData={isLoadingData}
+          defaultRegion={defaultRegion}
+          storageRegions={storageRegions}
+          isNeedFilePath={isNeedFilePath}
+          selectedStorage={selectedStorage}
+          errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+          deleteValueFormSetting={deleteValueFormSetting}
+          addValueInFormSettings={addValueInFormSettings}
+          setIsThirdStorageChanged={setIsThirdStorageChanged}
+          setRequiredFormSettings={setRequiredFormSettings}
+        />
+      ) : null}
       <div
         className={classNames(
           styles.manualBackupButtons,

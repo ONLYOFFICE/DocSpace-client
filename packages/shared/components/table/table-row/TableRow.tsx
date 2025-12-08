@@ -24,8 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef, useMemo } from "react";
+import React, { useCallback, useRef } from "react";
 import classNames from "classnames";
+import equal from "fast-deep-equal";
 
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import {
@@ -33,12 +34,13 @@ import {
   ContextMenuButtonDisplayType,
 } from "../../context-menu-button";
 import { hasOwnProperty } from "../../../utils/object";
+import { EMPTY_ARRAY } from "../../../constants";
 
 import { TableCell } from "../sub-components/table-cell";
 import { TableRowProps } from "../Table.types";
 import styles from "./TableRow.module.scss";
 
-const TableRow = (props: TableRowProps) => {
+const TableRow = React.memo((props: TableRowProps) => {
   const {
     fileContextClick,
     onHideContextMenu,
@@ -59,30 +61,33 @@ const TableRow = (props: TableRowProps) => {
     onClick,
     onDoubleClick,
     contextMenuCellStyle,
-    dataTestId,
+    dataTestId = "table-row",
     contextMenuTestId,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
   const row = useRef<HTMLDivElement | null>(null);
 
-  const onContextMenu = (e: React.MouseEvent) => {
-    fileContextClick?.(e.button === 2);
-    if (cm.current && !cm.current?.menuRef.current) {
-      row.current?.click();
-    }
-    if (cm.current) cm.current.show(e);
-  };
+  const onContextMenu = useCallback(
+    (e: React.MouseEvent) => {
+      fileContextClick?.(e.button === 2);
+      if (cm.current && !cm.current?.menuRef.current) {
+        row.current?.click();
+      }
+      if (cm.current) cm.current.show(e);
+    },
+    [cm, fileContextClick, row],
+  );
 
   const renderContext =
     hasOwnProperty(props, "contextOptions") &&
     contextOptions &&
     contextOptions.length > 0;
 
-  const getOptions = () => {
+  const getOptions = useCallback(() => {
     fileContextClick?.();
-    return contextOptions || [];
-  };
+    return contextOptions || EMPTY_ARRAY;
+  }, [fileContextClick, contextOptions]);
 
   const tableRowClasses = classNames(
     styles.tableRow,
@@ -106,7 +111,7 @@ const TableRow = (props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      data-testid={dataTestId}
+      data-testid={dataTestId ?? "table-row"}
     >
       {children}
       {isIndexEditingMode ? null : (
@@ -150,6 +155,6 @@ const TableRow = (props: TableRowProps) => {
       )}
     </div>
   );
-};
+}, equal);
 
 export { TableRow };

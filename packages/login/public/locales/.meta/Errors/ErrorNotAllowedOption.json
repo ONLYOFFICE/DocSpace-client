@@ -3,7 +3,7 @@
   "content": "Your pricing plan does not support this option",
   "content_en_sha1_hash": "300c26d4ea30766ea193fca2701f28e5f7e91156",
   "created_at": "2025-05-19T21:30:57.284Z",
-  "updated_at": "2025-05-26T07:57:32.884Z",
+  "updated_at": "2025-09-07T07:53:15.427Z",
   "comment": {
     "text": "This translation key displays an error message indicating that a specific option is not allowed on the user's pricing plan. It appears in a login process related to SSO settings and is displayed when an invalid or unsupported option is chosen. The goal is to inform users of their pricing limitations.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 90,
+      "line_number": 91,
       "context": "case \"InvalidUsernameOrPassword\":\n return t(\"Errors:InvalidUsernameOrPassword\");\n case \"SsoSettingsDisabled\":\n return t(\"Errors:SsoSettingsDisabled\");\n case \"ErrorNotAllowedOption\":\n return t(\"Errors:ErrorNotAllowedOption\");\n case \"SsoSettingsEmptyToken\":\n return t(\"Errors:SsoSettingsEmptyToken\");\n case \"SsoSettingsNotValidToken\":\n return t(\"Errors:SsoSettingsNotValidToken\");\n case \"SsoSettingsCantCreateUser\":",
       "module": "/packages/login"
     }

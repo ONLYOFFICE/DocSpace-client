@@ -3,7 +3,7 @@
   "content": "members: {{count}}",
   "content_en_sha1_hash": "6cf3172711c139cbfb9cbe7c811d95b0ae2e47e7",
   "created_at": "2025-05-19T21:30:53.482Z",
-  "updated_at": "2025-08-12T19:46:26.022Z",
+  "updated_at": "2025-08-21T11:22:39.845Z",
   "comment": {
     "text": "This translation key displays the number of members for a specific group. It is used to populate a dynamic count in various UI elements throughout the application, including an info panel and row views in a contacts body section. Translators should provide a value that represents the total number of people in the specified group.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Groups/RowView/GroupsRow.tsx",
-      "line_number": 159,
-      "context": "fontSize=\"15px\"\n lineHeight=\"20px\"\n isTextOverflow\n onClick={onOpenGroup}\n >\n {t(\"PeopleTranslations:MembersCount\", {\n count: item.membersCount,\n })}\n </Link>\n </GroupsRowContent>\n </GroupsRow>",
+      "line_number": 162,
+      "context": "lineHeight=\"20px\"\n isTextOverflow\n onClick={onOpenGroup}\n dataTestId={`contacts_groups_members_count_link_${itemIndex}`}\n >\n {t(\"PeopleTranslations:MembersCount\", {\n count: item.membersCount,\n })}\n </Link>\n </GroupsRowContent>\n </GroupsRow>",
       "module": "/packages/client"
     }
   ],

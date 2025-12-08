@@ -34,7 +34,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 
 import api from "@docspace/shared/api";
-import { EmployeeType } from "@docspace/shared/enums";
+import { EmployeeActivationStatus, EmployeeType } from "@docspace/shared/enums";
 import Body from "./sub-components/Body";
 import Footer from "./sub-components/Footer";
 
@@ -197,6 +197,7 @@ const DataReassignmentDialog = ({
 
   const filter = Filter.getDefault();
   filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+  filter.employeeStatus = EmployeeActivationStatus.Activated;
 
   if (selectorVisible) {
     return (

@@ -51,7 +51,7 @@ const fillAvailableWidth = css`
   width: 100%;
   width: -moz-available;
   width: -webkit-fill-available;
-  width: fill-available;
+  width: stretch;
 `;
 
 const StyledInvitePanel = styled.div`

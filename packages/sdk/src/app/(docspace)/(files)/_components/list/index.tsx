@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { observer } from "mobx-react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -62,6 +62,7 @@ const List = ({
   const timezone = portalSettings.timezone;
   const displayFileExtension = filesSettings.displayFileExtension;
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const { setIsEmptyList, filesViewAs } = useSettingsStore();
   const { setItems } = useFilesListStore();
@@ -81,6 +82,7 @@ const List = ({
   const [filter, setFilter] = React.useState<FilesFilter>(
     FilesFilter.getFilter({
       search: `?${filesFilter}`,
+      pathname,
     } as Location)!,
   );
   const [filesList, setFilesList] = React.useState<(TFolderItem | TFileItem)[]>(

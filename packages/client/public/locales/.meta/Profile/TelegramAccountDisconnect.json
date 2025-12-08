@@ -1,0 +1,28 @@
+{
+  "key_path": "TelegramAccountDisconnect",
+  "content": "Disconnect Telegram",
+  "content_en_sha1_hash": "67950bc2ada8b4276e4189d5534e4bbc62e01802",
+  "created_at": "2025-09-10T09:59:16.170Z",
+  "updated_at": "2025-09-26T15:21:06.156Z",
+  "comment": {
+    "text": "This key is used for the title of a dialog box that allows a user to disconnect their Telegram account. It appears in the header of the disconnect account dialog, guiding the user on the action they are about to take. Translators should ensure the translation accurately conveys the action of disconnecting.",
+    "is_auto": true,
+    "updated_at": "2025-09-10T10:02:08.731Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisconnectAccountDialog/index.tsx",
+      "line_number": 77,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"Profile:TelegramAccountDisconnect\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Profile:TelegramAccountDisconnectDescription\", {\n username,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

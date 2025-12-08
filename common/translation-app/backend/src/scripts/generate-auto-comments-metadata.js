@@ -17,6 +17,8 @@ const {
 const axios = require("axios");
 
 const MODEL = process.env.OLLAMA_MODEL || "gemma3:12b";
+const REQUEST_TIMEOUT_MS =
+  Number.parseInt(process.env.OLLAMA_TIMEOUT_MS, 10) || 90000; // default 90s timeout
 
 /**
  * Checks if Ollama is running and available
@@ -117,7 +119,7 @@ Based on this information, please write a short, clear description of what this 
           stream: false,
         },
         {
-          timeout: 30000, // 30 second timeout
+          timeout: REQUEST_TIMEOUT_MS,
           headers: {
             "Content-Type": "application/json",
           },

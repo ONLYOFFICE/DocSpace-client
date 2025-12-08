@@ -3,7 +3,7 @@
   "content": "Save the file copy in the original format",
   "content_en_sha1_hash": "64de7dd97e573eef13f21dc0a7909949a67ea43a",
   "created_at": "2025-05-19T21:30:56.892Z",
-  "updated_at": "2025-06-02T10:20:51.101Z",
+  "updated_at": "2025-09-23T07:24:24.080Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to save a file copy in its original format when converting files. The text appears on a modal dialog footer.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 195,
+      "line_number": 196,
       "context": "<ModalDialog.Footer>\n <StyledFooterContent className=\"convert_dialog_footer\">\n <div className=\"convert_dialog_checkboxes\">\n <Checkbox\n className=\"convert_dialog_checkbox\"\n label={t(\"SaveOriginalFormatMessage\")}\n isChecked={storeOriginalFiles}\n onChange={onChangeFormat}\n />\n {convertSingleFile && sortedFolder ? (\n <div",
       "module": "/packages/client"
     }

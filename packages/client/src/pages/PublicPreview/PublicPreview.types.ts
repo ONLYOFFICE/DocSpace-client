@@ -1,6 +1,15 @@
-export interface PublicPreviewProps {
-  getFilesSettings?: TStore["filesSettingsStore"]["getFilesSettings"];
-  getIcon?: TStore["filesSettingsStore"]["getIcon"];
-  extsImagePreviewed?: TStore["filesSettingsStore"]["extsImagePreviewed"];
-  openUrl?: TStore["settingsStore"]["openUrl"];
+import type { TFilesSettings } from "@docspace/shared/api/files/types";
+import type { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
+
+export interface PublicPreviewViewerProps {
+  extsImagePreviewed: string[];
+
+  openUrl: TStore["settingsStore"]["openUrl"];
+  getIcon: (size: number, fileExst: string) => string;
+}
+
+export interface PublicPreviewLoaderProps {
+  key: string;
+  settings: TFilesSettings;
+  validateData: TValidateShareRoom;
 }

@@ -38,9 +38,10 @@ import { Text } from "@docspace/shared/components/text";
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryType } from "@docspace/shared/utils/common";
 
-import { getCategoryUrl, getCategoryType } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const OptionsComponent = (props) => {
   const { onCreate, t, linkStyles } = props;

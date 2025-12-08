@@ -23,14 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import TopLoaderService from "./index";
 
 describe("TopLoaderService", () => {
   let mockElement: HTMLElement;
 
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     // Create and style the element
     mockElement = document.createElement("div");
     mockElement.id = "ipl-progress-indicator";
@@ -50,8 +50,8 @@ describe("TopLoaderService", () => {
 
   afterEach(() => {
     document.body.removeChild(mockElement);
-    jest.clearAllTimers();
-    jest.useRealTimers();
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 
   it("should initialize loading with proper attributes", () => {

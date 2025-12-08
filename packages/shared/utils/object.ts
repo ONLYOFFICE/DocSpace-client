@@ -28,8 +28,9 @@ export const hasOwnProperty = (obj: unknown, propertyName: string): boolean => {
   if (!obj) return false;
 
   try {
+    // biome-ignore lint/suspicious/noPrototypeBuiltins: TODO fix
     return Object.prototype.hasOwnProperty.call(obj, propertyName);
-  } catch (error) {
+  } catch {
     return false;
   }
 };

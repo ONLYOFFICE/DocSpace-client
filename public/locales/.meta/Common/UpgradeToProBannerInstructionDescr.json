@@ -3,7 +3,7 @@
   "content": "Use the official documentation to upgrade:",
   "content_en_sha1_hash": "543e777ff5b1b9ec51febc46ab0a1b341669aea6",
   "created_at": "2025-05-26T07:15:49.164Z",
-  "updated_at": "2025-05-26T08:02:33.791Z",
+  "updated_at": "2025-10-13T22:35:29.660Z",
   "comment": {
     "text": "This translation key is used to provide a brief instruction on how to upgrade to a professional plan, likely appearing as a tooltip or inline message in a UI element such as a button. The text should encourage users to refer to official documentation for further instructions.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Benutzen Sie die offizielle Dokumentation für das Upgrade:' is not the most natural or idiomatic way to say 'Use the official documentation to upgrade:' in German. 'Benutzen' is somewhat formal and 'für das Upgrade' sounds slightly awkward. A more natural phrasing would be something like 'Verwenden Sie die offizielle Dokumentation für das Upgrade' or 'Nutzen Sie die offizielle Dokumentation für das Upgrade'.",
+          "suggestion": "Verwenden Sie die offizielle Dokumentation für das Upgrade"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Թարմացնելու համար օգտագործեք պաշտոնական փաստաթղթերը՝' is a literal translation but could be more natural in Armenian. 'Use the official documentation to upgrade' implies a direct action of upgrading *by using* the documentation. The current translation focuses on 'using' the documents rather than upgrading *with* them.",
+          "suggestion": "Consider a more fluent translation like 'Օգտագործեք պաշտոնական փաստաթղթերը՝ թարմացնելու համար:' or 'Թարմացնելու համար դիմեք պաշտոնական փաստաթղթերին:''"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"アップグレードには公式ドキュメントを使用します:\" is technically correct but sounds slightly unnatural in Japanese. A more natural phrasing would imply a directive or recommendation rather than simply stating a fact. The colon at the end also seems unnecessary and slightly awkward.",
+          "suggestion": "アップグレードは公式ドキュメントを参照してください。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'උත්ශ්‍රේණිය සඳහා නිල ප්‍රලේඛනය භාවිතා කරන්න:' is a literal translation and could be improved for naturalness in Sinhala. A more common phrasing for 'Upgrade to Pro' would involve emphasizing the benefit or action being taken.",
+          "suggestion": "Consider alternatives like 'ඔබේ ක්‍රීඩාංගනය වැඩිදියුණු කිරීම සඳහා නිල ප්‍රලේඛනය භාවිතා කරන්න:' (Use the official documentation to improve your game) or 'ප්‍රෝ වෙත යවන්න, නිල ප්‍රලේඛනය භාවිතා කරන්න:' (Go Pro, use the official documentation)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -202,6 +226,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Upgrade to Pro\" implies a move to a paid or higher-tier version. \"Përmirësuar\" (to improve) doesn't accurately convey this. It suggests a general enhancement rather than an upgrade to a specific version.",
+          "suggestion": "Consider alternatives like \"Kaloni në versionin Pro\" (Move to the Pro version) or \"Hidheni gradën në Pro\" (Upgrade to Pro) depending on the specific nuance desired. A more accurate translation would reflect the promotional/sales intent of the original."
+        }
+      ],
       "approved_at": null
     }
   }

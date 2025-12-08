@@ -32,7 +32,7 @@ import { CircleSkeletonProps } from "./Circle.types";
 
 export type { CircleSkeletonProps };
 
-const CircleSkeleton = ({
+export const CircleSkeleton = ({
   title = LOADER_STYLE.title,
   x = "3",
   y = "12",
@@ -64,4 +64,4 @@ const CircleSkeleton = ({
   </ContentLoader>
 );
 
-export { CircleSkeleton };
+

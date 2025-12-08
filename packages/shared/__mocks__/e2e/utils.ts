@@ -42,6 +42,7 @@ export const HEADER_TRAFF_LIMIT = "x-test-data-traff-limit";
 export const HEADER_USER_EXISTED = "x-test-data-user-existed";
 export const HEADER_USER_EXCLUDED = "x-test-data-user-excluded";
 export const HEADER_QUOTA_FAILED = "x-test-data-quota-failed";
+export const HEADER_CONFIRM_WITHOUT_EMAIL = "x-test-data-confirm-without-email";
 
 export const HEADER_LIST_CAPABILITIES = "x-test-list-capabilities";
 
@@ -62,3 +63,13 @@ export const HEADER_FILTERED_FOLDER = "x-test-data-filtered-folder";
 
 export const HEADER_AUTHENTICATED_SETTINGS =
   "x-test-data-authenticated-settings";
+
+export const HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS =
+  "x-test-data-authenticated-with-socket-settings";
+
+export const HEADER_ENABLED_JOIN_SETTINGS = "x-test-data-enabled-join-settings";
+
+export const HEADER_ENABLE_ADM_MESS_SETTINGS =
+  "x-test-data-enable-adm-mess-settings";
+
+export const HEADER_HCAPTCHA_SETTINGS = "x-test-data-hcaptcha-settings";

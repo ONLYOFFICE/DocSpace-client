@@ -35,8 +35,8 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { toastr } from "@docspace/shared/components/toast";
-import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
 
@@ -46,14 +46,14 @@ const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
 
 const DocumentService = ({
-  getDocumentServiceLocation,
   changeDocumentServiceLocation,
   currentColorScheme,
   integrationSettingsUrl,
+  initialDocumentServiceData,
+  showPortalSettingsLoader,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
-  const [isLoading, setIsLoading] = useState(true);
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
 
@@ -83,29 +83,27 @@ const DocumentService = ({
 
   useEffect(() => {
     setDocumentTitle(t("DocumentService"));
-    setIsLoading(true);
-    getDocumentServiceLocation()
-      .then((result) => {
-        setIsDefaultSettings(result?.isDefault || false);
-        setPortalUrl(result?.docServicePortalUrl);
-        setSecretKey(result?.docServiceSignatureSecret);
-        setAuthHeader(result?.docServiceSignatureHeader);
-        setInternalUrl(result?.docServiceUrlInternal);
-        setDocServiceUrl(result?.docServiceUrl);
-        setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+  }, [t]);
 
-        setInitPortalUrl(result?.docServicePortalUrl);
-        setInitSecretKey(result?.docServiceSignatureSecret);
-        setInitAuthHeader(result?.docServiceSignatureHeader);
-        setInitDocServiceUrl(result?.docServiceUrl);
-        setInitInternalUrl(result?.docServiceUrlInternal);
-        setInitIsDisabledCertificat(
-          !result?.docServiceSslVerification || false,
-        );
-      })
-      .catch((error) => toastr.error(error))
-      .finally(() => setIsLoading(false));
-  }, []);
+  useEffect(() => {
+    if (initialDocumentServiceData) {
+      const result = initialDocumentServiceData;
+      setIsDefaultSettings(result?.isDefault || false);
+      setPortalUrl(result?.docServicePortalUrl);
+      setSecretKey(result?.docServiceSignatureSecret);
+      setAuthHeader(result?.docServiceSignatureHeader);
+      setInternalUrl(result?.docServiceUrlInternal);
+      setDocServiceUrl(result?.docServiceUrl);
+      setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+
+      setInitPortalUrl(result?.docServicePortalUrl);
+      setInitSecretKey(result?.docServiceSignatureSecret);
+      setInitAuthHeader(result?.docServiceSignatureHeader);
+      setInitDocServiceUrl(result?.docServiceUrl);
+      setInitInternalUrl(result?.docServiceUrlInternal);
+      setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
+    }
+  }, [initialDocumentServiceData]);
 
   const onChangeDocServiceUrl = (e) => {
     setDocServiceUrl(e.target.value);
@@ -221,14 +219,14 @@ const DocumentService = ({
     portalUrl == initPortalUrl &&
     isDisabledCertificat == initIsDisabledCertificat;
 
-  if (isLoading || !ready) return <SettingsDSConnectSkeleton />;
-
   const saveButtonDisabled =
     isFormEmpty ||
     isValuesInit ||
     !allInputsValid ||
     isSaveLoading ||
     isResetLoading;
+
+  if (showPortalSettingsLoader || !ready) return <SettingsDSConnectSkeleton />;
 
   return (
     <Styled.Location>
@@ -432,16 +430,23 @@ const DocumentService = ({
   );
 };
 
-export default inject(({ settingsStore, filesSettingsStore }) => {
-  const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
-    settingsStore;
-  const { getDocumentServiceLocation, changeDocumentServiceLocation } =
-    filesSettingsStore;
-  return {
-    getDocumentServiceLocation,
-    changeDocumentServiceLocation,
-    currentColorScheme,
-    integrationSettingsUrl,
-    currentDeviceType,
-  };
-})(observer(DocumentService));
+export default inject(
+  ({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
+    const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
+      settingsStore;
+    const {
+      changeDocumentServiceLocation,
+      documentServiceLocation: initialDocumentServiceData,
+    } = filesSettingsStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
+    return {
+      changeDocumentServiceLocation,
+      currentColorScheme,
+      integrationSettingsUrl,
+      currentDeviceType,
+      showPortalSettingsLoader,
+      initialDocumentServiceData,
+    };
+  },
+)(observer(DocumentService));

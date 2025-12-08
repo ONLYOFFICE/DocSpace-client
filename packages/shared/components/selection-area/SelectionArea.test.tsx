@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
-import { screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, render } from "@testing-library/react";
 
 import { TViewAs } from "../../types";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 import { SelectionArea } from ".";
 
-const mockOnMove = jest.fn();
+const mockOnMove = vi.fn();
 
 const defaultProps = {
   containerClass: "container-class",
@@ -41,12 +39,12 @@ const defaultProps = {
 };
 
 const renderComponent = (props = {}) => {
-  return renderWithTheme(<SelectionArea {...defaultProps} {...props} />);
+  return render(<SelectionArea {...defaultProps} {...props} />);
 };
 
 describe("SelectionArea", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without crashing", () => {

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 const SHOW_LOADER_TIMER = 500;
 const MIN_LOADER_TIMER = 500;
@@ -46,6 +47,10 @@ class ClientLoadingStore {
   isArticleLoading: boolean = true;
 
   isProfileLoaded: boolean = false;
+
+  isPortalSettingsLoading: boolean = true;
+
+  settingsStore: SettingsStore | null = null;
 
   loaderStates: Record<SectionType, LoaderState> = {
     header: {
@@ -76,9 +81,11 @@ class ClientLoadingStore {
 
   isChangePageRequestRunning = false;
 
-  currentClientView: "users" | "groups" | "files" | "profile" | "" = "";
+  currentClientView: "users" | "groups" | "files" | "chat" | "profile" | "" =
+    "";
 
-  constructor() {
+  constructor(settingsStore: SettingsStore) {
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
@@ -86,8 +93,12 @@ class ClientLoadingStore {
     this.isChangePageRequestRunning = isChangePageRequestRunning;
   };
 
+  setIsPortalSettingsLoading = (isPortalSettingsLoading: boolean) => {
+    this.isPortalSettingsLoading = isPortalSettingsLoading;
+  };
+
   setCurrentClientView = (
-    currentClientView: "users" | "groups" | "files" | "profile" | "",
+    currentClientView: ClientLoadingStore["currentClientView"],
   ) => {
     this.currentClientView = currentClientView;
   };
@@ -231,7 +242,7 @@ class ClientLoadingStore {
     withTimer: boolean = true,
   ) => {
     return;
-    this.setIsLoading("body", isSectionBodyLoading, withTimer);
+    //this.setIsLoading("body", isSectionBodyLoading, withTimer);
   };
 
   get isLoading() {
@@ -266,6 +277,10 @@ class ClientLoadingStore {
 
   get showProfileLoader(): boolean {
     return this.showHeaderLoader || !this.isProfileLoaded;
+  }
+
+  get showPortalSettingsLoader(): boolean {
+    return this.isPortalSettingsLoading;
   }
 }
 

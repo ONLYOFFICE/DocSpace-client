@@ -54,7 +54,7 @@ const SyncContainer = ({
   isUIDisabled,
   isLdapAvailable,
 }) => {
-  const { t } = useTranslation(["Ldap", "Common", "Settings"]);
+  const { t, ready } = useTranslation(["Ldap", "Common", "Settings"]);
   const navigate = useNavigate();
 
   const onCheckView = () => {
@@ -117,7 +117,7 @@ const SyncContainer = ({
         onClick={onSync}
         label={t("LdapSyncButton")}
         isDisabled={!isLdapEnabledOnServer || isUIDisabled}
-        dataTestId="manual_sync_button"
+        testId="manual_sync_button"
       />
 
       <ProgressContainer operation={LDAPOperation.Sync} />
@@ -161,12 +161,14 @@ const SyncContainer = ({
             isDisabled={
               !isLdapEnabledOnServer || isUIDisabled || cron === serverCron
             }
-            dataTestId="auto_sync_save_button"
+            testId="auto_sync_save_button"
           />
         </>
       ) : null}
     </div>
   );
+
+  if (!ready) return null;
 
   if (isMobileView) {
     return (

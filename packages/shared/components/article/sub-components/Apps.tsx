@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -51,7 +50,6 @@ const ArticleApps = React.memo(
     officeforiosUrl,
   }: ArticleAppsProps) => {
     const { t } = useTranslation(["Translations", "Common"]);
-    const theme = useTheme();
 
     if (!showText) return null;
 
@@ -75,11 +73,11 @@ const ArticleApps = React.memo(
         <div className="download-app-list">
           {downloaddesktopUrl ? (
             <IconButton
+              className={styles.windowsIcon}
               onClick={() => window.open(downloaddesktopUrl)}
               iconName={WindowsReactSvgUrl}
               size={32}
               isFill
-              hoverColor={theme.filesArticleBody.downloadAppList.winHoverColor}
               title={t("Common:MobileWin", {
                 organizationName: logoText,
               })}
@@ -88,11 +86,11 @@ const ArticleApps = React.memo(
 
           {downloaddesktopUrl ? (
             <IconButton
+              className={styles.macOsIcon}
               onClick={() => window.open(downloaddesktopUrl)}
               iconName={MacOSReactSvgUrl}
               size={32}
               isFill
-              hoverColor={theme.filesArticleBody.downloadAppList.macHoverColor}
               title={t("Common:MobileMac", {
                 organizationName: logoText,
               })}
@@ -101,13 +99,11 @@ const ArticleApps = React.memo(
 
           {downloaddesktopUrl ? (
             <IconButton
+              className={styles.linuxIcon}
               onClick={() => window.open(downloaddesktopUrl)}
               iconName={LinuxReactSvgUrl}
               size={32}
               isFill
-              hoverColor={
-                theme.filesArticleBody.downloadAppList.linuxHoverColor
-              }
               title={t("Common:MobileLinux", {
                 organizationName: logoText,
               })}
@@ -116,13 +112,11 @@ const ArticleApps = React.memo(
 
           {officeforandroidUrl ? (
             <IconButton
+              className={styles.androidIcon}
               onClick={() => window.open(officeforandroidUrl)}
               iconName={AndroidReactSvgUrl}
               size={32}
               isFill
-              hoverColor={
-                theme.filesArticleBody.downloadAppList.androidHoverColor
-              }
               title={t("Common:MobileAndroid", {
                 organizationName: logoText,
               })}
@@ -131,11 +125,11 @@ const ArticleApps = React.memo(
 
           {officeforiosUrl ? (
             <IconButton
+              className={styles.iosIcon}
               onClick={() => window.open(officeforiosUrl)}
               iconName={IOSReactSvgUrl}
               size={32}
               isFill
-              hoverColor={theme.filesArticleBody.downloadAppList.iosHoverColor}
               title={t("Common:MobileIos", {
                 organizationName: logoText,
               })}

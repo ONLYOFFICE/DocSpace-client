@@ -1,5 +1,3 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
@@ -27,14 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { InputSize } from "../text-input";
 import type { EmailInputProps } from "./EmailInput.types";
 import { EmailInput } from ".";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 const defaultProps: EmailInputProps = {
   id: "emailInputId",
@@ -46,35 +43,35 @@ const defaultProps: EmailInputProps = {
   isReadOnly: false,
   maxLength: 255,
   placeholder: "Enter email",
-  onChange: jest.fn(),
-  onValidateInput: jest.fn(),
-  handleAnimationStart: jest.fn(),
-  onBlur: jest.fn(),
-  testId: "email-input",
+  onChange: vi.fn(),
+  onValidateInput: vi.fn(),
+  handleAnimationStart: vi.fn(),
+  onBlur: vi.fn(),
+  dataTestId: "email-input",
 };
 
 describe("<EmailInput />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("renders without error", () => {
-    renderWithTheme(<EmailInput {...defaultProps} />);
+    render(<EmailInput {...defaultProps} />);
     expect(screen.getByTestId("email-input")).toBeInTheDocument();
   });
 
   it("renders with initial invalid value", () => {
     const email = "invalid-email";
-    renderWithTheme(<EmailInput {...defaultProps} value={email} />);
+    render(<EmailInput {...defaultProps} value={email} />);
     const input = screen.getByTestId("email-input");
     expect(input).toHaveValue(email);
   });
 
   it("handles input value changes", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
-    const onValidateInput = jest.fn();
-    renderWithTheme(
+    const onChange = vi.fn();
+    const onValidateInput = vi.fn();
+    render(
       <EmailInput
         {...defaultProps}
         onChange={onChange}
@@ -94,10 +91,8 @@ describe("<EmailInput />", () => {
 
   it("validates correct email formats", async () => {
     const user = userEvent.setup();
-    const onValidateInput = jest.fn();
-    renderWithTheme(
-      <EmailInput {...defaultProps} onValidateInput={onValidateInput} />,
-    );
+    const onValidateInput = vi.fn();
+    render(<EmailInput {...defaultProps} onValidateInput={onValidateInput} />);
 
     const validEmails = [
       "simple@example.com",
@@ -122,10 +117,8 @@ describe("<EmailInput />", () => {
 
   it("validates incorrect email formats", async () => {
     const user = userEvent.setup();
-    const onValidateInput = jest.fn();
-    renderWithTheme(
-      <EmailInput {...defaultProps} onValidateInput={onValidateInput} />,
-    );
+    const onValidateInput = vi.fn();
+    render(<EmailInput {...defaultProps} onValidateInput={onValidateInput} />);
 
     const invalidEmails = [
       "Abc.example.com",
@@ -155,8 +148,8 @@ describe("<EmailInput />", () => {
       errors: [],
     });
 
-    const onValidateInput = jest.fn();
-    renderWithTheme(
+    const onValidateInput = vi.fn();
+    render(
       <EmailInput
         {...defaultProps}
         customValidate={customValidate}
@@ -183,20 +176,20 @@ describe("<EmailInput />", () => {
   });
 
   it("handles disabled state", () => {
-    renderWithTheme(<EmailInput {...defaultProps} isDisabled />);
+    render(<EmailInput {...defaultProps} isDisabled />);
     expect(screen.getByTestId("email-input")).toBeDisabled();
   });
 
   it("handles readonly state", () => {
-    renderWithTheme(<EmailInput {...defaultProps} isReadOnly />);
+    render(<EmailInput {...defaultProps} isReadOnly />);
     expect(screen.getByTestId("email-input")).toHaveAttribute("readonly");
   });
 
   it("handles blur events", async () => {
     const user = userEvent.setup();
-    const onBlur = jest.fn();
-    const onValidateInput = jest.fn();
-    renderWithTheme(
+    const onBlur = vi.fn();
+    const onValidateInput = vi.fn();
+    render(
       <EmailInput
         {...defaultProps}
         onBlur={onBlur}
@@ -212,7 +205,7 @@ describe("<EmailInput />", () => {
   });
 
   it("respects maxLength prop", () => {
-    renderWithTheme(<EmailInput {...defaultProps} maxLength={10} />);
+    render(<EmailInput {...defaultProps} maxLength={10} />);
     expect(screen.getByTestId("email-input")).toHaveAttribute(
       "maxLength",
       "10",
@@ -220,8 +213,8 @@ describe("<EmailInput />", () => {
   });
 
   it("validates empty value", () => {
-    const onValidateInput = jest.fn();
-    renderWithTheme(
+    const onValidateInput = vi.fn();
+    render(
       <EmailInput
         {...defaultProps}
         value=""
@@ -232,9 +225,9 @@ describe("<EmailInput />", () => {
   });
 
   it("validates initial value on mount", () => {
-    const onValidateInput = jest.fn();
+    const onValidateInput = vi.fn();
     const email = "test@example.com";
-    renderWithTheme(
+    render(
       <EmailInput
         {...defaultProps}
         value={email}
@@ -246,11 +239,11 @@ describe("<EmailInput />", () => {
 
   it("handles maxLength boundary", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const maxLength = 10;
     const testString = "a".repeat(maxLength + 5);
 
-    renderWithTheme(
+    render(
       <EmailInput
         {...defaultProps}
         maxLength={maxLength}

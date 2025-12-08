@@ -30,6 +30,8 @@ import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 
+import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
+
 import { Text } from "../../../../../components/text";
 import { ComboBox } from "../../../../../components/combobox";
 import { DropDownItem } from "../../../../../components/drop-down-item";
@@ -51,6 +53,7 @@ import { SelectelStorage } from "../storages/SelectelStorage";
 import { AmazonStorage } from "../storages/AmazonStorage";
 
 import styles from "../../ManualBackup.module.scss";
+import NoteComponent from "../../../sub-components/NoteComponent";
 
 const DefaultParameters = {
   comboBoxOptions: [],
@@ -64,6 +67,8 @@ interface ThirdPartyStorageModuleProps {
   isNeedFilePath: boolean;
   isMaxProgress: boolean;
   buttonSize?: ButtonSize;
+  isBackupPaid?: boolean;
+  isFreeBackupsLimitReached?: boolean;
   thirdPartyStorage: SelectedStorageType[];
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
@@ -85,6 +90,7 @@ interface ThirdPartyStorageModuleProps {
   addValueInFormSettings: (name: string, value: string) => void;
   setRequiredFormSettings: (arr: string[]) => void;
   setIsThirdStorageChanged: (changed: boolean) => void;
+  isThirdPartyAvailable: boolean;
 }
 
 const ThirdPartyStorageModule = ({
@@ -104,6 +110,9 @@ const ThirdPartyStorageModule = ({
   deleteValueFormSetting,
   setRequiredFormSettings,
   setIsThirdStorageChanged,
+  isThirdPartyAvailable,
+  isBackupPaid,
+  isFreeBackupsLimitReached,
 }: ThirdPartyStorageModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -180,6 +189,7 @@ const ThirdPartyStorageModule = ({
     addValueInFormSettings,
     setRequiredFormSettings,
     setIsThirdStorageChanged,
+    isThirdPartyAvailable,
   };
 
   const advancedOptions = (
@@ -237,6 +247,16 @@ const ThirdPartyStorageModule = ({
           "manual-backup_storages-module",
         )}
       >
+        {!isThirdPartyAvailable ? (
+          <div
+            className={styles.notAvailable}
+            data-testid="third-party-storage-not-available"
+          >
+            <LockedReactSvg />
+            <Text>{t("Common:NotIncludedInYourCurrentPlan")}</Text>
+          </div>
+        ) : null}
+
         <ComboBox
           options={[]}
           displayArrow
@@ -278,6 +298,9 @@ const ThirdPartyStorageModule = ({
           />
         ) : null}
       </div>
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+      />
     </div>
   );
 };

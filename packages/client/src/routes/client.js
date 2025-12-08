@@ -28,8 +28,10 @@ import { Navigate } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
 import Error404 from "@docspace/shared/components/errors/Error404";
+import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
+import { publicPreviewLoader } from "SRC_DIR/pages/PublicPreview/PublicPreview.helpers";
 import { StartPageRedirect } from "SRC_DIR/pages/Home/StartPageRedirect";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
@@ -37,8 +39,11 @@ import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
-import { contanctsRoutes } from "./contacts";
+import { contactsRoutes } from "./contacts";
 
+/**
+ * @type {import("react-router").RouteObject[]}
+ */
 const ClientRoutes = [
   {
     path: "/",
@@ -116,6 +121,78 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "ai-agents",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent/chat",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:agent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: SHARED_WITH_ME_PATH,
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: SHARED_WITH_ME_PATH + "/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "files/trash",
             element: (
               <PrivateRoute>
@@ -125,6 +202,22 @@ const ClientRoutes = [
           },
           {
             path: "files/trash/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "files/favorite",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "files/favorite/filter",
             element: (
               <PrivateRoute>
                 <ViewComponent />
@@ -236,7 +329,7 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
-          ...contanctsRoutes,
+          ...contactsRoutes,
           ...profileClientRoutes,
         ],
       },
@@ -274,6 +367,7 @@ const ClientRoutes = [
       return { Component };
     },
   },
+
   {
     path: "/form-gallery/:fromFolderId",
     async lazy() {
@@ -313,20 +407,21 @@ const ClientRoutes = [
   {
     path: "/share/preview/:id",
     async lazy() {
-      const { WrappedComponent } = await componentLoader(
+      const { PublicPreview } = await componentLoader(
         () => import("SRC_DIR/pages/PublicPreview/PublicPreview"),
       );
 
       const Component = () => (
         <PublicRoute>
           <ErrorBoundary>
-            <WrappedComponent />
+            <PublicPreview />
           </ErrorBoundary>
         </PublicRoute>
       );
 
       return { Component };
     },
+    loader: publicPreviewLoader,
   },
   {
     path: "/rooms/share",
@@ -350,7 +445,7 @@ const ClientRoutes = [
       {
         index: true,
         element: (
-          <PublicRoute restricted withManager withCollaborator>
+          <PublicRoute>
             <ViewComponent />
           </PublicRoute>
         ),
@@ -358,7 +453,7 @@ const ClientRoutes = [
       {
         path: "media/view/:id",
         element: (
-          <PublicRoute restricted withManager withCollaborator>
+          <PublicRoute>
             <ViewComponent />
           </PublicRoute>
         ),
@@ -372,6 +467,18 @@ const ClientRoutes = [
   {
     path: "/about",
     async lazy() {
+      const { isDesktop, isTablet } = await import("@docspace/shared/utils");
+
+      // On desktop/tablet we redirect to the home page with a flag to open the modal.
+      if (isDesktop() || isTablet()) {
+        const Component = () => {
+          return <Navigate to="/" replace state={{ openAboutDialog: true }} />;
+        };
+
+        return { Component };
+      }
+
+      // On mobile we show the full page.
       const { About } = await componentLoader(
         () => import("SRC_DIR/pages/About"),
       );

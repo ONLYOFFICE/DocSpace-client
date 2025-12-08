@@ -36,7 +36,5 @@ export enum InputType {
 export enum InputSize {
   base = "base",
   middle = "middle",
-  big = "big",
-  huge = "huge",
   large = "large",
 }

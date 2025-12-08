@@ -23,6 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import LockedSharedRoomLightIconURL from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg?url";
+import LockedSharedRoomDarkIconURL from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg?url";
+import LockIcon from "PUBLIC_DIR/images/icons/12/lock.react.svg";
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -32,16 +37,13 @@ import { Text } from "@docspace/shared/components/text";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import LockedSharedRoomLightIconURL from "PUBLIC_DIR/images/locked.shared.room.svg?url";
-import LockedSharedRoomDarkIconURL from "PUBLIC_DIR/images/locked.shared.room.dark.svg?url";
-import LockIcon from "PUBLIC_DIR/images/icons/12/lock.react.svg";
-
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import styles from "./NoItem.module.scss";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 type LockedItemProps = {
-  item: TRoom;
+  item: TRoom | TFile | TFolder;
   setPasswordEntryDialog?: DialogsStore["setPasswordEntryDialog"];
 };
 

@@ -44,12 +44,13 @@ export const DownloadRow = (props: DownloadRowProps) => {
     isOther,
     isChecked,
     getItemIcon,
+    dataTestId,
   } = props;
 
   const element = getItemIcon(file);
 
   return (
-    <div className={styles.downloadDialogRow}>
+    <div className={styles.downloadDialogRow} data-testid={dataTestId}>
       <div className={styles.downloadDialogMainContent}>
         <Checkbox
           className={styles.downloadDialogCheckbox}
@@ -57,6 +58,7 @@ export const DownloadRow = (props: DownloadRowProps) => {
           data-type={type}
           onChange={onRowSelect}
           isChecked={isChecked}
+          dataTestId={`checkbox_${dataTestId}`}
         />
         <div className={styles.downloadDialogIconContainer}>{element}</div>
         <Text

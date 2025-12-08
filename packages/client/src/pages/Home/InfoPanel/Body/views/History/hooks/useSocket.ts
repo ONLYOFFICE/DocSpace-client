@@ -53,10 +53,10 @@ export const useSocket = ({
       }
     };
 
-    SocketHelper.on(SocketEvents.UpdateHistory, updateHistory);
+    SocketHelper?.on(SocketEvents.UpdateHistory, updateHistory);
 
     return () => {
-      SocketHelper.off(SocketEvents.UpdateHistory, updateHistory);
+      SocketHelper?.off(SocketEvents.UpdateHistory, updateHistory);
     };
   }, []);
 };

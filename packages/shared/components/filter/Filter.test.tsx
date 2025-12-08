@@ -25,16 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { act, render } from "@testing-library/react";
 
 import { DeviceType } from "../../enums";
-import { renderWithTheme } from "../../utils/render-with-theme";
 import Filter from ".";
 import { TGetSelectedSortData, TSortDataItem } from "./Filter.types";
 import { TViewAs } from "../../types";
 
 // Mock selectors
-jest.mock("../../selectors/Groups", () => ({
+vi.mock("../../selectors/Groups", () => ({
   __esModule: true,
   default: ({ onSelect }: { onSelect: (items: unknown) => void }) => (
     <div data-testid="groups-selector">
@@ -48,7 +48,7 @@ jest.mock("../../selectors/Groups", () => ({
   ),
 }));
 
-jest.mock("../../selectors/People", () => ({
+vi.mock("../../selectors/People", () => ({
   __esModule: true,
   default: ({ onSelect }: { onSelect: (items: unknown) => void }) => (
     <div data-testid="people-selector">
@@ -62,7 +62,7 @@ jest.mock("../../selectors/People", () => ({
   ),
 }));
 
-jest.mock("../../selectors/Room", () => ({
+vi.mock("../../selectors/Room", () => ({
   __esModule: true,
   default: ({ onSelect }: { onSelect: (items: unknown) => void }) => (
     <div data-testid="room-selector">
@@ -77,28 +77,28 @@ jest.mock("../../selectors/Room", () => ({
 }));
 
 const baseProps = {
-  onSearch: jest.fn(),
-  onClearFilter: jest.fn(),
+  onSearch: vi.fn(),
+  onClearFilter: vi.fn(),
   clearSearch: false,
-  setClearSearch: jest.fn(),
-  getSelectedInputValue: jest.fn(() => ""),
+  setClearSearch: vi.fn(),
+  getSelectedInputValue: vi.fn(() => ""),
   placeholder: "Search...",
   isIndexEditingMode: false,
-  getSortData: jest.fn(() => []),
-  getSelectedSortData: jest.fn(
+  getSortData: vi.fn(() => []),
+  getSelectedSortData: vi.fn(
     () => ({}) as TSortDataItem,
   ) as TGetSelectedSortData,
-  onChangeViewAs: jest.fn(),
+  onChangeViewAs: vi.fn(),
   view: "tile",
   viewAs: "tile" as TViewAs,
   viewSelectorVisible: true,
-  onSort: jest.fn(),
-  getFilterData: jest.fn(() => Promise.resolve([])),
-  getSelectedFilterData: jest.fn(() => Promise.resolve([])),
-  getViewSettingsData: jest.fn(() => []),
-  clearAll: jest.fn(),
+  onSort: vi.fn(),
+  getFilterData: vi.fn(() => Promise.resolve([])),
+  getSelectedFilterData: vi.fn(() => Promise.resolve([])),
+  getViewSettingsData: vi.fn(() => []),
+  clearAll: vi.fn(),
   isRecentFolder: false,
-  removeSelectedItem: jest.fn(),
+  removeSelectedItem: vi.fn(),
   isRooms: false,
   isContactsPage: false,
   isContactsPeoplePage: false,
@@ -112,28 +112,30 @@ const baseProps = {
   userId: "1",
   filterHeader: "Filter",
   selectorLabel: "Select",
-  onFilter: jest.fn(),
-  onSortButtonClick: jest.fn(() => Promise.resolve([])),
+  onFilter: vi.fn(),
+  onSortButtonClick: vi.fn(() => Promise.resolve([])),
 };
 
 describe("Filter Component", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const renderComponent = (props = {}) => {
-    return renderWithTheme(<Filter {...baseProps} {...props} />);
+    return render(<Filter {...baseProps} {...props} />);
   };
 
   describe("Search Input", () => {
-    it("clears search when clearSearch prop is true", () => {
-      const onClearFilter = jest.fn();
-      const setClearSearch = jest.fn();
+    it("clears search when clearSearch prop is true", async () => {
+      const onClearFilter = vi.fn();
+      const setClearSearch = vi.fn();
 
-      renderComponent({
-        clearSearch: true,
-        onClearFilter,
-        setClearSearch,
+      await act(async () => {
+        renderComponent({
+          clearSearch: true,
+          onClearFilter,
+          setClearSearch,
+        });
       });
 
       expect(onClearFilter).toHaveBeenCalled();

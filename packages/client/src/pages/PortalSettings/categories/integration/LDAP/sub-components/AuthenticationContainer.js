@@ -121,7 +121,7 @@ const AuthenticationContainer = ({
             scale
             tabIndex={19}
             simpleView
-            size={InputSize.small}
+            size={InputSize.base}
             autoComplete="current-password"
             inputType={InputType.password}
             isDisableTooltip

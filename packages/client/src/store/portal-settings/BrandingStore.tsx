@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
 import {
   getBrandName as getWhiteLabelBrandName,
@@ -34,7 +35,10 @@ import {
   restoreWhiteLabelLogos,
 } from "@docspace/shared/api/settings";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { isManagement } from "@docspace/shared/utils/common";
+import {
+  isManagement,
+  updateLogoTimestamp,
+} from "@docspace/shared/utils/common";
 
 import { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
 
@@ -75,10 +79,24 @@ class BrandingStore {
   };
 
   getBrandName = async () => {
-    const res = (await getWhiteLabelBrandName(isManagement())) as string;
-    this.setBrandName(res);
-    this.setDefaultBrandName(res);
-    return res;
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      const res = (await getWhiteLabelBrandName(
+        isManagement(),
+        abortController.signal,
+      )) as string;
+
+      this.setBrandName(res);
+      this.setDefaultBrandName(res);
+
+      return res;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+
+      throw e;
+    }
   };
 
   setLogoUrls = (urls: ILogo[]) => {
@@ -92,17 +110,31 @@ class BrandingStore {
   getLogoUrls = async () => {
     const { getWhiteLabelLogoUrls } = this.settingsStore;
     const logos = await getWhiteLabelLogoUrls();
-    this.setLogoUrls(Object.values(logos));
+    if (logos) {
+      this.setLogoUrls(Object.values(logos));
+    }
     return logos;
   };
 
   getIsDefaultLogos = async () => {
-    const res = await getIsDefaultWhiteLabelLogos(isManagement());
-    if (!res) return;
-    const isDefaultWhiteLabel = (res as { default: boolean }[])
-      .map((item) => item.default)
-      .includes(false);
-    this.setIsDefaultLogos(isDefaultWhiteLabel);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      const res = await getIsDefaultWhiteLabelLogos(
+        isManagement(),
+        abortController.signal,
+      );
+      if (!res) return;
+      const isDefaultWhiteLabel = (res as { default: boolean }[])
+        .map((item) => item.default)
+        .includes(false);
+      this.setIsDefaultLogos(isDefaultWhiteLabel);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+
+      throw e;
+    }
   };
 
   applyNewLogos = (logos: ILogo[]) => {
@@ -134,19 +166,24 @@ class BrandingStore {
     this.settingsStore.getPortalSettings();
     const logos = await this.getLogoUrls();
     this.getIsDefaultLogos();
-    this.applyNewLogos(logos);
+    if (logos) {
+      this.applyNewLogos(logos);
+      updateLogoTimestamp();
+    }
   };
 
   resetWhiteLabelLogos = async () => {
     await restoreWhiteLabelLogos(isManagement());
     const logos = await this.getLogoUrls();
     this.getIsDefaultLogos();
-    this.applyNewLogos(logos);
+    if (logos) {
+      this.applyNewLogos(logos);
+      updateLogoTimestamp();
+    }
   };
 
-  initWhiteLabel = () => {
-    this.getLogoUrls();
-    this.getIsDefaultLogos();
+  initWhiteLabel = async () => {
+    await Promise.all([this.getLogoUrls(), this.getIsDefaultLogos()]);
   };
 
   get isWhiteLabelLoaded() {

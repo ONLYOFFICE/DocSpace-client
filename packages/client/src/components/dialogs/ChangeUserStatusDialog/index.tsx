@@ -211,6 +211,7 @@ const ChangeUserStatusDialogComponent = ({
       onClose={onCloseAction}
       displayType={ModalDialogType.modal}
       autoMaxHeight
+      dataTestId="change_user_status_dialog"
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -226,6 +227,7 @@ const ChangeUserStatusDialogComponent = ({
           onClick={onChangeUserStatus}
           isLoading={isRequestRunning}
           isDisabled={userIDs.length === 0}
+          testId="change_user_status_dialog_submit"
         />
         <Button
           id="change-user-status-modal_cancel"
@@ -234,6 +236,7 @@ const ChangeUserStatusDialogComponent = ({
           scale
           onClick={onCloseAction}
           isDisabled={isRequestRunning}
+          testId="change_user_status_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

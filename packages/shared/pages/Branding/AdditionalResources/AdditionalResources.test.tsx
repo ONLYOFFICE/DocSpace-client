@@ -25,15 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, fireEvent, render } from "@testing-library/react";
 
 import { AdditionalResources } from ".";
 import { DeviceType } from "../../../enums";
-import { renderWithTheme } from "../../../utils/render-with-theme";
 
-jest.mock("../../../hooks/useResponsiveNavigation", () => ({
-  useResponsiveNavigation: jest.fn(),
+vi.mock("../../../hooks/useResponsiveNavigation", () => ({
+  useResponsiveNavigation: vi.fn(),
 }));
 
 const defaultProps = {
@@ -41,8 +40,8 @@ const defaultProps = {
   isSettingPaid: true,
   feedbackAndSupportEnabled: true,
   helpCenterEnabled: true,
-  onSave: jest.fn(),
-  onRestore: jest.fn(),
+  onSave: vi.fn(),
+  onRestore: vi.fn(),
   isLoading: false,
   additionalResourcesIsDefault: false,
   deviceType: DeviceType.desktop,
@@ -50,21 +49,19 @@ const defaultProps = {
 
 describe("<AdditionalResources />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
-    renderWithTheme(<AdditionalResources {...defaultProps} />);
+    render(<AdditionalResources {...defaultProps} />);
 
-    expect(screen.getByText("AdditionalResources")).toBeInTheDocument();
+    expect(screen.getByText("Common:AdditionalResources")).toBeInTheDocument();
     expect(screen.getByText("ShowFeedbackAndSupport")).toBeInTheDocument();
     expect(screen.getByText("ShowHelpCenter")).toBeInTheDocument();
   });
 
   it("disables checkboxes when isSettingPaid is false", () => {
-    renderWithTheme(
-      <AdditionalResources {...defaultProps} isSettingPaid={false} />,
-    );
+    render(<AdditionalResources {...defaultProps} isSettingPaid={false} />);
 
     const feedbackCheckbox = screen.getByTestId("show-feedback-support");
     const helpCheckbox = screen.getByTestId("show-help-center");
@@ -74,7 +71,7 @@ describe("<AdditionalResources />", () => {
   });
 
   it("updates state when checkboxes are clicked", () => {
-    renderWithTheme(<AdditionalResources {...defaultProps} />);
+    render(<AdditionalResources {...defaultProps} />);
 
     const feedbackCheckbox = screen.getByTestId("show-feedback-support");
     fireEvent.click(feedbackCheckbox);
@@ -83,8 +80,8 @@ describe("<AdditionalResources />", () => {
   });
 
   it("calls onSave with correct parameters", () => {
-    const onSave = jest.fn();
-    renderWithTheme(<AdditionalResources {...defaultProps} onSave={onSave} />);
+    const onSave = vi.fn();
+    render(<AdditionalResources {...defaultProps} onSave={onSave} />);
 
     // Toggle feedback checkbox
     const feedbackCheckbox = screen.getByTestId("show-feedback-support");
@@ -98,7 +95,7 @@ describe("<AdditionalResources />", () => {
   });
 
   it("shows reminder text when there are unsaved changes", () => {
-    renderWithTheme(<AdditionalResources {...defaultProps} />);
+    render(<AdditionalResources {...defaultProps} />);
 
     // Initially no reminder
     expect(
@@ -115,7 +112,7 @@ describe("<AdditionalResources />", () => {
   });
 
   it("disables restore button when additionalResourcesIsDefault is true", () => {
-    renderWithTheme(
+    render(
       <AdditionalResources {...defaultProps} additionalResourcesIsDefault />,
     );
 
@@ -126,7 +123,7 @@ describe("<AdditionalResources />", () => {
   });
 
   it("shows loading state", () => {
-    renderWithTheme(<AdditionalResources {...defaultProps} isLoading />);
+    render(<AdditionalResources {...defaultProps} isLoading />);
 
     expect(
       screen.getByText("Common:YouHaveUnsavedChanges"),
@@ -137,10 +134,8 @@ describe("<AdditionalResources />", () => {
   });
 
   it("calls onRestore when restore button is clicked", () => {
-    const onRestore = jest.fn();
-    renderWithTheme(
-      <AdditionalResources {...defaultProps} onRestore={onRestore} />,
-    );
+    const onRestore = vi.fn();
+    render(<AdditionalResources {...defaultProps} onRestore={onRestore} />);
 
     const restoreButton = screen.getByTestId(
       "additional-resources-cancel-button",
@@ -151,9 +146,7 @@ describe("<AdditionalResources />", () => {
   });
 
   it("updates checkboxes when props change", () => {
-    const { rerender } = renderWithTheme(
-      <AdditionalResources {...defaultProps} />,
-    );
+    const { rerender } = render(<AdditionalResources {...defaultProps} />);
 
     rerender(
       <AdditionalResources

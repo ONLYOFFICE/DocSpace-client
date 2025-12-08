@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import classNames from "classnames";
 
@@ -99,32 +99,7 @@ const actionOptions = [
 ];
 
 const Template = ({ ...args }) => {
-  const maxUploads = 10;
-  const maxOperations = 7;
-
   const [isOpenButton, setIsOpenButton] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-  const [state, setState] = useState({ uploads: 0, operations: 0 });
-
-  useEffect(() => {
-    if (!isUploading) return;
-
-    const interval = setInterval(() => {
-      setState((prev) => ({
-        uploads: prev.uploads < maxUploads ? prev.uploads + 1 : prev.uploads,
-        operations:
-          prev.operations < maxOperations
-            ? prev.operations + 1
-            : prev.operations,
-      }));
-
-      if (state.uploads === maxUploads && state.operations === maxOperations) {
-        setIsUploading(false);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [isUploading, state]);
 
   const buttonOptions = [
     {
@@ -169,11 +144,15 @@ const Template = ({ ...args }) => {
           insetInlineEnd: "44px",
         }}
         actionOptions={actionOptions}
-        dropdownStyle={{
-          position: "absolute",
-          bottom: "25px",
-          insetInlineEnd: "60px",
-        }}
+        dropdownStyle={
+          {
+            position: "absolute",
+            top: "auto",
+            bottom: "80px",
+            insetInlineEnd: "60px",
+            "--main-button-mobile-dropdown-right": "60px",
+          } as React.CSSProperties
+        }
         buttonOptions={buttonOptions}
         withButton
         isOpenButton={isOpenButton}
@@ -191,13 +170,5 @@ export const Default: Story = {
     alert: false,
     withMenu: true,
     actionOptions,
-  },
-};
-
-export const WithProgress: Story = {
-  render: (args) => <MainButtonMobile {...args} />,
-  args: {
-    ...Default.args,
-    percent: 45,
   },
 };

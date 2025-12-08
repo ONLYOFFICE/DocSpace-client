@@ -26,6 +26,7 @@
 
 "use client";
 
+import Image from "next/image";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
@@ -45,7 +46,7 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
     : `${portal.portalName}.${baseDomain}`;
 
   const onClick = () => {
-    const redirectUrl = getRedirectURL()!.replace(window.location.origin, name);
+    const redirectUrl = getRedirectURL()?.replace(window.location.origin, name);
 
     sessionStorage.removeItem("tenant-list");
 
@@ -55,8 +56,20 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
   return (
     <div className="item" onClick={onClick} data-testid={portal}>
       <div className="info">
-        <img className="favicon" alt="Portal favicon" src={DefaultLogoUrl} />
-        <Text fontWeight={600} fontSize="14px" lineHeight="16px" truncate>
+        <Image
+          className="favicon"
+          alt="Portal favicon"
+          src={DefaultLogoUrl}
+          width={32}
+          height={32}
+        />
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          lineHeight="16px"
+          truncate
+          dataTestId="portal_name_text"
+        >
           {name.replace("http://", "").replace("https://", "")}
         </Text>
       </div>
@@ -64,6 +77,7 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
         iconName={ArrowRightSvrUrl}
         size={16}
         className="icon-button"
+        dataTestId="open_portal_icon_button"
       />
     </div>
   );

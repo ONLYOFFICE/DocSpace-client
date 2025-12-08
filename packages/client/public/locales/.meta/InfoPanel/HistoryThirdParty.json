@@ -3,7 +3,7 @@
   "content": "History display is not available for public rooms with connected third-party storages",
   "content_en_sha1_hash": "15def1d16fa0234e0d0bd8f823a54c8ff6716f1e",
   "created_at": "2025-05-19T21:30:54.882Z",
-  "updated_at": "2025-05-24T10:09:39.415Z",
+  "updated_at": "2025-09-22T10:04:13.866Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that history display is not available for public rooms with connected third-party storages. The text appears on an \"InfoPanel\" within the application, providing context to users about limitations of viewing history in certain room types.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ThirdParty.tsx",
-      "line_number": 52,
+      "line_number": 51,
       "context": "return (\n <StyledEmptyScreenContainer\n imageSrc={theme.isBase ? EmptyCanceledLight : EmptyCanceledDark}\n headerText={t(\"NoRecordsFound\")}\n descriptionText={t(\"HistoryThirdParty\")}\n imageAlt={t(\"NoRecordsFound\")}\n />\n );\n };",
       "module": "/packages/client"
     }

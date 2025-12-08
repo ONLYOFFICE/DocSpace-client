@@ -70,6 +70,7 @@ export const enum PluginActions {
   // closeSettingsModal= "close-settings-modal",
 
   showCreateDialogModal = "show-create-dialog-modal",
+  updateCreateDialogModal = "update-create-dialog-modal",
 
   showModal = "show-modal",
   closeModal = "close-modal",

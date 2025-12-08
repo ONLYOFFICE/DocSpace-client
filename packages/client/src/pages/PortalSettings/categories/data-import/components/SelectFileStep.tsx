@@ -189,7 +189,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       isDefaultRoomsQuotaSet ||
       isTenantCustomQuotaSet;
     setWarningQuotaDialogVisible(isQuotaWarningVisible);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet, isTenantCustomQuotaSet]);
 
   const onClickRedirect = () => {

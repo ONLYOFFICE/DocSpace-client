@@ -3,7 +3,7 @@
   "content": "Docker instruction.",
   "content_en_sha1_hash": "ebb408553e05d849ad37700e004798f23d8228e3",
   "created_at": "2025-05-26T07:15:49.186Z",
-  "updated_at": "2025-08-04T07:30:01.737Z",
+  "updated_at": "2025-10-13T22:16:08.385Z",
   "comment": {
     "text": "The translation key \"UpgradeToProBannerInstructionItemDocker\" is used to display a Docker instruction in official documentation and possibly as an upgrade prompt within a UI component. It appears on a payment bonus page and is part of the payment process.",
     "is_auto": true,
@@ -39,13 +39,25 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Докер инструкции' is a literal translation but doesn't quite capture the nuance of 'Docker instruction'. It translates as 'Docker instructions' instead of 'Docker instruction'. While understandable, it's less precise for an instruction item.",
+          "suggestion": "Докер инструкция"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Docker instruction' is too literal. 'Pokyny pro práci s nástrojem Docker' is technically correct but sounds slightly clunky. A more natural Czech translation might be 'Instrukce pro Docker' or 'Docker instrukce'.",
+          "suggestion": "Instrukce pro Docker"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -75,19 +87,42 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Consignes d'installation à l'aide de Docker' is overly verbose and doesn't accurately reflect the simplicity of the English 'Docker instruction.' It implies a complex installation process.",
+          "suggestion": "Instruction Docker"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Armenian word 'հրահանգ' (instruction) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'հրահանգ' is a valid translation of 'instruction,' it doesn't capture the specific nuance of 'Docker instruction' which might require a more technical or specialized term depending on the context. Consider whether a more specific term for 'Docker' exists in Armenian and if so, incorporating that would be more accurate.",
+          "suggestion": "Consider reviewing with a technical translator familiar with Docker terminology in Armenian. Possible alternatives might include 'Docker ցուցումներ' or 'Docker ուսումնարանային հրահանգներ' depending on the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Istruzione per Docker.' is slightly awkward. A more natural translation would be 'Istruzioni per Docker' or 'Guida per Docker'.",
+          "suggestion": "Istruzioni per Docker"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,13 +134,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Docker 설명서' (Docker description) is understandable, it doesn't directly translate 'instruction.' 'Docker 사용법' (Docker usage) or 'Docker 안내' (Docker guidance) might be more accurate depending on the intended meaning within the larger context.",
+          "suggestion": "Consider 'Docker 사용법' or 'Docker 안내' for a more accurate translation of 'Docker instruction.'"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຄໍາແນະນໍາສຳລັບ Docker' is a literal translation of 'instruction for Docker'. A more natural and idiomatic Lao translation for 'Docker instruction' would be something like 'ຄໍາແນະນໍາການໃຊ້ Docker' or 'ວິທີການໃຊ້ Docker'.",
+          "suggestion": "ຄໍາແນະນໍາການໃຊ້ Docker"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,13 +170,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Instrukcje dla Dockera\" is too literal. A more natural and accurate translation would be something like \"Instrukcja Dockera\" or \"Dokumentacja Dockera.\" The use of 'dla' creates an unnecessary prepositional phrase.",
+          "suggestion": "Instrukcja Dockera"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Instruções para Docker\" is a bit literal. A more natural translation might be \"Instruções do Docker\" or \"Instruções sobre Docker\". \"Para Docker\" implies instructions *leading* to Docker, rather than instructions *related to* Docker.",
+          "suggestion": "Instruções do Docker"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +200,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Instrucţiuni pentu Docker' uses 'pentu' which is incorrect. The correct preposition is 'pentru'.",
+          "suggestion": "Instrucţiuni pentru Docker."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +264,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

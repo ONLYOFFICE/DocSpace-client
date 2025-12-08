@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import { decode } from "he";
@@ -39,10 +39,12 @@ import {
   ContextMenu,
   ContextMenuRefType,
 } from "@docspace/shared/components/context-menu";
+import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
@@ -55,11 +57,13 @@ import styles from "./Users.module.scss";
 type ItemTitleProps = {
   userSelection: TPeopleListItem;
   getUserContextOptions: ContactsConextOptionsStore["getUserContextOptions"];
+  isMe: UserStore["isMe"];
 };
 
 const ItemTitle = ({
   userSelection,
   getUserContextOptions,
+  isMe,
 }: ItemTitleProps) => {
   const { t } = useTranslation([
     "People",
@@ -110,6 +114,17 @@ const ItemTitle = ({
 
   const role = getUserAvatarRoleByType(userSelection.role);
 
+  const contextMenuHeader = useMemo((): HeaderType | undefined => {
+    if (!userSelection) return undefined;
+
+    return {
+      title: displayName || userSelection.email || "",
+      avatar: userAvatar || DefaultUserPhoto,
+      logo: "",
+      icon: "",
+    };
+  }, [userSelection, displayName, userAvatar]);
+
   return (
     <div className={styles.userTitle} ref={itemTitleRef}>
       <Avatar
@@ -132,6 +147,16 @@ const ItemTitle = ({
           >
             {isPending || !displayName ? userSelection.email : displayName}
           </Text>
+          {isMe?.(userSelection.id) ? (
+            <Text
+              className={styles.isMeLabel}
+              fontWeight={700}
+              fontSize="16px"
+              lineHeight="22px"
+            >
+              ({t("Common:MeLabel")})
+            </Text>
+          ) : null}
           {isPending ? (
             <Badges withoutPaid statusType={userSelection.statusType} />
           ) : null}
@@ -197,6 +222,8 @@ const ItemTitle = ({
         model={contextOptions || []}
         getContextModel={getData}
         withBackdrop
+        baseZIndex={310}
+        header={contextMenuHeader}
       />
       {contextOptions.length ? (
         <ContextMenuButton

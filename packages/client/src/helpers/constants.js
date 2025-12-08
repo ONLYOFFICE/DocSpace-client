@@ -59,25 +59,6 @@ export const GUID_EMPTY = "00000000-0000-0000-0000-000000000000";
 export const ID_NO_GROUP_MANAGER = "4a515a15-d4d6-4b8e-828e-e0586f18f3a3";
 
 /**
- * Enum for type of confirm link.
- * @readonly
- */
-export const CategoryType = Object.freeze({
-  Personal: 0,
-  Shared: 1,
-  SharedRoom: 2,
-  Archive: 3,
-  ArchivedRoom: 4,
-  Favorite: 5,
-  Recent: 6,
-  Trash: 7,
-  Settings: 8,
-  Accounts: 9,
-  PublicRoom: 10,
-  Flows: 11,
-});
-
-/**
  * Enum for table columns version
  * @readonly
  */
@@ -85,11 +66,15 @@ export const TableVersions = Object.freeze({
   Rooms: "3",
   Files: "3",
   People: "3",
-  Trash: "4",
+  Trash: "5",
   Groups: "6",
   InsideGroup: "6",
-  Recent: "1",
+  Recent: "2",
+  Favorites: "1",
   Guests: "1",
+  SharedWithMe: "2",
+  AIAgents: "1",
+  InSharedFolder: "1",
 });
 
 /**
@@ -182,3 +167,7 @@ export const ThirdPartyServicesUrlName = Object.freeze({
   ownCloud: "owncloud",
   WebDav: "webdav",
 });
+
+export const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
+export const TABLE_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
+export const TABLE_AI_AGENTS_COLUMNS = `aiAgentsTableColumns_ver-${TableVersions.AIAgents}`;

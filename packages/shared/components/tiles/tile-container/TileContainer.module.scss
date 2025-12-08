@@ -66,7 +66,10 @@
 
 .gridWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(216px, 13.4vw, 360px), 1fr)
+  );
   grid-gap: 16px;
   width: 100%;
   box-sizing: border-box;
@@ -74,7 +77,10 @@
 
   &.rooms,
   &.templates {
-    grid-template-columns: repeat(auto-fill, minmax(274px, 1fr));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(clamp(275px, 13.4vw, 350px), 1fr)
+    );
   }
 
   &.files {

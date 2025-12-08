@@ -2,5 +2,6 @@
   "CancellaionNotification": "Annuleringsmelding niet meer weergeven",
   "DisplayFileExtension": "Bestandsextensie naast bestandsnaam weergeven",
   "OpenSameTab": "Open {{organizationName}} editor in hetzelfde tabblad",
-  "OriginalCopy": "Bewaar de bestandskopie ook in het oorspronkelijke formaat"
+  "OriginalCopy": "Bewaar de bestandskopie ook in het oorspronkelijke formaat",
+  "TrashMoveConfirmation": "Toon melding bij het verplaatsen van items naar {{sectionName}}"
 }

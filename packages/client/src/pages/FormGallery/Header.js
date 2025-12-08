@@ -106,6 +106,7 @@ const SectionHeaderContent = ({
         isFill
         onClick={onNavigateBack}
         className="arrow-button"
+        dataTestId="form_gallery_header_back"
       />
       <StyledHeading
         className="oform-header"
@@ -123,6 +124,7 @@ const SectionHeaderContent = ({
           size="small"
           onClick={onOpenSubmitToGalleryDialog}
           label={t("Common:SubmitToFormGallery")}
+          testId="form_gallery_header_submit_to_gallery"
         />
       ) : null}
 
@@ -130,6 +132,7 @@ const SectionHeaderContent = ({
         <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>
           <div className="info-panel-toggle-bg">
             <IconButton
+              dataTestId="form_gallery_header_info_panel"
               className="info-panel-toggle"
               iconName={PanelReactSvgUrl}
               size="16"

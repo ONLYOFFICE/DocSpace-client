@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 
@@ -247,7 +248,7 @@ beforeAll(() => {
   );
 });
 
-test("UnusedDependenciesTest: Verify that all dependencies in package.json files are being used", async () => {
+it("UnusedDependenciesTest: Verify that all dependencies in package.json files are being used", async () => {
   const unusedDependencies = [];
 
   const sharedDeps = workspaceDeps.find(
@@ -327,11 +328,9 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@storybook/addon-webpack5-compiler-babel",
       "@storybook/components",
       "@storybook/react-webpack5",
-      "babel-eslint",
       "babel-jest",
       "babel-plugin-styled-components",
       "@babel/core",
-      "@babel/eslint-parser",
       "@babel/runtime",
       "@babel/preset-env",
       "@babel/preset-react",
@@ -342,32 +341,23 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@babel/plugin-transform-class-properties",
       "@babel/plugin-proposal-export-default-from",
       "webpack-dev-server",
-      "eslint-config-airbnb",
-      "eslint-config-airbnb-typescript",
-      "eslint-config-prettier",
-      "eslint-plugin-import",
-      "eslint-plugin-jsx-a11y",
-      "eslint-plugin-prettier",
-      "eslint-plugin-react-hooks",
-      "eslint-plugin-react",
-      "eslint-plugin-storybook",
-      "eslint-config-next",
-      "eslint-import-resolver-webpack",
-      "prettier",
       "resolve-url-loader",
       "typescript",
       "local-web-server",
       "identity-obj-proxy",
       "@types/identity-obj-proxy",
       "@types/element-resize-detector",
-      "@types/eslint",
       "@types/node",
-      "@typescript-eslint/eslint-plugin",
-      "@typescript-eslint/parser",
       "jest-environment-jsdom",
       "jest-styled-components",
       "ts-jest",
       "ts-node",
+      "jest-html-reporter",
+      "linkifyjs",
+      "@biomejs/biome",
+      "@vitest/ui",
+      "@vitest/coverage-v8",
+      "open-cli"
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
@@ -412,7 +402,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
   expect(unusedDependencies.length, message).toBe(0);
 });
 
-test("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
+it("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
   // List of packages to be ignored
   const ignoredPackages = new Set([]);
 
@@ -442,13 +432,16 @@ test("DifferentDependencyVersionsTest: Verify that all workspaces use same depen
         .map(([ws, ver]) => `  - ${ws}: ${ver}`)
         .join("\n");
 
-      mismatchedDeps.push(`❌ ${depName} has different versions:\n${versionList}`);
+      mismatchedDeps.push(
+        `❌ ${depName} has different versions:\n${versionList}`
+      );
     }
   }
 
   if (mismatchedDeps.length > 0) {
     const report = mismatchedDeps.join("\n\n");
-    throw new Error(`Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`);
+    throw new Error(
+      `Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`
+    );
   }
 });
-

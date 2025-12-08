@@ -58,6 +58,7 @@ const MainContainer = styled.div`
 const AdminMessage = (props) => {
   const {
     t,
+    tReady,
 
     enableAdmMess,
     setMessageSettings,
@@ -157,6 +158,8 @@ const AdminMessage = (props) => {
     setType(defaultSettings || "disabled");
     setShowReminder(false);
   };
+
+  if (!tReady) return null;
 
   return (
     <MainContainer>

@@ -44,6 +44,7 @@ import type {
 } from "../../../../../types";
 
 import styles from "../../ManualBackup.module.scss";
+import NoteComponent from "../../../sub-components/NoteComponent";
 
 const Documents = "Documents";
 
@@ -63,6 +64,9 @@ export interface RoomsModuleProps {
   basePath: string;
   isErrorPath: boolean;
   currentDeviceType?: DeviceType;
+
+  isBackupPaid?: boolean;
+  isFreeBackupsLimitReached?: boolean;
 
   toDefault: VoidFunction;
   setBasePath: (folders: TBreadCrumb[]) => void;
@@ -88,6 +92,8 @@ const RoomsModule = ({
   toDefault,
   currentDeviceType,
   settingsFileSelector,
+  isBackupPaid,
+  isFreeBackupsLimitReached,
 }: RoomsModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -209,6 +215,9 @@ const RoomsModule = ({
           testId="create_backup_room_button"
         />
       </div>
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+      />
     </div>
   );
 };

@@ -110,7 +110,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     invitationSettings,
   } = props;
 
-  const { linkData, roomData } = useContext(ConfirmRouteContext);
+  const { linkData, roomData, confirmLinkResult } =
+    useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
 
   const router = useRouter();
@@ -121,9 +122,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const emailFromLink = linkData?.email ? linkData.email : "";
+  const emailFromLink = confirmLinkResult?.email ? confirmLinkResult.email : "";
   const roomName = roomData?.title;
   const roomId = roomData?.roomId;
+  const isAgent = roomData?.isAgent;
 
   const [email, setEmail] = useState(emailFromLink);
   const [emailValid, setEmailValid] = useState(true);
@@ -159,7 +161,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     async (profile: string) => {
       const signupAccount: { [key: string]: string | undefined } = {
         EmployeeType: linkData.emplType,
-        Email: linkData.email,
+        Email: confirmLinkResult.email,
         Key: linkData.key,
         SerializedProfile: profile,
         culture: currentCultureName,
@@ -192,8 +194,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           throw new Error("Empty API response");
         }
 
+        const path = isAgent
+          ? `ai-agents/${roomData?.roomId}/chat`
+          : `rooms/shared/${roomData?.roomId}/filter`;
+
         const finalUrl = roomData.roomId
-          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
+          ? `/${path}?folder=${roomData.roomId}`
           : defaultPage;
 
         if (response.confirmUrl) {
@@ -222,10 +228,11 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     [
       currentCultureName,
       defaultPage,
-      linkData.email,
+      confirmLinkResult.email,
       linkData.emplType,
       linkData.key,
       roomData.roomId,
+      roomData.isAgent,
       linkData.confirmHeader,
     ],
   );
@@ -257,8 +264,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         "max-age": COOKIE_EXPIRATION_YEAR,
       });
 
-      const finalUrl = roomId
-        ? `/rooms/shared/${roomId}/filter?folder=${roomId}`
+      const path = isAgent
+        ? `ai-agents/${roomData?.roomId}/chat`
+        : `rooms/shared/${roomData?.roomId}/filter`;
+
+      const finalUrl = roomData.roomId
+        ? `/${path}?folder=${roomData.roomId}`
         : defaultPage;
 
       if (roomId) {
@@ -321,8 +332,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       return window.location.replace(res.confirmUrl);
     }
 
+    const path = isAgent
+      ? `ai-agents/${roomData?.roomId}/chat`
+      : `rooms/shared/${roomData?.roomId}/filter`;
+
     const finalUrl = roomData.roomId
-      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
+      ? `/${path}?folder=${roomData.roomId}`
       : defaultPage;
 
     const isConfirm = typeof res === "string" && res.includes("confirm");
@@ -446,7 +461,11 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === ButtonKeys.enter) {
-      registrationForm ? onSubmit() : onContinue();
+      if (registrationForm) {
+        onSubmit();
+      } else {
+        onContinue();
+      }
     }
   };
 
@@ -509,7 +528,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     if (!capabilities?.oauthEnabled) return false;
 
     let existProviders = 0;
-    thirdPartyProviders && thirdPartyProviders.length > 0;
+    // biome-ignore-start lint/suspicious/noPrototypeBuiltins: TODO fix
     thirdPartyProviders?.forEach((item) => {
       const key = item.provider as keyof typeof PROVIDERS_DATA;
       if (
@@ -519,6 +538,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         return;
       existProviders++;
     });
+
+    // biome-ignore-end lint/suspicious/noPrototypeBuiltins: TODO fix
 
     return !!existProviders;
   };

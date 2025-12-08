@@ -155,8 +155,7 @@ const createIconEntries = (icons: Record<string, string[]>) => {
 const { all, nonRoom } = createIconEntries(iconsMap);
 
 const getUrlByName = (size: number, name: string): string =>
-  // eslint-disable-next-line import/no-dynamic-require, global-require
-  require(`PUBLIC_DIR/images/icons/${size}/${name}?url`);
+    require(`PUBLIC_DIR/images/icons/${size}/${name}?url`);
 
 const generateMapForSize = (
   size: number,

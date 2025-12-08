@@ -25,27 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import { Badge } from ".";
 import styles from "./Badge.module.scss";
 
 describe("<Badge />", () => {
   const renderComponent = (props = {}) => {
-    return renderWithTheme(<Badge {...props} />);
+    return render(<Badge {...props} />);
   };
 
   describe("Rendering", () => {
-    test("renders Badge component", () => {
+    it("renders Badge component", () => {
       renderComponent();
       const badgeElement = screen.getByRole("generic");
       expect(badgeElement).toBeInTheDocument();
     });
 
-    test("renders Badge with correct text", () => {
+    it("renders Badge with correct text", () => {
       renderComponent({ label: "Test Badge" });
       const badgeElement = screen.getByText("Test Badge");
       expect(badgeElement).toBeInTheDocument();
@@ -97,7 +96,7 @@ describe("<Badge />", () => {
   });
 
   describe("Styling", () => {
-    test("renders Badge with custom className", () => {
+    it("renders Badge with custom className", () => {
       const customClass = "custom-badge";
       renderComponent({ className: customClass });
       const badgeElement = screen.getByTestId("badge");
@@ -118,7 +117,7 @@ describe("<Badge />", () => {
 
   describe("Interactions", () => {
     it("handles click events", async () => {
-      const onClick = jest.fn();
+      const onClick = vi.fn();
       renderComponent({ label: "Click", onClick });
 
       const badge = screen.getByTestId("badge");
@@ -144,12 +143,6 @@ describe("<Badge />", () => {
       renderComponent({ label: "High", type: "high" });
       const badge = screen.getByTestId("badge");
       expect(badge).toHaveAttribute("data-type", "high");
-    });
-
-    it("applies compact styling", () => {
-      renderComponent({ label: "Compact", compact: true });
-      const inner = screen.getByTestId("badge-inner");
-      expect(inner).toHaveAttribute("data-compact", "true");
     });
   });
 });

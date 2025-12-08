@@ -3,7 +3,7 @@
   "content": "Remove the unnecessary files or contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "9fd6bb65f7678c7fb00eb2a9266bacc48fe55e5b",
   "created_at": "2025-05-19T21:30:54.119Z",
-  "updated_at": "2025-08-04T07:30:01.020Z",
+  "updated_at": "2025-11-18T14:41:49.665Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to remove unnecessary files or contact an administrator to upgrade their tariff plan. It appears in a quota management interface and informs users of available options to modify their plans.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 56,
-      "context": "const onCloseAction = () => {\n onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin) return t(\"RemoveFilesOrContactToUpgradeQuota\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"TenantCustomQuotaDescription\"",
+      "line_number": 57,
+      "context": "onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans",
       "module": "/packages/client"
     }
   ],

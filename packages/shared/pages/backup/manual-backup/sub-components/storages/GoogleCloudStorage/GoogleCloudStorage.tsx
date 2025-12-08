@@ -66,6 +66,7 @@ interface GoogleCloudStorageProps {
   addValueInFormSettings: (name: string, value: string) => void;
   setRequiredFormSettings: (arr: string[]) => void;
   setIsThirdStorageChanged: (changed: boolean) => void;
+  isThirdPartyAvailable: boolean;
 }
 
 const GoogleCloudStorage = ({
@@ -84,6 +85,7 @@ const GoogleCloudStorage = ({
   addValueInFormSettings,
   setRequiredFormSettings,
   setIsThirdStorageChanged,
+  isThirdPartyAvailable,
 }: GoogleCloudStorageProps) => {
   const isDisabled = selectedStorage && !selectedStorage.isSet;
 
@@ -105,18 +107,20 @@ const GoogleCloudStorage = ({
 
   return (
     <div data-testid="google-cloud-storage">
-      <GoogleCloudSettings
-        t={t}
-        isLoading={isLoading}
-        formSettings={formSettings}
-        isLoadingData={isLoadingData}
-        isNeedFilePath={isNeedFilePath}
-        selectedStorage={selectedStorage}
-        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
-        addValueInFormSettings={addValueInFormSettings}
-        setRequiredFormSettings={setRequiredFormSettings}
-        setIsThirdStorageChanged={setIsThirdStorageChanged}
-      />
+      {isThirdPartyAvailable ? (
+        <GoogleCloudSettings
+          t={t}
+          isLoading={isLoading}
+          formSettings={formSettings}
+          isLoadingData={isLoadingData}
+          isNeedFilePath={isNeedFilePath}
+          selectedStorage={selectedStorage}
+          errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+          addValueInFormSettings={addValueInFormSettings}
+          setRequiredFormSettings={setRequiredFormSettings}
+          setIsThirdStorageChanged={setIsThirdStorageChanged}
+        />
+      ) : null}
 
       <div
         className={classNames(

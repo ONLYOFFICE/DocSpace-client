@@ -33,10 +33,10 @@ import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
+import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyview/empty.contacts.info.light.svg?url";
+import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.contacts.info.dark.svg?url";
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.light.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.dark.svg?url";
 
 import { TPeopleListItem } from "SRC_DIR/helpers/contacts";
 

@@ -3,7 +3,7 @@
   "AllDataTransferred": "모든 데이터가 전송되었습니다",
   "DataReassignment": "데이터 재할당",
   "DeleteProfileIsFinished": "재할당 완료 시 프로필 삭제",
-  "DescriptionDataReassignment": "사용자가 생성한 방과 사용자의 방에 보관된 문서를 전송해 드립니다.",
+  "DescriptionDataReassignment": "연락처가 생성한 공유 파일 및 방을 이전하겠습니다.",
   "Interrupted": "중단되었습니다, 일부 데이터를 전송할 수 없습니다",
   "MoreAboutDataTransfer": "데이터 전송에 대해 더 보기",
   "NewDataOwner": "새로운 데이터 소유자",

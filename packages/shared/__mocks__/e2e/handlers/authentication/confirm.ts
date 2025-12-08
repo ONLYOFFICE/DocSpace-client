@@ -1,6 +1,7 @@
 import {
   API_PREFIX,
   BASE_URL,
+  HEADER_CONFIRM_WITHOUT_EMAIL,
   HEADER_LINK_EXPIRED,
   HEADER_LINK_INVALID,
   HEADER_QUOTA_FAILED,
@@ -13,9 +14,15 @@ export const PATH = "authentication/confirm";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-export const getConfirmSuccess = (result: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0) => {
+export const getConfirmSuccess = (
+  result: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0,
+  withEmail?: boolean,
+) => {
   return {
-    response: { result },
+    response: {
+      result,
+      email: withEmail ? "mail@mail.com" : undefined,
+    },
     count: 1,
     links: [
       {
@@ -36,6 +43,7 @@ export const confirm = (headers?: Headers): Response => {
   let isUserExisted = false;
   let isUserExcluded = false;
   let isQuotaFailed = false;
+  let isConfirmWithoutEmail = false;
 
   if (headers?.get(HEADER_LINK_INVALID)) {
     isInvalid = true;
@@ -54,6 +62,10 @@ export const confirm = (headers?: Headers): Response => {
   }
   if (headers?.get(HEADER_QUOTA_FAILED)) {
     isQuotaFailed = true;
+  }
+
+  if (headers?.get(HEADER_CONFIRM_WITHOUT_EMAIL)) {
+    isConfirmWithoutEmail = true;
   }
 
   if (isInvalid) {
@@ -80,5 +92,9 @@ export const confirm = (headers?: Headers): Response => {
     return new Response(JSON.stringify(getConfirmSuccess(6)));
   }
 
-  return new Response(JSON.stringify(getConfirmSuccess()));
+  if (isConfirmWithoutEmail) {
+    return new Response(JSON.stringify(getConfirmSuccess(0)));
+  }
+
+  return new Response(JSON.stringify(getConfirmSuccess(0, true)));
 };

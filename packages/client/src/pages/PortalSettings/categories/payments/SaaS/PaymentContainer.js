@@ -313,7 +313,7 @@ const PaymentContainer = (props) => {
                     i18nKey="PerUserYear"
                     ns="Common"
                     values={{ price: formatPaymentCurrency(startValue) }}
-                    components={{ 1: <span /> }}
+                    components={{ 1: <span key="price-span" /> }}
                   />
                 ) : (
                   <Trans
@@ -321,7 +321,7 @@ const PaymentContainer = (props) => {
                     i18nKey="PerUserMonth"
                     ns="Common"
                     values={{ price: formatPaymentCurrency(startValue) }}
-                    components={{ 1: <span /> }}
+                    components={{ 1: <span key="price-span" /> }}
                   />
                 )}
               </Text>

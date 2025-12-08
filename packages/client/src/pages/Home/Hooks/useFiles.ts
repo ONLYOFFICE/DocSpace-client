@@ -30,7 +30,11 @@ import { useNavigate, useLocation, useParams } from "react-router";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import {
+  CREATED_FORM_KEY,
+  MEDIA_VIEW_URL,
+  CategoryType,
+} from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,
@@ -38,10 +42,14 @@ import {
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
-import { getObjectByLocation } from "@docspace/shared/utils/common";
+import {
+  getObjectByLocation,
+  getCategoryType,
+  isPublicRoom,
+} from "@docspace/shared/utils/common";
+import type { ValueOf } from "@docspace/shared/types";
 
-import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
@@ -50,10 +58,10 @@ import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
   fetchRooms: FilesStore["fetchRooms"];
+  fetchAgents: FilesStore["fetchAgents"];
   getFileInfo: FilesStore["getFileInfo"];
   setIsPreview: FilesStore["setIsPreview"];
   setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
-  scrollToTop: FilesStore["scrollToTop"];
   wsCreatedPDFForm: FilesStore["wsCreatedPDFForm"];
 
   playlist: MediaViewerDataStore["playlist"];
@@ -69,10 +77,10 @@ export type UseFilesProps = {
 const useFiles = ({
   fetchFiles,
   fetchRooms,
+  fetchAgents,
   getFileInfo,
   setIsPreview,
   setIsUpdatingRowItem,
-  scrollToTop,
   wsCreatedPDFForm,
 
   playlist,
@@ -87,10 +95,12 @@ const useFiles = ({
   const location = useLocation();
   const { id } = useParams();
 
-  const fetchDefaultFiles = () => {
-    const filter = FilesFilter.getDefault();
+  const fetchDefaultFiles = (categoryType: ValueOf<typeof CategoryType>) => {
+    const filter = FilesFilter.getDefault({
+      categoryType,
+    });
 
-    const url = getCategoryUrl(CategoryType.Personal);
+    const url = getCategoryUrl(categoryType);
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -123,7 +133,19 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
+  const fetchDefaultAgents = () => {
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
+
+    const categoryType = getCategoryType(location) as number;
+
+    const url = getCategoryUrl(categoryType);
+
+    navigate(`${url}?${filter.toUrlParams()}`);
+  };
+
   const getFiles = React.useCallback(async () => {
+    if (isPublicRoom()) return;
+
     const categoryType = getCategoryType(location);
 
     let filterObj = null;
@@ -145,14 +167,25 @@ const useFiles = ({
           })
           .catch((err) => {
             toastr.error(err);
-            fetchDefaultFiles();
+            fetchDefaultFiles(categoryType);
           });
       }, 1);
+
+      return;
     }
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
+    const isAIAgents = categoryType === CategoryType.AIAgents;
 
-    if (
+    if (isAIAgents) {
+      filterObj = RoomsFilter.getFilter(window.location);
+
+      if (!filterObj) {
+        fetchDefaultAgents();
+
+        return;
+      }
+    } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
         categoryType == CategoryType.Archive) &&
@@ -171,7 +204,7 @@ const useFiles = ({
       filterObj = FilesFilter.getFilter(window.location);
 
       if (!filterObj) {
-        fetchDefaultFiles();
+        fetchDefaultFiles(categoryType);
 
         return;
       }
@@ -228,9 +261,11 @@ const useFiles = ({
     const { filter } = dataObj;
     let newFilter = filter
       ? filter.clone()
-      : isRooms
-        ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
-        : FilesFilter.getDefault();
+      : isAIAgents
+        ? RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents)
+        : isRooms
+          ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
+          : FilesFilter.getDefault({ categoryType });
     const requests = [Promise.resolve(newFilter)];
 
     await axios
@@ -250,6 +285,9 @@ const useFiles = ({
         newFilter = data[0];
 
         if (newFilter) {
+          if (isAIAgents) {
+            return fetchAgents(null, newFilter, false, false);
+          }
           if (isRooms) {
             return fetchRooms(null, newFilter, undefined, undefined, false);
           }
@@ -298,19 +336,16 @@ const useFiles = ({
 
           window.dispatchEvent(event);
         }
-      })
-      .finally(() => {
-        scrollToTop();
       });
   }, [
     location.pathname,
     location.search,
     fetchFiles,
     fetchRooms,
+    fetchAgents,
     getFileInfo,
     setIsPreview,
     setIsUpdatingRowItem,
-    scrollToTop,
     wsCreatedPDFForm,
 
     playlist,

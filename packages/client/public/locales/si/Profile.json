@@ -7,6 +7,7 @@
   "DesktopTheme": "වැඩතල සංස්කරකයේ සැකසුම් සමමුහූර්ත කරන්න",
   "DesktopThemeDescription": "වැඩතල සංස්කරක වල වත්මන් තේමාව අනුව දීප්ත සහ අඳුරු තේමා අතර ස්වයංක්‍රීයව මාරු වන්න.",
   "EditPhoto": "රූපය සංස්කරණය",
+  "EmailChangeSuccess": "ඔබගේ විද්‍යුත් තැපෑල සාර්ථකව වෙනස් කර ඇත.",
   "EmailNotVerified": "වි-තැපෑල සත්‍යාපනය කර නැත",
   "ErrorAccountAlreadyUse": "සබැඳි ගිණුම දැනටමත් වෙනත් අයෙක් භාවිතා කරයි",
   "FileManagement": "ගොනු කළමනාකරණය",
@@ -17,6 +18,7 @@
   "LogoutDescription": "සටහන: මෙම සම්බන්ධතාවය හැර අනෙකුත් සියළුම සක්‍රිය සම්බන්ධතා නික්මවනු ඇත.",
   "LogoutFrom": "{{platform}} {{browser}} වෙතින් නික්මෙන්න ද?",
   "MyProfile": "මාගේ පැතිකඩ",
+  "NotificationsChannels": "දැනුම්දීම් නාලිකා",
   "ProviderSuccessfullyConnected": "ප්‍රතිපාදක සාර්ථකව සම්බන්ධ විය",
   "ProviderSuccessfullyDisconnected": "ප්‍රතිපාදක සාර්ථකව විසන්ධි විය",
   "SendAgain": "නැවත යවන්න",
@@ -24,6 +26,10 @@
   "SuccessLogout": "සක්‍රිය සම්බන්ධතාවය නික්ම ගොස් ඇත: {{platform}}, {{browser}}",
   "SystemTheme": "පද්ධතියේ තේමාව යොදාගන්න",
   "SystemThemeDescription": "ඔබගේ පද්ධතියේ වෙනස් වන පරිදි දීප්ත සහ අඳුරු තේමා අතර ස්වයංක්‍රීයව මාරු වන්න.",
+  "TelegramAccount": "විදුලි පණිවුඩ ගිණුම",
+  "TelegramAccountDescription": "ඔබගේ ගිණුමට TelegramBot සම්බන්ධ කිරීමට රහස් සබැඳිය අනුගමනය කරන්න “Telegram සම්බන්ධ කරන්න” බොත්තම ක්ලික් කරන්න.",
+  "TelegramAccountDisconnect": "ටෙලිග්‍රෑම් විසන්ධි කරන්න",
+  "TelegramAccountDisconnectDescription": "ඔබගේ @{{username}} ගිණුම ටෙලිග්‍රාම් දැනුම්දීම් සඳහා සම්බන්ධ කර ඇත. ඔබට මෙම ගිණුමෙන් විසන්ධි කළ හැකිය. මෙම අවස්ථාවේදී, ඔබට දැනුම්දීම් නොලැබෙනු ඇත.",
   "TerminateAllSessions": "වත්මන් සැසිය හැර අනෙකුත් සියළු සැසියන් අවසන් කරන්න.",
   "TwoFactorDescription": "පරිපාලකගේ අභිමතයට අනුව සියළුම පරිශ්‍රීලකයින් සඳහා කේත උත්පාදනය කරන යෙදුමක් හරහා ද්වි-සාධක තහවුරුව සබල කර ඇත."
 }

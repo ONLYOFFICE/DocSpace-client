@@ -3,7 +3,7 @@
   "content": "Auth button",
   "content_en_sha1_hash": "42d86c4f8b922902e61c87c4247787aa5fa197e8",
   "created_at": "2025-05-19T21:30:53.817Z",
-  "updated_at": "2025-08-04T07:30:01.445Z",
+  "updated_at": "2025-09-17T13:43:01.802Z",
   "comment": {
     "text": "The AuthButton translation key refers to the label displayed on an \"Auth button\" component used in OAuth authentication workflows. It appears as a title within a modal dialog, guiding users through the authorization process. Translators should use this key for buttons and dialog titles related to authenticating with external services.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 744,
+      "line_number": 775,
       "context": "};\n \n const authButtonOption = {\n key: \"auth-button\",\n icon: CodeReactSvgUrl,\n label: t(\"AuthButton\"),\n onClick: onShowPreview,\n disabled: !item.enabled,\n dataTestId: \"oauth_auth_option\",\n };",
       "module": "/packages/client"
     }

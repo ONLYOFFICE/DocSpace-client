@@ -1,11 +1,16 @@
 {
-  "ActionsWithFilesDescription": "Označenia vás budú upozorňovať na akcie, ako je nahrávanie, vytváranie a úprava súborov.",
+  "AdminSetupRequired": "Vyžaduje sa nastavenie administrátora",
   "Badges": "Menovky",
   "DailyFeed": "Denný informačný kanál {{productName}}",
   "DailyFeedDescription": "Prečítajte si správy a udalosti z vášho {{productName}} v dennom prehľade.",
-  "ManageNotifications": "Spravovať",
+  "FileActivityNotify": "Notifikácie o aktivite súborov",
+  "IsNotValid": "Nie je platné",
+  "LdapEmailTooltip": "Tento používateľský účet je načítaný z LDAP. Používateľova e-mailová adresa nebola zadaná a aktuálna bola generovaná automaticky a nemožno ju použiť na odosielanie upozornení.",
+  "NotConfigured": "Nakonfigurované",
   "Notifications": "Upozornenia",
-  "RoomsActivityDescription": "Hodinové upozornenia. Buďte informovaní o všetkých aktivitách vo svojich miestnostiach.",
+  "SettingUpNotifications": "Nastavenie upozornení",
+  "SuccessConnected": "{{serviceName}} bol úspešne pripojený ako kanál pre upozornenia. Teraz tam budete dostávať aktualizácie.",
+  "SuccessDisconnected": "{{serviceName}} bol úspešne odpojený ako kanál pre upozornenia. Upozornenia tam už nebudú zasielané.",
   "UsefulTips": "Užitočné tipy pre {{productName}}",
   "UsefulTipsDescription": "Získajte užitočných sprievodcov o {{productName}}"
 }

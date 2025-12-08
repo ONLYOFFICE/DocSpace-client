@@ -7,6 +7,7 @@
   "DesktopTheme": "Zsynchronizuj z ustawieniami edytora dla komputerów stacjonarnych",
   "DesktopThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem w zależności od bieżącego motywu edytorów dla komputerów stacjonarnych.",
   "EditPhoto": "Edytuj zdjęcie",
+  "EmailChangeSuccess": "Zaktualizowano pomyślnie Twój adres e-mail.",
   "EmailNotVerified": "Adres e-mail nie został jeszcze zweryfikowany",
   "ErrorAccountAlreadyUse": "Połączone konto jest już wykorzystywane przez innego użytkownika",
   "FileManagement": "Zarządzanie plikami",
@@ -17,6 +18,7 @@
   "LogoutDescription": "Uwaga. Wszystkie aktywne połączenia, oprócz niniejszego zostaną wylogowane, ponieważ jest ono obecnie w użyciu.",
   "LogoutFrom": "Wylogować z {{platform}} na {{browser}}?",
   "MyProfile": "Mój profil",
+  "NotificationsChannels": "Kanały powiadomień",
   "ProviderSuccessfullyConnected": "Dostawca został pomyślnie podłączony",
   "ProviderSuccessfullyDisconnected": "Dostawca został pomyślnie rozłączony",
   "SendAgain": "Wyślij ponownie",
@@ -24,6 +26,10 @@
   "SuccessLogout": "Aktywne połączenie zostało wylogowane: {{platform}}, {{browser}}",
   "SystemTheme": "Użyj motywu systemowego",
   "SystemThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem, kiedy robi to Twój system.",
+  "TelegramAccount": "Konto Telegram",
+  "TelegramAccountDescription": "Aby połączyć TelegramBot z Twoim kontem, postępuj zgodnie z sekretnym linkiem i kliknij przycisk „Połącz Telegram”.",
+  "TelegramAccountDisconnect": "Odłącz Telegram",
+  "TelegramAccountDisconnectDescription": "Twoje konto @{{username}} jest połączone w celu otrzymywania powiadomień z Telegrama. Możesz rozłączyć to konto. W takim przypadku nie będziesz otrzymywać powiadomień.",
   "TerminateAllSessions": "Zakończ wszystkie sesje z wyjątkiem bieżącej",
   "TwoFactorDescription": "Weryfikacja dwuetapowa za pośrednictwem aplikacji generującej kody została włączona przez administratora dla wszystkich użytkowników."
 }

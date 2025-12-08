@@ -269,7 +269,7 @@ export const createGetRoomsHandler = () =>
   });
 
 export const createCreateRoomsHandler = () =>
-  http.post<{}, { title: string }>(url, async ({ request }) => {
+  http.post<object, { title: string }>(url, async ({ request }) => {
     const body = await request.json();
 
     const response = { ...rooms[0], title: body.title, id: uuidv4() };

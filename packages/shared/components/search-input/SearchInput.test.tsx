@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { InputSize } from "../text-input";
 import { SearchInput } from ".";
@@ -58,21 +58,15 @@ describe("<SearchInput />", () => {
       InputSize.middle,
     );
 
-    rerender(<SearchInput {...baseProps} size={InputSize.big} />);
+    rerender(<SearchInput {...baseProps} size={InputSize.large} />);
     expect(screen.getByTestId("text-input")).toHaveAttribute(
       "data-size",
-      InputSize.big,
-    );
-
-    rerender(<SearchInput {...baseProps} size={InputSize.huge} />);
-    expect(screen.getByTestId("text-input")).toHaveAttribute(
-      "data-size",
-      InputSize.huge,
+      InputSize.large,
     );
   });
 
   it("handles input changes", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<SearchInput {...baseProps} onChange={onChange} />);
 
     const input = screen.getByTestId("text-input");
@@ -82,7 +76,7 @@ describe("<SearchInput />", () => {
   });
 
   it("handles auto refresh with timeout", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <SearchInput
         {...baseProps}
@@ -119,7 +113,7 @@ describe("<SearchInput />", () => {
   });
 
   it("handles focus events", async () => {
-    const onFocus = jest.fn();
+    const onFocus = vi.fn();
     render(<SearchInput {...baseProps} onFocus={onFocus} />);
 
     const input = screen.getByTestId("text-input");

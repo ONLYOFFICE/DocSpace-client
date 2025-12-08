@@ -3,7 +3,7 @@
   "content": "Notify users that the space will be unavailable",
   "content_en_sha1_hash": "60226058f43f64563c0928ea2b09ef90e055819d",
   "created_at": "2025-05-19T21:30:57.461Z",
-  "updated_at": "2025-05-26T07:57:33.002Z",
+  "updated_at": "2025-08-21T11:22:39.970Z",
   "comment": {
     "text": "This translation key is used to notify users that a space will be unavailable. It appears as a button label in an interface, prompting users to take action or be informed of the unavailability. Translators should provide a message that conveys this information in a clear and concise manner.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
-      "line_number": 121,
+      "line_number": 122,
       "context": "/>\n </Text>\n ) : null}\n <Checkbox\n className=\"checkbox\"\n label={t(\"NotifyUsers\")}\n onChange={() => setIsNotifyChecked(!isNotifyChecked)}\n isChecked={isNotifyChecked}\n isDisabled={isDisabled}\n />\n <Button",
       "module": "/packages/management"
     }

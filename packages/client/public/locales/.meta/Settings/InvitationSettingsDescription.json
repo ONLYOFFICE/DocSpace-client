@@ -3,7 +3,7 @@
   "content": "Configure the invitation options for internal members and external guests of your {{productName}}. These settings can help you comply with your company's security guidelines, for example, if you use LDAP or other user management systems.",
   "content_en_sha1_hash": "679bd3552b0cd51701c408c4776d782a843309fd",
   "created_at": "2025-05-26T07:15:51.088Z",
-  "updated_at": "2025-08-04T07:30:01.544Z",
+  "updated_at": "2025-10-16T07:29:35.905Z",
   "comment": {
     "text": "Configure invitation options for internal members and external guests to comply with security guidelines. This description is used in a portal settings section, providing context to users about the purpose of the invitation settings.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 254,
-      "context": "<Text fontSize=\"16px\" fontWeight=\"700\" ref={invitationSettingsRef}>\n {t(\"InvitationSettings\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n <InvitationSettingsSection />",
+      "line_number": 256,
+      "context": "<Text fontSize=\"16px\" fontWeight=\"700\" ref={invitationSettingsRef}>\n {t(\"InvitationSettings\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 225,
-      "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </LearnMoreWrapper>",
+      "line_number": 252,
+      "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (",
       "module": "/packages/client"
     }
   ],

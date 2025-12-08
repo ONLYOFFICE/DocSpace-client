@@ -1,0 +1,28 @@
+{
+  "key_path": "EditUserCount",
+  "content": "{{count}} {{productName}} users",
+  "content_en_sha1_hash": "bae40159efb2f2263adf84c6e57307ea8d807a8a",
+  "created_at": "2025-09-19T15:39:07.642Z",
+  "updated_at": "2025-09-19T16:00:58.292Z",
+  "comment": {
+    "text": "This key displays the number of users who have edited something, formatted as \"{{count}} {{productName}} users\". It's used within the User Statistics Dialog to show a specific count of users who have made edits, likely related to a product. Translators should ensure \"productName\" is also translated appropriately.",
+    "is_auto": true,
+    "updated_at": "2025-09-19T16:00:58.292Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/UserStatisticsDialog/sub-components/UserStatisticsInfo.tsx",
+      "line_number": 44,
+      "context": "const percentEditing = Math.round((totalUsers / limitUsers) * 100);\n \n const detailedEditInfo = () => {\n const portalUsersText = portalUsers\n ? t(\"EditUserCount\", {\n count: portalUsers,\n productName: t(\"ProductName\"),\n })\n : null;",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

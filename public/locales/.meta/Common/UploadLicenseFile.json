@@ -3,7 +3,7 @@
   "content": "Upload license file",
   "content_en_sha1_hash": "6333456e22fe94df2bb16029236561d60ddcd9ea",
   "created_at": "2025-05-26T07:15:49.355Z",
-  "updated_at": "2025-08-11T18:11:59.377Z",
+  "updated_at": "2025-10-13T21:10:25.583Z",
   "comment": {
     "text": "The translation key \"UploadLicenseFile\" is used to display a placeholder text in a file input field for uploading license files. In this context, it appears as the placeholder text on a button component. The translator should provide an alternative phrase that clearly instructs users to upload their license file.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Ανέβασμα αρχείου άδειας χρήσης' is a bit literal and sounds awkward in Greek. A more natural phrasing would be closer to 'Φόρτωση αρχείου άδειας χρήσης' or 'Ανάρτηση αρχείου άδειας χρήσης'. 'Ανέβασμα' is rarely used in this context.",
+          "suggestion": "Φόρτωση αρχείου άδειας χρήσης"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Վերբեռնեք լիցենզիայի ֆայլը\" is a literal translation of \"Upload license file\", a more natural and idiomatic Armenian phrasing might be preferable. \"Վերբեռնեք լիցենզիայի ֆայլը\" sounds a bit clunky in Armenian.",
+          "suggestion": "Consider a more natural phrasing such as \"Լիցենզիայի ֆայլի վերբեռնում\" or \"Վերբեռնեք լիցենզիայի ֆայլ\" (dropping the \"-ը\" for a slightly more conversational tone, depending on the context)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -129,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Atualizar o ficheiro da licença' translates to 'Update the license file', not 'Upload license file'. 'Upload' implies an action of transferring a file to a system, while 'Atualizar' implies updating an existing file.",
+          "suggestion": "Carregar o ficheiro da licença"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -171,13 +189,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Отпремите датотеку лиценце' doesn't accurately convey the meaning of 'Upload license file'. 'Отпремите' is closer to 'Deliver' or 'Send', not 'Upload'.",
+          "suggestion": "Уплоад датотеку лиценце"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Otpremite datoteku licence' is not the most natural or precise translation of 'Upload license file'. 'Upload' typically implies an action of sending a file *to* a system or server. 'Otpremite' implies simply sending. A more accurate translation would be 'Učitajte datoteku licence'.",
+          "suggestion": "Učitajte datoteku licence"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

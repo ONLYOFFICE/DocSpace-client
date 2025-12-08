@@ -127,7 +127,6 @@ const InfoBar = styled.div`
 const CSP = ({
   cspDomains,
   currentColorScheme,
-  getCSPSettings,
   installationGuidesUrl,
   setCSPSettings,
   standalone,
@@ -138,10 +137,6 @@ const CSP = ({
 }) => {
   const [domain, changeDomain] = useState("");
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    getCSPSettings();
-  }, []);
 
   const addDomain = async () => {
     if (!domain.trim()) return;
@@ -298,7 +293,6 @@ export default inject(({ settingsStore, userStore }) => {
   const {
     cspDomains,
     currentColorScheme,
-    getCSPSettings,
     installationGuidesUrl,
     setCSPSettings,
     standalone,
@@ -312,7 +306,6 @@ export default inject(({ settingsStore, userStore }) => {
   return {
     cspDomains,
     currentColorScheme,
-    getCSPSettings,
     installationGuidesUrl,
     setCSPSettings,
     standalone,

@@ -116,6 +116,5 @@
   "Subtitle": "Subtítulo",
   "SubtitleDescription": "Subtítulo con comentarios o descripciones adicionales para el directorio actual.",
   "TabPlugins": "Pestaña Extensiones",
-  "Viewer": "Visor",
   "ViewerDescription": "Incruste un visor para permitir a los usuarios abrir un archivo para verlo desde la sala correspondiente."
 }

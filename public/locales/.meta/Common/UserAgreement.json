@@ -3,7 +3,7 @@
   "content": "I confirm and want to proceed",
   "content_en_sha1_hash": "9a1708e8dbfcfa98c4531a9a57767fd20d9a308a",
   "created_at": "2025-05-26T07:15:49.400Z",
-  "updated_at": "2025-08-12T19:46:26.388Z",
+  "updated_at": "2025-10-13T20:55:29.061Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message for user agreement. It appears in various UI elements, such as buttons and checkboxes, where users are asked to confirm their actions or settings. Translators should ensure that this text accurately conveys the intended meaning and tone in different languages.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Təsdiqləyirəm və davam etmək istəyirəm\" is a literal translation and a bit verbose for a confirmation button. A more natural and concise option would be better.",
+          "suggestion": "Təsdiqləyirəm və davam"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Επιβεβαίωση και συνέχιση\" doesn't fully capture the meaning of \"I confirm and want to proceed\". \"Επιβεβαίωση\" means 'confirmation', and \"συνέχιση\" means 'continuation'. While technically correct, it lacks the personal affirmation implied by the English phrase.",
+          "suggestion": "A better translation might be \"Επιβεβαιώνω και θέλω να συνεχίσω\" or \"Ολοκληρώνω και προχωράω\" (I complete and proceed)."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -99,19 +111,37 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"確認して、進む\" (Kakunin shite, susumu) is a literal translation of 'Confirm and proceed'. While understandable, it lacks the nuance of 'I confirm and want to proceed'. It's a slightly formal and detached phrasing for an agreement confirmation.",
+          "suggestion": "確認しました。同意します (Kakunin shimashita. Dōi shimasu) - 'I have confirmed. I agree' or 同意して進みます (Dōi shite susumimasu) - 'I agree and proceed' are more natural and suitable translations that capture the intent of a user actively confirming and wanting to continue."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"확인하고 진행하겠습니다\" translates to \"I will confirm and proceed.\" While not drastically wrong, it's not a direct equivalent of \"I confirm and want to proceed.\" It's a more formal and less conversational phrasing. A closer translation would be something like \"확인하고 동의합니다\" or \"확인하고 계속 진행하겠습니다.\"",
+          "suggestion": "Consider \"확인하고 동의합니다\" or \"확인하고 계속 진행하겠습니다\" for a closer match."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the Lao translation \"ຂ້ອຍຢືນຢັນແລະຕ້ອງການດໍາເນີນການ\" (khoy yuen yan lae tongkan damnoen kan) is a bit literal and formal. A more natural phrasing for 'I confirm and want to proceed' in this context (e.g., a user agreement) would be something more like 'ຕົກລົງ' (tok long) which means 'agree' or 'okay'.",
+          "suggestion": "ຕົກລົງ (tok long)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -147,7 +177,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Agreez și doresc să continui' is a literal translation but sounds slightly unnatural in Romanian for this context. While grammatically correct, it's not the most idiomatic way to express 'I confirm and want to proceed'.",
+          "suggestion": "Confirm și continuă"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Agreez' while technically correct, feels somewhat formal and less conversational than a more direct equivalent in this user agreement context.",
+          "suggestion": "Accept"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +200,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"මම තහවුරු කරමි. ඉදිරියට යාමට වුවමනාය.\" is a literal translation that doesn't convey the concise and affirmative meaning of \"I confirm and want to proceed.\" It sounds overly formal and clunky in Sinhala.",
+          "suggestion": "A better translation would be something like \"අනුමැතියි, ඉදිරියට යාමට කැමතියි\" (Anumathiyi, idiriyata yamata kamatiyi) or \"ඔව්, ඉදිරියට යාමට කැමතියමි\" (Ov, idiriyata yamata kamatiyami).  These convey the 'confirm and want to proceed' intent more naturally."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -205,6 +252,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

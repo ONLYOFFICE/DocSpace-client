@@ -82,6 +82,7 @@ const EmailInputForm = ({
             ? t(`Common:${emailErrorText}`)
             : t("Common:RequiredField")
         }
+        dataTestId="email_field_container"
       >
         <EmailInput
           id="login"
@@ -100,6 +101,7 @@ const EmailInputForm = ({
           onValidateInput={onValidate}
           forwardedRef={ref}
           onKeyDown={onKeyPress}
+          dataTestId="email-input-invite"
         />
       </FieldContainer>
       <Button
@@ -113,6 +115,7 @@ const EmailInputForm = ({
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onContinue}
+        testId="email_continue_button"
       />
     </div>
   );

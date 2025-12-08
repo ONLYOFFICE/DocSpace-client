@@ -27,6 +27,7 @@
 import { makeAutoObservable } from "mobx";
 import { isMobile } from "@docspace/shared/utils";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { clearTextSelection } from "@docspace/shared/utils/copy";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
 import GroupsStore from "./GroupsStore";
@@ -337,12 +338,51 @@ class ContactsHotkeysStore {
 
   enableSelection = (e: KeyboardEvent) => {
     if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      clearTextSelection();
       this.setSelectionAreaIsEnabled(false);
       this.setWithContentSelection(true);
     } else if (e.type === "keyup") {
       this.setSelectionAreaIsEnabled(true);
     }
     e.preventDefault();
+  };
+
+  openContextMenu = () => {
+    if (!this.contactsSelection.length) return;
+
+    const index = this.contactsList.findIndex(
+      (i) => i.id === this.contactsSelection[0].id,
+    );
+    const firstSelectedItem = this.contactsList[index];
+    const windowItems = document.querySelectorAll(".window-item");
+
+    windowItems.forEach((item) => {
+      const nodeId = (item.childNodes[0] as HTMLElement).id;
+
+      if (nodeId === firstSelectedItem.id) {
+        const cmButton = item.querySelector(".context-menu-button");
+        if (!cmButton) return;
+
+        const rect = cmButton.getBoundingClientRect();
+
+        const event = new MouseEvent("contextmenu", {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          clientX: rect.left,
+          clientY: rect.top,
+          button: 2,
+        });
+
+        cmButton.dispatchEvent(event);
+
+        if (this.contactsSelection.length === 0) {
+          this.setSelectionWithCaret([firstSelectedItem] as
+            | UsersStore["selection"]
+            | GroupsStore["selection"]);
+        }
+      }
+    });
   };
 }
 

@@ -24,12 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable prefer-template */
-/* eslint-disable prefer-promise-reject-errors */
-/* eslint-disable no-plusplus */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+// biome-ignore-start lint/suspicious/noExplicitAny: TODO fix
 function toFileWithPath(file: any, path: any) {
   if (typeof file?.path === "string") return file;
 
@@ -224,3 +219,4 @@ async function fromFileEntry(entry: any) {
     );
   });
 }
+// biome-ignore-end lint/suspicious/noExplicitAny: TODO fix

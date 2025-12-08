@@ -42,6 +42,7 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { CategoryType } from "@docspace/shared/constants";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import ChangeMailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
@@ -63,18 +64,16 @@ import ReassignDataReactSvgUrl from "PUBLIC_DIR/images/reassign.data.svg?url";
 import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
-import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url";
-import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
+import PersonInviteReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
+import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
   createGroup,
   onDeletePersonalDataClick,
   onInviteAgainClick,
-  onInviteMultipleAgain,
   shareGuest,
 } from "SRC_DIR/helpers/contacts";
 
@@ -466,7 +465,7 @@ class ContactsConextOptionsStore {
       },
       {
         key: "cm-invite",
-        label: t("Common:Invite"),
+        label: t("LblInviteAgain"),
         disabled: !hasUsersToInvite,
         onClick: () => setSendInviteDialogVisible(true),
         icon: InviteAgainReactSvgUrl,
@@ -641,16 +640,20 @@ class ContactsConextOptionsStore {
 
   get contactsCanCreate() {
     const isInsideGroup = this.usersStore.contactsTab === "inside_group";
-
+    const isGuestView = this.usersStore.contactsTab === "guests";
+    const isGroup = this.usersStore.contactsTab === "groups";
     const isCollaborator = this.userStore.user?.isCollaborator;
+    const isRoomAdmin = this.userStore.user?.isRoomAdmin;
 
-    const canCreate = !isInsideGroup && !isCollaborator;
+    const canCreate = !isInsideGroup && !isGuestView && !isCollaborator;
 
-    return canCreate;
+    return isGroup ? !isRoomAdmin : canCreate;
   }
 
   getContactsModel = (t: TTranslation, isSectionMenu: boolean) => {
-    const { isRoomAdmin, isOwner, isAdmin } = this.userStore.user!;
+    const { isOwner, isAdmin } = this.userStore.user!;
+    const { allowInvitingMembers } = this.settingsStore;
+    const isGroups = this.usersStore.contactsTab === "groups";
 
     const someDialogIsOpen = checkDialogsOpen();
 
@@ -693,31 +696,9 @@ class ContactsConextOptionsStore {
         action: EmployeeType.User,
         key: "collaborator",
       },
-      {
-        key: "separator",
-        isSeparator: true,
-      },
-      {
-        id: "accounts-add_invite-again",
-        className: "main-button_drop-down",
-        icon: InviteAgainReactSvgUrl,
-        label: t("People:LblInviteAgain"),
-        onClick: () => onInviteMultipleAgain(t),
-        "data-action": "invite-again",
-        key: "invite-again",
-      },
     ];
 
-    const accountsFullOptions = [
-      {
-        id: "actions_invite_user",
-        className: "main-button_drop-down",
-        icon: PersonUserReactSvgUrl,
-        label: t("Common:Invite"),
-        key: "new-user",
-        openByDefault: true,
-        items: accountsUserOptions,
-      },
+    const groupsOptions = [
       {
         id: "create_group",
         className: "main-button_drop-down",
@@ -729,15 +710,29 @@ class ContactsConextOptionsStore {
       },
     ];
 
-    // Delete Invite
-    if (!this.settingsStore.allowInvitingMembers)
-      accountsFullOptions.splice(0, 1);
+    const accountsSectionActions = [
+      {
+        id: "invite-accounts",
+        icon: PersonInviteReactSvgUrl,
+        label: t("Common:Invite"),
+        key: "invite-accounts",
+        items: accountsUserOptions,
+      },
+    ];
 
-    return isRoomAdmin
-      ? !this.settingsStore.allowInvitingMembers
-        ? []
-        : accountsUserOptions
-      : accountsFullOptions;
+    if (isGroups) {
+      return groupsOptions;
+    }
+
+    if (isSectionMenu && allowInvitingMembers) {
+      return accountsSectionActions;
+    }
+
+    if (allowInvitingMembers) {
+      return accountsUserOptions;
+    }
+
+    return null;
   };
 
   inviteUser = (userType: EmployeeType) => {

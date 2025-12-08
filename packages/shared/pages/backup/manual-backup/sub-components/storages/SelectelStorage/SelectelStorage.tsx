@@ -65,6 +65,7 @@ interface SelectelStorageProps {
     values: Record<string, string>,
     module?: string,
   ) => void;
+  isThirdPartyAvailable: boolean;
 }
 
 const SelectelStorage = ({
@@ -83,6 +84,7 @@ const SelectelStorage = ({
   addValueInFormSettings,
   setRequiredFormSettings,
   setIsThirdStorageChanged,
+  isThirdPartyAvailable,
 }: SelectelStorageProps) => {
   const isDisabled = selectedStorage && !selectedStorage.isSet;
 
@@ -104,18 +106,20 @@ const SelectelStorage = ({
 
   return (
     <div data-testid="selectel-storage">
-      <SelectelSettings
-        t={t}
-        isLoading={isLoading}
-        formSettings={formSettings}
-        isLoadingData={isLoadingData}
-        isNeedFilePath={isNeedFilePath}
-        selectedStorage={selectedStorage}
-        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
-        addValueInFormSettings={addValueInFormSettings}
-        setRequiredFormSettings={setRequiredFormSettings}
-        setIsThirdStorageChanged={setIsThirdStorageChanged}
-      />
+      {isThirdPartyAvailable ? (
+        <SelectelSettings
+          t={t}
+          isLoading={isLoading}
+          formSettings={formSettings}
+          isLoadingData={isLoadingData}
+          isNeedFilePath={isNeedFilePath}
+          selectedStorage={selectedStorage}
+          errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+          addValueInFormSettings={addValueInFormSettings}
+          setRequiredFormSettings={setRequiredFormSettings}
+          setIsThirdStorageChanged={setIsThirdStorageChanged}
+        />
+      ) : null}
 
       <div
         className={classNames(

@@ -41,7 +41,7 @@ export const Header = styled.div`
   }
 `;
 
-export const AddMembersButton = styled.div<{}>`
+export const AddMembersButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;

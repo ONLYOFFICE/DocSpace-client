@@ -86,11 +86,12 @@ const PeopleTableRow = ({
   contactsTab,
   isRoomAdmin,
   inProgress,
+  itemIndex,
   withContentSelection,
+  isMe,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
-  const [isLoading, setIsLoading] = React.useState(false);
 
   const {
     displayName,
@@ -104,6 +105,8 @@ const PeopleTableRow = ({
     isCollaborator,
     isSSO,
     isLDAP,
+
+    id,
   } = item;
 
   const isGuests = contactsTab === "guests";
@@ -121,29 +124,11 @@ const PeopleTableRow = ({
     return options;
   }, [getUsersChangeTypeOptions, item, t]);
 
-  const onAbort = () => {
-    setIsLoading(false);
-  };
-
-  const onSuccess = () => {
-    setIsLoading(false);
-  };
-
   const onTypeChange = React.useCallback(
     (option: TOption) => {
       if (!option.action || option.key === role) return;
 
-      setIsLoading(true);
-      if (
-        !changeUserType(
-          option.action as EmployeeType,
-          [item],
-          onSuccess,
-          onAbort,
-        )
-      ) {
-        setIsLoading(false);
-      }
+      changeUserType(option.action as EmployeeType, [item]);
     },
     [item, changeUserType],
   );
@@ -228,7 +213,6 @@ const PeopleTableRow = ({
         displaySelectedOption
         modernView
         manualWidth="auto"
-        isLoading={isLoading}
       />
     );
 
@@ -274,6 +258,7 @@ const PeopleTableRow = ({
 
   return (
     <StyledWrapper
+      id={item.id}
       className={`user-item ${
         isChecked || isActive ? "table-row-selected" : ""
       } ${item.id}`}
@@ -291,12 +276,21 @@ const PeopleTableRow = ({
         getContextModel={getContextModel!}
         isIndexEditingMode={false}
         badgeUrl=""
+        dataTestId={
+          isGuests
+            ? `contacts_guests_row_${itemIndex}`
+            : `contacts_users_row_${itemIndex}`
+        }
       >
-        <TableCell className="table-container_user-name-cell">
+        <TableCell
+          className="table-container_user-name-cell"
+          dataTestId={`contacts_name_cell_${itemIndex}`}
+        >
           <TableCell
             hasAccess
             className="table-container_row-checkbox-wrapper"
             checked={isChecked}
+            dataTestId={`contacts_users_checkbox_cell_${itemIndex}`}
           >
             {inProgress ? (
               <Loader
@@ -317,6 +311,7 @@ const PeopleTableRow = ({
           </TableCell>
 
           <Text
+            as="div"
             title={displayName}
             fontWeight="600"
             fontSize="13px"
@@ -324,12 +319,18 @@ const PeopleTableRow = ({
             className="table-cell_username"
             dir="auto"
             truncate
+            data-testid="contacts_users_username_text"
           >
             {statusType === "pending"
               ? email
               : displayName?.trim()
                 ? displayName
                 : email}
+            {isMe?.(id) ? (
+              <Text className="me-label" fontWeight="600" fontSize="13px">
+                ({t("Common:MeLabel")})
+              </Text>
+            ) : null}
           </Text>
           <Badges
             statusType={statusType}
@@ -340,13 +341,21 @@ const PeopleTableRow = ({
         </TableCell>
 
         {isGuests ? null : typeColumnIsEnabled ? (
-          <TableCell className="table-cell_type">{typeCell}</TableCell>
+          <TableCell
+            className="table-cell_type"
+            dataTestId={`contacts_type_cell_${itemIndex}`}
+          >
+            {typeCell}
+          </TableCell>
         ) : (
           <div />
         )}
 
         {isGuests ? null : groupColumnIsEnabled ? (
-          <TableCell className="table-cell_groups">
+          <TableCell
+            className="table-cell_groups"
+            dataTestId={`contacts_groups_cell_${itemIndex}`}
+          >
             {renderGroupsCell()}
           </TableCell>
         ) : (
@@ -354,7 +363,10 @@ const PeopleTableRow = ({
         )}
 
         {emailColumnIsEnabled ? (
-          <TableCell className="table-cell_email">
+          <TableCell
+            className="table-cell_email"
+            dataTestId={`contacts_email_cell_${itemIndex}`}
+          >
             <Link
               type={LinkType.page}
               title={email}
@@ -365,6 +377,7 @@ const PeopleTableRow = ({
               isTextOverflow
               enableUserSelect
               truncate
+              dataTestId="contacts_email_link"
             >
               {email}
             </Link>
@@ -375,7 +388,10 @@ const PeopleTableRow = ({
 
         {isGuests && !isRoomAdmin ? (
           inviterColumnIsEnabled ? (
-            <TableCell className="table-cell_inviter">
+            <TableCell
+              className="table-cell_inviter"
+              dataTestId={`contacts_inviter_cell_${itemIndex}`}
+            >
               <Text
                 title={item.createdBy?.displayName}
                 fontSize="13px"
@@ -395,7 +411,10 @@ const PeopleTableRow = ({
 
         {isGuests && !isRoomAdmin ? (
           invitedDateColumnIsEnabled ? (
-            <TableCell className="table-cell_invited-date">
+            <TableCell
+              className="table-cell_invited-date"
+              dataTestId={`contacts_invited_date_cell_${itemIndex}`}
+            >
               <Text
                 title={item.registrationDate}
                 fontSize="13px"
@@ -417,7 +436,10 @@ const PeopleTableRow = ({
           ? null
           : showStorageInfo &&
             (storageColumnIsEnabled ? (
-              <TableCell className="table-cell_Storage/Quota">
+              <TableCell
+                className="table-cell_Storage/Quota"
+                dataTestId={`contacts_storage_cell_${itemIndex}`}
+              >
                 <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
               </TableCell>
             ) : (
@@ -441,6 +463,7 @@ export default inject(
 
       isRoomAdmin: userStore.user?.isRoomAdmin,
       withContentSelection,
+      isMe: userStore.isMe,
     };
   },
 )(withContent(observer(PeopleTableRow)));

@@ -29,12 +29,22 @@ import React from "react";
 import api from "../../../api";
 import { TFilesSettings } from "../../../api/files/types";
 import { presentInArray } from "../../../utils";
-import { iconSize32 } from "../../../utils/image-helpers";
+import {
+  iconSize32,
+  iconSize64,
+  iconSize96,
+} from "../../../utils/image-helpers";
 import { HTML_EXST, EBOOK_EXST } from "../../../constants";
 import { toastr } from "../../../components/toast";
 import { TData } from "../../../components/toast/Toast.type";
 
 import { TGetIcon } from "../types";
+
+const IconSizes: Record<number, Map<string, string>> = {
+  32: iconSize32,
+  64: iconSize64,
+  96: iconSize96,
+};
 
 const useFilesSettings = (
   getIconProp?: TGetIcon,
@@ -103,14 +113,17 @@ const useFilesSettings = (
   );
 
   const getIcon = React.useCallback(
-    (fileExst: string) => {
-      if (getIconProp) return getIconProp(32, fileExst) ?? "";
+    (fileExst: string, size = 32) => {
+      if (getIconProp) return getIconProp(size, fileExst) ?? "";
       if (!filesSettings) return "";
 
       const path = determineIconPath(fileExst);
-      return iconSize32.has(path)
-        ? (iconSize32.get(path) ?? "")
-        : (iconSize32.get("file.svg") ?? "");
+
+      const iconSize = IconSizes[size] ?? iconSize32;
+
+      return iconSize.has(path)
+        ? (iconSize.get(path) ?? "")
+        : (iconSize.get("file.svg") ?? "");
     },
     [filesSettings, getIconProp, determineIconPath],
   );

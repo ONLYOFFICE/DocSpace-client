@@ -47,8 +47,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -76,7 +76,7 @@ test("password change success", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.changePassword, endpoints.login]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("text-input").fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -84,7 +84,7 @@ test("password change success", async ({ page, mockRequest }) => {
     "password-change-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("create_password_button").click();
 
   await page.waitForURL("/login?passwordChanged=true", { waitUntil: "load" });
 
@@ -98,8 +98,8 @@ test("password change success", async ({ page, mockRequest }) => {
 test("password change error", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("text-input").fill("123");
-  await page.getByTestId("button").click();
+  await page.fill("[name='password']", "123");
+  await page.getByTestId("create_password_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",

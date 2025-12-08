@@ -103,7 +103,11 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
 
     e.preventDefault();
 
-    item.isFolder ? openFolder(item.id, item.title) : openFile(item);
+    if (item.isFolder) {
+      openFolder(item.id, item.title);
+    } else {
+      openFile(item);
+    }
   };
 
   const tileContextClick = (isRightMouseButtonClick?: boolean) => {
@@ -137,7 +141,9 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       viewAs="tile"
       showNew={false}
       onFilesClick={() => {
-        !item.isFolder && openFile(item);
+        if (!item.isFolder) {
+          openFile(item);
+        }
       }}
     />
   );
@@ -188,7 +194,9 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
             {...commonTileProps}
             thumbnailClick={openItem}
             temporaryIcon={temporaryIcon}
-            thumbnail={item.thumbnailUrl}
+            thumbnail={
+              !item.providerItem && item.thumbnailUrl ? item.thumbnailUrl : ""
+            }
             contentElement={quickButtonsComponent}
           />
         )}

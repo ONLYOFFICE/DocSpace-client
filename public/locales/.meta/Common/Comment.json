@@ -3,7 +3,7 @@
   "content": "Comment",
   "content_en_sha1_hash": "153d7a58b3a3e898fcbdd04c462af308414bd09d",
   "created_at": "2025-05-19T21:30:43.541Z",
-  "updated_at": "2025-06-02T10:20:51.579Z",
+  "updated_at": "2025-10-01T08:28:22.228Z",
   "comment": {
     "text": "This translation key is used for the label of a comment feature in a share component. It appears on a button or similar UI element where users can add comments to a shared item. The translation should be used for text related to commenting on a file or document.",
     "is_auto": true,
@@ -12,14 +12,38 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 113,
-      "context": "icon: AccessReviewReactSvgUrl,\n },\n available.Comment && {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),\n icon: AccessCommentReactSvgUrl,\n },\n available.Read && {\n access: ShareAccessRights.ReadOnly,\n key: \"viewing\",",
+      "line_number": 130,
+      "context": "icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n key: \"viewing\",",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 113,
-      "context": "icon: AccessReviewReactSvgUrl,\n },\n available.Comment && {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),\n icon: AccessCommentReactSvgUrl,\n },\n available.Read && {\n access: ShareAccessRights.ReadOnly,\n key: \"viewing\",",
+      "line_number": 130,
+      "context": "icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n key: \"viewing\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 130,
+      "context": "icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n key: \"viewing\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 130,
+      "context": "icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n key: \"viewing\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 130,
+      "context": "icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n key: \"viewing\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 130,
+      "context": "icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n key: \"viewing\",",
       "module": "/packages/shared"
     }
   ],

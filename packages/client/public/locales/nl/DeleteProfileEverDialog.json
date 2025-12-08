@@ -7,7 +7,7 @@
   "DeleteGuest": "Verwijder gast",
   "DeleteGuests": "Verwijder gasten",
   "DeletePersonalDataApplicable": "*Van toepassing op de geselecteerde gebruikers die dergelijke bestanden en mappen hebben.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Kamers aangemaakt door deze gebruiker en documenten opgeslagen in deze kamers worden automatisch toegewezen aan een beheerder die gaat verwijderen: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Gegevens handmatig opnieuw toewijzen om een andere bestemmingsgebruiker te kiezen om opnieuw toe te wijzen.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Alle gedeelde bestanden en ruimtes die door deze contactpersoon zijn gemaakt, worden automatisch toegewezen aan een beheerder die de verwijdering uitvoert: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Wijs gegevens handmatig toe om een andere bestemminggebruiker voor toewijzing te kiezen.",
   "DeleteReqassignDescriptionGuest": "De {{userCaption}} zal verwijderd worden uit alle kamers waarvoor ze uitgenodigd waren. Documenten die door deze {{userCaption}} in kamers zijn aangemaakt, worden automatisch opnieuw toegewezen aan de kamer eigenaars.",
   "DeleteUser": "Gebruiker verwijderen",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> zal worden verwijderd. Deze actie kan niet ongedaan worden gemaakt.",

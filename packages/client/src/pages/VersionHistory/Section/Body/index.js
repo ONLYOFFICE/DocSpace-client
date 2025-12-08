@@ -137,6 +137,7 @@ class SectionBodyContent extends React.Component {
           culture={culture}
           onSetRestoreProcess={this.onSetRestoreProcess}
           onUpdateHeight={this.onUpdateHeight}
+          dataTestId={`version_row_${index}`}
         />
       </div>
     );

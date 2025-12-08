@@ -43,6 +43,7 @@ import { DropDownItem } from "../drop-down-item";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
 import { TGetTooltipContent, Tooltip } from "../tooltip";
+import { AVATAR_ACTION_KEYS } from "../../constants";
 
 import styles from "./Avatar.module.scss";
 
@@ -107,7 +108,7 @@ const AvatarPure = ({
         src={source}
         className={`${styles.image}${imgClassName ? ` ${imgClassName}` : ""}`}
         data-is-default={isDefault}
-        alt=""
+        alt="avatar"
         style={
           {
             "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
@@ -121,7 +122,7 @@ const AvatarPure = ({
     <img
       className={styles.image}
       data-is-default="true"
-      alt=""
+      alt="avatar"
       style={
         {
           "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
@@ -182,7 +183,7 @@ const AvatarPure = ({
         const optionOnClickAction = () => {
           setOpenLogoEdit(false);
 
-          if (option.key === "upload") {
+          if (option.key === AVATAR_ACTION_KEYS.PROFILE_AVATAR_UPLOAD) {
             return option.onClick(inputFilesElement);
           }
 
@@ -240,7 +241,7 @@ const AvatarPure = ({
                 iconName={PlusSvgUrl}
                 onClick={onUploadClick}
                 size={16}
-                dataTestId="upload_avatar_icon_button"
+                dataTestId="edit_avatar_icon_button"
               />
             )}
           </div>

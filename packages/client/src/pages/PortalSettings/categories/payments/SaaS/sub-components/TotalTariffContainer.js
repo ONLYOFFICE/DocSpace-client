@@ -109,8 +109,8 @@ const TotalTariffContainer = ({
                 ns="Payments"
                 values={{ price: formatPaymentCurrency(totalPrice) }}
                 components={{
-                  2: <span className="lagerFontSize" />,
-                  3: <Text fontWeight={600} />,
+                  2: <span key="large-font-year" className="lagerFontSize" />,
+                  3: <Text fontWeight={600} as="span" key="bold-text-year" />,
                 }}
               />
             ) : (
@@ -120,8 +120,8 @@ const TotalTariffContainer = ({
                 ns="Payments"
                 values={{ price: formatPaymentCurrency(totalPrice) }}
                 components={{
-                  2: <span className="lagerFontSize" />,
-                  3: <Text fontWeight={600} />,
+                  2: <span key="large-font-month" className="lagerFontSize" />,
+                  3: <Text fontWeight={600} as="span" key="bold-text-month" />,
                 }}
               />
             )}

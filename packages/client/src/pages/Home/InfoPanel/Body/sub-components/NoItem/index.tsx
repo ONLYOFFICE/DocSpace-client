@@ -27,7 +27,8 @@
 import React from "react";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import { WithFlag } from "@docspace/shared/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { WithFlag } from "@docspace/shared/types";
 
 import NoGalleryItem from "./NoGalleryItem";
 import NoRoomItem from "./NoRoomItem";
@@ -35,12 +36,12 @@ import NoFileOrFolderItem from "./NoFileOrFolderItem";
 import NoContactsItem from "./NoContactsItem";
 import ExpiredItem from "./ExpiredItem";
 import LockedItem from "./LockedItem";
+import NoAgentItem from "./NoAgentItem";
 
 type SharedRoom = WithFlag<
   "isLockedSharedRoom",
   {
     isLockedSharedRoom: true;
-    infoPanelSelection: TRoom;
   }
 >;
 
@@ -50,7 +51,10 @@ type NoItemsProps = {
   isGuests?: boolean;
   isGallery?: boolean;
   isRooms?: boolean;
+  isAgents?: boolean;
   isFiles?: boolean;
+  isTemplatesRoom?: boolean;
+  infoPanelSelection?: TRoom | TFile | TFolder | null;
 } & SharedRoom;
 
 const NoItem = ({
@@ -60,6 +64,8 @@ const NoItem = ({
   isGallery,
   isRooms,
   isFiles,
+  isTemplatesRoom,
+  isAgents,
   isLockedSharedRoom,
   infoPanelSelection,
 }: NoItemsProps) => {
@@ -70,6 +76,8 @@ const NoItem = ({
     isGallery,
     isRooms,
     isFiles,
+    isTemplatesRoom,
+    isAgents,
     isLockedSharedRoom,
   });
 
@@ -80,6 +88,8 @@ const NoItem = ({
     isGallery ||
     isRooms ||
     isFiles ||
+    isTemplatesRoom ||
+    isAgents ||
     isLockedSharedRoom
   ) {
     prevNoItemsRef.current = {
@@ -89,12 +99,14 @@ const NoItem = ({
       isGallery,
       isRooms,
       isFiles,
+      isTemplatesRoom,
+      isAgents,
       isLockedSharedRoom,
     };
   }
 
-  if (infoPanelSelection?.expired && infoPanelSelection?.external)
-    return <ExpiredItem />;
+  if (infoPanelSelection?.isLinkExpired && infoPanelSelection?.external)
+    return <ExpiredItem infoPanelSelection={infoPanelSelection} />;
 
   if (prevNoItemsRef.current.isLockedSharedRoom)
     return <LockedItem item={infoPanelSelection!} />;
@@ -108,7 +120,9 @@ const NoItem = ({
   if (prevNoItemsRef.current.isGallery) return <NoGalleryItem />;
 
   if (prevNoItemsRef.current.isFiles) return <NoFileOrFolderItem />;
+  if (prevNoItemsRef.current.isTemplatesRoom) return <NoGalleryItem />;
   if (prevNoItemsRef.current.isRooms) return <NoRoomItem />;
+  if (prevNoItemsRef.current.isAgents) return <NoAgentItem />;
 
   return null;
 };

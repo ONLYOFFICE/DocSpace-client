@@ -58,7 +58,7 @@ const BodyComponent = ({
   onlyGuests,
 }: BodyComponentProps) => {
   const warningMessageMyDocuments = t("UserFilesRemovalScope", {
-    sectionNameFirst: t("Common:MyFilesSection"),
+    sectionNameFirst: t("Common:MyDocuments"),
     sectionNameSecond: t("Common:TrashSection"),
   });
 
@@ -120,7 +120,7 @@ const BodyComponent = ({
         <Text className="text-delete-description">
           {t("PersonalDataDeletionInfo", {
             productName: t("Common:ProductName"),
-            sectionNameFirst: t("Common:MyFilesSection"),
+            sectionNameFirst: t("Common:MyDocuments"),
             sectionNameSecond: t("Common:TrashSection"),
           })}
         </Text>

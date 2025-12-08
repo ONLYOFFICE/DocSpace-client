@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { classNames } from "../../../utils";
 
 import { Button, ButtonSize } from "../../button";
@@ -64,9 +65,10 @@ const Footer = React.memo(
     cancelButtonId,
 
     requestRunning,
+    withErrorFooter,
   }: FooterProps) => {
     const ref = useRef<HTMLDivElement>(null);
-
+    const { t } = useTranslation(["Common"]);
     const label =
       selectedItemsCount && isMultiSelect
         ? `${submitButtonLabel} (${selectedItemsCount})`
@@ -88,6 +90,7 @@ const Footer = React.memo(
           [styles.withFooterCheckbox]: withFooterCheckbox && !withFooterInput,
           [styles.withFooterInput]: !withFooterCheckbox && withFooterInput,
           [styles.defaultHeight]: !withFooterCheckbox && !withFooterInput,
+          [styles.withErrorFooter]: withErrorFooter,
         })}
       >
         {withFooterInput ? (
@@ -100,14 +103,29 @@ const Footer = React.memo(
             >
               {footerInputHeader}
             </Text>
-            <TextInput
-              type={InputType.text}
-              size={InputSize.base}
-              className={styles.newFileInput}
-              value={currentFooterInputValue || ""}
-              scale
-              onChange={onChangeFileName}
-            />
+            <div className={styles.newFileInputContainer}>
+              <TextInput
+                type={InputType.text}
+                size={InputSize.base}
+                className={styles.newFileInput}
+                value={currentFooterInputValue || ""}
+                scale
+                onChange={onChangeFileName}
+                testId="selector_footer_input"
+                hasError={withErrorFooter}
+              />
+
+              {withErrorFooter ? (
+                <Text
+                  className={styles.errorText}
+                  fontSize="12px"
+                  lineHeight="16px"
+                >
+                  {t("Common:ContainsSpecCharacter")}
+                </Text>
+              ) : null}
+            </div>
+
             {withFooterCheckbox ? (
               <Checkbox
                 label={footerCheckboxLabel}
@@ -124,6 +142,7 @@ const Footer = React.memo(
             isChecked={isChecked}
             onChange={onChangeCheckbox}
             className="selector_footer-checkbox"
+            dataTestId="selector_footer_checkbox"
           />
         ) : null}
 
@@ -142,6 +161,7 @@ const Footer = React.memo(
                 : disableSubmitButton || !currentFooterInputValue.trim()
             }
             onClick={onSubmit}
+            testId="selector_submit_button"
           />
 
           {withAccessRights ? (
@@ -163,6 +183,7 @@ const Footer = React.memo(
               size={ButtonSize.normal}
               onClick={onCancel}
               isDisabled={requestRunning}
+              testId="selector_cancel_button"
             />
           ) : null}
         </div>

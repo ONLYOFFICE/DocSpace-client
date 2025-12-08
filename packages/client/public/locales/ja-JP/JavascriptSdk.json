@@ -116,6 +116,5 @@
   "Subtitle": "サブタイトル",
   "SubtitleDescription": "現在のディレクトリに関するコメントや説明を追加したサブタイトル。",
   "TabPlugins": "「プラグイン」タブ",
-  "Viewer": "ビューア",
   "ViewerDescription": "ビューアを埋め込み、対応するルームからファイルを開いて閲覧できるようにします。"
 }

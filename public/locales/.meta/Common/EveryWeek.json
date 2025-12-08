@@ -3,7 +3,7 @@
   "content": "Every week",
   "content_en_sha1_hash": "043058e2050c0345ef7aac78bd9025d3adce099a",
   "created_at": "2025-05-19T21:30:45.186Z",
-  "updated_at": "2025-08-04T07:30:01.693Z",
+  "updated_at": "2025-09-07T07:53:15.440Z",
   "comment": {
     "text": "This translation key is used to display the frequency at which data should be backed up automatically. It appears in a file backup settings page, where users can select how often backups are performed. Translators, please update this key to reflect the desired frequency in English for the \"EveryWeek\" category.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/cron/Cron.utils.ts",
-      "line_number": 530,
+      "line_number": 529,
       "context": "case \"Year\":\n return t(\"EveryYear\");\n case \"Month\":\n return t(\"EveryMonth\");\n case \"Week\":\n return t(\"EveryWeek\");\n case \"Day\":\n return t(\"EveryDay\");\n case \"Hour\":\n return t(\"EveryHour\");\n default:",
       "module": "/packages/shared"
     },

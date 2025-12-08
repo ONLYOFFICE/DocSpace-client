@@ -119,8 +119,8 @@ const FillPDFDialog = inject<TStore>(
         },
         {
           id: "role-based-filling",
-          title: t("Common:RoleBasedFilling"),
-          description: t("Common:RoleBasedFillingDescription"),
+          title: t("Common:RecipientBasedFilling"),
+          description: t("Common:RecipientBasedFillingDescription"),
           buttonLabel: t("Common:ShareInTheRoom"),
           onClick: () => openSelector(RoomsType.VirtualDataRoom),
           icon: <RoleBasedFillingIcon />,

@@ -3,7 +3,7 @@
   "content": "Enter the AWS region where your Amazon bucket resides.",
   "content_en_sha1_hash": "8b30b6e8c00c36cc42c9387f6a8891f2053a78a2",
   "created_at": "2025-05-26T07:15:40.388Z",
-  "updated_at": "2025-08-11T09:02:44.076Z",
+  "updated_at": "2025-11-03T12:10:35.428Z",
   "comment": {
     "text": "\"Used in a tooltip within a region selection input field, indicating the user to enter the AWS region of their Amazon bucket.\"",
     "is_auto": true,

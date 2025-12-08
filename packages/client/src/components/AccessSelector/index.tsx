@@ -39,13 +39,14 @@ import StyledAccessSelector from "./AccessSelector.styled";
 interface AccessSelectorProps {
   t: TTranslation;
   roomType: RoomsType | -1;
-  onSelectAccess: (access: any) => void;
+  onSelectAccess: (access: TOption) => void;
   containerRef?: React.RefObject<HTMLDivElement | null>;
   defaultAccess: number;
   isOwner: boolean;
   isAdmin: boolean;
   withRemove?: boolean;
-  filteredAccesses?: any[];
+  filteredAccesses?: TOption[];
+  setIsOpenItemAccess?: React.Dispatch<React.SetStateAction<boolean>>;
   className: string;
   standalone?: boolean;
   isMobileView: boolean;
@@ -71,6 +72,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   isAdmin,
   withRemove = false,
   filteredAccesses,
+  setIsOpenItemAccess,
   className,
   standalone,
   isMobileView,
@@ -137,7 +139,9 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           className={className}
           selectedOption={selectedOption as unknown as TOption}
           onSelect={onSelectAccess}
-          accessOptions={filteredAccesses || accessOptions}
+          accessOptions={
+            (filteredAccesses || accessOptions) as unknown as TOption[]
+          }
           noBorder={noBorder}
           directionX={directionX as "right" | "left"}
           directionY={directionY as "bottom" | "top" | "both" | undefined}
@@ -145,12 +149,14 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           manualWidth={`${width}px`}
           isDefaultMode={false}
           isAside={false}
+          setIsOpenItemAccess={setIsOpenItemAccess}
           isDisabled={isDisabled}
           isSelectionDisabled={isSelectionDisabled}
           selectionErrorText={selectionErrorText}
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
           dataTestId={dataTestId}
+          showDisabledItems={true}
         />
       ) : null}
 
@@ -159,7 +165,9 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           className={className}
           selectedOption={selectedOption as unknown as TOption}
           onSelect={onSelectAccess}
-          accessOptions={filteredAccesses || accessOptions}
+          accessOptions={
+            (filteredAccesses || accessOptions) as unknown as TOption[]
+          }
           noBorder={noBorder}
           directionX="right"
           directionY="top"
@@ -167,6 +175,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           manualWidth="auto"
           isDefaultMode
           isAside={isMobileView}
+          setIsOpenItemAccess={setIsOpenItemAccess}
           manualY="0px"
           withBackground={isMobileView}
           withBlur={isMobileView}
@@ -176,6 +185,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
           dataTestId={dataTestId}
+          showDisabledItems={true}
         />
       ) : null}
     </StyledAccessSelector>

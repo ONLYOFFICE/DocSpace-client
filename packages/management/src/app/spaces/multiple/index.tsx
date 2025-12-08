@@ -26,7 +26,10 @@
 
 "use client";
 
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import type { TPortals } from "@docspace/shared/api/management/types";
+
+import { useEndAnimation } from "@/hooks/useEndAnimation";
 
 import { Header } from "./header";
 import { Spaces } from "./spaces";
@@ -44,11 +47,15 @@ export const MultipleSpaces = ({
   portals,
   tenantAlias,
 }: IProps) => {
+  const isLoading = useEndAnimation();
+
   return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} tenantAlias={tenantAlias} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
+    <LoaderWrapper isLoading={isLoading}>
+      <StyledWrapper>
+        <Header />
+        <Spaces portals={portals} tenantAlias={tenantAlias} />
+        <DomainSettings baseDomain={baseDomain} />
+      </StyledWrapper>
+    </LoaderWrapper>
   );
 };

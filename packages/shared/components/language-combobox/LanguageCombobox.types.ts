@@ -43,4 +43,13 @@ export type ComboboxProps = {
   /** Indicates that component contain border */
   withBorder?: boolean;
   isMobileView?: boolean;
+  /** Direction of dropdown opening (top, bottom, both) */
+  directionY?: "top" | "bottom" | "both";
+  /** Fix dropdown direction regardless of available space */
+  fixedDirection?: boolean;
+  /** Use default mode for dropdown positioning */
+  isDefaultMode?: boolean;
+  /** Manual width for dropdown */
+  manualWidth?: string;
+  dataTestId?: string;
 };

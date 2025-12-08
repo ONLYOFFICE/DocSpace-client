@@ -55,7 +55,7 @@ const StyledWrapper = styled.div`
 `;
 
 const ProviderMetadata = (props) => {
-  const { t } = useTranslation("SingleSignOn");
+  const { t, ready } = useTranslation("SingleSignOn");
   const navigate = useNavigate();
   const location = useLocation();
   const { downloadMetadata, currentDeviceType, isSSOAvailable } = props;
@@ -74,6 +74,8 @@ const ProviderMetadata = (props) => {
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
+
+  if (!ready) return null;
 
   return (
     <StyledWrapper>

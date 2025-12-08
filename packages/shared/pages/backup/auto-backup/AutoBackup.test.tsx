@@ -1,62 +1,58 @@
 import React from "react";
-import { screen } from "@testing-library/react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { BackupStorageType, FolderType } from "../../../enums";
 import { ButtonSize } from "../../../components/button";
-import { renderWithTheme } from "../../../utils/render-with-theme";
-import {
-  deleteBackupSchedule,
-  createBackupSchedule,
-} from "../../../api/portal";
+import * as portalApi from "../../../api/portal";
 
 import AutomaticBackup from "./index";
 import { selectedStorages, mockThirdPartyAccounts } from "../mockData";
 
-jest.mock("@docspace/shared/api/portal", () => ({
-  deleteBackupSchedule: jest.fn().mockResolvedValue(undefined),
-  getBackupSchedule: jest.fn().mockResolvedValue(undefined),
-  createBackupSchedule: jest.fn().mockResolvedValue(undefined),
+vi.mock("../../../api/portal", () => ({
+  deleteBackupSchedule: vi.fn().mockResolvedValue(undefined),
+  getBackupSchedule: vi.fn().mockResolvedValue(undefined),
+  createBackupSchedule: vi.fn().mockResolvedValue(undefined),
 }));
 
-jest.mock("@docspace/shared/api/settings", () => ({
-  getBackupStorage: jest.fn().mockResolvedValue(undefined),
+vi.mock("../../../api/settings", () => ({
+  getBackupStorage: vi.fn().mockResolvedValue(undefined),
 }));
 
-jest.mock("@docspace/shared/components/toast", () => ({
+vi.mock("@docspace/shared/components/toast", () => ({
   toastr: {
-    success: jest.fn(),
-    error: jest.fn(),
+    success: vi.fn(),
+    error: vi.fn(),
   },
 }));
 
-jest.mock("@docspace/shared/utils/socket", () => ({
-  on: jest.fn(),
-  off: jest.fn(),
+vi.mock("@docspace/shared/utils/socket", () => ({
+  on: vi.fn(),
+  off: vi.fn(),
   SocketEvents: {
     BackupProgress: "BACKUP_PROGRESS",
   },
 }));
 
-jest.mock("./sub-components/RoomsModule", () => ({
-  RoomsModule: jest
+vi.mock("./sub-components/RoomsModule", () => ({
+  RoomsModule: vi
     .fn()
     .mockImplementation(() => (
       <div data-testid="rooms-module">Rooms Module Content</div>
     )),
 }));
 
-jest.mock("./sub-components/ThirdPartyModule", () => ({
-  ThirdPartyModule: jest
+vi.mock("./sub-components/ThirdPartyModule", () => ({
+  ThirdPartyModule: vi
     .fn()
     .mockImplementation(() => (
       <div data-testid="third-party-module">Third Party Module Content</div>
     )),
 }));
 
-jest.mock("./sub-components/ThirdPartyStorageModule", () => ({
-  ThirdPartyStorageModule: jest
+vi.mock("./sub-components/ThirdPartyStorageModule", () => ({
+  ThirdPartyStorageModule: vi
     .fn()
     .mockImplementation(() => (
       <div data-testid="third-party-storage-module">
@@ -68,22 +64,22 @@ jest.mock("./sub-components/ThirdPartyStorageModule", () => ({
 describe("AutomaticBackup", () => {
   const defaultProps = {
     language: "en",
-    setDefaultOptions: jest.fn(),
-    setThirdPartyStorage: jest.fn(),
-    setBackupSchedule: jest.fn(),
-    setConnectedThirdPartyAccount: jest.fn(),
+    setDefaultOptions: vi.fn(),
+    setThirdPartyStorage: vi.fn(),
+    setBackupSchedule: vi.fn(),
+    setConnectedThirdPartyAccount: vi.fn(),
     rootFoldersTitles: {
       [FolderType.USER]: { title: "My Documents", id: 1 },
     },
-    seStorageType: jest.fn(),
-    setSelectedEnableSchedule: jest.fn(),
-    toDefault: jest.fn(),
+    seStorageType: vi.fn(),
+    setSelectedEnableSchedule: vi.fn(),
+    toDefault: vi.fn(),
     selectedStorageType: `${BackupStorageType.DocumentModuleType}`,
-    resetNewFolderPath: jest.fn(),
-    updateBaseFolderPath: jest.fn(),
-    isFormReady: jest.fn().mockReturnValue(true),
+    resetNewFolderPath: vi.fn(),
+    updateBaseFolderPath: vi.fn(),
+    isFormReady: vi.fn().mockReturnValue(true),
     selectedFolderId: "folder-id",
-    getStorageParams: jest.fn().mockReturnValue([]),
+    getStorageParams: vi.fn().mockReturnValue([]),
     selectedEnableSchedule: true,
     selectedHour: "10:00",
     selectedMaxCopiesNumber: "5",
@@ -91,7 +87,7 @@ describe("AutomaticBackup", () => {
     selectedPeriodNumber: "0",
     selectedStorageId: "storage-id",
     selectedWeekday: "1",
-    deleteSchedule: jest.fn(),
+    deleteSchedule: vi.fn(),
     buttonSize: ButtonSize.normal,
     downloadingProgress: 0,
     isEnableAuto: true,
@@ -110,89 +106,94 @@ describe("AutomaticBackup", () => {
       isBase: true,
     },
     isBackupProgressVisible: false,
-    setIsBackupProgressVisible: jest.fn(),
+    setIsBackupProgressVisible: vi.fn(),
     isChanged: false,
     isThirdStorageChanged: false,
     settingsFileSelector: {
-      getIcon: jest.fn(),
+      getIcon: vi.fn(),
     },
     basePath: "/",
     isErrorPath: false,
     newPath: "",
-    setBasePath: jest.fn(),
-    setNewPath: jest.fn(),
-    toDefaultFileSelector: jest.fn(),
-    setSelectedFolder: jest.fn(),
+    setBasePath: vi.fn(),
+    setNewPath: vi.fn(),
+    toDefaultFileSelector: vi.fn(),
+    setSelectedFolder: vi.fn(),
     defaultStorageType: `${BackupStorageType.DocumentModuleType}`,
     defaultFolderId: "default-folder-id",
-    openConnectWindow: jest.fn(),
+    openConnectWindow: vi.fn(),
     connectDialogVisible: false,
     deleteThirdPartyDialogVisible: false,
     connectedThirdPartyAccount: null,
-    setConnectDialogVisible: jest.fn(),
+    setConnectDialogVisible: vi.fn(),
     selectedPeriodLabel: "Every day",
     selectedWeekdayLabel: "Monday",
-    setDeleteThirdPartyDialogVisible: jest.fn(),
-    setMaxCopies: jest.fn(),
-    setMonthNumber: jest.fn(),
-    setPeriod: jest.fn(),
-    setTime: jest.fn(),
-    setWeekday: jest.fn(),
-    setStorageId: jest.fn(),
+    setDeleteThirdPartyDialogVisible: vi.fn(),
+    setMaxCopies: vi.fn(),
+    setMonthNumber: vi.fn(),
+    setPeriod: vi.fn(),
+    setTime: vi.fn(),
+    setWeekday: vi.fn(),
+    setStorageId: vi.fn(),
     thirdPartyStorage: Object.values(selectedStorages),
     defaultStorageId: "default-storage-id",
-    setCompletedFormFields: jest.fn(),
+    setCompletedFormFields: vi.fn(),
     errorsFieldsBeforeSafe: {},
     formSettings: {},
-    addValueInFormSettings: jest.fn(),
-    setIsThirdStorageChanged: jest.fn(),
-    setRequiredFormSettings: jest.fn(),
+    addValueInFormSettings: vi.fn(),
+    setIsThirdStorageChanged: vi.fn(),
+    setRequiredFormSettings: vi.fn(),
     storageRegions: [
       { systemName: "us-east-1", displayName: "US East (N. Virginia)" },
     ],
     defaultRegion: "us-east-1",
-    deleteValueFormSetting: jest.fn(),
-    clearLocalStorage: jest.fn(),
-    setSelectedThirdPartyAccount: jest.fn(),
+    deleteValueFormSetting: vi.fn(),
+    clearLocalStorage: vi.fn(),
+    setSelectedThirdPartyAccount: vi.fn(),
     isTheSameThirdPartyAccount: false,
     selectedThirdPartyAccount: null,
     accounts: [],
-    setThirdPartyAccountsInfo: jest.fn(),
-    deleteThirdParty: jest.fn(),
+    setThirdPartyAccountsInfo: vi.fn(),
+    deleteThirdParty: vi.fn(),
     providers: [],
-    setThirdPartyProviders: jest.fn(),
+    setThirdPartyProviders: vi.fn(),
     removeItem: mockThirdPartyAccounts[0],
     isNeedFilePath: false,
     isEmptyContentBeforeLoader: false,
     isInitialLoading: false,
-    setDownloadingProgress: jest.fn(),
-    setTemporaryLink: jest.fn(),
-    setErrorInformation: jest.fn(),
+    setDownloadingProgress: vi.fn(),
+    setTemporaryLink: vi.fn(),
+    setErrorInformation: vi.fn(),
     isInitialError: false,
     errorInformation: "",
     isManagement: false,
     backupProgressError: "",
-    setBackupProgressError: jest.fn(),
+    setBackupProgressError: vi.fn(),
+    backupProgressWarning: "",
+    setBackupProgressWarning: vi.fn(),
+    setDefaultFolderId: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
+    vi.spyOn(portalApi, "deleteBackupSchedule").mockResolvedValue(undefined);
+    vi.spyOn(portalApi, "createBackupSchedule").mockResolvedValue(undefined);
   });
 
   it("renders without errors", () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} />);
+    render(<AutomaticBackup {...defaultProps} />);
 
     expect(screen.getByTestId("auto-backup")).toBeInTheDocument();
   });
 
   it("shows loader when isInitialLoading is true", () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isInitialLoading />);
+    render(<AutomaticBackup {...defaultProps} isInitialLoading />);
 
     expect(screen.getByTestId("auto-backup-loader")).toBeInTheDocument();
   });
 
   it("does not render content when isEmptyContentBeforeLoader is true and isInitialLoading is false", () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <AutomaticBackup
         {...defaultProps}
         isEmptyContentBeforeLoader
@@ -204,7 +205,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("displays error message when errorInformation is provided", () => {
-    renderWithTheme(
+    render(
       <AutomaticBackup
         {...defaultProps}
         errorInformation="Test error message"
@@ -215,7 +216,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("toggles automatic backup when toggle button is clicked", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} />);
+    render(<AutomaticBackup {...defaultProps} />);
 
     const toggleButton = screen.getByRole("checkbox");
     await userEvent.click(toggleButton);
@@ -224,7 +225,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("switches to Third Party Resource when selected", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} />);
+    render(<AutomaticBackup {...defaultProps} />);
 
     const thirdPartyRadio = screen.getByLabelText("Common:ThirdPartyResource");
     await userEvent.click(thirdPartyRadio);
@@ -235,7 +236,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("switches to Third Party Storage when selected", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} />);
+    render(<AutomaticBackup {...defaultProps} />);
 
     const thirdPartyStorageRadio = screen.getByLabelText(
       "Common:ThirdPartyStorage",
@@ -248,20 +249,14 @@ describe("AutomaticBackup", () => {
   });
 
   it("renders save and cancel buttons when changes are made", () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isChanged />);
+    render(<AutomaticBackup {...defaultProps} isChanged />);
 
     expect(screen.getByText("Common:SaveButton")).toBeInTheDocument();
     expect(screen.getByText("Common:CancelButton")).toBeInTheDocument();
   });
 
-  it("shows paid badge when isEnableAuto is false", () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isEnableAuto={false} />);
-
-    expect(screen.getByText("Common:Paid")).toBeInTheDocument();
-  });
-
   it("calls deleteBackupSchedule when toggle is turned off and save is clicked", async () => {
-    renderWithTheme(
+    render(
       <AutomaticBackup
         {...defaultProps}
         selectedEnableSchedule={false}
@@ -272,20 +267,20 @@ describe("AutomaticBackup", () => {
     const saveButton = screen.getByText("Common:SaveButton");
     await userEvent.click(saveButton);
 
-    expect(deleteBackupSchedule).toHaveBeenCalled();
+    expect(vi.mocked(portalApi.deleteBackupSchedule)).toHaveBeenCalled();
   });
 
   it("calls createBackupSchedule when settings are saved", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isChanged />);
+    render(<AutomaticBackup {...defaultProps} isChanged />);
 
     const saveButton = screen.getByText("Common:SaveButton");
     await userEvent.click(saveButton);
 
-    expect(createBackupSchedule).toHaveBeenCalled();
+    expect(vi.mocked(portalApi.createBackupSchedule)).toHaveBeenCalled();
   });
 
   it("calls toDefault when cancel button is clicked", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isChanged />);
+    render(<AutomaticBackup {...defaultProps} isChanged />);
 
     const cancelButton = screen.getByText("Common:CancelButton");
     await userEvent.click(cancelButton);

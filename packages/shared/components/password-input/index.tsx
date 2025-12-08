@@ -42,7 +42,7 @@ import { InputBlock } from "../input-block";
 import { Link, LinkType } from "../link";
 import { Text } from "../text";
 import { Tooltip } from "../tooltip";
-import { InputType } from "../text-input";
+import { InputSize, InputType } from "../text-input";
 
 import { PasswordInputProps, TPasswordSettings } from "./PasswordInput.types";
 import { globalColors } from "../../themes";
@@ -115,6 +115,8 @@ const PasswordInput = ({
   // clipPasswordResource = "Password ",
   simulateSymbol = "•",
 }: PasswordInputProps) => {
+  const refTooltip = useRef(null);
+
   const usePrevious = (value: string) => {
     const inputValueRef = useRef<string>(undefined);
     useEffect(() => {
@@ -136,7 +138,8 @@ const PasswordInput = ({
     passwordSettings,
     onValidateInput,
   );
-  const { refTooltip, onChangeAction } = usePasswordInput(
+
+  const { onChangeAction } = usePasswordInput(
     isSimulateType,
     simulateSymbol,
     simpleView,
@@ -146,6 +149,7 @@ const PasswordInput = ({
     onChange,
     state.value,
   );
+
   const { onGeneratePassword } = usePasswordGenerator(
     generatorSpecial,
     passwordSettings,
@@ -185,20 +189,6 @@ const PasswordInput = ({
     [onBlur],
   );
 
-  const onFocusAction = () => {
-    const length = state.value?.length ?? 0;
-
-    const minLength = passwordSettings?.minLength;
-
-    if ((minLength && length < minLength) || hasError || hasWarning) {
-      if (refTooltip.current) {
-        const tooltip = refTooltip.current as TooltipRefProps;
-
-        tooltip?.open?.();
-      }
-    }
-  };
-
   const handleClickOutside = React.useCallback(
     (event: Event) => {
       if (refTooltip.current && refTooltipContent.current) {
@@ -235,7 +225,7 @@ const PasswordInput = ({
     [onKeyDown],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     setState((s) => ({ ...s, copyLabel: clipActionResource }));
   }, [clipActionResource, clipCopiedResource, setState]);
 
@@ -249,6 +239,47 @@ const PasswordInput = ({
       } as ChangeEvent<HTMLInputElement>);
     }
   }, [inputValue, prevInputValue, isSimulateType, onChangeAction]);
+
+  useEffect(() => {
+    const length = state.value?.length ?? 0;
+
+    const minLength = passwordSettings?.minLength;
+
+    if (!refTooltip.current) {
+      return;
+    }
+    const tooltip = refTooltip.current as TooltipRefProps;
+
+    if ((minLength && length < minLength) || hasError || hasWarning) {
+      tooltip?.open?.();
+    }
+  }, [state.value, hasError, hasWarning, refTooltip]);
+
+  React.useEffect(() => {
+    const length = state.value?.length ?? 0;
+    const minLength = passwordSettings?.minLength ?? 0;
+
+    if (refTooltip.current) {
+      const tooltip = refTooltip.current as TooltipRefProps;
+      const meetsLength = length >= minLength;
+
+      if (
+        tooltip?.isOpen &&
+        meetsLength &&
+        hasError !== undefined &&
+        !hasError &&
+        !hasWarning
+      ) {
+        tooltip.close();
+      }
+    }
+  }, [
+    state.value,
+    hasError,
+    hasWarning,
+    passwordSettings?.minLength,
+    refTooltip,
+  ]);
 
   React.useImperativeHandle(ref, () => {
     return { onGeneratePassword, setState, value: state.value };
@@ -361,14 +392,13 @@ const PasswordInput = ({
   );
 
   const renderInputGroup = () => {
+    const effectiveSize = size ?? InputSize.middle;
     const { type, value } = state;
     const iconNode =
       type === "password" ? (
-        <EyeOffReactSvg
-          data-testid={testId ? `${testId}_eye_icon` : undefined}
-        />
+        <EyeOffReactSvg data-testid="password_input_eye_off_icon" />
       ) : (
-        <EyeReactSvg data-testid={testId ? `${testId}_eye_icon` : undefined} />
+        <EyeReactSvg data-testid="password_input_eye_icon" />
       );
     const iconButtonClassName = `password_eye--${
       type === "password" ? "close" : "open"
@@ -393,12 +423,11 @@ const PasswordInput = ({
           onIconClick={changeInputType}
           onChange={onChangeAction}
           scale={scale}
-          size={size}
+          size={effectiveSize}
           type={isSimulateType ? InputType.text : type}
           iconSize={16}
           isIconFill
           onBlur={onBlurAction}
-          onFocus={onFocusAction}
           onKeyDown={onKeyDownAction}
           hasWarning={hasWarning}
           placeholder={placeholder}
@@ -407,7 +436,6 @@ const PasswordInput = ({
           autoComplete={autoComplete}
           forwardedRef={forwardedRef}
           isAutoFocussed={isAutoFocussed}
-          testId={testId}
         />
 
         {!isDisableTooltip && !isDisabled ? (
@@ -415,7 +443,7 @@ const PasswordInput = ({
             place="top"
             clickable
             openOnClick
-            anchorSelect="div[id='tooltipContent'] input"
+            anchorSelect={`div[id='tooltipContent-${id || inputName}'] input`}
             ref={refTooltip}
             imperativeModeOnly
           >
@@ -438,7 +466,7 @@ const PasswordInput = ({
         className,
       )}
       style={style}
-      data-testid="password-input"
+      data-testid={testId ?? "password-input"}
       data-scale={scale}
       data-warning={hasWarning}
       data-error={hasError}
@@ -453,7 +481,7 @@ const PasswordInput = ({
         <>
           <div className="password-field-wrapper">
             <div
-              id="tooltipContent"
+              id={`tooltipContent-${id || inputName}`}
               data-testid="tooltipContent"
               ref={refProgress}
               className={classNames(styles.passwordProgress, {

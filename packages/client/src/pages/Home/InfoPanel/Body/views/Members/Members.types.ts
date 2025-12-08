@@ -39,6 +39,7 @@ import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 export enum TInfoPanelMemberType {
+  owner = "owner",
   users = "users",
   groups = "groups",
   expected = "expected",
@@ -59,10 +60,14 @@ export type TInfoPanelMember = {
   isExpect?: boolean;
 } & (TUser | TGroup);
 
-export type TInfoPanelMembers = Record<
-  TInfoPanelMemberType,
-  TInfoPanelMember[]
->;
+export type TInfoPanelMembers = {
+  [TInfoPanelMemberType.owner]?: TInfoPanelMember[];
+  [TInfoPanelMemberType.users]: TInfoPanelMember[];
+  [TInfoPanelMemberType.groups]: TInfoPanelMember[];
+  [TInfoPanelMemberType.expected]: TInfoPanelMember[];
+  [TInfoPanelMemberType.guests]: TInfoPanelMember[];
+  [TInfoPanelMemberType.administrators]: TInfoPanelMember[];
+};
 
 type TMember = TTitleMember | TInfoPanelMember;
 
@@ -86,11 +91,8 @@ export type MembersProps = {
   additionalLinks?: PublicRoomStore["additionalLinks"];
   setExternalLink?: PublicRoomStore["setExternalLink"];
   setExternalLinks?: PublicRoomStore["setExternalLinks"];
-  setPublicRoomKey?: PublicRoomStore["setPublicRoomKey"];
 
-  setLinkParams?: DialogsStore["setLinkParams"];
   setAccessSettingsIsVisible?: DialogsStore["setTemplateAccessSettingsVisible"];
-  setEditLinkPanelIsVisible?: DialogsStore["setEditLinkPanelIsVisible"];
 
   getPrimaryLink?: FilesStore["getPrimaryLink"];
 
@@ -124,6 +126,7 @@ export type UserProps = {
   searchValue: string;
 
   index?: number;
+  isAIAgentsFolderRoot?: boolean;
 
   changeUserRole: (
     option: TOption,
@@ -137,16 +140,8 @@ export type UserProps = {
   setRemoveUserConfirmation?: DialogsStore["setRemoveUserConfirmation"];
 };
 
-export type MembersListProps = {
-  hasNextPage: boolean;
-  itemCount: number;
-  loadNextPage: () => Promise<void>;
-  linksBlockLength: number;
-  withoutTitlesAndLinks: boolean;
-  children: React.ReactNode;
-};
-
 export type LinkRowProps = {
+  item: TRoom;
   link: TFileLink;
 
   roomId: string | number;
@@ -160,10 +155,8 @@ export type LinkRowProps = {
   setIsScrollLocked?: InfoPanelStore["setIsScrollLocked"];
   isPublicRoomType: boolean;
   isFormRoom: boolean;
-  isPrimaryLink?: boolean;
   isCustomRoom: boolean;
   setExternalLink?: PublicRoomStore["setExternalLink"];
-  editExternalLink?: PublicRoomStore["editExternalLink"];
   deleteExternalLink?: PublicRoomStore["deleteExternalLink"];
 };
 

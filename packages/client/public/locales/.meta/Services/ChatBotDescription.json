@@ -1,0 +1,28 @@
+{
+  "key_path": "ChatBotDescription",
+  "content": "Interact with an AI assistant directly in your editors — ask questions, get suggestions, or speed up your workflow.",
+  "content_en_sha1_hash": "9f6035621fe928fe5ee99248949779b44e473ff5",
+  "created_at": "2025-11-03T12:10:29.429Z",
+  "updated_at": "2025-11-03T12:29:50.504Z",
+  "comment": {
+    "text": "This text describes the ChatBot service, which allows users to interact with an AI assistant within the editor. It appears in a list of available AI tools, likely in a dialog or settings panel, and explains the functionality of the ChatBot service. Translators should focus on conveying the benefits of AI assistance for workflow and suggestions.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:29:50.504Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 122,
+      "context": "icon: <ToolsIcon />,\n },\n {\n id: \"chatbot\",\n title: t(\"ChatBot\"),\n description: t(\"ChatBotDescription\"),\n icon: <ChatIcon />,\n },\n {\n id: \"summarization\",\n title: t(\"Summarization\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

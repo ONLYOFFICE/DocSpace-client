@@ -83,8 +83,17 @@ const EmailContainer = ({
       <div className="invitation-info-container">
         <div className="sign-in-container">
           <div className="back-title">
-            <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
-            <Text fontWeight={600} onClick={onClickBack}>
+            <IconButton
+              size={16}
+              iconName={ArrowIcon}
+              onClick={onClickBack}
+              dataTestId="email_invitation_back_button"
+            />
+            <Text
+              fontWeight={600}
+              onClick={onClickBack}
+              dataTestId="email_invitation_back_text"
+            >
               {t("Common:Back")}
             </Text>
           </div>
@@ -129,6 +138,7 @@ const EmailContainer = ({
           ? t(`Common:${errorText}`, errorText)
           : t("Common:RequiredField")
       } // TODO: Add wrong login server error
+      dataTestId="email_field"
     >
       {isLdapLogin ? (
         <TextInput
@@ -148,6 +158,7 @@ const EmailContainer = ({
           autoComplete="off"
           onChange={onChangeLogin}
           onBlur={onBlurEmail}
+          testId="ldap_username_input"
         />
       ) : (
         <EmailInput

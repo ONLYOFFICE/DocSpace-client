@@ -30,8 +30,8 @@ import classNames from "classnames";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { Text } from "@docspace/shared/components/text";
 
-import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
-import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
+import EmptyScreenRecentUrl from "PUBLIC_DIR/images/emptyview/empty.history.light.svg?url";
+import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/emptyview/empty.history.dark.svg?url";
 
 import styles from "./NoItem.module.scss";
 

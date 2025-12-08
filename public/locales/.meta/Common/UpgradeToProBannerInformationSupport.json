@@ -3,7 +3,7 @@
   "content": "Get tech assistance <1>{{helpUrl}}</1>",
   "content_en_sha1_hash": "653923be289053ccbdd59fa114cf2caef5bfa3c5",
   "created_at": "2025-05-26T07:15:49.153Z",
-  "updated_at": "2025-08-11T18:11:59.376Z",
+  "updated_at": "2025-10-13T22:42:21.979Z",
   "comment": {
     "text": "This translation key is used to display a help message for contacting technical support. It appears as part of a payment contact container and is linked to a URL for additional information or feedback. The user will likely click on this text to access more detailed assistance.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Texniki yardım alın' is a bit awkward. A more natural phrasing for 'Get tech assistance' would be something like 'Texniki kömək alın'. 'Alın' can be translated as 'get' or 'receive'.",
+          "suggestion": "Texniki kömək alın"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +57,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Get tech assistance' is more naturally translated as 'Technische Unterstützung erhalten' or 'Holen Sie sich technische Unterstützung' in German. 'Erhalten Sie technische Hilfe' is a literal translation and sounds slightly awkward.",
+          "suggestion": "Technische Unterstützung erhalten"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Get tech assistance' is better translated as 'Αποκτήστε τεχνική υποστήριξη' rather than 'Λάβετε τεχνική βοήθεια'. 'Λάβετε' implies receiving something, while 'Αποκτήστε' implies acquiring or obtaining, which is more aligned with the context of tech assistance.",
+          "suggestion": "Αποκτήστε τεχνική υποστήριξη"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Obtenir une assistance technique' is not the most natural or idiomatic way to say \"Get tech assistance\" in French. A more natural translation would be something like 'Bénéficiez d'une assistance technique'.",
+          "suggestion": "Bénéficiez d'une assistance technique"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -117,31 +141,66 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Ontvang technische ondersteuning' is a bit formal. A more natural and user-friendly translation would be 'Krijg technische ondersteuning' or ' krijg hulp van een techneut'.",
+          "suggestion": "Krijg technische ondersteuning"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aby uzyskać pomoc w kwestiach technicznych, kliknij tutaj:' deviates from the concise 'Get tech assistance'. It adds unnecessary phrasing. While not incorrect, it's less direct and doesn't fully capture the original meaning in a user interface context.",
+          "suggestion": "Uzyskaj pomoc techniczną: "
+        },
+        {
+          "type": "formatting",
+          "description": "The Polish translation includes a colon after 'Uzyskaj pomoc techniczną', which is not present in the English original. While grammatically acceptable, maintaining consistency in formatting is desirable.",
+          "suggestion": "Uzyskaj pomoc techniczną"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Obter assistência técnica' is a generally acceptable translation of 'Get tech assistance', but 'Obter' sounds slightly formal. A more natural and common phrasing would be 'Consiga assistência técnica' or 'Receba assistência técnica'.",
+          "suggestion": "Consiga assistência técnica"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Obtenha assistência técnica' is a literal translation of 'Get tech assistance' but sounds unnatural in Portuguese. A more natural translation would be 'Receba assistência técnica' or 'Consiga assistência técnica'.",
+          "suggestion": "Receba assistência técnica"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Get tech assistance\" is more casually translated as \"Solicitați asistența tehnică.\" A more natural and closer translation might be \"Obțineți asistență tehnică\" or \"Cereți asistență tehnică\". \"Solicitați\" is correct but sounds overly formal in this context.",
+          "suggestion": "Cereți asistență tehnică"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +212,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Get tech assistance' is not accurately translated. 'Get' implies obtaining something, which is not clearly conveyed by ' හරහා' (haraha - through). A more direct translation of 'Get' would be 'ලබා ගන්න' (labā ganna).",
+          "suggestion": "<1>{{helpUrl}}</1> තාක්‍ෂණික සහාය ලබා ගන්න"
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags should remain consistent with the English content. They appear to be tags meant for variables or special formatting. Ensure this is handled correctly in the target system.",
+          "suggestion": "Verify that `<1>{{helpUrl}}</1>` tags are correctly processed by the rendering system in Sinhala, mirroring the English behavior."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,7 +235,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zahtevajte pomoč' doesn't accurately convey the meaning of 'Get tech assistance'. 'Zahtevajte' implies requesting or demanding help, which is stronger than simply 'Get'. A more accurate translation would be something along the lines of 'Pridobite tehnično pomoč' or 'Poiščite tehnično pomoč'.",
+          "suggestion": "Pridobite tehnično pomoč"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,31 +253,67 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Get tech assistance\" is translated as \"Dobijte tehničku pomoć\". While technically correct, \"Dobijte\" can sound a bit formal or transactional in this context. A more natural phrasing might be \"Potražite tehničku pomoć\" or \"Uputstvo za tehničku pomoć\".",
+          "suggestion": "Potražite tehničku pomoć"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Get tech assistance' is not perfectly captured by 'Teknik yardım alın'. A more natural translation would be 'Teknik destek alın' or 'Teknik yardım edinin'. 'Alın' implies obtaining something which is correct, but 'edinin' or 'destek alın' sound more idiomatic in this context.",
+          "suggestion": "Teknik destek alın"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Get tech assistance' is translated as 'Щоб отримати технічну допомогу'. While technically correct, 'Щоб отримати технічну допомогу' is more formal than the original. A more natural translation might be 'Отримайте технічну допомогу' or 'Зверніться за технічною допомогою'.",
+          "suggestion": "Отримайте технічну допомогу"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets in the Vietnamese translation are inconsistent with the English. The English uses <1> and </1>, while the Vietnamese uses <1> and </1>. This creates a visual discrepancy.",
+          "suggestion": "Change the closing angle bracket in the Vietnamese translation to </1> to match the English."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Get tech assistance\" is better translated as 'Përfitoni ndihmë teknike' rather than 'Merrni asistencë teknike'. While 'Merrni' is technically correct, 'Përfitoni' conveys a more proactive and user-friendly tone, which is often preferred in UI text.",
+          "suggestion": "Përfitoni ndihmë teknike <1>{{helpUrl}}</1>"
+        }
+      ],
       "approved_at": null
     }
   }

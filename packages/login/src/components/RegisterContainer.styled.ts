@@ -149,8 +149,4 @@ export const RegisterContainer = styled.div<{
       line-height: 22px !important;
     }
   }
-
-  .input-block-icon {
-    padding-inline-end: 12px;
-  }
 `;

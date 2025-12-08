@@ -57,29 +57,53 @@ const StyledBox = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
 
   .consumer-icon {
-    ${(props) =>
-      !props.theme.isBase &&
+    ${({ theme, isLinkedIn, isWeixin, isTelegram }) =>
+      !theme.isBase &&
       css`
         path {
           fill: ${globalColors.white};
           opacity: 1;
         }
-        ${props.isLinkedIn &&
-        css`
-          path:nth-child(8) {
-            fill: ${globalColors.black};
-            opacity: 1;
-          }
+
+        ${
+          isLinkedIn &&
+          css`
+          path:nth-child(8),
           path:nth-child(9) {
             fill: ${globalColors.black};
             opacity: 1;
           }
-        `}
+        `
+        }
+
+        ${
+          isWeixin &&
+          css`
+          path:nth-child(11),
+          path:nth-child(12),
+          path:nth-child(13),
+          path:nth-child(14) {
+            fill: ${globalColors.black};
+            opacity: 1;
+          }
+        `
+        }
+
+        ${
+          isTelegram &&
+          css`
+          path:nth-child(11),
+          path:nth-child(12) {
+            fill: ${globalColors.black};
+            opacity: 1;
+          }
+        `
+        }
       `}
 
-    ${(props) =>
-      !props.isThirdPartyAvailable &&
-      props.canSet &&
+    ${({ isThirdPartyAvailable, canSet }) =>
+      !isThirdPartyAvailable &&
+      canSet &&
       css`
         path {
           opacity: 0.5;
@@ -95,17 +119,21 @@ const ConsumerItem = ({
   updateConsumerProps,
   t,
   isThirdPartyAvailable,
+  standalone,
 }) => {
   const logo = thirdpartiesLogo?.get(`${consumer.name.toLowerCase()}.svg`);
   const isSet = !!(!consumer.canSet || consumer.props.find((p) => p.value));
+  const saveAvailable = !consumer.paid || standalone || isThirdPartyAvailable; // same logic on backend
 
   return (
-    <StyledItem isThirdPartyAvailable={isThirdPartyAvailable} isSet={isSet}>
+    <StyledItem isThirdPartyAvailable={saveAvailable} isSet={isSet}>
       <div className="item-box">
         <StyledBox
           canSet={consumer.canSet}
           isLinkedIn={consumer.name === "linkedin"}
-          isThirdPartyAvailable={isThirdPartyAvailable}
+          isWeixin={consumer.name === "weixin"}
+          isTelegram={consumer.name === "telegram"}
+          isThirdPartyAvailable={saveAvailable}
         >
           {logo ? (
             <ReactSVG
@@ -121,7 +149,7 @@ const ConsumerItem = ({
             onModalOpen={onModalOpen}
             updateConsumerProps={updateConsumerProps}
             t={t}
-            isDisabled={!isThirdPartyAvailable}
+            isDisabled={!saveAvailable}
             dataTestId="consumer_toggle_button"
           />
         </div>

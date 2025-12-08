@@ -8,6 +8,8 @@
   "NeedSettings": "Cần vào cài đặt",
   "NoPlugins": "Không có plugin nào được thêm",
   "NotNeedSettings": "Không cần vào cài đặt",
+  "PluginIsNotCompatible": "Phiên bản SDK plugin không khớp với phiên bản {{productName}}. Vui lòng cập nhật lên phiên bản tương thích.",
+  "PluginLoadedSuccessfully": "Plugin đã được tải thành công",
   "PluginSamples": "Mẫu plugin",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Sử dụng Plugin SDK, bạn có thể mở rộng chức năng {{productName}}, kết nối các dịch vụ của bên thứ ba hay nâng cao trải nghiệm người dùng hiện có. Tại đây bạn có thể tìm thấy các mẫu plugin với mã nguồn có sẵn trên GitHub.",

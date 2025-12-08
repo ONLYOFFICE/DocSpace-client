@@ -49,11 +49,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import CanceledLightIconURL from "PUBLIC_DIR/images/emptyview/empty.canceled.light.svg?url";
-import CanceledDarkIconURL from "PUBLIC_DIR/images/emptyview/empty.canceled.dark.svg?url";
+import CanceledLightIconURL from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg?url";
+import CanceledDarkIconURL from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg?url";
 
 import { Text } from "@docspace/shared/components/text";
 import {
@@ -62,12 +62,38 @@ import {
   HeadingSize,
 } from "@docspace/shared/components/heading";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { isFile, isFolder } from "@docspace/shared/utils/typeGuards";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import styles from "./NoItem.module.scss";
 
-const ExpiredItem = () => {
+interface ExpiredItemProps {
+  infoPanelSelection?: TRoom | TFile | TFolder;
+}
+
+const ExpiredItem: FC<ExpiredItemProps> = ({ infoPanelSelection }) => {
   const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
+
+  const { title, description } = useMemo(() => {
+    if (isFile(infoPanelSelection))
+      return {
+        title: t("Common:FileNotAvailable"),
+        description: t("Common:FileLinkExpired"),
+      };
+
+    if (isFolder(infoPanelSelection))
+      return {
+        title: t("Common:FolderNotAvailable"),
+        description: t("Common:FolderLinkExpired"),
+      };
+
+    return {
+      title: t("Common:RoomNotAvailable"),
+      description: t("Common:RoomLinkExpired"),
+    };
+  }, [infoPanelSelection]);
 
   const imageSrc = isBase ? CanceledLightIconURL : CanceledDarkIconURL;
 
@@ -82,10 +108,10 @@ const ExpiredItem = () => {
           level={HeadingLevel.h3}
           size={HeadingSize.xsmall}
         >
-          {t("Common:RoomNotAvailable")}
+          {title}
         </Heading>
         <Text className="expired-text" textAlign="center">
-          {t("Common:RoomLinkExpired")}
+          {description}
         </Text>
       </div>
     </div>

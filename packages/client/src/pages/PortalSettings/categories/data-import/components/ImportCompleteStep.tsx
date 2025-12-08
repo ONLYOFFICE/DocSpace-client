@@ -121,7 +121,7 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
 
   useEffect(() => {
     try {
-      getMigrationStatus().then((res) =>
+      getMigrationStatus()?.then((res) =>
         setImportResult({
           succeedUsers: res?.parseResult.successedUsers || 0,
           failedUsers: res?.parseResult.failedUsers || 0,

@@ -46,6 +46,7 @@ import {
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 class FilesSettingsStore {
   thirdPartyStore;
@@ -152,6 +153,10 @@ class FilesSettingsStore {
   hideConfirmRoomLifetime = false;
 
   hideConfirmCancelOperation = false;
+
+  extsFilesVectorized = [];
+
+  documentServiceLocation = null;
 
   constructor(
     thirdPartyStore,
@@ -276,8 +281,8 @@ class FilesSettingsStore {
       .catch((e) => toastr.error(e));
   };
 
-  setKeepNewFileName = (data) => {
-    api.files
+  setKeepNewFileName = async (data) => {
+    return api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res))
       .catch((e) => toastr.error(e));
@@ -321,7 +326,25 @@ class FilesSettingsStore {
   setForceSave = (data) =>
     api.files.forceSave(data).then((res) => this.setForcesave(res));
 
-  getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
+  getDocumentServiceLocation = async () => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      return await api.files.getDocumentServiceLocation(
+        null,
+        abortController.signal,
+      );
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+
+      throw error;
+    }
+  };
+
+  setDocumentServiceLocation = (data) => {
+    this.documentServiceLocation = data;
+  };
 
   changeDocumentServiceLocation = (
     docServiceUrl,
@@ -417,7 +440,7 @@ class FilesSettingsStore {
   getIcon = (
     size = 32,
     fileExst = null,
-    providerKey = null, // eslint-disable-line @typescript-eslint/no-unused-vars
+    providerKey = null,
     contentLength = null,
     roomType = null,
     isArchive = null,
@@ -483,7 +506,9 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "customRoom.svg";
           break;
-
+        case RoomsType.AIRoom:
+          path = "aiRoom.svg";
+          break;
         case RoomsType.EditingRoom:
           path = "editingRoom.svg";
           break;
@@ -514,7 +539,7 @@ class FilesSettingsStore {
 
     const path = `${extension.replace(/^\./, "")}.svg`;
 
-    if (enablePlugins && fileItemsList) {
+    if (!isAIAgents() && enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
         ({ value }) => value.extension === extension && value.fileIcon,
       );

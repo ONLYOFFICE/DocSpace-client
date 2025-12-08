@@ -29,7 +29,7 @@
 @use "../../../styles/mixins";
 @use "../../../styles/variables";
 
-@use "../backup";
+@use "../backup" as backup;
 
 .manualBackup {
   @include backup.common-backup-styles;
@@ -98,7 +98,7 @@
   .modules {
     &.isDisabled {
       .backupDescription {
-        color: variables.$gray;
+        color: var(--settings-backup-text-disabled);
       }
     }
   }
@@ -109,5 +109,23 @@
 
   .dropDownItemIcon {
     align-items: center;
+  }
+}
+
+.notAvailable {
+  display: grid;
+  padding: 12px;
+  background-color: var(--settings-backup-background);
+  gap: 8px;
+  max-width: backup.$input-length;
+  border-radius: 6px;
+  box-sizing: border-box;
+  grid-template-columns: 16px 1fr;
+  margin-top: 16px;
+
+  svg {
+    path {
+      fill: var(--text-color);
+    }
   }
 }

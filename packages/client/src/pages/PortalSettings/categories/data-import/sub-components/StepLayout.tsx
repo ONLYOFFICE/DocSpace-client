@@ -38,7 +38,7 @@ const DescriptionWrapper = styled.div`
 
   .data-import-counter {
     margin-top: 19px;
-    margin-bottom: 9px;
+    margin-bottom: 8px;
   }
 
   .data-import-section-description {

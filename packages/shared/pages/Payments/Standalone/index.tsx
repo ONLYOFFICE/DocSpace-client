@@ -47,6 +47,9 @@ export const StandalonePage = ({
   paymentDate,
   isEnterprise,
   logoText,
+  docspaceFaqUrl,
+  licenseQuota,
+  openOnNewPage,
 }: IPaymentsProps) => {
   return (
     <div data-testid="standalone-page" className={styles.pageWrapper}>
@@ -60,6 +63,9 @@ export const StandalonePage = ({
           paymentDate={paymentDate}
           isEnterprise={isEnterprise}
           logoText={logoText}
+          docspaceFaqUrl={docspaceFaqUrl}
+          licenseQuota={licenseQuota}
+          openOnNewPage={openOnNewPage}
         />
       ) : (
         <EnterpriseContainer
@@ -72,6 +78,9 @@ export const StandalonePage = ({
           paymentDate={paymentDate}
           isEnterprise={isEnterprise}
           logoText={logoText}
+          docspaceFaqUrl={docspaceFaqUrl}
+          licenseQuota={licenseQuota}
+          openOnNewPage={openOnNewPage}
         />
       )}
       <LicenseContainer

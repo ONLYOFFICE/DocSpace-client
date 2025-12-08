@@ -46,8 +46,6 @@ export type BadgeProps = TextProps & {
   noHover?: boolean;
   /** Sets badge type to high priority. Changes visual appearance */
   type?: "high";
-  /** When true, applies compact styling for smaller badge display */
-  compact?: boolean;
   /** Custom border style for the badge. Accepts CSS border values */
   border?: string;
   /** Custom height for the badge. Accepts CSS size values */
@@ -61,4 +59,6 @@ export type BadgeProps = TextProps & {
   /** Handler for mouse over events. Used for hover state management and interactions */
   /** When true, applies custom hover styles */
   isHovered?: boolean;
+  /** Data test id for testing */
+  dataTestId?: string;
 };

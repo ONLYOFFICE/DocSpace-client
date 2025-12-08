@@ -675,8 +675,6 @@ export const getBaseTheme = () => {
       width: {
         base: "173px",
         middle: "300px",
-        big: "350px",
-        huge: "500px",
         large: "550px",
       },
 
@@ -705,24 +703,18 @@ export const getBaseTheme = () => {
       width: {
         base: "173px",
         middle: "300px",
-        big: "350px",
-        huge: "500px",
         large: "550px",
       },
 
       height: {
         base: "32px",
         middle: "38px",
-        big: "38px",
-        huge: "39px",
         large: "44px",
       },
 
       paddingRight: {
         base: "37px",
         middle: "48px",
-        big: "53px",
-        huge: "58px",
         large: "64px",
       },
 
@@ -735,16 +727,12 @@ export const getBaseTheme = () => {
         width: {
           base: "30px",
           middle: "36px",
-          big: "37px",
-          huge: "38px",
           large: "48px",
         },
 
         height: {
           base: "30px",
           middle: "36px",
-          big: "36px",
-          huge: "37px",
           large: "42px",
         },
       },
@@ -753,8 +741,6 @@ export const getBaseTheme = () => {
         width: {
           base: "15px",
           middle: "15px",
-          big: "16px",
-          huge: "16px",
           large: "16px",
         },
       },
@@ -827,24 +813,18 @@ export const getBaseTheme = () => {
       lineHeight: {
         base: "20px",
         middle: "20px",
-        big: "20px",
-        huge: "21px",
-        large: "20px",
+        large: "22px",
       },
 
       fontSize: {
         base: "13px",
         middle: "14px",
-        big: "16px",
-        huge: "18px",
         large: "16px",
       },
 
       padding: {
         base: "5px 6px",
         middle: "8px 12px",
-        big: "8px 16px",
-        huge: "8px 20px",
         large: "11px 12px",
       },
     },
@@ -2900,8 +2880,8 @@ export const getBaseTheme = () => {
           comboBoxLabelColor: black,
           importSectionBackground: grayLight,
           importSectionTextColor: gray,
-          importItemBackground: grayLightMid,
-          importItemDisableBackground: lightGrayHover,
+          importItemBackground: grayLight,
+          importItemDisableBackground: grayLight,
           importItemTextColor: grayText,
           importItemDisableTextColor: gray,
           importItemDescription: black,
@@ -3097,6 +3077,9 @@ export const getBaseTheme = () => {
       submitToGalleryTile: {
         bodyText: grayText,
         closeIconFill: lightGrayDark,
+        border: `1px solid ${grayLightMid}`,
+        background: lightGraySelected,
+        colorExt: gray,
       },
     },
 

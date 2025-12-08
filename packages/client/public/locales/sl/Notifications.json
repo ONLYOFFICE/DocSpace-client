@@ -1,11 +1,16 @@
 {
-  "ActionsWithFilesDescription": "Značke vas bodo obveščale o aktivnostih, kot so nalaganje, ustvarjanje in spreminjanje datotek.",
+  "AdminSetupRequired": "Potrebna je nastavitev administratorja",
   "Badges": "Značke",
   "DailyFeed": "Dnevni vir {{productName}}",
   "DailyFeedDescription": "Preberi novice in dogodke iz svojega prostora {{productName}} v dnevnem povzetku.",
-  "ManageNotifications": "Upravljanje",
+  "FileActivityNotify": "Obvestila o dejavnosti datotek",
+  "IsNotValid": "Ni veljavno",
+  "LdapEmailTooltip": "Ta uporabniški račun je naložen iz LDAP. Uporabnikova e-poštna naslov ni bila navedena in trenutna je bila ustvarjena samodejno ter je ni mogoče uporabiti za pošiljanje obvestil.",
+  "NotConfigured": "Ni konfigurirano",
   "Notifications": "Obvestila",
-  "RoomsActivityDescription": "Urna obvestila. Bodite obveščeni o vseh dejavnostih v svojih sobah.",
+  "SettingUpNotifications": "Nastavljanje obvestil",
+  "SuccessConnected": "{{serviceName}} je bil uspešno povezan kot kanal za obveščanje. Sedaj boste prejemali posodobitve tam.",
+  "SuccessDisconnected": "{{serviceName}} je bil uspešno izklopljen kot kanal za obveščanja. Obveščanja ne bodo več poslana tja.",
   "UsefulTips": "Uporabni {{productName}} nasveti",
   "UsefulTipsDescription": "Pridobite uporabna navodila za {{productName}}"
 }

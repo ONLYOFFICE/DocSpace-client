@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
-
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -38,6 +38,11 @@ import {
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
+import AIAgentsSelector from "@docspace/shared/selectors/AIAgent";
+import FilesFilter from "@docspace/shared/api/files/filter";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "@docspace/shared/constants";
 
 import {
   UploadPanel,
@@ -51,7 +56,6 @@ import {
 } from "../panels";
 import {
   ConnectDialog,
-  DeleteThirdPartyDialog,
   EmptyTrashDialog,
   DeleteDialog,
   DownloadDialog,
@@ -62,7 +66,6 @@ import {
   SubmitToFormGallery,
   EditGroupMembersDialog,
   ChangeQuotaDialog,
-  UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
   SettingsPluginDialog,
@@ -95,6 +98,7 @@ import FillingStatusPanel from "../panels/FillingStatusPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
+import ShareSelector from "../ShareSelector";
 
 const Panels = (props) => {
   const {
@@ -103,7 +107,6 @@ const Panels = (props) => {
     moveToPanelVisible,
     restorePanelVisible,
     connectDialogVisible,
-    deleteThirdPartyDialogVisible,
     versionHistoryPanelVisible,
     deleteDialogVisible,
     lifetimeDialogVisible,
@@ -117,7 +120,10 @@ const Panels = (props) => {
     selectFileFormRoomDialogVisible,
     selectFileFormRoomFilterParam,
     setSelectFileFormRoomDialogVisible,
+    selectFileAiKnowledgeDialogVisible,
+    setSelectFileAiKnowledgeDialogVisible,
     copyFromTemplateForm,
+    copyFileToAiKnowledge,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -132,7 +138,6 @@ const Panels = (props) => {
     editGroupMembersDialogVisible,
     changeQuotaDialogVisible,
     editLinkPanelIsVisible,
-    unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
     embeddingPanelData,
     moveToPublicRoomVisible,
@@ -172,7 +177,12 @@ const Panels = (props) => {
     removeUserConfirmation,
     assignRolesDialogVisible,
     socialAuthWelcomeDialogVisible,
+    extsFilesVectorized,
+    aiAgentSelectorDialogProps,
+    setAiAgentSelectorDialogProps,
   } = props;
+
+  const navigate = useNavigate();
 
   const [sharePDFForm, setSharePDFForm] = useState({
     visible: false,
@@ -192,6 +202,10 @@ const Panels = (props) => {
 
   const onCloseFileFormRoomDialog = () => {
     setSelectFileFormRoomDialogVisible(false);
+  };
+
+  const onCloseFileFormAiKnowledgeDialog = () => {
+    setSelectFileAiKnowledgeDialogVisible(false);
   };
 
   const descriptionTextFileFormRoomDialog = useMemo(() => {
@@ -275,17 +289,16 @@ const Panels = (props) => {
         isCopy={copyPanelVisible}
         isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
+        withAIAgentsTreeFolder
+        disableBySecurity="UseChat"
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
-    deleteThirdPartyDialogVisible && (
-      <DeleteThirdPartyDialog key="thirdparty-delete-dialog" />
-    ),
     versionHistoryPanelVisible && (
       <VersionHistoryPanel key="version-history-panel" />
     ),
     deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
-    lifetimeDialogVisible && <LifetimeDialog key="delete-dialog" />,
+    lifetimeDialogVisible && <LifetimeDialog key="lifetime-dialog" />,
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
@@ -305,6 +318,9 @@ const Panels = (props) => {
         isPanelVisible={selectFileDialogVisible}
         onSelectFile={createMasterForm}
         onClose={onClose}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        withAIAgentsTreeFolder
       />
     ),
 
@@ -318,6 +334,48 @@ const Panels = (props) => {
         onSelectFile={(file) => copyFromTemplateForm(file, t)}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        withAIAgentsTreeFolder
+      />
+    ),
+
+    selectFileAiKnowledgeDialogVisible && (
+      <FilesSelector
+        isFormRoom
+        isPanelVisible
+        key="select-file-ai-knowledge-dialog"
+        onClose={onCloseFileFormAiKnowledgeDialog}
+        openRoot
+        onSelectFile={(files) => copyFileToAiKnowledge(files, t)}
+        filterParam={extsFilesVectorized.join(",")}
+        descriptionText=""
+        isMultiSelect
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        withAIAgentsTreeFolder
+      />
+    ),
+
+    aiAgentSelectorDialogProps.visible && (
+      <AIAgentsSelector
+        key="ai-agents-selector"
+        onClose={() => setAiAgentSelectorDialogProps(false, null)}
+        withPadding
+        withSearch
+        onSubmit={(items) => {
+          const id = items[0]?.id;
+
+          setAiAgentSelectorDialogProps(false);
+
+          const url = getCategoryUrl(CategoryType.Chat, id);
+
+          const filter = new FilesFilter();
+
+          filter.folder = id;
+
+          navigate(`${url}?${filter.toUrlParams()}`);
+        }}
       />
     ),
 
@@ -342,9 +400,7 @@ const Panels = (props) => {
     ),
     changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
-    unsavedChangesDialogVisible && (
-      <UnsavedChangesDialog key="unsaved-dialog" />
-    ),
+
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
     embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
     moveToPublicRoomVisible && (
@@ -404,6 +460,7 @@ const Panels = (props) => {
 
     formFillingTipsVisible ? (
       <Guidance
+        key="form-filling-tips-guidance"
         viewAs={viewAs}
         onClose={onCloseGuidance}
         getRefElement={getRefElement}
@@ -425,6 +482,7 @@ const Panels = (props) => {
     socialAuthWelcomeDialogVisible && (
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
+    <ShareSelector key="share-selector" />,
   ];
 };
 
@@ -442,13 +500,13 @@ export default inject(
     filesStore,
     userStore,
     guidanceStore,
+    filesSettingsStore,
   }) => {
     const {
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
       connectDialogVisible,
-      deleteThirdPartyDialogVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,
       downloadDialogVisible,
@@ -464,13 +522,14 @@ export default inject(
       restoreRoomDialogVisible,
       welcomeFormFillingTipsVisible,
 
-      unsavedChangesDialogVisible,
       createMasterForm,
       selectFileDialogVisible,
       setSelectFileDialogVisible,
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       invitePanelOptions,
       inviteQuotaWarningDialogVisible,
       changeQuotaDialogVisible,
@@ -509,12 +568,17 @@ export default inject(
       removeUserConfirmation,
       assignRolesDialogData,
       socialAuthWelcomeDialogVisible,
+
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
 
+    const { extsFilesVectorized } = filesSettingsStore;
+
     const { preparationPortalDialogVisible } = backup;
-    const { copyFromTemplateForm } = filesActionsStore;
+    const { copyFromTemplateForm, copyFileToAiKnowledge } = filesActionsStore;
 
     const { uploadPanelVisible, conversionVisible } = uploadDataStore;
     const {
@@ -557,7 +621,6 @@ export default inject(
       moveToPanelVisible,
       restorePanelVisible,
       connectDialogVisible: connectDialogVisible || !!connectItem, // TODO:
-      deleteThirdPartyDialogVisible,
       versionHistoryPanelVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,
@@ -574,7 +637,10 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       copyFromTemplateForm,
+      copyFileToAiKnowledge,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
@@ -586,7 +652,6 @@ export default inject(
       editGroupMembersDialogVisible,
       changeQuotaDialogVisible,
       editLinkPanelIsVisible,
-      unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
       embeddingPanelData,
       moveToPublicRoomVisible,
@@ -626,6 +691,10 @@ export default inject(
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
       socialAuthWelcomeDialogVisible,
+      extsFilesVectorized,
+
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
     };
   },
 )(observer(Panels));

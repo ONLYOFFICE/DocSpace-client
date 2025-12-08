@@ -237,6 +237,7 @@ const ScheduleComponent = ({
           directionY="both"
           dataTestId="auto_backup_max_copies_combobox"
           dropDownTestId="auto_backup_max_copies_dropdown"
+          isDefaultMode={false}
         />
       </div>
     </div>

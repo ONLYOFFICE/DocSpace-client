@@ -132,7 +132,11 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
       .then(() => setIsDisabled(false))
       .catch(() => {
         setIsDisabled(false);
-        toastr.info(t("PrivacyEditors"));
+        toastr.info(
+          t("PrivacyEditors", {
+            organizationName: logoText,
+          }),
+        );
       });
   };
 

@@ -34,7 +34,6 @@ import { RoomsType } from "../../enums";
 import { RoomLogo } from "../room-logo";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
-import { Badge } from "../badge";
 
 import {
   getRoomTypeDescriptionTranslation,
@@ -42,7 +41,6 @@ import {
 } from "./RoomType.utils";
 import styles from "./RoomType.module.scss";
 import { RoomTypeProps } from "./RoomType.types";
-import { globalColors } from "../../themes";
 
 const RoomType = ({
   roomType,
@@ -87,17 +85,6 @@ const RoomType = ({
       <div className="choose_room-info_wrapper">
         <div className="choose_room-title">
           <Text className="choose_room-title-text">{t(room.title)}</Text>
-          {isTemplate ? (
-            <Badge
-              label={t("Common:New")}
-              backgroundColor={globalColors.lightBlueMain}
-              fontSize="9px"
-              fontWeight={700}
-              borderRadius="50px"
-              noHover
-              isHovered={false}
-            />
-          ) : null}
         </div>
         <Text className="choose_room-description">{t(room.description)}</Text>
       </div>

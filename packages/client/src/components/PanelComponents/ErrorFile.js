@@ -37,7 +37,14 @@ const TooltipContent = ({ content }) => (
   </Text>
 );
 
-const ErrorFile = ({ t, item, theme, onTextClick, showPasswordInput }) => {
+const ErrorFile = ({
+  t,
+  item,
+  theme,
+  onTextClick,
+  showPasswordInput,
+  onRetryClick,
+}) => {
   const { interfaceDirection } = useTheme();
   const placeTooltip = interfaceDirection === "rtl" ? "right" : "left";
   const tooltipId = uniqueid("uploading_tooltip");
@@ -56,6 +63,15 @@ const ErrorFile = ({ t, item, theme, onTextClick, showPasswordInput }) => {
         maxWidth="320px"
         color={theme.tooltip.backgroundColor}
       />
+      {!item.needPassword ? (
+        <Text
+          className="enter-password"
+          fontWeight="600"
+          onClick={onRetryClick}
+        >
+          {t("Retry")}
+        </Text>
+      ) : null}
       {item.needPassword ? (
         <Text className="enter-password" fontWeight="600" onClick={onTextClick}>
           {showPasswordInput ? t("HideInput") : t("Common:EnterPassword")}

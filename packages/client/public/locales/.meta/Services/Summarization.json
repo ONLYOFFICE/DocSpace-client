@@ -1,0 +1,28 @@
+{
+  "key_path": "Summarization",
+  "content": "Summarization",
+  "content_en_sha1_hash": "8dfe4e2db2cdcb1c1afcbbc48ed26c367561e09d",
+  "created_at": "2025-11-03T12:10:29.457Z",
+  "updated_at": "2025-11-03T12:26:24.809Z",
+  "comment": {
+    "text": "This key represents the label for a summarization feature or service. It's likely used as a label or title within the AI Tools section of the Portal Settings, potentially on a button or in a dialog. Translators should ensure the translation accurately conveys the concept of creating a condensed version of text.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:26:24.809Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AITools/AIServiceDialog.tsx",
+      "line_number": 71,
+      "context": "import ListIcon from \"PUBLIC_DIR/images/icons/32/list.svg\";\n import ImageGenerationIcon from \"PUBLIC_DIR/images/icons/32/image.generation.svg\";\n import GenerationIcon from \"PUBLIC_DIR/images/icons/32/generation.svg\";\n import OcrIcon from \"PUBLIC_DIR/images/icons/32/ocr.svg\";\n import TranslationIcon from \"PUBLIC_DIR/images/icons/32/translation.svg\";\n import SummarizationIcon from \"PUBLIC_DIR/images/icons/32/summarization.svg\";\n import ChatIcon from \"PUBLIC_DIR/images/icons/32/chat.svg\";\n import ToolsIcon from \"PUBLIC_DIR/images/icons/32/tools.svg\";\n import styles from \"../../styles/BackupServiceDialog.module.scss\";\n \n interface AIServiceDialogProps {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

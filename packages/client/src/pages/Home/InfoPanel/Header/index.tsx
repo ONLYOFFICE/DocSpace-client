@@ -33,17 +33,20 @@ import { AsideHeader } from "@docspace/shared/components/aside-header";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 import styles from "./Header.module.scss";
 import InfoPanelHeaderContentProps from "./Header.types";
 
 const InfoPanelHeaderContent = ({
   selection,
-  setIsVisible,
+  // setIsVisible,
   roomsView,
   fileView,
   setView,
@@ -51,6 +54,8 @@ const InfoPanelHeaderContent = ({
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
+
+  isRecentFolder,
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -65,8 +70,8 @@ const InfoPanelHeaderContent = ({
     selection.isFolder &&
     selection.id === selection.rootFolderId;
 
-  const expired =
-    selection && "expired" in selection ? selection.expired : false;
+  const isLinkExpired =
+    selection && "isLinkExpired" in selection ? selection.isLinkExpired : false;
   const external =
     selection && "external" in selection ? selection.external : false;
 
@@ -77,14 +82,16 @@ const InfoPanelHeaderContent = ({
     !isContacts &&
     !isTrash &&
     !isLockedSharedRoom(selection as TRoom) &&
-    !(external && expired === true);
+    !(external && isLinkExpired);
 
   const isTemplate =
     selection &&
     "rootFolderType" in selection &&
     selection.rootFolderType === FolderType.RoomTemplates;
 
-  const closeInfoPanel = () => setIsVisible(false);
+  const closeInfoPanel = () => {
+    hideInfoPanel();
+  };
 
   const setMembers = () => setView(InfoPanelView.infoMembers);
   const setHistory = () => setView(InfoPanelView.infoHistory);
@@ -118,19 +125,32 @@ const InfoPanelHeaderContent = ({
   ];
 
   const isRoomsType =
-    selection &&
-    "rootFolderType" in selection &&
-    (selection.rootFolderType === FolderType.Rooms ||
-      selection.rootFolderType === FolderType.Archive ||
+    (!isRecentFolder &&
+      selection &&
+      "rootFolderType" in selection &&
+      isRoomUtil(selection) &&
+      (selection.rootFolderType === FolderType.Rooms ||
+        selection.rootFolderType === FolderType.Archive)) ||
+    (!isRecentFolder &&
+      selection &&
+      "rootFolderType" in selection &&
       selection.rootFolderType === FolderType.RoomTemplates);
 
-  if (isRoomsType) tabsData.unshift(memberTab);
+  const isAgentType =
+    !isRecentFolder &&
+    selection &&
+    "rootFolderType" in selection &&
+    "roomType" in selection &&
+    selection.roomType &&
+    selection.rootFolderType === FolderType.AIAgents;
+
+  if (isRoomsType || isAgentType) tabsData.unshift(memberTab);
 
   if (
     selection &&
     "canShare" in selection &&
-    !isRoomsType &&
-    selection.canShare
+    selection.canShare &&
+    !isRoomUtil(selection)
   ) {
     tabsData.unshift({
       id: "info_share",
@@ -140,7 +160,7 @@ const InfoPanelHeaderContent = ({
     });
   }
 
-  if (enablePlugins && infoPanelItemsList.length > 0) {
+  if (!isAIAgents() && enablePlugins && infoPanelItemsList.length > 0) {
     const isRoom = selection && "roomType" in selection && selection.roomType;
     const isFile = selection && "fileExst" in selection && selection.fileExst;
 
@@ -197,6 +217,7 @@ const InfoPanelHeaderContent = ({
         withoutBorder
         className="header-text"
         isCloseable
+        dataTestId="info_panel_aside_header"
       />
 
       {withTabs ? (
@@ -204,7 +225,7 @@ const InfoPanelHeaderContent = ({
           <Tabs
             style={{ width: "100%" }}
             items={isTemplate ? templateSubmenu : tabsData}
-            selectedItemId={isRoomsType ? roomsView : fileView}
+            selectedItemId={isRoomsType || isAgentType ? roomsView : fileView}
             withAnimation
           />
         </div>
@@ -214,7 +235,12 @@ const InfoPanelHeaderContent = ({
 };
 
 export default inject(
-  ({ settingsStore, infoPanelStore, pluginStore }: TStore) => {
+  ({
+    settingsStore,
+    infoPanelStore,
+    pluginStore,
+    treeFoldersStore,
+  }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 
     const {
@@ -230,6 +256,8 @@ export default inject(
 
     const selection = infoPanelStore.infoPanelSelection;
 
+    const { isRecentFolder } = treeFoldersStore;
+
     return {
       selection,
       roomsView,
@@ -242,6 +270,8 @@ export default inject(
       infoPanelItemsList,
 
       enablePlugins,
+
+      isRecentFolder,
     };
   },
 )(observer(InfoPanelHeaderContent));

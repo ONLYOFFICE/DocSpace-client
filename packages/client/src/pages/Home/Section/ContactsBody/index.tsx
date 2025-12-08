@@ -48,6 +48,7 @@ type SectionBodyContentProps = {
   currentView: string;
   isUsersLoading?: UsersStore["isUsersLoading"];
   selectUser?: UsersStore["selectUser"];
+  clearSelection: UsersStore["clearSelection"];
   setPeopleSelection?: UsersStore["setSelection"];
   setPeopleBufferSelection?: UsersStore["setBufferSelection"];
   setGroupsSelection?: GroupsStore["setSelection"];
@@ -62,6 +63,7 @@ type SectionBodyContentProps = {
   selectAll?: ContactsHotkeysStore["selectAll"];
   deselectAll?: ContactsHotkeysStore["deselectAll"];
   openItem?: ContactsHotkeysStore["openItem"];
+  openContextMenu: ContactsHotkeysStore["openContextMenu"];
   onClickBack?: FilesActionStore["onClickBack"];
   getTfaType?: TfaStore["getTfaType"];
   enableSelection: ContactsHotkeysStore["enableSelection"];
@@ -79,6 +81,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
+    clearSelection,
     enabledHotkeys,
     isUsersLoading,
     selectBottom,
@@ -95,6 +98,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     viewAs,
     membersSelection,
     groupsSelection,
+    openContextMenu,
   } = props;
 
   const location = useLocation();
@@ -115,6 +119,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     enableSelection,
     viewAs,
     selection,
+    openContextMenu,
   });
 
   const onMouseDown = useCallback(
@@ -156,6 +161,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     }
 
     if (location?.state?.user) {
+      clearSelection();
       selectUser!(location?.state?.user);
     }
   }, [
@@ -199,6 +205,7 @@ export default inject(
       isUsersLoading,
 
       selectUser,
+      clearSelection,
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
       selection: membersSelection,
@@ -222,6 +229,7 @@ export default inject(
       selectAll,
       deselectAll,
       openItem,
+      openContextMenu,
 
       enableSelection,
     } = contactsHotkeysStore!;
@@ -238,6 +246,7 @@ export default inject(
       setGroupsBufferSelection,
       setChangeOwnerDialogVisible,
       selectUser,
+      clearSelection,
       enabledHotkeys,
       isUsersLoading,
 
@@ -250,6 +259,7 @@ export default inject(
       deselectAll,
       openItem,
       onClickBack,
+      openContextMenu,
 
       getTfaType,
 

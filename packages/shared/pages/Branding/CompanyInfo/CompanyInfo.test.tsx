@@ -25,20 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, fireEvent, render } from "@testing-library/react";
 
 import { CompanyInfo } from ".";
 import { DeviceType } from "../../../enums";
-import { renderWithTheme } from "../../../utils/render-with-theme";
 
-jest.mock("../../../hooks/useResponsiveNavigation", () => ({
-  useResponsiveNavigation: jest.fn(),
+vi.mock("../../../hooks/useResponsiveNavigation", () => ({
+  useResponsiveNavigation: vi.fn(),
 }));
 
 const defaultProps = {
   isSettingPaid: true,
-  onShowExample: jest.fn(),
+  onShowExample: vi.fn(),
   companySettings: {
     address: "Test Address",
     companyName: "Test Company",
@@ -51,8 +50,8 @@ const defaultProps = {
   },
   displayAbout: true,
   isBrandingAvailable: true,
-  onSave: jest.fn(),
-  onRestore: jest.fn(),
+  onSave: vi.fn(),
+  onRestore: vi.fn(),
   isLoading: false,
   companyInfoSettingsIsDefault: false,
   deviceType: DeviceType.desktop,
@@ -71,17 +70,17 @@ const defaultProps = {
 
 describe("<CompanyInfo />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} />);
+    render(<CompanyInfo {...defaultProps} />);
 
     expect(screen.getByText("CompanyInfoSettings")).toBeInTheDocument();
   });
 
   it("disables inputs when isSettingPaid is false", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} isSettingPaid={false} />);
+    render(<CompanyInfo {...defaultProps} isSettingPaid={false} />);
 
     const companyNameInput = screen.getByTestId(
       "company_info_settings_company_name_input",
@@ -101,7 +100,7 @@ describe("<CompanyInfo />", () => {
   });
 
   it("updates state when inputs change", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} />);
+    render(<CompanyInfo {...defaultProps} />);
 
     const companyNameInput = screen.getByTestId(
       "company_info_settings_company_name_input",
@@ -114,8 +113,8 @@ describe("<CompanyInfo />", () => {
   });
 
   it("calls onSave with correct parameters", () => {
-    const onSave = jest.fn();
-    renderWithTheme(<CompanyInfo {...defaultProps} onSave={onSave} />);
+    const onSave = vi.fn();
+    render(<CompanyInfo {...defaultProps} onSave={onSave} />);
 
     const companyNameInput = screen.getByTestId(
       "company_info_settings_company_name_input",
@@ -133,11 +132,12 @@ describe("<CompanyInfo />", () => {
       defaultProps.companySettings.email,
       defaultProps.companySettings.phone,
       defaultProps.companySettings.site,
+      !defaultProps.displayAbout,
     );
   });
 
   it("shows validation errors for invalid inputs", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} />);
+    render(<CompanyInfo {...defaultProps} />);
 
     const emailInput = screen.getByTestId("company_info_settings_email_input");
     fireEvent.change(emailInput, { target: { value: "invalid-email" } });
@@ -147,7 +147,7 @@ describe("<CompanyInfo />", () => {
   });
 
   it("enables save button only when changes are valid", () => {
-    renderWithTheme(<CompanyInfo {...defaultProps} />);
+    render(<CompanyInfo {...defaultProps} />);
 
     const saveButton = screen.getByTestId("company_info_settings_save_button");
     expect(saveButton).toBeDisabled();

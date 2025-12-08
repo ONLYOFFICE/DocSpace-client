@@ -24,10 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
 import { isMobile } from "react-device-detect";
-import { checkDialogsOpen } from "../../../utils/checkDialogsOpen";
 import { TTabsHotkey } from "../Tabs.types";
 
 const useTabsHotkeys = ({
@@ -40,8 +39,6 @@ const useTabsHotkeys = ({
   onSelect,
   hotkeysId,
 }: TTabsHotkey) => {
-  const [isEnabled, setIsEnabled] = useState(true);
-
   const activateHotkeys = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Tab" && !isMobile) {
@@ -73,7 +70,9 @@ const useTabsHotkeys = ({
     else setFocusedTab(focusedTabIndex - 1);
   };
 
-  const onSelectTab = () => {
+  const onSelectTab = (e: KeyboardEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
     onSelect?.(items[focusedTabIndex]);
   };
 
@@ -94,29 +93,28 @@ const useTabsHotkeys = ({
     },
     filterPreventDefault: false,
     enableOnTags: ["INPUT"],
-    enabled: enabledHotkeys && isEnabled,
+    enabled: enabledHotkeys,
   } as Options;
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
+      if (enabledHotkeys) {
+        const isDefaultKeys =
+          [
+            "PageUp",
+            "PageDown",
+            "Home",
+            "End",
+            "Space",
+            "ArrowUp",
+            "ArrowDown",
+            "ArrowLeft",
+            "ArrowRight",
+          ].indexOf(e.code) > -1;
 
-      const isDefaultKeys =
-        [
-          "PageUp",
-          "PageDown",
-          "Home",
-          "End",
-          "Space",
-          "ArrowUp",
-          "ArrowDown",
-          "ArrowLeft",
-          "ArrowRight",
-        ].indexOf(e.code) > -1;
-
-      if (isDefaultKeys) {
-        e.preventDefault();
+        if (isDefaultKeys) {
+          e.preventDefault();
+        }
       }
 
       activateHotkeys(e);
@@ -135,9 +133,7 @@ const useTabsHotkeys = ({
   useHotkeys(
     "*",
     (e: KeyboardEvent) => {
-      const someDialogIsOpen = checkDialogsOpen();
-
-      if (e.shiftKey || e.ctrlKey || someDialogIsOpen) return;
+      if (e.shiftKey || e.ctrlKey) return;
 
       switch (e.key) {
         case "ArrowRight": {

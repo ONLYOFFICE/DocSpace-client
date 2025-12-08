@@ -3,7 +3,7 @@
   "content": "Pin",
   "content_en_sha1_hash": "9c918414710c579b80732bc369eb7087f0d8c8d1",
   "created_at": "2025-05-19T21:30:55.960Z",
-  "updated_at": "2025-05-24T11:44:42.813Z",
+  "updated_at": "2025-11-06T18:29:15.997Z",
   "comment": {
     "text": "The translation key \"Pin\" represents the label for a pin icon used to mark or highlight files in the FilesActionsStore.js file. It is likely used as a button text or tooltip in a UI element, such as a file management interface.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 33,
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 35,
       "context": "import InfoOutlineReactSvgUrl from \"PUBLIC_DIR/images/info.outline.react.svg?url\";\n import CopyToReactSvgUrl from \"PUBLIC_DIR/images/copyTo.react.svg?url\";\n import DownloadReactSvgUrl from \"PUBLIC_DIR/images/icons/16/download.react.svg?url\";\n import DownloadAsReactSvgUrl from \"PUBLIC_DIR/images/downloadAs.react.svg?url\";\n import MoveReactSvgUrl from \"PUBLIC_DIR/images/icons/16/move.react.svg?url\";\n import PinReactSvgUrl from \"PUBLIC_DIR/images/pin.react.svg?url\";\n import UnpinReactSvgUrl from \"PUBLIC_DIR/images/unpin.react.svg?url\";\n import RoomArchiveSvgUrl from \"PUBLIC_DIR/images/room.archive.svg?url\";\n import DeleteReactSvgUrl from \"PUBLIC_DIR/images/delete.react.svg?url\";\n import CatalogRoomsReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url\";\n import ChangQuotaReactSvgUrl from \"PUBLIC_DIR/images/change.quota.react.svg?url\";",
       "module": "/packages/client"
     }

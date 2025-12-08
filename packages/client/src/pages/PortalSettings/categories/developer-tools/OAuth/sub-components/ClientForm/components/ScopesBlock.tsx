@@ -143,7 +143,7 @@ const ScopesBlock = ({
               fontWeight={600}
               lineHeight="16px"
             >
-              {t(`Common:${name}`)}
+              {t(`${name}`)}
             </Text>
 
             {value.read?.name ? (
@@ -162,7 +162,7 @@ const ScopesBlock = ({
                 >
                   {value.read?.name}
                 </Text>{" "}
-                — {t(`Common:${value.read?.tKey}`)}
+                — {t(`${value.read?.tKey}`)}
               </Text>
             ) : null}
             {value.write?.name ? (
@@ -181,7 +181,7 @@ const ScopesBlock = ({
                 >
                   {value.write?.name}
                 </Text>{" "}
-                — {t(`Common:${value.write?.tKey}`)}
+                — {t(`${value.write?.tKey}`)}
               </Text>
             ) : null}
           </StyledScopesName>

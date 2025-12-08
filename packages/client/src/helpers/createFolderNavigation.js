@@ -1,13 +1,13 @@
 import FilesFilter from "@docspace/shared/api/files/filter";
 
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, SearchArea } from "@docspace/shared/enums";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_ARCHIVE_DOCUMENTS,
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl, getCategoryTypeByFolderType } from "./utils";
 
@@ -17,7 +17,6 @@ export const createFolderNavigation = async (
   userId,
   roomType,
   currentTitle,
-  getPublicKey,
 ) => {
   if (!item) return { url: "", state: {} };
 
@@ -34,14 +33,21 @@ export const createFolderNavigation = async (
     security,
   } = item;
 
-  const path = getCategoryUrl(
-    getCategoryTypeByFolderType(rootFolderType, id),
-    id,
-  );
+  const isAiRoom = itemRoomType === RoomsType.AIRoom;
+
+  const aiAgentStartCategory = security.UseChat
+    ? CategoryType.Chat
+    : CategoryType.AIAgent;
+
+  const path = isAiRoom
+    ? getCategoryUrl(aiAgentStartCategory, id)
+    : getCategoryUrl(getCategoryTypeByFolderType(rootFolderType, id), id);
   const filter = FilesFilter.getDefault();
   const filterObj = FilesFilter.getFilter(window.location);
 
-  if (isRoom) {
+  if (isAiRoom) {
+    if (!security.UseChat) filter.searchArea = SearchArea.ResultStorage;
+  } else if (isRoom) {
     if (userId) {
       const key =
         categoryType === CategoryType.Archive
@@ -61,11 +67,6 @@ export const createFolderNavigation = async (
 
   filter.folder = id;
 
-  if (getPublicKey) {
-    const shareKey = await getPublicKey(item);
-    if (shareKey) filter.key = shareKey;
-  }
-
   const isShared = shared || navigationPath?.findIndex((r) => r.shared) > -1;
 
   const isExternal =
@@ -78,6 +79,7 @@ export const createFolderNavigation = async (
     isRoom,
     rootRoomTitle: roomType ? currentTitle : "",
     isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+    isAiRoomType: isAiRoom,
     isShared,
     isExternal,
     canCreate: security?.canCreate,

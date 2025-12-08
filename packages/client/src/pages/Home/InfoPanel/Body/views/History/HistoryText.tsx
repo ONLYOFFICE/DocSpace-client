@@ -39,7 +39,7 @@ const StyledHistoryText = styled.span`
 const HistoryText = ({ title }: { title: string }) => (
   <StyledHistoryText title={title} className="history-text_wrapper">
     <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
-      «
+      "
     </Text>
     <Text
       fontWeight={600}
@@ -50,7 +50,7 @@ const HistoryText = ({ title }: { title: string }) => (
       {title}
     </Text>
     <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
-      »
+      "
     </Text>
   </StyledHistoryText>
 );

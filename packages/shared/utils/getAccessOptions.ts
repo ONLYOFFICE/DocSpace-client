@@ -27,9 +27,9 @@
 import { globalColors } from "../themes";
 import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
-import { RoomsType, EmployeeType, ShareAccessRights } from "../enums";
+import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";
 
-type AccessOptionType = {
+export type AccessOptionType = {
   key: string | EmployeeType;
   label: string;
   description: string;
@@ -38,6 +38,7 @@ type AccessOptionType = {
 
   color?: string;
   quota?: string;
+  tooltip?: string;
 };
 
 type SeparatorOptionType = {
@@ -51,9 +52,11 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Common:RoleRoomAdminFormRoomDescription");
+    case RoomsType.AIRoom:
+      return t("Common:RoleAIAgentManagerDescription");
     case None:
       return t("Common:RoleRoomAdminDescription", {
-        sectionName: t("Common:MyFilesSection"),
+        sectionName: t("Common:MyDocuments"),
       });
     default:
       return t("Common:RoleRoomManagerDescription");
@@ -64,6 +67,8 @@ const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Common:RolePowerUserFormRoomDescription");
+    case RoomsType.AIRoom:
+      return t("Common:RoleAIAgentContentCreatorDescription");
     case None:
       return t("Common:RoleNewUserDescription");
     default:
@@ -96,7 +101,7 @@ export const getAccessOptions = (
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       description: t("Common:RolePortalAdminDescription", {
         productName: t("Common:ProductName"),
-        sectionName: t("Common:MyFilesSection"),
+        sectionName: t("Common:MyDocuments"),
       }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
@@ -120,6 +125,24 @@ export const getAccessOptions = (
       key: "roomManager",
       label: t("Common:RoomManager"),
       description: getRoomAdminDescription(roomType, t),
+      tooltip: t("UserMaxAvailableRoleWarning", {
+        productName: t("Common:ProductName"),
+      }),
+      ...(!standalone && { quota: t("Common:Paid") }),
+      color: globalColors.favoritesStatus,
+      access:
+        roomType === None
+          ? EmployeeType.RoomAdmin
+          : ShareAccessRights.RoomManager,
+      type: EmployeeType.RoomAdmin,
+    },
+    agentManager: {
+      key: "agentManager",
+      label: t("Common:AgentManager"),
+      description: getRoomAdminDescription(roomType, t),
+      tooltip: t("UserAgentMaxAvailableRoleWarning", {
+        productName: t("Common:ProductName"),
+      }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
       access:
@@ -140,6 +163,12 @@ export const getAccessOptions = (
       key: "contentCreator",
       label: t("Common:ContentCreator"),
       description: getUserDescription(roomType, t),
+      tooltip:
+        roomType === RoomsType.AIRoom
+          ? t("GuestAgentMaxAvailableRoleWarning", {
+              productName: t("Common:ProductName"),
+            })
+          : undefined,
       access:
         roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,
       type: EmployeeType.User,
@@ -175,7 +204,10 @@ export const getAccessOptions = (
     viewer: {
       key: "viewer",
       label: t("Common:RoleViewer"),
-      description: t("Common:RoleViewerDescription"),
+      description:
+        roomType === RoomsType.AIRoom
+          ? t("Common:RoleAIAgentViewerDescription")
+          : t("Common:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
       type: EmployeeType.User,
     },
@@ -250,6 +282,15 @@ export const getAccessOptions = (
         accesses.editor,
         accesses.viewer,
         accesses.formFiller,
+      ];
+      break;
+
+    case RoomsType.AIRoom:
+      options = [
+        accesses.agentManager,
+        accesses.contentCreator,
+        { key: "s1", isSeparator: withSeparator },
+        accesses.viewer,
       ];
       break;
 

@@ -33,8 +33,6 @@ import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/Emp
 import {
   changeApiKeyStatus,
   deleteApiKey,
-  getApiKeyPermissions,
-  getApiKeys,
 } from "@docspace/shared/api/api-keys";
 import {
   TApiKey,
@@ -52,25 +50,30 @@ import { ApiKeysProps } from "./types";
 import { StyledApiKeys, StyledMobileButton } from "./StyledApiKeys";
 
 const ApiKeys = (props: ApiKeysProps) => {
-  const { viewAs, currentColorScheme, apiKeysLink, isUser } = props;
+  const {
+    viewAs,
+    currentColorScheme,
+    apiKeysUrl,
+    isUser,
+    apiKeys,
+    setApiKeys,
+    permissions,
+    error,
+  } = props;
 
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
-  const [listItems, setListItems] = useState<TApiKey[]>([]);
-  const [permissions, setPermissions] = useState<string[]>([]);
   const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] =
     useState(false);
   const [deleteKeyDialogIsVisible, setDeleteKeyDialogIsVisible] =
     useState(false);
   const [actionItem, setActionItem] = useState<TApiKey | null>(null);
   const [isRequestRunning, setIsRequestRunning] = useState(false);
-  const [error, setError] = useState<null | Error>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const onDeleteApiKey = (id: TApiKey["id"]) => {
-    const itemIndex = listItems.findIndex((x) => x.id === id);
+    const itemIndex = apiKeys.findIndex((x) => x.id === id);
     if (itemIndex > -1) {
-      setActionItem(listItems[itemIndex]);
+      setActionItem(apiKeys[itemIndex]);
     }
 
     setDeleteKeyDialogIsVisible(true);
@@ -82,7 +85,7 @@ const ApiKeys = (props: ApiKeysProps) => {
     deleteApiKey(actionItem.id)
       .then((res) => {
         if (res) {
-          setListItems((prev) => prev.filter((k) => k.id !== actionItem.id));
+          setApiKeys(apiKeys?.filter((k) => k.id !== actionItem.id));
           toastr.success(t("Settings:SecretKeyDeleted"));
         }
       })
@@ -102,7 +105,7 @@ const ApiKeys = (props: ApiKeysProps) => {
     changeApiKeyStatus(id, params)
       .then((res) => {
         if (res) {
-          const items = listItems.slice();
+          const items = apiKeys.slice();
           const index = items.findIndex((x) => x.id === id);
           if (index > -1) {
             if (params.isActive !== undefined) {
@@ -116,7 +119,7 @@ const ApiKeys = (props: ApiKeysProps) => {
             }
           }
 
-          setListItems(items);
+          setApiKeys(items);
           toastr.success(t("Settings:SecretKeyEdited"));
         }
       })
@@ -129,34 +132,12 @@ const ApiKeys = (props: ApiKeysProps) => {
   };
 
   const onEditApiKey = (id: TApiKey["id"]) => {
-    const itemIndex = listItems.findIndex((x) => x.id === id);
+    const itemIndex = apiKeys.findIndex((x) => x.id === id);
     if (itemIndex > -1) {
-      setActionItem(listItems[itemIndex]);
+      setActionItem(apiKeys[itemIndex]);
       setCreateKeyDialogIsVisible(true);
     }
   };
-
-  const getKeys = async () => {
-    setIsLoading(true);
-    try {
-      const [keys, permissionsData] = await Promise.all([
-        getApiKeys(),
-        getApiKeyPermissions(),
-      ]);
-
-      setListItems(keys);
-      setPermissions(permissionsData);
-    } catch (err) {
-      toastr.error(err as Error);
-      setError(err as Error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getKeys();
-  }, []);
 
   useEffect(() => {
     if (ready) {
@@ -183,16 +164,18 @@ const ApiKeys = (props: ApiKeysProps) => {
         <Text className="api-keys_text api-keys_usage-text">
           {t("Settings:ApiKeyViewUsage")}
         </Text>
-        <Link
-          isHovered
-          color={currentColorScheme?.main?.accent}
-          fontSize="13px"
-          fontWeight={600}
-          onClick={() => window.open(apiKeysLink, "_blank")}
-          dataTestId="api_guide_link"
-        >
-          {t("Settings:APIGuide")}
-        </Link>
+        {apiKeysUrl ? (
+          <Link
+            isHovered
+            color={currentColorScheme?.main?.accent}
+            fontSize="13px"
+            fontWeight={600}
+            onClick={() => window.open(apiKeysUrl, "_blank")}
+            dataTestId="api_guide_link"
+          >
+            {t("Settings:APIGuide")}
+          </Link>
+        ) : null}
       </div>
       <div>
         {error ? (
@@ -207,7 +190,6 @@ const ApiKeys = (props: ApiKeysProps) => {
                   primary
                   size={ButtonSize.normal}
                   scale
-                  isDisabled={isLoading}
                   testId="create_new_secret_key_button"
                 />
               </StyledMobileButton>
@@ -217,14 +199,13 @@ const ApiKeys = (props: ApiKeysProps) => {
                 label={t("Settings:CreateNewSecretKey")}
                 primary
                 size={ButtonSize.small}
-                isDisabled={isLoading}
                 testId="create_new_secret_key_button"
               />
             )}
             <div>
-              {!isLoading && listItems.length ? (
+              {apiKeys.length ? (
                 <ApiKeysView
-                  items={listItems}
+                  items={apiKeys}
                   viewAs={viewAs}
                   onDeleteApiKey={onDeleteApiKey}
                   onChangeApiKeyParams={onChangeApiKeyParams}
@@ -240,7 +221,7 @@ const ApiKeys = (props: ApiKeysProps) => {
         <CreateApiKeyDialog
           isVisible={createKeyDialogIsVisible}
           setIsVisible={setCreateKeyDialogIsVisible}
-          setListItems={setListItems}
+          setListItems={setApiKeys}
           permissions={permissions}
           setActionItem={setActionItem}
           actionItem={actionItem}
@@ -267,13 +248,24 @@ const ApiKeys = (props: ApiKeysProps) => {
 
 export default inject(({ setup, settingsStore, userStore }: TStore) => {
   const { viewAs } = setup;
-  const { currentColorScheme, apiKeysLink } = settingsStore;
+  const {
+    currentColorScheme,
+    apiKeysUrl,
+    apiKeys,
+    permissions,
+    errorKeys: error,
+    setApiKeys,
+  } = settingsStore;
   const { user } = userStore;
 
   return {
     viewAs,
     currentColorScheme,
-    apiKeysLink,
+    apiKeysUrl,
     isUser: user?.isCollaborator,
+    apiKeys,
+    permissions,
+    error,
+    setApiKeys,
   };
 })(observer(ApiKeys));

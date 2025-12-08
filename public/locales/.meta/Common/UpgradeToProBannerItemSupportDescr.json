@@ -3,7 +3,7 @@
   "content": "Get quick professional help for all the issues you face.",
   "content_en_sha1_hash": "638f386878c8549e1b0339e2dcd4abd04461a4e3",
   "created_at": "2025-05-26T07:15:49.310Z",
-  "updated_at": "2025-08-04T07:30:01.743Z",
+  "updated_at": "2025-10-13T21:28:54.998Z",
   "comment": {
     "text": "This translation key is used to provide a brief description of professional support options on the \"Upgrade to Pro\" banner in the payment benefits container. The text appears as part of a button or dialog prompt where users can access quick help for issues they're facing.",
     "is_auto": true,
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Qarşılaşdığınız hər hansı bir çətinlik üçün sürətli peşəkar yardımdan yararlanın' is a bit literal and clunky. While technically correct, it doesn't flow as naturally as it could in Azerbaijani. The English conveys a sense of 'help for *any* issue', which isn't perfectly reflected. A more natural phrasing would emphasize resolving issues.",
+          "suggestion": "Qoyulsa da necə problemlərlə rastlaşsanız, dəstək alın."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a slightly formal tone. Depending on the target audience and brand voice, a more conversational tone might be preferred.",
+          "suggestion": "Consider a less formal phrasing if appropriate for the context."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +62,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Erhalten Sie den professionellen Support bei allen Schwierigkeiten' is a literal translation but doesn't quite capture the proactive and quick assistance implied by 'Get quick professional help'. The German phrasing is a bit passive.",
+          "suggestion": "Consider 'Profitieren Sie von schnellem, professionellem Support bei allen Herausforderungen.' or 'Schneller, professioneller Support für alle Ihre Probleme.'"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,13 +98,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ստացեք արագ մասնագիտական օգնություն ձեր առջև ծառացած բոլոր խնդիրների համար:\" is a bit literal and could be more naturally phrased in Armenian. While technically correct, it doesn't quite capture the same tone as the English.",
+          "suggestion": "Consider a more fluid translation like: \"Արագորեն լուծեք ձեր բոլոր խնդիրները մասնագետների օգնությամբ:\" or \"Մասնագիտական օգնություն ձեր բոլոր խնդիրների համար արագ եւ հարմարավետ ձեւով:\""
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ricevi un aiuto professionale e rapido per tutti i problemi che hai' is a literal translation but doesn't quite capture the brevity and marketing tone of the original 'Get quick professional help for all the issues you face.' It's a bit clunky in Italian.",
+          "suggestion": "Ottieni assistenza professionale e rapida per qualsiasi problema."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -135,13 +164,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Obtenha' is a formal Portuguese verb. While grammatically correct, it doesn't fully capture the 'Get' feeling in the English, which implies a more accessible action. It sounds a bit stiff for a banner encouraging users.",
+          "suggestion": "Receba ajuda profissional rápida para todos os problemas que você enfrenta."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Obțineți rapid asistența profesională pentru orice problemă cu care vă confruntați' is a bit literal and could be improved for naturalness in Romanian. While technically correct, it sounds slightly awkward.",
+          "suggestion": "Obțineți rapid asistență profesională pentru orice problemă întâmpinați."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +194,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබ මුහුණ දෙන සියළුම ගැටළු සඳහා ඉක්මනින් සහාය ගන්න' translates more literally to 'Get quick support for all the issues you face'. The original English content 'Get quick professional help for all the issues you face' implies a more proactive and expert-level assistance, which isn't fully captured by 'support'.",
+          "suggestion": "Consider a translation that conveys 'professional help' more accurately, such as 'ඔබ මුහුණ දෙන සියළුම ගැටළු සඳහා වෘත්තීයමය උදව් ඉක්මනින් ලබා ගන්න' (Oba muhuna dena siyāluma gaṭulu samaṭa vruttiyōmayuda uḍaw ikmānin labā ganna)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'issues' is translated as 'otázky' (questions). While 'otázky' isn't entirely wrong, 'problémy' would be a more accurate translation for 'issues' in this context, as it directly implies difficulties or problems requiring assistance.",
+          "suggestion": "Získajte rýchlu odbornú pomoc pri všetkých problémoch, ktoré sa vám môžu vyskytnúť."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -183,7 +236,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Karşılaştığınız tüm sorunlar için hızlı ve profesyonel yardım alın' is a literal translation but doesn't quite capture the nuance of 'Get quick professional help for all the issues you face.' It sounds a bit clunky in Turkish. A more natural phrasing would convey the idea of proactively receiving help.",
+          "suggestion": "Consider 'Karşılaştığınız sorunlara hızlı ve profesyonel destek alın.' or 'Her türlü sorununuz için hızlı ve profesyonel destek imkanı.'"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -199,6 +258,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Get quick professional help for all the issues you face' implies a broader scope of assistance. The Chinese translation '解决你的任何问题' (solve any problems of yours) is slightly more restrictive than the original meaning. While not incorrect, it could be more closely aligned.",
+          "suggestion": "Consider a more encompassing phrase like '解决您遇到的任何问题' (solve any problems you encounter) or '解决您所有的疑问' (solve all your questions) to better reflect the original scope."
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

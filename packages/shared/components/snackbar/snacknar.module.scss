@@ -26,7 +26,6 @@
 
 @use "../../styles/mixins";
 @use "../../styles/variables/colors";
-@use "../../styles/common-icons-style";
 
 .iframe {
   border: none;
@@ -46,13 +45,15 @@
   position: relative;
   display: flex;
   align-items: flex-start;
-  color: #{colors.$white};
+  color: var(--snackbar-color);
   line-height: 16px;
   margin: 0;
   opacity: var(--opacity, 0);
   width: 100%;
-  background-color: var(--background-color);
+  background-color: var(--snackbar-background-color);
   background-image: var(--background-image);
+  border-inline-start: 4px solid var(--snackbar-border-color);
+  box-sizing: border-box;
 
   & > div,
   & > button {
@@ -78,6 +79,8 @@
   justify-content: start;
 
   .logo {
+    height: 16px;
+    width: 16px;
     box-sizing: border-box;
   }
 }
@@ -150,7 +153,7 @@
 }
 
 .crossIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
 
   path {
     fill: #{colors.$gray};
@@ -158,9 +161,10 @@
 }
 
 .infoIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
+  vertical-align: unset !important;
 
   path {
-    fill: var(--color);
+    fill: var(--snackbar-icon-color);
   }
 }

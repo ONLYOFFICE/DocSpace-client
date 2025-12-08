@@ -26,7 +26,7 @@
 
 import {
   getSettings,
-  getUserByEmail,
+  getUserByEncEmail,
   getUserFromConfirm,
 } from "@/utils/actions";
 import { cookies } from "next/headers";
@@ -36,6 +36,7 @@ import { getStringFromSearchParams } from "@/utils";
 
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
 import { logger } from "logger.mjs";
+import { TConfirmLinkParams } from "@/types";
 import GuestShareLinkForm from "./page.client";
 
 type GuestShareLinkProps = {
@@ -46,15 +47,15 @@ async function Page(props: GuestShareLinkProps) {
   logger.info("GuestShareLink page");
 
   const { searchParams: sp } = props;
-  const searchParams = await sp;
-  const uid = searchParams.uid;
-  const email = searchParams.email;
+  const searchParams = (await sp) as TConfirmLinkParams;
+  const uid = searchParams.uid ?? "";
+  const encemail = searchParams.encemail ?? "";
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const [settings, initiator, guest] = await Promise.all([
     getSettings(),
     getUserFromConfirm(uid, confirmKey),
-    getUserByEmail(email, confirmKey),
+    getUserByEncEmail(encemail, confirmKey),
   ]);
 
   const settingsCulture =

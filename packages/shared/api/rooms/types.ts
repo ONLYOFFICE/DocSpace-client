@@ -24,17 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TFolder } from "../files/types";
-import {
+import type { TFile, TFolder, TShareSettings } from "../files/types";
+import type {
   ExportRoomIndexTaskStatus,
   FolderType,
+  LinkSharingEntityType,
   RoomsType,
   ShareAccessRights,
   ValidationStatus,
 } from "../../enums";
-import { TCreatedBy, TPathParts } from "../../types";
-import { TUser } from "../people/types";
-import { TGroup } from "../groups/types";
+import type {
+  TAvailableShareRights,
+  TCreatedBy,
+  TPathParts,
+} from "../../types";
+import type { TUser } from "../people/types";
+import type { TGroup } from "../groups/types";
 
 export type ICover = {
   data: string;
@@ -72,6 +77,7 @@ export type TRoomSecurity = {
   Duplicate: boolean;
   Download: boolean;
   CopySharedLink: boolean;
+  UseChat: boolean;
 };
 
 export type TRoomLifetime = {
@@ -87,6 +93,10 @@ export type TWatermark = {
   imageWidth: number;
   rotate: number;
   imageUrl?: string;
+  text?: string;
+  scale?: number;
+  image?: File | string;
+  isImage?: boolean;
 };
 export type TRoom = {
   parentId: number;
@@ -119,7 +129,7 @@ export type TRoom = {
   external?: boolean;
   passwordProtected?: boolean;
   requestToken?: string;
-  expired?: boolean;
+  isLinkExpired?: boolean;
   indexing?: boolean;
   denyDownload?: boolean;
   watermark?: TWatermark;
@@ -128,6 +138,10 @@ export type TRoom = {
   isTemplate?: boolean;
   isAvailable?: boolean;
   isRoom?: boolean;
+  chatSettings?: { prompt: string; providerId: number; modelId: string };
+  shareSettings?: TShareSettings;
+  availableShareRights?: TAvailableShareRights;
+  path?: TPathParts[];
 };
 
 export type TGetRooms = {
@@ -152,38 +166,35 @@ export type TExportRoomIndexTask = {
   resultFileUrl: string;
 };
 
-export type TPublicRoomPassword = {
-  id: string;
-  linkId: string;
-  shared: boolean;
-  status: ValidationStatus;
-  tenantId: string | number;
-};
-
-export type TNewFilesItem = TFile[] | { room: TRoom; items: TFile[] };
+export type TNewFilesItem =
+  | TFile[]
+  | { room: TRoom; items: TFile[] }
+  | { agent: TRoom; items: TFile[] };
 
 export type TNewFiles = {
   date: string;
   items: TNewFilesItem[];
 };
 
-export type TValidateShareRoom =
-  | {
-      id: string;
-      isAuthenticated: boolean;
-      linkId: string;
-      shared: boolean;
-      status: number;
-      tenantId: number;
-      title: string;
-    }
-  | {
-      isAuthenticated: boolean;
-      linkId: string;
-      shared: boolean;
-      status: number;
-      tenantId: number;
-    };
+export type TValidateShareRoom = {
+  id: string;
+  isAuthenticated: boolean;
+  linkId: string;
+  shared: boolean;
+  status: ValidationStatus;
+  tenantId: number;
+  title: string;
+
+  isRoom: boolean;
+  type: LinkSharingEntityType;
+
+  entityId?: string;
+  entityTitle?: string;
+  entityType?: LinkSharingEntityType;
+  isRoomMember?: boolean;
+};
+
+export type TPublicRoomPassword = TValidateShareRoom;
 
 export type RoomMember = {
   access: number;
@@ -238,6 +249,7 @@ export interface TFeedData {
   group?: {
     id: string;
     name: string;
+    isSystem?: boolean;
   };
   tags?: string[];
   sharedTo?: {
@@ -302,6 +314,7 @@ export enum FeedTarget {
   File = "file",
   Folder = "folder",
   Room = "room",
+  Agent = "agent",
   RoomTag = "roomTag",
   RoomLogo = "roomLogo",
   RoomExternalLink = "roomExternalLink",
@@ -372,11 +385,14 @@ export enum FeedActionKeys {
   RoomGroupAdded = "RoomGroupAdded",
   RoomUpdateAccessForGroup = "RoomUpdateAccessForGroup",
   RoomGroupRemove = "RoomGroupRemove",
+  AgentCreated = "AgentCreated",
+  AgentRenamed = "AgentRenamed",
 }
 
 export type CapitalizedFeedAction = Capitalize<FeedAction>;
 
 export type TFeedAction<T = TFeedData> = {
+  id: number;
   action: {
     id: number;
     key: FeedActionKeys;

@@ -86,8 +86,11 @@ export interface ICreateDialog {
   ) => Promise<IMessage> | Promise<void> | IMessage | void;
   onCancel?: (e: unknown) => void;
   onClose?: (e: unknown) => void;
+  onChange?: (value: string) => void;
   isCreateDialog: boolean;
   extension?: string;
+  errorText?: string;
+  isAutoFocusOnError?: boolean;
 }
 
 export interface IImage {
@@ -132,7 +135,7 @@ export interface IMessage {
   settings?: string;
 }
 
-type TButtonGroup = {
+export type TButtonGroup = {
   component: PluginComponents.button;
   props: ButtonProps;
   contextName?: string;
@@ -149,18 +152,33 @@ export interface IContextMenuItem {
   key: string;
   label: string;
   icon: string;
-  onClick: (id: number) => Promise<IMessage> | Promise<void> | IMessage | void;
+  onClick?: (id: number) => Promise<IMessage> | Promise<void> | IMessage | void;
+  onGroupClick?: (
+    ids: number[],
+  ) => Promise<IMessage> | Promise<void> | IMessage | void;
+  isGroupAction?: boolean;
   withActiveItem?: boolean;
   fileExt?: string[];
   fileType?: PluginFileType[];
   usersTypes?: PluginUsersType[];
   devices?: PluginDevices[];
-  security?: (
-    | keyof TRoomSecurity
+  itemSecurity?: (
     | keyof TFileSecurity
+    | keyof TRoomSecurity
     | keyof TFolderSecurity
   )[];
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
   pluginName?: string;
+  items?: IContextMenuItem[];
+}
+
+export interface IContextMenuItemValidation {
+  type?: PluginFileType;
+  fileExst?: string;
+  userRole?: PluginUsersType;
+  device?: PluginDevices;
+  security?: TRoomSecurity | TFolderSecurity;
+  itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity;
 }
 
 export interface IEventListenerItem {
@@ -182,6 +200,8 @@ export interface IFileItem {
   fileTileIcon?: string;
   fileIcon?: string;
   fileIconTile?: string;
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
+  fileSecurity?: (keyof TFileSecurity)[];
   pluginName?: string;
 }
 
@@ -194,7 +214,8 @@ export interface IInfoPanelItem {
   key: string;
   subMenu: IInfoPanelSubMenu;
   body: BoxProps;
-  onLoad: () => Promise<{ body: BoxProps }>;
+  isHeaderVisible?: boolean;
+  onLoad?: () => Promise<{ body: BoxProps }>;
   filesType?: PluginFileType[];
   filesExsts?: string[];
   usersTypes?: PluginUsersType[];
@@ -232,7 +253,9 @@ export interface IframeWindow extends Window {
 export type TPlugin = {
   name: string;
   version: string;
+  minDocSpaceVersion?: string;
   description: string;
+  compatible: boolean;
   license: string;
   author: string;
   homePage: string;

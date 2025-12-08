@@ -23,16 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled from "styled-components";
+
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { TFunction } from "i18next";
+import { useEffect } from "react";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
-import { tablet, mobile } from "@docspace/shared/utils";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
@@ -44,6 +45,8 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
+import TelegramStore from "SRC_DIR/store/TelegramStore";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/login";
@@ -52,29 +55,7 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 import AuthorizedApps from "./sub-components/authorized-apps";
 import useProfileBody from "./useProfileBody";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  margin-top: -19px;
-
-  @media ${tablet} {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  @media ${mobile} {
-    margin-top: 0;
-  }
-`;
-
-const StyledTabs = styled(Tabs)`
-  > .sticky {
-    z-index: 201;
-  }
-`;
+import styles from "./body.module.scss";
 
 type SectionBodyContentProps = {
   showProfileLoader?: boolean;
@@ -93,7 +74,12 @@ type SectionBodyContentProps = {
   getCapabilities?: AuthStore["getCapabilities"];
   getSessions?: SettingsSetupStore["getSessions"];
   setIsProfileLoaded?: ClientLoadingStore["setIsProfileLoaded"];
+  setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
   setIsSectionHeaderLoading?: ClientLoadingStore["setIsSectionHeaderLoading"];
+  setIsArticleLoading?: ClientLoadingStore["setIsArticleLoading"];
+  resetSelections?: FilesStore["resetSelections"];
+  setNotificationChannels?: TargetUserStore["setNotificationChannels"];
+  checkTg?: TelegramStore["checkTg"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -113,10 +99,33 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getCapabilities,
     getSessions,
     setIsProfileLoaded,
+    setIsSectionBodyLoading,
     setIsSectionHeaderLoading,
+    setIsArticleLoading,
     getTfaType,
+    resetSelections,
+    setNotificationChannels,
+    checkTg,
   } = props;
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const checkEmailChangeParam = () => {
+    const search = window.location.search;
+    const urlParams = new URLSearchParams(search);
+
+    if (urlParams.get("email_change") === "success") {
+      toastr.success(t?.("Profile:EmailChangeSuccess"));
+
+      const pathname = window.location.pathname;
+      window.history.replaceState({}, document.title, pathname);
+    }
+  };
+
+  useEffect(() => {
+    checkEmailChangeParam();
+    resetSelections?.();
+  }, []);
 
   const {
     tfaOn,
@@ -127,6 +136,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   } = useProfileBody({
     getFilesSettings: getFilesSettings!,
     setSubscriptions: setSubscriptions!,
+    setNotificationChannels: setNotificationChannels!,
     isFirstSubscriptionsLoad,
     fetchConsents: fetchConsents!,
     fetchScopes: fetchScopes!,
@@ -137,7 +147,10 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getSessions: getSessions!,
     setIsProfileLoaded: setIsProfileLoaded!,
     setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
+    setIsArticleLoading: setIsArticleLoading!,
     getTfaType: getTfaType!,
+    checkTg: checkTg!,
+    setIsSectionBodyLoading: setIsSectionBodyLoading!,
   });
 
   const data = [
@@ -196,22 +209,24 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     const arrayPaths = window.location.pathname.split("/");
     arrayPaths.splice(arrayPaths.length - 1);
     const path = arrayPaths.join("/");
-    navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });
+    navigate(`${path}/${e.id}`, {
+      state: { disableScrollToTop: true, fromUrl: location?.state?.fromUrl },
+    });
   };
 
   if (showProfileLoader) return <ProfileViewLoader />;
 
   return (
-    <Wrapper>
+    <div className={styles.wrapper}>
       <MainProfile />
-      <StyledTabs
+      <Tabs
         items={data}
         selectedItemId={currentTabId}
         onSelect={onSelect}
         stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType as DeviceType]}
         withAnimation
       />
-    </Wrapper>
+    </div>
   );
 };
 
@@ -225,15 +240,25 @@ export default inject(
     oauthStore,
     tfaStore,
     setup,
+    filesStore,
+    telegramStore,
   }: TStore) => {
-    const { showProfileLoader, setIsProfileLoaded, setIsSectionHeaderLoading } =
-      clientLoadingStore;
+    const {
+      showProfileLoader,
+      setIsProfileLoaded,
+      setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsArticleLoading,
+    } = clientLoadingStore;
 
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
 
-    const { setSubscriptions, isFirstSubscriptionsLoad } =
-      peopleStore.targetUserStore!;
+    const {
+      setSubscriptions,
+      setNotificationChannels,
+      isFirstSubscriptionsLoad,
+    } = peopleStore.targetUserStore!;
 
     const { fetchConsents, fetchScopes } = oauthStore;
 
@@ -243,6 +268,10 @@ export default inject(
     const { getCapabilities } = authStore;
 
     const { getSessions } = setup;
+
+    const { resetSelections } = filesStore;
+
+    const { checkTg } = telegramStore;
 
     return {
       currentDeviceType: settingsStore.currentDeviceType,
@@ -262,6 +291,11 @@ export default inject(
       getTfaType,
       setIsProfileLoaded,
       setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsArticleLoading,
+      resetSelections,
+      setNotificationChannels,
+      checkTg,
     };
   },
 )(

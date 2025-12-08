@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { TableHeaderCell } from "./TableHeaderCell";
 import { SortByFieldName } from "../../../../enums";
@@ -39,13 +39,13 @@ const mockColumn = {
   sortBy: SortByFieldName.Name,
   minWidth: 200,
   resizable: false,
-  onClick: jest.fn(),
+  onClick: vi.fn(),
 };
 
 const defaultProps = {
   column: mockColumn,
   index: 0,
-  onMouseDown: jest.fn(),
+  onMouseDown: vi.fn(),
   resizable: false,
   sortBy: SortByFieldName.Author,
   sorted: true,
@@ -54,7 +54,7 @@ const defaultProps = {
 
 describe("<TableHeaderCell />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without errors", () => {

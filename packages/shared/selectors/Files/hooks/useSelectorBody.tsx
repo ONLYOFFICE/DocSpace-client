@@ -23,16 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { use } from "react";
-import { useTheme } from "styled-components";
+import { use, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
-import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
+import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg?url";
+import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg?url";
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 
 import { Selector } from "../../../components/selector";
+import { FolderType } from "../../../enums";
+import type { TFolder } from "../../../api/files/types";
 import {
   SelectorProps,
   TSelectorBreadCrumbs,
@@ -48,6 +49,7 @@ import {
   RowLoader,
   SearchLoader,
 } from "../../../skeletons/selector";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { FilesSelectorProps } from "../FilesSelector.types";
 import { LoadersContext } from "../../utils/contexts/Loaders";
@@ -70,7 +72,11 @@ type PickedBreadCrumbsProps = Pick<
 type PickedSelectorBodyProps = Pick<
   SelectorProps,
   "items" | "onSelect" | "hasNextPage" | "totalItems" | "loadNextPage"
-> & { isRoot: boolean };
+> & { isRoot: boolean; selectedItemType?: string };
+
+type SelectedTreeNodeProps = {
+  selectedTreeNode: TFolder;
+};
 
 const useSelectorBody = ({
   // header props
@@ -99,6 +105,7 @@ const useSelectorBody = ({
   withFooterInput,
   footerInputHeader,
   currentFooterInputValue,
+  folderFormValidation,
 
   // footer checkbox
   withFooterCheckbox,
@@ -125,12 +132,17 @@ const useSelectorBody = ({
   withInit,
 
   isMultiSelect,
+  maxSelectedItems,
+
+  selectedItemType,
+  selectedTreeNode,
 }: Omit<FilesSelectorProps, "withSearch" | "onSubmit"> &
   PickedSearchProps &
   PickedSubmitButtonProps &
   PickedBreadCrumbsProps &
-  PickedSelectorBodyProps) => {
-  const theme = useTheme();
+  PickedSelectorBodyProps &
+  SelectedTreeNodeProps) => {
+  const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
 
   const { showBreadCrumbsLoader, isNextPageLoading, showLoader } =
@@ -202,6 +214,32 @@ const useSelectorBody = ({
       }
     : {};
 
+  const isKnowledgeFolder = selectedTreeNode?.type === FolderType.Knowledge;
+  const isEmptyFilesRootScreen = selectedItemType === "files";
+  const isEmptyAgentsRootScreen = selectedItemType === "agents";
+
+  const emptyScreenHeader = useMemo(() => {
+    if (isKnowledgeFolder) {
+      return t("Common:SelectorEmptyScreenHeaderKnowledge");
+    }
+
+    if (isEmptyFilesRootScreen) return t("Common:SelectorEmptyScreenHeader");
+
+    if (isEmptyAgentsRootScreen) return t("Common:EmptyRoomsHeaderAgent");
+
+    return t("Common:EmptyRoomsHeader");
+  }, [t, isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen]);
+
+  const emptyScreenDescription = isEmptyFilesRootScreen
+    ? ""
+    : isEmptyAgentsRootScreen
+      ? t("Common:EmptyRoomsDescriptionTextAgent", {
+          sectionName: t("Common:AIAgents"),
+        })
+      : t("Common:EmptyRoomsDescriptionText", {
+          sectionName: t("Common:Rooms"),
+        });
+
   const SelectorBody = (
     <Selector
       {...headerSelectorProps}
@@ -212,17 +250,16 @@ const useSelectorBody = ({
       {...footerCheckboxProps}
       {...breadCrumbsProps}
       isMultiSelect={isMultiSelect ?? false}
+      maxSelectedItems={maxSelectedItems}
       items={items}
       onSelect={onSelect}
       emptyScreenImage={
-        theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
+        isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
-      emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
-      emptyScreenDescription=""
+      emptyScreenHeader={emptyScreenHeader}
+      emptyScreenDescription={emptyScreenDescription}
       searchEmptyScreenImage={
-        theme?.isBase
-          ? EmptyScreenFilterAltSvgUrl
-          : EmptyScreenFilterAltDarkSvgUrl
+        isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}
@@ -245,6 +282,7 @@ const useSelectorBody = ({
       infoBarData={infoBarData}
       withPadding={withPadding}
       isSSR={withInit}
+      folderFormValidation={folderFormValidation}
     />
   );
 

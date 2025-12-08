@@ -42,6 +42,7 @@ import { Link, LinkType } from "../../link";
 
 import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";
+import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 
 import NewItemDropDown from "./NewItemDropDown";
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
@@ -51,7 +52,8 @@ import styles from "../Selector.module.scss";
 import { EmptyScreenProps } from "../Selector.types";
 
 const linkStyles = {
-  isHovered: true,
+  noHover: true,
+  isHovered: false,
   type: LinkType.action,
   fontWeight: "600",
   className: "empty-folder_link",
@@ -62,6 +64,7 @@ const EmptyScreen = ({
   withSearch,
   items,
   inputItemVisible,
+  hideBackButton,
 }: EmptyScreenProps) => {
   const {
     emptyScreenImage,
@@ -71,6 +74,8 @@ const EmptyScreen = ({
     searchEmptyScreenHeader,
     searchEmptyScreenDescription,
   } = use(EmptyScreenContext);
+  const { withBreadCrumbs, breadCrumbs, onSelectBreadCrumb } =
+    React.use(BreadCrumbsContext);
 
   const { t } = useTranslation(["Common"]);
 
@@ -103,6 +108,10 @@ const EmptyScreen = ({
     createItem.onCreateClick?.();
   };
 
+  const onBackClick = () => {
+    onSelectBreadCrumb?.(breadCrumbs?.[breadCrumbs.length - 2]);
+  };
+
   if (
     !withSearch &&
     createItem?.isRoomsOnly &&
@@ -129,8 +138,8 @@ const EmptyScreen = ({
       </Heading>
 
       <Text className="empty-description">{currentDescription}</Text>
-      {createItem ? (
-        <div className="buttons">
+      <div className="buttons">
+        {createItem ? (
           <div
             className="empty-folder_container-links"
             onClick={onCreateClickAction}
@@ -150,12 +159,15 @@ const EmptyScreen = ({
               />
             ) : null}
           </div>
+        ) : null}
+
+        {(withBreadCrumbs || createItem) && (!hideBackButton || withSearch) ? (
           <div
             className="empty-folder_container-links"
             onClick={
               withSearch
                 ? () => onClearSearch?.(() => setIsSearch(false))
-                : createItem.onBackClick
+                : onBackClick
             }
           >
             <IconButton
@@ -164,12 +176,13 @@ const EmptyScreen = ({
               iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
               isFill
             />
+
             <Link {...linkStyles}>
               {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
             </Link>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </div>
   );
 };

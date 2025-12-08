@@ -49,7 +49,7 @@ interface ListProps {
   currentDeviceType: DeviceType;
   apiOAuthLink: string;
   logoText: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   isError: boolean;
 }
 
@@ -96,6 +96,7 @@ const List = ({
           tag="a"
           style={isError ? undefined : { marginBottom: "20px" }}
           color="accent"
+          dataTestId="oauth_guide_link"
         >
           {t("OAuth:OAuth")} {t("Common:Guide")}
         </Link>

@@ -90,26 +90,35 @@ const useSocketHelper = ({
   }, []);
 
   React.useEffect(() => {
-    const callback = async (loginEventId: unknown) => {
-      console.log(`[WS] "logout-session"`, loginEventId, user?.loginEventId);
+    const callback = async ({
+      loginEventId,
+      redirectUrl,
+    }: {
+      loginEventId: unknown;
+      redirectUrl: string | null;
+    }) => {
+      const eventId = Number(loginEventId);
 
-      if (
-        Number(loginEventId) === user?.loginEventId ||
-        Number(loginEventId) === 0
-      ) {
-        sessionStorage.setItem("referenceUrl", window.location.href);
-        if (user) sessionStorage.setItem("loggedOutUserId", user.id);
+      if (eventId !== user?.loginEventId && eventId !== 0) return;
 
-        const docEditor =
-          typeof window !== "undefined" &&
-          window.DocEditor?.instances[EDITOR_ID];
+      console.log(
+        `[WS] "logout-session"`,
+        loginEventId,
+        user?.loginEventId,
+        redirectUrl,
+      );
 
-        docEditor?.requestClose();
+      const { pathname, search, origin } = window.location;
+      const loginUrl = redirectUrl || window.ClientConfig?.proxy?.url;
 
-        window.location.replace(
-          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-        );
-      }
+      sessionStorage.setItem(
+        "referenceUrl",
+        `${redirectUrl || origin}${pathname}${search}`,
+      );
+      if (user?.id) sessionStorage.setItem("loggedOutUserId", user.id);
+
+      window.DocEditor?.instances[EDITOR_ID]?.requestClose();
+      window.location.replace(combineUrl(loginUrl, "/login"));
     };
 
     SocketHelper?.on(SocketEvents.LogoutSession, callback);
@@ -117,7 +126,7 @@ const useSocketHelper = ({
     return () => {
       SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
-  }, [user, user?.loginEventId]);
+  }, [user?.id, user?.loginEventId]);
 };
 
 export default useSocketHelper;

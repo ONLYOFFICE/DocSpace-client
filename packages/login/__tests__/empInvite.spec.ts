@@ -45,8 +45,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "emplType",
@@ -92,11 +92,8 @@ test("emp invite success standalone", async ({ page, mockRequest }) => {
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "qwerty123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -104,7 +101,7 @@ test("emp invite success standalone", async ({ page, mockRequest }) => {
     "emp-invite-success-standalone.png",
   ]);
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
@@ -124,14 +121,11 @@ test("emp invite success no standalone", async ({ page, mockRequest }) => {
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("checkbox").click();
+  await page.getByTestId("news_checkbox").click();
 
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -139,7 +133,7 @@ test("emp invite success no standalone", async ({ page, mockRequest }) => {
     "emp-invite-success-no-standalone.png",
   ]);
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
@@ -152,10 +146,10 @@ test("emp invite success no standalone", async ({ page, mockRequest }) => {
 test("emp invite error standalone", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -171,10 +165,10 @@ test("emp invite error no standalone", async ({ page, mockRequest }) => {
 
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",

@@ -1,7 +1,7 @@
 import React from "react";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { QuotaForm } from "./index";
 
@@ -9,12 +9,12 @@ describe("QuotaForm", () => {
   const defaultProps = {
     isLoading: false,
     isError: false,
-    onSetQuotaBytesSize: jest.fn(),
+    onSetQuotaBytesSize: vi.fn(),
     initialSize: 1048576,
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders correctly with default props", () => {
@@ -53,15 +53,13 @@ describe("QuotaForm", () => {
   it("calls onSetQuotaBytesSize when text input changes", async () => {
     render(<QuotaForm {...defaultProps} />);
     const input = screen.getByTestId("quota-text-input");
-    await act(async () => {
-      await userEvent.clear(input);
-      await userEvent.type(input, "2");
-    });
+    await userEvent.clear(input);
+    await userEvent.type(input, "2");
     expect(defaultProps.onSetQuotaBytesSize).toHaveBeenCalled();
   });
 
   it("calls onSetQuotaBytesSize with -1 when unlimited checkbox is checked", async () => {
-    const onSetQuotaBytesSize = jest.fn();
+    const onSetQuotaBytesSize = vi.fn();
     render(
       <QuotaForm
         {...defaultProps}
@@ -70,45 +68,37 @@ describe("QuotaForm", () => {
       />,
     );
     const checkbox = screen.getByRole("checkbox");
-    await act(async () => {
-      await userEvent.click(checkbox);
-    });
+    await userEvent.click(checkbox);
     expect(onSetQuotaBytesSize).toHaveBeenCalledWith("-1");
   });
 
   it("disables input fields when unlimited checkbox is checked", async () => {
     render(<QuotaForm {...defaultProps} checkboxLabel="Unlimited storage" />);
     const checkbox = screen.getByRole("checkbox");
-    await act(async () => {
-      await userEvent.click(checkbox);
-    });
+    await userEvent.click(checkbox);
     expect(screen.getByTestId("quota-text-input")).toBeDisabled();
   });
 
   it("calls onSave when save button is clicked", async () => {
-    const onSave = jest.fn();
+    const onSave = vi.fn();
     render(<QuotaForm {...defaultProps} isButtonsEnable onSave={onSave} />);
     const input = screen.getByTestId("quota-text-input");
-    await act(async () => {
-      await userEvent.type(input, "2");
-      await userEvent.click(screen.getByText("Common:SaveButton"));
-    });
+    await userEvent.type(input, "2");
+    await userEvent.click(screen.getByText("Common:SaveButton"));
     expect(onSave).toHaveBeenCalled();
   });
 
   it("calls onCancel when cancel button is clicked", async () => {
-    const onCancel = jest.fn();
+    const onCancel = vi.fn();
     render(<QuotaForm {...defaultProps} isButtonsEnable onCancel={onCancel} />);
     const input = screen.getByTestId("quota-text-input");
-    await act(async () => {
-      await userEvent.type(input, "2");
-      await userEvent.click(screen.getByText("Common:CancelButton"));
-    });
+    await userEvent.type(input, "2");
+    await userEvent.click(screen.getByText("Common:CancelButton"));
     expect(onCancel).toHaveBeenCalled();
   });
 
   it("resets to initial values when cancel button is clicked", async () => {
-    const onSetQuotaBytesSize = jest.fn();
+    const onSetQuotaBytesSize = vi.fn();
     render(
       <QuotaForm
         {...defaultProps}
@@ -117,33 +107,29 @@ describe("QuotaForm", () => {
       />,
     );
     const input = screen.getByTestId("quota-text-input");
-    await act(async () => {
-      await userEvent.clear(input);
-      await userEvent.type(input, "2");
-      await userEvent.click(screen.getByText("Common:CancelButton"));
-    });
+    await userEvent.clear(input);
+    await userEvent.type(input, "2");
+    await userEvent.click(screen.getByText("Common:CancelButton"));
     expect(input).toHaveValue("1");
   });
 
   it("submits form when Enter key is pressed in input field", async () => {
-    const onSave = jest.fn();
+    const onSave = vi.fn();
     render(<QuotaForm {...defaultProps} isButtonsEnable onSave={onSave} />);
     const input = screen.getByTestId("quota-text-input");
-    await act(async () => {
-      await userEvent.clear(input);
-      await userEvent.type(input, "2");
-      fireEvent.keyDown(input, {
-        key: "Enter",
-        code: "Enter",
-        keyCode: 13,
-        which: 13,
-      });
+    await userEvent.clear(input);
+    await userEvent.type(input, "2");
+    fireEvent.keyDown(input, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 13,
+      which: 13,
     });
     expect(onSave).toHaveBeenCalled();
   });
 
   it("does not submit form on Enter key if isButtonsEnable is false", async () => {
-    const onSave = jest.fn();
+    const onSave = vi.fn();
     render(<QuotaForm {...defaultProps} onSave={onSave} />);
     const input = screen.getByTestId("quota-text-input");
     fireEvent.keyDown(input, {
@@ -157,13 +143,11 @@ describe("QuotaForm", () => {
 
   it("disables save button when values are unchanged", async () => {
     render(<QuotaForm {...defaultProps} isButtonsEnable />);
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("quota-save-button");
     expect(saveButton).toBeDisabled();
     const input = screen.getByTestId("quota-text-input");
-    await act(async () => {
-      await userEvent.clear(input);
-      await userEvent.type(input, "2");
-    });
+    await userEvent.clear(input);
+    await userEvent.type(input, "2");
     expect(saveButton).not.toBeDisabled();
   });
 

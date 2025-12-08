@@ -110,22 +110,25 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = () => {
   }, [errorInternalServer]);
 
   useEffect(() => {
-    SocketHelper?.on(SocketEvents.EncryptionProgress, (opt) => {
-      const { percentage, error } = opt;
-      const roundedPercentage = Math.round(percentage);
+    SocketHelper?.on(
+      SocketEvents.EncryptionProgress,
+      (opt: { percentage: number; error?: string }) => {
+        const { percentage, error } = opt;
+        const roundedPercentage = Math.round(percentage);
 
-      setPercent(roundedPercentage);
+        setPercent(roundedPercentage);
 
-      if (roundedPercentage >= 100) {
-        if (error) {
-          setErrorMessage(error);
+        if (roundedPercentage >= 100) {
+          if (error) {
+            setErrorMessage(error);
 
-          return;
+            return;
+          }
+
+          returnToPortal();
         }
-
-        returnToPortal();
-      }
-    });
+      },
+    );
   }, [getProgress]);
 
   useEffect(() => {
@@ -135,11 +138,17 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = () => {
 
   useEffect(() => {
     if (typeof statusEncryption === "number") return;
-    const asyncFunction = async () => {
-      const encryptionSettings = await getEncryptionSettings();
+    const getSettings = () => {
+      const encryptionSettings = getEncryptionSettings();
+      if (
+        encryptionSettings.status === EncryptionStatus.Encrypted ||
+        encryptionSettings.status === EncryptionStatus.EncryptionStarted
+      ) {
+        returnToPortal(true);
+      }
       setStatusEncryption(encryptionSettings.status);
     };
-    asyncFunction();
+    getSettings();
   }, [statusEncryption]);
 
   const headerText = errorMessage

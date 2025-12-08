@@ -61,4 +61,6 @@ export type SelectorAddButtonProps = {
   size?: string;
   /** Test id */
   testId?: string;
+  /** Shows loading state with spinner */
+  isLoading?: boolean;
 };

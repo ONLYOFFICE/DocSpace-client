@@ -42,12 +42,12 @@ import { ViewComponent } from "SRC_DIR/pages/Home/View";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 
-export const contanctsRoutes = [
+export const contactsRoutes = [
   {
     path: CONTACTS_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={PEOPLE_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${PEOPLE_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -55,7 +55,7 @@ export const contanctsRoutes = [
     path: "accounts/filter",
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={PEOPLE_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${PEOPLE_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -64,7 +64,7 @@ export const contanctsRoutes = [
     element: (
       <PrivateRoute restricted withManager>
         <Navigate
-          to={PEOPLE_ROUTE_WITH_FILTER}
+          to={`/${PEOPLE_ROUTE_WITH_FILTER}`}
           state={{ openChangeOwnerDialog: true }}
           replace
         />
@@ -75,7 +75,7 @@ export const contanctsRoutes = [
     path: PEOPLE_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={PEOPLE_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${PEOPLE_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -91,7 +91,7 @@ export const contanctsRoutes = [
     path: GROUPS_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={GROUPS_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${GROUPS_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -107,7 +107,7 @@ export const contanctsRoutes = [
     path: INSIDE_GROUP_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={INSIDE_GROUP_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${INSIDE_GROUP_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -123,7 +123,7 @@ export const contanctsRoutes = [
     path: GUESTS_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={GUESTS_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${GUESTS_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },

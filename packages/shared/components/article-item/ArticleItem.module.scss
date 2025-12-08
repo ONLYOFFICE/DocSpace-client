@@ -338,6 +338,10 @@
   }
 }
 
+:global(.ai-agents):has(.articleItemBadgeWrapper:hover) .articleItemSibling {
+  background-color: var(--article-item-sibling-hover-bg-color);
+}
+
 .articleItemContainer {
   display: flex;
   justify-content: center;
@@ -357,6 +361,20 @@
   &.showText {
     justify-content: space-between;
     padding: 0 12px;
+  }
+
+  &:global(.ai-agents) {
+    justify-content: flex-start;
+
+    .articleItemText {
+      width: auto !important;
+    }
+  }
+
+  &:global(.ai-agents):not(.showText) {
+    @include mixins.tablet {
+      justify-content: center;
+    }
   }
 
   &.endOfBlock {

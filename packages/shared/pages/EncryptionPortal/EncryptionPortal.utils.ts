@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
@@ -32,8 +31,13 @@ export const isStorybook = (): boolean => {
   return document.querySelector('[class^="sb-"]') !== null;
 };
 
-export const returnToPortal = () => {
+export const returnToPortal = (withoutTimeout = false) => {
   if (isStorybook()) {
+    return;
+  }
+
+  if (withoutTimeout) {
+    window.location.replace("/");
     return;
   }
 

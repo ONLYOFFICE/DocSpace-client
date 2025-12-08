@@ -22,31 +22,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { Textarea } from ".";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 describe("<Textarea />", () => {
   const defaultProps = {
     placeholder: "Add comment",
-    onChange: jest.fn(),
+    onChange: vi.fn(),
     value: "test value",
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
-    renderWithTheme(<Textarea {...defaultProps} />);
+    render(<Textarea {...defaultProps} />);
     expect(screen.getByTestId("textarea")).toBeInTheDocument();
   });
 
   it("accepts className and style props", () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <Textarea
         {...defaultProps}
         className="test-class"
@@ -60,8 +59,8 @@ describe("<Textarea />", () => {
   });
 
   it("handles value changes", async () => {
-    const handleChange = jest.fn();
-    renderWithTheme(<Textarea {...defaultProps} onChange={handleChange} />);
+    const handleChange = vi.fn();
+    render(<Textarea {...defaultProps} onChange={handleChange} />);
 
     const textarea = screen.getByTestId("textarea");
     await userEvent.type(textarea, " additional text");
@@ -70,7 +69,7 @@ describe("<Textarea />", () => {
   });
 
   it("displays placeholder correctly", () => {
-    renderWithTheme(
+    render(
       <Textarea {...defaultProps} value="" placeholder="Test placeholder" />,
     );
 
@@ -78,21 +77,21 @@ describe("<Textarea />", () => {
   });
 
   it("handles disabled state", () => {
-    renderWithTheme(<Textarea {...defaultProps} isDisabled />);
+    render(<Textarea {...defaultProps} isDisabled />);
 
     const textarea = screen.getByTestId("textarea");
     expect(textarea).toBeDisabled();
   });
 
   it("handles readonly state", () => {
-    renderWithTheme(<Textarea {...defaultProps} isReadOnly />);
+    render(<Textarea {...defaultProps} isReadOnly />);
 
     const textarea = screen.getByTestId("textarea");
     expect(textarea).toHaveAttribute("readonly");
   });
 
   it("shows copy icon when enableCopy is true", () => {
-    renderWithTheme(<Textarea {...defaultProps} enableCopy />);
+    render(<Textarea {...defaultProps} enableCopy />);
 
     const copyIcon = screen.getByTestId("icon-button");
     expect(copyIcon).toBeInTheDocument();
@@ -100,9 +99,7 @@ describe("<Textarea />", () => {
 
   it("handles JSON formatting when isJSONField is true", () => {
     const jsonValue = JSON.stringify({ test: "value" });
-    renderWithTheme(
-      <Textarea {...defaultProps} value={jsonValue} isJSONField />,
-    );
+    render(<Textarea {...defaultProps} value={jsonValue} isJSONField />);
 
     const textarea = screen.getByTestId("textarea");
     const expectedValue = JSON.stringify({ test: "value" }, null, 2);
@@ -110,9 +107,7 @@ describe("<Textarea />", () => {
   });
 
   it("applies custom font size", () => {
-    const { container } = renderWithTheme(
-      <Textarea {...defaultProps} fontSize={16} />,
-    );
+    const { container } = render(<Textarea {...defaultProps} fontSize={16} />);
 
     const textarea = container.querySelector("[data-testid='textarea']");
     expect(textarea).toHaveStyle({ fontSize: "16px" });

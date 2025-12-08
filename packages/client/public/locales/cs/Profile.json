@@ -7,6 +7,7 @@
   "DesktopTheme": "Synchronizace s nastavením desktopového editoru",
   "DesktopThemeDescription": "Automatické přepínání mezi světlými a tmavými motivy v závislosti na aktuálním motivu editorů plochy.",
   "EditPhoto": "Upravit fotografii",
+  "EmailChangeSuccess": "Váš e-mail byl úspěšně změněn.",
   "EmailNotVerified": "E-mail není ověřen",
   "ErrorAccountAlreadyUse": "Propojený účet již používaný jiným uživatelem",
   "FileManagement": "Správa souborů",
@@ -17,6 +18,7 @@
   "LogoutDescription": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
   "LogoutFrom": "Odhlášení z {{platform}} {{browser}}?",
   "MyProfile": "Můj profil",
+  "NotificationsChannels": "Notifikační kanály",
   "ProviderSuccessfullyConnected": "Poskytovatel úspěšně připojen",
   "ProviderSuccessfullyDisconnected": "Poskytovatel úspěšně odpojen",
   "SendAgain": "Odeslat znovu",
@@ -24,6 +26,10 @@
   "SuccessLogout": "Aktivní připojení bylo odhlášeno: {{platform}}, {{browser}}",
   "SystemTheme": "Použít systémový motiv",
   "SystemThemeDescription": "Automatické přepínání mezi světlými a tmavými motivy v souladu s vaším systémem.",
+  "TelegramAccount": "Telegram účet",
+  "TelegramAccountDescription": "Pro připojení TelegramBotu k vašemu účtu postupujte podle tajného odkazu a klikněte na tlačítko „Připojit Telegram“.",
+  "TelegramAccountDisconnect": "Odpojit Telegram",
+  "TelegramAccountDisconnectDescription": "Váš účet @{{username}} je propojený pro telegramové notifikace. Můžete se od tohoto účtu odpojit. V tomto případě nebudete dostávat notifikace.",
   "TerminateAllSessions": "Ukončení všech relací kromě aktuální",
   "TwoFactorDescription": "Dvoufázové ověřování prostřednictvím aplikace generující kódy bylo správcem povoleno pro všechny uživatele."
 }

@@ -34,6 +34,7 @@ import { useDidMount } from "../../../../../hooks/useDidMount";
 import styles from "../../AutoBackup.module.scss";
 import { ScheduleComponent } from "../ScheduleComponent";
 import { ThirdPartyModuleProps } from "./ThirdPartyModule.types";
+import NoteComponent from "../../../sub-components/NoteComponent";
 
 const ThirdPartyModule = ({
   isError,
@@ -82,6 +83,9 @@ const ThirdPartyModule = ({
   setTime,
   setWeekday,
   weekdaysLabelArray,
+  setDefaultFolderId,
+  isBackupPaid,
+  isFreeBackupsLimitReached,
 }: ThirdPartyModuleProps) => {
   const isResourcesDefault =
     defaultStorageType === BackupStorageType.ResourcesModuleType.toString();
@@ -100,6 +104,8 @@ const ThirdPartyModule = ({
 
   const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
 
+  const withoutInitPath = isResourcesDefault ? !passedId : true;
+
   return (
     <div data-testid="third-party-module">
       <div
@@ -115,7 +121,7 @@ const ThirdPartyModule = ({
           isDisabled={isLoadingData}
           checkCreating={checkCreating}
           onSelectFolder={onSelectFolder}
-          withoutInitPath={!isResourcesDefault}
+          withoutInitPath={withoutInitPath}
           openConnectWindow={openConnectWindow}
           connectDialogVisible={connectDialogVisible}
           deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
@@ -141,6 +147,7 @@ const ThirdPartyModule = ({
           toDefault={toDefault}
           setNewPath={setNewPath}
           dataTestId="auto_backup"
+          setDefaultFolderId={setDefaultFolderId}
         />
       </div>
       <ScheduleComponent
@@ -161,6 +168,9 @@ const ThirdPartyModule = ({
         monthNumbersArray={monthNumbersArray}
         hoursArray={hoursArray}
         maxNumberCopiesArray={maxNumberCopiesArray}
+      />
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
       />
     </div>
   );

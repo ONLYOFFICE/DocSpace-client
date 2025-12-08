@@ -39,9 +39,10 @@ import {
   getThirdPartyProviders,
   getUserFromConfirm,
   getInvitationSettings,
-  getUserByEmail,
+  getUserByEncEmail,
 } from "@/utils/actions";
 import { logger } from "logger.mjs";
+import { TConfirmLinkParams } from "@/types";
 import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
@@ -52,16 +53,16 @@ type LinkInviteProps = {
 async function Page(props: LinkInviteProps) {
   logger.info("Invite page");
   const { searchParams: sp, params: p } = props;
-  const searchParams = await sp;
+  const searchParams = (await sp) as TConfirmLinkParams;
   const params = await p;
   if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite") {
     logger.info(`Invite page notFound params.Invite: ${params.Invite}`);
     return notFound();
   }
 
-  const type = searchParams.type;
+  const type = searchParams.type ?? "";
   const uid = searchParams.uid;
-  const email = searchParams.email;
+  const encemail = searchParams.encemail ?? "";
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = await headers();
@@ -77,9 +78,7 @@ async function Page(props: LinkInviteProps) {
   ] = await Promise.all([
     uid
       ? getUserFromConfirm(uid, confirmKey)
-      : email
-        ? getUserByEmail(email, confirmKey)
-        : undefined,
+      : getUserByEncEmail(encemail, confirmKey),
     getSettings(),
     getThirdPartyProviders(true),
     getCapabilities(),

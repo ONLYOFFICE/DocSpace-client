@@ -3,7 +3,7 @@
   "content": "Ask purchase questions at <1>{{email}}</1>",
   "content_en_sha1_hash": "6b8817e13f560fda3a03a1762a7240069b4575df",
   "created_at": "2025-05-26T07:15:49.141Z",
-  "updated_at": "2025-08-11T18:11:59.375Z",
+  "updated_at": "2025-10-13T22:52:35.869Z",
   "comment": {
     "text": "This translation key is used for a text that prompts users to ask purchase-related questions when making an upgrade to a Pro plan. It appears in a contact component on a payment page, likely as part of a help or support section.",
     "is_auto": true,
@@ -27,19 +27,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Ask purchase questions' is not accurately translated. 'اطرح أسئلة الشراء' is a literal translation but sounds slightly unnatural in this context. A more natural phrasing might be 'للاستفسار عن الشراء' (for purchase inquiries) or 'إذا كان لديك أي أسئلة حول الشراء' (if you have any questions about purchase).",
+          "suggestion": "للاستفسار عن الشراء"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1> and </1> are present in both the English and Azerbaijani versions. While not technically an error, preserving them might be unnecessary or confusing for the user. It's recommended to remove them to ensure clean presentation.",
+          "suggestion": "Remove the angle brackets: 'Satınalma ilə bağlı hər hansı sualınız olarsa, bizimlə {{email}} əlaqə saxlayın'"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Задавайте въпроси относно покупките' is a bit literal and could be improved for better flow. A more natural phrasing would be 'Имате ли въпроси относно покупката?' or similar.",
+          "suggestion": "Имате ли въпроси относно покупката?"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,13 +69,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Ask purchase questions' is not accurately translated. 'Senden Sie Ihre Fragen zum Kauf' translates to 'Send your questions about the purchase,' which changes the nuance. A more accurate translation would be 'Haben Sie Fragen zum Kauf?' or 'Fragen Sie zum Kauf.'",
+          "suggestion": "Haben Sie Fragen zum Kauf?"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Ask purchase questions\" is not accurately translated. \"Στείλτε τις ερωτήσεις σας σχετικά με την αγορά\" translates to \"Send your questions regarding the purchase.\" While conveying a similar meaning, \"Ask\" implies a direct inquiry, which is better represented. A more accurate translation would be something like \"Ρωτήστε για ερωτήσεις σχετικά με την αγορά\" or \"Για ερωτήσεις σχετικά με την αγορά...\"",
+          "suggestion": "Ρωτήστε για ερωτήσεις σχετικά με την αγορά"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,49 +99,107 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Ask purchase questions\" is better translated as \"Kysy kysymyksiä ostoksesta\" or \"Kysy ostoksesta kysymyksiä\". \"Esitä kysymyksiä ostoon liittyen\" is grammatically correct but less natural and idiomatic for a marketing banner.",
+          "suggestion": "Kysy kysymyksiä ostoksesta"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Ask purchase questions\" is more accurately translated as something like \"Si vous avez des questions concernant l'achat\" or \"Pour des questions concernant l'achat\". \"Pour toute question d'achat\" is a slightly too broad translation.",
+          "suggestion": "Si vous avez des questions concernant l'achat"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Ask purchase questions at\" is not accurately reflected in the Armenian translation. A more natural translation would be something along the lines of \"For questions about the purchase, contact us at\".",
+          "suggestion": "For questions about the purchase, contact us at"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'հասցեով' (hasceov) which translates to 'at an address' doesn't fit the context. It's more appropriate to use a phrase indicating contact.",
+          "suggestion": "through"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Per le domande sull'acquisto a' is not the most natural or idiomatic way to say 'Ask purchase questions at'. A more accurate and fluent translation would be something like 'Per domande sull'acquisto, contattaci a'.",
+          "suggestion": "Per domande sull'acquisto, contattaci a"
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <1>{{email}}</1> are present in both the source and target, which is appropriate. However, ensure the email is being properly substituted at runtime.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation retains the HTML tags <1>{{email}}</1> which might not be desired in the final output. It is recommended to remove or adjust the tag depending on the intended display format.",
+          "suggestion": "Remove the HTML tags or replace with a different formatting as needed. For example: <1>{{email}}</1> -> {{email}}"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Korean versions, but their purpose is unclear and might be unnecessary. Consider whether these tags are required for rendering or if they should be removed.",
+          "suggestion": "Evaluate the necessity of the <1> and </1> tags. If they are not required, remove them. If they are required, ensure they are used correctly and consistently."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຖາມຄຳຖາມຊື້ຢູ່\" is a literal translation but doesn't flow naturally in Lao. It's better to express the meaning of 'ask purchase questions' in a more idiomatic way.",
+          "suggestion": "ຖາມຄຳຖາມກ່ຽວກັບການຊື້ຢູ່"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Ask purchase questions' is translated as 'Uzdodiet jautājumus par pirkumu'. While not strictly incorrect, a more natural translation might be 'Jautājumus par pirkumu var uzdot'. The current translation sounds slightly awkward in Latvian.",
+          "suggestion": "Jautājumus par pirkumu var uzdot"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,37 +211,88 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Ask purchase questions' is not accurately reflected in the Polish translation 'W razie pytań dotyczących zakupu'. A more direct and natural translation would be something like 'Masz pytania dotyczące zakupu?' or 'Jeśli masz pytania dotyczące zakupu...'",
+          "suggestion": "Masz pytania dotyczące zakupu?"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Colocar questões relacionadas com a compra em' is not the most natural or direct translation of 'Ask purchase questions at'. A more suitable translation would be something like 'Tire dúvidas sobre a compra em' or 'Para dúvidas sobre a compra, entre em'.",
+          "suggestion": "Tire dúvidas sobre a compra em"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, 'Colocar questões relacionadas com a compra' is a bit verbose and could be simplified for better readability in Portuguese. 'Questões relacionadas com a compra' can be shortened to 'dúvidas sobre a compra'.",
+          "suggestion": "dúvidas sobre a compra"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Faça perguntas sobre compra em <1>{{email}}</1>\" is a literal translation and could be improved for naturalness. A more common phrasing would be 'Tire suas dúvidas sobre a compra em...'.",
+          "suggestion": "Tire suas dúvidas sobre a compra em <1>{{email}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Adresați întrebarea legată de cumpărarea' is a bit awkward. A more natural translation for 'Ask purchase questions' would be something like 'Pentru întrebări despre achiziție' or 'Dacă aveți întrebări despre achiziție'. The 'legată de cumpărarea' part implies a direct connection that isn't necessarily present.",
+          "suggestion": "Pentru întrebări despre achiziție"
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>{{email}}</1>` tag appears to be preserved in the Romanian translation. While technically correct, it might be better to handle this dynamically in the application rather than explicitly including it in the translation.",
+          "suggestion": "Consider dynamic handling of the email placeholder."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Задать вопросы по покупке\" is a literal translation of 'Ask purchase questions'. A more natural phrasing in Russian might be \"Есть вопросы по покупке?\" or \"Задайте вопросы о покупке\".",
+          "suggestion": "Есть вопросы по покупке?"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation ' හරහා මිලදී ගැනීමේ ප්‍රශ්න අසන්න' doesn't perfectly capture the nuance of 'Ask purchase questions at'. A more accurate translation would convey the idea of contacting for purchase inquiries.",
+          "suggestion": "ඔබේ මිලදී ගැනීමේ ප්‍රශ්න සඳහා <1>{{email}}</1> වෙත සම්බන්ධ වන්න"
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation includes the tags <1> and </1> which should ideally match the English format.  Ensure consistency in tag usage.",
+          "suggestion": "Ensure that the tags are identical to the English version."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,7 +304,18 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Ask purchase questions\" is better translated as \"Če imate vprašanja glede nakupa\" or \"Za vprašanja glede nakupa\". The current translation, \"Vprašanja glede nakupa pošljite na\", implies 'send questions regarding purchase to,' which isn't quite the intended meaning of asking a question.",
+          "suggestion": "Če imate vprašanja glede nakupa"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Ask' is more appropriately conveyed in Slovenian as a direct inquiry, rather than implying sending questions.",
+          "suggestion": "Za vprašanja glede nakupa"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,19 +327,42 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Ask purchase questions\" is better translated as \"Pitajte pitanja o kupovini\" in Serbian (Latin). \"Postavite pitanja o kupovini\" implies setting up or arranging questions, not asking them.",
+          "suggestion": "Pitajte pitanja o kupovini na <1>{{email}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'adresinden satın alma soruları sorun' doesn't fully convey the meaning of 'Ask purchase questions at'. A more natural Turkish phrasing would be closer to 'Satın alma ile ilgili sorularınız için'.",
+          "suggestion": "Satın alma ile ilgili sorularınız için <1>{{email}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of the <1> and </1> tags seems to be identical to the English. It's crucial to review and ensure consistency in the template language across both languages. There may be reasons for the tag placement in English that don't translate directly to Turkish.",
+          "suggestion": "Review and potentially adjust the tag placement based on the intended display logic."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Ask purchase questions\" is translated as \"Щоб поставити запитання щодо придбання\" which is a more verbose and less direct translation. A more accurate translation would be something like \"Для запитань щодо придбання\" or \"Якщо у вас є запитання щодо придбання\".",
+          "suggestion": "Для запитань щодо придбання"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +374,30 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content \"Ask purchase questions at <1>{{email}}</1>\" is not accurately translated. \"Ask purchase questions at\" is better conveyed as something like \"如有购买疑问\" or \"关于购买的疑问\".  \"获得销售团队的咨询\" is a bit indirect. A more direct translation would be something like \"咨询购买事宜\" or \"咨询购买相关问题\".",
+          "suggestion": "如有购买疑问，请咨询邮箱 <1>{{email}}</1> 或 咨询购买相关问题"
+        },
+        {
+          "type": "formatting",
+          "description": "The Chinese translation includes a phrase \"通过邮箱\", while the original English uses \"at\".  While \"通过邮箱\" isn't *wrong*, it isn't a direct equivalent and might not convey the intended meaning as effectively.",
+          "suggestion": "Consider removing \"通过\" for a more concise translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Ask purchase questions\" is not accurately reflected in the Albanian translation \"Bëni pyetje për blerjet\". A more accurate translation might be \"Për pyetje blerjeje...\" or \"Merrni përgjigje për pyetje blerjeje...\"",
+          "suggestion": "Merrni përgjigje për pyetje blerjeje në <1>{{email}}</1>"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -41,8 +41,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -56,7 +56,7 @@ test("email activation success", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.activationStatus]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.waitForURL("/login?confirmedEmail=**", { waitUntil: "load" });
+  await page.waitForURL("/login", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

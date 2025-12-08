@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Şifre başarıyla değiştirildi",
   "CodeTitle": "Kod tarafınıza e-posta olarak gönderildi",
+  "ConfirmEmailChange": "E-posta adresinizi değiştirmeyi onaylayın",
+  "ConfirmEmailChangeText": "{{productName}} hesabınızdaki e-posta adresini değiştirmek istediğinizi belirttiniz. Devam etmek için, lütfen mevcut kimlik bilgilerinizle giriş yapın.",
   "ErrorInvalidText": "10 saniye içinde <1>{{productName}}</1> yönlendirileceksiniz",
   "ForgotPassword": "Şifrenizi mi unuttunuz?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}} kullanıcı adı",

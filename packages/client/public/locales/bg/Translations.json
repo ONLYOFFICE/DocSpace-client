@@ -12,7 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive директория",
   "FolderTitleWebDav": "WebDAV директория",
   "FolderTitleYandex": "Yandex директория",
-  "LinkHasExpiredAndHasBeenDisabled": "Линкът изтече и беше деактивиран",
   "LinkValidTime": "Този линк е валиден само за {{days_count}} дни.",
   "NewForm": "PDF формуляр",
   "OwnerChange": "Смени собственик",
@@ -24,5 +23,6 @@
   "ThirdPartyInfo": "Смени информацията от трето лице",
   "ThirdPartyTitle": "Услуги на трети страни",
   "TitleShowActions": "Покажи действията за файлове",
-  "TitleShowFolderActions": "Покажи действията за папки"
+  "TitleShowFolderActions": "Покажи действията за папки",
+  "TrashItemsDeleteSuccess": "Избраните елементи бяха успешно изтрити от {{sectionName}}"
 }

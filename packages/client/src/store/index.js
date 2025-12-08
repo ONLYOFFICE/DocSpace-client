@@ -87,8 +87,15 @@ import EditGroupStore from "./contacts/EditGroupStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
+import AiRoomStore from "./AiRoomStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
+import AISettingsStore from "./portal-settings/AISettingsStore";
+import CreateEditAgentStore from "./CreateEditAgentStore";
+
+const aiRoomStore = new AiRoomStore();
+
+import TelegramStore from "./TelegramStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -108,15 +115,22 @@ const servicesStore = new ServicesStore(currentTariffStatusStore, paymentStore);
 
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
-const backupStore = new BackupStore(authStore, thirdPartyStore);
+const backupStore = new BackupStore(
+  authStore,
+  thirdPartyStore,
+  currentQuotaStore,
+  currentTariffStatusStore,
+  settingsStore,
+  paymentStore,
+);
 const commonStore = new CommonStore(settingsStore);
 
-const ssoStore = new SsoFormStore();
-const ldapStore = new LdapFormStore(currentQuotaStore);
+const ssoStore = new SsoFormStore(settingsStore);
+const ldapStore = new LdapFormStore(currentQuotaStore, settingsStore);
 
 const tagsStore = new TagsStore();
 
-const clientLoadingStore = new ClientLoadingStore();
+const clientLoadingStore = new ClientLoadingStore(settingsStore);
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
@@ -165,6 +179,7 @@ const filesStore = new FilesStore(
   currentTariffStatusStore,
   settingsStore,
   indexingStore,
+  aiRoomStore,
 );
 
 const guidanceStore = new GuidanceStore();
@@ -207,6 +222,7 @@ const profileActionsStore = new ProfileActionsStore(
   settingsStore,
   currentTariffStatusStore,
   infoPanelStore,
+  clientLoadingStore,
 );
 
 const peopleStore = new PeopleStore(
@@ -233,6 +249,7 @@ const uploadDataStore = new UploadDataStore(
   primaryProgressDataStore,
   dialogsStore,
   filesSettingsStore,
+  aiRoomStore,
 );
 
 const filesActionsStore = new FilesActionsStore(
@@ -254,6 +271,7 @@ const filesActionsStore = new FilesActionsStore(
   currentQuotaStore,
   indexingStore,
   versionHistoryStore,
+  aiRoomStore,
 );
 
 mediaViewerDataStore.filesActionsStore = filesActionsStore;
@@ -328,8 +346,24 @@ const createEditRoomStore = new CreateEditRoomStore(
   avatarEditorDialogStore,
 );
 
+const createEditAgentStore = new CreateEditAgentStore(
+  filesStore,
+  filesActionsStore,
+  selectedFolderStore,
+  tagsStore,
+  settingsStore,
+  currentQuotaStore,
+  clientLoadingStore,
+  dialogsStore,
+  avatarEditorDialogStore,
+);
+
 const webhooksStore = new WebhooksStore(settingsStore);
-const importAccountsStore = new ImportAccountsStore(currentQuotaStore);
+const importAccountsStore = new ImportAccountsStore(
+  currentQuotaStore,
+  settingsStore,
+  dialogsStore,
+);
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
@@ -338,13 +372,16 @@ const storageManagement = new StorageManagement(
   settingsStore,
 );
 
-const oauthStore = new OAuthStore(userStore, storageManagement);
+const oauthStore = new OAuthStore(userStore, settingsStore);
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
 
 const brandingStore = new BrandingStore(settingsStore);
+
+const aiSettingsStore = new AISettingsStore();
+const telegramStore = new TelegramStore();
 
 const store = {
   authStore,
@@ -409,6 +446,11 @@ const store = {
   brandingStore,
 
   guidanceStore,
+
+  aiRoomStore,
+  aiSettingsStore,
+  telegramStore,
+  createEditAgentStore,
 };
 
 export default store;

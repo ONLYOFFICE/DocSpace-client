@@ -43,4 +43,6 @@ export type TTabItemProps = {
   className?: string;
   /** Sets a tab data-testid */
   dataTestId?: string;
+  /** Locks the last selected tab */
+  lockLastSelection?: boolean;
 };

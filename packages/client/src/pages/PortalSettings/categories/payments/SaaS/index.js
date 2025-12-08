@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { inject, observer } from "mobx-react";
 import moment from "moment";
@@ -37,13 +37,9 @@ import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
 import PaymentContainer from "./PaymentContainer";
 
-let timerId = null;
 const SaaSPage = ({
   language,
-  isLoadedTariffStatus,
-  isLoadedCurrentQuota,
   isInitPaymentPage,
-  init,
   isUpdatingTariff,
   isUpdatingBasicSettings,
   resetTariffContainerToBasic,
@@ -54,14 +50,12 @@ const SaaSPage = ({
   isDesktop,
   isDesktopClientInit,
   setIsDesktopClientInit,
-  setIsUpdatingBasicSettings,
   isShowStorageTariffDeactivatedModal,
+  showPortalSettingsLoader,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
   const shouldShowLoader =
     !isInitPaymentPage || !ready || isUpdatingTariff || isUpdatingBasicSettings;
-
-  const [showLoader, setShowLoader] = useState(false);
 
   useEffect(() => {
     moment.locale(language);
@@ -86,34 +80,8 @@ const SaaSPage = ({
     setDocumentTitle(t("Common:PaymentsTitle"));
   }, [ready]);
 
-  useEffect(() => {
-    if (!isLoadedTariffStatus || !isLoadedCurrentQuota || !ready) return;
-
-    init(t);
-  }, [isLoadedTariffStatus, isLoadedCurrentQuota, ready]);
-
-  useEffect(() => {
-    if (!shouldShowLoader && timerId) {
-      clearTimeout(timerId);
-      timerId = null;
-    }
-  }, [shouldShowLoader]);
-
-  useEffect(() => {
-    timerId = setTimeout(() => {
-      setShowLoader(true);
-    }, 200);
-
-    return () => {
-      clearTimeout(timerId);
-      setIsUpdatingBasicSettings(true);
-    };
-  }, []);
-
-  return shouldShowLoader ? (
-    showLoader ? (
-      <PaymentsLoader />
-    ) : null
+  return shouldShowLoader && showPortalSettingsLoader ? (
+    <PaymentsLoader />
   ) : (
     <>
       <PaymentContainer t={t} />
@@ -132,8 +100,7 @@ export default inject(
     settingsStore,
     paymentStore,
     userStore,
-    currentQuotaStore,
-    currentTariffStatusStore,
+    clientLoadingStore,
   }) => {
     const {
       language,
@@ -141,14 +108,10 @@ export default inject(
       isUpdatingTariff,
     } = authStore;
     const { user } = userStore;
-    const { isLoaded: isLoadedCurrentQuota } = currentQuotaStore;
-    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
     const {
       isInitPaymentPage,
-      init,
       isUpdatingBasicSettings,
       resetTariffContainerToBasic,
-      setIsUpdatingBasicSettings,
       isShowStorageTariffDeactivatedModal,
     } = paymentStore;
 
@@ -160,6 +123,9 @@ export default inject(
       isDesktopClientInit,
       setIsDesktopClientInit,
     } = settingsStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
     return {
       isDesktopClientInit,
       setIsDesktopClientInit,
@@ -170,14 +136,11 @@ export default inject(
       setEncryptionKeys,
       resetTariffContainerToBasic,
       isUpdatingTariff,
-      init,
       isInitPaymentPage,
       language,
-      isLoadedTariffStatus,
-      isLoadedCurrentQuota,
       isUpdatingBasicSettings,
-      setIsUpdatingBasicSettings,
       isShowStorageTariffDeactivatedModal,
+      showPortalSettingsLoader,
     };
   },
 )(observer(SaaSPage));

@@ -3,7 +3,7 @@
   "content": "Time zone",
   "content_en_sha1_hash": "eea79afd832854a3b24153b928ee9c62c7457dbe",
   "created_at": "2025-05-19T21:30:52.951Z",
-  "updated_at": "2025-05-24T03:51:28.883Z",
+  "updated_at": "2025-09-17T13:43:01.728Z",
   "comment": {
     "text": "Time zone description is used to display a time zone option for user selection in the portal settings page. This translation key will appear as a dropdown or list of options within the category settings, allowing users to select their preferred time zone. It should reflect the actual name and value associated with each time zone.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 80,
-      "context": "let timezoneFromSessionStorage = \"\";\n let timezoneDefaultFromSessionStorage = \"\";\n \n const settingNames = [\"language\", \"timezone\"];\n \n const LanguageAndTimeZoneComponent = (props) => {\n const {\n i18n,\n language,\n cultureNames,\n rawTimezones,",
+      "line_number": 81,
+      "context": "let timezoneFromSessionStorage = \"\";\n let timezoneDefaultFromSessionStorage = \"\";\n \n const settingNames = [\"language\", \"timezone\"];\n \n const LanguageAndTimeZoneComponent = (props) => {\n const {\n i18n,\n language,\n rawTimezones,\n portalTimeZoneId,",
       "module": "/packages/client"
     }
   ],

@@ -49,7 +49,7 @@ const RoleHistories = ({
         "Common:HistoryOpenedAtDate",
       ),
       [FillingFormStatusHistory.SubmissionDate.toString()]: t(
-        "Common:HistorySubmissionDate",
+        "Common:HistorySubmittedPartDescription",
       ),
       [FillingFormStatusHistory.StopDate.toString()]: (
         <Trans

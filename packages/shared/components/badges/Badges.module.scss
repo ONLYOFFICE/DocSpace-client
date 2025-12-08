@@ -26,9 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "../../styles/common-icons-style";
 @use "../../styles/variables/colors";
-
 @use "../../styles/mixins";
 
 :global(.rtl) {
@@ -50,7 +48,7 @@
     }
 
     .iconBadge {
-      @include common-icons-style.icon-size(small);
+      @include mixins.icon-size(small);
     }
   }
   &.rowView {
@@ -63,10 +61,10 @@
     }
 
     .iconBadge {
-      @include common-icons-style.icon-size(medium);
+      @include mixins.icon-size(medium);
 
       @include mixins.mobile {
-        @include common-icons-style.icon-size(small);
+        @include mixins.icon-size(small);
       }
     }
   }
@@ -77,7 +75,7 @@
     }
 
     .iconBadge {
-      @include common-icons-style.icon-size(medium);
+      @include mixins.icon-size(medium);
     }
   }
 }

@@ -25,20 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { screen, waitFor, act, render } from "@testing-library/react";
 
 import { EncryptionPortal } from "./index";
+import styles from "./EncryptionPortal.module.scss";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import * as settingsApi from "../../api/settings";
 
 // Mock the socket helper
-jest.mock("../../utils/socket", () => ({
+vi.mock("../../utils/socket", () => ({
   __esModule: true,
   default: {
-    on: jest.fn(),
+    on: vi.fn(),
   },
   SocketEvents: {
     EncryptionProgress: "encryption-progress",
@@ -46,17 +46,18 @@ jest.mock("../../utils/socket", () => ({
 }));
 
 // Mock the settings API
-jest.mock("../../api/settings", () => ({
-  getEncryptionProgress: jest.fn().mockResolvedValue(50),
+vi.mock("../../api/settings", () => ({
+  getEncryptionProgress: vi.fn().mockResolvedValue(50),
+  getEncryptionSettings: vi.fn().mockResolvedValue({ status: 1 }),
 }));
 
 // Mock the utils
-jest.mock("./EncryptionPortal.utils", () => ({
-  returnToPortal: jest.fn(),
+vi.mock("./EncryptionPortal.utils", () => ({
+  returnToPortal: vi.fn(),
 }));
 
 // Mock the translation hook
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     ready: true,
@@ -64,18 +65,24 @@ jest.mock("react-i18next", () => ({
 }));
 
 describe("EncryptionPortal", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+  });
+
   // Add a test for the loader state
-  test("renders loader when not ready", () => {
+  it("renders loader when not ready", async () => {
     // Mock the useTranslation hook to return ready: false
-    jest
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-      .spyOn(require("react-i18next"), "useTranslation")
-      .mockImplementation(() => ({
+    vi.doMock("react-i18next", () => ({
+      useTranslation: () => ({
         t: (key: string) => key,
         ready: false,
-      }));
+      }),
+    }));
 
-    renderWithTheme(<EncryptionPortal />);
+    const { EncryptionPortal } = await import("./index");
+
+    await act(async () => render(<EncryptionPortal />));
 
     expect(screen.getByTestId("preparation-portal-loader")).toBeInTheDocument();
     expect(screen.getByTestId("encryption-portal")).toHaveAttribute(
@@ -84,29 +91,20 @@ describe("EncryptionPortal", () => {
     );
 
     // Restore the original mock
-    jest
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-      .spyOn(require("react-i18next"), "useTranslation")
-      .mockImplementation(() => ({
-        t: (key: string) => key,
-        ready: true,
-      }));
-  });
-  beforeEach(() => {
-    jest.clearAllMocks();
+    vi.restoreAllMocks();
   });
 
-  test("renders state initially", () => {
-    renderWithTheme(<EncryptionPortal />);
+  it("renders state initially", async () => {
+    await act(async () => render(<EncryptionPortal />));
 
     const portalElement = screen.getByTestId("encryption-portal");
     expect(portalElement).toBeInTheDocument();
   });
 
-  test("renders progress bar when encryption is in progress", async () => {
-    (settingsApi.getEncryptionProgress as jest.Mock).mockResolvedValue(50);
+  it("renders progress bar when encryption is in progress", async () => {
+    vi.mocked(settingsApi.getEncryptionProgress).mockResolvedValue(50);
 
-    renderWithTheme(<EncryptionPortal />);
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -136,9 +134,9 @@ describe("EncryptionPortal", () => {
     expect(progressBar).toHaveAttribute("aria-label", "Encryption Progress");
   });
 
-  test("renders error message when API call fails", async () => {
+  it("renders error message when API call fails", async () => {
     const errorMessage = "API Error";
-    (settingsApi.getEncryptionProgress as jest.Mock).mockRejectedValue({
+    vi.mocked(settingsApi.getEncryptionProgress).mockRejectedValue({
       response: {
         data: {
           error: {
@@ -148,7 +146,7 @@ describe("EncryptionPortal", () => {
       },
     });
 
-    renderWithTheme(<EncryptionPortal />);
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -166,25 +164,30 @@ describe("EncryptionPortal", () => {
     expect(errorContainer).toHaveAttribute("data-error", "true");
     expect(errorContainer).toHaveAttribute("aria-live", "assertive");
     expect(portalElement).toHaveAttribute("aria-busy", "false");
-    expect(portalElement).toHaveClass("encryptionPortal");
-    expect(portalElement).toHaveClass("error");
+    expect(portalElement).toHaveClass(styles.encryptionPortal);
+    expect(portalElement).toHaveClass(styles.error);
     expect(portalBody).toHaveAttribute("data-error", "true");
   });
 
-  test("updates progress via socket events", async () => {
-    (settingsApi.getEncryptionProgress as jest.Mock).mockResolvedValue(30);
+  it("updates progress via socket events", async () => {
+    vi.mocked(settingsApi.getEncryptionProgress).mockResolvedValue(30);
 
     // Capture the socket callback
     let socketCallback:
       | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
-    (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
-      if (event === SocketEvents.EncryptionProgress) {
-        socketCallback = callback;
-      }
-    });
+    vi.mocked(SocketHelper!.on).mockImplementation(
+      (event, callback: unknown) => {
+        if (event === SocketEvents.EncryptionProgress) {
+          socketCallback = callback as (data: {
+            percentage: number;
+            error: string | null;
+          }) => void;
+        }
+      },
+    );
 
-    renderWithTheme(<EncryptionPortal />);
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -196,44 +199,49 @@ describe("EncryptionPortal", () => {
 
     // Simulate socket event
     expect(socketCallback).toBeDefined();
-    if (socketCallback) {
-      socketCallback({ percentage: 75, error: null });
+    act(() => {
+      socketCallback?.({ percentage: 75, error: null });
+    });
 
-      await waitFor(
-        () => {
-          const progressText = screen.queryByText(/75\s*%/i);
-          expect(progressText).toBeInTheDocument();
-        },
-        { timeout: 3000 },
-      );
+    await waitFor(
+      () => {
+        const progressText = screen.queryByText(/75\s*%/i);
+        expect(progressText).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
 
-      const progressBar = screen.getByTestId("encryption-progress-bar");
-      const portalBody = screen.getByTestId("encryption-portal-body");
+    const progressBar = screen.getByTestId("encryption-progress-bar");
+    const portalBody = screen.getByTestId("encryption-portal-body");
 
-      expect(progressBar).toBeInTheDocument();
-      expect(progressBar).toHaveAttribute("aria-valuenow", "75");
-      expect(progressBar).toHaveAttribute("data-percent", "75");
-      expect(progressBar).toHaveAttribute("role", "progressbar");
-      expect(progressBar).toHaveAttribute("aria-valuemin", "0");
-      expect(progressBar).toHaveAttribute("aria-valuemax", "100");
-      expect(portalBody).toHaveAttribute("data-progress", "true");
-    }
+    expect(progressBar).toBeInTheDocument();
+    expect(progressBar).toHaveAttribute("aria-valuenow", "75");
+    expect(progressBar).toHaveAttribute("data-percent", "75");
+    expect(progressBar).toHaveAttribute("role", "progressbar");
+    expect(progressBar).toHaveAttribute("aria-valuemin", "0");
+    expect(progressBar).toHaveAttribute("aria-valuemax", "100");
+    expect(portalBody).toHaveAttribute("data-progress", "true");
   });
 
-  test("handles socket error events", async () => {
-    (settingsApi.getEncryptionProgress as jest.Mock).mockResolvedValue(30);
+  it("handles socket error events", async () => {
+    vi.mocked(settingsApi.getEncryptionProgress).mockResolvedValue(30);
 
     // Capture the socket callback
     let socketCallback:
       | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
-    (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
-      if (event === SocketEvents.EncryptionProgress) {
-        socketCallback = callback;
-      }
-    });
+    vi.mocked(SocketHelper!.on).mockImplementation(
+      (event, callback: unknown) => {
+        if (event === SocketEvents.EncryptionProgress) {
+          socketCallback = callback as (data: {
+            percentage: number;
+            error: string | null;
+          }) => void;
+        }
+      },
+    );
 
-    renderWithTheme(<EncryptionPortal />);
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -246,29 +254,29 @@ describe("EncryptionPortal", () => {
     // Simulate socket error event
     const socketError = "Socket Error";
     expect(socketCallback).toBeDefined();
-    if (socketCallback) {
-      socketCallback({ percentage: 100, error: socketError });
+    act(() => {
+      socketCallback?.({ percentage: 100, error: socketError });
+    });
 
-      await waitFor(
-        () => {
-          expect(screen.getByText(socketError)).toBeInTheDocument();
-          expect(screen.getByText("Error")).toBeInTheDocument();
-        },
-        { timeout: 3000 },
-      );
+    await waitFor(
+      () => {
+        expect(screen.getByText(socketError)).toBeInTheDocument();
+        expect(screen.getByText("Error")).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
 
-      const errorContainer = screen.getByTestId("encryption-portal-error");
-      const portalElement = screen.getByTestId("encryption-portal");
-      const portalBody = screen.getByTestId("encryption-portal-body");
+    const errorContainer = screen.getByTestId("encryption-portal-error");
+    const portalElement = screen.getByTestId("encryption-portal");
+    const portalBody = screen.getByTestId("encryption-portal-body");
 
-      expect(errorContainer).toBeInTheDocument();
-      expect(errorContainer).toHaveAttribute("data-error", "true");
-      expect(errorContainer).toHaveAttribute("aria-live", "assertive");
-      expect(portalElement).toHaveAttribute("aria-busy", "false");
-      expect(portalElement).toHaveClass("encryptionPortal");
-      expect(portalElement).toHaveClass("error");
-      expect(portalBody).toHaveAttribute("data-error", "true");
-      expect(portalBody).toHaveAttribute("data-socket-error", "true");
-    }
+    expect(errorContainer).toBeInTheDocument();
+    expect(errorContainer).toHaveAttribute("data-error", "true");
+    expect(errorContainer).toHaveAttribute("aria-live", "assertive");
+    expect(portalElement).toHaveAttribute("aria-busy", "false");
+    expect(portalElement).toHaveClass(styles.encryptionPortal);
+    expect(portalElement).toHaveClass(styles.error);
+    expect(portalBody).toHaveAttribute("data-error", "true");
+    expect(portalBody).toHaveAttribute("data-socket-error", "true");
   });
 });

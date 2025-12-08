@@ -68,6 +68,8 @@ export interface ContextMenuButtonProps {
   directionX?: TDirectionX;
   /** Direction Y */
   directionY?: TDirectionY;
+  /** Fixes the direction of the dropdown */
+  fixedDirection?: boolean;
   /** Accepts class */
   className?: string;
   /** Accepts id */

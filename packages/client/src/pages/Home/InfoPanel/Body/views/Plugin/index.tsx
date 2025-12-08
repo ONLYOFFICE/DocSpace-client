@@ -29,11 +29,11 @@ import { observer } from "mobx-react";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
-import { IInfoPanelItem } from "SRC_DIR/helpers/plugins/types";
+import { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
 import { TSelection } from "@docspace/shared/utils/copy";
 
 type Props = {
-  infoPanelItem?: IInfoPanelItem;
+  infoPanelItem?: IInfoPanelItemClient;
   selection?: TSelection;
 };
 

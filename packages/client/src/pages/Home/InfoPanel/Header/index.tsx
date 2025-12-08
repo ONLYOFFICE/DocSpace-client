@@ -181,12 +181,12 @@ const InfoPanelHeaderContent = ({
         return;
       }
 
-      if (isRoom && item.value.filesType.includes(PluginFileType.Rooms)) {
+      if (isRoom && item.value.filesType.includes(PluginFileType.room)) {
         tabsData.push(tabsItem);
         return;
       }
 
-      if (isFile && item.value.filesType.includes(PluginFileType.Files)) {
+      if (isFile && item.value.filesType.includes(PluginFileType.file)) {
         if (
           item.value.filesExsts &&
           !item.value.filesExsts.includes(selection?.fileExst)
@@ -199,7 +199,7 @@ const InfoPanelHeaderContent = ({
         return;
       }
 
-      if (item.value.filesType.includes(PluginFileType.Folders)) {
+      if (item.value.filesType.includes(PluginFileType.folder)) {
         tabsData.push(tabsItem);
       }
     });

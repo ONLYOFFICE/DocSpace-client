@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Button } from "./Button";
+import { Button as ButtonBase } from "./Button";
 import { withTooltip } from "../tooltip";
 export type { ButtonProps } from "./Button.types";
 export { ButtonSize } from "./Button.enums";
 
-const ButtonWithTooltip = withTooltip(Button);
+const Button = withTooltip(ButtonBase);
 
-export { ButtonWithTooltip, Button };
+export { Button };

@@ -52,7 +52,7 @@ import styled, { css } from "styled-components";
 
 import { MainButton } from "@docspace/shared/components/main-button";
 import { toastr } from "@docspace/shared/components/toast";
-import { ButtonWithTooltip as Button } from "@docspace/shared/components/button";
+import { Button } from "@docspace/shared/components/button";
 
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";

@@ -29,7 +29,7 @@ import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { getRoomTypeTitleTranslation } from "@docspace/shared/components/room-type/RoomType.utils";
 
-import { LinkWithTooltip as Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
@@ -107,9 +107,11 @@ const SimpleFilesTileContent = styled(TileContent)`
 
     font-size: ${(props) =>
       (props.isRooms && "16px") ||
-      (!props.isRooms && props.currentDeviceType === DeviceType.desktop
-        ? "13px"
-        : "14px")};
+      (
+        !props.isRooms && props.currentDeviceType === DeviceType.desktop
+          ? "13px"
+          : "14px"
+      )};
   }
 
   .item-file-exst {
@@ -118,12 +120,14 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   ${({ isRooms, isTemplate }) =>
     isRooms ||
-    (isTemplate &&
-      css`
+    (
+      isTemplate &&
+        css`
         .item-file-name {
           font-size: 16px;
         }
-      `)}
+      `
+    )}
 
   @media ${tablet} {
     display: inline-flex;

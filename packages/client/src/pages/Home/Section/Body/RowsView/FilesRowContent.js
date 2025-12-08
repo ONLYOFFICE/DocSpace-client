@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isTablet } from "@docspace/shared/utils";
 
-import { LinkWithTooltip as Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { FilesRowContent as SimpleFilesRowContent } from "@docspace/shared/components/files-row";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";

@@ -34,7 +34,7 @@ import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { sendInstructionsToDelete } from "@docspace/shared/api/people";
-import { LinkWithTooltip as Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/shared/components/link";
 
 class DeleteSelfProfileDialogComponent extends React.Component {
   constructor(props) {

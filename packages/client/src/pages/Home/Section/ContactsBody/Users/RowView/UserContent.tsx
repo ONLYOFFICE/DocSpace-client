@@ -32,10 +32,7 @@ import {
   getSpaceQuotaAsText,
   getUserTypeName,
 } from "@docspace/shared/utils/common";
-import {
-  LinkWithTooltip as Link,
-  LinkType,
-} from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 
 import Badges from "../../Badges";

@@ -35,7 +35,7 @@ import { LinkType, LinkTarget } from "./Link.enums";
 import styles from "./Link.module.scss";
 import { withTooltip } from "../tooltip";
 
-const Link: React.FC<LinkProps> = React.memo(
+const LinkBase: React.FC<LinkProps> = React.memo(
   ({
     className,
     children,
@@ -105,6 +105,6 @@ const Link: React.FC<LinkProps> = React.memo(
   equal,
 );
 
-const LinkWithTooltip = withTooltip(Link);
+const Link = withTooltip(LinkBase);
 
-export { LinkType, LinkTarget, Link, LinkWithTooltip };
+export { LinkType, LinkTarget, Link };

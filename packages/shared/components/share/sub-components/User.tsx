@@ -49,7 +49,7 @@ import { AccessRightSelect } from "../../access-right-select";
 
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
-import { LinkWithTooltip as Link, LinkType } from "../../link";
+import { Link, LinkType } from "../../link";
 import { TooltipContainer } from "../../tooltip";
 
 import styles from "../Share.module.scss";

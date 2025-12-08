@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { TableCell } from "@docspace/shared/components/table";
-import { LinkWithTooltip as Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { TextWithTooltip as Text } from "@docspace/shared/components/text";
 import {

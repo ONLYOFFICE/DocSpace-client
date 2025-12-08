@@ -39,7 +39,7 @@ import { Avatar } from "@docspace/shared/components/avatar";
 import { TextWithTooltip as Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { Button } from "@docspace/shared/components/button";
-import { LinkWithTooltip as Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";

@@ -32,9 +32,9 @@ export const HEADER_LICENCE_REQUIRED = "x-test-data-license-required";
 
 export const HEADER_WIZARD_SETTINGS = "x-test-data-wizard-settings";
 export const HEADER_WIZARD_WITH_AMI_SETTINGS =
-  "x-test-data-wizard-with-ami-settings";
+	"x-test-data-wizard-with-ami-settings";
 export const HEADER_PORTAL_DEACTIVATE_SETTINGS =
-  "x-test-data-portal-deactivate-settings";
+	"x-test-data-portal-deactivate-settings";
 
 export const HEADER_LINK_INVALID = "x-test-data-link-invalid";
 export const HEADER_LINK_EXPIRED = "x-test-data-link-expired";
@@ -47,13 +47,13 @@ export const HEADER_CONFIRM_WITHOUT_EMAIL = "x-test-data-confirm-without-email";
 export const HEADER_LIST_CAPABILITIES = "x-test-list-capabilities";
 
 export const HEADER_LIST_THIRD_PARTY_PROVIDERS =
-  "x-test-list-third-party-providers";
+	"x-test-list-third-party-providers";
 
 export const HEADER_SELF_ERROR_404 = "x-test-data-self-error-404";
 export const HEADER_SELF_ERROR_400 = "x-test-data-self-error-400";
 
 export const HEADER_NO_STANDALONE_SETTINGS =
-  "x-test-data-no-standalone-settings";
+	"x-test-data-no-standalone-settings";
 
 export const HEADER_ROOMS_LIST = "x-test-data-rooms-list";
 export const HEADER_FILTERED_ROOMS_LIST = "x-test-data-filtered-rooms-list";
@@ -62,14 +62,16 @@ export const HEADER_EMPTY_FOLDER = "x-test-data-empty-folder";
 export const HEADER_FILTERED_FOLDER = "x-test-data-filtered-folder";
 
 export const HEADER_AUTHENTICATED_SETTINGS =
-  "x-test-data-authenticated-settings";
+	"x-test-data-authenticated-settings";
 
 export const HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS =
-  "x-test-data-authenticated-with-socket-settings";
+	"x-test-data-authenticated-with-socket-settings";
 
 export const HEADER_ENABLED_JOIN_SETTINGS = "x-test-data-enabled-join-settings";
 
 export const HEADER_ENABLE_ADM_MESS_SETTINGS =
-  "x-test-data-enable-adm-mess-settings";
+	"x-test-data-enable-adm-mess-settings";
 
 export const HEADER_HCAPTCHA_SETTINGS = "x-test-data-hcaptcha-settings";
+
+export const HEADER_AI_DISABLED = "x-ai-config-disabled";

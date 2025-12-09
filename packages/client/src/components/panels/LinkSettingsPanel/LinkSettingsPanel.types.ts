@@ -26,6 +26,7 @@
 
 import { TComboboxProps, TOption } from "@docspace/shared/components/combobox";
 import { ShareAccessRights } from "@docspace/shared/enums";
+import { TTheme } from "@docspace/shared/themes";
 
 export type LinkRolesDropdownItemProps = {
   item: TOption;
@@ -41,6 +42,7 @@ export type LinkRolesDropdownProps = {
 };
 
 export type LinkSettingsPanelProps = {
+  theme: TTheme;
   isVisible: boolean;
   showUsersLimitWarning: boolean;
   filteredAccesses: TComboboxProps["options"];

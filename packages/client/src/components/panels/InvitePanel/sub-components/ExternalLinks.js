@@ -63,6 +63,7 @@ import {
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
+import moment from "moment";
 
 const ExternalLinks = ({
   t,
@@ -96,6 +97,13 @@ const ExternalLinks = ({
   const showUsersJoinedBlock = !!activeLink?.maxUseCount;
   const showUsersLimitWarning =
     activeLink?.currentUseCount >= activeLink?.maxUseCount;
+  const linkIsExpired = moment(new Date()).isAfter(
+    moment(activeLink?.expirationDate),
+  );
+
+  const warningColor = theme?.isBase
+    ? globalColors.lightErrorStatus
+    : globalColors.darkErrorStatus;
 
   const inputsRef = useRef();
 
@@ -317,9 +325,30 @@ const ExternalLinks = ({
               >
                 {t("Files:ValidUntil")}
               </Text>
-              <Text fontSize="12px" fontWeight={600}>
+              <Text
+                fontSize="12px"
+                fontWeight={600}
+                color={linkIsExpired ? warningColor : null}
+              >
                 {getCorrectDate(culture ?? "en", activeLink.expirationDate)}
               </Text>
+              {linkIsExpired ? (
+                <HelpButton
+                  place="right"
+                  iconNode={<ButtonAlertIcon />}
+                  tooltipMaxWidth="344px"
+                  tooltipContent={
+                    <>
+                      <Text>{t("Files:LinkSettingsExpiredToast")}</Text>
+                      <Text>
+                        {t("Files:LinkSettingsExpiredToastDescription")}
+                      </Text>
+                    </>
+                  }
+                  className="invite-via-link-settings-warning"
+                  color={warningColor}
+                />
+              ) : null}
             </div>
             {showUsersJoinedBlock ? (
               <div className="invite-via-link-settings">
@@ -335,20 +364,28 @@ const ExternalLinks = ({
                 >
                   {t("Files:UsersJoined")}
                 </Text>
-                <Text fontSize="12px" fontWeight={600}>
+                <Text
+                  fontSize="12px"
+                  fontWeight={600}
+                  color={showUsersLimitWarning ? warningColor : null}
+                >
                   {activeLink.currentUseCount}/{activeLink.maxUseCount}
                 </Text>
                 {showUsersLimitWarning ? (
                   <HelpButton
                     place="right"
                     iconNode={<ButtonAlertIcon />}
-                    tooltipContent={<Text>{t("Files:WarningUsersLimit")}</Text>}
-                    className="invite-via-link-settings-warning"
-                    color={
-                      theme?.isBase
-                        ? globalColors.lightErrorStatus
-                        : globalColors.darkErrorStatus
+                    tooltipContent={
+                      <>
+                        <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                        <Text>
+                          {t("Files:LinkSettingsUsersLimitToastDescription")}
+                        </Text>
+                      </>
                     }
+                    className="invite-via-link-settings-warning"
+                    tooltipMaxWidth="344px"
+                    color={warningColor}
                   />
                 ) : null}
               </div>

@@ -46,10 +46,12 @@ import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { TOption } from "@docspace/shared/components/combobox";
+import { globalColors } from "@docspace/shared/themes";
 
 const MAX_USERS_COUNT = 1000;
 
 const LinkSettingsPanel = ({
+  theme,
   isVisible,
   filteredAccesses,
   onBackClick,
@@ -63,6 +65,10 @@ const LinkSettingsPanel = ({
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common", "Files"]);
 
+  const warningColor = theme?.isBase
+    ? globalColors.lightErrorStatus
+    : globalColors.darkErrorStatus;
+
   const usersNumber = activeLink.currentUseCount ?? 0;
   const maxUsersNumber = activeLink.maxUseCount ?? 1;
   const limitIsChecked = !activeLink.maxUseCount ? false : true;
@@ -75,6 +81,9 @@ const LinkSettingsPanel = ({
   const [limitDate, setLimitDate] = useState<moment.Moment>(date);
   const [maxNumber, setMaxNumber] = useState(String(maxUsersNumber));
   const [hasError, setHasError] = useState(false);
+
+  const showLimitError = Number(maxNumber) <= usersNumber;
+  const showExpiredError = moment(new Date()).isAfter(limitDate);
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -207,7 +216,7 @@ const LinkSettingsPanel = ({
                       place="right"
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
-                        <Text>{t("Files:WarningUsersLimit")}</Text>
+                        <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
                       }
                       className={styles.linkSettingsHelpButton}
                     />
@@ -226,8 +235,11 @@ const LinkSettingsPanel = ({
                   fontSize="12px"
                   fontWeight={400}
                   className={styles.linkSettingsDescriptionText}
+                  color={showLimitError ? warningColor : undefined}
                 >
-                  {t("Files:LinkSettingsLimitDescription")}
+                  {showLimitError
+                    ? t("Files:LinkSettingsLimitExceeded")
+                    : t("Files:LinkSettingsLimitDescription")}
                 </Text>
                 <div className={styles.joinedUsersBlock}>
                   <div className={styles.joinedUsersCell}>
@@ -262,8 +274,11 @@ const LinkSettingsPanel = ({
             fontSize="12px"
             fontWeight={400}
             className={styles.linkSettingsSubDescriptionText}
+            color={showExpiredError ? warningColor : undefined}
           >
-            {`${t("Common:LinkValidUntil")}:`}
+            {showExpiredError
+              ? t("Files:LinkSettingsExpiredToast")
+              : t("Common:LinkValidUntil")}
           </Text>
 
           <DateTimePicker

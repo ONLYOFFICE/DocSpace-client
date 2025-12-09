@@ -223,8 +223,12 @@
   "UserLimitDescription": "Define the number of users who can join via this invite link.",
   "MaxNumber": "Max. number <1>(up to {{usersCount}} users)</1>",
   "LinkSettingsLimitDescription": "Once this limit is reached, registration via the link will become unavailable",
+  "LinkSettingsLimitExceeded": "Registration via the link is no longer available since the limit has been exceeded.",
   "LinkSettingsJoinedUsers": "Users have joined via this link",
   "ValidUntil": "Valid until:",
   "UsersJoined": "Users joined:",
-  "WarningUsersLimit": "Registration via the link is no longer available since the limit has been exceeded. Adjust the limit in settings or create a new link to enable new user registrations."
+  "LinkSettingsUsersLimitToast": "Registration via the link is no longer available since the limit has been exceeded.",
+  "LinkSettingsUsersLimitToastDescription": "Adjust the limit in settings or create a new link to enable new user registrations.",
+  "LinkSettingsExpiredToast": "Registration via this link is no longer available since its lifetime has expired.",
+  "LinkSettingsExpiredToastDescription": "Extend the validity period in the settings or create a new link to enable new user registrations."
 }

@@ -73,6 +73,7 @@ const InvitePanel = ({
   setInviteItems,
   setInvitePanelOptions,
   t,
+  theme,
   isVisible,
   defaultAccess,
   setInfoPanelIsMobileHidden,
@@ -833,6 +834,7 @@ const InvitePanel = ({
       {linkSettingsPanelVisible ? (
         <ModalDialog.Container>
           <LinkSettingsPanel
+            theme={theme}
             isVisible={linkSettingsPanelVisible}
             onClose={() => {
               onCloseLinkSettingsPanel();

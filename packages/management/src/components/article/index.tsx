@@ -35,6 +35,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { useRouter, usePathname } from "next/navigation";
+import classNames from "classnames";
+import { ReactSVG } from "react-svg";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { ArticleItemNext as ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapperNext";
@@ -44,9 +46,10 @@ import { Portal } from "@docspace/shared/components/portal";
 import { useStores } from "@/hooks/useStores";
 import useDeviceType from "@/hooks/useDeviceType";
 
-import { StyledArticle, StyledCrossIcon } from "./article.styled";
 import { ArticleHeader } from "./article-header";
 import { HideButton } from "./article-hide-button";
+
+import styles from "./article.module.scss";
 
 export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
   const router = useRouter();
@@ -83,8 +86,13 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
   };
 
   const articleComponent = (
-    <StyledArticle showText={showText} articleOpen={articleOpen}>
-      <div className="article__content">
+    <article
+      className={classNames(styles.article, {
+        [styles.showText]: showText,
+        [styles.articleOpen]: articleOpen,
+      })}
+    >
+      <div className={styles.articleContent}>
         <ArticleHeader />
         <ArticleItem
           key="spaces"
@@ -135,7 +143,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
         )}
       </div>
       <HideButton />
-    </StyledArticle>
+    </article>
   );
 
   const renderPortalArticle = () => {
@@ -145,9 +153,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           visible={articleOpen}
           onClick={() => setArticleOpen(false)}
           withBackground
-          // withBlur
         />
-        {articleOpen ? <StyledCrossIcon /> : null}
         {articleComponent}
       </>
     );

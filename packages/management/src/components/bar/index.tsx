@@ -28,14 +28,14 @@ import React from "react";
 
 import { Text } from "@docspace/shared/components/text";
 
-import { StyledBar } from "./Bar.styled";
+import styles from "./bar.module.scss";
 
 export const Bar = ({ title }: { title: string }) => {
   return (
-    <StyledBar className="bar">
+    <div className={styles.bar}>
       <Text fontSize="12px" fontWeight="400" lineHeight="16px">
         {title}
       </Text>
-    </StyledBar>
+    </div>
   );
 };

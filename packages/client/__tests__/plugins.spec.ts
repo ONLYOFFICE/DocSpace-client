@@ -131,6 +131,9 @@ test.describe("Plugins", () => {
       '[data-testid^="plugin_test-plugin"]',
     );
     await expect(pluginsListAfter).toHaveCount(3);
+
+    const plugin2 = page.getByTestId("plugin_test-plugin-two");
+    await expect(plugin2).toBeVisible();
   });
 
   test("should toggle plugin enabled state", async ({ page, mockRequest }) => {
@@ -144,9 +147,18 @@ test.describe("Plugins", () => {
     const toggleSwitch = plugin1.getByTestId("enable_plugin_toggle_button");
     await expect(toggleSwitch).toBeVisible();
 
+    const toggleSwitchInput = toggleSwitch.getByTestId("toggle-button-input");
+    await expect(toggleSwitchInput).toBeChecked();
+
     await mockRequest.router([endpoints.webPluginsUpdate]);
 
     await toggleSwitch.click();
+
+    await expect(toggleSwitchInput).not.toBeChecked();
+
+    await toggleSwitch.click();
+
+    await expect(toggleSwitchInput).toBeChecked();
   });
 
   test("should delete plugin successfully", async ({ page, mockRequest }) => {
@@ -182,6 +194,7 @@ test.describe("Plugins", () => {
       '[data-testid^="plugin_test-plugin"]',
     );
     await expect(pluginsListAfter).toHaveCount(1);
+    await expect(plugin3).not.toBeVisible();
   });
 
   test("should display plugin information correctly", async ({

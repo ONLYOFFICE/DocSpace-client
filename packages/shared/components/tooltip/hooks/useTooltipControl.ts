@@ -25,16 +25,41 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useCallback, useRef, useState, useEffect } from "react";
-import { TTooltipPlace, MouseEventHandler } from "../Tooltip.types";
-import { DEFAULT_DELAY_SHOW } from "../Tooltip.constants";
+import {
+  DEFAULT_DELAY_SHOW,
+  SYSTEM_TOOLTIP_TOP_OFFSET,
+} from "../Tooltip.constants";
 
 const shouldHandleTooltipEvent = (
   target: HTMLElement,
   currentTarget: HTMLElement,
 ): boolean => {
   const anchorElement =
-    target.closest && target.closest("[data-tooltip-anchor]");
+    target.closest && target.closest("[data-tooltip-element]");
   return anchorElement === currentTarget;
+};
+
+const VIRTUAL_ANCHOR_STYLES = {
+  position: "fixed",
+  width: "1px",
+  height: "1px",
+  pointerEvents: "none",
+  visibility: "hidden",
+  zIndex: "-1",
+} as const;
+
+const createVirtualAnchor = (
+  anchorId: string,
+  contentString?: string,
+): HTMLDivElement => {
+  const anchor = document.createElement("div");
+  anchor.setAttribute("data-tooltip-id", "system-tooltip");
+  anchor.setAttribute("data-tooltip-anchor", anchorId);
+  anchor.setAttribute("data-tooltip-content", contentString || "");
+
+  Object.assign(anchor.style, VIRTUAL_ANCHOR_STYLES);
+
+  return anchor;
 };
 
 export const useTooltipControl = (
@@ -42,12 +67,43 @@ export const useTooltipControl = (
   originalOnMouseEnter?: (e: React.MouseEvent<HTMLElement>) => void,
   originalOnMouseLeave?: (e: React.MouseEvent<HTMLElement>) => void,
   contentString?: string,
-  tooltipPlace: TTooltipPlace = "bottom",
 ) => {
   const [isReady, setIsReady] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const virtualAnchorRef = useRef<HTMLDivElement | null>(null);
   const anchorId = useRef<string>(
     `tooltip-${Math.floor(Math.random() * 1000000)}`,
+  );
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const anchor = createVirtualAnchor(anchorId.current, contentString);
+    document.body.appendChild(anchor);
+    virtualAnchorRef.current = anchor;
+
+    return () => {
+      if (virtualAnchorRef.current) {
+        document.body.removeChild(virtualAnchorRef.current);
+      }
+    };
+  }, [contentString]);
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const currentTarget = e.currentTarget as HTMLElement;
+
+      if (!shouldHandleTooltipEvent(target, currentTarget)) {
+        return;
+      }
+      if (!isReady && virtualAnchorRef.current) {
+        virtualAnchorRef.current.style.left = `${e.clientX}px`;
+        virtualAnchorRef.current.style.top = `${e.clientY + SYSTEM_TOOLTIP_TOP_OFFSET}px`;
+      }
+    },
+    [isReady],
   );
 
   const handleMouseEnter = useCallback(
@@ -59,34 +115,52 @@ export const useTooltipControl = (
         return;
       }
 
+      if (virtualAnchorRef.current) {
+        virtualAnchorRef.current.style.left = `${e.clientX}px`;
+        virtualAnchorRef.current.style.top = `${e.clientY + SYSTEM_TOOLTIP_TOP_OFFSET}px`;
+      }
+
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-      timeoutRef.current = setTimeout(() => {
-        setIsReady(true);
-      }, DEFAULT_DELAY_SHOW);
+
+      if (isReady) {
+        setIsReady(false);
+        timeoutRef.current = setTimeout(() => {
+          setIsReady(true);
+        }, 100);
+      } else {
+        timeoutRef.current = setTimeout(() => {
+          setIsReady(true);
+        }, DEFAULT_DELAY_SHOW);
+      }
 
       if (originalOnMouseEnter) {
         originalOnMouseEnter(e as React.MouseEvent<HTMLElement>);
       }
     },
-    [originalOnMouseEnter],
+    [originalOnMouseEnter, isReady],
   );
 
   const handleMouseLeave = useCallback(
     (e: React.MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const currentTarget = e.currentTarget as HTMLElement;
-
-      if (!shouldHandleTooltipEvent(target, currentTarget)) {
-        return;
-      }
-
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
         timeoutRef.current = null;
       }
-      setIsReady(false);
+
+      closeTimeoutRef.current = setTimeout(() => {
+        setIsReady(false);
+        if (virtualAnchorRef.current) {
+          virtualAnchorRef.current.style.left = "-9999px";
+          virtualAnchorRef.current.style.top = "-9999px";
+        }
+      }, 50);
 
       if (originalOnMouseLeave) {
         originalOnMouseLeave(e as React.MouseEvent<HTMLElement>);
@@ -101,6 +175,11 @@ export const useTooltipControl = (
         clearTimeout(timeoutRef.current);
         timeoutRef.current = null;
       }
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+
       setIsReady(false);
 
       if (originalOnClick) {
@@ -115,8 +194,29 @@ export const useTooltipControl = (
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
     };
   }, []);
+
+  useEffect(() => {
+    if (!isReady) return;
+
+    const handleDocumentClick = () => {
+      setIsReady(false);
+      const tooltipRef = window.__systemTooltipRef;
+      if (tooltipRef?.current) {
+        tooltipRef.current.close();
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick, true);
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick, true);
+    };
+  }, [isReady]);
 
   useEffect(() => {
     const tooltipRef = window.__systemTooltipRef;
@@ -126,16 +226,17 @@ export const useTooltipControl = (
       tooltipRef.current.open({
         anchorSelect: `[data-tooltip-anchor="${anchorId.current}"]`,
         content: contentString,
-        place: tooltipPlace,
+        place: "bottom-start",
       });
     } else {
       tooltipRef.current.close();
     }
-  }, [isReady, contentString, tooltipPlace]);
+  }, [isReady, contentString]);
 
   return {
     anchorId: anchorId.current,
     handleMouseEnter,
+    handleMouseMove,
     handleMouseLeave,
     handleClick,
   };

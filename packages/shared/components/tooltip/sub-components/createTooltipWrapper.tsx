@@ -40,6 +40,7 @@ export const createTooltipWrapper = <TProps extends object>(
       onClick?: MouseEventHandler;
       onMouseEnter?: MouseEventHandler;
       onMouseLeave?: MouseEventHandler;
+      onMouseMove?: MouseEventHandler;
     };
 
   const ComponentWithTooltip = forwardRef<HTMLElement, PropsWithHandlers>(
@@ -48,10 +49,10 @@ export const createTooltipWrapper = <TProps extends object>(
         title,
         tooltipContent,
         tooltipPlace,
-        tooltipFitToContent,
         onClick,
         onMouseEnter,
         onMouseLeave,
+        onMouseMove,
         ...componentProps
       } = props;
 
@@ -77,6 +78,7 @@ export const createTooltipWrapper = <TProps extends object>(
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
+            onMouseMove={onMouseMove}
           />
         );
       }
@@ -89,6 +91,7 @@ export const createTooltipWrapper = <TProps extends object>(
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
+            onMouseMove={onMouseMove}
           />
         );
       }
@@ -97,23 +100,15 @@ export const createTooltipWrapper = <TProps extends object>(
         <Component
           ref={ref}
           {...(componentProps as TProps)}
-          data-tooltip-anchor={tooltipHandlers.anchorId}
+          data-tooltip-element={tooltipHandlers.anchorId}
           onMouseEnter={tooltipHandlers.handleMouseEnter}
+          onMouseMove={tooltipHandlers.handleMouseMove}
           onMouseLeave={tooltipHandlers.handleMouseLeave}
           onClick={tooltipHandlers.handleClick}
         />
       );
 
-      return tooltipFitToContent ? (
-        <span
-          data-tooltip-anchor={tooltipHandlers.anchorId}
-          style={{ display: "inline-block", width: "fit-content" }}
-        >
-          {element}
-        </span>
-      ) : (
-        element
-      );
+      return element;
     },
   );
 

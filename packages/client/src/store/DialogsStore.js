@@ -58,6 +58,8 @@ class DialogsStore {
 
   versionHistoryStore;
 
+  infoPanelStore;
+
   moveToPanelVisible = false;
 
   restorePanelVisible = false;
@@ -339,6 +341,7 @@ class DialogsStore {
     filesStore,
     selectedFolderStore,
     versionHistoryStore,
+    infoPanelStore,
   ) {
     makeAutoObservable(this);
 
@@ -347,6 +350,7 @@ class DialogsStore {
     this.selectedFolderStore = selectedFolderStore;
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
+    this.infoPanelStore = infoPanelStore;
   }
 
   /**
@@ -429,7 +433,8 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.infoPanelStore.infoPanelSelection
     )
       return;
 
@@ -457,7 +462,8 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.infoPanelStore.infoPanelSelection
     ) {
       console.log("No files selected");
       return;

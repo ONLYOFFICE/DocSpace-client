@@ -624,6 +624,11 @@ class FilesStore {
 
       console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
 
+      if (!folderInfo || folderInfo.parentId !== this.selectedFolderStore.id) {
+        console.log("Skip UNSUBSCRIBED folder creation");
+        return;
+      }
+
       const newFolders = [folderInfo, ...this.folders];
 
       const newFilter = this.filter;

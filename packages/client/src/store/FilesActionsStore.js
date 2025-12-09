@@ -407,20 +407,16 @@ class FilesActionStore {
 
     const toFolderId = folderId || this.selectedFolderStore.id;
 
-    setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
+    if (withoutHiddenFiles.length) {
+      setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
+    }
 
     const tree = this.convertToTree(withoutHiddenFiles);
 
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
 
-    if (!filesList.length) {
-      setPrimaryProgressBarData({
-        ...pbData,
-        completed: uploaded,
-        withoutStatus: !tree.length,
-      });
-    } else {
+    if (filesList.length) {
       setPrimaryProgressBarData({ ...pbData });
     }
 

@@ -210,6 +210,7 @@ const dialogsStore = new DialogsStore(
   filesStore,
   selectedFolderStore,
   versionHistoryStore,
+  infoPanelStore,
 );
 
 const profileActionsStore = new ProfileActionsStore(

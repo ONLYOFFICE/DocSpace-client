@@ -77,15 +77,18 @@ const ButtonContainer = (props) => {
       (settings[HOST_PASSWORD]?.trim() === "" ||
         settings[HOST_LOGIN]?.trim() === "");
 
+    let valid = true;
+
     if (
       authInvalid ||
       settings[HOST]?.trim() === "" ||
       settings[PORT]?.toString()?.trim() === "" ||
       settings[SENDER_EMAIL_ADDRESS]?.trim() === ""
-    )
-      return false;
+    ) {
+      valid = false;
+    }
 
-    return true;
+    return valid;
   };
 
   const setErrors = () => {

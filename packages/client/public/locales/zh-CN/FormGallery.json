@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "将您的表单提交至公共表单库，让他人在工作中使用。表单通过审核，您就会收到通知、获得奖励。",
   "SuggestChanges": "提出修改建议",
   "TemplateInfo": "模板信息",
-  "ViewAllTemplates": "查看模板大全"
+  "ViewAllTemplates": "查看模板大全",
+  "ErrorViewDescriptionNetworkError": "当前无法连接网络"
 }

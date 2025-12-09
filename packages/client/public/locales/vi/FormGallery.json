@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Gửi biểu mẫu của bạn đến bộ sưu tập công cộng để cho phép người khác sử dụng biểu mẫu đó trong công việc của họ. Sau khi biểu mẫu được kiểm duyệt, bạn sẽ được thông báo và thưởng cho khoản đóng góp của mình.",
   "SuggestChanges": "Đề xuất thay đổi",
   "TemplateInfo": "Thông tin biểu mẫu",
-  "ViewAllTemplates": "Xem tất cả các mẫu"
+  "ViewAllTemplates": "Xem tất cả các mẫu",
+  "ErrorViewDescriptionNetworkError": "Có vẻ như không có kết nối Internet"
 }

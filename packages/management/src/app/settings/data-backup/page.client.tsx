@@ -28,10 +28,10 @@
 
 import { useMemo } from "react";
 import { observer } from "mobx-react";
-import { useTheme } from "styled-components";
 
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import { TariffState } from "@docspace/shared/enums";

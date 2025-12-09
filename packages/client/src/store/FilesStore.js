@@ -3016,7 +3016,7 @@ class FilesStore {
             !item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
-              PluginFileType.Files,
+              PluginFileType.file,
               item.fileExst,
               security,
               item.security,
@@ -3031,7 +3031,7 @@ class FilesStore {
             item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
-              PluginFileType.Image,
+              PluginFileType.image,
               item.fileExst,
               security,
               item.security,
@@ -3046,7 +3046,7 @@ class FilesStore {
             !item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
-              PluginFileType.Video,
+              PluginFileType.video,
               item.fileExst,
               security,
               item.security,
@@ -3342,7 +3342,7 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginRoomsKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Rooms,
+            PluginFileType.room,
             null,
             security,
             item.security,
@@ -3480,7 +3480,7 @@ class FilesStore {
 
       if (enablePlugins) {
         const pluginFoldersKeys = this.pluginStore.getContextMenuKeysByType(
-          PluginFileType.Folders,
+          PluginFileType.folder,
           null,
           security,
           item.security,

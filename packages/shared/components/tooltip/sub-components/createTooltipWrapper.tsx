@@ -48,7 +48,6 @@ export const createTooltipWrapper = <TProps extends object>(
       const {
         title,
         tooltipContent,
-        tooltipPlace,
         onClick,
         onMouseEnter,
         onMouseLeave,
@@ -64,7 +63,6 @@ export const createTooltipWrapper = <TProps extends object>(
         onMouseEnter,
         onMouseLeave,
         contentString,
-        tooltipPlace as TTooltipPlace,
       );
 
       const isTestEnvironment = process.env.NODE_ENV === "test";

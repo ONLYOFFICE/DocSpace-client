@@ -301,6 +301,7 @@ const InvitePanel = ({
       setRequestIsRunning(true);
 
       const linkData = await getInviteLink(defaultAccess);
+      setRequestIsRunning(false);
       setAccountsLink(true);
 
       if (!linkData) {
@@ -319,8 +320,6 @@ const InvitePanel = ({
       setActiveLink(newLinkData);
     } catch (error) {
       toastr.error(error);
-    } finally {
-      setRequestIsRunning(false);
     }
   };
 

@@ -132,7 +132,8 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           confirmLinkParams,
           validationResult: confirmLinkResult.result,
         });
-        throw new Error(t("Common:LinkExpired"));
+        window.location.href = "/login/error/link-expired";
+        return;
       case ValidationResult.TariffLimit:
         console.error("tariff limit", {
           confirmLinkParams,

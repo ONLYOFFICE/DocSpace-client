@@ -27,7 +27,7 @@
 import InviteLinkError from "@/components/InviteLinkError";
 
 async function Page() {
-  return <InviteLinkError />;
+  return <InviteLinkError isExpired />;
 }
 
 export default Page;

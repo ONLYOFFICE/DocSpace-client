@@ -34,10 +34,14 @@ import { Text } from "@docspace/shared/components/text";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { Link, LinkType } from "@docspace/shared/components/link";
 
-const InviteQuotaError = () => {
+const InviteLinkError = ({ isExpired }: { isExpired?: boolean }) => {
   const router = useRouter();
 
   const { t } = useTranslation(["Confirm"]);
+
+  const bodyText = isExpired
+    ? t("InviteLinkExpiredErrorBody")
+    : t("InviteLinkQuotaErrorBody");
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -47,10 +51,7 @@ const InviteQuotaError = () => {
   }, [router]);
 
   return (
-    <ErrorContainer
-      headerText={t("InviteQuotaErrorHeader")}
-      bodyText={t("InviteQuotaErrorBody")}
-    >
+    <ErrorContainer headerText={t("InviteLinkErrorHeader")} bodyText={bodyText}>
       <Text fontSize="13px" fontWeight="600">
         <Trans
           t={t}
@@ -74,4 +75,4 @@ const InviteQuotaError = () => {
   );
 };
 
-export default InviteQuotaError;
+export default InviteLinkError;

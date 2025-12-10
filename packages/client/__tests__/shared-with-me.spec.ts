@@ -94,7 +94,7 @@ test.describe("Shared with me", () => {
 
     // Should not have any table list items
 
-    await expect(emptyView).toHaveScreenshot([
+    await expect(page).toHaveScreenshot([
       "desktop",
       "shared-with-me",
       "shared-with-me-empty.png",

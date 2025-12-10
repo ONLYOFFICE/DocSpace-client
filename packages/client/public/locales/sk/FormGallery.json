@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Odošlite svoj formulár do verejnej galérie a umožnite ostatným, používať ho v ich práci. Po tom, ako formulár bude skalený moderátormi, budete informovaní a odmenení za svoj vklad.",
   "SuggestChanges": "Navrhnúť zmeny",
   "TemplateInfo": "Informácie o šablóne",
-  "ViewAllTemplates": "Zobraziť všetky šablóny"
+  "ViewAllTemplates": "Zobraziť všetky šablóny",
+  "ErrorViewDescriptionNetworkError": "Zdá sa, že nie je k dispozícii pripojenie na internet."
 }

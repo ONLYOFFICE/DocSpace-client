@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Pošljite svoj obrazec v javno galerijo, da ga lahko drugi uporabljajo pri svojem delu. Ko bo obrazec prestal moderacijo, boste obveščeni in nagrajeni za svoj prispevek.",
   "SuggestChanges": "Predlagaj spremembe",
   "TemplateInfo": "Informacije o predlogi",
-  "ViewAllTemplates": "Poglej vse predloge"
+  "ViewAllTemplates": "Poglej vse predloge",
+  "ErrorViewDescriptionNetworkError": "Zdi se, da interneta ni na voljo"
 }

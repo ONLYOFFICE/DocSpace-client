@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Invia il tuo modulo alla galleria pubblica per consentire ad altri di utilizzarlo nel loro lavoro. Una volta che il modulo avrà superato la moderazione, riceverai una notifica e sarai ricompensato per il tuo contributo.",
   "SuggestChanges": "Suggerire modifiche",
   "TemplateInfo": "Informazioni sul modello",
-  "ViewAllTemplates": "Visualizzare tutti i modelli"
+  "ViewAllTemplates": "Visualizzare tutti i modelli",
+  "ErrorViewDescriptionNetworkError": "Sembra che non ci sia connessione a Internet"
 }

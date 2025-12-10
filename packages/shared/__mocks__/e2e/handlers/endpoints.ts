@@ -105,6 +105,8 @@ import {
   shareHandler,
   thirdPartyCapabilitiesHandler,
   thirdPartyHandler,
+  PATH_FAVORITES,
+  favoritesHandler,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -423,5 +425,13 @@ export const endpoints = {
   shareToUser: {
     url: PATH_SHARE_TO_USERS_FILE,
     dataHandler: shareToUserHandle,
+  },
+  favorites: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "success"),
+  },
+  favoritesEmpty: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "empty"),
   },
 } satisfies TEndpoints;

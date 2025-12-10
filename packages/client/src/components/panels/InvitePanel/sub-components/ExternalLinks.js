@@ -119,6 +119,7 @@ const ExternalLinks = ({
         shareLinks[0].id,
       ));
     setActiveLink({});
+    onChangeExternalLinksVisible(false);
     return setShareLinks([]);
   };
 

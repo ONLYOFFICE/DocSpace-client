@@ -488,6 +488,7 @@ const InvitePanel = ({
     let link = null;
 
     try {
+      setIsLinksToggling(true);
       link = await api.rooms.setInvitationLinks(
         roomId,
         "Invite",
@@ -496,7 +497,7 @@ const InvitePanel = ({
         defaultLink?.linkExpirationDate,
         defaultLink?.maxUseCount,
       );
-      setIsLinksToggling(true);
+      onChangeExternalLinksVisible(true);
     } catch (error) {
       toastr.error(error);
     } finally {

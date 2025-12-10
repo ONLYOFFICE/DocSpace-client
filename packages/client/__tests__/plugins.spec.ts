@@ -66,7 +66,7 @@ test.describe("Plugins", () => {
     const emptyView = page.getByTestId("empty-screen-container");
     await expect(emptyView).toBeVisible();
 
-    await expect(emptyView).toHaveScreenshot([
+    await expect(page).toHaveScreenshot([
       "desktop",
       "plugins",
       "plugins-empty.png",

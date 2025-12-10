@@ -51,6 +51,7 @@ import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
 import { openFile } from "../../../utils";
 import { SelectChatProps } from "../../../Chat.types";
+import { TooltipContainer } from "../../../../tooltip";
 
 import ExportSelector from "../../export-selector";
 
@@ -292,14 +293,15 @@ const SelectChat = ({
 
   return (
     <>
-      <div
+      <TooltipContainer
+        as="div"
         title={t("Common:ChatHistory")}
         className={classNames(styles.selectChat, { [styles.open]: isOpen })}
         onClick={toggleOpen}
         ref={parentRef}
       >
         <SelectSessionReactSvg />
-      </div>
+      </TooltipContainer>
       {isOpen ? (
         <DropDown
           open={isOpen}

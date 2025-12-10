@@ -121,6 +121,10 @@ import {
 	PATH_AI_CONFIG,
 	PATH_AI_AGENTS,
 	aiAgentsHandler,
+	PATH_AI_PROVIDERS,
+	aiProvidersHandler,
+	PATH_AI_MODELS,
+	aiModelsHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -347,6 +351,26 @@ export const endpoints = {
 	aiAgentsEmptyCreate: {
 		url: `${BASE_URL}${PATH_AI_AGENTS}`,
 		dataHandler: () => aiAgentsHandler({ withCreate: true }),
+	},
+	aiProvidersList: {
+		url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+		dataHandler: aiProvidersHandler,
+	},
+	aiModelsClaude: {
+		url: `${BASE_URL}${PATH_AI_MODELS}`,
+		dataHandler: () => aiModelsHandler({ isClaude: true }),
+	},
+	aiModelsOpenAI: {
+		url: `${BASE_URL}${PATH_AI_MODELS}`,
+		dataHandler: () => aiModelsHandler({ isOpenAI: true }),
+	},
+	aiModelsTogether: {
+		url: `${BASE_URL}${PATH_AI_MODELS}`,
+		dataHandler: () => aiModelsHandler({ isTogetherAI: true }),
+	},
+	aiModelsOpenRouter: {
+		url: `${BASE_URL}${PATH_AI_MODELS}`,
+		dataHandler: () => aiModelsHandler({ isOpenRouter: true }),
 	},
 	additionalSettings: {
 		url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,

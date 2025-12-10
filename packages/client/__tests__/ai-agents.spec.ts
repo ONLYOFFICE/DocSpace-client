@@ -32,7 +32,7 @@ import {
 
 import { expect, test } from "./fixtures/base";
 
-test.describe("Shared with me", () => {
+test.describe("AI agents", () => {
 	test.beforeEach(async ({ mockRequest }) => {
 		await mockRequest.router([
 			endpoints.settingsWithQuery,
@@ -54,6 +54,7 @@ test.describe("Shared with me", () => {
 			endpoints.thirdPartyCapabilities,
 			endpoints.thirdParty,
 			endpoints.docService,
+			endpoints.aiProvidersList,
 		]);
 	});
 
@@ -137,6 +138,28 @@ test.describe("Shared with me", () => {
 		);
 
 		await btn.click();
+
+		const asideHeader = page.getByTestId("aside-header");
+
+		await expect(asideHeader).toBeVisible();
+	});
+
+	test("should render AI agents create dialog and create AI agent", async ({
+		page,
+		mockRequest,
+	}) => {
+		await mockRequest.router([
+			endpoints.aiAgentsEmptyCreate,
+			endpoints.emptyTags,
+		]);
+
+		await page.goto("/ai-agents/filter");
+
+		const mainBtn = page.getByTestId("create_new_agent_button");
+
+		await expect(mainBtn).toBeVisible();
+
+		await mainBtn.click();
 
 		const asideHeader = page.getByTestId("aside-header");
 

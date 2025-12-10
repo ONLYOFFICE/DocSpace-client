@@ -43,8 +43,8 @@ const successEmpty = {
 			indexing: false,
 			denyDownload: false,
 			fileEntryType: 1,
-			id: 1,
-			rootFolderId: 1,
+			id: 224866,
+			rootFolderId: 224866,
 			canShare: false,
 			security: {
 				Read: true,
@@ -117,7 +117,7 @@ const successEmpty = {
 		},
 		pathParts: [
 			{
-				id: 1,
+				id: 224866,
 				title: "AI agents",
 				folderType: 34,
 			},
@@ -153,8 +153,8 @@ const successEmptyWithCreate = {
 			indexing: false,
 			denyDownload: false,
 			fileEntryType: 1,
-			id: 1,
-			rootFolderId: 1,
+			id: 224866,
+			rootFolderId: 224866,
 			canShare: false,
 			security: {
 				Read: true,
@@ -227,7 +227,7 @@ const successEmptyWithCreate = {
 		},
 		pathParts: [
 			{
-				id: 1,
+				id: 224866,
 				title: "AI agents",
 				folderType: 34,
 			},

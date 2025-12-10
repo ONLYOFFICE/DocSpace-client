@@ -186,8 +186,8 @@ export const successFavorites = {
       indexing: false,
       denyDownload: false,
       fileEntryType: 1,
-      id: 2,
-      rootFolderId: 2,
+      id: 1,
+      rootFolderId: 1,
       canShare: false,
       security: {
         Read: true,
@@ -269,7 +269,7 @@ export const successFavorites = {
     },
     pathParts: [
       {
-        id: 2,
+        id: 1,
         title: "Favorites",
         folderType: 10,
       },

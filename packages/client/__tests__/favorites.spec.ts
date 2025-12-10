@@ -57,7 +57,7 @@ test.describe("Favorites", () => {
   test("should navigate to favorites page", async ({ page, mockRequest }) => {
     await mockRequest.router([endpoints.favorites]);
 
-    await page.goto("/files/favorite/filter?folder=2");
+    await page.goto("/files/favorite/filter?folder=1");
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();
@@ -77,7 +77,7 @@ test.describe("Favorites", () => {
   test("should handle empty favorites list", async ({ page, mockRequest }) => {
     await mockRequest.router([endpoints.favoritesEmpty]);
 
-    await page.goto("/files/favorite/filter?folder=2");
+    await page.goto("/files/favorite/filter?folder=1");
 
     const emptyView = page.getByTestId("empty-view");
     await expect(emptyView).toBeVisible();
@@ -100,7 +100,7 @@ test.describe("Favorites", () => {
     ]);
     await wsMock.setupWebSocketMock();
 
-    await page.goto("/files/favorite/filter?folder=2");
+    await page.goto("/files/favorite/filter?folder=1");
 
     const table = page.getByTestId("table-body");
     await expect(table).toBeVisible();

@@ -558,8 +558,8 @@ const InvitePanel = ({
           "Invite",
           +selectedAccess,
           shareLinks[0]?.id ?? null,
-          access.expirationDate,
-          access.maxUseCount,
+          access.expirationDate ?? activeLink?.expirationDate,
+          access.maxUseCount ?? activeLink?.maxUseCount,
         );
 
         const {

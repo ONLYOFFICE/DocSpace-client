@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Olet tämän huoneen omistaja. Sinun täytyy siirtää omistajan rooli toiselle käyttäjälle ennen kuin poistut huoneesta.",
   "SuggestChanges": "Ehdota muutoksia",
   "TemplateInfo": "Mallin tiedot",
-  "ViewAllTemplates": "Näytä kaikki mallit"
+  "ViewAllTemplates": "Näytä kaikki mallit",
+  "ErrorViewDescriptionNetworkError": "Näyttää siltä, ettei Internet-yhteyttä ole"
 }

@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Majitelem této místnosti jste vy. Než místnost opustíte, musíte roli vlastníka převést na jiného uživatele.",
   "SuggestChanges": "Navrhnout změny",
   "TemplateInfo": "Informace o šabloně",
-  "ViewAllTemplates": "Zobrazit všechny šablony"
+  "ViewAllTemplates": "Zobrazit všechny šablony",
+  "ErrorViewDescriptionNetworkError": "Zdá se, že není k dispozici připojení k internetu."
 }

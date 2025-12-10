@@ -3,7 +3,7 @@
   "content": "Send Test Mail",
   "content_en_sha1_hash": "9cc6d411269baaf5e4d72721b6423d33917cbfc8",
   "created_at": "2025-05-19T21:30:53.311Z",
-  "updated_at": "2025-05-24T02:45:52.604Z",
+  "updated_at": "2025-12-09T12:12:27.328Z",
   "comment": {
     "text": "This translation key is used to display a message for sending a test email when a button is clicked. It appears in a UI component where users can configure SMTP settings and triggers an action that simulates sending an email.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
-      "line_number": 164,
+      "line_number": 167,
       "context": "}\n \n isWaitRequest = false;\n }, 1000);\n };\n const onClickSendTestMail = async () => {\n try {\n setSMTPSettingsLoading(true);\n setButtonOperation({ ...buttonOperation, send: true });\n \n const result = await sendingTestMail();",
       "module": "/packages/client"
     }

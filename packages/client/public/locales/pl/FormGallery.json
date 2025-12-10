@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Prześlij swój formularz do galerii publicznej, aby umożliwić innym skorzystanie z niego w swojej pracy. Gdy formularz przejdzie moderację, otrzymasz powiadomienie i nagrodę za swój wkład.",
   "SuggestChanges": "Zasugeruj zmiany",
   "TemplateInfo": "Dane szablonu",
-  "ViewAllTemplates": "Zobacz wszystkie szablony"
+  "ViewAllTemplates": "Zobacz wszystkie szablony",
+  "ErrorViewDescriptionNetworkError": "Wygląda na to, że nie ma połączenia z Internetem."
 }

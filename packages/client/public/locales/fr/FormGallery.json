@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Soumettez votre formulaire à la galerie publique pour permettre à d'autres personnes de l'utiliser dans leur travail. Une fois le formulaire modéré, vous serez informé et récompensé pour votre contribution.",
   "SuggestChanges": "Proposer des modifications",
   "TemplateInfo": "Informations sur le modèle",
-  "ViewAllTemplates": "Afficher tous les formulaires"
+  "ViewAllTemplates": "Afficher tous les formulaires",
+  "ErrorViewDescriptionNetworkError": "La connexion Internet semble être interrompue"
 }

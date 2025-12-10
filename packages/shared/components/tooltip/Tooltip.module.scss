@@ -115,3 +115,10 @@
     }
   }
 }
+
+:global(#system-tooltip) {
+  max-width: min(100vw, 800px) !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}

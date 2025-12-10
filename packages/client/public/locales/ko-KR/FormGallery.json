@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "다른 사람들이 작업하는 데 사용할 수 있도록 양식을 퍼블릭 갤러리에 제출하세요. 양식이 검토를 통과하면 알림이 전송되며 기여에 대해 보상을 받게 됩니다.",
   "SuggestChanges": "변경 사항 제안",
   "TemplateInfo": "템플릿 정보",
-  "ViewAllTemplates": "모든 템플릿 보기"
+  "ViewAllTemplates": "모든 템플릿 보기",
+  "ErrorViewDescriptionNetworkError": "인터넷 연결이 없는 것 같습니다."
 }

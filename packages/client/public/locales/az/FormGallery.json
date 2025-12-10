@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Bu otağın sahibi sizsiniz. Otağı tərk etməzdən əvvəl sahib rolunu başqa istifadəçiyə ötürməlisiniz.",
   "SuggestChanges": "Dəyişikliklər təklif edin",
   "TemplateInfo": "Şablon məlumatı",
-  "ViewAllTemplates": "Bütün şablonlara baxın"
+  "ViewAllTemplates": "Bütün şablonlara baxın",
+  "ErrorViewDescriptionNetworkError": "Görünür ki, internet bağlantısı yoxdur"
 }

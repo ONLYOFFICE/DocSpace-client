@@ -66,6 +66,12 @@ test.describe("Favorites", () => {
 
     await expect(title).toBeVisible();
     await expect(title).toHaveText("New document");
+
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "favorites",
+      "favorites.png",
+    ]);
   });
 
   test("should handle empty favorites list", async ({ page, mockRequest }) => {

@@ -47,4 +47,8 @@ export type TimePickerProps = {
   forwardedRef?: React.RefObject<HTMLDivElement | null>;
   /** Test id */
   testId?: string;
+  /** Whether to use 12-hour time format (with AM/PM) instead of 24-hour format */
+  isTwelveHourFormat?: boolean;
+  /** The meridiem indicator (AM/PM) for 12-hour format */
+  meridiem?: string;
 };

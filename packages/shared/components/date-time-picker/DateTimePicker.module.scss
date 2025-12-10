@@ -52,7 +52,6 @@
 
   box-sizing: border-box;
 
-  width: 73px;
   height: 32px;
 
   background-color: var(--date-picker-cell-background);
@@ -79,6 +78,12 @@
   &.hasError {
     color: red;
   }
+}
+
+.timePicker {
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .timeSelector {

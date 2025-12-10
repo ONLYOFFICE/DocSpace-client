@@ -44,6 +44,8 @@ const TimePicker = ({
   focusOnRender = false,
   forwardedRef,
   testId,
+  isTwelveHourFormat,
+  meridiem,
 }: TimePickerProps) => {
   const hoursInputRef = useRef<HTMLInputElement>(null);
   const minutesInputRef = useRef<HTMLInputElement>(null);
@@ -54,7 +56,8 @@ const TimePicker = ({
 
   const [isInputFocused, setIsInputFocused] = useState(false);
 
-  const [hours, setHours] = useState(moment(date, "HH:mm").format("HH"));
+  const hoursFormat = isTwelveHourFormat ? "hh" : "HH";
+  const [hours, setHours] = useState(moment(date, "HH:mm").format(hoursFormat));
 
   const [minutes, setMinutes] = useState(moment(date, "HH:mm").format("mm"));
 
@@ -83,10 +86,15 @@ const TimePicker = ({
         "YYYY-MM-DD HH:mm",
       ),
     );
+
+    const dateFormat = isTwelveHourFormat
+      ? "YYYY-MM-DD HH:mm A"
+      : "YYYY-MM-DD HH:mm";
+
     onChange(
       moment(
-        `${date.format("YYYY-MM-DD")} ${time}:${minutes}`,
-        "YYYY-MM-DD HH:mm",
+        `${date.format("YYYY-MM-DD")} ${time}:${minutes} ${meridiem}`,
+        dateFormat,
       ),
     );
   };
@@ -137,13 +145,17 @@ const TimePicker = ({
     }
     if (!/^\d+$/.test(h)) return;
 
-    if (+h > 23) {
+    const maxHours = isTwelveHourFormat ? 11 : 23;
+
+    if (+h > maxHours) {
       focusMinutesInput();
       if (h.length === 2) changeHours(`0${h[0]}`);
       return;
     }
 
-    if (h.length === 1 && +h > 2) {
+    const maxHoursDigit = isTwelveHourFormat ? 1 : 2;
+
+    if (h.length === 1 && +h > maxHoursDigit) {
       changeHours(`0${h}`);
       focusMinutesInput();
       return;

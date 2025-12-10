@@ -37,6 +37,8 @@ import { DatePicker } from "../date-picker";
 
 import { DateTimePickerProps } from "./DateTimerPicker.types";
 import styles from "./DateTimePicker.module.scss";
+import { ComboBox, TOption } from "../combobox";
+import { useTranslation } from "react-i18next";
 
 const DateTimePicker = (props: DateTimePickerProps) => {
   const {
@@ -54,9 +56,26 @@ const DateTimePicker = (props: DateTimePickerProps) => {
     hideCross,
   } = props;
 
+  const { t } = useTranslation("Common");
+
+  const options = [
+    {
+      key: "AM",
+      label: t("AM"),
+    },
+    {
+      key: "PM",
+      label: t("PM"),
+    },
+  ];
+
   const [isTimeFocused, setIsTimeFocused] = useState(false);
 
   const [date, setDate] = useState(initialDate ? moment(initialDate) : null);
+  const [isTwelveHourFormat, setIsTwelveHourFormat] = useState(true);
+  const [selectedFormat, setSelectedFormat] = useState<TOption>(
+    initialDate && moment(initialDate).hour() >= 12 ? options[1] : options[0],
+  );
 
   const showTimePicker = () => setIsTimeFocused(true);
   const hideTimePicker = () => setIsTimeFocused(false);
@@ -66,20 +85,39 @@ const DateTimePicker = (props: DateTimePickerProps) => {
     setDate(d);
   };
 
-  const timePickerRef = useRef<HTMLInputElement | null>(null);
+  const timePickerRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
+    if (!target) return;
+
+    const dropDownElement =
+      target.tagName === "SPAN" ? target.parentElement : target;
+    const containsDropDown =
+      dropDownElement?.classList.contains("drop-down-item");
+
     if (
-      target &&
       timePickerRef?.current &&
-      !timePickerRef?.current?.contains(target)
-    )
+      !timePickerRef?.current?.contains(target) &&
+      !containsDropDown
+    ) {
       setIsTimeFocused(false);
+    }
   };
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === ButtonKeys.enter || event.key === ButtonKeys.tab) {
       setIsTimeFocused(false);
+    }
+  };
+
+  const onSelectFormat = (opt: TOption) => {
+    setSelectedFormat(opt);
+    if (!date) return;
+
+    if (opt.key === "AM") {
+      handleChange(date?.subtract(12, "hours"));
+    } else {
+      handleChange(date?.add(12, "hours"));
     }
   };
 
@@ -91,6 +129,20 @@ const DateTimePicker = (props: DateTimePickerProps) => {
       document.removeEventListener("keydown", handleKeyDown, { capture: true });
     };
   }, []);
+
+  useEffect(() => {
+    const date = initialDate ? moment(initialDate) : moment();
+    date.locale(locale);
+
+    const localeData = date.localeData();
+    const timeFormat = localeData.longDateFormat("LT");
+
+    if (timeFormat.includes("h")) {
+      setIsTwelveHourFormat(true);
+    } else {
+      setIsTwelveHourFormat(false);
+    }
+  }, [initialDate]);
 
   return (
     <div
@@ -119,15 +171,26 @@ const DateTimePicker = (props: DateTimePickerProps) => {
       >
         {date !== null ? (
           isTimeFocused ? (
-            <TimePicker
-              initialTime={date}
-              onChange={handleChange}
-              tabIndex={0}
-              onBlur={hideTimePicker}
-              focusOnRender
-              forwardedRef={timePickerRef}
-              aria-label="Time picker"
-            />
+            <div className={styles.timePicker} ref={timePickerRef}>
+              <TimePicker
+                initialTime={date}
+                onChange={handleChange}
+                tabIndex={0}
+                onBlur={hideTimePicker}
+                focusOnRender
+                aria-label="Time picker"
+                isTwelveHourFormat={isTwelveHourFormat}
+                meridiem={String(selectedFormat.key)}
+              />
+              {isTwelveHourFormat ? (
+                <ComboBox
+                  options={options}
+                  selectedOption={selectedFormat}
+                  onSelect={onSelectFormat}
+                  scaledOptions
+                />
+              ) : null}
+            </div>
           ) : (
             <span
               className={classNames(styles.timeCell, {
@@ -144,7 +207,9 @@ const DateTimePicker = (props: DateTimePickerProps) => {
                 aria-hidden="true"
                 data-testid="date-time-picker-clock-icon"
               />
-              {date.format("HH:mm")}
+              {isTwelveHourFormat
+                ? date.format("hh:mm A")
+                : date.format("HH:mm")}
             </span>
           )
         ) : null}

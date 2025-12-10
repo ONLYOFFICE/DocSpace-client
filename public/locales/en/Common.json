@@ -1084,5 +1084,7 @@
   "UserLimit": "User limit",
   "DomainAlreadyAdded": "This domain has already been added",
   "IpAlreadyAdded": "This IP address has already been added",
-  "IncorrectIp": "Incorrect IP address"
+  "IncorrectIp": "Incorrect IP address",
+  "AM": "AM",
+  "PM": "PM"
 }

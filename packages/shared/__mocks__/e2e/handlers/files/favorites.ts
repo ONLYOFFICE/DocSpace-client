@@ -26,152 +26,154 @@
 
 import { BASE_URL, API_PREFIX } from "../../utils";
 
-type ResponseType = "success" | "empty";
+type ResponseType = "delete" | "success" | "empty";
 
 export const PATH_FAVORITES = /.*\/api\/2\.0\/files\/\d+\?.*/;
+export const PATH_DELETE_FAVORITES = /.*\/api\/2\.0\/files\/favorites$/;
+export const PATH_GET_FILE = /.*\/api\/2\.0\/files\/file\/\d+$/;
+
+const file = [
+  {
+    folderId: 7,
+    version: 1,
+    versionGroup: 1,
+    contentLength: "7.54 KB",
+    pureContentLength: 7726,
+    fileStatus: 32,
+    mute: false,
+    viewUrl: `${BASE_URL}/filehandler.ashx?action=download&fileid=1`,
+    webUrl: `${BASE_URL}/doceditor?fileid=1&version=1`,
+    fileType: 7,
+    fileExst: ".docx",
+    comment: "Created",
+    thumbnailStatus: 3,
+    locked: false,
+    formFillingStatus: 0,
+    viewAccessibility: {
+      ImageView: false,
+      MediaView: false,
+      WebView: true,
+      WebEdit: true,
+      WebReview: true,
+      WebCustomFilterEditing: false,
+      WebRestrictedEditing: false,
+      WebComment: true,
+      CanConvert: true,
+      MustConvert: false,
+    },
+    lastOpened: "2025-12-10T13:01:52.0000000+03:00",
+    fileEntryType: 2,
+    id: 1,
+    rootFolderId: 7,
+    originId: 7,
+    originRoomId: 7,
+    originTitle: "My documents",
+    originRoomTitle: "My documents",
+    canShare: false,
+    shareSettings: {
+      ExternalLink: 6,
+    },
+    security: {
+      Read: true,
+      Comment: true,
+      FillForms: false,
+      Review: true,
+      Edit: false,
+      Delete: false,
+      CustomFilter: false,
+      Rename: false,
+      ReadHistory: true,
+      Lock: false,
+      EditHistory: true,
+      Copy: true,
+      Move: true,
+      Duplicate: false,
+      SubmitToFormGallery: false,
+      Download: true,
+      Convert: true,
+      CreateRoomFrom: false,
+      CopyLink: false,
+      Embed: false,
+      StartFilling: false,
+      FillingStatus: false,
+      ResetFilling: false,
+      StopFilling: false,
+      OpenForm: true,
+      Vectorization: false,
+      AskAi: true,
+      CopySharedLink: false,
+    },
+    availableShareRights: {
+      User: [
+        "ReadWrite",
+        "Editing",
+        "Review",
+        "Comment",
+        "Read",
+        "Restrict",
+        "None",
+      ],
+      ExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
+      Group: [
+        "ReadWrite",
+        "Editing",
+        "Review",
+        "Comment",
+        "Read",
+        "Restrict",
+        "None",
+      ],
+      PrimaryExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
+    },
+    title: "New document.docx",
+    access: 0,
+    shared: false,
+    sharedForUser: false,
+    parentShared: false,
+    shortWebUrl: "",
+    created: "2025-12-10T13:00:53.0000000+03:00",
+    createdBy: {
+      id: "0000000000-0000-000000-000000000",
+      displayName: "Admin Admin",
+      avatar: "/static/images/default_user_photo_size_82-82.png?hash=261361478",
+      avatarOriginal:
+        "/static/images/default_user_photo_size_200-200.png?hash=261361478",
+      avatarMax:
+        "/static/images/default_user_photo_size_200-200.png?hash=261361478",
+      avatarMedium:
+        "/static/images/default_user_photo_size_48-48.png?hash=261361478",
+      avatarSmall:
+        "/static/images/default_user_photo_size_32-32.png?hash=261361478",
+      profileUrl: `${BASE_URL}/accounts/people/filter?search=admin%40gmail.com`,
+      hasAvatar: true,
+      isAnonim: false,
+    },
+    updated: "2025-12-10T13:00:53.0000000+03:00",
+    rootFolderType: 5,
+    updatedBy: {
+      id: "0000000000-0000-000000-000000000",
+      displayName: "Admin Admin",
+      avatar: "/static/images/default_user_photo_size_82-82.png?hash=261361478",
+      avatarOriginal:
+        "/static/images/default_user_photo_size_200-200.png?hash=261361478",
+      avatarMax:
+        "/static/images/default_user_photo_size_200-200.png?hash=261361478",
+      avatarMedium:
+        "/static/images/default_user_photo_size_48-48.png?hash=261361478",
+      avatarSmall:
+        "/static/images/default_user_photo_size_32-32.png?hash=261361478",
+      profileUrl: `${BASE_URL}/accounts/people/filter?search=admin%40gmail.com`,
+      hasAvatar: true,
+      isAnonim: false,
+    },
+    order: "",
+    isFavorite: true,
+  },
+];
 
 export const successFavorites = {
   response: {
-    files: [
-      {
-        folderId: 7,
-        version: 1,
-        versionGroup: 1,
-        contentLength: "7.54 KB",
-        pureContentLength: 7726,
-        fileStatus: 32,
-        mute: false,
-        viewUrl: `${BASE_URL}/filehandler.ashx?action=download&fileid=1`,
-        webUrl: `${BASE_URL}/doceditor?fileid=1&version=1`,
-        fileType: 7,
-        fileExst: ".docx",
-        comment: "Created",
-        thumbnailStatus: 3,
-        locked: false,
-        formFillingStatus: 0,
-        viewAccessibility: {
-          ImageView: false,
-          MediaView: false,
-          WebView: true,
-          WebEdit: true,
-          WebReview: true,
-          WebCustomFilterEditing: false,
-          WebRestrictedEditing: false,
-          WebComment: true,
-          CanConvert: true,
-          MustConvert: false,
-        },
-        lastOpened: "2025-12-10T13:01:52.0000000+03:00",
-        fileEntryType: 2,
-        id: 355,
-        rootFolderId: 7,
-        originId: 7,
-        originRoomId: 7,
-        originTitle: "My documents",
-        originRoomTitle: "My documents",
-        canShare: false,
-        shareSettings: {
-          ExternalLink: 6,
-        },
-        security: {
-          Read: true,
-          Comment: true,
-          FillForms: false,
-          Review: true,
-          Edit: false,
-          Delete: false,
-          CustomFilter: false,
-          Rename: false,
-          ReadHistory: true,
-          Lock: false,
-          EditHistory: true,
-          Copy: true,
-          Move: true,
-          Duplicate: false,
-          SubmitToFormGallery: false,
-          Download: true,
-          Convert: true,
-          CreateRoomFrom: false,
-          CopyLink: false,
-          Embed: false,
-          StartFilling: false,
-          FillingStatus: false,
-          ResetFilling: false,
-          StopFilling: false,
-          OpenForm: true,
-          Vectorization: false,
-          AskAi: true,
-          CopySharedLink: false,
-        },
-        availableShareRights: {
-          User: [
-            "ReadWrite",
-            "Editing",
-            "Review",
-            "Comment",
-            "Read",
-            "Restrict",
-            "None",
-          ],
-          ExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
-          Group: [
-            "ReadWrite",
-            "Editing",
-            "Review",
-            "Comment",
-            "Read",
-            "Restrict",
-            "None",
-          ],
-          PrimaryExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
-        },
-        title: "New document.docx",
-        access: 0,
-        shared: false,
-        sharedForUser: false,
-        parentShared: false,
-        shortWebUrl: "",
-        created: "2025-12-10T13:00:53.0000000+03:00",
-        createdBy: {
-          id: "0000000000-0000-000000-000000000",
-          displayName: "Admin Admin",
-          avatar:
-            "/static/images/default_user_photo_size_82-82.png?hash=261361478",
-          avatarOriginal:
-            "/static/images/default_user_photo_size_200-200.png?hash=261361478",
-          avatarMax:
-            "/static/images/default_user_photo_size_200-200.png?hash=261361478",
-          avatarMedium:
-            "/static/images/default_user_photo_size_48-48.png?hash=261361478",
-          avatarSmall:
-            "/static/images/default_user_photo_size_32-32.png?hash=261361478",
-          profileUrl: `${BASE_URL}/accounts/people/filter?search=admin%40gmail.com`,
-          hasAvatar: true,
-          isAnonim: false,
-        },
-        updated: "2025-12-10T13:00:53.0000000+03:00",
-        rootFolderType: 5,
-        updatedBy: {
-          id: "0000000000-0000-000000-000000000",
-          displayName: "Admin Admin",
-          avatar:
-            "/static/images/default_user_photo_size_82-82.png?hash=261361478",
-          avatarOriginal:
-            "/static/images/default_user_photo_size_200-200.png?hash=261361478",
-          avatarMax:
-            "/static/images/default_user_photo_size_200-200.png?hash=261361478",
-          avatarMedium:
-            "/static/images/default_user_photo_size_48-48.png?hash=261361478",
-          avatarSmall:
-            "/static/images/default_user_photo_size_32-32.png?hash=261361478",
-          profileUrl: `${BASE_URL}/accounts/people/filter?search=admin%40gmail.com`,
-          hasAvatar: true,
-          isAnonim: false,
-        },
-        order: "",
-        isFavorite: true,
-      },
-    ],
+    files: [...file],
     folders: [],
     current: {
       parentId: 0,
@@ -298,12 +300,44 @@ export const emptyFavorites = {
   },
 };
 
+export const deleteFavorites = {
+  response: true,
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_DELETE_FAVORITES}`,
+      action: "DELETE",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const getFile = {
+  response: { ...file[0], isFavorite: false },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/file/1`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const favoritesHandler = (type: ResponseType) => {
   switch (type) {
     case "empty":
       return new Response(JSON.stringify(emptyFavorites));
+    case "delete":
+      return new Response(JSON.stringify(deleteFavorites));
     case "success":
     default:
       return new Response(JSON.stringify(successFavorites));
   }
+};
+
+export const getFileHandler = () => {
+  return new Response(JSON.stringify(getFile));
 };

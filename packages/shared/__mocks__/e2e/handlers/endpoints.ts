@@ -106,7 +106,10 @@ import {
   thirdPartyCapabilitiesHandler,
   thirdPartyHandler,
   PATH_FAVORITES,
+  PATH_DELETE_FAVORITES,
   favoritesHandler,
+  PATH_GET_FILE,
+  getFileHandler,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -433,5 +436,14 @@ export const endpoints = {
   favoritesEmpty: {
     url: PATH_FAVORITES,
     dataHandler: favoritesHandler.bind(null, "empty"),
+  },
+  favoritesDelete: {
+    url: PATH_DELETE_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "delete"),
+    method: "DELETE",
+  },
+  getFile: {
+    url: PATH_GET_FILE,
+    dataHandler: getFileHandler,
   },
 } satisfies TEndpoints;

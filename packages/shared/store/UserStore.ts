@@ -174,6 +174,8 @@ class UserStore {
     this.user.quotaLimit = quotaLimit;
   };
 
+  isMe = (userId: string) => this.user?.id === userId;
+
   get withActivationBar() {
     return (
       this.user &&

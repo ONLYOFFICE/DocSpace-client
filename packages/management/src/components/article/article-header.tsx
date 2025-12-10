@@ -26,21 +26,52 @@
 
 "use client";
 
+import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
+
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import classNames from "classnames";
+import { ReactSVG } from "react-svg";
+
+import { DeviceType } from "@docspace/shared/enums";
+
 import { useStores } from "@/hooks/useStores";
+import useDeviceType from "@/hooks/useDeviceType";
 import { getMinifyTitle } from "@/lib";
-import { StyledArticleHeader } from "./article.styled";
+
+import styles from "./article.module.scss";
 
 export const ArticleHeader = observer(() => {
   const { t } = useTranslation(["Common"]);
   const {
-    articleStore: { showText },
+    articleStore: { showText, setArticleOpen },
   } = useStores();
 
   const title = !showText
     ? getMinifyTitle(t("SpaceManagement"))
     : t("SpaceManagement");
 
-  return <StyledArticleHeader showText={showText}>{title}</StyledArticleHeader>;
+  const { currentDeviceType } = useDeviceType();
+
+  if (currentDeviceType === DeviceType.mobile) {
+    return (
+      <div className={styles.mobileArticleHeader}>
+        <ReactSVG
+          src={CrossIcon}
+          className={styles.crossIcon}
+          onClick={() => setArticleOpen(false)}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <h1
+      className={classNames(styles.articleHeader, {
+        [styles.notShowText]: !showText,
+      })}
+    >
+      {title}
+    </h1>
+  );
 });

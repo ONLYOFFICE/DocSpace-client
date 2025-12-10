@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -39,6 +39,7 @@ import {
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
+import PluginStore from "SRC_DIR/store/PluginStore";
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
@@ -60,7 +61,10 @@ type BodyProps = {
   getIsFiles: InfoPanelStore["getIsFiles"];
   getIsRooms: InfoPanelStore["getIsRooms"];
   getIsAIAgent: InfoPanelStore["getIsAIAgent"];
+  getIsTrash: InfoPanelStore["getIsTrash"];
   setView: InfoPanelStore["setView"];
+
+  infoPanelItemsList: PluginStore["infoPanelItemsList"];
 
   maxImageUploadSize: SettingsStore["maxImageUploadSize"];
 
@@ -90,7 +94,10 @@ const InfoPanelBodyContent = ({
   getIsFiles,
   getIsRooms,
   getIsAIAgent,
+  getIsTrash,
   setView,
+
+  infoPanelItemsList,
 
   maxImageUploadSize,
 
@@ -111,6 +118,7 @@ const InfoPanelBodyContent = ({
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
   const isAgents = getIsAIAgent();
+  const isTrash = getIsTrash();
   const isGallery = window.location.pathname.includes("form-gallery");
   const isGroups = contactsTab === "groups";
   const isGuests = contactsTab === "guests";
@@ -148,7 +156,7 @@ const InfoPanelBodyContent = ({
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       fileView === InfoPanelView.infoShare &&
       selection &&
@@ -161,11 +169,24 @@ const InfoPanelBodyContent = ({
     }
   }, [fileView, selection, isTemplatesRoom, isAgent]);
 
+  useEffect(() => {
+    if (!currentView.startsWith("info_plugin-")) return;
+
+    const itemKey = currentView.replace("info_plugin-", "");
+    const item = infoPanelItemsList.find((item) => item.key === itemKey);
+
+    if (isAgent) {
+      setView(InfoPanelView.infoMembers);
+    } else if (!item || isTrash || isTemplatesRoom) {
+      setView(InfoPanelView.infoDetails);
+    }
+  }, [currentView, isAgent, isTrash, isTemplatesRoom, infoPanelItemsList]);
+
   const isExpiredLink = useEventCallback(() =>
     checkIsExpiredLinkAsync(selection),
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!id) return;
 
     isExpiredLink();
@@ -266,8 +287,12 @@ export default inject(
     dialogsStore,
     peopleStore,
     filesActionsStore,
+    pluginStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
+
+    const { infoPanelItemsList } = pluginStore;
+
     const {
       roomsView,
       fileView,
@@ -276,6 +301,7 @@ export default inject(
       getIsRooms,
       getIsAIAgent,
       setView,
+      getIsTrash,
     } = infoPanelStore;
 
     const { isExpiredLinkAsync } = filesActionsStore;
@@ -307,7 +333,10 @@ export default inject(
       getIsFiles,
       getIsRooms,
       getIsAIAgent,
+      getIsTrash,
       setView,
+
+      infoPanelItemsList,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 

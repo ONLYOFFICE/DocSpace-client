@@ -55,6 +55,7 @@ import {
   isSystemFolder,
 } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
+import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
@@ -623,6 +624,11 @@ class FilesStore {
 
       console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
 
+      if (!folderInfo || folderInfo.parentId !== this.selectedFolderStore.id) {
+        console.log("Skip UNSUBSCRIBED folder creation");
+        return;
+      }
+
       const newFolders = [folderInfo, ...this.folders];
 
       const newFilter = this.filter;
@@ -1008,7 +1014,9 @@ class FilesStore {
 
   checkSelection = (file) => {
     if (this.selection) {
-      const foundIndex = this.selection?.findIndex((x) => x.id === file.id);
+      const foundIndex = this.selection?.findIndex((x) =>
+        isSameEntity(x, file),
+      );
       if (foundIndex > -1) {
         runInAction(() => {
           this.selection[foundIndex] = file;
@@ -1016,15 +1024,10 @@ class FilesStore {
       }
     }
 
-    if (this.bufferSelection) {
-      const foundIndex = [this.bufferSelection].findIndex(
-        (x) => x.id === file.id,
-      );
-      if (foundIndex > -1) {
-        runInAction(() => {
-          this.bufferSelection[foundIndex] = file;
-        });
-      }
+    if (isSameEntity(this.bufferSelection, file)) {
+      runInAction(() => {
+        this.bufferSelection = file;
+      });
     }
   };
 
@@ -1355,7 +1358,7 @@ class FilesStore {
 
   updateRoomMute = (index, status) => {
     this.folders[index].mute = status;
-    this.updateSelection(this.folders[index].id);
+    this.updateSelection(this.folders[index]);
   };
 
   setFile = (file) => {
@@ -1364,7 +1367,7 @@ class FilesStore {
     if (index !== -1) {
       this.files[index] = file;
       this.createThumbnail(file);
-      this.updateSelection(file.id);
+      this.updateSelection(file);
     }
   };
 
@@ -1386,21 +1389,26 @@ class FilesStore {
     this.setSelection(newSelection);
   };
 
-  updateSelection = (id) => {
-    const indexFileList = this.filesList.findIndex(
-      (filelist) => filelist.id === id,
+  updateSelection = (item) => {
+    const indexFileList = this.filesList.findIndex((file) =>
+      isSameEntity(file, item),
     );
-    const indexSelectedRoom = this.selection.findIndex(
-      (room) => room.id === id,
+    const indexSelectedRoom = this.selection.findIndex((selectionItem) =>
+      isSameEntity(selectionItem, item),
     );
 
     if (~indexFileList && ~indexSelectedRoom) {
       this.selection[indexSelectedRoom] = this.filesList[indexFileList];
     }
+
     if (this.bufferSelection) {
-      this.bufferSelection = this.filesList.find(
-        (file) => file.id === this.bufferSelection.id,
+      const newBuffer = this.filesList.find((file) =>
+        isSameEntity(file, this.bufferSelection),
       );
+
+      if (!newBuffer) return;
+
+      this.bufferSelection = newBuffer;
     }
   };
 
@@ -1412,7 +1420,7 @@ class FilesStore {
   updateFolder = (index, folder) => {
     if (index !== -1) this.folders[index] = folder;
 
-    this.updateSelection(folder.id);
+    this.updateSelection(folder);
   };
 
   setFolder = (folder) => {
@@ -3005,7 +3013,7 @@ class FilesStore {
             !item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
-              PluginFileType.Files,
+              PluginFileType.file,
               item.fileExst,
               security,
               item.security,
@@ -3020,7 +3028,7 @@ class FilesStore {
             item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
-              PluginFileType.Image,
+              PluginFileType.image,
               item.fileExst,
               security,
               item.security,
@@ -3035,7 +3043,7 @@ class FilesStore {
             !item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
-              PluginFileType.Video,
+              PluginFileType.video,
               item.fileExst,
               security,
               item.security,
@@ -3203,7 +3211,7 @@ class FilesStore {
       const canEditRoom = item.security?.EditRoom;
 
       const canViewRoomInfo = item.security?.Read || isLockedSharedRoom(item);
-      const canMuteRoom = item.security?.Mute;
+      const canMuteRoom = item.security?.Mute && item.inRoom;
 
       const canChangeOwner = item.security?.ChangeOwner;
 
@@ -3296,10 +3304,6 @@ class FilesStore {
         roomOptions = removeOptions(roomOptions, ["download"]);
       }
 
-      if (!canDownload && !canDuplicate) {
-        roomOptions = removeOptions(roomOptions, ["separator1"]);
-      }
-
       if (!item.providerKey) {
         roomOptions = removeOptions(roomOptions, ["reconnect-storage"]);
       }
@@ -3335,7 +3339,7 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginRoomsKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Rooms,
+            PluginFileType.room,
             null,
             security,
             item.security,
@@ -3473,7 +3477,7 @@ class FilesStore {
 
       if (enablePlugins) {
         const pluginFoldersKeys = this.pluginStore.getContextMenuKeysByType(
-          PluginFileType.Folders,
+          PluginFileType.folder,
           null,
           security,
           item.security,
@@ -3525,7 +3529,13 @@ class FilesStore {
     //   ]);
     // }
 
-    if (!(isMyFolder && (this.filterType || this.filterSearch))) {
+    if (
+      !(
+        isRecentFolder ||
+        isFavoritesFolder ||
+        (isMyFolder && (this.filterType || this.filterSearch))
+      )
+    ) {
       folderOptions = removeOptions(folderOptions, ["open-location"]);
     }
 

@@ -34,7 +34,7 @@ import { useEndAnimation } from "@/hooks/useEndAnimation";
 import { Header } from "./header";
 import { Spaces } from "./spaces";
 import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+import styles from "./multiple.module.scss";
 
 interface IProps {
   baseDomain: string;
@@ -51,11 +51,11 @@ export const MultipleSpaces = ({
 
   return (
     <LoaderWrapper isLoading={isLoading}>
-      <StyledWrapper>
+      <div className={styles.wrapper}>
         <Header />
         <Spaces portals={portals} tenantAlias={tenantAlias} />
         <DomainSettings baseDomain={baseDomain} />
-      </StyledWrapper>
+      </div>
     </LoaderWrapper>
   );
 };

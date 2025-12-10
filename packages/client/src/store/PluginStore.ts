@@ -46,12 +46,19 @@ import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import type {
   IContextMenuItem,
+  IContextMenuItemClient,
   IContextMenuItemValidation,
   IEventListenerItem,
+  IEventListenerItemClient,
   IFileItem,
+  IFileItemClient,
   IInfoPanelItem,
+  IInfoPanelItemClient,
   IMainButtonItem,
+  IMainButtonItemClient,
+  IMessage,
   IProfileMenuItem,
+  IProfileMenuItemClient,
   IframeWindow,
   TPlugin,
 } from "SRC_DIR/helpers/plugins/types";
@@ -85,17 +92,17 @@ class PluginStore {
 
   plugins: TPlugin[] = [];
 
-  contextMenuItems: Map<string, IContextMenuItem> = new Map();
+  contextMenuItems: Map<string, IContextMenuItemClient> = new Map();
 
-  infoPanelItems: Map<string, IInfoPanelItem> = new Map();
+  infoPanelItems: Map<string, IInfoPanelItemClient> = new Map();
 
-  mainButtonItems: Map<string, IMainButtonItem> = new Map();
+  mainButtonItems: Map<string, IMainButtonItemClient> = new Map();
 
-  profileMenuItems: Map<string, IProfileMenuItem> = new Map();
+  profileMenuItems: Map<string, IProfileMenuItemClient> = new Map();
 
-  eventListenerItems: Map<string, IEventListenerItem> = new Map();
+  eventListenerItems: Map<string, IEventListenerItemClient> = new Map();
 
-  fileItems: Map<string, IFileItem> = new Map();
+  fileItems: Map<string, IFileItemClient> = new Map();
 
   pluginFrame: HTMLIFrameElement | null = null;
 
@@ -128,6 +135,31 @@ class PluginStore {
 
     makeAutoObservable(this);
   }
+
+  private dispatchMessage = (
+    message: Promise<IMessage> | Promise<void> | IMessage | void,
+    pluginName: string,
+  ) => {
+    messageActions({
+      message,
+      pluginName,
+      setElementProps: null,
+      setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
+      setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
+      updatePluginStatus: this.updatePluginStatus,
+      updatePropsContext: null,
+      setPluginDialogVisible: this.setPluginDialogVisible,
+      setPluginDialogProps: this.setPluginDialogProps,
+      updateContextMenuItems: this.updateContextMenuItems,
+      updateInfoPanelItems: this.updateInfoPanelItems,
+      updateMainButtonItems: this.updateMainButtonItems,
+      updateProfileMenuItems: this.updateProfileMenuItems,
+      updateEventListenerItems: this.updateEventListenerItems,
+      updateFileItems: this.updateFileItems,
+      updateCreateDialogProps: null,
+      updatePlugin: null,
+    });
+  };
 
   setNeedPageReload = (value: boolean) => {
     this.needPageReload = value;
@@ -352,11 +384,9 @@ class PluginStore {
 
           newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
 
-          const isPluginCompatible = this.checkPluginCompatibility(
+          newPlugin.compatible = this.checkPluginCompatibility(
             plugin.minDocSpaceVersion,
           );
-
-          newPlugin.compatible = isPluginCompatible;
 
           this.installPlugin(newPlugin);
 
@@ -393,6 +423,38 @@ class PluginStore {
     });
   };
 
+  installPluginCss = async (plugin: TPlugin) => {
+    const cssUrl = getPluginUrl(
+      plugin.url,
+      `plugin.css?hash=${plugin.version}`,
+    );
+
+    const linkId = `plugin-styles-${plugin.pluginName}`;
+    const existingLink = document.getElementById(linkId) as HTMLLinkElement;
+
+    if (existingLink) {
+      // update existing link
+      existingLink.href = cssUrl;
+      return;
+    }
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = cssUrl;
+    link.id = linkId;
+    document.head.appendChild(link);
+  };
+
+  uninstallPluginCss = (plugin: TPlugin) => {
+    const linkId = `plugin-styles-${plugin.pluginName}`;
+    const link = document.getElementById(linkId) as HTMLLinkElement;
+
+    if (link) {
+      link.remove();
+    }
+  };
+
   installPlugin = async (plugin: TPlugin, addToList = true) => {
     if (addToList) {
       const idx = this.plugins.findIndex((p) => p.name === plugin.name);
@@ -423,6 +485,8 @@ class PluginStore {
     }
 
     if (plugin.status === PluginStatus.hide) return;
+
+    this.installPluginCss(plugin);
 
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
       this.updateContextMenuItems(name);
@@ -509,6 +573,8 @@ class PluginStore {
 
     plugin.enabled = false;
     plugin.settings = "";
+
+    this.uninstallPluginCss(plugin);
 
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
       this.deactivateContextMenuItems(plugin);
@@ -625,7 +691,7 @@ class PluginStore {
     const keys: string[] = [];
 
     switch (type) {
-      case PluginFileType.Files:
+      case PluginFileType.file:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -640,7 +706,7 @@ class PluginStore {
         });
 
         break;
-      case PluginFileType.Folders:
+      case PluginFileType.folder:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -653,7 +719,7 @@ class PluginStore {
           if (validKeys) keys.push(...validKeys);
         });
         break;
-      case PluginFileType.Rooms:
+      case PluginFileType.room:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -666,7 +732,7 @@ class PluginStore {
           if (validKeys) keys.push(...validKeys);
         });
         break;
-      case PluginFileType.Image:
+      case PluginFileType.image:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -680,7 +746,7 @@ class PluginStore {
           if (validKeys) keys.push(...validKeys);
         });
         break;
-      case PluginFileType.Video:
+      case PluginFileType.video:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -707,7 +773,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: Map<string, IContextMenuItem> =
+    const items: Map<string, IContextMenuItem> | undefined =
       plugin.getContextMenuItems && plugin.getContextMenuItems();
 
     if (!items) return;
@@ -716,39 +782,32 @@ class PluginStore {
     let currentDepth = 1;
 
     // Helper function to recursively process context menu items
-    const processContextMenuItem = (value: IContextMenuItem) => {
+    const processContextMenuItem = (
+      value: IContextMenuItem,
+    ): IContextMenuItemClient => {
       const onClick = async (fileId: number) => {
         if (!value.onClick || value.items) return;
 
         const message = await value.onClick(fileId);
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage(message, plugin.name);
+      };
+
+      const onGroupClick = async (filesId: number[]) => {
+        if (!value.onGroupClick || !value.isGroupAction || value.items) return;
+
+        const message = await value.onGroupClick(filesId);
+
+        this.dispatchMessage(message, plugin.name);
       };
 
       const { items, ...rest } = value;
 
       // Create processed result object
-      const processedItem: IContextMenuItem = {
+      const processedItem: IContextMenuItemClient = {
         ...rest,
         onClick,
+        onGroupClick,
         pluginName: plugin.name,
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       };
@@ -809,40 +868,20 @@ class PluginStore {
 
       if (!correctUserType || !correctDevice) return;
 
-      const submenu = { ...value.subMenu };
+      const onClick = async (id: number) => {
+        if (!value.subMenu?.onClick) return;
 
-      if (value.subMenu.onClick) {
-        const onClick = async (id: number) => {
-          const message = await value?.subMenu?.onClick?.(id);
+        const message = await value.subMenu.onClick(id);
 
-          messageActions({
-            message,
-            setElementProps: null,
-            pluginName: plugin.name,
-            setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-            updatePluginStatus: this.updatePluginStatus,
-            updatePropsContext: null,
-            setPluginDialogVisible: this.setPluginDialogVisible,
-            setPluginDialogProps: this.setPluginDialogProps,
-            updateContextMenuItems: this.updateContextMenuItems,
-            updateInfoPanelItems: this.updateInfoPanelItems,
-            updateMainButtonItems: this.updateMainButtonItems,
-            updateProfileMenuItems: this.updateProfileMenuItems,
-            updateEventListenerItems: this.updateEventListenerItems,
-            updateFileItems: this.updateFileItems,
-            updateCreateDialogProps: null,
-            updatePlugin: null,
-          });
-        };
+        this.dispatchMessage(message, plugin.name);
 
-        submenu.onClick = onClick;
-      }
+        return message;
+      };
 
       this.infoPanelItems.set(key, {
         ...value,
-        subMenu: submenu,
-
+        isHeaderVisible: value.isHeaderVisible ?? true,
+        subMenu: { ...value.subMenu, onClick },
         pluginName: plugin.name,
       });
     });
@@ -886,42 +925,29 @@ class PluginStore {
 
       if (!correctUserType || !correctDevice) return;
 
-      const newItems: IMainButtonItem[] = [];
+      const newItems: IMainButtonItemClient[] = [];
 
       if (value.items && storeId) {
-        value.items.forEach((i) => {
-          const onClick = async () => {
-            const message = await i?.onClick?.(storeId);
+        const storeIdNum = Number(storeId);
 
-            messageActions({
-              message,
-              setElementProps: null,
+        if (!isNaN(storeIdNum)) {
+          value.items.forEach((i) => {
+            const onClick = async () => {
+              const message = await i.onClick?.(storeIdNum);
+
+              this.dispatchMessage(message, plugin.name);
+            };
+
+            const { items: _, ...rest } = i;
+
+            newItems.push({
+              ...rest,
+              onClick,
+              icon: `${plugin.iconUrl}/assets/${i.icon}?hash=${plugin.version}`,
               pluginName: plugin.name,
-              setSettingsPluginDialogVisible:
-                this.setSettingsPluginDialogVisible,
-              setCurrentSettingsDialogPlugin:
-                this.setCurrentSettingsDialogPlugin,
-              updatePluginStatus: this.updatePluginStatus,
-              updatePropsContext: null,
-              setPluginDialogVisible: this.setPluginDialogVisible,
-              setPluginDialogProps: this.setPluginDialogProps,
-              updateContextMenuItems: this.updateContextMenuItems,
-              updateInfoPanelItems: this.updateInfoPanelItems,
-              updateMainButtonItems: this.updateMainButtonItems,
-              updateProfileMenuItems: this.updateProfileMenuItems,
-              updateEventListenerItems: this.updateEventListenerItems,
-              updateFileItems: this.updateFileItems,
-              updateCreateDialogProps: null,
-              updatePlugin: null,
             });
-          };
-
-          newItems.push({
-            ...i,
-            onClick,
-            icon: `${plugin.iconUrl}/assets/${i.icon}?hash=${plugin.version}`,
           });
-        });
+        }
       }
 
       const onClick = async () => {
@@ -929,37 +955,21 @@ class PluginStore {
         const currStoreId = this.selectedFolderStore.id;
         if (!currStoreId) return;
 
-        const message = await value.onClick(currStoreId);
+        const currStoreIdNum = Number(currStoreId);
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        if (isNaN(currStoreIdNum)) return;
+
+        const message = await value.onClick(currStoreIdNum);
+
+        this.dispatchMessage(message, plugin.name);
       };
 
       this.mainButtonItems.set(key, {
         ...value,
         onClick,
-
         pluginName: plugin.name,
-
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
-        items: newItems.length > 0 ? newItems : null,
+        items: newItems.length > 0 ? newItems : undefined,
       });
     });
   };
@@ -1006,33 +1016,13 @@ class PluginStore {
 
         const message = await value.onClick();
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage(message, plugin.name);
       };
 
       this.profileMenuItems.set(key, {
         ...value,
         onClick,
-
         pluginName: plugin.name,
-
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       });
     });
@@ -1079,31 +1069,12 @@ class PluginStore {
 
         const message = await value.eventHandler();
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage(message, plugin.name);
       };
 
       this.eventListenerItems.set(key, {
         ...value,
         eventHandler,
-
         pluginName: plugin.name,
       });
     });
@@ -1174,25 +1145,7 @@ class PluginStore {
 
         const message = await value.onClick(item);
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage(message, plugin.name);
       };
 
       this.fileItems.set(key, {
@@ -1200,7 +1153,6 @@ class PluginStore {
         onClick,
         fileIcon,
         fileIconTile,
-
         pluginName: plugin.name,
       });
     });
@@ -1232,7 +1184,7 @@ class PluginStore {
   }
 
   get contextMenuItemsList() {
-    const items: { key: string; value: IContextMenuItem }[] = Array.from(
+    const items: { key: string; value: IContextMenuItemClient }[] = Array.from(
       this.contextMenuItems,
       ([key, value]) => {
         return { key, value: { ...value } };

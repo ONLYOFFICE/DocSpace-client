@@ -239,7 +239,7 @@ class SettingsSetupStore {
     this.integration.smtpSettings.initialSettings = { ...storeSettings };
   };
 
-  setInitSMTPSettings = async () => {
+  setInitSMTPSettings = async (password) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
@@ -247,6 +247,10 @@ class SettingsSetupStore {
       const result = await getSMTPSettings(abortController.signal);
 
       if (!result) return;
+
+      if (password) {
+        result.credentialsUserPassword = password;
+      }
 
       this.setSMTPFields(result);
     } catch (error) {
@@ -284,9 +288,15 @@ class SettingsSetupStore {
   };
 
   updateSMTPSettings = async () => {
-    await setSMTPSettings(this.integration.smtpSettings.settings);
+    const password =
+      this.integration.smtpSettings.settings.credentialsUserPassword;
 
-    this.setInitSMTPSettings();
+    return setSMTPSettings(this.integration.smtpSettings.settings).then(
+      (result) => {
+        this.setInitSMTPSettings(password);
+        return result;
+      },
+    );
   };
 
   setSMTPSettings = (settings) => {

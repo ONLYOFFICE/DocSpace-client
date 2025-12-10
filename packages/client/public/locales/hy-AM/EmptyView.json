@@ -47,6 +47,8 @@
   "InviteRootRoomDescription": "Ուղարկեք հրավեր՝ ձեր {{productName}}-ին նոր անդամներ ավելացնելու համար",
   "InviteUsersOptionDescription": "Ավելացնել պորտալի անդամներ սենյակում համատեղ խմբագրման համար",
   "ManageAccess": "Կառավարել մուտքը",
+  "MigrationDataDescription": "Փոխանցեք ձեր տվյալները {{productName}} {{organizationName}} Workspace-ից, Google Workspace-ից կամ Nextcloud-ից։",
+  "MigrationDataTitle": "Ներմուծել տվյալներ",
   "NoRecentFilesHereYet": "Այստեղ դեռևս վերջերս բացված ֆայլեր չկան",
   "PublicRoomEmptyTitle": "Բարի գալուստ Հանրային սենյակ",
   "SectionsUploadDescription": "Վերբեռնեք ցանկացած տեսակի ֆայլ {{sectionNameFirst}} կամ {{sectionNameSecond}}-ից",

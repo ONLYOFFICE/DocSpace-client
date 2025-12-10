@@ -39,6 +39,7 @@ import { useEndAnimation } from "@/hooks/useEndAnimation";
 import { getIsLicenseDateExpired, getPaymentDate, getDaysLeft } from "@/lib";
 import { TLicenseQuota } from "@docspace/shared/api/portal/types";
 import { TFilesSettings } from "@docspace/shared/api/files/types";
+import styles from "./payments.module.scss";
 
 const PaymentsPage = ({
   isTrial,
@@ -122,25 +123,27 @@ const PaymentsPage = ({
   }, [dueDate]);
 
   return (
-    <LoaderWrapper isLoading={isLoading}>
-      <StandalonePage
-        isTrial={isTrial}
-        setPaymentsLicense={setPaymentsLicense}
-        acceptPaymentsLicense={acceptPaymentsLicense}
-        isLicenseCorrect={isLicenseCorrect}
-        salesEmail={salesEmail}
-        isLicenseDateExpired={isLicenseDateExpired}
-        isDeveloper={isDeveloper}
-        buyUrl={buyUrl}
-        trialDaysLeft={trialDaysLeft}
-        paymentDate={paymentDate}
-        isEnterprise={isEnterprise}
-        logoText={logoText}
-        docspaceFaqUrl={docspaceFaqUrl}
-        licenseQuota={licenseQuota}
-        openOnNewPage={shouldOpenEditorInNewTab()}
-      />
-    </LoaderWrapper>
+    <div className={styles.wrapper}>
+      <LoaderWrapper isLoading={isLoading}>
+        <StandalonePage
+          isTrial={isTrial}
+          setPaymentsLicense={setPaymentsLicense}
+          acceptPaymentsLicense={acceptPaymentsLicense}
+          isLicenseCorrect={isLicenseCorrect}
+          salesEmail={salesEmail}
+          isLicenseDateExpired={isLicenseDateExpired}
+          isDeveloper={isDeveloper}
+          buyUrl={buyUrl}
+          trialDaysLeft={trialDaysLeft}
+          paymentDate={paymentDate}
+          isEnterprise={isEnterprise}
+          logoText={logoText}
+          docspaceFaqUrl={docspaceFaqUrl}
+          licenseQuota={licenseQuota}
+          openOnNewPage={shouldOpenEditorInNewTab()}
+        />
+      </LoaderWrapper>
+    </div>
   );
 };
 

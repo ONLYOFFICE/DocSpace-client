@@ -30,6 +30,7 @@ import {
   TFeedAction,
   TFeedData,
   RoomMember,
+  FeedActionKeys,
 } from "@docspace/shared/api/rooms/types";
 
 import HistoryUserList from "./UserList";

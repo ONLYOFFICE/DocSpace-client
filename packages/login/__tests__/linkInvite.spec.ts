@@ -27,7 +27,9 @@
 import {
   endpoints,
   HEADER_CONFIRM_WITHOUT_EMAIL,
+  HEADER_LINK_EXPIRED,
   HEADER_NO_STANDALONE_SETTINGS,
+  HEADER_QUOTA_FAILED,
 } from "@docspace/shared/__mocks__/e2e";
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
@@ -346,4 +348,32 @@ test("link invite registration error no standalone", async ({
     ],
     { fullPage: true },
   );
+});
+
+test("link invite quota failed", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_QUOTA_FAILED,
+  ]);
+
+  await page.goto(URL_WITH_PARAMS);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "link-invite",
+    "link-invite-quota-failed.png",
+  ]);
+});
+
+test("link invite expired", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_LINK_EXPIRED,
+  ]);
+
+  await page.goto(URL_WITH_PARAMS);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "link-invite",
+    "link-invite-expired.png",
+  ]);
 });

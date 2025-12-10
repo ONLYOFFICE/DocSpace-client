@@ -115,6 +115,12 @@ test.describe("Favorites", () => {
     const removeFromFavorites = page.getByTestId("remove-from-favorites");
     await expect(removeFromFavorites).toBeVisible();
 
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "favorites",
+      "favorites-context-menu.png",
+    ]);
+
     await mockRequest.router([endpoints.favoritesDelete]);
     await mockRequest.router([endpoints.getFile]);
 

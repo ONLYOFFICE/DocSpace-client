@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Stuur uw formulier naar de openbare galerij zodat anderen het in hun werk kunnen gebruiken. Zodra het formulier door de moderatie komt, ontvangt u een bericht en wordt u beloond voor uw bijdrage.",
   "SuggestChanges": "Wijzigingen voorstellen",
   "TemplateInfo": "Sjabloon info",
-  "ViewAllTemplates": "Bekijk alle sjablonen"
+  "ViewAllTemplates": "Bekijk alle sjablonen",
+  "ErrorViewDescriptionNetworkError": "Het lijkt erop dat er geen internetverbinding is."
 }

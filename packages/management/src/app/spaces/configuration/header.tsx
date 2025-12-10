@@ -28,13 +28,13 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 
-import { StyledHeader } from "./configuration.styled";
+import styles from "./configuration.module.scss";
 
 export const Header = () => {
   const { t } = useTranslation(["Management", "Common"]);
 
   return (
-    <StyledHeader>
+    <div className={styles.header}>
       <Text fontSize="12px" fontWeight={400}>
         {t("Subheader")}
       </Text>
@@ -46,6 +46,6 @@ export const Header = () => {
           productName: t("Common:ProductName"),
         })}
       </Text>
-    </StyledHeader>
+    </div>
   );
 };

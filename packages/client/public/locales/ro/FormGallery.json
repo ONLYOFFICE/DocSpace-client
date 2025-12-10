@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Depuneți formularul dvs la galeria publică pentru a permite altora să-l folosească în lucrul. Odată ce formularul trece prin moderare, veți primi o notificare și o recompensă pentru contribuția dvs.",
   "SuggestChanges": "Propuneri privind modificări",
   "TemplateInfo": "Informații despre șablon",
-  "ViewAllTemplates": "Afișează toate șabloanele"
+  "ViewAllTemplates": "Afișează toate șabloanele",
+  "ErrorViewDescriptionNetworkError": "Se pare că nu aveți conexiune la Internet."
 }

@@ -881,11 +881,13 @@
 .light {
   --header-background-color: #{$gray-light};
   --header-height: 48px;
+  --header-burger-color: #{$light-gray-dark};
 }
 
 .dark {
   --header-background-color: #{$dark-gray-light};
   --header-height: 48px;
+  --header-burger-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -3038,6 +3040,26 @@
   --profile-oauth-row-background: #{$light-dark-gray-hover};
   --profile-oauth-row-border: 1px solid #{$gray-dark-strong};
   --profile-oauth-checked-background: #{$light-dark-gray-hover};
+}
+
+.light {
+  --management-disable-color: #{$gray};
+  --management-badge-color: #{$light-status-positive};
+  --management-bar-background: #{$gray-light};
+  --management-text-color: #{$gray};
+  --management-error-color: #{$light-error-status};
+  --management-row-border-color: #{$gray-light-mid};
+  --management-cross-icon-fill: #{$gray};
+}
+
+.dark {
+  --management-disable-color: #{$gray-dark};
+  --management-badge-color: #{$dark-status-positive};
+  --management-bar-background: #{$dark-gray-light};
+  --management-text-color: #{$gray-dark};
+  --management-error-color: #{$dark-error-status};
+  --management-row-border-color: #{$gray-dark-strong};
+  --management-cross-icon-fill: #{$gray-dark};
 }
 
 .light {

@@ -1,0 +1,28 @@
+{
+  "key_path": "ErrorViewDescriptionNetworkError",
+  "content": "It seems there is no Internet connection",
+  "content_en_sha1_hash": "52188b0e6ea9f15f1e9e06ad750c7b482bdb5975",
+  "created_at": "2025-12-08T14:10:11.334Z",
+  "updated_at": "2025-12-08T14:12:06.601Z",
+  "comment": {
+    "text": "This text appears in the error view within the Form Gallery page. It displays a user-friendly message indicating a lack of internet connectivity. Translators should ensure the message clearly conveys the error and its cause.",
+    "is_auto": true,
+    "updated_at": "2025-12-08T14:12:06.601Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/FormGallery/ErrorView/index.js",
+      "line_number": 70,
+      "context": "),\n );\n };\n \n const descriptionText = oformsNetworkError\n ? t(\"FormGallery:ErrorViewDescriptionNetworkError\")\n : t(\"FormGallery:ErrorViewDescription\");\n \n return (\n <Styled.ErrorView\n imageSrc={ErrorImageSvgUrl}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

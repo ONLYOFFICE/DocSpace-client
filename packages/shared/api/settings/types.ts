@@ -230,6 +230,7 @@ export type THelpCenterEntries = {
   dataImport: string;
   apikeys: string;
   aisettings: string;
+  documentService: string;
 };
 
 export type TIntegrationsEntries = {

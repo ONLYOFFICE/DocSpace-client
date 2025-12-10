@@ -82,4 +82,48 @@ test.describe("Favorites", () => {
       "favorites-empty.png",
     ]);
   });
+
+  test("should remove file from favorites", async ({
+    page,
+    mockRequest,
+    wsMock,
+  }) => {
+    await mockRequest.router([
+      endpoints.favorites,
+      endpoints.settingsWithSocket,
+    ]);
+    await wsMock.setupWebSocketMock();
+
+    await page.goto("/files/favorite/filter?folder=2");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const title = table.locator(".table-list-item a").first();
+
+    await expect(title).toBeVisible();
+    await expect(title).toHaveText("New document");
+
+    await title.click({ button: "right" });
+
+    const removeFromFavorites = page.getByTestId("remove-from-favorites");
+    await expect(removeFromFavorites).toBeVisible();
+
+    await mockRequest.router([endpoints.favoritesDelete]);
+    await mockRequest.router([endpoints.getFile]);
+
+    await removeFromFavorites.click();
+
+    wsMock.emitModifyFolder({
+      cmd: "delete",
+      id: 1,
+      type: "file",
+      data: "",
+    });
+
+    const emptyView = page.getByTestId("empty-view");
+    await expect(emptyView).toBeVisible();
+
+    wsMock.closeConnection();
+  });
 });

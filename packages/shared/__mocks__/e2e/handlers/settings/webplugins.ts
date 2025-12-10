@@ -25,12 +25,90 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { BASE_URL, API_PREFIX } from "../../utils";
+import type { TAPIPlugin } from "../../../../api/plugins/types";
 
 export const PATH_WEB_PLUGINS = "settings/webplugins";
 
-const url = `${BASE_URL}${API_PREFIX}${PATH_WEB_PLUGINS}`;
+const url = `${BASE_URL}/${API_PREFIX}/${PATH_WEB_PLUGINS}`;
 
-export const webPluginsSuccess = {
+// Mock plugin data
+export const mockPlugin1: TAPIPlugin = {
+  name: "test-plugin-one",
+  version: "1.1.0",
+  minDocSpaceVersion: "3.0.0",
+  description: "Test Plugin One for e2e testing",
+  license: "Apache-2.0",
+  author: "ONLYOFFICE",
+  homePage: "https://github.com/ONLYOFFICE/docspace-plugins",
+  pluginName: "Testpluginone",
+  scopes: "ContextMenu,InfoPanel,MainButton",
+  image: "icon.png",
+  createBy: {
+    id: "00000000-0000-0000-0000-000000000000",
+    displayName: "Admin",
+    avatarSmall: "",
+    profileUrl: "",
+    hasAvatar: false,
+  },
+  createOn: new Date("2024-01-01T00:00:00Z"),
+  enabled: true,
+  system: false,
+  url: "/plugins/test-plugin-one/plugin.js",
+  settings: "",
+};
+
+export const mockPlugin2: TAPIPlugin = {
+  name: "test-plugin-two",
+  version: "1.2.0",
+  minDocSpaceVersion: "3.0.0",
+  description: "Test Plugin Two for e2e testing",
+  license: "Apache-2.0",
+  author: "ONLYOFFICE",
+  homePage: "https://github.com/ONLYOFFICE/docspace-plugins",
+  pluginName: "Testplugintwo",
+  scopes: "ContextMenu,InfoPanel,MainButton",
+  image: "icon.png",
+  createBy: {
+    id: "00000000-0000-0000-0000-000000000000",
+    displayName: "Admin",
+    avatarSmall: "",
+    profileUrl: "",
+    hasAvatar: false,
+  },
+  createOn: new Date("2024-01-01T00:00:00Z"),
+  enabled: true,
+  system: false,
+  url: "/plugins/test-plugin-two/plugin.js",
+  settings: "",
+};
+
+export const mockPlugin3: TAPIPlugin = {
+  name: "test-plugin-three",
+  version: "1.3.0",
+  minDocSpaceVersion: "10.0.0",
+  description: "Test Plugin Three for e2e testing",
+  license: "Apache-2.0",
+  author: "ONLYOFFICE",
+  homePage: "https://github.com/ONLYOFFICE/docspace-plugins",
+  pluginName: "Testpluginthree",
+  scopes: "ContextMenu,InfoPanel,MainButton",
+  image: "icon.png",
+  createBy: {
+    id: "00000000-0000-0000-0000-000000000000",
+    displayName: "Admin",
+    avatarSmall: "",
+    profileUrl: "",
+    hasAvatar: false,
+  },
+  createOn: new Date("2024-01-01T00:00:00Z"),
+  enabled: true,
+  system: false,
+  url: "/plugins/test-plugin-three/plugin.js",
+  settings: "",
+};
+
+// Empty plugins list
+export const webPluginsEmpty = {
   response: [],
   count: 0,
   links: [
@@ -43,6 +121,74 @@ export const webPluginsSuccess = {
   statusCode: 200,
 };
 
-export const webPluginsHandler = () => {
-  return new Response(JSON.stringify(webPluginsSuccess));
+// Plugins list with data
+export const webPluginsWithData = {
+  response: [mockPlugin1, mockPlugin3],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Plugin upload response (for add operations)
+export const webPluginsUploadResponse = {
+  response: mockPlugin2,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Updated plugin response
+export const webPluginsUpdatedResponse = {
+  count: 0,
+  links: [
+    {
+      href: url,
+      action: "PUT",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Delete success response
+export const webPluginsDeleteResponse = {
+  count: 0,
+  links: [
+    {
+      href: url,
+      action: "DELETE",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+// Handlers
+export const webPluginsHandler = (type: "empty" | "withData" = "empty") => {
+  const data = type === "empty" ? webPluginsEmpty : webPluginsWithData;
+  return new Response(JSON.stringify(data));
+};
+
+export const webPluginsAddHandler = () => {
+  return new Response(JSON.stringify(webPluginsUploadResponse));
+};
+
+export const webPluginsUpdateHandler = () => {
+  return new Response(JSON.stringify(webPluginsUpdatedResponse));
+};
+
+export const webPluginsDeleteHandler = () => {
+  return new Response(JSON.stringify(webPluginsDeleteResponse));
 };

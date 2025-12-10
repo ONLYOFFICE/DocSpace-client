@@ -68,6 +68,9 @@ import {
   invitationSettingsHandler,
   PATH_WEB_PLUGINS,
   webPluginsHandler,
+  webPluginsAddHandler,
+  webPluginsUpdateHandler,
+  webPluginsDeleteHandler,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -112,6 +115,7 @@ import {
   HEADER_FILTERED_FOLDER,
   HEADER_FILTERED_ROOMS_LIST,
   HEADER_LIST_CAPABILITIES,
+  HEADER_PLUGINS_SETTINGS,
   HEADER_ROOMS_LIST,
 } from "../utils";
 import { PATH_DELETE_USER } from "./people/self";
@@ -296,6 +300,16 @@ export const endpoints = {
         }),
       ),
   },
+  settingsWithPlugins: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(
+        new Headers({
+          [HEADER_AUTHENTICATED_SETTINGS]: "true",
+          [HEADER_PLUGINS_SETTINGS]: "true",
+        }),
+      ),
+  },
   self: {
     url: `${BASE_URL}${PATH_DELETE_USER}`,
     dataHandler: selfHandler,
@@ -355,6 +369,27 @@ export const endpoints = {
   webPlugins: {
     url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
     dataHandler: webPluginsHandler,
+    method: "GET",
+  },
+  webPluginsWithData: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsHandler.bind(null, "withData"),
+    method: "GET",
+  },
+  webPluginsAdd: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsAddHandler,
+    method: "POST",
+  },
+  webPluginsUpdate: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+    dataHandler: webPluginsUpdateHandler,
+    method: "PUT",
+  },
+  webPluginsDelete: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+    dataHandler: webPluginsDeleteHandler,
+    method: "DELETE",
   },
   thirdPartyCapabilities: {
     url: `${BASE_URL}${PATH_THIRD_PARTY_CAPABILITIES}`,

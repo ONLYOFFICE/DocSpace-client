@@ -96,6 +96,17 @@ export const test = base.extend<{
         .catch((e) => {});
     });
 
+    // Route for plugin files (test plugins)
+    await page.route("*/**/plugins/**", async (route, request) => {
+      const url = request.url().split("/plugins/").at(-1)!.split("?")[0];
+
+      await route
+        .fulfill({
+          path: `./__tests__/plugins/${url}`,
+        })
+        .catch((e) => {});
+    });
+
     // Route for static assets
     // await page.route(
     //   "*/**/static/scripts/config.json",

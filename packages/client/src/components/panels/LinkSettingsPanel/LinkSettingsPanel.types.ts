@@ -43,6 +43,7 @@ export type LinkRolesDropdownProps = {
 
 export type LinkSettingsPanelProps = {
   theme: TTheme;
+  culture: string;
   isVisible: boolean;
   showUsersLimitWarning: boolean;
   filteredAccesses: TComboboxProps["options"];

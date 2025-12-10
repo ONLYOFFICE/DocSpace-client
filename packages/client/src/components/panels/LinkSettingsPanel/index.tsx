@@ -47,11 +47,14 @@ import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { TOption } from "@docspace/shared/components/combobox";
 import { globalColors } from "@docspace/shared/themes";
+import { getCookie } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 const MAX_USERS_COUNT = 1000;
 
 const LinkSettingsPanel = ({
   theme,
+  culture,
   isVisible,
   filteredAccesses,
   onBackClick,
@@ -64,6 +67,7 @@ const LinkSettingsPanel = ({
   showUsersLimitWarning,
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common", "Files"]);
+  const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
   const warningColor = theme?.isBase
     ? globalColors.lightErrorStatus
@@ -283,7 +287,7 @@ const LinkSettingsPanel = ({
 
           <DateTimePicker
             id="link-settings_date-time-picker"
-            locale={moment.locale()}
+            locale={locale}
             hasError={false}
             onChange={(date) => date && setLimitDate(date)}
             openDate={new Date()}

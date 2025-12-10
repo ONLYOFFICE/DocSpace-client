@@ -91,7 +91,7 @@ const InvitePanel = ({
   allowInvitingGuests,
   checkGuests,
   hasGuests,
-  getPortalInviteLink,
+  culture,
   currentUserId,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
@@ -834,6 +834,7 @@ const InvitePanel = ({
       {linkSettingsPanelVisible ? (
         <ModalDialog.Container>
           <LinkSettingsPanel
+            culture={culture}
             theme={theme}
             isVisible={linkSettingsPanelVisible}
             onClose={() => {
@@ -915,7 +916,7 @@ export default inject(
     const { isUserTariffLimit } = currentQuotaStore;
 
     const { isOwner, isAdmin } = userStore.user;
-    const { getPortalInviteLink } = peopleStore.inviteLinksStore;
+    const { culture } = settingsStore;
 
     return {
       folders,
@@ -941,7 +942,7 @@ export default inject(
       allowInvitingGuests,
       checkGuests,
       hasGuests,
-      getPortalInviteLink,
+      culture,
       currentUserId: userStore.user.id,
     };
   },

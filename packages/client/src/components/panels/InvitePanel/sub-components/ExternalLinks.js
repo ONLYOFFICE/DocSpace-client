@@ -33,7 +33,7 @@ import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-com
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 
-import { getCorrectDate } from "@docspace/shared/utils";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 // import { objectToGetParams } from "@docspace/shared/utils/common";
 
@@ -64,6 +64,7 @@ import {
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
 import moment from "moment";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 const ExternalLinks = ({
   t,
@@ -104,6 +105,8 @@ const ExternalLinks = ({
   const warningColor = theme?.isBase
     ? globalColors.lightErrorStatus
     : globalColors.darkErrorStatus;
+
+  const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
   const inputsRef = useRef();
 
@@ -330,7 +333,7 @@ const ExternalLinks = ({
                 fontWeight={600}
                 color={linkIsExpired ? warningColor : null}
               >
-                {getCorrectDate(culture ?? "en", activeLink.expirationDate)}
+                {getCorrectDate(locale, activeLink.expirationDate)}
               </Text>
               {linkIsExpired ? (
                 <HelpButton

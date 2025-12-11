@@ -40,9 +40,15 @@ type AiTileProps = {
   icon: string | React.ReactNode;
   children: React.ReactNode;
   tooltipText?: string;
+  dataTestId?: string;
 };
 
-export const AiTile = ({ icon, children, tooltipText }: AiTileProps) => {
+export const AiTile = ({
+  icon,
+  children,
+  tooltipText,
+  dataTestId = "ai-tile",
+}: AiTileProps) => {
   const tooltipId = useId();
 
   const dataTooltipProps = tooltipText
@@ -50,7 +56,11 @@ export const AiTile = ({ icon, children, tooltipText }: AiTileProps) => {
     : {};
 
   return (
-    <div className={styles.aiTile} {...dataTooltipProps}>
+    <div
+      className={styles.aiTile}
+      {...dataTooltipProps}
+      data-testid={dataTestId}
+    >
       <div className={styles.icon}>
         {typeof icon === "string" ? (
           <img src={icon} alt="ai tile icon" />
@@ -101,6 +111,7 @@ const Header = ({
         {hasError ? (
           <>
             <LoadErrorIcon
+              dataTestId="ai-tile-error-icon"
               className={styles.errorIcon}
               data-tooltip-id={tooltipId}
             />

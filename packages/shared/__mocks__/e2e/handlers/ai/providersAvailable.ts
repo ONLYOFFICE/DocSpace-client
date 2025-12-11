@@ -24,42 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
+export const PATH_AI_PROVIDERS_AVAILABLE = "ai/providers/available";
 
-import { TEndpoint } from "./handlers";
+const successList = {
+  response: [
+    {
+      type: 1,
+      url: "https://api.openai.com/v1",
+    },
+    {
+      type: 2,
+      url: "https://api.together.xyz/v1",
+    },
+    {
+      type: 4,
+      url: "https://api.anthropic.com/v1",
+    },
+    {
+      type: 5,
+      url: "https://openrouter.ai/api/v1",
+    },
+  ],
+  count: 4,
+  status: 0,
+  statusCode: 200,
+};
 
-export class MockRequest {
-  constructor(public readonly page: Page) {}
-
-  async router(endpoints: TEndpoint[]) {
-    await Promise.all(
-      endpoints.map(async (endpoint) => {
-        return this.page.route(endpoint.url, async (route) => {
-          const method = route.request().method();
-
-          if (endpoint.method && endpoint.method !== method) {
-            await route.fallback();
-            return;
-          }
-
-          const json = await endpoint.dataHandler().json();
-
-          await route.fulfill({ json, status: json.statusCode ?? 200 });
-        });
-      }),
-    );
-  }
-
-  async setHeaders(url: string, headers: string[]) {
-    await this.page.route(url, async (route, request) => {
-      const objHeaders: { [key: string]: "true" } = {};
-      headers.forEach((item) => (objHeaders[item] = "true"));
-
-      const newHeaders = {
-        ...request.headers(),
-        ...objHeaders,
-      };
-      await route.fallback({ headers: newHeaders });
-    });
-  }
-}
+export const aiProvidersAvailableHandler = () => {
+  return new Response(JSON.stringify(successList));
+};

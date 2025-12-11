@@ -30,7 +30,19 @@ export { aiConfigHandler, PATH_AI_CONFIG } from "./config";
 
 export { aiModelsHandler, PATH_AI_MODELS } from "./models";
 
-export { aiProvidersHandler, PATH_AI_PROVIDERS } from "./providers";
+export {
+  aiProvidersHandler,
+  aiProvidersPostHandler,
+  aiProvidersDeleteHandler,
+  aiProvidersPutHandler,
+  PATH_AI_PROVIDERS,
+  PATH_AI_PROVIDER,
+} from "./providers";
+
+export {
+  aiProvidersAvailableHandler,
+  PATH_AI_PROVIDERS_AVAILABLE,
+} from "./providersAvailable";
 
 export { aiServerHandler, PATH_AI_SERVER } from "./server";
 

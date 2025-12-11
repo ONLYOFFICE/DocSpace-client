@@ -47,7 +47,7 @@ import type { TDomainValidator } from "@docspace/shared/api/settings/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 
-import { StyledBody } from "./configuration.styled";
+import styles from "./configuration.module.scss";
 
 type CheckDomainResponse = {
   value: boolean;
@@ -73,7 +73,7 @@ export const Body = ({
       <Text fontSize="13px" fontWeight={600}>
         {t("Common:Domain")}
       </Text>
-      <Text className="domain-description">(example.com)</Text>
+      <Text className={styles.domainDescription}>(example.com)</Text>
     </>
   );
 
@@ -134,7 +134,7 @@ export const Body = ({
   ) as string;
 
   return (
-    <StyledBody>
+    <div className={styles.body}>
       <FieldContainer
         isVertical
         labelText={domainFieldLabel}
@@ -182,6 +182,6 @@ export const Body = ({
         isLoading={isLoading}
         // scale={false}
       />
-    </StyledBody>
+    </div>
   );
 };

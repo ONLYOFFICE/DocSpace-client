@@ -42,6 +42,7 @@ const ErrorView = ({
   setGallerySelected,
   categoryType,
   setIsLoading,
+  oformsNetworkError,
 }) => {
   const navigate = useNavigate();
   const isMobile = isMobileUtils();
@@ -65,12 +66,16 @@ const ErrorView = ({
     );
   };
 
+  const descriptionText = oformsNetworkError
+    ? t("FormGallery:ErrorViewDescriptionNetworkError")
+    : t("FormGallery:ErrorViewDescription");
+
   return (
     <Styled.ErrorView
       imageSrc={ErrorImageSvgUrl}
       imageAlt="Error Screen Gallery image"
       headerText={t("FormGallery:ErrorViewHeader")}
-      descriptionText={t("FormGallery:ErrorViewDescription")}
+      descriptionText={descriptionText}
       buttons={
         <Button
           primary
@@ -94,4 +99,5 @@ export default inject(({ oformsStore, filesStore, clientLoadingStore }) => ({
     clientLoadingStore.setIsSectionFilterLoading(true, false);
     clientLoadingStore.setIsSectionBodyLoading(true, false);
   },
+  oformsNetworkError: oformsStore.oformsNetworkError,
 }))(withTranslation("Common", "FormGallery")(observer(ErrorView)));

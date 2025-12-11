@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "قم بتسليم النموذج الخاص بك إلى المعرض العام للسماح للمستخدمين استخدامه في أعمالهم. بمجرد أن يتم قبول النموذج سيتم إعلامك وسيتم مكافئتك على مساهمتك.",
   "SuggestChanges": "أقترح التغييرات",
   "TemplateInfo": "معلومات النموذج",
-  "ViewAllTemplates": "إظهار كافة القوالب"
+  "ViewAllTemplates": "إظهار كافة القوالب",
+  "ErrorViewDescriptionNetworkError": "يبدو أنه لا يوجد اتصال بالإنترنت"
 }

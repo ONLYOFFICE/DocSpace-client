@@ -17,7 +17,8 @@
       "!tests/*",
       "!analyse.js",
       "!scripts/*",
-      "!**/*.html"
+      "!**/*.html",
+      "!__tests__/plugins/*"
     ]
   },
   "linter": {

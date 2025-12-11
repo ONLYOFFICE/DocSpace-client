@@ -442,6 +442,10 @@ export const endpoints = {
     dataHandler: favoritesHandler.bind(null, "delete"),
     method: "DELETE",
   },
+  favoritesMany: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "success_many"),
+  },
   getFile: {
     url: PATH_GET_FILE,
     dataHandler: getFileHandler,

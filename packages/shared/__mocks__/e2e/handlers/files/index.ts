@@ -47,3 +47,5 @@ export * from "./sharedWithMe";
 export * from "./share";
 
 export * from "./favorites";
+
+export * from "./documents";

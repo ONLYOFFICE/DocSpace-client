@@ -26,10 +26,11 @@
 
 import { BASE_URL, API_PREFIX } from "../../utils";
 
-type ResponseType = "delete" | "success" | "success_many" | "empty";
+type ResponseType = "mark" | "delete" | "success" | "success_many" | "empty";
 
 export const PATH_FAVORITES = /.*\/api\/2\.0\/files\/\d+\?.*/;
 export const PATH_DELETE_FAVORITES = /.*\/api\/2\.0\/files\/favorites$/;
+export const PATH_ADD_TO_FAVORITES = /.*\/api\/2\.0\/files\/favorites$/;
 export const PATH_GET_FILE = /.*\/api\/2\.0\/files\/\d+$/;
 
 const file = [
@@ -1765,6 +1766,19 @@ export const deleteFavorites = {
   statusCode: 200,
 };
 
+export const addToFavoritesResponse = {
+  response: true,
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/files/favorites`,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const getFile = {
   response: {
     files: [],
@@ -1891,6 +1905,8 @@ export const favoritesHandler = (type: ResponseType) => {
     case "delete":
       return new Response(JSON.stringify(deleteFavorites));
     case "success_many":
+      return new Response(JSON.stringify(successFavoritesMany));
+    case "mark":
       return new Response(JSON.stringify(successFavoritesMany));
     case "success":
     default:

@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Iesniedziet savu veidlapu publiskajā galerijā, lai ļautu citiem to izmantot savā darbā. Tiklīdz veidlapa tiks pārbaudīta, jūs saņemsiet paziņojumu un saņemsiet atlīdzību par jūsu ieguldījumu.",
   "SuggestChanges": "Ieteikt izmaiņas",
   "TemplateInfo": "Informācija par veidni",
-  "ViewAllTemplates": "Skatīt visas veidnes"
+  "ViewAllTemplates": "Skatīt visas veidnes",
+  "ErrorViewDescriptionNetworkError": "Šķiet, nav pieejams interneta savienojums."
 }

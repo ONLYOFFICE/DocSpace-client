@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Envíe su formulario a la galería pública para que otros puedan utilizarlo en su trabajo. Una vez que el formulario pase la moderación, recibirá una notificación y una recompensa por su contribución.",
   "SuggestChanges": "Sugerir cambios",
   "TemplateInfo": "Información sobre la plantilla",
-  "ViewAllTemplates": "Ver todas las plantillas"
+  "ViewAllTemplates": "Ver todas las plantillas",
+  "ErrorViewDescriptionNetworkError": "Parece que no hay conexión a Internet"
 }

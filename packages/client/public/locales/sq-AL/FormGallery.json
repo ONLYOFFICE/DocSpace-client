@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Paraqisni formularin tuaj në galerinë publike për të lejuar të tjerët ta përdorin atë në punën e tyre. Pasi formulari të kalojë moderimin, do të njoftoheni dhe do të shpërbleheni për kontributin tuaj.\"",
   "SuggestChanges": "Sugjeroni ndryshime",
   "TemplateInfo": "Info shablloni",
-  "ViewAllTemplates": "Shikoni të gjitha shabllonet"
+  "ViewAllTemplates": "Shikoni të gjitha shabllonet",
+  "ErrorViewDescriptionNetworkError": "Shkruan se nuk ka lidhje me internet."
 }

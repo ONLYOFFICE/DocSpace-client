@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Вие сте собственикът на тази стая. Преди да напуснете стаята, трябва да прехвърлите ролята на собственик на друг потребител.",
   "SuggestChanges": "Предложи промени",
   "TemplateInfo": "Информация за шаблона",
-  "ViewAllTemplates": "Прегледай всички шаблони"
+  "ViewAllTemplates": "Прегледай всички шаблони",
+  "ErrorViewDescriptionNetworkError": "Изглежда няма интернет връзка"
 }

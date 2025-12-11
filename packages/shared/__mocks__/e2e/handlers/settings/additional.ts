@@ -24,32 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { BASE_URL, API_PREFIX } from "../../utils";
 
-import React, { useState } from "react";
-import { ServerStyleSheet, StyleSheetManager } from "styled-components";
-import { useServerInsertedHTML } from "next/navigation";
+export const PATH_SETTINGS_ADDITIONAL = "settings/rebranding/additional";
 
-export default function StyledComponentsRegistry({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // Only create stylesheet once with lazy initial state
-  // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+const success = {
+  response: {
+    feedbackAndSupportEnabled: true,
+    helpCenterEnabled: true,
+    isDefault: true,
+    licenseAgreementsEnabled: true,
+    startDocsEnabled: true,
+    userForumEnabled: true,
+    videoGuidesEnabled: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_SETTINGS_ADDITIONAL}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-  useServerInsertedHTML(() => {
-    const styles = styledComponentsStyleSheet.getStyleElement();
-    styledComponentsStyleSheet.instance.clearTag();
-    return styles;
-  });
-
-  if (typeof window !== "undefined") return children;
-
-  return (
-    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-      {children}
-    </StyleSheetManager>
-  );
-}
+export const settingsAdditionalHandler = () => {
+  return new Response(JSON.stringify(success));
+};

@@ -24,43 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
+import { BASE_URL, API_PREFIX } from "../../utils";
 
-import styled from "styled-components";
-import { mobile } from "@docspace/shared/utils";
+export const PATH_AI_CONFIG = "ai/config";
 
-export const StyledWrapper = styled.header`
-  position: relative;
-  height: 48px;
-  background-color: ${(props) => props.theme.header.backgroundColor};
-  display: none;
-  padding: 0 16px;
+const success = {
+  response: {
+    webSearchEnabled: true,
+    vectorizationEnabled: true,
+    aiReady: true,
+    portalMcpServerId: "id",
+    embeddingModel: "text-embedding-3-small",
+    knowledgeSearchToolName: "docspace_knowledge_search",
+    webSearchToolName: "docspace_web_search",
+    webCrawlingToolName: "docspace_web_crawling",
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-  @media ${mobile} {
-    display: flex;
-    align-items: center;
-  }
-`;
-
-export const StyledHeader = styled.header`
-  height: 48px;
-  width: 100%;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const StyledMenuIcon = styled(MenuIcon)`
-  width: 20px;
-  height: 20px;
-
-  path {
-    fill: ${(props) => props.theme.catalog.headerBurgerColor};
-  }
-
-  cursor: pointer;
-`;
+export const aiConfigHandler = () => {
+  return new Response(JSON.stringify(success));
+};

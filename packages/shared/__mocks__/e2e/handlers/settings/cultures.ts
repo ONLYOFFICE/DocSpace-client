@@ -24,56 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
+import { BASE_URL, API_PREFIX } from "../../utils";
 
-export const StyledWrapper = styled.div<{ isDisabled: boolean }>`
-  width: 100%;
-  max-width: 700px;
+export const PATH_CULTURES = "settings/cultures";
 
-  .header {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    margin-bottom: 8px;
-  }
+const url = `${BASE_URL}/${API_PREFIX}/${PATH_CULTURES}`;
 
-  .wrapper-block {
-    margin-top: 20px;
+export const culturesSuccess = {
+  response: [
+    "az",
+    "cs",
+    "de",
+    "en-GB",
+    "en-US",
+    "es",
+    "fr",
+    "it",
+    "lv",
+    "nl",
+    "pl",
+    "pt-BR",
+    "pt",
+    "ro",
+    "sk",
+    "sl",
+    "sq-AL",
+    "fi",
+    "vi",
+    "tr",
+    "el-GR",
+    "bg",
+    "ru",
+    "sr-Cyrl-RS",
+    "sr-Latn-RS",
+    "uk-UA",
+    "hy-AM",
+    "ar-SA",
+    "si",
+    "lo-LA",
+    "zh-CN",
+    "ja-JP",
+    "ko-KR",
+  ],
+  count: 33,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-    .description {
-      margin-top: 9px;
-      margin-bottom: 12px;
-    }
-  }
-
-  .checkbox {
-    margin-top: 20px;
-    margin-bottom: 24px;
-  }
-
-  .badge {
-    margin-inline-start: 4px;
-    padding: 4px 8px;
-    border-radius: 3px;
-    border: 1px solid ${globalColors.lightStatusPositive};
-    color: ${globalColors.lightStatusPositive};
-  }
-
-  ${(props) =>
-    props.isDisabled &&
-    css`
-      color: ${props.theme.text.disableColor};
-      pointer-events: none;
-      cursor: default;
-
-      label {
-        color: ${props.theme.text.disableColor};
-      }
-
-      path {
-        fill: ${props.theme.text.disableColor};
-      }
-    `}
-}
-`;
+export const culturesHandler = (): Response => {
+  return new Response(JSON.stringify(culturesSuccess));
+};

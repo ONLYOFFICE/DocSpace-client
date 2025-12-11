@@ -37,7 +37,6 @@ import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@docspace/shared/utils";
 import type { Nullable } from "@docspace/shared/types";
-import type { TError } from "@docspace/shared/utils/axiosClient";
 
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
@@ -49,7 +48,6 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType, SearchArea } from "@docspace/shared/enums";
 
@@ -94,13 +92,10 @@ type ViewProps = UseContactsProps &
 
     canUseChat: AccessRightsStore["canUseChat"];
 
-    isErrorAIAgentNotAvailable: FilesStore["isErrorAIAgentNotAvailable"];
-    setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
-
-    isAdmin: AuthStore["isAdmin"];
     aiConfig: SettingsStore["aiConfig"];
     isResultTab: AiRoomStore["isResultTab"];
     resultId: AiRoomStore["resultId"];
+    setHotkeyCaret: FilesStore["setHotkeyCaret"];
   };
 
 const View = ({
@@ -168,7 +163,6 @@ const View = ({
 
   aiAgentSelectorDialogProps,
   setAiAgentSelectorDialogProps,
-  setIsErrorAccountNotAvailable,
 
   canUseChat,
   aiConfig,
@@ -247,11 +241,8 @@ const View = ({
     gallerySelected,
     userId,
 
-    scrollToTop,
     selectedFolderStore,
     wsCreatedPDFForm,
-    setHotkeyCaret,
-    currentView,
   });
 
   const { getProfileInitialValue } = useProfileBody({
@@ -501,16 +492,6 @@ const View = ({
           return;
         }
 
-        const typedError = error as TError;
-
-        if (
-          typedError?.response?.data?.error?.message === "Access denied" &&
-          isContactsPage
-        ) {
-          setIsErrorAccountNotAvailable(true);
-          setIsSectionHeaderLoading(false, false);
-        }
-
         setIsChangePageRequestRunning(false);
         setIsLoading(false);
       }
@@ -518,6 +499,20 @@ const View = ({
 
     getView();
   }, [location, isContactsPage, isProfilePage, isChatPage, showToastAccess]);
+
+  React.useEffect(() => {
+    if (isLoading || currentView === "chat") return;
+
+    const scroll = document.getElementsByClassName("section-body");
+
+    if (scroll && scroll[0]) {
+      const firstChild = scroll[0] as HTMLElement;
+      firstChild.focus();
+      setHotkeyCaret(null);
+    }
+
+    scrollToTop();
+  }, [isLoading, currentView, scrollToTop]);
 
   React.useEffect(() => {
     if (isResultTab && !canUseChat && !showBodyLoader) {
@@ -558,7 +553,7 @@ const View = ({
 
   const shouldRedirectToResultStorage =
     currentView === "chat" &&
-    !!selectedFolderStore.id &&
+    selectedFolderStore.isAIRoom &&
     !canUseChat &&
     !showBodyLoader;
 
@@ -666,8 +661,6 @@ export const ViewComponent = inject(
       aiAgentsController,
 
       clearFiles,
-
-      setIsErrorAccountNotAvailable,
     } = filesStore;
 
     const {
@@ -767,7 +760,6 @@ export const ViewComponent = inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
-      setIsErrorAccountNotAvailable,
 
       canUseChat,
       aiConfig,

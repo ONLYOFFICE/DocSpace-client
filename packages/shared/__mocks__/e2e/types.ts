@@ -24,23 +24,4 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
-export const StyledBrandingPage = styled.div`
-  max-width: 700px;
-  width: 100%;
-  margin-bottom: 16px;
-
-  hr {
-    margin: 24px 0;
-    border: none;
-    border-top: ${(props) => props.theme.client.settings.separatorBorder};
-  }
-
-  .header {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
-    padding-bottom: 9px;
-  }
-`;
+export type MethodType = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";

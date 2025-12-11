@@ -27,7 +27,12 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TextInput } from "@docspace/shared/components/text-input";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -140,14 +145,18 @@ const CustomSettings = (props) => {
           *
         </Text>
       </div>
-      <TextInput
+      <PasswordInput
+        simpleView={true}
+        autoComplete="off"
         className="smtp-settings_input"
-        name={HOST_PASSWORD}
+        inputName={HOST_PASSWORD}
         placeholder={t("Common:EnterPassword")}
         onChange={onChange}
-        value={settings[HOST_PASSWORD]}
+        inputValue={settings[HOST_PASSWORD]}
         isDisabled={isLoading || !settings[AUTHENTICATION]}
         scale
+        inputType={InputType.password}
+        size={InputSize.base}
         testId="smtp_host_password_input"
       />
 

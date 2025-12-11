@@ -24,26 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { mobile } from "@docspace/shared/utils";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-export const StyledWrapper = styled.div<{ hideTabs?: boolean }>`
-  .content {
-    display: none;
-  }
+export const PATH_DOC_SERVICE = "files/docservice";
 
-  .tabs-body {
-    margin-bottom: 16px;
-  }
+export const docServiceSuccess = {
+  response: {
+    version: "",
+    docServiceUrlApi: `${BASE_URL}/ds-vpath/web-apps/apps/api/documents/api.js`,
+    docServiceUrl: "/ds-vpath/",
+    docServicePreloadUrl: `${BASE_URL}/ds-vpath/web-apps/apps/api/documents/preload.html`,
+    docServiceUrlInternal: "http://onlyoffice-document-server/",
+    docServicePortalUrl: "http://host.docker.internal/",
+    docServiceSignatureHeader: "AuthorizationJwt",
+    docServiceSslVerification: true,
+    isDefault: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_DOC_SERVICE}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-  @media ${mobile} {
-    ${({ hideTabs }) =>
-      hideTabs &&
-      css`
-        .sticky,
-        .sticky-indent {
-          display: none;
-        }
-      `}
-  }
-`;
+export const docServiceHandler = () => {
+  return new Response(JSON.stringify(docServiceSuccess));
+};

@@ -125,6 +125,10 @@ import {
 	aiProvidersHandler,
 	PATH_AI_MODELS,
 	aiModelsHandler,
+	PATH_AI_SERVER,
+	aiServerHandler,
+	PATH_AI_SERVERS,
+	aiServersHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -371,6 +375,14 @@ export const endpoints = {
 	aiModelsOpenRouter: {
 		url: `${BASE_URL}${PATH_AI_MODELS}`,
 		dataHandler: () => aiModelsHandler({ isOpenRouter: true }),
+	},
+	aiServer: {
+		url: `${BASE_URL}${PATH_AI_SERVER}`,
+		dataHandler: aiServerHandler,
+	},
+	aiServers: {
+		url: `${BASE_URL}${PATH_AI_SERVERS}`,
+		dataHandler: aiServersHandler,
 	},
 	additionalSettings: {
 		url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,

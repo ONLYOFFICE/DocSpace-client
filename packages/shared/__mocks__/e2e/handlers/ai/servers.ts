@@ -24,14 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { aiAgentsHandler, PATH_AI_AGENTS } from "./agents";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-export { aiConfigHandler, PATH_AI_CONFIG } from "./config";
+export const PATH_AI_SERVERS = "ai/servers/available?*";
 
-export { aiModelsHandler, PATH_AI_MODELS } from "./models";
+const success = {
+	response: [
+		{
+			id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+			name: "docspace",
+			serverType: 1,
+			enabled: true,
+		},
+		{
+			id: "883da87d-5ae0-49fd-8cb9-2cb82181667b",
+			name: "custom",
+			serverType: 0,
+			enabled: true,
+		},
+	],
+	count: 2,
+	total: 2,
+	links: [
+		{
+			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
+			action: "GET",
+		},
+	],
+	status: 0,
+	statusCode: 200,
+};
 
-export { aiProvidersHandler, PATH_AI_PROVIDERS } from "./providers";
-
-export { aiServerHandler, PATH_AI_SERVER } from "./server";
-
-export { aiServersHandler, PATH_AI_SERVERS } from "./servers";
+export const aiServersHandler = () => {
+	return new Response(JSON.stringify(success));
+};

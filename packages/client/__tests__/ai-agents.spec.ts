@@ -295,4 +295,47 @@ test.describe("AI agents", () => {
     expect(parsedPayload.chatSettings.modelId).toBe("gpt-4.1");
     expect(parsedPayload.chatSettings.providerId).toBe(2);
   });
+
+  test("should render AI agents list", async ({ page, mockRequest }) => {
+    await mockRequest.router([endpoints.aiAgentsListCreate]);
+
+    await page.goto("/ai-agents/filter");
+
+    await expect(page.getByText("Plugin SDK")).toBeVisible();
+  });
+
+  test("should render AI agent context menu", async ({ page, mockRequest }) => {
+    await mockRequest.router([endpoints.aiAgentsListCreate]);
+
+    await page.goto("/ai-agents/filter");
+
+    await expect(page.getByText("Plugin SDK")).toBeVisible();
+
+    await page
+      .getByRole("button", { name: "PS Plugin SDK, 10/12/2025 09:" })
+      .click();
+
+    await expect(page.getByText("Pin").first()).toBeVisible();
+    await expect(page.getByText("Delete").first()).toBeVisible();
+
+    await page.locator(".Checkbox-module__checkbox--oU4gW ").first().click();
+
+    await expect(page.getByText("Pin").first()).not.toBeVisible();
+    await expect(page.getByText("Delete").first()).not.toBeVisible();
+
+    const contextMenuButton = page.getByTestId("context-menu-button");
+
+    await contextMenuButton.click();
+
+    await expect(page.getByTestId("select").first()).toBeVisible();
+    await expect(page.getByTestId("open").first()).toBeVisible();
+    await expect(page.getByTestId("pin-room").first()).toBeVisible();
+    await expect(page.getByTestId("mute-room").first()).toBeVisible();
+    await expect(page.getByTestId("manage").first()).toBeVisible();
+    await expect(
+      page.getByTestId("invite-users-to-room").first(),
+    ).toBeVisible();
+    await expect(page.getByTestId("room-info").first()).toBeVisible();
+    await expect(page.getByTestId("delete").first()).toBeVisible();
+  });
 });

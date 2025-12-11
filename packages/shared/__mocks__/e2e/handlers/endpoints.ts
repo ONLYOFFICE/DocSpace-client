@@ -356,6 +356,10 @@ export const endpoints = {
 		url: `${BASE_URL}${PATH_AI_AGENTS}`,
 		dataHandler: () => aiAgentsHandler({ withCreate: true }),
 	},
+	aiAgentsListCreate: {
+		url: `${BASE_URL}${PATH_AI_AGENTS}`,
+		dataHandler: () => aiAgentsHandler({ withListCreate: true }),
+	},
 	aiProvidersList: {
 		url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
 		dataHandler: aiProvidersHandler,

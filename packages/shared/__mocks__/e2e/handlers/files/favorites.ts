@@ -30,7 +30,7 @@ type ResponseType = "delete" | "success" | "success_many" | "empty";
 
 export const PATH_FAVORITES = /.*\/api\/2\.0\/files\/\d+\?.*/;
 export const PATH_DELETE_FAVORITES = /.*\/api\/2\.0\/files\/favorites$/;
-export const PATH_GET_FILE = /.*\/api\/2\.0\/files\/file\/\d+$/;
+export const PATH_GET_FILE = /.*\/api\/2\.0\/files\/\d+$/;
 
 const file = [
   {
@@ -1766,11 +1766,117 @@ export const deleteFavorites = {
 };
 
 export const getFile = {
-  response: { ...file[0], isFavorite: false },
+  response: {
+    files: [],
+    folders: [],
+    current: {
+      parentId: 0,
+      filesCount: 0,
+      foldersCount: 0,
+      new: 0,
+      mute: false,
+      pinned: false,
+      private: false,
+      indexing: false,
+      denyDownload: false,
+      fileEntryType: 1,
+      id: 1,
+      rootFolderId: 1,
+      canShare: false,
+      security: {
+        Read: true,
+        Create: false,
+        Delete: false,
+        EditRoom: false,
+        Rename: false,
+        CopyTo: false,
+        Copy: false,
+        MoveTo: false,
+        Move: false,
+        Pin: false,
+        Mute: false,
+        EditAccess: false,
+        Duplicate: false,
+        Download: false,
+        CopySharedLink: false,
+        Reconnect: false,
+        CreateRoomFrom: false,
+        CopyLink: false,
+        Embed: false,
+        ChangeOwner: false,
+        IndexExport: false,
+        UseChat: false,
+        FillForms: false,
+        Edit: false,
+        SubmitToFormGallery: false,
+        Lock: false,
+        CustomFilter: false,
+        StartFilling: false,
+        StopFilling: false,
+        FillingStatus: false,
+      },
+      availableShareRights: {},
+      title: "Favorites",
+      access: 0,
+      shared: false,
+      sharedForUser: false,
+      parentShared: false,
+      shortWebUrl: "",
+      created: "2025-10-28T05:44:26.0000000+03:00",
+      createdBy: {
+        id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+        displayName: "Administrator ",
+        avatar:
+          "/static/images/default_user_photo_size_82-82.png?hash=1168361071",
+        avatarOriginal:
+          "/static/images/default_user_photo_size_200-200.png?hash=1168361071",
+        avatarMax:
+          "/static/images/default_user_photo_size_200-200.png?hash=1168361071",
+        avatarMedium:
+          "/static/images/default_user_photo_size_48-48.png?hash=1168361071",
+        avatarSmall:
+          "/static/images/default_user_photo_size_32-32.png?hash=1168361071",
+        profileUrl: `${BASE_URL}/accounts/people/filter?search=admin%40gmail.com`,
+        hasAvatar: false,
+        isAnonim: false,
+      },
+      updated: "2025-10-28T05:44:26.0000000+03:00",
+      rootFolderType: 10,
+      updatedBy: {
+        id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+        displayName: "Administrator ",
+        avatar:
+          "/static/images/default_user_photo_size_82-82.png?hash=1168361071",
+        avatarOriginal:
+          "/static/images/default_user_photo_size_200-200.png?hash=1168361071",
+        avatarMax:
+          "/static/images/default_user_photo_size_200-200.png?hash=1168361071",
+        avatarMedium:
+          "/static/images/default_user_photo_size_48-48.png?hash=1168361071",
+        avatarSmall:
+          "/static/images/default_user_photo_size_32-32.png?hash=1168361071",
+        profileUrl: `${BASE_URL}/accounts/people/filter?search=admin%40gmail.com`,
+        hasAvatar: false,
+        isAnonim: false,
+      },
+      order: "",
+    },
+    pathParts: [
+      {
+        id: 1,
+        title: "Favorites",
+        folderType: 10,
+      },
+    ],
+    startIndex: 0,
+    count: 8,
+    total: 8,
+    new: 0,
+  },
   count: 1,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/files/file/1`,
+      href: `${BASE_URL}/${API_PREFIX}/files/1`,
       action: "GET",
     },
   ],

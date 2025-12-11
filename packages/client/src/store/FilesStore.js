@@ -3115,17 +3115,23 @@ class FilesStore {
 
       return templateOptions;
     } else if (isAIAgent) {
-      const canInviteUserInAgent = item.security?.EditAccess;
+      const canInviteUserInAgent =
+        item.security?.EditAccess &&
+        !this.settingsStore.aiConfig.aiReadyNeedReset;
       const canRemoveAgent = item.security?.Delete;
 
       const canPinAgent = item.security?.Pin;
 
-      const canEditAgent = item.security?.EditRoom;
+      const canEditAgent =
+        item.security?.EditRoom &&
+        !this.settingsStore.aiConfig.aiReadyNeedReset;
 
       const canViewAgentInfo = item.security?.Read;
       const canMuteAgent = item.security?.Mute;
 
-      const canChangeOwner = item.security?.ChangeOwner;
+      const canChangeOwner =
+        item.security?.ChangeOwner &&
+        !this.settingsStore.aiConfig.aiReadyNeedReset;
 
       let agentOptions = [
         "select",

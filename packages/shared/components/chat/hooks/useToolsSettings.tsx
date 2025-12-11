@@ -52,7 +52,9 @@ const useToolsSettings = ({ roomId, aiConfig }: Props) => {
 
   const fetchServerTools = React.useCallback(
     async (res: TServer[], roomId: string | number) => {
-      const enabledServers = res.filter((server) => server.connected);
+      const enabledServers = res.filter(
+        (server) => server.connected && !server.needReset,
+      );
 
       const actions = await Promise.all(
         enabledServers.map((server) =>
@@ -78,7 +80,7 @@ const useToolsSettings = ({ roomId, aiConfig }: Props) => {
 
     setServers(res);
     fetchServerTools(res, roomId);
-  }, [roomId]);
+  }, [roomId, fetchServerTools]);
 
   const initTools = React.useCallback(async () => {
     if (!roomId) return;

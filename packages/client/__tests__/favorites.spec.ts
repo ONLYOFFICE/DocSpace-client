@@ -258,4 +258,37 @@ test.describe("Favorites", () => {
       "favorites-image-context-menu.png",
     ]);
   });
+
+  test("should add file from my documents to favorites", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([
+      endpoints.myDocuments,
+    ]);
+    
+    await page.goto("/rooms/personal/filter?folder=12764");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const title = table.locator(".table-list-item a").first();
+    await expect(title).toBeVisible();
+    await expect(title).toHaveText("Test document");
+
+    await title.click({ button: "right" });
+
+    const markAsFavorite = page.getByTestId("mark-as-favorite");
+    await expect(markAsFavorite).toBeVisible();
+
+    await mockRequest.router([
+      endpoints.addToFavorites,
+      endpoints.getFileInfo,
+    ]);
+
+    await markAsFavorite.click();
+
+    const toast = page.getByTestId("toast-content");
+    await expect(toast).toBeVisible();
+  });
 });

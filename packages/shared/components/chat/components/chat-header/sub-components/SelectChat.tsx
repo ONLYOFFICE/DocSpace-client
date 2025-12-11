@@ -192,29 +192,33 @@ const SelectChat = ({
 
         const title = chats.find((chat) => chat.id === hoveredItem)?.title;
 
-        if (isChecked) {
-          openFile(resultFile.id.toString());
+        if (resultFile) {
+          if (isChecked) {
+            openFile(resultFile.id.toString());
+          }
+
+          const toastMsg = (
+            <Trans
+              ns="Common"
+              i18nKey="ChatExported"
+              t={t}
+              values={{ fileName, title }}
+              components={{
+                1: <b />,
+                2: (
+                  <Link
+                    type={LinkType.action}
+                    onClick={() => openFile(resultFile.id.toString())}
+                  />
+                ),
+              }}
+            />
+          );
+
+          toastr.success(toastMsg);
+        } else {
+          toastr.error(data.error);
         }
-
-        const toastMsg = (
-          <Trans
-            ns="Common"
-            i18nKey="ChatExported"
-            t={t}
-            values={{ fileName, title }}
-            components={{
-              1: <b />,
-              2: (
-                <Link
-                  type={LinkType.action}
-                  onClick={() => openFile(resultFile.id.toString())}
-                />
-              ),
-            }}
-          />
-        );
-
-        toastr.success(toastMsg);
 
         socket?.off(SocketEvents.ExportChat);
         socket?.emit(SocketCommands.Unsubscribe, {

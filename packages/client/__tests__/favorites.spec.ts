@@ -138,4 +138,124 @@ test.describe("Favorites", () => {
 
     wsMock.closeConnection();
   });
+
+  test("should context menu for favorite folder", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.favoritesMany]);
+
+    await page.goto("/files/favorite/filter?folder=1");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const cell = page.locator('[data-testid="favorites-cell-name-0"]');
+    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "favorites",
+      "favorites-folder-context-menu.png",
+    ]);
+  });
+
+  test("should context menu for favorite file via link", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.favoritesMany]);
+
+    await page.goto("/files/favorite/filter?folder=1");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const cell = page.locator('[data-testid="favorites-cell-name-1"]');
+    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "favorites",
+      "favorites-file-via-link-context-menu.png",
+    ]);
+  });
+
+  test("should context menu for favorite file from room", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.favoritesMany]);
+
+    await page.goto("/files/favorite/filter?folder=1");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const cell = page.locator('[data-testid="favorites-cell-name-2"]');
+    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "favorites",
+      "favorites-file-from-room-context-menu.png",
+    ]);
+  });
+
+  test("should context menu for favorite shared file", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.favoritesMany]);
+
+    await page.goto("/files/favorite/filter?folder=1");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const cell = page.locator('[data-testid="favorites-cell-name-3"]');
+    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "favorites",
+      "favorites-file-shared-context-menu.png",
+    ]);
+  });
+
+  test("should context menu for favorite archive", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.favoritesMany]);
+
+    await page.goto("/files/favorite/filter?folder=1");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const cell = page.locator('[data-testid="favorites-cell-name-4"]');
+    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "favorites",
+      "favorites-archive-context-menu.png",
+    ]);
+  });
+
+  test("should context menu for favorite image", async ({
+    page,
+    mockRequest,
+  }) => {
+    await mockRequest.router([endpoints.favoritesMany]);
+
+    await page.goto("/files/favorite/filter?folder=1");
+
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible();
+
+    const cell = page.locator('[data-testid="favorites-cell-name-5"]');
+    await cell.locator('[data-testid="link"]').click({ button: "right" });
+    await expect(page).toHaveScreenshot([
+      "desktop",
+      "favorites",
+      "favorites-image-context-menu.png",
+    ]);
+  });
 });

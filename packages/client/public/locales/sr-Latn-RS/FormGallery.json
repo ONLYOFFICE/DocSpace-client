@@ -8,5 +8,6 @@
   "SubmitToGalleryDialogMainInfo": "Podnesite svoj obrazac u Javnu galeriju da bi drugi mogli da ga koriste za svoj posao. Kada obrazac prođe moderaciju, bićete obavešteni i nagrađeni za vaš doprinos.",
   "SuggestChanges": "Predloži promene",
   "TemplateInfo": "Info za šablon",
-  "ViewAllTemplates": "Pregledaj sve šablone"
+  "ViewAllTemplates": "Pregledaj sve šablone",
+  "ErrorViewDescriptionNetworkError": "Izgleda da nema internet konekcije"
 }

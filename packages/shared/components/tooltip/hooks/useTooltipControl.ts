@@ -29,6 +29,7 @@ import {
   DEFAULT_DELAY_SHOW,
   SYSTEM_TOOLTIP_TOP_OFFSET,
 } from "../Tooltip.constants";
+import { checkIsSSR } from "../../../utils/device";
 
 const shouldHandleTooltipEvent = (
   target: HTMLElement,
@@ -77,13 +78,14 @@ export const useTooltipControl = (
   );
 
   useEffect(() => {
-    if (typeof document === "undefined") return;
+    if (checkIsSSR()) return;
 
     const anchor = createVirtualAnchor(anchorId.current, contentString);
     document.body.appendChild(anchor);
     virtualAnchorRef.current = anchor;
 
     return () => {
+      if (checkIsSSR()) return;
       if (virtualAnchorRef.current) {
         document.body.removeChild(virtualAnchorRef.current);
       }
@@ -201,6 +203,7 @@ export const useTooltipControl = (
   }, []);
 
   useEffect(() => {
+    if (checkIsSSR()) return;
     if (!isReady) return;
 
     const handleDocumentClick = () => {

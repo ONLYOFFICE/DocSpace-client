@@ -29,6 +29,7 @@ import { flip, shift, offset } from "@floating-ui/dom";
 import { Tooltip as ReactTooltip, TooltipRefProps } from "react-tooltip";
 
 import { Portal } from "../portal";
+import { checkIsSSR } from "../../utils/device";
 
 import { DEFAULT_OFFSET } from "./Tooltip.constants";
 import styles from "./Tooltip.module.scss";
@@ -60,9 +61,11 @@ const RootTooltip = () => {
   const systemTooltipRef = useRef<TooltipRefProps>(null);
   const infoTooltipRef = useRef<HTMLDivElement>(null);
 
-  if (typeof window !== "undefined") {
-    window.__systemTooltipRef = systemTooltipRef;
-  }
+  React.useEffect(() => {
+    if (!checkIsSSR()) {
+      window.__systemTooltipRef = systemTooltipRef;
+    }
+  }, []);
 
   const renderTooltip = (
     id: string,
@@ -142,7 +145,9 @@ const RootTooltip = () => {
     true,
   );
 
-  const rootElement = document?.getElementById("root");
+  const rootElement = !checkIsSSR()
+    ? document?.getElementById("root") || document?.body
+    : null;
 
   return (
     <>

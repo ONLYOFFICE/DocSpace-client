@@ -1,6 +1,6 @@
 {
   "name": "@docspace/management",
-  "version": "4.0.0",
+  "version": "3.6.1",
   "private": true,
   "scripts": {
     "build:translations": "node scripts/buildTranslations.js",
@@ -31,7 +31,7 @@
     "mobx-react": "7.6.0",
     "moment-timezone": "0.5.46",
     "nconf": "0.12.1",
-    "next": "16.0.1",
+    "next": "16.0.10",
     "react": "19.2.0",
     "react-device-detect": "2.2.3",
     "react-dom": "19.2.0",
@@ -40,7 +40,6 @@
     "resize-image": "0.1.0",
     "sass": "1.79.5",
     "socket.io-client": "4.8.0",
-    "styled-components": "5.3.11",
     "ts-pattern": "5.5.0",
     "windows-iana": "5.1.0",
     "winston": "3.17.0",
@@ -62,7 +61,6 @@
     "@types/node": "22.7.5",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
-    "@types/styled-components": "5.1.34",
     "cross-env": "^7.0.3",
     "css-loader": "6.11.0",
     "css-minimizer-webpack-plugin": "^7.0.2",

@@ -2,6 +2,7 @@
   "Categories": "Kategoritë",
   "EmptyFormGalleryScreenDescription": "Nuk u gjend asnjë rezultat që përputhet me pyetjen tuaj",
   "ErrorViewDescription": "Ju lutem provojeni përsëri më vonë",
+  "ErrorViewDescriptionNetworkError": "Shkruan se nuk ka lidhje me internet.",
   "ErrorViewHeader": "Galeria e formularëve është përkohësisht e padisponueshme",
   "SelectForm": "Selektoni nga",
   "SubmitToGalleryDialogGuideInfo": "Mësoni se si të krijoni forma të përsosura dhe rrisni mundësinë tuaj për të marrë miratim në <1>udhëzuesin</1>tonë.",

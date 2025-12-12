@@ -25,10 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { FolderType } from "../../enums";
-import { TRoom } from "../../api/rooms/types";
+import { TRoom, TRoomSecurity } from "../../api/rooms/types";
 import { TSelectorItem } from "../../components/selector";
 
-export const convertToItems = (folders: TRoom[]) => {
+export const convertToItems = (
+  folders: TRoom[],
+  disableBySecurity?: string,
+) => {
   const items: TSelectorItem[] = folders.map((folder) => {
     const {
       id,
@@ -56,6 +59,10 @@ export const convertToItems = (folders: TRoom[]) => {
     const cover = logo?.cover;
     const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
+    const isDisabledBySecurity = disableBySecurity
+      ? !security?.[disableBySecurity as keyof TRoomSecurity]
+      : false;
+
     return {
       id,
       label: title,
@@ -81,6 +88,7 @@ export const convertToItems = (folders: TRoom[]) => {
       watermark,
       tags,
       quotaLimit,
+      isDisabled: isDisabledBySecurity,
     };
   });
 

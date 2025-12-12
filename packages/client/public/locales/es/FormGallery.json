@@ -2,6 +2,7 @@
   "Categories": "Categorías",
   "EmptyFormGalleryScreenDescription": "No se han encontrado resultados que coincidan con la búsqueda",
   "ErrorViewDescription": "Vuelva a intentarlo más tarde",
+  "ErrorViewDescriptionNetworkError": "Parece que no hay conexión a Internet",
   "ErrorViewHeader": "La galería de formularios no está disponible temporalmente ",
   "SelectForm": "Seleccionar formulario",
   "SubmitToGalleryDialogGuideInfo": "Aprenda a crear formularios perfectos y a aumentar sus posibilidades de obtener la aprobación en nuestra <1>guía</1>.",

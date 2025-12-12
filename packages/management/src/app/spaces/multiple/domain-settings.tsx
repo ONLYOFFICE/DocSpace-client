@@ -39,7 +39,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import useDeviceType from "@/hooks/useDeviceType";
 import { useStores } from "@/hooks/useStores";
 
-import { StyledDomainSettings } from "./multiple.styled";
+import styles from "./multiple.module.scss";
 
 interface IProps {
   baseDomain: string;
@@ -56,12 +56,12 @@ export const DomainSettings = observer(({ baseDomain }: IProps) => {
   };
 
   return (
-    <StyledDomainSettings>
+    <div className={styles.domainSettings}>
       <Text fontSize="16px" fontWeight={700}>
         {t("DomainSettings")}
       </Text>
       <FieldContainer
-        className="field-container"
+        className={styles.fieldContainer}
         isVertical
         labelText={t("Common:YourCurrentDomain")}
         labelVisible
@@ -85,6 +85,6 @@ export const DomainSettings = observer(({ baseDomain }: IProps) => {
         onClick={onEditButtonClick}
         scale={false}
       />
-    </StyledDomainSettings>
+    </div>
   );
 });

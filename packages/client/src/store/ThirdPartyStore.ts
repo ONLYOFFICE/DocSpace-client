@@ -83,8 +83,8 @@ export class ThirdPartyStore {
     return list;
   };
 
-  fetchConnectingStorages = async () => {
-    const res = await api.files.getConnectingStorages();
+  fetchConnectingStorages = async (paramsString?: string) => {
+    const res = await api.files.getConnectingStorages(paramsString);
 
     this.connectingStorages = res.map((storage) => ({
       ...storage,

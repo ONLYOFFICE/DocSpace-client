@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 .sendClockIcon {
+  padding-inline-start: 8px;
   min-width: 12px;
   overflow: hidden;
   vertical-align: middle;
@@ -32,4 +33,9 @@
   path {
     fill: var(--accounts-badges-pending-color);
   }
+}
+
+.isMeLabel {
+  padding-inline-start: 4px;
+  color: var(--info-panel-me-label-color);
 }

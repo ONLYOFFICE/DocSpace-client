@@ -680,7 +680,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-bonus",
-        key: "11-0",
+        key: "12-0",
         icon: "",
         link: "",
         tKey: "Common:FreeAccessToLicensedVersion",

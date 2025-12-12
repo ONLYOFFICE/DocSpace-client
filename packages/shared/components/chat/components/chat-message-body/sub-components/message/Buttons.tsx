@@ -65,6 +65,7 @@ const Buttons = ({
   getIcon,
   messageIndex,
   getResultStorageId,
+  folderFormValidation,
 }: MessageButtonsProps) => {
   const { t } = useTranslation(["Common"]);
   const { roomId, findPreviousUserMessage } = useMessageStore();
@@ -103,28 +104,32 @@ const Buttons = ({
     socket?.on(SocketEvents.ExportChat, (data) => {
       const { resultFile } = data;
 
-      if (isChecked) {
-        openFile(resultFile.id.toString());
+      if (resultFile) {
+        if (isChecked) {
+          openFile(resultFile.id.toString());
+        }
+
+        const toastMsg = (
+          <Trans
+            ns="Common"
+            i18nKey="MessageExported"
+            values={{ fileName }}
+            t={t}
+            components={{
+              1: (
+                <Link
+                  type={LinkType.action}
+                  onClick={() => openFile(resultFile.id.toString())}
+                />
+              ),
+            }}
+          />
+        );
+
+        toastr.success(toastMsg);
+      } else {
+        toastr.error(data.error);
       }
-
-      const toastMsg = (
-        <Trans
-          ns="Common"
-          i18nKey="MessageExported"
-          values={{ fileName }}
-          t={t}
-          components={{
-            1: (
-              <Link
-                type={LinkType.action}
-                onClick={() => openFile(resultFile.id.toString())}
-              />
-            ),
-          }}
-        />
-      );
-
-      toastr.success(toastMsg);
 
       socket?.off(SocketEvents.ExportChat);
       socket?.emit(SocketCommands.Unsubscribe, {
@@ -201,6 +206,7 @@ const Buttons = ({
           getFileName={getExportedFileName}
           getIcon={getIcon}
           showFolderSelector={showFolderSelector}
+          folderFormValidation={folderFormValidation}
         />
       ) : null}
     </>

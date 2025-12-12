@@ -3,7 +3,7 @@
   "content": "Mark as read",
   "content_en_sha1_hash": "c1ee860bc3a94be1ae96eaa05833713b79c6634b",
   "created_at": "2025-05-19T21:30:55.828Z",
-  "updated_at": "2025-11-18T14:41:49.678Z",
+  "updated_at": "2025-11-25T11:53:04.790Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Mark as read\" on a button that allows users to update the read status of a file. The button appears in a file listing interface, likely as part of a task or action menu.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
-      "line_number": 170,
+      "line_number": 184,
       "context": "const markAsReadButton = (\n <Button\n className=\"mark-as-read-button\"\n scale\n label={t(\"MarkRead\")}\n size={isMobileDevice ? ButtonSize.normal : ButtonSize.small}\n onClick={markAsReadAction}\n isLoading={isMarkAsReadRunning}\n />\n );",
       "module": "/packages/client"
     },

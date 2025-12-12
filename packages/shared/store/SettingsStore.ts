@@ -441,6 +441,12 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get documentServiceSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.documentService
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.documentService}`
+      : this.helpCenterDomain;
+  }
+
   get dropboxUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectdropbox
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectdropbox}`

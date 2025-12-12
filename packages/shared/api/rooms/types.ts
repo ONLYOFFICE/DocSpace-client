@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TFile, TFolder, TShareSettings } from "../files/types";
-import {
+import type {
   ExportRoomIndexTaskStatus,
   FolderType,
   LinkSharingEntityType,
@@ -38,8 +38,8 @@ import type {
   TCreatedBy,
   TPathParts,
 } from "../../types";
-import { TUser } from "../people/types";
-import { TGroup } from "../groups/types";
+import type { TUser } from "../people/types";
+import type { TGroup } from "../groups/types";
 
 export type ICover = {
   data: string;
@@ -166,7 +166,10 @@ export type TExportRoomIndexTask = {
   resultFileUrl: string;
 };
 
-export type TNewFilesItem = TFile[] | { room: TRoom; items: TFile[] };
+export type TNewFilesItem =
+  | TFile[]
+  | { room: TRoom; items: TFile[] }
+  | { agent: TRoom; items: TFile[] };
 
 export type TNewFiles = {
   date: string;
@@ -298,6 +301,7 @@ export enum FeedAction {
   Invite = "invite",
   CHANGE_COLOR = "changeColor",
   CHANGE_COVER = "changeCover",
+  CHANGE_OWNER = "changeOwner",
   DeleteVersion = "deleteVersion",
   FormStartedToFill = "formStartedToFill",
   FormPartiallyFilled = "formPartiallyFilled",
@@ -376,6 +380,7 @@ export enum FeedActionKeys {
   RoomExternalLinkDeleted = "RoomExternalLinkDeleted",
   RoomExternalLinkRevoked = "RoomExternalLinkRevoked",
   RoomCreateUser = "RoomCreateUser",
+  RoomChangeOwner = "RoomChangeOwner",
   RoomUpdateAccessForUser = "RoomUpdateAccessForUser",
   RoomRemoveUser = "RoomRemoveUser",
   RoomInviteResend = "RoomInviteResend",

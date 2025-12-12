@@ -44,7 +44,7 @@ import {
 } from "../../../../api/ai";
 import { ServerType } from "../../../../api/ai/enums";
 import { getOAuthToken } from "../../../../utils/common";
-import { getServerIcon } from "../../../../utils";
+import { getServerIcon, isMobile } from "../../../../utils";
 import { useTheme } from "../../../../hooks/useTheme";
 
 import { Text } from "../../../text";
@@ -154,9 +154,9 @@ const ToolsSettings = ({
     [MCPTools, roomId, setMCPTools],
   );
 
-  const onGoToWebSearchPage = () => {
+  const onGoToWebSearchPage = React.useCallback(() => {
     navigate("/portal-settings/ai-settings/search");
-  };
+  }, [navigate]);
 
   const openOauthWindow = async (serverId: string, type: string) => {
     const url = await openConnectWindow(type);
@@ -255,57 +255,59 @@ const ToolsSettings = ({
   }, [webCrawlingToolName, setWebCrawlingToolName]);
 
   const model = React.useMemo(() => {
-    const serverItems = Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
-      const server = servers.find((s) => s.id === mcpId);
+    const serverItems = Array.from(MCPTools.entries())
+      .map(([mcpId, tools]) => {
+        const server = servers.find((s) => s.id === mcpId);
 
-      if (!server)
-        return {
-          key: "",
-          label: "",
-        };
+        if (!server || server.needReset)
+          return {
+            key: "",
+            label: "",
+          };
 
-      const items = [
-        {
-          key: "all_tools",
-          label: "All tools",
-          withToggle: true,
-          checked: tools.some((tool) => tool.enabled),
-          onClick: () => {
-            toggleTool(mcpId, "all_tools");
-          },
-        },
-        {
-          key: "separator-sub-menu-1",
-          isSeparator: true,
-        },
-        ...tools
-          .map((tool) => ({
-            key: tool.name,
-            label: tool.name,
+        const items = [
+          {
+            key: "all_tools",
+            label: "All tools",
             withToggle: true,
-            checked: tool.enabled,
+            checked: tools.some((tool) => tool.enabled),
             onClick: () => {
-              toggleTool(mcpId, tool.name);
+              toggleTool(mcpId, "all_tools");
             },
-          }))
-          .filter(Boolean),
-      ];
+          },
+          {
+            key: "separator-sub-menu-1",
+            isSeparator: true,
+          },
+          ...tools
+            .map((tool) => ({
+              key: tool.name,
+              label: tool.name,
+              withToggle: true,
+              checked: tool.enabled,
+              onClick: () => {
+                toggleTool(mcpId, tool.name);
+              },
+            }))
+            .filter(Boolean),
+        ];
 
-      const name =
-        server.serverType === ServerType.Portal
-          ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
-          : server.name;
+        const name =
+          server.serverType === ServerType.Portal
+            ? `${t("Common:OrganizationName")} ${t("Common:ProductName")}`
+            : server.name;
 
-      return {
-        key: mcpId,
-        label: name,
-        icon:
-          (server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
-          "",
-        withMCPIcon: true,
-        items,
-      };
-    });
+        return {
+          key: mcpId,
+          label: name,
+          icon:
+            (server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
+            "",
+          withMCPIcon: true,
+          items,
+        };
+      })
+      .filter((i) => i.key);
 
     const showManageConnectionItem = servers.some(
       (server) =>
@@ -368,11 +370,14 @@ const ToolsSettings = ({
   }, [
     MCPTools,
     isBase,
+    isAdmin,
     servers,
     t,
     toggleTool,
     webSearchEnabled,
     webSearchPortalEnabled,
+    onGoToWebSearchPage,
+    onWebSearchToggle,
   ]);
 
   if (!isFetched) return;
@@ -401,7 +406,8 @@ const ToolsSettings = ({
           onHide={hideMcpTools}
           maxHeightLowerSubmenu={360}
           showDisabledItems
-          // ignoreChangeView
+          withBackdrop={isMobile()}
+          //ignoreChangeView
           headerOnlyMobile
           withoutBackHeaderButton
         />

@@ -62,7 +62,6 @@ export type UseFilesProps = {
   getFileInfo: FilesStore["getFileInfo"];
   setIsPreview: FilesStore["setIsPreview"];
   setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
-  scrollToTop: FilesStore["scrollToTop"];
   wsCreatedPDFForm: FilesStore["wsCreatedPDFForm"];
 
   playlist: MediaViewerDataStore["playlist"];
@@ -82,7 +81,6 @@ const useFiles = ({
   getFileInfo,
   setIsPreview,
   setIsUpdatingRowItem,
-  scrollToTop,
   wsCreatedPDFForm,
 
   playlist,
@@ -338,9 +336,6 @@ const useFiles = ({
 
           window.dispatchEvent(event);
         }
-      })
-      .finally(() => {
-        scrollToTop();
       });
   }, [
     location.pathname,
@@ -351,7 +346,6 @@ const useFiles = ({
     getFileInfo,
     setIsPreview,
     setIsUpdatingRowItem,
-    scrollToTop,
     wsCreatedPDFForm,
 
     playlist,

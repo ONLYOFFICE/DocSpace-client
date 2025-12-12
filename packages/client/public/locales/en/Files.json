@@ -145,6 +145,7 @@
   "Protected": "protected",
   "RecentlyOpenedTooltip": "Recently opened via the link",
   "RemovedFromFavorites": "Removed from favorites",
+  "RemovedFromRecent": "Removed from recent",
   "RemoveFromFavorites": "Remove from favorites",
   "Reorder": "Reorder",
   "ReorderIndex": "The Reorder action will remove spaces in the indexes. The files will be re-indexed in order with offset to fill in missing indexes.",

@@ -149,6 +149,7 @@ const FilesSelectorWrapper = ({
   folderIsShared,
   checkCreating,
   isMultiSelect,
+  disableBySecurity,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -497,6 +498,7 @@ const FilesSelectorWrapper = ({
       formProps={formProps}
       checkCreating={checkCreating}
       isMultiSelect={isMultiSelect}
+      disableBySecurity={disableBySecurity}
     />
   );
 };

@@ -3,7 +3,7 @@
   "content": "You have left the room",
   "content_en_sha1_hash": "46542dad576cfe3647d36a31566045dcad57950c",
   "created_at": "2025-05-19T21:30:56.359Z",
-  "updated_at": "2025-11-18T14:41:50.134Z",
+  "updated_at": "2025-12-09T12:12:27.408Z",
   "comment": {
     "text": "\"When you exit a room, displays a confirmation message to inform users that they have left the current room.\"",
     "is_auto": true,

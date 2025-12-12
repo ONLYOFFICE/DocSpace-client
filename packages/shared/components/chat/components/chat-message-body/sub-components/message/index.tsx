@@ -34,7 +34,7 @@ import { Link, LinkTarget } from "../../../../../link";
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
 import { Text } from "../../../../../text";
 
-import { MessageProps } from "../../../../Chat.types";
+import type { MessageProps } from "../../../../Chat.types";
 import { useChatStore } from "../../../../store/chatStore";
 
 import styles from "../../ChatMessageBody.module.scss";
@@ -71,6 +71,7 @@ const Message = ({
   isLast,
   getIcon,
   getResultStorageId,
+  folderFormValidation,
 }: MessageProps) => {
   const { currentChat } = useChatStore();
 
@@ -150,7 +151,11 @@ const Message = ({
       {message.contents.map((c, mId) => {
         if (c.type === ContentType.Text)
           return (
-            <Markdown key={c.text} chatMessage={c.text} isFirst={mId === 0} />
+            <Markdown
+              key={`${idx}_${c.type}_${mId}`}
+              chatMessage={c.text}
+              isFirst={mId === 0}
+            />
           );
 
         if (c.type === ContentType.Tool)
@@ -167,10 +172,11 @@ const Message = ({
           messageIndex={idx}
           getIcon={getIcon}
           getResultStorageId={getResultStorageId}
+          folderFormValidation={folderFormValidation}
         />
       ) : null}
     </div>
   );
 };
 
-export default Message;
+export default React.memo(Message);

@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-11-19T15:02:40.884Z",
+  "updated_at": "2025-12-11T16:07:35.909Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 414,
+      "line_number": 416,
       "context": "const uploadFromDocSpace = {\n id: \"actions_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", { productName: t(\"Common:ProductName\") }),\n key: \"actions_upload-from-docspace\",\n disabled: false,\n onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 414,
+      "line_number": 416,
       "context": "const uploadFromDocSpace = {\n id: \"actions_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", { productName: t(\"Common:ProductName\") }),\n key: \"actions_upload-from-docspace\",\n disabled: false,\n onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),\n };",
       "module": "/packages/client"
     },
@@ -516,44 +516,56 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 239,
-      "context": "roomType === -1 ? accesses : filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : isAIAgentsFolder\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")\n : t(\"InviteViaLinkDescriptionAgentMembers\", {",
+      "line_number": 244,
+      "context": ": filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : roomType === RoomsType.AIRoom\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")\n : t(\"InviteViaLinkDescriptionAgentMembers\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 239,
-      "context": "roomType === -1 ? accesses : filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : isAIAgentsFolder\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")\n : t(\"InviteViaLinkDescriptionAgentMembers\", {",
+      "line_number": 244,
+      "context": ": filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : roomType === RoomsType.AIRoom\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")\n : t(\"InviteViaLinkDescriptionAgentMembers\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 239,
-      "context": "roomType === -1 ? accesses : filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : isAIAgentsFolder\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")\n : t(\"InviteViaLinkDescriptionAgentMembers\", {",
+      "line_number": 244,
+      "context": ": filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : roomType === RoomsType.AIRoom\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")\n : t(\"InviteViaLinkDescriptionAgentMembers\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 594,
+      "line_number": 623,
       "context": "<StyledDescription\n noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 594,
+      "line_number": 623,
       "context": "<StyledDescription\n noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 594,
+      "line_number": 623,
       "context": "<StyledDescription\n noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/utils/index.js",
-      "line_number": 72,
-      "context": "item.warning = item.isGroup\n ? t(\"GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n });\n return item;\n };\n \n export const fixAccess = (item, t, roomType) => {",
+      "line_number": 82,
+      "context": "item.warning = item.isGroup\n ? t(\"GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n });\n return item;\n };\n \n export const makeViewerRole = (item, t, viewerRole) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/utils/index.js",
+      "line_number": 82,
+      "context": "item.warning = item.isGroup\n ? t(\"GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n });\n return item;\n };\n \n export const makeViewerRole = (item, t, viewerRole) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/utils/index.js",
+      "line_number": 82,
+      "context": "item.warning = item.isGroup\n ? t(\"GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n });\n return item;\n };\n \n export const makeViewerRole = (item, t, viewerRole) => {",
       "module": "/packages/client"
     },
     {
@@ -611,6 +623,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 49,
+      "context": "},\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"InviteDialog:UserMaxAvailableRoleWarning\", {\n productName: this.t(\"Common:ProductName\"),\n }),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n agentAdmin: {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/index.tsx",
       "line_number": 167,
       "context": "return (\n <div className={styles.aiProvider}>\n <Text className={styles.description}>\n {t(\"AISettings:AIProviderSettingDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {aiSettingsUrl ? (\n <Link\n className={styles.learnMoreLink}",
@@ -618,7 +636,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 210,
+      "line_number": 208,
       "context": ": undefined\n }\n >\n <Text className={generalStyles.description}>\n {t(\"AISettings:SearchDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {aiSettingsUrl ? (\n <Link\n className={generalStyles.learnMoreLink}",
       "module": "/packages/client"
     },
@@ -1062,13 +1080,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 358,
+      "line_number": 360,
       "context": "</div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"internalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlInternal\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n <InputBlock\n id=\"internalAdress\"\n type=\"text\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 358,
+      "line_number": 360,
       "context": "</div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"internalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlInternal\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n <InputBlock\n id=\"internalAdress\"\n type=\"text\"",
       "module": "/packages/client"
     },
@@ -1134,7 +1152,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 229,
+      "line_number": 231,
       "context": "src={imgSrc}\n alt=\"integration_icon\"\n />\n <Text>\n {t(\"IntegrationRequest\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Button\n label={t(\"Submit\")}",
       "module": "/packages/client"
     },
@@ -1381,7 +1399,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
       "line_number": 62,
-      "context": "{...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={1}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n );\n };",
+      "context": "{...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -1572,25 +1590,25 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2171,
+      "line_number": 2189,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2171,
+      "line_number": 2189,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2171,
+      "line_number": 2189,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PluginStore.ts",
-      "line_number": 298,
+      "line_number": 294,
       "context": ");\n \n if (!isPluginCompatible) {\n toastr.error(\n t(\"PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));\n }",
       "module": "/packages/client"
     },
@@ -1806,13 +1824,13 @@
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 296,
+      "line_number": 297,
       "context": ".filter(Boolean),\n ];\n \n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: mcpId,\n label: name,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 296,
+      "line_number": 297,
       "context": ".filter(Boolean),\n ];\n \n const name =\n server.serverType === ServerType.Portal\n ? `${t(\"Common:OrganizationName\")} ${t(\"Common:ProductName\")}`\n : server.name;\n \n return {\n key: mcpId,\n label: name,",
       "module": "/packages/shared"
     },
@@ -2030,6 +2048,12 @@
       "file_path": "/packages/shared/utils/common.ts",
       "line_number": 342,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 103,
+      "context": "const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
       "module": "/packages/shared"
     },
     {

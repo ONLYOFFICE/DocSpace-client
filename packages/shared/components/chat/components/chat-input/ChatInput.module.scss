@@ -67,7 +67,7 @@
     max-height: 172px !important;
 
     background-color: var(--chat-input-background-color);
-    border: none;
+    border: var(--chat-input-border);
   }
 
   .chatInputTextAreaWrapperFiles {
@@ -91,6 +91,7 @@
   box-sizing: border-box;
 
   padding: 0 8px;
+  width: 100%;
 }
 
 .chatInputButtonsTools {

@@ -129,3 +129,56 @@
   margin-inline-start: auto;
   cursor: pointer;
 }
+
+.notificationContainer {
+  display: flex;
+  flex-direction: column;
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div > label {
+      position: relative;
+      gap: 0;
+    }
+  }
+
+  margin-bottom: 12px;
+
+  .notificationContainerDescription {
+    color: var(--profile-notifications-description);
+  }
+}
+
+.badgesContainer {
+  margin-bottom: 24px;
+
+  p {
+    line-height: 20px;
+  }
+}
+
+.sectionBody {
+  width: 100%;
+  max-width: 660px;
+
+  @include mixins.tablet {
+    max-width: 100%;
+  }
+}
+
+.textContent {
+  margin-bottom: 12px;
+  border-bottom: var(--profile-notifications-border);
+
+  p {
+    line-height: 16px;
+    padding-bottom: 8px;
+  }
+
+  :global(.email-title) {
+    padding-top: 2px;
+  }
+}

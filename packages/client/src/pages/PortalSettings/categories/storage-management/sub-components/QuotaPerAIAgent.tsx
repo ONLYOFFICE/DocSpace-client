@@ -56,7 +56,7 @@ const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
       saveQuota={saveQuota}
       {...initialSizeProp}
       isQuotaSet={isDefaultAIAgentsQuotaSet}
-      tabIndex={1}
+      tabIndex={3}
       dataTestId="quota_ai_agent"
       toggleDescription={t("SetDefaultAIAgentQuota", {
         productName: t("Common:ProductName"),

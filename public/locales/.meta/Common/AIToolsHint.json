@@ -3,7 +3,7 @@
   "content": "AI tools and integrations",
   "content_en_sha1_hash": "647cfdd2c06961f3756768e640186ab58be2c1f2",
   "created_at": "2025-11-17T07:51:05.550Z",
-  "updated_at": "2025-11-17T07:53:51.931Z",
+  "updated_at": "2025-12-11T16:07:36.116Z",
   "comment": {
     "text": "This text appears as a tooltip on a button or setting related to AI tools and integrations within the chat interface. It explains the functionality of the tools being offered and provides a brief label for those features. Translators should ensure the meaning accurately reflects AI tool integrations.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 383,
+      "line_number": 388,
       "context": "if (!isFetched) return;\n \n return (\n <>\n <div\n title={t(\"AIToolsHint\")}\n className={classNames(\n styles.chatInputButton,\n styles.chatInputToolsButton,\n {\n [styles.activeChatInputButton]: isMcpToolsVisible,",
       "module": "/packages/shared"
     }

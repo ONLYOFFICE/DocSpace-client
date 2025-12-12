@@ -1178,8 +1178,6 @@ export default inject(
 
     const {
       onClickEditRoom,
-      onClickInviteUsers,
-      onClickArchive,
       onCopyLink,
       onCreateAndCopySharedLink,
       getFolderModel,
@@ -1253,7 +1251,8 @@ export default inject(
     const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
     isPublicRoom ||
     isSharedWithMeFolderRoot ||
-    isArchive
+    isArchive ||
+    !isRootRooms
       ? false
       : security?.Read && isShared);
 
@@ -1319,8 +1318,6 @@ export default inject(
       selectedFolder,
 
       onClickEditRoom,
-      onClickInviteUsers,
-      onClickArchive,
       onCopyLink,
 
       isGroupMenuBlocked,

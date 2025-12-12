@@ -40,6 +40,7 @@ export const TableVersions = Object.freeze({
   Guests: "1",
   SharedWithMe: "2",
   AIAgents: "1",
+  InSharedFolder: "1",
 });
 
 /**

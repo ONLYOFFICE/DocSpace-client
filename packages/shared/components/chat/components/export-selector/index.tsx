@@ -47,6 +47,7 @@ type ExportSelectorProps = {
   ) => Promise<void>;
   currentFolderId: string | number;
   getFileName: () => string;
+  folderFormValidation: RegExp;
 };
 
 const ExportSelector = ({
@@ -56,6 +57,7 @@ const ExportSelector = ({
   onSubmit,
   currentFolderId,
   getFileName,
+  folderFormValidation,
 }: ExportSelectorProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -118,6 +120,7 @@ const ExportSelector = ({
             ? DeviceType.tablet
             : DeviceType.mobile
       }
+      folderFormValidation={folderFormValidation}
       renderInPortal
     />
   );

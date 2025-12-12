@@ -3,7 +3,7 @@
   "content": "You have left the agent",
   "content_en_sha1_hash": "9046d9c834b4b78bdceb1017ec100bcfc353675a",
   "created_at": "2025-10-27T16:14:30.911Z",
-  "updated_at": "2025-11-18T14:41:50.136Z",
+  "updated_at": "2025-12-09T12:12:27.409Z",
   "comment": {
     "text": "This message is displayed to a user when they leave an agent session. It confirms the user has exited the agent and may be used in a confirmation dialog or status update within the application. Translators should ensure the tone aligns with other exit/leave confirmations.",
     "is_auto": true,

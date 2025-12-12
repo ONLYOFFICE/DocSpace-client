@@ -32,10 +32,17 @@ import { Trans, useTranslation } from "react-i18next";
 import { decode } from "he";
 import classNames from "classnames";
 
+import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
+
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { TUser } from "@docspace/shared/api/people/types";
-import { RoomMember, TFeedAction } from "@docspace/shared/api/rooms/types";
+
+import {
+  RoomMember,
+  TFeedAction,
+  FeedActionKeys,
+} from "@docspace/shared/api/rooms/types";
 
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
@@ -70,7 +77,7 @@ const HistoryUserList = ({
 
   return (
     <>
-      {usersData.map(({ id, data: member }, i) => {
+      {usersData.map(({ id, data: member, action }, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         const withComma = !isExpanded
           ? i < EXPANSION_THRESHOLD - 1
@@ -78,6 +85,49 @@ const HistoryUserList = ({
 
         const user: TUser | null =
           "user" in member ? (member.user as TUser) : null;
+
+        const isChangeOwnerAction =
+          action.key === FeedActionKeys.RoomChangeOwner;
+
+        if (isChangeOwnerAction) {
+          const currentOwner: TUser | null =
+            "owner" in member ? (member.owner as TUser) : null;
+          const oldOwner: TUser | null =
+            "oldOwner" in member ? (member.oldOwner as TUser) : null;
+
+          if (!currentOwner || !oldOwner) return;
+
+          const ownerName = decode(currentOwner?.displayName);
+          const oldOwnerName = decode(oldOwner?.displayName);
+
+          return (
+            <div
+              key={id}
+              data-testid={`history_user_${i}`}
+              className={styles.historyUserLink}
+            >
+              <Link
+                className="text link"
+                onClick={() => openUser!(oldOwner)}
+                title={oldOwnerName}
+                dataTestId={`history_user_link_${i}`}
+              >
+                {oldOwnerName}
+              </Link>
+              <div className="arrow-wrapper">
+                <SortDesc className="arrow-index" />
+              </div>
+              <Link
+                className="text link"
+                onClick={() => openUser!(currentOwner)}
+                title={ownerName}
+                dataTestId={`history_user_link_${i}`}
+              >
+                {ownerName}
+              </Link>
+            </div>
+          );
+        }
 
         if (!user) return;
 

@@ -3,7 +3,7 @@
   "content": "Storage quota disabled.",
   "content_en_sha1_hash": "b6d30ca17df8d425a828140d44b2241bd12d1c5e",
   "created_at": "2025-05-19T21:30:49.119Z",
-  "updated_at": "2025-11-18T14:41:49.705Z",
+  "updated_at": "2025-12-09T12:12:27.165Z",
   "comment": {
     "text": "This translation key is used for a message displayed when storage quota is disabled. It informs users that their storage limit has been removed. This message appears in a success notification dialog and toast notification after certain actions are performed, such as enabling unlimited space or setting custom room quotas.",
     "is_auto": true,

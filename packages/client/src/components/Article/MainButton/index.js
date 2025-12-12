@@ -197,6 +197,8 @@ const ArticleMainButtonContent = (props) => {
     isAIRoom,
     extsFilesVectorized,
     allowInvitingMembers,
+
+    aiConfig,
   } = props;
 
   const navigate = useNavigate();
@@ -777,6 +779,8 @@ const ArticleMainButtonContent = (props) => {
 
     if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
 
+    if (isAIAgentsFolder && aiConfig.aiReadyNeedReset) visibilityValue = false;
+
     return visibilityValue;
   };
 
@@ -854,7 +858,7 @@ const ArticleMainButtonContent = (props) => {
           label={t("Common:NewAgent")}
           onClick={onCreateAgent}
           $currentColorScheme={currentColorScheme}
-          isDisabled={isDisabled}
+          isDisabled={isDisabled || aiConfig.aiReadyNeedReset}
           size="small"
           primary
           scale
@@ -967,7 +971,9 @@ export default inject(
       currentColorScheme,
       currentDeviceType,
       allowInvitingMembers,
+      aiConfig,
     } = settingsStore;
+
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const { security } = selectedFolderStore;
@@ -1063,6 +1069,8 @@ export default inject(
       isAIRoom: selectedFolderStore.isAIRoom,
       extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
       allowInvitingMembers,
+
+      aiConfig,
     };
   },
 )(

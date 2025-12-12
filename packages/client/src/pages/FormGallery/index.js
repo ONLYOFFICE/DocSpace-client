@@ -35,6 +35,7 @@ import SectionHeaderContent from "./Header";
 import SectionBodyContent from "./Body";
 import { InfoPanelBodyContent } from "../Home/InfoPanel";
 import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
+import InfoPanelActions from "../Home/InfoPanel/Actions";
 import SectionFilterContent from "./Filter";
 import Dialogs from "./Dialogs";
 import ErrorView from "./ErrorView";
@@ -48,6 +49,7 @@ const FormGallery = ({
   oformsFilter,
   fetchOforms,
   setOformFromFolderId,
+  oformsNetworkError,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -103,14 +105,18 @@ const FormGallery = ({
           <SectionHeaderContent />
         </Section.SectionHeader>
 
-        {!oformsLoadError ? (
+        {!oformsLoadError && !oformsNetworkError ? (
           <Section.SectionFilter>
             <SectionFilterContent />
           </Section.SectionFilter>
         ) : null}
 
         <Section.SectionBody isFormGallery>
-          {!oformsLoadError ? <SectionBodyContent /> : <ErrorView />}
+          {!oformsLoadError && !oformsNetworkError ? (
+            <SectionBodyContent />
+          ) : (
+            <ErrorView />
+          )}
         </Section.SectionBody>
 
         <Section.InfoPanelHeader>
@@ -123,6 +129,7 @@ const FormGallery = ({
       </SectionWrapper>
 
       <Dialogs />
+      <InfoPanelActions />
     </>
   );
 };
@@ -141,4 +148,6 @@ export const WrappedComponent = inject(({ oformsStore }) => ({
 
   fetchOforms: oformsStore.fetchOforms,
   setOformFromFolderId: oformsStore.setOformFromFolderId,
+
+  oformsNetworkError: oformsStore.oformsNetworkError,
 }))(observer(FormGallery));

@@ -2,6 +2,7 @@
   "Categories": "Kateqoriyalar",
   "EmptyFormGalleryScreenDescription": "Sorğunuza uyğun nəticə tapılmadı",
   "ErrorViewDescription": "Zəhmət olmasa, bir az sonra yenə cəhd edin",
+  "ErrorViewDescriptionNetworkError": "Görünür ki, internet bağlantısı yoxdur",
   "ErrorViewHeader": "Forma qalereyası müvəqqəti olaraq əlçatan deyil",
   "SelectForm": "Formanı seçin",
   "SubmitToGalleryDialogGuideInfo": "Mükəmməl formalar yaratmağı və təsdiq şansınızı artırmağı bizim <1>bələdçimizdən</1> öyrənin.",

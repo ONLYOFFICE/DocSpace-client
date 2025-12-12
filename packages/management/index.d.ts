@@ -27,12 +27,6 @@
 import type { TColorScheme, TTheme } from "@docspace/shared/themes";
 
 declare global {
-  declare module "styled-components" {
-    export interface DefaultTheme extends TTheme {
-      currentColorScheme?: TColorScheme;
-    }
-  }
-
   declare module "resize-image" {
     type ImageFormat = "png" | "gif" | "bmp" | "jpeg" | "webp";
 

@@ -211,9 +211,13 @@ export default class MessageStore {
 
   addMessageId = (id: number) => {
     const lastMessage = this.getLastMessage();
+
     if (!lastMessage) return;
 
     this.replaceLastMessage({ ...lastMessage, id });
+
+    this.setIsStreamRunning(false);
+    this.setIsRequestRunning(false);
   };
 
   addUserMessage = (message: string, files: Partial<TFile>[]) => {
@@ -515,6 +519,14 @@ export default class MessageStore {
 
             if (event.includes(EventType.MessageStop)) {
               try {
+                try {
+                  const { messageId } = JSON.parse(jsonData);
+
+                  if (messageId) this.addMessageId(messageId);
+                } catch {
+                  // ignore
+                }
+
                 reader.cancel();
               } catch (e) {
                 console.log(e);
@@ -565,22 +577,26 @@ export default class MessageStore {
   };
 
   sendMessage = async (message: string, files: Partial<TFile>[]) => {
-    this.addUserMessage(message, files);
+    try {
+      this.addUserMessage(message, files);
 
-    this.setIsRequestRunning(true);
+      this.setIsRequestRunning(true);
 
-    this.abortController.abort("Start new message");
+      this.abortController.abort("Start new message");
 
-    this.abortController = new AbortController();
+      this.abortController = new AbortController();
 
-    const stream = await sendMessageToChat(
-      this.currentChatId,
-      message,
-      files.map((f) => (f.id ? f.id.toString() : "")),
-      this.abortController,
-    );
+      const stream = await sendMessageToChat(
+        this.currentChatId,
+        message,
+        files.map((f) => (f.id ? f.id.toString() : "")),
+        this.abortController,
+      );
 
-    await this.startStream(stream);
+      await this.startStream(stream);
+    } catch (e) {
+      this.handleStreamError(JSON.stringify(e));
+    }
   };
 
   stopMessage = () => {
@@ -620,6 +636,8 @@ export const MessageStoreContextProvider = ({
   }, [store, roomId]);
 
   React.useEffect(() => {
+    if (store.isRequestRunning) return;
+
     if (chatId) store.setInitMessages(messages, total, chatId);
   }, [chatId, store, messages, total]);
 

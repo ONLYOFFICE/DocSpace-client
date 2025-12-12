@@ -407,20 +407,16 @@ class FilesActionStore {
 
     const toFolderId = folderId || this.selectedFolderStore.id;
 
-    setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
+    if (withoutHiddenFiles.length) {
+      setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
+    }
 
     const tree = this.convertToTree(withoutHiddenFiles);
 
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
 
-    if (!filesList.length) {
-      setPrimaryProgressBarData({
-        ...pbData,
-        completed: uploaded,
-        withoutStatus: !tree.length,
-      });
-    } else {
+    if (filesList.length) {
       setPrimaryProgressBarData({ ...pbData });
     }
 
@@ -462,9 +458,11 @@ class FilesActionStore {
       newSelection ||
       (this.filesStore.selection.length
         ? this.filesStore.selection
-        : [bufferSelection]);
+        : bufferSelection
+          ? [bufferSelection]
+          : []);
 
-    selection = selection.filter((item) => item.security.Delete);
+    selection = selection.filter((item) => item?.security?.Delete);
 
     //  const isThirdPartyFile = selection.some((f) => f.providerKey);
 
@@ -585,6 +583,10 @@ class FilesActionStore {
         this.setGroupMenuBlocked(false);
       }
     }
+  };
+
+  askAIAction = (item) => {
+    this.dialogsStore.setAiAgentSelectorDialogProps(true, item);
   };
 
   emptyTrash = async (translations) => {
@@ -1733,6 +1735,8 @@ class FilesActionStore {
   };
 
   nameWithoutExtension = (title) => {
+    if (!title) return "";
+
     const indexPoint = title.lastIndexOf(".");
     const splitTitle = title.split(".");
     const splitTitleLength = splitTitle.length;
@@ -2409,6 +2413,8 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       .set("delete", {
+        id: "menu-remove-from-shared-with-me",
+        key: "remove-from-shared-with-me",
         label: t("Common:RemoveFromList"),
         onClick: () => {
           setUnsubscribe(true);
@@ -2768,7 +2774,7 @@ class FilesActionStore {
   onClickBack = (fromHotkeys = true) => {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
-    const { clearFiles, setBufferSelection } = this.filesStore;
+    const { clearFiles, setBufferSelection, setSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
@@ -2778,6 +2784,7 @@ class FilesActionStore {
     }
 
     setBufferSelection(null);
+    setSelection([]);
 
     const categoryType = getCategoryType(window.DocSpace.location);
 
@@ -3170,18 +3177,19 @@ class FilesActionStore {
       });
   };
 
-  onClickRemoveFromRecent = (selection) => {
+  onClickRemoveFromRecent = (selection, t) => {
     const { setSelected } = this.filesStore;
     const ids = selection.map((item) => item.id);
-    this.removeFilesFromRecent(ids);
+    this.removeFilesFromRecent(ids, t);
     setSelected("none");
   };
 
-  removeFilesFromRecent = async (fileIds) => {
+  removeFilesFromRecent = async (fileIds, t) => {
     const { refreshFiles } = this.filesStore;
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
+    toastr.success(t("Files:RemovedFromRecent"));
   };
 
   onCreateRoomFromTemplate = (item, addSelection) => {

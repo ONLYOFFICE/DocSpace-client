@@ -73,6 +73,7 @@ export const enum SocketEvents {
   ChatMessageId = "s:commit-chat-message",
   UpdateChat = "s:update-chat",
   UpdateTelegram = "s:update-telegram",
+  ConnectTelegram = "s:telegram",
   SelfRestrictionFile = "s:self-restriction-file",
   SelfRestrictionFolder = "s:self-restriction-folder",
   ChaneFolderAccessRights = "s:change-access-rights-folder",
@@ -218,11 +219,11 @@ type TOptQuota =
  * @extends TOptQuota
  */
 export type TOptSocket = {
-  featureId: string;
-  value: number;
+  featureId?: string;
+  value?: number;
   data?: string;
   type?: "folder" | "file";
-  id?: string;
+  id?: string | number;
   cmd?: "create" | "update" | "delete";
 } & TOptQuota;
 
@@ -293,7 +294,8 @@ export type TListenEventCallbackMap = {
     chatId: string;
     chatTitle: string;
   }) => void;
-  [SocketEvents.UpdateTelegram]: (data: { username: string }) => void;
+  [SocketEvents.UpdateTelegram]: (data: string) => void;
+  [SocketEvents.ConnectTelegram]: (data: string) => void;
   [SocketEvents.SelfRestrictionFile]: (data: {
     id: number;
     data: string;
@@ -302,7 +304,16 @@ export type TListenEventCallbackMap = {
     id: number;
     data: string;
   }) => void;
-  [SocketEvents.ExportChat]: (data: { resultFile: TFile }) => void;
+  [SocketEvents.ExportChat]: (
+    data:
+      | {
+          resultFile: TFile;
+        }
+      | {
+          resultFile: null;
+          error: string;
+        },
+  ) => void;
 };
 
 /**

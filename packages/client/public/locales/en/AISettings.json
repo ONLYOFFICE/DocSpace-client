@@ -39,6 +39,7 @@
   "ProviderNameInputHint": "Use any name that is convenient for you to identify this connection",
   "ProviderRemovedSuccess": "Provider removed successfully",
   "ProviderUnavailableError": "The AI provider is unavailable",
+  "MCPUnavailableError": "The MCP server is unavailable",
   "ProviderUpdatedSuccess": "Provider updated successfully",
   "ProviderURL": "URL",
   "ProviderURLInputHint": "Enter the API endpoint URL provided by your AI service",

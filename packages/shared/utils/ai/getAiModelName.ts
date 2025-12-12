@@ -27,6 +27,7 @@
  */
 
 const MODEL_NAME_MAP: Record<string, string> = {
+  "openai/gpt-5.2": "GPT-5.2",
   "openai/gpt-5.1": "GPT-5.1",
   "anthropic/claude-haiku-4.5": "Claude Haiku 4.5",
   "anthropic/claude-sonnet-4.5": "Claude Sonnet 4.5",
@@ -55,6 +56,7 @@ export const getAiModelName = (id: string) => {
     //   return "Qwen3";
     default:
       if (id.includes("gpt-5.1")) return "GPT-5.1";
+      if (id.includes("gpt-5.2")) return "GPT-5.2";
       if (id.includes("claude-haiku-4-5")) return "Claude Haiku 4.5";
       if (id.includes("claude-sonnet-4-5")) return "Claude Sonnet 4.5";
       if (id.includes("claude-opus-4-5")) return "Claude Opus 4.5";

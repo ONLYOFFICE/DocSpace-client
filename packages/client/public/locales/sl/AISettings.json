@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Spletno iskanje je bilo uspešno onemogočeno.",
   "WebSearchEnabledSuccess": "Omogočeno uspešno iskanje po spletu",
   "WebSearchKeyDescription": "Vnesite ključ API, pridobljen od ponudnika iskanja na spletu.",
-  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov."
+  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov.",
+  "MCPUnavailableError": "Strežnik MCP je nedostopen."
 }

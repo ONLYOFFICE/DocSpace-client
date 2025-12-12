@@ -67,6 +67,8 @@ export const HEADER_AUTHENTICATED_SETTINGS =
 export const HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS =
 	"x-test-data-authenticated-with-socket-settings";
 
+export const HEADER_PLUGINS_SETTINGS = "x-test-data-plugins-settings";
+
 export const HEADER_ENABLED_JOIN_SETTINGS = "x-test-data-enabled-join-settings";
 
 export const HEADER_ENABLE_ADM_MESS_SETTINGS =

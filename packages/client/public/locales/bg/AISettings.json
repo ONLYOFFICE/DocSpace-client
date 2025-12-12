@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Успешно деактивирано уеб търсене",
   "WebSearchEnabledSuccess": "Успешно активирано уеб търсене",
   "WebSearchKeyDescription": "Въведете API ключа, получен от вашия доставчик на уеб търсене.",
-  "WebSearchKeyHiddenDescription": "Ключът за API се показва само веднъж при запазване и след това се скрива за целите на сигурността."
+  "WebSearchKeyHiddenDescription": "Ключът за API се показва само веднъж при запазване и след това се скрива за целите на сигурността.",
+  "MCPUnavailableError": "MCP сървърът е недостъпен."
 }

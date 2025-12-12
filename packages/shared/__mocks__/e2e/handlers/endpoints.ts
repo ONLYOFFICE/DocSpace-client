@@ -68,6 +68,9 @@ import {
 	invitationSettingsHandler,
 	PATH_WEB_PLUGINS,
 	webPluginsHandler,
+	webPluginsAddHandler,
+	webPluginsUpdateHandler,
+	webPluginsDeleteHandler,
 } from "./settings";
 import {
 	CONTINUE_PATH,
@@ -114,6 +117,7 @@ import {
 	HEADER_LIST_CAPABILITIES,
 	HEADER_ROOMS_LIST,
 	HEADER_AI_DISABLED,
+	HEADER_PLUGINS_SETTINGS,
 } from "../utils";
 import { PATH_DELETE_USER } from "./people/self";
 import {
@@ -456,5 +460,36 @@ export const endpoints = {
 	emptyTags: {
 		url: `${BASE_URL}${PATH_TAGS}`,
 		dataHandler: roomTagsHandler,
+	},
+	settingsWithPlugins: {
+		url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+		dataHandler: () =>
+			settingsHandler(
+				new Headers({
+					[HEADER_AUTHENTICATED_SETTINGS]: "true",
+					[HEADER_PLUGINS_SETTINGS]: "true",
+				}),
+			),
+	},
+
+	webPluginsWithData: {
+		url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+		dataHandler: webPluginsHandler.bind(null, "withData"),
+		method: "GET",
+	},
+	webPluginsAdd: {
+		url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+		dataHandler: webPluginsAddHandler,
+		method: "POST",
+	},
+	webPluginsUpdate: {
+		url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+		dataHandler: webPluginsUpdateHandler,
+		method: "PUT",
+	},
+	webPluginsDelete: {
+		url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+		dataHandler: webPluginsDeleteHandler,
+		method: "DELETE",
 	},
 } satisfies TEndpoints;

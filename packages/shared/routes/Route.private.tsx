@@ -305,8 +305,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (
       !restricted ||
       isAdmin ||
-      (withManager &&
-        (user?.isVisitor || (user?.isCollaborator && restricted))) ||
+      withManager ||
       (withCollaborator &&
         (!user?.isVisitor || (user?.isVisitor && user?.hasPersonalFolder)))
     ) {

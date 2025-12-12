@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Веб претрага је успешно онемогућена",
   "WebSearchEnabledSuccess": "Веб претрага је успешно омогућена",
   "WebSearchKeyDescription": "Унесите API кључ добијен од вашег провајдера веб претраге",
-  "WebSearchKeyHiddenDescription": "API кључ се приказује само једном након чувања, а затим је скривен из безбедносних разлога."
+  "WebSearchKeyHiddenDescription": "API кључ се приказује само једном након чувања, а затим је скривен из безбедносних разлога.",
+  "MCPUnavailableError": "MCP сервер је недоступан."
 }

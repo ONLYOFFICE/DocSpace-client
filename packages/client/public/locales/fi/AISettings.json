@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Web-haun poistaminen käytöstä onnistui",
   "WebSearchEnabledSuccess": "Verkkohaku käytössä onnistuneesti",
   "WebSearchKeyDescription": "Syötä web-hakupalveluntarjoajaltasi hankittu API-avain.",
-  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä."
+  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä.",
+  "MCPUnavailableError": "MCP-palvelin ei ole käytettävissä"
 }

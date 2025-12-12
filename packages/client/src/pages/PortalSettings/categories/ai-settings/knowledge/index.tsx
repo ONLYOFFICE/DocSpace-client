@@ -73,7 +73,9 @@ const KnowledgeComponent = ({
   const [resetDialogVisible, setResetDialogVisible] =
     React.useState<boolean>(false);
 
-  const [isKeyHidden, setIsKeyHidden] = React.useState(!!knowledgeConfig?.key);
+  const [isKeyHidden, setIsKeyHidden] = React.useState(
+    !!knowledgeConfig?.key && !knowledgeConfig?.needReset,
+  );
   const [valuesByProvider, setValuesByProvider] = React.useState<
     Record<KnowledgeType, string>
   >(() => {
@@ -83,7 +85,11 @@ const KnowledgeComponent = ({
       [KnowledgeType.None]: "",
     };
 
-    if (knowledgeConfig?.type && knowledgeConfig.key) {
+    if (
+      knowledgeConfig?.type &&
+      knowledgeConfig.key &&
+      !knowledgeConfig?.needReset
+    ) {
       initial[knowledgeConfig.type] = FAKE_KEY_VALUE;
     }
 
@@ -93,6 +99,9 @@ const KnowledgeComponent = ({
     () => {
       if (knowledgeConfig?.type === KnowledgeType.OpenAi)
         return KnowledgeType.OpenAi;
+
+      if (knowledgeConfig?.type === KnowledgeType.OpenRouter)
+        return KnowledgeType.OpenRouter;
 
       return KnowledgeType.None;
     },
@@ -167,12 +176,12 @@ const KnowledgeComponent = ({
   }, [valuesByProvider, selectedOption]);
 
   React.useEffect(() => {
-    if (knowledgeConfig?.type) {
+    if (knowledgeConfig?.type && !knowledgeConfig?.needReset) {
       setIsKeyHidden(true);
       if (knowledgeConfig.key) {
         setValuesByProvider((prev) => ({
           ...prev,
-          [knowledgeConfig.type!]: FAKE_KEY_VALUE,
+          [knowledgeConfig.type]: FAKE_KEY_VALUE,
         }));
       }
     }
@@ -336,7 +345,8 @@ const KnowledgeComponent = ({
             isDisabled={
               !knowledgeConfig ||
               knowledgeConfig?.type === KnowledgeType.None ||
-              saveRequestRunning
+              saveRequestRunning ||
+              knowledgeConfig.needReset
             }
           />
         </div>

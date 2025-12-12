@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Pesquisa na web desativada com sucesso",
   "WebSearchEnabledSuccess": "Pesquisa na web habilitada com sucesso",
   "WebSearchKeyDescription": "Insira a chave da API obtida do seu provedor de pesquisa na web.",
-  "WebSearchKeyHiddenDescription": "A chave da API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança."
+  "WebSearchKeyHiddenDescription": "A chave da API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança.",
+  "MCPUnavailableError": "O servidor MCP está indisponível."
 }

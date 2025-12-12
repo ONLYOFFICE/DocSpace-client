@@ -1737,10 +1737,10 @@ class SettingsStore {
 
   updateDefaultFolderType = async (folderType: FolderType) => {
     try {
-      await api.settings.setDefaultFolderType(folderType);
-      this.defaultFolderType = folderType;
+      const res = await api.settings.setDefaultFolderType(folderType);
+      this.setDefaultFolderType(res);
     } catch (e) {
-      console.error(e);
+      toastr.error(e as TData);
     }
   };
 }

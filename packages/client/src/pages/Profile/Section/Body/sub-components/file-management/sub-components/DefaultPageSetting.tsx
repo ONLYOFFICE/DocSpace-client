@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
+import React, { startTransition, useOptimistic } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -48,8 +48,9 @@ const StartPageSettingComponent = ({
   userType,
 }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
-  const [optimisticValue, setOptimisticValue] =
-    React.useState<FolderType | null>(null);
+
+  const [optimisticFolderType, setOptimisticFolderType] =
+    useOptimistic<FolderType>(defaultFolderType!);
 
   const getStartPageOptions = () => {
     const isGuest = userType === EmployeeType.Guest;
@@ -93,21 +94,19 @@ const StartPageSettingComponent = ({
   const startPageOptions = getStartPageOptions();
 
   const getSelectedStartPage = () => {
-    const folderType = optimisticValue || defaultFolderType || FolderType.Rooms;
-
     return (
-      startPageOptions.find((option) => option.key === folderType) ||
+      startPageOptions.find((option) => option.key === optimisticFolderType) ||
       startPageOptions[0]
     );
   };
 
   const onSelectStartPage = async (option: TOption) => {
-    if (option.key === defaultFolderType) return;
+    if (option.key === optimisticFolderType) return;
 
-    setOptimisticValue(option.key as FolderType);
-    await updateDefaultFolderType!(option.key as FolderType);
-
-    setOptimisticValue(null);
+    startTransition(async () => {
+      setOptimisticFolderType(option.key as FolderType);
+      await updateDefaultFolderType!(option.key as FolderType);
+    });
   };
 
   return (

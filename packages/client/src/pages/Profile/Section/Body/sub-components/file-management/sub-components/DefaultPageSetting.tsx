@@ -32,56 +32,58 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
-import { DefaultPageRoutes, EmployeeType } from "@docspace/shared/enums";
+import { EmployeeType, FolderType } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 type Props = {
-  defaultPage?: SettingsStore["defaultPage"];
-  setDefaultPage?: SettingsStore["setDefaultPage"];
+  defaultFolderType?: SettingsStore["defaultFolderType"];
+  updateDefaultFolderType?: SettingsStore["updateDefaultFolderType"];
   userType?: UserStore["userType"];
 };
 
 const StartPageSettingComponent = ({
-  defaultPage,
-  setDefaultPage,
+  defaultFolderType,
+  updateDefaultFolderType,
   userType,
 }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
+  const [optimisticValue, setOptimisticValue] =
+    React.useState<FolderType | null>(null);
 
   const getStartPageOptions = () => {
     const isGuest = userType === EmployeeType.Guest;
 
-    const unavailableOptions: DefaultPageRoutes[] = [];
+    const unavailableOptions: FolderType[] = [];
 
     if (isGuest) {
-      unavailableOptions.push(DefaultPageRoutes.MyDocuments);
+      unavailableOptions.push(FolderType.USER);
     }
 
     const options = [
       {
         label: t("Common:AIAgents"),
-        key: DefaultPageRoutes.AIAgents,
+        key: FolderType.AIAgents,
       },
       {
         label: t("Common:MyDocuments"),
-        key: DefaultPageRoutes.MyDocuments,
+        key: FolderType.USER,
       },
       {
         label: t("Common:Rooms"),
-        key: DefaultPageRoutes.Rooms,
+        key: FolderType.Rooms,
       },
       {
         label: t("Common:SharedWithMe"),
-        key: DefaultPageRoutes.SharedWithMe,
+        key: FolderType.SHARE,
       },
       {
         label: t("Common:Favorites"),
-        key: DefaultPageRoutes.Favorites,
+        key: FolderType.Favorites,
       },
       {
         label: t("Common:Recent"),
-        key: DefaultPageRoutes.Recent,
+        key: FolderType.Recent,
       },
     ];
 
@@ -91,16 +93,21 @@ const StartPageSettingComponent = ({
   const startPageOptions = getStartPageOptions();
 
   const getSelectedStartPage = () => {
-    const route = defaultPage || DefaultPageRoutes.Rooms;
+    const folderType = optimisticValue || defaultFolderType || FolderType.Rooms;
 
     return (
-      startPageOptions.find((option) => option.key === route) ||
+      startPageOptions.find((option) => option.key === folderType) ||
       startPageOptions[0]
     );
   };
 
-  const onSelectStartPage = (option: TOption) => {
-    setDefaultPage!(option.key as DefaultPageRoutes);
+  const onSelectStartPage = async (option: TOption) => {
+    if (option.key === defaultFolderType) return;
+
+    setOptimisticValue(option.key as FolderType);
+    await updateDefaultFolderType!(option.key as FolderType);
+
+    setOptimisticValue(null);
   };
 
   return (
@@ -122,10 +129,10 @@ const StartPageSettingComponent = ({
 
 export const DefaultPageSetting = inject(
   ({ settingsStore, userStore }: TStore) => {
-    const { defaultPage, setDefaultPage } = settingsStore;
+    const { defaultFolderType, updateDefaultFolderType } = settingsStore;
 
     const { userType } = userStore;
 
-    return { defaultPage, setDefaultPage, userType };
+    return { defaultFolderType, updateDefaultFolderType, userType };
   },
 )(observer(StartPageSettingComponent));

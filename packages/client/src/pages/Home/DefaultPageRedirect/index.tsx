@@ -30,16 +30,26 @@ import { inject, observer } from "mobx-react";
 import { Navigate } from "react-router";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { DefaultPageRoutes } from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
+
+import {
+  getCategoryTypeByFolderType,
+  getCategoryUrl,
+} from "SRC_DIR/helpers/utils";
 
 type Props = {
-  defaultPage?: SettingsStore["defaultPage"];
+  defaultFolderType?: SettingsStore["defaultFolderType"];
 };
 
-const DefaultPageRedirectComponent = ({ defaultPage }: Props) => {
-  return <Navigate to={`/${defaultPage || DefaultPageRoutes.Rooms}`} replace />;
+const DefaultPageRedirectComponent = ({ defaultFolderType }: Props) => {
+  const categoryType = getCategoryTypeByFolderType(
+    defaultFolderType || FolderType.Rooms,
+  );
+  const categoryUrl = getCategoryUrl(categoryType);
+
+  return <Navigate to={categoryUrl} replace />;
 };
 
 export const DefaultPageRedirect = inject(({ settingsStore }: TStore) => ({
-  defaultPage: settingsStore.defaultPage,
+  defaultFolderType: settingsStore.defaultFolderType,
 }))(observer(DefaultPageRedirectComponent));

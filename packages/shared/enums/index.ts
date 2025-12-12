@@ -915,16 +915,3 @@ export enum VectorizationStatus {
   Completed,
   Failed,
 }
-
-/**
- * Enum for start page routes.
- * @readonly
- */
-export enum DefaultPageRoutes {
-  AIAgents = "ai-agents",
-  MyDocuments = "rooms/personal",
-  Rooms = "rooms/shared",
-  SharedWithMe = "shared-with-me",
-  Favorites = "files/favorite",
-  Recent = "recent",
-}

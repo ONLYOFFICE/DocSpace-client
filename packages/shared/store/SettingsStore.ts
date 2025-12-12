@@ -59,7 +59,7 @@ import {
   TenantStatus,
   ThemeKeys,
   type UrlActionType,
-  DefaultPageRoutes,
+  FolderType,
 } from "../enums";
 import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
@@ -141,7 +141,7 @@ class SettingsStore {
 
   utcHoursOffset = 0;
 
-  defaultPage = DefaultPageRoutes.Rooms;
+  defaultFolderType = FolderType.Rooms;
 
   homepage = "";
 
@@ -897,8 +897,8 @@ class SettingsStore {
     this.snackbarExist = snackbar;
   };
 
-  setDefaultPage = (defaultPage: DefaultPageRoutes) => {
-    this.defaultPage = defaultPage;
+  setDefaultFolderType = (folderType: FolderType) => {
+    this.defaultFolderType = folderType;
   };
 
   setPortalDomain = (domain: string) => {
@@ -927,12 +927,7 @@ class SettingsStore {
           return;
         }
 
-        this.setValue(
-          key as keyof SettingsStore,
-          key === "defaultPage"
-            ? combineUrl(window.ClientConfig?.proxy?.url, settings[key])
-            : settings[key],
-        );
+        this.setValue(key as keyof SettingsStore, settings[key]);
 
         if (key === "culture") {
           if (settings?.wizardToken) return;
@@ -1738,6 +1733,15 @@ class SettingsStore {
 
   setDisplayBanners = (displayBanners: boolean) => {
     this.displayBanners = displayBanners;
+  };
+
+  updateDefaultFolderType = async (folderType: FolderType) => {
+    try {
+      await api.settings.setDefaultFolderType(folderType);
+      this.defaultFolderType = folderType;
+    } catch (e) {
+      console.error(e);
+    }
   };
 }
 

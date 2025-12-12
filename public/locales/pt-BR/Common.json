@@ -794,7 +794,7 @@
   "RevokeLink": "Revogar link",
   "Role": "Função",
   "RoleAIAgentContentCreatorDescription": "Criadores de conteúdo podem usar o chat e trabalhar com arquivos no armazenamento de resultados.\nEles podem enviar arquivos para a base de conhecimento, mas não podem gerenciar usuários ou acessar as configurações do agente.",
-  "RoleAIAgentManagerDescription": "Gerentes de agentes podem gerenciar o agente de IA designado, convidar novos usuários e atribuir funções abaixo do seu nível. Eles podem usar o chat, enviar arquivos de conhecimento, trabalhar com armazenamento de resultados e gerenciar as configurações do chat.",
+  "RoleAIAgentManagerDescription": "Gerentes de agentes podem gerenciar o agente de IA designado, convidar novos usuários e atribuir funções abaixo do seu nível.\nEles podem usar o chat, enviar arquivos de conhecimento, trabalhar com armazenamento de resultados e gerenciar as configurações do chat.",
   "RoleAIAgentViewerDescription": "Os espectadores só podem visualizar arquivos no armazenamento de resultados com saídas geradas por outros.\nEles não têm acesso ao chat ou à base de conhecimento.",
   "RoleCommentator": "Comentarista",
   "RoleCommentatorDescription": "Operações com arquivos existentes: visualização, comentário.",

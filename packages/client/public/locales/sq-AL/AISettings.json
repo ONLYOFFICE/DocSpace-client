@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Futni adresën e serverit MCP të dhënë nga shërbimi juaj.",
   "MCPSettingsDescription": "Ky seksion ju lejon të menaxhoni serverat MCP për biseda AI brenda dhomave. Mund të aktivizoni serverat sistemikë MCP ose të shtoni të personalizuar për nevojat e kompanisë. Pasi të aktivizohen, këta serverë do të jenë të aksesueshëm edhe nga përdorues të tjerë për detyrat e tyre.",
   "MCPSettingTitle": "Serverat MCP",
+  "MCPUnavailableError": "Serveri MCP nuk është i disponueshëm",
   "Provider": "Ofruesi",
   "ProviderAddedSuccess": "Ofruesi u shtua me sukses",
   "ProviderKey": "Çelësi",

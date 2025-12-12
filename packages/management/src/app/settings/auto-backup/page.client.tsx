@@ -28,12 +28,12 @@
 
 import { observer } from "mobx-react";
 import React, { useMemo } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import AutomaticBackup from "@docspace/shared/pages/backup/auto-backup";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 

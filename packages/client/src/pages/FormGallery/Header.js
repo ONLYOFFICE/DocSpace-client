@@ -61,6 +61,7 @@ const SectionHeaderContent = ({
 
   setIsLoading,
   oformsLoadError,
+  oformsNetworkError,
 
   getFolderInfo,
 }) => {
@@ -113,12 +114,14 @@ const SectionHeaderContent = ({
         isInfoPanelVisible={isInfoPanelVisible}
       >
         <StyledHeadline type="content" truncate>
-          {(!oformsLoadError && getCategoryTitle(currentCategory)) ||
+          {(!oformsLoadError &&
+            !oformsNetworkError &&
+            getCategoryTitle(currentCategory)) ||
             t("Common:OFORMsGallery")}
         </StyledHeadline>
       </StyledHeading>
 
-      {!oformsLoadError && canSubmitToFormGallery() ? (
+      {!oformsLoadError && !oformsNetworkError && canSubmitToFormGallery() ? (
         <StyledSubmitToGalleryButton
           primary
           size="small"
@@ -128,7 +131,7 @@ const SectionHeaderContent = ({
         />
       ) : null}
 
-      {!oformsLoadError ? (
+      {!oformsLoadError && !oformsNetworkError ? (
         <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>
           <div className="info-panel-toggle-bg">
             <IconButton
@@ -180,6 +183,7 @@ export default inject(
       },
 
       oformsLoadError: oformsStore.oformsLoadError,
+      oformsNetworkError: oformsStore.oformsNetworkError,
       getFolderInfo: filesStore.getFolderInfo,
     };
   },

@@ -396,6 +396,8 @@ export const useFeedTranslation = (
         return t("InfoPanel:RoomIndexExportLocation", {
           sectionName: t("Common:MyDocuments"),
         });
+      case FeedActionKeys.RoomChangeOwner:
+        return t("InfoPanel:RoomChangeOwner");
       case FeedActionKeys.FormSubmit:
         return t("InfoPanel:FilledOutForm");
       case FeedActionKeys.FormOpenedForFilling:

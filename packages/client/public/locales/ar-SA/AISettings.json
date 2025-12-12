@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "أدخلوا عنوان خادم MCP المقدم من خدمتكم",
   "MCPSettingsDescription": "يسمح لكم هذا القسم بإدارة خوادم MCP لدردشات الذكاء الاصطناعي داخل الغرف. يمكنكم تمكين خوادم MCP للنظام أو إضافة خوادم مخصصة لتلبية احتياجات شركتكم. بمجرد التمكين، ستكون هذه الخوادم متاحة للمستخدمين الآخرين لمهامهم.",
   "MCPSettingTitle": "خوادم MCP",
+  "MCPUnavailableError": "خادم الـ MCP غير متاح",
   "Provider": "المزود",
   "ProviderAddedSuccess": "تمت إضافة المزود بنجاح",
   "ProviderKey": "المفتاح",

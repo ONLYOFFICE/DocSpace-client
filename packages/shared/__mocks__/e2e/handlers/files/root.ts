@@ -151,8 +151,8 @@ const successRoot = {
         indexing: false,
         denyDownload: false,
         fileEntryType: 1,
-        id: 2,
-        rootFolderId: 2,
+        id: 28934,
+        rootFolderId: 28934,
         canShare: false,
         security: {
           Read: true,

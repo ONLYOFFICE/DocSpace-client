@@ -793,7 +793,7 @@
   "Role": "Rôle",
   "RoleAIAgentContentCreatorDescription": "Les créateurs de contenu peuvent utiliser le chat et travailler avec des fichiers dans le stockage des résultats.\nIls peuvent télécharger des fichiers vers la base de connaissances, mais ne peuvent pas gérer les utilisateurs ni accéder aux paramètres de l'agent.",
   "RoleAIAgentManagerDescription": "Les gestionnaires d'agents peuvent gérer l'agent IA assigné, inviter de nouveaux utilisateurs et attribuer des rôles en dessous de leur niveau.\nIls peuvent utiliser le chat, télécharger des fichiers de connaissances, travailler avec le stockage des résultats et gérer les paramètres du chat.",
-  "RoleAIAgentViewerDescription": "Les spectateurs ne peuvent consulter les fichiers que dans le stockage des résultats avec les sorties générées par d'autres. Ils n'ont pas accès au chat ni à la base de connaissances.",
+  "RoleAIAgentViewerDescription": "Les lecteurs ne peuvent consulter les fichiers que dans le stockage des résultats avec les sorties générées par d'autres.\nIls n'ont pas accès au chat ni à la base de connaissances.",
   "RoleCommentator": "Commentateur",
   "RoleCommentatorDescription": "Opérations sur les fichiers existants : affichage, commentaires.",
   "RoleContentCreatorDescription": "Les créateurs de contenu peuvent créer et modifier des fichiers dans la salle, mais ne peuvent pas gérer les utilisateurs ou les paramètres d'accès.",

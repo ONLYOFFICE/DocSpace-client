@@ -393,8 +393,8 @@ export default inject(
     const fileExst = item?.fileExst;
 
     const pluginContextMenuKeys = [
-      ...(getContextMenuKeysByType(PluginFileType.Image, fileExst) || []),
-      ...(getContextMenuKeysByType(PluginFileType.Video, fileExst) || []),
+      ...(getContextMenuKeysByType(PluginFileType.image, fileExst) || []),
+      ...(getContextMenuKeysByType(PluginFileType.video, fileExst) || []),
     ];
 
     const pluginContextMenuItems = [];

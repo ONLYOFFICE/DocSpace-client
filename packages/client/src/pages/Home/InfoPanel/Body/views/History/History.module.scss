@@ -360,3 +360,36 @@
     text-underline-offset: 2px;
   }
 }
+
+.historyUserLink {
+  &.arrowWrapper {
+    display: inline;
+    margin: 0 4px;
+  }
+
+  :global(.arrow-wrapper) {
+    display: inline;
+    margin: 0 4px;
+  }
+
+  :global(.text) {
+    display: inline;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 2px;
+    overflow-wrap: break-word; 
+    word-break: break-all;
+    word-spacing: normal;
+    text-wrap: wrap;
+  }
+
+  :global(.arrow-index) {
+    transform: rotate(-90deg);
+
+    path {
+      fill: var(--info-panel-text-color);
+    }
+  }
+}

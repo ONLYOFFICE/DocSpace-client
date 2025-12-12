@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "サービスから提供されたMCPサーバーアドレスを入力してください",
   "MCPSettingsDescription": "このセクションでは、ルーム内のAIチャットで使用するMCPサーバーを管理できます。システムMCPサーバーを有効化したり、企業ニーズに応じてカスタムサーバーを追加できます。有効化後、これらのサーバーは他のユーザーも利用できるようになります。",
   "MCPSettingTitle": "MCPサーバー",
+  "MCPUnavailableError": "MCPサーバーが利用できません。",
   "Provider": "プロバイダー",
   "ProviderAddedSuccess": "プロバイダーが正常に追加されました",
   "ProviderKey": "キー",

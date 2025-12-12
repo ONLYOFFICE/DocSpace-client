@@ -59,7 +59,7 @@ import { useEndAnimation } from "@/hooks/useEndAnimation";
 
 import { Header } from "./header";
 import { Body } from "./body";
-import { StyledWrapper } from "./configuration.styled";
+import styles from "./configuration.module.scss";
 
 export const ConfigurationSpaces = ({
   domainValidator,
@@ -70,10 +70,10 @@ export const ConfigurationSpaces = ({
 
   return (
     <LoaderWrapper isLoading={isLoading}>
-      <StyledWrapper>
+      <div className={styles.wrapper}>
         <Header />
         <Body domainValidator={domainValidator} />
-      </StyledWrapper>
+      </div>
     </LoaderWrapper>
   );
 };

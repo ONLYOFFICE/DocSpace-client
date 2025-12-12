@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Веб-поиск успешно отключен",
   "WebSearchEnabledSuccess": "Веб-поиск успешно включен",
   "WebSearchKeyDescription": "Введите ключ API, полученный от вашего провайдера веб-поиска.",
-  "WebSearchKeyHiddenDescription": "Ключ API отображается только один раз при сохранении, а затем скрывается в целях безопасности."
+  "WebSearchKeyHiddenDescription": "Ключ API отображается только один раз при сохранении, а затем скрывается в целях безопасности.",
+  "MCPUnavailableError": "Сервер MCP недоступен"
 }

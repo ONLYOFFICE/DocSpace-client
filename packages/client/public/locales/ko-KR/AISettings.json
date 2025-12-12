@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "웹 검색을 성공적으로 비활성화했습니다.",
   "WebSearchEnabledSuccess": "웹 검색 활성화 성공",
   "WebSearchKeyDescription": "웹 검색 제공업체로부터 얻은 API 키를 입력하세요.",
-  "WebSearchKeyHiddenDescription": "API 키는 저장 시에 한 번만 표시된 후 보안을 위해 숨겨집니다."
+  "WebSearchKeyHiddenDescription": "API 키는 저장 시에 한 번만 표시된 후 보안을 위해 숨겨집니다.",
+  "MCPUnavailableError": "MCP 서버가 사용 불가능합니다."
 }

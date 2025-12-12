@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Webová vyhledávání byla úspěšně vypnuta",
   "WebSearchEnabledSuccess": "Webové vyhledávání bylo úspěšně povoleno",
   "WebSearchKeyDescription": "Zadejte API klíč získaný od vašeho poskytovatele webového vyhledávání.",
-  "WebSearchKeyHiddenDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů."
+  "WebSearchKeyHiddenDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů.",
+  "MCPUnavailableError": "Server MCP je nedostupný."
 }

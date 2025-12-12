@@ -72,6 +72,21 @@
       "env": {
         "PYTHONPATH": "${workspaceFolder}/backend/src"
       }
+    },
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Debug Python Script (download_from_docspace)",
+      "program": "${workspaceFolder}/backend/src/scripts/form/download_from_docspace.py",
+      "cwd": "${workspaceFolder}/backend/src/scripts/form",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["--import-dir", "downloads", "--room-id", "14305"],
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend/src",
+        "DYLD_FRAMEWORK_PATH": "${env:HOME}/.pyenv/versions/3.12.0/lib/python3.12/site-packages/docbuilder/lib",
+        "DYLD_LIBRARY_PATH": "${env:HOME}/.pyenv/versions/3.12.0/lib/python3.12/site-packages/docbuilder/lib"
+      }
     }
   ]
 }

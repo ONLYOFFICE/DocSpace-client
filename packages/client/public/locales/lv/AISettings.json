@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Web meklēšana veiksmīgi atslēgta",
   "WebSearchEnabledSuccess": "Web meklēšana veiksmīgi ieslēgta",
   "WebSearchKeyDescription": "Ievadiet API atslēgu, kas iegūta no jūsu tiešsaistes meklēšanas pakalpojuma.",
-  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos."
+  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos.",
+  "MCPUnavailableError": "MCP server nav pieejams"
 }

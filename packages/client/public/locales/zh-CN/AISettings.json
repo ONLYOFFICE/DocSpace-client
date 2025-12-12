@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "联网搜索已禁用",
   "WebSearchEnabledSuccess": "联网搜索已启用",
   "WebSearchKeyDescription": "请输入从您的联网搜索提供商处获取的 API 密钥",
-  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。"
+  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。",
+  "MCPUnavailableError": "MCP 服务器不可用"
 }

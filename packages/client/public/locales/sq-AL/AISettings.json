@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Futni adresën e serverit MCP të dhënë nga shërbimi juaj.",
   "MCPSettingsDescription": "Ky seksion ju lejon të menaxhoni serverat MCP për biseda AI brenda dhomave. Mund të aktivizoni serverat sistemikë MCP ose të shtoni të personalizuar për nevojat e kompanisë. Pasi të aktivizohen, këta serverë do të jenë të aksesueshëm edhe nga përdorues të tjerë për detyrat e tyre.",
   "MCPSettingTitle": "Serverat MCP",
+  "MCPUnavailableError": "Serveri MCP nuk është i disponueshëm",
   "Provider": "Ofruesi",
   "ProviderAddedSuccess": "Ofruesi u shtua me sukses",
   "ProviderKey": "Çelësi",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Kërkimi në internet u çaktivizua me sukses",
   "WebSearchEnabledSuccess": "Kërkimi në internet u aktivizua me sukses",
   "WebSearchKeyDescription": "Futni çelësin API të marrë nga ofruesi i kërkimit në internet",
-  "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie.",
-  "MCPUnavailableError": "Serveri MCP nuk është i disponueshëm"
+  "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie."
 }

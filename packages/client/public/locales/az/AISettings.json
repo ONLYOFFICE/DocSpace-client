@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Xidmətiniz tərəfindən verilən MCP server ünvanını daxil edin.",
   "MCPSettingsDescription": "Bu bölmə otaqlar daxilində süni intellekt söhbətləri üçün MCP serverlərini idarə etməyə imkan verir. Siz sistem MCP serverlərini aktiv edə bilərsiniz və ya şirkətinizin ehtiyaclarını ödəmək üçün xüsusi olanları əlavə edə bilərsiniz. Aktiv edildikdən sonra, bu serverlər digər istifadəçilər üçün onların tapşırıqları üçün əlçatmaz olacaq.",
   "MCPSettingTitle": "MCP serverləri",
+  "MCPUnavailableError": "MCP serveri mövcud deyil.",
   "Provider": "Təminatçı",
   "ProviderAddedSuccess": "Təminatçı uğurla əlavə edildi",
   "ProviderKey": "Kunci",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Veb axtarışı uğurla dayandırıldı",
   "WebSearchEnabledSuccess": "Veb axtarışı uğurla aktivləşdirilib",
   "WebSearchKeyDescription": "Veb axtarış xidmətinizdən əldə etdiyiniz API açarını daxil edin.",
-  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir.",
-  "MCPUnavailableError": "MCP serveri mövcud deyil."
+  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir."
 }

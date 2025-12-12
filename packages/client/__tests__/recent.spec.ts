@@ -209,10 +209,7 @@ test.describe("Recent", () => {
     mockRequest,
     wsMock,
   }) => {
-    await mockRequest.router([
-      endpoints.recentOneFile,
-      endpoints.settingsWithSocket,
-    ]);
+    await mockRequest.router([endpoints.recent, endpoints.settingsWithSocket]);
     await wsMock.setupWebSocketMock();
     await page.goto("/recent/filter?folder=28934");
 
@@ -223,6 +220,7 @@ test.describe("Recent", () => {
     await cell.locator('[data-testid="link"]').click({ button: "right" });
     const removeFromRecent = page.getByTestId("remove-from-recent");
     await expect(removeFromRecent).toBeVisible();
+    await removeFromRecent.click();
 
     wsMock.emitModifyFolder({
       cmd: "delete",
@@ -231,8 +229,8 @@ test.describe("Recent", () => {
       data: "",
     });
 
-    const emptyView = page.getByTestId("empty-view");
-    await expect(emptyView).toBeVisible();
+    const toast = page.getByTestId("toast-content");
+    await expect(toast).toBeVisible();
 
     wsMock.closeConnection();
   });

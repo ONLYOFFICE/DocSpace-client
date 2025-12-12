@@ -107,7 +107,6 @@ import {
   thirdPartyHandler,
   recentEmptyHandler,
   recentHandler,
-  recentOneFileHandler,
   PATH_RECENT,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
@@ -435,9 +434,5 @@ export const endpoints = {
   recent: {
     url: PATH_RECENT,
     dataHandler: recentHandler,
-  },
-  recentOneFile: {
-    url: PATH_RECENT,
-    dataHandler: recentOneFileHandler,
   },
 } satisfies TEndpoints;

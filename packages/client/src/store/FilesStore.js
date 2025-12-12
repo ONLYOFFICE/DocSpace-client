@@ -1978,13 +1978,13 @@ class FilesStore {
                 !this.settingsStore.aiConfig.aiReadyNeedReset,
               Download: aiRoom.security.Download,
               EditAccess:
-                item.security?.EditAccess &&
+                currentFolder.security.security?.EditAccess &&
                 !this.settingsStore.aiConfig.aiReadyNeedReset,
               EditRoom:
-                item.security?.EditRoom &&
+                currentFolder.security.security?.EditRoom &&
                 !this.settingsStore.aiConfig.aiReadyNeedReset,
               ChangeOwner:
-                item.security?.ChangeOwner &&
+                currentFolder.security.security?.ChangeOwner &&
                 !this.settingsStore.aiConfig.aiReadyNeedReset,
               Delete: aiRoom.security.Delete,
 

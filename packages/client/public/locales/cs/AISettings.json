@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Zadejte adresu MCP serveru poskytnutou vaší službou.",
   "MCPSettingsDescription": "Tato sekce umožňuje spravovat MCP servery pro AI chaty v místnostech. Můžete povolit systémové MCP servery nebo přidat vlastní, aby vyhovovaly potřebám vaší společnosti. Jakmile budou povoleny, tyto servery budou pro ostatní uživatele dostupné pro jejich úkoly.",
   "MCPSettingTitle": "MCP servery",
+  "MCPUnavailableError": "Server MCP je nedostupný.",
   "Provider": "Poskytovatel",
   "ProviderAddedSuccess": "Poskytovatel byl úspěšně přidán",
   "ProviderKey": "Klíč",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Webová vyhledávání byla úspěšně vypnuta",
   "WebSearchEnabledSuccess": "Webové vyhledávání bylo úspěšně povoleno",
   "WebSearchKeyDescription": "Zadejte API klíč získaný od vašeho poskytovatele webového vyhledávání.",
-  "WebSearchKeyHiddenDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů.",
-  "MCPUnavailableError": "Server MCP je nedostupný."
+  "WebSearchKeyHiddenDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů."
 }

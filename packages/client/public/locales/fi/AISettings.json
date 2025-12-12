@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Syötä palvelusi antama MCP-palvelimen osoite",
   "MCPSettingsDescription": "Tämä osio mahdollistaa MCP-palvelimien hallinnan AI-keskusteluille huoneissa. Voit ottaa käyttöön järjestelmän MCP-palvelimia tai lisätä mukautettuja palvelimia yrityksesi tarpeisiin. Kun ne on otettu käyttöön, nämä palvelimet ovat muiden käyttäjien käytettävissä heidän tehtäviään varten.",
   "MCPSettingTitle": "MCP-palvelimet",
+  "MCPUnavailableError": "MCP-palvelin ei ole käytettävissä",
   "Provider": "Palveluntarjoaja",
   "ProviderAddedSuccess": "Palveluntarjoaja lisätty onnistuneesti",
   "ProviderKey": "Avain",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Web-haun poistaminen käytöstä onnistui",
   "WebSearchEnabledSuccess": "Verkkohaku käytössä onnistuneesti",
   "WebSearchKeyDescription": "Syötä web-hakupalveluntarjoajaltasi hankittu API-avain.",
-  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä.",
-  "MCPUnavailableError": "MCP-palvelin ei ole käytettävissä"
+  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä."
 }

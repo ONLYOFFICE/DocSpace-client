@@ -791,7 +791,7 @@
   "Reviewing": "pregled",
   "RevokeLink": "Opozovi link",
   "Role": "Uloga",
-  "RoleAIAgentContentCreatorDescription": "Kreatori sadržaja mogu koristiti čet i rade sa datotekama u skladištu rezultata. Mogu da učitavaju fajlove u bazu znanja, ali ne mogu da upravljaju korisnicima ili pristupe podešavanjima agenta.",
+  "RoleAIAgentContentCreatorDescription": "Kreatori sadržaja mogu koristiti čet i rade sa datotekama u skladištu rezultata.\nMogu da učitavaju fajlove u bazu znanja, ali ne mogu da upravljaju korisnicima ili pristupe podešavanjima agenta.",
   "RoleAIAgentManagerDescription": "Menadžeri agenata mogu da upravljaju dodeljenim AI agentom, pozivaju nove korisnike i dodeljuje uloge ispod njihovog nivoa.\nMogu da koriste čat, učitavaju fajlove znanja, rade sa skladištem rezultata i upravljaju podešavanjima čata.",
   "RoleAIAgentViewerDescription": "Gledaoci mogu da pregledaju samo datoteke u skladištu rezultata sa izlazima generisanim od strane drugih.\nOni nemaju pristup chatu ili bazi znanja.",
   "RoleCommentator": "Komentator",

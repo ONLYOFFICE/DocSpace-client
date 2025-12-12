@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Introduceți adresa serverului MCP oferită de serviciul dvs.",
   "MCPSettingsDescription": "Această secțiune vă permite să gestionați servere MCP pentru chat-ul cu IA în săli. Puteți activa servere MCP de sistem sau puteți adăuga servere personalizate pentru a vă îndeplini nevoile companiei. Odată activate, aceste servere vor fi accesibile pentru toți utilizatorii în îndeplinirea sarcinilor lor.",
   "MCPSettingTitle": "Servere MCP",
+  "MCPUnavailableError": "Serverul MCP este indisponibil.",
   "Provider": "Furnizor",
   "ProviderAddedSuccess": "Furnizorul a fost adăugat cu succes",
   "ProviderKey": "Cheie",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Căutare pe web a fost dezactivată cu succes",
   "WebSearchEnabledSuccess": "Căutare pe web a fost activată cu succes",
   "WebSearchKeyDescription": "Întroduceți cheia API oferită de furnizorul serviciului de căutare pe web",
-  "WebSearchKeyHiddenDescription": "Cheia API se afișează o singură dată la salvare și este ascunsă ulterior din motive de securitate.",
-  "MCPUnavailableError": "Serverul MCP este indisponibil."
+  "WebSearchKeyHiddenDescription": "Cheia API se afișează o singură dată la salvare și este ascunsă ulterior din motive de securitate."
 }

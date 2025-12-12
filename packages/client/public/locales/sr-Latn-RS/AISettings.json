@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Unesite MCP server adresu koju vam je dostavila vaša usluga",
   "MCPSettingsDescription": "Ovaj odeljak vam omogućava da upravljate MCP serverima za AI četove u okviru soba. Možete omogućiti sistemske MCP servere ili dodati prilagođene radi ispunjavanja potreba vaše kompanije. Kada se omoguće, ovi serveri će biti dostupni drugim korisnicima za njihove zadatke.",
   "MCPSettingTitle": "MCP serveri",
+  "MCPUnavailableError": "MCP server nije dostupan.",
   "Provider": "Provajder",
   "ProviderAddedSuccess": "Provajder uspešno dodat",
   "ProviderKey": "Ključ",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Veb pretraga je uspešno onemogućena",
   "WebSearchEnabledSuccess": "Veb pretraga je uspešno omogućena",
   "WebSearchKeyDescription": "Unesite API ključ dobijen od vašeg provajdera veb pretrage",
-  "WebSearchKeyHiddenDescription": "API ključ se prikazuje samo jednom nakon čuvanja, a zatim je skriven iz bezbednosnih razloga.",
-  "MCPUnavailableError": "MCP server nije dostupan."
+  "WebSearchKeyHiddenDescription": "API ključ se prikazuje samo jednom nakon čuvanja, a zatim je skriven iz bezbednosnih razloga."
 }

@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Wprowadź adres serwera MCP podany przez twoją usługę.",
   "MCPSettingsDescription": "Ta sekcja umożliwia zarządzanie serwerami MCP dla czatów AI w pokojach. Możesz włączyć systemowe serwery MCP lub dodać własne, aby spełnić potrzeby Twojej firmy. Po włączeniu te serwery będą dostępne dla innych użytkowników do ich zadań.",
   "MCPSettingTitle": "Serwery MCP",
+  "MCPUnavailableError": "Serwer MCP jest niedostępny.",
   "Provider": "Dostawca",
   "ProviderAddedSuccess": "Dodano dostawcę pomyślnie",
   "ProviderKey": "Klucz",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Wyszukiwanie w sieci zostało pomyślnie wyłączone.",
   "WebSearchEnabledSuccess": "Wyszukiwanie w sieci włączone pomyślnie",
   "WebSearchKeyDescription": "Wprowadź klucz API uzyskany od dostawcy wyszukiwarki internetowej.",
-  "WebSearchKeyHiddenDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania, a następnie jest ukrywany ze względów bezpieczeństwa.",
-  "MCPUnavailableError": "Serwer MCP jest niedostępny."
+  "WebSearchKeyHiddenDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania, a następnie jest ukrywany ze względów bezpieczeństwa."
 }

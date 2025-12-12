@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "输入服务商提供的 MCP 服务器地址",
   "MCPSettingsDescription": "此部分用于管理房间内 AI 对话的 MCP 服务器。您可以启用系统 MCP 服务器，也可以添加自定义服务器以满足公司需求。启用后，其他用户即可访问这些服务器以执行其任务。",
   "MCPSettingTitle": "MCP 服务器",
+  "MCPUnavailableError": "MCP 服务器不可用。",
   "Provider": "提供商",
   "ProviderAddedSuccess": "提供商添加成功",
   "ProviderKey": "密钥",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "联网搜索已禁用",
   "WebSearchEnabledSuccess": "联网搜索已启用",
   "WebSearchKeyDescription": "请输入从您的联网搜索提供商处获取的 API 密钥",
-  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。",
-  "MCPUnavailableError": "MCP 服务器不可用"
+  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。"
 }

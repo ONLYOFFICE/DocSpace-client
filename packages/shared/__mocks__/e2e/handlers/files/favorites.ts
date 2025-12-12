@@ -1532,7 +1532,7 @@ export const successFavoritesMany = {
           Create: true,
           Delete: false,
           EditRoom: true,
-          Rename: true,
+          Rename: false,
           CopyTo: true,
           Copy: true,
           MoveTo: true,

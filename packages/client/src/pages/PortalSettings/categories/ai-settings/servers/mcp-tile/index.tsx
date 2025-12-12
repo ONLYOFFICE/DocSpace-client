@@ -123,7 +123,7 @@ export const MCPTile = ({
             className={styles.toggleButton}
             isChecked={item.enabled}
             onChange={() => onToggle(item.id, !item.enabled)}
-            isDisabled={disableActions}
+            isDisabled={disableActions || item.needReset}
           />
           {item.serverType === ServerType.Custom ? (
             <ContextMenuButton

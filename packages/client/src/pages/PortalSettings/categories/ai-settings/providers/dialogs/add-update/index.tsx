@@ -205,7 +205,6 @@ const AddUpdateDialogComponent = ({
         };
 
         await addAIProvider?.(data);
-        await getAIConfig?.();
         toastr.success(t("AISettings:ProviderAddedSuccess"));
       }
 
@@ -227,6 +226,8 @@ const AddUpdateDialogComponent = ({
         await updateAIProvider?.(providerData.id, data);
         toastr.success(t("AISettings:ProviderUpdatedSuccess"));
       }
+
+      getAIConfig?.();
 
       onClose();
     } catch (e) {

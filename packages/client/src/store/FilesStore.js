@@ -1973,6 +1973,9 @@ class FilesStore {
             ...aiRoom,
             security: {
               ...currentFolder.security,
+              Create:
+                currentFolder.security.Create &&
+                !this.settingsStore.aiConfig.aiReadyNeedReset,
               Download: aiRoom.security.Download,
               ChangeOwner: aiRoom.security.ChangeOwner,
               Delete: aiRoom.security.Delete,
@@ -2457,6 +2460,12 @@ class FilesStore {
               pathParts: data.pathParts,
               navigationPath: EMPTY_ARRAY,
               ...{ new: data.new },
+              security: {
+                ...data.current.security,
+                Create:
+                  data.current.security.Create &&
+                  !this.settingsStore.aiConfig.aiReadyNeedReset,
+              },
             });
 
             const isEmptyList = data.folders.length === 0;
@@ -4071,6 +4080,23 @@ class FilesStore {
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
+      const isAIAgent =
+        item.rootFolderType === FolderType.AIAgents &&
+        item.roomType === RoomsType.AIRoom;
+
+      const newSecurity = {
+        ...security,
+        EditAccess:
+          item.security?.EditAccess &&
+          !this.settingsStore.aiConfig.aiReadyNeedReset,
+        EditRoom:
+          item.security?.EditRoom &&
+          !this.settingsStore.aiConfig.aiReadyNeedReset,
+        canChangeOwner:
+          item.security?.ChangeOwner &&
+          !this.settingsStore.aiConfig.aiReadyNeedReset,
+      };
+
       let isFolder = item.isFolder ?? false;
       this.folders.forEach((x) => {
         if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
@@ -4106,9 +4132,6 @@ class FilesStore {
       const isRoom = !!roomType;
       const isTemplate =
         item.rootFolderType === FolderType.RoomTemplates && isRoom;
-      const isAIAgent =
-        item.rootFolderType === FolderType.AIAgents &&
-        item.roomType === RoomsType.AIRoom;
 
       const icon =
         isRoom && logo?.medium
@@ -4215,7 +4238,7 @@ class FilesStore {
         pinned,
         thirdPartyIcon,
         providerType,
-        security,
+        security: isAIAgent ? newSecurity : security,
         viewAccessibility,
         ...pluginOptions,
         inRoom,

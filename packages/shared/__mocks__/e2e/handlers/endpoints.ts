@@ -105,6 +105,9 @@ import {
   shareHandler,
   thirdPartyCapabilitiesHandler,
   thirdPartyHandler,
+  recentEmptyHandler,
+  recentHandler,
+  PATH_RECENT,
   PATH_FAVORITES,
   PATH_DELETE_FAVORITES,
   PATH_ADD_TO_FAVORITES,
@@ -433,6 +436,14 @@ export const endpoints = {
   shareToUser: {
     url: PATH_SHARE_TO_USERS_FILE,
     dataHandler: shareToUserHandle,
+  },
+  recentEmpty: {
+    url: PATH_RECENT,
+    dataHandler: recentEmptyHandler,
+  },
+  recent: {
+    url: PATH_RECENT,
+    dataHandler: recentHandler,
   },
   favorites: {
     url: PATH_FAVORITES,

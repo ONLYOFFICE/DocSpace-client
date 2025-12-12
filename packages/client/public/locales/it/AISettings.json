@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Ricerca web disabilitata con successo",
   "WebSearchEnabledSuccess": "Ricerca web abilitata con successo",
   "WebSearchKeyDescription": "Inserisci la chiave API ottenuta dal tuo provider di ricerca web",
-  "WebSearchKeyHiddenDescription": "La chiave API viene visualizzata solo una volta al momento del salvataggio e viene poi nascosta per motivi di sicurezza."
+  "WebSearchKeyHiddenDescription": "La chiave API viene visualizzata solo una volta al momento del salvataggio e viene poi nascosta per motivi di sicurezza.",
+  "MCPUnavailableError": "Il server MCP non è disponibile."
 }

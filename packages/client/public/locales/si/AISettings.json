@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "වෙබ් සෙවීම සාර්ථකව අබල කරන ලදී.",
   "WebSearchEnabledSuccess": "වෙබ් සෙවීම සාර්ථකව සක්‍රීය කරන ලදී",
   "WebSearchKeyDescription": "ඔබගේ වෙබ් සෙවුම් සපයන්නාගෙන් ලබාගත් API යතුර ඇතුළත් කරන්න.",
-  "WebSearchKeyHiddenDescription": "සුරැකීමෙන් පසු API යතුර එක් වරක් පමණක් දර්ශනය වන අතර පසුව ආරක්ෂක අරමුණු සඳහා සඟවනු ලැබේ."
+  "WebSearchKeyHiddenDescription": "සුරැකීමෙන් පසු API යතුර එක් වරක් පමණක් දර්ශනය වන අතර පසුව ආරක්ෂක අරමුණු සඳහා සඟවනු ලැබේ.",
+  "MCPUnavailableError": "MCP සේවාදායකය නොමැත."
 }

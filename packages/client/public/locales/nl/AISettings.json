@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Webzoekfunctie succesvol uitgeschakeld",
   "WebSearchEnabledSuccess": "Web zoeken succesvol ingeschakeld",
   "WebSearchKeyDescription": "Voer de API-sleutel in die u van uw webzoekmachineprovider heeft verkregen",
-  "WebSearchKeyHiddenDescription": "De API-sleutel wordt slechts één keer weergegeven bij het opslaan en daarna verborgen om veiligheidsredenen."
+  "WebSearchKeyHiddenDescription": "De API-sleutel wordt slechts één keer weergegeven bij het opslaan en daarna verborgen om veiligheidsredenen.",
+  "MCPUnavailableError": "De MCP-server is niet beschikbaar."
 }

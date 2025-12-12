@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Veb axtarışı uğurla dayandırıldı",
   "WebSearchEnabledSuccess": "Veb axtarışı uğurla aktivləşdirilib",
   "WebSearchKeyDescription": "Veb axtarış xidmətinizdən əldə etdiyiniz API açarını daxil edin.",
-  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir."
+  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir.",
+  "MCPUnavailableError": "MCP serveri mövcud deyil."
 }

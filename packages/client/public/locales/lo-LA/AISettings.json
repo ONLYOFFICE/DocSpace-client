@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "ປິດການຄົ້ນຫາເວັບສຳເລັດແລ້ວ",
   "WebSearchEnabledSuccess": "ເປີດໃຊ້ການຄົ້ນຫາເວັບສຳເລັດແລ້ວ",
   "WebSearchKeyDescription": "ໃສ່ລະຫັດ API ທີ່ໄດ້ຮັບຈາກຜູ້ໃຫ້ບໍລິການຄົ້ນຫາເວັບຂອງທ່ານ",
-  "WebSearchKeyHiddenDescription": "ລະຫັດ API ຈະສະແດງພຽງຄັ້ງດຽວຫຼັງຈາກບັນທຶກແລ້ວ ແລະ ຫຼັງຈາກນັ້ນຈະຖືກເຊື່ອງໄວ້ເພື່ອຈຸດປະສົງດ້ານຄວາມປອດໄພ."
+  "WebSearchKeyHiddenDescription": "ລະຫັດ API ຈະສະແດງພຽງຄັ້ງດຽວຫຼັງຈາກບັນທຶກແລ້ວ ແລະ ຫຼັງຈາກນັ້ນຈະຖືກເຊື່ອງໄວ້ເພື່ອຈຸດປະສົງດ້ານຄວາມປອດໄພ.",
+  "MCPUnavailableError": "ເຊີບເວີ MCP ບໍ່ສາມາດໃຊ້ໄດ້"
 }

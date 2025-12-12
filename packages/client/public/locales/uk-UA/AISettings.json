@@ -59,5 +59,6 @@
   "WebSearchDisabledSuccess": "Успішно вимкнено веб-пошук",
   "WebSearchEnabledSuccess": "Успішно ввімкнено веб-пошук",
   "WebSearchKeyDescription": "Введіть API-ключ, отриманий від вашого пошукового сервісу.",
-  "WebSearchKeyHiddenDescription": "Ключ API відображається лише один раз під час збереження, після чого він прихований з міркувань безпеки."
+  "WebSearchKeyHiddenDescription": "Ключ API відображається лише один раз під час збереження, після чого він прихований з міркувань безпеки.",
+  "MCPUnavailableError": "Сервер MCP недоступний."
 }

@@ -91,6 +91,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       sessionStorage.removeItem("loggedOutUserId");
     }
 
+    const isAccountsPage = location.pathname.includes("/accounts");
+
     const isPortalUrl =
       location.pathname === "/preparation-portal" ||
       location.pathname === "/management/preparation-portal";
@@ -302,10 +304,14 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <Navigate replace to="/error/403" />;
     }
 
+    if (isAccountsPage) {
+      return children;
+    }
+
     if (
       !restricted ||
       isAdmin ||
-      withManager ||
+      (withManager && !user?.isVisitor && !user?.isCollaborator) ||
       (withCollaborator &&
         (!user?.isVisitor || (user?.isVisitor && user?.hasPersonalFolder)))
     ) {

@@ -41,6 +41,9 @@ import type {
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 import type { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
 import type { TTranslation } from "@docspace/shared/types";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@docspace/shared/utils";
+import { PluginLocale } from "@onlyoffice/docspace-plugin-sdk";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -456,6 +459,7 @@ class PluginStore {
   };
 
   installPlugin = async (plugin: TPlugin, addToList = true) => {
+    const { culture } = this.settingsStore;
     if (addToList) {
       const idx = this.plugins.findIndex((p) => p.name === plugin.name);
 
@@ -485,6 +489,9 @@ class PluginStore {
     }
 
     if (plugin.status === PluginStatus.hide) return;
+
+    const language = (getCookie(LANGUAGE) || culture) as PluginLocale;
+    plugin.setLanguage?.(language);
 
     this.installPluginCss(plugin);
 

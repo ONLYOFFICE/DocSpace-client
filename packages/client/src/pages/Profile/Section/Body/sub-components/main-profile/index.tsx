@@ -59,6 +59,7 @@ import { TAvatarModel } from "@docspace/shared/components/avatar/Avatar.types";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";
 import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
@@ -73,6 +74,7 @@ import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import CampaignsStore from "SRC_DIR/store/CampaignsStore";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
 import styles from "./Profile.module.scss";
 
@@ -117,6 +119,8 @@ type MainProfileProps = {
   setImage?: AvatarEditorDialogStore["setImage"];
   fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
   getBanner?: CampaignsStore["getBanner"];
+  updatePlugins: PluginStore["updatePlugins"];
+  enablePlugins: SettingsStore["enablePlugins"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
@@ -145,6 +149,8 @@ const MainProfile = (props: MainProfileProps) => {
     setImage,
     fetchTreeFolders,
     getBanner,
+    enablePlugins,
+    updatePlugins,
   } = props;
 
   const styleContainerRef = useRef<HTMLDivElement>(null);
@@ -337,6 +343,7 @@ const MainProfile = (props: MainProfileProps) => {
       TopLoadingIndicator.start();
       await updateProfileCulture?.(profile!.id, newLanguage.key as string);
       await i18n.changeLanguage(newLanguage.key?.toString());
+      enablePlugins && (await updatePlugins());
       await fetchTreeFolders?.();
       await getBanner?.(true);
     } catch (error: unknown) {
@@ -811,9 +818,11 @@ export default inject(
     avatarEditorDialogStore,
     treeFoldersStore,
     campaignsStore,
+    pluginStore,
   }: TStore) => {
     const { withActivationBar, sendActivationLink, user: profile } = userStore;
-    const { becometranslatorUrl, culture, documentationEmail } = settingsStore;
+    const { becometranslatorUrl, culture, documentationEmail, enablePlugins } =
+      settingsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -836,6 +845,8 @@ export default inject(
     const { fetchTreeFolders } = treeFoldersStore;
 
     const { getBanner } = campaignsStore;
+
+    const { updatePlugins } = pluginStore;
 
     return {
       profile,
@@ -860,6 +871,8 @@ export default inject(
       setImage,
       fetchTreeFolders,
       getBanner,
+      updatePlugins,
+      enablePlugins,
     };
   },
 )(withCultureNames<MainProfileProps>(observer(MainProfile)));

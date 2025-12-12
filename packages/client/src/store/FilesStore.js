@@ -1977,10 +1977,17 @@ class FilesStore {
                 currentFolder.security.Create &&
                 !this.settingsStore.aiConfig.aiReadyNeedReset,
               Download: aiRoom.security.Download,
-              ChangeOwner: aiRoom.security.ChangeOwner,
+              EditAccess:
+                item.security?.EditAccess &&
+                !this.settingsStore.aiConfig.aiReadyNeedReset,
+              EditRoom:
+                item.security?.EditRoom &&
+                !this.settingsStore.aiConfig.aiReadyNeedReset,
+              ChangeOwner:
+                item.security?.ChangeOwner &&
+                !this.settingsStore.aiConfig.aiReadyNeedReset,
               Delete: aiRoom.security.Delete,
-              EditRoom: aiRoom.security.EditRoom,
-              EditAccess: aiRoom.security.EditAccess,
+
               Pin: aiRoom.security.Pin,
               UseChat: aiRoom.security.UseChat,
             },
@@ -4092,7 +4099,7 @@ class FilesStore {
         EditRoom:
           item.security?.EditRoom &&
           !this.settingsStore.aiConfig.aiReadyNeedReset,
-        canChangeOwner:
+        ChangeOwner:
           item.security?.ChangeOwner &&
           !this.settingsStore.aiConfig.aiReadyNeedReset,
       };

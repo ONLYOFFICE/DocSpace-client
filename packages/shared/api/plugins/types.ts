@@ -28,11 +28,11 @@ import { TCreatedBy } from "../../types";
 
 export type TAPIPlugin = {
   name: string;
-  nameLocale: { [key: string]: string };
+  nameLocale?: { [key: string]: string };
   version: string;
   minDocSpaceVersion?: string;
   description: string;
-  descriptionLocale: { [key: string]: string };
+  descriptionLocale?: { [key: string]: string };
   license: string;
   author: string;
   homePage: string;

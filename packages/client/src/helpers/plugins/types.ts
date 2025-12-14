@@ -139,11 +139,13 @@ export interface IframeWindow extends Window {
 
 export type TPlugin = {
   name: string;
-  nameLocale?: { [key: string]: string };
+  nameLocaleMap?: { [key: string]: string };
   version: string;
   minDocSpaceVersion?: string;
   description: string;
-  descriptionLocale?: { [key: string]: string };
+  descriptionLocaleMap?: { [key: string]: string };
+  nameLocale: string;
+  descriptionLocale: string;
   compatible: boolean;
   license: string;
   author: string;

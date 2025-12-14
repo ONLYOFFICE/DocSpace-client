@@ -363,6 +363,21 @@ class PluginStore {
     }
   };
 
+  initLocalePlugin = (plugin: TPlugin) => {
+    const culture = this.settingsStore.culture;
+    const currentLanguage = (getCookie(LANGUAGE) || culture) as PluginLocale;
+    plugin.setLanguage?.(currentLanguage);
+
+    const language = plugin.getLanguage?.();
+
+    plugin.nameLocale =
+      (language && plugin.nameLocaleMap?.[language]) || plugin.name;
+
+    plugin.descriptionLocale =
+      (language && plugin.descriptionLocaleMap?.[language]) ||
+      plugin.description;
+  };
+
   initPlugin = (
     plugin: TAPIPlugin,
     callback?: (plugin: TPlugin) => void,
@@ -377,6 +392,8 @@ class PluginStore {
 
           const newPlugin = cloneDeep({
             ...plugin,
+            nameLocaleMap: plugin.nameLocale,
+            descriptionLocaleMap: plugin.descriptionLocale,
             ...iWindow?.Plugins?.[plugin.pluginName],
           });
 
@@ -390,6 +407,8 @@ class PluginStore {
           newPlugin.compatible = this.checkPluginCompatibility(
             plugin.minDocSpaceVersion,
           );
+
+          this.initLocalePlugin(newPlugin);
 
           this.installPlugin(newPlugin);
 
@@ -459,7 +478,6 @@ class PluginStore {
   };
 
   installPlugin = async (plugin: TPlugin, addToList = true) => {
-    const { culture } = this.settingsStore;
     if (addToList) {
       const idx = this.plugins.findIndex((p) => p.name === plugin.name);
 
@@ -489,9 +507,6 @@ class PluginStore {
     }
 
     if (plugin.status === PluginStatus.hide) return;
-
-    const language = (getCookie(LANGUAGE) || culture) as PluginLocale;
-    plugin.setLanguage?.(language);
 
     this.installPluginCss(plugin);
 

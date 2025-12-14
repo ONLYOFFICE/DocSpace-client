@@ -52,8 +52,6 @@ const PluginItem = ({
 
   enabled,
   updatePlugin,
-  
-  getLanguage,
 
   openSettingsDialog,
 
@@ -63,11 +61,6 @@ const PluginItem = ({
   theme,
 }: PluginItemProps) => {
   const { t } = useTranslation(["Common"]);
-
-  const language = getLanguage?.();
-
-  const pluginName = language && nameLocale?.[language] || name;
-  const pluginDescription = language && descriptionLocale?.[language] || description;
 
   const imgSrc = image
     ? getPluginUrl(url, `/assets/${image}?hash=${version}`)
@@ -93,7 +86,7 @@ const PluginItem = ({
       />
       <div className="plugin-info">
         <StyledPluginHeader>
-          <Heading className="plugin-name">{pluginName}</Heading>
+          <Heading className="plugin-name">{nameLocale}</Heading>
           <div className="plugin-controls">
             <IconButton
               iconName={PluginSettingsIconUrl}
@@ -137,14 +130,14 @@ const PluginItem = ({
           />
         ) : null}
 
-        {pluginDescription ? (
+        {descriptionLocale ? (
           <Text
             className="plugin-description"
             fontWeight={400}
             lineHeight="20px"
-            title={pluginDescription}
+            title={descriptionLocale}
           >
-            {pluginDescription}
+            {descriptionLocale}
           </Text>
         ) : null}
       </div>

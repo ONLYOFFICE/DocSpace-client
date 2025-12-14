@@ -119,8 +119,8 @@ type MainProfileProps = {
   setImage?: AvatarEditorDialogStore["setImage"];
   fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
   getBanner?: CampaignsStore["getBanner"];
-  updatePlugins: PluginStore["updatePlugins"];
-  enablePlugins: SettingsStore["enablePlugins"];
+  updatePlugins?: PluginStore["updatePlugins"];
+  enablePlugins?: SettingsStore["enablePlugins"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
@@ -343,7 +343,7 @@ const MainProfile = (props: MainProfileProps) => {
       TopLoadingIndicator.start();
       await updateProfileCulture?.(profile!.id, newLanguage.key as string);
       await i18n.changeLanguage(newLanguage.key?.toString());
-      enablePlugins && (await updatePlugins());
+      enablePlugins && (await updatePlugins?.());
       await fetchTreeFolders?.();
       await getBanner?.(true);
     } catch (error: unknown) {

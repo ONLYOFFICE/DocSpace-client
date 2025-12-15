@@ -343,7 +343,7 @@ const ExternalLinks = ({
                   tooltipMaxWidth="344px"
                   tooltipContent={
                     <>
-                      <Text>{t("Files:LinkSettingsExpiredToast")}</Text>
+                      <Text>{t("Common:LinkSettingsExpired")}</Text>
                       <Text>
                         {t("Files:LinkSettingsExpiredToastDescription")}
                       </Text>

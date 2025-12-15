@@ -230,6 +230,5 @@
   "UsersJoined": "Users joined:",
   "LinkSettingsUsersLimitToast": "Registration via the link is no longer available since the limit has been exceeded.",
   "LinkSettingsUsersLimitToastDescription": "Adjust the limit in settings or create a new link to enable new user registrations.",
-  "LinkSettingsExpiredToast": "Registration via this link is no longer available since its lifetime has expired.",
   "LinkSettingsExpiredToastDescription": "Extend the validity period in the settings or create a new link to enable new user registrations."
 }

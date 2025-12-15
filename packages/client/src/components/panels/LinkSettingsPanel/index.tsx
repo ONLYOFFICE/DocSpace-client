@@ -281,7 +281,7 @@ const LinkSettingsPanel = ({
             color={showExpiredError ? warningColor : undefined}
           >
             {showExpiredError
-              ? t("Files:LinkSettingsExpiredToast")
+              ? t("Common:LinkSettingsExpired")
               : t("Common:LinkValidUntil")}
           </Text>
 
@@ -309,7 +309,7 @@ const LinkSettingsPanel = ({
           label={t("Common:SaveAndCopy")}
           type="submit"
           testId="template_access_settings_modal_save_button"
-          isDisabled={hasError}
+          isDisabled={hasError || showLimitError || showExpiredError}
         />
         <Button
           className="cancel-button"

@@ -37,10 +37,10 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 const InviteLinkError = ({ isExpired }: { isExpired?: boolean }) => {
   const router = useRouter();
 
-  const { t } = useTranslation(["Confirm"]);
+  const { t } = useTranslation(["Confirm", "Common"]);
 
   const bodyText = isExpired
-    ? t("InviteLinkExpiredErrorBody")
+    ? t("Common:InviteLinkExpiredErrorBody")
     : t("InviteLinkQuotaErrorBody");
 
   React.useEffect(() => {

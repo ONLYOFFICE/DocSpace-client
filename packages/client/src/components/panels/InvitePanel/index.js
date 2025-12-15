@@ -28,6 +28,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
+import moment from "moment";
 
 import {
   EmployeeType,
@@ -553,12 +554,21 @@ const InvitePanel = ({
       }
     } else {
       try {
+        const linkExpirationDate = moment(
+          access.expirationDate ?? activeLink?.expirationDate,
+        );
+        const isExpired = moment(new Date()).isAfter(linkExpirationDate);
+
+        if (isExpired) {
+          linkExpirationDate.add(7, "days");
+        }
+
         const newLink = await api.rooms.setInvitationLinks(
           roomId,
           "Invite",
           +selectedAccess,
           shareLinks[0]?.id ?? null,
-          access.expirationDate ?? activeLink?.expirationDate,
+          linkExpirationDate,
           access.maxUseCount ?? activeLink?.maxUseCount,
         );
 

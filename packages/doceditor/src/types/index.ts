@@ -444,6 +444,17 @@ export type TDocEditor = {
   startFilling?: VoidFunction;
   requestRoles?: VoidFunction;
   setFavorite?: (favorite: boolean) => void;
+  createConnector?: () => TDocEditorConnector;
+};
+
+export type TDocEditorConnector = {
+  attachEvent: (id: string, action: (...args: unknown[]) => void) => void;
+  sendEvent: (name: string, data?: string | object | unknown[]) => void;
+  executeMethod: (
+    name: string,
+    params: object[],
+    callback: (response: object | { error: string }) => void,
+  ) => void;
 };
 
 export type TCatchError =

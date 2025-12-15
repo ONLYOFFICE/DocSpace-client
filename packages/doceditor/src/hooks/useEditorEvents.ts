@@ -77,6 +77,7 @@ import {
   UseEventsProps,
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
+import initProxy from "@/utils/aiProxy";
 
 let docEditor: TDocEditor | null = null;
 
@@ -251,6 +252,10 @@ const useEditorEvents = ({
     // if (config?.file?.canShare) {
     //   loadUsersRightsList(docEditor);
     // }
+
+    const product = t("Common:ProductName");
+
+    initProxy(docEditor, product);
 
     if (docEditor) {
       // console.log("call assign for asc files editor doceditor");

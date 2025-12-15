@@ -28,11 +28,18 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { TData, toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { TTranslation } from "@docspace/shared/types";
 
-const DeletePluginDialog = (props) => {
+type Props = {
+  isVisible: boolean;
+  onClose?: () => void;
+  onDelete?: (t: TTranslation) => Promise<void>;
+};
+
+const DeletePluginDialog = (props: Props) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
   const { isVisible, onClose, onDelete } = props;
 
@@ -41,23 +48,18 @@ const DeletePluginDialog = (props) => {
   const onDeleteClick = async () => {
     try {
       setIsRequestRunning(true);
-      await onDelete();
+      await onDelete?.(t);
 
       setIsRequestRunning(true);
-      onClose();
+      onClose?.();
     } catch (error) {
-      toastr.error(error);
-      onClose();
+      toastr.error(error as TData);
+      onClose?.();
     }
   };
 
   return (
-    <ModalDialog
-      isLoading={!ready}
-      visible={isVisible}
-      onClose={onClose}
-      displayType="modal"
-    >
+    <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>
       <ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         {t("DeletePluginDescription", { productName: t("Common:ProductName") })}
@@ -67,7 +69,7 @@ const DeletePluginDialog = (props) => {
           className="delete-button"
           key="DeletePortalBtn"
           label={t("Common:OKButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           primary
           isLoading={isRequestRunning}
@@ -77,7 +79,7 @@ const DeletePluginDialog = (props) => {
           className="cancel-button"
           key="CancelDeleteBtn"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           isDisabled={isRequestRunning}
           onClick={onClose}
@@ -87,7 +89,7 @@ const DeletePluginDialog = (props) => {
   );
 };
 
-export default inject(({ pluginStore }) => {
+export default inject<TStore>(({ pluginStore }) => {
   const {
     deletePluginDialogProps,
     setDeletePluginDialogVisible,
@@ -100,10 +102,12 @@ export default inject(({ pluginStore }) => {
     setDeletePluginDialogProps(null);
   };
 
-  const { pluginName } = deletePluginDialogProps;
+  const { pluginName } = deletePluginDialogProps || {};
 
-  const onDelete = async () => {
-    await uninstallPlugin(pluginName);
+  const onDelete = async (t: TTranslation) => {
+    if (!pluginName) return;
+
+    await uninstallPlugin(pluginName, t);
   };
 
   return { onClose, onDelete };

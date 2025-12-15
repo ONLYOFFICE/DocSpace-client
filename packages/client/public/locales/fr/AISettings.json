@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Saisissez l'adresse du serveur MCP fournie par votre service",
   "MCPSettingsDescription": "Cette section vous permet de gérer les serveurs MCP pour les chats IA dans les salles. Vous pouvez activer les serveurs MCP système ou en ajouter des personnalisés pour répondre aux besoins de votre entreprise. Une fois activés, ces serveurs seront accessibles aux autres utilisateurs pour leurs tâches.",
   "MCPSettingTitle": "Serveurs MCP",
+  "MCPUnavailableError": "Le serveur MCP est indisponible.",
   "Provider": "Fournisseur",
   "ProviderAddedSuccess": "Fournisseur ajouté avec succès",
   "ProviderKey": "Clé",

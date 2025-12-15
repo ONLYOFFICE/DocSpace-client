@@ -105,6 +105,19 @@ import {
   shareHandler,
   thirdPartyCapabilitiesHandler,
   thirdPartyHandler,
+  recentEmptyHandler,
+  recentHandler,
+  PATH_RECENT,
+  PATH_FAVORITES,
+  PATH_DELETE_FAVORITES,
+  PATH_ADD_TO_FAVORITES,
+  PATH_GET_FILE_INFO,
+  favoritesHandler,
+  PATH_GET_FILE,
+  getFileHandler,
+  PATH_MY_DOCUMENTS,
+  myDocumentsHandler,
+  getFileInfoHandler,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -423,5 +436,47 @@ export const endpoints = {
   shareToUser: {
     url: PATH_SHARE_TO_USERS_FILE,
     dataHandler: shareToUserHandle,
+  },
+  recentEmpty: {
+    url: PATH_RECENT,
+    dataHandler: recentEmptyHandler,
+  },
+  recent: {
+    url: PATH_RECENT,
+    dataHandler: recentHandler,
+  },
+  favorites: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "success"),
+  },
+  favoritesEmpty: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "empty"),
+  },
+  favoritesDelete: {
+    url: PATH_DELETE_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "delete"),
+    method: "DELETE",
+  },
+  favoritesMany: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "success_many"),
+  },
+  getFile: {
+    url: PATH_GET_FILE,
+    dataHandler: getFileHandler,
+  },
+  addToFavorites: {
+    url: PATH_ADD_TO_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "mark"),
+    method: "POST",
+  },
+  myDocuments: {
+    url: PATH_MY_DOCUMENTS,
+    dataHandler: myDocumentsHandler,
+  },
+  getFileInfo: {
+    url: PATH_GET_FILE_INFO,
+    dataHandler: getFileInfoHandler,
   },
 } satisfies TEndpoints;

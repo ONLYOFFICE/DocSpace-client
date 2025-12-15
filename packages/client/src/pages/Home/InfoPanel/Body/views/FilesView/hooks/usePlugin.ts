@@ -27,11 +27,11 @@
 import PluginStore from "SRC_DIR/store/PluginStore";
 
 export const usePlugin = (
-  currentView: string,
+  view: string | null,
   infoPanelItemsList?: PluginStore["infoPanelItemsList"],
 ) => {
-  const isPlugin = currentView.indexOf("info_plugin") > -1;
-  const infoPanelItemKey = currentView.replace("info_plugin-", "");
+  const isPlugin = view ? view.indexOf("info_plugin") > -1 : false;
+  const infoPanelItemKey = view ? view.replace("info_plugin-", "") : "";
 
   const infoPanelItem = infoPanelItemsList?.find(
     (i) => i.key === infoPanelItemKey,

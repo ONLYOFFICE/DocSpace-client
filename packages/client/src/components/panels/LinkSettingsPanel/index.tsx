@@ -91,7 +91,7 @@ const LinkSettingsPanel = ({
 
   const currentAccess = filteredAccesses.find(
     (a) =>
-      a.access ===
+      a.access ==
       (linkSelectedAccess?.access ?? activeLink?.access ?? defaultAccess),
   );
 
@@ -234,6 +234,7 @@ const LinkSettingsPanel = ({
                   maxLength={4}
                   onChange={onInputChange}
                   hasError={hasError}
+                  testId="link-settings_users-limit"
                 />
                 <Text
                   fontSize="12px"
@@ -308,7 +309,7 @@ const LinkSettingsPanel = ({
           primary
           label={t("Common:SaveAndCopy")}
           type="submit"
-          testId="template_access_settings_modal_save_button"
+          testId="link-settings_modal_save_button"
           isDisabled={hasError}
         />
         <Button
@@ -317,7 +318,7 @@ const LinkSettingsPanel = ({
           size={ButtonSize.normal}
           onClick={onBackClick}
           label={t("Common:CancelButton")}
-          testId="template_access_settings_modal_cancel_button"
+          testId="link-settings_modal_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

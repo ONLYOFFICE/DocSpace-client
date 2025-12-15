@@ -241,6 +241,7 @@ const ExternalLinks = ({
         <IconButton
           iconName={SettingsReactSvgUrl}
           size={16}
+          dataTestId="link-settings_icon"
           onClick={() => setLinkSettingsPanelVisible(true)}
         />
 

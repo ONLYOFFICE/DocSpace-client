@@ -312,10 +312,10 @@ const InvitePanel = ({
       onChangeExternalLinksVisible(true);
 
       const newLinkData = {
-        ...linkData,
         access: linkData.employeeType,
         shareLink: linkData.url,
         expirationDate: linkData.expiration,
+        ...linkData,
       };
 
       setActiveLink(newLinkData);
@@ -597,7 +597,7 @@ const InvitePanel = ({
     if (requestIsRunning) return;
 
     const createNewLink =
-      activeLink?.access !== defaultLink?.access || !activeLink?.access;
+      activeLink?.access != defaultLink?.access || !activeLink?.access;
 
     setRequestIsRunning(true);
     try {

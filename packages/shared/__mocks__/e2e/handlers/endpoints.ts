@@ -127,6 +127,15 @@ import {
   shareToUserHandle,
 } from "./share";
 import { MethodType } from "../types";
+import { contactsListHandler, PATH_CONTACTS_LIST } from "./people/contactsList";
+import { TFA_PATH, tfaSuccess } from "./settings/tfa";
+import {
+  createPortalInvitationLink,
+  deletePortalInvitationLink,
+  INVITATION_PATH,
+  portalInvitationHandler,
+  setPortalInvitationLink,
+} from "./portal/invitationlink";
 
 export type TEndpoint = {
   url: string | RegExp;
@@ -423,5 +432,69 @@ export const endpoints = {
   shareToUser: {
     url: PATH_SHARE_TO_USERS_FILE,
     dataHandler: shareToUserHandle,
+  },
+
+  contactsList: {
+    url: `${BASE_URL}${PATH_CONTACTS_LIST}`,
+    dataHandler: contactsListHandler,
+    method: "GET",
+  },
+  tfaapp: {
+    url: `${BASE_URL}${TFA_PATH}`,
+    dataHandler: tfaSuccess,
+  },
+  portalInvitationUserEmptyLink: {
+    url: `${BASE_URL}${INVITATION_PATH}/*`,
+    dataHandler: portalInvitationHandler.bind(null, {
+      userType: "4",
+      isEmpty: true,
+    }),
+    method: "GET",
+  },
+  portalInvitationUserCreateLink: {
+    url: `${BASE_URL}${INVITATION_PATH}`,
+    dataHandler: createPortalInvitationLink,
+    method: "POST",
+  },
+  portalInvitationUserDeleteLink: {
+    url: `${BASE_URL}${INVITATION_PATH}`,
+    dataHandler: deletePortalInvitationLink,
+    method: "DELETE",
+  },
+  portalInvitationUser: {
+    url: `${BASE_URL}${INVITATION_PATH}/*`,
+    dataHandler: portalInvitationHandler.bind(null, { userType: "4" }),
+    method: "GET",
+  },
+  portalInvitationUserExpired: {
+    url: `${BASE_URL}${INVITATION_PATH}/*`,
+    dataHandler: portalInvitationHandler.bind(null, {
+      userType: "4",
+      isExpired: true,
+    }),
+    method: "GET",
+  },
+  portalInvitationUserLimit: {
+    url: `${BASE_URL}${INVITATION_PATH}/*`,
+    dataHandler: portalInvitationHandler.bind(null, {
+      userType: "4",
+      isExpired: false,
+      limitIsExceeded: true,
+    }),
+    method: "GET",
+  },
+  portalInvitationUserLimitAndExpired: {
+    url: `${BASE_URL}${INVITATION_PATH}/*`,
+    dataHandler: portalInvitationHandler.bind(null, {
+      userType: "4",
+      isExpired: true,
+      limitIsExceeded: true,
+    }),
+    method: "GET",
+  },
+  setPortalInvitationUser: {
+    url: `${BASE_URL}${INVITATION_PATH}`,
+    dataHandler: setPortalInvitationLink,
+    method: "PUT",
   },
 } satisfies TEndpoints;

@@ -57,6 +57,7 @@ const AccountsTable = (props: AccountsTableProps) => {
     changeGroupType(UserTypes.RoomAdmin);
     toggleAllAccounts(false, [], checkedAccountType);
   };
+
   const setTypeUser = () => {
     changeGroupType(UserTypes.User);
     toggleAllAccounts(false, [], checkedAccountType);

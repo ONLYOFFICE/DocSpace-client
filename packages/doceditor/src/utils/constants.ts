@@ -41,11 +41,6 @@ export const IS_VIEW =
 
 export const REPLACED_URL_PATH = "/web-apps/apps/api/documents/api.js";
 
-export const SHOW_CLOSE =
-  typeof document !== "undefined" &&
-  document.referrer !== "" &&
-  window.history.length > 1;
-
 export const availableActions: Record<ActionType, boolean> = {
   edit: true,
   fill: true,

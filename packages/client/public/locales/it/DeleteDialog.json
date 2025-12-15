@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Elimina chat?",
+  "DeleteAIAgentDescription": "L'agente <strong>\"{{agentName}}\"</strong> verrà eliminato definitivamente. Tutti i dati e gli accessi degli utenti andranno persi.",
+  "DeleteAIAgentTitle": "Eliminare questo agente?",
+  "DeleteAIAgentWarning": "Capisco le conseguenze e desidero eliminare l'agente",
+  "DeleteAIChatDescription": "Sta per eliminare <strong>{{chatName}}<1>.</1></strong>\n Tutti i messaggi e la cronologia della chat verranno rimossi definitivamente e non potranno essere ripristinati.",
   "DeleteAllGroupDescription": "I gruppi selezionati verranno eliminati. Gli utenti dei gruppi non verranno rimossi da {{productName}}. Sei sicuro di voler continuare?",
   "DeleteAllGroupsTitle": "Elimina gruppi",
   "DeleteFiles": "Stai per spostare <strong>file ({{filesCount}})</strong> nel {{trashSection}}.",
@@ -11,6 +16,7 @@
   "DeleteGroupTitle": "Elimina gruppo",
   "DeleteItem": "Stai per spostare <strong>{{name}}</strong> nel {{trashSection}}.",
   "DeleteItemForever": "Stai per eliminare <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Tieni presente che se li hai condivisi con qualcuno, non saranno più disponibili.",
   "DeleteRoom": "La stanza <strong>\"{{roomName}}\"</strong> verrà eliminata definitivamente. Tutti i dati e gli accessi utente andranno persi.",
   "DeleteRoomTitle": "Eliminare questa stanza?",
   "DeleteRoomWarning": "Comprendo le conseguenze e desidero eliminare la stanza",

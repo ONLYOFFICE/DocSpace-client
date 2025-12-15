@@ -26,7 +26,7 @@
 
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -43,9 +43,6 @@ import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
-import { Badge } from "@docspace/shared/components/badge";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { Text } from "@docspace/shared/components/text";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BonusItem from "./BonusItem";
@@ -82,14 +79,10 @@ const Item = ({
   getLinkData,
   onBadgeClick,
   roomsFolderId,
+  aiAgentsFolderId,
   setDropTargetPreview,
-  currentDeviceType,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
-  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
-
-  const isAiAgents = item.rootFolderType === FolderType.AIAgents;
-  const isDesktop = currentDeviceType === DeviceType.desktop;
 
   const isDragging =
     dragging && !isIndexEditingMode ? showDragItems(item) : false;
@@ -153,16 +146,6 @@ const Item = ({
     (e, selectedFolderId) => {
       if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
 
-      if (!isDesktop && isTooltipOpen) {
-        setIsTooltipOpen(false);
-        return;
-      }
-
-      if (!isDesktop && isAiAgents) {
-        setIsTooltipOpen(true);
-        return;
-      }
-
       setBufferSelection(null);
 
       onClick?.(
@@ -173,59 +156,8 @@ const Item = ({
         item.security.Create,
       );
     },
-    [
-      onClick,
-      item.title,
-      item.rootFolderType,
-      isTooltipOpen,
-      setIsTooltipOpen,
-      isDesktop,
-      isAiAgents,
-    ],
+    [onClick, item.title, item.rootFolderType],
   );
-
-  const getTooltipAIAgentContent = () => (
-    <>
-      <Text fontSize="12px" fontWeight={600} noSelect>
-        {t("Common:AIAgentsComingSoon")}
-      </Text>
-      <Text fontSize="12px" fontWeight={400} noSelect>
-        {t("Common:AIAgentsDescription")}
-      </Text>
-    </>
-  );
-
-  useEffect(() => {
-    if (isDesktop) return;
-
-    const handleClickOutside = (event) => {
-      if (isTooltipOpen) {
-        const aiAgentElement = event.target.closest(
-          `[data-tooltip-id="aiAgentsTooltip${item.id}"]`,
-        );
-
-        if (!aiAgentElement) {
-          event.stopPropagation();
-          event.preventDefault();
-          setIsTooltipOpen(false);
-        }
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside, true);
-    document.addEventListener("touchend", handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-      document.removeEventListener("touchend", handleClickOutside, true);
-    };
-  }, [isTooltipOpen, item.id, isDesktop]);
-
-  const onClickAiAgentsBadge = () => {
-    if (!isDesktop) {
-      setIsTooltipOpen(!isTooltipOpen);
-    }
-  };
 
   const linkData = getLinkData(
     item.id,
@@ -267,9 +199,8 @@ const Item = ({
         value={value}
         showBadge={showBadge}
         labelBadge={labelBadge}
-        onClickBadge={isAiAgents ? onClickAiAgentsBadge : onBadgeClick}
+        onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        isDisabled={isAiAgents}
         withAnimation
         badgeTitle={
           labelBadge
@@ -277,35 +208,23 @@ const Item = ({
             : t("EmptySection", { sectionName: t("Common:TrashSection") })
         }
         badgeComponent={
-          isAiAgents ? (
-            <Badge
-              label={t("Soon")}
-              className={item.folderClassName}
-              fontSize="9px"
-            />
-          ) : (
-            <NewFilesBadge
-              newFilesCount={labelBadge}
-              folderId={item.id === roomsFolderId ? "rooms" : item.id}
-              parentDOMId={folderId}
-              onBadgeClick={onBadgeClick}
-            />
-          )
+          <NewFilesBadge
+            newFilesCount={labelBadge}
+            folderId={
+              item.id === roomsFolderId
+                ? "rooms"
+                : item.id === aiAgentsFolderId
+                  ? "agents"
+                  : item.id
+            }
+            parentDOMId={folderId}
+            onBadgeClick={onBadgeClick}
+          />
         }
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
         dataTooltipId={`aiAgentsTooltip${item.id}`}
       />
-      {isAiAgents ? (
-        <Tooltip
-          id={`aiAgentsTooltip${item.id}`}
-          place="bottom-start"
-          getContent={getTooltipAIAgentContent}
-          maxWidth="320px"
-          float={isDesktop}
-          isOpen={!isDesktop ? isTooltipOpen : undefined}
-        />
-      ) : null}
     </StyledDragAndDrop>
   );
 };
@@ -351,6 +270,7 @@ const Items = ({
 
   getLinkData,
   roomsFolderId,
+  aiAgentsFolderId,
   setDropTargetPreview,
 }) => {
   const getFolderIcon = React.useCallback((item) => {
@@ -431,19 +351,14 @@ const Items = ({
     (elm) => {
       const items = elm.map((item) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
-        const isAiAgents = item.rootFolderType === FolderType.AIAgents;
         const showBadge = emptyTrashInProgress
           ? false
           : item.newItems
             ? item.newItems > 0 && true
-            : (isTrash && !trashIsEmpty) || isAiAgents;
+            : isTrash && !trashIsEmpty;
 
-        let labelBadge;
-        if (isAiAgents) {
-          labelBadge = t("Soon");
-        } else {
-          labelBadge = showBadge ? item.newItems : null;
-        }
+        const labelBadge = showBadge ? item.newItems : null;
+
         const iconBadge = isTrash ? ClearTrashReactSvgUrl : null;
 
         return (
@@ -470,6 +385,7 @@ const Items = ({
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
             roomsFolderId={roomsFolderId}
+            aiAgentsFolderId={aiAgentsFolderId}
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
             setDropTargetPreview={setDropTargetPreview}
@@ -479,11 +395,37 @@ const Items = ({
         );
       });
 
-      items.splice(1, 0, <CatalogDivider key="ai-agents-divider" />);
+      // guest doesn't have my documents by default, but has if he was downgraded from another type
+      const hasMyDocuments = elm.some(
+        (f) => f.rootFolderType === FolderType.USER,
+      );
 
-      items.splice(6, 0, <CatalogDivider key="doc-other-header" />);
+      const agentsDividerIndex = 1;
+      let roomsDividerIndex = 4;
+      let recentDividerIndex = 8;
 
-      items.splice(9, 0, <CatalogDivider key="trash-divider" />);
+      if (!hasMyDocuments) {
+        roomsDividerIndex = 3;
+        recentDividerIndex = 7;
+      }
+
+      items.splice(
+        agentsDividerIndex,
+        0,
+        <CatalogDivider key="ai-agents-divider" />,
+      );
+
+      items.splice(
+        roomsDividerIndex,
+        0,
+        <CatalogDivider key="rooms-divider" />,
+      );
+
+      items.splice(
+        recentDividerIndex,
+        0,
+        <CatalogDivider key="recent-divider" />,
+      );
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);
@@ -567,6 +509,7 @@ export default inject(
       commonFolderId,
       isPrivacyFolder,
       roomsFolderId,
+      aiAgentsFolderId,
     } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
@@ -614,6 +557,7 @@ export default inject(
       folderAccess,
       currentColorScheme,
       roomsFolderId,
+      aiAgentsFolderId,
       isIndexEditingMode,
       setDropTargetPreview,
     };

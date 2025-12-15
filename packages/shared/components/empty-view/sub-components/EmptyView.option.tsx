@@ -28,9 +28,10 @@ import { Link as LinkRouter } from "react-router";
 
 import { classNames } from "../../../utils";
 import { Link, LinkType } from "../../link";
+import { Button, ButtonSize } from "../../button";
 
 import { EmptyViewItem } from "./EmptyView.item";
-import { isEmptyLinkOptions } from "../EmptyView.utils";
+import { isEmptyButtonOption, isEmptyLinkOptions } from "../EmptyView.utils";
 import styles from "../EmptyView.module.scss";
 
 import type { EmptyViewOptionProps } from "../EmptyView.types";
@@ -62,6 +63,19 @@ const EmptyViewOption = ({ option }: EmptyViewOptionProps) => {
         {option.icon}
         <span>{option.description}</span>
       </LinkRouter>
+    );
+  }
+
+  if (isEmptyButtonOption(option)) {
+    return (
+      <Button
+        className={classNames(styles.button, option.className)}
+        id={option.key.toString()}
+        onClick={option.onClick}
+        label={option.title}
+        primary
+        size={ButtonSize.small}
+      />
     );
   }
 

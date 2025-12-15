@@ -26,7 +26,7 @@
 
 import { makeAutoObservable } from "mobx";
 import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import i18n from "../i18n";
@@ -63,6 +63,9 @@ class TreeFoldersStore {
 
     treeFolders.forEach((folder) => {
       switch (folder.rootFolderType) {
+        case FolderType.AIAgents:
+          folder.title = i18n.t("Common:AIAgents");
+          break;
         case FolderType.USER:
           folder.title = i18n.t("Common:MyDocuments");
           break;
@@ -87,16 +90,6 @@ class TreeFoldersStore {
         default:
           break;
       }
-    });
-
-    treeFolders.unshift({
-      id: "aiAgents",
-      title: i18n.t("Common:AIAgents"),
-      rootFolderType: FolderType.AIAgents,
-      folderClassName: "ai-agents",
-      security: {
-        Create: false,
-      },
     });
 
     this.setRootFoldersTitles(treeFolders);
@@ -262,6 +255,12 @@ class TreeFoldersStore {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
   }
 
+  get aiAgentsFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.AIAgents,
+    );
+  }
+
   /**
    * @type {import("@docspace/shared/api/rooms/types").TRoom=}
    */
@@ -323,6 +322,10 @@ class TreeFoldersStore {
     return this.recentFolder ? this.recentFolder.id : null;
   }
 
+  get aiAgentsFolderId() {
+    return this.aiAgentsFolder ? this.aiAgentsFolder.id : null;
+  }
+
   get sharedWithMeFolderId() {
     return this.sharedWithMeFolder ? this.sharedWithMeFolder.id : null;
   }
@@ -343,6 +346,9 @@ class TreeFoldersStore {
 
   get isSharedWithMeFolderRoot() {
     return this.selectedFolderStore.rootFolderType === FolderType.SHARE;
+  }
+  get isInSharedFolder() {
+    return !this.isSharedWithMeFolder && this.isSharedWithMeFolderRoot;
   }
 
   get isFavoritesFolder() {
@@ -386,10 +392,25 @@ class TreeFoldersStore {
     );
   }
 
+  get isFlowsFolder() {
+    return window.location.pathname.includes("/flows");
+  }
+
   get isRoomsFolder() {
     return (
       this.roomsFolder && this.selectedFolderStore.id === this.roomsFolder.id
     );
+  }
+
+  get isAIAgentsFolder() {
+    return (
+      this.aiAgentsFolder &&
+      this.selectedFolderStore.id === this.aiAgentsFolder.id
+    );
+  }
+
+  get isAIAgentsFolderRoot() {
+    return FolderType.AIAgents === this.selectedFolderStore.rootFolderType;
   }
 
   get isRoom() {
@@ -428,7 +449,8 @@ class TreeFoldersStore {
 
   get isVDRRoomRoot() {
     return (
-      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType
+      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType ||
+      this.selectedFolderStore.roomType === RoomsType.VirtualDataRoom // need when changing the room settings, because parentRoomType is reset
     );
   }
 

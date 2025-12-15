@@ -36,6 +36,7 @@ import {
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
+import { EMPTY_ARRAY } from "@docspace/shared/constants";
 import {
   DeviceType,
   VDRIndexingAction,
@@ -43,11 +44,13 @@ import {
 } from "@docspace/shared/enums";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
-import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
+import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
+import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
+import NoAccessContainer from "../../../../components/EmptyContainer/NoAccessContainer";
 
 const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
 const sectionClass = "section-wrapper-content";
@@ -88,7 +91,6 @@ const SectionBodyContent = (props) => {
     uploaded,
     onClickBack,
     isEmptyPage,
-    movingInProgress,
     currentDeviceType,
     isIndexEditingMode,
     changeIndex,
@@ -101,6 +103,9 @@ const SectionBodyContent = (props) => {
     onEnableFormFillingGuid,
     isArchiveFolderRoot,
     setDropTargetPreview,
+    aiConfig,
+    isInsideKnowledge,
+    isErrorAIAgentNotAvailable,
   } = props;
 
   useEffect(() => {
@@ -197,7 +202,7 @@ const SectionBodyContent = (props) => {
       e.target.closest("#filter_search-input") ||
       isHeaderOptionButton(e)
     ) {
-      setSelection([]);
+      setSelection(EMPTY_ARRAY);
       setBufferSelection(null);
       setHotkeyCaretStart(null);
       setHotkeyCaret(null);
@@ -462,9 +467,14 @@ const SectionBodyContent = (props) => {
     filesList,
   ]);
 
-  if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
+  if (isErrorAIAgentNotAvailable)
+    return <NoAccessContainer type={NoAccessContainerType.Agent} />;
 
-  if (isEmptyFilesList && movingInProgress) return null;
+  if (isErrorRoomNotAvailable)
+    return <NoAccessContainer type={NoAccessContainerType.Room} />;
+
+  if (isInsideKnowledge && !aiConfig?.vectorizationEnabled)
+    return <KnowledgeDisabledContainer />;
 
   if (
     isEmptyFilesList &&
@@ -509,8 +519,8 @@ export default inject(
       setScrollToItem,
       filesList,
       isEmptyPage,
-      movingInProgress,
       isErrorRoomNotAvailable,
+      isErrorAIAgentNotAvailable,
     } = filesStore;
 
     const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
@@ -546,12 +556,14 @@ export default inject(
       filesList,
       uploaded,
       onClickBack: filesActionsStore.onClickBack,
-      movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
+      aiConfig: settingsStore.aiConfig,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
+      isErrorAIAgentNotAvailable,
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
+      isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
       userId: userStore?.user?.id,

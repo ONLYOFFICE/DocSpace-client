@@ -26,8 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 import DownloadDialog from "./index";
@@ -41,7 +41,7 @@ import {
   sortedPasswordFiles,
 } from "./mockData";
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => {
     return {
       t: (i18nKey: string) => i18nKey,
@@ -56,7 +56,7 @@ describe("DownloadDialog", () => {
     sortedFiles,
     setDownloadItems: () => {},
     downloadItems: [],
-    downloadFiles: jest.fn(),
+    downloadFiles: vi.fn(),
     getDownloadItems: () =>
       [
         [
@@ -82,7 +82,7 @@ describe("DownloadDialog", () => {
     resetDownloadedFileFormat: () => {},
     discardDownloadedFile: () => {},
     visible: true,
-    setDownloadDialogVisible: jest.fn(),
+    setDownloadDialogVisible: vi.fn(),
     setSortedPasswordFiles: () => {},
     getIcon: () => "",
     getFolderIcon: () => "",
@@ -90,7 +90,7 @@ describe("DownloadDialog", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without errors", () => {

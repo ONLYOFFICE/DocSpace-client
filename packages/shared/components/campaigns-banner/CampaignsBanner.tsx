@@ -58,7 +58,11 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
   const hasText = !!Text;
   const isButton = action?.isButton;
 
-  const fitTextResult = useFitText(campaignBackground, body?.fontSize);
+  const fitTextResult = useFitText(
+    campaignBackground,
+    campaignTranslate,
+    body?.fontSize,
+  );
 
   const staticRef = React.useRef<HTMLDivElement>(null);
   const staticWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -124,7 +128,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
           <button
             style={buttonStyle}
             className={styles.button}
-            onClick={() => onAction()}
+            onClick={() => onAction(action?.type, Link)}
             type="button"
           >
             <TextComponent

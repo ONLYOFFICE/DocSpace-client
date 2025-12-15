@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
@@ -70,7 +70,7 @@ describe("<IconButton />", () => {
   });
 
   it("handles click events", async () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<IconButton {...baseProps} onClick={handleClick} />);
 
     const button = screen.getByTestId("icon-button");
@@ -80,7 +80,7 @@ describe("<IconButton />", () => {
   });
 
   it("prevents click events when disabled", async () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<IconButton {...baseProps} onClick={handleClick} isDisabled />);
 
     const button = screen.getByTestId("icon-button");
@@ -92,7 +92,7 @@ describe("<IconButton />", () => {
   it("handles mouse down state correctly", () => {
     const clickIconName = "click-icon.svg";
     const clickColor = "blue";
-    const handleMouseDown = jest.fn();
+    const handleMouseDown = vi.fn();
 
     render(
       <IconButton
@@ -111,7 +111,7 @@ describe("<IconButton />", () => {
   });
 
   it("handles mouse up state with left click", () => {
-    const handleMouseUp = jest.fn();
+    const handleMouseUp = vi.fn();
     const hoverIconName = "hover-icon.svg";
 
     render(
@@ -130,7 +130,7 @@ describe("<IconButton />", () => {
   });
 
   it("handles right click mouse up", () => {
-    const handleMouseUp = jest.fn();
+    const handleMouseUp = vi.fn();
 
     render(<IconButton {...baseProps} onMouseUp={handleMouseUp} />);
 

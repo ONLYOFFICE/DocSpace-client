@@ -25,53 +25,46 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { Viewer } from "./index";
 import { DeviceType } from "../../../../enums";
 import type { PlaylistType } from "../../MediaViewer.types";
 import type { TFile } from "../../../../api/files/types";
 
 // Mock child components
-jest.mock("../ImageViewer", () => ({
+vi.mock("../ImageViewer", () => ({
   ImageViewer: () => <div data-testid="image-viewer">Image Viewer</div>,
 }));
 
-jest.mock("../ViewerPlayer", () => ({
+vi.mock("../ViewerPlayer", () => ({
   ViewerPlayer: () => <div data-testid="viewer-player">Viewer Player</div>,
 }));
 
-jest.mock("../PDFViewer", () => ({
+vi.mock("../PDFViewer", () => ({
   PDFViewer: () => <div data-testid="pdf-viewer">PDF Viewer</div>,
 }));
 
-jest.mock("../DesktopDetails", () => ({
+vi.mock("../DesktopDetails", () => ({
   DesktopDetails: () => (
     <div data-testid="desktop-details">Desktop Details</div>
   ),
 }));
 
-jest.mock("../MobileDetails", () => ({
+vi.mock("../MobileDetails", () => ({
   MobileDetails: () => <div data-testid="mobile-details">Mobile Details</div>,
 }));
 
-jest.mock("../Buttons/NextButton", () => ({
+vi.mock("../Buttons/NextButton", () => ({
   NextButton: () => <div data-testid="next-button">Next</div>,
 }));
 
-jest.mock("../Buttons/PrevButton", () => ({
+vi.mock("../Buttons/PrevButton", () => ({
   PrevButton: () => <div data-testid="prev-button">Previous</div>,
 }));
 
-// Mock styles
-jest.mock("./Viewer.module.scss", () => ({
-  container: "container",
-  iconWrapper: "iconWrapper",
-  volumeWrapper: "volumeWrapper",
-}));
-
 // Mock MediaViewer.helpers
-jest.mock("../../MediaViewer.helpers", () => ({
+vi.mock("../../MediaViewer.helpers", () => ({
   getCustomToolbar: () => [],
 }));
 
@@ -120,6 +113,7 @@ describe("Viewer", () => {
       CreateRoomFrom: false,
       CopyLink: false,
       Embed: false,
+      Vectorization: false,
     },
     shared: false,
     title: "test.jpg",
@@ -206,27 +200,27 @@ describe("Viewer", () => {
     isPublicFile: false,
     isPreviewFile: false,
     currentDeviceType: DeviceType.desktop,
-    onNextClick: jest.fn(),
-    onPrevClick: jest.fn(),
-    onMaskClick: jest.fn(),
-    contextModel: jest.fn(() => []),
-    onDownloadClick: jest.fn(),
-    onSetSelectionFile: jest.fn(),
-    generateContextMenu: jest.fn(),
+    onNextClick: vi.fn(),
+    onPrevClick: vi.fn(),
+    onMaskClick: vi.fn(),
+    contextModel: vi.fn(() => []),
+    onDownloadClick: vi.fn(),
+    onSetSelectionFile: vi.fn(),
+    generateContextMenu: vi.fn(),
   };
 
   beforeEach(() => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: vi.fn().mockImplementation((query) => ({
         matches: false,
         media: query,
         onchange: null,
-        addListener: jest.fn(), // deprecated
-        removeListener: jest.fn(), // deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        addListener: vi.fn(), // deprecated
+        removeListener: vi.fn(), // deprecated
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
       })),
     });
   });

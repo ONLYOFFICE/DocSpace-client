@@ -25,12 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Link, LinkType } from "../../link";
 import { RowContent } from ".";
 import { globalColors } from "../../../themes";
+import styles from "./RowContent.module.scss";
 
 const mainLink = (
   <div style={{ width: "140px" }}>
@@ -128,7 +129,7 @@ describe("<RowContent />", () => {
   });
 
   it("handles onClick event", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(
       <RowContent onClick={onClick}>
         {mainLink}
@@ -165,9 +166,7 @@ describe("<RowContent />", () => {
       </RowContent>,
     );
 
-    const sideInfo = screen
-      .getByTestId("row-content")
-      .querySelector(".tabletSideInfo");
+    const sideInfo = screen.getByTestId("tablet-side-info");
     expect(sideInfo).toHaveStyle({ color: sideColor });
   });
 
@@ -180,9 +179,7 @@ describe("<RowContent />", () => {
       </RowContent>,
     );
 
-    const mainContainer = screen
-      .getByTestId("row-content")
-      .querySelector(".mainContainerWrapper");
+    const mainContainer = screen.getByTestId("main-container-wrapper");
     expect(mainContainer).toHaveStyle({ "--main-container-width": "140px" });
   });
 
@@ -195,9 +192,7 @@ describe("<RowContent />", () => {
       </RowContent>,
     );
 
-    const sideContainer = screen
-      .getByTestId("row-content")
-      .querySelector(".sideContainerWrapper");
+    const sideContainer = screen.getByTestId("side-container");
     expect(sideContainer).toHaveStyle({ width: "40px" });
   });
 });

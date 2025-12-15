@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 
 import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
+import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
@@ -38,6 +39,8 @@ import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
 import EditRoomEvent from "./EditRoomEvent";
+import CreateAgentEvent from "./AgentEvents/CreateAgentEvent";
+import EditAgentEvent from "./AgentEvents/EditAgentEvent";
 import CreateGroupEvent from "./GroupEvents/CreateGroupEvent";
 import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
@@ -45,6 +48,7 @@ import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+import { isAIAgents } from "../../helpers/plugins/utils";
 
 const GlobalEvents = ({
   enablePlugins,
@@ -53,6 +57,10 @@ const GlobalEvents = ({
   setEditRoomDialogProps,
   createRoomDialogProps,
   setCreateRoomDialogProps,
+  createAgentDialogProps,
+  setCreateAgentDialogProps,
+  editAgentDialogProps,
+  setEditAgentDialogProps,
   setCover,
 
   setCreatePDFFormFile,
@@ -193,6 +201,38 @@ const GlobalEvents = ({
       onClose: () => {
         setCover();
         setEditRoomDialogProps({
+          visible: false,
+          item: null,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
+
+  const onCreateAgent = useCallback((e) => {
+    const startAgentParams = getStartAgentParams();
+    setCreateAgentDialogProps({
+      ...startAgentParams,
+      item: e.item,
+      visible: true,
+      onClose: () => {
+        setCreateAgentDialogProps({
+          visible: false,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
+
+  const onEditAgent = useCallback((e) => {
+    const visible = !!e.item;
+
+    setEditAgentDialogProps({
+      visible,
+      item: e.item,
+      onClose: () => {
+        setCover();
+        setEditAgentDialogProps({
           visible: false,
           item: null,
           onClose: null,
@@ -368,13 +408,15 @@ const GlobalEvents = ({
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
     window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
+    window.addEventListener(Events.AGENT_CREATE, onCreateAgent);
+    window.addEventListener(Events.AGENT_EDIT, onEditAgent);
     window.addEventListener(Events.ROOM_EDIT, onEditRoom);
     window.addEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
     window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
-    if (enablePlugins) {
+    if (!isAIAgents() && enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
         onCreatePluginFileDialog,
@@ -398,12 +440,14 @@ const GlobalEvents = ({
       window.removeEventListener(Events.RENAME, onRename);
       window.removeEventListener(Events.ROOM_CREATE, onCreateRoom);
       window.removeEventListener(Events.ROOM_EDIT, onEditRoom);
+      window.removeEventListener(Events.AGENT_CREATE, onCreateAgent);
+      window.removeEventListener(Events.AGENT_EDIT, onEditAgent);
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
       window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
-      if (enablePlugins) {
+      if (!isAIAgents() && enablePlugins) {
         window.removeEventListener(
           Events.CREATE_PLUGIN_FILE,
           onCreatePluginFileDialog,
@@ -423,6 +467,8 @@ const GlobalEvents = ({
     onRename,
     onCreate,
     onCreateRoom,
+    onCreateAgent,
+    onEditAgent,
     onEditRoom,
     onCreateGroup,
     onEditGroup,
@@ -443,6 +489,12 @@ const GlobalEvents = ({
     ),
     editRoomDialogProps.visible && (
       <EditRoomEvent key={Events.ROOM_EDIT} {...editRoomDialogProps} />
+    ),
+    createAgentDialogProps.visible && (
+      <CreateAgentEvent key={Events.AGENT_CREATE} {...createAgentDialogProps} />
+    ),
+    editAgentDialogProps.visible && (
+      <EditAgentEvent key={Events.AGENT_EDIT} {...editAgentDialogProps} />
     ),
     createGroupDialogProps.visible && (
       <CreateGroupEvent key={Events.GROUP_CREATE} {...createGroupDialogProps} />
@@ -489,6 +541,10 @@ export default inject(
       setEditRoomDialogProps,
       createRoomDialogProps,
       setCreateRoomDialogProps,
+      createAgentDialogProps,
+      setCreateAgentDialogProps,
+      editAgentDialogProps,
+      setEditAgentDialogProps,
       setCover,
       setCreatePDFFormFile,
       createPDFFormFileProps,
@@ -503,6 +559,10 @@ export default inject(
       setEditRoomDialogProps,
       createRoomDialogProps,
       setCreateRoomDialogProps,
+      createAgentDialogProps,
+      setCreateAgentDialogProps,
+      editAgentDialogProps,
+      setEditAgentDialogProps,
       setCover,
       setCreatePDFFormFile,
       createPDFFormFileProps,

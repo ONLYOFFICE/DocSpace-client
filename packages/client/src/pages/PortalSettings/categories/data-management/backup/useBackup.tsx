@@ -69,6 +69,7 @@ export type UseBackupProps = {
   isEmptyContentBeforeLoader?: BackupStore["isEmptyContentBeforeLoader"];
 
   addAbortControllers?: SettingsStore["addAbortControllers"];
+  isNotPaidPeriod?: CurrentTariffStatusStore["isNotPaidPeriod"];
 };
 
 const useBackup = ({
@@ -92,6 +93,7 @@ const useBackup = ({
   setIsEmptyContentBeforeLoader,
 
   addAbortControllers,
+  isNotPaidPeriod,
 }: UseBackupProps) => {
   const { t } = i18n;
 
@@ -117,15 +119,19 @@ const useBackup = ({
         backupsCountController,
       ]);
 
-      const baseRequests = [
-        getSettingsThirdParty(thirdPartyController.signal),
-        getBackupStorage(false, backupStorageController.signal),
-        getStorageRegions(storageRegionsController.signal),
-      ];
+      const baseRequests = [];
+
+      if (!isNotPaidPeriod) {
+        baseRequests.push(
+          getSettingsThirdParty(thirdPartyController.signal),
+          getBackupStorage(false, backupStorageController.signal),
+          getStorageRegions(storageRegionsController.signal),
+        );
+      }
 
       const optionalRequests = [];
 
-      if (isBackupPaid) {
+      if (isBackupPaid && !isNotPaidPeriod) {
         if (maxFreeBackups && maxFreeBackups > 0) {
           baseRequests.push(
             getBackupsCount(
@@ -193,7 +199,7 @@ const useBackup = ({
         backupsCountController,
       ]);
 
-      const baseRequests: (Promise<any> | undefined)[] = [
+      const baseRequests: (Promise<unknown> | undefined)[] = [
         getSettingsThirdParty(thirdPartyController.signal),
         getBackupSchedule(undefined, backupScheduleController.signal),
         getBackupStorage(undefined, backupStorageController.signal),

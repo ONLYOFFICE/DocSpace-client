@@ -45,7 +45,10 @@ export const getDialogContent = (
   isRoom,
   isTemplatesFolder,
   isSharedWithMeFolderRoot,
+  isAIAgent,
+  isAIAgentsFolderRoot,
   unsubscribe,
+  isAIAgentChatDelete,
 ) => {
   if (!selection) return null;
 
@@ -70,6 +73,37 @@ export const getDialogContent = (
         values={{ count: selection.length }}
         components={{ 1: <Text fontWeight={600} as="span" /> }}
       />
+    );
+  }
+
+  if (isAIAgent) {
+    return (
+      <>
+        <Trans
+          t={t}
+          i18nKey="DeleteAIAgentDescription"
+          ns="DeleteDialog"
+          values={{ agentName: selection[0]?.title }}
+        />{" "}
+        {t("Common:WantToContinue")}
+      </>
+    );
+  }
+
+  if (isAIAgentChatDelete.visible) {
+    return (
+      <>
+        <Trans
+          t={t}
+          i18nKey="DeleteAIChatDescription"
+          ns="DeleteDialog"
+          values={{ chatName: isAIAgentChatDelete.itemName }}
+          components={{
+            1: <Text key="chat-title" fontWeight={400} as="span" />,
+          }}
+        ></Trans>{" "}
+        {t("Common:WantToContinue")}
+      </>
     );
   }
 
@@ -115,7 +149,7 @@ export const getDialogContent = (
               : t("FilePermanentlyDeleted", {
                   trashSection: t("Common:TrashSection"),
                 })
-            : null}{" "}
+            : t("DeleteItemsSharedNote")}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -136,7 +170,7 @@ export const getDialogContent = (
             ? t("ItemsPermanentlyDeleted", {
                 trashSection: t("Common:TrashSection"),
               })
-            : null}{" "}
+            : t("DeleteItemsSharedNote")}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -152,7 +186,7 @@ export const getDialogContent = (
             ? t("FilesPermanentlyDeleted", {
                 trashSection: t("Common:TrashSection"),
               })
-            : null}{" "}
+            : t("DeleteItemsSharedNote")}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -169,7 +203,7 @@ export const getDialogContent = (
             ? t("FoldersPermanentlyDeleted", {
                 trashSection: t("Common:TrashSection"),
               })
-            : null}{" "}
+            : t("DeleteItemsSharedNote")}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -180,7 +214,8 @@ export const getDialogContent = (
     isPersonalRoom ||
     isRoom ||
     isTemplatesFolder ||
-    isSharedWithMeFolderRoot
+    isSharedWithMeFolderRoot ||
+    isAIAgentsFolderRoot
   ) {
     if (isSingle) {
       return (

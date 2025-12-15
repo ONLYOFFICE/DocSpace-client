@@ -165,6 +165,16 @@ export interface IContextMenuItem {
   )[];
   security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
   pluginName?: string;
+  items?: IContextMenuItem[];
+}
+
+export interface IContextMenuItemValidation {
+  type?: PluginFileType;
+  fileExst?: string;
+  userRole?: PluginUsersType;
+  device?: PluginDevices;
+  security?: TRoomSecurity | TFolderSecurity;
+  itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity;
 }
 
 export interface IEventListenerItem {

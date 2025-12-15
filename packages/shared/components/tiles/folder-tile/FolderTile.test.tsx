@@ -25,35 +25,38 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { ContextMenuRefType } from "../../context-menu/ContextMenu.types";
 import { FolderTile } from "./FolderTile";
 import { FolderTileProps } from "./FolderTile.types";
 
 // Mock translations
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
-// Mock styles
-jest.mock("./FolderTile.module.scss", () => ({
-  folderTile: "folderTile",
-  showHotkeyBorder: "showHotkeyBorder",
-  isDragging: "isDragging",
-  isActive: "isActive",
-  isEdit: "isEdit",
-  iconContainer: "iconContainer",
-  inProgress: "inProgress",
-  icon: "icon",
-  checked: "checked",
-  loader: "loader",
-  content: "content",
-  optionButton: "optionButton",
-  expandButton: "expandButton",
+// Mock styles - return default export for CSS Modules
+vi.mock("./FolderTile.module.scss", () => ({
+  default: {
+    folderTile: "folderTile",
+    showHotkeyBorder: "showHotkeyBorder",
+    isDragging: "isDragging",
+    isActive: "isActive",
+    isEdit: "isEdit",
+    iconContainer: "iconContainer",
+    inProgress: "inProgress",
+    icon: "icon",
+    checked: "checked",
+    loader: "loader",
+    content: "content",
+    optionButton: "optionButton",
+    expandButton: "expandButton",
+  },
 }));
 
 // Mock context menu components
-jest.mock("@docspace/shared/components/context-menu-button", () => ({
+vi.mock("@docspace/shared/components/context-menu-button", () => ({
   ContextMenuButton: ({
     title,
     onClick,
@@ -75,7 +78,7 @@ jest.mock("@docspace/shared/components/context-menu-button", () => ({
   },
 }));
 
-jest.mock("@docspace/shared/components/context-menu", () => {
+vi.mock("@docspace/shared/components/context-menu", () => {
   const ContextMenuComponent = ({
     ref,
     model,
@@ -85,9 +88,9 @@ jest.mock("@docspace/shared/components/context-menu", () => {
     ref: React.RefObject<ContextMenuRefType>;
   }) => {
     React.useImperativeHandle(ref, () => ({
-      show: jest.fn(),
-      hide: jest.fn(),
-      toggle: jest.fn(),
+      show: vi.fn(),
+      hide: vi.fn(),
+      toggle: vi.fn(),
       menuRef: { current: null },
     }));
 
@@ -104,7 +107,7 @@ jest.mock("@docspace/shared/components/context-menu", () => {
 });
 
 // Mock Checkbox component
-jest.mock("@docspace/shared/components/checkbox", () => ({
+vi.mock("@docspace/shared/components/checkbox", () => ({
   Checkbox: ({
     isChecked,
     onChange,
@@ -113,15 +116,25 @@ jest.mock("@docspace/shared/components/checkbox", () => ({
     isChecked?: boolean;
     isIndeterminate?: boolean;
     onChange?: (e: { target: { checked: boolean } }) => void;
-  }) => (
-    <input
-      type="checkbox"
-      checked={isChecked}
-      data-indeterminate={isIndeterminate}
-      onChange={() => onChange?.({ target: { checked: !isChecked } })}
-      data-testid="checkbox"
-    />
-  ),
+  }) => {
+    const inputRef = React.useRef<HTMLInputElement | null>(null);
+
+    React.useEffect(() => {
+      if (inputRef.current) {
+        inputRef.current.indeterminate = Boolean(isIndeterminate);
+      }
+    }, [isIndeterminate]);
+
+    return (
+      <input
+        ref={inputRef}
+        type="checkbox"
+        checked={isChecked}
+        aria-checked={isIndeterminate ? "mixed" : isChecked ? "true" : "false"}
+        onChange={() => onChange?.({ target: { checked: !isChecked } })}
+      />
+    );
+  },
 }));
 
 describe("FolderTile", () => {
@@ -147,13 +160,13 @@ describe("FolderTile", () => {
       contextOptions: mockContextOptions,
       element: <div data-testid="folder-icon">Folder Icon</div>,
       children: <FolderContent />,
-      onSelect: jest.fn(),
-      setSelection: jest.fn(),
-      withCtrlSelect: jest.fn(),
-      withShiftSelect: jest.fn(),
-      tileContextClick: jest.fn(),
-      hideContextMenu: jest.fn(),
-      getContextModel: jest.fn(),
+      onSelect: vi.fn(),
+      setSelection: vi.fn(),
+      withCtrlSelect: vi.fn(),
+      withShiftSelect: vi.fn(),
+      tileContextClick: vi.fn(),
+      hideContextMenu: vi.fn(),
+      getContextModel: vi.fn(),
       ...props,
     };
 
@@ -170,23 +183,23 @@ describe("FolderTile", () => {
 
   it("shows checkbox with correct state", () => {
     renderFolderTile({ checked: true });
-    const checkbox = screen.getByTestId("checkbox") as HTMLInputElement;
+    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
     expect(checkbox).toBeTruthy();
     expect(checkbox.checked).toBe(true);
   });
 
   it("shows indeterminate checkbox state", () => {
     renderFolderTile({ indeterminate: true });
-    const checkbox = screen.getByTestId("checkbox");
+    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
     expect(checkbox).toBeTruthy();
-    expect(checkbox.getAttribute("data-indeterminate")).toBe("true");
+    expect(checkbox.indeterminate).toBe(true);
   });
 
   it("calls onSelect when checkbox is clicked", () => {
-    const onSelect = jest.fn();
+    const onSelect = vi.fn();
     renderFolderTile({ onSelect });
 
-    const checkbox = screen.getByTestId("checkbox");
+    const checkbox = screen.getByRole("checkbox");
     fireEvent.click(checkbox);
 
     expect(onSelect).toHaveBeenCalledWith(true, mockItem);
@@ -199,7 +212,7 @@ describe("FolderTile", () => {
   });
 
   it("calls withCtrlSelect when Ctrl+Click", () => {
-    const withCtrlSelect = jest.fn();
+    const withCtrlSelect = vi.fn();
     renderFolderTile({ withCtrlSelect });
 
     const folderTile = screen.getByTestId("folder-content");
@@ -209,7 +222,7 @@ describe("FolderTile", () => {
   });
 
   it("calls withShiftSelect when Shift+Click", () => {
-    const withShiftSelect = jest.fn();
+    const withShiftSelect = vi.fn();
     renderFolderTile({ withShiftSelect });
 
     const folderTile = screen.getByTestId("folder-content");

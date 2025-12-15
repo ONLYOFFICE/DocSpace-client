@@ -30,7 +30,7 @@ import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import UserSolidIcon from "PUBLIC_DIR/images/icons/16/catalog.user.solid.react.svg?url";
-import SharedIcon from "PUBLIC_DIR/images/icons/16/catalog.old.share.react.svg?url";
+import SharedIcon from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
 import type { TFunction } from "i18next";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
@@ -73,7 +73,11 @@ export const getStepsData = (
       description: isTypeSelectEmpty ? (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
-          <div>{t("Settings:UsersAreRegistered")}</div>
+          <div>
+            {t("Settings:UsersAreRegistered", {
+              productName: t("Common:ProductName"),
+            })}
+          </div>
         </>
       ) : (
         <>
@@ -137,11 +141,7 @@ export const getStepsData = (
             name: t("Common:MyDocuments"),
             icon: UserSolidIcon,
           }}
-          sharedFilesExportDetails={{
-            name: t("Common:SharedWithMe"),
-            icon: SharedIcon,
-          }}
-          sharedFoldersExportDetails={{
+          sharedFilesAndFoldersExportDetails={{
             name: t("Common:SharedWithMe"),
             icon: SharedIcon,
           }}

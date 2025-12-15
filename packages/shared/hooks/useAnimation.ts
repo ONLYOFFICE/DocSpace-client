@@ -30,6 +30,7 @@ export const AnimationEvents = {
   END_ANIMATION: "ANIMATION_END",
   ANIMATION_STARTED: "ANIMATION_STARTED",
   ANIMATION_ENDED: "ANIMATION_ENDED",
+  Forced_Animation: "FORCED_ANIMATION",
 };
 
 export type UseAnimationReturn = {

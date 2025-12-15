@@ -109,6 +109,7 @@ const {
   darkGreyAction,
   darkActive,
   darkGreyHover,
+  grayLightText,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -2825,9 +2826,9 @@ const Dark: TTheme = {
         priceColor: darkGrayDark,
         storageSizeTitle: gray,
 
-        backgroundColor: lightDarkGrayHover,
+        backgroundColor: darkGrayLight,
         linkColor: link,
-        tariffText: grayDark,
+        tariffText: grayLightText,
         border: `1px solid ${grayDarkStrong}`,
         backgroundBenefitsColor: black,
         rectangleColor: lightDarkGrayHover,
@@ -2843,7 +2844,7 @@ const Dark: TTheme = {
         },
 
         benefitsContainer: {
-          iconsColor: grayDark,
+          iconsColor: darkGrayDark,
         },
         contactContainer: {
           textColor: darkGrayDark,
@@ -2871,10 +2872,10 @@ const Dark: TTheme = {
         comboBoxLabelColor: white,
         importSectionBackground: darkGrayLight,
         importSectionTextColor: grayDark,
-        importItemBackground: black,
+        importItemBackground: darkGrayLight,
         importItemDisableBackground: lightDarkGrayHover,
         importItemTextColor: darkGrayDark,
-        importItemDisableTextColor: grayDarkText,
+        importItemDisableTextColor: grayDark,
         importItemDescription: gray,
         importIconColor: darkGrayDark,
         groupMenuBackground: black,

@@ -3,7 +3,7 @@
   "content": "Limit by time period",
   "content_en_sha1_hash": "03e40a5e784a8aec64ccc72778ffd126b2588b86",
   "created_at": "2025-08-26T11:15:03.626Z",
-  "updated_at": "2025-10-13T14:41:03.210Z",
+  "updated_at": "2025-10-27T16:14:33.746Z",
   "comment": {
     "text": "This text appears as the header for a dialog or panel allowing users to set an expiration date for a link. It indicates the option to limit the link's availability by a specific time period. Translators should ensure the translation accurately conveys the concept of setting a time-based expiration.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 567,
+      "line_number": 566,
       "context": "bodyText={expiredLinkText}\n setIsExpired={setIsExpired}\n expirationDate={expirationDate}\n setExpirationDate={setExpirationDate}\n canChangeLifetime={canChangeLifetime}\n headerText={t(\"Common:LimitByTimePeriod\")}\n />\n </StyledEditLinkBodyContent>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/shared"
     }

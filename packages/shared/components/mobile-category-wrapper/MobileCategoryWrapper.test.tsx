@@ -1,22 +1,22 @@
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { MobileCategoryWrapper } from "./index";
 
-jest.mock("../../utils/common", () => ({
-  isManagement: jest.fn(() => false),
+vi.mock("../../utils/common", () => ({
+  isManagement: vi.fn(() => false),
 }));
 
-jest.mock("../../hooks/useTheme", () => ({
-  useTheme: jest.fn(() => ({ isBase: true })),
+vi.mock("../../hooks/useTheme", () => ({
+  useTheme: vi.fn(() => ({ isBase: true })),
 }));
 
 const defaultProps = {
   title: "Test Title",
   url: "/test-url",
   subtitle: "Test Subtitle",
-  onClickLink: jest.fn(),
+  onClickLink: vi.fn((e) => e.preventDefault()),
   isDisabled: false,
   withPaidBadge: false,
   badgeLabel: "PRO",
@@ -24,7 +24,7 @@ const defaultProps = {
 
 describe("MobileCategoryWrapper", () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders with default props", () => {

@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 
@@ -34,9 +34,9 @@ import ArticleFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 
 import { ArticleItem } from ".";
 
-const mockOnClick = jest.fn();
-const mockOnClickBadge = jest.fn();
-const mockOnDrop = jest.fn();
+const mockOnClick = vi.fn();
+const mockOnClickBadge = vi.fn();
+const mockOnDrop = vi.fn();
 
 const baseProps = {
   icon: ArticleFolderReactSvgUrl,
@@ -57,7 +57,7 @@ const renderWithRouter = (ui: React.ReactElement) => {
 
 describe("<ArticleItem />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {

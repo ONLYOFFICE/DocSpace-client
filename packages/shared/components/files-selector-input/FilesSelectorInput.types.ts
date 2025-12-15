@@ -88,4 +88,6 @@ export type FilesSelectorInputProps = {
     visible: boolean,
     options: BackupToPublicRoomOptionType,
   ) => void;
+
+  withAIAgentsTreeFolder?: boolean;
 };

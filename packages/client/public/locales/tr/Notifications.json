@@ -5,7 +5,6 @@
   "DailyFeed": "Günlük {{productName}} akışı",
   "DailyFeedDescription": "{{productName}}'inizdeki haberleri ve etkinlikleri günlük bir özet halinde okuyun.",
   "FileActivityNotify": "Dosya etkinliği bildirimleri",
-  "GoToSettings": "Ayarlara Git",
   "IsNotValid": "Geçerli değil",
   "LdapEmailTooltip": "Bu kullanıcı hesabı LDAP'den yüklenmiştir. Kullanıcının e-posta adresi belirtilmedi ve mevcut olan otomatik olarak oluşturuldu, bildirim göndermek için kullanılamaz.",
   "NotConfigured": "Yapılandırılmadı",

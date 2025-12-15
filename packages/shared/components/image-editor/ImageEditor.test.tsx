@@ -24,25 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { ImageEditor } from "./index";
 import { TImage } from "./ImageEditor.types";
-import "@testing-library/jest-dom";
 
-jest.mock("react-avatar-editor", () => {
-  return function AvatarEditor() {
+vi.mock("react-avatar-editor", () => ({
+  default: function AvatarEditor() {
     return null;
-  };
-});
+  },
+}));
 
-jest.mock("react-svg", () => ({
+vi.mock("react-svg", () => ({
   ReactSVG: () => null,
 }));
 
 const mockT = (key: string) => key;
-const mockOnChangeImage = jest.fn();
-const mockSetPreview = jest.fn();
-const mockOnChangeFile = jest.fn();
+const mockOnChangeImage = vi.fn();
+const mockSetPreview = vi.fn();
+const mockOnChangeFile = vi.fn();
 
 const defaultProps = {
   t: mockT,
@@ -62,7 +62,7 @@ const defaultProps = {
 
 describe("ImageEditor", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without crashing", () => {

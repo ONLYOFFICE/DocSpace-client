@@ -39,8 +39,9 @@ import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
 import { RoomIcon } from "../../room-icon";
 import { Tooltip } from "../../tooltip";
+import { MCPIcon, MCPIconSize } from "../../mcp-icon";
 
-import { ItemProps, Data, TSelectorItem } from "../Selector.types";
+import { Data, ItemProps, TSelectorItem } from "../Selector.types";
 import { EmployeeType, RoomsType } from "../../../enums";
 import NewItem from "./NewItem";
 import InputItem from "./InputItem";
@@ -65,7 +66,8 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
     prevItem?.label === nextItem?.label &&
     prevItem?.isSelected === nextItem?.isSelected &&
     nextData?.inputItemVisible === prevData?.inputItemVisible &&
-    nextData?.listHeight === prevData?.listHeight
+    nextData?.listHeight === prevData?.listHeight &&
+    nextData?.isLimitReached === prevData?.isLimitReached
   );
 };
 
@@ -82,6 +84,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     savedInputValue,
     setSavedInputValue,
     listHeight,
+    isLimitReached,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -128,8 +131,11 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       userType,
       fileExst: ext,
       isTemplate,
+      disableMultiSelect,
       isSeparator,
       isSystem,
+      isMCP,
+      isFolder,
     } = item;
 
     if (isSeparator) {
@@ -214,6 +220,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       )
         return;
 
+      if (isMultiSelect && isLimitReached && !isSelected && !isFolder) return;
+
       const isDoubleClick = e.detail === 2;
 
       onSelect?.(item, isDoubleClick);
@@ -227,20 +235,26 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const itemAvatar = avatar ?? (isGroup && isSystem ? EveryoneIconUrl : "");
 
+    const isItemDisabled =
+      isDisabled ||
+      (isMultiSelect && isLimitReached && !isSelected && !isFolder);
+
     return (
       <div
         key={`${label}-${avatar}-${role}`}
         style={style}
         onClick={onClick}
         className={classNames(styles.selectorItem, {
-          [styles.disabled]: isDisabled,
+          [styles.disabled]: isItemDisabled,
           [styles.selectedSingle]: isSelected && !isMultiSelect,
-          [styles.hoverable]: !isDisabled,
+          [styles.hoverable]: !isItemDisabled,
           [styles.isSystem]: isSystem,
         })}
         data-testid={`selector-item-${index}`}
       >
-        {avatar || isGroup ? (
+        {isMCP ? (
+          <MCPIcon title={label} imgSrc={icon} size={MCPIconSize.Big} />
+        ) : avatar || isGroup ? (
           <Avatar
             className={styles.userAvatar}
             source={itemAvatar}
@@ -282,7 +296,13 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         {renderCustomItem ? (
           renderCustomItem(label, typeLabel, email, isGroup, status)
         ) : (
-          <div className={styles.selectorItemName}>
+          <div
+            className={
+              isMultiSelect
+                ? styles.selectorItemNameMultiSelect
+                : styles.selectorItemName
+            }
+          >
             <Text
               className={classNames(styles.selectorItemLabel, "label-disabled")}
               fontWeight={600}
@@ -329,16 +349,14 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           >
             {disabledText}
           </Text>
-        ) : (
-          isMultiSelect && (
-            <Checkbox
-              className={classNames(styles.checkbox, "checkbox")}
-              isChecked={isSelected}
-              isDisabled={isDisabled}
-              onChange={onChangeAction}
-            />
-          )
-        )}
+        ) : disableMultiSelect ? null : isMultiSelect ? (
+          <Checkbox
+            className={classNames(styles.checkbox, "checkbox")}
+            isChecked={isSelected}
+            isDisabled={isItemDisabled}
+            onChange={onChangeAction}
+          />
+        ) : null}
       </div>
     );
   };

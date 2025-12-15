@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "チャットを削除しますか？",
+  "DeleteAIAgentDescription": "エージェント<strong>「{{agentName}}」</strong>は完全に削除されます。すべてのデータとユーザーアクセス権限が失われます。",
+  "DeleteAIAgentTitle": "このエージェントを削除",
+  "DeleteAIAgentWarning": "結果を理解した上で、エージェントを削除したい",
+  "DeleteAIChatDescription": "削除しようとしています：<strong>{{chatName}}<1>.</1></strong>\nすべてのメッセージとチャット履歴が完全に削除され、復元できません。",
   "DeleteAllGroupDescription": "選択したグループは削除されます。グループのユーザーは{{productName}}から削除されません。続けてよろしいですか？",
   "DeleteAllGroupsTitle": "グループの削除",
   "DeleteFiles": "あなたは<strong>ファイル ({{filesCount}})</strong>を{{trashSection}} に移動しようとしています。",
@@ -11,6 +16,7 @@
   "DeleteGroupTitle": "グループの削除",
   "DeleteItem": "あなたは<strong>{{name}}</strong>を{{trashSection}}に移動しようとしています。",
   "DeleteItemForever": "削除しようとしています：<strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "誰かと共有している場合は、利用できなくなりますのでご注意ください。",
   "DeleteRoom": "<strong>「{{roomName}}」</strong> ルームは永久に削除されます。すべてのデータとユーザーアクセスが失われます。",
   "DeleteRoomTitle": "このルームを削除しますか？",
   "DeleteRoomWarning": "私は上記の説明を理解しており、ルームを削除したいです",

@@ -1,0 +1,28 @@
+{
+  "key_path": "MCPServerAdvancedSettingsHint",
+  "content": "Use this section to pass additional HTTP headers, like authorization tokens.",
+  "content_en_sha1_hash": "46c659582b45fa6a31881287056e904b1042ed91",
+  "created_at": "2025-11-13T07:58:04.572Z",
+  "updated_at": "2025-11-13T08:10:23.825Z",
+  "comment": {
+    "text": "This text provides a helpful hint within the Advanced Settings section of the server configuration. It explains that this area allows users to add custom HTTP headers, such as authorization tokens, for enhanced security and functionality. This hint appears as a text label within the server settings UI.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:10:23.825Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useAdvancedSettings.tsx",
+      "line_number": 121,
+      "context": "{t(showAdvancedSettings ? \"Common:Hide\" : \"SingleSignOn:Show\")}\n </Link>\n </div>\n {showAdvancedSettings ? (\n <Text className={baseParamsStyles.fieldHint}>\n {t(\"AISettings:MCPServerAdvancedSettingsHint\")}\n </Text>\n ) : null}\n </div>\n {showAdvancedSettings ? (\n <div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

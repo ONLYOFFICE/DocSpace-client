@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile } from "@docspace/shared/api/files/types";
-import { TNewFilesItem, TRoom } from "@docspace/shared/api/rooms/types";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { Nullable } from "@docspace/shared/types";
+import type { TFile } from "@docspace/shared/api/files/types";
+import type { TNewFilesItem, TRoom } from "@docspace/shared/api/rooms/types";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { Nullable } from "@docspace/shared/types";
 
-import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
-import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
-import FilesStore from "SRC_DIR/store/FilesStore";
+import type FilesActionStore from "SRC_DIR/store/FilesActionsStore";
+import type FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import type FilesStore from "SRC_DIR/store/FilesStore";
 
 export type NewFilesBadgeProps = {
   newFilesCount: number;
@@ -81,6 +81,7 @@ export type NewFilesPanelItemProps = {
   date: string;
   items: TNewFilesItem[];
   isRooms: boolean;
+  isAgents: boolean;
   isFirst: boolean;
   onClose: VoidFunction;
 

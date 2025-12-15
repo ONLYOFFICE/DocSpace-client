@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Delete chat?",
+  "DeleteAIAgentDescription": "The agent <strong>\"{{agentName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
+  "DeleteAIAgentTitle": "Delete this agent?",
+  "DeleteAIAgentWarning": "I understand the consequences and want to delete the agent",
+  "DeleteAIChatDescription": "You are about to delete <strong>{{chatName}}<1>.</1></strong>\n All messages and chat history will be permanently removed and cannot be restored.",
   "DeleteAllGroupDescription": "The selected groups will be deleted. Users in the groups will not be removed from {{productName}}. Are you sure you want to continue?",
   "DeleteAllGroupsTitle": "Delete groups",
   "DeleteFiles": "You are about to move <strong>files ({{filesCount}})</strong> to {{trashSection}}.",
@@ -11,6 +16,7 @@
   "DeleteGroupTitle": "Delete group",
   "DeleteItem": "You are about to move <strong>{{name}}</strong> to {{trashSection}}.",
   "DeleteItemForever": "You are about to delete <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Please note that if you have shared them with someone, they will become unavailable.",
   "DeleteRoom": "The room <strong>\"{{roomName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
   "DeleteRoomTitle": "Delete this room?",
   "DeleteRoomWarning": "I understand the consequences and want to delete the room",

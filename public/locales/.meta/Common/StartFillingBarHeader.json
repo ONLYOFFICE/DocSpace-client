@@ -3,7 +3,7 @@
   "content": "How recipient assignment works",
   "content_en_sha1_hash": "43b88913fea3bc03a189be6a9adf9a673b5f79ca",
   "created_at": "2025-10-13T13:22:14.709Z",
-  "updated_at": "2025-10-14T04:11:09.542Z",
+  "updated_at": "2025-10-27T16:14:33.746Z",
   "comment": {
     "text": "This text appears as the header for an informational bar within a modal dialog. It explains how recipient assignment functions, likely within a filling status or start-filling process. Translators should ensure the description accurately reflects the underlying functionality.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 321,
+      "line_number": 353,
       "context": "<ModalDialog.Body>\n <section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:StartFillingBarHeader\")}\n bodyText={t(\"Common:StartFillingBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setInfoBarVisible(false)}\n />\n <hr className={styles.divider} />",
       "module": "/packages/shared"
     }

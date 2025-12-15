@@ -3,7 +3,7 @@
   "content": "Moving",
   "content_en_sha1_hash": "65cd4dd8114610f7bacc1f81bb9dd01a137f162f",
   "created_at": "2025-05-19T21:30:46.650Z",
-  "updated_at": "2025-06-03T20:59:41.993Z",
+  "updated_at": "2025-10-27T16:14:33.359Z",
   "comment": {
     "text": "The \"MoveToOperation\" translation key is used to display a label for an operation related to moving files in a user interface. It appears as part of a switch statement that determines which file action is being performed, such as moving or copying. Translators should replace this key with a localized string describing the specific file move action.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 266,
+      "line_number": 269,
       "context": "} = OPERATIONS_NAME;\n switch (type) {\n case trash:\n return i18n.t(\"Files:MovingToTrash\");\n case move:\n return i18n.t(\"Common:MoveToOperation\");\n case copy:\n return i18n.t(\"Common:CopyOperation\");\n case download:\n return i18n.t(\"Files:Downloading\");\n case duplicate:",
       "module": "/packages/client"
     }

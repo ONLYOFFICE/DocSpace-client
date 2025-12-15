@@ -3,7 +3,7 @@
   "content": "Share for users",
   "content_en_sha1_hash": "bf53de1cbc0dfc480132454f260d5d9fc5503d8a",
   "created_at": "2025-09-23T07:24:16.793Z",
-  "updated_at": "2025-10-13T13:22:36.007Z",
+  "updated_at": "2025-11-13T07:58:08.609Z",
   "comment": {
     "text": "This text appears in the UI as the title of a header section, likely within a sharing interface. It indicates a list or group of users who have access or are involved in a shared resource. Translators should consider this as a label for a user list.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/hooks/useMembers.tsx",
-      "line_number": 270,
-      "context": "const headersCount = membersList.length - countMembers;\n \n if (membersList.length === 0) {\n return {\n content: [\n <ShareHeader key=\"header-users\" title={t(\"Common:ShareForUsers\")} />,\n <CreateButton\n key=\"create-block\"\n onClick={onAdded}\n title={t(\"Common:AddUsersOrGroups\")}\n />,",
+      "line_number": 262,
+      "context": "const currentMember = membersList.find((member) => member.id === selfId);\n \n if (membersList.length === 0) {\n return {\n content: [\n <ShareHeader key=\"header-users\" title={t(\"Common:ShareForUsers\")} />,\n <CreateButton\n key=\"create-block\"\n onClick={onAdded}\n title={t(\"Common:AddUsersOrGroups\")}\n />,",
       "module": "/packages/shared"
     }
   ],

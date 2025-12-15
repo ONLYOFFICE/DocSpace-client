@@ -26,8 +26,8 @@
 
 import React from "react";
 import type { TFunction } from "i18next";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 import { RoomsType, ShareAccessRights } from "../../enums";
@@ -37,46 +37,45 @@ import type { QuickButtonsProps } from "./QuickButtons.types";
 import { type TFile } from "../../api/files/types";
 
 // Mock SVG imports
-jest.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => {
-  const DownloadIcon = () => <div data-testid="download-icon" />;
-
-  DownloadIcon.displayName = "DownloadIcon";
-  return DownloadIcon;
-});
-jest.mock("PUBLIC_DIR/images/link.react.svg?url", () => "link-icon.svg");
-jest.mock(
-  "PUBLIC_DIR/images/lifetime.react.svg?url",
-  () => "lifetime-icon.svg",
-);
-jest.mock(
-  "PUBLIC_DIR/images/create.room.react.svg?url",
-  () => "create-room-icon.svg",
-);
-jest.mock(
-  "PUBLIC_DIR/images/file.actions.locked.react.svg?url",
-  () => "locked-icon.svg",
-);
-jest.mock(
-  "PUBLIC_DIR/images/icons/12/lock.react.svg?url",
-  () => "locked-icon-12.svg",
-);
-jest.mock(
-  "PUBLIC_DIR/images/favorite.react.svg?url",
-  () => "favorite-icon.svg",
-);
-
-// Mock isTablet and isDesktop
-jest.mock("../../utils", () => ({
-  ...jest.requireActual("../../utils"),
-  isTablet: jest.fn().mockReturnValue(false),
-  isDesktop: jest.fn().mockReturnValue(true),
-  classNames: jest.requireActual("../../utils").classNames,
-  IconSizeType: jest.requireActual("../../utils").IconSizeType,
+vi.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => ({
+  default: () => <div data-testid="download-icon" />,
+}));
+vi.mock("PUBLIC_DIR/images/link.react.svg?url", () => ({
+  default: "link-icon.svg",
+}));
+vi.mock("PUBLIC_DIR/images/lifetime.react.svg?url", () => ({
+  default: "lifetime-icon.svg",
+}));
+vi.mock("PUBLIC_DIR/images/create.room.react.svg?url", () => ({
+  default: "create-room-icon.svg",
+}));
+vi.mock("PUBLIC_DIR/images/file.actions.locked.react.svg?url", () => ({
+  default: "locked-icon.svg",
+}));
+vi.mock("PUBLIC_DIR/images/icons/12/lock.react.svg?url", () => ({
+  default: "locked-icon-12.svg",
+}));
+vi.mock("PUBLIC_DIR/images/favorite.react.svg?url", () => ({
+  default: "favorite-icon.svg",
 }));
 
+// Mock isTablet and isDesktop
+vi.mock("../../utils", async () => {
+  const utils = await vi.importActual("../../utils");
+  return {
+    ...utils,
+    isTablet: vi.fn().mockReturnValue(false),
+    isDesktop: vi.fn().mockReturnValue(true),
+    classNames: utils.classNames,
+    IconSizeType: utils.IconSizeType,
+  };
+});
+
 // Mock react-device-detect
-jest.mock("react-device-detect", () => ({
+vi.mock("react-device-detect", () => ({
   isTablet: false,
+  isMobile: false,
+  isMobileOnly: false,
 }));
 
 const mockT = ((key: string, params?: Record<string, string>) => {
@@ -120,6 +119,7 @@ const baseFileItem: TFile = {
     CreateRoomFrom: true,
     CopyLink: true,
     Embed: true,
+    Vectorization: false,
   },
   canShare: true,
   access: ShareAccessRights.None,
@@ -177,11 +177,11 @@ const baseProps: QuickButtonsProps = {
   t: mockT,
   item: baseFileItem,
   viewAs: "row",
-  onClickDownload: jest.fn(),
-  onCopyPrimaryLink: jest.fn(),
-  onClickShare: jest.fn(),
-  onCreateRoom: jest.fn(),
-  onClickLock: jest.fn(),
+  onClickDownload: vi.fn(),
+  onCopyPrimaryLink: vi.fn(),
+  onClickShare: vi.fn(),
+  onCreateRoom: vi.fn(),
+  onClickLock: vi.fn(),
   isDisabled: false,
   isPublicRoom: false,
   isArchiveFolder: false,
@@ -192,7 +192,7 @@ const baseProps: QuickButtonsProps = {
 
 describe("<QuickButtons />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
@@ -223,7 +223,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("handles share button click", async () => {
-    const onClickShare = jest.fn();
+    const onClickShare = vi.fn();
 
     renderWithTheme(
       <QuickButtons {...baseProps} onClickShare={onClickShare} />,
@@ -243,7 +243,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("handles download button click", async () => {
-    const onClickDownload = jest.fn();
+    const onClickDownload = vi.fn();
 
     renderWithTheme(
       <QuickButtons
@@ -268,7 +268,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("handles create room button click", async () => {
-    const onCreateRoom = jest.fn();
+    const onCreateRoom = vi.fn();
 
     renderWithTheme(
       <QuickButtons
@@ -301,7 +301,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("handles copy link button click", async () => {
-    const onCopyPrimaryLink = jest.fn();
+    const onCopyPrimaryLink = vi.fn();
     const publicRoomItem = {
       ...baseFileItem,
       shared: true,
@@ -341,7 +341,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("handles lock button click", async () => {
-    const onClickLock = jest.fn();
+    const onClickLock = vi.fn();
     const lockedItem = {
       ...baseFileItem,
       locked: true,
@@ -364,7 +364,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("does not call onClickLock when canLock is false", async () => {
-    const onClickLock = jest.fn();
+    const onClickLock = vi.fn();
     const lockedItem = {
       ...baseFileItem,
       locked: true,
@@ -415,7 +415,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("disables share button when isDisabled is true", () => {
-    const onClickShare = jest.fn();
+    const onClickShare = vi.fn();
     renderWithTheme(
       <QuickButtons {...baseProps} isDisabled onClickShare={onClickShare} />,
     );
@@ -435,7 +435,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("handles favorites button click", async () => {
-    const onClickFavorite = jest.fn();
+    const onClickFavorite = vi.fn();
     renderWithTheme(
       <QuickButtons {...baseProps} onClickFavorite={onClickFavorite} />,
     );
@@ -446,7 +446,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("does not call onClickFavorite when disabled", async () => {
-    const onClickFavorite = jest.fn();
+    const onClickFavorite = vi.fn();
     renderWithTheme(
       <QuickButtons
         {...baseProps}

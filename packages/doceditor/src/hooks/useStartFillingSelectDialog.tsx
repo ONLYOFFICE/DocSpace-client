@@ -252,7 +252,7 @@ const useStartFillingSelectDialog = (
       isFirstLoad: boolean,
       isSelectedParentFolder: boolean,
       selectedItemId: string | number | undefined,
-      selectedItemType: "rooms" | "files" | undefined,
+      selectedItemType: "rooms" | "files" | "agents" | undefined,
       isRoot: boolean,
       selectedItemSecurity:
         | TFileSecurity

@@ -3,7 +3,7 @@
   "content": "Backup service successfully enabled.",
   "content_en_sha1_hash": "8433fcfa744945fc664e221df15d13d454b4ab39",
   "created_at": "2025-08-21T14:45:38.905Z",
-  "updated_at": "2025-10-07T15:39:07.542Z",
+  "updated_at": "2025-11-03T12:10:35.339Z",
   "comment": {
     "text": "This key displays a success message in the UI, confirming that the backup service has been successfully enabled. It appears as a toastr notification within the Portal Settings page, specifically when enabling a service. Translators should ensure the message conveys a positive confirmation of the action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 236,
-      "context": "toastr.error(t(\"Common:UnexpectedError\"));\n changeServiceState(confirmActionType);\n return;\n }\n \n toastr.success(t(\"Services:BackupServiceEnabled\"));\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n changeServiceState(confirmActionType);\n }",
+      "line_number": 278,
+      "context": "setIsConfirmDialogVisible(false);\n changeServiceState(confirmActionType);\n \n const getSuccessMessage = () => {\n if (confirmActionType === BACKUP_SERVICE) {\n return t(\"Services:BackupServiceEnabled\");\n }\n if (confirmActionType === AI_TOOLS) {\n return t(\"Services:AIToolsEnabled\");\n }\n if (confirmActionType === WEB_SEARCH) {",
       "module": "/packages/client"
     }
   ],

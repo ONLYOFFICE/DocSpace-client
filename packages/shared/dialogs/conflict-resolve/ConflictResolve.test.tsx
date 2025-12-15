@@ -25,16 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import ConflictResolve from "./ConflictResolve";
 import { ConflictResolveType } from "../../enums";
 
 describe("ConflictResolve", () => {
-  const mockOnClose = jest.fn();
-  const mockOnSubmit = jest.fn();
+  const mockOnClose = vi.fn();
+  const mockOnSubmit = vi.fn();
 
   const defaultProps = {
     isLoading: false,
@@ -55,7 +55,7 @@ describe("ConflictResolve", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders conflict resolve dialog with all options", () => {

@@ -1,0 +1,28 @@
+{
+  "key_path": "DataImportAdminLimitExceeded",
+  "content": "Admin limit exceeded. To continue, please either adjust the number of admins or increase the admin limit.",
+  "content_en_sha1_hash": "ff2ffc7d2f57c649e3c547236602e231eea5b81f",
+  "created_at": "2025-10-27T16:14:25.843Z",
+  "updated_at": "2025-10-27T18:00:35.024Z",
+  "comment": {
+    "text": "This text appears in an info block within the Data Import settings, specifically when the maximum number of administrators has been reached. It informs the user that they need to adjust the number of admins or increase the admin limit to proceed. Translators should ensure the wording accurately conveys this limitation and the available solutions.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T18:00:35.024Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
+      "line_number": 46,
+      "context": "return (\n <StyledInfoBlock isAdmins isLimitReached={isLimitReached}>\n {isLimitReached ? (\n <Text className=\"info-error-text\" fontSize=\"12px\" fontWeight={600}>\n {t(\"DataImportAdminLimitExceeded\")}\n </Text>\n ) : null}\n <div className=\"info-block-wrapper\">\n <Text\n as=\"div\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

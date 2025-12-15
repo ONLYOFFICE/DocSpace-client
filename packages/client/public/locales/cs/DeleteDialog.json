@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Smazat chat?",
+  "DeleteAIAgentDescription": "Agent <strong>\"{{agentName}}\"</strong> bude trvale smazán. Všechna data a přístupy uživatelů budou ztraceny.",
+  "DeleteAIAgentTitle": "Smazat tohoto agenta?",
+  "DeleteAIAgentWarning": "Rozumím následkům a chci smazat agenta.",
+  "DeleteAIChatDescription": "Mazat se chystáte <strong>{{chatName}}<1>.</1></strong>\n Všechny zprávy a historie chatu budou trvale smazány a nelze je obnovit.",
   "DeleteAllGroupDescription": "Vybrané skupiny budou odstraněny. Uživatelé ve skupinách nebudou z {{productName}} odstraněni. Opravdu chcete pokračovat?",
   "DeleteAllGroupsTitle": "Odstranit skupiny",
   "DeleteFiles": "Čekáte na přesunutí <strong>souborů ({{filesCount}})</strong> do {{trashSection}}.",
@@ -11,6 +16,7 @@
   "DeleteGroupTitle": "Smazat skupinu",
   "DeleteItem": "Čekáte na přesunutí <strong>{{name}}</strong> do {{trashSection}}.",
   "DeleteItemForever": "Mazat se chystáte <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Upozorňujeme, že pokud jste je s někým sdíleli, stanou se nedostupnými.",
   "DeleteRoom": "Pokoj <strong>{{roomName}}</strong> bude trvale smazán. Všechna data a přístupy uživatelů budou ztraceny.",
   "DeleteRoomTitle": "Smazat tuto místnost?",
   "DeleteRoomWarning": "Rozumím následkům a chci smazat pokoj.",

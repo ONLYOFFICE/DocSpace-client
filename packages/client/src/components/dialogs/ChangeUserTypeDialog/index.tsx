@@ -69,7 +69,7 @@ type ChangeUserTypeDialogProps = {
   onChangeUserType: VoidFunction;
 
   setDataReassignmentDialogVisible?: (visible: boolean) => void;
-  setDialogData?: (data: any) => void;
+  setDialogData?: (data: unknown) => void;
   dialogData?: TChangeUserTypeDialogData;
   isDowngradeType: boolean;
   isDowngradeToUser: boolean;

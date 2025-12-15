@@ -25,20 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { ModalDialog } from ".";
 import { ModalDialogType } from "./ModalDialog.enums";
 
-jest.mock("react-device-detect", () => ({
+vi.mock("react-device-detect", () => ({
   isSafari: false,
   isTablet: false,
+  isMobileOnly: false,
+  isMobile: false,
 }));
 
 describe("ModalDialog", () => {
-  const mockOnClose = jest.fn();
+  const mockOnClose = vi.fn();
 
   const defaultProps = {
     visible: true,
@@ -46,7 +48,7 @@ describe("ModalDialog", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders modal dialog with header, body and footer", () => {

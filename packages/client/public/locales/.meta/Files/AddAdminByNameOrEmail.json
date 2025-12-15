@@ -3,7 +3,7 @@
   "content": "Add admin by name or email",
   "content_en_sha1_hash": "c917300875036e8a075e1740087c98c90e3179cf",
   "created_at": "2025-05-19T21:30:55.202Z",
-  "updated_at": "2025-08-11T09:02:43.900Z",
+  "updated_at": "2025-11-03T12:10:35.067Z",
   "comment": {
     "text": "This translation key is used to display the text \"Add admin by name or email\" in a UI component, specifically as a placeholder in an invite input field. It appears on the screen when the user interacts with the input field and needs to add an administrator by either name or email address.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
-      "line_number": 274,
+      "line_number": 266,
       "context": "<StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>\n <TextInput\n className=\"invite-input\"\n scale\n onChange={onChange}\n placeholder={t(\"Files:AddAdminByNameOrEmail\")}\n value={inputValue}\n type={InputType.search}\n withBorder={false}\n isDisabled={isDisabled}\n onKeyDown={onKeyDown}",
       "module": "/packages/client"
     }

@@ -1,6 +1,6 @@
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { AsideHeader } from ".";
 import styles from "./AsideHeader.module.scss";
@@ -13,7 +13,7 @@ describe("AsideHeader", () => {
   });
 
   it("renders back button when isBackButton is true and handle click on it", () => {
-    const onBackClick = jest.fn();
+    const onBackClick = vi.fn();
     const { container } = render(
       <AsideHeader isBackButton onBackClick={onBackClick} />,
     );
@@ -28,7 +28,7 @@ describe("AsideHeader", () => {
   });
 
   it("renders close button when isCloseable is true", () => {
-    const onCloseClick = jest.fn();
+    const onCloseClick = vi.fn();
     render(<AsideHeader isCloseable onCloseClick={onCloseClick} />);
 
     const closeButton = screen.getByTestId("aside_header_close_icon_button");
@@ -43,12 +43,12 @@ describe("AsideHeader", () => {
       {
         key: "settings",
         url: "/images/settings.react.svg",
-        onClick: jest.fn(),
+        onClick: vi.fn(),
       },
       {
         key: "info",
         url: "/images/info.react.svg",
-        onClick: jest.fn(),
+        onClick: vi.fn(),
       },
     ];
 

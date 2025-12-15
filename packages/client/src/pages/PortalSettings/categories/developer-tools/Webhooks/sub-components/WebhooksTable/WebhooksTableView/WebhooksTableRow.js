@@ -39,8 +39,8 @@ import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-
 import { globalColors } from "@docspace/shared/themes";
+import { Encoder } from "@docspace/shared/utils/encoder";
 
 import StatusBadge from "../../StatusBadge";
 
@@ -189,7 +189,7 @@ const WebhooksTableRow = (props) => {
               truncate
               dataTestId={`author_name_${webhook.name}`}
             >
-              {webhook.createdBy?.displayName}
+              {Encoder.htmlDecode(webhook.createdBy?.displayName)}
             </Text>
           </TableCell>
         ) : (

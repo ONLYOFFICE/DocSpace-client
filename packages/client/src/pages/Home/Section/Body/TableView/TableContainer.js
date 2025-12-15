@@ -151,7 +151,9 @@ const Table = ({
   disableDrag,
   withContentSelection,
   isFavoritesFolder,
-  isSharedWithMeFolderRoot,
+  isSharedWithMeFolder,
+  isInSharedFolder,
+  isAIAgentsFolder,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -203,8 +205,8 @@ const Table = ({
   }, []);
 
   React.useEffect(() => {
-    if (!isRooms) setTagCount(0);
-  }, [isRooms]);
+    if (!isRooms && !isAIAgentsFolder) setTagCount(0);
+  }, [isRooms, isAIAgentsFolder]);
 
   const filesListNode = useMemo(() => {
     return list.map((item, index) => (
@@ -227,7 +229,9 @@ const Table = ({
         isTemplates={isTemplatesFolder}
         isTrashFolder={isTrashFolder}
         isFavoritesFolder={isFavoritesFolder}
-        isSharedWithMeFolderRoot={isSharedWithMeFolderRoot}
+        isSharedWithMeFolder={isSharedWithMeFolder}
+        isInSharedFolder={isInSharedFolder}
+        isAIAgentsFolder={isAIAgentsFolder}
         hideColumns={hideColumns}
         isHighlight={
           highlightFile.id == item.id
@@ -250,6 +254,7 @@ const Table = ({
     theme,
     tagCount,
     isRooms,
+    isAIAgentsFolder,
     hideColumns,
     highlightFile.id,
     highlightFile.isExst,
@@ -322,7 +327,9 @@ export default inject(
       isTrashFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
+      isInSharedFolder,
+      isAIAgentsFolder,
     } = treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
@@ -367,7 +374,8 @@ export default inject(
       infoPanelVisible,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal: isRooms ? roomsFilter.total : filter.total,
+      filterTotal:
+        isRooms || isAIAgentsFolder ? roomsFilter.total : filter.total,
       isRooms,
       isTrashFolder,
       isIndexEditingMode,
@@ -386,7 +394,9 @@ export default inject(
       disableDrag,
       withContentSelection,
       isFavoritesFolder,
-      isSharedWithMeFolderRoot,
+      isSharedWithMeFolder,
+      isInSharedFolder,
+      isAIAgentsFolder,
     };
   },
 )(withContainer(observer(Table)));

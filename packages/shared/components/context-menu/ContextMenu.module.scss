@@ -104,8 +104,6 @@
       -moz-box-shadow: var(--context-menu-box-shadow);
       -webkit-box-shadow: var(--context-menu-box-shadow);
 
-      @include mixins.truncate;
-
       margin-top: -4px;
 
       margin-left: var(--context-menu-submenu-list-margin);
@@ -391,4 +389,8 @@
   &.noHover:hover {
     background-color: var(--sub-menu-item-background-color);
   }
+}
+
+.menuItemWithToggle {
+  justify-content: space-between;
 }

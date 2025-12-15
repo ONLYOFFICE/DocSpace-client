@@ -32,8 +32,8 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import GithubLight from "PUBLIC_DIR/images/github.light.react.svg";
-import GithubDark from "PUBLIC_DIR/images/github.dark.react.svg";
+import GithubLight from "PUBLIC_DIR/images/thirdparties/github.light.react.svg";
+import GithubDark from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { StyledContainer } from "./StyledPluginSDK";

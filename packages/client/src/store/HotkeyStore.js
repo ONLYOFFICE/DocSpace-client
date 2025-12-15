@@ -699,8 +699,6 @@ class HotkeyStore {
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
           } else {
-            if (!isCopy) this.filesStore.setMovingInProgress(!isCopy);
-
             await itemOperationToFolder(operationData);
           }
         })

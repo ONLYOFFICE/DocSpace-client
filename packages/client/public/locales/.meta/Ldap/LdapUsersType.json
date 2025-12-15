@@ -3,7 +3,7 @@
   "content": "Users type",
   "content_en_sha1_hash": "06f3eb37b8e067964f5ab9325f6a9fcdb96ba946",
   "created_at": "2025-05-19T21:30:54.338Z",
-  "updated_at": "2025-08-11T18:11:59.238Z",
+  "updated_at": "2025-10-27T16:14:33.564Z",
   "comment": {
     "text": "The LdapUsersType translation key is used to display the label \"Users type\" in UI elements, such as title sections and input fields, related to LDAP user management settings. It appears in various contexts, including a settings page for portal integration and single sign-on configurations.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/UsersType.tsx",
-      "line_number": 67,
+      "line_number": 70,
       "context": "gap: \"4px\",\n margin: \"0 0 8px 0\",\n }}\n >\n <Text fontWeight={600} fontSize=\"15px\" lineHeight=\"16px\">\n {t(\"LdapUsersType\")}\n </Text>\n </div>\n <StyledInputWrapper>\n <Text fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"LdapUserTypeTooltip\", {",
       "module": "/packages/client"
     }

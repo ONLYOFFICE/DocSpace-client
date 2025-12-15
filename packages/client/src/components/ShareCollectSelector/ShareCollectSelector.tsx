@@ -217,7 +217,7 @@ const ShareCollectSelector = inject<TStore>(
         isFirstLoad: boolean,
         isSelectedParentFolder: boolean,
         selectedItemId: string | number | undefined,
-        selectedItemType: "rooms" | "files" | undefined,
+        selectedItemType: "rooms" | "files" | "agents" | undefined,
         isRoot: boolean,
         selectedItemSecurity:
           | TFolderSecurity
@@ -225,8 +225,12 @@ const ShareCollectSelector = inject<TStore>(
           | TFileSecurity
           | undefined,
         selectedFileInfo: TSelectedFileInfo,
+        isDisabledFolder?: boolean,
+        isInsideKnowledge?: boolean,
+        isInsideResultStorage?: boolean,
       ): boolean => {
         if (selectedItemType === "rooms" || isRoot) return true;
+        if (selectedItemType === "agents" || isInsideResultStorage) return true;
 
         if (isFirstLoad) return true;
         if (requestRunning.current) return true;

@@ -64,6 +64,7 @@ const DropBox = ({
   onCloseDropBox,
   isContextButtonVisible,
   isPublicRoom,
+
   isPlusButtonVisible,
   showTitleInDropBox,
 }: TDropBoxProps) => {

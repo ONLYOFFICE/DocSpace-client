@@ -54,6 +54,8 @@ beforeAll(() => {
     "storybook-static",
     "node_modules",
     ".meta",
+    "coverage",
+    "vitest"
   ];
 
   const excludePatterns = [

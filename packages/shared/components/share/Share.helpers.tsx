@@ -752,11 +752,22 @@ export const getShareAccessRightOptions = (
   infoPanelSelection: TFile | TFolder,
   withRemove = true,
   isGroup = false,
+  isOwner = false,
 ) => {
   const availableShareRights = infoPanelSelection.availableShareRights;
 
   const rights =
     (isGroup ? availableShareRights?.Group : availableShareRights?.User) || [];
+
+  if (isOwner) {
+    return [
+      {
+        access: ShareAccessRights.FullAccess,
+        key: "owner",
+        label: t("Common:Owner"),
+      },
+    ];
+  }
 
   if (isFolder(infoPanelSelection)) {
     const options: Partial<

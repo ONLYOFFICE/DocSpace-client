@@ -3,7 +3,7 @@
   "content": "<1>Admin account types and their privileges</1> <br> <br> <2>{{productName}} admin</2> <br> {{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>User</4> <br> Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
   "content_en_sha1_hash": "a5f8e3f05414f4551551d409b8f3a24e8f1a73bc",
   "created_at": "2025-05-19T21:30:53.036Z",
-  "updated_at": "2025-06-30T12:20:31.405Z",
+  "updated_at": "2025-10-03T10:07:11.708Z",
   "comment": {
     "text": "This translation key is used for a tooltip that describes user roles and their corresponding privileges in a workspace configuration. It appears as a tooltip on a settings page, providing an overview of available roles (Admin, Room Admin, User) and their respective access rights.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 97,
+      "line_number": 96,
       "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 105,
+      "line_number": 108,
       "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 97,
+      "line_number": 101,
       "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     }

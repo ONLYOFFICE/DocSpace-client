@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { PlayerFullScreen } from "./index";
 
 // Mock SVG components
-jest.mock("PUBLIC_DIR/images/videoplayer.exit.react.svg", () => {
+vi.mock("PUBLIC_DIR/images/videoplayer.exit.react.svg", () => {
   const DummyExitFullScreen = ({
     ref,
     ...props
@@ -38,10 +38,10 @@ jest.mock("PUBLIC_DIR/images/videoplayer.exit.react.svg", () => {
     ref: React.RefObject<HTMLDivElement>;
   }) => <div {...props} ref={ref} />;
   DummyExitFullScreen.displayName = "IconExitFullScreen";
-  return DummyExitFullScreen;
+  return { default: DummyExitFullScreen };
 });
 
-jest.mock("PUBLIC_DIR/images/videoplayer.full.react.svg", () => {
+vi.mock("PUBLIC_DIR/images/videoplayer.full.react.svg", () => {
   const DummyFullScreen = ({
     ref,
     ...props
@@ -49,23 +49,18 @@ jest.mock("PUBLIC_DIR/images/videoplayer.full.react.svg", () => {
     ref: React.RefObject<HTMLDivElement>;
   }) => <div {...props} ref={ref} />;
   DummyFullScreen.displayName = "IconFullScreen";
-  return DummyFullScreen;
+  return { default: DummyFullScreen };
 });
-
-// Mock styles
-jest.mock("./PlayerFullScreen.module.scss", () => ({
-  wrapper: "wrapper",
-}));
 
 describe("PlayerFullScreen", () => {
   const defaultProps = {
     isAudio: false,
     isFullScreen: false,
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders enter full screen button when not in full screen mode", () => {
@@ -82,7 +77,7 @@ describe("PlayerFullScreen", () => {
   });
 
   it("calls onClick when button is clicked", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<PlayerFullScreen {...defaultProps} onClick={onClick} />);
 
     const button = screen.getByTestId("player-fullscreen");

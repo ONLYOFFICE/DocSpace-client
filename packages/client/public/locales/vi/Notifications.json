@@ -5,7 +5,6 @@
   "DailyFeed": "Nguồn cấp dữ liệu {{productName}} hàng ngày",
   "DailyFeedDescription": "Đọc tin và sự kiện từ {{productName}} của bạn trong một bản tóm tắt hàng ngày.",
   "FileActivityNotify": "Thông báo hoạt động tệp",
-  "GoToSettings": "Vào Cài đặt",
   "IsNotValid": "Không hợp lệ",
   "LdapEmailTooltip": "Tài khoản người dùng này được tải từ LDAP. Địa chỉ email của người dùng không được chỉ định, và địa chỉ hiện tại được tạo tự động và không thể sử dụng để gửi thông báo.",
   "NotConfigured": "Chưa được cấu hình",

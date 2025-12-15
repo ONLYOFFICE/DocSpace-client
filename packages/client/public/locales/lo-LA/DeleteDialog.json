@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "ລຶບການສົນທະນາບໍ?",
+  "DeleteAIAgentDescription": "ຕົວແທນ <strong>\"{{agentName}}\"</strong> ຈະຖືກລຶບອອກຢ່າງຖາວອນ. ຂໍ້ມູນ ແລະ ການເຂົ້າເຖິງຂອງຜູ້ໃຊ້ທັງໝົດຈະສູນຫາຍໄປ.",
+  "DeleteAIAgentTitle": "ລຶບຕົວແທນນີ້ບໍ?",
+  "DeleteAIAgentWarning": "ຂ້ອຍເຂົ້າໃຈຜົນສະທ້ອນ ແລະ ຕ້ອງການລຶບຕົວແທນອອກ",
+  "DeleteAIChatDescription": "ທ່ານກຳລັງຈະລຶບ <strong>{{chatName}}<1>.</1></strong>\nຂໍ້ຄວາມ ແລະ ປະຫວັດການສົນທະນາທັງໝົດຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ບໍ່ສາມາດກູ້ຄືນໄດ້.",
   "DeleteAllGroupDescription": "ຄະນະກຸ່ມທີ່ຖືກເລືອກຈະຖືກລົບອອກ. ຜູ້ໃຊ້ຢູ່ໃນກຸ່ມຈະບໍ່ຖືກຖອນອອກຈາກ {{productName}}. ທ່ານຕ້ອງການດໍາເນີນຕໍ່ບໍ?",
   "DeleteAllGroupsTitle": "ລົບລ້າງກຸ່ມ",
   "DeleteFiles": "ທ່ານກຳລັງຈະຍ້າຍ <strong>ໄຟລ໌ ({{filesCount}})</strong> ໄປໃສ່ {{trashSection}}.",
@@ -11,6 +16,7 @@
   "DeleteGroupTitle": "ລົບກຸ່ມ",
   "DeleteItem": "ທ່ານກຳລັງຈະຍ້າຍ <strong>{{name}}</strong> ໄປໃສ່ {{trashSection}}.",
   "DeleteItemForever": "ທ່ານກຳລັງຈະລຶບ <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "ກະ​ລຸ​ນາ​ສັງ​ເກດ​ວ່າ​ຖ້າ​ຫາກ​ວ່າ​ທ່ານ​ໄດ້​ແບ່ງ​ປັນ​ໃຫ້​ເຂົາ​ເຈົ້າ​ກັບ​ຜູ້​ໃດ​ຜູ້​ຫນຶ່ງ​, ພວກ​ເຂົາ​ຈະ​ກາຍ​ເປັນ​ບໍ່​ມີ​.",
   "DeleteRoom": "ຫ້ອງ <strong>\"{{roomName}}\"</strong> ຈະຖືກລຶບອອກຖາວອນ. ຂໍ້ມູນ ແລະການເຂົ້າເຖິງຜູ້ໃຊ້ທັງໝົດຈະສູນເສຍໄປ.",
   "DeleteRoomTitle": "ລຶບຫ້ອງນີ້ບໍ?",
   "DeleteRoomWarning": "ຂ້ອຍເຂົ້າໃຈຜົນສະທ້ອນແລະຕ້ອງການລຶບຫ້ອງ",

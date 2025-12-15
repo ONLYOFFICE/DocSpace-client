@@ -22,21 +22,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { Textarea } from ".";
 
 describe("<Textarea />", () => {
   const defaultProps = {
     placeholder: "Add comment",
-    onChange: jest.fn(),
+    onChange: vi.fn(),
     value: "test value",
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {
@@ -59,7 +59,7 @@ describe("<Textarea />", () => {
   });
 
   it("handles value changes", async () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Textarea {...defaultProps} onChange={handleChange} />);
 
     const textarea = screen.getByTestId("textarea");

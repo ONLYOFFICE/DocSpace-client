@@ -28,6 +28,7 @@ import React from "react";
 
 import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
+import { createAIAgent } from "../../../api/ai";
 import { RoomsType } from "../../../enums";
 import { TSelectorItem } from "../../../components/selector/Selector.types";
 import { toastr } from "../../../components/toast";
@@ -64,13 +65,15 @@ const useInputItemHelper = ({
   }, [setItems, withCreate]);
 
   const onAcceptInput = React.useCallback(
-    async (value: string, roomType?: RoomsType) => {
+    async (value: string, roomType?: RoomsType, isAgent?: boolean) => {
       const currentSelectedItemId = selectedItemIdRef.current;
-      if (!withCreate || (!currentSelectedItemId && !roomType)) return;
+      if (!withCreate || (!currentSelectedItemId && !roomType && !isAgent))
+        return;
 
       try {
-        if (currentSelectedItemId)
-          await createFolder(currentSelectedItemId, value);
+        if (isAgent) await createAIAgent({ title: value });
+        else if (currentSelectedItemId)
+          await createFolder(currentSelectedItemId, value.trimEnd());
         else if (roomType) {
           await createRoom({ roomType, title: value });
         }
@@ -88,6 +91,7 @@ const useInputItemHelper = ({
       icon: string,
       roomType?: RoomsType,
       placeholder?: string,
+      isAgent?: boolean,
     ) => {
       if (!withCreate || !setItems) return;
 
@@ -95,7 +99,8 @@ const useInputItemHelper = ({
         label: "",
         id: "new-folder-input",
         isInputItem: true,
-        onAcceptInput: (value: string) => onAcceptInput(value, roomType),
+        onAcceptInput: (value: string) =>
+          onAcceptInput(value, roomType, isAgent),
         onCancelInput,
         defaultInputValue,
         icon,

@@ -5,7 +5,6 @@
   "DailyFeed": "{{productName}}の毎日フィード",
   "DailyFeedDescription": "{{productName}}のニュースやイベントのダイジェストを毎日お届けします。",
   "FileActivityNotify": "ファイルアクティビティ通知",
-  "GoToSettings": "設定に移動",
   "IsNotValid": "無効です",
   "LdapEmailTooltip": "このユーザーアカウントはLDAPから読み込まれています。ユーザーのメールアドレスは指定されておらず、現在のものは自動的に生成されており、通知を送信するためには使用できません。",
   "NotConfigured": "設定されていません",

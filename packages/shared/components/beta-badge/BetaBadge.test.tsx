@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import { screen, waitFor, render } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 
@@ -33,7 +33,7 @@ import { DeviceType } from "../../enums";
 
 import { BetaBadge, BetaBadgeProps } from ".";
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {

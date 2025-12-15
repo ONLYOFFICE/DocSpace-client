@@ -88,6 +88,7 @@
   "Payer": "Maksātājs",
   "PayerDescription": "Šim lietotājam ir piekļuve maksājuma informācijai, un tas ir vienīgais lietotājs, kas var pielāgot kvotu un veikt maksājumus. {{productName}} īpašnieks, kā arī pats maksājumu pārvaldnieks var atkārtoti piešķirt maksājumu pārvaldnieka lomu, izmantojot Stripe klientu portālu.",
   "PaymentMethod": "Apmaksas veids",
+  "PerAITools": "{{currency}} par žetonu",
   "PerBackup": "{{currency}} par 1 rezerves kopiju",
   "PerBackupWithBracket": "({{currency}} par 1 rezerves kopiju)",
   "PerStorage": "{{currency}} par {{amount}}/mēn",

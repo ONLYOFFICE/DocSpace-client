@@ -191,8 +191,6 @@ const SharingDialog = ({
               file={fileInfo}
               filesSettings={filesSettings}
               onClickAddUser={onClickAddUser}
-              // HACK: Hide share option for rooms — remove after implementation is ready
-              disabledIcon={fileInfo.rootFolderType === FolderType.Rooms}
             />
             <Share
               isEditor
@@ -203,6 +201,7 @@ const SharingDialog = ({
               setEditLinkPanelIsVisible={handleSetEditLinkPanelIsVisible}
               setLinkParams={setLinkParams}
               onClickGroup={onClickEditGroup}
+              onAddUser={onClickAddUser}
             />
           </div>
         </section>

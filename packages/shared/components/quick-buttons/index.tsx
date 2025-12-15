@@ -25,9 +25,11 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
+import { memo } from "react";
 import isNil from "lodash/isNil";
 import { Trans } from "react-i18next";
 import { isTablet as isTabletDevice } from "react-device-detect";
+import equal from "fast-deep-equal";
 
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
@@ -41,7 +43,12 @@ import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
-import { FolderType, RoomsType, ShareAccessRights } from "../../enums";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  VectorizationStatus,
+} from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { getDate, isExpired } from "../share/Share.helpers";
@@ -50,8 +57,9 @@ import { isRoom } from "../../utils/typeGuards";
 import { globalColors } from "../../themes/globalColors";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
+import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
-export const QuickButtons = (props: QuickButtonsProps) => {
+export const QuickButtons = memo((props: QuickButtonsProps) => {
   const {
     t,
     item,
@@ -70,6 +78,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
     onClickLock,
     onClickFavorite,
+    onRetryVectorization,
     isTrashFolder,
     openShareTab,
   } = props;
@@ -119,6 +128,13 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     !isArchiveFolder &&
     !isTile;
 
+  const showFailedVectorizationBadge =
+    isTile &&
+    "vectorizationStatus" in item &&
+    item.vectorizationStatus === VectorizationStatus.Failed;
+
+  const hasRetryVectorizationAccess =
+    security && "Vectorization" in security && security.Vectorization;
   const expirationLinkDate =
     item && "expirationDate" in item ? item.expirationDate : "";
 
@@ -326,8 +342,17 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               title={t("Common:Favorites")}
             />
           ) : null}
+
+          {showFailedVectorizationBadge ? (
+            <FailedVectorizationBadge
+              className={classNames("badge icons-group")}
+              size="medium"
+              onRetryVectorization={onRetryVectorization}
+              withRetryVectorization={hasRetryVectorizationAccess}
+            />
+          ) : null}
         </>
       ) : null}
     </div>
   );
-};
+}, equal);

@@ -492,7 +492,7 @@ const InvitePanel = ({
       t("Common:LinkCopiedToClipboard"),
     );
 
-    copyShareLink(link);
+    copyShareLink(link.shareLink ?? link.url);
   };
 
   const editLink = async (linkAccess = null, defaultLink) => {
@@ -566,13 +566,13 @@ const InvitePanel = ({
       }
     } else {
       try {
-        const linkExpirationDate = moment(
+        let linkExpirationDate = moment(
           access.expirationDate ?? activeLink?.expirationDate,
         );
         const isExpired = moment(new Date()).isAfter(linkExpirationDate);
 
         if (isExpired) {
-          linkExpirationDate.add(7, "days");
+          linkExpirationDate = moment().add(7, "days");
         }
 
         const newLink = await api.rooms.setInvitationLinks(

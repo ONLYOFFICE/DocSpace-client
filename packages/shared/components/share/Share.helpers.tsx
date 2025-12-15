@@ -255,13 +255,20 @@ export const getExpiredOptions = (
 export const getDate = (expirationDate: string) => {
   if (!expirationDate) return "";
 
-  const currentDare = moment(new Date());
+  const currentDate = moment(new Date());
   const expDate = moment(new Date(expirationDate));
-  const calculatedDate = expDate.diff(currentDare, "days");
+  const calculatedDate = expDate.diff(currentDate, "days");
+  const calculatedHours = expDate.diff(currentDate, "hours");
+
+  if (calculatedHours < 1) {
+    return moment
+      .duration(expDate.diff(currentDate, "minutes") + 1, "minutes")
+      .humanize();
+  }
 
   if (calculatedDate < 1) {
     return moment
-      .duration(expDate.diff(currentDare, "hours") + 1, "hours")
+      .duration(expDate.diff(currentDate, "hours") + 1, "hours")
       .humanize();
   }
 

@@ -2,12 +2,12 @@
   "Categories": "Categories",
   "EmptyFormGalleryScreenDescription": "No results matching your query could be found",
   "ErrorViewDescription": "Please try again later",
+  "ErrorViewDescriptionNetworkError": "It seems there is no Internet connection",
   "ErrorViewHeader": "Form gallery is temporarily unavailable",
   "SelectForm": "Select Form",
   "SubmitToGalleryDialogGuideInfo": "Learn how to create perfect forms and increase your chance to get approval in our <1>guide</1>.",
   "SubmitToGalleryDialogMainInfo": "Submit your form to the public gallery to let others use it in their work. Once the form passes moderation, you will be notified and rewarded for your contribution.",
   "SuggestChanges": "Suggest changes",
   "TemplateInfo": "Template info",
-  "ViewAllTemplates": "View all templates",
-  "ErrorViewDescriptionNetworkError": "It seems there is no Internet connection"
+  "ViewAllTemplates": "View all templates"
 }

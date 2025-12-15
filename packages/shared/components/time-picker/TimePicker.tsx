@@ -145,7 +145,7 @@ const TimePicker = ({
     }
     if (!/^\d+$/.test(h)) return;
 
-    const maxHours = isTwelveHourFormat ? 11 : 23;
+    const maxHours = isTwelveHourFormat ? 12 : 23;
 
     if (+h > maxHours) {
       focusMinutesInput();

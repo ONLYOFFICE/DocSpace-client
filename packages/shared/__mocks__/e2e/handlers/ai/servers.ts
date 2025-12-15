@@ -26,7 +26,8 @@
 
 import { API_PREFIX, BASE_URL } from "../../utils";
 
-export const PATH_AI_SERVERS = "ai/servers?*";
+export const PATH_AI_SERVERS_WITH_FILTER = "ai/servers?*";
+export const PATH_AI_SERVERS = "ai/servers";
 export const PATH_AI_SERVERS_AVAILABLE = "ai/servers/available?*";
 
 const successAvailable = {
@@ -65,7 +66,7 @@ const successList = {
       endpoint: "http://custom-mcp.com",
       serverType: 0,
       headers: {
-        header_key: "header_value",
+        headerKey: "headerValue",
       },
       enabled: true,
     },
@@ -81,10 +82,40 @@ const successList = {
   total: 2,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_AVAILABLE}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_WITH_FILTER}`,
       action: "GET",
     },
   ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successCreate = {
+  response: {
+    id: "b4b46038-4c1d-465b-9394-fd5544ca4f32",
+    name: "created_mcp",
+    description: "descr",
+    endpoint: "https://createdmcp.com/",
+    serverType: 0,
+    headers: {
+      headerKey: "headerValue",
+    },
+    enabled: true,
+    needReset: false,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+const successDelete = {
+  response: null,
   status: 0,
   statusCode: 200,
 };
@@ -93,6 +124,14 @@ export const aiServersAvailableHandler = () => {
   return new Response(JSON.stringify(successAvailable));
 };
 
-export const aiServersListHandler = () => {
+export const aiServersGetHandler = () => {
   return new Response(JSON.stringify(successList));
+};
+
+export const aiServersPostHandler = () => {
+  return new Response(JSON.stringify(successCreate));
+};
+
+export const aiServersDeleteHandler = () => {
+  return new Response(JSON.stringify(successDelete));
 };

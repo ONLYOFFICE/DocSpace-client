@@ -46,6 +46,33 @@ const success = {
   statusCode: 200,
 };
 
+const successUpdate = {
+  response: {
+    id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+    name: "updatedTitle",
+    description: "updatedDescription",
+    endpoint: "https://updatedenpoint.com",
+    serverType: 0,
+    headers: {
+      updatedHeaderKey: "updatedHeaderValue",
+    },
+    enabled: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVER}`,
+      action: "PUT",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 export const aiServerHandler = () => {
   return new Response(JSON.stringify(success));
+};
+
+export const aiServerPutHandler = () => {
+  return new Response(JSON.stringify(successUpdate));
 };

@@ -28,8 +28,12 @@
 
 import { expect, test } from "./fixtures/base";
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
-import { PATH_AI_PROVIDERS } from "@docspace/shared/__mocks__/e2e/handlers/ai";
-import { ProviderType } from "@docspace/shared/api/ai/enums";
+import {
+  PATH_AI_PROVIDERS,
+  PATH_AI_SERVERS,
+} from "@docspace/shared/__mocks__/e2e/handlers/ai";
+import { ProviderType, ServerType } from "@docspace/shared/api/ai/enums";
+import type { TServer } from "@docspace/shared/api/ai/types";
 
 test.describe("AI settings", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -277,6 +281,304 @@ test.describe("AI settings", () => {
 
       await expect(firstProviderTile).toBeVisible();
       await expect(firstProviderTile).toContainText(updateRes.response.title);
+    });
+  });
+
+  test.describe("MCP servers", () => {
+    test("should navigate to mcp servers page and render mcp servers lists", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiServersList,
+        endpoints.aiProvidersEmptyList,
+      ]);
+      await page.goto("/portal-settings/ai-settings/servers");
+
+      await expect(page.getByTestId("custom-mcp-list")).toBeVisible();
+      await expect(page.getByTestId("system-mcp-list")).toBeVisible();
+    });
+
+    test("should render disabled elements on mcp servers page if there are no ai providers", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiServersList,
+        endpoints.aiProvidersEmptyList,
+      ]);
+      await page.goto("/portal-settings/ai-settings/servers");
+
+      const addMcpButton = page.getByTestId("add-mcp-button");
+      await expect(addMcpButton).toBeDisabled();
+
+      const mcpTiles = page.getByTestId("mcp-tile");
+
+      for (const mcpTile of await mcpTiles.all()) {
+        const toggle = mcpTile.getByTestId("toggle-button-input");
+        await expect(toggle).toBeDisabled();
+
+        const contextMenuBtn = mcpTile.getByTestId("mcp-context-menu-button");
+
+        if (await contextMenuBtn.count()) {
+          await expect(contextMenuBtn).toHaveAttribute("aria-disabled", "true");
+        }
+      }
+    });
+
+    test("should render enabled elements on mcp servers page if there are ai providers", async ({
+      page,
+      mockRequest,
+    }) => {
+      await mockRequest.router([
+        endpoints.aiServersList,
+        endpoints.aiProvidersList,
+      ]);
+      await page.goto("/portal-settings/ai-settings/servers");
+
+      const addMcpButton = page.getByTestId("add-mcp-button");
+      await expect(addMcpButton).toBeEnabled();
+
+      const mcpTiles = page.getByTestId("mcp-tile");
+
+      for (const mcpTile of await mcpTiles.all()) {
+        const toggle = mcpTile.getByTestId("toggle-button-input");
+        await expect(toggle).toBeEnabled();
+
+        const contextMenuBtn = mcpTile.getByTestId("mcp-context-menu-button");
+
+        if (await contextMenuBtn.count()) {
+          await expect(contextMenuBtn).toHaveAttribute(
+            "aria-disabled",
+            "false",
+          );
+        }
+      }
+    });
+
+    test("should add mcp server", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiServersList,
+        endpoints.aiProvidersList,
+        endpoints.createAiServer,
+      ]);
+      await page.goto("/portal-settings/ai-settings/servers");
+
+      const addMcpButton = page.getByTestId("add-mcp-button");
+      await addMcpButton.click();
+
+      const customMcpTiles = page
+        .getByTestId("custom-mcp-list")
+        .getByTestId("mcp-tile");
+      await expect(customMcpTiles).toHaveCount(1);
+
+      const addMcpForm = page.getByTestId("add-mcp-form");
+      await expect(addMcpForm).toBeVisible();
+
+      const mcpSaveButton = page.getByTestId("mcp-save-button");
+      await expect(mcpSaveButton).toBeDisabled();
+
+      const mcpIconInput = addMcpForm.locator("#customFileInput");
+
+      await mcpIconInput.setInputFiles({
+        name: "icon.svg",
+        mimeType: "image/svg+xml",
+        buffer: Buffer.from(
+          `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect width="64" height="64"/></svg>`,
+        ),
+      });
+
+      const mcpTitleInput = addMcpForm.getByTestId("mcp-title-input");
+      await mcpTitleInput.fill("new_server");
+
+      const mcpUrlInput = addMcpForm.getByTestId("mcp-url-input");
+      await mcpUrlInput.fill("https://newserver.com");
+
+      const mcpDescriptionTextarea = addMcpForm.getByTestId(
+        "mcp-description-textarea",
+      );
+      await mcpDescriptionTextarea.fill("new server description");
+
+      const mcpHeadersBlockToggle = addMcpForm.getByTestId(
+        "mcp-headers-block-toggle",
+      );
+      await mcpHeadersBlockToggle.click();
+
+      const mcpHeaderNameInput = addMcpForm.getByTestId(
+        "mcp-header-name-input",
+      );
+      await mcpHeaderNameInput.fill("headerKey");
+
+      const mcpHeaderValueInput = addMcpForm.getByTestId(
+        "mcp-header-value-input",
+      );
+      await mcpHeaderValueInput.fill("headerValue");
+
+      const reqPromise = page.waitForRequest(
+        (r) => r.url().endsWith(PATH_AI_SERVERS) && r.method() === "POST",
+      );
+      await mcpSaveButton.click();
+      const req = await reqPromise;
+      const payload = req.postDataJSON();
+
+      expect(payload).toEqual({
+        icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ii8+PC9zdmc+",
+        endpoint: "https://newserver.com",
+        name: "new_server",
+        description: "new server description",
+        headers: {
+          headerKey: "headerValue",
+        },
+      });
+
+      await expect(customMcpTiles).toHaveCount(2);
+    });
+
+    test("should delete mcp server", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiServersList,
+        endpoints.aiProvidersList,
+        endpoints.deleteAiServer,
+      ]);
+
+      const listRespPromise = page.waitForResponse(
+        (r) =>
+          r.url().includes(PATH_AI_SERVERS) && r.request().method() === "GET",
+      );
+
+      await page.goto("/portal-settings/ai-settings/servers");
+
+      const listResp = await listRespPromise;
+      const body = await listResp.json();
+      const customMcpData = body.response.find(
+        (s: TServer) => s.serverType === ServerType.Custom,
+      );
+
+      const customMcpTiles = page
+        .getByTestId("custom-mcp-list")
+        .getByTestId("mcp-tile");
+      const firstCustomMcpTile = customMcpTiles.first();
+
+      const contextMenuBtn = firstCustomMcpTile.getByTestId(
+        "mcp-context-menu-button",
+      );
+      await contextMenuBtn.click();
+
+      const deleteItem = page.getByTestId("delete_item");
+      await deleteItem.click();
+
+      const deleteMcpDialog = page.getByRole("dialog");
+      await expect(deleteMcpDialog).toBeVisible();
+      await expect(deleteMcpDialog).toContainText("Delete server");
+
+      const deleteMcpButton = deleteMcpDialog.getByTestId("delete-mcp-button");
+
+      const deleteReqPromise = page.waitForRequest(
+        (r) => r.url().endsWith(PATH_AI_SERVERS) && r.method() === "DELETE",
+      );
+
+      await deleteMcpButton.click();
+
+      const deleteReq = await deleteReqPromise;
+      const payload = deleteReq.postDataJSON();
+
+      expect(payload).toEqual({ servers: [customMcpData.id] });
+
+      await expect(customMcpTiles).toHaveCount(0);
+    });
+
+    test("should update mcp server", async ({ page, mockRequest }) => {
+      await mockRequest.router([
+        endpoints.aiServersList,
+        endpoints.aiProvidersList,
+        endpoints.updateAiServer,
+      ]);
+
+      const listRespPromise = page.waitForResponse(
+        (r) =>
+          r.url().includes(PATH_AI_SERVERS) && r.request().method() === "GET",
+      );
+
+      await page.goto("/portal-settings/ai-settings/servers");
+
+      const listResp = await listRespPromise;
+      const body = await listResp.json();
+
+      const customMcpData = body.response.find(
+        (s: TServer) => s.serverType === ServerType.Custom,
+      );
+
+      const customMcpTiles = page
+        .getByTestId("custom-mcp-list")
+        .getByTestId("mcp-tile");
+      const firstCustomMcpTile = customMcpTiles.first();
+
+      const contextMenuBtn = firstCustomMcpTile.getByTestId(
+        "mcp-context-menu-button",
+      );
+      await contextMenuBtn.click();
+
+      const settingsItem = page.getByTestId("settings_item");
+      await settingsItem.click();
+
+      const updateMcpForm = page.getByTestId("edit-mcp-form");
+      await expect(updateMcpForm).toBeVisible();
+
+      const mcpSaveButton = page.getByTestId("mcp-save-button");
+      await expect(mcpSaveButton).toBeDisabled();
+
+      const mcpIconInput = updateMcpForm.locator("#customFileInput");
+
+      await mcpIconInput.setInputFiles({
+        name: "icon.svg",
+        mimeType: "image/svg+xml",
+        buffer: Buffer.from(
+          `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect width="64" height="64"/></svg>`,
+        ),
+      });
+
+      const mcpTitleInput = updateMcpForm.getByTestId("mcp-title-input");
+      await mcpTitleInput.fill("updatedTitle");
+
+      const mcpUrlInput = updateMcpForm.getByTestId("mcp-url-input");
+      await mcpUrlInput.fill("https://updatedenpoint.com");
+
+      const mcpDescriptionTextarea = updateMcpForm.getByTestId(
+        "mcp-description-textarea",
+      );
+      await mcpDescriptionTextarea.fill("updatedDescription");
+
+      const mcpHeaderNameInput = updateMcpForm.getByTestId(
+        "mcp-header-name-input",
+      );
+      await mcpHeaderNameInput.fill("updatedHeaderKey");
+
+      const mcpHeaderValueInput = updateMcpForm.getByTestId(
+        "mcp-header-value-input",
+      );
+      await mcpHeaderValueInput.fill("updatedHeaderValue");
+
+      const reqPromise = page.waitForRequest(
+        (r) =>
+          r.url().endsWith(`${PATH_AI_SERVERS}/${customMcpData.id}`) &&
+          r.method() === "PUT",
+      );
+
+      await mcpSaveButton.click();
+
+      const req = await reqPromise;
+      const payload = req.postDataJSON();
+
+      expect(payload).toEqual({
+        icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ii8+PC9zdmc+",
+        endpoint: "https://updatedenpoint.com",
+        name: "updatedTitle",
+        description: "updatedDescription",
+        headers: {
+          updatedHeaderKey: "updatedHeaderValue",
+        },
+        updateIcon: true,
+      });
     });
   });
 });

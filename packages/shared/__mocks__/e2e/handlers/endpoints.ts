@@ -152,8 +152,12 @@ import {
   aiServerHandler,
   PATH_AI_SERVERS_AVAILABLE,
   aiServersAvailableHandler,
+  PATH_AI_SERVERS_WITH_FILTER,
+  aiServersGetHandler,
+  aiServersPostHandler,
   PATH_AI_SERVERS,
-  aiServersListHandler,
+  aiServersDeleteHandler,
+  aiServerPutHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -437,8 +441,23 @@ export const endpoints = {
     dataHandler: aiServersAvailableHandler,
   },
   aiServersList: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_WITH_FILTER}`,
+    dataHandler: aiServersGetHandler,
+  },
+  createAiServer: {
     url: `${BASE_URL}${PATH_AI_SERVERS}`,
-    dataHandler: aiServersListHandler,
+    dataHandler: aiServersPostHandler,
+    method: "POST",
+  },
+  deleteAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVERS}`,
+    dataHandler: aiServersDeleteHandler,
+    method: "DELETE",
+  },
+  updateAiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER}`,
+    dataHandler: aiServerPutHandler,
+    method: "PUT",
   },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,

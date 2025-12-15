@@ -149,7 +149,7 @@ export const useAdvancedSettings = (
                     placeholder={t("AISettings:EnterLabel")}
                     scale
                     hasError={needReset && !headerNames[index] && index === 0}
-                    data-testid="mcp-header-name-input"
+                    testId="mcp-header-name-input"
                   />
                 </FieldContainer>
                 <FieldContainer
@@ -166,7 +166,7 @@ export const useAdvancedSettings = (
                     placeholder={t("AISettings:EnterValue")}
                     scale
                     hasError={needReset && !headerValues[index] && index === 0}
-                    data-testid="mcp-header-value-input"
+                    testId="mcp-header-value-input"
                   />
                 </FieldContainer>
               </React.Fragment>

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { type FC, useId } from "react";
+import { type FC, useId, useState } from "react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 
@@ -48,9 +48,16 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
     bodyText,
   } = props;
 
+  const [hasError, setHasError] = useState(isExpired);
+
   const { t } = useTranslation(["Common"]);
 
   const onChange = (date: Nullable<moment.Moment>) => {
+    setHasError(false);
+
+    const isExpired = moment(new Date()).isAfter(moment(date));
+    if (isExpired) setHasError(true);
+
     const expired = date
       ? moment(date).toDate().getTime() <= new Date().getTime()
       : false;
@@ -72,7 +79,7 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
   // const minDate = new Date(new Date().getTime());
   // minDate.setDate(new Date().getDate() - 1);
   // minDate.setTime(minDate.getTime() + 60 * 60 * 1000);
-  const minDate = new Date();
+  const minDate = moment().subtract(1, "days");
 
   return (
     <ToggleBlock {...props} withToggle={false}>
@@ -80,7 +87,7 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         id={id}
         locale={language}
         minDate={minDate}
-        hasError={isExpired}
+        hasError={hasError}
         onChange={onChange}
         openDate={new Date()}
         initialDate={expirationDate}

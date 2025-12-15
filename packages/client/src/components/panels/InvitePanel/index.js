@@ -577,13 +577,18 @@ const InvitePanel = ({
           linkExpirationDate = moment().add(7, "days");
         }
 
+        const maxUsersCount =
+          access.maxUseCount || access?.maxUseCount === null
+            ? access.maxUseCount
+            : activeLink?.maxUseCount;
+
         const newLink = await api.rooms.setInvitationLinks(
           roomId,
           "Invite",
           +selectedAccess,
           shareLinks[0]?.id ?? null,
           linkExpirationDate,
-          access.maxUseCount ?? activeLink?.maxUseCount,
+          maxUsersCount,
         );
 
         const {

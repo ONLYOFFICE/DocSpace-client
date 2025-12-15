@@ -121,7 +121,7 @@ const LinkSettingsPanel = ({
       const linkToSubmit = {
         ...defaultLink,
         expirationDate: moment(limitDate).toISOString(),
-        maxUseCount: Number(maxNumber),
+        maxUseCount: userLimitIsChecked ? Number(maxNumber) : null,
         currentUseCount: usersNumber,
       } as TOption & {
         expirationDate: string;

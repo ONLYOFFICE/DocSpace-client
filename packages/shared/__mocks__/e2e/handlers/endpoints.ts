@@ -117,24 +117,24 @@ import {
 } from "../utils";
 import { PATH_DELETE_USER } from "./people/self";
 import {
-	aiConfigHandler,
-	PATH_AI_CONFIG,
-	PATH_AI_AGENTS,
-	aiAgentsHandler,
-	PATH_AI_PROVIDERS,
-	aiProvidersHandler,
+  aiConfigHandler,
+  PATH_AI_CONFIG,
+  PATH_AI_AGENTS,
+  aiAgentsHandler,
+  PATH_AI_PROVIDERS,
+  aiProvidersHandler,
   aiProvidersPostHandler,
   aiProvidersDeleteHandler,
   aiProvidersPutHandler,
   PATH_AI_PROVIDER,
   PATH_AI_PROVIDERS_AVAILABLE,
   aiProvidersAvailableHandler,
-	PATH_AI_MODELS,
-	aiModelsHandler,
-	PATH_AI_SERVER,
-	aiServerHandler,
-	PATH_AI_SERVERS,
-	aiServersHandler,
+  PATH_AI_MODELS,
+  aiModelsHandler,
+  PATH_AI_SERVER,
+  aiServerHandler,
+  PATH_AI_SERVERS,
+  aiServersHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -270,106 +270,106 @@ export const endpoints = {
     dataHandler: roomListHandler,
   },
 
-	folder: {
-		url: `${BASE_URL}${PATH_FOLDER}`,
-		dataHandler: folderHandler,
-	},
-	filteredFolder: {
-		url: `${BASE_URL}${PATH_FOLDER}`,
-		dataHandler: () =>
-			folderHandler(new Headers({ [HEADER_FILTERED_FOLDER]: "true" })),
-	},
-	emptyFolder: {
-		url: `${BASE_URL}${PATH_FOLDER}`,
-		dataHandler: () =>
-			folderHandler(new Headers({ [HEADER_EMPTY_FOLDER]: "true" })),
-	},
-	addGuest: {
-		url: `${BASE_URL}${PATH_ADD_GUEST}`,
-		dataHandler: selfHandler,
-	},
-	capabilities: {
-		url: `${BASE_URL}${PATH_CAPABILITIES}`,
-		dataHandler: () =>
-			capabilitiesHandler(new Headers({ [HEADER_LIST_CAPABILITIES]: "true" })),
-	},
-	colorTheme: {
-		url: `${BASE_URL}${PATH_COLOR_THEME}`,
-		dataHandler: colorThemeHandler,
-	},
-	settings: {
-		url: `${BASE_URL}${PATH_SETTINGS}`,
-		dataHandler: () =>
-			settingsHandler(new Headers({ [HEADER_AUTHENTICATED_SETTINGS]: "true" })),
-	},
-	settingsWithQuery: {
-		url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
-		dataHandler: () =>
-			settingsHandler(new Headers({ [HEADER_AUTHENTICATED_SETTINGS]: "true" })),
-	},
-	settingsWithSocket: {
-		url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
-		dataHandler: () =>
-			settingsHandler(
-				new Headers({
-					[HEADER_AUTHENTICATED_SETTINGS]: "true",
-					[HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS]: "true",
-				}),
-			),
-	},
-	self: {
-		url: `${BASE_URL}${PATH_DELETE_USER}`,
-		dataHandler: selfHandler,
-	},
-	selfEmailActivated: {
-		url: `${BASE_URL}${PATH_DELETE_USER}`,
-		dataHandler: selfHandler.bind(null, null, null, true),
-	},
-	selfEmailActivatedClient: {
-		url: `${BASE_URL}${PATH_DELETE_USER}`,
-		dataHandler: selfHandler.bind(null, null, null, true, true),
-	},
-	build: {
-		url: `${BASE_URL}${PATH_BUILD}`,
-		dataHandler: buildHandler,
-	},
-	quota: {
-		url: `${BASE_URL}${PATH_QUOTA}`,
-		dataHandler: quotaHandler,
-	},
-	tariff: {
-		url: `${BASE_URL}${PATH_TARIFF}`,
-		dataHandler: tariffHandler,
-	},
-	aiConfig: {
-		url: `${BASE_URL}${PATH_AI_CONFIG}`,
-		dataHandler: () => aiConfigHandler(new Headers()),
-	},
-	aiConfigDisabled: {
-		url: `${BASE_URL}${PATH_AI_CONFIG}`,
-		dataHandler: () =>
-			aiConfigHandler(
-				new Headers({
-					[HEADER_AI_DISABLED]: "true",
-				}),
-			),
-	},
-	aiAgentsEmpty: {
-		url: `${BASE_URL}${PATH_AI_AGENTS}`,
-		dataHandler: () => aiAgentsHandler({}),
-	},
-	aiAgentsEmptyCreate: {
-		url: `${BASE_URL}${PATH_AI_AGENTS}`,
-		dataHandler: () => aiAgentsHandler({ withCreate: true }),
-	},
-	aiAgentsListCreate: {
-		url: `${BASE_URL}${PATH_AI_AGENTS}`,
-		dataHandler: () => aiAgentsHandler({ withListCreate: true }),
-	},
-	aiProvidersList: {
-		url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
-		dataHandler: aiProvidersHandler,
-	},
+  folder: {
+    url: `${BASE_URL}${PATH_FOLDER}`,
+    dataHandler: folderHandler,
+  },
+  filteredFolder: {
+    url: `${BASE_URL}${PATH_FOLDER}`,
+    dataHandler: () =>
+      folderHandler(new Headers({ [HEADER_FILTERED_FOLDER]: "true" })),
+  },
+  emptyFolder: {
+    url: `${BASE_URL}${PATH_FOLDER}`,
+    dataHandler: () =>
+      folderHandler(new Headers({ [HEADER_EMPTY_FOLDER]: "true" })),
+  },
+  addGuest: {
+    url: `${BASE_URL}${PATH_ADD_GUEST}`,
+    dataHandler: selfHandler,
+  },
+  capabilities: {
+    url: `${BASE_URL}${PATH_CAPABILITIES}`,
+    dataHandler: () =>
+      capabilitiesHandler(new Headers({ [HEADER_LIST_CAPABILITIES]: "true" })),
+  },
+  colorTheme: {
+    url: `${BASE_URL}${PATH_COLOR_THEME}`,
+    dataHandler: colorThemeHandler,
+  },
+  settings: {
+    url: `${BASE_URL}${PATH_SETTINGS}`,
+    dataHandler: () =>
+      settingsHandler(new Headers({ [HEADER_AUTHENTICATED_SETTINGS]: "true" })),
+  },
+  settingsWithQuery: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(new Headers({ [HEADER_AUTHENTICATED_SETTINGS]: "true" })),
+  },
+  settingsWithSocket: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(
+        new Headers({
+          [HEADER_AUTHENTICATED_SETTINGS]: "true",
+          [HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS]: "true",
+        }),
+      ),
+  },
+  self: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: selfHandler,
+  },
+  selfEmailActivated: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: selfHandler.bind(null, null, null, true),
+  },
+  selfEmailActivatedClient: {
+    url: `${BASE_URL}${PATH_DELETE_USER}`,
+    dataHandler: selfHandler.bind(null, null, null, true, true),
+  },
+  build: {
+    url: `${BASE_URL}${PATH_BUILD}`,
+    dataHandler: buildHandler,
+  },
+  quota: {
+    url: `${BASE_URL}${PATH_QUOTA}`,
+    dataHandler: quotaHandler,
+  },
+  tariff: {
+    url: `${BASE_URL}${PATH_TARIFF}`,
+    dataHandler: tariffHandler,
+  },
+  aiConfig: {
+    url: `${BASE_URL}${PATH_AI_CONFIG}`,
+    dataHandler: () => aiConfigHandler(new Headers()),
+  },
+  aiConfigDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG}`,
+    dataHandler: () =>
+      aiConfigHandler(
+        new Headers({
+          [HEADER_AI_DISABLED]: "true",
+        }),
+      ),
+  },
+  aiAgentsEmpty: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({}),
+  },
+  aiAgentsEmptyCreate: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({ withCreate: true }),
+  },
+  aiAgentsListCreate: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({ withListCreate: true }),
+  },
+  aiProvidersList: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: aiProvidersHandler,
+  },
   aiProvidersEmptyList: {
     url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
     dataHandler: () => aiProvidersHandler({ isEmpty: true }),
@@ -393,97 +393,97 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_PROVIDERS_AVAILABLE}`,
     dataHandler: aiProvidersAvailableHandler,
   },
-	aiModelsClaude: {
-		url: `${BASE_URL}${PATH_AI_MODELS}`,
-		dataHandler: () => aiModelsHandler({ isClaude: true }),
-	},
-	aiModelsOpenAI: {
-		url: `${BASE_URL}${PATH_AI_MODELS}`,
-		dataHandler: () => aiModelsHandler({ isOpenAI: true }),
-	},
-	aiModelsTogether: {
-		url: `${BASE_URL}${PATH_AI_MODELS}`,
-		dataHandler: () => aiModelsHandler({ isTogetherAI: true }),
-	},
-	aiModelsOpenRouter: {
-		url: `${BASE_URL}${PATH_AI_MODELS}`,
-		dataHandler: () => aiModelsHandler({ isOpenRouter: true }),
-	},
-	aiServer: {
-		url: `${BASE_URL}${PATH_AI_SERVER}`,
-		dataHandler: aiServerHandler,
-	},
-	aiServers: {
-		url: `${BASE_URL}${PATH_AI_SERVERS}`,
-		dataHandler: aiServersHandler,
-	},
-	additionalSettings: {
-		url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,
-		dataHandler: settingsAdditionalHandler,
-	},
-	companyInfo: {
-		url: `${BASE_URL}${COMPANY_INFO_PATH}`,
-		dataHandler: companyInfoHandler,
-	},
-	root: {
-		url: `${BASE_URL}${ROOT_PATH}`,
-		dataHandler: rootHandler,
-	},
-	filesSettings: {
-		url: `${BASE_URL}${PATH_FILES_SETTINGS}`,
-		dataHandler: filesSettingsHandler,
-	},
-	getPortal: {
-		url: `${PATH_PORTAL_GET}`,
-		dataHandler: getPortalHandler,
-	},
-	cultures: {
-		url: `${BASE_URL}${PATH_CULTURES}`,
-		dataHandler: culturesHandler,
-	},
-	invitationSettings: {
-		url: `${BASE_URL}${INVITATION_SETTINGS_PATH}`,
-		dataHandler: invitationSettingsHandler,
-	},
-	webPlugins: {
-		url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-		dataHandler: webPluginsHandler,
-	},
-	thirdPartyCapabilities: {
-		url: `${BASE_URL}${PATH_THIRD_PARTY_CAPABILITIES}`,
-		dataHandler: thirdPartyCapabilitiesHandler,
-	},
-	thirdParty: {
-		url: `${BASE_URL}${PATH_THIRD_PARTY}`,
-		dataHandler: thirdPartyHandler,
-	},
-	docService: {
-		url: `${BASE_URL}${PATH_DOC_SERVICE}`,
-		dataHandler: docServiceHandler,
-	},
-	sharedWithMe: {
-		url: PATH_SHARED_WITH_ME,
-		dataHandler: sharedWithMeHandler.bind(null, "success"),
-	},
-	sharedWithMeEmpty: {
-		url: PATH_SHARED_WITH_ME,
-		dataHandler: sharedWithMeHandler.bind(null, "empty"),
-	},
-	shareDelete: {
-		url: `${BASE_URL}${PATH_SHARE}`,
-		dataHandler: shareHandler.bind(null, "Delete"),
-	},
-	shareLink: {
-		url: LINK_FILE_PATH,
-		dataHandler: LinkHandler,
-		method: "POST",
-	},
-	shareToUser: {
-		url: PATH_SHARE_TO_USERS_FILE,
-		dataHandler: shareToUserHandle,
-	},
-	emptyTags: {
-		url: `${BASE_URL}${PATH_TAGS}`,
-		dataHandler: roomTagsHandler,
-	},
+  aiModelsClaude: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isClaude: true }),
+  },
+  aiModelsOpenAI: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isOpenAI: true }),
+  },
+  aiModelsTogether: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isTogetherAI: true }),
+  },
+  aiModelsOpenRouter: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isOpenRouter: true }),
+  },
+  aiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER}`,
+    dataHandler: aiServerHandler,
+  },
+  aiServers: {
+    url: `${BASE_URL}${PATH_AI_SERVERS}`,
+    dataHandler: aiServersHandler,
+  },
+  additionalSettings: {
+    url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,
+    dataHandler: settingsAdditionalHandler,
+  },
+  companyInfo: {
+    url: `${BASE_URL}${COMPANY_INFO_PATH}`,
+    dataHandler: companyInfoHandler,
+  },
+  root: {
+    url: `${BASE_URL}${ROOT_PATH}`,
+    dataHandler: rootHandler,
+  },
+  filesSettings: {
+    url: `${BASE_URL}${PATH_FILES_SETTINGS}`,
+    dataHandler: filesSettingsHandler,
+  },
+  getPortal: {
+    url: `${PATH_PORTAL_GET}`,
+    dataHandler: getPortalHandler,
+  },
+  cultures: {
+    url: `${BASE_URL}${PATH_CULTURES}`,
+    dataHandler: culturesHandler,
+  },
+  invitationSettings: {
+    url: `${BASE_URL}${INVITATION_SETTINGS_PATH}`,
+    dataHandler: invitationSettingsHandler,
+  },
+  webPlugins: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsHandler,
+  },
+  thirdPartyCapabilities: {
+    url: `${BASE_URL}${PATH_THIRD_PARTY_CAPABILITIES}`,
+    dataHandler: thirdPartyCapabilitiesHandler,
+  },
+  thirdParty: {
+    url: `${BASE_URL}${PATH_THIRD_PARTY}`,
+    dataHandler: thirdPartyHandler,
+  },
+  docService: {
+    url: `${BASE_URL}${PATH_DOC_SERVICE}`,
+    dataHandler: docServiceHandler,
+  },
+  sharedWithMe: {
+    url: PATH_SHARED_WITH_ME,
+    dataHandler: sharedWithMeHandler.bind(null, "success"),
+  },
+  sharedWithMeEmpty: {
+    url: PATH_SHARED_WITH_ME,
+    dataHandler: sharedWithMeHandler.bind(null, "empty"),
+  },
+  shareDelete: {
+    url: `${BASE_URL}${PATH_SHARE}`,
+    dataHandler: shareHandler.bind(null, "Delete"),
+  },
+  shareLink: {
+    url: LINK_FILE_PATH,
+    dataHandler: LinkHandler,
+    method: "POST",
+  },
+  shareToUser: {
+    url: PATH_SHARE_TO_USERS_FILE,
+    dataHandler: shareToUserHandle,
+  },
+  emptyTags: {
+    url: `${BASE_URL}${PATH_TAGS}`,
+    dataHandler: roomTagsHandler,
+  },
 } satisfies TEndpoints;

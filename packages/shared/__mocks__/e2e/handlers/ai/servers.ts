@@ -29,32 +29,32 @@ import { API_PREFIX, BASE_URL } from "../../utils";
 export const PATH_AI_SERVERS = "ai/servers/available?*";
 
 const success = {
-	response: [
-		{
-			id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
-			name: "docspace",
-			serverType: 1,
-			enabled: true,
-		},
-		{
-			id: "883da87d-5ae0-49fd-8cb9-2cb82181667b",
-			name: "custom",
-			serverType: 0,
-			enabled: true,
-		},
-	],
-	count: 2,
-	total: 2,
-	links: [
-		{
-			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
-			action: "GET",
-		},
-	],
-	status: 0,
-	statusCode: 200,
+  response: [
+    {
+      id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+      name: "docspace",
+      serverType: 1,
+      enabled: true,
+    },
+    {
+      id: "883da87d-5ae0-49fd-8cb9-2cb82181667b",
+      name: "custom",
+      serverType: 0,
+      enabled: true,
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
 export const aiServersHandler = () => {
-	return new Response(JSON.stringify(success));
+  return new Response(JSON.stringify(success));
 };

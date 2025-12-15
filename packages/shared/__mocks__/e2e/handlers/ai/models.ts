@@ -29,162 +29,162 @@ import { API_PREFIX, BASE_URL } from "../../utils";
 export const PATH_AI_MODELS = "ai/chats/models?*";
 
 const providerClaude = {
-	response: [
-		{
-			providerId: 1,
-			providerTitle: "Claude AI",
-			modelId: "claude-opus-4-5-20251101",
-		},
-		{
-			providerId: 1,
-			providerTitle: "Claude AI",
-			modelId: "claude-haiku-4-5-20251001",
-		},
-		{
-			providerId: 1,
-			providerTitle: "Claude AI",
-			modelId: "claude-sonnet-4-5-20250929",
-		},
-	],
-	count: 3,
-	links: [
-		{
-			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_MODELS}`,
-			action: "GET",
-		},
-	],
-	status: 0,
-	statusCode: 200,
+  response: [
+    {
+      providerId: 1,
+      providerTitle: "Claude AI",
+      modelId: "claude-opus-4-5-20251101",
+    },
+    {
+      providerId: 1,
+      providerTitle: "Claude AI",
+      modelId: "claude-haiku-4-5-20251001",
+    },
+    {
+      providerId: 1,
+      providerTitle: "Claude AI",
+      modelId: "claude-sonnet-4-5-20250929",
+    },
+  ],
+  count: 3,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_MODELS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
 const providerOpenAI = {
-	response: [
-		{
-			providerId: 2,
-			providerTitle: "OpenAI",
-			modelId: "gpt-5.1-2025-11-13",
-		},
-		{
-			providerId: 2,
-			providerTitle: "OpenAI",
-			modelId: "gpt-5",
-		},
-		{
-			providerId: 2,
-			providerTitle: "OpenAI",
-			modelId: "gpt-4.1",
-		},
-	],
-	count: 3,
-	links: [
-		{
-			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_MODELS}`,
-			action: "GET",
-		},
-	],
-	status: 0,
-	statusCode: 200,
+  response: [
+    {
+      providerId: 2,
+      providerTitle: "OpenAI",
+      modelId: "gpt-5.1-2025-11-13",
+    },
+    {
+      providerId: 2,
+      providerTitle: "OpenAI",
+      modelId: "gpt-5",
+    },
+    {
+      providerId: 2,
+      providerTitle: "OpenAI",
+      modelId: "gpt-4.1",
+    },
+  ],
+  count: 3,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_MODELS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
 const providerTogetherAI = {
-	response: [
-		{
-			providerId: 3,
-			providerTitle: "Together AI",
-			modelId: "deepseek-ai/DeepSeek-V3.1",
-		},
-		{
-			providerId: 3,
-			providerTitle: "Together AI",
-			modelId: "Qwen/Qwen3-235B-A22B-fp8-tput",
-		},
-	],
-	count: 3,
-	links: [
-		{
-			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_MODELS}`,
-			action: "GET",
-		},
-	],
-	status: 0,
-	statusCode: 200,
+  response: [
+    {
+      providerId: 3,
+      providerTitle: "Together AI",
+      modelId: "deepseek-ai/DeepSeek-V3.1",
+    },
+    {
+      providerId: 3,
+      providerTitle: "Together AI",
+      modelId: "Qwen/Qwen3-235B-A22B-fp8-tput",
+    },
+  ],
+  count: 3,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_MODELS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
 const providerOpenRouter = {
-	response: [
-		{
-			providerId: 4,
-			providerTitle: "OpenRouter",
-			modelId: "anthropic/claude-opus-4.5",
-		},
-		{
-			providerId: 4,
-			providerTitle: "OpenRouter",
-			modelId: "openai/gpt-5.1",
-		},
-		{
-			providerId: 4,
-			providerTitle: "OpenRouter",
-			modelId: "anthropic/claude-haiku-4.5",
-		},
-		{
-			providerId: 4,
-			providerTitle: "OpenRouter",
-			modelId: "anthropic/claude-sonnet-4.5",
-		},
-		{
-			providerId: 4,
-			providerTitle: "OpenRouter",
-			modelId: "qwen/qwen3-max",
-		},
-		{
-			providerId: 4,
-			providerTitle: "OpenRouter",
-			modelId: "deepseek/deepseek-v3.1-terminus",
-		},
-		{
-			providerId: 4,
-			providerTitle: "OpenRouter",
-			modelId: "x-ai/grok-4",
-		},
-	],
-	count: 3,
-	links: [
-		{
-			href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_MODELS}`,
-			action: "GET",
-		},
-	],
-	status: 0,
-	statusCode: 200,
+  response: [
+    {
+      providerId: 4,
+      providerTitle: "OpenRouter",
+      modelId: "anthropic/claude-opus-4.5",
+    },
+    {
+      providerId: 4,
+      providerTitle: "OpenRouter",
+      modelId: "openai/gpt-5.1",
+    },
+    {
+      providerId: 4,
+      providerTitle: "OpenRouter",
+      modelId: "anthropic/claude-haiku-4.5",
+    },
+    {
+      providerId: 4,
+      providerTitle: "OpenRouter",
+      modelId: "anthropic/claude-sonnet-4.5",
+    },
+    {
+      providerId: 4,
+      providerTitle: "OpenRouter",
+      modelId: "qwen/qwen3-max",
+    },
+    {
+      providerId: 4,
+      providerTitle: "OpenRouter",
+      modelId: "deepseek/deepseek-v3.1-terminus",
+    },
+    {
+      providerId: 4,
+      providerTitle: "OpenRouter",
+      modelId: "x-ai/grok-4",
+    },
+  ],
+  count: 3,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_MODELS}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
 export const aiModelsHandler = ({
-	isClaude,
-	isOpenAI,
-	isTogetherAI,
-	isOpenRouter,
+  isClaude,
+  isOpenAI,
+  isTogetherAI,
+  isOpenRouter,
 }: {
-	isClaude?: boolean;
-	isOpenAI?: boolean;
-	isTogetherAI?: boolean;
-	isOpenRouter?: boolean;
+  isClaude?: boolean;
+  isOpenAI?: boolean;
+  isTogetherAI?: boolean;
+  isOpenRouter?: boolean;
 }) => {
-	if (isClaude) {
-		return new Response(JSON.stringify(providerClaude));
-	}
+  if (isClaude) {
+    return new Response(JSON.stringify(providerClaude));
+  }
 
-	if (isOpenAI) {
-		return new Response(JSON.stringify(providerOpenAI));
-	}
+  if (isOpenAI) {
+    return new Response(JSON.stringify(providerOpenAI));
+  }
 
-	if (isTogetherAI) {
-		return new Response(JSON.stringify(providerTogetherAI));
-	}
+  if (isTogetherAI) {
+    return new Response(JSON.stringify(providerTogetherAI));
+  }
 
-	if (isOpenRouter) {
-		return new Response(JSON.stringify(providerOpenRouter));
-	}
+  if (isOpenRouter) {
+    return new Response(JSON.stringify(providerOpenRouter));
+  }
 
-	return new Response(JSON.stringify(providerOpenAI));
+  return new Response(JSON.stringify(providerOpenAI));
 };

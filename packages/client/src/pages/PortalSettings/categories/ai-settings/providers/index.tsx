@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -200,7 +200,9 @@ const AIProviderComponent = ({
             item={provider}
             onDeleteClick={onDeleteAIProvider}
             onSettingsClick={onUpdateAIProvider}
-            isAvailable={isProviderAvailable?.(provider.id)}
+            isAvailable={
+              isProviderAvailable?.(provider.id) && !provider.needReset
+            }
           />
         ))}
       </div>

@@ -68,6 +68,9 @@ import {
   invitationSettingsHandler,
   PATH_WEB_PLUGINS,
   webPluginsHandler,
+  webPluginsAddHandler,
+  webPluginsUpdateHandler,
+  webPluginsDeleteHandler,
 } from "./settings";
 import {
   CONTINUE_PATH,
@@ -102,6 +105,19 @@ import {
   shareHandler,
   thirdPartyCapabilitiesHandler,
   thirdPartyHandler,
+  recentEmptyHandler,
+  recentHandler,
+  PATH_RECENT,
+  PATH_FAVORITES,
+  PATH_DELETE_FAVORITES,
+  PATH_ADD_TO_FAVORITES,
+  PATH_GET_FILE_INFO,
+  favoritesHandler,
+  PATH_GET_FILE,
+  getFileHandler,
+  PATH_MY_DOCUMENTS,
+  myDocumentsHandler,
+  getFileInfoHandler,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -114,6 +130,7 @@ import {
   HEADER_LIST_CAPABILITIES,
   HEADER_ROOMS_LIST,
   HEADER_AI_DISABLED,
+  HEADER_PLUGINS_SETTINGS,
 } from "../utils";
 import { PATH_DELETE_USER } from "./people/self";
 import {
@@ -447,7 +464,7 @@ export const endpoints = {
   },
   webPlugins: {
     url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsHandler,
+    dataHandler: () => webPluginsHandler("empty"),
   },
   thirdPartyCapabilities: {
     url: `${BASE_URL}${PATH_THIRD_PARTY_CAPABILITIES}`,
@@ -485,5 +502,78 @@ export const endpoints = {
   emptyTags: {
     url: `${BASE_URL}${PATH_TAGS}`,
     dataHandler: roomTagsHandler,
+  },
+  settingsWithPlugins: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(
+        new Headers({
+          [HEADER_AUTHENTICATED_SETTINGS]: "true",
+          [HEADER_PLUGINS_SETTINGS]: "true",
+        }),
+      ),
+  },
+
+  webPluginsWithData: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsHandler.bind(null, "withData"),
+    method: "GET",
+  },
+  webPluginsAdd: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsAddHandler,
+    method: "POST",
+  },
+  webPluginsUpdate: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+    dataHandler: webPluginsUpdateHandler,
+    method: "PUT",
+  },
+  webPluginsDelete: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+    dataHandler: webPluginsDeleteHandler,
+    method: "DELETE",
+  },
+  recentEmpty: {
+    url: PATH_RECENT,
+    dataHandler: recentEmptyHandler,
+  },
+  recent: {
+    url: PATH_RECENT,
+    dataHandler: recentHandler,
+  },
+  favorites: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "success"),
+  },
+  favoritesEmpty: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "empty"),
+  },
+  favoritesDelete: {
+    url: PATH_DELETE_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "delete"),
+    method: "DELETE",
+  },
+  favoritesMany: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "success_many"),
+  },
+  getFile: {
+    url: PATH_GET_FILE,
+    dataHandler: getFileHandler,
+  },
+  addToFavorites: {
+    url: PATH_ADD_TO_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "mark"),
+    method: "POST",
+  },
+  myDocuments: {
+    url: PATH_MY_DOCUMENTS,
+    dataHandler: myDocumentsHandler,
+  },
+  getFileInfo: {
+    url: PATH_GET_FILE_INFO,
+    dataHandler: getFileInfoHandler,
   },
 } satisfies TEndpoints;

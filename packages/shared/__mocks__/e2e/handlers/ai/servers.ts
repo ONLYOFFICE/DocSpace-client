@@ -26,9 +26,10 @@
 
 import { API_PREFIX, BASE_URL } from "../../utils";
 
-export const PATH_AI_SERVERS = "ai/servers/available?*";
+export const PATH_AI_SERVERS = "ai/servers?*";
+export const PATH_AI_SERVERS_AVAILABLE = "ai/servers/available?*";
 
-const success = {
+const successAvailable = {
   response: [
     {
       id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
@@ -47,7 +48,7 @@ const success = {
   total: 2,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_AVAILABLE}`,
       action: "GET",
     },
   ],
@@ -55,6 +56,43 @@ const success = {
   statusCode: 200,
 };
 
-export const aiServersHandler = () => {
-  return new Response(JSON.stringify(success));
+const successList = {
+  response: [
+    {
+      id: "7a1f3c6d-1c3b-4704-b8ed-8dc90d0f371f",
+      name: "test custom server",
+      description: "asdf",
+      endpoint: "http://custom-mcp.com",
+      serverType: 0,
+      headers: {
+        header_key: "header_value",
+      },
+      enabled: true,
+    },
+    {
+      id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+      name: "test system server",
+      endpoint: "http://system-mcp.com",
+      serverType: 1,
+      enabled: true,
+    },
+  ],
+  count: 2,
+  total: 2,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVERS_AVAILABLE}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const aiServersAvailableHandler = () => {
+  return new Response(JSON.stringify(successAvailable));
+};
+
+export const aiServersListHandler = () => {
+  return new Response(JSON.stringify(successList));
 };

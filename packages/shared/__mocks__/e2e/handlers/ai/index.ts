@@ -46,4 +46,9 @@ export {
 
 export { aiServerHandler, PATH_AI_SERVER } from "./server";
 
-export { aiServersHandler, PATH_AI_SERVERS } from "./servers";
+export {
+  aiServersAvailableHandler,
+  PATH_AI_SERVERS_AVAILABLE,
+  aiServersListHandler,
+  PATH_AI_SERVERS,
+} from "./servers";

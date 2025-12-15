@@ -150,8 +150,10 @@ import {
   aiModelsHandler,
   PATH_AI_SERVER,
   aiServerHandler,
+  PATH_AI_SERVERS_AVAILABLE,
+  aiServersAvailableHandler,
   PATH_AI_SERVERS,
-  aiServersHandler,
+  aiServersListHandler,
 } from "./ai";
 import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
@@ -430,9 +432,13 @@ export const endpoints = {
     url: `${BASE_URL}${PATH_AI_SERVER}`,
     dataHandler: aiServerHandler,
   },
-  aiServers: {
+  aiServersAvailable: {
+    url: `${BASE_URL}${PATH_AI_SERVERS_AVAILABLE}`,
+    dataHandler: aiServersAvailableHandler,
+  },
+  aiServersList: {
     url: `${BASE_URL}${PATH_AI_SERVERS}`,
-    dataHandler: aiServersHandler,
+    dataHandler: aiServersListHandler,
   },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,

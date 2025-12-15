@@ -40,7 +40,7 @@ const InviteLinkError = ({ isExpired }: { isExpired?: boolean }) => {
   const { t } = useTranslation(["Confirm", "Common"]);
 
   const bodyText = isExpired
-    ? t("Common:InviteLinkExpiredErrorBody")
+    ? t("Common:LinkSettingsExpired")
     : t("InviteLinkQuotaErrorBody");
 
   React.useEffect(() => {

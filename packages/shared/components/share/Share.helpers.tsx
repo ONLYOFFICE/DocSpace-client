@@ -263,16 +263,16 @@ export const getDate = (expirationDate: string) => {
   if (calculatedHours < 1) {
     return moment
       .duration(expDate.diff(currentDate, "minutes") + 1, "minutes")
-      .humanize();
+      .humanize(true);
   }
 
   if (calculatedDate < 1) {
     return moment
       .duration(expDate.diff(currentDate, "hours") + 1, "hours")
-      .humanize();
+      .humanize(true);
   }
 
-  return moment.duration(calculatedDate + 1, "days").humanize();
+  return moment.duration(calculatedDate + 1, "days").humanize(true);
 };
 
 export const isExpired = (expirationDate: string | Date) => {

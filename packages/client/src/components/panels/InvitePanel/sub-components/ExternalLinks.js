@@ -153,7 +153,7 @@ const ExternalLinks = ({
     }
   };
 
-  const onCopyLink = () => copyLink(activeLink.shareLink);
+  const onCopyLink = () => copyLink(activeLink);
 
   // const toggleActionLinks = () => {
   //   setActionLinksVisible(!actionLinksVisible);

@@ -65,6 +65,7 @@ import {
   setInviteLink,
   updateInviteLink,
 } from "@docspace/shared/api/portal";
+import { getDate } from "@docspace/shared/components/share/Share.helpers";
 
 const InvitePanel = ({
   folders,
@@ -472,15 +473,26 @@ const InvitePanel = ({
   };
 
   const copyLink = (link) => {
-    if (link) {
-      toastr.success(
-        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
-          days_count: 7,
-        })}`,
-      );
+    if (!link.shareLink && !link.url) return;
 
-      copyShareLink(link);
-    }
+    const expirationDate = link?.expirationDate ?? link.expiration;
+    const isExpired = moment(new Date()).isAfter(moment(expirationDate));
+    if (isExpired) return toastr.error(t("Common:LinkExpired"));
+
+    const date = getDate(expirationDate);
+
+    toastr.success(
+      <Trans
+        t={t}
+        ns="Common"
+        values={{ date }}
+        i18nKey="LinkExpireAfter"
+        components={{ 1: <strong key="strong-expire-after" /> }}
+      />,
+      t("Common:LinkCopiedToClipboard"),
+    );
+
+    copyShareLink(link);
   };
 
   const editLink = async (linkAccess = null, defaultLink) => {
@@ -524,7 +536,7 @@ const InvitePanel = ({
       maxUseCount,
     };
 
-    copyLink(shareLink);
+    copyLink(newShareLink);
     setShareLinks([newShareLink]);
     return setActiveLink(newShareLink);
   };
@@ -546,7 +558,7 @@ const InvitePanel = ({
         };
 
         setActiveLink(linkDataObj);
-        copyLink(linkDataObj.shareLink);
+        copyLink(linkDataObj);
         setExternalLinksVisible(true);
         return;
       } catch (error) {
@@ -596,7 +608,7 @@ const InvitePanel = ({
         setActiveLink(newActiveLink);
 
         setLinkSelectedAccess(access);
-        copyLink(link.shareLink);
+        copyLink(link);
       } catch (error) {
         toastr.error(error);
       }
@@ -630,7 +642,7 @@ const InvitePanel = ({
       };
 
       setActiveLink(linkData);
-      copyLink(link.url);
+      copyLink(link);
       onChangeExternalLinksVisible(true);
     } catch (error) {
       toastr.error(error);

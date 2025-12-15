@@ -187,6 +187,7 @@ const EditMCPDialogComponent = ({
           onClick={handleSubmitClick}
           isLoading={loading}
           isDisabled={!hasChanges}
+          data-testid="mcp-save-button"
         />
         <Button
           size={ButtonSize.normal}

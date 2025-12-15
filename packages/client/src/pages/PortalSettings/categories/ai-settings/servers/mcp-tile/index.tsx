@@ -108,6 +108,7 @@ export const MCPTile = ({
             })
           : undefined
       }
+      dataTestId="mcp-tile"
     >
       <AiTile.Header
         title={name}
@@ -124,6 +125,7 @@ export const MCPTile = ({
             isChecked={item.enabled}
             onChange={() => onToggle(item.id, !item.enabled)}
             isDisabled={disableActions || item.needReset}
+            dataTestId="mcp-toggle-button"
           />
           {item.serverType === ServerType.Custom ? (
             <ContextMenuButton
@@ -131,6 +133,7 @@ export const MCPTile = ({
               getData={getContextOptions}
               isDisabled={disableActions}
               dropDownClassName={styles.aiContextMenuDropDown}
+              testId="mcp-context-menu-button"
             />
           ) : null}
         </div>

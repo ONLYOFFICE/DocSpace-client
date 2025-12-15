@@ -52,7 +52,7 @@ export const useBaseParams = (initialValues?: {
   const [name, setName] = React.useState(initialValues?.name || "");
   const [url, setUrl] = React.useState(initialValues?.url || "");
   const [description, setDescription] = React.useState(
-    initialValues?.description || ""
+    initialValues?.description || "",
   );
 
   const initBaseParams = React.useRef({
@@ -135,6 +135,7 @@ export const useBaseParams = (initialValues?: {
           scale
           hasError={hasError || !!nameError}
           maxLength={128}
+          data-testid="mcp-title-input"
         />
         <Text
           className={classNames(styles.fieldHint, {
@@ -163,6 +164,7 @@ export const useBaseParams = (initialValues?: {
           placeholder={t("OAuth:EnterURL")}
           scale
           hasError={!!urlError}
+          data-testid="mcp-url-input"
         />
         <Text className={styles.fieldHint}>
           {t("AISettings:MCPServerIntegrationURLHint")}
@@ -183,6 +185,7 @@ export const useBaseParams = (initialValues?: {
           onChange={(e) => onChangeDescription(e.target.value)}
           placeholder={t("OAuth:EnterDescription")}
           maxLength={256}
+          data-testid="mcp-description-textarea"
         />
         <Text className={styles.fieldHint}>
           {t("AISettings:MCPServerDescriptionHint")}

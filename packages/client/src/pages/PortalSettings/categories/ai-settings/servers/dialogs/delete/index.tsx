@@ -81,6 +81,7 @@ const DeleteDialogComponent = ({
           scale
           onClick={onSubmitAction}
           isLoading={loading}
+          testId="delete-mcp-button"
         />
         <Button
           size={ButtonSize.normal}

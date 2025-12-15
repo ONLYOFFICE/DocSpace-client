@@ -86,6 +86,7 @@ const DisableDialogComponent = ({
           scale
           onClick={onSubmitAction}
           isLoading={loading}
+          testId="disable-mcp-button"
         />
         <Button
           size={ButtonSize.normal}

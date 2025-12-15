@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Vnesite naslov MCP strežnika, ki ga je zagotovila vaša storitev.",
   "MCPSettingsDescription": "Ta razdelek vam omogoča upravljanje MCP strežnikov za pogovore z umetno inteligenco v sobah. Lahko omogočite sistemske MCP strežnike ali dodate po meri, da ustrezate potrebam vašega podjetja. Ko so ti strežniki omogočeni, bodo na voljo drugim uporabnikom za njihove naloge.",
   "MCPSettingTitle": "MCP strežniki",
+  "MCPUnavailableError": "Strežnik MCP je nedostopen.",
   "Provider": "Ponudnik",
   "ProviderAddedSuccess": "Ponudnik je bil uspešno dodan.",
   "ProviderKey": "Kluč",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Spletno iskanje je bilo uspešno onemogočeno.",
   "WebSearchEnabledSuccess": "Omogočeno uspešno iskanje po spletu",
   "WebSearchKeyDescription": "Vnesite ključ API, pridobljen od ponudnika iskanja na spletu.",
-  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov.",
-  "MCPUnavailableError": "Strežnik MCP je nedostopen."
+  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov."
 }

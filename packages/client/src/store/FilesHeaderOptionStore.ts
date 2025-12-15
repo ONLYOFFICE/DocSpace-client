@@ -134,8 +134,11 @@ export default class FilesHeaderOptionStore {
     }
   };
 
-  private onClickRemoveFromRecent = () =>
-    this.filesActionsStore.onClickRemoveFromRecent(this.filesStore.selection);
+  private onClickRemoveFromRecent = (t: TFunction) =>
+    this.filesActionsStore.onClickRemoveFromRecent(
+      this.filesStore.selection,
+      t,
+    );
 
   private retryVectorization = () =>
     this.filesActionsStore.retryVectorization(this.filesStore.selection);
@@ -328,7 +331,7 @@ export default class FilesHeaderOptionStore {
         return {
           id: "menu-remove-from-recent",
           label: t("Common:RemoveFromList"),
-          onClick: this.onClickRemoveFromRecent,
+          onClick: () => this.onClickRemoveFromRecent(t),
           iconUrl: RemoveOutlineSvgUrl,
         };
       case "vectorization":

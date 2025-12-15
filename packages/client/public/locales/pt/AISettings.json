@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Insira o endereço do servidor MCP fornecido pelo seu serviço",
   "MCPSettingsDescription": "Esta seção permite que você gerencie servidores MCP para chats de IA dentro de salas. Você pode habilitar servidores MCP do sistema ou adicionar servidores personalizados para atender às necessidades da sua empresa. Uma vez habilitados, esses servidores estarão acessíveis a outros usuários para suas tarefas.",
   "MCPSettingTitle": "Servidores MCP",
+  "MCPUnavailableError": "O servidor MCP está indisponível.",
   "Provider": "Fornecedor",
   "ProviderAddedSuccess": "Fornecedor adicionado com sucesso",
   "ProviderKey": "Chave",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Pesquisa na web desativada com sucesso",
   "WebSearchEnabledSuccess": "Pesquisa na web habilitada com sucesso",
   "WebSearchKeyDescription": "Insira a chave da API obtida do seu provedor de pesquisa na web.",
-  "WebSearchKeyHiddenDescription": "A chave da API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança.",
-  "MCPUnavailableError": "O servidor MCP está indisponível."
+  "WebSearchKeyHiddenDescription": "A chave da API é exibida apenas uma vez ao salvar e, em seguida, é ocultada por motivos de segurança."
 }

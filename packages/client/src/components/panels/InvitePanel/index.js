@@ -477,7 +477,9 @@ const InvitePanel = ({
 
     const expirationDate = link?.expirationDate ?? link.expiration;
     const isExpired = moment(new Date()).isAfter(moment(expirationDate));
+    const isLimit = link?.currentUseCount >= link?.maxUseCount;
     if (isExpired) return toastr.error(t("Common:LinkExpired"));
+    if (isLimit) return toastr.error(t("Common:LinkNoLongerAvailable"));
 
     const date = getDate(expirationDate);
 

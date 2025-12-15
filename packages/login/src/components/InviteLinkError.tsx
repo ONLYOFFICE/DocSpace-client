@@ -51,7 +51,10 @@ const InviteLinkError = ({ isExpired }: { isExpired?: boolean }) => {
   }, [router]);
 
   return (
-    <ErrorContainer headerText={t("InviteLinkErrorHeader")} bodyText={bodyText}>
+    <ErrorContainer
+      headerText={t("Common:LinkNoLongerAvailable")}
+      bodyText={bodyText}
+    >
       <Text fontSize="13px" fontWeight="600">
         <Trans
           t={t}

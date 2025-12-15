@@ -32,22 +32,18 @@ import { Navigate } from "react-router";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { FolderType } from "@docspace/shared/enums";
 
-import {
-  getCategoryTypeByFolderType,
-  getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
+import { getUrlByDefaultFolderType } from "SRC_DIR/helpers/utils";
 
 type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
 };
 
 const DefaultPageRedirectComponent = ({ defaultFolderType }: Props) => {
-  const categoryType = getCategoryTypeByFolderType(
+  const defaultUrl = getUrlByDefaultFolderType(
     defaultFolderType || FolderType.Rooms,
   );
-  const categoryUrl = getCategoryUrl(categoryType);
 
-  return <Navigate to={categoryUrl} replace />;
+  return <Navigate to={defaultUrl} replace />;
 };
 
 export const DefaultPageRedirect = inject(({ settingsStore }: TStore) => ({

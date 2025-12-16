@@ -64,7 +64,7 @@ const useSocketHelper = ({
   const folderSubscribers = React.useRef(new Set<string>());
 
   const initRef = React.useRef(false);
-  const subscribedId = React.useRef<null | number>(null);
+  const subscribedId = React.useRef<null | number | string>(null);
 
   const unsubscribe = React.useCallback((id?: number | string) => {
     if (!id) {
@@ -96,7 +96,7 @@ const useSocketHelper = ({
   }, []);
 
   const subscribe = React.useCallback(
-    (id: number) => {
+    (id: number | string) => {
       const roomParts = `DIR-${id}`;
 
       if (SocketHelper?.socketSubscribers.has(roomParts)) {

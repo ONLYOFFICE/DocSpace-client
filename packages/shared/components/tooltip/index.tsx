@@ -72,6 +72,7 @@ const Tooltip = ({
   dataTestId,
   zIndex,
   tooltipStyle,
+  delayShow,
   ...rest
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -126,6 +127,7 @@ const Tooltip = ({
           imperativeModeOnly={imperativeModeOnly}
           className="__react_component_tooltip"
           globalCloseEvents={globalCloseEvents}
+          delayShow={delayShow}
           middlewares={[
             offset(rest.offset ?? DEFAULT_OFFSET),
             flip({
@@ -175,3 +177,5 @@ Tooltip.displayName = "Tooltip";
 export type { TFallbackAxisSideDirection, TTooltipPlace, TGetTooltipContent };
 
 export { Tooltip };
+export { withTooltip } from "./sub-components/withTooltip";
+export { TooltipContainer } from "./sub-components/TooltipContainer";

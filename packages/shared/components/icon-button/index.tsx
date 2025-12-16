@@ -26,14 +26,20 @@
 
 "use client";
 
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, {
+  memo,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import { isIconSizeType } from "../../utils";
 import { isDesktop } from "../../utils/device";
 
-import { Tooltip } from "../tooltip";
+import { Tooltip, TooltipContainer } from "../tooltip";
 
 import styles from "./IconButton.module.scss";
 import { IconButtonProps } from "./IconButton.types";
@@ -240,7 +246,8 @@ const IconButton = memo(
     } as React.CSSProperties;
 
     return (
-      <div
+      <TooltipContainer
+        as="div"
         ref={buttonRef}
         className={buttonClasses}
         title={title}
@@ -248,7 +255,10 @@ const IconButton = memo(
         onMouseLeave={handleMouseLeave}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
-        onClick={handleClick}
+        onClick={
+          handleClick as React.MouseEventHandler<HTMLElement> &
+            MouseEventHandler
+        }
         data-tip={dataTip}
         data-event="click focus"
         data-for={id}
@@ -279,7 +289,7 @@ const IconButton = memo(
         {tooltipId && tooltipContent ? (
           <Tooltip float={isDesktop()} id={tooltipId} place="bottom" />
         ) : null}
-      </div>
+      </TooltipContainer>
     );
   },
 );

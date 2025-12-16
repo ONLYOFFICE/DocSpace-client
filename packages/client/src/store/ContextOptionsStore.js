@@ -1666,6 +1666,8 @@ class ContextOptionsStore {
         ? ["select"]
         : [];
 
+    console.log(item.contextOptions);
+
     if (!item.contextOptions) {
       const contextOptions = this.filesStore.getFilesContextOptions(
         item,
@@ -2651,15 +2653,9 @@ class ContextOptionsStore {
       const copyLinkIndex = resultOptions.findIndex(
         (option) => option.key === "link-for-room-members",
       );
-      const inviteUsersIndex = resultOptions.findIndex(
-        (option) => option.key === "invite-users-to-room",
-      );
 
-      const menuIndex = item.isAIAgent
-        ? inviteUsersIndex
-        : copySharedLinkIndex === -1
-          ? copyLinkIndex
-          : copySharedLinkIndex;
+      const menuIndex =
+        copySharedLinkIndex === -1 ? copyLinkIndex : copySharedLinkIndex;
 
       const insertIndex =
         menuIndex !== -1

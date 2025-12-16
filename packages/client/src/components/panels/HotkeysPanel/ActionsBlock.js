@@ -79,6 +79,12 @@ const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
           <Text {...keyTextStyles}>F2</Text>
         </>
       </Row>
+      <Row className="hotkeys_row">
+        <>
+          <Text {...textStyles}>{t("Common:AskAI")}</Text>
+          <Text {...keyTextStyles}>{`${CtrlKey} + i`}</Text>
+        </>
+      </Row>
     </>
   );
 };

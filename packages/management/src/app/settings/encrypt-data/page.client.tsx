@@ -28,18 +28,19 @@
 
 import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { useTheme } from "styled-components";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Link } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { EncryptionStatus } from "@docspace/shared/enums";
 import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { EncryptWarningDialog } from "./EncryptWarningDialog";
-import { StyledWrapper } from "./EncryptData.styles";
+import styles from "./encrypt-data.module.scss";
 
 type EncryptDataPageProps = {
   portals: TPortals[];
@@ -72,13 +73,13 @@ const EncryptDataPage = ({
           status={status}
         />
       ) : null}
-      <StyledWrapper isDisabled={isDisabled}>
-        <div className="header">
+      <div className={classNames(styles.wrapper, { disabled: isDisabled })}>
+        <div className={styles.header}>
           <Text fontSize="16px" fontWeight={700}>
             {t("EncryptData")}
           </Text>
           {status === EncryptionStatus.Encrypted ? (
-            <div className="badge">
+            <div className={styles.badge}>
               <Text fontSize="14px" fontWeight={600}>
                 {t("StorageEncrypted")}
               </Text>
@@ -90,11 +91,11 @@ const EncryptDataPage = ({
             organizationName: t("Common:OrganizationName"),
           })}
         </Text>
-        <div className="wrapper-block">
+        <div className={styles.wrapperBlock}>
           <Text fontSize="16px" fontWeight={700}>
             {t("Common:Warning")}!
           </Text>
-          <Text className="description">
+          <Text className={styles.description}>
             {t("EncryptDataWarningDescription")}
           </Text>
           {encryptionBlockHelpUrl ? (
@@ -118,7 +119,7 @@ const EncryptDataPage = ({
             </Text>
           ) : null}
           <Checkbox
-            className="checkbox"
+            className={styles.checkbox}
             label={t("NotifyUsers")}
             onChange={() => setIsNotifyChecked(!isNotifyChecked)}
             isChecked={isNotifyChecked}
@@ -136,7 +137,7 @@ const EncryptDataPage = ({
             isDisabled={isDisabled}
           />
         </div>
-      </StyledWrapper>
+      </div>
     </>
   );
 };

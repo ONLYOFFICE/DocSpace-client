@@ -2,6 +2,7 @@
   "Categories": "Категорије",
   "EmptyFormGalleryScreenDescription": "Нема резултата који одговарају вашем упиту",
   "ErrorViewDescription": "Молимо вас покушајте поново касније",
+  "ErrorViewDescriptionNetworkError": "Изгледа да нема интернет везе",
   "ErrorViewHeader": "Галерија образаца је тренутно недоступна",
   "SelectForm": "Изабери Образац",
   "SubmitToGalleryDialogGuideInfo": "Научите како да креирате савршене обрасце и увећајте шансу да добијете одобрење у нашем <1>водичу</1>.",

@@ -38,6 +38,7 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
+import { Row } from "@docspace/shared/components/rows";
 import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -45,7 +46,7 @@ import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { useStores } from "@/hooks/useStores";
 import { RowContent } from "./row-content";
-import { StyledSpaceRow } from "./multiple.styled";
+import styles from "./multiple.module.scss";
 
 export const SpacesRow = ({
   item,
@@ -151,13 +152,14 @@ export const SpacesRow = ({
         portalInfo={item}
         isDisableQuota={isDisableQuota}
       />
-      <StyledSpaceRow
+      <Row
+        className={styles.spaceRow}
         key={item.domain}
         element={logoElement}
         contextOptions={contextOptionsProps}
       >
         <RowContent item={item} tenantAlias={tenantAlias} />
-      </StyledSpaceRow>
+      </Row>
     </>
   );
 };

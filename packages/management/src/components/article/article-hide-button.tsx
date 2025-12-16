@@ -27,41 +27,39 @@
 import ArticleHideMenuReactSvg from "PUBLIC_DIR/images/article-hide-menu.react.svg";
 import ArticleShowMenuReactSvg from "PUBLIC_DIR/images/article-show-menu.react.svg";
 
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 
 import { useStores } from "@/hooks/useStores";
-import {
-  StyledHideButtonWrapper,
-  StyledHideButton,
-  StyledShowButton,
-} from "./article.styled";
+
+import styles from "./article.module.scss";
 
 export const HideButton = () => {
   const {
     articleStore: { showText, setShowText },
   } = useStores();
-  const theme = useTheme();
   const { t } = useTranslation(["Common"]);
 
   return (
-    <StyledHideButtonWrapper
-      showText={showText}
+    <div
+      className={classNames(styles.hideButtonWrapper, {
+        [styles.showText]: showText,
+      })}
       onClick={() => setShowText(!showText)}
     >
       {!showText ? (
-        <StyledShowButton>
+        <div className={styles.showButton}>
           <ArticleShowMenuReactSvg />
-        </StyledShowButton>
+        </div>
       ) : (
-        <StyledHideButton currentColorScheme={theme?.currentColorScheme}>
-          <div className="article-hide-menu-icon">
+        <div className={styles.hideButton}>
+          <div className={styles.hideMenuIcon}>
             <ArticleHideMenuReactSvg />
           </div>
           <Text
-            className="article-hide-menu-text"
+            className={styles.hideMenuText}
             fontWeight={600}
             fontSize="12px"
             noSelect
@@ -69,8 +67,8 @@ export const HideButton = () => {
           >
             {t("HideArticleMenu")}
           </Text>
-        </StyledHideButton>
+        </div>
       )}
-    </StyledHideButtonWrapper>
+    </div>
   );
 };

@@ -49,6 +49,7 @@ const FormGallery = ({
   oformsFilter,
   fetchOforms,
   setOformFromFolderId,
+  oformsNetworkError,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const FormGallery = ({
     Promise.all([fetchOforms(firstLoadFilter), fetchOformLocales()]).finally(
       () => {
         setIsInitLoading(false);
-      }
+      },
     );
   }, []);
 
@@ -86,7 +87,7 @@ const FormGallery = ({
       const myDocumentsFolderId = 2;
       setOformFromFolderId(myDocumentsFolderId);
       navigate(
-        `/form-gallery/${myDocumentsFolderId}/filter?${oformsFilter.toUrlParams()}`
+        `/form-gallery/${myDocumentsFolderId}/filter?${oformsFilter.toUrlParams()}`,
       );
     }
   }, [fromFolderId]);
@@ -104,14 +105,18 @@ const FormGallery = ({
           <SectionHeaderContent />
         </Section.SectionHeader>
 
-        {!oformsLoadError ? (
+        {!oformsLoadError && !oformsNetworkError ? (
           <Section.SectionFilter>
             <SectionFilterContent />
           </Section.SectionFilter>
         ) : null}
 
         <Section.SectionBody isFormGallery>
-          {!oformsLoadError ? <SectionBodyContent /> : <ErrorView />}
+          {!oformsLoadError && !oformsNetworkError ? (
+            <SectionBodyContent />
+          ) : (
+            <ErrorView />
+          )}
         </Section.SectionBody>
 
         <Section.InfoPanelHeader>
@@ -143,4 +148,6 @@ export const WrappedComponent = inject(({ oformsStore }) => ({
 
   fetchOforms: oformsStore.fetchOforms,
   setOformFromFolderId: oformsStore.setOformFromFolderId,
+
+  oformsNetworkError: oformsStore.oformsNetworkError,
 }))(observer(FormGallery));

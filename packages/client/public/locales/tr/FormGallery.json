@@ -2,6 +2,7 @@
   "Categories": "Kategoriler",
   "EmptyFormGalleryScreenDescription": "Sorgunuzla eşleşen sonuç bulunamadı",
   "ErrorViewDescription": "Lütfen daha sonra tekrar deneyin",
+  "ErrorViewDescriptionNetworkError": "Görünüşe göre internet bağlantısı yok",
   "ErrorViewHeader": "Form galerisi geçici olarak kullanılamıyor",
   "SelectForm": "Formu Seç",
   "SubmitToGalleryDialogGuideInfo": "<1>guide</1> mükemmel formlar oluşturmayı ve onay alma şansınızı nasıl artıracağınızı öğrenin.",

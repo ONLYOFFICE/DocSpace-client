@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Enter the MCP server address provided by your service",
   "MCPSettingsDescription": "This section lets you manage MCP servers for AI chats within rooms. You can enable system MCP servers or add custom ones to meet your company's needs. Once enabled, these servers will be accessible to other users for their tasks.",
   "MCPSettingTitle": "MCP servers",
+  "MCPUnavailableError": "The MCP server is unavailable",
   "Provider": "Provider",
   "ProviderAddedSuccess": "Provider added successfully",
   "ProviderKey": "Key",

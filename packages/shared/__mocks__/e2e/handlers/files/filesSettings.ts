@@ -1160,6 +1160,8 @@ const getFilesSettings = (): TFilesSettings => {
   };
 };
 
+export const PATH_FILES_SETTINGS = "files/settings";
+
 export const filesSettingsHandler = (): Response => {
   return new Response(JSON.stringify({ response: getFilesSettings() }));
 };

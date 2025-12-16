@@ -1981,17 +1981,17 @@ class FilesStore {
               ...currentFolder.security,
               Create:
                 currentFolder.security.Create &&
-                !this.settingsStore.aiConfig.aiReadyNeedReset,
+                !this.settingsStore.aiConfig?.aiReadyNeedReset,
               Download: aiRoom.security.Download,
               EditAccess:
                 currentFolder.security.security?.EditAccess &&
-                !this.settingsStore.aiConfig.aiReadyNeedReset,
+                !this.settingsStore.aiConfig?.aiReadyNeedReset,
               EditRoom:
                 currentFolder.security.security?.EditRoom &&
-                !this.settingsStore.aiConfig.aiReadyNeedReset,
+                !this.settingsStore.aiConfig?.aiReadyNeedReset,
               ChangeOwner:
                 currentFolder.security.security?.ChangeOwner &&
-                !this.settingsStore.aiConfig.aiReadyNeedReset,
+                !this.settingsStore.aiConfig?.aiReadyNeedReset,
               Delete: aiRoom.security.Delete,
 
               Pin: aiRoom.security.Pin,
@@ -2477,7 +2477,7 @@ class FilesStore {
                 ...data.current.security,
                 Create:
                   data.current.security.Create &&
-                  !this.settingsStore.aiConfig.aiReadyNeedReset,
+                  !this.settingsStore.aiConfig?.aiReadyNeedReset,
               },
             });
 
@@ -3139,21 +3139,21 @@ class FilesStore {
     } else if (isAIAgent) {
       const canInviteUserInAgent =
         item.security?.EditAccess &&
-        !this.settingsStore.aiConfig.aiReadyNeedReset;
+        !this.settingsStore.aiConfig?.aiReadyNeedReset;
       const canRemoveAgent = item.security?.Delete;
 
       const canPinAgent = item.security?.Pin;
 
       const canEditAgent =
         item.security?.EditRoom &&
-        !this.settingsStore.aiConfig.aiReadyNeedReset;
+        !this.settingsStore.aiConfig?.aiReadyNeedReset;
 
       const canViewAgentInfo = item.security?.Read;
       const canMuteAgent = item.security?.Mute;
 
       const canChangeOwner =
         item.security?.ChangeOwner &&
-        !this.settingsStore.aiConfig.aiReadyNeedReset;
+        !this.settingsStore.aiConfig?.aiReadyNeedReset;
 
       let agentOptions = [
         "select",
@@ -4097,13 +4097,13 @@ class FilesStore {
         ...security,
         EditAccess:
           item.security?.EditAccess &&
-          !this.settingsStore.aiConfig.aiReadyNeedReset,
+          !this.settingsStore.aiConfig?.aiReadyNeedReset,
         EditRoom:
           item.security?.EditRoom &&
-          !this.settingsStore.aiConfig.aiReadyNeedReset,
+          !this.settingsStore.aiConfig?.aiReadyNeedReset,
         ChangeOwner:
           item.security?.ChangeOwner &&
-          !this.settingsStore.aiConfig.aiReadyNeedReset,
+          !this.settingsStore.aiConfig?.aiReadyNeedReset,
       };
 
       let isFolder = item.isFolder ?? false;

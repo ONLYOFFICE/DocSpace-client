@@ -45,3 +45,9 @@ export * from "./docservice";
 export * from "./sharedWithMe";
 
 export * from "./share";
+
+export * from "./recent";
+
+export * from "./favorites";
+
+export * from "./documents";

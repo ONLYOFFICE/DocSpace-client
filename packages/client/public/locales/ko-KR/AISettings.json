@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "서비스 제공업체에서 제공하는 MCP 서버 주소를 입력하세요.",
   "MCPSettingsDescription": "이 섹션에서는 방 안에서 AI 채팅을 위한 MCP 서버를 관리할 수 있습니다. 시스템 MCP 서버를 활성화하거나 회사 요구 사항에 맞게 사용자 지정 서버를 추가할 수 있습니다. 활성화되면 이러한 서버는 다른 사용자가 작업을 수행하는 데 사용할 수 있습니다.",
   "MCPSettingTitle": "MCP 서버",
+  "MCPUnavailableError": "MCP 서버가 사용 불가능합니다.",
   "Provider": "제공업체",
   "ProviderAddedSuccess": "제공자를 성공적으로 추가했습니다.",
   "ProviderKey": "키",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "웹 검색을 성공적으로 비활성화했습니다.",
   "WebSearchEnabledSuccess": "웹 검색 활성화 성공",
   "WebSearchKeyDescription": "웹 검색 제공업체로부터 얻은 API 키를 입력하세요.",
-  "WebSearchKeyHiddenDescription": "API 키는 저장 시에 한 번만 표시된 후 보안을 위해 숨겨집니다.",
-  "MCPUnavailableError": "MCP 서버가 사용 불가능합니다."
+  "WebSearchKeyHiddenDescription": "API 키는 저장 시에 한 번만 표시된 후 보안을 위해 숨겨집니다."
 }

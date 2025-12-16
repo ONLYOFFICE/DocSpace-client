@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Nhập địa chỉ máy chủ MCP được cung cấp bởi dịch vụ của bạn.",
   "MCPSettingsDescription": "Phần này cho phép bạn quản lý các máy chủ MCP cho các cuộc trò chuyện AI trong phòng. Bạn có thể bật các máy chủ MCP hệ thống hoặc thêm các máy chủ tùy chỉnh để đáp ứng nhu cầu của công ty bạn. Sau khi được bật, các máy chủ này sẽ có thể truy cập được cho những người dùng khác để thực hiện các tác vụ của họ.",
   "MCPSettingTitle": "Máy chủ MCP",
+  "MCPUnavailableError": "Máy chủ MCP không khả dụng.",
   "Provider": "Nhà cung cấp",
   "ProviderAddedSuccess": "Đã thêm nhà cung cấp thành công",
   "ProviderKey": "Chìa khóa",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Tìm kiếm trên web đã bị tắt thành công",
   "WebSearchEnabledSuccess": "Đã bật tìm kiếm trên web thành công",
   "WebSearchKeyDescription": "Nhập khóa API đã lấy được từ nhà cung cấp tìm kiếm trên web của bạn.",
-  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn.",
-  "MCPUnavailableError": "Máy chủ MCP không khả dụng."
+  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn."
 }

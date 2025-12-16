@@ -32,6 +32,7 @@
   "MCPServerIntegrationURLHint": "Ievadiet MCP server adresi, ko sniedz jūsu pakalpojums.",
   "MCPSettingsDescription": "Šis nosaukums ļauj jums pārvaldīt MCP serverus MI tērzēšanai telpās. Jūs varat iespējot sistēmas MCP serverus vai pievienot pielāgotus serverus, lai apmierinātu uzņēmuma vajadzības. Kad tie ir iespējoti, šie serveri būs pieejami citiem lietotājiem viņu uzdevumiem.",
   "MCPSettingTitle": "MCP serveri",
+  "MCPUnavailableError": "MCP server nav pieejams",
   "Provider": "Pārskatītājs",
   "ProviderAddedSuccess": "Pievienots pakalpojumu sniedzējs veiksmīgi",
   "ProviderKey": "Atslēga",
@@ -59,6 +60,5 @@
   "WebSearchDisabledSuccess": "Web meklēšana veiksmīgi atslēgta",
   "WebSearchEnabledSuccess": "Web meklēšana veiksmīgi ieslēgta",
   "WebSearchKeyDescription": "Ievadiet API atslēgu, kas iegūta no jūsu tiešsaistes meklēšanas pakalpojuma.",
-  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos.",
-  "MCPUnavailableError": "MCP server nav pieejams"
+  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos."
 }

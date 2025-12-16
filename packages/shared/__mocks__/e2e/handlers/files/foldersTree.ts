@@ -28,6 +28,8 @@
 
 import type { TGetRootFolder } from "../../../../api/files/types";
 
+import { BASE_URL } from "../../utils";
+
 const getFoldersTree = (): TGetRootFolder[] => {
   return [
     {
@@ -561,6 +563,103 @@ const getFoldersTree = (): TGetRootFolder[] => {
         {
           id: 3,
           title: "Archive",
+        },
+      ],
+      startIndex: 0,
+      count: 0,
+      total: 0,
+      new: 0,
+    },
+    {
+      files: [],
+      folders: [],
+      current: {
+        parentId: 0,
+        filesCount: 0,
+        foldersCount: 0,
+        new: 0,
+        mute: false,
+        pinned: false,
+        private: false,
+        indexing: false,
+        denyDownload: false,
+        fileEntryType: 1,
+        id: 6,
+        rootFolderId: 6,
+        canShare: false,
+        security: {
+          Read: true,
+          Create: false,
+          Delete: false,
+          EditRoom: false,
+          Rename: false,
+          CopyTo: false,
+          Copy: false,
+          MoveTo: true,
+          Move: false,
+          Pin: false,
+          Mute: false,
+          EditAccess: false,
+          Duplicate: false,
+          Download: false,
+          CopySharedLink: false,
+          Reconnect: false,
+          CreateRoomFrom: false,
+          CopyLink: false,
+          Embed: false,
+          ChangeOwner: false,
+          IndexExport: false,
+        },
+        availableShareRights: {},
+        title: "AI agents",
+        access: 0,
+        shared: false,
+        sharedForUser: false,
+        parentShared: false,
+        created: "2025-10-30T13:04:11.0000000+05:00",
+        createdBy: {
+          id: "487b33be-9a9c-4270-a61f-d23d2e4f22e4",
+          displayName: "asdasd asdadsads",
+          avatar:
+            "/static/images/default_user_photo_size_82-82.png?hash=1927501797",
+          avatarOriginal:
+            "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+          avatarMax:
+            "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+          avatarMedium:
+            "/static/images/default_user_photo_size_48-48.png?hash=1927501797",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=1927501797",
+          profileUrl: `${BASE_URL}/accounts/people/filter?search=test@gmail.com`,
+
+          hasAvatar: false,
+          isAnonim: false,
+        },
+        updated: "2025-12-10T14:13:36.0000000+05:00",
+        rootFolderType: 34,
+        updatedBy: {
+          id: "487b33be-9a9c-4270-a61f-d23d2e4f22e4",
+          displayName: "asdasd asdadsads",
+          avatar:
+            "/static/images/default_user_photo_size_82-82.png?hash=1927501797",
+          avatarOriginal:
+            "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+          avatarMax:
+            "/static/images/default_user_photo_size_200-200.png?hash=1927501797",
+          avatarMedium:
+            "/static/images/default_user_photo_size_48-48.png?hash=1927501797",
+          avatarSmall:
+            "/static/images/default_user_photo_size_32-32.png?hash=1927501797",
+          profileUrl: `${BASE_URL}/accounts/people/filter?search=test@gmail.com`,
+          hasAvatar: false,
+          isAnonim: false,
+        },
+      },
+      pathParts: [
+        {
+          id: 6,
+          title: "AI agents",
+          folderType: 34,
         },
       ],
       startIndex: 0,

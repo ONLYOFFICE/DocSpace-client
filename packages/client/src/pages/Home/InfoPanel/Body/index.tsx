@@ -55,6 +55,10 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
     onChangeFile,
     setImage,
     checkIsExpiredLinkAsync,
+    getIsAIAgent,
+    getIsTrash,
+    infoPanelItemsList,
+    editAgentDialogProps,
   } = restProps as Exclude<InfoPanelBodyContentProps, { isGallery: true }>;
 
   return (
@@ -77,6 +81,10 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
       onChangeFile={onChangeFile}
       setImage={setImage}
       checkIsExpiredLinkAsync={checkIsExpiredLinkAsync}
+      getIsAIAgent={getIsAIAgent}
+      getIsTrash={getIsTrash}
+      infoPanelItemsList={infoPanelItemsList}
+      editAgentDialogProps={editAgentDialogProps}
     />
   );
 };

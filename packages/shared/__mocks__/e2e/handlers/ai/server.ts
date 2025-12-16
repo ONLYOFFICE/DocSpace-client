@@ -24,25 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX, HEADER_AI_DISABLED } from "../../utils";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-export const PATH_AI_CONFIG = "ai/config";
+export const PATH_AI_SERVER = "ai/servers/*";
 
 const success = {
   response: {
-    webSearchEnabled: true,
-    vectorizationEnabled: true,
-    aiReady: true,
-    portalMcpServerId: "id",
-    embeddingModel: "text-embedding-3-small",
-    knowledgeSearchToolName: "docspace_knowledge_search",
-    webSearchToolName: "docspace_web_search",
-    webCrawlingToolName: "docspace_web_crawling",
+    id: "883da87d-5ae0-49fd-8cb9-2cb82181667e",
+    name: "docspace",
+    serverType: 1,
+    enabled: true,
   },
   count: 1,
   links: [
     {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
+      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_SERVER}`,
       action: "GET",
     },
   ],
@@ -50,32 +46,6 @@ const success = {
   statusCode: 200,
 };
 
-const successDisabled = {
-  response: {
-    webSearchEnabled: false,
-    vectorizationEnabled: false,
-    aiReady: false,
-    portalMcpServerId: "id",
-    embeddingModel: "text-embedding-3-small",
-    knowledgeSearchToolName: "docspace_knowledge_search",
-    webSearchToolName: "docspace_web_search",
-    webCrawlingToolName: "docspace_web_crawling",
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-};
-
-export const aiConfigHandler = (headers: Headers) => {
-  if (headers.get(HEADER_AI_DISABLED)) {
-    return new Response(JSON.stringify(successDisabled));
-  }
-
+export const aiServerHandler = () => {
   return new Response(JSON.stringify(success));
 };

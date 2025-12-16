@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2025-11-17T11:52:35.099Z",
+  "updated_at": "2025-12-11T16:07:35.917Z",
   "comment": {
     "text": "This translation key is used for the label \"Spreadsheet\" which appears on a button in the \"Actions\" dropdown menu, allowing users to create a new spreadsheet. It is also used as part of a dialog and links within the application, consistently displaying the term \"Spreadsheet\". The text should be translated to appear cohesively across these different contexts.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 601,
+      "line_number": 603,
       "context": "const createNewSpreadsheetXlsx = {\n id: \"actions_new-spreadsheet\",\n className: \"main-button_drop-down\",\n icon: SpreadsheetReactSvgUrl,\n label: t(\"Common:Spreadsheet\"),\n onClick: onCreate,\n action: \"xlsx\",\n key: \"xlsx\",\n };",
       "module": "/packages/client"
     },

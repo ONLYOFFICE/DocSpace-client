@@ -52,4 +52,10 @@
   line-height: 16px;
   margin-top: 4px;
   color: variables.$gray;
+
+
+  &.fieldHintError {
+    color: var(--input-error-color);
+  }
 }
+

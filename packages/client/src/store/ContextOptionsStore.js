@@ -1222,8 +1222,8 @@ class ContextOptionsStore {
     this.dialogsStore.setWelcomeFormFillingTipsVisible(true);
   };
 
-  onClickRemoveFromRecent = (item) => {
-    this.filesActionsStore.removeFilesFromRecent([item.id]);
+  onClickRemoveFromRecent = (item, t) => {
+    this.filesActionsStore.removeFilesFromRecent([item.id], t);
   };
 
   setLoaderTimer = (isLoading, cb) => {
@@ -2428,7 +2428,7 @@ class ContextOptionsStore {
         key: "remove-from-recent",
         label: t("Common:RemoveFromList"),
         icon: RemoveOutlineSvgUrl,
-        onClick: () => this.onClickRemoveFromRecent(item),
+        onClick: () => this.onClickRemoveFromRecent(item, t),
         disabled: !this.treeFoldersStore.isRecentFolder,
       },
       {
@@ -2987,7 +2987,7 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: RemoveOutlineSvgUrl,
         onClick: () =>
-          this.filesActionsStore.onClickRemoveFromRecent(selection),
+          this.filesActionsStore.onClickRemoveFromRecent(selection, t),
         disabled: !this.treeFoldersStore.isRecentFolder,
       },
       /* {

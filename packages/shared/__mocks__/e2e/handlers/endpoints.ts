@@ -105,6 +105,19 @@ import {
   shareHandler,
   thirdPartyCapabilitiesHandler,
   thirdPartyHandler,
+  recentEmptyHandler,
+  recentHandler,
+  PATH_RECENT,
+  PATH_FAVORITES,
+  PATH_DELETE_FAVORITES,
+  PATH_ADD_TO_FAVORITES,
+  PATH_GET_FILE_INFO,
+  favoritesHandler,
+  PATH_GET_FILE,
+  getFileHandler,
+  PATH_MY_DOCUMENTS,
+  myDocumentsHandler,
+  getFileInfoHandler,
 } from "./files";
 import { capabilitiesHandler, PATH_CAPABILITIES } from "./capabilities";
 
@@ -115,18 +128,33 @@ import {
   HEADER_FILTERED_FOLDER,
   HEADER_FILTERED_ROOMS_LIST,
   HEADER_LIST_CAPABILITIES,
-  HEADER_PLUGINS_SETTINGS,
   HEADER_ROOMS_LIST,
+  HEADER_AI_DISABLED,
+  HEADER_PLUGINS_SETTINGS,
 } from "../utils";
 import { PATH_DELETE_USER } from "./people/self";
-import { aiConfigHandler, PATH_AI_CONFIG } from "./ai/config";
+import {
+  aiConfigHandler,
+  PATH_AI_CONFIG,
+  PATH_AI_AGENTS,
+  aiAgentsHandler,
+  PATH_AI_PROVIDERS,
+  aiProvidersHandler,
+  PATH_AI_MODELS,
+  aiModelsHandler,
+  PATH_AI_SERVER,
+  aiServerHandler,
+  PATH_AI_SERVERS,
+  aiServersHandler,
+} from "./ai";
+import { PATH_TAGS, roomTagsHandler } from "./rooms";
 import {
   LINK_FILE_PATH,
   LinkHandler,
   PATH_SHARE_TO_USERS_FILE,
   shareToUserHandle,
 } from "./share";
-import { MethodType } from "../types";
+import type { MethodType } from "../types";
 
 export type TEndpoint = {
   url: string | RegExp;
@@ -300,16 +328,6 @@ export const endpoints = {
         }),
       ),
   },
-  settingsWithPlugins: {
-    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
-    dataHandler: () =>
-      settingsHandler(
-        new Headers({
-          [HEADER_AUTHENTICATED_SETTINGS]: "true",
-          [HEADER_PLUGINS_SETTINGS]: "true",
-        }),
-      ),
-  },
   self: {
     url: `${BASE_URL}${PATH_DELETE_USER}`,
     dataHandler: selfHandler,
@@ -336,7 +354,56 @@ export const endpoints = {
   },
   aiConfig: {
     url: `${BASE_URL}${PATH_AI_CONFIG}`,
-    dataHandler: aiConfigHandler,
+    dataHandler: () => aiConfigHandler(new Headers()),
+  },
+  aiConfigDisabled: {
+    url: `${BASE_URL}${PATH_AI_CONFIG}`,
+    dataHandler: () =>
+      aiConfigHandler(
+        new Headers({
+          [HEADER_AI_DISABLED]: "true",
+        }),
+      ),
+  },
+  aiAgentsEmpty: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({}),
+  },
+  aiAgentsEmptyCreate: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({ withCreate: true }),
+  },
+  aiAgentsListCreate: {
+    url: `${BASE_URL}${PATH_AI_AGENTS}`,
+    dataHandler: () => aiAgentsHandler({ withListCreate: true }),
+  },
+  aiProvidersList: {
+    url: `${BASE_URL}${PATH_AI_PROVIDERS}`,
+    dataHandler: aiProvidersHandler,
+  },
+  aiModelsClaude: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isClaude: true }),
+  },
+  aiModelsOpenAI: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isOpenAI: true }),
+  },
+  aiModelsTogether: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isTogetherAI: true }),
+  },
+  aiModelsOpenRouter: {
+    url: `${BASE_URL}${PATH_AI_MODELS}`,
+    dataHandler: () => aiModelsHandler({ isOpenRouter: true }),
+  },
+  aiServer: {
+    url: `${BASE_URL}${PATH_AI_SERVER}`,
+    dataHandler: aiServerHandler,
+  },
+  aiServers: {
+    url: `${BASE_URL}${PATH_AI_SERVERS}`,
+    dataHandler: aiServersHandler,
   },
   additionalSettings: {
     url: `${BASE_URL}${PATH_SETTINGS_ADDITIONAL}`,
@@ -368,28 +435,7 @@ export const endpoints = {
   },
   webPlugins: {
     url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsHandler,
-    method: "GET",
-  },
-  webPluginsWithData: {
-    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsHandler.bind(null, "withData"),
-    method: "GET",
-  },
-  webPluginsAdd: {
-    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
-    dataHandler: webPluginsAddHandler,
-    method: "POST",
-  },
-  webPluginsUpdate: {
-    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
-    dataHandler: webPluginsUpdateHandler,
-    method: "PUT",
-  },
-  webPluginsDelete: {
-    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
-    dataHandler: webPluginsDeleteHandler,
-    method: "DELETE",
+    dataHandler: () => webPluginsHandler("empty"),
   },
   thirdPartyCapabilities: {
     url: `${BASE_URL}${PATH_THIRD_PARTY_CAPABILITIES}`,
@@ -423,5 +469,82 @@ export const endpoints = {
   shareToUser: {
     url: PATH_SHARE_TO_USERS_FILE,
     dataHandler: shareToUserHandle,
+  },
+  emptyTags: {
+    url: `${BASE_URL}${PATH_TAGS}`,
+    dataHandler: roomTagsHandler,
+  },
+  settingsWithPlugins: {
+    url: `${BASE_URL}${PATH_SETTINGS_WITH_QUERY}`,
+    dataHandler: () =>
+      settingsHandler(
+        new Headers({
+          [HEADER_AUTHENTICATED_SETTINGS]: "true",
+          [HEADER_PLUGINS_SETTINGS]: "true",
+        }),
+      ),
+  },
+
+  webPluginsWithData: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsHandler.bind(null, "withData"),
+    method: "GET",
+  },
+  webPluginsAdd: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}`,
+    dataHandler: webPluginsAddHandler,
+    method: "POST",
+  },
+  webPluginsUpdate: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+    dataHandler: webPluginsUpdateHandler,
+    method: "PUT",
+  },
+  webPluginsDelete: {
+    url: `${BASE_URL}${PATH_WEB_PLUGINS}/*`,
+    dataHandler: webPluginsDeleteHandler,
+    method: "DELETE",
+  },
+  recentEmpty: {
+    url: PATH_RECENT,
+    dataHandler: recentEmptyHandler,
+  },
+  recent: {
+    url: PATH_RECENT,
+    dataHandler: recentHandler,
+  },
+  favorites: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "success"),
+  },
+  favoritesEmpty: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "empty"),
+  },
+  favoritesDelete: {
+    url: PATH_DELETE_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "delete"),
+    method: "DELETE",
+  },
+  favoritesMany: {
+    url: PATH_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "success_many"),
+  },
+  getFile: {
+    url: PATH_GET_FILE,
+    dataHandler: getFileHandler,
+  },
+  addToFavorites: {
+    url: PATH_ADD_TO_FAVORITES,
+    dataHandler: favoritesHandler.bind(null, "mark"),
+    method: "POST",
+  },
+  myDocuments: {
+    url: PATH_MY_DOCUMENTS,
+    dataHandler: myDocumentsHandler,
+  },
+  getFileInfo: {
+    url: PATH_GET_FILE_INFO,
+    dataHandler: getFileInfoHandler,
   },
 } satisfies TEndpoints;

@@ -577,6 +577,10 @@ const InvitePanel = ({
           linkExpirationDate = moment().add(7, "days");
         }
 
+        if (access.expirationDate === null) {
+          linkExpirationDate = null;
+        }
+
         const maxUsersCount =
           access.maxUseCount || access?.maxUseCount === null
             ? access.maxUseCount

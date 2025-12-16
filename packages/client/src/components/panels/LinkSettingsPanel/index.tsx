@@ -82,12 +82,20 @@ const LinkSettingsPanel = ({
     : moment().add(7, "days");
 
   const [userLimitIsChecked, setUserLimitIsChecked] = useState(limitIsChecked);
+  const [lifetimeIsChecked, setLifetimeIsChecked] = useState(
+    !!activeLink.expirationDate,
+  );
   const [limitDate, setLimitDate] = useState<moment.Moment>(date);
   const [maxNumber, setMaxNumber] = useState(String(maxUsersNumber));
   const [hasError, setHasError] = useState(false);
 
-  const showLimitError = Number(maxNumber) <= usersNumber;
-  const showExpiredError = moment(new Date()).isAfter(limitDate);
+  const showLimitError = userLimitIsChecked
+    ? Number(maxNumber) <= usersNumber
+    : false;
+
+  const showExpiredError = lifetimeIsChecked
+    ? moment(new Date()).isAfter(limitDate)
+    : false;
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -120,7 +128,9 @@ const LinkSettingsPanel = ({
     if (defaultLink) {
       const linkToSubmit = {
         ...defaultLink,
-        expirationDate: moment(limitDate).toISOString(),
+        expirationDate: lifetimeIsChecked
+          ? moment(limitDate).toISOString()
+          : null,
         maxUseCount: userLimitIsChecked ? Number(maxNumber) : null,
         currentUseCount: usersNumber,
       } as TOption & {
@@ -176,7 +186,6 @@ const LinkSettingsPanel = ({
               </Text>
               <ToggleButton
                 className={styles.linkSettingsToggle}
-                name="toggleUserLimit"
                 isChecked={userLimitIsChecked}
                 onChange={() => setUserLimitIsChecked(!userLimitIsChecked)}
               />
@@ -267,37 +276,47 @@ const LinkSettingsPanel = ({
             ) : null}
           </div>
 
-          <Text
-            fontSize="16px"
-            fontWeight={700}
-            className={styles.linkSettingsText}
-          >
-            {t("Common:LimitByTimePeriod")}
-          </Text>
-          <Text
-            fontSize="12px"
-            fontWeight={400}
-            className={styles.linkSettingsSubDescriptionText}
-            color={showExpiredError ? warningColor : undefined}
-          >
-            {showExpiredError
-              ? t("Common:LinkSettingsExpired")
-              : t("Common:LinkValidUntil")}
-          </Text>
-
-          <DateTimePicker
-            id="link-settings_date-time-picker"
-            locale={locale}
-            hasError={false}
-            onChange={(date) => date && setLimitDate(date)}
-            openDate={new Date()}
-            className={styles.linkSettingsDatePicker}
-            selectDateText={t("Common:SelectDate")}
-            initialDate={limitDate}
-            minDate={moment().subtract(1, "days")}
-            maxDate={maxDate}
-            hideCross
-          />
+          <div className={styles.linkSettingsUserLimit}>
+            <Text
+              fontSize="16px"
+              fontWeight={700}
+              className={styles.linkSettingsText}
+            >
+              {t("Common:LimitByTimePeriod")}
+            </Text>
+            <ToggleButton
+              className={styles.linkSettingsToggle}
+              isChecked={lifetimeIsChecked}
+              onChange={() => setLifetimeIsChecked(!lifetimeIsChecked)}
+            />
+          </div>
+          {lifetimeIsChecked ? (
+            <>
+              <Text
+                fontSize="12px"
+                fontWeight={400}
+                className={styles.linkSettingsSubDescriptionText}
+                color={showExpiredError ? warningColor : undefined}
+              >
+                {showExpiredError
+                  ? t("Common:LinkSettingsExpired")
+                  : t("Common:LinkValidUntil")}
+              </Text>
+              <DateTimePicker
+                id="link-settings_date-time-picker"
+                locale={locale}
+                hasError={false}
+                onChange={(date) => date && setLimitDate(date)}
+                openDate={new Date()}
+                className={styles.linkSettingsDatePicker}
+                selectDateText={t("Common:SelectDate")}
+                initialDate={limitDate}
+                minDate={moment().subtract(1, "days")}
+                maxDate={maxDate}
+                hideCross
+              />
+            </>
+          ) : null}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

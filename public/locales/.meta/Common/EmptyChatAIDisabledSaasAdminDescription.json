@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyChatAIDisabledSaasAdminDescription",
+  "content": "The AI service is turned off, preventing this agent from processing chats or performing tasks. To restore full functionality, enable AI features in the {{productName}} settings.",
+  "content_en_sha1_hash": "3701608d9d13b0f9a0ae4b7a8e7ac16d12d3d769",
+  "created_at": "2025-11-03T12:10:17.296Z",
+  "updated_at": "2025-11-17T07:52:05.068Z",
+  "comment": {
+    "text": "This text explains to users, specifically SaaS administrators, that the AI service is disabled, preventing chat processing. It guides them to enable AI features in the product settings to restore functionality; it appears within a screen indicating lack of access.",
+    "is_auto": true,
+    "updated_at": "2025-11-03T12:13:29.098Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 73,
+      "context": "productName: t(\"Common:ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // standalone/saas user\n .with([P._, false], () =>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

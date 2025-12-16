@@ -3,7 +3,7 @@
   "content": "Title",
   "content_en_sha1_hash": "768e0c1c69573fb588f61f1308a015c11468e05f",
   "created_at": "2025-05-19T21:30:49.298Z",
-  "updated_at": "2025-10-14T00:30:05.777Z",
+  "updated_at": "2025-10-27T16:14:33.320Z",
   "comment": {
     "text": "This translation key is used to display the title of a header or panel element. It appears as a label on buttons, checkboxes, and other UI elements in various applications, such as panels, sections, and settings pages. Translators should focus on translating this content to provide clear and consistent titles throughout the product.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 813,
+      "line_number": 823,
       "context": "const groupsOptions = [];\n \n const title = {\n id: \"sort-by_title\",\n key: \"title\",\n label: t(\"Common:Title\"),\n default: true,\n };\n \n const people = {\n id: \"sort-by_people\",",
       "module": "/packages/client"
     },

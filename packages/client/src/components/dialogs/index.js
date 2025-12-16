@@ -74,6 +74,7 @@ import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
 import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
 import ConnectAccountDialog from "./ConnectAccountDialog";
 import DisconnectAccountDialog from "./DisconnectAccountDialog";
+import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
 
 export {
   EmptyTrashDialog,
@@ -126,4 +127,5 @@ export {
   StorageTariffDeactiveted,
   ConnectAccountDialog,
   DisconnectAccountDialog,
+  CreateAgentDialog,
 };

@@ -2,6 +2,7 @@
   "Categories": "カテゴリー",
   "EmptyFormGalleryScreenDescription": "検索条件に一致する結果は見つかりませんでした",
   "ErrorViewDescription": "後で再試行してください",
+  "ErrorViewDescriptionNetworkError": "インターネット接続が見当たらないようです。",
   "SuggestChanges": "変更点のご提案",
   "TemplateInfo": "テンプレート情報",
   "ViewAllTemplates": "テンプレート一覧を見る"

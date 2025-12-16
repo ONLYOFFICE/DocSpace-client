@@ -2,6 +2,7 @@
   "Categories": "Kategórie",
   "EmptyFormGalleryScreenDescription": "Neboli nájdené žiadne výsledky zodpovedajúce vašej požiadavke",
   "ErrorViewDescription": "Prosím, skúste to znova neskôr",
+  "ErrorViewDescriptionNetworkError": "Zdá sa, že nie je k dispozícii pripojenie na internet.",
   "SuggestChanges": "Navrhnúť zmeny",
   "TemplateInfo": "Informácie o šablóne",
   "ViewAllTemplates": "Zobraziť všetky šablóny"

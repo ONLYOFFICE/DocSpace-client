@@ -2,6 +2,7 @@
   "Categories": "Kategorijas",
   "EmptyFormGalleryScreenDescription": "Nevarēja atrast jūsu vaicājumam atbilstošus rezultātus",
   "ErrorViewDescription": "Mēģiniet vēlreiz vēlāk",
+  "ErrorViewDescriptionNetworkError": "Šķiet, nav pieejams interneta savienojums.",
   "SuggestChanges": "Ieteikt izmaiņas",
   "TemplateInfo": "Informācija par veidni",
   "ViewAllTemplates": "Skatīt visas veidnes"

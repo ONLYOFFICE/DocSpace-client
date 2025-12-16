@@ -27,16 +27,16 @@
  */
 
 import React, { useRef } from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { SortByFieldName } from "../../../enums";
 
 import { TableHeader } from "./TableHeader";
 import type { TableHeaderProps } from "../Table.types";
 
-const COLUMN_STORAGE_NAME = "jest-table-header-column-storage";
-const COLUMN_INFO_PANEL_STORAGE_NAME = "jest-table-header-info-panel-storage";
+const COLUMN_STORAGE_NAME = "vitest-table-header-column-storage";
+const COLUMN_INFO_PANEL_STORAGE_NAME = "vitest-table-header-info-panel-storage";
 
 const TableHeaderWithContainerRef = (
   args: Omit<TableHeaderProps, "containerRef">,
@@ -104,7 +104,7 @@ const defaultProps = {
 
 describe("<TableHeader />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without errors", () => {

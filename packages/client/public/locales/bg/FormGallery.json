@@ -2,6 +2,7 @@
   "Categories": "Категории",
   "EmptyFormGalleryScreenDescription": "Не бяха намерени резултати, съвпадащи със заявката Ви",
   "ErrorViewDescription": "Молим да опитате отново по-късно",
+  "ErrorViewDescriptionNetworkError": "Изглежда няма интернет връзка",
   "SuggestChanges": "Предложи промени",
   "TemplateInfo": "Информация за шаблона",
   "ViewAllTemplates": "Прегледай всички шаблони"

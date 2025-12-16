@@ -2,6 +2,7 @@
   "Categories": "类别",
   "EmptyFormGalleryScreenDescription": "没有找到匹配查询的结果",
   "ErrorViewDescription": "请稍后再试",
+  "ErrorViewDescriptionNetworkError": "当前无法连接网络",
   "SuggestChanges": "提出修改建议",
   "TemplateInfo": "模板信息",
   "ViewAllTemplates": "查看模板大全"

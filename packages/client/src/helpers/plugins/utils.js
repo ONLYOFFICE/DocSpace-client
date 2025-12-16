@@ -31,6 +31,8 @@ import { Events } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./enums";
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryType } from "@docspace/shared/utils/common";
 
 export const messageActions = ({
   message,
@@ -211,6 +213,17 @@ export const getPluginUrl = (url, file) => {
     config.homepage,
     path,
     file,
+  );
+};
+
+export const isAIAgents = () => {
+  const categoryType = getCategoryType(window.location);
+
+  return (
+    categoryType === CategoryType.Chat ||
+    categoryType === CategoryType.AIAgent ||
+    categoryType === CategoryType.AIAgents ||
+    window.location.pathname.startsWith("/ai-agents")
   );
 };
 

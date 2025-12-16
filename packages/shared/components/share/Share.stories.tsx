@@ -93,6 +93,7 @@ const createDefaultProps = (): ShareProps => ({
       CreateRoomFrom: false,
       CopyLink: false,
       Embed: false,
+      Vectorization: false,
     },
     shared: true,
     thumbnailStatus: 0,

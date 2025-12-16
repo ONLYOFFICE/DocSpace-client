@@ -25,26 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { screen, act, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { Toast } from ".";
 import { toastr } from "./sub-components/Toastr";
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
 describe("<Toast />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // Clear any existing toasts and reset timers
     toastr.clear();
-    jest.clearAllTimers();
+    vi.clearAllTimers();
   });
 
   afterEach(() => {
     // Cleanup after each test
     act(() => {
       toastr.clear();
-      jest.runAllTimers();
+      vi.runAllTimers();
     });
   });
 
@@ -143,7 +143,7 @@ describe("<Toast />", () => {
     expect(screen.getByText("Persistent message")).toBeInTheDocument();
 
     act(() => {
-      jest.advanceTimersByTime(10000);
+      vi.advanceTimersByTime(10000);
     });
 
     expect(screen.getByText("Persistent message")).toBeInTheDocument();

@@ -247,6 +247,18 @@ const DropDown = ({
     }));
   }, [fixedDirection, isRTL, forwardedRef, directionX, directionY, manualY]);
 
+  const setDropDownRef = React.useCallback((node: HTMLDivElement | null) => {
+    dropDownRef.current = node;
+    
+    if (node && open) {
+      if (isDefaultMode) {
+        checkPositionPortal();
+      } else {
+        checkPosition();
+      }
+    }
+  }, [open, isDefaultMode, checkPositionPortal, checkPosition]);
+
   const renderDropDown = () => {
     const directionXStylesDisabled =
       isDefaultMode && forwardedRef?.current && !fixedDirection;
@@ -314,7 +326,7 @@ const DropDown = ({
         {isDefaultMode ? backDrop : null}
 
         <div
-          ref={dropDownRef}
+          ref={setDropDownRef}
           style={dropDownStyles}
           className={dropDownClasses}
           data-testid={dataTestId ?? "dropdown"}
@@ -355,10 +367,6 @@ const DropDown = ({
 
       if (isIOS && isMobile)
         window.visualViewport?.addEventListener("resize", resizeListener);
-
-      if (isDefaultMode) {
-        setTimeout(checkPositionPortal, 0);
-      } else checkPosition();
     } else {
       window.removeEventListener("resize", resizeListener);
 

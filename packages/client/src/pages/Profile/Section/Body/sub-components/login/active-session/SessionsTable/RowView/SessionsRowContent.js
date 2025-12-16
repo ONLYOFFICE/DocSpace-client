@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
+
 import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
@@ -34,19 +35,7 @@ import { RowContent } from "@docspace/shared/components/rows";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { globalColors } from "@docspace/shared/themes";
 
-import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
-
-const StyledRowContent = styled(RowContent)`
-  .rowMainContainer {
-    height: 100%;
-  }
-
-  .session-browser {
-    font-size: 14px;
-    font-weight: 600;
-    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-  }
-`;
+import styles from "../../active-sessions.module.scss";
 
 const SessionsRowContent = ({
   id,
@@ -62,13 +51,15 @@ const SessionsRowContent = ({
   locale,
 }) => {
   return (
-    <StyledRowContent
+    <RowContent
+      className={styles.rowContent}
       key={id}
       sectionWidth={sectionWidth}
       sideColor={theme.profile.activeSessions.tableCellColor}
     >
       <Text fontSize="14px" fontWeight="600" dataTestId="session_platform">
-        {platform} <span className="session-browser">{`(${browser})`}</span>
+        {platform}{" "}
+        <span className={styles.sessionBrowser}>{`(${browser})`}</span>
       </Text>
       {isMobile() && showTickIcon ? (
         <IconButton
@@ -89,7 +80,7 @@ const SessionsRowContent = ({
       <Text truncate containerWidth="160px" dataTestId="session_ip">
         {ip}
       </Text>
-    </StyledRowContent>
+    </RowContent>
   );
 };
 

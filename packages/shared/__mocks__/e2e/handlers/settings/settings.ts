@@ -1,3 +1,4 @@
+import { PATH_WITH_PARAMS } from "./../authentication/login";
 import {
   API_PREFIX,
   BASE_URL,
@@ -6,9 +7,15 @@ import {
   HEADER_PORTAL_DEACTIVATE_SETTINGS,
   HEADER_NO_STANDALONE_SETTINGS,
   HEADER_AUTHENTICATED_SETTINGS,
+  HEADER_ENABLED_JOIN_SETTINGS,
+  HEADER_ENABLE_ADM_MESS_SETTINGS,
+  HEADER_HCAPTCHA_SETTINGS,
+  HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS,
+  HEADER_PLUGINS_SETTINGS,
 } from "../../utils";
 
-const PATH = "settings";
+export const PATH = "settings";
+export const PATH_WITH_QUERY = `${PATH}?**`;
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
@@ -303,6 +310,23 @@ export const settingsAuth = {
   response: { ...settingsNoAuth.response, socketUrl: "123" },
 };
 
+export const settingAuthWithSocket = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, socketUrl: "/socket.io" },
+};
+
+export const settingsWithPlugins = {
+  ...settingsAuth,
+  response: {
+    ...settingsAuth.response,
+    plugins: {
+      enabled: true,
+      upload: true,
+      delete: true,
+    },
+  },
+};
+
 export const settingsNoAuthNoStandalone = {
   response: {
     trustedDomainsType: 0,
@@ -447,12 +471,35 @@ export const settingsPortalDeactivate = {
   response: { ...settingsNoAuth.response, tenantStatus: 1 },
 };
 
+export const settingsWithEnabledJoin = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, enabledJoin: true },
+};
+
+export const settingsWithEnableAdmMess = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, enableAdmMess: true },
+};
+
+export const settingsWithHCaptcha = {
+  ...settingsNoAuth,
+  response: {
+    ...settingsNoAuth.response,
+    recaptchaType: 3,
+    recaptchaPublicKey: "10000000-ffff-ffff-ffff-000000000001",
+  },
+};
+
 export const settings = (headers?: Headers): Response => {
   let isWizard = false;
   let isWizardWithAmi = false;
   let isPortalDeactivate = false;
   let isNoStandalone = false;
   let isAuthenticated = false;
+  let isEnableJoin = false;
+  let isEnableAdmMess = false;
+  let isHCaptcha = false;
+  let isPlugins = false;
 
   if (headers?.get(HEADER_WIZARD_SETTINGS)) {
     isWizard = true;
@@ -474,6 +521,22 @@ export const settings = (headers?: Headers): Response => {
     isAuthenticated = true;
   }
 
+  if (headers?.get(HEADER_ENABLED_JOIN_SETTINGS)) {
+    isEnableJoin = true;
+  }
+
+  if (headers?.get(HEADER_ENABLE_ADM_MESS_SETTINGS)) {
+    isEnableAdmMess = true;
+  }
+
+  if (headers?.get(HEADER_HCAPTCHA_SETTINGS)) {
+    isHCaptcha = true;
+  }
+
+  if (headers?.get(HEADER_PLUGINS_SETTINGS)) {
+    isPlugins = true;
+  }
+
   if (isWizard) return new Response(JSON.stringify(settingsWizzard));
   if (isWizardWithAmi)
     return new Response(JSON.stringify(settingsWizzardWithAmi));
@@ -481,7 +544,18 @@ export const settings = (headers?: Headers): Response => {
     return new Response(JSON.stringify(settingsPortalDeactivate));
   if (isNoStandalone)
     return new Response(JSON.stringify(settingsNoAuthNoStandalone));
-  if (isAuthenticated) return new Response(JSON.stringify(settingsAuth));
+  if (isAuthenticated) {
+    if (headers?.get(HEADER_AUTHENTICATED_WITH_SOCKET_SETTINGS)) {
+      return new Response(JSON.stringify(settingAuthWithSocket));
+    }
+    if (isPlugins) return new Response(JSON.stringify(settingsWithPlugins));
+    return new Response(JSON.stringify(settingsAuth));
+  }
+  if (isEnableJoin)
+    return new Response(JSON.stringify(settingsWithEnabledJoin));
+  if (isEnableAdmMess)
+    return new Response(JSON.stringify(settingsWithEnableAdmMess));
+  if (isHCaptcha) return new Response(JSON.stringify(settingsWithHCaptcha));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

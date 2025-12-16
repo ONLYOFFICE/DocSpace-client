@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Bookmarks } from ".";
 
 // Mock the CustomScrollbarsVirtualList component
-jest.mock("../../../../../scrollbar", () => ({
+vi.mock("../../../../../scrollbar", () => ({
   CustomScrollbarsVirtualList: ({
     children,
   }: {
@@ -46,10 +46,10 @@ describe("Bookmarks component", () => {
     { page: 10, description: "Chapter 3", level: 1, y: 300 },
   ];
 
-  const mockNavigate = jest.fn();
+  const mockNavigate = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders bookmarks list with correct accessibility attributes", () => {

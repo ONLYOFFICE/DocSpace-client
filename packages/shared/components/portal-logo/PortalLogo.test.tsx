@@ -1,4 +1,5 @@
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import {
   screen,
   fireEvent,
@@ -6,11 +7,10 @@ import {
   waitFor,
   render,
 } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import PortalLogo from "./PortalLogo";
 
-jest.mock("react-device-detect", () => ({
+vi.mock("react-device-detect", () => ({
   isMobileOnly: false,
 }));
 
@@ -74,7 +74,7 @@ describe("PortalLogo", () => {
 
   it("removes resize event listener on unmount", () => {
     const { unmount } = render(<PortalLogo isResizable />);
-    const removeEventListenerSpy = jest.spyOn(window, "removeEventListener");
+    const removeEventListenerSpy = vi.spyOn(window, "removeEventListener");
     unmount();
     expect(removeEventListenerSpy).toHaveBeenCalledWith(
       "resize",
@@ -83,7 +83,7 @@ describe("PortalLogo", () => {
   });
 
   it("does not add resize listener when isResizable is false", () => {
-    const addEventListenerSpy = jest.spyOn(window, "addEventListener");
+    const addEventListenerSpy = vi.spyOn(window, "addEventListener");
     render(<PortalLogo isResizable={false} />);
     expect(addEventListenerSpy).not.toHaveBeenCalledWith(
       "resize",

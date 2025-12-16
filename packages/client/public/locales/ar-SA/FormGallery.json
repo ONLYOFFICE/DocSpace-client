@@ -2,6 +2,7 @@
   "Categories": "فئات",
   "EmptyFormGalleryScreenDescription": "لا يمكن العثور على نتائج تطابق استعلامك",
   "ErrorViewDescription": "المحاولة مرة أخرى لاحقاً",
+  "ErrorViewDescriptionNetworkError": "يبدو أنه لا يوجد اتصال بالإنترنت",
   "SuggestChanges": "أقترح التغييرات",
   "TemplateInfo": "معلومات النموذج",
   "ViewAllTemplates": "إظهار كافة القوالب"

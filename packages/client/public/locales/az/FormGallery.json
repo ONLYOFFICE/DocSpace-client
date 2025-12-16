@@ -2,6 +2,7 @@
   "Categories": "Kateqoriyalar",
   "EmptyFormGalleryScreenDescription": "Sorğunuza uyğun nəticə tapılmadı",
   "ErrorViewDescription": "Zəhmət olmasa, bir az sonra yenə cəhd edin",
+  "ErrorViewDescriptionNetworkError": "Görünür ki, internet bağlantısı yoxdur",
   "SuggestChanges": "Dəyişikliklər təklif edin",
   "TemplateInfo": "Şablon məlumatı",
   "ViewAllTemplates": "Bütün şablonlara baxın"

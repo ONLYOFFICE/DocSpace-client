@@ -2,6 +2,7 @@
   "Categories": "ໝວດໝູ່",
   "EmptyFormGalleryScreenDescription": "ບໍ່ພົບຜົນການຊອກຫາທີ່ກົງກັບຄຳຊອກຫາຂອງເຈົ້າ",
   "ErrorViewDescription": "ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ",
+  "ErrorViewDescriptionNetworkError": "ເບິ່ງຄືວ່າບໍ່ມີການເຊື່ອມຕໍ່ອິນເຕີເນັດ",
   "SuggestChanges": "ແນະນຳການປ່ຽນແປງ",
   "TemplateInfo": "ຂໍ້ມູນແມ່ແບບ",
   "ViewAllTemplates": "ເບິ່ງແມ່ແບບທັງໝົດ"

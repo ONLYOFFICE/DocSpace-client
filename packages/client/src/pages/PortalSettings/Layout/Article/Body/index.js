@@ -145,27 +145,31 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["6-0"]);
       }
 
-      if (location.pathname.includes("developer")) {
+      if (location.pathname.includes("ai-settings")) {
         setSelectedKeys(["7-0"]);
       }
 
-      if (location.pathname.includes("delete-data")) {
+      if (location.pathname.includes("developer")) {
         setSelectedKeys(["8-0"]);
       }
 
-      if (location.pathname.includes("payments")) {
+      if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
+      }
+
+      if (location.pathname.includes("payments")) {
+        setSelectedKeys(["10-0"]);
       }
 
       if (
         location.pathname.includes("services") &&
         !location.pathname.includes("third-party-services")
       ) {
-        setSelectedKeys(["10-0"]);
+        setSelectedKeys(["11-0"]);
       }
 
       if (location.pathname.includes("bonus")) {
-        setSelectedKeys(["11-0"]);
+        setSelectedKeys(["12-0"]);
       }
     }
   }, [
@@ -241,6 +245,8 @@ const ArticleBodyContent = (props) => {
         return t("StorageManagement");
       case "Services":
         return t("Services");
+      case "AISettings":
+        return t("Settings:AISettings");
       default:
         throw new Error("Unexpected translation key");
     }

@@ -189,6 +189,18 @@ export const feedInfo = [
     actionType: FeedAction.Reorder,
   },
   //
+  // AGENTS
+  {
+    key: FeedActionKeys.AgentCreated,
+    targetType: FeedTarget.Agent,
+    actionType: FeedAction.Create,
+  },
+  {
+    key: FeedActionKeys.AgentRenamed,
+    targetType: FeedTarget.Agent,
+    actionType: FeedAction.Rename,
+  },
+  //
   // ROOM
   {
     key: FeedActionKeys.RoomCreated,
@@ -334,6 +346,11 @@ export const feedInfo = [
     key: FeedActionKeys.RoomInviteResend,
     targetType: FeedTarget.User,
     actionType: FeedAction.Invite,
+  },
+  {
+    key: FeedActionKeys.RoomChangeOwner,
+    targetType: FeedTarget.User,
+    actionType: FeedAction.CHANGE_OWNER,
   },
   //
   // GROUP

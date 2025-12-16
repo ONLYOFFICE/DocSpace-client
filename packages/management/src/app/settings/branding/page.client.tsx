@@ -46,7 +46,7 @@ import { WhiteLabelPage } from "./white-label/page.client";
 import { CompanyInfoPage } from "./company-info/page.client";
 import { AdditionalResourcesPage } from "./additional-resources/page.client";
 
-import { StyledBrandingPage } from "./page.styled";
+import styles from "./branding.module.scss";
 
 const baseUrl = "/settings";
 
@@ -105,7 +105,7 @@ const BrandingPage = ({
       />
     );
   return (
-    <StyledBrandingPage>
+    <div className={styles.wrapper}>
       <BrandNamePage
         brandName={whiteLabelText}
         isSettingPaid={isSettingPaid}
@@ -138,7 +138,7 @@ const BrandingPage = ({
         quota={quota}
         additionalResourcesData={additionalResources}
       />
-    </StyledBrandingPage>
+    </div>
   );
 };
 

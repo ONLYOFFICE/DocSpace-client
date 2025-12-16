@@ -33,12 +33,16 @@ import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
 import EmptyFilterRoomsLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg";
 import EmptyFilterRoomsDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.dark.svg";
 
+import EmptyFilterAIAgentsLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.ai.agents.light.svg";
+import EmptyFilterAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.ai.agents.dark.svg";
+
 import EmptyFilterFilesLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg";
 import EmptyFilterFilesDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg";
 
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import { SearchArea } from "@docspace/shared/enums";
 
 // import EmptyContainer from "./EmptyContainer";
 
@@ -50,21 +54,34 @@ const EmptyFilterContainer = ({
   isRooms,
   isArchiveFolder,
   isRoomsFolder,
+  isAIAgentsFolder,
   isRecentFolder,
   setClearSearch,
   theme,
   isPublicRoom,
   publicRoomKey,
   userId,
+  isInsideKnowledge,
+  isInsideResultStorage,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const descriptionText = isRooms
-    ? t("Common:EmptyFilterRoomsDescription")
-    : t("Common:EmptyFilterFilesDescription");
+  const descriptionText = isAIAgentsFolder
+    ? t("Common:EmptyFilterAIAgentsDescription")
+    : isRooms
+      ? t("Common:EmptyFilterRoomsDescription")
+      : t("Common:EmptyFilterFilesDescription");
 
   const getIconURL = () => {
+    if (isAIAgentsFolder) {
+      return theme.isBase ? (
+        <EmptyFilterAIAgentsLightIcon />
+      ) : (
+        <EmptyFilterAIAgentsDarkIcon />
+      );
+    }
+
     if (isRooms)
       return theme.isBase ? (
         <EmptyFilterRoomsLightIcon />
@@ -92,7 +109,7 @@ const EmptyFilterContainer = ({
       setClearSearch(true);
       return;
     }
-    if (isRoomsFolder) {
+    if (isRoomsFolder || isAIAgentsFolder) {
       const newFilter = RoomsFilter.clean();
 
       navigate(`${location.pathname}?${newFilter.toUrlParams(userId)}`);
@@ -100,6 +117,14 @@ const EmptyFilterContainer = ({
       const newFilter = FilesFilter.getDefault({ isRecentFolder });
 
       newFilter.folder = selectedFolderId;
+
+      if (isInsideResultStorage) {
+        newFilter.searchArea = SearchArea.ResultStorage;
+      }
+
+      if (isInsideKnowledge) {
+        newFilter.searchArea = SearchArea.Knowledge;
+      }
 
       if (isPublicRoom) {
         navigate(
@@ -143,7 +168,8 @@ export default inject(
     publicRoomStore,
     userStore,
   }) => {
-    const { isRoomsFolder, isArchiveFolder, isRecentFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isRecentFolder, isAIAgentsFolder } =
+      treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
@@ -154,11 +180,14 @@ export default inject(
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       isRooms,
       isArchiveFolder,
+      isAIAgentsFolder,
       isRoomsFolder,
       isRecentFolder,
       setClearSearch: filesStore.setClearSearch,
       theme: settingsStore.theme,
       userId: user?.id,
+      isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
+      isInsideResultStorage: selectedFolderStore.isInsideResultStorage,
 
       isPublicRoom,
       publicRoomKey,

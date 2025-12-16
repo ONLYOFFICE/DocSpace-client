@@ -33,9 +33,10 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { BACKUP_SERVICE } from "@docspace/shared/constants";
+
+import ServiceToggleSection from "../ServiceToggleSection";
+import ServiceContent from "../ServiceContent";
 
 import ClockIcon from "PUBLIC_DIR/images/icons/32/clock.svg";
 import ServiceIcon from "PUBLIC_DIR/images/icons/32/service.icon.svg";
@@ -125,43 +126,24 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
     >
       <ModalDialog.Header>{t("Common:Backup")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.backupToggleSection}>
-          <div className={styles.toggleButton}>
-            <ToggleButton
-              isChecked={isEnabled}
-              onChange={handleToggleChange}
-              dataTestId="service-backup-toggle-button"
-            />
-          </div>
-          <div className={styles.textContent}>
-            <div>
-              <Text fontSize="12px" fontWeight={600} as="span">
-                {t("Common:Backup")}
-              </Text>{" "}
-              <Text as="span" fontSize="12px">
-                {t("Payments:PerBackupWithBracket", {
-                  currency: formatWalletCurrency!(backupServicePrice!, 2),
-                })}
-              </Text>
-            </div>
-            <Text fontSize="12px" className={styles.backupDescription}>
-              {description}
-            </Text>
-          </div>
-        </div>
+        <ServiceToggleSection
+          isEnabled={isEnabled}
+          onToggle={handleToggleChange}
+          title={t("Common:Backup")}
+          priceText={t("Payments:PerBackupWithBracket", {
+            currency: formatWalletCurrency!(backupServicePrice!, 2),
+          })}
+          description={description}
+          testId="service-backup-toggle-button"
+        />
         <div className={styles.servicesList}>
           {serviceOptions.map((service) => (
-            <div key={service.id} className={styles.serviceContent}>
-              <div className={styles.iconContainer}>{service.icon}</div>
-              <div className={styles.serviceInfo}>
-                <Text fontSize="12px" fontWeight={600}>
-                  {service.title}
-                </Text>
-                <Text fontSize="10px" className={styles.backupDescription}>
-                  {service.description}
-                </Text>
-              </div>
-            </div>
+            <ServiceContent
+              key={service.id}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+            />
           ))}
         </div>
       </ModalDialog.Body>

@@ -2,6 +2,7 @@
   "Categories": "Thể loại",
   "EmptyFormGalleryScreenDescription": "Không tìm thấy kết quả nào phù hợp với truy vấn của bạn",
   "ErrorViewDescription": "Xin vui lòng thử lại sau",
+  "ErrorViewDescriptionNetworkError": "Có vẻ như không có kết nối Internet",
   "SuggestChanges": "Đề xuất thay đổi",
   "TemplateInfo": "Thông tin biểu mẫu",
   "ViewAllTemplates": "Xem tất cả các mẫu"

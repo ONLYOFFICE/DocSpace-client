@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
 import { SocialButtonsGroup } from ".";
 import type { SocialButtonProps } from "./SocialButtonsGroup.types";
@@ -36,7 +37,7 @@ describe("<SocialButtonsGroup />", () => {
       { provider: "facebook", url: "facebook.com", linked: false },
     ],
     t: (key: string) => key,
-    onClick: jest.fn(),
+    onClick: vi.fn(),
     isDisabled: false,
   };
 

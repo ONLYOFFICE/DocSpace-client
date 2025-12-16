@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { describe, it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
@@ -358,7 +359,7 @@ beforeAll(() => {
 });
 
 describe("Locales Tests", () => {
-  test("ParseJsonTest: Verify that there are no errors in parsing JSON files", () => {
+  it("ParseJsonTest: Verify that there are no errors in parsing JSON files", () => {
     const message = `File path = '${parseJsonErrors
       .map((e) => e.path)
       .join(", ")}' failed to parse with error: '${parseJsonErrors
@@ -367,7 +368,7 @@ describe("Locales Tests", () => {
     expect(parseJsonErrors.length, message).toBe(0);
   });
 
-  test("SingleKeyFilesTest: Verify that there are no translation files in the project that contain only a single key for the English language.", () => {
+  it("SingleKeyFilesTest: Verify that there are no translation files in the project that contain only a single key for the English language.", () => {
     const singleKeyTranslationFiles = translationFiles.filter(
       (t) => t.language === "en" && t.translations.length === 1
     );
@@ -379,7 +380,7 @@ describe("Locales Tests", () => {
     expect(singleKeyTranslationFiles.length, message).toBe(0);
   });
 
-  test("FullEnDublicatesTest: Verify that there are no duplicate key-value pairs in the English translation files.", () => {
+  it("FullEnDublicatesTest: Verify that there are no duplicate key-value pairs in the English translation files.", () => {
     const fullEnDuplicates = translationFiles
       .filter((file) => file.language === "en")
       .flatMap((item) => item.translations)
@@ -405,7 +406,7 @@ describe("Locales Tests", () => {
     expect(duplicatesArray.length, message).toBe(0);
   });
 
-  test("NotFoundKeysTest: Verify that all translation keys used in the JavaScript files are present in the English translation files.", () => {
+  it("NotFoundKeysTest: Verify that all translation keys used in the JavaScript files are present in the English translation files.", () => {
     const allEnKeys = translationFiles
       .filter((file) => file.language === "en")
       .flatMap((item) => item.translations)
@@ -429,7 +430,7 @@ describe("Locales Tests", () => {
     expect(notFoundJsKeys.length, message).toBe(0);
   });
 
-  test("UselessTranslationKeysTest: Verify that all translation keys present in the English translation files are actually used in the JavaScript files.", () => {
+  it("UselessTranslationKeysTest: Verify that all translation keys present in the English translation files are actually used in the JavaScript files.", () => {
     const allEnKeys = translationFiles
       .filter((file) => file.language === "en")
       .flatMap((item) => item.translations)
@@ -455,7 +456,7 @@ describe("Locales Tests", () => {
     expect(notFoundi18nKeys.length, message).toBe(0);
   });
 
-  test("NotTranslatedToastsTest: Verify that all toast messages in the application are properly translated.", () => {
+  it("NotTranslatedToastsTest: Verify that all toast messages in the application are properly translated.", () => {
     let message = `Next text not translated in toasts:\r\n\r\n`;
 
     let i = 0;
@@ -478,7 +479,7 @@ describe("Locales Tests", () => {
     expect(notTranslatedToasts.length, message).toBe(0);
   });
 
-  test("NotTranslatedPropsTest: Verify that all specified properties (such as title, placeholder, label, and text) in all clients are properly translated.", () => {
+  it("NotTranslatedPropsTest: Verify that all specified properties (such as title, placeholder, label, and text) in all clients are properly translated.", () => {
     let message = `Next text not translated props (title, placeholder, label, text):\r\n\r\n`;
 
     let i = 0;
@@ -501,7 +502,7 @@ describe("Locales Tests", () => {
     expect(notTranslatedProps.length, message).toBe(0);
   });
 
-  test("WrongTranslationVariablesTest: Verify that translation keys across different languages have consistent variables.", () => {
+  it("WrongTranslationVariablesTest: Verify that translation keys across different languages have consistent variables.", () => {
     let message = `Next keys have wrong or empty variables:\r\n\r\n`;
     const regVariables = new RegExp("\\{\\{([^\\{].?[^\\}]+)\\}\\}", "gm");
 
@@ -580,7 +581,7 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
-  test("WrongTranslationTagsTest: Verify that HTML tags within translation strings are consistent across different languages.", () => {
+  it("WrongTranslationTagsTest: Verify that HTML tags within translation strings are consistent across different languages.", () => {
     let message = `Next keys have wrong or empty translation's html tags:\r\n\r\n`;
     const regString = "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>";
     const regTags = new RegExp(regString, "gm");
@@ -652,7 +653,7 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
-  test("ForbiddenValueElementsTest: Verify that certain forbidden values are not present in the translation strings across different languages.", () => {
+  it("ForbiddenValueElementsTest: Verify that certain forbidden values are not present in the translation strings across different languages.", () => {
     let message = `Next keys have forbidden values \`${forbiddenElements.join(
       ","
     )}\`:\r\n\r\n`;
@@ -690,7 +691,7 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  test("ForbiddenKeysElementsTest: Verify that translation keys do not contain any forbidden elements in their names.", () => {
+  it("ForbiddenKeysElementsTest: Verify that translation keys do not contain any forbidden elements in their names.", () => {
     let message = `Next keys have forbidden elements in names \`${forbiddenElements.join(
       ","
     )}\`:\r\n\r\n`;
@@ -745,7 +746,7 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  test("EmptyValueKeysTest: Verify that there are no translation keys with empty values across different languages in the translation files.", () => {
+  it("EmptyValueKeysTest: Verify that there are no translation keys with empty values across different languages in the translation files.", () => {
     let message = `Next files have empty keys:\r\n\r\n`;
 
     let exists = false;
@@ -792,7 +793,7 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  test("NotFoundEnKey: No English key variants: Verify that there are no translation keys in languages other than English that are not present in the English translation files.", () => {
+  it("NotFoundEnKey: No English key variants: Verify that there are no translation keys in languages other than English that are not present in the English translation files.", () => {
     let message = `Next keys are not found in 'en' language:\r\n\r\n`;
 
     let exists = false;
@@ -946,7 +947,7 @@ describe("Locales Tests", () => {
   });
 
   const skipBaseLanguagesTest = process.env.SKIP_BASE_LANGUAGES_TEST === "true";
-  (skipBaseLanguagesTest ? test.skip : test)(
+  (skipBaseLanguagesTest ? it.skip : it)(
     `NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(
       ","
     )}) are properly translated.`,
@@ -1007,7 +1008,7 @@ describe("Locales Tests", () => {
     }
   );
 
-  test("IncorrectNamespaceUsageTest: Verify that translation keys are used with their correct namespace", () => {
+  it("IncorrectNamespaceUsageTest: Verify that translation keys are used with their correct namespace", () => {
     let message = "The following keys are using incorrect namespaces:\r\n\r\n";
     let incorrectUsages = [];
 
@@ -1066,7 +1067,7 @@ describe("Locales Tests", () => {
     expect(incorrectUsages.length, message).toBe(0);
   });
 
-  test("MissingNamespacesTest: i18n namespace files should exist in public/locales", () => {
+  it("MissingNamespacesTest: i18n namespace files should exist in public/locales", () => {
     let exists = false;
     let message = "";
     let i = 0;
@@ -1189,5 +1190,237 @@ describe("Locales Tests", () => {
     }
 
     expect(exists, message).toBe(false);
+  });
+
+  it("MissingTranslationVariablesTest: Verify that all required variables are passed when using translation keys with variables", () => {
+    let message = "The following translation keys are missing required variables:\r\n\r\n";
+    let missingVariables = [];
+
+    // Get all English translations with variables
+    const regVariables = new RegExp("\\{\\{([^\\{].?[^\\}]+)\\}\\}", "gm");
+    
+    const enTranslationsWithVariables = translationFiles
+      .filter((file) => file.language === "en")
+      .flatMap((file) =>
+        file.translations
+          .map((t) => {
+            const variables = [...t.value.matchAll(regVariables)].map((m) =>
+              m[1]?.trim().replace(", lowercase", "")
+            );
+            return {
+              key: `${file.namespace}:${t.key}`,
+              namespace: file.namespace,
+              translationKey: t.key,
+              value: t.value,
+              variables,
+            };
+          })
+          .filter((t) => t.variables.length > 0)
+      );
+
+    // Create a map for quick lookup
+    const variablesMap = new Map();
+    enTranslationsWithVariables.forEach((t) => {
+      variablesMap.set(t.key, t.variables);
+    });
+
+    // Pattern to find t() calls with variables object
+    // We need to manually parse to handle nested braces in template literals
+    const findTCallsWithVariables = (text) => {
+      const results = [];
+      const tCallPattern = /t\??\(["'`]([a-zA-Z0-9_.:/-]+)["'`]\s*,\s*\{/g;
+      
+      let match;
+      while ((match = tCallPattern.exec(text)) !== null) {
+        const key = match[1];
+        const startPos = match.index + match[0].length - 1; // Position of opening {
+        
+        // Find matching closing brace by counting nested braces
+        let braceCount = 1;
+        let endPos = startPos + 1;
+        let inString = false;
+        let stringChar = null;
+        let inTemplate = false;
+        
+        while (endPos < text.length && braceCount > 0) {
+          const char = text[endPos];
+          const prevChar = text[endPos - 1];
+          
+          // Handle string literals
+          if ((char === '"' || char === "'" || char === '`') && prevChar !== '\\') {
+            if (!inString) {
+              inString = true;
+              stringChar = char;
+              inTemplate = char === '`';
+            } else if (char === stringChar) {
+              inString = false;
+              stringChar = null;
+              inTemplate = false;
+            }
+          }
+          
+          // Count braces only outside strings, but include template literal braces
+          if (!inString || inTemplate) {
+            if (char === '{') {
+              braceCount++;
+            } else if (char === '}') {
+              braceCount--;
+            }
+          }
+          
+          endPos++;
+        }
+        
+        if (braceCount === 0) {
+          const variablesString = text.substring(startPos + 1, endPos - 1);
+          results.push({ key, variablesString, fullMatch: text.substring(match.index, endPos) });
+        }
+      }
+      
+      return results;
+    };
+
+    javascriptFiles.forEach((jsFile) => {
+      const jsFileText = fs.readFileSync(jsFile.path, "utf8");
+      const matches = findTCallsWithVariables(jsFileText);
+
+      matches.forEach((match) => {
+        const fullKey = match.key;
+        const variablesString = match.variablesString;
+        
+        // Parse the key (it might have namespace or not)
+        const keyParts = fullKey.split(":");
+        const hasNamespace = keyParts.length > 1;
+        const namespace = hasNamespace ? keyParts[0] : null;
+        const translationKey = hasNamespace ? keyParts[1] : keyParts[0];
+        
+        // Try to find the key in our map
+        let expectedVariables = variablesMap.get(fullKey);
+        
+        if (!expectedVariables && hasNamespace) {
+          // If namespace is specified, ONLY look in that namespace
+          // Don't fall back to searching in other namespaces
+          return; // Key not found in the specified namespace with variables
+        }
+        
+        if (!expectedVariables && !hasNamespace) {
+          // If no namespace specified, try to find by key only in any namespace
+          for (const [mapKey, vars] of variablesMap.entries()) {
+            if (mapKey.endsWith(`:${translationKey}`)) {
+              expectedVariables = vars;
+              break;
+            }
+          }
+        }
+
+        if (!expectedVariables) return; // Key not found in translations with variables
+
+        // Extract variable names from the object
+        // Handle both full syntax (key: value) and shorthand syntax (key)
+        const passedVariables = [];
+        
+        // Split by comma to get individual properties
+        const properties = variablesString.split(',').map(p => p.trim());
+        
+        for (const prop of properties) {
+          if (!prop) continue;
+          
+          // Check if it contains a colon (full syntax: key: value)
+          if (prop.includes(':')) {
+            const keyMatch = prop.match(/^(\w+)\s*:/);
+            if (keyMatch) {
+              passedVariables.push(keyMatch[1]);
+            }
+          } else {
+            // Shorthand syntax: just the key name
+            const keyMatch = prop.match(/^(\w+)/);
+            if (keyMatch) {
+              passedVariables.push(keyMatch[1]);
+            }
+          }
+        }
+
+        // Check if all expected variables are passed
+        const missingVars = expectedVariables.filter(
+          (v) => !passedVariables.includes(v)
+        );
+
+        if (missingVars.length > 0) {
+          missingVariables.push({
+            file: jsFile.path,
+            key: fullKey,
+            expectedVariables,
+            passedVariables,
+            missingVars,
+            line: match.fullMatch,
+          });
+        }
+      });
+    });
+
+    // Also check for t() calls WITHOUT variables object where variables are expected
+    const tCallWithoutVariablesPattern = /t\??\(["'`]([a-zA-Z0-9_.:/-]+)["'`]\s*\)/g;
+
+    javascriptFiles.forEach((jsFile) => {
+      const jsFileText = fs.readFileSync(jsFile.path, "utf8");
+      const matches = [...jsFileText.matchAll(tCallWithoutVariablesPattern)];
+
+      matches.forEach((match) => {
+        const fullKey = match[1];
+        
+        // Parse the key (it might have namespace or not)
+        const keyParts = fullKey.split(":");
+        const hasNamespace = keyParts.length > 1;
+        const namespace = hasNamespace ? keyParts[0] : null;
+        const translationKey = hasNamespace ? keyParts[1] : keyParts[0];
+        
+        // Try to find the key in our map
+        let expectedVariables = variablesMap.get(fullKey);
+        
+        if (!expectedVariables && hasNamespace) {
+          // If namespace is specified, ONLY look in that namespace
+          // Don't fall back to searching in other namespaces
+          return; // Key not found in the specified namespace with variables
+        }
+        
+        if (!expectedVariables && !hasNamespace) {
+          // If no namespace specified, try to find by key only in any namespace
+          for (const [mapKey, vars] of variablesMap.entries()) {
+            if (mapKey.endsWith(`:${translationKey}`)) {
+              expectedVariables = vars;
+              break;
+            }
+          }
+        }
+
+        if (expectedVariables && expectedVariables.length > 0) {
+          missingVariables.push({
+            file: jsFile.path,
+            key: fullKey,
+            expectedVariables,
+            passedVariables: [],
+            missingVars: expectedVariables,
+            line: match[0],
+          });
+        }
+      });
+    });
+
+    if (missingVariables.length > 0) {
+      let i = 1;
+      message += missingVariables
+        .map(
+          (item) =>
+            `${i++}. File: ${path.relative(BASE_DIR, item.file)}\n` +
+            `   Key: ${item.key}\n` +
+            `   Expected variables: [${item.expectedVariables.join(", ")}]\n` +
+            `   Passed variables: [${item.passedVariables.join(", ")}]\n` +
+            `   Missing variables: [${item.missingVars.join(", ")}]\n` +
+            `   Code: ${item.line}\n`
+        )
+        .join("\n");
+    }
+
+    expect(missingVariables.length, message).toBe(0);
   });
 });

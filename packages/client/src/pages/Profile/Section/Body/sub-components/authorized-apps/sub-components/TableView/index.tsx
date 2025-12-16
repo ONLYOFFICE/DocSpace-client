@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
@@ -10,7 +10,7 @@ import Row from "./Row";
 import Header from "./Header";
 
 import { TableViewProps } from "./TableView.types";
-import { TableWrapper } from "./TableView.styled";
+import styles from "../../authorized-apps.module.scss";
 
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `consentColumnsSize_ver-${TABLE_VERSION}`;
@@ -64,7 +64,8 @@ const TableView = ({
   );
 
   return (
-    <TableWrapper
+    <TableContainer
+      className={styles.tableWrapper}
       forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
       useReactWindow
     >
@@ -97,7 +98,7 @@ const TableView = ({
           />
         ))}
       </TableBody>
-    </TableWrapper>
+    </TableContainer>
   );
 };
 

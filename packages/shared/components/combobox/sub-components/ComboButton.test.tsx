@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { ComboButton } from "./ComboButton";
 import { ComboBoxSize } from "../ComboBox.enums";
@@ -38,19 +38,19 @@ describe("ComboButton", () => {
       key: 1,
       label: "Test Option",
     } as TOption,
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   };
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  test("renders without error with minimal props", () => {
+  it("renders without error with minimal props", () => {
     render(<ComboButton {...baseProps} />);
     expect(screen.getByText("Test Option")).toBeInTheDocument();
   });
 
-  test("handles click events", async () => {
+  it("handles click events", async () => {
     const user = userEvent.setup();
     render(<ComboButton {...baseProps} />);
     const button = screen.getByText("Test Option").closest(".combo-button");
@@ -59,13 +59,13 @@ describe("ComboButton", () => {
     expect(baseProps.onClick).toHaveBeenCalledTimes(1);
   });
 
-  test("renders disabled state correctly", () => {
+  it("renders disabled state correctly", () => {
     render(<ComboButton {...baseProps} isDisabled />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toHaveAttribute("aria-disabled", "true");
   });
 
-  test("renders with different sizes", () => {
+  it("renders with different sizes", () => {
     const { rerender } = render(
       <ComboButton {...baseProps} size={ComboBoxSize.base} />,
     );
@@ -78,42 +78,42 @@ describe("ComboButton", () => {
     expect(screen.getByText("Test Option")).toBeInTheDocument();
   });
 
-  test("renders with loading state", () => {
+  it("renders with loading state", () => {
     render(<ComboButton {...baseProps} isLoading />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toBeInTheDocument();
   });
 
-  test("renders with modern view", () => {
+  it("renders with modern view", () => {
     render(<ComboButton {...baseProps} modernView />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toHaveStyle({ border: "none" });
   });
 
-  test("renders with open state", () => {
+  it("renders with open state", () => {
     render(<ComboButton {...baseProps} isOpen />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toHaveAttribute("aria-expanded", "true");
   });
 
-  test("renders with plus badge", () => {
+  it("renders with plus badge", () => {
     render(<ComboButton {...baseProps} plusBadgeValue={5} />);
     expect(screen.getByText("+5")).toBeInTheDocument();
   });
 
-  test("renders without border", () => {
+  it("renders without border", () => {
     render(<ComboButton {...baseProps} noBorder />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toHaveStyle({ border: "none" });
   });
 
-  test("renders with custom tab index", () => {
+  it("renders with custom tab index", () => {
     render(<ComboButton {...baseProps} tabIndex={1} />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     expect(button).toHaveAttribute("tabindex", "1");
   });
 
-  test("renders badge type correctly", () => {
+  it("renders badge type correctly", () => {
     const props = {
       ...baseProps,
       type: "badge" as TCombobox,
@@ -129,7 +129,7 @@ describe("ComboButton", () => {
     expect(screen.getByText("Test Option")).toBeInTheDocument();
   });
 
-  test("renders descriptive type correctly", () => {
+  it("renders descriptive type correctly", () => {
     const props = {
       ...baseProps,
       type: "descriptive" as TCombobox,
@@ -144,7 +144,7 @@ describe("ComboButton", () => {
     expect(screen.getByText("Test Description")).toBeInTheDocument();
   });
 
-  test("renders with advanced options", () => {
+  it("renders with advanced options", () => {
     render(<ComboButton {...baseProps} withAdvancedOptions />);
     const button = screen.getByText("Test Option").closest(".combo-button");
     if (!button) throw new Error("Button not found");
@@ -152,7 +152,7 @@ describe("ComboButton", () => {
     expect(arrowIcon).toBeInTheDocument();
   });
 
-  test("renders with custom icon", () => {
+  it("renders with custom icon", () => {
     const mockIcon = "test-icon.svg";
     render(<ComboButton {...baseProps} comboIcon={mockIcon} />);
     const button = screen.getByText("Test Option").closest(".combo-button");
@@ -161,7 +161,7 @@ describe("ComboButton", () => {
     expect(expanderIcon).toBeInTheDocument();
   });
 
-  test("renders with scaled option", () => {
+  it("renders with scaled option", () => {
     render(<ComboButton {...baseProps} scaled />);
     expect(screen.getByText("Test Option")).toBeInTheDocument();
   });

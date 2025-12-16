@@ -2,6 +2,7 @@
   "Categories": "Categorieën",
   "EmptyFormGalleryScreenDescription": "Er zijn geen resultaten gevonden die aan uw zoekopdracht voldoen",
   "ErrorViewDescription": "Probeer het later opnieuw",
+  "ErrorViewDescriptionNetworkError": "Het lijkt erop dat er geen internetverbinding is.",
   "SuggestChanges": "Wijzigingen voorstellen",
   "TemplateInfo": "Sjabloon info",
   "ViewAllTemplates": "Bekijk alle sjablonen"

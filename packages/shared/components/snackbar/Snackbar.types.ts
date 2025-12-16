@@ -49,14 +49,6 @@ export type SnackbarProps = {
    */
   backgroundImg?: string;
   /**
-   * Specifies the background color.
-   */
-  backgroundColor?: string;
-  /**
-   * Specifies the text color.
-   */
-  textColor?: string;
-  /**
    * Displays the icon.
    */
   showIcon?: boolean;

@@ -2,6 +2,7 @@
   "Categories": "Categorias",
   "EmptyFormGalleryScreenDescription": "Nenhum resultado correspondente à sua consulta foi encontrado",
   "ErrorViewDescription": "Por favor, tente novamente mais tarde",
+  "ErrorViewDescriptionNetworkError": "Parece que não há conexão com a Internet",
   "SuggestChanges": "Sugerir alterações",
   "TemplateInfo": "Informação do modelo",
   "ViewAllTemplates": "Ver todos os modelos"

@@ -93,7 +93,6 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const getRestrictedOptions = () => {
     const list: string[] = [];
     if (filteredOpt) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       Object.entries(filteredOpt).forEach(([_, value]) => {
         if (value.isWrite.isChecked) {
           list.push(value.isWrite.name);

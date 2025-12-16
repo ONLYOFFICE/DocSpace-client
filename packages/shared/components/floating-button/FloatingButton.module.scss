@@ -43,7 +43,8 @@
     border: 2px solid transparent;
     border-radius: 50%;
     opacity: 1;
-    background-image: linear-gradient(
+    background-image:
+      linear-gradient(
         var(--color-scheme-main-accent),
         var(--color-scheme-main-accent)
       ),
@@ -62,7 +63,8 @@
     &.withProgress {
       animation: none;
       transition: all 0.3s ease-out;
-      background-image: linear-gradient(
+      background-image:
+        linear-gradient(
           var(--color-scheme-main-accent),
           var(--color-scheme-main-accent)
         ),
@@ -158,14 +160,6 @@
   height: 12px;
   inset-inline-start: 20px;
   top: 0px;
-
-  &.alert {
-    svg {
-      path {
-        fill: var(--status-icon-color-negative) !important;
-      }
-    }
-  }
 
   &.complete {
     svg {

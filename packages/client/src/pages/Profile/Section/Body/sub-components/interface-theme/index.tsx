@@ -38,7 +38,7 @@ import { hideLoader, showLoader } from "@docspace/shared/utils/common";
 import { TColorScheme } from "@docspace/shared/themes";
 
 import ThemePreview from "./ThemePreview";
-import { StyledWrapperInterfaceTheme } from "./InterfaceTheme.styled";
+import styles from "./interface-theme.module.scss";
 
 type InterfaceThemeProps = {
   theme?: ThemeKeys;
@@ -112,21 +112,21 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
     : t("Profile:SystemThemeDescription");
 
   return (
-    <StyledWrapperInterfaceTheme>
+    <div className={styles.interfaceTheme}>
       <div>
         <Checkbox
-          className="system-theme-checkbox"
+          className={styles.systemThemeCheckbox}
           value={ThemeKeys.SystemStr}
           label={systemThemeLabel}
           isChecked={isSystemTheme}
           onChange={onChangeSystemTheme}
           dataTestId="system_theme_checkbox"
         />
-        <Text as="div" className="system-theme-description">
+        <Text as="div" className={styles.systemThemeDescription}>
           {systemThemeDescriptionLabel}
         </Text>
       </div>
-      <div className="themes-container">
+      <div className={styles.themesContainer}>
         <ThemePreview
           label={t("LightTheme")}
           theme="Light"
@@ -155,7 +155,7 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
         />
       </div>
 
-      <div className="mobile-themes-container">
+      <div className={styles.mobileThemesContainer}>
         <RadioButtonGroup
           orientation="vertical"
           name="interface-theme"
@@ -177,7 +177,7 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
           isDisabled={false}
         />
       </div>
-    </StyledWrapperInterfaceTheme>
+    </div>
   );
 };
 

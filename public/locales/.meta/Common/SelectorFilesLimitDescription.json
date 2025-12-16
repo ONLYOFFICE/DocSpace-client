@@ -1,0 +1,28 @@
+{
+  "key_path": "SelectorFilesLimitDescription",
+  "content": "When uploading a large amount of data, the context may be partially truncated, which can reduce the accuracy of responses. It’s recommended to limit the number of files and their total size.",
+  "content_en_sha1_hash": "dce1181ee7a007698739a58027258d8d7383988c",
+  "created_at": "2025-11-13T07:57:55.565Z",
+  "updated_at": "2025-11-13T08:04:06.201Z",
+  "comment": {
+    "text": "This text explains a limit on the number of files that can be selected for upload. It appears in the file selection interface to inform users that uploading too many files might reduce the quality of responses. Translators should focus on conveying the impact of file limits on response accuracy.",
+    "is_auto": true,
+    "updated_at": "2025-11-13T08:04:06.201Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/Attachment.tsx",
+      "line_number": 171,
+      "context": "maxSelectedItems={CHAT_MAX_FILE_COUNT}\n infoBarData={{\n title: t(\"Common:SelectorFilesLimit\", { count: CHAT_MAX_FILE_COUNT }),\n icon: AttachmentReactSvgUrl,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"Common:SelectorFilesLimitDescription\"),\n }}\n renderInPortal\n />\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

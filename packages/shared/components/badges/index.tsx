@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import equal from "fast-deep-equal";
 import React, { useMemo, useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
@@ -52,7 +53,7 @@ import { Text } from "../text";
 import { Link, LinkTarget, LinkType } from "../link";
 import { Badge } from "../badge";
 
-import { RoomsType, ShareAccessRights } from "../../enums";
+import { RoomsType, ShareAccessRights, VectorizationStatus } from "../../enums";
 import { globalColors } from "../../themes";
 
 import {
@@ -68,6 +69,7 @@ import {
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
 import { IconButton } from "../icon-button";
+import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
 const BadgeWrapper = ({
   onClick,
@@ -126,6 +128,7 @@ const Badges = ({
   className,
   isExtsCustomFilter,
   customFilterExternalLink,
+  onRetryVectorization,
   onClickLock,
   onClickFavorite,
   isPublicRoom,
@@ -143,9 +146,11 @@ const Badges = ({
     new: newCount,
     hasDraft,
     security,
+    vectorizationStatus,
     lockedBy,
     locked,
     isFavorite,
+    isAIAgent,
     // startFilling,
   } = item;
 
@@ -185,6 +190,7 @@ const Badges = ({
   const unpinIconProps = {
     "data-id": id,
     "data-action": "unpin",
+    "data-isaiagent": isAIAgent,
   };
 
   const commonBadgeProps = {
@@ -231,6 +237,8 @@ const Badges = ({
     !isArchiveFolder &&
     !isTile;
 
+  const hasRetryVectorizationAccess =
+    security && "Vectorization" in security && security.Vectorization;
   const lockedByUser = lockedBy ?? "";
 
   const canLock = security && "Lock" in security ? security.Lock : undefined;
@@ -267,6 +275,21 @@ const Badges = ({
       ) : null}
     </>
   );
+
+  const preparingForAITooltipId = `preparing-for-ai-tooltip-${id}`;
+
+  const getPreparingForAITooltipContent = () => {
+    return (
+      <div>
+        <Text fontWeight={600} fontSize="12px" lineHeight="16px">
+          {t("Common:PreparingForAI")}
+        </Text>
+        <Text fontSize="12px" lineHeight="16px">
+          {t("Common:PreparingForAIInfo")}
+        </Text>
+      </div>
+    );
+  };
 
   const wrapperCommonClasses = classNames(styles.badges, className, "badges", {
     [styles.tableView]: viewAs === "table",
@@ -465,6 +488,49 @@ const Badges = ({
           />
         </>
       ) : null}
+
+      {vectorizationStatus === VectorizationStatus.InProgress ? (
+        <>
+          <BadgeWrapper isTile={isTile}>
+            <Badge
+              noHover
+              isVersionBadge
+              className={classNames(
+                styles.versionBadge,
+                "badge-version badge-version-current tablet-badge icons-group",
+              )}
+              backgroundColor={theme.filesBadges.badgeBackgroundColor}
+              label={t("Common:Preparing")}
+              borderRadius="50px"
+              color={theme.filesBadges.color}
+              fontSize="9px"
+              fontWeight={700}
+              data-tooltip-id={preparingForAITooltipId}
+            />
+          </BadgeWrapper>
+          <Tooltip
+            id={preparingForAITooltipId}
+            className="not-selectable"
+            getContent={getPreparingForAITooltipContent}
+            place="bottom-start"
+            clickable
+            maxWidth="302px"
+            openOnClick={isMobileDevice}
+          />
+        </>
+      ) : null}
+
+      {!isTile && vectorizationStatus === VectorizationStatus.Failed ? (
+        <FailedVectorizationBadge
+          className={classNames(
+            styles.iconBadge,
+            "badge tablet-badge icons-group",
+          )}
+          size={tabletViewBadge ? "medium" : "small"}
+          onRetryVectorization={onRetryVectorization}
+          withRetryVectorization={hasRetryVectorizationAccess}
+        />
+      ) : null}
     </div>
   ) : (
     <div
@@ -557,4 +623,4 @@ const Badges = ({
   );
 };
 
-export default Badges;
+export default React.memo(Badges, equal);

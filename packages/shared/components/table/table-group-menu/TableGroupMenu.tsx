@@ -24,12 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
+import { FC, memo, useCallback } from "react";
+import equal from "fast-deep-equal";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
+
+import { EMPTY_ARRAY, EMPTY_OBJECT, FUNCTION_EMPTY } from "../../../constants";
 
 import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
@@ -38,11 +42,26 @@ import { IconButton } from "../../icon-button";
 import { Scrollbar } from "../../scrollbar";
 
 import { GroupMenuItem } from "../sub-components/group-menu-item";
+import type { TableGroupMenuProps, TGroupMenuProps } from "../Table.types";
 
-import { TableGroupMenuProps } from "../Table.types";
 import styles from "./TableGroupMenu.module.scss";
 
-const TableGroupMenu = (props: TableGroupMenuProps) => {
+const GroupMenu: FC<TGroupMenuProps> = memo(({ headerMenu, isBlocked }) => {
+  return (
+    <Scrollbar className={styles.scrollBar}>
+      {headerMenu.map((item) => (
+        <GroupMenuItem
+          key={item.id || item.label}
+          item={item}
+          isBlocked={isBlocked}
+          dataTestId={`table_group_menu_item_${item.id}`}
+        />
+      ))}
+    </Scrollbar>
+  );
+}, equal);
+
+const TableGroupMenu = memo((props: TableGroupMenuProps) => {
   const {
     isChecked,
     isIndeterminate,
@@ -62,9 +81,10 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
     onClick,
   } = props;
 
-  const onCheckboxChange = () => {
+  const onCheckboxChange = useCallback(() => {
     onChange?.(!isChecked);
-  };
+  }, [isChecked, onChange]);
+
   const { t } = useTranslation("Common");
 
   const toggleIconColor = isInfoPanelVisible ? "accent" : undefined;
@@ -114,13 +134,13 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           noBorder
           advancedOptions={checkboxOptions}
           className={classNames(styles.combobox, "not-selectable")}
-          options={[]}
-          selectedOption={{} as TOption}
+          options={EMPTY_ARRAY}
+          selectedOption={EMPTY_OBJECT as TOption}
           manualY="42px"
           manualX="-32px"
           title={t("Common:TitleSelectFile")}
           isMobileView={isMobileView}
-          onSelect={() => {}}
+          onSelect={FUNCTION_EMPTY}
           dataTestId="table_group_menu_combobox"
           withBackground={isMobileView}
         />
@@ -131,16 +151,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           "table-container_group-menu-separator",
         )}
       />
-      <Scrollbar className={styles.scrollBar}>
-        {headerMenu.map((item) => (
-          <GroupMenuItem
-            key={item.id || item.label}
-            item={item}
-            isBlocked={isBlocked}
-            dataTestId={`table_group_menu_item_${item.id}`}
-          />
-        ))}
-      </Scrollbar>
+      <GroupMenu headerMenu={headerMenu} isBlocked={isBlocked} />
       {isCloseable ? (
         <div className={styles.tableHeaderIcon}>
           <IconButton
@@ -189,6 +200,6 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
       ) : null}
     </div>
   );
-};
+}, equal);
 
 export { TableGroupMenu };

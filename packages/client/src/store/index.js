@@ -87,8 +87,13 @@ import EditGroupStore from "./contacts/EditGroupStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
+import AiRoomStore from "./AiRoomStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
+import AISettingsStore from "./portal-settings/AISettingsStore";
+import CreateEditAgentStore from "./CreateEditAgentStore";
+
+const aiRoomStore = new AiRoomStore();
 
 import TelegramStore from "./TelegramStore";
 
@@ -174,6 +179,7 @@ const filesStore = new FilesStore(
   currentTariffStatusStore,
   settingsStore,
   indexingStore,
+  aiRoomStore,
 );
 
 const guidanceStore = new GuidanceStore();
@@ -204,6 +210,7 @@ const dialogsStore = new DialogsStore(
   filesStore,
   selectedFolderStore,
   versionHistoryStore,
+  infoPanelStore,
 );
 
 const profileActionsStore = new ProfileActionsStore(
@@ -243,6 +250,7 @@ const uploadDataStore = new UploadDataStore(
   primaryProgressDataStore,
   dialogsStore,
   filesSettingsStore,
+  aiRoomStore,
 );
 
 const filesActionsStore = new FilesActionsStore(
@@ -264,6 +272,7 @@ const filesActionsStore = new FilesActionsStore(
   currentQuotaStore,
   indexingStore,
   versionHistoryStore,
+  aiRoomStore,
 );
 
 mediaViewerDataStore.filesActionsStore = filesActionsStore;
@@ -338,6 +347,18 @@ const createEditRoomStore = new CreateEditRoomStore(
   avatarEditorDialogStore,
 );
 
+const createEditAgentStore = new CreateEditAgentStore(
+  filesStore,
+  filesActionsStore,
+  selectedFolderStore,
+  tagsStore,
+  settingsStore,
+  currentQuotaStore,
+  clientLoadingStore,
+  dialogsStore,
+  avatarEditorDialogStore,
+);
+
 const webhooksStore = new WebhooksStore(settingsStore);
 const importAccountsStore = new ImportAccountsStore(
   currentQuotaStore,
@@ -360,6 +381,7 @@ const editGroupStore = new EditGroupStore(peopleStore);
 
 const brandingStore = new BrandingStore(settingsStore);
 
+const aiSettingsStore = new AISettingsStore();
 const telegramStore = new TelegramStore();
 
 const store = {
@@ -426,7 +448,10 @@ const store = {
 
   guidanceStore,
 
+  aiRoomStore,
+  aiSettingsStore,
   telegramStore,
+  createEditAgentStore,
 };
 
 export default store;

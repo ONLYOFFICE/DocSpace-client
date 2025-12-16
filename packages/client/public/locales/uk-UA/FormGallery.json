@@ -2,6 +2,7 @@
   "Categories": "Категорії",
   "EmptyFormGalleryScreenDescription": "Результатів, що відповідають вашому запиту, не знайдено",
   "ErrorViewDescription": "Повторіть спробу пізніше",
+  "ErrorViewDescriptionNetworkError": "Здається, немає підключення до Інтернету",
   "SuggestChanges": "Запропонувати зміни",
   "TemplateInfo": "Інформація про шаблон",
   "ViewAllTemplates": "Подивитися всі шаблони"

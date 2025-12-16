@@ -2,6 +2,7 @@
   "Categories": "Kategorije",
   "EmptyFormGalleryScreenDescription": "Ni bilo mogoče najti rezultatov, ki bi ustrezali vaši poizvedbi",
   "ErrorViewDescription": "Prosimo, poskusite kasneje",
+  "ErrorViewDescriptionNetworkError": "Zdi se, da interneta ni na voljo",
   "SuggestChanges": "Predlagaj spremembe",
   "TemplateInfo": "Informacije o predlogi",
   "ViewAllTemplates": "Poglej vse predloge"

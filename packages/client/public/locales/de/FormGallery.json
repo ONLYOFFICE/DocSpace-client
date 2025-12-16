@@ -2,6 +2,7 @@
   "Categories": "Kategorien",
   "EmptyFormGalleryScreenDescription": "Es konnten keine Ergebnisse gefunden werden, die Ihrer Anfrage entsprechen",
   "ErrorViewDescription": "Bitte versuchen Sie es später noch einmal",
+  "ErrorViewDescriptionNetworkError": "Anscheinend ist keine Internetverbindung verfügbar",
   "SuggestChanges": "Änderungen vorschlagen",
   "TemplateInfo": "Informationen zur Vorlage",
   "ViewAllTemplates": "Alle Vorlagen ansehen"

@@ -2,6 +2,7 @@
   "Categories": "Kategorie",
   "EmptyFormGalleryScreenDescription": "Nebyly nalezeny žádné výsledky odpovídající vašemu dotazu",
   "ErrorViewDescription": "Zkuste to prosím později",
+  "ErrorViewDescriptionNetworkError": "Zdá se, že není k dispozici připojení k internetu.",
   "SuggestChanges": "Navrhnout změny",
   "TemplateInfo": "Informace o šabloně",
   "ViewAllTemplates": "Zobrazit všechny šablony"

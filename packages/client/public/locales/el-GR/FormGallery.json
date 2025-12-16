@@ -2,6 +2,7 @@
   "Categories": "Κατηγορίες",
   "EmptyFormGalleryScreenDescription": "Δεν βρέθηκαν αποτελέσματα που να ταιριάζουν με το ερώτημά σας",
   "ErrorViewDescription": "Προσπαθήστε ξανά αργότερα",
+  "ErrorViewDescriptionNetworkError": "Φαίνεται ότι δεν υπάρχει σύνδεση στο διαδίκτυο",
   "SuggestChanges": "Προτείνετε αλλαγές",
   "TemplateInfo": "Πληροφορίες προτύπου",
   "ViewAllTemplates": "Προβολή όλων των προτύπων"

@@ -2,6 +2,7 @@
   "Categories": "Categorii",
   "EmptyFormGalleryScreenDescription": "Nu a putut fi găsit niciun rezultat care să corespundă interogării dvs",
   "ErrorViewDescription": "Încercați din nou mai târziu.",
+  "ErrorViewDescriptionNetworkError": "Se pare că nu aveți conexiune la Internet.",
   "SuggestChanges": "Propuneri privind modificări",
   "TemplateInfo": "Informații despre șablon",
   "ViewAllTemplates": "Afișează toate șabloanele"

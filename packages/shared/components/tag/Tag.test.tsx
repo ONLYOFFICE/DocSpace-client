@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Tag } from ".";
 

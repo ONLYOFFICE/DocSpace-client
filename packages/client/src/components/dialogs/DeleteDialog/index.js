@@ -62,7 +62,10 @@ const DeleteDialogComponent = (props) => {
     isPrivacyFolder,
     isRecycleBinFolder,
     isRoomDelete,
+    isAIAgentChatDelete,
+
     setIsRoomDelete,
+    setIsAIAgentChatDelete,
     deleteRoomsAction,
     isPersonalRoom,
     isSharedWithMeFolderRoot,
@@ -71,7 +74,9 @@ const DeleteDialogComponent = (props) => {
     selection: selectionProps,
     onRemoveSharedFilesOrFolder,
     setUnsubscribe,
+    isAIAgentsFolderRoot,
   } = props;
+
   const [isChecked, setIsChecked] = useState(false);
 
   const selection = useMemo(
@@ -83,6 +88,7 @@ const DeleteDialogComponent = (props) => {
   );
 
   const isTemplate = selection[0]?.isTemplate;
+  const isAIAgent = selection[0]?.isAIAgent;
 
   const onClose = () => {
     if (
@@ -95,6 +101,11 @@ const DeleteDialogComponent = (props) => {
     setBufferSelection(null);
     setRemoveMediaItem(null);
     setIsRoomDelete(false);
+    setIsAIAgentChatDelete({
+      visible: false,
+      itemName: "",
+      onDeleteAction: null,
+    });
     setDeleteDialogVisible(false);
     setUnsubscribe(false);
   };
@@ -125,8 +136,12 @@ const DeleteDialogComponent = (props) => {
 
   const onDeleteRoom = async () => {
     const translations = {
-      successRemoveRoom: t("Files:RoomRemoved"),
-      successRemoveRooms: t("Files:RoomsRemoved"),
+      successRemoveRoom: isAIAgent
+        ? t("Files:AgentRemoved")
+        : t("Files:RoomRemoved"),
+      successRemoveRooms: isAIAgent
+        ? t("Files:AgentsRemoved")
+        : t("Files:RoomsRemoved"),
     };
 
     if (isTemplate) {
@@ -143,8 +158,18 @@ const DeleteDialogComponent = (props) => {
     await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
   };
 
+  const onDeleteAIAgentChat = () => {
+    isAIAgentChatDelete.onDeleteAction();
+    onClose();
+  };
+
   const onDeleteAction = useCallback(() => {
-    if (isRoomDelete || isTemplate) {
+    if (isAIAgentChatDelete.visible) {
+      onDeleteAIAgentChat();
+      return;
+    }
+
+    if (isRoomDelete || isTemplate || isAIAgent) {
       if (!isChecked) return;
       onDeleteRoom();
       return;
@@ -158,6 +183,7 @@ const DeleteDialogComponent = (props) => {
     onDelete();
   }, [
     isRoomDelete,
+    isAIAgent,
     isTemplate,
     isChecked,
     onDeleteRoom,
@@ -187,11 +213,12 @@ const DeleteDialogComponent = (props) => {
       return t("Common:Delete");
     }
 
-    if (isRoomDelete) {
+    if (isRoomDelete || isAIAgent) {
       return t("Common:DeletePermanently");
     }
 
-    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverButton");
+    if (isRecycleBinFolder || isAIAgentChatDelete.visible)
+      return t("EmptyTrashDialog:DeleteForeverButton");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:OKButton");
@@ -202,6 +229,14 @@ const DeleteDialogComponent = (props) => {
   };
 
   const getDialogTitle = () => {
+    if (isAIAgentChatDelete.visible) {
+      return t("DeleteDialog:DeleteAIAgentChatTitle");
+    }
+
+    if (isAIAgent) {
+      return t("DeleteDialog:DeleteAIAgentTitle");
+    }
+
     if (isTemplate) {
       return `${t("Files:DeleteTemplate")}?`;
     }
@@ -232,25 +267,37 @@ const DeleteDialogComponent = (props) => {
     isRoom,
     isTemplatesFolder,
     isSharedWithMeFolderRoot,
+    isAIAgent,
+    isAIAgentsFolderRoot,
     unsubscribe,
+    isAIAgentChatDelete,
   );
 
   const title = getDialogTitle();
   const accessButtonLabel = getAccessButtonLabel();
 
   const isDisabledAccessButton =
-    isRoomDelete || isTemplate ? !isChecked : !selection.length;
+    isRoomDelete || isTemplate || isAIAgent ? !isChecked : !selection.length;
 
   return (
-    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
+    <StyledModalWrapper
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+      dataTestId="delete-dialog"
+    >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>
-        {isRoomDelete || isTemplate ? (
+        {isRoomDelete || isTemplate || isAIAgent ? (
           <Checkbox
             style={{ marginTop: "16px" }}
             label={
-              isTemplate ? t("DeleteTemplateWarning") : t("DeleteRoomWarning")
+              isAIAgent
+                ? t("DeleteAIAgentWarning")
+                : isTemplate
+                  ? t("DeleteTemplateWarning")
+                  : t("DeleteRoomWarning")
             }
             isChecked={isChecked}
             onChange={() => setIsChecked(!isChecked)}
@@ -316,6 +363,7 @@ export default inject(
       isRoom,
       isTemplatesFolderRoot,
       isSharedWithMeFolderRoot,
+      isAIAgentsFolderRoot,
     } = treeFoldersStore;
 
     const {
@@ -327,6 +375,8 @@ export default inject(
       isRoomDelete,
       setIsRoomDelete,
       setUnsubscribe,
+      isAIAgentChatDelete,
+      setIsAIAgentChatDelete,
     } = dialogsStore;
 
     const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
@@ -359,6 +409,9 @@ export default inject(
       isTemplatesFolder: isTemplatesFolderRoot,
       onRemoveSharedFilesOrFolder,
       setUnsubscribe,
+      isAIAgentsFolderRoot,
+      isAIAgentChatDelete,
+      setIsAIAgentChatDelete,
     };
   },
 )(observer(DeleteDialog));

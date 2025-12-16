@@ -25,35 +25,35 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { MainButtonMobile } from ".";
 import { ButtonOption } from "./MainButtonMobile.types";
 
-jest.mock("PUBLIC_DIR/images/button.alert.react.svg", () => ({
+vi.mock("PUBLIC_DIR/images/button.alert.react.svg", () => ({
   __esModule: true,
   default: () => <div className="alertIcon" data-testid="alert-icon" />,
 }));
 
 describe("<MainButtonMobile />", () => {
-  const mockOnClick = jest.fn();
+  const mockOnClick = vi.fn();
 
   const buttonOptions: ButtonOption[] = [
     {
       key: "option1",
       label: "Option 1",
-      onClick: jest.fn(),
+      onClick: vi.fn(),
     },
     {
       key: "option2",
       label: "Option 2",
-      onClick: jest.fn(),
+      onClick: vi.fn(),
     },
   ];
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", () => {

@@ -41,6 +41,10 @@ export const StyledRegister = styled.div.attrs(injectDefaultTheme)`
   bottom: 0;
 
   inset-inline-end: 0;
-  background-color: ${(props) => props.theme.login.register.backgroundColor};
+  background-color: var(--login-register-background-color);
   cursor: pointer;
+
+  .register-text {
+    color: var(--login-register-text-color);
+  }
 `;

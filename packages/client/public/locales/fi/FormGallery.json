@@ -2,6 +2,7 @@
   "Categories": "Luokat",
   "EmptyFormGalleryScreenDescription": "Hakuasi vastaavia tuloksia ei löytynyt",
   "ErrorViewDescription": "Ole hyvä ja yritä myöhemmin uudelleen",
+  "ErrorViewDescriptionNetworkError": "Näyttää siltä, ettei Internet-yhteyttä ole",
   "SuggestChanges": "Ehdota muutoksia",
   "TemplateInfo": "Mallin tiedot",
   "ViewAllTemplates": "Näytä kaikki mallit"

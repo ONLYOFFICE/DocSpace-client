@@ -3,7 +3,7 @@
   "content": "DocuSign account",
   "content_en_sha1_hash": "8923f31959d637d1c5bc0737b7c1292454bd7802",
   "created_at": "2025-05-19T21:30:49.972Z",
-  "updated_at": "2025-05-26T07:57:32.387Z",
+  "updated_at": "2025-10-27T16:14:33.351Z",
   "comment": {
     "text": "This translation key is used to display the title \"DocuSign account\" in various UI elements. It is typically displayed on a folder or file list view, and may appear as a button label or dialog heading. The translator should focus on conveying this information in a clear and concise manner.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 103,
+      "line_number": 106,
       "context": "case \"DropBox\":\n case \"DropboxV2\":\n return t(\"Translations:FolderTitleDropBox\");\n \n case \"DocuSign\":\n return t(\"Translations:FolderTitleDocuSign\");\n \n case \"Google\":\n case \"GoogleDrive\":\n return t(\"Translations:FolderTitleGoogle\");",
       "module": "/packages/client"
     }

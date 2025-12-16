@@ -60,6 +60,7 @@ import { useTheme } from "../../hooks/useTheme";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 import StyledSendClockIcon from "./components/SendClockIcon";
+import styles from "./PeopleSelector.module.scss";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
@@ -233,6 +234,7 @@ const PeopleSelector = ({
   onlyRoomMembers,
   targetEntityType = "room",
   disabledInvitedText,
+  isAgent,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -361,7 +363,10 @@ const PeopleSelector = ({
 
         const data = response.items
           .filter((item) => {
-            if (excludeItems && excludeItems.includes(item.id)) {
+            if (
+              (excludeItems && excludeItems.includes(item.id)) ||
+              ("status" in item && item.status === EmployeeStatus.Disabled)
+            ) {
               totalDifferent += 1;
               return false;
             }
@@ -533,18 +538,20 @@ const PeopleSelector = ({
     email?: string,
     isGroup?: boolean,
     status?: EmployeeStatus,
+    id?: string | number,
   ) => {
     return (
       <div
         style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
-        aria-label={`${isGroup ? "Group" : "User"}: ${label}${email ? `, ${email}` : ""}`}
+        aria-label={`${isGroup ? "Group" : "User"}: ${label}${
+          email ? `, ${email}` : ""
+        }`}
       >
         <div
           style={{
             display: "flex",
             boxSizing: "border-box",
             alignItems: "center",
-            gap: "8px",
           }}
         >
           <Text
@@ -559,6 +566,11 @@ const PeopleSelector = ({
           >
             {label}
           </Text>
+          {!isGroup && String(id) === currentUserId ? (
+            <Text className={styles.isMeLabel} fontWeight={600} fontSize="14px">
+              ({t("Common:MeLabel")})
+            </Text>
+          ) : null}
           {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
         </div>
         {!isGroup ? (
@@ -677,7 +689,9 @@ const PeopleSelector = ({
       emptyScreenDescription={
         emptyScreenDescription ??
         (activeTabId === GUESTS_TAB_ID
-          ? t("Common:NotFoundGuestsDescription")
+          ? isAgent
+            ? t("Common:NotFoundGuestsDescriptionAgent")
+            : t("Common:NotFoundGuestsDescription")
           : activeTabId === PEOPLE_TAB_ID
             ? t("Common:EmptyDescription", {
                 productName: t("Common:ProductName"),

@@ -1,6 +1,6 @@
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import Navigation from "./Navigation";
 import { DeviceType } from "../../enums";
 
@@ -17,22 +17,22 @@ describe("Navigation Component", () => {
       { id: "2", title: "Shared with me", isRootRoom: false },
       { id: "3", title: "Project files", isRootRoom: true },
     ],
-    onClickFolder: jest.fn(),
-    onBackToParentFolder: jest.fn(),
-    getContextOptionsFolder: jest.fn(() => [
+    onClickFolder: vi.fn(),
+    onBackToParentFolder: vi.fn(),
+    getContextOptionsFolder: vi.fn(() => [
       { key: "rename", label: "Rename" },
       { key: "delete", label: "Delete" },
     ]),
-    getContextOptionsPlus: jest.fn(() => [
+    getContextOptionsPlus: vi.fn(() => [
       { key: "upload", label: "Upload file" },
       { key: "create", label: "Create folder" },
     ]),
     isTrashFolder: false,
     isEmptyFilesList: false,
-    clearTrash: jest.fn(),
-    showFolderInfo: jest.fn(),
+    clearTrash: vi.fn(),
+    showFolderInfo: vi.fn(),
     isCurrentFolderInfo: false,
-    toggleInfoPanel: jest.fn(),
+    toggleInfoPanel: vi.fn(),
     isInfoPanelVisible: false,
     titles: {
       infoPanel: "Info Panel",
@@ -41,12 +41,12 @@ describe("Navigation Component", () => {
       warningText: "Warning",
     },
     withMenu: true,
-    onPlusClick: jest.fn(),
+    onPlusClick: vi.fn(),
     isEmptyPage: false,
     isDesktop: true,
     isRoom: false,
     isFrame: false,
-    hideInfoPanel: jest.fn(),
+    hideInfoPanel: vi.fn(),
     withLogo: false,
     burgerLogo: "test-logo.svg",
     showRootFolderTitle: true,
@@ -56,16 +56,16 @@ describe("Navigation Component", () => {
     rootRoomTitle: "Root Room",
     showTitle: true,
     navigationButtonLabel: "Navigation",
-    onNavigationButtonClick: jest.fn(),
+    onNavigationButtonClick: vi.fn(),
     tariffBar: <div data-testid="tariff-bar">Tariff information</div>,
     showNavigationButton: true,
     titleIconTooltip: "Folder tooltip",
-    onContextOptionsClick: jest.fn(),
-    onLogoClick: jest.fn(),
+    onContextOptionsClick: vi.fn(),
+    onLogoClick: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders navigation component with title", () => {

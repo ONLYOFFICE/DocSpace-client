@@ -25,20 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { ViewerLoader } from "./index";
+import styles from "./ViewerLoader.module.scss";
 
 describe("ViewerLoader", () => {
   const defaultProps = {
     isLoading: true,
     isError: false,
     withBackground: false,
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders loader when isLoading is true", () => {
@@ -63,7 +64,7 @@ describe("ViewerLoader", () => {
   it("adds background class when withBackground is true", () => {
     render(<ViewerLoader {...defaultProps} withBackground />);
     const wrapper = screen.getByTestId("viewer-loader-wrapper");
-    expect(wrapper).toHaveClass("withBackground");
+    expect(wrapper).toHaveClass(styles.withBackground);
   });
 
   it("handles click events", () => {

@@ -26,7 +26,12 @@
 
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type { TBreadCrumb } from "../components/selector/Selector.types";
-import type { RoomsType, ShareAccessRights, ShareRights } from "../enums";
+import type {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  ShareRights,
+} from "../enums";
 import type { TTheme, TColorScheme } from "../themes";
 import type FirebaseHelper from "../utils/firebase";
 import type { TRoom } from "../api/rooms/types";
@@ -101,7 +106,7 @@ export type TSortBy =
 
 export type TTranslation = (
   key: string,
-  params?: { [key: string]: string | string[] | number },
+  params?: Record<string, unknown>,
 ) => string;
 
 export type Nullable<T> = T | null;
@@ -134,6 +139,7 @@ export type TPathParts = {
   id: number;
   title: string;
   roomType?: RoomsType;
+  folderType?: FolderType;
 };
 
 export type TCreatedBy = {
@@ -319,7 +325,9 @@ declare global {
     RendererProcessVariable: {
       theme?: { id: string; system: string; type: string; addlocal: string };
     };
-    Tiff: new (arg: object) => {
+    Tiff: new (
+      arg: object,
+    ) => {
       toDataURL: () => string;
     };
     dataLayer?: Record<string, unknown>[];

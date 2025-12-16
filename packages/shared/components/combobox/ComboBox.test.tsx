@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { ComboBox } from "./ComboBox";
 import { ComboBoxDisplayType, ComboBoxSize } from "./ComboBox.enums";
@@ -41,7 +41,7 @@ const mockOptions = [
 const baseProps = {
   options: mockOptions,
   selectedOption: mockOptions[0],
-  onSelect: jest.fn(),
+  onSelect: vi.fn(),
   scaled: false,
   size: ComboBoxSize.base,
   tabIndex: 1,
@@ -50,17 +50,17 @@ const baseProps = {
 
 describe("ComboBox", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  test("renders with base props", () => {
+  it("renders with base props", () => {
     render(<ComboBox {...baseProps} />);
     expect(
       screen.getByRole("button", { name: "Option 1" }),
     ).toBeInTheDocument();
   });
 
-  test("opens dropdown on click", async () => {
+  it("opens dropdown on click", async () => {
     const user = userEvent.setup();
     render(<ComboBox {...baseProps} />);
 
@@ -69,7 +69,7 @@ describe("ComboBox", () => {
     expect(dropdown).toBeInTheDocument();
   });
 
-  test("selects option on click", async () => {
+  it("selects option on click", async () => {
     const user = userEvent.setup();
     render(<ComboBox {...baseProps} />);
 
@@ -79,9 +79,9 @@ describe("ComboBox", () => {
     expect(baseProps.onSelect).toHaveBeenCalledWith(mockOptions[1]);
   });
 
-  test("does not select disabled option", async () => {
+  it("does not select disabled option", async () => {
     const user = userEvent.setup();
-    const onSelect = jest.fn();
+    const onSelect = vi.fn();
     render(<ComboBox {...baseProps} onSelect={onSelect} />);
 
     await user.click(screen.getByRole("button"));
@@ -92,7 +92,7 @@ describe("ComboBox", () => {
     expect(onSelect).not.toHaveBeenCalled();
   });
 
-  test("handles separator options", async () => {
+  it("handles separator options", async () => {
     const user = userEvent.setup();
     render(<ComboBox {...baseProps} />);
 
@@ -103,8 +103,8 @@ describe("ComboBox", () => {
     expect(separatorOption.isSeparator).toBe(true);
   });
 
-  test("handles click on selected item", async () => {
-    const onClickSelectedItem = jest.fn();
+  it("handles click on selected item", async () => {
+    const onClickSelectedItem = vi.fn();
     const user = userEvent.setup();
 
     render(
@@ -125,8 +125,8 @@ describe("ComboBox", () => {
     expect(onClickSelectedItem).toHaveBeenCalledWith(mockOptions[0]);
   });
 
-  test("handles toggle display type with onToggle", async () => {
-    const onToggle = jest.fn();
+  it("handles toggle display type with onToggle", async () => {
+    const onToggle = vi.fn();
     const user = userEvent.setup();
 
     render(
@@ -141,7 +141,7 @@ describe("ComboBox", () => {
     expect(onToggle).toHaveBeenCalled();
   });
 
-  test("sets correct tabIndex", () => {
+  it("sets correct tabIndex", () => {
     render(<ComboBox {...baseProps} />);
     const button = screen.getByRole("button");
     expect(button).toHaveAttribute("tabindex", "1");

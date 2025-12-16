@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Chat wissen?",
+  "DeleteAIAgentDescription": "De agent <strong>\"{{agentName}}\"</strong> wordt permanent verwijderd. Alle data en gebruikersrechten gaan verloren.",
+  "DeleteAIAgentTitle": "Deze agent verwijderen?",
+  "DeleteAIAgentWarning": "Ik begrijp de gevolgen en wil de agent verwijderen.",
+  "DeleteAIChatDescription": "U gaat <strong>{{chatName}}<1>.</1></strong> verwijderen.\nAlle berichten en chatgeschiedenis worden permanent verwijderd en kunnen niet worden hersteld.",
   "DeleteAllGroupDescription": "De geselecteerde groepen worden verwijderd. Gebruikers in de groepen worden niet verwijderd uit {{productName}}. Weet u zeker dat u door wilt gaan?",
   "DeleteAllGroupsTitle": "Groepen verwijderen",
   "DeleteFiles": "U gaat nu <strong>bestanden ({{filesCount}})</strong> naar {{trashSection}} verplaatsen.",

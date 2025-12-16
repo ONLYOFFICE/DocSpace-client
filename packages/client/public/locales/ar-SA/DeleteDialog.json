@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "حذف الدردشة؟",
+  "DeleteAIAgentDescription": "سيتم حذف الوكيل <strong>\"{{agentName}}\"</strong> نهائيًا. سيتم فقدان جميع البيانات ووصول المستخدمين.",
+  "DeleteAIAgentTitle": "هل تريدون حذف هذا الوكيل؟",
+  "DeleteAIAgentWarning": "أنا أفهم العواقب وأريد حذف الوكيل",
+  "DeleteAIChatDescription": "أنت على وشك حذف <strong>{{chatName}}<1>.</1></strong> ستتم إزالة جميع الرسائل وسجل الدردشة نهائيًا ولا يمكن استعادتها.",
   "DeleteAllGroupDescription": "سيتم حذف المجموعات المحددة. لن تتم إزالة المستخدمين في المجموعات من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteAllGroupsTitle": "حذف المجموعات",
   "DeleteFiles": "أنتم على وشك نقل <strong>ملفات ({{filesCount}})</strong> إلى {{trashSection}}.",

@@ -25,21 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import PeopleSelector from "./index";
 import { EmployeeStatus, EmployeeType } from "../../enums";
 import * as peopleApi from "../../api/people";
 
 // Mock the API calls
-jest.mock("../../api/people", () => ({
-  getUserList: jest.fn(() => Promise.resolve({ items: [], total: 0 })),
-  getMembersList: jest.fn(() => Promise.resolve({ items: [], total: 0 })),
+vi.mock("../../api/people", () => ({
+  getUserList: vi.fn(() => Promise.resolve({ items: [], total: 0 })),
+  getMembersList: vi.fn(() => Promise.resolve({ items: [], total: 0 })),
 }));
 
 // Mock the Avatar component
-jest.mock("../../components/avatar", () => ({
+vi.mock("../../components/avatar", () => ({
   Avatar: ({ size, userName }: { size: string; userName: string }) => (
     <div data-testid="avatar" data-size={size} data-user-name={userName}>
       Avatar
@@ -48,7 +48,7 @@ jest.mock("../../components/avatar", () => ({
 }));
 
 // Mock the StyledSendClockIcon component
-jest.mock("./components/SendClockIcon", () => ({
+vi.mock("./components/SendClockIcon", () => ({
   __esModule: true,
   default: ({ className, size }: { className?: string; size?: string }) => (
     <div data-testid="send-clock-icon" data-size={size} className={className}>
@@ -58,22 +58,25 @@ jest.mock("./components/SendClockIcon", () => ({
 }));
 
 // Mock the translation hook
-jest.mock("react-i18next", () => ({
-  ...jest.requireActual("react-i18next"),
-  useTranslation: () => ({
-    t: (key: string, options?: Record<string, string>) => {
-      if (options) {
-        return `${key} ${Object.values(options).join(" ")}`;
-      }
-      return key;
-    },
-    ready: true,
-  }),
-  I18nextProvider: ({ children }: { children: React.ReactNode }) => children,
-}));
+vi.mock("react-i18next", async () => {
+  const actualModule = await vi.importActual("react-i18next");
+  return {
+    ...actualModule,
+    useTranslation: () => ({
+      t: (key: string, options?: Record<string, string>) => {
+        if (options) {
+          return `${key} ${Object.values(options).join(" ")}`;
+        }
+        return key;
+      },
+      ready: true,
+    }),
+    I18nextProvider: ({ children }: { children: React.ReactNode }) => children,
+  };
+});
 
 // Mock the components that are not needed for the test
-jest.mock("../../components/selector", () => ({
+vi.mock("../../components/selector", () => ({
   Selector: ({
     items,
     onSelect,
@@ -233,38 +236,67 @@ jest.mock("../../components/selector", () => ({
 const mockUsers = [
   {
     id: "user1",
+    firstName: "John",
+    lastName: "Doe",
+    userName: "johndoe",
     displayName: "John Doe",
     email: "john@example.com",
     avatar: "",
+    avatarSmall: "",
+    avatarMedium: "",
+    avatarMax: "",
+    avatarOriginal: "",
     hasAvatar: false,
     isOwner: false,
     isAdmin: false,
     isVisitor: false,
     isCollaborator: true,
     isRoomAdmin: false,
+    isLDAP: false,
+    isSSO: false,
+    isAnonim: false,
     status: EmployeeStatus.Active,
-    role: EmployeeType.User,
-    userType: EmployeeType.User,
+    activationStatus: 1,
+    department: "",
+    workFrom: "",
+    listAdminModules: [],
+    mobilePhoneActivationStatus: 0,
+    profileUrl: "",
     shared: false,
     groups: [],
     access: 0,
   },
   {
     id: "user2",
+    firstName: "Jane",
+    lastName: "Smith",
+    userName: "janesmith",
     displayName: "Jane Smith",
     email: "jane@example.com",
     avatar: "",
+    avatarSmall: "",
+    avatarMedium: "",
+    avatarMax: "",
+    avatarOriginal: "",
     hasAvatar: false,
     isOwner: false,
     isAdmin: true,
     isVisitor: false,
     isCollaborator: false,
     isRoomAdmin: false,
+    isLDAP: false,
+    isSSO: false,
+    isAnonim: false,
     status: EmployeeStatus.Active,
-    role: EmployeeType.Admin,
-    userType: EmployeeType.Admin,
+    activationStatus: 1,
+    department: "",
+    workFrom: "",
+    listAdminModules: [],
+    mobilePhoneActivationStatus: 0,
+    profileUrl: "",
     shared: false,
     groups: [],
+    access: 0,
   },
 ];
 
@@ -272,16 +304,16 @@ const mockUsers = [
 
 describe("PeopleSelector", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // Reset mock implementations to default
-    (peopleApi.getUserList as jest.Mock).mockImplementation(() =>
+    vi.mocked(peopleApi.getUserList).mockImplementation(() =>
       Promise.resolve({ items: mockUsers, total: mockUsers.length }),
     );
   });
 
-  test("renders the component with correct aria and data attributes", async () => {
+  it("renders the component with correct aria and data attributes", async () => {
     // Mock API response
-    (peopleApi.getUserList as jest.Mock).mockResolvedValueOnce({
+    vi.mocked(peopleApi.getUserList).mockResolvedValueOnce({
       items: mockUsers,
       total: mockUsers.length,
     });
@@ -290,11 +322,11 @@ describe("PeopleSelector", () => {
       <PeopleSelector
         headerProps={{
           headerLabel: "Select People",
-          onCloseClick: jest.fn(),
+          onCloseClick: vi.fn(),
         }}
         withHeader
         submitButtonLabel="Select"
-        onSubmit={jest.fn()}
+        onSubmit={vi.fn()}
         disableSubmitButton={false}
       />,
     );

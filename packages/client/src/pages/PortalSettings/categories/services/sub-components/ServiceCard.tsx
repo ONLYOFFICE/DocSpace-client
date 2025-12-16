@@ -70,6 +70,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       <div className={styles.headerContainer}>
         <div className={styles.iconWrapper}>
           <div
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
             dangerouslySetInnerHTML={{ __html: image }}
             className={styles.iconsContainer}
           />

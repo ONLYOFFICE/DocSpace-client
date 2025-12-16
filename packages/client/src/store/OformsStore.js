@@ -59,6 +59,8 @@ class OformsStore {
 
   oformsLoadError = false;
 
+  oformsNetworkError = false;
+
   oformsFilter = OformsFilter.getDefault();
 
   oformFromFolderId = myDocumentsFolderId;
@@ -183,13 +185,17 @@ class OformsStore {
     try {
       const oforms = await getOforms(apiUrl);
       this.oformsLoadError = false;
+      this.oformsNetworkError = false;
       return oforms;
     } catch (err) {
       const status = err?.response?.status;
+      const isNetworkError = err?.code === "ERR_NETWORK";
       const isApiError = status === 404 || status === 500;
-      // console.log({ err, isApiError });
+
       if (isApiError) {
         this.oformsLoadError = true;
+      } else if (isNetworkError) {
+        this.oformsNetworkError = true;
       } else {
         toastr.error(err);
       }

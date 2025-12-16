@@ -34,6 +34,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+import styles from "../Notifications.module.scss";
 
 type RoomsActionsContainerProps = {
   t: TFunction;
@@ -69,8 +70,8 @@ const RoomsActionsContainer = ({
   };
 
   return (
-    <div className="notification-container">
-      <div className="row">
+    <div className={styles.notificationContainer}>
+      <div className={styles.row}>
         <Text {...textProps} className="subscription-title">
           {t("FileActivityNotify")}
         </Text>
@@ -86,6 +87,7 @@ const RoomsActionsContainer = ({
           rooms: t("Common:Rooms"),
           shared: t("Common:SharedWithMe"),
           documents: t("Common:MyDocuments"),
+          aiAgents: t("Common:AIAgents"),
         })}
       </Text>
     </div>

@@ -49,7 +49,7 @@ const StyledBody = styled.div`
     min-width: 0;
     .combo-button {
       padding-inline: ${(props) => (props.isLoading ? "16px 0" : "8px 0")};
-      width: auto;
+      width: ${(props) => (props.isLoading ? "60px" : "auto")};
     }
   }
 `;

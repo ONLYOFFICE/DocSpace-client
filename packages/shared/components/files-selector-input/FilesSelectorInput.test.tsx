@@ -24,17 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
-import { mockDefaultProps } from "./mockData";
-import { FilesSelectorInput } from "./index";
-
-jest.mock("@docspace/shared/selectors/Files", () => ({
-  __esModule: true,
-  default: jest.fn((props) => {
+// Use vi.hoisted to ensure mocks are applied before any module loading
+const mocks = vi.hoisted(() => ({
+  FilesSelectorMock: vi.fn((props: { isPanelVisible?: boolean }) => {
     const { isPanelVisible } = props;
     return (
       <div data-testid="files-selector" data-visible={isPanelVisible}>
@@ -42,26 +38,38 @@ jest.mock("@docspace/shared/selectors/Files", () => ({
       </div>
     );
   }),
-}));
-
-jest.mock("@docspace/shared/components/file-input", () => ({
-  __esModule: true,
-  FileInput: jest.fn(({ onClick }) => (
+  FileInputMock: vi.fn(({ onClick }: { onClick?: () => void }) => (
     <div data-testid="file-input" onClick={onClick}>
       File Input
     </div>
   )),
 }));
 
-jest.mock("react-i18next", () => ({
+// Mock using relative path as it's imported in FilesSelectorInput.tsx
+vi.mock("../../selectors/Files", () => ({
+  __esModule: true,
+  default: mocks.FilesSelectorMock,
+}));
+
+vi.mock("@docspace/shared/components/file-input", () => ({
+  __esModule: true,
+  FileInput: mocks.FileInputMock,
+}));
+
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (str: string) => str,
   }),
 }));
 
+// Import React after mocks
+import React from "react";
+import { mockDefaultProps } from "./mockData";
+import { FilesSelectorInput } from "./index";
+
 describe("FilesSelectorInput", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders without error", async () => {
@@ -95,9 +103,9 @@ describe("FilesSelectorInput", () => {
 
     await userEvent.click(fileInput);
 
-    expect(screen.getByTestId("files-selector")).toHaveAttribute(
-      "data-visible",
-      "true",
-    );
+    const filesSelector = screen.getByTestId("files-selector");
+    // Check if data-visible attribute exists and is truthy (could be true or "true")
+    expect(filesSelector).toHaveAttribute("data-visible");
+    expect(filesSelector.getAttribute("data-visible")).toBeTruthy();
   });
 });

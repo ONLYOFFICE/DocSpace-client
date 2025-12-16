@@ -47,6 +47,7 @@ interface AccountsHotkeysProps {
   enableSelection: ContactsHotkeysStore["enableSelection"];
   viewAs: PeopleStore["viewAs"];
   selection: UsersStore["selection"] | GroupsStore["selection"];
+  openContextMenu: ContactsHotkeysStore["openContextMenu"];
 }
 
 const useAccountsHotkeys = ({
@@ -62,6 +63,7 @@ const useAccountsHotkeys = ({
   enableSelection,
   viewAs,
   selection,
+  openContextMenu,
 }: AccountsHotkeysProps) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -105,7 +107,9 @@ const useAccountsHotkeys = ({
     "*",
     (e) => {
       const someDialogIsOpen = checkDialogsOpen();
-      if (someDialogIsOpen) return;
+      const contextMenuIsOpen =
+        document.getElementsByClassName("p-contextmenu").length;
+      if (someDialogIsOpen || contextMenuIsOpen) return;
 
       if (
         (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
@@ -162,6 +166,12 @@ const useAccountsHotkeys = ({
 
   // Copy selected items to clipboard
   useHotkeys("Ctrl+Shift+c", copySelectedTextFn, hotkeysFilter);
+
+  // Open context menu
+  useHotkeys("Shift+c", openContextMenu, {
+    ...hotkeysFilter,
+    ...{ keyup: true },
+  });
 };
 
 export default useAccountsHotkeys;

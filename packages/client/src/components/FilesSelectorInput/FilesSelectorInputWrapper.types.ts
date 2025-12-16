@@ -67,6 +67,7 @@ export interface ExternalFilesSelectorInputWrapperProps {
   isRoomBackup?: boolean;
   isDocumentIcon?: boolean;
   withCreate?: boolean;
+  withAIAgentsTreeFolder?: boolean;
 }
 
 export interface FilesSelectorInputWrapperProps

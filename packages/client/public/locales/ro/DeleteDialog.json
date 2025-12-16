@@ -1,4 +1,9 @@
 {
+  "DeleteAIAgentChatTitle": "Șterge conversație?",
+  "DeleteAIAgentDescription": "Agentul <strong>\"{{agentName}}\"</strong> va fi șters definitiv. Toate datele și conectările utilizatorilor se vor pierde.",
+  "DeleteAIAgentTitle": "Doriți să ștergeți acest agent?",
+  "DeleteAIAgentWarning": "Confirm că înțeleg efectele și doresc să șterg acest agent",
+  "DeleteAIChatDescription": "Pe cale să ștergeți <strong>{{chatName}}<1>.</1></strong>\n Toate mesajele și istoricul conversației vor fi șterse permanent și nu pot fi recuperate.",
   "DeleteAllGroupDescription": "Grupurile selectate vor fi șterse. Utilizatorii care fac parte din grupurile nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
   "DeleteAllGroupsTitle": "Ștergere grup",
   "DeleteFiles": "Sunteți pe cale să mutați <strong>fișiere ({{filesCount}})</strong> în {{trashSection}}.",

@@ -69,7 +69,7 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
             agentSection: t("Common:AIAgents"),
           }}
         />
-      );
+      ) as unknown as string;
     default:
       return t("Common:RoleRoomManagerDescription");
   }
@@ -94,7 +94,7 @@ const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
             agentSection: t("Common:AIAgents"),
           }}
         />
-      );
+      ) as unknown as string;
     default:
       return t("Common:RoleContentCreatorDescription");
   }
@@ -137,7 +137,7 @@ export const getAccessOptions = (
             agentSection: t("Common:AIAgents"),
           }}
         />
-      ),
+      ) as unknown as string,
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
       access:

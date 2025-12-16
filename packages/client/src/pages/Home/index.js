@@ -167,6 +167,10 @@ const PureHome = (props) => {
     aiConfig,
     currentTab,
     setIsAboutDialogVisible,
+    abortDownloadFiles,
+    abortDuplicate,
+    abortCopy,
+    abortMove,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -270,6 +274,22 @@ const PureHome = (props) => {
     setOperationCancelVisible(true);
   }, [hideConfirmCancelOperation, cancelUpload, setOperationCancelVisible]);
 
+  const onCancelDownload = () => {
+    abortDownloadFiles();
+  };
+
+  const onCancelDuplicate = () => {
+    abortDuplicate();
+  };
+
+  const onCancelCopy = () => {
+    abortCopy();
+  };
+
+  const onCancelMove = () => {
+    abortMove();
+  };
+
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
 
@@ -363,6 +383,10 @@ const PureHome = (props) => {
   sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   sectionProps.cancelUpload = onCancelUpload;
+  sectionProps.cancelDownload = onCancelDownload;
+  sectionProps.cancelDuplicate = onCancelDuplicate;
+  sectionProps.cancelCopy = onCancelCopy;
+  sectionProps.cancelMove = onCancelMove;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
   sectionProps.needErrorChecking = isErrorChecking;
@@ -496,6 +520,8 @@ export const Component = inject(
       clearUploadData,
       clearUploadedFiles,
       clearConversionData,
+      abortCopy,
+      abortMove,
     } = uploadDataStore;
 
     const {
@@ -586,7 +612,8 @@ export const Component = inject(
 
     const { startUpload } = uploadDataStore;
 
-    const { createFoldersTree, onClickBack } = filesActionsStore;
+    const { createFoldersTree, onClickBack, abortDownloadFiles } =
+      filesActionsStore;
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
@@ -763,6 +790,11 @@ export const Component = inject(
       aiConfig: settingsStore.aiConfig,
 
       setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
+
+      abortDownloadFiles,
+      abortDuplicate: filesActionsStore.abortDuplicate,
+      abortCopy,
+      abortMove,
     };
   },
 )(observer(Home));

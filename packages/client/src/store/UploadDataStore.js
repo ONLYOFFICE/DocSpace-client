@@ -42,6 +42,7 @@ import {
   moveToFolder,
   fileCopyAs,
   checkIsFileExist,
+  terminateFileOps,
 } from "@docspace/shared/api/files";
 import { toastr } from "@docspace/shared/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
@@ -155,6 +156,10 @@ class UploadDataStore {
 
   finishUploadFilesCalled = false;
 
+  copyOperationId = null;
+
+  moveOperationId = null;
+
   constructor(
     settingsStore,
     treeFoldersStore,
@@ -177,6 +182,28 @@ class UploadDataStore {
     this.filesSettingsStore = filesSettingsStore;
     this.aiRoomStore = aiRoomStore;
   }
+
+  abortCopy = async () => {
+    if (this.copyOperationId) {
+      try {
+        await terminateFileOps(this.copyOperationId);
+      } catch (error) {
+        console.error("Failed to terminate operation:", error);
+      }
+      this.copyOperationId = null;
+    }
+  };
+
+  abortMove = async () => {
+    if (this.moveOperationId) {
+      try {
+        await terminateFileOps(this.moveOperationId);
+      } catch (error) {
+        console.error("Failed to terminate operation:", error);
+      }
+      this.moveOperationId = null;
+    }
+  };
 
   removeFiles = (fileIds) => {
     fileIds.forEach((id) => {
@@ -2053,12 +2080,16 @@ class UploadDataStore {
         if (!data) {
           return Promise.reject();
         }
+
+        this.copyOperationId = data.id;
+
         return this.loopFilesOperations(data, pbData)
           .then((result) => {
             this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds);
             return result;
           })
           .finally(async () => {
+            this.copyOperationId = null;
             // to update the status of trashIsEmpty filesStore
             if (this.treeFoldersStore.isRecycleBinFolder)
               await this.filesStore.getIsEmptyTrash();
@@ -2113,12 +2144,15 @@ class UploadDataStore {
           return Promise.reject();
         }
 
+        this.moveOperationId = data.id;
+
         return this.loopFilesOperations(data, pbData)
           .then((result) => {
             this.moveToCopyTo(destFolderId, pbData, false, fileIds, folderIds);
             return result;
           })
           .finally(async () => {
+            this.moveOperationId = null;
             // to update the status of trashIsEmpty filesStore
             if (this.treeFoldersStore.isRecycleBinFolder)
               await this.filesStore.getIsEmptyTrash();

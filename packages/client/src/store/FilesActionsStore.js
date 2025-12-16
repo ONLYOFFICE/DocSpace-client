@@ -46,6 +46,7 @@ import {
   reorderIndex,
   deleteVersionFile,
   enableCustomFilter,
+  terminateFileOps,
 } from "@docspace/shared/api/files";
 import {
   Events,
@@ -163,6 +164,10 @@ class FilesActionStore {
   processCreatingRoomFromData = false;
 
   alreadyExportingRoomIndex = false;
+
+  downloadFilesOperationId = null;
+
+  duplicateFilesOperationId = null;
 
   constructor(
     settingsStore,
@@ -827,6 +832,9 @@ class FilesActionStore {
           if (!data) {
             return Promise.reject();
           }
+
+          this.downloadFilesOperationId = data.id;
+
           const pbData = {
             operation: operationName,
             label,
@@ -889,6 +897,30 @@ class FilesActionStore {
       setDownloadItems([]);
 
       return toastr.error(err, null, 0, true);
+    } finally {
+      this.downloadFilesOperationId = null;
+    }
+  };
+
+  abortDownloadFiles = async () => {
+    if (this.downloadFilesOperationId) {
+      try {
+        await terminateFileOps(this.downloadFilesOperationId);
+      } catch (error) {
+        console.error("Failed to terminate operation:", error);
+      }
+      this.downloadFilesOperationId = null;
+    }
+  };
+
+  abortDuplicate = async () => {
+    if (this.duplicateFilesOperationId) {
+      try {
+        await terminateFileOps(this.duplicateFilesOperationId);
+      } catch (error) {
+        console.error("Failed to terminate operation:", error);
+      }
+      this.duplicateFilesOperationId = null;
     }
   };
 
@@ -1241,6 +1273,8 @@ class FilesActionStore {
           return Promise.reject();
         }
 
+        this.duplicateFilesOperationId = data.id;
+
         const operationData = await this.uploadDataStore.loopFilesOperations(
           data,
           pbData,
@@ -1272,6 +1306,7 @@ class FilesActionStore {
       .finally(() => {
         clearActiveOperations(fileIds, folderIds);
         this.setGroupMenuBlocked(false);
+        this.duplicateFilesOperationId = null;
       });
   };
 

@@ -292,8 +292,8 @@ importers:
         specifier: 2.3.4
         version: 2.3.4
       '@onlyoffice/docspace-plugin-sdk':
-        specifier: file:./onlyoffice-docspace-plugin-sdk-2.1.1.tgz
-        version: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.1.tgz(@types/node@24.3.0)
+        specifier: file:./onlyoffice-docspace-plugin-sdk-2.1.0.tgz
+        version: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.3.0)
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -2985,8 +2985,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.1.tgz':
-    resolution: {integrity: sha512-vBBMxrZIfJ4c+NgVJ5Okoajshkkazbd9NV9ewCC+mMzNOX5iTgMBUvBH+PC8qF0Mhprpqoq3zur57TJ+f5Gr7Q==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.1.tgz}
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
+    resolution: {integrity: sha512-JeXth+vedv9MuS24J0aEHcb44cKdjtkLfjLO4EGKt5kilPVUYKssbjj5yjOS4iSaJHhG3gYTL0Xfk6zmOYnGHQ==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
     version: 2.0.0
     hasBin: true
 
@@ -11634,7 +11634,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@21.5.2':
     optional: true
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.1.tgz(@types/node@24.3.0)':
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.3.0)':
     dependencies:
       inquirer: 9.3.8(@types/node@24.3.0)
       jszip: 3.10.1

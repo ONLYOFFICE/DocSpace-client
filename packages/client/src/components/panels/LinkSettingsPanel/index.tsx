@@ -79,13 +79,10 @@ const LinkSettingsPanel = ({
 
   const date = activeLink.expirationDate
     ? moment(activeLink.expirationDate)
-    : moment().add(7, "days");
+    : null;
 
   const [userLimitIsChecked, setUserLimitIsChecked] = useState(limitIsChecked);
-  const [lifetimeIsChecked, setLifetimeIsChecked] = useState(
-    !!activeLink.expirationDate,
-  );
-  const [limitDate, setLimitDate] = useState<moment.Moment>(date);
+  const [limitDate, setLimitDate] = useState<moment.Moment | null>(date);
   const [maxNumber, setMaxNumber] = useState(String(maxUsersNumber));
   const [hasError, setHasError] = useState(false);
 
@@ -93,9 +90,7 @@ const LinkSettingsPanel = ({
     ? Number(maxNumber) <= usersNumber
     : false;
 
-  const showExpiredError = lifetimeIsChecked
-    ? moment(new Date()).isAfter(limitDate)
-    : false;
+  const showExpiredError = moment(new Date()).isAfter(limitDate);
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -128,9 +123,7 @@ const LinkSettingsPanel = ({
     if (defaultLink) {
       const linkToSubmit = {
         ...defaultLink,
-        expirationDate: lifetimeIsChecked
-          ? moment(limitDate).toISOString()
-          : null,
+        expirationDate: limitDate ? moment(limitDate).toISOString() : null,
         maxUseCount: userLimitIsChecked ? Number(maxNumber) : null,
         currentUseCount: usersNumber,
       } as TOption & {
@@ -276,47 +269,36 @@ const LinkSettingsPanel = ({
             ) : null}
           </div>
 
-          <div className={styles.linkSettingsUserLimit}>
-            <Text
-              fontSize="16px"
-              fontWeight={700}
-              className={styles.linkSettingsText}
-            >
-              {t("Common:LimitByTimePeriod")}
-            </Text>
-            <ToggleButton
-              className={styles.linkSettingsToggle}
-              isChecked={lifetimeIsChecked}
-              onChange={() => setLifetimeIsChecked(!lifetimeIsChecked)}
-            />
-          </div>
-          {lifetimeIsChecked ? (
-            <>
-              <Text
-                fontSize="12px"
-                fontWeight={400}
-                className={styles.linkSettingsSubDescriptionText}
-                color={showExpiredError ? warningColor : undefined}
-              >
-                {showExpiredError
-                  ? t("Common:LinkSettingsExpired")
-                  : t("Common:LinkValidUntil")}
-              </Text>
-              <DateTimePicker
-                id="link-settings_date-time-picker"
-                locale={locale}
-                hasError={false}
-                onChange={(date) => date && setLimitDate(date)}
-                openDate={new Date()}
-                className={styles.linkSettingsDatePicker}
-                selectDateText={t("Common:SelectDate")}
-                initialDate={limitDate}
-                minDate={moment().subtract(1, "days")}
-                maxDate={maxDate}
-                hideCross
-              />
-            </>
-          ) : null}
+          <Text
+            fontSize="16px"
+            fontWeight={700}
+            className={styles.linkSettingsText}
+          >
+            {t("Common:LimitByTimePeriod")}
+          </Text>
+
+          <Text
+            fontSize="12px"
+            fontWeight={400}
+            className={styles.linkSettingsSubDescriptionText}
+            color={showExpiredError ? warningColor : undefined}
+          >
+            {showExpiredError
+              ? t("Common:LinkSettingsExpired")
+              : t("Common:LinkValidUntil")}
+          </Text>
+          <DateTimePicker
+            id="link-settings_date-time-picker"
+            locale={locale}
+            hasError={false}
+            onChange={(date) => setLimitDate(date)}
+            openDate={new Date()}
+            className={styles.linkSettingsDatePicker}
+            selectDateText={t("Common:SelectDate")}
+            initialDate={limitDate}
+            minDate={moment().subtract(1, "days")}
+            maxDate={maxDate}
+          />
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

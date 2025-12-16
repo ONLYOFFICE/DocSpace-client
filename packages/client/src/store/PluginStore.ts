@@ -32,7 +32,7 @@ import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { TData, toastr } from "@docspace/shared/components/toast";
 import type {
   TFile,
   TFileSecurity,
@@ -337,13 +337,11 @@ class PluginStore {
 
       this.initPlugin(plugin);
     } catch (e) {
-      const err = e as { response: { data: { error: { message: string } } } };
-
-      toastr.error(err.response.data.error.message as string);
+      toastr.error(e as TData);
     }
   };
 
-  uninstallPlugin = async (name: string) => {
+  uninstallPlugin = async (name: string, t: TTranslation) => {
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
     try {
@@ -358,7 +356,9 @@ class PluginStore {
           if (this.plugins.length === 0) this.setIsEmptyList(true);
         });
       }
+      toastr.success(t("PluginDeletedSuccessfully"));
     } catch (e) {
+      toastr.error(e as TData);
       console.log(e);
     }
   };
@@ -572,6 +572,7 @@ class PluginStore {
 
       return plugin;
     } catch (e) {
+      toastr.error(e as TData);
       console.log(e);
     }
   };

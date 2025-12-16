@@ -4,12 +4,13 @@ This directory contains Python scripts for exporting translations and generating
 
 ## Scripts Overview
 
-| Script | Purpose | Type | Platform |
-|--------|---------|------|----------|
-| `export_all_languages.py` | Export translation keys to JSON | Python | Cross-platform |
-| `build_oform.py` | Generate PDF forms from JSON | Python | Cross-platform |
-| `export_and_build_all.py` | Automated export + build workflow | Python | Cross-platform |
-| `upload_to_docspace.py` | Upload PDF forms to DocSpace VDR | Python | Cross-platform |
+| Script                      | Purpose                                    | Type   | Platform       |
+| --------------------------- | ------------------------------------------ | ------ | -------------- |
+| `export_all_languages.py`   | Export translation keys to JSON            | Python | Cross-platform |
+| `build_oform.py`            | Generate PDF forms from JSON               | Python | Cross-platform |
+| `export_and_build_all.py`   | Automated export + build workflow          | Python | Cross-platform |
+| `upload_to_docspace.py`     | Upload PDF forms to DocSpace VDR           | Python | Cross-platform |
+| `download_from_docspace.py` | Download PDF forms and import translations | Python | Cross-platform |
 
 ## Scripts
 
@@ -18,6 +19,7 @@ This directory contains Python scripts for exporting translations and generating
 Exports all translation keys for all languages in a project. This script replicates the backend API export functionality with `exportAll=true` parameter.
 
 **Features:**
+
 - Exports all keys from base language to target languages
 - Includes metadata comments for each key
 - Generates JSON files compatible with `build_oform.py`
@@ -37,12 +39,14 @@ python export_all_languages.py --project Common --base-language en --output-dir 
 ```
 
 **Arguments:**
+
 - `--project` (required): Project name (Common, Client, DocEditor, Login, Management)
 - `--base-language`: Base language code (default: en)
 - `--output-dir`: Output directory for exported files (default: output)
 - `--languages`: Specific languages to export (default: all languages except base)
 
 **Output:**
+
 - JSON files named: `{Project}-all-keys-from-{base}-to-{target}.json`
 - Each file contains all translation keys with base values, target values, and comments
 
@@ -51,6 +55,7 @@ python export_all_languages.py --project Common --base-language en --output-dir 
 Generates PDF review forms from exported translation JSON files using ONLYOFFICE Document Builder.
 
 **Features:**
+
 - Creates interactive PDF forms with fillable fields
 - Each key includes: source text, comment, target field, and confirmation checkbox
 - Supports large forms with progress indicators
@@ -67,10 +72,12 @@ python build_oform.py --input Common-all-keys-from-en-to-ru.json --output-dir my
 ```
 
 **Arguments:**
+
 - `--input` (required): Path to translation JSON file
 - `--output-dir`: Output directory for generated PDF (default: output)
 
 **Requirements:**
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -81,6 +88,7 @@ pip install -r requirements.txt
 - ONLYOFFICE Document Builder (for PDF generation)
 
 **Install Dependencies:**
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -90,6 +98,7 @@ pip install -r requirements.txt
 To avoid the "docbuilder: license is invalid!" warning, you have two options:
 
 **Option 1 (Recommended): Set environment variable**
+
 ```bash
 cp .env.example .env
 # Edit .env and set path to your license file:
@@ -98,6 +107,7 @@ ONLYOFFICE_BUILDER_LICENSE=/path/to/your/license.lic
 
 **Option 2: Install in Document Builder directory**
 Place `license.lic` in the installation directory:
+
 - Windows: `C:\Program Files\ONLYOFFICE\DocumentBuilder\license.lic`
 - Linux: `/opt/onlyoffice/documentbuilder/license.lic`
 - macOS: `/Applications/ONLYOFFICE/DocumentBuilder.app/Contents/license.lic`
@@ -109,6 +119,7 @@ Place `license.lic` in the installation directory:
 Automated workflow script that combines export and PDF generation. **Cross-platform** (Windows, macOS, Linux).
 
 **Features:**
+
 - Single command to export and build PDFs
 - Support for single project or ALL projects
 - Selective language export
@@ -139,6 +150,7 @@ python export_and_build_all.py --all-projects --base-language en --output-dir my
 ```
 
 **Arguments:**
+
 - `--project`: Single project to process (mutually exclusive with `--all-projects`)
 - `--all-projects`: Process ALL projects (Common, Client, DocEditor, Login, Management)
 - `--languages`: Specific languages to export (default: all languages except base)
@@ -147,6 +159,7 @@ python export_and_build_all.py --all-projects --base-language en --output-dir my
 - `--skip-pdf`: Skip PDF generation, only export JSON files
 
 **Output:**
+
 - JSON files in `output/exports/`
 - PDF forms in `output/forms/{language}/` (organized by language)
 
@@ -155,6 +168,7 @@ python export_and_build_all.py --all-projects --base-language en --output-dir my
 Upload generated PDF forms to ONLYOFFICE DocSpace VDR (Virtual Data Room) for review.
 
 **Features:**
+
 - Creates VDR room for translation review
 - Uploads PDF forms organized by language folders
 - Automatic folder structure creation
@@ -178,12 +192,14 @@ python upload_to_docspace.py --portal-url https://your-portal.onlyoffice.com --a
 ```
 
 **Arguments:**
+
 - `--forms-dir`: Directory containing language folders with PDF forms (default: output/forms)
 - `--room-name`: Name for the VDR room (default: Translation Review)
 - `--portal-url`: DocSpace portal URL (overrides DOCSPACE_PORTAL_URL env variable)
 - `--api-key`: DocSpace API key (overrides DOCSPACE_API_KEY env variable)
 
 **Requirements:**
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -193,20 +209,81 @@ This will install the official ONLYOFFICE DocSpace SDK (`docspace-api-sdk`).
 **Configuration:**
 
 Set in `.env` file:
+
 ```bash
 DOCSPACE_PORTAL_URL=https://your-portal.onlyoffice.com
 DOCSPACE_API_KEY=your-api-key-here
 ```
 
 To generate an API key:
+
 1. Log in to your DocSpace portal
 2. Go to Settings → Integration → Developer Tools → API
 3. Create a new API key
 
 **Output:**
+
 - Creates VDR room in DocSpace
 - Uploads language folders with PDF forms
 - Prints room URL for sharing with reviewers
+
+### 5. `download_from_docspace.py`
+
+Download filled PDF forms from DocSpace and import translations back into the system.
+
+**Features:**
+
+- Downloads PDF forms from DocSpace VDR room
+- Parses form fields to extract translations
+- Saves translations to locale JSON files
+- Updates metadata files with approval status and history
+- Supports dry-run mode for testing
+- Can import from local directory (skip download)
+
+**Usage:**
+
+```bash
+# Download and import from a specific room
+python download_from_docspace.py --room-id 12345
+
+# Download to custom directory
+python download_from_docspace.py --room-id 12345 --output-dir my_downloads
+
+# Only download, don't import
+python download_from_docspace.py --room-id 12345 --download-only
+
+# Only import from already downloaded files
+python download_from_docspace.py --import-dir downloaded_forms
+
+# Import all translations (not just confirmed)
+python download_from_docspace.py --import-dir downloaded_forms --include-unconfirmed
+
+# Dry run (show what would be done without writing files)
+python download_from_docspace.py --import-dir downloaded_forms --dry-run
+```
+
+**Arguments:**
+
+- `--room-id`: DocSpace room ID to download from
+- `--output-dir`: Directory to save downloaded files (default: downloads)
+- `--import-dir`: Directory containing PDF files to import (skips download)
+- `--download-only`: Only download files, don't import translations
+- `--include-unconfirmed`: Import all translations, not just confirmed ones
+- `--dry-run`: Show what would be done without writing files
+- `--portal-url`: DocSpace portal URL (overrides DOCSPACE_PORTAL_URL env variable)
+- `--api-key`: DocSpace API key (overrides DOCSPACE_API_KEY env variable)
+
+**Requirements:**
+
+```bash
+pip install -r requirements.txt
+```
+
+**Output:**
+
+- Downloads PDF files organized by language
+- Updates locale JSON files with translations
+- Creates/updates metadata files in `.meta/` directory with approval status
 
 ## Complete Workflow
 
@@ -229,11 +306,13 @@ python export_and_build_all.py --all-projects --languages ru de
 ```
 
 This script will:
+
 1. Export all translation keys to JSON files
 2. Generate PDF forms for each language
 3. Save everything to the `output/` directory
 
 **Then upload to DocSpace:**
+
 ```bash
 # Upload forms to DocSpace VDR room
 python upload_to_docspace.py
@@ -286,9 +365,17 @@ done
 3. Fill in or correct the target language fields
 4. Check the "confirmed" checkbox for each completed translation
 
-### Step 4: Import completed translations (future feature)
+### Step 4: Import completed translations
 
-The filled PDF forms can be processed to extract confirmed translations and import them back into the system.
+Download and import the filled PDF forms back into the system:
+
+```bash
+# Download from DocSpace and import
+python download_from_docspace.py --room-id 12345
+
+# Or import from already downloaded files
+python download_from_docspace.py --import-dir downloaded_forms
+```
 
 ## Project Structure
 

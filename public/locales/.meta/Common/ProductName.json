@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-12-11T16:07:35.909Z",
+  "updated_at": "2025-12-16T07:24:43.724Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -209,9 +209,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.js",
-      "line_number": 63,
-      "context": "onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeletePluginTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"DeletePluginDescription\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"",
+      "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.tsx",
+      "line_number": 65,
+      "context": "return (\n <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeletePluginTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"DeletePluginDescription\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"",
       "module": "/packages/client"
     },
     {
@@ -1548,26 +1548,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/DailyFeedContainer.tsx",
-      "line_number": 66,
-      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"DailyFeed\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <ToggleButton\n className=\"daily-feed\"\n onChange={onChangeEmailSubscription}\n isChecked={dailyFeedSubscriptions}",
+      "line_number": 67,
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"DailyFeed\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <ToggleButton\n className=\"daily-feed\"\n onChange={onChangeEmailSubscription}\n isChecked={dailyFeedSubscriptions}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/DailyFeedContainer.tsx",
-      "line_number": 66,
-      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"DailyFeed\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <ToggleButton\n className=\"daily-feed\"\n onChange={onChangeEmailSubscription}\n isChecked={dailyFeedSubscriptions}",
+      "line_number": 67,
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"DailyFeed\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <ToggleButton\n className=\"daily-feed\"\n onChange={onChangeEmailSubscription}\n isChecked={dailyFeedSubscriptions}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.tsx",
-      "line_number": 67,
-      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"UsefulTips\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <ToggleButton\n className=\"useful-tips toggle-btn\"\n onChange={onChangeEmailSubscription}\n isChecked={usefulTipsSubscription}",
+      "line_number": 68,
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"UsefulTips\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <ToggleButton\n className=\"useful-tips toggle-btn\"\n onChange={onChangeEmailSubscription}\n isChecked={usefulTipsSubscription}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.tsx",
-      "line_number": 67,
-      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"UsefulTips\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <ToggleButton\n className=\"useful-tips toggle-btn\"\n onChange={onChangeEmailSubscription}\n isChecked={usefulTipsSubscription}",
+      "line_number": 68,
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"UsefulTips\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <ToggleButton\n className=\"useful-tips toggle-btn\"\n onChange={onChangeEmailSubscription}\n isChecked={usefulTipsSubscription}",
       "module": "/packages/client"
     },
     {
@@ -1590,25 +1590,25 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2189,
+      "line_number": 2213,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2189,
+      "line_number": 2213,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2189,
+      "line_number": 2213,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PluginStore.ts",
-      "line_number": 294,
+      "line_number": 326,
       "context": ");\n \n if (!isPluginCompatible) {\n toastr.error(\n t(\"PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));\n }",
       "module": "/packages/client"
     },
@@ -1747,24 +1747,24 @@
     {
       "file_path": "/packages/management/src/app/spaces/configuration/header.tsx",
       "line_number": 46,
-      "context": "<Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigurationHeader\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>\n {t(\"ConfigurationDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </StyledHeader>\n );\n };",
+      "context": "<Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigurationHeader\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>\n {t(\"ConfigurationDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n );\n };",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 179,
+      "line_number": 148,
       "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"CreateSpaceDescription\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 179,
+      "line_number": 148,
       "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"CreateSpaceDescription\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 179,
+      "line_number": 148,
       "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"CreateSpaceDescription\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/management"
     },
@@ -2022,7 +2022,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 688,
+      "line_number": 697,
       "context": "? isAgent\n ? t(\"Common:NotFoundGuestsDescriptionAgent\")\n : t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={",
       "module": "/packages/shared"
     },
@@ -2033,45 +2033,45 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 342,
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 343,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 342,
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 343,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 342,
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 343,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 103,
-      "context": "const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 135,
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ),",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 103,
-      "context": "const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 135,
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ),",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 103,
-      "context": "const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 135,
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ),",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 103,
-      "context": "const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 135,
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ),",
       "module": "/packages/shared"
     }
   ],

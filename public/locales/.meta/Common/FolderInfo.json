@@ -1,0 +1,28 @@
+{
+  "key_path": "FolderInfo",
+  "content": "Folder info",
+  "content_en_sha1_hash": "4d59109fbdaa3c60825da62bd3a653e870df7bc5",
+  "created_at": "2025-12-15T14:02:08.602Z",
+  "updated_at": "2025-12-15T14:04:24.056Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2230,
+      "context": "// },\n \n {\n id: \"option_show-info\",\n key: \"show-info\",\n label: item.isFolder ? t(\"Common:FolderInfo\") : t(\"Common:FileInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: false,\n },\n ...versionActions,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

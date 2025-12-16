@@ -1,0 +1,28 @@
+{
+  "key_path": "IpAlreadyAdded",
+  "content": "This IP address has already been added",
+  "content_en_sha1_hash": "57357e309ce932380014ab712053d6685d4163ab",
+  "created_at": "2025-12-15T14:02:39.305Z",
+  "updated_at": "2025-12-15T14:04:23.962Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
+      "line_number": 214,
+      "context": "const getErrorMessage = (ip, index, ipsArray = ips) => {\n const isDuplicate = checkDuplicate(ipsArray, ip, index);\n const isValidFormat = isValidIp(ip) && ip !== \"\";\n \n if (isDuplicate) return t(\"Common:IpAlreadyAdded\");\n if (!isValidFormat) return t(\"Common:IncorrectIp\");\n return null;\n };\n \n const validateAllIps = (ipsArray) => {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

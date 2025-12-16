@@ -3,7 +3,7 @@
   "content": "Actions",
   "content_en_sha1_hash": "c3cd636a585b20c40ac2df5ffb403e83cb2eef51",
   "created_at": "2025-05-19T21:30:42.878Z",
-  "updated_at": "2025-12-11T16:07:35.919Z",
+  "updated_at": "2025-12-15T14:04:23.462Z",
   "comment": {
     "text": "This translation key is used to display a button or label that indicates actions available in an article or profile section. It appears on a main button and in some header sections, where it shows a title such as \"Actions\" or \"Invite\", depending on the context.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Header/index.js",
-      "line_number": 105,
-      "context": "<div className=\"action-button\">\n {(isAdmin && !profile?.isOwner) ||\n (!profile?.isLDAP && !profile?.isSSO) ? (\n <ContextMenuButton\n directionX=\"right\"\n title={t(\"Common:Actions\")}\n iconName={VerticalDotsReactSvgUrl}\n size={17}\n getData={getUserContextOptions}\n isDisabled={false}\n usePortal",
+      "line_number": 98,
+      "context": "<div className={styles.actionButton}>\n {(isAdmin && !profile?.isOwner) ||\n (!profile?.isLDAP && !profile?.isSSO) ? (\n <ContextMenuButton\n directionX=\"right\"\n title={t(\"Common:Actions\")}\n iconName={VerticalDotsReactSvgUrl}\n size={17}\n getData={getUserContextOptions}\n isDisabled={false}\n usePortal",
       "module": "/packages/client"
     },
     {
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2457,
+      "line_number": 2483,
       "context": "});\n } else {\n options.splice(1, 0, {\n id: \"option_plugin-actions\",\n key: \"plugin_actions\",\n label: t(\"Common:Actions\"),\n icon: PluginActionsSvgUrl,\n disabled: false,\n items: this.onLoadPlugins(item),\n });\n }",
       "module": "/packages/client"
     },

@@ -23,11 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import { Trans } from "react-i18next";
 import { globalColors } from "../themes";
 import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
 import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";
+import { TFunction } from "i18next";
 
 export type AccessOptionType = {
   key: string | EmployeeType;
@@ -55,9 +56,20 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
     case RoomsType.AIRoom:
       return t("Common:RoleAIAgentManagerDescription");
     case None:
-      return t("Common:RoleRoomAdminDescription", {
-        sectionName: t("Common:MyDocuments"),
-      });
+      return (
+        <Trans
+          t={t as TFunction}
+          ns="Common"
+          i18nKey="RoleRoomAdminDescription"
+          components={{
+            1: <strong></strong>,
+          }}
+          values={{
+            sectionName: t("Common:Documents"),
+            agentSection: t("Common:AIAgents"),
+          }}
+        />
+      );
     default:
       return t("Common:RoleRoomManagerDescription");
   }
@@ -70,7 +82,19 @@ const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
     case RoomsType.AIRoom:
       return t("Common:RoleAIAgentContentCreatorDescription");
     case None:
-      return t("Common:RoleNewUserDescription");
+      return (
+        <Trans
+          t={t as TFunction}
+          ns="Common"
+          i18nKey="RoleNewUserDescription"
+          components={{
+            1: <strong></strong>,
+          }}
+          values={{
+            agentSection: t("Common:AIAgents"),
+          }}
+        />
+      );
     default:
       return t("Common:RoleContentCreatorDescription");
   }
@@ -99,10 +123,21 @@ export const getAccessOptions = (
     portalAdmin: {
       key: EmployeeType.Admin,
       label: getUserTypeTranslation(EmployeeType.Admin, t),
-      description: t("Common:RolePortalAdminDescription", {
-        productName: t("Common:ProductName"),
-        sectionName: t("Common:MyDocuments"),
-      }),
+      description: (
+        <Trans
+          t={t as TFunction}
+          ns="Common"
+          i18nKey="RolePortalAdminDescription"
+          components={{
+            1: <strong></strong>,
+          }}
+          values={{
+            productName: t("Common:ProductName"),
+            sectionName: t("Common:Documents"),
+            agentSection: t("Common:AIAgents"),
+          }}
+        />
+      ),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
       access:

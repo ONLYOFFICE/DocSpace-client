@@ -3,7 +3,7 @@
   "content": "or",
   "content_en_sha1_hash": "1758356db21759f7c5a0da9b4dd1db8fd6feab3f",
   "created_at": "2025-05-19T21:30:47.119Z",
-  "updated_at": "2025-08-12T19:46:25.965Z",
+  "updated_at": "2025-12-15T14:04:23.614Z",
   "comment": {
     "text": "\"This translation key is used to display an 'or' operator symbol, typically used in hotkeys or shortcuts, such as Ctrl + / or ?.\"",
     "is_auto": true,
@@ -24,14 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
-      "line_number": 49,
+      "line_number": 55,
       "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomIn\")}</Text>\n <Text {...keyTextStyles}>+ {t(\"Common:Or\")} =</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomOut\")}</Text>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
-      "line_number": 43,
-      "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectDown\")}</Text>\n <Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>",
       "module": "/packages/client"
     },
     {

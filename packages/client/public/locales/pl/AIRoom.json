@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "Wraz z ich dostępnością, tutaj zobaczysz wyniki aktywności czatu AI od innych użytkowników.",
   "InstructionsDescriptionAgent": "Opisz, jak agent AI powinien się zachowywać i odpowiadać. Zdefiniuj jego rolę, ton i główne zadania.",
   "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga w pisaniu i redagowaniu komunikatów prasowych. Zachowuj profesjonalny, pewny siebie i przyjazny mediom ton. Wyraźnie podkreślaj kluczowe przesłania, unikaj żargonu i utrzymuj tekst zwięzły i angażujący.”",
-  "Knowledge": "Wiedza",
   "KnowledgeDescription": "Prześlij pliki z komputera lub {{productName}}, aby zapewnić lepszy kontekst dla rozmowy. Zwróć uwagę: część lub całość przesłanych treści może zostać ujawniona podczas rozmowy.",
   "KnowledgeSelectIn": "Wybierz w {{productName}}",
   "KnowledgeUnavailable": "Baza wiedzy niedostępna",

@@ -3,7 +3,7 @@
   "content": "Preview",
   "content_en_sha1_hash": "f1fbb2b43dca281d0138f4fcc92543ad143ef0b1",
   "created_at": "2025-05-19T21:30:47.467Z",
-  "updated_at": "2025-12-08T14:10:15.397Z",
+  "updated_at": "2025-12-15T14:04:23.755Z",
   "comment": {
     "text": "The translation key \"Preview\" is used to display a preview label in various UI elements, such as buttons and dialog titles. It provides a clear indication of what is being previewed or shown. This text appears in the PortalSettings categories, specifically in a header with a help button.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1897,
+      "line_number": 1938,
       "context": "key: \"preview\",\n label:\n this.treeFoldersStore.isRecentFolder ||\n this.treeFoldersStore.isFavoritesFolder\n ? t(\"Open\")\n : t(\"Common:Preview\"),\n icon: EyeReactSvgUrl,\n onClick: () =>\n this.treeFoldersStore.isRecentFolder ||\n this.treeFoldersStore.isFavoritesFolder\n ? this.gotoDocEditor(item)",
       "module": "/packages/client"
     },

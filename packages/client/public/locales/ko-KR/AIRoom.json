@@ -12,7 +12,6 @@
   "EmptyResultsViewerDescription": "다른 사용자의 AI 채팅 활동 결과가 사용 가능하게 되면 여기에서 확인할 수 있습니다.",
   "InstructionsDescriptionAgent": "AI 에이전트가 어떻게 행동하고 응답해야 하는지 설명하십시오. 그 역할, 어조, 주요 업무를 정의하십시오.",
   "InstructionsDescriptionAgentExample": "예: “당신은 보도 자료 작성 및 편집을 돕는 AI PR 어시스턴트입니다. 전문적이고, 자신감 있으며, 언론 친화적인 어조를 유지하십시오. 핵심 메시지를 명확하게 강조하고, 전문 용어를 피하며, 텍스트를 간결하고 흥미롭게 유지하십시오.”",
-  "Knowledge": "지식",
   "KnowledgeDescription": "컴퓨터나 {{productName}}에서 파일을 업로드하여 채팅에 더 나은 맥락을 제공하십시오. 참고: 업로드된 콘텐츠의 일부 또는 전부가 대화 중에 노출될 수 있습니다.",
   "KnowledgeSelectIn": "{{productName}}에서 선택",
   "KnowledgeUnavailable": "지식 기반을 사용할 수 없습니다.",

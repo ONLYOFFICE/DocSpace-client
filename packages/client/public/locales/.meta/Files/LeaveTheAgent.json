@@ -3,7 +3,7 @@
   "content": "Leave the agent",
   "content_en_sha1_hash": "448360671ff7052f06a5a0518dca7ae432710746",
   "created_at": "2025-10-27T16:14:30.382Z",
-  "updated_at": "2025-12-08T14:10:15.290Z",
+  "updated_at": "2025-12-15T14:04:23.585Z",
   "comment": {
     "text": "Text for a button or link allowing a user to leave an agent or room, used in dialogs, panels, and context menus. The wording will change depending on whether the user is interacting with an AI agent or a regular room. Translators should ensure it clearly indicates the action of exiting.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2342,
-      "context": "item.id !== this.selectedFolderStore.id,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false\n : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),",
+      "line_number": 2374,
+      "context": "disabled: false,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false\n : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),",
       "module": "/packages/client"
     }
   ],

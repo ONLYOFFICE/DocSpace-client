@@ -1,0 +1,28 @@
+{
+  "key_path": "OpenContextMenu",
+  "content": "Open context menu",
+  "content_en_sha1_hash": "b98d3fd266343740b5690950370786a7e96fa842",
+  "created_at": "2025-12-15T14:04:18.657Z",
+  "updated_at": "2025-12-15T14:04:23.618Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
+      "line_number": 36,
+      "context": "const PreviewActionsBlock = ({ t, textStyles, keyTextStyles }) => {\n return (\n <>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"OpenContextMenu\")}</Text>\n <Text {...keyTextStyles}>Shift + c</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

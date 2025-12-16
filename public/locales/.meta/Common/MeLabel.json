@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2025-11-13T10:21:17.692Z",
+  "updated_at": "2025-12-15T14:04:23.440Z",
   "comment": {
     "text": "This translation key \"MeLabel\" is used to display a user's name when they have ownership rights or are the current room owner in various UI components, such as dialogs and templates. The text appears next to the username in a bold font and indicates that the user has specific permissions or access.",
     "is_auto": true,
@@ -32,6 +32,24 @@
       "file_path": "/packages/client/src/HOCs/withContent.js",
       "line_number": 104,
       "context": "const createdDate = this.getStatusByDate(true);\n const lastOpenedDate = getCorrectDate(locale, lastOpened);\n \n const fileOwner =\n createdBy &&\n ((viewer?.id === createdBy.id && t(\"Common:MeLabel\")) ||\n createdBy.displayName);\n \n const accessToEdit =\n access === ShareAccessRights.FullAccess || // only badges?\n access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
+      "line_number": 157,
+      "context": "className={styles.isMeLabel}\n fontWeight={700}\n fontSize=\"16px\"\n lineHeight=\"22px\"\n >\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n {isPending ? (\n <Badges withoutPaid statusType={userSelection.statusType} />\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Users/RowView/UserContent.tsx",
+      "line_number": 128,
+      "context": ": displayName?.trim()\n ? displayName\n : email}\n {isMe?.(id) ? (\n <Text as=\"div\" className=\"me-label\" fontWeight=\"600\" fontSize=\"13px\">\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n </Link>\n <Badges\n statusType={statusType}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Users/TableView/TableRow.tsx",
+      "line_number": 331,
+      "context": ": displayName?.trim()\n ? displayName\n : email}\n {isMe?.(id) ? (\n <Text className=\"me-label\" fontWeight=\"600\" fontSize=\"13px\">\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n </Text>\n <Badges\n statusType={statusType}",
       "module": "/packages/client"
     },
     {
@@ -104,6 +122,12 @@
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
       "line_number": 209,
       "context": ": null}\n </Text>\n )}\n \n {currentUser?.id === user.id ? (\n <div className=\"me-label\">&nbsp;{`(${t(\"Common:MeLabel\")})`}</div>\n ) : null}\n </div>\n {!(\"isGroup\" in user && user.isGroup) ? (\n <div className=\"role-email\" style={{ display: \"flex\" }}>\n <Text",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 571,
+      "context": ">\n {label}\n </Text>\n {!isGroup && String(id) === currentUserId ? (\n <Text className={styles.isMeLabel} fontWeight={600} fontSize=\"14px\">\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}\n </div>\n {!isGroup ? (",
       "module": "/packages/shared"
     }
   ],

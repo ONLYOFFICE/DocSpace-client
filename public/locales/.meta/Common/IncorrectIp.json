@@ -1,0 +1,28 @@
+{
+  "key_path": "IncorrectIp",
+  "content": "Incorrect IP address",
+  "content_en_sha1_hash": "ab2c90c8a731847e84d27c4be0230e40151c2628",
+  "created_at": "2025-12-15T14:02:39.329Z",
+  "updated_at": "2025-12-15T14:04:23.962Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
+      "line_number": 215,
+      "context": "const getErrorMessage = (ip, index, ipsArray = ips) => {\n const isDuplicate = checkDuplicate(ipsArray, ip, index);\n const isValidFormat = isValidIp(ip) && ip !== \"\";\n \n if (isDuplicate) return t(\"Common:IpAlreadyAdded\");\n if (!isValidFormat) return t(\"Common:IncorrectIp\");\n return null;\n };\n \n const validateAllIps = (ipsArray) => {\n return ipsArray.map((ip, index) => getErrorMessage(ip, index, ipsArray));",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

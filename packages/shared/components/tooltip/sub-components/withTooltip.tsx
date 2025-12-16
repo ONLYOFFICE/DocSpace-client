@@ -24,49 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import FilterReactSvg from "PUBLIC_DIR/images/filter.react.svg";
-import classNames from "classnames";
-import styles from "../Filter.module.scss";
+import React, { ComponentType } from "react";
+import { createTooltipWrapper } from "./createTooltipWrapper";
 
-import { IconButton } from "../../icon-button";
-import { TooltipContainer } from "../../tooltip";
-
-type FilterIconProps = {
-  onClick: () => void;
-  isShowIndicator?: boolean;
-  isOpen?: boolean;
-  id?: string;
-  title?: string;
-  dataTestId?: string;
-};
-
-const FilterIcon = ({
-  id,
-  title,
-  onClick,
-  isOpen,
-  isShowIndicator,
-  dataTestId,
-}: FilterIconProps) => {
-  return (
-    <TooltipContainer
-      as="div"
-      id={id}
-      onClick={onClick}
-      title={title}
-      className={classNames({
-        [styles.button]: true,
-        [styles.isOpen]: isOpen,
-      })}
-      data-testid={dataTestId ?? "filter_icon_button"}
-    >
-      <IconButton iconNode={<FilterReactSvg />} size={16} />
-      {isShowIndicator ? (
-        <div className={styles.indicator} data-testid="filter_icon_indicator" />
-      ) : null}
-    </TooltipContainer>
-  );
-};
-
-export default FilterIcon;
+export function withTooltip<T extends object>(
+  WrappedComponent: ComponentType<T>,
+) {
+  return createTooltipWrapper(WrappedComponent);
+}

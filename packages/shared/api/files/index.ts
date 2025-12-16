@@ -1798,6 +1798,15 @@ export async function deleteVersionFile(
   return res;
 }
 
+export async function terminateFileOps(id: string) {
+  const res = (await request({
+    method: "PUT",
+    url: `/files/fileops/terminate/${id}`,
+  })) as TOperation[];
+
+  return res;
+}
+
 export async function formRoleMapping(data: TFormRoleMappingRequest) {
   return request({
     method: "post",

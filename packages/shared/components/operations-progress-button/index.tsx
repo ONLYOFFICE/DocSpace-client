@@ -85,6 +85,10 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   dropTargetFolderName,
   isDragging,
   clearDropPreviewLocation,
+  cancelDownload,
+  cancelDuplicate,
+  cancelCopy,
+  cancelMove,
 }) => {
   const { t } = useTranslation(["Common"]);
 
@@ -350,7 +354,17 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   };
 
   const onCancelOperation = () => {
-    cancelUpload?.(t);
+    if (isSeveralOperations && isMobile && !showCancelButton) return;
+
+    const operation = operationsLength
+      ? operations[0].operation
+      : panelOperations[0].operation;
+
+    if (operation === OPERATIONS_NAME.upload) cancelUpload?.(t);
+    if (operation === OPERATIONS_NAME.download) cancelDownload?.();
+    if (operation === OPERATIONS_NAME.duplicate) cancelDuplicate?.();
+    if (operation === OPERATIONS_NAME.copy) cancelCopy?.();
+    if (operation === OPERATIONS_NAME.move) cancelMove?.();
   };
 
   const disableOpenPanel =
@@ -429,13 +443,10 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
               alert={operationsAlert}
               completed={operationsCompleted}
               onClick={handleFloatingButtonClick}
-              {...(!isSeveralOperations &&
-                !isMobile && {
-                  showCancelButton,
-                  clearUploadedFilesHistory: onCancelOperation,
-                })}
               withoutStatus={withoutStatus}
               percent={getPercent()}
+              onCancelOperation={onCancelOperation}
+              showCancelButton={isSeveralOperations ? false : showCancelButton}
             />
           </HelpButton>
         ) : null}
@@ -460,8 +471,12 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
               ) => {
                 clearPanelOperationsData?.(operationName);
               }}
-              onCancel={onCancelOperation}
               onOpenPanel={handleOperationClick}
+              cancelUpload={cancelUpload}
+              cancelDownload={cancelDownload}
+              cancelDuplicate={cancelDuplicate}
+              cancelCopy={cancelCopy}
+              cancelMove={cancelMove}
             />
           </DropDown>
         ) : null}

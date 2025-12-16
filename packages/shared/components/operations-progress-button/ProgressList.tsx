@@ -36,6 +36,8 @@ import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
+import { useTranslation } from "react-i18next";
+
 import { ProgressBar } from "./ProgressBar";
 import { Operation } from "./OperationsProgressButton.types";
 import { OPERATIONS_NAME } from "../../constants";
@@ -49,7 +51,11 @@ interface ProgressListProps {
     operationId: string | null,
     operation: string,
   ) => void;
-  onCancel?: () => void;
+  cancelUpload?: (t: (key: string) => string) => void;
+  cancelDownload?: () => void;
+  cancelDuplicate?: () => void;
+  cancelCopy?: () => void;
+  cancelMove?: () => void;
 }
 
 const getIcon = (icon: string): string => {
@@ -85,14 +91,28 @@ const ProgressList = ({
   panelOperations,
   clearOperationsData,
   clearPanelOperationsData,
-  onCancel,
   onOpenPanel,
+  cancelUpload,
+  cancelDownload,
+  cancelDuplicate,
+  cancelCopy,
+  cancelMove,
 }: ProgressListProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const onOpenPanelOperation = (item: Operation) => {
     if (!item.showPanel) return;
 
     item.showPanel(true);
     onOpenPanel();
+  };
+
+  const onCancelOperation = (item: Operation) => {
+    if (item.operation === OPERATIONS_NAME.upload) cancelUpload?.(t);
+    if (item.operation === OPERATIONS_NAME.download) cancelDownload?.();
+    if (item.operation === OPERATIONS_NAME.duplicate) cancelDuplicate?.();
+    if (item.operation === OPERATIONS_NAME.copy) cancelCopy?.();
+    if (item.operation === OPERATIONS_NAME.move) cancelMove?.();
   };
 
   return (
@@ -109,9 +129,10 @@ const ProgressList = ({
             open
             iconUrl={getIcon(item.operation)}
             onClickAction={() => {}}
-            withoutProgress
+            withoutProgress={item.withoutProgress}
             onClearProgress={clearOperationsData}
             operation={item.operation}
+            onCancel={() => onCancelOperation(item)}
           />
         </div>
       ))}
@@ -130,7 +151,7 @@ const ProgressList = ({
             onClickAction={() => {}}
             onClearProgress={clearPanelOperationsData}
             operation={item.operation}
-            onCancel={onCancel}
+            onCancel={() => onCancelOperation(item)}
             onOpenPanel={() => onOpenPanelOperation(item)}
             withoutStatus={item.withoutStatus}
             withoutProgress={item.withoutProgress}

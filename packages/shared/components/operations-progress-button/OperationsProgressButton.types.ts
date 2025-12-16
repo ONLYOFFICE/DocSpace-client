@@ -53,6 +53,10 @@ export interface OperationsProgressProps {
   clearPanelOperationsData?: (operation?: string | null) => void;
   clearDropPreviewLocation?: () => void;
   cancelUpload?: (t: (key: string) => string) => void;
+  cancelDownload?: () => void;
+  cancelDuplicate?: () => void;
+  cancelCopy?: () => void;
+  cancelMove?: () => void;
   onOpenPanel?: () => void;
   mainButtonVisible?: boolean;
   needErrorChecking?: boolean;

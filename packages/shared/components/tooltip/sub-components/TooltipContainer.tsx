@@ -24,49 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import FilterReactSvg from "PUBLIC_DIR/images/filter.react.svg";
-import classNames from "classnames";
-import styles from "../Filter.module.scss";
+import React, { forwardRef } from "react";
+import { createTooltipWrapper } from "./createTooltipWrapper";
 
-import { IconButton } from "../../icon-button";
-import { TooltipContainer } from "../../tooltip";
+type TooltipContainerBaseProps = {
+  as?: React.ElementType;
+  children?: React.ReactNode;
+  type?: string;
+} & React.HTMLAttributes<HTMLElement>;
 
-type FilterIconProps = {
-  onClick: () => void;
-  isShowIndicator?: boolean;
-  isOpen?: boolean;
-  id?: string;
-  title?: string;
-  dataTestId?: string;
-};
+const TooltipContainerBase = forwardRef<HTMLElement, TooltipContainerBaseProps>(
+  (props, ref) => {
+    const { as: Element = "div", children, ...restProps } = props;
+    return React.createElement(Element, { ...restProps, ref }, children);
+  },
+);
 
-const FilterIcon = ({
-  id,
-  title,
-  onClick,
-  isOpen,
-  isShowIndicator,
-  dataTestId,
-}: FilterIconProps) => {
-  return (
-    <TooltipContainer
-      as="div"
-      id={id}
-      onClick={onClick}
-      title={title}
-      className={classNames({
-        [styles.button]: true,
-        [styles.isOpen]: isOpen,
-      })}
-      data-testid={dataTestId ?? "filter_icon_button"}
-    >
-      <IconButton iconNode={<FilterReactSvg />} size={16} />
-      {isShowIndicator ? (
-        <div className={styles.indicator} data-testid="filter_icon_indicator" />
-      ) : null}
-    </TooltipContainer>
-  );
-};
+TooltipContainerBase.displayName = "TooltipContainerBase";
 
-export default FilterIcon;
+export const TooltipContainer = createTooltipWrapper(TooltipContainerBase);
+
+TooltipContainer.displayName = "TooltipContainer";

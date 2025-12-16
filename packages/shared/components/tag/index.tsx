@@ -34,6 +34,7 @@ import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
+import { TooltipContainer } from "../tooltip";
 
 import type { TagProps } from "./Tag.types";
 import styles from "./Tag.module.scss";
@@ -182,7 +183,8 @@ const TagPure = ({
       </DropDown>
     </>
   ) : (
-    <div
+    <TooltipContainer
+      as="div"
       title={label}
       onClick={onClickAction}
       className={classNames(styles.tag, "tag", className, {
@@ -227,7 +229,7 @@ const TagPure = ({
           ) : null}
         </>
       )}
-    </div>
+    </TooltipContainer>
   );
 };
 

@@ -26,7 +26,8 @@
 
 import React from "react";
 import { describe, it, expect, vi } from "vitest";
-import { screen, fireEvent, waitFor, render } from "@testing-library/react";
+import { screen, waitFor, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import { InfoBadge } from ".";
 import type InfoBadgeProps from "./InfoBadge.types";
@@ -35,8 +36,8 @@ const baseProps: InfoBadgeProps = {
   label: "label",
   offset: 4,
   place: "bottom",
-  tooltipDescription: "Description",
-  tooltipTitle: "Title",
+  tooltipDescription: <div>Description</div>,
+  tooltipTitle: <div>Title</div>,
 };
 
 describe("<InfoBadge />", () => {
@@ -53,10 +54,11 @@ describe("<InfoBadge />", () => {
   });
 
   it("renders tooltip with correct title and description", async () => {
+    const user = userEvent.setup();
     render(<InfoBadge {...baseProps} />);
 
     const badge = screen.getByText(baseProps.label);
-    fireEvent.click(badge);
+    await user.click(badge);
 
     await waitFor(() => {
       expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
@@ -65,10 +67,11 @@ describe("<InfoBadge />", () => {
   });
 
   it("closes tooltip when close button is clicked", async () => {
+    const user = userEvent.setup();
     render(<InfoBadge {...baseProps} />);
 
     const badge = screen.getByText(baseProps.label);
-    fireEvent.click(badge);
+    await user.click(badge);
 
     // Wait for the tooltip to be visible
     await waitFor(() => {
@@ -77,7 +80,7 @@ describe("<InfoBadge />", () => {
 
     // Now find the close button and click it
     const closeButton = screen.getByTestId("close-tooltip-button");
-    fireEvent.click(closeButton);
+    await user.click(closeButton);
 
     try {
       await waitFor(() => {
@@ -89,6 +92,7 @@ describe("<InfoBadge />", () => {
   });
 
   it("renders with custom place and offset", async () => {
+    const user = userEvent.setup();
     const customProps = {
       ...baseProps,
       place: "top" as const,
@@ -98,10 +102,28 @@ describe("<InfoBadge />", () => {
     render(<InfoBadge {...customProps} />);
 
     const badge = screen.getByText(baseProps.label);
-    fireEvent.click(badge);
+    await user.click(badge);
 
     await waitFor(() => {
       expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
     });
+  });
+
+  it("renders simple string content tooltip", async () => {
+    const simpleProps: InfoBadgeProps = {
+      label: "label",
+      offset: 4,
+      place: "bottom",
+      tooltipDescription: "Simple description",
+      tooltipTitle: "Simple title",
+    };
+
+    render(<InfoBadge {...simpleProps} />);
+
+    const badge = screen.getByTestId("badge");
+
+    // For simple content, tooltip uses global tooltip with data-tooltip-html
+    expect(badge).toHaveAttribute("data-tooltip-id", "info-tooltip");
+    expect(badge).toHaveAttribute("data-tooltip-html");
   });
 });

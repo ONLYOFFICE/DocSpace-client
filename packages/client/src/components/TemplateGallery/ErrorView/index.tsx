@@ -34,7 +34,11 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import styles from "./ErrorView.module.scss";
 import type { ErrorViewProps } from "./ErrorView.types";
 
-const ErrorView: React.FC<ErrorViewProps> = ({ t, onCloseClick }) => {
+const ErrorView: React.FC<ErrorViewProps> = ({
+  t,
+  onCloseClick,
+  descriptionText,
+}) => {
   const isMobile = isMobileUtils();
 
   return (
@@ -44,7 +48,7 @@ const ErrorView: React.FC<ErrorViewProps> = ({ t, onCloseClick }) => {
         imageSrc={ErrorImageSvgUrl}
         imageAlt="Error Screen Gallery image"
         headerText={t("FormGallery:ErrorViewHeader")}
-        descriptionText={t("FormGallery:ErrorViewDescription")}
+        descriptionText={descriptionText}
         buttons={
           <Button
             primary

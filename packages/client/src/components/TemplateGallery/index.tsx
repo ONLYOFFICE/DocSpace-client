@@ -50,6 +50,7 @@ const TemplateGallery = (props: {
   resetFilters: (ext: string) => Promise<void>;
   initTemplateGallery: () => Promise<void>;
   oformsLoadError: boolean;
+  oformsNetworkError: boolean;
   setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
   t: TTranslation;
   filterOformsByLocaleIsLoading: boolean;
@@ -63,6 +64,7 @@ const TemplateGallery = (props: {
     resetFilters,
     initTemplateGallery,
     oformsLoadError,
+    oformsNetworkError,
     setSubmitToGalleryDialogVisible,
     t,
     filterOformsByLocaleIsLoading,
@@ -153,8 +155,17 @@ const TemplateGallery = (props: {
   );
 
   const renderContent = useMemo(() => {
-    if (oformsLoadError) {
-      return <ErrorView onCloseClick={onCloseClick} />;
+    if (oformsLoadError || oformsNetworkError) {
+      const descriptionText = oformsNetworkError
+        ? t("FormGallery:ErrorViewDescriptionNetworkError")
+        : t("FormGallery:ErrorViewDescription");
+
+      return (
+        <ErrorView
+          onCloseClick={onCloseClick}
+          descriptionText={descriptionText}
+        />
+      );
     }
 
     return (
@@ -221,6 +232,7 @@ export default inject<TStore>(({ oformsStore, dialogsStore }) => {
     filterOformsByLocaleIsLoading,
     categoryFilterLoaded,
     languageFilterLoaded,
+    oformsNetworkError,
   } = oformsStore;
 
   const { setSubmitToGalleryDialogVisible } = dialogsStore;
@@ -236,5 +248,6 @@ export default inject<TStore>(({ oformsStore, dialogsStore }) => {
     filterOformsByLocaleIsLoading,
     categoryFilterLoaded,
     languageFilterLoaded,
+    oformsNetworkError,
   };
 })(withTranslation("Common")(observer(TemplateGallery)));

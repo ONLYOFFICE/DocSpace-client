@@ -29,4 +29,5 @@ import type { TFunction } from "i18next";
 export interface ErrorViewProps {
   t: TFunction;
   onCloseClick: () => void;
+  descriptionText: string;
 }

@@ -24,58 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL, API_PREFIX, HEADER_AI_DISABLED } from "../../utils";
+export { aiAgentsHandler, PATH_AI_AGENTS } from "./agents";
 
-export const PATH_AI_CONFIG = "ai/config";
+export { aiConfigHandler, PATH_AI_CONFIG } from "./config";
 
-const success = {
-  response: {
-    webSearchEnabled: true,
-    vectorizationEnabled: true,
-    aiReady: true,
-    portalMcpServerId: "id",
-    embeddingModel: "text-embedding-3-small",
-    knowledgeSearchToolName: "docspace_knowledge_search",
-    webSearchToolName: "docspace_web_search",
-    webCrawlingToolName: "docspace_web_crawling",
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-};
+export { aiModelsHandler, PATH_AI_MODELS } from "./models";
 
-const successDisabled = {
-  response: {
-    webSearchEnabled: false,
-    vectorizationEnabled: false,
-    aiReady: false,
-    portalMcpServerId: "id",
-    embeddingModel: "text-embedding-3-small",
-    knowledgeSearchToolName: "docspace_knowledge_search",
-    webSearchToolName: "docspace_web_search",
-    webCrawlingToolName: "docspace_web_crawling",
-  },
-  count: 1,
-  links: [
-    {
-      href: `${BASE_URL}/${API_PREFIX}/${PATH_AI_CONFIG}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-};
+export { aiProvidersHandler, PATH_AI_PROVIDERS } from "./providers";
 
-export const aiConfigHandler = (headers: Headers) => {
-  if (headers.get(HEADER_AI_DISABLED)) {
-    return new Response(JSON.stringify(successDisabled));
-  }
+export { aiServerHandler, PATH_AI_SERVER } from "./server";
 
-  return new Response(JSON.stringify(success));
-};
+export { aiServersHandler, PATH_AI_SERVERS } from "./servers";

@@ -655,7 +655,7 @@ export async function getInviteLink(employeeType) {
   return res;
 }
 
-export async function setInviteLink(data) {
+export async function createInviteLink(data) {
   const options = {
     method: "post",
     url: `/portal/users/invitationlink`,

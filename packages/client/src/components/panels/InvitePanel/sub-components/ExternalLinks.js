@@ -70,7 +70,6 @@ const ExternalLinks = ({
   t,
   roomId,
   roomType,
-  defaultAccess,
   shareLinks,
   setShareLinks,
   isOwner,
@@ -96,6 +95,7 @@ const ExternalLinks = ({
   setInvitePanelOptions,
 }) => {
   const showUsersJoinedBlock = !!activeLink?.maxUseCount;
+  const showLifetimeBlock = !!activeLink?.expirationDate;
   const showUsersLimitWarning =
     activeLink?.currentUseCount >= activeLink?.maxUseCount;
   const linkIsExpired = moment(new Date()).isAfter(
@@ -314,87 +314,92 @@ const ExternalLinks = ({
             />
           </StyledInviteInputContainer>
 
-          <div className="invite-via-link-settings-container">
-            <div className="invite-via-link-settings">
-              <IconButton
-                className="invite-via-link-settings-icon"
-                iconName={ClockIconUrl}
-                size={12}
-                isDisabled
-              />
-              <Text
-                className="invite-via-link-settings-text"
-                fontSize="12px"
-                fontWeight={400}
-              >
-                {t("Files:ValidUntil")}
-              </Text>
-              <Text
-                fontSize="12px"
-                fontWeight={600}
-                color={linkIsExpired ? warningColor : null}
-              >
-                {getCorrectDate(locale, activeLink.expirationDate)}
-              </Text>
-              {linkIsExpired ? (
-                <HelpButton
-                  place="right"
-                  iconNode={<ButtonAlertIcon />}
-                  tooltipMaxWidth="344px"
-                  tooltipContent={
-                    <>
-                      <Text>{t("Common:LinkSettingsExpired")}</Text>
-                      <Text>
-                        {t("Files:LinkSettingsExpiredToastDescription")}
-                      </Text>
-                    </>
-                  }
-                  className="invite-via-link-settings-warning"
-                  color={warningColor}
-                />
+          {showLifetimeBlock || showUsersJoinedBlock ? (
+            <div className="invite-via-link-settings-container">
+              {showLifetimeBlock ? (
+                <div className="invite-via-link-settings">
+                  <IconButton
+                    className="invite-via-link-settings-icon"
+                    iconName={ClockIconUrl}
+                    size={12}
+                    isDisabled
+                  />
+                  <Text
+                    className="invite-via-link-settings-text"
+                    fontSize="12px"
+                    fontWeight={400}
+                  >
+                    {t("Files:ValidUntil")}
+                  </Text>
+                  <Text
+                    fontSize="12px"
+                    fontWeight={600}
+                    color={linkIsExpired ? warningColor : null}
+                  >
+                    {getCorrectDate(locale, activeLink.expirationDate)}
+                  </Text>
+                  {linkIsExpired ? (
+                    <HelpButton
+                      place="right"
+                      iconNode={<ButtonAlertIcon />}
+                      tooltipMaxWidth="344px"
+                      tooltipContent={
+                        <>
+                          <Text>{t("Common:LinkSettingsExpired")}</Text>
+                          <Text>
+                            {t("Files:LinkSettingsExpiredToastDescription")}
+                          </Text>
+                        </>
+                      }
+                      className="invite-via-link-settings-warning"
+                      color={warningColor}
+                    />
+                  ) : null}
+                </div>
+              ) : null}
+
+              {showUsersJoinedBlock ? (
+                <div className="invite-via-link-settings">
+                  <IconButton
+                    iconName={PersonPlusReactSvgUrl}
+                    size={12}
+                    isDisabled
+                  />
+                  <Text
+                    className="invite-via-link-settings-text"
+                    fontSize="12px"
+                    fontWeight={400}
+                  >
+                    {t("Files:UsersJoined")}
+                  </Text>
+                  <Text
+                    fontSize="12px"
+                    fontWeight={600}
+                    color={showUsersLimitWarning ? warningColor : null}
+                  >
+                    {activeLink.currentUseCount}/{activeLink.maxUseCount}
+                  </Text>
+                  {showUsersLimitWarning ? (
+                    <HelpButton
+                      place="right"
+                      iconNode={<ButtonAlertIcon />}
+                      tooltipContent={
+                        <>
+                          <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                          <Text>
+                            {t("Files:LinkSettingsUsersLimitToastDescription")}
+                          </Text>
+                        </>
+                      }
+                      className="invite-via-link-settings-warning"
+                      tooltipMaxWidth="344px"
+                      color={warningColor}
+                    />
+                  ) : null}
+                </div>
               ) : null}
             </div>
-            {showUsersJoinedBlock ? (
-              <div className="invite-via-link-settings">
-                <IconButton
-                  iconName={PersonPlusReactSvgUrl}
-                  size={12}
-                  isDisabled
-                />
-                <Text
-                  className="invite-via-link-settings-text"
-                  fontSize="12px"
-                  fontWeight={400}
-                >
-                  {t("Files:UsersJoined")}
-                </Text>
-                <Text
-                  fontSize="12px"
-                  fontWeight={600}
-                  color={showUsersLimitWarning ? warningColor : null}
-                >
-                  {activeLink.currentUseCount}/{activeLink.maxUseCount}
-                </Text>
-                {showUsersLimitWarning ? (
-                  <HelpButton
-                    place="right"
-                    iconNode={<ButtonAlertIcon />}
-                    tooltipContent={
-                      <>
-                        <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
-                        <Text>
-                          {t("Files:LinkSettingsUsersLimitToastDescription")}
-                        </Text>
-                      </>
-                    }
-                    className="invite-via-link-settings-warning"
-                    tooltipMaxWidth="344px"
-                    color={warningColor}
-                  />
-                ) : null}
-              </div>
-            ) : null}
-          </div>
+          ) : null}
         </>
       ) : null}
     </StyledExternalLink>

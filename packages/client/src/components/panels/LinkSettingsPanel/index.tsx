@@ -77,9 +77,12 @@ const LinkSettingsPanel = ({
   const maxUsersNumber = activeLink.maxUseCount ?? 1;
   const limitIsChecked = !activeLink.maxUseCount ? false : true;
 
+  const isEdit = Object.keys(activeLink).length === 0 ? false : true;
   const date = activeLink.expirationDate
     ? moment(activeLink.expirationDate)
-    : null;
+    : isEdit
+      ? null
+      : moment().add(7, "days");
 
   const [userLimitIsChecked, setUserLimitIsChecked] = useState(limitIsChecked);
   const [limitDate, setLimitDate] = useState<moment.Moment | null>(date);
@@ -90,7 +93,7 @@ const LinkSettingsPanel = ({
     ? Number(maxNumber) <= usersNumber
     : false;
 
-  const showExpiredError = moment(new Date()).isAfter(limitDate);
+  const [showExpiredError, setShowExpiredError] = useState(false);
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -117,13 +120,20 @@ const LinkSettingsPanel = ({
   };
 
   const onSubmitChanges = () => {
+    const expirationDate = limitDate ? moment(limitDate).toISOString() : null;
+
+    if (expirationDate && moment().isAfter(expirationDate)) {
+      setShowExpiredError(true);
+      return;
+    }
+
     const defaultLink = filteredAccesses.find(
       (a) => a.access === currentAccess?.access,
     );
     if (defaultLink) {
       const linkToSubmit = {
         ...defaultLink,
-        expirationDate: limitDate ? moment(limitDate).toISOString() : null,
+        expirationDate,
         maxUseCount: userLimitIsChecked ? Number(maxNumber) : null,
         currentUseCount: usersNumber,
       } as TOption & {
@@ -134,6 +144,13 @@ const LinkSettingsPanel = ({
 
       onSubmit(linkToSubmit);
     }
+  };
+
+  const onChangeLimitDate = (date: moment.Moment | null) => {
+    const isExpired = moment().isAfter(date);
+    if (!isExpired) setShowExpiredError(false);
+
+    setLimitDate(date);
   };
 
   return (
@@ -291,7 +308,7 @@ const LinkSettingsPanel = ({
             id="link-settings_date-time-picker"
             locale={locale}
             hasError={false}
-            onChange={(date) => setLimitDate(date)}
+            onChange={onChangeLimitDate}
             openDate={new Date()}
             className={styles.linkSettingsDatePicker}
             selectDateText={t("Common:SelectDate")}

@@ -59,14 +59,8 @@ const DateTimePicker = (props: DateTimePickerProps) => {
   const { t } = useTranslation("Common");
 
   const options = [
-    {
-      key: "AM",
-      label: t("AM"),
-    },
-    {
-      key: "PM",
-      label: t("PM"),
-    },
+    { key: "AM", label: t("AM") },
+    { key: "PM", label: t("PM") },
   ];
 
   const [isTimeFocused, setIsTimeFocused] = useState(false);
@@ -74,13 +68,21 @@ const DateTimePicker = (props: DateTimePickerProps) => {
   const [date, setDate] = useState(initialDate ? moment(initialDate) : null);
   const [isTwelveHourFormat, setIsTwelveHourFormat] = useState(true);
   const [selectedFormat, setSelectedFormat] = useState<TOption>(
-    initialDate && moment(initialDate).hour() >= 12 ? options[1] : options[0],
+    initialDate && moment(initialDate ?? undefined).hour() >= 12
+      ? options[1]
+      : options[0],
   );
 
   const showTimePicker = () => setIsTimeFocused(true);
   const hideTimePicker = () => setIsTimeFocused(false);
 
   const handleChange = (d: moment.Moment | null) => {
+    if (isTwelveHourFormat) {
+      setSelectedFormat(
+        moment(d ?? undefined).hour() >= 12 ? options[1] : options[0],
+      );
+    }
+
     onChange?.(d);
     setDate(d);
   };

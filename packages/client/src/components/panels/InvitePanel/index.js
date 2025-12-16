@@ -62,7 +62,7 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import {
   getInviteLink,
-  setInviteLink,
+  createInviteLink,
   updateInviteLink,
 } from "@docspace/shared/api/portal";
 import { getDate } from "@docspace/shared/components/share/Share.helpers";
@@ -638,11 +638,13 @@ const InvitePanel = ({
         id: activeLink?.id,
         employeeType: defaultLink?.access ?? defaultAccess,
         maxUseCount: defaultLink?.maxUseCount,
-        expiration: defaultLink?.expirationDate,
+        expiration: defaultLink
+          ? defaultLink.expirationDate
+          : moment().add(7, "days"),
       };
 
       const link = createNewLink
-        ? await setInviteLink(requestData)
+        ? await createInviteLink(requestData)
         : await updateInviteLink(requestData);
 
       const linkData = {
@@ -816,8 +818,8 @@ const InvitePanel = ({
       onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
       containerVisible={
-        linkSettingsPanelVisible ??
-        (!hideSelector ? addUsersPanelVisible : false)
+        linkSettingsPanelVisible ||
+        (!hideSelector ? addUsersPanelVisible : null)
       }
       isLoading={invitePanelIsLoding}
       withBodyScroll

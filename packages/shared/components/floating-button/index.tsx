@@ -90,9 +90,9 @@ const FloatingButton = forwardRef<HTMLDivElement, FloatingButtonProps>(
       completed = false,
       onClick,
       color,
-      clearUploadedFilesHistory,
       withoutProgress,
       showCancelButton,
+      onCancelOperation,
       withoutStatus = false,
       percent,
     },
@@ -105,7 +105,7 @@ const FloatingButton = forwardRef<HTMLDivElement, FloatingButtonProps>(
     }, [icon]);
 
     const handleProgressClear = () => {
-      clearUploadedFilesHistory?.();
+      onCancelOperation?.();
     };
 
     const buttonClassName = useMemo(() => {

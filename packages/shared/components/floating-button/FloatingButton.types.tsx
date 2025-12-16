@@ -42,7 +42,7 @@ export type FloatingButtonProps = {
   onClick?: (e: React.MouseEvent) => void;
   /** CSS color */
   color?: string;
-  clearUploadedFilesHistory?: () => void;
+  onCancelOperation?: () => void;
   withoutProgress?: boolean;
   showCancelButton?: boolean;
   completed?: boolean;

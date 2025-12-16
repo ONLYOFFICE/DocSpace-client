@@ -3155,6 +3155,7 @@ class FilesStore {
         "separator0",
         "edit-agent",
         "invite-users-to-room",
+        "link-for-room-members",
         "room-info",
         "pin-room",
         "unpin-room",

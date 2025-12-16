@@ -29,6 +29,7 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import { IconButton } from "../icon-button";
 import { SelectedItemProps } from "./SelectedItem.types";
 import styles from "./SelectedItem.module.scss";
+import { TooltipContainer } from "../tooltip";
 
 export const SelectedItemPure = (props: SelectedItemProps) => {
   const {
@@ -53,8 +54,8 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     if (!isDisabled) onClose(propKey, label, group || "", e);
   };
 
-  const handleOnClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLDivElement;
+  const handleOnClick = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as HTMLElement;
 
     if (!isDisabled && !target.classList.contains("selected-tag-removed"))
       onClick?.(propKey, label, group, e);
@@ -78,7 +79,8 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     .join(" ");
 
   return (
-    <div
+    <TooltipContainer
+      as="div"
       onClick={handleOnClick}
       className={selectedItemClassNames}
       id={id}
@@ -97,7 +99,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
           isDisabled={isDisabled}
         />
       ) : null}
-    </div>
+    </TooltipContainer>
   );
 };
 

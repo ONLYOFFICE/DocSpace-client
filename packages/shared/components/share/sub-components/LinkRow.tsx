@@ -36,6 +36,7 @@ import type { TFileLink } from "../../../api/files/types";
 
 import type { TOption } from "../../combobox";
 import { ContextMenuButton } from "../../context-menu-button";
+import { toastr } from "../../toast";
 
 import {
   getAccessTypeOptions,
@@ -138,7 +139,11 @@ const LinkRow = ({
             shareLink={shareLink}
             isExpiredLink={isExpiredLink}
             disabledCopy={isArchiveFolder}
-            onCopyLink={() => onCopyLink(link)}
+            onCopyLink={() =>
+              isExpiredLink
+                ? toastr.error(t("Common:LinkExpired"))
+                : onCopyLink(link)
+            }
           />
           <LinkExpiration
             t={t}

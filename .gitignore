@@ -28,6 +28,7 @@ Logs/
 **/.yarn/cache
 **/.yarn/install-state.gz
 licenses.csv
+license.xml
 
 
 .idea

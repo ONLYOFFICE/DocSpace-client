@@ -28,6 +28,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
+import moment from "moment";
 
 import {
   EmployeeType,
@@ -64,6 +65,7 @@ import {
   setInviteLink,
   updateInviteLink,
 } from "@docspace/shared/api/portal";
+import { getDate } from "@docspace/shared/components/share/Share.helpers";
 
 const InvitePanel = ({
   folders,
@@ -471,15 +473,28 @@ const InvitePanel = ({
   };
 
   const copyLink = (link) => {
-    if (link) {
-      toastr.success(
-        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
-          days_count: 7,
-        })}`,
-      );
+    if (!link.shareLink && !link.url) return;
 
-      copyShareLink(link);
-    }
+    const expirationDate = link?.expirationDate ?? link.expiration;
+    const isExpired = moment(new Date()).isAfter(moment(expirationDate));
+    const isLimit = link?.currentUseCount >= link?.maxUseCount;
+    if (isExpired) return toastr.error(t("Common:LinkExpired"));
+    if (isLimit) return toastr.error(t("Common:LinkNoLongerAvailable"));
+
+    const date = getDate(expirationDate);
+
+    toastr.success(
+      <Trans
+        t={t}
+        ns="Common"
+        values={{ date }}
+        i18nKey="LinkExpireAfter"
+        components={{ 1: <strong key="strong-expire-after" /> }}
+      />,
+      t("Common:LinkCopiedToClipboard"),
+    );
+
+    copyShareLink(link.shareLink ?? link.url);
   };
 
   const editLink = async (linkAccess = null, defaultLink) => {
@@ -523,7 +538,7 @@ const InvitePanel = ({
       maxUseCount,
     };
 
-    copyLink(shareLink);
+    copyLink(newShareLink);
     setShareLinks([newShareLink]);
     return setActiveLink(newShareLink);
   };
@@ -545,7 +560,7 @@ const InvitePanel = ({
         };
 
         setActiveLink(linkDataObj);
-        copyLink(linkDataObj.shareLink);
+        copyLink(linkDataObj);
         setExternalLinksVisible(true);
         return;
       } catch (error) {
@@ -553,13 +568,31 @@ const InvitePanel = ({
       }
     } else {
       try {
+        let linkExpirationDate = moment(
+          access.expirationDate ?? activeLink?.expirationDate,
+        );
+        const isExpired = moment(new Date()).isAfter(linkExpirationDate);
+
+        if (isExpired) {
+          linkExpirationDate = moment().add(7, "days");
+        }
+
+        if (access.expirationDate === null) {
+          linkExpirationDate = null;
+        }
+
+        const maxUsersCount =
+          access.maxUseCount || access?.maxUseCount === null
+            ? access.maxUseCount
+            : activeLink?.maxUseCount;
+
         const newLink = await api.rooms.setInvitationLinks(
           roomId,
           "Invite",
           +selectedAccess,
           shareLinks[0]?.id ?? null,
-          access.expirationDate ?? activeLink?.expirationDate,
-          access.maxUseCount ?? activeLink?.maxUseCount,
+          linkExpirationDate,
+          maxUsersCount,
         );
 
         const {
@@ -586,7 +619,7 @@ const InvitePanel = ({
         setActiveLink(newActiveLink);
 
         setLinkSelectedAccess(access);
-        copyLink(link.shareLink);
+        copyLink(link);
       } catch (error) {
         toastr.error(error);
       }
@@ -620,7 +653,7 @@ const InvitePanel = ({
       };
 
       setActiveLink(linkData);
-      copyLink(link.url);
+      copyLink(link);
       onChangeExternalLinksVisible(true);
     } catch (error) {
       toastr.error(error);

@@ -304,7 +304,16 @@ export type TListenEventCallbackMap = {
     id: number;
     data: string;
   }) => void;
-  [SocketEvents.ExportChat]: (data: { resultFile: TFile }) => void;
+  [SocketEvents.ExportChat]: (
+    data:
+      | {
+          resultFile: TFile;
+        }
+      | {
+          resultFile: null;
+          error: string;
+        },
+  ) => void;
 };
 
 /**

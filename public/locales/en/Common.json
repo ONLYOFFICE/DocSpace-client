@@ -1086,5 +1086,7 @@
   "IpAlreadyAdded": "This IP address has already been added",
   "IncorrectIp": "Incorrect IP address",
   "AM": "AM",
-  "PM": "PM"
+  "PM": "PM",
+  "LinkSettingsExpired": "Registration via this link is no longer available since its lifetime has expired.",
+  "LinkNoLongerAvailable": "Link no longer available"
 }

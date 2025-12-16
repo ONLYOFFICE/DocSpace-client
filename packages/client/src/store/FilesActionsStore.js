@@ -3177,18 +3177,19 @@ class FilesActionStore {
       });
   };
 
-  onClickRemoveFromRecent = (selection) => {
+  onClickRemoveFromRecent = (selection, t) => {
     const { setSelected } = this.filesStore;
     const ids = selection.map((item) => item.id);
-    this.removeFilesFromRecent(ids);
+    this.removeFilesFromRecent(ids, t);
     setSelected("none");
   };
 
-  removeFilesFromRecent = async (fileIds) => {
+  removeFilesFromRecent = async (fileIds, t) => {
     const { refreshFiles } = this.filesStore;
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
+    toastr.success(t("Files:RemovedFromRecent"));
   };
 
   onCreateRoomFromTemplate = (item, addSelection) => {

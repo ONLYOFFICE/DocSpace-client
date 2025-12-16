@@ -153,7 +153,7 @@ const ExternalLinks = ({
     }
   };
 
-  const onCopyLink = () => copyLink(activeLink.shareLink);
+  const onCopyLink = () => copyLink(activeLink);
 
   // const toggleActionLinks = () => {
   //   setActionLinksVisible(!actionLinksVisible);
@@ -344,7 +344,7 @@ const ExternalLinks = ({
                   tooltipMaxWidth="344px"
                   tooltipContent={
                     <>
-                      <Text>{t("Files:LinkSettingsExpiredToast")}</Text>
+                      <Text>{t("Common:LinkSettingsExpired")}</Text>
                       <Text>
                         {t("Files:LinkSettingsExpiredToastDescription")}
                       </Text>

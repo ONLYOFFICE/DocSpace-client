@@ -148,6 +148,7 @@
   "Protected": "protected",
   "RecentlyOpenedTooltip": "Recently opened via the link",
   "RemovedFromFavorites": "Removed from favorites",
+  "RemovedFromRecent": "Removed from recent",
   "RemoveFromFavorites": "Remove from favorites",
   "Reorder": "Reorder",
   "ReorderIndex": "The Reorder action will remove spaces in the indexes. The files will be re-indexed in order with offset to fill in missing indexes.",
@@ -229,6 +230,5 @@
   "UsersJoined": "Users joined:",
   "LinkSettingsUsersLimitToast": "Registration via the link is no longer available since the limit has been exceeded.",
   "LinkSettingsUsersLimitToastDescription": "Adjust the limit in settings or create a new link to enable new user registrations.",
-  "LinkSettingsExpiredToast": "Registration via this link is no longer available since its lifetime has expired.",
   "LinkSettingsExpiredToastDescription": "Extend the validity period in the settings or create a new link to enable new user registrations."
 }

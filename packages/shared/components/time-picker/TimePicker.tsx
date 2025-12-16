@@ -123,10 +123,15 @@ const TimePicker = ({
         "YYYY-MM-DD HH:mm",
       ),
     );
+
+    const dateFormat = isTwelveHourFormat
+      ? "YYYY-MM-DD HH:mm A"
+      : "YYYY-MM-DD HH:mm";
+
     onChange(
       moment(
-        `${date.format("YYYY-MM-DD")} ${hours}:${time}`,
-        "YYYY-MM-DD HH:mm",
+        `${date.format("YYYY-MM-DD")} ${hours}:${time} ${meridiem}`,
+        dateFormat,
       ),
     );
   };
@@ -145,7 +150,7 @@ const TimePicker = ({
     }
     if (!/^\d+$/.test(h)) return;
 
-    const maxHours = isTwelveHourFormat ? 11 : 23;
+    const maxHours = isTwelveHourFormat ? 12 : 23;
 
     if (+h > maxHours) {
       focusMinutesInput();

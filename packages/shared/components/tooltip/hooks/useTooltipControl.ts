@@ -78,19 +78,13 @@ export const useTooltipControl = (
   );
 
   useEffect(() => {
-    if (checkIsSSR()) return;
-
-    const anchor = createVirtualAnchor(anchorId.current, contentString);
-    document.body.appendChild(anchor);
-    virtualAnchorRef.current = anchor;
-
     return () => {
-      if (checkIsSSR()) return;
-      if (virtualAnchorRef.current) {
+      if (virtualAnchorRef.current && !checkIsSSR()) {
         document.body.removeChild(virtualAnchorRef.current);
+        virtualAnchorRef.current = null;
       }
     };
-  }, [contentString]);
+  }, []);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
@@ -117,11 +111,6 @@ export const useTooltipControl = (
         return;
       }
 
-      if (virtualAnchorRef.current) {
-        virtualAnchorRef.current.style.left = `${e.clientX}px`;
-        virtualAnchorRef.current.style.top = `${e.clientY + SYSTEM_TOOLTIP_TOP_OFFSET}px`;
-      }
-
       if (closeTimeoutRef.current) {
         clearTimeout(closeTimeoutRef.current);
         closeTimeoutRef.current = null;
@@ -129,6 +118,17 @@ export const useTooltipControl = (
 
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
+      }
+
+      if (!virtualAnchorRef.current && !checkIsSSR()) {
+        const anchor = createVirtualAnchor(anchorId.current, contentString);
+        anchor.style.left = `${e.clientX}px`;
+        anchor.style.top = `${e.clientY + SYSTEM_TOOLTIP_TOP_OFFSET}px`;
+        document.body.appendChild(anchor);
+        virtualAnchorRef.current = anchor;
+      } else if (virtualAnchorRef.current) {
+        virtualAnchorRef.current.style.left = `${e.clientX}px`;
+        virtualAnchorRef.current.style.top = `${e.clientY + SYSTEM_TOOLTIP_TOP_OFFSET}px`;
       }
 
       if (isReady) {
@@ -146,7 +146,7 @@ export const useTooltipControl = (
         originalOnMouseEnter(e as React.MouseEvent<HTMLElement>);
       }
     },
-    [originalOnMouseEnter, isReady],
+    [originalOnMouseEnter, isReady, contentString],
   );
 
   const handleMouseLeave = useCallback(
@@ -158,9 +158,9 @@ export const useTooltipControl = (
 
       closeTimeoutRef.current = setTimeout(() => {
         setIsReady(false);
-        if (virtualAnchorRef.current) {
-          virtualAnchorRef.current.style.left = "-9999px";
-          virtualAnchorRef.current.style.top = "-9999px";
+        if (virtualAnchorRef.current && !checkIsSSR()) {
+          document.body.removeChild(virtualAnchorRef.current);
+          virtualAnchorRef.current = null;
         }
       }, 50);
 

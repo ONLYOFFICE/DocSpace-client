@@ -30,7 +30,6 @@ import { useTheme } from "styled-components";
 import { decode } from "he";
 
 import { Text } from "@docspace/shared/components/text";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -138,6 +137,7 @@ const ItemTitle = ({
       <div className={styles.infoText}>
         <div className={styles.infoWrapper}>
           <Text
+            tooltipFitToContent
             className={styles.infoTextName}
             title={displayName}
             truncate
@@ -163,6 +163,7 @@ const ItemTitle = ({
         </div>
         {!isPending && !!displayName ? (
           <Text
+            tooltipFitToContent
             className={styles.infoTextEmail}
             title={userSelection.email}
             fontSize="13px"
@@ -173,9 +174,12 @@ const ItemTitle = ({
           </Text>
         ) : null}
         {isSSO ? (
-          <>
+          <div
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={t("PeopleTranslations:SSOAccountTooltip")}
+            data-tooltip-place="bottom"
+          >
             <Badge
-              id="sso-badge-info-panel"
               className={styles.ssoBadge}
               label={t("Common:SSO")}
               color={globalColors.white}
@@ -188,16 +192,16 @@ const ItemTitle = ({
               fontWeight={800}
               noHover
             />
-            <Tooltip anchorSelect={`div[id='sso-badge-info-panel'] div`}>
-              {t("PeopleTranslations:SSOAccountTooltip")}
-            </Tooltip>
-          </>
+          </div>
         ) : null}
 
         {isLDAP ? (
-          <>
+          <div
+            data-tooltip-id="system-tooltip"
+            data-tooltip-content={t("PeopleTranslations:LDAPAccountTooltip")}
+            data-tooltip-place="bottom"
+          >
             <Badge
-              id="ldap-badge-info-panel"
               className={styles.ldapBadge}
               label={t("Common:LDAP")}
               color={globalColors.white}
@@ -210,10 +214,7 @@ const ItemTitle = ({
               fontWeight={800}
               noHover
             />
-            <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
-              {t("PeopleTranslations:LDAPAccountTooltip")}
-            </Tooltip>
-          </>
+          </div>
         ) : null}
       </div>
 

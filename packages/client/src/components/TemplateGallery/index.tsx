@@ -133,7 +133,7 @@ const TemplateGallery = (props: {
       <div className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.headerText}>{t("Common:TemplateGallery")}</div>
-          {!oformsLoadError ? (
+          {!oformsLoadError && !oformsNetworkError ? (
             <Button
               className={styles.headerButton}
               onClick={onOpenSubmitToGalleryDialog}
@@ -151,7 +151,13 @@ const TemplateGallery = (props: {
         />
       </div>
     ),
-    [t, oformsLoadError, onOpenSubmitToGalleryDialog, onCloseClick],
+    [
+      t,
+      oformsLoadError,
+      oformsNetworkError,
+      onOpenSubmitToGalleryDialog,
+      onCloseClick,
+    ],
   );
 
   const renderContent = useMemo(() => {
@@ -178,7 +184,14 @@ const TemplateGallery = (props: {
         />
       </div>
     );
-  }, [oformsLoadError, onCloseClick, tabs, currentTabId, onSelect]);
+  }, [
+    oformsLoadError,
+    oformsNetworkError,
+    onCloseClick,
+    tabs,
+    currentTabId,
+    onSelect,
+  ]);
 
   const templateGalleryNode = useMemo(() => {
     const containerClass = isMobileView

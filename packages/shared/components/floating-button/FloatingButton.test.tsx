@@ -90,20 +90,20 @@ describe("FloatingButton", () => {
     });
   });
 
-  it("calls clearUploadedFilesHistory after close icon click", () => {
-    const clearUploadedFilesHistory = vi.fn();
+  it("calls onCancelOperation after close icon click", () => {
+    const onCancelOperation = vi.fn();
     renderComponent(
       <FloatingButton
         {...defaultProps}
         showCancelButton
-        clearUploadedFilesHistory={clearUploadedFilesHistory}
+        onCancelOperation={onCancelOperation}
       />,
     );
 
     const button = screen.getByTestId("floating-button-close-icon");
     fireEvent.click(button);
 
-    expect(clearUploadedFilesHistory).toHaveBeenCalledTimes(1);
+    expect(onCancelOperation).toHaveBeenCalledTimes(1);
   });
 
   describe("accessibility", () => {

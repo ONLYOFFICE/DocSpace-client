@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
@@ -45,6 +45,7 @@ import NoItem from "./sub-components/NoItem";
 
 import Users from "./views/Users";
 import Groups from "./views/Groups";
+
 import FilesView from "./views/FilesView";
 
 import commonStyles from "./helpers/Common.module.scss";
@@ -57,7 +58,11 @@ const InfoPanelBodyGeneral = ({
   fileView,
   getIsFiles,
   getIsRooms,
+  getIsAIAgent,
+  getIsTrash,
   setView,
+
+  infoPanelItemsList,
 
   maxImageUploadSize,
 
@@ -73,9 +78,12 @@ const InfoPanelBodyGeneral = ({
   onChangeFile,
   setImage,
   checkIsExpiredLinkAsync,
+  editAgentDialogProps,
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
+  const isAgents = getIsAIAgent();
+  const isTrash = getIsTrash();
   const isGroups = contactsTab === "groups";
   const isGuests = contactsTab === "guests";
   const isUsers = contactsTab === "inside_group" || contactsTab === "people";
@@ -84,6 +92,12 @@ const InfoPanelBodyGeneral = ({
     selection?.rootFolderType === FolderType.RoomTemplates;
 
   const isRoom = isRoomUtil(selection);
+  const isAgent =
+    selection &&
+    "rootFolderType" in selection &&
+    // "roomType" in selection &&
+    // selection.roomType &&
+    selection.rootFolderType === FolderType.AIAgents;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
@@ -101,28 +115,42 @@ const InfoPanelBodyGeneral = ({
     isRoot;
 
   const currentView = useMemo(() => {
-    return isRoom || isTemplatesRoom ? roomsView : fileView;
-  }, [isRoom, roomsView, fileView, isTemplatesRoom]);
+    return isRoom || isTemplatesRoom || isAgent ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView, isTemplatesRoom, isAgent]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       fileView === InfoPanelView.infoShare &&
       selection &&
       isFolderUtil(selection) &&
       !selection?.canShare &&
-      !isTemplatesRoom
+      !isTemplatesRoom &&
+      !isAgent
     ) {
       setView(InfoPanelView.infoDetails);
     }
-  }, [fileView, selection, isTemplatesRoom]);
+  }, [fileView, selection, isTemplatesRoom, isAgent]);
+
+  useEffect(() => {
+    if (!currentView.startsWith("info_plugin-")) return;
+
+    const itemKey = currentView.replace("info_plugin-", "");
+    const item = infoPanelItemsList.find((item) => item.key === itemKey);
+
+    if (isAgent) {
+      setView(InfoPanelView.infoMembers);
+    } else if (!item || isTrash || isTemplatesRoom) {
+      setView(InfoPanelView.infoDetails);
+    }
+  }, [currentView, isAgent, isTrash, isTemplatesRoom, infoPanelItemsList]);
 
   const isExpiredLink = useEventCallback(() =>
     checkIsExpiredLinkAsync(selection),
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!id) return;
 
     isExpiredLink();
@@ -145,6 +173,7 @@ const InfoPanelBodyGeneral = ({
           isRooms={isRooms}
           isFiles={isFiles}
           isTemplatesRoom={isTemplatesRoom}
+          isAgents={isAgents}
           infoPanelSelection={selection}
           {...lockedSharedRoomProps}
         />
@@ -189,6 +218,7 @@ const InfoPanelBodyGeneral = ({
 
       {avatarEditorDialogVisible &&
       !editRoomDialogProps.visible &&
+      !editAgentDialogProps.visible &&
       !createRoomDialogProps.visible &&
       !Array.isArray(selection) ? (
         <AvatarEditorDialog

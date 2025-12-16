@@ -32,13 +32,18 @@ import type TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 
 export type HeaderProps = {
   selection: InfoPanelStore["infoPanelSelection"];
+
   roomsView: InfoPanelStore["roomsView"];
   fileView: InfoPanelStore["fileView"];
   setView: InfoPanelStore["setView"];
+
   setIsVisible: InfoPanelStore["setIsVisible"];
   getIsTrash: InfoPanelStore["getIsTrash"];
+
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
+
   enablePlugins: SettingsStore["enablePlugins"];
+
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
 };
 

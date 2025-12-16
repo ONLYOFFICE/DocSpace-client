@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -37,21 +36,24 @@ import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
-
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
 import styles from "./Header.module.scss";
 import { HeaderProps } from "./Header.types";
 
 const InfoPanelHeaderGeneral = ({
   selection,
-  setIsVisible,
+  // setIsVisible,
   roomsView,
   fileView,
   setView,
+
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
+
   isRecentFolder,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
@@ -84,7 +86,9 @@ const InfoPanelHeaderGeneral = ({
     "rootFolderType" in selection &&
     selection.rootFolderType === FolderType.RoomTemplates;
 
-  const closeInfoPanel = () => setIsVisible(false);
+  const closeInfoPanel = () => {
+    hideInfoPanel();
+  };
 
   const setMembers = () => setView(InfoPanelView.infoMembers);
   const setHistory = () => setView(InfoPanelView.infoHistory);
@@ -129,7 +133,15 @@ const InfoPanelHeaderGeneral = ({
       "rootFolderType" in selection &&
       selection.rootFolderType === FolderType.RoomTemplates);
 
-  if (isRoomsType) tabsData.unshift(memberTab);
+  const isAgentType =
+    !isRecentFolder &&
+    selection &&
+    "rootFolderType" in selection &&
+    "roomType" in selection &&
+    selection.roomType &&
+    selection.rootFolderType === FolderType.AIAgents;
+
+  if (isRoomsType || isAgentType) tabsData.unshift(memberTab);
 
   if (
     selection &&
@@ -145,7 +157,7 @@ const InfoPanelHeaderGeneral = ({
     });
   }
 
-  if (enablePlugins && infoPanelItemsList.length > 0) {
+  if (!isAIAgents() && enablePlugins && infoPanelItemsList.length > 0) {
     const isRoom = selection && "roomType" in selection && selection.roomType;
     const isFile = selection && "fileExst" in selection && selection.fileExst;
 
@@ -166,12 +178,12 @@ const InfoPanelHeaderGeneral = ({
         return;
       }
 
-      if (isRoom && item.value.filesType.includes(PluginFileType.Rooms)) {
+      if (isRoom && item.value.filesType.includes(PluginFileType.room)) {
         tabsData.push(tabsItem);
         return;
       }
 
-      if (isFile && item.value.filesType.includes(PluginFileType.Files)) {
+      if (isFile && item.value.filesType.includes(PluginFileType.file)) {
         if (
           item.value.filesExsts &&
           !item.value.filesExsts.includes(selection?.fileExst)
@@ -184,7 +196,7 @@ const InfoPanelHeaderGeneral = ({
         return;
       }
 
-      if (item.value.filesType.includes(PluginFileType.Folders)) {
+      if (item.value.filesType.includes(PluginFileType.folder)) {
         tabsData.push(tabsItem);
       }
     });
@@ -210,7 +222,7 @@ const InfoPanelHeaderGeneral = ({
           <Tabs
             style={{ width: "100%" }}
             items={isTemplate ? templateSubmenu : tabsData}
-            selectedItemId={isRoomsType ? roomsView : fileView}
+            selectedItemId={isRoomsType || isAgentType ? roomsView : fileView}
             withAnimation
           />
         </div>

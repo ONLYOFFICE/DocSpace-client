@@ -296,10 +296,7 @@ const Section = (props: SectionProps) => {
           >
             {isSectionHeaderAvailable &&
             currentDeviceType === DeviceType.mobile ? (
-              <SubSectionHeader
-                className="section-body_header"
-                isFormGallery={isFormGallery}
-              >
+              <SubSectionHeader className="section-body_header">
                 {sectionHeaderContent}
               </SubSectionHeader>
             ) : null}

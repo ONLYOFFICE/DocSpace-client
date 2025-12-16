@@ -115,6 +115,10 @@ const Section = (props: SectionProps) => {
     clearPrimaryProgressData,
     primaryOperationsCompleted,
     cancelUpload,
+    cancelDownload,
+    cancelDuplicate,
+    cancelCopy,
+    cancelMove,
     secondaryOperationsAlert,
     mainButtonVisible,
 
@@ -237,10 +241,23 @@ const Section = (props: SectionProps) => {
     primaryOperationsArray,
   ]);
 
-  const showCancelButton =
+  const isUpload =
     primaryOperationsArray.length > 0 &&
     !primaryOperationsCompleted &&
     primaryOperationsArray.some((op) => op.operation === "upload");
+
+  const canCancel =
+    secondaryActiveOperations?.length > 0 &&
+    !secondaryOperationsCompleted &&
+    secondaryActiveOperations.some(
+      (op) =>
+        op.operation === "download" ||
+        op.operation === "duplicate" ||
+        op.operation === "copy" ||
+        op.operation === "move",
+    );
+
+  const showCancelButton = isUpload || canCancel;
 
   const isInfoVisible = canDisplay && isInfoPanelVisible;
 
@@ -341,6 +358,10 @@ const Section = (props: SectionProps) => {
             needErrorChecking={needErrorChecking}
             panelOperations={primaryOperationsArray}
             cancelUpload={cancelUpload}
+            cancelDownload={cancelDownload}
+            cancelDuplicate={cancelDuplicate}
+            cancelCopy={cancelCopy}
+            cancelMove={cancelMove}
             onOpenPanel={onOpenUploadPanel}
             mainButtonVisible={mainButtonVisible}
             showCancelButton={showCancelButton}

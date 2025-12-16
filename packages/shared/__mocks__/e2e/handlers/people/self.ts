@@ -167,7 +167,7 @@ export const regularUser = {
   isRoomAdmin: false,
   isOwner: false,
   isVisitor: false,
-  isCollaborator: false,
+  isCollaborator: true,
   usedSpace: 512000,
   loginEventId: 49,
   id: "regular-user-id",

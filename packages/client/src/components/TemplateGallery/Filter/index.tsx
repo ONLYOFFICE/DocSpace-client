@@ -30,6 +30,8 @@ import { ReactSVG } from "react-svg";
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import ViewChangeReactUrl from "PUBLIC_DIR/images/view-change.react.svg?url";
 
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
@@ -58,6 +60,8 @@ const FilterContent: FC<FilterContentProps> = (props) => {
     oformsLocal,
     oformLocales,
     filterOformsByLocale,
+    filterOformsBySearch,
+    sortOforms,
   } = props;
 
   const isMobileView = useMobileDetection();
@@ -92,8 +96,33 @@ const FilterContent: FC<FilterContentProps> = (props) => {
     viewMobile: isMobileView,
   };
 
+  const searchFilterProps = {
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    isShowInitSkeleton,
+    oformsFilter,
+    filterOformsBySearch,
+  };
+
+  const sortFilterProps = {
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    isShowInitSkeleton,
+    oformsFilter,
+    sortOforms,
+  };
+
   const renderViewToggleButton = () => {
     if (!isMobileView) return null;
+
+    if (
+      isShowInitSkeleton ||
+      filterOformsByLocaleIsLoading ||
+      !(categoryFilterLoaded && languageFilterLoaded)
+    )
+      return <RectangleSkeleton height="32px" width="32px" />;
 
     return (
       <div className={styles.viewButton} onClick={handleViewToggle}>
@@ -112,8 +141,8 @@ const FilterContent: FC<FilterContentProps> = (props) => {
         <LanguageFilter {...languageFilterProps} />
       </div>
       <div className={styles.generalFilters}>
-        <SearchFilter />
-        <SortFilter />
+        <SearchFilter {...searchFilterProps} />
+        <SortFilter {...sortFilterProps} />
         {renderViewToggleButton()}
       </div>
     </div>

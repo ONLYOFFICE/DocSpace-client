@@ -24,18 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type OformsStore from "../../../../store/OformsStore";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
 import type { TFunction } from "i18next";
-
-export interface InjectedProps {
-  oformsStore: OformsStore;
-}
 
 export interface SortFilterProps {
   t: TFunction;
   oformsFilter: OformsFilter;
   sortOforms: (sortBy: string, sortOrder: "asc" | "desc") => void;
+  filterOformsByLocaleIsLoading: boolean;
+  categoryFilterLoaded: boolean;
+  languageFilterLoaded: boolean;
+  isShowInitSkeleton: boolean;
 }
 
 export interface SortData {

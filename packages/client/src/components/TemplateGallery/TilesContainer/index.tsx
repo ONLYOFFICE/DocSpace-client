@@ -68,6 +68,8 @@ interface FilterProps {
   oformsLocal: string;
   oformLocales: string[] | null;
   filterOformsByLocale: (locale: string) => Promise<void>;
+  filterOformsBySearch: (search: string) => void;
+  sortOforms: (sortBy: string, sortOrder: "asc" | "desc") => void;
 }
 
 interface TilesContainerInjectedProps extends FilterProps {
@@ -190,6 +192,8 @@ export default inject<TStore>(({ oformsStore }) => {
     setFilterOformsByLocaleIsLoading,
     languageFilterLoaded,
     setLanguageFilterLoaded,
+    filterOformsBySearch,
+    sortOforms,
   } = oformsStore;
 
   const oformLocales = oformsStore.oformLocales as string[] | null;
@@ -210,6 +214,8 @@ export default inject<TStore>(({ oformsStore }) => {
     setFilterOformsByLocaleIsLoading,
     languageFilterLoaded,
     setLanguageFilterLoaded,
+    filterOformsBySearch,
+    sortOforms,
   };
 })(
   withTranslation("Common")(observer(TilesContainer)),

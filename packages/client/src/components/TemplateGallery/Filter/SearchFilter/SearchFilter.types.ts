@@ -24,16 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type OformsStore from "../../../../store/OformsStore";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
 import type { TFunction } from "i18next";
-
-export interface InjectedProps {
-  oformsStore: OformsStore;
-}
 
 export interface SearchFilterProps {
   t: TFunction;
   oformsFilter: OformsFilter;
   filterOformsBySearch: (search: string) => void;
+  filterOformsByLocaleIsLoading: boolean;
+  categoryFilterLoaded: boolean;
+  languageFilterLoaded: boolean;
+  isShowInitSkeleton: boolean;
 }

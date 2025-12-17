@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, FC } from "react";
-import { inject } from "mobx-react";
+import { observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -34,10 +34,19 @@ import { Text } from "@docspace/shared/components/text";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import styles from "./SortFilter.module.scss";
-import { InjectedProps, SortFilterProps, SortData } from "./SortFilter.types";
+import { SortFilterProps, SortData } from "./SortFilter.types";
 
-const SortFilter: FC<SortFilterProps> = ({ t, oformsFilter, sortOforms }) => {
+const SortFilter: FC<SortFilterProps> = ({
+  t,
+  oformsFilter,
+  sortOforms,
+  filterOformsByLocaleIsLoading,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  isShowInitSkeleton,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleCombobox = () => setIsOpen(!isOpen);
 
@@ -65,6 +74,13 @@ const SortFilter: FC<SortFilterProps> = ({ t, oformsFilter, sortOforms }) => {
 
     setIsOpen(false);
   };
+
+  if (
+    isShowInitSkeleton ||
+    filterOformsByLocaleIsLoading ||
+    !(categoryFilterLoaded && languageFilterLoaded)
+  )
+    return <RectangleSkeleton height="32px" width="32px" />;
 
   return (
     <>
@@ -133,7 +149,4 @@ const SortFilter: FC<SortFilterProps> = ({ t, oformsFilter, sortOforms }) => {
   );
 };
 
-export default inject(({ oformsStore }: InjectedProps) => ({
-  oformsFilter: oformsStore.oformsFilter,
-  sortOforms: oformsStore.sortOforms,
-}))(withTranslation(["Common"])(SortFilter));
+export default observer(withTranslation(["Common"])(SortFilter));

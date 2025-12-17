@@ -24,18 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject } from "mobx-react";
+import { observer } from "mobx-react";
 import { useState, useRef, useEffect, FC } from "react";
 import { withTranslation } from "react-i18next";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { SearchInput } from "@docspace/shared/components/search-input";
-
-import { InjectedProps, SearchFilterProps } from "./SearchFilter.types";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { SearchFilterProps } from "./SearchFilter.types";
 
 const SearchFilter: FC<SearchFilterProps> = ({
   t,
   oformsFilter,
   filterOformsBySearch,
+  filterOformsByLocaleIsLoading,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  isShowInitSkeleton,
 }) => {
   const [value, setValue] = useState(oformsFilter.search);
   const onChangeValue = (val: string) => {
@@ -60,6 +64,13 @@ const SearchFilter: FC<SearchFilterProps> = ({
     return () => document.removeEventListener("mousedown", onInputOutsideClick);
   }, [ref]);
 
+  if (
+    isShowInitSkeleton ||
+    filterOformsByLocaleIsLoading ||
+    !(categoryFilterLoaded && languageFilterLoaded)
+  )
+    return <RectangleSkeleton height="32px" />;
+
   return (
     <SearchInput
       forwardedRef={ref}
@@ -74,7 +85,6 @@ const SearchFilter: FC<SearchFilterProps> = ({
   );
 };
 
-export default inject(({ oformsStore }: InjectedProps) => ({
-  oformsFilter: oformsStore.oformsFilter,
-  filterOformsBySearch: oformsStore.filterOformsBySearch,
-}))(withTranslation(["FormGallery", "Common"])(SearchFilter));
+export default observer(
+  withTranslation(["FormGallery", "Common"])(SearchFilter),
+);

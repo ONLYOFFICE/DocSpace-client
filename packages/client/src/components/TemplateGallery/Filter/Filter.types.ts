@@ -45,4 +45,6 @@ export interface FilterContentProps {
   oformsLocal: string;
   oformLocales: string[] | null;
   filterOformsByLocale: (key: string) => Promise<void>;
+  filterOformsBySearch: (search: string) => void;
+  sortOforms: (sortBy: string, sortOrder: "asc" | "desc") => void;
 }

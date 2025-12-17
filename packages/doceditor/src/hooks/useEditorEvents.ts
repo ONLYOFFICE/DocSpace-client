@@ -47,7 +47,7 @@ import {
   TGetReferenceData,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
-import { getProviders } from "@docspace/shared/api/ai";
+import { getProviders, getModels } from "@docspace/shared/api/ai";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { TAiProvider } from "@docspace/shared/api/ai/types";
 import { EDITOR_ID, FILLING_STATUS_ID } from "@docspace/shared/constants";
@@ -267,9 +267,40 @@ const useEditorEvents = ({
       );
 
       if (openAIProvider) {
+        const models = await getModels(openAIProvider.id);
         const providerName = t("Common:ProductName");
-        const sendProviders = () =>
+        const defaultModel = models[0]?.modelId || "gpt-5.2";
+        const modelName = `${providerName} [${defaultModel}]`;
+        const sendProviders = () => {
           connector.sendEvent("ai_onCustomProviders", [{ name: providerName }]);
+
+          connector.sendEvent("ai_onCustomInit", {
+            settingsLock: undefined,
+            actionsOverride: true,
+            actions: {
+              Chat: {
+                model: defaultModel,
+              },
+              Summarization: {
+                model: defaultModel,
+              },
+              Translation: {
+                model: defaultModel,
+              },
+              TextAnalyze: {
+                model: defaultModel,
+              },
+            },
+            models: [
+              {
+                capabilities: 255,
+                provider: providerName,
+                name: modelName,
+                id: defaultModel,
+              },
+            ],
+          });
+        };
 
         connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
           if (data && typeof data === "object" && "error" in data && data.error)
